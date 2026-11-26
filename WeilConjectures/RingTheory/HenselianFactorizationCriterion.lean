@@ -17,12 +17,21 @@ import WeilConjectures.RingTheory.MonicFactorizationOfIdempotent
 /-!
 # Factorization criterion for henselian pairs
 
-Source: Stacks Project, More on Algebra, Lemma Tag 09XI (lemma-characterize-henselian-pair),
-condition (3) iff condition (1), with Definition Tag 09XE
-(blueprint: lem-weil-pbc-henselian-factorization-criterion).
+A pair `(A, I)` is henselian (Mathlib's `HenselianRing A I`) if and only if `I` lies in the
+Jacobson radical and every factorization of the reduction of a monic polynomial into coprime
+monic factors lifts to a monic factorization (`henselianRing_iff_factorization_criterion`).
 
-The henselian pair `(A, I)` is the recorded notion of `def-weil-pbc-henselian-terminology`,
-Mathlib's `HenselianRing A I`.
+## Implementation details
+
+For the forward direction, Bezout coefficients for the reduced factors give the Chinese
+remainder idempotent `(1, 0)` in `AdjoinRoot f` modulo `I`; lifting it yields the factorization
+via `Polynomial.exists_monic_factorization_of_idempotent`. Conversely, a simple root `x` of the
+reduction is lifted by lifting the coprime factorization `(X - C x) * q`.
+
+## References
+
+* [Stacks, Tag 09XE]
+* [Stacks, Tag 09XI]
 -/
 
 @[expose] public section
@@ -31,10 +40,8 @@ universe u
 
 open Polynomial
 
-/-- The Bezout polynomial `b * h₀` represents the Chinese remainder idempotent `(1, 0)`.
-Lift this idempotent in `AdjoinRoot f`, compute its images in the two factor quotients,
-and apply `Polynomial.exists_monic_factorization_of_idempotent`.
-Source: Stacks Project, Tag 09XI, proof of (3) implies (1). -/
+/-- If idempotents modulo `J` lift in `AdjoinRoot f`, then every factorization of the reduction of
+the monic polynomial `f` into coprime monic factors lifts to a monic factorization of `f`. -/
 private theorem factorization_of_lifting
     {R : Type u} [CommRing R] (J : Ideal R) (hJ : J ≤ Ideal.jacobson ⊥)
     (f : Polynomial R) (hf : f.Monic)
@@ -95,23 +102,7 @@ private theorem factorization_of_lifting
 
 /-- `(A, I)` is henselian iff (i) `I` lies in the Jacobson radical and (ii) every coprime monic
 factorization of the reduction of a monic `f ∈ A[T]` lifts to a monic factorization of `f`;
-in particular, when `I` lies in the Jacobson radical, henselian iff (ii).
-Source: Stacks Project, More on Algebra, Lemma Tag 09XI, (3) ⇔ (1), and Definition Tag 09XE
-(blueprint: lem-weil-pbc-henselian-factorization-criterion).
-
-Proof:
-1. The Jacobson condition is the `jac` field of the recorded `HenselianRing` predicate.
-2. For a monic `f`, the algebra `AdjoinRoot f` is finite over `A`. Bezout coefficients
-   for `g₀, h₀` give the Chinese remainder idempotent `(1, 0)` modulo `I`.
-   `Algebra.existsUnique_isIdempotentElem_of_henselianRing` lifts this idempotent, and
-   `Polynomial.exists_monic_factorization_of_idempotent` gives the monic factors.
-3. Conversely, to lift a simple root `x` of the reduction `f₀`, divide by `X - C x`.
-   The quotient `q` is monic and `q(x) = f₀'(x)` is a unit, so the division identity
-   for `q` gives Bezout coefficients for `X - C x` and `q`. Lift their factorization.
-   In a nonzero ring, the Jacobson condition makes `A/I` nonzero, so the lifted monic
-   linear factor has degree one. Its negative constant coefficient is a root of `f`
-   congruent to the original root modulo `I`. The zero ring is handled separately.
-4. With the Jacobson condition given, the first equivalence yields the particular case. -/
+in particular, when `I` lies in the Jacobson radical, henselian iff (ii). -/
 theorem henselianRing_iff_factorization_criterion
     (A : Type u) [CommRing A] (I : Ideal A) :
     (HenselianRing A I ↔

@@ -14,8 +14,20 @@ import WeilConjectures.TraceFormula.Scalar.ScalarPresentationKFlat
 
 /-! # Strict calculation of the iterated scalar realization
 
-Source: Bhatt--Scholze, Definition 3.4.10, Proposition 3.5.1 and Lemma 3.5.7;
-Stacks Project, Tags 06YY and 0941.
+On one simultaneous presentation, the iterated scalar realization is computed by the localized
+ordinary scalar counits followed by the strict tensor associator and quotient augmentation.
+
+## Implementation details
+
+The presentation is required to be coherent with the whole-system adjunction. This requirement fixes
+its realization before taking the total limit; equality only after separate finite derived
+evaluations does not fix that realization. The calculation uses neither faithfulness of separate
+derived evaluations nor an inverse completion map.
+
+## References
+
+* Bhatt--Scholze, Definition 3.4.10, Proposition 3.5.1 and Lemma 3.5.7.
+* Stacks Project, Tags 06YY and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -116,38 +128,9 @@ variable (l : ℕ) [Fact l.Prime]
   (ι : E →ₐ[ℚ_[l]] L) (j : L →ₐ[ℚ_[l]] F)
   (X : Scheme.{u})
 
-/-- The iterated route, on one simultaneous presentation, is the localized ordinary
-scalar counits followed by the strict tensor associator and quotient augmentation.
-It does not involve a direct scalar realization model or a derived associator.
-
-Source: Bhatt--Scholze, Definition 3.4.10, Proposition 3.5.1 and Lemma 3.5.7;
-Stacks 06YY and 0941; steps 1--3 of lem-trf-scalar-model-associativity.
-(blueprint: lem-trf-scalar-model-iterated-strict-calculation).
-
-The presentation is required to be coherent with the whole-system adjunction.
-This requirement fixes its realization before taking the total limit; equality
-only after separate finite derived evaluations does not fix that realization.
-
-Proof in words: normalize bEL on the given coherent presentation C,e,kappa and choose
-its normalized tower isomorphism qEL. The completed scalar comparison formula
-identifies the first realization, followed by the presentation map, with the
-ordinary E-to-L counit and the strict augmentation transported through qEL.
-The theorem scalarPresentationKFlat makes C K-flat from its finite evaluation
-isomorphisms. Normalize the derived system associator at C and use its
-naturality at e: its three-factor suffix becomes the L-to-F image of the first
-presentation map, the universal scalar cochain counit, and the strict system
-associator. Move the first presentation map across the actual SL adjunction
-counit, bLF.realization, and the second completed comparison by naturality.
-The theorem scalarTensorRoosCoordinates computes the transported first and
-direct augmentations: both have zero shifted coordinates, and the second has
-the nested pure-tensor coordinates of the scalar extension of the first.
-Apply scalarModelRoosZeroLift to this pair. Naturality of the normalized Roos
-bridge moves the strict system associator past the limit. Cancel it and q
-against their inverses in the transported direct augmentation. The result is
-exactly the two ordinary scalar counits followed by the ordinary sheaf tensor
-associator and direct augmentation. These are whole-system identities; no
-faithfulness of separate derived evaluations or inverse completion map is used.
-The same argument includes zero complexes and repeated coefficient fields. -/
+/-- The iterated route, on one simultaneous presentation, is the localized ordinary scalar counits
+followed by the strict tensor associator and quotient augmentation. It does not involve a direct
+scalar realization model or a derived associator. -/
 theorem scalarModelIteratedStrictCalculation
     (SE : CoefficientDerivedSystemCalculus l E X)
     (SL : CoefficientDerivedSystemCalculus l L X)

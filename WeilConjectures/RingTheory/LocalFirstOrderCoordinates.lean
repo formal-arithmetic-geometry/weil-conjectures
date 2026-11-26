@@ -13,8 +13,18 @@ import Mathlib.Algebra.Module.SpanRankOperations
 /-!
 # Coordinates on a split first-order local quotient
 
-Source: Stacks Project, More on Algebra, Tag 07EI, construction of f₁.
-(blueprint: lem-weil-pbc-local-first-order-coordinates).
+A residue-field section of a local ring `A` identifies `A/m²` with the trivial square-zero
+extension `K ⊕ K^d`, where `K = A/m` and `d` is the minimal number of generators of `m`.
+
+## Implementation details
+
+The map `(c, v) ↦ s(c) + j(v)`, with `j : m/m² → A/m²`, is multiplicative since the image of
+`j` has square zero, and bijective; Nakayama identifies `dim_K m/m²` with `m.spanFinrank`.
+
+## References
+
+* [Stacks, Tag 07EI] (construction of `f₁`)
+* [Stacks, Tag 00DV] (Nakayama's lemma)
 -/
 
 @[expose] public section
@@ -24,20 +34,7 @@ universe u
 namespace IsLocalRing
 
 /-- A residue section identifies the first-order quotient with a trivial square-zero
-extension, compatibly with reduction to the residue field.
-Source: Stacks Project, More on Algebra, Tag 07EI, construction of f₁;
-Algebra, Tag 00DV, Nakayama's lemma.
-(blueprint: lem-weil-pbc-local-first-order-coordinates)
-
-Proof: Put K = A/m and V = m/m². The residue section makes A and A/m² into
-K-algebras. The canonical map j : V → A/m² is injective and K-linear, and its
-image has square zero. Nakayama identifies dim_K V with m.spanFinrank; choose
-coordinates V ≃ K^d. The map (c,v) ↦ s(c) + j(v) is multiplicative since the
-image of j has square zero. It is surjective: for a in A subtract s(residue(a));
-the difference belongs to m and therefore comes from V. It is injective:
-reduction first determines c, and the injectivity of j then determines v.
-The inverse is the required equivalence. Its first coordinate is reduction.
-For d = 0 this gives A/m² = K, with no nonzero cotangent part. -/
+extension, compatibly with reduction to the residue field. -/
 theorem exists_firstOrder_coordinates (A : Type u) [CommRing A] [IsLocalRing A]
     [IsNoetherianRing A] (s : ResidueField A →+* A)
     (hs : (residue A).comp s = RingHom.id _) :

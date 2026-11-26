@@ -10,20 +10,32 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 import WeilConjectures.RingTheory.BoundedProjectiveResolutionDimension
 import Mathlib.CategoryTheory.Abelian.Projective.Dimension
+
+/-!
+# Bounded projective resolutions and Ext vanishing in all degrees
+
+A module has a projective resolution of length at most `n` if and only if Ext against every
+module vanishes in every degree at least `n + 1`.
+
+## Implementation details
+
+Induct on the resolution bound. A bounded projective resolution gives a long exact Ext sequence
+whose projective term contributes no positive Ext. Conversely, the kernel of a free epimorphism
+onto `X` inherits the shifted vanishing, and splicing its shorter resolution with that
+epimorphism gives a resolution of `X`. The argument is performed in `ModuleCat`;
+`HasExt.standard` merely chooses the standard small Ext model.
+
+## References
+
+* [Stacks, Tag 065R]
+-/
+
 @[expose] public section
 universe u v
 open CategoryTheory
 namespace ModuleCat
-/-- One component of Stacks 065R. Induct on the resolution bound. A bounded projective
-resolution gives a long exact Ext sequence whose projective term contributes no positive
-Ext; shifting along the sequence and applying the induction hypothesis yields vanishing
-in every degree at least `n + 1`. Conversely, the all-degrees hypothesis includes the
-degree `n + 1` case, and the kernel of a free epimorphism onto `X` inherits the shifted
-vanishing needed by the induction hypothesis. Splicing the resulting shorter resolution
-with that epimorphism gives a resolution of `X` of length at most `n`. The argument is
-performed in `ModuleCat`; `HasExt.standard` merely chooses the standard small Ext model.
-Source: Stacks Project, Algebra, Lemma 065R.
-(blueprint: lem-weil-pbc-projective-resolution-ext-all-degrees). -/
+/-- One component of Stacks 065R: a projective resolution of length at most `n` exists if and
+only if Ext vanishes in every degree at least `n + 1`. -/
 theorem projective_resolution_ext_all_degrees
     {R : Type u} [CommRing R] (X : ModuleCat.{max u v} R) (n : ℕ) :
     (HasProjectiveResolutionLE X n ↔

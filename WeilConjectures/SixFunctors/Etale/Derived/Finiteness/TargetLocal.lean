@@ -14,12 +14,14 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Constructible
 
 For a morphism `f : X ⟶ S` with `S` Noetherian and an open cover `(Uᵢ)` of `S`, the property
 `𝒞(f)` holds as soon as `𝒞(f ∣_ Uᵢ)` holds for the restrictions `f ∣_ Uᵢ : f⁻¹ Uᵢ ⟶ Uᵢ`
-(`AlgebraicGeometry.Etale.HasConstructibleDirectImages.of_iSup_eq_top`). Indeed restriction to
-an open commutes with the higher direct images, by étale base change for the derived direct
-image (`AlgebraicGeometry.Etale.upperStarHomologyRightDerivedLowerStarIso`), and
+(`AlgebraicGeometry.Etale.HasConstructibleDirectImages.of_iSup_eq_top`).
+
+## Implementation details
+
+Restriction to an open commutes with the higher direct images, by étale base change for the derived
+direct image (`AlgebraicGeometry.Etale.upperStarHomologyRightDerivedLowerStarIso`), and
 constructibility is local on open covers
-(`AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_iSup_eq_top`). This is the target
-localisation of the blueprint proof of `proposition-proper-direct-image-finite-coefficients`.
+(`AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_iSup_eq_top`).
 -/
 
 @[expose] public section
@@ -39,8 +41,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ]
 
 /-- **Étale restriction of higher direct images.** For a cartesian square
 `g' : X' ⟶ X`, `f' : X' ⟶ Y'`, `f : X ⟶ Y`, `g : Y' ⟶ Y` with `g` étale, the restriction along
-`g` of `Rᵠf_* F` is `Rᵠf'_*(g'^* F)`, by étale base change for the derived direct image
-(`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_etale`). -/
+`g` of `Rᵠf_* F` is `Rᵠf'_*(g'^* F)`. -/
 noncomputable def upperStarHomologyRightDerivedLowerStarIso {X' X Y' Y : Scheme.{u}}
     {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g) [Etale g]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) :

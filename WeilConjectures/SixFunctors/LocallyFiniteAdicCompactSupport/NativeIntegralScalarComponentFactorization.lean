@@ -9,7 +9,12 @@ public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.Native
 public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeCompactSupportScalarTransitions
 public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeIntegralScalarBoundaryConditions
 
-/-! # Integral scalar-mate steps for native compact support -/
+/-! # Integral scalar-mate steps for native compact support
+
+## References
+
+* [Bhatt--Scholze, Remark 6.8.15]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -52,14 +57,7 @@ private theorem sixArrow_regroup {C : Type*} [Category C]
     a₀ ≫ a₁ ≫ a₂ ≫ a₃ ≫ a₄ ≫ a₅ = (a₀ ≫ a₁ ≫ a₂) ≫ a₃ ≫ (a₄ ≫ a₅) := by
   simp only [Category.assoc]
 
-/-- Endpoint-aware integral normalization uniquely factors through its two boundaries.
-Source: Bhatt--Scholze, Remark 6.8.15.
-Proof: compare the rational arrows using their common prescribed value, then map
-that equality through inclusion, realization and derived sections. Compare the other
-five arrows with their prescribed values. Their endpoint equations let these six
-arrow equalities be composed. The given boundary equations regroup the first three
-and last two factors. Coefficient equality transports insert only equality arrows.
-(blueprint: lem-sf-native-integral-scalar-component-factorization). -/
+/-- Endpoint-aware integral normalization uniquely factors through its two boundaries. -/
 theorem integralComponent_factorization [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)
     (E : Index l (PadicAlgCl l))

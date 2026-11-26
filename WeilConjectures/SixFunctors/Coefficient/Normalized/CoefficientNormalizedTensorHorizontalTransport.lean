@@ -9,8 +9,19 @@ public import WeilConjectures.SixFunctors.Coefficient.Normalized.CoefficientNorm
 
 /-! # Transport of normalized tensor horizontality from representatives
 
-Source: Stacks 06YS and 07A4.
-(blueprint: lem-coef-normalized-tensor-horizontal-transport).
+We show that equality of the normalized tensor square on K-flat representatives transports to
+all objects of the unbounded derived coefficient category.
+
+## Implementation details
+
+Each derived object is resolved by a flat-term K-flat complex; after applying the assumed
+representative square, the epimorphic maps induced by the resolution isomorphisms are
+cancelled, using naturality of the evaluation tensor and of the quotient adjunction.
+
+## References
+
+* [Zheng, Construction 4.1]
+* [Stacks, Tags 06YS, 07A4]
 -/
 
 @[expose] public section
@@ -90,15 +101,7 @@ private theorem resolve (N : coefficientSequenceDerived l E W) :
 
 set_option linter.unusedVariables false in
 /-- Equality of the normalized tensor square on K-flat representatives transports to
-all objects of the unbounded derived coefficient category.
-Source: Stacks 06YS, 07A4; the resolving-representative transport in the proof of
-Zheng Construction 4.1.
-(blueprint: lem-coef-normalized-tensor-horizontal-transport).
-
-Proof: resolve each derived object by a flat-term K-flat complex, apply the assumed
-representative square, and cancel the epimorphic maps induced by the two resolution
-isomorphisms. Naturality of the evaluation tensor and of the quotient adjunction
-transports the equality along those isomorphisms. -/
+all objects of the unbounded derived coefficient category. -/
 theorem coefficientNormalizedTensorHorizontalTransport
     (R : CoefficientDerivedSystemReduction l E W)
     (hE : CoefficientEvaluationTensorNormalization l E W R)

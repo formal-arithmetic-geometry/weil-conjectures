@@ -56,7 +56,6 @@ along `h₁`.
 The passage to the derived category is
 `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_isIso_baseChangeMap`: the
 pushforwards along `f` and `f'` are exact, so no resolutions are involved.
-(blueprint: `lemma:weil-pbc-finite-exchange`, `prop:weil-pbc-finite-morphism`)
 
 -/
 
@@ -331,8 +330,7 @@ variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
 change map `g^* f_* ⟶ f'_* g'^*` is an isomorphism. The geometric points of `Y'` with
 algebraically closed residue field jointly reflect isomorphisms, and the base change map is
 an isomorphism on each of these stalks by
-`AlgebraicGeometry.Etale.isIso_sheafFiber_map_baseChangeMap_app`.
-(blueprint: `lemma:weil-pbc-finite-exchange`, `lemma-finite-morphisms`) -/
+`AlgebraicGeometry.Etale.isIso_sheafFiber_map_baseChangeMap_app`. -/
 lemma Etale.isIso_baseChangeMap_of_isFinite
     [hJ : Y'.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
     (sq : IsPullback g' f' f g) : IsIso (Etale.baseChangeMap A sq.toCommSq) := by
@@ -357,8 +355,7 @@ instance Etale.isBaseChangeIsoSheaf_of_isFinite : Etale.IsBaseChangeIsoSheaf A f
 /-- **Finite morphisms satisfy proper base change**: for every cartesian square on a finite
 morphism `f`, the derived base change map `g^* Rf_* ⟶ Rf'_* g'^*` on `D⁺` is an isomorphism.
 The pushforwards along `f` and its base change `f'` are exact, so this follows from the
-sheaf-level statement without any resolutions.
-(blueprint: `prop:weil-pbc-finite-morphism`, `lemma-finite-morphisms`, derived part) -/
+sheaf-level statement without any resolutions. -/
 instance Etale.isBaseChangeIso_of_isFinite : Etale.IsBaseChangeIso A f where
   isIso _ _ _ sq := by
     have : IsFinite _ := isFinite_of_isPullback sq

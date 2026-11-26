@@ -19,7 +19,20 @@ import Mathlib.LinearAlgebra.Dual.Basis
 
 /-! # Koszul roofs and normalized comparisons
 
-Source: Stacks Project, Tags 0BQZ and 0BQY, local finite free Koszul computation.
+Equal roofs through the Koszul resolutions of two generating sequences of the same ideal give
+the same normalized conormal value.
+
+## Implementation details
+
+Writing `f = g ∘ t`, exterior powers of `t` give a Koszul chain map `K(f) → K(g)` commuting
+with the normalized augmentations. The Koszul complexes are K-projective, so equality of derived
+maps gives a homotopy (`IsKProjective.Qh_map_bijective`, `homotopyOfEq`); the difference of
+top components is then a signed dual boundary, whose values lie in `I` and are killed by the
+normalized comparison. The conormal basis makes the determinant pairing injective.
+
+## References
+
+* [Stacks, Tags 0BQZ, 0BQY]
 -/
 
 @[expose] public section
@@ -112,41 +125,7 @@ private theorem conormalVector_surjective
   apply LinearMap.range_eq_top.mp
   simpa only [koszulConormalVector, Finsupp.range_linearCombination] using hspan
 
-/-- Equal roofs have the same normalized conormal value on different generators.
-Source: Stacks Project, Tags 0BQY and 0BQZ, determinant classes and the map on
-Ext induced by A -> A/I (blueprint: lem-sc-koszul-roof-comparison-independence).
-
-Proof: Express each f_i as a linear combination of the g_j, producing t with
-linearCombination g composed with t = linearCombination f. Its exterior powers
-form a Koszul chain map K(f) -> K(g): contraction commutes with exterior powers
-by the equation on the generator functionals. In degree zero it is the identity,
-so the normalized augmentations commute with its integer extension. Thus pulling
-z_g back along this chain map represents the same roof class as z_g. Equality of
-the two displayed derived morphisms first permits cancellation of the common
-single shift isomorphism on the right. Precompose with Q(epsilon_f), and use
-u followed by epsilon_g = epsilon_f to cancel Q(epsilon_g) with its inverse.
-This gives Q(z_f)=Q(u followed by z_g). Each natural-number Koszul term is free
-by its finite exterior basis and hence projective. The integer extension is zero
-above 0, so CochainComplex.isKProjective_of_projective at bound 0 applies (also
-the extension instance in HomotopyCategory/KProjective.lean:126). Naturality of
-quotientCompQhIso transfers the equality to Qh of the two homotopy classes.
-Injectivity of CochainComplex.IsKProjective.Qh_map_bijective reflects this to
-equality of homotopy classes; HomotopyCategory.homotopyOfEq extracts a homotopy.
-Equivalently, shift the maps to single(A,0)[r], use Cocycle.equivHomShift and
-CohomologyClass.toHom_bijective to obtain equality of their degree-r cocycle
-classes. The equations mk_sub and mk_eq_zero_iff say their difference is a
-coboundary. Cocycle.toSingleMk_mem_coboundaries_iff extracts its top component
-as E_f.d(-r,1-r) followed by a map E_f^(1-r) to A. For r>0, transport this to
-precomposition with d_(r,r-1); it is a signed dual boundary after absorbing the
-unit (-1)^r. For r=0, E_f^1=0 and the difference is zero. All boundary values lie
-in I because contraction with f is a sum of terms multiplied by f_i.
-The normalized comparison kills it by reduction modulo I. Finally the two
-normalized comparisons agree on pullback of a top functional: c_g composed with
-t equals c_f, exterior powers take wedges to wedges of their images, and the
-normalization equations coincide on every conormal wedge. The conormal basis
-makes the determinant pairing injective, proving equality of the values.
-For r=0 the chain map is the identity on A and there are no top coboundaries;
-for a zero quotient both conormal determinant values vanish. -/
+/-- Equal roofs have the same normalized conormal value on different generators. -/
 theorem koszul_roof_comparison_independent
     (A : Type u) [CommRing A] [HasDerivedCategory.{u + 1} (ModuleCat.{u} A)]
     (I : Ideal A) (r : ℕ) (f g : Fin r → A)

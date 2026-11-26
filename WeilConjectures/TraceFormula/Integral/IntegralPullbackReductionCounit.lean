@@ -15,8 +15,14 @@ public import WeilConjectures.TraceFormula.Supporting.RoosAdjunctionTranspose
 /-!
 # The reduction-unit computation of the integral inverse-image comparison
 
-Source: Bhatt--Scholze, Lemma 6.5.9(4); Stacks Project, Tags 06YY and 0941.
-(blueprint: lem-trf-integral-pullback-reduction-counit).
+On a flat-term K-flat complex, the counit image of the defining Roos lift of the integral
+inverse-image comparison is the inverse image of the whole-system reduction unit, followed by the
+finite tensor unit (`integralPullbackKFlatReductionCounit`).
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.5.9(4)
+* Stacks Project, Tags 06YY, 0941
 -/
 
 @[expose] public noncomputable section
@@ -138,26 +144,7 @@ private theorem integralPullbackKFlatReductionCounit_left
 whole-system reduction unit, followed by the finite tensor unit. This is the
 reduction-unit computation, before composing with a map from the reduction to
 any other quotient system. It is stated only on a flat-term K-flat complex,
-before any resolution is inverted.
-
-Source: Bhatt--Scholze, Lemma 6.5.9(4); Stacks Project, Tags 06YY and 0941;
-Steps 1, 3 and 5 of the resolution-matching argument
-(blueprint: lem-trf-integral-pullback-reduction-counit).
-
-Proof: choose a coherent strict reduction presentation (C, e, kappa, b) of P, and
-normalize the realization of F on it; this gives the tower identification q.
-Postcompose both sides with the isomorphism from U_Z(B(S.reduction(P))) to the
-localization of the strict tower Res_Z(B(C)). On the right, the coherence of b
-turns the derived unit followed by the derived-limit counit into the localization
-of b; the factor isomorphisms of the diagonal and of the tower unit then identify
-the right side with the localization of the strict family
-const(h^* P) to T(Res_W C) to Res_Z(B C). On the left, the normalization of F
-replaces the realization by the inverse of the Roos bridge followed by q. The
-defining Roos lift theta is the limit lift of that strict family followed by q
-(inverseImageRoosComparisonComplex_eq_limitToRoos), and
-integralComparisonRoosTranspose identifies its image under the normalized Roos
-comparison with the adjunct of the same family. The counit then gives the same
-localized family. No equality is detected merely by evaluation at finite levels. -/
+before any resolution is inverted. -/
 theorem integralPullbackKFlatReductionCounit
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

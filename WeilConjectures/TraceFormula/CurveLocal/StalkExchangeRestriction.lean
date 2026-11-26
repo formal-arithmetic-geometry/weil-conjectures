@@ -21,8 +21,9 @@ proves that the geometric stalk at `z` of the étale exchange restriction
 through an identification of its target with `RΓ_Y(B, b^* P|_T)`, through the classical supported
 restriction `ρ_{a,b}` on the strict localization `T` of `X ×_k X` at `(y, y)`
 (`AlgebraicGeometry.Etale.sectionsWithSupportRestriction`). This is the identification of the
-stalk of the supported restriction with the strictly local `ρ_{a,b}` used in blueprint
-`lemma-local-term-restriction-map`.
+stalk of the supported restriction with the strictly local `ρ_{a,b}` used for the local terms.
+
+## Implementation details
 
 The proof pulls the fixed square back along `τ : T ⟶ X ×_k X`
 (`CategoryTheory.Adjunction.exists_map_mateEquiv_app_comp_eq`, with compact-support base

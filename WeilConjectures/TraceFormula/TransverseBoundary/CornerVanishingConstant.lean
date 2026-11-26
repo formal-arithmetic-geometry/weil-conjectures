@@ -15,10 +15,8 @@ public import WeilConjectures.TraceFormula.TransverseBoundary.CornerStrictLocali
 Let `S` be the strict localization of the surface of a transverse corner at a geometric point
 `z̄` over the corner point, `ι : X_S - z ⟶ S - Y_S` the closed immersion of the punctured trait
 and `i' : S - (X_S ∪ Y_S) ⟶ S - Y_S` the complementary open immersion. If the restriction maps
-`H^q(S - Y_S, ℤ/ℓ) ⟶ H^q(X_S - z, ℤ/ℓ)` are bijective (blueprint
-`lemma-punctured-surface-punctured-curve--1`), then `H^q(S - Y_S, i'_! ℤ/ℓ) = 0` for all `q`: by the
-open–closed sequence `0 → i'_! ℤ/ℓ → ℤ/ℓ → ι_* ℤ/ℓ → 0` (blueprint
-`lemma-cohomology-near-two-transverse-divisors--1`, constant coefficients).
+`H^q(S - Y_S, ℤ/ℓ) ⟶ H^q(X_S - z, ℤ/ℓ)` are bijective, then `H^q(S - Y_S, i'_! ℤ/ℓ) = 0` for all
+`q`, by the open–closed sequence `0 → i'_! ℤ/ℓ → ℤ/ℓ → ι_* ℤ/ℓ → 0`.
 
 ## Main statements
 
@@ -74,9 +72,9 @@ lemma range_puncturedTraitι :
   rw [h₂, Set.preimage_compl, compl_compl]
   exact h₁
 
-/-- Blueprint `lemma-cohomology-near-two-transverse-divisors--1`, constant coefficients: if the
-restriction maps `H^q(S - Y_S, ℤ/ℓ) ⟶ H^q(X_S - z, ℤ/ℓ)` are bijective in every degree, then
-`H^q(S - Y_S, i'_! ℤ/ℓ) = 0` for the open immersion `i' : S - (X_S ∪ Y_S) ⟶ S - Y_S`. -/
+/-- If the restriction maps `H^q(S - Y_S, ℤ/ℓ) ⟶ H^q(X_S - z, ℤ/ℓ)` are bijective in every
+degree, then `H^q(S - Y_S, i'_! ℤ/ℓ) = 0` for the open immersion
+`i' : S - (X_S ∪ Y_S) ⟶ S - Y_S`. -/
 theorem subsingleton_sheafH_strictLocalizationComplement (ℓ : ℕ)
     (h : ∀ q : ℕ, Function.Bijective (Etale.cohomologyMap
       (pullback.snd (pullback.snd C.iX C.j) (pullback.fst C.j (strictLocalizationToBase zbar)))

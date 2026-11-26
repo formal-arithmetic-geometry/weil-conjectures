@@ -32,26 +32,14 @@ abbrev nativeOrdinaryRingedTensorObj (P Q : ProEtale.AdicSheaf l
   (SheafOfModules.monoidalCategory b.Q).tensorObj (b.ordinary.functor.obj Q)
     (b.ordinary.functor.obj P)
 
-/-- The underived comparison and its evaluation normalization.
-Source: Stacks 06YS and 06YU (blueprint: new-sf-native-ordinary-ringed-tensor-underived-data). -/
+/-- The underived comparison and its evaluation normalization. -/
 abbrev NativeOrdinaryRingedTensorUnderivedData :=
   OrdinaryRingedTensorUnderivedData l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
     b.K b.Q b.ordinary b.ordinaryHom
 
 set_option linter.unusedSectionVars false in
-/-- The underived comparison fixed by the ordinary and ringed tensor-Hom adjunctions.
-Source: Stacks 06YS and 06YU; the uniqueness-of-left-adjoints step in the native
-tensor model proof (blueprint: new-sf-native-ordinary-ringed-tensor-underived-data).
-
-Proof: transport the ordinary parameter adjunction through the additive equivalence
-`b.ordinary`, compare its right adjoint with the sheaf tensor-Hom adjunction by
-`b.ordinaryHom`, and use uniqueness of left adjoints.  The counit identity is the
-displayed uncurrying equation; naturality in the parameter gives the required
-two-variable comparison.  The construction is independent of all derived data.
-Its normalization determines
-this isomorphism uniquely: specialize to the adjunct of the identity to recover
-its inverse.  Thus this existence theorem specifies actual comparison data.
--/
+/-- The underived comparison fixed by the ordinary and ringed tensor-Hom adjunctions, with
+its evaluation normalization; this normalization determines the comparison uniquely. -/
 theorem native_ordinary_ringed_tensor_underived_data :
     Nonempty (NativeOrdinaryRingedTensorUnderivedData b) := by
   classical

@@ -77,9 +77,8 @@ theorem exists_linearEquiv_adicConstantH_cohomology_adicConstantHPullback (r : �
   exact hΘ x
 
 /-- **Frobenius-equivariant Poincaré duality for `Hʳ(Y ⊗ k̄, ℚ̄_ℓ)` from finite-level dualities**
-(the transport step of blueprint `theorem-poincare-duality--6`, for the constant Weil
-sheaf). Let the geometric fiber `Ȳ` be connected, with finite cohomology groups
-`Hᵏ(Ȳ, ℤ/ℓᵐ)`. If for every `m` there is a pairing `Hⁱ(Ȳ, ℤ/ℓᵐ) × Hʲ(Ȳ, ℤ/ℓᵐ) ⟶ ℤ/ℓᵐ` in
+(for the constant Weil sheaf). Let the geometric fiber `Ȳ` be connected, with finite cohomology
+groups `Hᵏ(Ȳ, ℤ/ℓᵐ)`. If for every `m` there is a pairing `Hⁱ(Ȳ, ℤ/ℓᵐ) × Hʲ(Ȳ, ℤ/ℓᵐ) ⟶ ℤ/ℓᵐ` in
 `D(Ȳ_ét, ℤ/ℓᵐ)`, nondegenerate on both sides and a `c`-similitude for the étale Frobenius
 operators of the Galois Frobenius, then there is a perfect pairing
 `Hⁱ(Y ⊗ k̄, ℚ̄_ℓ) × Hʲ(Y ⊗ k̄, ℚ̄_ℓ) ⟶ ℚ̄_ℓ` with `⟨F x, F y⟩ = c ⟨x, y⟩` for the geometric

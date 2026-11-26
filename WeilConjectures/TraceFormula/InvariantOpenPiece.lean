@@ -14,9 +14,8 @@ public import WeilConjectures.TraceFormula.Specialization.PointsSupport
 
 Let `c = (c₁, c₂) : C ⟶ X × X` be an endocorrespondence of `(X, K)` with coefficient map
 `u : Lc₂^* K ⟶ Rc₁^! K`, and let `U ⊆ X` be an open subscheme with
-`c₂⁻¹(U) ⊆ c₁⁻¹(U)`, i.e. its closed complement `Z` satisfies `c₁⁻¹(Z) ⊆ c₂⁻¹(Z)`
-(blueprint `lemma-lift-correspondence-invariant-decomposition`). Then `u` induces a coefficient
-map on the open piece `K_U = j_! Lj^* K`:
+`c₂⁻¹(U) ⊆ c₁⁻¹(U)`, i.e. its closed complement `Z` satisfies `c₁⁻¹(Z) ⊆ c₂⁻¹(Z)`. Then `u` induces
+a coefficient map on the open piece `K_U = j_! Lj^* K`:
 
 * `u_U = [j]_! (u|_U) : Lc₂^* K_U ⟶ Rc₁^! K_U`
   (`ProEtale.CondensedRing.Correspondence.openPieceCoeff`): the open base change
@@ -226,8 +225,7 @@ variable {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (c : Correspon
   (U : X.left.Opens)
 
 /-- The *open piece coefficient* `u_U = [j]_! (u|_U) : Lc₂^* K_U ⟶ Rc₁^! K_U` of a
-correspondence along an open subscheme `j : U ⟶ X` with `c₂⁻¹(U) ⊆ c₁⁻¹(U)` (blueprint
-`lemma-lift-correspondence-invariant-decomposition`): the open base change
+correspondence along an open subscheme `j : U ⟶ X` with `c₂⁻¹(U) ⊆ c₁⁻¹(U)`: the open base change
 `Lc₂^* j_! ≅ j_{V!} Lc_{2,V}^*` followed by the `j_{V!} ⊣ Lj_V^*` adjoint of the restriction of
 `u` to the open correspondence `V = c₂⁻¹(U) ⟶ U × U` (`openPieceCoeffOfIsPullback`). -/
 noncomputable def openPieceCoeff (hle : c.c₂.left ⁻¹ᵁ U ≤ c.c₁.left ⁻¹ᵁ U) :
@@ -237,10 +235,8 @@ noncomputable def openPieceCoeff (hle : c.c₂.left ⁻¹ᵁ U ≤ c.c₁.left �
   openPieceCoeffOfIsPullback ℓ (isPullback_opensOverRestrict c.c₂ U)
     (isPullback_opensOverRestrict c.c₁ U) (opensOverHomOfLE_ι hle) K c.u
 
-/-- **The open piece coefficient and the counit** (blueprint
-`lemma-lift-correspondence-invariant-decomposition`, the open piece): `Rc₁^! ε ∘ u_U = u ∘ Lc₂^* ε`
-for the counit `ε : j_! Lj^* K ⟶ K` of an open subscheme `j : U ⟶ X` with
-`c₂⁻¹(U) ⊆ c₁⁻¹(U)`. -/
+/-- **The open piece coefficient and the counit**: `Rc₁^! ε ∘ u_U = u ∘ Lc₂^* ε` for the counit
+`ε : j_! Lj^* K ⟶ K` of an open subscheme `j : U ⟶ X` with `c₂⁻¹(U) ⊆ c₁⁻¹(U)`. -/
 theorem openPieceCoeff_comp_map_counit (hle : c.c₂.left ⁻¹ᵁ U ≤ c.c₁.left ⁻¹ᵁ U) :
     c.openPieceCoeff U hle ≫
         (boundedConstructibleUpperShriek ℓ c.c₁).map

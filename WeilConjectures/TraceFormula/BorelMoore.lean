@@ -18,15 +18,13 @@ Let `h : T ⟶ T'` be a proper morphism of separated `k`-schemes of finite type.
 ```
 h_* α : ℚ̄_ℓ,T' ⟶ Rh_* Lh^* ℚ̄_ℓ,T' ≅ Rh_* ℚ̄_ℓ,T --Rh_* α--> Rh_* ω_T ≅ Rh_! Rh^! ω_T' ⟶ ω_T'
 ```
-(`ProEtale.CondensedRing.BorelMooreSection.pushforward`, blueprint
-`definition-pushforward-correspondence--2`), built from the unit of `Lh^* ⊣ Rh_*`, the unit
-isomorphism of the monoidal functor `Lh^*`, the identification `Rh_! ≅ Rh_*` of the proper `h`, the
-composition isomorphism `Rh^! ω_T' ≅ ω_T` and the counit of `Rh_! ⊣ Rh^!`.
+(`ProEtale.CondensedRing.BorelMooreSection.pushforward`), built from the unit of `Lh^* ⊣ Rh_*`,
+the unit isomorphism of the monoidal functor `Lh^*`, the identification `Rh_! ≅ Rh_*` of the
+proper `h`, the composition isomorphism `Rh^! ω_T' ≅ ω_T` and the counit of `Rh_! ⊣ Rh^!`.
 
 The scalars `End (ℚ̄_ℓ,s)` act on the Borel–Moore sections of `T` through the monoidal pullback
 `La_T^*` (`ProEtale.CondensedRing.BorelMooreSection.scalar`), and the integral is linear for
-this action (`ProEtale.CondensedRing.BorelMooreSection.integral_scalar_comp`, blueprint
-`theorem-proper-pushforward-lefschetz-verdier--3`).
+this action (`ProEtale.CondensedRing.BorelMooreSection.integral_scalar_comp`).
 
 -/
 
@@ -53,8 +51,7 @@ variable {T T' : Over (Spec (.of k))} [LocallyOfFiniteType T.hom] [QuasiCompact 
   [IsSeparated T.hom] [LocallyOfFiniteType T'.hom] [QuasiCompact T'.hom] [IsSeparated T'.hom]
   (h : T ⟶ T') [IsProper h.left]
 
-/-- The *pushforward* `h_* α` of a Borel–Moore section `α` along a proper morphism `h`
-(blueprint `definition-pushforward-correspondence--2`):
+/-- The *pushforward* `h_* α` of a Borel–Moore section `α` along a proper morphism `h`:
 ```
 ℚ̄_ℓ,T' ⟶ Rh_* Lh^* ℚ̄_ℓ,T' ≅ Rh_* ℚ̄_ℓ,T --Rh_* α--> Rh_* ω_T ≅ Rh_! ω_T ≅ Rh_! Rh^! ω_T'
   ⟶ ω_T'.
@@ -94,8 +91,7 @@ noncomputable def scalar [LocallyOfFiniteType X.hom] [IsSeparated X.hom]
     (Functor.Monoidal.εIso
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X))).inv)
 
-/-- **Linearity of the integral** (blueprint `theorem-proper-pushforward-lefschetz-verdier--3`,
-`definition-trace-class-local-terms--2`): for a scalar `t ∈ End (ℚ̄_ℓ,s)` acting on a Borel–Moore
+/-- **Linearity of the integral**: for a scalar `t ∈ End (ℚ̄_ℓ,s)` acting on a Borel–Moore
 section `α` through `scalar`, `∫_X (t • α) = t ∘ ∫_X α`. Together with `integral_add` this is the
 `End (ℚ̄_ℓ,s)`-linearity of the integral. -/
 lemma integral_scalar_comp [IsProper X.hom]
@@ -193,8 +189,7 @@ instance isProper_toPoint_left [IsProper X.hom] : IsProper (toPoint X).left := b
   rw [toPoint_left]
   infer_instance
 
-/-- **Integration is pushforward to the point** (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--2`): for `X` proper over `s`, the integral `∫_X α` is
+/-- **Integration is pushforward to the point**: for `X` proper over `s`, the integral `∫_X α` is
 the pushforward `(a_X)_* α` along the structure morphism, read through `ω_s ≅ ℚ̄_ℓ,s`. -/
 theorem integral_eq_pushforward [IsProper X.hom] (α : BorelMooreSection ℓ X) :
     α.integral = .of (pushforward (toPoint X) α ≫ (dualizingComplexPointIso ℓ k).hom) := by
@@ -205,8 +200,7 @@ theorem integral_eq_pushforward [IsProper X.hom] (α : BorelMooreSection ℓ X) 
   rw [(boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ
       (toPoint X)).inv.naturality_assoc α, lowerShriek_map_dualizingComplexComp_inv_counit]
 
-/-- **Integration is pushforward to the point**, in the form `∫_X α = ∫_s (a_X)_* α`
-(blueprint `theorem-proper-pushforward-lefschetz-verdier--2`). -/
+/-- **Integration is pushforward to the point**, in the form `∫_X α = ∫_s (a_X)_* α`. -/
 theorem integral_eq_integral_pushforward [IsProper X.hom] (α : BorelMooreSection ℓ X) :
     α.integral = (pushforward (toPoint X) α).integral := by
   rw [integral_point, integral_eq_pushforward]

@@ -13,7 +13,17 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 /-!
 # Smoothness after eliminating the auxiliary variables
 
-Source: Stacks Project, proof of Lemma 07FE, first paragraph.
+Inverting one coefficient `a j` in the relations `X_i^n = ∑_l Z_(i,l) a_l` yields a smooth
+`k[X_i]`-algebra, provided the localization `A_(a j)` is smooth over `k`.
+
+## Implementation details
+
+The cases `d = 0`, `a j` nilpotent and exponent `n = 0` are included: the elimination uses only
+the invertibility of `a j`.
+
+## References
+
+* [Stacks, Tag 07FE] (first paragraph of the proof)
 -/
 
 @[expose] public section
@@ -266,23 +276,7 @@ private theorem coefficientLocalization_equiv
     commutes' := htR }⟩
 
 /-- Inverting one coefficient in the displayed relations yields a smooth algebra over
-`k[X_i]`, provided the corresponding coefficient localization of `A` is smooth over `k`.
-
-Source: Stacks Project, proof of Lemma 07FE, first paragraph.
-(blueprint: lem-weil-pbc-popescu-polynomial-coefficient-localization-smooth).
-
-Proof: fix `j`. Over `A_(a j)` each relation has an invertible coefficient of `Z_(i,j)`.
-Solve it as `Z_(i,j) = (a j)⁻¹ * (X_i^n - Σ_(l ≠ j) Z_(i,l) a_l)`.
-The quotient localized at `a j` is therefore canonically isomorphic, as a `k[X_i]`-algebra,
-to the polynomial algebra in `Z_(i,l)` for `l ≠ j` over `A_(a j)[X_i]`.
-Construct the forward map on all variables by the displayed formula and the inverse on the
-remaining variables by their quotient classes. The equations show the two compositions
-are identities. The base algebra `A_(a j)[X_i]` is smooth over `k[X_i]` by base change
-of the assumed smooth map `k → A_(a j)`. Adjoining the remaining finitely many variables
-is smooth, and composition and transport along the algebra equivalence give the result.
-If `d = 0`, this is precisely the assumed smoothness. If `a j` is nilpotent, both localized
-rings are zero and the same construction applies. The exponent may be zero; elimination
-uses the invertibility of `a j`, not any condition on `n`. -/
+`k[X_i]`, provided the corresponding coefficient localization of `A` is smooth over `k`. -/
 theorem popescuPolynomialCoefficientLocalization_smooth
     {k : Type u} {A : Type v} [CommRing k] [CommRing A] [Algebra k A]
     (d n : ℕ) {m : ℕ} (a : Fin m → A) (j : Fin m)

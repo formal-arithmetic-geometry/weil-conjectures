@@ -41,8 +41,19 @@ import Mathlib.Algebra.Homology.BifunctorFlip
 
 /-! # Two-sided K-flat representatives in the native derived category
 
-Source: Stacks 06YS and 06YN. Transport ringed K-flat resolutions through the
-native additive equivalence and test both tensor variables by mapping cones.
+Every object of the native derived category has a representative that is K-flat in both tensor
+variables.
+
+## Implementation details
+
+Ringed K-flat resolutions are transported through the native additive equivalence with a
+ringed module category, and both tensor variables are tested by mapping cones: the native
+total-tensor comparison identifies each native tensor test with the ringed one, and exact
+equivalences preserve and reflect the resolution quasi-isomorphism.
+
+## References
+
+* Stacks Project, Tags 06YS and 06YN.
 -/
 
 @[expose] public noncomputable section
@@ -175,22 +186,7 @@ private instance tensor_obj_additive
 
 attribute [local irreducible] nativeDerivedClosedComparison nativeTensorBifunctor
 
-/-- Every native derived object has a representative satisfying both native K-flat tests.
-Source: Stacks 06YS and 06YN
-(blueprint: lem-sf-native-two-sided-kflat-representatives).
-
-Proof: use the additive ringed presentation of the native module category. Resolve
-the transported complex by a ringed K-flat complex and bring that resolution back
-through the inverse complex equivalence. The counit identifies the transported
-replacement with the chosen ringed K-flat complex. The native total-tensor comparison,
-preceded by the signed interchange of the two total directions, identifies each
-native tensor test with the ringed tensor test. Ringed symmetry gives the test in
-the other variable. A quasi-isomorphism has acyclic mapping cone; the two tensor-cone
-comparison isomorphisms therefore give preservation of quasi-isomorphisms in both
-variables. Exact equivalences preserve and reflect the resolution quasi-isomorphism.
-Localizing its augmentation and composing with a complex representative of the
-derived object gives the required isomorphism. No fraction calculus on complexes
-is assumed. -/
+/-- Every native derived object has a representative satisfying both native K-flat tests. -/
 theorem native_two_sided_kflat_representatives
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]

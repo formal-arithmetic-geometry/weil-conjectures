@@ -11,13 +11,15 @@ public import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactS
 /-!
 # Finite-coefficient exceptional composition
 
-Source: blueprint proposition-compatibility-purity-composition--1, proof Step 1 and
-proposition-composition-open-restriction-compactifications-f--1 (blueprint:
-def-pur-finite-exceptional-composition).
-
 This module owns the finite-coefficient presentation of the canonical compact-support
 compositor used by the diagonal pasting construction. It is the adjunction conjugate of
 the specified unbounded etale compositor, with no arbitrary natural isomorphism.
+
+## Implementation details
+
+The underlying lower-shriek map is the canonical `Etale.unboundedEtaleLowerShriekCompIso`;
+conjugation uses the two published etale right-derived upper-shriek adjunctions and their
+actual composite.
 -/
 
 @[expose] public noncomputable section
@@ -27,13 +29,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
 namespace WeilConjectures.PurityFiniteSetting
 
-/-- The adjunction conjugate of the specified compact-support compositor.
-Source: blueprint proposition-compatibility-purity-composition--1, proof Step 1 and
-proposition-composition-open-restriction-compactifications-f--1 (blueprint:
-def-pur-finite-exceptional-composition). The underlying lower-shriek map is the canonical
-`Etale.unboundedEtaleLowerShriekCompIso`; conjugation uses the two published etale
-right-derived upper-shriek adjunctions and their actual composite.
--/
+/-- The adjunction conjugate of the specified compact-support compositor. -/
 def finiteExceptionalComposition (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [HasCompactification f]
     [HasCompactification g] [HasCompactification (f ≫ g)] [QuasiCompact f]

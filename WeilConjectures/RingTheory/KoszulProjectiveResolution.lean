@@ -14,8 +14,18 @@ import Mathlib.Algebra.Category.ModuleCat.Projective
 
 /-! # The Koszul resolution of a quotient
 
-Source: Stacks Project, Tags 0623, 062E and 0BQZ.
-(blueprint: new-j3-koszul-projective-resolution).
+The Koszul complex of a Koszul-regular sequence, augmented by the quotient map, is a projective
+resolution of `A/I`.
+
+## Implementation details
+
+The augmentation is the quotient map in degree zero, through `⋀^0 A^r ≃ A`; it kills `d_1`
+since contraction sends `e_i` to `f_i`. Terms are free via the exterior basis. No properness
+of `I` is needed.
+
+## References
+
+* [Stacks, Tags 0623, 062E, 0BQZ]
 -/
 
 @[expose] public section
@@ -49,23 +59,7 @@ private theorem koszulBoundary_zero_quotient_formula
   exact LinearMap.congr_fun he x
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The Koszul complex of a Koszul-regular sequence resolves its quotient.
-Source: Stacks Project, Tag 0623 (the Koszul complex), Tag 062E (Koszul
-regularity), and Tag 0BQZ (the finite free resolution used in the Ext calculation).
-(blueprint: new-j3-koszul-projective-resolution).
-
-Proof: In degree zero use the exterior-power isomorphism wedge^0(A^r) = A
-and the quotient map A -> A/I; in higher degrees use zero. Contraction in degree
-one sends the standard basis vector e_i to f_i, so its image in degree zero is
-span(range f) = I. The quotient map therefore kills d_1 and defines the chain
-augmentation. Its degree-zero homology map is an isomorphism by the cokernel
-universal property. In positive degrees source homology is zero by hreg and
-homology of the single complex is zero, so the augmentation is a
-quasi-isomorphism in every degree. Finally, the exterior basis induced by the
-standard basis of Fin r ->_0 A makes every term free, hence projective. Bundle
-these data as a ProjectiveResolution with exactly the original chain complex.
-For r = 0 the augmentation is the isomorphism A -> A/(0); no properness of I
-is needed, so the construction also applies when A/I is zero. -/
+/-- The Koszul complex of a Koszul-regular sequence resolves its quotient. -/
 theorem exists_koszul_projective_resolution
     (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A)
     (hreg : RingTheory.Sequence.IsKoszulRegular f) (hf : Ideal.span (Set.range f) = I) :

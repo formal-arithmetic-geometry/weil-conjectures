@@ -10,7 +10,12 @@ public import WeilConjectures.CategoryTheory.ArrowHEq.ArrowHEq
 
 import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeIntegralStageObject
 
-/-! # The canonical target-realization transition square -/
+/-! # The canonical target-realization transition square
+
+## References
+
+* [Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -74,15 +79,7 @@ private theorem app_arrow_congr {C D : Type*} [Category C] [Category D]
   exact ArrowHEq.refl _
 
 -- Compare the common-field normalization with the canonical target realization.
-/-- The inverse integral realization and operation transport respect stage change.
-Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15.
-Proof: common_field expresses the realized stage transition through the two integral
-realization isomorphisms and the native scalar map. The stage-object formula identifies
-its target with raw localization of the integral transition. Naturality of inverse
-operationTransport moves this realized transition past the final transport. Precompose
-by the inverse initial integral realization and cancel its composite with the forward
-realization. Functoriality and associativity give the two canonical target boundaries.
-(blueprint: lem-sf-native-integral-canonical-target-transition). -/
+/-- The inverse integral realization and operation transport respect stage change. -/
 theorem canonicalIntegralTargetTransition [G : NativeGeometry.{u} l]
     (source : Realization l X) (i E : Index l (PadicAlgCl l)) (h : i ≤ E)
     (Ki : sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) i) X) :

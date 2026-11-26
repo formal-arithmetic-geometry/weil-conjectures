@@ -41,14 +41,14 @@ public import Mathlib.CategoryTheory.Limits.Types.Limits
 /-!
 # Ordinary immersion and representable-chart comparisons
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6D,
-lemma-derived-pullback-composition; sites-modules.tex, Tag 04IF,
-lemma-localize-morphism-ringed-topoi; Bhatt--Scholze, Remark 6.8.15.
-(blueprint: def-tw-ordinary-immersion-chart-models).
-
 All pullbacks below are ordinary, before completion. The records retain their
 universal computation counits and the ordinary adjunction mates that normalize
 both comparisons. Schemes and coefficients have independent universes.
+
+## References
+
+* Stacks Project, Tags 03CO, 03D1, 03D2, 03DA, 04IF, 04J0, 06YN, 06YS, 06YY and 0D6D.
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Remark 6.8.15.
 -/
 
 @[expose] public noncomputable section
@@ -67,22 +67,19 @@ namespace WeilConjectures.OrdinaryImmersionChart
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The underlying ring sheaf of the recorded commutative completed coefficient sheaf.
-Source: Stacks 03CO (blueprint: lem-tw-ordinary-immersion-chart-comparison). -/
+/-- The underlying ring sheaf of the recorded commutative completed coefficient sheaf. -/
 @[irreducible]
 def Rings (T : Scheme.{t}) : Sheaf (ProEt.topology T) RingCat.{max u (t + 1)} :=
   completedIntegralCoefficientSheafUnrestricted l E T
 
 /-- The recorded module-sheaf category over the completed ring, with no completeness
-condition on its objects. Source: Stacks 03DA, 0D6D
-(blueprint: lem-tw-ordinary-immersion-chart-comparison). -/
+condition on its objects. -/
 abbrev Modules (T : Scheme.{t}) :=
   ringedSiteModules.{max u (t + 1)} (Rings l E T)
 
 attribute [local semireducible] Rings
 
-/-- The adjunct of exactly the projection-defined structural map c_g.
-Source: Stacks 04J0 (blueprint: lem-tw-ordinary-immersion-chart-comparison). -/
+/-- The adjunct of exactly the projection-defined structural map c_g. -/
 def directRingMap {T W : Scheme.{t}} (g : T ⟶ W) :
     Rings l E W ⟶
       ((proEtaleBaseChange g).sheafPushforwardContinuous RingCat.{max u (t + 1)}
@@ -92,22 +89,19 @@ def directRingMap {T W : Scheme.{t}} (g : T ⟶ W) :
     (((completedRingAdj.{t, u} g).homEquiv _ _) (completedRingMap l E g)).hom
       (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})⟩
 
-/-- Ordinary sectionwise module direct image, with action through the structural adjunct.
-Source: Stacks 03D1 (blueprint: lem-tw-ordinary-immersion-chart-comparison). -/
+/-- Ordinary sectionwise module direct image, with action through the structural adjunct. -/
 abbrev push {T W : Scheme.{t}} (g : T ⟶ W) : Modules l E T ⥤ Modules l E W :=
   SheafOfModules.pushforward.{max u (t + 1)} (directRingMap l E g)
 
 /-- Mathlib's sheafified module Kan extension: B_T tensor_(g⁻¹ B_W) g⁻¹(-).
-The left adjoint is selected by its universal property, not by an arbitrary map.
-Source: Stacks 03D2 (blueprint: lem-tw-ordinary-immersion-chart-comparison). -/
+The left adjoint is selected by its universal property, not by an arbitrary map. -/
 @[irreducible]
 def pull {T W : Scheme.{t}} (g : T ⟶ W) : Modules l E W ⥤ Modules l E T :=
   letI := SheafOfModules.module_pushforward_isRightAdjoint_of_universes.{t + 1, t, u}
     (directRingMap l E g)
   SheafOfModules.pullback.{max u (t + 1)} (directRingMap l E g)
 
-/-- The canonical ordinary pullback adjunction, including its tensor-generator unit.
-Source: Stacks 03D2 (blueprint: lem-tw-ordinary-immersion-chart-comparison). -/
+/-- The canonical ordinary pullback adjunction, including its tensor-generator unit. -/
 @[irreducible]
 def adj {T W : Scheme.{t}} (g : T ⟶ W) : pull l E g ⊣ push l E g := by
   letI := SheafOfModules.module_pushforward_isRightAdjoint_of_universes.{t + 1, t, u}
@@ -115,14 +109,12 @@ def adj {T W : Scheme.{t}} (g : T ⟶ W) : pull l E g ⊣ push l E g := by
   unfold pull
   exact SheafOfModules.pullbackPushforwardAdjunction (directRingMap l E g)
 
-/-- Additivity supplied by the existing sectionwise pushforward and adjunction APIs.
-Source: Stacks 03D2 (blueprint: lem-tw-ordinary-immersion-chart-comparison). -/
+/-- Additivity supplied by the existing sectionwise pushforward and adjunction APIs. -/
 instance pullAdditive {T W : Scheme.{t}} (g : T ⟶ W) : (pull l E g).Additive :=
   letI := CategoryTheory.SubterminalImageCalculus.pushforwardAdditive (directRingMap l E g)
   (adj l E g).left_adjoint_additive
 
-/-- Flat-term K-flat representatives use the recorded independent-universe predicates.
-Source: Stacks 06YN, 06YS (blueprint: lem-tw-ordinary-immersion-chart-comparison). -/
+/-- Flat-term K-flat representatives use the recorded independent-universe predicates. -/
 def Good (T : Scheme.{t}) (P : CochainComplex (Modules l E T) ℤ) : Prop :=
   @CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, max u (t + 1)}
     T.ProEt inferInstance (essentiallySmallSelf _) (ProEt.topology T)
@@ -131,9 +123,7 @@ def Good (T : Scheme.{t}) (P : CochainComplex (Modules l E T) ℤ) : Prop :=
       (J := ProEt.topology T) (R := completedIntegralCommRingSheafUnrestricted l E T) (P.X n)
 
 /-- An ordinary derived pullback, with its universal counit and K-flat computation.
-Existence of these models is part of the conclusion, not an additional hypothesis.
-Source: Stacks 06YY, 0D6D
-(blueprint: lem-tw-ordinary-immersion-chart-comparison). -/
+Existence of these models is part of the conclusion, not an additional hypothesis. -/
 structure Image {T W : Scheme.{t}} (g : T ⟶ W) [(pull l E g).Additive] where
   functor : DerivedCategory (Modules l E W) ⥤ DerivedCategory (Modules l E T)
   counit : DerivedCategory.Q ⋙ functor ⟶
@@ -144,11 +134,8 @@ structure Image {T W : Scheme.{t}} (g : T ⟶ W) [(pull l E g).Additive] where
     Good l E W P → IsIso (counit.app P)
 
 /-- Exact restriction to a represented slice identified with the site of its scheme.
-The coefficient isomorphism is uniquely determined by the constant-section and finite
-projection equations in completedRingMap_slice; the identity morphism merely obtains
-that same identification without making it depend on a second scheme morphism.
-Source: Stacks 04IF, 04J0
-(blueprint: lem-tw-ordinary-immersion-chart-comparison). -/
+The coefficient isomorphism is the one determined by the constant-section and finite
+projection equations in `completedRingMap_slice`. -/
 def chartRingIso {W : Scheme.{t}} (U : W.ProEt) :
     (completedRingRestriction.{t, u} U).obj
       (completedIntegralCommRingSheafUnrestricted l E W) ≅
@@ -156,8 +143,7 @@ def chartRingIso {W : Scheme.{t}} (U : W.ProEt) :
   (completedRingMap_slice l E (𝟙 W) U).choose
 
 /-- Sectionwise restriction, followed by the recorded slice equivalence and its
-projection-normalized coefficient transport. Source: Stacks 04IF, 04J0
-(blueprint: lem-tw-ordinary-immersion-chart-comparison). -/
+projection-normalized coefficient transport. -/
 abbrev restrict {W : Scheme.{t}} (U : W.ProEt) : Modules l E W ⥤ Modules l E U.left :=
   letI := ProEt.sliceDense W U
   letI : (MorphismProperty.Over.map ⊤ U.prop).IsContinuous
@@ -171,8 +157,7 @@ abbrev restrict {W : Scheme.{t}} (U : W.ProEt) : Modules l E W ⥤ Modules l E U
       (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})⟩
 
 /-- The base-change comparison on the two equal composites, fixed by the actual
-fibre-product compositors. Source: Stacks 0D6D, 04J0
-(blueprint: lem-tw-ordinary-immersion-chart-comparison). -/
+fibre-product compositors. -/
 def squareSiteIso {A B C D : Scheme.{t}} (a : A ⟶ B) (b : B ⟶ D)
     (c : A ⟶ C) (d : C ⟶ D) (e : a ≫ b = c ≫ d) :
     proEtaleBaseChange b ⋙ proEtaleBaseChange a ≅
@@ -183,9 +168,7 @@ def squareSiteIso {A B C D : Scheme.{t}} (a : A ⟶ B) (b : B ⟶ D)
 
 /-- Normalization of an ordinary square by sectionwise direct image and its
 adjunction mate. It is the composite of the ordinary composition comparisons
-and transport along the specified equality, with all coefficient actions retained.
-Source: Stacks 0D6D, 04J0
-(blueprint: lem-tw-ordinary-immersion-chart-comparison). -/
+and transport along the specified equality, with all coefficient actions retained. -/
 structure Square {A B C D : Scheme.{t}} (a : A ⟶ B) (b : B ⟶ D)
     (c : A ⟶ C) (d : C ⟶ D) (e : a ≫ b = c ≫ d) where
   direct : push l E c ⋙ push l E d ≅ push l E a ⋙ push l E b
@@ -199,9 +182,7 @@ structure Square {A B C D : Scheme.{t}} (a : A ⟶ B) (b : B ⟶ D)
 
 /-- The first comparison together with its ordinary K-flat representative equation.
 The second pullbacks use immersion restrictions: their computation counits are
-invertible on every complex, not only on complete objects.
-Source: Stacks 0D6D; Bhatt--Scholze Remark 6.8.15
-(blueprint: lem-tw-ordinary-immersion-chart-comparison). -/
+invertible on every complex, not only on complete objects. -/
 structure ImmersionSquare {X Y S : Scheme.{t}} (f : X ⟶ Y) (i : S ⟶ Y)
     [(pull l E f).Additive] [(pull l E i).Additive]
     [(pull l E (pullback.fst f i)).Additive]
@@ -226,8 +207,7 @@ structure ImmersionSquare {X Y S : Scheme.{t}} (f : X ⟶ Y) (i : S ⟶ Y)
           DerivedCategory.Q.map
             ((NatIso.mapHomologicalComplex square.ordinary (.up ℤ)).hom.app Q)
 
-/-- Additivity of restriction is the existing sectionwise pushforward instance.
-Source: Stacks 04IF (blueprint: lem-tw-ordinary-immersion-chart-comparison). -/
+/-- Additivity of restriction is the existing sectionwise pushforward instance. -/
 instance restrictAdditive {W : Scheme.{t}} (U : W.ProEt) : (restrict l E U).Additive :=
   letI : (MorphismProperty.Over.map ⊤ U.prop).IsContinuous
       (ProEt.topology U.left) (ProEt.topology W) := ProEt.isContinuous_overMap U.prop
@@ -236,9 +216,7 @@ instance restrictAdditive {W : Scheme.{t}} (U : W.ProEt) : (restrict l E U).Addi
 /-- The representable slice comparison, with its ordinary mate and K-flat equation.
 The right-adjoint equation fixes the localized morphism on the actual base-changed
 schemes. Its coefficient actions are those of directRingMap and chartRingIso, so it
-identifies ringed morphisms. The ordinary mate is fixed by the unit and counit.
-Source: Stacks 04IF and 0D6D
-(blueprint: lem-tw-ordinary-immersion-chart-comparison). -/
+identifies ringed morphisms. The ordinary mate is fixed by the unit and counit. -/
 structure Chart {T S : Scheme.{t}} (g : T ⟶ S) (U : S.ProEt)
     (Pg : Image l E g) (Pv : Image l E (completedRingSliceArrow g U)) where
   uLimits : PreservesFiniteLimits (restrict l E U)
@@ -274,8 +252,7 @@ structure Chart {T S : Scheme.{t}} (g : T ⟶ S) (U : S.ProEt)
 
 /-- The two comparisons and the formula defining the second from the first and the
 inverse slice comparison. Every component is a natural isomorphism on the entire
-ordinary unbounded derived category. Source: Stacks 0D6D, 04IF
-(blueprint: lem-tw-ordinary-immersion-chart-comparison). -/
+ordinary unbounded derived category. -/
 structure Comparison {X Y S : Scheme.{t}} (f : X ⟶ Y) (i : S ⟶ Y) (U : S.ProEt) where
   Pf : Image l E f
   Pi : Image l E i

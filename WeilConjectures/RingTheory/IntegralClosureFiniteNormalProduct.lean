@@ -13,8 +13,10 @@ import WeilConjectures.RingTheory.FiniteProductNormal
 /-!
 # Integral closure in a finite product of normal domains
 
-Source: Stacks Project, Tags 035L and 034L.
-(blueprint: lem-sbc-integral-closure-finite-normal-product)
+## References
+
+* [Stacks, Tag 035L]
+* [Stacks, Tag 034L]
 -/
 
 @[expose] public section
@@ -35,20 +37,8 @@ private theorem integral_pi {A : Type u} [CommRing A] {ι : Type v} [Finite ι]
   rw [aeval_pi_apply₂, map_prod]
   exact Finset.prod_eq_zero (Finset.mem_univ i) (by simpa [aeval_def] using hz i)
 
-/-- Integral closure in a finite product of normal domains has normal prime localizations.
-
-Source: Stacks Project, Tags 035L and 034L.
-(blueprint: lem-sbc-integral-closure-finite-normal-product)
-
-Proof: Transport the A-algebra structure to the product factors. Coordinate projection
-maps integral elements to integral elements. Conversely, multiply one monic annihilating
-polynomial for each coordinate; this monic product annihilates the tuple. Thus the integral
-closure is the product of the coordinate integral closures. Each coordinate closure is a
-normal domain: integrality is transitive, and an element integral over that closure belongs
-to the ambient normal domain and hence to the closure. Every prime of the finite product
-comes from one coordinate. Localization at that prime is the localization of that normal
-domain, which is again an integrally closed domain. For an empty product there are no
-prime ideals. -/
+/-- The integral closure of `A` in a finite product of normal domains has normal prime
+localizations. -/
 theorem integralClosure_normal_localizations_of_finite_product
     {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]
     {ι : Type v} [Finite ι] (C : ι → Type u) [∀ i, CommRing (C i)]

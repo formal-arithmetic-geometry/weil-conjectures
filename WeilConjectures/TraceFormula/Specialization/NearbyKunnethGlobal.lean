@@ -20,8 +20,7 @@ public import WeilConjectures.Tactic.ExactModProofs
 
 Let `M`, `N` be models of finite type over the henselian trait `S = Spec k'⟦t⟧`
 over an arbitrary field `k'` along proper structure morphisms `q_M`, `q_N`, and let `P` be their
-product over the trait. This file proves the global-sections step (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, equation (4)) of Illusie's proof of Gabber's
+product over the trait. This file proves the global-sections step of Illusie's proof of Gabber's
 Künneth formula: the direct image `R(a_{P_s})_* Π_{A,B}` of the Künneth map of nearby cycles to the
 point `Spec k'` is an isomorphism
 (`AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.isIso_lowerStar_kunnethMap`).
@@ -33,14 +32,12 @@ After passing to the models of the geometric generic fibres
 (`NearbyCyclesModel.isIso_map_kunnethMap_iff_toGeneric`), the structure morphisms are morphisms
 of models `ψ : M ⟶ T` to the trait `T` as a model of its geometric generic point
 (`NearbyCyclesModel.traitGenericModel`). The compatibility of the Künneth map with direct
-images (blueprint `lemma-kunneth-map-proper-direct-image--1`,
-`NearbyCyclesModel.kunnethMap_comp_pushforwardExchange`) identifies `R(a_{P_s})_* Π_{A,B}`, up
-to
-* the proper exchanges `χ_ψ` (blueprint `prose-E-03` (2),
-  `NearbyCyclesModel.IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app`),
-* the ordinary Künneth isomorphism `RΓ(X_s) ⊗ RΓ(Y_s) ≅ RΓ(X_s × Y_s)` over `k'` (blueprint
-  `lemma-kunneth-one-identity-factor--1`,
-  `ProEtale.CondensedRing.isIso_lowerStarKunnethMap'_of_isPullback`),
+images (`NearbyCyclesModel.kunnethMap_comp_pushforwardExchange`) identifies
+`R(a_{P_s})_* Π_{A,B}`, up to
+* the proper exchanges `χ_ψ`
+  (`NearbyCyclesModel.IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app`),
+* the ordinary Künneth isomorphism `RΓ(X_s) ⊗ RΓ(Y_s) ≅ RΓ(X_s × Y_s)` over `k'`
+  (`ProEtale.CondensedRing.isIso_lowerStarKunnethMap'_of_isPullback`),
 
 with the Künneth map of the trait `T` at `(RΓ(X_η̄, A), RΓ(Y_η̄, B))` followed by the nearby cycles
 of the ordinary Künneth isomorphism on the geometric generic fibres; the former is an isomorphism
@@ -50,12 +47,25 @@ geometric generic point; this last input is a hypothesis of
 `NearbyCyclesModel.isIso_kunnethMap_traitGenericModel_of_shiftDecomposition`
 (`WeilConjectures.TraceFormula.Specialization.TraitNearbyMonoidal`).
 
-## Implementation notes
+## Implementation details
 
 The statements of the `ℚ̄_ℓ` inputs carry different `Precoherent Profinite` proofs (auxiliary proof
 constants and the synthesized instance) inside the `MonObj` instances of `ℚ̄_ℓ`; comparing them
 makes the unifier and the kernel unfold the derived categories. The inputs are therefore applied
 with `exact_mod_proofs`, which identifies these proofs by casts.
+
+The proper exchange
+`NearbyCyclesModel.IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app` is stated for
+the morphism `(q, g)` from the model of the geometric generic fibre to the trait as a model of its
+geometric generic point. The version for geometric models
+(`NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper_geometric`) is the same
+statement for `(q, q) : M.geometric ⟶ S.geometric`; the two exchanges differ by `Ψ_S` of the
+base change morphism `Lη̄^* Rq_* ⟶ Rg_* Lj^*`, which is invertible by proper base change for `q`.
+
+## References
+
+* SGA 7 XIII (2.1.7.1) (the proper exchange for the structure morphism)
+* L. Illusie, *Autour du théorème de monodromie locale*, proof of Thm. 4.7
 
 -/
 
@@ -212,22 +222,13 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [Fact (ringChar k
   {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
 
 -- the pushforward exchange of the model of the geometric generic fibre is slow to unify
-/-- **The proper exchange for the structure morphism** (blueprint
-`prose-E-03` (2), for the proper morphism `f = q : 𝒳 ⟶ S` to the trait; SGA 7
-XIII (2.1.7.1)): for a model `M` of finite type over the henselian trait `Spec k'⟦t⟧` along a
-proper `q` and a bounded constructible complex `C₀` on the total space, the pushforward exchange
-`χ : Ψ_S Rg_* (Lj^* C₀) ⟶ R(q_s)_* Ψ_M (Lj^* C₀)` of the structure morphism
-`(q, g) : M ⟶ S` (`NearbyCyclesModel.IsTraitModelOver.toTraitGeneric`) is an isomorphism. Here
-`Lj^* C₀` is the pullback to the geometric generic fibre of the complex `C₀|_{𝒳_η}` on the
-generic fibre, as in the blueprint node, and `Ψ_S Rg_*` is the nearby cycles of the trait of
-`Rq_{η*}`, computed on the geometric generic fibre.
-
-This is the node for the morphism `(q, g)` from the model of the geometric generic fibre to the
-trait as a model of its geometric generic point. The version for geometric models
-(`NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper_geometric`) is the same
-statement for `(q, q) : M.geometric ⟶ S.geometric`; the two exchanges differ by `Ψ_S` of the
-base change morphism `Lη̄^* Rq_* ⟶ Rg_* Lj^*`, which is invertible by proper base change for
-`q`. -/
+/-- **The proper exchange for the structure morphism**: for a model `M` of finite type over the
+henselian trait `Spec k'⟦t⟧` along a proper `q` and a bounded constructible complex `C₀` on the
+total space, the pushforward exchange `χ : Ψ_S Rg_* (Lj^* C₀) ⟶ R(q_s)_* Ψ_M (Lj^* C₀)` of the
+structure morphism `(q, g) : M ⟶ S` (`NearbyCyclesModel.IsTraitModelOver.toTraitGeneric`) is an
+isomorphism. Here `Lj^* C₀` is the pullback to the geometric generic fibre of the complex
+`C₀|_{𝒳_η}` on the generic fibre, and `Ψ_S Rg_*` is the nearby cycles of the trait of `Rq_{η*}`,
+computed on the geometric generic fibre. -/
 theorem IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app
     (h : M.IsTraitModelOver q g) [IsProper q]
     (C₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology M.total) Ab.{u + 1})
@@ -396,8 +397,7 @@ set_option maxHeartbeats 1600000 in
 direct image `R(a_{P_s})_* Π_{A,B}` of the Künneth map to the point `Spec k'` is an isomorphism
 as soon as the proper exchanges `χ` of the structure morphisms to the trait, the ordinary Künneth
 maps on the special and on the geometric generic fibres, and the Künneth map of the trait at
-`(Rg_{M*} Lε_M^* A, Rg_{N*} Lε_N^* B)` are isomorphisms (the identification
-`kunnethMap_comp_pushforwardExchange` of blueprint `lemma-kunneth-map-proper-direct-image--1`). -/
+`(Rg_{M*} Lε_M^* A, Rg_{N*} Lε_N^* B)` are isomorphisms. -/
 theorem isIso_lowerStar_kunnethMap_of_isIso (hM : M.IsTraitModelOver qM gM)
     (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)
     (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
@@ -490,16 +490,13 @@ variable {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))}
   {qN : N.total ⟶ trait k'} {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
 -- the composite square identifying the direct image of the Künneth map has large terms
-/-- **The global-sections step of Gabber's Künneth formula** (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, equation (4); Illusie, *Autour du théorème de
-monodromie locale*, proof of Thm. 4.7): let `P` be the product over the henselian trait `Spec k'⟦t⟧`
-of models `M`, `N` of finite type along proper structure morphisms `q_M`, `q_N`, whose projections
-are compatible with the structure morphisms `g` of the geometric generic fibres to `Spec Ω`. For
-bounded constructible `A`, `B` (whose nearby cycles are bounded constructible, Deligne's
-finiteness theorem), the direct image `R(a_{P_s})_* Π_{A,B}` of the Künneth map of nearby cycles
-to the point `Spec k'` is an isomorphism: under the proper exchanges and the ordinary Künneth
-formula on the special fibres, it is the Künneth isomorphism
-`RΓ(X_η̄, A) ⊗ RΓ(Y_η̄, B) ≅ RΓ(X_η̄ × Y_η̄, A ⊠ B)` of the geometric generic fibres. -/
+/-- **The global-sections step of Gabber's Künneth formula**: let `P` be the product over the
+henselian trait `Spec k'⟦t⟧` of models `M`, `N` of finite type along proper structure morphisms
+`q_M`, `q_N`, whose projections are compatible with the structure morphisms `g` of the geometric
+generic fibres to `Spec Ω`. For bounded constructible `A`, `B` with bounded constructible nearby
+cycles, and assuming the Künneth map of the trait at `(Rg_{M*} A, Rg_{N*} B)` is an isomorphism,
+the direct image `R(a_{P_s})_* Π_{A,B}` of the Künneth map of nearby cycles to the point `Spec k'`
+is an isomorphism. -/
 theorem isIso_lowerStar_kunnethMap (hM : M.IsTraitModelOver qM gM)
     (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)
     (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))

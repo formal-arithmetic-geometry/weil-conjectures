@@ -15,7 +15,18 @@ import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedAssoci
 
 /-! # The explicit native chain associator as a derived associator model
 
-Source: Stacks 06YN, 06YU, 0FPT. Transport the explicit chain models through localization.
+We transport the explicit chain models through localization.
+
+## Implementation details
+
+The equation is mapped through the fully faithful derived equivalence, whose counit is the
+tensor comparison of the transported monoidal structure. The remaining chain square is
+`cB.associator_model`, identified with the canonical complex associator by
+`coefficientAssociator_eq_native`.
+
+## References
+
+* Stacks Project, Tags 06YN, 06YU and 0FPT
 -/
 
 @[expose] public noncomputable section
@@ -56,18 +67,7 @@ attribute [local irreducible] nativeWeilRingedMonoidal nativeRingedTensorCompari
 -- the localization or monoidal structures protected by the local irreducibility API.
 -- Elaborate the four model squares while keeping localization definitions folded.
 /-- The explicit native binary models identify the transported derived associator
-with the localization of the explicit chain associator.
-Source: Stacks 06YU, 0FPT
-(blueprint: lem-sf-native-weil-ringed-associator-model).
-
-Proof: map the equation through the fully faithful derived equivalence. Its
-counit is the tensor comparison for the transported monoidal structure. Expand
-the four native binary models, cancel the counit and exact-functor factors, and
-use naturality of the ringed binary comparisons to move the two inner chain
-comparisons. The resulting equation is cB.associator_model. Its local pure-triple
-formula identifies its chain isomorphism with the canonical complex associator
-by coefficientAssociator_eq_native. The preimage equation in the definition of
-nativeRingedAssociatorComplex supplies the remaining chain square. -/
+with the localization of the explicit chain associator. -/
 theorem nativeRingedAssociatorComplex_model
     (P Q N : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
     (hP : NativeTensorKFlat k₀ l X T P) (hQ : NativeTensorKFlat k₀ l X T Q)

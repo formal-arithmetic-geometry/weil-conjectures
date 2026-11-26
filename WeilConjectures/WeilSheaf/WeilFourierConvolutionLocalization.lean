@@ -12,8 +12,15 @@ import WeilConjectures.WeilSheaf.FourierInversion.OtherSections
 /-!
 # Natural localization of functors with closed support
 
-Source: convolution-kernel proof, Step 3, and the Weil open--closed adjunction.
-(blueprint: lem-fd-weil-localization-functor)
+A functor to Weil complexes on `X` whose values restrict to zero on an open `U` factors
+naturally through the compact-support image of the complementary closed immersion.
+
+## Implementation details
+
+Whisker the closed adjunction unit by the functor. The open--closed localization lemma makes
+every component invertible, so this is a natural isomorphism. The closed immersion is proper,
+and its compact-support image is naturally its ordinary direct image. This proves naturality as
+well as objectwise localization and works when either the open or the closed part is empty.
 -/
 
 @[expose] public section
@@ -27,15 +34,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.WeilComplex
 
 /-- A functor whose values restrict to zero on an open complement factors naturally through
-the compact-support image of the closed immersion.
-Source: convolution-kernel proof, Step 3.
-
-Proof: whisker the closed adjunction unit by the functor. The open--closed localization
-lemma makes every component invertible, so this is a natural isomorphism. The closed
-immersion is proper, and its compact-support image is naturally its ordinary direct
-image. This proves naturality as well as objectwise localization and works when either
-the open or the closed part is empty.
-(blueprint: lem-fd-weil-localization-functor) -/
+the compact-support image of the closed immersion: `F ≅ F ⋙ i^* ⋙ Ri₀!`. -/
 theorem nonempty_iso_functor_closed_support
     {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] {X Z U : Scheme.{u}}

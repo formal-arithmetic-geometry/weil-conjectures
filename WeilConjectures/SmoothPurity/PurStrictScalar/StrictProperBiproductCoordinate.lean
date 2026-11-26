@@ -13,10 +13,12 @@ import all WeilConjectures.AlgebraicGeometry.Completed.Adic.CompletedAdicCoeffic
 import WeilConjectures.CategoryTheory.Derived.DerivedAdjunctionCochainUnit
 import WeilConjectures.CategoryTheory.ExactDerivedSquare.DerivedExactSquareCoherence
 
-/-! Coordinate form of the strict finite proper biproduct comparison.
+/-!
+# Coordinate form of the strict finite proper biproduct comparison
 
-Source: Stacks 0B56, 0940, 0944.
-(blueprint: lem-pur-compact-support-strict-scalar-mate-strict-coordinate)
+## References
+
+* [Stacks Project, Tags 0B56, 0940 and 0944]
 -/
 
 -- After pruning, this module only keeps private declarations.

@@ -15,8 +15,9 @@ import all WeilConjectures.Topology.ConstantSubsheafQuotientGluing
 
 /-! # Bezout component on a finite intersection
 
-Source: Stacks Project, Cohomology, Lemma 0A38, second proof paragraph.
-(blueprint: lem-sc-constant-subsheaf-gcd-component)
+## References
+
+* Stacks Project, Tag 0A38.
 -/
 
 @[expose] public section
@@ -27,24 +28,7 @@ universe u
 
 namespace TopCat.Sheaf
 
-/-- Realize the gcd label of a finite intersection as a component into K.
-Source: Stacks Project, Cohomology, Lemma 0A38, second proof paragraph.
-(blueprint: lem-sc-constant-subsheaf-gcd-component)
-
-Proof: For each i in S evaluate f i on its canonical unit and restrict the resulting
-section to S.inf A, which lies in A i. Choose integer Bezout coefficients for the
-finite natural labels, so their integer linear combination equals S.gcd c. Take the
-same linear combination of the restricted sections. Naturality and additivity of ι,
-isoC and the sheafification unit show that its image is the constant gcd section.
-Integer multiplication by this section gives a map from the constant presheaf on the
-intersection to the restriction of K. Factor through sheafification and use the
-extension-by-zero adjunction to obtain q. The unit and counit identities show that
-q maps the canonical unit to the constructed section, giving the displayed equation.
-The proved integerExtension_of_section helper realizes this section as q.
-This component construction needs neither compactness, positivity,
-finite generation, nor any epimorphism or attained-divisor conclusion. Empty opens and
-zero labels cause no difficulty, since all equations then hold with the zero section.
-The empty subset uses the zero section on X and has gcd zero. -/
+/-- Realize the gcd label of a finite intersection as a component into `K`. -/
 theorem constantSubsheaf_gcd_component
     (X : TopCat.{u}) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C)
     (isoC : C ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj

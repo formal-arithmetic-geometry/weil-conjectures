@@ -14,7 +14,7 @@ public import WeilConjectures.TraceFormula.PointNormalizationClass
 The comparison `ζ : LΔ^* ⟶ Rp₁_!` of `CategoryTheory.Verdier.transportζ` for the diagonal of the
 base point is compatible with the tensor structure of `LΔ^*` and the projection morphism of `p₁`
 (`ProEtale.CondensedRing.Correspondence.pointDiag_μ_transportζ`), by the composition and
-identity clauses of the coherence of the projection formula (blueprint `prop-sf-pf-coherence`).
+identity clauses of the coherence of the projection formula.
 
 -/
 

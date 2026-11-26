@@ -10,7 +10,18 @@ import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 
 /-! # Naturality of the generator-normalized total tensor evaluation
 
-Source: Stacks Project, Tags 03EK, 07A4 and 0941.
+We show that the generator-normalized evaluation tensor isomorphisms are natural in both
+complexes.
+
+## Implementation details
+
+After precomposing with the inverse comparison, each total degree is tested on its pure-tensor
+summands: the normalization identifies the inverse image of a pure tensor with the corresponding
+tensor of sequence sections, on which both chain maps act factorwise.
+
+## References
+
+* Stacks 03EK, 07A4, 0941
 -/
 
 @[expose] public noncomputable section
@@ -79,14 +90,7 @@ attribute [local irreducible] coefficientEvaluationTensorIso
   coefficientSequenceCommRingPresheaf coefficientSequenceCommRingSystem
   coefficientSequenceTopology SheafOfModules.monoidalCategory
 
-/-- The prescribed evaluation tensor isomorphisms are natural in both complexes.
-Source: Stacks Project, Cohomology on Sites, Tag 07A4, and Modules on Sites, Tag 03EK
-(blueprint: lem-coef-evaluation-total-tensor-naturality).
-Proof: precompose the square with the inverse comparison and test each total degree
-on its pure-tensor summands. Its normalization identifies the inverse image of a
-pure tensor with the corresponding tensor of sequence sections. The tensor maps
-apply the two given chain maps to their two factors. Evaluation maps those same
-sections, so the forward comparison normalization identifies both results. -/
+/-- The prescribed evaluation tensor isomorphisms are natural in both complexes. -/
 theorem pullbackTensorEvaluationTensor_naturality (W : Scheme.{u}) (n : ℕ)
     {P P' Q Q' : CochainComplex (coefficientSequenceModules l E W) ℤ}
     (a : P ⟶ P') (b : Q ⟶ Q') :

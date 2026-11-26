@@ -17,8 +17,12 @@ import Mathlib.Tactic.Ring
 /-!
 # Transfer an integral idempotent factor through a localization isomorphism
 
-Source: Stacks Project, Tag 09XI, proof of (5) implies (2), the passage from
-B'₁ to A'₁, and compatibility of the closed-fibre decompositions.
+The factor of a finite subalgebra cut out by an idempotent is integral over `A` and its
+closed fibre is `A/I`.
+
+## References
+
+* [Stacks, Tag 09XI]
 -/
 
 @[expose] public section
@@ -28,28 +32,8 @@ universe u v w
 namespace Algebra
 
 /-- A finite subalgebra controls the idempotent factor on which the localization
-parameter becomes a unit. The product description specifies the closed fibre.
-
-Source: Stacks Project, Tag 09XI (lemma-characterize-henselian-pair), proof of
-(5) implies (2), the sentence identifying B'₁ with A'₁ and the final compatible
-splitting; the same argument applies to the finite subalgebra B''.
-(blueprint: lem-weil-pbc-finite-idempotent-factor-transfer)
-
-Proof:
-1. Set e to the image of d in B. In D[1/d] and B[1/e], the images of d and e
-are 1. The relation bd = αd therefore makes the image of b equal to the unit α.
-The universal property of localization gives D[1/d] = (D[1/b])[1/d] and
-B[1/e] = (B[1/b])[1/e]. The given localization isomorphism respects d, and
-hence induces an A-algebra isomorphism D[1/d] to B[1/e].
-2. Since d is idempotent, every fraction x/dⁿ equals x/1 for n = 0 and
-(dx)/1 for n > 0. Thus D to D[1/d] is surjective. The finite A-algebra D
-is integral over A, and its quotient D[1/d] remains integral. Transfer this
-integrality along the A-algebra isomorphism of step 1.
-3. Quotient commutes with localization, so the same isomorphism gives
-B[1/e]/IB[1/e] = (D/ID)[1/d̄]. Under Φ, d̄ is (1,0), whose localization
-is precisely the first factor A/I. The specified formula for Φ on A shows
-that this identification inverts the structure map A/I to the localized
-quotient. That map is therefore bijective. -/
+parameter becomes a unit: localizing at the idempotent `d` gives an integral `A`-algebra
+whose reduction modulo `I` is identified with `A/I`. -/
 theorem finite_idempotent_factor_transfer
     {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B]
     (I : Ideal A) (D : Subalgebra A B) [Module.Finite A D]

@@ -13,8 +13,18 @@ import Mathlib.CategoryTheory.Retract
 
 /-! # Forgetting native K-flat complexes by an orbit-sum retract
 
-Source: Stacks 06YS, and the exact integer-orbit induction argument in step 2 of
-native Weil tensor transport. No termwise flatness is imposed.
+No termwise flatness is imposed.
+
+## Implementation details
+
+For an ordinary acyclic test `N`, the free Frobenius complex (the integer sum of the translates
+of `N`) is tested against the native K-flat complex `P`. Forgetting is exact, so the ordinary
+tensor of `P` with the underlying free complex is acyclic, and `P ⊗ N` is a retract of it via
+the inclusion of the zero translate.
+
+## References
+
+* Stacks Project, Tag 06YS.
 -/
 
 @[expose] public noncomputable section
@@ -76,22 +86,7 @@ namespace AlgebraicGeometry.ProEtaleWeilSheaf
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- A native acyclic-test K-flat complex stays K-flat after forgetting Frobenius.
-
-Source: Stacks 06YS; native tensor transport, step 2.
-(blueprint: lem-sf-native-weil-tensor-forget-kflat).
-
-Proof: for an ordinary acyclic test N, take the explicit free Frobenius complex,
-the integer sum of its translates. This functor is additive and exact: each
-translate is an equivalence, coproducts preserve monomorphisms in the Grothendieck
-heart, and the free adjunction preserves cokernels. The native K-flat hypothesis
-makes its tensor with P acyclic. Forgetting is exact, so the supplied chain
-comparison makes the ordinary tensor with the underlying free complex acyclic.
-The inclusion of the zero translate and the projection killing every other
-translate are chain maps splitting N off that underlying complex. Tensoring
-these maps with P gives a retract, and homology preserves the splitting. A
-retract of a zero homology object is zero. This works for every unbounded N,
-and also for the zero module and empty sites. -/
+/-- A native acyclic-test K-flat complex stays K-flat after forgetting Frobenius. -/
 theorem native_weil_tensor_forget_kflat
     (T : ProEtaleWeilSheaf k₀ l X ⥤ ProEtaleWeilSheaf k₀ l X ⥤
       ProEtaleWeilSheaf k₀ l X)

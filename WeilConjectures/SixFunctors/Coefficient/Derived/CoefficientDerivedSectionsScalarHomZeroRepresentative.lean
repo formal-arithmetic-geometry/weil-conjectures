@@ -10,9 +10,22 @@ import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSection
 import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSectionsScalarHomZeroCycleRepresentative
 import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSectionsScalarHomZeroCycleSurjective
 
-/-! The representative-input transpose step for H-zero scalar normalization.
-Source: Stacks 03CZ, 079P and 08JA.
-(blueprint: lem-coef-derived-sections-normalization-scalar-hom-zero-representative)
+/-! # The representative-input transpose step for H-zero scalar normalization
+
+## Implementation details
+
+The fixed K-injective replacement of the finite complex is chosen, the tensor-Hom uncurrying
+equation from the finite tensor normalization is applied, and the resulting zero cycle is
+evaluated using the fixed representative Hom equivalences. The ordinary scalar-section formula
+identifies the transpose with the finite scalar adjunction. The statement is strictly below the
+derived-object statement: its first input is a chosen K-flat complex and both derived inputs are
+fixed quotient images.
+
+## References
+
+* [Stacks, Tag 03CZ]
+* [Stacks, Tag 079P]
+* [Stacks, Tag 08JA]
 -/
 
 @[expose] public section
@@ -32,15 +45,6 @@ For a K-flat representative of the scalar input and an arbitrary complex
 representing the finite input, the normalized representative transpose gives the
 H-zero scalar Hom identity.  The remaining transport from arbitrary derived
 objects is separate from this representative calculation.
-
-Source: Stacks 03CZ, 079P and 08JA.  Choose the fixed K-injective replacement of
-the finite complex, apply the tensor-Hom uncurrying equation from the coefficient
-finite tensor normalization, and evaluate the resulting zero cycle using the
-fixed representative Hom equivalences.  The ordinary scalar-section formula
-identifies the transpose with the finite scalar adjunction.  This theorem is
-strictly below the derived-object statement because its first input is a chosen
-K-flat complex and both derived inputs are fixed quotient images.
-(blueprint: lem-coef-derived-sections-normalization-scalar-hom-zero-representative)
 -/
 theorem coefficientDerivedSectionsScalarHomZero_representative
     (R : CoefficientDerivedSystemReduction l E W)

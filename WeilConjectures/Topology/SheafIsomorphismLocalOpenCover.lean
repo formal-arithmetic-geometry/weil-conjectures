@@ -12,8 +12,12 @@ import Mathlib.CategoryTheory.Sites.LocalProperties
 /-!
 # Isomorphisms of sheaf modules are local on an open cover
 
-Source: Stacks Project, Sheaves, Section 00AK, Lemma 04TN
-(blueprint: lem-weil-pbc-sheaf-isomorphism-local-open-cover).
+A morphism of sheaves of modules on a ringed space is an isomorphism if and only if its
+restrictions to the members of an open cover are isomorphisms.
+
+## References
+
+* [Stacks Project, Tag 04TN](https://stacks.math.columbia.edu/tag/04TN)
 -/
 
 @[expose] public section
@@ -25,18 +29,7 @@ open CategoryTheory TopologicalSpace Opposite
 namespace AlgebraicGeometry
 
 /-- A morphism of modules on a ringed space is an isomorphism exactly when its
-restriction to every member of an open cover is an isomorphism.
-
-Source: Stacks Project, Sheaves, Section 00AK, Lemma 04TN
-(blueprint: lem-weil-pbc-sheaf-isomorphism-local-open-cover).
-Proof:
-1. Restriction is a functor, so it preserves isomorphisms.
-2. Forget to sheaves of abelian groups. This functor reflects isomorphisms.
-3. The equality `hcover` gives `CoversTop U` for the open-set Grothendieck topology.
-4. Underlying abelian sheaves commute definitionally with restriction to `Over (U i)`.
-   Thus each local module isomorphism gives a local abelian sheaf isomorphism.
-5. Apply Mathlib's `Sheaf.isIso_of_coversTop` and reflect the resulting isomorphism.
--/
+restriction to every member of an open cover is an isomorphism. -/
 theorem sheaf_module_isIso_iff_isIso_over_open_cover
     (X : RingedSpace.{u₂}) (I : Type w₂) (U : I → Opens X)
     (hcover : ⨆ i, U i = ⊤)

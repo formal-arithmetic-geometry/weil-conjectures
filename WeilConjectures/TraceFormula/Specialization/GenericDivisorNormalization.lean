@@ -13,11 +13,10 @@ public import WeilConjectures.AlgebraicGeometry.NormalSchemeOpen
 
 # Normalization of a normal scheme in a finite étale cover of an open subscheme
 
-Let `X` be a normal scheme of finite type over a field `k`, `I` an ideal sheaf on `X` with
-support `Z`, and `v : W ⟶ X ∖ Z` a connected finite étale cover. The normalization `X'` of `X`
-in `W` is normal, finite over `X`, and the complement of `V(f^* I)` in `X'` is identified with
-`W` over `v`. This is the normalisation step of the generic-divisor argument
-(blueprint `lemma-vanishing-generic-points-principal-divisor--1`).
+Let `X` be a normal scheme of finite type over a field `k`, `I` an ideal sheaf on `X` with support
+`Z`, and `v : W ⟶ X ∖ Z` a connected finite étale cover. The normalization `X'` of `X` in `W` is
+normal, finite over `X`, and the complement of `V(f^* I)` in `X'` is identified with `W` over `v`.
+This is the normalisation step of the generic-divisor argument.
 
 ## Main results
 
@@ -57,13 +56,12 @@ theorem Scheme.exists_isIso_isPullback_preimage_of_isOpenImmersion {W X Y : Sche
   rw [← hv]
   simp
 
-/-- **Normalization in a finite étale cover of the complement of a divisor** (the normalisation
-step of blueprint `lemma-vanishing-generic-points-principal-divisor--1`, via
-`lem-fin-normalization-extends-cover`): let `X` be a normal scheme of finite type over a field `k`,
-`I` an ideal sheaf on `X` with support `Z`, and `v : W ⟶ X ∖ Z` a finite étale cover with `W`
-connected. Then there are a normal scheme `X'` of finite type over `k` (the normalization of `X` in
-`W`) and a finite morphism `f : X' ⟶ X` such that `X' ∖ V(f^* I)` is identified with `W` by an
-isomorphism `w`, and the square `W ⟶ X' ∖ V(f^* I) ⟶ X'` over `v` and `f` is a pullback square. -/
+/-- **Normalization in a finite étale cover of the complement of a divisor**: let `X` be a normal
+scheme of finite type over a field `k`, `I` an ideal sheaf on `X` with support `Z`, and
+`v : W ⟶ X ∖ Z` a finite étale cover with `W` connected. Then there are a normal scheme `X'` of
+finite type over `k` (the normalization of `X` in `W`) and a finite morphism `f : X' ⟶ X` such that
+`X' ∖ V(f^* I)` is identified with `W` by an isomorphism `w`, and the square
+`W ⟶ X' ∖ V(f^* I) ⟶ X'` over `v` and `f` is a pullback square. -/
 theorem exists_normalization_of_finite_etale {k : Type u} [Field k] {X : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     (hX : IsNormalScheme X.left) (I : X.left.IdealSheafData) {W : Scheme.{u}} [ConnectedSpace W]

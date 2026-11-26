@@ -13,8 +13,19 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCocycle
 
 /-! # The normalized tower underlying a coefficient sequence
 
-Source: Stacks Project, Tags 0940 and 0941; Bhatt--Scholze, Lemmas 3.5.4--3.5.7.
-(blueprint: lem-coef-sequence-roos-model).
+A normalized coefficient sequence has a normalized DVR tower model whose Roos projections are
+the total-limit projections of the sequence.
+
+## Implementation details
+
+The tower is built from the derived evaluations of the sequence, with transition maps obtained by
+localizing the section restrictions. The Roos triangle is transported from
+`coefficientConstantTower_roos` along the total-derived-limit and evaluation identifications.
+
+## References
+
+* [Stacks Project, Tags 0940 and 0941]
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemmas 3.5.4--3.5.7
 -/
 
 @[expose] public noncomputable section
@@ -705,26 +716,8 @@ set_option backward.isDefEq.respectTransparency.types false
 namespace WeilConjectures
 
 /-- A normalized coefficient sequence has a normalized DVR tower model whose Roos
-projections are the specified total-limit projections, after exact scalar restriction.
-This assertion constructs a model and identifies maps; it asserts no finite effectivity.
-
-Source: Stacks Project, Tags 0940 and 0941, and the coherent-tower interpretation in
-Bhatt--Scholze, Lemmas 3.5.4--3.5.7.
-(blueprint: lem-coef-sequence-roos-model).
-
-Proof: take the exact restriction of the sequence to completed-coefficient towers.
-The finite objects are its actual derived evaluations, and their transition maps are
-those obtained by localizing the section restrictions. The identity and composition
-laws hold already on sections, hence after localization. The exact restriction and
-finite-evaluation comparison identify the restricted transitions with these maps.
-The given normalization condition is exactly the normalization field of the resulting
-DVR tower. Resolve the restricted tower by a simultaneous K-injective complex.
-Evaluation preserves K-injectives; its termwise product represents the derived product.
-The ordinary limit cone gives the canonical Roos triangle. Transport this triangle
-through the total-derived-limit and evaluation identifications. The characterization
-of the total-limit projections on K-injective towers identifies every transported
-projection with coefficientSequenceProjection. Thus the first map is the displayed
-product lift, with no choice of a new counit or unrelated projection. -/
+projections are the total-limit projections `coefficientSequenceProjection`, after exact
+scalar restriction. -/
 theorem coefficientSequence_roosModel
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})

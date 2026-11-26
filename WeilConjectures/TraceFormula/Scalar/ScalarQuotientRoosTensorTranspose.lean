@@ -14,7 +14,22 @@ import all WeilConjectures.SmoothPurity.IntegralAmbient.IntegralAmbientOperation
 import all WeilConjectures.SixFunctors.Scalar.ScalarRoosComparison
 import all WeilConjectures.TraceFormula.Supporting.RoosAdjunctionTranspose
 
-/-! # Tensor transposition on a coherent quotient presentation -/
+/-! # Tensor transposition on a coherent quotient presentation
+
+Transposing a quotient tensor family commutes with scalar change, independently of any chosen
+derived reduction calculus or completed scalar realization.
+
+## Implementation details
+
+The proof does not assume that ordinary system scalar extension is exact: derived naturality is
+obtained from `scalarRoosDerivedNaturality`, which uses a K-flat resolution of the middle complex of
+a right fraction.
+
+## References
+
+* Stacks Project, Tags 06YY and 0941.
+* Bhatt--Scholze, Proposition 3.5.1.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -215,28 +230,8 @@ private theorem quotientScalarChainComparison
     exact (quotientRoosMap_snd_zero (completedOrdinaryScalarExtension l L F j X)
       a q.hom (u ≫ integralComparisonLimitToRoos l L X CL) i hz).trans (hb.2 P.obj i).symm
 
-/-- Transposing a quotient tensor family commutes with scalar change, independently
-of any chosen derived reduction calculus or completed scalar realization.
-
-Source: Stacks Project, Tags 06YY and 0941; Bhatt--Scholze, Proposition 3.5.1;
-step 3 of the whole-system scalar counit calculation.
-(blueprint: lem-trf-scalar-quotient-roos-tensor-transpose)
-
-Proof in words: the residue formula ha determines a as the canonical natural
-scalar map of the restricted tower, by tensor generator extensionality. Transpose
-c through the ordinary constant/limit adjunction. Its limit projections are the
-specified quotient tensor units and its shifted Roos coordinate is zero. Apply
-ordinary scalar extension. On every unshifted projection, tensor naturality and
-the generator formula hq identify the result with the finite-free scalar chain
-comparison. The shifted projection is zero on both sides, since the scalar Roos
-map and the Roos map of the canonical tower map preserve that coordinate. Product
-extensionality and the two mapping-cocone coordinates prove the chain equality.
-Cancel the Roos map of q, use naturality of the universal scalar cochain counit,
-and apply scalarRoosDerivedNaturality to h. The latter uses a K-flat resolution
-of the middle complex in a right fraction; it does not assume that ordinary
-system scalar extension is exact. The zero complex and the identity coefficient
-inclusion give the same calculation, with zero shifted coordinate.
--/
+/-- Transposing a quotient tensor family commutes with scalar change, independently of any chosen
+derived reduction calculus or completed scalar realization. -/
 theorem scalarQuotientRoosTensorTranspose
     (l : ℕ) [Fact l.Prime]
     (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]

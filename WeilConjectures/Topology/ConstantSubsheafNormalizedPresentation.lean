@@ -14,10 +14,11 @@ import WeilConjectures.Topology.ConstantSheafLocallyConstantComparison
 import WeilConjectures.Topology.PresheafModuleStalkFunctor
 import WeilConjectures.Topology.ConstantSubsheafNormalizedCore
 
-/-! # ConstantSubsheafNormalizedPresentation
+/-! # Normalized presentations of finitely generated constant subsheaves
 
-Source: Stacks Project, Cohomology, Lemma 0A38
-(blueprint: lem-sc-constant-subsheaf-normalized-presentation).
+## References
+
+* Stacks Project, Tag 0A38.
 -/
 
 @[expose] public section
@@ -28,21 +29,10 @@ universe u
 
 namespace TopCat.Sheaf
 
-/-- Source: Stacks Project, Cohomology, Lemma 0A38.
-Proof: Normalize the generating sections using the constant-sheaf identification isoC.
-Each locally constant section on a compact open has finitely many clopen fibres; these
-fibres are compact in X. Restrict to the fibres, delete zero values, and negate sections
-with negative value. Adjoin the intersections of all nonempty subsets and their positive
-gcd sections. Bezout gives these sections in K. Binary compact-intersection closure
-makes all these opens compact. At every point the gcd of its active labels is attained,
-and the sections generate the same stalk subgroup as the original epimorphism. Stalk
-coordinates for isoC and the supplied e differ by an automorphism of the integers,
-hence by sign, so this gcd is at most b+1. Retain only labels at most b+1: an attained
-gcd remains at every nonzero stalk. Thus the retained coproduct map is epi and still has
-the attained-divisor property. Its sections are the images of the canonical unit 1,
-which gives hsection, and their positive constant values give hvalue. Empty families
-are allowed, and give n=0.
-(blueprint: lem-sc-constant-subsheaf-normalized-presentation). -/
+/-- A finitely generated subsheaf `K` of the constant integer sheaf whose stalks are generated
+by integers at most `b + 1` has a normalized presentation: finitely many compact opens with
+positive labels at most `b + 1`, canonical sections with those constant values generating `K`,
+and at each point an active label dividing all active labels. -/
 theorem constantSubsheaf_normalized_presentation
     (X : TopCat.{u}) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C) [Mono ι]
     (isoC : C ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj

@@ -13,8 +13,19 @@ import WeilConjectures.TraceFormula.Coherent.CoherentQuotientModelComparison
 
 /-! # Whole-system comparison of strict quotient presentations
 
-Source: Stacks 06YY, 0941 and 099N(5), the strict quotient-system construction.
-(blueprint: lem-trf-coherent-quotient-reduction-comparison)
+A coherent presentation is the canonical derived reduction comparison followed by the unique
+strict quotient isomorphism fixed by its finite comparisons.
+
+## Implementation details
+
+The ordinary quotient tensor system, with unit given by the sections `1 ⊗ x`, is adjoint to
+restriction followed by limit; its derived adjunction is compared with the given reduction by
+uniqueness of left adjoints. The equality is proved by transposing through the constant/limit and
+reduction/limit Hom bijections, before taking any derived limit.
+
+## References
+
+* [Stacks Project, Tags 06YY, 06YS, 0941 and 099N](https://stacks.math.columbia.edu/tag/06YY)
 -/
 
 @[expose] public noncomputable section
@@ -96,29 +107,7 @@ private theorem modelsForCalculus (W : Scheme.{t})
 attribute [local irreducible] CoefficientReductionPresentation
 
 /-- A coherent presentation is the canonical derived reduction comparison followed
-by the unique strict quotient isomorphism fixed by its finite comparisons.
-Source: Stacks 06YY, 06YS, 0941, ordinary tensor/restriction adjunction and descent.
-(blueprint: lem-trf-coherent-quotient-reduction-comparison).
-
-Proof: form the ordinary quotient tensor system, with transition maps induced by
-quotient reduction and unit given by the sections 1 tensor x. The extension/restriction
-Hom bijections and the limit universal property give its adjunction. Derive this
-adjunction using flat-term K-flat resolutions and simultaneous K-injective resolutions.
-Exact restriction identifies the right derived functor with coefficientSequenceLimit.
-The unique comparison of left adjoints transports the derived counit to the supplied
-S.reduction. Its finite comparisons agree by transposing S.unit_projection and
-S.counit_projection, so the resulting ordinary and derived data are M and D.
-For a presentation, transpose its coherent strict tower map through the ordinary
-constant/limit and tensor/limit adjunctions to obtain a chain map a. Its prescribed
-generator values identify every finite scalar adjunct with the tensor unit. The
-finite Hom bijections give the last equation below; these finite isomorphisms
-detect that a itself is an isomorphism of strict system complexes.
-The ordinary adjunction transposes D.reductionComparison followed by Q(a) to the
-localization of the strict tensor-unit map. Coherence transposes e to exactly the
-same entire tower map. The constant/limit and reduction/limit Hom bijections are
-injective, proving the displayed equality before taking any derived limit.
-Zero complexes and exponent one use the same adjunctions; no completeness or
-faithfulness of finite derived evaluation is assumed. -/
+by the unique strict quotient isomorphism fixed by its finite comparisons. -/
 theorem coherentQuotientReductionComparison (W : Scheme.{t})
     (_hlW : ∀ x : W, IsUnit (l : W.residueField x))
     (S : CoefficientDerivedSystemCalculus l E W) :

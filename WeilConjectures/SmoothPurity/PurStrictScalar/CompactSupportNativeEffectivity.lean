@@ -13,9 +13,11 @@ import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 
 /-! # Effectivity of the specified native compact-support tower
 
-Source: Stacks Tags 0940 and 0941; normalized DVR effectivity applied to the
-actual proper/open coefficient sequence.
-(blueprint: lem-pur-compact-support-native-effectivity).
+Normalized DVR effectivity applied to the actual proper/open coefficient sequence.
+
+## References
+
+* [Stacks Project, Tags 0940 and 0941]
 -/
 
 @[expose] public noncomputable section

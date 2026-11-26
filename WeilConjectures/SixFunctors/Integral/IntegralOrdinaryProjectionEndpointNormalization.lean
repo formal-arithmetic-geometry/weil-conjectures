@@ -11,8 +11,16 @@ public import WeilConjectures.SixFunctors.CompactSupportFiniteProjection.Constru
 
 /-! # Input normalization for the realized finite projection
 
-Source: the defining coordinate equation of the compactification projection and
-naturality of the canonical finite scalar-reduction comparison.
+We identify the tensor-coordinate component of the compactification projection on reduced
+finite inputs with the compactification projection on scalar-reduction extensions, using the
+defining coordinate equation of the compactification projection and naturality of the
+canonical finite scalar-reduction comparison.
+
+## Implementation details
+
+The isomorphism is obtained by evaluating `finiteReductionIso` at both inputs and using that
+the fixed-scalar compactification projection is a natural transformation of bifunctors; only
+naturality is involved.
 -/
 
 @[expose] public noncomputable section
@@ -78,25 +86,9 @@ private def normalizedInverse (R : Type u) [CommRing R] [Finite R] (Y : Scheme.{
 
 attribute [-instance] HasDerivedCategory.ofIsGrothendieckAbelian in
 attribute [local instance 30000] proEtaleRingModules_hasDerivedCategory in
-/-- Normalize the two intrinsic scalar inputs of the realized finite projection.
-Source: `finiteReductionIso` and the defining equation of the tensor-coordinate
-component of the compactification projection in `def-exchange-projection`.
-(blueprint: lem-sf-ordinary-projection-reduced-input-normalization-m4).
-
-Proof: set A to the positive finite coefficient quotient. Evaluate finiteReductionIso
-at K and at L and apply the inverse intrinsic realization functors to obtain
-isomorphisms between the two versions of each native finite input. The fixed-scalar
-compactification projection is a natural transformation of bifunctors, hence these
-two isomorphisms induce a commutative square of its evaluated arrows. On the source
-endpoint use the source bifunctor applied to the first isomorphism and then to the
-second; on the target endpoint do the same with the target bifunctor. These are
-isomorphisms, and the square commutes by naturality in both variables. Its source
-arrow is the coordinate component by that component's defining equation. Apply the
-forward intrinsic realization to this arrow isomorphism. The resulting arrows are
-exactly the displayed arrows. Only naturality is involved: there is no completed
-projection, proper scalar mate, open scalar comparison, or projection invertibility
-assertion in this step. The argument includes zero objects, empty schemes, the
-residue quotient and identity compactifications. -/
+/-- The tensor-coordinate component of the compactification projection on the reduced
+`n + 1`-st finite inputs of `K` and `L` is isomorphic, as an arrow, to the compactification
+projection evaluated on the scalar-reduction extensions of `K` and `L`. -/
 theorem integralOrdinaryProjection_reducedInputsNormalization
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

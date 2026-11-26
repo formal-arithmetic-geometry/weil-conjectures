@@ -25,6 +25,12 @@ cohomology of the quasi-compact quasi-separated scheme `W ×_X Y` does.
 - `AlgebraicGeometry.Etale.preservesFilteredColimitsOfSize_higherDirectImage` and
   `AlgebraicGeometry.Etale.preservesColimitsOfShape_higherDirectImage`: higher direct images
   along a quasi-compact quasi-separated morphism commute with filtered colimits of sheaves.
+
+## Implementation details
+
+In `AlgebraicGeometry.Etale.preservesColimitsOfShape_of_isLocallyBijective` the functors are
+variables, so that the element chases are checked once, independently of the large definitions
+of the functors they are later applied to.
 -/
 
 @[expose] public section
@@ -41,10 +47,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- On an étale `X`-scheme `W` whose base change `W ×_X Y` is quasi-compact and
 quasi-separated, the hypercohomology presheaves of single sheaves commute with filtered
-colimits: `Hᵠ(W ×_X Y, F|)` is the étale cohomology of the scheme `W ×_X Y`
-(`AlgebraicGeometry.Etale.shiftedHomFunctorUpperStarFreeSheafIso`), which commutes with
-filtered colimits by
-`AlgebraicGeometry.Etale.preservesColimitsOfShape_shiftedHomFunctor_freeSheaf_finalObject`. -/
+colimits. -/
 theorem Etale.preservesColimitsOfShape_higherDirectImagePresheaf_app {X Y : Scheme.{u}}
     (h : Y ⟶ X) (q : ℤ) (W : X.Etale)
     [CompactSpace ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W).left]
@@ -113,10 +116,7 @@ lemma Etale.sheafifyCocone_locally {X : Scheme.{u}} {J : Type (u + 1)} [SmallCat
 /-- A functor `G` to sheaves of `Λ`-modules on `X_ét` preserves filtered colimits as soon as it
 receives a natural, locally injective and locally surjective map `ψ F : P F ⟶ G F` from a functor
 `P` to presheaves which preserves filtered colimits after evaluation at each affine étale
-`X`-scheme.
-
-The functors are variables here so that the element chases are checked once, independently of
-the (large) definitions of the functors they are later applied to. -/
+`X`-scheme. -/
 theorem Etale.preservesColimitsOfShape_of_isLocallyBijective {X : Scheme.{u}}
     {𝒜 : Type*} [Category 𝒜] (J : Type (u + 1)) [SmallCategory J] [IsFiltered J]
     [HasColimitsOfShape J 𝒜]
@@ -293,14 +293,9 @@ private theorem Etale.preservesColimitsOfShape_higherDirectImage_of_app {X Y : S
 
 end ModuleSheafInstances
 
-/-- Blueprint `prose-04-17`: Filtered colimits and higher
-direct image.
-
-For a quasi-compact quasi-separated morphism `h : Y ⟶ X`, the higher direct image
-`F ↦ R^q h_* F` commutes with filtered colimits of sheaves of `Λ`-modules on `Y_ét`:
-`colim_i R^q h_* F_i ≅ R^q h_* (colim_i F_i)`. The functor is written out as the degree-`q`
-homology of the derived pushforward of a sheaf placed in degree `0`, the functor whose value
-at `F` is `AlgebraicGeometry.Etale.higherDirectImage`. -/
+/-- Filtered colimits and higher direct image: for a quasi-compact quasi-separated morphism
+`h : Y ⟶ X`, the higher direct image `F ↦ R^q h_* F` commutes with filtered colimits of sheaves
+of `Λ`-modules on `Y_ét`: `colim_i R^q h_* F_i ≅ R^q h_* (colim_i F_i)`. -/
 theorem Etale.preservesFilteredColimitsOfSize_higherDirectImage {X Y : Scheme.{u}} (h : Y ⟶ X)
     [QuasiCompact h] [QuasiSeparated h] (q : ℤ) :
     PreservesFilteredColimitsOfSize.{u + 1, u + 1}
@@ -316,11 +311,7 @@ theorem Etale.preservesFilteredColimitsOfSize_higherDirectImage {X Y : Scheme.{u
     ((Scheme.AffineEtale.Spec X).obj U) J
   exact preservesColimitsOfShape_of_natIso (Functor.associator _ _ _).symm
 
-/-- Blueprint `prose-04-17`: Filtered colimits and higher
-direct image, for filtered categories of any size
-(`AlgebraicGeometry.Etale.preservesFilteredColimitsOfSize_higherDirectImage`).
-
-For a quasi-compact quasi-separated morphism `h : Y ⟶ X`, the higher direct image
+/-- For a quasi-compact quasi-separated morphism `h : Y ⟶ X`, the higher direct image
 `F ↦ R^q h_* F` commutes with colimits over every essentially small (in the universe of the
 coefficients) filtered category `J`. -/
 theorem Etale.preservesColimitsOfShape_higherDirectImage {X Y : Scheme.{u}} (h : Y ⟶ X)

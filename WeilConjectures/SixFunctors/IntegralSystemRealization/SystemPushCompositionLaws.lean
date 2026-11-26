@@ -11,8 +11,10 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerDirectImageC
 
 /-! # Identity normalization of the system direct-image compositor
 
-Source: Stacks 07A7, 0F7C; blueprint fix-prop-coherence, composition clause.
-(blueprint: lem-sf-system-push-identity-pair).
+## References
+
+* [Stacks, Tag 07A7]
+* [Stacks, Tag 0F7C]
 -/
 
 @[expose] public noncomputable section
@@ -25,23 +27,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The two-identity proper-image compositor is the image of the canonical identity
-comparison. This concerns direct image only, before compactification or interchange.
-Source: Stacks 07A7, 0F7C; blueprint fix-prop-coherence, composition clause
-(blueprint: lem-sf-system-push-identity-pair).
-
-Proof: the sections normalization identifies the ordinary two-identity compositor
-with direct image of the ordinary identity comparison. The latter comparison is
-fixed by the sectionwise identity presentation of CanonicalBridge. Conjugate the
-ordinary equality under the inverse-image adjunctions, then localize whole
-complexes. The field Compositors.pullComp_model identifies the resulting derived
-inverse-image comparison with the recorded pullback compositor. Conjugating under
-the chosen derived adjunctions gives its direct-image mate Compositors.pushComp.
-The mate of the ordinary identity comparison is exactly CanonicalBridge.push
-followed by the intrinsic semilinear sId. Naturality of this identity isomorphism
-identifies its component at S_id M with S_id of its component at M, yielding the
-displayed equality. Equality transports for id composed with id are inserted at
-the output. No finite evaluation or faithfulness of evaluations is used.
--/
+comparison. This concerns direct image only, before compactification or interchange. -/
 private theorem conjugateTransport
     {A B I : Type*} [Category A] [Category B]
     (L : I → A ⥤ B) (R₀ : I → B ⥤ A) (a : ∀ i, L i ⊣ R₀ i)

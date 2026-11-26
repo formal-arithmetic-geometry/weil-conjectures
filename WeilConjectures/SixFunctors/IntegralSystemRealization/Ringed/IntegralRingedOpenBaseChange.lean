@@ -12,7 +12,10 @@ import all WeilConjectures.Algebra.Homology.SubterminalLocal.SubterminalModuleLo
 
 /-! # The specified ordinary open base-change mate
 
-Source: Stacks 03DI, 09AE; fix-prop-coherence, ordinary open comparison.
+## References
+
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 09AE]
 -/
 
 @[expose] public noncomputable section
@@ -117,8 +120,7 @@ private theorem derivedOpen_pull_counit_isIso {U' U X' X : Scheme.{u}}
     (DerivedCategory.Q.objObjPreimageIso K)
   exact (NatTrans.isIso_app_iff_of_iso (ringedOpenAdj l E j').counit e).mp (hQ _)
 
-/-- The reverse open exchange, constructed from the actual open unit.
-Source: Stacks 09AE (blueprint: lem-sf-integral-ringed-open-base-change). -/
+/-- The reverse open exchange, constructed from the actual open unit. -/
 def integralRingedOpenMate {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g) :
@@ -143,22 +145,7 @@ def integralRingedOpenMate {U' U X' X : Scheme.{u}}
     simpa only [Functor.comp_map] using
       (ringedSquare l E a j' j g h).inv.naturality ((ringedOpen l E j).map f)
 
-/-- For a cartesian open square the specified reverse mate is invertible.
-Source: Stacks 03DI, 09AE; fix-prop-coherence, open base-change step
-(blueprint: lem-sf-integral-ringed-open-base-change).
-
-Proof: the open objects are subterminal, so their slice-extension units are
-invertible. The open-slice presentations give full faithfulness, and hence
-invertibility of the actual ordinary open units. Ordinary support preservation
-places pullback of an extension in the essential image of the other open
-extension, making its actual counit invertible. The termwise unit and counit are
-isomorphisms on cochain complexes. The published localization formulas and the
-standard factorization isomorphisms give the same statements on unbounded
-derived categories; essential surjectivity of the localization covers every
-object. Finally the inverse transpose defining integralRingedOpenMate is open
-extension of an isomorphism followed by this invertible counit. Thus each of its
-components is invertible. No additional normalization of ringedSquare is needed;
-its inverse is an isomorphism by construction. -/
+/-- For a cartesian open square the specified reverse mate is invertible. -/
 theorem integralRingedOpenMate_isIso {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)

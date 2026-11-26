@@ -9,8 +9,13 @@ public import WeilConjectures.SmoothPurity.Compact.CompactSupportNativeSystemEva
 
 /-! # Section normalization of ordinary native direct evaluation
 
-Source: Stacks 03DI, 0D6E and 0D6J; Zheng 4.1 and 4.10
-(blueprint: lem-weil-compact-support-ordinary-direct-evaluation-sections).
+We define ordinary native direct evaluation in finite constant-module coordinates and show that
+it is the identity on each section carrier.
+
+## References
+
+* [Stacks, Tags 03DI, 0D6E and 0D6J](https://stacks.math.columbia.edu/tag/0D6E)
+* Zheng, 4.1 and 4.10
 -/
 
 @[expose] public noncomputable section
@@ -50,9 +55,7 @@ attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficien
   PresheafOfModules.pushforward₀Obj PresheafOfModules.restrictScalars
   PresheafOfModules.restrictScalarsObj ModuleCat.restrictScalars ModuleCat.RestrictScalars.obj'
 
-/-- Ordinary native direct evaluation in finite constant-module coordinates.
-Source: Stacks 03DI and 0D6E.
-(blueprint: lem-weil-compact-support-ordinary-direct-evaluation-sections). -/
+/-- Ordinary native direct evaluation in finite constant-module coordinates. -/
 def compactSupportOrdinaryDirectEvaluation {Z Y : Scheme.{u}} (g : Z ⟶ Y) (n : ℕ) :
     ProEtale.VaryingRing.push (compactSupportSystemLevel l E)
         (compactSupportSystemQuotient l E) g ⋙ coefficientSequenceEvaluation l E Y n ≅
@@ -73,12 +76,7 @@ private theorem raw_sections
   exact heq_of_eq ((ProEtale.VaryingRing.moduleEvalP_existsUnique R q g n).choose_spec.1
     M V.unop x)
 
-/-- Ordinary native direct evaluation is identity on each section carrier.
-Source: Stacks 03DI and 0D6E.
-(blueprint: lem-weil-compact-support-ordinary-direct-evaluation-sections).
-Proof: the chosen moduleEvalP has this identity-on-sections normalization. The
-compactSupportDirectModel comparison also has identity underlying section maps.
-Their composite therefore has identity underlying section maps. -/
+/-- Ordinary native direct evaluation is the identity on each section carrier. -/
 theorem compactSupportOrdinaryDirectEvaluation_sections {Z Y : Scheme.{u}} (g : Z ⟶ Y)
     (n : ℕ) (M : coefficientSequenceModules.{u, u} l E Z) (V : Y.ProEtᵒᵖ)
     (x : ((coefficientSequenceEvaluation l E Y n).obj

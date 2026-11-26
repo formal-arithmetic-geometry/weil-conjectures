@@ -26,8 +26,7 @@ Fix(c) ──ι──▶ C
    X ───Δ──▶ X ⨯ X
 ```
 with `d = ι ≫ c₁ = ι ≫ c₂`, which is cartesian
-(`ProEtale.CondensedRing.Correspondence.FixedLocus.isPullback`, blueprint
-`definition-correspondence--3`).
+(`ProEtale.CondensedRing.Correspondence.FixedLocus.isPullback`).
 
 -/
 
@@ -136,9 +135,8 @@ namespace Correspondence
 
 variable (c : Correspondence ℓ K)
 
-/-- The *support map* `c = (c₁, c₂) : C ⟶ X ⨯ X` of an endocorrespondence (blueprint
-`definition-correspondence`): its first component is the exceptional leg `c₁`, its second the
-ordinary leg `c₂`. -/
+/-- The *support map* `c = (c₁, c₂) : C ⟶ X ⨯ X` of an endocorrespondence: its first component is
+the exceptional leg `c₁`, its second the ordinary leg `c₂`. -/
 noncomputable def support : c.C ⟶ X ⨯ X :=
   prod.lift c.c₁ c.c₂
 
@@ -167,9 +165,9 @@ lemma ι_c₂ : F.ι ≫ c.c₂ = F.d :=
 lemma ι_support : F.ι ≫ c.support = F.d ≫ diag X := by
   apply prod.hom_ext <;> simp [ι_c₁, ι_c₂]
 
-/-- **The fixed square is cartesian** (blueprint `definition-correspondence--3`): the fixed
-locus `Fix(c)` is the fibre product `C ×_{X ⨯ X} X` of the support map `c : C ⟶ X ⨯ X` and the
-diagonal `Δ_X`, with projections `ι : Fix(c) ⟶ C` and `d : Fix(c) ⟶ X`. -/
+/-- **The fixed square is cartesian**: the fixed locus `Fix(c)` is the fibre product `C ×_{X ⨯ X} X`
+of the support map `c : C ⟶ X ⨯ X` and the diagonal `Δ_X`, with projections `ι : Fix(c) ⟶ C` and
+`d : Fix(c) ⟶ X`. -/
 theorem isPullback : IsPullback F.ι F.d c.support (diag X) := by
   refine ⟨⟨F.ι_support⟩, ⟨PullbackCone.IsLimit.mk _ (fun s ↦ ?_) (fun s ↦ ?_) (fun s ↦ ?_) ?_⟩⟩
   · refine F.isLimit.lift (Fork.ofι s.fst ?_)
@@ -194,9 +192,8 @@ instance isClosedImmersion_ι : IsClosedImmersion F.ι.left :=
   MorphismProperty.of_isPullback (P := @IsClosedImmersion)
     (F.isPullback.map (Over.forget _)).flip (inferInstanceAs (IsClosedImmersion (diag X).left))
 
-/-- The exceptional composition isomorphism of the fixed square (blueprint
-`definition-correspondence--3`): `Rd^! ≅ Rc₁^! ⋙ Rι^!`, from `d = ι ≫ c₁`, the only
-unconditional `!`-transport of the two legs in the fixed square. -/
+/-- The exceptional composition isomorphism `Rd^! ≅ Rc₁^! ⋙ Rι^!` of the fixed square, coming from
+`d = ι ≫ c₁`. -/
 noncomputable def upperShriekDIso :
     boundedConstructibleUpperShriek ℓ F.d ≅
       boundedConstructibleUpperShriek ℓ c.c₁ ⋙

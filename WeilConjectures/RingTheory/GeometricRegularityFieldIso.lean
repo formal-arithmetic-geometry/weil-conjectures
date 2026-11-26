@@ -14,8 +14,18 @@ import Mathlib.RingTheory.Finiteness.Small
 /-!
 # Geometric regularity under compatible field and ring isomorphisms
 
-Source: Stacks Project, Algebra, Definition 0382.
-(blueprint: lem-weil-pbc-geometric-regularity-field-iso).
+Geometric regularity is invariant under compatible isomorphisms of the base field and of the
+algebra.
+
+## Implementation details
+
+A finite purely inseparable extension `L` of `k'` becomes one of `k` through `σ`, and
+`l ⊗ a ↦ l ⊗ e(a)` gives `L ⊗[k] A ≃+* L ⊗[k'] B`. If `L` lives in a larger universe than
+the one tested by `IsGeometricallyRegular k A`, it is first replaced by `Shrink L`.
+
+## References
+
+* [Stacks, Tag 0382]
 -/
 
 @[expose] public section
@@ -24,22 +34,7 @@ universe u v w z
 
 namespace Algebra
 
-/-- Geometric regularity is invariant under compatible field and ring isomorphisms.
-Source: Stacks Project, Algebra, Definition 0382, transport of structure in step 5
-of lem-weil-pbc-regular-through-localization.
-(blueprint: lem-weil-pbc-geometric-regularity-field-iso).
-
-Proof: Transport Noetherianity along the ring isomorphism. For each finite purely
-inseparable extension L of k', give L the k-algebra structure obtained by composing
-its structure map with σ. Its dimension over k equals its dimension over k', since
-σ is bijective, and pure inseparability is unchanged since the images of the two
-base fields in L coincide. The rule l ⊗ a ↦ l ⊗ e(a) is balanced by the compatibility
-hypothesis. The inverse rule uses e.symm and σ.symm, and gives an isomorphism
-L ⊗[k] A ≃+* L ⊗[k'] B. Regularity is invariant under this ring isomorphism.
-If L is in a larger universe than the one tested by IsGeometricallyRegular k A,
-first replace it by Shrink L: finiteness over k makes it small in that universe.
-Transport back along the canonical field isomorphism Shrink L ≃+* L. This yields
-regularity after every finite purely inseparable extension of k', as required. -/
+/-- Geometric regularity is invariant under compatible field and ring isomorphisms. -/
 theorem isGeometricallyRegular_of_fieldIso
     {k : Type u} {k' : Type v} {A : Type w} {B : Type z}
     [Field k] [Field k'] [CommRing A] [CommRing B] [Algebra k A] [Algebra k' B]

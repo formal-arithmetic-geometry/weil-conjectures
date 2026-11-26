@@ -20,9 +20,13 @@ Let `j : V ⟶ W` be an open immersion into a locally noetherian regular scheme 
 morphism (in the application, the inclusion of a divisor in the complement of `V`). If, for every
 finite `Λ`-module `N` killed by `ℓ`, the complex `ι^* Rj_* N_V` has finite locally constant
 cohomology sheaves, then so has `ι^* Rj_* E` for every bounded complex `E` on `V` whose cohomology
-sheaves have finite `ℓ`-group monodromy (blueprint
-`lemma-cohomology-near-two-transverse-divisors--1`,
-*Complexes*).
+sheaves have finite `ℓ`-group monodromy.
+
+## Main statements
+
+- `AlgebraicGeometry.Etale.hasFiniteLocallyConstantHomology_of_constantSheaf`
+
+## Implementation details
 
 The question is local on `D`; over a connected component `Q` of `W`, which is irreducible since
 `W` is regular, `V ∩ Q` is irreducible or empty, and the dévissage of sheaves with finite
@@ -32,10 +36,6 @@ constant sheaves, using étale base change along `Q ⟶ W`
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarRightDerivedLowerStarIsoOfEtale`) and the stability
 of finite local constancy of cohomology under shifts and extensions
 (`AlgebraicGeometry.Scheme.HasFiniteLocallyConstantHomology.of_distTriang`).
-
-## Main statements
-
-- `AlgebraicGeometry.Etale.hasFiniteLocallyConstantHomology_of_constantSheaf`
 -/
 
 @[expose] public section
@@ -54,7 +54,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {Λ : Type (u + 1)} [CommRing Λ] [Finite 
   (hΛ : ∃ n : ℕ, (ℓ : Λ) ^ n = 0)
 
 /-- The restriction along `O = ι⁻¹(Q) ⟶ D` of `ι^* Rj_* K` is `ι_Q^* R j_{Q*} (K|_{V ∩ Q})` for an
-open `Q` of `W`: étale base change along `Q ⟶ W`. -/
+open `Q` of `W`. -/
 noncomputable def restrictOpensIso {W V D : Scheme.{u}} (j : V ⟶ W) (ι : D ⟶ W) (Q : W.Opens)
     (K : DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (a : ℤ)
     [K.IsGE a] :
@@ -121,11 +121,10 @@ lemma isZero_of_isEmpty {V : Scheme.{u}} [IsEmpty V]
 
 variable (ℓ) in
 include hΛ in
-/-- **Local constancy of a direct image by dévissage** (blueprint
-`lemma-cohomology-near-two-transverse-divisors--1`, *Complexes*): let `j : V ⟶ W` be an open
-immersion into a locally noetherian regular scheme and `ι : D ⟶ W` a morphism. If `ι^* Rj_* N_V` has
-finite locally constant cohomology sheaves for every finite `Λ`-module `N` killed by `ℓ`, then so
-has `ι^* Rj_* E` for every bounded complex `E` on `V` whose cohomology sheaves have finite `ℓ`-group
+/-- **Local constancy of a direct image by dévissage**: let `j : V ⟶ W` be an open immersion into
+a locally noetherian regular scheme and `ι : D ⟶ W` a morphism. If `ι^* Rj_* N_V` has finite
+locally constant cohomology sheaves for every finite `Λ`-module `N` killed by `ℓ`, then so has
+`ι^* Rj_* E` for every bounded complex `E` on `V` whose cohomology sheaves have finite `ℓ`-group
 monodromy. -/
 theorem hasFiniteLocallyConstantHomology_of_constantSheaf {W V D : Scheme.{u}}
     [IsLocallyNoetherian W] [IsRegular W] (j : V ⟶ W) [IsOpenImmersion j] (ι : D ⟶ W)

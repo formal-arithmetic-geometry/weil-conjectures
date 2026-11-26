@@ -18,8 +18,7 @@ Let `c = (c₁, c₂)` be an endocorrespondence of `(X, K)` with coefficient map
 `c₁⁻¹(x)`, `x = c₁(y)`, is the reduced point `y`. The closed piece coefficient
 `u^Z = [x, y]_! u_Z` on `K^Z = Rx_* Lx^* K` (the coefficient pushforward of the restricted
 coefficient map `u_Z` along `Correspondence.restrictedClosedPieceDiagram`) is compatible with `u`
-along the unit `η : K ⟶ Rx_* Lx^* K` (blueprint `proposition-additivity-trace-classes--2`, proof of
-item 1, step (b)):
+along the unit `η : K ⟶ Rx_* Lx^* K`:
 ```
 u^Z ∘ Lc₂^* η = Rc₁^! η ∘ u,
 ```
@@ -30,8 +29,7 @@ Both sides are compared after the injective double transposition along `Rc₁_! 
 cartesian square `y ≫ c₁ = 𝟙 ≫ x` through the units and counits of the ordinary adjunctions
 (`ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_app_eq`), a
 consequence of the mate description of `Ex_!`
-(`ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_mateEquiv`,
-blueprint `proposition-composition-base-change-rf-shriek`, clause (4)).
+(`ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_mateEquiv`).
 
 -/
 
@@ -325,9 +323,8 @@ lemma ProperPushforwardDiagram.map_map_comp_pushforwardCoeff_ofEnd_comp_counit
 variable {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {c : Correspondence ℓ K}
 
-/-- **The closed piece coefficient is compatible with the unit** (blueprint
-`proposition-additivity-trace-classes--2`, proof of item 1, step (b), for `Z = {x}`): for a
-`k`-point `y` of the fixed locus with reduced fibre `c₁⁻¹(x) = {y}`, `x = c₁(y)`, the closed piece
+/-- **The closed piece coefficient is compatible with the unit**: for a `k`-point `y` of the
+fixed locus with reduced fibre `c₁⁻¹(x) = {y}`, `x = c₁(y)`, the closed piece
 coefficient `u^Z = [x, y]_! u_Z` satisfies `u^Z ∘ Lc₂^* η = Rc₁^! η ∘ u` for the unit
 `η : K ⟶ Rx_* Lx^* K`. -/
 theorem upperStar_map_unit_comp_restrictedClosedPieceCoeff {y : RationalPoint c.C}

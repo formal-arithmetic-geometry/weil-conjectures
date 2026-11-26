@@ -11,8 +11,16 @@ import WeilConjectures.AlgebraicGeometry.FiniteFreeDirectImage.FiniteFreeRestric
 
 /-! # The finite-free scalar mate of restriction and direct image
 
-Source: Stacks Project, Tags 0B56 and 07A6.
-(blueprint: lem-pur-finite-free-restriction-direct-image-mate).
+## Implementation details
+
+`finiteFreeRestrictionDirectImageMate_isIso` is
+`FiniteFreeDirectImage.restrictionDirectImageMate_isIso` for the coefficient sheaves and
+coefficient change of `a`. The conclusion is the explicit mate expression; it does not import
+the higher compact-support comparison module.
+
+## References
+
+* [Stacks Project, Tags 0B56 and 07A6]
 -/
 
 @[expose] public section
@@ -23,14 +31,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Sc
 namespace WeilConjectures.PurCompactSupport
 
 /-- The inverse scalar mate of the canonical restriction/direct-image square is invertible
-for a globally finite-free coefficient extension.
-
-Source: Stacks Project, Tags 0B56 (projection formula) and 07A6 (derived adjunction).
-(blueprint: lem-pur-finite-free-restriction-direct-image-mate).
-
-This is `FiniteFreeDirectImage.restrictionDirectImageMate_isIso` for the coefficient
-sheaves and coefficient change of `a`. The conclusion is the explicit mate expression;
-it does not import the higher compact-support comparison module. -/
+for a globally finite-free coefficient extension. -/
 theorem finiteFreeRestrictionDirectImageMate_isIso {R S : Coefficients.{u}} (a : Change R S)
     {U V : Scheme.{u}} (g : U ⟶ V) (d : ℕ)
     (hfree : Nonempty

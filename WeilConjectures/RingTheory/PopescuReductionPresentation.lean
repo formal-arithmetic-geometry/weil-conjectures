@@ -13,7 +13,22 @@ public import Mathlib.RingTheory.Smooth.StandardSmooth
 import WeilConjectures.RingTheory.PopescuReductionPresentationCore
 import WeilConjectures.RingTheory.PopescuReductionPresentationFromFactor
 
-/-! # Polynomial data for a standard smooth stage modulo an ideal -/
+/-! # Polynomial data for a standard smooth stage modulo an ideal
+
+If `Λ / IΛ` is a filtered colimit of standard smooth `R/I`-algebras, then a map from a finitely
+presented `R`-algebra `A` to `Λ` yields polynomial equations `g` over `A`, with lifts in `Λ` of
+the variables at which they evaluate into `IΛ`, such that the reduced equations define a
+standard smooth `R/I`-algebra.
+
+## Implementation details
+
+No factor algebra over `R` is constructed here. The lifting claims also hold for empty
+presentations, the zero ring and `I = ⊤`.
+
+## References
+
+* [Stacks, Tag 07CK] (the first four steps of the proof)
+-/
 
 @[expose] public section
 
@@ -23,21 +38,8 @@ open CategoryTheory
 
 namespace Algebra
 
-/-- The first four construction steps of Stacks Project, Tag 07CK (lemma-lift-once).
-No factor algebra over `R` is constructed in this lemma.
-
-Proof: Base change a finite presentation of `A` to `R/I`. Factor the resulting map
-into the given filtered colimit through a standard smooth stage, using finite
-presentation (Tags 00QO and 07C3). If necessary use a small finite polynomial
-presentation of the source to perform this factorization in the diagram's universe.
-The stage is finitely presented over `R/I`; since `A/IA` is finite type over `R/I`,
-Tag 00F4 gives a finite polynomial presentation over `A/IA`. Lift its generators'
-images to `Λ` and its finitely many equations coefficientwise to `A`. Their evaluations
-map to zero in `Λ/IΛ`, because the reduced evaluation factors through the stage.
-Thus they belong to `IΛ`. The quotient defined by the reduced equations is isomorphic
-to that stage, so is standard smooth. Surjectivity of quotient maps proves the lifting
-claims even for empty presentations, the zero ring, and `I = top`.
-(blueprint: lem-weil-pbc-popescu-reduction-presentation) -/
+/-- Polynomial equations over `A` with lifts in `Λ`, evaluating into `IΛ`, whose reductions
+modulo `I` present a standard smooth `R/I`-algebra. -/
 theorem exists_popescu_reduction_presentation
     (R : Type u) [CommRing R] (Λ : Type (max u v)) [CommRing Λ] [Algebra R Λ]
     (I : Ideal R)

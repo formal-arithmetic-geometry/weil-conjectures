@@ -15,13 +15,20 @@ import WeilConjectures.CategoryTheory.SheafPullbackForgetComparison
 /-!
 # Underlying sets of the inverse image of a ring sheaf
 
-Source: Stacks Project, Sheaves, Tags 008F and 0087; Categories, Tag 04AX.
-(blueprint: lem-a1-ring-inverse-image-underlying-sets)
+Inverse image of sheaves of commutative rings commutes with taking underlying sets.
 
-The two comparisons are natural isomorphisms. The representative equation specifies
-all neighbourhood-colimit coprojections, and the sheafification equation specifies
-which sheaf isomorphism is induced by that presheaf comparison. We use the explicit
-sheaf-pullback construction and its adjunction from the dependency's Mathlib match.
+## Implementation details
+
+The two comparisons are natural isomorphisms. The representative equation specifies all
+neighbourhood-colimit coprojections, and the sheafification equation specifies which sheaf
+isomorphism is induced by that presheaf comparison. We use the explicit sheaf-pullback
+construction and its adjunction. The presheaf comparison is bijective by the elementwise
+description of filtered colimits of rings and of sets, and forgetting ring sheafification gives a
+set sheafification.
+
+## References
+
+* [Stacks Project, Tags 008F, 0087, 008P and 04AX](https://stacks.math.columbia.edu/tag/008F)
 -/
 
 @[expose] public section
@@ -36,34 +43,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Inverse image of commutative-ring sheaves commutes with underlying sets, including
-its presheaf colimit representatives, sheafification maps and adjunction units.
-Source: Stacks Project, Sheaves, Tags 008F and 0087, Section 008P; Categories, Tag 04AX.
-(blueprint: lem-a1-ring-inverse-image-underlying-sets)
-
-Proof plan:
-1. For an open W the opens B with W ≤ h⁻¹B form a small nonempty filtered poset
-   under reverse inclusion: the whole space is an object and intersections give
-   common successors. This is the pointwise left-Kan-extension indexing category
-   in def-weil-pbc-topological-inverse-image and def-weil-pbc-category-colimit.
-2. The underlying ring-colimit coprojections induce beta. Surjectivity follows
-   from lem-pc-filtered-colimit-commrings-elementwise (1). Its clause (2), followed
-   by lem-weil-pbc-filtered-colimit-sets-elementwise (2), gives injectivity.
-3. Restrictions and morphisms of ring sheaves send a representative (B,s) to the
-   same representative or its image. Hence beta is a presheaf isomorphism natural
-   in G. The representative equation below expresses its defining coprojections
-   as the presheaf unit followed by restriction from h⁻¹B to W.
-4. By lem-pc-sites-sheafification-underlying-sets, forgetting the ring
-   sheafification gives a set sheafification. Its composite with beta does too.
-   The universal property of def-weil-pbc-sheafification gives inverse sheaf maps
-   alpha and delta, with alpha characterized by the sheafification equation below.
-   Their composites are identities by uniqueness after the sheafification maps.
-5. Precompose the naturality square for alpha with the sheafification unit. The
-   defining equation and naturality of beta make it commute; uniqueness gives
-   naturality of alpha itself.
-6. The actual sheaf adjunction units are the presheaf units followed by the
-   sheafification maps. Substitute the representative equation at W = h⁻¹B
-   into the sheafification equation to obtain the displayed unit equation.
-No step requires nonempty spaces, separation, compactness or surjectivity. -/
+its presheaf colimit representatives, sheafification maps and adjunction units. -/
 theorem ringInverseImage_underlyingSets {T Z : TopCat.{u}} (h : T ⟶ Z) :
     ∃ β :
       (sheafToPresheaf (Opens.grothendieckTopology Z) CommRingCat.{u} ⋙

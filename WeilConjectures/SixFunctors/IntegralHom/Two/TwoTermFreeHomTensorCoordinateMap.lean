@@ -10,9 +10,15 @@ import WeilConjectures.SixFunctors.IntegralHom.Tensor.TensorEvaluationInterchang
 import WeilConjectures.SixFunctors.IntegralHom.Two.TwoTermCoordinateEvaluation
 import WeilConjectures.SixFunctors.IntegralHom.TotalTensorHomEvaluationExt
 
-/-! Finite-coordinate existence and uniqueness for the two-term Hom--tensor map.
-Source: Stacks Tags 0A8X and 08J7; blueprint lem-sf-two-term-free-hom-tensor-components.
-(blueprint: lem-sf-two-term-free-hom-tensor-coordinate-existence).
+/-! # Finite-coordinate existence and uniqueness for the two-term Hom--tensor map
+
+We construct the signed coordinate map for tensoring an internal Hom complex with a two-term
+free complex, show that it is an isomorphism in each total degree, and that it is unique.
+
+## References
+
+* [Stacks, Tag 0A8X]
+* [Stacks, Tag 08J7]
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -42,9 +48,7 @@ private theorem generator_transport
   rfl
 
 /-- The actual signed evaluation formula for tensoring an internal Hom complex.
-The degree transport only reassociates integer addition.
-Source: Stacks Tags 0A8X and 08J7, homogeneous tensor--Hom evaluation.
-(blueprint: lem-sf-two-term-free-hom-tensor-coordinate-existence). -/
+The degree transport only reassociates integer addition. -/
 def IsSignedHomTensor
     (P I Q : CochainComplex (Modules.{t, u} Y R) ℤ)
     (f : ((totalTensor Y R).obj
@@ -66,25 +70,7 @@ def IsSignedHomTensor
           (add_assoc p a b))).val.app U
             (totalPair Y R I Q (p + a) b U (evaluate Y R P I a p U v x) z)
 
-/-- The finite-free coordinate construction produces an isomorphism in each total degree.
-Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraph 1;
-Stacks Tags 0A8X and 08J7
-(blueprint: lem-sf-two-term-free-hom-tensor-coordinate-existence).
-
-Proof: in degree j, the support hypothesis leaves the two source summands
-Hom(P,I)^(j+1) tensor Q^(-1) and Hom(P,I)^j tensor Q^0. Use eNeg and eZero and the
-unit tensorors to identify these with the two Hom degrees. For each p, apply the
-same decomposition to (I tensor Q)^(p+j). Internal Hom out of P^p preserves this
-binary product; its product over all p commutes with the binary product. Multiply
-the coefficient-degree -1 coordinate at index p by (-1)^p. The resulting map is
-invertible, since that sign squares to one, and has the displayed formula.
-The differential of Hom is d_I v - (-1)^a v d_P, and the tensor differential on
-v tensor z is d(v) tensor z + (-1)^a v tensor d(z). Substituting the signed formula
-into these two differentials gives the same expression: the coefficient-differential
-term has sign (-1)^(a+(b+1)*p), and the two d_P signs agree because 2*b is even.
-Thus the degree maps assemble into a chain map. The product and tensor universal
-properties justify testing these identities on every local pure tensor and every
-section of P^p. No bound on P or I, and no special form of d_Q, is required. -/
+/-- The finite-free coordinate construction produces an isomorphism in each total degree. -/
 theorem twoTermFreeHomTensor_coordinate_exists
     (P I Q : CochainComplex (Modules.{t, u} Y R) ℤ)
     (hzero : ∀ k : ℤ, k ≠ -1 → k ≠ 0 → IsZero (Q.X k))
@@ -151,17 +137,7 @@ theorem twoTermFreeHomTensor_coordinate_exists
   subst j
   exact hf a b p U v z x
 
-/-- The product projections make the signed coordinate construction unique.
-Source: Stacks Tags 0A8X/08J7, uniqueness of the homogeneous tensor--Hom formula
-(blueprint: lem-sf-two-term-free-hom-tensor-coordinate-uniqueness).
-
-Proof: the total tensor coproduct inclusions and Hom product projections reduce
-maps to their internal Hom components on individual tensor summands. Precompose
-with the inverse tensor comparison and apply the sheafification adjunction.
-Naturality recovers every slice component from evaluation at identity slices.
-Induction on presheaf tensors then reduces equality to the two identical signed
-formulas. The support and unit-identification hypotheses are unnecessary for
-uniqueness, but are retained in the statement. -/
+/-- The product projections make the signed coordinate construction unique. -/
 theorem twoTermFreeHomTensor_coordinate_unique
     (P I Q : CochainComplex (Modules.{t, u} Y R) ℤ)
     (hzero : ∀ k : ℤ, k ≠ -1 → k ≠ 0 → IsZero (Q.X k))

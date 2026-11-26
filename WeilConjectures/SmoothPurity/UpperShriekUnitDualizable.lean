@@ -96,8 +96,7 @@ theorem isDualizable_of_forall_isDualizable_upperStar_overRestrictι {ι : Type}
     fun i ↦ isIso_map_ihomUnitTensorToIhom_of_isDualizable ℓ (overRestrictι X (U i)) _ (h i))
 
 /-- **The relative dualizing complex of a morphism smooth of pure relative dimension is
-dualizable**: on each connected component of `X` it is
-(`isDualizable_upperShriek_unit_of_connectedSpace`). -/
+dualizable**. -/
 theorem isDualizable_upperShriek_unit_of_smoothOfRelativeDimension (f : X ⟶ Y) (d : ℕ)
     [SmoothOfRelativeDimension d f.left] :
     IsDualizable ((boundedConstructibleUpperShriek ℓ f).obj
@@ -127,11 +126,8 @@ theorem isDualizable_upperShriek_unit_of_smoothOfRelativeDimension (f : X ⟶ Y)
     ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ (overRestrictι X (U c)) f).app _ ≪≫
       (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ (overRestrictι X (U c))).app _)
 
-/-- **The relative dualizing complex of a smooth morphism is dualizable** (blueprint
-`proposition-relative-dualizing-complex`, `proposition-exceptional-inverse-image-smooth-morphism`:
-"`ω_f` is pro-étale locally isomorphic to `Λ_X(d)[2d]`"): on the open and closed subschemes where
-`f` has pure relative dimension it is
-(`isDualizable_upperShriek_unit_of_smoothOfRelativeDimension`). -/
+/-- **The relative dualizing complex of a smooth morphism is dualizable**: `ω_f = Rf^! ℚ̄_ℓ` is
+a dualizable object of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`. -/
 theorem isDualizable_upperShriek_unit_of_smooth (f : X ⟶ Y) [Smooth f.left] :
     IsDualizable ((boundedConstructibleUpperShriek ℓ f).obj
       (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧))) := by

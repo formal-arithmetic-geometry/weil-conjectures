@@ -9,7 +9,17 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSyst
 public import Mathlib.CategoryTheory.Adjunction.Mates
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Pull.IntegralPullEvaluationDirectTransitionSquare
 
-/-! The degreewise module-map core of the ordinary pullback evaluation square. -/
+/-! The degreewise module-map core of the ordinary pullback evaluation square.
+
+## Implementation details
+
+The main statement records only the resulting module maps at one object, so the cochain
+wrappers and degree bookkeeping are absent.
+
+## References
+
+* [Zheng, Construction 4.1 and Lemma 4.10]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -145,16 +155,7 @@ attribute [local irreducible] proEtaleCoefficientDirectImageComparison
 
 /--
 The residual degreewise module-map identity obtained by expanding the mapped
-homological-complex component of the ordinary pullback evaluation square.
-Source: Zheng Construction 4.1 and the paragraph preceding Lemma 4.10.
-(blueprint: lem-sf-integral-pull-evaluation-cochain-square-component-core).
-The proof is the sectionwise quotient-transition calculation: the inverse-image
-comparison is the inverse mate of direct-image evaluation, the intrinsic finite
-comparison preserves the adjunction unit, and the normalized scalar comparison
-is identity on sections. Naturality in the coefficient transition then identifies
-both composites. This statement records only the resulting module maps at one
-object, so the cochain wrappers and degree bookkeeping are absent.
--/
+homological-complex component of the ordinary pullback evaluation square. -/
 theorem integralPullEvaluation_cochainSquare_component_core_expanded
     {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (r₀ : normalizedDVRModuleRes l E X (Nat.le_succ n) ⋙

@@ -16,6 +16,19 @@ The finite proper/open construction supplies the unique normalized open comparis
 and its endpoint coordinate formula.  This is the geometric part of the refinement
 coordinate calculation; the parent theorem only performs the categorical uniqueness
 and cancellation.
+
+## Implementation details
+
+The construction expands `finiteOpenIso` and `finiteDirectImage_eq`, transports the canonical
+`properOpenProEtaleIso` through the fixed witness, and pastes the proper compositor.
+Uniqueness of the open adjunction transpose makes this witness independent of all
+presentation choices.
+
+## References
+
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 03D6]
+* [Stacks, Tag 0F7B]
 -/
 
 @[expose] public noncomputable section
@@ -29,18 +42,7 @@ namespace WeilConjectures.ConstructibleExceptionalCoefficients
 
 /-- The finite proper/open comparison constructed from the constant-coefficient
 proper/open map has the displayed open-unit normalization and endpoint coordinate
-formula.  The construction expands `finiteOpenIso` and `finiteDirectImage_eq`,
-transports the canonical `properOpenProEtaleIso` through the fixed witness, and
-pastes the proper compositor.  Uniqueness of the open adjunction transpose makes
-this witness independent of all presentation choices.
-Source: Stacks Tags 03DI, 03D6 and 0F7B; compactification-coherence proof,
-first two paragraphs (blueprint: lem-sf-finite-ring-refinement-coordinates-canonical).
-
-Proof: construct the canonical finite proper/open comparison from the normalized
-constant-coefficient adjunctions, transport it through the retained witness, and
-expand the proper compositor. Naturality and the triangle identities cancel the
-endpoint coordinate isomorphisms, yielding the displayed intrinsic refinement word.
--/
+formula. -/
 theorem finite_ring_refinement_coordinates_canonical
     (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ)

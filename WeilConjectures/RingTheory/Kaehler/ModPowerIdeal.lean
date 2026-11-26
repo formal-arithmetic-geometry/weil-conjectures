@@ -24,6 +24,10 @@ More generally, for a surjection `S → S'` of `R`-algebras and an `S'`-algebra 
 * `KaehlerDifferential.tensorMapBaseChange_bijective`: the general statement.
 * `KaehlerDifferential.D_mem_pow_smul_top`: `d(Iⁿ⁺¹) ⊆ Iⁿ Ω[S⁄R]`.
 * `KaehlerDifferential.tensorQuotPowMap_bijective`: Stacks, Lemma 02HQ.
+
+## References
+
+* [Stacks, Tag 02HQ]
 -/
 
 @[expose] public section
@@ -115,14 +119,12 @@ theorem D_mem_pow_smul_top (I : Ideal S) (n : ℕ) {a : S} (ha : a ∈ I ^ (n + 
       exact add_mem hx hy
 
 variable (R) in
-/-- **Kähler differentials modulo a power of an ideal** (Stacks, Lemma 02HQ). Let `R → S` be a
+/-- **Kähler differentials modulo a power of an ideal**. Let `R → S` be a
 ring map, `I ⊆ S` an ideal, `n` a natural number and `S' = S ⧸ I ^ (n + 1)`. Then the
 `S ⧸ I ^ n`-linear map `S/Iⁿ ⊗[S] Ω[S⁄R] → S/Iⁿ ⊗[S'] Ω[S'⁄R]`, `t ⊗ ds ↦ t ⊗ d(s̄)`, is
 bijective (see `tensorMapBaseChange_tmul_D` for the formula). Here `S ⧸ I ^ n` carries its
 (unique) `S'`-algebra structure compatible with `S`, given as instance arguments. The statement
-holds for all `n` (the blueprint assumes `n ≥ 1`), and the tensor factors are written in the
-order `S/Iⁿ ⊗ Ω` instead of `Ω ⊗ S/Iⁿ`.
-(blueprint: `lem-weil-pbc-kahler-differentials-mod-power-ideal`) -/
+holds for all `n`. -/
 theorem tensorQuotPowMap_bijective (I : Ideal S) (n : ℕ)
     [Algebra (S ⧸ I ^ (n + 1)) (S ⧸ I ^ n)] [IsScalarTower S (S ⧸ I ^ (n + 1)) (S ⧸ I ^ n)] :
     Function.Bijective (tensorMapBaseChange R S (S ⧸ I ^ (n + 1)) (S ⧸ I ^ n)) := by

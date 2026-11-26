@@ -14,10 +14,23 @@ import WeilConjectures.RingTheory.KoszulRegularFlatBaseChange
 import Mathlib.RingTheory.Flat.Localization
 import Mathlib.LinearAlgebra.Determinant
 
-/-! # KoszulCoefficientExtensionNu
+/-! # Coefficient extension of the normal determinant
 
-Source: Stacks Project, Tag 0BQZ, coefficient formulas in the finite free
-Koszul calculation (blueprint: new-lem-sc-koszul-coefficient-extension-nu).
+For a Koszul-regular sequence `f` generating `I` and a localization `S` of `A`, the top exterior
+power of the dual of `I/I²` maps to that of `IS/(IS)²`, compatibly with the determinant
+evaluation formula.
+
+## Implementation details
+
+The map is explicit: it sends `a` times the top wedge of the coordinate functionals of the
+conormal basis given by `f` to `q(a)` times the corresponding top wedge over `S/IS`; Koszul
+regularity of the image sequence holds since localization is flat.
+
+## References
+
+* [Stacks, Tag 0BQZ]
+* [Stacks, Tag 062H]
+* [Stacks, Tag 062I]
 -/
 
 @[expose] public section
@@ -61,27 +74,7 @@ private theorem pairing_conormal_det
   have hd := (RingHom.map_det (Ideal.Quotient.mk I) (Matrix.of fun i j ↦ v i j)).symm
   exact hv.trans (congrArg (fun a ↦ l (exteriorPower.ιMulti (A ⧸ I) r b) * a) hd)
 
-/-- The coefficient extension normal determinant map with its evaluation formula.
-Source: Stacks Project, Tag 0BQZ, finite free Koszul computation.
-(blueprint: new-lem-sc-koszul-coefficient-extension-nu)
-
-Proof: Put B = A/I and C = S/IS. Localization is flat, so Tag 062H gives
-Koszul regularity of the image sequence. The conormal-basis theorem (Tag 062I)
-gives bases b_i of I/I^2 and c_i of IS/(IS)^2 consisting of the generator classes.
-Let b_i^* and c_i^* be their coordinate functionals. Their increasing top wedges
-are bases of the normal determinants. Define nu by sending a times the top
-wedge of b_i^* to q(a) times the top wedge of c_i^*. This is additive and
-A-linear: hq identifies the A-action through B with the A-action through C.
-The coordinates of koszulConormalVector(v) in b are the residues of the
-coordinates of v, by its linearCombination definition. The coordinates of its
-image in c are their q-images by hq. Pairing the top dual wedge with these
-vectors is their coordinate determinant (pairingDual_ιMulti_ιMulti). Ring maps
-preserve determinants, so multiplication by q(a) gives exactly the displayed
-formula for every w and v. For r = 0 use the empty wedge and determinant 1.
-If B or C is the zero ring, the same basis-coordinate construction and formulas
-still apply, without a nontriviality hypothesis. No data are chosen from a mere
-existence statement: the described coordinate maps are explicit once the
-conormal bases, fixed by their generator values, are given. -/
+/-- The coefficient extension normal determinant map `ν` with its evaluation formula. -/
 theorem exists_koszul_coefficient_extension_nu
     (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A)
     (hreg : RingTheory.Sequence.IsKoszulRegular f) (hf : Ideal.span (Set.range f) = I)

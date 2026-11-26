@@ -10,10 +10,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Standard pairs on constructible coefficient categories
 
-Source: Weil conjectures blueprint, `sec-smooth-base-change/sk-rem-rest`,
-`prop-weil-localized-tstructure` and `prop-weil-pbc-integral-tstructure`
-(blueprint: def-weil-constructible-standard-tstructure).
-
 Integral classes use the cohomology of completed-coefficient module sheaves.
 Rational and algebraically closed classes are the indicated isomorphism closures.
 The shifted classes use cohomological shifts. No t-structure axioms are asserted.

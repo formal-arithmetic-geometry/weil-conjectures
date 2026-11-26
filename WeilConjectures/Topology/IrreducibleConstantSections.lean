@@ -20,28 +20,23 @@ universe u v
 namespace TopCat
 
 /-! # Sections of a constant sheaf on an irreducible space
-Source: literature/stacks-project/sheaves.tex, Definition 006W
-(blueprint: lem-sc-irreducible-constant-sections) -/
+
+On an irreducible space, sections of the constant sheaf over nonempty opens are the coefficient
+group.
+
+## Implementation details
+
+The constant sheaf is identified with the sheaf of locally constant maps. Every nonempty open of
+an irreducible space is irreducible, hence connected, so locally constant maps on it are
+constant.
+
+## References
+
+* [Stacks Project, Tags 006W and 0081](https://stacks.math.columbia.edu/tag/006W)
+-/
 
 /-- Sections of the constant sheaf on nonempty opens of an irreducible space are canonically
-identified with the coefficient group, compatibly with restriction.
-Source: literature/stacks-project/sheaves.tex, Definition 006W and Example 0081
-(blueprint: lem-sc-irreducible-constant-sections)
-Proof:
-1. A nonempty open subspace of an irreducible space is irreducible, since two nonempty
-   opens in it are nonempty opens of the ambient space and meet.
-2. Let `L_A` be the presheaf of locally constant `A`-valued maps. By
-   `lem-weil-pbc-locally-constant-maps-sheaf` it is a sheaf. The map from the constant
-   presheaf to `L_A` sending an element to the corresponding constant map satisfies the
-   universal property of the sheafification in `def-weil-pbc-constant-sheaf`: locally
-   constant sections are locally constant on a cover, and compatible images glue uniquely.
-   Hence the constant sheaf is canonically identified with `L_A`.
-3. By `lem-pc-irreducible-space-connected`, every nonempty open is connected, and by
-   `lem-weil-pbc-connected-locally-constant-map`, every locally constant map on it is
-   constant. Evaluation therefore gives the displayed identifications with `A`.
-4. Restricting a constant map to a smaller nonempty open leaves its value unchanged, so
-   the identifications carry restriction to the identity of `A`.
--/
+identified with the coefficient group, compatibly with restriction. -/
 theorem irreducible_constant_sections
     (X : TopCat.{u}) [IrreducibleSpace X]
     [HasWeakSheafify (Opens.grothendieckTopology X) AddCommGrpCat]

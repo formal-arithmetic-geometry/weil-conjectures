@@ -16,8 +16,22 @@ import Mathlib.RingTheory.Unramified.Field
 import WeilConjectures.RingTheory.FilteredColimitAlgebrasTensorElementwise
 
 /-! # Reduced zero-dimensional fibres of filtered etale colimits
-Source: Stacks Project, More on Algebra, Tag 0AH1.
-(blueprint: lem-weil-pbc-filtered-etale-fiber-structure). -/
+
+The fibres of a filtered colimit of etale algebras are reduced and zero-dimensional.
+
+## Implementation details
+
+Tensor products commute with filtered colimits, so every fibre element lifts to a stage and a
+zero element vanishes at a later stage (Tags 00DD, 00D6, 00D7). Stage fibres are etale over a
+field, hence finite products of finite separable field extensions (Tag 00U3), so reduced with
+all primes maximal; both properties pass to the colimit. The zero ring is allowed, and no
+Noetherian hypothesis is needed.
+
+## References
+
+* [Stacks, Tag 0AH1], first paragraph of the proof
+* [Stacks, Tag 00DD], [Stacks, Tag 00D6], [Stacks, Tag 00D7], [Stacks, Tag 00U3]
+-/
 
 @[expose] public section
 
@@ -27,23 +41,7 @@ open scoped TensorProduct
 
 namespace CommAlgCat
 
-/-- Fibres of filtered colimits of etale algebras are reduced and zero-dimensional.
-Source: Stacks Project, More on Algebra, Lemma Tag 0AH1, proof, first paragraph.
-(blueprint: lem-weil-pbc-filtered-etale-fiber-structure).
-
-Proof:
-1. Tensor commutes with filtered colimits: every fibre element lifts to a stage, and
-   a zero element becomes zero at a later stage (Tags 00DD, 00D6, 00D7).
-2. Base change preserves etaleness, so each stage fibre is an etale algebra over the
-   base residue field, hence a finite product of finite separable fields (Tag 00U3).
-3. Such products are reduced. Lift a nilpotent element and its vanishing power to
-   a common later stage; reducedness there makes the element zero in the colimit.
-4. Primes in a product of fields are maximal. Comparable primes in the colimit
-   contract to equal primes at every stage. Since every element lifts to a stage,
-   the original primes are equal. Every prime is contained in a maximal ideal,
-   so every prime is maximal. This is exactly Krull dimension at most zero.
-The zero ring is allowed: it is reduced and its empty prime spectrum has dimension
-at most zero. No Noetherian hypothesis is needed in this argument. -/
+/-- Fibres of filtered colimits of etale algebras are reduced and zero-dimensional. -/
 theorem filteredEtale_fiber_structure
     (A : Type u) [CommRing A]
     {I : Type v} [SmallCategory I] [IsFiltered I]

@@ -23,9 +23,8 @@ For `f : X ⟶ Y` smooth separated of relative dimension `d`, the *canonical pur
 composite of the twist reassociation, the inverse of the canonical orientation
 `θ_f : ω_f ≅ Λ_X(d)[2d]` (`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso`), the symmetry
 and the canonical tensor map `ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K`
-(`AlgebraicGeometry.Etale.dualizingComplexTensorMap`). Blueprint
-`proposition-compatibility-purity-base-change` asserts `g'^* γ_f(K) = γ_{f'}(g^* K)` for a
-cartesian square (`AlgebraicGeometry.Etale.canonicalSmoothPurityMap_baseChange`).
+(`AlgebraicGeometry.Etale.dualizingComplexTensorMap`). We show `g'^* γ_f(K) = γ_{f'}(g^* K)` for
+a cartesian square (`AlgebraicGeometry.Etale.canonicalSmoothPurityMap_baseChange`).
 
 Each factor of `γ_f` commutes with base change: the orientation
 (`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_baseChange`), the tensor map
@@ -36,8 +35,8 @@ and the twist reassociation
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.canonicalSmoothPurityMap_baseChange`
-  (`proposition-compatibility-purity-base-change`).
+- `AlgebraicGeometry.Etale.canonicalSmoothPurityMap_baseChange`: compatibility of the canonical
+  purity map with base change.
 -/
 
 @[expose] public section
@@ -231,20 +230,12 @@ variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   [HasCompactification f'] [QuasiCompact f'] [HasInvertibleExponent Λ X]
   [HasInvertibleExponent Λ X'] {k k' : Type u} [Field k] [Field k']
 
-/-- Blueprint `proposition-compatibility-purity-base-change` (formerly
-`proposition-compatibility-purity-base-change`, `chap-Smooth-purity`): compatibility of purity with
-base change.
-
-For a cartesian square `g' ≫ f = f' ≫ g` with `f` and `f'` smooth separated of relative
-dimension `d` and `K ∈ D(Y_ét, Λ)`, identify the sources of the canonical purity maps by
+/-- Compatibility of purity with base change: for a cartesian square
+`g' ≫ f = f' ≫ g` with `f` and `f'` smooth separated of relative dimension `d` and
+`K ∈ D(Y_ét, Λ)`, identify the sources of the canonical purity maps by
 `Lg'^* Lf^* ≅ Lf'^* Lg^*` (`AlgebraicGeometry.Etale.leftDerivedUpperStarTwistShiftBaseChangeIso`)
 and the targets by the exceptional base change map
-(`AlgebraicGeometry.Etale.upperShriekBaseChangeMap`). Then `g'^* γ_f(K) = γ_{f'}(g^* K)`.
-
-The proof composes the base change of the orientation
-(`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_baseChange`), of the tensor map
-(`AlgebraicGeometry.Etale.dualizingComplexTensorMap_baseChange`), of the symmetry and of the
-twist reassociation. -/
+(`AlgebraicGeometry.Etale.upperShriekBaseChangeMap`). Then `g'^* γ_f(K) = γ_{f'}(g^* K)`. -/
 theorem canonicalSmoothPurityMap_baseChange (sq : IsPullback g' f' f g)
     (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
     (aY' : Y' ⟶ Spec (.of k')) [IsSeparated aY'] [LocallyOfFiniteType aY']

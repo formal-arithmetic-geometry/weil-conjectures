@@ -28,9 +28,6 @@ construction produces, for each prime `ℓ ≠ p`, a family satisfying these hyp
 two such families agree. That reading is a remark, not a statement of this file — nothing here
 mentions `ℓ` or the `ℓ`-adic determinants.
 
-This file formalises the uniqueness half of the integral-Frobenius-factors subsection of the
-blueprint block on zeta functions and the Weil conjectures.
-
 ## Main statements
 
 - `AlgebraicGeometry.IsWeilFactorization.unique`: two Weil factorizations of the same zeta
@@ -57,8 +54,7 @@ variable {k : Type u} [Field k] [Finite k] {X : Scheme.{u}} (f : X ⟶ Spec (.of
 /-- **The Weil conjectures, with uniqueness.** For a smooth proper geometrically integral
 scheme of dimension `d` over a finite field, the family of integral Frobenius factors of the
 zeta function satisfying the factorization, the functional equation and the Riemann hypothesis
-exists and is unique. Existence is `AlgebraicGeometry.Scheme.weil_conjectures` and uniqueness
-is `AlgebraicGeometry.IsWeilFactorization.unique`. -/
+exists and is unique. -/
 theorem existsUnique_weil_conjectures (hk : 1 < Nat.card k) (d : ℕ)
     [SmoothOfRelativeDimension d f] [IsProper f] [GeometricallyIntegral f] :
     ∃! P : Fin (2 * d + 1) → Polynomial ℤ,

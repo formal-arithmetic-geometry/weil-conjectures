@@ -175,14 +175,18 @@ import all WeilConjectures.TraceFormula.Supporting.PointFiniteReductionSectionAl
 
 /-! # Sections of the geometric point and integral coefficient extension
 
-Source: blueprint `lemma-perfect-complexes-geometric-point`, final paragraph;
-Bhatt--Scholze, Lemmas 4.2.12, 6.8.2(1), Definition 3.4.10 and Lemma 3.4.12
-(blueprint: lem-weil-point-sections-scalar-extension).
+## Implementation details
 
 All tensors on coefficient modules below are ordinary termwise tensors. The
 sections-tensor arrow is fixed on pure tensors, and the derived arrow is fixed
 on every K-flat flat-term representative. Completion uses the recorded strict
 zero-homotopy comparison, rather than an unspecified derived-limit lift.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemmas 4.2.12, 6.8.2(1),
+  Definition 3.4.10 and Lemma 3.4.12.
+* Stacks Project, Tags 03DA, 05RU and 06YY.
 -/
 
 @[expose] public section
@@ -221,27 +225,22 @@ variable (k : Type u) [Field k] [IsAlgClosed k]
   (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The recorded locally bijective criterion at the point's actual module size.
-Source: Stacks 03DA (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- The recorded locally bijective criterion at the point's actual module size. -/
 noncomputable instance (priority := 5000) pointScalarAbLocallyBijective :
     (Scheme.ProEt.topology (Spec (.of k))).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   integralCoefficientAbLocallyBijective.{u, u} (Spec (.of k))
 
-/-- Standard localization of coefficient-module complexes in the section universe.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- Standard localization of coefficient-module complexes in the section universe. -/
 noncomputable instance pointScalarModuleDerived (A : Type u) [Ring A] :
     HasDerivedCategory (ModuleCat.{u + 1} A) := HasDerivedCategory.standard _
 
-/-- Standard localization for modules on the point in their actual section universe.
-Source: Stacks 05RU (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- Standard localization for modules on the point in their actual section universe. -/
 noncomputable instance pointCompletedSheafDerived
     (R : Sheaf (Scheme.ProEt.topology (Spec (.of k))) RingCat.{u + 1}) :
     HasDerivedCategory (SheafOfModules.{u + 1} R) := HasDerivedCategory.standard _
 
 /-- The canonical constant-section coefficient map at the final object, obtained
-from the recorded constant-to-completion morphism and sheafification unit.
-Source: Bhatt--Scholze 6.8.2(1); blueprint completed coefficients, order 1455
-(blueprint: lem-weil-point-sections-scalar-extension). -/
+from the recorded constant-to-completion morphism and sheafification unit. -/
 noncomputable def pointCompletedConstant :
     Padic.coefficientExtensionIntegers l E →+*
       (completedIntegralCoefficientSheafUnrestricted.{u, u} l E (Spec (.of k))).obj.obj
@@ -397,8 +396,7 @@ private theorem pointCompletedConstant_eq (a : Padic.coefficientExtensionInteger
   · exact (integralScalarConstant_existsUnique l E (Spec (.of k))
       (op (Scheme.ProEt.mk (𝟙 (Spec (.of k))))) a).exists.choose_spec
 
-/-- Evaluation, with coefficients restricted along the actual constant-section map.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- Evaluation, with coefficients restricted along the actual constant-section map. -/
 noncomputable abbrev pointCompletedSections :
     integralTowerModules.{u, u} l E (Spec (.of k)) ⥤
       ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E) :=
@@ -407,12 +405,7 @@ noncomputable abbrev pointCompletedSections :
       (op (Scheme.ProEt.mk (𝟙 (Spec (.of k))))) ⋙
     ModuleCat.restrictScalars (pointCompletedConstant k l E)
 
-/-- Exactness and additivity of completed integral sections.
-Source: exact point-sections node and blueprint final paragraph
-(blueprint: lem-weil-point-sections-scalar-extension).
-Proof: point evaluation is exact by lem-weil-point-proetale-sections-exact.
-Restriction of scalars leaves the underlying abelian group unchanged, so preserves
-kernels and cokernels. Both functors add maps sectionwise. -/
+/-- Exactness and additivity of completed integral sections. -/
 theorem pointCompletedSections_exact :
     (pointCompletedSections k l E).Additive ∧
       PreservesFiniteLimits (pointCompletedSections k l E) ∧
@@ -443,25 +436,21 @@ theorem pointCompletedSections_exact :
   refine ⟨?_, comp_preservesFiniteLimits _ T, comp_preservesFiniteColimits _ T⟩
   exact ⟨by intros; rfl⟩
 
-/-- Additivity supplied by exact evaluation.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- Additivity supplied by exact evaluation. -/
 noncomputable instance pointCompletedSectionsAdditive :
     (pointCompletedSections k l E).Additive := (pointCompletedSections_exact k l E).1
 
-/-- Finite-limit preservation supplied by exact evaluation.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- Finite-limit preservation supplied by exact evaluation. -/
 noncomputable instance pointCompletedSectionsLimits :
     PreservesFiniteLimits (pointCompletedSections k l E) :=
   (pointCompletedSections_exact k l E).2.1
 
-/-- Finite-colimit preservation supplied by exact evaluation.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- Finite-colimit preservation supplied by exact evaluation. -/
 noncomputable instance pointCompletedSectionsColimits :
     PreservesFiniteColimits (pointCompletedSections k l E) :=
   (pointCompletedSections_exact k l E).2.2
 
-/-- Termwise completed sections, descended through derived localization.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- Termwise completed sections, descended through derived localization. -/
 noncomputable abbrev pointCompletedDerivedSections :
     DerivedCategory (integralTowerModules.{u, u} l E (Spec (.of k))) ⥤
       DerivedCategory (ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E)) :=
@@ -470,17 +459,11 @@ noncomputable abbrev pointCompletedDerivedSections :
 variable (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-/-- Ordinary tensor with the valuation ring of the larger coefficient field.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- Ordinary tensor with the valuation ring of the larger coefficient field. -/
 noncomputable abbrev pointIntegralModuleTensor :=
   ModuleCat.extendScalars.{u, u, u + 1} (integralScalarIntegerInclusion.{u} l E L ι)
 
-/-- The ordinary module tensor and fraction-field tensor functors are exact and additive.
-Source: Bhatt--Scholze 6.8.2(1), blueprint final paragraph
-(blueprint: lem-weil-point-sections-scalar-extension).
-Proof: O_L is finite free over O_E, so tensor is a finite direct sum, hence exact.
-The fraction field of a valuation DVR is its localization at nonzero elements;
-localization preserves kernels and cokernels. The tensor maps add termwise. -/
+/-- The ordinary module tensor and fraction-field tensor functors are exact and additive. -/
 theorem pointCoefficientTensors_exact :
     ((pointIntegralModuleTensor l E L ι).Additive ∧
       PreservesFiniteLimits (pointIntegralModuleTensor l E L ι) ∧
@@ -494,26 +477,22 @@ theorem pointCoefficientTensors_exact :
   exact ⟨(coefficientComplexTensors_exact.{u, u + 1} l E L ι).1,
     (coefficientComplexTensors_exact.{u, u + 1} l E L ι).2.1⟩
 
-/-- Additivity of the ordinary integral tensor.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- Additivity of the ordinary integral tensor. -/
 noncomputable instance pointIntegralModuleTensorAdditive :
     (pointIntegralModuleTensor l E L ι).Additive :=
   (pointCoefficientTensors_exact l E L ι).1.1
 
-/-- Exactness at kernels of the ordinary integral tensor.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- Exactness at kernels of the ordinary integral tensor. -/
 noncomputable instance pointIntegralModuleTensorLimits :
     PreservesFiniteLimits (pointIntegralModuleTensor l E L ι) :=
   (pointCoefficientTensors_exact l E L ι).1.2.1
 
-/-- Exactness at cokernels of the ordinary integral tensor.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- Exactness at cokernels of the ordinary integral tensor. -/
 noncomputable instance pointIntegralModuleTensorColimits :
     PreservesFiniteColimits (pointIntegralModuleTensor l E L ι) :=
   (pointCoefficientTensors_exact l E L ι).1.2.2
 
-/-- Ordinary termwise integral tensor on module derived categories.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- Ordinary termwise integral tensor on module derived categories. -/
 noncomputable abbrev pointIntegralModuleDerivedTensor :=
   (pointIntegralModuleTensor l E L ι).mapDerivedCategory
 
@@ -580,15 +559,7 @@ private noncomputable def pointTensorSquareIso
     rfl
   | add x y hx hy => simp only [smul_add, map_add, hx, hy]
 
-/-- The sections-tensor map is uniquely fixed by its balanced pure-tensor formula.
-Source: Bhatt--Scholze 6.8.2(1), blueprint final paragraph
-(blueprint: lem-weil-point-sections-scalar-extension).
-Proof: send a tensor n to the sheafified tensor of the constant section a with n.
-The coefficient maps agree on every finite quotient, so balancing is valid.
-The sheaf tensor universal property gives the map. Pure tensors generate its
-source, proving uniqueness, and the same formula commutes with every sheaf map.
-A finite free basis of R_L over R_E gives a global O_E-basis of O_L by evaluating
-at the point; both sides are then the same finite sum of sections. -/
+/-- The sections-tensor map is uniquely fixed by its balanced pure-tensor formula. -/
 theorem pointSectionsTensor_existsUnique :
     ∃! θ : pointCompletedSections k l E ⋙ pointIntegralModuleTensor l E L ι ≅
         completedOrdinaryScalarExtension.{u, u} l E L ι (Spec (.of k)) ⋙
@@ -650,44 +621,28 @@ theorem pointSectionsTensor_existsUnique :
   intro x
   exact (hν F 1 x).trans (hi F 1 x).symm
 
-/-- The canonical balanced sections-tensor transformation.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- The canonical balanced sections-tensor transformation. -/
 noncomputable def pointSectionsTensor :=
   (pointSectionsTensor_existsUnique k l E L ι).exists.choose
 
-/-- Finite-free ordinary completed coefficient extension is exact.
-Source: Bhatt--Scholze 6.8.2(1)
-(blueprint: lem-weil-point-sections-scalar-extension).
-Proof: choose a finite free R_E-basis of R_L. Ordinary sheafified tensor is then
-naturally a finite direct sum on the underlying R_E-modules. Finite sums are exact,
-and restriction of scalars detects exactness. -/
+/-- Finite-free ordinary completed coefficient extension is exact. -/
 theorem pointCompletedOrdinary_exact :
     PreservesFiniteLimits (completedOrdinaryScalarExtension.{u, u} l E L ι (Spec (.of k))) ∧
       PreservesFiniteColimits (completedOrdinaryScalarExtension.{u, u} l E L ι (Spec (.of k))) := by
   exact ⟨podCompletedOrdinaryScalarExtension_preservesFiniteLimits l E L ι (Spec (.of k)),
     podCompletedOrdinaryScalarExtension_preservesFiniteColimits l E L ι (Spec (.of k))⟩
 
-/-- Preservation of kernels by finite-free coefficient extension.
-Source: Bhatt--Scholze 6.8.2(1)
-(blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- Preservation of kernels by finite-free coefficient extension. -/
 noncomputable instance pointCompletedOrdinaryLimits :
     PreservesFiniteLimits (completedOrdinaryScalarExtension.{u, u} l E L ι (Spec (.of k))) :=
   (pointCompletedOrdinary_exact k l E L ι).1
 
-/-- Preservation of cokernels by coefficient extension.
-Source: Bhatt--Scholze 6.8.2(1)
-(blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- Preservation of cokernels by coefficient extension. -/
 noncomputable instance pointCompletedOrdinaryColimits :
     PreservesFiniteColimits (completedOrdinaryScalarExtension.{u, u} l E L ι (Spec (.of k))) :=
   (pointCompletedOrdinary_exact k l E L ι).2
 
-/-- The universal derived tensor comparison is the termwise one for a finite-free extension.
-Source: Stacks 06YY and Bhatt--Scholze 6.8.2(1)
-(blueprint: lem-weil-point-sections-scalar-extension).
-Proof: ordinary finite-free tensor preserves every quasi-isomorphism, not only those
-between K-flat complexes. Its exact-functor localization is therefore its left derived
-functor. The universal counit gives the displayed comparison, and localization at
-quasi-isomorphisms makes the normalization on representatives determine it uniquely. -/
+/-- The universal derived tensor comparison is the termwise one for a finite-free extension. -/
 theorem pointOrdinaryDerivedComparison_existsUnique :
     ∃! δ : completedDerivedScalarExtension.{u, u} l E L ι (Spec (.of k)) ≅
         (completedOrdinaryScalarExtension.{u, u} l E L ι (Spec (.of k))).mapDerivedCategory,
@@ -708,13 +663,11 @@ theorem pointOrdinaryDerivedComparison_existsUnique :
     ((completedOrdinaryScalarExtension l E L ι (Spec (.of k))).mapDerivedCategoryFactors.hom.app
       P)).mp ((hδ P).trans (hc P).symm)
 
-/-- The canonical identification of ordinary derived and termwise tensor.
-Source: Stacks 06YY (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- The canonical identification of ordinary derived and termwise tensor. -/
 noncomputable def pointOrdinaryDerivedComparison :=
   (pointOrdinaryDerivedComparison_existsUnique k l E L ι).exists.choose
 
-/-- The derived sections-tensor isomorphism, normalized by actual termwise tensors.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- The derived sections-tensor isomorphism, normalized by actual termwise tensors. -/
 noncomputable def pointDerivedSectionsTensor :
     pointCompletedDerivedSections k l E ⋙ pointIntegralModuleDerivedTensor l E L ι ≅
       completedDerivedScalarExtension.{u, u} l E L ι (Spec (.of k)) ⋙
@@ -728,11 +681,7 @@ noncomputable def pointDerivedSectionsTensor :
     Functor.isoWhiskerRight (pointOrdinaryDerivedComparison k l E L ι).symm
       (pointCompletedDerivedSections k l L)
 
-/-- Multiplication on ordinary sheaf tensor fixes the identity-extension identification.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension).
-Proof: multiplication s tensor x to sx is balanced and inverse to x to 1 tensor x.
-These formulas commute with restrictions and sheaf maps, and tensors generate,
-so they determine exactly one natural isomorphism. -/
+/-- Multiplication on ordinary sheaf tensor fixes the identity-extension identification. -/
 theorem pointOrdinaryTensorUnit_existsUnique :
     ∃! μ : completedOrdinaryScalarExtension.{u, u} l E E (AlgHom.id ℚ_[l] E) (Spec (.of k)) ≅
         𝟭 (integralTowerModules.{u, u} l E (Spec (.of k))),
@@ -770,13 +719,11 @@ theorem pointOrdinaryTensorUnit_existsUnique :
   intro U x a
   exact (hν F U a x).trans (hμ F U a x).symm
 
-/-- The canonical ordinary multiplication isomorphism.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- The canonical ordinary multiplication isomorphism. -/
 noncomputable def pointOrdinaryTensorUnit :=
   (pointOrdinaryTensorUnit_existsUnique k l E).exists.choose
 
-/-- The canonical derived multiplication isomorphism.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- The canonical derived multiplication isomorphism. -/
 noncomputable def pointDerivedTensorUnit :
     completedDerivedScalarExtension.{u, u} l E E (AlgHom.id ℚ_[l] E) (Spec (.of k)) ≅
       𝟭 (DerivedCategory (integralTowerModules.{u, u} l E (Spec (.of k)))) :=
@@ -799,75 +746,57 @@ end AbstractAssociator
 variable (M : Type u) [Field M] [Algebra ℚ_[l] M] [FiniteDimensional ℚ_[l] M]
   (κ : L →ₐ[ℚ_[l]] M)
 
-/-- Fraction-field extension on coefficient modules.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- Fraction-field extension on coefficient modules. -/
 noncomputable abbrev pointModuleRationalization :=
   ModuleCat.extendScalars.{u, u, u + 1}
     (algebraMap (Padic.coefficientExtensionIntegers l E) E)
 
-/-- Additivity of localization to the coefficient field.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- Additivity of localization to the coefficient field. -/
 noncomputable instance pointModuleRationalizationAdditive :
     (pointModuleRationalization l E).Additive :=
   (pointCoefficientTensors_exact l E E (AlgHom.id ℚ_[l] E)).2.1
 
-/-- Localization preserves kernels.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- Localization preserves kernels. -/
 noncomputable instance pointModuleRationalizationLimits :
     PreservesFiniteLimits (pointModuleRationalization l E) :=
   (pointCoefficientTensors_exact l E E (AlgHom.id ℚ_[l] E)).2.2.1
 
-/-- Localization preserves cokernels.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- Localization preserves cokernels. -/
 noncomputable instance pointModuleRationalizationColimits :
     PreservesFiniteColimits (pointModuleRationalization l E) :=
   (pointCoefficientTensors_exact l E E (AlgHom.id ℚ_[l] E)).2.2.2
 
-/-- Ordinary termwise tensor with the fraction field on derived modules.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- Ordinary termwise tensor with the fraction field on derived modules. -/
 noncomputable abbrev pointModuleDerivedRationalization :=
   (pointModuleRationalization l E).mapDerivedCategory
 
-/-- Tensor with a coefficient field extension is exact and additive.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension).
-Proof: a field extension is a free module, so tensor is a direct sum of copies on
-underlying vector spaces and preserves kernels and cokernels. It adds maps termwise. -/
+/-- Tensor with a coefficient field extension is exact and additive. -/
 theorem pointCoefficientFieldTensor_exact :
     (ModuleCat.extendScalars.{u, u, u + 1} ι.toRingHom).Additive ∧
       PreservesFiniteLimits (ModuleCat.extendScalars.{u, u, u + 1} ι.toRingHom) ∧
       PreservesFiniteColimits (ModuleCat.extendScalars.{u, u, u + 1} ι.toRingHom) := by
   exact (coefficientComplexTensors_exact.{u, u + 1} l E L ι).2.2.2
 
-/-- Additivity of coefficient field extension.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- Additivity of coefficient field extension. -/
 noncomputable instance pointCoefficientFieldTensorAdditive :
     (ModuleCat.extendScalars.{u, u, u + 1} ι.toRingHom).Additive :=
   (pointCoefficientFieldTensor_exact l E L ι).1
 
-/-- Coefficient field extension preserves kernels.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- Coefficient field extension preserves kernels. -/
 noncomputable instance pointCoefficientFieldTensorLimits :
     PreservesFiniteLimits (ModuleCat.extendScalars.{u, u, u + 1} ι.toRingHom) :=
   (pointCoefficientFieldTensor_exact l E L ι).2.1
 
-/-- Coefficient field extension preserves cokernels.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- Coefficient field extension preserves cokernels. -/
 noncomputable instance pointCoefficientFieldTensorColimits :
     PreservesFiniteColimits (ModuleCat.extendScalars.{u, u, u + 1} ι.toRingHom) :=
   (pointCoefficientFieldTensor_exact l E L ι).2.2
 
-/-- Termwise coefficient field extension on derived vector spaces.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- Termwise coefficient field extension on derived vector spaces. -/
 noncomputable abbrev pointCoefficientFieldDerivedTensor :=
   (ModuleCat.extendScalars.{u, u, u + 1} ι.toRingHom).mapDerivedCategory
 
-/-- Rationalization and finite extension commute by the actual balanced localization map.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension).
-Proof: send b tensor (a tensor n) to ba tensor (1 tensor n), where a is included
-in L. The inverse sends b tensor (x tensor n) to b*iota(x) tensor (1 tensor n).
-All nonzero O_E-elements are units in L, so denominators move across the tensor
-relation. These maps respect the balanced relations and are mutual inverses;
-their formulas commute with module morphisms and determine the map uniquely. -/
+/-- Rationalization and finite extension commute by the actual balanced localization map. -/
 theorem pointTensorRationalization_existsUnique :
     ∃! β : pointIntegralModuleTensor l E L ι ⋙ pointModuleRationalization l L ≅
         pointModuleRationalization l E ⋙ ModuleCat.extendScalars.{u, u, u + 1} ι.toRingHom,
@@ -883,8 +812,7 @@ theorem pointTensorRationalization_existsUnique :
               algebraMap (Padic.coefficientExtensionIntegers l E) E] n) := by
   exact coefficientComplexBeta_existsUnique.{u, u + 1} l E L ι
 
-/-- The canonical localization-tensor associator on module derived categories.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- The canonical localization-tensor associator on module derived categories. -/
 noncomputable def pointDerivedTensorRationalization :
     pointIntegralModuleDerivedTensor l E L ι ⋙ pointModuleDerivedRationalization l L ≅
       pointModuleDerivedRationalization l E ⋙ pointCoefficientFieldDerivedTensor l E L ι :=
@@ -901,33 +829,18 @@ section Constructible
 
 variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
 
-/-- The algebraic closure in the fixed finite-field datum is algebraically closed.
-Source: blueprint finite-field conventions
-(blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- The algebraic closure in the fixed finite-field datum is algebraically closed. -/
 noncomputable instance pointDatumIsAlgClosed : IsAlgClosed D.k :=
   IsAlgClosure.isAlgClosed D.k₀
 
-/-- The two recorded constructibility interfaces describe the same point objects.
-Source: blueprint order 1459 and the point's fixed finite-field datum
-(blueprint: lem-weil-point-sections-scalar-extension).
-Proof: both predicates require derived completeness of the same completed coefficient
-module complex. Identify their quotient reductions by the normalized change-of-rings
-counit on K-flat representatives. These identifications preserve constructibility
-and cohomological support. The support inclusion in Icc is exactly the pair of bounds
-in the finite-field interface, with the same interval for every positive exponent. -/
+/-- The two recorded constructibility interfaces describe the same point objects. -/
 theorem pointIntegralConstructible_iff
     (K : completedIntegralDerivedCategory l E (Spec (.of D.k)) D hl) :
     boundedConstructibleDerivedCompleteIntegral D l hl E (Spec (.of D.k)) K ↔
       sfIntegralConstructible l E (Spec (.of D.k)) K := by
   exact (constructible_iff_legacy l E (Spec (.of D.k)) D hl K).symm
 
-/-- The canonical completion comparison is invertible on the constructible integral category.
-Source: Bhatt--Scholze 3.4.12 and blueprint final paragraph
-(blueprint: lem-weil-point-sections-scalar-extension).
-Proof: the defining constructible predicate includes derived completeness. Its
-augmented reduction tower is the same strict tower as the unrestricted predicate:
-both units send x to 1 tensor x, and their product and cone maps agree. Apply
-lem-weil-finite-free-completed-scalar-comparison to this complete object. -/
+/-- The canonical completion comparison is invertible on the constructible integral category. -/
 theorem pointConstructibleCompletionComparison_isIso
     (K : completedIntegralDerivedCategory l E
             (Spec (.of D.k)) D hl)
@@ -950,8 +863,7 @@ theorem pointConstructibleCompletionComparison_isIso
       K hcomplete).1
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The actual completion comparison as an isomorphism on an integral constructible object.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- The actual completion comparison as an isomorphism on an integral constructible object. -/
 noncomputable def pointConstructibleCompletionIso
     (K : completedIntegralDerivedCategory l E
             (Spec (.of D.k)) D hl)
@@ -965,8 +877,7 @@ noncomputable def pointConstructibleCompletionIso
   asIso ((completedScalarComparison.{u, u} l E L ι
             (Spec (.of D.k))).app K)
 
-/-- Phi is precisely the inverse of sections of chi after the canonical sections-tensor map.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- Phi is precisely the inverse of sections of chi after the canonical sections-tensor map. -/
 noncomputable def pointSectionsScalarExtensionIso
     (K : completedIntegralDerivedCategory l E
             (Spec (.of D.k)) D hl)
@@ -981,8 +892,7 @@ noncomputable def pointSectionsScalarExtensionIso
     (pointCompletedDerivedSections D.k l L).mapIso
       (pointConstructibleCompletionIso l E L ι D hl K hK)).symm
 
-/-- The integral identity identification is completeness inverted followed by multiplication.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- The integral identity identification is completeness inverted followed by multiplication. -/
 noncomputable def pointIntegralScalarUnit
     (K : completedIntegralDerivedCategory l E
             (Spec (.of D.k)) D hl)
@@ -993,8 +903,7 @@ noncomputable def pointIntegralScalarUnit
   (pointConstructibleCompletionIso l E E (AlgHom.id ℚ_[l] E) D hl K hK).symm ≪≫
     (pointDerivedTensorUnit D.k l E).app K
 
-/-- Rational phi is integral phi tensored with L, followed by the balanced localization map.
-Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+/-- Rational phi is integral phi tensored with L, followed by the balanced localization map. -/
 noncomputable def pointRationalSectionsScalarExtensionIso
     (K : completedIntegralDerivedCategory l E
             (Spec (.of D.k)) D hl)

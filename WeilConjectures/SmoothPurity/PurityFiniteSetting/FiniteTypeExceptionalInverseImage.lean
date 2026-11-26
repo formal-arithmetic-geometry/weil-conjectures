@@ -44,12 +44,16 @@ public import WeilConjectures.Compactification.NagataCompactification
 
 /-! # Finite-level constructible exceptional inverse image
 
-Source: blueprint sec-smooth-purity/sk-def-sf-operations,
-theorem-f-shriek-finite-coefficients (blueprint: theorem-f-shriek-finite-coefficients).
-
 The functor is the published comparison transport of the etale right adjoint.
 The Noetherian finite-type interface supplies its bounded-below instance without
 postulating an ambient pro-etale right adjoint.
+
+## Implementation details
+
+The proper part of a compactification is of finite type over a Noetherian scheme, so its fibre
+dimensions have a finite global bound by quasi-compactness. Proper torsion cohomology has
+amplitude at most twice this bound and open extension is exact; the adjunction and t-structure
+orthogonality then bound the right adjoint below.
 -/
 
 @[expose] public section
@@ -63,9 +67,7 @@ open scoped CategoryTheory.Functor
 
 namespace WeilConjectures.PurityFiniteSetting
 
-/-- Finiteness of the actual positive coefficient quotient, including its standard size lift.
-Source: blueprint finite coefficient setting (blueprint: theorem-f-shriek-finite-coefficients).
-Proof: use finiteness of O_E/(varpi^n) and transport along ULift. -/
+/-- Finiteness of the actual positive coefficient quotient, including its standard size lift. -/
 theorem finiteCoefficient (P : PurityFiniteSetting.{u}) : Finite P.Coefficient := by
   have : Finite P.Ring :=
     Padic.finite_coefficientExtensionRing P.coefficients.l P.extension P.level P.level_pos
@@ -73,13 +75,7 @@ theorem finiteCoefficient (P : PurityFiniteSetting.{u}) : Finite P.Coefficient :
 
 attribute [instance] finiteCoefficient
 
-/-- Bounded-below preservation for the etale right adjoint over a Noetherian target.
-Source: blueprint theorem-f-shriek-finite-coefficients, defining properties paragraph
-(blueprint: theorem-f-shriek-finite-coefficients).
-Proof: the proper part of a compactification is finite type over a Noetherian scheme.
-Its fibre dimensions have a finite global bound by quasi-compactness. Proper torsion
-cohomology has amplitude at most twice this bound; open extension is exact.
-The adjunction and t-structure orthogonality then bound the right adjoint below. -/
+/-- Bounded-below preservation for the etale right adjoint over a Noetherian target. -/
 theorem exceptionalBoundedBelow (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
     [IsNoetherian Y]
@@ -88,11 +84,7 @@ theorem exceptionalBoundedBelow (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     _root_.DerivedCategory.TStructure.t.plus ((Etale.rightDerivedUpperShriek Λ f).obj K) :=
   Etale.plus_rightDerivedUpperShriek_obj Λ f K hK
 
-/-- A finite-type scheme over a field is Noetherian.
-Source: blueprint theorem-f-shriek-finite-coefficients, initial setting
-(blueprint: theorem-f-shriek-finite-coefficients).
-Proof: fields are Noetherian, finite-type affine algebras are Noetherian, and a finite
-cover of the scheme by these affine spectra gives a Noetherian scheme. -/
+/-- A finite-type scheme over a field is Noetherian. -/
 theorem noetherian (P : PurityFiniteSetting.{u}) {T : Scheme.{u}}
     (a : T ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType a] [QuasiCompact a] :
     IsNoetherian T := by
@@ -101,28 +93,21 @@ theorem noetherian (P : PurityFiniteSetting.{u}) {T : Scheme.{u}}
   exact ⟨⟩
 
 /-- The actual finite-level constructible exceptional functor, with its required
-bounded-below interface supplied from the finite-type field setting.
-Source: blueprint theorem-f-shriek-finite-coefficients, finite-level displayed definition
-(blueprint: theorem-f-shriek-finite-coefficients). -/
+bounded-below interface supplied from the finite-type field setting. -/
 noncomputable def exceptional (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}}
     (f : X ⟶ Y) [HasCompactification f] (aY : Y ⟶ Spec (.of P.field.k))
     [LocallyOfFiniteType aY] [QuasiCompact aY] :=
   letI := P.noetherian aY
   ProEtale.rightDerivedUpperShriek P.Coefficient f
 
-/-- The relative dualizing object is the exceptional inverse image of the coefficient unit.
-Source: blueprint theorem-f-shriek-finite-coefficients and
-proposition-exceptional-inverse-image-smooth-morphism (blueprint:
-theorem-f-shriek-finite-coefficients). -/
+/-- The relative dualizing object is the exceptional inverse image of the coefficient unit. -/
 noncomputable def dualizing (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}}
     (f : X ⟶ Y) [HasCompactification f] (aY : Y ⟶ Spec (.of P.field.k))
     [LocallyOfFiniteType aY] [QuasiCompact aY] :=
   letI := P.noetherian aY
   ProEtale.dualizingComplex P.Coefficient f
 
-/-- The published counit, with the same finite-type field interface.
-Source: blueprint theorem-f-shriek-finite-coefficients, adjunction characterization
-(blueprint: theorem-f-shriek-finite-coefficients). -/
+/-- The published counit, with the same finite-type field interface. -/
 noncomputable def counit (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}}
     (f : X ⟶ Y) [HasCompactification f] (aY : Y ⟶ Spec (.of P.field.k))
     [LocallyOfFiniteType aY] [QuasiCompact aY]

@@ -10,11 +10,12 @@ public import WeilConjectures.SixFunctors.GeneratorReduction.GeneratorReductionS
 
 /-! # Recursion for integral expression comparisons
 
-Source: blueprint main-20261015, fix-prop-coherence.proof.md, coefficient-comparison
-sentence; the expression-tree refinement in the DAG
-(blueprint: lem-sf-integral-expression-recursion).
+We construct the coefficient comparisons of integral expressions recursively along the
+finite expression tree, together with their transpose under the reduction/limit adjunction.
 
-The comparison data below are the given primitive comparisons, restricted to the
+## Implementation details
+
+The comparison data are the given primitive comparisons, restricted to the
 published intermediate domains. All coefficient equalities live in the derived
 category of strict systems. No structural-generator coherence is included.
 -/
@@ -41,9 +42,7 @@ namespace ExpressionRecursion
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- A single unary constructor, with precisely the permitted arrow hypotheses.
-Source: fix-prop-coherence, expression-tree refinement
-(blueprint: lem-sf-integral-expression-recursion). -/
+/-- A single unary constructor, with precisely the permitted arrow hypotheses. -/
 inductive Unary (B : Scheme.{u}) : Over B → Over B → Type (u + 1) where
   | pull {U V : Over B} (f : U ⟶ V) (hs : IsSeparated f.left)
       (hft : LocallyOfFiniteType f.left) (hqc : QuasiCompact f.left) : Unary B V U
@@ -51,8 +50,7 @@ inductive Unary (B : Scheme.{u}) : Over B → Over B → Type (u + 1) where
   | shriek {U V : Over B} (j : U ⟶ V) (hj : IsOpenImmersion j.left)
       (hqc : QuasiCompact j.left) : Unary B U V
 
-/-- The actual system functor of a unary constructor.
-Source: fix-prop-coherence (blueprint: lem-sf-integral-expression-recursion). -/
+/-- The actual system functor of a unary constructor. -/
 def Unary.system (o : Operations l E) {B : Scheme.{u}} {U V : Over B} :
     Unary B U V → System l E U.left ⥤ System l E V.left
   | .pull f _ _ _ => IntegralSystemRealization.pull l E f.left
@@ -61,8 +59,7 @@ def Unary.system (o : Operations l E) {B : Scheme.{u}} {U V : Over B} :
     letI := hj
     Operations.shriek l E o j.left
 
-/-- The prescribed completed/integral interpretation of the same constructor.
-Source: fix-prop-coherence (blueprint: lem-sf-integral-expression-recursion). -/
+/-- The prescribed completed/integral interpretation of the same constructor. -/
 def Unary.integral {B : Scheme.{u}} {U V : Over B} :
     Unary B U V → Integral l E U.left ⥤ Integral l E V.left
   | .pull f _ _ _ => integralDerivedPullback l E f.left
@@ -72,9 +69,7 @@ def Unary.integral {B : Scheme.{u}} {U V : Over B} :
     ringedOpen l E j.left
 
 /-- The prescribed primitive realization map before restricting its domain.
-The actual inverse is used on the complete domain; its ambient value is irrelevant.
-Source: fix-prop-coherence, primitive comparison refinement
-(blueprint: lem-sf-integral-expression-recursion). -/
+The actual inverse is used on the complete domain; its ambient value is irrelevant. -/
 def Unary.primitiveHom (o : Operations l E) (model : RealizationModel l E o)
     {B : Scheme.{u}} {U V : Over B} (a : Unary B U V) (K : Integral l E U.left) :
     (coefficientSequenceLimit l E V.left).obj
@@ -94,9 +89,7 @@ def Unary.primitiveHom (o : Operations l E) (model : RealizationModel l E o)
 
 /-- The given natural primitive comparisons d_A and r_A, and their assumed whole-system
 transpose identities. The compactification comparison is pinned by the recorded
-Roos projections and finite scalar-adjunction mates, as in basic realization.
-Source: fix-prop-coherence, hypotheses of the expression-tree refinement
-(blueprint: lem-sf-integral-expression-recursion). -/
+Roos projections and finite scalar-adjunction mates, as in basic realization. -/
 structure Primitives (D : FiniteFieldDatum.{u}) (o : Operations l E) where
   model : RealizationModel l E o
   unary : ∀ {U V : Over (Spec (.of D.k))} (a : Unary _ U V)
@@ -144,9 +137,7 @@ structure Primitives (D : FiniteFieldDatum.{u}) (o : Operations l E) where
             ((calculus l E W.left).reduction.obj K.obj.1,
               (calculus l E W.left).reduction.obj K.obj.2))
 
-/-- Transport d_A across the actual counit, exactly as in the displayed definition of a_A.
-Source: fix-prop-coherence, unary counit substitution
-(blueprint: lem-sf-integral-expression-recursion). -/
+/-- Transport d_A across the actual counit, exactly as in the displayed definition of a_A. -/
 def unaryA {D : FiniteFieldDatum.{u}} {o : Operations l E}
     (d : Primitives l E D o) {U V : Over (Spec (.of D.k))} (a : Unary _ U V)
     [LocallyOfFiniteType U.hom] [QuasiCompact U.hom]
@@ -157,9 +148,7 @@ def unaryA {D : FiniteFieldDatum.{u}} {o : Operations l E}
     ((a.system l E o).map ((calculus l E U.left).adjunction.counit.app M))) ≫
       (d.unary a).hom.app ⟨(coefficientSequenceLimit l E U.left).obj M, h⟩
 
-/-- The two-input version, using the tensor of the two actual counits.
-Source: fix-prop-coherence, binary counit substitution
-(blueprint: lem-sf-integral-expression-recursion). -/
+/-- The two-input version, using the tensor of the two actual counits. -/
 def tensorA {D : FiniteFieldDatum.{u}} {o : Operations l E}
     (d : Primitives l E D o) (W : Over (Spec (.of D.k)))
     [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] (M N : System l E W.left)
@@ -175,17 +164,14 @@ def tensorA {D : FiniteFieldDatum.{u}} {o : Operations l E}
         (coefficientSequenceLimit l E W.left).obj N), h⟩
 
 /-- Full input-family natural realization comparisons. The finite expression can
-reuse any variable, including in both tensor branches.
-Source: fix-prop-coherence (blueprint: lem-sf-integral-expression-recursion). -/
+reuse any variable, including in both tensor branches. -/
 abbrev Comparisons (D : FiniteFieldDatum.{u}) (o : Operations l E) :=
   ∀ {I : Type u} [Finite I] {X : I → Over (Spec (.of D.k))}
     {W : Over (Spec (.of D.k))} (e : Expression _ I X W) (_g : e.geometric),
     e.realizationSource l E o ≅ e.realizationTarget l E o
 
 /-- Coefficient maps are constructed on the finite tree, beginning with identity.
-The compact-support abbreviation uses the same open/proper composite.
-Source: fix-prop-coherence, displayed recursion for r_V
-(blueprint: lem-sf-integral-expression-recursion). -/
+The compact-support abbreviation uses the same open/proper composite. -/
 def coefficientMap {D : FiniteFieldDatum.{u}} {o : Operations l E}
     (d : Primitives l E D o) {I : Type u} {X : I → Over (Spec (.of D.k))}
     {W : Over (Spec (.of D.k))} (e : Expression _ I X W) (g : e.geometric)
@@ -226,9 +212,7 @@ def coefficientMap {D : FiniteFieldDatum.{u}} {o : Operations l E}
           (Operations.shriek l E o c.i).map (coefficientMap d e g.2.2.2.2.2 K))
 
 /-- Read the root's two geometric hypotheses without imposing a constructor on its tree.
-This is just projection from the recorded recursive domain, by cases.
-Source: fix-prop-coherence, geometric domain
-(blueprint: lem-sf-integral-expression-recursion). -/
+This is just projection from the recorded recursive domain, by cases. -/
 abbrev geometricRoot {B : Scheme.{u}} {I : Type u} {X : I → Over B} {W : Over B}
     (e : Expression B I X W) (g : e.geometric) :
     LocallyOfFiniteType W.hom ∧ QuasiCompact W.hom :=
@@ -242,9 +226,7 @@ abbrev geometricRoot {B : Scheme.{u}} {I : Type u} {X : I → Over B} {W : Over 
 
 /-- The displayed leaf, unary and binary equations, recursively at every child.
 The existential domain proofs merely license d_A(L M); the maps themselves are
-specified by unaryA and tensorA. The compact-support constructor expands to S_p J_j.
-Source: fix-prop-coherence, tree induction
-(blueprint: lem-sf-integral-expression-recursion). -/
+specified by unaryA and tensorA. The compact-support constructor expands to S_p J_j. -/
 def Equations {D : FiniteFieldDatum.{u}} {o : Operations l E}
     (d : Primitives l E D o) (c : Comparisons l E D o)
     {I : Type u} [Finite I] {X : I → Over (Spec (.of D.k))} :
@@ -361,9 +343,7 @@ def Equations {D : FiniteFieldDatum.{u}} {o : Operations l E}
 
 /-- The coefficient recursion is natural on the entire input-family category.
 Each vertex is the composite of its given natural primitive map with the
-functorial image of its children's transformations; no completeness is used.
-Source: fix-prop-coherence, finite-tree coefficient recursion
-(blueprint: def-sf-integral-expression-recursion-data). -/
+functorial image of its children's transformations; no completeness is used. -/
 def coefficientTransformation {D : FiniteFieldDatum.{u}} {o : Operations l E}
     (d : Primitives l E D o) {I : Type u} {X : I → Over (Spec (.of D.k))}
     {W : Over (Spec (.of D.k))} (e : Expression _ I X W) (g : e.geometric) :
@@ -412,9 +392,7 @@ def coefficientTransformation {D : FiniteFieldDatum.{u}} {o : Operations l E}
 attribute [irreducible] coefficientTransformation
 
 /-- Transpose of the coefficient recursion under the actual reduction/limit adjunction.
-This is an explicit natural transformation, before any invertibility theorem.
-Source: fix-prop-coherence, counit substitution
-(blueprint: def-sf-integral-expression-recursion-data). -/
+This is an explicit natural transformation, before any invertibility theorem. -/
 @[irreducible] def transposeComparison {D : FiniteFieldDatum.{u}} {o : Operations l E}
     (d : Primitives l E D o) {I : Type u} {X : I → Over (Spec (.of D.k))}
     {W : Over (Spec (.of D.k))} (e : Expression _ I X W) (g : e.geometric) :

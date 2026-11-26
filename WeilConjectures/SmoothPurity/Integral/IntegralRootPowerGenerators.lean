@@ -10,7 +10,9 @@ import WeilConjectures.SmoothPurity.Integral.IntegralRootPowerLocalGeneration
 
 /-! # Local generation of integral root powers
 
-Source: Stacks, Modules on Sites, Tag 03EK, and coefficient-twist clause 3.
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EK
 -/
 
 @[expose] public noncomputable section
@@ -28,27 +30,7 @@ attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
 
 /-- Maps out of a root tensor power are determined by the prescribed scalar/root
 sections. The generator family G is arbitrary subject to its three recursion equations;
-thus this lemma introduces no replacement for the existing generator construction.
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/
-def-weil-frobenius-coefficient-twists.md, Tate-twist construction;
-expanded DAG clause 3; Stacks, Modules on Sites, Tag 03EK.
-(blueprint: lem-weil-integral-root-power-generators).
-Proof: in degree zero, the generators are all coefficient sections.
-In degree one, use the sheafification adjunction for the integral scalar extension.
-Tensor generation reduces equality to a scalar tensor a tensor x. Scalar linearity
-moves a to the target, leaving the root generator with scalar 1. The completed
-integral action restricts to the original discrete O_E action by its defining
-normalization, so this reduction also applies to completed-linear arrows.
-For degree d+2, the sheaf tensor is the sheafification of the sectionwise tensor
-product of degree d+1 and degree one. Locally every section of either factor is a
-finite sum of scalar multiples of its root generators. Pass to a common refinement
-of the two covers. Bilinearity expresses a pure tensor as a sum of the displayed
-nested root tensors, putting the product of the two scalars in its first factor.
-The induction hypothesis and the degree-one calculation prove equality there.
-Separatedness of the target sheaf descends equality from this cover. This proves
-local generation and the asserted extensionality simultaneously, without assuming
-that arbitrary sheaf sections globally lift to their tensor presheaf. The induction
-includes zero coefficients, zero root groups, and the empty scheme. -/
+thus this lemma introduces no replacement for the existing generator construction. -/
 theorem integralRootPower_hom_ext
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

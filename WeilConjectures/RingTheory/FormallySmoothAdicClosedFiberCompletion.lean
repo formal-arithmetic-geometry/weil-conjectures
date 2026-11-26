@@ -16,8 +16,23 @@ import WeilConjectures.RingTheory.FormallySmoothAdicRingEquiv
 
 /-! # The formally smooth closed fibre after completion
 
-Source: Stacks Project, Tag 07NQ, opening completion reduction; Tags 07ED and 0325.
-(blueprint: lem-weil-pbc-fs-closed-fibre-completion-transfer)
+For a local homomorphism of Noetherian local rings, formal smoothness of the closed fibre
+passes to the closed fibre of the induced map of maximal-ideal completions.
+
+## Implementation details
+
+Write `C = B ⧸ m_A B` and `n = m_B C`. Completion of `B → C` identifies `B̂ ⧸ (m_A B) B̂` with
+the `n`-adic completion `Ĉ` (Tag 0325), and commuting with the canonical maps shows that the
+image of the maximal ideal of `Â` generates `(m_A B) B̂`. The residue field isomorphism
+`A ⧸ m_A ≃ Â ⧸ m_Â` identifies the scalar structures. Formal smoothness of `C` passes to `Ĉ`
+(Tag 07ED) and is transported along these ring isomorphisms. No flatness of the original map
+is needed, and the edge cases where `A` is a field or `m_A B = 0` need no extra hypotheses.
+
+## References
+
+* [Stacks, Tag 07NQ], opening completion reduction
+* [Stacks, Tag 07ED]
+* [Stacks, Tag 0325]
 -/
 
 @[expose] public section
@@ -45,27 +60,7 @@ private theorem formallySmoothAdic_of_algEquiv
   simpa using he
 
 /-- Formal smoothness of the closed fibre passes to a map of maximal-ideal completions
-commuting with the canonical maps. No flatness of the original map is needed here.
-Source: Stacks Project, Tag 07NQ, opening reduction, and Tags 07ED and 0325.
-(blueprint: lem-weil-pbc-fs-closed-fibre-completion-transfer)
-
-Proof: Write mA and mB for the maximal ideals, C = B/mA B, and n = mB C.
-Locality gives mA B contained in mB, so C is a nonzero Noetherian local ring and
-n is its maximal ideal. Completion of the quotient map B -> C identifies
-Bhat/(mA B)Bhat with the n-adic completion Chat (Tag 0325). The maximal ideal
-of Ahat is mA Ahat; commuting with canonical maps shows its image in Bhat is
-(mA B)Bhat. Thus the closed fibre of the completed map is Chat. The residue
-field isomorphism A/mA -> Ahat/mAhat identifies its scalar structure with the
-original one: both send the class of a to the class of f(a) in Chat. Formal
-smoothness of C over A/mA passes to Chat by Tag 07ED. Its ideal of definition
-is n Chat, which is the image of the maximal ideal of Bhat under the displayed
-quotient isomorphism. Transport a lifting problem through the two ring
-isomorphisms, apply formal smoothness of Chat, then transport the lift back.
-The maps, ideal powers, square-zero condition, and reduction identity are all
-preserved by these isomorphisms. This gives exactly the stated lifting property.
-When A is a field the base completion is A itself. When mA B is zero the
-quotient-completion identification is the identity, so these edge cases require
-no additional hypotheses. -/
+commuting with the canonical maps. No flatness of the original map is needed. -/
 theorem formallySmoothAdic_closedFiber_completion
     (A : Type u) (B : Type v) [CommRing A] [CommRing B]
     [IsLocalRing A] [IsLocalRing B] [IsNoetherianRing A] [IsNoetherianRing B]

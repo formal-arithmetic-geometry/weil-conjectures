@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPu
 
 /-! # Homogeneous total-tensor generator calculations
 
-Source: Stacks Tags 03EL and 07A4.
-(blueprint: lem-pur-coefficient-total-tensor-map-generators).
+## References
+
+- Stacks Project, Tags 03EK, 03EL and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -111,14 +112,7 @@ private theorem generator_ι {W : Scheme.{u}}
         (proEtaleTensorPair W R (P.X p) (Q.X q) V x y) := by
   rfl
 
-/-- Total tensor maps act on homogeneous generators by applying the two input maps.
-Source: Stacks 03EK and 07A4
-(blueprint: lem-pur-coefficient-total-tensor-map-generators).
-Proof: precompose the total map with the inclusion of bidegree (p,q). The defining
-map of the totalization is tensorHom of the two component maps on this summand.
-Naturality of tensor sheafification sends the pure tensor to the pure tensor of
-its images. Apply the target summand inclusion. This calculation has no boundedness
-or flatness assumption and preserves the two degrees, hence introduces no sign. -/
+/-- Total tensor maps act on homogeneous generators by applying the two input maps. -/
 theorem coefficientTotalTensor_map_generator (W : Scheme.{u})
     (R : Sheaf (ProEt.topology W) CommRingCat.{u + 1})
     {P Q P' Q' : CochainComplex (proEtaleRingModules W R) ℤ}

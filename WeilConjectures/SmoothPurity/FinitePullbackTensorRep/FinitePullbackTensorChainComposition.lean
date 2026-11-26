@@ -30,8 +30,17 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
 /-! # Composition of the ordinary signed tensor comparison
 
-Source: Stacks 03EL, 07A4 and 00YV.
-(blueprint: lem-pur-finite-pullback-tensor-chain-composition).
+The ordinary signed total tensor comparison for pullbacks is compatible with the
+unit-normalized pullback compositor along a composite `h ≫ f`.
+
+## Implementation details
+
+The proof works at the level of chain maps on the explicit signed total complexes; no
+flatness, boundedness or derived localization is used.
+
+## References
+
+* [Stacks, Tags 03EL, 07A4 and 00YV]
 -/
 
 @[expose] public noncomputable section
@@ -401,30 +410,7 @@ private theorem total_composition_inv {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Z 
       simpa only [Category.assoc] using hm
     _ = _ := by simpa only [Category.assoc, Functor.comp_map] using hn
 
-/-- The ordinary total comparison respects the unit-normalized pullback compositor.
-Source: Stacks, Modules on Sites 03EL, Sites 00YV, and Cohomology on Sites 07A4
-(blueprint: lem-pur-finite-pullback-tensor-chain-composition).
-
-Proof: first work with two sheaves of modules. The defining unit-section formula
-for proEtaleOrdinaryTensorPullback sends the unit of a pure tensor to the tensor
-of its two units. The realization maps in moduleComp preserve precisely these
-adjunction-unit sections. The fixed-scalar compositor is the comparison of the
-composite adjunctions, and inserts their composite unit. Consequently both routes
-send a unit section of m tensor n to the tensor of the two iterated unit sections,
-with the same fibre-product identification of test objects. Apply the adjunction
-hom-equivalence to the two candidate maps out of composite pullback. Maps from
-the sheaf tensor are determined by pure tensors: the tensor universal property
-proves this before sheafification, and the sheafification adjunction proves it
-afterwards. Thus the two module maps agree. Invert this square. For complexes,
-precompose in degree k with each source direct-sum injection indexed by i+j=k.
-The total comparison acts on that summand by the inverse ordinary module
-comparison followed by the pullback of its inclusion. The termwise compositor
-is moduleComp in each degree. The inverse module square and naturality of
-moduleComp on the inclusion identify both summand maps. Coproduct and complex
-morphism extensionality prove the inverse total square; cancellation of the
-three total comparison isomorphisms gives the stated equation. The existing
-chain maps already respect the signed differentials.
-No flatness, boundedness or derived localization is used. -/
+/-- The ordinary total comparison respects the unit-normalized pullback compositor. -/
 theorem chain_composition {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Z ⟶ X) (n : ℕ)
     (P Q : CochainComplex (normalizedDVRModules l E Y n) ℤ) :
     comparison l E (h ≫ f) n P Q ≫

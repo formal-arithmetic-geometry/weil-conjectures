@@ -10,7 +10,13 @@ public import WeilConjectures.Algebra.Homology.HomComplexComponents
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Binary coordinates in the product Hom complex
-Source: Stacks 0A8X and blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraph 1.
+
+We construct the signed finite-coordinate isomorphism on the terms of the product Hom
+complex with a two-term coefficient complex.
+
+## References
+
+* [Stacks, Tag 0A8X]
 -/
 
 @[expose] public noncomputable section
@@ -21,9 +27,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 
 namespace CategoryTheory.Limits
 
-/-- Products commute with binary biproducts, expressed using arbitrary product fans.
-Source: the product universal property, Stacks 0A8X.
-(blueprint: lem-sf-two-term-hom-coordinates). -/
+/-- Products commute with binary biproducts, expressed using arbitrary product fans. -/
 def productBinaryCoordinates
     {C : Type u} [Category.{v} C] [Preadditive C] [HasBinaryBiproducts C]
     {ι : Type w} {A B N : ι → C} (cA : Fan A) (cB : Fan B) (cN : Fan N)
@@ -109,8 +113,7 @@ local instance twoTermHomCoordinatesLocal1 :
 local instance twoTermHomCoordinatesLocal2 : HasBinaryBiproducts (Modules.{t, u} Y R) :=
   HasBinaryBiproducts.of_hasBinaryProducts
 
-/-- Additivity in the target of internal Hom, from sectionwise composition.
-Source: Stacks 03EO (blueprint: lem-sf-two-term-hom-coordinates). -/
+/-- Additivity in the target of internal Hom, from sectionwise composition. -/
 theorem twoTermHomAdditive (M : Modules.{t, u} Y R) :
     ((SheafOfModules.homFunctor R).obj (op M)).Additive where
   map_add := by
@@ -125,18 +128,14 @@ local instance twoTermHomCoordinatesLocal3 (M : Modules.{t, u} Y R) :
     PreservesBinaryBiproducts ((SheafOfModules.homFunctor R).obj (op M)) :=
   preservesBinaryBiproducts_of_preservesBinaryProducts _
 
-/-- The involution multiplying a module by the parity sign.
-Source: Stacks 0A8X, signs in the Hom complex.
-(blueprint: lem-sf-two-term-hom-coordinates). -/
+/-- The involution multiplying a module by the parity sign. -/
 def parityIso (M : Modules.{t, u} Y R) (p : ℤ) : M ≅ M where
   hom := p.negOnePow • 𝟙 M
   inv := p.negOnePow • 𝟙 M
   hom_inv_id := by simp [Linear.comp_units_smul, smul_smul]
   inv_hom_id := by simp [Linear.comp_units_smul, smul_smul]
 
-/-- The component coordinate isomorphism, with its parity correction.
-Source: the finite-free calculation, Stacks 0A8X.
-(blueprint: lem-sf-two-term-hom-coordinates). -/
+/-- The component coordinate isomorphism, with its parity correction. -/
 def twoTermHomComponentIso
     (P I Q : CochainComplex (Modules.{t, u} Y R) ℤ)
     (hzero : ∀ k : ℤ, k ≠ -1 → k ≠ 0 → IsZero (Q.X k))
@@ -181,9 +180,7 @@ theorem twoTermHomComponentIso_hom_snd
   erw [biprod.lift_snd]
 
 /-- The signed finite-coordinate isomorphism on the target Hom term. Only products and
-binary products are interchanged; no infinite coproduct passes through a product.
-Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraph 1; Stacks 0A8X.
-(blueprint: lem-sf-two-term-hom-coordinates). -/
+binary products are interchanged; no infinite coproduct passes through a product. -/
 def twoTermHomIso
     (P I Q : CochainComplex (Modules.{t, u} Y R) ℤ)
     (hzero : ∀ k : ℤ, k ≠ -1 → k ≠ 0 → IsZero (Q.X k))

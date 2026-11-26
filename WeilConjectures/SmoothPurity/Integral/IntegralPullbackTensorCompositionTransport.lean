@@ -10,15 +10,15 @@ public import Mathlib.CategoryTheory.NatIso
 
 /-! # Transport of a system composition law along fully faithful reductions
 
-Source: Stacks 07A4 and 0941; the transport step of the reduced integral
-pullback/tensor composition equation
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced).
-
 Integral pullbacks and tensors are related to system pullbacks and tensors by
 natural comparisons with a reduction functor. If the integral tensor comparisons
 are the reductions of the system comparisons conjugated by these natural
 comparisons, and the integral compositor reduces to the system compositor, then
 the system composition law transports to the reduced integral composition law.
+
+## References
+
+* Stacks Project, Tags 07A4 and 0941
 -/
 
 @[expose] public section
@@ -34,9 +34,7 @@ variable {CY : Type u₁} {CX : Type u₂} {CZ : Type u₃} {DY : Type u₄} {DX
   [Category.{v₄} DY] [Category.{v₅} DX] [Category.{v₆} DZ]
 
 /-- A functor applied to a map of the form `F.map φ` is conjugate, through a natural
-comparison `F ⋙ R ≅ R' ⋙ P`, to `P` applied to the reduction of `φ`.
-Source: naturality of the comparison
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced). -/
+comparison `F ⋙ R ≅ R' ⋙ P`, to `P` applied to the reduction of `φ`. -/
 theorem map_map_eq_of_comparison {A B D D' : Type*} [Category A] [Category B]
     [Category D] [Category D'] {F : A ⥤ B} {R : B ⥤ D'} {R' : A ⥤ D} {P : D ⥤ D'}
     (β : F ⋙ R ≅ R' ⋙ P) {M N : A} (φ : M ⟶ N) :
@@ -52,13 +50,7 @@ reduction of the integral composition law.
 The data are reductions `RW`, integral pullbacks `F`, system pullbacks `P`, integral
 and system tensors `T` and `S`, comparisons `β` of pullbacks and `γ` of tensors with
 reduction, system tensor comparisons `σ`, the system compositor `a`, the integral
-compositor `c` and integral tensor comparisons `κ`.
-Source: Stacks 07A4 and 0941
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced).
-Proof: expand every reduced integral map through its natural comparison. Replace the
-reduction of `c` using its compatibility with `a`, apply the system composition law,
-and move `a`, `β_h` and `σ_h` across the remaining maps by naturality. The two tensor
-comparisons `γ_X` cancel. -/
+compositor `c` and integral tensor comparisons `κ`. -/
 theorem reducedPullbackTensorComposition_of_systemLaw
     (RY : CY ⥤ DY) (RX : CX ⥤ DX) (RZ : CZ ⥤ DZ)
     (Ff : CY ⥤ CX) (Fh : CX ⥤ CZ) (Fhf : CY ⥤ CZ)
@@ -127,10 +119,7 @@ Let `μ : F ≅ R_Y ⋙ P' ⋙ L_X` and `t_W : T_W ≅ (R_W × R_W) ⋙ S_W ⋙ 
 through right adjoints `L_W` with counits `ε_W`, and let `σ` be a system comparison for `P'`.
 The reduction of the composite comparison `κ` built from these data, with the counits
 inverted at the system level, is the conjugate of `σ` (transported along `b : P' ≅ P`) by
-the comparisons `β` and `γ` defined from `μ`, `t` and the counits.
-Source: Stacks 0941 (blueprint: lem-pur-pullback-tensor-integral-composition-reduced).
-Proof: by naturality of the counit, the reduction of a total limit `L_X(ψ)` is `ψ`
-conjugated by counits; the counits then assemble with `μ` and `t` into `β` and `γ`. -/
+the comparisons `β` and `γ` defined from `μ`, `t` and the counits. -/
 theorem reduction_limitConjugate_eq {AY AX DY DX : Type*} [Category AY] [Category AX]
     [Category DY] [Category DX]
     (RY : AY ⥤ DY) (RX : AX ⥤ DX) (LY : DY ⥤ AY) (LX : DX ⥤ AX)

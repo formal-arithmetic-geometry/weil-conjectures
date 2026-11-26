@@ -16,7 +16,19 @@ import Mathlib.RingTheory.KrullDimension.Regular
 /-!
 # Kollár's alternatives after a regular element
 
-Source: Stacks Project, Algebra, Tag 0BHZ, the two subcases following the choice of y.
+If `x` is a regular element of the maximal ideal `m` of a Noetherian local ring `R` and `m` is
+associated to `R/xR`, then either `R` is regular of dimension one or `R` has a nontrivial finite
+extension of the kind in Kollár's dichotomy.
+
+## Implementation details
+
+Choose `y ∉ xR` with `y m ⊆ xR`. If `y m ⊆ x m`, the subalgebra of `R_x` stabilizing the image
+of `m` is the finite extension. Otherwise `y t = x` for some `t ∈ m`, which forces `m = (t)`, and
+`R` is regular of dimension one.
+
+## References
+
+* [Stacks, Tag 0BHZ]
 -/
 
 @[expose] public section
@@ -25,24 +37,10 @@ universe u v
 
 namespace IsLocalRing
 
-/-- Source: Stacks Project, Algebra, Lemma Tag 0BHZ, fourth and fifth proof paragraphs.
-(blueprint: lem-weil-pbc-kollar-regular-element-alternatives).
-
-Proof: The associated-prime hypothesis supplies a nonzero class of y modulo xR whose
-annihilator is the maximal ideal. Thus y is outside xR and y m is contained in xR.
-If y m is contained in x m, construct the subalgebra of R localized at x that
-preserves the image of m. Multiplication by x injects this subalgebra into the
-finite image of m, proving its finiteness over R. It contains y/x, so R does not
-surject onto it, while regularity of x makes the map injective. The image of m
-is already an ideal of the subalgebra, giving the cokernel condition with n = 1.
-The image of x acts injectively, so m cannot be the annihilator of an element.
-Lift this explicitly constructed subalgebra to Type (max u v).
-Otherwise choose t in m with yt = xu for a unit u, and replace t by u inverse times t.
-Then yt = x. Regularity of x implies regularity of y. For every t' in m, write yt' = xs;
-cancelling y gives t' = ts, hence m = (t). The dimension is at most one by the height
-theorem. Quotienting by the regular element x drops the dimension by one; since
-R/(x) is nonzero, its dimension is nonnegative, so R has dimension at least one.
-Thus the dimension is one, and the one generator of m proves that R is regular local. -/
+/-- If `x` is a regular element of the maximal ideal `m` and `m` is associated to `R/xR`, then
+`R` is a regular local ring of dimension one, or there is a finite, nonbijective ring map
+`R → S` with kernel and cokernel killed by a power of `m` such that `m` is not the annihilator
+of an element of `S`. -/
 theorem kollar_regular_element_alternatives (R : Type u)
     [CommRing R] [IsLocalRing R] [IsNoetherianRing R]
     (x : R) (hx : x ∈ maximalIdeal R) (hr : IsSMulRegular R x)

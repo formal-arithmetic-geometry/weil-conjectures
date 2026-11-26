@@ -10,7 +10,7 @@ public import WeilConjectures.WeilSheaf.Category
 /-!
 # The derived Frobenius isomorphism of a Weil complex
 
-Blueprint `definition-weil-structure`: an object `K` of the Weil category carries, in addition
+An object `K` of the Weil category carries, in addition
 to its underlying complex `For(K)`, the derived Frobenius isomorphism
 `θ_K : Fr_X^* For(K) ≅ For(K)`, represented termwise. Here `For`
 (`AlgebraicGeometry.WeilComplex.forget`) is induced by the forgetful functor from pro-étale Weil
@@ -56,15 +56,10 @@ open Endofunctor
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `definition-weil-structure`: Weil sheaf and Weil complex.
-
-The derived Frobenius isomorphism `θ_K : Fr_X^* For(K) ≅ For(K)` of a Weil complex `K`, natural
+/-- The derived Frobenius isomorphism `θ_K : Fr_X^* For(K) ≅ For(K)` of a Weil complex `K`, natural
 in `K`: the isomorphism induced on derived categories by the structure isomorphisms
 `φ : Fr_X^* F ≅ F` of pro-étale Weil sheaves, through
-`D(Fr_X^*) ∘ D(forget) ≅ D(Fr_X^* ∘ forget) ≅ D(forget)`. Here `Fr_X^*`
-(`AlgebraicGeometry.WeilSheaf.frobeniusPullback`) is the pullback along the geometric Frobenius
-`g_X` of the blueprint; it is exact, so its derived functor `Lg_X^*` is the functor it induces on
-derived categories. -/
+`D(Fr_X^*) ∘ D(forget) ≅ D(Fr_X^* ∘ forget) ≅ D(forget)`. -/
 noncomputable def frobeniusIso :
     forget (k₀ := k₀) (l := l) (X := X) ⋙ (WeilSheaf.frobeniusPullback k₀ l X).mapDerivedCategory ≅
       forget (X := X) :=

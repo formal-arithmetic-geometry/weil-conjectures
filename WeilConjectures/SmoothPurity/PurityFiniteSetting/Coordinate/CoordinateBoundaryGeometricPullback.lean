@@ -14,13 +14,16 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Geometric pullback of the actual coordinate Kummer boundary
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-a1-kummer,
-thm-pur-affine-line-orientation.proof.md, geometric-fibre sentence; Milne,
-Lectures on Etale Cohomology, Theorem 9.4 and Example 9.5
-(blueprint: lem-pur-coordinate-boundary-geometric-pullback).
+The geometric-fibre step of the affine-line orientation: the coordinate Kummer boundary is
+compatible with pullback to a geometric fibre.
 
 The section-class conversion below derives evaluation of the actual constant unit.
 All coefficient maps are the pure-tensor maps of the affine-line datum.
+
+## References
+
+* [J. S. Milne, *Lectures on Étale Cohomology*, Section 9, Theorem 9.4 and Example 9.5]
+* [Stacks Project, Tag 08FI]
 -/
 
 @[expose] public noncomputable section
@@ -31,9 +34,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace CategoryTheory.Abelian.Ext
 
 /-- The coefficient-adjusted degree-one pullback identity, with abstract categories
-so the two Yoneda compositions share their category instances without re-expansion.
-Source: Kummer naturality and coefficient extension
-(blueprint: lem-pur-coordinate-boundary-geometric-pullback). -/
+so the two Yoneda compositions share their category instances without re-expansion. -/
 def coordinatePullbackIdentity
     {C : Type v} [Category.{w} C] [Abelian C] [IsGrothendieckAbelian.{u} C]
     {D : Type v'} [Category.{w'} D] [Abelian D] [IsGrothendieckAbelian.{u'} D]
@@ -44,9 +45,7 @@ def coordinatePullbackIdentity
     (Ext.mk₀ a).comp y (zero_add 1)
 
 /-- Evaluation on a degree-one Ext class as a morphism under an additive functor.
-The degree-zero derived unit and canonical shifts specify the morphism.
-Source: Milne, Theorem 9.4, Ext description
-(blueprint: lem-pur-coordinate-boundary-geometric-pullback). -/
+The degree-zero derived unit and canonical shifts specify the morphism. -/
 def coordinateSectionMap
     {C : Type v} [Category.{w} C] [Abelian C] [HasExt.{u} C]
     [HasDerivedCategory.{u'} C] [EnoughInjectives C] [HasKInjectiveResolutions C]
@@ -69,8 +68,7 @@ end CategoryTheory.Abelian.Ext
 namespace WeilConjectures.PurityFiniteSetting
 
 /-- Evaluation of a derived module class on the constant unit, using the canonical
-right-derived comparison and shift maps. Source: Milne, Theorem 9.4, Ext description
-(blueprint: lem-pur-coordinate-boundary-geometric-pullback). -/
+right-derived comparison and shift maps. -/
 def coordinateClassSection (P : PurityFiniteSetting.{u})
     (T : Scheme.{u}) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))
     (c : Abelian.Ext (P.constantEtale T) F 1) :
@@ -82,9 +80,7 @@ def coordinateClassSection (P : PurityFiniteSetting.{u})
       (((constantSheafAdj T.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)
         (Scheme.Etale.isTerminalMkId T)).homEquiv _ _ (𝟙 (P.constantEtale T))) 1)
 
-/-- The canonical open evaluation comparison, derived from localization of the etale site.
-Source: Milne, Section 9, restriction to the complementary open
-(blueprint: lem-pur-coordinate-boundary-geometric-pullback). -/
+/-- The canonical open evaluation comparison, derived from localization of the etale site. -/
 def coordinateOpenSectionsIso (P : PurityFiniteSetting.{u})
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) j ⋙
@@ -101,26 +97,22 @@ def coordinateOpenSectionsIso (P : PurityFiniteSetting.{u})
        NatIso.ofComponents (fun G ↦ G.obj.mapIso e.op)
          (fun φ ↦ (φ.hom.naturality e.inv.op).symm)).symm
 
-/-- The zero section is the published affine-space closed immersion.
-Source: affine-line datum (blueprint: lem-pur-coordinate-boundary-geometric-pullback). -/
+/-- The zero section is the published affine-space closed immersion. -/
 instance coordinateBoundaryZeroClosed (Y : Scheme.{u}) : IsClosedImmersion (zeroSection Y) :=
   inferInstanceAs (IsClosedImmersion (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y))
 
-/-- The coordinate open is the actual basic-open immersion.
-Source: affine-line datum (blueprint: lem-pur-coordinate-boundary-geometric-pullback). -/
+/-- The coordinate open is the actual basic-open immersion. -/
 instance coordinateBoundaryOpen (Y : Scheme.{u}) : IsOpenImmersion (openImmersion Y) :=
   inferInstanceAs (IsOpenImmersion ((Line Y).basicOpen (coordinate Y)).ι)
 
-/-- The ordinary degree-zero etale coefficient complex.
-Source: affine-line datum (blueprint: lem-pur-coordinate-boundary-geometric-pullback). -/
+/-- The ordinary degree-zero etale coefficient complex. -/
 def coordinateEtaleInput (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) (T : Scheme.{u}) :
     DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)) :=
   (DerivedCategory.Plus.singleFunctor
     (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)) 0).obj (P.twistEtale h T)
 
-/-- The exact small pro-etale image of the ordinary input.
-Source: affine-line datum (blueprint: lem-pur-coordinate-boundary-geometric-pullback). -/
+/-- The exact small pro-etale image of the ordinary input. -/
 def coordinateProInput (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) (T : Scheme.{u}) :
     DerivedCategory.Plus
@@ -128,9 +120,7 @@ def coordinateProInput (P : PurityFiniteSetting.{u})
   (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) T).mapDerivedCategoryPlus.obj
     (P.coordinateEtaleInput h T)
 
-/-- Canonical bounded-below derived localization, with no finiteness assumption on X.
-Source: Milne, Section 9; Stacks 08FI
-(blueprint: lem-pur-coordinate-boundary-geometric-pullback). -/
+/-- Canonical bounded-below derived localization, with no finiteness assumption on X. -/
 def coordinateOpenDerivedIso (P : PurityFiniteSetting.{u})
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) j).mapDerivedCategoryPlus ⋙
@@ -146,9 +136,7 @@ def coordinateOpenDerivedIso (P : PurityFiniteSetting.{u})
 
 /-- Read the actual etale coordinate class as evaluation on the complement object.
 The open coefficient inverse is the inverse of the pure-tensor pullback map, and the
-open-site identification is the unique isomorphism over X.
-Source: Milne, Theorem 9.4; blueprint affine-line geometric-fibre sentence
-(blueprint: lem-pur-coordinate-boundary-geometric-pullback). -/
+open-site identification is the unique isomorphism over X. -/
 def coordinateEtaleOpenClass (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) (Y : Scheme.{u})
     (a : Y ⟶ Spec (CommRingCat.of P.field.k))
@@ -188,9 +176,7 @@ def coordinateEtaleOpenClass (P : PurityFiniteSetting.{u})
 
 /-- Normalized data for the coordinate boundary on the two sites. The complement is
 identified over the line, both boundaries have the snake sign, and both Hom
-identifications have the evaluation-at-one normalization of supportedHom_pullback.
-Source: Milne, Theorem 9.4 and Example 9.5; blueprint geometric-fibre sentence
-(blueprint: lem-pur-coordinate-boundary-geometric-pullback). -/
+identifications have the evaluation-at-one normalization of supportedHom_pullback. -/
 structure CoordinateBoundaryModel (P : PurityFiniteSetting.{u}) (Y : Scheme.{u}) where
   complementIso : Scheme.Etale.mk (openImmersion Y) ≅
     Scheme.Etale.mk (zeroSection Y).openComplement.ι
@@ -206,9 +192,7 @@ structure CoordinateBoundaryModel (P : PurityFiniteSetting.{u}) (Y : Scheme.{u})
   chiPro : (proEtaleSupportHomPair P (zeroSection Y)).Identification
 
 /-- The pro-etale open class is the canonical comparison image of the ordinary
-Kummer class, through the actual root-tensor coefficient identification.
-Source: affine-line datum, final comparison paragraph
-(blueprint: lem-pur-coordinate-boundary-geometric-pullback). -/
+Kummer class, through the actual root-tensor coefficient identification. -/
 def CoordinateBoundaryModel.openProClass (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) {Y : Scheme.{u}} (D : CoordinateBoundaryModel P Y)
     (a : Y ⟶ Spec (CommRingCat.of P.field.k)) :
@@ -220,8 +204,7 @@ def CoordinateBoundaryModel.openProClass (P : PurityFiniteSetting.{u})
     (Scheme.Etale.mk (zeroSection Y).openComplement.ι) 1).app
       (P.coordinateEtaleInput h (Line Y)) (P.coordinateEtaleOpenClass h Y a D.complementIso)
 
-/-- The actual ordinary supported coordinate boundary, not a chosen generator.
-Source: Milne, Theorem 9.4 (blueprint: lem-pur-coordinate-boundary-geometric-pullback). -/
+/-- The actual ordinary supported coordinate boundary, not a chosen generator. -/
 def CoordinateBoundaryModel.alphaEtale (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) {Y : Scheme.{u}} (D : CoordinateBoundaryModel P Y)
     (a : Y ⟶ Spec (CommRingCat.of P.field.k)) :
@@ -229,24 +212,19 @@ def CoordinateBoundaryModel.alphaEtale (P : PurityFiniteSetting.{u})
   (D.boundaryEtale 1).app ⟨P.coordinateEtaleInput h (Line Y), trivial⟩
     (P.coordinateEtaleOpenClass h Y a D.complementIso)
 
-/-- The same supported boundary on the small pro-etale site, with the same sign.
-Source: Milne, Theorem 9.4; blueprint site refinement
-(blueprint: lem-pur-coordinate-boundary-geometric-pullback). -/
+/-- The same supported boundary on the small pro-etale site, with the same sign. -/
 def CoordinateBoundaryModel.alphaPro (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) {Y : Scheme.{u}} (D : CoordinateBoundaryModel P Y)
     (a : Y ⟶ Spec (CommRingCat.of P.field.k)) :
     (proEtaleSupportHomPair P (zeroSection Y)).group (P.coordinateProInput h (Line Y)) 2 :=
   (D.boundaryPro 1).app ⟨P.coordinateProInput h (Line Y), trivial⟩ (D.openProClass P h a)
 
-/-- The existing affine-space map, with domain and codomain named by the datum.
-Source: affine-line base change
-(blueprint: lem-pur-coordinate-boundary-geometric-pullback). -/
+/-- The existing affine-space map, with domain and codomain named by the datum. -/
 def coordinateLineMap {T Y : Scheme.{u}} (g : T ⟶ Y) : Line T ⟶ Line Y :=
   AffineSpace.map (ULift.{u} (Fin 1)) g
 
 /-- The etale coefficient pullback, using the single-complex and root-tensor maps.
-This helper is defined for every scheme morphism, including non-finite-type ones.
-Source: affine-line datum (blueprint: lem-pur-coordinate-boundary-geometric-pullback). -/
+This helper is defined for every scheme morphism, including non-finite-type ones. -/
 def coordinateEtaleCoefficientPullback (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) {T S : Scheme.{u}} (f : T ⟶ S) :
     (Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) f).mapDerivedCategoryPlus.obj
@@ -255,9 +233,7 @@ def coordinateEtaleCoefficientPullback (P : PurityFiniteSetting.{u})
     (Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) f) 0).hom.app (P.twistEtale h S) ≫
       (DerivedCategory.Plus.singleFunctor _ 0).map (P.twistEtalePullback h f)
 
-/-- The pro-etale coefficient map, through the canonical comparison of inverse images.
-Source: affine-line datum, site comparison
-(blueprint: lem-pur-coordinate-boundary-geometric-pullback). -/
+/-- The pro-etale coefficient map, through the canonical comparison of inverse images. -/
 def coordinateProCoefficientPullback (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) {T S : Scheme.{u}} (f : T ⟶ S) :
     (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) f).mapDerivedCategoryPlus.obj
@@ -278,9 +254,7 @@ variable {A : Type (u + 1)} [CommRing A] {S T : SupportHomPair A}
   [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
 
 /-- Derived support pullback followed by the specified coefficient identification.
-This uses Transport.derivedMap, whose kernel inclusion fixes the underived pullback.
-Source: Milne, Section 9, functoriality of supported sections
-(blueprint: lem-pur-coordinate-boundary-geometric-pullback). -/
+This uses Transport.derivedMap, whose kernel inclusion fixes the underived pullback. -/
 def Transport.coefficientGroupMap (e : Transport S T B L adj)
     {K : DerivedCategory.Plus (Sheaf S.topology (ModuleCat.{u + 1} A))}
     {K' : DerivedCategory.Plus (Sheaf T.topology (ModuleCat.{u + 1} A))}
@@ -291,9 +265,7 @@ def Transport.coefficientGroupMap (e : Transport S T B L adj)
       (ModuleCat.{u + 1} A) T.restriction a).map b
 
 /-- Exact inverse image of the derived Hom, precomposed with c inverse and then
-postcomposed with the coefficient comparison and its canonical shift.
-Source: Milne, Ext description and closed exchange
-(blueprint: lem-pur-coordinate-boundary-geometric-pullback). -/
+postcomposed with the coefficient comparison and its canonical shift. -/
 def Transport.coefficientHomMap (e : Transport S T B L adj)
     {K : DerivedCategory.Plus (Sheaf S.topology (ModuleCat.{u + 1} A))}
     {K' : DerivedCategory.Plus (Sheaf T.topology (ModuleCat.{u + 1} A))}
@@ -301,9 +273,7 @@ def Transport.coefficientHomMap (e : Transport S T B L adj)
     (f : S.derivedHom K a) : T.derivedHom K' a :=
   e.homMap K a f ≫ (DerivedCategory.Plus.ι.map b)⟦a⟧'
 
-/-- The two coefficient-adjusted compatibility equalities for specified classes.
-Source: Milne, Theorem 9.4 and Ext description
-(blueprint: lem-pur-coordinate-boundary-geometric-pullback). -/
+/-- The two coefficient-adjusted compatibility equalities for specified classes. -/
 def Transport.CoefficientCompatible (e : Transport S T B L adj)
     (chi : S.Identification) (chi' : T.Identification)
     {K : DerivedCategory.Plus (Sheaf S.topology (ModuleCat.{u + 1} A))}
@@ -318,17 +288,14 @@ end AlgebraicGeometry.SupportHomPair
 namespace WeilConjectures.PurityFiniteSetting
 
 /-- The ordinary etale model of the coordinate class, with the unchanged exponent
-and pure-tensor coefficient morphism of the datum.
-Source: affine-line datum (blueprint: lem-pur-coordinate-boundary-geometric-pullback). -/
+and pure-tensor coefficient morphism of the datum. -/
 def coordinateEtaleKummer (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) (Y : Scheme.{u})
     (a : Y ⟶ Spec (CommRingCat.of P.field.k)) :=
   P.kummerEtale h (Punctured Y)
     (P.exponent_isUnit (Punctured Y) (puncturedProjection Y ≫ a)) (coordinateUnit Y)
 
-/-- Ordinary and pro-etale pullback of the actual coordinate Kummer classes.
-Source: affine-line datum and its geometric fibre
-(blueprint: lem-pur-coordinate-boundary-geometric-pullback). -/
+/-- Ordinary and pro-etale pullback of the actual coordinate Kummer classes. -/
 def CoordinateKummerPullback (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) {T Y : Scheme.{u}} (g : T ⟶ Y)
     (a : Y ⟶ Spec (CommRingCat.of P.field.k)) : Prop :=
@@ -357,9 +324,7 @@ def CoordinateKummerPullback (P : PurityFiniteSetting.{u})
 
 /-- Both supported boundary equalities and both normalized derived-Hom equalities.
 The support maps are the recorded right-derived kernel maps, and the Hom maps use
-closed exchange inverses and canonical shifts.
-Source: Milne, Theorem 9.4; supported-Hom pullback
-(blueprint: lem-pur-coordinate-boundary-geometric-pullback). -/
+closed exchange inverses and canonical shifts. -/
 def CoordinateBoundaryPullback (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) {T Y : Scheme.{u}} (g : T ⟶ Y)
     (a : Y ⟶ Spec (CommRingCat.of P.field.k))
@@ -379,9 +344,7 @@ def CoordinateBoundaryPullback (P : PurityFiniteSetting.{u})
     (P.coordinateProCoefficientPullback h (coordinateLineMap g)) 2
     (D.alphaPro P h a) (D'.alphaPro P h (g ≫ a))
 
-/-- Site comparison of the actual boundary and its supported-Hom representative.
-Source: blueprint site refinement; normalized support comparison
-(blueprint: lem-pur-coordinate-boundary-geometric-pullback). -/
+/-- Site comparison of the actual boundary and its supported-Hom representative. -/
 def CoordinateBoundarySiteAgreement (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) {Y : Scheme.{u}}
     (a : Y ⟶ Spec (CommRingCat.of P.field.k)) (D : CoordinateBoundaryModel P Y)

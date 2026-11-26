@@ -14,7 +14,17 @@ import WeilConjectures.RingTheory.RegularLocalOfFlatWithRegularClosedFiber
 /-!
 # Regularity ascends along regular maps
 
-Source: Stacks Project, Algebra, Lemma 031E, and More on Algebra, proof of Lemma 07QI.
+A flat map with regular fibres from a regular ring to a Noetherian ring has regular target.
+
+## Implementation details
+
+At a prime `q` of `S` over `p`, the closed fibre of `R_p → S_q` is a localization of the fibre at
+`p`, hence regular, and Lemma 031E makes `S_q` regular. The zero ring needs no separate argument.
+
+## References
+
+* [Stacks, Tag 031E]
+* [Stacks, Tag 07QI] (proof)
 -/
 
 @[expose] public section
@@ -24,15 +34,7 @@ universe u v
 namespace RingHom
 
 /-- A flat map with regular fibres from a regular ring to a Noetherian ring has
-regular target. Source: Stacks Project, Algebra, Lemma 031E, applied at each
-prime, as in More on Algebra, proof of Lemma 07QI
-(blueprint: lem-weil-pbc-regular-map-ascent).
-
-Proof: At a prime q of S put p = q ∩ R. Regularity of R makes R_p regular local.
-The closed fibre of R_p → S_q is a prime localization of the fibre at p, hence
-regular local. The local map is flat. Lemma 031E makes S_q regular local.
-Noetherianity of S and this assertion for every q give regularity of S.
-The zero target has no primes, so the argument also covers the zero ring. -/
+regular target. -/
 theorem isRegularRing_of_flat_of_regular_fibers
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
     [IsRegularRing R] [IsNoetherianRing S]

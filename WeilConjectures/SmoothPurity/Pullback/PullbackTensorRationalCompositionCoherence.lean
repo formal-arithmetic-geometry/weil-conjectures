@@ -10,16 +10,22 @@ import WeilConjectures.SmoothPurity.Pullback.PullbackTensorIntegralCompositionCo
 import WeilConjectures.SmoothPurity.Canonical.CanonicalRationalPullbackTensorCompositionRightLocalization
 import WeilConjectures.SmoothPurity.Canonical.CanonicalRationalPullbackTensorCompositionLeftLocalization
 
-/-! Rational coefficient component of pullback/tensor composition coherence.
+/-!
+# Rational pullback/tensor composition coherence
 
-Source: Stacks 07A4 and 0941; this is the rational part of
-`lem-pur-pullback-tensor-composition-coherence`.
-(blueprint: lem-pur-pullback-tensor-composition-coherence)
+The rational coefficient component of the composition coherence of the pullback tensor
+comparison.
+
+## Implementation details
 
 Localize the normalized integral quotient-tower composition equation. The
 object and morphism normalization specifications identify every localized
 comparison and compositor with its prescribed rational construction. Bilinearity
 of localization identifies the tensor of the two compositor components.
+
+## References
+
+* [Stacks Project, Tags 07A4 and 0941]
 -/
 
 @[expose] public noncomputable section
@@ -38,9 +44,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Rational component of higher pullback/tensor composition coherence.
-Source: Stacks 07A4 and 0941; localization of the integral composition square.
-(blueprint: lem-pur-pullback-tensor-composition-coherence). -/
+/-- Rational component of higher pullback/tensor composition coherence. -/
 theorem pullbackTensorRationalCompositionCoherence {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (h : Z ⟶ X)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]

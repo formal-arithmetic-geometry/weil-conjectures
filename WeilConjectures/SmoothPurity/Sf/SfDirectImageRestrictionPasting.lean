@@ -9,7 +9,12 @@ public import WeilConjectures.SmoothPurity.Sf.SfDerivedDirectImage
 public import WeilConjectures.SmoothPurity.CompactSupportProperImageTower.CompactSupportProperImageTower
 import all WeilConjectures.TraceFormula.Compact.CompactSupportDirectImageRestrictionTransition
 
-/-! # Pasting the normalized direct-image coefficient squares -/
+/-! # Pasting the normalized direct-image coefficient squares
+
+## References
+
+* Stacks Project, Tags 0D6E and 0D6J.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -332,17 +337,7 @@ private def completePasting
     (completedComparison_identity l E p n) (completedComparison_identity l E p (n + 1))
 
 /-- The normalized direct-image restriction squares respect successive restriction.
-This is independent of a completed input K and of the coefficient reduction map.
-Source: Stacks Tags 0D6E and 0D6J.
-(blueprint: lem-sf-direct-image-restriction-pasting).
-Proof: the underived completed/finite and finite/finite restriction squares preserve
-sections by sfDirectImageRestrictionComparison_existsUnique and d.sections. Their
-pastes are consequently equal after inserting the restriction compositors. Resolve a
-finite-coefficient complex by a K-injective complex, and resolve every restricted
-complex once more. Apply d.normalization and the resolution characterization of
-sfDerivedRestrictionComparison to the two pastes. The common ordinary paste gives
-equal derived maps on these models. Cancel the resolution quasi-isomorphisms and
-extend by naturality to B. This never assumes restriction preserves K-injectives. -/
+This is independent of a completed input K and of the coefficient reduction map. -/
 theorem sfDirectImageRestriction_pasting
     (d : CompactSupportProperImageTower.DirectData l E p) (n : ℕ)
     (B : normalizedDVRDerived l E X n) :

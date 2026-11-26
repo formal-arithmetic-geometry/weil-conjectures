@@ -15,8 +15,11 @@ import WeilConjectures.SmoothPurity.Supporting.NativeProperDerivedPresentation
 
 /-! # Strict coefficient reduction for proper image
 
-Source: Stacks 07A6, 0941; Bhatt--Scholze 6.7.6--6.7.7.
-(blueprint: lem-strict-coefficient-proper-reduction). -/
+## References
+
+* Stacks Project, Tags 07A6, 0941, 03DI, 0D6E and 0B56.
+* Bhatt–Scholze, *The pro-étale topology for schemes*, 6.7.6–6.7.7.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -230,8 +233,7 @@ private theorem nativeProperReduction (f : X ⟶ Y)
   rw [reassoc_of% (hβ₀ K n)]
   rw [reassoc_of% hb', ← q.map_comp, ha']
 
-/-- Native evaluation in the finite ringed proper-image presentation.
-Source: Stacks 03DI, 0D6E (blueprint: lem-strict-coefficient-proper-reduction). -/
+/-- Native evaluation in the finite ringed proper-image presentation. -/
 def strictCoefficientProperEvaluation (f : X ⟶ Y) (n : ℕ) :
     ProEtale.VaryingRing.P (compactSupportSystemLevel l E)
         (compactSupportSystemQuotient l E) f ⋙
@@ -248,26 +250,7 @@ def strictCoefficientProperEvaluation (f : X ⟶ Y) (n : ℕ) :
     (Functor.rightDerivedFunctorNatIso (eqToIso (finiteDirectImage_eq l E n f))).symm
 
 /-- Reduction commutes with the proper factor as a map of whole strict systems,
-with the scalar-adjunction mate at every finite coordinate.
-
-Source: Stacks 07A6, 0B56, 0941; Bhatt--Scholze 6.7.6--6.7.7;
-the first arrow of the Isomorphism paragraph in the blueprint proof of
-`sk-prop-scalar-six-compact-support`.
-(blueprint: lem-strict-coefficient-proper-reduction).
-
-Proof: Use the canonical completed-to-quotient tensor/pullback square on the sequence site. Its
-inverse, transposed under the geometric pullback/direct-image adjunctions, defines the displayed map
-on the entire derived system. Compute using flat-term K-flat representatives for tensor and
-K-injectives for direct image; the canonical restriction/direct-image comparison is normalized on
-these replacements. Evaluation is exact, and its direct-image comparison is the mate of its pullback
-comparison. Pasting these adjunction squares identifies evaluation of the constructed mate with
-properComparison. The reductionModel and unit_projection equations fix the endpoint coordinate
-changes as reductionEvaluation followed by finiteReductionIso inverse. The adjunction triangle
-identities give the displayed equality. No isomorphism assertion for the proper scalar comparison is
-needed, and no equality is inferred from faithfulness of finite evaluation.
-The zero input, empty scheme, identity morphism and n=0 (exponent one) obey the same
-unit, tensor and quotient equations.
--/
+with the scalar-adjunction mate at every finite coordinate. -/
 theorem strictCoefficientProperReduction (f : X ⟶ Y)
     (SX : CoefficientDerivedSystemCalculus l E X)
     (SY : CoefficientDerivedSystemCalculus l E Y) :

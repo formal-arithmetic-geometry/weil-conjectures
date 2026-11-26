@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.SixFunctors.Etale.Derived.Point
 import Mathlib.RingTheory.Finiteness.Cardinality
 
-/-! Source: Weil blueprint, `lemma-perfect-complexes-geometric-point`, order 1509
-(blueprint: lem-weil-point-sections-finite-torsion). -/
+/-! # Finiteness of sections of finite-torsion complexes at the geometric point -/
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -30,11 +29,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open AlgebraicGeometry.ProEtale
 namespace WeilConjectures
 
-/-- Constructible finite-ring point sections form a finite set.
-Source: blueprint order 1509, finite-torsion clause
-(blueprint: lem-weil-point-sections-finite-torsion).
-Proof: etale origin, the comparison unit, and finite etale sections identify these
-sections with a finitely generated module over the finite coefficient ring. -/
+/-- Constructible finite-ring point sections form a finite set. -/
 theorem point_finiteSections_finite_of_constructible (k B : Type u) [Field k] [IsAlgClosed k]
     [CommRing B] [Finite B]
     (F : proEtaleRingModules (Spec (.of k)) (proEtaleConstantRing (Spec (.of k)) B))
@@ -78,15 +73,7 @@ theorem point_finiteSections_finite_of_constructible (k B : Type u) [Field k] [I
     ((ObjectProperty.ι (IsConstructibleProEtaleModuleSheaf T B)).mapIso (e.counitIso.app F'))
   exact @Finite.of_equiv _ _ heF ec.toLinearEquiv.toEquiv
 
-/-- Strictly separated finite torsion clause from the point-sections finiteness assertion.
-Proof: finite-ring constructible sheaves have etale origin. The comparison unit
-identifies their pro-etale sections with etale sections. Constructible etale sections
-over an algebraically closed point are finitely generated, hence finite over the finite
-coefficient ring. Exact evaluation and restriction of scalars commute with cohomology
-and preserve zero objects, giving the same finite cohomological support.
-Source: the landing assertion in the finite coefficient point construction;
-(blueprint: lem-weil-point-sections-finite-torsion).
--/
+/-- Strictly separated finite torsion clause from the point-sections finiteness assertion. -/
 theorem point_sections_finiteness_finiteTorsion (D : FiniteFieldDatum.{u})
     (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

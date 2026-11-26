@@ -14,8 +14,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleF
 
 /-! # Composition of finite coefficient multiplication
 
-Source: the constant-sheaf clause of `theorem-grothendieck-lefschetz-trace-formula--8`, reviewed
-expansion step 3 (blueprint: lem-zl-finite-pullback-unit-composition).
+This file shows that the finite coefficient unit is compatible with composition of pullbacks:
+the finite compositor preserves regular coefficient multiplication. This is used in the
+constant-sheaf case of the Grothendieck–Lefschetz trace formula.
 -/
 
 @[expose] public noncomputable section
@@ -228,19 +229,7 @@ private theorem derivedUnit_coordinates {X Y : Scheme.{u}} (f : X ⟶ Y) (m : �
   rw [Category.assoc, ← Functor.map_comp]
   rfl
 
-/-- The actual finite compositor preserves regular coefficient multiplication.
-Source: current blueprint, sec-zeta-weil/sk-thm-intfactors,
-`prop-every-iterate-trace.proof.md`, constant-sheaf clause, reviewed expansion step 3.
-(blueprint: lem-zl-finite-pullback-unit-composition).
-
-Proof: transpose the regular multiplication maps along the module adjunctions.
-Each is the section one. The constant coefficient direct-image ring maps respect
-composition by `proEtaleCoefficientInverseImageMap_comp`. The unit-normalized
-changes of pullback presentation preserve these transposes. The canonical tensor
-compositor sends an iterated pure tensor to its associated tensor, so both paths
-multiply its coefficients in the same order. The regular sheaf in degree zero is
-K-flat, and the single-complex comparison is natural, giving the displayed equation
-in the derived category. This also applies to identity maps, empty schemes and m=0. -/
+/-- The actual finite compositor preserves regular coefficient multiplication. -/
 theorem finiteUnit_composition
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

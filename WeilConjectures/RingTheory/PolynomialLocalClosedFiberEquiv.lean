@@ -14,7 +14,19 @@ import WeilConjectures.RingTheory.FibreLocalRingNaturalIso
 
 /-! # The polynomial closed fibre as a polynomial local ring over a residue field
 
-Source: Stacks Project, Algebra, Remark 0H9M and the first paragraph of Tag 00SV.
+For a prime `Q` of `R[x]` over `p`, the closed fibre `R[x]_Q / p R[x]_Q` is the localization of
+`κ(p)[x]` at a prime.
+
+## Implementation details
+
+The fibre-prime correspondence and the scalar-extension equivalence `p.Fiber R[x] ≃ κ(p)[x]` are
+combined with the fibre-local-ring quotient equivalence. No variables, arbitrary coefficient
+rings, and no complete-intersection or Noetherian hypothesis are needed.
+
+## References
+
+* [Stacks, Tag 0H9M]
+* [Stacks, Tag 00SV] (first paragraph of the proof)
 -/
 
 @[expose] public section
@@ -25,28 +37,8 @@ open scoped TensorProduct
 
 namespace MvPolynomial
 
-/-- The closed fibre of a polynomial local map is a polynomial local ring over the
-residue field, with the natural formula for every polynomial.
-Source: Stacks Project, Algebra, Remark 0H9M and Tag 00SV, first proof paragraph.
-(blueprint: lem-weil-pbc-polynomial-local-closed-fiber-equiv).
-
-Proof: Set `P = R[x]` and `p = Q ∩ R`. By the fibre-prime correspondence there is a prime
-`T` of `p.Fiber P` whose contraction along `j : P → p.Fiber P` is `Q`.
-The polynomial scalar-extension equivalence identifies `p.Fiber P` with `κ(p)[x]`
-and sends `j(a) = 1 ⊗ a` to `map (R → κ(p)) a`. Transport `T` through this equivalence
-to the prime `Qk`. Its contraction to `P` is therefore `Q`.
-The natural fibre-local-ring quotient equivalence (0H9M) identifies
-`P_Q / p P_Q` with `(p.Fiber P)_T`, sending `[a/1]` to `j(a)/1`.
-The maximal ideal of `R_p` is `p R_p`. Its image under the local map `φ` generates
-exactly `p P_Q`: use the natural formula for `φ` on `r/1` and note that all denominators
-outside `p` become units. Thus its image ideal `I` equals `p P_Q`.
-Compose the quotient equivalence with the localization of the scalar-extension
-ring equivalence to obtain `e : P_Q/I ≃ κ(p)[x]_{Qk}`. Both equivalences have their
-specified natural fraction formula, so their composite sends `[a/1]` to the displayed
-coefficientwise image of `a` divided by `1`. The argument includes no variables and
-arbitrary coefficient rings; a prime `Q` already ensures that these local rings exist
-and are nonzero. No complete-intersection or Noetherian hypothesis is used.
--/
+/-- The closed fibre of a polynomial local map `R_p → R[x]_Q` is a polynomial local ring over the
+residue field `κ(p)`, with the natural formula for every polynomial. -/
 theorem exists_polynomial_local_closedFiber_equiv
     {R : Type u} [CommRing R] (n : ℕ)
     (Q : Ideal (MvPolynomial (Fin n) R)) [Q.IsPrime] :

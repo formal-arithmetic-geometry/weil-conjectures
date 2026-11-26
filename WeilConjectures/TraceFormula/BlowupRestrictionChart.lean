@@ -20,14 +20,11 @@ Let `R` be a local ring with a chart `R[T]/(xT - y)` of the blow-up of `T = Spec
 point as in `AlgebraicGeometry.BlowupChartData` (`f = x^d f'`, `h = x h'`). Put
 `Z = Spec (R[T]/(xT - y))[1/f']`, `Y = V(x) ⊆ Z` (the exceptional divisor off the strict transform
 `D'` of `D = V(f)`) and `X = V(h') ⊆ Z` (the strict transform of `H = V(h)`). This file constructs
-the transverse configuration of blueprint `lemma-vanishing-restrictions-after-blowing-up--1`, in the
-chart:
+the transverse configuration of the vanishing of restrictions after blowing up, in the chart:
 
-* `X`, `Y` are regular divisors of `Z` meeting transversely at one point, `Y` is connected
-  (`lemma-vanishing-restrictions-after-blowing-up--1` (1));
-* the blow-up map restricts to `φ : Z - Y ⟶ T - D` with `φ⁻¹(T - (D ∪ H)) = Z - (X ∪ Y)`
-  (`lemma-vanishing-restrictions-after-blowing-up--1` (2), (3); in the chart, `φ` is an isomorphism
-  onto `T - (D ∪ V(x))`).
+* `X`, `Y` are regular divisors of `Z` meeting transversely at one point, `Y` is connected;
+* the blow-up map restricts to `φ : Z - Y ⟶ T - D` with `φ⁻¹(T - (D ∪ H)) = Z - (X ∪ Y)` (in the
+  chart, `φ` is an isomorphism onto `T - (D ∪ V(x))`).
 
 ## Main definitions
 
@@ -37,6 +34,14 @@ chart:
 ## Main results
 
 - `AlgebraicGeometry.BlowupChartData.isPullback_φ`: `φ⁻¹(T - (D ∪ H)) = Z - (X ∪ Y)`.
+
+## Implementation details
+
+In the vanishing statement, the configuration `(Z, X, Y)` with the blow-up map
+`φ : Z - Y ⟶ T - D` is a transverse boundary configuration, and the map `B - t ⟶ T - D` factors
+through `Z - Y` and, inside `Z`, through the strict transform `B' = Spec A'` of `B`, a finite
+disjoint union of strictly local schemes centred on `Y`; so the restriction vanishes by
+`AlgebraicGeometry.Etale.globalSectionsRestriction_eq_zero_of_transverse`.
 -/
 
 @[expose] public section
@@ -136,8 +141,7 @@ lemma φU_ι : D.φU ≫ (Scheme.specBasicOpen (R := .of R) (f * h)).ι =
     D.UXY.ι ≫ Spec.map (CommRingCat.ofHom (algebraMap R D.Rx)) :=
   IsOpenImmersion.lift_fac _ _ _
 
-/-- `φ⁻¹(T - (D ∪ H)) = Z - (X ∪ Y)` (blueprint `lemma-vanishing-restrictions-after-blowing-up--1`
-(2)). -/
+/-- `φ⁻¹(T - (D ∪ H)) = Z - (X ∪ Y)`. -/
 lemma isPullback_φ :
     IsPullback D.φU ((Spec (.of D.Rx)).homOfLE D.UXY_le_UY)
       ((Spec (.of R)).homOfLE (PrimeSpectrum.basicOpen_mul_le_left f h)) D.φ := by
@@ -223,22 +227,12 @@ namespace AlgebraicGeometry.Etale
 
 open BlowupChartData
 
-/-- **The blowup restriction vanishing in a separating chart** (blueprint
-`lemma-vanishing-restrictions-after-blowing-up--1`, with
-`lemma-vanishing-restrictions-after-blowing-up--1` and
-`lemma-vanishing-restrictions-after-blowing-up--1` carried out in the chart `D` of the blow-up of
-`T = Spec R` at its closed point). Let `R` be a henselian local `k`-algebra with algebraically
+/-- **The blowup restriction vanishing in a separating chart** `D` of the blow-up of
+`T = Spec R` at its closed point. Let `R` be a henselian local `k`-algebra with algebraically
 closed residue field, with a separating chart `D` whose open part `Z = Spec (R[T]/(xT - y))[1/f']`
 is an étale limit of smooth `k`-surfaces. Then for every complex `E` with finite `ℓ`-group monodromy
 on `T - (D ∪ H) = D(fh)`, the restriction map `RΓ(T - D, i_! E) ⟶ RΓ(B - t, (i_! E)|_{B - t})` is
-zero.
-
-The configuration `(Z, X, Y)` with the blow-up map `φ : Z - Y ⟶ T - D` is a transverse boundary
-configuration (`lemma-vanishing-restrictions-after-blowing-up--1`), and the map `B - t ⟶ T - D`
-factors through `Z - Y` and, inside `Z`, through the strict transform `B' = Spec A'` of `B`, a
-finite disjoint union of strictly local schemes centred on `Y`
-(`lemma-vanishing-restrictions-after-blowing-up--1`); so the restriction vanishes by
-`AlgebraicGeometry.Etale.globalSectionsRestriction_eq_zero_of_transverse`. -/
+zero. -/
 theorem blowupRestriction_eq_zero_of_chartData {k : Type u} [Field k] [IsAlgClosed k] {ℓ : ℕ}
     [Fact ℓ.Prime] (hℓ : (ℓ : k) ≠ 0) {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     (hΛ : IsNilpotent (ℓ : Λ)) {R : Type u} [CommRing R] [HenselianLocalRing R]

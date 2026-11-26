@@ -9,8 +9,8 @@ public import WeilConjectures.ZetaWeil.ConstantGeometricStalkUnit.ConstantGeomet
 
 /-! # Scalar extension of return and Weil factors
 
-Source: the constant-sheaf clause of `theorem-grothendieck-lefschetz-trace-formula--8`, reviewed
-expansion step 8 (blueprint: lem-zl-return-weil-integral-scalar).
+Scalar extension of the return and Weil factors, for the constant-sheaf case of the
+Grothendieck–Lefschetz trace formula. This file currently only sets up the variables.
 -/
 
 @[expose] public noncomputable section

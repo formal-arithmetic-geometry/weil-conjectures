@@ -13,8 +13,11 @@ import all WeilConjectures.Algebra.Homology.ProperBaseChange.OpenImmersionTensor
 
 /-! # Finite quotient preserves ordinary open support
 
-Source: Stacks 03DI, 03EK and 0E8I; fix-prop-coherence, ordinary open-factor argument.
-(blueprint: lem-sf-ordinary-finite-quotient-open-support).
+## References
+
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 0E8I]
 -/
 
 @[expose] public noncomputable section
@@ -93,21 +96,7 @@ private theorem projection_square {X Y : Scheme.{u}} (j : X ⟶ Y) (n : ℕ) :
   exact congrArg (adj.homEquiv _ _).symm
     ((sfCompletedCoefficientMap_existsUnique l E j).exists.choose_spec n)
 
-/-- A single quotient of an extended module is in the finite open essential image.
-Source: Stacks 03DI, 03EK and 0E8I; fix-prop-coherence, ordinary open-factor argument.
-(blueprint: lem-sf-ordinary-finite-quotient-open-support).
-
-Proof: the canonical constant-ring comparison identifies finite geometric inverse
-image with the stated coefficient inverse image by uniqueness of left adjoints.
-Transpose the completed coefficient projection identity. The resulting coefficient
-square gives the proved scalar-restriction/pullback isomorphism. Compose this with
-the two scalar adjunctions and the two open adjunctions. Uniqueness of composite
-left adjoints then identifies quotient of integral extension with finite extension
-of quotient. In the slice presentation the open object is subterminal, so the open
-unit is invertible and finite extension is fully faithful. Its counit is invertible
-on its essential image; naturality transports this along the preceding quotient
-comparison. This includes empty and identity opens, zero modules and the first
-positive quotient, and uses no completeness or flatness. -/
+/-- A single quotient of an extended module is in the finite open essential image. -/
 theorem ordinaryFiniteQuotientOpenSupport {X Y : Scheme.{u}}
     (j : X ⟶ Y) [IsOpenImmersion j] (n : ℕ)
     (L : normalizedDVRModules l E X n ⥤ normalizedDVRModules l E Y n)

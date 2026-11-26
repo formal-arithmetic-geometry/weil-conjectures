@@ -11,7 +11,12 @@ import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.SmoothPurity.StrictQuotient.StrictTensorOrdinaryAdjunct
 import all WeilConjectures.CategoryTheory.Ringed.Site.RingedSiteDualityMaps
 
-/-! # Constructor laws for ordinary strict quotient adjuncts -/
+/-! # Constructor laws for ordinary strict quotient adjuncts
+
+## References
+
+* Stacks Project, Tags 07A4 and 07A6.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -243,28 +248,7 @@ private theorem paste_tensor_comparisons {C : Type*} [Category C]
         congrArg (fun h ↦ scalarBefore ≫ h ≫ tensorEnd) ho
 
 /-- Tensoring strict systems has its actual tensor transition and respects ordinary
-and derived quotient adjuncts on Good representatives.
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 07A6, and
-lem-pur-quotient-operation-adjoint-factorizations, tensor clauses.
-(blueprint: lem-pur-strict-tensor-adjoint-constructor).
-
-Proof: the sheafified pure-tensor inclusion into each total summand is natural in
-the site object. Apply naturality to the horizontal arrow (n,U) to (m,U) to get
-TensorTransitions. Evaluation identifies the total with the total of the evaluated
-complexes. Under these identifications, extension of scalars has the balanced
-comparison (u tensor v) tensor b maps to (u tensor b) tensor (v tensor 1),
-whose inverse multiplies the two scalars. The adjunct of the tensor transition is
-this comparison followed by the tensor of the two factor adjuncts: applying the
-ordinary adjunction unit to a pure generator gives the transition on both sides.
-The generator formulas extend through sheafification and direct sums and commute
-with d(u tensor v) = du tensor v + (-1)^p u tensor dv. Thus invertible factor
-adjuncts give an invertible tensor adjunct. Localize that same equality. The
-unit_model clauses identify the three localized adjuncts; tensor_model identifies
-the localized balanced comparison with D.tensor. Naturality of the finite K-flat
-tensor model moves the two factor maps through its comparison. This gives exactly
-TensorAdjointEquation with the specified tensorComparison at m and n. Zero inputs,
-equal levels, odd degrees and unbounded direct-sum totals obey the same formulas;
-no boundedness or flatness of the quotient map is used. -/
+and derived quotient adjuncts on `Good` representatives. -/
 theorem strictTensorAdjointConstructor {W : Scheme.{t}} (U V : Complex l E W) :
     TensorTransitions l E U V ∧
     ∀ (S : CoefficientDerivedSystemTensors l E W)

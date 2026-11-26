@@ -12,8 +12,19 @@ import WeilConjectures.RingTheory.FilteredColimitAlgebrasTensorElementwise
 /-!
 # Integral closure and ind-etale base change
 
-Source: Stacks Project, Algebra, Tag 0CBF
-(blueprint: lem-dl-a1-integral-closure-strict-etale-base-change).
+Integral closure commutes with base change by an ind-étale algebra.
+
+## Implementation details
+
+We lift to one universe with `ULift` and use a small filtered presentation of `S` by étale
+algebras. Injectivity of the comparison map follows from flatness. For surjectivity, a monic
+equation of an element of `S ⊗ D` lifts to a stage, where the étale (hence smooth) case applies.
+No injectivity, normality, domain, Noetherian or finiteness hypothesis is used.
+
+## References
+
+* [Stacks, Tag 0CBF]
+* [Stacks, Tag 03GE]
 -/
 
 @[expose] public section
@@ -239,39 +250,9 @@ private theorem of_algEquiv
     rw [eb.apply_symm_apply] at ht
     exact ht.trans (congrArg Subtype.val hy)
 
-/-- Integral closure commutes with base change by an ind-etale algebra.
-
-Source: Stacks Project, Algebra, Tag 0CBF
-(blueprint: lem-dl-a1-integral-closure-strict-etale-base-change).
-The canonical map `s ⊗ b ↦ s ⊗ b` is `TensorProduct.toIntegralClosure R S D`;
-its bijectivity is the asserted `S`-algebra isomorphism.
-
-Proof (Stacks 0CBF, with etale stages by Stacks 03GE):
-1. Lift to one universe: put `A = ULift R`, `T = ULift S`. By
-   definition-ind-etale-pro-etale-weakly, `T` has a small filtered presentation
-   `P : T = colim T_i` by etale (hence smooth) `A`-algebras.
-2. Same-universe case (`of_presentation`), for any `A`-algebra `D'`. Transport
-   lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise from the chosen
-   colimit to `P` along the unique cocone isomorphism (`tensor_rep`,
-   `tensor_zero`): every tensor has a stage representative, and one mapping
-   to zero vanishes after a transition.
-3. Injectivity: each etale stage is flat, so `T` is flat over `A`
-   (lem-weil-pbc-flat-ring-map-iff-ind-flat, `Module.Flat.iff_ind_flat`), and
-   `TensorProduct.toIntegralClosure_injective_of_flat` applies.
-4. Surjectivity: for `x` integral over `T` by a monic `p`, lift `p` to a monic
-   polynomial at a stage (`polynomial_rep`, via
-   `Polynomial.lifts_and_natDegree_eq_and_monic`) and `x` to a stage; at a
-   common stage `k` the value maps to zero (evaluation commutes with tensor
-   maps), so it vanishes at some `l`. Then `x_l` is integral over `T_l`, and
-   the etale stage (lem-dl-a1-integral-closure-etale-base-change,
-   `TensorProduct.toIntegralClosure_bijective_of_smooth`) lifts it; by
-   naturality of the comparison on pure tensors its image in `T ⊗ B` maps to `x`.
-5. Apply step 2 to `A → T` with `D' = A ⊗[R] D`; since `R → A` is a ring
-   isomorphism, hence smooth, `TensorProduct.toIntegralClosure_bijective_of_tower`
-   gives the result for `R → T`. Transport along `ULift.algEquiv : T ≃ₐ[R] S`
-   (`of_algEquiv`), which commutes with the comparison and maps monic equations.
-A bijective algebra map is an algebra isomorphism.
-No injectivity, normality, domain, Noetherian or finiteness hypothesis is used.
+/-- Integral closure commutes with base change by an ind-etale algebra: the canonical map
+`S ⊗[R] (integral closure of R in D) → integral closure of S in S ⊗[R] D`,
+`TensorProduct.toIntegralClosure R S D`, is bijective.
 -/
 theorem integralClosure_bijective_of_indEtale
     {R : Type u} {S : Type v} {D : Type w}

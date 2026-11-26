@@ -15,8 +15,7 @@ Let `(K, φ)` be a Weil object on `X` for `Φ`, `m ≥ 1` and `x` a rational poi
 The local Frobenius `F_{x,m}` on the stalk `K_x` is the stalk map at `x` of the coefficient map
 `φ_m : LΦ_m^* K ⟶ K` of the graph correspondence `c_m = (𝟙, Φ_m)`
 (`ProEtale.CondensedRing.WeilBoundedConstructible.stalkFrobenius_eq_graphStalkMap`). This
-identifies the local term of the Frobenius correspondence with the trace of the local Frobenius
-(blueprint `proposition-frobenius-local-term-curve--1`).
+identifies the local term of the Frobenius correspondence with the trace of the local Frobenius.
 
 -/
 

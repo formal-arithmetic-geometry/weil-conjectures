@@ -16,9 +16,8 @@ compactly supported cohomology `H_cⁱ(C₀ ⊗ k̄, ℚ̄_ℓ)` vanishes outsid
 with the Grothendieck–Lefschetz trace formula this determines it from the point counts when they
 are as simple as those of `𝔸¹` and `𝔾_m`:
 
-* `H_c²(𝔸¹ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ(-1)` and all other `H_cⁱ` vanish (blueprint `prose-12-31`);
-* `H_c¹(𝔾_m ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ`, `H_c²(𝔾_m ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ(-1)` and all other `H_cⁱ` vanish
-  (blueprint `ex-weil-multiplicative-group`).
+* `H_c²(𝔸¹ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ(-1)` and all other `H_cⁱ` vanish;
+* `H_c¹(𝔾_m ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ`, `H_c²(𝔾_m ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ(-1)` and all other `H_cⁱ` vanish.
 
 Indeed the reciprocal roots of `det(1 - T F | H_c²)` have absolute value `q` under every
 embedding `ι`, those of `det(1 - T F | H_c¹)` at most `q^{1/2}`, and the trace formula gives
@@ -30,9 +29,18 @@ embedding `ι`, those of `det(1 - T F | H_c¹)` at most `q^{1/2}`, and the trace
 - `AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_adicConstant_of_curve`,
   `AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_compactlySupportedCohomology_two_adicConstant`:
   vanishing and purity for a smooth geometrically connected affine curve.
-- `AlgebraicGeometry.compactlySupportedCohomology_affineLine`: `prose-12-31`.
-- `AlgebraicGeometry.compactlySupportedCohomology_multiplicativeGroup`:
-  `ex-weil-multiplicative-group`.
+- `AlgebraicGeometry.compactlySupportedCohomology_affineLine`: the cohomology of `𝔸¹`.
+- `AlgebraicGeometry.compactlySupportedCohomology_multiplicativeGroup`: the cohomology of `𝔾_m`.
+
+## Implementation details
+
+The vanishing and purity statements for a curve are the case `j = 𝟙` of
+`AlgebraicGeometry.subsingleton_compactlySupportedCohomology_directImage` and
+`AlgebraicGeometry.isPureOfWeightOver_compactlySupportedCohomology_directImage_two`, the
+pushforward of the constant sheaf along the identity being the constant sheaf. The trace formula
+on a curve is the trace-to-determinant identity of the trace datum formed by `H_c⁰, H_c¹, H_c²`.
+The cohomology of `𝔸¹` and `𝔾_m` is derived from the point counts
+(`AlgebraicGeometry.zetaSeries_affineLine`, `AlgebraicGeometry.zetaSeries_multiplicativeGroup`).
 -/
 
 @[expose] public section
@@ -145,10 +153,7 @@ local instance : LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀)) :=
 variable (k₀ l C)
 
 /-- The compactly supported cohomology of the constant Weil sheaf on a smooth geometrically
-connected affine curve vanishes outside degrees `1` and `2`: the pushforward of the constant sheaf
-along the identity is the constant sheaf (`AlgebraicGeometry.WeilSheaf.lowerStarIdIso`), so this
-is the case `j = 𝟙` of `AlgebraicGeometry.subsingleton_compactlySupportedCohomology_directImage`
-and `AlgebraicGeometry.subsingleton_compactlySupportedCohomology_directImage_zero`. -/
+connected affine curve vanishes outside degrees `1` and `2`. -/
 theorem subsingleton_compactlySupportedCohomology_adicConstant_of_curve {r : ℤ} (hr : r ≠ 1)
     (hr' : r ≠ 2) :
     Subsingleton ((adicConstant k₀ l C).compactlySupportedCohomology r).carrier := by
@@ -165,9 +170,7 @@ theorem subsingleton_compactlySupportedCohomology_adicConstant_of_curve {r : ℤ
     exact e.toLinearEquiv.symm.subsingleton
 
 /-- The top compactly supported cohomology `H_c²(C₀ ⊗ k̄, ℚ̄_ℓ)` of a smooth geometrically
-connected affine curve is `ι`-pure of weight `2`: this is the case `j = 𝟙` of
-`AlgebraicGeometry.isPureOfWeightOver_compactlySupportedCohomology_directImage_two`, the constant
-sheaf being lisse and punctually pure of weight `0`. -/
+connected affine curve is `ι`-pure of weight `2`. -/
 theorem isPureOfWeightOver_compactlySupportedCohomology_two_adicConstant
     (ι : PadicAlgCl l →+* ℂ) :
     ((adicConstant k₀ l C).compactlySupportedCohomology 2).IsPureOfWeightOver k₀ ι 2 := by
@@ -181,11 +184,8 @@ theorem isPureOfWeightOver_compactlySupportedCohomology_two_adicConstant
 
 variable [IsSeparated (C ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (C ↘ Spec (CommRingCat.of k₀))]
 
-/-- The trace formula on a smooth geometrically connected affine curve `C₀`: since the compactly
-supported cohomology is concentrated in degrees `1` and `2`,
-`Z(C₀, T) det(1 - T F | H_c²) = det(1 - T F | H_c¹)` in `ℚ̄_ℓ⟦T⟧`. This is the trace-to-determinant
-identity of a trace datum (`TraceDatum.zeta_mul_prod_even_eq_prod_odd`) formed by the groups
-`H_c⁰, H_c¹, H_c²`, the first of which vanishes. -/
+/-- The trace formula on a smooth geometrically connected affine curve `C₀`:
+`Z(C₀, T) det(1 - T F | H_c²) = det(1 - T F | H_c¹)` in `ℚ̄_ℓ⟦T⟧`. -/
 theorem map_zetaSeries_mul_charpolyRev_two_of_curve :
     PowerSeries.map (algebraMap ℚ (PadicAlgCl l)) (C ↘ Spec (CommRingCat.of k₀)).zetaSeries *
         (((adicConstant k₀ l C).compactlySupportedCohomology 2).frobeniusEnd.charpolyRev :
@@ -232,9 +232,7 @@ open _root_.Polynomial in
 /-- On a smooth geometrically connected affine curve `C₀` whose zeta function is
 `Z(C₀, T) = ∏_{c ∈ S} (1 - c T) / (1 - q T)`, with `S` a multiset of nonzero scalars of absolute
 value different from `q` under some embedding `ι`, the Frobenius eigenvalues on `H_c²` and `H_c¹`
-are `q` (once) and the elements of `S`: the eigenvalues on `H_c²` have absolute value `q` and
-those on `H_c¹` at most `q^{1/2}`, so there is no cancellation in
-`Z(C₀, T) det(1 - T F | H_c²) = det(1 - T F | H_c¹)`. -/
+are `q` (once) and the elements of `S`. -/
 theorem charpoly_roots_compactlySupportedCohomology_of_curve {S : Multiset (PadicAlgCl l)}
     (ι : PadicAlgCl l →+* ℂ) (hS : ∀ c ∈ S, c ≠ 0 ∧ ‖ι c‖ ≠ Nat.card k₀)
     (hZ : PowerSeries.map (algebraMap ℚ (PadicAlgCl l)) (C ↘ Spec (CommRingCat.of k₀)).zetaSeries *
@@ -276,11 +274,8 @@ open WeilSheaf
 variable (k : Type u) [Field k] [Finite k] (l : ℕ) [Fact l.Prime] [Fact (ringChar k ≠ l)]
 
 open _root_.Polynomial in
-/-- Blueprint `prose-12-31` (compactly supported cohomology of the affine line):
-`H_c²(𝔸¹ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ(-1)` is a line on which the geometric Frobenius acts by `q`, and all
-other `H_cⁱ(𝔸¹ ⊗ k̄, ℚ̄_ℓ)` vanish. With the trace formula this recovers `#𝔸¹(𝔽_{qⁿ}) = qⁿ` and
-`Z(𝔸¹, T) = (1 - qT)⁻¹` (`AlgebraicGeometry.pointCount_affineLine`,
-`AlgebraicGeometry.zetaSeries_affineLine`), from which it is derived. -/
+/-- Compactly supported cohomology of the affine line: `H_c²(𝔸¹ ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ(-1)` is a line
+on which the geometric Frobenius acts by `q`, and all other `H_cⁱ(𝔸¹ ⊗ k̄, ℚ̄_ℓ)` vanish. -/
 theorem compactlySupportedCohomology_affineLine :
     (∀ i : ℤ, i ≠ 2 → Subsingleton
       ((adicConstant k l (affineLine k)).compactlySupportedCohomology i).carrier) ∧
@@ -307,12 +302,10 @@ theorem compactlySupportedCohomology_affineLine :
   · exact WeilSheaf.subsingleton_compactlySupportedCohomology_adicConstant_of_curve k l _ hi1 hi
 
 open _root_.Polynomial in
-/-- Blueprint `ex-weil-multiplicative-group` (compactly supported cohomology of the multiplicative
-group): `H_c¹(𝔾_m ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ` is a line on which the geometric Frobenius acts trivially,
+/-- Compactly supported cohomology of the multiplicative group:
+`H_c¹(𝔾_m ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ` is a line on which the geometric Frobenius acts trivially,
 `H_c²(𝔾_m ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ(-1)` is a line on which it acts by `q`, and all other
-`H_cⁱ(𝔾_m ⊗ k̄, ℚ̄_ℓ)` vanish. With the trace formula this recovers `#𝔾_m(𝔽_{qⁿ}) = qⁿ - 1` and
-`Z(𝔾_m, T) = (1 - T) / (1 - qT)` (`AlgebraicGeometry.pointCount_multiplicativeGroup`,
-`AlgebraicGeometry.zetaSeries_multiplicativeGroup`), from which it is derived. -/
+`H_cⁱ(𝔾_m ⊗ k̄, ℚ̄_ℓ)` vanish. -/
 theorem compactlySupportedCohomology_multiplicativeGroup :
     (∀ i : ℤ, i ≠ 1 → i ≠ 2 → Subsingleton
       ((adicConstant k l (multiplicativeGroup k)).compactlySupportedCohomology i).carrier) ∧

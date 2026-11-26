@@ -10,8 +10,15 @@ public import Mathlib.Algebra.Group.Int.Defs
 
 /-! # Assembling shifts from an object-covering family of functors
 
-Source: thm-coef-qbar-verdier, proof steps 3--4.
-(blueprint: lem-commshift-object-cover-assembly-K6)
+Given functors `J i` whose images cover all objects of `B` and a family of isomorphisms
+`shiftFunctor B n ⋙ V ≅ V ⋙ shiftFunctor C n` whose precompositions with each `J i` come from
+`CommShift` structures on `J i ⋙ V`, we assemble a `CommShift` structure on `V`.
+
+## Implementation details
+
+Precomposition preserves the zero and addition formulas. At any object, choose a preimage under
+some `J i`; the corresponding restriction has the required laws, and cancelling the mapped
+isomorphism gives the global laws.
 -/
 
 @[expose] public noncomputable section
@@ -88,13 +95,7 @@ theorem precompShift_add
     ((shiftFunctorAdd B a b).hom.app (J.obj K)), Iso.inv_hom_id_app,
     Functor.map_id, Category.id_comp, reassoc_of% key]
 
-/-- Assemble a specified natural shift family from coherent restrictions.
-Source: thm-coef-qbar-verdier, shift descent in steps 3--4
-(blueprint: lem-commshift-object-cover-assembly-K6).
-
-Proof: precomposition preserves the zero and addition formulas. At any object,
-choose a literal finite-stage presentation. The corresponding restriction has the
-required laws. Cancel the mapped inclusion isomorphism to obtain the global laws. -/
+/-- Assemble a specified natural shift family from coherent restrictions. -/
 @[instance_reducible] def assembleShift
     {I : Type*} {A : I → Type*} [∀ i, Category (A i)]
     {B C : Type*} [Category B] [Category C]

@@ -57,7 +57,18 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 
 /-! # Projection-normalized Roos comparison for completed coefficient towers
 
-Source: Stacks 0941 and the strict Roos comparison.
+This file shows that the canonical Roos comparison for completed coefficient towers
+satisfies both its projection equation and its derived-unit equation.
+
+## Implementation details
+
+The comparison is the functorial K-injective resolution construction of the canonical
+Roos comparison; the projection equation is checked on K-injective towers and transported
+to every complex along a K-injective resolution.
+
+## References
+
+* Stacks Project, Tag 0941
 -/
 
 @[expose] public noncomputable section
@@ -70,16 +81,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 universe u v w g t
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace WeilConjectures
-/-- The canonical Roos comparison with both its projection and derived-unit equations.
-Source: Stacks Tag 0941 and coefficientConstantTowerRoosComparison.
-(blueprint: lem-pur-coefficient-tower-roos-unit-normalization).
-Proof: use the functorial K-injective resolution construction of the canonical
-comparison. Retain its defining unit equation. The projection equation is checked
-on K-injective towers by cancelling the Roos inclusion, then transported to every
-complex by naturality along a K-injective resolution. The Roos inclusion is a
-quasi-isomorphism on each such resolution. This also proves the required equation
-with the specified right-derived-functor comparison, rather than deducing equality
-from finite projections. -/
+/-- The canonical Roos comparison with both its projection and derived-unit equations. -/
 theorem coefficientConstantTowerRoosNormalization
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t}) :

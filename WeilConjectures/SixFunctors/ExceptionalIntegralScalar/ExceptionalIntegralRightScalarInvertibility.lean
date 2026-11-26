@@ -12,8 +12,12 @@ import all WeilConjectures.SmoothPurity.Completed.CompletedIntegralFiniteFree
 
 /-! # Invertibility of the prescribed exceptional right scalar mate
 
-Source: Zheng, Lemma 5.22 and Propositions 5.24 and 5.26.
-(blueprint: lem-sf-exceptional-integral-right-scalar-invertibility)
+The counit transpose of the normalized left comparison, i.e. the prescribed exceptional right
+scalar mate, is invertible.
+
+## References
+
+* [Zheng, Lemma 5.22 and Propositions 5.24 and 5.26]
 -/
 
 @[expose] public noncomputable section
@@ -731,20 +735,7 @@ private theorem completedRightMate
       (operation (.finite L m)).G.map
         ((z.scalarComposition a b d hsq ha hb hd false).iso.hom.app N))
 
-/-- The counit transpose of the normalized left comparison is invertible.
-Source: Zheng, Lemma 5.22 and Proposition 5.26; finite-free scalar mates on
-ordinary etale systems and their cofinal ramified recovery.
-Proof: for finite coefficient generators use the ordinary etale constant-coefficient
-exceptional tensor theorem, then transport along constructible-origin comparison.
-For integral reduction, evaluate the actual system adjunction and reconstruct its
-counit transpose. For completed inclusion, the selected-level finite-free right
-mates are invertible; cofinal recovery and reconstruction carry them to the
-prescribed right mate because its counit transpose is the normalized left map.
-For identities use the scalar multiplication unitor. For composites use naturality
-and the two counit equations to identify the composite right comparison with the
-mate of the left composite; balanced scalar associators identify it with the
-prescribed mate. Invertibility is preserved by each transport and composition.
-(blueprint: lem-sf-exceptional-integral-right-scalar-invertibility). -/
+/-- The counit transpose of the normalized left comparison is invertible. -/
 theorem exceptionalIntegralRightScalarInvertibility
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

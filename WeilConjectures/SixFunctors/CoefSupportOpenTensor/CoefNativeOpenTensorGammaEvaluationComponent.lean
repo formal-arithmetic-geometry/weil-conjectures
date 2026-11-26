@@ -14,8 +14,13 @@ import WeilConjectures.SixFunctors.CoefSupportOpenTensor.CoefNativeRestrictionTe
 
 /-! # Pointwise evaluation compatibility of native open tensor models
 
-Source: Stacks 0GL1, 07A4; support-open-tensor steps 5--6.
-(blueprint: lem-coef-native-open-tensor-gamma-evaluation-component).
+We show that the system open tensor comparison evaluates at each finite level to the finite
+open tensor comparison, for each fixed pair of derived objects.
+
+## References
+
+* [Stacks, Tag 0GL1]
+* [Stacks, Tag 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -311,13 +316,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The finite evaluation equation for one fixed degree and one fixed pair of derived
-objects. It is the pointwise generator-and-descent calculation used to assemble
-`GammaEvaluation`; exact evaluation preserves the open unit, restriction comparison,
-total summands, and K-flat pullback, while bilinearity and tensor descent extend the
-same equality from generators to the displayed derived pair.
-Source: Stacks 0GL1 and 07A4, support-open-tensor steps 5--6.
-(blueprint: lem-coef-native-open-tensor-gamma-evaluation-component).
--/
+objects, used to assemble `GammaEvaluation`. -/
 theorem nativeOpenTensorGammaEvaluation_component {X Z : Scheme.{u}} (j : X ⟶ Z)
     [IsOpenImmersion j]
     (SX : CoefficientDerivedSystemCalculus.{u, u} l E X)

@@ -239,8 +239,7 @@ import all WeilConjectures.AlgebraicGeometry.Finite.FiniteReductionPullbackSquar
 import all WeilConjectures.CategoryTheory.ProperBaseChange.ExchangeMateCube
 
 /-! # Linear completed operations and their canonical exchange
-Source: blueprint order 1442, Stacks Tags 099N, 099K and 07A7
-(blueprint: lem-sbc-completed-operations-linear-natural-exchange).
+
 The units and comparison maps below are fixed by ordinary tensor and the completion
 unit. No natural isomorphism is selected without its normalizing equation.
 
@@ -250,6 +249,15 @@ unit. No natural isomorphism is selected without its normalizing equation.
 - `sbcTheta`, `sbcExchange`: their canonical square comparison and mate.
 - `sbcCompletedOperations_linear_natural_exchange`: finite-reduction compatibility.
 - `sbcCompletedExchange_strictLimit`: equality with the strict derived-limit realization.
+
+## Implementation details
+
+`sbcOrdinaryModule_preservesZero` is an explicit instance to avoid an extra recursive
+instance search through the coefficients.
+
+## References
+
+- Stacks Project, Tags 099N, 099K, 07A7, 07A4 and 06YY.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -357,38 +365,28 @@ private theorem normalizedReflectionIso
   exact (ht X).trans (ha X).symm
 
 namespace WeilConjectures
-/-- The published intrinsic completeness predicate on the actual completed ring.
-Source: blueprint order 1442
-(blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- The published intrinsic completeness predicate on the actual completed ring. -/
 abbrev IsPbcComplete (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (T : Scheme.{u}) : ObjectProperty (PbcCompletedDerived T (pbcIntegralDatum l E)) :=
   PbcIsIntrinsicallyComplete T (pbcIntegralDatum l E)
 
-/-- Full category of intrinsically complete complexes without a constructibility bound.
-Source: blueprint order 1442
-(blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- Full category of intrinsically complete complexes without a constructibility bound. -/
 abbrev PbcComplete (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (T : Scheme.{u}) := (IsPbcComplete l E T).FullSubcategory
 
-/-- Alias of the landed integral constructible category; no new predicate is defined.
-Source: blueprint order 1442
-(blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- Alias of the landed integral constructible category; no new predicate is defined. -/
 abbrev PbcIntegralConstructible (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (T : Scheme.{u}) := PbcBoundedConstructibleComplete T (pbcIntegralDatum l E)
 
-/-- Alias of the landed raw rational constructible category.
-Source: blueprint order 1442
-(blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- Alias of the landed raw rational constructible category. -/
 abbrev PbcRationalConstructible (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (T : Scheme.{u}) := PbcRationalCategory T (pbcIntegralDatum l E) (pbcUniformizer l E)
 
-/-- Raw scalar localization of the complete ambient category, using the landed action.
-Source: blueprint order 1442
-(blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- Raw scalar localization of the complete ambient category, using the landed action. -/
 abbrev PbcRationalComplete (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (T : Scheme.{u}) :=
@@ -397,21 +395,14 @@ abbrev PbcRationalComplete (l : ℕ) [Fact l.Prime]
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The full integral inclusion with the completeness property already in membership.
-Source: blueprint order 1442
-(blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- The full integral inclusion with the completeness property already in membership. -/
 def pbcConstructibleInclusion (T : Scheme.{u}) :
     PbcIntegralConstructible l E T ⥤ PbcComplete l E T :=
   (IsPbcComplete l E T).lift
     (ObjectProperty.ι (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E)))
     (fun K ↦ K.property.1)
 
-/-- The full inclusion preserves addition and the published constant scalar action.
-Source: blueprint order 1442
-(blueprint: lem-sbc-completed-operations-linear-natural-exchange).
-Proof: both subcategories have exactly the ambient Hom groups and scalar actions.
-The inclusion sends every morphism to itself, so preserves addition and multiplication
-by every constant section. These are the additive and linear functor equations. -/
+/-- The full inclusion preserves addition and the published constant scalar action. -/
 theorem pbcConstructibleInclusion_linear (T : Scheme.{u}) :
     (pbcConstructibleInclusion l E T).Additive ∧
       (pbcConstructibleInclusion l E T).Linear (PbcIntegralRing l E) := by
@@ -419,14 +410,12 @@ theorem pbcConstructibleInclusion_linear (T : Scheme.{u}) :
   · exact ⟨fun {_ _} {_ _} ↦ rfl⟩
   · exact ⟨fun {_ _} _ _ ↦ rfl⟩
 
-/-- Additivity of the full inclusion. Source: blueprint order 1442
-(blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- Additivity of the full inclusion. -/
 instance pbcConstructibleInclusion_additive (T : Scheme.{u}) :
     (pbcConstructibleInclusion l E T).Additive :=
   (pbcConstructibleInclusion_linear l E T).1
 
-/-- Linearity of the full inclusion. Source: blueprint order 1442
-(blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- Linearity of the full inclusion. -/
 instance pbcConstructibleInclusion_scalarLinear (T : Scheme.{u}) :
     (pbcConstructibleInclusion l E T).Linear (PbcIntegralRing l E) :=
   (pbcConstructibleInclusion_linear l E T).2
@@ -439,15 +428,10 @@ variable (R : Type r) [CommRing R] (p : R)
   {D : Type v'} [Category.{w'} D] [Preadditive D] [Linear R D]
   (F : C ⥤ D) [F.Additive] [F.Linear R]
 
-/-- The localized map is the linear base change of the original map on Hom modules.
-Source: blueprint order 1442
-(blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- The localized map is the linear base change of the original map on Hom modules. -/
 def betweenHom (K L : C) := (F.mapLinearMap R (X := K) (Y := L)).baseChange (Localization.Away p)
 
-/-- Base change of linear Hom maps preserves the category laws.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange).
-Proof: check identity on 1 tensor id and composition on pairs of pure tensors, where
-both sides are ab tensor F(fg). Extend by bilinearity and tensor induction. -/
+/-- Base change of linear Hom maps preserves the category laws. -/
 theorem between_laws :
     (∀ K : C, betweenHom R p F K K ((1 : Localization.Away p) ⊗ₜ[R] 𝟙 K) =
       (1 : Localization.Away p) ⊗ₜ[R] 𝟙 (F.obj K)) ∧
@@ -467,9 +451,7 @@ theorem between_laws :
       | add f f' hf hf' => simp [map_add, hf, hf']
     | add g g' hg hg' => simp [map_add, hg, hg']
 
-/-- Scalar localization of a linear functor between two possibly different categories.
-Source: blueprint order 1442
-(blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- Scalar localization of a linear functor between two possibly different categories. -/
 def between : ScalarLocalization R C p ⥤ ScalarLocalization R D p where
   obj K := ⟨F.obj K.obj⟩
   map {K L} f := betweenHom R p F K.obj L.obj f
@@ -478,10 +460,7 @@ def between : ScalarLocalization R C p ⥤ ScalarLocalization R D p where
 
 variable {F} {G : C ⥤ D} [G.Additive] [G.Linear R]
 
-/-- Localized naturality follows on pure tensors from integral naturality.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange).
-Proof: on a tensor a tensor f the two sides are a tensor of the naturality square
-for f. The tensor maps and composition are additive, so tensor induction finishes. -/
+/-- Localized naturality follows on pure tensors from integral naturality. -/
 theorem betweenNat_naturality (α : F ⟶ G) (K L : ScalarLocalization R C p)
     (f : K ⟶ L) :
     (between R p F).map f ≫ ((1 : Localization.Away p) ⊗ₜ[R] α.app L.obj) =
@@ -492,9 +471,7 @@ theorem betweenNat_naturality (α : F ⟶ G) (K L : ScalarLocalization R C p)
   | tmul a f => simp [betweenHom, composition_tmul, α.naturality f]
   | add f g hf hg => simp [map_add, hf, hg]
 
-/-- Localize the specified natural transformation componentwise by tensoring with one.
-Source: blueprint order 1442
-(blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- Localize the specified natural transformation componentwise by tensoring with one. -/
 def betweenNat (α : F ⟶ G) : between R p F ⟶ between R p G where
   app K := (1 : Localization.Away p) ⊗ₜ[R] α.app K.obj
   naturality := betweenNat_naturality R p α
@@ -502,9 +479,7 @@ def betweenNat (α : F ⟶ G) : between R p F ⟶ between R p G where
 end CategoryTheory.ScalarLocalization
 
 namespace WeilConjectures
-/-- Localize the full inclusion of the landed constructible category.
-Source: blueprint order 1442
-(blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- Localize the full inclusion of the landed constructible category. -/
 def pbcRationalInclusion (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (T : Scheme.{u}) : PbcRationalConstructible l E T ⥤ PbcRationalComplete l E T :=
@@ -516,12 +491,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 variable {U V : Scheme.{u}} (q : U ⟶ V)
 
-/-- The canonical completed coefficient map is invertible.
-Source: Stacks 099N (blueprint: lem-sbc-completed-operations-linear-natural-exchange).
-Proof: finite quotient sheaves are finite constant sheaves and their quotient maps
-are the prescribed scalar maps. Profinite-coefficient inverse-image commutation applies
-to this system. Its map agrees with completedCoefficientMap by every finite projection,
-so the uniqueness of that limit-cone map identifies it with the given isomorphism. -/
+/-- The canonical completed coefficient map is invertible. -/
 theorem sbcCompletedCoefficientMap_isIso :
     IsIso (completedCoefficientMap q (pbcIntegralDatum l E)) := by
   let d := pbcIntegralDatum l E
@@ -576,26 +546,22 @@ theorem sbcCompletedCoefficientMap_isIso :
       (pbcLevelConstantComparison U d n).hom
   rw [L.map_id, Category.id_comp]
 
-/-- The actual finite-projection-normalized coefficient isomorphism.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- The actual finite-projection-normalized coefficient isomorphism. -/
 def sbcCoefficientIso :=
   letI := sbcCompletedCoefficientMap_isIso l E q
   asIso (completedCoefficientMap q (pbcIntegralDatum l E))
 
-/-- Ordinary, uncompleted, canonical derived pullback.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- Ordinary, uncompleted, canonical derived pullback. -/
 abbrev sbcOrdinaryPull := proEtaleRingDerivedPullback q
   (pbcAdicCompletion V (pbcIntegralDatum l E))
   (pbcAdicCompletion U (pbcIntegralDatum l E)) (sbcCoefficientIso l E q)
 
-/-- The actual K-injective derived module direct image along the coefficient map.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- The actual K-injective derived module direct image along the coefficient map. -/
 abbrev sbcAmbientPush := proEtaleRingDerivedDirectImage q
   (pbcAdicCompletion V (pbcIntegralDatum l E))
   (pbcAdicCompletion U (pbcIntegralDatum l E)) (sbcCoefficientIso l E q)
 
-/-- The specified object equality gives the identity on sheafified tensors.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- The specified object equality gives the identity on sheafified tensors. -/
 def sbcOrdinaryModuleIsoApp
     (M : pbcModules V (pbcAdicCompletion V (pbcIntegralDatum l E))) :
     (completedModulePullback q (pbcIntegralDatum l E)).obj M ≅
@@ -610,11 +576,7 @@ def sbcOrdinaryModuleIsoApp
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The object equality in the normalized scalar-extension interface is natural.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange).
-Proof: both maps are the sheafification of r tensor x maps to r tensor a(x),
-by the morphism characterization in completedAdicChangeData. The tensor generators
-and the sheafification universal property prove the naturality square. -/
+/-- The object equality in the normalized scalar-extension interface is natural. -/
 theorem sbcOrdinaryModuleIso_naturality
     (M N : pbcModules V (pbcAdicCompletion V (pbcIntegralDatum l E)))
     (a : M ⟶ N) :
@@ -638,8 +600,7 @@ theorem sbcOrdinaryModuleIso_naturality
       ((proEtaleModuleInverseImage q _).map a)]
   simp only [Category.assoc, eqToHom_trans, eqToHom_refl, Category.comp_id]
 
-/-- The ordinary module comparison is identity on the specified sheafified tensors.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- The ordinary module comparison is identity on the specified sheafified tensors. -/
 def sbcOrdinaryModuleIso : completedModulePullback q (pbcIntegralDatum l E) ≅
     proEtaleRingModulePullback q
       (pbcAdicCompletion V (pbcIntegralDatum l E))
@@ -647,8 +608,7 @@ def sbcOrdinaryModuleIso : completedModulePullback q (pbcIntegralDatum l E) ≅
   NatIso.ofComponents (fun M ↦ sbcOrdinaryModuleIsoApp l E q M)
     (fun {M N} a ↦ sbcOrdinaryModuleIso_naturality l E q M N a)
 
-/-- Additivity of the exact ordinary tensor functor at these specified coefficients.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- Additivity of the exact ordinary tensor functor at these specified coefficients. -/
 instance sbcOrdinaryModule_additive :
     (proEtaleRingModulePullback q
       (pbcAdicCompletion V (pbcIntegralDatum l E))
@@ -657,10 +617,7 @@ instance sbcOrdinaryModule_additive :
     (pbcAdicCompletion V (pbcIntegralDatum l E))
     (pbcAdicCompletion U (pbcIntegralDatum l E)) (sbcCoefficientIso l E q)
 
-/-- Zero-morphism preservation from the specified additive module pullback.
-The explicit instance avoids an extra recursive instance search through coefficients.
-Source: blueprint order 1442
-(blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- Zero-morphism preservation from the specified additive module pullback. -/
 instance sbcOrdinaryModule_preservesZero :
     (proEtaleRingModulePullback q
       (pbcAdicCompletion V (pbcIntegralDatum l E))
@@ -669,12 +626,7 @@ instance sbcOrdinaryModule_preservesZero :
   haveI := sbcOrdinaryModule_additive l E q
   Functor.preservesZeroMorphisms_of_additive _
 
-/-- The canonical derived comparison retains the universal counit on every complex.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange).
-Proof: the exact ordinary pullback is a total left derived functor of module pullback.
-Its factorization composed with the normalized module comparison is the required
-counit. Uniqueness of left derived functors gives the unique counit-preserving iso.
-K-flat resolutions compute the same map, so this includes arbitrary unbounded objects. -/
+/-- The canonical derived comparison retains the universal counit on every complex. -/
 theorem sbcOrdinaryDerivedIso_exists :
     ∃! e : completedOrdinaryPullback q (pbcIntegralDatum l E) ≅ sbcOrdinaryPull l E q,
       ∀ P : CochainComplex (pbcModules V (pbcAdicCompletion V (pbcIntegralDatum l E))) ℤ,
@@ -773,14 +725,11 @@ theorem sbcOrdinaryDerivedIso_exists :
       Iso.inv_hom_id_app, Category.comp_id, hδ]
     exact ht' P
 
-/-- The ordinary comparison is fixed by the actual tensor counit, not an arbitrary iso.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- The ordinary comparison is fixed by the actual tensor counit, not an arbitrary iso. -/
 def sbcOrdinaryDerivedIso := (sbcOrdinaryDerivedIso_exists l E q).exists.choose
 
 /-- Package the landed completed-pullback object construction with its actual maps.
-This is the same reduction, strict tower pullback and derived limit composite.
-Source: blueprint order 1442; Stacks 099N
-(blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+This is the same reduction, strict tower pullback and derived limit composite. -/
 def sbcCompletedPullbackFunctor :
     PbcCompletedDerived V (pbcIntegralDatum l E) ⥤
       PbcCompletedDerived U (pbcIntegralDatum l E) :=
@@ -788,8 +737,7 @@ def sbcCompletedPullbackFunctor :
     completedTowerPullback q (pbcIntegralDatum l E) ⋙
       completedTowerRlim (pbcIntegralDatum l E) U
 
-/-- Ordinary pullback followed by the strict-reduction-tower completion unit.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- Ordinary pullback followed by the strict-reduction-tower completion unit. -/
 def sbcCompletionUnit (K : PbcCompletedDerived V (pbcIntegralDatum l E)) :
     (sbcOrdinaryPull l E q).obj K ⟶ completedPullbackObject q (pbcIntegralDatum l E) K :=
   (sbcOrdinaryDerivedIso l E q).inv.app K ≫
@@ -830,13 +778,7 @@ private def sbcAmbientPushIso :
         (pbcAdicCompletion V (pbcIntegralDatum l E))
         (pbcAdicCompletion U (pbcIntegralDatum l E)) (sbcCoefficientIso l E q))
 
-/-- The actual operations preserve intrinsic completeness.
-Source: Stacks 099N and 099K (blueprint: lem-sbc-completed-operations-linear-natural-exchange).
-Proof: completed pullback is the intrinsic completion by the constant/completed
-comparison. For direct image, compute intrinsic completion by the Koszul products
-and mapping fibres. Direct image commutes with limits and is linear in the generators;
-its derived functor commutes with these homotopy limits. Thus it carries a complete
-object to a complete object. No scheme finiteness or constructibility is used. -/
+/-- The actual operations preserve intrinsic completeness. -/
 theorem sbcOperations_preserveComplete :
     (∀ K : PbcComplete l E V, IsPbcComplete l E U
       ((sbcCompletedPullbackFunctor l E q).obj K.obj)) ∧
@@ -860,26 +802,18 @@ theorem sbcOperations_preserveComplete :
     exact sbcComplete_iso l E ((sbcAmbientPushIso l E q).app K.obj)
       ((sbcComplete_unit_iff l E V (R.obj K.obj)).2 inferInstance)
 
-/-- Restrict the actual completed-pullback functor to complete objects.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- Restrict the actual completed-pullback functor to complete objects. -/
 def sbcPull : PbcComplete l E V ⥤ PbcComplete l E U :=
   (IsPbcComplete l E U).lift
     (ObjectProperty.ι (IsPbcComplete l E V) ⋙ sbcCompletedPullbackFunctor l E q)
     (sbcOperations_preserveComplete l E q).1
 
-/-- Restrict the actual derived direct-image functor to complete objects.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- Restrict the actual derived direct-image functor to complete objects. -/
 def sbcPush : PbcComplete l E U ⥤ PbcComplete l E V :=
   (IsPbcComplete l E V).lift (ObjectProperty.ι (IsPbcComplete l E U) ⋙ sbcAmbientPush l E q)
     (sbcOperations_preserveComplete l E q).2
 
-/-- Both restrictions are additive and linear for the specified constant sections.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange).
-Proof: module inverse image and extension preserve addition and constant scalars on
-pure tensors. Direct image does so sectionwise; on derived Hom groups compute with
-K-injective representatives and chain maps. Completion uses products, tensor and
-mapping fibres, which preserve the same scalar operations. The full subcategories
-inherit exactly these Hom actions. -/
+/-- Both restrictions are additive and linear for the specified constant sections. -/
 theorem sbcOperations_linear :
     (sbcPull l E q).Additive ∧ (sbcPush l E q).Additive ∧
       (sbcPull l E q).Linear (PbcIntegralRing l E) ∧
@@ -913,22 +847,14 @@ theorem sbcOperations_linear :
     apply ObjectProperty.hom_ext
     exact Functor.map_smul (sbcAmbientPush l E q) c a.hom
 
-/-- Additivity of completed pullback.
-Source: blueprint order 1442
-(blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- Additivity of completed pullback. -/
 instance sbcPull_additive : (sbcPull l E q).Additive := (sbcOperations_linear l E q).1
-/-- Additivity of completed direct image.
-Source: blueprint order 1442
-(blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- Additivity of completed direct image. -/
 instance sbcPush_additive : (sbcPush l E q).Additive := (sbcOperations_linear l E q).2.1
-/-- Constant-section scalar linearity of completed pullback.
-Source: blueprint order 1442
-(blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- Constant-section scalar linearity of completed pullback. -/
 instance sbcPull_linear : (sbcPull l E q).Linear (PbcIntegralRing l E) :=
   (sbcOperations_linear l E q).2.2.1
-/-- Constant-section scalar linearity of completed direct image.
-Source: blueprint order 1442
-(blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- Constant-section scalar linearity of completed direct image. -/
 instance sbcPush_linear : (sbcPush l E q).Linear (PbcIntegralRing l E) :=
   (sbcOperations_linear l E q).2.2.2
 
@@ -992,12 +918,7 @@ private theorem sbcCompletionUnit_universal (M : PbcComplete l E V)
   have he' : ⇑e = fun a ↦ sbcCompletionUnit l E q M.obj ≫ a := funext he
   exact he' ▸ e.bijective
 
-/-- The complete adjunction is uniquely normalized by the ordinary unit and completion.
-Source: Stacks 099K (blueprint: lem-sbc-completed-operations-linear-natural-exchange).
-Proof: completion is the reflector onto intrinsic complete objects. For complete N,
-precomposition by the completion unit gives Hom(PM,N)=Hom(LM,N). Compose with the
-canonical ordinary derived module adjunction. The resulting Hom equivalence defines
-an adjunction and its unit is the displayed composite. Its unit determines it uniquely. -/
+/-- The complete adjunction is uniquely normalized by the ordinary unit and completion. -/
 theorem sbcAdjunction_exists :
     ∃! adj : sbcPull l E q ⊣ sbcPush l E q,
       ∀ M : PbcComplete l E V, (adj.unit.app M).hom =
@@ -1059,26 +980,22 @@ theorem sbcAdjunction_exists :
   apply ObjectProperty.hom_ext
   exact (hu' M).trans (hu M).symm
 
-/-- The canonical completed adjunction with its fixed tensor-unit normalization.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- The canonical completed adjunction with its fixed tensor-unit normalization. -/
 def sbcAdjunction := (sbcAdjunction_exists l E q).exists.choose
 
 variable {U V : Scheme.{u}} (q : U ⟶ V)
 
-/-- Retain the prescribed finite coefficient identification, with no extra choice.
-Source: blueprint order 1444 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- Retain the prescribed finite coefficient identification, with no extra choice. -/
 def sbcFiniteCoefficientIso (n : ℕ) :=
   letI := completedFiniteCoefficientMap_isIso q (pbcIntegralDatum l E) n
   asIso (completedFiniteCoefficientMap q (pbcIntegralDatum l E) n)
 
-/-- Ordinary, uncompleted, quotient-coefficient inverse image.
-Source: blueprint order 1444 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- Ordinary, uncompleted, quotient-coefficient inverse image. -/
 abbrev sbcFinitePull (n : ℕ) := proEtaleRingDerivedPullback q
   (((pbcAdicRings V (pbcIntegralDatum l E)).obj (op n)))
   (((pbcAdicRings U (pbcIntegralDatum l E)).obj (op n))) (sbcFiniteCoefficientIso l E q n)
 
-/-- Ordinary K-injective quotient-coefficient direct image, without completion.
-Source: blueprint order 1444 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- Ordinary K-injective quotient-coefficient direct image, without completion. -/
 abbrev sbcFinitePush (n : ℕ) := proEtaleRingDerivedDirectImage q
   (((pbcAdicRings V (pbcIntegralDatum l E)).obj (op n)))
   (((pbcAdicRings U (pbcIntegralDatum l E)).obj (op n))) (sbcFiniteCoefficientIso l E q n)
@@ -1125,11 +1042,7 @@ private theorem sbcFiniteCoefficientComp {Z : Scheme.{u}} (v : Z ⟶ U) (n : ℕ
   simp only [Category.assoc]
   rfl
 
-/-- Completed coefficient identifications commute with composition.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange).
-Proof: project to any finite quotient. Both maps are the canonical successive
-inverse-image maps of a constant finite sheaf. Their composition law agrees on
-constant sections, hence everywhere; the completed limit projections are jointly monic. -/
+/-- Completed coefficient identifications commute with composition. -/
 theorem sbcCoefficientComp {Z : Scheme.{u}} (v : Z ⟶ U) :
     proEtaleRingCompositeCoefficients v q
       (pbcAdicCompletion V (pbcIntegralDatum l E))
@@ -1191,15 +1104,11 @@ private theorem sbcSuccessiveUnit_universal {Z : Scheme.{u}} (v : Z ⟶ U)
   exact hb' ▸ b.bijective
 
 
-/-- Canonical quotient-linear reduction of an ambient completed complex.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- Canonical quotient-linear reduction of an ambient completed complex. -/
 abbrev sbcReduction (W : Scheme.{u}) (n : ℕ) :=
   pbcCompletedReduction W (pbcIntegralDatum l E) n
 
-/-- The completed and finite coefficient identifications form the projection square.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange).
-Proof: this is precisely the finite-projection characterization of the completed
-coefficient map; replacing the two invertible maps by asIso changes no homomorphism. -/
+/-- The completed and finite coefficient identifications form the projection square. -/
 theorem sbcProjectionSquare (n : ℕ) :
     (sbcCoefficientIso l E q).hom ≫ pbcAdicProjection U (pbcIntegralDatum l E) n =
       (proEtaleSheafInverseImage q CommRingCat.{u + 1}).map
@@ -1209,8 +1118,7 @@ theorem sbcProjectionSquare (n : ℕ) :
     pbcAdicProjection U (pbcIntegralDatum l E) n = _
   exact limit.lift_π _ (op n)
 
-/-- Restriction comparison is the recorded identity-on-sections coefficient square.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- Restriction comparison is the recorded identity-on-sections coefficient square. -/
 def sbcRestrictionPull (n : ℕ) :=
   proEtaleRingRestrictionDerivedPullback q
     (pbcAdicCompletion V (pbcIntegralDatum l E))
@@ -1222,8 +1130,7 @@ def sbcRestrictionPull (n : ℕ) :=
     (sbcCoefficientIso l E q) (sbcFiniteCoefficientIso l E q n)
     (sbcProjectionSquare l E q n)
 
-/-- Ordinary pullback/reduction comparison is the scalar-adjunction mate of restriction.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- Ordinary pullback/reduction comparison is the scalar-adjunction mate of restriction. -/
 def sbcOrdinaryReductionMap (n : ℕ) :
     sbcOrdinaryPull l E q ⋙ sbcReduction l E U n ⟶
       sbcReduction l E V n ⋙ sbcFinitePull l E q n :=
@@ -1234,12 +1141,7 @@ def sbcOrdinaryReductionMap (n : ℕ) :
       (pbcAdicProjection U (pbcIntegralDatum l E) n))).symm
         (TwoSquare.mk _ _ _ _ (sbcRestrictionPull l E q n).inv))
 
-/-- The ordinary comparison is tensor balancing on K-flat representatives.
-Source: Stacks 07A4 and 06YY (blueprint: lem-sbc-completed-operations-linear-natural-exchange).
-Proof: take a flat-term K-flat resolution. Exact inverse image preserves the
-corresponding acyclic tensor tests. Both composites are its pullback tensored with
-the same quotient; their unit-normalized mate is balancing, whose reverse is its
-inverse. Localization gives an isomorphism on every derived object. -/
+/-- The ordinary comparison is tensor balancing on K-flat representatives. -/
 theorem sbcOrdinaryReductionMap_isIso (n : ℕ) :
     IsIso (sbcOrdinaryReductionMap l E q n) := by
   exact proEtaleReductionPullbackInv_isIso q
@@ -1492,13 +1394,7 @@ private theorem sbcFiniteRestricted_complete (n : ℕ)
 
 end CompletionPresentation
 
-/-- Reduction turns the completion unit into an isomorphism.
-Source: Stacks 099N(5) (blueprint: lem-sbc-completed-operations-linear-natural-exchange).
-Proof: restricting a finite-quotient complex gives an intrinsically complete complex:
-transport to the constant-coefficient site, where nilpotence proves completeness, then
-transport back through the normalized Koszul comparison. The scalar-extension adjunction
-and the completion-unit universal property show that the reduced unit induces a
-bijection on maps to every finite-coefficient complex. Coyoneda detects its invertibility. -/
+/-- Reduction turns the completion unit into an isomorphism. -/
 theorem sbcCompletionUnit_reduction_isIso (n : ℕ) (K : PbcComplete l E V) :
     IsIso ((sbcReduction l E U n).map (sbcCompletionUnit l E q K.obj)) := by
   let d := pbcIntegralDatum l E
@@ -1523,8 +1419,7 @@ theorem sbcCompletionUnit_reduction_isIso (n : ℕ) (K : PbcComplete l E V) :
     rw [adj.homEquiv_naturality_left, Equiv.apply_symm_apply]
     exact hx
 
-/-- The finite reduction of completed pullback, with its projection/unit normalization.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- The finite reduction of completed pullback, with its projection/unit normalization. -/
 def sbcPullReduction (n : ℕ) (K : PbcComplete l E V) :
     (sbcReduction l E U n).obj ((sbcPull l E q).obj K).obj ⟶
       (sbcFinitePull l E q n).obj ((sbcReduction l E V n).obj K.obj) :=
@@ -1533,8 +1428,7 @@ def sbcPullReduction (n : ℕ) (K : PbcComplete l E V) :
     (sbcOrdinaryReductionMap l E q n).app K.obj
 
 /-- The pushforward comparison is the canonical mate of ordinary pullback/reduction.
-It is the finite-perfect projection-formula map, rather than a selected isomorphism.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+It is the finite-perfect projection-formula map, rather than a selected isomorphism. -/
 def sbcPushReduction (n : ℕ) (K : PbcComplete l E U) :
     (sbcReduction l E V n).obj ((sbcPush l E q).obj K).obj ⟶
       (sbcFinitePush l E q n).obj ((sbcReduction l E U n).obj K.obj) :=
@@ -1590,14 +1484,7 @@ private theorem sbcProjection_isIso {A : Type (u + 1)} [CommRing A]
 attribute [local irreducible] sbcCoefficientIso sbcFiniteCoefficientIso
   AdicCoefficientDatum.integralRingIso AdicCoefficientDatum.finiteRingIso
 
-/-- Both canonical finite comparisons are invertible.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange).
-Proof: the pullback comparison is the composite of two already invertible maps.
-The pushforward mate is the projection formula for the globally strict-perfect
-coefficient quotient. Compute that quotient by the two-term free complex for the
-uniformizer power. Derived direct image commutes with the finite sums, shifts and
-cones in that complex, and the displayed mate is identity on the free generator.
-This proves invertibility without any boundedness or finiteness condition on q. -/
+/-- Both canonical finite comparisons are invertible. -/
 theorem sbcReductionComparisons_isIso (n : ℕ) :
     (∀ K : PbcComplete l E V, IsIso (sbcPullReduction l E q n K)) ∧
       (∀ K : PbcComplete l E U, IsIso (sbcPushReduction l E q n K)) := by
@@ -1620,11 +1507,7 @@ theorem sbcReductionComparisons_isIso (n : ℕ) :
 variable {X S T Y : Scheme.{u}} {f : X ⟶ S} {g : T ⟶ S} {h : Y ⟶ X} {e : Y ⟶ T}
     (sq : ChosenCartesianSquare h e f g)
 
-/-- The two composite coefficient identifications agree on every finite projection.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange).
-Proof: both send the constant residue of a to the same constant residue after inverse
-image. This proves equality at each finite quotient, and the limit projections determine
-the completed map. Transport along square commutativity gives the stated heterogeneous equality. -/
+/-- The two composite coefficient identifications agree on every finite projection. -/
 theorem sbcCoefficientSquare (_square : ChosenCartesianSquare h e f g) : HEq
     (proEtaleRingCompositeCoefficients h f
       (pbcAdicCompletion S (pbcIntegralDatum l E))
@@ -1644,8 +1527,7 @@ theorem sbcCoefficientSquare (_square : ChosenCartesianSquare h e f g) : HEq
     rfl
   exact aux _ _ _square.w
 
-/-- The ordinary tensor-normalized comparison, in the orientation used by exchange.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- The ordinary tensor-normalized comparison, in the orientation used by exchange. -/
 def sbcOrdinaryTheta : sbcOrdinaryPull l E f ⋙ sbcOrdinaryPull l E h ≅
     sbcOrdinaryPull l E g ⋙ sbcOrdinaryPull l E e :=
   (proEtaleAmbientRingedPullbackComparison sq
@@ -1694,13 +1576,7 @@ private theorem sbcTheta_ofIso
     intro K
     exact (Category.assoc _ _ _).trans (ht' K)
 
-/-- The completed square comparison is fixed by ordinary pullback and the two units.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange).
-Proof: successive completion is completion of successive ordinary pullback, by the
-reflector property and compatibility of the coefficient ideals. The ordinary theta
-therefore extends uniquely across the two completion units. Its inverse extends the
-ordinary inverse, so the extension is an isomorphism. This is equivalently the
-composition comparison obtained by uniqueness of the composite adjunction. -/
+/-- The completed square comparison is fixed by ordinary pullback and the two units. -/
 theorem sbcTheta_exists :
     ∃! t : sbcPull l E f ⋙ sbcPull l E h ≅ sbcPull l E g ⋙ sbcPull l E e,
       ∀ K : PbcComplete l E S,
@@ -1712,12 +1588,10 @@ theorem sbcTheta_exists :
           sbcCompletionUnit l E e ((sbcPull l E g).obj K).obj := by
   exact sbcTheta_ofIso l E (sbcOrdinaryTheta l E sq)
 
-/-- The square comparison with the ordinary-unit normalization retained.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- The square comparison with the ordinary-unit normalization retained. -/
 def sbcTheta := (sbcTheta_exists l E sq).exists.choose
 
-/-- The specified unit/comparison/counit mate, as an actual component morphism.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- The specified unit/comparison/counit mate, as an actual component morphism. -/
 def sbcExchangeApp (K : PbcComplete l E T) :
     (sbcPull l E f).obj ((sbcPush l E g).obj K) ⟶
       (sbcPush l E h).obj ((sbcPull l E e).obj K) :=
@@ -1725,14 +1599,7 @@ def sbcExchangeApp (K : PbcComplete l E T) :
     (sbcPush l E h).map ((sbcTheta l E sq).hom.app ((sbcPush l E g).obj K)) ≫
     (sbcPush l E h).map ((sbcPull l E e).map ((sbcAdjunction l E g).counit.app K))
 
-/-- The mate is natural, without an invertibility or finiteness assumption.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange).
-Proof: apply the naturality equations for the unit, theta and counit, and functoriality
-of the two operations. Associativity pastes the three squares into the required square.
-Finite reduction preserves this construction: normalized pullback and direct-image
-comparisons carry its unit and counit to the ordinary finite units and counits, and
-carry theta to finite tensor balancing. Applying derived inverse limit gives the same
-completed mate. Thus the construction agrees with finite-level completed exchange. -/
+/-- The mate is natural, without an invertibility or finiteness assumption. -/
 theorem sbcExchange_naturality {K K' : PbcComplete l E T} (a : K ⟶ K') :
     (sbcPush l E g ⋙ sbcPull l E f).map a ≫ sbcExchangeApp l E sq K' =
       sbcExchangeApp l E sq K ≫ (sbcPull l E e ⋙ sbcPush l E h).map a := by
@@ -1743,8 +1610,7 @@ theorem sbcExchange_naturality {K K' : PbcComplete l E T} (a : K ⟶ K') :
     (sbcPush l E h)
   exact (η ≫ θ ≫ ε).naturality a
 
-/-- The integral natural exchange is the specified adjunction mate.
-Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
+/-- The integral natural exchange is the specified adjunction mate. -/
 def sbcExchange : sbcPush l E g ⋙ sbcPull l E f ⟶ sbcPull l E e ⋙ sbcPush l E h where
   app K := sbcExchangeApp l E sq K
   naturality {_K _K'} a := sbcExchange_naturality l E sq a

@@ -74,7 +74,12 @@ import all WeilConjectures.CategoryTheory.ProperBaseChange.SliceTensorIntegerShi
 import Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import Mathlib.CategoryTheory.Localization.Prod
 
-/-! # Unique normalized shift in the unsigned strict-system first slot -/
+/-! # Unique normalized shift in the unsigned strict-system first slot
+
+## References
+
+* Stacks Project, Tags 011G, 012Z, 014E, 06YU and 0941.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -408,22 +413,7 @@ private theorem normalized_unique (W : Scheme.{u}) (r : ℤ)
   apply (cancel_epi ((calculus l E W).systemClosed.tensor.map e.hom)).1
   exact eα.trans ((congrArg (fun f ↦ _ ≫ DerivedCategory.Q.map f ≫ _) hab).trans eβ.symm)
 
-/-- Existence and uniqueness for the unsigned strict-system first slot.
-Source: Stacks 011G, 012Z, 014E, 06YU, 0941; blueprint purity transport, Step 2
-(blueprint: lem-pur-system-tensor-left-shift-unique).
-
-Proof: Reindex the direct sum defining total tensor by (i,j) ↦ (i+r,j).
-The differential on the shifted first factor and the shifted total differential
-have the same signs, so coefficient one defines a chain isomorphism. Its inverse
-uses the inverse reindexing. These maps commute with section restriction and
-coefficient transitions, and are natural in both complexes. Shifts preserve
-K-flatness, so the K-flat tensor models descend this comparison to the derived
-bifunctor and give the displayed property on every K-flat pair. For uniqueness,
-the pure tensor generators determine each total cochain map. The normalization
-then determines the derived component on each K-flat pair, and every derived
-object has a K-flat representative. Naturality transports this equality along
-the representative isomorphisms to every pair of derived objects. Natural
-isomorphism extensionality proves uniqueness. -/
+/-- Existence and uniqueness for the unsigned strict-system first slot. -/
 theorem systemTensorLeftShift_existsUnique (W : Scheme.{u}) (r : ℤ) :
     ∃! σ : tensorShiftFirst (System l E W) r ⋙ (calculus l E W).systemClosed.tensor ≅
       (calculus l E W).systemClosed.tensor ⋙ shiftFunctor (System l E W) r,

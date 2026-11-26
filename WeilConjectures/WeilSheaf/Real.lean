@@ -26,13 +26,13 @@ closed point is stable under complex conjugation. The linear-algebra statement i
 * `AlgebraicGeometry.WeilSheaf.isReal_iff_map_conj_roots_charpoly`: the same for the local
   Frobenius of a Weil sheaf at every closed point.
 
-## Blueprint
+## Implementation notes
 
 `AlgebraicGeometry.WeilSheaf.IsReal` together with
-`AlgebraicGeometry.WeilSheaf.isReal_iff_map_conj_roots_charpoly` implements
-`definition-real-sheaves--1` for Weil sheaves; with
-`AlgebraicGeometry.WeilSheaf.IsReal.conj_map_trace_frobeniusEnd_pow`
-(`definition-real-sheaves--2`) they implement `definition-real-sheaves`.
+`AlgebraicGeometry.WeilSheaf.isReal_iff_map_conj_roots_charpoly` gives the eigenvalue
+characterization of real Weil sheaves; with
+`AlgebraicGeometry.WeilSheaf.IsReal.conj_map_trace_frobeniusEnd_pow` they give the trace
+characterization.
 -/
 
 @[expose] public section
@@ -47,8 +47,7 @@ variable {K : Type v} [Field K]
 
 /-- Over an algebraically closed field `K`, a Frobenius module `M` is `ι`-real, i.e. the image
 under `ι` of its local polynomial `det(1 - T F)` has real coefficients, if and only if the
-multiset of complex eigenvalues `ι α` of its Frobenius `F` is stable under complex conjugation.
-(blueprint: `definition-real-sheaves--1`) -/
+multiset of complex eigenvalues `ι α` of its Frobenius `F` is stable under complex conjugation. -/
 theorem isReal_iff_map_conj_roots_charpoly [IsAlgClosed K] (ι : K →+* ℂ)
     (M : FrobeniusModule.{u, v} K) :
     M.IsReal ι ↔ ((M.frobeniusEnd.charpoly.roots.map ι).map (starRingEnd ℂ)) =
@@ -86,8 +85,7 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- A Weil sheaf `G` is `ι`-real, i.e. `ι det(1 - T Frobₓ | G_x̄)` has real coefficients at every
 closed point `x`, if and only if at every closed point the multiset of complex eigenvalues of the
-local Frobenius `Frobₓ` on `G_x̄` is stable under complex conjugation.
-(blueprint: `definition-real-sheaves`, `definition-real-sheaves--1`) -/
+local Frobenius `Frobₓ` on `G_x̄` is stable under complex conjugation. -/
 theorem isReal_iff_map_conj_roots_charpoly (ι : PadicAlgCl l →+* ℂ) (G : WeilSheaf k₀ l X) :
     G.IsReal ι ↔ ∀ x : X.finitePoints,
       ((G.stalk x).frobeniusEnd.charpoly.roots.map ι).map (starRingEnd ℂ) =

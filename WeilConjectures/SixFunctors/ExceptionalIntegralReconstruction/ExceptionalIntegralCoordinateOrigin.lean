@@ -10,8 +10,21 @@ import WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingConstructibleDeri
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Etale origins of bounded constructible coefficient systems
-Source: Zheng Construction 4.1 and Lemma 4.10.
-(blueprint: lem-sf-exceptional-integral-coordinate-origin).
+
+## Implementation details
+
+For `WeilConjectures.ExceptionalIntegralReconstruction.exceptionalIntegralCoordinateOrigin`: finite
+bounded constructible étale antecedents are chosen using the finite-ring comparison and lifted
+through the exact quotient-ring realization equivalence. Composing the site inverse comparison, its
+realization counit, the finite origin isomorphism and the coordinate evaluation comparison, full
+faithfulness of the finite realization lifts this isomorphism to the recorded evaluation category.
+The common lower bound of the whole system is preserved and reflected by the exact coordinate
+realizations, since evaluation commutes with homology and the ordinary strict components detect zero
+objects.
+
+## References
+
+* [Zheng, Construction 4.1 and Lemma 4.10]
 -/
 
 @[expose] public noncomputable section
@@ -61,21 +74,7 @@ private theorem lowerBoundOfEvaluations (W : Scheme.{u})
   have hz := ((DerivedCategory.isGE_iff _ a).1 (h n) q hq).of_iso ((hi.app M).symm)
   exact hz.eq_of_src _ _
 
-/-- Common finite constructible bounds imply origin in the recorded site comparison.
-Source: Zheng Construction 4.1 and Lemma 4.10; finite-ring constructible origin.
-(blueprint: lem-sf-exceptional-integral-coordinate-origin).
-
-Proof: choose finite bounded constructible etale antecedents using finite-ring
-comparison. Lift them through the exact quotient-ring realization equivalence.
-Compose the site inverse comparison, its realization counit, the finite origin
-isomorphism and the coordinate evaluation comparison. Full faithfulness of finite
-realization lifts this isomorphism to the recorded evaluation category. Exact
-inverse realization preserves the antecedent's lower bound. For the whole system,
-the common input lower bound is preserved and reflected by the exact coordinate
-realizations. Evaluation commutes with homology; the ordinary strict components
-detect zero objects, proving the same lower bound on the whole system. The zero
-and empty cases follow from the same componentwise zero-homology argument.
--/
+/-- Common finite constructible bounds imply origin in the recorded site comparison. -/
 theorem exceptionalIntegralCoordinateOrigin (W : Scheme.{u})
     (P : StrictEtaleEvaluation W (integralExceptionalIntegers l E)
       (integralExceptionalUniformizer l E))

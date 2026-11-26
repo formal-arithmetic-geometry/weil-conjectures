@@ -30,14 +30,27 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Compar
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.HasKunnethComparisons` (`lemma-external-duality-trace-morphism`): the
-  four product comparison assertions `Ku_!`, `α`, `β`, `κ`, one per field.
+- `AlgebraicGeometry.Etale.HasKunnethComparisons`: the four product comparison assertions
+  `Ku_!`, `α`, `β`, `κ`, one per field.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.hasKunnethComparisons` (`lemma-external-duality-trace-morphism`): the
-four
-  comparison maps are isomorphisms.
+- `AlgebraicGeometry.Etale.hasKunnethComparisons`: the four comparison maps are isomorphisms.
+
+## Implementation details
+
+Only `Ku_!` is built from isomorphisms; that `α`, `β` and `κ` are invertible is the content of
+`AlgebraicGeometry.Etale.hasKunnethComparisons`, which holds over a field for finite
+coefficients of invertible exponent. Over a more general base the comparisons fail: over
+`S = 𝔸¹_k`, with `E₁ = E₂ = i_*Λ` the skyscraper at the origin and `N₁ = N₂ = Λ_S`, the source
+of `β` is `i_*Λ(-2)[-4]` and its target `i_*Λ(-1)[-2]`.
+
+The isomorphism `β` for dualizable `E₁`, `E₂` uses that the derived pullbacks are monoidal and
+preserve duals, and that internal homs out of dualizable objects are tensor products with the
+duals. Over a field, constructible complexes of finite Tor amplitude are dualizable only where
+they are lisse, so this is the lisse case of the `externalHom` clause. The case of open
+immersions in `α` is the étale-local case through which lisse coefficients reduce to constant
+ones, and `κ` for dualizable `N` reduces to the exceptional Künneth map for `𝟙_X × b`.
 
 -/
 
@@ -66,9 +79,7 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
   [HasSmallSiteSheafify A]
 
-/-- Blueprint `lemma-external-duality-trace-morphism`: The product comparison maps.
-
-The four product comparison maps of the six-functor formalism over a base scheme `S`, each
+/-- The four product comparison maps of the six-functor formalism over a base scheme `S`, each
 recorded as the assertion that it is an isomorphism. All external products are taken over
 `S`.
 
@@ -88,13 +99,7 @@ recorded as the assertion that it is an isomorphism. All external products are t
 * `kunnethVerdier` is the Künneth–Verdier map
   `κ : M ⊠ 𝔻_Y N ⟶ RHom(p_Y^* N, Rp_X^! M)` on `X ×_S Y`, the composite of `β` applied to the
   pairs `(Λ_X, M)` and `(N, ω_Y)` with `RHom(1, α)` for `id_X × a_Y`, using the unit
-  identifications `RHom(Λ_X, M) = M` and `Λ_X ⊠ N = p_Y^* N`.
-
-Only `Ku_!` is built from isomorphisms; that `α`, `β` and `κ` are invertible is the content of
-`AlgebraicGeometry.Etale.hasKunnethComparisons`, i.e. of `lemma-external-duality-trace-morphism`,
-which holds over a field for finite coefficients of invertible exponent. Over a more general base
-the comparisons fail: over `S = 𝔸¹_k`, with `E₁ = E₂ = i_*Λ` the skyscraper at the origin and
-`N₁ = N₂ = Λ_S`, the source of `β` is `i_*Λ(-2)[-4]` and its target `i_*Λ(-1)[-2]`. -/
+  identifications `RHom(Λ_X, M) = M` and `Λ_X ⊠ N = p_Y^* N`. -/
 structure HasKunnethComparisons (S : Scheme.{u}) : Prop where
   /-- The `!`-Künneth map `Ku_!` is an isomorphism. -/
   kunnethShriek : ∀ {X₁ X₂ Y₁ Y₂ : Scheme.{u}} (b₁ : Y₁ ⟶ S) (b₂ : Y₂ ⟶ S)
@@ -156,11 +161,7 @@ structure HasKunnethComparisons (S : Scheme.{u}) : Prop where
 omit [HasSmallSiteSheafify A] in
 /-- The external Hom map `β` of `AlgebraicGeometry.Etale.HasKunnethComparisons` is an isomorphism
 for **dualizable** `E₁`, `E₂`:
-`RHom(E₁, N₁) ⊠ RHom(E₂, N₂) ≅ RHom(E₁ ⊠ E₂, N₁ ⊠ N₂)`. The derived pullbacks are monoidal and
-preserve duals, and internal homs out of dualizable objects are tensor products with the duals
-(`CategoryTheory.nonempty_iso_tensorObj_map_ihom_obj`). Over a field, constructible complexes of
-finite Tor amplitude are dualizable only where they are lisse, so this is the lisse case of the
-`externalHom` clause. -/
+`RHom(E₁, N₁) ⊠ RHom(E₂, N₂) ≅ RHom(E₁ ⊠ E₂, N₁ ⊠ N₂)`. -/
 theorem nonempty_iso_externalProduct_derivedHom_of_isDualizable [UpperStarPreservesFlat A]
     {S Z₁ Z₂ : Scheme.{u}} (c₁ : Z₁ ⟶ S) (c₂ : Z₂ ⟶ S)
     {E₁ N₁ : _root_.DerivedCategory (Sheaf Z₁.smallEtaleTopology A)}
@@ -198,13 +199,7 @@ lemma isOpenImmersion_mapOverBase {S X₁ X₂ Y₁ Y₂ : Scheme.{u}} (b₁ : Y
 
 /-- The exceptional Künneth map `α` of `AlgebraicGeometry.Etale.HasKunnethComparisons` is an
 isomorphism for **open immersions** `f₁`, `f₂` (quasi-compact, finite coefficients):
-`Rf₁^! N₁ ⊠ Rf₂^! N₂ ≅ R(f₁ × f₂)^! (N₁ ⊠ N₂)`. For a quasi-compact open immersion the exceptional
-inverse image is the restriction
-(`AlgebraicGeometry.Etale.rightDerivedUpperShriekIsoOfIsOpenImmersion`), and `f₁ × f₂` is again
-an open immersion, so this is the compatibility of the external product with pullbacks
-(`AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_externalProduct_of_comp`).
-This is the étale-local case through which the blueprint proof
-(`proposition-exceptional-external-kunneth--1`) reduces lisse coefficients to constant ones. -/
+`Rf₁^! N₁ ⊠ Rf₂^! N₂ ≅ R(f₁ × f₂)^! (N₁ ⊠ N₂)`. -/
 theorem nonempty_iso_externalProduct_rightDerivedUpperShriek_of_isOpenImmersion
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {S X₁ X₂ Y₁ Y₂ : Scheme.{u}}
     (b₁ : Y₁ ⟶ S) (b₂ : Y₂ ⟶ S) (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂)
@@ -234,11 +229,7 @@ theorem nonempty_iso_externalProduct_rightDerivedUpperShriek_of_isOpenImmersion
 
 /-- The Künneth–Verdier map `κ` of `AlgebraicGeometry.Etale.HasKunnethComparisons` for a
 **dualizable** `N` reduces to the case `N = Λ_Y`: given `M ⊠ ω_Y ≅ Rp_X^! M`,
-`M ⊠ 𝔻_Y N ≅ RHom(p_Y^* N, Rp_X^! M)`. Indeed `𝔻_Y N = RHom(N, ω_Y) ≅ N^∨ ⊗ ω_Y` and
-`RHom(p_Y^* N, -) ≅ p_Y^* N^∨ ⊗ -` (`CategoryTheory.nonempty_iso_tensorObj_map_ihom_obj_right`).
-The remaining case `M ⊠ ω_Y ≅ Rp_X^! M` is the exceptional Künneth map for `𝟙_X × b`, which
-is how the blueprint proof of `lemma-external-duality-trace-morphism--1` uses
-`proposition-exceptional-external-kunneth--1`. -/
+`M ⊠ 𝔻_Y N ≅ RHom(p_Y^* N, Rp_X^! M)`. -/
 theorem nonempty_iso_externalProduct_verdierDual_of_isDualizable [UpperStarPreservesFlat
     (ModuleCat.{u + 1} Λ)]
     {S : Scheme.{u}} (a : X ⟶ S) (b : Y ⟶ S) [HasCompactification b]

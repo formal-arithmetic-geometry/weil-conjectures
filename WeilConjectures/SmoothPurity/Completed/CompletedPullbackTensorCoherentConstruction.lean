@@ -45,10 +45,23 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Coherent pullback/tensor evaluation and coherence
 
-Source: Stacks 07A4, 0941 and 03D2. These existing proved declarations are
-extracted verbatim from the completed construction to keep file compilation
-within the project limit. The parent publicly re-exports them.
-(blueprint: lem-pur-completed-pullback-tensor-coherent-construction).
+The finite levels of the coherent pullback/tensor comparison on coefficient sequences: the
+unit-normalized finite pullback, the evaluation comparison for the system inverse image, and
+the compatibility of the coherent comparison with evaluation, associativity, braiding and
+units.
+
+## Implementation details
+
+These declarations are split off from the completed construction to keep file compilation
+within the project limit; the parent file publicly re-exports them. The coherence equations
+are proved on K-flat representatives and descended to arbitrary derived inputs.
+The cochain normalization is kept behind the named predicate
+`pullbackTensorDerivedEvaluationNormalization`, so that choosing the unique isomorphism
+does not repeatedly type-check the full square.
+
+## References
+
+* Stacks Project, Tags 00YV, 03D2, 03EL, 06YS, 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -87,11 +100,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The finite inverse image in the strict integral tower is the intrinsic inverse
-image, with equality on the actual adjunction-unit sections.
-Source: Stacks 00YV, 03D2 (blueprint: def-pur-completed-pullback-tensor-construction).
-Proof: both right adjoints take sections over the same base-change object with
-the same constant coefficient action. The identity of right adjoints induces
-this comparison of left adjoints. Its unit formula characterizes it uniquely. -/
+image, by a unique isomorphism compatible with the adjunction-unit sections. -/
 theorem pullbackTensorLevelIntrinsic_existsUnique {X Y : Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ) :
     ∃! e : integralOperationsLevelPullback l E f n ≅
@@ -126,8 +135,7 @@ theorem pullbackTensorLevelIntrinsic_existsUnique {X Y : Scheme.{u}}
       ext U x
       exact he M U.unop x
 
-/-- The unit-normalized realization of the finite pullback used by the strict tower.
-Source: Stacks 03D2 (blueprint: def-pur-completed-pullback-tensor-construction). -/
+/-- The unit-normalized realization of the finite pullback used by the strict tower. -/
 def pullbackTensorLevelIntrinsic {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
   pullbackTensorUniqueChoice (pullbackTensorLevelIntrinsic_existsUnique l E f n)
 
@@ -162,9 +170,9 @@ private theorem derivedCompositeIso_existsUnique
 attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficientCommRingSheaf
   pullbackTensorSequenceDerived in
 attribute [local irreducible] pullbackTensorInverseEvaluationComplex pullbackTensorLevelIntrinsic in
-/-- The full cochain normalization of finite evaluation, kept behind a named predicate so
-selecting its unique isomorphism does not repeatedly type-check the full square.
-Source: Stacks 07A4, 0941 (blueprint: def-pur-completed-pullback-tensor-construction). -/
+/-- The cochain normalization of a finite evaluation comparison `e`: on every cochain
+representative it is the ordinary inverse-image/evaluation comparison followed by the
+unit-normalized finite pullback. -/
 def pullbackTensorDerivedEvaluationNormalization {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (e : pullbackTensorSequenceDerived l E f ⋙
         coefficientSequenceDerivedEvaluation l E X n ≅
@@ -189,12 +197,7 @@ attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficien
   pullbackTensorSequenceDerived in
 attribute [local irreducible] pullbackTensorInverseEvaluationComplex pullbackTensorLevelIntrinsic in
 /-- Evaluating the system inverse image gives the finite intrinsic inverse image;
-the comparison is fixed on all cochain representatives by the two ordinary units.
-Source: Stacks 0941, 03D2 (blueprint: def-pur-completed-pullback-tensor-construction).
-Proof: apply the exact evaluation functor to a cochain representative. The
-ordinary inverse-image/evaluation mate and the unit-normalized intrinsic
-realization give the displayed chain comparison. Exact localization descends
-it uniquely, since every derived object is represented by a complex. -/
+there is a unique such comparison satisfying the cochain normalization. -/
 theorem pullbackTensorDerivedEvaluation_existsUnique {X Y : Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ) :
     ∃! e : pullbackTensorSequenceDerived l E f ⋙
@@ -217,8 +220,7 @@ theorem pullbackTensorDerivedEvaluation_existsUnique {X Y : Scheme.{u}}
     (pullbackTensorInverseEvaluationComplex l E f n).symm
     (pullbackTensorLevelIntrinsic l E f n)
 
-/-- The actual evaluation comparison, including its fixed cochain normalization.
-Source: Stacks 0941 (blueprint: def-pur-completed-pullback-tensor-construction). -/
+/-- The evaluation comparison for the system inverse image, normalized on cochains. -/
 def pullbackTensorDerivedEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
   pullbackTensorUniqueChoice (pullbackTensorDerivedEvaluation_existsUnique l E f n)
 
@@ -257,13 +259,9 @@ attribute [local irreducible] pullbackTensorSystemComparison pullbackTensorDeriv
   pullbackTensorSequenceDerived pullbackTensorSequenceInverse
   finitePullbackTensorConstructionIso canonicalFinitePullbackTensor
 
-/-- The coherent comparison whose limit defines μI evaluates to the same μF at
-EVERY finite level, under the canonical tensor and inverse-image comparisons.
-Source: Stacks 07A4, 0941 (blueprint: def-pur-completed-pullback-tensor-construction).
-Proof: on a flat K-flat pair both routes are the totalization of the identical
-ordinary section formula. The evaluation tensor comparison and inverse-image
-comparison preserve these sections by their normalizations. K-flat descent
-therefore proves the equation on arbitrary coherent derived inputs. -/
+/-- At every finite level `n`, the coherent pullback/tensor comparison evaluates to the
+canonical finite pullback/tensor comparison, under the evaluation tensor and inverse-image
+comparisons. -/
 theorem pullbackTensorSystemComparison_evaluation {X Y : Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -300,12 +298,7 @@ section CoherentAssociativity
 attribute [local irreducible] pullbackTensorCalculus pullbackTensorSequenceDerived
   pullbackTensorSystemComparison pullbackTensorSequenceInverse
 
-/-- Associativity for the actual coherent μ whose derived limit is the integral μ.
-Source: Stacks 07A4, 0941 (blueprint: def-pur-completed-pullback-tensor-construction).
-Proof: on three simultaneous flat K-flat representatives the two maps send
-(x tensor y) tensor z to f*x tensor (f*y tensor f*z). The total reassociation
-preserves the signed differential and all sequence restrictions. Localize this
-equality of coherent complexes; applying the actual limit functor preserves it. -/
+/-- The coherent pullback/tensor comparison is compatible with the associators. -/
 theorem pullbackTensorSystemComparison_associativity {X Y : Scheme.{u}}
     (f : X ⟶ Y) (M N P : coefficientSequenceDerived l E Y) :
     (pullbackTensorSequenceDerived l E f).map
@@ -346,12 +339,7 @@ attribute [local irreducible] pullbackTensorCalculus pullbackTensorSequenceDeriv
   pullbackTensorSystemComparison pullbackTensorBraiding pullbackTensorSequenceInverse
 
 attribute [local implicit_reducible] pullbackTensorSwap in
-/-- Koszul braiding for the same coherent μ before taking its derived limit.
-Source: Stacks 06YS, 07A4, 0941 (blueprint: def-pur-completed-pullback-tensor-construction).
-Proof: both maps take a homogeneous generator x tensor y of degrees p,q to
-(-1)^(pq) f*y tensor f*x. The equality respects every sequence restriction and
-descends through the specified K-flat tensor models. Its image under the actual
-limit, scalar localization, and common-stage maps gives the higher-level equation. -/
+/-- The coherent pullback/tensor comparison is compatible with the Koszul braidings. -/
 theorem pullbackTensorSystemComparison_braiding {X Y : Scheme.{u}}
     (f : X ⟶ Y) (M N : coefficientSequenceDerived l E Y) :
     (pullbackTensorSequenceDerived l E f).map
@@ -399,10 +387,8 @@ section CoherentUnit
 universe a b c d
 open MonoidalCategory
 
-/-- Both unit equations for the coherent μ used to define the integral comparison.
-Source: Stacks 03EL, 07A4, 0941 (blueprint: def-pur-completed-pullback-tensor-construction).
-Proof: the associativity comparison and the coherent unit representative are
-combined by the monoidal unit extraction lemma. -/
+/-- The pullback of the tensor unit is isomorphic to the tensor unit, compatibly with the
+coherent pullback/tensor comparison and both unitors. -/
 theorem pullbackTensorSystemComparison_unit {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ ε : (pullbackTensorSequenceDerived l E f).obj
         (pullbackTensorCalculus l E Y).systemClosed.monoidal.tensorUnit ≅

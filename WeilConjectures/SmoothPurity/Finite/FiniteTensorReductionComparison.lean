@@ -6,7 +6,14 @@ Authors: Bin Wu
 module
 public import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTowerCore
 
-/-! # The finite tensor of inverse reduction evaluations -/
+/-! # The finite tensor of inverse reduction evaluations
+
+The tensor product of the two inverse reduction evaluations, with scalars restricted.
+
+## References
+
+* [Stacks, Tags 07A4 and 0941]
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option linter.all false
@@ -25,8 +32,7 @@ attribute [local irreducible] Functor.leftAdjoint HasDerivedCategory.standard
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Tensor the two inverse reduction evaluations and restrict scalars.
-Source: Stacks 07A4, 0941 (blueprint: def-pur-finite-tensor-reduction-comparison). -/
+/-- Tensor the two inverse reduction evaluations and restrict scalars. -/
 def pullbackTensorFiniteReductionComparison (W : Scheme.{u}) (n : ℕ) :
     ((((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).prod
       ((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ))) ⋙

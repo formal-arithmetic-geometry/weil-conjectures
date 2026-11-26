@@ -15,8 +15,19 @@ import WeilConjectures.RingTheory.PrincipalLocalizationCI
 /-!
 # Principal localization of a relative global complete intersection
 
-Source: Stacks Project, Algebra, Lemma Tag 00SS, part (2)
-(blueprint: lem-weil-pbc-relative-global-complete-intersection-principal-localization).
+Inverting an element of a relative global complete intersection gives a relative global complete
+intersection with one more variable and one more equation.
+
+## Implementation details
+
+The enlarged quotient is identified with the principal localization by the polynomial quotient
+localization lemma. Its fibres are principal localizations of the original fibres, and
+equidimensionality of the original fibres together with invariance of local dimension on open
+subspaces gives the dimension `(n+1)-(c+1)`.
+
+## References
+
+* [Stacks, Tag 00SS] (2)
 -/
 
 @[expose] public section
@@ -30,16 +41,7 @@ presentation), then for `h ∈ R[x_1,…,x_n]` with image `g ∈ T` the presenta
 `T' = R[x_1,…,x_{n+1}]/(f_1,…,f_c,h x_{n+1} - 1)` (old variables `Fin.castSucc i`, new variable
 `Fin.last n`, new equation appended with `Fin.snoc`) is a relative global complete intersection,
 and the `R`-algebra map `T' → T_g` with `x_i ↦ x_i/1` and `x_{n+1} ↦ 1/g` is an isomorphism.
-Source: Stacks Project, Algebra, Lemma Tag 00SS, part (2)
-(blueprint: lem-weil-pbc-relative-global-complete-intersection-principal-localization).
-
-Proof: identify the enlarged quotient with the principal localization by the
-polynomial quotient localization lemma.  Tensoring with residue fields identifies
-its fibres with principal localizations of the original fibres.  The dimension
-condition is preserved on the corresponding basic open, using equidimensionality
-of the original complete-intersection fibres and invariance of local dimension on
-open subspaces; hence the enlarged presentation has dimension `(n+1)-(c+1)`.
--/
+and the `R`-algebra map `T' → T_g` with `x_i ↦ x_i/1` and `x_{n+1} ↦ 1/g` is an isomorphism. -/
 theorem relativeGlobalCompleteIntersection_principalLocalization
     (R : Type u) [CommRing R] (n c : ℕ)
     (f : Fin c → MvPolynomial (Fin n) R)

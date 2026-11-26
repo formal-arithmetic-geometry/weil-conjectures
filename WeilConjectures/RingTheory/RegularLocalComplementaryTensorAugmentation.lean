@@ -12,12 +12,21 @@ import Mathlib.Algebra.Homology.SingleHomology
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.LinearAlgebra.ExteriorPower.Basic
 
-/-! Tensor Koszul augmentation for complementary regular quotients.
-Source: Stacks Project, `intersection.tex`, Tag 0B1I.
-(blueprint: new-d3-regular-local-complementary-tensor-augmentation)
+/-!
+# Tensor Koszul augmentation for complementary regular quotients
 
-The statement isolates construction of the normalized degree-zero augmentation after
-base change; its proof uses the tensor homology calculation and the quotient identity.
+Construction of the normalized degree-zero augmentation of the tensor Koszul complex to the
+common quotient `A/(I ⊔ J)`.
+
+## Implementation details
+
+The degree-zero homology of the tensor Koszul complex is the quotient by `I ⊔ J`; the map is
+defined by multiplication, and exactness in positive degrees from the tensor homology
+hypothesis makes it a quasi-isomorphism.
+
+## References
+
+* [Stacks, Tag 0B1I]
 -/
 
 @[expose] public section
@@ -232,15 +241,7 @@ private theorem exists_tensor_quotient_augmentation
   exact hqM _
 
 /-- Acyclic tensor Koszul homology and transversality give the normalized tensor
-augmentation to the common quotient.
-Source: Stacks Project, `intersection.tex`, Tag 0B1I.
-(blueprint: new-d3-regular-local-complementary-tensor-augmentation)
-
-Proof: use the degree-zero identification of the tensor Koszul complex with the quotient
-by `I ⊔ J`, define the map by multiplication, and use exactness in positive degrees
-from the tensor homology hypothesis to obtain a quasi-isomorphism. The displayed pure
-tensor formula is the defining multiplication formula.
--/
+augmentation to the common quotient. -/
 theorem regularLocal_complementary_tensor_augmentation
     (A : Type u) [CommRing A] [IsRegularLocalRing A] (r : ℕ) (I J : Ideal A) (g : Fin r → A)
     (hspan : I = Ideal.span (Set.range g))

@@ -15,13 +15,23 @@ import Mathlib.RingTheory.TensorProduct.Basic
 /-!
 # Descent of extensions of cyclic ideal-power quotients
 
-Source: Stacks Project, More on Algebra, Lemma 05EG, the case `M = R/I^n`
-(blueprint: lem-weil-pbc-cyclic-extension-flat-descent).
+Let `R → S` be flat with `R/I ≅ S/IS` for a finitely generated ideal `I`. Every extension of
+`S ⊗ R/I^n` by `S ⊗ N` is the base change of an extension of `R/I^n` by `N`.
+
+## Implementation details
 
 Base change is written `S ⊗[R] M`, as in `LinearMap.baseChange`; tensor symmetry identifies
 this with the source's `M ⊗[R] S`. Short exactness is expressed by injectivity, `Function.Exact`,
 and surjectivity, the module interpretation of `CategoryTheory.ShortComplex.ShortExact`
 via `ShortExact.moduleCat_exact_iff_function_exact` and its injective/surjective lemmas.
+
+The extension is built as `E = (N × R) / {(l(r), -r) : r ∈ I^n}`, where `l : I^n → N` comes
+from `exists_ideal_power_hom_lift` applied to the map `I^n → S ⊗ N` determined by a lift of
+`1 ⊗ 1`; flatness makes the induced map `S ⊗ E → T` bijective.
+
+## References
+
+* [Stacks, Tag 05EG]
 -/
 
 @[expose] public section
@@ -32,27 +42,9 @@ open TensorProduct
 
 namespace LinearMap
 
-/-- An extension of a cyclic ideal-power quotient descends along a flat neighbourhood.
-Source: Stacks Project, More on Algebra, Lemma 05EG, second paragraph of the proof
-(blueprint: lem-weil-pbc-cyclic-extension-flat-descent).
-
-Proof:
-1. Lift `1 ⊗ 1` to `τ` in the given extension. Exactness and injectivity give
-   the unique map `d : I^n → S ⊗ N` satisfying `a (d r) = r • τ`.
-2. Apply `exists_ideal_power_hom_lift` to obtain `l : I^n → N` and `m` with
-   `1 ⊗ l(r) = d(r) + r • m`. Replace `τ` by `τ + a(m)`.
-3. Construct `E = (N × R) / range (r ↦ (l(r), -r))`, with inclusion `j`
-   and second-coordinate quotient `q`. A relation with second coordinate zero
-   has `r = 0`, proving injectivity. A representative `(p,r)` in `ker q`
-   has `r ∈ I^n` and equals `j(p + l(r))`, proving exactness; `q` is surjective.
-4. The map `(p,r) ↦ a(1 ⊗ p) + r • (τ + a(m))` kills the relations.
-   Descend it to `E` and extend scalars to obtain `θ₀ : S ⊗ E → T`.
-   Check both commuting squares on pure tensors and quotient representatives.
-5. Flat tensor exactness gives `ker q_S = range j_S`, and tensor right
-   exactness gives surjectivity of `q_S`. If `θ₀ z = 0`, lift `z` from `j_S`
-   and use injectivity of `a` to show `z = 0`. To lift `t` from `θ₀`, first
-   lift `b(t)` through `q_S`, then lift the remainder from `a`. Thus `θ₀`
-   is bijective and gives the required linear equivalence. -/
+/-- An extension of a cyclic ideal-power quotient descends along a flat neighbourhood: every
+short exact sequence `0 → S ⊗ N → T → S ⊗ R/I^n → 0` is the base change of a short exact
+sequence `0 → N → E → R/I^n → 0`. -/
 theorem exists_cyclic_extension_flat_descent
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
     (hflat : (algebraMap R S).Flat) (I : Ideal R) (hI : I.FG)

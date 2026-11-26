@@ -9,9 +9,11 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSyst
 
 /-! # Independent leaf occurrences in an integral-system expression
 
-Source: blueprint, adic transport in theorem-smooth-purity-all-admissible-coefficients, Step 2;
-independent occurrence-slot convention of lem-pur-integral-realization-shift-coherence
-(blueprint: def-pur-integral-expression-occurrences).
+## Implementation details
+
+Every leaf occurrence is an independent slot: two occurrences of the same variable give
+different slots. Contexts are explicit unary composites found by tree search; no functor,
+map or context is chosen by an existence theorem.
 -/
 
 @[expose] public noncomputable section
@@ -23,9 +25,7 @@ open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.IntegralSystemRealization
 
 /-- Each leaf contributes its own singleton, and a tensor contributes a disjoint
-sum. In particular two occurrences of the same variable give different elements.
-Source: blueprint, independent occurrence slots
-(blueprint: def-pur-integral-expression-occurrences). -/
+sum. In particular two occurrences of the same variable give different elements. -/
 def Expression.Occurrences {B : Scheme.{u}} {I : Type u} {X : I → Over B} :
     {W : Over B} → Expression B I X W → Type u
   | _, .var _ => PUnit.{u + 1}
@@ -36,9 +36,7 @@ def Expression.Occurrences {B : Scheme.{u}} {I : Type u} {X : I → Over B} :
   | _, .tensor e t => e.Occurrences ⊕ t.Occurrences
 
 /-- Original input label at a leaf occurrence. This retains labels independently
-of equality of the supplied objects.
-Source: blueprint, each leaf occurrence is an independent slot
-(blueprint: def-pur-integral-expression-occurrences). -/
+of equality of the supplied objects. -/
 def Expression.occurrenceLabel {B : Scheme.{u}} {I : Type u} {X : I → Over B} :
     {W : Over B} → (e : Expression B I X W) → e.Occurrences → I
   | _, .var i => fun _ ↦ i
@@ -50,17 +48,13 @@ def Expression.occurrenceLabel {B : Scheme.{u}} {I : Type u} {X : I → Over B} 
 
 open Classical in
 open Classical in
-/-- Shift one factor of a product input category; all other factors retain their maps.
-Source: blueprint Step 2 (blueprint: def-pur-integral-expression-occurrences). -/
+/-- Shift one factor of a product input category; all other factors retain their maps. -/
 def inputShift {I : Type u} (C : I → Type v) [∀ i, Category.{w} (C i)]
     [∀ i, HasShift (C i) ℤ] (i : I) (r : ℤ) : (∀ j, C j) ⥤ ∀ j, C j :=
   Functor.pi' (fun j ↦ Pi.eval C j ⋙ if i = j then shiftFunctor (C j) r else 𝟭 (C j))
 
 open Classical in
-/-- The input endofunctor has exactly the dependent-update object family.
-Source: blueprint Step 2 (blueprint: def-pur-integral-expression-occurrences).
-Proof: apply dependent function extensionality at j and split on i = j. After
-substitution the selected component is (K i)[r]; every other component is K j. -/
+/-- The input endofunctor has exactly the dependent-update object family. -/
 theorem inputShift_obj {I : Type u} (C : I → Type v) [∀ i, Category.{w} (C i)]
     [∀ i, HasShift (C i) ℤ] (K : ∀ j, C j) (i : I) (r : ℤ) :
     (inputShift C i r).obj K = Function.update K i ((K i)⟦r⟧) := by
@@ -74,9 +68,7 @@ open Classical in
 open Classical in
 /-- A single designated input, with every other operand held at its actual value.
 Unary vertices retain their original maps and witnesses, and tensor vertices retain
-which of the two inputs contains the designated occurrence.
-Source: blueprint, independent slotwise comparisons
-(blueprint: def-pur-integral-expression-occurrences). -/
+which of the two inputs contains the designated occurrence. -/
 inductive Expression.SlotContext {B : Scheme.{u}} {C : Scheme.{u} → Type v}
     [∀ W, Category.{w} (C W)] (d : Interpretation C) (A : Over B) :
     Over B → Type (max (u + 1) v) where
@@ -92,9 +84,7 @@ inductive Expression.SlotContext {B : Scheme.{u}} {C : Scheme.{u} → Type v}
   | tensorRight {W : Over B} (M : C W.left) (e : SlotContext d A W) : SlotContext d A W
 
 /-- A context is the actual unary composite, using the appropriate curried tensor
-functor at a tensor vertex. No functor or map is chosen by an existence theorem.
-Source: blueprint, expression contexts and slotwise comparisons
-(blueprint: def-pur-integral-expression-occurrences). -/
+functor at a tensor vertex. -/
 def Expression.SlotContext.evaluate {B : Scheme.{u}} {C : Scheme.{u} → Type v}
     [∀ W, Category.{w} (C W)] {d : Interpretation C} {A : Over B} :
     {W : Over B} → SlotContext d A W → (C A.left ⥤ C W.left)
@@ -109,18 +99,14 @@ def Expression.SlotContext.evaluate {B : Scheme.{u}} {C : Scheme.{u} → Type v}
   | W, .tensorRight M e => e.evaluate ⋙ (Functor.curry.obj (d.tensor W.left)).obj M
 
 open Classical in
-/-- Independently labelled finite expressions. This is only a presentation of
-independent occurrences: independentInputs provides it for every existing expression.
-Source: blueprint, independent input slots
-(blueprint: def-pur-integral-expression-occurrences). -/
+/-- Independently labelled finite expressions. `independentInputs` provides this
+presentation for every existing expression. -/
 abbrev IndependentExpression (B : Scheme.{u}) (I : Type u) (X : I → Over B) (W : Over B) :=
   {e : Expression B I X W // Function.Bijective e.occurrenceLabel}
 
 open Classical in
 /-- Search the expression for a designated input label. At a tensor the actual
-other subtree is held fixed. For independent labels there is exactly one hit.
-Source: blueprint, individual occurrence slots
-(blueprint: def-pur-integral-expression-occurrences). -/
+other subtree is held fixed. For independent labels there is exactly one hit. -/
 def Expression.variableContext {B : Scheme.{u}} {I : Type u} {X : I → Over B}
     {C : Scheme.{u} → Type v} [∀ W, Category.{w} (C W)] (d : Interpretation C)
     (K : ∀ i, C (X i).left) (i : I) :
@@ -214,25 +200,14 @@ private theorem evaluate_update_absent {B : Scheme.{u}} {I : Type u}
     exact congrArg (d.tensor _).obj
       (Prod.ext (ih (fun j ↦ h (Sum.inl j))) (jt (fun j ↦ h (Sum.inr j))))
 
-/-- Every independently labelled input has a context in the explicit search.
-Source: blueprint, independent leaf indexing
-(blueprint: def-pur-integral-expression-occurrences).
-
-Proof: surjectivity of the label map gives a leaf with label i. Follow its path
-through the tree. Unary vertices preserve successful searches. At a tensor the
-leaf is in one of the two disjoint occurrence sets. Injectivity excludes an
-occurrence of i in the other subtree, so the search reaches precisely that branch.
-A variable labelled i returns the input context. Thus the resulting Option is some. -/
+/-- Every independently labelled input has a context in the explicit search. -/
 theorem IndependentExpression.variableContext_isSome {B : Scheme.{u}} {I : Type u}
     {X : I → Over B} {C : Scheme.{u} → Type v} [∀ W, Category.{w} (C W)]
     (d : Interpretation C) {W : Over B} (e : IndependentExpression B I X W)
     (K : ∀ i, C (X i).left) (i : I) : (e.val.variableContext d K i).isSome := by
   exact (variableContext_isSome_iff d K i e.val).mpr (e.property.surjective i)
 
-/-- Extract the context from the successful explicit tree search. The proof only
-certifies Option.get; it does not choose a context from an existence theorem.
-Source: blueprint, independent input slots
-(blueprint: def-pur-integral-expression-occurrences). -/
+/-- Extract the context from the successful explicit tree search. -/
 def IndependentExpression.variableContext {B : Scheme.{u}} {I : Type u}
     {X : I → Over B} {C : Scheme.{u} → Type v} [∀ W, Category.{w} (C W)]
     (d : Interpretation C) {W : Over B} (e : IndependentExpression B I X W)
@@ -297,17 +272,7 @@ private theorem variableContext_evaluate_of_some {B : Scheme.{u}} {I : Type u}
         (Prod.ext (evaluate_update_absent d K i P e ha).symm (jt hr c' hc'))
 
 open Classical in
-/-- Replacing the sole occurrence of a label is evaluation of its actual context.
-Source: blueprint, slotwise comparison
-(blueprint: def-pur-integral-expression-occurrences).
-
-Proof: induct along the successful search. At a variable, bijectivity identifies
-its label with i and the context is identity. Unary functor evaluation preserves
-the equality. At a tensor the nonselected subtree has no occurrence of i, by
-injectivity of the global leaf-label map. Its evaluation therefore ignores the
-update. The selected subtree satisfies the inductive identity, so the respective
-curried tensor gives the stated equality. The same induction with P = K i gives
-the second equality, since update at the current value is the original family. -/
+/-- Replacing the sole occurrence of a label is evaluation of its actual context. -/
 theorem IndependentExpression.variableContext_evaluate {B : Scheme.{u}} {I : Type u}
     {X : I → Over B} {C : Scheme.{u} → Type v} [∀ W, Category.{w} (C W)]
     (d : Interpretation C) {W : Over B} (e : IndependentExpression B I X W)

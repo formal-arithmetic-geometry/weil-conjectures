@@ -13,8 +13,14 @@ import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 
 /-! # Native coefficient transitions
 
-Source: Stacks 03DI, 0D6E; Bhatt--Scholze 6.7.6
-(blueprint: lem-weil-compact-support-coefficient-transition).
+We construct the horizontal transition maps between the finite coefficient quotients on a
+sequence site and their localizations, and compare them with the derived strict-tower
+transitions.
+
+## References
+
+* [Stacks, Tags 03DA, 03DI, 0941, 0D6E](https://stacks.math.columbia.edu/tag/0D6E)
+* Bhatt–Scholze, 6.7.6
 -/
 
 @[expose] public noncomputable section
@@ -144,9 +150,7 @@ private theorem moduleSheafHomTransport
   ext V x
   exact congrFun (eq_of_heq (h V)) x
 
-/-- All-pair coefficient quotients agree with the direct quotient factor.
-Source: Stacks 03DA, 0941
-(blueprint: lem-weil-compact-support-coefficient-transition). -/
+/-- All-pair coefficient quotients agree with the direct quotient factor. -/
 theorem compactSupportQuotient_eq (W : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
     normalizedDVRQuotient l E W h =
       (sheafCompose (ProEt.topology W)
@@ -191,9 +195,7 @@ theorem compactSupportQuotient_eq (W : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
     intro a
     rfl
 
-/-- Restriction along the direct quotient is the recorded exact finite restriction.
-Source: Stacks 03DA
-(blueprint: lem-weil-compact-support-coefficient-transition). -/
+/-- Restriction along the direct quotient is the recorded exact finite restriction. -/
 theorem compactSupportModuleRes_eq (W : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
     normalizedDVRModuleRes l E W h =
       proEtaleCoefficientRestrictScalars W (compactSupportLevelQuotient l E m n h) := by
@@ -201,8 +203,7 @@ theorem compactSupportModuleRes_eq (W : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
   rw [compactSupportQuotient_eq]
   rfl
 
-/-- The concrete horizontal map of module sheaves on a sequence site.
-Source: Stacks 03DA, 0941 (blueprint: lem-weil-compact-support-coefficient-transition). -/
+/-- The concrete horizontal map of module sheaves on a sequence site. -/
 def compactSupportHorizontalWithCoefficients
     {C : Type*} [Category C] (J : GrothendieckTopology C)
     (R : Sheaf (coefficientSequenceTopology J) RingCat.{u + 1})
@@ -239,15 +240,13 @@ private theorem compactSupportHorizontalWithCoefficients_sections
       (fun x : M.val.obj (op (m, V.unop)) ↦ M.val.map (α.app V.unop).op x) := by
   rfl
 
-/-- The horizontal inclusion between coefficient slices.
-Source: Stacks 0941 (blueprint: lem-weil-compact-support-coefficient-transition). -/
+/-- The horizontal inclusion between coefficient slices. -/
 def compactSupportHorizontalIndex {C : Type*} [Category C]
     {m n : ℕ} (h : n ≤ m) : Prod.sectR n C ⟶ Prod.sectR m C where
   app U := Prod.mkHom (homOfLE h) (𝟙 U)
   naturality := fun {_ _} f ↦ by ext <;> simp
 
-/-- The actual horizontal coefficient square.
-Source: Stacks 03DA, 0941 (blueprint: lem-weil-compact-support-coefficient-transition). -/
+/-- The horizontal coefficient square of rings commutes. -/
 theorem compactSupportHorizontalRingSquare (W : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
     eqToHom (coefficientSequenceEvaluationRing_eq.{u, u} l E W m).symm ≫
       (Functor.sheafPushforwardContinuousNatTrans (compactSupportHorizontalIndex h) RingCat
@@ -260,9 +259,7 @@ theorem compactSupportHorizontalRingSquare (W : Scheme.{u}) {m n : ℕ} (h : n �
   rw [← compactSupportQuotient_eq]
   exact coefficientSequenceRingHorizontal.{u, u} l E W h
 
-/-- The actual horizontal map, constructed from the ring-square equality.
-Source: Stacks 0941
-(blueprint: lem-weil-compact-support-coefficient-transition). -/
+/-- The horizontal map, constructed from the ring-square equality. -/
 def compactSupportOrdinaryCoefficientTransition (W : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
     coefficientSequenceEvaluation.{u, u} l E W m ⟶
       coefficientSequenceEvaluation.{u, u} l E W n ⋙
@@ -297,9 +294,7 @@ private theorem compactSupportOrdinaryCoefficientTransition_sections
       (compactSupportLevelSheafQuotient l E W m n h)) (compactSupportHorizontalIndex h)
     (compactSupportHorizontalRingSquare l E W h) M V
 
-/-- Localization of the actual horizontal coefficient map.
-Source: Stacks 0941
-(blueprint: lem-weil-compact-support-coefficient-transition). -/
+/-- Localization of the horizontal coefficient map. -/
 def compactSupportCoefficientTransition (W : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
     coefficientSequenceDerivedEvaluation.{u, u} l E W m ⟶
       coefficientSequenceDerivedEvaluation.{u, u} l E W n ⋙
@@ -433,10 +428,8 @@ private theorem towerTransition_fac (W : Scheme.{u}) (m n : ℕ)
   erw [Iso.inv_hom_id_app, Category.comp_id]
   rfl
 
-/-- Exact completed restriction carries the actual horizontal map to the derived
-strict-tower transition, with its canonical scalar composition comparison.
-Source: Stacks 03DA, 0941; proof: localize the sectionwise horizontal square.
-(blueprint: lem-weil-compact-support-coefficient-transition). -/
+/-- Exact completed restriction carries the horizontal map to the derived strict-tower
+transition, with its canonical scalar composition comparison. -/
 theorem compactSupportCoefficientTransition_restricted (W : Scheme.{u}) {m n : ℕ}
     (h : n ≤ m) (M : coefficientSequenceDerived.{u, u} l E W) :
     (pbcTowerTransition W (completedIntegralCommRingSheafUnrestricted l E W) m n h).app

@@ -13,9 +13,16 @@ import Mathlib.Analysis.SpecialFunctions.Log.Basic
 
 /-! # Tensor products add Frobenius weight bounds
 
-Source: latest blueprint, sec-purity-real-sheaves/sk-p-real-semi/sk-p-real-semi.proof.md,
-last paragraph: tensor powers have the multiplied punctual weight bound.
-(blueprint: lem-wf-tensor-frobenius-weight-bound).
+If the eigenvalues of automorphisms `f` and `g` of finite-dimensional vector spaces over an
+algebraically closed field have Frobenius weights bounded by `a` and `b`, then the eigenvalues
+of `f ⊗ g` have Frobenius weights bounded by `a + b`. This is used for weight bounds on tensor
+powers.
+
+## Implementation details
+
+The characteristic polynomial of `f ⊗ g` factors into the products `α β` of eigenvalues of
+`f` and `g`, and the Frobenius weight is additive on products of nonzero elements, since it is
+defined through the logarithm of the absolute value.
 -/
 
 @[expose] public section
@@ -38,10 +45,8 @@ private theorem eigenvalue_ne_zero_of_bijective (f : V →ₗ[K] V) (hf : Functi
   apply hf.injective
   simpa [h] using Module.End.mem_eigenspace_iff.mp hv
 
-/-- Factor the tensor characteristic polynomial into products of eigenvalues, then use
-logarithmic additivity for the two nonzero factors of each eigenvalue.
-Source: latest blueprint, sk-p-real-semi.proof.md, tensor-power weight assertion
-(blueprint: lem-wf-tensor-frobenius-weight-bound). -/
+/-- If all eigenvalues of the automorphisms `f` and `g` have Frobenius weight at most `a` and
+`b` respectively, then all eigenvalues of `f ⊗ g` have Frobenius weight at most `a + b`. -/
 theorem tensor_frobeniusWeight_le
     (ι : K →+* ℂ) (q : ℕ) (f : V →ₗ[K] V) (g : W →ₗ[K] W)
     (hf : Function.Bijective f) (hg : Function.Bijective g) (a b : ℝ)

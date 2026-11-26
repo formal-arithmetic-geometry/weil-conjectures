@@ -14,6 +14,24 @@ public import Mathlib.RingTheory.Regular.RegularSequence
 import Mathlib.RingTheory.KrullDimension.Regular
 import Mathlib.RingTheory.Localization.Ideal
 
+/-!
+# Dimension at a point of a quotient by a regular sequence
+
+The local dimension at `q` of a quotient of a polynomial ring in `n` variables cut out at `q` by
+an `e`-term regular sequence is `n - e`, and `e ≤ n`.
+
+## Implementation details
+
+The localized quotient is the quotient of the localized polynomial ring, and the
+regular-sequence dimension formula compares their dimensions, which are the heights of `q` and
+its inverse image. The polynomial-quotient dimension-at-point formula then gives `n - e`.
+
+## References
+
+* [Stacks, Tag 00SC] ((5) implies (2))
+* [Stacks, Tags 00KW, 00P2]
+-/
+
 @[expose] public section
 
 universe u
@@ -21,14 +39,7 @@ universe u
 namespace Algebra
 
 /-- The local topological dimension of a polynomial quotient cut out at the point by
-an e-term regular sequence is n-e, and e is at most n. Source: Stacks Project,
-Algebra, Lemma 00SC (5) implies (2), using 00KW and 00P2.
-(blueprint: lem-weil-pbc-regular-sequence-dimension-at-point).
-Proof: the quotient of the localized polynomial ring is the localization of the
-quotient. The regular-sequence dimension formula says its dimension plus e equals
-the dimension of the localized polynomial ring. These dimensions are the heights
-of q and its inverse image. Substituting in the polynomial-quotient dimension-at-point
-formula gives n-e; the bound on the inverse-image height gives e ≤ n. -/
+an e-term regular sequence is n-e, and e is at most n. -/
 theorem regularSequence_dimensionAtPoint
     (k : Type u) [Field k] (n : ℕ)
     (I : Ideal (MvPolynomial (Fin n) k))

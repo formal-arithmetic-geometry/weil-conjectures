@@ -73,9 +73,7 @@ lemma plusEtaleOrigin_leftDerivedUpperStar_obj_unit {A B : Scheme.{u}} (f : A �
 coefficients): for a commutative square of schemes `e' ≫ ν = q ≫ e` with `q` a universal
 homeomorphism, if the base change morphism `Le^* Rν_* ⟶ Rq_* Le'^*` is invertible at `Lν^* Λ`, then
 the restriction `Le^*(η_ν) : Le^* Λ ⟶ Le^* Rν_* Lν^* Λ` of the unit of `Lν^* ⊣ Rν_*` at the unit is
-an isomorphism. By the unit identity of the base change morphism, `Le^*(η_ν)` followed by the base
-change morphism is the unit `η_q`, invertible by topological invariance, followed by `Rq_*` of the
-pullback comparison. -/
+an isomorphism. -/
 theorem isIso_leftDerivedUpperStar_map_unit_app_unit_of_isIso_baseChangeMap
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {W D Z F : Scheme.{u}} {ν : W ⟶ D} {e : Z ⟶ D} {e' : F ⟶ W} {q : F ⟶ Z}
@@ -105,8 +103,7 @@ theorem isIso_leftDerivedUpperStar_map_unit_app_unit_of_isIso_baseChangeMap
 /-- **The restricted unit of a proper pushforward, with finite coefficients**: for a cartesian
 square of schemes `e' ≫ ν = q ≫ e` with `ν` proper and `q` a universal homeomorphism, the
 restriction `Le^*(η_ν) : Le^* T̲ ⟶ Le^* Rν_* Lν^* T̲` of the unit of `Lν^* ⊣ Rν_*` at the unit is an
-isomorphism: the base change morphism is invertible at `Lν^* T̲` by proper base change, the unit
-being of étale origin. -/
+isomorphism. -/
 theorem isIso_leftDerivedUpperStar_map_unit_app_unit_of_isPullback_finiteCoefficient
     {W D Z F : Scheme.{u}} {ν : W ⟶ D} {e : Z ⟶ D} {e' : F ⟶ W} {q : F ⟶ Z}
     (sq : IsPullback e' q ν e) [IsProper ν] [IsUniversalHomeomorphism q] :
@@ -124,10 +121,7 @@ variable {k : Type u} [Field k] (k' : Type u) [Field k'] [Algebra k k'] [IsSepCl
 
 /-- **The specialization unit of the deformation of the reduced origin, with finite
 coefficients**: for the deformation to the normal cone `𝒟` of the origin `V(x) ⊆ 𝔸¹_k` over
-`Spec k'⟦t⟧`, the specialization unit `σ : T̲ ⟶ Ψ(T̲)` is an isomorphism. The total space of `𝒟` is
-smooth over the trait, so by the smooth exchange with finite coefficients the pullback exchange of
-`𝒟 ⟶ 𝒟_⊥ (Spec k)` is invertible at the unit, and the specialization unit of the trait is an
-isomorphism. -/
+`Spec k'⟦t⟧`, the specialization unit `σ : T̲ ⟶ Ψ(T̲)` is an isomorphism. -/
 theorem isIso_deformationModel_polyAffineThickOrigin_one_unit_finiteCoefficient
     {n : ℕ} (hT : (ℓ : T) ^ n = 0) :
     IsIso ((deformationModel (polyAffine k 1) (polyAffineThickOrigin k 1) k').unit
@@ -147,8 +141,7 @@ theorem isIso_deformationModel_polyAffineThickOrigin_one_unit_finiteCoefficient
   exact isIso_of_comp_eq_comp_comp h
 
 /-- The specialization unit of the power model `𝒲` of the thick origin, with finite coefficients,
-is an isomorphism: its restriction along the universal homeomorphism `c` is the specialization unit
-of the deformation of the origin. -/
+is an isomorphism. -/
 theorem isIso_thickOriginPowSourceModel_unit_finiteCoefficient {n : ℕ} (hT : (ℓ : T) ^ n = 0)
     {m : ℕ} (hm : m ≠ 0) :
     IsIso ((thickOriginPowSourceModel k k' hm).unit (Profinite.continuousMapRingObj.{u} T)) := by
@@ -216,9 +209,9 @@ theorem isIso_upperStar_zeroSection_unit_polyAffineThickOrigin_finiteCoefficient
       (deformationSpecialFibre (centre (polyAffine k 1) (polyAffineThickOrigin k m)) ⊥ k').hom
   exact isIso_leftDerivedUpperStar_map_of_comp _ _ _ _ ho
 
-/-- **The thick origin with finite coefficients** (blueprint `lemma-case-z-v-x-m--1`, with
-coefficients in a finite ring `T` killed by a power of a prime `ℓ ≠ char k'`): for `m ≥ 1`, the
-defect `C_{𝔸¹, V(x^m)}(T̲)` of the constant complex vanishes. -/
+/-- **The thick origin with finite coefficients**: let `T` be a finite ring killed by a power of a
+prime `ℓ ≠ char k'`. For `m ≥ 1`, the defect `C_{𝔸¹, V(x^m)}(T̲)` of the constant complex
+vanishes. -/
 theorem isZero_specializationDefect_polyAffineThickOrigin_unit_finiteCoefficient
     {n : ℕ} (hT : (ℓ : T) ^ n = 0) {m : ℕ} (hm : 0 < m) :
     IsZero (specializationDefect (polyAffine k 1) (polyAffineThickOrigin k m) k'

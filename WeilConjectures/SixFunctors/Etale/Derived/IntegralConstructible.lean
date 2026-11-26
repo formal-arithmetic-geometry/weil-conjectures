@@ -12,37 +12,37 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 /-!
 # Bounded constructible derived-complete integral coefficients
 
-The blueprint defines the integral stage `Dᵇc(Y, 𝒪_E)` as the derived complete objects `K` all of
+The integral stage `Dᵇc(Y, 𝒪_E)` consists of the derived complete objects `K` all of
 whose reductions `K ⊗ᴸ_{𝒪_E} A_{E,n}` are bounded constructible, with cohomological supports
-(`DerivedCategory.cohomologicalSupport`, blueprint `def-weil-cohomological-support`) contained in
+(`DerivedCategory.cohomologicalSupport`) contained in
 one interval `[r, s]` independent of `n`.
 
 As everywhere in the repository (see
 `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral`), the integral stage is
 realised on the small étale site with coefficients in the discrete ring `Λ = 𝒪_E` and the ideal
 `I = 𝔪_E`: the reductions are `AlgebraicGeometry.Etale.reductionModIdeal Λ X (I ^ (n + 1))`, the
-objects `K ⊗ᴸ (Λ/Iⁿ⁺¹)_X` regarded as `Λ`-module complexes, which is the blueprint's
+objects `K ⊗ᴸ (Λ/Iⁿ⁺¹)_X` regarded as `Λ`-module complexes, which is
 `Res_n (K ⊗ᴸ A_{E,n})` inside the single category `D(Y, 𝒪_E)`.
 
 The repository's working definition
 `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral`
 asks for a uniform *Tor amplitude* of the reductions instead of a uniform cohomological support.
-Tor amplitude in `[a, b]` bounds the support by `[a, b]`, so it is contained in the blueprint's
-category (`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral_le`); the
-converse is the residue-field argument of the blueprint's remark in
-`definition-constructible-sheaves`.
+Tor amplitude in `[a, b]` bounds the support by `[a, b]`, so it is contained in the
+support-bounded category
+(`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral_le`); the converse is a
+residue-field argument.
 
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegralOfSupport`: the
-  blueprint's `Dᵇc(Y, 𝒪_E)`, as an object property of `D(Y_ét, Λ)`.
+  support-bounded `Dᵇc(Y, 𝒪_E)`, as an object property of `D(Y_ét, Λ)`.
 - `AlgebraicGeometry.Etale.DerivedCategoryBoundedConstructibleIntegralOfSupport`: the
   corresponding full subcategory.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral_le`: the working
-  definition is contained in the blueprint's.
+  definition is contained in the support-bounded one.
 -/
 
 @[expose] public section
@@ -81,7 +81,7 @@ def DerivedCategory.boundedConstructibleIntegralOfSupport :
     ∃ r s : ℤ, ∀ n : ℕ, _root_.DerivedCategory.cohomologicalSupport
       ((reductionModIdeal Λ X (I ^ (n + 1))).obj K) ⊆ Set.Icc r s
 
-/-- The blueprint's `Dᵇc(Y, 𝒪_E)` as a full subcategory of `D(Y_ét, 𝒪_E)`. -/
+/-- The support-bounded `Dᵇc(Y, 𝒪_E)` as a full subcategory of `D(Y_ét, 𝒪_E)`. -/
 abbrev DerivedCategoryBoundedConstructibleIntegralOfSupport :=
   (DerivedCategory.boundedConstructibleIntegralOfSupport I X).FullSubcategory
 
@@ -100,8 +100,8 @@ lemma DerivedCategory.boundedConstructibleIntegralOfSupport_iff
     _root_.DerivedCategory.cohomologicalSupport_subset_Icc_iff]
 
 /-- The working definition `DerivedCategory.boundedConstructibleIntegral` of the repository,
-with a uniform Tor amplitude of the reductions, is contained in the blueprint's `Dᵇc(Y, 𝒪_E)`:
-Tor amplitude in `[a, b]` bounds the cohomological support by `[a, b]`. -/
+with a uniform Tor amplitude of the reductions, is contained in the support-bounded
+`Dᵇc(Y, 𝒪_E)`. -/
 lemma DerivedCategory.boundedConstructibleIntegral_le :
     DerivedCategory.boundedConstructibleIntegral I X ≤
       DerivedCategory.boundedConstructibleIntegralOfSupport I X := by

@@ -414,11 +414,6 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteClassComparison
 
 /-! # Integration normalization of vector purity
 
-Source: main-20261015 sec-smooth-purity/sk-prop-an, integration and Steps 4--6
-(blueprint: def-pur-vector-purity-normalization).
-
-## Main definitions
-
 This module gives the canonical comparisons and their displayed source equation.
 Every map is constructed before the compatibility proposition is stated.
 -/
@@ -431,9 +426,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Algebr
 namespace AlgebraicGeometry.Etale
 
 /-- The existing derived monoidal structure, elaborated with the same abstract coefficient
-interface as `Etale.derivedTensor`. This is a cache of the existing structure.
-Source: `Etale.TensorStructure`, implementation notes
-(blueprint: def-pur-vector-purity-normalization). -/
+interface as `Etale.derivedTensor`. This is a cache of the existing structure. -/
 @[implicit_reducible]
 def purityEtaleMonoidal (A : Type v₁) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -443,30 +436,25 @@ def purityEtaleMonoidal (A : Type v₁) [Category.{u + 1} A] [Abelian A]
   inferInstance
 
 /-- Cache the published tensor structure at concrete module coefficients, retaining the
-generic coefficient instance choices. Source: `Etale.TensorStructure`, implementation notes
-(blueprint: def-pur-vector-purity-normalization). -/
+generic coefficient instance choices. -/
 instance (priority := high) purityModuleEtaleMonoidal
     (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     MonoidalCategory (DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))) :=
   purityEtaleMonoidal (ModuleCat.{u + 1} A) T
 
-/-- Ordinary compact support using the chosen global Nagata compactification.
-Source: ordinary six operations (blueprint: def-pur-vector-purity-normalization). -/
+/-- Ordinary compact support using the chosen global Nagata compactification. -/
 abbrev RfShriek (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}}
     (f : X ⟶ Y) [HasCompactification f] :=
   Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} A) f
-/-- The Brown right adjoint of ordinary compact support, determined with its adjunction.
-Source: ordinary six operations (blueprint: def-pur-vector-purity-normalization). -/
+/-- The Brown right adjoint of ordinary compact support, determined with its adjunction. -/
 abbrev RfUpper (A : Type (u + 1)) [CommRing A] [Finite A] {X Y : Scheme.{u}}
     (f : X ⟶ Y) [HasCompactification f] :=
   Etale.rightDerivedUpperShriek A f
-/-- The existing ordinary K-flat derived inverse image.
-Source: ordinary six operations (blueprint: def-pur-vector-purity-normalization). -/
+/-- The existing ordinary K-flat derived inverse image. -/
 abbrev RfPullback (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   Etale.ordinaryFinitePullback A f
 /-- Purity specified by the counit equations of integration, in arbitrary categories.
-This helper only factors the expression; all its arguments below are the actual operations.
-Source: blueprint vector-bundle purity (blueprint: def-pur-vector-purity-normalization). -/
+This helper only factors the expression; all its arguments below are the actual operations. -/
 def IntegrationPurityNormalized {C : Type v₁} {D : Type v₂} [Category.{w₁} C] [Category.{w₂} D]
     [MonoidalCategory C] [MonoidalCategory D]
     (L : C ⥤ D) (R P : D ⥤ C) (adj : L ⊣ R)
@@ -478,8 +466,7 @@ def IntegrationPurityNormalized {C : Type v₁} {D : Type v₂} [Category.{w₁}
       HEq (projection.app K.obj ≫ m) ((t ▷ K.obj) ≫ (λ_ K.obj).hom)
 
 /-- The unique purity family normalized by the actual projection and integration counit,
-with its coefficient-unit value. Source: proposition-purity-vector-bundles, integration and
-Proposition (blueprint: def-pur-vector-purity-normalization). -/
+with its coefficient-unit value. -/
 def IntegrationPurity {C : Type v₁} {D : Type v₂} [Category.{w₁} C] [Category.{w₂} D]
     [MonoidalCategory C] [MonoidalCategory D]
     (L : C ⥤ D) (R P : D ⥤ C) (adj : L ⊣ R)
@@ -491,8 +478,7 @@ def IntegrationPurity {C : Type v₁} {D : Type v₂} [Category.{w₁} C] [Categ
     (∃! β : R.obj (𝟙_ D) ≅ W, L.map β.inv ≫ adj.counit.app (𝟙_ D) = t)
 
 /-- The normalized purity family and its unit value in ordinary derived coordinates.
-Uniqueness fixes the family by integration and the actual Brown-adjunction counit.
-Source: vector-bundle purity (blueprint: def-pur-vector-purity-normalization). -/
+Uniqueness fixes the family by integration and the actual Brown-adjunction counit. -/
 def VectorPurityFunctorConclusion (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
     (Q : ObjectProperty (DerivedCategory (Sheaf Y.smallEtaleTopology
@@ -505,15 +491,12 @@ def VectorPurityFunctorConclusion (A : Type (u + 1)) [CommRing A] [Finite A]
     ((Etale.projectionMap (ModuleCat.{u + 1} A) f).app W) Q
 
 /-- The normalized transport of finite Tate lines. Its roots and pure-tensor equations
-fix both fields uniquely. Source: proposition-purity-vector-bundles, Tate pullback comparisons
-(blueprint: def-pur-vector-purity-normalization). -/
+fix both fields uniquely. -/
 def purityTwistTransport (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) :=
   (Etale.exists_ordinaryFiniteP1Adjunction N hN A hA).choose
 
-/-- The inverse-purity family has the actual twist/pullback source and Brown target.
-Source: proposition-purity-vector-bundles, integration adjunct (blueprint:
-def-pur-vector-purity-normalization). -/
+/-- The inverse-purity family has the actual twist/pullback source and Brown target. -/
 abbrev VectorPurityGamma (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0) (B : Scheme.{u}) [IsNoetherian B]
     (d : ℕ) (F : B.Modules) [F.IsFiniteLocallyFreeOfRank d]
@@ -524,8 +507,7 @@ abbrev VectorPurityGamma (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- The counit/projection equations determine every component uniquely: transpose
 under the Brown adjunction after inverse projection. HEq retains the published
-projection functor's exact presentation. Source: proposition-purity-vector-bundles, Steps 1--2
-(blueprint: def-pur-vector-purity-normalization). -/
+projection functor's exact presentation. -/
 def IntegrationGammaNormalized {C : Type v₁} {D : Type v₂}
     [Category.{w₁} C] [Category.{w₂} D] [MonoidalCategory C] [MonoidalCategory D]
     (L : C ⥤ D) (R P : D ⥤ C) (adj : L ⊣ R) (W : C) (t : L.obj W ⟶ 𝟙_ D)
@@ -537,8 +519,7 @@ def IntegrationGammaNormalized {C : Type v₁} {D : Type v₂}
 
 /-- The independently normalized inverse-purity family for one bundle. This condition
 uses no base-change, sum or reduction equation; in each component the adjunction and
-invertible projection uniquely fix gamma. Source: proposition-purity-vector-bundles, Steps 1--2
-(blueprint: def-pur-vector-purity-normalization). -/
+invertible projection uniquely fix gamma. -/
 def VectorPurityGammaNormalized (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     (B : Scheme.{u}) [IsNoetherian B] (hB : IsUnit (N : Γ(B, ⊤)))

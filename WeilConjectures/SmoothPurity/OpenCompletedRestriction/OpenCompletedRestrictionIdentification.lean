@@ -29,9 +29,10 @@ import Mathlib.Data.Nat.Prime.Infinite
 
 /-! # Open restriction and the actual completed quotient tower
 
-Source: Stacks Tags 00XZ, 08TC and 0941; the finite-clopen expansion of
-blueprint lemma-section-normal-bundle--1, retained step 5
-(blueprint: lem-pur-open-completed-restriction-identification).
+## References
+
+* Stacks Project, Tags 00XZ, 015F, 03CO, 03D2, 05RU, 08TC and 0941.
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 3.5.2 and Lemma 6.5.9(4).
 -/
 
 @[expose] public noncomputable section
@@ -62,25 +63,21 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
 
-/-- The unchanged standard derived localization in the global slice presentation.
-Source: Stacks 05RU (blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- The unchanged standard derived localization in the global slice presentation. -/
 instance globalHasDerived (W : Scheme.{t}) :
     HasDerivedCategory (IntegralOnSlice.Mod l E W none) :=
   IntegralOnSlice.hasDerived l E W none
 
-/-- The actual site inclusion, composition with the open immersion.
-Source: Stacks 00XZ (blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- The actual site inclusion, composition with the open immersion. -/
 abbrev inclusion : U.ProEt ⥤ X.ProEt :=
   MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)
 
-/-- Continuity of the actual site inclusion.
-Source: Stacks 00XZ (blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- Continuity of the actual site inclusion. -/
 instance inclusionContinuous : (inclusion j).IsContinuous
     (Scheme.ProEt.topology U) (Scheme.ProEt.topology X) :=
   Scheme.ProEt.isContinuous_overMap (inferInstance : WeaklyEtale j)
 
-/-- The ordinary precomposition of commutative ring sheaves.
-Source: Stacks 00XZ (blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- The ordinary precomposition of commutative ring sheaves. -/
 abbrev ringRestriction :=
   (inclusion j).sheafPushforwardContinuous CommRingCat.{max u (t + 1)}
     (Scheme.ProEt.topology U) (Scheme.ProEt.topology X)
@@ -95,9 +92,7 @@ private local instance (priority := 5000) weakRingSheafify (W : Scheme.{t}) :
 
 attribute [local irreducible] Padic
 
-/-- Coefficient comparisons with their determining constant-section and projection equations.
-These are assertion data, not an assumed existence of a comparison.
-Source: Stacks 00XZ, 03CO (blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- Coefficient comparisons with their determining constant-section and projection equations. -/
 structure Coefficients where
   finite : ∀ n : ℕ, integralCoefficientCommRingSheaf l E U n ≅
     (ringRestriction.{t, u} j).obj (integralCoefficientCommRingSheaf l E X n)
@@ -121,15 +116,13 @@ attribute [local irreducible] CategoryTheory.constantSheaf Padic
 variable (c : Coefficients l E j)
 
 /-- Ordinary site restriction with scalar action transported through the inverse
-of the canonical restriction-to-local coefficient isomorphism.
-Source: Stacks 00XZ (blueprint: lem-pur-open-completed-restriction-identification). -/
+of the canonical restriction-to-local coefficient isomorphism. -/
 def restriction : IntegralOnSlice.Mod l E X none ⥤ IntegralOnSlice.Mod l E U none :=
   SheafOfModules.pushforward (F := inclusion j)
     ((sheafCompose _ (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
       c.completed.hom)
 
-/-- Finite ordinary restriction with the same constant-section normalization.
-Source: Stacks 00XZ (blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- Finite ordinary restriction with the same constant-section normalization. -/
 def finiteRestriction (n : ℕ) : integralOperationsFiniteModules l E X n ⥤
     integralOperationsFiniteModules l E U n :=
   SheafOfModules.pushforward (F := inclusion j)
@@ -377,12 +370,7 @@ private theorem normalizedRestrictionExact
 
 attribute [local irreducible] normalizedCoefficients CategoryTheory.constantSheaf
 
-/-- Existence of the uniquely normalized coefficients and exactness of their restrictions.
-Source: Stacks 00XZ, 03CO (blueprint: lem-pur-open-completed-restriction-identification).
-Proof: constant sheafification commutes with localization. Its comparison is fixed by
-constants, so it commutes with every coefficient reduction. Sectionwise inverse limits
-supply the completed comparison and its projection equations. Restriction is exact;
-scalar transport through each ring isomorphism is an exact equivalence. -/
+/-- Existence of the uniquely normalized coefficients and exactness of their restrictions. -/
 theorem coefficients_exact :
     ∃! c : Coefficients l E j,
       (restriction l E j c).Additive ∧
@@ -407,42 +395,33 @@ theorem coefficients_exact :
     (S := integralCoefficientSheaf l E U n)
     (H.mapIso ((normalizedCoefficients l E j).finite n))
 
-/-- The coefficient data determined by constants and limit projections.
-Source: Stacks 00XZ, 03CO (blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- The coefficient data determined by constants and limit projections. -/
 def coefficients : Coefficients l E j := (coefficients_exact l E j).exists.choose
 
-/-- Ordinary exact restriction with the uniquely normalized coefficient data.
-Source: Stacks 00XZ (blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- Ordinary exact restriction with the uniquely normalized coefficient data. -/
 abbrev ordinary := restriction l E j (coefficients l E j)
 
-/-- Additivity of ordinary restriction.
-Source: Stacks 00XZ (blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- Additivity of ordinary restriction. -/
 instance ordinaryAdditive : (ordinary l E j).Additive :=
   (coefficients_exact l E j).exists.choose_spec.1
 
-/-- Finite limits of ordinary restriction.
-Source: Stacks 00XZ (blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- Finite limits of ordinary restriction. -/
 instance ordinaryLimits : PreservesFiniteLimits (ordinary l E j) :=
   (coefficients_exact l E j).exists.choose_spec.2.1
 
-/-- Finite colimits of ordinary restriction.
-Source: Stacks 00XZ (blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- Finite colimits of ordinary restriction. -/
 instance ordinaryColimits : PreservesFiniteColimits (ordinary l E j) :=
   (coefficients_exact l E j).exists.choose_spec.2.2.1
 
-/-- Termwise ordinary restriction, before localization.
-Source: Stacks 015F (blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- Termwise ordinary restriction, before localization. -/
 abbrev complexRestriction : IntegralOnSlice.Cx l E X none ⥤
     IntegralOnSlice.Cx l E U none := (ordinary l E j).mapHomologicalComplex (.up ℤ)
 
-/-- The exact functor on ordinary unbounded derived categories.
-Source: Stacks 015F (blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- The exact functor on ordinary unbounded derived categories. -/
 abbrev derivedRestriction : IntegralOnSlice.D l E X none ⥤
     IntegralOnSlice.D l E U none := (ordinary l E j).mapDerivedCategory
 
-/-- Canonical graph-coordinate image of a section under finite inverse image.
-Source: Stacks 00XZ, 03D2
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- Canonical graph-coordinate image of a section under finite inverse image. -/
 def graphSection (n : ℕ) (M : integralOperationsFiniteModules l E X n) (V : U.ProEt)
     (x : M.val.obj (op ((inclusion j).obj V))) :
     ((integralOperationsLevelPullback l E j n).obj M).val.obj (op V) :=
@@ -451,22 +430,16 @@ def graphSection (n : ℕ) (M : integralOperationsFiniteModules l E X n) (V : U.
       (inferInstance : WeaklyEtale j) trivial).unit.app V).op
     (integralOperationsPullbackGenerator l E j n M ((inclusion j).obj V) x)
 
-/-- The source's actual strict quotient tower, on one common representative.
-Source: Bhatt--Scholze 3.5.2
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- The source's actual strict quotient tower, on one common representative. -/
 abbrev sourceTower (P : IntegralOnSlice.Cx l E X none) :=
   (IntegralOnSlice.tower l E X none).obj P
 
-/-- The target's actual strict finite-pullback tower.
-Source: Bhatt--Scholze 6.5.9(4)
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- The target's actual strict finite-pullback tower. -/
 abbrev targetTower (P : IntegralOnSlice.Cx l E X none) :
     ℕᵒᵖ ⥤ IntegralOnSlice.Cx l E U none :=
   (integralOperationsPullbackTowerFunctor l E j).obj P
 
-/-- The actual first Roos projection, in the strict model used by integral operations.
-Source: Stacks 08TC, 0941
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- The actual first Roos projection, in the strict model used by integral operations. -/
 def roosProjection {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
     (T : ℕᵒᵖ ⥤ CochainComplex A ℤ) :
     integralOperationsRoos T ⟶ ∏ᶜ fun n : ℕ ↦ T.obj (op n) :=
@@ -474,9 +447,7 @@ def roosProjection {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProduc
     (towerTransitionEndomorphism (K := fun n : ℕ ↦ T.obj (op n))
       (integralOperationsTowerStep T))
 
-/-- The actual second Roos coordinate, retaining Mathlib's shifted-cone sign.
-Source: Stacks 08TC, 0941
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- The actual second Roos coordinate, retaining Mathlib's shifted-cone sign. -/
 def roosSecond {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
     (T : ℕᵒᵖ ⥤ CochainComplex A ℤ) (q : ℤ) :
     (integralOperationsRoos T).X q ⟶ (∏ᶜ fun n : ℕ ↦ T.obj (op n)).X (q - 1) :=
@@ -496,9 +467,7 @@ attribute [local irreducible] completedIntegralCommRingSheafUnrestricted
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- One of the original tower normalization equations.
-Source: Stacks 00XZ, 08TC, 0941
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- One of the original tower normalization equations. -/
 def FiniteSectionNormalization
     (finite : ∀ n : ℕ, finiteRestriction l E j (coefficients l E j) n ≅
     integralOperationsLevelPullback l E j n)
@@ -516,9 +485,7 @@ def FiniteSectionNormalization
       (V : U.ProEt) (x : M.val.obj (op ((inclusion j).obj V))),
     ((finite n).hom.app M).val.app (op V) x = graphSection l E j n M V x
 
-/-- One of the original tower normalization equations.
-Source: Stacks 00XZ, 08TC, 0941
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- One of the original tower normalization equations. -/
 def LevelSectionNormalization
     (_finite : ∀ n : ℕ, finiteRestriction l E j (coefficients l E j) n ≅
     integralOperationsLevelPullback l E j n)
@@ -543,9 +510,7 @@ def LevelSectionNormalization
         (unrestrictedIntegralTensorSection l E X n (P.X i)
           (op ((inclusion j).obj V)) 1 x))
 
-/-- One of the original tower normalization equations.
-Source: Stacks 00XZ, 08TC, 0941
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- One of the original tower normalization equations. -/
 def ProductNormalization
     (_finite : ∀ n : ℕ, finiteRestriction l E j (coefficients l E j) n ≅
     integralOperationsLevelPullback l E j n)
@@ -565,9 +530,7 @@ def ProductNormalization
         (Pi.π (fun k : ℕ ↦ (sourceTower l E P).obj (op k)) n) ≫
           (levels.hom.app P).app (op n)
 
-/-- One of the original tower normalization equations.
-Source: Stacks 00XZ, 08TC, 0941
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- One of the original tower normalization equations. -/
 def RoosFirstNormalization
     (_finite : ∀ n : ℕ, finiteRestriction l E j (coefficients l E j) n ≅
     integralOperationsLevelPullback l E j n)
@@ -587,9 +550,7 @@ def RoosFirstNormalization
         (roosProjection (A := IntegralOnSlice.Mod l E X none) (sourceTower l E P)) ≫
           (product P).hom
 
-/-- One of the original tower normalization equations.
-Source: Stacks 00XZ, 08TC, 0941
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- One of the original tower normalization equations. -/
 def RoosSecondNormalization
     (_finite : ∀ n : ℕ, finiteRestriction l E j (coefficients l E j) n ≅
     integralOperationsLevelPullback l E j n)
@@ -610,9 +571,7 @@ def RoosSecondNormalization
         (roosSecond (A := IntegralOnSlice.Mod l E X none) (sourceTower l E P) q) ≫
           (product P).hom.f (q - 1)
 
-/-- The conjunction of the five original normalization equations.
-Source: Stacks 00XZ, 08TC, 0941
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- The conjunction of the five original normalization equations. -/
 def TowerNormalization
     (finite : ∀ n : ℕ, finiteRestriction l E j (coefficients l E j) n ≅
     integralOperationsLevelPullback l E j n)
@@ -634,9 +593,7 @@ def TowerNormalization
 
 /-- Normalization data for the single natural comparison. The finite sections fix
 its levels; the two shifted-cone coordinates fix the actual chain map. The final
-factorization fixes its descent on every derived morphism, including roofs.
-Source: Stacks 00XZ, 08TC, 0941
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+factorization fixes its descent on every derived morphism, including roofs. -/
 def TowerComparison :=
   { d : (∀ n : ℕ, finiteRestriction l E j (coefficients l E j) n ≅
     integralOperationsLevelPullback l E j n) ×
@@ -653,18 +610,14 @@ def TowerComparison :=
       TowerNormalization l E j d.1 d.2.1 d.2.2.1 d.2.2.2 }
 
 variable {l E j} in
-/-- The original finite comparison data.
-Source: Stacks 00XZ, 08TC, 0941
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- The original finite comparison data. -/
 abbrev TowerComparison.finite (d : TowerComparison l E j) :
     ∀ n : ℕ, finiteRestriction l E j (coefficients l E j) n ≅
     integralOperationsLevelPullback l E j n :=
   d.val.1
 
 variable {l E j} in
-/-- The original levels comparison data.
-Source: Stacks 00XZ, 08TC, 0941
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- The original levels comparison data. -/
 abbrev TowerComparison.levels (d : TowerComparison l E j) :
     IntegralOnSlice.tower l E X none ⋙
       (Functor.whiskeringRight ℕᵒᵖ
@@ -674,9 +627,7 @@ abbrev TowerComparison.levels (d : TowerComparison l E j) :
   d.val.2.1
 
 variable {l E j} in
-/-- The original product comparison data.
-Source: Stacks 00XZ, 08TC, 0941
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- The original product comparison data. -/
 abbrev TowerComparison.product (d : TowerComparison l E j) :
     ∀ P : IntegralOnSlice.Cx l E X none,
     (complexRestriction l E j).obj (∏ᶜ fun n : ℕ ↦ (sourceTower l E P).obj (op n)) ≅
@@ -684,9 +635,7 @@ abbrev TowerComparison.product (d : TowerComparison l E j) :
   d.val.2.2.1
 
 variable {l E j} in
-/-- The original roos comparison data.
-Source: Stacks 00XZ, 08TC, 0941
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- The original roos comparison data. -/
 abbrev TowerComparison.roos (d : TowerComparison l E j) :
     IntegralOnSlice.roos l E X none ⋙ complexRestriction l E j ≅
     integralOperationsPullbackComplexFunctor l E j :=
@@ -698,9 +647,7 @@ private theorem tower_normalized (d : TowerComparison l E j) :
 attribute [local irreducible] CategoryTheory.Functor.mapDerivedCategory
   CategoryTheory.Functor.mapDerivedCategoryFactors
 
-/-- The exact localization normalization as a proposition, keeping data-record recursors small.
-Source: Stacks 015F, 08TC
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- The exact localization normalization as a proposition, keeping data-record recursors small. -/
 def ComparisonLocalization
     (roos : IntegralOnSlice.roos l E X none ⋙ complexRestriction l E j ≅
       integralOperationsPullbackComplexFunctor l E j)
@@ -715,9 +662,7 @@ def ComparisonLocalization
         ((IntegralOnSlice.roos l E X none).obj P.obj) ≫
       DerivedCategory.Q.map (roos.hom.app P.obj)
 
-/-- The descent of the normalized tower and Roos comparisons.
-Source: Stacks 015F, 08TC
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- The descent of the normalized tower and Roos comparisons. -/
 def Comparison :=
   { d : TowerComparison l E j ×
       (IntegralOnSlice.completion l E X none ⋙ derivedRestriction l E j ≅
@@ -725,55 +670,38 @@ def Comparison :=
     ComparisonLocalization l E j d.1.roos d.2 }
 
 variable {l E j} in
-/-- The representative-level comparison data.
-Source: Stacks 015F, 08TC
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- The representative-level comparison data. -/
 abbrev Comparison.toTowerComparison (d : Comparison l E j) : TowerComparison l E j := d.val.1
 
 variable {l E j} in
-/-- The inherited finite comparison.
-Source: Stacks 00XZ, 08TC, 0941
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- The inherited finite comparison. -/
 abbrev Comparison.finite (d : Comparison l E j) := d.toTowerComparison.finite
 
 variable {l E j} in
-/-- The inherited levels comparison.
-Source: Stacks 00XZ, 08TC, 0941
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- The inherited levels comparison. -/
 abbrev Comparison.levels (d : Comparison l E j) := d.toTowerComparison.levels
 
 variable {l E j} in
-/-- The inherited product comparison.
-Source: Stacks 00XZ, 08TC, 0941
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- The inherited product comparison. -/
 abbrev Comparison.product (d : Comparison l E j) := d.toTowerComparison.product
 
 variable {l E j} in
-/-- The inherited roos comparison.
-Source: Stacks 00XZ, 08TC, 0941
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- The inherited roos comparison. -/
 abbrev Comparison.roos (d : Comparison l E j) := d.toTowerComparison.roos
 
 variable {l E j} in
-/-- The original derived comparison isomorphism.
-Source: Stacks 015F, 08TC
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- The original derived comparison isomorphism. -/
 abbrev Comparison.derived (d : Comparison l E j) :
     IntegralOnSlice.completion l E X none ⋙ derivedRestriction l E j ≅
       integralDerivedPullback l E j := d.val.2
 
 variable {l E j} in
-/-- The original localization equation, projected from its proof record.
-Source: Stacks 015F, 08TC
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+/-- The original localization equation, projected from its proof record. -/
 theorem Comparison.localization (d : Comparison l E j) :
     ComparisonLocalization l E j d.roos d.derived := d.property
 
 /-- The canonical open comparison is restriction of the actual quotient completion
-unit followed by the representative-normalized comparison. Its naturality includes
-all derived roofs because both factors are natural transformations on D(R_X).
-Source: Stacks 00XZ, 08TC, 0941; retained step 5 of lemma-section-normal-bundle--1
-(blueprint: lem-pur-open-completed-restriction-identification). -/
+unit followed by the representative-normalized comparison. -/
 def kappa (d : Comparison l E j) :
     derivedRestriction l E j ⟶ integralDerivedPullback l E j :=
   Functor.whiskerRight (IntegralOnSlice.completionUnit l E X none)

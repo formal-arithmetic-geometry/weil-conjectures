@@ -113,9 +113,6 @@ public import WeilConjectures.AlgebraicGeometry.CoefficientRingedSequenceSite
 
 /-! # The coefficient ringed sequence site and canonical functors
 
-Source: Stacks Project, Tags 0941, 06YY, 079P and 07A6
-(blueprint: def-coef-ringed-sequence-site).
-
 ## Main definitions
 
 - `coefficientSequenceTopology`: the product sequence site with vertical covers.
@@ -124,6 +121,27 @@ Source: Stacks Project, Tags 0941, 06YY, 079P and 07A6
 - `coefficientSequenceEvaluation`: exact restriction to the nth vertical slice.
 - `coefficientSequenceLimit`: total derived limit after exact scalar restriction.
 - `coefficientSequenceProjection`: its canonical, resolution-normalized projections.
+
+## Implementation details
+
+The sequence ring is a sheaf because the recorded finite coefficient sheaves are glued along
+vertical covering slices, with separatedness giving compatibility with horizontal arrows.
+Evaluation is exact since kernels are sectionwise and vertical gluing computes the same
+sheafification at each level. The quotient transitions and the termwise restriction functor are
+characterized by their actual section formulas, which also give uniqueness. The total-limit
+projections are obtained by descending the ordinary limit projection of a K-injective tower
+resolution along the right-derived universal property.
+
+## References
+
+* [Stacks, Tag 0941]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 079P]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 03CZ]
+* [Stacks, Tag 05RU]
+* [Stacks, Tag 08JA]
+* [Stacks, Tag 0A95]
 -/
 
 @[expose] public section
@@ -459,8 +477,7 @@ private theorem towers_generic
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-/-- The same quotient transition with its commutative structure retained.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- The same quotient transition with its commutative structure retained. -/
 noncomputable def coefficientSequenceCommRingTransition (n : ℕ) :
     integralCoefficientCommRingSheaf l E W (n + 1) ⟶
       integralCoefficientCommRingSheaf l E W n where
@@ -470,26 +487,19 @@ noncomputable def coefficientSequenceCommRingTransition (n : ℕ) :
       naturality := fun {_ _} f ↦ (forget₂ CommRingCat RingCat).map_injective
         ((integralCoefficientSheafTransition l E W n).hom.naturality f) }
 
-/-- The commutative coefficient sequence, with precisely the recorded quotient maps.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- The commutative coefficient sequence, with precisely the recorded quotient maps. -/
 noncomputable def coefficientSequenceCommRingSystem :
     ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology W) CommRingCat.{max u (t + 1)} :=
   Functor.ofOpSequence (coefficientSequenceCommRingTransition l E W)
 
-/-- The actual sectionwise commutative ring presheaf on the sequence site.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- The actual sectionwise commutative ring presheaf on the sequence site. -/
 noncomputable def coefficientSequenceCommRingPresheaf :
     (ℕ × W.ProEt)ᵒᵖ ⥤ CommRingCat.{max u (t + 1)} :=
   (prodOpEquiv (C := ℕ) (D := W.ProEt)).functor ⋙ Functor.uncurry.obj
     (coefficientSequenceCommRingSystem l E W ⋙
       sheafToPresheaf (Scheme.ProEt.topology W) CommRingCat.{max u (t + 1)})
 
-/-- The commutative sequence ring is a sheaf for the vertical topology.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site).
-Proof: glue in the recorded finite coefficient sheaves:
-use the vertical covering slice to glue in B_n, then use separatedness on its
-pullbacks to verify compatibility with every horizontal arrow. All ring operations
-are preserved because they are preserved by the recorded coefficient restrictions. -/
+/-- The commutative sequence ring is a sheaf for the vertical topology. -/
 theorem coefficientSequenceCommRingPresheaf_isSheaf :
     Presheaf.IsSheaf (coefficientSequenceTopology (Scheme.ProEt.topology W))
       (coefficientSequenceCommRingPresheaf l E W) := by
@@ -500,8 +510,7 @@ theorem coefficientSequenceCommRingPresheaf_isSheaf :
   rw [← Functor.assoc, uncurry_slice_eq]
   exact ((coefficientSequenceCommRingSystem l E W).obj (op n)).property A
 
-/-- The same sequence ring sheaf with commutativity retained.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- The same sequence ring sheaf with commutativity retained. -/
 noncomputable def coefficientSequenceCommRingSheaf :
     Sheaf (coefficientSequenceTopology (Scheme.ProEt.topology W))
       CommRingCat.{max u (t + 1)} :=
@@ -510,46 +519,38 @@ noncomputable def coefficientSequenceCommRingSheaf :
 
 /-- Strict semilinear systems as modules over the actual commutative sequence ring.
 The vertical sheaf condition is exactly the component sheaf condition; horizontal
-restrictions are quotient-linear transition maps.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+restrictions are quotient-linear transition maps. -/
 noncomputable abbrev coefficientSequenceModules :=
   ringedSiteModules.{max u (t + 1)}
     ((sheafCompose (coefficientSequenceTopology (Scheme.ProEt.topology W))
       (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj
         (coefficientSequenceCommRingSheaf l E W))
 
-/-- The ordinary unbounded localization of strict coefficient systems.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- The ordinary unbounded localization of strict coefficient systems. -/
 @[reducible]
 noncomputable def coefficientSequenceDerived :=
   @DerivedCategory (coefficientSequenceModules l E W) _ _ (HasDerivedCategory.standard _)
 
-/-- The standard localization instance for strict coefficient-system modules.
-Source: Stacks 05RU, 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- The standard localization instance for strict coefficient-system modules. -/
 noncomputable instance coefficientSequenceHasDerived :
     HasDerivedCategory (coefficientSequenceModules l E W) := HasDerivedCategory.standard _
 
-/-- The recorded derived scalar extension with its finite-category codomain displayed.
-Source: Stacks 06YY, 07A6 (blueprint: def-coef-ringed-sequence-site). -/
+/-- The recorded derived scalar extension with its finite-category codomain displayed. -/
 noncomputable def coefficientFiniteDerivedExtension (n : ℕ) :
     DerivedCategory (scalarReductionSource l E W) ⥤ normalizedDVRDerived l E W n :=
   scalarReductionDerivedExtension l E W n
 
-/-- The recorded derived restriction with its finite-category domain displayed.
-Source: Stacks 03CZ, 07A6 (blueprint: def-coef-ringed-sequence-site). -/
+/-- The recorded derived restriction with its finite-category domain displayed. -/
 noncomputable def coefficientFiniteDerivedRestriction (n : ℕ) :
     normalizedDVRDerived l E W n ⥤ DerivedCategory (scalarReductionSource l E W) :=
   scalarReductionDerivedRestriction l E W n
 
-/-- The existing scalar adjunction with its specified K-flat unit normalization.
-Source: Stacks 07A6 (blueprint: def-coef-ringed-sequence-site). -/
+/-- The existing scalar adjunction with its specified K-flat unit normalization. -/
 noncomputable def coefficientFiniteAdjunction (n : ℕ) :
     coefficientFiniteDerivedExtension l E W n ⊣ coefficientFiniteDerivedRestriction l E W n :=
   (derivedScalarExtensionRestrictionAdjunction l E W n).choose
 
-/-- Derived internal Hom taken on the actual sequence site before evaluation.
-Source: Stacks 0A95 and 0941
-(blueprint: def-coef-ringed-sequence-site). -/
+/-- Derived internal Hom taken on the actual sequence site before evaluation. -/
 noncomputable def coefficientSequenceInternalHom :
     (coefficientSequenceDerived l E W)ᵒᵖ × coefficientSequenceDerived l E W ⥤
       coefficientSequenceDerived l E W :=
@@ -557,11 +558,7 @@ noncomputable def coefficientSequenceInternalHom :
     _ _ (coefficientSequenceTopology (Scheme.ProEt.topology W)) _ _
       (coefficientSequenceCommRingSheaf l E W) (HasDerivedCategory.standard _)
 
-/-- Evaluation of the actual sequence ring is the recorded finite coefficient sheaf.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site).
-Proof: the object at (n,U) is B_n(U). Its vertical restriction is B_n(f), since the
-horizontal quotient along the identity is the identity. Functor extensionality
-identifies the underlying presheaves; sheaf-condition proofs are irrelevant. -/
+/-- Evaluation of the actual sequence ring is the recorded finite coefficient sheaf. -/
 theorem coefficientSequenceEvaluationRing_eq (n : ℕ) :
     ((Prod.sectR n W.ProEt).sheafPushforwardContinuous RingCat.{max u (t + 1)}
       (Scheme.ProEt.topology W) (coefficientSequenceTopology (Scheme.ProEt.topology W))).obj
@@ -580,41 +577,30 @@ theorem coefficientSequenceEvaluationRing_eq (n : ℕ) :
   rw [uncurry_slice_eq]
   rfl
 
-/-- Evaluation of a strict coefficient system, with the canonical ring identification.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- Evaluation of a strict coefficient system, with the canonical ring identification. -/
 noncomputable def coefficientSequenceEvaluation (n : ℕ) :
     coefficientSequenceModules l E W ⥤ normalizedDVRModules l E W n :=
   SheafOfModules.pushforward (F := Prod.sectR n W.ProEt)
     (eqToHom (coefficientSequenceEvaluationRing_eq l E W n).symm)
 
-/-- Componentwise exactness of coefficient evaluation.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site).
-Proof: kernels of module presheaves are sectionwise; cokernels are their sectionwise
-cokernels followed by sheafification. Vertical gluing computes the same sheafification
-at each level. Hence both kernel and cokernel comparisons are isomorphisms at every
-level, and the additive evaluation functor preserves finite limits and colimits. -/
+/-- Componentwise exactness of coefficient evaluation. -/
 theorem coefficientSequenceEvaluation_exact (n : ℕ) :
     PreservesFiniteLimits (coefficientSequenceEvaluation l E W n) ∧
       PreservesFiniteColimits (coefficientSequenceEvaluation l E W n) := by
   exact sequenceEvaluation_exact.{u, t+1, t} (C := W.ProEt) (Scheme.ProEt.topology W) n
     (eqToHom (coefficientSequenceEvaluationRing_eq l E W n).symm)
 
-/-- The finite-limit part of componentwise exact evaluation.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- The finite-limit part of componentwise exact evaluation. -/
 noncomputable instance coefficientSequenceEvaluation_limits (n : ℕ) :
     PreservesFiniteLimits (coefficientSequenceEvaluation l E W n) :=
   (coefficientSequenceEvaluation_exact l E W n).1
 
-/-- The finite-colimit part of componentwise exact evaluation.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- The finite-colimit part of componentwise exact evaluation. -/
 noncomputable instance coefficientSequenceEvaluation_colimits (n : ℕ) :
     PreservesFiniteColimits (coefficientSequenceEvaluation l E W n) :=
   (coefficientSequenceEvaluation_exact l E W n).2
 
-/-- Evaluation is additive because addition of module maps is componentwise.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site).
-Proof: both sides of preservation of addition have at (n,U) the sum of the same
-underlying linear maps. Module-sheaf morphism extensionality gives equality. -/
+/-- Evaluation is additive because addition of module maps is componentwise. -/
 theorem coefficientSequenceEvaluation_additive (n : ℕ) :
     (coefficientSequenceEvaluation l E W n).Additive := by
   constructor
@@ -622,14 +608,12 @@ theorem coefficientSequenceEvaluation_additive (n : ℕ) :
   ext U x
   rfl
 
-/-- The additive structure of canonical evaluation.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- The additive structure of canonical evaluation. -/
 noncomputable instance coefficientSequenceEvaluation_additiveInstance (n : ℕ) :
     (coefficientSequenceEvaluation l E W n).Additive :=
   coefficientSequenceEvaluation_additive l E W n
 
-/-- Ordinary derived evaluation descended from exact sequence evaluation.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- Ordinary derived evaluation descended from exact sequence evaluation. -/
 @[reducible]
 noncomputable def coefficientSequenceDerivedEvaluation (n : ℕ) :
     coefficientSequenceDerived l E W ⥤ normalizedDVRDerived l E W n :=
@@ -637,10 +621,7 @@ noncomputable def coefficientSequenceDerivedEvaluation (n : ℕ) :
   letI := HasDerivedCategory.standard (normalizedDVRModules l E W n)
   (coefficientSequenceEvaluation l E W n).mapDerivedCategory
 
-/-- Evaluation retains the actual underlying abelian section object.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site).
-Proof: unfold the continuous module pushforward. Scalar restriction changes the
-module action only, so forgetting the action gives exactly the section at (n,U). -/
+/-- Evaluation retains the actual underlying abelian section object. -/
 theorem coefficientSequenceEvaluationAb_eq
     (M : coefficientSequenceModules l E W) (n : ℕ) (U : W.ProEtᵒᵖ) :
     ((coefficientSequenceEvaluation l E W n).obj M).val.presheaf.obj U =
@@ -654,10 +635,7 @@ private theorem restrictScalars_presheaf_obj
     ((SheafOfModules.restrictScalars f).obj M).val.presheaf.obj U =
       M.val.presheaf.obj U := rfl
 
-/-- Restricting a finite evaluation retains the same underlying abelian sections.
-Source: Stacks 0941, 03CZ (blueprint: def-coef-ringed-sequence-site).
-Proof: the finite quotient restriction leaves the abelian presheaf unchanged.
-Then apply the preceding evaluation equality. -/
+/-- Restricting a finite evaluation retains the same underlying abelian sections. -/
 theorem coefficientSequenceRestrictedEvaluationAb_eq
     (M : coefficientSequenceModules l E W) {m n : ℕ} (h : n ≤ m) (U : W.ProEtᵒᵖ) :
     ((normalizedDVRModuleRes l E W h).obj
@@ -718,12 +696,7 @@ private theorem coefficientSequenceRingHorizontal {m n : ℕ} (h : n ≤ m) :
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 -- Comparing the concrete pushforward and scalar-restriction interfaces is expensive.
-/-- The actual quotient transition, characterized on every section of every system.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site).
-Proof: the horizontal restriction in the module presheaf is linear over B_m with
-its target action restricted by B_m→B_n. Its site naturality gives a module-sheaf
-map, and naturality in the input module gives the displayed transformation.
-Extensionality on all sections proves uniqueness. -/
+/-- The actual quotient transition, characterized on every section of every system. -/
 theorem coefficientSequenceTransition_exists {m n : ℕ} (h : n ≤ m) :
     ∃! τ : coefficientSequenceEvaluation l E W m ⟶
       coefficientSequenceEvaluation l E W n ⋙ normalizedDVRModuleRes l E W h,
@@ -750,15 +723,13 @@ theorem coefficientSequenceTransition_exists {m n : ℕ} (h : n ≤ m) :
     (fun M U ↦ coefficientSequenceRestrictedEvaluationAb_eq l E W M h U)
   exact hgeneric
 
-/-- The canonical quotient transition, chosen by its unique actual restriction formula.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- The canonical quotient transition, chosen by its unique actual restriction formula. -/
 noncomputable def coefficientSequenceTransition {m n : ℕ} (h : n ≤ m) :
     coefficientSequenceEvaluation l E W m ⟶
       coefficientSequenceEvaluation l E W n ⋙ normalizedDVRModuleRes l E W h :=
   (coefficientSequenceTransition_exists l E W h).exists.choose
 
-/-- The same transition descended to the ordinary derived system category.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- The same transition descended to the ordinary derived system category. -/
 noncomputable def coefficientSequenceDerivedTransition {m n : ℕ} (h : n ≤ m) :
     coefficientSequenceDerivedEvaluation l E W m ⟶
       coefficientSequenceDerivedEvaluation l E W n ⋙ normalizedDVRRes l E W h :=
@@ -776,9 +747,7 @@ noncomputable def coefficientSequenceDerivedTransition {m n : ℕ} (h : n ≤ m)
       (normalizedDVRModuleRes l E W h)).inv
 
 /-- Normalization of an actual derived semilinear system, using the dependency's
-universal derived tensor/restriction criterion for its specified transitions.
-Source: Stacks 0941, normalized coefficient systems
-(blueprint: def-coef-ringed-sequence-site). -/
+universal derived tensor/restriction criterion for its specified transitions. -/
 def IsNormalizedCoefficientSequence (N : coefficientSequenceDerived l E W) : Prop :=
   ∀ {m n : ℕ} (h : n ≤ m) (P : normalizedDVRDerived l E W n),
     Function.Bijective
@@ -798,13 +767,7 @@ private theorem moduleSheaf_hom_eq_of_heq
   exact congrFun (eq_of_heq (h V)) x
 
 -- Comparing composite module pushforwards with restriction uses concrete quotient actions.
-/-- Exact restriction of scalars as an actual strict tower, with unchanged sections.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site).
-Proof: restrict the action at n by the actual completed coefficient projection.
-The limit cone equations make every horizontal restriction completed-linear.
-Use the original module-presheaf restrictions for the tower arrows and original
-component maps for morphisms. Their functor equations are those of the presheaves.
-Extensionality on objects and section maps proves uniqueness of this functor. -/
+/-- Exact restriction of scalars as an actual strict tower, with unchanged sections. -/
 theorem coefficientSequenceRestriction_exists :
     ∃! U : coefficientSequenceModules l E W ⥤
       (ℕᵒᵖ ⥤ scalarReductionSource l E W),
@@ -874,17 +837,12 @@ theorem coefficientSequenceRestriction_exists :
   intro X
   exact (hV.2.2 f n.unop X).trans (hU.2.2 f n.unop X).symm
 
-/-- Termwise restriction is fixed by the actual quotient projections and section maps.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- Termwise restriction is fixed by the actual quotient projections and section maps. -/
 noncomputable def coefficientSequenceRestriction : coefficientSequenceModules l E W ⥤
     (ℕᵒᵖ ⥤ scalarReductionSource l E W) :=
   (coefficientSequenceRestriction_exists l E W).exists.choose
 
-/-- Restriction followed by evaluation agrees with actual scalar restriction.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site).
-Proof: the object equality is the first characterization of coefficientSequenceRestriction.
-The morphism equality is its sectionwise characterization. Module-sheaf extensionality
-and functor extensionality give the asserted equality, including the specified maps. -/
+/-- Restriction followed by evaluation agrees with actual scalar restriction. -/
 theorem coefficientSequenceRestriction_evaluation (n : ℕ) :
     coefficientSequenceRestriction l E W ⋙
       (evaluation ℕᵒᵖ (scalarReductionSource l E W)).obj (op n) =
@@ -896,11 +854,7 @@ theorem coefficientSequenceRestriction_evaluation (n : ℕ) :
   intro V
   exact h.2.2 f n V
 
-/-- Exactness of termwise restriction: underlying abelian sheaves do not change.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site).
-Proof: kernels and cokernels are computed levelwise in the system category and
-in the constant-coefficient tower category. Restriction changes only the scalar
-action, so preserves these computations and componentwise addition. -/
+/-- Exactness of termwise restriction: underlying abelian sheaves do not change. -/
 theorem coefficientSequenceRestriction_exact :
     (coefficientSequenceRestriction l E W).Additive ∧
       PreservesFiniteLimits (coefficientSequenceRestriction l E W) ∧
@@ -924,32 +878,27 @@ theorem coefficientSequenceRestriction_exact :
   refine ⟨?_, hlim, hcolim⟩
   exact leftExactFunctor_le_additiveFunctor _ _ _ (by rw [leftExactFunctor_iff]; infer_instance)
 
-/-- Additivity of exact coefficient restriction.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- Additivity of exact coefficient restriction. -/
 noncomputable instance coefficientSequenceRestriction_additive :
     (coefficientSequenceRestriction l E W).Additive :=
   (coefficientSequenceRestriction_exact l E W).1
 
-/-- Finite-limit preservation for exact coefficient restriction.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- Finite-limit preservation for exact coefficient restriction. -/
 noncomputable instance coefficientSequenceRestriction_limits :
     PreservesFiniteLimits (coefficientSequenceRestriction l E W) :=
   (coefficientSequenceRestriction_exact l E W).2.1
 
-/-- Finite-colimit preservation for exact coefficient restriction.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- Finite-colimit preservation for exact coefficient restriction. -/
 noncomputable instance coefficientSequenceRestriction_colimits :
     PreservesFiniteColimits (coefficientSequenceRestriction l E W) :=
   (coefficientSequenceRestriction_exact l E W).2.2
 
-/-- The standard unbounded derived category of completed-coefficient towers.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- The standard unbounded derived category of completed-coefficient towers. -/
 @[reducible]
 noncomputable def coefficientSequenceRestrictedDerived :=
   @DerivedCategory (ℕᵒᵖ ⥤ scalarReductionSource l E W) _ _ (HasDerivedCategory.standard _)
 
-/-- The exact functor U_W on ordinary unbounded derived system categories.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- The exact functor U_W on ordinary unbounded derived system categories. -/
 @[reducible]
 noncomputable def coefficientSequenceDerivedRestriction :
     coefficientSequenceDerived l E W ⥤ coefficientSequenceRestrictedDerived l E W :=
@@ -957,28 +906,24 @@ noncomputable def coefficientSequenceDerivedRestriction :
   letI := HasDerivedCategory.standard (ℕᵒᵖ ⥤ scalarReductionSource l E W)
   (coefficientSequenceRestriction l E W).mapDerivedCategory
 
-/-- Canonical total inverse limit of strict completed-coefficient towers.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- Canonical total inverse limit of strict completed-coefficient towers. -/
 noncomputable def coefficientConstantTowerLimit :
     coefficientSequenceRestrictedDerived l E W ⥤ DerivedCategory (scalarReductionSource l E W) :=
   letI := HasDerivedCategory.standard (ℕᵒᵖ ⥤ scalarReductionSource l E W)
   (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W).rightDerivedFunctor
 
-/-- The specified total limit after exact termwise scalar restriction.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- The specified total limit after exact termwise scalar restriction. -/
 noncomputable def coefficientSequenceLimit :
     coefficientSequenceDerived l E W ⥤ DerivedCategory (scalarReductionSource l E W) :=
   coefficientSequenceDerivedRestriction l E W ⋙ coefficientConstantTowerLimit l E W
 
-/-- The exact evaluation of a constant-coefficient derived tower.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- The exact evaluation of a constant-coefficient derived tower. -/
 noncomputable def coefficientConstantTowerEvaluation (n : ℕ) :
     coefficientSequenceRestrictedDerived l E W ⥤ DerivedCategory (scalarReductionSource l E W) :=
   letI := HasDerivedCategory.standard (ℕᵒᵖ ⥤ scalarReductionSource l E W)
   ((evaluation ℕᵒᵖ (scalarReductionSource l E W)).obj (op n)).mapDerivedCategory
 
-/-- The localization comparison for exact constant-tower evaluation.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- The localization comparison for exact constant-tower evaluation. -/
 noncomputable abbrev coefficientConstantTowerEvaluationFactors (n : ℕ) :=
   ((evaluation ℕᵒᵖ (scalarReductionSource l E W)).obj (op n)).mapDerivedCategoryFactors
 
@@ -1061,12 +1006,7 @@ private theorem derived_projection_exists
   apply (cancel_mono (G.mapDerivedCategory.map e.hom)).mp
   rw [← γ.naturality, ← π.naturality, hcomp]
 
-/-- Actual total-limit projections, characterized on simultaneous K-injective towers.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site).
-Proof: apply the ordinary limit projection to a K-injective tower resolution.
-Exact evaluation identifies its localization with the derived evaluation. The
-right-derived universal property descends these natural chain maps; every object
-has a K-injective representative, so the normalization determines the map uniquely. -/
+/-- Actual total-limit projections, characterized on simultaneous K-injective towers. -/
 theorem coefficientConstantTowerProjection_exists (n : ℕ) :
     ∃! π : coefficientConstantTowerLimit l E W ⟶ coefficientConstantTowerEvaluation l E W n,
       ∀ (I : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) [I.IsKInjective],
@@ -1080,29 +1020,25 @@ theorem coefficientConstantTowerProjection_exists (n : ℕ) :
     (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W)
     ((evaluation ℕᵒᵖ (scalarReductionSource l E W)).obj (op n)) (lim.π (op n))
 
-/-- Canonical total-limit projection, not a lift selected after evaluation.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- Canonical total-limit projection, not a lift selected after evaluation. -/
 noncomputable def coefficientConstantTowerProjection (n : ℕ) :=
   (coefficientConstantTowerProjection_exists l E W n).choose
 
-/-- The actual derived global sections on completed coefficients, with displayed categories.
-Source: Stacks 08JA (blueprint: def-coef-ringed-sequence-site). -/
+/-- The actual derived global sections on completed coefficients, with displayed categories. -/
 noncomputable def coefficientIntegralSections :
     DerivedCategory (scalarReductionSource l E W) ⥤
       @DerivedCategory AddCommGrpCat.{max u (t+1)} _ _ (HasDerivedCategory.standard _) :=
   coefficientGlobalSections.{u, t+1, t} (Scheme.ProEt.topology W)
     (completedIntegralCommRingSheafUnrestricted l E W)
 
-/-- The actual derived global sections at a positive finite coefficient level.
-Source: Stacks 08JA (blueprint: def-coef-ringed-sequence-site). -/
+/-- The actual derived global sections at a positive finite coefficient level. -/
 noncomputable def coefficientFiniteSections (n : ℕ) :
     normalizedDVRDerived l E W n ⥤
       @DerivedCategory AddCommGrpCat.{max u (t+1)} _ _ (HasDerivedCategory.standard _) :=
   coefficientGlobalSections.{u, t+1, t} (Scheme.ProEt.topology W)
     (integralCoefficientCommRingSheaf l E W n)
 
-/-- Integral global derived Hom, retaining the full mapping complex.
-Source: Stacks 08JA (blueprint: def-coef-ringed-sequence-site). -/
+/-- Integral global derived Hom, retaining the full mapping complex. -/
 noncomputable def coefficientIntegralGlobalHom :
     (DerivedCategory (scalarReductionSource l E W))ᵒᵖ ×
       DerivedCategory (scalarReductionSource l E W) ⥤
@@ -1111,8 +1047,7 @@ noncomputable def coefficientIntegralGlobalHom :
       (completedIntegralCommRingSheafUnrestricted l E W) (HasDerivedCategory.standard _) ⋙
     coefficientIntegralSections l E W
 
-/-- Finite global derived Hom, retaining the full mapping complex.
-Source: Stacks 08JA (blueprint: def-coef-ringed-sequence-site). -/
+/-- Finite global derived Hom, retaining the full mapping complex. -/
 noncomputable def coefficientFiniteGlobalHom (n : ℕ) :
     (normalizedDVRDerived l E W n)ᵒᵖ × normalizedDVRDerived l E W n ⥤
         @DerivedCategory AddCommGrpCat.{max u (t+1)} _ _ (HasDerivedCategory.standard _) :=
@@ -1125,8 +1060,7 @@ noncomputable def coefficientFiniteGlobalHom (n : ℕ) :
       (integralCoefficientCommRingSheaf l E W n) (HasDerivedCategory.standard _) ⋙
     coefficientFiniteSections l E W n
 
-/-- The integral derived internal-Hom bifunctor used in the calculus.
-Source: Stacks 0A95 (blueprint: def-coef-ringed-sequence-site). -/
+/-- The integral derived internal-Hom bifunctor used in the calculus. -/
 noncomputable def coefficientIntegralInternalHom :
     (DerivedCategory (scalarReductionSource l E W))ᵒᵖ ×
       DerivedCategory (scalarReductionSource l E W) ⥤
@@ -1134,16 +1068,14 @@ noncomputable def coefficientIntegralInternalHom :
   @derivedInternalHomOfUniverses.{t+1, t, u} _ _ (Scheme.ProEt.topology W) _ _
     (completedIntegralCommRingSheafUnrestricted l E W) (HasDerivedCategory.standard _)
 
-/-- The finite derived internal-Hom bifunctor used in the calculus.
-Source: Stacks 0A95 (blueprint: def-coef-ringed-sequence-site). -/
+/-- The finite derived internal-Hom bifunctor used in the calculus. -/
 noncomputable def coefficientFiniteInternalHom (n : ℕ) :
     (normalizedDVRDerived l E W n)ᵒᵖ × normalizedDVRDerived l E W n ⥤
       normalizedDVRDerived l E W n :=
   @derivedInternalHomOfUniverses.{t+1, t, u} _ _ (Scheme.ProEt.topology W) _ _
     (integralCoefficientCommRingSheaf l E W n) (HasDerivedCategory.standard _)
 
-/-- The canonical derived identification of restricted evaluation.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- The canonical derived identification of restricted evaluation. -/
 noncomputable def coefficientRestrictedEvaluationIso (n : ℕ) :
     coefficientSequenceDerivedRestriction l E W ⋙ coefficientConstantTowerEvaluation l E W n ≅
       coefficientSequenceDerivedEvaluation l E W n ⋙ coefficientFiniteDerivedRestriction l E W n :=
@@ -1157,8 +1089,7 @@ noncomputable def coefficientRestrictedEvaluationIso (n : ℕ) :
     (Functor.mapDerivedCategoryCompIso (coefficientSequenceEvaluation l E W n)
       (scalarReductionRestriction l E W n)).symm
 
-/-- The actual projection L N to the restricted nth coefficient component.
-Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
+/-- The actual projection L N to the restricted nth coefficient component. -/
 noncomputable def coefficientSequenceProjection (n : ℕ) :
     coefficientSequenceLimit l E W ⟶
       coefficientSequenceDerivedEvaluation l E W n ⋙ coefficientFiniteDerivedRestriction l E W n :=

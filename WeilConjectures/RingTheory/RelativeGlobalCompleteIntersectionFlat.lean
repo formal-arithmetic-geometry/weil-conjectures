@@ -13,8 +13,18 @@ import WeilConjectures.RingTheory.RelativeGlobalCompleteIntersectionPartialLocal
 /-!
 # Flatness of relative global complete intersections
 
-Source: Stacks Project, Algebra, Lemma Tag 00SW
-(blueprint: lem-weil-pbc-relative-global-complete-intersection-flat).
+A relative global complete intersection is flat over its coefficient ring.
+
+## Implementation details
+
+At each maximal ideal of the quotient, the localized quotient is flat over `R` by the
+partial-local flatness result with all equations, and
+`Module.flat_of_isLocalized_maximal` checks flatness on these localizations without localizing
+`R`. The zero quotient has no maximal ideals.
+
+## References
+
+* [Stacks, Tag 00SW]
 -/
 
 @[expose] public section
@@ -24,22 +34,7 @@ universe u
 namespace Algebra
 
 /-- A polynomial quotient that is a relative global complete intersection is flat over
-its coefficient ring. Source: Stacks Project, Algebra, Lemma Tag 00SW.
-(blueprint: lem-weil-pbc-relative-global-complete-intersection-flat)
-
-Proof:
-1. For a prime `q` of the quotient, let `q'` be its inverse image in the polynomial ring.
-   Part (2) of `lem-weil-pbc-relative-global-complete-intersection-partial-local-flat`,
-   with `i = c` in a complete-intersection presentation, makes the localized polynomial
-   quotient flat over `R`. The isomorphism of
-   `lem-weil-pbc-localization-at-prime-of-quotient` identifies it with the quotient
-   localized at `q`. The hypothesis applies to the displayed equations themselves.
-2. It suffices to take maximal ideals `q`. Apply Mathlib's
-   `Module.flat_of_isLocalized_maximal` with the quotient as both the intermediate
-   algebra and the module. This version of the local flatness criterion checks each
-   localization over `R` directly, so there is no need to localize `R` separately.
-   Convert module flatness to ring-map flatness with `RingHom.flat_algebraMap_iff`.
-   If the quotient is zero, there are no maximal ideals and the criterion is vacuous. -/
+its coefficient ring. -/
 theorem flat_of_isRelativeGlobalCompleteIntersection_quotient
     (R : Type u) [CommRing R] (n c : ℕ) (relations : Fin c → MvPolynomial (Fin n) R)
     (h : IsRelativeGlobalCompleteIntersectionPresentation relations) :

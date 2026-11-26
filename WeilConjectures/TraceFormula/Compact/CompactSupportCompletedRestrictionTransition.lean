@@ -11,9 +11,20 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Transition of completed coefficient restriction
 
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 03DI, 03DJ, 07A4, 0941.
-This module specializes the ordinary system calculus to the actual pro-etale functors.
-(blueprint: lem-trf-completed-restriction-transition).
+Evaluation of completed scalar restriction preserves the actual system transition. This module
+specializes the ordinary system calculus to the actual pro-étale functors.
+
+## Implementation details
+
+Before localization, both transitions are the horizontal restriction of `N` on each section, by
+`coefficientSequenceRestriction_exists` and `coefficientSequenceTransition_exists`. The resulting
+natural-transformation equality is localized, and naturality of `mapDerivedCategoryCompIso` and
+`mapDerivedCategoryNatIso` supplies the comparison factors.
+
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10.
+* [Stacks Project, Tags 03DI, 03DJ, 07A4 and 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -398,19 +409,7 @@ private theorem towerTransition_eq {m n : ℕ} (h : n ≤ m) :
 
 variable {W}
 
-/-- Evaluation of completed scalar restriction preserves the actual system transition.
-Source: coherence proof step 5; Stacks 0941 and exact-functor localization
-(blueprint: lem-trf-completed-restriction-transition).
-Proof: before localization, evaluate the canonical restricted tower on each section.
-The characterization coefficientSequenceRestriction_exists makes its transition the
-horizontal restriction of N. The characterization coefficientSequenceTransition_exists
-makes the quotient-restriction transition the very same horizontal restriction.
-The limit projection equation identifies successive scalar restrictions with the nth
-projection, hence the two morphisms agree by module-sheaf extensionality. Apply exact
-functors to complexes and localize this natural-transformation equality. Naturality
-of mapDerivedCategoryCompIso and mapDerivedCategoryNatIso supplies precisely the
-three comparison factors displayed here. The universal property of localization
-then gives the equality on every derived object, including unbounded complexes. -/
+/-- Evaluation of completed scalar restriction preserves the actual system transition. -/
 theorem compactSupportCompletedRestrictionTransition
     (W : Scheme.{t}) {m n : ℕ} (h : n ≤ m)
     (N : coefficientSequenceDerived l E W) :

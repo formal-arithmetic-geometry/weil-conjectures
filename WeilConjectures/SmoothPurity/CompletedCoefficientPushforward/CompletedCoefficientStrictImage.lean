@@ -36,8 +36,20 @@ import all WeilConjectures.CategoryTheory.Diagram.DiagramRingRestrictionPushforw
 
 /-! # Direct image of strict semilinear coefficient systems
 
-Source: Stacks Project, Cohomology on Sites, Tag 0D6E, on sequence ringed topoi.
-(blueprint: lem-pur-completed-coefficient-strict-image).
+Direct image of strict semilinear coefficient systems along a morphism of schemes, together
+with its levelwise evaluation identifications and the derived comparison square with the
+tower direct image.
+
+## Implementation details
+
+The system direct image is computed on the quotient-ring diagram on the sequence site; the
+derived square is formed on diagram sites before evaluating, using normalized ringed-topos
+composition. No normalized coefficient systems or bounded complexes are needed.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 0D6E.
+* Zheng, Construction 4.1.
 -/
 
 @[expose] public noncomputable section
@@ -91,9 +103,9 @@ private instance systemsGrothendieck (W : Scheme.{t}) :
       (O := systemRing.{t, u} l E) (ell := systemUniformizer.{t, u} l E)).symm
 
 /-- The system part of the comparison, for fixed coefficient and tower images.
-It retains all transitions before evaluation and contains no inverse-limit data.
-Source: Stacks Project, Cohomology on Sites, Tag 0D6E; Zheng Construction 4.1
-(blueprint: def-pur-completed-coefficient-strict-image-data). -/
+It consists of an additive direct image of strict systems with sectionwise-identity
+evaluation comparisons, its right derived image, and the derived square with the tower
+image; it contains no inverse-limit data. -/
 structure StrictImageData {X Y : Scheme.{t}} (f : X ⟶ Y)
     (C : CoefficientComparisonData l E f)
     (towerImage : RightImage
@@ -119,30 +131,8 @@ structure StrictImageData {X Y : Scheme.{t}} (f : X ⟶ Y)
     (x : ((C.target.systemRestriction.obj (systemPush.obj M)).obj (op n)).val.obj U),
       HEq ((((diagramSquare.ordinary.hom.app M).app (op n)).val.app U) x) x
 
-/-- Extend the fixed coefficient comparisons to the strict-system square, with its
-sectionwise identity and evaluation identifications. The tower right image is supplied;
-there is no evaluation or limit comparison for that tower in this conclusion.
-
-Source: Stacks Project, Cohomology on Sites, Tag 0D6E, on diagram sites;
-Zheng Construction 4.1
-(blueprint: lem-pur-completed-coefficient-strict-image).
-
-Proof: Apply direct image to the sheaf at each coefficient level, using the constant
-structural map of that quotient. The naturality of constant structural maps with respect
-to quotient maps makes the old semilinear transitions into transitions of the image.
-This defines the ordinary system functor and its additive action on morphisms.
-Transport each level by the supplied finiteIso. Its generator equation and naturality
-of constant sections identify the transported finite ring maps with finiteStructure.
-Thus systemPushEvaluation has identity underlying sections. Realize systems as modules
-over the quotient-ring diagram on the sequence site. The compatible completed
-projections give its ring map from the constant completed-ring diagram. Restriction
-along that map is the supplied systemRestriction: systemEvaluation_identity,
-systemTransition and systemMap identify both functors on objects, transitions and maps.
-The two factorizations of the common diagram direct image therefore have an ordinary
-comparison with identity sections. Derive the square on diagram sites using normalized
-ringed-topos composition, before evaluating. Identify its exact restrictions and tower
-image with the supplied factors and universal unit. This gives diagramSquare and its
-normalization. Nothing requires normalized coefficient systems or bounded complexes. -/
+/-- For fixed coefficient comparisons and a supplied tower right image, strict-system image
+data `StrictImageData` exists. -/
 theorem strictImage_exists {X Y : Scheme.{t}} (f : X ⟶ Y)
     (C : CoefficientComparisonData l E f)
     (towerImage : RightImage

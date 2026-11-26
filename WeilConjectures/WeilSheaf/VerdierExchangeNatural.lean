@@ -13,8 +13,7 @@ public import WeilConjectures.WeilSheaf.Localization
 # The Verdier exchange of Weil complexes, natural form
 
 For a separated morphism of finite type `f : X ⟶ Y` of separated `k₀`-schemes of finite type,
-the Verdier exchange `𝔻_Y Rf₀! ≅ Rf_* 𝔻_X` (blueprint
-`lemma-internal-adjunction-two-exchange-formulas--2`) as a natural isomorphism of functors
+this file states the Verdier exchange `𝔻_Y Rf₀! ≅ Rf_* 𝔻_X` as a natural isomorphism of functors
 `(WeilComplex X)ᵒᵖ ⥤ WeilComplex Y`. With Verdier biduality it identifies `Rf^!` with `𝔻_X f^* 𝔻_Y`
 (`AlgebraicGeometry.WeilComplex.nonempty_upperShriek_obj_iso`).
 
@@ -62,15 +61,10 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [(derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).IsLeftAdjoint]
   [(derivedLowerShriek k₀ l (Y ↘ Spec (CommRingCat.of k₀))).IsLeftAdjoint]
 
-/-- **Verdier exchange, natural in `M`** (blueprint
-`lemma-internal-adjunction-two-exchange-formulas--2`): for a separated morphism of finite type
-`f : X ⟶ Y`, `𝔻_Y (Rf₀! M) ≅ Rf_* (𝔻_X M)` naturally in the Weil complex `M`. Here `𝔻 = RHom(-, ω)`
-is the derived internal hom into the dualizing complex `ω = (Ra!)^{ra}(ℚ̄_ℓ)`, lifted to Weil
-complexes along any proofs `hX`, `hY` that it lands there.
-
-This is the case `S = Spec k₀`, `Q = ℚ̄_ℓ` of
-`AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_op_comp_iso_of_adjunction`; the
-objectwise form is `AlgebraicGeometry.WeilComplex.nonempty_verdierDual_derivedLowerShriek_iso`. -/
+/-- **Verdier exchange, natural in `M`**: for a separated morphism of finite type `f : X ⟶ Y`,
+`𝔻_Y (Rf₀! M) ≅ Rf_* (𝔻_X M)` naturally in the Weil complex `M`. Here `𝔻 = RHom(-, ω)` is the
+derived internal hom into the dualizing complex `ω = (Ra!)^{ra}(ℚ̄_ℓ)`, lifted to Weil complexes
+along any proofs `hX`, `hY` that it lands there. -/
 theorem nonempty_verdierDual_derivedLowerShriek_natIso
     (hX : ∀ K : WeilComplex k₀ l X, WeilComplex.objectProperty k₀ l X
       ((ProEtaleWeilSheaf.derivedHom k₀ l X (dualizingComplexOfIsLeftAdjoint k₀ l X).obj).obj

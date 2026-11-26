@@ -16,8 +16,7 @@ public import WeilConjectures.TraceFormula.TransverseBoundary.OneDivisorDevissag
 Let `C` be a transverse corner over an algebraically closed field `k`
 (`AlgebraicGeometry.Scheme.TransverseCorner`), `W = Z - X`, `j_W : Z - (X ∪ Y) ⟶ W` and
 `Y - z ⟶ W` the punctured divisor. For a prime `ℓ` invertible in `k`, the restriction of
-`R j_{W*} ℤ/ℓ` to `Y - z` has finite locally constant cohomology sheaves (blueprint
-`lemma-cohomology-near-two-transverse-divisors--1`, constant coefficients): near every point of
+`R j_{W*} ℤ/ℓ` to `Y - z` has finite locally constant cohomology sheaves: near every point of
 `Y - z`, purity for the regular divisor `Y` of the étale limit of smooth surfaces `Z`
 (`Scheme.exists_hasDivisorComplementDirectImages_of_isEtaleLimitOfSmoothSurfaces`)
 computes `R^q j_* ℤ/ℓ` as `ℤ/ℓ`, `i_* ℤ/ℓ` and `0`
@@ -42,9 +41,8 @@ open AlgebraicGeometry.Etale
 
 variable {k : Type u} [Field k] [IsAlgClosed k] (C : TransverseCorner k) {ℓ : ℕ} [Fact ℓ.Prime]
 
-/-- Blueprint `lemma-cohomology-near-two-transverse-divisors--1`, constant coefficients `ℤ/ℓ`: the
-restriction of `R j_{W*} ℤ/ℓ` to the punctured divisor `Y - z` has finite locally constant
-cohomology sheaves. -/
+/-- The restriction of `R j_{W*} ℤ/ℓ` to the punctured divisor `Y - z` has finite locally
+constant cohomology sheaves. -/
 theorem hasFiniteLocallyConstantHomology_puncturedYι_jW_constantZModModule
     (hℓ : (ℓ : k) ≠ 0) :
     HasFiniteLocallyConstantHomology C.puncturedY

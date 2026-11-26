@@ -37,9 +37,7 @@ variable {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
   (L : finiteTorConstructibleCategory C.l E n hn Z.obj.left)
 
 /-- Realization of the tensor of an iterated support value. It first realizes the
-outer support, then tensors the inner support comparison.
-Source: coefficient transport in fix-prop-projection-formula.proof.md
-(blueprint: lem-sf-finite-projection-iteration-realization). -/
+outer support, then tensors the inner support comparison. -/
 def iterationSourceComparison :=
   letI := Padic.finite_coefficientExtensionRing C.l E n hn
   let RZ := realization (C := C) (E := E) (n := n) (hn := hn) Z
@@ -49,9 +47,7 @@ def iterationSourceComparison :=
     RZ.functor.mapIso ((TZ.mapIso (G.mapIso (fixedSupportRealization S f cf K))).app
       (RZ.inverse.obj L.obj))
 
-/-- Cancel the tensor coefficient unit, and realize the two successive pullbacks.
-Source: coefficient transport in fix-prop-projection-formula.proof.md
-(blueprint: lem-sf-finite-projection-iteration-realization). -/
+/-- Cancel the tensor coefficient unit, and realize the two successive pullbacks. -/
 def iterationTensorComparison :=
   letI := Padic.finite_coefficientExtensionRing C.l E n hn
   let RX := realization (C := C) (E := E) (n := n) (hn := hn) X
@@ -62,9 +58,7 @@ def iterationTensorComparison :=
         ⟨((torPull S g).obj L).obj, ((torPull S g).obj L).property.1⟩ ≪≫
         Pf.mapIso (fixedPullRealization S g ⟨L.obj, L.property.1⟩))
 
-/-- Realize the two supports and cancel the coefficient unit at their tensor input.
-Source: coefficient transport in fix-prop-projection-formula.proof.md
-(blueprint: lem-sf-finite-projection-iteration-realization). -/
+/-- Realize the two supports and cancel the coefficient unit at their tensor input. -/
 def iterationTargetComparison :=
   letI := Padic.finite_coefficientExtensionRing C.l E n hn
   let RZ := realization (C := C) (E := E) (n := n) (hn := hn) Z
@@ -343,22 +337,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFun
 
 /-- Iterating two conjugated projection components realizes the iteration of the
 fixed-scalar components. This contains no support compositor, no composite-map
-projection and no composition-coherence assertion.
-
-Source: fix-prop-projection-formula.proof.md, coefficient transport in the composition
-sentence; naturality of projectionMapOfCompactification and coefficient units
-(blueprint: lem-sf-finite-projection-iteration-realization).
-
-Proof: expand the two components as source comparison, realized fixed component,
-and inverse target comparison. Naturality of the outer support realization moves
-its image of the inner component past that realization. The intermediate coefficient
-unit cancels with its inverse. Naturality of the outer fixed projection in its first
-input moves fixedSupportRealization for f to the source. Naturality of the inner
-fixed projection in its second input moves fixedPullRealization for g to the target.
-The remaining target is precisely iterationTensorComparison followed by the two
-support realizations. Functoriality and associativity give the displayed equation.
-The argument uses neither boundedness beyond the stated domains nor invertibility
-of a projection, and applies to zero objects and identity maps without exceptions. -/
+projection and no composition-coherence assertion. -/
 theorem iteration_realization :
     letI := Padic.finite_coefficientExtensionRing C.l E n hn
     let RX := realization (C := C) (E := E) (n := n) (hn := hn) X

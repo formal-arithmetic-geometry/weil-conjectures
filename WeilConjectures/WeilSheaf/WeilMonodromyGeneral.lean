@@ -181,10 +181,7 @@ noncomputable abbrev frobAction : Multiplicative ℤ →* MulAut (Aut (fiber B.t
 
 /-- **The Weil group** `W(X₀, t) = π₁(X, t) ⋊ ℤ` attached to base point data `B`: the semidirect
 product of the geometric fundamental group `π₁(X, t) = Aut F_t` with `ℤ`, where the generator
-`γ = (1, 1)` acts by `γ⁻¹ g γ = β ≫ Fr_* g ≫ β⁻¹`. By the homotopy exact sequence it is the Weil
-group of Deligne (Weil II, 1.1.7), the preimage of `ℤ` in `π₁(X₀, t)`, but this
-identification is never needed: lisse Weil sheaves are equivalent to its continuous
-representations. -/
+`γ = (1, 1)` acts by `γ⁻¹ g γ = β ≫ Fr_* g ≫ β⁻¹`. -/
 abbrev WeilGroup : Type (u + 1) := Aut (fiber B.t) ⋊[B.frobAction] Multiplicative ℤ
 
 /-- The input for the Weil fundamental representation in arbitrary dimension: a group `W` with
@@ -227,8 +224,8 @@ section FundamentalRepresentation
 variable {l : ℕ} [Fact l.Prime] [Fact (ringChar K ≠ l)]
   (M : LisseMonodromy l (X ↘ Spec (.of K)).geometricFiber K) (B : FrobeniusBasePoint K X)
 
-/-- The Frobenius `Φ : ℱ_t ≅ ℱ_t` of the Weil fundamental representation
-(`situation-weil`): the transport `ℱ_t ≅ ℱ_{t ≫ Fr}` along the path `β`, the
+/-- The Frobenius `Φ : ℱ_t ≅ ℱ_t` of the Weil fundamental representation: the transport
+`ℱ_t ≅ ℱ_{t ≫ Fr}` along the path `β`, the
 identification `ℱ_{t ≫ Fr} = (Fr^* ℱ)_t`, and the stalk at `t` of the Weil structure
 `Fr^* ℱ ≅ ℱ`. -/
 noncomputable def frobStalkIso (F : WeilSheaf K l X) (hF : F.IsLisse) :
@@ -500,8 +497,8 @@ theorem frobUnit_conj (F : WeilSheaf K l X) (hF : F.IsLisse) (u : W)
       D.degreeDatum.deg.normal_ker.conj_mem u hu _⟩) (frobStalk M B F hF v)
   rw [LinearEquiv.symm_apply_apply, D.geomEquiv_symm_conj hu, frobStalk_rep]
 
-/-- **The Weil fundamental representation** of a lisse Weil sheaf on `X₀` of arbitrary dimension
-(`situation-weil`): the representation `ρ(u γⁿ) = ρ_geom(u) Φⁿ` of `W` on
+/-- **The Weil fundamental representation** of a lisse Weil sheaf on `X₀` of arbitrary dimension:
+the representation `ρ(u γⁿ) = ρ_geom(u) Φⁿ` of `W` on
 the stalk `ℱ_t`, extending the geometric fundamental representation by the Frobenius `Φ` of the
 Weil structure. -/
 noncomputable def fundamentalRep (F : WeilSheaf K l X) (hF : F.IsLisse) :
@@ -608,8 +605,7 @@ theorem exists_stalkMap_eq (hM : M.IsEquivalenceAt B.t) {F G : LisseWeilSheaf K 
 
 /-- **Essential surjectivity of the Weil fundamental representation**: every finite-dimensional
 representation of `W` which is continuous on the geometric part `π₁(X, t)` is the Weil
-fundamental representation of a lisse Weil sheaf (`definition-weil-representation--1`,
-Frobenius descent). -/
+fundamental representation of a lisse Weil sheaf. -/
 theorem exists_fundamentalRep_linearEquiv (hM : M.IsEquivalenceAt B.t) (V : Type (u + 1))
     [AddCommGroup V] [Module (PadicAlgCl l) V] [FiniteDimensional (PadicAlgCl l) V]
     (ρ : Representation (PadicAlgCl l) W V)
@@ -937,8 +933,8 @@ variable {l : ℕ} [Fact l.Prime] [Fact (ringChar K ≠ l)]
 def isContinuousRep : ObjectProperty (Rep.{u} (PadicAlgCl l) W) :=
   fun V ↦ FiniteDimensional (PadicAlgCl l) V.V ∧ V.ρ.IsContinuousOn D.geomHom
 
-/-- **The lisse sheaf–representation equivalence** on a scheme `X₀` of arbitrary dimension
-(`definition-weil-representation--1`): if the monodromy at `t` is an equivalence,
+/-- **The lisse sheaf–representation equivalence** on a scheme `X₀` of arbitrary dimension:
+if the monodromy at `t` is an equivalence,
 the Weil fundamental representation is an equivalence between lisse Weil sheaves on `X₀` and
 finite-dimensional representations of `W` continuous on `π₁(X, t)`, under which every lisse Weil
 sheaf goes to a representation isomorphic to its Weil fundamental representation. -/
@@ -1116,8 +1112,9 @@ theorem exists_lisseMonodromy_isBoundedOn_twist_fundamentalRep
   exact ⟨M, B, rfl, hM B.t, fun F hF ↦ exists_isBoundedOn_twist_fundamentalRep M B (hM B.t) hF⟩
 
 /-- **Deligne, Weil II, 1.3.14** for smooth geometrically connected `X₀` of finite type over
-`K` of arbitrary dimension: the geometric fibre is then connected, regular, Noetherian and
-quasi-compact, so `exists_lisseMonodromy_isBoundedOn_twist_fundamentalRep` applies. -/
+`K` of arbitrary dimension: for every geometric point `t` there are a monodromy `M` which is an
+equivalence at `t` and base point data `B` at `t` such that for every irreducible lisse Weil
+sheaf `ℱ` some twist `ρ_ℱ ⊗ b^{-deg}` of its Weil fundamental representation is bounded. -/
 theorem exists_lisseMonodromy_isBoundedOn_twist_fundamentalRep_of_smooth
     [Smooth (X ↘ Spec (.of K))] [QuasiCompact (X ↘ Spec (.of K))]
     [GeometricallyConnected (X ↘ Spec (.of K))]

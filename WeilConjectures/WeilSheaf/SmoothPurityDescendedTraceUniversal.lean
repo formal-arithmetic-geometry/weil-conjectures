@@ -9,7 +9,7 @@ public import WeilConjectures.WeilSheaf.SmoothPurityFieldTrace
 public import WeilConjectures.WeilSheaf.SmoothPurityTraceDescent
 
 /-!
-# The smooth trace after a change of the base field (A1')
+# The smooth trace after a change of the base field
 
 Let `f : X ⟶ Y` be a smooth morphism of pure relative dimension `d` of separated `k₁`-schemes of
 finite type, `f' : X' ⟶ Y'` a morphism of `k₂`-schemes with maps `πX : X' ⟶ X`, `πY : Y' ⟶ Y`
@@ -28,11 +28,10 @@ In `AlgebraicGeometry.WeilComplex`, this is the finite-field input of
 (`DescendedSmoothTraceUniversal`): the equivariance of the descended trace is automatic, and
 universality of its carrier reduces to the invertibility of `smoothUnitBaseChange`.
 
-## Status of the remaining input
+## Implementation details
 
 `IsIso (smoothUnitBaseChange ...)` is the compatibility of `Rf^!` with the change of base field
-for a *non-proper* smooth `f` (blueprint `proposition-compatibility-purity-base-change` across a
-field extension, SGA 4½ Th. finitude). The library proves it
+for a *non-proper* smooth `f` (SGA 4½ Th. finitude). The library proves it
 
 * for smooth **proper** `f` along a weakly étale change of base
   (`ProEtale.CondensedRing.isIso_upperShriekBaseChangeOfMap_app_of_smooth_of_weaklyEtale`, where
@@ -42,8 +41,12 @@ field extension, SGA 4½ Th. finitude). The library proves it
 * for same-field cartesian squares with `f` smooth and the base map a closed immersion
   (`ProEtale.CondensedRing.isIso_upperShriekBaseChange_of_smooth_of_isClosedImmersion`).
 
-The relative non-proper smooth case over `k₁ ⟶ k̄₁` is not in the library (this is why K4's
-route B closes only the absolute case `Y = Spec k₀`).
+The relative non-proper smooth case over `k₁ ⟶ k̄₁` is not in the library; only the absolute
+case `Y = Spec k₀` is available.
+
+## References
+
+* [SGA 4½, Th. finitude]
 -/
 
 @[expose] public noncomputable section
@@ -75,8 +78,7 @@ variable (l : ℕ) [Fact l.Prime] {k₁ k₂ : Type u} [Field k₁] [Field k₂]
 
 /-- **The exceptional base change map at the unit** `πX^* Rf^! ℚ̄_ℓ,Y ⟶ Rf'^! ℚ̄_ℓ,Y'`: the mate of
 the compact-support base change `bc` under `Rf_! ⊣ Rf^!` and `Rf'_! ⊣ Rf'^!`, followed by
-`Rf'^!(e)`. For `f` proper and `bc` proper base change this is
-`ProEtale.CondensedRing.upperShriekBaseChangeOfMap` at the unit. -/
+`Rf'^!(e)`. -/
 abbrev smoothUnitBaseChange :
     (boundedConstructibleUpperStarOfMap l πX).obj
         ((boundedConstructibleUpperShriek l f).obj (𝟙_ _)) ⟶
@@ -105,8 +107,8 @@ lemma homEquiv_baseChangedSmoothTrace :
   exact Adjunction.homEquiv_baseChangedTrace (boundedConstructibleUpperShriekAdjunction l f)
     (boundedConstructibleUpperShriekAdjunction l f') bc e (smoothOrientation l f d)
 
-/-- **A1' in finite-field terms**: the pulled-back smooth trace is universal as soon as the
-exceptional base change map at the unit is invertible. -/
+/-- **The pulled-back smooth trace is universal** as soon as the exceptional base change map at
+the unit is invertible. -/
 theorem isIso_homEquiv_baseChangedSmoothTrace_of_isIso
     [IsIso (smoothUnitBaseChange l f f' bc e)] :
     IsIso ((boundedConstructibleUpperShriekAdjunction l f').homEquiv _ _

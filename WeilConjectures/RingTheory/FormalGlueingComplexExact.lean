@@ -17,8 +17,22 @@ import Mathlib.LinearAlgebra.TensorProduct.Pi
 /-!
 # Exactness of the formal glueing complex
 
-Source: Stacks Project, More on Algebra, Lemma 05EK and equation `glueing-complex`
-(blueprint: lem-weil-pbc-formal-glueing-complex-exact).
+For a flat ring map `R → S` inducing an isomorphism modulo `I = (f₁, …, fₜ)` and an `R`-module
+`M`, the formal glueing complex of `M` is exact.
+
+## Implementation details
+
+Scalar extension is written `S ⊗[R] M`; the map `η` is `m ↦ 1 ⊗ m` and the overlap maps are the
+universal lifts of `m ↦ m/1`. Vanishing in all localizations `M_{fᵢ}` is equivalent to being
+`I`-power torsion, and injectivity and surjectivity of the base change map on `I`-power torsion
+handle the kernel of the first map and the torsion part of a kernel element. For the remaining
+part, after clearing denominators one gets a compatible family `xᵢ` with `1 ⊗ xᵢ = fᵢⁿ y`; its
+class in `Mᵗ / range (m ↦ (fᵢⁿ m)ᵢ)` is `I`-power torsion and vanishes after base change, hence
+vanishes. This uses the ambient cokernel instead of Koszul homology.
+
+## References
+
+* [Stacks, Tag 05EK]
 -/
 
 @[expose] public section
@@ -159,23 +173,8 @@ private theorem formalGlueing_normalize
     rw [map_smul, ← hKP, pow_add, mul_smul]
 
 /-- A compatible family of multiples by powers of the generators is a boundary if
-it becomes a boundary after the specified flat base change.
-
-Source: Stacks Project, More on Algebra, Lemma 05EK, second computational proof,
-the argument using the class in `H_1(M, (f_1^n, ..., f_t^n))`.
-(blueprint: lem-weil-pbc-formal-glueing-complex-exact).
-
-Proof: let `δ : M → M^t` send `m` to `(f_i^n m)_i`, and take the class `ξ`
-of `x` in `Q = M^t / range δ`. Compatibility gives `f_k^n x = δ(x_k)`,
-so every `f_k^n` annihilates `ξ`. The finitely generated ideal `I = (f_i)`
-lies in the radical of the annihilator of `ξ`, hence a power of `I` kills `ξ`.
-The finite product tensor comparison identifies `1 ⊗ x` with `δ.lTensor S y`
-by the boundary hypothesis. Applying the tensor extension of the quotient map
-gives `1 ⊗ ξ = 0`. Injectivity of the torsion-submodule base-change map
-(05EC(1)) now gives `ξ = 0`, hence `x = δ(m)` for some `m`.
-This uses the ambient cokernel instead of the Koszul subquotient of the source;
-only the class of the compatible family must be torsion. For an empty family,
-the ambient product is zero and the same argument applies. -/
+it becomes a boundary after the flat base change: if `f_j^n x_i = f_i^n x_j` for all `i, j`
+and `1 ⊗ x_i = f_i^n y` in `S ⊗_R M`, then `x_i = f_i^n m` for some `m ∈ M`. -/
 private theorem formalGlueing_powerFamily_descent
     {R : Type u} {S : Type v} [CommRing R] [CommRing S]
     [Algebra R S] (hflat : RingHom.Flat (algebraMap R S))
@@ -247,35 +246,8 @@ private theorem formalGlueing_powerFamily_descent
 
 
 /-- The formal glueing complex is exact for a flat map inducing an isomorphism modulo
-`I = (f₁, …, fₜ)`. Scalar extension is written `S ⊗[R] M`, as in the recorded dependency
-`def-weil-module-base-change`; tensor commutativity identifies it with `M ⊗[R] S`.
-The map `η` is `m ↦ 1 ⊗ m`. Its localized map renders `mᵢ ⊗ 1` in `(M ⊗ S)_fᵢ`.
-The canonical overlap maps `ρ` are the universal lifts of `m ↦ m/1`.
-Source: Stacks Project, More on Algebra, Lemma 05EK and equation `glueing-complex`
-(blueprint: lem-weil-pbc-formal-glueing-complex-exact).
-
-Proof (following the second computational proof of 05EK):
-1. Vanishing in all localizations is equivalent to ideal-power torsion: individual
-   annihilating powers place I in the radical of the element's annihilator, and
-   finite generation gives a power of I contained in that annihilator.
-2. The localized map of eta sends m/1 to eta(m)/1. The universal overlap lifts
-   also send m/1 to m/1, so beta(alpha(m)) = 0.
-3. If alpha(m) = 0, then m is I-power torsion and eta(m) = 0. Injectivity of
-   `Ideal.primaryComponent_baseChange_bijective` gives m = 0.
-4. For a kernel element (y, (s_i)), clear denominators and the finitely many
-   localized equalities. Obtain a common n and x_i in M satisfying
-   f_i^n s_i = x_i/1, f_j^n x_i = f_i^n x_j, and eta(x_i) = f_i^n y.
-5. Let delta(m) = (f_i^n m)_i, Q = M^t/range(delta), and xi be the class of x.
-   Compatibility gives f_k^n x = delta(x_k), hence xi is I-power torsion.
-   `TensorProduct.piRight` identifies 1 tensor x with delta.lTensor(S)(y).
-   Applying the tensor extension of the quotient map gives 1 tensor xi = 0.
-   Torsion comparison injectivity applied to Q gives xi = 0, so x_i = f_i^n m.
-6. Scalar multiplication by f_i^n is injective in M localized at f_i, giving
-   m/1 = s_i. The remainder y - eta(m) is I-power torsion. Surjectivity of
-   the torsion comparison lifts it to a torsion element z of M, whose
-   localizations vanish. Thus the kernel element is alpha(m + z).
-The proof uses only the torsion class in the ambient cokernel, without forming
-Koszul homology. Empty families and exponent zero are included throughout. -/
+`I = (f₁, …, fₜ)`: the sequence
+`0 → M → (S ⊗_R M) × ∏ᵢ M_{fᵢ} → ∏ᵢ (S ⊗_R M)_{fᵢ} × ∏ᵢⱼ M_{fᵢfⱼ}` is exact. -/
 theorem formalGlueingComplexExact {R : Type u} {S : Type v}
     [CommRing R] [CommRing S] (φ : R →+* S) (hflat : φ.Flat)
     (t : ℕ) (f : Fin t → R)

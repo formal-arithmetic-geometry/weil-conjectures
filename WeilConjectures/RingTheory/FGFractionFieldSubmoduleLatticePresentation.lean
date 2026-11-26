@@ -15,8 +15,20 @@ import Mathlib.RingTheory.Localization.Integer
 /-!
 # Clearing denominators in a finitely generated fraction-field submodule
 
-Source: Stacks Project, Algebra, Tag 00PE, proof, first and second paragraphs
-(blueprint: lem-weil-pbc-fg-fraction-submodule-lattice-presentation).
+A finitely generated `R`-submodule `M` of `K^r`, for `K` the fraction field of a domain `R`, is
+isomorphic to a submodule `N` of `R^s` with `s ≤ r` containing `d R^s` for some nonzero `d`.
+
+## Implementation details
+
+The `K`-span `V` of `M` has dimension `s ≤ r`; a basis identifies `V` with `K^s`. Multiplying by a
+common nonzero denominator `a` of the generators carries `M` isomorphically into `R^s`, and a
+common denominator `d` of the coefficients expressing the standard basis vectors in terms of `N`
+gives `d R^s ⊆ N`. The case `s = 0` is covered with `N = 0` and `d = 1`. No Noetherianity,
+locality or dimension assumption is needed.
+
+## References
+
+* [Stacks, Tag 00PE], proof, first and second paragraphs
 -/
 
 @[expose] public section
@@ -118,24 +130,7 @@ private theorem exists_integral_lattice_of_fg_of_span_eq_top
   rw [Finset.prod_erase_mul _ _ (Finset.mem_univ i)]
 
 /-- A finite fraction-field submodule is isomorphic to a submodule of a free module of
-rank at most the ambient dimension, containing a nonzero scalar multiple of that free module.
-Source: Stacks Project, Algebra, Tag 00PE, proof, reduction to a spanning submodule and
-clearing denominators in the finite case
-(blueprint: lem-weil-pbc-fg-fraction-submodule-lattice-presentation).
-
-Proof: Let V be the K-linear span of M inside K^r. Its dimension s is at most r. A
-K-basis identifies V with K^s and transports M to a finitely generated R-submodule
-spanning K^s. Write each coordinate of each of its finitely many generators as a
-fraction of elements of R. Multiply by the product a of their nonzero denominators.
-Then a is nonzero, and aM lies in the coordinatewise image of R^s in K^s. The algebra
-map R → K is injective, so its coordinatewise map identifies aM with an R-submodule
-N of R^s. Multiplication by a is an isomorphism onto its image because a is nonzero
-in the field K; together these maps give M ≃ N. The transported module N still spans
-K^s. Express each standard basis vector as a finite K-linear combination of elements
-of N. Multiplying by a common nonzero denominator d makes all coefficients integral,
-so d times every standard basis vector belongs to N. By R-linearity, dR^s ⊆ N.
-For s = 0 the module is zero, take N = 0 and d = 1; an empty denominator product is 1.
-No Noetherianity, locality, or dimension assumption is needed for this construction. -/
+rank at most the ambient dimension, containing a nonzero scalar multiple of that free module. -/
 theorem exists_lattice_presentation_of_fg
     {R : Type u} [CommRing R] [IsDomain R]
     {K : Type v} [Field K] [Algebra R K] [IsFractionRing R K]

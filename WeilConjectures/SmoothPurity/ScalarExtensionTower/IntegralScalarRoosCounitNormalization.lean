@@ -10,7 +10,12 @@ public import WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarExtensionT
 public import WeilConjectures.SixFunctors.Scalar.ScalarRoosComparison
 import WeilConjectures.TraceFormula.Scalar.ScalarModelRoosCounitNormalization
 
-/-! # The normalized Roos counit in the ordinary integral scalar model -/
+/-! # The normalized Roos counit in the ordinary integral scalar model
+
+## References
+
+* Stacks Project, Tags 06YY and 0941.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -41,15 +46,7 @@ attribute [local implicit_reducible] integralScalarExtension integralScalarExten
   integralComparisonDerivedSequencePullback HomologicalComplex.asFunctor
   HomologicalComplex.complexOfFunctorsToFunctorToComplex
 
-/-- Transport the normalized scalar Roos counit to the ordinary integral scalar model.
-Source: Stacks 06YY and 0941, universal derived scalar counits and total limits.
-(blueprint: lem-pur-integral-scalar-roos-counit-normalization).
-
-Proof: evaluate the prescribed scalar-completion comparison on the total limit.
-Naturality of the derived comparison moves it past the inverse Roos bridge.
-Apply the existing normalized scalar Roos counit equation. The prescribed
-cochain-counit comparison then gives the ordinary integral scalar factors.
-Functoriality and associativity identify the resulting composite. -/
+/-- Transport the normalized scalar Roos counit to the ordinary integral scalar model. -/
 theorem integralScalarRoosCounitNormalization (X : Scheme.{u})
     (S : CoefficientDerivedSystemCalculus l E X)
     (ρE : IntegralComparisonRoosModel l E X)

@@ -15,8 +15,20 @@ import WeilConjectures.RingTheory.FiniteConeCycleAttachment
 /-!
 # One descending finite free extension
 
-Source: Stacks Project, Tag 064U, descending induction step.
-(blueprint: lem-pc-ring-finite-cone-free-extension).
+A bounded complex of finite free modules mapping to `C`, whose cone is acyclic in degrees `≥ n`
+and has finitely generated cohomology in degree `n - 1`, extends by one finite free term in
+degree `n - 1` so that the new cone is acyclic in degrees `≥ n - 1`.
+
+## Implementation details
+
+Lift finitely many generators of `H^(n-1)(mappingCone f)` to cycles `(a, c)` with
+`a ∈ F^n` and `c ∈ C^(n-1)`, and adjoin a finite free module on them in degree `n - 1` with
+differential `a` and map `-c` to `C`. The finite free carrier is built on `Shrink R` so that it
+lives in the module universe. The bound `n ≤ b + 1` keeps the new term below `b`.
+
+## References
+
+* [Stacks, Tag 064U]
 -/
 
 @[expose] public section
@@ -28,28 +40,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace DerivedCategory
 
 /-- Extend a bounded finite free approximation by one degree using generators of its
-finite obstruction module.
-
-Source: Stacks Project, More on Algebra, Tag 064U, proof of (2) implies (1), induction
-step; the cone-cycle version combines the kernel and cokernel generators in one step.
-(blueprint: lem-pc-ring-finite-cone-free-extension).
-
-Proof: Write `D = mappingCone f`. Choose finitely many generators of `H^(n-1)(D)`
-and lift them to cycles. In the convention `D^(n-1) = F^n ⊕ C^(n-1)`, write a
-representative as `(a,c)`; its equations are `d_F a = 0` and `f a + d_C c = 0`.
-Take a finite free module on these generators in degree `n-1`, give it differential
-`a` to `F^n`, and map it to `C^(n-1)` by `-c`. Retain all degrees at least `n`
-and put zero in lower degrees. The cycle equations give the complex and chain-map
-identities. Use `Shrink R` (R is small in v) for the finite free carrier in v.
-The inclusion `j` of the old complex has identity components in degrees at least n,
-and its lower components are the unique maps from zero. Thus `j ≫ g = f`.
-The old cone has zero cohomology in degrees at least n. Adjoining the chosen cycles
-kills every class of its degree n-1 cohomology, so the new cone is exact in degree
-n-1 and remains exact above it. Equivalently the long exact sequence makes the new
-map an isomorphism on cohomology above n-1 and surjective at n-1. The bound
-`n ≤ b+1` ensures the new term does not exceed b, and all retained terms remain
-finite free. Empty generators work for a zero obstruction module and for the zero
-ring. This constructs the new complex from finite generators and cycle lifts. -/
+finite obstruction module. -/
 theorem exists_finiteFree_cone_extension (R : Type u) [CommRing R] [Small.{v} R]
     [HasDerivedCategory.{w} (ModuleCat.{v} R)]
     (C F : CochainComplex (ModuleCat.{v} R) ℤ) (f : F ⟶ C) (b n : ℤ)

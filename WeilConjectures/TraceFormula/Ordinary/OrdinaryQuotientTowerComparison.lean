@@ -14,8 +14,12 @@ import all WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitOrdinaryAdj
 
 /-! # Ordinary strict quotient tower comparison
 
-Source: Stacks 03CZ, 03EK, 06YY, 08TC and 0941; the strict quotient-cone argument
-of `lem-trf-isomorphism-multiplication-cone-descent`.
+Restriction of the ordinary quotient system is the strict quotient tower
+(`ordinaryQuotientTowerComparison`).
+
+## References
+
+* Stacks Project, Tags 03CZ, 03EK, 06YY, 08TC, 0941
 -/
 
 @[expose] public noncomputable section
@@ -488,21 +492,7 @@ end OrdinaryTowerComparisonProof
 
 attribute [local semireducible] unrestrictedIntegralComplexFunctor
 
-/-- Restriction of the ordinary quotient system is the actual strict quotient tower.
-Source: Stacks 03D7, 03EK and 0941, strict quotient presentation construction.
-(blueprint: lem-trf-ordinary-quotient-tower-comparison).
-
-Proof: at level n compose the restriction/evaluation identification with the
-restriction of M.evaluation n. Naturality in complexes follows from naturality
-of both factors. The transition square is M.transition restricted to completed
-coefficients, together with the coefficient projection composition identity.
-It identifies the transition with the actual quotient map since both send
-s tensor x to its reduced coefficient tensor x. Thus the components assemble
-to a natural isomorphism of entire strict towers. For a second presentation a,
-compose restriction of a inverse with this isomorphism. The finite comparison
-identity cancels a inverse and gives exactly the displayed section formula.
-This is an ordinary complex assertion; no derived category, resolving-class
-assumption, completeness, or boundedness is used. -/
+/-- Restriction of the ordinary quotient system is the actual strict quotient tower. -/
 theorem ordinaryQuotientTowerComparison
     (W : Scheme.{t}) (M : CompletionUnit.OrdinaryModel l E W) :
     let T := (coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ) ⋙

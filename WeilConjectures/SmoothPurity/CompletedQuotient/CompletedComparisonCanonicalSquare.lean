@@ -9,8 +9,12 @@ public import WeilConjectures.SmoothPurity.CompletedQuotient.CompletedComparison
 
 /-! # The canonical pullback tensor substitution square
 
-Source: Stacks 07A4 and 0941; the canonical integral comparison realization.
-(blueprint: lem-pur-completed-comparison-canonical-square).
+For a pullback `f`, tensor substitution and pullback substitution commute with the strict
+quotient comparison and the canonical integral pullback tensor comparison.
+
+## References
+
+* [Stacks, Tags 07A4 and 0941]
 -/
 
 @[expose] public noncomputable section
@@ -253,14 +257,8 @@ private theorem pull_reduction {V W : Scheme.{u}} (g : V ⟶ W)
     ← L.map_comp, R, L, pullbackTensorReferencePullback, Functor.comp_obj] using hn
 
 -- Keep counit cancellation explicit across the derived operation models.
-/-- Source: Stacks 07A4, 0941; the integral comparison counit construction.
-(blueprint: lem-pur-completed-comparison-canonical-square).
-Proof: use the K-flat normalization equation for the system comparison, followed
-by tensor-model naturality across the sequence pullback bridge. Counit naturality
-computes reduction of each tensor and pullback substitution. Insert these formulas
-into the defining canonical comparison; the effective counits and the primitive
-realization isomorphisms cancel. The remaining equality is naturality of the
-system comparison at the two arbitrary reduction maps. -/
+/-- Pullback substitution followed by the strict comparison equals the canonical integral
+pullback tensor comparison followed by tensor substitution of the pulled-back data. -/
 theorem completedComparisonCanonicalSquare {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

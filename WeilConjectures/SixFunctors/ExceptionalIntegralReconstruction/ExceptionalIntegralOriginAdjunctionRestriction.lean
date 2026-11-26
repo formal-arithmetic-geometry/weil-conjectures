@@ -8,9 +8,22 @@ module
 public import WeilConjectures.SixFunctors.ExceptionalIntegralReconstruction.ExceptionalIntegralReconstructionInterfaces
 import Mathlib.CategoryTheory.Adjunction.Restrict
 
-/-! # Restriction of the origin adjunction
-Source: Zheng, Section 5; integral reconstruction, step 2.
-(blueprint: lem-sf-exceptional-integral-origin-adjunction-restriction).
+/-!
+# Restriction of the origin adjunction
+
+The transported origin adjunction restricts to the normalized full subcategories, giving a
+`SystemAdjunction`.
+
+## Implementation details
+
+The two coordinate equivalences are lifted to the origin subcategories, and their counit
+isomorphisms identify the transported functors with the normalized lifts. The adjunction is then
+restricted with `Adjunction.restrictFullyFaithful`; the transpose equation follows by expanding
+the restricted Hom equivalence and cancelling the coordinate counit.
+
+## References
+
+* [Zheng, Lemma 5.22]
 -/
 
 @[expose] public noncomputable section
@@ -27,19 +40,9 @@ namespace WeilConjectures.ExceptionalIntegralReconstruction
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Restrict the transported origin adjunction along the normalized full
-subcategories and the two coordinate equivalences.
-Source: Zheng, Lemma 5.22; the Hom-chain construction in the proof of the
-normalized exceptional integral adjunction.
-(blueprint: lem-sf-exceptional-integral-origin-adjunction-restriction).
-
-Proof: lift the two coordinate equivalences to the origin subcategories and
-use their counit isomorphisms to identify the transported proper/open and
-exceptional functors with the normalized lifts. Apply the full-subcategory
-adjunction restriction theorem. The displayed transpose is obtained by
-expanding the restricted Hom equivalence and cancelling the coordinate
-counit; it is exactly the transpose equation stored in SystemAdjunction.
--/
+/-- If the exceptional functors preserve normalized systems and normalized systems have
+constructible origin, then the transported origin adjunction restricts to a `SystemAdjunction`
+along the normalized full subcategories and the two coordinate equivalences. -/
 theorem exceptionalIntegralOriginAdjunctionRestriction
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (s : Systems l E c)

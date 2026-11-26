@@ -17,8 +17,12 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Raw localization of one integral linear adjunction
 
-Source: Zheng, Construction 6.2, localization of the integral coefficient category.
+Localization of the integral coefficient category along a single integral linear adjunction.
 The functors below are actual tensor extensions, with no choice of object or arrow maps.
+
+## References
+
+* [Zheng, Construction 6.2]
 -/
 
 @[expose] public noncomputable section
@@ -286,8 +290,6 @@ private theorem exists_normalized_raw_core
 
 set_option linter.unusedVariables false in
 /-- The localized adjunction admits the identity normalized coefficient comparison.
-Source: Zheng, Construction 6.2, normalization after scalar localization
-(blueprint: lem-sf-integral-adjunction-raw-localization-identity).
 The adjunction's counit and left shift comparison are normalized explicitly; an arbitrary
 adjunction structure on the raw functors does not satisfy this assertion. -/
 theorem exists_raw_localized_identity_comparison
@@ -342,10 +344,7 @@ theorem exists_raw_localized_identity_comparison
     exact rawRationalComparisonHom l Ω E A.G hY M
 
 /-- A single integral linear adjunction localizes on its literal tensor Hom maps.
-There is no compactification, compact-support realization, or change of coefficient field.
-Source: Zheng, Construction 6.2, and scalar localization of adjunctions
-(blueprint: lem-sf-integral-adjunction-raw-localization).
--/
+There is no compactification, compact-support realization, or change of coefficient field. -/
 theorem exists_integral_adjunction_raw_localization
     (A : Operation.{u, v} l Ω X Y (.integral E))
     [A.F.Additive] [A.G.Additive]

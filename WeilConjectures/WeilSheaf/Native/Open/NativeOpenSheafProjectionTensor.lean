@@ -13,7 +13,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.P
 
 /-! # The equivariant sheaf open projection formula
 
-Source: Stacks 0E8I, balanced generators and Frobenius reindexing.
+## References
+
+* Stacks Project, Tag 0E8I.
 -/
 
 @[expose] public noncomputable section
@@ -586,34 +588,7 @@ private theorem sheafProjectionGamma
   exact heq_of_eq ((adj.homEquiv _ _).apply_symm_apply _)
 
 /-- The two orientations of the sheaf projection formula, with the first
-orientation normalized by the specified open unit.
-
-Source: Stacks Project, sites-modules.tex, Tag 0E8I,
-lemma-j-shriek-and-tensor; step 2 of the native open tensor argument.
-(blueprint: lem-sf-native-open-sheaf-projection-tensor).
-
-Proof: the ordinary sheaf projection formula shows that tensoring a sheaf
-supported on the open with any sheaf preserves that support. The essential
-image of ordinary extension by zero is closed under colimits. Apply this to
-the two objects in the relative module tensor coequalizer, in either order.
-The comparison between module extension and sheaf extension and the triangle
-identity identify the underlying module counit with the sheaf counit, so the
-module counit is invertible on both tensor objects. Faithful conservative
-forgetting and the specified unit and counit normalizations give the same
-facts for Weil sheaves.
-
-The normalized restriction comparisons are natural: after faithful forgetting,
-their naturality is the ordinary balanced restriction comparison's naturality
-in each module. Form the natural adjunction projection map with their inverses.
-Its transpose is tensoring the unit followed by inverse restriction comparison;
-this is invertible, as is the counit on its target by the support calculation.
-Consequently the projection map is invertible. Its inverse gives the first
-natural isomorphism. The pointwise adjunction-transpose construction gives
-gamma and its required adjunct identity. Apply the same construction to the flipped tensor
-bifunctor and
-exchange the input variables to obtain the other natural isomorphism. Empty
-opens and zero objects are included by the colimit and adjunction arguments;
-no quasi-compactness, complex or K-flatness hypothesis is used. -/
+orientation normalized by the specified open unit. -/
 theorem native_open_sheaf_projection_tensor
     (adj : extensionByZero k₀ l j ⊣ upperStar k₀ l j)
     (hu : ∀ M, (adj.unit.app M).hom.f =

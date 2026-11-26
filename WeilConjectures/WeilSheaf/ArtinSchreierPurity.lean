@@ -30,8 +30,7 @@ trace, the value `ψ(Tr(a x))` of the trace function
 - `AlgebraicGeometry.WeilSheaf.exists_frobeniusEnd_stalk_artinSchreier`: at a closed point `x`
   the local Frobenius of `ℒ_{ψ(a x)}` is multiplication by `ψ(c)` for some `c ∈ k₀` which does
   not depend on `ψ`.
-- `AlgebraicGeometry.isPunctuallyPureOfWeight_artinSchreier` (blueprint:
-`lemma-artin-schreier-character-sheaf--7`):
+- `AlgebraicGeometry.isPunctuallyPureOfWeight_artinSchreier`:
   `ℒ_{ψ(a x)}` is punctually `ι`-pure of weight zero.
 - `AlgebraicGeometry.isPunctuallyPureOfWeight_fourierKernel`: so is the Fourier kernel.
 -/
@@ -91,9 +90,7 @@ local notation "ĀS" => affineLine.geometricArtinSchreierMap k₀
 
 -- Instance search for the (co)kernels in the category of sheaves of modules is slow.
 /-- After pullback along the Artin–Schreier cover `ĀS`, the `ψ`-isotypic component `ℒ_ψ` of
-`AS_* ℚ̄_ℓ` becomes the constant sheaf `ℚ̄_ℓ`: the projector `e_ψ` factors there as averaging
-followed by splitting (see `AlgebraicGeometry.WeilSheaf.isLisse_image_artinSchreierIdempotent`).
--/
+`AS_* ℚ̄_ℓ` becomes the constant sheaf `ℚ̄_ℓ`. -/
 lemma affineLine.nonempty_adicUpperStar_image_artinSchreierIdempotent_iso
     (ψ : AddChar k₀ (PadicAlgCl l)) :
     Nonempty ((ĀS)^*ᵃ[l].obj (image (WeilSheaf.artinSchreierIdempotent ψ)).obj.carrier ≅
@@ -126,8 +123,7 @@ lemma affineLine.nonempty_adicUpperStar_image_artinSchreierIdempotent_iso
 namespace WeilSheaf
 
 /-- The stalks of the `ψ`-isotypic component `ℒ_ψ` of `AS_* ℚ̄_ℓ` at all geometric points are
-lines: the geometric point lifts through the étale surjection `ĀS`, after pullback along which
-`ℒ_ψ` becomes `ℚ̄_ℓ`. -/
+lines. -/
 lemma finrank_stalkObj_image_artinSchreierIdempotent (ψ : AddChar k₀ (PadicAlgCl l))
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶
       (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
@@ -166,9 +162,7 @@ theorem finrank_stalk_artinSchreier (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀
 
 /-- **The local Frobenius of an Artin–Schreier sheaf.** At a closed point `x` of the line, the
 local Frobenius of `ℒ_{ψ(a x)}` is multiplication by `ψ(c)`, for some `c ∈ k₀` which does not
-depend on `ψ`: the stalk is a line, so the Frobenius is multiplication by its trace, the value
-`ψ(Tr(a x))` of the trace function at an `𝔽_{q^d}`-point over `x`, `d = [κ(x) : k₀]`
-(`AlgebraicGeometry.WeilSheaf.traceFunction_artinSchreier`). -/
+depend on `ψ`. -/
 theorem exists_frobeniusEnd_stalk_artinSchreier (a : k₀) (x : (affineLine k₀).finitePoints) :
     ∃ c : k₀, ∀ ψ : AddChar k₀ (PadicAlgCl l),
       ((artinSchreier ψ a).stalk x).frobeniusEnd = ψ c • LinearMap.id := by
@@ -207,10 +201,7 @@ lemma AddChar.norm_map_apply_eq_one {K : Type*} [Field K] [Finite K] {R : Type*}
     AddChar.map_zero_eq_one, map_one]
 
 /-- **Purity of the Artin–Schreier sheaf.** The Artin–Schreier sheaf `ℒ_{ψ(a x)}` on the affine
-line is punctually `ι`-pure of weight zero: at every closed point its local Frobenius is
-multiplication by a value of `ψ`, a root of unity
-(`AlgebraicGeometry.WeilSheaf.exists_frobeniusEnd_stalk_artinSchreier`).
-(blueprint: `lemma-artin-schreier-character-sheaf--7`) -/
+line is punctually `ι`-pure of weight zero. -/
 theorem isPunctuallyPureOfWeight_artinSchreier (ι : PadicAlgCl l →+* ℂ)
     (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :
     (artinSchreier ψ a).IsPunctuallyPureOfWeight ι 0 := by

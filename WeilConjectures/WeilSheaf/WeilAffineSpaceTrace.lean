@@ -18,8 +18,19 @@ import WeilConjectures.WeilSheaf.OpenClosedTriangle
 /-!
 # Integration over standard affine space on constructible Weil complexes
 
-Source: vector-bundle Thom theorem, specialized to the standard trivial bundle.
-(blueprint: lem-fd-weil-standard-affine-trace)
+This file computes the integral `Rπ₀! π^*` along the projection `π : 𝔸ⁿ_X ⟶ X` of standard
+affine space: it is the Tate twist by `-n` followed by the shift by `-2n`. This is the
+vector-bundle Thom theorem, specialized to the standard trivial bundle.
+
+## Implementation details
+
+The proof inducts on the finite coordinate type. For the empty type the structure map is an
+isomorphism, so its integral is the identity. In the inductive step, splitting off one
+coordinate presents the affine space as a trivial line bundle over the remaining one; the
+relative affine-line trace computes its integral as `(-1)[-2]`, and pullback, compact-support
+composition, commutation of Tate twists with pullback and shifts, and addition of twists and
+shifts combine this with the induction hypothesis. Reindexing the coordinate type is an
+isomorphism over the base, and compact-support base change transports the result through it.
 -/
 
 @[expose] public section
@@ -394,23 +405,8 @@ private theorem trace_all
 
 
 
-/-- The trace of the standard affine-space projection on arbitrary Weil complexes.
-Source: `lemma-integral-linear-character--1`, convolution-kernel proof Step 4.
-
-Proof: induct on the finite coordinate type. For the empty type the structure
-map is an isomorphism, so its integral is the identity and the zero twist and
-zero shift are identities. In the inductive step split off one coordinate.
-The resulting map to the remaining affine space is a trivial line bundle.
-The relative affine-line trace computes its integral as `(-1)[-2]`. Compose
-with the induction hypothesis for the remaining coordinates. Pullback and
-compact-support composition factor the full integral. Pullback commutes with
-Tate lines, so bring the line twist to the original base; compact-support
-images commute with shifts. Tensor multiplication of Tate lines adds the
-twists, and shift composition adds degrees. Reindexing the coordinate type is
-an isomorphism over the base and compact-support base change transports the
-result through it. All the comparisons are natural in the input Weil complex.
-No character or support statement is involved.
-(blueprint: lem-fd-weil-standard-affine-trace) -/
+/-- The trace of the standard affine-space projection `π : 𝔸ⁿ_X ⟶ X` on arbitrary Weil
+complexes: `Rπ₀! π^* K ≅ K(-n)[-2n]`, naturally in `K`. -/
 theorem nonempty_iso_affineSpace_integral
     {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (n : Type u) [Fintype n] (X : Scheme.{u})

@@ -12,17 +12,23 @@ public import WeilConjectures.RingTheory.CohenRing
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 
-/-! Regularity after purely inseparable base change for generic formal fibres.
-(blueprint: new-lem-weil-pbc-generic-formal-fibre-purely-inseparable-regular) -/
+/-!
+# Generic formal fibres after purely inseparable base change
+
+Every finite purely inseparable base change of the generic formal fibre of a regular
+power-series model is regular.
+
+## References
+
+* [Stacks, Tag 07PS]
+-/
 
 @[expose] public section
 
 universe u
 
 set_option linter.style.haveILetI false in
-/-- Every finite purely inseparable base change of the generic formal fibre is regular.
-Source: Stacks Project, More on Algebra, Proposition 07PS, last two paragraphs.
-(blueprint: new-lem-weil-pbc-generic-formal-fibre-purely-inseparable-regular) -/
+/-- Every finite purely inseparable base change of the generic formal fibre is regular. -/
 theorem isRegular_genericFormalFiber_after_finite_purelyInseparable
     (A : Type u) [CommRing A] [IsDomain A] [IsRegularLocalRing A]
     (hmodel :

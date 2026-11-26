@@ -29,8 +29,10 @@ set_option linter.privateModule false
 /-!
 # Normalization tensor decomposition for a local weakly etale map
 
-Source: Silvio Greco, *Two theorems on excellent rings*, Nagoya Math. J. 60 (1976),
-Lemma 5.5 proof, first two sentences (blueprint: lem-exc-weakly-etale-normalization-tensor).
+## References
+
+* Silvio Greco, *Two theorems on excellent rings*, Nagoya Math. J. 60 (1976), proof of
+  Lemma 5.5.
 -/
 
 @[expose] public section

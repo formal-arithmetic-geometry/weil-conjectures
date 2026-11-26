@@ -44,10 +44,6 @@ public import WeilConjectures.AlgebraicGeometry.IntegralReductionTowerWellDefine
 
 /-! # Canonical resolution comparisons without an auxiliary finite-field datum
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YS/06YT/06YY; derived.tex,
-Tags 05RT/06XN; Bhatt--Scholze, p. 24, Definition 3.5.2
-(blueprint: lem-weil-integral-reduction-tower-well-defined).
-
 This is the unrestricted interface to the same augmented reduction tower.
 It uses the published completed sheaf and scalarReductionExtension, its universal
 derived counit, and the canonical localization factorization. Index n means
@@ -60,6 +56,27 @@ exponent n+1. The site and coefficient universes remain independent.
 - `unrestrictedTowerUnit`: the uniquely normalized unit chain map.
 - `unrestrictedTowerTransition`: the published canonical transition at P.
 - `unrestrictedReductionTowerWellDefined`: invariance of the augmented derived tower.
+
+## Implementation details
+
+The derived-counit computation on K-flat complexes is the K-flat computation conjunct of
+the universal change-of-rings witness defining `scalarReductionDerivedExistence`.
+For the invariance of the tower, two resolutions q, q' are dominated by a common K-flat
+resolution T with quasi-isomorphisms a : T → P, b : T → P' (no direct chain map P → P'
+is assumed). The canonical comparison is then [a_n]⁻¹ ≫ [b_n], and the compatibility with
+units and transitions follows from the sectionwise identities a_n γ_T = γ_P a and
+a_n τ_T = τ_P a_(n+1) (and likewise for b) after sheafification and localization.
+
+## References
+
+* [Stacks, Tag 03DA]
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 06YS]
+* [Stacks, Tag 06YT]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 05RT]
+* [Stacks, Tag 06XN]
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 3.5.2]
 -/
 
 @[expose] public section
@@ -88,8 +105,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 
 /-- A pure tensor, followed by sheafification, in the recorded finite reduction.
-Transport uses the object equality in the defining change-of-rings witness.
-Source: Stacks Tag 03EK (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
+Transport uses the object equality in the defining change-of-rings witness. -/
 noncomputable def unrestrictedTowerTensorSection (n : ℕ)
     (M : scalarReductionSource l E Y)
     (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
@@ -97,11 +113,7 @@ noncomputable def unrestrictedTowerTensorSection (n : ℕ)
     ((scalarReductionExtension l E Y n).obj M).val.obj U :=
   unrestrictedIntegralTensorSection l E Y n M U s x
 
-/-- The universal derived counit computes scalar reduction on K-flat complexes.
-Source: Stacks Tag 06YY (blueprint: lem-weil-integral-reduction-tower-well-defined).
-Proof: specialize the K-flat computation conjunct of the universal
-change-of-rings witness defining scalarReductionDerivedExistence to P and hP.
-The selected functor and counit are precisely its projections. -/
+/-- The universal derived counit computes scalar reduction on K-flat complexes. -/
 theorem unrestrictedTowerCounit_isIso (n : ℕ)
     (P : CochainComplex (scalarReductionSource l E Y) ℤ)
     (hP : CochainComplex.IsKFlatIndependentCoefficients
@@ -113,8 +125,7 @@ theorem unrestrictedTowerCounit_isIso (n : ℕ)
     ((scalarReductionDerivedExistence l E Y n).choose_spec.choose_spec.2.2 P hP)
 
 /-- The canonical computation by a resolution, expressed using complexes rather than
-homotopy representatives. Both transports are the standard quotient comparison.
-Source: Stacks Tag 06YY (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
+homotopy representatives. Both transports are the standard quotient comparison. -/
 noncomputable def unrestrictedTowerResolutionIso (n : ℕ)
     {P K : CochainComplex (scalarReductionSource l E Y) ℤ}
     (q : P ⟶ K)
@@ -135,8 +146,7 @@ noncomputable def unrestrictedTowerResolutionIso (n : ℕ)
     (DerivedCategory.quotientCompQhIso (scalarReductionTarget l E Y n)).app
       (unrestrictedTowerFiniteComplex l E Y n P)
 
-/-- The finite comparison is defined through the common derived reduction of K.
-Source: Stacks Tag 06YY (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
+/-- The finite comparison is defined through the common derived reduction of K. -/
 noncomputable def unrestrictedTowerFiniteComparison (n : ℕ)
     {P P' K : CochainComplex (scalarReductionSource l E Y) ℤ}
     (q : P ⟶ K) (q' : P' ⟶ K)
@@ -152,9 +162,7 @@ noncomputable def unrestrictedTowerFiniteComparison (n : ℕ)
     unrestrictedTowerResolutionIso l E Y n q' hq'
 
 /-- Restrict the canonical finite comparison, using the canonical localization
-factorization to express its endpoints by the restricted complexes.
-Source: Stacks Tags 03DA/06YY
-(blueprint: lem-weil-integral-reduction-tower-well-defined). -/
+factorization to express its endpoints by the restricted complexes. -/
 noncomputable def unrestrictedTowerComparison (n : ℕ)
     {P P' K : CochainComplex (scalarReductionSource l E Y) ℤ}
     (q : P ⟶ K) (q' : P' ⟶ K)
@@ -171,8 +179,7 @@ noncomputable def unrestrictedTowerComparison (n : ℕ)
       (unrestrictedTowerFiniteComparison l E Y n q q' hq hq') ≪≫
     (scalarReductionRestriction l E Y n).mapDerivedCategoryFactors.app _
 
-/-- The unit maps are specified on local sections by x ↦ 1 ⊗ x and sheafification.
-Source: Stacks Tag 03EK (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
+/-- The unit maps are specified on local sections by x ↦ 1 ⊗ x and sheafification. -/
 def unrestrictedTowerUnitCondition
     (P : CochainComplex (scalarReductionSource l E Y) ℤ)
     (γ : ∀ n : ℕ, P ⟶ unrestrictedTowerComplex l E Y n P) : Prop :=
@@ -180,10 +187,7 @@ def unrestrictedTowerUnitCondition
     ((γ n).f i).val.app U x = unrestrictedTowerTensorSection l E Y n (P.X i) U 1 x
 
 
-/-- The constructed unit has the prescribed sectionwise pure-tensor formula.
-Source: Stacks Tag 03EK (blueprint: lem-weil-integral-reduction-tower-well-defined).
-Proof: the unit of the scalar-extension adjunction sends x to 1 tensor x;
-the chain map is defined degreewise by exactly that unit. -/
+/-- The constructed unit has the prescribed sectionwise pure-tensor formula. -/
 theorem unrestrictedTowerUnit_condition
     (P : CochainComplex (scalarReductionSource l E Y) ℤ) :
     unrestrictedTowerUnitCondition l E Y P (unrestrictedTowerUnit l E Y P) := by
@@ -193,17 +197,15 @@ theorem unrestrictedTowerUnit_condition
   rw [(scalarReductionExtension_adjunction l E Y n).choose_spec]
   rfl
 
-/-- The chain-level reduction id⊗ρ: the published canonical transition of
-def-weil-integral-reduction-tower, uniquely determined on sheafified pure tensors
-(`unrestrictedIntegralTransition_existsUnique`), evaluated at P.
-Source: Stacks Tag 03EK (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
+/-- The chain-level reduction id⊗ρ: the published canonical transition of the integral
+reduction tower, uniquely determined on sheafified pure tensors
+(`unrestrictedIntegralTransition_existsUnique`), evaluated at P. -/
 noncomputable def unrestrictedTowerTransition
     (P : CochainComplex (scalarReductionSource l E Y) ℤ) (n : ℕ) :
     unrestrictedTowerComplex l E Y (n + 1) P ⟶ unrestrictedTowerComplex l E Y n P :=
   (unrestrictedIntegralTransition l E Y n).app P
 
-/-- The image of the resolution augmentation is invertible in the derived category.
-Source: Stacks Tag 06YS (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
+/-- The image of the resolution augmentation is invertible in the derived category. -/
 noncomputable def unrestrictedTowerAugmentationIso
     {P K : CochainComplex (scalarReductionSource l E Y) ℤ}
     (q : P ⟶ K)
@@ -415,30 +417,7 @@ attribute [local irreducible] unrestrictedTowerComparison
 
 /-- The finite canonical comparisons give an isomorphism of the two augmented towers.
 The unit and transition maps are the unique maps with the specified pure-tensor formulas.
-The comparison is the recorded derived counit comparison.
-Source: Stacks Tags 06YS/06YT/06YY and derived.tex Tags 05RT/06XN;
-Bhatt--Scholze, p. 24, Definition 3.5.2
-(blueprint: lem-weil-integral-reduction-tower-well-defined).
-
-Proof:
-1. Apply the common-roof property for quasi-isomorphisms in the homotopy category
-(lem-pur-quasi-isos-saturated-triangulated) to q and q'. Resolve its source V by
-lem-pc-kflat-resolution, obtaining K-flat T and quasi-isomorphisms a:T→P, b:T→P'
-with qa=q'b in the homotopy category. No direct chain map P→P' is assumed.
-2. Termwise tensoring preserves these quasi-isomorphisms by clause (1) of
-lem-pur-derived-change-of-rings. Naturality of its universal counit, invertible on
-T,P,P', identifies the canonical comparison with [a_n]⁻¹ ≫ [b_n]. This is also the
-comparison defined through integralDerivedReductionResolutionIso; the quotient and
-restriction factorization isomorphisms merely express the same objects by complexes.
-3. On local sections, a_n γ_T = γ_P a and b_n γ_T = γ_P' b, since both sides
-send x to 1⊗a(x), respectively 1⊗b(x). Sheafification and localization preserve
-these identities. Cancel [a_n], [b_n] and use qa=q'b to obtain clause (1).
-4. Similarly a_n τ_T = τ_P a_(n+1) and b_n τ_T = τ_P' b_(n+1), since both
-sides send s⊗x to ρ_n(s)⊗a(x), respectively ρ_n(s)⊗b(x). The projection
-identity makes these maps linear over the completed sheaf. Sheafify, localize and
-cancel to obtain clause (2). The components are isomorphisms by construction;
-rearranging clause (2) gives compatibility of their inverses, hence the asserted
-isomorphism of inverse systems, and clause (1) respects the augmentations. -/
+The comparison is the recorded derived counit comparison. -/
 theorem unrestrictedReductionTowerWellDefined
     {P P' K : CochainComplex (scalarReductionSource l E Y) ℤ}
     (q : P ⟶ K) (q' : P' ⟶ K)

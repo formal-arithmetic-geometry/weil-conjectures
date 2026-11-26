@@ -27,6 +27,12 @@ every Amitsur `2`-cocycle in `(L ⊗_K L ⊗_K L)ˣ`.
   jointly give an isomorphism `A ≅ L^n`.
 - `Algebra.TensorProduct.exists_eq_of_cocycle₂`: an Amitsur `2`-cocycle of a finite Galois
   extension is a coboundary, provided every Galois `2`-cocycle is a coboundary.
+
+## Implementation details
+
+For `exists_eq_of_cocycle₂`, the identifications `L ⊗_K L ≅ ∏_{σ ∈ G} L` and
+`L ⊗_K L ⊗_K L ≅ ∏_{(σ, τ) ∈ G × G} L` turn `u` into the Galois `2`-cocycle
+`(σ, τ) ↦ (1 ⊗ σ ⊗ στ)(u)`.
 -/
 
 @[expose] public section
@@ -177,12 +183,7 @@ private lemma bijective_χ₃ :
 Galois extension with group `G` such that every Galois `2`-cocycle `G × G → Lˣ` is a
 coboundary. Let `u` be a unit of `L ⊗_K L ⊗_K L` satisfying the Amitsur cocycle identity
 `u₁₂₃ u₀₁₃ = u₀₂₃ u₀₁₂` in `L^{⊗ 4}` (slots numbered `0, …, 3`). Then
-`u = v₁₂ (v₀₂)⁻¹ v₀₁` for a unit `v` of `L ⊗_K L`.
-
-The proof identifies `L ⊗_K L` with `∏_{σ ∈ G} L` and `L ⊗_K L ⊗_K L` with
-`∏_{(σ, τ) ∈ G × G} L`, turning `u` into the Galois `2`-cocycle
-`(σ, τ) ↦ (1 ⊗ σ ⊗ στ)(u)`.
-(blueprint: `lemma-cohomology-multiplicative-group--7`, Amitsur-to-Galois step) -/
+`u = v₁₂ (v₀₂)⁻¹ v₀₁` for a unit `v` of `L ⊗_K L`. -/
 theorem exists_eq_of_cocycle₂
     (hgal : ∀ f : (L ≃ₐ[K] L) → (L ≃ₐ[K] L) → Lˣ,
       (∀ σ τ ρ, (f σ τ : L) * f (σ * τ) ρ = σ (f τ ρ : L) * f σ (τ * ρ)) →

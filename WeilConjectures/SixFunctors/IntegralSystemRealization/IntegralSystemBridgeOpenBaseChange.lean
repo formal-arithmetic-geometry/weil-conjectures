@@ -8,7 +8,12 @@ module
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralCompactificationRealizationData
 import all WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSystemBridgeExchange
 
-/-! # Canonical bridge comparison for a single open base-change map -/
+/-! # Canonical bridge comparison for a single open base-change map
+
+## References
+
+* [Stacks, Tag 03DI], [Stacks, Tag 07A7]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -168,15 +173,7 @@ private theorem canonicalInverseSquare (o : Operations l E) (c : Compositors l E
     Functor.isoWhiskerLeft_hom, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Category.assoc] using (congr_app hh L).symm
 
-/-- The canonical bridge intertwines open base change for one cartesian square.
-Source: Stacks 03DI and 07A7; blueprint fix-prop-coherence
-(blueprint: lem-sf-integral-system-bridge-open-basechange).
-Proof: apply injectivity of the open-adjunction hom equivalence to the desired
-forward equation, substitute the specified inverse-beta transpose equation and
-both bridge unit equations, use the bridge pull-square comparison, and cancel the
-beta isomorphisms. This is a whole-system argument and needs no finite evaluation.
-(blueprint: lem-sf-integral-system-bridge-open-basechange).
--/
+/-- The canonical bridge intertwines open base change for one cartesian square. -/
 theorem integralSystemBridgeOpenBaseChange (o : Operations l E)
     (c : Compositors l E o) (a : OpenComparisons l E o c) (b : CanonicalBridge l E o)
     {U' U X' X : Scheme.{u}} (d : U' ⟶ U) (j' : U' ⟶ X')

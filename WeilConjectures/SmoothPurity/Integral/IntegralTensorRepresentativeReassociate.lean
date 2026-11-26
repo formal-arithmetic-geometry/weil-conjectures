@@ -11,8 +11,9 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 
 /-! # Reassociation of the tensor representative comparison
 
-Source: Stacks 07A4 and 0941; categories.tex, Tag 04VK.
-(blueprint: def-pur-integral-tensor-representative-reassociate).
+## References
+
+* Stacks Project, Tags 04VK, 06YT, 07A4, 08TC and 0941
 -/
 
 @[expose] public noncomputable section
@@ -68,18 +69,13 @@ local notation "q" => integralOperationsGoodLocalization l E W
 local notation "t" => Functor.prod I I ⋙ integralOperationsTensorComplexFunctor l E W
 
 /-- Reassociate the recorded tensor representative comparison without changing its map.
-Source: Stacks 06YT and 08TC
-(blueprint: def-pur-integral-tensor-representative-reassociate).
 The construction is exactly integralCompletedTensorComparison; only its target
 functor is written as the tensor complex functor followed by Q. -/
 def integralTensorRepresentativeReassociate :
     (Functor.prod q q) ⋙ integralCompletedTensor l E W ≅ t ⋙ DerivedCategory.Q :=
   integralCompletedTensorComparison l E W
 
-/-- The reassociation preserves every component of the recorded comparison.
-Source: Stacks 06YT and 08TC
-(blueprint: def-pur-integral-tensor-representative-reassociate).
-Proof: the reassociation was defined to be this same comparison. -/
+/-- The reassociation preserves every component of the recorded comparison. -/
 theorem integralTensorRepresentativeReassociate_app (P) :
     (integralTensorRepresentativeReassociate l E W).hom.app P =
       (integralCompletedTensorComparison l E W).hom.app P := rfl

@@ -12,8 +12,12 @@ import all WeilConjectures.SmoothPurity.Compact.CompactSupportCoefficientTransit
 
 /-! # Sections of the left ordinary direct-evaluation composite
 
-Source: Stacks 03DI and 0D6E
-(blueprint: lem-weil-compact-support-ordinary-direct-left-sections).
+On sections, the left ordinary coefficient-transition composite for the compact-support
+direct image is horizontal restriction.
+
+## References
+
+* [Stacks Project, Tags 03DI and 0D6E](https://stacks.math.columbia.edu/tag/03DI)
 -/
 
 @[expose] public noncomputable section
@@ -75,13 +79,8 @@ attribute [local irreducible] compactSupportOrdinaryDirectEvaluation
   compactSupportOrdinaryCoefficientTransition proEtaleCoefficientDirectImageComparison
 
 -- The formula compares scalar actions on the same underlying section carriers.
-/-- The left ordinary coefficient-transition composite is horizontal restriction.
-Source: Stacks 03DI and 0D6E.
-(blueprint: lem-weil-compact-support-ordinary-direct-left-sections).
-Proof: The scalar direct-image comparison and restricted evaluation are identity on sections.
-The horizontal coefficient map is restriction along the horizontal product arrow.
-Native direct image applies the base-change functor to that arrow, which preserves
-its index and identity components. Thus the composite is horizontal restriction of M. -/
+/-- On sections, the left ordinary coefficient-transition composite of `M` (levels `m ≥ n`) is
+restriction of `M` along the horizontal arrow `n ⟶ m`. -/
 theorem compactSupportOrdinaryDirectLeftSections
     {Z Y : Scheme.{u}} (g : Z ⟶ Y) {m n : ℕ} (h : n ≤ m)
     (M : coefficientSequenceModules.{u, u} l E Z) (V : Y.ProEtᵒᵖ)

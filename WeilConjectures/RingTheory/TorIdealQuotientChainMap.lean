@@ -13,7 +13,20 @@ public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.RingTheory.Ideal.Maps
 
 /-! # Quotient tensor complexes under a semilinear comparison
-Source: Stacks Project, Algebra, Section 00LY and Tag 00M6.
+For a ring map `f : R → A` with `J = f(I) A`, an `f`-semilinear chain map `φ` between
+projective resolutions induces a chain map `P ⊗ R/I → G ⊗ A/J` of underlying additive complexes,
+`p ⊗ r ↦ φ p ⊗ f r`, which sends cycles to cycles.
+
+## Implementation details
+
+The composite `R → A → A/J` kills `I` and so descends to a semilinear map `R/I → A/J`; tensoring
+it with `φ` in each degree gives the chain map. No freeness, augmentation or homology comparison
+is used.
+
+## References
+
+* [Stacks, Section 00LY]
+* [Stacks, Tag 00M6]
 -/
 
 @[expose] public section
@@ -23,23 +36,9 @@ open CategoryTheory CategoryTheory.MonoidalCategory
 open scoped TensorProduct BigOperators
 namespace ModuleCat
 
-/-- Source: Stacks Project, Algebra, functoriality in Section 00LY and Tag 00M6;
-Step 1 of the ideal comparison compatibility argument.
-(blueprint: lem-weil-pbc-quotient-tensor-comparison).
-
-Proof in words: the composite of f with A → A/J kills I because J = map f I,
-so it descends to an additive semilinear map R/I → A/J. Tensor it with φ in
-each degree, using semilinearity in both arguments to verify balancing.
-The tensor map sends p ⊗ mk(r) to φ(p) ⊗ mk(f(r)). The chain identity on
-consecutive differentials follows from hdφ on pure tensors; for all other
-pairs both differentials are zero by the complex shape. Thus these maps form
-a morphism of the underlying additive complexes. A chain map sends a cycle
-to a cycle: the target differential kills its image by the chain identity.
-The kernel universal property of iCycles supplies w and the displayed equality.
-The pure tensor formula determines every component, hence ψ uniquely; this
-construction chooses no arbitrary mathematical data. No freeness,
-augmentation, connecting maps, or homology comparison is used.
--/
+/-- An `f`-semilinear chain map `φ : P → G` induces a chain map `ψ` from `P ⊗ R/I` to `G ⊗ A/J`
+of underlying additive complexes with `ψ (p ⊗ r) = φ p ⊗ f r`, and `ψ` sends every degree-one
+cycle to a cycle. -/
 theorem exists_quotient_tensor_comparison
     {R A : Type u} [CommRing R] [CommRing A]
     (f : R →+* A) (I : Ideal R) (J : Ideal A) (hJ : J = Ideal.map f I)

@@ -12,10 +12,11 @@ public import WeilConjectures.Topology.AbelianOpenExtensionByZero
 import Mathlib.Algebra.Category.Grp.Zero
 import all WeilConjectures.Topology.AbelianSheafLocalIntegerGenerator
 
-/-! # ConstantSubsheafQuotientGluing
+/-! # Gluing the top-layer quotient section
 
-Source: Stacks Project, Cohomology, Lemma 0A38
-(blueprint: lem-sc-constant-subsheaf-quotient-gluing).
+## References
+
+* Stacks Project, Tag 0A38.
 -/
 
 @[expose] public section
@@ -98,19 +99,9 @@ private theorem integerExtension_of_section
   change (F.obj.map (homOfLE (image_le V')).op ≫ _) s = _
   exact congrArg (fun g ↦ g s) hs
 
-/-- Source: Stacks Project, Cohomology, Lemma 0A38, final paragraph.
-Proof: The opens with label b+1 together with the lower-label union cover iSup A,
-since every positive label is at most b+1. On the top opens the sections s i agree
-on intersections: apply the monomorphism into the constant integer sheaf and use
-naturality of the constant section. Their images under π therefore glue on the top
-union. The sheaf Q restricted to the lower union is zero, because all its stalks
-there vanish. Consequently those images agree with zero on overlaps with the lower
-union. Glue with zero to obtain a section on iSup A. Use the constant-sheaf
-adjunction to define a morphism on the restriction, then send each open-slice
-summand of the extension presheaf by restriction of that morphism and apply
-sheafifyLift. On each A i with top label its unit section has the stated image.
-Empty unions and an absent top layer give the zero morphism and vacuous equations.
-(blueprint: lem-sc-constant-subsheaf-quotient-gluing). -/
+/-- The images in the quotient `Q` of the sections with top label `b + 1` glue, together with
+zero on the lower-label union, to a morphism from the extension by zero of the constant integer
+sheaf on `iSup A` to `Q` sending each top-label unit section to the image of `s i`. -/
 theorem constantSubsheaf_quotient_gluing
     (X : TopCat.{u}) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C) [Mono ι]
     (isoC : C ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj

@@ -102,8 +102,7 @@ It is the conjugate of the base change map
 `j_! ⋙ g''^* ⊣ g''_* ⋙ j^*` and `g'^* ⋙ j'_! ⊣ j'^* ⋙ g'_*`.
 
 This map exists for every commutative square, and it runs *against* the direction of the
-exchange map `Ex_!` of the blueprint (`sk-def-sf-exchanges`), which is its inverse for a
-cartesian square (`AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekBaseChangeMap`). -/
+exchange map `Ex_!`, which is its inverse for a cartesian square. -/
 noncomputable def Etale.openImmersionLowerShriekBaseChangeMap (sq : CommSq g' j' j g'') :
     (g')^*[A] ⋙ (j')_!open[A] ⟶ (j)_!open[A] ⋙ (g'')^*[A] :=
   (conjugateEquiv ((Etale.openImmersionLowerShriekUpperStarAdjunction A j).comp

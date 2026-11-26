@@ -16,7 +16,22 @@ import WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSupportCoeff
 
 This statement concerns scalar restriction and its counit mates. The operations,
 ambient left realizations, and their shift compatibility are supplied as inputs.
-Source: Zheng, Lemma 5.22 and Propositions 5.24 and 5.26.
+
+## Implementation details
+
+The endpoint scalar restrictions are chosen once, independently of the compactification: the
+literal lift of finite-target derived extension, and the published strict-tower scalar functor
+for completed extension. At each compactification the normalized system adjunction is
+reconstructed integrally and compared with the supplied operations by right-adjoint uniqueness.
+The comparison `q` is built intrinsically from system proper scalar projection and open tensor
+maps, and `b` is its system counit transpose; both are identities of system maps before taking
+the limit, without assuming that evaluations are faithful on morphisms. The identity and
+composition laws follow by induction on `Allowed` witnesses, using multiplication tensor
+unitors and balanced tensor associators.
+
+## References
+
+* [Zheng, Lemma 5.22, Construction 5.25 and Propositions 5.24 and 5.26]
 -/
 
 @[expose] public noncomputable section
@@ -220,53 +235,8 @@ private theorem endpointRestrictions
   · dsimp only [endpoint]
     exact exists_ring_endpoint_scalar_restrictions.{u, v} l Ω D hl X
 
-/-- Scalar mates for supplied, ambient-realized adjunctions.
-Source: Zheng, Lemma 5.22, Construction 5.25, Propositions 5.24 and 5.26;
-coefficient construction steps 2 and 4
-(blueprint: lem-sf-ring-scalar-mates-for-realized-operations).
-
-Proof:
-1. At each endpoint restrict ambient finite-target derived extension to the full
-finite-Tor subcategory. Flat representatives show preservation of its Tor interval;
-finite scalar constructibility gives constructible cohomology. Use the literal lift
-and equality realization. For completed extension use the published strict-tower
-scalar functor, realized by the inverse finite-free completed scalar comparison.
-Its reductions preserve the common bounds. Make these choices at the endpoints,
-independently of compactification.
-2. At each compactification take the finite transported adjunctions and reconstruct
-the normalized system adjunction integrally using the reduction/total-limit
-equivalence and the proper/open system realization. Compare their left functors with the
-supplied operations by lifting the composite of their ambient realizations through
-the full inclusion. Right-adjoint uniqueness gives the corresponding right isomorphism
-preserving units and counits. Adjoint shift uniqueness and the left realization shift
-show that these changes of presentation preserve shifts.
-3. Apply finite scalar mates to finite generators. For integral reduction use the
-system evaluation isomorphisms with their units and counits. For completed extension
-use the finite-free system comparison and cofinal recovery of the ramified subsequence,
-then take total limit. Construct q intrinsically from system proper scalar
-projection and open tensor maps, and define b as its system counit transpose.
-The actual system unit/counit comparison identifies their evaluations with the
-finite mates. Their cones therefore have zero evaluations, so both are invertible.
-Reconstruction transports their counit equation by its transpose formula. The
-simultaneous proper/open realization identifies q with the canonical ambient
-coefficient mate. These are identities of system maps before limit, without
-assuming that evaluations are faithful on morphisms.
-4. Conjugate q and b by the isomorphisms of step 2 and the unique endpoint scalar
-realization isomorphisms. Naturality and the adjunction equations preserve the counit
-transpose equation. Whiskering, inversion and composition preserve shifts. The ambient
-proper/open mate gives exactly CounitQNormalized for the supplied left realizations.
-5. Lift the ambient multiplication tensor unitor, preceded by the given equality of
-coefficient maps, through the fully faithful endpoint inclusion. Its map/preimage
-equation proves the displayed ScalarIdentity normalization for every actual identity
-coefficient map, including composite Allowed witnesses.
-6. Induct on Allowed witnesses. Identities use multiplication tensor unitors; composites
-use balanced tensor associators. Proper/open mate pasting identifies the resulting q
-with the canonical map for the actual composite coefficient map. Transposition gives
-its counit equation. Compositions of the generator isomorphisms remain invertible.
-Full inclusion retains the same endpoint scalar restrictions for all compactifications.
-Empty schemes use zero objects; positive levels include the residue level, and nonflat
-quotients use derived extension. No operation, adjunction or scalar associator is
-constructed here. -/
+/-- Scalar mates for supplied, ambient-realized adjunctions. No operation, adjunction or scalar
+associator is constructed here. -/
 theorem exists_ring_scalar_mates (D : FiniteFieldDatum.{max u v}) (_hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} (f : X ⟶ Y)
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]

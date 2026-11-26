@@ -21,7 +21,20 @@ import Mathlib.RingTheory.TensorProduct.Pi
 /-!
 # The idempotent selecting a pair henselization fibre component
 
-Source: Stacks Project, More on Algebra, Tags 0AH1 and 0AH3.
+For a prime `q` of a Noetherian pair henselization with contraction `p`, the canonical map of
+fibres over `C` is the projection onto a factor selected by an idempotent.
+
+## Implementation details
+
+The fibre over `p` is reduced and zero-dimensional, hence an Artinian product of the residue
+fields at the primes above `p`. Tensoring this decomposition with `C`, the element equal to one
+at `q` and zero elsewhere gives the idempotent. The argument also works when the `q` factor is
+the zero ring.
+
+## References
+
+* [Stacks, Tag 0AH1]
+* [Stacks, Tag 0AH3]
 -/
 
 @[expose] public section
@@ -162,29 +175,8 @@ private theorem fiber_projection_of_product_equiv
       simp [ε, hxj]
     · simp [ε, Pi.single_eq_of_ne h]
 
-/-- The canonical map of fibres is a surjective projection with idempotent kernel annihilator.
-
-Source: Stacks Project, More on Algebra, Tag 0AH1 and the product calculation in Tag 0AH3.
-(blueprint: lem-weil-pbc-pair-henselization-fiber-projection).
-
-Proof: Filteredness and essential smallness of the pair-etale category allow its
-colimit to be represented by a small filtered diagram of commutative A-algebras.
-The reduced, zero-dimensional fibre statement of Tag 0AH1, together with
-Noetherianity, makes the fibre Artinian. Its canonical Artinian product decomposition
-and the fibre residue-field identifications give the residue fields at primes above p.
-Each component sends x tensor b to rho(x) times
-the image of b. Thus this ring equivalence respects the c.pt.right-algebra structures
-(on the source through the second tensor factor), so it can be tensored over
-c.pt.right with C.
-Tensor cancellation and distribution over a finite product identify p.Fiber C with
-that product of fibres. On pure tensors its q projection is exactly phi by the
-specified compatibility, so equality on all tensors follows by additive generation.
-In that product select the element equal to one at q and zero elsewhere and pull it
-back to an element e of p.Fiber C. Componentwise multiplication proves idempotence
-and phi(e)=1. Extend any element in the q factor by zero to prove surjectivity.
-A kernel element has zero q coordinate, so multiplication by e kills it in every
-coordinate. The argument also works when the q factor is the zero ring. The given
-prime q supplies an index even if other fibres are empty. -/
+/-- The canonical map of fibres `φ : p.Fiber C → q.Fiber C` is a surjective projection: there is
+an idempotent `e` with `φ e = 1` that annihilates the kernel of `φ`. -/
 theorem pair_henselization_fiber_projection
     (A : Type u) [CommRing A] (I : Ideal A)
     (c : Cocone (ObjectProperty.ι

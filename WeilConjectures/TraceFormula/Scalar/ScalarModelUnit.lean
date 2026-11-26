@@ -40,9 +40,13 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 
 /-! # Scalar model normalization before inverting completion
 
-Source: Bhatt--Scholze, Definition 3.4.10 and Proposition 3.5.1;
-Stacks Project, Tags 06YY and 0941.
-(blueprint: lem-trf-scalar-model-unit)
+The normalized scalar identity model sends the ordinary multiplication unitor to the
+reduction-realization unit, before completion is inverted.
+
+## References
+
+* Bhatt--Scholze, Definition 3.4.10 and Proposition 3.5.1.
+* Stacks Project, Tags 06YY and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -247,27 +251,8 @@ private theorem scalarModelUnit_onGood
       exact hχ
     _ = _ := by rw [← hunit, Category.assoc]
 
-/-- The normalized scalar identity model sends the ordinary multiplication unitor
-to the actual reduction-realization unit, before completion is inverted.
-Source: Bhatt--Scholze, Definition 3.4.10 and Proposition 3.5.1;
-Stacks 06YY, 0941, the scalar calculation in step 11 of the parent.
-(blueprint: lem-trf-scalar-model-unit)
-
-Proof: on a flat-term K-flat representative P, use a simultaneous strict quotient
-presentation with whole-tower adjunction coherence. Normalize the scalar realization
-on this same presentation. Extend the system scalar-unit formula from K-flat
-complexes to arbitrary complexes by a K-flat resolution and naturality. Its inverse
-followed by the scalar counit is therefore the localization of inverse ordinary
-multiplication. The coherent presentation and the strict constant/limit adjunction
-identify the actual unit with a strict compatible family. The normalized Roos
-comparison takes its adjunct to the ordinary limit lift; tensor insertion and the
-normalization of the scalar-tower identification make its unshifted coordinate
-1 tensor x and its shifted coordinate zero. This is completedScalarIdentityUnit.
-Postcompose the desired equation with the invertible normalization factor. The
-finite-free identity formula and ordinary multiplication-unit normalization identify
-both sides. Cancel that factor and extend by essential surjectivity of the good
-localization and naturality to every K. No finite-projection faithfulness or inverse
-to a chain completion map is used. -/
+/-- The normalized scalar identity model sends the ordinary multiplication unitor to the actual
+reduction-realization unit, before completion is inverted. -/
 theorem scalarModelUnit
     (SE : CoefficientDerivedSystemCalculus l E X)
     (ρE : IntegralComparisonRoosModel l E X)

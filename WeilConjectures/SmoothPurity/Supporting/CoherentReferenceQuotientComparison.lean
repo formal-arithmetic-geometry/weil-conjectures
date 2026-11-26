@@ -15,8 +15,14 @@ import all WeilConjectures.TraceFormula.Coherent.CoherentQuotientOrdinaryLift
 
 /-! # Coherent presentations in the fixed ordinary quotient coordinates
 
-Source: Stacks 03D7, 06YY and 0941; step 2 of
-stage3-pur-scalar-tensor-model-normalization.
+## Implementation details
+
+`coherentReferenceQuotientComparison` is the fixed-coordinate version of
+`coherentQuotientModelComparison` and uses no finite derived evaluation faithfulness.
+
+## References
+
+* Stacks Project, Tags 03D7, 06YY and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -213,25 +219,7 @@ private theorem referenceDerivedModel (W : Scheme.{u}) :
   exact ((pullbackTensorReductionModel_existsUnique l E W).exists.choose_spec P).symm
 
 /-- Whole-system coherence identifies a presentation with the fixed ordinary quotient
-complex and the adjunction-normalized reference reduction model.
-Source: Stacks 03D7, 06YY and 0941; step 2 of
-stage3-pur-scalar-tensor-model-normalization.
-(blueprint: lem-pur-coherent-reference-quotient-comparison).
-
-Proof: reconstruct the ordinary quotient isomorphism by transposing the strict
-unit map in the coherence hypothesis through the ordinary tensor/limit adjunction.
-The finite extension/restriction Hom bijections identify each evaluated map with
-the inverse prescribed quotient identification followed by the reference evaluation.
-In particular each evaluation is invertible, so the map is a strict isomorphism.
-The normalized right-derived limit unit gives the derived transpose of this map.
-Both the reference reduction model and the given coherent presentation have this
-transpose: use the reference reduction model's defining unit equation, the
-constant-tower counit's K-injective normalization, and naturality along a
-K-injective replacement. The unique left-adjoint comparison preserves the unit.
-Injectivity of the two derived Hom bijections therefore gives the first equality
-in the entire system derived category. This is the fixed-coordinate version of
-coherentQuotientModelComparison and uses no finite derived evaluation faithfulness.
-The construction works for zero complexes, the first quotient and the empty scheme. -/
+complex and the adjunction-normalized reference reduction model. -/
 theorem coherentReferenceQuotientComparison (W : Scheme.{u})
     (S : CoefficientDerivedSystemCalculus.{u, u} l E W)
     (P : (integralOperationsGoodComplex.{u, u} l E W).FullSubcategory)

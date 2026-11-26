@@ -35,8 +35,22 @@ import WeilConjectures.Mathlib.RingTheory.DedekindDomain.IntegralClosure
 /-!
 # Tensor products of geometrically normal and normal algebras
 
-Source: Stacks Project, Algebra, Tag 06DF, lemma-geometrically-normal-tensor-normal
-(blueprint: lem-weil-pbc-geometrically-normal-tensor-normal).
+If `A` is geometrically normal over a field `k` and `B` is normal, then `A ⊗[k] B` is normal.
+
+## Implementation details
+
+At a prime of the tensor product, contract to primes of `A` and `B` and reduce to normal
+domains (`normal_domain_case`). There, every finite-type subalgebra of `B` lies in a finite-type
+normal subalgebra (Noether finiteness of integral closure), so filtered-colimit normality reduces
+to finite-type `B`. With `K = Frac(A)` and `L = Frac(B)`, both `K ⊗ B` (via separability of `K/k`
+and smooth base change) and `A ⊗ L` are normal. The ring `C = A ⊗ B` is reduced with finitely
+many minimal primes, both partial localizations embed in its total fraction ring, and their
+intersection is `C` (split `A → K` by a linear retraction). Hence `C` is integrally closed in its
+total fractions and normal. The algebras are lifted to a common universe and transported back.
+
+## References
+
+* [Stacks, Tag 06DF]
 -/
 
 @[expose] public section
@@ -685,26 +699,7 @@ private theorem normal_domain_case_common
   exact integrallyClosed_tensor_of_normal_localizations (K := K) (L := L) hKD hAL
 
 /-- The normal-domain case of tensor normality, allowing different universes for the
-base field and both algebras. The test extensions live in their common universe.
-
-Source: Stacks Project, Algebra, Tag 06DF, the normal-domain reduction.
-(blueprint: lem-weil-pbc-geometrically-normal-tensor-normal-domain-case)
-
-Lift the two algebras to the common universe and transport back at the end. Every finite-type
-subalgebra of `B` lies in a finite-type normal subalgebra: its integral closure in its fraction
-field is finite by Noether's finiteness theorem, and embeds in `B` by integral closedness.
-These normal subalgebras form a directed cover, so filtered-colimit normality reduces to
-finite-type `B`. Put `K = Frac(A)` and `L = Frac(B)`. Geometric normality makes `K/k`
-separable. Express `K` as a directed union of smooth finite-type subalgebras; smooth base
-change and filtered-colimit normality show `K ⊗ B` is normal. Also `A ⊗ L` is normal by
-hypothesis. The injection into the Noetherian ring `K ⊗ B` gives finitely many minimal
-primes for `C = A ⊗ B`; it also gives reducedness. Both partial localizations embed in the
-total fraction ring of `C`. An integral total fraction belongs to both by their normality.
-Their intersection is `C`: split the vector-space inclusion `A → K` by a linear retraction
-and tensor this retraction with the identity. The equality of the two images in `K ⊗ L`
-then yields the common preimage in `A ⊗ B`. Thus `C` is integrally closed in its total
-fractions, and the reduced finite-minimal-prime criterion proves its normality.
--/
+base field and both algebras. The test extensions live in their common universe. -/
 theorem normal_domain_case
     {k : Type u} {A : Type v} {B : Type w}
     [Field k] [CommRing A] [CommRing B]
@@ -733,16 +728,7 @@ theorem normal_domain_case
   · exact normal_equiv eB.symm.toRingEquiv hB
 
 /-- If `A` is geometrically normal over a field `k` and `B` is normal, then
-`A ⊗[k] B` is normal, with normality expressed at every prime localization.
-Source: Stacks Project, Algebra, Tag 06DF, lemma-geometrically-normal-tensor-normal
-(blueprint: lem-weil-pbc-geometrically-normal-tensor-normal).
-
-At a prime of the tensor product, contract to primes of `A` and `B`. Localizing each
-factor there gives normal domains. The first remains geometrically normal because
-localization commutes with scalar extension. Apply `normal_domain_case` to these domains,
-then descend normality through the two localizations to the original prime. The normality
-of `A` itself follows by testing geometric normality on a universe lift of `k`.
--/
+`A ⊗[k] B` is normal, with normality expressed at every prime localization. -/
 theorem isNormal_tensorProduct_of_geometricallyNormal
     (k : Type u) (A : Type v) (B : Type w)
     [Field k] [CommRing A] [CommRing B] [Algebra k A] [Algebra k B]

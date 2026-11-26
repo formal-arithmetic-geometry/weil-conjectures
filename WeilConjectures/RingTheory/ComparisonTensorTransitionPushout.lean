@@ -14,7 +14,23 @@ import Mathlib.RingTheory.IsTensorProduct
 
 
 /-! # A step of finite-stage tensor comparison
-Source: Stacks Project, Algebra, Tags 02JO (3) and 00DD.
+
+Given a directed system `F` of rings over `F.obj i₀`, a map `φ₀ : B₀ →ₐ C₀` and a natural
+transformation `α : D ⟶ E` identified with the canonical comparison
+`(F_j ⊗ B₀) ⊗_P Q ⟶ F_j ⊗ C₀`, every transition square of `α` is a pushout of commutative rings.
+
+## Implementation details
+
+For a transition `j ⟶ k`, cancellation of iterated tensor products makes the scalar-extension
+squares for `B₀` and `C₀` pushouts, and cancelling one against the other shows that
+`B_j, C_j, B_k, C_k` is a pushout (the private lemma `canonical_tensor_comparison_pushout`). A
+cocone is then descended through the algebra pushout universal property, and uniqueness follows
+by tensor induction. No invertibility of `α`, nontriviality or flatness is assumed.
+
+## References
+
+* [Stacks, Tag 02JO]
+* [Stacks, Tag 00DD]
 -/
 @[expose] public section
 open scoped TensorProduct
@@ -122,27 +138,9 @@ private theorem canonical_tensor_comparison_pushout
 
 
 
-/-- Pushout squares for any compatible canonical tensor comparison.
-Source: Stacks Project, Algebra, Tags 02JO (3) and 00DD.
-(blueprint: lem-weil-pbc-comparison-tensor-transition-pushout-j3)
-
-Proof: Fix a transition j→k. Cancellation of iterated tensor products makes
-the two scalar-extension squares for B₀ and C₀ pushouts. Cancelling the
-B₀ square against the pasted C₀ square proves B_j,C_j,B_k,C_k is a pushout.
-This is formalized by the private canonical_tensor_comparison_pushout helper.
-For any cocone on α_j and the D-transition, its E_j leg, conjugated by c_j,
-gives f:C_j→T, and its D_k leg restricted along B_k→B_k⊗_P Q gives g:B_k→T.
-The cocone identity on b⊗1 and the left inclusion compatibility make f and g
-agree on B_j. The algebra pushout universal property constructs δ:C_k→T.
-Conjugate δ by c_k. Its E-transition factorization follows from δ on C_j.
-Its α_k factorization is checked on b⊗q: on b⊗1 it follows from δ on B_k;
-on 1⊗q it follows from naturality of α and the original cocone identity.
-Multiplicativity combines these two factors, and tensor induction extends
-the identity to every tensor. Any other factorization agrees with δ on the
-images of C_j and B_k. Every element of C_k is a sum of products of such
-images, by its scalar-extension pushout equivalence, so tensor induction
-proves uniqueness. No inverse of α, nonzero-ring, or flatness assumption is
-used; zero rings, Q=P, and singleton or nonskeletal tails are covered.
+/-- Let `α : D ⟶ E` be a natural transformation of functors on `{j // i ≤ j}`, with
+`D_j ≅ (F_j ⊗ B₀) ⊗_P Q` and `E_j ≅ F_j ⊗ C₀` compatibly with the transitions, such that `α_j`
+restricts to `F_j ⊗ φ₀` on `F_j ⊗ B₀`. Then every naturality square of `α` is a pushout.
 -/
 theorem comparison_tensor_transition_isPushout
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]

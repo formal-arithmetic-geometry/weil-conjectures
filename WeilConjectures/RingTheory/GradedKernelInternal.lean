@@ -18,7 +18,10 @@ import WeilConjectures.RingTheory.GradedKernelFinite
 /-!
 # Internal grading on a finite graded kernel
 
-Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, successive graded kernels.
+The kernel of a degree-preserving map between finite graded `k[x₀,x₁]`-modules, with the grading
+inherited from the source, is an internally graded finite module with a finite homogeneous
+spanning set (`MvPolynomial.graded_kernel_internal_finite`). This allows iterating the
+construction of graded free covers along successive kernels.
 -/
 
 @[expose] public section
@@ -49,23 +52,8 @@ private theorem finite_homogeneous_spanning {k : Type u} [Field k]
     rw [← Finsupp.range_linearCombination, ← heq]
     exact LinearMap.range_eq_top.mpr hf
 
-/-- The inherited grading on the kernel of a graded surjection is internal and finite.
-Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, proof, successive graded kernels
-(blueprint: lem-sc-p1-graded-kernel-internal).
-
-Proof: take finite homogeneous generating families for source and target using
-`exists_finite_homogeneous_generators`, and turn their ranges into finite homogeneous spanning
-sets. Apply `graded_kernel_finite` to obtain closure of the kernel under homogeneous components
-and a finite homogeneous spanning set in the source. For a kernel element, its finite source
-homogeneous decomposition therefore consists entirely of kernel elements. Viewing these
-components as elements of the kernel gives existence of its inherited decomposition, while
-uniqueness follows by applying the injective subtype map and source uniqueness. Thus the
-comapped additive subgroups form an internal direct sum. The finite spanning set in the source
-makes the kernel a finitely generated submodule, hence its carrier has `Module.Finite`.
-Apply `exists_finite_homogeneous_generators` to this internal grading and use the standard
-finsupp basis to identify the image of its surjection with the span of the generators.
-Their finite range is the asserted homogeneous spanning set. Zero kernels and zero-rank
-source modules use the empty generating set. -/
+/-- The inherited grading on the kernel of a graded map is internal and finite.
+The kernel is a finite module spanned by finitely many homogeneous elements. -/
 theorem graded_kernel_internal_finite {k : Type u} [Field k]
     {F : Type v} [AddCommGroup F] [Module (MvPolynomial (Fin 2) k) F]
     {M : Type w} [AddCommGroup M] [Module (MvPolynomial (Fin 2) k) M]

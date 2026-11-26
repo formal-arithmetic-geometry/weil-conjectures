@@ -11,8 +11,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-! # Evaluation of the cohomology presheaf
 
-Source: Stacks Project, Cohomology, Tags 0BKJ and 0D60.
-(blueprint: lem-pc-cohomology-presheaf-derived-sections-evaluation).
+## References
+
+* Stacks Project, Tags 0BKJ and 0D60.
 -/
 
 @[expose] public section
@@ -24,21 +25,7 @@ open CategoryTheory TopologicalSpace Opposite
 namespace AlgebraicGeometry.RingedSpace
 
 /-- Evaluating any descent of the cohomology presheaf computed on functorial
-K-injective replacements gives cohomology of the right derived sections functor.
-Source: Stacks Project, Cohomology, Tag 0BKJ, proof, and Tag 0D60, proof.
-(blueprint: lem-pc-cohomology-presheaf-derived-sections-evaluation).
-
-Proof: Fix an open U. Evaluation at U is exact in abelian-group presheaves,
-so it commutes with cohomology. Evaluating the given presentation of P therefore
-identifies Q followed by evaluation of P with cohomology of sections of the
-functorial K-injective replacement. The quasi-isomorphism from a complex to its
-replacement becomes a natural isomorphism under Q. The right-derived-functor
-unit on that replacement is an isomorphism, since the replacement is K-injective.
-Its naturality identifies this same functor with Q followed by RΓ(U,-) followed
-by cohomology. Compose these natural isomorphisms and descend along Q using the
-fully faithful precomposition functor for localization. This proves the claimed
-natural isomorphism, including compatibility with every derived morphism.
-This argument also covers the empty open and every integer cohomological degree. -/
+K-injective replacements gives cohomology of the right derived sections functor. -/
 theorem cohomology_presheaf_derivedSections_evaluation
     (X : RingedSpace.{u})
     [HasDerivedCategory.{v} (SheafOfModules.{u} (moduleRings X))]

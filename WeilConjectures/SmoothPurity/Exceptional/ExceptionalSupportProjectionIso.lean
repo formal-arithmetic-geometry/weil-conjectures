@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicRealizationTransport
 /-!
 # Scalar restricted constant support projection
 
-Source: Stacks Tag 0GL6 and the coefficientwise support comparison.
-(blueprint: lem-exc-support-constant-projection-after-restriction)
+## References
+
+* Stacks Project, Tag 0GL6.
 -/
 
 @[expose] public section

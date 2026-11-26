@@ -12,13 +12,21 @@ import WeilConjectures.TraceFormula.Compact.CompactSupportDirectImageRestriction
 
 /-! # Compact-support system evaluation coherence
 
-Source: Weil conjectures blueprint, `prop-trf-rational-frobenius-integral-model.proof.md`,
-clause (3), second paragraph (blueprint: lem-trf-compact-support-system-evaluation-coherence).
-
 `CompactSupportSystemEvaluationWitness` states normalization of the actual geometric
 comparison maps, their compatibility with the two specified transition definitions,
 and the four unit and counit equations. `compactSupportSystemEvaluationCoherence`
 supplies this witness and its presentation before any inverse limit is taken.
+
+## Implementation details
+
+The ringed sequence site realizes ordinary strict quotient-linear systems, with componentwise
+exact evaluation and simultaneous K-injective resolutions. The direct image is
+`integralComparisonSequenceDirectImage p`, with constant-section coefficient map, and the
+pro-étale open localization gives the exact, section-normalized slice extension and restriction
+on whole systems. Transposing the normalized restriction square under the finite quotient
+adjunctions gives the coefficient mate `b`, which yields `compactSupportSystemTargetTransition`;
+composing the direct-image and open evaluations gives `compactSupportSystemEvaluationIso`. No
+arbitrary transition family, cartesianness, quotient-flatness or evaluated K-injectivity is used.
 -/
 
 @[expose] public noncomputable section
@@ -41,9 +49,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Normalization of the actual finite coefficient square on all K-injective models.
-Source: node proof step 2, Zheng 4.10
-(blueprint: lem-trf-compact-support-system-evaluation-coherence). -/
+/-- Normalization of the actual finite coefficient square on all K-injective models. -/
 def compactSupportCoefficientSquareNormalized
     {X Z Y : Scheme.{t}} {j : X ⟶ Z} {p : Z ⟶ Y} [IsOpenImmersion j]
     [D : CompactSupportSystemEvaluationData l E X Z Y j p] {m n : ℕ} (h : n ≤ m) : Prop :=
@@ -56,9 +62,7 @@ def compactSupportCoefficientSquareNormalized
     (normalizedDVRModuleRes l E Z h) (normalizedDVRModuleRes l E Y h)
     (D.operations.ordinaryCoefficientComparison h) (D.operations.derivedCoefficientComparison h)
 
-/-- Normalization of actual direct-image evaluation on arbitrary evaluated resolutions.
-Source: node proof step 2, Stacks 0D6E
-(blueprint: lem-trf-compact-support-system-evaluation-coherence). -/
+/-- Normalization of actual direct-image evaluation on arbitrary evaluated resolutions. -/
 def compactSupportDirectImageEvaluationNormalized
     {X Z Y : Scheme.{t}} {j : X ⟶ Z} {p : Z ⟶ Y} [IsOpenImmersion j]
     [D : CompactSupportSystemEvaluationData l E X Z Y j p] (n : ℕ) : Prop :=
@@ -73,9 +77,7 @@ def compactSupportDirectImageEvaluationNormalized
     (coefficientSequenceEvaluation l E Z n) (coefficientSequenceEvaluation l E Y n)
     (D.pOrdinaryEvaluation n).symm (D.pRightEvaluation n).symm
 
-/-- The unit equation for the two comparison maps of an evaluated adjunction.
-Source: node final clause, SemilinearSections.AdjunctionEvaluation.unit
-(blueprint: lem-trf-compact-support-system-evaluation-coherence). -/
+/-- The unit equation for the two comparison maps of an evaluated adjunction. -/
 def CompactSupportUnitEvaluation
     {C : Type c₁} {D : Type c₂} {c : Type d₁} {d : Type d₂}
     [Category.{v} C] [Category.{v} D] [Category.{v} c] [Category.{v} d]
@@ -87,9 +89,7 @@ def CompactSupportUnitEvaluation
     E₀.map (adj.unit.app M) ≫ right.hom.app (L.obj M) ≫
       R₀.map (left.hom.app M) = level.unit.app (E₀.obj M)
 
-/-- The counit equation for the same two evaluated comparison maps.
-Source: node final clause, SemilinearSections.AdjunctionEvaluation.counit
-(blueprint: lem-trf-compact-support-system-evaluation-coherence). -/
+/-- The counit equation for the same two evaluated comparison maps. -/
 def CompactSupportCounitEvaluation
     {C : Type c₁} {D : Type c₂} {c : Type d₁} {d : Type d₂}
     [Category.{v} C] [Category.{v} D] [Category.{v} c] [Category.{v} d]
@@ -101,9 +101,7 @@ def CompactSupportCounitEvaluation
     L₀.map (right.hom.app N) ≫ level.counit.app (F₀.obj N) =
       left.inv.app (R.obj N) ≫ F₀.map (adj.counit.app N)
 
-/-- Identity on sections for the ordinary quotient restriction square.
-Source: node statement, proof steps 2--6
-(blueprint: lem-trf-compact-support-system-evaluation-coherence). -/
+/-- Identity on sections for the ordinary quotient restriction square. -/
 def compactSupportOrdinaryCoefficientSectionsNormalized
     {X Z Y : Scheme.{t}} {j : X ⟶ Z} {p : Z ⟶ Y} [IsOpenImmersion j]
     [D : CompactSupportSystemEvaluationData l E X Z Y j p] : Prop :=
@@ -115,9 +113,7 @@ def compactSupportOrdinaryCoefficientSectionsNormalized
 /-- Identity on sections for the slice-restriction evaluation of the open presentation.
 With the open presentation's unit and counit evaluation equations, this fixes its
 extension evaluation `e_n J = j_! e_n`, so `theta` and the target transition use the
-canonical open identification rather than one twisted by a levelwise automorphism.
-Source: node statement, `e_n J_j^str = j_! e_n`; proof step 3, Stacks 03DJ
-(blueprint: lem-trf-compact-support-system-evaluation-coherence). -/
+canonical open identification rather than one twisted by a levelwise automorphism. -/
 def compactSupportOpenRestrictionSectionsNormalized
     {X Z Y : Scheme.{t}} {j : X ⟶ Z} {p : Z ⟶ Y} [IsOpenImmersion j]
     [D : CompactSupportSystemEvaluationData l E X Z Y j p] : Prop :=
@@ -125,9 +121,7 @@ def compactSupportOpenRestrictionSectionsNormalized
     HEq (((D.operations.instances.jOperations.openSystems.restrictionEvaluation n).hom.app
       N).val.app V x) x
 
-/-- Identity on sections for the ordinary system direct-image evaluation.
-Source: node statement, proof steps 2--6
-(blueprint: lem-trf-compact-support-system-evaluation-coherence). -/
+/-- Identity on sections for the ordinary system direct-image evaluation. -/
 def compactSupportOrdinaryDirectImageSectionsNormalized
     {X Z Y : Scheme.{t}} {j : X ⟶ Z} {p : Z ⟶ Y} [IsOpenImmersion j]
     [D : CompactSupportSystemEvaluationData l E X Z Y j p] : Prop :=
@@ -137,9 +131,7 @@ def compactSupportOrdinaryDirectImageSectionsNormalized
         coefficientSequenceEvaluation l E Y n).obj N).val.obj V),
       HEq (((D.pOrdinaryEvaluation n).hom.app N).val.app V x) x
 
-/-- Compatibility with the actual source tower and the specified target transition.
-Source: node statement, proof steps 2--6
-(blueprint: lem-trf-compact-support-system-evaluation-coherence). -/
+/-- Compatibility with the actual source tower and the specified target transition. -/
 def CompactSupportSystemTransitionCompatibility
     {X Z Y : Scheme.{t}} {j : X ⟶ Z} {p : Z ⟶ Y} [IsOpenImmersion j]
     [D : CompactSupportSystemEvaluationData l E X Z Y j p]
@@ -150,9 +142,7 @@ def CompactSupportSystemTransitionCompatibility
       compactSupportSystemSourceTransition l E (D := D) h M ≫ (theta n).hom.app M =
         (theta m).hom.app M ≫ compactSupportSystemTargetTransition l E (D := D) h M
 
-/-- Unit compatibility for evaluation of the actual open adjunction.
-Source: node statement, proof steps 2--6
-(blueprint: lem-trf-compact-support-system-evaluation-coherence). -/
+/-- Unit compatibility for evaluation of the actual open adjunction. -/
 def CompactSupportSystemOpenUnitCompatibility
     {X Z Y : Scheme.{t}} {j : X ⟶ Z} {p : Z ⟶ Y} [IsOpenImmersion j]
     [D : CompactSupportSystemEvaluationData l E X Z Y j p] : Prop :=
@@ -169,9 +159,7 @@ def CompactSupportSystemOpenUnitCompatibility
         (compactSupportCanonicalJLevelAdjunction l E j D.operations.instances.jOperations n)
         (D.jLeftEvaluation n) (D.jRightEvaluation n)
 
-/-- Counit compatibility for evaluation of the actual open adjunction.
-Source: node statement, proof steps 2--6
-(blueprint: lem-trf-compact-support-system-evaluation-coherence). -/
+/-- Counit compatibility for evaluation of the actual open adjunction. -/
 def CompactSupportSystemOpenCounitCompatibility
     {X Z Y : Scheme.{t}} {j : X ⟶ Z} {p : Z ⟶ Y} [IsOpenImmersion j]
     [D : CompactSupportSystemEvaluationData l E X Z Y j p] : Prop :=
@@ -188,9 +176,7 @@ def CompactSupportSystemOpenCounitCompatibility
         (compactSupportCanonicalJLevelAdjunction l E j D.operations.instances.jOperations n)
         (D.jLeftEvaluation n) (D.jRightEvaluation n)
 
-/-- Unit compatibility for evaluation of the actual direct-image adjunction.
-Source: node statement, proof steps 2--6
-(blueprint: lem-trf-compact-support-system-evaluation-coherence). -/
+/-- Unit compatibility for evaluation of the actual direct-image adjunction. -/
 def CompactSupportSystemDirectImageUnitCompatibility
     {X Z Y : Scheme.{t}} {j : X ⟶ Z} {p : Z ⟶ Y} [IsOpenImmersion j]
     [D : CompactSupportSystemEvaluationData l E X Z Y j p] : Prop :=
@@ -205,9 +191,7 @@ def CompactSupportSystemDirectImageUnitCompatibility
         (compactSupportCanonicalPAdjunction l E p) (compactSupportCanonicalPLevelAdjunction l E p n)
         (D.pLeftEvaluation n) (D.pRightEvaluation n)
 
-/-- Counit compatibility for evaluation of the actual direct-image adjunction.
-Source: node statement, proof steps 2--6
-(blueprint: lem-trf-compact-support-system-evaluation-coherence). -/
+/-- Counit compatibility for evaluation of the actual direct-image adjunction. -/
 def CompactSupportSystemDirectImageCounitCompatibility
     {X Z Y : Scheme.{t}} {j : X ⟶ Z} {p : Z ⟶ Y} [IsOpenImmersion j]
     [D : CompactSupportSystemEvaluationData l E X Z Y j p] : Prop :=
@@ -224,9 +208,7 @@ def CompactSupportSystemDirectImageCounitCompatibility
 
 /-- A whole-tower comparison using the two fixed transition definitions.
 The four final conjuncts state unit and counit compatibility of the same component
-comparisons that define `theta`; they are conclusions of the existence theorem below.
-Source: node statement, final three sentences; proof steps 4--6
-(blueprint: lem-trf-compact-support-system-evaluation-coherence). -/
+comparisons that define `theta`; they are conclusions of the existence theorem below. -/
 def CompactSupportSystemEvaluationWitness
     {X Z Y : Scheme.{t}} {j : X ⟶ Z} {p : Z ⟶ Y} [IsOpenImmersion j]
     [D : CompactSupportSystemEvaluationData l E X Z Y j p] :=
@@ -309,40 +291,7 @@ private theorem evaluated_tower_square
 /-- Coherent evaluation of the actual strict compact-support system before any limit.
 Index `n : ℕ` denotes positive exponent `n+1`. The theorem supplies the canonical
 presentation and its natural level isomorphisms, the equation for every actual tower
-transition, and both unit and counit equations for each geometric adjunction.
-
-Source: Weil blueprint `prop-trf-rational-frobenius-integral-model.proof.md`, clause (3),
-second paragraph (blueprint: lem-trf-compact-support-system-evaluation-coherence).
-Proof plan:
-1. The ringed sequence site realizes ordinary strict quotient-linear systems, with
-componentwise exact evaluation and simultaneous K-injective resolutions, by
-`def-coef-ringed-sequence-site` and `lem-coef-semilinear-derived-sections`.
-2. The canonical sectionwise direct image is `integralComparisonSequenceDirectImage p`.
-Its coefficient map is constant-section base change. The coefficient identifications
-`p⁻¹ B_n = B_n` commute with all quotients by
-`prop-weil-pbc-proetale-constant-ring-map` and `def-weil-proetale-inverse-image`.
-The semilinear calculus gives its derived evaluations, normalized on arbitrary
-K-injective resolutions by CompactSupportDerivedSquareNormalization. It also gives
-the identity-on-sections coefficient square and its normalized derived square.
-3. The pro-etale open localization and `lem-pur-site-restriction-module-adjunction-exact`
-give the exact, section-normalized slice extension and restriction on whole systems.
-Its finite evaluations are the localizations of IntegralOpenReduction.extensionEvaluation.
-Slice restriction keeps every section, so its evaluation is the identity on sections;
-the open unit/counit evaluation equations then fix the extension evaluation itself.
-Thus N=J M has the real transitions obtained by extending the input transitions.
-4. Transpose the normalized restriction square under the finite quotient adjunctions.
-This is b. The actual transition of N has adjunct t^N, so semilinear derived sections
-identifies the extension-form direct-image transition with Rp_n(t^N) composed with b.
-Transpose under the same coefficient adjunction on Y and apply Res_m. The actual
-projection composition gives compactSupportSystemTargetTransition. No arbitrary
-transition family, cartesianness, quotient-flatness or evaluated K-injectivity is used.
-5. Exact termwise completed restriction identifies ev_n U with Res_n e_n through
-coefficientRestrictedEvaluationIso. Composing the direct-image and open evaluations
-is compactSupportSystemEvaluationIso. The transition equation identifies the two
-whole towers; natural isomorphisms ensure naturality for every derived morphism.
-6. The canonical ordinary adjunctions descend to their normalized derived adjunctions.
-Their unit and counit evaluation identities are the four explicit witness conclusions.
-All these constructions precede any inverse limit. -/
+transition, and both unit and counit equations for each geometric adjunction. -/
 theorem compactSupportSystemEvaluationCoherence
     {X Z Y : Scheme.{t}} {j : X ⟶ Z} {p : Z ⟶ Y} [IsOpenImmersion j]
     [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]

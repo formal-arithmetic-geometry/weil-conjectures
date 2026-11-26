@@ -12,9 +12,11 @@ import all WeilConjectures.SmoothPurity.ConstantScalarStrictUnit.ConstantScalarS
 
 /-! # Compatible quotient bases after inverse image along a site object
 
-Source: Stacks Project, Modules on Sites, localization at an object (Tag 04J0);
-Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.9.
-(blueprint: lem-pur-integral-object-pullback-quotient-basis).
+## References
+
+* Stacks Project, Modules on Sites, localization at an object (Tag 04J0)
+* B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, Definition 3.4.10 and
+  Lemma 6.5.9
 -/
 
 @[expose] public noncomputable section
@@ -50,8 +52,7 @@ private noncomputable instance (priority := 5000) fixedAbLocallyBijective (T : S
     (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   integralCoefficientAbLocallyBijective.{u, u} T
 
-/-- The fixed site-size witness used by the exported quotient-basis statement.
-Source: Stacks Tag 04J0 (blueprint: lem-pur-integral-object-pullback-quotient-basis). -/
+/-- The fixed site-size witness used by the exported quotient-basis statement. -/
 theorem integralObjectPullbackSiteSmall (T : Scheme.{u}) :
     EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0} _
 
@@ -361,30 +362,7 @@ private theorem normalizedBasis_step
 
 end IntegralObjectQuotientProof
 
-/-- A slice basis gives compatible bases of all finite quotient inverse images.
-
-Source: Stacks Project, Modules on Sites, localization at an object (Tag 04J0);
-Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.9.
-(blueprint: lem-pur-integral-object-pullback-quotient-basis).
-
-Proof: write R for the completed coefficient sheaf and A_n for its positive
-quotient at exponent n+1. Restrict the scalar-extension adjunction along the
-slice projection. Its right adjoint is restriction of scalars, so uniqueness
-of left adjoints identifies (A_n tensor_R L)|_W with
-(A_n|_W) tensor_(R|_W) (L|_W). Apply the supplied basis to the second factor;
-multiplication identifies the result with A_n|_W. The object-inverse-image
-restriction comparison transports this to the regular A_n-module on W.left.
-For the identity coefficient extension the finite scalar multiplication
-isomorphism identifies the reduced regular R-module with this same regular
-A_n-module. Compose with its inverse, restrict scalars along R -> A_n, and
-apply the single-complex comparison to obtain b_n. For each successor square,
-both composites on a local tensor generator a tensor x give reduction of a
-times the reduction of the coefficient of x in the supplied basis. The
-constant-ring comparison is normalized on constant sections, hence commutes
-with these reductions. Tensor generation and the sheafification universal
-property give equality of the module maps, and therefore the asserted chain
-map equation. This argument needs no flatness of L or coefficient projection;
-it also applies to the empty scheme and the zero coefficient sheaf. -/
+/-- A slice basis gives compatible bases of all finite quotient inverse images. -/
 theorem integralObjectPullbackQuotientBasis (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) (W : X.ProEt) (L : integralTowerModules.{u, u} l E X)

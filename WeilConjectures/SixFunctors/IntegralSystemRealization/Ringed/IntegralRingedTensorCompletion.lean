@@ -12,7 +12,11 @@ import all WeilConjectures.SmoothPurity.IntegralOnSlice.IntegralDerivedOperation
 
 /-! # Completion of the fixed calculus tensor
 
-Source: Stacks 07A4, 0941, 099N; fix-prop-coherence, quotient tensor realization.
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 099N]
 -/
 
 @[expose] public noncomputable section
@@ -67,21 +71,7 @@ private theorem tensorCompletion_ofDescent (W : Scheme.{u})
 attribute [-instance] IntegralAmbient.ambientCxCategory IntegralAmbient.ambientDCategory
   IntegralOnSlice.abSheafify IntegralOnSlice.abLocallyBijective in
 /-- The quotient completion comparison for the fixed calculus tensor, including its
-representative augmentation equation. This concerns tensor alone, on one scheme.
-Source: Stacks 07A4, 0941, 099N; fix-prop-coherence, tensor-model step
-(blueprint: lem-sf-integral-ringed-tensor-completion).
-
-Proof: restrict the calculus's K-flat tensor presentation to flat-term K-flat pairs.
-The quotient Roos augmentation of their ordinary total tensor has first coordinate
-x tensor y sent to (1 tensor x) tensor (1 tensor y), and zero shifted coordinate.
-The strict tensor-tower isomorphism identifies its target with the published tensor
-operation complex. On the product of the good-complex localizations, completion of
-the ordinary tensor and the published completed tensor therefore have naturally
-isomorphic presentations. Fully faithful whiskering by that product localization
-descends the comparison and its inverse. The descent equation, precomposed with
-the ordinary representative comparison, is IsTensorCompletion. All maps use the
-same signed total tensor and quotient tower; zero inputs and empty schemes require
-no change. No constructibility, quasi-compactness or invertibility of l on W is used. -/
+representative augmentation equation. This concerns tensor alone, on one scheme. -/
 theorem integralRingedTensorCompletion (W : Scheme.{u}) :
     ∃ β : (integralRingedOrdinaryTensor l E W).tensor ⋙ C l E W ≅
         integralCompletedTensor l E W,

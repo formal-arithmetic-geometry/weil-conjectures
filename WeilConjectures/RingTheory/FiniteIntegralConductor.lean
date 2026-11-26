@@ -19,8 +19,12 @@ import Mathlib.RingTheory.Finiteness.Ideal
 /-!
 # A conductor power for a finite intermediate ring
 
-Source: Stacks Project, Varieties, Lemma 33.37.5 (Tag 09N2), finite-conductor paragraph
-(blueprint: lem-sc-finite-integral-conductor).
+A positive power of the Jacobson radical of a one-dimensional Noetherian semilocal domain
+multiplies a finite intermediate ring of its fraction field into the domain.
+
+## References
+
+* [Stacks, Tag 09N2]
 -/
 
 @[expose] public section
@@ -32,18 +36,7 @@ namespace Subalgebra
 /-- A finite intermediate algebra in the fraction field of a Noetherian semilocal domain of
 Krull dimension one contains the product of a positive power of the base ring's Jacobson radical
 with the intermediate algebra. Membership in the base ring is expressed through its algebra map.
-Source: Stacks Project, Varieties, Lemma 33.37.5 (Tag 09N2), finite-conductor paragraph
-(blueprint: lem-sc-finite-integral-conductor).
-
-Proof: (1) By `FractionalIdeal.isFractional_of_fg`, the finite submodule `A` of the fraction
-field has a common denominator `d ≠ 0`: every `d * a` is in the image of `B`.
-(2) Every prime containing `(d)` is nonzero, hence maximal by dimension one. Thus the
-intersection of all maximal ideals is contained in the intersection of the primes containing
-`(d)`, namely its radical. The Jacobson radical is finitely generated since `B` is Noetherian,
-so `Ideal.exists_pow_le_of_le_radical_of_fg` gives a power contained in `(d)`. Increasing the
-exponent by one makes it positive and preserves containment.
-(3) Write any element `b` of this power as `r * d`. If `d * a` is the image of `c`, then
-`b * a` is the image of `r * c`. -/
+-/
 theorem exists_jacobson_pow_mul_mem_base
     {B : Type u} [CommRing B] [IsDomain B] [IsNoetherianRing B]
     [Finite (MaximalSpectrum B)] (hdim : ringKrullDim B = 1)

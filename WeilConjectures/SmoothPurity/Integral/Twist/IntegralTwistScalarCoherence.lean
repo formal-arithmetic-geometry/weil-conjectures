@@ -50,12 +50,7 @@ import WeilConjectures.SmoothPurity.Integral.Twist.IntegralTwistAmbientCoherence
 import WeilConjectures.SmoothPurity.Integral.Twist.IntegralTwistCommonScalarModel
 import WeilConjectures.FourierTransform.CompletedLineTensor.CompletedLineTensorCoherence
 
-/-! # Coherence of integral twisting and scalar extension
-
-Source: blueprint `definition-tate-twists--10`, final integral/common-stage paragraph,
-and `lem-weil-scalar-extension-composition`, integral associativity paragraph
-(blueprint: lem-weil-integral-twist-scalar-coherence).
--/
+/-! # Coherence of integral twisting and scalar extension -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

@@ -15,7 +15,24 @@ import all WeilConjectures.SmoothPurity.IntegralOnSlice.IntegralDerivedOperation
 
 /-! # Exact open restriction of the strict finite pullback tower
 
-Source: Stacks Project, sites-modules.tex, Tags 03D2 and 03D8.
+For a clopen immersion, the strict finite pullback tower is the restriction of the strict
+quotient tower.
+
+## Implementation details
+
+Composition with the open immersion is left adjoint to base change on the pro-étale sites;
+transposing the inverse normalized coefficient isomorphism and using uniqueness of module left
+adjoints identifies ordinary restriction with ambient pullback. The clopen scalar quotient
+comparison commutes restriction with each quotient complex, naturally and compatibly with the
+quotient transitions; these comparisons are assembled with `NatTrans.ofOpSequence` and
+composed with the normalized ambient pullback tower isomorphism. No invertibility of the
+prime, completeness or boundedness is used; empty clopens give the unique comparison in the
+zero module category.
+
+## References
+
+* [Stacks, Tag 03D2]
+* [Stacks, Tag 03D8]
 -/
 
 @[expose] public section
@@ -94,29 +111,7 @@ private noncomputable def ordinarySfIso
 
 attribute [local irreducible] ordinarySfIso
 
-/-- The strict finite pullback tower is restriction of the strict quotient tower.
-
-Source: Stacks Project, sites-modules.tex, Tags 03D2 and 03D8; step 1 of
-lem-fix-clopen-integral-completion-restriction.
-(blueprint: lem-sf-clopen-pullback-quotient-tower).
-
-Proof: composition with the open immersion is left adjoint to base change on the
-pro-etale sites. Transpose the inverse normalized coefficient isomorphism under
-this adjunction. The finite transpose fixes constant sections, so it is the
-specified direct-image coefficient map. The completed transpose commutes with
-every finite projection, so uniqueness identifies it with the specified ambient
-completed coefficient map. The ringed-site adjunction and uniqueness of module
-left adjoints therefore identify ordinary restriction with ambient pullback.
-
-Use the existing clopen scalar quotient comparison to commute restriction with
-each actual quotient complex. Its tensor normalization proves naturality in the
-input complex and compatibility with quotient transitions: after the inverse
-comparison, local pure tensors generate the source, and both composites have the
-same formula. Assemble these comparisons by NatTrans.ofOpSequence. Identify the
-global slice towers with the unrestricted quotient towers. Finally compose with
-the normalized ambient pullback tower isomorphism. No invertibility of the prime,
-completeness or boundedness is used. Empty clopens give the unique comparison in
-the zero module category. -/
+/-- The strict finite pullback tower is restriction of the strict quotient tower. -/
 theorem clopenPullbackQuotientTower
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

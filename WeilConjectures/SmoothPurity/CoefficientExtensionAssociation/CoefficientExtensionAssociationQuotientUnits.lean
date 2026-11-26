@@ -10,9 +10,23 @@ import all WeilConjectures.SmoothPurity.Coefficient.CoefficientExtensionOrdinary
 
 /-! # Quotient unit sections of an ordinary tensor system
 
-Source: Stacks 03CZ and 03D7; the sequence site preceding 0941.
-All constructions are actual normalized adjunction units. The generic laws prevent
-kernel checking from expanding the completed coefficient ring at each application.
+We define the normalized adjunction unit sections of the quotient tensor adjunctions on the
+sequence site and show that they are compatible with the successor transitions of an ordinary
+tensor model.
+
+## Implementation details
+
+All constructions are actual normalized adjunction units. The generic laws prevent kernel
+checking from expanding the completed coefficient ring at each application. The unit section
+`normalizedUnitSection` keeps its carrier explicit to avoid unfolding restriction-of-scalars
+actions, and the witness of `quotientAdjunction` fixes the unit on every section rather than
+choosing arbitrary data. The transition law is proved by sending the defining mate of the
+ordinary quotient back to the lower unit through the adjunction Hom equivalence and conjugating
+by the evaluation isomorphisms of the model.
+
+## References
+
+* Stacks 03CZ, 03D7, 0941
 -/
 
 @[expose] public noncomputable section
@@ -55,9 +69,7 @@ private structure QuotientMateLaw
   app_eq : ∀ M, q.app M = (coefficientQuotientNatTrans adj adj' T e).app M
 
 universe d e r₀
-/-- The actual adjunction unit section, returned in the native target module.
-Keeping this carrier explicit avoids unfolding restriction-of-scalars actions.
-Source: Stacks 03D7. -/
+/-- The adjunction unit section, returned in the native target module. -/
 @[irreducible] def normalizedUnitSection
     {C : Type d} [Category.{e} C] {J : GrothendieckTopology C}
     {R S : Sheaf J RingCat.{r₀}} (f : R ⟶ S)
@@ -167,8 +179,7 @@ attribute [local irreducible] constantSheaf HasDerivedCategory.standard
   scalarReductionExtension scalarReductionExistence coefficientOrdinaryQuotient
   coefficientQuotientNatTrans coefficientOrdinaryQuotientComponent
 
-/-- The completed coefficient projection, viewed as a ring-sheaf map.
-Source: the quotient tower preceding Stacks 0941. -/
+/-- The completed coefficient projection, viewed as a ring-sheaf map. -/
 abbrev coefficientProjection (n : ℕ) :
     SheafOfModules.derivedChangeRingIndependentCoefficients (Scheme.ProEt.topology W)
       (completedIntegralCommRingSheafUnrestricted l E W) ⟶ integralCoefficientSheaf l E W n :=
@@ -176,16 +187,14 @@ abbrev coefficientProjection (n : ℕ) :
     (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
       (completedIntegralCommRingProjectionUnrestricted l E W n)
 
-/-- The quotient tensor adjunction with its recorded sectionwise unit normalization.
-The chosen witness fixes the unit on every section, rather than choosing arbitrary data.
-Source: `scalarReductionExtension_adjunction`, Stacks 03CZ and 03D7. -/
+/-- The quotient tensor adjunction `scalarReductionExtension_adjunction`, with its recorded
+sectionwise unit normalization. -/
 def quotientAdjunction (n : ℕ) :
     scalarReductionExtension l E W n ⊣ scalarReductionRestriction l E W n :=
   (scalarReductionExtension_adjunction l E W n).choose
 attribute [local irreducible] quotientAdjunction
 
-/-- The normalized quotient tensor unit section.
-Source: Stacks 03CZ and 03D7. -/
+/-- The normalized quotient tensor unit section. -/
 @[irreducible] def finiteUnitSection (M : scalarReductionSource l E W) (n : ℕ)
     (U : W.ProEtᵒᵖ) (x : M.val.obj U) :
     ((scalarReductionExtension l E W n).obj M).val.obj U :=
@@ -227,8 +236,7 @@ private theorem tensor_unit_law (M : CompletionUnit.OrdinaryModel l E W)
     (coefficientOrdinaryQuotient l E W (Nat.le_succ n))
     (quotient_mate_law l E W (Nat.le_succ n)) (M.transition K (Nat.le_succ n))
 
-/-- The quotient unit transported into the supplied ordinary system model.
-Source: Stacks 03D7 and the sequence-site construction preceding 0941. -/
+/-- The quotient unit transported into the supplied ordinary system model. -/
 @[irreducible] def quotientUnitSection (M : CompletionUnit.OrdinaryModel l E W)
     (K : scalarReductionSource l E W) (n : ℕ) (U : W.ProEtᵒᵖ) (x : K.val.obj U) :
     ((coefficientSequenceEvaluation l E W n).obj (M.tensor.obj K)).val.obj U :=
@@ -242,17 +250,7 @@ private theorem quotientUnitSection_evaluation (M : CompletionUnit.OrdinaryModel
   exact congrArg (fun f ↦ f.val.app U (finiteUnitSection l E W K n U x))
     ((M.evaluation n).app K).inv_hom_id
 
-/-- Quotient unit sections are compatible with the successor of the ordinary tensor model.
-
-Source: Stacks 03D7; sequence-site quotient construction preceding 0941.
-(blueprint: stage3-pur-extension-quotient-unit-successor).
-
-Proof: the ordinary quotient is the mate of composition of restriction functors.
-The adjunction Hom equivalence sends its defining mate back to the lower unit.
-Restriction and its composition comparison preserve underlying sections.
-Conjugate this unit identity by the two evaluation isomorphisms, using the
-transition clause of the given model, and cancel each isomorphism with its inverse.
-This proves the formula for every section, including the zero section and n = 0. -/
+/-- Quotient unit sections are compatible with the successor of the ordinary tensor model. -/
 theorem quotientUnitSection_transition (M : CompletionUnit.OrdinaryModel l E W)
     (K : scalarReductionSource l E W) (n : ℕ) (U : W.ProEtᵒᵖ) (x : K.val.obj U) :
     HEq (((coefficientSequenceTransition l E W (Nat.le_succ n)).app

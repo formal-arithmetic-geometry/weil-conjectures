@@ -14,9 +14,10 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingClosedI
 For a morphism `φ : N ⟶ M` of proper trait models with full geometric generic fibres over a
 generic base, over proper `i₁ : Y₁ ⟶ X₁` and `i₂ : Y' ⟶ X'`, and a compact-support exchange `ν`
 inverting the proper exchange `χ_φ` under `Ri_! ≅ Ri_*`, the dualizing maps satisfy the
-closed-immersion law `θ_N ∘ Ψ_N(ρ) = ρ' ∘ Ri₂^!(θ_M) ∘ β_φ(ω_{X₁})` (blueprint
-`sec-Base-change-for-nearby-cycles` (4);
-`NearbyCyclesModel.NearbyDualizingDataOfGenericBase.closedImmersion_law`).
+closed-immersion law `θ_N ∘ Ψ_N(ρ) = ρ' ∘ Ri₂^!(θ_M) ∘ β_φ(ω_{X₁})`
+(`NearbyCyclesModel.NearbyDualizingDataOfGenericBase.closedImmersion_law`). Both sides are
+determined by their traces after the invertible proper exchange `χ_{a_N}`, which are compared by
+`CategoryTheory.closedImmersionLaw_aux`.
 
 -/
 
@@ -39,14 +40,12 @@ namespace NearbyDualizingDataOfGenericBase
 variable {k' : Type u} [Field k'] {ℓ : ℕ} [Fact ℓ.Prime] [IsSepClosed k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
-/-- **The closed-immersion law of the dualizing maps over a generic base** (blueprint
-`sec-Base-change-for-nearby-cycles` (4)): for a morphism `φ : N ⟶ M` of proper trait models with
-full geometric generic fibres over proper `i₁ : Y₁ ⟶ X₁` and `i₂ : Y' ⟶ X'`, and a
-compact-support exchange `ν` inverting the proper exchange `χ_φ` under `Ri_! ≅ Ri_*`,
+/-- **The closed-immersion law of the dualizing maps over a generic base**: for a morphism
+`φ : N ⟶ M` of proper trait models with full geometric generic fibres over proper
+`i₁ : Y₁ ⟶ X₁` and `i₂ : Y' ⟶ X'`, and a compact-support exchange `ν` inverting the proper
+exchange `χ_φ` under `Ri_! ≅ Ri_*`,
 `θ_N ∘ Ψ_N(ρ) = ρ' ∘ Ri₂^!(θ_M) ∘ β_φ(ω_{X₁})` for the exceptional exchange `β_φ` of `ν` and the
-composition isomorphisms `ρ : Ri₁^! ω_{X₁} ≅ ω_{Y₁}`, `ρ' : Ri₂^! ω_{X'} ≅ ω_{Y'}`. Both sides
-are determined by their traces after the invertible proper exchange `χ_{a_N}`, which are compared
-by `CategoryTheory.closedImmersionLaw_aux`. -/
+composition isomorphisms `ρ : Ri₁^! ω_{X₁} ≅ ω_{Y₁}`, `ρ' : Ri₂^! ω_{X'} ≅ ω_{Y'}`. -/
 theorem closedImmersion_law (D : NearbyDualizingDataOfGenericBase k' ℓ)
     {F : Type u} [Field F] [Fact (ringChar F).Prime] [Fact (ringChar F ≠ ℓ)]
     {X₁ Y₁ : Over (Spec (.of F))} [LocallyOfFiniteType X₁.hom] [QuasiCompact X₁.hom]

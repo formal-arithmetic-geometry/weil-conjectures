@@ -8,7 +8,22 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalTensorPullback
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPullbackDescentData
 
-/-! # Transport between normalized pro-etale tensor models -/
+/-! # Transport between normalized pro-etale tensor models
+
+We show that two signed K-flat tensor presentations have a normalized comparison
+isomorphism, and that canonical tensor pullback commutes with these changes of model.
+
+## Implementation details
+
+Restriction of natural transformations along the product of the resolving-class
+localizations is fully faithful, which reduces both statements to flat-term K-flat pairs.
+
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0G7E]
+* [Stacks, Tag 04VK]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -23,14 +38,7 @@ attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoida
   proEtaleRingDerivedPullbackFactors proEtaleTensorPullbackTotalIso
   Functor.mapDerivedCategory
 
-/-- Two signed K-flat tensor presentations have a normalized comparison isomorphism.
-Source: Stacks 07A4, 0G7E and 04VK.
-(blueprint: lem-sf-integral-tensor-model-identification).
-
-Proof: restrict natural transformations along the product of the resolving-class
-localizations. This restriction is fully faithful. Lift the inverse of the first
-representative isomorphism followed by the second. The map-preimage equation,
-evaluated on a representative pair, gives the asserted normalization. -/
+/-- Two signed K-flat tensor presentations have a normalized comparison isomorphism. -/
 theorem tensorModelIso (W : Scheme.{u})
     (R : Sheaf (ProEt.topology W) CommRingCat.{u + 1})
     (a b : ProEtaleTensorModel W R) :
@@ -52,16 +60,7 @@ theorem tensorModelIso (W : Scheme.{u})
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Iso.hom_inv_id_app_assoc]
 
-/-- Canonical tensor pullback commutes with normalized changes of tensor model.
-Source: Stacks 07A4, 0G7E and 04VK.
-(blueprint: lem-sf-integral-tensor-model-pullback-transport).
-
-Proof: full faithfulness of product resolving-class restriction reduces the equality
-of natural transformations to flat-term K-flat pairs. Precompose with the source
-representative isomorphism and postcompose with the tensor of the pullback computation
-isomorphisms. Apply the two defining canonical pullback equations. The normalization
-at the source, naturality of the target model isomorphism, and its normalization on
-the pulled representatives identify the resulting composites. Cancel isomorphisms. -/
+/-- Canonical tensor pullback commutes with normalized changes of tensor model. -/
 theorem tensorModelPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

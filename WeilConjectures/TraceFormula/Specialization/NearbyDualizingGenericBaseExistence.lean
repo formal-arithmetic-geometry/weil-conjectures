@@ -15,8 +15,9 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingGeneric
 The dualizing maps `θ_N` of the trait models over generic bases
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.dualizingMap`) form a family
 `NearbyCyclesModel.NearbyDualizingDataOfGenericBase`
-(`NearbyCyclesModel.nonempty_nearbyDualizingDataOfGenericBase`, blueprint
-`prose-E-15`).
+(`NearbyCyclesModel.nonempty_nearbyDualizingDataOfGenericBase`).
+
+## Implementation details
 
 The dualizing maps are built from the trait as a model of the point `Spec F` along
 `ε₀ = (Spec Ω ⟶ η ⟶ Spec F)`, while the trace property is asked for every `ε₀'` compatible with
@@ -38,8 +39,7 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 
 namespace AlgebraicGeometry
 
-/-- A morphism from a nonempty scheme to the spectrum of a field is an epimorphism: it is flat
-(`AlgebraicGeometry.Flat.of_field`) and surjective. -/
+/-- A morphism from a nonempty scheme to the spectrum of a field is an epimorphism. -/
 lemma epi_of_nonempty_of_field {Z : Scheme.{u}} [Nonempty Z] {K : Type u} [Field K]
     (f : Z ⟶ Spec (.of K)) : Epi f := by
   have := Flat.of_field K f
@@ -63,11 +63,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {F : Type u} [Field F] [Fact (ringChar F).
 
 /-- **The trace property of the dualizing maps over a generic base**, for every
 `ε₀ : Spec Ω ⟶ Spec F` compatible with `ε`: `tr_{Y'} ∘ Ra'_*(θ_N) ∘ χ_a(ω_Y) = σ⁻¹ ∘ Ψ_S(tr_Y)`
-for `q` proper and geometric generic fibre all of `Y ×_F Spec Ω`. If `Y` is nonempty, so is the
-geometric generic fibre, whose structure morphism to `Spec Ω` is then an epimorphism, so that
-`ε₀ = (Spec Ω ⟶ η ⟶ Spec F)` and this is
-`IsTraitModelOfGenericBase.pushforwardExchange_app_comp_map_dualizingMap_comp_trace`;
-if `Y` is empty, `Ra_* ω_Y` vanishes and both sides are morphisms out of a zero object. -/
+for `q` proper and geometric generic fibre all of `Y ×_F Spec Ω`. -/
 theorem pushforwardExchange_app_comp_map_dualizingMap_comp_trace_of_comp_eq
     [IsProper (CondensedRing.toPoint Y).left] [IsProper (CondensedRing.toPoint Y').left]
     (h : N.IsTraitModelOfGenericBase Y ι q g) [IsProper q]
@@ -106,15 +102,11 @@ end IsTraitModelOfGenericBase
 variable (k' : Type u) [Field k'] (ℓ : ℕ) [Fact ℓ.Prime] [IsSepClosed k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
-/-- **Existence of the dualizing maps of nearby cycles over generic bases** (blueprint
-`prose-E-15`): the dualizing map `θ_Y = β_{a_Y}(A)` of blueprint
-`prose-E-15` (5) for separated models of finite type over the trait, the
-exceptional adjoint of the compact-support exchange `ν_{a_Y}` (built from a relative
-compactification over the trait), with its characterising properties: for proper models,
-`ν_a = χ_a⁻¹` gives the trace property (`prose-E-15`), and the composition law
-`sec-Base-change-for-nearby-cycles` (4) for an open immersion followed by the structure morphism
-gives open restriction. This is the generic-base version of
-`NearbyCyclesModel.nonempty_nearbyDualizingData` (the case of a base field). -/
+/-- **Existence of the dualizing maps of nearby cycles over generic bases**:
+the dualizing maps `θ_Y = β_{a_Y}(ℚ̄_ℓ)` of the trait models over generic bases, the exceptional
+adjoints of the compact-support exchanges `ν_{a_Y}`, form a family
+`NearbyCyclesModel.NearbyDualizingDataOfGenericBase`. This is the generic-base version of
+`NearbyCyclesModel.nonempty_nearbyDualizingData`. -/
 theorem nonempty_nearbyDualizingDataOfGenericBase :
     Nonempty (NearbyDualizingDataOfGenericBase k' ℓ) :=
   ⟨{ θ := fun h ↦ h.dualizingMap ℓ

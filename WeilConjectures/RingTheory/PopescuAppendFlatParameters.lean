@@ -19,8 +19,27 @@ import Mathlib.Algebra.MvPolynomial.Rename
 /-!
 # Appending parameters to a residue differential basis
 
-Source: Stacks Project, proof of Tag 07FH, construction of property (1), and
-More on Algebra, Tag 07E6.
+For a geometrically regular algebra localized at `q`, appending suitable generators of the maximal
+ideal to coordinates lifting a residue differential basis gives a flat map from a localized
+polynomial ring.
+
+## Implementation details
+
+Tag 07E6 gives a flat map from the first polynomial localization with regular local closed fibre
+`S`; a subset of the given generators forms a regular system of parameters of `S` (Nakayama and
+Tag 00NQ). The fibre of the extended polynomial localization is regular local at the origin
+(Tag 00OP), so the closed-fibre map is flat (Tag 07DY) and Tag 00MP gives flatness. The cases
+`t = 0`, `r = 0` and a field closed fibre are included. No injectivity of the selected indexing
+function is required.
+
+## References
+
+* [Stacks, Tag 07FH] (construction of property (1))
+* [Stacks, Tag 07E6]
+* [Stacks, Tag 00NQ]
+* [Stacks, Tag 00OP]
+* [Stacks, Tag 07DY]
+* [Stacks, Tag 00MP]
 -/
 
 @[expose] public section
@@ -30,37 +49,7 @@ universe u v w
 namespace Algebra
 
 /-- Appending selected maximal-ideal generators to fixed differential coordinates gives
-flat polynomial coordinates. No admissible subalgebra or enlargement is constructed here.
-Source: Stacks Project, proof of Tag 07FH, from the choice of the differential basis
-through property (1); More on Algebra, Tag 07E6.
-(blueprint: lem-weil-pbc-popescu-append-flat-parameters).
-
-Proof: Localize the geometrically regular algebra at `q`; geometric regularity persists,
-because purely inseparable scalar extension commutes with localization and localization
-preserves regular rings. Identify `F` with its image under `ι`, a finitely generated
-intermediate field of the residue field (essential finite type for field extensions is
-finite generation). Apply 07E6 to the polynomial map on `xs` and the given differential
-basis. This gives a flat map from the first polynomial localization and a regular local
-closed fibre `S`. The images of `ys` generate its maximal ideal. Extract a basis from their
-images in the cotangent space, and retain the corresponding indices `s`. Nakayama makes
-these selected elements generators of the maximal ideal of `S`; their number is its
-embedding dimension, hence its dimension. They are therefore a regular system of parameters
-and a regular sequence by 00NQ. Append precisely these `ys (s i)` to `xs`, using `Fin.addCases`.
-The contracted prime contains the added variables. Its extended ideal is contained in
-`q` and contains the first-coordinate ideal and the selected parameters, whose sum is `q`
-after localization, proving the ideal equality. The fibre of the extended polynomial
-localization over the first one is the polynomial ring over the first residue field
-localized at the origin: its prime contains all new variables, which already generate a
-maximal ideal. By 00OP it is regular local, with the new variables as parameters. Their
-images in `S` are a regular sequence, so 07DY gives flatness of the closed-fibre map.
-Finally 00MP, applied to the first polynomial localization, the extended one, and
-`Localization.AtPrime q` as a module over itself, lifts this fibre flatness and the initial
-flatness to flatness of the extended map. Its restriction to the polynomial ring is the
-explicit `aeval` map by the localization universal property.
-
-If `t = 0`, 07E6 still applies to the empty basis. If the closed fibre is a field, choose
-`e = 0`. If `r = 0`, the localized maximal ideal is zero, so this latter case applies.
-No injectivity of the selected indexing function is required by the conclusion. -/
+flat polynomial coordinates. No admissible subalgebra or enlargement is constructed here. -/
 theorem exists_popescu_append_flat_parameters
     (k : Type u) (Λ : Type v) [Field k] [CommRing Λ] [Algebra k Λ]
     [IsNoetherianRing Λ] (p : ℕ) [CharP k p] (hp : 0 < p)

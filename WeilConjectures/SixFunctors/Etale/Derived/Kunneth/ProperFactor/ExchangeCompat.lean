@@ -17,17 +17,22 @@ Let `j : U ⟶ X` be a morphism of `S`-schemes, `Y` an `S`-scheme, `W = X ×_S Y
 Künneth maps (`AlgebraicGeometry.Etale.kunnethMap`) of `(X, Y)` at `Rj_* F` and of `(U, Y)` at
 `F` are compatible with the exchange map `β : Lq^* Rj_* F ⟶ Rh_* Lp^* F`
 (`AlgebraicGeometry.Etale.derivedBaseChangeMap`) and the composition isomorphism
-`Ra_{X*} Rj_* ≅ Ra_{U*}` (blueprint `lemma-kunneth-finite-direct-image--1`).
+`Ra_{X*} Rj_* ≅ Ra_{U*}`.
 
 As a consequence, for `S = Spec k` with `k` separably closed and `Λ` a finite ring whose exponent
 is invertible in `k`, `RΓ(W, β)` is an isomorphism: this is the projective case of the proof of
-blueprint `corollary-open-direct-image-over-field--2`.
+base change for open immersions along a product projection.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.kunnethMap_derivedBaseChangeMap`
-(`lemma-kunneth-finite-direct-image--1`).
-- `AlgebraicGeometry.Etale.isIso_rightDerivedGlobalSections_map_derivedBaseChangeMap_of_isProper`.
+- `AlgebraicGeometry.Etale.isIso_rightDerivedGlobalSections_map_derivedBaseChangeMap_of_isProper`
+
+## Implementation details
+
+For the projective case, both sides are computed by the Künneth formula with the proper factor
+`Y` (`AlgebraicGeometry.Etale.isIso_kunnethMap_of_isProper`) with the unit `Λ_Y` on `Y`, and
+the two Künneth maps are related by `AlgebraicGeometry.Etale.kunnethMap_derivedBaseChangeMap`.
 -/
 
 @[expose] public section
@@ -133,8 +138,7 @@ lemma leftDerivedUpperStarComp_hom_app_map_counit_comp_derivedSquareUpperStarIso
     ← (leftDerivedUpperStarComp A p j (p ≫ j) rfl).hom.naturality_assoc]
   simp
 
-/-- Blueprint `lemma-kunneth-finite-direct-image--1`: compatibility of the Künneth maps with the
-exchange map of the square
+/-- Compatibility of the Künneth maps with the exchange map of the square
 
 ```
   V --h--> W --r--> Y
@@ -199,8 +203,7 @@ lemma kunnethMap_derivedBaseChangeMap (aX : X ⟶ S) (aY : Y ⟶ S) (aU : U ⟶ 
 /-- The exchange map `β : Lq^* Rj_* F ⟶ Rh_* Lp^* F` of the square of
 `AlgebraicGeometry.Etale.kunnethMap_derivedBaseChangeMap` becomes an isomorphism after `Rc_*`
 as soon as the Künneth maps of `(X, Y)` at `(Rj_* F, Λ_Y)` and of `(U, Y)` at `(F, Λ_Y)` are
-isomorphisms: by `lemma-kunneth-finite-direct-image--1`, `Rc_*(β ⊗ᴸ Lr^* Λ_Y)` is then an
-isomorphism, the projection map of `h` being an isomorphism at the unit. -/
+isomorphisms. -/
 theorem isIso_rightDerivedLowerStar_map_derivedBaseChangeMap_of_isIso_kunnethMap
     (aX : X ⟶ S) (aY : Y ⟶ S) (aU : U ⟶ S)
     (q : W ⟶ X) (r : W ⟶ Y) (c : W ⟶ S) (hq : q ≫ aX = c) (hr : r ≫ aY = c)
@@ -238,20 +241,12 @@ section Point
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {k : Type u} [Field k] [IsSepClosed k]
 
-/-- The projective case of the proof of blueprint `corollary-open-direct-image-over-field--2`.
-
-Let `k` be a separably closed field, `Λ` a ring which is torsion as an additive group,
-`j : U ⟶ X` an open immersion of `k`-schemes, `X` of finite type over `k`, `Y` a proper (e.g.
-projective) `k`-scheme, `W = X ×_k Y` with projections `q`, `r`, and `V = U ×_X W` with
-projections `p : V ⟶ U`, `h : V ⟶ W`. For every `E ∈ D(U_ét, Λ)` the exchange map
-`β : Lq^* Rj_* E ⟶ Rh_* Lp^* E` (`AlgebraicGeometry.Etale.derivedBaseChangeMap`) induces an
-isomorphism `RΓ(W, Lq^* Rj_* E) ≅ RΓ(W, Rh_* Lp^* E)`.
-
-Following the blueprint, both sides are computed by the Künneth formula with the proper factor
-`Y` (`AlgebraicGeometry.Etale.isIso_kunnethMap_of_isProper`,
-`corollary-open-direct-image-over-field--2`) with the unit `Λ_Y` on `Y`, and the two Künneth maps
-are related by `AlgebraicGeometry.Etale.kunnethMap_derivedBaseChangeMap`
-(`lemma-kunneth-finite-direct-image--1`). -/
+/-- The projective case of base change for open immersions: let `k` be a separably closed field, `Λ`
+a ring which is torsion as an additive group, `j : U ⟶ X` an open immersion of `k`-schemes, `X` of
+finite type over `k`, `Y` a proper (e.g. projective) `k`-scheme, `W = X ×_k Y` with projections `q`,
+`r`, and `V = U ×_X W` with projections `p : V ⟶ U`, `h : V ⟶ W`. For every `E ∈ D(U_ét, Λ)` the
+exchange map `β : Lq^* Rj_* E ⟶ Rh_* Lp^* E` (`AlgebraicGeometry.Etale.derivedBaseChangeMap`)
+induces an isomorphism `RΓ(W, Lq^* Rj_* E) ≅ RΓ(W, Rh_* Lp^* E)`. -/
 theorem isIso_rightDerivedGlobalSections_map_derivedBaseChangeMap_of_isProper
     (hΛ : IsAddTorsion Λ) {X Y U W V : Scheme.{u}} (aX : X ⟶ Spec (.of k))
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsProper aY]

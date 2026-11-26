@@ -26,15 +26,19 @@ bounded constructible complex along a geometric point `x̄ : Spec Ω ⟶ X` is a
 a finite direct sum of copies of the unit
 (`ProEtale.CondensedRing.isFiniteFree_upperStar_homology`).
 
+## Implementation details
+
 The first two statements are transported, along the equivalence `p^*` from condensed
-`ℚ̲̄_ℓ`-modules (`ProEtale.CondensedRing.isEquivalence_upperStarFromPointMod`, blueprint node
-`proposition-pro-etale-site-separably-closed`), from the regular module `ℚ̲̄_ℓ`, whose
-endomorphisms are the constants `ℚ̄_ℓ` (`Profinite.PadicAlgCl.isIso_of_ne_zero_end_regular`,
+`ℚ̲̄_ℓ`-modules (`ProEtale.CondensedRing.isEquivalence_upperStarFromPointMod`), from the regular
+module `ℚ̲̄_ℓ`, whose endomorphisms are the constants `ℚ̄_ℓ`
+(`Profinite.PadicAlgCl.isIso_of_ne_zero_end_regular`,
 `Profinite.PadicAlgCl.one_ne_zero_end_regular`). The third combines the finite presentation of
 the stalks of constructible module objects
 (`ProEtale.CondensedRing.isFinitelyPresented_upperStar_of_isConstructibleModuleObject`) with the
 rank normal form of morphisms between finite powers of the unit
-(`CategoryTheory.Limits.exists_iso_biproduct_cokernel`).
+(`CategoryTheory.Limits.exists_iso_biproduct_cokernel`): the restriction to the stratum through
+`x̄` is pro-étale locally finitely presented, every pro-étale cover of `Spec Ω` has a section, and
+a finitely presented module over the field `ℚ̄_ℓ = End (𝟙_ Mod_{Spec Ω})` is free.
 
 -/
 
@@ -77,9 +81,7 @@ theorem one_ne_zero_end_tensorUnit :
     (Profinite.PadicAlgCl.one_ne_zero_end_regular ℓ)
 
 /-- The pullback of a homology sheaf `Hʲ(K)` of a bounded constructible complex along a
-geometric point `x̄ : Spec Ω ⟶ X` is finite free: its restriction to the stratum through `x̄` is
-pro-étale locally finitely presented, every pro-étale cover of `Spec Ω` has a section, and a
-finitely presented module over the field `ℚ̄_ℓ = End (𝟙_ Mod_{Spec Ω})` is free. -/
+geometric point `x̄ : Spec Ω ⟶ X` is finite free. -/
 theorem isFiniteFree_upperStar_homology {k : Type u} [Field k] [Fact (ringChar k).Prime]
     [Fact (ringChar k ≠ ℓ)] {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom]
     [QuasiCompact X.hom] [IsSeparated X.hom] (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)

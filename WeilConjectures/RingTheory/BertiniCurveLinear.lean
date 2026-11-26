@@ -18,7 +18,12 @@ Let `A` be a finite type algebra over an algebraically closed field `k` and `S` 
 maximal ideals of `A`. We construct finitely many elements `v i` of `A` which all vanish on `S`,
 whose common zero locus is exactly `S`, which span `m / m²` for `m ∈ S` and `A / m²` for maximal
 `m ∉ S` (`exists_linearSystem_of_finite`). This is the linear system used in the ring-level
-Bertini argument (blueprint: `lemma-curve-preserving-finite-cover--1`).
+Bertini argument for curve-preserving finite covers.
+
+## Implementation details
+
+The `v i` are the products of generators `g j` of the ideal `⋂ S` with algebra generators of `A`
+(and `1`).
 -/
 
 @[expose] public section
@@ -119,9 +124,7 @@ end LinearSystem
 /-- **A linear system with base locus `S`.** Let `A` be a finite type algebra over an
 algebraically closed field `k` and `S` a finite set of maximal ideals. There are finitely many
 elements `v i` of `A` vanishing at every point of `S`, with common zero locus exactly `S`, which
-span `A / m²` over `k` for maximal `m ∉ S` and span `m / m²` for `m ∈ S`: take generators `g j`
-of the ideal `⋂ S` times algebra generators of `A` (and `1`).
-(blueprint: `lemma-curve-preserving-finite-cover--1`) -/
+span `A / m²` over `k` for maximal `m ∉ S` and span `m / m²` for `m ∈ S`. -/
 theorem exists_linearSystem_of_finite {k A : Type*} [Field k] [IsAlgClosed k] [CommRing A]
     [Algebra k A] [Algebra.FiniteType k A] (S : Set (Ideal A)) (hS : S.Finite)
     (hSmax : ∀ m ∈ S, m.IsMaximal) :

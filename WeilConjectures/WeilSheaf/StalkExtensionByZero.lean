@@ -17,11 +17,10 @@ import WeilConjectures.WeilSheaf.StalkUpperStar
 # Stalks of the extension by zero of a Weil sheaf
 
 Let `j : U ⟶ X` be a quasi-compact open immersion of `k₀`-schemes and `G` a Weil sheaf on `U`.
-The extension by zero `j₀!G` (`AlgebraicGeometry.WeilSheaf.extensionByZero`) has the stalk
-prescription of blueprint `proposition-extension-zero-restriction-closed-subscheme`: at a closed
-point `j z` of `U` its geometric stalk, with its local Frobenius, is that of `G` at `z`, and at a
-closed point outside `U` it vanishes. In particular `j₀!` preserves punctual purity, and, being
-exact, mixed upper weight bounds.
+The extension by zero `j₀!G` (`AlgebraicGeometry.WeilSheaf.extensionByZero`) has the expected
+stalks: at a closed point `j z` of `U` its geometric stalk, with its local Frobenius, is that of
+`G` at `z`, and at a closed point outside `U` it vanishes. In particular `j₀!` preserves punctual
+purity, and, being exact, mixed upper weight bounds.
 
 ## Main statements
 
@@ -29,8 +28,7 @@ exact, mixed upper weight bounds.
   closed point outside `U` vanishes, since the pullback of `j̄_!G` along a geometric point
   missing `Ū` vanishes.
 - `AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_extensionByZero`: the stalk of `j₀!G` at a
-  closed point `j z` of `U` is that of `G` at `z`, with its local Frobenius
-  (`proposition-extension-zero-restriction-closed-subscheme`).
+  closed point `j z` of `U` is that of `G` at `z`, with its local Frobenius.
 - `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.extensionByZero` and
   `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.extensionByZero`: `j₀!` preserves
   punctual purity and mixed upper weight bounds.
@@ -51,9 +49,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
 
 /-- The stalk of the extension by zero `j₀!G` at a closed point `x` outside the open subscheme
-`U` vanishes: the geometric point over `x` misses the image of `Ū`, and the pullback of `j̄_!G`
-along a morphism missing the image of `Ū` vanishes
-(`AlgebraicGeometry.ProEtale.isZero_adicUpperStar_adicOpenImmersionLowerShriek`). -/
+`U` vanishes. -/
 theorem subsingleton_stalk_extensionByZero (G : WeilSheaf k₀ l U) (x : X.finitePoints)
     (hx : x.1 ∉ Set.range j.base) :
     Subsingleton (((extensionByZero j).obj G).stalk x).carrier := by
@@ -91,10 +87,8 @@ private lemma stalkAt_eq_of_degree_eq (F : WeilSheaf k₀ l X)
   subst n
   rfl
 
-/-- **The stalks of the extension by zero inside `U`** (blueprint:
-`proposition-extension-zero-restriction-closed-subscheme`, `(j_!K)_x̄ = K_x̄` for a geometric point
-`x̄` of `U`): the geometric stalk of `j₀!G` at a closed point `j z` of `U`, with its local
-Frobenius, is that of `G` at `z`. -/
+/-- **The stalks of the extension by zero inside `U`**: the geometric stalk of `j₀!G` at a
+closed point `j z` of `U`, with its local Frobenius, is that of `G` at `z`. -/
 theorem nonempty_equiv_stalk_extensionByZero (G : WeilSheaf k₀ l U) (z : U.finitePoints) :
     Nonempty ((((extensionByZero j).obj G).stalk
       ⟨j.base z.1, (Scheme.Hom.mem_finitePoints_iff_of_isIso j z.1).2 z.2⟩).Equiv
@@ -155,8 +149,7 @@ theorem nonempty_equiv_stalk_extensionByZero (G : WeilSheaf k₀ l U) (z : U.fin
   exact ⟨e₀.trans (e₁.trans e₂)⟩
 
 /-- The extension by zero `j₀!G` of a Weil sheaf punctually `ι`-pure of weight `w` is punctually
-`ι`-pure of weight `w`: its stalks at the closed points of `U` are those of `G`, with the same
-residue fields, and its other stalks vanish. -/
+`ι`-pure of weight `w`. -/
 theorem IsPunctuallyPureOfWeight.extensionByZero {ι : PadicAlgCl l →+* ℂ} {G : WeilSheaf k₀ l U}
     {w : ℝ} (hG : G.IsPunctuallyPureOfWeight ι w) :
     ((WeilSheaf.extensionByZero j).obj G).IsPunctuallyPureOfWeight ι w := by

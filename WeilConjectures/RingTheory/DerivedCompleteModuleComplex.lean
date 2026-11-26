@@ -12,9 +12,18 @@ public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 /-!
 # Derived completeness of module complexes
 
-Source: Stacks Project, More on Algebra, Section 15.93 (Tag 091N), notation `T(K,f)`,
-and Definition 15.93.4 (Tag 091S)
-(auxiliary; not a blueprint node).
+This file defines derived completeness of objects of `D(A)` and of `A`-modules with respect to
+an ideal, using the derived limit `T(K, f)` of multiplication-by-`f` towers.
+
+## Implementation details
+
+The definition quantifies over product structures, so the Roos-triangle condition can be
+expressed without choosing a product or imposing an additional product hypothesis.
+
+## References
+
+* [Stacks, Tag 091N]
+* [Stacks, Tag 091S]
 -/
 
 @[expose] public section
@@ -26,11 +35,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace DerivedCategory
 
 /-- An object of `D(A)` is derived complete for `I` when every derived limit of the
-constant tower with transition multiplication by `f` is zero, for every `f ∈ I`.
-We quantify over product structures to express the Roos-triangle condition without
-choosing one or imposing an additional product hypothesis on the object.
-Source: Stacks Project, Tags 091N and 091S
-(auxiliary; not a blueprint node). -/
+constant tower with transition multiplication by `f` is zero, for every `f ∈ I`. -/
 noncomputable def IsDerivedComplete {A : Type u} [CommRing A]
     [HasDerivedCategory.{w} (ModuleCat.{v} A)] (I : Ideal A)
     (K : DerivedCategory (ModuleCat.{v} A)) : Prop :=
@@ -43,8 +48,7 @@ end DerivedCategory
 namespace ModuleCat
 
 /-- A module is derived complete for `I` if its complex concentrated in degree zero is
-derived complete. Source: Stacks Project, Definition 15.93.4 (Tag 091S)
-(auxiliary; not a blueprint node). -/
+derived complete. -/
 noncomputable def IsDerivedComplete {A : Type u} [CommRing A]
     [HasDerivedCategory.{w} (ModuleCat.{v} A)] (I : Ideal A) (M : ModuleCat.{v} A) : Prop :=
   DerivedCategory.IsDerivedComplete I ((DerivedCategory.singleFunctor (ModuleCat.{v} A) 0).obj M)

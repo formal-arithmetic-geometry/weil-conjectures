@@ -9,7 +9,18 @@ public import WeilConjectures.WeilSheaf.NativeWeilTensorPresentation.NativeWeilT
 public import WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForgetTensorTranspositionData
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
-/-! # Evaluation-normalized ordinary tensor coherence data -/
+/-! # Evaluation-normalized ordinary tensor coherence data
+
+## Implementation details
+
+The normalization equations in `OrdinaryRingedTensorCoherence` fix every tensorator
+uniquely, and its first clause retains symmetry relative to the actual ordinary balanced
+tensor. It is a property of specified data, not a choice of an unrelated monoidal structure.
+
+## References
+
+* Stacks 06YS, 06YU, 0FPT
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -28,8 +39,7 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   (H : Functor.uncurry.obj (ordinaryIhomBifunctor l Y) ⋙ E.functor ≅
     E.functor.op.prod E.functor ⋙ Functor.uncurry.obj (SheafOfModules.homFunctor (R := R)))
 
-/-- A binary comparison fixed uniquely by its tensor--Hom mate.
-Source: Stacks 06YS, 06YU (blueprint: new-sf-ordinary-ringed-tensor-coherence-data). -/
+/-- A binary comparison fixed uniquely by its tensor--Hom mate. -/
 structure OrdinaryRingedTensorUnderivedData where
   underived (P Q : ProEtale.AdicSheaf l Y) :
     E.functor.obj (((ordinaryTensorBifunctor l
@@ -54,8 +64,7 @@ set_option maxHeartbeats 1200000 in
 -- Elaborating the concrete tensor instances requires large definitional comparisons.
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
-/-- A normalized comparison on the existing ordinary and ringed cochain tensors.
-Source: Stacks 0FPT (blueprint: new-sf-ordinary-ringed-tensor-coherence-data). -/
+/-- A normalized comparison on the existing ordinary and ringed cochain tensors. -/
 structure OrdinaryRingedTensorChainComparison
     (κ : ∀ P Q : CochainComplex (ProEtale.AdicSheaf l
         Y) ℤ,
@@ -88,12 +97,7 @@ structure OrdinaryRingedTensorChainComparison
       tensor.hom.app (P ⊗ Q, N) ≫ (tensor.hom.app (P, Q) ▷ G.obj N) ≫
         (α_ (G.obj P) (G.obj Q) (G.obj N)).hom
 
-/-- The Hom comparison is the one arising from a coherent ordinary tensor comparison.
-The normalization equations fix every tensorator uniquely. The first clause retains
-symmetry relative to the actual ordinary balanced tensor. This is a property of
-specified data, not a choice of an unrelated monoidal structure.
-Source: Stacks 06YS, 06YU, 0FPT
-(blueprint: new-sf-ordinary-ringed-tensor-coherence-data). -/
+/-- The Hom comparison is the one arising from a coherent ordinary tensor comparison. -/
 def OrdinaryRingedTensorCoherence : Prop :=
   (∀ (d : OrdinaryRingedTensorUnderivedData l Y J R E H)
     (P Q : ProEtale.AdicSheaf l Y),

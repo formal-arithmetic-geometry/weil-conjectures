@@ -50,10 +50,12 @@ set_option linter.privateModule false
 /-!
 # The counit identity for the integral inverse-image comparison
 
-Source: blueprint Global powers in
-`sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md`;
-Stacks Project, Tags 0FND, 0DVC, 03CZ, 06YY and 0941
-(blueprint: lem-trf-integral-pullback-resolution-matching).
+Auxiliary lemmas computing the integral inverse-image comparison through a chosen K-flat
+resolution and transporting counit identities along it.
+
+## References
+
+* Stacks Project, Tags 0FND, 0DVC, 03CZ, 06YY, 0941
 -/
 
 @[expose] public noncomputable section

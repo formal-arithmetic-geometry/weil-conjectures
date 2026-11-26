@@ -12,8 +12,13 @@ import WeilConjectures.CategoryTheory.UnboundedExactTower.UnboundedExactAdjuncti
 
 /-! # Unit normalization of native direct evaluation
 
-Source: Zheng, Construction 4.1; Stacks 0D6E and 0D6J
-(blueprint: lem-weil-compact-support-raw-direct-normalization).
+Native ordinary direct image of varying-ring module systems commutes with level evaluation
+compatibly with the derived units.
+
+## References
+
+* Zheng, Construction 4.1.
+* Stacks Project, Tags 0D6E and 0D6J.
 -/
 
 @[expose] public noncomputable section
@@ -52,14 +57,8 @@ private theorem cochainUnit_eq
   rfl
 
 -- Native and level module categories share a concrete sequence-site presentation.
-/-- Native ordinary direct evaluation satisfies the derived unit equation.
-Source: Zheng, Construction 4.1; Stacks 0D6E and 0D6J.
-(blueprint: lem-weil-compact-support-raw-direct-normalization).
-Proof: moduleEvalG is normalized by the ordinary adjunction units, so the inverse-mate
-identity identifies its mate with moduleEvalP. Apply the existing localized mate's
-cochain normalization to moduleEvalG.symm. Compose with the evaluation localization
-factor, cancel its inverse, and identify the cochain unit with rightDerivedFunctorUnitQ.
-Unfolding the specified evalP mate then gives precisely the unit-normalization equation. -/
+/-- The level-`n` evaluation square for native ordinary direct image, with comparisons
+`moduleEvalP` and `evalP`, is unit-normalized. -/
 theorem compactSupportRawDirectNormalization
     (R : ℕ → CommRingCat.{u + 1}) (q : ∀ n, R (n + 1) ⟶ R n)
     {Z Y : Scheme.{u}} (g : Z ⟶ Y) (n : ℕ) :

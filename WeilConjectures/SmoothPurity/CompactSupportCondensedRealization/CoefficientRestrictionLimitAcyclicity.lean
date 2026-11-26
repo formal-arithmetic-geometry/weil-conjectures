@@ -13,9 +13,20 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 
 /-! # Limit acyclicity of resolved coefficient systems
 
-Source: Stacks Project, Tags 0940 and 0941; blueprint compact-support realization,
-Step 11 (acyclicity part).
-(blueprint: lem-pur-coefficient-restriction-limit-acyclicity). -/
+The underlying completed-coefficient towers of a K-injective coefficient system, and their
+coefficient restrictions, are acyclic for the inverse limit.
+
+## Implementation details
+
+Coefficient systems are identified with strict systems by the exact vertical-slice equivalence,
+and restricted-tower resolution acyclicity is applied both over the source field and over the
+source completed ring acting on the target quotient system, using the supplied strict tower
+comparison. Scalar restriction is not asserted to preserve K-injective complexes.
+
+## References
+
+* Stacks Project, Tags 0940, 0941, 0D6E.
+-/
 
 @[expose] public noncomputable section
 set_option synthInstance.maxSize 4096
@@ -60,22 +71,9 @@ private theorem unit_isIso_of_acyclic
     infer_instance
   exact IsIso.of_isIso_comp_right _ (G.rightDerivedFunctor.map (DerivedCategory.Q.map j))
 
-/-- The underlying completed-coefficient towers of a K-injective system, including
-its coefficient restriction, are acyclic for inverse limit.
-Source: Stacks Project, Tags 0940, 0941 and 0D6E
-(blueprint: lem-pur-coefficient-restriction-limit-acyclicity).
-Proof: identify coefficient systems with strict systems using the exact vertical-slice
- equivalence. For the source field apply restricted-tower resolution acyclicity.
-For the source completed ring acting on the target-field quotient system, compose
-its completed coefficient map with the target projection cone. The generic restricted
-system functor for this cone is termwise completed restriction of the target tower:
-both the scalar actions and all transition maps agree. The supplied strict tower
-comparison identifies this tower with restriction of the coefficient system followed
-by source-field tower restriction. Apply the same generic acyclicity theorem over
-this source completed ring. Naturality of the actual universal limit unit along a
-K-injective tower resolution identifies it with an isomorphism, because inverse
-limit sends that resolution map to a quasi-isomorphism. No preservation of
-K-injective complexes by scalar restriction is asserted. -/
+/-- For a K-injective coefficient system `I`, the derived limit units of its underlying
+completed-coefficient tower and of the coefficient restriction of that tower are
+isomorphisms. -/
 theorem coefficientRestrictionLimitAcyclicity
     (l : ℕ) [Fact l.Prime] (E F : Type u) [NormedField E] [NormedField F]
     [NormedAlgebra ℚ_[l] E] [NormedAlgebra ℚ_[l] F]

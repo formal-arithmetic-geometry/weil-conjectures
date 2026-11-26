@@ -13,8 +13,13 @@ import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryOpenTensorSupport
 
 /-! # Forgetting normalization for the native open tensor
 
-Source: Stacks 0GL1 and 0E8I, native open tensor proof step 8
-(blueprint: new-lem-sf-native-open-tensor-forget-normalization).
+The native derived open tensor presentation admits the prescribed ordinary forgetting
+comparison data: forgetting the normalized representative squares through the exact open
+functors identifies them with the ordinary unit-normalized squares.
+
+## References
+
+* [Stacks, Tags 0GL1, 0E8I, 015F]
 -/
 
 @[expose] public noncomputable section
@@ -371,13 +376,7 @@ variable
   [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
 
 /-- The native derived open tensor presentation admits the prescribed ordinary
-forgetting comparison data.
-
-Source: Stacks 0GL1, 0E8I and 015F; forgetting the normalized representative
-squares through the exact open functors identifies them with the ordinary
-unit-normalized squares. The proof uses the fixed tensor comparisons, the
-ordinary open tensor theorem, and the Frobenius resolution theorem.
-(blueprint: new-lem-sf-native-open-tensor-forget-normalization). -/
+forgetting comparison data. -/
 theorem native_open_tensor_forget_normalization (s : NativeOpenTensorData k₀ l j)
     (rho : nativeDerivedTensor k₀ l Z ⋙ nativeOpenPull k₀ l j ≅
       (nativeOpenPull k₀ l j).prod (nativeOpenPull k₀ l j) ⋙ nativeDerivedTensor k₀ l U)

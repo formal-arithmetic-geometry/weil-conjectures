@@ -12,6 +12,23 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 import Mathlib.LinearAlgebra.Matrix.Rank
 import Mathlib.RingTheory.TensorProduct.Free
 
+/-!
+# Split localizations of maps of finite free modules
+
+A map of finite free modules that is injective on the residue field at a prime `p` becomes split
+injective with finite free cokernel after inverting an element outside `p`, and one that is
+bijective there becomes bijective.
+
+## Implementation details
+
+Choose a maximal minor with determinant outside `p`, localize at it and use elementary row and
+column operations; in the square case use the adjugate matrix.
+
+## References
+
+* [Stacks, Tag 00O0] (1), (3)
+-/
+
 @[expose] public section
 
 namespace Module
@@ -127,11 +144,9 @@ private theorem exists_nonzero_minor
   exact (Matrix.isUnit_iff_isUnit_det _).mp
     (Matrix.linearIndependent_row_iff_isUnit.mp (hrows.symm ▸ c.linearIndependent)) |>.ne_zero
 
-/-- A matrix minor argument gives a split localized map and a free cokernel, while an
-isomorphism on the residue field gives an explicit inverse after localization. The proof is
-Stacks Project, Algebra, Tag 00O0, parts (1) and (3): choose a nonvanishing maximal minor,
-localize at its determinant, and use elementary row and column operations; in the square case
-use the adjugate matrix. (blueprint: lem-pc-finite-free-map-residue-localization-strong) -/
+/-- If `u : R^m → R^n` is injective on the residue field of a prime `p`, then after inverting
+some `f ∉ p` it has a left inverse and finite free cokernel; if it is bijective on the residue
+field, then it is bijective after inverting some `f ∉ p`. -/
 theorem finiteFreeMap_residue_localization_strong
     {R : Type*} [CommRing R] (m n : ℕ)
     (u : (Fin m → R) →ₗ[R] (Fin n → R)) (p : Ideal R) [p.IsPrime] :

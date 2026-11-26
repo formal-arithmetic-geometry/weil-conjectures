@@ -46,15 +46,18 @@ import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTowerCore
 
 /-! # Simultaneous quotient realization of completed comparisons
 
-The construction data are owned by
-(blueprint: def-pur-completed-comparison-quotient-realization-data).
+This file defines the data for a simultaneous quotient realization of completed comparisons:
+recursive substitution of strict quotient representatives into finite constructor
+expressions, the induced completed transport maps, and their scalar-extension squares.
 
-Source: the integral reduction compatibility in the Weil blueprint,
-`prose-03-02`, and its representative refinement
-(blueprint: lem-pur-completed-comparison-quotient-realization).
+## Implementation details
 
-Natural level n means positive quotient exponent n+1. All maps below are maps
+Natural level `n` means positive quotient exponent `n+1`. All maps below are maps
 of entire coefficient systems before evaluation or total derived limit.
+
+## References
+
+* Stacks Project, Tags 03D2, 03EL, 06YS, 06YY, 07A2, 07A4, 0941, 099N, 0D6D, 0G7E.
 -/
 
 @[expose] public noncomputable section
@@ -84,17 +87,13 @@ universe u
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The actual ordinary reduction diagram of a representative, not a new resolution.
-Source: Stacks 0941, quotient construction
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+/-- The actual ordinary reduction diagram of a representative. -/
 abbrev quotient {Y : Scheme.{u}}
     (P : CochainComplex (scalarReductionSource l E Y) ℤ) :=
   ((pullbackTensorOrdinaryReduction l E Y).mapHomologicalComplex (.up ℤ)).obj P
 
 /-- Evaluate the existing finite constructor trees using the specified completed
-operations. The unit is the total limit of the actual coefficient unit system.
-Source: integral finite-expression clause
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+operations. The unit is the total limit of the actual coefficient unit system. -/
 def value {Z X Y : Scheme.{u}} {h : Z ⟶ X} {f : X ⟶ Y} {r : ℕ} :
     {W : Scheme.{u}} → StrictQuotient.Expression h f r W →
       ((Fin r → DerivedCategory (scalarReductionSource l E Y)) ⥤
@@ -118,9 +117,7 @@ def value {Z X Y : Scheme.{u}} {h : Z ⟶ X} {f : X ⟶ Y} {r : ℕ} :
   | _, .pullHF A => value A ⋙ integralDerivedPullback l E (h ≫ f)
 
 /-- Translate the already recorded finite syntax to the shared structural-map
-syntax. This retains each constructor and its actual scheme morphism.
-Source: finite-expression and coherence clauses
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+syntax. This retains each constructor and its actual scheme morphism. -/
 def expression {Z X Y : Scheme.{u}} {h : Z ⟶ X} {f : X ⟶ Y} {r : ℕ} :
     {W : Scheme.{u}} → StrictQuotient.Expression h f r W →
       CompletedOperations.Expression (fun V : Scheme.{u} ↦ V) (fun _ : Fin r ↦ Y) W
@@ -133,18 +130,14 @@ def expression {Z X Y : Scheme.{u}} {h : Z ⟶ X} {f : X ⟶ Y} {r : ℕ} :
   | _, .pullH A => .pullback h (expression A)
   | _, .pullHF A => .pullback (h ≫ f) (expression A)
 
-/-- Interpret that same syntax by the existing strict-system interpretation.
-Source: finite-expression and coherence clauses
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+/-- Interpret that same syntax by the existing strict-system interpretation. -/
 abbrev strictValue {Z X Y : Scheme.{u}} {h : Z ⟶ X} {f : X ⟶ Y} {r : ℕ}
     (N : Fin r → StrictQuotient.Complex l E Y) {W : Scheme.{u}}
     (A : StrictQuotient.Expression h f r W) :=
   IntegralCoherence.value l E (W := fun V : Scheme.{u} ↦ V) N (expression A)
 
 /-- The specified coherent reduction of a substitution map, followed by the actual
-counit. This formula does not assume that the substitution is invertible.
-Source: whole-system equation, proof step 4
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+counit. -/
 def reduction {W : Scheme.{u}}
     {K : DerivedCategory (scalarReductionSource l E W)}
     {A : coefficientSequenceDerived l E W}
@@ -154,9 +147,7 @@ def reduction {W : Scheme.{u}}
     (pullbackTensorCalculus l E W).adjunction.counit.app A
 
 /-- Tensor substitution is its actual Roos-normalized realization followed by the
-image of the two coherent reduction maps, then the fixed K-flat tensor model.
-Source: proof steps 1 and 4; Stacks 07A4, 0941
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+image of the two coherent reduction maps, then the fixed K-flat tensor model. -/
 def tensorSubstitution {W : Scheme.{u}}
     {K H : DerivedCategory (scalarReductionSource l E W)}
     (A B : StrictQuotient.Complex l E W)
@@ -176,13 +167,7 @@ def tensorSubstitution {W : Scheme.{u}}
 attribute [local irreducible] tensorSubstitution
 
 /-- The two recorded sequence interfaces use the same constant-section ring map
-and the same sectionwise right adjoint, hence the same chosen left adjoint.
-Source: Stacks 03D2, 0941; actual finite pullbacks in the node
-(blueprint: lem-pur-completed-comparison-quotient-realization).
-Proof: uniqueness in pullbackTensorSequenceRing_existsUnique identifies its ring
-map with integralComparisonSequenceRingMap. Unfold the two direct images; they
-are the same pushforward. Their IsRightAdjoint proofs agree by proof irrelevance.
-Applying Functor.leftAdjoint to that equality gives the asserted equality. -/
+and the same sectionwise right adjoint, hence the same chosen left adjoint. -/
 theorem sequencePullback_eq {V W : Scheme.{u}} (g : V ⟶ W) :
     pullbackTensorSequenceInverse l E g = integralComparisonSequencePullback l E g := by
   have hr : pullbackTensorSequenceRing l E g = integralComparisonSequenceRingMap l E g := by
@@ -203,17 +188,12 @@ theorem sequencePullback_eq {V W : Scheme.{u}} (g : V ⟶ W) :
     rfl
   exact chosen _ _ hd
 
-/-- Transport between the two names of the same actual strict inverse image.
-Source: Stacks 03D2, 0941
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+/-- Transport between the two names of the same actual strict inverse image. -/
 def pullBridge {V W : Scheme.{u}} (g : V ⟶ W) :=
   NatIso.mapHomologicalComplex (eqToIso (sequencePullback_eq l E g)) (.up ℤ)
 
 /-- The specified strict comparison on quotient systems, transported only across
-the recorded equality of inverse-image interfaces. Its hom and inverse retain
-all horizontal maps because this is an isomorphism of sequence complexes.
-Source: Stacks 07A4; the displayed c and inverse in the node
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+the recorded equality of inverse-image interfaces. -/
 def comparison {V W : Scheme.{u}} (g : V ⟶ W)
     (P Q : StrictQuotient.Complex l E W) :
     StrictQuotient.pull l E g (StrictQuotient.total l E P Q) ≅
@@ -228,9 +208,7 @@ def comparison {V W : Scheme.{u}} (g : V ⟶ W)
 attribute [local irreducible] comparison pullBridge
 
 /-- Pullback substitution uses the actual primitive realization, its counit, and
-exact localization of this very strict inverse image.
-Source: proof steps 1 and 4; Stacks 099N, 0941
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+exact localization of this very strict inverse image. -/
 def pullSubstitution {V W : Scheme.{u}} (g : V ⟶ W)
     {K : DerivedCategory (scalarReductionSource l E W)}
     (A : StrictQuotient.Complex l E W)
@@ -248,9 +226,7 @@ def pullSubstitution {V W : Scheme.{u}} (g : V ⟶ W)
 attribute [local irreducible] pullSubstitution
 
 /-- Recursive substitution from specified leaf comparisons. Tensor and pullback
-vertices use the actual primitive counit formulas, retaining every parenthesis.
-Source: proof step 1 and the displayed beta comparisons
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+vertices use the actual primitive counit formulas, retaining every parenthesis. -/
 def substituteInputs {Z X Y : Scheme.{u}} {h : Z ⟶ X} {f : X ⟶ Y} {r : ℕ}
     (N : Fin r → StrictQuotient.Complex l E Y)
     (M : Fin r → DerivedCategory (scalarReductionSource l E Y))
@@ -273,9 +249,7 @@ def substituteInputs {Z X Y : Scheme.{u}} {h : Z ⟶ X} {f : X ⟶ Y} {r : ℕ}
 
 attribute [local irreducible] substituteInputs
 
-/-- Substitute simultaneous representatives using the actual reconstruction unit at leaves.
-Source: proof step 1 and the displayed beta comparisons
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+/-- Substitute simultaneous representatives using the actual reconstruction unit at leaves. -/
 def substitution {Z X Y : Scheme.{u}} {h : Z ⟶ X} {f : X ⟶ Y} {r : ℕ}
     (P : Fin r → (integralOperationsGoodComplex l E Y).FullSubcategory)
     (M : Fin r → DerivedCategory (scalarReductionSource l E Y))
@@ -293,19 +267,14 @@ def substitution {Z X Y : Scheme.{u}} {h : Z ⟶ X} {f : X ⟶ Y} {r : ℕ}
 
 attribute [local irreducible] substitution
 
-/-- Whole-system K-flatness needed to evaluate the normalized tensor models.
-Source: finite-expression clause, proof step 1
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+/-- Whole-system K-flatness needed to evaluate the normalized tensor models. -/
 abbrev GoodExpressions {Z X Y : Scheme.{u}} (h : Z ⟶ X) (f : X ⟶ Y) {r : ℕ}
     (P : Fin r → (integralOperationsGoodComplex l E Y).FullSubcategory) : Prop :=
   ∀ {W : Scheme.{u}} (A : StrictQuotient.Expression h f r W),
     StrictQuotient.SystemGood l E (strictValue l E (fun i ↦ quotient l E (P i).obj) A)
 
 /-- The canonical completed image of a strict arrow, with both vertices fixed
-by recursive substitution. This also defines the completed structural maps by
-their representative normalization; there is no independent isomorphism choice.
-Source: comparison, coherence and counit clauses, proof steps 2--5
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+by recursive substitution. -/
 def transport {Z X Y : Scheme.{u}} {h : Z ⟶ X} {f : X ⟶ Y} {r : ℕ}
     (P : Fin r → (integralOperationsGoodComplex l E Y).FullSubcategory)
     (M : Fin r → DerivedCategory (scalarReductionSource l E Y))
@@ -323,22 +292,16 @@ def transport {Z X Y : Scheme.{u}} {h : Z ⟶ X} {f : X ⟶ Y} {r : ℕ}
 
 attribute [local irreducible] transport
 
-/-- The two expressions defining K_s and K_t, with the first two inputs at Y.
-Source: displayed K_s,K_t equation
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+/-- The two expressions defining K_s and K_t, with the first two inputs at Y. -/
 def sourceExpression {Z X Y : Scheme.{u}} (h : Z ⟶ X) (f : X ⟶ Y) :
     StrictQuotient.Expression h f 3 X := .pullF (.tensor (.input 0) (.input 1))
 
-/-- The tensor of the two completed pullbacks, with the displayed parentheses.
-Source: displayed K_s,K_t equation
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+/-- The tensor of the two completed pullbacks, with the displayed parentheses. -/
 def targetExpression {Z X Y : Scheme.{u}} (h : Z ⟶ X) (f : X ⟶ Y) :
     StrictQuotient.Expression h f 3 X := .tensor (.pullF (.input 0)) (.pullF (.input 1))
 
 /-- Naturality of the fixed completed comparison under all derived morphisms;
-the input full subcategory imposes no restriction on its Hom sets.
-Source: derived naturality clause, proof step 3
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+the input full subcategory imposes no restriction on its Hom sets. -/
 def NaturalComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] : Prop :=
@@ -355,17 +318,13 @@ def NaturalComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
 variable (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-/-- The two coefficient rows of the actual strict scalar-expression calculus.
-Source: scalar quotient paragraph
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+/-- The two coefficient rows of the actual strict scalar-expression calculus. -/
 def ScalarComplex (d : Bool) (W : Scheme.{u}) :=
   if d then StrictQuotient.Complex l L W else StrictQuotient.Complex l E W
 
 /-- The least family of finite expressions using the given three inputs, units,
-tensor, the displayed pullbacks, and the actual coefficient extension. It records
-both orders of scalar change and pullback; no closure property is assumed.
-Source: scalar quotient and finite-expression paragraphs
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+tensor, the displayed pullbacks, and the actual coefficient extension, in both
+orders of scalar change and pullback. -/
 inductive ScalarGenerated {Z X Y : Scheme.{u}} (h : Z ⟶ X) (f : X ⟶ Y)
     (N : Fin 3 → StrictQuotient.Complex l E Y) :
     (d : Bool) → (W : Scheme.{u}) → ScalarComplex l E L d W → Prop where
@@ -392,9 +351,7 @@ inductive ScalarGenerated {Z X Y : Scheme.{u}} (h : Z ⟶ X) (f : X ⟶ Y)
       ScalarGenerated h f N false W A → ScalarGenerated h f N true W
         ((ScalarExtensionTower.scalar l E L ι W).obj A)
 
-/-- Flat-term K-flatness and normalization in either coefficient row.
-Source: scalar normalization clause; Stacks 06YS, 0G7E, 07A2
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+/-- Flat-term K-flatness and normalization in either coefficient row. -/
 def ScalarGood (d : Bool) (W : Scheme.{u}) : ScalarComplex l E L d W → Prop :=
   match d with
   | false => fun A ↦ StrictQuotient.SystemGood l E A ∧
@@ -405,9 +362,7 @@ def ScalarGood (d : Bool) (W : Scheme.{u}) : ScalarComplex l E L d W → Prop :=
       IsNormalizedCoefficientSequence l L W (DerivedCategory.Q.obj A)
 
 /-- The induced map of strict expressions, using the same ordinary constructor
-functors as their objects. No localization or resolution is chosen here.
-Source: natural substitution paragraph, proof steps 1 and 3
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+functors as their objects. -/
 def strictMap {Z X Y : Scheme.{u}} {h : Z ⟶ X} {f : X ⟶ Y} {r : ℕ}
     {N N' : Fin r → StrictQuotient.Complex l E Y} (a : ∀ i : Fin r, N i ⟶ N' i) :
     {W : Scheme.{u}} → (A : StrictQuotient.Expression h f r W) →
@@ -428,10 +383,7 @@ def strictMap {Z X Y : Scheme.{u}} {h : Z ⟶ X} {f : X ⟶ Y} {r : ℕ}
 attribute [local irreducible] strictMap
 
 /-- Naturality of every canonical substitution in representative maps and their
-arbitrary derived input maps. The fixed comparison itself has the all-derived
-naturality statement NaturalComparison, so representative roofs are not excluded.
-Source: naturality and representative-independence paragraphs, proof step 3
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+arbitrary derived input maps. -/
 def NaturalSubstitution {Z X Y : Scheme.{u}} {h : Z ⟶ X} {f : X ⟶ Y}
     (M : Fin 3 → sfIntegralConstructibleCategory l E Y)
     (P : Fin 3 → (integralOperationsGoodComplex l E Y).FullSubcategory)
@@ -452,10 +404,8 @@ def NaturalSubstitution {Z X Y : Scheme.{u}} {h : Z ⟶ X} {f : X ⟶ Y}
             (fun i ↦ ((pullbackTensorOrdinaryReduction l E Y).mapHomologicalComplex
               (.up ℤ)).map (a i)) A))
 
-/-- The strict associativity, signed symmetry, action units and composition laws,
-for the very comparison defined above, rather than unrelated monoidal data.
-Source: comparison coherence paragraph; Stacks 07A4, 0D6D
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+/-- The strict associativity, signed symmetry, action units and composition laws
+for the comparison defined above. -/
 def StrictCoherence {Z X Y : Scheme.{u}} (h : Z ⟶ X) (f : X ⟶ Y) : Prop :=
   ∃ (cf : IntegralCoherence.PullbackComparison l E f)
     (ch : IntegralCoherence.PullbackComparison l E h)
@@ -469,9 +419,7 @@ def StrictCoherence {Z X Y : Scheme.{u}} (h : Z ⟶ X) (f : X ⟶ Y) : Prop :=
       chf.tensor l E A B = comparison l E (h ≫ f) A B)
 
 /-- Scalar change of a specified substitution, using the normalized scalar realization,
-the derived scalar image of its coherent counit, and the actual K-flat counit.
-Source: scalar paragraph, proof steps 6--7; Stacks 06YY, 0941
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+the derived scalar image of its coherent counit, and the actual K-flat counit. -/
 def scalarSubstitution {W : Scheme.{u}}
     {ρ : IntegralComparisonRoosModel l L W}
     (S : IntegralComparisonScalarModel l E L ι W
@@ -486,18 +434,14 @@ def scalarSubstitution {W : Scheme.{u}}
     ((integralComparisonDerivedSequenceScalar l E L ι W).map (reduction l E β) ≫
       (integralComparisonSequenceScalarModel l E L ι W).ε.app A)
 
-/-- The actual scalar quotient list, without choosing new resolutions over L.
-Source: balanced quotient association in proof step 6
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+/-- The scalar quotient list over L. -/
 def scalarQuotients {Y : Scheme.{u}}
     (P : Fin 3 → (integralOperationsGoodComplex l E Y).FullSubcategory) :
     Fin 3 → StrictQuotient.Complex l L Y :=
   fun i ↦ (ScalarExtensionTower.scalar l E L ι Y).obj (quotient l E (P i).obj)
 
 /-- Apply this item's same recursive substitution at L, with the scalar-realized
-E quotient leaves. This pins the L vertices used by the strict scalar square.
-Source: scalar paragraph, proof steps 6--7
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+E quotient leaves. -/
 def scalarBeta {Z X Y : Scheme.{u}} {h : Z ⟶ X} {f : X ⟶ Y}
     (M : Fin 3 → sfIntegralConstructibleCategory l E Y)
     (P : Fin 3 → (integralOperationsGoodComplex l E Y).FullSubcategory)
@@ -517,9 +461,7 @@ def scalarBeta {Z X Y : Scheme.{u}} {h : Z ⟶ X} {f : X ⟶ Y}
     (fun i ↦ scalarSubstitution l E L ι SY (quotient l E (P i).obj)
       (substitution l E P (fun j ↦ (M j).obj) φ good (.input i))) goodL A
 
-/-- Transport at L by the scalar-realized leaves and this item's recursive substitution.
-Source: the limit-image clause of the scalar paragraph
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+/-- Transport at L by the scalar-realized leaves and this item's recursive substitution. -/
 def scalarTransport {Z X Y : Scheme.{u}} {h : Z ⟶ X} {f : X ⟶ Y}
     (M : Fin 3 → sfIntegralConstructibleCategory l E Y)
     (P : Fin 3 → (integralOperationsGoodComplex l E Y).FullSubcategory)
@@ -541,9 +483,7 @@ def scalarTransport {Z X Y : Scheme.{u}} {h : Z ⟶ X} {f : X ⟶ Y}
     (coefficientSequenceLimit l L W).map (DerivedCategory.Q.map v) ≫
     (@asIso _ _ _ _ (scalarBeta l E L ι M P φ good SY goodL B) (invertibleL B)).inv
 
-/-- The strict scalar square's first route, using this item's comparison c_L.
-Source: displayed scalar square, proof step 7; Stacks 03EL, 07A4
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+/-- The strict scalar square's first route, using this item's comparison c_L. -/
 def scalarLeft {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : StrictQuotient.Complex l E Y) :
     (ScalarExtensionTower.scalar l E L ι X).obj
@@ -569,9 +509,7 @@ def scalarLeft {X Y : Scheme.{u}} (f : X ⟶ Y)
       (comparison l L f ((ScalarExtensionTower.scalar l E L ι Y).obj P)
         ((ScalarExtensionTower.scalar l E L ι Y).obj Q)))
 
-/-- The strict scalar square's second route, using this item's comparison c_E.
-Source: displayed scalar square, proof step 7; Stacks 03EL, 07A4
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+/-- The strict scalar square's second route, using this item's comparison c_E. -/
 def scalarRight {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : StrictQuotient.Complex l E Y) :
     (ScalarExtensionTower.scalar l E L ι X).obj
@@ -588,11 +526,8 @@ def scalarRight {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 attribute [local irreducible] scalarSubstitution scalarBeta scalarTransport scalarLeft scalarRight
 
-/-- The actual link from strict scalar routes to completed gamma and alpha composites.
-The L substitutions use the same recursion as the E substitutions and the normalized
-scalar realization at their leaves. All equalities are before finite evaluation.
-Source: scalar paragraph's limit-image assertion, proof steps 6--7
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+/-- The actual link from strict scalar routes to completed gamma and alpha composites,
+as equalities of coefficient systems before finite evaluation. -/
 def ScalarLimitImage {Z X Y : Scheme.{u}} (h : Z ⟶ X) (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -660,25 +595,19 @@ def ScalarLimitImage {Z X Y : Scheme.{u}} (h : Z ⟶ X) (f : X ⟶ Y)
         (integralPullbackScalarComparison l E L ι f (M 1)).hom.hom))
 
 open ScalarExtensionTower in
-/-- Identity coefficient extension uses the actual action unitors.
-Source: scalar paragraph, proof steps 6--7; Stacks 03EL, 07A4, 0941
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+/-- Identity coefficient extension uses the actual action unitors. -/
 def ScalarIdentity {X Y : Scheme.{u}} (f : X ⟶ Y) : Prop :=
   type_of% (ScalarExtensionTower.unit l E f)
 
 open ScalarExtensionTower in
-/-- Successive extensions use the actual scalar associators.
-Source: scalar paragraph, proof steps 6--7; Stacks 03EL, 07A4, 0941
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+/-- Successive extensions use the actual scalar associators. -/
 def ScalarComposition (F : Type u) [Field F] [Algebra ℚ_[l] F]
     [FiniteDimensional ℚ_[l] F] (j : L →ₐ[ℚ_[l]] F)
     {X Y : Scheme.{u}} (f : X ⟶ Y) : Prop :=
   type_of% (ScalarExtensionTower.composition l E L ι F j f)
 
 open ScalarExtensionTower in
-/-- The actual quotient association, including its balanced section formula.
-Source: scalar paragraph, proof steps 6--7; Stacks 03EL, 07A4, 0941
-(blueprint: lem-pur-completed-comparison-quotient-realization). -/
+/-- The actual quotient association, including its balanced section formula. -/
 def ScalarAssociation {X Y : Scheme.{u}} (f : X ⟶ Y)
     (_hX : IsUnit (l : Γ(X, ⊤))) (_hY : IsUnit (l : Γ(Y, ⊤)))
     (SE : CoefficientDerivedSystemCalculus.{u, u} l E Y)

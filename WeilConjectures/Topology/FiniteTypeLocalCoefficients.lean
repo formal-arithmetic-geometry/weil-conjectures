@@ -16,8 +16,9 @@ import Mathlib.Algebra.Category.Grp.EpiMono
 /-!
 # Local coefficients for finite type module sheaves
 
-Source: Stacks Project, Modules, Definition 01B5 and proof of Lemma 01B8;
-Modules, Section 01AF and Lemma 01AG.
+## References
+
+* Stacks Project, Definition 01B5, Lemma 01B8, Section 01AF and Lemma 01AG.
 -/
 
 @[expose] public section
@@ -78,20 +79,7 @@ private theorem generator_map_apply
 -- The restricted-site free sheaf and its biproduct require additional elaboration steps.
 set_option backward.isDefEq.respectTransparency false in
 /-- Finite type gives finitely many sections near a point such that every section is locally
-an explicit linear combination of their restrictions.
-
-Source: Stacks Project, Modules, Definition 01B5, proof of Lemma 01B8, and Section 01AF,
-Lemma 01AG. (blueprint: lem-weil-pbc-finite-type-local-coefficients)
-
-Proof: Choose finite local generators data for F. Its covering contains an open U around x;
-evaluate the generating sections of F.over U at the terminal object of Over U, and identify
-its finite index type with Fin n. The resulting map from the finite free sheaf to F.over U
-is epi. For W contained in U, the local lifting criterion for epimorphisms gives a covering
-of W on which t lifts to this free sheaf. A finite free sheaf has tuples of ring sections
-as sections, since finite coproducts are finite products in modules. Evaluating the generating
-map sends a tuple to the sum of its coordinates times the restricted generators. This gives
-the coefficients at each point y of W. With n = 0 the free sheaf is zero, the sum is empty,
-and local lifting gives zero restrictions of t. The empty open W has no points to check. -/
+an explicit linear combination of their restrictions. -/
 theorem exists_finite_type_local_coefficients (X : RingedSpace.{u})
     (F : SheafOfModules.{u} (moduleRings X)) (x : X) [F.IsFiniteType] :
     ∃ (U : Opens X), x ∈ U ∧ ∃ (n : ℕ) (s : Fin n → F.val.obj (op U)),

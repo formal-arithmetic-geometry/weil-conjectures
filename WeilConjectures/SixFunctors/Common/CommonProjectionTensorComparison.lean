@@ -11,7 +11,8 @@ import Mathlib.Algebra.CharP.CharAndCard
 
 /-! # A natural tensor comparison for finite-stage inclusion
 
-Source: thm-sf-pf-field.proof.md, Compatibility and the common coefficient field.
+We construct one canonical tensor comparison for finite-stage inclusion of coefficients, for all
+morphisms and compactifications.
 -/
 
 @[expose] public noncomputable section
@@ -30,11 +31,8 @@ open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
 open GeneralAlgebraicallyClosedCoefficients
 
-/-- The coefficient prime is invertible on every space over the fixed base field.
-Source: the coefficient convention, l different from the characteristic
-(blueprint: def-sf-common-projection-tensor-comparison).
-Proof: compute the characteristic from the finite base field and its algebraic
-closure, then map the resulting unit to each residue field. -/
+/-- The coefficient prime is invertible on every space over the fixed base field, since `l`
+differs from the characteristic. -/
 theorem sixFunctorSpace_coefficient_invertible
     {D : FiniteFieldDatum.{u}} (C : D.CoefficientDatum) (X : SixFunctorSpace D) :
     ∀ x : X.obj.left, Nonempty (Invertible (C.l : X.obj.left.residueField x)) := by
@@ -51,9 +49,7 @@ theorem sixFunctorSpace_coefficient_invertible
       (CharP.cast_ne_zero_of_ne_of_prime D.k (Fact.out : C.l.Prime)
         C.different.symm)).map φ)).invertible⟩
 
-/-- One canonical tensor comparison for all morphisms and compactifications.
-Source: thm-sf-pf-field.proof.md, common finite coefficient field paragraph
-(blueprint: def-sf-common-projection-tensor-comparison). -/
+/-- One canonical tensor comparison for all morphisms and compactifications. -/
 @[irreducible] def commonProjectionTensorComparison
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     (H : SixFunctorCommonStages D C) (E : Padic.FiniteCoefficientFields C.l C.Qbar)

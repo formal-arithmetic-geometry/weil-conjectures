@@ -12,6 +12,13 @@ import WeilConjectures.Topology.AbelianOpenExtensionIntegerGermCoordinates
 import WeilConjectures.Topology.AbelianOpenExtensionByZeroStalks
 import Mathlib.Algebra.Category.Grp.Zero
 
+/-! # Maps out of integer extensions by zero
+
+## References
+
+* Stacks Project, Tags 00A5 and 0A38.
+-/
+
 @[expose] public section
 
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
@@ -21,21 +28,7 @@ universe u
 namespace TopCat.Sheaf
 
 /-- A map from the integer extension by zero is determined by the image of
-its canonical integer-one section.
-Source: Stacks Project, Sheaves, Lemma 00A5, and Cohomology, Lemma 0A38,
-https://stacks.math.columbia.edu/tag/00A5 and https://stacks.math.columbia.edu/tag/0A38
-(blueprint: lem-sc-abelian-integer-extension-hom-ext)
-
-Proof: At a point of U, the canonical unit germ generates the source stalk:
-its integer multiples give every stalk element by the existing integer-germ
-coordinates theorem. Naturality carries that germ to the germ of the unit image
-in F. Thus equality of the unit images gives equality on the generator, and
-additivity gives equality on every stalk element. At a point outside U, the
-source stalk is zero, so both stalk maps are the zero map. For a section on any
-open of X, the two images therefore have the same germs at every point of that
-open. Sheaf separation makes those images equal. Extensionality of additive
-maps, natural transformations and sheaf maps gives equality of the original
-morphisms. For empty U only the zero-stalk case is used. -/
+its canonical integer-one section. -/
 theorem abelianIntegerExtension_unit_injective
     (X : TopCat.{u}) (F : Sheaf AddCommGrpCat.{u} X) (U : Opens X) :
     Function.Injective (fun f : (abelianOpenExtensionByZero U).obj

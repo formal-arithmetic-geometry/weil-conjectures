@@ -136,14 +136,19 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # Realization of integral pullback comparisons
 
-Source: Stacks Project, Tags 099N(2),(5), 0D6D, 06YY and 0941; blueprint
-`sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md`,
-final common-stage transport paragraph
-(blueprint: def-trf-integral-comparison-realization-models).
+We construct the realization models of integral pullback comparisons and scalar changes on the
+derived categories of whole strict quotient towers on the sequence site: the total limit via its
+Roos model, the completed pullback and the completed scalar change, each with its normalization.
+
+## Implementation details
 
 The sequence site retains the whole quotient diagram. Its pullback is the left
 adjoint of the actual sectionwise direct image. Scalar change is the universal
 derived change of rings for the actual map of quotient coefficient sheaves.
+
+## References
+
+* Stacks Project, Tags 099N, 0D6D, 06YY, 0941
 -/
 
 @[expose] public noncomputable section
@@ -581,9 +586,7 @@ private theorem integralComparisonRestrictionCurried_eq :
   · intro M N f n V
     rfl
 
-/-- The exact constant tower functor, on ordinary derived categories.
-Source: Stacks 0941
-(blueprint: def-trf-integral-comparison-realization-models). -/
+/-- The exact constant tower functor, on ordinary derived categories. -/
 def integralComparisonConstantTower :
     DerivedCategory (scalarReductionSource l E X) ⥤
       coefficientSequenceRestrictedDerived l E X :=
@@ -591,15 +594,13 @@ def integralComparisonConstantTower :
     ℕᵒᵖ ⥤ scalarReductionSource l E X).mapDerivedCategory
 
 /-- The exact diagonal/total-limit adjunction, using the ordinary adjunction
-and the universal right derived functor. Source: Stacks 0941
-(blueprint: def-trf-integral-comparison-realization-models). -/
+and the universal right derived functor. -/
 def integralComparisonConstantAdjunction : integralComparisonConstantTower l E X ⊣
     coefficientConstantTowerLimit l E X :=
   (constLimAdj (J := ℕᵒᵖ)
     (C := scalarReductionSource l E X)).mapDerivedCategoryRightDerivedAdjunction
 
-/-- The counit in the derived category of whole strict towers.
-Source: Stacks 0941 (blueprint: def-trf-integral-comparison-realization-models). -/
+/-- The counit in the derived category of whole strict towers. -/
 def integralComparisonTowerCounit :
     coefficientConstantTowerLimit l E X ⋙ integralComparisonConstantTower l E X ⟶ 𝟭 _ :=
   (integralComparisonConstantAdjunction l E X).counit
@@ -674,12 +675,7 @@ private theorem integralComparisonDerivedCounit
         Category.assoc, Iso.app_hom, Iso.app_inv]
       rfl
 
-/-- On a simultaneous K-injective resolution this is the ordinary limit cone.
-Source: Stacks 0941 (blueprint: def-trf-integral-comparison-realization-models).
-Proof: the universal derived adjunction evaluates on a K-injective complex by
-the right-derived comparison. Its underlying ordinary adjunction counit is
-exactly the constant limit cone, giving the displayed formula. Naturality
-transports this formula along every K-injective resolution. -/
+/-- On a simultaneous K-injective resolution this is the ordinary limit cone. -/
 theorem integralComparisonTowerCounit_computes :
      ∀ (I : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E X) ℤ)
       [I.IsKInjective],
@@ -773,11 +769,7 @@ private theorem integralComparisonLimitToRoos_generic
       _ = α.f i := Category.comp_id _
 
 /-- The ordinary limit maps to its Roos cocone by the limit tuple and zero in
-its shifted coordinate. Source: Stacks 0941
-(blueprint: def-trf-integral-comparison-realization-models).
-Proof: the compatible limit tuple is killed by 1-s, so the two indicated
-coordinates commute with the signed cocone differential. They give a chain map.
-The two cocone coordinates jointly determine that map, proving uniqueness. -/
+its shifted coordinate. -/
 theorem integralComparisonLimitToRoos_existsUnique
     (C : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E X) ℤ) :
     ∃! α : ((lim : (ℕᵒᵖ ⥤ scalarReductionSource l E X) ⥤
@@ -790,9 +782,7 @@ theorem integralComparisonLimitToRoos_existsUnique
         (CochainComplex.mappingCocone.snd (scalarRoosBoundary C.asFunctor)).v i j h = 0) := by
   exact integralComparisonLimitToRoos_generic C
 
-/-- The specified limit-tuple/zero-shifted-coordinate map.
-Source: Stacks 0941
-(blueprint: def-trf-integral-comparison-realization-models). -/
+/-- The specified limit-tuple/zero-shifted-coordinate map. -/
 def integralComparisonLimitToRoos
     (C : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E X) ℤ) :
     ((lim : (ℕᵒᵖ ⥤ scalarReductionSource l E X) ⥤
@@ -802,9 +792,7 @@ def integralComparisonLimitToRoos
 
 /-- The K-injective normalization of a natural Roos comparison.
 Naming this predicate prevents the model constructor from repeatedly elaborating
-its full derived-limit equation. It is the unchanged representative formula.
-Source: Stacks 0941
-(blueprint: def-trf-integral-comparison-realization-models). -/
+its full derived-limit equation. It is the unchanged representative formula. -/
 def IsIntegralComparisonRoosNormalized
     (comparison : DerivedCategory.Q ⋙ coefficientConstantTowerLimit l E X ≅
       HomologicalComplex.complexOfFunctorsToFunctorToComplex ⋙
@@ -815,9 +803,7 @@ def IsIntegralComparisonRoosNormalized
         (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E X) ⥤ scalarReductionSource l E X) I).hom ≫
       DerivedCategory.Q.map (integralComparisonLimitToRoos l E X I)
 
-/-- The Roos model of total limit, with its exact K-injective normalization.
-Source: Stacks 0941
-(blueprint: def-trf-integral-comparison-realization-models). -/
+/-- The Roos model of total limit, with its exact K-injective normalization. -/
 structure IntegralComparisonRoosModel where
   /-- A natural comparison on entire strict tower complexes. -/
   comparison : DerivedCategory.Q ⋙ coefficientConstantTowerLimit l E X ≅
@@ -826,11 +812,7 @@ structure IntegralComparisonRoosModel where
   /-- It is induced on simultaneous K-injectives by the ordinary limit cone. -/
   computes : IsIntegralComparisonRoosNormalized l E X comparison
 
-/-- Scalar restriction has exactly the original underlying section type.
-Source: Stacks 0941 (blueprint: def-trf-integral-comparison-realization-models).
-Proof: the object equation for coefficientSequenceRestriction identifies it with
-ordinary finite restriction after evaluation. Neither restriction changes the
-underlying abelian sheaf, and coefficientSequenceEvaluationAb_eq finishes. -/
+/-- Scalar restriction has exactly the original underlying section type. -/
 theorem integralComparisonRestrictedSectionType (M : coefficientSequenceModules l E X)
     (n : ℕ) (U : X.ProEtᵒᵖ) :
     ↥((((coefficientSequenceRestriction l E X).obj M).obj (op n)).val.obj U) =
@@ -840,23 +822,20 @@ theorem integralComparisonRestrictedSectionType (M : coefficientSequenceModules 
   exact congrArg (fun A : AddCommGrpCat ↦ ↥A)
     (coefficientSequenceEvaluationAb_eq l E X M n U)
 
-/-- The same section read over the completed coefficient sheaf.
-Source: Stacks 0941 (blueprint: def-trf-integral-comparison-realization-models). -/
+/-- The same section read over the completed coefficient sheaf. -/
 def integralComparisonRestrictedSection (M : coefficientSequenceModules l E X)
     (n : ℕ) (U : X.ProEtᵒᵖ) (x : M.val.obj (op (n, U.unop))) :
     (((coefficientSequenceRestriction l E X).obj M).obj (op n)).val.obj U :=
   cast (integralComparisonRestrictedSectionType l E X M n U).symm x
 
-/-- The inverse identification of evaluation sections with original sections.
-Source: Stacks 0941 (blueprint: def-trf-integral-comparison-realization-models). -/
+/-- The inverse identification of evaluation sections with original sections. -/
 def integralComparisonSequenceSection (M : coefficientSequenceModules l E X)
     (n : ℕ) (U : X.ProEtᵒᵖ)
     (x : ((coefficientSequenceEvaluation l E X n).obj M).val.obj U) :
     M.val.obj (op (n, U.unop)) :=
   (eqToHom (coefficientSequenceEvaluationAb_eq l E X M n U)) x
 
-/-- The normalized passage from the derived total limit to the actual Roos cocone.
-Source: Stacks 0941 (blueprint: def-trf-integral-comparison-realization-models). -/
+/-- The normalized passage from the derived total limit to the actual Roos cocone. -/
 def integralComparisonRoosBridge (ρ : IntegralComparisonRoosModel l E X)
     (C : CochainComplex (coefficientSequenceModules l E X) ℤ) :
     (coefficientSequenceLimit l E X).obj (DerivedCategory.Q.obj C) ≅
@@ -869,9 +848,7 @@ def integralComparisonRoosBridge (ρ : IntegralComparisonRoosModel l E X)
 
 /-- A strict reduction presentation fixes its comparison in the whole derived tower.
 The transpose of `e` is the localization of the tensor-unit map specified by `κ`.
-Finite evaluations alone do not determine that derived tower morphism.
-Source: Stacks 06YY, 0941, the ordinary extension/restriction adjunction.
-(blueprint: def-trf-integral-comparison-realization-models). -/
+Finite evaluations alone do not determine that derived tower morphism. -/
 @[irreducible] def IsIntegralComparisonPresentationCoherent
     (S : CoefficientDerivedSystemCalculus l E X)
     (P : CochainComplex (scalarReductionSource l E X) ℤ)
@@ -900,9 +877,7 @@ Source: Stacks 06YY, 0941, the ordinary extension/restriction adjunction.
         (coefficientSequenceRestriction l E X).mapDerivedCategoryFactors.inv.app C
 
 /-- The representative normalization of completed pullback, expressed as one named
-predicate so that the model structure does not repeatedly elaborate the long equation.
-Source: Stacks 099N(5), 0D6D, 0941
-(blueprint: def-trf-integral-comparison-realization-models). -/
+predicate so that the model structure does not repeatedly elaborate the long equation. -/
 def IsIntegralComparisonPullbackNormalized {Y Z : Scheme.{t}} (f : Z ⟶ Y)
     (S : CoefficientDerivedSystemCalculus l E Y)
     (ρ : IntegralComparisonRoosModel l E Z)
@@ -945,9 +920,7 @@ def IsIntegralComparisonPullbackNormalized {Y Z : Scheme.{t}} (f : Z ⟶ Y)
 /-- The completed pullback is the total limit of the actual finite pullback of
 one reduction diagram. The normalization tests every whole-system coherent
 simultaneous presentation of every flat-term K-flat complex, and fixes maps on
-tensor-unit generators.
-Source: Stacks 099N(5), 0D6D, 0941
-(blueprint: def-trf-integral-comparison-realization-models). -/
+tensor-unit generators. -/
 structure IntegralComparisonPullbackModel {Y Z : Scheme.{t}} (f : Z ⟶ Y)
     (S : CoefficientDerivedSystemCalculus l E Y)
     (ρ : IntegralComparisonRoosModel l E Z) where
@@ -958,9 +931,7 @@ structure IntegralComparisonPullbackModel {Y Z : Scheme.{t}} (f : Z ⟶ Y)
   normalization : IsIntegralComparisonPullbackNormalized l E f S ρ realization
 
 /-- The same coherent quotient-presentation normalization for completed scalar change.
-Naming this predicate preserves the equation while keeping model projections small.
-Source: Stacks 06YY, 0941
-(blueprint: def-trf-integral-comparison-realization-models). -/
+Naming this predicate preserves the equation while keeping model projections small. -/
 def IsIntegralComparisonScalarNormalized
     (S : CoefficientDerivedSystemCalculus l E X)
     (ρ : IntegralComparisonRoosModel l L X)
@@ -1001,9 +972,7 @@ def IsIntegralComparisonScalarNormalized
           (integralScalarExtensionComparisonOfUniverses l E L ι X).hom.app P
 
 /-- Scalar realization uses the very same reduction diagram and the universal
-cochain counit of actual change of rings on that diagram.
-Source: Stacks 06YY, 0941
-(blueprint: def-trf-integral-comparison-realization-models). -/
+cochain counit of actual change of rings on that diagram. -/
 structure IntegralComparisonScalarModel
     (S : CoefficientDerivedSystemCalculus l E X)
     (ρ : IntegralComparisonRoosModel l L X) where

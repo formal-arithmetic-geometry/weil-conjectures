@@ -12,9 +12,18 @@ import WeilConjectures.RingTheory.PopescuTranslatedPresentationProperties
 
 /-! # Translation of a strictly standard presentation
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Tag 07CR (lemma-desingularize),
-from the choice of presentation through the constant Jacobian minor identity.
-(blueprint: lem-weil-pbc-popescu-translated-presentation).
+We translate a strictly standard presentation so that its generators vanish under a section
+modulo `π⁴`, and lift the resulting constant Jacobian minor identity to `R`.
+
+## Implementation details
+
+No inverse matrix, substituted polynomials or smoothness assertion is constructed in this step.
+The transpose convention for Jacobian minors leaves determinants unchanged.
+
+## References
+
+* [Stacks, Tag 07CR] (proof, from the choice of presentation through the constant Jacobian
+  minor identity)
 -/
 
 @[expose] public section
@@ -26,26 +35,7 @@ namespace Algebra
 open MvPolynomial
 
 /-- Translate a strictly standard presentation so that its generators vanish under the
-section modulo `π⁴`, and lift the resulting constant Jacobian minor identity to `R`.
-
-Source: Stacks Project, Smoothing Ring Maps, proof of Tag 07CR (lemma-desingularize),
-choice of presentation, replacement of `xᵢ` by `xᵢ-rᵢ`, and identity for `uπ`.
-(blueprint: lem-weil-pbc-popescu-translated-presentation).
-
-Proof: choose the finite presentation and initial relations from strict standardness.
-Lift the section's value on every generator to `R`, and translate the polynomial ring
-by these lifts. The translation is an automorphism, with inverse the opposite
-translation; transport the presentation and its chosen lift along this automorphism.
-Partial derivatives commute with translation, as follows by polynomial induction from
-Leibniz and the identities on constants and variables. Thus the Jacobian minor identity
-and the ideal-square condition persist. The composite of the new presentation map and
-the section kills every variable, hence is constant evaluation modulo `π⁴`. Every
-relation has constant coefficient `π⁴aⱼ`. Compatibility with `α` gives
-`α(P.val i)=π⁴λᵢ`. Apply the section to the minor identity, lift the finitely many
-coefficients, and use the kernel of `R→R/(π⁴)` to write the error as `π⁴t`. Consequently
-`(1-π³t)π` is a linear combination of the constant minors. The transpose convention
-below leaves determinants unchanged. No inverse matrix, substituted polynomials, or
-smoothness assertion is constructed in this step. -/
+section modulo `π⁴`, and lift the resulting constant Jacobian minor identity to `R`. -/
 theorem exists_popescu_translated_presentation
     (R : Type u) (Λ : Type v) (A : Type w)
     [CommRing R] [CommRing Λ] [CommRing A]

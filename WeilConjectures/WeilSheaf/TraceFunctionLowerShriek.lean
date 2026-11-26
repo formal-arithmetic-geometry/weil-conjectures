@@ -38,9 +38,7 @@ trace function of `K` splits as `t_K = t_{j_! j^* K} + t_{i_* i^* K}`, where `t_
   `AlgebraicGeometry.WeilComplex.traceFunction_derivedLowerStar_upperStar_mapFieldPoints`,
   `AlgebraicGeometry.WeilComplex.traceFunction_derivedLowerStar_upperStar_of_notMem_range`.
 
-## Blueprint
-
-Parts (3) and (4) of `proposition-function-sheaf-dictionary`, in the framework of Weil complexes
+These are parts (3) and (4) of the function–sheaf dictionary, in the framework of Weil complexes
 over `ℚ̄_ℓ`.
 -/
 
@@ -188,11 +186,9 @@ private lemma finsum_eq_finsum_fiber {α β M : Type*} [AddCommMonoid M] [Finite
   simp_rw [finsum_eq_sum_of_fintype]
   exact (Fintype.sum_fiberwise g φ).symm
 
-/-- **The trace function of a direct image with compact support**
-(blueprint `proposition-function-sheaf-dictionary`, part (3); blueprint
-`corollary-trace-functions-direct-image-compact`): for a separated quasi-compact morphism
-`f : X ⟶ Y` locally of finite type of `k₀`-schemes, with `Y` of finite type over `k₀`, a Weil
-complex `K` on `X`, `n ≥ 1` and `y ∈ Y(𝔽_{qⁿ})`,
+/-- **The trace function of a direct image with compact support**: for a separated quasi-compact
+morphism `f : X ⟶ Y` locally of finite type of `k₀`-schemes, with `Y` of finite type over `k₀`,
+a Weil complex `K` on `X`, `n ≥ 1` and `y ∈ Y(𝔽_{qⁿ})`,
 
 `t_{Rf₀! K, n}(y) = ∑_{x ∈ X(𝔽_{qⁿ}), f(x) = y} t_{K, n}(x)`. -/
 theorem traceFunction_derivedLowerShriek (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
@@ -285,8 +281,7 @@ variable {U Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- **The open–closed decomposition of the trace function** (blueprint
-`proposition-function-sheaf-dictionary`, part (4)): for an open immersion `j : U ↪ X` with
+/-- **The open–closed decomposition of the trace function**: for an open immersion `j : U ↪ X` with
 closed complement `i : Z ↪ X` and a Weil complex `K` on `X`,
 `t_{K, n} = t_{j_! j^* K, n} + t_{i_* i^* K, n}`. -/
 theorem traceFunction_eq_add_openClosed (hij : IsCompl (Set.range j.base) (Set.range i.base))
@@ -299,8 +294,7 @@ theorem traceFunction_eq_add_openClosed (hij : IsCompl (Set.range j.base) (Set.r
   rw [← traceFunction_congr e₁, ← traceFunction_congr e₂, ← traceFunction_congr e₃]
   exact traceFunction_eq_add_of_distTriang T hT n x
 
-/-- The trace function of `j_! j^* K` at a rational point of `U` is that of `K`
-(blueprint `proposition-function-sheaf-dictionary`, part (4)). -/
+/-- The trace function of `j_! j^* K` at a rational point of `U` is that of `K`. -/
 theorem traceFunction_derivedLowerShriek_upperStar_mapFieldPoints (K : WeilComplex k₀ l X)
     {n : ℕ} (hn : n ≠ 0)
     (u : (U ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
@@ -309,8 +303,7 @@ theorem traceFunction_derivedLowerShriek_upperStar_mapFieldPoints (K : WeilCompl
       K.traceFunction n (j.mapFieldPoints _ u) := by
   rw [traceFunction_derivedLowerShriek_mapFieldPoints j _ hn, traceFunction_upperStar]
 
-/-- The trace function of `j_! j^* K` vanishes at the rational points of `X` outside `U`
-(blueprint `proposition-function-sheaf-dictionary`, part (4)). -/
+/-- The trace function of `j_! j^* K` vanishes at the rational points of `X` outside `U`. -/
 theorem traceFunction_derivedLowerShriek_upperStar_of_notMem_range (K : WeilComplex k₀ l X)
     {n : ℕ} (hn : n ≠ 0)
     (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n))
@@ -318,8 +311,7 @@ theorem traceFunction_derivedLowerShriek_upperStar_of_notMem_range (K : WeilComp
     ((derivedLowerShriek k₀ l j).obj ((upperStar j).obj K)).traceFunction n x = 0 :=
   traceFunction_derivedLowerShriek_of_notMem_range j _ hn x hx
 
-/-- The trace function of `i_* i^* K` at a rational point of `Z` is that of `K`
-(blueprint `proposition-function-sheaf-dictionary`, part (4)). -/
+/-- The trace function of `i_* i^* K` at a rational point of `Z` is that of `K`. -/
 theorem traceFunction_derivedLowerStar_upperStar_mapFieldPoints (K : WeilComplex k₀ l X)
     {n : ℕ} (hn : n ≠ 0)
     (z : (Z ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
@@ -328,8 +320,7 @@ theorem traceFunction_derivedLowerStar_upperStar_mapFieldPoints (K : WeilComplex
   rw [← traceFunction_congr (derivedLowerShriekObjIsoDerivedLowerStar i _),
     traceFunction_derivedLowerShriek_mapFieldPoints i _ hn, traceFunction_upperStar]
 
-/-- The trace function of `i_* i^* K` vanishes at the rational points of `X` outside `Z`
-(blueprint `proposition-function-sheaf-dictionary`, part (4)). -/
+/-- The trace function of `i_* i^* K` vanishes at the rational points of `X` outside `Z`. -/
 theorem traceFunction_derivedLowerStar_upperStar_of_notMem_range (K : WeilComplex k₀ l X)
     {n : ℕ} (hn : n ≠ 0)
     (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n))

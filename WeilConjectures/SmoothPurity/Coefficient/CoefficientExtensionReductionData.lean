@@ -22,10 +22,20 @@ public import Mathlib.CategoryTheory.Limits.EssentiallySmall
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 /-! # Interfaces for coherent finite reduction of coefficient extension
 
-Source: the integral-operations clause of the main-20261015 blueprint.
 The model records and their predicates are shared by the construction lemmas and
-the public reduction theorem. Existing declarations are moved here verbatim.
-(blueprint: stage3-pur-extension-reduction-data).
+the public reduction theorem.
+
+## Implementation details
+
+`CoefficientReductionModelData` takes the concrete functor types as parameters so that
+they are cached before structure generation. `IsCoefficientExtensionModelEvaluation` and
+`IsCoefficientExtensionCompletionProjection` are irreducible definitions, which prevents
+their expansion when projecting the model record. `coefficientExtensionAssociationChain`
+uses explicit zero-map instances exposing the existing additive witnesses.
+
+## References
+
+- Stacks Project, Tag 06YY.
 -/
 
 @[expose] public noncomputable section
@@ -37,8 +47,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 universe t u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace WeilConjectures
-/-- A comparison with ordinary and derived normalizations, abstracted over its types.
-Source: integral operations (blueprint: lem-pur-coefficient-extension-reduction-model). -/
+/-- A comparison with ordinary and derived normalizations, abstracted over its types. -/
 structure CoefficientScalarComparisonData (Ordinary Derived : Type*)
     (sectionFormula : Ordinary → Prop) (modelFormula : Ordinary → Derived → Prop) where
   ordinary : Ordinary
@@ -46,15 +55,13 @@ structure CoefficientScalarComparisonData (Ordinary Derived : Type*)
   derived : Derived
   model : modelFormula ordinary derived
 
-/-- An ordinary association with its balanced formula, abstracted over its type.
-Source: integral operations (blueprint: lem-pur-coefficient-extension-reduction-model). -/
+/-- An ordinary association with its balanced formula, abstracted over its type. -/
 structure CoefficientAssociationData (Association : Type*)
     (sectionFormula : Association → Prop) where
   association : Association
   association_section : sectionFormula association
 
-/-- A strict model with its evaluation and transition specifications.
-Source: integral operations (blueprint: lem-pur-coefficient-extension-reduction-model). -/
+/-- A strict model with its evaluation and transition specifications. -/
 structure CoefficientStrictModelData (Association Direct : Type*)
     (sectionFormula : Association → Prop) (Evaluation : Direct → Type*)
     (transitionFormula : ∀ direct, Evaluation direct → Prop)
@@ -63,9 +70,7 @@ structure CoefficientStrictModelData (Association Direct : Type*)
   directEvaluation : Evaluation direct
   direct_transition : transitionFormula direct directEvaluation
 
-/-- A representative model, normalized completion and its invertible counit.
-The parameters cache the concrete functor types before structure generation.
-Source: integral operations (blueprint: lem-pur-coefficient-extension-reduction-model). -/
+/-- A representative model, normalized completion and its invertible counit. -/
 structure CoefficientReductionModelData (Association Direct Completion : Type*)
     (sectionFormula : Association → Prop) (Evaluation : Direct → Type*)
     (transitionFormula : ∀ direct, Evaluation direct → Prop) (Model : Direct → Type*)
@@ -87,8 +92,7 @@ universe c v r
 variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   [EssentiallySmall.{r} C] {R S : Sheaf J CommRingCat.{r}} {f : R ⟶ S}
 /-- Zero preservation from the actual additive structure, with the coefficient
-universe explicitly retained. Source: Stacks 06YY
-(blueprint: lem-pur-coefficient-extension-reduction-model). -/
+universe explicitly retained. -/
 instance coefficientScalarModelZero (A : SemilinearSections.ScalarData.{c, v, r} f) :
     A.model.E.PreservesZeroMorphisms :=
   @Functor.preservesZeroMorphisms_of_additive _ _ _ _ _ _ A.model.E A.model.additive
@@ -104,9 +108,7 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   (D : SemilinearSections.ScalarData.{c, v, max c v r} h)
 
 /-- Canonical scalar association, normalized on local tensors and on K-flat complexes.
-It applies in particular on the actual coefficient sequence site.
-Source: integral operations, node proof steps 2 and 7
-(blueprint: lem-pur-coefficient-extension-reduction-model). -/
+It applies in particular on the actual coefficient sequence site. -/
 abbrev CoefficientScalarAssociation :=
   CoefficientScalarComparisonData (A.model.E ⋙ B.model.E ≅ D.model.E) (A.T ⋙ B.T ≅ D.T)
     (fun ordinary ↦ ∀ (M : SemilinearSections.Mod.{c, v, max c v r} J R) (U : Cᵒᵖ)
@@ -131,15 +133,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L) (W : Scheme.{t})
 
-/-- The `ULift`-transported finite quotient ring maps commute with transitions.
-
-Source: the quotient-transition calculation in
-`IntegralScalarExtensionWellDefined.integralScalarQuotientMap_transition`.
-The two composites are equal after applying `RingHom.ext`; each sends a quotient
-class represented by `x` to the class represented by the image of `x` under
-`ι`, and the source transition and quotient lift are defined by quotient
-induction.
-(blueprint: lem-pur-coefficient-extension-reduction-model) -/
+/-- The `ULift`-transported finite quotient ring maps commute with transitions. -/
 private theorem quotientRing_transition (n : ℕ) :
     CommRingCat.ofHom
         (ULift.ringEquiv.symm.toRingHom.comp
@@ -162,11 +156,7 @@ private theorem quotientRing_transition (n : ℕ) :
       ((Padic.coefficientExtensionTransition l E (n + 1)) x.down)
   exact RingHom.congr_fun (integralScalarQuotientMap_transition l E L ι n) x.down
 
-/-- The actual finite quotient inclusions commute with quotient transitions.
-Source: the integral operations clause and integralScalarQuotientMap_transition
-(blueprint: lem-pur-coefficient-extension-reduction-model).
-Proof: both ring maps send the residue of x to the residue of ι(x). Apply quotient
-induction, then functorial constant sheafification. This includes ramified inclusions. -/
+/-- The actual finite quotient inclusions commute with quotient transitions. -/
 theorem coefficientExtensionQuotient_naturality (n : ℕ) :
     integralScalarQuotientSheafMap l E L ι W (n + 1) ≫
         coefficientSequenceCommRingTransition l L W n =
@@ -185,9 +175,7 @@ theorem coefficientExtensionQuotient_naturality (n : ℕ) :
   exact Functor.map_comp _ _ _
 
 /-- The dependency's canonical semilinear scalar-extension data for the actual
-quotient inclusions; no replacement functor or arbitrary coefficient map is used.
-Source: integral operations and lem-coef-semilinear-derived-sections
-(blueprint: lem-pur-coefficient-extension-reduction-model). -/
+quotient inclusions; no replacement functor or arbitrary coefficient map is used. -/
 abbrev CoefficientExtensionSystems :=
   SemilinearSections.ScalarSystems.{t + 1, t, u} (Scheme.ProEt.topology W)
     (integralCoefficientCommRingSheaf l E W) (coefficientSequenceCommRingTransition l E W)
@@ -200,17 +188,13 @@ variable (SE : CoefficientDerivedSystemCalculus l E W)
   (A : CoefficientExtensionSystems l E L ι W)
 
 /-- The coherent system C(K), formed by actual derived extension of the reduction
-system; its evaluation is K_m tensor over A_m with B_m by A.evaluation.
-Source: integral operations, simultaneous coefficient extension
-(blueprint: lem-pur-coefficient-extension-reduction-model). -/
+system; its evaluation is K_m tensor over A_m with B_m by A.evaluation. -/
 def coefficientExtensionSystem :
     DerivedCategory (scalarReductionSource l E W) ⥤ coefficientSequenceDerived l L W :=
   SE.reduction ⋙ A.scalar.T
 
 /-- The actual comparison: inverse of the completed-limit identification, followed
-by the coherent counit. Associativity and unitors only display its functorial type.
-Source: node proof step 4, φ=a⁻¹e, expressed with C already associated
-(blueprint: lem-pur-coefficient-extension-reduction-model). -/
+by the coherent counit. -/
 @[irreducible] def coefficientExtensionCounit
     (δ : coefficientExtensionSystem l E L ι W SE A ⋙ coefficientSequenceLimit l L W ≅
       integralScalarExtensionOfUniverses l E L ι W) :
@@ -221,37 +205,30 @@ Source: node proof step 4, φ=a⁻¹e, expressed with C already associated
     Functor.whiskerLeft (coefficientExtensionSystem l E L ι W SE A) SL.adjunction.counit ≫
     (Functor.rightUnitor _).hom
 
-/-- Finite scalar extension preserves zero maps via its own additive structure.
-Source: Stacks 06YY (blueprint: lem-pur-coefficient-extension-reduction-model). -/
+/-- Finite scalar extension preserves zero maps via its own additive structure. -/
 instance coefficientExtensionFiniteZero (n : ℕ) :
     (A.levels n).model.E.PreservesZeroMorphisms :=
   @Functor.preservesZeroMorphisms_of_additive _ _ _ _ _ _ _ (A.levels n).model.additive
 
-/-- Zero preservation from the published additive finite reduction.
-Source: Stacks 06YY (blueprint: lem-pur-coefficient-extension-reduction-model). -/
+/-- Zero preservation from the published additive finite reduction. -/
 instance coefficientExtensionReductionZero (n : ℕ) :
     (scalarReductionExtension l E W n).PreservesZeroMorphisms :=
   @Functor.preservesZeroMorphisms_of_additive _ _ _ _ _ _ _
     (coefficientFiniteExtensionAdditive l E W n)
 
-/-- Zero preservation from the published additive direct scalar extension.
-Source: Stacks 06YY (blueprint: lem-pur-coefficient-extension-reduction-model). -/
+/-- Zero preservation from the published additive direct scalar extension. -/
 instance coefficientExtensionDirectZero (n : ℕ) :
     (integralScalarReduction l E L ι W n).PreservesZeroMorphisms :=
   @Functor.preservesZeroMorphisms_of_additive _ _ _ _ _ _ _
     (integralScalarReduction_additive l E L ι W n)
 
-/-- Zero preservation for the same ordinary association source functor.
-Source: Stacks 06YY (blueprint: lem-pur-coefficient-extension-reduction-model). -/
+/-- Zero preservation for the same ordinary association source functor. -/
 instance coefficientExtensionCompositeZero (n : ℕ) :
     (scalarReductionExtension l E W n ⋙ (A.levels n).model.E).PreservesZeroMorphisms :=
   letI := coefficientExtensionFiniteZero l E L ι W A n
   Functor.preservesZeroMorphisms_comp _ _
 
-/-- Apply ordinary scalar association degree by degree. The explicit zero-map
-instances expose the existing additive witnesses without changing any functor.
-Source: integral operations, node proof step 2
-(blueprint: lem-pur-coefficient-extension-reduction-model). -/
+/-- Apply ordinary scalar association degree by degree. -/
 @[irreducible] def coefficientExtensionAssociationChain (n : ℕ)
     (a : scalarReductionExtension l E W n ⋙ (A.levels n).model.E ≅
       integralScalarReduction l E L ι W n)
@@ -264,9 +241,7 @@ Source: integral operations, node proof step 2
   letI := coefficientExtensionCompositeZero l E L ι W A n
   (NatTrans.mapHomologicalComplex a.hom (.up ℤ)).app P
 
-/-- The existing shifted Roos cone's actual nth projection, with its tower explicit.
-Source: integral operations and completed scalar extension, node proof step 4
-(blueprint: lem-pur-coefficient-extension-reduction-model). -/
+/-- The existing shifted Roos cone's actual nth projection, with its tower explicit. -/
 @[irreducible] def coefficientExtensionRoosProjection
     (P : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :
     (integralScalarComplexFunctor l E L ι W).obj P ⟶
@@ -277,9 +252,7 @@ Source: integral operations and completed scalar extension, node proof step 4
         (integralOperationsTowerStep ((integralScalarTowerFunctor l E L ι W).obj P))) ≫
     Pi.π (fun k ↦ ((integralScalarTowerFunctor l E L ι W).obj P).obj (op k)) n
 
-/-- The balanced scalar-association formula on every local tensor section.
-Source: integral operations, node proof step 2
-(blueprint: lem-pur-coefficient-extension-reduction-model). -/
+/-- The balanced scalar-association formula on every local tensor section. -/
 def IsCoefficientExtensionAssociation
     (association : ∀ n : ℕ,
     scalarReductionExtension l E W n ⋙ (A.levels n).model.E ≅
@@ -297,18 +270,14 @@ def IsCoefficientExtensionAssociation
         (((integralScalarQuotientSheafMap l E L ι W n).hom.app U) a * b) x
 
 /-- Simultaneous ordinary scalar association on the actual finite quotient models.
-The section formula fixes the balanced association on arbitrary tensor coefficients.
-Source: integral operations, node proof steps 1--2
-(blueprint: lem-pur-coefficient-extension-reduction-model). -/
+The section formula fixes the balanced association on arbitrary tensor coefficients. -/
 abbrev CoefficientExtensionAssociationData :=
   CoefficientAssociationData
     (∀ n : ℕ, scalarReductionExtension l E W n ⋙ (A.levels n).model.E ≅
       integralScalarReduction l E L ι W n)
     (IsCoefficientExtensionAssociation l E L ι W A)
 
-/-- The direct quotient model has exactly the published quotient transitions.
-Source: integral operations, node proof steps 2--3
-(blueprint: lem-pur-coefficient-extension-reduction-model). -/
+/-- The direct quotient model has exactly the published quotient transitions. -/
 def IsCoefficientExtensionStrictTransition
     (direct : (integralOperationsGoodComplex l E W).FullSubcategory ⥤
       CochainComplex (coefficientSequenceModules l L W) ℤ)
@@ -325,9 +294,7 @@ def IsCoefficientExtensionStrictTransition
         ((((integralScalarTransition l E L ι W n).app P.obj).f i).val.app U
           ((((directEvaluation (n + 1)).hom.app P).f i).val.app U x)))
 
-/-- The finite evaluation equation of the coherent representative model.
-Caching this proposition prevents expansion when projecting the model record.
-Source: integral operations (blueprint: lem-pur-coefficient-extension-reduction-model). -/
+/-- The finite evaluation equation of the coherent representative model. -/
 @[irreducible] def IsCoefficientExtensionModelEvaluation
     (association : ∀ n : ℕ,
       scalarReductionExtension l E W n ⋙ (A.levels n).model.E ≅
@@ -352,9 +319,7 @@ Source: integral operations (blueprint: lem-pur-coefficient-extension-reduction-
         DerivedCategory.Q.map
           (coefficientExtensionAssociationChain l E L ι W A n (association n) P.obj)
 
-/-- The completion identification preserves the specified Roos projections.
-Caching this proposition prevents expansion when projecting the model record.
-Source: integral operations (blueprint: lem-pur-coefficient-extension-reduction-model). -/
+/-- The completion identification preserves the specified Roos projections. -/
 @[irreducible] def IsCoefficientExtensionCompletionProjection
     (direct : (integralOperationsGoodComplex l E W).FullSubcategory ⥤
       CochainComplex (coefficientSequenceModules l L W) ℤ)
@@ -379,9 +344,7 @@ Source: integral operations (blueprint: lem-pur-coefficient-extension-reduction-
         DerivedCategory.Q.map
           (coefficientExtensionRoosProjection l E L ι W P.obj n)
 
-/-- The representative-normalized coherent counit comparison, with its completion.
-Source: integral operations, node proof steps 4--6
-(blueprint: lem-pur-coefficient-extension-reduction-model). -/
+/-- The representative-normalized coherent counit comparison, with its completion. -/
 abbrev CoefficientExtensionReductionData :=
   CoefficientReductionModelData
     (∀ n : ℕ, scalarReductionExtension l E W n ⋙ (A.levels n).model.E ≅
@@ -404,18 +367,14 @@ abbrev CoefficientExtensionReductionData :=
     (IsCoefficientExtensionCompletionProjection l E L ι W SE A)
     (fun completion ↦ IsIso (coefficientExtensionCounit l E L ι W SE SL A completion))
 
-/-- The natural isomorphism of coherent quotient systems, with its specified counit.
-Source: integral operations, node proof step 4
-(blueprint: lem-pur-coefficient-extension-reduction-model). -/
+/-- The natural isomorphism of coherent quotient systems, with its specified counit. -/
 @[irreducible] def coefficientExtensionReductionIso
     (d : CoefficientExtensionReductionData l E L ι W SE SL A) :
     integralScalarExtensionOfUniverses l E L ι W ⋙ SL.reduction ≅
       coefficientExtensionSystem l E L ι W SE A :=
   @asIso _ _ _ _ (coefficientExtensionCounit l E L ι W SE SL A d.completion) d.comparison_isIso
 
-/-- The coherent reduction data before the final counit isomorphism.
-Source: integral operations and normalized DVR effectivity
-(blueprint: lem-pur-coefficient-extension-reduction-model). -/
+/-- The coherent reduction data before the final counit isomorphism. -/
 def CoefficientExtensionReductionSkeleton :=
   CoefficientReductionModelData
     (∀ n : ℕ, scalarReductionExtension l E W n ⋙ (A.levels n).model.E ≅

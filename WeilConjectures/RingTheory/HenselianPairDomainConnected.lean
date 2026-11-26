@@ -11,23 +11,29 @@ public import Mathlib.RingTheory.Henselian
 import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 import Mathlib.Tactic.Ring
 
+/-!
+# Connectedness of `V(J)` for a henselian ideal of a domain
+
+If `B` is a domain and `(B, J)` is a henselian pair, then the closed subset `V(J)` of `Spec B` is
+connected (`PrimeSpectrum.connectedSpace_zeroLocus_of_henselian_domain`).
+
+## Implementation details
+
+Every idempotent of `B ⧸ J` lifts, by simple-root lifting for `X(X - 1)`, to a root of `X(X - 1)`
+in `B`, hence to `0` or `1`. So `Spec (B ⧸ J)` is connected, and its image in `Spec B` is `V(J)`.
+
+## References
+
+* [Stacks, Tag 09Y6]
+-/
+
 @[expose] public section
 
 universe u
 namespace PrimeSpectrum
 
 /-- Domain case of connectedness for spectra of quotients by henselian ideals.
-Source: Stacks Project, More on Algebra, Lemma 15.11.16 (Tag 09Y6).
-(blueprint: lem-weil-pbc-henselian-pair-prime-connected-domain)
-
-The henselian Jacobson condition makes J proper, so B/J is nonzero. Given an
-idempotent in B/J, choose a representative a₀ in B and apply simple-root lifting
-to the monic polynomial X(X - 1). Its derivative modulo J is 2a₀ - 1, whose square
-is 1, so it is a unit even in characteristic 2. The lifted root a satisfies
-a(a - 1) = 0, and the domain condition forces a = 0 or a = 1. Thus every
-idempotent of B/J is zero or one. The clopen-idempotent criterion makes its
-spectrum connected. The continuous quotient-spectrum map has image exactly V(J),
-so V(J) is connected and nonempty. -/
+If `B` is a domain and `(B, J)` is a henselian pair, then `V(J)` is connected. -/
 theorem connectedSpace_zeroLocus_of_henselian_domain {B : Type u} [CommRing B]
     [Nontrivial B] [NoZeroDivisors B] (J : Ideal B) [HenselianRing B J] :
     ConnectedSpace (zeroLocus (J : Set B)) := by

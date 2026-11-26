@@ -12,7 +12,12 @@ import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeIntegra
 import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeCompletedScalarMateTransition
 import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeIntegralTargetBoundaryTransition
 
-/-! # Pasting the three normalized integral boundary squares -/
+/-! # Pasting the three normalized integral boundary squares
+
+## References
+
+* [Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -88,15 +93,8 @@ private theorem normalized_three_squares_heq {C : Type*} [Category C]
     _ = _ := by rw [hd]; simp only [Category.assoc]
 
 -- The three square interfaces use several equivalent coefficient presentations.
-/-- The three boundary transition squares paste on their prescribed factors.
-Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15.
-Proof: the first boundary square moves the stage map past the initial boundary.
-The completed-to-native scalar-mate square then moves the ordinary finite scalar
-map past the native scalar component. The final boundary square moves it past
-the last boundary. Transport the E component and final boundary along the given
-underlying-object equality, using endpoint-recorded equality, and compose the three
-squares by associativity. This statement has no alpha family or rational component morphisms.
-(blueprint: lem-sf-native-integral-boundary-transition-pasting). -/
+/-- The three boundary transition squares (first boundary, completed-to-native scalar mate,
+final boundary) paste on their prescribed factors. -/
 theorem integralBoundaryTransitionPasting [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)
     (stage : StageAction l D hl P c)

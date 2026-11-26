@@ -9,9 +9,19 @@ module
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.Data.List.OfFn
 
-/-! Equivalence between permutation and subsequence regularity.
-Source: Stacks Project, Algebra, Lemma 10.68.10, Tag 07DW.
-(blueprint: lem-weil-pbc-regular-sequence-permutations-subsequences-proof).
+/-!
+# Permutations and subsequences of regular sequences
+
+For a finite family generating a proper ideal, all permutations are regular if and only if all
+order-preserving subsequences are regular.
+
+## Implementation details
+
+The equivalence is proved by induction on the length, using the two-element swap lemma.
+
+## References
+
+* [Stacks, Tag 07DW]
 -/
 
 @[expose] public section
@@ -81,10 +91,8 @@ private theorem weaklyRegular_sublists_perm
         exact (e.isWeaklyRegular_congr rest).mpr hparts.2
   | trans hp₁ hp₂ ih₁ ih₂ => exact ih₂ (ih₁ h)
 
-/-- Source: Stacks Project, Algebra, Lemma 10.68.10, Tag 07DW.
-(blueprint: lem-weil-pbc-regular-sequence-permutations-subsequences-proof).
-The equivalence is proved by induction on the length, using the two-element swap lemma.
--/
+/-- For a finite family generating a proper ideal, all permutations are regular sequences if
+and only if all order-preserving subsequences are. -/
 theorem isRegular_permutations_iff_subsequences
     {R : Type u} [CommRing R] (r : ℕ) (f : Fin r → R)
     (hproper : Ideal.ofList (List.ofFn f) ≠ ⊤) :

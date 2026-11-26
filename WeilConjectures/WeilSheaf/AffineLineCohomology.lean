@@ -46,9 +46,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fa
 
 variable {k₀ l} in
 /-- **Thom isomorphism for the affine line.** For a Weil sheaf `P` on `Spec k₀` and the structure
-morphism `π : 𝔸¹ ⟶ Spec k₀`, the cohomology sheaves `R^r π₀! π^* P` vanish for `r ≠ 2`:
-`Rπ₀! π^* P ≅ P(-1)[-2]` by the rank-one Thom isomorphism, and the Tate twist of a sheaf placed
-in degree zero is a sheaf placed in degree zero. -/
+morphism `π : 𝔸¹ ⟶ Spec k₀`, the cohomology sheaves `R^r π₀! π^* P` vanish for `r ≠ 2`. -/
 theorem isZero_homologySheaf_derivedLowerShriek_upperStar_affineLine
     (P : WeilSheaf k₀ l (Spec (CommRingCat.of k₀))) {r : ℤ} (hr : r ≠ 2) :
     IsZero ((WeilComplex.homologySheaf r).obj
@@ -76,9 +74,7 @@ theorem isZero_homologySheaf_derivedLowerShriek_upperStar_affineLine
       ((WeilComplex.derivedLowerShriek k₀ l _).mapIso eU ≪≫ T.app _ ≪≫
         (shiftFunctor _ (-2 : ℤ)).mapIso eT))
 
-/-- `H_cʳ(𝔸¹_k̄, ℚ̄_ℓ) = 0` for `r ≠ 2`: the constant sheaf on `𝔸¹` is the pullback `π^* ℚ̄_ℓ` of
-the constant sheaf on `Spec k₀`, and `Rπ₀! π^* ℚ̄_ℓ ≅ ℚ̄_ℓ(-1)[-2]` by the Thom isomorphism
-(`AlgebraicGeometry.WeilSheaf.isZero_homologySheaf_derivedLowerShriek_upperStar_affineLine`). -/
+/-- `H_cʳ(𝔸¹_k̄, ℚ̄_ℓ) = 0` for `r ≠ 2`. -/
 theorem subsingleton_compactlySupportedCohomology_adicConstant_affineLine {r : ℤ}
     (hr : r ≠ 2) :
     Subsingleton ((adicConstant k₀ l (affineLine k₀)).compactlySupportedCohomology r).carrier := by
@@ -89,11 +85,7 @@ theorem subsingleton_compactlySupportedCohomology_adicConstant_affineLine {r : �
   exact (compactlySupportedCohomologyEquivOfIso (upperStarAdicConstantIso
     (affineLine k₀ ↘ Spec (CommRingCat.of k₀))) r).toLinearEquiv.symm.toEquiv.subsingleton
 
-/-- **Constant cohomology of the affine line.** `Hʳ(𝔸¹_k̄, ℚ̄_ℓ) = 0` for `r ≠ 0`: by Poincaré
-duality on the smooth curve `𝔸¹`, `Hʳ(𝔸¹_k̄, ℚ̄_ℓ(1))`, which is `Hʳ(𝔸¹_k̄, ℚ̄_ℓ)` up to the
-Frobenius, is dual to `H_c^{2-r}(𝔸¹_k̄, ℚ̄_ℓ)`, which vanishes since `2 - r ≠ 2`.
-(blueprint: `lemma-integral-linear-character--2`, subsection
-`lemma-artin-schreier-character-sheaf`) -/
+/-- **Constant cohomology of the affine line.** `Hʳ(𝔸¹_k̄, ℚ̄_ℓ) = 0` for `r ≠ 0`. -/
 theorem subsingleton_cohomology_adicConstant_affineLine {r : ℤ} (hr : r ≠ 0) :
     Subsingleton ((adicConstant k₀ l (affineLine k₀)).cohomology r).carrier := by
   obtain ⟨P, hP, -⟩ := exists_isPerfPair_compactlySupportedCohomology_adicConstant k₀ l

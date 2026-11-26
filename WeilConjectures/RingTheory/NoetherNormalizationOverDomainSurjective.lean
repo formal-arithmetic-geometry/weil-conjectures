@@ -12,26 +12,30 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 import WeilConjectures.RingTheory.NoetherNormalizationOverDomainSurjectiveCore
 import Mathlib.Tactic.Ring
 
+/-!
+# Noether normalization over a domain, surjective form
+
+The constructive part of Noether normalization over a domain, producing a finite extension of a
+polynomial subalgebra whose localization away from a nonzero base element is surjective.
+
+## Implementation details
+
+Every element of `S` is a polynomial in the original generators `xᵢ`; multiplying by a large power
+of `f` rewrites it as a polynomial in the generators `f * xᵢ` of `S'`.
+
+## References
+
+* [Stacks, Tag 07NA]
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u v
 namespace Algebra.FiniteType
 
-/-- The constructive part of Noether normalization over a domain, producing a surjective
-localization map.  Source: Stacks Project, Algebra, Lemma 07NA.
-(blueprint: new-noether-normalization-over-domain-surjective)
-Proof: localize `S` at the nonzero elements of `R` and apply field Noether normalization to
-the resulting finite-type algebra.  Rescale the normalized coordinates by denominators so that
-they lie in `S`; injectivity over the fraction field then gives injectivity of evaluation over
-`R`.  Express finite-integral equations for a finite set of algebra generators, clear their
-coefficient denominators, and multiply by one common nonzero element of `R` so that the
-equations hold in `S`.  If `f` is the product of these clearing factors, let `S'` be generated
-over `R` by the normalized coordinates and by `f` times the original generators.  Rescaling
-each monic equation shows that these generators are integral over the polynomial subalgebra,
-so `S'` is finite over it.  Finally, every element of `S` is a polynomial in the original
-generators; multiplying by a sufficiently large power of `f` rewrites it as a polynomial in
-the generators of `S'`.  Hence every fraction in `S_f` comes from `S'_f`, which is precisely
-surjectivity of the displayed localization map. -/
+/-- Noether normalization over a domain, constructive form: an injective finite type algebra `S`
+over a domain `R` contains a finite extension `S'` of a polynomial subalgebra such that the
+localization map `S'_f → S_f` is surjective for some nonzero `f ∈ R`. -/
 theorem exists_finite_subalgebra_away_surjective
     (R : Type u) (S : Type v) [CommRing R] [IsDomain R] [CommRing S]
     [Algebra R S] [Algebra.FiniteType R S]

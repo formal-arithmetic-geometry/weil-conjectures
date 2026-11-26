@@ -28,11 +28,18 @@ restricts to an equivalence between `Dᵇc(Spec k, Λ)` and the full subcategory
 - `AlgebraicGeometry.Etale.pointFiber`: the evaluation
   `Fib_s : Dᵇc(Spec k, Λ) ⥤ Dᵇ_fin(Λ)` at the geometric point `s = Spec k`, the restriction
   of `D(Γ)`.
-- `AlgebraicGeometry.Etale.pointFiberEquivalence` (`lemma-perfect-complexes-geometric-point`, finite
-  coefficient stage): `Fib_s` is an equivalence. The integral stage `𝒪_E` is
-  `AlgebraicGeometry.Etale.pointFiberIntegerRingEquivalence`
+- `AlgebraicGeometry.Etale.pointFiberEquivalence`: `Fib_s` is an equivalence. The integral stage
+  `𝒪_E` is `AlgebraicGeometry.Etale.pointFiberIntegerRingEquivalence`
   (`WeilConjectures.SixFunctors.Etale.Derived.PointFiberIntegral`).
 
+## Implementation details
+
+The other coefficient stages are `AlgebraicGeometry.Etale.pointFiberIntegerRingEquivalence`
+(`𝒪_E`), `AlgebraicGeometry.Etale.pointFiberFieldEquivalence` (`E`) and
+`AlgebraicGeometry.Etale.pointFiberCocone_isFilteredTwoColimit` (`ℚ̄_ℓ`). As in the rest of the
+repository the categories are those of the small étale site; the pro-étale comparison
+(`WeilConjectures.SixFunctors.ProEtale.Comparison`) identifies them with the pro-étale
+categories on bounded below objects of étale origin.
 -/
 
 @[expose] public section
@@ -167,26 +174,14 @@ noncomputable def pointFiberCompιIso :
         rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k)) :=
   Functor.isoWhiskerLeft _ (rightDerivedGlobalSectionsIsoOfIsSepClosed Λ (k := k)).symm
 
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finite coefficient categories over a point
-(finite coefficient stage `A_{E,n}`).
-
-For a commutative ring `Λ` (in the blueprint the finite ring `A_{E,n} = 𝒪_E / ϖ_Eⁿ`) and a
-separably closed field `k`, the evaluation at the geometric point of `s = Spec k`,
-`Fib_s : Dᵇc(s, Λ) ⥤ Dᵇ_fin(Λ)` (`AlgebraicGeometry.Etale.pointFiber`, see
-`AlgebraicGeometry.Etale.pointFiberEquivalence_functor`), is an equivalence onto the bounded
-complexes of `Λ`-modules with finitely generated (for `Λ` finite, equivalently finite,
-`DerivedCategory.boundedFiniteCohomology_iff_finite`) cohomology modules. It is the restriction
-of the equivalence `D(Γ) : D(s_ét, Λ) ≌ D(Λ)` induced by the exact equivalence `Γ(s, -)`
-between étale sheaves of `Λ`-modules on `s` and `Λ`-modules, a sheaf on `s` being constructible
-if and only if its global sections are finitely generated.
-
-The other coefficient stages of the blueprint node are
-`AlgebraicGeometry.Etale.pointFiberIntegerRingEquivalence` (`𝒪_E`),
-`AlgebraicGeometry.Etale.pointFiberFieldEquivalence` (`E`) and
-`AlgebraicGeometry.Etale.pointFiberCocone_isFilteredTwoColimit` (`ℚ̄_ℓ`). As in the rest of the
-repository the categories are those of the small étale site; the pro-étale comparison
-(`WeilConjectures.SixFunctors.ProEtale.Comparison`) identifies them with the pro-étale
-categories of the blueprint on bounded below objects of étale origin. -/
+/-- **Finite coefficient categories over a point**, finite coefficient stage. For a commutative ring
+`Λ` (for instance the finite ring `A_{E,n} = 𝒪_E / ϖ_Eⁿ`) and a separably closed field `k`, the
+evaluation at the geometric point of `s = Spec k`, `Fib_s : Dᵇc(s, Λ) ⥤ Dᵇ_fin(Λ)`
+(`AlgebraicGeometry.Etale.pointFiber`, see `AlgebraicGeometry.Etale.pointFiberEquivalence_functor`),
+is an equivalence onto the bounded complexes of `Λ`-modules with finitely generated (for `Λ` finite,
+equivalently finite, `DerivedCategory.boundedFiniteCohomology_iff_finite`) cohomology modules. It is
+the restriction of the equivalence `D(Γ) : D(s_ét, Λ) ≌ D(Λ)` induced by the exact equivalence
+`Γ(s, -)`. -/
 noncomputable def pointFiberEquivalence :
     DerivedCategoryBoundedConstructible (ModuleCat.{u + 1} Λ) (Spec (.of k)) ≌
       DerivedCategory.BoundedFiniteCohomology Λ :=

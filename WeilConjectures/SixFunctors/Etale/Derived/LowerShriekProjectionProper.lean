@@ -29,9 +29,6 @@ projection formula is the direct-image projection formula
 (`AlgebraicGeometry.Etale.isIso_projectionMapOfCompactification_app_app_iff_of_isProper`); for
 `f = 𝟙 X` the latter holds for any coefficients
 (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_id_app_app`).
-
-These are the identity and proper clauses of blueprint
-`proposition-composition-base-change-rf-shriek--1`.
 -/
 
 @[expose] public section

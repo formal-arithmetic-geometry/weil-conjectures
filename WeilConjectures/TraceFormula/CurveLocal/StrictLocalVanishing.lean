@@ -20,7 +20,7 @@ Let `T ≅ Spec R` be the spectrum of a strictly henselian local ring and `t : S
 geometric point over the closed point. The global sections functor on `T_ét` is exact and
 computes the stalk at `t`. Consequently, for a bounded below complex `P` of étale sheaves of
 `Λ`-modules on `T` whose pullback `t^* P` vanishes, the derived global sections `RΓ(T, P)`
-vanish (blueprint `lemma-vanishing-local-term-zero-stalk--1`, item (ii)).
+vanish.
 
 ## Main results
 
@@ -151,11 +151,9 @@ lemma isZero_Γ_homology_of_isZero_mapDerivedCategoryPlus_upperStar
     (((t)^*[ModuleCat.{u + 1} Λ].mapDerivedCategoryPlusHomologyFunctorIso q).app P))
   exact Functor.map_isZero (DerivedCategory.Plus.homologyFunctor _ q) hP
 
-/-- Blueprint `lemma-vanishing-local-term-zero-stalk--1`, item (ii): **derived global sections over
-a strictly local scheme.** Let `T ≅ Spec R` with `R` strictly henselian local, `t : Spec Ω ⟶ T`
-a geometric point over the closed point and `P` a bounded below complex of étale sheaves of
-`Λ`-modules on `T` with `t^* P = 0`. Then `RΓ(T, P) = 0`: the global sections functor is exact,
-so `H^q RΓ(T, P) = Γ(T, H^q P)`, which is the stalk of `H^q P` at `t`, that is `H^q(t^* P) = 0`. -/
+/-- **Derived global sections over a strictly local scheme.** Let `T ≅ Spec R` with `R` strictly
+henselian local, `t : Spec Ω ⟶ T` a geometric point over the closed point and `P` a bounded below
+complex of étale sheaves of `Λ`-modules on `T` with `t^* P = 0`. Then `RΓ(T, P) = 0`. -/
 theorem isZero_rightDerivedGlobalSections_of_isStrictlyHenselianLocalRing
     (e : T ≅ Spec (.of R)) {Ω : Type u} [Field Ω] [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ T)
     (ht : (t ≫ e.hom) (IsLocalRing.closedPoint Ω) = IsLocalRing.closedPoint R)
@@ -171,10 +169,9 @@ theorem isZero_rightDerivedGlobalSections_of_isStrictlyHenselianLocalRing
   exact IsZero.of_iso (isZero_Γ_homology_of_isZero_mapDerivedCategoryPlus_upperStar e t ht P hP q)
     (((Sheaf.Γ T.smallEtaleTopology _).mapDerivedCategoryHomologyFunctorIso q).app _).symm
 
-/-- Blueprint `lemma-vanishing-local-term-zero-stalk--1`, item (ii): for a closed immersion
-`i : Z ⟶ T` into a strictly local scheme `T ≅ Spec R` and a bounded below complex `P` of étale
-sheaves of `Λ`-modules on `T` whose pullback to a geometric point `t` over the closed point
-vanishes, the middle term `RΓ(T, P)` of the localization triangle
+/-- For a closed immersion `i : Z ⟶ T` into a strictly local scheme `T ≅ Spec R` and a bounded below
+complex `P` of étale sheaves of `Λ`-modules on `T` whose pullback to a geometric point `t` over the
+closed point vanishes, the middle term `RΓ(T, P)` of the localization triangle
 `RΓ_Z(T, P) ⟶ RΓ(T, P) ⟶ RΓ(T ∖ Z, P) ⟶ RΓ_Z(T, P)[1]` vanishes. -/
 theorem isZero_sectionsWithSupportTriangle_obj₂_of_isStrictlyHenselianLocalRing {Z : Scheme.{u}}
     (i : Z ⟶ T) [IsClosedImmersion i] (e : T ≅ Spec (.of R)) {Ω : Type u} [Field Ω]

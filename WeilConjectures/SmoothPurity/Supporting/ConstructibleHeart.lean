@@ -15,9 +15,6 @@ import Mathlib.CategoryTheory.Abelian.Basic
 import Mathlib.CategoryTheory.Preadditive.Biproducts
 /-! # Constructible hearts and their standard truncations
 
-Source: Weil conjectures blueprint, `sec-smooth-purity/sk-def-sf-admissible`,
-`def-weil-constructible-heart`, order 1506 (blueprint: def-weil-constructible-heart).
-
 The hearts are the full subcategories on the intersection of the specified standard
 classes. On a finite-type geometric scheme the standard pair determines a unique
 bounded t-structure; its canonical truncations give the displayed vanishing tests.

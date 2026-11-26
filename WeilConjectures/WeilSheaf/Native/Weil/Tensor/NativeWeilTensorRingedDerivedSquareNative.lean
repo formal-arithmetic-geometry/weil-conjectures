@@ -13,8 +13,17 @@ import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedDerive
 
 /-! # Native comparison part of the native ringed derived square
 
-Source: Stacks 06YU, 0FPT; blueprint steps 2--3 of
-`lem-sf-native-weil-tensor-ringed-derived-square`.
+## Implementation details
+
+The comparison `t` with its full representative square is obtained from
+`native_weil_tensor_ringed_derived_square_comparison`, by descent along the product of the
+derived localization and the native K-flat localization. The coherence component
+`native_weil_tensor_ringed_derived_square_native_coherence`, applied to `t` and its square,
+gives `TensorCoherence`.
+
+## References
+
+* Stacks Project, Tags 06YU and 0FPT.
 -/
 
 @[expose] public section
@@ -30,21 +39,8 @@ attribute [local irreducible] AlgebraicGeometry.ProEtaleWeilSheaf.nativeWeilRing
   AlgebraicGeometry.ProEtaleWeilSheaf.NativeTensorKFlat
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
-/-- Given the ordinary representative data, the native comparison, its representative
-square, and its coherence are the remaining native part of the derived-square argument.
-
-Source: Stacks 06YU, 0FPT; blueprint:
-`lem-sf-native-weil-tensor-ringed-derived-square-native-data`.
-
-Proof: `native_weil_tensor_ringed_derived_square_comparison` (blueprint:
-lem-sf-native-weil-tensor-ringed-derived-square-comparison) gives a comparison `t`
-with the full representative square, by descent along the product of the derived
-localization and the native K-flat localization `A.localization`. The coherence
-component `native_weil_tensor_ringed_derived_square_native_coherence` (blueprint:
-lem-sf-native-weil-tensor-ringed-derived-square-native-coherence), applied to `t` and
-its square, gives `TensorCoherence`. The transport of the associator, unit and
-symmetry equations is the content of that component.
--/
+/-- Given the ordinary representative data, there is a native comparison with its
+representative square and its coherence. -/
 theorem native_weil_tensor_ringed_derived_square_native_data
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})

@@ -18,8 +18,23 @@ import Mathlib.LinearAlgebra.TensorProduct.DirectLimit
 
 /-! # Tensor products over an arbitrary colimit on a cofinal tail
 
-Source: Stacks Project, Algebra, Tags 00D6, 00D7 and 00DD.
-(blueprint: lem-pc-tensor-tail-colimit-elementwise)
+Let `F` be a directed diagram of commutative rings with a colimit cocone `c`, and let `M₀` be a
+module over `F(i₀)`. Every element of `c.pt ⊗ M₀` comes from some `F(i) ⊗ M₀` with `i` in a
+prescribed upper tail `i ≥ k`, and an element of `F(i) ⊗ M₀` mapping to zero already vanishes
+at a later stage.
+
+## Implementation details
+
+On the tail above `k` the ring diagram is regarded as a diagram of `F(i₀)`-modules. The
+elementwise criterion for filtered colimits of rings identifies its module direct limit with
+`c.pt`; tensoring this linear equivalence with `M₀` and using `directLimitLeft` gives the
+statement. The argument works for preorders without passing to a partial order.
+
+## References
+
+* [Stacks, Tag 00D6]
+* [Stacks, Tag 00D7]
+* [Stacks, Tag 00DD]
 -/
 
 @[expose] public section
@@ -32,18 +47,9 @@ open scoped TensorProduct
 namespace TensorProduct
 
 /-- Tensor representatives and eventual vanishing over any colimit cocone,
-with representatives restricted to a prescribed cofinal upper tail.
-
-Source: Stacks Project, Algebra, Tags 00D6, 00D7 and 00DD.
-(blueprint: lem-pc-tensor-tail-colimit-elementwise)
-
-Proof: On the tail above k, regard the ring diagram as a diagram of F(i₀)-modules.
-The elementwise criterion for a filtered ring colimit identifies its module direct
-limit with c.pt: move representatives above k and use eventual equality for
-injectivity. Tensor this linear equivalence with M₀ and use directLimitLeft.
-Represent the inverse image of a tensor at a stage; injectivity and zero_exact
-prove eventual vanishing. This works for preorders without taking a reflection.
--/
+with representatives restricted to a prescribed cofinal upper tail: every element of
+`c.pt ⊗[F(i₀)] M₀` comes from some `F(i) ⊗ M₀` with `k ≤ i`, and an element of `F(i) ⊗ M₀`
+mapping to zero in `c.pt ⊗ M₀` vanishes in `F(i') ⊗ M₀` for some `i' ≥ i`. -/
 theorem tensorTailColimitElementwise
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{v}) (c : Cocone F) (hc : IsColimit c)

@@ -13,6 +13,29 @@ public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 public import Mathlib.Algebra.Category.Ring.Basic
 import WeilConjectures.RingTheory.FiniteGabberUpstairsRelation
 
+/-!
+# Gabber's relation after a faithfully flat base change
+
+For a finite algebra `B` over `A` with `I` in the Jacobson radical, and `b ∈ B` lifting `(1, 0)`
+in a decomposition `B / IB ≅ B₁ × B₂`, the class of `(b - 1) b ^ d` vanishes in `C ⊗[A] (B / N)`
+for a faithfully flat `A`-algebra `C`, where `N` is spanned by the `i b ^ j` with `i ∈ I` and
+`j ≤ d`.
+
+## Implementation details
+
+`C` is an étale `A`-algebra over which the idempotent `(1, 0)` lifts, localized at an element
+`g ∈ 1 + IA'` given by Nakayama; it is faithfully flat since `C / IC ≅ A / I` and every maximal
+ideal contains `I`. The descent of the relation to `B` is proved in an importing module.
+
+## References
+
+* [Stacks, Tag 0EM0]
+* [Stacks, Tag 07M4]
+* [Stacks, Tag 00DV]
+* [Stacks, Tag 00H5]
+* [Stacks, Tag 00HP]
+-/
+
 @[expose] public section
 
 universe u v w z
@@ -22,26 +45,7 @@ open scoped BigOperators
 namespace Algebra
 
 /-- Gabber's relation vanishes after a faithfully flat base change, in the quotient
-by the finite coefficient submodule.
-Source: Stacks Project, More on Algebra, Lemma Tag 0EM0, construction before descent.
-(blueprint: lem-weil-pbc-zariski-pair-finite-gabber-polynomial-upstairs-relation)
-
-Proof: Apply Tag 07M4 to lift the idempotent (1,0) over an etale A-algebra A' preserving
-A/I. Split the finite base change of B using this idempotent. The first factor has
-surjective structure map modulo IA'. Its finite cokernel is equal to IA' times itself;
-Nakayama (00DV) gives g in 1+IA' annihilating it. Localize A' at g to obtain C, so the
-first factor is a quotient of C and C/IC is still A/I. Lift the image of b-1 in that
-factor to a' in IC. In the second factor the image of b belongs to the extended ideal;
-00H5 gives a monic annihilator G congruent to a power of X. Multiply G by X to ensure
-its degree d is positive, including when that factor is zero. Then (X-1-a')G
-annihilates both components. Its difference from (X-1)X^d has degree at most d and
-coefficients in IC. Thus the image of (b-1)b^d belongs to the C-submodule generated
-by the images of i b^j, i in I, j at most d. This is the image of the base change of
-the range of the coefficient map displayed below. Right exactness of tensor product
-therefore kills the displayed class in C tensor (B/N). Finally C is flat over A
-(etale followed by localization), and every maximal ideal contains I and has nonzero
-fibre since C/IC is A/I. The maximal-ideal criterion (00HP) makes C faithfully flat.
-No descent to B is asserted here; that is proved in the importing module. -/
+by the finite coefficient submodule. -/
 theorem exists_gabber_relation_after_base_change
     {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B]
     [Module.Finite A B] (I : Ideal A) (hI : I ≤ Ideal.jacobson ⊥)

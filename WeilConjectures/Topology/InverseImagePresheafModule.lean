@@ -19,6 +19,16 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 # Modules on the presheaf inverse image
 
 This is the filtered-colimit step of Stacks Tag 008T, before sheafification.
+
+## Implementation details
+
+The section module structures are transported from the concrete presheaf-module pullback along
+the natural additive equivalence between its underlying abelian presheaf and the Lan of the
+original abelian presheaf; semilinearity follows by injectivity of this equivalence.
+
+## References
+
+* [Stacks Project, Tag 008T](https://stacks.math.columbia.edu/tag/008T)
 -/
 
 @[expose] public section
@@ -40,20 +50,7 @@ set_option quotPrecheck false in
 local notation "L" A => (Opens.map f).op.lan (H := A)
 
 /-- The presheaf inverse image of a module has section module structures over the
-presheaf inverse image ring, with semilinear restrictions and semilinear Lan unit.
-Source: Stacks Tag 008T, lemma-pullback-presheaf-module.
-Proof: apply the existing concrete presheaf-module pullback adjunction theorem,
-whose coprojection formula is the multiplication on filtered-colimit representatives.
-Its underlying abelian presheaf is naturally isomorphic to the Lan of the original
-abelian presheaf. On each open, use the inverse of that isomorphism as an additive
-equivalence to transport the section module structure back to the Lan carrier.
-The equivalence carries a transported scalar product to the original scalar product.
-Its naturality and the semilinear restrictions of the module presheaf therefore imply
-semilinearity of the transported restrictions, by injectivity of the equivalence.
-For the unit, apply the coprojection formula on the inverse image of the source open,
-where the final restriction is the identity. The same injectivity gives semilinearity
-of the Lan unit. No assumption on nonemptiness of an open is made.
-(blueprint: lem-pc-inverse-image-presheaf-module). -/
+presheaf inverse image ring, with semilinear restrictions and semilinear Lan unit. -/
 theorem exists_inverseImagePresheafModuleInstances
     (R : CategoryTheory.Sheaf (Opens.grothendieckTopology Y) CommRingCat.{u})
     (M : SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y)

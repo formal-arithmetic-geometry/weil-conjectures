@@ -17,9 +17,21 @@ import WeilConjectures.RingTheory.CompletionLocalizedAlgebraFiniteQuotients
 /-!
 # Interpolation in the completion of a localized finite algebra
 
-Source: Stacks Project, Algebra, Tag 07N9 (lemma-completion-finite-extension),
-the second equality, before the use of Tag 00MA.
-(blueprint: lem-weil-pbc-completion-localized-algebra-product-surjective)
+For a finite algebra `S` over a Noetherian ring `R` and a prime `p`, the completion of
+`R_p ⊗[R] S` maps onto the product of the completions of the `S_q` over the primes `q`
+above `p`.
+
+## Implementation details
+
+The finite-quotient comparison gives bijections `B ⧸ J^n ≃ ∏ q, S_q ⧸ K_q^n` with `K_q`
+cofinal with the maximal ideal `M_q`. A target tuple is transported from the `M_q`-adic to the
+`K_q`-adic completions via `changeIdealCompletionRing`, the inverse bijections give compatible
+coordinates in `B ⧸ J^n`, and `liftRingHom` assembles a preimage.
+
+## References
+
+* [Stacks, Tag 07N9], second equality, before the use of [Stacks, Tag 00MA]
+* [Stacks, Tag 0394]
 -/
 
 @[expose] public section
@@ -28,31 +40,9 @@ universe u v
 open scoped TensorProduct
 namespace AdicCompletion
 
-/-- The completion of the localized algebra maps onto its local completion product.
-Source: Stacks Project, Algebra, Tag 07N9 (lemma-completion-finite-extension),
-second equality; Tag 0394 (lemma-finite-after-completion).
-(blueprint: lem-weil-pbc-completion-localized-algebra-product-surjective)
-
-Proof:
-1. The finite-quotient comparison gives, for K_q = J S_q, bijections
-   B/J^n -> product_q S_q/K_q^n, and M_q^c <= K_q <= M_q for some c >= 1.
-2. Apply the proved changeIdealCompletionRing with d = 1. Its component formula
-   determines the comparison e_q from the K_q-adic to the M_q-adic completion.
-   Transport the prescribed tuple y to z_q = e_q.symm(y_q).
-3. Invert the finite-quotient bijections on the coordinates of z. These are actual
-   inverses of bijections, not arbitrary witnesses of an existence statement.
-   The canonical quotient maps commute with reduction on representatives.
-   Injectivity of each quotient product map and compatibility of z therefore
-   prove that the inverse coordinates commute with all reduction maps.
-4. Mathlib's liftRingHom constructs x from these compatible coordinates. For
-   each q and n choose a representative b of x_n. The quotient comparison gives
-   z_q,n = psi_q(b) modulo K_q^n. The comparison's component formula gives
-   y_q,n = psi_q(b) modulo M_q^n. The stipulated formula for g gives the same
-   coordinate for g(x)_q. Completion extensionality proves g(x) = y.
-   The construction also covers n = 0 and the empty product.
-
-This is a decomposition: the remaining finite-quotient theorem contains no
-completion objects and leaves the inverse-limit construction to this proof. -/
+/-- The completion of the localized algebra maps onto its local completion product: any ring
+map `g` from the `J`-adic completion of `R_p ⊗[R] S` to `∏ q, S_q^∧` that is levelwise induced
+by maps `ψ q` extending the local maps is surjective. -/
 theorem completion_localizedAlgebra_product_surjective
     (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime] :

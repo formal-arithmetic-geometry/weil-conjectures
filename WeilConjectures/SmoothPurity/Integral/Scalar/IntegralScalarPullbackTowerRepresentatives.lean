@@ -15,8 +15,11 @@ import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarPullbackChainT
 /-! # Coherent scalar squares on pullback representatives
 
 The exact scalar factors and the normalized chain maps form coherent squares before
-localization. Source: coefficient-comparison coherence, Stacks 07A4 and 08J9.
-(blueprint: lem-pur-integral-scalar-pullback-tower-representatives).
+localization.
+
+## References
+
+* Stacks Project, Tags 07A4 and 08J9
 -/
 
 @[expose] public noncomputable section
@@ -163,13 +166,7 @@ private def pullbackSquare {X Y : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ Y)
       ((integralOperationsPullbackComplexFunctor l E f).obj P.obj) ≫
     DerivedCategory.Q.map (scalarPullbackChain l E L ι f P.obj)
 
-/-- The pullback representative square commutes with a coefficient tower.
-Source: coefficient-comparison coherence, Stacks 07A4 and 08J9.
-(blueprint: lem-pur-integral-scalar-pullback-tower-representatives).
-Proof: naturality of the second scalar localization factor moves the first chain map
-past that factor. Functoriality of Q combines the remaining chain maps, the chain
-pullback tower equation rewrites their composite, and exact-derived scalar
-composition identifies the two localization factors with the scalar associator. -/
+/-- The pullback representative square commutes with a coefficient tower. -/
 theorem integralScalarPullbackTowerOnRepresentatives
     (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
     (j : L →ₐ[ℚ_[l]] F) {X Y : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ Y)

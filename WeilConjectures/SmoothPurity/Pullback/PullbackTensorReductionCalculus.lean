@@ -9,7 +9,16 @@ public import Mathlib.CategoryTheory.Products.Basic
 public import Mathlib.CategoryTheory.Whiskering
 import Mathlib.CategoryTheory.Adjunction.Basic
 
-/-! # Reduction calculations for pullback tensor comparisons -/
+/-!
+# Reduction calculations for pullback tensor comparisons
+
+## Implementation details
+
+For `reducedComparison_natural`: the tensor and pullback reduction isomorphisms give natural
+isomorphisms from the two reduced composite functors to the same system functor. The prescribed
+component equation identifies the reduced comparison with their quotient. That quotient is
+natural, and faithfulness of reduction reflects its naturality.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -20,13 +29,7 @@ set_option backward.isDefEq.respectTransparency.types true
 open CategoryTheory CategoryTheory.Functor
 namespace WeilConjectures
 
-/-- Faithful reduction detects naturality of a normalized tensor comparison.
-Source: naturality and cancellation in the parent pullback tensor reduction square.
-(blueprint: lem-pur-reduced-pullback-tensor-naturality).
-Proof: The tensor and pullback reduction isomorphisms give natural isomorphisms
-from the two reduced composite functors to the same system functor. The prescribed
-component equation identifies the reduced comparison with their quotient. That
-quotient is natural, and faithfulness of reduction reflects its naturality. -/
+/-- Faithful reduction detects naturality of a normalized tensor comparison. -/
 theorem reducedComparison_natural
     {C D S T : Type*} [Category* C] [Category* D] [Category* S] [Category* T]
     (Q : C ⥤ S) (R : D ⥤ T) [R.Faithful]

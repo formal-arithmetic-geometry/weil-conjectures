@@ -15,29 +15,27 @@ import WeilConjectures.RingTheory.FlatLocalExtensionGivenResidueField
 /-!
 # Existence of Cohen rings
 
-Source: Stacks Project, Algebra, Lemma Tag 0328
-(blueprint: lem-weil-pbc-cohen-rings-exist).
+Every field of prime characteristic `p` is the residue field of a Cohen ring
+(`exists_cohenRing`).
+
+## Implementation details
+
+The residue field `ZMod p` of `ℤ_[p]` maps into `k`; the flat local extension theorem gives a
+local `ℤ_[p]`-algebra `S` with maximal ideal `(p)` and residue field `k`. The Cohen ring is the
+`m`-adic completion of `S`, which is a complete discrete valuation ring with maximal ideal `(p)`
+and residue field `k`.
+
+## References
+
+* [Stacks, Tag 0328]
+* [Stacks, Tag 03C3]
 -/
 
 @[expose] public section
 
 universe u
 
-/-- Every field of prime characteristic is the residue field of a Cohen ring.
-Source: Stacks Project, Algebra, Lemma Tag 0328.
-(blueprint: lem-weil-pbc-cohen-rings-exist)
-
-Proof:
-1. Identify the residue field of `ℤ_[p]` with `ZMod p` and map it into `k`.
-2. Apply the flat local extension theorem (Tag 03C3) to obtain a local ring `S`
-   with maximal ideal `(p)` and residue field isomorphic to `k`.
-3. Construct `Λ` as `AdicCompletion (maximalIdeal S) S`. Apply
-   `adicCompletion_dvr_of_flat_padicInt` to obtain its domain and DVR properties.
-4. The maximal ideal is finitely generated. Mathlib's completion results give
-   completeness and identify the maximal ideal of `Λ` with `(p)`.
-5. Evaluation at level one is surjective with kernel `(p)`. Its quotient-kernel
-   equivalence identifies `Λ/(p)` with the residue field of `S`, hence with `k`.
-6. Combine these properties with `hp` to obtain `IsCohenRing p Λ`. -/
+/-- Every field of prime characteristic `p` is the residue field of a Cohen ring. -/
 theorem exists_cohenRing (p : ℕ) (hp : Nat.Prime p) (k : Type u) [Field k] [CharP k p] :
     ∃ (Λ : Type u) (_ : CommRing Λ),
       IsCohenRing p Λ ∧ Nonempty ((Λ ⧸ Ideal.span {(p : Λ)}) ≃+* k) := by

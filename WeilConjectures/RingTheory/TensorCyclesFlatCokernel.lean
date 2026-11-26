@@ -13,8 +13,21 @@ import Mathlib.RingTheory.Flat.Equalizer
 /-!
 # Lifting tensor cycles across a flat cokernel
 
-Source: Stacks Project, Algebra, Tag 00MM, the kernel base-change paragraph.
-(blueprint: lem-weil-pbc-tensor-cycles-flat-cokernel)
+For an exact sequence `X → Y → Z → 0` of `R`-modules and ring maps `R → A → B` with
+`A ⊗[R] Z` flat over `A`, the kernel of `X ⊗[R] B → Y ⊗[R] B` is spanned over `B` by the
+image of the kernel of `X ⊗[R] A → Y ⊗[R] A`.
+
+## Implementation details
+
+Let `I` be the image and `K` the kernel of `X ⊗ A → Y ⊗ A`. Since `0 → I → Y ⊗ A → Z ⊗ A → 0`
+has flat last term, tensoring with `B` over `A` keeps `I ⊗[A] B → Y ⊗ B` injective. Right
+exactness applied to `K → X ⊗ A → I → 0` then identifies the image of `K ⊗[A] B` with the
+kernel of `X ⊗ B → Y ⊗ B`. The statement concerns cycles only; it does not involve boundaries
+or Tor, and the presentation terms need not be projective.
+
+## References
+
+* [Stacks, Tag 00MM]
 -/
 
 @[expose] public section
@@ -27,20 +40,9 @@ open scoped TensorProduct
 namespace CategoryTheory
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, Algebra, Tag 00MM (lemma-surjective-on-tor-one),
-the paragraph proving the surjection from the base change of the cycle module.
-
-Proof: tensor the exact presentation X → Y → Z → 0 with A. Put I equal to the
-image of X ⊗ A → Y ⊗ A and K equal to its kernel. The sequence
-0 → I → Y ⊗ A → Z ⊗ A → 0 has flat final term, so tensoring with B over A
-preserves injectivity at I. Tensor right exactness applied to
-K → X ⊗ A → I → 0 then identifies the image of K ⊗[A] B with the kernel
-of X ⊗ B → Y ⊗ B, using the associativity isomorphisms for scalar extension.
-Write a preimage in K ⊗[A] B as a finite sum of pure tensors. Their images
-are exactly the displayed coefficient maps, giving the claimed finite sum.
-This is a statement about cycles only: it does not involve boundaries or Tor.
-It also applies when the presentation terms are not projective.
-(blueprint: lem-weil-pbc-tensor-cycles-flat-cokernel) -/
+/-- Let `X → Y → Z → 0` be an exact sequence of `R`-modules and `R → A → B` ring maps such that
+`A ⊗[R] Z` is flat over `A`. Then every cycle `z` in `X ⊗[R] B` (an element killed by
+`d ⊗ B`) is a finite sum `∑ bᵢ • xᵢ` with `xᵢ` cycles in `X ⊗[R] A` and `bᵢ ∈ B`. -/
 theorem tensor_cycles_flat_cokernel
     (R A B : Type u) [CommRing R] [CommRing A] [CommRing B]
     [Algebra R A] [Algebra R B] [Algebra A B] [IsScalarTower R A B]

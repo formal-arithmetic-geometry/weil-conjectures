@@ -17,9 +17,18 @@ import Mathlib.CategoryTheory.Limits.Preserves.Over
 /-!
 # Flatness of the completion of a strict henselization
 
-Source: Stacks Project, More on Algebra, Lemma Tag 06LJ, proof of (c),
-paragraph beginning “To finish the proof of (c)”
-(blueprint: lem-sc-strict-henselization-completion-flat).
+Let `R` be a Noetherian local ring with maximal ideal `m` and let `C` be a strict henselization
+of `R`. We show that the `mC`-adic completion of `C` is flat over `C`.
+
+## Implementation details
+
+The strict henselization is written as the filtered colimit of pointed étale `R`-algebras. For
+each pointed étale algebra the map to the completed strict henselization is flat, so the
+canonical map from the colimit is flat by the flatness criterion for filtered colimits of rings.
+
+## References
+
+* [Stacks, Tag 06LJ], proof of (c)
 -/
 
 @[expose] public section
@@ -29,18 +38,7 @@ universe v
 namespace Algebra
 
 /-- The maximal-ideal completion of a strict henselization is flat over the
-strict henselization.
-Source: Stacks Project, More on Algebra, Lemma Tag 06LJ, proof of (c)
-(blueprint: lem-sc-strict-henselization-completion-flat).
-
-Proof: Write the strict henselization as the filtered colimit of pointed étale
-algebras from `lem-weil-pbc-strict-henselization-triples`. For each pointed
-étale algebra, the map to the completed strict henselization is flat by the
-per-triple completion-flatness assertion
-`lem-sc-etale-triple-to-sh-completion-flat`. The composite maps are therefore
-flat, and the filtered-colimit flatness lemma
-`lem-weil-pbc-colimit-rings-flat` gives flatness of the canonical map from the
-strict henselization to its completion. -/
+strict henselization. -/
 theorem strictHenselization_completion_flat
     (R K C : Type v) [CommRing R] [IsLocalRing R] [IsNoetherianRing R]
     [Field K] [Algebra (IsLocalRing.ResidueField R) K]

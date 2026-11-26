@@ -15,9 +15,8 @@ public import WeilConjectures.TraceFormula.SourceExchangeProjection
 For a proper pushforward diagram `(f, g) : (C, c) ⟶ (D, b)` with `q = f × f`, the test maps of the
 class of the coefficient pushforward `[f, g]_! u` and of the transported class of `u` agree up to
 the coefficient map
-(`ProEtale.CondensedRing.Correspondence.ProperPushforwardDiagram.class_pushforward_core`,
-blueprint `theorem-proper-pushforward-lefschetz-verdier--1`, Step 2). This gives identity (b),
-`ProperPushforwardDiagram.class_pushforward`.
+(`ProEtale.CondensedRing.Correspondence.ProperPushforwardDiagram.class_pushforward_core`). This
+gives identity (b), `ProperPushforwardDiagram.class_pushforward`.
 
 -/
 

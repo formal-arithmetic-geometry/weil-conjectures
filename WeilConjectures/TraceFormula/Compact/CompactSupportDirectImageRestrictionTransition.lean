@@ -11,9 +11,21 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Restriction-form transition of derived direct image
 
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 03DI, 03DJ, 07A4, 0941.
-This module specializes the ordinary system calculus to the actual pro-etale functors.
-(blueprint: lem-trf-direct-image-restriction-transition).
+Derived direct-image evaluation intertwines the restriction-form system transition. This module
+specializes the ordinary system calculus to the actual pro-étale functors.
+
+## Implementation details
+
+Resolving `N` by a K-injective `J` and its evaluations by K-injective resolutions, the two
+composites become chain homotopic, and the normalization equations of the evaluation and
+coefficient comparisons identify them; the choice of evaluated resolutions cancels by uniqueness
+of right-derived comparisons. The argument does not assume that evaluation or quotient
+restriction preserves injectives, K-injectives, flatness, or cartesian systems.
+
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10.
+* [Stacks Project, Tags 03DI, 03DJ, 07A4 and 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -536,27 +548,7 @@ private theorem ordinary_transition {Z Y : Scheme.{t}} (p : Z ⟶ Y)
 
 /-- Derived direct-image evaluation intertwines the restriction-form system transition.
 This is a statement about arbitrary systems N on Z, before open extension or completed
-restriction, and involves neither the coefficient mate nor any scalar adjunction.
-Source: coherence proof steps 2 and 4; Zheng 4.10; Stacks 07A4, 0941
-(blueprint: lem-trf-direct-image-restriction-transition).
-Proof: on ordinary systems the evaluation maps and the coefficient square are identities
-on sections by h0 and h2. Both composites are therefore the horizontal restriction
-map of N evaluated on the base change of a pro-etale test object. Resolve N on the
-whole sequence site, with K-injective representative J. Choose K-injective resolutions
-r_m:e_m J -> I_m and r_n:e_n J -> I_n. Choose a K-injective resolution
-r:Res I_n -> K. The chain map r followed after Res(r_n) and the transition of J
-factors through r_m in the homotopy category, since K is K-injective and r_m is a
-quasi-isomorphism. Choose a chain representative s:I_m -> K for this factorization.
-Thus s r_m and r Res(r_n) tau_J are chain homotopic. Apply the additive direct image:
-it preserves this homotopy. The normalization h3 at (J,I_m,r_m) and (J,I_n,r_n)
-identifies the two evaluation comparisons, while h1 at (I_n,K,r) identifies the
-coefficient comparison. Substitute these three normalization equations and use the
-ordinary sectionwise transition square. The displayed equality now follows from the
-homotopy just obtained. Cancel the resolution comparison isomorphisms to return to N.
-The choice of evaluated resolutions cancels by uniqueness of right-derived comparisons.
-In particular, the argument does not assume that evaluation or quotient restriction
-preserves injectives,
-K-injectives, flatness, or cartesian systems. -/
+restriction, and involves neither the coefficient mate nor any scalar adjunction. -/
 theorem compactSupportDirectImageRestrictionTransition
     {X Z Y : Scheme.{t}} {j : X ⟶ Z} {p : Z ⟶ Y} [IsOpenImmersion j]
     [D : CompactSupportSystemEvaluationData l E X Z Y j p]

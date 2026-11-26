@@ -39,7 +39,11 @@ import Mathlib.RingTheory.Ideal.Quotient.Index
 The finite-level maps, strict towers, and good-representative models are publicly
 re-exported from IntegralOperationsScalarComparisonModels. This file retains the
 ordinary derived comparisons, completed comparisons, and coherence statements.
-(blueprint: lem-pur-integral-operations-scalar-extension).
+
+## References
+
+* Stacks Project, Tags 03EL, 07A4, 08J9, 08JB, 08TC, 099B and 099N
+* B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, 3.4.11 and 3.5.1
 -/
 
 @[expose] public noncomputable section
@@ -90,15 +94,7 @@ attribute [local irreducible] integralOperationsPullbackComplexFunctor
 attribute [local irreducible] constantSheaf limit
   integralDerivedPullback integralCompletedTensor integralScalarExtension
 
-/-- The ordinary scalar/pullback comparison is the localization of scalarPullbackChain.
-Source: Stacks 07A4, 099N (blueprint: lem-pur-integral-operations-scalar-extension).
-Proof: the prescribed level generator maps are natural and commute with strict
-reductions. The two Roos coordinates therefore give scalarPullbackChain. Finite
-freeness commutes with countable products; cofinality of uniformizer filtrations
-makes this chain map a quasi-isomorphism on good representatives. Localize the
-map, conjugating by the two displayed representative comparisons. Good K-flat
-resolutions compute all objects and roofs, giving naturality and invertibility.
-The same localization property gives uniqueness with this normalization. -/
+/-- The ordinary scalar/pullback comparison is the localization of scalarPullbackChain. -/
 theorem scalarPullbackOrdinary_existsUnique {X Y : AlgebraicGeometry.Scheme.{u}}
     (f : X ⟶ Y) :
     ∃! α : integralDerivedPullback l E f ⋙ integralOrdinaryDerivedScalar l E L ι X ≅
@@ -106,16 +102,13 @@ theorem scalarPullbackOrdinary_existsUnique {X Y : AlgebraicGeometry.Scheme.{u}}
       scalarPullbackOrdinaryNormalization l E L ι f α := by
   exact normalizedIntegralScalarPullbackComparison l E L ι f
 
-/-- The canonical localized scalar/pullback comparison.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-operations-scalar-extension). -/
+/-- The canonical localized scalar/pullback comparison. -/
 def scalarPullbackOrdinary {X Y : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ Y) :
     integralDerivedPullback l E f ⋙ integralOrdinaryDerivedScalar l E L ι X ≅
       integralOrdinaryDerivedScalar l E L ι Y ⋙ integralDerivedPullback l L f :=
   (scalarPullbackOrdinary_existsUnique l E L ι f).exists.choose
 
-/-- The prescribed representative normalization, retained as a named predicate.
-Source: Stacks 07A4, 08J9, 08TC
-(blueprint: lem-pur-integral-operations-scalar-extension). -/
+/-- The prescribed representative normalization, retained as a named predicate. -/
 def scalarTensorOrdinaryNormalization (W : AlgebraicGeometry.Scheme.{u})
     (α : integralCompletedTensor l E W ⋙ integralOrdinaryDerivedScalar l E L ι W ≅
       (integralOrdinaryDerivedScalar l E L ι W).prod
@@ -134,14 +127,7 @@ def scalarTensorOrdinaryNormalization (W : AlgebraicGeometry.Scheme.{u})
           (integralCompletedTensorComparison l L W).hom.app
             (⟨_, scalarGood l E L ι W P⟩, ⟨_, scalarGood l E L ι W Q⟩)
 
-/-- The ordinary scalar/completed-tensor comparison has its full Roos normalization.
-Source: Stacks 07A4, 099N (blueprint: lem-pur-integral-operations-scalar-extension).
-Proof: the finite tensor generator maps respect the signed total differential and
-strict reductions. Their diagonal Roos map is scalarTensorChain. Finite freeness
-commutes with its products, and the two uniformizer filtrations are cofinal. Thus
-this map is a quasi-isomorphism on good pairs. Localize in both variables and
-conjugate by the displayed comparisons. Roofs prove naturality and independence;
-the universal property of the localization gives uniqueness. -/
+/-- The ordinary scalar/completed-tensor comparison has its full Roos normalization. -/
 theorem scalarTensorOrdinary_existsUnique (W : AlgebraicGeometry.Scheme.{u}) :
     ∃! α : integralCompletedTensor l E W ⋙ integralOrdinaryDerivedScalar l E L ι W ≅
       (integralOrdinaryDerivedScalar l E L ι W).prod
@@ -149,17 +135,14 @@ theorem scalarTensorOrdinary_existsUnique (W : AlgebraicGeometry.Scheme.{u}) :
       scalarTensorOrdinaryNormalization l E L ι W α := by
   exact normalizedIntegralScalarTensorComparison l E L ι W
 
-/-- The canonical localized scalar/completed-tensor comparison.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-operations-scalar-extension). -/
+/-- The canonical localized scalar/completed-tensor comparison. -/
 def scalarTensorOrdinary (W : AlgebraicGeometry.Scheme.{u}) :
     integralCompletedTensor l E W ⋙ integralOrdinaryDerivedScalar l E L ι W ≅
       (integralOrdinaryDerivedScalar l E L ι W).prod
         (integralOrdinaryDerivedScalar l E L ι W) ⋙ integralCompletedTensor l L W :=
   (scalarTensorOrdinary_existsUnique l E L ι W).exists.choose
 
-/-- The prescribed representative normalization, retained as a named predicate.
-Source: Stacks 07A4, 08J9, 08TC
-(blueprint: lem-pur-integral-operations-scalar-extension). -/
+/-- The prescribed representative normalization, retained as a named predicate. -/
 def scalarCompletionNormalization (W : AlgebraicGeometry.Scheme.{u})
     (χ : integralOrdinaryDerivedScalar l E L ι W ⟶ integralScalarExtension l E L ι W) : Prop :=
   (∀ P : (integralOperationsGoodComplex l E W).FullSubcategory,
@@ -169,33 +152,23 @@ def scalarCompletionNormalization (W : AlgebraicGeometry.Scheme.{u})
             DerivedCategory.Q.map ((integralScalarCompletionChain l E L ι W).app P.obj)) ∧
       (∀ K, IsSfDerivedComplete l E W K → IsIso (χ.app K))
 
-/-- The ordinary-to-completed scalar map is fixed on every good complex.
-Source: Bhatt--Scholze 3.5.1 (blueprint: lem-pur-integral-operations-scalar-extension).
-Proof: the already prescribed integralScalarCompletionChain has the quotient tensor
-projection as its unshifted coordinate and zero shifted coordinate. Localize that
-chain map using the scalar representative comparisons. Good resolutions compute
-all objects and roofs, so the localization gives exactly one natural transformation.
-The finite free basis commutes with the Roos products; on a complete input the
-completion unit is invertible, which proves the second assertion. -/
+/-- The ordinary-to-completed scalar map is fixed on every good complex. -/
 theorem scalarCompletion_existsUnique (W : AlgebraicGeometry.Scheme.{u}) :
     ∃! χ : integralOrdinaryDerivedScalar l E L ι W ⟶ integralScalarExtension l E L ι W,
       scalarCompletionNormalization l E L ι W χ := by
   exact normalizedIntegralScalarCompletion l E L ι W
 
-/-- The normalized scalar completion map, including on nonconstructible complete Homs.
-Source: Bhatt--Scholze 3.5.1 (blueprint: lem-pur-integral-operations-scalar-extension). -/
+/-- The normalized scalar completion map, including on nonconstructible complete Homs. -/
 def scalarCompletion (W : AlgebraicGeometry.Scheme.{u}) :
     integralOrdinaryDerivedScalar l E L ι W ⟶ integralScalarExtension l E L ι W :=
   (scalarCompletion_existsUnique l E L ι W).exists.choose
 
-/-- The intrinsic ordinary closed structure, retaining the recorded ambient Hom.
-Source: Stacks 08J9 (blueprint: lem-pur-integral-operations-scalar-extension). -/
+/-- The intrinsic ordinary closed structure, retaining the recorded ambient Hom. -/
 def scalarIntegralClosed (W : AlgebraicGeometry.Scheme.{u}) :
     CoefficientClosedStructure (integralDerivedInternalHom l E W) :=
   (coefficientDerivedSystemEvaluationCalculus l E W).choose.integralClosed
 
-/-- The normalized total tensor models for the same closed structure.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-operations-scalar-extension). -/
+/-- The normalized total tensor models for the same closed structure. -/
 def scalarIntegralModels (W : AlgebraicGeometry.Scheme.{u}) :
     CoefficientTensorModels.{u, u+1, u, u+2}
       (AlgebraicGeometry.Scheme.ProEt.topology W)
@@ -204,9 +177,7 @@ def scalarIntegralModels (W : AlgebraicGeometry.Scheme.{u}) :
 
 attribute [local irreducible] scalarIntegralClosed scalarIntegralModels
 
-/-- The prescribed representative normalization, retained as a named predicate.
-Source: Stacks 07A4, 08J9, 08TC
-(blueprint: lem-pur-integral-operations-scalar-extension). -/
+/-- The prescribed representative normalization, retained as a named predicate. -/
 def scalarOrdinaryTensorChainNormalization (W : AlgebraicGeometry.Scheme.{u})
     (α : coefficientTotalTensor.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)
         (completedIntegralCommRingSheafUnrestricted l E W) ⋙
@@ -232,12 +203,7 @@ def scalarOrdinaryTensorChainNormalization (W : AlgebraicGeometry.Scheme.{u})
           (integralOrdinaryTensorSection l E L ι W (P.X p) U 1 x)
           (integralOrdinaryTensorSection l E L ι W (Q.X q) U 1 y)
 
-/-- Ordinary total tensor base change, fixed on sheafified pure tensors.
-Source: Stacks 03EL, 07A4 (blueprint: lem-pur-integral-operations-scalar-extension).
-Proof: send s tensor (x tensor y) to (s tensor x) tensor (1 tensor y).
-Balance gives the inverse (s tensor x) tensor (t tensor y) to st tensor (x tensor y).
-Sheafify, and sum over bidegrees. The formulas respect both signed differential
-summands and chain maps. These generators determine the natural isomorphism. -/
+/-- Ordinary total tensor base change, fixed on sheafified pure tensors. -/
 theorem scalarOrdinaryTensorChain_existsUnique (W : AlgebraicGeometry.Scheme.{u}) :
     ∃! α : coefficientTotalTensor.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)
         (completedIntegralCommRingSheafUnrestricted l E W) ⋙
@@ -249,8 +215,7 @@ theorem scalarOrdinaryTensorChain_existsUnique (W : AlgebraicGeometry.Scheme.{u}
       scalarOrdinaryTensorChainNormalization l E L ι W α := by
   exact normalizedIntegralOrdinaryTensorChain l E L ι W
 
-/-- The pure-tensor-normalized ordinary total comparison.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-operations-scalar-extension). -/
+/-- The pure-tensor-normalized ordinary total comparison. -/
 def scalarOrdinaryTensorChain (W : AlgebraicGeometry.Scheme.{u}) :
     coefficientTotalTensor.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)
         (completedIntegralCommRingSheafUnrestricted l E W) ⋙
@@ -261,9 +226,7 @@ def scalarOrdinaryTensorChain (W : AlgebraicGeometry.Scheme.{u}) :
             (completedIntegralCommRingSheafUnrestricted l L W) :=
   (scalarOrdinaryTensorChain_existsUnique l E L ι W).exists.choose
 
-/-- The prescribed representative normalization, retained as a named predicate.
-Source: Stacks 07A4, 08J9, 08TC
-(blueprint: lem-pur-integral-operations-scalar-extension). -/
+/-- The prescribed representative normalization, retained as a named predicate. -/
 def scalarClosedTensorNormalization (W : AlgebraicGeometry.Scheme.{u})
     (α : (scalarIntegralClosed l E W).tensor ⋙
         integralOrdinaryDerivedScalar l E L ι W ≅
@@ -286,13 +249,7 @@ def scalarClosedTensorNormalization (W : AlgebraicGeometry.Scheme.{u})
 
 section ScalarClosedTensorDescent
 
-/-- The ordinary derived scalar tensor comparison is fixed on all good pairs.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-operations-scalar-extension).
-Proof: scalarGood supplies good target representatives. Localize the ordinary
-pure-tensor chain isomorphism, using the two normalized closed tensor models.
-Exact ordinary extension identifies its derived value with its termwise value.
-The displayed square is that conjugation. Naturality on roofs and simultaneous
-localization give a natural isomorphism and uniqueness with this square. -/
+/-- The ordinary derived scalar tensor comparison is fixed on all good pairs. -/
 theorem scalarClosedTensor_existsUnique (W : AlgebraicGeometry.Scheme.{u}) :
     ∃! α : (scalarIntegralClosed l E W).tensor ⋙
         integralOrdinaryDerivedScalar l E L ι W ≅
@@ -343,8 +300,7 @@ theorem scalarClosedTensor_existsUnique (W : AlgebraicGeometry.Scheme.{u}) :
 
 end ScalarClosedTensorDescent
 
-/-- The canonical closed scalar tensor comparison.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-operations-scalar-extension). -/
+/-- The canonical closed scalar tensor comparison. -/
 def scalarClosedTensor (W : AlgebraicGeometry.Scheme.{u}) :
     (scalarIntegralClosed l E W).tensor ⋙
         integralOrdinaryDerivedScalar l E L ι W ≅
@@ -352,8 +308,7 @@ def scalarClosedTensor (W : AlgebraicGeometry.Scheme.{u}) :
         (integralOrdinaryDerivedScalar l E L ι W) ⋙ (scalarIntegralClosed l L W).tensor :=
   (scalarClosedTensor_existsUnique l E L ι W).exists.choose
 
-/-- Ordinary scalar/internal-Hom comparison: transpose of scalar-extended evaluation.
-Source: Stacks 08J9 (blueprint: lem-pur-integral-operations-scalar-extension). -/
+/-- Ordinary scalar/internal-Hom comparison: transpose of scalar-extended evaluation. -/
 def scalarHomOrdinary (W : AlgebraicGeometry.Scheme.{u})
     (M N : DerivedCategory (integralTowerModules l E W)) :
     (integralOrdinaryDerivedScalar l E L ι W).obj
@@ -366,15 +321,7 @@ def scalarHomOrdinary (W : AlgebraicGeometry.Scheme.{u})
 
 section ScalarHomBaseChange
 
-/-- Finite free scalar extension commutes with internal Hom, including unbounded inputs.
-Source: Stacks 08J9 (blueprint: lem-pur-integral-operations-scalar-extension).
-Proof: resolve the second input by a K-injective complex. After restriction, finite
-free extension is a finite direct sum. Internal Hom into a finite direct sum is
-the corresponding finite sum of internal Homs; restriction is exact, so the derived
-adjunction gives the same conclusion. Under the closed tensor model, the resulting
-map is exactly the transpose of extended evaluation, namely scalarHomOrdinary.
-The inverse is the finite-free tensor-Hom identity; its basis calculation is
-independent of the basis. Thus this specified map is invertible. -/
+/-- Finite free scalar extension commutes with internal Hom, including unbounded inputs. -/
 theorem scalarHomOrdinary_isIso (W : AlgebraicGeometry.Scheme.{u})
     (M N : DerivedCategory (integralTowerModules l E W)) :
     IsIso (scalarHomOrdinary l E L ι W M N) := by
@@ -468,8 +415,7 @@ theorem scalarHomOrdinary_isIso (W : AlgebraicGeometry.Scheme.{u})
 
 end ScalarHomBaseChange
 
-/-- The completion isomorphism on an actually derived-complete object.
-Source: Bhatt--Scholze 3.5.1 (blueprint: lem-pur-integral-operations-scalar-extension). -/
+/-- The completion isomorphism on an actually derived-complete object. -/
 def scalarCompletionIso (W : AlgebraicGeometry.Scheme.{u})
     (K : DerivedCategory (integralTowerModules l E W)) (hK : IsSfDerivedComplete l E W K) :
     (integralOrdinaryDerivedScalar l E L ι W).obj K ≅
@@ -478,8 +424,7 @@ def scalarCompletionIso (W : AlgebraicGeometry.Scheme.{u})
     (scalarCompletion_existsUnique l E L ι W).exists.choose_spec.2 K hK
   exact asIso ((scalarCompletion l E L ι W).app K)
 
-/-- Completed pullback/scalar comparison, conjugated by the normalized completion maps.
-Source: Stacks 099N (blueprint: lem-pur-integral-operations-scalar-extension). -/
+/-- Completed pullback/scalar comparison, conjugated by the normalized completion maps. -/
 def scalarPullbackCompleted {X Y : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ Y)
     (K : DerivedCategory (integralTowerModules l E Y))
     (hK : IsSfDerivedComplete l E Y K)
@@ -490,8 +435,7 @@ def scalarPullbackCompleted {X Y : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ Y)
     (scalarPullbackOrdinary l E L ι f).app K ≪≫
     (integralDerivedPullback l L f).mapIso (scalarCompletionIso l E L ι Y K hK)
 
-/-- Completed tensor/scalar comparison, with the prescribed ordinary and Roos maps.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-operations-scalar-extension). -/
+/-- Completed tensor/scalar comparison, with the prescribed ordinary and Roos maps. -/
 def scalarTensorCompleted (W : AlgebraicGeometry.Scheme.{u})
     (M N : DerivedCategory (integralTowerModules l E W))
     (hM : IsSfDerivedComplete l E W M) (hN : IsSfDerivedComplete l E W N)
@@ -507,8 +451,7 @@ def scalarTensorCompleted (W : AlgebraicGeometry.Scheme.{u})
 
 /-- The completed Hom comparison uses the inverse first-variable comparison.
 It is defined whenever its three completion inverses exist; in particular this
-includes every permitted constructible-Hom pair in the owning definition.
-Source: Stacks 08J9 (blueprint: lem-pur-integral-operations-scalar-extension). -/
+includes every permitted constructible-Hom pair in the owning definition. -/
 def scalarHomCompleted (W : AlgebraicGeometry.Scheme.{u})
     (M N : DerivedCategory (integralTowerModules l E W))
     (hM : IsSfDerivedComplete l E W M) (hN : IsSfDerivedComplete l E W N)
@@ -528,13 +471,7 @@ def scalarHomCompleted (W : AlgebraicGeometry.Scheme.{u})
 section ScalarHomCompleteness
 
 /-- Ambient internal Hom into a complete object is complete; constructibility of the
-Hom is not assumed. Source: Bhatt--Scholze 3.4.11; Stacks 08JB, 099B
-(blueprint: lem-pur-integral-operations-scalar-extension).
-Proof: restrict to every slice. Tensor-Hom currying identifies Hom from R[1/t]
-into Hom(M,N) with Hom from M into Hom(R[1/t],N), which vanishes by completeness
-of N. The local Koszul completion reflector identifies this vanishing with
-invertibility of the canonical completion unit. Its Roos triangle is the specified
-strict reduction-tower triangle, giving precisely IsSfDerivedComplete. -/
+Hom is not assumed. -/
 theorem scalarInternalHom_complete (W : AlgebraicGeometry.Scheme.{u})
     (M N : DerivedCategory (integralTowerModules l E W))
     (hN : IsSfDerivedComplete l E W N) :
@@ -543,11 +480,7 @@ theorem scalarInternalHom_complete (W : AlgebraicGeometry.Scheme.{u})
 
 end ScalarHomCompleteness
 
-/-- Naturality of the evaluation-defined ordinary Hom comparison in both variables.
-Source: Stacks 08J9 (blueprint: lem-pur-integral-operations-scalar-extension).
-Proof: uncurry both sides. Tensor-comparison naturality and evaluation naturality
-identify both uncurried maps with extended evaluation after the two given arrows.
-The closed transpose bijection gives the equality, including precomposition. -/
+/-- Naturality of the evaluation-defined ordinary Hom comparison in both variables. -/
 theorem scalarHomOrdinary_naturality (W : AlgebraicGeometry.Scheme.{u})
     (M N M' N' : DerivedCategory (integralTowerModules l E W))
     (a : M' ⟶ M) (b : N ⟶ N') :
@@ -848,17 +781,7 @@ end ScalarTowerDescent
 
 /-- The prescribed comparisons commute with coefficient towers before completion.
 Conjugation by scalarCompletion gives the completed tower identities, with the
-same completed scalar associators as the recorded scalar-extension composition.
-Source: blueprint scalar comparison proof step 9; Stacks 07A4, 08J9
-(blueprint: lem-pur-integral-operations-scalar-extension).
-Proof: on finite pullback and tensor generators, both routes multiply the two
-new coefficients in the same order. This gives equality of the strict tower maps
-and both diagonal Roos coordinates. Their localizations give the first two
-equalities. Uncurry the Hom equality: both routes evaluate h on m and multiply
-those same coefficients. The normalized closed transpose gives the third
-equality. The canonical completion maps commute with these diagrams by their
-quotient generator normalization; cancel adjacent inverse completion maps to
-obtain the completed identities. -/
+same completed scalar associators as the recorded scalar-extension composition. -/
 theorem scalarOperationsOrdinary_tower
     (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
     (j : L →ₐ[ℚ_[l]] F) {X Y : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ Y)

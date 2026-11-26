@@ -97,15 +97,22 @@ import Mathlib.CategoryTheory.Monoidal.Preadditive
 /-!
 # Normalized finite-projective models under ordinary pullback
 
-Source: Stacks Project, Tags 08H3, 06YQ and 06YY; Modules on Sites, Section 03EK;
-Bhatt--Scholze, Proposition 6.6.11 and Remark 6.8.15.
-(blueprint: lem-tw-finite-projective-model-pullback).
+We compare the ordinary pullback of the constant realization `P ↦ B_T ⊗_R P` of finite
+projective scalar modules with the realization over the pulled-back coefficients, and show
+that the comparison is uniquely determined on constant tensor generators.
+
+## Implementation details
 
 All tensors and derived functors here are ordinary, before completion. The limit
 coefficient sheaf and its quotient projections are the published constructions.
 The scalar ring and module pullback are the published ordinary integral constructions.
 Schemes and the coefficient extension are in universe u; their small pro-etale
 sites retain object universe u+1 and morphism universe u.
+
+## References
+
+* Stacks Project, Tags 03CY, 03D2, 03EK, 06YQ, 06YY, 08G5 and 08H3
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.6.11 and Remark 6.8.15
 -/
 
 @[expose] public noncomputable section
@@ -158,9 +165,7 @@ attribute [local instance] proofCommSheafify proofAbSheafify proofAbWeakSheafify
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The canonical constant scalar map, retaining commutativity for sheaf tensors.
-Source: the limit lift of the constant quotient cone
-(blueprint: lem-tw-finite-projective-model-pullback). -/
+/-- The canonical constant scalar map, retaining commutativity for sheaf tensors. -/
 def scalar (T : Scheme.{u}) :
     SheafOfModules.scalarPerfectRing.{u + 1, u, u + 1}
       (ProEt.topology T) (PbcIntegralRing l E) ⟶
@@ -168,17 +173,13 @@ def scalar (T : Scheme.{u}) :
   (sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).preimage
     (integralConstantToCompletionOfUniverses.{u, u} l E T)
 
-/-- Ordinary constant realization P ↦ B_T tensor_R underline P, including linear maps.
-Source: Stacks 03CY and 03EK; Bhatt--Scholze, Proposition 6.6.11
-(blueprint: lem-tw-finite-projective-model-pullback). -/
+/-- Ordinary constant realization P ↦ B_T tensor_R underline P, including linear maps. -/
 def model (T : Scheme.{u}) :
     ModuleCat.{u + 1} (PbcIntegralRing l E) ⥤ integralTowerModules.{u, u} l E T :=
   SheafOfModules.scalarPerfectFunctor.{u + 1, u, u + 1}
     (ProEt.topology T) (PbcIntegralRing l E) (scalar l E T)
 
-/-- A pure tensor b tensor x, using the actual constant and tensor sheafification units.
-Source: Stacks 03CY and 03EK
-(blueprint: lem-tw-finite-projective-model-pullback). -/
+/-- A pure tensor b tensor x, using the actual constant and tensor sheafification units. -/
 def modelSection (T : Scheme.{u}) (P : ModuleCat.{u + 1} (PbcIntegralRing l E))
     (W : T.ProEtᵒᵖ) (b : (completedIntegralCommRingSheafUnrestricted.{u, u} l E T).obj.obj W)
     (x : P) : ((model l E T).obj P).val.obj W :=
@@ -188,31 +189,22 @@ def modelSection (T : Scheme.{u}) (P : ModuleCat.{u + 1} (PbcIntegralRing l E))
     (SheafOfModules.scalarPerfectConstantSection.{u + 1, u, u + 1} (ProEt.topology T)
       (PbcIntegralRing l E) P W x)
 
-/-- Additivity of the published constant realization.
-Source: Stacks 03CY and 03EK
-(blueprint: lem-tw-finite-projective-model-pullback).
-Proof: compose the additive constant-module and scalar-extension functors. -/
+/-- Additivity of the published constant realization. -/
 @[instance] theorem model_additive (T : Scheme.{u}) : (model l E T).Additive := by
   exact SheafOfModules.scalarPerfectFunctor_additive _ _ _
 
-/-- The inverse-image generator 1 tensor m from the specified adjunction unit.
-Source: Stacks 03D2
-(blueprint: lem-tw-finite-projective-model-pullback). -/
+/-- The inverse-image generator 1 tensor m from the specified adjunction unit. -/
 def generator {V U : Scheme.{u}} (v : V ⟶ U) (M : integralTowerModules.{u, u} l E U)
     (W : U.ProEt) (x : M.val.obj (op W)) :
     ((ordinaryIntegralModulePull l E v).obj M).val.obj (op ((proEtaleBaseChange v).obj W)) :=
   (((ordinaryIntegralModuleAdjunction l E v).unit.app M).val.app (op W)) x
 
-/-- The existing full subcategory of finite projective scalar modules.
-Source: Stacks 08G5, finite-free direct summands
-(blueprint: lem-tw-finite-projective-model-pullback). -/
+/-- The existing full subcategory of finite projective scalar modules. -/
 abbrev Projectives := ObjectProperty.FullSubcategory
   (fun P : ModuleCat.{u + 1} (PbcIntegralRing l E) ↦
     Module.Finite (PbcIntegralRing l E) P ∧ Module.Projective (PbcIntegralRing l E) P)
 
-/-- Restrict the scalar realization to finite projective modules, with every linear map.
-Source: Stacks 03EK and 08H3
-(blueprint: lem-tw-finite-projective-model-pullback). -/
+/-- Restrict the scalar realization to finite projective modules, with every linear map. -/
 def projectiveModel (T : Scheme.{u}) : Projectives l E ⥤ integralTowerModules.{u, u} l E T :=
   ObjectProperty.ι _ ⋙ model l E T
 
@@ -394,8 +386,7 @@ private noncomputable def tensorHomEquiv
     (tensorPresheafHomEquiv c M H)
 
 -- These are naturality statements for the explicit universe-aware presheaf
--- changeOfRingsPresheafOfUniverses and scalarPerfectExtensionFunctor. The older
--- CoefficientOrdinaryProof and ScalarReductionProof use changeOfRingsPresheaf.
+-- changeOfRingsPresheafOfUniverses and scalarPerfectExtensionFunctor.
 private theorem tensorHomEquiv_naturality_left
     {D : Type a} [Category.{b} D] [EssentiallySmall.{r} D]
     {K : GrothendieckTopology D}
@@ -647,17 +638,7 @@ private theorem allComparison_normalized {V U : Scheme.{u}} (v : V ⟶ U)
   rw [allComparison_terminal, modelSection_restrict] at h
   exact h
 
-/-- The canonical comparison is uniquely fixed on constant tensor generators.
-Source: Stacks 08H3 and 03EK; the item's balanced-tensor and matrix argument
-(blueprint: lem-tw-finite-projective-model-pullback).
-Proof: the projection equations show that the completed structural map preserves
-constant R-scalars. The explicit constant-module and scalar-extension adjunctions
-identify maps out of each model with R-linear maps to its terminal sections.
-Scalar compatibility identifies these right adjoints after ordinary pushforward.
-Uniqueness of left adjoints therefore gives the comparison, even for arbitrary
-R-modules. The hom-equivalence equation gives its normalized formula at a terminal
-object. Restriction gives the formula on every object, and injectivity of the
-hom-equivalences proves that this formula determines the comparison uniquely. -/
+/-- The canonical comparison is uniquely fixed on constant tensor generators. -/
 theorem comparison_existsUnique {V U : Scheme.{u}} (v : V ⟶ U) :
     ∃! γ : projectiveModel l E U ⋙ ordinaryIntegralModulePull l E v ≅ projectiveModel l E V,
       ∀ (P : Projectives l E) (W : U.ProEt) (x : P.obj),
@@ -681,30 +662,20 @@ theorem comparison_existsUnique {V U : Scheme.{u}} (v : V ⟶ U) :
     exact (he' P (⊤_ U.ProEt) x).trans
       (allComparison_normalized l E v P.obj (⊤_ U.ProEt) x).symm
 
-/-- The unique normalized comparison; no splitting is chosen in this definition.
-Source: Stacks 08H3 and 03EK
-(blueprint: lem-tw-finite-projective-model-pullback). -/
+/-- The unique normalized comparison; no splitting is chosen in this definition. -/
 def comparison {V U : Scheme.{u}} (v : V ⟶ U) :
     projectiveModel l E U ⋙ ordinaryIntegralModulePull l E v ≅ projectiveModel l E V :=
   (comparison_existsUnique l E v).exists.choose
 
-/-- The standard finite free scalar module, including rank zero.
-Source: Stacks 08G5, with the standard coordinate basis
-(blueprint: lem-tw-finite-projective-model-pullback). -/
+/-- The standard finite free scalar module, including rank zero. -/
 def free (r : ℕ) : Projectives l E :=
   ⟨ModuleCat.of (PbcIntegralRing l E) (Fin r → PbcIntegralRing l E), inferInstance, inferInstance⟩
 
-/-- The specified termwise scalar realization, including the original differential.
-Source: Stacks 03CY and 03EK; Bhatt--Scholze, Proposition 6.6.11
-(blueprint: lem-tw-finite-projective-model-pullback). -/
+/-- The specified termwise scalar realization, including the original differential. -/
 def modelComplex (T : Scheme.{u}) :=
   (model l E T).mapHomologicalComplex (.up ℤ)
 
-/-- Naturality in each scalar differential is the chain-map equation.
-Source: Stacks 08H3; the item's step 5
-(blueprint: lem-tw-finite-projective-model-pullback).
-Proof: regard d(i,j) as a morphism in the full finite-projective subcategory.
-The naturality equation for comparison is exactly the displayed equality. -/
+/-- Naturality in each scalar differential is the chain-map equation. -/
 theorem comparison_differential {V U : Scheme.{u}} (v : V ⟶ U)
     (L : CochainComplex (ModuleCat.{u + 1} (PbcIntegralRing l E)) ℤ)
     (hL : ∀ q : ℤ, Module.Finite (PbcIntegralRing l E) (L.X q) ∧
@@ -715,9 +686,7 @@ theorem comparison_differential {V U : Scheme.{u}} (v : V ⟶ U)
   exact ((comparison l E v).hom.naturality
     (show (⟨L.X i, hL i⟩ : Projectives l E) ⟶ ⟨L.X j, hL j⟩ from ⟨L.d i j⟩)).symm
 
-/-- The normalized isomorphism of complexes, with its actual degreewise comparison maps.
-Source: Stacks 08H3; the item's step 5
-(blueprint: lem-tw-finite-projective-model-pullback). -/
+/-- The normalized isomorphism of complexes, with its actual degreewise comparison maps. -/
 def complexComparison {V U : Scheme.{u}} (v : V ⟶ U)
     (L : CochainComplex (ModuleCat.{u + 1} (PbcIntegralRing l E)) ℤ)
     (hL : ∀ q : ℤ, Module.Finite (PbcIntegralRing l E) (L.X q) ∧

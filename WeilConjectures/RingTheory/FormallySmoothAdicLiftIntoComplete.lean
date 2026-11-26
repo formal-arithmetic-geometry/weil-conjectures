@@ -14,8 +14,20 @@ import WeilConjectures.RingTheory.FormallySmoothAdicQuotientGrid
 /-!
 # Lifting adically formally smooth algebras into complete rings
 
-Source: Stacks Project, More on Algebra, Lemma 15.38.5 (Tag 07NJ), with the base
-ring discrete (blueprint: lem-weil-pbc-fs-adic-lift-into-complete).
+An algebra formally smooth for an adic topology lifts through a closed ideal of an adically
+complete algebra.
+
+## Implementation details
+
+`Algebra.FormallySmoothAdic.exists_quotient_grid` gives compatible maps
+`S → A ⧸ (J ^ a ⊔ I ^ b)`. Since `J ^ (b * t) ≤ I ^ b`, the diagonal maps factor through
+`A ⧸ I ^ b` and `IsAdicComplete.liftAlgHom` assembles them into `f : S → A`. Closedness of `J`
+shows that `f` lifts `g`, and the bound `(I ⊔ J) ^ k ≤ I ⊔ J ^ k` gives the continuity
+estimate.
+
+## References
+
+* [Stacks, Tag 07NJ], with the base ring discrete
 -/
 
 @[expose] public section
@@ -26,28 +38,7 @@ namespace Algebra
 
 /-- An algebra formally smooth for the `n`-adic topology lifts through a closed ideal `J`
 of an `I`-adically complete algebra when a positive power `J ^ t` lies in `I`.
-The lift satisfies the explicit continuity bound `f(n ^ (r * t)) ⊆ I`.
-Source: Stacks Project, More on Algebra, Lemma 15.38.5 (Tag 07NJ).
-(blueprint: lem-weil-pbc-fs-adic-lift-into-complete)
-
-Proof (following Tag 07NJ):
-1. Apply `exists_quotient_grid` to obtain compatible algebra maps
-   `F a b : S → A / (J ^ a + I ^ b)` whose first row is the reduction of `g`.
-   This isolates the source's finite quotient calculations and lifting induction.
-2. Since `J ^ (b*t) = (J ^ t) ^ b ≤ I ^ b`, factor the diagonal maps through
-   `A / I ^ b`. Grid compatibility and composition of quotient factors prove
-   compatibility of this family. `IsAdicComplete.liftAlgHom` gives `f : S → A`
-   with exactly these reductions.
-3. For positive `b`, compatibility with the first row shows that `f` and `g`
-   agree modulo `J + I ^ b`. For each `x`, choose a representative `y` of `g x`.
-   Then `f x - y` lies in every `J + I ^ b`, and hence in `J` by closedness.
-   The quotient equality criterion proves `(Ideal.Quotient.mkₐ R J).comp f = g`.
-   Only injectivity of the first-row inverse-limit map is needed here.
-4. The lifting equation and `hg` imply `(n ^ r).map f ≤ I + J`. Induct on `k`
-   to show `(I + J) ^ k ≤ I + J ^ k`, distributing ideal products and absorbing
-   terms with an `I` factor. Taking `t`th powers and using `map_pow` and `pow_mul`
-   gives `(n ^ (r*t)).map f ≤ (I + J) ^ t ≤ I + J ^ t ≤ I`.
-All quotient algebra structures and maps use `def-weil-pbc-algebra-hom-quotient`. -/
+The lift satisfies the explicit continuity bound `f(n ^ (r * t)) ⊆ I`. -/
 theorem FormallySmoothAdic.exists_lift_into_complete
     {R : Type u} {S : Type v} {A : Type w}
     [CommRing R] [CommRing S] [CommRing A] [Algebra R S] [Algebra R A]

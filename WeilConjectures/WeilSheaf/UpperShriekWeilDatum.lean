@@ -23,11 +23,12 @@ datum*: the transport along `ī^*` of the right Weil datum of the adjunction `R�
 counit `Rḡ_* ḡ^! L̄ ⟶ L̄` is Frobenius equivariant
 (`AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_obj_iso_isWeilEquivariant`).
 
-This is the formal half of blueprint `proposition-purity-trace-commute-frobenius` (the Weil
-structure of `Rf^!` is the exceptional datum of the Frobenius square); the geometric half, that
-the canonical orientation carries the exceptional datum to the Tate datum, is the trace square.
+This is the formal half of the statement that the Weil structure of `Rf^!` is the exceptional
+datum of the Frobenius square; the geometric half, that the canonical orientation carries the
+exceptional datum to the Tate datum, is the trace square.
 
-## Proof
+## Implementation details
+
 `Rf^! ≅ ḡ^! ∘ i^*` as functors of Weil complexes (`UpperShriekGeometric`), and isomorphisms of
 Weil complexes are equivariant. The structure of `i^* M` is the transport of that of `M`
 (`CategoryTheory.Endofunctor.IsoAlgebra.isWeilEquivariant_derivedExactForgetCommIso_hom_app`),
@@ -138,11 +139,10 @@ noncomputable def upperShriekExceptionalDatum
 
 set_option linter.style.longLine false in
 set_option linter.unusedSectionVars false in
-/-- **The Frobenius structure of the Weil `Rf^!` is the exceptional datum** (blueprint
-`proposition-purity-trace-commute-frobenius`, formal half): for a right adjoint `ḡ^!` of
-`Rḡ_*` on bounded constructible adic complexes and a Weil complex `L` on `Y`, there is an
-identification `θ` of the underlying complex of `Rf^! L` with `ī^* (ḡ^! L̄)` which is Frobenius
-equivariant for the structure of `Rf^! L` and the exceptional datum
+/-- **The Frobenius structure of the Weil `Rf^!` is the exceptional datum**: for a right adjoint
+`ḡ^!` of `Rḡ_*` on bounded constructible adic complexes and a Weil complex `L` on `Y`, there is
+an identification `θ` of the underlying complex of `Rf^! L` with `ī^* (ḡ^! L̄)` which is
+Frobenius equivariant for the structure of `Rf^! L` and the exceptional datum
 `AlgebraicGeometry.WeilComplex.upperShriekExceptionalDatum`. -/
 theorem exists_forget_upperShriek_obj_iso_isWeilEquivariant
     (hR : PreservesBoundedConstructibleAdicLowerStar k₀ l f)

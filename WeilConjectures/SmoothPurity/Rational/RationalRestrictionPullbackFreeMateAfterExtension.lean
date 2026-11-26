@@ -12,14 +12,21 @@ import WeilConjectures.SmoothPurity.Sf.SfRationalScalarExtensionHomBasis
 
 /-! # The legacy finite-free mate after scalar extension
 
-Source: Bhatt--Scholze, Proposition 6.8.14(2), Remark 6.8.15;
-trace-dual-basis coordinates after applying the scalar extension functor.
+Trace-dual-basis coordinates after applying the scalar extension functor.
 
-This compatibility statement belongs to the retired rationalization/Karoubi route.
-It remains for existing legacy consumers. The current blueprint definition of
-derived direct image uses the condensed module-object construction recorded by
-`prose-03-02`; this lemma is not an input to that definition.
-(blueprint: new-sf-rational-restriction-pullback-free-mate-after-extension).
+## Implementation details
+
+This compatibility statement belongs to the retired rationalization/Karoubi route and remains
+for existing legacy consumers; it is not an input to the definition of derived direct image,
+which uses the condensed module-object construction. On K-flat representatives, finite-free
+tensor coordinates for a finite `E`-basis of `F` and its trace-dual basis identify the two
+composites with the same finite direct sum after pullback; the normalized completed comparison
+and rational localization preserve this coordinate equality.
+
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.14(2) and
+  Remark 6.8.15]
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -49,14 +56,7 @@ theorem ScalarLocalization.map_smul_of_map_tmul_heq
     rw [smul_add, G.map_add, G.map_add, hx, hy, smul_add]
 
 /-- Applying the canonical E-to-F scalar extension to the finite-free mate at
-an extended object gives an isomorphism.
-
-Proof: choose a finite E-basis of F and its trace-dual basis. On K-flat
-representatives, finite-free tensor coordinates identify the two composites
-with the same finite direct sum after pullback. The normalized completed
-comparison and rational localization preserve this coordinate equality, so the
-map obtained by applying the X scalar extension to the canonical mate is
-invertible. -/
+an extended object gives an isomorphism. -/
 theorem rationalRestrictionPullback_freeMate_after_extension
     (l : ℕ) [Fact l.Prime]
     (E F : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

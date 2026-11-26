@@ -15,7 +15,7 @@ public import WeilConjectures.TraceFormula.CurveLocal.SectionsRestrictionOpen
 Let `b : B ⟶ T`, `a : G ⟶ T` and `y : Y ⟶ B` be as in
 `WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroLocalization`, so that the supported
 restriction `ρ_{a,b} : RΓ_G(T, P) ⟶ RΓ_Y(B, b^* P)` is defined, and let `O ⊆ T ∖ G` be an open
-subscheme such that the punctured curve `U = B ∖ Y` maps into `O` (in the blueprint,
+subscheme such that the punctured curve `U = B ∖ Y` maps into `O` (in the application,
 `O = T ∖ (G ∪ V)` is the complement of the Frobenius graph and the vertical axis, and the
 punctured diagonal `B ∖ y` lies in `T ∖ (H ∪ V ∪ G)`). If `RΓ(T, P) = 0` and `RΓ(B, b^* P) = 0`
 and the restriction
@@ -25,10 +25,9 @@ RΓ(O, P) ⟶ RΓ(U, P|_U)
 vanishes, then `ρ_{a,b} = 0`
 (`AlgebraicGeometry.Etale.sectionsWithSupportRestriction_eq_zero_of_restriction`).
 
-This is the reduction step of the proof of blueprint `lemma-vanishing-local-term-zero-stalk`
-(`lemma-vanishing-local-term-zero-stalk--1` (iii)): by the localization triangles `ρ_{a,b}` vanishes
-if and only if the restriction `RΓ(T ∖ G, P) ⟶ RΓ(B ∖ Y, b^* P)` does, and this restriction
-factors through `RΓ(O, P)`, since `U ⊆ O ⊆ T ∖ G`.
+This is the reduction step of the vanishing of the supported restriction: by the localization
+triangles `ρ_{a,b}` vanishes if and only if the restriction `RΓ(T ∖ G, P) ⟶ RΓ(B ∖ Y, b^* P)` does,
+and this restriction factors through `RΓ(O, P)`, since `U ⊆ O ⊆ T ∖ G`.
 
 -/
 
@@ -88,11 +87,9 @@ variable {T B G Y : Scheme.{u}} (b : B ⟶ T) (a : G ⟶ T) [IsClosedImmersion a
   (hψ : ψ ≫ O.ι = y.openComplement.ι ≫ b)
 
 include hw hψ in
-/-- **Reduction of the supported restriction to a punctured restriction** (blueprint
-`lemma-vanishing-local-term-zero-stalk--1` (iii), as used in the proof of
-`lemma-vanishing-local-term-zero-stalk`): if `RΓ(T, P) = 0`, `RΓ(B, b^* P) = 0`, and the restriction
-`RΓ(O, P) ⟶ RΓ(B ∖ Y, P)` along `ψ : B ∖ Y ⟶ O` vanishes, where `O ⊆ T ∖ G`, then the
-supported restriction `ρ_{a,b}` vanishes. -/
+/-- **Reduction of the supported restriction to a punctured restriction**: if `RΓ(T, P) = 0`,
+`RΓ(B, b^* P) = 0`, and the restriction `RΓ(O, P) ⟶ RΓ(B ∖ Y, P)` along `ψ : B ∖ Y ⟶ O` vanishes,
+where `O ⊆ T ∖ G`, then the supported restriction `ρ_{a,b}` vanishes. -/
 theorem sectionsWithSupportRestriction_eq_zero_of_restriction
     (P : DerivedCategory.Plus (Sheaf T.smallEtaleTopology A))
     (hT : IsZero ((sectionsWithSupportTriangle A a).obj P).obj₂)

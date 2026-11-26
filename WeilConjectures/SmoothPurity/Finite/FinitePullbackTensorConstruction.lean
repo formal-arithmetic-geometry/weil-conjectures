@@ -28,15 +28,25 @@ public import Mathlib.CategoryTheory.Limits.EssentiallySmall
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 /-! # Derived pullback and derived tensor comparison
 
-Source: `literature/stacks-project/sites-cohomology.tex`, Lemma 21.18.4
-(Tag 07A4, label `lemma-pullback-tensor-product`), together with the integral,
-rational, and algebraically closed coefficient conventions
-(blueprint: def-pur-finite-pullback-tensor-construction).
+We construct the canonical comparison `f^*(M ⊗^L N) ≅ f^*M ⊗^L f^*N` for finite,
+completed integral, rational and algebraically closed coefficients.
 
 ## Main definitions
 
 * `finitePullbackTensorConstruction` constructs the prescribed comparison.
 * The helper declarations fix its representative normalization.
+
+## Implementation details
+
+The finite comparison is the small-site specialization of
+`ringedTopoiCanonicalDerivedTensorComparison` with the unit-normalized module realization; its
+K-flat square is `proEtaleCanonicalTensorPullback`, and the tensor representative comparisons
+are `finiteIntrinsicTensorModels`.
+
+## References
+
+* Stacks Project, Tags 00YV, 00YW, 03D2, 06YN, 06YS, 07A4 (Lemma 21.18.4), 0H7J.
+* J.-P. Serre, *Local Fields*, II.2.
 -/
 
 @[expose] public noncomputable section
@@ -63,9 +73,7 @@ attribute [local irreducible] finiteIntrinsicClosed finiteIntrinsicTensorModels
 
 /-! The comparison families below are fixed by canonical constructions. The
 compatibilities are stated as equations on those same comparison maps. -/
-/-- Finite unbounded tensor/pullback isomorphism families.
-Source: Stacks 07A4 and the blueprint coefficient conventions
-(blueprint: def-pur-finite-pullback-tensor-construction). -/
+/-- Finite unbounded tensor/pullback isomorphism families. -/
 abbrev FinitePullbackTensorComparison
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E]
@@ -81,9 +89,7 @@ abbrev FinitePullbackTensorComparison
         ((finiteDerivedPullback l E n f).obj M,
           (finiteDerivedPullback l E n f).obj N)
 
-/-- Completed integral constructible tensor/pullback isomorphism families.
-Source: Stacks 07A4 and the blueprint coefficient conventions
-(blueprint: def-pur-finite-pullback-tensor-construction). -/
+/-- Completed integral constructible tensor/pullback isomorphism families. -/
 abbrev IntegralPullbackTensorComparison
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E]
@@ -98,9 +104,7 @@ abbrev IntegralPullbackTensorComparison
         (((@constructibleIntegralPullback l _ E _ _ _ X Y f hX hY)).obj M,
           ((@constructibleIntegralPullback l _ E _ _ _ X Y f hX hY)).obj N)
 
-/-- Rational constructible tensor/pullback isomorphism families.
-Source: Stacks 07A4 and the blueprint coefficient conventions
-(blueprint: def-pur-finite-pullback-tensor-construction). -/
+/-- Rational constructible tensor/pullback isomorphism families. -/
 abbrev RationalPullbackTensorComparison
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E]
@@ -115,9 +119,7 @@ abbrev RationalPullbackTensorComparison
         (((@rationalDerivedPullback l _ E _ _ _ X Y f hX hY)).obj M,
           ((@rationalDerivedPullback l _ E _ _ _ X Y f hX hY)).obj N)
 
-/-- Common-stage algebraically closed tensor/pullback isomorphism families.
-Source: Stacks 07A4 and the blueprint coefficient conventions
-(blueprint: def-pur-finite-pullback-tensor-construction). -/
+/-- Common-stage algebraically closed tensor/pullback isomorphism families. -/
 abbrev CommonStagePullbackTensorComparison
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
       [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
@@ -131,8 +133,7 @@ abbrev CommonStagePullbackTensorComparison
         (((@commonStageDerivedPullback l _ Ω _ _ _ X Y f hX hY)).obj M,
           ((@commonStageDerivedPullback l _ Ω _ _ _ X Y f hX hY)).obj N)
 
-/-- Essential smallness with the site morphism and object sizes retained.
-Source: Stacks 00YW (blueprint: def-pur-finite-pullback-tensor-construction). -/
+/-- Essential smallness with the site morphism and object sizes retained. -/
 instance (priority := 3000) pullbackTensorSiteSmall (W : Scheme.{u}) :
     EssentiallySmall.{u + 1} W.ProEt := essentiallySmallSelf.{0, u, u + 1} _
 
@@ -143,23 +144,18 @@ open CategoryTheory.Functor
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Finiteness of the existing positive coefficient quotient.
-Source: Serre, Local Fields II.2 (blueprint: def-pur-finite-pullback-tensor-construction). -/
+/-- Finiteness of the existing positive coefficient quotient. -/
 noncomputable instance pullbackTensorCoefficientFinite (n : ℕ) :
     Finite (finiteCoefficientRing l E (n + 1)) :=
   Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
 
-/-- The canonical constant-ring identification, with coefficient exponent n + 1.
-Source: Stacks 0H7J and 07A4 (blueprint: def-pur-finite-pullback-tensor-construction). -/
+/-- The canonical constant-ring identification, with coefficient exponent n + 1. -/
 def pullbackTensorCoefficientIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
   letI : Finite (finiteCoefficientRing l E (n + 1)) :=
     Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
   asIso (proEtaleCoefficientInverseImageMap f (finiteCoefficientRing l E (n + 1)))
 
-/-- The two recorded K-flat interfaces agree at the small-site coefficient size.
-Source: Stacks 06YN (blueprint: def-pur-finite-pullback-tensor-construction).
-Proof: apply isKFlatIndependentCoefficients_iff_isKFlat at object size u + 1
-and morphism size u. Its right side is the first flat-representative property. -/
+/-- The two recorded K-flat interfaces agree at the small-site coefficient size. -/
 theorem pullbackTensorIndependent (W : Scheme.{u})
     (R : Sheaf (ProEt.topology W) CommRingCat.{u + 1})
     (P : (proEtaleFlatRepresentatives W R).FullSubcategory) :
@@ -168,11 +164,7 @@ theorem pullbackTensorIndependent (W : Scheme.{u})
       (ProEt.topology W) R P.obj := by
   exact P.property.1
 
-/-- Restriction of the recorded K-flat model is unique with its component equations.
-Source: Stacks 06YS and 07A4 (blueprint: def-pur-finite-pullback-tensor-construction).
-Proof: restrict the model's comparison along the inclusion of flat-term K-flat
-representatives. Every component is prescribed in the displayed formula, so
-natural-transformation extensionality proves uniqueness. -/
+/-- Restriction of the recorded K-flat model is unique with its component equations. -/
 theorem pullbackTensorFiniteRepresentative_existsUnique (W : Scheme.{u})
     (R : Sheaf (ProEt.topology W) CommRingCat.{u + 1})
     (S : CoefficientClosedStructure
@@ -210,16 +202,14 @@ theorem pullbackTensorFiniteRepresentative_existsUnique (W : Scheme.{u})
       exact eq_of_heq (he P.1 P.2)
     exact congrArg (fun r ↦ ProEtaleTensorModel.mk S.tensor r) hr
 
-/-- The unique restriction of the prescribed finite tensor model.
-Source: Stacks 07A4 (blueprint: def-pur-finite-pullback-tensor-construction). -/
+/-- The unique restriction of the prescribed finite tensor model. -/
 def pullbackTensorFiniteModel (W : Scheme.{u}) (n : ℕ) :
     ProEtaleTensorModel W (integralCoefficientCommRingSheaf l E W n) :=
   (pullbackTensorFiniteRepresentative_existsUnique W
     (integralCoefficientCommRingSheaf l E W n) (finiteIntrinsicClosed l E W n)
     (finiteIntrinsicTensorModels l E W n)).exists.choose
 
-/-- The equality of tensor functors in the preceding normalized restriction.
-Source: Stacks 07A4 (blueprint: def-pur-finite-pullback-tensor-construction). -/
+/-- The equality of tensor functors in the preceding normalized restriction. -/
 def pullbackTensorFiniteModelIso (W : Scheme.{u}) (n : ℕ) :
     (pullbackTensorFiniteModel l E W n).tensor ≅ finiteIntrinsicDerivedTensor l E W n :=
   eqToIso (pullbackTensorFiniteRepresentative_existsUnique W
@@ -227,13 +217,7 @@ def pullbackTensorFiniteModelIso (W : Scheme.{u}) (n : ℕ) :
     (finiteIntrinsicTensorModels l E W n)).exists.choose_spec.1
 
 /-- The two finite module presentations have a unique comparison preserving the
-actual adjunction-unit sections. Source: Stacks 00YV, 03D2 and 07A4
-(blueprint: def-pur-finite-pullback-tensor-construction).
-Proof: identify their right adjoints on sections using the constant-section ring
-map. Conjugating this identification by the two normalized adjunctions gives the
-comparison. The adjunction unit equation is the displayed section equation.
-Taking adjuncts of any second comparison with that equation makes its components
-identical on every section, so the comparison is unique. -/
+actual adjunction-unit sections. -/
 theorem pullbackTensorFiniteRealization_existsUnique {X Y : Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ) :
     ∃! e : proEtaleRingModulePullback f
@@ -251,16 +235,11 @@ theorem pullbackTensorFiniteRealization_existsUnique {X Y : Scheme.{u}}
           (finiteCoefficientRing l E (n + 1))).unit.app M).val.app (Opposite.op U) x := by
   exact openSquarePullbackModel_existsUnique (finiteCoefficientRing l E (n + 1)) f
 
-/-- The uniquely unit-normalized finite module realization.
-Source: Stacks 00YV, 03D2 (blueprint: def-pur-finite-pullback-tensor-construction). -/
+/-- The uniquely unit-normalized finite module realization. -/
 def pullbackTensorFiniteRealization {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
   (pullbackTensorFiniteRealization_existsUnique l E f n).exists.choose
 
-/-- The canonical finite tensor comparison, using the small-site specialization of
-ringedTopoiCanonicalDerivedTensorComparison and the prescribed unit-normalized
-realization. Its K-flat square is proEtaleCanonicalTensorPullback; the tensor
-representative comparisons are exactly finiteIntrinsicTensorModels.
-Source: Stacks 07A4 (blueprint: def-pur-finite-pullback-tensor-construction). -/
+/-- The canonical finite tensor comparison `f^*(M ⊗^L N) ≅ f^*M ⊗^L f^*N`. -/
 def finitePullbackTensorConstruction {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)] :
@@ -296,8 +275,7 @@ def finitePullbackTensorConstruction {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Naturality of the constructed comparison in its two derived inputs.
-Source: Stacks 07A4 (blueprint: def-pur-finite-pullback-tensor-construction). -/
+/-- Naturality of the constructed comparison in its two derived inputs. -/
 def finitePullbackTensorConstructionIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     [_hX : ∀ x : X, Invertible (l : X.residueField x)]
     [_hY : ∀ y : Y, Invertible (l : Y.residueField y)] :

@@ -14,8 +14,25 @@ import WeilConjectures.RingTheory.FilteredPushoutBijectiveStage
 
 /-! # A tensor model at one finite stage
 
-Source: Stacks Project, Algebra, Tag 02JO (3), final paragraph; Tag 05N9.
-(blueprint: lem-pc-tensor-model-algebra-stage)
+A tensor model `colim F ⊗ B ≅ (colim F ⊗ A) ⊗[P] Q` of finitely presented algebras over a
+directed colimit of rings gives a pushout square at some finite stage of the system.
+
+## Implementation details
+
+On the upper tail above `i`, tensor products with `A` and `B` commute with the colimit. Finite
+presentation of `P` over `ℤ` factors `P → colim F ⊗ A` through a stage `r`. The map
+`Q → colim F ⊗ B` is `P`-linear by the compatibility of `e` with `f`, and factors through a
+stage `s` by finite presentation of `Q` over `P`. Since `F s ⊗ B` and `(F s ⊗ A) ⊗[P] Q` are
+finitely presented over `F s ⊗ A`, the inverse of `e` descends (Tag 05N9), and both inverse
+identities hold at a common later stage `k`, where the comparison is an isomorphism. The
+canonical tensor pushout is transported along it. No flatness or injectivity of transition
+maps is needed.
+
+## References
+
+* [Stacks, Tag 02JO]
+* [Stacks, Tag 00QO]
+* [Stacks, Tag 05N9]
 -/
 
 @[expose] public section
@@ -26,35 +43,12 @@ open scoped TensorProduct
 
 namespace AlgebraicGeometry
 
-/-- A compatible finitely presented tensor model gives one pushout square at a finite stage.
-
-Source: Stacks Project, Algebra, Tag 02JO (3), final paragraph; Tags 00QO and 05N9.
-(blueprint: lem-pc-tensor-model-algebra-stage)
-
-Proof:
-1. Restrict the diagram to the directed upper tail above i. Tensoring with A and B
-   gives colimits X and Y: each element has a stage representative and any equality
-   holds at a later stage. Finite presentation of P over the integers descends its
-   map to X to a map P to A_r at a stage r.
-2. For j above r give B_j its P-structure through A_r to A_j to B_j. The given
-   map Q to Y is P-linear: on P the left and right inclusions into X tensor_P Q
-   agree, and he identifies the left inclusion with the extension of f. Finite
-   presentation of Q over P factors this map through some B_s. The tensor lift
-   A_s tensor_P Q to B_s then base changes to the given e.
-3. B is finitely presented over A because B is finitely presented over F(i) and A
-   is of finite type there. Thus B_s is finitely presented over A_s. The model
-   A_s tensor_P Q is also finitely presented over A_s. The diagram A_j on the
-   upper tail of s has colimit X. Apply descent of maps between finitely presented
-   algebras to the inverse of e, using the tensor associativity identifications.
-   Both inverse identities hold after passing to X, so descent of equality makes
-   them hold at some common later k. The comparison at k is an isomorphism.
-4. Transport the canonical tensor pushout along this isomorphism. Its restrictions
-   are precisely f_k and the transition of the factor Q to B_s. Naturality gives
-   the asserted equality after passage to Y. The P-structure on A_k is the one
-   factored through the stage in step 1, so it maps to the given P-structure of X.
-   All constructions work for zero rings and empty presentations, without flatness
-   or injective transitions.
--/
+/-- Let `f : A → B` be a map of finitely presented `F i`-algebras, `P → Q` a finitely presented
+map with `P` finitely presented over `ℤ`, and `e : (colim F ⊗ A) ⊗[P] Q ≅ colim F ⊗ B` an
+isomorphism compatible with `f`. Then at some stage `k ≥ i` there are a map
+`Q → F k ⊗ B` compatible with `e` and a `P`-structure on `F k ⊗ A` mapping to the given one on
+the colimit, such that the square `P → F k ⊗ A`, `P → Q`, `F k ⊗ A → F k ⊗ B`, `Q → F k ⊗ B`
+is a pushout. -/
 theorem exists_tensor_model_algebra_stage
     {I : Type v} [Preorder I] [IsDirectedOrder I]
     (F : I ⥤ CommRingCat.{v}) (c : Cocone F) (hc : IsColimit c)

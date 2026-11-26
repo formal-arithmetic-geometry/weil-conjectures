@@ -7,7 +7,13 @@ module
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.Canonical.IntegralSystemCanonicalBridge
 public import WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSupportCoefficientComparison
 
-/-! # Canonical finite pullback coordinates -/
+/-! # Canonical finite pullback coordinates
+
+## References
+
+* [Stacks, Tag 03D3], [Stacks, Tag 03D6], [Stacks, Tag 03D8], [Stacks, Tag 06YY],
+  [Stacks, Tag 07A6]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -27,9 +33,7 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The finite ringed pullback in the constant-ring coordinates.
-Source: Stacks 03D3, 03D6 and 07A6; the derived finiteDirectImage_eq adjoint.
-(blueprint: def-sf-integral-finite-pullback-coordinates). -/
+/-- The finite ringed pullback in the constant-ring coordinates. -/
 def finiteRingPullbackIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     PurCompactSupport.pull
         (PurCompactSupport.finite l E (n + 1) (Nat.le_add_left 1 n)) f ≅
@@ -44,9 +48,7 @@ def finiteRingPullbackIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
         (eqToIso (PurCompactSupport.finiteDirectImage_eq l E n f)))).leftAdjointUniq
           (finiteAdj l E f n)
 
-/-- Scalar/pullback balancing in the published finite coordinates.
-Source: Stacks 03D8, 06YY, 07A6.
-(blueprint: def-sf-integral-finite-pullback-coordinates). -/
+/-- Scalar/pullback balancing in the published finite coordinates. -/
 def finiteScalarPullback {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     ringedPull l E f ⋙ scalarReductionDerivedExtension l E X n ≅
       scalarReductionDerivedExtension l E Y n ⋙ finiteDerivedPullback l E n f :=

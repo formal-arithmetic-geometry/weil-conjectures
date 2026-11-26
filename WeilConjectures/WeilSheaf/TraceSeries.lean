@@ -20,9 +20,9 @@ family `(Hⁱ(X, ℚ̄_ℓ), F)_{0 ≤ i ≤ 2d}` is
 
 `str_F(T) = ∑_{n ≥ 1} (∑_{i = 0}^{2d} (-1) ^ i tr (F ^ n ∣ Hⁱ(X, ℚ̄_ℓ))) T ^ n / n`.
 
-In the blueprint `X₀` is smooth, proper and geometrically connected of pure dimension `d`, so
-that `I = {0, …, 2d}` contains every degree with nonzero cohomology; the definition itself needs
-no such hypothesis.
+In the main application `X₀` is smooth, proper and geometrically connected of pure dimension
+`d`, so that `I = {0, …, 2d}` contains every degree with nonzero cohomology; the definition itself
+needs no such hypothesis.
 
 ## Main declarations
 
@@ -50,16 +50,13 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fa
 `str_F(T) = ∑_{n ≥ 1} (∑_{i = 0}^{2d} (-1) ^ i tr (F ^ n ∣ Hⁱ(X ⊗ k̄, ℚ̄_ℓ))) T ^ n / n`
 
 of the finite graded family of Frobenius modules `(Hⁱ(X ⊗ k̄, ℚ̄_ℓ), F)_{0 ≤ i ≤ 2d}`, the
-cohomology of the constant Weil sheaf `ℚ̄_ℓ` with its global geometric Frobenius `F`
-(blueprint: `theorem-weil-conjectures-smooth-proper-schemes--7`, geometric situation,
-`lemma-logarithm-determinant`). -/
+cohomology of the constant Weil sheaf `ℚ̄_ℓ` with its global geometric Frobenius `F`. -/
 noncomputable def adicConstantAlternatingTraceSeries (d : ℕ) : (PadicAlgCl l)⟦X⟧ :=
   FrobeniusModule.alternatingTraceSeries (Finset.Icc 0 (2 * d : ℤ))
     (adicConstant k₀ l X).cohomology
 
 /-- The `n`-th coefficient of the alternating trace series of the cohomology of `X` is
-`(∑_{i = 0}^{2d} (-1) ^ i tr (F ^ n ∣ Hⁱ(X ⊗ k̄, ℚ̄_ℓ))) / n`, and `0` for `n = 0`
-(blueprint: `theorem-weil-conjectures-smooth-proper-schemes--7`). -/
+`(∑_{i = 0}^{2d} (-1) ^ i tr (F ^ n ∣ Hⁱ(X ⊗ k̄, ℚ̄_ℓ))) / n`, and `0` for `n = 0`. -/
 theorem coeff_adicConstantAlternatingTraceSeries (d n : ℕ) :
     coeff n (adicConstantAlternatingTraceSeries k₀ l X d) =
       if n = 0 then 0
@@ -70,7 +67,7 @@ theorem coeff_adicConstantAlternatingTraceSeries (d n : ℕ) :
 
 /-- The alternating trace series of the cohomology of `X` is the alternating sum
 `∑_{i = 0}^{2d} (-1) ^ i tr_{F ∣ Hⁱ}(T)` of the trace series of the individual cohomology
-groups (blueprint: `theorem-weil-conjectures-smooth-proper-schemes--7`). -/
+groups. -/
 theorem adicConstantAlternatingTraceSeries_eq_sum (d : ℕ) :
     adicConstantAlternatingTraceSeries k₀ l X d =
       ∑ i ∈ Finset.Icc 0 (2 * d : ℤ), (i.negOnePow : ℤ) •

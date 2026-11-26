@@ -14,8 +14,18 @@ import WeilConjectures.RingTheory.KoszulConormalVectorBasisData
 /-!
 # Conormal basis of a Koszul-regular sequence
 
-Source: Stacks Project, More on Algebra, Tag 062I, lemma-H1-regular-quasi-regular,
-first paragraph of the proof (blueprint: lem-sc-koszul-conormal-basis).
+The classes of a Koszul-regular sequence `f₁, …, f_r` generating `I` form a basis of the
+conormal module `I/I²` over `A/I`.
+
+## Implementation details
+
+Vanishing of `H_1` makes `∧² A^r → A^r → I → 0` exact. Tensoring with `A/I` kills the first
+map, since every coefficient of the second Koszul differential lies in `I`, so
+`(A/I)^r ≃ I/I²`.
+
+## References
+
+* [Stacks, Tags 062I, 0CEM]
 -/
 
 @[expose] public section
@@ -24,22 +34,7 @@ universe u
 
 namespace ExteriorAlgebra
 
-/-- The generating conormal classes of a Koszul-regular sequence form a basis.
-Source: Stacks Project, More on Algebra, Tags 0CEM and 062I,
-lemma-koszul-regular-H1-regular and lemma-H1-regular-quasi-regular, first paragraph.
-(blueprint: lem-sc-koszul-conormal-basis).
-
-Proof: Koszul-regularity gives zero first homology. Write E = A^r and B = A/I.
-The map E to I sends the standard basis to the generators. It is surjective since
-these generate I. Its kernel is the image of the second Koszul differential,
-because H_1 vanishes. Thus the sequence exterior^2 E -> E -> I -> 0 is exact.
-Tensor with B. Right exactness identifies I/I^2 with the cokernel of the map
-B tensor exterior^2 E -> B tensor E. The former map is zero: every coefficient
-of the second Koszul differential is one of the generators, hence belongs to I.
-Consequently B^r -> I/I^2 is an isomorphism sending its standard basis to the
-classes of the generators. Transport that basis across this isomorphism.
-For r = 0 both modules are zero; for I = A the quotient ring and modules are zero,
-and the same construction still gives a basis indexed by Fin r. -/
+/-- The generating conormal classes of a Koszul-regular sequence form a basis. -/
 theorem exists_koszul_conormal_basis
     (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A)
     (hreg : RingTheory.Sequence.IsKoszulRegular f) (hf : Ideal.span (Set.range f) = I) :

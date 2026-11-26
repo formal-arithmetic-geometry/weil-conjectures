@@ -9,7 +9,21 @@ public import WeilConjectures.SmoothPurity.CompletedQuotient.CompletedComparison
 
 /-! # Quotient realization steps
 
-Source: integral comparison proof, quotient normalization and coherent substitution.
+We show that the recursive `L` substitution intertwines the strict pullback/tensor comparison
+with the canonical one, via quotient normalization and coherent substitution.
+
+## Implementation details
+
+The coherent scalar quotients of the prescribed representatives are used as the three leaves.
+The defining normalization square of the descended system pullback/tensor comparison identifies
+its cochain model with the comparison at `L`; counit naturality and the adjunction triangle
+identities cancel the intermediate reconstruction factors. The argument works with whole
+coefficient systems before taking the limit, and does not use invertibility of the recursive
+substitutions.
+
+## References
+
+* Stacks Project, Tags 0941 and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -301,24 +315,7 @@ private theorem substitution_comparison
   repeat' erw [Category.assoc]
   exact H
 
-/-- The recursive L substitution intertwines the strict comparison with the canonical one.
-Source: Stacks 07A4 and 0941; quotient-realization proof steps 2, 3 and 6
-(blueprint: lem-pur-completed-scalar-beta-comparison).
-
-Proof: use the coherent scalar quotients of the prescribed representatives as the
-three leaves. Their scalar substitution is the scalar realization followed by
-scalar change of the E coherent reduction and the fixed K-flat scalar counit.
-Expand the recursion at pullF(tensor(input 0,input 1)) and at the tensor of the
-two pullF inputs. The defining normalization square of the descended system
-pullback/tensor comparison identifies its cochain model with comparison at L.
-Naturality moves the two leaf reduction maps through that square. Insert the
-primitive tensor and pullback realizations in canonicalIntegralPullbackTensor.
-Counit naturality and the adjunction triangle identities cancel their intermediate
-reconstruction factors. The remaining factors are exactly the two displayed
-recursive substitutions. Work in whole coefficient systems before total limit,
-so every horizontal transition and arbitrary choice of representative is retained.
-No invertibility of these recursive substitutions is used in this equation;
-zero inputs, identity coefficients and ramified extensions obey the same formulas. -/
+/-- The recursive `L` substitution intertwines the strict comparison with the canonical one. -/
 theorem completedScalarBetaComparison
     {Z X Y : Scheme.{u}} (h : Z ⟶ X) (f : X ⟶ Y)
     [∀ z : Z, Invertible (l : Z.residueField z)]

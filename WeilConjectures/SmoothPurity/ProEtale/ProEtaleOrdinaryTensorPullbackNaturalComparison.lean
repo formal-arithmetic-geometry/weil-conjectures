@@ -8,7 +8,10 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPu
 import WeilConjectures.SmoothPurity.ProEtale.ProEtaleOrdinaryTensorPullbackAssociativity
 
 /-! # Natural ordinary tensor pullback comparison with associativity
-Source: Stacks 03EL and 07A4.
+
+## References
+
+* Stacks Project, Tags 03EL and 07A4.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -25,13 +28,7 @@ attribute [local instance] SheafOfModules.monoidalCategory
 attribute [local irreducible] SheafOfModules.monoidalCategory
   proEtaleOrdinaryTensorPullback
 
-/-- Package the prescribed ordinary comparisons naturally, retaining their associativity.
-Source: Stacks 03EL and 07A4
-(blueprint: lem-pur-natural-ordinary-tensor-pullback-comparison).
-Proof: naturality of the given binary comparisons constructs a natural isomorphism
-with exactly those components. Its forward associativity is the ordinary pure-triple
-calculation, since evaluation of the constructed natural isomorphism returns the
-given comparison. No flatness or derived localization is involved. -/
+/-- Package the prescribed ordinary comparisons naturally, retaining their associativity. -/
 theorem proEtaleOrdinaryTensorPullbackNaturalComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (R' : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

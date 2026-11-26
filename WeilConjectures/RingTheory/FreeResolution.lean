@@ -16,10 +16,15 @@ This file collects elementary facts about resolutions of modules by free modules
 stated concretely in terms of `LinearMap.range` and `LinearMap.ker`.
 
 * `Module.free_complex_maps_to_resolution`: a complex of free modules over `M` maps to any
-  resolution of `N` over a linear map `M → N` (Stacks 00LS, part (1)).
+  resolution of `N` over a linear map `M → N`.
 
 The existence of finite free resolutions over Noetherian rings (Stacks 00LP) is
 `Module.exists_finite_free_resolution` in `WeilConjectures.RingTheory.FiniteFreeResolution`.
+
+## References
+
+* [Stacks, Tag 00LS] (part (1))
+* [Stacks, Tag 00LP]
 -/
 
 @[expose] public section
@@ -44,13 +49,12 @@ theorem Projective.exists_comp_eq_of_range_eq_ker {R : Type*} [Ring R] {P A B C 
   refine ⟨k, LinearMap.ext fun p => ?_⟩
   simpa using congrArg Subtype.val (LinearMap.congr_fun hk p)
 
-/-- **A complex of free modules maps to a resolution** (Stacks 00LS, part (1)).
+/-- **A complex of free modules maps to a resolution.**
 Let `φ : M → N` be a linear map, `⋯ → N₂ → N₁ → N₀ → N → 0` an exact sequence (with
 augmentation `η` and differentials `∂ i : N_{i+1} → N_i`), and `⋯ → F₁ → F₀ → M` a complex of
 free modules (augmentation `π`, differentials `δ i : F_{i+1} → F_i`, not necessarily exact).
 Then there are linear maps `α i : F_i → N_i` with `η ∘ α 0 = φ ∘ π` and
-`∂ i ∘ α (i + 1) = α i ∘ δ i` for all `i`.
-(blueprint: `lem-weil-pbc-free-complex-maps-to-resolution`) -/
+`∂ i ∘ α (i + 1) = α i ∘ δ i` for all `i`. -/
 theorem free_complex_maps_to_resolution {R : Type*} [CommRing R] {M N : Type*}
     [AddCommGroup M] [Module R M] [AddCommGroup N] [Module R N] (φ : M →ₗ[R] N)
     {N' : ℕ → Type*} [∀ i, AddCommGroup (N' i)] [∀ i, Module R (N' i)]

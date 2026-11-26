@@ -47,6 +47,14 @@ from the case of Weil sheaves, `AlgebraicGeometry.WeilSheaf.exists_hasWeilObject
 That case compares the Weil sheaves of the zeta-function chapter, which
 live on the geometric fiber `X₀ ⊗ k̄`, with the bounded constructible Weil objects of the trace
 formula chapter, which live on `X₀`.
+
+## Implementation details
+
+The Weil objects of the trace formula chapter live on `X₀` itself, with an extra automorphism.
+A Weil sheaf need not descend to `X₀`, so `K'` is not a descent of `K`: by Deligne (Weil II,
+1.3.14) every irreducible Weil sheaf is the twist of an étale sheaf on `X₀` by a character of
+`W(k̄/k₀)`, which becomes the automorphism of `K'`, and the traces only depend on the
+semisimplification.
 -/
 
 @[expose] public section
@@ -68,25 +76,15 @@ attribute [local instance] fact_ringChar_prime_of_finite
     ProEtale.CondensedRing.fintypeFrobeniusFixedPoints
 
 open ProEtale.CondensedRing in
-/-- **Weil complexes have the traces of Weil objects of `Dᵇc(-)⟦ℚ̲̄_ℓ⟧`** (comparison of the
-zeta-function chapter with the trace formula chapter): a Weil complex `K` on `X₀` has the
-same traces as a Weil object `K'` for `𝟙 X₀`. There is an additive map
+/-- **Weil complexes have the traces of Weil objects of `Dᵇc(-)⟦ℚ̲̄_ℓ⟧`**: a Weil complex `K` on
+`X₀` has the same traces as a Weil object `K'` for `𝟙 X₀`. There is an additive map
 `ι : End (𝟙 Mod_{Spec k̄}) ⟶ ℚ̄_ℓ` such that, for every `n`,
 * `ι` of the global trace of `K'` in degree `n + 1` is
   `∑ᵢ (-1)ⁱ Tr(F^{n+1} | H_c^i(X₀ ⊗ k̄, K))`, and
 * for every `𝔽_{q^{n+1}}`-rational point `y` of `X₀`, `ι` of the local trace of `K'` at the
   geometric point `Spec ι ≫ y` (for the embedding `ι : 𝔽_{q^{n+1}} ↪ k̄` chosen by
   `IsAlgClosed.lift`) is the trace function `t_K(y)` of `K` in degree `n + 1`, which is the
-  Frobenius trace on the stalks of `K` at the geometric point of `X₀ ⊗ k̄` over `Spec ι ≫ y`.
-
-The Weil sheaves of the zeta-function chapter live on the geometric fiber `X₀ ⊗ k̄`, while the Weil
-objects of the trace formula chapter live on `X₀` itself, with an extra automorphism. A Weil sheaf
-need not descend to `X₀`, so `K'` is not a descent of `K`: by Deligne (Weil II, 1.3.14) every
-irreducible Weil sheaf is the twist of an étale sheaf on `X₀` by a character of `W(k̄/k₀)`, which
-becomes the automorphism of `K'`, and the traces only depend on the semisimplification.
-
-It is deduced from the case of Weil sheaves, `WeilSheaf.exists_hasWeilObjectComparison`, by the
-dévissage `WeilComplex.hasWeilObjectComparison_of_toComplex`. -/
+  Frobenius trace on the stalks of `K` at the geometric point of `X₀ ⊗ k̄` over `Spec ι ≫ y`. -/
 theorem WeilComplex.exists_weilBoundedConstructible_comparison (K : WeilComplex k₀ l X) :
     ∃ (K' : WeilBoundedConstructible l (Iso.refl (WeilComplex.overSpec (k₀ := k₀) X)).hom)
       (ι : End (𝟙_ (GeometricPointMod l (AlgebraicClosure k₀))) →+ PadicAlgCl l),
@@ -105,9 +103,9 @@ theorem WeilComplex.exists_weilBoundedConstructible_comparison (K : WeilComplex 
   exact ⟨K', ι, hglob, hloc⟩
 
 open ProEtale.CondensedRing in
-/-- **The Grothendieck–Lefschetz trace formula for Weil complexes**, deduced from the trace formula
-for Weil objects `ProEtale.CondensedRing.weilTraceFormula` (with `e = 𝟙`) through the comparison
-`WeilComplex.exists_weilBoundedConstructible_comparison`. -/
+/-- **The Grothendieck–Lefschetz trace formula for Weil complexes**: for every `m ≥ 1`, the
+alternating sum of the traces of `Fᵐ` on compactly supported cohomology is the sum of the
+trace function over the `𝔽_{qᵐ}`-rational points. -/
 theorem WeilComplex.finsum_trace_compactlySupportedCohomology_eq_of_comparison
     (K : WeilComplex k₀ l X) {m : ℕ} (hm : 1 ≤ m) :
     ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
@@ -128,17 +126,13 @@ theorem WeilComplex.finsum_trace_compactlySupportedCohomology_eq_of_comparison
     ⟨1, Nat.one_pos, Iso.pow_refl 1⟩ K' (n + 1), map_sum, ← finsum_eq_sum_of_fintype]
   exact (finsum_congr heqv).trans (finsum_comp_equiv eqv)
 
-/-- Blueprint `theorem-grothendieck-lefschetz-trace-formula--8`: the Grothendieck–Lefschetz formula
-over `ℚ̄_ℓ`. For a separated `k₀`-scheme `X₀` of finite type, a Weil complex `K` on `X₀` and
-`m ≥ 1`,
+/-- **The Grothendieck–Lefschetz formula over `ℚ̄_ℓ`**: for a separated `k₀`-scheme `X₀` of finite
+type, a Weil complex `K` on `X₀` and `m ≥ 1`,
 
 `∑ᵢ (-1)ⁱ Tr(Fᵐ | H_cⁱ(X, K)) = ∑_{y ∈ X₀(𝔽_{qᵐ})} t_K(y)`,
 
-`F` being the geometric Frobenius on compactly supported cohomology
-(`AlgebraicGeometry.WeilComplex.compactlySupportedCohomology`) and `t_K` the trace function
-(`AlgebraicGeometry.WeilComplex.traceFunction`). Only finitely many terms are nonzero on
-either side. It is
-`AlgebraicGeometry.WeilComplex.finsum_trace_compactlySupportedCohomology_eq_of_comparison`. -/
+`F` being the geometric Frobenius on compactly supported cohomology and `t_K` the trace
+function. -/
 theorem WeilComplex.sum_trace_compactlySupportedCohomology_eq_sum_traceFunction
     (K : WeilComplex k₀ l X) {m : ℕ} (hm : m ≠ 0) :
     ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _

@@ -44,9 +44,15 @@ commute with filtered colimits is in
   higher direct image `R^q h_* (Λ/dΛ)` vanishes as soon as every class of
   `H^q(U ×_X Y, ℤ/e)`, for `e ∣ d` and `U` affine étale over `X`, dies on an étale cover of `U`.
 
+## Implementation details
+
+The identification of `R^q h_* K` with a sheafified presheaf is stated for quasi-compact
+quasi-separated `h`, although it holds for any `h` ([Stacks, Tag 072W]).
+
 ## References
 
 - Stacks Project, Lemma 59.51.6, <https://stacks.math.columbia.edu/tag/03Q8>
+- [Stacks, Tag 072W]
 -/
 
 @[expose] public section
@@ -772,9 +778,7 @@ noncomputable abbrev Etale.homologyShiftComparison {X Y : Scheme.{u}} (h : Y ⟶
       ((DerivedCategory.Plus.homologyFunctor _ 0).shiftIso q 0 q (add_zero q)).hom.app _
 
 /-- The canonical map from `W ↦ Hᵠ(W ×_X Y, K|)` to `Hᵠ(Rh_* K)` is locally injective and
-locally surjective, for every morphism `h`. 
-(blueprint: sbc-lem-module-higher-image-raw-comparison-locally-bijective)
--/
+locally surjective, for every morphism `h`. -/
 theorem Etale.isLocallyBijective_higherDirectImagePresheafToSheaf {X Y : Scheme.{u}}
     (h : Y ⟶ X) (q : ℤ)
     (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -798,16 +802,11 @@ theorem Etale.isLocallyBijective_higherDirectImagePresheafToSheaf {X Y : Scheme.
   rw [hφ]
   constructor <;> infer_instance
 
-/-- Blueprint `theorem-proper-base-change-classical-pro`: Higher direct images for quasi-compact
-quasi-separated morphisms, for complexes.
-
-Let `h : Y ⟶ X` be quasi-compact and quasi-separated and `K ∈ D⁺(Y_ét, Λ)`. Then the `q`-th
+/-- Higher direct images for quasi-compact quasi-separated morphisms, for complexes: if
+`h : Y ⟶ X` is quasi-compact and quasi-separated and `K ∈ D⁺(Y_ét, Λ)`, then the `q`-th
 cohomology sheaf of `Rh_* K` is, as a sheaf of abelian groups, the sheafification of the
-presheaf `W ↦ H^q(W ×_X Y, K|)` on the small étale site of `X`
-(`AlgebraicGeometry.Etale.higherDirectImagePresheaf`): the canonical map
-`AlgebraicGeometry.Etale.higherDirectImagePresheafToSheaf` induces an isomorphism from the
-sheafification. The hypotheses on `h` are those of the blueprint; the statement holds for any
-`h` (Stacks `072W`). -/
+presheaf `W ↦ H^q(W ×_X Y, K|)` on the small étale site of `X`, via the canonical map
+`AlgebraicGeometry.Etale.higherDirectImagePresheafToSheaf`. -/
 theorem Etale.isIso_higherDirectImagePresheafToSheaf {X Y : Scheme.{u}}
     (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h] (q : ℤ)
     (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -836,14 +835,10 @@ theorem Etale.isIso_higherDirectImagePresheafToSheaf {X Y : Scheme.{u}}
     exact Presheaf.isLocallySurjective_of_isLocallySurjective X.smallEtaleTopology
       (toSheafify _ _) ψ.hom
 
-/-- Blueprint `theorem-proper-base-change-classical-pro`: Higher direct images for quasi-compact
-quasi-separated morphisms.
-
-Let `h : Y ⟶ X` be quasi-compact and quasi-separated and `F` an étale sheaf of `Λ`-modules on
-`Y`. Then `R^q h_* F` is, as a sheaf of abelian groups, the sheafification of the presheaf
-`W ↦ H^q(W ×_X Y, F|)` on the small étale site of `X`, via the canonical map
-`AlgebraicGeometry.Etale.higherDirectImagePresheafToSheaf`. This is the case `K = F[0]` of
-`AlgebraicGeometry.Etale.isIso_higherDirectImagePresheafToSheaf`. -/
+/-- Higher direct images for quasi-compact quasi-separated morphisms: if `h : Y ⟶ X` is
+quasi-compact and quasi-separated and `F` is an étale sheaf of `Λ`-modules on `Y`, then
+`R^q h_* F` is, as a sheaf of abelian groups, the sheafification of the presheaf
+`W ↦ H^q(W ×_X Y, F|)` on the small étale site of `X`. -/
 theorem Etale.isIso_higherDirectImagePresheafToSheaf_singleFunctor
     {X Y : Scheme.{u}} (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h] (q : ℤ)
     (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
@@ -968,24 +963,11 @@ lemma Etale.higherDirectImagePresheafFunctor_map {X Y : Scheme.{u}} (h : Y ⟶ X
 
 end FilteredColimits
 
-/-- Blueprint `proposition-base-change-larger-algebraically-closed`, in the vanishing form used for
-constant coefficients: Higher direct image as a sheafified cohomology presheaf.
-
-Let `h : Y ⟶ X` be quasi-compact and quasi-separated, let `d : ℕ` and `q : ℕ`. Suppose that for
-every `e ∣ d`, every affine scheme `U` étale over `X` and every class
-`ξ ∈ H^q(Y ×_X U, ℤ/e)` there is an étale covering `{V i ⟶ U}` such that `ξ` dies after
-pullback to every `Y ×_X V i`. Then `R^q h_* (Λ/dΛ) = 0`.
-
-By Stacks `03Q8` the abelian sheaf `R^q h_* (ℤ/e)` is the sheafification of
-`U ↦ H^q(Y ×_X U, ℤ/e)` on `X_ét`, and the affine `U` form a basis of `X_ét`, so the hypothesis
-says that `R^q h_* (ℤ/e) = 0` for every `e ∣ d`. The underlying abelian group of `Λ/dΛ` is the
-filtered colimit of its finitely generated subgroups, which are finite direct sums of cyclic
-groups `ℤ/e` with `e ∣ d` (and of copies of `ℤ` when `d = 0`); as `h` is quasi-compact and
-quasi-separated, `R^q h_*` commutes with filtered colimits, so the underlying abelian sheaf of
-`R^q h_* (Λ/dΛ)` vanishes, and the higher direct images of a sheaf of `Λ`-modules are computed
-on its underlying abelian sheaf. 
-(blueprint: lem-sbc-constant-module-higher-direct-image-local-vanishing)
--/
+/-- Vanishing of higher direct images of constant coefficients: let `h : Y ⟶ X` be
+quasi-compact and quasi-separated and `d q : ℕ`. Suppose that for every `e ∣ d`, every affine
+scheme `U` étale over `X` and every class `ξ ∈ H^q(Y ×_X U, ℤ/e)` there is an étale covering
+`{V i ⟶ U}` such that `ξ` dies after pullback to every `Y ×_X V i`. Then
+`R^q h_* (Λ/dΛ) = 0`. -/
 @[stacks 03Q8]
 theorem Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists {X Y : Scheme.{u}}
     (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h] (d q : ℕ)

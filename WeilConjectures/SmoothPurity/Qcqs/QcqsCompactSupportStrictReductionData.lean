@@ -11,8 +11,22 @@ public import WeilConjectures.SmoothPurity.Compact.CompactSupportNativeSystemEva
 import WeilConjectures.SmoothPurity.Supporting.Coefficient.StrictCoefficientProperReduction
 import WeilConjectures.SmoothPurity.Supporting.Coefficient.StrictCoefficientOpenReduction
 
-/-! The strict proper/open comparison and its finite coordinates.
-(blueprint: lem-qcqs-compact-support-strict-reduction-data) -/
+/-!
+# The strict proper/open comparison and its finite coordinates
+
+## Implementation details
+
+For `qcqsCompactSupport_strictReductionData`, paste the strict proper comparison after completed
+open extension with native proper image of the strict open comparison. Naturality of proper
+evaluation and the two finite comparison equations cancel the coefficient coordinates on the
+middle scheme. The proved proper/open factorization gives the ambient comparison, and the
+finite presentation isomorphisms cancel by naturality. The total-limit comparison is separate.
+
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 6.7.6 and Lemma 6.7.7]
+* [Stacks Project, Tags 0941 and 0F7J]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -136,17 +150,7 @@ include K₀ hl
 -- The existing statement retains the geometric hypotheses of its source.
 set_option linter.unusedSectionVars false in
 
-/-- The strict comparison map exists and has the prescribed finite coordinate identity.
-
-Source: Bhatt--Scholze, Definition 6.7.6 and Lemma 6.7.7; Stacks 0941, 0F7J
-(blueprint: lem-qcqs-compact-support-strict-reduction-data).
-
-Paste the strict proper comparison after completed open extension with native proper
-image of the strict open comparison. Naturality of proper evaluation and the two
-finite comparison equations cancel the coefficient coordinates on the middle scheme.
-The proved proper/open factorization gives the ambient comparison, and the finite
-presentation isomorphisms cancel by naturality. The total-limit comparison is separate.
--/
+/-- The strict comparison map exists and has the prescribed finite coordinate identity. -/
 theorem qcqsCompactSupport_strictReductionData :
     ∃ (SX : CoefficientDerivedSystemCalculus l E X)
       (SY : CoefficientDerivedSystemCalculus l E Y),

@@ -13,8 +13,18 @@ import WeilConjectures.RingTheory.PopescuZeroBaseSingleChartUnlocalized
 
 /-! # Scalar extension and localization of the single-chart presentation
 
-Source: Stacks Project, Tag 07CP, first two lines of the calculation modulo pi.
-(blueprint: lem-weil-pbc-popescu-zero-base-single-chart-presentation).
+After a scalar extension killing `π` and inverting `a_k`, the single-chart quotient of the
+Popescu lifting algebra is presented by the linear relations `a_k z_l - ∑_j h_klj z_j` over the
+localized reduced coefficient quotient.
+
+## Implementation details
+
+Normalization of `h` is not required: every linear relation is retained, including the
+free-variable relations.
+
+## References
+
+* [Stacks, Tag 07CP] (first two lines of the calculation modulo `π`)
 -/
 
 @[expose] public section
@@ -100,26 +110,7 @@ private theorem localized_equiv {S P Q : Type*}
     (Localization.Away t) (Localization.Away u) e (by rw [Submonoid.map_powers, h])⟩
 
 set_option synthInstance.maxSize 512 in
-/-- Scalar extension killing pi and localization give the displayed linear presentation.
-
-Source: Stacks Project, Tag 07CP, first two lines of the calculation modulo pi.
-(blueprint: lem-weil-pbc-popescu-zero-base-single-chart-presentation).
-
-Proof: Split the original and auxiliary polynomial variables using the polynomial
-universal property. Tensoring with B replaces coefficients by their images in B.
-Because pi maps to zero, the original equations become f_l and the selected chart's
-equations become a_k z_l minus the sum of h_klj z_j. First quotient by all the f_l
-in the coefficient ring; reducing coefficients modulo pi squared is invisible in B,
-so this is B tensor over R/(pi squared) with reducedQuotient. Inverting the image
-of a_k commutes with scalar extension, polynomial extension, and the remaining
-quotient: each assertion follows by constructing maps in both directions from their
-universal properties and checking them on the coefficient ring and variables.
-The resulting coefficient ring is K below, and its coefficient map is exactly
-singleChartCoefficient. The remaining equations are exactly the generators of I.
-Remove ULift by its canonical algebra equivalence. The two presentation maps fix
-coefficients and each auxiliary variable; quotient and localization uniqueness show
-that their composites are identities. Normalization of h is not required: this
-statement retains every linear relation, including the free-variable relations. -/
+/-- Scalar extension killing pi and localization give the displayed linear presentation. -/
 theorem zero_base_single_chart_presentation (R : Type a) (Cbar : Type c)
     [CommRing R] [CommRing Cbar] (π : R)
     [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]

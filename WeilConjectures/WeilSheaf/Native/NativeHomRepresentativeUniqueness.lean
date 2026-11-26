@@ -9,7 +9,19 @@ public import WeilConjectures.WeilSheaf.Native.Weil.NativeWeilClosedModels
 
 /-! # Uniqueness of Hom comparisons with fixed product-total representatives
 
-Source: Stacks 0A95 and 079P; native constraint lifting, Hom identification step.
+Projection-normalized native Hom comparisons with fixed product-total representatives are
+unique.
+
+## Implementation details
+
+Two compatible comparisons agree on pairs of K-injective complexes by the universal property of
+the product, degree by degree; since every native derived object is isomorphic to the image of a
+K-injective complex, naturality transports the equality to arbitrary pairs. No tensor model,
+boundedness or nonzero objects are used.
+
+## References
+
+* [Stacks, Tags 0A95, 079P]
 -/
 
 @[expose] public section
@@ -68,23 +80,7 @@ namespace AlgebraicGeometry.ProEtaleWeilSheaf
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- Projection-normalized native Hom comparisons are unique. This statement
-concerns only internal Hom; it constructs no tensor or structural constraint.
-
-Source: native constraint lifting step 3, identification of Hom representatives;
-Stacks 0A95 and 079P (blueprint: lem-sf-native-hom-representative-uniqueness).
-
-Proof: first take two K-injective complexes P and I. The two compatibility
-witnesses have the same projections to every product-Hom component, by their
-HEq clauses. The universal property of the product, degree by degree, makes
-the two complex comparison arrows equal, independently of the proof witnesses
-of K-injectivity. Cancel the common invertible localization factorization and
-representative maps in the two compatibility squares. Thus eta and chi agree
-on (QP,QI). Every native derived object is isomorphic to Q of a K-injective
-complex. Naturality in both variables transports that equality to arbitrary
-derived pairs; cancel the images of these isomorphisms. Natural transformations
-and natural isomorphisms are determined by their components, proving eta=chi.
-Neither a tensor model nor boundedness or nonzero objects is used. -/
+/-- Projection-normalized native Hom comparisons are unique. -/
 theorem native_hom_representative_unique
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]

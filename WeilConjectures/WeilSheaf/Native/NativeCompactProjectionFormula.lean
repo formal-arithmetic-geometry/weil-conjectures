@@ -20,13 +20,22 @@ import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-! # Compact projection formula for actual derived Weil complexes
 
-Source: blueprint latest, fix-lem-tensor-adjunction.proof.md, Step 1, second Hom
-bijection (blueprint: lem-sf-derived-weil-compact-projection-formula).
+This file sets up the ingredients of the compact projection formula
+`f_! A ⊗ T ≅ f_! (A ⊗ f^* T)` for derived Weil complexes: the constructible tensor, the
+balanced pullback/tensor comparison for the proper factor, its projection mate, and the
+chosen compactification of `f`.
+
+## Implementation details
 
 The tensor and compact-support operations are the recorded native constructions.
 The proper pullback/tensor comparison is pinned on sheaf summands and K-flat
-representatives. The projection is pinned to the counit mate followed by the
-normalized open comparison and the balanced pullback compositor.
+representatives, using a generic exact functor so that it is independent of any
+presentation of the native fixed-pair functor. The projection is pinned to the counit
+mate followed by the normalized open comparison and the balanced pullback compositor.
+
+## References
+
+* [Stacks, Tags 07A4, 0G7E, 01T3, 01KU]
 -/
 
 @[expose] public noncomputable section
@@ -39,11 +48,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
-/-- On each summand, totalized pullback/tensor is the specified sheaf comparison.
-Using a generic exact functor keeps the comparison independent of any presentation
-of the native fixed-pair functor.
-Source: Stacks 07A4; blueprint latest, fix-lem-tensor-adjunction.proof.md, Step 1
-(blueprint: lem-sf-derived-weil-compact-projection-formula). -/
+/-- On each summand, the totalized pullback/tensor comparison is the specified sheaf
+comparison. -/
 def ProjectionTensorSummandNormalization
     {A B : Type a} [Category.{b} A] [Category.{b} B] [Abelian A] [Abelian B]
     (F : A ⥤ B) [F.Additive] (SA : A × A ⥤ A) (SB : B × B ⥤ B)
@@ -63,10 +69,8 @@ def ProjectionTensorSummandNormalization
         iB ((F.mapHomologicalComplex (.up ℤ)).obj P)
           ((F.mapHomologicalComplex (.up ℤ)).obj T) a b n h
 
-/-- A presentation of balanced pullback/tensor, retaining its sheaf, total and
-localized maps. The native compatibility conditions below pin every operation.
-Source: Stacks 07A4, 0G7E; blueprint latest, fix-lem-tensor-adjunction.proof.md,
-Step 1 (blueprint: lem-sf-derived-weil-compact-projection-formula). -/
+/-- A presentation of the balanced pullback/tensor comparison, retaining its sheaf, total
+and localized maps. -/
 structure ProjectionTensorPresentation
     (A B : Type a) [Category.{b} A] [Category.{b} B] [Abelian A] [Abelian B]
     [HasDerivedCategory.{b} A] [HasDerivedCategory.{b} B] where
@@ -135,10 +139,7 @@ namespace WeilComplex
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)]
 
-/-- The recorded native tensor restricted to its bounded constructible full subcategory.
-Source: nativeDerivedTensor_mem_weilComplex; blueprint latest,
-fix-lem-tensor-adjunction.proof.md, Step 1
-(blueprint: lem-sf-derived-weil-compact-projection-formula). -/
+/-- The native derived tensor restricted to the bounded constructible full subcategory. -/
 def nativeConstructibleTensor (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
     [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
@@ -165,13 +166,10 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
   (p : Z ⟶ Y) [p.IsOver (Spec (CommRingCat.of k₀))]
 
-/-- Representative normalization for the proper factor's balanced tensor comparison.
-This is data specifying the comparison, not a projection-formula assumption.
-Sheaf maps are the existing balanced ordinary maps with their Weil structures;
-total maps are fixed on every coproduct insertion; mu is their localization.
-Source: Stacks 07A4, 0G7E; blueprint latest,
-fix-lem-tensor-adjunction.proof.md, Step 1, second Hom bijection
-(blueprint: lem-sf-derived-weil-compact-projection-formula). -/
+/-- The balanced pullback/tensor comparison along the proper map `p`, together with a
+representative presentation whose sheaf maps are the balanced module comparisons, whose
+total maps are fixed on each coproduct insertion, and whose derived map `mu` is their
+localization. -/
 structure NativeProjectionTensorComparison where
   /-- Natural balanced comparison in the actual ambient derived category. -/
   mu : nativeDerivedTensor k₀ l Y ⋙ nativeOpenPull k₀ l p ≅
@@ -199,10 +197,8 @@ structure NativeProjectionTensorComparison where
     ((ProEtale.adicUpperStarTensorLeftIso l
       (Scheme.Hom.geometricFiberMap p (comp_over p _)) N.carrier).hom.app M.carrier)
 
-/-- The proper projection mate of the actual derived counit and balanced comparison.
-No invertibility is included in this definition.
-Source: blueprint latest, fix-lem-tensor-adjunction.proof.md, Step 1, second Hom
-bijection (blueprint: lem-sf-derived-weil-compact-projection-formula). -/
+/-- The projection map `p_* A ⊗ T ⟶ p_* (A ⊗ p^* T)`, the mate of the derived counit
+composed with the balanced comparison. -/
 def nativeProjectionProperMate (C : NativeProjectionTensorComparison k₀ l p)
     (A : DerivedCategory (ProEtaleWeilSheaf k₀ l Z))
     (T : DerivedCategory (ProEtaleWeilSheaf k₀ l Y)) :
@@ -231,63 +227,42 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
   [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
 
-/-- The framework's actual chosen compactification, with its canonical k0-structure.
-Source: native framework, LowerShriek.lean; blueprint latest,
-fix-lem-tensor-adjunction.proof.md, Step 1
-(blueprint: lem-sf-derived-weil-compact-projection-formula). -/
+/-- The chosen compactification of `f`, with its canonical `k₀`-structure. -/
 abbrev nativeProjectionCompactification : Compactification f :=
   HasCompactification.compactification f (hf := hasCompactification_of_over (k₀ := k₀) f)
 
-/-- Finite type of the chosen compactification source, by composition with its proper map.
-Source: Stacks 01T3; node proof Step 1
-(blueprint: lem-sf-derived-weil-compact-projection-formula).
-Proof: the structure map is p followed by the finite-type structure map of Y;
-proper maps are finite type, and finite-type maps compose. -/
+/-- The source of the chosen compactification is locally of finite type over `k₀`. -/
 instance nativeProjectionCompactification_locallyOfFiniteType :
     LocallyOfFiniteType ((nativeProjectionCompactification k₀ f).Z ↘
       Spec (CommRingCat.of k₀)) :=
   locallyOfFiniteType_comp (nativeProjectionCompactification k₀ f).g
     (Y ↘ Spec (CommRingCat.of k₀))
 
-/-- Quasi-compactness of the chosen compactification source by proper composition.
-Source: Stacks 01T3; node proof Step 1
-(blueprint: lem-sf-derived-weil-compact-projection-formula).
-Proof: p is proper, hence quasi-compact; compose with the quasi-compact map of Y. -/
+/-- The source of the chosen compactification is quasi-compact over `k₀`. -/
 instance nativeProjectionCompactification_quasiCompact :
     QuasiCompact ((nativeProjectionCompactification k₀ f).Z ↘
       Spec (CommRingCat.of k₀)) :=
   quasiCompact_comp (nativeProjectionCompactification k₀ f).g
     (Y ↘ Spec (CommRingCat.of k₀))
 
-/-- Separatedness of the chosen compactification source by proper composition.
-Source: Stacks 01KU; node proof Step 1
-(blueprint: lem-sf-derived-weil-compact-projection-formula).
-Proof: factor its diagonal through Z times_Y Z. The first map is closed since p
-is proper, and the second is the pullback of the closed diagonal of Y. -/
+/-- The source of the chosen compactification is separated over `k₀`. -/
 instance nativeProjectionCompactification_isSeparated :
     IsSeparated ((nativeProjectionCompactification k₀ f).Z ↘
       Spec (CommRingCat.of k₀)) :=
   MorphismProperty.comp_mem (@IsSeparated) (nativeProjectionCompactification k₀ f).g
     (Y ↘ Spec (CommRingCat.of k₀)) inferInstance inferInstance
 
-/-- The two-variable source of the compact projection formula.
-Source: blueprint latest, fix-lem-tensor-adjunction.proof.md, Step 1
-(blueprint: lem-sf-derived-weil-compact-projection-formula). -/
+/-- The two-variable source `(A, T) ↦ f_! A ⊗ T` of the compact projection formula. -/
 abbrev nativeCompactProjectionLeft :=
   (derivedLowerShriek k₀ l f).prod (𝟭 (WeilComplex k₀ l Y)) ⋙
     nativeConstructibleTensor k₀ l Y
 
-/-- The two-variable target of the compact projection formula.
-Source: blueprint latest, fix-lem-tensor-adjunction.proof.md, Step 1
-(blueprint: lem-sf-derived-weil-compact-projection-formula). -/
+/-- The two-variable target `(A, T) ↦ f_! (A ⊗ f^* T)` of the compact projection formula. -/
 abbrev nativeCompactProjectionRight :=
   (𝟭 (WeilComplex k₀ l X)).prod (upperStar (k₀ := k₀) (l := l) f) ⋙
     nativeConstructibleTensor k₀ l X ⋙ derivedLowerShriek k₀ l f
 
-/-- The balanced compositor for the actual chosen factorization of f.
-Source: UpperStarComp.lean, UpperStarId.lean; blueprint latest,
-fix-lem-tensor-adjunction.proof.md, Step 1
-(blueprint: lem-sf-derived-weil-compact-projection-formula). -/
+/-- The pullback compositor `i^* ∘ g^* ≅ f^*` for the chosen compactification `f = g ∘ i`. -/
 def nativeProjectionPullComp :
     ProEtaleWeilSheaf.nativeOpenPull k₀ l (nativeProjectionCompactification k₀ f).g ⋙
         ProEtaleWeilSheaf.nativeOpenPull k₀ l (nativeProjectionCompactification k₀ f).i ≅

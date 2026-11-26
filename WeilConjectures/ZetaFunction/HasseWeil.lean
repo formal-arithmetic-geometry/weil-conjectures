@@ -28,18 +28,10 @@ For a smooth projective curve of genus `g` this is the classical Hasse–Weil bo
 `|N₁ - (q + 1)| ≤ 2 g √q`, since there `d = 1` and `deg (P 1) = 2 g`. The hypothesis `1 ≤ d` is
 needed: for `d = 0` the two endpoint factors coincide and the bound fails.
 
-This file formalises the Hasse–Weil bound of the blueprint block on zeta functions and the Weil
-conjectures.
-
-The proof compares logarithmic derivatives in the factorization of the zeta function: this
-expresses `N n` as the alternating sum `∑ (-1) ^ i ∑ αⁿ` of the power sums of the reciprocal
-roots `α` of the `P i`, the shadow of the Lefschetz trace formula.
-
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.abs_pointCount_sub_le_sum_finrank`: the Hasse–Weil bound with the
-  Betti numbers `dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` (`corollary-point-count-estimates--1`), using the endpoint
-  cohomology of `theorem-weil-conjectures-smooth-proper-schemes`
+  Betti numbers `dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)`, using the endpoint cohomology
   (`AlgebraicGeometry.Scheme.endpoints_of_isIntegralFrobeniusFactor`).
 - `AlgebraicGeometry.Scheme.Hom.pointCount_eq_sum_roots`: `N n = ∑ (-1) ^ i ∑ αⁿ`.
 - `AlgebraicGeometry.Scheme.Hom.abs_pointCount_sub_le`: the Hasse–Weil bound over the degree `n`
@@ -49,7 +41,16 @@ roots `α` of the `P i`, the shadow of the Lefschetz trace formula.
 - `AlgebraicGeometry.Scheme.Hom.abs_pointCount_sub_le_two_mul_genus`: the Hasse–Weil bound
   `|N n - (qⁿ + 1)| ≤ 2 g q^{n/2}` for a smooth proper geometrically integral curve of genus `g`.
   It uses `AlgebraicGeometry.Scheme.Hom.natDegree_eq_two_mul_genus_of_isWeilFactorization`,
-  the identity `deg P 1 = 2 g`, proved by counting effective divisors with Riemann–Roch.
+  the identity `deg P 1 = 2 g`.
+
+## Implementation details
+
+The proof compares logarithmic derivatives in the factorization of the zeta function: this
+expresses `N n` as the alternating sum `∑ (-1) ^ i ∑ αⁿ` of the power sums of the reciprocal
+roots `α` of the `P i`, the shadow of the Lefschetz trace formula. The identity `deg P 1 = 2 g`
+for curves is proved without `ℓ`-adic cohomology, by F. K. Schmidt's argument: Riemann–Roch
+counts the effective divisors of large degree, which are the coefficients of the zeta function,
+and together with the Riemann hypothesis for `P 1` this forces `deg P 1 = 2 g`.
 
 ## References
 
@@ -71,11 +72,7 @@ omit [Finite k] in
 /-- **The point count as an alternating sum of power sums of reciprocal roots.** If the zeta
 function of `X` factors as `∏ P i ^ ((-1) ^ (i + 1))` with `P i (0) = 1`, then for every `n ≥ 1`
 the number of points of `X` over the degree `n` extension of `k` is
-`N n = ∑ i, (-1) ^ i ∑_α αⁿ`, where `α` runs over the reciprocal roots `z⁻¹` of `P i`.
-
-This is the trace formula `N n = ∑ (-1) ^ i tr (Fⁿ | V i)` of Step 1 of the blueprint proof of
-`corollary-point-count-estimates--1`, read off from the factorization of the zeta function by
-comparing logarithmic derivatives. -/
+`N n = ∑ i, (-1) ^ i ∑_α αⁿ`, where `α` runs over the reciprocal roots `z⁻¹` of `P i`. -/
 theorem Hom.pointCount_eq_sum_roots (f : X.Hom (Spec (.of k))) {q d : ℕ}
     {P : Fin (2 * d + 1) → Polynomial ℤ} (hfact : IsWeilFactorization q d f.zetaSeries P)
     {n : ℕ} (hn : n ≠ 0) :
@@ -141,13 +138,7 @@ theorem Hom.pointCount_eq_sum_roots (f : X.Hom (Spec (.of k))) {q d : ℕ}
 /-- **The Hasse–Weil bound in every degree.** If the zeta function of `X` has integral Frobenius
 factors `P i` satisfying the Riemann hypothesis, `d ≥ 1`, then for every `n ≥ 1` the number
 `N n` of points of `X` over the degree `n` extension of `k` satisfies
-`|N n - (q ^ (d n) + 1)| ≤ ∑_{0 < i < 2d} deg (P i) · q ^ (i n / 2)`.
-
-The two endpoint factors `P 0 = 1 - T` and `P (2 * d) = 1 - qᵈ T` (the content of the blueprint
-node `theorem-weil-conjectures-smooth-proper-schemes`, recorded in
-`AlgebraicGeometry.IsWeilFactorization`) contribute `1` and `q ^ (d n)`, and each of the `deg (P i)`
-reciprocal roots in degree `i` has absolute value `q ^ (i / 2)`.
-(blueprint: `corollary-point-count-estimates--1`) -/
+`|N n - (q ^ (d n) + 1)| ≤ ∑_{0 < i < 2d} deg (P i) · q ^ (i n / 2)`. -/
 theorem Hom.abs_pointCount_sub_le (f : X.Hom (Spec (.of k))) {q d : ℕ}
     (hq : q = Nat.card k) (hd : 1 ≤ d) {P : Fin (2 * d + 1) → Polynomial ℤ}
     (hfact : IsWeilFactorization q d f.zetaSeries P)
@@ -220,8 +211,7 @@ theorem Hom.abs_pointCount_sub_le (f : X.Hom (Spec (.of k))) {q d : ℕ}
 
 /-- **The Hasse–Weil bound.** If the zeta function of `X` has integral Frobenius factors `P i`
 satisfying the Riemann hypothesis, then the number `N₁` of `k`-rational points of `X` differs
-from `qᵈ + 1` by at most `∑_{0 < i < 2d} deg (P i) · q^{i/2}`.
-(blueprint: `corollary-point-count-estimates`) -/
+from `qᵈ + 1` by at most `∑_{0 < i < 2d} deg (P i) · q^{i/2}`. -/
 theorem Hom.abs_pointCount_one_sub_le (f : X.Hom (Spec (.of k))) {q d : ℕ}
     (hq : q = Nat.card k) (hd : 1 ≤ d) {P : Fin (2 * d + 1) → Polynomial ℤ}
     (hfact : IsWeilFactorization q d f.zetaSeries P)
@@ -233,16 +223,7 @@ theorem Hom.abs_pointCount_one_sub_le (f : X.Hom (Spec (.of k))) {q d : ℕ}
 
 /-- **The degree of the middle Weil factor of a curve is twice the genus.** For a smooth proper
 geometrically integral curve over a finite field, the factor `P 1` in the factorization
-`Z = P 1 / ((1 - T) (1 - q T))` of its zeta function has degree `2 g`.
-
-This is the zeta-function form of Step 4 of the blueprint proof of
-`corollary-point-count-estimates--2`, `dim H¹(C ⊗ k̄, ℚ̄_ℓ) = 2 g`. It is proved here without
-`ℓ`-adic cohomology, by F. K. Schmidt's argument: Riemann–Roch counts the effective divisors of
-large degree, which are the coefficients of the zeta function, and together with the Riemann
-hypothesis for `P 1` this forces `deg P 1 = 2 g`
-(`AlgebraicGeometry.Scheme.natDegree_eq_two_mul_arithmeticGenus_of_isWeilFactorization`). The
-genus `dim_k Γ(C, Ω¹)` is the arithmetic genus by
-`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`. -/
+`Z = P 1 / ((1 - T) (1 - q T))` of its zeta function has degree `2 g`. -/
 theorem Hom.natDegree_eq_two_mul_genus_of_isWeilFactorization
     (f : X ⟶ Spec (.of k)) [SmoothOfRelativeDimension 1 f] [IsProper f]
     [GeometricallyIntegral f] {P : Fin (2 * 1 + 1) → Polynomial ℤ}
@@ -264,8 +245,7 @@ theorem Hom.natDegree_eq_two_mul_genus_of_isWeilFactorization
 
 /-- **The Hasse–Weil bound for curves.** Let `C` be a smooth proper geometrically integral curve
 of genus `g` over a finite field `k` with `q` elements. Then for every `n ≥ 1`,
-`|#C(𝔽_{qⁿ}) - (qⁿ + 1)| ≤ 2 g q^{n/2}`.
-(blueprint: `corollary-point-count-estimates--2`) -/
+`|#C(𝔽_{qⁿ}) - (qⁿ + 1)| ≤ 2 g q^{n/2}`. -/
 theorem Hom.abs_pointCount_sub_le_two_mul_genus (f : X ⟶ Spec (.of k))
     [SmoothOfRelativeDimension 1 f] [IsProper f] [GeometricallyIntegral f] {n : ℕ}
     (hn : n ≠ 0) :
@@ -295,11 +275,10 @@ variable (d : ℕ) [IsProper (X ↘ Spec (CommRingCat.of k₀))]
   [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
   [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `corollary-point-count-estimates--1` (Hasse–Weil bound in every dimension), in its
-cohomological form: for `X₀` smooth, proper and geometrically connected of pure dimension
-`d ≥ 1` over `k₀ = 𝔽_q` and every prime `ℓ ≠ p`, the number `N n = #X₀(𝔽_{qⁿ})` satisfies
-`|N n - (q^{dn} + 1)| ≤ ∑_{0 < i < 2d} bᵢ q^{in/2}` with the Betti numbers
-`bᵢ = dim_{ℚ̄_ℓ} Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)`. -/
+/-- **The Hasse–Weil bound with Betti numbers.** For `X₀` smooth, proper and geometrically
+connected of pure dimension `d ≥ 1` over `k₀ = 𝔽_q` and every prime `ℓ ≠ p`, the number
+`N n = #X₀(𝔽_{qⁿ})` satisfies `|N n - (q^{dn} + 1)| ≤ ∑_{0 < i < 2d} bᵢ q^{in/2}` with the Betti
+numbers `bᵢ = dim_{ℚ̄_ℓ} Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)`. -/
 theorem abs_pointCount_sub_le_sum_finrank (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
     (hd : 1 ≤ d) {n : ℕ} (hn : n ≠ 0) :
     |((X ↘ Spec (CommRingCat.of k₀)).pointCount n : ℝ) - ((Nat.card k₀ : ℝ) ^ (d * n) + 1)| ≤

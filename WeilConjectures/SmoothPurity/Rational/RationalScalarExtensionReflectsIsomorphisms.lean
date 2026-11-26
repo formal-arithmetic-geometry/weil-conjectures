@@ -12,8 +12,8 @@ import Mathlib.CategoryTheory.Functor.EpiMono
 
 /-! # Conservativity of finite rational scalar extension
 
-Source: finite separable coefficient extension and the raw rationalization
-construction (blueprint: new-sf-rational-scalar-extension-reflects-isomorphisms).
+Scalar extension along a finite separable coefficient extension reflects isomorphisms on the
+raw rational constructible categories.
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -78,15 +78,7 @@ noncomputable def rationalScalarExtension_leftAdjunction
   exact Adjunction.ofIsRightAdjoint _
 
 /-- Scalar extension along a finite field extension reflects isomorphisms on the
-raw rational constructible categories.
-
-Proof: represent a morphism by a localized integral morphism. Restriction of
-scalars along the finite coefficient extension is faithful on the underlying
-coefficient sheaves and detects quasi-isomorphisms after finite reduction.
-The finite-free completed comparison identifies this restriction with the
-recorded rational scalar functor after extension, so an isomorphism after scalar
-extension has an invertible cone before extension. The same argument applies
-on the full constructible subcategories. -/
+raw rational constructible categories. -/
 theorem rationalScalarExtension_reflects_isomorphisms
     (l : ℕ) [Fact l.Prime]
     (E F : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

@@ -63,9 +63,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
 variable (Y) in
-/-- **Biduality at the unit**: `ℚ̄_ℓ ≅ RHom(ω_Y, ω_Y)`, from the biduality isomorphism
-`ℚ̄_ℓ ≅ 𝔻_Y 𝔻_Y ℚ̄_ℓ` (`isIso_verdierBiduality`) and `RHom(ℚ̄_ℓ, ω_Y) ≅ ω_Y`
-(`MonoidalClosed.unitNatIso`). -/
+/-- **Biduality at the unit**: `ℚ̄_ℓ ≅ RHom(ω_Y, ω_Y)`. -/
 def unitIsoIhomDualizingComplex :
     𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) ≅
       (ihom (dualizingComplex ℓ Y)).obj (dualizingComplex ℓ Y) :=
@@ -76,9 +74,7 @@ def unitIsoIhomDualizingComplex :
 variable (f : X ⟶ Y)
 
 /-- **The exceptional internal hom exchange** `RHom(f^* M, Rf^! N) ≅ Rf^! RHom(M, N)` on bounded
-constructible `ℚ̄_ℓ`-complexes (blueprint `lemma-external-duality-trace-morphism--2`), from the
-derived projection formula `boundedConstructibleExceptionalProjection` and the exceptional
-adjunction, as `TraceFormula.TraceClass.exceptionalHomIso`. -/
+constructible `ℚ̄_ℓ`-complexes. -/
 def upperShriekExceptionalHomIso (M N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (ihom ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj M)).obj
         ((boundedConstructibleUpperShriek ℓ f).obj N) ≅
@@ -118,9 +114,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k₁ k₂ : Type u} [Field k₁] [Field k
   (f : X ⟶ Y) (f' : X' ⟶ Y') {πX : X'.left ⟶ X.left} {πY : Y'.left ⟶ Y.left}
 
 /-- The pullbacks commute with the pullbacks across fields: `f^* ⋙ πX^* ≅ πY^* ⋙ f'^*` on bounded
-constructible complexes for a commutative square `πX ≫ f = f' ≫ πY`, from the composition
-isomorphisms of the derived pullbacks (`boundedConstructibleUpperStarCompUpperStarOfMapIso`
-without its open-immersion hypotheses). -/
+constructible complexes for a commutative square `πX ≫ f = f' ≫ πY`. -/
 def boundedConstructibleUpperStarSquareIso (h : πX ≫ f.left = f'.left ≫ πY) :
     boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f ⋙
         boundedConstructibleUpperStarOfMap ℓ (X := X) (Y := X') πX ≅
@@ -143,8 +137,7 @@ def boundedConstructibleUpperStarSquareIso (h : πX ≫ f.left = f'.left ≫ πY
 
 
 /-- **Weakly étale pullback commutes with internal homs**, as an isomorphism
-`π^* RHom(A, B) ≅ RHom(π^* A, π^* B)` on bounded constructible complexes
-(`isIso_nearbyDualityMap_upperStarOfMap_id_of_weaklyEtale`). -/
+`π^* RHom(A, B) ≅ RHom(π^* A, π^* B)` on bounded constructible complexes. -/
 def upperStarOfMapIhomIso (π : X'.left ⟶ X.left) [WeaklyEtale π]
     (A B : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStarOfMap ℓ (X := X) (Y := X') π).obj ((ihom A).obj B) ≅
@@ -164,9 +157,7 @@ def upperStarOfMapIhomIso (π : X'.left ⟶ X.left) [WeaklyEtale π]
 πX^* Rf^! ℚ̄_ℓ ≅ πX^* RHom(f^* ω_Y, ω_X) ≅ RHom(πX^* f^* ω_Y, ω_X') ≅ RHom(f'^* πY^* ω_Y, ω_X')
   ≅ RHom(f'^* ω_Y', ω_X') ≅ Rf'^! ℚ̄_ℓ.
 ```
-It is not claimed to be the exceptional base change map; see
-`isIso_upperShriekBaseChangeOfMap_app_unit_of_iso` for the endomorphism trick that deduces the
-invertibility of the latter from the existence of this isomorphism, for `f` proper. -/
+It is not claimed to be the exceptional base change map. -/
 def upperShriekUnitIsoOfDualizingComplexIso (h : πX ≫ f.left = f'.left ≫ πY) [WeaklyEtale πX]
     (ωX : (boundedConstructibleUpperStarOfMap ℓ (X := X) (Y := X') πX).obj
       (dualizingComplex ℓ X) ≅ dualizingComplex ℓ X')
@@ -210,10 +201,7 @@ variable (X : Over (Spec (.of k)))
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
 /-- **The dualizing complex commutes with the change of the base field `k ⟶ k̄`**, as an
-isomorphism `πX^* ω_X ≅ ω_X̄`: the point case of A1'
-(`isIso_smoothUnitBaseChange_geometricFiberLowerShriekBaseChangePoint`, for the structure
-morphism `a_X : X ⟶ Spec k`) gives `πX^* Ra_X^! ℚ̄_ℓ ≅ Rā_X^! ℚ̄_ℓ`, and `ā_X` followed by the
-isomorphism `Spec k̄ ×_k Spec k ⟶ Spec k̄` is the structure morphism of `X̄`. -/
+isomorphism `πX^* ω_X ≅ ω_X̄`. -/
 def geometricFiberDualizingComplexIso :
     (boundedConstructibleUpperStarOfMap ℓ (X := X) (Y := geometricFiberOver X)
         X.hom.geometricFiberProj).obj (dualizingComplex ℓ X) ≅
@@ -235,9 +223,7 @@ variable {X} {Y : Over (Spec (.of k))}
   (f : X ⟶ Y)
 
 /-- **Some isomorphism `πX^* Rf^! ℚ̄_ℓ ≅ Rf̄^! ℚ̄_ℓ`** for an arbitrary morphism `f : X ⟶ Y` of
-separated `k`-schemes of finite type, `k` finite, along `k ⟶ k̄`: Verdier duality
-(`upperShriekUnitIsoOfDualizingComplexIso`) with the point case for `X` and `Y`
-(`geometricFiberDualizingComplexIso`). -/
+separated `k`-schemes of finite type, `k` finite, along `k ⟶ k̄`. -/
 def geometricFiberUpperShriekUnitIso :
     (boundedConstructibleUpperStarOfMap ℓ (X := X) (Y := geometricFiberOver X)
         X.hom.geometricFiberProj).obj ((boundedConstructibleUpperShriek ℓ f).obj (𝟙_ _)) ≅
@@ -266,10 +252,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k₁ k₂ : Type u} [Field k₁] [Field k
 
 /-- **The endomorphism trick at the unit**: for a cartesian square `πZ ≫ p = p' ≫ πP` with `p`,
 `p'` proper and `πP` weakly étale, the base change map `πZ^* Rp^! ℚ̄_ℓ ⟶ Rp'^! πP^* ℚ̄_ℓ` of `Rp^!`
-at the unit is invertible as soon as its source and target are isomorphic in **some** way:
-`Rp'_*` of it is invertible (`isIso_lowerStar_map_upperShriekBaseChangeOfMap_app`, from the
-commutation of `πP^*` with `RHom(Rp_* ℚ̄_ℓ, ℚ̄_ℓ)`), and
-`isIso_upperShriekBaseChangeOfMap_app_of_iso` concludes. -/
+at the unit is invertible as soon as its source and target are isomorphic in **some** way. -/
 theorem isIso_upperShriekBaseChangeOfMap_app_unit_of_iso (sq : IsPullback πZ p'.left p.left πP)
     [WeaklyEtale πP]
     (ψ : (boundedConstructibleUpperStarOfMap ℓ (X := Z) (Y := Z') πZ).obj

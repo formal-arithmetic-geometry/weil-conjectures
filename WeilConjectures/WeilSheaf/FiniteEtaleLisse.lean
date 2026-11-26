@@ -31,10 +31,8 @@ open ProEtale
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
 
-/-- **The pushforward of a lisse Weil sheaf along a finite étale morphism is lisse**: the base
-change of `g` to the geometric fibres is finite étale. This is the lissity part of the blueprint
-lemmas `lemma-finite-generically-etale-map-line--2` and
-`lemma-finite-quasi-finite-direct-images--3`. -/
+/-- **The pushforward of a lisse Weil sheaf along a finite étale morphism is lisse**: if `F` is
+lisse and `g` is finite étale, then `g_* F` is lisse. -/
 theorem IsLisse.lowerStar_of_finite_etale (g : Y ⟶ X) [g.IsOver (Spec (CommRingCat.of k₀))]
     [IsFinite g] [Etale g] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     {F : WeilSheaf k₀ l Y} (hF : F.IsLisse) : ((lowerStar (k₀ := k₀) g).obj F).IsLisse := by

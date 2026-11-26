@@ -7,7 +7,12 @@ module
 
 public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.LocallyFiniteAdicCompactSupportData
 
-/-! # Integral scalar-mate steps for native compact support -/
+/-! # Integral scalar-mate steps for native compact support
+
+## References
+
+* [Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -37,9 +42,8 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   (P : CoefficientConstruction l (ULift.{u} (PadicAlgCl l)) D hl (f := f))
   (c : Compactification f)
 
-/-- The common-field scalar arrow before the final integral realization.
-Source: Bhatt--Scholze, Proposition 6.8.14; the `commonField` normalization.
-(blueprint: def-sf-native-compact-support-scalar-transition-maps). -/
+/-- The common-field scalar arrow before the final integral realization, given by the
+`commonField` normalization. -/
 def nativeScalarTransition [_G : NativeGeometry.{u} l]
     (T : Scheme.{u}) (R : Realization l T)
     (i E : Index l (PadicAlgCl l)) (h : i ≤ E)
@@ -60,9 +64,7 @@ def nativeScalarTransition [_G : NativeGeometry.{u} l]
         (Coefficient.{u} l (PadicAlgCl l) E)
         (coefficientInclusion l (PadicAlgCl l) i E h)).app M)
 
-/-- Compact support of the finite coefficient change, followed by completed scalar change.
-Source: Bhatt--Scholze, Remark 6.8.15; the normalized proper/open scalar comparison.
-(blueprint: def-sf-native-compact-support-scalar-transition-maps). -/
+/-- Compact support of the finite coefficient change, followed by completed scalar change. -/
 def supportScalarTransition [_G : NativeGeometry.{u} l]
     (target : Realization l Y) (i E : Index l (PadicAlgCl l)) (h : i ≤ E)
     (M : DerivedCategory (scalarReductionSource l (Coefficient.{u} l (PadicAlgCl l) i) X)) :
@@ -94,9 +96,7 @@ def supportScalarTransition [_G : NativeGeometry.{u} l]
             (Coefficient.{u} l (PadicAlgCl l) E)
             (coefficientInclusion l (PadicAlgCl l) i E h)).app M))
 
-/-- The specified native scalar mate, transported along the given coefficient equalities.
-Source: Bhatt--Scholze, Remark 6.8.15.
-(blueprint: def-sf-native-compact-support-scalar-transition-maps). -/
+/-- The specified native scalar mate, transported along the given coefficient equalities. -/
 def nativeScalarComponent [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)
     (E : Index l (PadicAlgCl l))

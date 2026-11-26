@@ -9,8 +9,19 @@ public import WeilConjectures.SixFunctors.AmbientPullbackTensor.AmbientPullbackS
 
 /-! # Inverse sections of the selected ambient pushforward comparison
 
-Source: Stacks 03D3, 0941 and fibre-product pasting.
-(blueprint: lem-sf-ambient-pushforward-identity-inverse-sections).
+The inverse of the selected identity pushforward comparison acts on sections by restriction
+along the forward fibre-product comparison.
+
+## Implementation details
+
+The forward section formula is evaluated on the inverse image of a section; the presheaf
+restriction laws and the fibre-product inverse law then cancel the composite with the inverse
+comparison.
+
+## References
+
+* [Stacks, Tag 03D3]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -31,14 +42,7 @@ private theorem moduleRestriction_inverse
   rw [← PresheafOfModules.map_comp_apply, ← op_comp, i.hom_inv_id, op_id, M.map_id]
   rfl
 
-/-- Inverse comparison restricts by the forward fibre-product comparison.
-Source: Stacks 03D3 and 0941
-(blueprint: lem-sf-ambient-pushforward-identity-inverse-sections).
-Proof: evaluate the specified forward section formula on the inverse image of
-x. The isomorphism inverse law identifies the left side with x. Restrict both
-sides by the forward fibre-product comparison; the presheaf restriction laws and
-the fibre-product inverse law cancel its composite with the inverse comparison.
-The resulting equality is the asserted inverse section formula. -/
+/-- Inverse comparison restricts by the forward fibre-product comparison. -/
 theorem pushId_inverse_sections (Y : Scheme.{t}) (s : Option ℕ)
     (M : Modules ell E Y s) (U : Site Y s) (x : M.val.obj (op U)) :
     (((pushId_existsUnique ell E Y s).exists.choose.inv.app M).val.app (op U)) x =

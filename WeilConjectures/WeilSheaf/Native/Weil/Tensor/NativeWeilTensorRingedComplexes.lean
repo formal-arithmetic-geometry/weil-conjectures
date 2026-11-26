@@ -13,8 +13,19 @@ import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedKFlatD
 
 /-! # Normalized complex comparisons for an additive ringed presentation
 
-Source: Stacks 06YS, 06YU, and steps 1--2 of native tensor transport.
 These data precede the choice of any derived monoidal structure.
+
+## Implementation details
+
+The total comparison includes the Koszul exchange `(-1)^(pq)` because the native curried
+parameter comes first, whereas the ringed tensor orders its actual tensor factors first.
+The underived comparison is fixed by Yoneda from the two tensor--Hom adjunctions, and the
+K-flat localization is transported through the equivalence of complexes using K-flat
+resolutions. No derived tensor, symmetry, closed structure or forgetful comparison is used.
+
+## References
+
+* Stacks Project, Tags 06YS and 06YU
 -/
 
 @[expose] public noncomputable section
@@ -32,14 +43,12 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [∀ P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ, P.HasMapBifunctor Q T]
   (adj : T ⊣₂ ihomBifunctor k₀ l X)
 
-/-- The reversed ringed tensor corresponding to the native right-parameter convention.
-Source: Stacks 06YU (blueprint: lem-sf-native-weil-tensor-ringed-complexes). -/
+/-- The reversed ringed tensor corresponding to the native right-parameter convention. -/
 abbrev nativeRingedTensorObj (P Q : ProEtaleWeilSheaf k₀ l X) :=
   (SheafOfModules.monoidalCategory b.R).tensorObj (b.native.functor.obj Q)
     (b.native.functor.obj P)
 
-/-- The Koszul scalar on a ringed module morphism, with its hom group explicit.
-Source: Stacks 06YU (blueprint: lem-sf-native-weil-tensor-ringed-complexes). -/
+/-- The Koszul scalar on a ringed module morphism, with its hom group explicit. -/
 def nativeRingedTensorSign (p q : ℤ)
     {Y Z : RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R} (f : Y ⟶ Z) : Y ⟶ Z :=
   letI : AddCommGroup (Y ⟶ Z) :=
@@ -50,10 +59,7 @@ def nativeRingedTensorSign (p q : ℤ)
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- Normalized transport on complexes, without any derived tensor or forgetting comparison.
-The total comparison includes the Koszul exchange because the native curried parameter
-comes first, whereas the ringed tensor orders its actual tensor factors first.
-Source: Stacks 06YS, 06YU
-(blueprint: lem-sf-native-weil-tensor-ringed-complexes). -/
+The total comparison includes the Koszul exchange sign. -/
 structure NativeWeilRingedTensorComplexes where
   /-- The unique comparison fixed by the two underived adjunctions. -/
   underived (P Q : ProEtaleWeilSheaf k₀ l X) :
@@ -106,31 +112,7 @@ structure NativeWeilRingedTensorComplexes where
         (ObjectProperty.ι (NativeTensorKFlat k₀ l X T)))
 
 /-- An additive equivalence preserving the specified internal Hom gives the normalized
-total tensor comparison and transports its K-flat localization.
-
-Source: steps 1--2 of native tensor transport; Stacks 06YS, 06YU.
-(blueprint: lem-sf-native-weil-tensor-ringed-complexes).
-
-Proof: for each P, compose the equivalence's Hom bijections with nativeHom and
-the sheaf tensor-Hom adjunction. Yoneda gives the unique underived comparison
-whose inverse satisfies uncurry; the sheaf braiding puts Q before P. Naturality
-of the parameter adjunction gives naturality in P as well as Q. Apply the additive
-equivalence termwise, take the coproduct of these comparisons on each diagonal,
-and exchange the two total directions with sign (-1)^(pq). This yields chain,
-summand and naturality. The differential commutes because exchanging p and q
-changes the two Koszul differentials by precisely that sign. The equivalence and
-its inverse preserve all coproducts and preserve and reflect acyclicity. Every
-ringed acyclic test is isomorphic to the image of a native test. Thus these chain
-comparisons identify NativeTensorKFlat with ringed acyclic-test K-flatness. Ringed
-K-flat resolutions transport through the equivalence of complexes. For localization,
-first pass to homotopy categories: tensor respects chain homotopies, so contractible
-complexes are K-flat, and K-flat complexes are closed under cones and shifts. Every
-derived morphism is a roof. Replacing its middle complex by a K-flat resolution gives
-a roof within the K-flat subcategory; the same replacement of a common refinement
-proves injectivity on morphisms. Resolutions give essential surjectivity. These
-comparisons and the homotopy quotient give the displayed localization of complexes.
-No derived tensor, symmetry, closed structure or forgetful comparison is used.
-All coproducts are countable; the proof applies to unbounded and zero complexes. -/
+total tensor comparison and transports its K-flat localization. -/
 theorem native_weil_tensor_ringed_complexes :
     Nonempty (NativeWeilRingedTensorComplexes b T adj) := by
   obtain ⟨u⟩ := native_weil_tensor_ringed_underived_data b T adj

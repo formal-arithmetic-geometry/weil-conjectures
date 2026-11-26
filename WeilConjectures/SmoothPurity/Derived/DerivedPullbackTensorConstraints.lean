@@ -24,8 +24,12 @@ import WeilConjectures.SmoothPurity.Rational.RationalTensorStageCoherence
 
 /-! # Normalized higher pullback tensor constraints
 
-The unchanged constructions and structural predicates from the parent module.
-(blueprint: lem-pur-derived-pullback-tensor-constraints).
+Unit, unitor, associator and braiding constraints for the integral, rational and common-stage
+pullback tensor comparisons, and their coherence with the canonical comparisons.
+
+## References
+
+* [Stacks: Tags 03EL, 06YS, 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -451,13 +455,7 @@ private theorem systemUnitEvaluationIso (W : Scheme.{u})
       ((coefficientSequenceEvaluation l E W n).mapDerivedCategorySingleFunctor 0).app _ ≪≫
       (DerivedCategory.singleFunctor _ 0).mapIso (evaluationUnitIso l E W n)⟩
 
-/-- The limit of the coherent ring unit is constructible and complete.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: The coherent ring unit is the
-constant
-  rank-one finite coefficient tower. Its quotient transitions are normalized. Normalized DVR
-  effectivity computes its limit as the completed rank-one coefficient module, whose reductions are
-  the finite constructible ring units; these have uniform amplitude zero. -/
+/-- The limit of the coherent ring unit is constructible and complete. -/
 theorem pullbackTensorIntegralUnit_constructible (W : Scheme.{u})
     [_hW : ∀ w : W, Invertible (l : W.residueField w)] :
     sfIntegralConstructible l E W ((coefficientSequenceLimit l E W).obj
@@ -504,19 +502,12 @@ theorem pullbackTensorIntegralUnit_constructible (W : Scheme.{u})
       · exact DerivedCategory.isZero_of_isLE _ 0 i h
     simp [he]
 
-/-- The actual derived limit of the coherent coefficient-ring unit.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- The actual derived limit of the coherent coefficient-ring unit. -/
 def pullbackTensorIntegralUnit (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)] : sfIntegralConstructibleCategory l E W :=
   ⟨_, @pullbackTensorIntegralUnit_constructible l _ E _ _ _ W hW⟩
 
-/-- The reduction counit of the normalized coefficient-ring unit is invertible.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: The finite ring units and their
-quotient
-  tensor comparisons form a normalized system. Apply normalized DVR effectivity to this system. The
-  reconstruction isomorphism is precisely the reduction/limit adjunction counit. -/
+/-- The reduction counit of the normalized coefficient-ring unit is invertible. -/
 theorem pullbackTensorIntegralUnit_counit (W : Scheme.{u})
     [_hW : ∀ w : W, Invertible (l : W.residueField w)] : IsIso ((pullbackTensorCalculus l E
       W).adjunction.counit.app
@@ -530,9 +521,7 @@ theorem pullbackTensorIntegralUnit_counit (W : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The fixed identification of the reduced integral unit with the coherent ring unit.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- The fixed identification of the reduced integral unit with the coherent ring unit. -/
 def pullbackTensorIntegralUnitReduction (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)] :
     (pullbackTensorCalculus l E W).reduction.obj ((@pullbackTensorIntegralUnit l _ E _ _ _ W
@@ -541,9 +530,7 @@ def pullbackTensorIntegralUnitReduction (W : Scheme.{u})
   letI := (@pullbackTensorIntegralUnit_counit l _ E _ _ _ W hW)
   asIso ((pullbackTensorCalculus l E W).adjunction.counit.app _)
 
-/-- The rational unit is the localization of the completed coefficient-ring unit.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- The rational unit is the localization of the completed coefficient-ring unit. -/
 def pullbackTensorRationalUnit (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)] :=
   (sfRationalConstructibleLocalization l E W).obj ((@pullbackTensorIntegralUnit l _ E _ _ _ W hW))
@@ -555,13 +542,7 @@ set_option allowUnsafeReducibility true in
 attribute [local irreducible] instCategoryDerivedCategory DerivedCategory.instPreadditive
   SheafOfModules.instAbelian SheafOfModules.instCategory
 
-/-- The integral left unitor is fixed by coherent reduction.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: Conjugate the coherent unitor by
-the actual
-  tensor-reduction and unit-reduction isomorphisms. Reduction is fully faithful on the complete
-  constructible subcategory by normalized effectivity, so this arrow and its inverse lift uniquely.
-  Faithfulness gives the inverse identities. -/
+/-- The integral left unitor is fixed by coherent reduction. -/
 theorem pullbackTensorIntegralLeftUnitor_existsUnique (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M : sfIntegralConstructibleCategory l E W) :
@@ -595,20 +576,13 @@ theorem pullbackTensorIntegralLeftUnitor_existsUnique (W : Scheme.{u})
       apply hu
       exact hd'
 
-/-- The normalized completed left unitor.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- The normalized completed left unitor. -/
 def pullbackTensorIntegralLeftUnitor (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M : sfIntegralConstructibleCategory l E W) :=
   ((@pullbackTensorIntegralLeftUnitor_existsUnique l _ E _ _ _ W hW) M).exists.choose
 
-/-- The rational left unitor is the localized completed one.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: Use the prescribed rational
-tensor object
-  equality and localize the integral unitor and its inverse. The displayed hom equality uniquely
-  determines the iso. -/
+/-- The rational left unitor is the localized completed one. -/
 theorem pullbackTensorRationalLeftUnitor_existsUnique (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M : sfRationalConstructibleCategory l E W) :
@@ -624,21 +598,13 @@ theorem pullbackTensorRationalLeftUnitor_existsUnique (W : Scheme.{u})
       ((sfRationalConstructibleLocalization l E W).mapIso
         (pullbackTensorIntegralLeftUnitor l E W M.obj))
 
-/-- The localized completed left unitor.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- The localized completed left unitor. -/
 def pullbackTensorRationalLeftUnitor (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M : sfRationalConstructibleCategory l E W) :=
   ((@pullbackTensorRationalLeftUnitor_existsUnique l _ E _ _ _ W hW) M).exists.choose
 
-/-- The integral right unitor is fixed by coherent reduction.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: Conjugate the coherent unitor by
-the actual
-  tensor-reduction and unit-reduction isomorphisms. Reduction is fully faithful on the complete
-  constructible subcategory by normalized effectivity, so this arrow and its inverse lift uniquely.
-  Faithfulness gives the inverse identities. -/
+/-- The integral right unitor is fixed by coherent reduction. -/
 theorem pullbackTensorIntegralRightUnitor_existsUnique (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M : sfIntegralConstructibleCategory l E W) :
@@ -672,20 +638,13 @@ theorem pullbackTensorIntegralRightUnitor_existsUnique (W : Scheme.{u})
       apply hu
       exact hd'
 
-/-- The normalized completed right unitor.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- The normalized completed right unitor. -/
 def pullbackTensorIntegralRightUnitor (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M : sfIntegralConstructibleCategory l E W) :=
   ((@pullbackTensorIntegralRightUnitor_existsUnique l _ E _ _ _ W hW) M).exists.choose
 
-/-- The rational right unitor is the localized completed one.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: Use the prescribed rational
-tensor object
-  equality and localize the integral unitor and its inverse. The displayed hom equality uniquely
-  determines the iso. -/
+/-- The rational right unitor is the localized completed one. -/
 theorem pullbackTensorRationalRightUnitor_existsUnique (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M : sfRationalConstructibleCategory l E W) :
@@ -701,9 +660,7 @@ theorem pullbackTensorRationalRightUnitor_existsUnique (W : Scheme.{u})
       ((sfRationalConstructibleLocalization l E W).mapIso
         (pullbackTensorIntegralRightUnitor l E W M.obj))
 
-/-- The localized completed right unitor.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- The localized completed right unitor. -/
 def pullbackTensorRationalRightUnitor (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M : sfRationalConstructibleCategory l E W) :=
@@ -753,12 +710,7 @@ private theorem scalarConjugate_tensor_comparison
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Integral scalar extension preserves the coefficient-ring unit, compatibly with both
-integral unitors and the prescribed integral scalar tensor comparison.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: apply coherent reduction.
-The coherent scalar tensor normalization identifies the reduced tensor comparison with the
-whole-system scalar tensorator, whose unit equations are `systemScalarTensorUnit`. Insert the
-unit reductions and use full faithfulness of coherent reduction. -/
+integral unitors and the prescribed integral scalar tensor comparison. -/
 theorem integralScalarTensorUnit_exists
     (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
     (ι : E →ₐ[Padic l] L) (W : Scheme.{u})
@@ -1038,9 +990,7 @@ private theorem scalarUnit_rationalLeftUnitor_natural (W : Scheme.{u})
     simp only [ScalarLocalization.composition_tmul, one_mul, mul_one]
     rw [scalarUnit_integralLeftUnitor_natural l E W f]
 
-/-- Rational form of `integralScalarTensorUnit_exists`, with uniqueness.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- Rational form of `integralScalarTensorUnit_exists`, with uniqueness. -/
 private theorem rationalScalarUnit_existsUnique_aux
     (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
     (ι : E →ₐ[Padic l] L) (W : Scheme.{u})
@@ -1292,13 +1242,7 @@ attribute [local irreducible] pullbackTensorIntegralUnit pullbackTensorRationalU
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Scalar extension preserves the canonical rational coefficient-ring unit.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: For integral coefficients, scalar
-extension
-  sends the coefficient-ring unit to the new coefficient ring by multiplication. Its unit equations
-  hold on pure tensors, remain true in both Roos coordinates, and localize. The tensor comparison is
-  invertible; cancellation in the unit square at the unit object proves uniqueness. -/
+/-- Scalar extension preserves the canonical rational coefficient-ring unit. -/
 theorem pullbackTensorRationalScalarUnit_existsUnique
     (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
     (ι : E →ₐ[Padic l] L) (W : Scheme.{u})
@@ -1326,9 +1270,7 @@ theorem pullbackTensorRationalScalarUnit_existsUnique
               _ E _ _ _ W hW) M).hom) := by
   exact rationalScalarUnit_existsUnique_aux l E L ι W
 
-/-- The coefficient-ring scalar comparison fixed by the two tensor unit squares.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- The coefficient-ring scalar comparison fixed by the two tensor unit squares. -/
 def pullbackTensorRationalScalarUnit
     (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
     (ι : E →ₐ[Padic l] L) (W : Scheme.{u})
@@ -1338,9 +1280,7 @@ def pullbackTensorRationalScalarUnit
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The common-stage unit represented over the least finite coefficient field.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- The common-stage unit represented over the least finite coefficient field. -/
 def pullbackTensorCommonUnit (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)] :
       generalAlgebraicallyClosedConstructibleCategory l
@@ -1350,9 +1290,7 @@ def pullbackTensorCommonUnit (W : Scheme.{u})
       (_root_.WeilConjectures.AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω
         (Padic.finiteCoefficientBase l Ω)) _ _ _ W hW)⟩
 
-/-- The common-stage ring unit is the rational ring unit at every larger stage.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- The common-stage ring unit is the rational ring unit at every larger stage. -/
 def pullbackTensorCommonUnitStage (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (L : AlgebraicallyClosedCoefficients.Index l Ω)
@@ -1729,14 +1667,7 @@ attribute [local irreducible] pullbackTensorCommonUnitStage pullbackTensorCommon
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The common-stage left unitor has the canonical representative at every larger field.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: Represent at the finite
-compositum. Apply
-  the tensor-stage comparison, the coefficient-ring unit comparison, and the rational unitor. The
-  scalar unit equations and scalar cocycles identify these arrows at all larger stages. Their
-  inverses define an inverse class, and this representative condition determines the colimit hom
-  uniquely. -/
+/-- The common-stage left unitor has the canonical representative at every larger field. -/
 theorem pullbackTensorCommonLeftUnitor_existsUnique (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M : generalAlgebraicallyClosedConstructibleCategory l Ω W) :
@@ -1766,9 +1697,7 @@ theorem pullbackTensorCommonLeftUnitor_existsUnique (W : Scheme.{u})
                   by
   exact pullbackTensorCommonLeftUnitor_existsUnique_aux l Ω W M
 
-/-- The common-stage class of the canonical rational left unitor.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- The common-stage class of the canonical rational left unitor. -/
 def pullbackTensorCommonLeftUnitor (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M : generalAlgebraicallyClosedConstructibleCategory l Ω W) :=
@@ -1776,14 +1705,7 @@ def pullbackTensorCommonLeftUnitor (W : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The common-stage right unitor has the canonical representative at every larger field.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: Represent at the finite
-compositum. Apply
-  the tensor-stage comparison, the coefficient-ring unit comparison, and the rational unitor. The
-  scalar unit equations and scalar cocycles identify these arrows at all larger stages. Their
-  inverses define an inverse class, and this representative condition determines the colimit hom
-  uniquely. -/
+/-- The common-stage right unitor has the canonical representative at every larger field. -/
 theorem pullbackTensorCommonRightUnitor_existsUnique (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M : generalAlgebraicallyClosedConstructibleCategory l Ω W) :
@@ -1811,9 +1733,7 @@ theorem pullbackTensorCommonRightUnitor_existsUnique (W : Scheme.{u})
                 ((@pullbackTensorCommonUnit l _ Ω _ _ _ W hW)).stage).1.trans h))).hom)) := by
   exact pullbackTensorCommonRightUnitor_existsUnique_aux l Ω W M
 
-/-- The common-stage class of the canonical rational right unitor.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- The common-stage class of the canonical rational right unitor. -/
 def pullbackTensorCommonRightUnitor (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M : generalAlgebraicallyClosedConstructibleCategory l Ω W) :=
@@ -1822,9 +1742,7 @@ def pullbackTensorCommonRightUnitor (W : Scheme.{u})
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- Both unit equations for the actual canonical integral comparison.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- Both unit equations for the actual canonical integral comparison. -/
 def canonicalIntegralPullbackTensor_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)] : Prop :=
@@ -1848,9 +1766,7 @@ def canonicalIntegralPullbackTensor_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
       ((@constructibleIntegralPullback l _ E _ _ _ X Y f hX hY)).map
         ((@pullbackTensorIntegralRightUnitor l _ E _ _ _ Y hY) M).hom)
 
-/-- Both unit equations for the actual canonical rational comparison.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- Both unit equations for the actual canonical rational comparison. -/
 def canonicalRationalPullbackTensor_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)] : Prop :=
@@ -1873,9 +1789,7 @@ def canonicalRationalPullbackTensor_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
       ((@rationalDerivedPullback l _ E _ _ _ X Y f hX hY)).map ((@pullbackTensorRationalRightUnitor
         l _ E _ _ _ Y hY) M).hom)
 
-/-- Both unit equations for the actual canonical commonstage comparison.
-Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- Both unit equations for the actual canonical commonstage comparison. -/
 def canonicalCommonStagePullbackTensor_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)] : Prop :=
@@ -1898,9 +1812,7 @@ def canonicalCommonStagePullbackTensor_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
       ((@commonStageDerivedPullback l _ Ω _ _ _ X Y f hX hY)).map ((@pullbackTensorCommonRightUnitor
         l _ Ω _ _ _ Y hY) M).hom)
 
-/-- Coherence for the canonical integral comparison with the fixed associator.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- Coherence for the canonical integral comparison with the fixed associator. -/
 def canonicalIntegralPullbackTensor_associative {X Y : Scheme.{u}}
     (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -1923,15 +1835,7 @@ def canonicalIntegralPullbackTensor_associative {X Y : Scheme.{u}}
             (((@constructibleIntegralPullback l _ E _ _ _ X Y f hX hY)).obj N)
             (((@constructibleIntegralPullback l _ E _ _ _ X Y f hX hY)).obj P)).hom
 
-/-- The normalized integral comparison obeys this coherence equation.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: Apply coherent reduction to both
-routes.
-  Insert the actual reduction square for the integral comparison and the defining normalized
-  associator. The system comparison associativity equation makes the reduced routes equal. Full
-  faithfulness on complete constructible objects gives the integral equation. Localization gives the
-  rational equation; represent at a common finite field and use the prescribed transition
-  comparisons for the algebraically closed equation. -/
+/-- The canonical integral comparison is compatible with the associators. -/
 theorem canonicalIntegralPullbackTensor_associative_spec {X Y : Scheme.{u}}
     (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -1961,9 +1865,7 @@ theorem canonicalIntegralPullbackTensor_associative_spec {X Y : Scheme.{u}}
     · exact integralComparison_reduction l E f
     · exact pullbackTensorSystemComparison_associativity l E f
 
-/-- Coherence for the canonical rational comparison with the fixed associator.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- Coherence for the canonical rational comparison with the fixed associator. -/
 def canonicalRationalPullbackTensor_associative {X Y : Scheme.{u}}
     (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -1992,15 +1894,7 @@ attribute [local irreducible] pullbackTensorIntegralAssociator
 section RationalCoherenceElaboration
 attribute [local irreducible] sfIntegralConstructible Linear.homModule Preadditive.homGroup
 
-/-- The normalized rational comparison obeys this coherence equation.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: Apply coherent reduction to both
-routes.
-  Insert the actual reduction square for the integral comparison and the defining normalized
-  associator. The system comparison associativity equation makes the reduced routes equal. Full
-  faithfulness on complete constructible objects gives the integral equation. Localization gives the
-  rational equation; represent at a common finite field and use the prescribed transition
-  comparisons for the algebraically closed equation. -/
+/-- The canonical rational comparison is compatible with the associators. -/
 theorem canonicalRationalPullbackTensor_associative_spec {X Y : Scheme.{u}}
     (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -2126,9 +2020,7 @@ theorem canonicalRationalPullbackTensor_associative_spec {X Y : Scheme.{u}}
   simpa only [pullbackTensorRationalAssociator, canonicalRationalPullbackTensor, F] using
     hleft.trans ((heq_of_eq (congrArg Q.map hh)).trans hright.symm)
 
-/-- Coherence for the canonical commonstage comparison with the fixed associator.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- Coherence for the canonical commonstage comparison with the fixed associator. -/
 def canonicalCommonStagePullbackTensor_associative {X Y : Scheme.{u}}
     (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -2151,9 +2043,7 @@ def canonicalCommonStagePullbackTensor_associative {X Y : Scheme.{u}}
             (((@commonStageDerivedPullback l _ Ω _ _ _ X Y f hX hY)).obj N)
             (((@commonStageDerivedPullback l _ Ω _ _ _ X Y f hX hY)).obj P)).hom
 
-/-- Coherence for the canonical integral comparison with the fixed braiding.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- Coherence for the canonical integral comparison with the fixed braiding. -/
 def canonicalIntegralPullbackTensor_braiding {X Y : Scheme.{u}}
     (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -2167,15 +2057,7 @@ def canonicalIntegralPullbackTensor_braiding {X Y : Scheme.{u}}
             (((@constructibleIntegralPullback l _ E _ _ _ X Y f hX hY)).obj M)
             (((@constructibleIntegralPullback l _ E _ _ _ X Y f hX hY)).obj N)).hom
 
-/-- The normalized integral comparison obeys this coherence equation.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: Apply coherent reduction to both
-routes.
-  Insert the actual reduction square for the integral comparison and the defining normalized
-  braiding. The system comparison signed symmetry equation makes the reduced routes equal. Full
-  faithfulness on complete constructible objects gives the integral equation. Localization gives the
-  rational equation; represent at a common finite field and use the prescribed transition
-  comparisons for the algebraically closed equation. -/
+/-- The canonical integral comparison is compatible with the braidings. -/
 theorem canonicalIntegralPullbackTensor_braiding_spec {X Y : Scheme.{u}}
     (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -2208,9 +2090,7 @@ theorem canonicalIntegralPullbackTensor_braiding_spec {X Y : Scheme.{u}}
       (fun M N ↦ (pullbackTensorIntegralBraiding_existsUnique l E X M N).exists.choose_spec)
       (integralComparison_reduction l E f) (pullbackTensorSystemComparison_braiding l E f)
 
-/-- Coherence for the canonical rational comparison with the fixed braiding.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- Coherence for the canonical rational comparison with the fixed braiding. -/
 def canonicalRationalPullbackTensor_braiding {X Y : Scheme.{u}}
     (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -2224,15 +2104,7 @@ def canonicalRationalPullbackTensor_braiding {X Y : Scheme.{u}}
             (((@rationalDerivedPullback l _ E _ _ _ X Y f hX hY)).obj M)
             (((@rationalDerivedPullback l _ E _ _ _ X Y f hX hY)).obj N)).hom
 
-/-- The normalized rational comparison obeys this coherence equation.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: Apply coherent reduction to both
-routes.
-  Insert the actual reduction square for the integral comparison and the defining normalized
-  braiding. The system comparison signed symmetry equation makes the reduced routes equal. Full
-  faithfulness on complete constructible objects gives the integral equation. Localization gives the
-  rational equation; represent at a common finite field and use the prescribed transition
-  comparisons for the algebraically closed equation. -/
+/-- The canonical rational comparison is compatible with the braidings. -/
 theorem canonicalRationalPullbackTensor_braiding_spec {X Y : Scheme.{u}}
     (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -2300,9 +2172,7 @@ theorem canonicalRationalPullbackTensor_braiding_spec {X Y : Scheme.{u}}
     rw [canonicalIntegralPullbackTensor_braiding_spec l E f M.obj N.obj]
     exact (heq_of_eq (Q.map_comp _ _)).trans hright.symm
 
-/-- Coherence for the canonical commonstage comparison with the fixed braiding.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- Coherence for the canonical commonstage comparison with the fixed braiding. -/
 def canonicalCommonStagePullbackTensor_braiding {X Y : Scheme.{u}}
     (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]

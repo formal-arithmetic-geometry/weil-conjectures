@@ -21,9 +21,8 @@ Let `X` be a topological space with a generic point `η`.
   (e.g. an irreducible noetherian scheme of dimension one), then such a set is a finite set of
   closed points (`Topology.IsConstructible.exists_finset_of_notMem`).
 
-This is used in the finite-support step of Gabber's Künneth formula (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`): a constructible subset of a line which omits
-the generic point is a finite set of closed points.
+This is used in the finite-support step of Gabber's Künneth formula: a constructible subset of a
+line which omits the generic point is a finite set of closed points.
 
 -/
 

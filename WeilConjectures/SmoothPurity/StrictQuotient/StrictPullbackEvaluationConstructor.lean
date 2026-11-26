@@ -10,7 +10,12 @@ import all WeilConjectures.SixFunctors.AmbientPullbackTensor.AmbientPullbackSite
 import WeilConjectures.SixFunctors.SequenceModuleEvaluation.SequenceModulePullbackEvaluation
 import WeilConjectures.AlgebraicGeometry.ProEtale.Coefficient.ProEtaleCoefficientPullbackExact
 
-/-! # Evaluation and exactness of strict sequence inverse image -/
+/-! # Evaluation and exactness of strict sequence inverse image
+
+## References
+
+* Stacks Project, Tags 0G7E, 07A6 and 03EL.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -199,20 +204,7 @@ private theorem pullbackModel {V W : Scheme.{t}} (g : V ⟶ W)
   exact pullbackEvaluation_generator l E g (K.X k) n U x
 
 /-- Evaluation of strict sequence inverse image is the actual finite inverse image,
-and finite inverse image computes every universal left-derived pair.
-Source: Stacks Project, sites-cohomology.tex, Tags 0G7E and 07A6;
-sites-modules.tex, Tag 03EL.
-(blueprint: lem-pur-strict-pullback-evaluation-constructor).
-
-Proof: the actual sequence adjunction unit is natural for horizontal site arrows.
-The inverse mate of direct-image evaluation is invertible, so it identifies
-sequence inverse image evaluated at n with finite inverse image. The inverse-mate
-unit identity fixes its generator formula. Apply this natural isomorphism to
-cochain complexes. Finite constant-coefficient geometric inverse image is exact;
-its functor on complexes therefore inverts quasi-isomorphisms after localization.
-The universal property of each left-derived pair makes its comparison invertible
-on every complex. All constructions retain independent coefficient and site
-universes and impose no flatness or normalization hypothesis on the complex. -/
+and finite inverse image computes every universal left-derived pair. -/
 theorem strictPullbackEvaluationConstructor {V W : Scheme.{t}} (g : V ⟶ W)
     (K : Complex l E W) :
     PullbackTransitions l E g K ∧

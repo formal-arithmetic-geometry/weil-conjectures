@@ -10,8 +10,19 @@ import WeilConjectures.SixFunctors.CoefSupportOpenTensor.CoefNativeOpenTensorGam
 
 /-! # Evaluation compatibility of native open tensor models
 
-Source: Stacks 0GL1, 07A4; support-open-tensor steps 5--6.
-(blueprint: lem-coef-native-open-tensor-gamma-evaluation).
+For fixed native open tensor representatives, exact finite evaluation identifies the system
+gamma with the canonical finite gamma.
+
+## Implementation details
+
+This is a generator calculation: both composites are induced by the same ordinary pure-tensor
+map, and exact evaluation preserves the open unit, the restriction comparison, total summands and
+K-flat pullback.
+
+## References
+
+* [Stacks, Tag 0GL1]
+* [Stacks, Tag 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -34,12 +45,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- For fixed native open tensor representatives, exact finite evaluation identifies
-the system gamma with the canonical finite gamma. This is the generator calculation:
-both composites are induced by the same ordinary pure-tensor map, and exact evaluation
-preserves the open unit, restriction comparison, total summands and K-flat pullback.
-Source: Stacks 0GL1 and 07A4; support-open-tensor proof steps 5--6.
-(blueprint: lem-coef-native-open-tensor-gamma-evaluation).
--/
+the system gamma with the canonical finite gamma. -/
 theorem nativeOpenTensorGammaEvaluation {X Z : Scheme.{u}} (j : X ⟶ Z)
     [IsOpenImmersion j]
     (SX : CoefficientDerivedSystemCalculus.{u, u} l E X)

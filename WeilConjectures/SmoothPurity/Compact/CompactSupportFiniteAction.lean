@@ -21,8 +21,14 @@ import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-! # Normalized compact-support finite action
 
-Source: blueprint order 1494, coherent strict-tower realization and rationalization
-(blueprint: def-weil-compact-support-finite-action).
+The compact-support finite action is obtained from the coherent strict-tower realization of
+the integral compact-support functor by rationalization of Hom modules.
+
+## Implementation details
+
+The reduction isomorphism is built from the value equality of the integral realization and the
+uniquely specified projection adjunct, rather than from a freely chosen isomorphism; its
+invertibility needs no extra Tor or finite-base-field assumption.
 -/
 
 @[expose] public noncomputable section
@@ -188,20 +194,14 @@ variable (l : ℕ) [Fact l.Prime]
 attribute [local irreducible] SfCompactSupportFiniteRealizationSpec
 
 /-- The already normalized integral compact-support functor, retaining its coherent
-strict-tower construction and the fixed projections of sfCompactSupportTerm.
-Source: blueprint order 1494, proof steps 1--4
-(blueprint: def-weil-compact-support-finite-action). -/
+strict-tower construction and the fixed projections of sfCompactSupportTerm. -/
 @[irreducible] def sfCompactSupportFiniteIntegralFunctor
     (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] :
     sfIntegralConstructibleCategory l E X ⥤ sfIntegralConstructibleCategory l E Y :=
   (sfCompactSupportFiniteRealization l K₀ hl c E).choose
 
-/-- Linearity of the fixed integral realization.
-Source: blueprint order 1494, proof steps 3--4
-(blueprint: def-weil-compact-support-finite-action).
-Proof: project the additive and integral-linear conjuncts for the chosen integral
-functor in sfCompactSupportFiniteRealization. -/
+/-- Linearity of the fixed integral realization. -/
 theorem sfCompactSupportFiniteIntegralFunctor_linear (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] :
     (sfCompactSupportFiniteIntegralFunctor l K₀ hl c E).Additive ∧
@@ -213,9 +213,7 @@ theorem sfCompactSupportFiniteIntegralFunctor_linear (E : Type u) [Field E] [Alg
   with_unfolding_all
     exact ⟨h.1, h.2.1⟩
 
-/-- The actual tensor extension of the fixed integral Hom map.
-Source: blueprint order 1494, proof step 4
-(blueprint: def-weil-compact-support-finite-action). -/
+/-- The actual tensor extension of the fixed integral Hom map. -/
 def sfCompactSupportFiniteHomMap (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E]
     (K L : sfRationalConstructibleCategory l E X) :
@@ -233,12 +231,7 @@ def sfCompactSupportFiniteHomMap (E : Type u) [Field E] [Algebra (Padic l) E]
         (Localization.Away (Padic.coefficientExtensionUniformizer l
           E))
 
-/-- The tensor Hom map preserves identities and composition.
-Source: blueprint order 1494, proof step 4
-(blueprint: def-weil-compact-support-finite-action).
-Proof: on pure tensors, baseChange sends a tensor v to a tensor F(v). Apply the
-integral functor laws and the prescribed tensor-composition formula. Extend by
-additivity in both variables, since pure tensors generate the localized Hom modules. -/
+/-- The tensor Hom map preserves identities and composition. -/
 theorem sfCompactSupportFiniteHomMap_laws (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] :
     (∀ K : sfRationalConstructibleCategory l E X,
@@ -255,10 +248,8 @@ theorem sfCompactSupportFiniteHomMap_laws (E : Type u) [Field E] [Algebra (Padic
     (sfCompactSupportFiniteIntegralFunctor l K₀ hl c E) |>.imp
       (fun h K ↦ h K.obj) (fun h K L N a b ↦ h K.obj L.obj N.obj a b)
 
-/-- The raw Hom scalar extension of the fixed integral action. Objects and all
-morphisms are constructed explicitly; on pure tensors the map is a tensor F(v).
-Source: blueprint order 1494, proof step 4
-(blueprint: def-weil-compact-support-finite-action). -/
+/-- The raw Hom scalar extension of the fixed integral action; on pure tensors the map is
+`a ⊗ v ↦ a ⊗ F(v)`. -/
 def sfCompactSupportFiniteFunctor (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] :
     sfRationalConstructibleCategory l E X ⥤ sfRationalConstructibleCategory l E Y where
@@ -267,11 +258,7 @@ def sfCompactSupportFiniteFunctor (E : Type u) [Field E] [Algebra (Padic l) E]
   map_id K := (sfCompactSupportFiniteHomMap_laws l K₀ hl c E).1 K
   map_comp a b := (sfCompactSupportFiniteHomMap_laws l K₀ hl c E).2 _ _ _ a b
 
-/-- The value equality retained in the fixed integral realization.
-Source: blueprint order 1494, integral realization clause
-(blueprint: def-weil-compact-support-finite-action).
-Proof: project the object-normalization conjunct of the already recorded
-exists_compactSupportRepresentativeComparison package used in the definition. -/
+/-- The value equality retained in the fixed integral realization. -/
 theorem sfCompactSupportFiniteIntegralFunctor_obj
     (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E]
@@ -284,9 +271,7 @@ theorem sfCompactSupportFiniteIntegralFunctor_obj
     exact h.2.2.1 K
 
 /-- The canonical n-th reduction comparison is the tensor/restriction adjoint of
-the fixed n-th projection in the definition of sfIntegralCompactSupportValue.
-Source: blueprint definition order 1490 and proposition-six-operations-change-coefficients
-(blueprint: def-weil-compact-support-finite-action). -/
+the fixed n-th projection in the definition of sfIntegralCompactSupportValue. -/
 def sfCompactSupportChosenReduction (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E]
     (K : sfIntegralConstructibleCategory l E X)
@@ -308,15 +293,7 @@ def sfCompactSupportChosenReduction (E : Type u) [Field E] [Algebra (Padic l) E]
   exact ((derivedScalarExtensionRestrictionAdjunction l E Y n).choose.homEquiv _ _).symm
       (Classical.choose hM ≫ Pi.π (sfCompactSupportTerm l E c K.obj) n)
 
-/-- The specified projection adjunct is invertible, without an extra Tor or
-finite-base-field assumption.
-Source: definition order 1490; proposition-six-operations-change-coefficients, compact-support
-paragraph (blueprint: def-weil-compact-support-finite-action).
-Proof: the source is the chosen derived limit of the actual compact-support tower.
-Proper direct image commutes with the perfect two-term quotient tensor, and open
-extension is exact and commutes with that tensor. These are the normalized unit/counit
-mates. Their reduction cocycle identifies the displayed adjunct with the finite-level
-comparison. The proper/open coefficient-change theorem makes it invertible. -/
+/-- The specified projection adjunct is invertible. -/
 theorem sfCompactSupportChosenReduction_isIso (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E]
     (K : sfIntegralConstructibleCategory l E X)
@@ -333,10 +310,8 @@ theorem sfCompactSupportChosenReduction_isIso (E : Type u) [Field E] [Algebra (P
   unfold sfCompactSupportChosenReduction sfIntegralCompactSupportValue
   exact hi
 
-/-- Reduction of the fixed integral functor, using its actual value equality and
-the uniquely specified projection adjunct, rather than a freely chosen isomorphism.
-Source: definition order 1490; proposition-six-operations-change-coefficients
-(blueprint: def-weil-compact-support-finite-action). -/
+/-- Reduction of the fixed integral functor, using its value equality and the specified
+projection adjunct. -/
 def sfCompactSupportFiniteReductionIso (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E]
     (K : sfIntegralConstructibleCategory l E X)

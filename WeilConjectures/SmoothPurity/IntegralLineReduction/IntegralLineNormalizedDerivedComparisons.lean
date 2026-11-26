@@ -15,7 +15,9 @@ import WeilConjectures.SmoothPurity.Integral.IntegralTensorTransitionCompatibili
 
 /-! # Normalized derived comparisons for integral lines
 
-(blueprint: lem-pur-integral-line-normalized-derived-comparisons).
+## References
+
+* Stacks Project, Tags 06YY and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -592,19 +594,7 @@ private theorem transition_square (L : scalarReductionSource.{u, u} l E X)
       ((integralLineSingle l E X).obj (power l E X L m)))
 
 /-- The normalized derived comparison isomorphisms exist and satisfy the representative,
-chain, transition, and naturality formulas in `DerivedFormula`.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 06YY and 07A4; the signed-line
-specialization in the blueprint proof of `lem-pur-integral-line-derived-comparisons`.
-Proof: resolve both arguments by K-flat complexes with flat terms. Tensoring with the
-single degree-zero signed line is exact and K-flat. The ringed-topos tensor pullback
-comparison identifies reduction of the total tensor with the total tensor of the two
-reductions. Compose this comparison with the specified ordinary power comparison `b`.
-The balancing formula on pure tensors proves `ChainFormula`; conjugating the strict
-quotient transition proves `TransitionFormula`. The representative equations and
-naturality descend through the K-flat localization, yielding `DerivedFormula`.
-(blueprint: lem-pur-integral-line-normalized-derived-comparisons).
--/
+chain, transition, and naturality formulas in `DerivedFormula`. -/
 theorem integral_line_normalized_derived_comparisons
     (L : scalarReductionSource.{u, u} l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (b : PowerComparisons l E X L) (hb : PowerFormula l E X L b) :

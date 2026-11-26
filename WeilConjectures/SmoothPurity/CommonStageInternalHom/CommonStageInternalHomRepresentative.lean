@@ -10,9 +10,15 @@ import WeilConjectures.SmoothPurity.CommonStageInternalHom.CommonStageInternalHo
 
 /-! # Independence of common-stage internal Hom representatives
 
-Source: the common-stage internal-Hom paragraph of prose-03-02,
-using the normalized comparisons of lem-pur-integral-operations-scalar-extension.
-(blueprint: lem-weil-common-stage-internal-hom-representative).
+This file shows that the normalized common-stage Hom arrow is compatible with further
+coefficient extensions, so that equal input classes give equal conjugated Hom classes.
+
+## Implementation details
+
+The proofs expand `StageSystem.tr` as conjugation by the output associators and use the Hom
+clause of `scalarOperationsOrdinary_tower` together with `scalarHomOrdinary_naturality`. For
+the two input associators, Hom uses the inverse first associator and the forward second one.
+The constructibility side conditions are supplied by `commonStageHomPairAtStage_permitted`.
 -/
 
 @[expose] public noncomputable section
@@ -64,9 +70,7 @@ variable (P Q : (commonStageHomPairs.{u, v} l Ω W).FullSubcategory)
   (b : (commonStageHomPairAtStage l Ω W P L h).obj.2 ⟶
     (commonStageHomPairAtStage l Ω W Q L h').obj.2)
 
-/-- The input arrow represented at a common coefficient stage, with reversed first slot.
-Source: the common-stage internal-Hom representative formula.
-(blueprint: lem-weil-common-stage-internal-hom-representative). -/
+/-- The input arrow represented at a common coefficient stage, with reversed first slot. -/
 def input : P ⟶ Q :=
   ObjectProperty.homMk (X := P) (Y := Q) (Prod.mkHom
     (StageSystem.PairCategory.mkHom
@@ -82,9 +86,7 @@ def input : P ⟶ Q :=
       (((Padic.finiteCoefficientFields_properties l Ω).1
         Q.obj.1.unop.stage Q.obj.2.stage).2.trans h') b))
 
-/-- The rational Hom map in the coordinates of the extended output objects.
-Source: the common-stage internal-Hom representative formula.
-(blueprint: lem-weil-common-stage-internal-hom-representative). -/
+/-- The rational Hom map in the coordinates of the extended output objects. -/
 def value : (commonStageHomObject l Ω W P).toStage h ⟶
     (commonStageHomObject l Ω W Q).toStage h' :=
   (commonStageHomComparison l Ω W P L h).hom ≫
@@ -94,40 +96,14 @@ def value : (commonStageHomObject l Ω W P).toStage h ⟶
         (Y := commonStageHomPairAtStage l Ω W Q L h') (Prod.mkHom a.op b)) ≫
     (commonStageHomComparison l Ω W Q L h').inv
 
-/-- Conjugate the rational Hom arrow by the prescribed scalar comparisons.
-Source: the common-stage internal-Hom representative formula.
-(blueprint: lem-weil-common-stage-internal-hom-representative). -/
+/-- Conjugate the rational Hom arrow by the prescribed scalar comparisons. -/
 def output : commonStageHomObject l Ω W P ⟶ commonStageHomObject l Ω W Q :=
   StageSystem.PairCategory.mkHom
     (S := stageSystem l Ω W)
     (X := commonStageHomObject l Ω W P) (Y := commonStageHomObject l Ω W Q) L h h'
     (value l Ω W P Q L h h' a b)
 
-/-- The normalized Hom arrow commutes with one further coefficient extension.
-Source: the existing proof plan of commonStageDerivedInternalHom_existsUnique in
-DerivedPullbackTensorHom; lem-pur-integral-operations-scalar-extension,
-scalarOperationsOrdinary_tower and scalarHomOrdinary_naturality.
-(blueprint: lem-weil-common-stage-internal-hom-representative).
-
-Proof: expand StageSystem.tr as conjugation by the output associators. The
-ordinary Hom scalar comparison is the transpose of scalar-extended evaluation.
-Its naturality equation moves the scalar-extended arrows through this comparison,
-with the reversed first arrow. Apply the Hom clause of
-scalarOperationsOrdinary_tower to the coefficient fields at each input's
-compositum, L and M. Conjugate by the canonical scalarCompletion isomorphisms:
-completion naturality moves them through Hom and scalar extension, and adjacent
-inverse completion maps cancel. Restrict this equation to the constructible
-full subcategories, and localize it. Rational scalar and Hom comparisons are
-uniquely normalized localizations of these integral maps, so their defining
-component formulas identify the resulting equation. Substitute the recorded
-stage transition and associator specifications and the coefficient-inclusion
-tower law. For the two input associators, Hom uses the inverse first associator
-and the forward second one. Functoriality cancels their adjacent inverses and
-gives exactly the two input transports on the right. Both endpoints remain
-permitted by commonStageHomPairAtStage_permitted. Repeated fields and identity
-inclusions satisfy these same tower identities; zero arrows and empty schemes
-require no separate assumption. This is an equation at a single larger stage,
-not an assertion about quotient arrows or an already descended functor. -/
+/-- The normalized Hom arrow commutes with one further coefficient extension. -/
 theorem value_transport (M : Index l Ω) (k : L ≤ M) :
     (stageSystem l Ω W).tr k (value l Ω W P Q L h h' a b) =
       value l Ω W P Q M (h.trans k) (h'.trans k)
@@ -145,27 +121,7 @@ private theorem output_transport (M : Index l Ω) (k : L ≤ M) :
   rw [← value_transport]
   exact StageSystem.PairCategory.mkHom_tr k _
 
-/-- Equal input classes give equal conjugated Hom classes, even at different stages.
-Source: prose-03-02, common-stage internal-Hom paragraph;
-lem-pur-integral-operations-scalar-extension, naturality and coefficient tower laws.
-(blueprint: lem-weil-common-stage-internal-hom-representative).
-
-Proof: equality of the two input classes gives eventual equality separately for the
-contravariant and covariant representatives, by mkHom_eq_mkHom_iff'. Directedness
-puts both equalities above both initial stages at one finite coefficient field.
-Transport each output to that field. Expand transport as conjugation by the
-recorded stage associators. The coefficient tower identity for the normalized
-Hom scalar comparison identifies the transported output comparison with the
-direct comparison, followed by the Hom of the two input associators. Naturality
-moves those input associators through the rational Hom map. In the first slot the
-associator is inverted before taking the opposite, and in the second slot it has
-the forward orientation. Adjacent comparison inverses cancel. Thus the
-transported output is the direct comparison conjugating Hom of the two
-transported input arrows. The eventual input equalities now give equal output
-representatives. Apply mkHom_eq_mkHom_iff' once more. Identity field inclusions,
-repeated stages, zero arrows and empty schemes obey the same equations. No
-faithfulness of scalar extension or additional constructibility assumption is
-used: commonStageHomPairAtStage_permitted supplies the latter at each field. -/
+/-- Equal input classes give equal conjugated Hom classes, even at different stages. -/
 theorem output_eq_of_input_eq
     (M : Index l Ω)
     (k : (commonStageHomObject l Ω W P).stage ≤ M)

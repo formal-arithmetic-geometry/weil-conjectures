@@ -16,7 +16,16 @@ import WeilConjectures.SmoothPurity.CompletedQuotient.CompletedScalarRouteCoordi
 
 /-! # Quotient realization steps
 
-Source: integral comparison proof, quotient normalization and coherent substitution.
+The scalar quotient closure and the limit image of the two strict scalar routes
+(`completedComparisonScalarLimitImage`).
+
+## Implementation details
+
+No flatness of finite coefficient maps is used, so ramified extensions are included.
+
+## References
+
+* [Stacks: Tags 03EL, 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -282,26 +291,7 @@ private theorem cancel_coordinate_three {C : Type*} [Category C] {A B D F G H : 
   rw [← Category.assoc, hc]
   simp only [Category.assoc, e.hom_inv_id, Category.comp_id]
 
-/-- Scalar quotient closure and the limit image of the two strict scalar routes.
-Source: realization proof steps 6 and 7; Stacks 03EL, 07A4 and 0941
-(blueprint: lem-pur-completed-comparison-scalar-limit-image).
-
-Proof: coefficient-extension reduction gives the actual scalar quotient systems.
-On flat-term K-flat representatives, balanced association sends (x tensor a) tensor b
-to x tensor iota(a)*b, with insertion-of-one inverse. This commutes with quotient
-transitions and restrictions. Induct over ScalarGenerated, using tensor and
-constant-coefficient inverse-image preservation to obtain flat K-flat normalized
-expressions. The normalized scalar model realizes the canonical completed scalar
-functor; its counit formula is exactly scalarSubstitution. Induction on the same
-expression syntax identifies the L realization with scalarBeta and proves its
-invertibility. The strict coefficient square sends b tensor (x tensor y) by both
-routes to (b tensor x) tensor (1 tensor y); balancing and local generation prove
-equality. Apply the total-limit functor. Expand the normalized scalar, tensor and
-pullback realization equations and cancel successive inverse substitutions. The
-L comparison becomes the canonical completed comparison by its representative
-normalization. The two resulting equations are exactly the two composites in
-ScalarLimitImage for each of the equal strict routes. No finite coefficient-map
-flatness is used, so ramified extensions are included. -/
+/-- Scalar quotient closure and the limit image of the two strict scalar routes. -/
 theorem completedComparisonScalarLimitImage
     {Z X Y : Scheme.{u}} (h : Z ⟶ X) (f : X ⟶ Y)
     [∀ z : Z, Invertible (l : Z.residueField z)]

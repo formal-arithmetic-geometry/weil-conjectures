@@ -13,8 +13,19 @@ import WeilConjectures.Topology.SpectralLimitConstructibleClosed
 /-!
 # Directed inverse limits of spectral spaces
 
-Source: Stacks Project, Topology, Tag 0A2Z, in the directed-set case
-(blueprint: lem-weil-pbc-spectral-directed-limit-spectral).
+A directed inverse limit of spectral spaces along spectral transition maps is spectral, with
+spectral projections.
+
+## Implementation details
+
+Inverse images of compact opens from single stages form a basis, compact by
+`isCompact_limit_constructibleClosed`; this gives prespectrality and quasi-separatedness.
+Generic points of irreducible closed subsets are obtained as limits of the generic points of the
+closures of their images in the stages.
+
+## References
+
+* [Stacks Project, Tag 0A2Z](https://stacks.math.columbia.edu/tag/0A2Z)
 -/
 
 @[expose] public section
@@ -24,33 +35,7 @@ universe u v
 namespace Topology
 
 /-- A directed inverse limit of spectral spaces with spectral transition maps is spectral,
-and its projections are spectral. Source: Stacks Project, Topology, Tag 0A2Z
-(blueprint: lem-weil-pbc-spectral-directed-limit-spectral).
-
-Proof:
-1. The initial topology and directedness give a basis of inverse images of compact opens
-from single stages. A common upper bound combines two such opens into a single inverse image.
-2. For a compact open `U` at stage `i`, use the constructibly closed subsets
-`f i j ⁻¹' U` for `i ≤ j` and the whole stage otherwise. The compatible-subset compactness
-lemma `lem-weil-pbc-spectral-limit-constructible-closed-quasi-compact` (Tag 0A2V), with
-`def-weil-pbc-constructible-topology`, makes their inverse limit `p i ⁻¹' U` compact.
-The same lemma applied to whole stages makes the limit compact.
-3. Use `PrespectralSpace.of_isTopologicalBasis` for prespectrality. The basic opens
-are closed under intersection by Step 1, and are compact by Step 2. Apply
-`QuasiSeparatedSpace.of_isTopologicalBasis`, which covers compact opens by finitely
-many basis members and distributes intersections over those finite unions.
-4. Step 2 and continuity give spectral projections. Together with Step 3 these are
-the compactness, prespectrality, and quasi-separatedness clauses of
-`def-weil-spectral-space`. No separate compact-open descent theorem is needed.
-5. For an irreducible closed subset `Z`, the closures of its images in the stages are
-irreducible by `lem-weil-pbc-irreducible-continuous-image` and
-`lem-weil-pbc-irreducible-closure`. Their unique generic points are compatible, hence lift
-to a limit point. A basic-open neighbourhood argument shows that this point belongs to
-`Z` and its closure equals `Z`.
-6. Inseparable points have inseparable images in every stage, so their images agree
-by T0 separation. Injectivity of the tuple map therefore makes the limit T0. With
-Step 5 this gives sobriety and uniqueness of generic points, completing spectrality.
--/
+and its projections are spectral. -/
 theorem spectralSpace_directedLimit
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (Y : I → Type u) [∀ i : I, TopologicalSpace (Y i)] [∀ i : I, SpectralSpace (Y i)]

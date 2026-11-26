@@ -33,8 +33,9 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # The normalized ordinary scalar tensor chain comparison
 
-Source: Stacks 03EL and 07A4
-(blueprint: lem-weil-normalized-ordinary-scalar-tensor-chain).
+## References
+
+* Stacks Project, Tags 03EL and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -78,17 +79,7 @@ variable (l : ℕ) [Fact l.Prime]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-/-- The ordinary total tensor comparison, uniquely fixed on pure scalar generators.
-Source: Stacks, Modules on Sites, Tag 03EL, tensor-product section; Tag 07A4.
-(blueprint: lem-weil-normalized-ordinary-scalar-tensor-chain).
-Proof: identify the ordinary scalar functor with the recorded sheaf change-of-rings
-functor by its object and morphism formulas. Apply the existing normalized complex
-tensor comparison. The sheafification adjunction unit identifies its scalar
-sections with the prescribed ordinary tensor sections, proving normalization.
-For uniqueness, apply the scalar-extension adjunction in each degree. Equality
-of the two adjoint maps follows on all pure bidegree generators from the two
-normalization formulas; total tensor generation gives equality in every degree.
-Chain-map, natural-transformation, and isomorphism extensionality finish. -/
+/-- The ordinary total tensor comparison, uniquely fixed on pure scalar generators. -/
 theorem normalizedIntegralOrdinaryTensorChain (W : AlgebraicGeometry.Scheme.{u}) :
     ∃! α : coefficientTotalTensor.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)
         (completedIntegralCommRingSheafUnrestricted l E W) ⋙

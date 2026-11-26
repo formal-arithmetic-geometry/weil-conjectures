@@ -10,8 +10,6 @@ public import WeilConjectures.SmoothPurity.CommonStageInternalHom.CommonStageInt
 /-! # The arrow calculus for descending common-stage internal Hom
 
 The representative equation determines an arrow map preserving identities and composition.
-Source: the existing common-stage internal-Hom proof plan.
-(blueprint: lem-weil-common-stage-internal-hom-descent-calculus).
 -/
 
 @[expose] public noncomputable section
@@ -61,9 +59,7 @@ variable (l : ℕ) [Fact l.Prime]
 namespace CommonStageInternalHomDescent
 open CommonStageInternalHom
 
-/-- Every permitted input arrow has a representative above any prescribed stage.
-Source: the common-stage internal-Hom representative proof.
-(blueprint: lem-weil-common-stage-internal-hom-descent-calculus). -/
+/-- Every permitted input arrow has a representative above any prescribed stage. -/
 theorem homRepresentative_exists (W : Scheme.{u})
     (P Q : (commonStageHomPairs.{u, v} l Ω W).FullSubcategory) (f : P ⟶ Q)
     (N : Index l Ω) :
@@ -89,9 +85,7 @@ theorem homRepresentative_exists (W : Scheme.{u})
   · exact congrArg Quiver.Hom.op ha
   · exact hb
 
-/-- Further extension leaves the represented input arrow unchanged.
-Source: the common-stage internal-Hom representative proof.
-(blueprint: lem-weil-common-stage-internal-hom-descent-calculus). -/
+/-- Further extension leaves the represented input arrow unchanged. -/
 theorem homInput_transport (W : Scheme.{u})
     (P Q : (commonStageHomPairs.{u, v} l Ω W).FullSubcategory)
     (L M : Index l Ω)
@@ -109,9 +103,7 @@ theorem homInput_transport (W : Scheme.{u})
   · exact congrArg Quiver.Hom.op (StageSystem.PairCategory.mkHom_tr k a)
   · exact StageSystem.PairCategory.mkHom_tr k b
 
-/-- Identity representatives give the identity input arrow.
-Source: the common-stage internal-Hom representative proof.
-(blueprint: lem-weil-common-stage-internal-hom-descent-calculus). -/
+/-- Identity representatives give the identity input arrow. -/
 theorem homInput_id (W : Scheme.{u})
     (P : (commonStageHomPairs.{u, v} l Ω W).FullSubcategory)
     (L : Index l Ω) (h : (commonStageHomObject l Ω W P).stage ≤ L) :
@@ -122,9 +114,7 @@ theorem homInput_id (W : Scheme.{u})
       (StageSystem.PairCategory.id_eq_mkHom P.obj.1.unop _).symm
   · exact (StageSystem.PairCategory.id_eq_mkHom P.obj.2 _).symm
 
-/-- Normalized identity representatives give the identity output arrow.
-Source: the common-stage internal-Hom representative proof.
-(blueprint: lem-weil-common-stage-internal-hom-descent-calculus). -/
+/-- Normalized identity representatives give the identity output arrow. -/
 theorem homOutput_id (W : Scheme.{u})
     (P : (commonStageHomPairs.{u, v} l Ω W).FullSubcategory)
     (L : Index l Ω) (h : (commonStageHomObject l Ω W P).stage ≤ L) :
@@ -138,9 +128,7 @@ theorem homOutput_id (W : Scheme.{u})
     Category.id_comp, Iso.hom_inv_id]
   exact (StageSystem.PairCategory.id_eq_mkHom _ h).symm
 
-/-- Composition of inputs reverses the first representative slot.
-Source: the common-stage internal-Hom representative proof.
-(blueprint: lem-weil-common-stage-internal-hom-descent-calculus). -/
+/-- Composition of inputs reverses the first representative slot. -/
 theorem homInput_comp (W : Scheme.{u})
     (P Q R : (commonStageHomPairs.{u, v} l Ω W).FullSubcategory)
     (L : Index l Ω)
@@ -166,9 +154,7 @@ theorem homInput_comp (W : Scheme.{u})
     exact congrArg Quiver.Hom.op (StageSystem.PairCategory.mkHom_comp_mkHom a' a)
   · exact StageSystem.PairCategory.mkHom_comp_mkHom b b'
 
-/-- Normalized outputs compose by cancelling the middle comparison.
-Source: the common-stage internal-Hom representative proof.
-(blueprint: lem-weil-common-stage-internal-hom-descent-calculus). -/
+/-- Normalized outputs compose by cancelling the middle comparison. -/
 theorem homOutput_comp (W : Scheme.{u})
     (P Q R : (commonStageHomPairs.{u, v} l Ω W).FullSubcategory)
     (L : Index l Ω)
@@ -203,9 +189,7 @@ theorem homOutput_comp (W : Scheme.{u})
   simp only [Category.assoc, Iso.inv_hom_id_assoc,
     ← CategoryTheory.Functor.map_comp_assoc, hc]
 
-/-- All representatives of one input arrow specify exactly one output arrow.
-Source: the common-stage internal-Hom representative proof.
-(blueprint: lem-weil-common-stage-internal-hom-descent-calculus). -/
+/-- All representatives of one input arrow specify exactly one output arrow. -/
 theorem homArrow_existsUnique (W : Scheme.{u})
     (P Q : (commonStageHomPairs.{u, v} l Ω W).FullSubcategory) (f : P ⟶ Q) :
     ∃! g : commonStageHomObject l Ω W P ⟶ commonStageHomObject l Ω W Q,
@@ -225,16 +209,12 @@ theorem homArrow_existsUnique (W : Scheme.{u})
   · intro g hg
     exact hg L h h' a b rfl
 
-/-- The output uniquely determined by the proved representative-independence statement.
-Source: the common-stage internal-Hom representative proof.
-(blueprint: lem-weil-common-stage-internal-hom-descent-calculus). -/
+/-- The output uniquely determined by the proved representative-independence statement. -/
 def homArrow (W : Scheme.{u})
     {P Q : (commonStageHomPairs.{u, v} l Ω W).FullSubcategory} (f : P ⟶ Q) :=
   (homArrow_existsUnique l Ω W P Q f).exists.choose
 
-/-- The unique output has the prescribed value on every representative.
-Source: the common-stage internal-Hom representative proof.
-(blueprint: lem-weil-common-stage-internal-hom-descent-calculus). -/
+/-- The unique output has the prescribed value on every representative. -/
 theorem homArrow_spec (W : Scheme.{u})
     (P Q : (commonStageHomPairs.{u, v} l Ω W).FullSubcategory)
     (L : Index l Ω)

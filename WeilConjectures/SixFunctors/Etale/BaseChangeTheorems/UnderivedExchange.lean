@@ -60,10 +60,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 set_option backward.isDefEq.respectTransparency false in
 /-- **The stalks of the underived proper exchange.** For a cartesian square with `f` proper and
 an algebraically closed geometric point `y'` of `Y'`, the base change map
-`g^* f_* F ⟶ f'_* g'^* F` of abelian étale sheaves is bijective on stalks at `y'`: through the
-stalk formula `AlgebraicGeometry.Etale.bijective_stalkToFibreSections_of_isProper`, both stalks
-are the sections over the geometric fibre `X' ×_{Y'} Spec Ω = X ×_Y Spec Ω`, and the base change
-map becomes the identity of these sections. -/
+`g^* f_* F ⟶ f'_* g'^* F` of abelian étale sheaves is bijective on stalks at `y'`. -/
 lemma Etale.bijective_sheafFiber_map_baseChangeMap_of_isProper {X' X Y' Y : Scheme.{u}}
     {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g)
     [IsProper f] (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) {Ω : Type u} [Field Ω]
@@ -134,12 +131,7 @@ Y' --g---> Y
 ```
 
 with `f` proper, the base change map `g^* f_* F ⟶ f'_* g'^* F` is an isomorphism for every
-étale sheaf `F` of `Λ`-modules on `X`. At a geometric point `ȳ'` of `Y'` both stalks are the
-sections of `F` over the closed geometric fibre `X_ȳ = X'_ȳ'`, by the stalk formula over the
-strict henselisation and the degree-zero comparison
-`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_geometricFibre`, and the induced
-map of stalks is the identity; geometric stalks are conservative.
-(blueprint: `proposition-proper-base-change-degree-zero`) -/
+étale sheaf `F` of `Λ`-modules on `X`. -/
 @[stacks 0A3T]
 theorem Etale.isIso_baseChangeMap_of_isProper {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X}
     {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g) [IsProper f] :

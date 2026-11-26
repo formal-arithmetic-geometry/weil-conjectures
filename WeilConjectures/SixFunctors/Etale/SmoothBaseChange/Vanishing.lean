@@ -32,11 +32,19 @@ at a closed point.
 
 The proof works with the `AddCommGrpCat`-valued cohomology `H^q(-, ℤ/e)` of the fibres
 `Y₀ ×_{X₀} U` for `U` affine étale over `X₀` and `e ∣ d`: by
-`AlgebraicGeometry.Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists` (blueprint
-`proposition-base-change-larger-algebraically-closed`) it suffices that every such class dies on an
-étale cover of `U`. In degrees `q ≥ 2` the classes vanish outright, `Y₀ ×_{X₀} U` being a smooth
-affine curve over `K`. In degree one the class is killed by a torsor spread out from the generic
-fibre, after reducing to a base with a section by slicing. Only the *vanishing* of pulled-back
+`AlgebraicGeometry.Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists` it suffices
+that every such class dies on an étale cover of `U`. In degrees `q ≥ 2` the classes vanish
+outright, `Y₀ ×_{X₀} U` being a smooth affine curve over `K`. In degree one the class is killed
+by a torsor spread out from the generic fibre, after reducing to a base with a section by
+slicing (`AlgebraicGeometry.Smooth.exists_etaleCover_factorization`); the étale map to `S₀`
+produced by slicing is a local isomorphism since `S₀` is normal with algebraically closed
+function field (`AlgebraicGeometry.Etale.isLocalIso_of_isSepClosed_functionField`). Over a base
+with a section the class comes from the generic fibre `C_L`
+(`AlgebraicGeometry.bijective_cohomologyMap_constantZMod_of_smoothOfRelativeDimension`), where it
+is represented by a torsor; this torsor has an `L`-point above the generic point of the section,
+since `H¹(Spec L, ℤ/e) = 0`, so it spreads out
+(`AlgebraicGeometry.Scheme.EtaleTorsor.exists_isPullback_of_genericFibre`). Only the *vanishing*
+of pulled-back
 classes is used, which is why `AlgebraicGeometry.Etale.cohomologyMap_cohomologyMap_eq_zero_iff`
 suffices to compare pullbacks along composites.
 
@@ -62,23 +70,13 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- The degree-one step of blueprint `proposition-base-change-larger-algebraically-closed--1`, over
-a base with a section.
-
-Let `W` be an affine integral normal scheme with algebraically closed function field `L`, let
-`c : C ⟶ W` be affine and smooth of relative dimension one with geometrically connected fibres
-and a section `σ`, let `K` be an algebraically closed extension of `L` and let `Y` be the fibre
-of `c` over the geometric generic point `Spec K ⟶ W`. Let `e` be invertible on `W`. Then every
-class `ξ ∈ H¹(Y, ℤ/e)` is killed by a `ℤ/e`-torsor `T` over `C`: it dies after pullback to any
-scheme `Z` over `Y` whose map to `C` lifts to `T`.
-
-By `AlgebraicGeometry.bijective_cohomologyMap_constantZMod_of_smoothOfRelativeDimension`
-(blueprint `theorem-cohomology-curves--6`) the class comes from the generic fibre
-`C_L`, where it is represented by a torsor `t`
-(`AlgebraicGeometry.Scheme.EtaleTorsor.exists_forall_cohomologyMap_eq_zero_iff`). The torsor
-has an `L`-point above the generic point of the section, since `H¹(Spec L, ℤ/e) = 0`, so it
-spreads out to a torsor `T` over `C`
-(`AlgebraicGeometry.Scheme.EtaleTorsor.exists_isPullback_of_genericFibre`). -/
+/-- The degree-one vanishing step over a base with a section: let `W` be an affine integral
+normal scheme with algebraically closed function field `L`, let `c : C ⟶ W` be affine and
+smooth of relative dimension one with geometrically connected fibres and a section `σ`, let `K`
+be an algebraically closed extension of `L` and let `Y` be the fibre of `c` over the geometric
+generic point `Spec K ⟶ W`. Let `e` be invertible on `W`. Then every class `ξ ∈ H¹(Y, ℤ/e)` is
+killed by a `ℤ/e`-torsor `T` over `C`: it dies after pullback to any scheme `Z` over `Y` whose
+map to `C` lifts to `T`. -/
 theorem Etale.exists_etaleTorsor_cohomologyMap_eq_zero {W C : Scheme.{u}} [IsAffine W]
     [IsIntegral W] (hW : ∀ x : W, IsIntegrallyClosed (W.presheaf.stalk x))
     [IsAlgClosed W.functionField] (c : C ⟶ W) [IsAffineHom c] [SmoothOfRelativeDimension 1 c]
@@ -190,19 +188,8 @@ theorem Etale.CurveTestDatum.isIntegrallyClosed_and_isAlgClosed_and_exists_of_is
     refine ⟨iW, ?_⟩
     rw [hiW, Scheme.Spec_stalkClosedPointTo_fromSpecStalk, hgW]
 
-/-- The degree-one case of blueprint `proposition-base-change-larger-algebraically-closed--1`: on a
-curve-test datum, every class `ξ ∈ H¹(Y₀ ×_{X₀} U, ℤ/e)`, for `e ∣ d` and `U` affine étale over
-`X₀`, dies on an étale cover of `U`.
-
-By the slicing lemma `AlgebraicGeometry.Smooth.exists_etaleCover_factorization` (blueprint
-`theorem-smooth-base-change-classical-torsion`) `U` is covered by étale `U'` with `U' ⟶ S₀`
-factoring as an affine morphism `U' ⟶ V` with geometrically connected fibres and a section, followed
-by an étale `V ⟶ S₀`. As `S₀` is normal with algebraically closed function field, `V ⟶ S₀` is a
-local isomorphism (`AlgebraicGeometry.Etale.isLocalIso_of_isSepClosed_functionField`, blueprint
-`proposition-base-change-larger-algebraically-closed`), so after shrinking `V` to affine opens it is
-an open of `S₀`. Over each of these,
-`AlgebraicGeometry.Etale.exists_etaleTorsor_cohomologyMap_eq_zero` provides a torsor whose total
-space kills the restriction of `ξ`. -/
+/-- The degree-one vanishing on a curve-test datum: every class `ξ ∈ H¹(Y₀ ×_{X₀} U, ℤ/e)`, for
+`e ∣ d` and `U` affine étale over `X₀`, dies on an étale cover of `U`. -/
 theorem Etale.CurveTestDatum.exists_cover_cohomologyMap_eq_zero (D : Etale.CurveTestDatum.{u})
     {e : ℕ} [NeZero e] (he : e ∣ D.d) {U : Scheme.{u}} (u : U ⟶ D.X₀) [Etale u] [IsAffine U]
     (ξ : Sheaf.H ((pullback D.h u).constantZMod e) 1) :
@@ -313,11 +300,9 @@ theorem Etale.CurveTestDatum.exists_cover_cohomologyMap_eq_zero (D : Etale.Curve
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `proposition-base-change-larger-algebraically-closed--1`: Vanishing in the universal
-curve test.
-
-For a curve-test datum `D` — an affine smooth relative curve `f₀ : X₀ ⟶ S₀` over an affine
-integral normal base with algebraically closed function field, together with the fibre
+/-- Vanishing in the universal curve test: for a curve-test datum `D` — an affine smooth
+relative curve `f₀ : X₀ ⟶ S₀` over an affine integral normal base with algebraically closed
+function field, together with the fibre
 
 ```
 Y₀ ---e---> Spec K
@@ -328,17 +313,7 @@ X₀ ---f₀----> S₀
 ```
 
 over a geometric generic point and an integer `d` invertible on `S₀` — the higher direct
-images `R^q h_* (Λ/dΛ)` of the constant sheaf vanish for every `q ≥ 1`.
-
-This is also blueprint `proposition-base-change-larger-algebraically-closed--1`. It is a
-recombination of the lemmas of Stacks, Étale Cohomology, Section 59.88 rather than a single tagged
-one. By `AlgebraicGeometry.Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists` it
-suffices to kill every class of `H^q(Y₀ ×_{X₀} U, ℤ/e)`, `e ∣ d`, on an étale cover of the
-affine étale `U ⟶ X₀`. For `q ≥ 2` these groups vanish, `Y₀ ×_{X₀} U` being a smooth affine
-curve over `K`
-(`AlgebraicGeometry.subsingleton_sheafH_constantZMod_and_nonempty_addEquiv_sheafH_zero`,
-blueprint `theorem-cohomology-curves--2`); the case `q = 1` is
-`AlgebraicGeometry.Etale.CurveTestDatum.exists_cover_cohomologyMap_eq_zero`. -/
+images `R^q h_* (Λ/dΛ)` of the constant sheaf vanish for every `q ≥ 1`. -/
 theorem Etale.CurveTestDatum.isZero_higherDirectImage_constantSheaf
     (D : Etale.CurveTestDatum.{u}) (q : ℤ) (hq : 1 ≤ q) :
     IsZero (Etale.higherDirectImage Λ D.h q (Etale.constantModSheaf Λ D.Y₀ D.d)) := by

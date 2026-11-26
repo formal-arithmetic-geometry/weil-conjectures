@@ -12,7 +12,11 @@ import Mathlib.Tactic.Ring
 
 /-! # Scalar localization of a permitted contravariant bilinear functor
 
-Extracted proved scalar-localization calculus used by the derived-operation construction.
+Scalar-localization calculus used by the derived-operation construction.
+
+## References
+
+* Stacks Project, Tags 00CV and 00CX.
 -/
 
 @[expose] public noncomputable section
@@ -133,17 +137,7 @@ private def homLocalizedFunctor :
   map_comp {P Q T} f g :=
     homLocalizedAction_comp A p q B q' hq' β hβ P Q T f.hom.1.unop g.hom.1.unop f.hom.2 g.hom.2
 
-/-- Scalar localization of a permitted contravariant bilinear functor.
-Source: module base change (Stacks 00CV, 00CX), and the rational paragraph of
-blueprint `prose-03-02`.
-(blueprint: lem-sf-localized-permitted-hom).
-Proof: Base change the integral bilinear Hom map and compose with the inverse distribution
-isomorphism for base change of tensor products. Curry to obtain the localized separately linear
-action. Its value on pure tensors multiplies the two coefficients. Four tensor inductions prove
-compatibility with composition from the integral functor laws and commutativity of coefficients;
-identities follow from the pure-tensor formula. This constructs the functor on the permitted full
-subcategory. Double tensor induction and functor extensionality prove uniqueness. The object
-restriction is used only to supply the underlying permitted integral pairs. -/
+/-- Scalar localization of a permitted contravariant bilinear functor. -/
 theorem restrictedHom_existsUnique :
     ∃! F : q'.FullSubcategory ⥤ ScalarLocalization A D p,
       (∀ P, F.obj P = ⟨B.obj (⟨(op P.obj.1.unop.obj, P.obj.2.obj), hq' P.obj P.property⟩)⟩) ∧

@@ -10,10 +10,21 @@ import all WeilConjectures.SmoothPurity.Finite.FinitePullbackTensorUnitRepresent
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 import WeilConjectures.CategoryTheory.Ringed.RingedDerivedClosedSymmetricMonoidal
 
-/-! The coherent unit comparison follows from the associativity comparison.
+/-! # Unit comparison from associativity
+
+The coherent unit comparison for the completed pullback/tensor comparison follows from the
+associativity comparison.
+
+## Implementation details
 
 This module isolates the unit construction so that consumers of the completed
-pullback comparison do not re-elaborate its large representative model.
+pullback comparison do not re-elaborate its large representative model. The representative
+construction of the unit is the one transported by the ordinary pullback of the coefficient
+ring unit.
+
+## References
+
+* [Stacks, Tags 03EL, 07A4 and 0941](https://stacks.math.columbia.edu/tag/07A4)
 -/
 
 @[expose] public noncomputable section
@@ -118,13 +129,8 @@ private def coherentPullback_unit_object {X Y : Scheme.{u}} (f : X ⟶ Y) :
 attribute [local irreducible] pullbackTensorCalculus pullbackTensorSequenceDerived
   pullbackTensorSystemComparison coherentUnit_single coherentPullback_unit_object
 
-/--
-Both unit equations for the coherent μ used to define the integral comparison,
-assuming the associativity equation for μ. The representative construction of
-the unit is the one transported by the ordinary pullback of the coefficient
-ring unit. Source: Stacks 03EL, 07A4, 0941 (blueprint:
-lem-pur-completed-pullback-tensor-unit-from-associativity).
--/
+/-- Both unit equations hold for the coherent `μ` used to define the integral comparison,
+assuming the associativity equation for `μ`. -/
 theorem completedPullbackTensor_unit_of_associativity
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hA : ∀ M N P : coefficientSequenceDerived l E Y,

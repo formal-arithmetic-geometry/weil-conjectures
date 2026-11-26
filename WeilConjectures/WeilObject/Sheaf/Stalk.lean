@@ -128,9 +128,7 @@ noncomputable def upperStarFromPointModComp {X Y : Scheme.{u}} (f : X ⟶ Y) :
 variable {Ω : Type u} [Field Ω]
 
 /-- For a separably closed field `Ω`, the pullback `p^* : Mod_Λ ⥤ Mod_{Λ_{Spec Ω}}` from
-condensed `Λ`-modules is an equivalence: the pro-étale site of `Spec Ω` is equivalent to
-profinite sets, through `S ↦ Spec C(S, Ω)` (blueprint `proposition-pro-etale-site-separably-closed`,
-with `proposition-pro-etale-site-separably-closed--3` for the coefficient ring). -/
+condensed `Λ`-modules is an equivalence. -/
 instance isEquivalence_upperStarFromPointMod [IsSepClosed Ω] :
     (upperStarFromPointMod Λ (Spec (.of Ω))).IsEquivalence :=
   ProEtale.isEquivalence_mapMod_upperStarFromPoint Ω Λ
@@ -155,8 +153,7 @@ section EqToIso
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
 /-- The isomorphism `t^* ≅ t'^*` of the pullbacks of module objects along equal morphisms, with
-components `eqToHom` (an equality of objects rather than of functors, which keeps the kernel from
-unfolding the pullbacks when the components are computed). -/
+components `eqToHom`. -/
 noncomputable def upperStarEqToIso {A B : Scheme.{u}} {t t' : A ⟶ B} (h : t = t') :
     (t)^*⟦Λ⟧ ≅ (t')^*⟦Λ⟧ :=
   NatIso.ofComponents (fun M ↦ eqToIso (congrArg (fun s : A ⟶ B ↦ (s)^*⟦Λ⟧.obj M) h))

@@ -10,8 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleCohomologicalSu
 
 /-!
 # Constructible cohomological intervals
-
-Source: Weil blueprint, order 1466 (blueprint: def-weil-constructible-intervals).
 -/
 
 @[expose] public section
@@ -21,8 +19,7 @@ open CategoryTheory AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
 /-- The full constructible interval, with vanishing outside the inclusive integer interval.
-When b < a the interval is empty, so all cohomology vanishes.
-Source: Weil blueprint, order 1466 (blueprint: def-weil-constructible-intervals). -/
+When `b < a` the interval is empty, so all cohomology vanishes. -/
 noncomputable def constructibleInterval (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (n : ℕ) (hn : 1 ≤ n) (Y : AlgebraicGeometry.Scheme.{u}) (a b : ℤ) :

@@ -10,6 +10,21 @@ public import Mathlib.Algebra.Category.Grp.EpiMono
 public import WeilConjectures.SixFunctors.Coefficient.CoefficientHomZeroClass
 import all WeilConjectures.SixFunctors.Coefficient.CoefficientHomZeroClass
 
+/-! # Cycle representatives of H-zero classes
+
+## Implementation details
+
+Since `eN.hom` is an isomorphism, the induced map on H-zero of the integral global Hom is
+bijective. The class map `coefficientHomZeroClass` of the fixed Hom-section complex is the
+homology projection of zero cycles (an epimorphism) followed by the isomorphism of the universal
+sections comparison with the fixed K-injective replacement, so every class is the class of a
+zero cycle. No hypothesis on `P` is needed.
+
+## References
+
+* [Stacks, Tag 08JA]
+-/
+
 @[expose] public section
 set_option autoImplicit false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
@@ -23,16 +38,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Every H-zero class has a cycle representative after transporting the target
 through a chosen quotient-image isomorphism.
-Source: Stacks 08JA and the fixed K-injective Hom-complex construction.
-Proof: since `eN.hom` is an isomorphism, the map induced on H-zero of the integral
-global Hom in the second variable is bijective, so `x` is the image of a unique class
-`y` in H-zero of the global Hom from `Q(P)` to `Q(N)`. The class map
-`coefficientHomZeroClass` of the fixed Hom-section complex is the homology projection
-of zero cycles (an epimorphism) followed by the isomorphism of the universal sections
-comparison with the fixed K-injective replacement of `N`, as in the proof of
-`coefficientHomZeroEquiv_exists`; hence `y` is the class of a zero cycle `z`, and the
-image of that class is `x`. No hypothesis on `P` is needed.
-(blueprint: lem-coef-derived-sections-normalization-scalar-hom-zero-cycle-surjective)
 -/
 theorem coefficientDerivedSectionsScalarHomZero_cycle_surjective
     (P : CochainComplex (scalarReductionSource l E W) ℤ)

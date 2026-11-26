@@ -15,8 +15,12 @@ import WeilConjectures.AlgebraicGeometry.Pur.PurTwistCoefficientTensor
 
 /-! # Additive transport input for the first integral root line
 
-This is the additive sheaf comparison used to construct the module comparison.
-(blueprint: lem-weil-frobenius-integral-root-transport).
+This is the additive sheaf comparison used to construct the module comparison in the
+integral root transport.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03EK and 03EL
 -/
 
 @[expose] public noncomputable section
@@ -150,17 +154,9 @@ private theorem integralTransportScalar_of_tensors
   | add y z h y' => simp only [map_add, smul_add, h, y']
   | tmul b x => exact hp V a' b x
 
-/-- The additive inverse-image transport of the first completed integral root line.
-
-Source: literature/stacks-project/sites-modules.tex, Tags 03EK and 03EL; expanded DAG
-clause 2 of `prose-10-21`.
-Proof: finite root comparisons commute with transitions, hence their inverse limit gives
-an additive isomorphism. Tensor presentation transport extends it across the constant
-integral coefficients and the completed coefficient pushout. The resulting additive map
-is semilinear for the completed coefficient comparison and has the displayed formula on
-pure root tensors. This is the additive part of the module transport; the parent theorem
-performs the adjunction step turning it into a module isomorphism.
-(blueprint: new-weil-frobenius-integral-root-transport-additive). -/
+/-- The additive inverse-image transport of the first completed integral root line: an
+additive isomorphism, semilinear for the completed coefficient comparison, with the displayed
+formula on pure root tensors. -/
 theorem frobeniusIntegralRootTransport_additive
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 
 For a finite coefficient ring `Λ` and a morphism `f : X ⟶ Y` admitting a compactification, two
 canonical morphisms built from the adjunction `Rf_! ⊣ Rf^!`, which enter the definition of a
-cohomologically smooth morphism (blueprint `proposition-exceptional-inverse-image-smooth-morphism`):
+cohomologically smooth morphism:
 
 * the *tensor map* `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K`, where `ω_f = Rf^! Λ_Y`: the adjunct of
   `Rf_!(ω_f ⊗ᴸ Lf^* K) ≅ Rf_! ω_f ⊗ᴸ K ⟶ Λ_Y ⊗ᴸ K ≅ K`, the inverse of the projection map
@@ -110,8 +110,7 @@ noncomputable abbrev rightDerivedUpperShriekTensorMap
     (R(f)^![Λ]).obj M ⊗ (L((f)^*[ModuleCat.{u + 1} Λ])).obj N ⟶ (R(f)^![Λ]).obj (M ⊗ N) :=
   lowerShriekRightAdjointTensorMap (rightDerivedUpperShriekAdjunction Λ f) M N
 
-/-- The canonical **tensor map** `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K` (blueprint
-`proposition-exceptional-inverse-image-smooth-morphism`), for `ω_f = Rf^! Λ_Y` and finite
+/-- The canonical **tensor map** `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K`, for `ω_f = Rf^! Λ_Y` and finite
 coefficients: the adjunct under `Rf_! ⊣ Rf^!` of
 `Rf_!(ω_f ⊗ᴸ Lf^* K) ≅ Rf_! ω_f ⊗ᴸ K ⟶ Λ_Y ⊗ᴸ K ≅ K`, the inverse of the projection map
 (`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`) followed by the counit and the left unitor
@@ -152,8 +151,8 @@ noncomputable def rightDerivedUpperShriekBaseChangeMap (sq : IsPullback g' f' f 
     (inv (rightDerivedLowerShriekBaseChangeMap Λ sq))
 
 /-- The canonical base change map `Lg'^* ω_f ⟶ ω_{f'}` of the dualizing complexes of a cartesian
-square `g' ≫ f = f' ≫ g` (blueprint `proposition-exceptional-inverse-image-smooth-morphism`): the
-component of `AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap` at `Λ_Y`, followed by
+square `g' ≫ f = f' ≫ g`: the component of
+`AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap` at `Λ_Y`, followed by
 `Rf'^!(Lg^* Λ_Y ≅ Λ_{Y'})`. -/
 noncomputable def dualizingComplexBaseChangeMap (sq : IsPullback g' f' f g) :
     (L((g')^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ f) ⟶

@@ -33,14 +33,20 @@ import Mathlib.CategoryTheory.Sites.CoverPreserving
 
 /-! # Tensor insertion across quotient coefficient systems
 
-Source: blueprint main-20261015, sec-trace-formula/sk-d-weil,
-prop-trf-rational-frobenius-integral-model.proof.md, clause (3);
-Stacks Tags 03EK and 03CY (blueprint: lem-trf-quotient-tensor-insertion).
+For an isomorphism `g : X ⟶ Y` and a complex `K` of finite-level coefficient modules on `Y`, we
+construct the insertion `x ↦ x ⊗ 1` from the pullback of `K` to its sheafified finite pullback, the
+transition maps `x ⊗ b ↦ w(x) ⊗ ρ(b)` between levels, and the resulting augmentations.
 
-The index n denotes positive exponent n+1. Source, target and transition maps are
-unbounded complexes of sheaves, before localization. Site and coefficient sizes
-are independent. Tensor sections below use the published sheafified tensor unit,
-not an identification of sections of a sheaf tensor with tensors of sections.
+## Implementation details
+
+The index `n` denotes the positive exponent `n + 1`. Source, target and transition maps are
+unbounded complexes of sheaves, before localization. Site and coefficient sizes are independent.
+Tensor sections use the sheafified tensor unit, not an identification of sections of a sheaf tensor
+with tensors of sections.
+
+## References
+
+* Stacks Tags 03EK and 03CY.
 -/
 
 @[expose] public noncomputable section
@@ -57,27 +63,22 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 
-/-- G after restriction by the completed projection, with action through c_R inverse.
-Source: blueprint clause (3) (blueprint: lem-trf-quotient-tensor-insertion). -/
+/-- G after restriction by the completed projection, with action through c_R inverse. -/
 def source (n : ℕ) :
     CochainComplex (integralOperationsFiniteModules l E Y n) ℤ ⥤
       CochainComplex (integralTowerModules l E X) ℤ :=
   integralOperationsRestrict l E Y n ⋙
     (inverseImageIntegralModules l E g).mapHomologicalComplex (.up ℤ)
 
-/-- The specified finite sheafified pullback, restricted by pi_X,n.
-Source: Stacks 03EK, blueprint clause (3)
-(blueprint: lem-trf-quotient-tensor-insertion). -/
+/-- The specified finite sheafified pullback, restricted by pi_X,n. -/
 def target (n : ℕ) :
     CochainComplex (integralOperationsFiniteModules l E Y n) ℤ ⥤
       CochainComplex (integralTowerModules l E X) ℤ :=
   (integralOperationsLevelPullback l E g n).mapHomologicalComplex (.up ℤ) ⋙
     integralOperationsRestrict l E X n
 
-/-- The actual section x tensor b: scalar multiplication of the published tensor-unit
-generator, restricted along the canonical inverse-image comma arrow.
-Source: Stacks 03EK; def-weil-inverse-image-pullback-comparison (a)
-(blueprint: lem-trf-quotient-tensor-insertion). -/
+/-- The section x tensor b: scalar multiplication of the tensor-unit generator, restricted along the
+canonical inverse-image comma arrow. -/
 def tensorSection (n : ℕ)
     (K : CochainComplex (integralOperationsFiniteModules l E Y n) ℤ)
     (i : ℤ) (U : X.ProEt)
@@ -286,15 +287,7 @@ private theorem tensorUnit_bijective (n : ℕ)
   rw [h]
   exact hr.comp hu
 
-/-- Insertion x to x tensor 1 is a unique completed-linear chain map.
-Source: Stacks 03EK and 03CY, blueprint clause (3)
-(blueprint: lem-trf-quotient-tensor-insertion).
-Proof: on the sectionwise tensor presheaf insert 1 and then apply sheafification.
-Restrictions preserve 1. The structure square c_n G(pi_Y,n) c_R inverse = pi_X,n
-and balancing give j(ax)=a j(x). The differential acts on x alone, so insertion
-commutes with it. The published finite comparison has precisely this section formula;
-the completed action square makes it a map with the displayed endpoints. Equality
-on every section in every degree proves uniqueness. These are split steps 1 and 2. -/
+/-- Insertion x to x tensor 1 is a unique completed-linear chain map. -/
 theorem insertion_existsUnique (n : ℕ)
     (K : CochainComplex (integralOperationsFiniteModules l E Y n) ℤ) :
     ∃! j : (source l E g n).obj K ⟶ (target l E g n).obj K,
@@ -359,8 +352,7 @@ theorem insertion_existsUnique (n : ℕ)
         simpa only [tensorSection, one_smul, f]
           using hf i U.unop x
 
-/-- The insertion is chosen only from its unique actual sheafified section formula.
-Source: Stacks 03EK and 03CY (blueprint: lem-trf-quotient-tensor-insertion). -/
+/-- The insertion chain map x to x tensor 1, characterized by its sheafified section formula. -/
 def insertion (n : ℕ)
     (K : CochainComplex (integralOperationsFiniteModules l E Y n) ℤ) :
     (source l E g n).obj K ⟶ (target l E g n).obj K :=
@@ -476,9 +468,8 @@ private theorem coefficientInverse_reduction (n : ℕ) (U : X.ProEt)
   exact hfin.symm.trans
     (congrArg ((inv (inverseImageFiniteCoefficientMap l E g n)).hom.app (op U)) hc)
 
-/-- Quotient semilinearity of a chain map, written on every sheaf section.
-The completed-linear map is just the same map after restriction by the limit projections.
-Source: blueprint clause (3) (blueprint: lem-trf-quotient-tensor-insertion). -/
+/-- Quotient semilinearity of a chain map, written on every sheaf section. The completed-linear map
+is just the same map after restriction by the limit projections. -/
 def IsReductionLinear (n : ℕ)
     (K : CochainComplex (integralOperationsFiniteModules l E Y (n + 1)) ℤ)
     (L : CochainComplex (integralOperationsFiniteModules l E Y n) ℤ)
@@ -492,17 +483,8 @@ def IsReductionLinear (n : ℕ)
         ((integralCoefficientSheafTransition l E Y n).hom.app (op U) a)
         ((w.f i).val.app (op U) x)
 
-/-- The actual cross-coefficient tensor map exists uniquely as a completed-linear chain map.
-Source: Stacks 03EK and 03CY, blueprint clause (3)
-(blueprint: lem-trf-quotient-tensor-insertion).
-Proof: put B_n=G S_Y,n, T_n=S_X,n, q_n=G rho_Y,n and p_n=rho_X,n.
-Coefficient naturality gives p_n c_(n+1)=c_n q_n. Hence semilinearity of w gives
-w(bx) tensor p(t)=w(x) tensor c_n(q(b))p(t)=w(x) tensor p(c_(n+1)(b)t).
-The formula is balanced and commutes with restrictions. The limit projection identity
-p_n pi_(n+1)=pi_n makes it completed-linear. Apply the module sheafification
-interface with base ring R_X to obtain its unique extension. The differential
-commutes on pure tensors since w is a chain map, and hence after sheafification.
-These are split steps 1, 3 and 4; no exactness of tensor is used. -/
+/-- For a quotient-semilinear chain map `w`, the cross-coefficient tensor map x tensor b to G(w)(x)
+tensor rho_X,n(b) exists uniquely as a chain map. -/
 theorem transition_existsUnique (n : ℕ)
     (K : CochainComplex (integralOperationsFiniteModules l E Y (n + 1)) ℤ)
     (L : CochainComplex (integralOperationsFiniteModules l E Y n) ℤ)
@@ -559,8 +541,7 @@ theorem transition_existsUnique (n : ℕ)
       symm
       simpa only [map_one] using hv i U.unop 1 x
 
-/-- The unique sheafified map x tensor b to G(w)(x) tensor rho_X,n(b).
-Source: Stacks 03EK and 03CY (blueprint: lem-trf-quotient-tensor-insertion). -/
+/-- The unique sheafified map x tensor b to G(w)(x) tensor rho_X,n(b). -/
 def transition (n : ℕ)
     (K : CochainComplex (integralOperationsFiniteModules l E Y (n + 1)) ℤ)
     (L : CochainComplex (integralOperationsFiniteModules l E Y n) ℤ)
@@ -570,9 +551,7 @@ def transition (n : ℕ)
     (target l E g (n + 1)).obj K ⟶ (target l E g n).obj L :=
   (transition_existsUnique l E g n K L w hw).exists.choose
 
-/-- The specified augmentation theta_n=j_n G(r_n), retaining completed scalar linearity.
-Source: blueprint clause (3), augmentation in strict-quotient step 4
-(blueprint: lem-trf-quotient-tensor-insertion). -/
+/-- The augmentation theta_n=j_n G(r_n), retaining completed scalar linearity. -/
 def augmentation (n : ℕ) (P : CochainComplex (integralTowerModules l E Y) ℤ)
     (K : CochainComplex (integralOperationsFiniteModules l E Y n) ℤ)
     (r : P ⟶ (integralOperationsRestrict l E Y n).obj K) :

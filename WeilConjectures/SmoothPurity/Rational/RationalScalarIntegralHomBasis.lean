@@ -17,10 +17,17 @@ For a finite extension `L/E` of finite extensions of `ℚ_ℓ` and an `𝒪_E`-b
 every morphism `Ext X ⟶ Ext Z` of the completed scalar extensions of derived complete
 complexes is uniquely of the form `∑ i, b i • Ext (h i)`.
 
-Proof: extension ⊣ restriction on derived categories identifies `Hom(Ord X, Ord Z)` with
+## Implementation details
+
+Extension ⊣ restriction on derived categories identifies `Hom(Ord X, Ord Z)` with
 `Hom(X, Res Ord Z)`, and the coordinates of `integralOrdinaryScalar_coordinates` exhibit
-`Res Ord Z` as `⊕ᵢ Z`. On complete objects the exact ordinary extension is the completed one.
-(blueprint: def-weil-rationalization-karoubi).
+`Res Ord Z` as `⊕ᵢ Z`. On complete objects the exact ordinary extension is the completed one
+(`isIso_completedScalarComparison_app`).
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 3.5.1, Lemma 6.8.2(1),
+  Proposition 6.8.14(2).
 -/
 
 @[expose] public section
@@ -115,8 +122,7 @@ theorem integralScalarChainAction_app_f (x : Padic.coefficientExtensionIntegers 
 
 /-- The finite free Hom formula for the exact ordinary scalar extension on derived categories:
 for an `𝒪_E`-basis `b` of `𝒪_L`, every morphism `Ord X ⟶ Ord Z` is uniquely
-`∑ i, b i • Ord (h i)`.
-Source: Bhatt--Scholze, Lemma 6.8.2(1) and Proposition 6.8.14(2). -/
+`∑ i, b i • Ord (h i)`. -/
 theorem integralOrdinaryDerivedScalar_map_basis_bijective :
     ∃ (d : ℕ) (b : Fin d → Padic.coefficientExtensionIntegers l L),
       (letI := (integralScalarIntegerInclusion l E L ι).toAlgebra
@@ -240,11 +246,7 @@ theorem integralOrdinaryDerivedScalar_map_basis_bijective :
 
 /-- The finite free Hom formula for the completed integral scalar extension of integral
 constructible complexes: for an `𝒪_E`-basis `β` of `𝒪_L`, every morphism `Ext N ⟶ Ext Z` is
-uniquely `∑ i, β i • Ext (h i)`.
-Source: Bhatt--Scholze, Lemma 6.8.2(1), Propositions 3.5.1 and 6.8.14(2).
-Proof: on complete objects the completed scalar extension is the exact ordinary one
-(`isIso_completedScalarComparison_app`), and the comparison is natural and linear, so this is
-`integralOrdinaryDerivedScalar_map_basis_bijective`. -/
+uniquely `∑ i, β i • Ext (h i)`. -/
 theorem sfConstructibleIntegralScalarExtension_map_basis_bijective (p : ℕ) (hl : l ≠ p) :
     letI := (integralScalarIntegerInclusion l E L ι).toAlgebra
     ∃ (d : ℕ) (β : Module.Basis (Fin d) (Padic.coefficientExtensionIntegers l E)

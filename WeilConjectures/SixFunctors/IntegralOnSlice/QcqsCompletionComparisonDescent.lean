@@ -12,7 +12,21 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Descent of a normalized completion comparison
 
-Source: Stacks Tags 06YY and 0941: localization and the two coordinates of the Roos cone.
+We show that exact ordinary restriction descends a chain-level Roos comparison uniquely to
+the completion, and that a comparison normalized on good representatives and on both Roos
+coordinates preserves the completion unit.
+
+## Implementation details
+
+The ordinary derived counit is an isomorphism on every complex; on good representatives the
+chain comparison is conjugated by this counit and the completion comparisons, and fully
+faithful restriction along the localization of good representatives descends it. Equality
+of natural transformations is likewise checked on good representatives.
+
+## References
+
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -192,13 +206,7 @@ private lemma ordinaryCounitIso_hom_app
 
 attribute [local irreducible] ordinaryCounitIso
 
-/-- Exact ordinary restriction descends a chain Roos comparison uniquely to completion.
-Source: Stacks 06YY and 0941
-(blueprint: lem-fix-qcqs-completion-comparison-unit).
-Proof: the ordinary derived counit is an isomorphism on every complex. On good
-representatives conjugate the chain comparison by this counit and the two
-completion comparisons. Fully faithful restriction along the good localization
-descends this natural isomorphism. Its component equation is the stated normalization. -/
+/-- Exact ordinary restriction descends a chain Roos comparison uniquely to completion. -/
 theorem ordinaryCompletionComparison_exists
     [PreservesFiniteLimits (ordinaryPull l E r)]
     [PreservesFiniteColimits (ordinaryPull l E r)]
@@ -319,18 +327,7 @@ private lemma ordinaryRoosUnit_comparison (P : Cx l E T none) :
 
 include τ haug hfst hsnd in
 /-- A comparison normalized on good representatives and both Roos coordinates
-preserves the specified completion unit.
-
-Source: Stacks Tags 06YY and 0941
-(blueprint: lem-fix-qcqs-completion-comparison-unit).
-Proof: the two chain coordinates identify the image of the (quotient, zero) lift
-with that same lift on the pulled representative. Compose the representative
-comparison equation with the source unit. Naturality of the derived counit moves
-that unit to the chain level. The normalization of both completion units then gives
-the desired square after the target counit and completion comparison. Exactness
-makes those maps invertible. Finally good representatives localize to the entire
-derived category, so equality of natural transformations on them proves equality
-everywhere. -/
+preserves the specified completion unit. -/
 theorem ordinaryCompletionComparison_unit
     [PreservesFiniteLimits (ordinaryPull l E r)]
     [PreservesFiniteColimits (ordinaryPull l E r)]

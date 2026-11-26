@@ -11,7 +11,16 @@ import WeilConjectures.CategoryTheory.SixFunctors.TransportedTensorComparison
 
 /-! # Defining squares for the explicit native chain associator
 
-Source: Stacks 06YN, 06YU, 0FPT. Transport the explicit chain models through localization.
+Transport the explicit chain models through localization.
+
+## Implementation details
+
+The localization square follows from naturality of the equivalence's localization factor
+applied to the chain square, combined with functoriality.
+
+## References
+
+* Stacks 06YN, 06YU, 0FPQ, 0FPT
 -/
 
 @[expose] public noncomputable section
@@ -44,12 +53,7 @@ variable [HasDerivedCategory.{u + 2}
   (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R)]
 
 -- The ringed cochain monoidal structure needs a deep search for its graded tensor instances.
-/-- The defining chain square commutes with derived localization.
-Source: Stacks 0FPQ, 0FPT
-(blueprint: lem-sf-native-weil-ringed-associator-localization-square).
-
-Proof: apply naturality of the equivalence's localization factor to the chain
-square, then use functoriality to combine its two model maps. -/
+/-- The defining chain square commutes with derived localization. -/
 theorem nativeRingedAssociatorComplex_localization_square
     (P Q N : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) :
     letI := SheafOfModules.isMonoidal_W_independentCoefficients b.R

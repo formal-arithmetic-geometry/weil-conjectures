@@ -8,7 +8,12 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.Canonical.In
 public import WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSupportCoefficientComparison
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Open.IntegralOpenScalarUnitSquare
 
-/-! # Finite evaluation of the open reduction mate -/
+/-! # Finite evaluation of the open reduction mate
+
+## References
+
+* [Stacks, Tag 03DI], [Stacks, Tag 07A7], [Stacks, Tag 0E8I]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -65,9 +70,7 @@ private theorem assemble
   simpa only [Functor.id_map, Functor.comp_map, Functor.id_obj, Functor.comp_obj] using
     c.unit.naturality (rX.hom.app K)
 
-/-- Open scalar comparison in the published finite constant-ring coordinates.
-Source: Stacks 03DI and 0E8I; open mate of fix-prop-coherence
-(blueprint: lem-sf-integral-open-finite-evaluation). -/
+/-- Open scalar comparison in the published finite constant-ring coordinates. -/
 @[irreducible] def openFiniteReduction {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] (n : ℕ) :
     ringedOpen l E j ⋙ scalarReductionDerivedExtension l E Y n ⟶
       scalarReductionDerivedExtension l E X n ⋙
@@ -88,27 +91,7 @@ Source: Stacks 03DI and 0E8I; open mate of fix-prop-coherence
 
 /-- Evaluating the open reduction mate gives the canonical open scalar comparison.
 This assertion involves no proper image, total-limit projection or inverse
-reconstruction unit.
-Source: Stacks 03DI, 07A7 and 0E8I; fix-prop-coherence.proof.md, preservation
-of adjunction units and counits; Step 2 of integral support projection transport
-(blueprint: lem-sf-integral-open-finite-evaluation).
-
-Proof: evaluate the whole-system K-flat equation model.model for j. The ordinary
-comparison is the conjugate of ordinary.comparison; its sectionwise projection
-equation identifies the evaluated pullback comparison with quotient/pullback
-interchange. On a flat-term K-flat representative both maps send a pure tensor
-to the same pulled-back section tensored with its quotient coefficient. Thus the
-localized pullback square is the specified finite scalar/pullback square.
-Take inverse open-adjunction mates of this square. By the definition of
-model.openReduction and OpenEvaluation.transpose, its two horizontal composites
-are the evaluation of model.openReduction followed by reductionEvaluation, and
-openEvaluation followed by open image of reductionEvaluation. The coefficient
-mate on the remaining side is PurCompactSupport.openComparison. The adjunction
-uniqueness defining finiteReductionIso and finiteOpenIso preserves the actual
-units, so transporting that mate gives openFiniteReduction, with precisely the
-orientations displayed below. The mate equivalence and the triangle identities
-give the equality before any limit or completeness argument. For an empty open
-this is the same zero extension calculation, with no nonemptiness requirement. -/
+reconstruction unit. -/
 theorem integralOpenFiniteEvaluation (o : Operations l E)
     (model : RealizationModel l E o) {X Y : Scheme.{u}} (j : X ⟶ Y)
     [IsOpenImmersion j] (K : Integral l E X) (n : ℕ) :

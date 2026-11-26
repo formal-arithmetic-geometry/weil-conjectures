@@ -14,11 +14,15 @@ import WeilConjectures.Algebra.Homology.KFlatTotalTensorModel.KFlatTotalTensorMo
 
 /-! # Derived tensor comparison of reduction from a strict tensor comparison
 
-Source: Stacks 07A4 and 0941.
-
 A strict tensor comparison for the ordinary quotient-system functor descends to a
 tensor comparison for every functor which the quotient-system functor computes on
 flat-term K-flat complexes.
+
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 06YN]
 -/
 
 @[expose] public noncomputable section
@@ -53,8 +57,7 @@ private theorem coefficient_total_eq :
         (completedIntegralCommRingSheafUnrestricted l E W) := by
   rfl
 
-/-- Total tensor products of flat-term K-flat complexes are flat-term K-flat.
-Source: Stacks 06YN, 07A4. -/
+/-- Total tensor products of flat-term K-flat complexes are flat-term K-flat. -/
 theorem flatTermKFlat_totalTensor (P Q : CochainComplex (scalarReductionSource l E W) ℤ)
     (hP : flatTermKFlat l E W P) (hQ : flatTermKFlat l E W Q) :
     flatTermKFlat l E W ((coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
@@ -66,8 +69,7 @@ theorem flatTermKFlat_totalTensor (P Q : CochainComplex (scalarReductionSource l
 
 /-- A strict tensor comparison for the ordinary quotient-system functor descends to a
 derived tensor comparison for any functor which it computes on flat-term K-flat
-complexes. The descended comparison is the strict one on all such representatives.
-Source: Stacks 07A4, proof of lemma-pullback-tensor-product, and 0941. -/
+complexes. The descended comparison is the strict one on all such representatives. -/
 theorem reductionTensor_descent (M : OrdinaryModel l E W)
     (T : CoefficientDerivedSystemTensors l E W)
     (L : DerivedCategory (scalarReductionSource l E W) ⥤ coefficientSequenceDerived l E W)

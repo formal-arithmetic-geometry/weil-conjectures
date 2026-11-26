@@ -15,15 +15,13 @@ public import WeilConjectures.CategoryTheory.Adjunction.ConjugateHomEquiv
 Let `c = (C, c₁, c₂, u)` be an endocorrespondence of `(X, K)` with fixed locus
 `ι : Fix(c) ⟶ C`, `d = ι ≫ c₁ : Fix(c) ⟶ X`, and put `P = K ⊠ D_X K`. The *supported class*
 of `u` is the exceptional adjoint `ũ : Rc_! ℚ̄_ℓ,C ⟶ P` of `ℚ̄_ℓ,C --mate--> 𝓗_c(K) ≅ Rc^! P`
-(`ProEtale.CondensedRing.Correspondence.supportedClass`, blueprint
-`lem-trf-trace-class-diagonal-pairing`, Step 1). The trace class is the exceptional adjoint
-along `d` of
+(`ProEtale.CondensedRing.Correspondence.supportedClass`). The trace class is the exceptional
+adjoint along `d` of
 ```
 h : Rd_! Lι^* ℚ̄_ℓ,C ≅ LΔ^* Rc_! ℚ̄_ℓ,C --LΔ^* ũ--> LΔ^* P ≅ K ⊗ D_X K --ev--> ω_X,
 ```
 the inverse of compact-support base change in the fixed square, `LΔ^*` of the supported class
-and the evaluation (`ProEtale.CondensedRing.Correspondence.traceClass_eq_homEquiv`, blueprint
-`lem-trf-trace-class-diagonal-pairing`, Step 2).
+and the evaluation (`ProEtale.CondensedRing.Correspondence.traceClass_eq_homEquiv`).
 
 -/
 
@@ -73,9 +71,9 @@ namespace Correspondence
 
 variable (c : Correspondence ℓ K)
 
-/-- The *supported class* `ũ : Rc_! ℚ̄_ℓ,C ⟶ K ⊠ D_X K` of the coefficient map `u` (blueprint
-`lem-trf-trace-class-diagonal-pairing`, Step 1): the exceptional adjoint of the mate of `u`
-read through the external duality isomorphism `𝓗_c(K) ≅ Rc^! (K ⊠ D_X K)`. -/
+/-- The *supported class* `ũ : Rc_! ℚ̄_ℓ,C ⟶ K ⊠ D_X K` of the coefficient map `u`: the
+exceptional adjoint of the mate of `u` read through the external duality isomorphism
+`𝓗_c(K) ≅ Rc^! (K ⊠ D_X K)`. -/
 noncomputable def supportedClass :
     (boundedConstructibleLowerShriek ℓ c.support).obj (𝟙_ _) ⟶
       externalProduct ℓ K (verdierDual ℓ K) :=
@@ -83,16 +81,16 @@ noncomputable def supportedClass :
     (c.mate ≫ c.verdierDualityIso.hom)
 
 /-- The mate of `u`, read through the external duality isomorphism, is the exceptional adjoint
-of the supported class (blueprint `lem-trf-trace-class-diagonal-pairing`, Step 1). -/
+of the supported class. -/
 lemma mate_comp_verdierDualityIso_hom :
     c.mate ≫ c.verdierDualityIso.hom =
       (boundedConstructibleUpperShriekAdjunction ℓ c.support).homEquiv _ _
         c.supportedClass := by
   rw [supportedClass, Equiv.apply_symm_apply]
 
-/-- **The supported class is the Künneth–Verdier inverse of the class of `u`** (blueprint
-`lem-trf-trace-class-diagonal-pairing`, Step 1): `ũ = κ_{K,K}⁻¹ ∘ [u]`, where `[u]` is the class of
-`u` read through `Lc₂^* = Lc^* Lp₂^*` and `Rc₁^! = Rc^! Rp₁^!`. -/
+/-- **The supported class is the Künneth–Verdier inverse of the class of `u`**:
+`ũ = κ_{K,K}⁻¹ ∘ [u]`, where `[u]` is the class of `u` read through `Lc₂^* = Lc^* Lp₂^*` and
+`Rc₁^! = Rc^! Rp₁^!`. -/
 lemma supportedClass_eq :
     c.supportedClass =
       (Verdier.correspondenceClassEquiv (boundedConstructibleUpperShriekAdjunction ℓ c.support)
@@ -109,7 +107,7 @@ lemma supportedClass_eq :
 variable {c} (F : c.FixedLocus)
 
 /-- The morphism `h : Rd_! Lι^* ℚ̄_ℓ,C ⟶ ω_X` whose exceptional adjoint along `d` is the trace
-class (blueprint `lem-trf-trace-class-diagonal-pairing`, Step 2): the inverse of compact-support
+class: the composite of the inverse of compact-support
 base change `LΔ^* Rc_! ≅ Rd_! Lι^*` in the fixed square, `LΔ^*` of the supported class, the
 identification `LΔ^* (K ⊠ D_X K) ≅ K ⊗ D_X K` and the evaluation. -/
 noncomputable def diagonalSpecialization :
@@ -120,10 +118,9 @@ noncomputable def diagonalSpecialization :
     (boundedConstructibleUpperStar _ ℓ (diag X)).map c.supportedClass ≫
     (diagUpperStarExternalProductIso ℓ K _).hom ≫ (ihom.ev K).app (dualizingComplex' ℓ X)
 
-/-- **The trace class is an exceptional adjoint along the fixed locus** (blueprint
-`lem-trf-trace-class-diagonal-pairing`, Step 2): `Tr_c(u)` is the exceptional adjoint along
-`d : Fix(c) ⟶ X` of `diagonalSpecialization`, read through `ℚ̄_ℓ,Fix(c) ≅ Lι^* ℚ̄_ℓ,C` and the
-composition isomorphism `Rd^! ω_X ≅ ω_Fix(c)`. -/
+/-- **The trace class is an exceptional adjoint along the fixed locus**: `Tr_c(u)` is the
+exceptional adjoint along `d : Fix(c) ⟶ X` of `diagonalSpecialization`, read through
+`ℚ̄_ℓ,Fix(c) ≅ Lι^* ℚ̄_ℓ,C` and the composition isomorphism `Rd^! ω_X ≅ ω_Fix(c)`. -/
 theorem traceClass_eq_homEquiv :
     c.traceClass F =
       (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ F.ι)).hom ≫

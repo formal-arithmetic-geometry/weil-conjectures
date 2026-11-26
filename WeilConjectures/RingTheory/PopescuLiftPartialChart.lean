@@ -18,8 +18,17 @@ import all WeilConjectures.RingTheory.SmoothAtPrimeDifferentialsDimension
 
 /-! # The partial equation chart in Popescu lifting
 
-Source: Stacks Project, Tag 07CP, the presentation and equation count for D_k.
-(blueprint: lem-weil-pbc-popescu-lift-partial-chart-dimension).
+We define the partial chart `D_k` of the Popescu lifting algebra, an explicit quotient with one
+equation per auxiliary variable, and show that its special fibre has dimension `n` at primes
+containing `π`, so that it is flat by the equation-count criterion.
+
+## Implementation details
+
+`partial_chart_fibre_dimension` uses no flatness or equality of annihilators.
+
+## References
+
+* [Stacks, Tag 07CP] (the presentation and equation count for `D_k`, applying Tag 00ST)
 -/
 
 @[expose] public section
@@ -41,7 +50,7 @@ def chartEquation (d : PopescuLiftPresentation R Cbar π) (k : Fin d.r)
 abbrev chartIdeal (d : PopescuLiftPresentation R Cbar π) (k : Fin d.r) :=
   Ideal.span (Set.range (d.chartEquation k))
 
-/-- The partial chart is an explicit quotient, with no chosen existence witness. -/
+/-- The partial chart, as an explicit quotient of the polynomial ring. -/
 abbrev chartAlgebra (d : PopescuLiftPresentation R Cbar π) (k : Fin d.r) :=
   ULift.{c} (d.polynomial ⧸ d.chartIdeal k)
 
@@ -99,7 +108,8 @@ theorem equation_key_identity [Algebra R Cbar]
       (MvPolynomial.C π) ^ 2 * d.includeX (d.g k l) at hrel
   linear_combination hrel
 
-/-- Invertibility of a_k and the key identity kill every original equation locally. -/
+/-- At a prime of the lifting algebra not containing `a_k`, every original equation vanishes
+in the partial chart local ring. -/
 theorem chart_original_equation_eq_zero [Algebra R Cbar]
     (d : PopescuLiftPresentation R Cbar π) (hd : d.Prepared)
     (k : Fin d.r) (q : PrimeSpectrum d.liftingAlgebra)
@@ -193,24 +203,7 @@ def finiteChartEquiv (d : PopescuLiftPresentation R Cbar π) (k : Fin d.r) :
       exact ((MvPolynomial.renameEquiv R finSumFinEquiv).symm_apply_apply _).symm)).trans
     (ULift.algEquiv (R := R)).symm
 
-/-- The smooth special fibre of the partial chart has dimension n at the chosen prime.
-
-Source: Stacks Project, Tag 07CP (lemma-lifting), the calculation of D_k/pi D_k.
-(blueprint: lem-weil-pbc-popescu-lift-partial-chart-dimension).
-
-Proof: Pull the chosen prime back along finiteChartEquiv and chartMap. Its contraction
-contains pi, so the residue field B is a compatible R/pi^2-algebra killing pi. The fibre
-prime avoids the image t of a_k. The partial-chart polynomial-model theorem identifies
-the localization at t with a polynomial algebra in card(E_k) variables over the base
-change to B of the smooth reduced coefficient chart. Base change Prepared.differentials
-using tensorKaehlerEquiv, and apply the polynomial differential decomposition. Transfer
-the resulting basis through the polynomial model using differential base change for its
-formally etale algebra equivalence. At a prime Q above the fibre point, base change this
-basis to the residue field; its rank is (n-card(E_k))+card(E_k)=n by Prepared.card_le.
-The smooth-over-field differential dimension theorem gives dimension n at Q. The spectrum
-map of localization at t is an open embedding, which preserves dimension at a point,
-so the original fibre point also has dimension n. No flatness or equality of annihilators
-is used. -/
+/-- The smooth special fibre of the partial chart has dimension n at the chosen prime. -/
 theorem partial_chart_fibre_dimension [Algebra R Cbar]
     [IsScalarTower R (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]
     (d : PopescuLiftPresentation R Cbar π) (hd : d.Prepared)
@@ -300,10 +293,8 @@ theorem partial_chart_fibre_dimension [Algebra R Cbar]
   rw [← hQ, ← Algebra.dimAt_openEmbedding
     (PrimeSpectrum.localization_away_isOpenEmbedding L t) Q, ← hdim, hfin]
 
-/-- Apply equation-count flatness to the finite presentation of the partial chart.
-
-Source: Stacks Project, Tag 07CP, applying Tag 00ST to D_k.
-(blueprint: lem-weil-pbc-popescu-lift-partial-chart-dimension). -/
+/-- At a prime containing `π` but not `a_k`, the local ring of the partial chart is flat over
+`R`. -/
 theorem partial_chart_flat [Algebra R Cbar] [IsNoetherianRing R]
     [IsScalarTower R (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]
     (d : PopescuLiftPresentation R Cbar π) (hd : d.Prepared)

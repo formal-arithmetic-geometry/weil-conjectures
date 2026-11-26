@@ -23,8 +23,21 @@ import Mathlib.Algebra.Order.BigOperators.GroupWithZero.Finset
 /-!
 # A common denominator lies in Jacobson radicals
 
-Source: Stacks Project, Varieties, Lemma 33.37.8 (Tag 09N5)
-(blueprint: lem-sc-jacobson-denominator-function-field).
+For a domain `A` with fraction field `K` and finitely many Noetherian one-dimensional semilocal
+domains `Bᵢ ⊆ K` such that each `A ⊗ Bᵢ → K` is surjective, some nonzero element of `A` has
+inverse in the Jacobson radical of every `Bᵢ`.
+
+## Implementation details
+
+One reduces to the integral closures, which are semilocal Dedekind, and then to their
+localizations at maximal ideals, which are discrete valuation rings. For finitely many
+valuations, an element of `A` with negative valuation at all of them is built inductively: if
+`x` is negative at all but the last and `y` is negative at the last, then `x^N + y` is negative
+everywhere for large `N`.
+
+## References
+
+* [Stacks, Tag 09N5]
 -/
 
 @[expose] public section
@@ -195,38 +208,10 @@ private theorem exists_inv_mem_maximalIdeal_of_tensor_surjective
   simpa only [hd] using hval
 
 
-/-- Source: Stacks Project, Varieties, Lemma 33.37.8 (Tag 09N5).
-For a domain `A` with fraction field `K` and a finite family of Noetherian one-dimensional
+/-- For a domain `A` with fraction field `K` and a finite family of Noetherian one-dimensional
 semilocal domains `B i` in `K` with fraction field `K`, if each canonical multiplication map
 `A ⊗[ℤ] B i → K` is surjective, then a nonzero element of `A` has inverse in the Jacobson
-radical of every `B i`.
-
-Proof (Stacks Tag 09N5):
-1. Replace each `B i` by its integral closure `B' i` in `K`. The tensor map remains
-   surjective since its image contains the old image. By
-   `lem-sc-semilocal-dim-one-conductor`, each `B' i` is semilocal Dedekind. If a nonzero
-   `x : A` has inverse in their radicals, that conductor lemma with `y = 1` gives positive
-   exponents `n i` with `x ^ (-n i)` in `B i`. Replace `x` by the power whose exponent is
-   the product of these finitely many exponents. Its inverse then belongs to every `B i`
-   and remains in every radical of `B' i`. For a maximal ideal `m` of `B i`, integral
-   lying-over (`lem-weil-pbc-integral-injective-lying-over`) gives a prime above `m` in
-   `B' i`. A maximal ideal containing that prime contracts to `m`, so the inverse lies
-   in `m`. This descends radical membership to `B i`.
-2. By `lem-sc-semilocal-dedekind-dvr-reduction`, replace every semilocal Dedekind ring
-   by its finitely many localizations at maximal ideals. These are DVRs with fraction
-   field `K`, their tensor maps remain surjective, and membership in all their maximal
-   ideals is equivalent to membership in the original Jacobson radical.
-3. For one DVR, `lem-sc-dvr-tensor-surjective-negative-valuation` gives a nonzero element
-   of `A` with negative valuation: otherwise `A` lies in the DVR and the tensor map
-   cannot surject onto `K`. Induct on the finite family of valuations. Choose nonzero
-   `x` negative at all but the last valuation. If it is negative there too, finish.
-   Otherwise choose nonzero `y` negative at the last valuation by the base case.
-   Using `lem-sc-dvr-valuation-arithmetic`, replace `x` by a sufficiently large positive
-   power so its valuations at all earlier places are smaller than those of `y`.
-   The unequal-value sum rule makes `x + y` negative at every place and nonzero.
-   Its inverse has positive valuation, hence lies in every maximal ideal. For the empty
-   family take `1 : A`.
-(blueprint: lem-sc-jacobson-denominator-function-field) -/
+radical of every `B i`. -/
 theorem exists_inv_mem_jacobson_of_tensor_surjective
     {A : Type u} {K : Type v} [CommRing A] [IsDomain A] [Field K]
     [Algebra A K] [IsFractionRing A K]

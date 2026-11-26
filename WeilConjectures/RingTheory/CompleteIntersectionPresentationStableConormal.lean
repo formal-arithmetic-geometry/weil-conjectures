@@ -21,7 +21,23 @@ import WeilConjectures.RingTheory.RegularSequenceConormal
 /-!
 # Stable conormal comparison with a complete intersection presentation
 
-Source: Stacks Project, Algebra, proof of Lemma 00SC, last paragraph, using Lemma 00S6.
+If a principal localization `S_g` of `S = k[x_1, …, x_n]/I` has a complete intersection
+presentation `k[y_1, …, y_m]/(f_1, …, f_t)` of the expected dimension, then at a prime `q` of
+`S_g` the stable conormal module `(I/I²)_q × S_q^m` is finite free.
+
+## Implementation details
+
+The equation classes form a basis of `J/J²` for `J = (f_1, …, f_t)`: local independence at
+every maximal prime comes from the regular sequence conormal theorem, and the coefficients are
+then globally in `J`. The principal localization comparison identifies `(I/I²)_q × S_q^m` with
+`(S_q ⊗ J/J²) × S_q^n`, and the two finite powers are joined. No local free-summand
+cancellation is used.
+
+## References
+
+* [Stacks, Tag 00SC], last paragraph of the proof
+* [Stacks, Tag 00S6]
+* [Stacks, Tag 00SV] (3)
 -/
 
 @[expose] public section
@@ -129,8 +145,7 @@ private theorem coefficients_mem_of_locally_regular (D : Type u) [CommRing D]
     exact Submodule.mem_top
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The equation classes form a basis when the sequence is regular at every containing prime.
-Source: Stacks Project, Algebra, Tag 00SV (3), the local independence argument. -/
+/-- The equation classes form a basis when the sequence is regular at every containing prime. -/
 private theorem basis_of_locally_regular (D : Type u) [CommRing D]
     (c : ℕ) (f : Fin c → D)
     (hreg : ∀ (p : Ideal D) [p.IsPrime], Ideal.span (Set.range f) ≤ p →
@@ -165,31 +180,7 @@ private theorem basis_of_locally_regular (D : Type u) [CommRing D]
   exact ⟨b⟩
 
 /-- The local conormal module becomes finite free after adding the variables of a
-complete intersection presentation of a principal localization.
-
-Source: Stacks Project, Algebra, Lemma 00SC (lemma-lci), last paragraph of the proof,
-through the equation from Lemma 00S6 (lemma-conormal-module-localize).
-(blueprint: lem-weil-pbc-complete-intersection-presentation-stable-conormal)
-
-Proof:
-1. The map Q/J → S_g → S_q makes Q/J nontrivial. The spectrum homeomorphism
-induced by e transfers the dimension identity to Q/J. Since t ≤ m, it becomes
-`dim Spec(Q/J) + t = m`.
-2. Apply the global complete intersection local regular sequence theorem at every
-prime of Q containing J. The regular sequence conormal theorem gives a basis for
-the conormal of the extended ideal at each such prime.
-3. The equation classes span J/J². For a relation in J², local independence in step 2
-puts each coefficient in the extended ideal at every maximal prime containing J.
-At maximal primes not containing J the extended ideal is the whole localized ring.
-Ideal.mem_of_localization_maximal therefore puts each coefficient in J. Lifting
-quotient coefficients shows the equation classes are linearly independent globally.
-Together with spanning this constructs a basis of J/J² over Q/J with index Fin t.
-4. The principal localization comparison, base changed to S_q, identifies
-`(I/I²)_q × S_q^m` with `(S_q tensor_(Q/J) J/J²) × S_q^n`.
-Base change the basis of step 3 to S_q. Tensoring a finite power of Q/J gives
-S_q^t. Compose these equivalences, then join the two finite powers using
-`Fin t ⊕ Fin n ≃ Fin (t+n)`. No local free-summand cancellation is used.
--/
+complete intersection presentation of a principal localization. -/
 theorem stable_conormal_of_completeIntersection_presentation
     {k : Type u} [Field k] (n : ℕ) (I : Ideal (MvPolynomial (Fin n) k))
     (q : PrimeSpectrum (MvPolynomial (Fin n) k ⧸ I))

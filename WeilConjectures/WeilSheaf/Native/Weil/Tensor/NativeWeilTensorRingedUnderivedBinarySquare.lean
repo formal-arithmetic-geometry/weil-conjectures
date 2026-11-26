@@ -68,7 +68,12 @@ import all WeilConjectures.Algebra.Homology.InternalHom
 import all WeilConjectures.Algebra.Homology.HomComplexComponents
 import all WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 
-/-! # The binary square for normalized native tensor complexes -/
+/-! # The binary square for normalized native tensor complexes
+
+## References
+
+* Stacks Project, Tags 06YS and 06YU
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -245,19 +250,7 @@ private theorem binaryMate_forget
 
 -- Compare the two site tensor instances through the bridge.
 -- The normalized mates involve both concrete tensor constructions.
-/-- The two evaluation-normalized underived tensor comparisons form a binary square.
-Source: Stacks 06YS and 06YU
-(blueprint: new-sf-native-weil-tensor-ringed-underived-binary-square).
-
-Proof: invert all tensor comparisons and apply the ordinary tensor--Hom
-adjunction. Substitute the native uncurrying equation, `he`, and the ordinary
-uncurrying equation. Naturality of the bridge square moves the adjunct across
-its component. Its Hom square identifies the two remaining Hom maps. The
-restriction evaluation equation identifies the mate of its tensorator, and
-its symmetry equation cancels the braidings introduced by reversing the tensor
-parameter. Injectivity of the adjunction and cancellation of the isomorphisms
-give the displayed square. There are only two underived factors here; no
-complexes, signs, or associator calculations occur. -/
+/-- The two evaluation-normalized underived tensor comparisons form a binary square. -/
 theorem native_weil_tensor_ringed_underived_binary_square
     (d : NativeOrdinaryRingedTensorUnderivedData D.b)
     (P Q : ProEtaleWeilSheaf k₀ l X) :

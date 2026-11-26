@@ -15,10 +15,8 @@ public import WeilConjectures.SmoothPurity.GeneralAlgebraicallyClosedCoefficient
 /-!
 # Compatibility predicates for the former coefficient model
 
-Source: Weil conjectures blueprint, `sec-smooth-purity/sk-prop-sf-pf-reduction`,
-order 1881. These declarations retain their original meanings for existing consumers.
+These declarations retain their original meanings for existing consumers.
 They do not define perfectness for condensed coefficients.
-(blueprint: def-weil-legacy-site-perfect-compatibility).
 
 ## Main definitions
 

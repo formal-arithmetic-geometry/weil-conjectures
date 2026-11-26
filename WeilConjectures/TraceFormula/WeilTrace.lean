@@ -208,11 +208,8 @@ lemma categoricalTrace_frobeniusStalk_congr {F G : WeilSheaf ℓ e} (i : F ≅ G
     (B := WeilSheaf.frobeniusStalk ℓ n x hx G) ((WeilSheaf.powStalkFunctor ℓ n x hx).mapIso i)).symm
 
 /-- The trace `Tr(Fr_{x̄,n} | F_x̄)` of the `n`-th Frobenius operator on the stalk of a Weil sheaf
-at a geometric point `x̄` with `x̄ ≫ eⁿ = σⁿ ≫ x̄`: the categorical trace computed with a right
-dual chosen from `Nonempty (HasRightDual F_x̄)` (`traceOrZero`, `weilSheafStalkTrace_eq`),
-and `0` when the stalk has no right dual. The stalks of constructible sheaves are
-finite-dimensional over `ℚ̄_ℓ`, hence dualizable, so the second case does not occur for the
-homology sheaves of the trace formula. -/
+at a geometric point `x̄` with `x̄ ≫ eⁿ = σⁿ ≫ x̄`: the categorical trace, and `0` when the stalk
+has no right dual. -/
 noncomputable def weilSheafStalkTrace (F : WeilSheaf ℓ e) :
     End (𝟙_ (GeometricPointMod ℓ (AlgebraicClosure k))) :=
   traceOrZero (WeilSheaf.frobeniusStalk ℓ n x hx F).str.hom
@@ -341,8 +338,7 @@ lemma WeilSheaf.unit_str :
   IsoAlgebra.mk_str _ _
 
 /-- The composition isomorphism `(f.left ≫ g.left)^* ≅ g.left^* ⋙ f.left^*`, seen as an
-isomorphism out of `((f ≫ g).left)^*`, is its transport along `(f ≫ g).left = f.left ≫ g.left`.
-Stating it propositionally keeps the kernel from unfolding the pullbacks. -/
+isomorphism out of `((f ≫ g).left)^*`, is its transport along `(f ≫ g).left = f.left ≫ g.left`. -/
 lemma upperStarComp_left_eq (f g : X ⟶ X) :
     (upperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left :
       ((f ≫ g).left)^*⟦Profinite.padicAlgClRingObj ℓ⟧ ≅ _) =
@@ -374,9 +370,7 @@ lemma WeilSheaf.pow_unit (n : ℕ) :
   exact powSuccStr_εIso_symm_hom ℓ e n
 
 /-- The Frobenius on the stalk of the unit Weil sheaf, conjugated by the unit comparison
-`ε_x : Λ ≅ x̄^* Λ`, is the identity: by `Iso.hom_comp_whiskerLeft_comp_inv_eq` it is
-`τ⁻¹ ≫ ε_σ⁻¹` at the unit, for `τ = upperStarIsoIdOfIsSepClosed σ`, and
-`τ = ε_σ⁻¹` there by `upperStarIsoIdOfIsSepClosed_hom_app_unit`. -/
+`ε_x : Λ ≅ x̄^* Λ`, is the identity. -/
 lemma WeilSheaf.stalkFunctor_obj_unit_str_hom {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (σ : Spec (.of Ω) ⟶ Spec (.of Ω)) (x : Spec (.of Ω) ⟶ X.left)
     (hx : x ≫ e.hom.left = σ ≫ x) :
@@ -400,8 +394,7 @@ lemma WeilSheaf.stalkFunctor_obj_unit_str_hom {Ω : Type u} [Field Ω] [IsSepClo
   rw [← upperStarIsoIdOfIsSepClosed_hom_app_unit, Iso.inv_hom_id_app]
   rfl
 
-/-- The Frobenius on the stalk of the unit Weil sheaf has trace `1`: conjugated by the unit
-comparison `ε_x : Λ ≅ x̄^* Λ` it is the identity (`WeilSheaf.stalkFunctor_obj_unit_str_hom`). -/
+/-- The Frobenius on the stalk of the unit Weil sheaf has trace `1`. -/
 lemma WeilSheaf.traceOrZero_stalkFunctor_obj_unit_str_hom {Ω : Type u} [Field Ω]
     [hΩ : IsSepClosed Ω] (σ : Spec (.of Ω) ⟶ Spec (.of Ω)) (x : Spec (.of Ω) ⟶ X.left)
     (hx : x ≫ e.hom.left = σ ≫ x) :
@@ -467,11 +460,7 @@ lemma weilStalkTraceAlternatingSum_unit_eq_weilSheafStalkTrace (n : ℕ)
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] in
-/-- The unit Weil sheaf `ℚ̲̄_ℓ,X` has trace `1` at every point: its stalk is the unit, on which the
-Frobenius acts trivially. By `WeilSheaf.pow_unit` the stalk is that of the unit Weil sheaf for
-`e^{n+1}`, whose Frobenius has trace `1`
-(`WeilSheaf.traceOrZero_stalkFunctor_obj_unit_str_hom`). This gives
-`weilStalkTraceAlternatingSum_weilUnit`, the normalization test N1. -/
+/-- The unit Weil sheaf `ℚ̲̄_ℓ,X` has trace `1` at every point of degree `n + 1`. -/
 lemma weilSheafStalkTrace_unit (n : ℕ) (x : Spec (.of (AlgebraicClosure k)) ⟶ X.left)
     (hx : x ≫ (e.pow (n + 1)).hom.left = ((geometricFrobeniusField k).pow (n + 1)).hom ≫ x) :
     weilSheafStalkTrace ℓ (n + 1) x hx (WeilSheaf.unit ℓ e) = 1 := by
@@ -480,9 +469,7 @@ lemma weilSheafStalkTrace_unit (n : ℕ) (x : Spec (.of (AlgebraicClosure k)) �
   exact WeilSheaf.traceOrZero_stalkFunctor_obj_unit_str_hom ℓ _ (hΩ := _) _ x hx
 
 /-- The canonical Weil unit has local trace `1` at every point of degree `n ≠ 0`: its stalk is
-`ℚ̄_ℓ` in degree `0`, on which the Frobenius acts trivially (normalization test N1). This is the
-unit stalk trace used in the proof of the twisted variant of blueprint
-`corollary-point-counting-zeta-function--2`. -/
+`ℚ̄_ℓ` in degree `0`, on which the Frobenius acts trivially (normalization test N1). -/
 theorem weilStalkTraceAlternatingSum_weilUnit (n : ℕ) [NeZero n]
     (x : Spec (.of (AlgebraicClosure k)) ⟶ X.left)
     (hx : x ≫ (e.pow n).hom.left = ((geometricFrobeniusField k).pow n).hom ≫ x) :

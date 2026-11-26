@@ -15,8 +15,18 @@ import all WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearTensorEvaluati
 
 /-! # Components of normalized coefficient evaluation projection
 
-Source: Stacks 07A4, 08J9 and 0941; Zheng Construction 4.1.
-(blueprint: lem-coef-normalized-evaluation-projection-components).
+We show that every finite evaluation of the unit-defined normalized projection is invertible.
+
+## Implementation details
+
+Coefficient normalization is converted to semilinear normalization using the sectionwise
+characterization of the actual transition and the scalar adjunction. The semilinear Cartesian
+projection theorem is then applied to the actual reduction data and evaluated at `q`.
+
+## References
+
+* [Zheng, Construction 4.1, Proposition 4.17(a)]
+* [Stacks, Tags 07A4, 08J9, 0941]
 -/
 
 @[expose] public section
@@ -149,19 +159,7 @@ private noncomputable def evaluationModel
 attribute [-instance] SemilinearSections.hasDerived SemilinearSections.moduleAbelian in
 /-- Every finite evaluation of the unit-defined normalized projection is invertible.
 This is the componentwise finite-prefix calculation; the remaining joint detection
-of isomorphisms is proved in `coefficientNormalizedEvaluationProjection`.
-Source: Zheng Construction 4.1 and Proposition 4.17(a); Stacks 07A4 and 08J9;
-the component calculation in step 3 of
-`lem-coef-normalized-evaluation-projection`.
-(blueprint: lem-coef-normalized-evaluation-projection-components).
-
-Proof: convert coefficient normalization to semilinear normalization using the
-actual transition's sectionwise characterization and the scalar adjunction.
-Identify the canonical total evaluation comparison with the specified coefficient
-comparison, and invert the representative square supplied by `hE` to obtain the
-semilinear comparison model. Apply the existing semilinear Cartesian projection
-theorem to the actual reduction data and adjunction, then map its isomorphism
-by evaluation at `q`. -/
+of isomorphisms is proved in `coefficientNormalizedEvaluationProjection`. -/
 theorem coefficientNormalizedEvaluationProjection_components
     (R : CoefficientDerivedSystemReduction l E W)
     (hE : CoefficientEvaluationTensorNormalization l E W R)

@@ -16,9 +16,19 @@ import WeilConjectures.RingTheory.FilteredColimitOfFactorization
 
 /-! # Local-ring identifications with w-local target
 
-Source: blueprint, proper base change, `theorem-proper-base-change-classical-pro`, lemma
-`theorem-pro-etale-refinements-weakly-etale`
-(blueprint: theorem-pro-etale-refinements-weakly-etale).
+A ring map identifying all local rings and having w-local target presents the target as a
+filtered colimit of finite products of principal localizations of the source.
+
+## Implementation details
+
+Given a finitely presented `P` and `α : P → B`, inverting the stalk isomorphism at a prime `q`
+and descending gives `β : P → A_f`; clearing the finitely many generator equalities gives a
+factorization `P → A_f → B_g` with `g ∉ q`. The closed points of `Spec B` are profinite, so a
+finite disjoint clopen refinement subordinate to the `D(g)` exists; pulled back along the map to
+the closed point of the connected component, it gives complete orthogonal idempotents `e_i` with
+`B ≃ ∏ B/(1 - e_i)`. Each `g_i` is a unit in `B/(1 - e_i)`, so the local factorizations patch to
+`P → ∏ A_fᵢ → B`. Finite products of principal localizations are finitely presented, and
+`CommAlgCat.exists_filtered_colimit_of_factorization` produces the filtered colimit.
 -/
 
 @[expose] public section
@@ -32,8 +42,7 @@ namespace Algebra
 open scoped BigOperators
 
 /-- Descend the inverse stalk map to a principal neighbourhood, then clear the finitely
-many generator equalities. Source: blueprint theorem-pro-etale-refinements-weakly-etale,
-proof paragraphs 1--2 (blueprint: theorem-pro-etale-refinements-weakly-etale). -/
+many generator equalities. -/
 private theorem local_factorization
     (A B P : Type u) [CommRing A] [CommRing B] [CommRing P]
     [Algebra A B] [Algebra A P] [FinitePresentation A P]
@@ -128,8 +137,7 @@ private theorem local_factorization
   exact AlgHom.congr_fun hgen y
 
 /-- Pull a disjoint clopen refinement on the closed points back along the continuous
-closed-specialization map. Source: blueprint theorem-pro-etale-refinements-weakly-etale,
-proof paragraph 2 (blueprint: theorem-pro-etale-refinements-weakly-etale). -/
+closed-specialization map. -/
 private theorem clopen_refinement
     (B : Type u) [CommRing B] [IsWLocalRing B]
     (ι : Type u) (O : ι → TopologicalSpace.Opens (PrimeSpectrum B))
@@ -176,8 +184,7 @@ private theorem clopen_refinement
     exact hxc.mem_open (O (r i)).isOpen (hr i hcV)
 
 /-- Patch neighbourhood factorizations using the Chinese remainder isomorphism associated
-with a finite clopen partition. Source: blueprint theorem-pro-etale-refinements-weakly-etale,
-proof paragraph 2 (blueprint: theorem-pro-etale-refinements-weakly-etale). -/
+with a finite clopen partition. -/
 private theorem patch_factorization
     (A B P : Type u) [CommRing A] [CommRing B] [CommRing P]
     [Algebra A B] [Algebra A P]
@@ -268,43 +275,7 @@ private theorem patch_factorization
 
 /-- A ring map identifying all prime localizations and having w-local target presents that
  target as a filtered colimit of finite products of principal localizations of the source.
- No w-locality of the source or of the map is assumed.
-
-Source: blueprint, proper base change, `theorem-proper-base-change-classical-pro`, lemma
-`theorem-pro-etale-refinements-weakly-etale`
-(blueprint: theorem-pro-etale-refinements-weakly-etale).
-
-Proof:
-1. Given a finitely presented algebra `P` and `α : P → B`, invert the stalk isomorphism
-   at each prime `q`. Apply `factors_through_principal_localization` to descend the resulting
-   map `P → A_p` to `β : P → A_f`, with `f` outside the contracted prime `p`.
-2. Map `A_f` canonically to `B` localized at `g₀ = algebraMap A B f`. Its composite with
-   `β` agrees with `α` in `B_q`, by localization extensionality. Choose a finite polynomial
-   presentation of `P`. For each generator, write the difference as a fraction in `B_g₀`;
-   its numerator vanishes in `B_q`, hence has an annihilator outside `q`. Multiply these
-   annihilators with `g₀` to obtain `g` outside `q`. After mapping to `B_g`, all differences
-   vanish by unit cancellation. Equality on generators and surjectivity give the desired
-   factorization `P → A_f → B_g`.
-3. The proved homeomorphism `WLocalSpace.closedPointsHomeomorph` makes the closed points
-   profinite. Mathlib's finite disjoint clopen refinement theorem gives a finite partition
-   subordinate to the neighbourhoods `D(g)`. Pull it back to the spectrum along the
-   continuous map sending a point to the closed point of its connected component.
-   A point specializes to that closed point, so each pulled-back part stays inside its
-   selected open. This includes the empty partition of the empty spectrum.
-4. Associate idempotents `e_i` to the clopen parts. Disjointness and injectivity of the
-   idempotent/basic-open correspondence give orthogonality. The sum is idempotent and
-   belongs to no prime, so its basic open is `D(1)` and the same injectivity gives sum one.
-   `CompleteOrthogonalIdempotents.bijective_pi` identifies `B` with `∏ B/(1-e_i)`.
-5. Each selected `g_i` becomes a unit in `B/(1-e_i)`: otherwise a maximal ideal containing
-   it contracts to a prime in `D(e_i)`, contradicting `D(e_i) ⊆ D(g_i)`. Extend the local
-   maps by the localization universal property and compose their product with the inverse
-   Chinese remainder isomorphism. This gives `P → ∏ A_fᵢ → B` with composite `α`.
-6. Principal localizations are finitely presented by
-   `IsLocalization.Away.finitePresentation`; their finite products are finitely presented
-   by `Algebra.FinitePresentation.pi`, including the empty product. Transport along algebra
-   equivalences, and let `E` be the set of all algebras equivalent to these products.
-7. Apply `CommAlgCat.exists_filtered_colimit_of_factorization` to `E` and step 5. Its small
-   filtered diagram and colimit cocone give exactly `IsIndPrincipalZariski A B`. -/
+ No w-locality of the source or of the map is assumed. -/
 theorem isIndPrincipalZariski_of_bijective_localRingHom
     (A B : Type u) [CommRing A] [CommRing B] [Algebra A B] [IsWLocalRing B]
     (hlocal : ∀ (q : Ideal B) [q.IsPrime],

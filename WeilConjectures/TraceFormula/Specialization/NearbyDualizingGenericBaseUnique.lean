@@ -14,7 +14,7 @@ public import WeilConjectures.TraceFormula.Specialization.TraitModelOfGenericBas
 
 The two properties of a family of dualizing maps over generic bases
 (`NearbyCyclesModel.NearbyDualizingDataOfGenericBase`) determine it, as over a base field
-(`TraceFormula.Specialization.NearbyDualizingUnique`, blueprint `prose-E-15`):
+(`TraceFormula.Specialization.NearbyDualizingUnique`):
 
 * for a proper model whose geometric generic fibre is all of `X₁ ×_F Spec Ω`, the proper exchange
   `χ_a` along `ε₀ = (Spec Ω ⟶ η ⟶ Spec F)` is invertible
@@ -49,8 +49,7 @@ variable {k' : Type u} [Field k'] {ℓ : ℕ} [Fact ℓ.Prime] [IsSepClosed k']
 
 /-- **Uniqueness of the dualizing maps of proper models over a generic base**: for a proper
 model whose geometric generic fibre is all of `X₁ ×_F Spec Ω`, two families of dualizing maps
-agree, both being determined by the trace property through the invertible proper exchange `χ_a`
-along `ε₀ = (Spec Ω ⟶ η ⟶ Spec F)`. -/
+agree. -/
 theorem θ_eq_of_isProper (D₁ D₂ : NearbyDualizingDataOfGenericBase k' ℓ)
     {F : Type u} [Field F] [Fact (ringChar F).Prime] [Fact (ringChar F ≠ ℓ)]
     {X₁ : Over (Spec (.of F))} [LocallyOfFiniteType X₁.hom] [QuasiCompact X₁.hom]
@@ -69,13 +68,8 @@ theorem θ_eq_of_isProper (D₁ D₂ : NearbyDualizingDataOfGenericBase k' ℓ)
   rw [← h₂, cancel_epi] at h₁
   exact eq_of_map_comp_trace_eq ℓ X' h₁
 
-/-- **Uniqueness of the dualizing maps over generic bases** (blueprint
-`prose-E-15`): two families of dualizing maps of nearby cycles over generic bases
-agree. The model is an open sub-model of a proper model with full geometric generic fibre
-(`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_isProper_openSubmodel`), on which they agree
-(`NearbyCyclesModel.NearbyDualizingDataOfGenericBase.θ_eq_of_isProper`), and open restriction
-determines the dualizing map of the sub-model, the exchange `α_j` and the identification `ρ`
-being invertible. -/
+/-- **Uniqueness of the dualizing maps over generic bases**:
+two families of dualizing maps of nearby cycles over generic bases agree. -/
 theorem θ_eq (D₁ D₂ : NearbyDualizingDataOfGenericBase k' ℓ)
     {F : Type u} [Field F] [Fact (ringChar F).Prime] [Fact (ringChar F ≠ ℓ)]
     {X₁ : Over (Spec (.of F))} [LocallyOfFiniteType X₁.hom] [QuasiCompact X₁.hom]

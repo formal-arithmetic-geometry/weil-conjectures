@@ -547,9 +547,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyFreeTens
 /-!
 # Integral generators and their finite reductions
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-integral-models,
-Integral generators, clauses (1)--(3) (blueprint: lemma-integral-models).
-
 The generator classes use the existing canonical scalar extension and locally closed
 extension by zero. Finite reductions use the total left derived extension of scalars.
 Their etale origin is tested through the existing intrinsic finite-coefficient comparison,
@@ -574,10 +571,7 @@ universe u
 attribute [local irreducible] upperStarFromPoint upperStarFromPointComp
   monoidal_upperStarFromPoint monoidal_pointUpperStar oplaxMonoidal_pointUpperStar
 
-/-- Canonical extension of scalars from the integral coefficient ring to a finite subextension.
-
-Source: blueprint main-20261015, integral generators, clauses (1)--(3)
-(blueprint: lemma-integral-models). -/
+/-- Canonical extension of scalars from the integral coefficient ring to a finite subextension. -/
 noncomputable def finiteCoefficientExtension (X : Scheme.{u}) (ℓ : ℕ)
     [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -585,9 +579,7 @@ noncomputable def finiteCoefficientExtension (X : Scheme.{u}) (ℓ : ℕ)
     CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
         (condensedRingObj (Profinite.continuousMapRingObj E.1) X) :=
   Mod.extendScalars (AlgebraicGeometry.ProEtale.padicIntegersToPadicSubfield X ℓ E)
-/-- Canonical extension of scalars from a finite subextension to the algebraic closure.
-Source: blueprint main-20261015, integral generators, clauses (1)--(3)
-(blueprint: lemma-integral-models). -/
+/-- Canonical extension of scalars from a finite subextension to the algebraic closure. -/
 noncomputable def qlbarCoefficientExtension (X : Scheme.{u}) (ℓ : ℕ)
     [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -597,35 +589,25 @@ noncomputable def qlbarCoefficientExtension (X : Scheme.{u}) (ℓ : ℕ)
   Mod.extendScalars (AlgebraicGeometry.ProEtale.coefficientMap
     (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) X)
 
-/-- Canonical coefficient specialization used in the integral generator statement.
-Source: blueprint main-20261015, integral generators, clauses (1)--(3)
-(blueprint: lemma-integral-models). -/
+/-- Canonical coefficient specialization used in the integral generator statement. -/
 noncomputable abbrev integralCoefficientObject (X : Scheme.{u}) (ℓ : ℕ)
     [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) :=
   (coefficientRing X (Mon.mk (Profinite.padicIntegersRingObj ℓ E.1))).X
-/-- Canonical coefficient specialization used in the integral generator statement.
-Source: blueprint main-20261015, integral generators, clauses (1)--(3)
-(blueprint: lemma-integral-models). -/
+/-- Canonical coefficient specialization used in the integral generator statement. -/
 noncomputable abbrev finiteCoefficientObject (X : Scheme.{u}) (ℓ : ℕ)
     [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) :=
   (coefficientRing X (Mon.mk (Profinite.continuousMapRingObj E.1))).X
-/-- Canonical coefficient specialization used in the integral generator statement.
-Source: blueprint main-20261015, integral generators, clauses (1)--(3)
-(blueprint: lemma-integral-models). -/
+/-- Canonical coefficient specialization used in the integral generator statement. -/
 noncomputable abbrev qlbarCoefficientObject (X : Scheme.{u}) (ℓ : ℕ)
     [Fact ℓ.Prime] :=
   (coefficientRing X (Mon.mk (Profinite.padicAlgClRingObj ℓ))).X
-/-- Canonical coefficient specialization used in the integral generator statement.
-Source: blueprint main-20261015, integral generators, clauses (1)--(3)
-(blueprint: lemma-integral-models). -/
+/-- Canonical coefficient specialization used in the integral generator statement. -/
 noncomputable instance integralCoefficientObject_isComm (X : Scheme.{u}) (ℓ : ℕ)
     [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     IsCommMonObj (integralCoefficientObject X ℓ E) := by
   exact Functor.isCommMonObj_obj (F := upperStarFromPoint X)
 /-- The module obtained by extension by zero along a locally closed immersion written as
-an open immersion followed by a closed immersion.
-Source: blueprint main-20261015, integral generators, clauses (1)--(3)
-(blueprint: lemma-integral-models). -/
+an open immersion followed by a closed immersion. -/
 noncomputable def integralLowerShriek (X : Scheme.{u})
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
     {S V : Scheme.{u}} (u : S ⟶ V) (i : V ⟶ X) [IsOpenImmersion u]
@@ -635,9 +617,7 @@ noncomputable def integralLowerShriek (X : Scheme.{u})
     CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) :=
   ((CondensedRing.openImmersionLowerShriek Λ u) ⋙ CondensedRing.lowerStar Λ i).obj L₀
 
-/-- The class of integral generators after scalar extension to `E`.
-Source: blueprint main-20261015, integral generators, clauses (1)--(3)
-(blueprint: lemma-integral-models). -/
+/-- The class of integral generators after scalar extension to `E`. -/
 noncomputable def integralModelGenerator (X : Scheme.{u}) (ℓ : ℕ)
     [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     ObjectProperty (DerivedCategory
@@ -652,9 +632,7 @@ noncomputable def integralModelGenerator (X : Scheme.{u}) (ℓ : ℕ)
       ((finiteCoefficientExtension X ℓ E).obj
         (integralLowerShriek X (Profinite.padicIntegersRingObj ℓ E.1) u i L₀))
 
-/-- The class obtained from integral generators after the further extension to `Q̄_ℓ`.
-Source: blueprint main-20261015, integral generators, clauses (1)--(3)
-(blueprint: lemma-integral-models). -/
+/-- The class obtained from integral generators after the further extension to `Q̄_ℓ`. -/
 noncomputable def qlbarModelGenerator (X : Scheme.{u}) (ℓ : ℕ)
     [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     ObjectProperty (DerivedCategory
@@ -670,10 +648,7 @@ noncomputable def qlbarModelGenerator (X : Scheme.{u}) (ℓ : ℕ)
         ((finiteCoefficientExtension X ℓ E).obj
           (integralLowerShriek X (Profinite.padicIntegersRingObj ℓ E.1) u i L₀)))
 
-/-- Constant scalars act on continuous functions by constant functions.
-
-Source: blueprint main-20261015, integral generators, clauses (1)--(3)
-(blueprint: lemma-integral-models). -/
+/-- Constant scalars act on continuous functions by constant functions. -/
 noncomputable def integralModelConstantScalars (X : Scheme.{u}) (A : Type)
     [CommRing A] [TopologicalSpace A] [IsTopologicalRing A] :
     ULift.{u + 1, u} (ULift.{u, 0} A) →+*
@@ -685,10 +660,7 @@ noncomputable def integralModelConstantScalars (X : Scheme.{u}) (A : Type)
   map_add' _ _ := rfl
 
 /-- Keep a continuous module's sheaf and restrict its action to constant scalars.
-This is the actual restriction functor, with no arbitrary coefficient isomorphism.
-
-Source: blueprint main-20261015, integral generators, clauses (1)--(3)
-(blueprint: lemma-integral-models). -/
+This is the actual restriction functor, with no arbitrary coefficient isomorphism. -/
 noncomputable def integralModelFixedScalars (X : Scheme.{u}) (A : Type)
     [CommRing A] [TopologicalSpace A] [IsTopologicalRing A] :
     SheafOfModules.{u + 1} (continuousMapRingSheaf X A) ⥤
@@ -698,10 +670,7 @@ noncomputable def integralModelFixedScalars (X : Scheme.{u}) (A : Type)
       (terminalIsTerminal (C := X.ProEt)).op ⋙
     sheafCompose _ (ModuleCat.restrictScalars (integralModelConstantScalars X A))
 
-/-- Constant-scalar restriction is additive, section by section.
-
-Source: blueprint main-20261015, integral generators, clauses (1)--(3)
-(blueprint: lemma-integral-models). -/
+/-- Constant-scalar restriction is additive, section by section. -/
 instance integralModelFixedScalars_additive (X : Scheme.{u}) (A : Type)
     [CommRing A] [TopologicalSpace A] [IsTopologicalRing A] :
     (integralModelFixedScalars X A).Additive where
@@ -711,20 +680,14 @@ instance integralModelFixedScalars_additive (X : Scheme.{u}) (A : Type)
 
 /-- Canonical passage from internal finite continuous coefficients to intrinsic constant
 coefficients. The first equivalence reconstructs the sectionwise action, the next functor
-restricts to constant scalar functions, and the last is the existing intrinsic realization.
-
-Source: blueprint main-20261015, integral generators, clauses (1)--(3)
-(blueprint: lemma-integral-models). -/
+restricts to constant scalar functions, and the last is the existing intrinsic realization. -/
 noncomputable def integralModelIntrinsicRealization (X : Scheme.{u}) (A : Type)
     [CommRing A] [TopologicalSpace A] [IsTopologicalRing A] [Finite A]
     [DiscreteTopology A] :=
   (CondensedRing.continuousRingModuleEquivalence X A).functor ⋙
     integralModelFixedScalars X A ⋙ finiteCoefficientIntrinsicRealization X (ULift.{u, 0} A)
 
-/-- The canonical realization is additive, since each of its three factors is additive.
-
-Source: blueprint main-20261015, integral generators, clauses (1)--(3)
-(blueprint: lemma-integral-models). -/
+/-- The canonical realization is additive, since each of its three factors is additive. -/
 instance integralModelIntrinsicRealization_additive (X : Scheme.{u}) (A : Type)
     [CommRing A] [TopologicalSpace A] [IsTopologicalRing A] [Finite A]
     [DiscreteTopology A] : (integralModelIntrinsicRealization X A).Additive := by
@@ -733,10 +696,7 @@ instance integralModelIntrinsicRealization_additive (X : Scheme.{u}) (A : Type)
   unfold integralModelIntrinsicRealization
   infer_instance
 
-/-- The pulled-back reduction modulo the actual exponent `n` (not `n+1`).
-
-Source: blueprint main-20261015, integral generators, clauses (1)--(3)
-(blueprint: lemma-integral-models). -/
+/-- The pulled-back reduction modulo the actual exponent `n` (not `n+1`). -/
 noncomputable abbrev integralModelReductionMap (X : Scheme.{u}) (ℓ : ℕ)
     [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1) (n : ℕ) :=
@@ -745,10 +705,7 @@ noncomputable abbrev integralModelReductionMap (X : Scheme.{u}) (ℓ : ℕ)
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Finite reductions of this very extension by zero are bounded constructible and have
 bounded constructible etale origin. `completedResidue` indexes powers by `m+1`, so at the
-positive level `n` we use `m=n-1`. Finiteness and discreteness are conclusions, not assumptions.
-
-Source: blueprint main-20261015, integral generators, clauses (1)--(3)
-(blueprint: lemma-integral-models). -/
+positive level `n` we use `m=n-1`. Finiteness and discreteness are conclusions, not assumptions. -/
 noncomputable def integralReductionHasEtaleOrigin (X : Scheme.{u}) (ℓ : ℕ)
     [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1)
@@ -1849,44 +1806,7 @@ private theorem integralModel_reductions
 /-- Integral locally free models generate the bounded constructible categories using finitely
 many cones and shifts. In the algebraic-closure clause a single finite E is fixed before
 forming the closure. The third clause concerns the specified integral module and all of
-its positive uniformizer-power derived reductions, including their etale origin.
-
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-integral-models,
-Integral generators, clauses (1)--(3)
-(blueprint: lemma-integral-models).
-
-Proof:
-1. Finite type over a field makes X Noetherian. Coefficient-heart generation reduces
-   the finite-extension clause to degree-zero extensions of lisse sheaves.
-2. Apply the lattice-subquotient filtration on each locally closed stratum. Its
-   canonical spectral-norm coefficients are identified with the specified finite
-   coefficient field and its integers, using ULift and equality of the two norms.
-   Transporting the filtration gives integral generators as its successive quotients.
-   Short exact sequences give distinguished triangles; finite induction on the
-   filtration, followed by the heart's cone construction, proves the first clause.
-3. Descend an algebraic-closure object to one finite E. Exact scalar extension sends
-   its cone construction to a cone construction over the algebraic closure, and its
-   values on generators are exactly the specified algebraic-closure generators.
-4. A locally free integral module has finite constant local models. Open extension
-   and closed pushforward preserve the resulting stratified constructibility, hence
-   its extension in degree zero is bounded constructible.
-5. Tensor commutes with normalized inverse image. Joint conservativity of closed
-   and complementary open restriction therefore detects flatness. The unit, counit
-   and off-support zero identities show that open extension and closed pushforward
-   preserve flatness. The extended integral module is flat; its single complex is
-   K-flat, so derived reduction is ordinary reduction. Ordinary scalar extension
-   commutes with both extension functors, again by their support identities.
-6. Scalar extension preserves local freeness, so each reduced extension is bounded
-   constructible. The quotient ring is finite by the maximal-ideal-power quotient theorem.
-   Its quotient topology is discrete because the uniformizer-power ideal contains
-   an open ball. Finite discrete coefficient encoding makes the underlying sheaf
-   constructible. The specified fixed-scalar realization has the same underlying
-   sheaf; finite constructibility transfers along this identification. That
-   realization is exact, as detected by the exact faithful underlying-abelian-sheaf
-   functor. Its derived functor consequently preserves constructible cohomology and
-   bounds. The finite-ring constructible derived-origin theorem now gives etale
-   origin for the precise realization in the statement.
--/
+its positive uniformizer-power derived reductions, including their etale origin. -/
 theorem integral_models_generators
     (k : Type u) [Field k] (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime]
     [CharP k p] (hℓp : ℓ ≠ p) (X : Scheme.{u})

@@ -15,9 +15,15 @@ The normalization condition determines the representative comparison by its
 tensor--Hom transpose when both representative inputs are K-flat.  This is the
 K-flat part of the ordinary naturality argument.
 
-Source: Stacks 06YU, 0FPT; blueprint step 1 of
-`lem-sf-native-weil-tensor-ringed-derived-square-ordinary-data`.
-(blueprint: lem-sf-native-weil-tensor-ringed-derived-square-ordinary-naturality)
+## Implementation details
+
+Both sides are compared after applying the specified product-total Hom representatives;
+the componentwise uncurrying equation in `NativeAdjunctionNormalization` identifies their
+transposes. The extension to arbitrary second inputs is a separate resolution argument.
+
+## References
+
+* Stacks Project, Tags 06YU and 0FPT
 -/
 
 @[expose] public section
@@ -99,14 +105,8 @@ private theorem tensor_model_normalized_map
 
 -- Keep the supplied names of the quantified K-flat hypotheses, which occur only in the proof.
 set_option linter.unusedVariables false in
-/-- A normalized one-K-flat ordinary tensor model is natural on K-flat inputs.
-
-The proof compares both sides after applying the specified product-total Hom
-representatives.  The componentwise uncurrying equation in
-`NativeAdjunctionNormalization` identifies their transposes, and the
-tensor--Hom adjunction then cancels the common transpose.  Both Q and Q' are
-assumed K-flat here; the extension to arbitrary second inputs is a separate
-resolution argument. -/
+/-- A normalized one-K-flat ordinary tensor model is natural on K-flat inputs `Q` and
+`Q'`. -/
 theorem native_ordinary_tensor_model_naturality_kflat
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (H : (DerivedCategory (ProEtale.AdicSheaf l Y))ᵒᵖ ×

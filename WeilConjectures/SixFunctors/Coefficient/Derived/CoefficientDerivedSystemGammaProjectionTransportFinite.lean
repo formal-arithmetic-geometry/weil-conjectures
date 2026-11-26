@@ -10,8 +10,19 @@ public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerived
 /-! # Finite enriched transport before sections
 
 This is the unsectioned finite fiber/base-change identity used by the final gamma
-projection transport calculation
-(blueprint: lem-coef-derived-system-gamma-projection-transport-final).
+projection transport calculation.
+
+## Implementation details
+
+The proof uses the enriched uncurrying identity, the fiber evaluation comparison, and
+naturality of reduction evaluation in the first variable.
+
+## References
+
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 08JA]
+* [Stacks, Tag 0D6E]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public section
@@ -78,10 +89,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 The finite enriched uncurrying and evaluation transport, before applying derived
 sections.  It is the strict internal-Hom equation whose image under integral sections,
 followed by the scalar-section comparison, is the final gamma projection composite.
-Source: Stacks 07A6, 08JA, 0D6E and 0941.
-Proof: use the enriched uncurrying identity, the fiber evaluation comparison, and
-naturality of reduction evaluation in the first variable.
-(blueprint: lem-coef-derived-system-gamma-projection-transport-final)
 -/
 theorem coefficientDerivedSystemGammaProjectionTransport_finite
     (S : CoefficientDerivedSystemCalculus l E W)

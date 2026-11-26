@@ -19,8 +19,26 @@ import all WeilConjectures.RingTheory.KoszulProjectiveResolution
 /-!
 # Pro-zero cones of the Noetherian Koszul augmentation
 
-Source: Stacks Project, Tags 0921, 0922 and 0G3B
-(auxiliary; not a blueprint node).
+For a finite sequence in a Noetherian ring, the cones of the augmentations from the Koszul
+complexes on powers of the sequence to the quotients by powers of the ideal `I` it generates
+form a pro-zero tower.
+
+## Implementation details
+
+The exterior model is the signed total tensor model: a wedge indexed by an increasing subset is
+the corresponding tensor basis vector. All maps are specified on components; the quotient
+transition is specified after the surjective quotient map.
+
+With `J_m = (a_i^(m+1))`, the ideal `J_m` annihilates Koszul homology, and Artin--Rees applied to
+the cycles makes the negative-degree transitions eventually zero on cohomology. All cones are
+supported in `[-r-1, 0]`, so the uniform bounded-tower lemma upgrades eventual cohomological
+vanishing to vanishing of the cone maps.
+
+## References
+
+* [Stacks, Tag 0921]
+* [Stacks, Tag 0922]
+* [Stacks, Tag 0G3B]
 -/
 
 @[expose] public section
@@ -281,29 +299,10 @@ private noncomputable def strictConeFunctor (A : Type u) [CommRing A] :
   map_id _ := HomologicalComplex.homotopyCofiber.mapArrowHom_id _ _
   map_comp _ _ := HomologicalComplex.homotopyCofiber.mapArrowHom_comp _ _ _ _ _ _
 
-/-- The canonical augmentations and power transitions exist and their strict cone transitions
-are eventually zero in the derived category. Indices `m : ℕ` mean exponent `m + 1`.
-The exterior model is the signed total tensor model: a wedge indexed by an increasing
-subset is the corresponding tensor basis vector. All maps are specified on components;
-the quotient transition is specified after the surjective quotient map. Thus the existential
-maps are uniquely determined, including their strict commuting squares.
-
-Source: Stacks Project, Tags 0921, 0922 and 0G3B
-(auxiliary; not a blueprint node).
-
-Proof: put J_m = (a_i^(m+1)). The exterior contraction differential has the usual alternating
-signs; the exterior power of the diagonal a_i^(k-m) commutes with contraction. The quotient
-kills the degree-one differential, giving the augmentation and strict squares. Signed
-insertion of a generator gives dh+hd = a_i^(m+1), so J_m annihilates Koszul homology.
-Apply Artin--Rees (lem-weil-pbc-artin-rees) to the cycles inside each finite free term.
-For large k the negative-degree transition has image in J_m^(c+1), so its cycle image
-lies in J_m times the cycles and hence in boundaries. A maximum kills all negative degrees.
-The augmentation cone has H^0=0, H^(-1)=I^(m+1)/J_m, and lower cohomology the shifted
-negative Koszul homology. The containment I^(r*m+1) ≤ J_m kills the degree-minus-one
-transition eventually. All cones are supported in [-r-1,0]. Apply the uniform bounded-tower
-lemma (lem-weil-pbc-bounded-derived-tower-pro-zero), Tag 0G3B, to upgrade eventual
-cohomological vanishing to vanishing of these very cone maps. For r=0 the augmentation
-is the identity under the degree-zero exterior identification, so its cone is acyclic. -/
+/-- The canonical augmentations from the Koszul complexes on `a_i^(m+1)` to `A / I^(m+1)` and the
+power transitions exist, and their strict cone transitions are eventually zero in the derived
+category. Indices `m : ℕ` mean exponent `m + 1`. The existential maps are specified on
+components, so they are uniquely determined, including their strict commuting squares. -/
 theorem noetherian_koszul_augmentation_pro_zero
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     [HasDerivedCategory.{w} (ModuleCat.{u} A)] (r : ℕ) (a : Fin r → A) :

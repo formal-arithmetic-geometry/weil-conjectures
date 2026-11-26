@@ -22,10 +22,9 @@ v          v
 Y' --g---> Y
 ```
 with `f` proper, the base change morphism `g^* Rf_* ⟶ Rf'_* g'^*` of Weil complexes is a natural
-isomorphism (blueprint `theorem-purity-higher-direct-images-under--2`, the base change morphism
-being a morphism of Weil complexes by `sec-Weil-complexes`). It is stated as the existence of a
-natural isomorphism, in the form needed for the compatibilities of the direct image with compact
-support (`WeilConjectures.WeilSheaf.LowerShriekIndependence`); the objectwise statement is
+isomorphism. It is stated as the existence of a natural isomorphism, in the form needed for the
+compatibilities of the direct image with compact support
+(`WeilConjectures.WeilSheaf.LowerShriekIndependence`); the objectwise statement is
 `AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerStar_iso_of_isProper`.
 -/
 
@@ -51,10 +50,9 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [LocallyOfFiniteType (Y' ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y' ↘ Spec (CommRingCat.of k₀))]
 
-/-- **Proper base change for Weil complexes, naturally** (blueprint
-`theorem-purity-higher-direct-images-under--2`, with the Weil structures of `sec-Weil-complexes`):
-for a cartesian square of `k₀`-schemes `X' = X ×_Y Y'` with `f : X ⟶ Y` proper,
-`g^* ∘ Rf_* ≅ Rf'_* ∘ g'^*` as functors of Weil complexes on `X`. -/
+/-- **Proper base change for Weil complexes, naturally**: for a cartesian square of
+`k₀`-schemes `X' = X ×_Y Y'` with `f : X ⟶ Y` proper, `g^* ∘ Rf_* ≅ Rf'_* ∘ g'^*` as functors
+of Weil complexes on `X`. -/
 theorem WeilComplex.nonempty_derivedLowerStar_comp_upperStar_iso_of_isProper
     (hf : IsProper f) (h : IsPullback g' f' f g) :
     Nonempty (WeilComplex.derivedLowerStar (k₀ := k₀) (l := l) f ⋙ WeilComplex.upperStar g ≅

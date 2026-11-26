@@ -9,7 +9,19 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorHom
 public import WeilConjectures.CategoryTheory.StageSystem.StageSystemFunctorDescent
 public import WeilConjectures.CategoryTheory.StageSystem.Functor
 
-/-! # Normalized descent for the specified common-stage pullback -/
+/-! # Normalized descent for the specified common-stage pullback
+
+We show that the specified quotient pullback is the functor of its normalized coherent stage
+morphism.
+
+## Implementation details
+
+The coherent transition comparisons are identified with the rational scalar comparisons
+conjugated by the recorded transition identifications; the resulting stage-system morphism has
+the specified object formula and representative action, and uniqueness of the specified
+quotient functor identifies it with the descended functor. No shift or inverse comparison is
+needed.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -41,9 +53,7 @@ variable (l : ℕ) [Fact l.Prime]
   [∀ x : X, Invertible (l : X.residueField x)]
   [∀ y : Y, Invertible (l : Y.residueField y)]
 
-/-- Rational scalar comparison conjugated by the recorded stage-transition identifications.
-Source: current blueprint common-stage pullback paragraph
-(blueprint: lem-pod-common-stage-pullback-normalized-descent). -/
+/-- Rational scalar comparison conjugated by the recorded stage-transition identifications. -/
 def commonStagePullbackTransition {E L : Index l Ω} (h : E ≤ L) :
     rationalDerivedPullback l (Coefficient.{u} l Ω E) g ⋙
         (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω X).T h ≅
@@ -54,18 +64,7 @@ def commonStagePullbackTransition {E L : Index l Ω} (h : E ≤ L) :
       (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) g ≪≫
     Functor.isoWhiskerRight (operationStageTransitionIso l Ω Y E L h).symm _
 
-/-- The specified quotient pullback is the functor of its normalized coherent stage morphism.
-Source: current blueprint sec-six-functors/sk-rem-sf-pf-done/
-lem-fix-weil-operations.proof.md, common-stage pullback paragraph.
-(blueprint: lem-pod-common-stage-pullback-normalized-descent).
-
-Proof: the existing comparison-data theorem gives coherent transition comparisons.
-Their prescribed components identify them with the scalar comparisons conjugated
-by the recorded transition identifications. Substitute this equality in their tower
-law. The resulting stage-system morphism has the specified object formula, and
-its representative action has exactly the prescribed conjugation formula, by the
-same component identities. Uniqueness of the specified quotient functor identifies
-it with this descended functor. No shift or inverse comparison is needed. -/
+/-- The specified quotient pullback is the functor of its normalized coherent stage morphism. -/
 theorem commonStagePullbackNormalizedDescent :
     ∃ hcoh : StageSystem.pairFunctorCoherent
       (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y)

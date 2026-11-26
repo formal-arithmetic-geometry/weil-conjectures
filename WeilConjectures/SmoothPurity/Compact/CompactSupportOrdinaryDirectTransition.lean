@@ -13,8 +13,17 @@ import WeilConjectures.SmoothPurity.Compact.CompactSupportOrdinaryDirectRightSec
 
 /-! # Ordinary coefficient compatibility of direct evaluation
 
-Source: Stacks 03DI and 0D6E
-(blueprint: lem-weil-compact-support-ordinary-direct-transition).
+Ordinary native direct evaluation is compatible with the horizontal coefficient transition
+maps.
+
+## Implementation details
+
+`moduleEvalP`, `compactSupportDirectModel` and the ordinary scalar direct-image comparison are
+the identity on section carriers, so the statement is proved sectionwise.
+
+## References
+
+* Stacks Project, Tags 03DI, 0D6E.
 -/
 
 @[expose] public noncomputable section
@@ -55,14 +64,8 @@ attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficien
   PresheafOfModules.restrictScalarsObj ModuleCat.restrictScalars ModuleCat.RestrictScalars.obj'
 
 -- The identities compare concrete scalar actions on the same section carriers.
-/-- Ordinary native direct evaluation respects the actual horizontal coefficient maps.
-Source: Stacks 03DI and 0D6E.
-(blueprint: lem-weil-compact-support-ordinary-direct-transition).
-Proof: moduleEvalP and compactSupportDirectModel are identity on section carriers.
-The horizontal coefficient transformations act by the horizontal restriction of the
-sequence sheaf, and the ordinary scalar direct-image comparison is identity on sections.
-Base change preserves the horizontal product arrow. Apply these section formulas to both
-sides, then use extensionality of module-sheaf maps. -/
+/-- Ordinary native direct evaluation commutes with the horizontal coefficient transitions
+from level `m` to level `n`. -/
 theorem compactSupportOrdinaryDirectTransition {Z Y : Scheme.{u}} (g : Z ⟶ Y)
     {m n : ℕ} (h : n ≤ m) (M : coefficientSequenceModules.{u, u} l E Z) :
     (compactSupportOrdinaryCoefficientTransition l E Y h).app

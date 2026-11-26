@@ -15,25 +15,27 @@ import Mathlib.RingTheory.Smooth.AdicCompletion
 import Mathlib.Algebra.Algebra.Rat
 
 /-! # Lifting a characteristic-zero residue field
-Source: Stacks Project, Algebra, Theorem 032A(1), first proof paragraph. -/
+
+The residue map of a complete local ring with residue field of characteristic zero has a
+ring-theoretic section.
+
+## Implementation details
+
+All nonzero integers are units, so `R` is a `ℚ`-algebra and the residue field is formally smooth
+over `ℚ`. Sections into `R/m^n` are lifted inductively through the square-zero extensions
+`R/m^(n+1) → R/m^n`, and the compatible family defines a map into the completion.
+
+## References
+
+* [Stacks, Tag 032A] (1), first proof paragraph
+-/
 
 @[expose] public section
 
 universe u
 namespace IsLocalRing
 
-/-- The residue map of a complete local ring in residue characteristic zero has a section.
-Source: Stacks Project, Algebra, Theorem 032A(1), first proof paragraph.
-(blueprint: theorem-finite-etale-covers-proper-henselian--2)
-
-Proof: Every nonzero integer is a unit in R, since its residue is nonzero, so R and
-all its adic quotients are Q-algebras. The residue field is formally smooth over Q.
-Start with the identity map into R/m. Inductively lift a section into R/m^n through
-R/m^(n+1): the kernel is square-zero because 2n >= n+1 for n >= 1. The lift reduces
-to the preceding section, hence still reduces to the identity on the residue field.
-The compatible family defines a ring map into the adic completion. Compose it with
-the inverse of the canonical completion isomorphism to obtain f. Its first component
-is the identity, which is the stated equality. -/
+/-- The residue map of a complete local ring in residue characteristic zero has a section. -/
 theorem exists_residue_section (R : Type u) [CommRing R] [IsLocalRing R]
     [IsAdicComplete (maximalIdeal R) R] [CharP (ResidueField R) 0] :
     ∃ f : ResidueField R →+* R, (residue R).comp f = RingHom.id _ := by

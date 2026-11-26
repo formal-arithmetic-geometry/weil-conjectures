@@ -21,8 +21,19 @@ import Mathlib.Algebra.CharP.Defs
 /-!
 # Initial flat differential coordinates at a prime
 
-Source: Stacks Project, More on Algebra, Tag 07E6, lemma-geometrically-regular-over-field;
-Smoothing Ring Maps, Tag 07FH, lemma-solution-modulo, differential-coordinate construction.
+Polynomial coordinates whose residue differentials form a basis give a flat local map into
+`Λ_q` with regular closed fibre; this is the differential-coordinate construction used before
+appending parameters.
+
+## Implementation details
+
+The argument covers an empty differential basis and an arbitrary, possibly infinite, residue
+field.
+
+## References
+
+* [Stacks, Tag 07E6]
+* [Stacks, Tag 07FH] (differential-coordinate construction)
 -/
 
 @[expose] public section
@@ -83,30 +94,7 @@ private theorem differential_map_bijective
       (Finsupp.mapDomain_injective hinj)
   simp only [LinearMap.ker_eq_bot.mpr h, Submodule.map_bot]
 
-/-- The first differential coordinates give a flat local map with regular closed fibre.
-Source: Stacks Project, More on Algebra, Tag 07E6, lemma-geometrically-regular-over-field;
-Smoothing Ring Maps, Tag 07FH, lemma-solution-modulo, before appending parameters.
-(blueprint: lem-weil-pbc-popescu-initial-flat-coordinates).
-
-Proof: Put L = Λ_q. For every finite purely inseparable extension k'/k, the ring
-k' ⊗ L is the localization of k' ⊗ Λ at the image of q's complement, by localization
-base change. The latter ring is regular by hreg, so its localization is regular.
-Thus L is geometrically regular and Noetherian. Positive characteristic of a field
-is prime, supplying the prime-characteristic instance required by 07E6.
-
-Let E be the image intermediate field of ι. The injective field map ι identifies F
-with E. Essential finite type says that F/k is finitely generated as a field;
-transport this through F ≃ₐ[k] E. Functoriality of Kähler differentials under this
-isomorphism transports b to an E-basis consisting of the differentials of the
-images of a. The residue equations ha give the equations in 07E6 for the map
-k[X_j] → L, X_j ↦ xs j/1. Apply
-exists_flat_polynomialLocalization_of_isGeometricallyRegular to obtain flatness
-and the regular local closed fibre. The maximal ideal of L contracts to q, so
-the polynomial prime is exactly q.comap (aeval xs). Uniqueness of a localization
-map identifies the map supplied by 07E6 with Localization.localRingHom.
-The equality of the extended polynomial ideals then identifies the quotient
-in its conclusion with the quotient displayed here. This argument includes
-an empty differential basis and an arbitrary, possibly infinite, residue field. -/
+/-- The first differential coordinates give a flat local map with regular closed fibre. -/
 theorem popescu_initial_flat_coordinates
     (k : Type u) (Λ : Type v) [Field k] [CommRing Λ] [Algebra k Λ]
     [IsNoetherianRing Λ] (p : ℕ) [CharP k p] (hp : 0 < p)

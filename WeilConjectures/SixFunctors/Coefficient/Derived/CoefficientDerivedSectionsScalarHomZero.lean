@@ -8,8 +8,21 @@ module
 public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSystemEvaluationData
 import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSectionsScalarHomZeroRepresentative
 
-/-! The H-zero scalar normalization extracted from the coefficient-sections package.
-(blueprint: lem-coef-derived-sections-scalar-hom-zero)
+/-! # The H-zero scalar normalization of the coefficient-sections package
+
+The H-zero scalar normalization extracted from the coefficient-sections package.
+
+## Implementation details
+
+K-flat and K-injective representatives are chosen, the enriched map is identified with the
+ordinary tensor-Hom transpose, and degree-zero cocycles are transported through the fixed
+representative evaluation equivalences.
+
+## References
+
+* [Stacks, Tag 03CZ]
+* [Stacks, Tag 079P]
+* [Stacks, Tag 08JA]
 -/
 
 @[expose] public section
@@ -24,12 +37,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-/-- The H-zero finite scalar comparison is the normalized adjunction transpose.
-Source: Stacks 03CZ, 079P and 08JA.
-Choose K-flat and K-injective representatives, identify the enriched map with the
-ordinary tensor-Hom transpose, and transport degree-zero cocycles through the fixed
-representative evaluation equivalences.
-(blueprint: lem-coef-derived-sections-normalization-scalar-hom-zero) -/
+/-- The H-zero finite scalar comparison is the normalized adjunction transpose. -/
 theorem coefficientDerivedSectionsScalarHomZero
     (R : CoefficientDerivedSystemReduction l E W)
     (hF : CoefficientFiniteTensorNormalization l E W R)

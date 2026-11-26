@@ -12,7 +12,16 @@ import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.LinearAlgebra.Basis.SMul
 import WeilConjectures.RingTheory.ZeroVariableConormalStabilization
 
-/-! Auxiliary stabilization result for localized conormal bases. -/
+/-!
+# Stabilization for localized conormal bases
+
+Auxiliary stabilization result for localized conormal bases: a stably free localized conormal
+module becomes free with a basis of relation classes after adjoining variables sent to zero.
+
+## References
+
+* [Stacks, Tag 07EZ]
+-/
 
 @[expose] public section
 
@@ -21,29 +30,10 @@ open scoped TensorProduct
 
 namespace Algebra
 
-/-- Realize a stable trivialization by adjoining exactly `r` zero variables and choosing
-initial relations whose localized conormal classes form a basis of rank exactly `q`.
-No smoothness hypothesis or rank bound on the polynomial variables is used here.
-
-Source: Stacks Project, Tag 07EZ, proof of part (e), stabilization and choice of relations
-(blueprint: lem-weil-pbc-smooth-stable-conormal-basis-unbounded).
-
-Proof: adjoin exactly r variables sent to zero using the zero-variable conormal
-stabilization theorem. Its localized conormal module is the product of the old
-localized conormal module and A_a^r. Compose that equivalence with the input stable
-trivialization and transport the standard Fin q basis backwards. Mathlib identifies
-the base-change map x ↦ 1 ⊗ x with module localization. Its fraction-surjectivity
-property supplies, for each basis vector, a denominator s_j in the powers of a and
-a conormal numerator x_j such that s_j times the vector equals 1 ⊗ x_j. Lift x_j
-through the surjective conormal quotient map to g_j in the kernel. Each denominator
-maps to a unit in A_a, so rescaling the basis by those units gives a basis whose
-vectors are exactly 1 ⊗ [g_j]. Define the new relation list by these q numerators
-followed by all m₀+r relations of the stabilized presentation. Every entry belongs
-to the kernel and the appended subfamily already generates the kernel, so the full
-list does as well. Keep the generators fixed, giving definitional equality of the
-conormal modules, and index the list by Fin (q+(m₀+r)). The first q entries are the
-numerators. Thus q≤m and all displayed basis equalities hold, including q=0 and zero
-localizations. Only existential theorem data are produced. -/
+/-- Given a stable trivialization `(A_a ⊗ I/I²) × A_aʳ ≃ A_a^q` of the localized conormal module
+of a presentation, adjoining `r` variables sent to zero yields a presentation with at least `q`
+relations whose first `q` localized conormal classes form a basis.
+No smoothness hypothesis or rank bound on the polynomial variables is used here. -/
 theorem exists_stabilized_presentation_localized_conormal_basis
     (R : Type u) (A : Type v) [CommRing R] [CommRing A] [Algebra R A]
     [FinitePresentation R A] (a : A)

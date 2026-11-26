@@ -13,15 +13,15 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Package
 The Weil conjectures use the six operations for schemes of finite type over the algebraic
 closure `k = k̄₀` of the finite field `k₀`, with finite coefficient rings `Λ` of `ℓ`-power order
 for a prime `ℓ` different from the characteristic. This file records that the six-operations
-package (`AlgebraicGeometry.Etale.sixOperationsPackage`, blueprint `sk-thm-sf-package`) applies in
-this setting: the exponent `ℓⁿ` of `Λ` is invertible on `Spec k`.
+package (`AlgebraicGeometry.Etale.sixOperationsPackage`) applies in this setting: the exponent
+`ℓⁿ` of `Λ` is invertible on `Spec k`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.hasInvertibleExponent_spec_algebraicClosure`: `ℓⁿ` is invertible on
   `Spec k̄₀` for `ℓ ≠ p`.
-- `AlgebraicGeometry.Etale.sixOperationsPackage_algebraicClosure`: blueprint
-  `thm-weil-six-operations`.
+- `AlgebraicGeometry.Etale.sixOperationsPackage_algebraicClosure`: the six operations for the
+  finite-field datum.
 -/
 
 @[expose] public section
@@ -57,13 +57,10 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) (aY : Y ⟶ Spec (.of (AlgebraicClosur
   [LocallyOfFiniteType aY] [QuasiCompact aY] [HasCompactification aY]
   [HasCompactification (f ≫ aY)]
 
-/-- Blueprint `thm-weil-six-operations` (the six operations for the finite-field datum): the
-clauses of the six-operations package (`sk-thm-sf-package`, `prop-functor-package`) hold for the
-global finite-field datum, i.e. for separated morphisms `f : X ⟶ Y` of schemes of finite type
-over the algebraic closure `k̄₀` of the finite field `k₀`, with coefficients in a finite ring `Λ`
-killed by `ℓⁿ` for a prime `ℓ` different from the characteristic, carrying a normalized Tate
-twist datum. This is the finite coefficient stage `A_{E,n}` of the package; the clauses are
-those of `AlgebraicGeometry.Etale.SixOperationsPackage`. -/
+/-- **The six operations for the finite-field datum**: the clauses of the six-operations package
+hold for separated morphisms `f : X ⟶ Y` of schemes of finite type over the algebraic closure
+`k̄₀` of the finite field `k₀`, with coefficients in a finite ring `Λ` killed by `ℓⁿ` for a prime
+`ℓ` different from the characteristic, carrying a normalized Tate twist datum. -/
 theorem sixOperationsPackage_algebraicClosure {l : ℕ} (hl : l.Prime) (hne : ringChar k₀ ≠ l)
     {n : ℕ} (hΛ : ((l ^ n : ℕ) : Λ) = 0) :
     SixOperationsPackage Λ (AlgebraicClosure k₀) f aY :=

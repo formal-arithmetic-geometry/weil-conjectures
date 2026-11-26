@@ -36,7 +36,19 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-! # Acyclicity of evaluated K-injective coefficient systems
 
-Source: Zheng, Construction 4.1 and Lemma 4.10.
+The evaluation of a K-injective coefficient system is acyclic for finite geometric direct image.
+
+## Implementation details
+
+Restricting scalars to the constant integral coefficient ring, a K-injective constant-coefficient
+resolution is sectionwise a quasi-isomorphism, and evaluations of constant systems preserve
+K-injectives since their left adjoints are exact. Hence a K-injective resolution of the evaluated
+system is sectionwise a quasi-isomorphism, which geometric direct image preserves.
+
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10.
+* [Stacks Project, Tags 0D6E, 03DI, 03DJ and 070M](https://stacks.math.columbia.edu/tag/0D6E)
 -/
 
 @[expose] public noncomputable section
@@ -437,27 +449,7 @@ private theorem evaluation_resolution_sections (W : Scheme.{t}) (n : ℕ)
 
 attribute [local irreducible] Scheme.coefficientProEtaleDirectRingMap
 
-/-- Evaluation of a K-injective system is acyclic for finite geometric direct image.
-
-Source: Zheng, Construction 4.1 and Lemma 4.10, derived direct-image evaluation;
-Stacks, Tags 0D6E, 03DI, 03DJ and 070M.
-Restrict the system scalars to the constant integral coefficient ring and resolve
-there by a K-injective constant-coefficient system T. The scalar-restriction
-section theorem makes this resolution sectionwise a quasi-isomorphism. Constant
-systems are diagrams of modules over one ring sheaf, whose evaluations preserve
-K-injectives: their left adjoints are exact coproduct functors. Thus T_n is
-K-injective. For a K-injective resolution r of J_n, exact scalar restriction
-preserves its quasi-isomorphism. The K-injective comparison principle factors
-the evaluated resolution through the restricted target of r up to homotopy.
-The comparison is a quasi-isomorphism between a restricted K-injective and a
-K-injective, so the same scalar-restriction section theorem applies. Homotopy
-invariance and two-out-of-three show that r is sectionwise a quasi-isomorphism.
-Geometric direct image evaluates these same maps on base-changed site objects,
-so it sends r to a quasi-isomorphism. Naturality of the derived unit, and its
-invertibility on the K-injective target of r, now give the desired isomorphism.
-This applies to all n, including zero, zero complexes, and empty schemes.
-(blueprint: lem-trf-compact-support-evaluation-direct-image-acyclic).
--/
+/-- Evaluation of a K-injective system is acyclic for finite geometric direct image. -/
 theorem compactSupportEvaluationDirectImage_acyclic
     {Z Y : Scheme.{t}} (p : Z ⟶ Y) (n : ℕ)
     [(compactSupportLevelDirectImage l E p n).Additive]

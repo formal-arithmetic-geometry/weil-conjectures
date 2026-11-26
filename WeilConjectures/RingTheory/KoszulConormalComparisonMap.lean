@@ -14,8 +14,20 @@ import Mathlib.LinearAlgebra.Determinant
 /-!
 # Construction of the normalized dual Koszul comparison
 
-Source: Stacks Project, Tag 0BQZ, lemma-regular-immersion-ext, local Koszul computation.
-(blueprint: new-s3-koszul-conormal-comparison-map).
+For a Koszul-regular sequence generating `I`, we construct a cochain map from the dual Koszul
+complex to the normal determinant in degree `r` satisfying the determinant normalization.
+
+## Implementation details
+
+With `c_i` the conormal basis, `e_top` the ordered top wedge and `s = (-1)^(r(r-1)/2)`, a top
+functional `x` is sent to `s · (x(e_top) mod I) · ∧ c_i^*`, transported along `singleObjXSelf`;
+all other components are zero. The only chain-map condition is that the degree-`(r-1)` dual
+differential is killed, which holds since `d_r(e_top)` has coefficients `f_i ∈ I`. The
+normalization follows from `∧ v = det(v) · e_top`.
+
+## References
+
+* [Stacks, Tags 0BQZ, 062I]
 -/
 
 @[expose] public section
@@ -98,31 +110,7 @@ private theorem boundary_top_mem
   apply I.mul_mem_left
   exact hf ▸ Ideal.subset_span (Set.mem_range_self i)
 
-/-- A determinant-normalized comparison map exists.
-Source: Stacks Project, Tag 0BQZ, lemma-regular-immersion-ext, local computation;
-Tag 062I, lemma-H1-regular-quasi-regular, first paragraph, for the conormal basis.
-(blueprint: new-s3-koszul-conormal-comparison-map).
-
-Proof: Set E = A^r and B = A/I. By `exists_koszul_conormal_basis`, the classes
-c_i of the generators form a B-basis of I/I^2. Let c_i^* be its dual basis,
-e_top the ordered wedge of the standard basis of E, and s = (-1)^(r*(r-1)/2).
-Send a top-degree functional x to s times its value on e_top reduced modulo I,
-times the ordered wedge of the c_i^*. This is A-linear, with the target A-action
-restricted from B. Transport it along singleObjXSelf to the degree-r term of
-the single complex, and put zero in all other degrees.
-
-The only nontrivial chain-map equation is that the degree-(r-1) differential
-is killed. The dual differential is signed precomposition with Koszul d_r;
-d_r(e_top) is a signed sum of complementary basis wedges with coefficients f_i.
-Thus its evaluation by any functional belongs to I and vanishes in B. The
-outgoing differential of the target is zero. These equations give the map phi.
-
-For v_1,...,v_r in E, their top wedge is det(v) times e_top. Their conormal
-classes have the same coordinate matrix reduced to B. The determinant pairing
-of the ordered dual conormal wedge with their wedge is therefore det(v) mod I.
-Multiplying by s and x(e_top) mod I gives exactly IsKoszulConormalComparison.
-For r = 0 the empty determinant is 1, I = 0, and this is the identity on A.
-For I = A all target modules are zero and the formula still defines the map. -/
+/-- A determinant-normalized comparison map exists. -/
 theorem exists_koszul_conormal_comparison_map
     (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A)
     (hreg : RingTheory.Sequence.IsKoszulRegular f) (hf : Ideal.span (Set.range f) = I) :

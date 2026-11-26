@@ -18,7 +18,22 @@ import WeilConjectures.AlgebraicGeometry.Ogoma
 /-!
 # Rescaling polynomial coefficients to stabilize multiplication kernels
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07FJ, justification of item 12.
+A family `f_i` regular in every order at a prime `p` can be rescaled by factors `s_i ∉ p` so that,
+for the polynomial terms `s_i f_i X_i`, multiplication by each term and by its square have the
+same kernel on the quotient by the `e`-th powers of the earlier terms.
+
+## Implementation details
+
+Induct on the terms. After localizing at `p`, Tag 07DV makes multiplication by the current term
+injective on the quotient by the earlier powers; Ogoma's lemma (Tag 07FC) then gives a factor
+outside `p` equalizing the kernels before localization. Earlier equalities are unaffected.
+
+## References
+
+* [Stacks, Tag 07FJ] (justification of item 12)
+* [Stacks, Tag 07DW]
+* [Stacks, Tag 07DV]
+* [Stacks, Tag 07FC]
 -/
 
 @[expose] public section
@@ -145,26 +160,7 @@ private theorem exists_factor_of_polynomial_regular
   simpa only [Set.mem_ofPred_eq, pow_one, hscalar] using h
 
 /-- Rescale a family regular in every order at a prime by coefficient factors outside that
-prime so that the first and square polynomial multiplication kernels agree globally.
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07FJ, justification of item 12;
-Algebra, Tags 07DW and 07DV; Smoothing Ring Maps, Tag 07FC.
-(blueprint: lem-weil-pbc-polynomial-coefficient-kernel-rescaling).
-
-Proof: Write S = R \ p and T = R[X_i]. Localizing T at the image of S under C gives
-R_p[X_i]. The hypothesis and Tag 07DW make the family C(f_i)X_i regular there.
-Induct on t from zero to d, maintaining the kernel equalities at indices below t and
-replacing only f_t at the next step. Every factor chosen lies in S, so its image in R_p
-is a unit: all permutations of the localized coefficient family remain regular, as do
-the polynomial family and the powered prefixes. Tag 07DV, with exponent e on earlier
-terms and exponent one on the current term, makes multiplication by the current term
-injective on the localized quotient by the earlier e-th powers. Thus its first and
-square kernels agree on this quotient. The ring T is Noetherian, and the unlocalized
-quotient is a finite T-module. Apply Ogoma (07FC) with the coefficient-image submonoid
-C(S), and take exponent one, to obtain a factor C(s_t) with s_t outside p equalizing
-these kernels before localization. Replace f_t by s_t f_t. The earlier equalities
-involve only earlier coefficients and hence remain unchanged. All localized regularity
-hypotheses persist because s_t is a unit there. At t=d the accumulated factors give the
-assertion. For d=0 choose the empty family; every conclusion is vacuous. -/
+prime so that the first and square polynomial multiplication kernels agree globally. -/
 theorem exists_polynomial_coefficient_kernel_rescaling
     {R : Type u} [CommRing R] [IsNoetherianRing R]
     (p : Ideal R) [p.IsPrime] (d : ℕ) (f : Fin d → R)

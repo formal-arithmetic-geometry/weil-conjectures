@@ -63,13 +63,16 @@ import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulated
 
 /-! # Isomorphism pullback and termwise inverse image
 
-Source: Weil blueprint, ordinary compact cohomology, order 1510, coefficient-object
-paragraph; Stacks Project, Tags 015F, 06YS and 08TC; Bhatt--Scholze, Definition 3.5.2
-(blueprint: lem-weil-isomorphism-derived-pullback).
+## Implementation details
 
 The integral structure isomorphism is fixed by all its finite quotient projections.
 Termwise inverse image transports the module action by restriction along its inverse;
 it does not apply a completed tensor product to each term.
+
+## References
+
+* Stacks Project, Tags 015F, 03CO, 00WX, 00YV, 03D2, 06YS, 08TC and 09A5.
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Definition 3.5.2.
 -/
 
 @[expose] public noncomputable section
@@ -85,8 +88,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The finite quotient transition with commutativity retained.
-Source: Stacks Tag 03CO (blueprint: lem-weil-isomorphism-derived-pullback). -/
+/-- The finite quotient transition with commutativity retained. -/
 private def completedCommTransition (Y : Scheme.{u}) (n : ℕ) :
     integralCoefficientCommRingSheaf l E Y (n + 1) ⟶
       integralCoefficientCommRingSheaf l E Y n :=
@@ -96,13 +98,11 @@ private def completedCommTransition (Y : Scheme.{u}) (n : ℕ) :
         ((Padic.coefficientExtensionTransition l E (n + 1)).comp
           (ULift.ringEquiv : ULift.{u + 1, u} _ ≃+* _).toRingHom)))
 
-/-- The finite quotient tower with commutativity retained.
-Source: Stacks Tag 03CO (blueprint: lem-weil-isomorphism-derived-pullback). -/
+/-- The finite quotient tower with commutativity retained. -/
 private def completedCommDiagram (Y : Scheme.{u}) :=
   Functor.ofOpSequence (completedCommTransition l E Y)
 
-/-- The recorded completed ring and its finite quotient projections.
-Source: Stacks Tag 03CO (blueprint: lem-weil-isomorphism-derived-pullback). -/
+/-- The recorded completed ring and its finite quotient projections. -/
 private def completedCommCone (Y : Scheme.{u}) : Cone (completedCommDiagram l E Y) where
   pt := completedIntegralCommRingSheafUnrestricted l E Y
   π := NatTrans.ofOpSequence (completedIntegralCommRingProjectionUnrestricted l E Y)
@@ -118,8 +118,7 @@ private def completedCommCone (Y : Scheme.{u}) : Cone (completedCommDiagram l E 
         using (limit.w (integralCoefficientSheafSystem l E Y)
           (homOfLE (Nat.le_add_right n 1)).op).symm)
 
-/-- The completed commutative-ring cone is limiting by reflection to ring sheaves.
-Source: Stacks Tag 03CO (blueprint: lem-weil-isomorphism-derived-pullback). -/
+/-- The completed commutative-ring cone is limiting by reflection to ring sheaves. -/
 private def completedCommConeIsLimit (Y : Scheme.{u}) :
     IsLimit (completedCommCone l E Y) := by
   apply isLimitOfReflects (sheafCompose (ProEt.topology Y)
@@ -143,14 +142,7 @@ private def completedCommConeIsLimit (Y : Scheme.{u}) :
 
 /-- The completed coefficient comparison is uniquely determined by its composites with
 all finite quotient projections. These equations specify exactly the inverse-limit
-comparison followed by the limit of the canonical constant-coefficient comparisons.
-Source: blueprint order 1510; Stacks Tags 09A5 and 00WX
-(blueprint: lem-weil-isomorphism-derived-pullback).
-Proof: by lem-weil-proetale-isomorphism-inverse-image, inverse image preserves limits.
-Its canonical limit comparison followed by the limit of the finite constant-ring
-isomorphisms gives the required isomorphism. Naturality of those constant comparisons
-makes a morphism of towers. Composing with the nth projection gives the displayed
-identity. Joint monicity of limit projections proves uniqueness, also for inverses. -/
+comparison followed by the limit of the canonical constant-coefficient comparisons. -/
 theorem isomorphismCompletedCoefficientComparison_existsUnique
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     ∃! c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
@@ -190,20 +182,16 @@ theorem isomorphismCompletedCoefficientComparison_existsUnique
     exact (hd n.unop).trans
       (hc.conePointUniqueUpToIso_hom_comp (completedCommConeIsLimit l E X) n).symm
 
-/-- The uniquely normalized completed coefficient isomorphism c_O_E.
-Source: blueprint order 1510; Stacks Tags 09A5 and 00WX
-(blueprint: lem-weil-isomorphism-derived-pullback). -/
+/-- The uniquely normalized completed coefficient isomorphism `c_O_E`. -/
 def isomorphismCompletedCoefficientComparison {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
         (completedIntegralCommRingSheafUnrestricted l E Y) ≅
       completedIntegralCommRingSheafUnrestricted l E X :=
   (isomorphismCompletedCoefficientComparison_existsUnique l E g).exists.choose
 
-/-- Inverse image of module sheaves, with the scalar action transported through c.
-The inverse image is the recorded module inverse image, and restriction along c.inv
-makes it an S-module without replacing it by a tensor model.
-Source: Stacks Tags 00YV and 03D2; blueprint order 1510
-(blueprint: lem-weil-isomorphism-derived-pullback). -/
+/-- Inverse image of module sheaves, with the scalar action transported through `c`.
+The inverse image is the recorded module inverse image, and restriction along `c.inv`
+makes it an `S`-module without replacing it by a tensor model. -/
 def isomorphismTermwiseModuleInverseImage {X Y : Scheme.{u}} (g : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
@@ -214,14 +202,7 @@ def isomorphismTermwiseModuleInverseImage {X Y : Scheme.{u}} (g : X ⟶ Y)
       ((sheafCompose (ProEt.topology X)
         (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map c.inv)
 
-/-- Exactness of the termwise coefficient transport used in this node.
-Source: Stacks Tag 015F; blueprint order 1510
-(blueprint: lem-weil-isomorphism-derived-pullback).
-Proof: lem-weil-proetale-isomorphism-inverse-image identifies inverse image with
-relabelling along the covering-preserving site equivalence. Relabel the action maps
-as well as the underlying abelian sheaves. Restriction along c.inv only transports
-the scalars, so it preserves sums of maps, kernels and cokernels. Relabelling back
-is its inverse, proving exactness and additivity. -/
+/-- Termwise inverse image of module sheaves along an isomorphism is exact and additive. -/
 theorem isomorphismTermwiseModuleInverseImage_exact {X Y : Scheme.{u}}
     (g : X ⟶ Y) [IsIso g]
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
@@ -257,8 +238,7 @@ theorem isomorphismTermwiseModuleInverseImage_exact {X Y : Scheme.{u}}
       exact ⟨inferInstance, preservesFiniteLimits_of_reflects_of_preserves T V,
         preservesFiniteColimits_of_reflects_of_preserves T V⟩
 
-/-- Additivity for termwise inverse image. Source: Stacks Tag 015F
-(blueprint: lem-weil-isomorphism-derived-pullback). -/
+/-- Additivity for termwise inverse image. -/
 instance isomorphismTermwiseModuleInverseImage_additive {X Y : Scheme.{u}}
     (g : X ⟶ Y) [IsIso g]
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
@@ -267,8 +247,7 @@ instance isomorphismTermwiseModuleInverseImage_additive {X Y : Scheme.{u}}
     (isomorphismTermwiseModuleInverseImage g R S c).Additive :=
   (isomorphismTermwiseModuleInverseImage_exact g R S c).1
 
-/-- Left exactness for termwise inverse image. Source: Stacks Tag 015F
-(blueprint: lem-weil-isomorphism-derived-pullback). -/
+/-- Left exactness for termwise inverse image. -/
 instance isomorphismTermwiseModuleInverseImage_preservesFiniteLimits {X Y : Scheme.{u}}
     (g : X ⟶ Y) [IsIso g]
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
@@ -277,8 +256,7 @@ instance isomorphismTermwiseModuleInverseImage_preservesFiniteLimits {X Y : Sche
     PreservesFiniteLimits (isomorphismTermwiseModuleInverseImage g R S c) :=
   (isomorphismTermwiseModuleInverseImage_exact g R S c).2.1
 
-/-- Right exactness for termwise inverse image. Source: Stacks Tag 015F
-(blueprint: lem-weil-isomorphism-derived-pullback). -/
+/-- Right exactness for termwise inverse image. -/
 instance isomorphismTermwiseModuleInverseImage_preservesFiniteColimits {X Y : Scheme.{u}}
     (g : X ⟶ Y) [IsIso g]
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
@@ -288,9 +266,7 @@ instance isomorphismTermwiseModuleInverseImage_preservesFiniteColimits {X Y : Sc
   (isomorphismTermwiseModuleInverseImage_exact g R S c).2.2
 
 /-- Termwise integral inverse image in the ambient derived category over the completed
-coefficient sheaf. The scalar action uses the specified limit comparison c_O_E.
-Source: blueprint order 1510; Stacks Tag 015F
-(blueprint: lem-weil-isomorphism-derived-pullback). -/
+coefficient sheaf. The scalar action uses the specified limit comparison `c_O_E`. -/
 def isomorphismIntegralTermwiseInverseImage {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     DerivedCategory (scalarReductionSource l E Y) ⥤
       DerivedCategory (scalarReductionSource l E X) :=
@@ -530,38 +506,7 @@ uniformly bounded constructible derived-complete subcategory, and agrees natural
 there with the specified completed derived pullback. The last clause is its
 specialization to the completed coefficient sheaf in degree zero.
 The natural isomorphism has source the recorded constructible integral pullback
-and is stated in the full category D^b_c(X,O_E).
-Source: blueprint order 1510; Bhatt--Scholze Definition 3.5.2; Stacks Tag 08TC
-(blueprint: lem-weil-isomorphism-derived-pullback).
-Proof:
-1. Use the completed comparison fixed by the finite quotient projections. Exact
-   relabelling transports module actions, tensor products and cohomology. It
-   preserves flat terms and K-flatness by relabelling an acyclic test complex back.
-2. Choose a K-flat resolution with flat terms (lem-pc-kflat-resolution). Tensor
-   relabelling and the coefficient projection equations identify every finite
-   reduction with the reduction of the relabelled resolution, including the maps
-   x ↦ x tensor 1 and x tensor a ↦ x tensor rho(a). The identifications respect
-   resolution comparisons by lem-weil-integral-reduction-tower-well-defined.
-3. Exact countable products (lem-weil-proetale-countable-products-exact) represent
-   derived products by lemma-reduction-derived-nakayama. For B(P)=product Res_n P_n,
-   C(P)=Cone(1-s)[-1] has differential d(y,x)=(-d y-(1-s)x,d x). The quotient
-   maps a:P→B(P) satisfy (1-s)a=0, so x ↦ (0,a(x)) is the canonical comparison.
-   The L=E case of lem-weil-finite-free-completed-scalar-comparison says this
-   comparison eta is natural and invertible on derived-complete objects.
-4. Relabelling both coordinates commutes with this cone and its product
-   projections, giving theta:Lg* K ≅ F C(P) for the actual construction of
-   def-pur-integral-derived-operations. The normalized descent in
-   lem-pur-integral-operations-well-defined gives naturality independent of
-   resolutions. Compose theta with the inverse of F(eta) to get lambda.
-5. Transport the defining Roos triangle and its quotient-unit first map to show
-   completeness of FK. Every reduction is the finite inverse image of the old
-   reduction. The finite case preserves constructibility and each vanishing
-   degree, so the same single interval works for all reductions, exactly as in
-   def-weil-derived-complete-integral-detailed. Fullness gives the required iso.
-6. Specialize to the completed regular module in degree zero, whose membership
-   is lem-weil-constant-coefficient-objects-constructible. Its auxiliary finite
-   field can be chosen of any prime characteristic different from l; it imposes
-   no structure morphism or restriction on X or Y. -/
+and is stated in the full category `D^b_c(X, O_E)`. -/
 theorem isomorphismIntegralDerivedPullback_termwise {X Y : Scheme.{u}}
     (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

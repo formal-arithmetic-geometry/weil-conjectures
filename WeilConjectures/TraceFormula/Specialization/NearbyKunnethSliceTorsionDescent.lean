@@ -16,8 +16,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethClosure
 # Descent of the Künneth map along a Galois slice
 
 This file assembles the projection formula of the generic-slicing step of Gabber's Künneth formula
-(blueprint `proposition-external-kunneth-formula-nearby-cycles`, identification (2) and projection
-formula (3)) for finite field coefficients, for abstract product configurations
+for finite field coefficients, for abstract product configurations
 (`NearbyCyclesModel.isIso_map_kunnethMap_of_galoisSlice`). Consider:
 
 * a product configuration `M ⟵ P ⟶ N` (with Künneth map `Π`);
@@ -33,6 +32,8 @@ Galois layers is invertible by the square along `ρ`, it descends to `M₁ ⟵ P
 (`NearbyCyclesModel.isIso_kunnethMap_of_isIso_galoisLayer`, with the coinvariant retraction of
 `NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor`), and it is
 identified with `Lψ'^* Π` by the square along `ψ`.
+
+## Implementation details
 
 The statement is kept abstract so that it is elaborated once: the slices over a generic slice trait
 are large terms.
@@ -115,9 +116,8 @@ lemma isIso_kunnethMap_leftDerivedUpperStar_id {X₀ Y₀ Z₀ X₀' Y₀' Z₀'
     ((leftDerivedUpperStarId Λ Y₀).app _ ≪≫ (leftDerivedUpperStarId Λ Y₀).app _ ≪≫
       (leftDerivedUpperStarId Λ Y₀).app _) h
 
-/-- **The Künneth map descends along a Galois slice** (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, identification (2) and projection formula (3);
-finite field coefficients `T₀`): in the situation of the module docstring, if the Künneth map of
+/-- **The Künneth map descends along a Galois slice** (finite field coefficients `T₀`): in the
+situation of the module docstring, if the Künneth map of
 `M_S ⟵ P_S ⟶ N` is invertible at `Lσ_M^* A`, `B`, then `Lψ_P'^* Π_{A,B}` is invertible. -/
 theorem isIso_map_kunnethMap_of_galoisSlice (hrM : rM = 𝟙 X) (hrP : rP = 𝟙 Z)
     (htotψ : μ₁.total ≫ ψM.total = ψP.total ≫ φ₁.total)

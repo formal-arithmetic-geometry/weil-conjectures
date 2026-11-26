@@ -31,8 +31,7 @@ naturality of the Künneth–Verdier map `κ_{M,N}` in `N` along the Verdier dua
 * the trace class as the image of `e_K ∘ ũ` under an additive map
   `Hom(Rc_! ℚ̄_ℓ,C, RΔ_* ω_X) →+ Hom(ℚ̄_ℓ,Fix(c), ω_Fix(c))`
   (`ProEtale.CondensedRing.Correspondence.FixedLocus.traceClassOfKernel`,
-  `ProEtale.CondensedRing.Correspondence.traceClass_eq_traceClassOfKernel`), following blueprint
-  `lem-trf-trace-class-diagonal-pairing`.
+  `ProEtale.CondensedRing.Correspondence.traceClass_eq_traceClassOfKernel`).
 
 -/
 
@@ -358,9 +357,9 @@ variable {ℓ} {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompa
   [IsSeparated X.hom] {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (c : Correspondence ℓ K)
 
 /-- The *supported class* `κ_{K₁,K₂}⁻¹ ∘ [w] : Rc_! ℚ̄_ℓ,C ⟶ K₁ ⊠ D_X K₂` of a coefficient map
-`w : Lc₂^* K₂ ⟶ Rc₁^! K₁` with two coefficient objects on the support of `c` (blueprint
-`lem-trf-trace-class-diagonal-pairing`, Step 1): the class of `w`, read through
-`Lc₂^* = Lc^* Lp₂^*` and `Rc₁^! = Rc^! Rp₁^!`, followed by the inverse Künneth–Verdier map. -/
+`w : Lc₂^* K₂ ⟶ Rc₁^! K₁` with two coefficient objects on the support of `c`: the class of
+`w`, read through `Lc₂^* = Lc^* Lp₂^*` and `Rc₁^! = Rc^! Rp₁^!`, followed by the inverse
+Künneth–Verdier map. -/
 noncomputable def supportedClassOfCoeff (K₁ K₂ : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (w : (boundedConstructibleUpperStar _ ℓ c.c₂).obj K₂ ⟶
       (boundedConstructibleUpperShriek ℓ c.c₁).obj K₁) :
@@ -424,9 +423,8 @@ namespace FixedLocus
 variable {c} (F : c.FixedLocus)
 
 /-- The additive map `Hom(Rc_! ℚ̄_ℓ,C, RΔ_* ω_X) ⟶ Hom(ℚ̄_ℓ,Fix(c), ω_Fix(c))` through which the
-trace class factors (blueprint `lem-trf-trace-class-diagonal-pairing`, Step 2): a kernel
-`φ : Rc_! ℚ̄_ℓ,C ⟶ RΔ_* ω_X` goes to the exceptional adjoint along `d` of
-`Rd_! Lι^* ℚ̄_ℓ,C ≅ LΔ^* Rc_! ℚ̄_ℓ,C ⟶ ω_X`, the inverse of base change in the fixed square
+trace class factors: a kernel `φ : Rc_! ℚ̄_ℓ,C ⟶ RΔ_* ω_X` goes to the exceptional adjoint along
+`d` of `Rd_! Lι^* ℚ̄_ℓ,C ≅ LΔ^* Rc_! ℚ̄_ℓ,C ⟶ ω_X`, the inverse of base change in the fixed square
 followed by the adjoint of `φ`. -/
 noncomputable def traceClassOfKernel :
     ((boundedConstructibleLowerShriek ℓ c.support).obj (𝟙_ _) ⟶
@@ -454,8 +452,7 @@ lemma traceClassOfKernel_apply
 
 end FixedLocus
 
-/-- **The trace class through the evaluation kernel** (blueprint
-`lem-trf-trace-class-diagonal-pairing`): `Tr_c(u)` is the image of `e_K ∘ ũ` under
+/-- **The trace class through the evaluation kernel**: `Tr_c(u)` is the image of `e_K ∘ ũ` under
 `FixedLocus.traceClassOfKernel`, `ũ` the supported class of `u`. -/
 theorem traceClass_eq_traceClassOfKernel (F : c.FixedLocus) :
     c.traceClass F = F.traceClassOfKernel (c.supportedClass ≫ evaluationKernel ℓ K) := by

@@ -10,8 +10,14 @@ import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 
 /-! # Tensor normalization for two composable inverse images
 
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0941, 03DI, 07A7;
-blueprint fix-prop-coherence, strict-system realization.
+We show that the unit-normalized tensor maps on coefficient-system cochains commute with
+composition of inverse images.
+
+## References
+
+* [Zheng, Construction 4.1 and Lemma 4.10]
+* [Stacks, Tag 0941], [Stacks, Tag 03DI], [Stacks, Tag 03EL], [Stacks, Tag 07A4],
+  [Stacks, Tag 07A7]
 -/
 
 @[expose] public noncomputable section
@@ -257,18 +263,7 @@ private theorem cochain_pure (o : Operations l E) (c : Compositors l E o)
     (op (n, (proEtaleBaseChange (f ≫ g)).obj U)) x' y') hp hq).symm.trans hr'.symm
 
 /-- The unit-normalized tensor maps on coefficient-system cochains commute with
-composition of inverse images.
-Source: Stacks 03EL and 07A4; the pure-generator step in the strict-system
-realization of fix-prop-coherence
-(blueprint: lem-sf-integral-system-tensor-cochain-composition).
-
-Proof: transpose under the inverse-image adjunction for the composite. The unit
-conjugation equation and the section normalization of the direct compositor
-express this transpose by restriction along pullbackComp. The two successive
-tensor comparisons take unit-inserted generators to the tensors of the two
-successive unit images. Naturality of tensor generators under restriction and
-the ordinary compositor's unit equation identify these with the composite unit
-images. Total-summand pure generators detect equality of the transposes. -/
+composition of inverse images. -/
 theorem integralSystemTensorCochainComposition (o : Operations l E) (c : Compositors l E o)
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (P Q : CochainComplex (coefficientSequenceModules l E Z) ℤ) :

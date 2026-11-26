@@ -11,8 +11,20 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSystemTenso
 
 /-! # Tensor normalization for two composable inverse images
 
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0941, 03DI, 07A7;
-blueprint fix-prop-coherence, strict-system realization.
+We show that the section-normalized inverse-image compositor respects the fixed system tensor
+comparison.
+
+## Implementation details
+
+The equality is first proved on flat-term K-flat representatives, summand by summand on
+generalized pure tensors, and then localized using the fixed system tensor models. This is a
+whole-system equality before evaluation; no flatness of a coefficient quotient is needed.
+
+## References
+
+* [Zheng, Construction 4.1 and Lemma 4.10]
+* [Stacks, Tag 0941], [Stacks, Tag 03D8], [Stacks, Tag 03DI], [Stacks, Tag 03EL],
+  [Stacks, Tag 07A4], [Stacks, Tag 07A7]
 -/
 
 @[expose] public noncomputable section
@@ -236,25 +248,7 @@ private theorem composition_on_representatives (o : Operations l E) (c : Composi
 
 /-- The section-normalized inverse-image compositor respects the fixed system
 tensor comparison for two composable morphisms. No commutative square, right
-adjoint, open extension or proper/open map occurs here.
-Source: Stacks 03EL, 03D8, 07A4, 07A7 and 0941; fix-prop-coherence,
-strict-system realization step 4
-(blueprint: lem-sf-integral-system-tensor-composition).
-
-Proof: choose flat-term K-flat representatives for A and B on the sequence site.
-On each total tensor summand, the two inverse-image tensor comparisons send a
-pure tensor to the two inverse images of its factors. The ordinary compositor is
-the adjoint conjugate of restriction along pullbackComp; its unit equation
-identifies these sections with those for the composite morphism. Hence both
-composites agree on every generalized pure tensor. Tensor generation and the
-total-summand injections give equality of chain maps. Exact inverse image preserves
-K-flat representatives, so localize this equality using the fixed system tensor
-models. Compositors.pullComp_model identifies the localized ordinary compositor
-with c.pullComp, and pullbackTensorSystemComparison_existsUnique identifies the
-localized tensor maps with the displayed ones. Every object admits such a resolving
-representative, and naturality transports the equality to A and B. This proves a
-whole-system equality before evaluation. The construction is valid for identity
-morphisms and zero inputs; no flatness of a coefficient quotient is needed. -/
+adjoint, open extension or proper/open map occurs here. -/
 theorem integralSystemTensorComposition (o : Operations l E) (c : Compositors l E o)
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (A B : System l E Z) :
     (c.pullComp f g).hom.app ((calculus l E Z).systemClosed.tensor.obj (A, B)) ≫

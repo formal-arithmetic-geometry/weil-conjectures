@@ -23,8 +23,7 @@ shift. Hence so does the Fourier–Deligne transform
 
 ## Main statements
 
-- `AlgebraicGeometry.nonempty_iso_fourierTransform_tateTwist`
-(`proposition-base-change-fourier-inversion--2`, clause (2)):
+- `AlgebraicGeometry.nonempty_iso_fourierTransform_tateTwist`:
   `FT_ψ(K(m)) ≅ FT_ψ(K)(m)`, naturally in the Weil complex `K`.
 
 This module only imports its parts, so that `import`s of

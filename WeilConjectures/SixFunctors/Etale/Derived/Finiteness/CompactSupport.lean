@@ -21,17 +21,17 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 
 Compactly supported cohomology of a bounded constructible complex of finite Tor amplitude over
 a separably closed field is a perfect complex of `Λ`-modules, and so are the derived geometric
-stalks of such a complex (`lemma-perfect-complexes-geometric-point`).
+stalks of such a complex.
 
 ## Implementation notes
 
-`lemma-perfect-complexes-geometric-point` concludes that `RΓ_c(X, K)` is *perfect*: bounded, with
-finite cohomology modules, and of finite Tor amplitude. The three are proved separately below,
-finite Tor amplitude in the sense of `DerivedCategory.finiteTorAmplitude` for `D(ModuleCat Λ)`; they
-are assembled into perfectness in `WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect`
-(`AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections`). The geometric
-stalk `RΓ(Spec Ω, Lx̄^* K)` is perfect because `Lx̄^*` preserves `Dctf` and `RΓ` on a separably
-closed point carries `Dctf` into perfect complexes.
+Perfectness of `RΓ_c(X, K)` means: bounded, with finite cohomology modules, and of finite
+Tor amplitude. The three are proved separately below, finite Tor amplitude in the sense of
+`DerivedCategory.finiteTorAmplitude` for `D(ModuleCat Λ)`; they are assembled into perfectness in
+`WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect`
+(`AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections`). The geometric stalk
+`RΓ(Spec Ω, Lx̄^* K)` is perfect because `Lx̄^*` preserves `Dctf` and `RΓ` on a separably closed
+point carries `Dctf` into perfect complexes.
 
 ## Main statements
 
@@ -125,14 +125,10 @@ variable [Finite Λ] {k : Type u} [Field k] [IsSepClosed k]
   [HasInvertibleExponent Λ X]
 
 omit [IsSeparated aX] in
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Perfectness of compact cohomology and of
-geometric stalks
-
-**Boundedness of compactly supported cohomology.** Let `Λ` be a finite coefficient ring, `k`
+/-- **Boundedness of compactly supported cohomology.** Let `Λ` be a finite coefficient ring, `k`
 separably closed, `X` separated of finite type over `k` with structure morphism `a_X`, and
 `K ∈ D^b_{ctf}(X, Λ)`. Then `RΓ_c(X, K) = Ra_{X!} K` vanishes in all but finitely many
-degrees. Separable closedness of the base is essential: over `Spec ℚ` already
-`H¹_c(Spec ℚ, ℤ/n) = Hom(G_ℚ, ℤ/n)` is infinite. -/
+degrees. -/
 theorem isZero_compactlySupportedCohomology_of_lt
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) :
@@ -147,13 +143,9 @@ theorem isZero_compactlySupportedCohomology_of_lt
   · exact (_root_.DerivedCategory.isLE_iff _ b).1 hb q hq
 
 omit [IsSeparated aX] in
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Perfectness of compact cohomology and of
-geometric stalks
-
-**Finiteness of compactly supported cohomology.** In the situation of
+/-- **Finiteness of compactly supported cohomology.** In the situation of
 `AlgebraicGeometry.Etale.isZero_compactlySupportedCohomology_of_lt`, every compactly supported
-cohomology module `H^q_c(X, K)` is a finite `Λ`-module. Together with boundedness and finite
-Tor amplitude these are exactly perfectness over the Artinian local ring `A_{E,n}`. -/
+cohomology module `H^q_c(X, K)` is a finite `Λ`-module. -/
 theorem finite_compactlySupportedCohomology
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) (q : ℤ) :
@@ -169,17 +161,9 @@ theorem finite_compactlySupportedCohomology
     ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K)).symm.toLinearEquiv
 
 omit [IsSeparated aX] in
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Perfectness of compact cohomology and of
-geometric stalks
-
-**Finite Tor amplitude of compactly supported cohomology.** In the situation of
+/-- **Finite Tor amplitude of compactly supported cohomology.** In the situation of
 `AlgebraicGeometry.Etale.isZero_compactlySupportedCohomology_of_lt`, the complex of
-`Λ`-modules `RΓ_c(X, K)` has finite Tor amplitude. If `K` has Tor amplitude in `[a, b]` and
-the geometric fibres of `a_X` have dimension `≤ d`, then for every sheaf `F` on `Spec k` the
-projection formula gives `Ra_{X!} K ⊗ᴸ F ≅ Ra_{X!}(K ⊗ᴸ a_X^* F)`, which is concentrated in
-degrees `[a, b + 2d]` (`Ra_{X!}` is left t-exact and has cohomological amplitude `2d`). So
-`Ra_{X!} K` has Tor amplitude in `[a, b + 2d]`, and so has `RΓ_c(X, K)`, global sections over
-the separably closed `k` being a stalk. -/
+`Λ`-modules `RΓ_c(X, K)` has finite Tor amplitude. -/
 theorem finiteTorAmplitude_compactlySupportedGlobalSections
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) :
@@ -223,16 +207,11 @@ section Stalk
 
 variable [Finite Λ] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
 
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Compact-support perfectness (geometric
-stalks).
-
-Also blueprint `lemma-perfect-complexes-geometric-point`: Perfectness of compact cohomology and of
-geometric stalks.
+/-- Compact-support perfectness (geometric stalks).
 
 For a finite coefficient ring `Λ`, `K ∈ D^b_{ctf}(X, Λ)` and a geometric point
 `x̄ : Spec Ω ⟶ X` (`Ω` separably closed), the derived geometric stalk
-`K_x̄ = RΓ(Spec Ω, Lx̄^* K)` is a perfect complex of `Λ`-modules: `Lx̄^*` preserves `Dctf`, and
-`RΓ(Spec Ω, -)` carries `Dctf(Spec Ω, Λ)` into perfect complexes. -/
+`K_x̄ = RΓ(Spec Ω, Lx̄^* K)` is a perfect complex of `Λ`-modules. -/
 theorem isPerfect_geometricStalk (x : Spec (.of Ω) ⟶ X)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) :

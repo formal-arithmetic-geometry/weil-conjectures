@@ -14,8 +14,17 @@ import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 /-!
 # Open restriction of injective module resolutions
 
-Source: Stacks Project, Cohomology, Lemma 01E1, part (1) and proof
-(blueprint: lem-sc-ringed-space-restrict-injective-resolution).
+Restricting an injective resolution of sheaves of modules to an open gives an injective
+resolution.
+
+## Implementation details
+
+Restriction is exact and has an exact left adjoint (extension by zero), so it preserves exact
+complexes and injective objects.
+
+## References
+
+* [Stacks Project, Tag 01E1](https://stacks.math.columbia.edu/tag/01E1), part (1)
 -/
 
 @[expose] public section
@@ -29,19 +38,7 @@ namespace AlgebraicGeometry.RingedSpace
 /-- Restricting an injective resolution to any open gives an injective resolution,
 with the termwise restricted complex and the restricted augmentation. In particular,
 every restricted term is injective. The equality `h` identifies the whole complex,
-including its differentials; `eqToHom` transports the augmentation's target along `h`.
-
-Source: Stacks Project, Cohomology, Lemma 01E1, part (1) and proof
-(blueprint: lem-sc-ringed-space-restrict-injective-resolution).
-
-Proof: By `lem-sc-derived-open-restriction-adjunction-exact`, restriction is exact,
-so it preserves the augmented exact complex of `def-sp-injective-resolutions`.
-The same lemma gives an exact left adjoint, extension by zero. Apply
-`lem-sp-right-adjoint-preserves-injectives` to obtain injectivity of every restricted
-term. By `lem-sc-ringed-space-module-sheaves-enough-injectives`, the module category
-on the open is abelian and has enough injectives. Exactness and injectivity give the
-claimed resolution, using `def-sp-injective-resolutions`; its degree-zero augmentation
-is the restriction of the original one. -/
+including its differentials; `eqToHom` transports the augmentation's target along `h`. -/
 theorem restrict_injectiveResolution (X : RingedSpace.{u}) (U : Opens X)
     (F : SheafOfModules.{u} (moduleRings X)) (I : InjectiveResolution F) :
     let R := SheafOfModules.overFunctor.{u} (moduleRings X) U

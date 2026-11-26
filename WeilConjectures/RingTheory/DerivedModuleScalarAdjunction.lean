@@ -15,9 +15,22 @@ import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 
 /-! # Left adjoints to derived restriction of module scalars
 
-Source: Stacks Project, More on Algebra, `lemma-tensor-hom-adjoint`, and Derived Categories,
-Tag 09T5, `lemma-derived-adjoint-functors`
-(auxiliary; not a blueprint node).
+Derived restriction of scalars along a map of commutative rings has a left adjoint on the
+unbounded derived categories.
+
+## Implementation details
+
+No flatness or boundedness hypothesis is needed. First put rings and modules in the same
+universe. Free modules give functorial flat resolutions, and scalar extension followed by
+restriction is tensoring with `S` over `R`, so scalar extension preserves K-flat
+quasi-isomorphisms. The general derived-adjunction theorem then applies to ordinary scalar
+extension and restriction. For a larger module universe, replace `R` and `S` by their universe
+lifts and transport the adjunction along the induced derived equivalences.
+
+## References
+
+* [Stacks, Tag 09T5] (derived adjoint functors)
+* [Stacks, More on Algebra, tensor-hom adjunction]
 -/
 
 @[expose] public section
@@ -91,31 +104,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Exact derived restriction of scalars along a map of commutative rings has a left
 adjoint on the unbounded derived categories, in any module universe at least that of
-both rings. No flatness or boundedness hypothesis is needed.
-
-Source: Stacks Project, More on Algebra, `lemma-tensor-hom-adjoint`, and Derived Categories,
-Tag 09T5, `lemma-derived-adjoint-functors`
-(auxiliary; not a blueprint node).
-
-Proof. First put rings and modules in the same universe. The free module on the underlying
-set gives a functorial epimorphism from a flat module onto every module: the counit sends
-the basis vector at x to x. This supplies the source library's functorial flat resolutions.
-For scalar extension F along R → S, the composite of F with restriction of scalars is
-naturally isomorphic to tensoring over R with S, viewed as an R-module. The isomorphism is
-the identity on the underlying tensor product; compatibility of scalar actions follows
-by tensor induction. An acyclic K-flat complex remains acyclic after this tensor functor.
-Exact faithful scalar restriction reflects acyclicity, so F preserves K-flat
-quasi-isomorphisms. Module categories have exact filtered colimits and K-injective
-resolutions. Apply the proved source derived-adjunction theorem to ordinary scalar
-extension and restriction. Exactness identifies derived restriction with its exact
-levelwise functor, giving the asserted right-adjoint property.
-
-For a larger module universe, replace R and S by their universe lifts. Apply the preceding
-construction there. Restriction along the two lifting ring equivalences induces derived
-equivalences, hence right adjoints. The lifted ring map, bracketed by those equivalences,
-is the original ring map. The exact derived composition isomorphisms therefore identify
-the original derived restriction with the composite of these three right adjoints.
-Transport the composite adjunction along that natural isomorphism. -/
+both rings. -/
 theorem derivedRestrictScalars_isRightAdjoint
     {R S : Type u} [CommRing R] [CommRing S]
     [HasDerivedCategory.{w} (ModuleCat.{max u v} R)]

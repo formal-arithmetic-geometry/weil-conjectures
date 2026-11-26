@@ -11,7 +11,10 @@ import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedBridge
 import all WeilConjectures.WeilSheaf.Native.NativeTensorAcyclicTestComparison
 
 /-! Full native K-flat localization used by normalized extension descent.
-(blueprint: lem-sf-native-open-tensor-full-kflat-localization) -/
+
+## References
+
+Stacks 06YS and 06YU. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -22,16 +25,7 @@ namespace AlgebraicGeometry.ProEtaleWeilSheaf
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)]
 
-/-- The functorial ringed K-flat resolution localizes the full native predicate.
-Source: Stacks 06YS and 06YU; native ringed bridge and acyclic-test comparison.
-(blueprint: lem-sf-native-open-tensor-full-kflat-localization)
-
-Proof: obtain a functorial native acyclic-test K-flat replacement and its
-quasi-isomorphic augmentation from the ringed bridge. The cone criterion makes
-each replacement NativeIsKFlat. Lift the replacement functor to the full subcategory
-of that predicate. Its augmentation is a functorial left resolution for the
-inclusion localizer morphism, hence the inclusion is a localized equivalence.
-The ambient derived quotient is a localization, so its restriction is one too. -/
+/-- The functorial ringed K-flat resolution localizes the full native predicate. -/
 theorem native_open_tensor_full_kflat_localization (X : Scheme.{u})
     [X.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]

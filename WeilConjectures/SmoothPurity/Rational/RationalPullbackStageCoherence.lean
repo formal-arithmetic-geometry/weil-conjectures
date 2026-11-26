@@ -14,7 +14,15 @@ import all Mathlib.Logic.Small.Defs
 
 /-! # Pullback comparisons on the normalized coefficient stages
 
-Source: the common-stage pullback construction in prose-03-02.
+The common-stage pullback construction.
+
+## Implementation details
+
+Uniqueness identifies the recorded stage system with the explicit system of scalar transitions
+and their normalized associators. The scalar associators and the coefficient-inclusion
+composition law are substituted into the rational pullback tower identity as natural
+transformations before evaluating at an object; this keeps the coefficient-equality witnesses
+out of large functor-object conversions.
 -/
 
 @[expose] public noncomputable section
@@ -88,9 +96,7 @@ set_option backward.isDefEq.respectTransparency.types false
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
 
-/-- Conjugate the prescribed rational scalar comparison by the recorded transitions.
-Source: the common-stage pullback paragraph
-(blueprint: lem-weil-rational-pullback-stage-coherence). -/
+/-- Conjugate the prescribed rational scalar comparison by the recorded transitions. -/
 def rationalPullbackStageComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -199,16 +205,7 @@ private theorem canonical_coherent {X Y : Scheme.{u}} (f : X ⟶ Y)
   simpa only [canonicalSystem, NatTrans.comp_app, Functor.whiskerRight_app,
     Functor.whiskerLeft_app] using hc
 
-/-- The recorded pullback comparisons satisfy the stage-system tower equation.
-Source: rationalPullbackScalarComparison_tower and the normalized stage construction
-(blueprint: lem-weil-rational-pullback-stage-coherence).
-Proof: uniqueness identifies the recorded stage system with the explicit system of
-scalar transitions and their normalized associators. Its transition equality
-transports become identity isomorphisms. Substitute the scalar associators and
-the coefficient-inclusion composition law into the rational pullback tower
-identity as natural transformations before evaluating at an object. This keeps the
-coefficient-equality witnesses out of large functor-object conversions, and gives
-the required equation with both recorded associators. -/
+/-- The recorded pullback comparisons satisfy the stage-system tower equation. -/
 theorem rationalPullbackStageComparison_coherent {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] :

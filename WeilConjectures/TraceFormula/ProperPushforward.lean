@@ -13,11 +13,10 @@ public import WeilConjectures.TraceFormula.Correspondence
 # Proper pushforward of a correspondence
 
 Let `c = (C, c₁, c₂, u)` be an endocorrespondence of `(X, K)`. A *proper pushforward diagram*
-`(f, g) : (C, c) ⟶ (D, b)` (blueprint `definition-pushforward-correspondence--1`) consists of a
-proper morphism `f : X ⟶ Y`, a second support `b = (b₁, b₂) : D ⟶ Y × Y` and a proper morphism
-`g : C ⟶ D` with `g ≫ bᵢ = cᵢ ≫ f`
-(`ProEtale.CondensedRing.Correspondence.ProperPushforwardDiagram`). No cartesian condition on
-the leg squares is imposed. With `K' = Rf_* K`, the *coefficient pushforward* of `u` is
+`(f, g) : (C, c) ⟶ (D, b)` consists of a proper morphism `f : X ⟶ Y`, a second support
+`b = (b₁, b₂) : D ⟶ Y × Y` and a proper morphism `g : C ⟶ D` with `g ≫ bᵢ = cᵢ ≫ f`
+(`ProEtale.CondensedRing.Correspondence.ProperPushforwardDiagram`). No cartesian condition on the
+leg squares is imposed. With `K' = Rf_* K`, the *coefficient pushforward* of `u` is
 ```
 [f, g]_! u = δ ∘ Rg_* u ∘ γ : Lb₂^* K' ⟶ Rb₁^! K',
 ```
@@ -39,22 +38,19 @@ The relations `g ≫ bᵢ = cᵢ ≫ f` induce `h : Fix(c) ⟶ Fix(b)`, the rest
 ```
 Fix(c) --κ--> C ×_D Fix(b) --π--> Fix(b)
 ```
-with `π` the base change of `g` and `κ` a base change of the relative diagonal
-`X ⟶ X ×_Y X` (`ProperPushforwardDiagram.isPullback_fixMapFactor`), hence a closed immersion;
-so `h` is proper (`ProperPushforwardDiagram.isProper_fixMap`, blueprint
-`definition-pushforward-correspondence--2`), and so is `q = f × f`
+with `π` the base change of `g` and `κ` a base change of the relative diagonal `X ⟶ X ×_Y X`
+(`ProperPushforwardDiagram.isPullback_fixMapFactor`), hence a closed immersion; so `h` is proper
+(`ProperPushforwardDiagram.isProper_fixMap`), and so is `q = f × f`
 (`ProperPushforwardDiagram.isProper_prodMap`).
 
 ## Maps along proper morphisms
 
-For the kernel maps of a proper pushforward diagram (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1`) we construct the trace `τ_f : Rf_* ω_X ⟶ ω_Y`
-(`lowerStarDualizingComplexTrace`) and the multiplication
-`μ_f : Rf_* M ⊗ Rf_* N ⟶ Rf_* (M ⊗ N)` (`lowerStarTensorMap`). For a commutative square
-`g ≫ b = c ≫ f` with `g`, `f` proper we construct the composition isomorphism
-`Ξ : Rb_! Rg_* ≅ Rf_* Rc_!` (`lowerStarLowerShriekCompIso`) and its mate, the exchange map
-`E : Rg_* Rc^! ⟶ Rb^! Rf_*` (`lowerStarUpperShriekExchange`); the exceptional half `δ` above is
-`E` for the square `g ≫ b₁ = c₁ ≫ f`.
+For the kernel maps of a proper pushforward diagram we construct the trace `τ_f : Rf_* ω_X ⟶ ω_Y`
+(`lowerStarDualizingComplexTrace`) and the multiplication `μ_f : Rf_* M ⊗ Rf_* N ⟶ Rf_* (M ⊗ N)`
+(`lowerStarTensorMap`). For a commutative square `g ≫ b = c ≫ f` with `g`, `f` proper we construct
+the composition isomorphism `Ξ : Rb_! Rg_* ≅ Rf_* Rc_!` (`lowerStarLowerShriekCompIso`) and its
+mate, the exchange map `E : Rg_* Rc^! ⟶ Rb^! Rf_*` (`lowerStarUpperShriekExchange`); the exceptional
+half `δ` above is `E` for the square `g ≫ b₁ = c₁ ≫ f`.
 
 -/
 
@@ -81,8 +77,7 @@ variable (ℓ) {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-/-- The *trace along a proper morphism* `τ_f : Rf_* ω_X ⟶ ω_Y` (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1`, item 2):
+/-- The *trace along a proper morphism* `τ_f : Rf_* ω_X ⟶ ω_Y`:
 ```
 Rf_* ω_X ≅ Rf_! ω_X ≅ Rf_! Rf^! ω_Y --ε--> ω_Y,
 ```
@@ -96,8 +91,7 @@ noncomputable def lowerStarDualizingComplexTrace (f : X ⟶ Y) [IsProper f.left]
       (dualizingComplexComp ℓ f).inv ≫
     (boundedConstructibleUpperShriekAdjunction ℓ f).counit.app _
 
-/-- The *multiplication* `μ_f : Rf_* M ⊗ Rf_* N ⟶ Rf_* (M ⊗ N)` (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1`, item 3): the adjoint for `Lf^* ⊣ Rf_*` of
+/-- The *multiplication* `μ_f : Rf_* M ⊗ Rf_* N ⟶ Rf_* (M ⊗ N)`: the adjoint for `Lf^* ⊣ Rf_*` of
 ```
 Lf^* (Rf_* M ⊗ Rf_* N) ≅ Lf^* Rf_* M ⊗ Lf^* Rf_* N --ε ⊗ ε--> M ⊗ N,
 ```
@@ -128,8 +122,7 @@ variable (ℓ) {C D X Y : Over (Spec (.of k))}
   {c : C ⟶ X} {g : C ⟶ D} {b : D ⟶ Y} {f : X ⟶ Y} [IsProper g.left] [IsProper f.left]
 
 /-- The *composition isomorphism* `Ξ : Rb_! Rg_* ≅ Rf_* Rc_!` of a commutative square
-`g ≫ b = c ≫ f` with proper `g` and `f` (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1`, item 9):
+`g ≫ b = c ≫ f` with proper `g` and `f`:
 ```
 Rb_! Rg_* ≅ Rb_! Rg_! ≅ R(g ≫ b)_! = R(c ≫ f)_! ≅ Rf_! Rc_! ≅ Rf_* Rc_!,
 ```
@@ -146,8 +139,7 @@ noncomputable def lowerStarLowerShriekCompIso (w : g ≫ b = c ≫ f) :
     Functor.isoWhiskerLeft _ (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f)
 
 /-- The *exchange map* `E : Rg_* Rc^! ⟶ Rb^! Rf_*` of a commutative square `g ≫ b = c ≫ f` with
-proper `g` and `f` (blueprint `theorem-proper-pushforward-lefschetz-verdier--1`, item 9): the
-exceptional adjoint of
+proper `g` and `f`: the exceptional adjoint of
 ```
 Rb_! Rg_* Rc^! ≅ Rf_* Rc_! Rc^! --Rf_* ε_c--> Rf_*,
 ```
@@ -191,10 +183,9 @@ lemma hom_ext {W : Over (Spec (.of k))} {t t' : W ⟶ F.F} (h : t ≫ F.ι = t' 
 end FixedLocus
 
 /-- A *proper pushforward diagram* `(f, g) : (C, c) ⟶ (D, b)` of an endocorrespondence `c` of
-`(X, K)` to a scheme `Y` (blueprint `definition-pushforward-correspondence--1`): a proper morphism
-`f : X ⟶ Y`, a separated `k`-scheme of finite type `D` with morphisms `b₁, b₂ : D ⟶ Y`, and a
-proper morphism `g : C ⟶ D` with `g ≫ bᵢ = cᵢ ≫ f`. No cartesian condition is imposed on the
-leg squares. -/
+`(X, K)` to a scheme `Y`: a proper morphism `f : X ⟶ Y`, a separated `k`-scheme of finite type `D`
+with morphisms `b₁, b₂ : D ⟶ Y`, and a proper morphism `g : C ⟶ D` with `g ≫ bᵢ = cᵢ ≫ f`. No
+cartesian condition is imposed on the leg squares. -/
 structure ProperPushforwardDiagram where
   /-- the proper morphism `f : X ⟶ Y`. -/
   f : X ⟶ Y
@@ -224,8 +215,7 @@ variable {c Y} (P : c.ProperPushforwardDiagram Y)
 noncomputable abbrev coeff : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
   (boundedConstructibleLowerStar ℓ P.f).obj K
 
-/-- The *ordinary half* `γ : Lb₂^* K' ⟶ Rg_* Lc₂^* K` of the coefficient pushforward (blueprint
-`definition-pushforward-correspondence--1`, item 1):
+/-- The *ordinary half* `γ : Lb₂^* K' ⟶ Rg_* Lc₂^* K` of the coefficient pushforward:
 ```
 Lb₂^* K' --η_g--> Rg_* Lg^* Lb₂^* K' ≅ Rg_* L(g ≫ b₂)^* K' = Rg_* L(c₂ ≫ f)^* K'
   ≅ Rg_* Lc₂^* Lf^* Rf_* K --Rg_* Lc₂^* ε_f--> Rg_* Lc₂^* K.
@@ -245,8 +235,8 @@ noncomputable def pushforwardCoeffUnit :
           ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
             P.f).counit.app K))
 
-/-- The *exceptional half* `δ : Rg_* Rc₁^! K ⟶ Rb₁^! K'` of the coefficient pushforward
-(blueprint `definition-pushforward-correspondence--1`, item 2): the adjoint for `Rb₁_! ⊣ Rb₁^!` of
+/-- The *exceptional half* `δ : Rg_* Rc₁^! K ⟶ Rb₁^! K'` of the coefficient pushforward: the adjoint
+for `Rb₁_! ⊣ Rb₁^!` of
 ```
 Rb₁_! Rg_* Rc₁^! K ≅ Rb₁_! Rg_! Rc₁^! K ≅ R(g ≫ b₁)_! Rc₁^! K = R(c₁ ≫ f)_! Rc₁^! K
   ≅ Rf_! Rc₁_! Rc₁^! K ≅ Rf_* Rc₁_! Rc₁^! K --Rf_* ε_{c₁}--> Rf_* K,
@@ -261,8 +251,7 @@ noncomputable def pushforwardCoeffCounit :
   (lowerStarUpperShriekExchange ℓ P.w₁).app K
 
 /-- The *coefficient pushforward* `[f, g]_! u = δ ∘ Rg_* u ∘ γ : Lb₂^* K' ⟶ Rb₁^! K'` of the
-coefficient map of `c` along a proper pushforward diagram (blueprint
-`definition-pushforward-correspondence--1`, item 3). -/
+coefficient map of `c` along a proper pushforward diagram. -/
 noncomputable def pushforwardCoeff :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ P.b₂).obj P.coeff ⟶
       (boundedConstructibleUpperShriek ℓ P.b₁).obj P.coeff :=
@@ -270,8 +259,8 @@ noncomputable def pushforwardCoeff :
     (boundedConstructibleLowerStar ℓ P.g).map c.u ≫
     P.pushforwardCoeffCounit
 
-/-- The *proper pushforward* `(D, b₁, b₂, [f, g]_! u)` of the correspondence `c`, a
-correspondence of `(Y, Rf_* K)` (blueprint `definition-pushforward-correspondence--1`). -/
+/-- The *proper pushforward* `(D, b₁, b₂, [f, g]_! u)` of the correspondence `c`, a correspondence
+of `(Y, Rf_* K)`. -/
 noncomputable abbrev pushforward : Correspondence ℓ P.coeff where
   C := P.D
   c₁ := P.b₁
@@ -293,8 +282,8 @@ lemma fixedLocus_ι_comp_g_comp_b₁ :
   rw [Category.assoc, Category.assoc, P.w₁, P.w₂, ← Category.assoc, Fc.w, Category.assoc]
 
 /-- The *induced map of fixed loci* `h : Fix(c) ⟶ Fix(b)` of a proper pushforward diagram, the
-restriction of `g` (blueprint `definition-pushforward-correspondence--1`, item 4): the factorization
-of `Fix(c) ⟶ C ⟶ D` through the equalizer `Fix(b) ⟶ D` of `b₁` and `b₂`. -/
+restriction of `g`: the factorization of `Fix(c) ⟶ C ⟶ D` through the equalizer `Fix(b) ⟶ D` of `b₁`
+and `b₂`. -/
 noncomputable def fixMap : Fc.F ⟶ Fb.F :=
   Fork.IsLimit.lift Fb.isLimit (Fc.ι ≫ P.g) (P.fixedLocus_ι_comp_g_comp_b₁ Fc)
 
@@ -308,8 +297,7 @@ lemma fixMap_ι : P.fixMap Fc Fb ≫ Fb.ι = Fc.ι ≫ P.g :=
 lemma fixMap_ι_b₁ : P.fixMap Fc Fb ≫ Fb.ι ≫ P.b₁ = Fc.ι ≫ c.c₁ ≫ P.f := by
   rw [fixMap_ι_assoc, P.w₁]
 
-/-- The first factor `κ = (i_c, h) : Fix(c) ⟶ C ×_D Fix(b)` of the induced map of fixed loci
-(blueprint `definition-pushforward-correspondence--2`). -/
+/-- The first factor `κ = (i_c, h) : Fix(c) ⟶ C ×_D Fix(b)` of the induced map of fixed loci. -/
 noncomputable def fixMapFactor : Fc.F ⟶ pullback P.g Fb.ι :=
   pullback.lift Fc.ι (P.fixMap Fc Fb) (P.fixMap_ι Fc Fb).symm
 
@@ -317,8 +305,8 @@ noncomputable def fixMapFactor : Fc.F ⟶ pullback P.g Fb.ι :=
 lemma fixMapFactor_fst : P.fixMapFactor Fc Fb ≫ pullback.fst _ _ = Fc.ι :=
   pullback.lift_fst _ _ _
 
-/-- The induced map of fixed loci factors as `h = π ∘ κ`, with `π : C ×_D Fix(b) ⟶ Fix(b)` the
-base change of `g` (blueprint `definition-pushforward-correspondence--2`, item 1). -/
+/-- The induced map of fixed loci factors as `h = π ∘ κ`, with `π : C ×_D Fix(b) ⟶ Fix(b)` the base
+change of `g`. -/
 @[reassoc]
 lemma fixMapFactor_snd : P.fixMapFactor Fc Fb ≫ pullback.snd _ _ = P.fixMap Fc Fb :=
   pullback.lift_snd _ _ _
@@ -342,8 +330,7 @@ lemma fixMapFactorDiagonalLift_snd :
   pullback.lift_snd _ _ _
 
 /-- The first factor `κ` of the induced map of fixed loci is the base change of the relative
-diagonal `X ⟶ X ×_Y X` along `λ : C ×_D Fix(b) ⟶ X ×_Y X` (blueprint
-`definition-pushforward-correspondence--2`, item 1). -/
+diagonal `X ⟶ X ×_Y X` along `λ : C ×_D Fix(b) ⟶ X ×_Y X`. -/
 lemma isPullback_fixMapFactor :
     IsPullback (P.fixMapFactor Fc Fb) (Fc.ι ≫ c.c₁) (P.fixMapFactorDiagonalLift Fb)
       (pullback.diagonal P.f) := by
@@ -381,28 +368,24 @@ lemma isPullback_fixMapFactor :
     rw [Fc.lift_ι, ← hm, Category.assoc, fixMapFactor_fst]
 
 /-- The first factor `κ : Fix(c) ⟶ C ×_D Fix(b)` of the induced map of fixed loci is a closed
-immersion, as a base change of the relative diagonal of the separated morphism `f` (blueprint
-`definition-pushforward-correspondence--2`, item 1). -/
+immersion, as a base change of the relative diagonal of the separated morphism `f`. -/
 instance isClosedImmersion_fixMapFactor : IsClosedImmersion (P.fixMapFactor Fc Fb).left :=
   MorphismProperty.of_isPullback ((P.isPullback_fixMapFactor Fc Fb).map (Over.forget _)).flip
     (inferInstanceAs (IsClosedImmersion (pullback.diagonal P.f).left))
 
-/-- The second factor `π : C ×_D Fix(b) ⟶ Fix(b)` of the induced map of fixed loci is proper, as
-the base change of the proper `g` along `i_b : Fix(b) ⟶ D` (blueprint
-`definition-pushforward-correspondence--2`, item 1). -/
+/-- The second factor `π : C ×_D Fix(b) ⟶ Fix(b)` of the induced map of fixed loci is proper, as the
+base change of the proper `g` along `i_b : Fix(b) ⟶ D`. -/
 instance isProper_pullbackSnd_g : IsProper (pullback.snd P.g Fb.ι).left :=
   MorphismProperty.of_isPullback ((IsPullback.of_hasPullback P.g Fb.ι).map (Over.forget _))
     (inferInstanceAs (IsProper P.g.left))
 
-/-- **The induced map of fixed loci is proper** (blueprint
-`definition-pushforward-correspondence--2`, item 2): `h = π ∘ κ` is the composite of the closed
+/-- **The induced map of fixed loci is proper**: `h = π ∘ κ` is the composite of the closed
 immersion `κ` and the base change `π` of the proper `g`. -/
 instance isProper_fixMap : IsProper (P.fixMap Fc Fb).left := by
   rw [← P.fixMapFactor_snd Fc Fb, Over.comp_left]
   infer_instance
 
-/-- The product `q = f × f : X ×_k X ⟶ Y ×_k Y` of the proper `f` is proper (blueprint
-`definition-pushforward-correspondence--2`, item 2). -/
+/-- The product `q = f × f : X ×_k X ⟶ Y ×_k Y` of the proper `f` is proper. -/
 instance isProper_prodMap : IsProper (prod.map P.f P.f).left :=
   inferInstance
 

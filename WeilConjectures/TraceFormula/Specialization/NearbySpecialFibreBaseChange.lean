@@ -25,7 +25,9 @@ and whose square of special fibres is cartesian. For a bounded constructible `�
 on the geometric generic fibre of `M`, the base change morphism
 `Li_N^* Rt_* ⟶ Rt_{s*} Li_M^*` is invertible at the generic direct image `Rj_{M*} L`
 (`NearbyCyclesModel.Hom.isIso_baseChangeMap_commSq_i_app_lowerStar`). This is the step
-`ī^* Rt̄_* ≃ Rt_{s*} ī'^*` of the proof of blueprint `prose-E-03` (2).
+`ī^* Rt̄_* ≃ Rt_{s*} ī'^*` of the proof of proper base change for nearby cycles.
+
+## Implementation details
 
 The complex `Rj_{M*} L` is not bounded constructible, so the proper base change theorem for
 bounded constructible complexes does not apply. The proof passes to an integral model `L₀` of
@@ -38,6 +40,10 @@ the special fibres, whose pullbacks preserve countable products
 (`ProEtale.CondensedRing.preservesLimitsOfShape_leftDerivedUpperStar_of_isClosedImmersion`),
 gives the integral statement, and the coefficient changes `𝒪_E → E → ℚ̄_ℓ` commute with the
 direct images of bounded below complexes and with base change morphisms.
+
+## References
+
+* SGA 7 XIII 2.1.7
 
 -/
 
@@ -87,10 +93,9 @@ lemma IsTraitModel.isAffineHom_j {M : NearbyCyclesModel X X'.left} (hM : M.IsTra
 variable {ℓ : ℕ} [Fact ℓ.Prime]
 
 -- the derived categories of module objects are slow to elaborate
-/-- **Proper base change along the special fibre at a generic direct image** (the step
-`ī^* Rt̄_* ≃ Rt_{s*} ī'^*` of the proof of blueprint `prose-E-03` (2); SGA 7
-XIII 2.1.7): for a morphism `φ : M ⟶ N` of models of finite type over the trait whose morphism of
-total spaces is proper and whose square of special fibres is cartesian, the base change morphism
+/-- **Proper base change along the special fibre at a generic direct image**: for a morphism
+`φ : M ⟶ N` of models of finite type over the trait whose morphism of total spaces is proper
+and whose square of special fibres is cartesian, the base change morphism
 `Li_N^* Rt_* ⟶ Rf'_* Li_M^*` is invertible at the direct image `Rj_{M*} L` of a bounded
 constructible `ℚ̄_ℓ`-complex `L` on the geometric generic fibre of `M`. -/
 theorem Hom.isIso_baseChangeMap_commSq_i_app_lowerStar {X' Y Y' : Scheme.{u}}

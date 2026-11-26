@@ -13,8 +13,17 @@ import Mathlib.Algebra.DirectSum.Module
 /-!
 # One-step approximation from homogeneous initial-ideal generators
 
-Source: Stacks Project, Algebra, Lemma 05GH, proof, second and third paragraphs
-(blueprint: lem-weil-pbc-associated-graded-ideal-approximation).
+If `gr_J(A)` is Noetherian, every ideal `K` admits finitely many elements whose initial forms
+approximate any element of `K ∩ J^n` modulo `K ∩ J^(n+1)`. No completeness is needed.
+
+## Implementation details
+
+The finitely many initial forms are chosen directly from the generating set, avoiding the
+construction of a homogeneous ideal and the homogenization of its generators.
+
+## References
+
+* [Stacks, Tag 05GH], proof, second and third paragraphs
 -/
 
 @[expose] public section
@@ -29,8 +38,8 @@ private noncomputable def initialForm {A : Type u} [CommRing A]
   DirectSum.of (fun k : ℕ ↦ associatedGradedPiece J k) n
     (Submodule.Quotient.mk (⟨x, hx⟩ : (J ^ n : Ideal A)))
 
-/-- Choose finite initial forms directly from the generating set. This avoids
-constructing a homogeneous ideal and then homogenizing its generators. -/
+/-- If `gr_J(A)` is Noetherian, there are finitely many `h i ∈ K ∩ J^(d i)` whose initial forms
+generate the initial forms of all elements of `K`. -/
 private theorem finite_initial_forms {A : Type u} [CommRing A]
     (J K : Ideal A) [IsNoetherianRing (associatedGraded J)] :
     ∃ (t : ℕ) (d : Fin t → ℕ) (h : Fin t → A)
@@ -74,8 +83,8 @@ private theorem finite_initial_forms {A : Type u} [CommRing A]
   refine ⟨q, ?_⟩
   simpa only [smul_eq_mul] using hq.symm
 
-/-- Multiplication by a homogeneous initial form contributes to degree n
-through an actual coefficient in J^(n-d). -/
+/-- The degree-`n` component of the product of `q` with the degree-`d` initial form of `h` is the
+class of `a * h` for some `a ∈ J^(n-d)`. -/
 private theorem product_component_coefficient {A : Type u} [CommRing A]
     (J : Ideal A) (q : associatedGraded J) (d : ℕ) (h : A)
     (hh : h ∈ J ^ d) (n : ℕ) :
@@ -122,19 +131,9 @@ private theorem product_component_coefficient {A : Type u} [CommRing A]
               Submodule.Quotient.mk (0 : (J ^ n : Ideal A))
             exact (Submodule.Quotient.mk_zero _).symm
 
-/-- Homogeneous initial forms give finite one-step ideal approximation data.
-Source: Stacks Project, Tag 05GH, proof, second and third paragraphs.
-(blueprint: lem-weil-pbc-associated-graded-ideal-approximation)
-
-Proof: Take the ideal spanned by all initial forms of elements of K in J^n.
-Noetherianity and finite-subset extraction choose finitely many of these very
-initial forms, with degrees d and representatives h in K intersect J^d.
-Express each initial form of x in their span. Degree-n projection of a product
-with the degree-d initial form of h is represented by a*h with a in J^(n-d):
-prove this by direct-sum induction, lifting each homogeneous coefficient to
-its ideal-power representative. Applying projection to the finite-sum equality
-makes x minus the resulting sum zero modulo J^(n+1). It also lies in K since
-x and every h do. This argument does not require completeness of the ring. -/
+/-- If `gr_J(A)` is Noetherian, every ideal `K` has finitely many elements `h i ∈ K ∩ J^(d i)`
+such that every `x ∈ K ∩ J^n` is congruent modulo `K ∩ J^(n+1)` to some `∑ a i * h i` with
+`a i ∈ J^(n - d i)`. -/
 theorem exists_associatedGraded_ideal_approximation {A : Type u} [CommRing A]
     (J K : Ideal A) [IsNoetherianRing (associatedGraded J)] :
     ∃ (t : ℕ) (d : Fin t → ℕ) (h : Fin t → A),

@@ -18,8 +18,21 @@ import WeilConjectures.RingTheory.TensorLimitOfProZeroKernels
 /-!
 # Inverse limits of flat modules over ideal-power quotients
 
-Source: Stacks Project, More on Algebra, Lemma Tag 0912 (lemma-limit-flat).
-(blueprint: lem-weil-pbc-limit-flat-modules)
+An inverse system of flat `A/Iⁿ`-modules with surjective transitions has flat limit, and
+tensoring with a finite module commutes with this limit.
+
+## Implementation details
+
+Artin–Rees and flatness over the quotients show that tensor kernels of finite submodule
+inclusions are eventually killed by the transitions
+(`tensor_kernel_eventually_zero_of_flat_quotients`). The tensor comparison
+(`tensor_limit_comparison_of_proZero_kernels`) uses finite free presentations, recursive lifting
+and Mittag-Leffler fibres. Flatness then follows from the ideal criterion and injectivity of the
+comparison for finitely generated ideals.
+
+## References
+
+* [Stacks, Tag 0912]
 -/
 
 @[expose] public section
@@ -32,29 +45,11 @@ namespace ModuleCat
 
 /-- An inverse system of flat `A / Iⁿ`-modules with surjective transitions has flat limit,
 and tensoring with a finite module commutes with this limit.
-Source: Stacks Project, More on Algebra, Lemma Tag 0912 (lemma-limit-flat).
-(blueprint: lem-weil-pbc-limit-flat-modules)
 
 The object `F.obj (op n)` denotes `M_{n+1}`. The quotient module structures, together
-with `IsScalarTower`, say that the given `A`-action factors through `A / I^(n+1)`;
-in particular `I^(n+1)` annihilates this object. The tensor comparison is stated as
-injectivity into the product and surjectivity onto its compatible sequences. Its
-`n`-th component is `1 ⊗ limit.π F (op n)`.
-
-Proof, using a presentation-level version of the argument of Tag 0912:
-1. Artin--Rees and flatness over the quotients show that tensor kernels of finite
-   submodule inclusions are eventually killed by tower transitions. This is
-   `tensor_kernel_eventually_zero_of_flat_quotients`, which needs no surjectivity.
-2. The general `tensor_limit_comparison_of_proZero_kernels` uses these kernels,
-   finite free presentations, recursive lifting and Mittag--Leffler fibres to prove
-   the canonical tensor comparison. It applies to every finite `Q`, with independent
-   universes for the ring, the tower, and `Q`.
-3. Apply the finitely generated ideal criterion for flatness. If `y ∈ J ⊗ lim F`
-   is killed by the inclusion into `A ⊗ lim F`, tensor naturality puts each
-   coordinate in the corresponding tensor kernel. For each n, choose a later m
-   whose transition kills that kernel. Compatibility of the limit projections
-   then makes the n-th coordinate zero. Injectivity of the comparison for `J`
-   gives `y = 0`, proving flatness. -/
+with `IsScalarTower`, say that the given `A`-action factors through `A / I^(n+1)`.
+The tensor comparison is stated as injectivity into the product and surjectivity onto its
+compatible sequences; its `n`-th component is `1 ⊗ limit.π F (op n)`. -/
 theorem limit_flat_of_flat_quotients
     (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (F : ℕᵒᵖ ⥤ ModuleCat.{v} A)

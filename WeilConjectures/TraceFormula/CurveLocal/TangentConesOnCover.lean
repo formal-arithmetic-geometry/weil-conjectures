@@ -17,7 +17,7 @@ import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 
 For a cover datum `D` of a curve local model `M`, the surface `T'` is the strict localization of
 the smooth surface `S' = C ×_k C` at the `k`-point `s' = (c, c)`, and `π : T' ⟶ T` is induced by
-`p × p`. This file assembles blueprint `lemma-tangent-cones-on-cover`:
+`p × p`. This file assembles the properties of `T'`:
 
 * `S'` is smooth of relative dimension two over `k` and `s'` is a `k`-point;
 * `π` is finite and flat (miracle flatness: both strict local rings are regular of dimension
@@ -37,7 +37,7 @@ the smooth surface `S' = C ×_k C` at the `k`-point `s' = (c, c)`, and `π : T' 
 - `AlgebraicGeometry.Etale.CurveLocalModel.CoverDatum.free_and_finrank_π`: `π` is finite free of
   degree `e²`.
 - `AlgebraicGeometry.Etale.CurveLocalModel.CoverDatum.tangentConesOnCover`: the assembled
-  statement of blueprint `lemma-tangent-cones-on-cover`.
+  statement.
 -/
 
 @[expose] public section
@@ -126,7 +126,7 @@ instance isLocalHom_preimage_π : IsLocalHom (Spec.preimage D.π).hom := by
   rw [← h, CommRingCat.comp_apply]
   exact (ha.map (strictHenselizationEval D.s').hom).ne_zero
 
-/-- **`π : T' ⟶ T` is flat** (blueprint `lemma-tangent-cones-on-cover`): it is a finite local
+/-- **`π : T' ⟶ T` is flat**: it is a finite local
 homomorphism of regular local rings of dimension two (miracle flatness). -/
 theorem flat_π : Flat D.π := by
   set φ := Spec.preimage D.π
@@ -162,13 +162,13 @@ theorem flat_π : Flat D.π := by
     (strictHenselization D.s' ⧸ p.map (algebraMap _ (strictHenselization D.s')))
   rw [h0, hSd, hRd, add_zero]
 
-/-- **`π` is étale over `T ∖ (H ∪ V)`** (blueprint `lemma-tangent-cones-on-cover`). -/
+/-- **`π` is étale over `T ∖ (H ∪ V)`**. -/
 instance etale_π_openComplement :
     Etale ((D.π ⁻¹ᵁ (M.hH.openComplement ⊓ M.v.openComplement)).ι ≫ D.π) :=
   etale_comp_ι_of_le D.π (V := D.π ⁻¹ᵁ M.O₂)
     (fun _ hz ↦ M.openComplement_hH_inf_openComplement_v_le_O₂ hz)
 
-/-- **The degree of `π`** (blueprint `lemma-tangent-cones-on-cover`): every geometric fibre of
+/-- **The degree of `π`**: every geometric fibre of
 `π` over a geometric point of `T ∖ (H ∪ V)` has `e²` points. -/
 theorem natCard_geometricFiber_π {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (z : Spec (.of Ω) ⟶ M.T) (hz : z default ∈ M.hH.openComplement ⊓ M.v.openComplement) :
@@ -179,7 +179,7 @@ theorem natCard_geometricFiber_π {Ω : Type u} [Field Ω] [IsSepClosed Ω]
   · exact D.natCard_geometricFiber_ρ _ hO.1
   · exact D.natCard_geometricFiber_ρ _ hO.2
 
-/-- **`π` is finite free of degree `e²`** (blueprint `lemma-tangent-cones-on-cover`): the strict
+/-- **`π` is finite free of degree `e²`**: the strict
 local ring of `T'` is a free module of rank `e²` over that of `T`. The rank is computed from the
 geometric fibre over a point of `T ∖ (H ∪ V)`, namely the image of a point of the diagonal `B'`
 other than the closed point. -/
@@ -225,7 +225,7 @@ theorem free_and_finrank_π :
   exact (Scheme.Hom.natCard_geometricFiber_Spec_map_eq_finrank
     (R := strictHenselization M.diagPoint) (S := strictHenselization D.s') ζ.hom het').symm
 
-/-- **Tangent cones on the cover** (blueprint `lemma-tangent-cones-on-cover`): `T'` is the strict
+/-- **Tangent cones on the cover**: `T'` is the strict
 localization of the smooth surface `S' = C ×_k C` at the `k`-point `s'`; the morphism
 `π : T' ⟶ T` is finite and flat, étale over `T ∖ (H ∪ V)` with geometric fibres there of
 cardinality `e²`; `H'` is regular; and the tangent cone of `(G' ∪ V')_red` meets the tangent

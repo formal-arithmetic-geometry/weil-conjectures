@@ -9,7 +9,16 @@ public import WeilConjectures.SixFunctors.IntegralOpenReduction.IntegralOpenRedu
 
 /-! # Evaluation of the ordinary transported open-system counit
 
-Source: Stacks Project, Tags 03DJ and 0941. All equalities here precede localization.
+We show that the transported ordinary open-system counit evaluates to the finite counit.
+
+## Implementation details
+
+All equalities here precede localization.
+
+## References
+
+* [Stacks, Tag 03DJ]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -103,8 +112,7 @@ private theorem transported_counit_comparison
     Category.comp_id, Category.assoc] using h
 
 /-- The actual restriction evaluation, including the coefficient equivalence units
-and counits. Source: Stacks 03DJ, 0941
-(blueprint: lem-sf-open-system-counit-evaluation). -/
+and counits. -/
 abbrev counitRestrictionEvaluation (n : ℕ) (N : coefficientSequenceModules l E X) :
     (coefficientSequenceEvaluation l E U n).obj ((systemRestriction l E j o).obj N) ≅
       (finiteRestriction l E j o n).obj ((coefficientSequenceEvaluation l E X n).obj N) :=
@@ -120,18 +128,7 @@ abbrev counitRestrictionEvaluation (n : ℕ) (N : coefficientSequenceModules l E
         (o.systems.counitIso.app _)) ≪≫
     (o.finite n).inverse.mapIso ((o.openSystems.restrictionEvaluation n).app N)
 
-/-- The transported ordinary open-system counit evaluates to the finite counit.
-Source: Stacks Project, Tags 03DJ and 0941; the ordinary evaluation calculation
-in step 2 of `lem-sf-open-restriction-counit-on-good-complexes`.
-(blueprint: lem-sf-open-system-counit-evaluation).
-
-Proof: expand the counit of the composite adjunction into the equivalence counit
-and the localized open counit. Use naturality of extension evaluation to move the
-equivalence counit across it. Substitute the specified counit evaluation equation
-of openSystems. In the remaining finite equivalence, naturality of its counit
-moves transportEvaluation across the finite restriction comparison. The finite
-equivalence triangle identity cancels its unit with its counit. This leaves the
-same ordinary system counit evaluated at the finite level. -/
+/-- The transported ordinary open-system counit evaluates to the finite counit. -/
 theorem openSystemCounitEvaluation (n : ℕ) (N : coefficientSequenceModules l E X) :
     (finiteExtension l E j o n).map (counitRestrictionEvaluation l E j o n N).hom ≫
       ((o.finite n).toAdjunction.comp

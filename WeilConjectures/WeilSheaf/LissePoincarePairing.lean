@@ -20,7 +20,8 @@ type and pure dimension `d`, and `F` a lisse Weil sheaf on `X₀` with dual `F^�
 duality pairs `H_c^i(X₀ ⊗ k̄, F)` perfectly with `H^{2d-i}(X₀ ⊗ k̄, F^∨)`, with values in the line
 `ℚ̄_ℓ(-d)` on which the geometric Frobenius acts by `q^d`. This is derived from
 `AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_dual` (the twisted
-form, pairing with `F^∨(d)`).
+form, pairing with `F^∨(d)`), transported along `H^j(F^∨(d)) ≅ H^j(F^∨)` with Frobenius rescaled
+by `χ_ℓ(σ)ᵈ = q^{-d}` (`AlgebraicGeometry.WeilSheaf.nonempty_equiv_cohomology_constantTwist`).
 
 A perfect pairing `M × N ⟶ K` of Frobenius modules with `⟨F x, F y⟩ = c ⟨x, y⟩` identifies `M`
 with the dual `N^∨` with Frobenius rescaled by `c`
@@ -70,12 +71,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 /-- Degreewise Poincaré duality for a lisse Weil sheaf, untwisted form: for `X₀` smooth,
 separated, of finite type and pure dimension `d` over `k₀` and `F` lisse, there are perfect
 pairings `H_c^i(X₀ ⊗ k̄, F) × H^j(X₀ ⊗ k̄, F^∨) ⟶ ℚ̄_ℓ`, `i + j = 2d`, with
-`⟨F x, F y⟩ = q^d ⟨x, y⟩` for the geometric Frobenius `F`: the value line is `ℚ̄_ℓ(-d)`.
-
-This is `AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_dual`
-(blueprint `corollary-degreewise-duality-over-fields--1`), which pairs with `F^∨(d)`, transported
-along `H^j(F^∨(d)) ≅ H^j(F^∨)` with Frobenius rescaled by `χ_ℓ(σ)ᵈ = q^{-d}`
-(`AlgebraicGeometry.WeilSheaf.nonempty_equiv_cohomology_constantTwist`). -/
+`⟨F x, F y⟩ = q^d ⟨x, y⟩` for the geometric Frobenius `F`: the value line is `ℚ̄_ℓ(-d)`. -/
 theorem exists_isPerfPair_compactlySupportedCohomology_dual_mul (d : ℕ)
     [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l X)
     (hF : F.IsLisse) (i j : ℤ) (h : i + j = 2 * d) :

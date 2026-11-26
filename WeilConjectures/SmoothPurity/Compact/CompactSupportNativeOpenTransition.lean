@@ -16,8 +16,21 @@ import WeilConjectures.SmoothPurity.Compact.CompactSupportOrdinaryOpenTransition
 
 /-! # Coefficient compatibility of native open evaluation
 
-Source: Stacks 03DI, 0D6E and 0D6J; Zheng 4.1 and 4.10
-(blueprint: lem-weil-compact-support-native-open-transition).
+Evaluation of the native extension by zero along an open immersion `j` at level `n` is
+compatible with the coefficient transition maps between levels `n ≤ m`.
+
+## Implementation details
+
+The square is transposed under the open-extension/restriction adjunctions on the sequence
+site, where the horizontal transformation is the map of sections along `(n, U) ⟶ (m, U)`.
+Since all open extensions, evaluations and scalar restrictions are exact, the degreewise
+square is localized at quasi-isomorphisms. The argument uses only `n ≤ m`, and applies to
+arbitrary, non-cartesian systems without any flatness assumption.
+
+## References
+
+* [Stacks Project, Tags 03DI, 0D6E and 0D6J](https://stacks.math.columbia.edu/tag/03DI)
+* Zheng, Construction 4.1 and Lemma 4.10
 -/
 
 @[expose] public noncomputable section
@@ -247,9 +260,8 @@ private theorem square_postcompose
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The open part of the specified native evaluation, with its original unit normalization.
-Source: Stacks 03DI; Zheng, Construction 4.1 and Lemma 4.10.
-(blueprint: lem-weil-compact-support-native-open-transition). -/
+/-- For an open immersion `j`, evaluation at level `n` of the native extension by zero is
+extension by zero of the evaluation at level `n`. -/
 def compactSupportNativeOpenEvaluation {X Z : Scheme.{u}} (j : X ⟶ Z)
     [IsOpenImmersion j] (n : ℕ) :
     ProEtale.VaryingRing.J (compactSupportSystemLevel l E)
@@ -485,25 +497,8 @@ private theorem localizedOrdinaryOpenTransition
     (compactSupportCoefficientTransition_fac l E Z h)
     (compactSupportOrdinaryOpenTransition l E j h) M
 
-/-- Open evaluation respects every horizontal coefficient map of an arbitrary derived system.
-Source: Stacks 03DI, 03DA, 0941; Zheng, Construction 4.1 and Lemma 4.10;
-the open-extension step of the native compact-support transition proof.
-(blueprint: lem-weil-compact-support-native-open-transition).
-Proof: first work with module sheaves on the sequence site. Transpose the proposed square
-under the open-extension/restriction adjunctions. The horizontal transformation is the
-actual map of sections along (n,U) to (m,U); evaluation of ordinary direct image preserves
-sections. Naturality of the system adjunction unit therefore identifies the transposes.
-The unit equations defining moduleEvalG and the inverse mate defining evalJ identify this
-open square with the native one. Transport the single-level adjunctions along
-compactSupportOpenModel. Its left-adjoint uniqueness normalization, together with the
-section normalization of sfRealizationRestriction and the units defining
-sfFixedOpenRestriction, identifies the transported coefficient square with sfOpenRestriction.
-All open extensions, evaluations and scalar restrictions are exact. Apply the degreewise
-square to complexes, then localize at quasi-isomorphisms. The localization factorization
-of compactSupportCoefficientTransition and mapDerivedCategorySquareIso gives precisely
-the displayed equation. Localization natural-transformation extensionality extends it to
-all derived objects. The argument uses only n <= m, so includes equality and arbitrary,
-noncartesian systems, without any flatness assumption. -/
+/-- For an open immersion `j` and `n ≤ m`, the open evaluation isomorphisms at levels `n` and
+`m` are compatible with the coefficient transition maps of an arbitrary derived system `M`. -/
 theorem compactSupportNativeOpenTransition
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     {m n : ℕ} (h : n ≤ m) (M : coefficientSequenceDerived.{u, u} l E X) :

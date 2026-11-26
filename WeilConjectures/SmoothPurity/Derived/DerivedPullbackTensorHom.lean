@@ -91,18 +91,14 @@ import all WeilConjectures.CategoryTheory.BilinearCoefficientDescent.BilinearCoe
 
 /-! # Derived pullback, tensor product, and internal Hom
 
-Source: blueprint sec-smooth-purity/sk-def-sf-operations, order 1467;
-Stacks Project, Tags 06YL, 06YV, 08J7 and 099N
-(blueprint: prose-03-02).
-
 The ambient operations for every commutative condensed coefficient ring are the
 existing module-object derived pullback, K-flat relative tensor and closed internal Hom,
 publicly re-exported here. `ambientDerivedOperations_spec` records their defining
 properties and the exact termwise pullback comparison.
 
 The finite, integral, rational and common-stage declarations below retain the legacy
-constructible interfaces for their existing consumers. They do not define the ambient
-operations of the current blueprint.
+constructible interfaces for their existing consumers; they are not the ambient
+operations.
 
 ## Main definitions
 
@@ -119,6 +115,10 @@ operations of the current blueprint.
 
 Every common-stage comparison rationalizes the prescribed integral comparison.
 No idempotent completion, arbitrary isomorphism, or extra coefficient flatness is used.
+
+## References
+
+* [Stacks: Tags 06YL, 06YV, 08J7, 099N]
 -/
 
 -- The module has public declarations; avoid the costly final private-only style scan.
@@ -159,9 +159,9 @@ variable {I : Type*} [Preorder I] [IsDirectedOrder I]
 
 end PairDescent
 
-/-! Private helpers of the former single module, kept here verbatim: the importers
-`FiniteProductFieldCoefficientDescent` and `RationalRestrictionComparisonCoherence` use them
-through `import all WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorHom`. -/
+/-! Private helpers, used by `FiniteProductFieldCoefficientDescent` and
+`RationalRestrictionComparisonCoherence` through
+`import all WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorHom`. -/
 
 private theorem map_heq {C : Type*} [Category* C] {D : Type*} [Category* D]
     (F : C ⥤ D) {X Y X' Y' : C} (hx : X = X') (hy : Y = Y')
@@ -234,18 +234,7 @@ attribute [local reducible] GeneralAlgebraicallyClosedCoefficients.stageCategory
   GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_5
 attribute [local irreducible] ScalarLocalization.category
 
-/-- Pullback on the actual pair-category quotient has the prescribed representative action.
-Source: blueprint common-stage paragraph
-(blueprint: prose-03-02).
-Proof: use the normalized rationalPullbackScalarComparison for every coefficient
-inclusion. The strict generator formulas commute with a tower of coefficient
-maps; multiplication and associativity of tensors give the scalar associators.
-Both Roos coordinates preserve these equalities. Thus the comparisons satisfy
-the coherent pair-functor descent equation. Conjugating a representative by the
-source comparison and inverse target comparison is independent of enlargement
-and eventual equality. Composition cancels the middle comparisons; identity
-representatives give identities. Every arrow has a representative, so the object
-and representative formulas uniquely determine the functor. -/
+/-- Pullback on the actual pair-category quotient has the prescribed representative action. -/
 theorem commonStageDerivedPullback_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] :
@@ -266,17 +255,13 @@ theorem commonStageDerivedPullback_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 end PullbackProofs
 
-/-- Canonical common-stage pullback, with no new coefficient objects or retracts.
-Source: blueprint common-stage paragraph
-(blueprint: prose-03-02). -/
+/-- Canonical common-stage pullback, with no new coefficient objects or retracts. -/
 def commonStageDerivedPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] :=
   (commonStageDerivedPullback_existsUnique l Ω f).exists.choose
 
-/-- The literal tensor object is formed at the finite coefficient compositum.
-Source: blueprint common-stage paragraph
-(blueprint: prose-03-02). -/
+/-- The literal tensor object is formed at the finite coefficient compositum. -/
 def commonStageTensorObject (W : Scheme.{u})
     [∀ w : W, Invertible (l : W.residueField w)]
     (P Q : generalAlgebraicallyClosedConstructibleCategory l Ω W) :
@@ -290,9 +275,7 @@ def commonStageTensorObject (W : Scheme.{u})
 section ComparisonElaboration
 attribute [local irreducible] ObjectProperty.FullSubcategory.category
 
-/-- The tensor comparison at a common stage includes the scalar associators of both inputs.
-Source: blueprint common-stage paragraph
-(blueprint: prose-03-02). -/
+/-- The tensor comparison at a common stage includes the scalar associators of both inputs. -/
 def commonStageTensorComparison (W : Scheme.{u})
     [∀ w : W, Invertible (l : W.residueField w)]
     (P Q : generalAlgebraicallyClosedConstructibleCategory l Ω W)
@@ -333,18 +316,7 @@ attribute [local reducible] GeneralAlgebraicallyClosedCoefficients.stageSystem
 attribute [local semireducible] operationStageTransitionIso
 attribute [local irreducible] ObjectProperty.FullSubcategory.category ScalarLocalization.category
 
-/-- Common-stage tensor has the bilinear representative formula of the blueprint.
-Source: blueprint common-stage paragraph
-(blueprint: prose-03-02).
-Proof: extend both endpoints to their finite coefficient composita and use the
-literal object formula. At a common larger stage, use commonStageTensorComparison
-to identify their scalar extensions with the tensor of the extended inputs. The
-normalized scalar tensor comparisons are natural, compatible with coefficient
-towers and units: test their strict finite generator formulas and both Roos
-coordinates. Thus the displayed conjugation respects eventual equality. At a
-common stage, composition and identities follow from the rational tensor functor;
-intermediate comparisons cancel. Directedness puts every pair of morphisms at
-such a common stage, so the formula also gives uniqueness. -/
+/-- Common-stage tensor has the bilinear representative formula. -/
 theorem commonStageDerivedTensor_existsUnique (W : Scheme.{u})
     [∀ w : W, Invertible (l : W.residueField w)] :
     ∃! F : generalAlgebraicallyClosedConstructibleCategory l Ω W ×
@@ -410,9 +382,7 @@ theorem commonStageDerivedTensor_existsUnique (W : Scheme.{u})
 
 end TensorDescentElaboration
 
-/-- The canonical common-stage tensor functor on the existing pair category.
-Source: blueprint common-stage paragraph
-(blueprint: prose-03-02). -/
+/-- The canonical common-stage tensor functor on the existing pair category. -/
 def commonStageDerivedTensor (W : Scheme.{u})
     [∀ w : W, Invertible (l : W.residueField w)] :=
   (commonStageDerivedTensor_existsUnique l Ω W).exists.choose
@@ -436,19 +406,7 @@ attribute [local implicit_reducible] catToReflQuiver
 
 open CommonStageInternalHom CommonStageInternalHomDescent
 
-/-- Common-stage internal Hom has precisely the contravariant representative formula.
-Source: blueprint common-stage internal-Hom paragraph
-(blueprint: prose-03-02).
-Proof: form the permitted rational Hom at each literal compositum. The permitted
-pair remains permitted at every common stage by commonStageHomPairAtStage_permitted.
-Use commonStageHomComparison to compare the scalar extension of each output with
-the Hom of the extended inputs. Its ordinary comparison transposes extended
-evaluation; the inverse comparison in its first argument gives exactly u.op in
-the formula. Naturality and the normalized coefficient tower equations show that
-conjugation respects further transport and eventual equality. At a common stage,
-the rational Hom functor gives identity and composition; the middle comparisons
-cancel. Directedness puts any two representatives at such a stage. Every arrow
-has a representative, so these formulas determine the functor uniquely. -/
+/-- Common-stage internal Hom has precisely the contravariant representative formula. -/
 theorem commonStageDerivedInternalHom_existsUnique (W : Scheme.{u}) :
     ∃! F : (commonStageHomPairs.{u, v} l Ω W).FullSubcategory ⥤
         generalAlgebraicallyClosedConstructibleCategory l Ω W,
@@ -530,9 +488,7 @@ theorem commonStageDerivedInternalHom_existsUnique (W : Scheme.{u}) :
     exact (hG.2 P Q L hP hQ a b).trans
       (heq_of_eq (homArrow_spec l Ω W P Q L hP hQ a b).symm)
 
-/-- The canonical common-stage internal Hom on precisely the permitted full subcategory.
-Source: blueprint common-stage internal-Hom paragraph
-(blueprint: prose-03-02). -/
+/-- The canonical common-stage internal Hom on precisely the permitted full subcategory. -/
 def commonStageDerivedInternalHom (W : Scheme.{u}) :=
   (commonStageDerivedInternalHom_existsUnique l Ω W).exists.choose
 

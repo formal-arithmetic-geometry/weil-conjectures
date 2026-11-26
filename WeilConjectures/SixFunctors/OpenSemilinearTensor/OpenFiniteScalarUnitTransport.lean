@@ -11,8 +11,12 @@ import WeilConjectures.CategoryTheory.ProEtaleCoefficients.EquivalenceAdjunction
 
 /-! # Unit-normalized finite scalar transport on the open slice
 
-Source: Stacks Project, Modules on Sites, Tags 03DI, 03EK and 0E8I.
-(blueprint: lem-sf-open-finite-scalar-unit-transport).
+We compare scalar extension on `U` with scalar extension on the transported slice, preserving
+the normalized units on original sections.
+
+## References
+
+* Stacks Project, Tags 03CZ, 03DI, 03EK and 0E8I
 -/
 
 @[expose] public noncomputable section
@@ -195,17 +199,7 @@ private theorem transport_unit (o : Operations l E j) (n : ℕ)
     (op ((IntegralOpenReduction.sliceSite j).obj W)) y) hc)
 
 /-- Scalar extension on U and scalar extension on the transported slice have a
-comparison which preserves the actual normalized units on original sections.
-Source: Stacks 03CZ, 03DI; categorical unit transport across equivalences
-(blueprint: lem-sf-open-finite-scalar-unit-transport).
-
-Proof: the projection equality gives the scalar-restriction square. Its maps are
-identities on the underlying sections; linearity is exactly that projection equality.
-Insert the given forward-functor equalities on the two sides. The normalized comparison
-of left adjoints across the two coefficient equivalences produces η with its unit
-identity. Evaluate that identity on a slice section. Naturality of the forward-functor
-cast moves the integral scalar unit past the cast, and the inverse casts cancel.
-The resulting equation is the displayed formula on the original section. -/
+comparison which preserves the actual normalized units on original sections. -/
 theorem exists_openFiniteScalarUnitTransport (o : Operations l E j) (n : ℕ)
     (D : SheafOfModules.SystemScalarModel.{t + 1, t, max u (t + 1)}
       (((ProEt.topology X).overPullback CommRingCat.{max u (t + 1)}

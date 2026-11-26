@@ -13,6 +13,16 @@ public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 import WeilConjectures.Topology.Sheaves.CechComparison
 
+/-!
+# Zeroth homology of the Čech complex of an open cover
+
+The degree-zero homology of the Čech complex of an open cover is the group of global sections.
+
+## References
+
+* [Stacks Project, Tags 03AN and 03AZ](https://stacks.math.columbia.edu/tag/03AN)
+-/
+
 @[expose] public section
 
 universe u
@@ -23,20 +33,7 @@ namespace TopCat.Sheaf
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The degree-zero homology of the categorical Čech complex of an open cover
-is the group of global sections, with coefficients one universe above the space.
-Source: Stacks Project, Tag 03AN (the degree-zero sheaf condition),
-as used in Tag 03AZ.
-(blueprint: lem-sc-open-cech-zeroth-homology)
-
-Proof: Augment the Čech complex by restricting a global section to each
-one-fold product. The augmentation has zero differential because the two
-restrictions to every two-fold product coincide. The zeroth cycles are exactly
-compatible local sections: project the equation d c = 0 to the two-fold
-product and restrict further to the intersection. Sheaf gluing supplies a
-unique global section for these cycles. Thus the augmentation identifies
-global sections with the cycles. There are no incoming boundaries in degree
-zero, so cycles project isomorphically to homology. This includes an empty
-cover of the empty space. -/
+is the group of global sections, with coefficients one universe above the space. -/
 theorem nonempty_openCech_zerothHomology
     {X : TopCat.{u}} {ι : Type u} (U : ι → Opens X) (hU : iSup U = ⊤)
     (F : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u + 1}) :

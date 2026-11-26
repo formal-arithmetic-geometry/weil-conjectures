@@ -12,7 +12,14 @@ import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Rational
 /-! # A geometric step in normalized exceptional coefficient assembly
 
 The coefficient records include the literal localization and representative-arrow action
-normalizations; the refinement construction uses these same fixed stage functors. -/
+normalizations; the refinement construction uses these same fixed stage functors.
+
+## References
+
+* [Stacks, Tag 0F7B]
+* [Stacks, Tag 0F7I]
+* [Zheng, 5.13--5.15]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -222,31 +229,7 @@ private theorem closed_left_iso_shift
         (M.commonComparison d i).q.hom).CommShift ℤ
     infer_instance
 
-/-- Construct the left proper/open refinements on normalized coefficient stages.
-Source: Stacks 0F7B and 0F7I, Zheng 5.13--5.15; exceptional construction step 6
-(blueprint: lem-sf-constructible-exceptional-left-refinements).
-
-Proof: for a proper refinement r use the open unit to obtain the canonical map from
-j_d! to Rr_* j_c!. Proper base change identifies its restriction to the open with
-identity, so it is invertible on the compact-support objects. Compose its inverse
-with proper direct-image composition and transport through the given left
-realizations. Full faithfulness lifts this natural isomorphism to the full finite-Tor
-categories, giving the exact RingRefinementNormalized formula. At integral stages use
-the same map of strict systems before total limit; the prescribed ambient-to-tower
-realizations identify it with the ambient proper/open word. Shift compatibility is
-termwise and passes to the total limit; transport through the shift-compatible
-left realizations preserves it. Localize the integral map on all fraction morphisms.
-The identity normalization of the rationalization comparisons gives the displayed
-rational equation. At a common finite field use its rational map conjugated by the
-common-stage q maps. Every pair-category arrow is a stage arrow at a common field
-conjugated by transition isomorphisms; commonTransitionNatural expresses both closed
-functors on transitions by the rational scalar q, and the canonical proper/open scalar
-square (the localized integral q commutes with the integral refinement map) gives
-naturality on them. The common-stage shifts and q maps give the shift equation. For the identity
-refinement the open unit and proper composition reduce to identities; for empty
-source the maps are the unique maps of zero functors. Only left maps are output;
-the right isomorphisms and both adjunction equations are constructed separately by
-adjunction conjugation. -/
+/-- Construct the left proper/open refinements on normalized coefficient stages. -/
 theorem exists_coefficient_left_refinements (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} (f : X ⟶ Y)
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]

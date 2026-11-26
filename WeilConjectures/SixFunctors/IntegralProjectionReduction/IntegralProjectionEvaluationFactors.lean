@@ -9,7 +9,9 @@ public import WeilConjectures.SixFunctors.IntegralProjectionReduction.IntegralPr
 
 /-! # Explicit factors of finite evaluation
 
-Source: fix-prop-projection-formula.proof.md, successive coefficient reductions.
+We record the explicit factors (tensor, support, inverse image and finite realization) of
+the finite evaluation of the source and target endpoints of the finite projection, following
+the successive coefficient reductions of the projection formula.
 -/
 
 @[expose] public noncomputable section
@@ -29,24 +31,18 @@ attribute [local irreducible] CategoryTheory.constantSheaf HasDerivedCategory.st
   AlgebraicGeometry.Scheme.residueField integralDerivedPullback integralCompletedTensor
   pullbackTensorCalculus
 
-/-- The ambient fixed-coefficient tensor, before restricting its input domains.
-Source: the finite projection construction
-(blueprint: def-sf-integral-projection-evaluation-factors). -/
+/-- The ambient fixed-coefficient tensor, before restricting its input domains. -/
 abbrev evaluatedTensor (X : SixFunctorSpace D) :=
   Functor.uncurry.obj (CompactSupportFiniteProjection.tensor
     (C := C) (E := E) (n := m + 1) (hn := Nat.le_add_left 1 m) X)
 
-/-- A comparison on all system inputs, independent of support and integral realization.
-Source: finite tensor evaluation
-(blueprint: def-sf-integral-projection-evaluation-factors). -/
+/-- A comparison on all system inputs, independent of support and integral realization. -/
 abbrev SystemTensorEvaluation := ∀ X : SixFunctorSpace D,
   (calculus C.l E X.obj.left).systemClosed.tensor ⋙ evaluation (C := C) (E := E) m X ≅
     (evaluation (C := C) (E := E) m X).prod
       (evaluation (C := C) (E := E) m X) ⋙ evaluatedTensor (C := C) (E := E) m X
 
-/-- Evaluate support by its open and proper factors, and the given finite realization.
-Source: supportEvaluation and finiteSupport
-(blueprint: def-sf-integral-projection-evaluation-factors). -/
+/-- Evaluate support by its open and proper factors, and the given finite realization. -/
 def evaluatedSupport (o : Operations C.l E) {X Y : SixFunctorSpace D}
     (f : X ⟶ Y) (c : Compactification f.hom.left)
     (K : sfIntegralConstructibleCategory C.l E X.obj.left) :
@@ -60,9 +56,7 @@ def evaluatedSupport (o : Operations C.l E) {X Y : SixFunctorSpace D}
       (reductionEvaluation d m X K) ≪≫
     ((stage d m).finiteSupport f c).symm.app _
 
-/-- Evaluate inverse image, retaining the datum's prescribed finite pullback comparison.
-Source: pullbackTensorDerivedEvaluation and finitePullback
-(blueprint: def-sf-integral-projection-evaluation-factors). -/
+/-- Evaluate inverse image, retaining the datum's prescribed finite pullback comparison. -/
 def evaluatedPull {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (L : sfIntegralConstructibleCategory C.l E Y.obj.left) :
     (evaluation (C := C) (E := E) m X).obj
@@ -73,9 +67,7 @@ def evaluatedPull {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (finiteDerivedPullback C.l E m f.hom.left).mapIso (reductionEvaluation d m Y L) ≪≫
     ((stage d m).finitePullback f).symm.app _
 
-/-- Evaluation of the tensor/pullback input by its three specified factors.
-Source: tensor and inverse-image evaluation
-(blueprint: def-sf-integral-projection-evaluation-factors). -/
+/-- Evaluation of the tensor/pullback input by its three specified factors. -/
 def evaluatedInput (b : SystemTensorEvaluation (C := C) (E := E) m)
     {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (K : sfIntegralConstructibleCategory C.l E X.obj.left)
@@ -94,9 +86,7 @@ def evaluatedInput (b : SystemTensorEvaluation (C := C) (E := E) m)
     (evaluatedTensor (C := C) (E := E) m X).mapIso
       (Iso.prod (reductionEvaluation d m X K) (evaluatedPull d m f L))
 
-/-- The source endpoint: evaluate tensor, support, and the second integral input.
-Source: the source of the finite projection
-(blueprint: def-sf-integral-projection-evaluation-factors). -/
+/-- The source endpoint: evaluate tensor, support, and the second integral input. -/
 def evaluatedSource (b : SystemTensorEvaluation (C := C) (E := E) m)
     (o : Operations C.l E) {X Y : SixFunctorSpace D}
     (f : X ⟶ Y) (c : Compactification f.hom.left)
@@ -113,9 +103,7 @@ def evaluatedSource (b : SystemTensorEvaluation (C := C) (E := E) m)
     (evaluatedTensor (C := C) (E := E) m Y).mapIso
       (Iso.prod (evaluatedSupport d m o f c K) (reductionEvaluation d m Y L))
 
-/-- The target endpoint: evaluate support, its tensor input, and finite support realization.
-Source: the target of the finite projection
-(blueprint: def-sf-integral-projection-evaluation-factors). -/
+/-- The target endpoint: evaluate support, its tensor input, and finite support realization. -/
 def evaluatedTarget (b : SystemTensorEvaluation (C := C) (E := E) m)
     (o : Operations C.l E) {X Y : SixFunctorSpace D}
     (f : X ⟶ Y) (c : Compactification f.hom.left)

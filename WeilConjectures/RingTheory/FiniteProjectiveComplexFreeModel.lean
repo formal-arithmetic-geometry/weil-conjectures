@@ -15,8 +15,25 @@ import Mathlib.RingTheory.Finiteness.Prod
 /-!
 # Finite free replacement of bounded above finite projective complexes
 
-Source: Stacks Project, More on Algebra, Lemma 15.66.5, Tag 064U, (3) implies (1).
-(blueprint: lem-pc-finite-projective-complex-free-model).
+A bounded above complex of finite projective modules is quasi-isomorphic to a bounded above
+complex of finite free modules with the same upper bound.
+
+## Main results
+
+* `CochainComplex.exists_finiteFree_model_of_finite_projective`
+
+## Implementation details
+
+Descending from the upper bound `b`, choose a finite projective complement `C^n` of
+`P^n ⊕ C^(n + 1)` in a finite free module and set `F^n = P^n ⊕ C^(n + 1) ⊕ C^n`, with
+differential `(p, x, y) ↦ (d_P(p), 0, x)`. The projection `F → P` is a homotopy equivalence,
+the complement summands being contracted by `(p, x, y) ↦ (0, y, 0)`. The recursion is carried
+out on a `ℕ`-indexed complex after truncation and the result is extended back to `ℤ`. The
+module universe equals the ring universe, so the finite free modules and kernels fit in it.
+
+## References
+
+* [Stacks, Tag 064U] ((3) implies (1))
 -/
 
 @[expose] public section
@@ -193,31 +210,7 @@ private theorem nat_free_model (R : Type u) [CommRing R]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A bounded above complex of finite projective modules has a finite free replacement
-with the same upper bound and a quasi-isomorphism to the original complex.
-
-Source: Stacks Project, More on Algebra, Lemma 15.66.5, Tag 064U, (3) implies (1).
-(blueprint: lem-pc-finite-projective-complex-free-model).
-
-Proof: Put C^(b+1) = 0. Descending from b, choose a finite projective complement C^n
-of P^n ⊕ C^(n + 1) in a finite free module. This is possible because a finite projective
-module is a direct summand of a finite free module: choose a finite free surjection,
-split it using projectivity, and use its kernel as complement. The kernel is finite
-projective because it is a direct summand of that finite free module.
-Set F^n = P^n ⊕ C^(n + 1) ⊕ C^n for n ≤ b, and F^n = 0 for n > b. Choose the
-complements recursively at n = b-k for k : ℕ; transport the resulting decompositions
-to the finite free modules. The differential sends (p, x, y) in degree n to
-(d_P(p), 0, x) in degree n+1. At the top it is zero, since P^(b+1) and C^(b+1)
-are zero. Its square is zero by the square-zero identity for d_P.
-Projection onto P gives a chain map, and inclusion of P is a chain map in the
-opposite direction. Their composite on P is the identity. The other composite
-differs from the identity by the projection onto the two complement summands.
-The degree-minus-one map (p, x, y) ↦ (0, y, 0) contracts these summands, giving
-id_F - inclusion ∘ projection = d h + h d. Thus the projection is a homotopy
-equivalence and in particular a quasi-isomorphism. All terms are finite free and
-zero above b. No lower bound is needed; the recursion continues indefinitely.
-For the zero ring or zero complex the same construction works with rank-zero
-terms and zero complements. The module universe equals the ring universe, so the
-finite free modules and kernels used in the construction fit in it. -/
+with the same upper bound and a quasi-isomorphism to the original complex. -/
 theorem exists_finiteFree_model_of_finite_projective (R : Type u) [CommRing R]
     (P : CochainComplex (ModuleCat.{u} R) ℤ) (b : ℤ) (hb : P.IsStrictlyLE b)
     (hfinite : ∀ n : ℤ, Module.Finite R (P.X n))

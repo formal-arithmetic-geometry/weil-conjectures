@@ -11,8 +11,11 @@ import all WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorEvaluat
 
 /-! # Evaluation of sequence pullback tensor maps on generators
 
-Source: Stacks Tags 07A4, 0941 and 03D2.
-(blueprint: lem-pur-completed-pullback-tensor-evaluation-generators).
+This module computes the evaluated sequence pullback tensor map on unit generators.
+
+## References
+
+* Stacks Project, Tags 07A4, 0941 and 03D2
 -/
 
 @[expose] public noncomputable section
@@ -55,15 +58,7 @@ attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
   SheafOfModules.monoidalCategory
 
 -- The section formulas compare coefficient modules on the sequence and finite sites.
-/-- The evaluated sequence tensor map sends unit generators to the intrinsic unit tensors.
-Source: Stacks Tags 07A4, 0941 and 03D2
-(blueprint: lem-pur-completed-pullback-tensor-evaluation-generators).
-Proof: naturality of evaluation moves the sequence tensor map inside evaluation.
-Its defining normalization sends the unit of a pure tensor to the tensor of the
-sequence units. The evaluation tensor comparison preserves these generators.
-The final tensor map applies the evaluation mate to each unit; its unit formula
-and hc identify them with the two intrinsic inverse-image units.
--/
+/-- The evaluated sequence tensor map sends unit generators to the intrinsic unit tensors. -/
 theorem completedPullbackTensor_evaluation_generators {X Y : Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ)
     (c : integralOperationsLevelPullback l E f n ≅

@@ -46,8 +46,21 @@ import WeilConjectures.SmoothPurity.PurStrictScalar.NativeReductionCounitKFlat
 
 /-! # Universal whole-cochain scalar reduction counit
 
-Source: Stacks 06YY and 0940--0941; the whole-sequence derived balancing construction.
-(blueprint: lem-pur-scalar-target-counit-universal).
+The whole-sequence derived balancing construction, on the target side.
+
+## Implementation details
+
+A K-flat resolution of the completed `E`-module complex extends to a K-flat complex over the
+completed `F` coefficients, on which native `F` quotient extension is computed. Derived tensor
+associativity identifies this with the left derived functor of the composite ordinary
+extensions, and the mate defining the native reduction counit is the universal counit.
+Restriction to constant integral scalars followed by arithmetic restriction of strict diagrams
+preserves the calculation. Pasting the scalar-extension counit, reduction counit and
+exact-localization factor gives the right Kan extension; `e = 1` is the identity subsequence.
+
+## References
+
+* [Stacks Project, Tags 06YY, 0940 and 0941]
 -/
 
 @[expose] public noncomputable section
@@ -397,25 +410,7 @@ private theorem scalarExtensionKFlat (W : Scheme.{u})
     (reductionChange_map_eq W (completedCoefficientMap l E F i W)) hP
 
 /-- Completed scalar extension followed by native reduction and arithmetic
-restriction has its universal composite cochain counit.
-Source: Stacks 06YY (derived tensor composition), 0940--0941 (ringed sequence systems).
-Proof: choose a K-flat resolution of the completed E-module complex. Its extension
-to completed F coefficients is K-flat: restriction of scalars is exact, and the
-tensor adjunction tests acyclicity against arbitrary acyclic coefficient complexes.
-Compute native F quotient extension on this replacement. Derived tensor
-associativity identifies this with the left derived functor of the composite
-ordinary extensions. The mate defining the native reduction counit is the
-universal counit by its normalized derived-limit adjunction. Exact restriction to
-constant integral scalars followed by arithmetic restriction of strict diagrams
-preserves the calculation, since both operate on the underlying whole sequence
-complex and compute cohomology pointwise. Pasting the scalar-extension counit,
-reduction counit and exact-localization factor yields exactly the formula below.
-This construction is natural on all complexes, and its universal property
-identifies maps into the resulting derived functor with maps into the ordinary
-composite after Q. Hence it is the asserted right Kan extension. The index e=1
-is the identity subsequence, and the same argument applies to the zero complex
-and the empty site object.
-(blueprint: lem-pur-scalar-target-counit-universal). -/
+restriction has its universal composite cochain counit. -/
 theorem scalarTargetCounit_universal (W : Scheme.{u})
     (S : CoefficientDerivedSystemCalculus.{u, u} l F W) (e : ℕ) :
     letI := ordinaryReduction_additive l F W

@@ -10,9 +10,18 @@ import all WeilConjectures.SmoothPurity.Coefficient.CoefficientExtensionOrdinary
 
 /-! # Scalar unit sections and finite evaluation
 
-Source: Stacks 03D7 and the sequence-site construction preceding 0941.
-Native target carriers keep presheaf maps and adjunction sections small while
-their proved comparison lemmas retain the actual restriction-of-scalars maps.
+Unit sections of finite scalar extension on the sequence site, their evaluation at finite
+levels, and their compatibility with the coefficient transitions.
+
+## Implementation details
+
+Native target carriers keep presheaf maps and adjunction sections small, while
+the comparison lemmas retain the actual restriction-of-scalars maps.
+
+## References
+
+* [Stacks: Tag 03D7](https://stacks.math.columbia.edu/tag/03D7); the sequence-site
+  construction preceding [Stacks: Tag 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -123,8 +132,7 @@ private theorem iso_inv_hom_section
     e.hom.val.app U (e.inv.val.app U y) = y :=
   congrArg (fun f ↦ f.val.app U y) e.inv_hom_id
 
-/-- The unit section of finite scalar extension, in its native target module.
-Source: Stacks 03D7. -/
+/-- The unit section of finite scalar extension, in its native target module. -/
 @[irreducible] def finiteScalarUnitSection
     (A : CoefficientExtensionSystems l E L ι W)
     (N : coefficientSequenceModules l E W) (n : ℕ) (U : W.ProEtᵒᵖ)
@@ -133,8 +141,7 @@ Source: Stacks 03D7. -/
   ((A.levels n).ordinaryAdjunction.unit.app
     ((coefficientSequenceEvaluation l E W n).obj N)).val.app U x
 
-/-- The finite scalar unit transported back through the supplied evaluation isomorphism.
-Source: Stacks 03D7 and the ordinary evaluation unit equation. -/
+/-- The finite scalar unit transported back through the supplied evaluation isomorphism. -/
 @[irreducible] def evaluatedUnitSection
     (A : CoefficientExtensionSystems l E L ι W)
     (ρ : ∀ n : ℕ, A.scalar.model.E ⋙ coefficientSequenceEvaluation l L W n ≅
@@ -246,18 +253,7 @@ private theorem coefficientTransition_nativeMap
   unfold presheafMapSection
   exact heq_of_eq (coefficientTransition_section l E W N h U x)
 
-/-- The normalized finite scalar unit preserves every compatible pair of system sections.
-
-Source: Stacks 03D7; sequence-site construction preceding 0941.
-(blueprint: stage3-pur-extension-scalar-unit-transition).
-
-Proof: apply the evaluation unit equation and cancel rho to identify the normalized
-finite unit with the system adjunction unit. The latter is a sheaf-module morphism
-on the sequence site, so naturality for the horizontal arrow commutes with the
-presheaf restriction maps. The coefficient transition section formula identifies
-these maps with the finite successors. Substitute compatibility of the input pair,
-then use the lower evaluation unit identity in reverse. This applies also to
-identity arrows and zero sections and uses no exactness or flatness. -/
+/-- The normalized finite scalar unit preserves every compatible pair of system sections. -/
 theorem evaluatedUnitSection_transition
     (A : CoefficientExtensionSystems l E L ι W)
     (ρ : ∀ n : ℕ, A.scalar.model.E ⋙ coefficientSequenceEvaluation l L W n ≅

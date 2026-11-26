@@ -23,16 +23,22 @@ public import WeilConjectures.AlgebraicGeometry.ImmersionCompletedPullback.SfImm
 
 /-! # Normalized integral immersion pullback
 
-Comparison data (blueprint: def-sf-integral-immersion-pullback-normalization-data).
+Comparison data for the normalized integral pullback along an immersion.
 
-Source: main-20261015 smooth-purity localization, integral and rational paragraphs;
-Stacks proetale.tex, Tags 09AA and 099N(2),(5), and sites-cohomology.tex, Tag 0941
-(blueprint: lem-sf-integral-immersion-pullback-normalization).
+## Implementation details
 
 All three functors below have the recorded completed-coefficient derived categories
 as source and target. Only the strict construction is transported through the existing
 finite-projection-normalized coefficient isomorphism. Ordinary pullback is exact
 termwise module inverse image in these same coefficient presentations.
+
+In `Comparison`, the displayed gamma is required to be exactly the transport of the
+integral comparison to the original strict construction, so no arbitrary isomorphism or
+arbitrary shift is substituted.
+
+## References
+
+* Stacks Project, Tags 015F, 03D2, 03DA, 0941, 097N, 098T, 099N and 09AA.
 -/
 
 @[expose] public noncomputable section
@@ -50,19 +56,11 @@ namespace WeilConjectures.IntegralImmersionNormalization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Inverse coefficient transport along the existing normalized completed-ring iso.
-Source: Stacks 099N, coefficient identification
-(blueprint: lem-sf-integral-immersion-pullback-normalization). -/
+/-- Inverse coefficient transport along the existing normalized completed-ring iso. -/
 abbrev back (T : Scheme.{u}) :=
   pbcDerivedRestrict (ImmersionCompletedPullback.completedRingIso l E T).hom
 
-/-- The scalar restriction round trip is identity on every module section.
-Source: Stacks 03DA; coefficient identification in the localization proof
-(blueprint: lem-sf-integral-immersion-pullback-normalization).
-Proof: both coefficient restrictions leave underlying sections and maps unchanged.
-Their composite action is the original action by the inverse identities of the ring
-iso. The sectionwise identity and its inverse define the natural iso; the equation
-on all sections determines every component, hence proves uniqueness. -/
+/-- The scalar restriction round trip is identity on every module section. -/
 theorem moduleRoundTrip_exists (T : Scheme.{u}) :
     ∃! e : pbcRestrict (ImmersionCompletedPullback.completedRingIso l E T).hom ⋙
         pbcRestrict (ImmersionCompletedPullback.completedRingIso l E T).inv ≅
@@ -91,14 +89,10 @@ theorem moduleRoundTrip_exists (T : Scheme.{u}) :
     ext M V x
     exact hη' M V x
 
-/-- The unique identity-on-sections coefficient restriction round trip.
-Source: Stacks 03DA
-(blueprint: lem-sf-integral-immersion-pullback-normalization). -/
+/-- The unique identity-on-sections coefficient restriction round trip. -/
 def moduleRoundTrip (T : Scheme.{u}) := (moduleRoundTrip_exists l E T).exists.choose
 
-/-- Descent of that identity-on-sections comparison, using exact restriction.
-Source: Stacks 015F, 03DA
-(blueprint: lem-sf-integral-immersion-pullback-normalization). -/
+/-- Descent of that identity-on-sections comparison, using exact restriction. -/
 def roundTrip (T : Scheme.{u}) :
     back l E T ⋙ ImmersionCompletedPullback.transport l E T ≅
       𝟭 (DerivedCategory (scalarReductionSource.{u, u} l E T)) :=
@@ -110,9 +104,7 @@ def roundTrip (T : Scheme.{u}) :
 
 variable {X Y : Scheme.{u}} (g : Y ⟶ X)
 
-/-- The canonical completed coefficient isomorphism, in the recorded integral presentation.
-Source: Stacks 098T; the finite-projection-normalized coefficient transport
-(blueprint: lem-sf-integral-immersion-pullback-normalization). -/
+/-- The canonical completed coefficient isomorphism, in the recorded integral presentation. -/
 def coefficientIso :
     (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
         (completedIntegralCommRingSheafUnrestricted l E X) ≅
@@ -122,9 +114,7 @@ def coefficientIso :
     (pbcIntegralDatum l E).integralRingIso g ≪≫
       ImmersionCompletedPullback.completedRingIso l E Y
 
-/-- The finite coefficient comparison with the same prescribed quotient identifications.
-Source: Stacks 098T
-(blueprint: lem-sf-integral-immersion-pullback-normalization). -/
+/-- The finite coefficient comparison with the same prescribed quotient identifications. -/
 def finiteCoefficientIso (n : ℕ) :
     (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
         (integralCoefficientCommRingSheaf l E X n) ≅
@@ -135,8 +125,7 @@ def finiteCoefficientIso (n : ℕ) :
       ImmersionCompletedPullback.finiteRingIso l E Y n
 
 /-- The coefficient identifications keep constants, projections and the entire quotient
-system, in its existing function-sheaf presentation. Source: Stacks 098T and 097N
-(blueprint: lem-sf-integral-immersion-pullback-normalization). -/
+system, in its existing function-sheaf presentation. -/
 def CoefficientNormalization : Prop :=
   (∀ (V : X.ProEt) (r : Padic.coefficientExtensionIntegers l E),
     (((((proEtaleSheafAdjunction g CommRingCat.{u + 1}).homEquiv _ _)
@@ -156,29 +145,22 @@ def CoefficientNormalization : Prop :=
           ((pbcIntegralDatum l E).finiteRingIso g a.unop).hom
 
 /-- Ordinary module inverse image with the specified coefficient identification.
-The two restrictions only identify the existing completed-ring presentations.
-Source: Stacks 03D2; localization integral paragraph
-(blueprint: lem-sf-integral-immersion-pullback-normalization). -/
+The two restrictions only identify the existing completed-ring presentations. -/
 abbrev ordinaryModule :=
   pbcRestrict (ImmersionCompletedPullback.completedRingIso l E X).hom ⋙
     ImmersionCompletedPullback.modulePull l E g ⋙
       pbcRestrict (ImmersionCompletedPullback.completedRingIso l E Y).inv
 
-/-- Ordinary pullback with its canonical termwise derived shift comparison.
-Source: Stacks 015F, 03D2
-(blueprint: lem-sf-integral-immersion-pullback-normalization). -/
+/-- Ordinary pullback with its canonical termwise derived shift comparison. -/
 abbrev ordinary := (ordinaryModule l E g).mapDerivedCategory
 
 /-- The original strict quotient-tower completed pullback, in the recorded integral
-coefficient category. Source: Stacks 099N(5)
-(blueprint: lem-sf-integral-immersion-pullback-normalization). -/
+coefficient category. -/
 abbrev completed := back l E X ⋙
   pbcActualStrictCompletedPull (pbcIntegralDatum l E) g ⋙
     ImmersionCompletedPullback.transport l E Y
 
-/-- The counit-normalized comparison with ordinary termwise inverse image.
-Source: Stacks 015F and the recorded immersion comparison
-(blueprint: lem-sf-integral-immersion-pullback-normalization). -/
+/-- The counit-normalized comparison with ordinary termwise inverse image. -/
 def ordinaryPresentation :
     back l E X ⋙ pbcActualDerivedPull g (pbcIntegralDatum l E) ⋙
         ImmersionCompletedPullback.transport l E Y ≅ ordinary l E g :=
@@ -193,25 +175,19 @@ def ordinaryPresentation :
       (ImmersionCompletedPullback.modulePull l E g ⋙
         pbcRestrict (ImmersionCompletedPullback.completedRingIso l E Y).inv))
 
-/-- The actual completion comparison, built from the published strict quotient unit.
-Source: Stacks 099N(2),(5)
-(blueprint: lem-sf-integral-immersion-pullback-normalization). -/
+/-- The actual completion comparison, built from the published strict quotient unit. -/
 def completionComparison : ordinary l E g ⟶ completed l E g :=
   (ordinaryPresentation l E g).inv ≫
     whiskerLeft (back l E X)
       (whiskerRight (pbcActualStrictCompletedPullUnit (pbcIntegralDatum l E) g)
         (ImmersionCompletedPullback.transport l E Y))
 
-/-- The actual finite projection of strict pullback, transported to integral coefficients.
-Source: Stacks 0941 and 099N(5)
-(blueprint: lem-sf-integral-immersion-pullback-normalization). -/
+/-- The actual finite projection of strict pullback, transported to integral coefficients. -/
 def finiteProjection (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) (n : ℕ) :=
   (ImmersionCompletedPullback.transport l E Y).map
     (ImmersionCompletedPullback.actualCompletedProjection l E g ((back l E X).obj K) n)
 
-/-- A fixed interval for every positive reduction, including empty intervals.
-Source: localization integral paragraph
-(blueprint: lem-sf-integral-immersion-pullback-normalization). -/
+/-- A fixed interval for every positive reduction, including empty intervals. -/
 def HasReductionInterval (T : Scheme.{u})
     (K : DerivedCategory (scalarReductionSource.{u, u} l E T)) (a b : ℤ) : Prop :=
   ∀ n : ℕ, proEtaleCohomologicalSupport
@@ -219,10 +195,7 @@ def HasReductionInterval (T : Scheme.{u})
 
 /-- The normalized comparisons and their exact, scalar-linear constructible restrictions.
 The integral comparison contains its representative projection and canonical signed-shift
-normalization. The displayed gamma is required to be exactly its transport to the original
-strict construction. Thus no arbitrary isomorphism or arbitrary shift is substituted.
-Source: localization integral/rational paragraphs; Stacks 09AA, 099N, 0941 and 015F
-(blueprint: lem-sf-integral-immersion-pullback-normalization). -/
+normalization. -/
 structure Comparison where
   coefficients : CoefficientNormalization l E g
   integralComparison : IntegralCompletedComparison.Comparison l E g

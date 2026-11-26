@@ -80,9 +80,22 @@ import all WeilConjectures.Algebra.Homology.KernelShiftedMappingCone
 
 /-! # The normalized regular unit for arbitrary completed pullback
 
-Source: the constant-sheaf clause of `theorem-grothendieck-lefschetz-trace-formula--8`, expanded in
-step 6 of `lem-zl-constant-geometric-stalk-unit`. The finite regular multiplication,
+This file shows that the normalized regular unit of the constant sheaf is a quasi-isomorphism
+after localization, for an arbitrary completed pullback. The finite regular multiplication, the
 compatible quotient tower and its actual limit cone determine the entire Roos map.
+
+## Implementation details
+
+Finite pullback multiplication identifies the regular module with the target regular module.
+The base-change functor preserves the terminal object and hence is final, so the regular-unit
+multiplication is invertible for arbitrary scheme maps; naturality and linearity identify every
+unit projection with the actual quotient projection. These isomorphisms form an isomorphism of
+towers and carry the completed coefficient cone to a limit cone of the pulled tower. The
+quotient transitions are epic, so the Milnor theorem and the product comparison make one minus
+shift epic on the pulled tower of complexes; its kernel is the limit cone, so the zero
+shifted-component cocone lift is a quasi-isomorphism. Uniqueness of the normalized chain unit
+identifies the given map with that lift. This includes empty schemes and the first positive
+coefficient quotient.
 -/
 
 @[expose] public noncomputable section
@@ -313,23 +326,7 @@ private theorem stalkChainUnitCandidate_quasiIso {X Y : Scheme.{u}} (g : X ⟶ Y
 end GeneralPullbackUnitProof
 
 /-- Every strict regular unit with the finite generator and zero shifted-component
-normalizations is a quasi-isomorphism after localization.
-
-Source: constant-sheaf clause of `theorem-grothendieck-lefschetz-trace-formula--8`, reviewed
-expansion step 6 (blueprint: lem-zl-constant-pullback-unit-quasi-isomorphism).
-
-Proof: finite pullback multiplication identifies the regular module with the target
-regular module. The base-change functor preserves the terminal object and hence is
-final, so the regular-unit multiplication is invertible for arbitrary scheme maps.
-Its adjunction generator is one. Naturality and linearity identify every unit projection
-with the actual quotient projection. Thus these isomorphisms form an isomorphism of
-towers and carry the completed coefficient cone to a limit cone of the pulled tower.
-The quotient transitions are epic. The Milnor theorem and the product comparison
-make one minus shift epic on the pulled tower of complexes. Its kernel is the limit
-cone, so the zero shifted-component cocone lift is a quasi-isomorphism. Uniqueness
-of the normalized chain unit identifies the given map with that lift. Localization
-therefore makes precisely the given map invertible. This includes empty schemes and
-the first positive coefficient quotient. -/
+normalizations is a quasi-isomorphism after localization. -/
 theorem normalizedChainUnit_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (η : constantWeilIntegralComplex l E X ⟶
         (integralOperationsPullbackComplexFunctor l E f).obj

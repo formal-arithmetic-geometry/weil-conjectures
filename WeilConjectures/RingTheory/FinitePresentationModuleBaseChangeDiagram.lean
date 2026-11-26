@@ -20,8 +20,26 @@ import Mathlib.RingTheory.TensorProduct.IsBaseChangeRightExact
 import Mathlib.RingTheory.TensorProduct.IsBaseChangePi
 
 /-! # The presentation-matrix diagram before its colimit verification
-Source: Stacks Project, Algebra, Tags 00QX and 00R1.
-(blueprint: lem-weil-pbc-finite-presentation-base-change-diagram).
+
+A finitely presented module `M` over `S = colim Bᵢ`, whose presentation matrix lifts to a stage
+`i₀`, is the base change of a directed diagram of finite modules `Dⱼ = Bⱼⁿ / im(Aⱼ)` over the
+tail of `i₀`.
+
+## Main results
+
+* `Module.exists_finitePresentation_baseChange_diagram`
+
+## Implementation details
+
+The tail of `i₀` is nonempty and directed, and its inclusion is final. Each stage ring is a
+finite-type `ℤ`-algebra, hence countable, so the quotient modules are small and are transported
+to `Type v` through `Shrink` equivalences. Tensor right exactness identifies each base-changed
+quotient with the quotient by the transported matrix. No additive colimit property is asserted.
+
+## References
+
+* [Stacks, Tag 00QX] (presentation-matrix paragraph)
+* [Stacks, Tag 00R1]
 -/
 
 @[expose] public section
@@ -96,28 +114,9 @@ private theorem presentation_baseChange {R T P : Type*} [CommRing R] [CommRing T
   · exact hex
   · exact hf
 
-/-- Construct the diagram from a lifted finite presentation matrix and its tensor comparison maps.
-Source: Stacks Project, Algebra, Tag 00QX, presentation-matrix paragraph,
-non-local construction used in Tag 00R1.
-(blueprint: lem-weil-pbc-finite-presentation-base-change-diagram)
-
-Proof: The finite presentation f, g and its lifted matrix A₀ are given explicitly.
-Restrict to the upper tail of i₀. It is nonempty and directed. Every original stage
-maps to a tail stage, so its full inclusion is final.
-At each tail stage take the quotient of its finite free module by the image of the
-lifted matrix. The ring transition maps preserve these images and descend to additive
-maps of quotients. Identities, compositions, and scalar compatibility follow on
-representatives, producing D and ν. The images of the coordinate vectors generate
-these modules. Each stage ring is countable: a finite-type integer algebra is a
-quotient of a polynomial algebra in finitely many variables over ℤ. The finite powers
-and their quotients are therefore countable and small in universe v. Transport the
-explicit quotients, their actions and maps through `Shrink` equivalences to Type v.
-Tensor right exactness identifies each base-changed quotient with the quotient by the
-transported matrix, using the finite-product tensor equivalence for the free terms.
-At a later stage this is precisely its defining quotient; over S it is the original
-presentation of M. On pure tensors the resulting equivalences send y tensor x to y
-times the image of x. No additive colimit property is asserted here.
--/
+/-- Given a finite presentation of `M` over `S = colim Bᵢ` whose matrix lifts to `A₀` over
+`B i₀`, there is a directed diagram `D` of finite modules over a final subcategory, with a
+cocone `ν` to `M`, such that each transition map and each leg `ν j` is a base change. -/
 theorem exists_finitePresentation_baseChange_diagram
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (B : I ⥤ CommRingCat.{u}) (S : Type u) [CommRing S]

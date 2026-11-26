@@ -42,10 +42,11 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Intrinsic scalar normalization formulas
 
-Source: blueprint `def-sfb-derived-extend-comp-iso.proof.md`, exact derived scalar
-composition; `SfScalarExtensionComposition.lean`, intrinsic normalization, and
-`GeneralAlgebraicallyClosedCoefficientStages.lean`, normalized shifts and associators
-(blueprint: lem-pur-intrinsic-scalar-normalization-formulas).
+Normalization formulas for the ordinary, integral and rational scalar compositors, following
+the intrinsic normalization of `SfScalarExtensionComposition.lean` and the normalized shifts
+and associators of `GeneralAlgebraicallyClosedCoefficientStages.lean`.
+
+## Implementation details
 
 The coefficient models and all three comparisons are the published constructions.
 `integralOrdinaryDerivedScalar` is the exact termwise induced functor, and
@@ -118,19 +119,7 @@ private theorem index_rational_transport
         ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω E) Y).obj K)
 
 /-- The actual rational associator is the rationalization image of the integral one.
-HEq retains the specified endpoint equalities of the rational scalar functors.
-Source: blueprint `def-sfb-derived-extend-comp-iso.proof.md`, rational scalar composition
-(blueprint: lem-pur-intrinsic-scalar-normalization-formulas).
-Proof: rationalization has unchanged objects. Localize the integral compositor and its
-inverse componentwise. On a pure tensor arrow, naturality is integral naturality tensored
-with the image of the coefficient. Bilinearity extends this to every arrow
-(`def-weil-linear-scalar-localization`, `def-weil-rationalization-karoubi`). Localization
-preserves the inverse equations. Every rational object is an integral representative,
-so this component prescription uniquely determines `sfRationalScalarComp`. The stage
-associator follows it by the coefficient-inclusion equality, hence has the stated image
-(`lem-general-algebraically-closed-coefficient-stages`). Equality elimination applies
-the same endpoint transport on both sides. Repeated indices need no strict identity
-of tensor functors, and primality alone supplies the proof parameter l ≠ 0. -/
+HEq retains the specified endpoint equalities of the rational scalar functors. -/
 theorem intrinsicRationalScalarAssociator_image
     (E L M : Index l Ω) (h : E ≤ L) (k : L ≤ M)
     (K : sfIntegralConstructibleCategory l (Coefficient.{u} l Ω E) Y) :

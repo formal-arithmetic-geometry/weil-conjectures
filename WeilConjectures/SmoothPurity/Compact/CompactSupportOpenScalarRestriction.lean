@@ -13,11 +13,17 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChan
 
 /-! # Scalar compatibility of literal open restriction
 
-Source: Stacks Project, Tags 03D3, 03CY and 03DI.
-(blueprint: lem-weil-compact-support-open-restriction-scalar).
+This module shows that restriction of scalars along a coefficient homomorphism commutes with
+the identification of tensor inverse image along an open immersion with literal restriction.
 
-The comparisons below involve one coefficient homomorphism and one open immersion.
-There is no coefficient sequence or extension-by-zero evaluation in the statement.
+## Implementation details
+
+The comparisons involve one coefficient homomorphism and one open immersion; there is no
+coefficient sequence or extension-by-zero evaluation.
+
+## References
+
+* Stacks Project, Tags 03D3, 03CY and 03DI
 -/
 
 @[expose] public noncomputable section
@@ -29,8 +35,7 @@ attribute [local irreducible] constantSheaf presheafToSheaf
 namespace WeilConjectures
 variable {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
 
-/-- The section-normalized scalar square for the native direct image.
-Source: Stacks Tag 03D3 (blueprint: lem-weil-compact-support-open-restriction-scalar). -/
+/-- The section-normalized scalar square for the native direct image. -/
 def compactSupportScalarDirectImage {X Y : Scheme.{u}} (f : X ⟶ Y) (φ : A →+* B) :
     ProEtale.StrictTower.moduleDirectImage (ULift.{u + 1, u} B) f ⋙
         proEtaleCoefficientRestrictScalars Y φ ≅
@@ -48,8 +53,7 @@ private theorem compactSupportScalarDirectImage_sections {X Y : Scheme.{u}}
   change ((proEtaleCoefficientDirectImageComparison f φ).hom.app N).val.app V x = x
   exact (proEtaleCoefficientDirectImageComparison_existsUnique f φ).choose_spec.1 N V x
 
-/-- The inverse mate of the normalized direct-image coefficient square.
-Source: Stacks Tag 03D3 (blueprint: lem-weil-compact-support-open-restriction-scalar). -/
+/-- The inverse mate of the normalized direct-image coefficient square. -/
 def compactSupportScalarPullback {X Y : Scheme.{u}} (f : X ⟶ Y) (φ : A →+* B) :
     proEtaleCoefficientRestrictScalars Y φ ⋙
         ProEtale.StrictTower.modulePullback (ULift.{u + 1, u} A) f ⟶
@@ -100,8 +104,7 @@ private def upperModel (A : Type u) [CommRing A] [Finite A]
   sfIntrinsicTransportIso A (ProEtale.upperStarIsoOpenImmersionRestriction
     (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j)
 
-/-- Tensor inverse image identified with literal restriction to an open.
-Source: Stacks Tag 03CY (blueprint: lem-weil-compact-support-open-restriction-scalar). -/
+/-- Tensor inverse image identified with literal restriction to an open. -/
 def compactSupportOpenRestrictionModel (A : Type u) [CommRing A] [Finite A]
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :
     ProEtale.StrictTower.modulePullback (ULift.{u + 1, u} A) j ≅
@@ -437,23 +440,7 @@ private theorem native_literal_unit (A : Type u) [CommRing A] [Finite A]
   exact h'
 
 /-- Scalar restriction commutes with the normalized identification of tensor inverse
-image with literal open restriction.
-Source: Stacks Project, Tag 03D3 (adjoint inverse and direct images of modules),
-Tag 03CY (restriction to a localized site), and Tag 03DI (open adjunction).
-(blueprint: lem-weil-compact-support-open-restriction-scalar).
-Proof: transpose the two composites under the tensor inverse-image/direct-image
-adjunction. By the definition of compactSupportScalarPullback as inverse mate, its transpose is the
-section-normalized scalar direct-image square. The comparison
-openSquarePullbackModel preserves the specified tensor and realization units.
-The comparison from fixed-scalar inverse image to literal restriction is likewise
-fixed by the open-restriction/direct-image adjunction unit. In fixed-scalar
-coordinates, restriction to the open is precomposition and hence commutes literally
-with restriction of scalars. The realization coefficient squares preserve the
-constant-section maps; the direct-image comparisons preserve those same sections.
-Thus both transposes send every section at V to the same section over the pullback
-of V, with the same restricted coefficient action. They agree by sectionwise
-extensionality, and the adjunction Hom equivalence is injective. This also applies
-to the zero ring, the identity coefficient homomorphism, and an empty open. -/
+image with literal open restriction. -/
 theorem compactSupportOpenRestrictionModel_scalar {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     (φ : A →+* B) (N : proEtaleRingModules Z (proEtaleConstantRing Z B)) :
     (compactSupportScalarPullback j φ).app N ≫

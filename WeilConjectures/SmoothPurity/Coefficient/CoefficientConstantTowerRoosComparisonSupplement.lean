@@ -67,7 +67,18 @@ import WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupple
 
 /-! # Projection-normalized Roos comparison for completed coefficient towers
 
-Source: Stacks 0941 and the strict Roos comparison.
+The total derived limit of a completed coefficient tower is identified with the strict Roos
+complex, compatibly with the tower projections.
+
+## Implementation details
+
+The ordinary-limit inclusion into the strict Roos complex is a quasi-isomorphism on
+K-injective towers; the comparison is obtained by resolving functorially and inverting this
+inclusion.
+
+## References
+
+* [Stacks Project, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -149,13 +160,9 @@ end CategoryTheory
 
 namespace WeilConjectures
 
-/-- The canonical inverse-limit comparison preserves every specified tower projection.
-Source: Stacks 0941 (blueprint: stage3-pur-canonical-tower-roos-comparison).
-Proof: the ordinary-limit inclusion into the strict Roos complex is a
-quasi-isomorphism on K-injective towers. Resolve functorially and invert this
-inclusion to get a natural comparison. Its normalization identifies the projection
-on K-injective towers with the canonical right-derived projection. Naturality
-along a K-injective resolution proves the equation for every tower complex. -/
+/-- The canonical inverse-limit comparison preserves every specified tower projection: there is
+a natural isomorphism between the derived tower limit and the strict Roos complex whose
+composite with the `n`-th projection is the localization of the Roos evaluation at `n`. -/
 theorem coefficientConstantTowerRoosComparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t}) :

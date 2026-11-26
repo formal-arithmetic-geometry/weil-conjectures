@@ -15,11 +15,16 @@ import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 /-!
 # Essential smallness of pointed etale algebras
 
-Source: Stacks Project, Tag 04GW (pointed-algebra category); Mathlib finite-type algebra
-smallness (blueprint: lem-sc-pointed-etale-essentially-small).
+The category of étale `R`-algebras pointed into a fixed `K` is essentially small.
 
-The category embeds fully faithfully into finitely generated algebras pointed into `K`.
-Mathlib proves essential smallness of that costructured arrow category.
+## Implementation details
+
+The category embeds fully faithfully into the costructured arrow category of `FGAlgCat R` over
+`CommAlgCat.of R K`, which is essentially small by Mathlib.
+
+## References
+
+* [Stacks, Tag 04GW]
 -/
 
 @[expose] public section
@@ -27,17 +32,7 @@ universe u
 open CategoryTheory
 namespace Algebra
 
-/-- Essential smallness follows from finite-presentation representatives of affine etale
-algebras and the set of pointings into a fixed K.
-Source: Stacks Project, Algebra, Tag 04GW.
-(blueprint: lem-sc-pointed-etale-essentially-small).
-
-Proof: An etale algebra is finitely presented, hence finitely generated. Send a pointed
-etale algebra to the same algebra and pointing in the costructured arrow category of
-`FGAlgCat R` over `CommAlgCat.of R K`. This functor is fully faithful: both categories
-have exactly the algebra maps commuting with the pointings. Mathlib proves `FGAlgCat R`
-essentially small, and its costructured arrow category is essentially small because
-`CommAlgCat R` is locally small. Pull essential smallness back along this functor. -/
+/-- The category of étale `R`-algebras pointed into a fixed `K` is essentially small. -/
 theorem pointedEtale_essentiallySmall
     (R K : Type u) [CommRing R] [IsLocalRing R] [Field K]
     [Algebra (IsLocalRing.ResidueField R) K]

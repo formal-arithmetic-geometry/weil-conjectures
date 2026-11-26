@@ -20,8 +20,7 @@ public import WeilConjectures.TraceFormula.TransverseBoundary.MonodromyPullback
 Let `c : P ⟶ V` be a Galois cover with group a finite `ℓ`-group `G` and connected total space,
 and `H` a sheaf of `Λ`-modules on `V_ét` with `π^* H ≅ M_P` for a nonzero finite `Λ`-module `M`,
 `ℓ` nilpotent in `Λ`. The group `G` acts on `H(P) ≅ M`, and a nonzero fixed vector killed by `ℓ`
-descends to a nonzero global section `y` of `H` killed by `ℓ` (blueprint
-`lemma-cohomology-near-two-transverse-divisors--1`, dévissage).
+descends to a nonzero global section `y` of `H` killed by `ℓ`.
 
 ## Main statements
 
@@ -41,11 +40,9 @@ namespace AlgebraicGeometry.Etale
 variable {V : Scheme.{u}} (ℓ : ℕ) {Λ : Type (u + 1)} [CommRing Λ]
   {G : Type (u + 1)} [Group G] [Finite G] (c : V.GaloisCover G) [ConnectedSpace c.P]
 
-/-- Blueprint `lemma-cohomology-near-two-transverse-divisors--1` (dévissage): if a sheaf `H` of
-`Λ`-modules, `ℓ` nilpotent in `Λ`, is trivialized by a Galois cover with connected total space and
-group a finite `ℓ`-group, with nonzero finite value `M`, then `H` has a nonzero global section
-killed by `ℓ`: it descends from a nonzero fixed vector, killed by `ℓ`, of the group acting on
-`H(P) ≅ M`. -/
+/-- If a sheaf `H` of `Λ`-modules, `ℓ` nilpotent in `Λ`, is trivialized by a Galois cover with
+connected total space and group a finite `ℓ`-group, with nonzero finite value `M`, then `H` has a
+nonzero global section killed by `ℓ`. -/
 theorem exists_ne_zero_smul_eq_zero_of_connected_cover [Fact ℓ.Prime]
     (hΛ : ∃ n : ℕ, (ℓ : Λ) ^ n = 0)
     (hG : IsPGroup ℓ G) (H : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -99,11 +96,10 @@ theorem exists_ne_zero_smul_eq_zero_of_connected_cover [Fact ℓ.Prime]
 
 variable [Finite Λ]
 
-/-- Blueprint `lemma-cohomology-near-two-transverse-divisors--1` (dévissage): let `H` be trivialized
-by a Galois cover `c` with connected total space, `π^* H ≅ M_P`, and let `y` be a nonzero global
-section of `H` killed by `ℓ`. The submodule `N = Λ y` gives a monomorphism `χ : N_V ⟶ H` whose
-cokernel is trivialized by the same cover, with value a quotient `M'` of `M` of smaller
-cardinality. -/
+/-- Let `H` be trivialized by a Galois cover `c` with connected total space, `π^* H ≅ M_P`, and
+let `y` be a nonzero global section of `H` killed by `ℓ`. The submodule `N = Λ y` gives a
+monomorphism `χ : N_V ⟶ H` whose cokernel is trivialized by the same cover, with value a quotient
+`M'` of `M` of smaller cardinality. -/
 theorem exists_mono_constantSheaf_of_connected_cover
     (H : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (M : ModuleCat.{u + 1} Λ) [Finite M]

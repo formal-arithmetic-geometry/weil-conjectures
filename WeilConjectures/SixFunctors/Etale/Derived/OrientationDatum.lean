@@ -12,18 +12,17 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Dua
 /-!
 # Orientation data
 
-An *orientation datum* (blueprint `theorem-smooth-purity-all-admissible-coefficients`) is a choice,
-for every smooth separated morphism `f : X ⟶ Y` of finite type and of pure relative dimension `d`,
-of an orientation `γ_f : Λ_X(d)[2d] ≅ Rf^! Λ_Y` (`AlgebraicGeometry.Etale.Orientation`), natural in
-`Y`, compatible with composition, étale base change, finite reduction, scalar extension and
-the pro-étale realization, and normalized on the affine line.
+An *orientation datum* is a choice, for every smooth separated morphism `f : X ⟶ Y` of finite type
+and of pure relative dimension `d`, of an orientation `γ_f : Λ_X(d)[2d] ≅ Rf^! Λ_Y`
+(`AlgebraicGeometry.Etale.Orientation`), natural in `Y`, compatible with composition, étale base
+change, finite reduction, scalar extension and the pro-étale realization, and normalized on the
+affine line.
 
-The blueprint places the definition in the setting of a six-functor datum (`def-sf-datum`),
-whose comparison isomorphisms (the composition law and the base change of `R^!`, the
-projection formula) are part of the datum. The compatibilities of an orientation datum are
-equations between composites of these comparison isomorphisms. They are therefore stated
-relative to the comparison isomorphisms they involve, which are bundled as
-`AlgebraicGeometry.Etale.OrientationComparisonData` (one coefficient ring),
+The definition lives in the setting of a six-functor datum, whose comparison isomorphisms (the
+composition law and the base change of `R^!`, the projection formula) are part of the datum. The
+compatibilities of an orientation datum are equations between composites of these comparison
+isomorphisms. They are therefore stated relative to the comparison isomorphisms they involve, which
+are bundled as `AlgebraicGeometry.Etale.OrientationComparisonData` (one coefficient ring),
 `AlgebraicGeometry.Etale.CoefficientChange` (two coefficient rings) and
 `AlgebraicGeometry.Etale.ProEtaleRealization` (étale and pro-étale sheaves).
 
@@ -43,9 +42,9 @@ relative to the comparison isomorphisms they involve, which are bundled as
 
 ## Implementation notes
 
-The comparison isomorphisms of a six-functor datum are canonical in the blueprint; in the
-repository the composition law and the base change of `R^!` and the tensor formula of smooth
-`R^!` are so far only known to exist
+The comparison isomorphisms of a six-functor datum are meant to be canonical; so far the
+composition law and the base change of `R^!` and the tensor formula of smooth
+`R^!` are only known to exist
 (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp`,
 `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek`,
 `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor`). For this
@@ -75,18 +74,14 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ]
 
-/-- Blueprint `theorem-smooth-purity-all-admissible-coefficients`: Orientation datum.
-
-The comparison isomorphisms of the six-functor datum `def-sf-datum` in terms of which the
-compatibilities of an orientation datum are stated:
-* the composition law `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` (the mate of axiom (A4));
+/-- The comparison isomorphisms of the six-functor datum in terms of which the compatibilities of
+an orientation datum are stated:
+* the composition law `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!`;
 * the base change `Rf^! ⋙ Lg^* ≅ Lv^* ⋙ Rf'^!` of `R^!` along a cartesian square with `f`
-  smooth (cohomological smoothness, `proposition-exceptional-inverse-image-smooth-morphism` (c));
+  smooth;
 * the tensor formula `Rf^!(Λ_Y(e)[2e]) ≅ Λ_X(e)[2e] ⊗ ω_f` for `f` smooth, the instance of
-  `Rf^! K ≅ Lf^* K ⊗ ω_f` (`proposition-exceptional-inverse-image-smooth-morphism` (b)) at a
-  twisting object, followed by `Lf^* Λ_Y(e)[2e] ≅ Λ_X(e)[2e]`;
-* the canonical orientation `Λ(1)[2] ≅ Rπ^! Λ_Y` of the affine line `π : 𝔸¹_Y ⟶ Y`
-  (`sk-prop-a1`). -/
+  `Rf^! K ≅ Lf^* K ⊗ ω_f` at a twisting object, followed by `Lf^* Λ_Y(e)[2e] ≅ Λ_X(e)[2e]`;
+* the canonical orientation `Λ(1)[2] ≅ Rπ^! Λ_Y` of the affine line `π : 𝔸¹_Y ⟶ Y`. -/
 structure OrientationComparisonData where
   /-- The composition law `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!`. -/
   upperShriekComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [HasCompactification f]
@@ -115,9 +110,7 @@ structure OrientationComparisonData where
       dualizingComplex Λ (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)
 
 variable {Λ} in
-/-- Blueprint `theorem-smooth-purity-all-admissible-coefficients`: Orientation datum.
-
-The composite `Λ_X(d + e)[2(d + e)] ≅ R(f ≫ g)^! Λ_Z` built from orientations
+/-- The composite `Λ_X(d + e)[2(d + e)] ≅ R(f ≫ g)^! Λ_Z` built from orientations
 `γ_f : Λ_X(d)[2d] ≅ Rf^! Λ_Y` and `γ_g : Λ_Y(e)[2e] ≅ Rg^! Λ_Z`:
 
 `Λ_X(d + e)[2(d + e)] ≅ Λ_X(e)[2e] ⊗ Λ_X(d)[2d] ≅ Λ_X(e)[2e] ⊗ Rf^! Λ_Y ≅ Rf^!(Λ_Y(e)[2e])
@@ -140,9 +133,7 @@ noncomputable def OrientationComparisonData.compIso (C : OrientationComparisonDa
     ((C.upperShriekComp f g).app (𝟙_ _)).symm
 
 variable {Λ} in
-/-- Blueprint `theorem-smooth-purity-all-admissible-coefficients`: Orientation datum.
-
-The base change `Λ_{X'}(d)[2d] ≅ Rf'^! Λ_{Y'}` of an orientation
+/-- The base change `Λ_{X'}(d)[2d] ≅ Rf'^! Λ_{Y'}` of an orientation
 `γ_f : Λ_X(d)[2d] ≅ Rf^! Λ_Y` along a cartesian square `g ≫ f = f' ≫ v`:
 
 `Λ_{X'}(d)[2d] ≅ Lg^*(Λ_X(d)[2d]) ≅ Lg^* Rf^! Λ_Y ≅ Rf'^! Lv^* Λ_Y ≅ Rf'^! Λ_{Y'}`.
@@ -159,9 +150,7 @@ noncomputable def OrientationComparisonData.baseChangeIso (C : OrientationCompar
     (C.upperShriekBaseChange sq d).app (𝟙_ _) ≪≫
     (R(f')^![Λ]).mapIso (leftDerivedUpperStarUnitIso _ v)
 
-/-- Blueprint `theorem-smooth-purity-all-admissible-coefficients`: Orientation datum.
-
-In the setting of a six-functor datum with comparison isomorphisms `C`, an *orientation
+/-- In the setting of a six-functor datum with comparison isomorphisms `C`, an *orientation
 datum* consists of, for every smooth separated morphism `f : X ⟶ Y` of finite type and of
 pure relative dimension `d` (along which the exponent of `Λ` is invertible), an orientation
 `γ_f : Λ_X(d)[2d] ≅ Rf^! Λ_Y` (`AlgebraicGeometry.Etale.Orientation`), such that
@@ -170,14 +159,7 @@ pure relative dimension `d` (along which the exponent of `Λ` is invertible), an
   `v` étale this is the compatibility with étale base change;
 * `γ` is compatible with composition: `γ_{f ≫ g}` is obtained from `γ_f` and `γ_g`
   (`AlgebraicGeometry.Etale.OrientationComparisonData.compIso`);
-* `γ` is the canonical orientation of the affine line on the projection `𝔸¹_Y ⟶ Y`.
-
-The compatibilities with finite reduction, scalar extension and the pro-étale realization
-relate orientation data for different coefficients or sites; they are
-`AlgebraicGeometry.Etale.OrientationDatum.IsCompatibleCoefficientChange` and
-`AlgebraicGeometry.Etale.OrientationDatum.IsCompatibleProEtaleRealization`. For the
-structure morphism `f = a_X` the orientation reads `ω_X ≅ Λ_X(d)[2d]`
-(`AlgebraicGeometry.Etale.Orientation.nonempty_iso_dualizingComplex`). -/
+* `γ` is the canonical orientation of the affine line on the projection `𝔸¹_Y ⟶ Y`. -/
 structure OrientationDatum (C : OrientationComparisonData Λ) where
   /-- The orientation `γ_f` of a smooth separated `f` of finite type, of relative
   dimension `d`. -/
@@ -208,9 +190,7 @@ structure OrientationDatum (C : OrientationComparisonData Λ) where
     (orientation (𝔸(ULift.{u} (Fin 1); Y) ↘ Y) 1).purity = C.affineLine Y
 
 variable {Λ} in
-/-- Blueprint `theorem-smooth-purity-all-admissible-coefficients`: Orientation datum.
-
-For the structure morphism `a : X ⟶ S` of a smooth separated `X` of finite type and pure
+/-- For the structure morphism `a : X ⟶ S` of a smooth separated `X` of finite type and pure
 relative dimension `d` over `S`, an orientation datum reads `ω_X ≅ Λ_X(d)[2d]`: the dualizing
 complex `ω_X = Ra^! Λ_S` is the shifted Tate twist. -/
 theorem OrientationDatum.nonempty_iso_dualizingComplex {C : OrientationComparisonData Λ}
@@ -222,10 +202,8 @@ theorem OrientationDatum.nonempty_iso_dualizingComplex {C : OrientationCompariso
 
 variable (Λ' : Type (u + 1)) [CommRing Λ'] [Finite Λ'] [HasTateTwist Λ']
 
-/-- Blueprint `theorem-smooth-purity-all-admissible-coefficients`: Orientation datum.
-
-A change of coefficients from `Λ` to `Λ'`, such as the finite reduction
-`A_{E,n+1} → A_{E,n}` or the scalar extension `A_{E,n} → A_{E',n}` of `def-sf-datum` (A5):
+/-- A change of coefficients from `Λ` to `Λ'`, such as the finite reduction
+`A_{E,n+1} → A_{E,n}` or the scalar extension `A_{E,n} → A_{E',n}`:
 functors `D(X_ét, Λ) ⥤ D(X_ét, Λ')` together with their identifications
 `Λ_X(d)[2d] ↦ Λ'_X(d)[2d]` on the twisting objects and `ω_f ↦ ω'_f` on the dualizing
 complexes (the compatibility of `R^!` with the change of coefficients). -/
@@ -241,9 +219,7 @@ structure CoefficientChange where
       dualizingComplex Λ' f
 
 variable {Λ Λ'} in
-/-- Blueprint `theorem-smooth-purity-all-admissible-coefficients`: Orientation datum.
-
-Compatibility of orientation data over `Λ` and `Λ'` with a change of coefficients `F`: for
+/-- Compatibility of orientation data over `Λ` and `Λ'` with a change of coefficients `F`: for
 every smooth `f`, the change of coefficients of `γ_f` is `γ'_f`. -/
 def OrientationDatum.IsCompatibleCoefficientChange {C : OrientationComparisonData Λ}
     {C' : OrientationComparisonData Λ'} (o : OrientationDatum Λ C) (o' : OrientationDatum Λ' C')
@@ -255,9 +231,7 @@ def OrientationDatum.IsCompatibleCoefficientChange {C : OrientationComparisonDat
       F.tateShiftIso X d ≪≫ (o'.orientation f d).purity
 
 open scoped AlgebraicGeometry.ProEtale in
-/-- Blueprint `theorem-smooth-purity-all-admissible-coefficients`: Orientation datum.
-
-The pro-étale realization `D(ν^*) : D(X_ét, Λ) ⥤ D(X_proét, Λ)` on dualizing complexes: the
+/-- The pro-étale realization `D(ν^*) : D(X_ét, Λ) ⥤ D(X_proét, Λ)` on dualizing complexes: the
 identification `D(ν^*) ω_f ≅ ω_f^{proét}` of the étale dualizing complex with the pro-étale
 one, for `f` smooth of relative dimension `d`. -/
 structure ProEtaleRealization where
@@ -270,9 +244,7 @@ structure ProEtaleRealization where
 
 open scoped AlgebraicGeometry.ProEtale in
 variable {Λ} in
-/-- Blueprint `theorem-smooth-purity-all-admissible-coefficients`: Orientation datum.
-
-Compatibility of an orientation datum `o` with the pro-étale realization `ν`: the pro-étale
+/-- Compatibility of an orientation datum `o` with the pro-étale realization `ν`: the pro-étale
 orientations `γ^{proét}_f : ν^*(Λ_X(d)[2d]) ≅ ω_f^{proét}` are the realizations of the
 étale ones. -/
 def OrientationDatum.IsCompatibleProEtaleRealization {C : OrientationComparisonData Λ}

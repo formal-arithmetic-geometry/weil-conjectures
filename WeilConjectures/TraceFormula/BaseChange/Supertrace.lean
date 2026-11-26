@@ -19,9 +19,9 @@ import all Mathlib.Algebra.Homology.Localization
 
 For a separably closed field `Ω`, the categorical trace of an endomorphism `v` of a dualizable
 object `P` of `Dᵇc(Spec Ω)⟦ℚ̲̄_ℓ⟧`, with the Koszul braiding, is the alternating sum of the
-categorical traces of the induced endomorphisms `Hʲ(v)` of the homology sheaves `Hʲ(P)`
-(blueprint `proposition-properties-trace`, item (4)). The two traces live in different rings: the
-supertrace in `End (𝟙_ Mod_{Spec Ω})`, the trace in `End (𝟙_ Dᵇc(Spec Ω)⟦ℚ̲̄_ℓ⟧)`; they are
+categorical traces of the induced endomorphisms `Hʲ(v)` of the homology sheaves `Hʲ(P)`. The two
+traces live in different rings: the supertrace in `End (𝟙_ Mod_{Spec Ω})`, the trace in
+`End (𝟙_ Dᵇc(Spec Ω)⟦ℚ̲̄_ℓ⟧)`; they are
 compared through the ring homomorphism `homologyUnitEndRingHom` placing an endomorphism of the
 unit module in degree `0`.
 
@@ -31,10 +31,10 @@ unit module in degree `0`.
 
 ## Main results
 
-- `ProEtale.CondensedRing.trace_eq_homologyUnitEndRingHom_superTrace` (blueprint
-  `proposition-properties-trace`, item (4)): every object of `Dᵇc(Spec Ω)⟦ℚ̲̄_ℓ⟧` is a finite direct
-  sum of shifts of the unit (`ProEtale.CondensedRing.nonempty_shiftDecomposition_point`), and on
-  such objects of the ambient derived category the trace is the supertrace on homology
+- `ProEtale.CondensedRing.trace_eq_homologyUnitEndRingHom_superTrace`: every object of
+  `Dᵇc(Spec Ω)⟦ℚ̲̄_ℓ⟧` is a finite direct sum of shifts of the unit
+  (`ProEtale.CondensedRing.nonempty_shiftDecomposition_point`), and on such objects of the ambient
+  derived category the trace is the supertrace on homology
   (`DerivedCategory.trace_eq_singleFunctor_map_superTrace`).
 
 -/
@@ -110,17 +110,10 @@ lemma ι_map_homologyUnitEndRingHom
   rfl
 
 attribute [local instance] boundedConstructibleBraiding in
-/-- **The trace as a supertrace over a field** (blueprint `proposition-properties-trace`,
-item (4)): for a separably closed field `Ω` and an endomorphism `v` of a dualizable object `P` of
-`Dᵇc(Spec Ω)⟦ℚ̲̄_ℓ⟧`, the categorical trace of `v` is the alternating sum
-`∑ⱼ (-1)ʲ Tr(Hʲ(v) | Hʲ(P))` of the traces on the homology sheaves, placed in degree `0`.
-
-The object `P` is a finite direct sum of shifts `𝟙⟦nⱼ⟧` of the unit
-(`nonempty_shiftDecomposition_point`, through the fibre functor `Fib_s` of blueprint
-`lemma-perfect-complexes-geometric-point`), and its homology sheaves are finite free, hence
-dualizable. In the ambient derived category both sides are then sums over the summands, and on
-`𝟙⟦n⟧` they are `(-1)ⁿ r` for the endomorphism `r` of the unit inducing the block
-(`DerivedCategory.trace_eq_singleFunctor_map_superTrace`). -/
+/-- **The trace as a supertrace over a field**: for a separably closed field `Ω` and an
+endomorphism `v` of a dualizable object `P` of `Dᵇc(Spec Ω)⟦ℚ̲̄_ℓ⟧`, the categorical trace of `v`
+is the alternating sum `∑ⱼ (-1)ʲ Tr(Hʲ(v) | Hʲ(P))` of the traces on the homology sheaves,
+placed in degree `0`. -/
 theorem trace_eq_homologyUnitEndRingHom_superTrace (Ω : Type u) [Field Ω] [IsSepClosed Ω]
     [Fact (ringChar Ω).Prime] [Fact (ringChar Ω ≠ ℓ)]
     (P : Dᵇc((point Ω).left)⟦Profinite.padicAlgClRingObj ℓ⟧) [HasRightDual P] (v : P ⟶ P) :

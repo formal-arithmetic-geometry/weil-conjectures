@@ -20,7 +20,24 @@ zero. This file records this dictionary, the resulting description of the class 
 cycle through the global unit class, and the evaluation of `coefficientHomZeroEquiv` on
 the global class of a tensor-Hom transpose.
 
-Source: Stacks Project, Tags 08JA, 0A8X and 08J9.
+## Implementation details
+
+The class of a tensor-Hom transpose from the unit is computed as follows: the transpose is the
+localization of a chain map `σ` into the K-injective Hom complex, its class is the class of the
+cycle of `σ`, and the recorded H-zero equivalence sends this to the chain map evaluating `σ` at
+`1`, which the uncurry normalization identifies with the left unitor followed by the uncurried
+map.
+
+## References
+
+* [Stacks, Tag 08JA]
+* [Stacks, Tag 0A8X]
+* [Stacks, Tag 08J9]
+* [Stacks, Tag 079P]
+* [Stacks, Tag 06YN]
+* [Stacks, Tag 070Y]
+* [Stacks, Tag 0FPQ]
+* [Stacks, Tag 0FPT]
 -/
 
 @[expose] public section
@@ -35,8 +52,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}]
   (A : Sheaf J CommRingCat.{max c v u})
 
-/-- The coefficient ring placed in degree zero.
-Source: Stacks 0FPT (auxiliary; not a blueprint node). -/
+/-- The coefficient ring placed in degree zero. -/
 noncomputable abbrev coefficientUnitComplex :
     CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ :=
@@ -44,18 +60,14 @@ noncomputable abbrev coefficientUnitComplex :
     (SheafOfModules.unit ((sheafCompose J
       (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A))
 
-/-- The degree-zero section of the unit complex given by a local coefficient.
-Source: Stacks 0FPT (auxiliary; not a blueprint node). -/
+/-- The degree-zero section of the unit complex given by a local coefficient. -/
 noncomputable def coefficientUnitComplexSection (U : Cᵒᵖ) (a : A.obj.obj U) :
     ((coefficientUnitComplex.{u} J A).X 0).val.obj U :=
   ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (0 : ℤ)
     (SheafOfModules.unit ((sheafCompose J
       (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A))).inv.val.app U) a
 
-/-- The unit complex is K-flat.
-Source: Stacks 06YN (auxiliary; not a blueprint node).
-Proof: tensoring with the unit complex is isomorphic to the identity by the right
-unitor, which preserves acyclicity. -/
+/-- The unit complex is K-flat. -/
 theorem coefficientUnitComplex_isKFlat :
     CochainComplex.IsKFlatIndependentCoefficients.{c, v, max c v u}
       (J := J) (R := A) (coefficientUnitComplex.{u} J A) := by
@@ -65,8 +77,7 @@ theorem coefficientUnitComplex_isKFlat :
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ))).ExactAt i
   exact (exactAt_iff_of_quasiIsoAt (ρ_ F).hom i).2 (hF i)
 
-/-- The left unitor of the total tensor product with the unit complex.
-Source: Stacks 0FPQ (auxiliary; not a blueprint node). -/
+/-- The left unitor of the total tensor product with the unit complex. -/
 noncomputable def coefficientUnitLeftUnitor
     (P : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ) :
@@ -74,8 +85,7 @@ noncomputable def coefficientUnitLeftUnitor
   letI := SheafOfModules.cochainModulesMonoidal A
   λ_ P
 
-/-- The left unitor sends the generator `1 ⊗ x` to `x`.
-Source: Stacks 0FPQ (auxiliary; not a blueprint node). -/
+/-- The left unitor sends the generator `1 ⊗ x` to `x`. -/
 theorem coefficientUnitLeftUnitor_generator
     (P : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)
@@ -87,8 +97,7 @@ theorem coefficientUnitLeftUnitor_generator
     x).trans (one_smul (((sheafCompose J
       (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A).obj.obj U) x)
 
-/-- The inverse left unitor sends `x` to the generator `1 ⊗ x`.
-Source: Stacks 0FPQ (auxiliary; not a blueprint node). -/
+/-- The inverse left unitor sends `x` to the generator `1 ⊗ x`. -/
 theorem coefficientUnitLeftUnitor_inv_apply
     (P : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)
@@ -106,8 +115,7 @@ theorem coefficientUnitLeftUnitor_inv_apply
     PresheafOfModules.id_app, ConcreteCategory.id_apply] using h
 
 
-/-- The canonical global section of the unit complex, as a degree-zero cycle.
-Source: Stacks 08JA (auxiliary; not a blueprint node). -/
+/-- The canonical global section of the unit complex, as a degree-zero cycle. -/
 noncomputable def coefficientUnitCycle :
     (((coefficientOrdinarySections.{u, c, v} J A).mapHomologicalComplex (ComplexShape.up ℤ)).obj
       (coefficientUnitComplex.{u} J A)).cycles 0 :=
@@ -118,8 +126,7 @@ noncomputable def coefficientUnitCycle :
           (AddEquiv.ulift.{0, max c v u} (α := ℤ)).toAddMonoidHom)) 1 (by simp)
     (by simp) (ULift.up (1 : ℤ))
 
-/-- The unit cycle is the inclusion of the coefficient ring in degree zero.
-Source: Stacks 08JA (auxiliary; not a blueprint node). -/
+/-- The unit cycle is the inclusion of the coefficient ring in degree zero. -/
 theorem coefficientUnitCycle_iCycles :
     (((coefficientOrdinarySections.{u, c, v} J A).mapHomologicalComplex
       (ComplexShape.up ℤ)).obj (coefficientUnitComplex.{u} J A)).iCycles 0
@@ -130,8 +137,7 @@ theorem coefficientUnitCycle_iCycles :
   rw [coefficientUnitCycle, ← ConcreteCategory.comp_apply, HomologicalComplex.liftCycles_i]
   exact one_zsmul _
 
-/-- The degree-zero cycle of the fixed Hom complex determined by a map from the unit complex.
-Source: Stacks 08JA, 0A8X (auxiliary; not a blueprint node). -/
+/-- The degree-zero cycle of the fixed Hom complex determined by a map from the unit complex. -/
 noncomputable def coefficientHomCycleOfUnitMap
     [HasDerivedCategory.{w} (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A))]
@@ -148,8 +154,7 @@ noncomputable def coefficientHomCycleOfUnitMap
 variable [HasDerivedCategory.{w} (SheafOfModules.{max c v u}
   ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A))]
 
-/-- The cycle of a map from the unit complex is its degree-zero component.
-Source: Stacks 08JA (auxiliary; not a blueprint node). -/
+/-- The cycle of a map from the unit complex is its degree-zero component. -/
 theorem coefficientHomCycleOfUnitMap_iCycles
     (L M : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)
@@ -167,8 +172,7 @@ theorem coefficientHomCycleOfUnitMap_iCycles
   rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply, coefficientUnitCycle_iCycles] at h
   exact h
 
-/-- The map from the unit complex determined by a degree-zero cycle.
-Source: Stacks 08JA, 0A8X (auxiliary; not a blueprint node). -/
+/-- The map from the unit complex determined by a degree-zero cycle. -/
 noncomputable def coefficientHomUnitMapOfCycle
     (L M : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)
@@ -184,8 +188,7 @@ noncomputable def coefficientHomUnitMapOfCycle
         ((coefficientHomSectionComplex.{u, c, v} J A L M).iCycles_d 0 k) z
       exact h)
 
-/-- Every degree-zero cycle comes from its map out of the unit complex.
-Source: Stacks 08JA (auxiliary; not a blueprint node). -/
+/-- Every degree-zero cycle comes from its map out of the unit complex. -/
 theorem coefficientHomCycleOfUnitMap_unitMapOfCycle
     (L M : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)
@@ -197,8 +200,7 @@ theorem coefficientHomCycleOfUnitMap_unitMapOfCycle
   rw [coefficientHomCycleOfUnitMap_iCycles, coefficientHomUnitMapOfCycle,
     HomologicalComplex.mkHomFromSingle_f, Iso.inv_hom_id_assoc]
 
-/-- Evaluating the cycle of a map from the unit complex is evaluating the map at `1`.
-Source: Stacks 08JA, 0A8X (auxiliary; not a blueprint node). -/
+/-- Evaluating the cycle of a map from the unit complex is evaluating the map at `1`. -/
 theorem coefficientHomZeroEvaluation_cycleOfUnitMap
     (L M : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)
@@ -214,8 +216,7 @@ theorem coefficientHomZeroEvaluation_cycleOfUnitMap
   rw [coefficientHomCycleOfUnitMap_iCycles]
   rfl
 
-/-- Naturality of the canonical global-sections comparison on complexes.
-Source: Stacks 079P (auxiliary; not a blueprint node). -/
+/-- Naturality of the canonical global-sections comparison on complexes. -/
 theorem coefficientSiteSectionsComparison_naturality
     {K L : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ}
@@ -233,8 +234,7 @@ theorem coefficientSiteSectionsComparison_naturality
       J A).1
   exact (coefficientOrdinarySections.{u, c, v} J A).rightDerivedFunctorUnitQ_naturality f
 
-/-- The global class of the unit section of the coefficient ring.
-Source: Stacks 08JA (auxiliary; not a blueprint node). -/
+/-- The global class of the unit section of the coefficient ring. -/
 noncomputable def coefficientUnitClass :
     (@DerivedCategory.homologyFunctor AddCommGrpCat.{max c v u} _ _
       (HasDerivedCategory.standard _) 0).obj
@@ -249,10 +249,7 @@ noncomputable def coefficientUnitClass :
         (ComplexShape.up ℤ)).obj (coefficientUnitComplex.{u} J A)).homologyπ 0)
           (coefficientUnitCycle.{u} J A)))
 
-/-- The class of the cycle of a map from the unit complex is the image of the unit class.
-Source: Stacks 08JA, 079P (auxiliary; not a blueprint node).
-Proof: naturality of the homology projection, of the homology factorization and of the
-global-sections comparison carry the unit cycle along the map. -/
+/-- The class of the cycle of a map from the unit complex is the image of the unit class. -/
 theorem coefficientHomZeroClass_cycleOfUnitMap
     (L M : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)
@@ -295,8 +292,7 @@ theorem coefficientHomZeroClass_cycleOfUnitMap
   simp only [Functor.map_comp]
   rfl
 
-/-- Every derived morphism into a K-injective complex is the localization of a chain map.
-Source: Stacks 070Y (auxiliary; not a blueprint node). -/
+/-- Every derived morphism into a K-injective complex is the localization of a chain map. -/
 theorem derivedCategoryQ_map_surjective_of_isKInjective
     {D : Type*} [Category* D] [Abelian D] [HasDerivedCategory D]
     (X K : CochainComplex D ℤ) [K.IsKInjective]
@@ -313,13 +309,7 @@ theorem derivedCategoryQ_map_surjective_of_isKInjective
   rw [hh] at hn
   simpa using hn.symm
 
-/-- The class of a tensor-Hom transpose from the unit is computed by the left unitor.
-Source: Stacks 08JA, 08J9 (auxiliary; not a blueprint node).
-Proof: the transpose is the localization of a chain map `σ` into the K-injective Hom
-complex. Its class is the class of the cycle of `σ`, which the recorded H-zero
-equivalence sends to the chain map whose components evaluate `σ` at `1`. The uncurry
-normalization identifies this chain map with the left unitor followed by the uncurried
-map, which represents `X` on the K-flat tensor model. -/
+/-- The class of a tensor-Hom transpose from the unit is computed by the left unitor. -/
 theorem coefficientHomZeroEquiv_unitClass_transpose
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J A))
     (T : CoefficientTensorModels.{u, c, v, w} J A S)

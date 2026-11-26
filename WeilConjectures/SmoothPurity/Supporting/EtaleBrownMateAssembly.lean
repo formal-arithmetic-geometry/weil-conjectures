@@ -7,17 +7,18 @@ module
 public import Mathlib.CategoryTheory.Adjunction.Mates
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
-/-! # Generic inverse mate assembly -/
+/-! # Generic inverse mate assembly
+
+## References
+
+* Zheng, Lemma 5.16.
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 open CategoryTheory
 
-/-- The inverse mate assembly used by the Brown scalar square.
-Source: Zheng, Lemma 5.16; categorical mate-pasting.
-(blueprint: lem-pur-etale-brown-mate-assembly).
-Proof: apply injectivity of the right mate equivalence to the pasted horizontal
-and vertical squares, use mate composition and whiskering identities, and
-evaluate the resulting equality at the required object. -/
+/-- The inverse mate assembly used by the Brown scalar square: if the mates of two pasted
+squares agree objectwise, then the whiskered pasted squares agree. -/
 theorem etaleBrownMatePasting
     {CA DA CB DB EA FA EB FB : Type*}
     [Category CA] [Category DA] [Category CB] [Category DB]

@@ -12,7 +12,14 @@ import WeilConjectures.SmoothPurity.Pur.PurNormalizedReconstructionAdjunctionCal
 
 /-! # Realization squares for canonical expression pairs
 
-Source: blueprint fix-prop-coherence, strict-system expression realization.
+We show that the independently fixed canonical arrows intertwine the recursive realizations
+of canonical expression pairs.
+
+## Implementation details
+
+The proof is by induction on the `CanonicalPair` derivation, after identifying the recursive
+coefficient maps with reduction of the inverse realization followed by the actual counit.
+No evaluation faithfulness is used.
 -/
 
 @[expose] public noncomputable section
@@ -198,32 +205,8 @@ private theorem canonical_square (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
             Prod.ext hc₁ hc₂))
 
 /-- The independently fixed canonical arrows intertwine the recursive realizations.
-This asserts the realization equation only; neither finite scalar projections nor
-invertibility of the ordinary-to-completed expression map is asserted here.
-
-Source: blueprint fix-prop-coherence, coefficient-comparison and inherited-equations
-sentences; generator/context step of lem-sf-integral-expression-coefficient-squares.
-(blueprint: lem-sf-integral-canonical-realization-square).
-
-Proof: first use the primitive transpose formulas to identify the recursive coefficient
-maps with reduction of inverse realization followed by the actual counit. For a basic
-pair, apply generatorReductionCoherence on its finite word, using the completion
-transport to pass from the ordinary ringed arrow to the completed arrow. Pullback
-composition and tensor reassociation use their representative normalizations. Exchange
-and projection are the displayed adjunction mates, and their composite cases follow
-by the ringed exchange/tensor coherence equation. The proper/open arrow is determined
-by its lambda adjunct, so the normalized bridge identifies the two independently
-specified maps. Expand compact-support generators into the fixed open/proper word.
-Transpose the resulting whole-system equation under reduction/limit. Induct on the
-CanonicalPair derivation: identity and composition use functoriality; pull and tensor
-use the recursion equations after cancelling the invertible images of the actual
-counits; proper image uses naturality of the proper comparison. Open extension uses
-openNormalization, counit naturality and the invertible reconstruction unit, which
-make its prescribed comparison natural on the good domain. Compact support is the
-composition of those open and proper steps. Tensor applies the two child squares
-in their respective slots, including repeated inputs. All intermediate domains are
-supplied by the derivation and the expression domains. No evaluation faithfulness
-is used, and zero inputs and empty opens are handled by the same identities. -/
+Neither finite scalar projections nor invertibility of the ordinary-to-completed expression
+map is asserted here. -/
 theorem integralCanonicalRealizationSquare (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (o : Operations l E) (a : AmbientModels l E o)
     (comparison : ExpressionRecursion.Comparisons l E D o)

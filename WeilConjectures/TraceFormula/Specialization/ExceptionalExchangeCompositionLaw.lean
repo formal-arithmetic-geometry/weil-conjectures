@@ -14,18 +14,17 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingComposi
 
 # The composition law of the exceptional exchanges along proper morphisms of models
 
-For proper morphisms of proper trait models over a common generic base, the compact-support
-exchange `ν_φ` is the inverse of the proper exchange `χ_φ`, read through `Rf_! ≅ Rf_*`
+For proper morphisms of proper trait models over a common generic base, the compact-support exchange
+`ν_φ` is the inverse of the proper exchange `χ_φ`, read through `Rf_! ≅ Rf_*`
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.properCompactSupportExchange`), and the exceptional
-exchange `β_φ` is its mate for `Rf_! ⊣ Rf^!` (`ProEtale.CondensedRing.exceptionalExchange`).
-The proper exchanges compose
+exchange `β_φ` is its mate for `Rf_! ⊣ Rf^!` (`ProEtale.CondensedRing.exceptionalExchange`). The
+proper exchanges compose
 (`NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_comp_app_of_eq`) and the
 identifications `Rf_! ≅ Rf_*` are compatible with composition
 (`ProEtale.CondensedRing.boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_comp`), so the
 compact-support exchanges compose, which is the hypothesis of the conditional composition law
 `ProEtale.CondensedRing.exceptionalExchange_comp_app`. This gives the composition law
-`β_{gf} = f_s^! β_g ∘ β_f(g_η^!)` of blueprint `lemma-composition-exceptional-base-change-maps`
-(E.9) for proper morphisms of models.
+`β_{gf} = f_s^! β_g ∘ β_f(g_η^!)` for proper morphisms of models.
 
 ## Main results
 
@@ -181,13 +180,11 @@ theorem properCompactSupportExchange_comp_app
       exact boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_comp ℓ d₂ i₂ K) K
 
 include htot hgen in
-/-- **The composition law of the exceptional exchanges along proper morphisms of models**
-(blueprint `lemma-composition-exceptional-base-change-maps` (E.9), `β_{gf} = f_s^! β_g ∘
-β_f(g_η^!)`, for proper morphisms of proper trait models over a common generic base): for
+/-- **The composition law of the exceptional exchanges along proper morphisms of models**: for
 `φ : L ⟶ N` and `ψ : N ⟶ M` with composite `χ`, the exceptional exchange of `χ` is the composite of
-those of `φ` and `ψ` under the composition isomorphisms of the exceptional inverse images, the
-exceptional exchanges being the mates of the compact-support exchanges inverse to the proper
-exchanges. -/
+those of `φ` and `ψ` under the composition isomorphisms of the exceptional inverse images,
+`β_{gf} = f_s^! β_g ∘ β_f(g_η^!)`; the exceptional exchanges are the mates of the compact-support
+exchanges inverse to the proper exchanges. -/
 theorem exceptionalExchange_properCompactSupportExchange_comp_app
     (K : Dᵇc(X₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (exceptionalExchange ℓ (d₁ ≫ i₁) (d₂ ≫ i₂)

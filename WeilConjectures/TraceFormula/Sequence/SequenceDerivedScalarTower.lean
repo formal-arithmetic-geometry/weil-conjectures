@@ -43,7 +43,12 @@ import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 
 /-! # A component of strict quotient-system coherence
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6D.
+The scalar-pullback comparisons of the derived sequence functors are compatible with the composition
+of scalar extensions along a tower `E → L → M`.
+
+## References
+
+* Stacks Project, Tag 0D6D.
 -/
 
 @[expose] public noncomputable section
@@ -96,15 +101,9 @@ private theorem scalarTower_pasting
     _ = _ := by rw [hC]
 
 -- The comparison types require repeated independent-universe sheaf instance synthesis.
-/-- Source: Stacks Project, sites-cohomology.tex, Tag 0D6D.
-(blueprint: lem-trf-sequence-derived-scalar-tower).
-Proof: Resolve the input whole quotient system by a flat-term K-flat complex. Each scalar
-extension and geometric pullback preserves the resolving class, including nonflat coefficient
-extensions. Normalize each edge by its universal cochain counit and compose along both sides.
-Functoriality and associativity reduce the equation to the ordinary scalar-tower generator
-calculation, which sends c tensor (b tensor x) to c*j(b) tensor x on both sides. Cancel the common
-composite counit and descend along the localized resolution isomorphism. This also treats equality
-among any of the coefficient fields without extra assumptions. -/
+/-- The scalar tower square: for `ι : E → L`, `j : L → M` and `f : X ⟶ Y`, the scalar-pullback
+comparisons along `ι` and `j`, followed by the scalar composition isomorphism, give the
+scalar-pullback comparison along `j ∘ ι`. -/
 theorem sequenceDerivedScalarTower
     (l : ℕ) [Fact l.Prime]
     (E L : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

@@ -9,8 +9,11 @@ public import WeilConjectures.TraceFormula.Integral.IntegralComparisonSequenceSy
 
 /-! # Evaluation of canonical sequence direct image
 
-Source: Stacks Project, Tags 03D1 and 0941
-(blueprint: lem-pur-integral-comparison-sequence-direct-evaluation).
+Direct image on sequences commutes with evaluation by the identity on sections.
+
+## References
+
+* Stacks Project, Tags 03D1 and 0941
 -/
 
 @[expose] public noncomputable section
@@ -84,11 +87,7 @@ attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficien
   PresheafOfModules.pushforward₀Obj PresheafOfModules.restrictScalars
   PresheafOfModules.restrictScalarsObj ModuleCat.restrictScalars
   coefficientSequenceEvaluation coefficientProEtaleModuleDirectImage in
-/-- Direct image on sequences commutes with evaluation by the identity on sections.
-Source: Stacks 03D1 and 0941 (blueprint: lem-pur-integral-comparison-sequence-direct-evaluation).
-Proof: both functors evaluate M at (n, f-basechange U) with scalar action through
-the same constant-section coefficient map. The identity section maps give the
-natural isomorphism. Sectionwise extensionality proves uniqueness. -/
+/-- Direct image on sequences commutes with evaluation by the identity on sections. -/
 private theorem canonical_exists
     {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     ∃ e : integralComparisonSequenceDirectImage l E f ⋙ coefficientSequenceEvaluation l E Y n ≅
@@ -167,11 +166,7 @@ private theorem canonical_exists
           (G := Prod.sectR n X.ProEt) ψ b
   exact ⟨e, (fun M U x ↦ he M (op U) x)⟩
 
-/-- Direct image on sequences commutes with evaluation by the identity on sections.
-Source: Stacks 03D1 and 0941 (blueprint: lem-pur-integral-comparison-sequence-direct-evaluation).
-Proof: both functors evaluate M at (n, f-basechange U) with scalar action through
-the same constant-section coefficient map. The identity section maps give the
-natural isomorphism. Sectionwise extensionality proves uniqueness. -/
+/-- Direct image on sequences commutes with evaluation by the identity on sections. -/
 theorem integralComparisonSequenceDirectEvaluation_existsUnique
     {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     ∃! e : integralComparisonSequenceDirectImage l E f ⋙ coefficientSequenceEvaluation l E Y n ≅

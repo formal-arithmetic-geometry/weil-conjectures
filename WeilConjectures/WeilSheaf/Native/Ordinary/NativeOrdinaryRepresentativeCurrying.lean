@@ -15,8 +15,12 @@ import all WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryTensorReprese
 
 /-! # Normalized native currying on a prescribed total tensor model
 
-Source: Stacks Tags 08J9, 0A90 and 0A97; the Hom portion of the ordinary
-native closed construction (blueprint: lem-sf-native-ordinary-representative-currying).
+This file constructs the Hom portion of the ordinary native closed structure: natural currying
+bijections for a natural K-flat model of the canonical derived tensor.
+
+## References
+
+* Stacks Project, Tags 08J9, 0A90, 0A8Z and 0A97.
 -/
 
 @[expose] public section
@@ -823,31 +827,9 @@ private theorem result
 
 end OrdinaryCurrying
 
-/-- Product-total Hom representatives determine natural currying bijections for
-any natural one-K-flat model of the canonical derived tensor. No adjunction,
-closed structure or symmetric structure is included in this statement.
-
-Source: Stacks Tags 08J9, 0A90, 0A8Z and 0A97; ordinary internal-Hom comparison
-and uncurrying in step 1 of lem-sf-weil-native-tensor-transport.
-(blueprint: lem-sf-native-ordinary-representative-currying).
-
-Proof: use scalar forgetting and the section-ring module equivalence to apply
-the ringed-site normalized tensor-Hom bijection. Transport the chain-level
-bijection back to native modules. Convert the ringed Hom differential to the
-native row convention by multiplying the (n,p) component by (-1)^(np), and reverse
-the curried tensor convention. On the summand (p,q), these conversions give the
-unsigned counit formula in the conclusion. The chain-map equation is exactly the
-Hom cocycle equation, and homotopies correspond. For K-flat P and Q and K-injective
-I, both total tensor and product Hom therefore compute the relevant derived Hom
-sets. Compose with model and R.model to get the required representative bijection.
-The naturality assumption on model and the naturality field of R prove naturality
-in all three variables on these representatives. K-flat replacement and K-injective
-replacement are localization equivalences, so fully faithful restriction along their
-product extends the natural bijection uniquely to all derived objects and maps,
-including inverse quasi-isomorphisms. Restricting that extension back to representatives
-recovers the bijection used to construct it, proving the final equality. The actual
-uncurried chain map gives ψ and its displayed homogeneous counit equation. The source
-and target can be zero and the scheme empty; this argument is unbounded throughout. -/
+/-- Product-total Hom representatives determine natural currying bijections for any natural
+one-K-flat model of the canonical derived tensor. No adjunction, closed structure or symmetric
+structure is included in this statement. -/
 theorem native_ordinary_representative_currying
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (H : (DerivedCategory (ProEtale.AdicSheaf l Y))ᵒᵖ ×

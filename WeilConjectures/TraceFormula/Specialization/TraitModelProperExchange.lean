@@ -20,18 +20,19 @@ with proper total space, whose geometric generic fibre is all of `X ×_k Spec Ω
 exchange `χ_a : Ψ_S Ra_* ⟶ Ra'_* Ψ_M` of the structure morphism `a : X ⟶ Spec k`
 (`NearbyCyclesModel.IsTraitModelOfBase.pushforwardExchange`) is an isomorphism on bounded
 constructible complexes (`NearbyCyclesModel.IsTraitModelOfBase.isIso_pushforwardExchange_app`).
+## Implementation details
+
 The proof works on the ambient derived categories
 (`NearbyCyclesModel.IsTraitModelOfBase.isIso_pushforwardExchange_app_ambient`) and then restricts
 to `Dᵇc` through `NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_app_hom`.
 
 The proof compares `χ_a` with the proper exchange of the model `M` of its geometric generic fibre
 over the trait as a model of `Spec Ω` (`NearbyCyclesModel.IsTraitModelOver.toTraitGeneric`,
-invertible by blueprint `prose-E-03` (2),
+invertible by proper base change for nearby cycles,
 `NearbyCyclesModel.IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app`): by the square
 law of the pullback exchanges, the two differ by `Ψ_S` of the base change morphism
 `Lε^* Ra_* ⟶ Rg_* Lε^*` of the cartesian square of generic fibres, which is invertible by proper
-base change (blueprint `proposition-proper-direct-image-constructible-complexes`,
-`ProEtale.CondensedRing.isIso_baseChangeMap_app_padicAlgCl_of_isProper`), and
+base change (`ProEtale.CondensedRing.isIso_baseChangeMap_app_padicAlgCl_of_isProper`), and
 by pullback exchanges along identities (`NearbyCyclesModel.pushforwardExchange_square_aux`).
 
 -/
@@ -150,11 +151,7 @@ local notation "𝐐" => Profinite.padicAlgClRingObj ℓ
 categories: if the total space of the trait model `M` over the base is proper over the trait and
 its geometric generic fibre is all of `X ×_k Spec Ω`, the proper exchange
 `χ_a : Ψ_S Ra_* K ⟶ Ra'_* Ψ_M K` of the structure morphism `a : X ⟶ Spec k` is invertible at
-every bounded constructible `K` (for proper `X`). By the square law
-`NearbyCyclesModel.pushforwardExchange_square_aux`, it agrees, up to invertible pullback
-exchanges along identities and base change along identities, with the proper exchange of the
-model of the geometric generic fibre (blueprint `prose-E-03` (2)) composed
-with `Ψ_S` of the proper base change morphism of the square of generic fibres. -/
+every bounded constructible `K` (for proper `X`). -/
 theorem IsTraitModelOfBase.isIso_pushforwardExchange_app_ambient
     [Fact (ringChar k ≠ ℓ)] [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
     (h : M.IsTraitModelOfBase k q g) [IsProper q] [IsProper (toPoint X).left]
@@ -182,9 +179,7 @@ theorem IsTraitModelOfBase.isIso_pushforwardExchange_app_ambient
 /-- **Proper exchange for a proper trait model over the base**: if `X` is proper over `k`, the
 total space of the trait model `M` over the base is proper over the trait and its geometric
 generic fibre is all of `X ×_k Spec Ω`, the proper exchange `χ_a : Ψ_S Ra_* ⟶ Ra'_* Ψ_M` of the
-structure morphism is an isomorphism on bounded constructible complexes
-(`NearbyCyclesModel.IsTraitModelOfBase.isIso_pushforwardExchange_app_ambient`, restricted by
-`NearbyCyclesModel.Hom.isIso_boundedConstructiblePushforwardExchange_app`). -/
+structure morphism is an isomorphism on bounded constructible complexes. -/
 theorem IsTraitModelOfBase.isIso_pushforwardExchange_app [Fact (ringChar k).Prime]
     [Fact (ringChar k ≠ ℓ)] [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]

@@ -12,7 +12,18 @@ import all WeilConjectures.SmoothPurity.Coefficient.CoefficientExtensionOrdinary
 
 /-! # Augmented open reduction descent
 
-Source: Stacks Project, Modules on Sites, Tags 0E8I and 03DI.
+We prove that a single ordinary quotient reduction has a natural augmented computation on good
+models.
+
+## Implementation details
+
+The comparison identifies the reduction with the ordinary simultaneous quotient-tensor functor,
+derives the tensor/limit adjunction using flat-term K-flat and K-injective resolutions on the
+sequence site, and identifies the transpose of its comparison with the strict augmentation.
+
+## References
+
+* [Stacks Project, Tags 0E8I, 03DI, 06YS, 06YY, 0941, 09T5]
 -/
 
 @[expose] public noncomputable section
@@ -301,20 +312,7 @@ private theorem ordinaryAugmentedPresentation (W : Scheme.{t})
       ((CompletionUnit.termwiseLimitComparison l E W).hom.app Z), hd]
     rfl
 
-/-- Natural augmented computation of a single ordinary quotient reduction on good models.
-Source: Stacks 06YS, 06YY, 0941 and 09T5
-(blueprint: lem-sf-ordinary-reduction-augmented-computation).
-
-Proof: The evaluation isomorphisms and their quotient equations identify A with the
-ordinary simultaneous quotient-tensor functor. Transport the actual scalar units through
-these isomorphisms; their quotient compatibility gives one strict augmentation. Derive
-the ordinary tensor/limit adjunction using flat-term K-flat resolutions and K-injective
-resolutions on the sequence site. Its right adjoint is the specified total limit.
-Uniqueness of left adjoints identifies its left functor with S.reduction. The normalized
-adjunction identifies the transpose of its comparison with the strict augmentation.
-Finite scalar adjunctions and the unit-projection equations give the presentation
-normalization. This supplies a natural comparison on the full category of good models,
-including its augmentation as a whole system arrow. -/
+/-- Natural augmented computation of a single ordinary quotient reduction on good models. -/
 theorem ordinaryReductionAugmentedComputation (W : Scheme.{t})
     (S : CoefficientDerivedSystemCalculus l E W)
     (cS : CoefficientDerivedSystemCoherence l E W S) (A : OrdinaryReduction l E W) :

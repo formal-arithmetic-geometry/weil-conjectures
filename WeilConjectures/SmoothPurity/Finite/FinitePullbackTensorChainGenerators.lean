@@ -11,8 +11,12 @@ import WeilConjectures.SmoothPurity.ProEtale.ProEtaleTotalTensorPullbackGenerato
 
 /-! # The explicit intrinsic total pullback tensor isomorphism
 
-Source: Stacks Tags 03EL, 06YY and 07A4.
-(blueprint: lem-pur-finite-pullback-tensor-chain-generators).
+The signed-total ordinary pullback tensor comparison, conjugated by the finite realization,
+and its compatibility with inverse-image unit generators.
+
+## References
+
+* [Stacks, Tags 03EL, 06YY and 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -41,9 +45,7 @@ attribute [local instance] sfIntrinsicPullback_additive
   pullbackTensorCoefficientFinite
   SheafOfModules.monoidalCategory
 
-/-- The signed-total ordinary comparison conjugated by the prescribed finite realization.
-Source: Stacks 03EL and 07A4
-(blueprint: lem-pur-finite-pullback-tensor-chain-generators). -/
+/-- The signed-total ordinary comparison conjugated by the prescribed finite realization. -/
 @[irreducible] def finitePullbackTensorChainIso {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (P Q : CochainComplex (normalizedDVRModules l E Y n) ℤ) :
     ((sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f).mapHomologicalComplex
@@ -69,13 +71,7 @@ Source: Stacks 03EL and 07A4
       (integralCoefficientCommRingSheaf l E X n)).mapIso
         (Iso.prod (e.app P) (e.app Q))
 
-/-- The explicit chain comparison preserves intrinsic inverse-image unit generators.
-Source: Stacks 03EL and 07A4
-(blueprint: lem-pur-finite-pullback-tensor-chain-generators).
-Proof: move the source unit through the inverse unit-normalized realization. The
-ordinary signed-total comparison sends that ordinary unit generator to the tensor
-of the two ordinary units. The total tensor map applies the realization in each
-factor, and its two unit equations give the two intrinsic unit sections. -/
+/-- The explicit chain comparison preserves intrinsic inverse-image unit generators. -/
 theorem finitePullbackTensorChain_generators {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (P Q : CochainComplex (normalizedDVRModules l E Y n) ℤ) :
     ∀ (p q i : ℤ) (hpq : p + q = i) (U : Y.ProEt)

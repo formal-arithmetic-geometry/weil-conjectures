@@ -15,8 +15,19 @@ import WeilConjectures.RingTheory.LinearEquationLocalizationPolynomialFormula
 /-!
 # Localizing a polynomial algebra with one linear relation
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 16.2.8, Tag 07EU,
-`lemma-final-solve` (blueprint: lem-weil-pbc-linear-equation-localization-polynomial).
+For `B = A[x₁, …, x_r]/(∑ f_j x_j - 1)`, the localization `B_{f_i}` is a polynomial algebra over
+`A_{f_i}` in the variables `x_j` with `j ≠ i`; in particular it is smooth.
+
+## Implementation details
+
+This fills in the computation omitted in Stacks. The inverse sends `x_i` to
+`z = f_i⁻¹ (1 - ∑_{j ≠ i} f_j y_j)` and `x_j` to `y_j`; it kills the defining relation, and the
+universal properties of polynomial rings, quotients and localizations show that both composites
+are identities.
+
+## References
+
+* [Stacks, Tag 07EU]
 -/
 
 @[expose] public section
@@ -25,27 +36,9 @@ universe u
 
 namespace MvPolynomial
 
-/-- Source: Stacks Project, Tag 07EU, proof of `lemma-final-solve`, the omitted computation
-showing that `B` localized at `f i` is smooth over `A` localized at `f i`.
-(blueprint: lem-weil-pbc-linear-equation-localization-polynomial)
-
-Proof (the four steps of the node, given here for the omitted detail):
-1. By the localization universal property
-   [lem-weil-pbc-localization-away-universal-property], the map `A → B → Bf` induces
-   `Af → Bf`, mapping each fraction to the same fraction. Polynomial evaluation
-   [def-weil-pbc-mv-polynomial-ring] gives the map sending `y j` to the class of `x j`.
-2. Set `z = (f i)⁻¹ * (1 - ∑ j ≠ i, f j * y j)`. Evaluate the original polynomial
-   ring by sending `x i` to `z` and the other variables to `y j`. The defining relation
-   maps to zero, since `f i * (f i)⁻¹ = 1`, so evaluation factors through `B`.
-   The image of `f i` is a unit, hence the same localization universal property extends
-   this map to `Bf`. On fractions it sends `b / (f i)^n` to the image of `b` times
-   `(f i)⁻ⁿ`; this also proves `Af`-linearity and the stated inverse formulas.
-3. The inverse composed with polynomial evaluation fixes every `y j`, so it is the
-   identity by `MvPolynomial.algHom_ext` [def-weil-pbc-mv-polynomial-ring].
-4. In the other order the composite fixes `x j` for `j ≠ i`. It fixes `x i` because the
-   relation in `B` gives `1 - ∑ j ≠ i, f j * x j = f i * x i`. Polynomial uniqueness,
-   surjectivity of the quotient map, and uniqueness for localization then show that
-   this composite too is the identity.
+/-- For `B = A[x]/(∑ f_j x_j - 1)`, the localization `B_{f_i}` is the polynomial algebra over
+`A_{f_i}` in the variables `x_j`, `j ≠ i`, with the eliminated variable sent to
+`f_i⁻¹ (1 - ∑_{j ≠ i} f_j X_j)`.
 
 The binder `i : Fin r` encodes the choice of one of the `r ≥ 1` variables.
 The local algebra instance is the induced map on localizations, not extra data. -/

@@ -14,8 +14,9 @@ import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
 
 /-! # Native restriction and the ordinary total tensor
 
-Source: Stacks 0E8I, 0GL1 and 015F.
-(blueprint: lem-sf-native-restriction-forget-total-model).
+## References
+
+* Stacks 0E8I, 0GL1, 012Z and 015F.
 -/
 
 @[expose] public noncomputable section
@@ -1028,34 +1029,7 @@ end Proof
 -- The concrete specialization carries the full exact-derived normalization diagram.
 /-- Forgetting the native restriction presentation, compared with ordinary total models.
 The two isomorphisms are pinned by the binary model equations; the assertion does
-not use an ordinary derived restriction tensorator.
-
-Source: Stacks 012Z, 0GL1, 0E8I and 015F, steps 1, 2, 4 and the native part of
-step 5 of the parent representative restriction-forgetting proof.
-(blueprint: lem-sf-native-restriction-forget-total-model).
-
-Proof: restrict P,T using s.restriction_kflat, then apply
-native_two_sided_kflat_forget on the ambient and open schemes. Apply
-native_forget_normalized_binary_models to both pairs. Its first conjunct fixes
-the chain comparisons cZ,cU on every balanced summand. In degree n precompose
-with each (p,q) inclusion for p+q=n. The presentation's restriction_summands
-rewrites the native total map to s.sheafRestriction. Then s.restriction_forget
-identifies its underlying balanced map with ordinary module pullback. The
-monoidal module pullback comparison and its totalization give exactly the
-summand of nativeOrdinaryRestrictionTotal. The raw balanced quotient maps are
-epimorphisms, and restriction and forgetting preserve the diagonal coproducts;
-therefore the two total chain maps agree. Apply Q to this equality. Apply
-nativeForget to c.restriction_model and substitute the two binary model
-equations. Naturality of the exact-derived factorization moves Q(cZ), Q(cU)
-and the native model maps across the restriction factors. The two successive
-exact factors are the factors for the composite exact functor, so their ratio
-is nativeOpenForgetPull. This identifies the ambient model with mZ in the first
-equation. On the open the same substitution and naturality in the two input
-factor isomorphisms gives mU in the second equation. All its factors are
-invertible: the ordinary tensorator of Q is invertible on the K-flat restricted
-forgotten inputs. The localized total square is the third equation. These
-normalization equations determine mZ,mU uniquely. Zero complexes and empty opens
-use the same coproduct equations and do not require nonempty diagonals. -/
+not use an ordinary derived restriction tensorator. -/
 theorem native_restriction_forget_total_model (s : NativeOpenTensorData k₀ l j)
     (rho : nativeDerivedTensor k₀ l Z ⋙ nativeOpenPull k₀ l j ≅
       (nativeOpenPull k₀ l j).prod (nativeOpenPull k₀ l j) ⋙ nativeDerivedTensor k₀ l U)

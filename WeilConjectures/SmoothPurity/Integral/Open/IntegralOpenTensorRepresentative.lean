@@ -10,9 +10,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Finite components of strict open reduction on K-flat representatives
 
-Source: Stacks Tags 0E8I, 0GL1, 06YY and 0941; the strict-model normalization in
-`lem-sf-integral-open-reduction-comparison`
-(blueprint: lem-sf-integral-open-tensor-representative).
+## References
+
+* Stacks Project, Tags 0E8I, 0GL1, 06YY and 0941
 -/
 
 @[expose] public noncomputable section
@@ -79,9 +79,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local irreducible] scalarReductionExtension HasDerivedCategory.standard
   CategoryTheory.Functor.mapDerivedCategory
 
-/-- The consecutive scalar quotient map, with the specified derived adjunction.
-Source: Stacks 06YY and 0941
-(blueprint: lem-sf-integral-open-tensor-representative). -/
+/-- The consecutive scalar quotient map, with the specified derived adjunction. -/
 def integralOpenReductionStep (W : Scheme.{t}) (n : ℕ) :
     coefficientFiniteDerivedExtension l E W (n + 1) ⟶
       coefficientFiniteDerivedExtension l E W n ⋙ normalizedDVRRes l E W (Nat.le_succ n) :=
@@ -89,9 +87,7 @@ def integralOpenReductionStep (W : Scheme.{t}) (n : ℕ) :
     (coefficientFiniteAdjunction l E W n) (normalizedDVRRes l E W (Nat.le_succ n))
     (compactSupportSystemRestrictionComp l E W (Nat.le_succ n))
 
-/-- Evaluation of the specified strict comparison, through the finite evaluations.
-Source: Stacks 0941, the strict comparison of open reduction
-(blueprint: lem-sf-integral-open-tensor-representative). -/
+/-- Evaluation of the specified strict comparison, through the finite evaluations. -/
 def integralOpenReductionAlpha
     (SV : CoefficientDerivedSystemCalculus l E V)
     (SX : CoefficientDerivedSystemCalculus l E X)
@@ -107,9 +103,7 @@ def integralOpenReductionAlpha
     (compactSupportCanonicalJEvaluation l E j o n).app (SX.reduction.obj K.obj) ≪≫
     (compactSupportCanonicalJLevel l E j o n).mapIso ((SX.reductionEvaluation n).app K.obj)
 
-/-- The tensor comparison applied degreewise, with the two composites kept nested.
-Source: Stacks 0GL1, degreewise open tensor comparison
-(blueprint: lem-sf-integral-open-tensor-representative). -/
+/-- The tensor comparison applied degreewise, with the two composites kept nested. -/
 def integralOpenTensorChainIso
     (tensor : IntegralOpenReduction.TensorComparison l E j o)
     (Q : CochainComplex (scalarReductionSource l E X) ℤ) (n : ℕ) :
@@ -124,9 +118,7 @@ attribute [local irreducible] coefficientFiniteReductionModel
   integralOpenReductionAlpha integralOpenTensorChainIso
 
 /-- The localization of the actual ordinary open tensor isomorphism on a K-flat model.
-This is a construction from chain isomorphisms, with no chosen existence witness.
-Source: Stacks 0GL1, proof of lemma-j-shriek-and-tensor
-(blueprint: lem-sf-integral-open-tensor-representative). -/
+This is a construction from chain isomorphisms, with no chosen existence witness. -/
 def integralOpenTensorRepresentativeIso
     (tensor : IntegralOpenReduction.TensorComparison l E j o)
     (Q : CochainComplex (scalarReductionSource l E X) ℤ)
@@ -155,23 +147,7 @@ def integralOpenTensorRepresentativeIso
 
 attribute [local irreducible] integralOpenTensorRepresentativeIso
 
-/-- A strict comparison evaluates to the localization of its prescribed tensor components.
-Source: Stacks 0GL1 and 0941; Step 3 of the parent quotient-square argument.
-(blueprint: lem-sf-integral-open-tensor-representative).
-
-Proof: Apply r.strictModel to Q, its flat terms, and its completeness. Retain its
-K-flatness proof for the open extension. Apply finite derived evaluation to the
-whole-system representative equation. The two CoefficientReductionPresentation
-identities replace the evaluated representative maps by reductionEvaluation followed
-by coefficientFiniteReductionModel. The finite chain component equation identifies
-the evaluated chain isomorphism, after extensionEvaluation, with the degreewise
-ordinary tensor comparison. Exact localization commutes with composition of these
-chain maps. Naturality of the exact-localization comparison moves the finite
-representative maps through extension. Cancel the representative isomorphisms and
-the two finite-reduction model isomorphisms. The resulting equality is precisely
-alpha = the displayed localization of tensor.ordinary. This is a comparison of
-individual finite components, with no assertion about quotient arrows. It applies
-to the empty open, the zero complex, n=0, and unbounded complexes. -/
+/-- A strict comparison evaluates to the localization of its prescribed tensor components. -/
 theorem integralOpenTensorRepresentative
     (SV : CoefficientDerivedSystemCalculus l E V)
     (SX : CoefficientDerivedSystemCalculus l E X)

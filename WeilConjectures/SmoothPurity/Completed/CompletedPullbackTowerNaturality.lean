@@ -9,7 +9,12 @@ public import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTowerCore
 
 /-! # Naturality of the strict pullback tower
 
-Source: Stacks Project, Cohomology on Sites, Tag 0941.
+This module proves that the components of the strict pullback tower are natural in the
+integral complex.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 0941
 -/
 
 @[expose] public noncomputable section
@@ -56,14 +61,7 @@ private theorem pullbackTensorNaturality_of_components
 
 attribute [local irreducible] coefficientSequenceRestriction scalarReductionExtension
   completedIntegralCommRingSheafUnrestricted in
-/-- The prescribed pullback tower components are natural in the integral complex.
-Source: Stacks Project, Cohomology on Sites, Tag 0941
-(blueprint: lem-pur-strict-pullback-tower-naturality).
-Proof: evaluate the square at n. The prescribed component is the composite of
-reordering, sequence pullback evaluation, and the inverse reduction evaluation.
-These are natural isomorphisms of cochain functors, so their composite is natural.
-Replace each prescribed component with the chosen tower component, using its
-normalization, and conclude by extensionality of natural transformations. -/
+/-- The prescribed pullback tower components are natural in the integral complex. -/
 theorem pullbackTensorPullbackTower_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
     {P Q : CochainComplex (integralTowerModules l E Y) ℤ} (g : P ⟶ Q) :
     HomologicalComplex.complexOfFunctorsToFunctorToComplex.map

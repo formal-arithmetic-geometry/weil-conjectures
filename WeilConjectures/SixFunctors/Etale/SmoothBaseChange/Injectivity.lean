@@ -50,7 +50,7 @@ injectivity statements in `...Injectivity.CriticalMap`; this module imports both
 
 ## Implementation notes
 
-The proof follows the blueprint: embed `F` in an injective sheaf `I`, compare the long exact
+The proof proceeds as follows: embed `F` in an injective sheaf `I`, compare the long exact
 sequences of `0 ⟶ F ⟶ I ⟶ I / F ⟶ 0` through the base-change maps, and use that the source
 of the degree-`q` map vanishes on `I` and that the degree-`(q - 1)` maps are isomorphisms. The
 long exact sequences are the homology sequences of the images of the distinguished triangle

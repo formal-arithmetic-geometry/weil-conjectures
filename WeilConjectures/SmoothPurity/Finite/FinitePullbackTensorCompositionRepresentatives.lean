@@ -12,8 +12,13 @@ import WeilConjectures.SmoothPurity.FinitePullbackTensorRep.FinitePullbackTensor
 
 /-! # Pullback composition on flat K-flat tensor representatives
 
-Source: Stacks Project, Tags 07A4 and 00YV.
-(blueprint: lem-pur-finite-pullback-tensor-composition-representatives).
+This file proves the composition coherence of the finite pullback-tensor comparison on
+localized flat K-flat tensor representatives.
+
+## References
+
+* [Stacks, Tag 07A4] (pullback of a tensor product)
+* [Stacks, Tag 00YV] (composition of inverse images)
 -/
 
 @[expose] public noncomputable section
@@ -210,20 +215,8 @@ private theorem constructionIso_app {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
   unfold finitePullbackTensorConstructionIso finitePullbackTensorConstruction
   rfl
 
-/-- Composition coherence restricted to the specified flat K-flat complexes.
-Source: Stacks 07A4, lemma-pullback-tensor-product, and 00YV, composition of
-inverse images (blueprint: lem-pur-finite-pullback-tensor-composition-representatives).
-Proof: use the canonical total-tensor normalization square for f, h and h ≫ f.
-Pullback preserves flat K-flat complexes, so the square for h applies to the
-termwise pullbacks of P and Q. On each bidegree summand the direct pullback
-of x tensor y and the iterated pullback both map to h*f*x tensor h*f*y.
-The ordinary adjunction compositor identifies the unit sections in these two
-expressions. Bilinearity, sheafification and the direct-sum total injections
-prove equality of the chain maps. Apply the derived quotient and insert the
-recorded tensor-model and unit-normalized realization isomorphisms. Naturality
-cancels the realization conjugations, and the derived ordinary compositor is
-sfIntrinsicDerivedPullbackComp. This gives the displayed equation only on
-localized flat K-flat pairs; no extension to arbitrary derived objects is used. -/
+/-- Composition coherence of the finite pullback-tensor comparison, restricted to localized
+flat K-flat complexes. -/
 theorem finitePullbackTensor_composition_representatives {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (h : Z ⟶ X) (n : ℕ)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]

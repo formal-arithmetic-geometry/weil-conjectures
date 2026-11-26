@@ -28,18 +28,23 @@ the *base change morphism* `π^* Rg_* ⟶ Rg'_* π'^*` of Weil complexes
 `g'^* π^* ≅ (g' ≫ π)^* = (π' ≫ g)^* ≅ π'^* g^*` under the adjunctions `g^* ⊣ Rg_*` and
 `g'^* ⊣ Rg'_*`.
 
-The smooth base change theorem (blueprint `theorem-smooth-base-change-classical-torsion--1`, in its
-Weil form) says that it is an isomorphism when the square is cartesian, `π` is smooth and `g` is
-separated (`AlgebraicGeometry.WeilComplex.isIso_baseChange_of_smooth`). The base change morphism
-lies over the native derived base-change mate of pro-étale Weil sheaves
-(`AlgebraicGeometry.WeilComplex.ι_map_baseChange_app`); forgetting the Weil structure, this is
-the geometric native smooth base change theorem
-(`AlgebraicGeometry.NativeBaseChange.geometric_smooth_baseChange_isIso`).
+The smooth base change theorem, in its Weil form, says that it is an isomorphism when the square
+is cartesian, `π` is smooth and `g` is separated
+(`AlgebraicGeometry.WeilComplex.isIso_baseChange_of_smooth`).
 
 The mate description gives the input to homotopy invariance: if the base change morphism is
 invertible at `M` and the unit of `π'^* ⊣ Rπ'_*` is invertible at `M`, then the unit of
 `π^* ⊣ Rπ_*` is invertible at `Rg_* M`
 (`AlgebraicGeometry.WeilComplex.isIso_unit_app_derivedLowerStar_obj_of_isIso_baseChange_app`).
+
+## Implementation details
+
+The base change morphism lies over the native derived base-change mate of pro-étale Weil sheaves
+(`AlgebraicGeometry.WeilComplex.ι_map_baseChange_app`). Forgetting the Weil structure is
+conservative and carries this mate to the base-change morphism of the square base changed to the
+algebraic closure of `k₀` (`AlgebraicGeometry.NativeBaseChange.forget_mate`), which is invertible
+on bounded complexes with constructible cohomology by the geometric native smooth base change
+theorem (`AlgebraicGeometry.NativeBaseChange.geometric_smooth_baseChange_isIso`).
 -/
 
 @[expose] public section
@@ -204,17 +209,9 @@ theorem ι_map_baseChange_app (h : g' ≫ π = π' ≫ g) (M : WeilComplex k₀ 
     ι_map_upperStarCompUpperStarIso_hom_app]
   rfl
 
-/-- Blueprint `theorem-smooth-base-change-classical-torsion--1` (Weil form): **smooth base change
-for Weil complexes**. For a cartesian square of `k₀`-schemes `g' ≫ π = π' ≫ g` with `π` smooth and
-`g` separated, quasi-compact and of finite type, the base change morphism `π^* Rg_* ⟶ Rg'_* π'^*` of
-Weil complexes is an isomorphism.
-
-Its component at a Weil complex `M` lies over the native derived base-change mate of the
-underlying complex (`AlgebraicGeometry.WeilComplex.ι_map_baseChange_app`). Forgetting the Weil
-structure is conservative and carries this mate to the base-change morphism of the square base
-changed to the algebraic closure of `k₀` (`AlgebraicGeometry.NativeBaseChange.forget_mate`),
-which is invertible on bounded complexes with constructible cohomology by geometric smooth base
-change (`AlgebraicGeometry.NativeBaseChange.geometric_smooth_baseChange_isIso`). -/
+/-- **Smooth base change for Weil complexes.** For a cartesian square of `k₀`-schemes
+`g' ≫ π = π' ≫ g` with `π` smooth and `g` separated, quasi-compact and of finite type, the base
+change morphism `π^* Rg_* ⟶ Rg'_* π'^*` of Weil complexes is an isomorphism. -/
 theorem isIso_baseChange_of_smooth [IsSeparated g] (h : IsPullback g' π' π g) [Smooth π] :
     IsIso (baseChange k₀ l h.w) := by
   obtain ⟨_, _, _, _, _, _, _, _, _, _, _, hF⟩ :=

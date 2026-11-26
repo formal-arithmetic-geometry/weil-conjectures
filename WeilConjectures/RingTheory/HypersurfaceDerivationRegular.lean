@@ -16,8 +16,19 @@ import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 /-!
 # Regular hypersurfaces with a unit derivative
 
-Source: Stacks Project, More on Algebra, Lemma Tag 07PF
-(blueprint: lem-weil-pbc-hypersurface-derivation-regular).
+The quotient of a regular ring by an element `f` is regular if some derivation sends `f` to a
+unit modulo `f`.
+
+## Implementation details
+
+Absolute derivations are represented by `ℤ`-derivations: additive maps are automatically
+`ℤ`-linear, and the Leibniz rule forces `D 1 = 0`. At each prime, the image of `f` lies outside
+the square of the maximal ideal, since `D` maps that square into the maximal ideal; the regular
+local hypersurface criterion then applies.
+
+## References
+
+* [Stacks, Tag 07PF]
 -/
 
 @[expose] public section
@@ -26,27 +37,8 @@ universe u
 
 namespace IsRegularRing
 
-/-- Stacks Project, More on Algebra, Lemma Tag 07PF:
-(blueprint: lem-weil-pbc-hypersurface-derivation-regular).
-The quotient of a regular ring by `f` is regular if an absolute derivation sends `f`
-to a unit in the quotient. Absolute derivations are represented by `ℤ`-derivations:
-additive maps are automatically `ℤ`-linear, and the Leibniz rule forces `D 1 = 0`.
-
-Proof:
-1. The quotient is Noetherian. For any prime `q` of the quotient, take its inverse
-   image `p` in `R`. The element `f` lies in `p`, whereas `D(f)` does not: its
-   image is a unit, and a proper prime ideal cannot contain a unit. This also
-   covers a unit `f` vacuously, since its quotient has no primes.
-2. Extend `D` to `R_p` using `theorem-finite-etale-covers-proper-henselian--2`. The image of `f`
-   lies in the maximal ideal, and the derivative of this image is a unit because
-   `D(f)` lies outside `p`. Induction on sums of products in the square of the
-   maximal ideal, using additivity and Leibniz, shows that their derivatives lie
-   in the maximal ideal. Therefore the image of `f` is outside that square.
-   Apply `lem-weil-pbc-regular-local-hypersurface-criterion` to its local quotient.
-3. Mathlib's quotient-localization instance and `IsLocalization.algEquiv` identify
-   this regular local quotient with the localization of `R/(f)` at `q`, as in
-   `lem-weil-pbc-localization-at-prime-of-quotient`. Transport regular localness
-   along the equivalence. The regular-ring local criterion concludes.
+/-- The quotient of a regular ring `R` by `f` is regular if an absolute derivation `D` of `R`
+sends `f` to a unit in the quotient.
 -/
 theorem quotient_span_singleton_of_isUnit_derivation
     (R : Type u) [CommRing R] [IsRegularRing R] (f : R) (D : Derivation ℤ R R)

@@ -11,8 +11,12 @@ import WeilConjectures.SmoothPurity.Finite.FinitePullbackTensorKFlatTransport
 
 /-! # Intrinsic pullback tensor normalization on K-flat complexes
 
-Source: Stacks Tags 03EL, 06YY and 07A4.
-(blueprint: lem-pur-finite-pullback-tensor-kflat-normalization).
+The total pullback tensor comparison on K-flat complexes is normalized by sending
+inverse-image unit generators to tensors of inverse-image unit generators.
+
+## References
+
+* [Stacks: Tags 03EL, 06YY, 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -43,8 +47,7 @@ attribute [local instance] sfIntrinsicPullback_additive
   SheafOfModules.monoidalCategory
 
 /-- The total pullback tensor comparison sends inverse-image unit generators to tensors
-of inverse-image unit generators. Source: Stacks 03EL and 07A4
-(blueprint: lem-pur-finite-pullback-tensor-kflat-normalization). -/
+of inverse-image unit generators. -/
 def FinitePullbackTensorGenerators {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (P Q : CochainComplex (normalizedDVRModules l E Y n) ℤ)
     (k : ((sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f).mapHomologicalComplex
@@ -78,21 +81,7 @@ def FinitePullbackTensorGenerators {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
       (((sfIntrinsicConstantModuleAdjunction f
         (finiteCoefficientRing l E (n + 1))).unit.app (Q.X q)).val.app (op U) y)
 
-/-- Intrinsic pullback tensor normalization on K-flat complexes.
-Source: Stacks 07A4, proof of lemma-pullback-tensor-product, and 06YY
-(blueprint: lem-pur-finite-pullback-tensor-kflat-normalization).
-Proof: take the direct-sum total of the inverse of the ordinary tensor pullback
-comparison, transported through the unit-normalized finite realization. On each
-bidegree its map sends the unit of x tensor y to the tensor of the two units.
-Coproduct preservation and the ordinary comparison give a chain isomorphism,
-including the signed differentials. For flat-term K-flat inputs the defining
-square of proEtaleCanonicalTensorPullback, conjugated by the finite realization
-and finite tensor model isomorphisms, is the displayed square. For arbitrary
-K-flat inputs choose flat-term K-flat resolutions. Their maps are quasi-isomorphisms;
-tensoring with K-flat complexes and exact pullback preserve them. Naturality of
-the total comparison and the tensor models transports the flat-term square along
-these invertible localized resolution maps. The resulting formula uses the
-prescribed coefficient tensor models, not newly chosen model maps. -/
+/-- Intrinsic pullback tensor normalization on K-flat complexes. -/
 theorem finitePullbackTensor_kflat_normalization {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)] (n : ℕ)

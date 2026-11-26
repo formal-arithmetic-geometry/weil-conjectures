@@ -11,7 +11,11 @@ public import WeilConjectures.SmoothPurity.Scalar.ScalarExtensionComposition
 import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarTensorLevelTower
 
 /-! # Composition of normalized strict scalar tensor towers
-(blueprint: lem-pur-integral-scalar-tensor-tower-composition). -/
+
+## References
+
+* Stacks Project, Tag 08TC.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -62,13 +66,7 @@ section TowerComposition
 attribute [local irreducible] integralOperationsTensorLevel integralOrdinaryScalarComp
 attribute [local implicit_reducible] integralOperationsTensorTowerFunctor
 
-/-- Normalized strict tensor tower comparisons respect coefficient composition.
-Source: Stacks 08TC and the blueprint coefficient comparison step 9.
-(blueprint: lem-pur-integral-scalar-tensor-tower-composition).
-Proof: extensionality of natural transformations reduces the equation to each
-integer level. The chosen tower normalization identifies each tower component
-with its finite tensor comparison. The finite-level scalar composition theorem
-then supplies the required equality, including the two associator components. -/
+/-- Normalized strict tensor tower comparisons respect coefficient composition. -/
 theorem integralScalarTensorTowerComposition (W : AlgebraicGeometry.Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     Functor.whiskerRight ((scalarTensorTower l E L ι W).app (P, Q))

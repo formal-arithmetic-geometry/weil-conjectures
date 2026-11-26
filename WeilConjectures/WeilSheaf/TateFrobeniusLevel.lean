@@ -34,8 +34,7 @@ Frobenius, which is `q⁻¹`
 `AlgebraicGeometry.ProEtale.upperStar_map_unitToRootsOfUnitySheaf_geometricGaloisFrobenius`.
 This is the finite-level input of the identification of the Tate twist `ℚ̄_ℓ(1)` of roots of
 unity, pulled back to the geometric fibre with its canonical Weil structure, with the constant
-Weil twist by `χ_ℓ(γ)` (`AlgebraicGeometry.WeilSheaf.tateTwistSheaf_one`), blueprint
-`prose-10-21`.
+Weil twist by `χ_ℓ(γ)` (`AlgebraicGeometry.WeilSheaf.tateTwistSheaf_one`).
 -/
 
 @[expose] public section
@@ -101,9 +100,7 @@ section FiniteField
 variable (k : Type u) [Field k] [Finite k] (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k ≠ ℓ)]
 
 /-- The value `c ∈ (ℤ/ℓⁿ)ˣ` of the modular cyclotomic character of the geometric Frobenius
-`γ = (x ↦ x ^ q)⁻¹` of `k̄`: `γ(ζ) = ζ ^ c` for every `ℓⁿ`-th root of unity `ζ` of `k̄`. It
-satisfies `c q = 1`
-(`AlgebraicGeometry.WeilSheaf.purity_modularCyclotomicCharacter_geometricFrobenius_mul`). -/
+`γ = (x ↦ x ^ q)⁻¹` of `k̄`: `γ(ζ) = ζ ^ c` for every `ℓⁿ`-th root of unity `ζ` of `k̄`. -/
 noncomputable def geometricFrobeniusModularCharacter (n : ℕ) : (ZMod (ℓ ^ n))ˣ :=
   haveI := WeilSheaf.purity_neZero_natCast_algebraicClosure k ℓ
   letI := Fintype.ofFinite k

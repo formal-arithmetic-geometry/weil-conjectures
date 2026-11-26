@@ -11,7 +11,19 @@ import WeilConjectures.SmoothPurity.Rational.RationalPullbackTensorAssociatorNat
 
 /-! # Triangle identity for common-stage tensor
 
-Source: Stacks Project, Tags 07A4 and 0941; the coefficient-stage conventions.
+We show that the prescribed common-stage associator and unitors satisfy the triangle identity.
+
+## Implementation details
+
+Faithful coherent reduction reduces the integral equation to the monoidal triangle identity of
+the selected coherent-system monoidal structure, with no normalization of the associator on
+cochain representatives. For the common-stage equation one chooses a finite field containing
+all the stages involved; the prescribed common-stage representatives conjugate the rational
+associator and unitors by the same tensor comparisons, which cancel by tensor naturality.
+
+## References
+
+* [Stacks, Tags 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -271,27 +283,7 @@ private theorem chosen_spec {A : Sort*} {p : A → Prop} (h : ∃! a, p a)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The prescribed common-stage associator and unitors satisfy the triangle identity.
-
-Source: Stacks Project, Tags 07A4 and 0941; the normalized coefficient tensor
-constraints of `lem-pur-derived-pullback-tensor-constraints`.
-(blueprint: lem-pur-common-stage-tensor-triangle).
-
-Proof: apply faithful coherent reduction to the integral equation and insert
-the prescribed tensor comparison and the reduction of the reconstructed unit.
-Naturality of the tensor comparison cancels the inner comparison maps. The
-remaining equation is precisely the monoidal triangle identity for the selected
-coherent-system monoidal structure. No normalization of its associator on
-cochain representatives or compatibility with a separate signed braiding is
-needed. Localize this equality to each rational coefficient field using the
-defining representatives of the rational associator and both unitors. For the
-common-stage equation, choose a finite field containing the stages of both
-inputs, the unit, and all intermediate tensor objects. The prescribed
-common-stage representatives conjugate the rational associator and unitors by
-the same tensor comparisons. Tensor naturality cancels these comparisons and
-the unit-stage isomorphism; the rational triangle identity makes the resulting
-representatives equal. Their classes are therefore equal. Zero objects and
-an empty scheme require no additional hypothesis. -/
+/-- The prescribed common-stage associator and unitors satisfy the triangle identity. -/
 theorem commonStageTensor_triangle
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
     [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (X : Scheme.{u})

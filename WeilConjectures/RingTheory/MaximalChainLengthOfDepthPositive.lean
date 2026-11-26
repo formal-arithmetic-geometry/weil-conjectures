@@ -22,9 +22,25 @@ import Mathlib.RingTheory.Ideal.Operations
 import Mathlib.RingTheory.Ideal.AssociatedPrime.Localization
 import Mathlib.RingTheory.KrullDimension.Regular
 
-/-! Positive-dimensional induction step for maximal Cohen--Macaulay prime chains.
-Source: Stacks Project, Algebra, Lemma 10.104.3 (Tag 00N9), via 10.103.9
-(blueprint: lem-weil-pbc-cm-local-maximal-chain-length-positive). -/
+/-!
+# Positive-dimensional step for maximal prime chains in Cohen–Macaulay local rings
+
+Assuming the dimension-`d` case, every maximal chain of primes in a Noetherian local ring of
+dimension `d + 1` and depth at least `d + 1` has length `d + 1`.
+
+## Implementation details
+
+Prime avoidance gives `x` in the second prime outside all minimal primes, and some power `y` of
+`x` makes the second prime associated to `S/yS`. The dimension drop and the regularity of `y`
+make `S/yS` Noetherian local of dimension `d` and depth at least `d`, and the image of the
+second prime is minimal there. Prime correspondence maps the tail of the chain to a maximal
+chain in `S/yS`, to which the dimension-`d` case applies.
+
+## References
+
+* [Stacks, Tag 00N9]
+* [Stacks, Tag 0AAE]
+-/
 
 @[expose] public section
 
@@ -212,30 +228,7 @@ private theorem associated_map_quotient {S : Type u} [CommRing S] [IsNoetherianR
     ext a
     simp [Submodule.mem_colon_singleton, Ideal.mem_comap, Algebra.smul_def]
 
-/-- The successor step for the maximal-chain theorem, assuming its dimension-`d` case.
-Source: Stacks Project, Algebra, Tag 00N9, proof via Tag 0AAE.
-(blueprint: lem-weil-pbc-cm-local-maximal-chain-length-positive)
-
-Proof: Maximality makes the first prime minimal, the last prime maximal, and every
-adjacent pair saturated. The chain has positive length: otherwise the maximal ideal
-is minimal, so every prime equals it and the ring has dimension zero, contradicting
-its dimension `d + 1`. The finitely many minimal primes contain none of the second
-prime, since the first prime lies strictly below it. Prime avoidance therefore gives
-`x` in the second prime outside all minimal primes. The first prime is associated
-in the Noetherian ring, and the second prime is minimal over the first plus `(x)`
-by saturation and `x` not belonging to the first prime. The associated-prime power
-quotient theorem gives a positive power `y` of `x` for which the second prime is
-associated to `S/yS`. This power still avoids every minimal prime and belongs to
-the maximal ideal. Dimension drop gives `dim(S/yS) = d`; the dimension-drop
-regularity theorem makes `y` a nonzerodivisor, and the quotient depth theorem gives
-depth at least `d` in this Noetherian local quotient. The associated element has
-annihilator over the quotient equal to the image of the second prime, so associated
-prime minimality makes that image minimal. Prime correspondence maps the tail of
-the original chain to a strict chain in the quotient, of length `p.length - 1`.
-It is maximal: its first prime is minimal, its last prime is the maximal ideal,
-and saturation is preserved and reflected by prime correspondence. Apply `ih`
-to this quotient chain to obtain `p.length - 1 = d`. The positive length of `p`
-then gives `p.length = d + 1`. -/
+/-- The successor step for the maximal-chain theorem, assuming its dimension-`d` case. -/
 theorem maximal_chain_length_eq_of_depth_pos {S : Type u} [CommRing S]
     [IsNoetherianRing S] [IsLocalRing S] (d : ℕ)
     (ih : ∀ {T : Type u} [CommRing T] [IsNoetherianRing T] [IsLocalRing T],

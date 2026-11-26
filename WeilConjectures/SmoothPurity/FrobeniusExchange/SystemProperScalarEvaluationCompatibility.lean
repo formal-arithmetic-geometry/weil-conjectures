@@ -8,7 +8,21 @@ module
 public import WeilConjectures.SixFunctors.FrobeniusExchange.SystemOperationExchangeRealization
 public import WeilConjectures.SmoothPurity.FrobeniusExchange.SystemScalarFiniteEvaluation
 
-/-! # The scalar/pullback compatibility square used by proper evaluation -/
+/-! # The scalar/pullback compatibility square used by proper evaluation
+
+## Implementation details
+
+This square is stated separately so that the mate calculation in
+`systemDirectScalar_finiteEvaluation` is a formal consequence of
+`SemilinearSections.evaluation_mate`. It is proved on a common flat-term K-flat model using
+the universal scalar counits and the K-injective normalization of
+`sfDerivedImageRestriction`, then transported by naturality to all derived systems.
+
+## References
+
+* W. Zheng, Construction 4.1 and Lemma 4.10
+* Stacks Project, Tags 06YY, 07A6 and 0941
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -19,34 +33,9 @@ namespace WeilConjectures.FrobeniusExchange
 open AlgebraicGeometry.Scheme.FiniteCompactScalar
 open WeilConjectures.SemilinearSections
 
-/-- The evaluated scalar/pullback cube required by the mate-pasting proof.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 06YY, 07A6 and 0941.
-(blueprint: lem-sf-system-proper-scalar-evaluation-compatibility).
-
-This is the square compatibility clause in the proof of the proper scalar
-evaluation formula.  It is stated separately so that the mate calculation in
-`systemDirectScalar_finiteEvaluation` is a formal consequence of
-`SemilinearSections.evaluation_mate`.
-
-Proof plan: take the scalar transpose of the ordinary scalar/pullback comparison.
-Its tensor-unit normalization identifies it with the identity-on-sections
-restriction/direct-image square. On complexes, the universal scalar counits
-identify this transpose with the specified derived scalar adjunction. Localize
-using one flat-term K-flat resolution; pullback and finite evaluation preserve
-these representatives. The scalar evaluation comparisons preserve transposes
-because both adjoint-uniqueness maps do. At finite coefficients, transpose the
-normalized direct-image restriction comparison first under scalar adjunctions
-and then under geometric adjunctions; the ordinary units and counits and the
-K-injective normalization of sfDerivedImageRestriction identify this double
-mate with the finite tensor/pullback square. Naturality transports the ordinary
-commuting tensor/evaluation square through the cochain counits and the exact
-localization factors. Cancel these isomorphisms on the common K-flat model,
-then use naturality along the resolution to obtain the displayed equation on
-all derived systems. This uses neither quotient flatness nor faithfulness of
-evaluation, and includes n = 0, identity embeddings and empty schemes.
--/
--- STATEMENT-DISPUTED: the former statement allowed an arbitrary `a`, although its
--- left side is fixed. The repaired statement specifies the double mate used by its caller.
+/-- The evaluated scalar/pullback cube required by the mate-pasting proof of the proper
+scalar evaluation formula: the specified double mate of the normalized direct-image
+restriction comparison agrees with the finite tensor/pullback square. -/
 theorem systemProperScalarEvaluation_compatibility
     (l : ℕ) [Fact l.Prime]
     (E L : Type u) [Field E] [Field L]

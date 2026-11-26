@@ -8,9 +8,14 @@ public import WeilConjectures.SmoothPurity.Exceptional.ExceptionalProEtaleRealiz
 import WeilConjectures.CategoryTheory.InverseMateEquivalence
 import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 /-! # Realization of the actual etale/pro-etale system comparison
-Source: blueprint theorem-f-shriek-finite-coefficients. All ordinary maps are fixed on
-sections or by adjunction transposes; their derived maps retain the localization units.
-(blueprint: def-pur-adic-site-realization).
+
+This file constructs the ordinary direct and inverse site realizations comparing the etale and
+pro-etale direct images.
+
+## Implementation details
+
+All ordinary maps are fixed on sections or by adjunction transposes; their derived maps retain
+the localization units.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -264,12 +269,7 @@ private theorem integralExceptionalSiteRight_map_smul (n : ℕ)
     ((ε.map_smul _ _).trans (congrArg₂ (· • ·) hs hb.symm)))
 
 /-- Ordinary site direct-image realization, fixed on every section by the actual
-underlying set-sheaf comparison.
-Source: blueprint integral exceptional image (blueprint: def-pur-adic-site-realization).
-Proof: both direct images restrict a sheaf along the actual etale-to-pro-etale functor. The
-recorded rightUnderlying map identifies their values on each etale test object. The
-quotient coordinate equivalence fixes constants, so these maps are linear, natural,
-and invertible. Faithful forgetting to set sheaves proves uniqueness. -/
+underlying set-sheaf comparison. -/
 theorem integralExceptionalSiteRight_existsUnique (n : ℕ) :
     ∃! e : B.ordinary.right n ⋙ integralExceptionalEtaleRealization l E W n ≅
       integralExceptionalProRealization l E W n ⋙
@@ -345,16 +345,11 @@ theorem integralExceptionalSiteRight_existsUnique (n : ℕ) :
     ext U x
     exact he M U x
 
-/-- The ordinary direct realization, fixed on all sections.
-Source: blueprint integral exceptional image (blueprint: def-pur-adic-site-realization). -/
+/-- The ordinary direct realization, fixed on all sections. -/
 def integralExceptionalSiteRight (n : ℕ) :=
   (integralExceptionalSiteRight_existsUnique l E W P B n).exists.choose
 
-/-- Ordinary inverse realization, fixed by its full adjunction transpose equation.
-Source: blueprint integral exceptional image (blueprint: def-pur-adic-site-realization).
-Proof: transport the two site adjunctions along the exact realization equivalences.Take
- the mate of the already section-normalized ordinary direct comparison. The
-adjunction bijections imply the displayed equation and uniqueness of the map. -/
+/-- Ordinary inverse realization, uniquely fixed by its full adjunction transpose equation. -/
 theorem integralExceptionalSiteInverse_existsUnique (n : ℕ) :
     ∃! e : (B.ordinary.lift n).modules ⋙ integralExceptionalProRealization l E W n ≅
       integralExceptionalEtaleRealization l E W n ⋙
@@ -415,8 +410,7 @@ theorem integralExceptionalSiteInverse_existsUnique (n : ℕ) :
     exact h
   exact Iso.ext_inv hi
 
-/-- The specified ordinary inverse comparison.
-Source: blueprint integral exceptional image (blueprint: def-pur-adic-site-realization). -/
+/-- The specified ordinary inverse comparison. -/
 @[no_expose] def integralExceptionalSiteInverse (n : ℕ) :=
   (integralExceptionalSiteInverse_existsUnique l E W P B n).exists.choose
 

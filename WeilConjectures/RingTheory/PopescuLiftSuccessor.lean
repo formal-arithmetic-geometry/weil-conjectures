@@ -12,8 +12,17 @@ import WeilConjectures.RingTheory.PopescuLiftQuotientData
 /-!
 # Induction step for lifting Popescu resolutions
 
-Source: Stacks Project, Lemma 07F8 (lemma-lift-solution), case `r > 1`.
-(blueprint: lem-weil-pbc-popescu-lift-successor)
+Applying the lifting hypothesis for shorter lists, the quotient by the eighth power of the
+first element can be resolved.
+
+## Implementation details
+
+`popescuEighthPowerLifting_tail` concludes only resolvability after quotienting by `π₀⁸`,
+not the original problem.
+
+## References
+
+* [Stacks, Lemma 07F8] (case `r > 1`)
 -/
 
 @[expose] public section
@@ -22,26 +31,7 @@ universe u v w
 
 namespace Algebra
 
-/-- Resolve the quotient by the first eighth power by applying the shorter-list hypothesis.
-Source: Stacks Project, Lemma 07F8 (lemma-lift-solution), final paragraph.
-(blueprint: lem-weil-pbc-popescu-lift-successor)
-
-Proof:
-1. Form R' = R/(π₀⁸), A' = A/(π₀⁸)A, Λ' = Λ/(π₀⁸)Λ and the induced prime q'.
-The first-power ideal is contained in q because π₀ maps into q. Quotient rings are
-Noetherian, and A' is finitely presented over R' by quotient tensor base change.
-2. Use the tail π'ⱼ equal to the image of π(j+1) in R'. The third isomorphism theorem
-identifies each preceding-power quotient of R' and Λ' with the corresponding original
-quotient. Construct both maps by the quotient universal property; their composites fix
-quotient classes. They intertwine multiplication, hence transport hR and hΛ at j+1.
-3. Strict standardness survives base change by standardElements_baseChange; the tensor
-quotient equivalence identifies the base-changed element with its quotient class.
-4. The final tail quotient is isomorphic to the original total quotient, compatibly with
-α and q. Transport hresolved through these algebra equivalences: smooth principal
-localizations, and therefore the singular and extended radical ideals, correspond.
-5. Apply ih over R' to the n tail elements, using hn. Its conclusion resolves the
-first quotient. Record its induced map and prime with the quotient compatibility equations.
-This concludes only resolvability after quotienting by π₀⁸, not the original problem. -/
+/-- Resolve the quotient by the first eighth power by applying the shorter-list hypothesis. -/
 theorem popescuEighthPowerLifting_tail
     (n : ℕ) (hn : 1 ≤ n) (ih : PopescuEighthPowerLifting.{u, v, w} n)
     (R : Type u) (A : Type v) (Λ : Type w)

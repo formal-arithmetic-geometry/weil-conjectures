@@ -10,7 +10,11 @@ public import Mathlib.CategoryTheory.NatIso
 
 /-! # Normalized isomorphisms of localized functors
 
-Extracted proved scalar-localization calculus used by the derived-operation construction.
+Scalar-localization calculus used by the derived-operation construction.
+
+## References
+
+* Stacks Project, Tags 00CV and 00CX.
 -/
 
 @[expose] public noncomputable section
@@ -22,15 +26,7 @@ universe u v r s u₁ v₁ u₂ v₂
 open Opposite TensorProduct CategoryTheory
 namespace WeilConjectures.OperationsScalarLocalization
 
-/-- Normalized isomorphisms of localized functors.
-Source: module base change (Stacks 00CV, 00CX), and the rational paragraph of
-blueprint `prose-03-02`.
-(blueprint: lem-sf-localized-natural-iso).
-Proof: Conjugate the localized integral comparison by the prescribed object equalities. On a pure
-tensor, the two map formulas and the integral naturality square prove naturality; additivity
-proves it on zero and sums. The conjugated components are isomorphisms, hence form a natural
-isomorphism. The prescribed component equality and natural transformation extensionality prove
-uniqueness. -/
+/-- Normalized isomorphisms of localized functors. -/
 theorem iso_existsUnique
     {R : Type r} [CommRing R] {S : Type s} [CommRing S]
     {C : Type u₁} [Category.{v₁} C] [Preadditive C] [Linear R C]

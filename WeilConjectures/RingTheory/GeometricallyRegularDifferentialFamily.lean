@@ -15,8 +15,22 @@ import Mathlib.LinearAlgebra.Dimension.OrzechProperty
 /-!
 # Finite independent differential families in geometrically regular local algebras
 
-Source: Stacks Project, More on Algebra, Proposition Tag 07E5, proof of (2) ⇒ (4).
-(blueprint: lem-weil-pbc-geometrically-regular-differential-family).
+In a geometrically regular local algebra over a field `k` of characteristic `p`, a finite
+family of elements of `k` with independent differentials keeps independent differentials
+after base change to the residue field.
+
+## Implementation details
+
+The proof adjoins `p`-th roots `k[X_i]/(X_i^p - a_i)` of the family and compares the conormal
+exact sequences of `A` and of its base change `A'`; both are regular local of the same
+dimension. A dimension count with the snake lemma shows that the kernel of the comparison of
+absolute differentials, spanned by the `1 ⊗ da_i`, has dimension `n`. No finiteness of the
+whole module of absolute differentials is assumed.
+
+## References
+
+* [Stacks, Tag 07E5]
+* [Stacks, Tag 07DZ]
 -/
 
 @[expose] public section
@@ -28,29 +42,7 @@ open scoped TensorProduct
 namespace Algebra
 
 /-- A finite independent family of prime-field differentials in the base field stays
-independent in the residue-field base change of the algebra's prime-field differentials.
-
-Source: Stacks Project, More on Algebra, Proposition Tag 07E5, proof of (2) ⇒ (4).
-(blueprint: lem-weil-pbc-geometrically-regular-differential-family).
-
-Proof: Adjoin the p-th roots of the family a_i to k. Independence of da_i gives degree
-p^n and identifies this extension with k[X_i]/(X_i^p-a_i), by Tag 07DZ. Its base change
-A' is finite free and local with finite residue extension K'/K. Geometric regularity
-makes A and A' regular local, with the same dimension d by the flat height formula and
-the zero-dimensional closed fibre. Their conormal spaces therefore both have dimension d.
-For the comparison beta of absolute differentials after tensoring with K', the p-root
-presentation gives a kernel spanned by the n elements 1 tensor da_i and a cokernel of
-dimension n. The conormal exact sequences for A and A' follow from Jacobi-Zariski,
-vanishing of prime-field H1 for their residue fields, and the quotient conormal
-identification. Tensor the A sequence with K', which is flat over K. In the resulting
-commutative diagram, the conormal comparison alpha has equally dimensional source and
-target. Cartier equality and Jacobi-Zariski give equally dimensional kernel and cokernel
-for the residue differential comparison gamma. The snake lemma and its alternating
-finite-dimensional dimension sum imply dim ker beta = dim coker beta = n. Thus the
-n spanning elements of ker beta are independent over K'. Any K-linear relation would
-remain a relation over K'; faithful extension of fields gives independence over K.
-For an empty family the assertion is automatic, so the argument applies to every finite
-index type. No finiteness of the entire absolute differential module is assumed. -/
+independent in the residue-field base change of the algebra's prime-field differentials. -/
 theorem linearIndependent_residueField_differentials_of_isGeometricallyRegular
     (k : Type u) (A : Type v) [Field k] [CommRing A] [Algebra k A]
     [IsLocalRing A] [IsNoetherianRing A] (p : ℕ) [Fact p.Prime] [CharP k p]

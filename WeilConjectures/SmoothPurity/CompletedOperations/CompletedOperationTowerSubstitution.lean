@@ -14,14 +14,19 @@ public import Mathlib.CategoryTheory.Pi.Basic
 
 /-! # Substitution into completed tensor and pullback
 
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.9(4); blueprint
-main-20261015, order 2232, coefficient twists; explicit coherent-counit refinement
-in proof steps 1--12 of the node below
-(blueprint: lem-pur-completed-operation-tower-substitution).
-
 All comparisons live in the ordinary derived category of the ringed sequence
 site before restriction or total derived limit. The natural-number index n
 means positive quotient exponent n+1. Site and coefficient universes are independent.
+
+## Implementation details
+
+In `StructuralLaw`, uniqueness specifies the canonical completed constraint;
+`RingedSiteDualityModel` fixes the system tensor maps on total-complex generators.
+
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 3.4.10 and
+  Lemma 6.5.9(4)]
 -/
 
 @[expose] public noncomputable section
@@ -43,8 +48,7 @@ variable {S : Type s} {W : S → Scheme.{t}} (M : Models l E W)
 
 variable {I : Type i} {location : I → S}
 
-/-- Evaluate an expression on *whole* coefficient systems, functorially in all inputs.
-Source: node proof step 7 (blueprint: lem-pur-completed-operation-tower-substitution). -/
+/-- Evaluate an expression on *whole* coefficient systems, functorially in all inputs. -/
 def systemValue {a : S} : Expression W location a →
     ((∀ k : I, coefficientSequenceDerived l E (W (location k))) ⥤
       coefficientSequenceDerived l E (W a))
@@ -53,8 +57,7 @@ def systemValue {a : S} : Expression W location a →
   | .tensor P Q => (systemValue P).prod' (systemValue Q) ⋙ tensor l E M a
   | .pullback f P => systemValue P ⋙ integralComparisonDerivedSequencePullback l E f
 
-/-- Evaluate with the same parentheses using the recorded completed operations.
-Source: node proof step 7 (blueprint: lem-pur-completed-operation-tower-substitution). -/
+/-- Evaluate with the same parentheses using the recorded completed operations. -/
 def completedValue {a : S} : Expression W location a →
     ((∀ k : I, DerivedCategory (scalarReductionSource l E (W (location k)))) ⥤
       DerivedCategory (scalarReductionSource l E (W a)))
@@ -66,8 +69,7 @@ def completedValue {a : S} : Expression W location a →
   | .pullback f P => completedValue P ⋙ integralDerivedPullback l E f
 
 /-- The recursive comparison: identities at leaves, then the primitive counit formulas.
-It is defined as a morphism, without choosing objectwise isomorphisms.
-Source: node proof step 7 (blueprint: lem-pur-completed-operation-tower-substitution). -/
+It is defined as a morphism, without choosing objectwise isomorphisms. -/
 def comparison {a : S} (P : Expression W location a)
     (N : ∀ k : I, coefficientSequenceDerived l E (W (location k))) :
     (completedValue l E P).obj (fun k ↦ (coefficientSequenceLimit l E _).obj (N k)) ⟶
@@ -82,16 +84,14 @@ def comparison {a : S} (P : Expression W location a)
   | .pullback f P => (integralDerivedPullback l E f).map (comparison P N) ≫
       pullbackComparison l E M f ((systemValue l E M P).obj N)
 
-/-- Coherent reduction comparison e_(S_P) after R(beta_P).
-Source: node proof step 8 (blueprint: lem-pur-completed-operation-tower-substitution). -/
+/-- Coherent reduction comparison e_(S_P) after R(beta_P). -/
 def reductionComparison {a : S} (P : Expression W location a)
     (N : ∀ k : I, coefficientSequenceDerived l E (W (location k))) :=
   (M.calculus a).reduction.map (comparison l E M P N) ≫
     (M.calculus a).adjunction.counit.app ((systemValue l E M P).obj N)
 
 /-- Canonical comparison between substitution and system evaluation, recursively using
-functoriality, with identity components at inputs and units.
-Source: node proof step 12 (blueprint: lem-pur-completed-operation-tower-substitution). -/
+functoriality, with identity components at inputs and units. -/
 def systemSubstitution {J : Type j} {location' : J → S}
     (σ : ∀ k : I, Expression W location' (location k)) {a : S}
     (P : Expression W location a)
@@ -106,8 +106,7 @@ def systemSubstitution {J : Type j} {location' : J → S}
   | .pullback f P => (integralComparisonDerivedSequencePullback l E f).mapIso
       (systemSubstitution σ P N)
 
-/-- The analogous parenthesis-preserving substitution comparison for completed evaluation.
-Source: node proof step 12 (blueprint: lem-pur-completed-operation-tower-substitution). -/
+/-- The analogous parenthesis-preserving substitution comparison for completed evaluation. -/
 def completedSubstitution {J : Type j} {location' : J → S}
     (σ : ∀ k : I, Expression W location' (location k)) {a : S}
     (P : Expression W location a)
@@ -124,8 +123,7 @@ def completedSubstitution {J : Type j} {location' : J → S}
 
 /-- The named primitive constraints and their finite contexts. The composition
 constraint has the direction (h >> f)* -> f* >> h* of the finite adjunction comparison.
-Inverses and composites are included, so this also covers arrows inside a larger expression.
-Source: node proof steps 9--12 (blueprint: lem-pur-completed-operation-tower-substitution). -/
+Inverses and composites are included, so this also covers arrows inside a larger expression. -/
 inductive StructuralMap : {a : S} → Expression W location a →
     Expression W location a → Type (max t s i)
   | associator {a : S} (P Q R : Expression W location a) :
@@ -146,8 +144,7 @@ inductive StructuralMap : {a : S} → Expression W location a →
       StructuralMap P Q → StructuralMap (.pullback f P) (.pullback f Q)
 
 /-- The actual system constraint: total-complex reassociation, action, Koszul sign,
-or the localization of the finite adjunction-normalized composition map.
-Source: node proof steps 9 and 11 (blueprint: lem-pur-completed-operation-tower-substitution). -/
+or the localization of the finite adjunction-normalized composition map. -/
 def structuralValue {a : S} {P Q : Expression W location a} (α : StructuralMap P Q)
     (N : ∀ k : I, coefficientSequenceDerived l E (W (location k))) :
     (systemValue l E M P).obj N ≅ (systemValue l E M Q).obj N :=
@@ -173,9 +170,7 @@ def structuralValue {a : S} {P Q : Expression W location a} (α : StructuralMap 
   | .pullback f α => (integralComparisonDerivedSequencePullback l E f).mapIso (structuralValue α N)
 
 /-- The normalization and comparison assertions, with explicit whole-system naturality
-and every quotient-transition square. No equality of derived maps is inferred from evaluations.
-Source: node statement paragraphs 1--3, proof steps 2--10
-(blueprint: lem-pur-completed-operation-tower-substitution). -/
+and every quotient-transition square. No equality of derived maps is inferred from evaluations. -/
 structure ComparisonLaws : Prop where
   /-- The canonical coherent counit, not merely its independently evaluated components. -/
   counit : ∀ (a : S) (N : coefficientSequenceDerived l E (W a)),
@@ -220,8 +215,7 @@ structure ComparisonLaws : Prop where
 
 /-- Compatibility of the *recursive* comparisons with simultaneous substitution.
 The two evaluation isomorphisms preserve parentheses; the middle arrow applies
-completed operations to the comparisons for the substituted expressions.
-Source: node proof step 12 (blueprint: lem-pur-completed-operation-tower-substitution). -/
+completed operations to the comparisons for the substituted expressions. -/
 def SubstitutionLaw : Prop :=
   ∀ {I : Type i} {J : Type j} {location : I → S} {location' : J → S}
     (σ : ∀ k : I, Expression W location' (location k)) {a : S}
@@ -237,9 +231,7 @@ def SubstitutionLaw : Prop :=
 
 /-- The canonical completed constraints are characterized uniquely by their limit
 and coherent reduction squares. In particular their forward map is exactly
-beta_P >> L(alpha) >> beta_Q inverse. Uniqueness specifies the canonical map;
-RingedSiteDualityModel fixes the system tensor maps on total-complex generators.
-Source: node proof steps 9--11 (blueprint: lem-pur-completed-operation-tower-substitution). -/
+beta_P >> L(alpha) >> beta_Q inverse. -/
 def StructuralLaw : Prop :=
   ∀ {I : Type i} {location : I → S} {a : S}
     {P Q : Expression W location a} (α : StructuralMap P Q)

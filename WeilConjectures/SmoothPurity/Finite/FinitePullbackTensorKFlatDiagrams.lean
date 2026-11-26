@@ -10,8 +10,12 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPullbackD
 
 /-! # Naturality of the two finite tensor comparison composites
 
-Source: Stacks Tags 06YS and 07A4.
-(blueprint: lem-pur-finite-pullback-tensor-kflat-diagrams).
+We show that both composites in the ordinary pullback tensor square are natural on every
+family of K-flat complexes with K-flat pullbacks.
+
+## References
+
+* Stacks Project, Tags 06YS, 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -65,8 +69,7 @@ private theorem constructionIso_app {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
   unfold finitePullbackTensorConstructionIso finitePullbackTensorConstruction
   rfl
 
-/-- Restrict the prescribed tensor-model comparison to a family of K-flat complexes.
-Source: Stacks 06YS (blueprint: lem-pur-finite-pullback-tensor-kflat-diagrams). -/
+/-- Restrict the prescribed tensor-model comparison to a family of K-flat complexes. -/
 @[irreducible] def finiteTensorModelOnKFlatFamily (W : Scheme.{u}) (n : ℕ)
     {C : Type v} [Category.{w} C]
     (I : C ⥤ CochainComplex (normalizedDVRModules l E W n) ℤ)
@@ -94,14 +97,7 @@ private theorem finiteTensorModelOnKFlatFamily_app (W : Scheme.{u}) (n : ℕ)
   rfl
 
 /-- Both composites in the ordinary pullback tensor square are natural on every
-family of K-flat complexes with K-flat pullbacks. Source: Stacks 06YS and 07A4
-(blueprint: lem-pur-finite-pullback-tensor-kflat-diagrams).
-Proof: restrict the finite tensor-model natural isomorphisms to the given full
-subcategory. The first composite consists of the source model, the derived
-pullback tensor comparison, and the two pullback factor maps. The second consists
-of the factor map on the total tensor, the ordinary total tensor pullback
-comparison, and the target tensor model. Whiskering and composition give the two
-natural transformations; their components are exactly the stated formulas. -/
+family of K-flat complexes with K-flat pullbacks. -/
 theorem finitePullbackTensor_kflat_diagrams {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]

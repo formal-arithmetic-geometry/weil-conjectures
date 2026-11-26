@@ -13,7 +13,11 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 
 /-! # Fixed calculus tensor and descent data
 
-Source: Stacks 07A4, 0941, 099N; fix-prop-coherence, quotient tensor realization.
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 099N]
 -/
 
 @[expose] public noncomputable section
@@ -34,8 +38,7 @@ attribute [local irreducible] IntegralOnSlice.roosUnit IntegralAmbient.tensorTow
   integralOperationsTensorTowerFunctor HasDerivedCategory.standard
 
 attribute [-instance] IntegralAmbient.ambientCxCategory IntegralAmbient.ambientDCategory in
-/-- The calculus tensor with its own representative comparison, restricted to flat terms.
-Source: Stacks 07A4 (blueprint: def-sf-integral-ringed-tensor-descent-data). -/
+/-- The calculus tensor with its own representative comparison, restricted to flat terms. -/
 def integralRingedOrdinaryTensor (W : Scheme.{u}) :
     ProEtaleTensorModel W ((PurCompactSupport.completed l E).ring W) where
   tensor := (calculus l E W).integralClosed.tensor

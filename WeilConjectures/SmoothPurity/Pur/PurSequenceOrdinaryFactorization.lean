@@ -13,8 +13,19 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # The ordinary quotient projection and its constant-ring factorization
 
-Source: Stacks Project, Tags 03D7 and 0940
-(blueprint: lem-pur-sequence-ordinary-factorization).
+## Implementation details
+
+For `purSequenceOrdinaryFactorization`, the cone of the completed-ring projections to the
+quotient tower is fed into the sequence-site constant/limit construction; its module pullback is
+the strict system of scalar extensions, compared with the recorded finite adjunctions by
+uniqueness of left adjoints. The ring map factors through the constant completed ring, and
+constant-ring sequence modules are towers of base modules with identity section
+identifications. Every construction uses actual section restrictions; no surjectivity or
+flatness of a quotient map is used.
+
+## References
+
+* [Stacks Project, Tags 03D7, 0940 and 0941]
 -/
 
 @[expose] public noncomputable section
@@ -183,10 +194,7 @@ private theorem presheaf_function_eq {C : Type*} [Category C]
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The actual horizontal map, retaining the two literal section carriers.
-Source: Stacks 0941 (blueprint: lem-pur-sequence-ordinary-factorization).
-Proof: remove the source and target additive-group transports in the defining
-transition equation. Forgetting linearity does not change the underlying function. -/
+/-- The actual horizontal map, retaining the two literal section carriers. -/
 private theorem coefficientSequenceTransition_function_heq (N : coefficientSequenceModules l E W)
     {m n : ℕ} (h : n ≤ m) (V : W.ProEtᵒᵖ) :
     HEq (fun x : ((coefficientSequenceEvaluation l E W m).obj N).val.obj V ↦
@@ -363,24 +371,7 @@ private theorem ordinaryAdjoints_exist : Nonempty (PurSequenceOrdinaryAdjoints l
   intro n V x
   rfl
 
-/-- The ordinary quotient projection factors through the constant completed ring.
-Source: Stacks 0940 (constant/limit ringed projection) and 03D7 (module adjunction)
-(blueprint: lem-pur-sequence-ordinary-factorization).
-
-Proof: form the cone of the completed-ring projections to the quotient tower and
-apply the sequence-site constant/limit construction. Its module pullback is the
-strict system of scalar extensions. Compare each scalar adjunction with the
-recorded finite adjunction by uniqueness of left adjoints. The comparison preserves
-their units, hence their quotient mates and tensor transitions. Projection to each
-coordinate of the limit gives the displayed transpose equation. Factor the ring
-map through the constant completed ring: the first geometric morphism is identity
-on sheaves and restricts scalars, and the second is the constant/limit morphism
-with identity structural map. Constant-ring sequence modules are towers of base
-modules, with identity section identifications. These identifications give the
-three composition comparisons, the structural-map equation, the restriction and
-limit comparisons. Scalar restriction preserves kernels and sheafified cokernels,
-so it preserves finite limits and finite colimits. Every construction uses actual
-section restrictions; no surjectivity or flatness of a quotient map is used. -/
+/-- The ordinary quotient projection factors through the constant completed ring. -/
 theorem purSequenceOrdinaryFactorization :
     ∃ O : PurSequenceOrdinaryAdjoints l E W,
       Nonempty (PurSequenceRingedFactorization l E W O) := by

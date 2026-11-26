@@ -18,11 +18,18 @@ import Mathlib.Topology.Sheaves.Sheafify
 /-!
 # Stalks of topological inverse images
 
-Source: Stacks Project, Sheaves, Tags 008H, 008O and Section 008P
-(blueprint: lem-weil-pbc-topological-inverse-image-stalk).
-
 The two statements give the natural stalk isomorphism, its formula on germs using
 the sheaf-adjunction unit, and representation of every inverse-image stalk element.
+
+## Implementation details
+
+The inverse image is the sheafification of the presheaf inverse image. The stalk isomorphism is
+the composite of the stalk isomorphism of the presheaf inverse image with the stalk isomorphism
+of the sheafification map; naturality is checked on germs, which exhaust the stalks.
+
+## References
+
+* [Stacks Project, Tags 008H, 008O and Section 008P](https://stacks.math.columbia.edu/tag/008P)
 -/
 
 @[expose] public section
@@ -133,26 +140,7 @@ end General
 set_option backward.isDefEq.respectTransparency false
 set_option backward.defeqAttrib.useBackward true
 
-/-- Stalks of the inverse image for sheaves of abelian groups, naturally in the sheaf.
-Source: Stacks Project, Sheaves, Tags 008H, 008O and Section 008P.
-(blueprint: lem-weil-pbc-topological-inverse-image-stalk)
-
-Proof route from the node:
-0. Identify the inverse image with the sheafification of the presheaf inverse image
-   (def-weil-pbc-topological-inverse-image); the unit is the presheaf unit followed
-   by the sheafification map.
-1. Apply lem-weil-pbc-presheaf-inverse-image-stalk to identify the presheaf stalks,
-   with its germ formula.
-2. Apply lem-weil-pbc-stalk-sheafification-space in the abelian case, or
-   lem-weil-pbc-ring-stalk-sheafification-space in the ring case, to the
-   sheafification map.
-3. Compose these isomorphisms. Their germ formulas give the displayed unit formula.
-4. Represent an original stalk element by a germ (def-weil-pbc-module-stalk,
-   and lem-weil-pbc-filtered-colimit-algebras-elementwise for rings). Surjectivity
-   of the composite gives the final clause.
-5. Naturality of the unit gives naturality on germs; since germs exhaust stalks,
-   this gives naturality of the isomorphism.
--/
+/-- Stalks of the inverse image for sheaves of abelian groups, naturally in the sheaf. -/
 theorem exists_inverseImage_stalk_iso_ab {X Y : TopCat.{u}} (f : X ⟶ Y) (x : X) :
     ∃ c : (forget AddCommGrpCat.{u} Y ⋙ Presheaf.stalkFunctor AddCommGrpCat.{u} (f x)) ≅
         (pullback AddCommGrpCat.{u} f ⋙ forget AddCommGrpCat.{u} X ⋙
@@ -186,26 +174,7 @@ theorem exists_inverseImage_stalk_iso_ab {X Y : TopCat.{u}} (f : X ⟶ Y) (x : X
     erw [← hg, hs]
     exact ConcreteCategory.congr_hom (c.app G).inv_hom_id t
 
-/-- Stalks of the inverse image for sheaves of commutative rings, naturally in the sheaf.
-Source: Stacks Project, Sheaves, Tags 008H, 008O and Section 008P.
-(blueprint: lem-weil-pbc-topological-inverse-image-stalk)
-
-Proof route from the node:
-0. Identify the inverse image with the sheafification of the presheaf inverse image
-   (def-weil-pbc-topological-inverse-image); the unit is the presheaf unit followed
-   by the sheafification map.
-1. Apply lem-weil-pbc-presheaf-inverse-image-stalk to identify the presheaf stalks,
-   with its germ formula.
-2. Apply lem-weil-pbc-stalk-sheafification-space in the abelian case, or
-   lem-weil-pbc-ring-stalk-sheafification-space in the ring case, to the
-   sheafification map.
-3. Compose these isomorphisms. Their germ formulas give the displayed unit formula.
-4. Represent an original stalk element by a germ (def-weil-pbc-module-stalk,
-   and lem-weil-pbc-filtered-colimit-algebras-elementwise for rings). Surjectivity
-   of the composite gives the final clause.
-5. Naturality of the unit gives naturality on germs; since germs exhaust stalks,
-   this gives naturality of the isomorphism.
--/
+/-- Stalks of the inverse image for sheaves of commutative rings, naturally in the sheaf. -/
 theorem exists_inverseImage_stalk_iso_commRing {X Y : TopCat.{u}} (f : X ⟶ Y) (x : X) :
     ∃ c : (forget CommRingCat.{u} Y ⋙ Presheaf.stalkFunctor CommRingCat.{u} (f x)) ≅
         (pullback CommRingCat.{u} f ⋙ forget CommRingCat.{u} X ⋙

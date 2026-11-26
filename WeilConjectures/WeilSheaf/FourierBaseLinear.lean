@@ -16,12 +16,15 @@ For a lisse Weil sheaf `N` on the base `Spec k₀`, with pullbacks `p^* N` to th
 
 `FT_ψ(K ⊗ p^* N) ≅ FT_ψ(K) ⊗ p'^* N`
 
-naturally in `K` (blueprint `proposition-base-change-fourier-inversion--2`;
-`AlgebraicGeometry.nonempty_iso_tensorLisse_upperStar_comp_fourierTransform`). On the Fourier
-square `p ∘ pr₁ = p' ∘ pr₂`, so `pr₁^*(K ⊗ p^* N) ≅ pr₁^* K ⊗ pr₂^* p'^* N`; tensoring with the
-kernel commutes with tensoring with `pr₂^* p'^* N`, and the projection formula for `pr₂` moves
-`p'^* N` out of the compact-support direct image. The case of the Tate twists `N = ℚ̄_ℓ(m)` is
+naturally in `K` (`AlgebraicGeometry.nonempty_iso_tensorLisse_upperStar_comp_fourierTransform`).
+The case of the Tate twists `N = ℚ̄_ℓ(m)` is
 `AlgebraicGeometry.nonempty_iso_fourierTransform_tateTwist`.
+
+## Implementation details
+
+On the Fourier square `p ∘ pr₁ = p' ∘ pr₂`, so `pr₁^*(K ⊗ p^* N) ≅ pr₁^* K ⊗ pr₂^* p'^* N`;
+tensoring with the kernel commutes with tensoring with `pr₂^* p'^* N`, and the projection formula
+for `pr₂` moves `p'^* N` out of the compact-support direct image.
 -/
 
 @[expose] public section
@@ -50,10 +53,9 @@ set_option hygiene false in
 /-- The pullback `p^* N` of the lisse Weil sheaf `N` on the base. -/
 local notation "P" => (WeilSheaf.upperStar (affineLine k₀ ↘ Spec (CommRingCat.of k₀))).obj N
 
-/-- **The Fourier–Deligne transform is linear over the base** (blueprint
-`proposition-base-change-fourier-inversion--2`): for a lisse Weil sheaf `N` on `Spec k₀`, pulled
-back to the affine line along `p : 𝔸¹ ⟶ Spec k₀` (on both sides, the line and its dual being the
-same scheme),
+/-- **The Fourier–Deligne transform is linear over the base**: for a lisse Weil sheaf `N` on
+`Spec k₀`, pulled back to the affine line along `p : 𝔸¹ ⟶ Spec k₀` (on both sides, the line and
+its dual being the same scheme),
 
 `FT_ψ(K ⊗ p^* N) ≅ FT_ψ(K) ⊗ p^* N`
 

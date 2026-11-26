@@ -10,9 +10,11 @@ import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalRingTran
 import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalRingTransportCoreLawsSystemAdjunction
 import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalRingTransportCoreLawsSystemReduction
 
-/-! The system-level compatibility laws for exceptional integral transport.
-Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
-5.26 (blueprint: lem-sf-exceptional-ring-transport-core-system-laws).
+/-! # System-level compatibility laws for exceptional integral transport
+
+## References
+
+* [Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24, 5.26]
 -/
 
 @[expose] public noncomputable section
@@ -60,12 +62,7 @@ structure TransportCoreSystemLaws
         (d.reconstruction E true).equivalence.counit.app
           ((d.G E).obj ((d.reconstruction E false).equivalence.functor.obj K))
 
-/-- The system laws are supplied by strict-system transport and reconstruction.
-Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Proposition 5.24.
-Proof: transport the strict-system support and reconstruction comparisons through
-both equivalences and retain their displayed equations.
-(blueprint: lem-sf-exceptional-ring-transport-core-system-laws)
--/
+/-- The system laws are supplied by strict-system transport and reconstruction. -/
 theorem exists_exceptional_transport_core_system_laws
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)

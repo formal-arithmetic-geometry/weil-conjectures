@@ -11,8 +11,27 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsExist
 /-!
 # Products and triangles of derived-complete module complexes
 
-Source: Stacks Project, More on Algebra, Tags 091S and 091P
-(auxiliary; not a blueprint node).
+Derived completeness is preserved by countable products and satisfies two-out-of-three in
+distinguished triangles.
+
+## Implementation details
+
+Products of modules are exact (also when ring and module universes differ), so countable
+products exist in the derived category. Via the Roos triangle, completeness is equivalent to
+invertibility of `1 - s` on each multiplication-by-`f` tower product; this is condition (7) of
+[Stacks, Tag 091P], used directly instead of the localization/Hom test. For products the inverse
+is assembled coordinatewise; for triangles, two-out-of-three for morphisms of distinguished
+triangles ([Stacks, Tag 014A]) applies to the three operators `1 - s`.
+
+The first conjunct of the main theorem asserts existence of the product, followed by
+completeness for any choice of product structure. The index `n : ℕ` stands for the positive
+index `n + 1`. No finite-generation, boundedness, or product-existence hypothesis is imposed.
+
+## References
+
+* [Stacks, Tag 091S]
+* [Stacks, Tag 091P]
+* [Stacks, Tag 014A]
 -/
 
 @[expose] public section
@@ -106,36 +125,7 @@ private lemma tower_triangle_endomorphism {A : Type u} [CommRing A]
     (fun n ↦ productTriangle.π (fun _ : ℕ ↦ T) (n + 1) ≫ (f • 𝟙 T)), rfl, rfl, rfl⟩
 
 /-- Derived completeness for any ideal is preserved by countable products and satisfies
-two-out-of-three in distinguished triangles of the unbounded module derived category.
-Source: Stacks Project, Tag 091S, Definition 15.93.4 and the following paragraph;
-Tag 091P, Lemma 15.93.2
-(auxiliary; not a blueprint node).
-
-Proof:
-1. Products of modules are exact, including when the ring and module universes differ:
-forgetting to abelian groups preserves kernels and epimorphisms, hence finite colimits,
-and reflects finite colimits. Exact countable products then descend to the derived
-category by `derivedCategory_hasCountableProducts`.
-2. The Roos triangle makes completeness equivalent to invertibility of `1 - s` on each
-multiplication-by-`f` tower product. For the forward implication, complete `1 - s` to a
-Roos triangle and apply completeness to its first object. For the converse, any such
-triangle has zero first object because its second morphism is invertible.
-3. For a product of complete objects, construct the inverse of `1 - s` coordinatewise:
-project the double product to each factor's tower, apply its inverse, and assemble by
-the two product universal properties. Naturality of `1 - s` and the two inverse equations
-prove that the assembled morphism is a two-sided inverse.
-4. The countable product of copies of a distinguished triangle is distinguished.
-Multiplication by `f` is an endomorphism of the original triangle, so the tower shift
-is an endomorphism of its product triangle. Subtract it from the identity. Its three
-components are the three operators `1 - s`. Two invertible components force the third
-to be invertible by the two-out-of-three theorem for morphisms of distinguished
-triangles (Stacks, Tag 014A). Step 2 proves all three completeness implications.
-
-This uses condition (7) of Stacks, Tag 091P directly and avoids the localization/Hom test.
-
-The first conjunct asserts existence of the product, followed by completeness for any
-choice of product structure. Index `n : ℕ` denotes the paper's positive index `n + 1`.
-No finite-generation, boundedness, or product-existence hypothesis is imposed. -/
+two-out-of-three in distinguished triangles of the unbounded module derived category. -/
 theorem isDerivedComplete_products_and_triangles {A : Type u} [CommRing A]
     [HasDerivedCategory.{w} (ModuleCat.{v} A)] (I : Ideal A) :
     (∀ (K : ℕ → DerivedCategory (ModuleCat.{v} A)),

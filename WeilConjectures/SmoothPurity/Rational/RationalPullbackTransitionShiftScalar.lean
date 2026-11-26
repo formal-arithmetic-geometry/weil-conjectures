@@ -22,9 +22,6 @@ faithful, the coefficient transition of the integral pullback scalar comparison 
 with the supplied integral pullback shifts (`integralPullbackScalarComparison_commShift`).
 
 This is the integral step of the proof of `rationalPullbackTransitionShift`.
-Source: current blueprint sec-smooth-purity/sk-prop-sf-localization,
-prop-sf-open-closed-triangle-all-stages.proof.md, Weil-structures paragraph.
-(blueprint: lem-sf-rational-pullback-transition-shift).
 -/
 
 @[expose] public section
@@ -290,10 +287,7 @@ theorem integralPullbackScalarAmbientIso_commShift
   infer_instance
 
 /-- The coefficient transition of the integral pullback scalar comparison commutes with the
-supplied integral pullback shifts and the normalized integral transition shifts.
-Source: current blueprint sec-smooth-purity/sk-prop-sf-localization,
-prop-sf-open-closed-triangle-all-stages.proof.md, Weil-structures paragraph
-(blueprint: lem-sf-framework-theta-shift-compatibility). -/
+supplied integral pullback shifts and the normalized integral transition shifts. -/
 theorem integralPullbackScalarComparison_commShift
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

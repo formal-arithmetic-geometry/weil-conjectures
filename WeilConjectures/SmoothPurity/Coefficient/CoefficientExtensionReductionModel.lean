@@ -31,9 +31,6 @@ import WeilConjectures.SmoothPurity.Coefficient.CoefficientExtensionStrictRepres
 import WeilConjectures.SmoothPurity.Coefficient.CoefficientExtensionRepresentativeRoos
 /-! # Coherent finite reduction of completed coefficient extension
 
-Source: main-20261015 blueprint, sec-proetale-coefficients/sk-def-sf-operations,
-prose-03-02, integral operations; Stacks 06YS, 0G7E, 06YY.
-(blueprint: lem-pur-coefficient-extension-reduction-model).
 Positive exponent m is encoded by n=m-1. All derived categories are unbounded,
 and the small pro-etale site's object and morphism universes remain independent.
 
@@ -47,6 +44,19 @@ and the small pro-etale site's object and morphism universes remain independent.
 - `coefficientExtensionReductionModel`: existence on the entire unbounded derived category.
 - `coefficientExtensionReduction_identity`: normalization for identity coefficients.
 - `coefficientExtensionReduction_composition`: compatibility for three coefficient fields.
+
+## Implementation details
+
+The models are built from a flat-term K-flat representative `P`: change of rings preserves
+K-flatness and flat terms even for ramified quotient maps, and the balanced maps
+`(x ⊗ a) ⊗ b ↦ x ⊗ ι(a)b` and `x ⊗ b ↦ (x ⊗ 1) ⊗ b`
+give a strict system isomorphism. The Roos construction computes the total limit, and
+normalized DVR effectivity makes the counit invertible. Naturality descends through the
+localization of flat-term K-flat complexes. No finiteness of `K` is used.
+
+## References
+
+* [Stacks Project, Tags 06YS, 0G7E, 06YY]
 -/
 
 @[expose] public noncomputable section
@@ -92,13 +102,7 @@ variable (SE : CoefficientDerivedSystemCalculus l E W)
   (A : CoefficientExtensionSystems l E L ι W)
 
 /-- Construction of the normalized reduction skeleton from flat-term
-representatives and finite quotient scalar association.
-Source: integral operations and K-flat change of rings
-(blueprint: lem-pur-coefficient-extension-reduction-model).
-Proof: choose a flat-term K-flat representative, form the finite quotient scalar
-models, transport their balanced maps through every quotient transition, and
-assemble the strict model, normalized tower, completion projection, and all
-evaluation equations into the displayed skeleton. -/
+representatives and finite quotient scalar association. -/
 theorem coefficientExtensionReductionSkeleton_exists
     (_hl : IsUnit (l : Γ(W, ⊤))) :
     Nonempty (CoefficientExtensionReductionSkeleton l E L ι W SE A) := by
@@ -193,13 +197,7 @@ private theorem normalizedSequence_counit_isIso
   exact IsIso.of_isIso_comp_left
     ((SL.reductionEvaluation n).inv.app ((coefficientSequenceLimit l L W).obj N)) _
 
-/-- The normalized tower counit of a reduction skeleton is invertible.
-Source: normalized DVR effectivity
-(blueprint: lem-pur-coefficient-extension-reduction-model).
-Proof: regard the skeleton's normalized sequence and completion projection as
-the normalized DVR tower data, apply normalized effectivity to its Roos limit,
-and identify the resulting canonical counit with `coefficientExtensionCounit`.
--/
+/-- The normalized tower counit of a reduction skeleton is invertible. -/
 theorem coefficientExtensionReductionSkeleton_comparison_isIso
     (_hl : IsUnit (l : Γ(W, ⊤)))
     (s : CoefficientExtensionReductionSkeleton l E L ι W SE A) :
@@ -213,28 +211,7 @@ theorem coefficientExtensionReductionSkeleton_comparison_isIso
   dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app]
   infer_instance
 
-/-- Coherent finite reduction of completed scalar extension on the entire derived category.
-Source: integral operations, Stacks 06YS, 0G7E, 06YY
-(blueprint: lem-pur-coefficient-extension-reduction-model).
-Proof: choose one flat-term K-flat P. Change of rings preserves K-flatness and flat
-terms even for ramified quotient maps. The balanced maps (x⊗a)⊗b ↦ x⊗ι(a)b and
-x⊗b ↦ (x⊗1)⊗b are inverse and commute with differentials. Quotient reduction
-commutes with these formulas, giving a strict system isomorphism and normalization
-by the same association with B_m→B_n. Its cocycle is the quotient cocycle. The
-Roos construction computes the specified total limit and its projections, hence
-completion. Apply normalized DVR effectivity with coefficient field L: its counit
-is invertible and normalized by the actual limit projections. Transport it through
-the simultaneous association to obtain exactly coefficientExtensionCounit.
-Naturality on chain maps descends through the localization of flat-term K-flat
-complexes; quasi-isomorphisms and roofs give the canonical resolution comparisons,
-including their composition for a third representative. The equations hold for all
-m≥n, including identities, because the comparison is a map of coherent systems.
-For identity extension scalar association is the action unitor, so this is the
-usual reduction counit of the completion, without assuming K itself complete.
-For three fields the two scalar associations multiply the same coefficients.
-Apply coefficient extension to this coherent counit and then use counit naturality
-h e_H = e_J R_F L_F(h). This is an equality of system maps before evaluation,
-and gives the composition equation stated below. No finiteness of K is used. -/
+/-- Coherent finite reduction of completed scalar extension on the entire derived category. -/
 theorem coefficientExtensionReductionModel
     (_hl : IsUnit (l : Γ(W, ⊤))) :
     Nonempty (CoefficientExtensionReductionData l E L ι W SE SL A) := by

@@ -25,14 +25,13 @@ public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Basic
 
 Let `X` be a scheme, `K ∈ D(X_ét, Λ)` unbounded, and `B` a class of étale `X`-schemes covering
 `X_ét` such that `Hᵖ(U, ℋᵠ(K)) = 0` for `p > 0` and `U ∈ B`. Then `Hᵠ(U, K) ≅ Γ(U, ℋᵠ(K))`
-for `U ∈ B` (blueprint `lem-kun-0bkz`, Stacks 0BKZ). Following Stacks, `K` is compared with the
+for `U ∈ B` (Stacks 0BKZ). Following Stacks, `K` is compared with the
 homotopy limit `R lim τ^{≥ -n} K` of its truncations: `RΓ(U, -)` preserves countable products,
 hence homotopy limits, the towers `Hᵐ(U, τ^{≥ -n} K)` are eventually constant (so the Milnor
 sequence has no `lim¹` term), and since `B` covers `X_ét`, an object with vanishing `Hᵠ(U, -)`
 for all `U ∈ B` has `ℋᵠ = 0`. As an application, for `X` of finite type over a separably closed
 field, an unbounded `Q` whose cohomology sheaves are supported at closed points vanishes if and
-only if `Hⁱ(X_ét, Q) = 0` for all `i` (blueprint `corollary-open-direct-image-over-field--2`, Stacks
-0F1G).
+only if `Hⁱ(X_ét, Q) = 0` for all `i` (Stacks 0F1G).
 
 ## Main statements
 
@@ -40,10 +39,27 @@ only if `Hⁱ(X_ét, Q) = 0` for all `i` (blueprint `corollary-open-direct-image
   sequence for an essentially constant tower in `D(R)`.
 - `CategoryTheory.Functor.nonempty_homology_rightDerivedFunctor_obj_iso_of_acyclic_of_detects`:
   the abstract form of Stacks 0BKZ.
-- `AlgebraicGeometry.Etale.nonempty_homology_rightDerivedFunctor_sheafSections_obj_iso_of_acyclic`
-  (`lem-kun-0bkz`).
-- `AlgebraicGeometry.Etale.isZero_iff_forall_isZero_homology_rightDerivedGlobalSections`
-  (`corollary-open-direct-image-over-field--2`).
+- `AlgebraicGeometry.Etale.nonempty_homology_rightDerivedFunctor_sheafSections_obj_iso_of_acyclic`.
+- `AlgebraicGeometry.Etale.isZero_iff_forall_isZero_homology_rightDerivedGlobalSections`.
+
+## Implementation details
+
+The abstract form of Stacks 0BKZ is proved as follows: let `c` be a homotopy limit cone over the
+tower `τ^{≥ -n} K`. The tower `Hᵐ(RΓᵢ(τ^{≥ -n} K))` is eventually constant by the acyclicity
+hypothesis, so the legs of `RΓᵢ(c)` induce isomorphisms on `Hᵐ` for `n ≫ 0` (Milnor sequence).
+By detection the legs of `c` induce isomorphisms on `Hᵐ` for `n ≫ 0`, so the comparison
+`K ⟶ R lim τ^{≥ -n} K` is an isomorphism, and one concludes by the bounded below case. This
+replaces an argument with the hypercohomology spectral sequence.
+
+For the detection of objects supported at closed points, the class `B` of quasi-compact étale
+`X`-schemes covers `X_ét`, and the cohomology sheaves of `Q` are acyclic on its members, so that
+`Hⁱ(X_ét, Q) = Γ(X, ℋⁱ(Q))`; the sheaves `ℋⁱ(Q)` are globally generated, hence vanish if they
+have no global sections.
+
+## References
+
+* [Stacks, Tag 0BKZ]
+* [Stacks, Tag 0F1G]
 -/
 
 @[expose] public section
@@ -338,13 +354,7 @@ Stacks, Tag 0BKZ). Let `(Γᵢ)ᵢ` be a family of left exact functors `C ⥤ Mo
 countable products which *detects* cohomology: an object `N ∈ D(C)` with `Hᵠ(RΓᵢ(N)) = 0` for
 all `i` has `Hᵠ(N) = 0` (for sheaves on a site, `Γᵢ` are the sections over a family of
 objects covering every object). If `K ∈ D(C)` is such that all `Hᵠ(K)` are `Γᵢ`-acyclic, then
-`Hᵠ(RΓᵢ(K)) ≅ Γᵢ(Hᵠ(K))` for all `i` and `q`.
-
-Proof: let `c` be a homotopy limit cone over the tower `τ^{≥ -n} K`. The tower `Hᵐ(RΓᵢ(τ^{≥ -n} K))`
-is eventually constant by the acyclicity hypothesis, so the legs of `RΓᵢ(c)` induce isomorphisms
-on `Hᵐ` for `n ≫ 0` (Milnor sequence). By detection the legs of `c` induce isomorphisms on `Hᵐ`
-for `n ≫ 0`, so the comparison `K ⟶ R lim τ^{≥ -n} K` is an isomorphism, and we conclude by the
-bounded below case. -/
+`Hᵠ(RΓᵢ(K)) ≅ Γᵢ(Hᵠ(K))` for all `i` and `q`. -/
 theorem nonempty_homology_rightDerivedFunctor_obj_iso_of_acyclic_of_detects {ι : Type*}
     (Γ : ι → C ⥤ ModuleCat.{v} R) [∀ i, (Γ i).Additive] [∀ i, PreservesFiniteLimits (Γ i)]
     [∀ i, PreservesLimitsOfShape (Discrete ℕ) (Γ i)]
@@ -521,20 +531,12 @@ theorem isZero_homology_of_forall_isZero_homology_rightDerivedFunctor_sheafSecti
     ((_root_.DerivedCategory.homologyFunctor _ q).mapIso e ≪≫
       (_root_.DerivedCategory.homologyFunctorFactors _ q).app I)
 
-/-- Blueprint `lem-kun-0bkz`: **cohomology of unbounded complexes** (Stacks, Tag 0BKZ). Let `X`
+/-- **Cohomology of unbounded complexes** (Stacks, Tag 0BKZ). Let `X`
 be a scheme, `K ∈ D(X_ét, Λ)` (unbounded), and `B` a class of objects of `X_ét` such that
 (1) every object of `X_ét` has a covering by members of `B` and (2) `Hᵖ(U, ℋᵠ(K)) = 0` for all
 `p > 0`, all `q` and all `U ∈ B`. Then `Hᵠ(U, K) ≅ H⁰(U, ℋᵠ(K)) = Γ(U, ℋᵠ(K))` for all `q` and
 all `U ∈ B`. Here `H^•(U, -)` is the cohomology of the right derived functor of the sections
-functor `Γ(U, -)` on `D(X_ét, Λ)`.
-
-The blueprint argues with the hypercohomology spectral sequence; the proof here follows Stacks:
-`K` is the derived limit of its truncations `τ^{≥ -n} K`, and `RΓ(U, -)` commutes with derived
-limits
-(`CategoryTheory.Functor.nonempty_homology_rightDerivedFunctor_obj_iso_of_acyclic_of_detects`,
-with the detection property
-`Etale.isZero_homology_of_forall_isZero_homology_rightDerivedFunctor_sheafSections`
-provided by the coverings by members of `B`). -/
+functor `Γ(U, -)` on `D(X_ét, Λ)`. -/
 theorem nonempty_homology_rightDerivedFunctor_sheafSections_obj_iso_of_acyclic {X : Scheme.{u}}
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (B : Set X.Etale)
@@ -600,8 +602,7 @@ noncomputable def homologyRightDerivedFunctorSheafSectionsSingleIso {X : Scheme.
 
 
 /-- Two geometric points over the same point of a scheme have simultaneously zero stalks for
-every étale sheaf of `Λ`-modules (`lem-kun-support-geometric-point-independent`, transported
-from abelian groups along the forgetful functor). -/
+every étale sheaf of `Λ`-modules. -/
 lemma isZero_sheafFiber_iff_of_same_image_moduleCat {X : Scheme.{u}}
     {Ω Ω' : Type u} [Field Ω] [IsAlgClosed Ω] [Field Ω'] [IsAlgClosed Ω']
     (s : Spec (.of Ω) ⟶ X) (s' : Spec (.of Ω') ⟶ X) (h : s default = s' default)
@@ -644,10 +645,9 @@ lemma isClosed_singleton_of_etale {k : Type u} [Field k] {U X : Scheme.{u}} (g :
   exact Algebra.IsAlgebraic.trans k (X.residueField (g u)) _
 
 
-/-- Blueprint `lemma-sheaves-finite-support-finite-morphisms--1` on a quasi-compact étale `X`-scheme
-`V`: if `X` is locally of finite type over a separably closed field and the stalks of `F` vanish at
-the non-closed points of `X`, then `Hᵠ(V, F) = 0` for `q ≠ 0`. Indeed `Hᵠ(V, F) = Hᵠ(V_ét, F|_V)`,
-`V` is of finite type over the field, and the points of `V` over closed points of `X` are closed. -/
+/-- Vanishing for sheaves supported on closed points, on a quasi-compact étale `X`-scheme `V`: if
+`X` is locally of finite type over a separably closed field and the stalks of `F` vanish at the
+non-closed points of `X`, then `Hᵠ(V, F) = 0` for `q ≠ 0`. -/
 lemma isZero_homology_rightDerivedFunctor_sheafSections_of_isZero_sheafFiber {K : Type u}
     [Field K] [IsSepClosed K] {X : Scheme.{u}} (p : X ⟶ Spec (.of K)) [LocallyOfFiniteType p]
     (V : X.Etale) [CompactSpace V.left] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -669,17 +669,11 @@ lemma isZero_homology_rightDerivedFunctor_sheafSections_of_isZero_sheafFiber {K 
     F).2 (hF _ hx)
   simp
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`: **detection of objects supported at
-closed points** (unbounded case). Let `K` be a separably closed field, `X` a scheme of finite type
-over `K` (structure morphism `p`, locally of finite type, `X` quasi-compact), and `Q ∈ D(X_ét, Λ)`
-(unbounded) such that the stalks of all cohomology sheaves `ℋᵠ(Q)` at the geometric points over
-non-closed points of `X` vanish. Then `Q = 0` if and only if `Hⁱ(X_ét, Q) = 0` for all `i`.
-
-Following the blueprint, the class `B` of quasi-compact étale `X`-schemes covers `X_ét`, and
-the cohomology sheaves of `Q` are acyclic on its members
-(`lemma-sheaves-finite-support-finite-morphisms--1`), so that `Hⁱ(X_ét, Q) = Γ(X, ℋⁱ(Q))` by
-`lem-kun-0bkz`; the sheaves `ℋⁱ(Q)` are globally generated
-(`corollary-open-direct-image-over-field--2`), hence vanish if they have no global sections. -/
+/-- **Detection of objects supported at closed points** (unbounded case). Let `K` be a separably
+closed field, `X` a scheme of finite type over `K` (structure morphism `p`, locally of finite type,
+`X` quasi-compact), and `Q ∈ D(X_ét, Λ)` (unbounded) such that the stalks of all cohomology sheaves
+`ℋᵠ(Q)` at the geometric points over non-closed points of `X` vanish. Then `Q = 0` if and only if
+`Hⁱ(X_ét, Q) = 0` for all `i`. -/
 theorem isZero_iff_forall_isZero_homology_rightDerivedGlobalSections {K : Type u} [Field K]
     [IsSepClosed K] {X : Scheme.{u}} (p : X ⟶ Spec (.of K)) [LocallyOfFiniteType p]
     [CompactSpace X]

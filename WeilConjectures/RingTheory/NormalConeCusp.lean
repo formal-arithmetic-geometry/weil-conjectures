@@ -14,7 +14,7 @@ public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 /-!
 # The normal cone of the cusp
 
-The singular case of blueprint `example-normal-cone-point`: for the cusp
+The singular case of the normal cone at a point: for the cusp
 `X = V(y² - x³) ⊂ 𝔸²` over a commutative ring `k`, with coordinate ring
 `A = k[x, y] / (y² - x³)`, and `Z` the origin with ideal `I = (x, y)`, the graded algebra
 `⨁_r I^r / I^{r+1}` is `k[ξ, η] / (η²)`, where `ξ, η` are the classes of `x, y` in `I / I²`.
@@ -195,9 +195,8 @@ lemma homogeneousComponent_map {σ R S : Type*} [CommRing R] [CommRing S] (f : R
   simp only [coeff_homogeneousComponent, coeff_map]
   split_ifs <;> simp
 
-/-- (blueprint `example-normal-cone-point`) For the cusp `A = k[x, y] / (y² - x³)` and
-`I = (x, y)`, the kernel of `k[ξ, η] ⟶ A[t, I t⁻¹] / (t) = ⨁_r I^r / I^{r+1}`,
-`ξ ↦ x t⁻¹`, `η ↦ y t⁻¹`, is `(η²)`. -/
+/-- For the cusp `A = k[x, y] / (y² - x³)` and `I = (x, y)`, the kernel of
+`k[ξ, η] ⟶ A[t, I t⁻¹] / (t) = ⨁_r I^r / I^{r+1}`, `ξ ↦ x t⁻¹`, `η ↦ y t⁻¹`, is `(η²)`. -/
 theorem ker_cuspToReesQuot :
     RingHom.ker (cuspToReesQuot k) = Ideal.span {(X 1 : MvPolynomial (Fin 2) k) ^ 2} := by
   classical
@@ -235,10 +234,10 @@ theorem ker_cuspToReesQuot :
   · rw [Ideal.span_le, Set.singleton_subset_iff]
     exact X_one_sq_mem_ker_cuspToReesQuot k
 
-/-- (blueprint `example-normal-cone-point`) **The normal cone of the cusp.** For the cusp
-`A = k[x, y] / (y² - x³)` and the ideal `I = (x, y)` of the origin, the graded algebra
-`A[t, I t⁻¹] / (t) = ⨁_r I^r / I^{r+1}` is `k[ξ, η] / (η²)`, with `ξ, η` the classes of
-`x, y ∈ I / I²` (`MvPolynomial.cuspReesQuotEquiv_mk_X`): the normal cone is a double line. -/
+/-- **The normal cone of the cusp.** For the cusp `A = k[x, y] / (y² - x³)` and the ideal
+`I = (x, y)` of the origin, the graded algebra `A[t, I t⁻¹] / (t) = ⨁_r I^r / I^{r+1}` is
+`k[ξ, η] / (η²)`, with `ξ, η` the classes of `x, y ∈ I / I²`
+(`MvPolynomial.cuspReesQuotEquiv_mk_X`): the normal cone is a double line. -/
 noncomputable def cuspReesQuotEquiv :
     MvPolynomial (Fin 2) k ⧸ Ideal.span {(X 1 : MvPolynomial (Fin 2) k) ^ 2} ≃+*
       (𝔪).extendedReesAlgebra ⧸ Ideal.span {(𝔪).extendedReesAlgebraT} :=
@@ -257,8 +256,8 @@ lemma cuspReesQuotEquiv_mk_X (i : Fin 2) :
         Ideal.C_mul_T_neg_one_mem_extendedReesAlgebra (Ideal.subset_span (Set.mem_range_self i))⟩ :=
   cuspToReesQuot_X k i
 
-/-- (blueprint `example-normal-cone-point`) The associated graded ring `⨁_r I^r / I^{r+1}` of the
-ideal `I = (x, y)` of the origin of the cusp `k[x, y] / (y² - x³)` is `k[ξ, η] / (η²)`. -/
+/-- The associated graded ring `⨁_r I^r / I^{r+1}` of the ideal `I = (x, y)` of the origin of the
+cusp `k[x, y] / (y² - x³)` is `k[ξ, η] / (η²)`. -/
 theorem nonempty_cusp_ringEquiv_associatedGraded :
     Nonempty (MvPolynomial (Fin 2) k ⧸ Ideal.span {(X 1 : MvPolynomial (Fin 2) k) ^ 2} ≃+*
       Ideal.associatedGraded 𝔪) := by

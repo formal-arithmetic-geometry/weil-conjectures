@@ -52,18 +52,14 @@ namespace DerivedCategory
 
 variable (R : Type u) [CommRing R] [HasDerivedCategory.{u} (ModuleCat.{u} R)]
 
-/-- Blueprint `definition-categorical-trace`: Perfect complex and its categorical trace (the
-category `D^b_fin(A)`).
-
-The perfect complexes of `D(A)`, those quasi-isomorphic to a bounded complex of finitely
+/-- The perfect complexes of `D(A)`, those quasi-isomorphic to a bounded complex of finitely
 generated projective `A`-modules, as an object property. Over a local ring such as
 `A = A_{E,n}` these are the complexes quasi-isomorphic to a bounded complex of finitely
 generated free modules (`DerivedCategory.IsPerfect.exists_free`). -/
 def perfect : ObjectProperty (DerivedCategory (ModuleCat.{u} R)) :=
   fun C ↦ C.IsPerfect
 
-/-- Blueprint `definition-categorical-trace`: the category `D^b_fin(A)` of perfect complexes, as a
-full subcategory of `D(A)`. -/
+/-- The category `D^b_fin(A)` of perfect complexes, as a full subcategory of `D(A)`. -/
 abbrev Perf : Type _ := (perfect R).FullSubcategory
 
 /-- The degree-`0` cohomology of the unit of `D(A)` is `A`: the unit is `A` placed in degree
@@ -74,9 +70,8 @@ noncomputable def homologyZeroUnitIso :
   (homologyFunctor (ModuleCat.{u} R) 0).mapIso (singleFunctorObjUnitIso _).symm ≪≫
     (singleFunctorCompHomologyFunctorIso (ModuleCat.{u} R) 0).app (𝟙_ _)
 
-/-- Blueprint `definition-categorical-trace`: the identification `End_{D(A)}(A) ⟶ A` sending an
-endomorphism of the unit `A` of `D(A)` to its degree-`0` scalar, the image of `1` under the
-induced endomorphism of `H⁰(A) = A`. -/
+/-- The identification `End_{D(A)}(A) ⟶ A` sending an endomorphism of the unit `A` of `D(A)` to
+its degree-`0` scalar, the image of `1` under the induced endomorphism of `H⁰(A) = A`. -/
 noncomputable def unitEndScalar (φ : 𝟙_ (DerivedCategory (ModuleCat.{u} R)) ⟶ 𝟙_ _) : R :=
   ((homologyZeroUnitIso R).inv ≫ (homologyFunctor (ModuleCat.{u} R) 0).map φ ≫
     (homologyZeroUnitIso R).hom).hom (1 : R)

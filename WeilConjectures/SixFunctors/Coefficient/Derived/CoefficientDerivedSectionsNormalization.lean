@@ -11,8 +11,24 @@ import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSection
 
 /-! # Normalized coefficient sections and inverse limits
 
-Source: Stacks 03CZ, 079P, 08JA, 0D6E and 0941
-(blueprint: lem-coef-derived-sections-normalization).
+## Implementation details
+
+`coefficientSequenceGlobalSectionsEvaluation` is applied to the completed coefficient ring, its
+finite quotient tower and its projection cone; ordinary global sections are identified with Hom
+from the module unit via `f ↦ f(1)`. Uniqueness of total right-derived pairs transports the
+finite and tower sections functors to the recorded coefficient functors, and
+`coefficientSequenceSectionsLimitComparison` identifies both inverse limits with the prescribed
+ones, including their projections. For `scalar_hom_zero`, K-flat and K-injective representatives
+identify the enriched comparison with the ordinary scalar extension/restriction transpose, which
+sends `b ⊗ x` to `b • f(x)`. No gamma comparison or internal-Hom fiber isomorphism is used.
+
+## References
+
+* [Stacks, Tag 03CZ]
+* [Stacks, Tag 079P]
+* [Stacks, Tag 08JA]
+* [Stacks, Tag 0D6E]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public section
@@ -28,9 +44,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
 /-- The resolution-unit equation for sections of the prescribed inverse limit.
-This is CoefficientGlobalLimitModel with its sole comparison supplied as a parameter.
-Source: Stacks 0D6E, 0941
-(blueprint: lem-coef-derived-sections-normalization). -/
+This is CoefficientGlobalLimitModel with its sole comparison supplied as a parameter. -/
 def CoefficientSectionsLimitResolutionEquation
     (κ : coefficientSequenceLimit l E W ⋙ coefficientIntegralSections l E W ≅
       coefficientSequenceDerivedRestriction l E W ⋙
@@ -54,9 +68,7 @@ def CoefficientSectionsLimitResolutionEquation
 
 attribute [local irreducible] CoefficientSectionsLimitResolutionEquation
 
-/-- Sections comparisons before inserting an internal-Hom fiber.
-Source: Stacks 03CZ, 079P, 08JA, 0D6E and 0941
-(blueprint: lem-coef-derived-sections-normalization). -/
+/-- Sections comparisons before inserting an internal-Hom fiber. -/
 structure CoefficientDerivedSectionsNormalization
     (R : CoefficientDerivedSystemReduction l E W)
     extends CoefficientDerivedSystemScalarCoherence l E W where
@@ -102,40 +114,7 @@ structure CoefficientDerivedSectionsNormalization
       ((coefficientFiniteAdjunction l E W n).homEquiv P M).symm
         (coefficientIntegralHomEquiv l E W P _ x)
 
-/-- Sections and total-limit comparisons with their ordinary and H-zero normalizations.
-Source: Stacks, sites-cohomology.tex, Tags 03CZ, 079P, 08JA, 0D6E and 0941;
-resolution-model construction, steps 4--6
-(blueprint: lem-coef-derived-sections-normalization).
-
-Proof:
-Apply coefficientSequenceGlobalSectionsEvaluation to the completed coefficient ring,
-its finite quotient tower and its projection cone. Identify its exact restriction
-with coefficientSequenceRestriction by their identical section maps and transitions.
-Ordinary global sections, defined there as a presheaf limit, are naturally the Hom
-from the module unit defining coefficientOrdinarySections. Transport by the section
-map f to f(1), whose inverse sends a compatible section x to b mapped to b times x.
-The latter formula is precisely ordinaryScalarSections_formula after scalar
-restriction. Uniqueness of total right-derived pairs transports the finite and tower
-sections functors to the recorded coefficient functors, preserving their universal
-comparison units. The scalar_unit equation becomes scalarSections_model, and the
-finiteEvaluation isomorphism gives systemSectionsEvaluation.
-Apply coefficientSequenceSectionsLimitComparison to those same normalized pairs.
-Uniqueness of the right-derived comparisons identifies both inverse limits with
-the prescribed coefficientConstantTowerLimit and coefficientMappingLimit, including
-their actual projections. The ordinary comparison is coefficientSectionsLimitIso:
-its compositions with every ordinary limit projection agree, so limit uniqueness
-identifies them. Whisker by exact coefficientSequenceDerivedRestriction. The
-universal-unit equation is globalLimit_model, and the arbitrary-system projection
-equation is sections_projection. No internal-Hom fiber is used in either equation.
-For scalar_hom_zero, choose a K-flat representative for P and a K-injective
-representative for M. The finite tensor normalization and the integral and finite
-uncurry_model fields identify the enriched comparison with the ordinary scalar
-extension/restriction transpose on the product Hom complex. The recorded
-coefficientHomZeroEquiv sends a degree-zero cocycle class to its derived morphism.
-The ordinary transpose sends b tensor x to b times f(x), and the scalar sections
-transport has exactly that formula. Localization and the normalized scalar derived
-adjunction therefore give the displayed Hom-bijection equation for every class x.
-These assertions involve no gamma comparison or internal-Hom fiber isomorphism. -/
+/-- Sections and total-limit comparisons with their ordinary and H-zero normalizations. -/
 theorem coefficientDerivedSectionsNormalization
     (R : CoefficientDerivedSystemReduction l E W)
     (hF : CoefficientFiniteTensorNormalization l E W R) :

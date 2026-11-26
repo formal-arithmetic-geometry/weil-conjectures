@@ -37,10 +37,6 @@ concludes.
   `r = dim_K 𝔪/𝔪²`.
 - `Bialgebra.exists_finrank_eq_pow`: a finite-dimensional commutative local bialgebra over a field
   of characteristic `p > 0` has dimension a power of `p`.
-
-## Blueprint
-
-`Bialgebra.exists_finrank_eq_pow` is the algebraic content of `proposition-multiplication-n--2`.
 -/
 
 @[expose] public section
@@ -530,8 +526,8 @@ theorem finrank_eq_pow_mul_finrank_frobenius :
   exact Subalgebra.topEquiv.toLinearEquiv.finrank_eq.symm
 
 variable (K A p) in
-/-- **Blueprint `proposition-multiplication-n--2`, algebraic form**: a finite-dimensional
-commutative local bialgebra over a field of characteristic `p > 0` has dimension a power of `p`.
+/-- A finite-dimensional commutative local bialgebra over a field of characteristic `p > 0` has
+dimension a power of `p`.
 Applied to the coordinate ring of a connected finite group scheme, this is
 `AlgebraicGeometry.exists_finrankΓ_eq_pow`. -/
 theorem exists_finrank_eq_pow : ∃ r : ℕ, finrank K A = p ^ r := by

@@ -32,17 +32,16 @@ bounded below derived categories twice:
 
 This file shows that they are equal
 (`AlgebraicGeometry.Etale.baseChange_eq_derivedBaseChangeMapPlus`), so that the pasting laws
-and the computations available for `derivedBaseChangeMapPlus` apply to `baseChange`. The
-proof identifies the derived adjunction used by `baseChange` with `Adjunction.derivedPlus`
-(`Adjunction.derivedAdjunctionPlus_eq_derivedPlus`), computes `θ_sq` on complexes
-(`AlgebraicGeometry.Etale.pullbackSquareComparison_hom_app_factorsh`) and applies the
-general computation of derived mates `Adjunction.derivedPlus_mateEquiv_app_fac`. In particular
-`AlgebraicGeometry.Etale.baseChange` commutes with the shifts
+and the computations available for `derivedBaseChangeMapPlus` apply to `baseChange`. In
+particular `AlgebraicGeometry.Etale.baseChange` commutes with the shifts
 (`AlgebraicGeometry.Etale.commShift_baseChange`).
 
-This is the identification of the base-change map of blueprint
-`definition-derived-base-change-map--1` with the derived exchange morphism of the proper base change
-chapter.
+## Implementation details
+
+The proof identifies the derived adjunction used by `baseChange` with `Adjunction.derivedPlus`
+(`Adjunction.derivedAdjunctionPlus_eq_derivedPlus`), computes `θ_sq` on complexes
+(`AlgebraicGeometry.Etale.pullbackSquareComparison_hom_app_factorsh`) and applies the
+general computation of derived mates `Adjunction.derivedPlus_mateEquiv_app_fac`.
 -/
 
 @[expose] public section
@@ -166,8 +165,7 @@ omit [HasSmallSiteSheafify A] in
 /-- **The two derived base-change morphisms agree.** The derived base-change morphism
 `AlgebraicGeometry.Etale.baseChange`, built from the units and counits of the derived
 adjunctions, is the derived base change map `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus`,
-characterised by being computed by the underived base change map on complexes.
-(blueprint: `definition-derived-base-change-map`) -/
+characterised by being computed by the underived base change map on complexes. -/
 theorem Etale.baseChange_eq_derivedBaseChangeMapPlus (sq : CommSq g' f' f g) :
     Etale.baseChange A sq = Etale.derivedBaseChangeMapPlus A sq := by
   refine Etale.derivedBaseChangeMapPlus_ext A sq _ fun K => ?_

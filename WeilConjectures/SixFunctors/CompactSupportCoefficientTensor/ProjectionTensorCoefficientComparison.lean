@@ -17,8 +17,6 @@ import WeilConjectures.SixFunctors.CompactSupportCoefficientTensor.ProjectionRat
 
 /-! # The representative-normalized tensor comparison for projection
 
-Source: main-20261015, projection-formula proof step 13
-(blueprint: def-sf-projection-tensor-coefficient-comparison).
 The ordinary comparison is fixed on homogeneous local pure tensors. Derived
 descent and the specified quotient-completion unit then fix its integral and
 rational constructible restrictions.
@@ -44,23 +42,14 @@ variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   (X : Scheme.{u})
 
-/-- Coefficient restriction preserves the precise resolving class.
-Source: step 13 (blueprint: def-sf-projection-tensor-coefficient-comparison).
-Proof: an exact equivalence preserves acyclicity and tensor flatness. The local
-pure-tensor isomorphism identifies tensoring a transported complex with
-transporting its tensor against the inverse-transported complex. Thus K-flatness
-and termwise flatness are preserved without a boundedness restriction. -/
+/-- Coefficient restriction preserves the precise resolving class. -/
 theorem good (P : (proEtaleFlatRepresentatives X
       (completedIntegralCommRingSheafUnrestricted l E X)).FullSubcategory) :
     proEtaleFlatRepresentatives X (pbcAdicCompletion X (pbcIntegralDatum l E))
       ((complexTransport l E X).obj P.obj) := by
   exact ProjectionTensorNormalization.good l E X P
 
-/-- The signed-total comparison is natural in both input complexes.
-Source: projection-formula proof step 13
-(blueprint: def-sf-projection-tensor-coefficient-comparison).
-Proof: expand `totalIso` as the inverse signed total; evaluate a component on a homogeneous
-summand; use `module_tensorHom_naturality` and the defining signed-total map equations. -/
+/-- The signed-total comparison is natural in both input complexes. -/
 private theorem totalIso_naturality
     {P P' Q Q' : CochainComplex (integralTowerModules l E X) ℤ}
     (f : P ⟶ P') (g : Q ⟶ Q') :
@@ -97,9 +86,7 @@ private theorem normalizedTensorDescent
   exact ProjectionTensorNormalization.normalizedTensorDescent q q' F LF eps P S hF ff
     t t' T T' r r' b (fun f ↦ hb f)
 
-/-- The signed-total representative square specifying the ordinary comparison.
-Source: projection-formula proof step 13
-(blueprint: def-sf-projection-tensor-coefficient-comparison). -/
+/-- The signed-total representative square specifying the ordinary comparison. -/
 def ordinaryNormalization
     (T : ProEtaleTensorModel X (completedIntegralCommRingSheafUnrestricted l E X))
     (e : T.tensor ⋙ integralDetailedTransport X l E ≅
@@ -122,12 +109,7 @@ def ordinaryNormalization
 
 attribute [local irreducible] ordinaryNormalization
 
-/-- Ordinary coefficient transport is fixed by the signed-total representative square.
-Source: step 13 (blueprint: def-sf-projection-tensor-coefficient-comparison).
-Proof: compose the specified representative comparisons with total, and with the
-exact transport factorization. The good theorem supplies the target resolving
-objects. Double K-flat localization extends this square uniquely to a natural
-isomorphism. Its inverse is obtained from the inverse total comparison. -/
+/-- Ordinary coefficient transport is fixed by the signed-total representative square. -/
 theorem ordinary_existsUnique
     (T : ProEtaleTensorModel X (completedIntegralCommRingSheafUnrestricted l E X)) :
     ∃! e : T.tensor ⋙ integralDetailedTransport X l E ≅
@@ -168,12 +150,7 @@ theorem ordinary_existsUnique
     (fun f ↦ totalIso_naturality l E X f.1 f.2)
 
 /-- Every normalized tensor-completion presentation has invertible comparison
-on constructible pairs. This is the actual completion unit, not an assumption.
-Source: step 13 (blueprint: def-sf-projection-tensor-coefficient-comparison).
-Proof: the presentation's representative square and its two chain coordinates
-identify chi with the quotient-map completion unit. Constructible tensor
-completion makes that unit invertible, and tensor descent identifies its
-ordinary tensor presentation with the presentation used there. -/
+on constructible pairs. This is the actual completion unit, not an assumption. -/
 theorem completion_isIso (t : OpenFactorCoherence.Tensor l E X)
     [CompactSpace X] [QuasiSeparatedSpace X]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -181,8 +158,7 @@ theorem completion_isIso (t : OpenFactorCoherence.Tensor l E X)
     IsIso ((t.chi l E).app (M.obj, N.obj)) := by
   exact ProjectionTensorModelComparison.completion_isIso l E X t M N
 
-/-- The representative-normalized ordinary derived comparison.
-Source: step 13 (blueprint: def-sf-projection-tensor-coefficient-comparison). -/
+/-- The representative-normalized ordinary derived comparison. -/
 def ordinaryComparison
     (T : ProEtaleTensorModel X (completedIntegralCommRingSheafUnrestricted l E X)) :
     T.tensor ⋙ integralDetailedTransport X l E ≅
@@ -228,38 +204,33 @@ variable (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
   (F : FdCoefficientComparisonSystem.{u} C.l C.Qbar)
   (W : FdFrobeniusComparison C.l C.Qbar D C.different F T₀)
 
-/-- The recorded integral coefficient equivalence at this field and scheme.
-Source: step 13 (blueprint: def-sf-projection-tensor-coefficient-comparison). -/
+/-- The recorded integral coefficient equivalence at this field and scheme. -/
 def integral :=
   letI := W.noetherian
   letI := W.dimension
   letI := W.invertible
   ((F.coefficients (D.geometricFiber T₀).left).stage E₀).integral.functor
 
-/-- The recorded rational coefficient equivalence at this field and scheme.
-Source: step 13 (blueprint: def-sf-projection-tensor-coefficient-comparison). -/
+/-- The recorded rational coefficient equivalence at this field and scheme. -/
 def rational :=
   letI := W.noetherian
   letI := W.dimension
   letI := W.invertible
   ((F.coefficients (D.geometricFiber T₀).left).stage E₀).rational.functor
 
-/-- Integral completed tensor in the framework convention.
-Source: step 13 (blueprint: def-sf-projection-tensor-coefficient-comparison). -/
+/-- Integral completed tensor in the framework convention. -/
 def integralTensor :=
   letI := sfWeilPrimeInvertible D C.l C.different T₀
   constructibleIntegralTensor C.l (pbcFiniteField C.l C.Qbar E₀) (D.geometricFiber T₀).left
 
-/-- Rational tensor in the framework convention.
-Source: step 13 (blueprint: def-sf-projection-tensor-coefficient-comparison). -/
+/-- Rational tensor in the framework convention. -/
 def rationalTensor :=
   letI := sfWeilPrimeInvertible D C.l C.different T₀
   rationalDerivedTensor C.l (pbcFiniteField C.l C.Qbar E₀) (D.geometricFiber T₀).left
 
 /-- The coefficient tensor map on integral objects: inverse quotient-completion
 unit, followed by the representative-normalized ordinary coefficient comparison.
-Its underlying map is prescribed, not merely asserted to be invertible.
-Source: step 13 (blueprint: def-sf-projection-tensor-coefficient-comparison). -/
+Its underlying map is prescribed, not merely asserted to be invertible. -/
 def integralArrow
     (t : OpenFactorCoherence.Tensor C.l (pbcFiniteField C.l C.Qbar E₀)
       (D.geometricFiber T₀).left)
@@ -319,15 +290,7 @@ private theorem transported_hom_heq {A : Type*} [Category* A]
   simp only [eqToIso_refl, Iso.refl_symm, Iso.refl_trans, Iso.trans_refl]
   rfl
 
-/-- The full integral lift of the specified underlying coefficient tensor arrow.
-Source: step 13 (blueprint: def-sf-projection-tensor-coefficient-comparison).
-Proof: integral_identity fixes the underlying objects and maps of the coefficient
-equivalence. Thus integralArrow has these endpoints after those equalities.
-Constructible fullness lifts it and its inverse. Each normalized tensor model
-gives the same arrow: the representative comparison cancels its own completion
-unit, while the chain normalization fixes both Roos coordinates. Such a model
-exists by the tensor-completion theorem and K-flat descent, so the universal
-normalization is nonvacuous and faithfulness makes its lift unique. -/
+/-- The full integral lift of the specified underlying coefficient tensor arrow. -/
 theorem integral_existsUnique
     (M N : sfIntegralConstructibleCategory C.l
       (pbcFiniteField C.l C.Qbar E₀) (D.geometricFiber T₀).left) :
@@ -380,8 +343,7 @@ theorem integral_existsUnique
   apply ObjectProperty.hom_ext
   exact eq_of_heq ((he' t).trans (hn t).symm)
 
-/-- The integral comparison selected only from its uniquely prescribed arrow.
-Source: step 13 (blueprint: def-sf-projection-tensor-coefficient-comparison). -/
+/-- The integral comparison selected only from its uniquely prescribed arrow. -/
 def integralComparison
     (M N : sfIntegralConstructibleCategory C.l
       (pbcFiniteField C.l C.Qbar E₀) (D.geometricFiber T₀).left) :=
@@ -451,9 +413,7 @@ private theorem integralComparison_naturality
   simp only [Functor.map_comp]
   exact hn
 
-/-- The integral-representative square specifying the rational comparison.
-Source: projection-formula proof step 13
-(blueprint: def-sf-projection-tensor-coefficient-comparison). -/
+/-- The integral-representative square specifying the rational comparison. -/
 def rationalNormalization
     (R : WfTensorCompletion.RationalComparison D C T₀ E₀)
     (e : rationalTensor D C T₀ E₀ ⋙ rational D C T₀ E₀ F W ≅
@@ -471,13 +431,7 @@ def rationalNormalization
 attribute [local irreducible] rationalNormalization
 
 /-- Rational tensor compatibility retains the canonical integral comparison on
-every unchanged integral representative. Bilinearity fixes every denominator.
-Source: step 13 (blueprint: def-sf-projection-tensor-coefficient-comparison).
-Proof: localize integralComparison and its inverse. The integral_identity,
-objects and tensors fields of the coefficient comparison identify the localized
-endpoints and maps. The normalization of R.ordinary does the same for the tensor.
-Naturality on integral maps extends by bilinearity to all localized maps.
-All rational objects are unchanged integral representatives, giving uniqueness. -/
+every unchanged integral representative. Bilinearity fixes every denominator. -/
 theorem rational_existsUnique
     (R : WfTensorCompletion.RationalComparison D C T₀ E₀)
     (hR : R.Normalized D C T₀ E₀) :
@@ -497,8 +451,7 @@ theorem rational_existsUnique
   exact rationalTensorDescent D C T₀ E₀
     ((F.coefficients (D.geometricFiber T₀).left).stage E₀) R hR mu
 
-/-- The rational coefficient tensor comparison with its integral normalization.
-Source: step 13 (blueprint: def-sf-projection-tensor-coefficient-comparison). -/
+/-- The rational coefficient tensor comparison with its integral normalization. -/
 def comparison
     (R : WfTensorCompletion.RationalComparison D C T₀ E₀)
     (hR : R.Normalized D C T₀ E₀) :

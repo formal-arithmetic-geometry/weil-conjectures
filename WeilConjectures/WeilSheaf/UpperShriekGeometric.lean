@@ -22,10 +22,9 @@ Let `X` be a separated `k₀`-scheme of finite type with structure morphism `a :
 let `R` be a right adjoint of the direct image with compact support
 `Ra_! : WeilComplex X ⥤ WeilComplex k₀` of Weil complexes. We show that the underlying complex on
 the geometric fibre `X̄` of `R ℚ̄_ℓ` is the dualizing complex `ω_X̄` of `X̄` over `k̄`
-(`AlgebraicGeometry.WeilComplex.nonempty_nativeGeometricForget_obj_iso_of_adjunction`,
-blueprint `prose-10-20`).
+(`AlgebraicGeometry.WeilComplex.nonempty_nativeGeometricForget_obj_iso_of_adjunction`).
 
-## Proof
+## Implementation details
 
 Let `X ⟶[i] Z ⟶[g] Spec k₀` be the compactification of `a` defining `Ra_!`, so that
 `Ra_! ≅ Rg_* ∘ i_!`.
@@ -256,10 +255,10 @@ theorem nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_upperShriekOfC
   exact ⟨(adicSheafDerivedEquivCondensedMod l _).functor.mapIso (i₁ ≪≫ i₂ ≪≫ i₃) ≪≫ i₄ ≪≫ i₅ ≪≫
     i₆ ≪≫ i₇⟩
 
-/-- **The Weil exceptional inverse image lies over the geometric one** (blueprint
-`prose-10-20`): for a separated morphism of finite type `f : X ⟶ Y` of `k₀`-schemes,
-a right adjoint `R` of `Rf₀!` on Weil complexes and a Weil complex `L` on `Y`, the underlying
-complex of `R L` on `X̄`, in the condensed model, is `Rf̄^!` of the underlying complex of `L`. -/
+/-- **The Weil exceptional inverse image lies over the geometric one**: for a separated morphism
+of finite type `f : X ⟶ Y` of `k₀`-schemes, a right adjoint `R` of `Rf₀!` on Weil complexes and a
+Weil complex `L` on `Y`, the underlying complex of `R L` on `X̄`, in the condensed model, is
+`Rf̄^!` of the underlying complex of `L`. -/
 theorem nonempty_adicSheafDerivedEquivCondensedMod_forget_obj_iso_upperShriek
     {R : WeilComplex k₀ l Y ⥤ WeilComplex k₀ l X} (adj : derivedLowerShriek k₀ l f ⊣ R)
     (L : WeilComplex k₀ l Y) :
@@ -323,10 +322,10 @@ noncomputable def adicSheafDerivedEquivCondensedModForgetConstantIso :
     (_root_.DerivedCategory.singleFunctor _ 0).mapIso (adicSheafEquivCondensedModUnitIso l _) ≪≫
     _root_.DerivedCategory.singleFunctorObjUnitIso _
 
-/-- **The underlying complex of the dualizing complex of Weil complexes** (blueprint:
-`prose-10-20`): for a right adjoint `R` of the direct image with compact support
-`Ra_!` of Weil complexes along the structure morphism `a : X ⟶ Spec k₀`, the underlying complex
-on the geometric fibre `X̄` of `R ℚ̄_ℓ` is the dualizing complex `ω_X̄` of `X̄` over `k̄`. -/
+/-- **The underlying complex of the dualizing complex of Weil complexes**: for a right adjoint
+`R` of the direct image with compact support `Ra_!` of Weil complexes along the structure
+morphism `a : X ⟶ Spec k₀`, the underlying complex on the geometric fibre `X̄` of `R ℚ̄_ℓ` is the
+dualizing complex `ω_X̄` of `X̄` over `k̄`. -/
 theorem nonempty_nativeGeometricForget_obj_iso_of_adjunction
     {R : WeilComplex k₀ l (Spec (CommRingCat.of k₀)) ⥤ WeilComplex k₀ l X}
     (adj : derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀)) ⊣ R) :

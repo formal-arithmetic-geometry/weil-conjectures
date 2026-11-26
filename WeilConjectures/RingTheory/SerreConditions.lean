@@ -13,14 +13,15 @@ public import Mathlib.RingTheory.Ideal.Height
 /-!
 # Serre's conditions for Noetherian rings
 
-Source: Stacks Project, Algebra, Definition 10.157.1 (Tag 031P), parts (1) and (2);
-height as local dimension, Definition 10.60.3 (Tag 00KF)
-(blueprint: def-weil-pbc-serre-conditions-rk-sk).
-
 ## Main definitions
 
 - `Ring.IsSerreR`: regularity in codimension at most `k`.
 - `Ring.IsSerreS`: depth at least the minimum of `k` and local dimension.
+
+## References
+
+* [Stacks, Tag 031P], parts (1) and (2)
+* [Stacks, Tag 00KF] (height as local dimension)
 -/
 
 @[expose] public section
@@ -29,16 +30,14 @@ universe u
 
 namespace Ring
 
-/-- Serre's condition `(R_k)` for a Noetherian ring (Stacks, Tag 031P, part (1);
-(blueprint: def-weil-pbc-serre-conditions-rk-sk)). The height of a prime is the
-dimension of its localization (Stacks, Tag 00KF). -/
+/-- Serre's condition `(R_k)` for a Noetherian ring: the localization at every prime of
+height at most `k` is a regular local ring. -/
 def IsSerreR (R : Type u) [CommRing R] [IsNoetherianRing R] (k : ℕ) : Prop :=
   ∀ (p : Ideal R) [p.IsPrime], p.height ≤ (k : ℕ∞) →
     IsRegularLocalRing (Localization.AtPrime p)
 
-/-- Serre's condition `(S_k)` for a Noetherian ring (Stacks, Tag 031P, part (2);
-(blueprint: def-weil-pbc-serre-conditions-rk-sk)). The depth is that of the local
-ring as a module over itself, and `p.height` is its Krull dimension (Tag 00KF). -/
+/-- Serre's condition `(S_k)` for a Noetherian ring: for every prime `p`, the depth of the
+local ring at `p` (as a module over itself) is at least `min k (height p)`. -/
 def IsSerreS (R : Type u) [CommRing R] [IsNoetherianRing R] (k : ℕ) : Prop :=
   ∀ (p : Ideal R) [p.IsPrime],
     min (k : ℕ∞) p.height ≤

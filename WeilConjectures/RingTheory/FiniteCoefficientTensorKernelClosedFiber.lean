@@ -12,28 +12,25 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 /-!
 # Injectivity on the closed fibre of the coefficient tensor map
 
-Source: Stacks Project, Remark 07NS (4), the closed-fibre isomorphism.
-(blueprint: lem-weil-pbc-finite-coefficient-tensor-kernel-closed-fiber)
+The kernel of the coefficient tensor map `C ⊗[A₀] A → B` is contained in the extension of the
+maximal ideal of `A`; neither flatness nor surjectivity is used.
+
+## Implementation details
+
+With `D = C ⊗[A₀] A` and `L = m_A D`, surjectivity on residue fields shows that every element of
+`D` is congruent to some `c ⊗ 1` modulo `L`. The kernel equality on `C` then puts `c` in `m₀ C`,
+and balancing (using that `A₀ → A` is local) gives `c ⊗ 1 ∈ L`.
+
+## References
+
+* [Stacks, Remark 07NS] (4)
 -/
 
 @[expose] public section
 
 universe u v w z
 
-/-- The tensor-map kernel is contained in the extended maximal ideal, without flatness.
-Source: Stacks Project, Remark 07NS (4), the closed-fibre calculation preceding flatness.
-(blueprint: lem-weil-pbc-finite-coefficient-tensor-kernel-closed-fiber)
-
-Proof: put D = C ⊗[A₀] A and L = m_A D. For every a in A, surjectivity on
-residue fields supplies a₀ in A₀ such that a - α(a₀) lies in m_A. Balancing
-then gives c ⊗ a = c γ(a₀) ⊗ 1 modulo L. Tensor induction shows every x in D
-is congruent to c ⊗ 1 for some c in C. The tensor formula implies F(L) ⊆ m_A B.
-If F(x) = 0, therefore ψ(c) lies in m_A B. The kernel equality gives c ∈ m₀ C.
-For each generator γ(r)c' with r ∈ m₀, balancing writes γ(r)c' ⊗ 1 as
-c' ⊗ α(r), which lies in L because α is local. Additivity proves c ⊗ 1 ∈ L;
-combining this with x - c ⊗ 1 ∈ L gives x ∈ L. Neither flatness nor
-surjectivity of F is used.
--/
+/-- The tensor-map kernel is contained in the extended maximal ideal, without flatness. -/
 theorem RingHom.finite_coefficient_tensor_kernel_closed_fiber
     {A₀ : Type u} {A : Type v} {B : Type w} {C : Type z}
     [CommRing A₀] [CommRing A] [CommRing B] [CommRing C]

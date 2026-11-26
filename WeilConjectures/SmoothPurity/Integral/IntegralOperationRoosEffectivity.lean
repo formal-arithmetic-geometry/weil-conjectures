@@ -27,8 +27,11 @@ import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 
 /-! # Effectivity of the strict finite-operation towers
 
-Source: Stacks Tags 099M and 099N(5); Bhatt--Scholze, Lemmas 3.5.4--3.5.7
-(blueprint: lem-pur-integral-operation-roos-effectivity).
+## References
+
+* Stacks Project, Tags 08TC, 099M, 099N(5) and 09BQ
+* B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, Lemmas 3.5.4--3.5.7,
+  6.5.5 and 6.5.9(5)
 -/
 
 @[expose] public noncomputable section
@@ -49,7 +52,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The canonical projection of the strict Roos complex to its nth tower term.
-Source: Stacks Tag 08TC (blueprint: lem-pur-integral-operations-preserve-constructible).
 It is the first mapping-cocone projection followed by the nth product projection. -/
 def integralOperationRoosProjection (W : AlgebraicGeometry.Scheme.{u})
     (T : ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :
@@ -61,18 +63,14 @@ def integralOperationRoosProjection (W : AlgebraicGeometry.Scheme.{u})
 
 /-- The finite pullback of the nth reduction of a good integral representative.
 The coefficient pullback is the canonical pro-etale inverse image with its
-constant-ring action; exactness makes this compute `f⁻¹(K tensor^L A_(n+1))`.
-Source: Bhatt--Scholze, Lemma 6.5.9(5); Stacks Tag 099N(5)
-(blueprint: lem-pur-integral-operations-preserve-constructible). -/
+constant-ring action; exactness makes this compute `f⁻¹(K tensor^L A_(n+1))`. -/
 def integralPullbackFiniteComplex {X Y : AlgebraicGeometry.Scheme.{u}}
     (f : X ⟶ Y) (P : CochainComplex (integralTowerModules l E Y) ℤ) (n : ℕ) :=
   ((integralOperationsLevelPullback l E f n).mapHomologicalComplex (ComplexShape.up ℤ)).obj
     ((unrestrictedIntegralFiniteComplex l E Y n).obj P)
 
 /-- The finite derived tensor on the two reduced K-flat representatives.
-This is the recorded total tensor, before restricting its scalar action to the completion.
-Source: Bhatt--Scholze, Lemma 6.5.5; Stacks Tag 09BQ
-(blueprint: lem-pur-integral-operations-preserve-constructible). -/
+This is the recorded total tensor, before restricting its scalar action to the completion. -/
 def integralTensorFiniteComplex (W : AlgebraicGeometry.Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :=
   (Functor.uncurry.obj
@@ -1064,27 +1062,7 @@ attribute [local semireducible] operationDerivedAdjunction operationEffective
 
 /-- The Roos limits of finite pullback and finite tensor towers are derived complete,
 and their actual projection adjoints compute finite reduction. This assertion uses
-only good representatives, with no boundedness or constructibility hypotheses.
-
-Source: Stacks Tags 099M and 099N(5); Bhatt--Scholze, Lemmas 3.5.4--3.5.7
-(blueprint: lem-pur-integral-operation-roos-effectivity).
-
-Proof:
-1. Compute ordinary reduction of a good completed-coefficient representative by the
-simultaneous K-flat coefficient-sequence model. Its finite comparisons commute with
-successive quotients, since the quotient map is adjoint to the smaller tensor unit.
-2. Restrict its strict sequence representative to the completion. The restriction
-comparisons and finite model comparisons form an isomorphism of whole strict towers.
-The ambient pullback and tensor tower isomorphisms identify the operation towers
-with ordinary reductions of good completed-coefficient representatives.
-3. Completion projections are locally surjective, so restriction is full and faithful.
-Lift the level isomorphisms to the finite coefficient categories. The canonical Roos
-comparison preserves each actual mapping-cocone projection.
-4. A normalized coefficient sequence has a normalized DVR Roos model with those same
-projections. Transport its distinguished triangle along the vertex isomorphism and
-apply normalized DVR effectivity and finite reduction. Adjunction naturality and the
-finite evaluation isomorphisms identify the requested adjoints. The legacy comparison
-gives IsSfDerivedComplete. No boundedness or constructibility enters the argument. -/
+only good representatives, with no boundedness or constructibility hypotheses. -/
 theorem integralOperationRoos_effectivity :
     (∀ {X Y : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ Y)
       (P : (integralOperationsGoodComplex l E Y).FullSubcategory)

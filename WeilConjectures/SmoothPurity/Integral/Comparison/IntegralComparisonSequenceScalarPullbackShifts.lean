@@ -38,8 +38,11 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Shift compatibility of scalar/pullback interchange on strict systems
-Source: Stacks Tags 014E, 06YY and 0D6D.
-(blueprint: lem-sf-integral-sequence-scalar-pullback-shifts). -/
+
+## References
+
+* Stacks Project, Tags 014E, 06YY and 0D6D
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

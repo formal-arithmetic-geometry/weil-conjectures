@@ -275,7 +275,7 @@ variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
 /-- The inverse form of `derivedOpenImmersionLowerShriekProjectionMap_baseChange`, with the
-blueprint's projection map `j_!K ⊗ᴸ M ⟶ j_!(K ⊗ᴸ Lj^*M)`. -/
+projection map `j_!K ⊗ᴸ M ⟶ j_!(K ⊗ᴸ Lj^*M)`. -/
 lemma derivedOpenImmersionLowerShriekProjectionIso_inv_baseChange
     (hsq : IsPullback g' j' j g'')
     (K : DerivedCategory (Sheaf U.smallEtaleTopology A))

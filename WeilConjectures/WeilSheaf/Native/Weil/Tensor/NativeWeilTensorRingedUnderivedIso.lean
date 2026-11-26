@@ -151,13 +151,7 @@ private theorem inverse_naturality
       _ _ _ _ nh
 
 set_option linter.unusedSectionVars false in
-/-- The pointwise underived comparisons assemble into a bifunctor isomorphism.
-Source: Stacks 06YS and 06YU (blueprint: lem-sf-native-weil-tensor-ringed-chain-data).
-
-Proof: use the normalized uncurrying equation to identify both composites with the
-same tensor--Hom mate.  Naturality in each variable follows from uniqueness of
-mates under the two adjunctions; this is the underived naturality step needed by
-the total-complex comparison. -/
+/-- The pointwise underived comparisons assemble into a bifunctor isomorphism. -/
 theorem native_weil_tensor_ringed_underived_iso
     (U : NativeWeilRingedTensorUnderivedData b T adj) :
     ∃ e : (Functor.uncurry.obj T ⋙ b.native.functor) ≅

@@ -12,8 +12,18 @@ import all WeilConjectures.SmoothPurity.PurStrictScalar.FiniteScalarCoordinateDa
 /-! # Localization of completed-coefficient scalar balancing
 
 The ordinary comparison is a parameter, so localization preserves precisely the
-comparison fixed by the caller. Source: Stacks Tags 06YY and 099L
-(blueprint: lem-pur-completed-scalar-localization-balancing).
+comparison fixed by the caller.
+
+## Implementation details
+
+Constant extension is exact by finite freeness, and restriction of completed coefficients is
+conservative, so the given ordinary balancing detects exactness of completed extension. Its
+universal left-derived counit is then invertible on all complexes, and localizing the ordinary
+balancing gives the normalized map; uniqueness follows by localization extensionality.
+
+## References
+
+* [Stacks Project, Tags 06YY and 099L]
 -/
 
 @[expose] public noncomputable section
@@ -55,18 +65,7 @@ private theorem exact_of_conservative_balancing
     preservesFiniteColimits_of_reflects_of_preserves E U⟩
 
 /-- Every ordinary completed/constant balancing has a unique localization
-compatible with all complex counits.
-Source: Stacks Tags 06YY and 099L
-(blueprint: lem-pur-completed-scalar-localization-balancing).
-Proof: constant extension is exact by finite freeness. Restriction of completed
-coefficients is conservative, since its underlying abelian sheaf is unchanged.
-The given ordinary balancing therefore detects exactness of completed extension.
-Its universal left-derived counit is invertible on all complexes. Localize the
-ordinary balancing, using these counits and the canonical exact-functor
-factorizations. This yields the displayed equation. Any other normalized map
-agrees after precomposition with the complex localization, hence agrees by
-localization extensionality. The argument includes the zero complex and identity
-coefficient extensions and makes no choice of a new ordinary balancing. -/
+compatible with all complex counits. -/
 theorem completedScalarBalancing_existsUnique (W : Scheme.{u})
     [hHA : (constantRestriction l E W).Additive]
     [hHL : PreservesFiniteLimits (constantRestriction l E W)]

@@ -14,7 +14,17 @@ import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationPureT
 /-! # Transport of integral ambient trace through rational localization
 
 This module isolates the denominator and normalized scalar-extension transport.
-(blueprint: new-sf-rational-scalar-ambient-localization-transport).
+
+## Implementation details
+
+The rationalized trace transport tensors the integral Hom equivalences with the localization
+coefficient ring and uses the full-subcategory Hom equivalence on both sides. Pure tensors are
+independent of their chosen denominators by balancing, and tensor induction extends the
+calculation to all localized morphisms.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.14(2), Remark 6.8.15.
 -/
 
 @[expose] public noncomputable section
@@ -93,9 +103,7 @@ theorem sfConstructibleIntegralScalarExtension_map_smul
       ((sfIntegralConstructible_linear l F W).1 _ _ _ _).symm)
 
 /-- A family of integral Hom equivalences from the actual derived restriction of `K`
-to the completed integral scalar extension, indexed by integral constructible objects.
-Source: Bhatt--Scholze, Proposition 6.8.14(2)
-(blueprint: new-sf-rational-scalar-ambient-localization-transport). -/
+to the completed integral scalar extension, indexed by integral constructible objects. -/
 abbrev rationalScalarAmbientIntegralFamily
     (l : ℕ) [Fact l.Prime] (E F : Type u)
     [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -107,9 +115,7 @@ abbrev rationalScalarAmbientIntegralFamily
       (K ⟶ ((sfConstructibleIntegralScalarExtension 0 l
         (Nat.Prime.ne_zero (Fact.out : l.Prime)) E F ι W).obj M).obj)
 
-/-- Postcomposition naturality of an integral family of Hom equivalences.
-Source: Bhatt--Scholze, Proposition 6.8.14(2)
-(blueprint: new-sf-rational-scalar-ambient-localization-transport). -/
+/-- Postcomposition naturality of an integral family of Hom equivalences. -/
 abbrev rationalScalarAmbientIntegralNaturality
     (l : ℕ) [Fact l.Prime] (E F : Type u)
     [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -124,9 +130,7 @@ abbrev rationalScalarAmbientIntegralNaturality
 
 /-- Inclusion of rational constructible objects into the ambient scalar localization
 (the same expression as `rationalScalarAmbientInclusion` of the item module, which
-cannot be imported here).
-Source: the raw rationalization Hom formula
-(blueprint: new-sf-rational-scalar-ambient-localization-transport). -/
+cannot be imported here). -/
 abbrev rationalScalarAmbientTransportInclusion :=
   ScalarLocalization.fullSubcategoryInclusion (Padic.coefficientExtensionIntegers l E)
     (DerivedCategory (scalarReductionSource l E W)) (sfIntegralConstructible l E W)
@@ -182,18 +186,8 @@ theorem rationalScalarAmbientIntegralFamily_apply_add
   exact key
 
 -- The tensor-induction over localized morphisms elaborates large scalar-localization terms.
-/-- Rationalized trace transport from the integral trace data.
-Source: Bhatt--Scholze, Proposition 6.8.14(2), Remark 6.8.15, and the raw
-scalar-localization Hom formula.
-(blueprint: new-sf-rational-scalar-ambient-localization-transport).
-
-Proof: tensor the integral equivalences with the localization coefficient ring,
-then use the full-subcategory Hom equivalence on both sides. Pure tensors are
-independent of their chosen denominators by balancing, and tensor induction
-extends the calculation to all localized morphisms. The defining equations of
-the normalized rational scalar extension identify the transported map with the
-specified functor. Applying the same calculation to postcomposition proves the
-displayed naturality equation. -/
+/-- Rationalized trace transport: the integral trace data induce natural Hom equivalences
+between the rational scalar-localized categories. -/
 theorem rationalScalarAmbientLocalizationTransport
     (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
     (ι : E →ₐ[ℚ_[l]] F)

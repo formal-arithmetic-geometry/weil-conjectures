@@ -13,9 +13,17 @@ import Mathlib.RingTheory.MvPolynomial.Localization
 /-!
 # Clearing equations and the inverse Jacobian
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Tag 07F9,
-`lemma-delocalize-weak`, the denominator-clearing paragraphs.
-(blueprint: lem-weil-pbc-popescu-weak-clear-core)
+We clear the denominators of the defining equations of a submersive presentation over `R_p` and
+of an inverse-Jacobian certificate, retaining generation of the localized kernel.
+
+## Implementation details
+
+No auxiliary relations are involved. The empty relation family uses the empty determinant and
+products equal to `1`.
+
+## References
+
+* [Stacks, Tag 07F9] (the denominator-clearing paragraphs of the proof)
 -/
 
 @[expose] public section
@@ -27,27 +35,7 @@ namespace Algebra
 open MvPolynomial
 
 /-- Clear the defining equations and inverse-Jacobian certificate, retaining generation
-of the localized kernel. No auxiliary relations are involved.
-Source: Stacks Project, Smoothing Ring Maps, proof of Tag 07F9,
-`lemma-delocalize-weak`, the denominator-clearing paragraphs.
-(blueprint: lem-weil-pbc-popescu-weak-clear-core)
-
-Proof: Identify the polynomial ring over Rₚ with the localization of the polynomial
-ring over R at the constant polynomials from R \ p. For each relation of P, multiply
-by a common denominator of its finitely many coefficients, obtaining fⱼ over R.
-The coefficient extension of fⱼ is a scalar unit times P.relation j. Consequently
-these extensions generate exactly the kernel of evaluation, and fⱼ vanishes in D.
-Partial differentiation commutes with coefficient extension and the scalar factors
-have derivative zero, so the new Jacobian determinant is the old determinant times
-the product of these units. Its evaluation in D is therefore a unit. Surjectivity
-of the presentation evaluation lifts its inverse to a localized polynomial. The
-product of that lift and the determinant differs from 1 by an element of the ideal
-of the extended fⱼ. Express this membership as a finite linear combination. Clear
-all coefficients in the inverse and in this combination with one denominator
-outside p. The resulting polynomial identity holds after localization; multiply
-by one further scalar outside p annihilating its error in the localization kernel.
-This gives C s - h * det ∈ (f), with s outside p. The empty relation family uses
-empty determinant and products equal to 1. -/
+of the localized kernel. -/
 theorem exists_cleared_submersive_presentation_core
     {R : Type u} [CommRing R] (p : Ideal R) [p.IsPrime]
     {D : Type v} [CommRing D] [Algebra (Localization.AtPrime p) D]

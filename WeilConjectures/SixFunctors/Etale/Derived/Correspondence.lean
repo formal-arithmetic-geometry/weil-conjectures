@@ -22,25 +22,22 @@ correspondence* of an endomorphism `h : X ⟶ X` over `s` and a morphism `v : h^
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.CohomologicalCorrespondence`: a cohomological correspondence
-  (blueprint `definition-correspondence--2`).
+- `AlgebraicGeometry.Etale.CohomologicalCorrespondence`: a cohomological correspondence.
 - `AlgebraicGeometry.Etale.CohomologicalCorrespondence.fixedScheme`: its fixed scheme
-  `Fix(c) = C ×_{X ×_s X, c, Δ_X} X` (blueprint `definition-correspondence--3`).
+  `Fix(c) = C ×_{X ×_s X, c, Δ_X} X`.
 - `AlgebraicGeometry.Etale.CohomologicalCorrespondence.graph`: the graph correspondence of
-  `(h, v)` (blueprint `definition-frobenius-correspondences-their-operators--5`), whose fixed scheme
-  is `Fix(h)` (`AlgebraicGeometry.Etale.CohomologicalCorrespondence.fixedScheme_graph`).
+  `(h, v)`, whose fixed scheme is `Fix(h)`
+  (`AlgebraicGeometry.Etale.CohomologicalCorrespondence.fixedScheme_graph`).
 
-## Implementation notes
+## Implementation details
 
 The pullback leg is the derived pullback `D((c₂)^*[ModuleCat Λ])` along `c₂`, which is the derived
 functor `L((c₂)^*[ModuleCat Λ])` since `c₂^*` is exact
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarIsoMapDerivedCategory`). The exceptional leg is the
 exceptional inverse image `R(c₁)^![Λ]`, which needs `c₁` to admit a compactification; this is
-recorded as an instance field. The blueprint's admissibility of `c₁`
-(`theorem-f-shriek-finite-coefficients`, the existence of the adjunction `Rc₁_! ⊣ Rc₁^!` with its
-exchange isomorphisms) is a theorem for separated finite type morphisms, and is not part of the
-data.
--/
+recorded as an instance field. The admissibility of `c₁` (the existence of the adjunction
+`Rc₁_! ⊣ Rc₁^!` with its exchange isomorphisms) is a theorem for separated finite type morphisms,
+and is not part of the data. -/
 
 @[expose] public section
 
@@ -59,9 +56,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 variable {X s : Scheme.{u}} (aX : X ⟶ s)
   (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
 
-/-- Blueprint `definition-correspondence--2`: Cohomological correspondence.
-
-A cohomological correspondence on an object `K` of `D(X_ét, Λ)`, for `X` over `s` via `aX`: a
+/-- A cohomological correspondence on an object `K` of `D(X_ét, Λ)`, for `X` over `s` via `aX`: a
 separated scheme `C` of finite type over `s` with morphisms `c = (c₁, c₂) : C ⟶ X ×_s X`, that
 is `c₁ c₂ : C ⟶ X` with `c₁ ≫ aX = c₂ ≫ aX`, and a morphism `u : c₂^* K ⟶ Rc₁^! K` in
 `D(C_ét, Λ)`. The leg `c₂` is the pullback leg and `c₁` the exceptional leg. -/
@@ -91,8 +86,7 @@ attribute [instance] hasCompactification
 
 variable {Λ aX K} (c : CohomologicalCorrespondence Λ aX K)
 
-/-- The fixed scheme `Fix(c) = C ×_{X ×_s X, c, Δ_X} X` of a cohomological correspondence
-(blueprint `definition-correspondence--3`). -/
+/-- The fixed scheme `Fix(c) = C ×_{X ×_s X, c, Δ_X} X` of a cohomological correspondence. -/
 noncomputable abbrev fixedScheme : Scheme.{u} :=
   Scheme.fixedScheme aX c.c₁ c.c₂ c.w
 
@@ -100,9 +94,7 @@ section Graph
 
 variable (Λ)
 
-/-- Blueprint `definition-frobenius-correspondences-their-operators--5`: Graph correspondence.
-
-The graph correspondence of a separated finite type endomorphism `h : X ⟶ X` over `s` and a
+/-- The graph correspondence of a separated finite type endomorphism `h : X ⟶ X` over `s` and a
 morphism `v : h^* K ⟶ K`: `C = X`, `c₁ = 𝟙 X`, `c₂ = h` and `u = v`, composed with the
 identification `R(𝟙 X)^! ≅ 𝟭` (`AlgebraicGeometry.Etale.rightDerivedUpperShriekIdIso`). Its
 fixed scheme is `Fix(h)` (`fixedScheme_graph`). -/
@@ -136,8 +128,7 @@ lemma graph_c₂ (h : X ⟶ X) (hh : h ≫ aX = aX) (v : (D((h)^*[ModuleCat.{u +
   rfl
 
 /-- The fixed scheme of the graph correspondence of `h` is the fixed scheme `Fix(h)` of `h`,
-the scheme-theoretic equalizer of `𝟙 X` and `h` (blueprint
-`definition-frobenius-correspondences-their-operators--5`). -/
+the scheme-theoretic equalizer of `𝟙 X` and `h`. -/
 lemma fixedScheme_graph (h : X ⟶ X) (hh : h ≫ aX = aX)
     (v : (D((h)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) :
     (graph Λ h hh v).fixedScheme = Hom.fixedScheme aX h hh :=

@@ -12,8 +12,9 @@ import all Mathlib.Logic.Small.Defs
 
 /-! # Forward transport of the canonical pullback/tensor inclusion square
 
-Source: thm-sf-pf-field.proof.md, Compatibility.
-(blueprint: lem-sf-common-stage-pullback-tensor-normalized-forward).
+We show that normalized pullback and tensor data preserve the canonical forward inclusion
+square. The proof applies the canonical inverse inclusion square and cancels the pullback
+comparisons and tensorators by functoriality; no geometric hypothesis on the scheme map is used.
 -/
 
 @[expose] public noncomputable section
@@ -152,17 +153,7 @@ private theorem normalized_forward_generic
   apply forward_of_inverse F₀ F'₀ c d e TA₀ TB₀ TA'₀ TB'₀ tA₀ tB₀ M N mu₀ mu'₀
   simpa only [hei] using h
 
-/-- Normalized pullback and tensor data preserve the canonical forward inclusion square.
-
-Source: thm-sf-pf-field.proof.md, Compatibility.
-(blueprint: lem-sf-common-stage-pullback-tensor-normalized-forward).
-
-Proof: substitute the given functor equalities and heterogeneous comparison
-normalizations. The pullback comparison has identity components, so its inverse
-is the prescribed object-equality morphism. Apply the canonical inverse inclusion
-square. Postcompose by the tensor of inverse pullback comparisons and the inverse
-target tensorator, then cancel the isomorphisms by functoriality to obtain the
-forward equation. No geometric hypothesis on the scheme map is used. -/
+/-- Normalized pullback and tensor data preserve the canonical forward inclusion square. -/
 theorem commonStagePullbackTensor_forward_of_normalizations
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] {X Y : Scheme.{u}} (f : X ⟶ Y)

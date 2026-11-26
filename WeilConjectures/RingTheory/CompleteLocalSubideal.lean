@@ -10,7 +10,18 @@ public import Mathlib.RingTheory.AdicCompletion.Noetherian
 
 /-! # Completeness for subideals of the maximal ideal
 
-Source: Stacks Project, Tags 00IP and 0317.
+A complete Noetherian local ring is complete for every ideal contained in its maximal ideal.
+
+## Implementation details
+
+An `I`-adic Cauchy sequence is adic Cauchy for the maximal ideal, hence has a limit `L`. The
+Krull intersection theorem in the finite modules `R ⧸ I^n` shows that the sequence converges
+`I`-adically to `L`; Krull intersection for `I` gives separatedness.
+
+## References
+
+* [Stacks, Tag 00IP] (Krull intersection)
+* [Stacks, Tag 0317] (completeness)
 -/
 
 @[expose] public section
@@ -18,18 +29,7 @@ Source: Stacks Project, Tags 00IP and 0317.
 universe u
 
 /-- A complete Noetherian local ring is complete for every subideal of its
-maximal ideal.
-
-Source: Stacks Project, Tags 00IP (Krull intersection) and 0317 (completeness).
-(blueprint: lem-sbc-complete-local-subideal)
-
-Proof: An I-adic Cauchy sequence is maximal-ideal-adic Cauchy, hence has a limit L.
-For each n, pass to the finite module R/I^n. For every k choose t at least n and k.
-The difference of the n-th and t-th terms lies in I^n; the difference of the t-th
-term and L lies in m^k. Thus the image of the difference of the n-th term and L
-lies in every m^k(R/I^n). Krull intersection in this finite module makes that image
-zero, giving I-adic convergence. Krull intersection for I gives separatedness.
-The argument works for I=0 and nilpotent ideals, without cancellation. -/
+maximal ideal. -/
 theorem IsAdicComplete.of_le_maximalIdeal
     (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     [IsAdicComplete (IsLocalRing.maximalIdeal R) R]

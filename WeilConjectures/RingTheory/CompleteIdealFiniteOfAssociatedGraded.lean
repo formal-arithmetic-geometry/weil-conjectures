@@ -14,8 +14,19 @@ import WeilConjectures.RingTheory.AssociatedGradedIdealApproximation
 /-!
 # Lifting finite generation from an associated graded ring
 
-Source: Stacks Project, Algebra, Lemma 05GH, proof, second and third paragraphs
-(blueprint: lem-weil-pbc-complete-ideal-finite-associated-graded).
+Every ideal of a ring that is complete with respect to an ideal `J` and whose associated graded
+ring `gr_J(A)` is Noetherian is finitely generated.
+
+## Implementation details
+
+For an ideal `K`, the initial forms of elements of `K` form a homogeneous ideal of `gr_J(A)`,
+which has finitely many homogeneous generators. Lifting them to `h j ∈ K`, every `x ∈ K` is
+written as `x = ∑ j, A j * h j` by successive approximation: the coefficient partial sums
+converge by completeness, and separatedness shows the remainder is zero.
+
+## References
+
+* [Stacks, Tag 05GH], proof, second and third paragraphs
 -/
 
 @[expose] public section
@@ -26,28 +37,7 @@ open scoped BigOperators
 
 namespace Ideal
 
-/-- Every ideal of an adically complete ring with Noetherian associated graded is finite.
-Source: Stacks Project, Algebra, Lemma 05GH, proof, second and third paragraphs
-(blueprint: lem-weil-pbc-complete-ideal-finite-associated-graded).
-
-Proof: For an ideal `K`, the images of `K ∩ J^n` in `J^n/J^(n+1)` form a homogeneous
-ideal of `gr_J(A)`. Multiplication preserves it because `K` is an ideal. Noetherianity
-provides finitely many generators; replace them by all their homogeneous components,
-which still lie in this ideal. Lift the resulting homogeneous generators of degrees
-`d j` to elements `h j ∈ K ∩ J^(d j)`. For `x ∈ K ∩ J^n`, express its degree-`n`
-initial form in these generators and take homogeneous components of the coefficients.
-Lift those of degree `n - d j` to `a j ∈ J^(n - d j)`, setting `a j = 0` for `n < d j`.
-Then `x - ∑ j, a j * h j ∈ K ∩ J^(n+1)`.
-
-Starting with `x ∈ K`, iterate this operation on the remainders. This gives
-`x = ∑ j, (∑ n ≤ N, a j n) * h j + x_(N+1)`, with `x_(N+1) ∈ J^(N+1)` and
-`a j n ∈ J^(n - d j)` for `n ≥ d j`. The coefficient partial sums stabilize modulo
-each `J^k` once `N ≥ k + d j`. Their compatible residue classes therefore have unique
-lifts `A j` by adic completeness. For each `k`, choose `N ≥ k + max j (d j)`;
-then the displayed formula gives `x - ∑ j, A j * h j ∈ J^k`. Separatedness, which is
-part of completeness, makes this difference zero. Thus the finite family `h` spans
-`K`; the reverse inclusion holds since each `h j` belongs to `K`. An empty family
-causes no exception: all initial forms vanish, and separatedness gives `K = 0`. -/
+/-- Every ideal of an adically complete ring with Noetherian associated graded is finite. -/
 theorem fg_of_isAdicComplete_of_associatedGraded {A : Type u} [CommRing A]
     (J K : Ideal A) [IsAdicComplete J A] [IsNoetherianRing (associatedGraded J)] :
     K.FG := by

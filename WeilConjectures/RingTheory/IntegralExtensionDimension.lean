@@ -17,19 +17,15 @@ namespace RingHom
 
 /-! # Dimension and maximal ideals under integral extensions
 
-Source: Stacks Project, Algebra, Lemma Tag 00OJ (lemma-integral-dim-up),
-with Lemmas Tags 00GT and 00OI (blueprint: proposition-proper-direct-image-constructible-complexes).
+## References
+
+* [Stacks, Tag 00OJ]
+* [Stacks, Tag 00GT]
+* [Stacks, Tag 00OI]
 -/
 
 /-- An integral ring map does not increase Krull dimension, and maximal ideals contract
- to maximal ideals. Source: Stacks Project, Algebra, Lemma Tag 00OJ
- (blueprint: proposition-proper-direct-image-constructible-complexes).
-
-Proof: For a strict chain of prime ideals in the target, contract each prime along the
-ring map. Integrality and incomparability make the contracted inclusions strict, so the
-chain length is bounded by the Krull dimension of the source. For a maximal ideal in the
-target, the integral-extension maximal-contraction theorem makes its contraction maximal.
--/
+ to maximal ideals. -/
 theorem IsIntegral.ringKrullDim_le_and_isMaximal_comap
     {R : Type u} {S : Type v} [CommRing R] [CommRing S]
     (f : R →+* S) (hf : f.IsIntegral) :

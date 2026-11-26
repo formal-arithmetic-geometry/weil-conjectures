@@ -25,17 +25,15 @@ universe u w'
 namespace TopCat
 
 /-! # Constant sheaves are acyclic on irreducible Noetherian spaces
-Source: literature/stacks-project/cohomology.tex, Lemma 02UW
-(blueprint: lem-sc-irreducible-noetherian-constant-acyclic) -/
 
-/-- The constant abelian sheaf on an irreducible Noetherian space has no higher cohomology.
-Source: literature/stacks-project/cohomology.tex, Lemma 02UW
-(blueprint: lem-sc-irreducible-noetherian-constant-acyclic)
-Proof:
-1. Every nonempty open is irreducible; `irreducible_constant_sections` identifies constant
-   sections and restrictions, while the empty open has the zero group. Hence the sheaf is flasque.
-2. Apply flasque acyclicity on the topological opens site.
+The constant sheaf is flasque on an irreducible space, hence acyclic.
+
+## References
+
+* [Stacks Project, Tag 02UW](https://stacks.math.columbia.edu/tag/02UW)
 -/
+
+/-- The constant abelian sheaf on an irreducible Noetherian space has no higher cohomology. -/
 theorem irreducible_noetherian_constant_acyclic
     (X : TopCat.{u}) [IrreducibleSpace X] [NoetherianSpace X]
     [HasSheafify (Opens.grothendieckTopology X) AddCommGrpCat.{u}]

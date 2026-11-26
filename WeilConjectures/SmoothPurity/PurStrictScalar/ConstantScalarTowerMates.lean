@@ -10,9 +10,18 @@ import all WeilConjectures.CategoryTheory.ExactDerivedSquare.DerivedExactSquareC
 
 /-! # Finite scalar mates on strict compact-support towers
 
-Source: Stacks Project, Tags 07A6, 0B56, 0940 and 0E8I; auxiliary extracted from
-compact-support coefficient comparison, Steps 3--4.
-(blueprint: def-pur-constant-scalar-tower-mates).
+An auxiliary extracted from the compact-support coefficient comparison, Steps 3--4.
+
+## Implementation details
+
+Finite free tensor is an exact left adjoint of restriction, hence restriction preserves
+K-injectives. The ordinary identity-on-sections restriction square is derived on simultaneous
+tower resolutions, and the universal property of the derived composite determines the derived
+comparison `properRestriction` uniquely.
+
+## References
+
+* [Stacks Project, Tags 03DA, 07A6, 0B56, 0940, 0D6E and 0E8I]
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +36,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGe
 open AlgebraicGeometry.ProEtale.StrictTower
 namespace WeilConjectures.PurStrictScalar
 
-/-- The canonical cochain form of the right-derived unit.
-Source: Stacks 0D6E (blueprint: def-pur-constant-scalar-tower-mates). -/
+/-- The canonical cochain form of the right-derived unit. -/
 def derivedUnit {A : Type a} {B : Type b} [Category.{va} A] [Category.{vb} B]
     [Abelian A] [Abelian B]
     [HasDerivedCategory.{wa} A] [HasDerivedCategory.{wb} B]
@@ -41,8 +49,7 @@ def derivedUnit {A : Type a} {B : Type b} [Category.{va} A] [Category.{vb} B]
     H.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso A).hom.app K)
 
 /-- The whole-cochain unit normalization of a square with exact vertical functors.
-This is an equation on all complexes, before any finite diagram evaluation.
-Source: Stacks 0D6E (blueprint: def-pur-constant-scalar-tower-mates). -/
+This is an equation on all complexes, before any finite diagram evaluation. -/
 def unitCompatible
     {A : Type a} {B : Type b} {C : Type c} {D : Type d}
     [Category.{va} A] [Category.{vb} B] [Category.{vc} C] [Category.{vd} D]
@@ -102,12 +109,7 @@ variable (l : ℕ) [Fact l.Prime]
   (i : E →ₐ[ℚ_[l]] F)
 
 /-- The ordinary proper restriction comparison is uniquely identity on all
-underlying tower sections, including transitions.
-Source: Stacks 03DA, 0D6E (blueprint: def-pur-constant-scalar-tower-mates).
-Proof: the recorded ordinary restriction/direct-image square is identity on
-sections of N over the same base-change object. Postcompose this square on
-strict diagrams. The coefficient square identifies the scalar actions. Identity
-is natural, invertible, and uniquely determines every component sheaf map. -/
+underlying tower sections, including transitions. -/
 theorem properRestrictionOrdinary_existsUnique {X Y : Scheme.{u}} (g : X ⟶ Y) :
     ∃! d : towerDirectImage (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) g ⋙
           restrict l E F i Y ≅
@@ -163,8 +165,7 @@ theorem properRestrictionOrdinary_existsUnique {X Y : Scheme.{u}} (g : X ⟶ Y) 
   exact (congrFun (eq_of_heq (hd' N (unop n) V)) x).trans
     (congrFun (eq_of_heq (hd N (unop n) V)) x).symm
 
-/-- The uniquely specified ordinary restriction/proper-image square on strict towers.
-Source: Stacks 0D6E (blueprint: def-pur-constant-scalar-tower-mates). -/
+/-- The uniquely specified ordinary restriction/proper-image square on strict towers. -/
 def properRestrictionOrdinary {X Y : Scheme.{u}} (g : X ⟶ Y) :
     towerDirectImage (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) g ⋙
         restrict l E F i Y ≅
@@ -173,13 +174,7 @@ def properRestrictionOrdinary {X Y : Scheme.{u}} (g : X ⟶ Y) :
   (properRestrictionOrdinary_existsUnique l E F i g).choose
 
 /-- Restriction/direct image has a unique comparison with the canonical whole-complex
-resolution units and the identity-on-sections ordinary square.
-Source: Stacks 0D6E (blueprint: def-pur-constant-scalar-tower-mates).
-Proof: finite free tensor is an exact left adjoint of restriction, hence restriction
-preserves K-injectives. Derive the ordinary identity square on simultaneous tower
-resolutions. The canonical derived-composite comparisons give an isomorphism
-satisfying the displayed equation. The universal property of the derived composite
-determines it uniquely from this equation on every complex. -/
+resolution units and the identity-on-sections ordinary square. -/
 theorem properRestriction_existsUnique {X Y : Scheme.{u}} (g : X ⟶ Y) :
     ∃! d : R (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) g ⋙ U l E F i Y ≅
         U l E F i X ⋙ R (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) g,
@@ -201,23 +196,20 @@ theorem properRestriction_existsUnique {X Y : Scheme.{u}} (g : X ⟶ Y) :
     (properRestrictionOrdinary l E F i g)
 
 /-- The proper restriction comparison determined by the actual ordinary square and
-canonical whole-cochain units, before finite evaluation.
-Source: Stacks 0D6E (blueprint: def-pur-constant-scalar-tower-mates). -/
+canonical whole-cochain units, before finite evaluation. -/
 def properRestriction {X Y : Scheme.{u}} (g : X ⟶ Y) :
     R (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) g ⋙ U l E F i Y ≅
       U l E F i X ⋙ R (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) g :=
   (properRestriction_existsUnique l E F i g).choose
 
-/-- The canonical proper scalar mate, with its B action retained.
-Source: Stacks 07A6, 0B56 (blueprint: def-pur-constant-scalar-tower-mates). -/
+/-- The canonical proper scalar mate, with its B action retained. -/
 def proper {X Y : Scheme.{u}} (g : X ⟶ Y) :
     R (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) g ⋙ T l E F i Y ⟶
       T l E F i X ⋙ R (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) g :=
   ((mateEquiv (scalarAdj l E F i X) (scalarAdj l E F i Y)).symm
     (TwoSquare.mk _ _ _ _ (properRestriction l E F i g).inv))
 
-/-- The open restriction square on strict towers is the actual ordinary open mate.
-Source: Stacks 0E8I (blueprint: def-pur-constant-scalar-tower-mates). -/
+/-- The open restriction square on strict towers is the actual ordinary open mate. -/
 def openRestrictionOrdinary {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :
     restrict l E F i X ⋙
         towerJ (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) j ≅
@@ -226,15 +218,13 @@ def openRestrictionOrdinary {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j]
   (Functor.whiskeringRight ℕᵒᵖ _ _).mapIso
     (asIso (PurCompactSupport.openRestrictionMap (change l E F i) j))
 
-/-- Exact localization fixes the open square on the entire diagram category.
-Source: Stacks 0E8I (blueprint: def-pur-constant-scalar-tower-mates). -/
+/-- Exact localization fixes the open square on the entire diagram category. -/
 def openRestriction {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :
     U l E F i X ⋙ J (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) j ≅
       J (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) j ⋙ U l E F i Y :=
   Functor.mapDerivedCategorySquareIso (openRestrictionOrdinary l E F i j)
 
-/-- Open scalar tensor balancing is the scalar-adjunction mate of the open square.
-Source: Stacks 0E8I, 07A6 (blueprint: def-pur-constant-scalar-tower-mates). -/
+/-- Open scalar tensor balancing is the scalar-adjunction mate of the open square. -/
 def openTensor {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :
     J (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) j ⋙ T l E F i Y ⟶
       T l E F i X ⋙ J (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) j :=
@@ -242,14 +232,12 @@ def openTensor {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :
     (TwoSquare.mk _ _ _ _ (openRestriction l E F i j).hom))
 
 /-- The proper/open functor on constant integral towers, deriving the proper part
-separately after exact open extension.
-Source: Stacks 0940 (blueprint: def-pur-constant-scalar-tower-mates). -/
+separately after exact open extension. -/
 def image {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :=
   J (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) c.i ⋙
     R (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) c.g
 
-/-- The ordered proper mate followed by proper image of open tensor balancing.
-Source: Stacks 07A6, 0E8I (blueprint: def-pur-constant-scalar-tower-mates). -/
+/-- The ordered proper mate followed by proper image of open tensor balancing. -/
 def comparison {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     image l E c ⋙ T l E F i Y ⟶ T l E F i X ⋙ image l F c :=
   Functor.whiskerLeft

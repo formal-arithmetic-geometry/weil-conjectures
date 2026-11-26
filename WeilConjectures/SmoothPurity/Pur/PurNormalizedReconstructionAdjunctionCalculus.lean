@@ -22,14 +22,24 @@ import WeilConjectures.CategoryTheory.AdjointEquivalenceConjugation.AdjointEquiv
 /-!
 # Normalized reconstruction and its adjunction calculus
 
-Source: current Weil blueprint, chap-Smooth-purity,
-prop-pur-adic-reconstruction-trace-coherence, sole proof paragraph
-(blueprint: lem-pur-normalized-reconstruction-adjunction-calculus).
-
 All categories are unbounded. The system category, reduction, total limit and their
 unit/counit are the recorded evaluation calculus, with its actual projection normalization.
 The property Q selects any replete full subcategory; Q = top gives the entire normalized
 category. No cohomological, constructibility or Tor-amplitude restriction is imposed.
+
+## Implementation details
+
+`purNormalizedReconstructionOfScheme` realizes the normalized evaluated tower by its
+two-coordinate Roos triangle. DVR effectivity makes its total limit complete and its finite
+counit maps invertible; conservativity of evaluations inverts the actual system counit. For a
+complete object, its K-flat quotient tower is compared with the reduction tower, and the
+adjunction triangle makes the actual unit invertible. The argument is independent of the
+characteristic of the scheme: the auxiliary finite field datum only requires a prime different
+from `l`.
+
+In `purNormalizedReconstruction`, K-flat scalar extension shows that reduction is normalized;
+joint conservativity of derived evaluation makes the counit invertible, and the triangle
+identity together with derived Nakayama makes the unit invertible. No boundedness is used.
 -/
 
 @[expose] public noncomputable section
@@ -107,18 +117,7 @@ private theorem reconstructionFiniteTransition
   rw [ha, ha] at h
   exact h
 
-/-- Normalized reconstruction over any scheme, using the actual reduction adjunction.
-Source: the normalized DVR/Roos reconstruction argument in the sole proof paragraph of
-prop-pur-adic-reconstruction-trace-coherence
-(blueprint: lem-pod-unrestricted-normalized-reconstruction).
-
-Proof: realize the normalized evaluated tower by its two-coordinate Roos triangle.
-DVR effectivity makes its total limit complete and its finite counit maps invertible;
-conservativity of evaluations inverts the actual system counit. For a complete object,
-compare its K-flat quotient tower with the reduction tower, retaining each transition.
-Transport its Roos triangle and use uniqueness of derived limits. The adjunction triangle
-then makes its actual unit invertible. The argument is independent of the characteristic
-of the scheme: the auxiliary finite field datum only requires a prime different from l. -/
+/-- Normalized reconstruction over any scheme, using the actual reduction adjunction. -/
 theorem purNormalizedReconstructionOfScheme
     (S : CoefficientDerivedSystemCalculus l E W) :
     (∀ (N : coefficientSequenceDerived l E W), IsNormalizedCoefficientSequence l E W N →
@@ -258,18 +257,7 @@ theorem purNormalizedReconstructionOfScheme
   exact IsIso.of_isIso_comp_right _
     ((S.reduction ⋙ coefficientSequenceLimit l E W).map φ.hom)
 
-/-- Reconstruction uses the actual evaluation-calculus adjunction.
-Source: the sole proof paragraph of prop-pur-adic-reconstruction-trace-coherence
-(blueprint: lem-pur-normalized-reconstruction-adjunction-calculus).
-Proof: (1) K-flat scalar extension shows reduction is normalized, as recorded in S.
-(2) Apply lemma-sp-tower-adjunction-foundation--2 to the evaluated normalized tower.
-The resulting scalar-extension comparisons are precisely S.counit_projection;
-joint conservativity of derived evaluation makes the actual counit invertible.
-The same effectivity theorem gives completeness of its total limit.
-(3) The triangle identity makes reduction of the unit invertible. Its first evaluation
-is reduction modulo the uniformizer, by S.unit_projection. Apply
-lemma-reduction-derived-nakayama between the complete source and complete target.
-Naturality is already that of S.adjunction. No boundedness is used. -/
+/-- Reconstruction uses the actual evaluation-calculus adjunction. -/
 theorem purNormalizedReconstruction
     (_hl : IsUnit (l : Γ(W, ⊤))) (S : CoefficientDerivedSystemCalculus l E W) :
     (∀ (N : coefficientSequenceDerived l E W), IsNormalizedCoefficientSequence l E W N →
@@ -288,36 +276,27 @@ variable {C₁ : Type u₁} [Category.{v₁} C₁] {N₁ : Type u₂} [Category.
   {C₂ : Type u₃} [Category.{v₃} C₂] {N₂ : Type u₄} [Category.{v₄} N₂]
   {C₃ : Type u₅} [Category.{v₅} C₃] {N₃ : Type u₆} [Category.{v₆} N₃]
 
-/-- Realization L_Y F R_X. Source: the same proof paragraph
-(blueprint: lem-pur-normalized-reconstruction-adjunction-calculus). -/
+/-- Realization L_Y F R_X. -/
 def realized (eX : C₁ ≌ N₁) (eY : C₂ ≌ N₂) (F : N₁ ⥤ N₂) : C₁ ⥤ C₂ :=
   eX.functor ⋙ F ⋙ eY.inverse
 
-/-- The transported adjunction is the composite of the three specified adjunctions.
-Source: the same proof paragraph
-(blueprint: lem-pur-normalized-reconstruction-adjunction-calculus). -/
+/-- The transported adjunction is the composite of the three specified adjunctions. -/
 def realizedAdjunction (eX : C₁ ≌ N₁) (eY : C₂ ≌ N₂)
     {F : N₁ ⥤ N₂} {G : N₂ ⥤ N₁} (adj : F ⊣ G) :
     realized eX eY F ⊣ realized eY eX G :=
   (eX.toAdjunction.comp adj).comp eY.symm.toAdjunction
 
-/-- The natural identification Fbar L_X = L_Y F, induced by the actual system counit.
-Source: the same proof paragraph
-(blueprint: lem-pur-normalized-reconstruction-adjunction-calculus). -/
+/-- The natural identification Fbar L_X = L_Y F, induced by the actual system counit. -/
 def realizationComparison (eX : C₁ ≌ N₁) (eY : C₂ ≌ N₂) (F : N₁ ⥤ N₂) :
     eX.inverse ⋙ realized eX eY F ≅ F ⋙ eY.inverse :=
   isoWhiskerRight eX.counitIso (F ⋙ eY.inverse) ≪≫ Functor.leftUnitor _
 
-/-- Realization of a transformation, by functorial whiskering.
-Source: the same proof paragraph
-(blueprint: lem-pur-normalized-reconstruction-adjunction-calculus). -/
+/-- Realization of a transformation, by functorial whiskering. -/
 def realizedTransformation (eX : C₁ ≌ N₁) (eY : C₂ ≌ N₂)
     {F F' : N₁ ⥤ N₂} (α : F ⟶ F') : realized eX eY F ⟶ realized eX eY F' :=
   Functor.whiskerLeft eX.functor (Functor.whiskerRight α eY.inverse)
 
-/-- The natural composition comparison inserts e_Y between R_Y and L_Y.
-Source: the same proof paragraph
-(blueprint: lem-pur-normalized-reconstruction-adjunction-calculus). -/
+/-- The natural composition comparison inserts e_Y between R_Y and L_Y. -/
 def compositionComparison (eX : C₁ ≌ N₁) (eY : C₂ ≌ N₂) (eZ : C₃ ≌ N₃)
     (F : N₁ ⥤ N₂) (H : N₂ ⥤ N₃) :
     realized eX eY F ⋙ realized eY eZ H ≅ realized eX eZ (F ⋙ H) :=
@@ -325,9 +304,7 @@ def compositionComparison (eX : C₁ ≌ N₁) (eY : C₂ ≌ N₂) (eZ : C₃ �
     (isoWhiskerRight eY.counitIso (H ⋙ eZ.inverse) ≪≫ Functor.leftUnitor _)
 
 /-- The explicit transported counit, transpose and composition formulas.
-These are propositions about the preceding constructions, with no extra choice of maps.
-Source: the same proof paragraph
-(blueprint: lem-pur-normalized-reconstruction-adjunction-calculus). -/
+These are propositions about the preceding constructions, with no extra choice of maps. -/
 structure Calculus (eX : C₁ ≌ N₁) (eY : C₂ ≌ N₂) (eZ : C₃ ≌ N₃) : Prop where
   /-- The counit is u inverse after L epsilon after L F(e). -/
   counit : ∀ (F : N₁ ⥤ N₂) (G : N₂ ⥤ N₁) (adj : F ⊣ G) (K : C₂),

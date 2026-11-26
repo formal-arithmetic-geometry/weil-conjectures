@@ -21,14 +21,8 @@ On a Noetherian space every locally closed subset is constructible
 (`IsLocallyClosed.isConstructible_of_noetherianSpace`), and
 `Topology.Stratification.ofNoetherianSpace` builds a stratification from locally closed strata
 alone.
--/
 
-@[expose] public section
-
-namespace Topology
-
-/-- A *stratification* of a topological space `X`: a finite partition of `X` into pairwise
-disjoint locally closed *constructible* subsets — the *strata* — covering `X`.
+## Implementation details
 
 This is the notion of [Stacks 09XZ] (a partition into locally closed subsets) with two
 additional requirements, neither of which is part of loc. cit.: the partition is finite, and
@@ -49,9 +43,15 @@ schemes: preimages along arbitrary morphisms of schemes
 (`AlgebraicGeometry.Scheme.Hom.isConstructible_preimage`), images along open embeddings with
 retrocompact range and along closed embeddings with retrocompact complement
 (`Topology.IsConstructible.image_of_isOpenEmbedding`,
-`Topology.IsConstructible.image_of_isClosedEmbedding`), and finite intersections. On a
-Noetherian space every locally closed subset is constructible, see
-`Topology.Stratification.ofNoetherianSpace`. (blueprint: `definition-constructible-sheaves--2`) -/
+`Topology.IsConstructible.image_of_isClosedEmbedding`), and finite intersections.
+-/
+
+@[expose] public section
+
+namespace Topology
+
+/-- A *stratification* of a topological space `X`: a finite partition of `X` into pairwise
+disjoint locally closed *constructible* subsets — the *strata* — covering `X`. -/
 @[stacks 09XZ]
 structure Stratification (X : Type*) [TopologicalSpace X] where
   /-- The number of strata. -/

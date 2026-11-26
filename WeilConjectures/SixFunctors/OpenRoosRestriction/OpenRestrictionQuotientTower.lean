@@ -12,7 +12,12 @@ import all WeilConjectures.SmoothPurity.IntegralOnSlice.IntegralDerivedOperation
 
 /-! # The augmented quotient tower under normalized open restriction
 
-Source: Stacks Project, Tags 03EL, 07A4 and 099N (5).
+We show that normalized open restriction commutes with the ordinary strict quotient tower and its
+augmentation.
+
+## References
+
+* Stacks Project, Tags 03EL, 07A4 and 099N (5)
 -/
 
 @[expose] public noncomputable section
@@ -215,27 +220,7 @@ private def towerComparison :
     funext n
     exact (levelComparison l E e o n.unop).hom.naturality a)
 
-/-- Restriction commutes with the ordinary strict quotient tower and its augmentation.
-Source: Stacks Project, sites-modules.tex, Tag 03EL; sites-cohomology.tex, Tag 07A4;
-proetale.tex, Tag 099N (5).
-(blueprint: lem-sf-open-restriction-quotient-tower).
-
-Proof: the normalized quotient-unit map is a cokernel of multiplication by
-uniformizer^(n+1), by the proved ordinary quotient-module calculation. The completed
-coefficient map preserves the uniformizer, as can be checked against its finite
-projections and their constant-section equations. The supplied module equivalence
-therefore transports the uniformizer endomorphism, including all its powers.
-Restriction preserves finite colimits, so its image of the quotient unit is another
-cokernel of the same endomorphism. The unique comparison of these cokernels gives
-the natural module isomorphism carrying quotient unit to quotient unit.
-Apply it termwise to complexes. The augmentation at every degree is precisely the
-quotient unit. Precompose the desired consecutive transition square with the image
-of the augmentation at n+1. It is an epimorphism, since it is a cokernel. Both
-composites become the augmentation at n by naturality of the tower augmentation
-and the comparison's unit equation. Cancel this epimorphism. The consecutive
-squares assemble to one natural isomorphism of strict towers, retaining the
-augmentation equations. This uses no resolutions, Roos complexes or derived
-descent, and works for zero modules, the empty open, and n=0 (exponent one). -/
+/-- Restriction commutes with the ordinary strict quotient tower and its augmentation. -/
 theorem quotientTower :
     ∃ τ : IntegralOnSlice.tower l E W none ⋙
         (Functor.whiskeringRight ℕᵒᵖ _ _).obj

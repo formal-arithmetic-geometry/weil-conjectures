@@ -10,7 +10,12 @@ import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.SmoothPurity.IntegralSystemRealization.IntegralTensorShiftProperties
 import WeilConjectures.CategoryTheory.NatTransFromResolvingClass
 
-/-! # Unique normalized shift in the signed strict-system second slot -/
+/-! # Unique normalized shift in the signed strict-system second slot
+
+## References
+
+* Stacks Project, Tags 011G, 012Z, 014E, 06YU and 0941.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -515,21 +520,7 @@ private theorem normalizedExt (W : Scheme.{u}) (r : ℤ)
       (calculus l E W).systemClosed.tensor).map e.hom)).1
   rw [σ.hom.naturality, τ.hom.naturality, hc]
 
-/-- Existence and uniqueness for the signed strict-system second slot.
-Source: Stacks 011G, 012Z, 014E, 06YU, 0941; blueprint purity transport, Step 2
-(blueprint: lem-pur-system-tensor-right-shift-unique).
-
-Proof: Reindex total tensor by (i,j) ↦ (i,j+r), multiplying its (i,j)
-summand by (-1)^(ri). The first differential changes i by one and hence changes
-this coefficient by (-1)^r; the second preserves it. These are exactly the two
-signs needed for a cochain map to the shifted total. Reverse reindexing gives
-its inverse. The maps commute with restrictions and coefficient transitions
-and are natural in both inputs. Shifts preserve K-flatness; descend through
-the recorded K-flat tensor models. This gives the stated property for every
-K-flat pair. For uniqueness the generator formula determines the cochain maps,
-the model equation determines the derived components on K-flat representatives,
-and naturality along resolving isomorphisms determines all other components.
-Extensionality of natural isomorphisms finishes. -/
+/-- Existence and uniqueness for the signed strict-system second slot. -/
 theorem systemTensorRightShift_existsUnique (W : Scheme.{u}) (r : ℤ) :
     ∃! σ : completedTensorShiftSecond (System l E W) r ⋙
         (calculus l E W).systemClosed.tensor ≅

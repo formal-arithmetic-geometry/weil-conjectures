@@ -13,8 +13,23 @@ import WeilConjectures.SmoothPurity.Qcqs.QcqsCompactSupportStrictReductionGamma
 
 /-! # Strict proper/open comparison before total inverse limit
 
-Source: Bhatt--Scholze, Definition 6.7.6 and Lemma 6.7.7; Stacks 0941, 0F7J
-(blueprint: lem-qcqs-compact-support-strict-reduction-comparison).
+## Implementation details
+
+Choose simultaneous coefficient reduction calculi on `X` and `Y`. The open scalar-adjunction
+mate is tensor extension on strict flat-term K-flat complexes, and its quotient maps commute
+with each transition. Separately derived proper image in the varying-ring diagram category and
+its scalar mate give `beta` on the entire strict derived system, with no constructibility
+hypothesis; its evaluation is the ordered proper/open scalar mate. For `gamma`, restrict this
+native system to completed scalars and compare with the chosen coherent tower of
+`exists_compactSupportReductionTower`; normalization of the derived limit projections identifies
+each projection with the chosen Roos projection, whose finite scalar adjunct is
+`sfCompactSupportFiniteReductionIso`. All comparisons concern whole strict diagrams before the
+limit; no equality of maps is inferred merely from equality of finite evaluations.
+
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 6.7.6 and Lemma 6.7.7]
+* [Stacks Project, Tags 0941 and 0F7J]
 -/
 
 @[expose] public noncomputable section
@@ -37,33 +52,7 @@ variable (l : ℕ) [Fact l.Prime]
 
 /-- The strict proper/open reduction comparison and the independently recorded limit
 identification, retaining their actual projection coordinates. No morphism from the
-ambient proper/open value to the recorded integral value is asserted here.
-
-Source: Bhatt--Scholze Definition 6.7.6 and Lemma 6.7.7; Stacks 0941, 0F7J
-(blueprint: lem-qcqs-compact-support-strict-reduction-comparison).
-
-Proof: choose simultaneous coefficient reduction calculi on X and Y. The open
-scalar-adjunction mate is tensor extension on strict flat-term K-flat complexes;
-its quotient maps commute with each transition because both maps send a pure tensor
-to the same tensor with reduced coefficient. Apply separately derived proper image
-in the varying-ring diagram category. Its scalar mate gives beta on the entire
-strict derived system, for every ambient input, with no constructibility hypothesis.
-Evaluation of this map is the ordered proper/open scalar mate;
-the scalar adjunction units give the first equation, including both endpoint changes
-of finite coordinates. Construct everything on simultaneous resolutions and descend
-through quasi-isomorphisms, so beta is natural in the derived input.
-
-For gamma, restrict this native system to completed scalars and compare with the
-chosen coherent tower of exists_compactSupportReductionTower. Its evaluation
-comparisons and every quotient transition are those of the native system. The
-universal right-derived comparison identifies its total limit with the RF used by
-exists_compactSupportRepresentativeComparison. Compose its recorded gamma with
-this right-derived comparison. The normalization of the derived limit projections
-identifies each resulting projection with the chosen Roos projection, whose finite
-scalar adjunct is sfCompactSupportFiniteReductionIso. This is the second equation.
-All comparisons concern whole strict diagrams before limit; no equality of maps is
-inferred merely from equality of finite evaluations. At zero input and on the empty
-scheme all constructions and the two equations reduce to their zero versions. -/
+ambient proper/open value to the recorded integral value is asserted here. -/
 theorem qcqsCompactSupport_strictReductionComparison :
     ∃ (SX : CoefficientDerivedSystemCalculus l E X)
       (SY : CoefficientDerivedSystemCalculus l E Y),

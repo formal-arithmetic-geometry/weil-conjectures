@@ -19,9 +19,21 @@ import WeilConjectures.RingTheory.FiniteModuleComplete
 /-!
 # Complete local base change along a surjection and its closed fibre
 
-Source: Stacks Project, More on Algebra, Tag 07NR, final base change;
-Algebra, Tags 00DF and 0325.
-(blueprint: lem-weil-pbc-complete-local-base-change-fiber)
+Base change of a Noetherian complete local algebra `T` over `R` along a surjective local map
+`R → A` is again complete local, with closed fibre identified with that of `T`.
+
+## Implementation details
+
+With `I = ker(R → A)`, the tensor product `T ⊗[R] A` is identified with `T/IT`, which is
+Noetherian complete local since `IT ⊆ m_T`. Its closed fibre over `A` is `T/m_R T`, since a
+surjective local map maps `m_R` onto `m_A`. No flatness, regularity or formal smoothness is
+required.
+
+## References
+
+* [Stacks, Tag 07NR], final base change
+* [Stacks, Tag 00DF]
+* [Stacks, Tag 0325]
 -/
 
 @[expose] public section
@@ -157,27 +169,7 @@ private theorem complete_local_baseChange_closedFiber_equiv
 
 set_option linter.unusedVariables false in
 /-- Base change of a complete local algebra along a surjective local map remains
-complete local, and preserves an identified closed fibre compatibly with the new base.
-
-Source: Stacks Project, More on Algebra, Tag 07NR (lemma-lift-fs), final base change,
-with the quotient descriptions from Algebra 00DF and completeness from Algebra 0325.
-(blueprint: lem-weil-pbc-complete-local-base-change-fiber)
-
-Proof: Let I = ker(R → A). Surjectivity identifies A with R/I, and the tensor
-quotient isomorphism identifies C = T ⊗[R] A with T/IT, taking t ⊗ 1 to t mod IT.
-Since the map R → T is local and I lies in m_R, IT lies in m_T. Thus this quotient
-is nonzero, Noetherian, local, and complete, and its maximal ideal is the image of
-m_T (Algebra 0325). Transport these assertions to C. For a in m_A choose r in m_R
-mapping to a: this is possible because a surjective local map maps its maximal
-ideal onto the target maximal ideal. Its image in C lies in m_C, proving locality
-of A → C. Under C = T/IT, the ideal m_A C is the image of m_R T, because the same
-surjective-map calculation gives q(m_R) = m_A and I is contained in m_R. The
-successive-quotient isomorphism therefore identifies C/m_A C with T/m_R T.
-Compose it with e. For any a in A lift a to r in R; the assumed compatibility
-of e gives the image of a under A → E. This proves that the resulting ring
-isomorphism is an A-algebra isomorphism. No flatness, regularity or formal
-smoothness is required. If I = 0 the quotient is T itself; if m_R = 0 then A = R
-and the fibre is T, so the construction also covers these boundary cases. -/
+complete local, and preserves an identified closed fibre compatibly with the new base. -/
 theorem complete_local_baseChange_closedFiber
     (R : Type w) (A : Type u) (T : Type w) (E : Type v)
     [CommRing R] [CommRing A] [CommRing T] [CommRing E]

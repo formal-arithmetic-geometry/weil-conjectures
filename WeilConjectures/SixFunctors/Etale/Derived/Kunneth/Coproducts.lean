@@ -58,16 +58,17 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SepClosedCohomology
 
 For a quasi-compact quasi-separated morphism `f` of finite cohomological dimension, the derived
 pushforward `Rf_*` on unbounded derived categories of étale sheaves of `Λ`-modules commutes with
-direct sums, and similarly for `RΓ(X, -)` (blueprint
-`proposition-open-direct-image-preserves-finite`, Stacks 0F11).
+direct sums, and similarly for `RΓ(X, -)` ([Stacks, Tag 0F11]).
 
-The proof follows the blueprint. The higher direct images `R^q f_*` of sheaves commute with
-filtered colimits (`AlgebraicGeometry.Etale.preservesFilteredColimitsOfSize_higherDirectImage`),
-hence with direct sums, which are filtered colimits of finite direct sums. Then the unbounded
-statement follows from the finiteness of the cohomological dimension: the coproduct of
-K-injective complexes with injective components is a complex of `f_*`-acyclic objects, which
-computes `Rf_*` (`CategoryTheory.Functor.preservesColimitsOfShape_rightDerivedFunctor`); this
-replaces the hypercohomology spectral sequence of the blueprint.
+## Implementation details
+
+The higher direct images `R^q f_*` of sheaves commute with filtered colimits
+(`AlgebraicGeometry.Etale.preservesFilteredColimitsOfSize_higherDirectImage`), hence with direct
+sums, which are filtered colimits of finite direct sums. Then the unbounded statement follows from
+the finiteness of the cohomological dimension: the coproduct of K-injective complexes with injective
+components is a complex of `f_*`-acyclic objects, which computes `Rf_*`
+(`CategoryTheory.Functor.preservesColimitsOfShape_rightDerivedFunctor`); this replaces a
+hypercohomology spectral sequence argument.
 
 For `RΓ(X, -)`, the classical derived functors `R^q Γ(X, -)` are identified with
 `N ↦ Hom(Λ_X[0], N[0]⟦q⟧)` (`AlgebraicGeometry.Etale.shiftedHomFunctorFreeSheafFinalObjectIso`),
@@ -84,8 +85,12 @@ commutes with filtered colimits on a quasi-compact quasi-separated scheme
 ## Main statements
 
 - `AlgebraicGeometry.Etale.preservesCoproducts_rightDerivedLowerStar` and
-  `AlgebraicGeometry.Etale.preservesCoproducts_rightDerivedGlobalSections`
-  (`proposition-open-direct-image-preserves-finite`).
+  `AlgebraicGeometry.Etale.preservesCoproducts_rightDerivedGlobalSections`: `Rf_*` and
+  `RΓ(X, -)` commute with direct sums in finite cohomological dimension.
+
+## References
+
+* [Stacks, Tag 0F11]
 -/
 
 @[expose] public section
@@ -118,10 +123,7 @@ instance preservesColimitsOfShape_rightDerived_lowerStar {X Y : Scheme.{u}} (f :
         q)
   preservesColimitsOfShape_discrete_of_preservesColimitsOfShape_finset ι _
 
-/-- Blueprint `proposition-open-direct-image-preserves-finite`: direct sums and finite cohomological
-dimension.
-
-For a quasi-compact quasi-separated morphism `f` of finite cohomological dimension,
+/-- For a quasi-compact quasi-separated morphism `f` of finite cohomological dimension,
 `Rf_* : D(X_ét, Λ) ⥤ D(Y_ét, Λ)` commutes with direct sums. -/
 theorem preservesCoproducts_rightDerivedLowerStar {X Y : Scheme.{u}}
     (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
@@ -216,9 +218,8 @@ instance preservesColimitsOfShape_rightDerived_globalSections (X : Scheme.{u}) [
       (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat)
   preservesColimitsOfShape_discrete_of_preservesColimitsOfShape_finset ι _
 
-/-- Blueprint `proposition-open-direct-image-preserves-finite`, part (2): for a quasi-compact
-quasi-separated scheme `X` of finite cohomological dimension, `RΓ(X, -)` commutes with direct
-sums. -/
+/-- For a quasi-compact quasi-separated scheme `X` of finite cohomological dimension, `RΓ(X, -)`
+commutes with direct sums. -/
 theorem preservesCoproducts_rightDerivedGlobalSections (X : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X] (hX : HasFiniteCohomologicalDimension Λ X)
     (ι : Type (u + 1)) :

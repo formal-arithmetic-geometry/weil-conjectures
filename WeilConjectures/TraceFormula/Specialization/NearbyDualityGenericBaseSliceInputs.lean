@@ -17,8 +17,7 @@ Let `M` be a trait model of `X₁` over the generic base, `b : 𝒳 ⟶ 𝔸¹_S
 space and `M''` the generic slice model of `b` (`NearbyCyclesModel.genericSliceModel`), a trait
 model over the generic base `(Frac K⟦t⟧, X₂)`, with special fibre `Y = 𝒳''_s`. This file sets up
 the proof of the slice compatibility of nearby duality
-(`NearbyCyclesModel.isIso_map_sliceSpecialMap_nearbyDualityMapOfGenericBase`, blueprint
-`lemma-nearby-duality-slice--1` (2) with `lemma-duality-invariants-pro-p--1`):
+(`NearbyCyclesModel.isIso_map_sliceSpecialMap_nearbyDualityMapOfGenericBase`):
 
 * the pullback `Lg^*` of bounded constructible complexes along a morphism of schemes of finite
   type over possibly different fields (`boundedConstructibleUpperStarOfMap`), strong monoidal;
@@ -35,8 +34,7 @@ the proof of the slice compatibility of nearby duality
 The other inputs of the slice step are in separate files: the averaging splitting of `α`
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_averaging_genericSliceExchange`, in
 `WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceAveraging`), the
-commutation of the pullbacks with internal Hom (blueprint
-`lemma-restriction-geometric-generic-fibre` (2), in
+commutation of the pullbacks with internal Hom (in
 `WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceClosedHom`) and the
 dualizing map of the slice
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_genericSliceDualizingMap`, in
@@ -129,10 +127,9 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k₁ k₁' k₂ k₂' : Type u} [Field k�
 omit [Fact (ringChar k₁).Prime] [Fact (ringChar k₁').Prime] [Fact (ringChar k₂).Prime]
   [Fact (ringChar k₂').Prime] [IsSeparated X.hom] [IsSeparated X'.hom] [IsSeparated Y.hom]
   [IsSeparated Y'.hom] in
-/-- The monoidality of the restriction `NearbyCyclesModel.liftExchange` to bounded constructible
-complexes of a transformation `α : Ψ_M ⋙ Lj'^* ⟶ Lj^* ⋙ Ψ_N`, along morphisms of schemes over
-possibly different fields, deduced from that of `α` (in the oplax form of
-`NearbyCyclesModel.Hom.map_tensorMap_comp_pullbackExchange_app`). -/
+/-- The restriction `NearbyCyclesModel.liftExchange` to bounded constructible complexes of a
+monoidal transformation `α : Ψ_M ⋙ Lj'^* ⟶ Lj^* ⋙ Ψ_N`, along morphisms of schemes over possibly
+different fields, is monoidal. -/
 lemma liftExchange_upperStarOfMap_tensor
     (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
     (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
@@ -326,10 +323,8 @@ lemma uncurry_genericSliceDualityMap
 omit [Fact (ringChar F).Prime] [IsSeparated X₁.hom] [IsSeparated X'.hom]
   [Fact (ringChar (FractionRing (PowerSeries K))).Prime] [IsSeparated (genericSliceBase x hb).hom]
   [IsSeparated (baseChangeSpecial b (traitSlice x)).hom] in
-/-- **The slice exchange is monoidal** (blueprint `lemma-nearby-duality-slice--1`, "the pairing"):
-`Ψ_{M''}(μ_{c^*}) ∘ μ_{M''} ∘ (α ⊗ α) = α ∘ p^*(μ_M) ∘ μ_{p^*}`. This is the restriction to
-bounded constructible complexes of `NearbyCyclesModel.Hom.map_tensorMap_comp_pullbackExchange_app`
-(with `μ = δ⁻¹` for the strong monoidal pullbacks). -/
+/-- **The slice exchange is monoidal**:
+`Ψ_{M''}(μ_{c^*}) ∘ μ_{M''} ∘ (α ⊗ α) = α ∘ p^*(μ_M) ∘ μ_{p^*}`. -/
 lemma genericSliceExchange_tensor (A B : Dᵇc(X₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     ((genericSliceExchange x ℓ h hb).app A ⊗ₘ (genericSliceExchange x ℓ h hb).app B) ≫
         boundedConstructibleTensorMap
@@ -358,8 +353,7 @@ omit [Fact (ringChar F).Prime] [Fact (ringChar F ≠ ℓ)] [IsSepClosed k'] [Fac
   [IsSeparated (genericSliceBase x hb).hom]
   [IsSeparated (baseChangeSpecial b (traitSlice x)).hom] in
 /-- **The action of a self-map of the generic slice model on nearby cycles is monoidal**:
-`μ_{M''} ∘ (ρ(ψ) ⊗ ρ(ψ)) = ρ(ψ) ∘ μ_{M''}`. It follows from
-`NearbyCyclesModel.Hom.autAction_tensor`. -/
+`μ_{M''} ∘ (ρ(ψ) ⊗ ρ(ψ)) = ρ(ψ) ∘ μ_{M''}`. -/
 lemma genericSliceSelfAction_tensor
     (ψ : (genericSliceModel x hb).Hom (genericSliceModel x hb) (𝟙 _) (𝟙 _))
     (A B : Dᵇc((genericSliceBase x hb).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :

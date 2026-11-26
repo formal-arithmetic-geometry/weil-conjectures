@@ -13,8 +13,10 @@ import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarTensorTowerCom
 
 /-! # Scalar completed tensor chain comparisons and coefficient towers
 
-Source: Stacks 07A4, 08TC; coefficient-comparison coherence in the blueprint.
-(blueprint: lem-pur-integral-scalar-tensor-chain-tower). -/
+## References
+
+* Stacks Project, Tags 07A4 and 08TC.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -66,21 +68,7 @@ attribute [local irreducible] integralOperationsTensorLevel integralOrdinaryScal
 attribute [local implicit_reducible] integralOperationsTensorComplexFunctor
   integralOperationsRoosFunctor
 
-/-- The normalized completed-tensor Roos chain maps respect coefficient towers.
-Source: Stacks 07A4, 08TC; blueprint scalar comparison proof step 9
-(blueprint: lem-pur-integral-scalar-tensor-chain-tower).
-Proof: on each bidegree generator the two finite-level routes send
-c tensor (b tensor ((1 tensor x) tensor (1 tensor y))) to the tensor of
-c*j(b) tensor (1 tensor x) with 1 tensor (1 tensor y). The scalar
-associator's multiplication and the two tensor comparison formulas give exactly
-this equality. Balanced tensor relations, sheafification, and the coproducts in
-total degree extend it to the finite total complex, respecting both signed
-differential summands. Consecutive reduction compatibility gives equality of
-strict tower maps. Project the Roos comparison onto each of its two product
-coordinates. Naturality of the canonical product comparisons and the finite-level
-equality identify both routes. Product projections are jointly injective,
-so the chain maps agree. Zero complexes, identity extensions and arbitrary
-unbounded inputs are included. -/
+/-- The normalized completed-tensor Roos chain maps respect coefficient towers. -/
 theorem integralScalarTensorChainTower (W : AlgebraicGeometry.Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     ((integralOrdinaryScalar l L F j W).mapHomologicalComplex (.up ℤ)).map

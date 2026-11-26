@@ -20,7 +20,16 @@ import Mathlib.LinearAlgebra.TensorProduct.Basis
 /-!
 # Injectivity of the residue differential comparison for differential coordinates
 
-Source: Stacks Project, More on Algebra, Tag 07E6, proof.
+## Implementation details
+
+With `B = k[y]_p` and `K₀ = κ(B)`, the module `K₀ ⊗_B Ω[B/k]` is free on the `1 ⊗ dX_i`. A
+relation in the kernel of the residue comparison maps to a relation among the `da_i` in
+`Ω[F/k]`, which form a basis, so all coefficients vanish. This covers `m = 0`; no geometric
+regularity, characteristic condition, or finiteness of `F` is needed.
+
+## References
+
+* [Stacks, Tag 07E6]
 -/
 
 @[expose] public section
@@ -33,21 +42,7 @@ open scoped _root_.TensorProduct
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The polynomial-localization differential comparison is injective when its residue
-coordinates become a differential basis in an intermediate residue field.
-Source: Stacks Project, More on Algebra, Tag 07E6, the assertion that the residue
-comparison for A₀ is an isomorphism.
-(blueprint: lem-weil-pbc-differential-coordinates-residue-comparison).
-
-Proof: Put R = k[y], p = φ⁻¹(m_A), B = R_p and K₀ = κ(B).
-The map R → κ(A) has kernel p, so it embeds R/p in κ(A) and extends to its fraction
-field K₀. The images of the variables lie in F, so the extension lands in F.
-Polynomial differentials form the free R-module on dX_i; localization and scalar
-extension give a K₀-basis of K₀ tensor_B Ω[B/k] on 1 tensor dX_i.
-A relation in the kernel of the residue comparison maps under Ω[K₀/k] → Ω[F/k]
-to a relation among da_i. Since b_i = da_i is an F-basis and K₀ → F is injective,
-each coefficient is zero. The basis in the source then makes the relation zero.
-This covers m = 0, when the source module is zero. No geometric regularity,
-characteristic condition, or finiteness of F is needed. -/
+coordinates become a differential basis in an intermediate residue field. -/
 theorem injective_residue_differential_comparison_of_basis
     (k : Type u) (A : Type v) [Field k] [CommRing A] [Algebra k A]
     [IsLocalRing A]

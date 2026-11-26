@@ -14,8 +14,13 @@ public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 /-!
 # A cyclic presentation of an ideal-power torsion module
 
-Source: Stacks Project, More on Algebra, Tag 05E8, proof, first two sentences
-(blueprint: lem-weil-pbc-torsion-cyclic-presentation).
+We show that a module in which every element is killed by a positive power of an ideal `I`
+is a quotient of a direct sum of modules `R ⧸ I ^ n` with `n > 0`, with kernel of the same
+kind.
+
+## References
+
+* [Stacks, Tag 05E8]
 -/
 
 @[expose] public section
@@ -27,22 +32,7 @@ open DirectSum
 namespace Ideal
 
 /-- An ideal-power torsion module has a surjection from a direct sum of positive-power
-ideal quotients, with ideal-power torsion kernel and the resulting short exact sequence.
-Source: Stacks Project, Tag 05E8, proof, first two sentences
-(blueprint: lem-weil-pbc-torsion-cyclic-presentation).
-
-Proof: Index the summands by the elements `q` of `Q`. Choose the least positive `n_q`
-annihilating `q`. The map `R / I ^ n_q → Q` taking the class of `r` to `r • q` is well
-defined and linear, since every element of `I ^ n_q` kills `q`
-[def-weil-pbc-quotient-module]. Combine these maps by the direct sum universal property
-[def-weil-pbc-direct-sum-modules]; the image of `1` in the `q`-summand is `q`, so the
-resulting map is surjective. By direct-sum induction, zero is killed by `I ^ 1`,
-a single summand is killed by its defining ideal power, and a sum of elements killed
-by `I ^ m` and `I ^ l` is killed by `I ^ max m l`. Indeed, the latter ideal power
-is contained in each of the former powers. Thus the direct sum and its kernel are
-ideal-power torsion. The kernel inclusion and the surjective presentation map form
-a short exact sequence [def-weil-pbc-exact-sequence], by Mathlib's
-`LinearMap.shortExact_shortComplexKer`. -/
+ideal quotients, with ideal-power torsion kernel and the resulting short exact sequence. -/
 theorem exists_torsion_cyclic_presentation {R : Type u} [CommRing R] (I : Ideal R)
     (Q : Type (max u v)) [AddCommGroup Q] [Module R Q]
     (hQ : ∀ q : Q, ∃ n : ℕ, 0 < n ∧ ∀ a ∈ I ^ n, a • q = 0) :

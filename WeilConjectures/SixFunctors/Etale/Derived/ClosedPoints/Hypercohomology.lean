@@ -21,7 +21,13 @@ length, a bounded complex `L ∈ D^{≤ a}` with `F`-acyclic homology has `H^j(R
 
 - `CategoryTheory.Functor.nonempty_homology_rightDerivedFunctor_obj_iso_of_acyclic`.
 - `AlgebraicGeometry.Etale.nonempty_homology_rightDerivedGlobalSections_obj_iso_of_acyclic`
-  (`lem-kun-0bkz`, bounded below case).
+  (bounded below case).
+
+## Implementation details
+
+Applied to the restrictions of `K` to the members of a class of étale `X`-schemes, the étale
+statement gives the corresponding local statement for bounded below `K`; the unbounded case,
+which needs derived limits, is not treated.
 -/
 
 @[expose] public section
@@ -208,12 +214,10 @@ namespace AlgebraicGeometry.Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `lem-kun-0bkz`: **cohomology of complexes with acyclic cohomology sheaves**
-(bounded below case, for the global sections over `X` itself). Let `X` be a scheme and
-`K ∈ D^{≥ m}(X_ét, Λ)` such that `H^p(X_ét, ℋ^q(K)) = 0` for all `p > 0` and all `q`. Then
-`H^q(X_ét, K) ≅ H^0(X_ét, ℋ^q(K))` for all `q`. Applied to the restrictions of `K` to the
-members `U` of a class `B` of étale `X`-schemes this gives the blueprint's statement for bounded
-below `K`; the unbounded case, which needs derived limits, is not treated. -/
+/-- **Cohomology of complexes with acyclic cohomology sheaves** (bounded below case, for the
+global sections over `X` itself). Let `X` be a scheme and `K ∈ D^{≥ m}(X_ét, Λ)` such that
+`H^p(X_ét, ℋ^q(K)) = 0` for all `p > 0` and all `q`. Then `H^q(X_ét, K) ≅ H^0(X_ét, ℋ^q(K))` for
+all `q`. -/
 theorem nonempty_homology_rightDerivedGlobalSections_obj_iso_of_acyclic (X : Scheme.{u})
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (m : ℤ)
     [K.IsGE m]

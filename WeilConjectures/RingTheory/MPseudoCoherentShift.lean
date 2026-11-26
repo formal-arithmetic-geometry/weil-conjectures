@@ -11,8 +11,17 @@ public import WeilConjectures.RingTheory.MPseudoCoherent
 /-!
 # Shifting finite-free approximations
 
-Source: Stacks Project, Tag 064R, rotation argument for assertions (2) and (3).
-(blueprint: lem-pc-ring-m-pseudo-coherent-shift).
+An object `C` is `(m + 1)`-pseudo-coherent if and only if `C[1]` is `m`-pseudo-coherent.
+
+## Implementation details
+
+Finite-free witnesses are shifted by `±1` and composed with the canonical isomorphism
+`C[1][-1] ≅ C`; the cohomology shift isomorphisms identify the degree-`i` map with the old map
+in the shifted degree.
+
+## References
+
+* [Stacks, Tag 064R] (rotation argument for assertions (2) and (3))
 -/
 
 @[expose] public section
@@ -78,19 +87,7 @@ private theorem pseudoCoherent_shift
     infer_instance
 
 /-- Shift the witness complex and its map. A shift preserves boundedness, freeness,
- and finiteness, and `Hⁱ(C[1]) = Hⁱ⁺¹(C)` gives precisely the new approximation degree.
-Source: Stacks Project, Tag 064R, proof of assertions (2) and (3).
-(blueprint: lem-pc-ring-m-pseudo-coherent-shift).
-
-Proof: for the forward direction choose a finite-free witness for `C[1]` through
- degree `m`, shift it by `-1`, and compose the shifted map with the canonical
- isomorphism `C[1][-1] ≅ C`. The new bounds are the old bounds plus one. The
- cohomology shift isomorphisms identify its map in degree `i` with the old map
- in degree `i - 1`, so it is an isomorphism for `i > m + 1` and epi at `m + 1`.
- For the reverse direction shift a witness for `C` by `1`; the bounds decrease
- by one. Identify the homology map in degree `i` with the old one in degree
- `i + 1`. These identifications give the required isomorphisms and epimorphism.
- The termwise shift isomorphisms preserve finite free modules in both directions. -/
+and finiteness, and `Hⁱ(C[1]) = Hⁱ⁺¹(C)` gives precisely the new approximation degree. -/
 theorem isMPseudoCoherent_shift_one_iff
     (R : Type u) [CommRing R]
     [HasDerivedCategory.{w} (ModuleCat.{v} R)]

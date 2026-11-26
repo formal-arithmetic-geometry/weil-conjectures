@@ -19,8 +19,16 @@ import Mathlib.RingTheory.Etale.Field
 /-!
 # Realizing a separable residue element in an admissible subalgebra
 
-Source: Stacks Project, Tags 07FH and 07FI, algebraic branch after power extraction.
-(blueprint: lem-weil-pbc-popescu-separable-residue-realization).
+A specified separable element of the ambient residue field is the residue of an element of an
+admissible enlargement of a given admissible subalgebra.
+
+## Implementation details
+
+No characteristic assumption is needed for this step.
+
+## References
+
+* [Stacks, Tag 07FH] and [Stacks, Tag 07FI] (algebraic case, after choosing a separable power)
 -/
 
 @[expose] public section
@@ -28,25 +36,7 @@ set_option autoImplicit false
 universe u v
 namespace Algebra
 
-/-- Realize a specified separable element of the ambient residue field.
-Source: Stacks Project, Tags 07FH and 07FI, algebraic case, after choosing a
-separable power. No characteristic assumption is needed for this geometric step.
-
-Proof: Use the given residue compatibility and surjectivity of A₀'s residue map
-to identify the supplied residue algebra with the canonical one induced by inclusion.
-Apply `exists_finiteEtale_artinian_residue_lift` to A₀ → B and β; admissibility
-supplies the Artinian and flat hypotheses. This gives a finite étale local Artinian
-A₀-algebra D, a flat local map g : D → B factoring inclusion, and d whose image
-has residue β. Flat local maps are faithfully flat, hence g is injective. Its
-k-algebra image A is isomorphic to D and contains A₀. Transfer finiteness and étaleness
-through this isomorphism. Finiteness makes A Artinian and essentially finite type
-over A₀, hence essentially finite type over k by composition. The inclusion A → B
-is flat because it is g composed with the inverse isomorphism. Étaleness gives
-m_A = m_A₀ A; extending this equality to B and using admissibility of A₀ gives
-m_A B = m_B. Thus A is admissible. The element corresponding to d has residue β.
-The canonical residue algebra of A₀ → A has the required compatibility and k-scalar
-tower. The residue extension of a local étale map is separable, hence formally étale.
-(blueprint: lem-weil-pbc-popescu-separable-residue-realization). -/
+/-- Realize a specified separable element of the ambient residue field. -/
 theorem exists_popescu_separable_residue_realization
     (k : Type u) (B : Type v) [Field k] [CommRing B] [Algebra k B]
     [IsArtinianRing B] [IsLocalRing B]

@@ -9,7 +9,14 @@ public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.F
 
 import all WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Finite.FiniteCoordinateCalculus
 
-/-! # Proved finite coefficient coordinate calculus -/
+/-! # Proved finite coefficient coordinate calculus
+
+The ordinary finite open-extension coordinates preserve the specified unit.
+
+## References
+
+* [Stacks, Tag 03DI]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -29,15 +36,7 @@ attribute [local implicit_reducible] Equivalence.mapDerivedCategory
   sfIntrinsicPullback sfIntrinsicTransport sfIntrinsicExtensionByZero
 set_option backward.defeqAttrib.useBackward true
 
-/-- The ordinary finite open-extension coordinates preserve the specified unit.
-Source: compactification-coherence proof, first paragraph; Stacks 03DI
-(blueprint: lem-sf-finite-ring-ordinary-open-unit-coordinates).
-Proof: finiteOpenIso is the left-adjoint uniqueness comparison for the finite
-open adjunction transported by finitePullbackIso. Apply the general
-open_unit_coordinates identity to the two realization equivalences and the
-specified fixed and ring open adjunctions. The realization comparison is exactly
-fixedOpenModel. The calculation uses only unit naturality and the equivalence
-triangle identities, and also applies to identity and empty opens. -/
+/-- The ordinary finite open-extension coordinates preserve the specified unit. -/
 theorem finite_open_unit_ordinary
     (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ)

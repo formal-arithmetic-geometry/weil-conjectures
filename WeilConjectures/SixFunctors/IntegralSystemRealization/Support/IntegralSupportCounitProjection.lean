@@ -13,7 +13,10 @@ import WeilConjectures.SmoothPurity.Qcqs.QcqsCompactSupportRealization
 
 /-! # Counit-normalized projection of the primitive compact-support comparison
 
-Source: blueprint fix-prop-coherence, strict-system expression realization.
+## References
+
+* [Stacks, Tag 0941]
+* [Stacks, Tag 0D6E]
 -/
 
 @[expose] public noncomputable section
@@ -182,27 +185,7 @@ private theorem open_normalized_transport (o : Operations l E) (a : AmbientModel
 -- The final rewrite unfolds the scalar-reduction evaluation of the counit composite.
 /-- Finite projection of the primitive open/proper realization, with an arbitrary
 normalized input comparison substituted afterwards. There are no expression trees
-or canonical-pair derivations in this assertion.
-
-Source: blueprint fix-prop-coherence, compactification step of
-lem-sf-integral-expression-coefficient-squares; Stacks 0941 and 0D6E.
-(blueprint: lem-sf-integral-support-counit-projection).
-
-Proof: transport Good through rho, retaining each origin evaluation and its actual
-transition square. The general reconstruction lemma applied to b makes H integral
-constructible. Specialize the compactification component of integralBasicRealization,
-integralSupportTowerNormalization, to H. Its direct map d_H is the proper comparison,
-the limit of openReduction, the inverse reconstruction unit, and the prescribed
-compact-support realization. openNormalization, naturality of that unit and of
-openReduction, and the supplied counit normalization identify L(SJ(rho)) followed by
-d_H with the displayed primitive composite followed by that realization.
-SfQcqsCompactSupportRealizationSpec identifies exactly the four finite transport
-factors in the conclusion with scalar reduction of the realization and its recorded
-finite reduction isomorphism. Apply the scalar-adjunction projection of d_H.
-counit_projection and naturality of homEquiv evaluate its mate. The evaluated counit
-is a natural transformation; its naturality at SJ(rho), followed by supportEvaluation
-naturality at rho, gives the displayed right side. All actual quotient transitions
-are retained. The same calculations apply to zero systems and empty opens. -/
+or canonical-pair derivations in this assertion. -/
 theorem integralSupportCounitProjection (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (o : Operations l E) (a : AmbientModels l E o)
     {U V : Over (Spec (CommRingCat.of D.k))}

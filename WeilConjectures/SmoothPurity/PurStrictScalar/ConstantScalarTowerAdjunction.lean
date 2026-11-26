@@ -55,9 +55,17 @@ import all WeilConjectures.CategoryTheory.Constant.ConstantFiniteFreeSectionBasi
 
 /-! # The constant integral scalar adjunction on strict towers
 
-Source: Stacks Project, Tags 07A6, 0B56, 0940 and 0E8I; auxiliary extracted from
-compact-support coefficient comparison, Steps 3--4.
-(blueprint: def-pur-constant-scalar-tower-adjunction).
+An auxiliary extracted from the compact-support coefficient comparison, Steps 3--4.
+
+## Implementation details
+
+For `tensor_exact`, one finite `A`-basis of `B` identifies restricted scalar extension with a
+finite biproduct on every site object. Kernels and cokernels of strict diagrams are computed
+pointwise, and restriction is exact and conservative.
+
+## References
+
+* [Stacks Project, Tags 03CO, 03CY, 03DA, 07A6, 0B56, 0940 and 0E8I]
 -/
 
 @[expose] public noncomputable section
@@ -77,29 +85,20 @@ variable (l : ℕ) [Fact l.Prime]
   (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (i : E →ₐ[ℚ_[l]] F)
 
-/-- The canonical constant integral coefficient map, induced by inclusion of integers.
-Source: Stacks 03CO (blueprint: def-pur-constant-scalar-tower-adjunction). -/
+/-- The canonical constant integral coefficient map, induced by inclusion of integers. -/
 def constantMap (W : Scheme.{u}) :=
   (constantSheaf (ProEt.topology W) CommRingCat.{u + 1}).map
     (CommRingCat.ofHom (integralScalarIntegerInclusion l E F i).ulift.{u + 1, u + 1})
 
-/-- Tensor by B on strict constant-A towers, before passage to complexes.
-Source: Stacks 0940 (blueprint: def-pur-constant-scalar-tower-adjunction). -/
+/-- Tensor by B on strict constant-A towers, before passage to complexes. -/
 abbrev tensor (W : Scheme.{u}) :=
   (Functor.whiskeringRight ℕᵒᵖ _ _).obj (pbcExtend (constantMap l E F i W))
 
-/-- Exact coefficient restriction on strict towers.
-Source: Stacks 03DA (blueprint: def-pur-constant-scalar-tower-adjunction). -/
+/-- Exact coefficient restriction on strict towers. -/
 abbrev restrict (W : Scheme.{u}) :=
   (Functor.whiskeringRight ℕᵒᵖ _ _).obj (pbcRestrict (constantMap l E F i W))
 
-/-- Finite freeness makes ordinary constant scalar extension exact on whole towers.
-Source: Stacks 03CY, 0940; coefficient-model argument, Step 1
-(blueprint: def-pur-constant-scalar-tower-adjunction).
-Proof: choose one finite A-basis of B. The same constant sections identify restricted
-scalar extension with a finite biproduct on every site object. Kernels and cokernels
-of strict diagrams are computed pointwise; restriction is exact and conservative.
-Thus tensor preserves finite limits and colimits, including zero towers. -/
+/-- Finite freeness makes ordinary constant scalar extension exact on whole towers. -/
 theorem tensor_exact (W : Scheme.{u}) :
     PreservesFiniteLimits (tensor l E F i W) ∧
       PreservesFiniteColimits (tensor l E F i W) := by
@@ -124,8 +123,7 @@ theorem tensor_exact (W : Scheme.{u}) :
     A B inferInstance (Module.finrank E F) (WeilConjectures.liftedBasis.{u, u} b)
   exact scalarTowerExtension_exact W (constantMap l E F i W) (Module.finrank E F) e.symm
 
-/-- Exact descent of tensor by B on strict towers.
-Source: Stacks 0940 (blueprint: def-pur-constant-scalar-tower-adjunction). -/
+/-- Exact descent of tensor by B on strict towers. -/
 def T (W : Scheme.{u}) :
     Derived (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W ⥤
       Derived (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) W :=
@@ -133,25 +131,21 @@ def T (W : Scheme.{u}) :
   haveI := (tensor_exact l E F i W).2
   (tensor l E F i W).mapDerivedCategory
 
-/-- Exact descent of restriction of scalars on strict towers.
-Source: Stacks 03DA (blueprint: def-pur-constant-scalar-tower-adjunction). -/
+/-- Exact descent of restriction of scalars on strict towers. -/
 instance restrict_limits (W : Scheme.{u}) :
     PreservesFiniteLimits (restrict l E F i W) :=
   ⟨fun _ _ _ ↦ inferInstance⟩
 
-/-- Exact scalar restriction preserves finite colimits pointwise.
-Source: Stacks 03DA (blueprint: def-pur-constant-scalar-tower-adjunction). -/
+/-- Exact scalar restriction preserves finite colimits pointwise. -/
 instance restrict_colimits (W : Scheme.{u}) :
     PreservesFiniteColimits (restrict l E F i W) :=
   ⟨fun _ _ _ ↦ inferInstance⟩
 
-/-- The localization of pointwise coefficient restriction.
-Source: Stacks 03DA (blueprint: def-pur-constant-scalar-tower-adjunction). -/
+/-- The localization of pointwise coefficient restriction. -/
 def U (W : Scheme.{u}) := (restrict l E F i W).mapDerivedCategory
 
 /-- The tower scalar adjunction is the descent of the tensor-unit normalized
-ordinary scalar adjunction, without any independently selected unit.
-Source: Stacks 07A6 (blueprint: def-pur-constant-scalar-tower-adjunction). -/
+ordinary scalar adjunction, without any independently selected unit. -/
 def scalarAdj (W : Scheme.{u}) : T l E F i W ⊣ U l E F i W :=
   haveI := (tensor_exact l E F i W).1
   haveI := (tensor_exact l E F i W).2
@@ -160,14 +154,12 @@ def scalarAdj (W : Scheme.{u}) : T l E F i W ⊣ U l E F i W :=
       ((pbcScalarAdjunction (constantMap l E F i W)).whiskerRight ℕᵒᵖ))
     (restrict l E F i W).rightDerivedFunctorIsoMapDerivedCategory
 
-/-- Constant integral coefficients with their canonical inverse-image identifications.
-Source: Stacks 03CO (blueprint: def-pur-constant-scalar-tower-adjunction). -/
+/-- Constant integral coefficients with their canonical inverse-image identifications. -/
 def constants : PurCompactSupport.Coefficients.{u} where
   ring W := coefficients (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W
   pull g := constantRingIso (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) g
 
-/-- The constant coefficient square commutes on the generating constant sections.
-Source: Stacks 03CO (blueprint: def-pur-constant-scalar-tower-adjunction). -/
+/-- The constant coefficient square commutes on the generating constant sections. -/
 def change : PurCompactSupport.Change (constants l E) (constants l F) where
   map := constantMap l E F i
   square g := (proEtaleConstantInverseImageMap_naturality g

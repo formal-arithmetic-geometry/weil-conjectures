@@ -18,8 +18,21 @@ import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 /-!
 # Rooting a finite family of fractions by polynomial substitution
 
-Source: Stacks Project, Algebra, Tag 032O, coefficient-root construction.
-(blueprint: lem-weil-pbc-finite-fraction-root-substitution)
+After a finite extension of coefficients and the substitution `X ↦ T ^ (p ^ n)`, finitely many
+rational functions over a domain of characteristic `p` acquire `p ^ n`-th roots.
+
+## Implementation details
+
+With `K = Frac(R)`, adjoin to `K` (inside an algebraic closure) the `p ^ n`-th roots of all
+nonzero coefficients of the numerators and denominators; this gives a finite extension `E`, and
+the roots lie in `A = integralClosure R E`. The map `R[X] → A[T]` mapping coefficients and
+substituting `X ↦ T ^ (p ^ n)` is injective and extends to fraction fields. Lifting coefficients
+along iterated Frobenius on `A` and `map_iterateFrobenius_expand` give the roots. The
+construction also covers `n = 0`, empty families and zero numerators.
+
+## References
+
+* [Stacks, Tag 032O]
 -/
 
 @[expose] public section
@@ -53,29 +66,7 @@ private theorem polynomial_root_of_coefficient_roots
   rfl
 
 /-- Finitely many rational functions acquire prescribed p-power roots after a finite
-coefficient extension and the substitution X ↦ T^(p^n).
-
-Source: Stacks Project, Algebra, Tag 032O, the coefficient-root construction in the
-second assertion, with the omitted finite-coefficient argument expanded.
-(blueprint: lem-weil-pbc-finite-fraction-root-substitution)
-
-Proof. Put K = Frac(R). Write each fraction as a quotient of polynomials over R.
-In an algebraic closure of K adjoin the p^n-th roots of the finite union of their
-nonzero coefficients. Each root is integral over K because its positive p^n-th
-power is in K; the finite algebraic-generators theorem makes the generated subfield
-E finite over K. Give E the R-algebra structure induced through K. Each chosen root
-is also integral over R, since its p^n-th power is the image of a coefficient in R.
-Thus the roots already belong to A = integralClosure R E. The coefficient map R → A
-is injective. Polynomial expansion by the positive integer p^n is injective, so
-mapping coefficients and substituting X ↦ T^(p^n) gives an injective map R[X] → A[T].
-Extend its composite with A[T] → Frac(A[T]) to fractions by IsFractionRing.lift.
-For each numerator and denominator, Polynomial.mem_map_range lifts its coefficient
-image along iterated Frobenius on A. If Q is the lifted polynomial, the identity
-map_iterateFrobenius_expand shows Q^(p^n) equals the substituted original polynomial.
-The quotient of the lifted polynomials therefore has p^n-th power equal to the image
-of the original fraction, by compatibility of ring homomorphisms with powers and
-division. All subfields and fraction fields stay in Type u. This construction also
-handles n=0, empty families and zero numerators; no nonzero numerator is assumed. -/
+coefficient extension and the substitution X ↦ T^(p^n). -/
 theorem exists_finite_fraction_root_substitution
     (R : Type u) [CommRing R] [IsDomain R]
     (p : ℕ) [Fact p.Prime] [CharP (FractionRing (Polynomial R)) p]

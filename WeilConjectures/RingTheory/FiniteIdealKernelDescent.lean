@@ -19,8 +19,12 @@ import WeilConjectures.RingTheory.ColimitFlatRelationDescentElementwise
 /-!
 # Descent of finite subsets of an ideal multiplication kernel
 
-Source: Stacks Project, Algebra, Tag 00R6, tensor-colimit descent paragraph.
-(blueprint: lem-weil-pbc-finite-ideal-kernel-descent)
+In a directed colimit, finitely many elements of the kernel of an ideal multiplication map
+vanish at a common later stage.
+
+## References
+
+* [Stacks, Tag 00R6]
 -/
 
 @[expose] public section
@@ -47,24 +51,9 @@ private theorem exists_ideal_tensor_map
     { η with map_smul' := hη }
   exact ⟨(TensorProduct.map g h).toAddMonoidHom, fun _ _ ↦ rfl⟩
 
-/-- Any finite subset of an ideal multiplication kernel dies at a common later stage.
-The forgetful functor to sets preserves the specified colimit of the first ring diagram.
-Source: Stacks Project, Algebra, Tag 00R6, descent of finitely many generators xi.
-(blueprint: lem-weil-pbc-finite-ideal-kernel-descent)
-
-Proof: Assemble single-element descent from finite-relation factorization for
-every element of the finite subset, keeping the independent carrier universes.
-Directedness gives an index l above i and all the finitely many witness stages;
-for the empty subset l=i suffices. Construct the canonical ideal-tensor map to
-l from the semilinear ring and module transitions. For each witness stage j,
-the ideal I A_j maps to I A_l since extension of ideals commutes with ring-map
-composition. The induced tensor transition from j to l composes with the
-single-element witness map to give the canonical map from i to l: on pure
-tensors this is functoriality of A and N and equality of parallel morphisms
-in the preorder, and tensor induction gives equality on every tensor.
-Thus an element killed at its witness stage remains zero at l. The canonical
-map to l kills all elements of the finite subset and has the required formula.
-No flatness argument is repeated here and no generation assumption is used. -/
+/-- In a directed system of rings and modules, any finite subset of the kernel of an ideal
+multiplication map at a stage dies at a common later stage. The forgetful functor to sets is
+assumed to preserve the colimit of the first ring diagram. -/
 theorem exists_stage_finite_ideal_kernel_vanishes
     {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]
     (A : Λ ⥤ CommRingCat.{v}) (B : Λ ⥤ CommRingCat.{w})

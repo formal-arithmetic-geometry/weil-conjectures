@@ -22,17 +22,20 @@ Its nearby cycles `Ψ_s` on bounded constructible complexes
 `θ_X : Ψ_X ω_X ⟶ ω_{X'}`, which are read through the specialization unit `σ_s : ℚ̄_ℓ ⟶ Ψ_s ℚ̄_ℓ`
 (`ProEtale.CondensedRing.traitSpecializationUnit`).
 
-## Implementation notes
+## Implementation details
 
-Nothing uses these declarations yet. They are the base point of the compact-support exchange
+These declarations are the base point of the compact-support exchange
 `ν_{a_X}` of the structure map `a_X : X ⟶ Spec k`, which builds the dualizing maps `θ_X` from the
 exceptional exchange `β_{a_X}` (`ProEtale.CondensedRing.dualizingExchange` takes `σ_s` as a
 parameter). Reading `θ_X` through `σ_s⁻¹` needs `σ_s` to be an isomorphism
-(`ProEtale.CondensedRing.isIso_traitSpecializationUnit`), the point case of blueprint
-`lemma-nearby-cycles-constant-family--1`. It follows from the pro-étale computations over the
+(`ProEtale.CondensedRing.isIso_traitSpecializationUnit`), the point case of the computation of
+nearby cycles of a constant family. It follows from the pro-étale computations over the
 strictly henselian trait that `i^*` inverts the unit `ℚ̄_ℓ ⟶ j_* ℚ̄_ℓ` and kills `Rⁿ j_* ℚ̄_ℓ` for
 `n > 0` (`WeilConjectures.TraceFormula.Specialization.TraitDirectImageUnit`,
 `WeilConjectures.TraceFormula.Specialization.TraitHigherDirectImage`).
+
+`ProEtale.CondensedRing.UpperStarInvertsLowerStarUnit` is bundled as a definition so that the
+kernel compares instances of it argument by argument instead of unfolding the derived functors.
 
 -/
 
@@ -53,21 +56,13 @@ section Unit
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
 /-- For morphisms `j : G ⟶ T` and `i : X' ⟶ T`, the restriction `i^*` inverts the unit
-`Λ ⟶ j_* j^* Λ` and kills the higher direct images `Rⁿ j_* (j^* Λ)`, `n > 0`. These are the
-inputs of the computation of the specialization unit of a model with special fibre `i` and
-geometric generic fibre `j`
-(`ProEtale.CondensedRing.NearbyCyclesModel.isIso_unit_of_upperStarInvertsLowerStarUnit`).
-
-It is bundled as a definition so that the kernel compares instances of it argument by argument
-instead of unfolding the derived functors. -/
+`Λ ⟶ j_* j^* Λ` and kills the higher direct images `Rⁿ j_* (j^* Λ)`, `n > 0`. -/
 def UpperStarInvertsLowerStarUnit {T G X' : Scheme.{u}} (j : G ⟶ T) (i : X' ⟶ T) : Prop :=
   IsIso ((i)^*⟦Λ⟧.map ((upperStarLowerStarAdjunction Λ j).unit.app (𝟙_ _))) ∧
     ∀ n : ℕ, 0 < n → IsZero ((i)^*⟦Λ⟧.obj (((j)_*⟦Λ⟧.rightDerived n).obj ((j)^*⟦Λ⟧.obj (𝟙_ _))))
 
 /-- The specialization unit `σ : Λ ⟶ i^* Rj_* j^* Λ` of a model is an isomorphism as soon as `i^*`
-inverts the unit `Λ ⟶ j_* j^* Λ` and kills the higher direct images `Rⁿ j_* (j^* Λ)`, `n > 0`:
-then `i^*` inverts the derived unit `Λ ⟶ Rj_* Lj^* Λ`
-(`CategoryTheory.Adjunction.isIso_mapDerivedCategory_map_derivedAdjunction_unit_app`). -/
+inverts the unit `Λ ⟶ j_* j^* Λ` and kills the higher direct images `Rⁿ j_* (j^* Λ)`, `n > 0`. -/
 theorem NearbyCyclesModel.isIso_unit_of_upperStarInvertsLowerStarUnit {X X' : Scheme.{u}}
     (M : NearbyCyclesModel X X') (h : UpperStarInvertsLowerStarUnit Λ M.j M.i) :
     IsIso (M.unit Λ) := by
@@ -129,8 +124,7 @@ noncomputable def traitSpecializationUnit :
 omit [Fact (ringChar k).Prime] in
 /-- For the strictly henselian trait `S = Spec k'⟦t⟧`, the specialization unit
 `σ_s : ℚ̄_ℓ ⟶ Ψ_s ℚ̄_ℓ = i^* Rj_* ℚ̄_ℓ` is an isomorphism: the cohomology of the geometric
-generic point of `S` is that of its closed point. This is the case `Y = Spec k'`, `L = ℚ̄_ℓ` of
-blueprint `lemma-nearby-cycles-constant-family--1`. -/
+generic point of `S` is that of its closed point. -/
 theorem isIso_traitSpecializationUnit : IsIso (traitSpecializationUnit k k' (ℓ := ℓ)) := by
   have h : UpperStarInvertsLowerStarUnit (Profinite.padicAlgClRingObj ℓ) (traitGenericPoint k')
       (traitClosedPoint k') :=

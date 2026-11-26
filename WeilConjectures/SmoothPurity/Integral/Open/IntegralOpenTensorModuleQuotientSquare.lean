@@ -13,7 +13,9 @@ import all WeilConjectures.SmoothPurity.Coefficient.CoefficientExtensionOrdinary
 
 /-! # The ordinary open tensor quotient square on modules
 
-Source: Stacks 0E8I, 03DI and 03CY; Step 3 of the open tensor quotient-model argument.
+## References
+
+* Stacks Project, Tags 0E8I, 03DI and 03CY
 -/
 
 @[expose] public noncomputable section
@@ -152,21 +154,7 @@ private theorem scalar_open_generator_ext (n : ℕ) (M : scalarReductionSource l
   rw [hu] at hf hg
   exact eq_of_heq (hf.trans ((heq_of_eq (h W a x)).trans hg.symm))
 
-/-- Generator normalization makes the ordinary tensor comparison respect quotients.
-Source: Stacks 0E8I, 03DI and 03CY; parent Step 3, before passing to complexes.
-(blueprint: lem-sf-integral-open-tensor-module-quotient-square).
-
-Proof: work first with a single module M. Transpose the two maps under the scalar
-extension/restriction adjunction for the larger quotient. The ordinary quotient's
-mate formula makes its transpose the smaller scalar unit followed by the inverse
-successive-restriction comparison. The tensor comparison's generator formula and
-hgen identify both transposes on every extension summand: both send x to the
-smaller scalar-unit image of x in that same summand. Apply the extension/restriction
-Hom bijection for the localized site and the sheafification Hom bijection; equality
-on direct-sum generators gives equality of the maps. Transposing back gives the
-ordinary quotient square. The argument is entirely on modules, before any
-complex or localization is used. No flatness, boundedness, completeness or strict
-reduction calculus is involved. Empty sums, zero terms and n=0 obey the same formulas. -/
+/-- Generator normalization makes the ordinary tensor comparison respect quotients. -/
 theorem integralOpenTensorModuleQuotientSquare
     (tensor : IntegralOpenReduction.TensorComparison l E j o) (n : ℕ)
     (ordinary : normalizedDVRModuleRes l E X (Nat.le_succ n) ⋙

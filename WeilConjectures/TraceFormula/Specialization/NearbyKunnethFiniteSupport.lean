@@ -23,11 +23,10 @@ points of the special fibre `X_s × Y_s`
 (`NearbyCyclesModel.exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible`), given
 that its source and target are bounded constructible, that the total spaces locally embed into
 `𝔸ᵐ_S`, `𝔸^{m'}_S`, and that the generic-slicing step holds in chart dimension `m + m' - 1`:
-by the generic-slicing step (`NearbyCyclesModel.SliceKunnethFormula`, blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, "Finite support"), `C` vanishes on the special
-fibre `(𝒵 ×_{𝔸¹_S} Spec K⟦t⟧)_s` of the generic slice of every chart coordinate.
+by the generic-slicing step (`NearbyCyclesModel.SliceKunnethFormula`), `C` vanishes on the
+special fibre `(𝒵 ×_{𝔸¹_S} Spec K⟦t⟧)_s` of the generic slice of every chart coordinate.
 
-## Proof
+## Implementation details
 
 Around a point of `X_s × Y_s`, choose charts `V ⟶ 𝔸(ι_V; S)`, `W ⟶ 𝔸(ι_W; S)` (immersions over
 `S` of opens of the total spaces of `M`, `N`). Their coordinates, pulled
@@ -38,6 +37,13 @@ fibre they detect closed points (`AlgebraicGeometry.AffineSpace`
 of the restricted Künneth map vanishes over the generic point of each coordinate line, so `C` is
 supported on finitely many closed points
 (`ProEtale.CondensedRing.exists_finset_isZero_of_forall_exists_coordinates`).
+
+The derived pullback is named (`finiteSupportUpperStar`) so that the inferred graded tensor
+instances are shared across its occurrences.
+
+## References
+
+* L. Illusie, *Autour du théorème de monodromie locale*, proof of Thm. 4.7
 
 -/
 
@@ -238,8 +244,7 @@ end Restriction
 
 /-! ### Finite support for a morphism -/
 
-/-- The derived pullback used in the finite-support criterion. Naming the functor shares the
-inferred graded tensor instances across its occurrences. -/
+/-- The derived pullback used in the finite-support criterion. -/
 private noncomputable abbrev finiteSupportUpperStar
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -478,22 +483,12 @@ private lemma exists_coordinates_isIso_kunnethMap_of_slice
       (exists_comp_sliceSpecialMap (traitSliceCoord k') hPU (hcoord i)) _ hslice'
 
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
-/-- **The finite-support step of Gabber's Künneth formula** (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, "Finite support"; Illusie, *Autour du théorème
-de monodromie locale*, proof of Thm. 4.7): for the product `P` over the strictly henselian trait of
-models `M`, `N` of finite type and bounded constructible `A`, `B` such that the source and the
-target of the Künneth map `Π_{A,B}` are bounded constructible, and whose total spaces locally embed
-into `𝔸ᵐ_S`, `𝔸^{m'}_S`, if the generic-slicing step holds in chart dimension `m + m' - 1`
-(`NearbyCyclesModel.SliceKunnethFormula`), then `Π_{A,B}` is an isomorphism away from finitely
-many closed points of the special fibre `X_s × Y_s`.
-
-Around every point, the coordinates of charts `V ⟶ 𝔸(ι_V; S)`, `W ⟶ 𝔸(ι_W; S)` of the total
-spaces detect closed points of the special fibre of `V ×_S W`, and the cone of
-`Π_{A,B}` vanishes over the generic point of each coordinate line
-(`NearbyCyclesModel.SliceKunnethFormula` and its mirror, for the
-restriction of the product to `V ×_S W`); conclude by
-`ProEtale.CondensedRing.exists_finset_isZero_of_forall_exists_coordinates`.
--/
+/-- **The finite-support step of Gabber's Künneth formula**: for the product `P` over the strictly
+henselian trait of models `M`, `N` of finite type and bounded constructible `A`, `B` such that
+the source and the target of the Künneth map `Π_{A,B}` are bounded constructible, and whose total
+spaces locally embed into `𝔸ᵐ_S`, `𝔸^{m'}_S`, if the generic-slicing step holds in chart
+dimension `m + m' - 1` (`NearbyCyclesModel.SliceKunnethFormula`), then `Π_{A,B}` is an
+isomorphism away from finitely many closed points of the special fibre `X_s × Y_s`. -/
 theorem exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible
     [TopologicalSpace.NoetherianSpace X] [TopologicalSpace.NoetherianSpace Y]
     [TopologicalSpace.NoetherianSpace Z]

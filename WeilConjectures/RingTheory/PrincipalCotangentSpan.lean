@@ -14,15 +14,7 @@ import Mathlib.RingTheory.PrincipalIdealDomain
 
 namespace IsLocalRing
 
-/-- An element outside the square of a principal maximal ideal spans that ideal.
-
-Source: elementary local algebra, principal generator calculation.
-(blueprint: lem-sbc-principal-cotangent-span)
-
-Proof: If tau is a unit, its span is the whole ring. Otherwise write
-m = (r) and tau = c*r. If c is a nonunit, both c and r lie in m,
-contradicting tau outside m*m. Thus c is a unit and (tau) = (r) = m.
-This also covers zero maximal ideal, where tau outside m*m is a unit. -/
+/-- An element outside the square of a principal maximal ideal spans that ideal. -/
 theorem maximalIdeal_le_span_of_isPrincipal_of_not_mem_square
     {C : Type*} [CommRing C] [IsLocalRing C] (tau : C)
     (hm : Submodule.IsPrincipal (maximalIdeal C))

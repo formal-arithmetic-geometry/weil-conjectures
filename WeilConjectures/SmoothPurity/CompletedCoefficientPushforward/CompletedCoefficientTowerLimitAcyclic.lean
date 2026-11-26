@@ -11,8 +11,12 @@ import WeilConjectures.SmoothPurity.CompletedCoefficientPushforward.CompletedCoe
 
 /-! # Inverse-limit acyclicity of completed-coefficient tower direct image
 
-Source: Stacks Project, Cohomology on Sites, Tags 0A07 and 0D6E.
-(blueprint: lem-pur-completed-coefficient-tower-limit-acyclic).
+The levelwise direct image of a K-injective complex of coefficient towers is acyclic for the
+derived inverse limit: the derived limit unit is an isomorphism on it.
+
+## References
+
+* [Stacks, Tags 0A07 and 0D6E](https://stacks.math.columbia.edu/tag/0A07)
 -/
 
 @[expose] public noncomputable section

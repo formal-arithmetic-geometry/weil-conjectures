@@ -16,8 +16,18 @@ import WeilConjectures.RingTheory.RegularThroughLocalization
 /-!
 # Backward implication of the G-ring criterion
 
-Source: Stacks Project, More on Algebra, proof of Lemma 07PN.
-(blueprint: theorem-finite-etale-covers-proper-henselian--2)
+If, for all primes `q ⊆ p` of a Noetherian ring `R`, the generic formal fibre of the completion
+of `(R ⧸ q)_p` is Noetherian and geometrically regular, then `R` is a G-ring.
+
+## Implementation details
+
+The proof uses the formal-fibre description of regular completion maps and identifies the fibres
+of the completion of `R_p` with the generic formal fibres of the quotients; fibres over primes not
+contained in `p` vanish.
+
+## References
+
+* [Stacks, Tag 07PN] (backward half)
 -/
 
 @[expose] public section
@@ -58,10 +68,9 @@ private theorem completion_fiber_subsingleton
     exact hu'
   exact subsingleton_of_zero_eq_one (isUnit_zero_iff.mp hzunit)
 
-/-- Backward implication in the G-ring criterion by pairs of primes. This is the backward
-half of Stacks Project, More on Algebra, Lemma 07PN, using the formal-fibre description of
-regular completion maps and the quotient formal-fibre identification.
-(blueprint: theorem-finite-etale-covers-proper-henselian--2) -/
+/-- Backward implication in the G-ring criterion by pairs of primes: if for all primes `q ⊆ p`
+the generic formal fibre of the completion of `(R ⧸ q)_p` is Noetherian and geometrically
+regular, then `R` is a G-ring. -/
 theorem isGRing_pairsOfPrimes_backward (R : Type u) [CommRing R] [IsNoetherianRing R]
     (h : ∀ (q p : Ideal R) [q.IsPrime] [p.IsPrime] (hqp : q ≤ p),
       let pbar := p.map (Ideal.Quotient.mk q)

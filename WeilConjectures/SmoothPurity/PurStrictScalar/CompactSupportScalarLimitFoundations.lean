@@ -149,8 +149,23 @@ import WeilConjectures.SmoothPurity.PurStrictScalar.ScalarLimitRestrictionLimits
 
 The canonical scalar limits, arithmetic restriction, completed coefficient
 balancing, and native compact-support limit comparisons.
-Source: Stacks Tags 0941, 06YY and 099L
-(blueprint: def-pur-compact-support-scalar-limit-maps).
+
+## Implementation details
+
+* `scalarLimitTensor_exact`: one integral basis identifies restricted tensor with a finite
+  biproduct, including all tower transitions; the dual basis makes tensor a right adjoint of an
+  exact functor, so it preserves K-injectives.
+* `scalarLimitRestriction_isIso`: `compactSupportRoosCofinality` on a simultaneous strict
+  K-injective resolution gives a quasi-isomorphic selection/block map, which is the restriction
+  of the ordinary limit cone under `strictRoosComparison`.
+* `scalarCompletionOrdinary_existsUnique`, `scalarCompletion_existsUnique`: an integral basis
+  makes completed scalar extension a finite biproduct; the pure-tensor map and its inverse
+  descend through tensor relations and sheafification, and localization with the universal
+  derived counits gives the derived statement.
+
+## References
+
+* [Stacks Project, Tags 03CY, 03DA, 03EK, 0941, 06YY and 099L]
 -/
 
 @[expose] public noncomputable section
@@ -214,39 +229,31 @@ private theorem scalarTensor_preservesLimits (W : Scheme.{u})
   exact preservesLimitsOfShape_of_reflects_of_preserves _
     (pbcRestrict (constantMap l E F i W))
 
-/-- Additivity of the actual inverse-limit functor follows from its finite products.
-Source: Stacks 0941 (blueprint: lem-pur-compact-support-scalar-limit-reduction). -/
+/-- Additivity of the actual inverse-limit functor follows from its finite products. -/
 instance scalarLimit_additive (W : Scheme.{u}) :
     (lim : Towers (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W ⥤
       Modules (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W).Additive :=
   Functor.additive_of_preserves_binary_products _
 
-/-- The specified total derived inverse limit on discrete integral strict towers.
-Source: Stacks 0941 (blueprint: lem-pur-compact-support-scalar-limit-reduction). -/
+/-- The specified total derived inverse limit on discrete integral strict towers. -/
 abbrev scalarLimit (W : Scheme.{u}) :=
   (lim : Towers (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W ⥤
     Modules (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W).rightDerivedFunctor
 
-/-- Ordinary restriction of the limit cone to the arithmetic subsequence.
-Source: Stacks 0941 (blueprint: lem-pur-compact-support-scalar-limit-reduction). -/
+/-- Ordinary restriction of the limit cone to the arithmetic subsequence. -/
 def scalarLimitRestrictionOrdinary (W : Scheme.{u}) (e : ℕ) :
     (lim : Towers (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W ⥤ _) ⟶
       ordinarySubsequence l E W e ⋙ lim where
   app K := limit.pre K (CategoryTheory.StrictTowerArithmetic.index e)
   naturality _K _L a := limit.map_pre a (CategoryTheory.StrictTowerArithmetic.index e)
 
-/-- Canonical derived arithmetic restriction, with the ordinary cone normalization.
-Source: Stacks 0941 (blueprint: lem-pur-compact-support-scalar-limit-reduction). -/
+/-- Canonical derived arithmetic restriction, with the ordinary cone normalization. -/
 def scalarLimitRestriction (W : Scheme.{u}) (e : ℕ) :
     scalarLimit l E W ⟶ subsequence l E W e ⋙ scalarLimit l E W :=
   Functor.rightDerivedPullback (ordinarySubsequence l E W e)
     (scalarLimitRestrictionOrdinary l E W e)
 
-/-- Finite-free integral scalar extension is exact and preserves strict K-injectives.
-Source: Stacks 03CY, 0941 (blueprint: lem-pur-compact-support-scalar-limit-reduction).
-Proof: one integral basis identifies restricted tensor with a finite biproduct,
-including all tower transitions. The dual basis makes tensor a right adjoint of
-an exact functor. The exact-left-adjoint criterion gives preservation of K-injectives. -/
+/-- Finite-free integral scalar extension is exact and preserves strict K-injectives. -/
 theorem scalarLimitTensor_exact (W : Scheme.{u}) :
     PreservesFiniteLimits (pbcExtend (constantMap l E F i W)) ∧
       PreservesFiniteColimits (pbcExtend (constantMap l E F i W)) ∧
@@ -257,8 +264,7 @@ theorem scalarLimitTensor_exact (W : Scheme.{u}) :
   exact ⟨h.1, h.2, hlim, scalarTensor_preservesKInjective l E F i W⟩
 
 /-- The canonical tensor/product comparison on total derived limits. Its factors
-are the unit-normalized derived-composite comparisons and ordinary limit comparison.
-Source: Stacks 0941 (blueprint: lem-pur-compact-support-scalar-limit-reduction). -/
+are the unit-normalized derived-composite comparisons and ordinary limit comparison. -/
 def scalarLimitTensor (W : Scheme.{u}) :
     scalarLimit l E W ⋙ baseTensor l E F i W ≅
       T l E F i W ⋙ scalarLimit l F W :=
@@ -293,11 +299,7 @@ private theorem scalarIndex_initial (e : ℕ) (he : 1 ≤ e) :
             right_inv := fun _ ↦ Subsingleton.elim _ _ } }
   exact Functor.initial_of_adjunction adj
 
-/-- Arithmetic restriction is invertible for every full tower and positive e.
-Source: Stacks 0941 (blueprint: lem-pur-compact-support-scalar-limit-reduction).
-Proof: use compactSupportRoosCofinality on a simultaneous strict K-injective
-resolution. Its selection/block map is a quasi-isomorphism and is the restriction
-of the ordinary limit cone under strictRoosComparison. Cancel the derived units. -/
+/-- Arithmetic restriction is invertible for every full tower and positive e. -/
 theorem scalarLimitRestriction_isIso (W : Scheme.{u}) (e : ℕ) (he : 1 ≤ e) :
     IsIso (scalarLimitRestriction l E W e) := by
   let A := Modules (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W
@@ -339,8 +341,7 @@ theorem scalarLimitRestriction_isIso (W : Scheme.{u}) (e : ℕ) (he : 1 ≤ e) :
   exact IsIso.of_isIso_comp_right ((Functor.rightDerivedPullback P α).app M)
     ((P.mapDerivedCategory ⋙ H.rightDerivedFunctor).map uI.hom)
 
-/-- The inverse of the specific arithmetic restriction, using its cofinality theorem.
-Source: Stacks 0941 (blueprint: lem-pur-compact-support-scalar-limit-reduction). -/
+/-- The inverse of the specific arithmetic restriction, using its cofinality theorem. -/
 def scalarLimitCofinalInverse (W : Scheme.{u}) (e : ℕ) (he : 1 ≤ e)
     (K : Derived (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W) :
     (scalarLimit l E W).obj ((subsequence l E W e).obj K) ⟶
@@ -373,41 +374,32 @@ private theorem restriction_preservesColimits
   exact preservesFiniteColimits_of_reflects_of_preserves _ U
 
 /-- Restriction to constant scalars preserves finite limits, detected on abelian
-sheaves. Source: Stacks 03DA
-(blueprint: lem-pur-compact-support-scalar-limit-reduction). -/
+sheaves. -/
 instance scalarConstantRestriction_limits (W : Scheme.{u}) :
     PreservesFiniteLimits (constantRestriction l E W) :=
   restriction_preservesLimits (integralConstantToCompletionOfUniverses l E W)
 
 /-- Restriction to constant scalars preserves finite colimits, detected on abelian
-sheaves. Source: Stacks 03DA
-(blueprint: lem-pur-compact-support-scalar-limit-reduction). -/
+sheaves. -/
 instance scalarConstantRestriction_colimits (W : Scheme.{u}) :
     PreservesFiniteColimits (constantRestriction l E W) :=
   restriction_preservesColimits (integralConstantToCompletionOfUniverses l E W)
 
-/-- Additivity of the specified constant restriction.
-Source: Stacks 03DA (blueprint: lem-pur-compact-support-scalar-limit-reduction). -/
+/-- Additivity of the specified constant restriction. -/
 instance scalarConstantRestriction_additive (W : Scheme.{u}) :
     (constantRestriction l E W).Additive :=
   Functor.additive_of_preserves_binary_products _
 
-/-- The exact constant restriction on the fixed derived module categories.
-Source: Stacks 03DA (blueprint: lem-pur-compact-support-scalar-limit-reduction). -/
+/-- The exact constant restriction on the fixed derived module categories. -/
 def scalarConstantRestriction (W : Scheme.{u}) :=
   (constantRestriction l E W).mapDerivedCategory
 
-/-- The ordinary scalar/completion composite is additive.
-Source: Stacks 03DA (blueprint: lem-pur-compact-support-scalar-limit-reduction). -/
+/-- The ordinary scalar/completion composite is additive. -/
 instance scalarCompletionTarget_additive (W : Scheme.{u}) :
     (pbcExtend (completedCoefficientMap l E F i W) ⋙ constantRestriction l F W).Additive := by
   infer_instance
 
-/-- Ordinary scalar/completion balancing, determined on every local pure tensor.
-Source: Stacks 03EK, 099L (blueprint: lem-pur-compact-support-scalar-limit-reduction).
-Proof: an integral basis makes completed scalar extension a finite biproduct.
-The displayed pure-tensor map and its inverse descend through tensor relations
-and sheafification. Local pure tensors generate, proving uniqueness and naturality. -/
+/-- Ordinary scalar/completion balancing, determined on every local pure tensor. -/
 theorem scalarCompletionOrdinary_existsUnique (W : Scheme.{u}) :
     ∃! β : constantRestriction l E W ⋙ pbcExtend (constantMap l E F i W) ≅
         pbcExtend (completedCoefficientMap l E F i W) ⋙ constantRestriction l F W,
@@ -420,13 +412,11 @@ theorem scalarCompletionOrdinary_existsUnique (W : Scheme.{u}) :
             (((integralConstantToCompletionOfUniverses l F W).hom.app U) b) x := by
   exact compactSupportCoefficientModels_ordinary l E F i W
 
-/-- The ordinary balancing map with its prescribed pure-tensor normalization.
-Source: Stacks 03EK (blueprint: lem-pur-compact-support-scalar-limit-reduction). -/
+/-- The ordinary balancing map with its prescribed pure-tensor normalization. -/
 def scalarCompletionOrdinary (W : Scheme.{u}) :=
   (scalarCompletionOrdinary_existsUnique l E F i W).choose
 
-/-- Termwise localization of the already fixed ordinary balancing.
-Source: Stacks 06YY (blueprint: lem-pur-compact-support-scalar-limit-reduction). -/
+/-- Termwise localization of the already fixed ordinary balancing. -/
 def scalarCompletionOrdinaryComplex (W : Scheme.{u}) :
     (constantRestriction l E W ⋙ pbcExtend (constantMap l E F i W)).mapHomologicalComplex
         (.up ℤ) ≅
@@ -437,10 +427,7 @@ def scalarCompletionOrdinaryComplex (W : Scheme.{u}) :
   NatIso.mapHomologicalComplex (scalarCompletionOrdinary l E F i W) (.up ℤ)
 
 /-- The scalar/completion comparison is fixed on all complex counits, before
-passing to finite levels. It therefore cannot be an independently chosen iso.
-Source: Stacks 06YY, 099L (blueprint: lem-pur-compact-support-scalar-limit-reduction).
-Proof: finite freeness makes both ordinary tensors exact. Localize the prescribed
-ordinary balancing; the universal derived counits give the equation and uniqueness. -/
+passing to finite levels. It therefore cannot be an independently chosen iso. -/
 theorem scalarCompletion_existsUnique (W : Scheme.{u}) :
     ∃! χ : scalarConstantRestriction l E W ⋙ baseTensor l E F i W ≅
         pbcDerivedExtend (completedCoefficientMap l E F i W) ⋙
@@ -460,8 +447,7 @@ theorem scalarCompletion_existsUnique (W : Scheme.{u}) :
   simpa only [scalarConstantRestriction, scalarCompletionOrdinaryComplex] using
     completedScalarBalancing_existsUnique l E F i W (scalarCompletionOrdinary l E F i W)
 
-/-- The quotient-compatible ordinary/strict scalar comparison χ.
-Source: Stacks 06YY (blueprint: lem-pur-compact-support-scalar-limit-reduction). -/
+/-- The quotient-compatible ordinary/strict scalar comparison χ. -/
 def scalarCompletion (W : Scheme.{u}) :=
   (scalarCompletion_existsUnique l E F i W).choose
 
@@ -470,9 +456,7 @@ attribute [local irreducible] scalarCompletion
 attribute [-instance] WeilConjectures.SemilinearSections.abelianSheafify
   WeilConjectures.SemilinearSections.locallyBijective WeilConjectures.SemilinearSections.hasDerived
 
-/-- Exact countable products on this specific constant coefficient category.
-Source: blueprint proposition-exact-products--1
-(blueprint: lem-pur-compact-support-scalar-limit-reduction). -/
+/-- Exact countable products on this specific constant coefficient category. -/
 instance scalarRoos_exactProducts (W : Scheme.{u}) :
     HasExactLimitsOfShape (Discrete ℕ)
       (Modules (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W) :=

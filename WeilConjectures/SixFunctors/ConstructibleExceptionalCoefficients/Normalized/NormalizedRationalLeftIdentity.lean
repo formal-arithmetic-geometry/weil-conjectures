@@ -12,7 +12,14 @@ import WeilConjectures.SixFunctors.Integral.IntegralResidueTor
 import WeilConjectures.DeligneLaumon.CompactSupportNormalizedScalarIsomorphisms
 import WeilConjectures.SixFunctors.NormalizedRingCompactScalar.NormalizedRingCompactScalarCocycle
 
-/-! # Identity law for normalized rational left coefficient comparisons -/
+/-! # Identity law for normalized rational left coefficient comparisons
+
+## Implementation details
+
+The integral identity equation is transported through the specified rational localization; the
+localized action formula identifies the localized integral unit arrow with the rational scalar
+unit.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -85,14 +92,6 @@ private theorem ring_identity (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
 
 /--
 The normalized rational left comparison satisfies the scalar identity law.
-Source: exceptional inverse-image coefficient construction, rationalization paragraph;
-the rational-arrow localization argument, Steps 1--4
-(blueprint: lem-sf-normalized-rational-left-laws).
-
-The proof transports the integral identity equation through the specified rational
-localization. The localized action formula identifies the localized integral unit arrow
-with the displayed rational scalar unit, and localization preserves composition and
-identities.
 -/
 theorem normalized_rational_left_identity (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} {f : X ⟶ Y}

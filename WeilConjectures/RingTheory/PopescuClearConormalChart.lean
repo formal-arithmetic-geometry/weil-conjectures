@@ -18,8 +18,21 @@ import Mathlib.RingTheory.Etale.Kaehler
 
 /-! # Clearing the relations on one conormal chart
 
-Source: Stacks Project, Tag 07CP, preparation (3)--(4).
-(blueprint: lem-weil-pbc-popescu-clear-conormal-chart).
+On a conormal chart, the selected relations can be made to generate the other relations exactly
+modulo `π²`, after inverting a positive power of the chart element.
+
+## Implementation details
+
+`Ideal.exists_conormal_span_clearing` and Nakayama (Tag 00DV) give an element `e` with `e - 1` in
+the localized ideal and `e I ⊆ I_E`; clearing denominators gives the multiplier, and the residual
+polynomial is divisible by `π²`. Localization at a positive power is identified with localization
+at the original element. The cases `m = 0`, `E = ∅`, the zero ring and `π` zero or a unit are
+included.
+
+## References
+
+* [Stacks, Tag 07CP] (preparations (2)–(4))
+* [Stacks, Tag 00DV]
 -/
 
 @[expose] public section
@@ -121,29 +134,8 @@ private theorem transfer_chart
       (KaehlerDifferential.map R R S T)⟩
 
 
-/-- A selected conormal basis can be refined to exact polynomial relations modulo π².
-
-Source: Stacks Project, Tag 07CP, proof between preparations (2) and (4).
-(blueprint: lem-weil-pbc-popescu-clear-conormal-chart).
-
-Proof: Write Pbar = (R/π²)[x], I = (reduced f), and I_E = (reduced f_j, j in E).
-The prescribed basis spans the localized conormal module. Apply
-Ideal.exists_conormal_span_clearing: lift the spanning combinations to I_E and
-clear their localization equalities to obtain a0^k_l*f_l in I_E+I². In Pbar_a0,
-Nakayama (Tag 00DV) gives e with e-1 in the localized I and e*I contained in I_E.
-Clear the denominator of e-1, writing (e-1)*a0^N=b with b in I. Then
-(a0^N+b)*f_l lies in the localized I_E. Clear these finitely many memberships
-and choose K=1+max_l k_l. The reduced multiplier abar=a0^K*(a0^N+b) satisfies
-abar*f_l in I_E and has quotient image val(a0)^(K+N), with K+N positive.
-Express each membership using the selected generators, and lift abar and all
-coefficients to R[x]. The residual polynomial maps to zero under reduction,
-so it is divisible by C(π²), giving the polynomial g_l and the exact identity.
-Localization at a positive power is canonically localization at the original element;
-transport smoothness, the prescribed conormal basis, and the differential basis
-along the algebra and module localization equivalences. The equivalences commute
-with the localization maps, so they preserve the prescribed conormal generators.
-For m=0 the empty maximum is zero and K=1. For E empty Nakayama still applies.
-The argument also works in the zero ring and when π is zero or a unit. -/
+/-- A selected conormal basis can be refined to exact polynomial relations modulo `π²` after
+inverting a positive power of the chart element. -/
 theorem exists_popescu_cleared_conormal_chart
     {R : Type u} [CommRing R] (π : R) (n m : ℕ)
     (f : Fin m → MvPolynomial (Fin n) R)

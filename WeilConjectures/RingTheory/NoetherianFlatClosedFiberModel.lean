@@ -20,8 +20,19 @@ import WeilConjectures.RingTheory.NoetherianLocalModelTowerFiberFlat
 /-!
 # A common Noetherian stage for base and closed-fibre flatness
 
-Source: Stacks Project, Algebra, proof of Tag 00R7, paragraphs 1 and 2.
-(blueprint: lem-weil-pbc-noetherian-flat-closed-fiber-model).
+A flat module over a local homomorphism of essentially finitely presented local algebras has a
+Noetherian model at which both the base module and the closed-fibre module are flat.
+
+## Implementation details
+
+The model comes from the limit tower for essentially finite presentation, after lifting rings
+to a common universe. Flatness at one stage is obtained from eventual flatness of colimits,
+first for the given system and then for the system of closed fibres, and persists at later stages
+by base change and localization. No nonzero hypothesis is needed.
+
+## References
+
+* [Stacks, Tag 00R7] (first two paragraphs of the proof)
 -/
 
 @[expose] public section
@@ -32,56 +43,12 @@ open scoped TensorProduct
 
 namespace Module
 
-/-- A Noetherian model at which the base module and the closed-fibre module are flat.
-Source: Stacks Project, Algebra, proof of Tag 00R7, first two paragraphs, with the
-localization corrections in steps 1--8 of `lem-weil-pbc-criterion-flatness-fibre`.
-(blueprint: lem-weil-pbc-noetherian-flat-closed-fiber-model).
+/-- A Noetherian model `R₀ → S₀ → T₀` with finite module `N₀` at which the base module and the
+closed-fibre module are flat, together with identifications of `S` and `M` with localizations of
+the appropriate base changes.
 
-This asserts the inputs to the Noetherian fibre criterion, not its conclusions: it does
-not assert flatness of `S₀` over `R₀` or of `N₀` over `S₀`. The last two clauses identify
-`S` and `M` with localizations of the appropriate base changes. Only the scalar actions
-needed to express and use these identifications are retained from the directed system.
-
-Proof:
-1. Present `M` by a finite matrix over `S'`. Apply
-   `lem-weil-pbc-limit-tower-essentially-finite-presentation` to the two given localized
-   presentations and this matrix. Lift rings to a common universe before applying its
-   same-universe formulation, and transport the limit comparison maps back along the
-   lift equivalences. Its stage rings lie in `Type (max u v w)` and its stage modules
-   in `Type t`, as in the statement here. Lift transport preserves the local maps,
-   tensor products and flatness hypotheses.
-2. The stage rings are Noetherian: the integers are Noetherian; finite type extensions
-   and localizations preserve Noetherianity. The maps are local by the tower theorem.
-   Consequently each stage maximal ideal is the inverse image of the maximal ideal
-   of `R`, and likewise under the transition maps.
-3. Compose the two transition localization clauses by tensor associativity and
-   localization base change. This makes the transition from the top stage after base
-   change along the base ring a localization. Apply
-   `lem-weil-pbc-colimit-eventually-flat` to the base and top rings and stage modules.
-   Flatness of `M` over `R` gives base flatness at one stage. It persists at later stages:
-   base change of a flat module is flat, and localizing a module preserves base flatness.
-4. Quotient each stage by the extended maximal ideal of its base. The quotient rings
-   are Noetherian local; the quotient modules are finite. Tensor over a quotient and
-   localization base change give the same transition localization and module-isomorphism
-   clauses for this system. Its colimits are `S/m_R S`, `S'/m_R S'`, and `M/m_R M`.
-   Indeed, elements and finite ideal expressions descend to a common stage; an equality
-   at the limit holds at a later stage. Locality identifies membership in the maximal
-   ideal already at that stage. Thus the kernel of the map from the quotient colimit
-   is zero, and surjectivity follows by representing elements at a stage.
-5. Apply `lem-weil-pbc-colimit-eventually-flat` to that fibre system and the hypothesis
-   `h_fibre`, using the quotient-tensor identification. Obtain fibre flatness at one
-   stage; it persists at later stages by base change and localization as in step 3.
-   Directedness supplies a common stage `R₀ → S₀ → T₀`, with module `N₀`, at which both
-   flatness properties hold. Finiteness is a clause of the tower theorem. No nonzero
-   hypothesis is needed: the construction also applies to the zero module.
-6. The limit localization clauses identify `S` with a localization of `R ⊗[R₀] S₀`.
-   A localization of a ring agrees with its module localization, giving the first
-   displayed linear equivalence. For the second, put `C = S ⊗[S₀] T₀` and use its
-   canonical action on `S ⊗[S₀] N₀`. The limit clause identifies `S'` with a localization
-   of `C`, and identifies `M` with `S' ⊗[T₀] N₀`. Tensor associativity identifies the
-   latter with the localization of `S ⊗[S₀] N₀` at the same submonoid. These
-   identifications are `S`-linear and the canonical `C`-action has the required tower.
--/
+This asserts the inputs to the Noetherian fibre criterion, not its conclusions: it does not
+assert flatness of `S₀` over `R₀` or of `N₀` over `S₀`. -/
 theorem exists_noetherian_flat_closedFiber_model
     (R : Type u) (S : Type v) (S' : Type w) (M : Type t)
     [CommRing R] [CommRing S] [CommRing S']

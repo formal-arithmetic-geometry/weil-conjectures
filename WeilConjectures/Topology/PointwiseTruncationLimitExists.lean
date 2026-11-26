@@ -11,21 +11,31 @@ public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 
+/-!
+# Existence of a map to the derived limit of lower truncations
+
+A complex of modules admits a map to a derived limit of its lower truncations, compatible with
+the truncation maps.
+
+## Implementation details
+
+The truncation maps are compatible with the transition maps, so their product map is killed by
+`1 - s`, where `s` is the shift on the product; exactness of Hom into the Roos derived-limit
+triangle lifts this family. No local cohomology bounds are needed for existence.
+
+## References
+
+* [Stacks Project, Tags 0H72 and 0D62](https://stacks.math.columbia.edu/tag/0H72)
+-/
+
 @[expose] public section
 
 universe u w
 open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace AlgebraicGeometry.RingedSpace
 set_option linter.unusedVariables false in
-/-- Existence part of pointwise truncation reconstruction
-(blueprint: lem-pc-ringed-space-pointwise-truncation-limit-exists).
-
-Proof: for each standard lower truncation, use its canonical truncation map from `E`.
-These maps are compatible with the transition maps. Their product map
-is killed by `1 - s`, where `s` is the shift on the product. Exactness of Hom into the
-Roos derived-limit triangle lifts this compatible family through `π`, producing a map
-`c : E ⟶ K`. Local cohomology bounds are not needed for this existence argument.
-Source: Stacks, Derived Categories, Tag 0H72, as invoked in Cohomology, Tag 0D62. -/
+/-- Existence part of pointwise truncation reconstruction: the canonical maps from `E` to its
+lower truncations lift to a map `c : E ⟶ K` to the derived limit. -/
 theorem pointwise_truncation_limit_exists (X : RingedSpace.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]
     (E : DerivedCategory (SheafOfModules.{u} (moduleRings X)))

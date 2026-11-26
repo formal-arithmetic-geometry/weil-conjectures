@@ -9,10 +9,8 @@ public import WeilConjectures.SmoothPurity.Common.CommonStageInternalHomData
 
 /-! # Literal common-stage pullback data
 
-The existing pullback object and comparison definitions, moved without changing their bodies.
-The shared recorded stage-transition identification is re-exported by the imported data module.
-Source: the existing common-stage pullback definitions in DerivedPullbackTensorHom.
-(blueprint: def-weil-common-stage-pullback-data).
+The common-stage pullback of an algebraically closed constructible coefficient object, and its
+comparison with rational pullback at any larger coefficient stage.
 -/
 
 @[expose] public noncomputable section
@@ -52,9 +50,8 @@ set_option backward.isDefEq.respectTransparency.types false
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
 
-/-- Common-stage pullback retains the literal coefficient stage.
-Source: blueprint common-stage paragraph
-(blueprint: prose-03-02). -/
+/-- Common-stage pullback of an object `P` at stage `L` is the rational
+pullback of `P` with coefficients in `L`, at the same stage `L`. -/
 def commonStagePullbackObject {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -62,9 +59,9 @@ def commonStagePullbackObject {X Y : Scheme.{u}} (f : X ⟶ Y)
     generalAlgebraicallyClosedConstructibleCategory l Ω X :=
   ⟨P.stage, (rationalDerivedPullback l (Coefficient.{u} l Ω P.stage) f).obj P.obj⟩
 
-/-- The canonical pullback comparison includes the recorded transition identifications.
-Source: blueprint common-stage paragraph
-(blueprint: prose-03-02). -/
+/-- The canonical pullback comparison at a larger stage `L`: the transport of
+`commonStagePullbackObject f P` to `L` is isomorphic to the rational pullback of the transport of
+`P` to `L`, via the stage-transition identifications. -/
 def commonStagePullbackComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

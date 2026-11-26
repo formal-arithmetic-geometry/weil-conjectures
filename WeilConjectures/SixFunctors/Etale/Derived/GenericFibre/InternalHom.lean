@@ -20,10 +20,10 @@ For a morphism of schemes `g : Y ⟶ X` and a monoidal Grothendieck abelian coef
 `ρ_{K, M} : Lg^* RHom(K, M) ⟶ RHom(Lg^* K, Lg^* M)`
 
 (`AlgebraicGeometry.Etale.derivedHomUpperStarComparison`), the transpose of
-`Lg^* K ⊗ᴸ Lg^* RHom(K, M) ≅ Lg^*(K ⊗ᴸ RHom(K, M)) ⟶ Lg^* M`. It is the comparison map of the
-third assertion of blueprint `lemma-restriction-geometric-generic-fibre`, and it is compatible with
-evaluation by construction (`AlgebraicGeometry.Etale.derivedHomUpperStarComparison_ev`): this is
-what identifies `g^* δ_K` with `δ_{g^* K}` in `lemma-double-dual-geometric-generic-fibre--1`.
+`Lg^* K ⊗ᴸ Lg^* RHom(K, M) ≅ Lg^*(K ⊗ᴸ RHom(K, M)) ⟶ Lg^* M`. It is the internal-hom comparison
+map for the restriction to the geometric generic fibre, and it is compatible with evaluation by
+construction (`AlgebraicGeometry.Etale.derivedHomUpperStarComparison_ev`): this is what
+identifies `g^* δ_K` with `δ_{g^* K}`.
 
 This file records the general properties of `ρ` used to prove that it is an isomorphism over a
 geometric generic point
@@ -67,8 +67,8 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [UpperStarPreservesFlat A]
 
-/-- Blueprint `lemma-restriction-geometric-generic-fibre`, the internal-hom comparison: for
-`g : Y ⟶ X`, the canonical map `Lg^* RHom(K, M) ⟶ RHom(Lg^* K, Lg^* M)`, the comparison map
+/-- The internal-hom comparison: for `g : Y ⟶ X`, the canonical map
+`Lg^* RHom(K, M) ⟶ RHom(Lg^* K, Lg^* M)`, the comparison map
 `CategoryTheory.Functor.LaxMonoidal.ihomComparison` of the monoidal functor `Lg^*`
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarMonoidal`). It is the transpose of
 `Lg^* K ⊗ᴸ Lg^* RHom(K, M) ≅ Lg^*(K ⊗ᴸ RHom(K, M)) ⟶ Lg^* M`, the pullback of the evaluation
@@ -80,8 +80,7 @@ noncomputable def derivedHomUpperStarComparison {X Y : Scheme.{u}} (g : Y ⟶ X)
   letI := leftDerivedUpperStarMonoidal A g
   (Functor.LaxMonoidal.ihomComparison L((g)^*[A]) K).app M
 
-/-- Blueprint `lemma-restriction-geometric-generic-fibre`: the internal-hom comparison preserves
-evaluation. The square
+/-- The internal-hom comparison preserves evaluation. The square
 ```
   Lg^*K ⊗ᴸ Lg^* RHom(K, M) ──1 ⊗ ρ──▶ Lg^*K ⊗ᴸ RHom(Lg^*K, Lg^*M)
             │ μ                                   │ ev

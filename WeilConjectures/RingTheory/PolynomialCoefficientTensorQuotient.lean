@@ -13,8 +13,19 @@ import Mathlib.LinearAlgebra.TensorProduct.Quotient
 
 /-! # Polynomial coefficient tensors as a quotient of the coefficient kernel
 
-Source: Stacks Project, Algebra, Tag 00S2, proof of lemma-exact-sequence-NL;
-More on Algebra, Tag 07D4, proof of lemma-transitive-lci-at-end.
+For `Q = P[y]`, `H = ker(Q → (P/I)[y])` and `J = ker(Q → C)`, there is an identification
+`C ⊗[P/I] (I/I²) ≃ H / J H`.
+
+## Implementation details
+
+The map `Q ⊗[P] I → H`, `q ⊗ x ↦ q x`, is an isomorphism by coefficient expansion. Tensoring
+with `C` and using cancellation and the quotient tensor equivalences gives the result. Neither
+flatness of `C` nor projectivity of `I` is needed.
+
+## References
+
+* [Stacks, Tag 00S2]
+* [Stacks, Tag 07D4]
 -/
 
 @[expose] public section
@@ -67,25 +78,8 @@ private theorem coefficient_tensor_bijective
   exact hr x x.2 x.2
 
 /-- The coefficient expansion and quotient tensor identifications identify the base changed
-conormal module with the coefficient kernel modulo its product with the presentation kernel.
-Source: Stacks Project, Algebra, Tag 00S2, proof of lemma-exact-sequence-NL;
-More on Algebra, Tag 07D4, proof of lemma-transitive-lci-at-end.
-(blueprint: lem-weil-pbc-polynomial-coefficient-tensor-quotient)
-
-Proof. Write Q = P[y], A = P/I, H = ker(Q → A[y]), and J = ker φ.
-A polynomial belongs to H precisely when all its coefficients belong to I.
-The map Q tensor_P I → H sends q tensor x to q C(x); its inverse sends a
-polynomial to the finite sum of its monomials tensor their coefficients in I.
-These are inverse Q-linear maps, by coefficient comparison and tensor balancing.
-Tensor this equivalence with C over Q. Tensor associativity and cancellation identify
-C tensor_Q H with C tensor_P I. Since C is an A-module, cancellation over A and
-the quotient tensor equivalence A tensor_P I = I/I² identify the latter with
-C tensor_A (I/I²). Finally Q/J = C via φ, so the quotient tensor equivalence identifies
-C tensor_Q H with H/JH. All maps send c tensor [x] to the class of a lift of c
-multiplied by C(x). Two lifts differ in J and give the same class modulo JH.
-These computations prove the displayed formula and Q-linearity. They require neither
-flatness of C nor projectivity of I. For I = P, compatibility forces C to be the zero
-ring and both sides vanish; for no variables, coefficient expansion is the identity. -/
+conormal module `C ⊗[P/I] (I/I²)` with the coefficient kernel `H` modulo its product with the
+presentation kernel `J`. -/
 theorem polynomial_coefficient_tensor_quotient
     (P : Type u) [CommRing P] (I : Ideal P) (m : ℕ)
     (C : Type v) [CommRing C] [Algebra (P ⧸ I) C]

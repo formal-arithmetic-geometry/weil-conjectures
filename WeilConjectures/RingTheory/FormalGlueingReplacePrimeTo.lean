@@ -11,8 +11,20 @@ public import WeilConjectures.RingTheory.FormalGlueingData
 /-!
 # Replacing the prime component of a glueing datum
 
-Source: Stacks Project, More on Algebra, Lemma 0ALK, proof of part (1), and Remark 05EL
-(blueprint: lem-weil-pbc-formal-glueing-replace-prime-to).
+Given a glueing datum `Y` and an `S`-linear map `h : Q → Y.M'` that is bijective on every
+chart, we construct a glueing datum with prime component `Q` and a morphism to `Y` whose
+chart components are bijective.
+
+## Implementation details
+
+The new datum keeps the chart modules and overlap maps of `Y`; each comparison isomorphism is
+composed with the localization of `h`. The square identity uses naturality of the
+interchange isomorphism with respect to `h`. No flatness or quotient hypothesis is used.
+
+## References
+
+* [Stacks, Tag 0ALK], proof of part (1)
+* [Stacks, Tag 05EL]
 -/
 
 @[expose] public section
@@ -101,22 +113,7 @@ private theorem extendMapR_id {R : Type u} {S : Type v}
   simp [extendMapR, extendMap, restrictMap]
 
 /-- A map invertible on every chart gives a new glueing datum and a morphism to
- the old datum that is invertible on its chart components.
-Source: Stacks Project, More on Algebra, Lemma 0ALK, proof of part (1),
-the modified object and the morphism to the canonical object; Remark 05EL.
-(blueprint: lem-weil-pbc-formal-glueing-replace-prime-to).
-
-Proof: Set the new prime component to Q and keep all old chart modules and overlap
-maps. Compose each old comparison isomorphism with the localization of h, which
-is an isomorphism by the hypothesis. The comparison remains S-linear by
-localMap_smul and the old alpha_smul. For the square, localization preserves
-composition, and interchange is natural with respect to h: on double fractions
-both paths send the numerator to h of that numerator and interchange the same
-denominators. Substitute this naturality identity and use the old square. The
-cocycle is unchanged. The map with prime component h and identity chart components
-satisfies prime compatibility by the definition of the new comparison and chart
-compatibility by the identity laws. Use the identity equivalence on Q; every
-identity chart component is bijective. No flatness or quotient hypothesis is used. -/
+ the old datum that is invertible on its chart components. -/
 theorem exists_replace_prime_to
     {R : Type u} {S : Type v} [CommRing R] [CommRing S]
     (φ : R →+* S) {t : ℕ} (f : Fin t → R)

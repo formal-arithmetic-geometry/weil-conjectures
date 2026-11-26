@@ -11,8 +11,16 @@ import WeilConjectures.WeilSheaf.Ordinary.OrdinaryRingedTensorTotalComparison
 
 /-! # Termwise transport of an evaluation-normalized binary comparison
 
-Source: Stacks 03EO and 0FPQ, tensor-Hom naturality and sum-total complexes.
-(blueprint: new-sf-ordinary-ringed-tensor-termwise-comparison).
+## Implementation details
+
+The binary comparison is made natural in both variables via the tensor--Hom mate equation,
+and the total map-bifunctor comparison is applied to it; the equivalence preserves the
+coproducts indexed by `p+q=n`. No associativity or unit compatibility of the Hom comparison
+is used.
+
+## References
+
+* Stacks Project, Tags 03EO and 0FPQ
 -/
 
 @[expose] public noncomputable section
@@ -25,20 +33,7 @@ attribute [local instance] Mod.monoidalCategoryCochainComplex
 
 -- Elaborating the concrete tensor instances requires large definitional comparisons.
 -- The native and ringed tensor instances have separate coefficient and site universes.
-/-- Transport a normalized tensor comparison termwise, without asserting associativity.
-Source: Stacks 03EO and 0FPQ.
-(blueprint: new-sf-ordinary-ringed-tensor-termwise-comparison).
-
-Proof: the quotient equation for b implies its naturality in both variables, since
-precomposition by the quotient projection detects equality. Transport d across b.
-The tensor--Hom mate equation and naturality of the Hom comparison prove naturality
-in both factors, by transposing and then specializing to the adjunct of an identity.
-Thus the resulting components form the natural isomorphism nu. Apply the total
-map-bifunctor comparison to nu. The equivalence preserves the coproducts indexed by
-p+q=n, so this comparison is invertible in every degree and hence is an isomorphism
-of complexes. Its defining coproduct equation gives the displayed summand formula.
-No associativity or unit compatibility of the Hom comparison is used.
--/
+/-- Transport a normalized tensor comparison termwise, without asserting associativity. -/
 theorem ordinary_ringed_tensor_termwise_comparison
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     {C : Type (u + 1)} [SmallCategory C] (J : GrothendieckTopology C)

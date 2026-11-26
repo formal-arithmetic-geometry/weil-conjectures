@@ -15,7 +15,19 @@ import Mathlib.CategoryTheory.Filtered.Connected
 
 /-! # Finite presentation and ind-smooth factorizations
 
-Source: Stacks Project, Algebra, Lemma 00QO and Lemma 07C3.
+A finitely presented algebra mapping into an ind-smooth algebra factors through a smooth
+algebra.
+
+## Implementation details
+
+The base and source are raised to the universe of the target using `ULift`, and the
+finite-presentation factorization lemma is applied to the underlying diagram of rings under the
+lifted base; its forgetful functor preserves filtered colimits.
+
+## References
+
+* [Stacks, Tag 00QO]
+* [Stacks, Tag 07C3]
 -/
 
 @[expose] public section
@@ -27,20 +39,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace Algebra
 
 /-- A finitely presented algebra mapping into an ind-smooth algebra factors through a
-smooth algebra. The source and base can be smaller than the target universe.
-
-Source: Stacks Project, Algebra, Lemma 00QO and Lemma 07C3, (1) implies (2).
-(blueprint: lem-weil-pbc-ind-smooth-finite-presentation-factorization).
-
-Proof: Raise the base and source to the universe of the target using ULift.
-The category of algebras over the base is equivalent to commutative rings under
-that lifted base. Its forgetful functor preserves filtered colimits, since these
-are connected colimits. Apply the finite-presentation factorization lemma to the
-underlying ring diagram with its compatible structure maps from the lifted base.
-The factorization map commutes with those structure maps and hence is an algebra
-map over the original base. Compose with the inverse ULift equivalence on the source.
-The chosen stage is smooth by the hypothesis defining the ind-smooth presentation.
-The composite equality is the equality supplied by the factorization lemma. -/
+smooth algebra. The source and base can be smaller than the target universe. -/
 theorem exists_smooth_factorization_of_ind_smooth
     {R : Type u} {A : Type v} {L : Type (max u v w)}
     [CommRing R] [CommRing A] [CommRing L] [Algebra R A] [Algebra R L]

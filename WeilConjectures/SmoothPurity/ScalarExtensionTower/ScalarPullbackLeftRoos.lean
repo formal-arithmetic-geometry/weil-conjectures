@@ -12,8 +12,12 @@ import WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarPullbackRoosCoord
 
 /-! # Fixed cochain coordinates for the scalar/pullback calculation
 
-Source: Stacks 06YY, 07A4 and 0941. The coordinates are constructed from the
-ordinary scalar/pullback chain map and a coherent quotient presentation.
+The coordinates are constructed from the ordinary scalar/pullback chain map and a coherent
+quotient presentation.
+
+## References
+
+* Stacks Project, Tags 06YY, 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -68,24 +72,7 @@ private theorem scalarCompletionIso_hom (Y : Scheme.{u})
 attribute [local irreducible] integralScalarExtension
 
 /-- Compute the route using scalar normalization at Y and pullback normalization
-with coefficients L. There is no scalar model at X or pullback model for E here.
-Source: Stacks 07A4, 0941; the left route in realization step 8 of
-lem-pur-scalar-extension-tower-coherence.
-(blueprint: stage3-pur-scalar-pullback-left-roos).
-
-Proof: precompose by scalarCompletionIso at the pulled E input. Its inverse in
-scalarPullbackCompleted cancels. Naturality of the L-pullback realization moves
-the remaining scalarCompletion at Y into the reduction diagram. Use the scalar
-normalization of SY on the coherent presentation C, and the normalization of the
-L-pullback on the ordinary scalar extension of P. The normalized completion chain
-has the tensor-unit augmentation and zero shifted coordinate. The quotient
-formula for q identifies its augmentation with the canonical scalarPullbackTower
-map, level by level and with every transition. Applying the Roos functor gives
-scalarPullbackChain on both coordinates. The normalization of
-scalarPullbackOrdinary identifies its localization with the middle of the
-conjugated completed comparison. Move eP through the natural transformations,
-then cancel the source completion isomorphism. This proves the stated one-sided
-coordinate formula. No realization with E after pullback is used. -/
+with coefficients L. There is no scalar model at X or pullback model for E here. -/
 theorem scalarPullbackLeftRoos (W : Bool → Scheme.{u})
     (SE : CoefficientDerivedSystemCalculus.{u, u} l E (W false))
     (ML : CompletedOperations.Models.{u, u} l L W)

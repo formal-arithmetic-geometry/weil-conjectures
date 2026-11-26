@@ -20,8 +20,19 @@ import Mathlib.RingTheory.Spectrum.Prime.Noetherian
 
 /-! # Prepared polynomial data for Popescu lifting
 
-Source: Stacks Project, Tag 07CP, preparation (1)--(4).
-(blueprint: lem-weil-pbc-popescu-lift-preparation).
+We define the finite polynomial data used in the lifting lemma of Popescu's theorem, the
+explicit lifting algebra it presents, and show that such prepared data exist.
+
+## Implementation details
+
+All data are explicit finite polynomial data; no algebra is chosen from an existence theorem.
+The lifting algebra is wrapped in `ULift` to land in the universe required by the original
+theorem.
+
+## References
+
+* [Stacks, Tag 07CP] (preparation (1)--(4))
+* [Stacks, Tag 07C6]
 -/
 
 @[expose] public section
@@ -32,7 +43,7 @@ universe a c
 
 namespace Algebra
 
-/-- Finite polynomial data; no algebra is chosen from an existence theorem. -/
+/-- Finite polynomial data for the Popescu lifting construction. -/
 structure PopescuLiftPresentation (R : Type a) (Cbar : Type c)
     [CommRing R] [CommRing Cbar] (π : R)
     [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar] where
@@ -114,7 +125,7 @@ def equation (d : PopescuLiftPresentation R Cbar π) :
 abbrev definingIdeal (d : PopescuLiftPresentation R Cbar π) :=
   Ideal.span (Set.range d.equation)
 
-/-- Explicit quotient; `ULift` gives the universe required by the original theorem. -/
+/-- The lifting algebra: the quotient of the polynomial ring by the equations. -/
 abbrev liftingAlgebra (d : PopescuLiftPresentation R Cbar π) :=
   ULift.{c} (d.polynomial ⧸ d.definingIdeal)
 
@@ -146,25 +157,7 @@ private theorem smoothAtPrime_of_algEquiv
       (by simp only [Submonoid.map_powers, e.apply_symm_apply])
     exact Smooth.of_equiv el.symm
 
-/-- Prepare the finite presentation and smooth charts used in the lifting construction.
-
-Source: Stacks Project, Tag 07CP, proof through equations (1)--(4); Tag 07C6.
-(blueprint: lem-weil-pbc-popescu-lift-preparation).
-
-Proof: Choose a finite polynomial presentation over R/π² and lift its finitely many
-relations to R[x]. Let ε be its surjective presentation map. The quotient Cbar is
-Noetherian, since it is finite type over the Noetherian quotient R/π². At each smooth
-prime apply Tag 07C6 to select a principal neighbourhood, a subset E of the given
-relations forming a conormal basis, and a differential basis of complementary rank.
-Select finitely many such neighbourhoods covering the smooth locus using Noetherianity.
-For each chart, the selected relations generate I/I² after localization. Nakayama
-applied to I/I_E gives an annihilator 1+b/a^N with b in I. Replace a by a(a^N+b);
-in Cbar its image is a power of the old image, so the cover and bases persist, while
-I and I_E now agree after localization. Clear denominators in the expressions for
-all f_l in I_E modulo π², replacing a by a common positive power. Lift the coefficients
-and the π² remainders to R[x]. For l in E choose h_{klj}=a_k δ_{lj} and g_{kl}=0.
-These choices satisfy the displayed relations exactly and preserve every chart condition.
--/
+/-- Prepare the finite presentation and smooth charts used in the lifting construction. -/
 theorem exists_popescu_lift_preparation (R : Type a) (Cbar : Type c)
     [CommRing R] [CommRing Cbar] [Algebra R Cbar] [IsNoetherianRing R] (π : R)
     [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]

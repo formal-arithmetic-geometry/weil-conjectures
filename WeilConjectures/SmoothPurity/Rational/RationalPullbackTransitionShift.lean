@@ -13,10 +13,6 @@ import WeilConjectures.CategoryTheory.Shift.CommShiftEqToIso
 
 /-! # Scalar compatibility of normalized pullback shifts
 
-Source: current blueprint sec-smooth-purity/sk-prop-sf-localization,
-prop-sf-open-closed-triangle-all-stages.proof.md, Weil-structures paragraph.
-(blueprint: lem-sf-rational-pullback-transition-shift).
-
 The proof is split into the following steps:
 - `WeilConjectures.SmoothPurity.Rational.RationalPullbackTransitionShiftRoos`: the Roos
   scalar/tower chain comparison commutes with signed Roos shifts;
@@ -28,6 +24,17 @@ The proof is split into the following steps:
   integral pullback scalar comparison commutes with shifts;
 - `WeilConjectures.SmoothPurity.Rational.RationalPullbackTransitionShiftRational`: the
   rational pullback scalar comparison commutes with shifts.
+
+## Implementation details
+
+The coordinates are the signed Roos coordinates, fixed on every good representative by the
+descent comparisons, and the coefficient transition uses the canonical completed scalar shifts
+normalized by `integralTransitionCommShift`. The framework theta theorem applies to these four
+shifts, using any finite-field datum of characteristic different from `l`. Theta is identified
+with the integral pullback scalar comparison, and rational localization together with the
+degree-one formulas gives the rational square at one; the `CommShift` laws extend it to all
+integers. Finally `commonStagePullbackTransition` conjugates this comparison by the recorded
+stage-transition isomorphisms, which preserve the transported shifts.
 -/
 
 @[expose] public section
@@ -55,32 +62,7 @@ attribute [local reducible] GeneralAlgebraicallyClosedCoefficients.stageCategory
 attribute [local instance 5000] GeneralAlgebraicallyClosedCoefficients.stageCategory
   GeneralAlgebraicallyClosedCoefficients.stageShift
 
-/-- The actual coefficient-transition comparison preserves normalized pullback shifts.
-Source: current blueprint sec-smooth-purity/sk-prop-sf-localization,
-prop-sf-open-closed-triangle-all-stages.proof.md, Weil-structures paragraph;
-step 7 of lem-sf-automorphism-constructible-stage-equivalence and
-lem-sf-framework-theta-shift-compatibility.
-(blueprint: lem-sf-rational-pullback-transition-shift).
-
-Proof: take the two cochain and derived shift witnesses in hE and hL. The
-coordinates are the signed Roos coordinates, and the descent comparisons fix their
-values on every good representative. For the coefficient transition take the
-canonical completed scalar shifts, whose ordinary-to-completed comparison has the
-normalization defining integralTransitionCommShift. The framework theta theorem
-applies to these four shifts, using any finite-field datum of characteristic different
-from l (no scheme structure map to that field is required). Identify theta with the prescribed
-integral pullback
-scalar comparison using its completion normalization. The full constructible
-inclusion is faithful, so its ambient shift square is the integral scalar square.
-Apply rational localization to that square. The supplied degree-one formulas rE
-and rL and the canonical scalar-transition formula identify its sides with the
-rational square at one. The CommShift zero and addition laws extend the square
-to every positive integer; applying the inverse shift gives negative integers.
-Finally commonStagePullbackTransition conjugates this comparison by the recorded
-stage-transition isomorphisms, which preserve the transported shifts. Whiskering
-and composing their squares proves the conclusion. The argument uses the entire
-natural transformations, so it also covers zero objects, empty schemes, repeated
-fields, and arbitrary scheme morphisms without an isomorphism hypothesis. -/
+/-- The actual coefficient-transition comparison preserves normalized pullback shifts. -/
 theorem rationalPullbackTransitionShift
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

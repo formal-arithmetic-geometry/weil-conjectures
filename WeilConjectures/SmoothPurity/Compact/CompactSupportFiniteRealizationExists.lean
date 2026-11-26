@@ -9,8 +9,8 @@ public import WeilConjectures.SmoothPurity.Compact.CompactSupportFiniteRealizati
 
 /-! # Existence for the existing compact-support realization predicate
 
-Project the integral-functor conjunct of the existing representative comparison.
-(blueprint: lem-weil-compact-support-finite-realization-exists).
+The integral-functor conjunct of the existing representative comparison gives the
+compact-support finite realization.
 -/
 
 @[expose] public noncomputable section
@@ -31,13 +31,7 @@ variable (l : ℕ) [Fact l.Prime]
   [f.IsOver (Spec (.of K₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
   (c : Compactification f)
 
-/-- The integral realization package with its exact recorded predicate.
-Source: blueprint order 1494, proof steps 1--4
-(blueprint: lem-weil-compact-support-finite-realization-exists).
-Proof: project the integral-functor conjunct after the specified tower, evaluation,
-right-derived limit, unit and Roos projections in
-exists_compactSupportRepresentativeComparison. Unfold the named predicate; it is
-exactly the predicate in that conjunct, with no added choice or normalization. -/
+/-- The integral realization package with its exact recorded predicate. -/
 theorem sfCompactSupportFiniteRealization (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] :
     ∃ F, SfCompactSupportFiniteRealizationSpec l K₀ hl c E F := by

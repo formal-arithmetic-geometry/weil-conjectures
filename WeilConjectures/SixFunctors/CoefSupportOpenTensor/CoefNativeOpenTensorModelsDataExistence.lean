@@ -13,8 +13,14 @@ import WeilConjectures.CategoryTheory.Ringed.Tensor.RingedTensorComparisonExtens
 
 /-! # Existence of native open tensor representative data
 
-Source: Stacks 0E8I, 0GL1 and 07A4; support-open-tensor steps 5--6.
-(blueprint: lem-coef-native-open-tensor-models-data-existence).
+For an open immersion, the localized-site and finite coefficient constructions provide native
+system and finite open tensor representative data.
+
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 0GL1]
 -/
 
 @[expose] public noncomputable section
@@ -104,10 +110,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 set_option linter.unusedVariables false in
 /-- The localized-site and finite coefficient constructions provide native system and
 finite open tensor representative data. The construction uses the normalized open
-adjunction, its restriction/tensor comparison, and total K-flat representatives.
-Source: Stacks 0E8I, 0GL1 and 07A4; support-open-tensor proof steps 5--6.
-(blueprint: lem-coef-native-open-tensor-models-data-existence).
--/
+adjunction, its restriction/tensor comparison, and total K-flat representatives. -/
 theorem nativeOpenTensorModels_data_exists {X Z : Scheme.{u}} (j : X ⟶ Z)
     [IsOpenImmersion j]
     (SX : CoefficientDerivedSystemCalculus.{u, u} l E X)

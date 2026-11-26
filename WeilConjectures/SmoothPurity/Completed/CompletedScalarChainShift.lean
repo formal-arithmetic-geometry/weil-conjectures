@@ -13,8 +13,17 @@ import WeilConjectures.CategoryTheory.ProductShift.ProductCommShift
 
 /-! # Signed shifts of the completed scalar Roos complex
 
-Source: Stacks Project, Tags 011G, 014E, 06YS, 06YT and 08TC.
-(blueprint: lem-weil-completed-scalar-chain-shift)
+The strict Roos complex of completed scalars has a coherent signed shift compatible with its
+quotient map.
+
+## Implementation details
+
+The level isomorphisms are the tensor and restriction shift maps; on the mapping cocone of
+`1 - s` the shift is `(x, y) ↦ (x, (-1)^m y)`. No resolution or derived descent is involved.
+
+## References
+
+* [Stacks, Tags 011G, 014E, 06YS, 06YT and 08TC](https://stacks.math.columbia.edu/tag/014E)
 -/
 
 @[expose] public section
@@ -294,8 +303,7 @@ private theorem chain_comparison_shift
     (((completedOrdinaryScalarExtension l E L ι Y).mapCochainComplexShiftIso m).hom.app P)
     (chainFirstProduct_shift l E L ι Y P m)
 
-/-- The canonical product of the finite tensor and restriction shift isomorphisms.
-Source: Stacks 011G and 014E (blueprint: lem-weil-completed-scalar-chain-shift). -/
+/-- The canonical product of the finite tensor and restriction shift isomorphisms. -/
 noncomputable def completedScalarChainProductIso
     (P : CochainComplex (integralTowerModules l E Y) ℤ) (m : ℤ) :
     (∏ᶜ fun n : ℕ ↦ ((integralScalarTowerFunctor l E L ι Y).obj (P⟦m⟧)).obj (op n)) ≅
@@ -311,22 +319,7 @@ noncomputable def completedScalarChainProductIso
     (PreservesProduct.iso (shiftFunctor (CochainComplex (integralTowerModules l L Y) ℤ) m)
       (fun n : ℕ ↦ ((integralScalarTowerFunctor l E L ι Y).obj P).obj (op n))).symm
 
-/-- The strict Roos complex has a coherent signed shift compatible with its quotient map.
-Source: Stacks Project, Tags 011G and 014E; the chain-level steps 2--5 of
-lem-weil-point-completed-scalar-shift.
-(blueprint: lem-weil-completed-scalar-chain-shift).
-Proof: the tensor and restriction shift maps give the displayed level isomorphisms.
-The transition maps commute with them: both composites send a sheafified generator
-s tensor x to red(s) tensor x. Take their product and the canonical product-shift
-comparison. It conjugates 1-s to the shifted 1-s. On its mapping cocone define alpha
-by (x,y) -> (x,(-1)^m y). Its source differential is (e dx,-e dy-hx) and its target
-differential (e dx,-e dy-e hx), so both composites equal (e dx,-dy-e hx).
-The same formula gives the inverse. Product naturality gives naturality in P;
-e_0=1 and e_(m+n)=e_m e_n give zero and addition coherence. The canonical chain
-comparison has quotient component c and second component zero. Shifting its quotient
-formula and using generation by sheafified pure tensors identifies the first
-components; the second components both vanish. The two cocone projections give
-the displayed chain equality. No resolution or derived descent is involved. -/
+/-- The strict Roos complex has a coherent signed shift compatible with its quotient map. -/
 theorem completedScalarChainShift :
     ∃ eC : (integralScalarComplexFunctor l E L ι Y).CommShift ℤ,
       RoosShift.ConeFormula (integralScalarTowerFunctor l E L ι Y)

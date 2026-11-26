@@ -16,12 +16,13 @@ import all WeilConjectures.SmoothPurity.Finite.FiniteSystemPullbackCoherence
 
 /-! # Scalar extension carries the integral pullback compositor: base lemmas
 
-Source: Stacks Project, Tags 06YY, 07A4, 0941 and 0D6D; Bhatt--Scholze, Lemma 3.5.7
-(blueprint: lem-pod-integral-pullback-composition-scalar).
+For a coefficient inclusion `E ⟶ L`, completed scalar extension carries the specified
+integral composition comparison at `E` to the one at `L`, conjugated by the canonical
+scalar/pullback comparisons.
 
-For a coefficient inclusion E to L, completed scalar extension carries the specified
-integral composition comparison at E to the one at L, conjugated by the canonical
-scalar/pullback comparisons. Both sides are compared after the fully faithful coherent
+## Implementation details
+
+Both sides are compared after the fully faithful coherent
 reduction at L: the system-level composition clause of integralPullbackComposition at
 E and at L, the system scalar comparison, the pullback/scalar square of
 scalarExtensionTowerCoherence, and whole-system mixed coherence.
@@ -29,6 +30,11 @@ The rationalized statement follows by localization on pure tensors.
 
 This file holds the integral system
 models and the system scalar comparison used by IntegralPullbackCompositionScalar.
+
+## References
+
+* Stacks Project, Tags 06YY, 07A4, 0941, 0D6D
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 3.5.7
 -/
 
 @[expose] public noncomputable section
@@ -57,7 +63,7 @@ private theorem coefficientPrime_isUnit (W : Scheme.{u})
 /-- The completed-operation models with the pinned calculus, Roos model and pullback
 realization models of integralPullbackSystemIso; the remaining fields are transported
 from the normalized models along the unique comparison of left adjoints of total limit.
-Source: Stacks 0941 (blueprint: lem-pod-integral-pullback-composition-scalar).
+
 Construction: keep the pinned fields and transport the rest along the left-adjoint comparison. -/
 def integralSystemModels (W : Bool → Scheme.{u})
     (hl : ∀ (a : Bool) (x : W a), IsUnit (l : (W a).residueField x)) :
@@ -90,7 +96,7 @@ attribute [local implicit_reducible] integralScalarExtension integralScalarExten
 
 /-- The fixed normalized realization model of completed scalar extension, over the pinned
 evaluation calculus at E and the pinned Roos model at L.
-Source: Stacks 06YY, 0941 (blueprint: lem-pod-integral-pullback-composition-scalar).
+
 Construction: a chosen model from primitiveQuotientScalarModelExistence. -/
 def integralSystemScalarModel (X : Scheme.{u}) (hX : ∀ x : X, IsUnit (l : X.residueField x)) :
     IntegralComparisonScalarModel l E L ι X
@@ -99,7 +105,7 @@ def integralSystemScalarModel (X : Scheme.{u}) (hX : ∀ x : X, IsUnit (l : X.re
   Classical.choice (primitiveQuotientScalarModelExistence l E L ι X hX _ _)
 
 /-- Reduction of the scalar realization, followed by the coherent counit.
-Source: Stacks 06YY, 0941 (blueprint: lem-pod-integral-pullback-composition-scalar).
+
 Construction: whisker the realization of the scalar model and compose with the counit. -/
 def integralSystemScalarTransformation (X : Scheme.{u})
     (hX : ∀ x : X, IsUnit (l : X.residueField x)) :
@@ -113,10 +119,7 @@ def integralSystemScalarTransformation (X : Scheme.{u})
         integralComparisonDerivedSequenceScalar l E L ι X)
       (coefficientDerivedSystemEvaluationCalculus l L X).choose.adjunction.counit
 
-/-- The system scalar transformation is invertible.
-Source: Stacks 0941 (blueprint: lem-pod-integral-pullback-composition-scalar).
-Proof: the realization is an isomorphism and effective quotient model descent makes the
-coherent counit invertible on scalar extensions of reduction systems. -/
+/-- The system scalar transformation is invertible. -/
 theorem integralSystemScalarTransformation_isIso (X : Scheme.{u})
     (hX : ∀ x : X, IsUnit (l : X.residueField x))
     (K : DerivedCategory (scalarReductionSource l E X)) :
@@ -139,7 +142,7 @@ set_option allowUnsafeReducibility true in
 attribute [local reducible] integralSystemReduction
 
 /-- The system scalar comparison p_X : S ⋙ R_L ≅ R_E ⋙ H on constructible objects.
-Source: Stacks 06YY, 0941 (blueprint: lem-pod-integral-pullback-composition-scalar).
+
 Construction: componentwise the invertible system scalar transformation. -/
 def integralSystemScalarIso (X : Scheme.{u}) [∀ x : X, Invertible (l : X.residueField x)] :
     sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime))
@@ -153,11 +156,7 @@ def integralSystemScalarIso (X : Scheme.{u}) [∀ x : X, Invertible (l : X.resid
       (fun x ↦ isUnit_of_invertible (l : X.residueField x))).naturality a.hom)
 
 /-- Coherent reduction intertwines the scalar/pullback comparison of completed pullback
-with the whole-system scalar/pullback comparison.
-Source: Stacks 07A4, 0941 (blueprint: lem-pod-integral-pullback-composition-scalar).
-Proof: this is the pullback clause of scalarExtensionTowerCoherence, for the
-completed-operation models whose calculus, Roos and pullback fields are the pinned
-ones, and the pinned scalar models. -/
+with the whole-system scalar/pullback comparison. -/
 theorem integralPullbackSystemIso_scalar {X Y : Scheme.{u}}
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] (f : X ⟶ Y)

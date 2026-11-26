@@ -12,27 +12,17 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 /-!
 # Local denominators of integral total fractions
 
-Source: Stacks Project, Algebra, Tag 031S, reverse implication, denominator clearing.
-(blueprint: lem-weil-pbc-integral-total-fraction-local-denominator).
+## References
+
+* [Stacks, Tag 031S]
 -/
 
 @[expose] public section
 
 universe u
 
-/-- Integral total fractions belong locally to any normal prime localization.
-Source: Stacks Project, Algebra, Tag 031S, reverse implication, denominator clearing
-(blueprint: lem-weil-pbc-integral-total-fraction-local-denominator).
-
-Proof: Write x = a/b with b a nonzerodivisor. Put A = R_p and K = Frac(A).
-The image of every nonzerodivisor s of R is nonzero in A: otherwise a multiplier
-outside p kills s, forcing that multiplier to be zero, a contradiction. Thus the
-map R → K extends to Q(R) → K. The image of x is integral over A by mapping a monic
-integral equation, so integral closedness writes it as c/t with c in R and t outside p.
-Write tx-c = d/e in Q(R). Its image in K is zero. Hence d maps to zero in A,
-and there is u outside p with ud = 0. Multiplying gives (ut)x = uc in Q(R).
-Take s = ut and a = uc. Neither factor lies in p, so s does not lie in p.
-This also handles the zero ring vacuously, since it has no prime ideal. -/
+/-- Integral total fractions belong locally to any normal prime localization: if `x` is
+integral over `R` and `R_p` is an integrally closed domain, then `s * x ∈ R` for some `s ∉ p`. -/
 theorem IsIntegral.exists_local_denominator_of_normal
     {R : Type u} [CommRing R] {x : FractionRing R} (hx : IsIntegral R x)
     (p : Ideal R) [p.IsPrime] [IsDomain (Localization.AtPrime p)]

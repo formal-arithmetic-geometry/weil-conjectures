@@ -12,7 +12,22 @@ import WeilConjectures.RingTheory.KoszulAugmentationLiftHomotopy
 
 /-! # Conormal relations vanish in Koszul-to-resolution homology
 
-Source: Stacks Project, Tags 09PQ and 00LS.
+Every exterior-conormal relation among Koszul wedge cycles evaluates to zero in the homology of
+`P ⊗ A/I`, for a resolution `P` of `A/I` and specified Koszul-to-resolution chain maps.
+
+## Implementation details
+
+Homology is computed with a free strictly commutative Tate resolution `Q`. Degree-one lifts of
+elements of `I` give classes depending only on their image in `I/I²`, and their products are
+alternating (also in characteristic two) since `Q` is strictly commutative, so they satisfy the
+relations of `∧(I/I²)`. Koszul-to-`Q` maps send wedges to these products, and any two
+augmentation-preserving maps out of the free Koszul complex are homotopic, so the specified
+evaluation respects the same relations.
+
+## References
+
+* [Stacks, Tag 09PQ] (strict Tor product)
+* [Stacks, Tag 00LS] (comparison homotopies)
 -/
 
 @[expose] public section
@@ -22,9 +37,7 @@ open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry
 
 /-- Evaluate formal wedge-cycle generators in the homology of one resolution,
-using a specified family of chain maps. This is an actual finite linear combination. 
-(blueprint: new-e1-koszul-conormal-cycle-relations)
--/
+using a specified family of chain maps, as a finite linear combination. -/
 noncomputable def koszulConormalCycleEvaluation (A : Type u) [CommRing A]
     (I : Ideal A) (n : ℕ) (P : ProjectiveResolution (ModuleCat.of A (A ⧸ I)))
     (a : ∀ (r : ℕ) (g : Fin r → I),
@@ -117,29 +130,8 @@ private theorem ideal_alternating_descends (A : Type u) [CommRing A]
     exact F.map_eq_zero_of_eq _ (congrArg lift hij) hne
 
 /-- Every exterior-conormal relation among Koszul wedge cycles evaluates to zero
-in resolution homology. There is no comparison map or derived-functor object in
-this assertion: it is a kernel inclusion for two explicitly constructed linear maps.
-Source: Stacks Project, Tag 09PQ (strict Tor product), Tag 00LS (comparison homotopies).
-(blueprint: new-e1-koszul-conormal-cycle-relations).
-
-Proof: Compute the homology using a free strictly commutative Tate resolution Q.
-An element x of I lifts to degree one with differential x; its homology class
-after tensoring with A/I depends only on x modulo I². Additivity and the A/I
-scalar rule follow by adding and scaling lifts; changing a lift changes its
-class by a boundary, by exactness before tensoring. Products of these degree-one
-classes are alternating, including in characteristic two, since the Tate algebra
-is strictly commutative. Therefore they satisfy the additive, balanced, and
-alternating relations defining the exterior power of I/I² over A/I. Choose
-Koszul-to-Q dg algebra maps by lifting the tuple elements in degree one; on a
-wedge they give exactly these products. A comparison Q -> P induces an
-isomorphism after tensoring and passing to homology. Its composite with each
-Koszul map is homotopic to the specified a by Tag 00LS, because Koszul terms
-are free and both maps preserve augmentation. Tensoring preserves the homotopy,
-so their homology maps agree. Thus the specified evaluation also respects all
-the relations, proving the kernel inclusion by linearity. Cycle representatives
-with the same image under iCycles agree because iCycles is monic. In degree
-zero the empty product is the quotient unit and is killed by I; for I=A all
-quotient tensor complexes vanish; for I=0 all positive conormal wedges vanish. -/
+in resolution homology: the kernel of the formal presentation is contained in the kernel of
+the evaluation map. -/
 theorem koszulConormalCycleEvaluation_ker (A : Type u) [CommRing A]
     (I : Ideal A) (n : ℕ) (P : ProjectiveResolution (ModuleCat.of A (A ⧸ I)))
     (a : ∀ (r : ℕ) (g : Fin r → I),

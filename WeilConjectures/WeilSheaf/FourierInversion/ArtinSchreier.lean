@@ -13,9 +13,13 @@ public import WeilConjectures.WeilSheaf.UpperStarId
 /-!
 # Fourier inversion: Artin–Schreier sheaves of functions
 
-Multiplicativity of the Artin–Schreier sheaves `ℒ_{ψ,a}` (blueprint
-`lemma-artin-schreier-character-sheaf--2`, `lemma-artin-schreier-character-sheaf`) and their
-compatibility with pullback.
+Multiplicativity of the Artin–Schreier sheaves `ℒ_{ψ,a}` and their compatibility with pullback.
+
+## Implementation details
+
+The sheaf `ℒ_{ψ,0}` is the constant sheaf because the Artin–Schreier cover of the zero function
+is the trivial torsor. The pullback formula `φ^* ℒ_{ψ,a} ≅ ℒ_{ψ,φ^* a}` follows from
+`φ ≫ a = φ^* a` as morphisms to `𝔸¹` and the composition of pullbacks of Weil sheaves.
 -/
 
 @[expose] public section
@@ -30,8 +34,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `lemma-artin-schreier-character-sheaf--2` / `lemma-artin-schreier-character-sheaf`:
-`ℒ_{ψ⁻¹,a} ≅ ℒ_{ψ,-a}`. -/
+/-- The Artin–Schreier sheaf of the inverse character: `ℒ_{ψ⁻¹,a} ≅ ℒ_{ψ,-a}`. -/
 theorem nonempty_iso_artinSchreierOf_inv (ψ : AddChar k₀ (PadicAlgCl l)) (a : Γ(X, ⊤)) :
     Nonempty (artinSchreierOf ψ⁻¹ a ≅ artinSchreierOf ψ (-a)) := by
   rw [artinSchreierOf_eq, artinSchreierOf_eq, artinSchreier, artinSchreier,
@@ -47,8 +50,7 @@ theorem nonempty_iso_artinSchreierOf_inv (ψ : AddChar k₀ (PadicAlgCl l)) (a :
       (WeilSheaf.hasImage_artinSchreierIdempotent ψ))
   exact ⟨e₁ ≪≫ e₂.symm⟩
 
-/-- Blueprint `lemma-artin-schreier-character-sheaf` (`ℒ_{ψ,0}` is the constant sheaf, the
-Artin–Schreier cover of the zero function being the trivial torsor): `ℒ_{ψ,0} ≅ ℚ̄_ℓ`. -/
+/-- The Artin–Schreier sheaf of the zero function is the constant sheaf: `ℒ_{ψ,0} ≅ ℚ̄_ℓ`. -/
 theorem nonempty_iso_artinSchreierOf_zero (ψ : AddChar k₀ (PadicAlgCl l)) :
     Nonempty (artinSchreierOf ψ (0 : Γ(X, ⊤)) ≅ WeilSheaf.adicConstant k₀ l X) := by
   rw [artinSchreierOf_eq, artinSchreier, WeilSheaf.image_artinSchreierIdempotent_eq]
@@ -58,8 +60,7 @@ theorem nonempty_iso_artinSchreierOf_zero (ψ : AddChar k₀ (PadicAlgCl l)) :
     (by rw [affineLine.homOfSection_comp_artinSchreierMap]; simp [Fintype.card_ne_zero])
     _ (WeilSheaf.upperStarArtinSchreierMapImageIso ψ)
 
-/-- Pullback of Artin–Schreier sheaves of functions: `φ^* ℒ_{ψ,a} ≅ ℒ_{ψ,φ^* a}`, from
-`φ ≫ a = φ^* a` as morphisms to `𝔸¹` and the composition of pullbacks of Weil sheaves. -/
+/-- Pullback of Artin–Schreier sheaves of functions: `φ^* ℒ_{ψ,a} ≅ ℒ_{ψ,φ^* a}`. -/
 theorem nonempty_iso_upperStar_artinSchreierOf {X Y : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (φ : Y ⟶ X)
     [φ.IsOver (Spec (CommRingCat.of k₀))] (ψ : AddChar k₀ (PadicAlgCl l)) (a : Γ(X, ⊤)) :

@@ -21,8 +21,20 @@ import Mathlib.LinearAlgebra.Dimension.Constructions
 /-!
 # Rank of the conormal module at a complete intersection point
 
-Source: Stacks Project, Algebra, Lemma 00SC, implication (1) implies (4)
-(blueprint: lem-weil-pbc-lci-conormal-free-rank-codimension).
+At a point `q` of `Spec(k[x₁, …, xₙ]/I)` with a global complete intersection neighbourhood, the
+localized conormal module `(I/I²)_q` is free of rank `n - d`, where `d` is the dimension at `q`.
+
+## Implementation details
+
+After localizing at `g`, choose a global complete intersection presentation `k[y₁, …, yₘ]/J`
+with `t` equations; equidimensionality gives `d = m - t`. The equations form a regular sequence
+locally, so `(J/J²)_q` is free of rank `t`. Comparing the two polynomial presentations gives
+`N ⊕ S_q^m ≅ S_q^(t+n)` for `N = (I/I²)_q`, so `N` is finite projective, hence free of rank
+`t + n - m = n - d`.
+
+## References
+
+* [Stacks, Tag 00SC] ((1) implies (4))
 -/
 
 @[expose] public section
@@ -50,30 +62,12 @@ private theorem basis_of_stably_free {R M : Type*} [CommRing R] [IsLocalRing R]
     simpa only [Module.finrank_prod, Module.finrank_pi, Fintype.card_fin] using e.finrank_eq
   refine ⟨by omega, ⟨Module.finBasisOfFinrankEq R M (by omega)⟩⟩
 
-/-- Stacks Project, Algebra, Lemma 00SC, implication (1) implies (4).
-(blueprint: lem-weil-pbc-lci-conormal-free-rank-codimension)
-The dimension here is the topological dimension at the point, not the dimension of its
+/-- If `q` has a principal neighbourhood that is a global complete intersection over `k`, then
+the localization of `I/I²` at `q` is free of rank `n - d`, where `d ≤ n` is the dimension at
+`q`. The dimension here is the topological dimension at the point, not the dimension of its
 local ring. `I.Cotangent` is `I/I²` with its canonical quotient-ring action, and
 `Localization.AtPrime q.asIdeal` acts on its localization by Mathlib's fraction action
 `OreLocalization.instModule`.
-
-Proof plan, following the node's six steps:
-1. Localize at `g`. The localization-prime-residue-field-iso lemma identifies the prime
-   above `q` and its local ring with `S_q`. Choose a global complete intersection
-   presentation `k[y₁, ..., yₘ]/J` with `t` equations and dimension `m - t`.
-2. The principal-localization-open-immersion and dimension-at-point-open-subspace lemmas
-   preserve dimension at `q`. Global-complete-intersection-equidimensional gives `d = m - t`.
-3. Global-complete-intersection-local-regular-sequence gives a regular sequence of length
-   `t` at the corresponding polynomial prime. Regular-sequence-conormal-free gives a
-   free conormal module with the classes of those equations as basis.
-4. Localization-module-exact identifies this conormal module with the localization of
-   `J/J²`, over the local ring identified with `S_q` in step 1.
-5. Conormal-module-principal-localization compares the two polynomial presentations.
-   Localize its isomorphism again at the prime: if `N = (I/I²)_q`, it yields
-   `N ⊕ S_q^m ≅ S_q^(t+n)`; successive module localizations identify its first term with `N`.
-6. This makes `N` a finite projective module, hence flat by projective-module-flat.
-   Finite-flat-local-free gives freeness. Reduction to the residue field computes the
-   basis cardinality as `t + n - m = n - d`, hence also `0 ≤ d ≤ n`.
 -/
 theorem exists_basis_cotangent_localization_of_completeIntersection
     {k : Type u} [Field k] (n : ℕ) (I : Ideal (MvPolynomial (Fin n) k))

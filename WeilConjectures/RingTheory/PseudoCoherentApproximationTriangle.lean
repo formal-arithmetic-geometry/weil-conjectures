@@ -17,8 +17,21 @@ import Mathlib.RingTheory.Finiteness.Prod
 /-!
 # Finite-free approximation triangles
 
-Source: Stacks Project, Tag 064R, first half of the proof of assertion (1).
-(blueprint: lem-pc-ring-pseudo-coherent-approximation-triangle).
+Finite-free approximations of the first two vertices of a distinguished triangle extend to a
+morphism from a finite-free cone triangle.
+
+## Implementation details
+
+Brutally truncate the first witness below `m + 1`; its cohomology above `m + 1` is unchanged and
+surjects onto that of the original witness in degree `m + 1`. Lift the composite to the second
+witness as a chain map (Tag 064E); its mapping cone is bounded finite free, and TR3 extends the
+commuting square to a morphism of triangles. The truncation calculation is also used in
+`PseudoCoherentIffAllM`, which cannot be imported here because it depends on this file.
+
+## References
+
+* [Stacks, Tag 064R] (first half of the proof of (1))
+* [Stacks, Tag 064E]
 -/
 
 @[expose] public section
@@ -36,13 +49,7 @@ private theorem truncIndex (n i : ℤ) (hi : n ≤ i) :
   omega
 
 /-- Brutally truncate a finite-free approximation below its cutoff.
-Source: Stacks Project, Tag 064R, first sentence of the proof of (1).
-The inclusion is degreewise an isomorphism from the cutoff onward. Apply the
-short-complex homology comparison above the cutoff and the cycles comparison
-at the cutoff, then transport along `homologyFunctorFactors` and compose with
- the original approximation. The calculation is also used in
-`PseudoCoherentIffAllM`, which cannot be imported here because it depends on
- the present theorem. -/
+The inclusion is degreewise an isomorphism from the cutoff onward. -/
 private theorem exists_truncated_approximation {R : Type u} [CommRing R]
     [HasDerivedCategory.{w} (ModuleCat.{v} R)]
     (n : ℤ) (A : DerivedCategory (ModuleCat.{v} R)) (hA : IsMPseudoCoherent n A) :
@@ -118,20 +125,7 @@ private theorem exists_truncated_approximation {R : Type u} [CommRing R]
     infer_instance
 
 /-- A compatible finite-free triangle, before checking cohomology on its third vertex.
-Source: Stacks Project, Tag 064R, proof of assertion (1), through construction of
- the morphism of distinguished triangles.
-(blueprint: lem-pc-ring-pseudo-coherent-approximation-triangle).
-
-Proof: choose the finite-free witnesses for the first two vertices. Brutally truncate
- the first witness below `m + 1`; its cohomology above `m + 1` is unchanged, and its
- cohomology in degree `m + 1` surjects onto that of the original witness. The truncated
- complex is bounded finite free and vanishes below `m`. Finite free modules are
- projective. Apply the derived map lift (Tag 064E) to lift the composite to the second
- witness as a chain map. Its mapping cone is bounded finite free: each term is the
- direct sum of a term of the second witness and a shifted term of the first witness.
- The cone triangle is distinguished. TR3 extends the commuting square to a morphism
- of triangles. Its first two components retain exactly the witness conditions.
- This statement makes no assertion about cohomology of the third component. -/
+This statement makes no assertion about cohomology of the third component. -/
 theorem exists_pseudoCoherent_approximation_triangle
     (R : Type u) [CommRing R]
     [HasDerivedCategory.{w} (ModuleCat.{v} R)]

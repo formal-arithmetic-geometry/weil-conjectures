@@ -14,8 +14,9 @@ import all WeilConjectures.CategoryTheory.DirectedColimitHomology
 /-!
 # Directed colimits and finite compact Čech complexes
 
-Source: Stacks Project, Cohomology, Tag 01FF, the comparison of Čech complexes
-(blueprint: lem-sc-compact-cech-cohomology-directed-colimit).
+## References
+
+* Stacks Project, Tags 01FF and 00DB.
 -/
 
 @[expose] public section
@@ -26,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.Sheaf
 
-/-- Source: Stacks Project, Algebra, Tag 00DB. Taking the three adjacent terms
-preserves colimits degreewise; compose with short-complex homology preservation. -/
+/-- Taking homology of complexes of abelian groups in a fixed degree preserves filtered colimits. -/
 private theorem complexHomologyPreserves
     {I : Type u} [SmallCategory I] [IsFiltered I] (p : ℕ) :
     PreservesColimitsOfShape I
@@ -50,22 +50,7 @@ private theorem complexHomologyPreserves
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Finite compact Čech cohomology preserves an existing directed colimit of abelian
-sheaves on a space with a compact open basis and compact intersections.
-
-Source: Stacks Project, Cohomology, Lemma 01FF, the Čech-complex comparison.
-(blueprint: lem-sc-compact-cech-cohomology-directed-colimit).
-
-Proof: the compact-basis and compact-intersection hypotheses ensure that sections on
-every compact chosen intersection preserve the directed colimit, by 01FF's degree-zero
-argument. In degree k the tuple index Fin (k+1) → T is finite, so its product commutes
-with filtered colimits of abelian groups. The resulting identifications commute with
-restriction maps and finite alternating sums, and hence with all differentials and
-cocone maps. Colimits of complexes are calculated degreewise. Exactness of filtered
-colimits of abelian groups identifies the homology of this colimit complex with the
-colimit of its homology groups. The identification respects the cocone legs, proving
-preservation of the given colimit. This works also for the empty covering, where each
-term is the zero group, and for the empty open. No injectivity of the diagram objects
-is used. -/
+sheaves on a space with a compact open basis and compact intersections. -/
 theorem compact_siteCech_cohomology_preserves_directedColimit
     (X : Type u) [TopologicalSpace X]
     (hbas : ∀ (V : Set X), IsOpen V → ∀ x ∈ V, ∃ W : Set X, IsOpen W ∧

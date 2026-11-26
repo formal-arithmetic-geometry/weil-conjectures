@@ -16,6 +16,26 @@ import WeilConjectures.RingTheory.DepthLeSupportDimension
 import Mathlib.RingTheory.Noetherian.Basic
 import WeilConjectures.RingTheory.CohenMacaulayDepthFirstTerm
 
+/-!
+# Maximal Cohen–Macaulay syzygies
+
+Over a Noetherian local Cohen–Macaulay ring of dimension `d`, the left term of a finite free
+exact sequence of length `d - e` ending in a finite module of depth `e` is zero or maximal
+Cohen–Macaulay.
+
+## Implementation details
+
+Splitting the sequence into short exact sequences, the depth of the syzygies grows by one at each
+step up to `d` (`first_term_depth_ge`); the reverse bound comes from `depth_le_supportDim`.
+
+## References
+
+* [Stacks, Tag 00NG]
+* [Stacks, Tag 00NE]
+* [Stacks, Tag 00LX]
+* [Stacks, Tag 00LK]
+-/
+
 @[expose] public section
 
 universe u v
@@ -23,31 +43,9 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace IsLocalRing
 
-/-- The left term of a prescribed finite free sequence is zero or maximal
-Cohen--Macaulay when its length is the ring dimension minus the depth of `M`.
-Source: Stacks Project, Algebra, Tags 00NG, 00NE and 00LX, with the depth bound 00LK
-(blueprint: lem-weil-pbc-cm-local-free-resolution-mcm).
-
-Proof: Read the exact sequence from right to left as short exact sequences
-`0 → N_{j+1} → F_j → N_j → 0`, with `N_0` identified with `M` and
-`N_{d-e}` identified with its left term `K`. Every `N_j` is finite: `N_0` is finite
-by hypothesis and each next kernel is a submodule of a finite free module over a
-Noetherian ring. Every nonzero finite free module has depth at least `d`: a regular
-sequence on `R` acts componentwise regularly on `R^n`, so its lengths give the same
-lower bound for a free module. Transport by a finite basis preserves regularity.
-Tag 00LK also bounds the depth of any nonzero finite module by `dim R = d`.
-
-Inductively show that a nonzero `N_j` has depth at least `min(d, e+j)`.
-When all three modules of a short exact sequence are nonzero, part (3) of Tag 00LX
-bounds the next kernel's depth below by `min(depth F_j, depth N_j + 1)`.
-If the quotient `N_j` is zero, the next kernel is isomorphic to `F_j`, so the bound
-follows from freeness. If `F_j` is zero, its submodule `N_{j+1}` is zero. A zero next
-kernel already satisfies the alternative in the conclusion. These cases also allow
-continuing the induction after a zero intermediate syzygy. At `j = d-e`, the lower
-bound is `d` because `e ≤ d`; the upper bound for a nonzero `K` gives equality.
-At length zero, exactness with zero endpoints identifies `K` with `M`, and `e = d`
-gives the conclusion directly. All isomorphisms used preserve regular sequences and
-therefore depth. -/
+/-- Let `R` be a Noetherian local ring of dimension `d` and depth at least `d`, and let `M` be a
+nonzero finite module of depth `e ≤ d`. If `0 → K → F_{d-e-1} → ⋯ → F_0 → M → 0` is exact with
+the `F_i` finite free, then `K` is finite and either zero or of depth `d`. -/
 theorem first_term_is_maximalCohenMacaulay
     {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] [Nontrivial M]

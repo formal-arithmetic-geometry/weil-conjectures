@@ -11,7 +11,12 @@ import WeilConjectures.TraceFormula.Coherent.CoherentQuotientModelComparison
 import WeilConjectures.TraceFormula.Ordinary.OrdinaryQuotientScalarTowerComparison
 import all WeilConjectures.TraceFormula.Primitive.PrimitiveQuotientScalarModelExistence
 
-/-! # Scalar realization over a fixed quotient calculus -/
+/-! # Scalar realization over a fixed quotient calculus
+
+## References
+
+* Stacks Project, Tags 03EK, 03D7, 06YY and 0941.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -29,18 +34,7 @@ variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E
 
 attribute [local irreducible] HasDerivedCategory.standard
 
-/-- A quotient-normalized scalar realization for any fixed reduction calculus.
-Source: Stacks 03EK, 03D7, 06YY and 0941.
-(blueprint: lem-pur-fixed-calculus-scalar-model).
-
-Proof: choose the normalized ordinary and derived quotient models for the fixed
-calculus. Evaluated quotients of a good complex are K-flat; the componentwise
-criterion gives K-flatness of the whole sequence. Its scalar cochain counit,
-Roos bridge and balanced ordinary scalar tower comparison form a natural iso.
-Descend it along the good-complex localization. For any coherent presentation,
-its comparison with the fixed quotient model is a strict iso fixing every finite
-comparison and the entire derived comparison. Naturality of the scalar counit
-and cancellation of this strict iso give the asserted normalization. -/
+/-- A quotient-normalized scalar realization for any fixed reduction calculus. -/
 theorem fixedCalculusScalarModel
     (W : Scheme.{u})
     (SW : CoefficientDerivedSystemCalculus l E W)

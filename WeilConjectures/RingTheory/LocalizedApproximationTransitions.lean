@@ -17,8 +17,21 @@ import Mathlib.RingTheory.Localization.BaseChange
 
 /-! # Base changes of localized approximation transitions
 
-Source: Stacks Project, Algebra, Tag 00RC, first reduction paragraph, and Tag 00QX.
-(blueprint: lem-weil-pbc-localized-approximation-transitions)
+Localizing the transition ring and module base-change isomorphisms of an approximation system at
+compatible primes gives localizations of ring base change and module base-change equivalences.
+
+## Implementation details
+
+For `i ≤ j`, localizing the tensor factors of `B_j ≃ B_i ⊗_{A_i} A_j` and then inverting the
+complement of the inverse image of the maximal ideal of the localized `B_j` gives exactly the
+localized `B_j`. For modules, both the localized base change and `D^l_j` are localizations of
+`B_j ⊗_{B_i} D_i` at `q_j`, so `IsLocalizedModule` gives the equivalence. The arguments are
+pointwise in the transition and use no colimits or finiteness.
+
+## References
+
+* [Stacks, Tag 00RC] (first reduction paragraph)
+* [Stacks, Tag 00QX]
 -/
 
 @[expose] public section
@@ -30,30 +43,7 @@ open scoped TensorProduct
 
 namespace Algebra
 
-/-- Localization of transition ring and module base changes at compatible primes.
-
-Source: Stacks Project, Algebra, Tag 00RC, first reduction paragraph, and Tag 00QX.
-(blueprint: lem-weil-pbc-localized-approximation-transitions)
-
-Proof:
-1. Fix i ≤ j. The supplied pure-tensor ring isomorphism identifies B_j with
-   B_i tensor over A_i A_j. Localizing the two tensor factors at q_i and its
-   contraction to A_j gives B_i localized at q_i tensor over localized A_i
-   localized A_j. The commuting localization squares identify its map to localized
-   B_j with the product map on pure tensors. All denominators already inverted
-   avoid q_j, by compatibility of the primes. Inverting the complement of the
-   inverse image of the maximal ideal of localized B_j gives exactly localized B_j:
-   the original tensor isomorphism and the localization universal properties give
-   inverse fraction maps. This supplies W and the IsLocalization witness.
-2. Localize the supplied module base-change equivalence. Tensor-localization
-   compatibility first localizes the earlier module and then extends scalars to
-   localized B_j. Both the resulting module and D^l_j are localizations of
-   B_j tensor over B_i D_i at q_j. The IsLocalizedModule witnesses give their
-   unique linear equivalence. On a tensor with denominator-one module numerator,
-   the original pure-tensor formula and the compatibility of ζ with the transition
-   give b tensor ζ_i(x) mapped to b ζ_j(D(f)(x)). Clear denominators in x to extend
-   this to every localized x; this yields the stated pure-tensor formula.
-These arguments are pointwise in the transition and do not use colimits or finiteness. -/
+/-- Localization of transition ring and module base changes at compatible primes. -/
 theorem localized_approximation_transition_base_change
     {Λ : Type u} [Preorder Λ]
     (A B : Λ ⥤ CommRingCat.{u}) (η : A ⟶ B)

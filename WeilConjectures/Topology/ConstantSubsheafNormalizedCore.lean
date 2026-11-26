@@ -13,6 +13,13 @@ import WeilConjectures.Topology.ConstantSubsheafUnboundedNormalization
 import WeilConjectures.Topology.ConstantSubsheafDivisorSubfamilyEpi
 import WeilConjectures.Topology.ConstantSubsheafSelectedStalkRange
 
+/-! # Normalized presentation data for finitely generated constant subsheaves
+
+## References
+
+* Stacks Project, Tag 0A38.
+-/
+
 @[expose] public section
 
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
@@ -20,14 +27,10 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 universe u
 namespace TopCat.Sheaf
 
-/-- The finite normalized presentation data, without choosing its canonical sections.
-Source: Stacks Project, Cohomology, Lemma 0A38, normalization construction.
-(blueprint: lem-sc-constant-subsheaf-normalized-core)
-The construction refines the finitely many generating sections by clopen fibres,
-intersects the resulting compact opens, and adjoins positive gcd labels.  Bezout
-identities give sections on the intersections.  The active gcd at each point is
-retained, and the stalk bound discards labels larger than `b+1`; the resulting
-coproduct map remains an epimorphism and has the divisibility property. -/
+/-- The finite normalized presentation data, without choosing its canonical sections: finitely
+many compact opens with positive labels at most `b + 1` whose extension-by-zero generators map
+epimorphically onto `K`, such that at each point of their union an active label divides all
+active labels. -/
 structure NormalizedPresentationData
     (X : TopCat.{u}) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C)
     (isoC : C ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj
@@ -45,9 +48,7 @@ structure NormalizedPresentationData
     ∃ i, x ∈ A i ∧ ∀ j, x ∈ A j → c i ∣ c j
 
 set_option linter.unusedVariables false in
-/-- Existence of the finite normalized presentation data.
-Source: Stacks Project, Cohomology, Lemma 0A38, first two proof paragraphs.
-(blueprint: lem-sc-constant-subsheaf-normalized-core) -/
+/-- Existence of the finite normalized presentation data. -/
 theorem constantSubsheaf_normalized_core
     (X : TopCat.{u}) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C) [Mono ι]
     (isoC : C ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj
@@ -96,8 +97,8 @@ private theorem normalized_positive_bound (p a B : ℕ) (hp : 0 < p) (ha : a ≤
   exact (Nat.le_of_dvd (Nat.pos_of_ne_zero ha0) hdiv).trans ha
 
 set_option linter.unusedVariables false in
-/-- Completion intermediate theorem. Source: Stacks Project, Cohomology, Lemma 0A38.
-(blueprint: lem-sc-constant-subsheaf-normalized-completion) -/
+/-- Completion of normalized presentation data to the normalized presentation, with the
+canonical generating sections and their constant values. -/
 theorem constantSubsheaf_normalized_completion
     (X : TopCat.{u}) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C) [Mono ι]
     (isoC : C ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj

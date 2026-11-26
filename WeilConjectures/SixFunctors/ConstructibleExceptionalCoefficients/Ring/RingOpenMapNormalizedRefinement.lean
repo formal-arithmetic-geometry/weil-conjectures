@@ -10,7 +10,14 @@ public import WeilConjectures.SixFunctors.PurCompactSupport.RefinementOpenRestri
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Ring.RingOpenMapNormalizedRefinementFinite
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Ring.RingOpenMapNormalizedRefinementIntegral
 
-/-! # Normalized objectwise refinement comparisons -/
+/-! # Normalized objectwise refinement comparisons
+
+## References
+
+* [Zheng, Section 5, Lemma 5.13 and Constructions 5.14–5.15]
+* [Stacks, Tag 0F7B]
+* [Stacks, Tag 0F7I]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -23,18 +30,8 @@ namespace WeilConjectures.ConstructibleExceptionalCoefficients
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-/-- A normalized objectwise comparison is available at every ring stage.
-
-Source: the normalized refinement construction in Zheng Section 5, Lemma 5.13 and
-Constructions 5.14--5.15 (Stacks Tags 0F7B and 0F7I).
-(blueprint: lem-sf-ring-open-map-normalized-refinement).
-
-Proof: use the finite coefficient construction at finite stages and its normalized
-strict reduction system at completed integral stages. The coefficient realization
-identifies the resulting comparison with the displayed open and proper functors;
-its defining normalization is the inverse restriction followed by the open unit.
-This statement records only the objectwise comparison and its normalization, leaving
-invertibility of the canonical map to the parent theorem. -/
+/-- A normalized objectwise comparison is available at every ring stage. Invertibility of the
+canonical map is left to the parent theorem. -/
 theorem exists_normalized_refinement_iso
     (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} {f : X ⟶ Y}

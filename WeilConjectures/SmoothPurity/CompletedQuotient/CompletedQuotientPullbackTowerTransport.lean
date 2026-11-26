@@ -18,7 +18,8 @@ import all WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorIntegra
 
 /-! # Quotient realization steps
 
-Source: integral comparison proof, quotient normalization and coherent substitution.
+Transport of adjunction mates and tower comparisons used in the quotient normalization
+and coherent substitution steps of the integral comparison.
 -/
 
 @[expose] public noncomputable section
@@ -74,12 +75,7 @@ private theorem direct_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
   rw [WeilConjectures.pullbackTensorSequenceRing_eq]
   rfl
 
-/-- Transport of a normalized adjunction mate across equality of chosen right adjoints.
-Source: Mathlib adjunction mates, applied to quotient pullback evaluation.
-(blueprint: lem-pur-completed-quotient-mate-transport).
-Proof: substitute the equality of right adjoints. The direct comparison is then
-unchanged, and the transported left-adjoint equality is reflexive. Apply the
-adjunction Hom bijection to each component and use unit_mateEquiv_symm. -/
+/-- Transport of a normalized adjunction mate across equality of chosen right adjoints. -/
 theorem completedQuotientMateTransport
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     (R R' : B ⥤ A) [R.IsRightAdjoint] [R'.IsRightAdjoint]

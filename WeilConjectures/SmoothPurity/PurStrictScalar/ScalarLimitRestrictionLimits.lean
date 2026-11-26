@@ -12,7 +12,6 @@ public import Mathlib.CategoryTheory.Limits.Preserves.Limits
 
 The all-shaped ordinary limit clause is isolated from the K-injective clause
 of the scalar-limit restriction foundation.
-(blueprint: lem-pur-compact-support-scalar-limit-restriction-limits).
 -/
 
 @[expose] public noncomputable section

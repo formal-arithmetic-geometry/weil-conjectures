@@ -9,8 +9,9 @@ public import WeilConjectures.SmoothPurity.PurStrictScalar.StrictScalarFiniteEva
 
 /-! # Finite proper and open comparisons used by native support evaluation
 
-Source: Stacks 03DI, 0D6E and 0E8I.
-(blueprint: def-pur-native-geometric-finite-evaluation-data).
+## References
+
+* [Stacks Project, Tags 03DI, 0D6E and 0E8I]
 -/
 
 @[expose] public noncomputable section
@@ -26,8 +27,7 @@ namespace WeilConjectures.PurStrictScalar
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Native proper evaluation, expressed in the finite coefficient model.
-Source: Stacks 0D6E (blueprint: def-pur-native-geometric-finite-evaluation-data). -/
+/-- Native proper evaluation, expressed in the finite coefficient model. -/
 def nativeFiniteProper {X Y : Scheme.{u}} (g : X ⟶ Y) (n : ℕ) :
     ProEtale.VaryingRing.P (compactSupportSystemLevel l E)
         (compactSupportSystemQuotient l E) g ⋙
@@ -46,8 +46,7 @@ def nativeFiniteProper {X Y : Scheme.{u}} (g : X ⟶ Y) (n : ℕ) :
     Functor.isoWhiskerLeft _ (Functor.rightDerivedFunctorNatIso
       (eqToIso (PurCompactSupport.finiteDirectImage_eq l E n g))).symm
 
-/-- Native open evaluation, expressed in the finite coefficient model.
-Source: Stacks 03DI (blueprint: def-pur-native-geometric-finite-evaluation-data). -/
+/-- Native open evaluation, expressed in the finite coefficient model. -/
 def nativeFiniteOpen {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] (n : ℕ) :
     ProEtale.VaryingRing.J (compactSupportSystemLevel l E)
         (compactSupportSystemQuotient l E) j ⋙
@@ -68,8 +67,7 @@ def nativeFiniteOpen {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] (n : �
     Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryNatIso
       (PurCompactSupport.finiteOpenIso l E n j)).symm
 
-/-- Positive restriction through proper image, with the fixed quotient identification.
-Source: Stacks 0D6E (blueprint: def-pur-native-geometric-finite-evaluation-data). -/
+/-- Positive restriction through proper image, with the fixed quotient identification. -/
 def finiteProperRestriction {X Y : Scheme.{u}} (g : X ⟶ Y) (n : ℕ) :
     positiveRestriction l E X (n + 1) (Nat.le_add_left 1 n) ⋙
       proEtaleRingDerivedDirectImage g
@@ -92,8 +90,7 @@ def finiteProperRestriction {X Y : Scheme.{u}} (g : X ⟶ Y) (n : ℕ) :
       (proEtaleRingDerivedDirectImage g (B.ring Y) (B.ring X) (B.pull g))
       (positiveRestrictionIdentification l E Y (n + 1) (Nat.le_add_left 1 n)).symm
 
-/-- Positive restriction through open extension, with the fixed quotient identification.
-Source: Stacks 0E8I (blueprint: def-pur-native-geometric-finite-evaluation-data). -/
+/-- Positive restriction through open extension, with the fixed quotient identification. -/
 def finiteOpenRestriction {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] (n : ℕ) :
     positiveRestriction l E X (n + 1) (Nat.le_add_left 1 n) ⋙
       (PurCompactSupport.openExtension (constants l E) j).mapDerivedCategory ≅

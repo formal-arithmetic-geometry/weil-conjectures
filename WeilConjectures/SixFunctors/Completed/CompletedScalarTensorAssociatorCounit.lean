@@ -13,8 +13,12 @@ import WeilConjectures.SmoothPurity.PurStrictScalar.CompletedScalarAssociatorLoc
 
 /-! # The scalar associator on computation counits
 
-Source: Stacks Tags 06YY and 07A6.
-(blueprint: lem-sf-completed-scalar-associator-counit).
+The scalar tensor associator is compatible with the successive computation counits.
+
+## References
+
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A6]
 -/
 
 @[expose] public noncomputable section
@@ -100,13 +104,7 @@ private theorem scalar_counit_isIso
   rw [← PurStrictScalar.completedTensorModel_counit l E L i T P]
   infer_instance
 
-/-- The scalar tensor associator preserves the successive computation counits.
-Source: Stacks 06YY (lemma-derived-base-change) and 07A6 (lemma-adjoint).
-(blueprint: lem-sf-completed-scalar-associator-counit).
-Proof: express the associator through the three counit-normalized exact models.
-The exact derived-composition factorization identifies its cochain representative.
-Naturality moves the middle model comparison past the first factor map.
-The three model-counit equations then give the successive-counit formula. -/
+/-- The scalar tensor associator preserves the successive computation counits. -/
 theorem completedScalarTensorAssociatorCounit
     (P : CochainComplex (integralTowerModules l E T) ℤ) :
     (PurCompactSupport.tensorComposition _ _ _

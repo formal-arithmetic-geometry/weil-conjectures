@@ -11,8 +11,9 @@ import WeilConjectures.SmoothPurity.Supporting.ReducedIntegralBraidingScalarExte
 /-!
 # Integral Koszul braiding and scalar extension
 
-Source: literature/stacks-project/sites-cohomology.tex, Tag 0FPQ
-(blueprint: lem-pur-integral-braiding-scalar-extension-square).
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 0FPQ
 -/
 
 @[expose] public noncomputable section
@@ -26,24 +27,7 @@ namespace WeilConjectures
 
 /--
 The coherently normalized integral Koszul braiding commutes with the prescribed
-integral tensor comparison for a finite coefficient extension.
-
-Source: literature/stacks-project/sites-cohomology.tex, Tag 0FPQ, signed total symmetry;
-specialization to the prescribed completed integral scalar-extension tensor comparison
-(blueprint: lem-pur-integral-braiding-scalar-extension-square).
-
-Proof: represent both tensor comparisons on flat-term K-flat complexes and reduce to
-finite coefficient systems. The coefficient extension chain map sends a homogeneous
-term of bidegree `(p,q)` to the corresponding term with the scalar in degree zero,
-so applying the signed swap on either side gives the same factor `(-1)^(p*q)`.
-The levelwise equalities commute with quotient transitions and therefore assemble to
-the coherent reduction systems. The normalized reduction characterizations of the
-integral tensor comparison and the integral braidings identify the two reduced
-composites. Full faithfulness of coherent reduction then lifts their equality to the
-completed constructible category. The identity extension and ramified extensions
-are included because the argument uses only the coefficient ring map and degree-zero
-scalars.
--/
+integral tensor comparison for a finite coefficient extension. -/
 theorem integralBraidingScalarExtensionSquare
     (l : ℕ) [Fact l.Prime]
     (E L : Type u) [Field E] [Field L]

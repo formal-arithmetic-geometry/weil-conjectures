@@ -13,8 +13,21 @@ import Mathlib.Tactic.LinearCombination
 
 /-! # Polynomial substitution in the desingularization construction
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Tag 07CR, through the
-construction of the polynomials `g` and the two observations on the remaining relations.
+The polynomial substitution `xᵢ = π² ∑ₖ sᵢₖ vₖ + π³ wᵢ` of the desingularization construction and
+the resulting polynomials `g`.
+
+## Implementation details
+
+After translating the variables of a strictly standard presentation, the scalar left inverse `s`
+satisfies `∑ᵢ rⱼᵢ sᵢₖ = u π δⱼₖ` with `u = 1 - π³ t`. Then `fⱼ(ξ) = π³ gⱼ` with
+`gⱼ = vⱼ + ∑ᵢ rⱼᵢ wᵢ + π eⱼ`, obtained by coefficientwise division of explicitly divisible terms
+rather than cancellation of a possibly zero divisor. The first-order expansion is proved by
+polynomial induction, valid over rings with zero divisors. No annihilator stability or Noetherian
+hypothesis is needed.
+
+## References
+
+* [Stacks, Tag 07CR] (through the construction of the polynomials `g`)
 -/
 
 @[expose] public section
@@ -25,8 +38,7 @@ namespace Algebra
 
 open MvPolynomial
 
-/-- First-order Taylor expansion with remainder in the square of the variable ideal.
-The polynomial induction keeps all statements valid over rings with zero divisors. -/
+/-- First-order Taylor expansion with remainder in the square of the variable ideal. -/
 private theorem first_order_expansion {R : Type u} [CommRing R]
     {n : ℕ} (p : MvPolynomial (Fin n) R) :
     ∃ q : MvPolynomial (Fin n) R,
@@ -70,32 +82,7 @@ private theorem first_order_expansion {R : Type u} [CommRing R]
 
 /-- The polynomial part of desingularization, before descending evaluation to a quotient
 or proving any smoothness. The variable-index universe lift puts the polynomial quotient
-in the universe required by the original algebra.
-
-Source: Stacks Project, Smoothing Ring Maps, proof of Tag 07CR, presentation, translation,
-scalar left inverse, substitution, and the two observations on the remaining relations.
-(blueprint: lem-weil-pbc-popescu-desingularization-substitution).
-
-Proof: choose a strictly standard presentation with `c` selected relations. Translate its
-variables by lifts of their images under the section, so their images under `α` are
-`π⁴λᵢ` and every relation has constant term in `π⁴R`. Write its linear coefficients as
-`rⱼᵢ`. Applying the section to the strictly standard minor identity gives a linear
-combination of constant minors equal to `uπ`, where `u = 1 - π³t`. Apply the scalar
-left-inverse lemma to obtain `s` with `Σᵢ rⱼᵢsᵢₖ = uπδⱼₖ`. Substitute
-`ξᵢ = π²Σₖsᵢₖvₖ + π³wᵢ`. For the first `c` relations, their constant and higher-degree
-terms are divisible by `π⁴`, and their linear terms are
-`π³(vⱼ + Σᵢrⱼᵢwᵢ)` modulo `π⁴`. Construct the corresponding polynomials `gⱼ` by dividing
-these displayed coefficients, obtaining `fⱼ(ξ) = π³gⱼ` and
-`gⱼ = vⱼ + Σᵢrⱼᵢwᵢ + πeⱼ`. This is coefficientwise division of explicitly divisible
-terms, not cancellation of a possibly zero divisor. All substituted relations lie in
-`(π²)`. Substitute into the strictly standard ideal-square relation to get
-`πfⱼ(ξ)` in `(g)+(f(ξ))²` for each remaining relation. The chosen lift
-`P.σ (algebraMap R A π)` differs from `C π` by an element of the relation ideal, so
-replacing it by `C π` changes its product with a relation only by an ideal-square
-element. The first `c` relations already lie in `(g)`. The coefficient-ring lift and
-the lifted variable indices do not change
-any of these identities. This argument does not need annihilator stability or any
-Noetherian hypothesis. -/
+in the universe required by the original algebra. -/
 theorem exists_desingularization_substitution
     (R : Type u) (Λ : Type v) (A : Type w)
     [CommRing R] [CommRing Λ] [CommRing A]

@@ -14,7 +14,9 @@ import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 
 /-! # Functorial strict quotient representatives
 
-Source: Stacks Project, Tags 06YY, 07A4 and 0941.
+## References
+
+* Stacks Project, Tags 06YY, 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -622,24 +624,7 @@ private theorem tensorLevel_transition
 
 -- Normalize the coefficient functor and complex instances within this declaration.
 /-- Strict tensor evaluation assembles to an isomorphism of whole towers, naturally
-on the product of good categories.
-Source: Stacks 07A4 and 0941; finite tensor construction in step 1 of
-lem-pur-primitive-counit-tensor-realization.
-(blueprint: stage3-v3-primitive-tensor-strict-tower-comparison).
-
-Proof: at level n compose restriction/evaluation, the ordinary total tensor
-evaluation isomorphism, the tensor of the two evaluation comparisons, and the
-finiteTensorBridge. These are all isomorphisms. The normalized ordinary units,
-their limit-cone equation and the finite scalar-unit formula identify both routes
-around each quotient transition square.
-On a homogeneous tensor they both apply the coefficient quotient and the two
-quotient maps to its factors. The ordinary tensor balancing relation, sheafification
-and total-summand universal properties give equality of chain maps. Thus the level
-isomorphisms assemble by NatIso.ofComponents to a strict tower isomorphism.
-Naturality of all four factors gives its naturality for pairs of good chain maps.
-The differential uses the same total tensor signs on both routes. Identity
-transitions, level zero, zero inputs and the empty site obey the same calculation.
-No derived evaluation faithfulness or Roos normalization is used. -/
+on the product of good categories. -/
 theorem tensorStrictTowerComparison
     (S : CoefficientDerivedSystemReduction l E W)
     (M : ReductionRepresentatives l E W S) :

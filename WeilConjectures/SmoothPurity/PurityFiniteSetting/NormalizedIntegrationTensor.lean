@@ -7,7 +7,17 @@ module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMap
 
-/-! # The tensor family associated to an orientation has its scalar trace normalization -/
+/-!
+# The tensor family associated to an orientation has its scalar trace normalization
+
+## Implementation details
+
+Transpose the natural transformation consisting of inverse projection, tensoring with the scalar
+trace, and the left unitor; its counit is that transformation by the triangle identity. To
+identify each component with the orientation followed by the dualizing tensor map, transpose
+again: naturality of the projection moves the orientation through the inverse projection, and
+functoriality of tensor combines it with the unit counit to give the scalar trace.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -17,16 +27,7 @@ open CategoryTheory CategoryTheory.MonoidalCategory
 namespace WeilConjectures.PurityFiniteSetting
 
 /-- The canonical tensor extension of an orientation is a natural family normalized by
-its scalar counit. Source: latest blueprint sec-smooth-purity/sk-prop-an,
-cor-pur-vector-bundle-purity.proof.md paragraph 2, transposition of integration.
-
-Proof: transpose the natural transformation consisting of inverse projection, tensoring
-with the scalar trace, and the left unitor. Its counit is that transformation by the
-adjunction triangle identity. To identify each component with the orientation followed by
-the dualizing tensor map, transpose again. Naturality of the projection in its first
-variable moves the orientation through the inverse projection; functoriality of tensor
-combines it with the unit counit to give the specified scalar trace.
-(blueprint: lem-pur-normalized-integration-tensor). -/
+its scalar counit. -/
 theorem normalizedIntegration_tensor
     {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
     (L : C ⥤ D) (R P : D ⥤ C) (adj : L ⊣ R)

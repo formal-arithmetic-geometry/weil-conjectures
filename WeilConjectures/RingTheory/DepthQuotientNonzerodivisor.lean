@@ -18,8 +18,20 @@ public import Mathlib.RingTheory.Noetherian.Basic
 /-!
 # Cohen–Macaulay quotients by a nonzerodivisor
 
-Source: Stacks Project, Algebra, Lemma 10.104.2 (Tag 02JN), last assertion for one
-regular element (blueprint: lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm).
+The quotient of a Noetherian local Cohen–Macaulay ring of dimension `d` by a nonzerodivisor in
+its maximal ideal is Cohen–Macaulay of dimension `d - 1`.
+
+## Implementation details
+
+The dimension drops by one since `x` is a nonzerodivisor; the depth drops by one by the
+depth-drop lemma for a regular element, and the depth of `S/xS` over `S` equals its depth as a
+ring by the quotient-ring comparison.
+
+## References
+
+* [Stacks, Tag 02JN]
+* [Stacks, Tag 00N5]
+* [Stacks, Tag 0AAD]
 -/
 
 @[expose] public section
@@ -29,25 +41,9 @@ universe u
 namespace IsLocalRing
 
 /-- A quotient of a Noetherian local Cohen–Macaulay ring by a nonzerodivisor in its
-maximal ideal is again Cohen–Macaulay, of dimension one less (Stacks, Tag 02JN)
-(blueprint: lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm).
-
-Proof, following the blueprint's five steps:
-1. Since `x` lies in the maximal ideal, its principal ideal is proper. The quotient is
-nonzero, Noetherian and local, with maximal ideal the image of the original maximal ideal.
-The dimension-quotient-nonzerodivisor lemma gives dimension plus one equal to `d`, hence
-`d ≥ 1` and quotient dimension `d - 1`.
-2. The support-annihilator lemma identifies the supports of `S` and `S/xS` with `Spec S`
-and `V(x)`. Prime correspondence identifies the dimension of `V(x)` with that of the
-quotient, so intersecting the support with `V(x)` decreases dimension by one.
-3. The depth-le-support-dimension lemma and the assumed depth bound show that `S` is a
-Cohen–Macaulay module over itself, of depth `d`.
-4. The cm-module-good-element-nonzerodivisor lemma (Stacks, Tag 00N5, clause (b)) gives
-`S/xS` depth `d - 1` as an `S`-module and makes it Cohen–Macaulay over `S`.
-5. Choose a regular sequence of this length in the maximal ideal using the definition
-of depth. Its images in the quotient maximal ideal act by the same maps on every
-successive module quotient. They therefore form a regular sequence over `S/xS` itself,
-which gives the asserted quotient-ring depth bound (change of rings, Tag 0AAD).
+maximal ideal is again Cohen–Macaulay, of dimension one less: the quotient is a
+Noetherian local ring of dimension `d - 1` whose maximal ideal contains a regular sequence of
+length `d - 1`.
 -/
 theorem depth_quotient_nonzerodivisor
     (S : Type u) [CommRing S] [IsNoetherianRing S] [IsLocalRing S]
@@ -64,8 +60,8 @@ theorem depth_quotient_nonzerodivisor
       ∃ rs : List (S ⧸ Ideal.span {x}),
         RingTheory.Sequence.IsRegular (S ⧸ Ideal.span {x}) rs ∧
         (∀ y ∈ rs, y ∈ maximalIdeal (S ⧸ Ideal.span {x})) ∧ rs.length = d - 1 := by
-  -- Use the proved depth-drop and quotient-ring comparison in place of the historical
-  -- support-cutting argument above; attain the finite depth to extract the regular list.
+  -- Use the depth-drop and quotient-ring comparison; attain the finite depth to extract
+  -- the regular list.
   classical
   let : DistribMulAction S (Submodule S S) := Submodule.pointwiseDistribMulAction
   have hI : Ideal.span {x} ≤ maximalIdeal S := by simpa using hx

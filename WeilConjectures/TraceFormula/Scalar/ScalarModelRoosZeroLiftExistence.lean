@@ -11,14 +11,18 @@ import WeilConjectures.TraceFormula.Scalar.ScalarModelRoosZeroLiftFactorizationF
 
 /-! # Existence of the normalized scalar Roos lift
 
-Source: Stacks Project, Tags 06YY and 0941; Bhatt--Scholze, Definition 3.4.10
-and Proposition 3.5.1.
-(blueprint: lem-trf-scalar-model-roos-zero-lift-existence)
+This is the realization and transpose part of the scalar Roos lift argument. It produces the
+scalar-extended strict map and its zero-shifted coordinate formula.
 
-This is the realization and transpose part of the scalar Roos lift argument.
-It produces the scalar-extended strict map and its zero-shifted coordinate
-formula. The construction is independent of a second map `g`; the coordinate
-uniqueness argument is isolated in the companion theorem.
+## Implementation details
+
+The construction is independent of a second map `g`; the coordinate uniqueness argument is isolated
+in the companion theorem.
+
+## References
+
+* Stacks Project, Tags 06YY and 0941.
+* Bhatt--Scholze, Definition 3.4.10 and Proposition 3.5.1.
 -/
 
 @[expose] public noncomputable section
@@ -42,16 +46,7 @@ variable (l : ℕ) [Fact l.Prime]
   (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (ι : E →ₐ[ℚ_[l]] L) (j : L →ₐ[ℚ_[l]] F) (X : Scheme.{u})
 
-/-- The normalized scalar lift supplied by the realization/transpose construction.
-
-Source: Stacks 06YY, 0941; Bhatt--Scholze, Definition 3.4.10 and Proposition 3.5.1;
-steps 1--2 of `lem-trf-scalar-model-roos-zero-lift`.
-
-Proof in words: apply the proved strict core with the supplied source zero-shift
-hypothesis hf. It supplies a lift with zero shifted coordinate and the normalized
-quotient coordinates. Apply factorization_from_coordinates directly to this lift,
-using the same hf. No intermediate factorized-existence or uniqueness wrapper is
-needed. -/
+/-- The normalized scalar lift supplied by the realization/transpose construction. -/
 theorem scalarModelRoosZeroLift_existence
     (SL : CoefficientDerivedSystemCalculus l L X)
     (ρL : IntegralComparisonRoosModel l L X)

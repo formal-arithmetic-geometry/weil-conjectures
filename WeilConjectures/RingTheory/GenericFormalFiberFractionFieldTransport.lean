@@ -8,15 +8,27 @@ module
 public import WeilConjectures.RingTheory.GRing
 public import Mathlib.RingTheory.Localization.FractionRing
 import WeilConjectures.RingTheory.FractionFieldGeometricRegularityTransport
+
+/-!
+# Generic formal fibres over a chosen fraction field
+
+Geometric regularity of a generic formal fibre does not depend on the choice of fraction
+field of the base domain.
+
+## Implementation details
+
+The universal property of fraction fields identifies the chosen field with the canonical
+residue field; geometric regularity is transported across the induced tensor isomorphism.
+
+## References
+
+* [Stacks, Tag 07PS]
+-/
+
 @[expose] public section
 universe u
 /-- Geometric regularity of a generic formal fibre is invariant under replacing the
-canonical fraction field by any chosen fraction field.
-Source: Stacks Project, More on Algebra, Proposition 07PS.
-(blueprint: theorem-finite-etale-covers-proper-henselian--2).
-Proof: Use the universal property of fraction fields to identify the chosen field with the
-canonical residue field, then transport geometric regularity across the induced tensor
-isomorphism. -/
+canonical fraction field by any chosen fraction field. -/
 theorem genericFormalFiber_geometricallyRegular_of_fractionField_transport
     (A : Type u) [CommRing A] [IsDomain A] [IsNoetherianRing A]
     (K : Type u) [Field K] [Algebra A K] [IsFractionRing A K]

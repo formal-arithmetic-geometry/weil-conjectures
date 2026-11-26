@@ -12,10 +12,21 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Coherence of completed scalar restriction
 
-Source: the canonical restriction comparisons in def-coef-normalized-dvr-tower,
-and Stacks, Derived Categories, lemma-right-derived-exact-functor;
-Categories, lemma-properties-left-localization.
-(blueprint: lem-coef-normalized-dvr-completed-restriction-coherence).
+This file proves the unit and associativity equations for the canonical comparisons of completed
+scalar restriction along the normalized DVR tower
+(`normalizedDVR_completedRestriction_coherence`).
+
+## Implementation details
+
+On ordinary module sheaves every restriction comparison is the identity on sections, so the unit
+and composition squares commute sectionwise. The derived comparisons are characterized by their
+factorization through the localization functor `Q`, and precomposition with `Q` is faithful, so
+the derived identities reduce to the sectionwise ones. Repeated indices need no special treatment.
+
+## References
+
+* [Stacks Project, Derived Categories, Lemma "right derived exact functor"][stacks-project]
+* [Stacks Project, Categories, Lemma "properties left localization"][stacks-project]
 -/
 
 @[expose] public section
@@ -120,25 +131,7 @@ private noncomputable instance completedColimits
 
 /-- The unit and associativity equations for the canonical completed restriction
 comparisons. These are equations of the specified comparisons, not merely the
-existence of some coherent comparison isomorphisms.
-
-Source: def-coef-normalized-dvr-tower and the strict representative step in
-lem-coef-integral-dualizing-roos-model; Stacks, Derived Categories,
-lemma-right-derived-exact-functor; Categories, lemma-properties-left-localization.
-(blueprint: lem-coef-normalized-dvr-completed-restriction-coherence).
-
-Proof: for ordinary module sheaves every restriction comparison has the identity
-as its underlying map on every section. The unit and the threefold composition
-squares therefore commute sectionwise. Apply exact restriction to complexes and
-then localize. The canonical composition comparison of mapDerivedCategory is
-characterized by its factorization through Q. Whisker each proposed derived
-identity with Q, replace every comparison by this factorization, and cancel the
-invertible factorization maps. The remaining unit square, respectively the
-threefold composition square, is precisely the identity-on-sections square just
-checked. Faithfulness of precomposition with the localization proves both
-identities on every derived object. Repeated indices cause no exception: their
-quotient maps are identities, so this also proves all degenerate associativity
-cases. The zero sheaf on an empty scheme satisfies the same equalities. -/
+existence of some coherent comparison isomorphisms. -/
 theorem normalizedDVR_completedRestriction_coherence
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

@@ -15,14 +15,13 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.Empty
 /-!
 # The induction statement for Deligne's generic constructibility
 
-The proof of `theorem-generic-constructibility-base-change-rj` is an induction on the dimension of
+The proof of Deligne's generic constructibility theorem is an induction on the dimension of
 the generic fibre of the source (`AlgebraicGeometry.Etale.genericFiberDim`). This file states the
 induction hypothesis (`AlgebraicGeometry.Etale.DeligneStatement`), proves its start, for an empty
 generic fibre (`AlgebraicGeometry.Etale.deligneStatement_zero`), and deduces the theorem from the
 induction hypothesis in all dimensions
 (`AlgebraicGeometry.Etale.exists_hasConstructibleDirectImageBaseChangeOn_of_forall`). It also
-states the input on smooth morphisms with locally constant coefficients of the second step,
-`lemma-smooth-morphisms-locally-constant-sheaves`
+states the input on smooth morphisms with locally constant coefficients of the second step
 (`AlgebraicGeometry.Etale.SmoothGenericDirectImage`).
 -/
 
@@ -86,7 +85,7 @@ lemma quasiCompact_of_isImmersion {X Y : Scheme.{u}} [IsLocallyNoetherian Y] (j 
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- **The induction statement** of the proof of `theorem-generic-constructibility-base-change-rj`,
+/-- **The induction statement** of the proof of Deligne's generic constructibility theorem,
 in generic dimension `< n`: for every integral scheme `S` of finite type over a field on which the
 exponent of `Λ` is invertible, every immersion `j : X ⟶ Y` of finite type `S`-schemes whose generic
 fibre has dimension `< n`, and every constructible sheaf `F` on `X`, there is a nonempty open
@@ -101,8 +100,8 @@ def DeligneStatement (n : ℕ) : Prop :=
       ∃ U : S.Opens, (U : Set S).Nonempty ∧ HasDirectImageBaseChangeOnPlus Λ fY j
         ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F) U
 
-/-- **The smooth case**, the statement of `lemma-smooth-morphisms-locally-constant-sheaves` used by
-the proof of `theorem-generic-constructibility-base-change-rj`: for a separated smooth morphism of
+/-- **The smooth case**, the statement on smooth morphisms with locally constant coefficients used
+by the proof of Deligne's generic constructibility theorem: for a separated smooth morphism of
 finite type `a : X ⟶ S` to an integral scheme of finite type over a field on which the exponent of
 `Λ` is invertible, and a finite locally constant sheaf `F` on `X`, there is a nonempty open `U ⊆ S`
 over which `Ra_* F` is bounded constructible and commutes with every base change from a

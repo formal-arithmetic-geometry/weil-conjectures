@@ -14,15 +14,24 @@ import WeilConjectures.RingTheory.SmoothLocalizationConormalSplit
 import WeilConjectures.RingTheory.SelectedBasisOfLocalizedSplit
 import Mathlib.RingTheory.Smooth.Locus
 
+/-!
+# Conormal data at a smooth point
+
+For a polynomial quotient that is smooth at a prime, we produce a smooth principal localization
+around the prime on which the localized conormal module is free, with a basis given by the
+classes of some of the given generators.
+
+## References
+
+* [Stacks, Tag 07C6]
+-/
+
 @[expose] public section
 universe u
 namespace Algebra
-/-- The smooth localization and prescribed conormal basis data exist.
-Source: Stacks Project, Smoothing Ring Maps, Lemma Tag 07C6.
-(blueprint: lem-weil-pbc-smooth-at-prime-free-conormal-basis-conormal-data)
-The proof chooses a smooth principal neighbourhood, selects a residue-field basis
-from the given generators, and spreads it after shrinking; this is the conormal
-part of Tag 07C6. -/
+/-- If `C = R[x₁, ..., xₙ]/(f₁, ..., f_m)` is smooth over `R` at a prime `q`, there is an `a`
+outside `q` with `C_a` smooth over `R` and a subset of `c ≤ min n m` of the generators `f_j` whose
+classes form a basis of the localized conormal module `(I/I²)_a`. -/
 theorem exists_smoothAtPrime_conormal_data
     (R : Type u) [CommRing R] (n m : ℕ)
     (f : Fin m → MvPolynomial (Fin n) R)

@@ -43,7 +43,7 @@ The structure maps of `amitsurCosimplicialObject` are `M ⊗ θ_*`, where for
 `θ : Fin (k + 1) → Fin (m + 1)` the algebra map `θ_* : B^{⊗ (k + 1)} → B^{⊗ (m + 1)}` sends `b`
 in the `i`-th factor to `b` in the `θ i`-th factor (`Algebra.TensorProduct.amitsurMap`).
 
-Exactness is proved as in the blueprint: after tensoring with `B` on the left, the augmented
+Exactness is proved by the classical argument: after tensoring with `B` on the left, the augmented
 cosimplicial module acquires an extra codegeneracy
 `b ⊗ m ⊗ b₀ ⊗ ⋯ ⊗ bₙ ↦ b b₀ ⊗ m ⊗ b₁ ⊗ ⋯ ⊗ bₙ`, which yields exactness of the base changed
 complex (`CategoryTheory.CosimplicialObject.exact_lTensor_alternatingCofaceMapComplex_d` and
@@ -416,14 +416,9 @@ open Algebra.TensorProduct CosimplicialObject
 variable (A B M : Type u) [CommRing A] [CommRing B] [Algebra A B] [AddCommGroup M] [Module A M]
 
 /-- The augmented Amitsur complex `0 → M → M ⊗_A B → M ⊗_A B ⊗_A B → ⋯` of a faithfully flat
-`A`-algebra `B` is exact (blueprint: proposition-p-torsion-smooth-proper-curve): the augmentation
-`M → M ⊗_A B` is injective, the complex is exact at `M ⊗_A B` (the kernel of the first differential
-is the image of the augmentation), and the Amitsur complex `amitsurComplex A B M` is exact in all
-positive degrees.
-
-The proof follows the classical argument: after tensoring with `B`, the augmented complex admits
-the contracting homotopy `b ⊗ m ⊗ b₀ ⊗ ⋯ ⊗ bₙ ↦ b b₀ ⊗ m ⊗ b₁ ⊗ ⋯ ⊗ bₙ`, so it is exact, and
-exactness descends along the faithfully flat map `A → B`. -/
+`A`-algebra `B` is exact: the augmentation `M → M ⊗_A B` is injective, the complex is exact at
+`M ⊗_A B` (the kernel of the first differential is the image of the augmentation), and the
+Amitsur complex `amitsurComplex A B M` is exact in all positive degrees. -/
 theorem exact_amitsurComplex [Module.FaithfullyFlat A B] :
     Function.Injective (amitsurAugmentation A B M) ∧
       Function.Exact (amitsurAugmentation A B M) ((amitsurComplex A B M).d 0 1).hom ∧

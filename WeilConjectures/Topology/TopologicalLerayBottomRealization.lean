@@ -17,7 +17,23 @@ public import WeilConjectures.CategoryTheory.CanonicalFiltration
 import WeilConjectures.Topology.TopologicalLerayCartanEilenbergCocycle
 import WeilConjectures.Topology.TopologicalResolutionCocycleLift
 
-/-! # Realization of the canonical Leray bottom edge -/
+/-! # Realization of the canonical Leray bottom edge
+
+A cohomology map characterized on resolution cocycles is realized as the bottom edge of a
+functorial Leray spectral sequence.
+
+## Implementation details
+
+The spectral sequence is the Grothendieck spectral sequence for `f_*` followed by global
+sections, built from the second filtration of the Cartan--Eilenberg total complex; pages are
+constructed in the functor category using natural resolution comparisons, which induce the same
+maps from page two onward. The bottom map is computed on cocycles via the augmentation into the
+resolution-degree-zero summands of the total complex.
+
+## References
+
+* [Stacks Project, Tags 01F2 and 015N](https://stacks.math.columbia.edu/tag/01F2)
+-/
 
 @[expose] public section
 
@@ -75,41 +91,7 @@ private theorem topological_cohomology_edge_eq_of_cocycles
 
 /-- Realize a cohomology map already characterized on resolution cocycles as the bottom
 edge of a functorial Leray spectral sequence. The induced map and its cocycle computation
-are inputs; this statement constructs only the spectral sequence and its finite filtration.
-
-Source: Stacks Project, Cohomology Lemma 01F2, and Derived Categories Lemma 015N, with
-its Cartan--Eilenberg construction and finite-filtration conclusion.
-(blueprint: lem-sc-topological-leray-bottom-realization)
-
-Proof: Apply the Grothendieck spectral-sequence construction to f_* and global sections
-on X. Direct image is left exact sectionwise and additive by hypothesis. It sends
-injectives to injectives by topological pushforward injectivity, hence to
-sections-acyclics. Abelian sheaves are Grothendieck abelian categories with enough
-injectives. Global sections after f_* agrees with global sections on Z. The canonical
-resolution computation therefore identifies the second page with R^b f_* followed by
-HX a and the abutment with HZ n, transported through hX and hZ.
-
-Construct the pages in the functor category using natural resolution comparisons;
-comparison homotopies induce the same maps from page two onward. The second filtration
-on the Cartan--Eilenberg total complex gives T; its image filtration has top at zero
-and bottom at n+1. Its graded quotients give g. In the first quadrant, both differentials
-at (p,q) vanish for r > max(p,q+1), giving stabilization at page p+q+2.
-On the bottom row the outgoing differential vanishes. The cycles inclusion is therefore
-an isomorphism; compose its inverse with homology projection and the next-page
-isomorphism to obtain t, with the displayed equation. Start b at the identity and
-iterate t. Since the final filtration step T(p).step(p+1) vanishes, its cokernel quotient
-identifies with T(p).step p; invert g p 0 through that identification to obtain k.
-
-The resulting bottom map sends a resolution cocycle s to the global cocycle obtained
-by the resolution comparison J -> f_*I, as follows by the augmentation into the
-resolution-degree-zero summands of the total complex. This global cocycle is a unique
-z under the representation of sections by the free terminal sheaf, and satisfies hz
-and a >> f_*z = s >> phi. The assumed cocycle formula identifies its class with edge.
-Every cohomology class is J.extMk of a cocycle. Thus this equality on cocycles implies
-equality of morphisms in every sheaf, hence the displayed natural-transformation
-factorization. For p=0, b at page two is the identity; for f the identity this specializes
-to the one-row sequence. No acyclicity assumption on the original sheaf is introduced.
--/
+are inputs; this statement constructs only the spectral sequence and its finite filtration. -/
 theorem exists_topological_leray_bottom_realization
     {Z X : TopCat.{u}} (f : Z ⟶ X) [(TopCat.Sheaf.pushforwardAb f).Additive]
     (HX : ℕ → (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u}))

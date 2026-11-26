@@ -14,8 +14,21 @@ import Mathlib.Algebra.Module.LocalizedModule.Submodule
 
 /-! # Clearing a finite ideal from localized conormal spanning
 
-Source: Stacks Project, Tag 07CP, preparation (2)--(4), and Tag 00DV.
-(blueprint: lem-weil-pbc-conormal-span-clearing).
+Let `I = (f_1, …, f_m) ⊆ A`. If the classes of `f_j`, `j ∈ E`, span the conormal module
+`I/I²` after inverting the image of `x` in `A/I`, then there is `a ∈ A` with
+`a ≡ x^s mod I` for some `s > 0` such that every `a f_l` is an `A`-combination of the `f_j`,
+`j ∈ E`.
+
+## Implementation details
+
+With `J = (f_j, j ∈ E)` and `T = A_x`, localized spanning gives `I_T ≤ J_T + I_T²`, so
+Nakayama (Tag 00DV) gives `e ∈ 1 + I_T` with `e I_T ⊆ J_T`. Writing `(e - 1) x^N = b` with
+`b ∈ I` and clearing denominators gives `a = x^K (x^N + b)`.
+
+## References
+
+* [Stacks, Tag 07CP]
+* [Stacks, Tag 00DV]
 -/
 
 @[expose] public section
@@ -25,25 +38,7 @@ universe u
 namespace Ideal
 
 /-- Localized conormal spanning gives exact equations after multiplying by an element
-whose quotient image is a positive power of the original chart element.
-
-Source: Stacks Project, Tag 07CP, preparation (2)--(4); Tag 00DV for Nakayama.
-(blueprint: lem-weil-pbc-conormal-span-clearing).
-
-Proof: Put J = (f_j, j in E), I = (f_j), and q:A -> A/I. Lift linear
-combinations of selected conormal classes to J. Localized spanning and the
-localization equality criterion give x^k_l*f_l in J+I^2 for every l.
-In T=A_x these imply I_T <= J_T+I_T^2. The ideal I_T is finitely generated,
-so Nakayama applied to I_T/J_T gives e with e-1 in I_T and e*I_T contained
-in J_T. The localization ideal membership criterion writes
-(e-1)*x^N=b in T with b in I. Consequently (x^N+b)*f_l belongs to J_T.
-Clear this membership to get x^k_l*(x^N+b)*f_l in J. Set K to one plus
-the maximum of these finitely many exponents (the empty maximum is zero).
-For a=x^K*(x^N+b), every a*f_l belongs to J, and q(a)=q(x)^(K+N).
-The exponent K+N is positive. Express each membership as a sum over E,
-and extend its coefficients by zero outside E. Empty generator families,
-empty E, and zero rings require no additional assumptions; all finiteness
-comes from the finite family generating I. -/
+whose quotient image is a positive power of the original chart element. -/
 theorem exists_conormal_span_clearing
     {A : Type u} [CommRing A] (m : ℕ) (f : Fin m → A)
     (x : A) (E : Finset (Fin m)) :

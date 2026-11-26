@@ -13,37 +13,12 @@ public import WeilConjectures.WeilSheaf.StrictWeilComplex
 /-!
 # The functor from Weil complexes to strict Weil complexes is not faithful
 
-Blueprint `definition-weil-structure` (complement): the functor
-`AlgebraicGeometry.WeilComplex.toStrictWeilComplex`, `K ↦ (For(K), θ_K)`, from Weil complexes to
-strict Weil complexes is not faithful. On the point `Spec k₀`, whose geometric fiber is
-`Spec k̄`, the Jordan block `J = ℚ̄_ℓ ⊕ ℚ̄_ℓ` with Frobenius `[[1, 1], [0, 1]]` is a nonsplit
+The functor `AlgebraicGeometry.WeilComplex.toStrictWeilComplex`, `K ↦ (For(K), θ_K)`, from Weil
+complexes to strict Weil complexes is not faithful. On the point `Spec k₀`, whose geometric fiber
+is `Spec k̄`, the Jordan block `J = ℚ̄_ℓ ⊕ ℚ̄_ℓ` with Frobenius `[[1, 1], [0, 1]]` is a nonsplit
 extension `0 → ℚ̄_ℓ → J → ℚ̄_ℓ → 0` of Weil sheaves; its class is a nonzero morphism
 `δ : ℚ̄_ℓ ⟶ ℚ̄_ℓ[1]` of Weil complexes. Forgetting the Frobenius, the extension splits, so
 `For(δ) = 0`.
-
-## The Jordan block
-
-For an algebra `(a, φ : F a ≅ a)` of an additive endofunctor `F`, the Jordan block
-`CategoryTheory.Endofunctor.IsoAlgebra.jordanBlock` is `a ⊞ a` with structure isomorphism
-`F (a ⊞ a) ≅ F a ⊞ F a --φ ⊞ φ--> a ⊞ a --[[1, 1], [0, 1]]--> a ⊞ a`. The inclusion of the first
-summand and the projection to the second one are morphisms of algebras. If an additive functor
-`G` with `G ≅ F ⋙ G` (here the global sections) turns `φ` into the identity of a nonzero object,
-the projection has no section
-(`CategoryTheory.Endofunctor.IsoAlgebra.not_isSplitEpi_jordanBlockSnd`):
-on `G (a ⊞ a)` the Frobenius is the unipotent matrix, which has no invariant complement.
-
-For the constant Weil sheaf `ℚ̄_ℓ` on a `k₀`-scheme with connected geometric fiber `X̄`, the
-functor is `Γ(X̄, -)`: the Frobenius of `Γ(X̄, ℚ̄_ℓ) = ℚ̄_ℓ` is the identity.
-
-## The class of the extension
-
-The Jordan block extension is short exact; its class is the connecting morphism
-`δ : ℚ̄_ℓ[0] ⟶ ℚ̄_ℓ[0][1]` of the distinguished triangle of the derived category of pro-étale Weil
-sheaves (`ShortComplex.ShortExact.singleδ`). If `δ = 0`, the projection `J[0] ⟶ ℚ̄_ℓ[0]` is
-split, and so is `J ⟶ ℚ̄_ℓ`, the single functor being fully faithful; hence `δ ≠ 0`. Forgetting
-the Frobenius gives a distinguished triangle whose first morphism is a split monomorphism, so the
-image of `δ` vanishes. No vanishing of `Hom(ℚ̄_ℓ, ℚ̄_ℓ[1])` in the derived category of `ℓ`-adic
-sheaves on `Spec k̄` is needed.
 
 ## Main results
 
@@ -58,6 +33,26 @@ sheaves on `Spec k̄` is needed.
   `AlgebraicGeometry.WeilComplex.not_faithful_toStrictWeilComplex` and
   `AlgebraicGeometry.WeilComplex.not_faithful_toStrictWeilComplex_spec`: the functor from Weil
   complexes to strict Weil complexes is not faithful, in particular on the point `Spec k₀`.
+
+## Implementation details
+
+For an algebra `(a, φ : F a ≅ a)` of an additive endofunctor `F`, the Jordan block
+`CategoryTheory.Endofunctor.IsoAlgebra.jordanBlock` is `a ⊞ a` with structure isomorphism
+`F (a ⊞ a) ≅ F a ⊞ F a --φ ⊞ φ--> a ⊞ a --[[1, 1], [0, 1]]--> a ⊞ a`. The inclusion of the first
+summand and the projection to the second one are morphisms of algebras. If an additive functor
+`G` with `G ≅ F ⋙ G` (here the global sections) turns `φ` into the identity of a nonzero object,
+the projection has no section: on `G (a ⊞ a)` the Frobenius is the unipotent matrix, which has no
+invariant complement. For the constant Weil sheaf `ℚ̄_ℓ` on a `k₀`-scheme with connected
+geometric fiber `X̄`, the functor is `Γ(X̄, -)`: the Frobenius of `Γ(X̄, ℚ̄_ℓ) = ℚ̄_ℓ` is the
+identity.
+
+The Jordan block extension is short exact; its class is the connecting morphism
+`δ : ℚ̄_ℓ[0] ⟶ ℚ̄_ℓ[0][1]` of the distinguished triangle of the derived category of pro-étale Weil
+sheaves (`ShortComplex.ShortExact.singleδ`). If `δ = 0`, the projection `J[0] ⟶ ℚ̄_ℓ[0]` is
+split, and so is `J ⟶ ℚ̄_ℓ`, the single functor being fully faithful; hence `δ ≠ 0`. Forgetting
+the Frobenius gives a distinguished triangle whose first morphism is a split monomorphism, so the
+image of `δ` vanishes. No vanishing of `Hom(ℚ̄_ℓ, ℚ̄_ℓ[1])` in the derived category of `ℓ`-adic
+sheaves on `Spec k̄` is needed.
 -/
 
 @[expose] public section
@@ -145,9 +140,7 @@ lemma jordanBlockInl_jordanBlockSnd (K : IsoAlgebra F) :
 
 /-- **The Jordan block is nonsplit.** Let `G : C ⥤ D` be an additive functor with an isomorphism
 `γ : G ≅ F ⋙ G` turning the structure isomorphism of `K` into the identity of `G K`, a nonzero
-object. Then the projection `jordanBlock K ⟶ K` has no section: on `G (K ⊞ K)` the transported
-structure is the unipotent matrix `[[1, 1], [0, 1]]`, and a section `σ` invariant under it would
-satisfy `σ ≫ G fst = σ ≫ G fst + 𝟙`. -/
+object. Then the projection `jordanBlock K ⟶ K` has no section. -/
 lemma not_isSplitEpi_jordanBlockSnd {D : Type*} [Category D] [Preadditive D] (G : C ⥤ D)
     [G.Additive] (γ : G ≅ F ⋙ G) (K : IsoAlgebra F)
     (hK : γ.hom.app K.carrier ≫ G.map K.str.hom = 𝟙 _) (hK' : ¬ IsZero (G.obj K.carrier)) :
@@ -206,8 +199,7 @@ section Connected
 variable [Fact (ringChar k₀ ≠ l)] [ConnectedSpace (X ↘ Spec (CommRingCat.of k₀)).geometricFiber]
 
 /-- On a scheme with connected geometric fiber, the Frobenius of the global sections
-`Γ(X̄, ℚ̄_ℓ) = ℚ̄_ℓ` of the constant Weil sheaf is the identity: it fixes the unit section, which
-spans the line `Γ(X̄, ℚ̄_ℓ)`. -/
+`Γ(X̄, ℚ̄_ℓ) = ℚ̄_ℓ` of the constant Weil sheaf is the identity. -/
 lemma adicGlobalSectionsFrobeniusIso_hom_app_comp_adicConstant_str :
     (adicGlobalSectionsFrobeniusIso k₀ l X).hom.app (adicConstant k₀ l X).carrier ≫
       (adicGlobalSections k₀ l X).map (adicConstant k₀ l X).str.hom = 𝟙 _ :=
@@ -243,8 +235,7 @@ noncomputable abbrev jordanShortComplex : ShortComplex (ProEtaleWeilSheaf k₀ l
   ShortComplex.mk (IsoAlgebra.jordanBlockInl K) (IsoAlgebra.jordanBlockSnd K)
     (IsoAlgebra.jordanBlockInl_jordanBlockSnd K)
 
-/-- The Jordan block extension is short exact: forgetting the Frobenius, it is the split short
-exact sequence `0 → K → K ⊞ K → K → 0`, and the forgetful functor is faithful and exact. -/
+/-- The Jordan block extension is short exact. -/
 lemma shortExact_jordanShortComplex : (jordanShortComplex K).ShortExact := by
   have hs : ((jordanShortComplex K).map (IsoAlgebra.forget _)).ShortExact :=
     ShortComplex.Splitting.shortExact
@@ -266,9 +257,7 @@ noncomputable abbrev jordanδ :
       ((DerivedCategory.singleFunctor _ 0).obj K)⟦(1 : ℤ)⟧ :=
   (shortExact_jordanShortComplex K).singleδ
 
-/-- If the Jordan block extension is nonsplit, its class `δ` is nonzero: if `δ = 0`, the
-projection `J[0] ⟶ K[0]` is an epimorphism in the triangulated derived category, hence split, and
-a section comes from a section of `J ⟶ K`, the single functor being fully faithful. -/
+/-- If the Jordan block extension is nonsplit, its class `δ` is nonzero. -/
 lemma jordanδ_ne_zero (hK : ¬ IsSplitEpi (IsoAlgebra.jordanBlockSnd K)) : jordanδ K ≠ 0 := by
   intro h
   have hT := (shortExact_jordanShortComplex K).singleTriangle_distinguished
@@ -280,9 +269,7 @@ lemma jordanδ_ne_zero (hK : ¬ IsSplitEpi (IsoAlgebra.jordanBlockSnd K)) : jord
     (section_ ((DerivedCategory.singleFunctor _ 0).map (IsoAlgebra.jordanBlockSnd K))),
     (DerivedCategory.singleFunctor _ 0).map_injective (by simp)⟩⟩
 
-/-- Forgetting the Frobenius kills the class of the Jordan block extension: the image of the
-triangle `K[0] → J[0] → K[0] → K[0][1]` is distinguished with split monomorphic first morphism,
-the underlying extension `0 → K → K ⊞ K → K → 0` being split. -/
+/-- Forgetting the Frobenius kills the class of the Jordan block extension. -/
 lemma map_jordanδ : (IsoAlgebra.forget _).mapDerivedCategory.map (jordanδ K) = 0 := by
   have hT := Functor.map_distinguished
     (IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategory _
@@ -322,11 +309,10 @@ theorem exists_ne_zero_forget_map_eq_zero
       ProEtaleWeilSheaf.not_isSplitEpi_jordanBlockSnd_adicConstant (congrArg (·.hom) h),
     ProEtaleWeilSheaf.map_jordanδ _⟩
 
-/-- Blueprint `definition-weil-structure` (complement): on a `k₀`-scheme with connected geometric
-fiber, the functor `K ↦ (For(K), θ_K)` from Weil complexes to strict Weil complexes is not
-faithful: the class of the nonsplit Jordan block extension of `ℚ̄_ℓ` by `ℚ̄_ℓ` is a nonzero
-morphism `ℚ̄_ℓ ⟶ ℚ̄_ℓ[1]` of Weil complexes, which becomes zero after forgetting the Weil
-structure. -/
+/-- On a `k₀`-scheme with connected geometric fiber, the functor `K ↦ (For(K), θ_K)` from Weil
+complexes to strict Weil complexes is not faithful: the class of the nonsplit Jordan block
+extension of `ℚ̄_ℓ` by `ℚ̄_ℓ` is a nonzero morphism `ℚ̄_ℓ ⟶ ℚ̄_ℓ[1]` of Weil complexes, which
+becomes zero after forgetting the Weil structure. -/
 theorem not_faithful_toStrictWeilComplex
     [ConnectedSpace (X ↘ Spec (CommRingCat.of k₀)).geometricFiber] :
     ¬ (toStrictWeilComplex (k₀ := k₀) (l := l) (X := X)).Faithful := by
@@ -343,8 +329,8 @@ instance : ConnectedSpace
     inferInstanceAs (ConnectedSpace (Spec (CommRingCat.of (AlgebraicClosure k₀))))
   (WeilSheaf.geometricFiberSpecIso k₀).hom.homeomorph.connectedSpace_iff.1 this
 
-/-- Blueprint `definition-weil-structure` (complement): on the point `Spec k₀`, whose geometric
-fiber is `Spec k̄`, the functor from Weil complexes to strict Weil complexes is not faithful. -/
+/-- On the point `Spec k₀`, whose geometric fiber is `Spec k̄`, the functor from Weil complexes
+to strict Weil complexes is not faithful. -/
 theorem not_faithful_toStrictWeilComplex_spec :
     ¬ (toStrictWeilComplex (k₀ := k₀) (l := l) (X := Spec (CommRingCat.of k₀))).Faithful :=
   not_faithful_toStrictWeilComplex

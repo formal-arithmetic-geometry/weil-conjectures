@@ -19,21 +19,20 @@ with the lifted operations.
 
 ## Main definitions
 
-- `AlgebraicGeometry.WeilComplex.upperStarCompForgetIso` (`sec-Weil-complexes`): the
-  forgetful functor commutes with the pullback `φ^*` of Weil complexes,
-  `For ∘ φ^* ≅ φ̄^* ∘ For`.
+- `AlgebraicGeometry.WeilComplex.upperStarCompForgetIso`: the forgetful functor commutes with
+  the pullback `φ^*` of Weil complexes, `For ∘ φ^* ≅ φ̄^* ∘ For`.
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerStar_comp_forget_iso`
-  (`sec-Weil-complexes`): the forgetful functor commutes with the derived pushforward
-  `Rφ_*` of Weil complexes, `For ∘ Rφ_* ≅ Rφ̄_* ∘ For`.
+- `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerStar_comp_forget_iso`: the forgetful
+  functor commutes with the derived pushforward `Rφ_*` of Weil complexes,
+  `For ∘ Rφ_* ≅ Rφ̄_* ∘ For`.
 
 ## Implementation notes
 
-Blueprint `sec-Weil-complexes` lifts `Lf^*`, `Rf_*`, `Rf_!`, `⊗ᴸ`, `RHom` and `Rf^!` to Weil
-complexes, compatibly with the forgetful functor, and asserts that the composition, base
-change, projection, purity and duality isomorphisms are morphisms of Weil complexes. The Weil
+The six operations `Lf^*`, `Rf_*`, `Rf_!`, `⊗ᴸ`, `RHom` and `Rf^!` should lift to Weil
+complexes, compatibly with the forgetful functor, with the composition, base change,
+projection, purity and duality isomorphisms being morphisms of Weil complexes. The Weil
 complexes of the repository (`AlgebraicGeometry.WeilComplex`) carry the lifts of `φ^*`
 (`AlgebraicGeometry.WeilComplex.upperStar`), of `Rφ_*`
 (`AlgebraicGeometry.WeilComplex.derivedLowerStar`) and of `Rf_!`
@@ -41,6 +40,12 @@ complexes of the repository (`AlgebraicGeometry.WeilComplex`) carry the lifts of
 the forgetful functor for `φ^*` and `Rφ_*`. The lifts of `⊗ᴸ`, `RHom` and `Rf^!`, and the
 equivariance of the comparison isomorphisms, need operations on Weil complexes that the
 repository does not have yet.
+
+The pullback of a pro-étale Weil sheaf has underlying sheaf the pullback of the underlying sheaf,
+so `upperStarCompForgetIso` is the composition isomorphism of the functors induced on derived
+categories by the exact functors `φ^*` and `For`. The forgetful functor from pro-étale Weil
+sheaves has an exact left adjoint, the induction `F ↦ ⨁ₙ (Frⁿ)^* F`, so it preserves
+K-injective complexes, and it commutes with the underived pushforward.
 -/
 
 @[expose] public section
@@ -63,13 +68,8 @@ namespace WeilComplex
 
 variable (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `sec-Weil-complexes`: Six operations on Weil complexes.
-
-The forgetful functor commutes with the pullback of Weil complexes: `For(φ^* K) ≅ φ̄^* For(K)`,
-where `φ̄ : X̄ ⟶ Ȳ` is the base change of `φ` to the geometric fibers. The pullback of a
-pro-étale Weil sheaf has underlying sheaf the pullback of the underlying sheaf, so this is the
-composition isomorphism of the functors induced on derived categories by the exact functors
-`φ^*` and `For`. -/
+/-- The forgetful functor commutes with the pullback of Weil complexes: `For(φ^* K) ≅ φ̄^* For(K)`,
+where `φ̄ : X̄ ⟶ Ȳ` is the base change of `φ` to the geometric fibers. -/
 noncomputable def upperStarCompForgetIso :
     upperStar (k₀ := k₀) (l := l) φ ⋙ forget ≅
       forget ⋙
@@ -85,13 +85,9 @@ noncomputable def upperStarCompForgetIso :
       (Functor.mapDerivedCategoryCompIso (IsoAlgebra.forget _)
         ((Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*ᵃ[l])).symm)
 
-/-- Blueprint `sec-Weil-complexes`: Six operations on Weil complexes.
-
-The forgetful functor commutes with the derived pushforward of Weil complexes:
+/-- The forgetful functor commutes with the derived pushforward of Weil complexes:
 `For(Rφ_* K) ≅ Rφ̄_* For(K)`, where `φ̄ : X̄ ⟶ Ȳ` is the base change of `φ` to the geometric
-fibers. The forgetful functor from pro-étale Weil sheaves has an exact left adjoint, the
-induction `F ↦ ⨁ₙ (Frⁿ)^* F`, so it preserves K-injective complexes, and it commutes with the
-underived pushforward. -/
+fibers. -/
 theorem nonempty_derivedLowerStar_comp_forget_iso [QuasiCompact φ] [QuasiSeparated φ]
     [LocallyOfFiniteType φ] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] :

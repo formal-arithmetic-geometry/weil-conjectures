@@ -16,8 +16,7 @@ public import WeilConjectures.TraceFormula.Stalk
 
 Let `(K, φ)` be a Weil object on `X` for `Φ`, let `m ≥ 1` and let `x : s ⟶ X` be a rational
 point fixed by `Φ_m`, with complement `j : U ⟶ X` (an open immersion with
-`Φ_{m,U} ≫ j = j ≫ Φ_m` cartesian). The *curve pieces* of `K` at `x` (blueprint
-`proposition-frobenius-local-term-curve--1`) are
+`Φ_{m,U} ≫ j = j ≫ Φ_m` cartesian). The *curve pieces* of `K` at `x` are
 ```
 K^Z = Rx_* Lx^* K,        K^U = j_! Lj^* K,
 ```
@@ -123,8 +122,7 @@ lemma lowerStarLowerShriekCompIso_hom_app_of_id (w : f ≫ 𝟙 X = 𝟙 P ≫ f
 
 /-- The exchange map `E : Rf_* R(𝟙 P)^! ⟶ R(𝟙 X)^! Rf_*` of the square `f ≫ 𝟙 = 𝟙 ≫ f` is the
 identity, up to the identifications `R(𝟙)^! ≅ 𝟭`: the exceptional half of a coefficient
-pushforward with identity exceptional legs is the identity (blueprint
-`proposition-frobenius-local-term-curve--1`). Applied to the diagram `(x, x)` of
+pushforward with identity exceptional legs is the identity. Applied to the diagram `(x, x)` of
 `closedPieceDiagram` it gives `u^Z = Rx_* F_{x,m} ∘ γ`. -/
 lemma lowerStarUpperShriekExchange_app_of_id (w : f ≫ 𝟙 X = 𝟙 P ≫ f)
     (K : Dᵇc(P.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -147,16 +145,14 @@ variable {Φ : X ⟶ X} (K : WeilBoundedConstructible ℓ Φ)
 
 /-! ### The closed piece -/
 
-/-- The *closed piece* `K^Z = Rx_* Lx^* K` of `K` at a rational point `x` (blueprint
-`proposition-frobenius-local-term-curve--1`). -/
+/-- The *closed piece* `K^Z = Rx_* Lx^* K` of `K` at a rational point `x`. -/
 noncomputable abbrev closedPiece (x : RationalPoint X) :
     Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
   (boundedConstructibleLowerStar ℓ x).obj
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K.carrier)
 
 /-- The *point correspondence* `(s, 𝟙, 𝟙)` of the geometric stalk `K_x̄ = Lx^* K` at a rational
-point `x` fixed by `Φ_m`, with coefficient map the local Frobenius `F_{x,m}` (blueprint
-`proposition-frobenius-local-term-curve--1`). -/
+point `x` fixed by `Φ_m`, with coefficient map the local Frobenius `F_{x,m}`. -/
 noncomputable abbrev stalkCorrespondence (m : ℕ) (x : RationalPoint X)
     (hx : x ≫ frobeniusIterate Φ m = x) :
     Correspondence ℓ ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj
@@ -174,7 +170,7 @@ lemma stalkCorrespondence_eq_ofEnd (m : ℕ) (x : RationalPoint X)
   rfl
 
 /-- The proper pushforward diagram `(x, x)` from the point correspondence on `s` to the graph
-`(𝟙, Φ_m)` on `X` (blueprint `proposition-frobenius-local-term-curve--1`): a diagram since
+`(𝟙, Φ_m)` on `X`: a diagram since
 `x ≫ 𝟙 = 𝟙 ≫ x` and `x ≫ Φ_m = 𝟙 ≫ x`. -/
 noncomputable abbrev closedPieceDiagram (m : ℕ) (x : RationalPoint X)
     (hx : x ≫ frobeniusIterate Φ m = x) :
@@ -195,9 +191,9 @@ lemma closedPieceDiagram_coeff (m : ℕ) (x : RationalPoint X) (hx : x ≫ frobe
     (K.closedPieceDiagram m x hx).coeff = K.closedPiece x :=
   rfl
 
-/-- The *closed piece coefficient* `u^Z = [x, x]_! F_{x,m} : LΦ_m^* K^Z ⟶ R(𝟙)^! K^Z` (blueprint
-`proposition-frobenius-local-term-curve--1`): the coefficient pushforward of the local Frobenius
-along the proper pushforward diagram `(x, x)`, a coefficient map for the graph `(𝟙, Φ_m)`. -/
+/-- The *closed piece coefficient* `u^Z = [x, x]_! F_{x,m} : LΦ_m^* K^Z ⟶ R(𝟙)^! K^Z`: the
+coefficient pushforward of the local Frobenius along the proper pushforward diagram `(x, x)`, a
+coefficient map for the graph `(𝟙, Φ_m)`. -/
 noncomputable def closedPieceCoeff (m : ℕ) (x : RationalPoint X)
     (hx : x ≫ frobeniusIterate Φ m = x) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (frobeniusIterate Φ m)).obj
@@ -211,14 +207,13 @@ noncomputable def closedPieceCoeff (m : ℕ) (x : RationalPoint X)
 variable {U : Over (Spec (.of k))} [LocallyOfFiniteType U.hom] [QuasiCompact U.hom]
   [IsSeparated U.hom] (j : U ⟶ X) [IsOpenImmersion j.left]
 
-/-- The *open piece* `K^U = j_! Lj^* K` of `K` along an open immersion `j : U ⟶ X` (blueprint
-`proposition-frobenius-local-term-curve--1`). -/
+/-- The *open piece* `K^U = j_! Lj^* K` of `K` along an open immersion `j : U ⟶ X`. -/
 noncomputable abbrev openPiece : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
   (boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K.carrier)
 
-/-- The *open piece coefficient* `u^U : LΦ_m^* K^U ⟶ K^U` (blueprint
-`proposition-frobenius-local-term-curve--1`) for a cartesian square `Φ_{m,U} ≫ j = j ≫ Φ_m`:
+/-- The *open piece coefficient* `u^U : LΦ_m^* K^U ⟶ K^U` for a cartesian square
+`Φ_{m,U} ≫ j = j ≫ Φ_m`:
 ```
 LΦ_m^* j_! Lj^* K --b--> j_! LΦ_{m,U}^* Lj^* K ≅ j_! L(Φ_{m,U} ≫ j)^* K = j_! L(j ≫ Φ_m)^* K
   ≅ j_! Lj^* LΦ_m^* K --j_! Lj^* φ_m--> j_! Lj^* K,

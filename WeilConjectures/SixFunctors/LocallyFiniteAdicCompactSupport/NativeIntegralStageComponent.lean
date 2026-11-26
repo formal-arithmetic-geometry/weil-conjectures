@@ -12,7 +12,12 @@ import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeCompact
 import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeIntegralBoundaryIsoFactorization
 import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeIntegralStageObject
 
-/-! # The normalized integral component at a common scalar stage -/
+/-! # The normalized integral component at a common scalar stage
+
+## References
+
+* [Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -67,16 +72,8 @@ attribute [local irreducible] IntegralSourceBoundary IntegralTargetBoundary
   IntegralComponent IntegralScalarFormula nativeScalarComponent
 
 -- Compare the cached finite-stage types without unfolding their constructions.
-/-- Move one normalized integral component to its canonical common scalar stage.
-Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15.
-Proof: use the constructed boundary isomorphisms at E and factor the normalized
-component through them. The stage-system transition equation and rational scalar
-extension's object formula identify rationalization of KE with the common-stage
-object. Eliminate this equality in a generic categorical helper: the original
-boundaries become witnesses at the common stage, their prescribed-arrow predicates
-are preserved, and the same factorization holds there. The witnesses are explicit
-equality transports of the constructed boundary components.
-(blueprint: lem-sf-native-integral-stage-component). -/
+/-- Move one normalized integral component to its canonical common scalar stage, where it
+factors through boundary witnesses satisfying the prescribed-arrow predicates. -/
 theorem integralStageComponent [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)
     (stage : StageAction l D hl P c)

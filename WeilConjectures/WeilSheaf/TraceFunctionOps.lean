@@ -27,11 +27,7 @@ coefficient field of the rational points.
 - `AlgebraicGeometry.WeilComplex.traceFunction_fieldPointsCongr`: `t_K(σ(x)) = t_K(x)` for a
   `k₀`-automorphism `σ` of the coefficient field.
 
-## Blueprint
-
-These are the properties of the trace function (blueprint `definition-trace-function`,
-`definition-trace-function`) used in the proof of the Fourier trace formula
-(sketch blueprint `sec-The-Plancherel-formula`).
+These are the properties of the trace function used in the proof of the Fourier trace formula.
 -/
 
 @[expose] public section
@@ -113,9 +109,7 @@ theorem trace_frobeniusEnd_stalkAt_eq_of_eq (F : WeilSheaf k₀ l X)
   subst h
   rfl
 
-/-- The trace function at a rational point only depends on the image point: at points with the
-same image the stalks are taken at geometric points over the same point of `X`
-(`AlgebraicGeometry.WeilSheaf.traceFunction_eq_trace_frobeniusEnd_stalk_pow`). -/
+/-- The trace function at a rational point only depends on the image point. -/
 theorem traceFunction_eq_of_base_eq (F : WeilSheaf k₀ l X) (n : ℕ)
     {x y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)}
     (h : x.1.base (IsLocalRing.closedPoint _) = y.1.base (IsLocalRing.closedPoint _)) :
@@ -125,9 +119,8 @@ theorem traceFunction_eq_of_base_eq (F : WeilSheaf k₀ l X) (n : ℕ)
   rw [F.traceFunction_eq_trace_frobeniusEnd_stalk_pow n x ⟨_, hx⟩ rfl,
     F.traceFunction_eq_trace_frobeniusEnd_stalk_pow n y ⟨_, hx⟩ h.symm]
 
-/-- The stalk of `φ^* F` at a geometric point `t` is the stalk of `F` at `t ≫ φ̄`, compatibly
-with the Frobenius (`AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalkAt_of_upperStar`), so the
-traces of the Frobenius agree. -/
+/-- The trace of the Frobenius of the stalk of `φ^* F` at a geometric point `t` is that of the
+stalk of `F` at `t ≫ φ̄`. -/
 theorem trace_frobeniusEnd_stalkAt_upperStar (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
     (F : WeilSheaf k₀ l Y)
     (t : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
@@ -149,9 +142,7 @@ theorem trace_frobeniusEnd_stalkAt_upperStar (φ : X ⟶ Y) [φ.IsOver (Spec (Co
     (θ := 𝟙 _) (upperStar_frobeniusStr_compatible (φ := φ) F) t m ht ht'
   exact e.trace_frobeniusEnd
 
-/-- The trace function of a pullback is the composite with the morphism on rational points:
-the stalk of `φ^* F` at the geometric point over `x` is the stalk of `F` at the geometric point
-over `φ(x)` (`AlgebraicGeometry.WeilSheaf.trace_frobeniusEnd_stalkAt_upperStar`). -/
+/-- The trace function of a pullback is the composite with the morphism on rational points. -/
 theorem traceFunction_upperStar (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
     (F : WeilSheaf k₀ l Y) (n : ℕ)
     (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
@@ -230,8 +221,7 @@ theorem traceFunction_upperStar (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of 
   exact WeilSheaf.traceFunction_congr (homologySheafUpperStarIso φ j K) n x
 
 /-- The trace function is invariant under `k₀`-automorphisms of the coefficient field of the
-rational points: `t_K(σ(x)) = t_K(x)`, the local Frobenius operators at the geometric points
-over `x` and `σ(x)` being conjugate. -/
+rational points: `t_K(σ(x)) = t_K(x)`. -/
 theorem traceFunction_fieldPointsCongr (K : WeilComplex k₀ l X) (n : ℕ)
     (σ : FiniteField.galoisExtension k₀ n ≃ₐ[k₀] FiniteField.galoisExtension k₀ n)
     (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :

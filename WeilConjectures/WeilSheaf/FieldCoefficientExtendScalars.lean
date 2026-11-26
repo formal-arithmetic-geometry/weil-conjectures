@@ -11,7 +11,7 @@ public import WeilConjectures.WeilSheaf.FieldCoefficient
 /-!
 # From `E`-Weil complexes to `ℚ̄_ℓ`-Weil complexes
 
-Following blueprint `definition-weil-structure`, the `ℚ̄_ℓ`-stage `D^b_{c,W}(X, ℚ̄_ℓ)` is the
+Mathematically, the `ℚ̄_ℓ`-stage `D^b_{c,W}(X, ℚ̄_ℓ)` is the
 `2`-colimit of the stages `D^b_{c,W}(X, E)` over the finite extensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the
 transition functors being the extensions of scalars.
 In this repository the `ℚ̄_ℓ`-stage is realised directly, as `AlgebraicGeometry.WeilComplex`
@@ -79,12 +79,8 @@ instance : PreservesFiniteColimits (ProEtaleFieldWeilSheaf.extendScalarsToAdic h
 
 variable [Fact (ringChar k₀ ≠ l)]
 
-/-- Blueprint `definition-weil-structure`: Weil sheaf and Weil complex, the functor from the
-stage `Λ = E` to the stage `ℚ̄_ℓ`.
-
-The functor `D^b_{c,W}(X, E) ⥤ D^b_{c,W}(X, ℚ̄_ℓ)` towards the `2`-colimit, induced on derived
-categories by the exact extension of scalars `ℚ̄_ℓ ⊗_E -` of pro-étale Weil sheaves, which
-preserves constructibility. -/
+/-- The functor `D^b_{c,W}(X, E) ⥤ D^b_{c,W}(X, ℚ̄_ℓ)` from the stage `Λ = E` to the stage
+`ℚ̄_ℓ`, induced by the exact extension of scalars `ℚ̄_ℓ ⊗_E -` of pro-étale Weil sheaves. -/
 noncomputable def FieldWeilComplex.extendScalarsToAdic :
     FieldWeilComplex k₀ Λ X ⥤ WeilComplex k₀ l X :=
   (FieldWeilComplex.objectProperty k₀ Λ X).liftFullSubcategory (WeilComplex.objectProperty k₀ l X)
@@ -99,9 +95,8 @@ section Subfield
 
 variable (E : IntermediateField ℚ_[l] (PadicAlgCl l)) [FiniteDimensional ℚ_[l] E]
 
-/-- Blueprint `definition-weil-structure`: the functor `D^b_{c,W}(X, E) ⥤ D^b_{c,W}(X, ℚ̄_ℓ)`
-for a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the extension of scalars along the inclusion
-`E → ℚ̄_ℓ` (`AlgebraicGeometry.FieldWeilComplex.extendScalarsToAdic`). -/
+/-- The functor `D^b_{c,W}(X, E) ⥤ D^b_{c,W}(X, ℚ̄_ℓ)` for a finite extension `E ⊆ ℚ̄_ℓ` of
+`ℚ_ℓ`: the extension of scalars along the inclusion `E → ℚ̄_ℓ`. -/
 noncomputable def FieldWeilComplex.toWeilComplex : FieldWeilComplex k₀ E X ⥤ WeilComplex k₀ l X :=
   FieldWeilComplex.extendScalarsToAdic (e := E.val) continuous_subtype_val
     ((continuous_algebraMap ℚ_[l] (PadicAlgCl l)).subtype_mk _) k₀ X

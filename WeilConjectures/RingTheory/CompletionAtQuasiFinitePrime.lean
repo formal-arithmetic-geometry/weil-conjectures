@@ -22,48 +22,32 @@ universe u v
 /-!
 # Completion at a quasi-finite prime is a direct factor
 
-Source: Stacks Project, Algebra, Lemma Tag 07NC (blueprint:
-lem-weil-pbc-completion-at-quasi-finite-prime).
+If `S` is of finite type over a Noetherian ring `R` and quasi-finite at a prime `q` over `p`,
+then the completion of `S_q` is a direct factor of `R_p^∧ ⊗[R] S`, split off by the natural
+projection.
+
+## Implementation details
+
+The local map is `Localization.localRingHom` and the completions are taken at the maximal
+ideals of the localizations, as in `AdicCompletion.completion_finite_extension`. The map `ψ` is
+characterized on every quotient coordinate, so it is the map induced on completions. The
+formula for `φ` on pure tensors specifies the natural projection, including its compatibility
+with both the `S`-action and the completed-base action.
+
+The proof chooses a finite subalgebra `S'` and `g ∉ q` with `S'_g ≅ S_g`, applies the
+decomposition of the completion of a finite extension to `R_p^∧ ⊗[R] S'`, and transports the
+idempotent splitting along the inclusion after inverting `g`.
+
+## References
+
+* [Stacks, Tag 07NC]
 -/
 
 namespace Algebra
 
-/-- Completion at a quasi-finite prime splits off via the natural projection.
-
-Source: Stacks Project, Algebra, Lemma Tag 07NC
-(blueprint: lem-weil-pbc-completion-at-quasi-finite-prime).
-
-The local map is `Localization.localRingHom` and the completions are taken at the
-maximal ideals of the localizations, as in `AdicCompletion.completion_finite_extension`.
-The map `ψ` is characterized on every quotient coordinate, so it is the map induced on
-completions.
-The formula for `φ` on pure tensors specifies the natural projection, including its
-compatibility with both the `S`-action and the completed-base action. Transporting these
-actions along `β` gives the corresponding actions on `B` and the product.
-
-Proof (the eight steps of the node):
-1. Choose a finite R-subalgebra S' and g outside q' = S' ∩ q with S'_g ≅ S_g, using
-   lem-weil-pbc-quasi-finite-at-finite-subalgebra-away (00QB, pointwise via 00Q9).
-2. Clearing powers of g proves S'_{q'} ≅ S_q; the isomorphism carries maximal-ideal
-   powers onto one another, hence gives an isomorphism α of completions. The induced
-   local and completed maps commute (def-weil-pbc-localization-at-prime,
-   def-weil-pbc-module-localization-away, def-weil-pbc-adic-completion).
-3. Apply lem-weil-pbc-completion-finite-extension (07N9) to T = Rph ⊗[R] S'. Select
-   the idempotent e corresponding to the q' factor; Te maps isomorphically to its
-   completed local ring (def-weil-finitely-generated-module).
-4. For j = 1 ⊗ inclusion : T → U, check φ ∘ j = α ∘ φ' on pure tensors, using step 2.
-5. Localization commutes with these tensor products, so j becomes an isomorphism after
-   inverting g (lem-weil-pbc-localization-tensor-over-base,
-   def-weil-pbc-module-localization-away).
-6. The image of g in the first completed factor is a unit. Thus γe is a unit in Te,
-   where γ = 1 ⊗ g. Its inverse v gives vγe = e; put f₀ = j(e) and w = j(v).
-7. The restriction j : Te → Uf₀ is bijective: clear g-denominators using step 5, then
-   multiply by powers of v or w using step 6 (def-weil-pbc-module-localization-away).
-8. Put B = U(1-f₀) and β(u) = u(1-f₀). Step 4 shows φ vanishes on 1-f₀, and steps
-   2, 3, 7 show its restriction to Uf₀ is an isomorphism. Compose the idempotent
-   decomposition U ≅ Uf₀ × B with this isomorphism to obtain (φ, β). The pure-tensor
-   formula gives the S- and Rph-algebra compatibilities, including the source's sanity
-   check that the projection is the natural map. -/
+/-- If `S` is of finite type over a Noetherian ring `R` and quasi-finite at `q` over `p`, then
+`R_p^∧ ⊗[R] S ≅ S_q^∧ × B` for some ring `B`, where the first component is the natural map
+`φ` induced by the map of completions `ψ : R_p^∧ → S_q^∧`. -/
 theorem completion_at_quasiFiniteAtPrime
     (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [Algebra.FiniteType R S] [IsNoetherianRing R]

@@ -18,8 +18,25 @@ import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Maps from ind-étale algebras into henselian local rings
-Source: Stacks Project, Algebra, Lemmas Tags 08HQ and 08HR
-(blueprint: lem-weil-pbc-map-into-henselian-colimit).
+
+Let `A` be a filtered colimit of étale `R`-algebras and `S` a henselian local `R`-algebra. Every
+embedding of residue fields `κ(q) → κ(m_S)` over `R` lifts uniquely to an `R`-algebra map
+`A → S` with `q` the inverse image of `m_S`.
+
+## Implementation details
+
+For a single étale algebra, `B = A ⊗_R S` is étale over `S`, and the residue maps define a
+surjection `φ : B → κ(m_S)` whose kernel `q'` lies over `m_S` with residue field `κ(m_S)`. The
+henselian étale retraction theorem (Stacks 04GG) gives a unique retraction `B → S` with inverse
+image `q'`, whose restriction to `A` is the lift; uniqueness follows from uniqueness of the
+retraction. In the filtered case, uniqueness makes the lifts at each stage compatible, and the
+colimit universal property gives the lift. Universe lifts are used to put `S` and `B` in the same
+universe.
+
+## References
+
+* [Stacks, Tags 08HQ, 08HR]
+* [Stacks, Tag 04GG]
 -/
 
 @[expose] public section
@@ -138,22 +155,6 @@ private theorem etale_lift_field
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Every residue-valued map from a single étale algebra has a unique henselian lift.
-
-Source: Stacks Project, Algebra, Lemma Tag 08HQ, its tensor-product proof using Tag 04GG.
-(blueprint: lem-weil-pbc-map-into-henselian-colimit).
-
-Proof: Put k = κ(m_S) and B = S ⊗[R] A, which is étale over S by base change.
-The given map χ and the residue map S → k induce the S-algebra map φ : B → k.
-It is surjective since its restriction to S is the residue map. Thus q' = ker φ
-is maximal, lies over m_S, and has residue field k; the map κ(m_S) → κ(q')
-is bijective. Apply the henselian étale retraction theorem (Stacks 04GG) to obtain
-its unique S-algebra retraction σ : B → S with maximal-ideal preimage q'.
-The reduction of σ equals φ: both vanish on q', and they agree on S, whose image
-in B/q' is all of B/q'. Restriction of σ to A is therefore a lift of χ.
-Conversely any lift f extends to an S-algebra map B → S, whose reduction equals φ
-on both tensor factors and hence on B. Its maximal-ideal preimage is ker φ = q'.
-Retraction uniqueness gives uniqueness of f. Universe lifts may be used to put
-S and B in the same universe before applying the retraction theorem.
 -/
 private theorem existsUnique_etale_residue_lift
     (R : Type u) [CommRing R]
@@ -323,34 +324,9 @@ private theorem filteredColimit_algHom
     apply AlgHom.ext
     exact hg i
 
-/-- Source: Stacks Project, Algebra, Lemmas Tags 08HQ and 08HR
-(blueprint: lem-weil-pbc-map-into-henselian-colimit).
-
-Proof (the nine steps of the node):
-1. In the single étale case put `k = S / m` and `B = A ⊗[R] S`. Base change preserves
-   étaleness (`lem-weil-pbc-etale-ring-base-change`).
-2. The residue map from `A` and the quotient map from `S` agree over `R` by `hτ`, hence
-   define `φ : B → k`. It is surjective; its kernel `q'` lies over `m` with residue field `k`
-   (`def-weil-residue-field`).
-3. Apply `lem-weil-pbc-henselian-etale-retraction` to obtain the unique retraction
-   `σ : B → S` over `S` with inverse image `q'`, and restrict it to `f : A → S`.
-4. The residue of `σ` is `φ`: both maps factor through `B / q'` and agree on the
-   surjective image of `S`. Therefore `f` induces `τ`; injectivity of `τ` gives the
-   required inverse-image ideal.
-5. Any other such `f'` extends to an `S`-algebra retraction `σ'` by the tensor-product
-   universal property. Its residue is `φ`, so its inverse-image ideal is `q'`.
-   Uniqueness in `lem-weil-pbc-henselian-etale-retraction` gives `σ' = σ` and `f' = f`.
-6. For the filtered diagram pull `q` back to `qᵢ` and compose `τ` with the induced
-   residue-field map. Apply the single étale case to obtain the unique `fᵢ` at each stage
-   (`def-weil-pbc-category-colimit`, `def-weil-residue-field`). A singleton diagram
-   includes the single étale case.
-7. Along every transition map the composite with `fⱼ` satisfies the conditions defining
-   `fᵢ`, so uniqueness makes the family compatible. The colimit universal property
-   defines `f` (`def-weil-pbc-category-colimit`).
-8. Every element comes from a stage (`lem-weil-pbc-filtered-colimit-algebras-elementwise`);
-   checking there gives the inverse-image ideal and prescribed residue map for `f`.
-9. Any other map restricts to `fᵢ` at every stage by the single étale uniqueness.
-   Colimit uniqueness then makes it equal to `f` (`def-weil-pbc-category-colimit`).
+/-- Let `A` be a filtered colimit of étale `R`-algebras and `S` a henselian local `R`-algebra.
+Every map of residue fields `τ : κ(q) → κ(m_S)` compatible with `R` lifts to a unique
+`R`-algebra map `f : A → S` such that `q` is the inverse image of `m_S` and `f` induces `τ`.
 -/
 theorem map_into_henselian_colimit
     (R : Type u) [CommRing R]

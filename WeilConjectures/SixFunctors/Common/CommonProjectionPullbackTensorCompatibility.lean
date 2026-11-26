@@ -11,7 +11,18 @@ public import WeilConjectures.SixFunctors.Common.CommonProjectionPullbackTensorC
 import WeilConjectures.SixFunctors.Common.CommonProjectionPullbackTensorRepresentative
 import all Mathlib.Logic.Small.Defs
 
-/-! # Compatibility of finite-stage inclusion with tensor and pullback -/
+/-! # Compatibility of finite-stage inclusion with tensor and pullback
+
+We show that finite-stage inclusion preserves the canonical tensor/pullback comparison.
+
+## Implementation details
+
+For two inputs included from `E`, the common-stage comparison is evaluated at the coefficient
+stage `E`, where its representative is `pullbackTensorAtCommonStage`. The inclusion
+tensorators are expanded using `commonInclusionTensorModel`, and naturality of the transitions
+cancels the transition maps on both sides. Equality in the common-stage Hom group follows by
+applying `ofHom` at `E`.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -86,28 +97,7 @@ theorem projectionTensorComparisonCompatible_of_representative_formula
 
 /-- Finite-stage inclusion preserves the canonical tensor/pullback comparison.
 This is a square for pullback and tensor alone; no support functor, direct image,
-projection mate, or adjunction counit occurs in the square.
-
-Source: thm-sf-pf-field.proof.md, Compatibility, and the common finite coefficient
-field paragraph; canonicalCommonStagePullbackTensor_existsUnique and its
-pullbackTensorAtCommonStage representative formula.
-(blueprint: lem-sf-common-projection-pullback-tensor-compatibility).
-
-Proof: use the rational and common tensor and pullback normalization equalities
-and the two tensorPullbackNormalization equations. The left comparison of the
-coefficient adjunction is the identity on the prescribed finite-stage object
-model by commonStageModelNormalization. For two inputs included from E, evaluate
-the common-stage comparison at the common coefficient stage E. Its representative
-is pullbackTensorAtCommonStage: the pullback transition, rational pullback of the
-tensor transition, canonical rational tensor/pullback map, tensor of the two
-inverse pullback transitions, and the inverse final tensor transition. Expand
-the two inclusion tensorators using commonInclusionTensorModel and the scalar
-unit for E to E. Naturality of the pullback and tensor transitions, and the
-rational scalar compatibility of the tensor/pullback map, cancel the transition
-maps on both sides and give the displayed square. Equality in the common-stage
-Hom group follows by applying ofHom at E to this finite-stage equation. Transport
-back by the normalization equalities. This argument applies to zero inputs,
-empty schemes, and identity morphisms without additional assumptions. -/
+projection mate, or adjunction counit occurs in the square. -/
 theorem commonProjectionPullbackTensorCompatibility
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     (H : SixFunctorCommonStages D C) (E : Padic.FiniteCoefficientFields C.l C.Qbar)

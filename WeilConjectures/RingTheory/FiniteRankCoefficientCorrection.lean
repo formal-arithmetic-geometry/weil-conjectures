@@ -15,8 +15,25 @@ import WeilConjectures.RingTheory.FiniteRankDefectDerivation
 /-!
 # Finite-rank correction of a lifted coefficient section
 
-Source: Stacks Project, Tag 07FG, the derivation and Jacobi--Zariski paragraphs.
-(blueprint: lem-weil-pbc-finite-rank-coefficient-correction)
+A residue section `σ0` of a local ring `Λ` can be corrected so that the discrepancy between
+`algebraMap k Λ` and a map `ψ` agreeing with it modulo `I` lies in the `k`-span of finitely
+many elements of `I`.
+
+## Main results
+
+* `Algebra.exists_finite_rank_coefficient_correction`
+
+## Implementation details
+
+The difference `theta = algebraMap k Λ - ψ` is a derivation with values in `I`. The derivation
+`D : K → I` of `Algebra.exists_finite_rank_defect_derivation` corrects it up to finite rank,
+and `σ = σ0 + D` is the corrected section. Reevaluating a polynomial expression for `ψ a` in
+`t` and `σ0(k(c0))` with `σ` in place of `σ0` changes only its constant coefficient, since
+`t ⊆ ker r` and `D` takes values in `I`. The fixed coefficient field is not enlarged.
+
+## References
+
+* [Stacks, Tag 07FG] (derivation and Jacobi–Zariski paragraphs)
 -/
 
 @[expose] public section
@@ -29,36 +46,7 @@ namespace Algebra
 
 /-- Given two structure maps agreeing modulo an annihilated ideal, adjust an existing
 residue section so their discrepancy has finite rank over the base field. The fixed
-coefficient field is not enlarged here; the finite error generators still lie in I.
-
-Source: Stacks Project, Tag 07FG, from "These maps agree modulo I" through the formula
-expressing theta(a) as a finite sum of a_j f_j.
-(blueprint: lem-weil-pbc-finite-rank-coefficient-correction).
-
-Proof:
-1. Give I its K-vector-space structure through r; this is well defined because ker(r)I=0.
-   The difference theta = algebraMap k Lambda - psi takes values in I. The product
-   identity for two ring maps, and the fact their difference belongs to I, show that
-   theta is a derivation over the prime field, with scalar action through k -> K.
-2. The differentials dy for y in k span Omega_{k/F_p}; choose a basis dy_j from them.
-   They remain a basis after extension of scalars to K. Jacobi--Zariski exactness at
-   K tensor Omega_k identifies the kernel of its map to Omega_K with the image of
-   H1(K/k). Its finite dimension puts this kernel in the span of a finite subset J0
-   of the extended basis. The remaining dy_j have independent images in Omega_K.
-3. Extend those images to a basis of Omega_K. Define a K-linear map to I agreeing with
-   theta on these basis vectors and zero on the added vectors. Its universal
-   derivation D : K -> I makes theta - D restricted to k vanish on all dy_j outside
-   J0. Put f_j equal to its values on dy_j for j in J0. Every value of the corrected
-   derivation lies in the k-span of this finite family, all of which belong to I.
-4. Set sigma = sigma0 + D. The identities I^2 = 0 and ker(r)I = 0 show it is a ring
-   map, a section of r, and unchanged modulo I. For each a choose a polynomial
-   expression for psi(a) in t and sigma0(k(c0)), which exists by the ring-closure
-   hypothesis. Reevaluate it using sigma instead. Every positive-degree term has
-   the same value, since t lies in ker(r) and D takes values in I. The change in
-   its constant coefficient is D(r(psi(a))) = D(algebraMap k K a). The new value b
-   lies in the closure using sigma and the same c0. Thus algebraMap k Lambda a - b
-   is precisely the corrected derivation value, in the k-span of the finite f_j.
-   Ring closure allows integer constants as well; D vanishes on them. -/
+coefficient field is not enlarged here; the finite error generators still lie in `I`. -/
 theorem exists_finite_rank_coefficient_correction
     (k : Type u) [Field k] (K : Type w) [Field K] [Algebra k K]
     (Λ : Type v) [CommRing Λ] [Algebra k Λ] [IsLocalRing Λ]

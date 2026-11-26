@@ -28,7 +28,8 @@ The proof is étale-local on `X`: by `AlgebraicGeometry.exists_etaleCover_factor
 may assume `p` factors as `U ⟶ V ⟶ S` with `V ⟶ S` étale and `U ⟶ V` quasi-compact flat
 with geometrically connected fibres, and then both sides evaluate to `F(V ×_S T)` because for
 such a morphism the global sections of an inverse image agree with the global sections
-downstairs [Stacks 0A3H].
+downstairs [Stacks, Tag 0A3H]. Every étale `X`-scheme is covered by such charts, which generate
+a covering sieve of every object.
 
 The argument is carried out for the underived base-change map
 `AlgebraicGeometry.Etale.baseChangeMap`, whose adjoint under `p^* ⊣ p_*` is
@@ -46,11 +47,10 @@ the degree-zero homology of the derived base-change map of
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isIso_upperStarSectionsMap`: the map `G(V) ⟶ (p^* G)(W)` is
-  bijective when `W ⟶ V` is flat, quasi-compact with geometrically connected fibres
-  [Stacks 0A3H].
+  bijective when `W ⟶ V` is flat, quasi-compact with geometrically connected fibres.
 - `AlgebraicGeometry.Etale.isIso_baseChangeMap_app_of_flat`: the underived base-change map
   is an isomorphism for `p` flat, locally of finite presentation with geometrically reduced
-  fibres (blueprint `lemma-degree-zero-calculation--1`).
+  fibres.
 - `AlgebraicGeometry.Etale.nonempty_arrowIso_baseChangeHomologyMap_zero`: in degree zero the
   derived base-change map is the underived one.
 - `AlgebraicGeometry.Etale.baseChangeProperty_zero`: degree-zero base change for a flat,
@@ -105,10 +105,7 @@ variable (p) in
 /-- For a sheaf `G` on `S_ét`, an étale `S`-scheme `V`, an étale `X`-scheme `W` and a morphism
 `φ : W ⟶ V ×_S X` of étale `X`-schemes, the map `G(V) ⟶ (p^* G)(W)`: the unit of
 `p^* ⊣ p_*` at `V`, landing in `(p_* p^* G)(V) = (p^* G)(V ×_S X)`, followed by the restriction
-along `φ`.
-
-When `W ⟶ V` is flat, quasi-compact and has geometrically connected fibres, this map is
-bijective, see `AlgebraicGeometry.Etale.isIso_upperStarSectionsMap`. -/
+along `φ`. -/
 noncomputable def Etale.upperStarSectionsMap (G : Sheaf S.smallEtaleTopology A) {V : S.Etale}
     {W : X.Etale} (φ : W ⟶ (MorphismProperty.Over.pullback @Etale ⊤ p).obj V) :
     G.obj.obj (op V) ⟶ ((p)^*[A].obj G).obj.obj (op W) :=
@@ -120,8 +117,7 @@ of the square: for `φ : W ⟶ V ×_S X` and the induced morphism
 `φ' : W ×_X Y ⟶ (V ×_S T) ×_T Y` of étale `Y`-schemes, the composite
 `(g_* F)(V) ⟶ (p^* g_* F)(W) ⟶ (h_* e^* F)(W)` is the map
 `F(V ×_S T) ⟶ (e^* F)(W ×_X Y)` attached to `φ'`. The morphism `φ'` is pinned down by its
-first component `hφ'`. This is the computation underlying Step 2 of the blueprint proof of
-`lemma-degree-zero-calculation--1`. -/
+first component `hφ'`. -/
 lemma Etale.upperStarSectionsMap_comp_baseChangeMap_app (sq : CommSq e h g p)
     (F : Sheaf T.smallEtaleTopology A) {V : S.Etale} {W : X.Etale}
     (φ : W ⟶ (MorphismProperty.Over.pullback @Etale ⊤ p).obj V)
@@ -295,16 +291,7 @@ variable (p) in
 /-- Let `φ : W ⟶ V ×_S X` be a morphism of étale `X`-schemes such that the induced morphism
 `q : W ⟶ V` is flat, quasi-compact and has geometrically connected fibres. Then for every
 sheaf `G` of `Λ`-modules on `S_ét` the map `G(V) ⟶ (p^* G)(W)` of
-`AlgebraicGeometry.Etale.upperStarSectionsMap` is bijective.
-
-Writing `j : W ⟶ X` and `r : V ⟶ S` for the structure morphisms, `j ≫ p = q ≫ r` and `r` is
-étale, so `(p^* G)(W) = Γ(W, q^* (G|_V))`; and for a flat quasi-compact `q` with geometrically
-connected fibres the global sections of an inverse image agree with the global sections
-downstairs [Stacks 0A3H]: a section of `q^* G'` is constant on the connected geometric fibres,
-hence descends along the fpqc covering `q`. This is Step 2 of the blueprint proof of
-`lemma-degree-zero-calculation--1`. 
-(blueprint: lem-sbc-module-chart-sections-flat-connected)
--/
+`AlgebraicGeometry.Etale.upperStarSectionsMap` is bijective. -/
 @[stacks 0A3H]
 theorem Etale.isIso_upperStarSectionsMap (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     {V : S.Etale} {W : X.Etale} (φ : W ⟶ (MorphismProperty.Over.pullback @Etale ⊤ p).obj V)
@@ -317,9 +304,7 @@ theorem Etale.isIso_upperStarSectionsMap (G : Sheaf S.smallEtaleTopology (Module
     (isIso_module_unit_sections_of_flat_connected Λ
       (φ.left ≫ pullback.fst V.hom p) ((V.hom)^*[_].obj G))
 
-/-- Blueprint `lemma-degree-zero-calculation--1`: degree-zero flat base change.
-
-For a Cartesian square
+/-- **Degree-zero flat base change**, underived form. For a Cartesian square
 
 ```
 Y --e--> T
@@ -332,17 +317,7 @@ X --p--> S
 with `p` flat, locally of finite presentation and with geometrically reduced fibres, the
 degree-zero base-change map `p⁻¹ g_* F ⟶ h_* e⁻¹ F` of
 `AlgebraicGeometry.Etale.baseChangeMap` is an isomorphism at every sheaf `F` of
-`Λ`-modules on `T_ét`; no hypothesis on `g` is needed.
-
-Every étale `X`-scheme `W₀` is covered, by `AlgebraicGeometry.exists_etaleCover_factorization`
-applied to `W₀ ⟶ S`, by charts `W` for which `W ⟶ S` factors as `W ⟶ V ⟶ S` with `V ⟶ S` étale
-and `W ⟶ V` flat, of finite presentation, with geometrically connected fibres. On such
-a chart both sides have sections `F(V ×_S T)`, by
-`AlgebraicGeometry.Etale.isIso_upperStarSectionsMap` applied to `W ⟶ V` and to its base change
-`W ×_X Y ⟶ V ×_S T`, compatibly with the base-change map by
-`AlgebraicGeometry.Etale.upperStarSectionsMap_comp_baseChangeMap_app`. Since the
-charts generate a covering sieve of every object, the base-change map is an isomorphism by
-`CategoryTheory.Sheaf.isIso_of_isIso_app_of_generate_mem`. -/
+`Λ`-modules on `T_ét`; no hypothesis on `g` is needed. -/
 @[stacks 0EYS]
 theorem Etale.isIso_baseChangeMap_app_of_flat [Flat p] [LocallyOfFinitePresentation p]
     [GeometricallyReduced p] (sq : IsPullback e h g p)
@@ -396,12 +371,7 @@ theorem Etale.isIso_baseChangeMap_app_of_flat [Flat p] [LocallyOfFinitePresentat
 open scoped CategoryTheory.Functor in
 /-- In degree zero the base-change map `AlgebraicGeometry.Etale.baseChangeHomologyMap` of the
 derived base-change morphism is, up to isomorphism of arrows, the underived base-change map
-`AlgebraicGeometry.Etale.baseChangeMap`: the degree-zero homology of
-`p^*(R g_* F[0])` is `p^* g_* F` and that of `R h_*(e^*(F[0]))` is `h_* e^* F`, the pullbacks
-being exact and `g_*`, `h_*` left exact, and under these identifications the units and counits
-of the derived adjunctions restrict in degree zero to those of the underived adjunctions. 
-(blueprint: lem-sbc-base-change-homology-zero-underived)
--/
+`AlgebraicGeometry.Etale.baseChangeMap`. -/
 theorem Etale.nonempty_arrowIso_baseChangeHomologyMap_zero (sq : IsPullback e h g p)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     Nonempty (Arrow.mk (Etale.baseChangeHomologyMap Λ sq 0 F) ≅
@@ -497,9 +467,7 @@ end DegreeZero
 
 variable {X S : Scheme.{u}} (p : X ⟶ S)
 
-/-- Blueprint `lemma-degree-zero-calculation--1`: Degree-zero flat base change.
-
-For a Cartesian square
+/-- **Degree-zero flat base change.** For a Cartesian square
 
 ```
 Y --e--> T
@@ -512,9 +480,7 @@ X --p--> S
 with `g` quasi-compact quasi-separated and `p` flat, locally of finite presentation and with
 geometrically reduced fibres, the degree-zero base-change map `p⁻¹ g_* F ⟶ h_* e⁻¹ F` is an
 isomorphism for *every* sheaf `F` of `Λ`-modules on `T_ét`: no torsion hypothesis is needed in
-degree zero. This is `AlgebraicGeometry.Etale.isIso_baseChangeMap_app_of_flat`, transferred
-to the derived base-change map by
-`AlgebraicGeometry.Etale.nonempty_arrowIso_baseChangeHomologyMap_zero`. -/
+degree zero. -/
 @[stacks 0EYS]
 theorem Etale.baseChangeProperty_zero [Flat p] [LocallyOfFinitePresentation p]
     [GeometricallyReduced p] :
@@ -524,16 +490,13 @@ theorem Etale.baseChangeProperty_zero [Flat p] [LocallyOfFinitePresentation p]
   exact ((MorphismProperty.isomorphisms _).arrow_mk_iso_iff φ).2
     (Etale.isIso_baseChangeMap_app_of_flat Λ sq F)
 
-/-- The smooth case of `AlgebraicGeometry.Etale.baseChangeProperty_zero`: a smooth morphism
-is flat and locally of finite presentation and its geometric fibres are smooth varieties,
-hence reduced, so `BC(p, Λ, 0)` holds for `p` smooth. This is the degree-zero start of the
-induction in the smooth base change theorem. -/
+/-- The smooth case of `AlgebraicGeometry.Etale.baseChangeProperty_zero`: `BC(p, Λ, 0)` holds
+for `p` smooth. -/
 theorem Etale.baseChangeProperty_zero_of_smooth [Smooth p] :
     Etale.BaseChangeProperty Λ p 0 :=
   Etale.baseChangeProperty_zero Λ p
 
-/-- `AlgebraicGeometry.Etale.baseChangeProperty_zero` holds universally: flatness, local finite
-presentation and geometric reducedness of the fibres are stable under base change. -/
+/-- `AlgebraicGeometry.Etale.baseChangeProperty_zero` holds universally. -/
 theorem Etale.universalBaseChangeProperty_zero [Flat p] [LocallyOfFinitePresentation p]
     [GeometricallyReduced p] :
     Etale.UniversalBaseChangeProperty Λ p 0 := by

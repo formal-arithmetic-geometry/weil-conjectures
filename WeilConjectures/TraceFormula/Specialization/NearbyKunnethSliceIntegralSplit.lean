@@ -33,6 +33,10 @@ Following Deligne, the slice factors through a generic slice trait `S'`
   homeomorphisms, whose unit is split with `𝒪_E`-coefficients
   (`NearbyCyclesModel.Hom.isSplitMono_unit_toCartesian_generic_of_sliceTrait_padicIntegers`).
 
+## References
+
+* SGA 4½, [Th. finitude], Lemme 3.3, Lemme 3.4 and Prop. 3.7
+
 -/
 
 @[expose] public section
@@ -56,13 +60,10 @@ variable {k' : Type u} [Field k'] {X : Scheme.{u}} {X' : Over (Spec (.of k'))}
 variable {ℓ : ℕ} [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k').Prime]
   [Fact (ringChar k' ≠ ℓ)]
 
-/-- **The slice over a generic slice trait splits, `𝒪_E`-coefficients** (SGA 4½, [Th. finitude],
-Lemme 3.4): on the models of the geometric generic fibres, the pullback exchange of the slice
-`σ : (X' over S') ⟶ (𝒳 over S)` of `M` along the coordinate `b` over a generic slice trait `S'`
-is a split monomorphism at every bounded constructible `𝒪_E`-complex `C` on the geometric generic
-fibre of `M`. Its cartesian factor is weakly étale base change, an isomorphism, and its change of
-geometric generic fibres is split by the unit, the change of generic fibres being a pro-`p`
-Galois layer up to universal homeomorphisms. -/
+/-- **The slice over a generic slice trait splits, `𝒪_E`-coefficients**: on the models of the
+geometric generic fibres, the pullback exchange of the slice `σ : (X' over S') ⟶ (𝒳 over S)` of
+`M` along the coordinate `b` over a generic slice trait `S'` is a split monomorphism at every
+bounded constructible `𝒪_E`-complex `C` on the geometric generic fibre of `M`. -/
 theorem isSplitMono_pullbackExchange_coordinateSliceTraitHom_padicIntegers
     (D : GenericSliceTrait k') (E : PadicAlgCl.FiniteIntermediateField ℓ)
     {C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology M.generic) Ab.{u + 1})
@@ -122,20 +123,11 @@ theorem isSplitMono_pullbackExchange_coordinateSliceTraitHom_padicIntegers
     (by exact_mod_proofs h₂)
   exact_mod_proofs h
 
-/-- **The slice exchange splits with `𝒪_E`-coefficients** (SGA 4½, [Th. finitude], Lemme 3.3–3.4;
-blueprint `proposition-external-kunneth-formula-nearby-cycles`, "Finite support"): for a model `M`
-of finite type over `S = Spec k'⟦t⟧` with a coordinate `b : 𝒳 ⟶ 𝔸¹_S`, the pullback exchange
+/-- **The slice exchange splits with `𝒪_E`-coefficients**: for a model `M` of finite type
+over `S = Spec k'⟦t⟧` with a coordinate `b : 𝒳 ⟶ 𝔸¹_S`, the pullback exchange
 `α : Lσ_s^* Ψ_M A₀ ⟶ Ψ_{M''} A₀` with `𝒪_E`-coefficients to the nearby cycles of the geometric
 slice `M''` of `M` along `b` (over `Spec K⟦t⟧`, `K = k'(x)^alg`) is a split monomorphism at every
-`A₀` whose restriction `Lε^* A₀` to the geometric generic fibre is bounded constructible.
-
-The generic slice factors through a generic slice trait `S'`
-(`AlgebraicGeometry.nonempty_genericSliceTrait`), and the exchange factors accordingly
-(`NearbyCyclesModel.isSplitMono_pullbackExchange_baseChangeHom_traitSlice_of_coordinateSliceTrait`)
-into that of the change of trait `Spec K⟦t⟧ ⟶ S'`, invertible by Th. finitude 3.7
-(`NearbyCyclesModel.isIso_pullbackExchange_coordinateSliceTraitChangeHom_padicIntegers`), and that
-of the slice over `S'`, split by averaging over a pro-`p` group
-(`NearbyCyclesModel.isSplitMono_pullbackExchange_coordinateSliceTraitHom_padicIntegers`). -/
+`A₀` whose restriction `Lε^* A₀` to the geometric generic fibre is bounded constructible. -/
 theorem isSplitMono_pullbackExchange_baseChangeHom_traitSlice_padicIntegers
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
     {A₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

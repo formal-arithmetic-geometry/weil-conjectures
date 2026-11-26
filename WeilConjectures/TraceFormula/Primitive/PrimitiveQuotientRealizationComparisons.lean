@@ -178,13 +178,20 @@ import WeilConjectures.TraceFormula.Primitive.PrimitiveQuotientScalarModelExiste
 
 /-! # Primitive realization on simultaneous quotient complexes
 
-Source: Stacks 099N(2),(5), 06YS, 0G7E, 0D6D and 0941; the explicit
-all-ambient quotient/Roos definitions of completed pullback and scalar extension
-(blueprint: lem-trf-primitive-quotient-realization-comparisons).
+We construct primitive realization isomorphisms for completed pullback and scalar extension on
+the entire ambient derived categories, normalized by the fixed Roos comparison on every
+simultaneous quotient presentation (`primitiveQuotientRealizationComparisons`).
 
-Natural number n denotes positive exponent n+1. The realization interfaces fix
+## Implementation details
+
+Completed pullback and scalar extension are given by their explicit all-ambient quotient/Roos
+definitions. Natural number n denotes positive exponent n+1. The realization interfaces fix
 all representative identifications and the normalized total-limit comparison.
 No flatness assumption is made on a homomorphism between quotient rings.
+
+## References
+
+* Stacks Project, Tags 099N, 06YS, 0G7E, 0D6D, 0941
 -/
 
 @[expose] public noncomputable section
@@ -306,39 +313,7 @@ private theorem sequenceFlat_of_evaluations (W : Scheme.{t})
 with the fixed normalized Roos comparison and every simultaneous quotient
 presentation. These are the interfaces whose `realization` fields are alpha
 and beta; their normalization fields specify rho and rho composed with the
-inverse of the strict association, respectively.
-
-Source: Stacks 099N(2),(5), 06YS, 0G7E, 0D6D, 0941
-(blueprint: lem-trf-primitive-quotient-realization-comparisons).
-Proof:
-1. Choose a flat-term K-flat resolution by lem-pc-kflat-resolution. Change of
-   rings preserves those properties at every quotient by
-   lem-pur-kflat-change-of-rings. The calculus's reductionModel supplies one
-   strict quotient presentation with the actual maps for all m greater than n.
-2. Finite constant-coefficient inverse image is exact by
-   prop-weil-pbc-proetale-constant-exact. By lem-coef-semilinear-derived-sections
-   it computes whole-system inverse image termwise. Restrict the resulting
-   tower to completed coefficients. The defining completed pullback is its
-   Roos cone, so apply the fixed rho to this very tower. No infinite product
-   passes through inverse image.
-3. Construct the balanced association and inverse as in
-   primitiveQuotientScalarAssociation. They commute with differentials and
-   quotient transitions, giving one strict-system chain isomorphism.
-4. The system tensor is componentwise on the vertical sequence site; therefore
-   the levelwise K-flat reduction system is K-flat as a whole system. Its
-   ordinary scalar extension computes derived extension. The association
-   identifies its restricted tower with integralScalarTowerFunctor. Apply H
-   to its inverse and then the fixed rho. This is beta with the orientation
-   specified in IsIntegralComparisonScalarNormalized.
-5. For E to L to M both associations multiply the same three coefficients;
-   for equal fields use multiplication with inverse insertion of 1. All
-   transitions are the actual reductions, so these identities are strict.
-6. The formulas commute with every cochain map. Quotient tensors preserve
-   quasi-isomorphisms of good inputs, and exact inverse image preserves them.
-   Apply lem-pur-flat-roos-functor-descent and the fixed strict Roos comparison.
-   This gives natural isomorphisms on all derived morphisms, independent of
-   representatives through the specified comparisons. Exact countable
-   products are lem-weil-proetale-countable-products-exact. -/
+inverse of the strict association, respectively. -/
 -- STATEMENT-DISPUTED: CoefficientReductionPresentation determines e only after finite
 -- derived evaluations. These are conservative, but do not detect equality of morphisms.
 -- Replacing e by reduction of a nontrivial automorphism with identity reductions preserves

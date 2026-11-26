@@ -43,7 +43,11 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
 The existing tensor realization, reduction maps and normalized derived comparison
 are separated from the coherence theorem so its two word comparisons can be proved
-independently. Their definitions and statements are unchanged.
+independently.
+
+## References
+
+* Stacks Project, Tags 06YS, 07A4, 0941, 0G7E.
 -/
 
 @[expose] public noncomputable section
@@ -79,8 +83,7 @@ variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E
 attribute [local irreducible] scalar_adj comparisons
   integralComparisonSequenceTensorSection integralComparisonSequenceScalarUnit
 
-/-- A generator read in the legacy restricted finite-tensor tower's exact section type.
-Source: Stacks 07A4 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
+/-- A generator read in the legacy restricted finite-tensor tower's exact section type. -/
 def integralTensorGenerator (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules.{u, u} l E W) ℤ)
     (n : ℕ) (p r : ℤ) (U : W.ProEtᵒᵖ)
@@ -93,8 +96,7 @@ def integralTensorGenerator (W : Scheme.{u})
 /-- Representative normalization of the completed tensor realization, including its
 local tensor formula and its specified Roos comparison. Both input presentations
 must fix the derived comparison in the whole tower through its adjunction transpose;
-finite derived evaluations alone do not determine that comparison.
-Source: Stacks 06YS, 07A4, 0941 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
+finite derived evaluations alone do not determine that comparison. -/
 def IsTensorModelNormalized (W : Scheme.{u})
     (S : CoefficientDerivedSystemCalculus.{u, u} l E W)
     (ρ : IntegralComparisonRoosModel.{u, u} l E W)
@@ -147,9 +149,7 @@ def IsTensorModelNormalized (W : Scheme.{u})
 
 attribute [local irreducible] IsTensorModelNormalized
 
-/-- A normalized presentation of the named completed tensor by whole quotient systems.
-Source: node proof steps 1, 4, 8; Stacks 06YS, 07A4 and 0941
-(blueprint: lem-pur-scalar-extension-tower-coherence). -/
+/-- A normalized presentation of the named completed tensor by whole quotient systems. -/
 structure TensorModel (W : Scheme.{u})
     (S : CoefficientDerivedSystemCalculus.{u, u} l E W)
     (ρ : IntegralComparisonRoosModel.{u, u} l E W) where
@@ -159,8 +159,7 @@ structure TensorModel (W : Scheme.{u})
   /-- Normalization at every whole-system coherent good quotient presentation. -/
   normalization : IsTensorModelNormalized l E W S ρ realization
 
-/-- The actual reduction of a completed pullback, followed by the coherent counit.
-Source: node proof step 8 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
+/-- The actual reduction of a completed pullback, followed by the coherent counit. -/
 def pullbackReduction (W : Bool → Scheme.{u}) (M : CompletedOperations.Models.{u, u} l E W)
     (f : W true ⟶ W false) (K : DerivedCategory (scalarReductionSource.{u, u} l E (W false))) :
     (M.calculus true).reduction.obj ((integralDerivedPullback.{u, u} l E f).obj K) ⟶
@@ -170,8 +169,7 @@ def pullbackReduction (W : Bool → Scheme.{u}) (M : CompletedOperations.Models.
     (M.calculus true).adjunction.counit.app _
 
 /-- The actual coherent scalar-reduction comparison, obtained from its normalized
-realization and the coherent counit, with no arbitrary quotient identification.
-Source: node proof step 8 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
+realization and the coherent counit, with no arbitrary quotient identification. -/
 def scalarReduction (W : Scheme.{u})
     (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)
     (SL : CoefficientDerivedSystemCalculus.{u, u} l L W)
@@ -182,8 +180,7 @@ def scalarReduction (W : Scheme.{u})
       (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W).obj (SE.reduction.obj K) :=
   SL.reduction.map (M.realization.hom.app K) ≫ SL.adjunction.counit.app _
 
-/-- The completed tensor's actual quotient comparison, followed by the coherent counit.
-Source: node proof step 8 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
+/-- The completed tensor's actual quotient comparison, followed by the coherent counit. -/
 def tensorReduction (W : Scheme.{u}) (S : CoefficientDerivedSystemCalculus.{u, u} l E W)
     (ρ : IntegralComparisonRoosModel.{u, u} l E W) (M : TensorModel l E W S ρ)
     (K N : DerivedCategory (scalarReductionSource.{u, u} l E W)) :
@@ -191,8 +188,7 @@ def tensorReduction (W : Scheme.{u}) (S : CoefficientDerivedSystemCalculus.{u, u
       S.systemClosed.tensor.obj (S.reduction.obj K, S.reduction.obj N) :=
   S.reduction.map (M.realization.hom.app (K, N)) ≫ S.adjunction.counit.app _
 
-/-- The flat-term K-flat class used for scalar/tensor descent on the sequence site.
-Source: Stacks 06YS, 0G7E (blueprint: lem-pur-scalar-extension-tower-coherence). -/
+/-- The flat-term K-flat class used for scalar/tensor descent on the sequence site. -/
 def Good (W : Scheme.{u}) (P : Complex l E W) : Prop :=
   CochainComplex.IsKFlatIndependentCoefficients
     (R := coefficientSequenceCommRingSheaf.{u, u} l E W) P ∧
@@ -200,9 +196,7 @@ def Good (W : Scheme.{u}) (P : Complex l E W) : Prop :=
     (J := coefficientSequenceTopology (Scheme.ProEt.topology W))
     (R := coefficientSequenceCommRingSheaf.{u, u} l E W) (P.X n)
 
-/-- Cochain normalization of the system derived scalar/tensor comparison.
-Source: node proof steps 1, 4, 8; Stacks 06YS, 07A4
-(blueprint: lem-pur-scalar-extension-tower-coherence). -/
+/-- Cochain normalization of the system derived scalar/tensor comparison. -/
 def DerivedSigmaModel (W : Scheme.{u})
     (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)
     (SL : CoefficientDerivedSystemCalculus.{u, u} l L W)
@@ -245,15 +239,7 @@ private theorem scalar_good (W : Scheme.{u}) (P : Complex l E W) (hP : Good l E 
 
 -- Compare the restricted tensor models and counits simultaneously.
 
-/-- The derived comparison is determined by the same strict sigma on good representatives.
-Source: node proof steps 1, 4, 8; Stacks 06YS, 07A4
-(blueprint: lem-pur-scalar-extension-tower-coherence).
-Proof: flat-term K-flat change of rings works without flatness of the ring map.
-It preserves Good and computes scalar derived extension by its universal counit.
-Localize sigma on the two resolving subcategories, inserting the normalized tensor
-models and scalar counits. Simultaneous K-flat resolutions give naturality on roofs
-and independence of resolutions. The localization universal property gives uniqueness
-with this cochain model equation. -/
+/-- The derived comparison is determined by the same strict sigma on good representatives. -/
 theorem derivedSigma_existsUnique (W : Scheme.{u})
     (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)
     (SL : CoefficientDerivedSystemCalculus.{u, u} l L W) :
@@ -317,8 +303,7 @@ theorem derivedSigma_existsUnique (W : Scheme.{u})
     obtain ⟨hX', hY', h⟩ := hβ X Y hX hY
     exact h
 
-/-- The representative-normalized derived tensor scalar comparison on coherent systems.
-Source: Stacks 07A4 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
+/-- The representative-normalized derived tensor scalar comparison on coherent systems. -/
 def derivedSigma (W : Scheme.{u})
     (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)
     (SL : CoefficientDerivedSystemCalculus.{u, u} l L W) :=

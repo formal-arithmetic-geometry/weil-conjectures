@@ -12,7 +12,12 @@ import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import all WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComparison
 import all WeilConjectures.SixFunctors.Scalar.ScalarRoosComparison
 
-/-! # Natural transformation data for scalar Roos comparison -/
+/-! # Natural transformation data for scalar Roos comparison
+
+## References
+
+* Stacks Project, Tag 0941.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -94,10 +99,7 @@ private def scalarRoosBridgeNat
 
 section
 attribute [local implicit_reducible] coefficientSequenceLimit
-/-- The natural bridge has precisely the specified pointwise Roos normalization.
-Source: Stacks Tag 0941, functoriality of the derived comparison.
-(blueprint: lem-trf-scalar-roos-naturality-data)
-Proof: whiskering and composition of natural isomorphisms evaluate pointwise. -/
+/-- The natural bridge has precisely the specified pointwise Roos normalization. -/
 theorem scalarRoosBridgeNat_app
     (l : ℕ) [Fact l.Prime]
     (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]

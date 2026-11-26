@@ -25,8 +25,12 @@ import WeilConjectures.SmoothPurity.Coefficient.CoefficientScalarCochainEvaluati
 
 /-! # Ordinary quotient scalar tower comparison
 
-Source: Stacks 03EK, 03D7, 06YY and 0941, balanced tensor association.
-(blueprint: lem-trf-ordinary-quotient-scalar-tower-comparison)
+Ordinary scalar extension of the strict quotient system is the direct scalar tower, through the
+balanced tensor association (`ordinaryQuotientScalarTowerComparison`).
+
+## References
+
+* Stacks Project, Tags 03EK, 03D7, 06YY, 0941
 -/
 
 @[expose] public noncomputable section
@@ -43,26 +47,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L) (W : Scheme.{t})
 
-/-- Ordinary scalar extension of the strict quotient system is the direct scalar tower.
-Source: Stacks 03EK, 03D7 and 0941, balanced association for quotient tensors.
-(blueprint: lem-trf-ordinary-quotient-scalar-tower-comparison).
-
-Proof: evaluate at each quotient. The ordinary extension/restriction adjunction
-identifies evaluation of sequence scalar extension with scalar extension of the
-evaluated module. Construct the scalar systems package with the prescribed
-actual sequence cochain model, transporting along the componentwise equality
-of the sequence ring maps. The ordinary unit formula then identifies actual
-tensor sections with scalar multiples of that unit. Compose with M.evaluation and the
-balanced associator
-b tensor (a tensor x) to (b times iota(a)) tensor x. Its inverse inserts 1.
-Both maps commute with quotient reduction because reduction preserves products,
-so they assemble to an isomorphism of whole strict towers. Apply the construction
-degreewise; naturality gives compatibility with differentials and chain maps.
-For a presentation a, precompose this comparison with scalar extension of a inverse.
-The evaluation equation cancels a against kappa. On the sections 1 tensor x this
-gives exactly s tensor x in the target. Linearity gives all s, and sheafification
-extends the formula to arbitrary local sections. This is an ordinary tensor and
-strict tower statement; it asserts no faithfulness of derived evaluations. -/
+/-- Ordinary scalar extension of the strict quotient system is the direct scalar tower. -/
 theorem ordinaryQuotientScalarTowerComparison
     (M : CompletionUnit.OrdinaryModel l E W) :
     let F := (integralComparisonSequenceScalarModel l E L ι W).E

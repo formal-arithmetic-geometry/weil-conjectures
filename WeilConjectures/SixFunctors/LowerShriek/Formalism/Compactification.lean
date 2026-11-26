@@ -26,7 +26,7 @@ c.Z -r-> d.Z
 It satisfies the identity and composition laws, and it is an isomorphism when `F` satisfies
 proper base change. Comparing two compactifications through their common refinement gives
 `F.shriekIso c d : F.shriek c ≅ F.shriek d`, which does not depend on the common refinement and
-satisfies the cocycle condition (blueprint `proposition-construction-independence-rf-shriek`).
+satisfies the cocycle condition.
 -/
 
 @[expose] public section
@@ -169,8 +169,7 @@ variable [QuasiCompact f]
 obtained through the common refinement `Compactification.inf c d`. It does not depend on the
 common refinement (`shriekIso_eq`) and satisfies the cocycle condition (`shriekIso_trans`); the
 comparisons along refinements are the identity for identity refinements
-(`refinementComparison_eq_id`) and transitive (`refinementComparison_comp`). This is the abstract
-form of blueprint `proposition-construction-independence-rf-shriek`. -/
+(`refinementComparison_eq_id`) and transitive (`refinementComparison_comp`). -/
 noncomputable def shriekIso (c d : Compactification f) : F.shriek c ≅ F.shriek d :=
   asIso (F.refinementComparison (Compactification.infFst c d)
       (Compactification.isPullback_infFst c d)) ≪≫

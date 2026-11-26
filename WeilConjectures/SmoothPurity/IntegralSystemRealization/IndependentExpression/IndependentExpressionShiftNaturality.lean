@@ -8,11 +8,7 @@ module
 public import WeilConjectures.SmoothPurity.IntegralSystemRealization.IntegralTensorShiftProperties
 public import WeilConjectures.SmoothPurity.IntegralSystemRealization.Expression.IntegralExpressionOccurrences
 
-/-! # Shifts of independent expression inputs
-
-Source: blueprint purity transport, Step 2, and the independent input convention
-(blueprint: lem-pur-independent-expression-shift-naturality).
--/
+/-! # Shifts of independent expression inputs -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -23,8 +19,7 @@ open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.IntegralSystemRealization
 attribute [local irreducible] HasDerivedCategory.standard
 
-/-- Shift comparisons for each primitive operation; tensor slots remain separate.
-Source: blueprint Step 2 (blueprint: def-pur-integral-operation-shift-data). -/
+/-- Shift comparisons for each primitive operation; tensor slots remain separate. -/
 structure InterpretationShifts {C : Scheme.{u} → Type v} [∀ W, Category.{w} (C W)]
     [∀ W, HasShift (C W) ℤ] (d : Interpretation C) where
   pull {U V : Scheme.{u}} (f : U ⟶ V) : (d.pull f).CommShift ℤ
@@ -39,8 +34,7 @@ structure InterpretationShifts {C : Scheme.{u} → Type v} [∀ W, Category.{w} 
       d.tensor W ⋙ shiftFunctor (C W) r
 
 /-- Reindex shifts through the actual single-slot context, with the designated
-left or right tensor comparison at every tensor vertex.
-Source: blueprint Step 2 (blueprint: def-pur-integral-operation-shift-data). -/
+left or right tensor comparison at every tensor vertex. -/
 def Expression.SlotContext.shift {B : Scheme.{u}} {C : Scheme.{u} → Type v}
     [∀ W, Category.{w} (C W)] [∀ W, HasShift (C W) ℤ] {d : Interpretation C}
     (a : InterpretationShifts d) {A : Over B} (r : ℤ) :
@@ -67,9 +61,8 @@ def Expression.SlotContext.shift {B : Scheme.{u}} {C : Scheme.{u} → Type v}
       (a.tensorRight W.left r).app (M, e.evaluate.obj P)
 
 open Classical in
-/-- The actual comparison for a single independently labelled input.
-Its endpoint identifications are equalities of explicit evaluations, not chosen isos.
-Source: blueprint Step 2 (blueprint: def-pur-integral-operation-shift-data). -/
+/-- The actual comparison for a single independently labelled input. Its endpoint
+identifications are equalities of explicit evaluations. -/
 def IndependentExpression.shift {B : Scheme.{u}} {I : Type u} {X : I → Over B}
     {C : Scheme.{u} → Type v} [∀ W, Category.{w} (C W)] [∀ W, HasShift (C W) ℤ]
     (d : Interpretation C) (a : InterpretationShifts d) {W : Over B}

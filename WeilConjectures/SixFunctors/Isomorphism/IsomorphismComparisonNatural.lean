@@ -23,16 +23,15 @@ import all WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowe
 
 /-! # Naturality of the specified inverse-image comparison
 
-Source: Deligne, Weil II, (1.1.3), p. 150 and (1.1.7), pp. 150--151;
-the explicit pro-etale/completed argument is agent-written, extracted from
-`lem-weil-frobenius-point-transport-natural`, steps 3--6 and 9
-(blueprint: lem-weil-isomorphism-comparison-natural).
-
 The finite comparison is fixed on every complex by the recorded tensor-unit map.
 The integral comparison is the recorded chosen-resolution map, on every ambient
 object, and agrees with the actual completion unit through the normalization
 isomorphism. Both natural transformations can be postcomposed with any functor
 and preceded by any natural transformation. The finite index `n` means exponent `n+1`.
+
+## References
+
+* [Deligne, Weil II, (1.1.3) and (1.1.7)]
 -/
 
 @[expose] public noncomputable section
@@ -310,26 +309,7 @@ private theorem complete_zero
 /-- The specified ambient integral components are natural, independent of the
 chosen flat-term K-flat resolutions, and are the inverse normalization followed
 by inverse image of the actual completion unit. They remain natural after the
-stated composition, including on incomplete objects.
-Source: Deligne, Weil II, (1.1.3), (1.1.7), as motivation; blueprint
-`sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md`,
-clauses (2)--(3), through the agent-written entire-cone normalization
-(blueprint: lem-weil-isomorphism-comparison-natural).
-
-Proof, node steps 3--5: apply
-lem-weil-isomorphism-derived-pullback-comparison-normalization to the canonical
-calculus S of lem-coef-derived-system-evaluation-calculus. Its entire-cone identity
-is κ_N followed by θ_N = G(u_N), with zero shifted coordinate, for every ambient
-N and under the canonical resolution comparisons. Thus κ_N = G(u_N) followed by
-θ_N inverse. The completion is S.reduction followed by coefficientSequenceLimit,
-and u is the actual adjunction unit. For v : N → N', unit naturality gives
-completion(v) u_N = u_N' v. Naturality of θ therefore identifies θ_N' P_g(v) κ_N
-with G(completion(v)) G(u_N), hence with θ_N' κ_N' G(v). Cancel θ_N' to obtain
-naturality of the specified κ. No inverse of u_N is used. The same normalization
-and the canonical representative comparisons identify the chosen derived component
-with inverseImagePullbackComparison for every good resolution q : P → K.
-Finally η = ρ followed by the right whiskering of κ with S has components
-ρ_N followed by S(κ_N), and its naturality is the composite of the two squares. -/
+stated composition, including on incomplete objects. -/
 theorem inverseImagePullbackComparisonIntegral_natural
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

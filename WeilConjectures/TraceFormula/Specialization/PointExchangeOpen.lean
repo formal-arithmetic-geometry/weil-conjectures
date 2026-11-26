@@ -10,8 +10,8 @@ public import WeilConjectures.TraceFormula.Specialization.PointExchange
 /-!
 # The compact-support exchange of the structure map of a separated scheme
 
-For separated `X` of finite type over `k` with rational point `x`, the exchange `ν_X` of blueprint
-`prose-E-15` (3) is `ν_{X̄}(u_!) ∘ Ra'_{X̄!}(ν_u)` for `u : X ⟶ X̄` the open immersion
+For separated `X` of finite type over `k` with rational point `x`, the compact-support exchange
+`ν_X` is `ν_{X̄}(u_!) ∘ Ra'_{X̄!}(ν_u)` for `u : X ⟶ X̄` the open immersion
 into the compactification of `X ⟶ Spec k`, `ν_u : u'_! Ψ_X ⟶ Ψ_{X̄} u_!` the mate of `α_u⁻¹`.
 -/
 
@@ -59,8 +59,8 @@ variable [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [I
   (k' : Type u) [Field k'] [Algebra k k'] {ℓ : ℕ} [Fact ℓ.Prime] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)] [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
-/-- **The compact-support exchange `ν_X` along an open immersion into a proper `Y`** (blueprint
-`prose-E-15` (3)): `ν_X = ν_Y(u_!) ∘ Ra'_{Y!}(ν_u)`, `ν_u` the mate of `α_u⁻¹`. -/
+/-- **The compact-support exchange `ν_X` along an open immersion into a proper `Y`**:
+`ν_X = ν_Y(u_!) ∘ Ra'_{Y!}(ν_u)`, `ν_u` the mate of `α_u⁻¹`. -/
 noncomputable def pointCompactSupportExchangeOfOpenImmersion :
     Correspondence.IsContractingAt.PointCompactSupportExchange (ℓ := ℓ) X k' x :=
   have hJ := ker_compatible_of_isOpenImmersion x u
@@ -88,8 +88,8 @@ noncomputable def pointCompactSupportExchangeOfOpenImmersion :
       (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ u) _)
     (pointCompactSupportExchange Y (x ≫ u) k')
 
-/-- **The compact-support exchange `ν_X` of a separated `X`** (blueprint `prose-E-15`
-(3)): `pointCompactSupportExchangeOfOpenImmersion` for the compactification `X ⊂ X̄` of `a_X`. -/
+/-- **The compact-support exchange `ν_X` of a separated `X`**:
+`pointCompactSupportExchangeOfOpenImmersion` for the compactification `X ⊂ X̄` of `a_X`. -/
 noncomputable def pointCompactSupportExchangeOfSeparated :
     Correspondence.IsContractingAt.PointCompactSupportExchange (ℓ := ℓ) X k' x :=
   have := (compactificationOverField (toPoint X)).isProper

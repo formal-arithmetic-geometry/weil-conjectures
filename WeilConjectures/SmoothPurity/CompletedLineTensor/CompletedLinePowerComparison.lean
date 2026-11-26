@@ -14,9 +14,6 @@ import all WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComp
 
 /-! # Scalar extension of signed powers of a coefficient line
 
-Source: Stacks 03EK, 03EO, 0GMX; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence).
-
 A comparison `b` between the scalar extension of a line `L` and a line `N` induces
 comparisons of all signed powers: positive powers by the binary tensor comparison and
 `b`, negative powers by duality. They are uniquely fixed by the positive formula and the
@@ -27,6 +24,10 @@ pairing formula, and they are compatible with a tower of three coefficient field
 * `IsLineNormalized`: the positive-power formula and the pairing formula.
 * `line_exists`, `line_unique`: normalized signed-power comparisons exist and are unique.
 * `line_tower`: the comparisons for a three-field tower compose.
+
+## References
+
+* [Stacks, Tags 03EK, 03EL, 03EO, 04TT and 0GMX]
 -/
 
 @[expose] public noncomputable section
@@ -65,15 +66,12 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 variable (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (ι : E →ₐ[ℚ_[l]] F)
 
-/-- Comparisons of all signed powers after scalar extension.
-Source: Stacks 03EK (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- Comparisons of all signed powers after scalar extension. -/
 abbrev LineFamily (L : integralTowerModules l E X) (N : integralTowerModules l F X) :=
   ∀ m : ℤ, SheafOfModules.changeOfRingsOfUniverses.{t, t + 1, max u (t + 1), max u (t + 1)}
     (completedCoefficientMap l E F ι X) (power l E X L m) ≅ power l F X N m
 
-/-- The positive-power formula and the pairing formula of `IsPairNormalized`.
-Source: Stacks 03EL, 03EO; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The positive-power formula and the pairing formula of `IsPairNormalized`. -/
 def IsLineNormalized (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (N : integralTowerModules l F X) [N.IsFiniteLocallyFreeOfRank 1]
     (b : SheafOfModules.changeOfRingsOfUniverses.{t, t + 1, max u (t + 1), max u (t + 1)}
@@ -117,8 +115,7 @@ attribute [local irreducible] siteSheafTensorRight siteSheafTensorTmul
   scalarExtensionTowerForward scalarExtensionTowerReverse
 
 /-- Positive-power comparisons normalized by the unit comparison in degree zero, the given
-line comparison in degree one, and the pure-tensor recursion.
-Source: Stacks 03EK (blueprint: lem-pur-completed-line-tensor-coherence). -/
+line comparison in degree one, and the pure-tensor recursion. -/
 private def IsPositiveNormalized {R S : Sheaf J CommRingCat.{max uC vC w}} (α : R ⟶ S)
     (L : SheafOfModules.{max uC vC w} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
     (K : SheafOfModules.{max uC vC w} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))
@@ -135,8 +132,7 @@ private def IsPositiveNormalized {R S : Sheaf J CommRingCat.{max uC vC w}} (α :
           (scalarExtensionSection α (scalarTensorPower R L (n + 1)) U s x))
         (b.hom.val.app U (scalarExtensionSection α L U 1 y))
 
-/-- The binary tensor comparison followed by tensor powers of `b` is normalized.
-Source: Stacks 03EK (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The binary tensor comparison followed by tensor powers of `b` is normalized. -/
 private theorem isPositiveNormalized_binary {R S : Sheaf J CommRingCat.{max uC vC w}}
     (α : R ⟶ S)
     (L : SheafOfModules.{max uC vC w} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
@@ -157,8 +153,7 @@ private theorem isPositiveNormalized_binary {R S : Sheaf J CommRingCat.{max uC v
   erw [e.tensor_tmul, scalarTensor_first_tmul, scalarTensor_first_tmul,
     scalarTensor_second_tmul]
 
-/-- Normalized positive-power comparisons are unique.
-Source: Stacks 03EK (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- Normalized positive-power comparisons are unique. -/
 private theorem isPositiveNormalized_unique {R S : Sheaf J CommRingCat.{max uC vC w}}
     (α : R ⟶ S)
     (L : SheafOfModules.{max uC vC w} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
@@ -177,8 +172,7 @@ private theorem isPositiveNormalized_unique {R S : Sheaf J CommRingCat.{max uC v
     refine (hP.2.2 n U s x y).trans (Eq.trans ?_ (hQ.2.2 n U s x y).symm)
     rw [ih]
 
-/-- Normalized positive-power comparisons compose along a tower of coefficient rings.
-Source: Stacks 03EK (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- Normalized positive-power comparisons compose along a tower of coefficient rings. -/
 private theorem isPositiveNormalized_tower {R S T : Sheaf J CommRingCat.{max uC vC w}}
     (α : R ⟶ S) (β : S ⟶ T) (γ : R ⟶ T) (hγ : α ≫ β = γ)
     (L : SheafOfModules.{max uC vC w} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
@@ -258,8 +252,7 @@ private theorem isPositiveNormalized_tower {R S T : Sheaf J CommRingCat.{max uC 
     simpa only [← Category.assoc, scalarExtensionTower_forward_reverse,
       Category.id_comp] using h
 
-/-- Restriction of the value of a map out of a scalar extension on a pure section.
-Source: Stacks 03EK (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- Restriction of the value of a map out of a scalar extension on a pure section. -/
 private theorem scalarExtension_hom_restrict {R S : Sheaf J CommRingCat.{max uC vC w}}
     (α : R ⟶ S)
     (M : SheafOfModules.{max uC vC w} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
@@ -271,8 +264,7 @@ private theorem scalarExtension_hom_restrict {R S : Sheaf J CommRingCat.{max uC 
   rw [← PresheafOfModules.naturality_apply, scalarExtensionSection_naturality]
 
 /-- A section of the dual of `N` is determined by its values, after all restrictions, on
-the images of pure sections under a comparison `changeOfRings α M ≅ N`.
-Source: Stacks 03EK, 04TT (blueprint: lem-pur-completed-line-tensor-coherence). -/
+the images of pure sections under a comparison `changeOfRings α M ≅ N`. -/
 private theorem homObj_section_ext {R S : Sheaf J CommRingCat.{max uC vC w}}
     (α : R ⟶ S)
     (M : SheafOfModules.{max uC vC w} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
@@ -301,8 +293,7 @@ private theorem homObj_section_ext {R S : Sheaf J CommRingCat.{max uC vC w}}
     _).trans (hW.trans (PresheafOfModules.restrictOver_hom_app_congr ψ
       (Category.id_comp W.unop.hom) _))
 
-/-- A dual comparison is determined by its evaluation against a positive comparison.
-Source: Stacks 03EK, 04TT (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- A dual comparison is determined by its evaluation against a positive comparison. -/
 private theorem dualComparison_ext {R S : Sheaf J CommRingCat.{max uC vC w}}
     (α : R ⟶ S)
     (M : SheafOfModules.{max uC vC w} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
@@ -325,8 +316,7 @@ private theorem dualComparison_ext {R S : Sheaf J CommRingCat.{max uC vC w}}
   rw [scalarExtension_hom_restrict, scalarExtension_hom_restrict]
   exact hD V _ t _ x
 
-/-- Dual comparisons normalized by evaluation compose along a tower of coefficient rings.
-Source: Stacks 03EK, 04TT (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- Dual comparisons normalized by evaluation compose along a tower of coefficient rings. -/
 private theorem dualComparison_tower {R S T : Sheaf J CommRingCat.{max uC vC w}}
     (α : R ⟶ S) (β : S ⟶ T) (γ : R ⟶ T) (hγ : α ≫ β = γ)
     (M : SheafOfModules.{max uC vC w} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
@@ -387,8 +377,7 @@ section Concrete
 
 attribute [local instance 5000] evaluationOverSheafify evaluationOverLocallyBijective
 
-/-- A line of rank one is trivial on a covering family.
-Source: Stacks 03EK (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- A line of rank one is trivial on a covering family. -/
 private theorem line_cover (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1] :
     ∃ (I : Type (t + 1)) (V : I → X.ProEt),
       (AlgebraicGeometry.Scheme.ProEt.topology X).CoversTop V ∧
@@ -402,8 +391,7 @@ private theorem line_cover (L : integralTowerModules l E X) [L.IsFiniteLocallyFr
       (M := L) (r := 1)).mp inferInstance
   exact ⟨I, V, hV, fun i ↦ ⟨(e i).some ≪≫ SheafOfModules.freeUniqueIso _⟩⟩
 
-/-- The positive part of a normalized family is a normalized positive comparison.
-Source: Stacks 03EK (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The positive part of a normalized family is a normalized positive comparison. -/
 private theorem line_positive (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (N : integralTowerModules l F X) [N.IsFiniteLocallyFreeOfRank 1]
     (b : SheafOfModules.changeOfRingsOfUniverses.{t, t + 1, max u (t + 1), max u (t + 1)}
@@ -419,13 +407,7 @@ private theorem line_positive (L : integralTowerModules l E X) [L.IsFiniteLocall
 
 end Concrete
 
-/-- Normalized signed-power comparisons exist.
-Source: Stacks 03EK, 0GMX; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: positive powers are the binary tensor comparison followed by the tensor power of
-`b`. For a negative power, compose the dual scalar comparison, which is invertible on
-lines, with precomposition by the inverse positive comparison. Evaluation cancels this
-inverse and gives the pairing formula. -/
+/-- Normalized signed-power comparisons exist. -/
 theorem line_exists (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (N : integralTowerModules l F X) [N.IsFiniteLocallyFreeOfRank 1]
     (b : SheafOfModules.changeOfRingsOfUniverses.{t, t + 1, max u (t + 1), max u (t + 1)}
@@ -441,13 +423,7 @@ theorem line_exists (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRan
   rw [mul_rotate] at h
   exact h
 
-/-- Normalized signed-power comparisons are unique.
-Source: Stacks 03EK, 03EO; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: positive powers are given by a formula. A negative comparison is determined by its
-pairing with the positive comparison: sections of the scalar extension are locally sums
-of pure tensors, the positive comparison is invertible, and a section of the dual sheaf is
-determined by its values on all restrictions. -/
+/-- Normalized signed-power comparisons are unique. -/
 theorem line_unique (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (N : integralTowerModules l F X) [N.IsFiniteLocallyFreeOfRank 1]
     (b : SheafOfModules.changeOfRingsOfUniverses.{t, t + 1, max u (t + 1), max u (t + 1)}
@@ -470,8 +446,7 @@ variable (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G
   (j : F →ₐ[ℚ_[l]] G)
 
 
-/-- Completed coefficient maps compose along a tower of coefficient fields.
-Source: Stacks 03EK (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- Completed coefficient maps compose along a tower of coefficient fields. -/
 private theorem completedCoefficientMap_comp :
     completedCoefficientMap l E F ι X ≫ completedCoefficientMap l F G j X =
       completedCoefficientMap l E G (j.comp ι) X := by
@@ -490,12 +465,7 @@ private theorem completedCoefficientMap_comp :
   · simpa only [completedCoefficientMap] using
       (completedCoefficientMap_existsUnique l E G (j.comp ι) X).exists.choose_spec
 
-/-- Normalized signed-power comparisons are compatible with a three-field tower.
-Source: Stacks 03EK, 03EO; blueprint Proof (3), final sentence
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: for positive powers induct on the exponent, using the tower hypothesis on `b` and
-the recursive binary formula. For negative powers both sides have the same pairing with
-the positive comparisons, by the positive case, so they agree by uniqueness. -/
+/-- Normalized signed-power comparisons are compatible with a three-field tower. -/
 theorem line_tower (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (N : integralTowerModules l F X) [N.IsFiniteLocallyFreeOfRank 1]
     (P : integralTowerModules l G X) [P.IsFiniteLocallyFreeOfRank 1]

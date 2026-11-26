@@ -13,8 +13,11 @@ import all WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarPullbackTo
 /-! # Coherent ordinary tensor scalar squares on representatives
 
 The exact scalar factors and the normalized chain maps form coherent squares before
-localization. Source: coefficient-comparison coherence, Stacks 07A4 and 08J9.
-(blueprint: lem-pur-integral-scalar-ordinary-tensor-tower-representatives).
+localization.
+
+## References
+
+* Stacks Project, Tags 03EL, 07A4 and 08J9
 -/
 
 @[expose] public noncomputable section
@@ -65,14 +68,7 @@ attribute [local irreducible] constantSheaf limit
 
 attribute [local irreducible] integralOrdinaryScalarComp integralOrdinaryDerivedScalarComp
 
-/-- The localized ordinary tensor chain square respects coefficient towers.
-Source: coefficient-comparison coherence, Stacks 03EL, 07A4 and 08J9.
-(blueprint: lem-pur-integral-scalar-ordinary-tensor-tower-representatives).
-Proof: naturality of the second exact scalar localization factor interchanges it
-with the first tensor chain comparison. Combine the three Q-images, apply the
-given ordinary chain tower equation, then separate the Q-image of the result.
-The scalar factorization composition formula identifies the remaining factors
-with the output derived scalar associator followed by the direct scalar factor. -/
+/-- The localized ordinary tensor chain square respects coefficient towers. -/
 theorem integralScalarOrdinaryTensorTowerOnRepresentatives
     (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
     (j : L →ₐ[ℚ_[l]] F) (W : AlgebraicGeometry.Scheme.{u})

@@ -10,7 +10,9 @@ import WeilConjectures.SixFunctors.SequenceModuleEvaluation.SequenceModulePullba
 
 /-! # The ordinary scalar evaluation comparison
 
-Source: Stacks 03D7, 06YY and 07A6.
+## References
+
+* Stacks Project, Tags 03D7, 06YY and 07A6.
 -/
 
 @[expose] public noncomputable section
@@ -32,13 +34,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (A : SemilinearSections.ScalarSystems.{c, v, r} J B τ F σ α hα)
 
 /-- Ordinary scalar extension commutes with sequence evaluation, respecting the
-specified ordinary adjunction units.
-Source: Stacks 03D7 and the sequence-site coextension construction
-(blueprint: stage3-pur-ordinary-scalar-evaluation-unit).
-Proof: take the inverse mate of the identity-on-sections restriction comparison.
-The sequence-site coextension lemma makes this mate invertible. The mate unit
-identity, followed by the image of its inverse, gives the displayed unit equation.
-This works for every coefficient level, including n = 0. -/
+specified ordinary adjunction units. -/
 theorem ordinaryScalarEvaluationUnit :
     ∃ ρ : ∀ n, A.scalar.model.E ⋙ SemilinearSections.evaluation J F σ n ≅
         SemilinearSections.evaluation J B τ n ⋙ (A.levels n).model.E,

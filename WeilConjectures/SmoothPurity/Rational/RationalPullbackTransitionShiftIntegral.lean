@@ -21,9 +21,6 @@ scalar/pullback comparison `scalarPullbackOrdinary` commutes with the descended 
 pullback shifts (`scalarPullbackOrdinary_commShift`).
 
 This is the derived-level step of the proof of `rationalPullbackTransitionShift`.
-Source: current blueprint sec-smooth-purity/sk-prop-sf-localization,
-prop-sf-open-closed-triangle-all-stages.proof.md, Weil-structures paragraph.
-(blueprint: lem-sf-rational-pullback-transition-shift).
 -/
 
 @[expose] public section
@@ -116,10 +113,7 @@ theorem integralDerivedPullbackComparison_commShift (l : ℕ) [Fact l.Prime]
   rfl
 
 /-- The ordinary scalar/pullback comparison commutes with the descended integral pullback
-shifts and the ordinary derived scalar shifts.
-Source: current blueprint sec-smooth-purity/sk-prop-sf-localization,
-prop-sf-open-closed-triangle-all-stages.proof.md, Weil-structures paragraph
-(blueprint: lem-sf-framework-theta-shift-compatibility). -/
+shifts and the ordinary derived scalar shifts. -/
 theorem scalarPullbackOrdinary_commShift (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]

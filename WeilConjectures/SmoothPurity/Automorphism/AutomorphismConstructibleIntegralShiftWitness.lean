@@ -13,8 +13,17 @@ import WeilConjectures.SmoothPurity.Automorphism.AutomorphismConstructibleIntegr
 import WeilConjectures.SmoothPurity.Integral.Comparison.IntegralComparisonPullbackRealizationShifts
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 
-/-! Auxiliary witness for the normalized integral shift square.
-(blueprint: lem-sf-automorphism-constructible-stage-equivalence) -/
+/-! # Normalized integral shift witness
+
+Auxiliary witness for the normalized integral shift square on constructible objects.
+
+## Implementation details
+
+The normalized signed shifts are restricted through the full constructible inclusion, and
+exactness is transferred through the normalized realization. The prescribed composition
+comparisons commute with these shifts because their realization, reduction-counit, and
+sequence-composition factors do.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -302,14 +311,8 @@ private theorem composition_shift
 
 -- The unchanged statement names instance binders that occur only through typeclass inference.
 set_option linter.unusedVariables false in
-/-- The normalized integral shift data and square shift compatibility.
-Source: the canonical shift paragraph of the Weil-structures proof
-(blueprint: lem-sf-automorphism-constructible-stage-equivalence).
-The proof chooses the existing normalized signed shifts, restricts them through
-the full constructible inclusion, and transfers exactness through the normalized
-realization. The prescribed composition comparisons commute with these shifts
-because their realization, reduction-counit, and sequence-composition factors do.
-Pasting the two comparisons with equality transport gives the prescribed square. -/
+/-- The normalized integral shift data, together with compatibility of the prescribed
+composition square with shifts. -/
 theorem automorphismConstructibleStage_integral_shift_witness
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

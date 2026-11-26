@@ -23,15 +23,19 @@ then the trace classes are additive, `Tr_c(u) = Tr_c(u') + Tr_c(u'')`
 (`ProEtale.CondensedRing.Correspondence.traceClass_eq_add_of_distTriang`). For an open–closed
 triangle `j_! j^* K ⟶ K ⟶ Ri_* i^* K` along a `c`-invariant closed subscheme these groups vanish
 by support considerations (`WeilConjectures.TraceFormula.PieceVanishing`), which gives the
-additivity of blueprint `proposition-additivity-trace-classes--2` and
-`proposition-additivity-trace-classes--2`.
+additivity of trace classes for open–closed decompositions.
+
+## Implementation details
 
 The proof writes `Tr_c(u)` as the image of `e_K ∘ ũ` (evaluation kernel and supported class,
 `Correspondence.traceClass_eq_traceClassOfKernel`) and applies the triangulated lemma
 `CategoryTheory.Pretriangulated.comp_eq_add_of_distTriang` to the three rows
 `K' ⊠ N ⟶ K ⊠ N ⟶ K'' ⊠ N` for `N = D K, D K', D K''`, with the dinaturality of the evaluation
-kernel and the naturality of the supported classes. This replaces Varshavsky's filtered argument
-(Prop. 1.5.10, after SGA 5, III 4.13).
+kernel and the naturality of the supported classes, instead of Varshavsky's filtered argument.
+
+## References
+
+* Y. Varshavsky, Prop. 1.5.10; SGA 5, III 4.13.
 
 -/
 
@@ -83,9 +87,9 @@ namespace Correspondence
 
 variable {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (c : Correspondence ℓ K)
 
-/-- **Additivity of trace classes along a distinguished triangle** (blueprint
-`proposition-additivity-trace-classes--2`, `proposition-additivity-trace-classes`): see the module
-docstring. -/
+/-- **Additivity of trace classes along a distinguished triangle**: if `u'`, `u`, `u''` form a
+morphism of triangles and the four corner morphism groups `h₁`–`h₄` vanish, then
+`Tr_c(u) = Tr_c(u') + Tr_c(u'')`. -/
 theorem traceClass_eq_add_of_distTriang (F : c.FixedLocus)
     {K' K'' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} {ε : K' ⟶ K} {η : K ⟶ K''}
     {δ : K'' ⟶ K'⟦(1 : ℤ)⟧} (hT : Triangle.mk ε η δ ∈ distTriang _)

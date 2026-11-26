@@ -24,12 +24,7 @@ variable (l : ℕ) [Fact l.Prime]
   [∀ x : X, Invertible (l : X.residueField x)]
   [∀ y : Y, Invertible (l : Y.residueField y)]
 
-/-- The literal coherent stage morphism realizes the specified quotient pullback.
-Source: common-stage pullback normalization in the blueprint.
-(blueprint: lem-sf-common-projection-pullback-stage-normalization).
-Proof: normalized pullback descent supplies a coherence proof and the functor
-identity. Coherence is a proposition, so its particular proof does not change the
-stage morphism or its descended functor. -/
+/-- The literal coherent stage morphism realizes the specified quotient pullback. -/
 theorem commonProjectionPullbackStageNormalization
     (hc : StageSystem.pairFunctorCoherent (stageSystem l Ω Y) (stageSystem l Ω X)
       (fun L ↦ rationalDerivedPullback l

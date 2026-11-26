@@ -70,13 +70,10 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 -- search differ from the ones in these definitions, and unifying them is very expensive.
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 
-/-- Blueprint `lem-pur-etale-iso-descent`: Isomorphisms descend along étale surjections (family
-version).
+/-- Isomorphisms descend along étale surjections (family version).
 
 Let `a i : U i ⟶ X` be a jointly surjective family of morphisms and `φ : M ⟶ N` a morphism of
-`D(X_ét, Λ)`. If every `La_i^* φ` is an isomorphism, then so is `φ`: the cohomology sheaves
-`ℋʳ(φ)` are isomorphisms, as `a_i^* ℋʳ(φ) ≅ ℋʳ(La_i^* φ)` and every geometric point of `X` lifts
-to some `U i`. -/
+`D(X_ét, Λ)`. If every `La_i^* φ` is an isomorphism, then so is `φ`. -/
 theorem isIso_of_forall_isIso_leftDerivedUpperStar_map_of_family {X : Scheme.{u}} {ι : Type u}
     {U : ι → Scheme.{u}} (a : ∀ i, U i ⟶ X) (ha : ∀ x : X, ∃ (i : ι) (y : U i), (a i).base y = x)
     {M N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -93,9 +90,7 @@ theorem isIso_of_forall_isIso_leftDerivedUpperStar_map_of_family {X : Scheme.{u}
       (D((a i)^*[ModuleCat.{u + 1} Λ]).map φ))
 
 /-- For an étale `u : U ⟶ X` and `L ∈ D(X_ét, Λ)` with `Lu^* L` invertible, the derived pullback
-of the evaluation `L ⊗ᴸ RHom(L, Λ) ⟶ Λ` is an isomorphism, the derived pullback along `u`
-commuting with the derived internal hom
-(`AlgebraicGeometry.Etale.isIso_ihomComparison_leftDerivedUpperStar_of_etale`). -/
+of the evaluation `L ⊗ᴸ RHom(L, Λ) ⟶ Λ` is an isomorphism. -/
 theorem isIso_leftDerivedUpperStar_map_ev_of_etale {U X : Scheme.{u}} (u : U ⟶ X) [Etale u]
     (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (h : DerivedCategory.isInvertible Λ U ((L((u)^*[ModuleCat.{u + 1} Λ])).obj L)) :
@@ -107,15 +102,10 @@ theorem isIso_leftDerivedUpperStar_map_ev_of_etale {U X : Scheme.{u}} (u : U ⟶
   exact isIso_map_ev_of_isIso_ihomComparison L((u)^*[ModuleCat.{u + 1} Λ])
     ((isInvertible_iff_exists_derivedTensor _).2 h)
 
-/-- Blueprint `lem-pur-co-smooth-etale-locality`: Source-étale locality (family version).
+/-- Source-étale locality (family version).
 
 Invertibility is local for a jointly surjective family of étale morphisms `a i : U i ⟶ X`: if
-every `La_i^* L` is invertible, then so is `L`. The evaluation `L ⊗ᴸ RHom(L, Λ) ⟶ Λ` pulls back
-to an isomorphism along every `a i`
-(`AlgebraicGeometry.Etale.isIso_leftDerivedUpperStar_map_ev_of_etale`), and isomorphisms are
-detected by the family
-(`AlgebraicGeometry.Etale.isIso_of_forall_isIso_leftDerivedUpperStar_map_of_family`).
--/
+every `La_i^* L` is invertible, then so is `L`. -/
 theorem isInvertible_of_forall_isInvertible_leftDerivedUpperStar {X : Scheme.{u}} {ι : Type u}
     {U : ι → Scheme.{u}} (a : ∀ i, U i ⟶ X) [∀ i, Etale (a i)]
     (ha : ∀ x : X, ∃ (i : ι) (y : U i), (a i).base y = x)

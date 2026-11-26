@@ -10,7 +10,9 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # The existing native tensor as a normalized additive bifunctor
 
-Source: the underived tensor--Hom adjunction and Stacks 06YS, 06YU.
+## References
+
+* Stacks Project, Tags 06YS and 06YU.
 -/
 
 @[expose] public noncomputable section
@@ -88,20 +90,7 @@ private def tensorBifunctorForget :
     rfl)
 
 /-- The native underived tensor is additive, parameter-adjoint to the specified
-native internal Hom, and its ordinary comparison is evaluation-normalized.
-
-Source: the existing tensorIhomAdjunction and Stacks 06YS, 06YU;
-step 2 of native tensor geometry.
-(blueprint: lem-sf-native-weil-underived-tensor).
-
-Proof: use the existing tensorFunctor in the variable being tensored. The maps
-in its parameter are the mates of precomposition in ihomBifunctor. Mate functoriality
-gives identity and composition and the parameter adjunction. Forgetting a mate is
-the mate for Mod.ihomAdjunction, because both units and counits are the existing
-underlying module maps. Mod.ihomMap is defined by that mate, so parameter maps forget
-to Mod.tensorLeftMap. This proves additivity and makes the comparison the identity
-on underlying objects. The formula for inverse adjunction is therefore the ordinary
-uncurrying formula, with no scalar or sign. No derived category is constructed. -/
+native internal Hom, and its ordinary comparison is evaluation-normalized. -/
 theorem native_weil_underived_tensor :
     ∃ T : ProEtaleWeilSheaf k₀ l X ⥤ ProEtaleWeilSheaf k₀ l X ⥤
       ProEtaleWeilSheaf k₀ l X,

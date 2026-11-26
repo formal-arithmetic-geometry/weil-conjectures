@@ -18,7 +18,11 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralTensorTransitionCompati
 import all WeilConjectures.SecSmoothPurity.StrictCoefficient.ScalarCalculation.NormalizedScalarTensorTransitionsSupplement
 
 /-! # Composition of normalized finite scalar tensor maps
-(blueprint: lem-pur-integral-scalar-tensor-level-tower). -/
+
+## References
+
+* Stacks Project, Tags 03EL and 07A4.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -118,15 +122,7 @@ private theorem finite_tensor_map_section (W : AlgebraicGeometry.Scheme.{u}) (n 
   simp only [integralOperationsTensorLevel, TensorTotalProof.composite_map]
   with_unfolding_all exact h
 
-/-- Normalized finite tensor comparisons respect composition of coefficient maps.
-Source: Stacks Tags 03EL, 07A4; scalar comparison proof step 9 in the blueprint.
-(blueprint: lem-pur-integral-scalar-tensor-level-tower).
-Proof: precompose by the inverse scalar associator and apply the scalar adjunction.
-The finite tensor generator extensionality reduces to original pairs of sections.
-The unit formula, inverse associator formula and normalized tensor comparisons
-compute both sides. The total tensor map acts on the two sections; finite reduction
-and the associator multiplication formula identify its output with the direct
-comparison, since ring maps preserve one. -/
+/-- Normalized finite tensor comparisons respect composition of coefficient maps. -/
 theorem integralScalarTensorLevelTower (W : AlgebraicGeometry.Scheme.{u}) (n : ℕ)
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     ((integralOrdinaryScalar l L F j W).mapHomologicalComplex (.up ℤ)).map

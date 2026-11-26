@@ -11,11 +11,14 @@ public import Mathlib.Topology.Sheaves.Sheafify
 
 /-! # Extension by zero of abelian sheaves on an open subspace
 
-Source: Stacks Project, Sheaves, Definition 00A4 and Lemma 00A5
-(blueprint: def-sc-abelian-open-extension-by-zero).
+## Implementation details
 
 The direct sum over inclusions is the existing slice-site construction: it has one
-summand on opens contained in U and no summands on the other opens.
+summand on opens contained in `U` and no summands on the other opens.
+
+## References
+
+* Stacks Project, Tags 00A4 and 00A5.
 -/
 
 @[expose] public section
@@ -28,15 +31,13 @@ noncomputable section
 
 namespace TopCat.Sheaf
 
-/-- Pull a presheaf on the open subspace back to the slice of opens over U.
-Source: Stacks, Definition 00A4 (blueprint: def-sc-abelian-open-extension-by-zero). -/
+/-- Pull a presheaf on the open subspace back to the slice of opens over U. -/
 def openSlicePresheaf {X : TopCat.{u}} (U : Opens X)
     (G : TopCat.Presheaf AddCommGrpCat.{u} ((Opens.toTopCat X).obj U)) :
     (Over U)ᵒᵖ ⥤ AddCommGrpCat.{u} :=
   (Over.forget U).op ⋙ (Opens.map U.inclusion').op ⋙ G
 
-/-- Extension by zero before sheafification, using the existing slice-site direct sum.
-Source: Stacks, Definition 00A4 (blueprint: def-sc-abelian-open-extension-by-zero). -/
+/-- Extension by zero before sheafification, using the existing slice-site direct sum. -/
 def abelianOpenExtensionPresheaf {X : TopCat.{u}} (U : Opens X) :
     TopCat.Sheaf AddCommGrpCat.{u} ((Opens.toTopCat X).obj U) ⥤
       TopCat.Presheaf AddCommGrpCat.{u} X :=
@@ -45,40 +46,34 @@ def abelianOpenExtensionPresheaf {X : TopCat.{u}} (U : Opens X) :
       ((Over.forget U).op ⋙ (Opens.map U.inclusion').op) ⋙
     siteExtensionByZeroPresheaf U
 
-/-- Extension by zero is sheafification of the extension-by-zero presheaf.
-Source: Stacks, Definition 00A4 (blueprint: def-sc-abelian-open-extension-by-zero). -/
+/-- Extension by zero is sheafification of the extension-by-zero presheaf. -/
 def abelianOpenExtensionByZero {X : TopCat.{u}} (U : Opens X) :
     TopCat.Sheaf AddCommGrpCat.{u} ((Opens.toTopCat X).obj U) ⥤
       TopCat.Sheaf AddCommGrpCat.{u} X :=
   abelianOpenExtensionPresheaf U ⋙
     presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}
 
-/-- Literal restriction to the open subspace, by direct image of its opens.
-Source: Stacks, Lemma 00A5 (blueprint: def-sc-abelian-open-extension-by-zero). -/
+/-- Literal restriction to the open subspace, by direct image of its opens. -/
 def abelianOpenRestrictionPresheaf {X : TopCat.{u}} (U : Opens X)
     (F : TopCat.Sheaf AddCommGrpCat.{u} X) :
     TopCat.Presheaf AddCommGrpCat.{u} ((Opens.toTopCat X).obj U) :=
   U.isOpenEmbedding.functor.op ⋙ F.obj
 
 /-- Restriction is a sheaf: any open cover in U maps to the same open cover in X;
-existence and uniqueness of gluing follow from the sheaf condition for F.
-Source: Stacks, Lemma 00A5 (blueprint: def-sc-abelian-open-extension-by-zero). -/
+existence and uniqueness of gluing follow from the sheaf condition for F. -/
 theorem abelianOpenRestriction_isSheaf {X : TopCat.{u}} (U : Opens X)
     (F : TopCat.Sheaf AddCommGrpCat.{u} X) :
     CategoryTheory.Presheaf.IsSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj U))
       (abelianOpenRestrictionPresheaf U F) := by
   exact TopCat.Presheaf.isSheaf_of_isOpenEmbedding U.isOpenEmbedding F.property
 
-/-- Restriction as an abelian sheaf on the open subspace.
-Source: Stacks, Lemma 00A5 (blueprint: def-sc-abelian-open-extension-by-zero). -/
+/-- Restriction as an abelian sheaf on the open subspace. -/
 def abelianOpenRestriction {X : TopCat.{u}} (U : Opens X)
     (F : TopCat.Sheaf AddCommGrpCat.{u} X) :
     TopCat.Sheaf AddCommGrpCat.{u} ((Opens.toTopCat X).obj U) :=
   ⟨abelianOpenRestrictionPresheaf U F, abelianOpenRestriction_isSheaf U F⟩
 
-/-- An open contained in U is unchanged by taking its preimage in U and its image in X.
-Proof: the resulting open is V intersect U, which equals V by the inclusion.
-Source: Stacks, Definition 00A4 (blueprint: def-sc-abelian-open-extension-by-zero). -/
+/-- An open contained in `U` is unchanged by taking its preimage in `U` and its image in `X`. -/
 theorem openImage_preimage_eq {X : TopCat.{u}} (U V : Opens X) (h : V ≤ U) :
     U.isOpenEmbedding.functor.obj ((Opens.map U.inclusion').obj V) = V := by
   apply Opens.ext
@@ -93,8 +88,7 @@ theorem openImage_preimage_eq {X : TopCat.{u}} (U V : Opens X) (h : V ≤ U) :
 
 open Classical in
 /-- The presheaf counit is identity on the sole summand when V lies in U, and zero
-when there is no inclusion V into U. Source: Stacks, Lemma 00A5
-(blueprint: def-sc-abelian-open-extension-by-zero). -/
+when there is no inclusion V into U. -/
 def abelianOpenCounitApp {X : TopCat.{u}} (U : Opens X)
     (F : TopCat.Sheaf AddCommGrpCat.{u} X) (V : (Opens X)ᵒᵖ) :
     ((abelianOpenExtensionPresheaf U).obj (abelianOpenRestriction U F)).obj V ⟶
@@ -104,8 +98,7 @@ def abelianOpenCounitApp {X : TopCat.{u}} (U : Opens X)
       (openImage_preimage_eq U V.unop φ.le))).hom)
 
 /-- Naturality of the presheaf counit follows on each direct-sum injection from the
-restriction law of F; the empty-sum case has the unique zero map.
-Source: Stacks, Lemma 00A5 (blueprint: def-sc-abelian-open-extension-by-zero). -/
+restriction law of F; the empty-sum case has the unique zero map. -/
 theorem abelianOpenCounitApp_naturality {X : TopCat.{u}} (U : Opens X)
     (F : TopCat.Sheaf AddCommGrpCat.{u} X) {V W : (Opens X)ᵒᵖ} (a : V ⟶ W) :
     ((abelianOpenExtensionPresheaf U).obj (abelianOpenRestriction U F)).map a ≫
@@ -135,16 +128,14 @@ theorem abelianOpenCounitApp_naturality {X : TopCat.{u}} (U : Opens X)
   simp only [Functor.map_comp, eqToHom_map] at h'
   exact congrArg (fun f ↦ f.hom x) h'
 
-/-- The presheaf map inducing the counit after sheafification.
-Source: Stacks, Lemma 00A5 (blueprint: def-sc-abelian-open-extension-by-zero). -/
+/-- The presheaf map inducing the counit after sheafification. -/
 def abelianOpenPresheafCounit {X : TopCat.{u}} (U : Opens X)
     (F : TopCat.Sheaf AddCommGrpCat.{u} X) :
     (abelianOpenExtensionPresheaf U).obj (abelianOpenRestriction U F) ⟶ F.obj where
   app V := abelianOpenCounitApp U F V
   naturality _ _ a := abelianOpenCounitApp_naturality U F a
 
-/-- The counit j_! (F restricted to U) to F, induced by the presheaf counit.
-Source: Stacks, Lemma 00A5 (blueprint: def-sc-abelian-open-extension-by-zero). -/
+/-- The counit j_! (F restricted to U) to F, induced by the presheaf counit. -/
 def abelianOpenCounit {X : TopCat.{u}} (U : Opens X)
     (F : TopCat.Sheaf AddCommGrpCat.{u} X) :
     (abelianOpenExtensionByZero U).obj (abelianOpenRestriction U F) ⟶ F :=
@@ -152,8 +143,7 @@ def abelianOpenCounit {X : TopCat.{u}} (U : Opens X)
     (sheafifyLift (Opens.grothendieckTopology X) (abelianOpenPresheafCounit U F) F.property)
 
 open Classical in
-/-- The canonical inclusion of a section over V contained in U into j_! G(V).
-Source: Stacks, Definition 00A4 (blueprint: def-sc-abelian-open-extension-by-zero). -/
+/-- The canonical inclusion of a section over V contained in U into j_! G(V). -/
 def abelianOpenExtensionSection {X : TopCat.{u}} (U : Opens X)
     (G : TopCat.Sheaf AddCommGrpCat.{u} ((Opens.toTopCat X).obj U))
     (V : Opens X) (h : V ≤ U) :

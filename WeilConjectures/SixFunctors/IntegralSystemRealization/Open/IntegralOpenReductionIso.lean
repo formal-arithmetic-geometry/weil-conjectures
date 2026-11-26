@@ -10,6 +10,16 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Open.OpenReductionM
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 
 /-! # Invertibility of the canonical open reduction mate
+
+## Implementation details
+
+The derived mate is identified with the ordinary open mate on a K-flat representative, which
+is degreewise an isomorphism. No completeness, constructibility or geometric characteristic
+hypothesis is used.
+
+## References
+
+* [Stacks, Tag 03DI], [Stacks, Tag 06YS], [Stacks, Tag 06YY], [Stacks, Tag 0GL1]
 -/
 
 @[expose] public noncomputable section
@@ -21,18 +31,7 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The canonical open reduction mate is invertible on every derived object.
-Source: Stacks 03DI, 06YS, 06YY and 0GL1; the localization paragraph of
-`fix-prop-coherence.proof.md` (blueprint: lem-sf-integral-open-reduction-iso).
-
-Proof: pass to the localization of good K-flat complexes.  The open reduction
-localization formula identifies the derived mate with the ordinary open mate on a
-K-flat representative.  The ordinary mate is an isomorphism degreewise by the
-direct-sum open-extension comparison.  Derived localization preserves this
-isomorphism, and essential surjectivity of the localization transports it to every
-derived object.  No completeness, constructibility or geometric characteristic
-hypothesis is used.
--/
+/-- The canonical open reduction mate is invertible on every derived object. -/
 theorem integralOpenReductionIso (o : Operations l E)
     (m : RealizationModel l E o) {U V : Scheme.{u}}
     (j : U ⟶ V) [IsOpenImmersion j]

@@ -11,8 +11,13 @@ import WeilConjectures.TraceFormula.Scalar.ScalarModelRoosZeroLiftUniqueness
 
 /-! # Scalar change of a zero-shifted Roos lift
 
-Source: Stacks Project, Tags 06YY and 0941; Bhatt--Scholze, Definition 3.4.10
-and Proposition 3.5.1.
+A normalized scalar realization takes a compatible zero-shifted Roos lift to its scalar-extended
+lift.
+
+## References
+
+* Stacks Project, Tags 06YY and 0941.
+* Bhatt--Scholze, Definition 3.4.10 and Proposition 3.5.1.
 -/
 
 @[expose] public noncomputable section
@@ -36,41 +41,9 @@ variable (l : ℕ) [Fact l.Prime]
   (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (ι : E →ₐ[ℚ_[l]] L) (j : L →ₐ[ℚ_[l]] F) (X : Scheme.{u})
 
-/-- A normalized scalar realization takes a compatible zero-shifted Roos lift to
-its scalar-extended lift. This concerns one coefficient map and an arbitrary target
-system, without any scalar associator.
-
-Source: Stacks 06YY, 0941; Bhatt--Scholze, Definition 3.4.10, Proposition 3.5.1;
-step 2 of lem-trf-scalar-model-iterated-strict-calculation.
-(blueprint: lem-trf-scalar-model-roos-zero-lift).
-
-Proof in words: choose a simultaneous strict quotient presentation of the good
-ordinary scalar extension of P using SL.reductionModel. Change of rings
-preserves its K-flatness and flat terms. Normalize b on that presentation. Under the
-constant-tower/limit adjunction the zero-shifted map f is the compatible family
-of its unshifted quotient coordinates: resolve its target tower simultaneously
-by a K-injective tower, and apply integralConeCounitRealization to that family.
-The formula integralComparisonReductionCounit_formula changes this statement to
-the actual SL adjunction, including its whole-system coefficient-action counit.
-The chain-map equation for f, together with hf, makes these coordinates a
-compatible family commuting with the differential and all quotient transitions.
-Each coordinate is linear over the completed L coefficient ring; since the target
-at level n is a module over its nth quotient, the extension/restriction adjunction
-factors it through that quotient tensor complex. The quotient universal property
-makes the factors commute with transitions and differentials. Transport them
-through the chosen presentation's evaluation isomorphisms. Thus the transpose of
-f factors through the strict quotient presentation of the ordinary L extension
-of P by the resulting whole-system morphism. Apply ordinary coefficient extension
-and its universal cochain counit. Naturality of b.realization, the universal
-counit and the Roos bridge identifies the displayed left side with the Roos
-lift of this scalar-extended family, preceded by completedScalarCounit. On a
-sheafified nested tensor s tensor (t tensor x) its nth coordinate is the quotient of s tensored
-with the nth coordinate of f(t tensor x); this is exactly htensor. Both shifted
-coordinates vanish by hf and hg. Tensor balancing and sheafification extend
-the generator equations, while product and mapping-cocone extensionality give
-equality of the strict chain maps. Localizing proves the formula. The zero
-complex and repeated coefficient fields satisfy the same formulas; no
-invertibility of a completion map or faithfulness of derived evaluations is used. -/
+/-- A normalized scalar realization takes a compatible zero-shifted Roos lift to its scalar-extended
+lift. This concerns one coefficient map and an arbitrary target system, without any scalar
+associator. -/
 theorem scalarModelRoosZeroLift
     (SL : CoefficientDerivedSystemCalculus l L X)
     (ρL : IntegralComparisonRoosModel l L X)

@@ -11,7 +11,9 @@ import WeilConjectures.SixFunctors.Compact.CompactSupportInputTowerCompatibility
 
 /-! # The adjacent completed input transition
 
-Source: Stacks Tags 06YY and 07A6.
+## References
+
+* Stacks Project, Tags 06YY and 07A6.
 -/
 
 @[expose] public noncomputable section
@@ -26,9 +28,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The adjacent completed input reduction is the canonical derived transition.
 This is the specialization of the compact-support input tower compatibility to
-successive indices; it is the input-transition part of the direct-image formula.
-Source: Stacks Tags 06YY and 07A6.
-(blueprint: lem-sf-direct-image-input-transition-adjacent). -/
+successive indices; it is the input-transition part of the direct-image formula. -/
 theorem sfDirectImageInputTransition_adjacent
     (K : DerivedCategory (scalarReductionSource l E X)) (n : ℕ) :
     (scalarReductionDerivedRestriction l E X (n + 1)).map

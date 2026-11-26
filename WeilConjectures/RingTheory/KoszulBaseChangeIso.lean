@@ -14,7 +14,12 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 
 /-! # The Koszul complex under extension of scalars
 
-Source: Stacks Project, Tag 062H, the complex identification in the proof.
+Extension of scalars identifies the Koszul complex of `f` with the Koszul complex of the images
+of `f`, via the exterior bases in each degree.
+
+## References
+
+* [Stacks, Tag 062H]
 -/
 
 @[expose] public section
@@ -78,22 +83,7 @@ private theorem koszulBoundary_wedge
     hform n (fun i ↦ Finsupp.single (g i) 1)
 
 /-- Extension of scalars identifies the Koszul complex with the Koszul complex
-of the images of its generators. No flatness or regularity is required.
-Source: Stacks Project, Tag 062H, first equality in the proof
-(blueprint: lem-sc-koszul-base-change-iso).
-
-Proof: In degree n, use the exterior basis indexed by n-element subsets of Fin r.
-The base-extended exterior basis over A and the exterior basis over S have the
-same index set. Send each tensor 1 ⊗ e_I to the corresponding basis vector e_I
-and extend S-linearly. The inverse sends e_I to 1 ⊗ e_I; the basis expansion
-proves both inverse identities. The contraction formula gives the differential
-on e_I as the alternating sum of the wedges with one vector omitted, multiplied
-by the corresponding generator. Extension of scalars applies algebraMap A S
-to each coefficient, which is exactly the differential over S. Hence the
-component isomorphisms commute with differentials and assemble to a chain
-complex isomorphism. For n > r both bases are empty; for r = 0 the only
-nonzero term is degree zero. The basis construction also works for the zero
-ring, so neither properness nor nontriviality is needed. -/
+of the images of its generators. No flatness or regularity is required. -/
 theorem nonempty_koszulBaseChangeIso
     (A S : Type u) [CommRing A] [CommRing S] [Algebra A S]
     (r : ℕ) (f : Fin r → A) :

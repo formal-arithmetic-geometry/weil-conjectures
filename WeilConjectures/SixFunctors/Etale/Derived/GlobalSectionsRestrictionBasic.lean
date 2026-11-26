@@ -19,9 +19,8 @@ RΓ(X, K) ⟶ RΓ(X, Rf_* f^* K) ≅ RΓ(Y, f^* K)
 is derived global sections of the unit of the derived adjunction `f^* ⊣ Rf_*`
 (`AlgebraicGeometry.Etale.mapDerivedUpperStarLowerStarAdjunction`) followed by the Leray
 isomorphism (`AlgebraicGeometry.Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso`).
-It is the pullback map on cohomology used throughout the blueprint (for instance in
-`lemma-restriction-punctured-curve--1`: "pullback maps on cohomology are compatible with
-composition").
+It is the pullback map on cohomology; pullback maps on cohomology are compatible with
+composition.
 
 ## Main definitions
 
@@ -76,7 +75,7 @@ lemma globalSectionsRestriction_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
   simp only [globalSectionsRestriction, Category.assoc, ← h₂, ← Functor.map_comp_assoc, h₁]
 
 /-- Restricting `Rf_* F` along `f` and applying the counit `f^* Rf_* F ⟶ F` is the Leray
-isomorphism `RΓ(X, Rf_* F) ≅ RΓ(Y, F)`: this is the triangle identity of `f^* ⊣ Rf_*`. -/
+isomorphism `RΓ(X, Rf_* F) ≅ RΓ(Y, F)`. -/
 @[reassoc]
 lemma globalSectionsRestriction_comp_map_counit {X Y : Scheme.{u}} (f : Y ⟶ X)
     (F : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :

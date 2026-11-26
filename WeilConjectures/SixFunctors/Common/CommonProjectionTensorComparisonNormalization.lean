@@ -18,11 +18,7 @@ attribute [local reducible] GeneralAlgebraicallyClosedCoefficients.stageCategory
 attribute [local irreducible] rationalDerivedTensor rationalDerivedPullback
   commonStageDerivedTensor commonStageDerivedPullback
 
-/-- The supplied inclusion tensorator is the canonical tensorator in normalized coordinates.
-Source: thm-sf-pf-field.proof.md, Compatibility.
-(blueprint: lem-sf-common-projection-tensor-comparison-normalization).
-Proof: the coefficient invertibility instances are unique. Substitute their
-identity, unfold the supplied tensorator, and remove its three equality transports. -/
+/-- The supplied inclusion tensorator is the canonical tensorator in normalized coordinates. -/
 theorem commonProjectionTensorComparison_heq
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     (H : SixFunctorCommonStages D C) (E : Padic.FiniteCoefficientFields C.l C.Qbar)

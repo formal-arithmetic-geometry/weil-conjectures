@@ -16,10 +16,20 @@ import Mathlib.RingTheory.Finiteness.Small
 /-!
 # Finite domain factors from a product embedding
 
-Source: the coordinate-factor argument in the docstring of
-`exists_spread_generic_product_domains`, smooth purity blueprint,
-`lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9.
-(blueprint: lem-weil-pbc-finite-product-field-image-factors)
+A finite algebra embedded into a product of fields, containing the coordinate idempotents and
+clearing denominators coordinatewise, is a product of finite domains with those fraction fields.
+This is the coordinate-factor argument used for `exists_spread_generic_product_domains`.
+
+## Main results
+
+* `exists_finite_domain_factors_of_product_embedding`
+
+## Implementation details
+
+The factor `T j` is the image of the `j`-th coordinate map, a finite domain as a subring of a
+field. Surjectivity onto `∏ T j` uses lifts of the coordinate idempotents, and the denominator
+hypothesis gives `IsFractionRing (T j) (L j)`. Each `T j` is small by `Module.Finite.small`, and
+the factors are taken to be `Shrink (T j)` in the base ring's universe.
 -/
 
 @[expose] public section
@@ -30,25 +40,7 @@ universe u v
 
 /-- A finite algebra embedded into a product of fields, containing all coordinate
 idempotents and clearing denominators in every coordinate, is a product of finite domains
-whose fraction fields are those fields. The factors lie in the base ring's universe.
-
-Source: `lem-weil-pbc-spread-generic-product-domains`, proof step 2 and the
-universe-presentation part of step 3, from the finite-algebra calculation in the smooth
-purity blueprint `lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9.
-(blueprint: lem-weil-pbc-finite-product-field-image-factors)
-
-Proof: For each coordinate j, take T j to be the image subalgebra of the coordinate
-map. Its underlying ring is a domain because it is a subring of a field. It is a finite
-module as a quotient of C. The induced map from C to the product of T j is injective
-by injectivity of the original product map. Given a tuple in the product, choose a
-preimage of each coordinate, multiply it by a lift of the corresponding coordinate
-idempotent, and sum. This proves surjectivity, including the empty product case, where
-the sum is zero. A denominator identity expresses every element of L j as the ratio
-of two elements of T j, with denominator the image of a nonzero base element; base
-injectivity makes it nonzero. Apply IsFractionRing.of_field to the injective inclusion.
-Finally T j is small by Module.Finite.small; take D j to be Shrink T j and transport
-its inclusion, finiteness, domain, fraction-ring structures, and product equivalence.
-The transported inclusion commutes with the base map, giving the scalar tower. -/
+whose fraction fields are those fields. The factors lie in the base ring's universe. -/
 theorem exists_finite_domain_factors_of_product_embedding
     (R : Type u) [CommRing R] (C : Type v) [CommRing C] [Algebra R C]
     [Module.Finite R C] (r : ℕ) (L : Fin r → Type (max u v))

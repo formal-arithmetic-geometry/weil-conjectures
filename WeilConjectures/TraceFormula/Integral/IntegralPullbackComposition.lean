@@ -26,14 +26,21 @@ import WeilConjectures.PoincareDuality.Integral.IntegralSystemPullbackLiftAssoci
 /-!
 # Composition of completed integral derived pullbacks
 
-Source: Stacks Project, Tags 099N(2),(5) and 0D6D; Bhatt--Scholze,
-Lemmas 3.5.5 and 3.5.7
-(blueprint: lem-pod-integral-pullback-composition).
+Integral derived pullback has natural composition isomorphisms, with their specified finite
+reductions, associative composition law and whole-system normalization
+(`integralPullbackComposition`).
+
+## Implementation details
 
 All categories use modules over the completed integral coefficient sheaf. The
 positive exponent is n+1. The reduction comparison is the actual projection-adjoint
 map, expressed in the published finite ring-sheaf presentation. Quantification over
 all good representatives makes the reduction clause independent of choices.
+
+## References
+
+* Stacks Project, Tags 099N, 0D6D
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemmas 3.5.5 and 3.5.7
 -/
 
 @[expose] public noncomputable section
@@ -52,9 +59,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 The first factor is the actual projection-adjoint map, whose invertibility is precisely
 part (1) of integralOperations_preserve_constructible. The other factors only change
 finite pullback presentation and identify the reduction of the representative with
-that of K through the universal reduction counit.
-Source: Stacks Tag 099N(5); Bhatt--Scholze, Lemma 6.5.9(5)
-(blueprint: lem-pod-integral-pullback-composition). -/
+that of K through the universal reduction counit. -/
 def integralPullbackReductionIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -80,9 +85,7 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- A family of composition comparisons on the actual full constructible categories.
-The type includes every composable pair of morphisms of schemes with l invertible.
-Source: Stacks Tags 099N and 0D6D
-(blueprint: lem-pod-integral-pullback-composition). -/
+The type includes every composable pair of morphisms of schemes with l invertible. -/
 abbrev IntegralPullbackCompositionFamily :=
   ∀ {V W Z : Scheme.{u}}
     [∀ v : V, Invertible (l : V.residueField v)]
@@ -210,49 +213,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- Integral pullback has natural composition isomorphisms, with their specified
-finite reductions, associative composition law and whole-system normalization.
-
-Source: Stacks Tags 099N(2),(5), 0D6D, 0941; Bhatt--Scholze, Lemmas 3.5.5 and 3.5.7
-(blueprint: lem-pod-integral-pullback-composition).
-
-Proof:
-1. Use the reduction/total-limit adjunction of lem-coef-derived-system-evaluation-calculus
-on strict varying-coefficient systems. Exact finite inverse image is supplied by
-prop-weil-pbc-proetale-constant-exact; the simultaneous system model is
-lem-coef-semilinear-derived-sections. Reductions of one flat-term K-flat resolution
-remain K-flat (lem-pur-kflat-change-of-rings). Quotient tensor comparisons multiply
-coefficients and obey the cocycle. Pullback preserves these comparisons by
-lem-weil-pbc-ringed-topoi-derived-tensor-pullback. The integral construction and
-lem-pur-integral-operations-well-defined identify its functor with total limit after
-finite inverse image and reduction. Exact countable products and the natural Roos
-triangle (lem-weil-proetale-countable-products-exact and
-lem-weil-pbc-ringed-strict-tower-homotopy-limit) make this an identification on maps.
-2. The system-adjunction counit gives beta_f: R F_f -> U_f R. Its evaluations are
-the adjoints of the actual tower projections, hence the specified rho maps.
-lemma-sp-tower-adjunction-foundation--2 makes beta invertible on normalized systems.
-lem-pur-integral-operations-preserve-constructible types every pullback value in
-D^b_c. The triangle identity makes the adjunction unit eta invertible on these
-values, giving full faithfulness of reduction on the objects used below.
-3. Apply lem-weil-pbc-proetale-derived-pullback-composition on each finite quotient.
-Its termwise tensor reassociation commutes with quotient maps, so it gives a coherent
-system isomorphism a_hk. With B = U_h(beta_k) beta_h, set delta = B^{-1} a_hk beta_hk.
-Lift delta by eta_target^{-1} L(delta) eta_source. All factors are invertible and
-natural, giving c on the actual integral functors and their full subcategories.
-4. Evaluate B R(c) = a_hk beta_hk at every positive exponent. This is exactly the
-reduction equation below, after the canonical representative comparisons defining
-integralPullbackReductionIso. No subsequence of exponents or unramifiedness is used.
-5. Reduce both triple composites and identify their common target with U_j U_h U_k R.
-Naturality of beta and the equation in step 4 give respectively
-U_j(a_hk) a_j,hk beta_hkj and a_jh(U_k R) a_hj,k beta_hkj. Before localization both
-finite composites are the same tensor reassociation: their forward maps insert
-units, and their inverses multiply the three transported scalar factors. These
-formulas commute with all quotient transitions. The simultaneous system model
-therefore gives equality of system maps. Cancel the common invertible comparison
-and use full faithfulness from step 2 to obtain the integral associativity equation.
-The explicit eqToHom below only identifies the two parenthesizations of j >> h >> k.
-The last clause records the whole-system normalization of c used in step 3: its
-reduction composed with the system comparisons beta is the system compositor
-after beta_hk, before any finite evaluation. -/
+finite reductions, associative composition law and whole-system normalization. -/
 theorem integralPullbackComposition :
     ∃ c : IntegralPullbackCompositionFamily l E,
       (∀ {V W Z : Scheme.{u}}

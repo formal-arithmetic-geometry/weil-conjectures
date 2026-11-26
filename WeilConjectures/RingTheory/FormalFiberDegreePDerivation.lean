@@ -27,7 +27,24 @@ import Mathlib.RingTheory.RegularLocalRing.Polynomial
 /-!
 # Degree-p formal-fibre derivation component
 
-Source: Stacks Project, More on Algebra, Tag 07PR.
+Let `A = k[[x_1, …, x_n]][y_1, …, y_m]` over a field `k` of characteristic `p`, let `q` be a
+prime of `A`, and let `M ⊆ L` be finite purely inseparable extensions of the fraction field `K`
+of `A` with `L = M(z)`, `z ^ p = a ∈ M` and `[L : M] = p`. We construct an absolute derivation
+of `M ⊗_K (formal fibre of A at q)` taking a unit value on `a ⊗ 1`.
+
+## Implementation details
+
+The element `a` is not a `p`-th power in `M`, since otherwise injectivity of Frobenius would put
+`z` in `M`. Choose a finite `A`-subalgebra `B` of `M` with fraction field `M`, write `a = b / s`
+and set `c = s ^ (p - 1) * b = s ^ p * a`, which is again not a `p`-th power. A derivation of
+`B` which is nonzero on `c` is extended to the formal fibre; as `D (s ^ p) = 0`, its value on
+`a` is `s ^ (-p)` times its value on `c`, hence a unit.
+
+## References
+
+* [Stacks, Tag 07PR]
+* [Stacks, Tag 07PH]
+* [Stacks, Tag 07PE]
 -/
 
 @[expose] public section
@@ -176,23 +193,8 @@ private theorem exists_derivation_isUnit_of_not_pth_power
 
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A derivation detects the specified degree-p coefficient in the extended formal fibre.
-Source: Stacks Project, More on Algebra, Tags 07PR, 07PH and 07PE.
-(blueprint: new-lem-weil-pbc-degree-p-derivation-component)
-
-Proof: The element a is not a pth power in M. Otherwise injectivity of Frobenius
-in L implies z belongs to M, contradicting [L:M] = p > 1. Choose a finite
-A-subalgebra B with fraction field M. Write a = b/s, with s nonzero in B,
-and set c = s^(p-1)b, so c = s^p a in M and c is not a pth power in M.
-The power-series base is Noetherian complete local and B is finite type over it.
-Tag 07PH supplies an absolute derivation of B nonzero on c. Normality of A and
-pure inseparability give a unique prime r over q. Finite-extension completion
-and tensor associativity identify R with completion(B_r) tensor_B M.
-Extend the derivation through B_r, its completion, and this localization by
-Tag 07PE. Its value on c is the image of a nonzero element of M, hence is a unit.
-Characteristic p implies D(s^p) = 0. Thus D(i(a)) = i(s)^(-p) D(i(c)),
-which is a unit. Transport the derivation along the ring equivalence with R.
-If R is zero, zero is a unit, and the same identities still apply. -/
+/-- If `L = M(z)` with `z ^ p = a ∈ M` and `[L : M] = p`, then there is an absolute derivation
+`D` of `M ⊗_K (formal fibre of A at q)` such that `D (a ⊗ 1)` is a unit. -/
 theorem exists_derivation_isUnit_tmul_formalFiber
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (n m : ℕ)
     (q : Ideal (MvPolynomial (Fin m) (MvPowerSeries (Fin n) k))) [q.IsPrime]

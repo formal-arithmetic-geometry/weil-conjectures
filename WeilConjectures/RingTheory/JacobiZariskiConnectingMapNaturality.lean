@@ -11,8 +11,21 @@ public import Mathlib.RingTheory.Extension.ExtendScalars
 /-!
 # Naturality of the Jacobi–Zariski connecting map for a quotient
 
-Source: Stacks Project, Algebra, Tag 00S2, and More on Algebra, Tags 07E4 and 07E5
-(blueprint: lem-weil-pbc-jacobi-zariski-connecting-map-naturality).
+For `R → S → B` and `C = B/I`, the Jacobi–Zariski connecting map of `R → B → C` is compatible
+with that of `S → B → C` and with the conormal differential of the quotient presentation.
+
+## Implementation details
+
+The comparison `c` lifts the `S`-linear map sending a differential to `1 ⊗` its image in the
+differentials of `B`. The two connecting maps are compared on monomials via
+`Generators.H1Cotangent.δAux_monomial` and extended by polynomial induction, without choosing
+lifts of elements of `C` or expanding partial derivatives.
+
+## References
+
+* [Stacks, Tag 00S2]
+* [Stacks, Tag 07E4]
+* [Stacks, Tag 07E5]
 -/
 
 @[expose] public section
@@ -23,31 +36,14 @@ open TensorProduct KaehlerDifferential
 
 namespace Algebra
 
-/-- Source: Stacks Project, Tag 00S2 (whose proof omits the definitions of the maps),
-and the diagram in Tag 07E5, equivalence of (3) and (4)
-(blueprint: lem-weil-pbc-jacobi-zariski-connecting-map-naturality).
+/-- Naturality of the Jacobi–Zariski connecting map for a quotient `C = B/I`.
 
 The quotient extension `P` has ring `B` and kernel `I`; its cotangent module is `I/I²`.
 The map `P.cotangentComplex` is the conormal differential, and
 `P.h1CotangentEquivCotangent` is the canonical quotient isomorphism. The connecting
 maps are those of `jacobiZariski_homology_sequence`, with its coefficient formula.
 Existence of the linear comparison `c`, with the displayed generator formula, expresses
-that this formula is well defined. All four maps are bundled linear maps over the quotient.
-
-Proof. Construct `c` by lifting the S-linear map that sends a differential to
-`1 tensor` its image in the differentials of B. Tensor balancing gives its generator
-formula. Mathlib's `cotangentComplex_comp_h1CotangentEquivCotangent` identifies the
-quotient conormal differential composed with the quotient isomorphism with the
-connecting map for R -> B -> C. It remains to compare the two connecting maps.
-
-The default morphism from the canonical S-presentation of C to its B-presentation
-fixes every variable and is therefore the polynomial coefficient map. On a monomial,
-Mathlib's `Generators.H1Cotangent.δAux_monomial` shows that coefficient differentiation
-commutes with this map and `c`; polynomial induction and additivity extend the equality
-to every polynomial. Represent an arbitrary H1 class by a kernel polynomial, use
-`Extension.Cotangent.map_mk` to compute its image, and use
-`Generators.H1Cotangent.δ_eq_δAux` on both classes. This proves the remaining identity
-without choosing lifts of elements of C or expanding partial derivatives. -/
+that this formula is well defined. All four maps are bundled linear maps over the quotient. -/
 theorem jacobiZariski_connectingMap_naturality
     (R : Type u) (S : Type v) (B : Type w)
     [CommRing R] [CommRing S] [CommRing B]

@@ -15,8 +15,8 @@ Let `g : Z ⟶ Y` be a morphism of schemes. This file proves that the derived pu
 `AlgebraicGeometry.Etale.leftDerivedUpperStarMonoidal`, is braided for the derived braidings
 `AlgebraicGeometry.Etale.derivedBraidedCategory` (the Koszul braiding of complexes descended
 along K-flat resolutions). This is the hypothesis `hbr` of the double-dual statements in
-`WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.DoubleDual`, used for blueprint
-`lemma-double-dual-geometric-generic-fibre--1` and `definition-verdier-dual-evaluation--4`.
+`WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.DoubleDual`, used for the double dual on
+the geometric generic fibre and for the Verdier dual evaluation.
 
 ## Main statements
 
@@ -309,8 +309,7 @@ theorem leftDerivedUpperStar_map_braiding_hom_δ
 /-- **The derived pullback is braided.** For the monoidal structure
 `AlgebraicGeometry.Etale.leftDerivedUpperStarMonoidal` of `Lg^*` and the derived braidings
 `AlgebraicGeometry.Etale.derivedBraidedCategory`,
-`μ_{K, M} ≫ Lg^* β_{K, M} = β_{Lg^* K, Lg^* M} ≫ μ_{M, K}`. This is used for blueprint
-`lemma-double-dual-geometric-generic-fibre--1` and `definition-verdier-dual-evaluation--4`. -/
+`μ_{K, M} ≫ Lg^* β_{K, M} = β_{Lg^* K, Lg^* M} ≫ μ_{M, K}`. -/
 theorem leftDerivedUpperStar_μ_map_braiding_hom
     (K M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
     letI := leftDerivedUpperStarMonoidal A g
@@ -330,8 +329,7 @@ noncomputable def leftDerivedUpperStarLaxBraidedOfPreservesFlat : (L((g)^*[A])).
 
 end PreservesFlat
 
-/-- Blueprint `lemma-double-dual-geometric-generic-fibre--1` and
-`definition-verdier-dual-evaluation--4` (input): the braided axiom
+/-- The braided axiom
 `AlgebraicGeometry.Etale.LeftDerivedUpperStarBraided` holds for every morphism `g`, i.e. `Lg^*` is
 braided for its monoidal structure `AlgebraicGeometry.Etale.leftDerivedUpperStarMonoidal`. -/
 theorem leftDerivedUpperStarBraided [UpperStarPreservesFlat A] :

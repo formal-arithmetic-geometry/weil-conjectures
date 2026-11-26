@@ -13,27 +13,14 @@ public import WeilConjectures.WeilSheaf.TateTwistCohomology
 /-!
 # Tate twists commute with extension of scalars
 
-Following blueprint `proposition-weights-under-usual-operations--13`, the Tate twist `(-)(m)`
-commutes with finite scalar extension: for finite extensions `E ⊆ F` of `ℚ_ℓ` inside `ℚ̄_ℓ` and
-`m ∈ ℤ`,
+The Tate twist `(-)(m)` commutes with finite scalar extension: for finite extensions `E ⊆ F` of
+`ℚ_ℓ` inside `ℚ̄_ℓ` and `m ∈ ℤ`,
 
 `F ⊗_E E_X(m) ≅ F_X(m)`
 
 compatibly with the Weil structures, and similarly `ℚ̄_ℓ ⊗_E E_X(m) ≅ ℚ̄_ℓ(m)`. Here
 `E_X(m)` is the constant `E`-Weil sheaf `E_X` whose Weil structure is multiplied by the
 cyclotomic unit `χ_ℓ(σ)ᵐ` (`AlgebraicGeometry.FieldWeilSheaf.tateTwistConstant`).
-
-The proof has three steps.
-
-- The extension of scalars of the constant sheaf is the constant sheaf,
-  `Λ' ⊗_Λ Λ_X̄ ≅ Λ'_X̄` (`AlgebraicGeometry.ProEtale.fieldExtendScalarsUnitIso`), and this
-  identification is compatible with the canonical Weil structures
-  `Fr^* Λ_X̄ = (Fr⁻¹)_* Λ_X̄ ≅ Λ_X̄`. Both identifications are adjoint to the maps on functions
-  (composition with `e : Λ → Λ'` and pullback along `Fr`), which commute.
-- Extension of scalars along `e` turns multiplication by `b ∈ Λˣ` into multiplication by
-  `e(b)`, so it commutes with constant twists.
-- The inclusion `E → F` is a `ℚ_ℓ`-algebra map, so it sends the cyclotomic unit of `E` to that
-  of `F`.
 
 ## Main declarations
 
@@ -50,6 +37,25 @@ The proof has three steps.
 - `AlgebraicGeometry.FieldWeilSheaf.extendScalarsTateTwistConstantIso`: `F ⊗_E E_X(m) ≅ F_X(m)`.
 - `AlgebraicGeometry.FieldWeilSheaf.extendScalarsToAdicTateTwistConstantIso`:
   `ℚ̄_ℓ ⊗_E E_X(m) ≅ ℚ̄_ℓ(m)`.
+
+## Implementation details
+
+The proof has three steps.
+
+- The extension of scalars of the constant sheaf is the constant sheaf,
+  `Λ' ⊗_Λ Λ_X̄ ≅ Λ'_X̄` (`AlgebraicGeometry.ProEtale.fieldExtendScalarsUnitIso`), and this
+  identification is compatible with the canonical Weil structures
+  `Fr^* Λ_X̄ = (Fr⁻¹)_* Λ_X̄ ≅ Λ_X̄`. Both identifications are adjoint to the maps on functions
+  (composition with `e : Λ → Λ'` and pullback along `Fr`), which commute.
+- Extension of scalars along `e` turns multiplication by `b ∈ Λˣ` into multiplication by
+  `e(b)`, so it commutes with constant twists.
+- The inclusion `E → F` is a `ℚ_ℓ`-algebra map, so it sends the cyclotomic unit of `E` to that
+  of `F`; for `ℚ̄_ℓ` it sends the cyclotomic unit of `E` to `χ_ℓ(σ)`
+  (`AlgebraicGeometry.WeilSheaf.cyclotomicUnit`), and
+  `ℚ̄_ℓ(m) ≅ ℚ̄_ℓ ⊗ 𝓑_{χ_ℓ(σ)ᵐ}` (`AlgebraicGeometry.WeilSheaf.tateTwistSheafObjIso`).
+
+The lemmas on pulling back functions along `a`, `b` with `a ≫ b = 𝟙` are stated for arbitrary
+`a`, `b`, `h`: for the components of an isomorphism the kernel is slow to check the same proof.
 -/
 
 @[expose] public section
@@ -129,8 +135,7 @@ lemma fieldConstantSheafToLowerStar_id_eq (Y : Scheme.{u}) :
 
 omit [IsUltrametricDist Λ] in
 /-- For `a ≫ b = 𝟙`, pulling back functions along `b` and then along `a` is the identification
-`𝟭 ≅ (𝟙 Y)_* = (a ≫ b)_* ≅ b_* a_*`. (Stated for arbitrary `a`, `b`, `h`: for the components of
-an isomorphism the kernel is slow to check the same proof.) -/
+`𝟭 ≅ (𝟙 Y)_* = (a ≫ b)_* ≅ b_* a_*`. -/
 lemma fieldConstantSheafToLowerStar_comp_map_of_comp_eq_id {X Y : Scheme.{u}} (a : Y ⟶ X)
     (b : X ⟶ Y) (h : a ≫ b = 𝟙 Y) :
     fieldConstantSheafToLowerStar Λ b ≫
@@ -319,8 +324,7 @@ lemma adicConstantSheafToLowerStar_id_eq (Y : Scheme.{u}) :
   rfl
 
 /-- For `a ≫ b = 𝟙`, pulling back functions along `b` and then along `a` is the identification
-`𝟭 ≅ (𝟙 Y)_* = (a ≫ b)_* ≅ b_* a_*`. (Stated for arbitrary `a`, `b`, `h`: for the components of
-an isomorphism the kernel is slow to check the same proof.) -/
+`𝟭 ≅ (𝟙 Y)_* = (a ≫ b)_* ≅ b_* a_*`. -/
 lemma adicConstantSheafToLowerStar_comp_map_of_comp_eq_id {X Y : Scheme.{u}} (a : Y ⟶ X)
     (b : X ⟶ Y) (h : a ≫ b = 𝟙 Y) :
     adicConstantSheafToLowerStar l b ≫
@@ -673,14 +677,9 @@ lemma _root_.PadicAlgCl.units_map_inclusion_units_map_zpow
   rw [map_zpow, ← MonoidHom.comp_apply, ← Units.map_comp]
   rfl
 
-/-- Blueprint `proposition-weights-under-usual-operations--13`: the Tate twist commutes with finite
-scalar extension.
-
-For finite extensions `E ⊆ F` of `ℚ_ℓ` inside `ℚ̄_ℓ` and `m ∈ ℤ`, the extension of scalars
-`F ⊗_E E_X(m)` of the Tate twisted constant `E`-Weil sheaf is `F_X(m)`, compatibly with the
-Weil structures: `F ⊗_E E_X ≅ F_X` (`AlgebraicGeometry.FieldWeilSheaf.extendScalarsConstantIso`),
-and the inclusion `E → F`, a `ℚ_ℓ`-algebra map, sends the cyclotomic unit `χ_ℓ(σ)ᵐ` of `E` to
-that of `F`. -/
+/-- The Tate twist commutes with finite scalar extension: for finite extensions `E ⊆ F` of `ℚ_ℓ`
+inside `ℚ̄_ℓ` and `m ∈ ℤ`, the extension of scalars `F ⊗_E E_X(m)` of the Tate twisted constant
+`E`-Weil sheaf is `F_X(m)`, compatibly with the Weil structures. -/
 noncomputable def extendScalarsTateTwistConstantIso {E F : FiniteIntermediateField l}
     (h : E ≤ F) (m : ℤ) :
     (ProEtaleFieldWeilSheaf.extendScalars (continuous_inclusion_finiteIntermediateField h)
@@ -703,15 +702,9 @@ lemma _root_.PadicAlgCl.units_map_val_units_map_zpow (E : IntermediateField ℚ_
   rw [map_zpow, ← MonoidHom.comp_apply, ← Units.map_comp]
   rfl
 
-/-- Blueprint `proposition-weights-under-usual-operations--13`: the Tate twist commutes with scalar
-extension to `ℚ̄_ℓ`.
-
-For a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and `m ∈ ℤ`, the extension of scalars
-`ℚ̄_ℓ ⊗_E E_X(m)` of the Tate twisted constant `E`-Weil sheaf is the Tate sheaf `ℚ̄_ℓ(m)`,
-compatibly with the Weil structures: `ℚ̄_ℓ ⊗_E E_X ≅ ℚ̄_ℓ`
-(`AlgebraicGeometry.FieldWeilSheaf.extendScalarsToAdicConstantIso`), the inclusion `E → ℚ̄_ℓ`
-sends the cyclotomic unit of `E` to `χ_ℓ(σ)` (`AlgebraicGeometry.WeilSheaf.cyclotomicUnit`), and
-`ℚ̄_ℓ(m) ≅ ℚ̄_ℓ ⊗ 𝓑_{χ_ℓ(σ)ᵐ}` (`AlgebraicGeometry.WeilSheaf.tateTwistSheafObjIso`). -/
+/-- The Tate twist commutes with scalar extension to `ℚ̄_ℓ`: for a finite extension `E ⊆ ℚ̄_ℓ` of
+`ℚ_ℓ` and `m ∈ ℤ`, the extension of scalars `ℚ̄_ℓ ⊗_E E_X(m)` of the Tate twisted constant
+`E`-Weil sheaf is the Tate sheaf `ℚ̄_ℓ(m)`, compatibly with the Weil structures. -/
 noncomputable def extendScalarsToAdicTateTwistConstantIso
     (E : IntermediateField ℚ_[l] (PadicAlgCl l)) [FiniteDimensional ℚ_[l] E] (m : ℤ) :
     (ProEtaleFieldWeilSheaf.extendScalarsToAdic (e := E.val) continuous_subtype_val

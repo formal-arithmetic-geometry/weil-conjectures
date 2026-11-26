@@ -19,25 +19,17 @@ the compatible `A`-algebra maps; its colimit
 
 `H_A(C̄) = colim_{N_A(C̄)} B`
 
-comes with an `A`-algebra map to `C̄` (blueprint
-`proposition-extension-zero-restriction-closed-subscheme`). When `C̄` is an ind-étale algebra over
-`A ⧸ I`, `H_A(C̄)` is an ind-étale `A`-algebra lifting `C̄`: the reduction
-`H_A(C̄) ⧸ I H_A(C̄) ⟶ C̄` is an isomorphism (blueprint
-`proposition-extension-zero-restriction-closed-subscheme`). This is the ring-theoretic input to
-lifting pro-étale coverings of a closed subscheme
-(`proposition-extension-zero-restriction-closed-subscheme`).
+comes with an `A`-algebra map to `C̄`. When `C̄` is an ind-étale algebra over `A ⧸ I`, `H_A(C̄)`
+is an ind-étale `A`-algebra lifting `C̄`: the reduction `H_A(C̄) ⧸ I H_A(C̄) ⟶ C̄` is an
+isomorphism. This is the ring-theoretic input to lifting pro-étale coverings of a closed
+subscheme.
 
 ## Implementation notes
 
 The objects of `N_A(C̄)` are taken to be the quotients `A[x₁, …, xₙ] ⧸ J` that are étale over
 `A`, so that `N_A(C̄)` is a small category (`Algebra.ClosedLift.Index`); every étale algebra of
 finite presentation is isomorphic to such a quotient, so this is a skeleton-like small model of
-the blueprint's indexing category, with the same colimit.
-
-The two facts about this construction that belong to the subsection
-`proposition-extension-zero-restriction-closed-subscheme` of the blueprint, that `N_A(C̄)` is
-filtered (`proposition-extension-zero-restriction-closed-subscheme`) and the reduction isomorphism
-(`proposition-extension-zero-restriction-closed-subscheme`), are stated here for use downstream.
+the indexing category of all étale algebras, with the same colimit.
 
 ## Main definitions
 
@@ -59,8 +51,7 @@ variable (A : Type u) [CommRing A] (C : Type u) [CommRing C] [Algebra A C]
 
 namespace ClosedLift
 
-/-- The objects of the indexing category `N_A(C̄)` of blueprint
-`proposition-extension-zero-restriction-closed-subscheme`: an étale `A`-algebra, presented as a
+/-- The objects of the indexing category `N_A(C̄)`: an étale `A`-algebra, presented as a
 quotient `A[x₁, …, xₙ] ⧸ J`, together with an `A`-algebra map to `C̄`. -/
 structure Index where
   /-- The number of variables of the presentation. -/
@@ -116,9 +107,8 @@ noncomputable def coconeC : Cocone (diagram A C) where
 
 end ClosedLift
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`: for an `A`-algebra `C̄`,
-the `A`-algebra `H_A(C̄) = colim_{N_A(C̄)} B`, the colimit of the étale `A`-algebras `B` with an
-`A`-algebra map to `C̄`. -/
+/-- For an `A`-algebra `C̄`, the `A`-algebra `H_A(C̄) = colim_{N_A(C̄)} B`, the colimit of the
+étale `A`-algebras `B` with an `A`-algebra map to `C̄`. -/
 def ClosedLift : Type u :=
   (colimit (ClosedLift.diagram A C) : CommAlgCat.{u} A)
 
@@ -130,8 +120,7 @@ noncomputable instance : Algebra A (ClosedLift A C) :=
 
 namespace ClosedLift
 
-/-- The map `H_A(C̄) ⟶ C̄` of blueprint `proposition-extension-zero-restriction-closed-subscheme`,
-induced by the maps `B ⟶ C̄` of the objects of `N_A(C̄)`. -/
+/-- The map `H_A(C̄) ⟶ C̄` induced by the maps `B ⟶ C̄` of the objects of `N_A(C̄)`. -/
 noncomputable def toAlgHom : ClosedLift A C →ₐ[A] C :=
   (colimit.desc (diagram A C) (coconeC A C)).hom
 
@@ -149,9 +138,7 @@ private theorem exists_index (B : Type u) [CommRing B] [Algebra A B]
     (inferInstance : Algebra.FinitePresentation A B)
   exact ⟨⟨n, J, Algebra.Etale.of_equiv e.symm, q.comp e.toAlgHom⟩, e, rfl⟩
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme` (subsection
-`proposition-extension-zero-restriction-closed-subscheme`): the indexing category `N_A(C̄)` of
-`proposition-extension-zero-restriction-closed-subscheme` is filtered. -/
+/-- The indexing category `N_A(C̄)` is filtered. -/
 instance isFiltered_index : IsFiltered (Index A C) := by
   exact {
     nonempty := by
@@ -240,8 +227,7 @@ private theorem exists_rep (x : ClosedLift A C) :
   exact Types.jointly_surjective_of_isColimit
     (isColimitOfPreserves (forget (CommAlgCat A)) (colimit.isColimit (diagram A C))) x
 
-/-- An element of `H_A(C̄)` whose image in `C̄` is a unit is a unit: lift the inverse along a
-localization of a representing étale stage. -/
+/-- An element of `H_A(C̄)` whose image in `C̄` is a unit is a unit. -/
 theorem isUnit_of_isUnit_image (x : ClosedLift A C)
     (hx : IsUnit (toAlgHom A C x)) : IsUnit x := by
   obtain ⟨X, b, rfl⟩ := exists_rep A C x
@@ -270,8 +256,7 @@ lemma map_le_ker_toAlgHom :
   rw [IsScalarTower.algebraMap_apply A (A ⧸ I) C, Ideal.Quotient.algebraMap_eq,
     Ideal.Quotient.eq_zero_iff_mem.2 ha, map_zero]
 
-/-- The reduction `H_A(C̄) ⧸ I H_A(C̄) ⟶ C̄` of blueprint
-`proposition-extension-zero-restriction-closed-subscheme`. -/
+/-- The reduction `H_A(C̄) ⧸ I H_A(C̄) ⟶ C̄`. -/
 noncomputable def reduction :
     ClosedLift A C ⧸ I.map (algebraMap A (ClosedLift A C)) →+* C :=
   Ideal.Quotient.lift _ (toAlgHom A C : ClosedLift A C →+* C) (map_le_ker_toAlgHom A C I)
@@ -309,10 +294,8 @@ theorem surjective_toAlgHom [Algebra.IndEtale (A ⧸ I) C] :
   rw [toAlgHom_ι, hf]
   simpa using hqa
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme` (subsection
-`proposition-extension-zero-restriction-closed-subscheme`): for an ind-étale `A ⧸ I`-algebra `C̄`,
-the reduction `H_A(C̄) ⧸ I H_A(C̄) ⟶ C̄` of the lift `H_A(C̄)` of
-`proposition-extension-zero-restriction-closed-subscheme` is an isomorphism. -/
+/-- For an ind-étale `A ⧸ I`-algebra `C̄`, the reduction `H_A(C̄) ⧸ I H_A(C̄) ⟶ C̄` of the lift
+`H_A(C̄)` is an isomorphism. -/
 theorem bijective_reduction [Algebra.IndEtale (A ⧸ I) C] :
     Function.Bijective (reduction A C I) := by
   let H := ClosedLift A C

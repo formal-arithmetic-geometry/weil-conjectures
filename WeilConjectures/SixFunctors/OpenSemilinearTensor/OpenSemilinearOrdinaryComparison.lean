@@ -12,7 +12,19 @@ import WeilConjectures.SixFunctors.OpenSemilinearTensor.OpenStrictScalarTranspor
 import WeilConjectures.SmoothPurity.Pur.PurSequenceOrdinaryFactorization
 /-! # Ordinary open scalar comparisons
 
-Source: Stacks Project, Modules on Sites, Tags 0E8I and 03DI.
+We construct the ordinary slice projection and scalar comparisons for an open immersion, retaining
+the strict quotient maps of the ordinary sequence-site factorizations on `X` and `U`.
+
+## Implementation details
+
+The normalized slice tensor formula is transported through the completed coefficient equivalence,
+and the strict scalar transport is applied to the two ordinary reductions. Each finite tensor
+comparison is obtained by evaluating the strict isomorphism and conjugating by the recorded
+evaluations; its scalar-unit normalization supplies the generator field.
+
+## References
+
+* Stacks 0E8I, 03DI, 03DJ, 03EK, 0941
 -/
 
 @[expose] public noncomputable section
@@ -63,19 +75,10 @@ private theorem ordinaryScalarEvaluationComparison_components
         (IntegralOpenReduction.finiteExtension l E j o n).map
           ((AU.evaluation n).hom.app M)) using 1 <;> rfl
 
-/-- The ordinary slice projection and scalar comparisons, retaining strict quotient maps.
-Source: Stacks 0E8I, 03DI, 03DJ, 03EK and 0941
-(blueprint: lem-sf-open-semilinear-ordinary-comparison).
-
-Proof: use the normalized coefficient transport for the supplied localization.
-Retain the ordinary reductions and all quotient equations from the existing sequence
-factorization on X and U. Transport the normalized slice tensor formula through the
-completed coefficient equivalence, using its actual counit on the restricted factor.
-Apply the strict scalar transport to the two ordinary reductions; the equality of the
-open systems carries the given section normalization to that transport. Define each
-finite tensor comparison by evaluating the strict isomorphism and conjugating by the
-recorded evaluations. Its scalar-unit normalization supplies the generator field.
-Cancelling AX's evaluation with its inverse proves the displayed component equation. -/
+/-- For semilinear derived sections whose restriction evaluations are the identity on sections,
+there are open coefficient operations, ordinary reductions on `X` and `U`, and ordinary slice
+projection and scalar comparisons, with the open systems given by the localization of the
+sections and the finite scalar comparisons compatible with the recorded evaluations. -/
 theorem openSemilinearOrdinaryComparison
     (sections : SemilinearDerivedSectionsData.{t + 1, t, max u (t + 1)}
       (ProEt.topology X) (IntegralOpenReduction.rings l E X)

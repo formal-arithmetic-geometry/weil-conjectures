@@ -14,9 +14,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDim
 
 Let `k` be a field, `f : X ⟶ Y` a morphism of `k`-schemes of finite type with `dim X ≤ d`, and
 `Λ` a torsion ring. The higher direct images `R^q f_*` of étale sheaves of `Λ`-modules vanish for
-`q > 2d` (`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_forall_topologicalKrullDim_le`,
-blueprint `lemma-uniform-bounds-pro-etale-affines` and `theorem-results-from-etale-theory--4`), so
-the unbounded derived direct image `Rf_*` sends `D^{≤ n}` into `D^{≤ n + 2d}`
+`q > 2d` (`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_forall_topologicalKrullDim_le`),
+so the unbounded derived direct image `Rf_*` sends `D^{≤ n}` into `D^{≤ n + 2d}`
 (`AlgebraicGeometry.Etale.isLE_rightDerivedLowerStar_obj`), and being left t-exact it sends
 `D^{≥ n}` into `D^{≥ n}` (`AlgebraicGeometry.Etale.isGE_rightDerivedLowerStar_obj`).
 -/
@@ -38,15 +37,10 @@ namespace Etale
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- **Vanishing of the higher direct images above twice the dimension, over an arbitrary
-field** (blueprint `theorem-results-from-etale-theory--4` without the separably closed
-hypothesis).
-
-Let `k` be a field, `f : X ⟶ Y` a morphism of `k`-schemes of finite type with `dim X ≤ d`, and
-`Λ` a torsion ring. Then `R^q f_* F = 0` for every étale sheaf `F` of `Λ`-modules on `X` and every
-`q > 2d`, the derived functors being those of the direct image `f_*` of sheaves of `Λ`-modules.
-The base changes of `X` to field extensions of `k` have dimension at most `d`
-(`AlgebraicGeometry.topologicalKrullDim_pullback_le`), so this is
-`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_forall_topologicalKrullDim_le`. -/
+field.** Let `k` be a field, `f : X ⟶ Y` a morphism of `k`-schemes of finite type with `dim X ≤ d`,
+and `Λ` a torsion ring. Then `R^q f_* F = 0` for every étale sheaf `F` of `Λ`-modules on `X` and
+every `q > 2d`, the derived functors being those of the direct image `f_*` of sheaves of
+`Λ`-modules. -/
 theorem isZero_rightDerived_lowerStar_of_two_mul_lt (hΛ : IsAddTorsion Λ) {k : Type u}
     [Field k] {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
     [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
@@ -66,8 +60,7 @@ theorem isZero_rightDerived_lowerStar_of_two_mul_lt (hΛ : IsAddTorsion Λ) {k :
 /-- **The derived direct image raises degrees by at most twice the dimension.** Let `k` be a
 field, `f : X ⟶ Y` a morphism of `k`-schemes of finite type with `dim X ≤ d`, and `Λ` a torsion
 ring. If `K ∈ D(X_ét, Λ)` vanishes above `n`, then `Rf_* K` vanishes above `n + 2d`. No
-boundedness below is needed: this is `CategoryTheory.Functor.isLE_rightDerivedFunctor_obj` for
-the uniform vanishing `AlgebraicGeometry.Etale.isZero_rightDerived_lowerStar_of_two_mul_lt`. -/
+boundedness below is needed. -/
 theorem isLE_rightDerivedLowerStar_obj (hΛ : IsAddTorsion Λ) {k : Type u}
     [Field k] {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
     [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]

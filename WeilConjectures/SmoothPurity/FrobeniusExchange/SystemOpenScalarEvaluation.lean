@@ -11,7 +11,19 @@ import WeilConjectures.SmoothPurity.FrobeniusExchange.SystemOpenScalarEvaluation
 
 /-! # Evaluation of the open scalar mate
 
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03DI and 07A6.
+Evaluation takes the open system scalar mate to the finite scalar transpose of the open
+restriction comparison.
+
+## Implementation details
+
+The inverse mate is evaluated first (see the core file); inverting the specified open
+evaluation mates and the system open scalar mate gives the forward equation, which is then
+transposed under the finite scalar adjunction.
+
+## References
+
+* W. Zheng, Construction 4.1 and Lemma 4.10
+* Stacks Project, Tags 03DI, 06YY and 07A6
 -/
 
 @[expose] public noncomputable section
@@ -23,8 +35,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Sc
 namespace WeilConjectures.FrobeniusExchange
 open AlgebraicGeometry.Scheme.FiniteCompactScalar
 
-/-- The finite scalar transpose of the specified open restriction comparison.
-Source: Stacks 03DI and 07A6 (blueprint: lem-sf-system-open-scalar-evaluation). -/
+/-- The finite scalar transpose of the specified open restriction comparison. -/
 def finiteOpenScalar
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :
@@ -36,8 +47,7 @@ def finiteOpenScalar
     (TwoSquare.mk _ _ _ _
       (Functor.mapDerivedCategorySquareIso (sfOpenRestriction j φ)).hom))
 
-/-- Evaluation of open extension, inverse to the specified open-adjunction mate.
-Source: Zheng 4.10 (blueprint: lem-sf-system-open-scalar-evaluation). -/
+/-- Evaluation of open extension, inverse to the specified open-adjunction mate. -/
 def systemOpenFiniteEvaluation
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] {X Z : Scheme.{u}} (j : X ⟶ Z)
@@ -49,28 +59,7 @@ def systemOpenFiniteEvaluation
   letI := systemOpenEvaluationInv_isIso l E j n
   (asIso (systemOpenEvaluationInv l E j n)).symm
 
-/-- Evaluation takes the forward open system scalar map to the finite scalar transpose.
-
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03DI, 06YY and 07A6;
-step 3, open factor, of lem-sf-compact-scalar-evaluation-square.
-(blueprint: lem-sf-system-open-scalar-evaluation).
-
-Proof: first compute the inverse mate defining systemOpenScalarInv. The exact ordinary
-open adjunction evaluates with its original units and counits. Its scalar/pullback
-comparison is the balanced tensor map on the open, and both extensions vanish off it.
-Thus evaluation of the inverse mate is the inverse finite open scalar comparison,
-through the scalar evaluation maps normalized by restriction transposition. Universal
-cochain counits identify the generic scalar models with the fixed ones, and their
-adjoint-uniqueness maps preserve this equation. Invert the two specified open evaluation
-mates and the system open scalar mate. The inverse-pair identities and functoriality
-of evaluation give the forward equation. Finally transpose under the finite scalar
-adjunction: the finite open restriction map is the unique ordinary open comparison
-normalized by its unit; the sectionwise tensor formula and triangle identity identify
-its scalar transpose with the forward open scalar comparison. This is finiteOpenScalar.
-Localization of the actual exact open functors retains these unit equations on all
-unbounded complexes. Naturality moves the scalar evaluation maps to the displayed
-ends. The calculation includes the empty open, identity open, zero complex and n=0;
-no constructibility, boundedness, quotient-flatness or evaluation-faithfulness is used. -/
+/-- Evaluation takes the forward open system scalar map to the finite scalar transpose. -/
 theorem systemOpenScalar_finiteEvaluation
     (l : ℕ) [Fact l.Prime]
     (E L : Type u) [Field E] [Field L]

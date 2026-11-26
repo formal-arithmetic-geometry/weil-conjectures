@@ -13,7 +13,9 @@ import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedModelN
 
 /-! # Transport of already descended ringed tensor comparisons to native modules
 
-Source: Stacks 06YS, 06YU and 0FPT; change of additive ringed presentation.
+## References
+
+* Stacks Project, Tags 06YS, 06YU and 0FPT.
 -/
 
 @[expose] public section
@@ -23,42 +25,8 @@ open CategoryTheory CategoryTheory.Limits Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
 /-- Transfer a supplied, normalized ringed tensor comparison across the two underived
-module equivalences. This assertion performs no construction of an action site and
-no descent of a chain comparison to a derived comparison: that comparison is an input.
-The coefficient-unit normalization of the final theorem is a separate groupoid calculation.
-
-Source: native tensor geometry, transport clauses of steps 1--3; Stacks 06YS,
-06YU and 0FPT; the normalized tensor comparison of ringed_forget_tensor_descent.
-(blueprint: lem-sf-native-weil-tensor-ringed-transport).
-
-Proof: lift the two additive equivalences termwise and localize. Their quasi-inverse
-functors and unit and counit isomorphisms remain inverse after localization, so these
-are equivalences of the actual derived categories of complexes of fixed pairs.
-The already constructed nativeWeilRingedMonoidal and nativeWeilRingedSymmetric
-are fixed; no native monoidal structure or symmetry is chosen here. Transport the underived
-ringed tensor through the same equivalence. Uniqueness of left adjoints to the
-native sheaf Hom identifies it with the native underived tensor; the Hom-square
-in b fixes this identification by evaluation. Apply the total-complex comparison
-in each variable. Equivalences preserve coproducts and acyclicity, so K-flatness
-and K-flat localization transport; for ordinary forgetting use the exact orbit-sum
-left adjoint, whose identity summand makes an ordinary acyclic tensor test a retract
-of a forgotten native test. Thus every native K-flat complex has ordinary K-flat
-image, without requiring flat terms. The one-K-flat ringed model gives the native
-model and its naturality; the supplied native chain comparison gives chain_summand directly.
-For the ordinary internal Hom, the underived equivalence preserves the products
-in its Hom complexes, and it and its inverse preserve K-injectives because their
-left adjoints are exact. Thus ordinaryHom and the specified ordinary representative
-factors identify the two ordinary derived Hom functors, naturally on every resolution.
-Identify the transported ordinary tensor with S.tensor using the two tensor--Hom
-adjunctions and hS's componentwise uncurrying. Their counit equations identify the
-ordinary model, and the signed-swap equations in hS identify betaA with beta under
-this tensor comparison; hmonoidal fixes the associator and unitors. Conjugate
-d.derived by the two equivalences, the localized square of b, and this ordinary
-tensor identification to get t. Its representative equation is exactly the
-model_forget equation with both exact-forgetting factors. Transport the four
-coherence equations of d.coherence to get c. These constructions give the seven
-fields of NativeWeilTensorPresentation; no native derived closed adjunction is
-used. All operations are on unbounded complexes, and apply to zero and empty sites. -/
+module equivalences. The comparison of derived tensors is an input here; no action site is
+constructed and no chain comparison is descended. -/
 theorem native_weil_tensor_ringed_transport
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})

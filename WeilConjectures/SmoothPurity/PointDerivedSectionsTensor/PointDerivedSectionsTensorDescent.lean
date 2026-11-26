@@ -68,13 +68,15 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Derived descent of the point sections-tensor comparison
 
-Source: Stacks Project, sites-cohomology.tex, Tag 06YY (lemma-derived-base-change),
-derived.tex, Tags 015F and 06XN, and categories.tex, Tag 04VG
-(blueprint: lem-weil-point-derived-sections-tensor-descent).
+## Implementation details
 
 The ordinary and derived extensions and their counit are the published constructions.
 The assertion retains the representative normalization, every K-flat resolution, and
 naturality on roofs. All complexes and derived categories are unbounded.
+
+## References
+
+* Stacks Project, Tags 015F, 03CW, 04VG, 06XN and 06YY.
 -/
 
 @[expose] public noncomputable section
@@ -168,20 +170,16 @@ variable {k : Type t} [Field k] {l : ℕ} [Fact l.Prime]
   [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   {ι : E →ₐ[ℚ_[l]] L} (d : PointFiniteFreeSectionsTensorData k l E L ι)
 
-/-- Sections with their constant-value integral action, at the source coefficient field.
-Source: Stacks 03CW (blueprint: lem-weil-point-derived-sections-tensor-descent). -/
+/-- Sections with their constant-value integral action, at the source coefficient field. -/
 abbrev sectionsE := pointFiniteFreeEvaluation k l E d.coefficientE
 
-/-- Sections with their constant-value integral action, at the target coefficient field.
-Source: Stacks 03CW (blueprint: lem-weil-point-derived-sections-tensor-descent). -/
+/-- Sections with their constant-value integral action, at the target coefficient field. -/
 abbrev sectionsL := pointFiniteFreeEvaluation k l L d.coefficientL
 
-/-- The source ordinary composite A(C) = Gamma(C) tensor O_L, before localization.
-Source: Stacks 06YY (blueprint: lem-weil-point-derived-sections-tensor-descent). -/
+/-- The source ordinary composite A(C) = Gamma(C) tensor O_L, before localization. -/
 abbrev A := sectionsE d ⋙ pointFiniteFreeModuleTensor.{t, u} l E L ι
 
-/-- The target ordinary composite B(C) = Gamma(C tensor R_L), before localization.
-Source: Stacks 06YY (blueprint: lem-weil-point-derived-sections-tensor-descent). -/
+/-- The target ordinary composite B(C) = Gamma(C tensor R_L), before localization. -/
 abbrev B := completedOrdinaryScalarExtension l E L ι (Spec (.of k)) ⋙ sectionsL d
 
 end PointDerivedSectionsTensor

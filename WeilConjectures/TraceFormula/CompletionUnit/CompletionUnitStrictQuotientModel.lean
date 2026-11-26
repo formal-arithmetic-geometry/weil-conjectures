@@ -11,17 +11,22 @@ import WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitCanonicalModels
 /-!
 # The actual completion unit on a strict quotient cone
 
-Source: blueprint main-20261015, trace formula, rational Frobenius integral model,
-proof (2)--(3); Stacks 07A6, 09T5, 0D6E, 0941 and 08TC. This is the normalization
-refinement of those constructions, not a verbatim assertion of a Stacks tag.
-(blueprint: lem-trf-completion-unit-strict-quotient-model).
+The canonical ordinary and derived comparison data exist, together with the whole-morphism
+formula for the actual completion unit on a strict quotient cone.
+
+## Implementation details
 
 The auxiliary structures package canonical constructions and their normalization
 conditions. They introduce no alternative tensor, limit, or derived category.
-The theorem asserts their existence together with the whole-morphism unit formula.
 The compatible-model construction is isolated in `canonicalModels`; the proof here
 derives the cone, unit and two-resolution formulas from its normalizations.
 Index n denotes the positive exponent n+1. Site and coefficient universes are independent.
+These are normalization refinements of the Stacks constructions, not verbatim assertions of
+Stacks tags.
+
+## References
+
+* Stacks Project, Tags 07A6, 09T5, 0D6E, 0941 and 08TC
 -/
 
 -- After pruning, this module only keeps private declarations.

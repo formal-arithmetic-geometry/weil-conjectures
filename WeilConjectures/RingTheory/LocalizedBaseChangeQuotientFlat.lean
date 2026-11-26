@@ -15,8 +15,20 @@ import WeilConjectures.RingTheory.Flat.LocalizationPreservesFlatness
 /-!
 # Flat quotients after localized base change
 
-Source: Stacks Project, Algebra, Tag 00MO.
-(blueprint: lem-weil-pbc-localized-base-change-quotient-flat)
+If `R/I ⊗_R M` is flat over `R/I`, then the corresponding quotient of the localized base change
+`S' ⊗_S M` is flat over `R'/IR'`.
+
+## Implementation details
+
+Flat base change makes `Q' ⊗_R M` flat over `Q' = R'/IR'`. Tensor cancellation identifies
+`(Q' ⊗_{R'} (S ⊗_R R')) ⊗_S M` with it, and `Q' ⊗_{R'} S'` is a localization of
+`Q' ⊗_{R'} (S ⊗_R R')`, so the result follows since localization preserves flatness over the
+base. No finiteness, Noetherianity, locality or properness of `I` is needed.
+
+## References
+
+* [Stacks, Tag 00MO] (proof, first paragraph)
+* [Stacks, Tags 00HI, 00CS, 00DK]
 -/
 
 @[expose] public section
@@ -53,27 +65,7 @@ private noncomputable def baseChangeTensorCancel
         Algebra.TensorProduct.commRight]
 
 
-/-- Flatness of the quotient after localized base change.
-Source: Stacks Project, Algebra, Tag 00MO, proof, first paragraph; Tags 00HI, 00CS, 00DK.
-(blueprint: lem-weil-pbc-localized-base-change-quotient-flat)
-
-Proof:
-1. Put Q = R/I and Q' = R'/IR'. Give Q' its algebra structure over Q through
-   the quotient map. Flat base change and tensor cancellation make Q' tensor_R M
-   flat over Q'.
-2. Put A = S tensor_R R', B = Q' tensor_R' A and D = Q' tensor_R' S'.
-   The localization witness q is R'-linear by its pure-tensor formula.
-   Localization base change makes D a localization of B at the image of W.
-3. Tensor cancellation identifies B with C = Q' tensor_R S, preserving both the
-   S-action and the Q'-action. The proved helper identifies C tensor_S M with
-   Q' tensor_R M. Thus B tensor_S M is Q'-flat.
-4. Localization commutes with tensoring over S, so D tensor_S M is the localization
-   of B tensor_S M and is Q'-flat by localization preservation of base flatness.
-   Tensor symmetry and the heterobasic right-commutation equivalence identify the
-   stated module with D tensor_S M. The equivalence is Q'-linear because R' maps
-   surjectively onto Q'.
-
-Neither finiteness, Noetherianity, locality, nor properness of I is needed. -/
+/-- Flatness of the quotient after localized base change. -/
 theorem flat_quotient_localized_baseChange
     {R : Type u} {S : Type v} {R' : Type w} {S' : Type z}
     [CommRing R] [CommRing S] [CommRing R'] [CommRing S']

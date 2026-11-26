@@ -19,18 +19,21 @@ set_option linter.privateModule false
 
 /-! # Coefficient-model balancing and proof helpers
 
-Source: Bhatt--Scholze, Definition 6.7.6 and Lemmas 6.7.7, 6.8.2(1);
-Weil blueprint, purity transport, coefficient extension step
-(blueprint: lem-pur-compact-support-coefficient-models).
+This module proves the balancing comparison for compact-support coefficient models, together
+with its helper lemmas.
 
-The proved balancing comparison and its private helpers are split out to keep
-each consumer compile below 60 seconds.
-The arithmetic basis is fixed before passing to quotients. The scalar comparisons
-are the published normalized comparisons, and the arbitrary ramified quotient is
-handled by derived tensor balancing rather than a flatness assumption.
-The native associator and unit clause is not restated: it is the proved
-`RingedDerivedNative.associator_square`, `leftUnitor_square` and `rightUnitor_square`
-of the cited node lem-sf-ringed-derived-native-tensor.
+## Implementation details
+
+The balancing comparison and its private helpers are split out to keep each consumer's compile
+time low. The arithmetic basis is fixed before passing to quotients. The scalar comparisons are
+the normalized comparisons, and an arbitrary ramified quotient is handled by derived tensor
+balancing rather than a flatness assumption. The native associator and unit clauses are not
+restated: they are `RingedDerivedNative.associator_square`, `leftUnitor_square` and
+`rightUnitor_square`.
+
+## References
+
+* Bhatt--Scholze, Definition 6.7.6 and Lemmas 6.7.7, 6.8.2(1)
 -/
 
 @[expose] public noncomputable section

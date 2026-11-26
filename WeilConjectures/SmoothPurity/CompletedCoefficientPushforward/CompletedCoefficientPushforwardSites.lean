@@ -36,7 +36,13 @@ import all Mathlib.Algebra.BigOperators.Ring.Finset
 
 /-! # Site-side coefficient restrictions and derived tower limits
 
-Source: Stacks Tags 03DA, 0D6E and 0941; Zheng, Construction 4.1.
+This module constructs the exact coefficient restrictions on the pro-étale site, the strict
+coefficient-system restriction and the normalized total derived inverse limit.
+
+## References
+
+* Stacks Project, Tags 03DA, 0D6E and 0941
+* Zheng, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -439,20 +445,7 @@ private theorem siteLimits (W : Scheme.{t}) : Nonempty (SiteLimitData l E W) := 
   rw [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
 
 /-- The exact restrictions, strict coefficient-system restriction and normalized total
-inverse limit exist on the original pro-etale site with independent coefficient universes.
-
-Source: Stacks Tags 03DA, 0D6E and 0941; Zheng, Construction 4.1
-(blueprint: lem-pur-completed-coefficient-site-data).
-Proof: identify the two finite quotient rings by the quotient of the ULift ring
-isomorphism. Quotient generators show that these identifications commute with successive
-reductions. Restrict each level along its completed-ring projection and this isomorphism;
-restriction of the semilinear transition then gives a strict completed-module tower.
-This functor is additive and exact, since evaluation is exact and jointly reflects
-finite limits and finite colimits. Localize the exact restrictions and their ordinary
-identity and composition isomorphisms. The localization factorization equations give
-all recorded normalizations. Module sheaves and their tower category are Grothendieck,
-so inverse limit has a K-injective total right derived functor. Its universal property
-applied to each ordinary projection gives the normalized derived projections. -/
+inverse limit exist on the original pro-etale site with independent coefficient universes. -/
 theorem siteData_exists (W : Scheme.{t}) : Nonempty (SiteData l E W) := by
   obtain ⟨L⟩ := siteLimits l E W
   exact ⟨{ toSystemRestrictionData := siteSystems l E W, toSiteLimitData := L }⟩

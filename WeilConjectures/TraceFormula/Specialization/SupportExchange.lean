@@ -13,7 +13,7 @@ public import WeilConjectures.TraceFormula.Specialization.Basic
 
 Let `c` be an endocorrespondence over `k` (the generic fibre) and `c'` one over `k'` (the special
 fibre), with fixed loci `ι : F ⟶ C` and `ι' : F' ⟶ C'`. The specialization data
-`TraceSpecialization` of blueprint `proposition-specialization-trace-class` consists of
+`TraceSpecialization` for the specialization of trace classes consists of
 specialization functors `Ψ_C, Ψ_F, Ψ_X, Ψ_{X×X}`, units `σ`, dualizing maps `θ` and exchange maps
 `χ`, `β`, with three coherences.
 
@@ -80,7 +80,7 @@ include adj in
   v                              v
   R L A₀ --R(e⁻¹ (e L(h) u) u⁻¹)--> R L A₁
 ```
-commutes, by naturality of the unit. -/
+commutes. -/
 lemma comp_unit_app_eq_unit_app_comp_map_conj {A₀ A₁ : 𝒞} (h : A₀ ⟶ A₁) {B : 𝒟}
     (e : B ≅ L.obj A₀) {Q : 𝒟} (u : L.obj A₁ ≅ Q) :
     h ≫ adj.unit.app A₁ = adj.unit.app A₀ ≫ R.map (e.inv ≫ (e.hom ≫ L.map h ≫ u.hom) ≫ u.inv) := by
@@ -188,15 +188,13 @@ noncomputable def fixedLocusExceptionalExchange :
 variable (σC : 𝟙_ _ ⟶ ΨC.obj (𝟙_ _))
   (θX : ΨX.obj (dualizingComplex' ℓ X) ⟶ dualizingComplex' ℓ X')
 
-/-- **The specialization data determined by the support** (blueprint
-`proposition-specialization-trace-class`): given the specialization `Ψ_C` of the support with its
-unit `σ_C`, specializations `Ψ_X`, `Ψ_{X×X}` with a transformation `χ_Δ : Ψ_{X×X} RΔ_* ⟶ RΔ'_* Ψ_X`,
-the exceptional exchange `β_c : Ψ_C Rc^! ⟶ Rc'^! Ψ_{X×X}` of the support map and a dualizing map
-`θ_X`, the specialization data with
+/-- **The specialization data determined by the support**: given the specialization `Ψ_C` of the
+support with its unit `σ_C`, specializations `Ψ_X`, `Ψ_{X×X}` with a transformation
+`χ_Δ : Ψ_{X×X} RΔ_* ⟶ RΔ'_* Ψ_X`, the exceptional exchange `β_c : Ψ_C Rc^! ⟶ Rc'^! Ψ_{X×X}` of
+the support map and a dualizing map `θ_X`, the specialization data with
 * `Ψ_F = Lι'^* Ψ_C Rι_*` and `χ_ι` the unit of `Lι'^* ⊣ Rι'_*`;
 * `σ_F = Lι'^*(Ψ_C(η_ι) σ_C)`, read through the unit isomorphisms of the monoidal pullbacks;
-* `β_d = fixedLocusExceptionalExchange` and `θ_F = d'^! θ_X ∘ β_d(ω_X)`.
-The coherences hold by the triangle identities of `Lι'^* ⊣ Rι'_*`. -/
+* `β_d = fixedLocusExceptionalExchange` and `θ_F = d'^! θ_X ∘ β_d(ω_X)`. -/
 noncomputable def ofSupportExchange : c.TraceSpecialization F c' F' where
   ΨC := ΨC
   ΨF := fixedLocusSpecialization (F := F) (F' := F') ΨC

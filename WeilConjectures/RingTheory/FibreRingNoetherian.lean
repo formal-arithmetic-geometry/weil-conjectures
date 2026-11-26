@@ -15,11 +15,16 @@ import Mathlib.RingTheory.Localization.Submodule
 /-!
 # Noetherian fibre rings
 
-Source: Stacks Project, Algebra, Remark 00E6 and Lemma 00FN
-(blueprint: lem-weil-pbc-fibre-ring-noetherian).
+The fibre ring `p.Fiber B = κ(p) ⊗[A] B` of a Noetherian algebra is Noetherian.
 
-The fibre ring `B ⊗_A κ(p)` of the node is Mathlib's `p.Fiber B = κ(p) ⊗[A] B`
-(the two tensor-factor orders are identified by `Algebra.TensorProduct.comm`).
+## Implementation details
+
+The fibre is a quotient of the localization `Bₚ` of `B` at the image of `A ∖ p`, which is
+Noetherian since `B` is.
+
+## References
+
+* [Stacks, Tag 00E6], [Stacks, Tag 00FN]
 -/
 
 @[expose] public section
@@ -28,19 +33,7 @@ universe u v
 
 namespace Ideal
 
-/-- The fibre ring of a Noetherian algebra at any prime of the base is Noetherian.
-Source: Stacks Project, Algebra, Remark 00E6 and Lemma 00FN
-(blueprint: lem-weil-pbc-fibre-ring-noetherian).
-
-Proof: Let `T` be the image of `A ∖ p` under the structure map and let `Bₚ = T⁻¹B`.
-1. By lem-weil-pbc-fibre-ring-localization-quotient, the fibre is ring-isomorphic to
-   `Bₚ / pBₚ`; the residue field is that of def-weil-pbc-localization-at-prime.
-2. Since `p` is prime, its complement and hence `T` are multiplicative. By
-   lem-weil-pbc-localization-noetherian, `Bₚ` is Noetherian because `B` is Noetherian
-   (def-weil-pbc-noetherian-ring).
-3. Compose the quotient map with the inverse of the isomorphism in step 1. This is a
-   surjective ring map from `Bₚ` to the fibre. The fibre is therefore Noetherian by
-   lem-weil-pbc-surjective-image-noetherian. -/
+/-- The fibre ring of a Noetherian algebra at any prime of the base is Noetherian. -/
 theorem isNoetherianRing_fiber
     {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B]
     [IsNoetherianRing B] (p : Ideal A) [p.IsPrime] :

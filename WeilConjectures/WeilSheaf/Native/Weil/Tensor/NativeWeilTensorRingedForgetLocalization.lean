@@ -11,7 +11,9 @@ import WeilConjectures.CategoryTheory.SixFunctors.TransportedTensorComparison
 
 /-! # Localization of the signed native forgetting associator square
 
-Source: Stacks 0FPQ, 06YU, 0FPT; naturality of localization factors.
+## References
+
+* Stacks Project, Tags 0FPQ, 06YU and 0FPT.
 -/
 
 @[expose] public noncomputable section
@@ -32,13 +34,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.mapDerivedCateg
   SheafOfModules.monoidalCategory
 
 -- Keep the concrete total and localization constructions folded when applying naturality.
-/-- The signed chain associator square commutes after exact forgetting and localization.
-Source: Stacks 0FPQ, 06YU, 0FPT
-(blueprint: lem-sf-native-weil-ringed-forget-localization).
-
-Proof: apply naturality of the exact-forgetting localization factor to the
-native chain associator, then map the signed chain equality into the ordinary
-derived category. Functoriality gives precisely the displayed square. -/
+/-- The signed chain associator square commutes after exact forgetting and localization. -/
 theorem nativeRingedAssociatorComplex_forget_localization
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})

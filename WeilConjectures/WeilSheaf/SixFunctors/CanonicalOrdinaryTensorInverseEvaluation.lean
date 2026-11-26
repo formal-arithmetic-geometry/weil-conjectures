@@ -20,9 +20,19 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
 /-! # Pure-tensor evaluation of the inverse Hom comparison
 
-Source: Stacks 03EK and 03EO, pure tensors and evaluation-normalized inverse mates.
-Auxiliary lemmas for `canonical_ordinary_tensor_inverse_associativity`
-(blueprint: new-sf-canonical-ordinary-tensor-inverse-associativity).
+Auxiliary lemmas on pure tensors and evaluation-normalized inverse mates, used for
+`canonical_ordinary_tensor_inverse_associativity`.
+
+## Implementation details
+
+The Hom comparison of the two module models takes the sheaf-compose instance as a parameter, so
+that its body keeps the instance supplied at the use site instead of an auxiliary proof; the
+kernel then compares it with the inline comparison of
+`canonical_ordinary_tensor_inverse_associativity` without unfolding.
+
+## References
+
+* Stacks Project, Tags 03EK and 03EO.
 -/
 
 -- This module only keeps private helpers for the inverse associativity theorem.
@@ -122,10 +132,7 @@ private theorem ringed_uncurry_pure
   rw [hi]
   exact hh
 
-/-- The Hom comparison of the two module models, as a natural isomorphism of bifunctors.
-The sheaf-compose instance is a parameter so that the body keeps the instance supplied at the use
-site instead of an auxiliary proof; the kernel then compares it with the inline comparison of
-`canonical_ordinary_tensor_inverse_associativity` without unfolding. -/
+/-- The Hom comparison of the two module models, as a natural isomorphism of bifunctors. -/
 private def hIso (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [(WeilFrobeniusAction.topology Y).HasSheafCompose (forget₂ CommRingCat RingCat)]
     (H : ProEtale.AdicModuleHomComparisonCore l Y) :

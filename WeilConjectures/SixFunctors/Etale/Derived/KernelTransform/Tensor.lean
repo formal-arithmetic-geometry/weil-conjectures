@@ -197,14 +197,7 @@ from `S` along `π` is the same as tensoring the output with the same complex pu
 
 naturally in `K` and `N`, on full subcategories `P` of `D(V_ét)` and `Q` of `D(S_ét)` such
 that the projection formula for the second projection `p₂ : V ×_S V' ⟶ V'` holds at
-`p₁^* K ⊗ᴸ 𝒦[a]` and `π'^* N` for `K ∈ P` and `N ∈ Q`.
-
-The shift is first moved into the kernel
-(`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_shift`). Then
-`p₁^*(K ⊗ᴸ π^* N) ≅ p₁^* K ⊗ᴸ p₂^* π'^* N` by monoidality of `Lp₁^*` and
-`p₁ ≫ π = p₂ ≫ π'`, the factor `p₂^* π'^* N` is moved past `𝒦` with the associator and a
-braiding of `D((V ×_S V')_ét)`, and the projection formula for `p₂` concludes.
-(sketch blueprint: `proposition-base-change-fourier-inversion--2`, proof) -/
+`p₁^* K ⊗ᴸ 𝒦[a]` and `π'^* N` for `K ∈ P` and `N ∈ Q`. -/
 theorem nonempty_iso_kernelTransform_tensor_of_hasProjectionFormula
     [HasCompactification (pullback.snd π π')]
     (P : ObjectProperty (DerivedCategory (Sheaf V.smallEtaleTopology A)))
@@ -245,11 +238,7 @@ theorem nonempty_iso_kernelTransform_tensor_of_hasProjectionFormula
 
 /-- A kernel transform is linear over the base on the whole unbounded derived categories,
 `Φ_𝒦(K ⊗ᴸ π^* N) ≅ Φ_𝒦(K) ⊗ᴸ π'^* N` naturally in `K` and `N`, provided the projection map of
-the second projection `p₂ : V ×_S V' ⟶ V'` is an isomorphism.
-
-This is the proof of
-`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_tensor_of_hasProjectionFormula`, without
-restriction to full subcategories. -/
+the second projection `p₂ : V ×_S V' ⟶ V'` is an isomorphism. -/
 theorem nonempty_iso_kernelTransform_tensor [HasCompactification (pullback.snd π π')]
     [IsIso (projectionMap A (pullback.snd π π'))]
     (𝒦 : DerivedCategory (Sheaf (pullback π π').smallEtaleTopology A)) (a : ℤ) :

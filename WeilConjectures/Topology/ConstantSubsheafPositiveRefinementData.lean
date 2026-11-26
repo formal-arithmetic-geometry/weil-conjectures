@@ -13,8 +13,9 @@ import WeilConjectures.Topology.ConstantSheafLocallyConstantUnitComparison
 
 /-! # Finite positive refinements of integer subsheaf sections
 
-Source: Stacks Project, Cohomology, Lemma 0A38, first proof paragraph.
-(blueprint: lem-sc-constant-subsheaf-positive-refinement-data)
+## References
+
+* Stacks Project, Tags 0A38, 00A5 and 0081.
 -/
 
 @[expose] public section
@@ -27,10 +28,7 @@ namespace TopCat.Sheaf
 
 /-- A finite disjoint partition of each original domain, with zero pieces and signed
 positive component sections. The equations `hs`, `hzero`, and `hsigned` retain the
-connection to the original map; positive values alone would not suffice.
-Source: Stacks Project, Cohomology, Lemma 0A38, first proof paragraph.
-https://stacks.math.columbia.edu/tag/0A38
-(blueprint: lem-sc-constant-subsheaf-positive-refinement-data) -/
+connection to the original map; positive values alone would not suffice. -/
 structure PositiveRefinementData
     (X : TopCat.{u}) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C)
     (isoC : C ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj
@@ -88,10 +86,7 @@ structure PositiveRefinementData
         (op ((Opens.map (A j).inclusion').obj (A j))) (ULift.up 1)))
 
 /-- A section gives a map from the integer extension by zero, sending its canonical
-unit to that section. Define integer multiplication on restrictions, lift through
-sheafification, extend by zero, and compose with the explicit restriction counit.
-The two sheafification-unit equations and the direct-sum counit formula give the result.
-Source: Stacks Project, Sheaves, Lemma 00A5 and Example 0081. -/
+unit to that section. -/
 private theorem extension_integer_section (X : TopCat.{u})
     (K : Sheaf AddCommGrpCat X) (U : Opens X) (t : K.obj.obj (op U)) :
     ∃ f : (abelianOpenExtensionByZero U).obj
@@ -169,40 +164,7 @@ private theorem extension_integer_section (X : TopCat.{u})
 -- The existing statement names an existential witness whose predicate is True.
 set_option linter.unusedVariables false in
 /-- Construct a finite signed partition and positive component maps, without yet
-constructing a morphism between the coproducts.
-Source: Stacks Project, Cohomology, Lemma 0A38, first proof paragraph.
-https://stacks.math.columbia.edu/tag/0A38
-(blueprint: lem-sc-constant-subsheaf-positive-refinement-data)
-
-Proof: Let s i be the image under the i-th component of g of its canonical integer-one
-section; this gives hs. Compose with the monomorphism into C and isoC. The locally
-constant comparison identifies the resulting section with an integer-valued locally
-constant function on U i. Here use the canonical description by local integer
-representatives of the sheafification unit, so unit images have their prescribed values:
-representatives exist locally by sheafification; equality on overlaps is detected by
-evaluation at a point (factor the constant presheaf into the integer skyscraper there).
-Their values therefore glue into a locally constant function, whose inverse glues
-constant unit sections on its fibres. This gives compatibility with the unit, in addition
-to the restriction compatibility of the comparison theorem. Compactness of U i makes
-its range finite. Each fibre is
-clopen in U i, hence open in X and compact in X (a closed subset of a compact space,
-followed by the continuous inclusion). Let Z i be the zero fibre. Index all nonzero
-fibres of all original domains by Fin n, retaining the original-domain index parent.
-Take A j to be the corresponding fibre. These fibres are disjoint for each parent,
-are disjoint from Z, and cover U together with Z, proving hAU, hZU, hdisjoint,
-hdisjointZ and hcover. This also handles empty domains or an empty original family.
-
-On a fibre of value a different from zero, set c j to the positive absolute value of a
-and sign j to 1 or -1 according to its sign. Restrict s (parent j) to A j and multiply
-by sign j, obtaining a section t j of K with image the constant c j. To construct f j,
-on every open of A j send an integer to that multiple of the restriction of t j.
-This is a map from the constant presheaf to the restriction of K. Sheafify, apply the
-extension-by-zero functor, and compose with its restriction counit. The sheafification
-unit and the explicit counit send the canonical unit to t j; this proves hv and
-hsigned because sign j squared is one. On Z i the image of the restriction of s i
-is zero. Monicity of the sheaf morphism makes the maps on sections injective, so the
-restriction itself is zero, proving hzero. The resulting record has actual finite
-partition data and component maps; no choice of a factorization is made here. -/
+constructing a morphism between the coproducts. -/
 theorem positive_refinement_data
     (X : TopCat.{u}) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C) [Mono ι]
     (isoC : C ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj

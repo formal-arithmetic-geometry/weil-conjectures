@@ -10,6 +10,23 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.TensorProduct.Maps
 
+/-!
+# The completed tensor map of a localized algebra
+
+For an `R`-algebra `S` and a prime `p` of `R`, we construct the canonical `S`-algebra map
+`R_p^∧ ⊗[R] S → (R_p ⊗[R] S)^∧`, where the target is the `p`-adic completion.
+
+## Implementation details
+
+At level `n`, the map `A ⧸ m^n → B ⧸ J^n` is `a ↦ a ⊗ 1`. These maps commute with reduction
+and define `C → B^∧`; the tensor universal property extends this and the structural map
+`S → B^∧` to `C ⊗[R] S`. The construction does not need finiteness.
+
+## References
+
+* [Stacks, Tag 07N9], first equality
+-/
+
 @[expose] public section
 
 universe u v
@@ -17,13 +34,7 @@ open scoped TensorProduct
 namespace AdicCompletion
 
 /-- The canonical map from the completed localized base tensored with a finite algebra
-into the completion of the localized algebra. The construction does not need finiteness.
-Source: Stacks Project, Algebra, Lemma 10.97.8 (Tag 07N9), first equality.
-(blueprint: new-completion-finite-extension-tensor-map)
-
-At level n, map A/m^n to B/J^n by a ↦ a ⊗ 1. These maps commute with reduction,
-so their composites with the projections from the completion define C → B^.
-The tensor universal property extends this and the structural map S → B^ to C ⊗ S. -/
+into the completion of the localized algebra. -/
 noncomputable def completionFiniteExtensionTensorMap
     (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     (p : Ideal R) [p.IsPrime] :

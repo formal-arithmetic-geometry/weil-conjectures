@@ -9,8 +9,12 @@ public import WeilConjectures.SmoothPurity.FinitePullbackTensorRep.FinitePullbac
 
 /-! # The derived factorization identity for finite realization
 
-Source: Stacks Tags 03EL, 06YY and 07A4.
-(blueprint: lem-pur-finite-pullback-tensor-realization-factors).
+This file proves that the intrinsic derived factor of the finite pullback-tensor comparison is
+the ordinary factor followed by the localized finite realization.
+
+## References
+
+* [Stacks, Tags 03EL, 06YY, 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -51,12 +55,7 @@ attribute [local implicit_reducible] finiteIntrinsicDerivedTensor coefficientTot
   FinitePullbackTensorRep.totalTensor
 
 /-- The intrinsic derived factor is the ordinary factor followed by the localized
-finite realization. Source: Stacks 07A4
-(blueprint: lem-pur-finite-pullback-tensor-realization-factors).
-Proof: expand the definition of the ordinary-coordinate factor. Compatibility of
-derived natural isomorphisms with their localization factors identifies the
-ordinary factor followed by the localized realization with the derived realization
-followed by the intrinsic factor. Cancel the inverse derived realization. -/
+finite realization. -/
 theorem finitePullbackTensor_realization_factors {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (P : CochainComplex (normalizedDVRModules l E Y n) ℤ) :
     letI : (sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f).Additive :=

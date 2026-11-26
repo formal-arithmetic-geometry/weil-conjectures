@@ -17,8 +17,19 @@ import WeilConjectures.RingTheory.PolynomialSuccessorTorBound
 import WeilConjectures.RingTheory.TorVanishingLocalizedBase
 
 /-! # Tor bounds for polynomial modules
-Source: Weibel, An Introduction to Homological Algebra, Theorem 4.3.7, pp. 101–102.
-(blueprint: lem-pc-polynomial-tor-bound)
+
+Polynomial extension in `n` variables increases the Tor bound of a module by at most `n`.
+
+## Implementation details
+
+For one variable, the canonical sequence `0 → A[t] ⊗[A] L → A[t] ⊗[A] L → L → 0` and the
+identification of `Tor` of induced modules with `Tor` over `A` give the bound; iterate over the
+variables, using the canonical equivalence with `A` for `n = 0`. No finiteness or Noetherian
+hypothesis is needed.
+
+## References
+
+* [Weibel, *An Introduction to Homological Algebra*, Theorem 4.3.7]
 -/
 
 @[expose] public section
@@ -29,21 +40,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace ModuleCat
 
-/-- Polynomial extension increases flat dimension by at most the number of variables.
-Source: Weibel, Theorem 4.3.7, pp. 101–102, its exact-sequence argument applied to Tor.
-Proof: for one variable t, resolve a module L by the canonical exact sequence
-0 → A[t] tensor_A L → A[t] tensor_A L → L → 0, where the first map sends
-f tensor x to tf tensor x - f tensor tx, and the last map evaluates the action.
-Injectivity follows by comparing the highest coefficient; the kernel of evaluation
-is the image by recursively removing highest coefficients. The induced modules
-have Tor_i over A[t] equal to Tor_i over A against the restricted test module:
-extend an A-projective resolution, using freeness of A[t] over A, and tensor
-associativity. The Tor long exact sequence therefore gives vanishing above d+1.
-Iterate this construction over n variables, identifying the iterated polynomial
-ring with MvPolynomial (Fin n) A. At n=0 use its canonical ring equivalence with A.
-No finiteness or Noetherian hypothesis is needed. The argument includes the zero
-module and d=0, because it only uses positive degrees above the indicated bounds.
-(blueprint: lem-pc-polynomial-tor-bound). -/
+/-- If an `A[x₁, …, xₙ]`-module has `Tor^A_i` vanishing for `i > d` after restriction to `A`,
+then its `Tor` over `A[x₁, …, xₙ]` vanishes in degrees `i > d + n`. -/
 theorem polynomial_tor_bound_of_base_tor_bound
     {A : Type u} [CommRing A]
     (n : ℕ) (M : ModuleCat.{u} (MvPolynomial (Fin n) A)) (d : ℕ)

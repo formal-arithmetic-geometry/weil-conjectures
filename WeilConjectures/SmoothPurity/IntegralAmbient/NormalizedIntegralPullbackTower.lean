@@ -17,15 +17,21 @@ import all WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowe
 
 /-! # The normalized integral pullback tower
 
-Source: Stacks Project, sites-modules.tex, Tags 03D7 and 03EL;
-sites-cohomology.tex, Tag 06YY
-(blueprint: lem-pur-normalized-integral-pullback-tower).
+We construct the normalized scalar-association isomorphism between the completion of
+ordinary pullback and the strict tower of finite pullbacks.
+
+## Implementation details
 
 The projection square identifies the right adjoints of pullback followed by reduction
 and reduction followed by finite pullback. Uniqueness of left adjoints gives the
 comparison, and the composite units determine it on generators. Restriction along
 the quotient epimorphism is fully faithful; this proves transition compatibility
 and uniqueness of the whole strict tower comparison.
+
+## References
+
+* Stacks Project, Tags 03D2, 03D7 and 03EL (Modules on Sites); Tags 06YY and 0941
+  (Cohomology on Sites).
 -/
 
 @[expose] public noncomputable section
@@ -65,13 +71,7 @@ private theorem adjunctionSquare
   rw [← Adjunction.homEquiv_naturality_right, ← Adjunction.homEquiv_naturality_left]
   exact (adj.homEquiv A Q).injective.eq_iff.symm
 
-/-- The completed-ring structure map is determined by all finite projections.
-Source: Stacks 03EL, 06YY (blueprint: lem-pur-normalized-integral-pullback-tower).
-Proof: the constant-section maps commute with every quotient reduction. Compose them
-with the completed-ring projections to obtain a cone after direct image. Direct image
-preserves limits, so its universal property gives the map, and the projections give
-uniqueness. Taking the adjoint gives the map f⁻¹R_Y → R_X without interchanging f⁻¹
-and inverse limit. -/
+/-- The completed-ring structure map is determined by all finite projections. -/
 theorem coefficientMap_existsUnique {X Y : Scheme.{t}} (f : X ⟶ Y) :
     ∃! c : completedIntegralCommRingSheafUnrestricted l E Y ⟶
       ((Scheme.proEtaleBaseChange f).sheafPushforwardContinuous
@@ -119,15 +119,13 @@ theorem coefficientMap_existsUnique {X Y : Scheme.{t}} (f : X ⟶ Y) :
       Equiv.apply_symm_apply] using hd n
   exact (e.apply_symm_apply d).symm.trans (congrArg e h)
 
-/-- The unique projection-induced ring map, in its adjoint presentation.
-Source: Stacks 03EL, 06YY (blueprint: lem-pur-normalized-integral-pullback-tower). -/
+/-- The unique projection-induced ring map, in its adjoint presentation. -/
 def coefficientMap {X Y : Scheme.{t}} (f : X ⟶ Y) :=
   (coefficientMap_existsUnique l E f).exists.choose
 
 attribute [local irreducible] HasDerivedCategory.standard
 
-/-- Ordinary module direct image with the projection-induced scalar action.
-Source: Stacks 03D2 (blueprint: lem-pur-normalized-integral-pullback-tower). -/
+/-- Ordinary module direct image with the projection-induced scalar action. -/
 def push {X Y : Scheme.{t}} (f : X ⟶ Y) :
     integralTowerModules l E X ⥤ integralTowerModules l E Y :=
   SheafOfModules.pushforward.{max u (t + 1)} (F := Scheme.proEtaleBaseChange f)
@@ -139,53 +137,41 @@ def push {X Y : Scheme.{t}} (f : X ⟶ Y) :
     ⟨Functor.whiskerRight (coefficientMap l E f).hom
       (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})⟩
 
-/-- The ordinary module pullback exists in the independent coefficient universe.
-Source: Stacks 03D2, 03D7 (blueprint: lem-pur-normalized-integral-pullback-tower).
-Proof: transport to the coefficient-sized small site model. Presheaf module Kan
-extension followed by module sheafification is left adjoint to this pushforward.
-Transport back. Its tensor presentation is R_X ⊗_(f⁻¹R_Y) f⁻¹(-). -/
+/-- The ordinary module pullback exists in the independent coefficient universe. -/
 @[instance]
 theorem push_isRightAdjoint {X Y : Scheme.{t}} (f : X ⟶ Y) :
     (push l E f).IsRightAdjoint := by
   exact SheafOfModules.module_pushforward_isRightAdjoint_of_universes
     ⟨Functor.whiskerRight (coefficientMap l E f).hom (forget₂ CommRingCat RingCat)⟩
 
-/-- Ordinary ambient module pullback along the specified coefficient map.
-Source: Stacks 03D2 (blueprint: lem-pur-normalized-integral-pullback-tower). -/
+/-- Ordinary ambient module pullback along the specified coefficient map. -/
 def pull {X Y : Scheme.{t}} (f : X ⟶ Y) := (push l E f).leftAdjoint
 
-/-- The canonical module adjunction, fixing scalar insertion on generators.
-Source: Stacks 03D7 (blueprint: lem-pur-normalized-integral-pullback-tower). -/
+/-- The canonical module adjunction, fixing scalar insertion on generators. -/
 def adjunction {X Y : Scheme.{t}} (f : X ⟶ Y) : pull l E f ⊣ push l E f :=
   Adjunction.ofIsRightAdjoint _
 
-/-- Direct image is additive since it precomposes the sectionwise linear maps.
-Source: Stacks 03D2 (blueprint: lem-pur-normalized-integral-pullback-tower).
-Proof: addition of maps is sectionwise; coefficient restriction changes only the action. -/
+/-- Direct image is additive since it precomposes the sectionwise linear maps. -/
 @[instance]
 theorem push_additive {X Y : Scheme.{t}} (f : X ⟶ Y) : (push l E f).Additive := by
   exact Functor.additive_of_preserves_binary_products (push l E f)
 
-/-- The module pullback is additive.
-Source: Stacks 03D2 (blueprint: lem-pur-normalized-integral-pullback-tower). -/
+/-- The module pullback is additive. -/
 instance pull_additive {X Y : Scheme.{t}} (f : X ⟶ Y) : (pull l E f).Additive :=
   (adjunction l E f).left_adjoint_additive
 
-/-- Termwise ordinary pullback, with no boundedness restriction.
-Source: Stacks 06YY (blueprint: lem-pur-normalized-integral-pullback-tower). -/
+/-- Termwise ordinary pullback, with no boundedness restriction. -/
 abbrev pullComplex {X Y : Scheme.{t}} (f : X ⟶ Y) :
     CochainComplex (integralTowerModules l E Y) ℤ ⥤
       CochainComplex (integralTowerModules l E X) ℤ :=
   (pull l E f).mapHomologicalComplex (.up ℤ)
 
-/-- The generalized inverse-image generator, normalized by the adjunction unit.
-Source: Stacks 03D7 (blueprint: lem-pur-normalized-integral-pullback-tower). -/
+/-- The generalized inverse-image generator, normalized by the adjunction unit. -/
 def pullSection {X Y : Scheme.{t}} (f : X ⟶ Y) (M : integralTowerModules l E Y)
     (V : Y.ProEt) (x : M.val.obj (op V)) :=
   ((adjunction l E f).unit.app M).val.app (op V) x
 
-/-- Scalar insertion into the finite-operation pullback, in the existing presentation.
-Source: Stacks 03EL (blueprint: lem-pur-normalized-integral-pullback-tower). -/
+/-- Scalar insertion into the finite-operation pullback, in the existing presentation. -/
 def finitePullSection {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ)
     (P : CochainComplex (integralTowerModules l E Y) ℤ) (i : ℤ) (V : Y.ProEt)
     (a : (integralCoefficientCommRingSheaf l E X n).obj.obj
@@ -205,8 +191,7 @@ def finitePullSection {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ)
         (((unrestrictedIntegralFiniteComplex l E Y n).obj P).X i)).val.obj
           (op ((Scheme.proEtaleBaseChange f).obj V)))
 
-/-- The source strict tower is completion of ordinary pullback.
-Source: Stacks 06YY, 0941 (blueprint: lem-pur-normalized-integral-pullback-tower). -/
+/-- The source strict tower is completion of ordinary pullback. -/
 def pullTower {X Y : Scheme.{t}} (f : X ⟶ Y) :
     CochainComplex (integralTowerModules l E Y) ℤ ⥤
       (ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l E X) ℤ) :=
@@ -483,14 +468,7 @@ private theorem pullLevelComparison_transition {X Y : Scheme.{t}}
   with_unfolding_all exact ((hl.trans (pullLevelComparison_unit l E f n P i V x)).trans
     ((hr.trans ht).trans hy').symm)
 
-/-- The normalized scalar-association isomorphism of whole strict pullback towers.
-Source: Stacks 03EL, 06YY (blueprint: lem-pur-normalized-integral-pullback-tower).
-Proof: the coefficient square commutes by coefficientMap's projections. In degree i
-send (r tensor x) tensor a to pi_n(r)a tensor (x tensor 1); the inverse sends
- a tensor (x tensor b) to (1 tensor x) tensor a c_n(b). Balancing proves both
-composites are identities. The maps commute with differentials and chain maps.
-Reduction of a gives the same formula on both paths of every quotient transition.
-This determines the unique natural strict tower isomorphism. -/
+/-- The normalized scalar-association isomorphism of whole strict pullback towers. -/
 theorem pullTowerModel {X Y : Scheme.{t}} (f : X ⟶ Y) :
     ∃! b : pullTower l E f ≅ integralOperationsPullbackTowerFunctor l E f,
       ∀ (P : CochainComplex (integralTowerModules l E Y) ℤ) (n : ℕ) (i : ℤ)

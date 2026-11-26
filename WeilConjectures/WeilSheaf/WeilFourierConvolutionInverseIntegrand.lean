@@ -12,9 +12,9 @@ import WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
 /-!
 # Multiplication of inverse-character integrands
 
-Source: the first step of the current Fourier convolution proof,
-`sec-fourier-transform/sk-thm-inversion/lem-fd-convolution-kernel.proof.md`.
-(blueprint: lem-fd-weil-inverse-integrand)
+This file shows that tensoring with the Artin–Schreier sheaves for `a` and for `b` with the
+inverse character is tensoring with the Artin–Schreier sheaf for `a - b`. This is the first step
+of the computation of the Fourier convolution kernel.
 -/
 
 @[expose] public section
@@ -28,15 +28,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.WeilComplex
 
 /-- Tensoring with the two character sheaves for `a` and `b`, with inverse characters,
-is tensoring with the character sheaf for `a - b`, naturally in the input complex.
-Source: convolution-kernel proof, Step 1.
-
-Proof: the inverse-character formula replaces the second sheaf by the character sheaf
-of `-b`. Composition of tensor functors is tensoring with the sheaf tensor product,
-and Artin--Schreier multiplicativity identifies that product with the sheaf of
-`-b + a = a - b`. Every comparison is a Weil-equivariant natural isomorphism.
-This includes `a = b`, the zero functions, and characteristic two.
-(blueprint: lem-fd-weil-inverse-integrand) -/
+is tensoring with the character sheaf for `a - b`, naturally in the input complex. -/
 theorem nonempty_iso_tensorLisse_artinSchreierOf_sub
     {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}}

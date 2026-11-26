@@ -17,6 +17,27 @@ import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 import Mathlib.RingTheory.Regular.Flat
 public import Mathlib.RingTheory.Nakayama
 
+/-!
+# Depth of the first term of a finite free resolution
+
+If `0 → N → F_{d-e-1} → ⋯ → F_0 → M → 0` is exact with finite free `F_i` over a Noetherian local
+ring of depth at least `d`, and `M` has depth `e ≤ d`, then `N` (if nonzero) has depth at least
+`d`.
+
+## Implementation details
+
+The sequence is read as short exact sequences `0 → N_{j+1} → F_j → N_j → 0`, and induction on
+`j` shows that any nonzero `N_j` has depth at least `min(d, e + j)`, using the depth lemma for
+short exact sequences. Zero intermediate terms are handled separately: if `N_j = 0` then
+`N_{j+1} ≅ F_j`, and if `F_j = 0` then `N_{j+1} = 0`.
+
+## References
+
+* [Stacks, Tag 00NG]
+* [Stacks, Tag 00NE]
+* [Stacks, Tag 00LX]
+-/
+
 @[expose] public section
 
 universe u v
@@ -131,29 +152,9 @@ private theorem depth_kernel_ge {R : Type u} [CommRing R]
         let := h
         exact (depth_in_short_exact f q hf hex hq).2.2
 
-/-- The nonzero finite left term of the prescribed free sequence has depth at least `d`.
-Source: Stacks Project, Algebra, Tags 00NG, 00NE and 00LX, part (3).
-(blueprint: lem-weil-pbc-cm-local-free-resolution-mcm-depth).
-
-Proof: Put `n = d-e`. Read the sequence right to left as short exact sequences
-`0 → N_{j+1} → F_j → N_j → 0`, with `N_0` identified with `M` and `N_n` with
-`S.obj' 1`. All syzygies are finite: each is a submodule of a finite free module
-and the ring is Noetherian. A nonzero finite free module has depth at least `d`:
-a regular sequence on `R` acts regularly componentwise on a finite power of `R`;
-a finite basis transports this fact, so taking suprema gives depth at least
-`depth R`. Linear equivalences preserve depth because they preserve regularity
-and the quotient by the maximal ideal.
-
-Induct on `j` to show that any nonzero `N_j` has depth at least `min(d,e+j)`.
-The initial bound is `he`. If the three terms are nonzero, part (3) of the depth
-lemma gives `depth N_{j+1} ≥ min(depth F_j, depth N_j + 1)`, hence the next bound.
-If `N_j` is zero, exactness identifies `N_{j+1}` with `F_j`, giving the bound by
-freeness. If `F_j` is zero, injectivity makes `N_{j+1}` zero, so there is no bound
-to prove at that step. If `N_{j+1}` is zero the induction assertion is vacuous;
-the next step is covered by the zero-quotient case. Thus zero intermediate terms
-do not interrupt induction. At `j=n`, `e≤d` gives `min(d,e+n)=d`; the assumed
-nontriviality of the left term gives the desired bound. When `n=0`, endpoint
-exactness identifies the left term with `M` and `he`, with `e=d`, proves it. -/
+/-- Let `M` be a nonzero finite module of depth `e ≤ d` over a Noetherian local ring of depth at
+least `d`, and let `0 → N → F_{d-e-1} → ⋯ → F_0 → M → 0` be exact with finite free `F_i`. If
+`N` is nonzero, its depth is at least `d`. -/
 theorem first_term_depth_ge
     {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] [Nontrivial M]

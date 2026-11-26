@@ -34,8 +34,8 @@ proved by induction on `n`:
   (`NearbyCyclesModel.isIso_pullbackExchange_restrictHom`), which reduces to affine `𝒳`
   (`NearbyCyclesModel.boundedConstructible_geometricNearbyCycles_obj_of_isAffine`);
 * **closed embedding**: an affine `𝒳` embeds as a closed subscheme `c : 𝒳 ⟶ 𝔸ⁿ_S`; by the proper
-  exchange `Ψ_{𝔸ⁿ} Rc_* ≅ Rc_{s*} Ψ_𝒳` (blueprint `prose-E-03` (2),
-  `NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper`), the full faithfulness of
+  exchange `Ψ_{𝔸ⁿ} Rc_* ≅ Rc_{s*} Ψ_𝒳`
+  (`NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper`), the full faithfulness of
   `Rc_{s*}` and the preservation of bounded constructibility by `Rc_*`
   (`ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_of_isClosedImmersion`),
   this reduces to `𝒳 = 𝔸ⁿ_S` with its standard model `NearbyCyclesModel.traitStdModel`
@@ -62,7 +62,7 @@ proved by induction on `n`:
   (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_of_slices`) treats the
   remaining case.
 
-## Implementation notes
+## Implementation details
 
 The comparison with the slices (SGA 4½, [Th. finitude], Lemme 3.3 and 3.7) is proved in
 `WeilConjectures.TraceFormula.Specialization.NearbyFinitenessSlice`. Deligne's criterion on the
@@ -72,12 +72,15 @@ theorem on `𝔸ⁿ_S`, proved first with the finite coefficients `𝔽_E` by De
 (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_obj_of_finite`) and then for
 `ℚ̄_ℓ` through integral models
 (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_obj_of_integral`).
-No blueprint node states the finiteness theorem: the blueprint uses it without a node
-in the proofs of `proposition-nearby-cycles-commute-verdier-duality` ("bounded constructible by the
-finiteness theorem for nearby cycles") and `lemma-nearby-cycles-constant-family--1` ("an exact
-functor with bounded constructible values"). The reductions also use the proper exchange (blueprint
-`prose-E-03` (2),
-`NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper_geometric`).
+The finiteness theorem is used in the commutation of nearby cycles with Verdier duality and for
+nearby cycles of constant families. The reductions also use the proper exchange
+(`NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper_geometric`).
+
+## References
+
+* P. Deligne, *Théorèmes de finitude en cohomologie ℓ-adique*, SGA 4½, [Th. finitude],
+  Thm. 3.2, Lemme 3.3 and 3.7
+* B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, §6.8 (`ℚ̄_ℓ`-coefficients)
 
 -/
 
@@ -102,18 +105,13 @@ variable [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)
 
 omit [Fact (ringChar k').Prime] in
 /-- **Deligne's finiteness theorem for the extension by zero of a lisse sheaf on a locally closed
-subscheme of the generic fibre of `𝔸ⁿ⁺¹_S`, given the slices** (SGA 4½, [Th. finitude], proof of
-Thm. 3.2): over the strictly henselian trait `S = Spec k'⟦t⟧`, let `v : E ⟶ 𝔸ⁿ⁺¹_S` be a locally
-closed immersion, factored as a surjective closed immersion `c' : E ⟶ W` onto an open `W` of a
-closed subscheme `c : D ⟶ 𝔸ⁿ⁺¹_S`, with `W` inside the generic fibre `𝔸ⁿ⁺¹_η`, and let `L` be a
-lisse sheaf of `ℚ̄_ℓ`-modules on `E`. If the restrictions `Lhᵢ,ₛ^* Ψ B` of the nearby cycles to
-the coordinate generic slices are bounded constructible for all bounded constructible `B`, then
-the nearby cycles of `v_! L = Rc_* j_{W!} Rc'_* L` are bounded constructible. If `D` misses the
-special fibre, they vanish (`NearbyCyclesModel.isZero_nearbyCycles_affineSpace_of_disjoint`); if a
-closed subscheme of `D` containing `W` is quasi-finite over `S`, this is
-`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_of_locallyQuasiFinite`;
-the remaining case is Deligne's criterion
-`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_of_slices`. -/
+subscheme of the generic fibre of `𝔸ⁿ⁺¹_S`, given the slices**: over the strictly henselian trait
+`S = Spec k'⟦t⟧`, let `v : E ⟶ 𝔸ⁿ⁺¹_S` be a locally closed immersion, factored as a surjective
+closed immersion `c' : E ⟶ W` onto an open `W` of a closed subscheme `c : D ⟶ 𝔸ⁿ⁺¹_S`, with `W`
+inside the generic fibre `𝔸ⁿ⁺¹_η`, and let `L` be a lisse sheaf of `ℚ̄_ℓ`-modules on `E`. If the
+restrictions `Lhᵢ,ₛ^* Ψ B` of the nearby cycles to the coordinate generic slices are bounded
+constructible for all bounded constructible `B`, then the nearby cycles of
+`v_! L = Rc_* j_{W!} Rc'_* L` are bounded constructible. -/
 theorem boundedConstructible_nearbyCycles_affineSpace_lisse_generic (n : ℕ)
     (h : ∀ (i : Fin (n + 1))
       (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' (n + 1)).total)
@@ -154,10 +152,7 @@ omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 the geometric nearby cycles of the extensions by zero `Rc_* j_{W!} Rc'_* L` of lisse sheaves `L`
 along locally closed immersions into the generic fibre `𝔸ⁿ_η` are bounded constructible, then
 the geometric nearby cycles of the standard model of `𝔸ⁿ_S` preserve bounded constructible
-complexes. This is the dévissage
-`ProEtale.CondensedRing.boundedConstructible_obj_of_forall_lisse_along`, adapted to the generic
-fibre: when `W` lies in the special fibre, the nearby cycles vanish
-(`NearbyCyclesModel.isZero_nearbyCycles_affineSpace_of_isZero`). -/
+complexes. -/
 theorem boundedConstructible_nearbyCycles_affineSpace_of_lisse_generic (n : ℕ)
     (hgen : ∀ (D : Scheme.{u}) (c : D ⟶ (affineSpaceModel k' n).total) [IsClosedImmersion c]
       (W : D.Opens) (_ : (W : Set D) ⊆ c ⁻¹ᵁ affineSpaceGenericOpen k' n) (E : Scheme.{u})
@@ -203,13 +198,10 @@ theorem boundedConstructible_nearbyCycles_affineSpace_of_lisse_generic (n : ℕ)
           Scheme.Opens.range_ι]) _))
 
 omit [Fact (ringChar k').Prime] in
-/-- **Deligne's finiteness theorem on `𝔸ⁿ⁺¹_S`, given the slices** (SGA 4½, [Th. finitude], proof
-of Thm. 3.2): if the restrictions `Lhᵢ,ₛ^* Ψ B` of the nearby cycles to the coordinate generic
-slices of the special fibre are bounded constructible for all bounded constructible `B`, then the
-geometric nearby cycles of the standard model of `𝔸ⁿ⁺¹_S` preserve bounded constructible
-complexes: by the dévissage
-`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_of_lisse_generic`, this is
-`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_generic`. -/
+/-- **Deligne's finiteness theorem on `𝔸ⁿ⁺¹_S`, given the slices**: if the restrictions
+`Lhᵢ,ₛ^* Ψ B` of the nearby cycles to the coordinate generic slices of the special fibre are
+bounded constructible for all bounded constructible `B`, then the geometric nearby cycles of the
+standard model of `𝔸ⁿ⁺¹_S` preserve bounded constructible complexes. -/
 theorem boundedConstructible_nearbyCycles_affineSpace_of_slices (n : ℕ)
     (h : ∀ (i : Fin (n + 1))
       (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' (n + 1)).total)
@@ -232,21 +224,9 @@ theorem boundedConstructible_nearbyCycles_affineSpace_of_slices (n : ℕ)
     (fun D c _ W hW E c' _ hc' L hL ↦
       boundedConstructible_nearbyCycles_affineSpace_lisse_generic n h D c W hW E c' hc' L hL) hB
 
-/-- **Deligne's finiteness theorem for nearby cycles on an affine space** (SGA 4½,
-[Th. finitude], Thm. 3.2; for `ℚ̄_ℓ`-coefficients, Bhatt–Scholze §6.8): over the strictly
+/-- **Deligne's finiteness theorem for nearby cycles on an affine space**: over the strictly
 henselian trait `S = Spec k'⟦t⟧` (`k'` separably closed, `ℓ ≠ char k'`), the geometric nearby
-cycles of the standard model of `𝔸ⁿ_S` preserve bounded constructible complexes.
-
-Deligne's induction on `n`, for all separably closed fields `k'` at once (the slices live over
-the different field `K = k'(x)^alg`): for `n = 0`,
-`𝔸⁰_S ⟶ S` is an isomorphism and the nearby cycles of the trait are computed directly
-(`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpaceModel_zero`). For `n + 1`, by
-`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_of_slices` it suffices that the
-restrictions `Lhᵢ,ₛ^* Ψ B` to the coordinate generic slices of the special fibre are bounded
-constructible; they are retracts
-(`NearbyCyclesModel.nonempty_retract_upperStar_nearbyCycles_affineSpaceSlice`) of the nearby
-cycles over the trait `Spec K⟦t⟧` of the pullbacks `Lhᵢ^* B` to `𝔸ⁿ_{K⟦t⟧}`, which are bounded
-constructible by induction. -/
+cycles of the standard model of `𝔸ⁿ_S` preserve bounded constructible complexes. -/
 theorem boundedConstructible_nearbyCycles_affineSpace_obj (n : ℕ)
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' n).total)
       Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (affineSpaceModel k' n).total))}
@@ -271,10 +251,7 @@ theorem boundedConstructible_nearbyCycles_affineSpace_obj (n : ℕ)
       (ih (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hB'))
 
 /-- **Reduction to affine spaces**: for a model `M` of finite type over the trait with affine
-total space `𝒳`, the geometric nearby cycles preserve bounded constructible complexes. Choose a
-closed immersion `c : 𝒳 ⟶ 𝔸ⁿ_S` over the trait; then
-`Ψ_𝒳 B ≅ Lc_s^* Rc_{s*} Ψ_𝒳 B ≅ Lc_s^* Ψ_{𝔸ⁿ} (Rc_* B)` by the full faithfulness of `Rc_{s*}` and
-the proper exchange, and `Rc_* B` is bounded constructible. -/
+total space `𝒳`, the geometric nearby cycles preserve bounded constructible complexes. -/
 theorem boundedConstructible_geometricNearbyCycles_obj_of_isAffine
     (M : NearbyCyclesModel X X'.left) (hM : M.IsTraitModel) [IsAffine M.total]
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology M.total) Ab.{u + 1})
@@ -289,14 +266,10 @@ theorem boundedConstructible_geometricNearbyCycles_obj_of_isAffine
     rfl (isPullback_traitStdHom_generic _ hj hi c hc) (isPullback_traitStdHom_special _ hi c hc)
     (fun hB' ↦ boundedConstructible_nearbyCycles_affineSpace_obj n hB') hB
 
-/-- **Deligne's finiteness theorem for nearby cycles** (SGA 4½, [Th. finitude], Thm. 3.2; for
-`ℚ̄_ℓ`-coefficients, Bhatt–Scholze §6.8): for a model `M` of finite type over the strictly
-henselian trait `Spec k'⟦t⟧`, the geometric nearby cycles `Li^* Rj_* Lj^*` carry bounded
+/-- **Deligne's finiteness theorem for nearby cycles**: for a model `M` of finite type over the
+strictly henselian trait `Spec k'⟦t⟧`, the geometric nearby cycles `Li^* Rj_* Lj^*` carry bounded
 constructible complexes on the total space `𝒳` to bounded constructible complexes on the special
-fibre. Bounded constructibility on the special fibre is checked on the traces `i⁻¹ V` of a
-finite affine open cover of `𝒳`, where the nearby cycles are those of the restricted models
-(`NearbyCyclesModel.isIso_pullbackExchange_restrictHom`), and the affine case is
-`NearbyCyclesModel.boundedConstructible_geometricNearbyCycles_obj_of_isAffine`. -/
+fibre. -/
 theorem boundedConstructible_geometricNearbyCycles_obj
     (M : NearbyCyclesModel X X'.left) (hM : M.IsTraitModel)
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology M.total) Ab.{u + 1})
@@ -320,15 +293,10 @@ theorem boundedConstructible_geometricNearbyCycles_obj
     (boundedConstructible_geometricNearbyCycles_obj_of_isAffine _ (hM.restrict _)
       (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hB))
 
-/-- **Deligne's finiteness theorem for the nearby cycles of a model** (SGA 4½, [Th. finitude],
-Thm. 3.2; for `ℚ̄_ℓ`-coefficients, Bhatt–Scholze §6.8): over the strictly henselian trait
-`Spec k'⟦t⟧`, the nearby cycles `Ψ = Li^* Rj_* Lε^*` of a model of finite type whose
-identification factors as `ε = j ≫ e` through the total space preserve bounded constructible
-complexes: `Lε^* A ≅ Lj^* Le^* A`, the pullback `Le^* A` is bounded constructible, and the
-geometric nearby cycles `Li^* Rj_* Lj^*` preserve bounded constructible complexes
-(`NearbyCyclesModel.boundedConstructible_geometricNearbyCycles_obj`). No blueprint node states
-this theorem; it is the analogue over the trait of `proposition-six-operations-dctf--5`
-(`ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj`). -/
+/-- **Deligne's finiteness theorem for the nearby cycles of a model**: over the strictly
+henselian trait `Spec k'⟦t⟧`, the nearby cycles `Ψ = Li^* Rj_* Lε^*` of a model of finite type
+whose identification factors as `ε = j ≫ e` through the total space preserve bounded
+constructible complexes. -/
 theorem preservesBoundedConstructible_of_isTraitModel (M : NearbyCyclesModel X X'.left)
     (hM : M.IsTraitModel) (hε : ∃ e : M.total ⟶ X, M.j ≫ e = M.ε) :
     M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ) := by

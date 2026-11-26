@@ -13,9 +13,9 @@ import WeilConjectures.CategoryTheory.Ringed.Tensor.RingedTensorComparisonExtens
 
 /-! # Normalized opposite-line evaluations in the recorded derived tensor model
 
-Source: the latest blueprint, smooth purity, proof (3) of
-`sk-def-sp-tate-twist-locally-free`.
-(blueprint: lem-pur-integral-line-normalized-evaluations).
+## References
+
+* Stacks Project, Tags 015F and 06YU.
 -/
 
 @[expose] public noncomputable section
@@ -89,32 +89,7 @@ private theorem chain_comparison
   rfl
 
 /-- The given sheaf evaluations descend to the recorded ordinary derived tensor,
-with the specified chain formula and the triangle identity.
-
-Source: latest blueprint, `sec-smooth-purity/sk-prop-an/`:
-`sk-def-sp-tate-twist-locally-free.proof.md`, (3), last two sentences;
-Stacks Project, Tags 06YU and 015F.
-(blueprint: lem-pur-integral-line-normalized-evaluations).
-
-Proof: every signed power is locally free of rank one. On complexes, collapse
-both total tensors with the degree-zero line factors to termwise tensor. Associate
-and apply the given sheaf evaluation followed by the module action. This is a
-chain isomorphism: on each open trivializing the line it is the unit action,
-with inverse insertion of the dual basis. Changes of basis cancel between the
-two opposite factors. The inverse maps glue because they are inverses of the
-globally defined evaluations. On a generator its value is precisely e(y,z) times x,
-including at exponent zero; reversing the factors uses reverseEvaluation and
-only the equality -(-m)=m. The differential formula follows by linearity, since
-both line factors are in degree zero. The two cancellation maps satisfy the
-triangle identity, checked on the triple generators in a trivializing cover.
-The exact tensor functors preserve quasi-isomorphisms. Localize the chain maps
-and their inverses through the K-flat flat-term presentation. The representative
-comparisons of the recorded tensor model identify these localizations with
-natural isomorphisms v and w. Naturality and the triangle identity descend by
-faithfulness of precomposition with the localization. On every good representative,
-composition with integralLineRepresentativeIso is the localized chain evaluation,
-which is exactly both clauses of DerivedEvaluationFormula. No completeness or
-constructibility hypothesis is used. -/
+with the specified chain formula and the triangle identity. -/
 theorem integral_line_normalized_evaluations
     (L : scalarReductionSource.{u, u} l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (e : Evaluations l E X L) (he : EvaluationFormula l E X L e) (m : ℤ) :

@@ -9,7 +9,19 @@ public import WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSuppo
 import WeilConjectures.SixFunctors.PurCompactSupport.ScalarComplexAdjunctionNormalization
 import WeilConjectures.CategoryTheory.Adjunction.Derived.DerivedIdentityInverseRepresentative
 
-/-! # Chain representative of the derived scalar identity -/
+/-! # Chain representative of the derived scalar identity
+
+## Implementation details
+
+The ordinary adjunction sends multiplication to the inverse restriction identity, since its
+unit sends `x` to `1 ⊗ x`; the derived transpose theorem and the representative formula for
+the exact-derived restriction identity then give equal derived transposes.
+
+## References
+
+* [Stacks, Tag 03DA]
+* [Stacks, Tag 06YY]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -83,9 +95,8 @@ attribute [local irreducible] pbcDerivedScalarAdjunction pbcComplexCounit
   reductionDerivedChange completedAdicDerivedChange reductionChange completedAdicChange
 attribute [local instance 5000] proEtaleRingModules_hasDerivedCategory
 
-/-- Fix the native site universe while computing the scalar identity representative.
-Source: Mathlib `essentiallySmallSelf`.
-(blueprint: lem-sf-scalar-identity-complex-formula). -/
+/-- Fix the native site universe while computing the scalar identity representative, using
+Mathlib's `essentiallySmallSelf`. -/
 local instance (priority := 10000) scalarIdentitySiteSmall (T : Scheme.{w}) :
     EssentiallySmall.{w + 1} T.ProEt := essentiallySmallSelf.{0, w, w + 1} _
 
@@ -199,9 +210,7 @@ private theorem identity_formula {T : Scheme.{w}}
   rw [ho] at ht
   exact model_formula (old_model R) P (μ.hom.app P) _ ht (old_rightFormula R P)
 
-/-- The representative equation for a derived isomorphism and a fixed complex counit.
-Source: Stacks Project Tag 06YY.
-(blueprint: lem-sf-scalar-identity-complex-formula). -/
+/-- The representative equation for a derived isomorphism and a fixed complex counit. -/
 def scalarComplexRepresentativeFormula {A : Type*} [Category A] [Abelian A]
     [HasDerivedCategory A] (L : A ⥤ A) [L.Additive]
     (F : DerivedCategory A ⥤ DerivedCategory A)
@@ -244,14 +253,7 @@ private theorem tensor_identity_formula_of_eq {T : Scheme.{w}}
       ((μ.hom.app P).f i).val.app U (pbcTensorSection b (P.X i) U 1 x) = x)
     ha (modelUnit (old_model R)) (fun μ hμ P ↦ identity_formula R μ hμ P) μ hμ
 
-/-- The derived identity-scalar unitor is represented by the normalized chain multiplication.
-Source: Stacks Project Tags 03DA and 06YY.
-(blueprint: lem-sf-scalar-identity-complex-formula)
-
-Proof: the ordinary adjunction sends multiplication to the inverse restriction identity,
-since its unit sends x to 1 tensor x. The derived transpose theorem and the representative
-formula for the exact-derived restriction identity give equal derived transposes. The
-adjunction bijection is injective. Finally transport along the equality of coefficient maps. -/
+/-- The derived identity-scalar unitor is represented by the normalized chain multiplication. -/
 theorem scalar_identity_complex_formula {T : Scheme.{w}}
     (R : Sheaf (ProEt.topology T) CommRingCat.{w + 1})
     (a : R ⟶ R) (ha : a = 𝟙 R)

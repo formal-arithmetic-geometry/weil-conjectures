@@ -160,10 +160,24 @@ import Mathlib.CategoryTheory.Sites.Abelian
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 
-/-! # The normalized DVR quotient completion and integral Roos completion
+/-!
+# The normalized DVR quotient completion and integral Roos completion
 
-Source: Stacks Tags 093M and 0941.
-(blueprint: lem-sf-open-dvr-roos-completion-comparison).
+We show that the normalized DVR quotient completion, including its unit, is transported to the
+integral Roos completion.
+
+## Implementation details
+
+On a flat-term K-flat representative, the finite comparisons identify each quotient tensor
+module with the corresponding integral quotient module, compatibly with transitions and the
+augmentation. The projection-normalized limit comparison identifies the total inverse limits,
+and exact countable products on the pro-étale site identify the total limit with the signed
+integral Roos complex. Localization extends the unit equation to every object. No completeness
+hypothesis or choice of generator of the ideal is used.
+
+## References
+
+* [Stacks: Tags 093M and 0941]
 -/
 
 @[expose] public noncomputable section
@@ -311,27 +325,7 @@ attribute [-instance] IntegralOnSlice.abSheafify IntegralOnSlice.abLocallyBiject
   integralOperationsSiteSmall integralOperationsCommHasDerivedCategory
   CompletedCoefficientPushforward.modAbelian CompletedCoefficientPushforward.hasDerived in
 attribute [local instance 3000] integralTowerHasDerivedCategory in
-/-- The quotient completion, including its unit, is transported to integral Roos completion.
-Source: Stacks Tags 093M (coefficient reduction) and 0941 (total inverse limit).
-(blueprint: lem-sf-open-dvr-roos-completion-comparison).
-
-Proof: choose a flat-term K-flat representative Q. The finite comparisons of C,
-normalized on constant sections, identify each quotient tensor module with the
-corresponding integral quotient module. The completed projection equations identify
-their completed scalar actions. These comparisons commute with all quotient
-transitions and take the quotient augmentation to the integral tensor augmentation.
-Transpose this isomorphism to complexes of strict towers. The projection-normalized
-limit comparison for the exact scalar equivalence C identifies their total inverse
-limits. Exact countable products on the pro-etale site identify the latter total
-limit with the signed integral Roos complex: the right-derived universal property
-fixes its comparison with ordinary limit, so the augmentation goes to the recorded
-zero-homotopy Roos unit. The definition of IntegralOnSlice.completionComparison
-identifies this Roos complex with integral completion. Compose these isomorphisms.
-On Q the unit equation follows from the same strict augmentation and the normalized
-ordinary-limit projections. Naturality and essential surjectivity of localization
-of flat-term K-flat complexes extend it to every P. No completeness hypothesis or
-choice of a generator for d.ideal is used. Empty schemes and zero complexes use
-the same limit and augmentation formulas. -/
+/-- The quotient completion, including its unit, is transported to integral Roos completion. -/
 theorem openDvrRoosCompletionComparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

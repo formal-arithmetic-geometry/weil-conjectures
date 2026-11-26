@@ -16,8 +16,9 @@ import Mathlib.Topology.Sheaves.Abelian
 
 /-! # Cohomology of the empty space
 
-Source: Stacks Project, Proposition 02UZ, empty-space base case.
-(blueprint: lem-sc-empty-space-cohomology-vanishing).
+## References
+
+* Stacks Project, Tag 02UZ.
 -/
 
 @[expose] public section
@@ -30,14 +31,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace TopCat
 
-/-- Every abelian sheaf on the empty space has zero cohomology in every degree.
-Source: Stacks Project, Proposition 02UZ, empty-space base case.
-(blueprint: lem-sc-empty-space-cohomology-vanishing).
-
-Proof: There are no stalks, so the stalkwise zero criterion makes the sheaf a
-zero object. The additive Ext functor in its second argument preserves zero
-objects. Evaluating it at the free abelian sheaf on the terminal open gives
-zero cohomology in every degree, including degree zero. -/
+/-- Every abelian sheaf on the empty space has zero cohomology in every degree. -/
 theorem cohomology_vanishing_of_isEmpty
     (X : Type u) [TopologicalSpace X] [IsEmpty X] (q : ℕ)
     (F : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) :

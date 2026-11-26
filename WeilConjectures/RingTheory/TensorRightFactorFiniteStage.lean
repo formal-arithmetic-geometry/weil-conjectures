@@ -14,8 +14,27 @@ import Mathlib.Data.Finset.Order
 
 /-! # Descending the right factor after descending the coefficient structure
 
-Source: Stacks Project, Algebra, Tags 02JO (3), 00QO and 00DD.
-(blueprint: lem-weil-pbc-tensor-right-factor-finite-stage)
+Let `F` be a directed diagram of commutative rings with colimit `A`, let `φ₀ : B₀ → C₀` be a map
+of `F(i₀)`-algebras and let `Q` be a finitely presented `P`-algebra. If the `P`-structure on
+`A ⊗ B₀` has been descended to a stage `F(j) ⊗ B₀`, then every ring map `f : Q → A ⊗ C₀` that
+is `P`-linear via `φ₀` factors through `F(i) ⊗ C₀` for some later stage `i`, compatibly with the
+descended `P`-structures.
+
+## Implementation details
+
+On the upper tail of `j`, `F(i) ⊗ B₀` carries the ring map `P → F(j) ⊗ B₀ → F(i) ⊗ B₀` and
+`F(i) ⊗ C₀` its composite with `id ⊗ φ₀`; tensor induction proves the compatibilities
+making all transition and limit maps `P`-linear. One then chooses a finite polynomial
+presentation of `Q` over `P`, lifts the generators to a common stage `F(i) ⊗ C₀`, advances to a
+stage killing all kernel generators and descends the resulting polynomial map through the
+surjective presentation. Only the map `q : Q → F(i) ⊗ C₀` is constructed here; the tensor
+assembly is left to the comparison theorem.
+
+## References
+
+* [Stacks, Tag 02JO] (3)
+* [Stacks, Tag 00QO]
+* [Stacks, Tag 00DD]
 -/
 
 @[expose] public section
@@ -27,34 +46,10 @@ universe v w x y
 
 namespace RingHom
 
-/-- Once the P-structure is descended, a P-linear map out of Q descends later.
-
-Source: Stacks Project, Algebra, Tag 02JO (3), the construction of Ψ;
-Tag 00QO (lemma-characterize-finite-presentation) and Tag 00DD.
-(blueprint: lem-weil-pbc-tensor-right-factor-finite-stage)
-
-Proof: on the upper tail of j, equip Bᵢ with the ring map P → Bⱼ → Bᵢ
-and Cᵢ with its composite with id ⊗ φ₀. Tensor induction proves transition
-composition, compatibility with limit maps, and the two squares involving φ₀.
-The hypothesis on μBj makes Bᵢ → B P-linear. The same squares prove that
-Cᵢ → C and all C transition maps are P-linear for the induced P-structures.
-Regard f as a P-algebra homomorphism using hf. The elementwise base-change
-lemma gives representatives on the upper tail of i₀; move each to a common
-upper bound with j to obtain representatives on the chosen tail. It also gives
-eventual vanishing on this tail. Choose a finite polynomial presentation of Q
-over P. Lift its finitely many generators to a common C stage and evaluate
-polynomials using the descended P-structure. Polynomial extensionality proves
-that this evaluation maps to f composed with the presentation. Advance to a
-common stage killing all kernel generators, and descend the resulting
-polynomial map through the surjective presentation. The descended map q
-factors f. To check its P-linearity, compare a polynomial representative of
-algebraMap P Q r with the constant polynomial r: their difference belongs to
-the kernel, which the evaluation kills. P-linearity of the transition map then
-gives q(algebraMap P Q r) = algebraMap P Cᵢ r. Retain the constructed
-P-structure on Bᵢ and its canonical P-linear map μB. This constructs only
-q : Q → Cᵢ, leaving tensor assembly to the comparison theorem. Empty finite
-presentations and zero rings use the same finite bounds and kernel argument.
--/
+/-- Once the `P`-structure on `colimit F ⊗ B₀` is descended to a stage `j`, a ring map
+`f : Q → colimit F ⊗ C₀` out of the finitely presented `P`-algebra `Q` that is `P`-linear via
+`φ₀` factors through `F(i) ⊗ C₀` for some `i ≥ i₀`, compatibly with a descended `P`-structure
+on `F(i) ⊗ B₀`. -/
 theorem exists_tensor_right_factor_finite_stage
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{v}) [HasColimit F]

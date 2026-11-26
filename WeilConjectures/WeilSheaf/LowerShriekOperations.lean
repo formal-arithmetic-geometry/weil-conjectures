@@ -11,14 +11,11 @@ import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 /-!
 # Composition and base change for the compact-support direct image of Weil complexes
 
-Two of the compatibilities of blueprint `sec-Weil-complexes` ("composition, base change,
-projection, purity and duality isomorphisms are morphisms of Weil complexes"), for the direct
-image with compact support `Rf₀!` of Weil complexes
-(`AlgebraicGeometry.WeilComplex.derivedLowerShriek`). They belong to another blueprint
-section and are recorded here as inputs of the Fourier trace formula. They are deduced from
-their statements in `WeilConjectures.WeilSheaf.LowerShriekFunctoriality` (clauses 3 and 4 of
-blueprint `prop-functor-package`). The Grothendieck–Lefschetz trace formula used by the Fourier
-trace formula is
+The composition and base change isomorphisms for the direct image with compact support `Rf₀!`
+of Weil complexes (`AlgebraicGeometry.WeilComplex.derivedLowerShriek`), recorded here as inputs
+of the Fourier trace formula. They are deduced from their statements in
+`WeilConjectures.WeilSheaf.LowerShriekFunctoriality`. The Grothendieck–Lefschetz trace formula
+used by the Fourier trace formula is
 `AlgebraicGeometry.WeilComplex.sum_trace_compactlySupportedCohomology_eq_sum_traceFunction`,
 in `WeilConjectures.ZetaFunction.WeilObjectComparison`.
 
@@ -39,10 +36,9 @@ namespace AlgebraicGeometry.WeilComplex
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
-/-- Blueprint `sec-Weil-complexes`: Six operations on Weil complexes (the composition
-isomorphism). For separated quasi-compact morphisms `f : X ⟶ Y`, `g : Y ⟶ Z` locally of finite
-type of `k₀`-schemes of finite type, `R(g ∘ f)₀! ≅ Rg₀! ∘ Rf₀!` as functors of Weil
-complexes. -/
+/-- The composition isomorphism: for separated quasi-compact morphisms `f : X ⟶ Y`,
+`g : Y ⟶ Z` locally of finite type of `k₀`-schemes of finite type, `R(g ∘ f)₀! ≅ Rg₀! ∘ Rf₀!` as
+functors of Weil complexes. -/
 theorem nonempty_iso_derivedLowerShriek_comp {X Y Z : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     [Z.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -60,9 +56,7 @@ theorem nonempty_iso_derivedLowerShriek_comp {X Y Z : Scheme.{u}}
       derivedLowerShriek k₀ l f ⋙ derivedLowerShriek k₀ l g) :=
   nonempty_derivedLowerShriek_comp_iso f g
 
-/-- Blueprint `sec-Weil-complexes`: Six operations on Weil complexes (the base change
-isomorphism; compactly supported base change for the underlying complexes). For a cartesian
-square of `k₀`-schemes
+/-- Compactly supported base change: for a cartesian square of `k₀`-schemes
 
 ```
   X' ──g'──▶ X

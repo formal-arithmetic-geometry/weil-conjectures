@@ -17,7 +17,7 @@ Let `G : C ⥤ D` be a strong monoidal functor between monoidal closed categorie
 map `ρ : G [K, M] ⟶ [G K, G M]` (`CategoryTheory.Functor.LaxMonoidal.ihomComparison`), the
 transpose of `G K ⊗ G [K, M] ≅ G (K ⊗ [K, M]) ⟶ G M`, is compatible with evaluation by
 construction. This file collects formal criteria for `ρ` to be an isomorphism, used for the
-internal-hom comparison of blueprint `lemma-restriction-geometric-generic-fibre`
+internal-hom comparison on the geometric generic fibre
 (`WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.InternalHom`):
 
 * `ρ` is an isomorphism at `K` if `K` has a left dual
@@ -47,8 +47,7 @@ variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [Monoida
   [MonoidalClosed C] [MonoidalClosed D] (G : C ⥤ D) [G.Monoidal]
 
 /-- If `Y` is a left dual of `X`, the comparison map `G [X, 𝟙] ⟶ [G X, G 𝟙]` is an
-isomorphism: precomposed with `G` of `Y ≅ [X, 𝟙]` and followed by `[G X, G 𝟙] ≅ [G X, 𝟙]`, it is
-the isomorphism `G Y ≅ [G X, 𝟙]` of the mapped exact pairing. -/
+isomorphism. -/
 lemma isIso_ihomComparison_app_unit_of_exactPairing (Y X : C) [ExactPairing Y X] :
     IsIso ((ihomComparison G X).app (𝟙_ C)) := by
   let := ExactPairing.map G Y X
@@ -66,9 +65,7 @@ lemma isIso_ihomComparison_app_unit_of_exactPairing (Y X : C) [ExactPairing Y X]
   exact IsIso.of_isIso_comp_right _ ((ihom (G.obj X)).map (η G))
 
 /-- **The comparison map at a dualizable object.** If `Y` is a left dual of `X`, the comparison
-map `G [X, Z] ⟶ [G X, G Z]` of a monoidal functor is an isomorphism for every `Z`: both sides
-are `Y ⊗ Z` (`CategoryTheory.Functor.Monoidal.map_ihomUnitTensorToIhom_comp`), and the case
-`Z = 𝟙` is `isIso_ihomComparison_app_unit_of_exactPairing`. -/
+map `G [X, Z] ⟶ [G X, G Z]` of a monoidal functor is an isomorphism for every `Z`. -/
 lemma isIso_ihomComparison_app_of_exactPairing (Y X : C) [ExactPairing Y X] (Z : C) :
     IsIso ((ihomComparison G X).app Z) := by
   let := ExactPairing.map G Y X
@@ -89,8 +86,7 @@ noncomputable def ihomRightAdjointComparison (K : C) (N : D) :
     (ihom K).obj (H.obj N) ⟶ H.obj ((ihom (G.obj K)).obj N) :=
   adj.homEquiv _ _ (curry (μ G K _ ≫ G.map ((ihom.ev K).app (H.obj N)) ≫ adj.counit.app N))
 
-/-- For an adjunction `G ⊣ H` with `G` strong monoidal, `[K, H N] ≅ H [G K, N]`: maps
-`W ⟶ [K, H N]` and `W ⟶ H [G K, N]` both correspond to maps `G K ⊗ G W ≅ G (K ⊗ W) ⟶ N`. -/
+/-- For an adjunction `G ⊣ H` with `G` strong monoidal, `[K, H N] ≅ H [G K, N]`. -/
 lemma isIso_ihomRightAdjointComparison (K : C) (N : D) :
     IsIso (ihomRightAdjointComparison adj K N) := by
   refine isIso_of_yoneda_map_bijective _ fun W ↦ ?_
@@ -115,9 +111,7 @@ lemma isIso_ihomRightAdjointComparison (K : C) (N : D) :
 
 /-- **The comparison map into a fully faithful right adjoint.** Let `G ⊣ H` with `G` strong
 monoidal and invertible counit. Then the comparison map `G [K, H N] ⟶ [G K, G H N]` is an
-isomorphism for all `K` and `N`: followed by `[G K, G H N] ≅ [G K, N]`, it is the transpose
-`G [K, H N] ⟶ [G K, N]` of the isomorphism `[K, H N] ≅ H [G K, N]`
-(`CategoryTheory.Functor.Monoidal.isIso_ihomRightAdjointComparison`). For a closed immersion
+isomorphism for all `K` and `N`. For a closed immersion
 `i` this says that `i^* RHom(K, Ri_* N) ≅ RHom(i^* K, i^* Ri_* N)`, and likewise for an open
 immersion. -/
 lemma isIso_ihomComparison_app_rightAdjoint [IsIso adj.counit] (K : C) (N : D) :
@@ -177,8 +171,7 @@ variable {C : Type*} [Category* C] [Preadditive C] [HasZeroObject C] [HasShift C
 /-- **A five lemma without the connecting morphisms.** Let `T₁` and `T₂` be distinguished
 triangles and `φᵢ : T₁.objᵢ ⟶ T₂.objᵢ` maps compatible with the first two morphisms of the
 triangles, but not necessarily with the connecting morphisms. If there are no nonzero maps
-`T₁.obj₁⟦1⟧ ⟶ T₂.obj₃` and `φ₁`, `φ₃` are isomorphisms, then so is `φ₂`: the map
-`T₁.obj₃ ⟶ T₂.obj₃` completing `(φ₁, φ₂)` to a morphism of triangles is forced to be `φ₃`. -/
+`T₁.obj₁⟦1⟧ ⟶ T₂.obj₃` and `φ₁`, `φ₃` are isomorphisms, then so is `φ₂`. -/
 lemma isIso₂_of_isIso₁₃_of_subsingleton {T₁ T₂ : Triangle C} (hT₁ : T₁ ∈ distTriang C)
     (hT₂ : T₂ ∈ distTriang C) (φ₁ : T₁.obj₁ ⟶ T₂.obj₁) (φ₂ : T₁.obj₂ ⟶ T₂.obj₂)
     (φ₃ : T₁.obj₃ ⟶ T₂.obj₃) (h₁ : T₁.mor₁ ≫ φ₂ = φ₁ ≫ T₂.mor₁)

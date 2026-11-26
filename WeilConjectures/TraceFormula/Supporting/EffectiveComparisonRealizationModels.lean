@@ -18,14 +18,41 @@ import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 /-!
 # Effective normalized integral realization models
 
-Source: Stacks Project, Tags 099N(2),(5) and 0941; blueprint
-`sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md`,
-final common-stage transport paragraph
-(blueprint: lem-trf-effective-comparison-realization-models).
-
+We show that effective normalized integral realization models exist simultaneously for all
+finite coefficient fields and embeddings (`WeilConjectures.effectiveComparisonRealizationModels`).
 The assertion retains the actual system adjunction, the representative-normalized
 primitive models, and the strict quotient augmentation. Effectivity is stated in
 the derived category of the entire quotient diagram.
+
+## Implementation details
+
+The proof of `WeilConjectures.effectiveComparisonRealizationModels` proceeds as follows.
+1. Exact countable products on the pro-étale site and the strict Roos comparison provide one
+   natural cone/total-limit comparison, normalized by the ordinary limit tuple and zero shifted
+   coordinate on every K-injective tower.
+2. The counit of the whole-system adjunction of `coefficientDerivedSystemEvaluationCalculus` is
+   the coefficient change of `integralComparisonTowerCounit`
+   (`integralComparisonReductionCounit_formula`); on a K-injective resolution `q` it is the
+   ordinary limit cone followed by the inverse of `q`.
+3. On flat-term K-flat representatives, exact finite inverse image sends the quotient diagram to
+   the completed-pullback tower; the Roos comparison gives pullback with the prescribed
+   generator normalization.
+4. For scalar change, `coefficientExtensionReductionModel` reassociates successive quotient
+   tensors by `(x ⊗ a) ⊗ b ↦ x ⊗ ab`, retaining every transition; the resulting cone is
+   `integralScalarExtensionOfUniverses`. No flatness of quotient ring maps is used.
+5. The strict quotient augmentation is a chain map with zero shifted coordinate, and the unit
+   identity holds on every coherent presentation.
+6. Reduction is normalized, and normalized reconstruction makes the counits invertible and their
+   realizations complete.
+7. `integralOperations_preserve_constructible` and `sfIntegralScalarExtension_constructible`,
+   transported through the primitive isomorphisms, give constructible realizations with one
+   uniform finite interval.
+8. The pullback and scalar well-definedness theorems make all formulas independent of the
+   chosen resolutions.
+
+## References
+
+* [Stacks: Tags 099N (2), (5), 0941]
 -/
 
 @[expose] public noncomputable section
@@ -47,9 +74,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- The actual completion unit is the strict quotient augmentation, on every
 whole-system coherent quotient presentation of every flat-term K-flat representative.
 The unshifted projections are quotient-unit sections; every shifted coordinate
-is zero. The final equation is an equality of entire derived morphisms.
-Source: Stacks 0941; blueprint common-stage transport, completion-unit normalization
-(blueprint: lem-trf-effective-comparison-realization-models). -/
+is zero. The final equation is an equality of entire derived morphisms. -/
 def IsEffectiveComparisonCompletionNormalized (X : Scheme.{t})
     (S : CoefficientDerivedSystemCalculus l E X)
     (ρ : IntegralComparisonRoosModel l E X) : Prop :=
@@ -84,9 +109,7 @@ def IsEffectiveComparisonCompletionNormalized (X : Scheme.{t})
 
 /-- Simultaneous primitive models and effectivity, for all finite coefficient
 fields and embeddings (in particular identities and composite embeddings).
-All model types are the published representative-normalized interfaces.
-Source: Stacks 099N(2),(5), 0941; blueprint common-stage transport
-(blueprint: lem-trf-effective-comparison-realization-models). -/
+All model types are the representative-normalized interfaces. -/
 structure EffectiveComparisonRealizationModels (l : ℕ) [Fact l.Prime] where
   /-- The specified whole-system reduction/realization calculus. -/
   system : ∀ (E : Type u) [Field E] [Algebra ℚ_[l] E]
@@ -168,41 +191,7 @@ private theorem complete_unrestricted
   have hl : l ≠ D.p := by change l ≠ p; omega
   exact ⟨D, hl, (sfDerivedComplete_iff_legacy l E X D hl K).mp hK⟩
 
-/-- Effective normalized models exist simultaneously.
-Source: Stacks 099N(2),(5), 0941; blueprint common-stage transport
-(blueprint: lem-trf-effective-comparison-realization-models).
-
-Proof: (1) Exact countable products on the pro-etale site and strict Roos comparison
-provide one natural cone/total-limit comparison, normalized by the ordinary limit
-tuple and zero shifted coordinate on every K-injective tower.
-(2) Use the whole-system adjunction of coefficientDerivedSystemEvaluationCalculus.
-Its counit is coefficient change of integralComparisonTowerCounit, as computed by
-integralComparisonReductionCounit_formula. On a K-injective resolution q the latter
-is the ordinary limit cone followed by the inverse of q, simultaneously as a tower map.
-(3) Choose flat-term K-flat representatives using lem-pc-kflat-resolution.
-Change of rings preserves their K-flatness. Exact finite inverse image sends their
-actual quotient diagram to the defining completed-pullback tower. Applying the
-single Roos comparison gives pullback with the prescribed generator normalization.
-(4) For scalar change use coefficientExtensionReductionModel: successive quotient
-tensors reassociate by (x tensor a) tensor b to x tensor ab, retaining every
-transition. The resulting cone is integralScalarExtensionOfUniverses. For three
-fields both associations multiply all three scalars; identity coefficients multiply
-by the unit. No quotient ring-map flatness is used.
-(5) The strict quotient augmentation is a chain map since its quotient tuple is
-killed by 1-shift. Its shifted coordinate is zero. The actual unit identity is the
-completion-unit strict-quotient-model lemma, and holds on every coherent presentation.
-(6) Reduction is normalized; exact whole-system inverse image and the scalar
-reduction-model comparison preserve normalization. purNormalizedReconstruction
-makes the actual counits invertible and their realizations complete. Its unit
-clause applies to the given complete K.
-(7) integralOperations_preserve_constructible and
-sfIntegralScalarExtension_constructible, transported through the primitive
-isomorphisms, give constructible realizations with one uniform finite interval.
-(8) The pullback and scalar well-definedness theorems descend the comparisons
-through every K-flat representative and common refinement. The Roos comparison
-is natural on entire tower complexes and computed on every K-injective tower;
-the counit is the natural transformation of the whole-system adjunction.
-Thus all formulas are resolution-independent and retain all quotient transitions. -/
+/-- Effective normalized models exist simultaneously. -/
 theorem effectiveComparisonRealizationModels (l : ℕ) [Fact l.Prime] :
     Nonempty (EffectiveComparisonRealizationModels.{u} l) := by
   classical

@@ -38,7 +38,7 @@ a geometric stalk.
 
 ## Implementation notes
 
-The proof follows the blueprint: embed `F` in an injective sheaf `I`, compare the long exact
+The proof proceeds as follows: embed `F` in an injective sheaf `I`, compare the long exact
 sequences of `0 ⟶ F ⟶ I ⟶ I / F ⟶ 0` through the base-change maps, and use that the source
 of the degree-`q` map vanishes on `I` and that the degree-`(q - 1)` maps are isomorphisms. The
 long exact sequences are the homology sequences of the images of the distinguished triangle
@@ -64,9 +64,8 @@ namespace AlgebraicGeometry
 variable (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}} {p : X ⟶ S}
   {T Y : Scheme.{u}} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
 
-/-- Blueprint `lemma-injectivity-base-change-map-degree` (1): Injectivity of the critical map.
-
-Let `q ≥ 1` and assume `BC(p, Λ, q - 1)`. Then for every Cartesian square
+/-- Injectivity of the critical map: let `q ≥ 1` and assume `BC(p, Λ, q - 1)`. Then for every
+Cartesian square
 
 ```
 Y --e--> T
@@ -103,15 +102,10 @@ theorem Etale.mono_baseChangeHomologyMap (q : ℤ) (hq : 1 ≤ q)
     (inferInstanceAs (Epi δS)) (inferInstanceAs (Epi (Etale.baseChangeHomologyMap Λ sq _ _)))
     (inferInstanceAs (Mono (Etale.baseChangeHomologyMap Λ sq _ _)))
 
-/-- Blueprint `lemma-injectivity-base-change-map-degree` (3): the cokernel of the critical map sits
-inside the higher direct image of an injective sheaf.
-
-In the situation of `AlgebraicGeometry.Etale.mono_baseChangeHomologyMap`, if `F` is a
-subsheaf of an injective sheaf `G`, then the map `R^q h_* e⁻¹ F ⟶ R^q h_* e⁻¹ G` kills the
-image of the base-change map for `F` — the source of the base-change map for `G` vanishes,
-`G` being injective and `q` positive — and the induced map from the cokernel is injective.
-The vanishing that makes the map out of the cokernel exist is
-`AlgebraicGeometry.Etale.baseChangeHomologyMap_comp_map_eq_zero_of_injective`. -/
+/-- The cokernel of the critical map sits inside the higher direct image of an injective sheaf:
+in the situation of `AlgebraicGeometry.Etale.mono_baseChangeHomologyMap`, if `F` is a subsheaf
+of an injective sheaf `G`, then the map `R^q h_* e⁻¹ F ⟶ R^q h_* e⁻¹ G` kills the image of the
+base-change map for `F`, and the induced map from the cokernel is injective. -/
 @[stacks 0F03]
 theorem Etale.mono_cokernelDesc (q : ℤ) (hq : 1 ≤ q)
     (hprev : Etale.BaseChangeProperty Λ p (q - 1)) [QuasiCompact g] [QuasiSeparated g]
@@ -146,12 +140,9 @@ theorem Etale.mono_cokernelDesc (q : ℤ) (hq : 1 ≤ q)
       τ₃ := 𝟙 _ }
   exact (ShortComplex.exact_iff_of_epi_of_isIso_of_mono ψ).2 hT₂
 
-/-- Blueprint `lemma-injectivity-base-change-map-degree` (2): the cokernel of the critical map grows
-with the coefficient sheaf.
-
-In the situation of `AlgebraicGeometry.Etale.mono_baseChangeHomologyMap`, if `F` is a
-subsheaf of `G`, then the map induced on the cokernels of the two base-change maps by the
-naturality `AlgebraicGeometry.Etale.baseChangeHomologyMap_naturality` is injective. -/
+/-- The cokernel of the critical map grows with the coefficient sheaf: in the situation of
+`AlgebraicGeometry.Etale.mono_baseChangeHomologyMap`, if `F` is a subsheaf of `G`, then the map
+induced on the cokernels of the two base-change maps is injective. -/
 @[stacks 0F03]
 theorem Etale.mono_cokernelMap (q : ℤ) (hq : 1 ≤ q)
     (hprev : Etale.BaseChangeProperty Λ p (q - 1)) [QuasiCompact g] [QuasiSeparated g]
@@ -176,11 +167,9 @@ theorem Etale.mono_cokernelMap (q : ℤ) (hq : 1 ≤ q)
   rw [← hfac] at this
   exact mono_of_mono _ (cokernel.desc _ _ (hzero (Injective.ι G)))
 
-/-- Blueprint `lemma-injectivity-base-change-map-degree`: Injectivity of the critical map and its
-cokernel.
-
-Assume that `BC(p, Λ, q - 1)` holds universally for some `q ≥ 1`, and let `p' : X' ⟶ S'` be
-the base change of `p` along `a : S' ⟶ S`. Then for every Cartesian square
+/-- Injectivity of the critical map and its cokernel: assume that `BC(p, Λ, q - 1)` holds
+universally for some `q ≥ 1`, and let `p' : X' ⟶ S'` be the base change of `p` along
+`a : S' ⟶ S`. Then for every Cartesian square
 
 ```
 Y --e--> T
@@ -196,11 +185,7 @@ with `g` quasi-compact quasi-separated:
 2. for a subsheaf `F ⊆ G`, the cokernel of the base-change map for `F` injects into the one
    for `G`;
 3. if moreover `G` is injective, the cokernel of the base-change map for `F` injects into
-   `R^q h_* e⁻¹ G`.
-
-Only `BC(p', Λ, q - 1)`, which is part of the universal hypothesis, enters, through
-`AlgebraicGeometry.Etale.mono_baseChangeHomologyMap`,
-`AlgebraicGeometry.Etale.mono_cokernelMap` and `AlgebraicGeometry.Etale.mono_cokernelDesc`. -/
+   `R^q h_* e⁻¹ G`. -/
 @[stacks 0F03]
 theorem Etale.UniversalBaseChangeProperty.mono_baseChangeHomologyMap_and_cokernel {q : ℤ}
     (hq : 1 ≤ q) (huniv : Etale.UniversalBaseChangeProperty Λ p (q - 1)) {S' X' : Scheme.{u}}

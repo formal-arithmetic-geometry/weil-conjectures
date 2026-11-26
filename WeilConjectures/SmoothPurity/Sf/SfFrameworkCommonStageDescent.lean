@@ -18,10 +18,6 @@ public import WeilConjectures.CategoryTheory.StageSystem.Functor
 
 /-! # Descent on the framework common-stage coefficient categories
 
-Source: blueprint main-20261015, sec-smooth-purity/sk-prop-sf-localization,
-prop-sf-open-closed-triangle-all-stages.proof.md, algebraically closed coefficient
-and Weil-structures paragraphs (blueprint: lem-sf-framework-common-stage-descent).
-
 The stages, transitions, associators, units, shifts and triangles are the recorded
 intrinsic framework constructions. The linear structures are their published
 finite-compositum scalar actions. StageSystem.Morphism bundles exactly the tower
@@ -45,9 +41,7 @@ open AlgebraicGeometry
 namespace WeilConjectures
 
 /-- The actual multiplication-unit square, expressed without normalizing the identity
-transition to an identity functor. HEq transports the published equality of transitions.
-Source: algebraically closed coefficient paragraph, unit compatibility
-(blueprint: lem-sf-framework-common-stage-descent). -/
+transition to an identity functor. HEq transports the published equality of transitions. -/
 def sfFrameworkUnitCompatible (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
     (T : Scheme.{t}) (S : Scheme.{u})
@@ -63,9 +57,7 @@ def sfFrameworkUnitCompatible (l : ℕ) [Fact l.Prime]
 
 /-- The hypotheses of framework descent, retaining the actual scalar tower square
 in system.coh. The unit equation uses the actual multiplication units; HEq only
-accommodates the published stage system's equality with the tensor transitions.
-Source: algebraically closed coefficient paragraph, extracted descent interface
-(blueprint: lem-sf-framework-common-stage-descent). -/
+accommodates the published stage system's equality with the tensor transitions. -/
 structure SfFrameworkFamily (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
     (T : Scheme.{t}) (S : Scheme.{u}) where
@@ -442,9 +434,7 @@ private theorem commShift_ext
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option linter.unusedVariables false in
-/-- The actual composite finite functor has its ordinary composite shift comparison.
-Source: algebraically closed coefficient paragraph, composition of families
-(blueprint: lem-sf-framework-common-stage-descent). -/
+/-- The actual composite finite functor has its ordinary composite shift comparison. -/
 instance sfFrameworkCompositeFiniteShift
     (F : SfFrameworkFamily l Ω T S) (G : SfFrameworkFamily l Ω S V)
     (E : Padic.FiniteCoefficientFields l Ω) :
@@ -452,16 +442,7 @@ instance sfFrameworkCompositeFiniteShift
   inferInstanceAs ((F.system.Φ E ⋙ G.system.Φ E).CommShift ℤ)
 
 /-- The composite family has the scalar-shift square and multiplication-unit square.
-Its exactness and linearity are the ordinary composite instances at each finite field.
-Source: algebraically closed coefficient paragraph, composition of families
-(blueprint: lem-sf-framework-common-stage-descent).
-
-Proof: step 10. The comparison is xi at Phi followed by Xi applied to beta.
-Substitute the two unit equations. For shifts use the shift square of xi,
-naturality of xi on the finite Phi shift comparison, naturality of the Xi
-shift comparison on beta, and the shift square of beta. For the tower use
-the two original tower equations and naturality of xi on beta; this is
-precisely the coherence already in StageSystem.Morphism.comp. -/
+Its exactness and linearity are the ordinary composite instances at each finite field. -/
 theorem sfFrameworkComposite_compatible
     (F : SfFrameworkFamily l Ω T S) (G : SfFrameworkFamily l Ω S V) :
     (∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
@@ -484,9 +465,7 @@ theorem sfFrameworkComposite_compatible
       (GeneralAlgebraicallyClosedCoefficients.unitor l Ω V E)
       K (F.unit E K) (G.unit E ((F.system.Φ E).obj K))
 
-/-- Composition of the given families, with the actual whiskered scalar comparisons.
-Source: algebraically closed coefficient paragraph, composition of families
-(blueprint: lem-sf-framework-common-stage-descent). -/
+/-- Composition of the given families, with the actual whiskered scalar comparisons. -/
 def SfFrameworkFamily.comp (F : SfFrameworkFamily l Ω T S) (G : SfFrameworkFamily l Ω S V) :
     SfFrameworkFamily l Ω T V where
   system := F.system.comp G.system

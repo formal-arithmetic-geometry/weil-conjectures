@@ -17,8 +17,24 @@ import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 /-!
 # Geometric regularity ascends along quasi-finite maps
 
-Source: Stacks Project, More on Algebra, Lemma 07PP (blueprint:
-lem-weil-pbc-formal-fibre-quasi-finite-ascent).
+Geometric regularity of formal fibres ascends along a finite type map which is quasi-finite at
+the relevant prime.
+
+## Implementation details
+
+The fibre rings use Mathlib's residue-field-first tensor order, canonically isomorphic as
+residue-field algebras to the completion-first order used in the literature.
+
+Quasi-finiteness splits `completion(R_p) ⊗_R R'` as `completion(R'_(p')) × B`. Tensoring with
+`κ(q')` exhibits the target formal fibre `F` as a factor of
+`C = κ(q') ⊗_{κ(q)} (κ(q) ⊗_R completion(R_p))`. Since `κ(q')` is finitely generated over
+`κ(q)`, so is every finite purely inseparable extension `L` of `κ(q')`, hence `L ⊗_{κ(q')} C` is
+Noetherian and regular. The factor `L ⊗_{κ(q')} F` is a localization at an idempotent, hence
+regular as well.
+
+## References
+
+* [Stacks, Tag 07PP]
 -/
 
 @[expose] public section
@@ -43,30 +59,10 @@ private theorem regularRing_fst
 
 namespace RingHom
 
-/-- Geometric regularity of a formal fibre ascends along a map quasi-finite at the prime.
-Source: Stacks Project, More on Algebra, Lemma 07PP, item (1)
-(blueprint: lem-weil-pbc-formal-fibre-quasi-finite-ascent).
-The fibre rings use Mathlib's residue-field-first tensor order, canonically isomorphic
-as residue-field algebras to the completion-first order in the source.
-
-Proof plan, following the six steps of the node:
-1. Completion-at-quasi-finite-prime splits completion(R_p) ⊗[R] R' as
-   completion(R'_(p')) × B, compatibly with the natural R'-algebra structures.
-2. Tensor this splitting over R' with κ(q'); tensor products commute with finite
-   products, so the target formal fibre F is a factor of the resulting algebra.
-3. Since q is the contraction of q', localization-at-prime induces κ(q) → κ(q').
-   Tensor-cancel-base-change, twice, identifies the resulting algebra with
-   C = κ(q') ⊗[κ(q)] (κ(q) ⊗[R] completion(R_p)).
-4. The images of finitely many R-algebra generators of R' generate κ(q') as a
-   field extension of κ(q), so this extension is finitely generated.
-5. For κ(q') itself or any finite purely inseparable extension L/κ(q'), L/κ(q)
-   is finitely generated. Geometrically-regular-finitely-generated-extensions
-   shows L ⊗[κ(q')] C is Noetherian and regular. Thus C is geometrically regular.
-6. Tensor the splitting C ≅ F × B' with each such L. Projection to L ⊗[κ(q')] F
-   is localization at the idempotent (1,0); localization-of-regular-ring makes
-   this factor regular. Taking L = κ(q') gives Noetherianity of F. Thus F is
-   geometrically regular over κ(q'), as required.
--/
+/-- Let `R → R'` be of finite type between Noetherian rings and quasi-finite at `p'`, and let
+`q' ≤ p'` be primes of `R'` lying over `q ≤ p`. If the formal fibre of `R_p` over `q` is
+geometrically regular over `κ(q)`, then the formal fibre of `R'_(p')` over `q'` is geometrically
+regular over `κ(q')`. -/
 theorem isRegular_formalFiber_of_isQuasiFiniteAtPrime
     {R : Type u} {R' : Type v} [CommRing R] [CommRing R']
     [IsNoetherianRing R] [IsNoetherianRing R']

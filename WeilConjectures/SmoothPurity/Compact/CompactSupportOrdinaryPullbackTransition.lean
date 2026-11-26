@@ -12,8 +12,13 @@ import WeilConjectures.SmoothPurity.Compact.CompactSupportOrdinaryPullbackUnit
 
 /-! # Horizontal compatibility of native inverse image
 
-Source: Stacks Project, Tags 03DA, 03D3 and 0941; Zheng 4.1.
-(blueprint: lem-weil-compact-support-ordinary-pullback-transition).
+This module shows that horizontal maps of ordinary coefficient systems commute with native
+inverse image.
+
+## References
+
+* Stacks Project, Tags 03DA, 03D3 and 0941
+* Zheng, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -134,15 +139,7 @@ private theorem scalarPullback_unit {A B : Type u} [CommRing A] [CommRing B]
     (proEtaleConstantRingAdjunction A f)
     (compactSupportScalarDirectImage f φ).hom M).symm
 
-/-- Horizontal maps of ordinary coefficient systems commute with native inverse image.
-Source: Stacks Project, Tags 03DA, 03D3 and 0941; Zheng 4.1.
-(blueprint: lem-weil-compact-support-ordinary-pullback-transition).
-Proof: direct image and coefficient evaluation keep the same section carriers. The
-horizontal map is the actual presheaf restriction along (n,V) to (m,V), and product
-base change preserves that arrow. Transpose that sectionwise square using the
-specified inverse-image adjunctions and the normalization of moduleEvalG. The scalar
-inverse-image comparison is the inverse mate of the direct-image scalar square,
-so its unit equation gives the required last factor. -/
+/-- Horizontal maps of ordinary coefficient systems commute with native inverse image. -/
 theorem compactSupportOrdinaryPullbackTransition {X Y : Scheme.{u}} (f : X ⟶ Y)
     {m n : ℕ} (h : n ≤ m) (N : coefficientSequenceModules.{u, u} l E Y) :
     (compactSupportOrdinaryCoefficientTransition l E X h).app

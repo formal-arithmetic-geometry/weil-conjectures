@@ -16,7 +16,9 @@ import WeilConjectures.CategoryTheory.Diagram.DiagramSiteTopology
 
 /-! # Direct-image acyclicity of native systems restricted to constant scalars
 
-Source: Stacks Project, Cohomology on Sites, Tag 0D6E.
+## References
+
+* Stacks Project, Tag 0D6E.
 -/
 
 @[expose] public noncomputable section
@@ -687,30 +689,7 @@ attribute [local instance 100000] NativeConstantModel.sequenceSmall
   NativeConstantModel.siteAbSheafify NativeConstantModel.siteAbLocallyBijective
 
 /-- Whole-tower direct image preserves a K-injective resolution map of a native
-K-injective system after restriction to constant integral scalars.
-
-Source: Stacks Project, `sites-cohomology.tex`, Tag 0D6E,
-`lemma-derived-pushforward-composition`, on the ringed sequence sites.
-(blueprint: lem-pur-native-constant-restriction-acyclicity).
-
-Proof: realize strict constant-ring towers as modules on the constant ringed
-sequence site. The maps from constant integral scalars to the finite quotients
-form a ring-sheaf map: the limit-cone equations identify the composite through
-the completed coefficient sheaf with the actual constant quotient maps.
-Under the sequence-site equivalence, restriction along this map is precisely
-the displayed composite, on sections, horizontal transitions and module maps.
-It is exact since restriction changes only scalar actions. Regard it as the
-direct image r_* of the identity morphism of ringed topoi, and whole-tower
-direct image as g_*. The normalized composition theorem identifies
-Rg_* Rr_* with R(g r)_*. For a K-injective I, the units for r_* and (g r)_*
-are invertible. Their composition-unit equation and exactness of r_* imply
-that the unit for g_* on r_* I is invertible. For a K-injective resolution
-j : r_* I ⟶ T, naturality of this unit, its invertibility on T, and invertibility
-of Q(j) show that Q(g_* j) is invertible. Localization reflects quasi-isomorphisms,
-so g_* j is a quasi-isomorphism. Transport through the exact sequence-site
-equivalences, which preserve the sectionwise direct image and j, gives the claim.
-This uses no preservation of K-injectivity by restriction. Empty schemes, zero
-complexes and nonflat quotient maps satisfy the same argument. -/
+K-injective system after restriction to constant integral scalars. -/
 theorem nativeConstantRestriction_push_quasiIso
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

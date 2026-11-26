@@ -77,13 +77,27 @@ public import WeilConjectures.CategoryTheory.Ringed.RingedDerivedClosedSymmetric
 
 /-! # Native Weil derived tensor and internal Hom under forgetting Frobenius
 
-Source: blueprint main-20261015, prose-10-20, internal-Hom
-comparison and transposition of evaluation; native refinement in the DAG proof
-(blueprint: def-sf-native-weil-closed-models).
+This file records the internal-Hom comparison and the transposition of evaluation under
+forgetting the Frobenius structure.
 
-The source is D(ProEtaleWeilSheaf), with constructibility imposed on cohomology.
-The data below expose the adjunctions and their representative normalization, so
-neither a chosen unrelated comparison nor a cohomology-only comparison suffices.
+## Implementation details
+
+The source is `D(ProEtaleWeilSheaf)`, with constructibility imposed on cohomology. The data
+below expose the adjunctions and their representative normalization, so neither a chosen
+unrelated comparison nor a cohomology-only comparison suffices.
+
+The ordinary relative tensor is curried with the right tensor parameter first, using
+`Mod.tensorLeft`, so its value at `(P, Q)` is `Q ⊗ P`. The native Hom differential has the
+row sign `(-1)^p`, while the total complex orders the curried parameter `P` first with
+differential `d_P + (-1)^p d_Q`, so the componentwise uncurrying is unsigned and the Koszul
+sign belongs to the signed swap. The normalization of the ordinary tensor model against the
+canonical localization tensorator rules out arbitrary symmetric rescalings of the model. The
+compatibility assertions of `NativeWeilClosedModels` are stated separately to avoid
+duplicating large dependent categorical types in structure constructors.
+
+## References
+
+* Stacks 0A95, 06YS, 08J9, 0A97
 -/
 
 @[expose] public section
@@ -97,9 +111,7 @@ open WeilConjectures
 
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
-/-- The ordinary sheaf internal Hom, with precomposition in its source.
-Source: Stacks Tag 0A95 and the native comparison proof, step 6
-(blueprint: lem-sf-weil-native-closed-forgetful). -/
+/-- The ordinary sheaf internal Hom, with precomposition in its source. -/
 noncomputable def ordinaryIhomBifunctor (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) :
     (ProEtale.AdicSheaf l Y)ᵒᵖ ⥤ ProEtale.AdicSheaf l Y ⥤ ProEtale.AdicSheaf l Y where
   obj A := ProEtale.AdicSheaf.ihom A.unop
@@ -107,31 +119,20 @@ noncomputable def ordinaryIhomBifunctor (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}
   map_id A := Mod.ihomMap_id A.unop
   map_comp f g := Mod.ihomMap_comp g.unop f.unop
 
-/-- Additivity of ordinary internal Hom in its source.
-Source: the product-Hom construction, Stacks Tag 0A95
-(blueprint: lem-sf-weil-native-closed-forgetful).
-Proof: precomposition by f+g is the sum of precompositions by f and by g;
-this is Mod.ihomMap_add, applied to the underlying module morphisms. -/
+/-- Additivity of ordinary internal Hom in its source. -/
 @[instance] theorem ordinaryIhomBifunctor_additive (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) :
     (ordinaryIhomBifunctor l Y).Additive := by
   constructor
   intro A B f g
   exact Mod.ihomMap_add f.unop g.unop
 
-/-- Additivity of ordinary internal Hom in its target.
-Source: the product-Hom construction, Stacks Tag 0A95
-(blueprint: lem-sf-weil-native-closed-forgetful).
-Proof: postcomposition by f+g is the sum of postcompositions. The sheaf Hom
-functor is a right adjoint between additive categories and is additive. -/
+/-- Additivity of ordinary internal Hom in its target. -/
 @[instance] theorem ordinaryIhomBifunctor_obj_additive (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u}) (A : (ProEtale.AdicSheaf l Y)ᵒᵖ) :
     ((ordinaryIhomBifunctor l Y).obj A).Additive := by
   exact inferInstanceAs (Mod.ihom A.unop).Additive
 
-/-- The ordinary relative tensor, curried with the right tensor parameter first.
-Its data are the existing Mod.tensorLeft and Mod.tensorLeftMap.
-Source: Stacks Tag 06YS and native comparison proof, step 5
-(blueprint: lem-sf-weil-native-closed-forgetful). -/
+/-- The ordinary relative tensor, curried with the right tensor parameter first. -/
 noncomputable def ordinaryTensorBifunctor (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) :
     ProEtale.AdicSheaf l Y ⥤ ProEtale.AdicSheaf l Y ⥤ ProEtale.AdicSheaf l Y where
   obj P := Mod.tensorLeft P
@@ -139,54 +140,38 @@ noncomputable def ordinaryTensorBifunctor (l : ℕ) [Fact l.Prime] (Y : Scheme.{
   map_id P := Mod.tensorLeftMap_id P
   map_comp f g := Mod.tensorLeftMap_comp f g
 
-/-- Additivity in the first curried tensor parameter.
-Source: Stacks Tag 06YS, the underived tensor construction
-(blueprint: lem-sf-weil-native-closed-forgetful).
-Proof: the relative tensor is the coequalizer of the two module actions. The
-induced map for f+g is the sum of the induced maps, by Mod.tensorLeftMap_add. -/
+/-- Additivity in the first curried tensor parameter. -/
 @[instance] theorem ordinaryTensorBifunctor_additive (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u}) : (ordinaryTensorBifunctor l Y).Additive := by
   constructor
   intro P Q f g
   exact Mod.tensorLeftMap_add f g
 
-/-- Additivity in the second curried tensor parameter.
-Source: Stacks Tag 06YS, the underived tensor construction
-(blueprint: lem-sf-weil-native-closed-forgetful).
-Proof: tensorLeft P is a left adjoint between additive categories, so it is
-additive. Equivalently, use the additive coequalizer presentation of tensor. -/
+/-- Additivity in the second curried tensor parameter. -/
 @[instance] theorem ordinaryTensorBifunctor_obj_additive (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u}) (P : ProEtale.AdicSheaf l Y) :
     ((ordinaryTensorBifunctor l Y).obj P).Additive := by
   exact (Mod.ihomAdjunction P).left_adjoint_additive
 
-/-- The sum-total ordinary relative tensor complex, with its Koszul differential.
-Source: Stacks Tag 06YS and native comparison proof, step 5
-(blueprint: lem-sf-weil-native-closed-forgetful). -/
+/-- The sum-total ordinary relative tensor complex, with its Koszul differential. -/
 noncomputable abbrev ordinaryTensorTotal (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ) :=
   CochainComplex.mapBifunctor P Q (ordinaryTensorBifunctor l Y)
 
-/-- The termwise forgetful functor localized at quasi-isomorphisms.
-Source: native comparison proof, step 2; Category.lean, WeilComplex.forget
-(blueprint: lem-sf-weil-native-closed-forgetful). -/
+/-- The termwise forgetful functor localized at quasi-isomorphisms. -/
 noncomputable abbrev nativeForget (k₀ : Type u) [Field k₀] [Finite k₀]
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :=
   (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)).mapDerivedCategory
 
 /-- Biduality is the transpose of evaluation after symmetry, for the specified
-closed adjunction. This definition asserts no invertibility.
-Source: prose-10-20, evaluation/transposition sentence
-(blueprint: lem-sf-weil-native-closed-forgetful). -/
+closed adjunction. -/
 def nativeBidual {D : Type a} [Category.{b} D] {H : Dᵒᵖ × D ⥤ D}
     (S : CoefficientClosedStructure H) (β : @SymmetricCategory D _ S.monoidal)
     (W K : D) : K ⟶ H.obj (op (H.obj (op K, W)), W) :=
   S.transpose K (H.obj (op K, W)) W
     ((β.toBraidedCategory.braiding K (H.obj (op K, W))).hom ≫ S.evaluation K W)
 
-/-- Product-total representative models, including both-variable naturality.
-Source: Stacks Tag 0A95 and native comparison proof, steps 4 and 6
-(blueprint: lem-sf-weil-native-closed-forgetful). -/
+/-- Product-total representative models, including both-variable naturality. -/
 structure NativeHomRepresentatives
     {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
     [HasDerivedCategory.{b} A] (H₀ : Aᵒᵖ ⥤ A ⥤ A)
@@ -205,11 +190,8 @@ structure NativeHomRepresentatives
         (CochainComplex.bifunctorHomMapLeft (H := H₀) (Y := I) f ≫
           CochainComplex.bifunctorHomMapRight (H := H₀) (K := P) g)
 
-/-- Representative normalization of forgetting internal Hom. The projection
-formula fixes the actual product-total comparison. The square then fixes its
-localized image, including the canonical localization factorization maps.
-Source: native comparison proof, step 6
-(blueprint: lem-sf-weil-native-closed-forgetful). -/
+/-- Representative normalization of forgetting internal Hom: the projection formula fixes the
+actual product-total comparison, and the square fixes its localized image. -/
 def NativeHomRepresentativeCompatibility
     {A B : Type a} [Category.{b} A] [Category.{b} B] [Abelian A] [Abelian B]
     [HasCountableProducts A] [HasCountableProducts B]
@@ -249,9 +231,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 
 /-- The two-variable derived internal Hom, with its actual product-total models.
 The source restriction is the recorded native derivedHom, as a functor, and the
-ordinary restriction is derived from the ordinary module-sheaf internal Hom.
-Source: native comparison proof, steps 4 and 6; Stacks Tag 0A95
-(blueprint: lem-sf-weil-native-closed-forgetful). -/
+ordinary restriction is derived from the ordinary module-sheaf internal Hom. -/
 structure NativeClosedHomModels where
   /-- The native derived internal Hom bifunctor. -/
   weilHom : (DerivedCategory (ProEtaleWeilSheaf k₀ l X))ᵒᵖ ×
@@ -278,9 +258,7 @@ structure NativeClosedHomModels where
     (ordinaryIhomBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ordinaryHom
 
 /-- The comparison obtained by uncurrying mapped evaluation, followed by the
-ordinary adjunction. Its arrow is specified, rather than chosen among isomorphisms.
-Source: native comparison proof, step 7; Stacks Tags 08J9 and 0A97
-(blueprint: lem-sf-weil-native-closed-forgetful). -/
+ordinary adjunction. -/
 def nativeHomComparison {C : Type a} [Category.{b} C]
     {D : Type a} [Category.{b} D] {HC : Cᵒᵖ × C ⥤ C} {HD : Dᵒᵖ × D ⥤ D}
     (SC : CoefficientClosedStructure HC) (SD : CoefficientClosedStructure HD)
@@ -289,9 +267,7 @@ def nativeHomComparison {C : Type a} [Category.{b} C]
   SD.transpose _ (U.obj K) (U.obj L)
     ((τ.app (HC.obj (op K, L), K)).inv ≫ U.map (SC.evaluation K L))
 
-/-- Preservation of the two symmetries by the tensor comparison.
-Source: native comparison proof, step 5
-(blueprint: lem-sf-weil-native-closed-forgetful). -/
+/-- Preservation of the two symmetries by the tensor comparison. -/
 def NativeSymmetryCompatibility {C : Type a} [Category.{b} C]
     {D : Type a} [Category.{b} D] {HC : Cᵒᵖ × C ⥤ C} {HD : Dᵒᵖ × D ⥤ D}
     (SC : CoefficientClosedStructure HC) (SD : CoefficientClosedStructure HD)
@@ -301,9 +277,7 @@ def NativeSymmetryCompatibility {C : Type a} [Category.{b} C]
   ∀ K L, U.map (βC.toBraidedCategory.braiding K L).hom ≫ (τ.app (L, K)).hom =
     (τ.app (K, L)).hom ≫ (βD.toBraidedCategory.braiding (U.obj K) (U.obj L)).hom
 
-/-- Associativity and unit coherence for the derived tensor comparison.
-Source: the canonical derived tensor comparison in native proof step 5
-(blueprint: lem-sf-weil-native-closed-forgetful). -/
+/-- Associativity and unit coherence for the derived tensor comparison. -/
 def NativeTensorCoherence {C : Type a} [Category.{b} C]
     {D : Type a} [Category.{b} D] {HC : Cᵒᵖ × C ⥤ C} {HD : Dᵒᵖ × D ⥤ D}
     (SC : CoefficientClosedStructure HC) (SD : CoefficientClosedStructure HD)
@@ -325,9 +299,7 @@ def NativeTensorCoherence {C : Type a} [Category.{b} C]
       SD.tensor.map (Prod.mkHom (𝟙 (U.obj K)) ε.hom) ≫
       (SD.monoidal.rightUnitor (U.obj K)).hom)
 
-/-- The evaluation square for a specified closed comparison.
-Source: native comparison proof, step 7
-(blueprint: lem-sf-weil-native-closed-forgetful). -/
+/-- The evaluation square for a specified closed comparison. -/
 def NativeEvaluationCompatibility {C : Type a} [Category.{b} C]
     {D : Type a} [Category.{b} D] {HC : Cᵒᵖ × C ⥤ C} {HD : Dᵒᵖ × D ⥤ D}
     (SC : CoefficientClosedStructure HC) (SD : CoefficientClosedStructure HD)
@@ -338,18 +310,14 @@ def NativeEvaluationCompatibility {C : Type a} [Category.{b} C]
       SD.tensor.map (Prod.mkHom (η.app (op K, L)).hom (𝟙 (U.obj K))) ≫
       SD.evaluation (U.obj K) (U.obj L)
 
-/-- Naturality of the transpose of evaluation after symmetry.
-Source: native comparison proof, step 8
-(blueprint: lem-sf-weil-native-closed-forgetful). -/
+/-- Naturality of the transpose of evaluation after symmetry. -/
 def NativeBidualNaturality {D : Type a} [Category.{b} D] {H : Dᵒᵖ × D ⥤ D}
     (S : CoefficientClosedStructure H) (β : @SymmetricCategory D _ S.monoidal) : Prop :=
   ∀ (W K K' : D) (f : K ⟶ K'), f ≫ nativeBidual S β W K' =
     nativeBidual S β W K ≫ H.map
       (Prod.mkHom (H.map (Prod.mkHom f.op (𝟙 W))).op (𝟙 W))
 
-/-- The actual equality of the two transposed evaluations under forgetting.
-Source: native comparison proof, step 8
-(blueprint: lem-sf-weil-native-closed-forgetful). -/
+/-- The actual equality of the two transposed evaluations under forgetting. -/
 def NativeBidualCompatibility {C : Type a} [Category.{b} C]
     {D : Type a} [Category.{b} D] {HC : Cᵒᵖ × C ⥤ C} {HD : Dᵒᵖ × D ⥤ D}
     (SC : CoefficientClosedStructure HC) (SD : CoefficientClosedStructure HD)
@@ -361,16 +329,14 @@ def NativeBidualCompatibility {C : Type a} [Category.{b} C]
       HD.map (Prod.mkHom (η.app (op K, W)).inv.op (𝟙 (U.obj W))) =
     nativeBidual SD βD (U.obj W) (U.obj K)
 
-/-- K-flatness for the actual ordinary total relative tensor.
-Source: Stacks Tag 06YS (blueprint: lem-sf-weil-native-closed-forgetful). -/
+/-- K-flatness for the actual ordinary total relative tensor. -/
 def NativeOrdinaryKFlat (Y : Scheme.{u})
     (P : CochainComplex (ProEtale.AdicSheaf l Y) ℤ) : Prop :=
   ∀ N : CochainComplex (ProEtale.AdicSheaf l Y) ℤ,
     N.Acyclic → (ordinaryTensorTotal l Y P N).Acyclic
 
-/-- The signed exchange on the actual ordinary total relative tensor.
-Source: Stacks Tag 06YS, Koszul symmetry on bidegrees
-(blueprint: lem-sf-weil-native-closed-forgetful). -/
+/-- The signed exchange on the actual ordinary total relative tensor, given by the Koszul
+symmetry on bidegrees. -/
 def NativeOrdinarySignedSwap (Y : Scheme.{u})
     (swap : ∀ P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ,
       ordinaryTensorTotal l Y P Q ≅ ordinaryTensorTotal l Y Q P) : Prop :=
@@ -384,12 +350,7 @@ def NativeOrdinarySignedSwap (Y : Scheme.{u})
           (HomologicalComplex.ιMapBifunctor Q P (ordinaryTensorBifunctor l Y)
             (.up ℤ) q p n hqp).hom)
 
-/-- Componentwise uncurrying fixes the adjunction, not just its right adjoint.
-The native Hom differential has the row sign (-1)^p. The total orders the
-curried parameter P first and has differential d_P + (-1)^p d_Q, so the
-componentwise uncurry is unsigned. The Koszul sign belongs to the signed swap.
-Source: Stacks Tags 08J9 and 0A97, native comparison proof, step 7
-(blueprint: lem-sf-weil-native-closed-forgetful). -/
+/-- Componentwise uncurrying fixes the adjunction, not just its right adjoint. -/
 def NativeAdjunctionNormalization
     {A : Type a} [Category.{b} A] [Abelian A]
     [HasCountableProducts A] [HasCountableCoproducts A] [HasDerivedCategory.{b} A]
@@ -415,13 +376,9 @@ def NativeAdjunctionNormalization
           (DerivedCategory.Q.obj I)).symm
             (DerivedCategory.Q.map φ ≫ (R.model P I hI).inv)
 
-/-- The ordinary derived tensor and symmetry on total K-flat representatives.
-The reversed order reflects Mod.tensorLeft: its value at (P,Q) is Q tensor P.
-The final clause fixes the model to the canonical localization tensorator, using
-its signed balanced-tensor comparison on every summand. It rules out arbitrary
-symmetric rescalings of the model relative to the fixed monoidal structure.
-Source: Stacks Tag 06YS and native comparison proof, step 5
-(blueprint: lem-sf-weil-native-closed-forgetful). -/
+/-- The ordinary derived tensor and symmetry on total K-flat representatives, with the model
+fixed to the canonical localization tensorator by its signed balanced-tensor comparison on
+every summand. -/
 def NativeOrdinaryTensorModels (Y : Scheme.{u})
     (H : (DerivedCategory (ProEtale.AdicSheaf l Y))ᵒᵖ ×
       DerivedCategory (ProEtale.AdicSheaf l Y) ⥤ DerivedCategory (ProEtale.AdicSheaf l Y))
@@ -459,10 +416,7 @@ def NativeOrdinaryTensorModels (Y : Scheme.{u})
             DerivedCategory.Q.map (κ P Q).inv))
 
 /-- Closed structures on the specified native and ordinary Hom models, and
-natural derived comparisons. Their compatibility assertions are stated separately
-to avoid duplicating large dependent categorical types in structure constructors.
-Source: native comparison proof, steps 4--8
-(blueprint: lem-sf-weil-native-closed-forgetful). -/
+natural derived comparisons. -/
 structure NativeClosedComparison where
   /-- Internal Hom has the specified native and ordinary two-resolution models. -/
   homModels : NativeClosedHomModels k₀ l X
@@ -492,9 +446,7 @@ structure NativeClosedComparison where
   homComparison : homModels.weilHom ⋙ nativeForget k₀ l X ≅
     (nativeForget k₀ l X).op.prod (nativeForget k₀ l X) ⋙ homModels.ordinaryHom
 
-/-- The unit comparison induced by forgetting the actual coefficient Weil sheaf.
-Source: native comparison proof, steps 1 and 5
-(blueprint: lem-sf-weil-native-closed-forgetful). -/
+/-- The unit comparison induced by forgetting the actual coefficient Weil sheaf. -/
 noncomputable def NativeClosedComparison.unitComparison
     (C : NativeClosedComparison k₀ l X) :
     (nativeForget k₀ l X).obj C.weilClosed.monoidal.tensorUnit ≅
@@ -505,9 +457,7 @@ noncomputable def NativeClosedComparison.unitComparison
         (adicConstant k₀ l X) ≪≫ C.ordinaryUnit.symm
 
 /-- The comparisons preserve the fixed adjunction, symmetry, evaluation and
-biduality; the Hom arrow is the specified transpose of mapped evaluation.
-Source: native comparison proof, steps 5--8
-(blueprint: lem-sf-weil-native-closed-forgetful). -/
+biduality; the Hom arrow is the specified transpose of mapped evaluation. -/
 def NativeClosedComparison.Compatible (C : NativeClosedComparison k₀ l X) : Prop :=
   (∀ K L, (C.homComparison.app (op K, L)).hom =
     nativeHomComparison C.weilClosed C.ordinaryClosed (nativeForget k₀ l X)

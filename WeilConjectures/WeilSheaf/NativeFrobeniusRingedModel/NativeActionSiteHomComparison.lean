@@ -10,8 +10,20 @@ public import WeilConjectures.WeilSheaf.DerivedHom
 
 /-! # Internal Hom along a specified native action-site realization
 
-Source: prose-10-20, internal-Hom and evaluation paragraph;
-the twisted action-site calculation, steps 11--12.
+This is part of the twisted action-site calculation.
+
+## Implementation details
+
+The Hom comparison composes the underlying isomorphisms `E(P.hom)` and `A.hom`, expanding the
+native `ihom_obj_str` formula. The ordinary Frobenius square `A.hom_frobenius` identifies the
+initial arrows, `A.hom_naturality` inserts the two structure maps, and naturality of `c`
+together with `P.hom_action` shows that the composite intertwines the native Weil
+structures. It uses the specified ordinary comparisons of `A`, rather than inferring
+preservation of Hom from additivity.
+
+## References
+
+* Stacks 03EO
 -/
 
 @[expose] public section
@@ -21,9 +33,7 @@ open CategoryTheory CategoryTheory.TwistedActionRingedSite Opposite
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
 /-- Restrict an action-site module and transport its structure map through the
-specified ordinary Frobenius comparison. No existence theorem chooses these data.
-Source: native ringed presentation step 2
-(blueprint: lem-sf-native-action-site-hom-comparison). -/
+specified ordinary Frobenius comparison. -/
 noncomputable def NativeFrobeniusRingedModel.toWeil
     {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
     {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
@@ -98,26 +108,7 @@ private noncomputable def action_hom_component
       A.E.functor.map f ≫ (A.hom m.obj.a n.obj.a).hom) (P.hom_action M N).symm
 
 /-- The specified action-site realization respects the actual native internal
-Hom, naturally in both module arguments. This asserts only compatibility for a
-specified functor; it does not construct a site or assert an equivalence.
-
-Source: prose-10-20, internal-Hom/evaluation paragraph;
-native ringed presentation step 3; twisted action-site steps 11--12; Stacks 03EO
-(blueprint: lem-sf-native-action-site-hom-comparison).
-
-Proof: compose the underlying isomorphisms E(P.hom) and A.hom. Expand the
-native ihom_obj_str formula for structures c_M followed by E(theta_M) and c_N
-followed by E(theta_N). Precomposition reverses the source composite. Commute
-precomposition by E(theta_M inverse) past postcomposition by c_N using
-naturality. The ordinary Frobenius square A.hom_frobenius identifies the initial
-arrows, and A.hom_naturality inserts the two structure maps. Naturality of c
-and P.hom_action then prove that the composite intertwines the native Weil
-structures. Lift it by Algebra.isoMk and ObjectProperty.isoMk. Finally compose
-P.hom_naturality with A.hom_naturality to obtain the naturality square in both
-arguments and assemble the components by NatIso.ofComponents. This uses A's
-specified ordinary comparisons; it does not infer preservation of Hom merely
-from additivity. Zero modules and an empty geometric fiber obey the same
-formulas, with no constructibility or local freeness hypothesis. -/
+Hom, naturally in both module arguments. -/
 theorem native_action_site_hom_comparison
     {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}}

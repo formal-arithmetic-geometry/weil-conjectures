@@ -9,7 +9,13 @@ public import WeilConjectures.SixFunctors.Compact.CompactSupportReductionTower
 import WeilConjectures.SmoothPurity.Qcqs.QcqsCompactSupportNativeTowerComparison
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Native.IntegralNativeOpenComparison
 
-/-! # Strict compact-support tower comparison -/
+/-! # Strict compact-support tower comparison
+
+## References
+
+* [Stacks, Tag 0941]
+* [Stacks, Tag 0D6E]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -111,28 +117,7 @@ private theorem nativeSupportIso_evaluation (o : Operations l E)
     Category.id_comp, Category.comp_id, Category.assoc] using hh
 
 /-- The simultaneous open/proper system comparison identifies the prescribed strict
-compact-support tower, retaining its specified finite evaluation maps.
-Source: Stacks 0941 and 0D6E; fix-prop-coherence.proof.md, coefficient comparisons,
-and primitive support realization Step 1
-(blueprint: lem-sf-integral-support-strict-tower-comparison).
-
-Proof: present the ordinary sequence-site direct images as the native varying-ring
-ones by the identity on sections. Their left adjoints are identified by the units;
-localizing the exact inverse images and taking right-adjoint conjugates identifies
-both the open and proper derived operations with the native operations. Compare the
-fixed reduction with the reduction used for the chosen support tower by uniqueness
-of left adjoints to the common total limit. Its unit-projection identity identifies
-finite evaluations with reductionEvaluation. Compose reduction, open, proper and
-strict scalar restriction comparisons before localizing the whole diagram. The
-result is the required tower isomorphism. Evaluating this composite, the ordinary
-unit identities and the defining transpose identity of o.openEvaluation identify
-its open component with that evaluation; the direct-image unit and counit identities
-identify its proper component with o.evaluation. Hence the evaluated composite is
-supportEvaluation followed by reductionEvaluation, with the displayed restricted
-coordinate change. The chosen evaluations e are retained throughout, rather than
-replaced by independently chosen levelwise comparisons. The restriction cocycle
-keeps all quotient transitions. No faithfulness of finite derived evaluations is
-used. Zero inputs and the empty open give the same zero comparison. -/
+compact-support tower, retaining its specified finite evaluation maps. -/
 theorem integralSupportStrictTowerComparison (K₀ : Type u) [Field K₀]
     (o : Operations l E)
     {X Y : Scheme.{u}} (f : X ⟶ Y)

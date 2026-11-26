@@ -18,8 +18,19 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 /-!
 # Filtered colimits of henselian pairs
 
-Source: Stacks Project, More on Algebra, Lemma 0FWT (blueprint:
-lem-weil-pbc-filtered-colimit-henselian-pair).
+A directed colimit of henselian pairs is a henselian pair.
+
+## Implementation details
+
+The proof uses the factorization criterion for henselian pairs (Stacks 09XI). Units of
+`1 + I` come from units `1 + x` with `x ∈ J i` at some stage, so `I` lies in the Jacobson
+radical. A coprime monic factorization modulo `I` descends to one stage
+(`filteredColimit_factorization_descent`), lifts there, and is mapped back to the colimit.
+
+## References
+
+* [Stacks, Tag 0FWT]
+* [Stacks, Tag 09XI]
 -/
 
 @[expose] public section
@@ -32,24 +43,7 @@ open CategoryTheory CategoryTheory.Limits Polynomial
 `Λ`, a directed system of commutative rings `F` with ideals `J i` carried into each other by
 the transition maps, every `(F.obj i, J i)` henselian, the union `I` of the images of the
 `J i` in `colimit F` is an ideal, contained in the Jacobson radical, and `(colimit F, I)` is
-henselian.
-Source: Stacks Project, More on Algebra, Lemma 0FWT.
-(blueprint: lem-weil-pbc-filtered-colimit-henselian-pair)
-
-Proof sketch:
-1. `Λ` is a filtered category, so every element of the colimit comes from a stage, two
-   elements of stages agreeing in the colimit agree at a later stage, and the union of the
-   images of the stage ideals is an ideal; an element of a stage landing in it lands in a
-   stage ideal later on.
-2. Each stage pair satisfies the factorization criterion (Stacks 09XI): its ideal lies in
-   the Jacobson radical and coprime monic factorizations modulo it lift.
-3. An element `u ∈ 1 + I` comes from some `1 + x` with `x ∈ J λ`, a unit at that stage,
-   so `u` is a unit; hence `I` lies in the Jacobson radical.
-4. A monic `f` over the colimit with a coprime monic factorization modulo `I` (the case
-   of a zero quotient being trivial) descends with its factors and Bezout coefficients to
-   one stage, where the factorization holds modulo the stage ideal after passing further.
-5. Lift the factorization at that stage and map it to the colimit; by the factorization
-   criterion `(colimit F, I)` is henselian. -/
+henselian. -/
 theorem filteredColimit_henselianPair
     {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]
     (F : Λ ⥤ CommRingCat.{u}) [HasColimit F]

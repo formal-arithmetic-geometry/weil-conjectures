@@ -49,6 +49,17 @@ and states the two theorems on nearby cycles that Varshavsky's vanishing argumen
   the invertibility of the zero-section map for all closed subschemes
   (`ProEtale.CondensedRing.isIso_zeroSectionMap`).
 
+## Implementation details
+
+The section `ẽ` is a closed immersion, so the smooth pullback exchange does not apply to it; the
+exchange form of Verdier's zero-section theorem is the case `I = ker x` of
+`ProEtale.CondensedRing.isIso_zeroSectionMap`, transported along
+`ProEtale.CondensedRing.isIso_pullbackExchange_zeroSectionModelHom_app_of_isIso_zeroSectionMap`.
+
+## References
+
+* Verdier, *Spécialisation de faisceaux et monodromie modérée*, Prop. 8.(5).
+
 -/
 
 @[expose] public section
@@ -85,17 +96,11 @@ noncomputable def specialization :
       (deformationModel_exists_comp_ε X x.left.ker k'))
 
 /-- **Verdier's zero-section theorem, exchange form** (Verdier, *Spécialisation de faisceaux et
-monodromie modérée*, Prop. 8.(5); blueprint `theorem-verdier-s-theorem-specialization-zero--1`, for
-the closed subscheme `Z = x`, with the constant family identification of
-`lemma-nearby-cycles-constant-family`): for `K` bounded constructible on `X`, the pullback exchange
-`α : Le^* Sp_{X,x}(K) ⟶ Ψ_S(Lx^* K)` along the section `ẽ : S ⟶ 𝒳` of the deformation to the
-normal cone (`ProEtale.CondensedRing.zeroSectionModelHom`) is an isomorphism. Followed by the
-inverse of the (invertible) specialization unit of the constant family `S`, it is the zero-section
-map `ε_{X,x}(K) : e^* Sp_{X,x}(K) ⟶ x^* K` of blueprint `prose-E-04`, which the
-blueprint node asserts to be an isomorphism. The section `ẽ` is a closed immersion, so the smooth
-pullback exchange of blueprint `prose-E-03` does not apply to it; instead this
-is the case `I = ker x` of `ProEtale.CondensedRing.isIso_zeroSectionMap`, transported along
-`ProEtale.CondensedRing.isIso_pullbackExchange_zeroSectionModelHom_app_of_isIso_zeroSectionMap`. -/
+monodromie modérée*, Prop. 8.(5), for the closed subscheme `Z = x`): for `K` bounded constructible
+on `X`, the pullback exchange `α : Le^* Sp_{X,x}(K) ⟶ Ψ_S(Lx^* K)` along the section `ẽ : S ⟶ 𝒳` of
+the deformation to the normal cone (`ProEtale.CondensedRing.zeroSectionModelHom`) is an isomorphism.
+Followed by the inverse of the (invertible) specialization unit of the constant family `S`, it is
+the zero-section map `ε_{X,x}(K) : e^* Sp_{X,x}(K) ⟶ x^* K`. -/
 theorem isIso_pullbackExchange_zeroSectionModelHom_app
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (((zeroSectionModelHom X x k').pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app
@@ -108,10 +113,9 @@ theorem isIso_pullbackExchange_zeroSectionModelHom_app
   exact h₂
 
 /-- **Verdier's zero-section theorem** (Verdier, *Spécialisation de faisceaux et monodromie
-modérée*, Prop. 8.(5); blueprint `theorem-verdier-s-theorem-specialization-zero--1`,
-`theorem-verdier-s-theorem-specialization-zero`): the restriction of the specialization
-`Sp_{X,x}(K)` to the zero section `x ⊗ k'` of the normal cone is the base change of the stalk `K_x`;
-in particular it vanishes if `K_x` does. -/
+modérée*, Prop. 8.(5)): the restriction of the specialization `Sp_{X,x}(K)` to the zero section
+`x ⊗ k'` of the normal cone is the base change of the stalk `K_x`; in particular it vanishes if
+`K_x` does. -/
 theorem isZero_upperStar_zeroSection_specialization
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (hK : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)) :
@@ -174,9 +178,8 @@ theorem isTraitProduct_deformationProdModel (I : X.left.IdealSheafData) :
   exists_comp_ε_right := deformationModel_exists_comp_ε X I k'
 
 /-- The Künneth map `Π_{K,L} : Sp_{X,x} K ⊠ Sp_{X,x} L ⟶ Sp_{X × X,(x,x)} (K ⊠ L)` of the
-specialization (blueprint `proposition-external-kunneth-formula-nearby-cycles`): the Künneth map of
-nearby cycles `NearbyCyclesModel.kunnethMap` of the projections of the product of the deformation
-models. -/
+specialization: the Künneth map of nearby cycles `NearbyCyclesModel.kunnethMap` of the projections
+of the product of the deformation models. -/
 noncomputable def specializationKunnethMap (K L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     externalProduct ℓ ((specialization k' x).obj K) ((specialization k' x).obj L) ⟶
       (specializationProd k' x).obj (externalProduct ℓ K L) :=
@@ -184,10 +187,8 @@ noncomputable def specializationKunnethMap (K L : Dᵇc(X.left)⟦Profinite.padi
     (deformationProdFstModelHom X x.left.ker X x.left.ker k')
     (deformationProdSndModelHom X x.left.ker X x.left.ker k') K.obj L.obj)
 
-/-- **Gabber's Künneth formula for the specialization** (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`):
-`Π_{K,L} : Sp_{X,x} K ⊠ Sp_{X,x} L ⟶ Sp (K ⊠ L)` is an isomorphism, by
-`NearbyCyclesModel.isIso_kunnethMap`. -/
+/-- **Gabber's Künneth formula for the specialization**:
+`Π_{K,L} : Sp_{X,x} K ⊠ Sp_{X,x} L ⟶ Sp (K ⊠ L)` is an isomorphism. -/
 instance isIso_specializationKunnethMap (K L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (specializationKunnethMap (ℓ := ℓ) k' x K L) := by
   have h := NearbyCyclesModel.isIso_kunnethMap ℓ
@@ -213,11 +214,10 @@ namespace IsContractingAt
 
 variable (k')
 
-/-- The *specialized correspondence* `c' = (γ₁, γ₂) : N_y C ⊗ k' ⟶ N_x X ⊗ k'` of the
-specialization `Ψ_X K` of `K` to the normal cone of `x = c₁(y)`: the special fibre of the
-deformation of `c` to the normal cones (blueprint
-`theorem-contracting-correspondences-local-terms`). Its coefficient map plays no role in the
-vanishing argument and is taken to be zero. -/
+/-- The *specialized correspondence* `c' = (γ₁, γ₂) : N_y C ⊗ k' ⟶ N_x X ⊗ k'` of the specialization
+`Ψ_X K` of `K` to the normal cone of `x = c₁(y)`: the special fibre of the deformation of `c` to the
+normal cones. Its coefficient map plays no role in the vanishing argument and is taken to be zero.
+-/
 noncomputable def specialCorrespondence :
     Correspondence ℓ (c.specialComplex k' y) where
   C := deformationSpecialFibre c.C y.left.ker k'

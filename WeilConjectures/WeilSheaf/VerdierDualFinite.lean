@@ -27,8 +27,7 @@ On a finite reduced `k₀`-scheme `Z` (finite étale over `k₀`), every Weil sh
 is again a Weil sheaf placed in degree zero (`𝔻_Z G ≅ G^∨`). By dévissage the Verdier dual
 `𝔻_Z` is t-exact: it carries complexes concentrated in degrees `[a, b]` to complexes
 concentrated in degrees `[-b, -a]`. In particular `𝓗⁻¹(𝔻_Z A) ≅ (𝓗¹ A)^∨` for every Weil
-complex `A` on `Z`, which is step 5 of the local boundary duality
-(`lemma-local-duality-point-c-u--1`).
+complex `A` on `Z`, which is step 5 of the local boundary duality.
 
 ## Main statements
 
@@ -37,6 +36,13 @@ complex `A` on `Z`, which is step 5 of the local boundary duality
   `𝓗⁻ⁿ(𝔻_Z A) ≅ 𝓗⁰(𝔻_Z (𝓗ⁿ(A)[0]))` in every degree.
 - `AlgebraicGeometry.WeilComplex.nonempty_homologySheaf_neg_one_verdierDual_iso`:
   `𝓗⁻¹(𝔻_Z A) ≅ (𝓗¹ A)^∨ ⊗ ℚ̄_ℓ(0) ⊗ ℚ̄_ℓ`.
+
+## Implementation details
+
+The t-exactness is proved by induction on the length of the interval of degrees, from the
+truncation triangles and `𝔻_Z (G[0]) ≅ G^∨[0]`. For `𝓗⁻ⁿ`, the truncation triangles
+`τ_{≤ n-1} A ⟶ A ⟶ τ_{≥ n} A ⟶` and `τ_{≤ n} τ_{≥ n} A ⟶ τ_{≥ n} A ⟶ τ_{≥ n+1} τ_{≥ n} A ⟶`,
+dualized, identify `𝓗⁻ⁿ(𝔻_Z A)` with `𝓗⁻ⁿ(𝔻_Z(𝓗ⁿ(A)[-n])) = 𝓗⁰(𝔻_Z(𝓗ⁿ(A)[0]))`.
 -/
 
 @[expose] public section
@@ -49,8 +55,7 @@ namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
-/-- A finite reduced scheme over a perfect field is étale over it: it is the spectrum of a
-finite reduced, hence étale, algebra (`Algebra.Etale.of_isReduced_of_perfectField`). -/
+/-- A finite reduced scheme over a perfect field is étale over it. -/
 theorem etale_of_isFinite_of_isReduced {K : Type u} [Field K] [PerfectField K] {Z : Scheme.{u}}
     (f : Z ⟶ Spec (.of K)) [IsFinite f] [IsReduced Z] : Etale f := by
   have : IsAffine Z := isAffine_of_isAffineHom f
@@ -98,8 +103,7 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
 /-- Weil complexes are stable under the truncations of the canonical t-structure of the derived
-category of pro-étale Weil sheaves: the truncations of a bounded complex are bounded, and their
-cohomology objects are those of the complex or zero. -/
+category of pro-étale Weil sheaves. -/
 instance : (objectProperty k₀ l X).HasInducedTStructure _root_.DerivedCategory.TStructure.t :=
   .mk' fun K hK n ↦ by
     obtain ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, hc⟩ := hK
@@ -162,8 +166,7 @@ variable {Z : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
 open Pretriangulated.Opposite
 
 /-- On a finite reduced `k₀`-scheme `Z`, the Verdier dual of a Weil sheaf `G` placed in degree
-zero is the Weil sheaf `G^∨ ⊗ ℚ̄_ℓ(0) ⊗ ℚ̄_ℓ` placed in degree zero: `G` is lisse and `Z` is étale,
-that is smooth of relative dimension zero, over `k₀`. -/
+zero is the Weil sheaf `G^∨ ⊗ ℚ̄_ℓ(0) ⊗ ℚ̄_ℓ` placed in degree zero. -/
 theorem nonempty_verdierDual_toComplex_iso_of_isFinite (G : WeilSheaf k₀ l Z) :
     Nonempty ((verdierDual k₀ l Z).obj (op (WeilSheaf.toComplex.obj G)) ≅
       WeilSheaf.toComplex.obj ((G.dual (WeilSheaf.isLisse_of_isFinite_of_isReduced G)).tensorObj
@@ -205,8 +208,7 @@ lemma verdierDual_mapTriangle_distinguished [(verdierDual k₀ l Z).CommShift �
 
 /-- **Dévissage for the Verdier dual on a finite reduced scheme**: `𝔻_Z` carries Weil complexes
 concentrated in degrees `[a, a + n - 1]` to Weil complexes concentrated in degrees
-`[-(a + n - 1), -a]`, by induction on `n`, from the truncation triangles and
-`𝔻_Z (G[0]) ≅ G^∨[0]`. -/
+`[-(a + n - 1), -a]`. -/
 theorem isGE_isLE_verdierDual_of_isFinite (n : ℕ) : ∀ (a : ℤ) (K : WeilComplex k₀ l Z),
     (tStructure k₀ l Z).IsGE K a → (tStructure k₀ l Z).IsLE K (a + n - 1) →
     (tStructure k₀ l Z).IsGE ((verdierDual k₀ l Z).obj (op K)) (-(a + n - 1)) ∧
@@ -301,10 +303,7 @@ lemma isZero_homologyFunctor_of_isLE (K : WeilComplex k₀ l Z) (n i : ℤ) (hi 
   _root_.DerivedCategory.isZero_of_isLE _ n i hi
 
 /-- **`𝔻_Z` in degree `-n`**: on a finite reduced `k₀`-scheme `Z`,
-`𝓗⁻ⁿ(𝔻_Z A) ≅ 𝓗⁰(𝔻_Z (𝓗ⁿ(A)[0]))` for every Weil complex `A`. The truncation triangles
-`τ_{≤ n-1} A ⟶ A ⟶ τ_{≥ n} A ⟶` and `τ_{≤ n} τ_{≥ n} A ⟶ τ_{≥ n} A ⟶ τ_{≥ n+1} τ_{≥ n} A ⟶`,
-dualized, identify `𝓗⁻ⁿ(𝔻_Z A)` with `𝓗⁻ⁿ(𝔻_Z(𝓗ⁿ(A)[-n])) = 𝓗⁰(𝔻_Z(𝓗ⁿ(A)[0]))`, `𝔻_Z` being
-t-exact. -/
+`𝓗⁻ⁿ(𝔻_Z A) ≅ 𝓗⁰(𝔻_Z (𝓗ⁿ(A)[0]))` for every Weil complex `A`. -/
 theorem nonempty_homologySheaf_neg_verdierDual_iso (A : WeilComplex k₀ l Z) (n : ℤ) :
     Nonempty ((homologySheaf (-n)).obj ((verdierDual k₀ l Z).obj (op A)) ≅
       (homologySheaf 0).obj ((verdierDual k₀ l Z).obj
@@ -372,9 +371,8 @@ theorem nonempty_homologySheaf_neg_verdierDual_iso (A : WeilComplex k₀ l Z) (n
   exact ⟨E₁.symm ≪≫ E₂ ≪≫ E₃ ≪≫
     (homologySheaf 0).mapIso ((verdierDual k₀ l Z).mapIso (WeilSheaf.toComplex.mapIso eH.symm).op)⟩
 
-/-- **`𝔻_Z` in degree `-1`** (blueprint: `lemma-local-duality-point-c-u--1`, step 5): on a finite
-reduced `k₀`-scheme `Z`, `𝓗⁻¹(𝔻_Z A) ≅ 𝓗⁰(𝔻_Z (𝓗¹(A)[0]))` for every Weil complex `A`: the
-case `n = 1` of `AlgebraicGeometry.WeilComplex.nonempty_homologySheaf_neg_verdierDual_iso`. -/
+/-- **`𝔻_Z` in degree `-1`**: on a finite reduced `k₀`-scheme `Z`,
+`𝓗⁻¹(𝔻_Z A) ≅ 𝓗⁰(𝔻_Z (𝓗¹(A)[0]))` for every Weil complex `A`. -/
 theorem nonempty_homologySheaf_neg_one_verdierDual_iso (A : WeilComplex k₀ l Z) :
     Nonempty ((homologySheaf (-1)).obj ((verdierDual k₀ l Z).obj (op A)) ≅
       (homologySheaf 0).obj ((verdierDual k₀ l Z).obj

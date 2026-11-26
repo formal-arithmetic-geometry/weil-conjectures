@@ -16,9 +16,24 @@ import Mathlib.Algebra.Category.Ring.FilteredColimits
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.Algebra.Category.Grp.Ulift
 
-/-! # Localized additive comparison
-Source: Stacks Project, Algebra, Tag 02JO first paragraph and Tag 037D.
-(blueprint: lem-pc-localized-module-colimit-comparison) -/
+/-!
+# Localized additive comparison
+
+Localizing a semilinear filtered module diagram at contracted primes and taking the additive
+colimit gives the localization of the colimit module.
+
+## Implementation details
+
+Numerators and denominators of a fraction lift to a common stage, and denominators stay outside
+the contracted prime. For equality, a multiplier witnessing the zero cross difference is lifted,
+and the original additive colimit detects the zero at a later stage. Diagrams larger than their
+group universe are handled by enlarging the additive-group universe.
+
+## References
+
+* [Stacks, Tag 02JO] (first paragraph)
+* [Stacks, Tag 037D]
+-/
 @[expose] public section
 universe u v
 open CategoryTheory CategoryTheory.Limits
@@ -61,18 +76,7 @@ private theorem additive_colimit_zero
   change (D.map f).hom x = (D.map g).hom 0 at he'
   exact he'.trans (map_zero _)
 
-/-- Additive comparison for localization of a semilinear filtered diagram.
-Source: Stacks Project, Algebra, Tag 02JO first paragraph and Tag 037D.
-(blueprint: lem-pc-localized-module-colimit-comparison)
-Proof: Lift the numerator of a fraction in M through D and its denominator through B,
-then pass to a common upper bound. The denominator remains outside the contracted prime,
-so the fraction lifts to N. For equality, lift a multiplier outside q witnessing the zero
-cross difference and pass to a common stage. Semilinearity ensures that the cross difference
-there maps to zero in M. The original additive colimit detects this zero at a later stage.
-The multiplier remains outside the prime, so the localized fractions agree at that stage.
-The stipulated transition and fraction formulas therefore give a bijective comparison
-from the colimit of N. Addition is respected at common stages; the comparison is an
-additive equivalence with the stated coprojection formula. -/
+/-- Additive comparison for localization of a semilinear filtered diagram. -/
 theorem exists_colimit_addEquiv_localizedModule
     {Λ : Type u} [Preorder Λ] [Nonempty Λ] [IsDirected Λ (· ≤ ·)]
     {T : Type u} [CommRing T] {M : Type v} [AddCommGroup M] [Module T M]

@@ -13,28 +13,29 @@ import Mathlib.Algebra.Ring.ULift
 
 
 /-! # A step of finite-stage tensor comparison
-Source: Stacks Project, Algebra, Tags 02JO (3) and 00DD.
+
+For a directed system of rings `F` and a stage `i ≥ i₀`, the rings `(F(j) ⊗ B₀) ⊗[P] Q` and
+`F(j) ⊗ C₀` for `j ≥ i` form functors to commutative rings whose transition maps are induced by
+the transitions of `F`.
+
+## Implementation details
+
+The functors are built on `ULift`s of the tensor products, with the identifications given by
+`ULift.ringEquiv`; the `P`-algebra structure on `F(j) ⊗ B₀` is transported from stage `i`.
+
+## References
+
+* [Stacks, Tag 02JO] (3)
+* [Stacks, Tag 00DD]
 -/
 @[expose] public section
 open scoped TensorProduct
 open CategoryTheory
 universe v w x y
 namespace RingHom
-/-- A component of the finite-stage tensor comparison construction.
-Source: Stacks Project, Algebra, Tags 02JO (3) and 00DD.
-(blueprint: lem-weil-pbc-comparison-tensor-stage-diagrams-j3)
-
-Proof: Write t_ij for the F(i₀)-algebra transition F(i)→F(j), and let
-b_ij=t_ij⊗id_B₀. Give B_j its P-action via the actual ring map
-b_ij composed with the algebra map P→B_i. Functoriality gives
-b_jk composed with b_ij=b_ik, so every canonical transition is P-linear.
-Take D_j=ULift(B_j⊗_P Q), E_j=ULift(C_j), and define their maps by
-RingHom.ulift of β_jk⊗id_Q and t_jk⊗id_C₀. Tensor map identity and composition
-laws prove both functor laws. Take d_j and c_j to be ULift.ringEquiv and
-βs_j to be b_ij with its induced P-linearity. All asserted conjugation
-identities follow directly from these definitions. This construction also
-works for singleton or nonskeletal preorders and for zero rings.
--/
+/-- For `j ≥ i`, the rings `(F(j) ⊗[F(i₀)] B₀) ⊗[P] Q` and `F(j) ⊗[F(i₀)] C₀` are, up to
+isomorphism, the values of functors `D` and `E` on `{j // i ≤ j}` whose transition maps are the
+tensor products of the transitions of `F` with identities. -/
 theorem exists_comparison_tensor_stage_diagrams
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{v})

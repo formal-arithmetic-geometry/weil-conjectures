@@ -14,13 +14,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.WeilDual
 Let `Λ` be a finite coefficient ring, `X` of finite type over a field `k` on which the
 exponent of `Λ` is invertible, and `g` an automorphism of `X` (the geometric Frobenius `g_γ`).
 For a strict Weil complex `(K, φ_K)` (`AlgebraicGeometry.Etale.WeilComplex`) this file packages
-the clauses of blueprint `theorem-poincare-duality-frobenius--2` as statements about strict Weil
-complexes:
+the compatibility of the dual and Tate data as statements about strict Weil complexes:
 
 * `(K^∨, φ_{K^∨})` is a strict Weil complex
   (`AlgebraicGeometry.Etale.WeilComplex.coefficientDual`): `K^∨ = RHom(K, Λ_X)` lies in
   `Dctf(X, Λ)` (`AlgebraicGeometry.Etale.constructibleFiniteTor_coefficientDual`) and its Weil
-  structure is the contragredient datum of `theorem-poincare-duality-frobenius--1`
+  structure is the contragredient datum
   (`AlgebraicGeometry.Etale.WeilComplex.coefficientDual_frobenius_hom_hom`);
 * the evaluation `K ⊗ᴸ K^∨ ⟶ Λ_X` is a morphism of strict Weil complexes
   (`AlgebraicGeometry.Etale.WeilComplex.coefficientEvaluation`);
@@ -53,8 +52,7 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X : Scheme.{u}}
 
 omit [Finite Λ] in
-/-- The monoidal unit `Λ_X` of `D(X_ét, Λ)` lies in `Dctf(X, Λ)`: it is the constant sheaf
-placed in degree `0`, with Tor amplitude in `[0, 0]`. -/
+/-- The monoidal unit `Λ_X` of `D(X_ét, Λ)` lies in `Dctf(X, Λ)`. -/
 theorem constructibleFiniteTor_unit :
     constructibleFiniteTor (ModuleCat.{u + 1} Λ) X (𝟙_ _) :=
   ⟨(boundedConstructible _ X).prop_of_iso (_root_.DerivedCategory.singleFunctorObjUnitIso _)
@@ -67,11 +65,7 @@ variable {k : Type u} [Field k] (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType a
   [QuasiCompact aX] [HasInvertibleExponent Λ X]
 
 include aX in
-/-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data.
-
-The coefficient dual `K^∨ = RHom(K, Λ_X)` of `K ∈ Dctf(X, Λ)` lies in `Dctf(X, Λ)`; for a
-perfect `K` it is again perfect
-(`AlgebraicGeometry.Etale.DerivedCategory.isDualizable_coefficientDual`). -/
+/-- The coefficient dual `K^∨ = RHom(K, Λ_X)` of `K ∈ Dctf(X, Λ)` lies in `Dctf(X, Λ)`. -/
 theorem constructibleFiniteTor_coefficientDual
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
@@ -98,9 +92,7 @@ noncomputable def unitOfConstructibleFiniteTor (h : constructibleFiniteTor A Y (
   frobenius := ObjectProperty.isoMk _ (leftDerivedUpperStarUnitIso A g.hom)
 
 /-- The internal-Hom Frobenius of `(K, φ_K)` and the unit is the contragredient datum `φ_{K^∨}`.
-It is stated over an arbitrary coefficient category, in the form of
-`AlgebraicGeometry.Etale.WeilComplex.internalHomFrobenius_hom_hom`, so that its instance at
-`ModuleCat Λ` is checked by the kernel without unfolding the derived internal hom. -/
+-/
 lemma comp_map_unitOfConstructibleFiniteTor_frobenius_hom_hom (K : WeilComplex A g)
     (h : constructibleFiniteTor A Y (𝟙_ _)) :
     leftDerivedUpperStarDerivedHomComparison A g.hom K.obj.obj
@@ -118,11 +110,7 @@ variable {Λ} (g : X ≅ X)
 
 variable (Λ) in
 /-- The unit strict Weil complex: `Λ_X` with its canonical datum `φ_Λ : Lg^* Λ_X ≅ Λ_X`
-(`AlgebraicGeometry.Etale.leftDerivedUpperStarUnitIso`).
-
-It is an instance of `AlgebraicGeometry.Etale.WeilComplex.unitOfConstructibleFiniteTor`, made
-over an arbitrary coefficient category, so that no proof nested in its body is abstracted (see
-the implementation notes of `WeilConjectures.SixFunctors.Etale.Derived.WeilComplexInternalHom`). -/
+(`AlgebraicGeometry.Etale.leftDerivedUpperStarUnitIso`). -/
 noncomputable def unit : WeilComplex (ModuleCat.{u + 1} Λ) g :=
   unitOfConstructibleFiniteTor g (constructibleFiniteTor_unit Λ)
 
@@ -133,13 +121,10 @@ lemma unit_frobenius_hom_hom :
 
 variable {g}
 
-/-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data.
-
-The *dual strict Weil complex* `(K^∨, φ_{K^∨})` of a strict Weil complex `(K, φ_K)`: the internal
-hom `RHom(K, Λ_X)` of strict Weil complexes (`AlgebraicGeometry.Etale.WeilComplex.internalHom`)
-into the unit (`AlgebraicGeometry.Etale.WeilComplex.unit`). Its Weil structure is the
-contragredient datum of `theorem-poincare-duality-frobenius--1`
-(`AlgebraicGeometry.Etale.WeilComplex.coefficientDual_frobenius_hom_hom`). -/
+/-- The *dual strict Weil complex* `(K^∨, φ_{K^∨})` of a strict Weil complex `(K, φ_K)`: the
+internal hom `RHom(K, Λ_X)` of strict Weil complexes
+(`AlgebraicGeometry.Etale.WeilComplex.internalHom`) into the unit
+(`AlgebraicGeometry.Etale.WeilComplex.unit`). -/
 noncomputable def coefficientDual (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     WeilComplex (ModuleCat.{u + 1} Λ) g :=
   ((internalHom g aX).obj (op K)).obj (unit Λ g)
@@ -148,20 +133,15 @@ lemma coefficientDual_obj_obj (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     (coefficientDual aX K).obj.obj = (DerivedCategory.coefficientDual _ X).obj (op K.obj.obj) :=
   rfl
 
-/-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data.
-
-The Weil structure of the dual strict Weil complex is the contragredient datum `φ_{K^∨}`
-(`AlgebraicGeometry.Etale.contragredientWeilDatum`) of `theorem-poincare-duality-frobenius--1`: the
-datum `φ_{K^∨}` defines a strict Weil complex `(K^∨, φ_{K^∨})`. -/
+/-- The Weil structure of the dual strict Weil complex is the contragredient datum `φ_{K^∨}`
+(`AlgebraicGeometry.Etale.contragredientWeilDatum`). -/
 theorem coefficientDual_frobenius_hom_hom (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     (coefficientDual aX K).frobenius.hom.hom =
       contragredientWeilDatum _ g.hom ((DerivedCategoryFiniteTor.ι _ X).mapIso K.frobenius) :=
   (internalHomFrobenius_hom_hom aX K (unit Λ g)).trans
     (comp_map_unitOfConstructibleFiniteTor_frobenius_hom_hom g K (constructibleFiniteTor_unit Λ))
 
-/-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data.
-
-**The evaluation is a morphism of strict Weil complexes**: the coefficient evaluation
+/-- **The evaluation is a morphism of strict Weil complexes**: the coefficient evaluation
 `ev_K : K ⊗ᴸ K^∨ ⟶ Λ_X` (`AlgebraicGeometry.Etale.DerivedCategory.coefficientEvaluation`) is a
 morphism from the tensor product (`AlgebraicGeometry.Etale.WeilComplex.tensor`) of `(K, φ_K)`
 and `(K^∨, φ_{K^∨})` to the unit strict Weil complex. -/
@@ -180,19 +160,14 @@ lemma coefficientEvaluation_hom_hom (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     (coefficientEvaluation aX K).hom.hom = DerivedCategory.coefficientEvaluation K.obj.obj :=
   rfl
 
-/-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data.
-
-The *twisted dual strict Weil complex* `(K^∨ ⊗ᴸ T, φ_{K^∨} ⊗ τ)` of a strict Weil complex
+/-- The *twisted dual strict Weil complex* `(K^∨ ⊗ᴸ T, φ_{K^∨} ⊗ τ)` of a strict Weil complex
 `(K, φ_K)`, for a strict Weil complex `(T, τ)`; for the Tate line `(Λ_X(r), τ_r)` it is
-`(K^∨(r), φ_{K^∨(r)})`. Its Weil structure is `φ_{K^∨} ⊗ τ`
-(`AlgebraicGeometry.Etale.WeilComplex.twistedCoefficientDual_frobenius_hom_hom`). -/
+`(K^∨(r), φ_{K^∨(r)})`. -/
 noncomputable def twistedCoefficientDual (K T : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     WeilComplex (ModuleCat.{u + 1} Λ) g :=
   ((tensor Λ g).obj (coefficientDual aX K)).obj T
 
-/-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data.
-
-The Weil structure of the twisted dual `K^∨ ⊗ᴸ T` is the tensor product of the contragredient
+/-- The Weil structure of the twisted dual `K^∨ ⊗ᴸ T` is the tensor product of the contragredient
 datum `φ_{K^∨}` and of `τ`. -/
 theorem twistedCoefficientDual_frobenius_hom_hom (K T : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     (twistedCoefficientDual aX K T).frobenius.hom.hom =
@@ -205,9 +180,7 @@ theorem twistedCoefficientDual_frobenius_hom_hom (K T : WeilComplex (ModuleCat.{
   rw [coefficientDual_frobenius_hom_hom]
   rfl
 
-/-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data.
-
-**The twisted evaluation is a morphism of strict Weil complexes**: for a strict Weil complex
+/-- **The twisted evaluation is a morphism of strict Weil complexes**: for a strict Weil complex
 `(T, τ)` (the Tate line `(Λ_X(r), τ_r)`), the twisted evaluation `K ⊗ᴸ (K^∨ ⊗ᴸ T) ⟶ T`
 (`AlgebraicGeometry.Etale.twistedEvaluation`) is a morphism from the tensor product of `(K, φ_K)`
 and the twisted dual (`AlgebraicGeometry.Etale.WeilComplex.twistedCoefficientDual`) to

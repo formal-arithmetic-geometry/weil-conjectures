@@ -48,16 +48,7 @@ private theorem lisse_splitEndo_isIso {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
   rw [heq]
   infer_instance
 
-/-- A split monic endomorphism of a constructible adic sheaf is invertible.
-
-Source: the finite-constructibility argument in the current blueprint,
-`cor-coef-verdier-weil-equivariance.proof.md`, final exceptional-adjunction sentence.
-On each lisse stratum, trivialize the sheaf on a pro-etale cover. The endomorphism
-and its left inverse give square matrices over the commutative ring of locally
-finite coefficient functions. A one-sided inverse of a square matrix is two-sided.
-Thus each restriction is invertible. Finite jointly surjective quasi-compact
-strata detect isomorphisms. This includes zero rank and empty strata.
-(blueprint: lem-sf-constructible-split-endomorphism). -/
+/-- A split monic endomorphism of a constructible adic sheaf is invertible. -/
 theorem constructible_splitEndo_isIso {l : ℕ} [Fact l.Prime]
     {X : Scheme.{u}} [IsLocallyNoetherian X] [CompactSpace X]
     {F : ProEtale.AdicSheaf l X} (hF : ProEtale.IsAdicConstructibleSheaf F)

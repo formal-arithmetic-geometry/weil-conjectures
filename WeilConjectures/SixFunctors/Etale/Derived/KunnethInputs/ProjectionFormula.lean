@@ -11,17 +11,20 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionBaseC
 /-!
 # The projection formula morphism
 
-Inputs of the ordinary Künneth formula (blueprint subsection
-`proposition-ordinary-external-kunneth--1`) about the projection formula morphism
+Inputs of the ordinary Künneth formula about the projection formula morphism
 `Rf_* E ⊗ᴸ K ⟶ Rf_*(E ⊗ᴸ Lf^* K)`.
 
 ## Main definitions and results
 
-- `AlgebraicGeometry.Etale.projectionFormulaMap` (`definition-projection-formula-map--1`).
+- `AlgebraicGeometry.Etale.projectionFormulaMap`
 - `AlgebraicGeometry.Etale.projectionFormulaMap_derivedBaseChangeMap`
-  (`lem-kun-proj-formula-natural`).
 - `AlgebraicGeometry.Etale.isIso_projectionFormulaMap_of_isProper`
-(`corollary-open-direct-image-over-field--2`).
+
+## Implementation details
+
+The projection formula for proper morphisms is stated with coefficients in a torsion ring `Λ`
+(the form used by the Künneth formula with finite coefficients) rather than with integer
+coefficients and torsion cohomology; it holds without boundedness assumptions.
 -/
 
 @[expose] public section
@@ -42,16 +45,14 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [Etale.UpperStarPreservesFlat A]
 
-/-- Blueprint `definition-projection-formula-map--1`: for a morphism of schemes `f : X ⟶ Y`,
+/-- For a morphism of schemes `f : X ⟶ Y`,
 `E ∈ D(X_ét)` and `K ∈ D(Y_ét)`, the projection-formula morphism
 
 `PF_f(E, K) : Rf_* E ⊗ᴸ K ⟶ Rf_*(E ⊗ᴸ Lf^* K)`
 
 is the morphism adjoint (along `Lf^* ⊣ Rf_*`) to the composite
 `Lf^*(Rf_* E ⊗ᴸ K) ≅ Lf^* Rf_* E ⊗ᴸ Lf^* K ⟶ E ⊗ᴸ Lf^* K` of the monoidality isomorphism of
-`Lf^*` and `ε ⊗ 1`, `ε` being the counit
-(`AlgebraicGeometry.Etale.homEquiv_symm_projectionFormulaMap`). It is the component of the
-natural transformation `AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap`. -/
+`Lf^*` and `ε ⊗ 1`, `ε` being the counit. -/
 noncomputable def projectionFormulaMap {X Y : Scheme.{u}} (f : X ⟶ Y)
     (E : DerivedCategory (Sheaf X.smallEtaleTopology A))
     (K : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
@@ -73,7 +74,7 @@ lemma homEquiv_symm_projectionFormulaMap {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
 
-/-- Blueprint `lem-kun-proj-formula-natural`: the projection formula commutes with base change.
+/-- The projection formula commutes with base change.
 For a commutative (for instance cartesian) square `g' ≫ f = f' ≫ g`, `E ∈ D(X_ét)` and
 `K ∈ D(Y_ét)`, the square
 ```
@@ -84,8 +85,7 @@ Lg^*Rf_*E ⊗ᴸ Lg^*K ──Ex ⊗ 1──▶ Rf'_*Lg'^*E ⊗ᴸ Lg^*K ──PF
 ```
 commutes, where the vertical arrows are the monoidality isomorphisms of the derived pullbacks,
 `Ex` is the base change map `AlgebraicGeometry.Etale.derivedBaseChangeMap`, and the bottom row
-ends with the identification `Lf'^*Lg^* ≅ Lg'^*Lf^*`
-(`AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap_derivedBaseChangeMap`). -/
+ends with the identification `Lf'^*Lg^* ≅ Lg'^*Lf^*`. -/
 lemma projectionFormulaMap_derivedBaseChangeMap (sq : CommSq g' f' f g)
     (E : DerivedCategory (Sheaf X.smallEtaleTopology A))
     (K : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
@@ -100,17 +100,10 @@ lemma projectionFormulaMap_derivedBaseChangeMap (sq : CommSq g' f' f g)
           ((derivedSquareUpperStarIso A sq).hom.app K)) :=
   rightDerivedLowerStarProjectionMap_derivedBaseChangeMap A sq E K
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`: the projection formula for a proper
-morphism with torsion coefficients. Let `f : X ⟶ Y` be proper and `Λ` a ring which is torsion as an
-additive group (for instance `Λ = ℤ/n`). Then for all `E ∈ D(X_ét, Λ)` and `K ∈ D(Y_ét, Λ)` the
-projection-formula morphism `Rf_* E ⊗ᴸ K ⟶ Rf_*(E ⊗ᴸ Lf^* K)` is an isomorphism.
-
-The blueprint states this with integer coefficients, for `E ∈ D⁺(X_ét, ℤ)` with torsion
-cohomology and `K ∈ D⁺(Y_ét, ℤ)`. That version is not available in this development; we state
-the projection formula with coefficients in a torsion ring instead, which is the form used by
-the Künneth formula with finite coefficients. It holds without boundedness assumptions
-(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_isProper`, which uses
-proper base change). -/
+/-- The projection formula for a proper morphism with torsion coefficients. Let `f : X ⟶ Y` be
+proper and `Λ` a ring which is torsion as an additive group (for instance `Λ = ℤ/n`). Then for
+all `E ∈ D(X_ét, Λ)` and `K ∈ D(Y_ét, Λ)` the projection-formula morphism
+`Rf_* E ⊗ᴸ K ⟶ Rf_*(E ⊗ᴸ Lf^* K)` is an isomorphism. -/
 theorem isIso_projectionFormulaMap_of_isProper (Λ : Type (u + 1)) [CommRing Λ]
     (hΛ : IsAddTorsion Λ) {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
     (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))

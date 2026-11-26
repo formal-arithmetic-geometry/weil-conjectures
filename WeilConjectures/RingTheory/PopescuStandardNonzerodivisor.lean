@@ -16,7 +16,20 @@ import WeilConjectures.RingTheory.PopescuStandardNonzerodivisorAux
 import WeilConjectures.RingTheory.ElementaryToStrict
 import WeilConjectures.RingTheory.PopescuDelocalizeBase
 
-/-! # A standard nonzerodivisor from the field case of Popescu -/
+/-! # A standard nonzerodivisor from the field case of Popescu
+
+If Popescu's theorem holds over fields, then for a regular map `R → Λ` from a nonzero reduced
+Noetherian ring, every map from a finitely presented `R`-algebra to `Λ` factors through a
+finitely presented algebra in which some nonzerodivisor of `R` is strictly standard.
+
+## Implementation details
+
+The finite polynomial quotient construction of the factor algebra lives in universe `max u v`.
+
+## References
+
+* [Stacks, Tag 07F5] (third and fourth paragraphs of the proof)
+-/
 
 @[expose] public section
 
@@ -25,23 +38,7 @@ open CategoryTheory
 open scoped nonZeroDivisors
 
 /-- The field case produces a strictly standard nonzerodivisor after a finite-presentation
-factorization. Source: Stacks Project, Smoothing Ring Maps, proof of Lemma Tag 07F5,
-third and fourth paragraphs, lines 2029--2043
-(blueprint: lem-weil-pbc-popescu-standard-nonzerodivisor).
-
-Proof: Localize the reduced Noetherian base at all nonzerodivisors. Its total fraction
-ring is a finite product of the residue fields at the minimal primes. The corresponding
-localization of Λ is the product of the fibres at those primes. Regularity supplies
-Noetherian geometric regularity of each fibre; over a field flatness is automatic,
-so the field hypothesis applies to each factor. ind_smooth_prod, iterated over the
-finite set of minimal primes, gives ind-smoothness over the total fraction ring.
-Finite presentation of A makes the localized map factor through one smooth term
-of this filtered diagram. Apply exists_factorization_isElementaryStandardElement_of_localized_smooth
-with the submonoid of nonzerodivisors, producing A → B → Λ and π in that submonoid
-whose image in B is elementary standard. It is strictly standard: select the initial
-minor in the sum over minors, set all other coefficients to zero, and use invariance
-of the determinant under transposition. The finite polynomial
-quotient construction of B lives in universe max u v. -/
+factorization. -/
 theorem exists_popescu_standard_nonzerodivisor
     (h : ∀ (k : Type u) (Λ : Type (max u v)) [Field k] [CommRing Λ] [Algebra k Λ]
       [IsNoetherianRing Λ],

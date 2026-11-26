@@ -23,9 +23,8 @@ point `x` of `X₀`.
 - The stalk `F_s` with the local Frobenius `F_x^{(m)}` is pure of weight `w` relative to `qᵐ`
   exactly when the stalk at `x` is pure of weight `w` relative to `q_x = q ^ deg x`
   (`AlgebraicGeometry.WeilSheaf.isPureOfWeight_stalk_iff_stalkAt`): `F_x^{(m)}` has the
-  characteristic polynomial of `F_x ^ (m / deg x)`. This is "the same power calculation at `x`"
-  of blueprint `theorem-real-constructible-sheaves-are-mixed--1`, which allows to test punctual
-  purity at any geometric point fixed by a power of the Frobenius
+  characteristic polynomial of `F_x ^ (m / deg x)`. This allows to test punctual purity at any
+  geometric point fixed by a power of the Frobenius
   (`AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.stalkAt`,
   `AlgebraicGeometry.WeilSheaf.isPunctuallyPureOfWeight_of_forall_stalkAt`).
 -/
@@ -41,9 +40,7 @@ open CategoryTheory
 namespace FiniteField
 
 /-- A field extension `L` of a finite field `K` with `q` elements in which every element
-satisfies `a ^ (qᵐ) = a`, `m ≥ 1`, is finite of degree dividing `m`: its elements are roots of
-the nonzero polynomial `X ^ (qᵐ) - X`, and the `m`-th power of the arithmetic Frobenius of `L/K`,
-whose order is `[L : K]`, is the identity. -/
+satisfies `a ^ (qᵐ) = a`, `m ≥ 1`, is finite of degree dividing `m`. -/
 theorem finite_and_finrank_dvd_of_forall_pow_card_pow_eq_self (K L : Type*) [Field K] [Fintype K]
     [Field L] [Algebra K L] {m : ℕ} (hm : 0 < m) (h : ∀ a : L, a ^ (Fintype.card K ^ m) = a) :
     Finite L ∧ Module.finrank K L ∣ m := by
@@ -68,12 +65,7 @@ variable {k : Type u} [Field k] [Finite k] {X : Scheme.{u}} (f : X ⟶ Spec (.of
 
 /-- Let `s : Spec k̄ ⟶ X₀ ×_k k̄` be a geometric point fixed by a positive power of the
 geometric Galois Frobenius up to reparametrisation, `s ≫ g_Xᵐ = σᵐ ≫ s`, `m ≥ 1`. Then the
-point `x` of `X₀` under `s` has finite residue field, of degree `[κ(x) : k]` dividing `m`.
-
-Indeed, `s ≫ pr` is invariant under `σᵐ`, as `g_Xᵐ ≫ pr = pr`. Writing
-`s ≫ pr = Spec ι₀ ≫ (Spec κ(x) ⟶ X₀)` for an embedding `ι₀ : κ(x) ↪ k̄`, this says that the
-image of `ι₀` is fixed by the `m`-th power of the geometric Frobenius of `k̄`, so that every
-element `a` of `κ(x)` satisfies `a ^ (qᵐ) = a`. -/
+point `x` of `X₀` under `s` has finite residue field, of degree `[κ(x) : k]` dividing `m`. -/
 theorem mem_finitePoints_and_degreeOver_dvd_of_geometricGaloisFrobenius_pow
     (s : Spec (.of (AlgebraicClosure k)) ⟶ f.geometricFiber) {m : ℕ} (hm : 0 < m)
     (hs : s ≫ (f.geometricGaloisFrobenius ^ m).asIso.hom =
@@ -114,13 +106,7 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 /-- **Purity can be tested at any geometric point fixed by a power of the Frobenius.** Let `s`
 be a geometric point with `s ≫ g_Xᵐ = σᵐ ≫ s`, `m ≥ 1`, over the closed point `x`. Then the
 stalk `F_s` with the local Frobenius `F_x^{(m)}` is pure of weight `w` relative to `qᵐ` if and
-only if the stalk `F_x̄` with `F_x` is pure of weight `w` relative to `q_x = q ^ deg x`.
-
-Indeed `deg x ∣ m`, and `F_x^{(m)}` has the characteristic polynomial of `F_x ^ (m / deg x)`
-(`AlgebraicGeometry.WeilSheaf.charpoly_frobeniusEnd_stalkAt_of_dvd`), while
-`qᵐ = q_x ^ (m / deg x)`: purity of `F_x` is purity of its `r`-th power relative to `q_xʳ`.
-This is "the same power calculation at `x`" of blueprint
-`theorem-real-constructible-sheaves-are-mixed--1`. -/
+only if the stalk `F_x̄` with `F_x` is pure of weight `w` relative to `q_x = q ^ deg x`. -/
 theorem isPureOfWeight_stalk_iff_stalkAt (F : WeilSheaf k₀ l X) (ι : PadicAlgCl l →+* ℂ)
     (w : ℝ)
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
@@ -149,8 +135,7 @@ theorem isPureOfWeight_stalk_iff_stalkAt (F : WeilSheaf k₀ l X) (ι : PadicAlg
     (Nat.div_pos (Nat.le_of_dvd hm hdvd) (Nat.pos_of_ne_zero hd)) h
 
 /-- A punctually pure Weil sheaf of weight `w` is pure of weight `w` relative to `qᵐ` at every
-geometric point `s` with `s ≫ g_Xᵐ = σᵐ ≫ s`, `m ≥ 1`: the point under `s` is a closed point,
-at which `AlgebraicGeometry.WeilSheaf.isPureOfWeight_stalk_iff_stalkAt` applies. -/
+geometric point `s` with `s ≫ g_Xᵐ = σᵐ ≫ s`, `m ≥ 1`. -/
 theorem IsPunctuallyPureOfWeight.stalkAt {F : WeilSheaf k₀ l X} {ι : PadicAlgCl l →+* ℂ}
     {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w)
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
@@ -164,8 +149,7 @@ theorem IsPunctuallyPureOfWeight.stalkAt {F : WeilSheaf k₀ l X} {ι : PadicAlg
 
 /-- A Weil sheaf is punctually pure of weight `w` as soon as, over every closed point `x`, there
 is some geometric point `s` with `s ≫ g_Xᵐ = σᵐ ≫ s`, `m ≥ 1`, at which `F_s` with `F_x^{(m)}`
-is pure of weight `w` relative to `qᵐ`
-(`AlgebraicGeometry.WeilSheaf.isPureOfWeight_stalk_iff_stalkAt`). -/
+is pure of weight `w` relative to `qᵐ`. -/
 theorem isPunctuallyPureOfWeight_of_forall_stalkAt {F : WeilSheaf k₀ l X}
     {ι : PadicAlgCl l →+* ℂ} {w : ℝ}
     (h : ∀ x : X.finitePoints, ∃ (s : Spec (.of (AlgebraicClosure k₀)) ⟶

@@ -15,9 +15,22 @@ import Mathlib.RingTheory.Finiteness.Basic
 import Mathlib.Algebra.Category.ModuleCat.Projective
 import Mathlib.CategoryTheory.Abelian.Projective.Resolution
 
-/-! Packaging a finite exact sequence as a bounded projective resolution.
-Source: Stacks Project, Algebra, Tag 0CXF.
-(blueprint: lem-weil-pbc-finite-free-exact-sequence-resolution) -/
+/-!
+# Finite exact sequences as bounded projective resolutions
+
+An exact sequence `0 → F_d → ⋯ → F_0 → M → 0` of modules with `F_i` finite free is packaged as a
+bounded finite free projective resolution of `M`.
+
+## Implementation details
+
+The object of index `d + 1 - i` is placed in chain degree `i` for `i ≤ d`, with zero modules in
+larger degrees; the differentials are the arrows of the sequence and the augmentation is the
+arrow of index `d + 1`.
+
+## References
+
+* [Stacks, Tag 0CXF]
+-/
 
 @[expose] public section
 
@@ -26,22 +39,7 @@ open CategoryTheory CategoryTheory.Limits HomologicalComplex
 namespace ModuleCat
 
 /-- An exact sequence with zero endpoints and finite free resolution terms yields a
-bounded finite free projective resolution of its penultimate object.
-Source: Stacks Project, Algebra, Tag 0CXF, proof of condition (7).
-(blueprint: lem-weil-pbc-finite-free-exact-sequence-resolution)
-
-Proof: Put the object of index `d + 1 - i` in chain degree `i` for `i ≤ d`,
-and the zero module in all larger degrees. Use the adjacent arrows of the
-sequence as differentials, and zero differentials past the top degree. The
-augmentation is the arrow of index `d + 1`. Consecutive differentials compose
-to zero by exactness of the sequence. Exactness in positive degrees below the
-top is inherited from the sequence. At the top, exactness with the zero left
-endpoint makes the outgoing differential injective. At degree zero, exactness
-with the zero right endpoint makes the augmentation surjective and identifies
-its kernel with the incoming image. Thus the augmentation to the degree-zero
-single complex is a quasi-isomorphism. Each term is projective because it is
-free; the zero terms are also finite free. For `d = 0`, the sole nonzero term
-maps isomorphically to the penultimate object, by exactness at both ends. -/
+bounded finite free projective resolution of its penultimate object. -/
 theorem exists_bounded_finite_free_resolution_of_exact_sequence
     {R : Type u} [CommRing R] (d : ℕ)
     (S : ComposableArrows (ModuleCat.{max u v} R) (d + 3))

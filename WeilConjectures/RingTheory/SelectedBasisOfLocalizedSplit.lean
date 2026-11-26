@@ -18,8 +18,14 @@ import Mathlib.RingTheory.Flat.Stability
 /-!
 # Selecting generators as a basis of a localized direct summand
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Tag 07C6;
-Algebra, Tags 00NX and 0GWM.
+If `M_b` is a direct summand of `A_b^n` and a finite family spans `M`, then after a further
+principal localization near a given prime, a subfamily becomes a basis.
+
+## References
+
+* [Stacks, Tag 07C6]
+* [Stacks, Tag 00NX]
+* [Stacks, Tag 0GWM]
 -/
 
 @[expose] public section
@@ -125,27 +131,7 @@ private theorem selected_basis_of_split
   simp
 
 /-- A finite spanning family of a module which is a direct summand of `A_b^n` contains
- a basis after a further principal localization near a specified prime.
-Source: Stacks Project, Smoothing Ring Maps, proof of Tag 07C6 (selection and shrinking);
-Algebra, Tags 00NX and 0GWM.
-(blueprint: lem-weil-pbc-selected-basis-of-localized-split)
-
-Proof: The split injection exhibits `M_b` as a direct summand of the finite free
-module `A_b^n`, so it is finite projective, hence finitely presented (00NX). The prime
-`p`, which avoids `b`, extends to a prime of `A_b`. Localizing the split injection
-at this prime makes `M_p` a finite projective module over the local ring `A_p`,
-hence free. The given generators span its residue vector space. Select a subset
-which is a residue basis and enumerate it by `Fin c`. Its cardinality is at most
-`m`, and the split injection after residue base change makes it at most `n`.
-Nakayama makes these prescribed lifts generate `M_p`. A surjective map between
-finite free modules of the same rank is bijective, so these lifts are a basis
-at `p`. Finite presentation of `M_b` spreads this isomorphism to a principal
-neighbourhood of the extended prime (0GWM, in its prescribed-lifts form).
-Write its localization element as `t / b^k`. Since it avoids the extended prime,
-`t` avoids `p`. The iterated localization is the localization at `b * t`;
-transport the basis along the localization equivalences. They send each original
-`x i` divided by one to itself divided by one, giving the displayed basis values.
-No global finite presentation of `M` is required. -/
+a basis after a further principal localization near a specified prime. -/
 theorem exists_selected_basis_away_mul_of_split
     {A : Type u} [CommRing A] {M : Type v} [AddCommGroup M] [Module A M]
     (n m : ℕ) (x : Fin m → M) (hx : Submodule.span A (Set.range x) = ⊤)

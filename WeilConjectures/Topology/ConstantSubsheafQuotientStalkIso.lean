@@ -13,10 +13,11 @@ import WeilConjectures.Topology.AbelianOpenExtensionIntegerGermCoordinates
 import WeilConjectures.Topology.ConstantSubsheafQuotientGermCoordinates
 import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
 
-/-! # ConstantSubsheafQuotientStalkIso
+/-! # Stalk isomorphisms for the top-layer quotient
 
-Source: Stacks Project, Cohomology, Lemma 0A38
-(blueprint: lem-sc-constant-subsheaf-quotient-stalk-iso).
+## References
+
+* Stacks Project, Tag 0A38.
 -/
 
 @[expose] public section
@@ -46,18 +47,9 @@ private theorem isIso_of_integer_coordinates {G H : AddCommGrpCat.{u}}
     refine ⟨z • a, ?_⟩
     rw [map_zsmul f.hom, hfa, hz]
 
-/-- Source: Stacks Project, Cohomology, Lemma 0A38, final paragraph.
-Proof: Fix x in U outside V. Every A i containing x has label b+1: a smaller
-label would put x in V. At least one A i contains x. Extension-by-zero stalks
-identify each active summand with the integers and every inactive summand with zero.
-The epimorphism g remains surjective on stalks, so the germs of active s i generate
-K_x. Their images under the injective stalk map to the constant integer sheaf all
-equal b+1. This positive integer is nonzero; hence each active s i is a generator
-of an infinite cyclic K_x. Since L_x is zero, exactness of stalks identifies
-K_x with the cokernel stalk. The displayed compatibility says q_x takes the
-canonical integer generator to that generator. It is therefore bijective and an
-isomorphism in AddCommGrpCat. The empty-family case has no x in U.
-(blueprint: lem-sc-constant-subsheaf-quotient-stalk-iso). -/
+/-- If `L` vanishes off the lower-label union `V`, any morphism from the extension by zero of
+the constant integer sheaf on `U` to the cokernel of `l : L ⟶ K` sending each top-label unit
+section to the image of `s i` is an isomorphism on stalks at points of `U` outside `V`. -/
 theorem constantSubsheaf_quotient_stalk_iso
     (X : TopCat.{u}) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C) [Mono ι]
     (isoC : C ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj

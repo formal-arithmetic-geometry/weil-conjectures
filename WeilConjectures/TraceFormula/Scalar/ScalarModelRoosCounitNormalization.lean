@@ -13,7 +13,15 @@ import WeilConjectures.TraceFormula.Supporting.RoosAdjunctionTranspose
 import all WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComparison
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 
-/-! # Normalized scalar change and the whole-system Roos counit -/
+/-! # Normalized scalar change and the whole-system Roos counit
+
+The normalized scalar realization commutes with the whole-system counit in Roos coordinates.
+
+## References
+
+* Stacks Project, Tags 06YY and 0941.
+* Bhatt--Scholze, Proposition 3.5.1.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -48,27 +56,9 @@ private theorem scalarCounit_normalization_of_fac
   simpa only [Category.assoc, Iso.inv_hom_id_assoc, IsIso.inv_hom_id_assoc,
     Iso.inv_hom_id, Category.comp_id, hb] using ha
 
-/-- The normalized scalar realization commutes with the whole-system counit in
-Roos coordinates. This is an equation on the target system alone, before inserting
-any map from a good complex or identifying any strict zero-shift lift.
-
-Source: Stacks 06YY, 0941; Bhatt--Scholze, Proposition 3.5.1.
-(blueprint: lem-trf-scalar-model-roos-counit-normalization)
-
-Proof in words: resolve the restricted target diagram simultaneously by a
-K-injective diagram. The normalized Roos bridge identifies its derived-limit
-counit with the ordinary compatible limit tuple followed by the resolution
-inverse. Present a flat-term K-flat source by its coherent quotient system and
-apply the scalar realization normalization to that presentation. Transpose its
-quotient tensor unit through the ordinary scalar adjunction. The residue square
-identifies this transpose with the coordinates of a. The universal cochain
-counit and the coefficient-action counit identify the resulting composite with
-scalarRoosMap followed by the Roos map of a; both cocone coordinates are used.
-Naturality and uniqueness of the derived comparison descend the equation from
-these good representatives to the arbitrary derived limit of D. The specified
-tensor coordinates determine a by the tensor and sheafification universal
-properties. No zero-shift hypothesis on a map into the Roos complex is used.
--/
+/-- The normalized scalar realization commutes with the whole-system counit in Roos coordinates.
+This is an equation on the target system alone, before inserting any map from a good complex or
+identifying any strict zero-shift lift. -/
 theorem scalarModelRoos_counit_normalization
     (l : ℕ) [Fact l.Prime]
     (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]

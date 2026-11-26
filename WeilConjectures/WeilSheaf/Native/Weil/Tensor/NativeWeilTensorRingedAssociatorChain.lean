@@ -12,7 +12,15 @@ import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedAssoci
 
 /-! # Signed forgetting of the explicit native chain associator
 
-Source: Stacks 0FPQ, 0FNG, 06YU, 0FPT; homogeneous-triple part of native tensor transport.
+## Implementation details
+
+The statement is checked on each triple coproduct inclusion and balanced tensor quotient;
+the exchange signs agree by `pq+(p+q)r=qr+p(q+r)`. It uses no derived category, derived
+tensor comparison or K-flat replacement.
+
+## References
+
+* Stacks Project, Tags 0FPQ, 0FNG, 06YU and 0FPT
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -22,20 +30,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
 -- Elaborating the statement unfolds the deep cochain tensor instance terms of the chain data.
-/-- The comparison of total complexes respects reassociation before localization.
-Source: Stacks 0FPQ, 0FNG, 06YU, 0FPT; homogeneous-triple step of native tensor transport.
-(blueprint: lem-sf-native-weil-ringed-associator-chain).
-
-Proof: precompose with each triple coproduct inclusion and each balanced tensor
-quotient. Expand the two native ringed total comparisons using A.summand, and
-the two forgetting comparisons using hchain and the summand equation for kappa.
-The normalized mates he and A.uncurry identify the underived tensor maps across
-b.square by b.hom_square. Underived associativity of b.underived.coherence then
-identifies the two composites. The exchange signs agree by
-pq+(p+q)r=qr+p(q+r). Local balanced tensor extensionality and the coproduct
-universal property give equality of chain maps. This statement uses no derived
-category, derived tensor comparison, K-flat replacement, or associativity square
-for an arbitrary derived natural transformation. -/
+/-- The comparison of total complexes respects reassociation before localization. -/
 theorem nativeRingedAssociatorComplex_forget
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})

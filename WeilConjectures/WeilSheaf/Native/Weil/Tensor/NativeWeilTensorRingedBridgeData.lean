@@ -25,10 +25,7 @@ set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- An additive ringed presentation of forgetting the actual Frobenius structure.
 The square, Hom comparison and coefficient unit are comparisons of underived modules.
-The last field is the flat-term resolution condition required by ringed tensor descent.
-
-Source: native tensor geometry, steps 1 and 2; Stacks 00W0, 00YV, 06YS, 06YU.
-(blueprint: def-sf-native-weil-tensor-ringed-bridge). -/
+The last field is the flat-term resolution condition required by ringed tensor descent. -/
 structure NativeWeilTensorRingedBridge
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})

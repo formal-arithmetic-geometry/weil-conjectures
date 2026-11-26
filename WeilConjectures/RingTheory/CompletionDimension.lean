@@ -16,8 +16,18 @@ import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 /-!
 # Dimension of the completion of a Noetherian local ring
 
-Source: literature/stacks-project/more-algebra.tex, Lemma Tag 07NV
-(blueprint: lem-weil-pbc-completion-dimension).
+The completion of a Noetherian local ring at its maximal ideal has the same finite Krull
+dimension.
+
+## Implementation details
+
+The equality comes from `RingTheory.completion_dimension_eq`, which applies the flat height
+formula to the faithfully flat map to the completion, whose closed fibre is the residue field.
+Finiteness is Mathlib's `ringKrullDim_lt_top`.
+
+## References
+
+* [Stacks, Tag 07NV], alternative proof via [Stacks, Tag 00ON]
 -/
 
 @[expose] public section
@@ -28,26 +38,8 @@ universe u
 
 namespace RingTheory
 
-/-- The maximal-ideal completion of a Noetherian local ring has the same finite Krull dimension.
-Source: literature/stacks-project/more-algebra.tex, Lemma Tag 07NV, alternative proof via
-Algebra Lemma Tag 00ON (blueprint: lem-weil-pbc-completion-dimension).
-
-1. The canonical map to the completion is faithfully flat
-   (`lem-weil-pbc-local-completion-faithfully-flat`). The completion is Noetherian
-   (`lem-weil-pbc-adic-completion-noetherian`) and local, with maximal ideal the extension of
-   the original maximal ideal and the same residue field
-   (`lem-weil-pbc-local-completion-local-ring`).
-2. The contraction of the completion's maximal ideal contains the original maximal ideal
-   and is proper, since it does not contain 1. By maximality it equals the original ideal.
-3. Apply the flat height formula (`lem-weil-pbc-flat-height-formula`) at these maximal ideals.
-   Localization at the maximal ideal of a local ring is an isomorphism, since the elements
-   inverted are already units (`def-weil-pbc-localization-at-prime`). Thus the completion's
-   dimension equals the original dimension plus the dimension of the closed fibre.
-4. The closed fibre is the residue field, of dimension zero, giving equality. The maximal
-   ideal is finitely generated (`def-weil-pbc-noetherian-ring`), and the original dimension
-   is bounded by its number of generators
-   (`lem-weil-pbc-noetherian-local-dimension-le-generators`). Equality makes both finite.
--/
+/-- The maximal-ideal completion of a Noetherian local ring has the same finite Krull
+dimension. -/
 theorem completion_dimension (A : Type u) [CommRing A] [IsNoetherianRing A]
     [IsLocalRing A] :
     ringKrullDim (AdicCompletion (IsLocalRing.maximalIdeal A) A) = ringKrullDim A ∧

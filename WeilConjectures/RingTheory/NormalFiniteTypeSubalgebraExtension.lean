@@ -13,8 +13,19 @@ import WeilConjectures.RingTheory.FiniteTypeZDomainNormalizationFinite
 /-!
 # Normal finite-type subalgebras containing a given finite-type subalgebra
 
-Source: Stacks Project, Algebra, Tag 033C, third paragraph, and Tag 0335.
-(blueprint: lem-weil-pbc-normal-finite-type-subalgebra-extension).
+Every finitely generated `ℤ`-subalgebra `C` of an integrally closed domain `R` is contained in a
+finitely generated, integrally closed `ℤ`-subalgebra.
+
+## Implementation details
+
+The normalization of `C` in its fraction field is finite over `C` (Tag 0335) and maps injectively
+into `R` because `R` is integrally closed; its image is the required subalgebra. No algebraicity
+of `R` over `C` is needed.
+
+## References
+
+* [Stacks, Tag 033C] (third paragraph)
+* [Stacks, Tag 0335]
 -/
 
 @[expose] public section
@@ -26,21 +37,7 @@ namespace Subalgebra
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Every finitely generated integer subalgebra of an integrally closed domain
-is contained in a finitely generated, integrally closed integer subalgebra.
-
-Source: Stacks Project, Algebra, Tag 033C, third paragraph; Tag 0335.
-(blueprint: lem-weil-pbc-normal-finite-type-subalgebra-extension).
-
-Proof: let K be the fraction field of C and normalize C in K. The normalization
-is finite over C by finiteness of normalization for finite-type domains over Z
-(Tag 0335), hence finite type over Z. Embed K in the fraction field of R using
-C's inclusion. Every element of the normalization is integral over C, and hence
-its image is integral over R. Since R is integrally closed, that image comes
-from R. The induced injective map of the normalization into R has image A,
-a Z-subalgebra containing C. Its image is isomorphic to the normalization,
-so A is finitely generated and integrally closed. No algebraicity assumption
-on R over C is needed: only C's own fraction field is normalized.
--/
+is contained in a finitely generated, integrally closed integer subalgebra. -/
 theorem exists_fg_integrallyClosed_extension
     {R : Type u} [CommRing R] [IsDomain R] [IsIntegrallyClosed R]
     (C : Subalgebra ℤ R) (hC : C.FG) :

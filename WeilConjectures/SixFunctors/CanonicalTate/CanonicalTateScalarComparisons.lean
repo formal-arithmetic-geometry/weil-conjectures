@@ -25,9 +25,14 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantOpenS
 
 /-! # Canonical Tate comparisons: ScalarComparisons
 
-Source: current blueprint, definition-weil-structure--1, canonical root-line comparisons.
-This module preserves the original unshifted comparison declarations.
-(blueprint: def-pur-canonical-tate-scalar-comparisons).
+Canonical comparisons of Tate lines under scalar extension of the coefficient field, integrally
+and rationally. This module preserves the original unshifted comparison declarations.
+
+## Implementation details
+
+The scalar-completion map is invertible on the complete line; its inverse identifies completed
+extension with the ordinary derived scalar functor. The single-functor comparison and
+`twistLineScalarIso` then fix every map and its inverse uniquely by unit tensor formulas.
 -/
 
 @[expose] public noncomputable section
@@ -55,13 +60,10 @@ attribute [local irreducible] IntegralOnSlice.completion
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-/-- The completed scalar comparison on a line, fixed by ordinary scalar extension.
-Source: blueprint definition-weil-structure--1, canonical roots and tensor powers
-(blueprint: def-pur-canonical-tate-scalar-comparisons).
-Proof: The scalar-completion map is invertible on the complete line. Its
-inverse identifies completed extension with the published ordinary derived
-scalar functor. The single-functor comparison and twistLineScalarIso finish
-the computation; their unit tensor formulas fix every map and its inverse uniquely. -/
+/-- The completed scalar comparison on a Tate line: there is a unique isomorphism from the
+completed scalar extension of the twisting object to the twisting object over `L` whose
+precomposition with the scalar-completion map is the ordinary derived scalar comparison
+followed by `twistLineScalarIso`. -/
 theorem integralScalarLine_existsUnique
     (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
     (ι : E →ₐ[Padic l] L) (X : Scheme.{u})
@@ -92,9 +94,7 @@ theorem integralScalarLine_existsUnique
       (sfIntegralTwistingObject l E X (r : ℤ)))).1
     simpa [e, scalarCompletionIso] using he'
 
-/-- The specified completed scalar extension of a Tate line.
-Source: blueprint definition-weil-structure--1, canonical roots and tensor powers
-(blueprint: def-pur-canonical-tate-scalar-comparisons). -/
+/-- The specified completed scalar extension of a Tate line. -/
 def integralScalarLine
     (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
     (ι : E →ₐ[Padic l] L) (X : Scheme.{u})
@@ -104,9 +104,7 @@ def integralScalarLine
       sfIntegralTwistingCoefficient l L X (r : ℤ) :=
   ObjectProperty.isoMk _ (integralScalarLine_existsUnique l E L ι X r).exists.choose
 
-/-- The rational coefficient-line comparison is the localized completed scalar map.
-Source: blueprint definition-weil-structure--1, canonical roots and tensor powers
-(blueprint: def-pur-canonical-tate-scalar-comparisons). -/
+/-- The rational coefficient-line comparison is the localized completed scalar map. -/
 def rationalScalarLine
     (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
     (ι : E →ₐ[Padic l] L) (X : Scheme.{u})

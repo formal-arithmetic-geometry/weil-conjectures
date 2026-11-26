@@ -14,10 +14,11 @@ import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 
 /-! # Every module is a directed colimit of finitely presented modules
 
-Source: Stacks Project, Algebra, Tag 058G, proof of Lazard's theorem, paragraph beginning
-"For the converse, first recall that any module M can be written as the colimit of a
- directed system of finitely presented modules"
-(blueprint: lem-trf-module-finitely-presented-directed-colimit).
+Every module over a ring is a directed colimit of finitely presented modules.
+
+## References
+
+* Stacks Project, Tag 058G (proof of Lazard's theorem)
 -/
 
 @[expose] public section

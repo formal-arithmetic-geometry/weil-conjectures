@@ -13,8 +13,9 @@ import WeilConjectures.SmoothPurity.Integral.IntegralTensorRepresentativeReassoc
 
 /-! # Descent of an integral scalar tensor representative isomorphism
 
-Source: Stacks 07A4 and 0941; categories.tex, Tag 04VK.
-(blueprint: lem-pur-integral-scalar-tensor-representative-descent).
+## References
+
+* Stacks Project, Tags 07A4, 0941 and 04VK.
 -/
 
 @[expose] public noncomputable section
@@ -92,15 +93,7 @@ private theorem scalarTensorCoefficientComparison_app (P) :
         ((integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app P.1.obj)
         ((integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app P.2.obj) := rfl
 
-/-- The normalized tensor comparison descends uniquely from good representatives.
-Source: Stacks 07A4 and 0941; categories.tex, Tag 04VK.
-(blueprint: lem-pur-integral-scalar-tensor-representative-descent).
-Proof: take a natural isomorphism on the good tensor representatives. The two normalized
-tensor representative comparisons and the exact scalar representative comparison
-form the source and target sides of a functor square. The product good-complex
-localization makes restriction fully faithful, so functorSquareRepresentativeDescent
-lifts that square uniquely. Its defining component equation is exactly the
-specified Roos normalization. No new comparison map or theorem hole is chosen. -/
+/-- The normalized tensor comparison descends uniquely from good representatives. -/
 theorem integralScalarTensorRepresentativeDescent
     (eδ : t ⋙ S ⋙ DerivedCategory.Q ≅ (Functor.prod k k) ⋙ s ⋙ DerivedCategory.Q) :
     ∃! α : integralCompletedTensor l E W ⋙ integralOrdinaryDerivedScalar l E L ι W ≅

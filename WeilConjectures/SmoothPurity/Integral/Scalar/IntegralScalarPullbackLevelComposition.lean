@@ -16,7 +16,17 @@ import all WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarPullbackLe
 
 The normalized finite-level comparison respects coefficient composition, by its
 existing uniqueness property and the tensor formulas for the scalar associator.
-(blueprint: lem-pur-integral-scalar-pullback-level-composition)
+
+## Implementation details
+
+The two successive comparisons are precomposed with the inverse scalar associator on `X`
+and postcomposed with the pullback of the associator on `Y`. On a normalized generator this
+inserts two unit tensors and multiplies them, so the prescribed normalization and uniqueness
+identify it with the direct comparison.
+
+## References
+
+* Stacks Project, Tags 03EL and 07A4
 -/
 
 @[expose] public noncomputable section
@@ -77,15 +87,7 @@ private theorem pullbackLevel_normalization {X Y : AlgebraicGeometry.Scheme.{u}}
   simpa only [scalarPullbackLevel] using
     (scalarPullbackLevel_existsUnique l E L ι f n).exists.choose_spec
 
-/-- Finite scalar pullback maps respect composition of the coefficient embeddings.
-Source: Stacks 03EL and 07A4; the finite-generator calculation in the scalar
-comparison part of blueprint fix-prop-coherence. Precompose the two successive
-comparisons with the inverse scalar associator on X, and postcompose with the
-pullback of the associator on Y. Its action on a normalized generator inserts two
-unit tensors and then multiplies them. The prescribed normalization and uniqueness
-therefore identify it with the direct comparison. Evaluate at P and cancel the
-inverse associator.
-(blueprint: lem-pur-integral-scalar-pullback-level-composition) -/
+/-- Finite scalar pullback maps respect composition of the coefficient embeddings. -/
 theorem integralScalarPullbackLevelComposition {X Y : AlgebraicGeometry.Scheme.{u}}
     (f : X ⟶ Y) (P : CochainComplex (integralTowerModules l E Y) ℤ) (n : ℕ) :
     (((integralOrdinaryScalar l L F j X).mapHomologicalComplex (.up ℤ)).map
