@@ -21,7 +21,6 @@ import WeilConjectures.ProperBaseChange.IntegralCoefficientPresentation.Integral
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.all false
 set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false
@@ -38,21 +37,21 @@ open AlgebraicallyClosedCoefficients (Index Coefficient)
 open AdicFiniteRealization
 variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
 
-variable [IsNoetherian X]
-  [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]
-  [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]
-  [IsCommMonObj (abRing l X)]
-
 private theorem finiteValues_injective (F : Type u) [Field F] [Algebra ℚ_[l] F]
     [FiniteDimensional ℚ_[l] F] (n : ℕ) (U : X.ProEtᵒᵖ) :
     Function.Injective (fun s : (finiteContinuousCoefficientSheaf l X F n).obj.obj U ↦
       fun x ↦ finiteContinuousCoefficientValue l F X n U s x) := by
   intro s t h
-  letI : TopologicalSpace (AlgebraicGeometry.Scheme.finiteCoefficientRing l F n) := ⊥
-  letI : DiscreteTopology (AlgebraicGeometry.Scheme.finiteCoefficientRing l F n) := ⟨rfl⟩
+  let _ : TopologicalSpace (AlgebraicGeometry.Scheme.finiteCoefficientRing l F n) := ⊥
+  have : DiscreteTopology (AlgebraicGeometry.Scheme.finiteCoefficientRing l F n) := ⟨rfl⟩
   apply ContinuousMap.ext
   intro x
   exact congrFun h x
+
+variable [IsNoetherian X]
+  [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]
+  [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]
+  [IsCommMonObj (abRing l X)]
 
 private theorem finiteCoefficientSquare (F : Type u) [Field F] [Algebra ℚ_[l] F]
     [FiniteDimensional ℚ_[l] F] (i : F →ₐ[ℚ_[l]] PadicAlgCl l)
@@ -84,8 +83,8 @@ private theorem finiteCoefficientSquare (F : Type u) [Field F] [Algebra ℚ_[l] 
   apply CommRingCat.hom_ext
   apply RingHom.ext
   intro a
-  letI : TopologicalSpace (AlgebraicGeometry.Scheme.finiteCoefficientRing l F n) := ⊥
-  letI : DiscreteTopology (AlgebraicGeometry.Scheme.finiteCoefficientRing l F n) := ⟨rfl⟩
+  let _ : TopologicalSpace (AlgebraicGeometry.Scheme.finiteCoefficientRing l F n) := ⊥
+  have : DiscreteTopology (AlgebraicGeometry.Scheme.finiteCoefficientRing l F n) := ⟨rfl⟩
   apply finiteValues_injective l X F n U
   funext x
   have hu := ConcreteCategory.congr_hom
@@ -136,9 +135,9 @@ private theorem integralCoefficientSquare (F : Type u) [Field F] [Algebra ℚ_[l
   rw [hπ]
   apply (cancel_mono (C.finite n.unop).hom).mp
   rw [Category.assoc, Category.assoc, finiteCoefficientSquare l X F i A C n.unop]
-  letI : TopologicalSpace
+  let _ : TopologicalSpace
       (ULift.{u + 1} (Padic.coefficientExtensionRing l F (n.unop + 1))) := ⊥
-  letI : DiscreteTopology
+  have : DiscreteTopology
       (ULift.{u + 1} (Padic.coefficientExtensionRing l F (n.unop + 1))) := ⟨rfl⟩
   apply Sheaf.hom_ext
   apply NatTrans.ext
@@ -146,9 +145,9 @@ private theorem integralCoefficientSquare (F : Type u) [Field F] [Algebra ℚ_[l
   apply CommRingCat.hom_ext
   apply RingHom.ext
   intro s
-  letI : TopologicalSpace
+  let _ : TopologicalSpace
       (ULift.{u + 1} (Padic.coefficientExtensionRing l F (n.unop + 1))) := ⊥
-  letI : DiscreteTopology
+  have : DiscreteTopology
       (ULift.{u + 1} (Padic.coefficientExtensionRing l F (n.unop + 1))) := ⟨rfl⟩
   apply finiteValues_injective l X F n.unop U
   funext x
@@ -168,7 +167,7 @@ theorem finiteCondensedIntegralCoefficientSquare (A : FiniteCondensedData l X)
         (A.closure.leg E) ≫
           ProEtale.CondensedRing.sectionRingMap X (condensedNativeMap l X)  := by
   have hi : C.integralInclusion = (A.realization E).inclusion := by
-    letI := coefficientExtensionNormedField l (Coefficient.{u} l (PadicAlgCl l) E)
+    let _ := coefficientExtensionNormedField l (Coefficient.{u} l (PadicAlgCl l) E)
     apply Sheaf.hom_ext
     apply NatTrans.ext
     funext U

@@ -25,7 +25,6 @@ set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false
 set_option genCtorIdx false
-set_option linter.all false
 
 attribute [local irreducible] HasDerivedCategory.standard
 
@@ -61,20 +60,20 @@ theorem coefficientSystem_exists
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
     Nonempty (CoefficientSystem l X) := by
   let e := ProEtale.padicAlgClSheafIsoAdicConstantSheaf X l
-  haveI : IsMonHom e.hom :=
+  have : IsMonHom e.hom :=
     inferInstanceAs (IsMonHom (ProEtale.padicAlgClSheafToAdicConstantSheaf X l))
-  letI : IsCommMonObj (abRing l X) := by
+  have : IsCommMonObj (abRing l X) := by
     constructor
     apply (cancel_epi (e.hom ⊗ₘ e.hom)).mp
     rw [← Category.assoc, BraidedCategory.braiding_naturality, Category.assoc,
       ← IsMonHom.mul_hom, ← Category.assoc, IsCommMonObj.mul_comm]
-  letI := ProEtale.nativeScalarForgetting_isEquivalence l X
-  haveI : (sections l X).IsEquivalence := by
+  have := ProEtale.nativeScalarForgetting_isEquivalence l X
+  have : (sections l X).IsEquivalence := by
     unfold sections
     infer_instance
-  haveI : PreservesFiniteLimits (sections l X) := inferInstance
-  haveI : PreservesFiniteColimits (sections l X) := inferInstance
-  haveI : (sections l X).Additive := Functor.additive_of_preserves_binary_products _
+  have : PreservesFiniteLimits (sections l X) := inferInstance
+  have : PreservesFiniteColimits (sections l X) := inferInstance
+  have : (sections l X).Additive := Functor.additive_of_preserves_binary_products _
   obtain ⟨coefficient, scalar⟩ := coefficientPresentations_exists l X
   exact ⟨{ coefficient := coefficient, coefficient_scalar := scalar }⟩
 

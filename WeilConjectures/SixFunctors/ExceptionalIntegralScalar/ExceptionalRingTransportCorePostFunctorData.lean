@@ -140,7 +140,6 @@ private def integralLeftEvaluation
             (PurCompactSupport.finite l E.carrier (n + 1) (Nat.succ_pos n)) c) ≪≫
         Functor.isoWhiskerLeft (RX.equivalence.functor ⋙ RX.evaluation n) leftB.symm)
 
-set_option linter.unusedVariables false in
 /-- The strict-system transport and normalized reconstruction calculus produce
 all transported functors, adjunctions, evaluations, and the integral-left
 comparison once the reconstruction and realization choices are fixed. -/
@@ -193,7 +192,6 @@ theorem exists_exceptional_transport_post_functor_data
     evaluationG := fun E n ↦
       Adjunction.compatibleRightComparison _ _ _ }⟩
 
-set_option linter.unusedVariables false in
 /-- The coherent integral realization supplies the remaining integral-left
 comparison for each field stage. -/
 theorem exists_exceptional_transport_integral_left
@@ -208,11 +206,11 @@ theorem exists_exceptional_transport_integral_left
     (operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l))
     (left : ∀ s : RingStage.{u} l,
       LeftRealization.{u} l Ω c s (operation s))
-    (reconstruction : ∀ E : FieldStage.{u} l, ∀ side : Bool,
+    (_reconstruction : ∀ E : FieldStage.{u} l, ∀ side : Bool,
       Reconstruction l E (endpoint X Y side))
     (operations : ∀ E : FieldStage.{u} l,
       IntegralSystemRealization.Operations l E.carrier)
-    (realizations : ∀ E : FieldStage.{u} l,
+    (_realizations : ∀ E : FieldStage.{u} l,
       IntegralSystemRealization.Realizations l E.carrier D (operations E)) :
     Nonempty (∀ E : FieldStage.{u} l,
       (operation (.integral E)).F ⋙
