@@ -11,9 +11,12 @@ import all WeilConjectures.SmoothBaseChange.SbcCompletedOperations
 
 /-! # Finite quotient restriction is derived complete
 
-Source: Stacks Tags 091N, 099L and 093M; the finite-restriction geometric-series completeness
-calculation and its normalized completed-coefficient transport.
-(blueprint: lem-sf-regular-quotient-restriction-complete). -/
+## References
+
+* [Stacks, Tag 091N](https://stacks.math.columbia.edu/tag/091N)
+* [Stacks, Tag 099L](https://stacks.math.columbia.edu/tag/099L)
+* [Stacks, Tag 093M](https://stacks.math.columbia.edu/tag/093M)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -52,10 +55,7 @@ private theorem finiteCoefficientIso_projection
   exact (integralDetailedCoefficientComparison_exists T l E).exists.choose_spec n
 
 /-- Restriction of every unbounded finite-quotient complex is intrinsically derived
-complete over the actual completed coefficient sheaf.
-Source: Stacks Tags 091N, 099L and 093M; the finite-restriction geometric-series completeness
-calculation and its normalized completed-coefficient transport.
-(blueprint: lem-sf-regular-quotient-restriction-complete). -/
+complete over the actual completed coefficient sheaf. -/
 theorem scalarReductionDerivedRestriction_complete
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (n : ℕ)

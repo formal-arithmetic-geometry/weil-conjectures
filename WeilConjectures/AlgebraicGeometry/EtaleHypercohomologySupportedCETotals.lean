@@ -38,7 +38,6 @@ private theorem supported_complexStep_antitone
   simpa only [DecreasingFiltration.complexStep, ← HomologicalComplex.comp_f,
     Subobject.ofLE_arrow] using h
 
-set_option linter.unusedVariables false in
 -- Elaborate the dependent presentation, support and stationary-page families together.
 /-- Construct support-controlled stationary comparisons for maps of augmented CE totals.
 The presentation, page maps and stationary comparisons are chosen simultaneously.
@@ -52,12 +51,12 @@ theorem exists_etaleHypercohomology_supported_ce_filtered_totals :
       (M : ∀ {X Y : Scheme.{u}} (f : Y ⟶ X)
         (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
         (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}))
-        (v : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
+        (_v : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
           (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj),
         (D X K).sequence ⟶ (D Y L).sequence)
       (eInf : ∀ (X : Scheme.{u})
         (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
-        (q n r : ℤ) (hr : 1 ≤ r) (hR : ∃ a : ℤ, (∀ s : ℤ, s < a → IsZero (K.obj.X s)) ∧
+        (q n r : ℤ) (hr : 1 ≤ r) (_hR : ∃ a : ℤ, (∀ s : ℤ, s < a → IsZero (K.obj.X s)) ∧
           max 1 (max (q - a + 2) (n - q + 2)) ≤ r),
         ((D X K).sequence.page r hr).X (q, n - q) ≅ ((D X K).H n).gradedPiece q),
       (∀ {X Y : Scheme.{u}} (f : Y ⟶ X)
@@ -81,7 +80,7 @@ theorem exists_etaleHypercohomology_supported_ce_filtered_totals :
           ∀ n : ℤ,
             ∃ (t : ∀ q : ℤ, (((D X K).H n).step q : AddCommGrpCat.{u + 1}) ⟶
             (((D Y L).H n).step q : AddCommGrpCat.{u + 1}))
-          (ht : ∀ q : ℤ, t q ≫ (((D Y L).H n).step q).arrow =
+          (_ht : ∀ q : ℤ, t q ≫ (((D Y L).H n).step q).arrow =
             (((D X K).H n).step q).arrow ≫
               (((D X K).c n).inv ≫
                 HomologicalComplex.homologyMap

@@ -101,10 +101,6 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsExist
 
 /-! # Roos and intrinsic completeness for completed local-field coefficients
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul,
-and Tag 099B, lemma-derived-completion
-(blueprint: lem-pur-roos-intrinsic-completeness-equivalence).
-
 All five conditions concern the completed integral ring on the actual small pro-etale
 site. A section on U is equivalently a global section on the slice over U. Membership
 in the ideal sheaf tR is expressed by local divisibility on a covering sieve; thus the
@@ -113,6 +109,14 @@ The representative is K-flat with flat terms. The three displayed units retain t
 specified quotient, degree-zero Koszul, and explicit (u,0) normalizations.
 The integral one-generator chain models and their normalized units are defined here;
 the proof uses these concrete integral models throughout.
+
+## References
+
+* [Stacks, Tag 08TC](https://stacks.math.columbia.edu/tag/08TC)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
+* [Stacks, Tag 099B](https://stacks.math.columbia.edu/tag/099B)
+* [Stacks, Tag 0999](https://stacks.math.columbia.edu/tag/0999)
+* [Stacks, Tag 0A0E](https://stacks.math.columbia.edu/tag/0A0E)
 -/
 
 @[expose] public noncomputable section
@@ -130,8 +134,7 @@ section IntegralKoszulModels
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (T : AlgebraicGeometry.Scheme.{t})
 
-/-- The uniformizer section, through the actual constant-to-limit map.
-Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
+/-- The uniformizer section, through the actual constant-to-limit map. -/
 def integralCompletionScalarValue (U : T.ProEtᵒᵖ) :
     (completedIntegralCoefficientSheafUnrestricted l E T).obj.obj U :=
   (integralConstantToCompletionOfUniverses l E T).hom.app U
@@ -140,12 +143,7 @@ def integralCompletionScalarValue (U : T.ProEtᵒᵖ) :
         (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionIntegers l E))))).app U
           (ULift.up (Padic.coefficientExtensionUniformizer l E)))
 
-/-- Multiplication by the actual uniformizer determines a unique chain endomorphism.
-Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence).
-Proof: the constant-to-limit map is natural, so its uniformizer sections restrict
-compatibly. Scalar multiplication is linear over the commutative coefficient ring,
-commutes with restrictions, and commutes with the linear differential. These formulas
-define a chain map; equality on every section in every degree proves uniqueness. -/
+/-- Multiplication by the actual uniformizer determines a unique chain endomorphism. -/
 theorem integralKoszulScalar_existsUnique (P : IntegralOnSlice.Cx l E T none) :
     ∃! f : P ⟶ P, ∀ (q : ℤ) (U : T.ProEtᵒᵖ) (x : (P.X q).val.obj U),
       (f.f q).val.app U x = integralCompletionScalarValue l E T U • x := by
@@ -207,47 +205,38 @@ theorem integralKoszulScalar_existsUnique (P : IntegralOnSlice.Cx l E T none) :
     ext x
     exact hg q U x
 
-/-- The uniquely section-normalized scalar chain map.
-Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
+/-- The uniquely section-normalized scalar chain map. -/
 def integralKoszulScalar (P : IntegralOnSlice.Cx l E T none) : End P :=
   .of (integralKoszulScalar_existsUnique l E T P).exists.choose
 
-/-- P tensor [R --t^(n+1)--> R], in the standard total-cone coordinates.
-Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
+/-- P tensor [R --t^(n+1)--> R], in the standard total-cone coordinates. -/
 def integralKoszulLevel (P : IntegralOnSlice.Cx l E T none) (n : ℕ) :=
   CochainComplex.mappingCone (integralKoszulScalar l E T P ^ (n + 1)).asHom
 
-/-- The square defining the (t,1) transition commutes.
-Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence).
-Proof: compose the indicated powers of the same endomorphism. Both sides are its
-(n+2)-nd power, by the power recursion and the identity composition law. -/
+/-- The square defining the (t,1) transition commutes. -/
 theorem integralKoszulStep_square (P : IntegralOnSlice.Cx l E T none) (n : ℕ) :
     (integralKoszulScalar l E T P ^ (n + 1 + 1)).asHom ≫ 𝟙 P =
       (integralKoszulScalar l E T P).asHom ≫ (integralKoszulScalar l E T P ^ (n + 1)).asHom := by
   exact CochainComplex.PrincipalCone.square (integralKoszulScalar l E T P) n
 
-/-- The specified transition, multiplication by t in degree -1 and identity in degree 0.
-Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
+/-- The specified transition, multiplication by t in degree -1 and identity in degree 0. -/
 def integralKoszulStep (P : IntegralOnSlice.Cx l E T none) (n : ℕ) :
     integralKoszulLevel l E T P (n + 1) ⟶ integralKoszulLevel l E T P n :=
   CochainComplex.mappingCone.map _ _ (integralKoszulScalar l E T P).asHom (𝟙 P)
     (integralKoszulStep_square l E T P n)
 
-/-- The strict positive-power Koszul tensor tower on this single representative.
-Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
+/-- The strict positive-power Koszul tensor tower on this single representative. -/
 def integralKoszulTower (P : IntegralOnSlice.Cx l E T none) :
     ℕᵒᵖ ⥤ IntegralOnSlice.Cx l E T none :=
   Functor.ofOpSequence (integralKoszulStep l E T P)
 
-/-- The product of the degree-zero inclusions.
-Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
+/-- The product of the degree-zero inclusions. -/
 def integralKoszulProductUnit (P : IntegralOnSlice.Cx l E T none) :
     P ⟶ ∏ᶜ (fun n : ℕ ↦ (integralKoszulTower l E T P).obj (op n)) :=
   Pi.lift (fun n ↦ CochainComplex.mappingCone.inr
     (integralKoszulScalar l E T P ^ (n + 1)).asHom)
 
-/-- The specified one-minus-transition map on the termwise product.
-Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
+/-- The specified one-minus-transition map on the termwise product. -/
 def integralKoszulOneSubShift (P : IntegralOnSlice.Cx l E T none) :=
   towerTransitionEndomorphism
     (K := fun n : ℕ ↦ (integralKoszulTower l E T P).obj (op n))
@@ -257,15 +246,11 @@ private theorem integralKoszulProductUnit_comp (P : IntegralOnSlice.Cx l E T non
     integralKoszulProductUnit l E T P ≫ integralKoszulOneSubShift l E T P = 0 := by
   exact CochainComplex.PrincipalCone.productUnit_comp (integralKoszulScalar l E T P)
 
-/-- The explicit fiber has differential (dx,(1-s)x-dy), as in the owning node.
-Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
+/-- The explicit fiber has differential (dx,(1-s)x-dy). -/
 def integralKoszulIntrinsicFiber (P : IntegralOnSlice.Cx l E T none) :=
   CochainComplex.mappingCocone (-integralKoszulOneSubShift l E T P)
 
-/-- Zero is the specified second cochain in the intrinsic augmentation.
-Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence).
-Proof: each component of u(1-s) is the difference of consecutive compatible cone
-inclusions, so is zero. The differential of the zero cochain is zero. -/
+/-- Zero is the specified second cochain in the intrinsic augmentation. -/
 theorem integralKoszulIntrinsicUnit_condition (P : IntegralOnSlice.Cx l E T none) :
     CochainComplex.HomComplex.δ (-1) 0
         (0 : CochainComplex.HomComplex.Cochain P
@@ -274,30 +259,23 @@ theorem integralKoszulIntrinsicUnit_condition (P : IntegralOnSlice.Cx l E T none
         (integralKoszulProductUnit l E T P ≫ (-integralKoszulOneSubShift l E T P)) = 0 := by
   simp [Preadditive.comp_neg, integralKoszulProductUnit_comp]
 
-/-- The actual (u,0) chain map into the signed intrinsic fiber.
-Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
+/-- The actual (u,0) chain map into the signed intrinsic fiber. -/
 def integralKoszulIntrinsicUnitComplex (P : IntegralOnSlice.Cx l E T none) :
     P ⟶ integralKoszulIntrinsicFiber l E T P :=
   CochainComplex.mappingCocone.lift _ (integralKoszulProductUnit l E T P) 0
     (integralKoszulIntrinsicUnit_condition l E T P)
 
-/-- The intrinsic unit on K, realized using the specified representative isomorphism.
-Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
+/-- The intrinsic unit on K, realized using the specified representative isomorphism. -/
 def integralKoszulIntrinsicUnit (K : IntegralOnSlice.D l E T none)
     (P : IntegralOnSlice.Cx l E T none) (e : DerivedCategory.Q.obj P ≅ K) :
     K ⟶ DerivedCategory.Q.obj (integralKoszulIntrinsicFiber l E T P) :=
   e.inv ≫ DerivedCategory.Q.map (integralKoszulIntrinsicUnitComplex l E T P)
 
-/-- The total derived inverse limit of the Koszul tensor tower, in the exact-products model.
-Source: Stacks 0A0E and 0941 (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
+/-- The total derived inverse limit of the Koszul tensor tower, in the exact-products model. -/
 def integralKoszulLimit (P : IntegralOnSlice.Cx l E T none) :=
   CochainComplex.mappingCocone (integralKoszulOneSubShift l E T P)
 
-/-- The zero cochain gives the strict Koszul augmentation into the Roos fiber.
-Source: Stacks 0A0E and 0941 (blueprint: lem-pur-roos-intrinsic-completeness-equivalence).
-Proof: evaluate u(1-s) at every product projection. It is the difference of the
-two cone inclusions identified by integralKoszulUnit_compatible. Thus it vanishes;
-the differential of the zero cochain also vanishes. -/
+/-- The zero cochain gives the strict Koszul augmentation into the Roos fiber. -/
 theorem integralKoszulLimitUnit_condition (P : IntegralOnSlice.Cx l E T none) :
     CochainComplex.HomComplex.δ (-1) 0
         (0 : CochainComplex.HomComplex.Cochain P
@@ -306,15 +284,13 @@ theorem integralKoszulLimitUnit_condition (P : IntegralOnSlice.Cx l E T none) :
         (integralKoszulProductUnit l E T P ≫ integralKoszulOneSubShift l E T P) = 0 := by
   simp [integralKoszulProductUnit_comp]
 
-/-- The degree-zero Koszul unit into its total strict derived inverse limit.
-Source: Stacks 0A0E and 0941 (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
+/-- The degree-zero Koszul unit into its total strict derived inverse limit. -/
 def integralKoszulLimitUnitComplex (P : IntegralOnSlice.Cx l E T none) :
     P ⟶ integralKoszulLimit l E T P :=
   CochainComplex.mappingCocone.lift _ (integralKoszulProductUnit l E T P) 0
     (integralKoszulLimitUnit_condition l E T P)
 
-/-- The specified Koszul unit on the object represented by P.
-Source: Stacks 0A0E and 0941 (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
+/-- The specified Koszul unit on the object represented by P. -/
 def integralKoszulLimitUnit (K : IntegralOnSlice.D l E T none)
     (P : IntegralOnSlice.Cx l E T none) (e : DerivedCategory.Q.obj P ≅ K) :
     K ⟶ DerivedCategory.Q.obj (integralKoszulLimit l E T P) :=
@@ -324,9 +300,7 @@ end IntegralKoszulModels
 
 /-- The local test object is exactly RHom(R_U[1/s], K restricted to U).
 The slice sheafification and standard localization are the existing canonical ones;
-they impose no equality between the site object, morphism and coefficient universes.
-Source: Stacks 0999 and 0A0E
-(blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
+they impose no equality between the site object, morphism and coefficient universes. -/
 noncomputable def integralCompletionLocalTest
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -449,9 +423,8 @@ private theorem signedFiberUnit {A : Type*} [Category* A] [Abelian A]
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The strict mapping-cocone model has the actual localized projections.
-Source: Stacks Tag 08TC. Exact products identify both product vertices; mapping the
-mapping-cocone triangle and transporting those vertices gives the required triangle. -/
+/-- The strict mapping-cocone model has the actual localized projections, and its mapping-cocone
+triangle is a derived limit triangle. -/
 private theorem integralStrictRoosTriangle {A : Type*} [Category* A] [Abelian A]
     [HasDerivedCategory.{w} A] [HasCountableProducts A] [CountableAB4Star A]
     [HasCountableProducts (DerivedCategory A)]
@@ -686,35 +659,7 @@ private noncomputable def integralAuxiliaryDatum (p : ℕ) [Fact p.Prime] :
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The five completeness conditions for the specified canonical units are equivalent.
-There is no geometric finiteness or cohomological boundedness assumption.
-
-Source: Stacks Project, algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul,
-and Tag 099B, lemma-derived-completion
-(blueprint: lem-pur-roos-intrinsic-completeness-equivalence).
-
-Proof:
-1. The independent-universe singleton cone criterion identifies local vanishing with
-   invertibility of the specified cone-completion unit and makes its output complete.
-2. The regular principal-quotient augmentation gives a levelwise quasi-isomorphism
-   from the scalar cones to the actual quotient reductions, preserving transitions
-   and augmentations. Exact products and the cone triangle give an isomorphism of
-   their Roos objects preserving the entire zero-homotopy units. Naturality and
-   representative normalization of the completion unit give (iii) iff (v).
-3. The square (1,-1) identifies the signed and unsigned cone models. After shifting
-   by minus one it preserves the product-component unit and its zero homotopy,
-   proving (iii) iff (iv).
-4. Localization preserves countable products because these products are exact.
-   Transporting the mapping-cocone triangle through its product comparison gives
-   the strict Roos triangle with the actual localized product projections.
-5. For (i), normalize the legacy quotient transitions. Rotate the asserted triangle
-   and the strict Roos triangle to start at the same arrow 1-s. The identity maps of
-   its two vertices extend to a triangle isomorphism. Shift back and transport local
-   vanishing from the quotient Roos object to K, proving (ii). No arbitrary TR3 map
-   is identified with the prescribed completion unit.
-6. For (v), transport the strict Roos triangle along the specified, invertible unit.
-   Its product projections are the quotient augmentations. The identity resolution
-   of the given K-flat representative and the auxiliary finite-field datum at p
-   therefore witness exactly the published global Roos condition (i). -/
+There is no geometric finiteness or cohomological boundedness assumption. -/
 theorem roosIntrinsicCompletenessEquivalence
     (p l : ℕ) [Fact p.Prime] [Fact l.Prime] (_hpl : p ≠ l)
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

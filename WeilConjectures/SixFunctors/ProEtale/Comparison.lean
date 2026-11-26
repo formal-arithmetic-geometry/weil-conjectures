@@ -26,14 +26,14 @@ This is the bridge between the étale statements of the purity chapter and the p
 categories in which the six operations of the framework are typed: the *étale-origin* objects
 are exactly those in the essential image of `ν^*`.
 
-## Implementation notes
+## Implementation details
 
 The inclusion `AlgebraicGeometry.toProEt` of small sites, the functors `ν^*` and `ν_*`,
 the adjunction `ν^* ⊣ ν_*` and the exactness of `ν^*` are
-`WeilConjectures.SixFunctors.ProEtale.Comparison.Defs`, sorry-free; this file states the
-remaining clauses of `theorem-bounded-below-cohomology-comparison` on top of them.
+defined in the `Comparison.Defs` file; this file states the remaining clauses of the comparison
+theorem on top of them.
 
-The remaining clause of `theorem-bounded-below-cohomology-comparison` — that `ν_T^*` restricts to an
+The remaining clause of the comparison theorem — that `ν_T^*` restricts to an
 equivalence of `D^b_c(T_ét, Λ)` onto the constructible subcategory of `D^b_c(T_proét, Λ)` — is not
 stated: the repository has no constructibility notion on the pro-étale site to be an equivalence
 onto.
@@ -65,33 +65,14 @@ namespace ProEtale
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
-/-- Blueprint `theorem-bounded-below-cohomology-comparison`: The pro-étale comparison
-
-*Right exactness.* The comparison pullback preserves finite colimits — indeed all colimits,
-being a left adjoint. Together with
-`AlgebraicGeometry.ProEtale.preservesFiniteLimits_comparisonUpperStar` this is the exactness
-of `ν^*`, which is what lets it be applied degreewise to complexes. -/
+/-- The comparison pullback preserves finite colimits (indeed all colimits, being a left
+adjoint). -/
 instance preservesFiniteColimits_comparisonUpperStar (X : Scheme.{u}) :
     PreservesFiniteColimits (comparisonUpperStar A X) :=
   inferInstance
 
-/-- Blueprint `theorem-bounded-below-cohomology-comparison`: The pro-étale comparison
-
-**The comparison direct image.** For `u : U ⟶ V` quasi-compact and quasi-separated the
-comparison commutes with direct images:
-
-```
-  D⁺(U_ét) --R u_{ét,*}--> D⁺(V_ét)
-      |                        |
-   ν_U^*                    ν_V^*
-      |                        |
-      v                        v
-  D⁺(U_proét) -R u_{proét,*}-> D⁺(V_proét)
-```
-
-commutes up to isomorphism, `ν_V^* ∘ R u_{ét,*} ≅ R u_{proét,*} ∘ ν_U^*`. Exactness of `ν^*`,
-which is what allows it to be applied degreewise to complexes, is
-`AlgebraicGeometry.ProEtale.preservesFiniteLimits_comparisonUpperStar`. -/
+/-- **The comparison direct image.** For `u : U ⟶ V` quasi-compact and quasi-separated the
+comparison commutes with direct images: `ν_V^* ∘ R u_{ét,*} ≅ R u_{proét,*} ∘ ν_U^*`. -/
 theorem nonempty_iso_comparisonUpperStar_comp_rightDerivedLowerStar {U V : Scheme.{u}}
     (u : U ⟶ V) [QuasiCompact u] [QuasiSeparated u] :
     Nonempty (R+(Etale.lowerStar A u) ⋙ D+(comparisonUpperStar A V) ≅

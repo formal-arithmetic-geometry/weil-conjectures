@@ -11,8 +11,10 @@ import WeilConjectures.AlgebraicGeometry.FreeParameterScalarMaps
 
 /-! # Unit normalization of integral reduction and geometric pullback
 
-Source: Stacks 06YY and 07A6; blueprint integral open direct image, Reduction paragraph.
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
 -/
 
 @[expose] public noncomputable section
@@ -31,9 +33,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   {U X : Scheme.{u}} (j : U ⟶ X)
 
-/-- The specified inverse scalar mate at exponent n+1.
-Source: Stacks 06YY and 07A6
-(auxiliary; not a blueprint node). -/
+/-- The specified inverse scalar mate at exponent n+1. -/
 abbrev integralReductionPullbackMap (n : ℕ) :
     (CondensedRing.upperStar (DerivedNakayama.integerRing l E) j).mapDerivedCategory ⋙
         AdicCompletion.derivedReduction l E U n ⟶
@@ -47,21 +47,7 @@ abbrev integralReductionPullbackMap (n : ℕ) :
         (CondensedRing.derivedComapUpperStarIso
           (DerivedNakayama.reductionRing l E (n + 1)) j).inv))
 
-/-- A finite derived scalar/pullback comparison with the prescribed scalar-unit equation.
-Source: Stacks 06YY, 07A6; blueprint integral open direct image, Reduction paragraph
-(auxiliary; not a blueprint node).
-
-Proof: the underived inverse image is exact and strong monoidal, and its coefficient
-identification is an isomorphism. Relative tensor balancing gives the comparison sending
-s tensor m to s tensor m, retaining the finite coefficient action. Pullback preserves
-K-flat complexes: apply its exact strong monoidal functor to the acyclic tensor test.
-Compute the two derived scalar extensions on a flat-term K-flat representative and
-localize the balancing isomorphism. Independence of resolution and naturality follow
-from the universal left derived functor. On representatives the scalar units both send
-m to 1 tensor m, so the displayed equation follows after exact restriction. This
-identifies the actual inverse mate and requires no flatness of the quotient map.
-Positive exponent one, zero complexes, empty schemes and unbounded representatives
-satisfy the same balancing and unit formulas. -/
+/-- A finite derived scalar/pullback comparison with the prescribed scalar-unit equation. -/
 theorem integral_reduction_pullback_normalization (n : ℕ) :
     ∃ b :
       (CondensedRing.upperStar (DerivedNakayama.integerRing l E) j).mapDerivedCategory ⋙

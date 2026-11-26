@@ -7,7 +7,12 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteCoefficientRestriction
 
-/-! # Composition of the normalized coefficient restriction comparison -/
+/-! # Composition of the normalized coefficient restriction comparison
+
+## References
+
+* Bhatt--Scholze, Lemma 5.4.1; naturality of the sectionwise encoding
+-/
 
 @[expose] public section
 
@@ -57,17 +62,7 @@ private theorem restriction_hom {S T : Scheme.{u}} (h : S ⟶ T)
   simp only [Category.id_comp]
   rfl
 
-/-- The normalized restriction comparisons commute with restriction composition.
-Source: Bhatt--Scholze, Lemma 5.4.1; naturality of the sectionwise encoding
-(blueprint: lem-weil-pbc-finite-discrete-restriction-composition).
-
-Proof. Forget module actions. Expand each normalized comparison as the restriction of
-the encoding forget isomorphism followed by its inverse at the target. The middle
-isomorphism and its inverse cancel after applying the second restriction. Move the
-last inverse past the ordinary restriction composition map by naturality. On underlying
-sheaves, internal restriction composition is the ordinary additive restriction
-composition map. Its naturality at the first encoding component proves the equality.
-Faithfulness of the internal-module forgetful functor finishes. -/
+/-- The normalized restriction comparisons commute with restriction composition. -/
 theorem finiteDiscreteCoefficientRestrictionIso_comp {S T U : Scheme.{u}} (f : S ⟶ T) (g : T ⟶ U)
     (N : FiniteDiscreteProEtaleSheaves B S) :
     (lowerStar (Profinite.continuousMapRingObj B) g).map

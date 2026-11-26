@@ -29,8 +29,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 attribute [local irreducible] Functor.sheafPullbackConstruction.sheafPullback
   proEtaleRingInverseImageComp LocallyRingedSpace.comp PresheafedSpace.comp
 attribute [local irreducible] proEtaleRingModulePullback proEtaleRingModuleAdjunction
@@ -54,7 +52,6 @@ end
 variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
 
-set_option linter.defProp false in
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 end AlgebraicGeometry.Scheme

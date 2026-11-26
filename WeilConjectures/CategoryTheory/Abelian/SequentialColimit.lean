@@ -212,7 +212,6 @@ attribute [local instance] Abelian.hasFiniteBiproducts
 
 variable [Abelian C] (F : ℕ ⥤ C) {P : Cofan fun n : ℕ ↦ F.obj n} (hP : IsColimit P)
 
-set_option linter.flexible false in
 /-- In an abelian category with exact colimits of shape `ℕ`, the map
 `1 - t : ∐ₙ Fₙ ⟶ ∐ₙ Fₙ` is a monomorphism. -/
 lemma mono_id_sub_telescopeShift [HasColimitsOfShape ℕ C] [HasExactColimitsOfShape ℕ C] :
@@ -224,8 +223,10 @@ lemma mono_id_sub_telescopeShift [HasColimitsOfShape ℕ C] [HasExactColimitsOfS
   refine colim.map_mono' (partialSumSubShiftNatTrans F) (isColimitPartialSumCocone F hP 0)
     (isColimitPartialSumCocone F hP 1) _ fun N ↦ ?_
   refine biproduct.hom_ext' _ _ fun i ↦ ?_
-  simp [partialSumSubShiftNatTrans, partialSumSubShift, Preadditive.comp_sub,
-    Preadditive.sub_comp]
+  simp only [Nat.add_zero, Functor.const_obj_obj, partialSumCocone_ι_app, Preadditive.comp_sub,
+    biproduct.ι_desc_assoc, Cofan.inj_telescopeShift, homOfLE_leOfHom,
+    partialSumSubShiftNatTrans, NatTrans.ofSequence_app, partialSumSubShift,
+    Nat.succ_eq_add_one, Preadditive.sub_comp, biproduct.ι_desc, assoc, sub_left_inj]
   exact Category.comp_id _
 
 variable {c : Cocone F} (hc : IsColimit c)

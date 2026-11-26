@@ -14,9 +14,15 @@ import WeilConjectures.SixFunctors.Supporting.SpecifiedPullbackComparisonAlpha
 
 /-! # Shift descent for normalized isomorphism transport
 
-The private generic pair-shift construction follows the proved calculation in
-`SfFrameworkCommonStageDescent` (SHEAF group Q19). It uses only coherent pair
-functor descent and the published stage inclusions and their shift comparisons.
+The finite-stage shifts of pullback along an isomorphism descend to the common algebraically
+closed coefficient stage, compatibly with the stage inclusion comparisons.
+
+## Implementation details
+
+The private generic pair-shift construction follows the calculation in
+`SfFrameworkCommonStageDescent`. It uses only coherent pair functor descent, the stage inclusions
+and their shift comparisons. The rational scalar comparisons commute with the finite shifts by
+`isomorphismPullbackScalarShift`, applied to the inverses of the normalized comparisons `lambda`.
 -/
 
 @[expose] public noncomputable section
@@ -354,27 +360,9 @@ private theorem normalized_scalar_shift (E L : Index l Ω) (h : E ≤ L) :
 
 end StageShifts
 
-/-- The prescribed finite shifts descend and commute with a normalized inclusion comparison.
-Source: current blueprint sec-six-functors/sk-rem-sf-pf-done/
-lem-fix-weil-operations.proof.md, inverse automorphism paragraph;
-step 1 and the shift part of step 3 of the common-stage transport argument.
-(blueprint: lem-pod-isomorphism-field-transport-shift-descent).
-
-Proof: invert the supplied lambda comparisons. Their component normalization is
-exactly inverseImagePullbackComparisonDerived, and the lambda shift square also
-holds for the inverse comparison. Apply isomorphismPullbackScalarShift to these
-comparisons and the given integral and rational shifts. This shows that the
-normalized rational scalar comparisons commute with the supplied shifts. The
-published stage transitions and their shifts are transports of those scalar
-functors and shifts along equality, so their transition identifications also
-commute with shifts. Descend each finite shift at the object's own field.
-On an arbitrary representative, the two scalar shift equations and finite
-naturality give naturality of the descended comparison. Descend the finite zero
-and addition equations to obtain CommShift. Both restrictions to a finite stage
-have its finite shift component, so the identity-normalized inclusion comparison
-commutes with shifts. All such comparisons agree componentwise by hc. No inverse
-family, equivalence, triangle preservation, or dimension hypothesis is needed.
--/
+/-- The finite-stage shifts `(S E).rationalShift` descend to a shift `q` on common-stage
+pullback along `g`, and every identity-normalized inclusion comparison `c E` commutes with
+these shifts. -/
 theorem isomorphismFieldTransportShiftDescent
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

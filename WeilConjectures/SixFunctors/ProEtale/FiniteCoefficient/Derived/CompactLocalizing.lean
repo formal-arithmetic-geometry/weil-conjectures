@@ -16,24 +16,10 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom
 /-!
 # Objects of `Dctf(X, Λ)` are compact in `Loc(Dctf(X, Λ))`
 
-Blueprint `proposition-compactness-finite-coefficients--1`. Let `k` be a field of finite
+Let `k` be a field of finite
 cohomological dimension for `Λ`-modules, `X` a finite-type `k`-scheme and `Λ` a finite ring whose
 exponent is invertible on `X`. Every object `C` of `Dctf(X, Λ)` is compact in `Loc(Dctf(X, Λ))`
 (`AlgebraicGeometry.ProEtale.DerivedCategory.isCompactObj_of_constructibleFiniteTor`).
-
-Write `C = ν^* C'` with `C'` in `Dctf(X_ét, Λ)`, which is compact with bounded morphisms in
-`D(X_ét, Λ)` (`AlgebraicGeometry.Etale.compactBoundedHom_of_constructibleFiniteTor`). Morphisms
-from `C` to an object `Y` with cohomology sheaves of étale origin (a class containing
-`Loc(Dctf(X, Λ))`) only depend on the truncation `τ_{[N, m]} Y` for suitable `N ≤ m`:
-
-* `Hom(C, L) = 0` for `L` of étale-origin cohomology in degrees `≤ N`
-  (`AlgebraicGeometry.ProEtale.DerivedCategory.exists_forall_eq_zero_of_constructibleFiniteTor`):
-  `L` is the homotopy limit of its bounded truncations (left completeness of `D(X_proét)`), and
-  `Hom(ν^* C', ν^* G) = Hom(C', G)` for bounded `G`;
-* `Hom(C, Z) = 0` for `Z` in degrees `> m`, since `C` is bounded above.
-
-On uniformly bounded families of étale origin, `ν^*` identifies the morphisms out of `C` with the
-étale ones, where `C'` is compact.
 -/
 
 @[expose] public section
@@ -81,7 +67,7 @@ lemma eq_zero_of_comparisonUpperStar
   simp [h φ]
 
 include hk aX in
-/-- Blueprint `proposition-compactness-finite-coefficients--1`, the vanishing step: for `C` in
+/-- The vanishing step: for `C` in
 `Dctf(X, Λ)` there is `N` with `Hom(C, L) = 0` for every pro-étale complex `L` with cohomology
 sheaves of étale origin in degrees `≤ N`. -/
 lemma exists_forall_eq_zero_of_constructibleFiniteTor
@@ -154,7 +140,7 @@ lemma compactFor_of_isGE_of_isLE
   simp [ψ, φ]
 
 include hk aX in
-/-- Blueprint `proposition-compactness-finite-coefficients--1`: an object `C` of `Dctf(X, Λ)` is
+/-- An object `C` of `Dctf(X, Λ)` is
 compact for every family of pro-étale complexes with cohomology sheaves of étale origin. Morphisms
 out of `C` only see the truncations `τ_{≥ N} τ_{≤ m}`, on which `C` is compact
 (`AlgebraicGeometry.ProEtale.DerivedCategory.compactFor_of_isGE_of_isLE`). -/
@@ -204,8 +190,7 @@ lemma compactFor_of_etaleOriginHomology
     (fun f ↦ t.zero_of_isLE_of_isGE f m (m + 2) (by lia) this hGT')).2
 
 include hk aX in
-/-- Blueprint `proposition-compactness-finite-coefficients--1`
-(`proposition-compactness-finite-coefficients`): every object of `Dctf(X, Λ)` is compact in
+/-- Every object of `Dctf(X, Λ)` is compact in
 `Loc(Dctf(X, Λ))`. -/
 theorem isCompactObj_of_constructibleFiniteTor
     (C : (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ)

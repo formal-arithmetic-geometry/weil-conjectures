@@ -8,7 +8,13 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteCoefficientRestriction
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 
-/-! # Pullback comparison for the finite discrete coefficient realization -/
+/-! # Pullback comparison for the finite discrete coefficient realization
+
+## References
+
+* Bhatt--Scholze, Lemma 5.4.1
+* Bhatt--Scholze, Proposition 5.3.2 and Lemma 5.4.1
+-/
 
 @[expose] public section
 
@@ -35,12 +41,7 @@ variable
   (hG : G ⋙ forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} B)) Ab.{u + 1} =
     Mod.forget (AddCommGrpCat.of (ULift.{u + 1} B)))
 
-/-- Conjugate restriction through the adjunctions to compare ordinary pullbacks.
-Source: Bhatt--Scholze, Lemma 5.4.1 and the common sectionwise encoding
-(blueprint: def-weil-pbc-canonical-finite-discrete-pullback).
-
-Construction. Cancel the two encoding equivalences from the right restriction
-comparison, then use conjugateIsoEquiv for the resulting composite adjunctions. -/
+/-- Conjugate restriction through the adjunctions to compare ordinary pullbacks. -/
 @[irreducible] noncomputable def finiteDiscreteCoefficientProEtalePullbackIso
     {S T : Scheme.{u}} (h : S ⟶ T) :
     ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) h ⋙
@@ -61,7 +62,6 @@ comparison, then use conjugateIsoEquiv for the resulting composite adjunctions. 
       (ModuleCat.{u + 1} (ULift.{u + 1} B)) h).comp ES.toAdjunction)).symm r'
 
 /-- The ordinary etale-to-internal-module pullback comparison before derivation.
-(blueprint: def-weil-pbc-canonical-finite-discrete-pullback).
 Compose the site inverse-image comparison with the internal coefficient comparison. -/
 @[irreducible] noncomputable def finiteDiscreteCoefficientSheafPullbackIso
     {S T : Scheme.{u}} (h : S ⟶ T) :
@@ -78,14 +78,7 @@ Compose the site inverse-image comparison with the internal coefficient comparis
     Functor.isoWhiskerLeft _ (finiteDiscreteCoefficientProEtalePullbackIso B eR G hG h) ≪≫
     (Functor.associator _ _ _).symm
 
-/-- Derive the canonical ordinary pullback comparison and restrict its source to D+.
-Source: Bhatt--Scholze, Proposition 5.3.2 and Lemma 5.4.1
-(blueprint: def-weil-pbc-canonical-finite-discrete-pullback).
-
-Construction. Combine the two exact realization factors with mapDerivedCategoryCompIso.
-Use mapDerivedCategoryPlusCompatibility to include the etale source in D. Derive the
-ordinary comparison, separate the realization factors again, and replace the exact
-internal pullback by its total left derived functor. Every isomorphism is specified. -/
+/-- Derive the canonical ordinary pullback comparison and restrict its source to D+. -/
 @[irreducible] noncomputable def finiteDiscreteCoefficientPullbackIso
     : CoefficientPullbackFamily B (Profinite.continuousMapRingObj B)
       (fun T ↦ finiteDiscreteRealization B T

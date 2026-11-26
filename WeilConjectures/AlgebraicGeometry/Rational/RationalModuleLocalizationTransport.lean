@@ -27,7 +27,6 @@ The completed presentation is compared with the continuous coefficient presentat
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 set_option synthInstance.maxSize 4096
 universe u v w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposite
@@ -183,9 +182,9 @@ private theorem descendTriangulated
     (hdist : ∀ Δ : Triangle L, Δ ∈ distTriang L →
       ∃ Δ₀ : Triangle C, Δ₀ ∈ distTriang C ∧ Nonempty (Δ ≅ Q.mapTriangle.obj Δ₀)) :
     ∃ s : J.CommShift ℤ, letI := s; J.IsTriangulated := by
-  letI : Localization.Lifting Q W H J := ⟨fac⟩
+  let : Localization.Lifting Q W H J := ⟨fac⟩
   let s : J.CommShift ℤ := Functor.commShiftOfLocalization Q W ℤ H J
-  letI := s
+  let := s
   have : NatTrans.CommShift fac.hom ℤ :=
     NatTrans.commShift_iso_hom_of_localization Q W ℤ H J
   refine ⟨s, ⟨?_⟩⟩
@@ -224,7 +223,7 @@ private theorem completedFractionDescent (X : Scheme.{u}) [IsNoetherian X]
                 (((pbcUniformizer l E).down.val ^ n)⁻¹ •
                   (pbcDerivedExtend.{u} α).map f.hom) ≫ eqToHom (hobj L).symm := by
   classical
-  letI := rationalLinear l E X
+  let := rationalLinear l E X
   let α := i.hom ≫ integralRationalCoefficientMap l E X
   dsimp only
   intro hs ht
@@ -235,7 +234,7 @@ private theorem completedFractionDescent (X : Scheme.{u}) [IsNoetherian X]
   let b := rationalSections l E X
   let c := integralToField l E
   let a := b.comp c
-  letI := scalarLocalizationCoefficientLinearOfUniverses A S a
+  let := scalarLocalizationCoefficientLinearOfUniverses A S a
   have : (pbcRestrict α).Linear A := completedRestrictionLinear l E X i _hi
   have : (pbcDerivedRestrict α).Linear A :=
     inferInstanceAs ((pbcRestrict α).mapDerivedCategory.Linear A)
@@ -289,9 +288,9 @@ private theorem completedFractionDescent (X : Scheme.{u}) [IsNoetherian X]
     (pbcRationalCoefficientEquiv l E).toRingHom H hH
   have hdist := ((pbcRationalTriangulationData l E X Fact.out Fact.out).choose_spec.choose_spec.2
     ).choose_spec.choose_spec.2.choose_spec.2.2
-  letI := hHtri
+  let := hHtri
   obtain ⟨sJ, hJtri⟩ := descendTriangulated Q W H J fac (fun Δ ↦ (hdist Δ).1)
-  letI := sJ
+  let := sJ
   refine ⟨J, hJadd, hJlin, sJ, hJtri,
     (fun K ↦ transportFractionFunctor_obj t
       (pbcRationalCoefficientEquiv l E).toRingHom H hH ⟨K⟩), ?_⟩
@@ -351,15 +350,15 @@ theorem rationalModuleLocalizationTransport (X : Scheme.{u}) [IsNoetherian X]
   classical
   let κ := rationalLinear l E X
   refine ⟨κ, ?_⟩
-  letI := κ
+  let := κ
   dsimp only
   let α := i.hom ≫ integralRationalCoefficientMap l E X
   have hα := completedExtensionExact l E X i
-  letI := hα.1
-  letI := hα.2
+  let := hα.1
+  let := hα.2
   let e := exactExtensionDerived α
   let sF : (pbcDerivedExtend α).CommShift ℤ := Functor.CommShift.ofIso e.symm ℤ
-  letI := sF
+  let := sF
   have : NatTrans.CommShift e.symm.hom ℤ :=
     Functor.CommShift.ofIso_compatibility e.symm ℤ
   have hFtri : (pbcDerivedExtend α).IsTriangulated :=

@@ -14,7 +14,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
@@ -49,7 +48,7 @@ theorem exists_integral_affine_generic_piece_avoiding_components
     (T : TopologicalSpace.Closeds Y) (hT : (T : Set Y) ≠ ∅) :
     Nonempty (IntegralAffineGenericPiece Y P T) := by
   classical
-  letI : IsNoetherian Y := {}
+  let : IsNoetherian Y := {}
   have hTne : (T : Set Y).Nonempty := Set.nonempty_iff_ne_empty.mpr hT
   obtain ⟨z, hz⟩ := hTne
   obtain ⟨C', hC', -⟩ := exists_mem_irreducibleComponents_subset_of_isIrreducible
@@ -81,16 +80,16 @@ theorem exists_integral_affine_generic_piece_avoiding_components
     rw [IdealSheafData.range_subschemeι,
       IdealSheafData.coe_support_vanishingIdeal]
     rfl
-  letI : IrreducibleSpace I.subscheme := by
+  let : IrreducibleSpace I.subscheme := by
     have h' : IrreducibleSpace (Set.range ι) := by
       rw [← isIrreducible_iff_irreducibleSpace, hrange]
       exact hCirr
     exact (Homeomorph.irreducibleSpace_iff ι.isEmbedding.toHomeomorph).mpr h'
-  letI : IsReduced I.subscheme :=
+  let : IsReduced I.subscheme :=
     (IdealSheafData.reduced_induced_closed_subscheme Y ⟨C, hCcl⟩).2.2.2.1
-  letI : IsIntegral I.subscheme :=
+  let : IsIntegral I.subscheme :=
     isIntegral_of_irreducibleSpace_of_isReduced _
-  letI : IsNoetherian I.subscheme := isNoetherian_of_locallyOfFiniteType ι
+  let : IsNoetherian I.subscheme := isNoetherian_of_locallyOfFiniteType ι
   have hgen : IsGenericPoint (ι (genericPoint I.subscheme)) C := by
     have h := (genericPoint_spec I.subscheme).image ι.continuous
     rwa [Set.image_univ, hrange, hCcl.closure_eq] at h
@@ -108,11 +107,11 @@ theorem exists_integral_affine_generic_piece_avoiding_components
       (x := genericPoint I.subscheme) hgen_mem_OI
   let B := Spec R
   let j : B ⟶ Y := f ≫ ι
-  letI : Nonempty B := by
+  let : Nonempty B := by
     obtain ⟨x, hx⟩ := hxf
     exact ⟨x⟩
-  letI : IsIntegral B := isIntegral_of_isOpenImmersion f
-  letI : IsNoetherian B := isNoetherian_of_locallyOfFiniteType f
+  let : IsIntegral B := isIntegral_of_isOpenImmersion f
+  let : IsNoetherian B := isNoetherian_of_locallyOfFiniteType f
   obtain ⟨W, hW, hP⟩ := hgeneric B (f ≫ ι) inferInstance
   obtain ⟨UI0, hUI0, hUI0W⟩ :=
     f.isEmbedding.isInducing.isOpen_iff.mp W.isOpen

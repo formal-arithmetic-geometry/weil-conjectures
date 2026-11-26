@@ -12,8 +12,10 @@ import WeilConjectures.SixFunctors.Finite.Scalar.Tensor.FiniteScalarTensorComple
 
 /-! # Cancellation of normalized tensor representative cubes
 
-Source: Stacks Tags 04VK and 07A4.
-(blueprint: lem-sf-representative-tensor-cube).
+## References
+
+* [Stacks, Tag 04VK](https://stacks.math.columbia.edu/tag/04VK)
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
 -/
 
 @[expose] public section
@@ -347,10 +349,7 @@ private theorem scalarCurriedTensorSquare
   exact scalarCurriedSquare F G EY EX alpha TY TX TK' TH' phiF phiG tauY tauX
     (q.obj P) (q.obj Q) h
 
-/-- The two tensor presentations and their specified realization equation.
-All data are supplied explicitly; the last field is their compatibility proof.
-Source: Stacks Tags 04VK and 07A4.
-(blueprint: lem-sf-representative-tensor-cube). -/
+/-- The two tensor presentations and their specified realization equation. -/
 structure ScalarTensorRepresentativeData
     (K H D D' : Type*) [Category K] [Category H] [Category D] [Category D']
     extends TensorFixedRepresentativeData K D where
@@ -375,16 +374,7 @@ structure ScalarTensorRepresentativeData
         r'.hom.app (⟨U.obj Z, preserves Z hz⟩, ⟨U.obj W, preserves W hw⟩)
 
 /-- Two normalized representative realizations turn an ordinary chain square into
-exactly the curried derived tensor square. Source: Stacks Tags 04VK and 07A4.
-(blueprint: lem-sf-representative-tensor-cube).
-
-Proof: uncurry the realization maps. Precompose with the source tensor
-representative and postcompose with the target tensor of the exact pullback
-factors followed by the ordinary comparison. Naturality moves these factors
-through the tensor comparisons. The four representative equations identify the
-two resulting paths with the ordinary chain square. Cancel the two isomorphisms
-and express the components in curried notation. The argument does not use
-nonzero objects, faithfulness of localization, or boundedness of complexes. -/
+exactly the curried derived tensor square. -/
 theorem finiteScalarRepresentativeTensorCube
     {K H K' H' D E D' E' : Type*}
     [Category K] [Category H]

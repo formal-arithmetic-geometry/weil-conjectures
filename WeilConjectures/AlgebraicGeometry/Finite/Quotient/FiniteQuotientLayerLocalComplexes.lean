@@ -24,7 +24,6 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposit
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-set_option linter.unusedVariables false in
 /-- The residue complex computes the coefficient layer after ordinary tensor. -/
 theorem finiteQuotient_layer_local_complexes
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
@@ -34,7 +33,7 @@ theorem finiteQuotient_layer_local_complexes
       completedAdicFiniteCommRing X d n)
     (hφ : ∀ n : ℕ, IsIso (φ n)) (hcompat : FinitePerfectModelsCompatible X d φ)
     (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale)
-    (a b : ℤ) (hab : a ≤ b) (n : ℕ)
+    (a b : ℤ) (_hab : a ≤ b) (n : ℕ)
     (hresidue : FinitePerfectModelsOn X d φ M 0 V a b) :
     FiniteCoefficientLocalHomologyModels X (A ⧸ d.ideal ^ (n + 1 + 1))
       (φ (n + 1)) (finiteQuotientLayerObject X d M n) V a b := by

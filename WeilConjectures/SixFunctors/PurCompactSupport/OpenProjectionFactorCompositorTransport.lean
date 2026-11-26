@@ -11,7 +11,6 @@ import WeilConjectures.SixFunctors.PurCompactSupport.ScalarGeometricPullComposit
 set_option linter.privateModule false
 
 /-! Pullback-compositor transport for the open projection coefficient square.
-(blueprint: lem-sf-open-projection-factor-compositor-transport).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

@@ -39,6 +39,16 @@ and the finite case. It is combined with the splitting of finite étale `Y`-sche
 geometric points (`AlgebraicGeometry.Scheme.UniversalCovers.exists_comp_eq_of_finiteEtale`),
 deduced from `AlgebraicGeometry.Scheme.UniversalCovers.bijective_fiber` in the Galois category
 of finite étale `Ỹ_y`-schemes.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemmas 7.3.9 and 7.4.10
+* [Stacks, Tag 0245](https://stacks.math.columbia.edu/tag/0245) (descent of affine morphisms
+  along fpqc covers)
+* [Stacks, Tag 02L4](https://stacks.math.columbia.edu/tag/02L4) and
+  [Tag 02VN](https://stacks.math.columbia.edu/tag/02VN) (finite étale morphisms are fpqc local
+  on the base)
+* [Stacks, Tag 097Z](https://stacks.math.columbia.edu/tag/097Z)
 -/
 
 @[expose] public section
@@ -71,14 +81,12 @@ lemma exists_affine_weaklyEtale_cover (f : V ⟶ Y) [WeaklyEtale f] [Surjective 
     inferInstance, by rw [Category.assoc, Category.assoc, pullback.condition]⟩
 
 /-- **Finite locally constant sheaves of sets are finite étale** (fpqc descent of finite étale
-morphisms), in cocycle form. Let `f : V ⟶ Y` be weakly étale, surjective and quasi-compact, hence
-an fpqc cover, `Y` quasi-separated, and `c` a descent cocycle on the constant sheaf with *finite*
-fibre `Fin N`. The descent datum `c` on the finite étale `V`-scheme `V × Fin N = ∐_{Fin N} V`
-is effective: there is a finite étale `p : P ⟶ Y` with `P ×_Y V ≅ V × Fin N` compatibly with
-`c` (descent of affine morphisms along fpqc covers, Stacks Project, Tag 0245, and finite étale
-morphisms being fpqc local on the base, Tags 02L4 and 02VN). The projection `P ×_Y V ⟶ Fin N`
-is a section of the sheaf of sets defined by `c` over `P` (its tautological section), and it
-takes every value at some point over every geometric point of `V`. -/
+morphisms), in cocycle form. Let `f : V ⟶ Y` be weakly étale, surjective and quasi-compact,
+hence an fpqc cover, `Y` quasi-separated, and `c` a descent cocycle on the constant sheaf with
+*finite* fibre `Fin N`. Then there is a finite étale `p : P ⟶ Y` with
+`P ×_Y V ≅ V × Fin N` compatibly with `c`, such that the projection `P ×_Y V ⟶ Fin N` is a
+section of the sheaf of sets defined by `c` over `P` (its tautological section), taking every
+value at some point over every geometric point of `V`. -/
 theorem exists_isTwistedSection_finiteEtale_of_fin (f : V ⟶ Y) [WeaklyEtale f]
     [Surjective f] [QuasiCompact f] [QuasiSeparatedSpace Y] {N : ℕ}
     {c : ↥(pullback f f) → Fin N → Fin N} (hc : IsDescentCocycle f c) {K : Type u} [Field K]
@@ -171,21 +179,12 @@ theorem exists_isTwistedSection_finiteEtale_of_fin (f : V ⟶ Y) [WeaklyEtale f]
   rw [← Scheme.Hom.comp_apply, e₃, hb]
 
 /-- **The components of a locally constant sheaf of sets on a geometrically unibranch scheme are
-finite** (Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 7.4.10), in cocycle form.
-Let `Y` be a connected normal (hence geometrically unibranch) Noetherian scheme, that is, with
-local rings integrally closed domains, `f : V ⟶ Y` a single-morphism pro-étale cover and `c` a
-descent cocycle on the constant sheaf `S_V`, defining a pro-étale locally constant sheaf of sets
-`F_c` on `Y`. Then every point `s` of the fibre `S` at a point `v` of `V` lies in a finite
-subsheaf of `F_c`: a locally constant function `T` from `V` to finite subsets of `S`, compatible
-with `c`, with `s ∈ T v`.
-
-The subsheaf `T` is the orbit of `s` at a generization lying over the generic point `η` of
-`Y` (`AlgebraicGeometry.exists_finite_invariant_subset_of_isGenericallyConnected`), after
-replacing `V` by a cover which is ind-étale over affine opens of `Y`
-(`AlgebraicGeometry.exists_isGenericallyConnected_cover_of_isIntegrallyClosed_stalk`, via Stacks
-097Z) and on which nearby generic points are connected close to the diagonal, by local
-irreducibility of the normal schemes étale over `Y`. Normality is necessary: on a nodal curve, a
-cocycle with values in the shifts of `ℤ` along the loop has infinite orbits. -/
+finite** (Bhatt–Scholze, Lemma 7.4.10), in cocycle form. Let `Y` be a connected normal (hence
+geometrically unibranch) Noetherian scheme, that is, with local rings integrally closed domains,
+`f : V ⟶ Y` a single-morphism pro-étale cover and `c` a descent cocycle on the constant sheaf
+`S_V`, defining a pro-étale locally constant sheaf of sets `F_c` on `Y`. Then every point `s` of
+the fibre `S` at a point `v` of `V` lies in a finite subsheaf of `F_c`: a locally constant
+function `T` from `V` to finite subsets of `S`, compatible with `c`, with `s ∈ T v`. -/
 theorem exists_finite_invariant_subset_of_isIntegrallyClosed_stalk [IsLocallyNoetherian Y]
     [CompactSpace Y] [ConnectedSpace Y]
     (hY : ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y))
@@ -217,19 +216,12 @@ theorem exists_finite_invariant_subset [IsLocallyNoetherian Y] [CompactSpace Y]
     (fun y ↦ ⟨inferInstance, IsRegular.isIntegrallyClosed_stalk y⟩) f hc v s
 
 /-- **Locally constant sheaves of sets on a geometrically unibranch scheme are unions of finite
-étale ones** (Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 7.4.10, with Lemma
-7.3.9), in cocycle form. Let `Y` be a connected normal (hence geometrically unibranch)
-Noetherian scheme, `f : V ⟶ Y` a single-morphism pro-étale cover and `c` a descent
-cocycle on the constant sheaf `S_V`, defining a pro-étale locally constant sheaf of sets `F_c` on
-`Y`. Then through every point `s` of the stalk of `F_c` at a geometric point `v̄ ≫ f`
-(identified with `S` through `v̄ : Spec K ⟶ V`) passes a section of `F_c` over a finite étale
-`p : P ⟶ Y`, at a geometric point `p̄` of `P` over `v̄ ≫ f`.
-
-The point `s` lies in a finite subsheaf `T` of `F_c`
-(`AlgebraicGeometry.exists_finite_invariant_subset_of_isIntegrallyClosed_stalk`), whose fibres
-have constant cardinality `N` over the connected `Y`; enumerating them locally constantly turns
-`c` into a descent cocycle on `Fin N`, which is effective
-(`AlgebraicGeometry.exists_isTwistedSection_finiteEtale_of_fin`). -/
+étale ones** (Bhatt–Scholze, Lemmas 7.4.10 and 7.3.9), in cocycle form. Let `Y` be a connected
+normal (hence geometrically unibranch) Noetherian scheme, `f : V ⟶ Y` a single-morphism
+pro-étale cover and `c` a descent cocycle on the constant sheaf `S_V`, defining a pro-étale
+locally constant sheaf of sets `F_c` on `Y`. Then through every point `s` of the stalk of `F_c`
+at a geometric point `v̄ ≫ f` (identified with `S` through `v̄ : Spec K ⟶ V`) passes a section of
+`F_c` over a finite étale `p : P ⟶ Y`, at a geometric point `p̄` of `P` over `v̄ ≫ f`. -/
 theorem exists_isTwistedSection_finiteEtale_of_isIntegrallyClosed_stalk [IsLocallyNoetherian Y]
     [CompactSpace Y] [ConnectedSpace Y]
     (hY : ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y))
@@ -380,13 +372,7 @@ lemma Scheme.FiniteEtale.exists_fiber_map_sigmaι {X : Scheme.{u}} {Ω : Type u}
 
 /-- **Finite étale schemes split over the universal cover at every geometric point.** For a
 finite étale `p : P ⟶ Y`, every geometric point of `P` over a geometric point `t` of the
-universal cover `Ỹ_y` is the image of `t` under a `Y`-morphism `Ỹ_y ⟶ P`. Indeed the
-`Y`-morphisms `a : Ỹ_y ⟶ P` give sections of the finite étale `P ×_Y Ỹ_y ⟶ Ỹ_y`, hence a
-morphism `∐_a Ỹ_y ⟶ P ×_Y Ỹ_y` of finite étale `Ỹ_y`-schemes. It is bijective on the geometric
-fibres at the base point (`AlgebraicGeometry.Scheme.UniversalCovers.bijective_fiber`), hence an
-isomorphism, `Ỹ_y` being connected
-(`AlgebraicGeometry.Scheme.FiniteEtale.isIso_of_isIso_fiber_map`), hence bijective on the geometric
-fibres at `t`. -/
+universal cover `Ỹ_y` is the image of `t` under a `Y`-morphism `Ỹ_y ⟶ P`. -/
 theorem Scheme.UniversalCovers.exists_comp_eq_of_finiteEtale {Ω : Type u} [Field Ω]
     (U : Scheme.UniversalCovers Y Ω) (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
     {P : Scheme.{u}} (p : P ⟶ Y) [IsFinite p] [Etale p] {K : Type u} [Field K] [IsAlgClosed K]
@@ -462,10 +448,7 @@ theorem Scheme.UniversalCovers.exists_comp_eq_of_finiteEtale {Ω : Type u} [Fiel
 be a connected normal Noetherian scheme, `Ỹ_y = U.cover y` its universal profinite étale cover
 at a geometric point `y`, `f : V ⟶ Y` a single-morphism pro-étale cover and `c` a descent
 cocycle on the constant sheaf `S_V`. Then the sheaf of sets defined by `c` has a section over
-`Ỹ_y` through every point of `V ×_Y Ỹ_y` and every value in `S`: the sheaf is a union of finite
-étale ones (`AlgebraicGeometry.exists_isTwistedSection_finiteEtale_of_isIntegrallyClosed_stalk`),
-which split over `Ỹ_y` (`AlgebraicGeometry.Scheme.UniversalCovers.exists_comp_eq_of_finiteEtale`).
--/
+`Ỹ_y` through every point of `V ×_Y Ỹ_y` and every value in `S`. -/
 theorem exists_isTwistedSection_universalCover_of_isIntegrallyClosed_stalk {Ω : Type u} [Field Ω]
     [IsLocallyNoetherian Y] [CompactSpace Y] [ConnectedSpace Y]
     (hY : ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y))

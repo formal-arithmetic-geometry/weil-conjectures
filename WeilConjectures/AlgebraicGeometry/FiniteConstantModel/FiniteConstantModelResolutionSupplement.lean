@@ -73,7 +73,6 @@ variable [TopologicalSpace A] [IsTopologicalRing A]
 
 attribute [instance] scalarToContinuous_isMonHom
 
-set_option linter.unusedSectionVars false in
 attribute [instance] constantScalars_commutative
 
 end AlgebraicGeometry.ProEtale.FiniteConstantModel

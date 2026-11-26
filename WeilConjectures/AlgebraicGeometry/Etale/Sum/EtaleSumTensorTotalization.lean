@@ -24,13 +24,8 @@ open scoped CategoryTheory
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
-set_option linter.unnecessarySeqFocus false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-set_option linter.style.haveILetI false
-set_option linter.style.longLine false
-set_option linter.style.whitespace false
 
 universe u
 
@@ -220,7 +215,7 @@ private theorem totalTensorMapX_comm
         (z ≫ L.map (HomologicalComplex.ιMapBifunctorOrZero P
           ((R.mapHomologicalComplex (.up ℤ)).obj H) F (.up ℤ) (p + 1) q m)))
         (ha (P.d p (p + 1)) (𝟙 (H.X q))) using 1 <;>
-      simp [Units.smul_def, CategoryTheory.Functor.map_comp, Category.assoc]
+      simp [CategoryTheory.Functor.map_comp, Category.assoc]
   · rw [HomologicalComplex.mapBifunctor.d₂_eq' _ _ _ _ _ (by rfl),
       HomologicalComplex.mapBifunctor.d₂_eq' _ _ _ _ _ (by rfl),
       Linear.units_smul_comp, Category.assoc, totalTensorMapX_orZero]

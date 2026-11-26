@@ -53,8 +53,6 @@ private theorem rankOne_artinSchreierSheafOf
     Functor.Monoidal.εIso (presheafToSheaf _ (ModuleCat Λ))
 
 -- Explicit monoidal module comparisons need additional elaboration heartbeats.
-set_option linter.unusedVariables false in
--- Preserve the original statement's named, nondependent hypotheses verbatim.
 /-- The Fourier kernel is lisse of rank one, of Tor amplitude `[0, 0]`, multiplicative in
 the character, with tensor inverse the kernel of the inverse character. The four branches
 are the finite small-etale kernel, the degree-`q` small-etale Artin--Schreier model, the
@@ -85,8 +83,8 @@ theorem prop_kernel_lisse :
         Nonempty (artinSchreierSheafOf X ψ f ⊗ artinSchreierSheafOf X ψ⁻¹ f ≅ 𝟙_ _)) ∧
     (∀ (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
       [MonObj Λ] [IsCommMonObj Λ]
-      (p : ℕ) [Fact p.Prime] (hp : IsUnit (p : MonObj.Γ Λ))
-      (hΛ : ProEtale.CondensedRing.IsAdmissibleCoefficient Λ)
+      (p : ℕ) [Fact p.Prime] (_hp : IsUnit (p : MonObj.Γ Λ))
+      (_hΛ : ProEtale.CondensedRing.IsAdmissibleCoefficient Λ)
       (X : Scheme.{u}) [X.Over (Spec (.of (ULift.{u} (ZMod p))))]
       (Ψ Ψ' : AddChar (ZMod p) (MonObj.Γ Λ)) (b : Γ(X, ⊤)),
       IsLisseCoefficientModule Λ
@@ -119,8 +117,8 @@ theorem prop_kernel_lisse :
     (∀ (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
       [MonObj Λ] [IsCommMonObj Λ]
       (k : Type u) [Field k] [Fintype k]
-      (hq : IsUnit (Fintype.card k : MonObj.Γ Λ))
-      (hΛ : ProEtale.CondensedRing.IsAdmissibleCoefficient Λ)
+      (_hq : IsUnit (Fintype.card k : MonObj.Γ Λ))
+      (_hΛ : ProEtale.CondensedRing.IsAdmissibleCoefficient Λ)
       (X : Scheme.{u}) [X.Over (Spec (.of k))]
       (ψ ψ' : AddChar k (MonObj.Γ Λ)) (f : Γ(X, ⊤)),
       IsLisseCoefficientModule Λ (condensedArtinSchreierSheafOf Λ k X ψ f) ∧

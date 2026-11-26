@@ -17,7 +17,11 @@ import all WeilConjectures.SmoothPurity.Sf.SfDirectImageTransitionPresentation
 
 /-! # The restricted tower of the actual system direct image
 
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks Tag 0D6E.
+## References
+
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks, Tag 0D6E](https://stacks.math.columbia.edu/tag/0D6E)
+* Zheng, Construction 4.1, Lemma 4.10
 -/
 
 @[expose] public noncomputable section
@@ -377,28 +381,7 @@ private def nativeTowerIso {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- A representing complex of the restricted system direct image evaluates to the
 finite-image tower, including its actual adjacent arrows. This comparison contains
-no inverse-limit object, product, projection or distinguished-triangle assertion.
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks Tags 0D6E and 06YY.
-(blueprint: stage3-weil-system-direct-image-restricted-tower-comparison).
-
-Proof: choose a flat-term K-flat complex P representing K. The reductionModel field
-of S supplies a strict quotient complex C and its simultaneous finite comparisons;
-its transition equation identifies the quotient arrows with ordinary scalar reduction.
-Resolve C once by a K-injective system J and apply the sequence direct image to J.
-The ordinary evaluation/direct-image square is identity on sections. Derived
-ringed-topos composition identifies its finite evaluations with the corresponding
-finite derived direct images; its resolution normalization retains the same arrows.
-Restrict to completed coefficients. On P, the quotient arrow is the map sending
-s tensor x to rho(s) tensor x, hence is sfDerivedReductionTransition by its unique
-representative characterization. The restriction/direct-image square is the
-section-normalized sfDerivedRestrictionComparison, so transporting this arrow gives
-exactly sfDirectImageTransition. These identifications yield an isomorphism of the
-whole evaluated tower of this representative with Functor.ofOpSequence of those
-arrows. Exact evaluation sends quasi-isomorphisms of strict towers to objectwise
-isomorphisms after localization. Localization's factorization of simultaneous
-evaluation therefore transports the comparison along e to any representing T.
-This uses no boundedness, constructibility, completeness, or geometric hypothesis;
-it applies also to zero complexes and empty schemes. -/
+no inverse-limit object, product, projection or distinguished-triangle assertion. -/
 theorem systemDirectImage_restrictedTowerComparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

@@ -27,8 +27,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
--- The existential proof binders in the unchanged interface are used by later witnesses.
-set_option linter.unusedVariables false in
 /-- Compatible injective and cokernel systems, assembled into a short exact diagram
 on the cone point, before taking any filtered colimit (Stacks, Tags 0EXZ and 04JC). -/
 theorem etale_replacement_stage_diagram
@@ -57,10 +55,10 @@ theorem etale_replacement_stage_diagram
     ∃ (FR : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})
     (φR : ∀ {i j : I} (f : i ⟶ j),
       (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (FR i) ⟶ FR j)
-    (hidentityR : ∀ i : I, φR (𝟙 i) =
+    (_hidentityR : ∀ i : I, φR (𝟙 i) =
       (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app
         (FR i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (FR i))
-    (hcompositionR : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),
+    (_hcompositionR : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),
       φR (f ≫ g) =
         (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)
           (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (FR i) ≫
@@ -68,7 +66,7 @@ theorem etale_replacement_stage_diagram
     (GR : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})
     (eGR : ∀ i : I, GR.obj i ≅
       (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (FR i))
-    (hGR : ∀ (i j : I) (f : i ⟶ j), GR.map f =
+    (_hGR : ∀ (i j : I) (f : i ⟶ j), GR.map f =
       (eGR i).hom ≫
         (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)
           (c.π.app (op i)) (c.w f.op).symm).hom.app (FR i) ≫
@@ -76,10 +74,10 @@ theorem etale_replacement_stage_diagram
     (FI : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})
     (ψ : ∀ {i j : I} (f : i ⟶ j),
       (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (FI i) ⟶ FI j)
-    (hidentityI : ∀ i : I, ψ (𝟙 i) =
+    (_hidentityI : ∀ i : I, ψ (𝟙 i) =
       (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app
         (FI i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (FI i))
-    (hcompositionI : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),
+    (_hcompositionI : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),
       ψ (f ≫ g) =
         (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)
           (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (FI i) ≫
@@ -87,14 +85,14 @@ theorem etale_replacement_stage_diagram
     (GI : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})
     (eGI : ∀ i : I, GI.obj i ≅
       (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (FI i))
-    (hGI : ∀ (i j : I) (f : i ⟶ j), GI.map f =
+    (_hGI : ∀ (i j : I) (f : i ⟶ j), GI.map f =
       (eGI i).hom ≫
         (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)
           (c.π.app (op i)) (c.w f.op).symm).hom.app (FI i) ≫
         (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (ψ f) ≫ (eGI j).inv)
     (ai : ∀ i : I, F i ⟶ FI i) (bi : ∀ i : I, FI i ⟶ FR i)
     (wi : ∀ i : I, ai i ≫ bi i = 0)
-    (hi : ∀ i : I, (ShortComplex.mk (ai i) (bi i) (wi i)).ShortExact)
+    (_hi : ∀ i : I, (ShortComplex.mk (ai i) (bi i) (wi i)).ShortExact)
     (α : G ⟶ GI) (β : GI ⟶ GR) (w : α ≫ β = 0)
     (s : ∀ i : I,
       (ShortComplex.mk (ai i) (bi i) (wi i)).map

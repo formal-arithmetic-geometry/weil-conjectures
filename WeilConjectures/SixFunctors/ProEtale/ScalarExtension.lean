@@ -16,8 +16,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Pro
 For a ring morphism `φ : R →+* S` and a scheme `X`, extension of scalars
 `S ⊗_R - : Sh(X_proét, R) ⥤ Sh(X_proét, S)` is the sheafified postcomposition with
 `ModuleCat.extendScalars φ`. It is left adjoint to restriction of scalars. These are the
-transition functors `𝒪_E ⟶ 𝒪_{E'}` between the `ℓ`-adic coefficient stages, through which
-the `ℚ̄_ℓ` stage of `sk-thm-sf-pf-proetale` is reached.
+transition functors `𝒪_E ⟶ 𝒪_{E'}` between the `ℓ`-adic coefficient stages.
 
 ## Main definitions
 

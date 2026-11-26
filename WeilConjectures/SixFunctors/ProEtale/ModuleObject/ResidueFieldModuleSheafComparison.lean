@@ -26,7 +26,7 @@ since the coefficient morphisms send constant sections to constant sections
 (`ProEtale.sectionActRingHom_lowerStar_residueFieldSectionRingHom` and
 `ProEtale.upperStarUnitHom_comp_sectionActRingHom_residueFieldSectionRingHom`).
 
-## Implementation notes
+## Implementation details
 
 The ring object `Profinite.continuousMapRingObj (integersResidueField ℓ E)` elaborates with the
 ring structure of `𝔽_E` coming from its field structure, while the constant sections
@@ -191,11 +191,7 @@ lemma upperStarUnitHom_comp_sectionActRingHom_continuousMapCoefficientSectionRin
 end Sections
 
 omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
-/-- `𝔽_E` is a topological ring. This restatement of
-`PadicAlgCl.isTopologicalRing_integersResidueField` for `E : FiniteIntermediateField ℓ` is used as
-a local instance so that all the instances of `IsTopologicalRing 𝔽_E` occurring below are
-syntactically equal, which avoids expensive kernel unfoldings. The final isomorphism
-`ProEtale.residueFieldModuleSheafUpperStarIso` is stated with the global instance. -/
+/-- `𝔽_E` is a topological ring, for `E : FiniteIntermediateField ℓ`. -/
 theorem isTopologicalRing_residueField :
     IsTopologicalRing (integersResidueField ℓ E) :=
   inferInstance
@@ -323,7 +319,7 @@ noncomputable def residueFieldModuleSheafUpperStarForgetIso :
     (Functor.associator _ _ _).symm
 
 /-- The isomorphism `residueFieldModuleSheafUpperStarIso`, stated for the commutative-ring form of
-`C(-, 𝔽_E)` (see the implementation notes). -/
+`C(-, 𝔽_E)`. -/
 noncomputable def residueFieldModuleSheafUpperStarIsoAux :
     (a)^*⟦residueFieldCommRingObj⟧ ⋙
         residueFieldModuleSheaf A ℓ E ≅

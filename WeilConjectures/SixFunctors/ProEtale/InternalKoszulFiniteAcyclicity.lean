@@ -10,9 +10,11 @@ import WeilConjectures.SixFunctors.ProEtale.InternalKoszulConeCoordinates
 
 /-! # Acyclicity of one normalized finite singleton augmentation
 
-Source: Stacks Project, More on Algebra, Tag 062F; algebraization.tex,
-Lemma derived-completion-koszul (0A0E); proetale.tex, Section 099L.
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks, Tag 062F](https://stacks.math.columbia.edu/tag/062F)
+* [Stacks, Tag 0A0E](https://stacks.math.columbia.edu/tag/0A0E)
+* [Stacks, Tag 099L](https://stacks.math.columbia.edu/tag/099L)
 -/
 
 @[expose] public noncomputable section
@@ -51,31 +53,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- A single finite augmentation, normalized on degree zero and zero on every other
 Koszul summand, is a quasi-isomorphism on a K-flat complex. No transition maps or
-inverse limits occur in this assertion.
-
-Source: Stacks Project, More on Algebra, Tag 062F; algebraization.tex,
-Lemma derived-completion-koszul (0A0E); proetale.tex, Section 099L.
-(auxiliary; not a blueprint node).
-
-Proof: the constant uniformizer pi is regular, and exact inverse image preserves its
-injective multiplication map. Since a and pi generate the same ideal sheaf, locally
-a=u*pi and pi=v*a. Injectivity of multiplication by pi gives vu=1; commutativity
-therefore makes u a unit. Thus a^(n+1) is also regular and has the same principal
-ideal as pi^(n+1). The negative two-term singleton complex consequently resolves the
-constant finite quotient, by the regular-sequence Koszul argument of Tag 062F.
-The constant-to-continuous coefficient map is flat and has these same finite
-quotients, so extension gives a resolution of the actual finite coefficient module.
-The point coefficient isomorphism fixes its identification with the specified
-continuous coefficient object. Tensor this coefficient resolution by the actual
-K-flat P. K-flatness makes its augmentation a quasi-isomorphism, including for
-unbounded P. Exact scalar restriction and the section equivalence preserve this
-quasi-isomorphism and identify its source with the displayed total tensor complex.
-In Koszul degree zero the dual unit is the identification with the rank-one ring;
-thus the unit equation specifies the augmentation on every summand (p,0).
-The vanishing hypothesis specifies it on all other summands. Joint epimorphy of
-the total-tensor coproduct inclusions identifies v with that tensor augmentation.
-No termwise flatness of P is needed. Zero P and the empty scheme give acyclic zero
-complexes, so they satisfy the same conclusion. -/
+inverse limits occur in this assertion. -/
 theorem koszul_finite_augmentation_quasiIso [IsNoetherian X]
     (a : ((ring l E X).obj ⋙ forget CommRingCat).sections)
     (ha : ∀ U : Scheme.coefficientProEtaleSiteModel.{u, u} X,

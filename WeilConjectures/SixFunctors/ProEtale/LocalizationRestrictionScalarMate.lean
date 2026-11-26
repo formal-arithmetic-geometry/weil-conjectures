@@ -15,7 +15,10 @@ scalars along a ring map `q : R →+* S`. The mate of this strict square along t
 `j_f^* ⊣ f_*` is the identity, since the unit of `j_f^* ⊣ f_*` is computed in the same way for
 both coefficient rings.
 
-Source: Stacks Project, Tags 03DA and 0960.
+## References
+
+* [Stacks, Tag 03DA](https://stacks.math.columbia.edu/tag/03DA)
+* [Stacks, Tag 0960](https://stacks.math.columbia.edu/tag/0960)
 -/
 
 @[expose] public noncomputable section
@@ -46,9 +49,7 @@ theorem localizationRestrictionLowerStarAdjunction_unit_restrictScalars
       ((localizationRestrictionLowerStarAdjunction (ModuleCat.{u + 1} S) f h).unit.app Y) :=
   rfl
 
-/-- The mate of the strict square along `j_f^* ⊣ f_*` is the identity.
-Proof: its component is the image under restriction of scalars of the unit at `f_* F`
-followed by `f_*` of the counit, which is the identity by a triangle identity. -/
+/-- The mate of the strict square along `j_f^* ⊣ f_*` is the identity. -/
 theorem localizationRestrictionRestrictScalarsSquare_mate_app
     (F : Sheaf (Scheme.ProEt.topology V) (ModuleCat.{u + 1} S)) :
     (mateEquiv (localizationRestrictionLowerStarAdjunction (ModuleCat.{u + 1} S) f h)

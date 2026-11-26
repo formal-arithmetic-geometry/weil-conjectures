@@ -18,7 +18,6 @@ set_option autoImplicit false
 open CategoryTheory Limits
 namespace AlgebraicGeometry
 open Scheme Etale
-set_option linter.unusedVariables.funArgs false in
 /-- Functoriality between affine presentations of compatible strict henselizations
 (Stacks, Tag 04GU). -/
 theorem Etale.exists_compatibleStrictHenselizationCoreCompletion
@@ -31,7 +30,7 @@ theorem Etale.exists_compatibleStrictHenselizationCoreCompletion
     (hst : s = t ≫ g)
     (eA : Spec (.of A) ≅ strictLocalization s)
     (eB : Spec (.of B) ≅ strictLocalization t) :
-    ∃ (φ : A →+* B) (hφ : IsLocalHom φ),
+    ∃ (φ : A →+* B) (_hφ : IsLocalHom φ),
       Spec.map (CommRingCat.ofHom φ) ≫ eA.hom ≫
           strictLocalizationToBase s =
         eB.hom ≫ strictLocalizationToBase t ≫ g := by

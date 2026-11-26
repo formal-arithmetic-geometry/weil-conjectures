@@ -414,6 +414,7 @@ def compactifiedProjectionReverse
       (compactifiedProjectionTheta d RY RZ RX cp cj b c E Q hα).inv ≫
     @inv _ _ _ _ (compactifiedProjectionPi d RY RZ RX cp cj a b E Q) hπ
 
+-- Keep the section instances as hypotheses of this public statement.
 set_option linter.unusedSectionVars false in
 /-- The compactified perfect projection formula with its exact ordered inverse.
 The local strict-perfect normalization of rho is recorded below on canonical slice

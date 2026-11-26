@@ -38,17 +38,15 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
--- The residue-field instance is used implicitly by finrank.
-set_option linter.unusedVariables false in
 /-- A coherent module whose generic stalk is a residue-field line admits a nonzero
 ideal pushforward inclusion with invertible generic stalk. -/
 theorem rank_one_generic_ideal_inclusion {X W : Scheme.{u}} [IsNoetherian X]
     (i : W ⟶ X) [IsClosedImmersion i] [IsIntegral W]
     (G : X.Modules) (hGcoh : RingedSpace.IsCoherent X.toRingedSpace G)
-    (hGann : ∀ a ∈ IsLocalRing.maximalIdeal (X.presheaf.stalk (i.base (genericPoint W))),
+    (_hGann : ∀ a ∈ IsLocalRing.maximalIdeal (X.presheaf.stalk (i.base (genericPoint W))),
       ∀ v : (RingedSpace.moduleStalkFunctor X.toRingedSpace
         (i.base (genericPoint W))).obj G, a • v = 0)
-    (hGrank : ∃ inst : Module (X.residueField (i.base (genericPoint W)))
+    (hGrank : ∃ _inst : Module (X.residueField (i.base (genericPoint W)))
       ((RingedSpace.moduleStalkFunctor X.toRingedSpace (i.base (genericPoint W))).obj G),
       (∀ (a : X.presheaf.stalk (i.base (genericPoint W)))
         (v : (RingedSpace.moduleStalkFunctor X.toRingedSpace

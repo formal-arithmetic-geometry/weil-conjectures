@@ -9,7 +9,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.S
 public import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 
 /-! The tensor-unit component of the scalar-first native projection map.
-(blueprint: lem-sfb-scalar-projection-tensor-unit)
 -/
 
 @[expose] public noncomputable section
@@ -82,15 +81,7 @@ private theorem scalarProjectionNative_delta
         (leftDerivedUpperStarOplaxMonoidal Λ f) A B =
       ((leftDerivedUpperStarTensor Λ f).app A).app B := rfl
 
-/-- The scalar-first projection is invertible at the tensor unit.
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md, finite-free paragraph.
-Transpose the projection under the derived adjunction. Counit naturality and tensor
-interchange identify its composite with the image of the pullback-unit comparison
-and the left unitor with the left unitor of the pushforward. Oplax left unitality
-proves this identity; both subsequent maps are invertible, hence so is the projection.
-(blueprint: lem-sfb-scalar-projection-tensor-unit)
--/
+/-- The scalar-first projection is invertible at the tensor unit. -/
 theorem scalarProjection_tensorUnit_isIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y)

@@ -32,31 +32,6 @@ site (`AlgebraicGeometry.ProEtale.CondensedRing.etaleReduction`). For a closed i
 (`ProEtale.CondensedRing.isIso_mateEquiv_etaleReduction_of_isClosedImmersion`). This is the second
 half of `ProEtale.CondensedRing.exists_etaleReductionLowerShriekIso`.
 
-## Strategy
-
-At `K`, the mate `β_K` is the unit of the étale adjunction `Rd_! ⊣ Rd^!`, then `Rd^!` of `γ⁻¹`,
-then `Rd^! red_Y (ε_K)`, for `ε` the counit of the condensed adjunction `Rd_! ⊣ Rd^!`
-(`CategoryTheory.isIso_mateEquiv_app_of_isIso_map_counit`). The étale unit is invertible, `Rd_!`
-being fully faithful (`Etale.isIso_rightDerivedUpperShriekAdjunction_unit_app`), so `γ` drops out
-and it remains to see that `Rd^! red_Y (ε_K)` is an isomorphism.
-
-1. On `Dᵇc(Y)⟦𝒪_E⟧`, the counit `ε_K` and the unit `K ⟶ Rj_* j^* K` of the open complement
-   `j : U ⟶ Y` of `d` extend to a distinguished triangle (the supported localization triangle,
-   `ProEtale.CondensedRing.exists_distTriang_boundedConstructibleUpperShriekAdjunction_counit`),
-   by the formal recollement argument `CategoryTheory.Pretriangulated.Recollement`: `Rd_! ≅ Rd_*`
-   is fully faithful, `j^* Rd_* = 0`, and complexes killed by `j^*` come from `Z` by open–closed
-   detection.
-2. The reduction modulo `ℓⁿ` preserves the `j`-local objects `Rj_* L`
-   (`isIso_derivedUpperStarLowerStarAdjunction_unit_app_integersModPowReduction`),
-   and the finite-coefficient comparison `Φ` and `Rν_*` commute with `Rj_*`
-   (`ProEtale.finiteCoefficientDerivedLowerStarIso`,
-   `ProEtale.rightDerivedLowerStarCompComparisonLowerStarIso`); so `red_Y (Rj_* j^* K)` is an
-   étale `Rj_* C`, which receives no maps from the shifts of `Rd_! B`
-   (`Etale.subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar`).
-3. Hence composition with `red_Y (ε_K)` is bijective on morphisms out of `Rd_! B`, and
-   `Rd^! red_Y (ε_K)` is an isomorphism by the Yoneda lemma along `Rd_! ⊣ Rd^!`
-   (`CategoryTheory.Adjunction.isIso_map_of_bijective_comp`).
-
 ## Main results
 
 - `ProEtale.CondensedRing.exists_distTriang_boundedConstructibleUpperShriekAdjunction_counit`: the
@@ -66,7 +41,6 @@ and it remains to see that `Rd^! red_Y (ε_K)` is an isomorphism.
   inverts the reduction of the counit of `Rd_! ⊣ Rd^!`.
 - `ProEtale.CondensedRing.isIso_mateEquiv_etaleReduction_of_isClosedImmersion`: the transpose of
   any isomorphism `Rd_! ⋙ red_Y ≅ red_Z ⋙ Rd_!` is an isomorphism.
-
 -/
 
 @[expose] public section
@@ -95,10 +69,7 @@ variable {Z Y : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z
 /-- **The supported localization triangle** on bounded constructible `𝒪_E`-complexes: for a
 closed immersion `d : Z ⟶ Y` with open complement `j : U ⟶ Y`, the counit
 `Rd_! Rd^! K ⟶ K` of `Rd_! ⊣ Rd^!` and the unit `K ⟶ Rj_* j^* K` of `j^* ⊣ Rj_*` extend to a
-distinguished triangle. This is the formal recollement argument
-(`CategoryTheory.Pretriangulated.Recollement.exists_distTriang_counit_unit`): `Rd_! ≅ Rd_*` is
-fully faithful, `j^* Rd_* = 0`, `Rj_*` is fully faithful, and a complex `K` killed by `j^*` is
-`Rd_* d^* K` by open–closed detection. -/
+distinguished triangle. -/
 theorem exists_distTriang_boundedConstructibleUpperShriekAdjunction_counit (d : Z ⟶ Y)
     [IsClosedImmersion d.left]
     (K : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :

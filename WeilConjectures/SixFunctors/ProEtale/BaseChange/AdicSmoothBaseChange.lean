@@ -107,15 +107,8 @@ variable (p) in
 
 For a Cartesian square with `p` smooth and `g` quasi-compact and quasi-separated, an ideal `I`
 containing an integer `N` invertible on `S`, and an object `K` of `D(T_proét, R)` whose
-reductions `K_n = K ⊗ᴸ R/Iⁿ` are of étale origin with bounded constructible cohomology (for
-instance `K ∈ Dᵇc(T_proét, R)`,
-`DerivedCategory.boundedConstructibleComplete.reductionsBoundedConstructible`),
-the completed exchange map `R lim_n p^* Rg_* K_n ⟶ R lim_n Rh_* e^* K_n` is an isomorphism:
-every morphism `u` completing the morphism of Milnor triangles induced by the levelwise
-exchange maps is an isomorphism. Its target is `Rh_* Le^*_comp K`
-(`AlgebraicGeometry.ProEtale.isHomotopyLimit_mapCone_rightDerivedLowerStar`), and both sides are
-derived complete when `I` is principal
-(`AlgebraicGeometry.ProEtale.derivedComplete_of_isHomotopyLimit_map`). -/
+reductions `K_n = K ⊗ᴸ R/Iⁿ` are of étale origin with bounded constructible cohomology, the
+completed exchange map `R lim_n p^* Rg_* K_n ⟶ R lim_n Rh_* e^* K_n` is an isomorphism. -/
 theorem isIso_of_adic_smooth_base_change [Smooth p] [QuasiCompact g] [QuasiSeparated g]
     (sq : IsPullback e h g p) {N : ℕ} (hN₀ : N ≠ 0) (hNS : IsUnit (N : Γ(S, ⊤)))
     (hNI : (N : R) ∈ I) (K : 𝐃(T))
@@ -190,12 +183,9 @@ variable (p) in
 
 For a Cartesian square with `p` smooth, `g` quasi-compact and quasi-separated and `ℓ` invertible
 on `S`, and an object `K_E` of `D_comp(T, E)` with a finite-level étale admissible integral
-lattice `Λ` (`AlgebraicGeometry.ProEtale.IntegralLattice`; the hypothesis `hΛ` is
-`Λ.IsFiniteLevelEtaleAdmissible`, stated explicitly; every lattice is finite-level étale
-admissible, `AlgebraicGeometry.ProEtale.IntegralLattice.isFiniteLevelEtaleAdmissible`), the
-completed exchange map `u : R lim_n p^* Rg_* L_n ⟶ R lim_n Rh_* e^* L_n` of the lattice
-`L = Λ.obj` becomes an isomorphism in `D_comp(X, E)`: by the adic theorem it is an isomorphism in
-`D_comp(X, 𝒪_E)`, and the central localization inverting `ℓ` preserves isomorphisms. -/
+lattice `Λ` (`AlgebraicGeometry.ProEtale.IntegralLattice`), the completed exchange map
+`u : R lim_n p^* Rg_* L_n ⟶ R lim_n Rh_* e^* L_n` of the lattice `L = Λ.obj` becomes an
+isomorphism in `D_comp(X, E)`. -/
 theorem isIso_fromIntegral_map_of_e_coefficient_smooth_base_change [Smooth p] [QuasiCompact g]
     [QuasiSeparated g] (sq : IsPullback e h g p) (hlS : IsUnit (l : Γ(S, ⊤)))
     {K : DerivedCategoryDerivedCompleteRational (Scheme.ProEt.topology T) l E}
@@ -254,10 +244,7 @@ variable (p) in
 An object of `D_comp(T, ℚ̄_ℓ)` represented at a finite stage is an object `K_E` of
 `D_comp(T, E)` for a finite subextension `E` of `ℚ̄_ℓ = PadicAlgCl l` over `ℚ_ℓ`, and the
 `ℚ̄_ℓ`-coefficient exchange map is the one of the stage. For every such stage and every
-integral lattice of `K_E`, the finite-stage exchange map is an isomorphism in `D_comp(X, E)`;
-this is
-`AlgebraicGeometry.ProEtale.isIso_fromIntegral_map_of_e_coefficient_smooth_base_change` applied
-to the stage `E`, whose hypotheses hold at every finite stage. -/
+integral lattice of `K_E`, the finite-stage exchange map is an isomorphism in `D_comp(X, E)`. -/
 theorem isIso_fromIntegral_map_of_qlbar_coefficient_smooth_base_change [Smooth p]
     [QuasiCompact g] [QuasiSeparated g] (sq : IsPullback e h g p) (hlS : IsUnit (l : Γ(S, ⊤)))
     {K : DerivedCategoryDerivedCompleteRational (Scheme.ProEt.topology T) l E}

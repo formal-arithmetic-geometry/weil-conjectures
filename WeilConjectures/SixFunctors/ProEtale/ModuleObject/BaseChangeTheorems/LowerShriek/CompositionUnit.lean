@@ -13,8 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 
 This file proves the identity equations of the composition isomorphisms
 `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` on bounded constructible `ℚ̄_ℓ`-sheaves, and the compatibility of the
-identification `Rf_! ≅ Rf_*` of a proper `f` with composition (blueprint `prop-functor-package`,
-clause (3)).
+identification `Rf_! ≅ Rf_*` of a proper `f` with composition.
 
 The proofs compute the composition isomorphisms through the triangles of compactifications
 `Compactification.Triangle.unitLeft`, `Compactification.Triangle.unitRight` and the triangle of
@@ -197,8 +196,8 @@ lemma boundedConstructibleLowerShriekComp_padicAlgCl_id_left_hom_eq (f : X ⟶ Y
     (boundedConstructibleLowerShriekOfCompactification ℓ (compactificationOverField f))] at hT
   exact hT
 
-/-- **Left identity equation of the composition isomorphisms of the lower shriek** (blueprint
-`prop-functor-package`, clause (3)): `R(𝟙 ≫ f)_! ≅ R(𝟙)_! ⋙ Rf_! ≅ R(𝟙)_* ⋙ Rf_! ≅ Rf_!` is
+/-- **Left identity equation of the composition isomorphisms of the lower shriek**:
+`R(𝟙 ≫ f)_! ≅ R(𝟙)_! ⋙ Rf_! ≅ R(𝟙)_* ⋙ Rf_! ≅ Rf_!` is
 the identity. -/
 theorem boundedConstructibleLowerShriekComp_padicAlgCl_id_left' (f : X ⟶ Y)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -362,8 +361,8 @@ lemma boundedConstructibleLowerShriekComp_padicAlgCl_id_right_aux (f : X ⟶ Y)
   rw [boundedConstructibleLowerShriekOfCompactificationOfIsProperIso_id_hom_app_comp,
     compIso_triangleShriekTriangle_unitRight_compactificationOverField_hom_app]
 
-/-- **Right identity equation of the composition isomorphisms of the lower shriek** (blueprint
-`prop-functor-package`, clause (3)): `R(f ≫ 𝟙)_! ≅ Rf_! ⋙ R(𝟙)_! ≅ Rf_! ⋙ R(𝟙)_* ≅ Rf_!` is
+/-- **Right identity equation of the composition isomorphisms of the lower shriek**:
+`R(f ≫ 𝟙)_! ≅ Rf_! ⋙ R(𝟙)_! ≅ Rf_! ⋙ R(𝟙)_* ≅ Rf_!` is
 the identity. -/
 theorem boundedConstructibleLowerShriekComp_padicAlgCl_id_right' (f : X ⟶ Y)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -505,8 +504,7 @@ lemma boundedConstructibleLowerShriekComp_padicAlgCl_hom_comp_hcomp_isoLowerStar
     boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_eq ℓ (f ≫ g), Iso.trans_hom,
     Category.assoc]
 
-/-- **The identification `Rf_! ≅ Rf_*` is compatible with composition** (blueprint
-`prop-functor-package`, clause (3)): for proper `f` and `g`,
+/-- **The identification `Rf_! ≅ Rf_*` is compatible with composition**: for proper `f` and `g`,
 `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_! ≅ Rf_* ⋙ Rg_*` is `R(f ≫ g)_! ≅ R(f ≫ g)_* ≅ Rf_* ⋙ Rg_*`. -/
 theorem boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_comp' (f : X ⟶ Y) (g : Y ⟶ Z)
     [IsProper f.left] [IsProper g.left] [IsProper (f ≫ g).left]

@@ -18,7 +18,6 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency true
-set_option linter.unusedSimpArgs false
 set_option linter.privateModule false
 
 variable (A : Type (u + 2)) [Category.{u + 1} A]
@@ -57,7 +56,7 @@ private lemma comp_single_inv {S Y Z : Scheme.{u}} (a : Z ⟶ Y) (h : Y ⟶ S)
   rw [reassoc_of% (comp_single A a h h' w M)]
   simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app]
   erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
-  simp only [Functor.comp_obj, Category.id_comp, Category.comp_id, Iso.hom_inv_id_app]
+  simp only [Functor.comp_obj, Category.id_comp, Iso.hom_inv_id_app]
 
 private noncomputable def flatten {X Q Y Z : Scheme.{u}}
     (a : Z ⟶ Y) (v : Y ⟶ Q) (q : Q ⟶ X) (av : Z ⟶ Q) (q' : Z ⟶ X)
@@ -83,8 +82,7 @@ private lemma flatten_comp_left {X Q Y Y' Z : Scheme.{u}}
   dsimp only [flatten]
   rw [upperStarComp_hom_app_map_upperStarComp_inv_app_assoc
     AddCommGrpCat.{u + 1} b a v d v' dv hd hv hdv]
-  simp only [Functor.comp_obj, Category.assoc, Iso.hom_inv_id_app, Iso.hom_inv_id_app_assoc,
-    Category.comp_id]
+  simp only [Functor.comp_obj, Iso.hom_inv_id_app_assoc]
 
 private lemma flatten_comp_right {X Q Y Y' Z : Scheme.{u}}
     (a : Y' ⟶ Y) (b : Z ⟶ Y') (d : Z ⟶ Y) (hd : d = b ≫ a)
@@ -107,8 +105,7 @@ private lemma flatten_comp_right {X Q Y Y' Z : Scheme.{u}}
   rw [upperStarComp_hom_app_map_upperStarComp_inv_app_assoc
     AddCommGrpCat.{u + 1} b av q dv q' q''
       (by rw [hdv, hd, hav, Category.assoc]) hq hq']
-  simp only [Functor.comp_obj, Category.assoc, Iso.hom_inv_id_app, Iso.hom_inv_id_app_assoc,
-    Category.comp_id]
+  simp only [Functor.comp_obj, Iso.hom_inv_id_app, Category.comp_id]
 
 private lemma raw_comp_named {B Y Y' Z : Scheme.{u}}
     (a : Y' ⟶ Y) (b : Z ⟶ Y') (d : Z ⟶ Y) (hd : d = b ≫ a)

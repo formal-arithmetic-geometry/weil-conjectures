@@ -16,8 +16,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralCoefficients
 Let `X` be a scheme and `ℓ` a prime. On the small pro-étale site of `X`, the sheaf of rings
 `ℤ_ℓ,X = C(-, ℤ_ℓ)` (`AlgebraicGeometry.ProEtale.padicIntSheaf`) is the limit of the sheaves of
 rings `(ℤ/ℓⁿ)_X = C(-, ℤ/ℓⁿ)` of locally constant functions, along the reductions
-(`AlgebraicGeometry.ProEtale.isLimitPadicIntSheafCone`). This is
-`lemma-comparison-completed-coefficients--1` (3) for `E = ℚ_ℓ`; the limit is computed
+(`AlgebraicGeometry.ProEtale.isLimitPadicIntSheafCone`). The limit is computed
 sectionwise, where it is `C(U, ℤ_ℓ) = lim_n C(U, ℤ/ℓⁿ)`
 (`PadicInt.continuousMapRingEquivCompatibleLocallyConstant`).
 
@@ -97,9 +96,8 @@ lemma nonempty_isLimit_mapCone_padicIntSheafCone (U : X.ProEtᵒᵖ) :
     (hy (op n))).trans (PadicInt.toZModPow_ringEquivCompatibleFamilies_symm
       (PadicInt.compatibleLocallyConstantEval t a) n).symm
 
-/-- **`ℤ_ℓ,X = lim_n (ℤ/ℓⁿ)_X`** as sheaves of rings on `X_proét`
-(`lemma-comparison-completed-coefficients--1` (3), for `E = ℚ_ℓ`): the limit is computed
-sectionwise, where it is `C(U, ℤ_ℓ) = lim_n C(U, ℤ/ℓⁿ)`. -/
+/-- **`ℤ_ℓ,X = lim_n (ℤ/ℓⁿ)_X`** as sheaves of rings on `X_proét`:
+the limit is computed sectionwise, where it is `C(U, ℤ_ℓ) = lim_n C(U, ℤ/ℓⁿ)`. -/
 noncomputable def isLimitPadicIntSheafCone : IsLimit (padicIntSheafCone X l) := by
   have : ReflectsLimitsOfSize.{0, 0} (forget RingCat.{u + 1}) :=
     reflectsLimits_of_reflectsIsomorphisms

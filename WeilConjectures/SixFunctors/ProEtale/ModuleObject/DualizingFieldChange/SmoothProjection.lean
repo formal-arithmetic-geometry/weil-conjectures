@@ -39,36 +39,6 @@ isomorphism when `f` is smooth of pure relative dimension `d` (for instance the 
 
 More generally `β(N)` is an isomorphism as soon as `πP^*` commutes with `RHom(Rf_* ℚ̄_ℓ, N)`
 (`ProEtale.CondensedRing.isIso_upperShriekBaseChangeOfMap_app_of_smooth`).
-
-## Proof
-
-*The endomorphism trick.* An endomorphism `t` of `Rf'^! M` with `Rf'_* t` invertible is invertible
-(`CategoryTheory.Adjunction.isIso_of_isIso_map_leftAdjoint` for `Rf'_* ⊣ Rf'^!`). Hence `β(N)` is
-invertible as soon as `Rf'_* β(N)` is and the two sides are isomorphic in some way
-(`ProEtale.CondensedRing.isIso_upperShriekBaseChangeOfMap_app_of_iso`).
-
-*Global sections.* Relative Verdier duality says that the duality map
-`Rf_* RHom(K, Rf^! N) ⟶ RHom(Rf_* K, N)` of `(Rf_*, ε_N)` is invertible
-(`ProEtale.CondensedRing.isIso_nearbyDualityMap_lowerStar_counit`, from
-`ProEtale.CondensedRing.isIso_verdierExchange`). By the counit property of `β`, the abstract
-proper identity `CategoryTheory.Verdier.isIso_map_nearbyDualityMap_of_proper_natTrans` (with
-`G = Rf_*`, `G' = Rf'_*`, `Ψ_X = πZ^*`, `Ψ_Y = πP^*`, the proper base change isomorphism as
-exchange, the counits as traces and `β(N)`, `𝟙` as dualizing maps) shows that `Rf'_* β(N)` is
-invertible as soon as `πP^* RHom(Rf_* ℚ̄_ℓ, N) ⟶ RHom(πP^* Rf_* ℚ̄_ℓ, πP^* N)` is
-(`ProEtale.CondensedRing.isIso_lowerStar_map_upperShriekBaseChangeOfMap_app`). This holds for
-weakly étale `πP` (`ProEtale.CondensedRing.isIso_nearbyDualityMap_upperStarOfMap_id_of_weaklyEtale`,
-from `ProEtale.CondensedRing.isIso_ihomComparison_leftDerivedUpperStar_of_weaklyEtale`) and for any
-morphism of points, every complex on a point being dualizable
-(`ProEtale.CondensedRing.isIso_nearbyDualityMap_upperStarOfMap_id_point`,
-`CategoryTheory.Verdier.isIso_ihomComparison_app_of_exactPairing`).
-
-*An abstract isomorphism.* For `f` smooth of pure relative dimension `d`,
-`πZ^* Rf^! N ≅ πZ^* (f^* N ⊗ ℚ̄_ℓ(d)[2d]) ≅ f'^* πP^* N ⊗ ℚ̄_ℓ(d)[2d] ≅ Rf'^! πP^* N`
-(`ProEtale.CondensedRing.upperShriekBaseChangeIsoOfSmooth`), by the purity tensor maps
-(`ProEtale.CondensedRing.isIso_upperShriekUnitTensorMap_of_smooth`), smooth purity
-(`ProEtale.CondensedRing.isIso_smoothPurityMap`, from the smooth purity section) and
-the pullback of the Tate twists.
-
 -/
 
 @[expose] public section
@@ -351,15 +321,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k₁ k₂ : Type u} [Field k₁] [Field k
 
 /-- **The two sides of the base change of `Rf^!` are isomorphic for smooth `f`**: for `f`, `f'`
 smooth of pure relative dimension `d` and a cartesian square `πZ ≫ f = f' ≫ πP`, there is an
-isomorphism `πZ^* Rf^! N ≅ Rf'^! πP^* N`, the composite
-```
-πZ^* Rf^! N ≅ πZ^* (f^* N ⊗ Rf^! ℚ̄_ℓ) ≅ πZ^* f^* N ⊗ πZ^* ℚ̄_ℓ(d)[2d] ≅ f'^* πP^* N ⊗ ℚ̄_ℓ(d)[2d]
-  ≅ f'^* πP^* N ⊗ Rf'^! ℚ̄_ℓ ≅ Rf'^! πP^* N
-```
-of the purity tensor maps (`ProEtale.CondensedRing.isIso_upperShriekUnitTensorMap_of_smooth`),
-the monoidality of `πZ^*`, smooth purity (`ProEtale.CondensedRing.isIso_smoothPurityMap`), the
-composition of pullbacks and the pullback of the Tate twists
-(`ProEtale.CondensedRing.boundedConstructibleUpperStarOfMapTateTwistIso`). -/
+isomorphism `πZ^* Rf^! N ≅ Rf'^! πP^* N`. -/
 noncomputable def upperShriekBaseChangeIsoOfSmooth {f : Z ⟶ P} {f' : Z' ⟶ P'} (d : ℕ)
     [SmoothOfRelativeDimension d f.left] [SmoothOfRelativeDimension d f'.left]
     (sqf : IsPullback πZ f'.left f.left πP) (N : Dᵇc(P.left)⟦𝐐⟧) :

@@ -7,25 +7,21 @@ module
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
 
-/-! Uniqueness for the unit-times-integer-power factorization in a DVR.
+/-! # Uniqueness of uniformizer factorizations in a DVR
 
-Source: Stacks Project, Algebra, Lemma 00PD.
-(auxiliary; not a blueprint node)
+We show that the unit-times-integer-power factorization of a nonzero element of the fraction
+field of a DVR is unique.
+
+## References
+
+* Stacks Project, Algebra, Lemma 00PD.
 -/
 
 @[expose] public section
 
 namespace Padic
 
-/-- The unit and integer exponent in a DVR fraction-field factorization are unique.
-
-Source: Stacks Project, Algebra, Lemma 00PD.
-Proof: compare two expressions after clearing denominators.  The DVR factorization
-of nonzero elements and uniqueness of the exponent in a product of powers of an
-irreducible force the two integer exponents to agree; cancellation in the domain then
-forces the units to agree.
-(auxiliary; not a blueprint node)
--/
+/-- The unit and integer exponent in a DVR fraction-field factorization are unique. -/
 theorem extension_integers_dvr_factorization_unique (E : Type*) [Field E] (O : Subring E)
     (m : Ideal O) (hDVR : IsDiscreteValuationRing O) (hmax : m.IsMaximal)
     (hfrac : IsFractionRing O E) :

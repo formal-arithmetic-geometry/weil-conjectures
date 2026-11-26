@@ -8,7 +8,12 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
 import WeilConjectures.AlgebraicGeometry.ComapUpperStarIsoMate
 
-/-! # Composition of coefficient restriction and ordinary pullback -/
+/-! # Composition of coefficient restriction and ordinary pullback
+
+## References
+
+* Bhatt--Scholze, Remark 6.8.15
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -65,17 +70,7 @@ private lemma upperStarComp_inv_conjugate
     Equiv.apply_symm_apply, Iso.symm_hom]
 
 -- The mate comparison repeats typeclass searches for module-object adjunctions.
-/-- Composition coherence for the ordinary coefficient-restriction comparison.
-Source: Bhatt--Scholze, Remark 6.8.15.
-(blueprint: new-comap-upper-star-iso-composition)
-
-Proof. Replace extension along each coefficient-pullback isomorphism by restriction
-along its inverse. The coefficient-map composition identity identifies the transported
-actions. Under the faithful module forgetful functor, the restriction comparisons have
-identity components. Transpose the specified upperStarComp under the ordinary pull/push
-adjunctions; its transpose is lowerStarComp by definition of upperStarComp. The
-restriction and pushforward comparisons have identity underlying maps and satisfy
-composition. Transpose back and apply faithfulness. -/
+/-- Composition coherence for the ordinary coefficient-restriction comparison. -/
 theorem comapUpperStarIso_comp
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (N : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})

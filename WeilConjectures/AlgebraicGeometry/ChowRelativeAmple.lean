@@ -37,7 +37,6 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 namespace AlgebraicGeometry
 
-set_option linter.unusedVariables false in
 /-- The Chow immersion is closed and its pulled-back twisting module is relatively ample
 (Stacks, Tag 02O5). -/
 theorem chow_relative_ample (m : ℕ) (S Z X' : Scheme.{u})
@@ -57,7 +56,7 @@ theorem chow_relative_ample (m : ℕ) (S Z X' : Scheme.{u})
               (ULift.{u} (Fin (m + 1))) Z)).obj
               (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))
                 (ULift.{u} ℤ)) 1)))) ∧
-      ∃ hL : ((Scheme.Modules.tensorPullback j).obj
+      ∃ _hL : ((Scheme.Modules.tensorPullback j).obj
           ((Scheme.Modules.tensorPullback (ProjectiveSpace.toProjInt
             (ULift.{u} (Fin (m + 1))) S)).obj
             (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))

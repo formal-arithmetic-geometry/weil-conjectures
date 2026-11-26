@@ -101,8 +101,6 @@ theorem singletonTensorCech_coface_raw_projection
   intro G P Q f
   exact singletonCoface_projection X U (Over.mk g) G n j s
 
--- Keep the unused `P` let-binding in the existing public statement.
-set_option linter.unusedVariables false in
 /-- Downstairs evaluation of the raw coface map is restriction (Stacks, Tags 03P2 and 03DR). -/
 theorem singletonTensorCech_coface_map_down
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
@@ -111,7 +109,7 @@ theorem singletonTensorCech_coface_map_down
     let G := (Over.forget U).op ⋙
       (((sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj
         (Modules.etaleTensorSectionsSheaf F)).obj)
-    let P := ∏ᶜ (fun _ : Fin (n + 2) ↦ Over.mk g)
+    let _P := ∏ᶜ (fun _ : Fin (n + 2) ↦ Over.mk g)
     let Q := ∏ᶜ (fun _ : Fin (n + 1) ↦ Over.mk g)
     let f := Pi.lift (fun k : Fin (n + 1) ↦
       Pi.π (fun _ : Fin (n + 2) ↦ Over.mk g) (j.succAbove k))

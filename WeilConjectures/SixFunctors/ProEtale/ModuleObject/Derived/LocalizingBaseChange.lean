@@ -13,8 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizi
 # Proper base change on the localizing categories `Loc(Dbc)`
 
 Let `Λ` be a commutative condensed ring and `g' ≫ p = p' ≫ g` a commutative square of schemes.
-This file proves the formal part of proper base change on the localizing categories (blueprint
-`proposition-proper-base-change-localizing-categories--1`): if the
+This file proves the formal part of proper base change on the localizing categories: if the
 base change map `Lg^* Rp_* ⟶ Rp'_* Lg'^*` is an isomorphism on `Dbc(X, Λ)`, if `Rp_*` and
 `Rp'_*` preserve the direct sums of objects of the localizing closures of `Dbc` and `Lg'^*`
 preserves `Dbc`, then the base change map is an isomorphism on `Loc(Dbc(X, Λ))`
@@ -22,8 +21,7 @@ preserves `Dbc`, then the base change map is an isomorphism on `Loc(Dbc(X, Λ))`
 
 Both sides are triangulated functors and the base change map commutes with the shifts
 (`ProEtale.CondensedRing.commShift_baseChangeMap`), so this is the determination argument
-`CategoryTheory.NatTrans.isIso_app_of_localizingClosure` (blueprint
-`lemma-checking-isomorphisms-constructible-complexes--1`).
+`CategoryTheory.NatTrans.isIso_app_of_localizingClosure`.
 -/
 
 @[expose] public section
@@ -99,16 +97,10 @@ instance commShift_baseChangeMap (sq : CommSq g' p' p g) :
   NatTrans.CommShift.exchangeRight (derivedUpperStarLowerStarAdjunction Λ p)
     (derivedUpperStarLowerStarAdjunction Λ p') (pullbackSquareComparison Λ sq)
 
-/-- The formal part of blueprint `proposition-proper-base-change-localizing-categories--1` and
-`proposition-proper-base-change-localizing-categories--1`, for an arbitrary condensed ring `Λ`:
-proper base change extends from `Dbc` to `Loc(Dbc)`.
-
-Let `g' ≫ p = p' ≫ g` be a commutative square. Assume that `Rp_*` and `Rp'_*` preserve the
-direct sums of objects of `Loc(Dbc(X, Λ))`, resp. `Loc(Dbc(X', Λ))`, that `Lg'^*` maps
-`Dbc(X, Λ)` into `Dbc(X', Λ)` and that the base change map `Lg^* Rp_*K ⟶ Rp'_* Lg'^*K` is an
-isomorphism for `K` in `Dbc(X, Λ)`. Then it is an isomorphism for `K` in `Loc(Dbc(X, Λ))`: both
-sides are triangulated functors of `K` preserving the direct sums of objects of
-`Loc(Dbc(X, Λ))`. -/
+/-- Formal part of proper base change on the localizing categories, for an arbitrary condensed
+ring `Λ`: given a commutative square, if `Rp_*` and `Rp'_*` preserve direct sums on `Loc(Dbc)`,
+`Lg'^*` preserves `Dbc` and base change is an isomorphism on `Dbc`, then it is an isomorphism on
+`Loc(Dbc)`. -/
 theorem isIso_baseChangeMap_of_localizingBoundedConstructible (sq : CommSq g' p' p g)
     (hsum : R((p)_*⟦Λ⟧).PreservesCoproductsOn.{u + 1} (localizingBoundedConstructible Λ X))
     (hsum' : R((p')_*⟦Λ⟧).PreservesCoproductsOn.{u + 1} (localizingBoundedConstructible Λ X'))

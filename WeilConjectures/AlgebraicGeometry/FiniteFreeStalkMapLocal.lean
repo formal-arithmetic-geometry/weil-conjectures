@@ -9,7 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.StalkRestrictionComplexIso
 import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkMapPositive
 @[expose] public section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
@@ -42,7 +41,7 @@ theorem exists_local_free_stalk_map
           apply (SheafOfModules.freeHomEquiv X).injective
           funext i
           exact isEmptyElim i }
-    letI := hUnique
+    let := hUnique
     exact (IsInitial.ofUnique (SheafOfModules.free (R := Z.ringCatSheaf)
       (ULift.{u} (Fin 0)))).isZero
   by_cases hr : r = 0

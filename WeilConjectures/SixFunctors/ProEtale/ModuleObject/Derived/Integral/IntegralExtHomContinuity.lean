@@ -372,14 +372,9 @@ import Mathlib.AlgebraicGeometry.Noetherian
 /-!
 # Continuity of Ext out of integral constructible complexes
 
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/
-sk-lem-int-ext-continuity.md,
-node lemma-continuity-ext-out-constructible-complex--1 (blueprint:
-lemma-continuity-ext-out-constructible-complex--1).
-
-The constructible category is `Dbc(X, 𝒪_E)` of definition-constructible-sheaves (finite constant
-scalar models), and the comparison is the canonical map `homContinuityComparison` of
-lemma-continuity-ext-out-constructible-complex--1, built from the termwise colimit cocone.
+The constructible category is `Dbc(X, 𝒪_E)` (bounded complexes with constructible cohomology,
+finite constant scalar models), and the comparison is the canonical map
+`homContinuityComparison`, built from the termwise colimit cocone.
 -/
 
 @[expose] public section
@@ -424,8 +419,7 @@ private def localIntegralContinuity
           (colimit.cocone L)))
 
 /-- Finite locally closed towers and bounded Postnikov devissage reduce continuity to
-locally finitely presented modules on strata. Source:
-lemma-continuity-ext-out-constructible-complex--1. -/
+locally finitely presented modules on strata. -/
 private theorem constructible_hom_continuity
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -472,9 +466,7 @@ private theorem constructible_hom_continuity
 
 set_option linter.unusedSectionVars false in
 /-- Ext continuity out of an integral constructible complex over a Noetherian scheme.
-The base field of `integralExtHomContinuous` only makes the scheme Noetherian.
-Source: blueprint lemma-continuity-ext-out-constructible-complex--1 (blueprint:
-lemma-continuity-ext-out-constructible-complex--1). -/
+The base field of `integralExtHomContinuous` only makes the scheme Noetherian. -/
 theorem integralExtHomContinuous_of_isNoetherian
     (X : Scheme.{u}) [IsNoetherian X]
     (C : DerivedCategory

@@ -18,22 +18,24 @@ of condensed `Λ`-module objects: the comparison `Φ` of the two finite-coeffici
 (`ProEtale.finiteCoefficientDerivedEquivalence`) followed by `Rν_*`. On bounded constructible
 complexes it is `ProEtale.CondensedRing.finiteEtaleReading`.
 
-This file proves that `ρ_X` commutes with internal homs out of bounded constructible complexes
-(blueprint `theorem-verdier-biduality`, proof of (i): the comparison is an equivalence
-compatible with tensor products, hence with internal homs):
+This file proves that `ρ_X` commutes with internal homs out of bounded constructible complexes:
 ```
 ρ_X RHom(A, B) ≅ RHom(ρ_X A, ρ_X B),
 ```
-naturally in `A`. Indeed `Φ` is an equivalence commuting with the derived tensor products, hence
-with their right adjoints; `Φ A ≅ ν^* ρ_X A` since `Φ A` is of étale origin
-(`ProEtale.CondensedRing.etaleOriginReading`); and `Rν_* RHom(ν^* M, N) ≅ RHom(M, Rν_* N)`, the
-right adjoint `Rν_*` of the monoidal `ν^*` satisfying the internal adjunction.
+naturally in `A`.
 
 ## Main definitions
 
 - `ProEtale.CondensedRing.ambientEtaleReading`: `ρ_X` on the ambient derived category.
 - `ProEtale.CondensedRing.finiteEtaleReadingIhomIso`: `ρ_X RHom(A, B) ≅ RHom(ρ_X A, ρ_X B)`,
   naturally in the bounded constructible `A`.
+
+## Implementation details
+
+`Φ` is an equivalence commuting with the derived tensor products, hence with their right
+adjoints; `Φ A ≅ ν^* ρ_X A` since `Φ A` is of étale origin
+(`ProEtale.CondensedRing.etaleOriginReading`); and `Rν_* RHom(ν^* M, N) ≅ RHom(M, Rν_* N)`, the
+right adjoint `Rν_*` of the monoidal `ν^*` satisfying the internal adjunction.
 -/
 
 @[expose] public section
@@ -95,7 +97,7 @@ noncomputable def ambientEtaleReadingLeftAdjointTensorIso :
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] in
 /-- On bounded constructible complexes, the counit of the adjunction `Φ⁻¹ ∘ ν^* ⊣ ρ_X` is an
-isomorphism: `Φ(M)` is of étale origin (`ProEtale.CondensedRing.etaleOriginReading`). -/
+isomorphism. -/
 lemma isIso_ambientEtaleReadingAdjunction_counit_app
     (A : Dᵇc(X.left)⟦Profinite.integersModPowRingObj ℓ E n⟧) :
     IsIso ((ambientEtaleReadingAdjunction ℓ E n X).counit.app A.obj) := by

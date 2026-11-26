@@ -20,10 +20,6 @@ import WeilConjectures.AlgebraicGeometry.Finite.Etale.FiniteEtaleOpenUniformTorI
 /-!
 # Finite-coefficient open direct image with a uniform Tor interval
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-sf-ctf-stability,
-sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), finite-coefficient open case
-(blueprint: lem-sfb-finite-open-direct-image-ctf).
-
 The coefficients are the continuous-map condensed ring of a finite discrete ring, pulled
 back from the point. Both categories are the ordinary unbounded derived categories of
 internal modules; the direct image is the total right derived module direct image.
@@ -47,24 +43,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 prime to `ℓ` preserves constant-model bounded constructibility for finite `ℓ`-primary
 coefficients and enlarges every Tor interval `[a,b]` to `[a,b+d]` for one fixed `d ≥ 0`.
 Tor amplitude tests all degree-zero internal module objects. Zero coefficients and the
-zero complex are allowed, and the field need not be separably closed.
-
-Source: blueprint main-20261015, sk-thm-sf-ctf-stability-direct-images.proof.md,
-paragraph (3), finite-coefficient open case
-(blueprint: lem-sfb-finite-open-direct-image-ctf).
-
-Proof:
-Choose the normalized finite-discrete encoding and use the internal-etale realization
-for each ordered Tor interval. The etale open-image theorem gives a natural-number
-bound d before the input complex and its interval are chosen, including zero rings.
-Lift the internal input through the realization equivalence on U. Its etale antecedent
-is bounded constructible, hence bounded below. The etale theorem gives a bounded
-constructible direct image of amplitude [a,b+d]. Realize this object on X and use the
-bounded-below direct-image comparison and the input isomorphism to identify it with
-the specified internal direct image. Transport constructibility and Tor amplitude
-along this isomorphism. These comparisons also apply to the zero complex and empty
-schemes, without a separable-closedness hypothesis on k.
--/
+zero complex are allowed, and the field need not be separably closed. -/
 theorem finiteOpenDirectImage_constantModel_torAmplitude
     (ℓ p : ℕ) [Fact ℓ.Prime]
     (k : Type u) [Field k] [CharP k p] (_hp : 0 < p) (_hne : p ≠ ℓ)

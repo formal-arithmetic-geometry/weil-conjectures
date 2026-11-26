@@ -91,19 +91,26 @@ import all WeilConjectures.SmoothPurity.CommonStageInternalHom.CommonStageIntern
 
 /-! # Scalar and localized descent of the reindexed internal Hom
 
-Source: current blueprint, theorem-poincare-duality-frobenius--2, proof Step 5;
-Stacks Project, Tags 08J9 and 0GMX
-(blueprint: lem-pod-reindexing-hom-coefficient-descent).
-
-The ambient comparison uses the prescribed evaluation transpose. The integral
-and rational comparisons below retain that same map and its inverse.
-The coefficient scalars have degree zero, including in ramified extensions.
+This file constructs the reindexing comparison for the constructible internal Hom along an
+isomorphism of schemes, at the integral, rational and common coefficient stages.
 
 ## Main statements
 
 * `integralComparison`, `rationalComparison`: the same evaluation-normalized
   reindexing comparison at the integral and rational coefficient stages.
 * `common_compositor_existsUnique`: the scheme compositor in common-stage coordinates.
+
+## Implementation details
+
+The ambient comparison uses the prescribed evaluation transpose. The integral and rational
+comparisons retain that same map and its inverse. The coefficient scalars have degree zero,
+including in ramified extensions. The common-stage functors `commonPullback`, `commonHom` and
+`commonTensor` are copies of the recorded ones in literal object coordinates, obtained by
+equality transport only, so that the prescribed representative maps are preserved.
+
+## References
+
+* [Stacks, Tags 08J9, 08JA, 099B, 0A8X, 0GMX]
 -/
 
 @[expose] public noncomputable section
@@ -190,8 +197,7 @@ attribute [local irreducible] scalarIntegralClosed scalarClosedTensor scalarHomO
 
 end FiniteScalar
 
-/-- Completed evaluation in the recorded full constructible category.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+/-- Completed evaluation in the recorded full constructible category. -/
 def integralEvaluation (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
     (P : (constructibleIntegralHomPairs l E W).FullSubcategory) :
     (constructibleIntegralTensor l E W).obj
@@ -199,8 +205,7 @@ def integralEvaluation (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueFie
   ObjectProperty.homMk (PodCompletedReflection.evaluation l E W
     P.obj.1.unop P.obj.2 P.property)
 
-/-- The recorded completed transposition, restricted by fullness.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+/-- The recorded completed transposition, restricted by fullness. -/
 def integralTranspose (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
     (P : (constructibleIntegralHomPairs l E W).FullSubcategory)
     (K : sfIntegralConstructibleCategory l E W)
@@ -297,15 +302,8 @@ private def integralTransposeLinear (W : Scheme.{u})
 
 end IntegralTransposeLinearity
 
-/-- Rational transposition is the unique linear extension of completed transposition.
-The HEq premises transport only the already specified, unchanged integral objects.
-Source: blueprint Step 5; Stacks 08J9
-(blueprint: lem-pod-reindexing-hom-coefficient-descent).
-Proof (node Steps 10--11): completed currying is O_E-linear, since evaluation,
-the tensor unit and ordinary signed currying commute with constant scalars.
-Tensor its linear map and inverse with E. The two inverse equations localize.
-The recorded tensor and Hom object formulas identify the endpoints, giving the
-specified formula on pure tensors. Pure tensors generate, proving uniqueness. -/
+/-- Rational transposition is the unique linear extension of completed transposition: it sends
+`a ⊗ b` to `a ⊗ integralTranspose b`. -/
 theorem rational_transpose_existsUnique (W : Scheme.{u})
     [∀ w : W, Invertible (l : W.residueField w)]
     (P : (constructibleRationalHomPairs l E W).FullSubcategory)
@@ -330,25 +328,18 @@ theorem rational_transpose_existsUnique (W : Scheme.{u})
     ((rationalDerivedInternalHom_existsUnique l E W).exists.choose_spec.1 P)
     (integralTransposeLinear l E W (integralPairOfRationalHomPair l E W P) K.obj)
 
-/-- The canonical linear rational transposition, including all localized inputs.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+/-- The canonical linear rational transposition, including all localized inputs. -/
 def rationalTranspose (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
     (P : (constructibleRationalHomPairs l E W).FullSubcategory)
     (K : sfRationalConstructibleCategory l E W) :=
   (rational_transpose_existsUnique l E W P K).exists.choose
 
-/-- Rational evaluation is the inverse transpose of the identity, with the original sign.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+/-- Rational evaluation is the inverse transpose of the identity, with the original sign. -/
 def rationalEvaluation (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
     (P : (constructibleRationalHomPairs l E W).FullSubcategory) :=
   (rationalTranspose l E W P ((rationalDerivedInternalHom l E W).obj P)).symm (𝟙 _)
 
-/-- Both integer shifts preserve the specified permitted-pair domain.
-Source: blueprint Step 5; Stacks 08JA
-(blueprint: lem-pod-reindexing-hom-coefficient-descent).
-Proof (node Steps 9--12): signed ambient Hom shift identifies the shifted output
-with the old Hom shifted by b - a. Constructibility is stable under every integer
-shift and under this isomorphism. Both source and target shifts are retained. -/
+/-- Both integer shifts preserve the specified permitted-pair domain. -/
 theorem shifted_pair_permitted (W : Scheme.{u})
     (P : (constructibleIntegralHomPairs l E W).FullSubcategory) (a b : ℤ) :
     constructibleIntegralHomPairs l E W (op (P.obj.1.unop⟦a⟧), P.obj.2⟦b⟧) := by
@@ -361,20 +352,13 @@ theorem shifted_pair_permitted (W : Scheme.{u})
       P.obj.1.unop.obj P.obj.2.obj a b).symm
     ((sfIntegralConstructible l E W).le_shift (b - a) _ P.property)
 
-/-- The shifted integral pair, with the inherited ambient integer shifts.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+/-- The shifted integral pair, with the inherited ambient integer shifts. -/
 def shiftedPair (W : Scheme.{u})
     (P : (constructibleIntegralHomPairs l E W).FullSubcategory) (a b : ℤ) :
     (constructibleIntegralHomPairs l E W).FullSubcategory :=
   ⟨(op (P.obj.1.unop⟦a⟧), P.obj.2⟦b⟧), shifted_pair_permitted l E W P a b⟩
 
-/-- Fullness restricts the actual signed ambient Hom shift, including its Koszul sign.
-Source: blueprint Step 5; Stacks 0A8X, 08JA
-(blueprint: lem-pod-reindexing-hom-coefficient-descent).
-Proof (node Steps 9--12): use the inherited ambient shifts and the signed Hom
-comparison. Its degree-r source-shift factor is (-1)^(a*r). Both endpoints are
-constructible by shifted_pair_permitted; fullness restricts the same arrow and
-its inverse. The underlying arrow fixes the isomorphism uniquely. -/
+/-- Fullness restricts the actual signed ambient Hom shift, including its Koszul sign. -/
 theorem integral_signedShift_existsUnique (W : Scheme.{u})
     (P : (constructibleIntegralHomPairs l E W).FullSubcategory) (a b : ℤ) :
     ∃! e : (constructibleIntegralHom l E W).obj (shiftedPair l E W P a b) ≅
@@ -402,8 +386,7 @@ theorem integral_signedShift_existsUnique (W : Scheme.{u})
   apply ObjectProperty.hom_ext
   exact eq_of_heq (hf.trans he.symm)
 
-/-- The original signed integral Hom shift in its full subcategory.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+/-- The original signed integral Hom shift in its full subcategory. -/
 def integralSignedShift (W : Scheme.{u})
     (P : (constructibleIntegralHomPairs l E W).FullSubcategory) (a b : ℤ) :=
   (integral_signedShift_existsUnique l E W P a b).exists.choose
@@ -415,12 +398,7 @@ variable {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The specified pullback preserves the permitted integral Hom domain.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent).
-Proof (node Steps 8--9): identify ordinary reindexing with the specified pullback
-by their identical quotient and zero shifted-product coordinates. The ambient
-comparison and completed-evaluation reflection preserve constructibility of Hom.
-Conjugate its two inputs by the projection-normalized pullback identifications. -/
+/-- The specified pullback preserves the permitted integral Hom domain. -/
 theorem integral_pair_permitted
     (P : (constructibleIntegralHomPairs l E Y).FullSubcategory) :
     constructibleIntegralHomPairs l E X
@@ -442,8 +420,7 @@ theorem integral_pair_permitted
     ((κ P.obj.1.unop).symm.op.prod (κ P.obj.2))
   exact (sfIntegralConstructible l E X).prop_of_iso e hH
 
-/-- Pull back the actual permitted pair, with no change to its morphisms.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+/-- Pull back the actual permitted pair, with no change to its morphisms. -/
 def integralPair : (constructibleIntegralHomPairs l E Y).FullSubcategory ⥤
     (constructibleIntegralHomPairs l E X).FullSubcategory :=
   (constructibleIntegralHomPairs l E X).lift
@@ -451,8 +428,8 @@ def integralPair : (constructibleIntegralHomPairs l E Y).FullSubcategory ⥤
       (constructibleIntegralPullback l E g).op.prod (constructibleIntegralPullback l E g))
     (integral_pair_permitted l E g)
 
-/-- Precisely the kappa-conjugate of the ambient c-zero, in specified pullback coordinates.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+/-- The integral comparison `α` is the conjugate of the ambient Hom comparison by the
+ordinary-to-completed pullback maps. -/
 def IsIntegralNormalized
     (A : PodCompletionReindex l E g) (c : PodCompletedReflection.Comparison l E g)
     (α : constructibleIntegralHom l E Y ⋙ constructibleIntegralPullback l E g ≅
@@ -488,17 +465,7 @@ private theorem completionUnit_isIso
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The uniquely normalized integral comparison in the constructible category.
-Source: blueprint Step 5; Stacks 099B, 08J9
-(blueprint: lem-pod-reindexing-hom-coefficient-descent).
-Proof (node Steps 6--9): finite-free completion exchange preserves the actual unit;
-the DVR equation varpi_E=u varpi_L^e and exact products apply also when ramified.
-The entire-system scalar realization pins tensor and pullback comparisons on both
-Roos coordinates. The specified-Hom evaluation pin identifies the remaining Hom
-comparison. Precompose with the ordinary-to-completed unit; reflector injectivity
-reduces every completed equation to the ordinary one. The kappa-conjugate is the
-specified integral isomorphism. Fullness gives naturality; invertibility of kappa
-and the ambient map gives invertibility and uniqueness, without any perfectness. -/
+/-- The uniquely normalized integral comparison in the constructible category. -/
 theorem integral_comparison_existsUnique
     (A : PodCompletionReindex l E g) (T : PodCompletedTensorReindex l E g A)
     (_hA : PodCompletionReindex.Laws l E g A)
@@ -599,10 +566,7 @@ theorem integral_comparison_existsUnique
   apply (cancel_mono d.hom).1
   simpa only [Category.assoc] using hβ'.trans hn'.symm
 
-/-- Rational pullback preserves exactly the integral permitted-pair domain on objects.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent).
-Proof (node Step 10): rational pullback has the same integral object formula, so
-integral_pair_permitted gives the result. No restriction is imposed on arrows. -/
+/-- Rational pullback preserves exactly the integral permitted-pair domain on objects. -/
 theorem rational_pair_permitted
     (P : (constructibleRationalHomPairs l E Y).FullSubcategory) :
     constructibleRationalHomPairs l E X
@@ -619,8 +583,7 @@ theorem rational_pair_permitted
   rw [hobj P.obj.1.unop, hobj P.obj.2]
   exact integral_pair_permitted l E g (integralPairOfRationalHomPair l E Y P)
 
-/-- The rational permitted-pair functor acts on all localized arrows.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+/-- The rational permitted-pair functor acts on all localized arrows. -/
 def rationalPair : (constructibleRationalHomPairs l E Y).FullSubcategory ⥤
     (constructibleRationalHomPairs l E X).FullSubcategory :=
   (constructibleRationalHomPairs l E X).lift
@@ -628,8 +591,7 @@ def rationalPair : (constructibleRationalHomPairs l E Y).FullSubcategory ⥤
       (rationalDerivedPullback l E g).op.prod (rationalDerivedPullback l E g))
     (rational_pair_permitted l E g)
 
-/-- The rational component and inverse are exactly the localized integral ones.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+/-- The rational component and inverse are exactly the localized integral ones. -/
 def IsRationalNormalized
     (α : constructibleIntegralHom l E Y ⋙ constructibleIntegralPullback l E g ≅
       integralPair l E g ⋙ constructibleIntegralHom l E X)
@@ -649,15 +611,7 @@ attribute [local irreducible] rationalDerivedPullback rationalDerivedInternalHom
 private theorem localized_chosen_spec {T : Sort*} {P : T → Prop} (h : ∃! t, P t)
     (t : T) (ht : t = h.exists.choose) : P t := ht.symm ▸ h.exists.choose_spec
 
-/-- Raw localization gives a unique comparison natural for arbitrary localized arrows.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent).
-Proof (node Steps 10--12): tensor the integral component and its inverse with one.
-Both operation functors have their recorded object formulas. Naturality is integral
-naturality multiplied by lambda*nu on pure tensors; bilinearity extends it to every
-finite sum, including arrows with no integral lift. Evaluation is bilinear and
-transposition linear, so their equations extend in the same way. Composition,
-inverse, identity and both signed shift equations localize with their original
-comparisons. No idempotents are introduced. The prescribed components give uniqueness. -/
+/-- Raw localization gives a unique comparison natural for arbitrary localized arrows. -/
 theorem rational_comparison_existsUnique
     (α : constructibleIntegralHom l E Y ⋙ constructibleIntegralPullback l E g ≅
       integralPair l E g ⋙ constructibleIntegralHom l E X) :
@@ -793,14 +747,8 @@ private theorem integral_normalized_component
   exact (Category.assoc _ _ _).trans
     (((hα P).trans hnfinal).trans (Category.assoc _ _ _).symm)
 
-/-- The normalized integral comparison is independent of its resolution presentation.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent).
-Proof (node Steps 8--9): completion-unit tensor compatibility and transpose
-naturality identify every normalized component with the transpose of pulled-back
-evaluation. Cancel the invertible kappa maps in IsIntegralNormalized. This formula
-is independent of the chosen completion presentation, so componentwise equality
-gives uniqueness. Existence is integral_comparison_existsUnique applied to the
-coherent family supplied by completed-evaluation reflection. -/
+/-- There is a unique integral comparison that is normalized for some normalized completion
+family; in particular it is independent of the chosen presentation. -/
 theorem integral_existsUnique :
     ∃! α : constructibleIntegralHom l E Y ⋙ constructibleIntegralPullback l E g ≅
       integralPair l E g ⋙ constructibleIntegralHom l E X,
@@ -822,20 +770,15 @@ theorem integral_existsUnique :
   exact (integral_normalized_component l E g B U hB hU d β hβ P).trans
     (integral_normalized_component l E g (A.completion g) (A.tensor g) hD hT c α hα P).symm
 
-/-- The unique comparison fixed by ambient evaluation and the specified kappa maps.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+/-- The unique comparison fixed by ambient evaluation and the specified kappa maps. -/
 def integralComparison := (integral_existsUnique l E g).exists.choose
 
-/-- The unique raw rational extension of the specified integral comparison.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+/-- The unique raw rational extension of the specified integral comparison. -/
 def rationalComparison :=
   (rational_comparison_existsUnique l E g (integralComparison l E g)).exists.choose
 
-/-- Naturality includes every pair of localized arrows, not only integral lifts.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent).
-Proof (node Step 11): apply naturality of the hom of rationalComparison to
-the permitted-pair arrow (a.op, b). The domain is full, so this includes every
-localized arrow without choosing an integral lift or a tensor expression. -/
+/-- Naturality of `rationalComparison` for every pair of localized arrows, not only integral
+lifts. -/
 theorem rational_naturality
     (P Q : (constructibleRationalHomPairs l E Y).FullSubcategory)
     (a : Q.obj.1.unop ⟶ P.obj.1.unop) (b : P.obj.2 ⟶ Q.obj.2) :
@@ -874,8 +817,7 @@ private theorem iso_inv_heq {C : Type*} [Category* C] {A B A' B' : C}
   cases hb
   rw [Iso.ext (eq_of_heq h)]
 
-/-- The rational Hom functor on a pair arrow with integral representatives.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+/-- The rational Hom functor on a pair arrow with integral representatives. -/
 private theorem rationalHom_map_heq (K : Type u) [Field K] [Algebra ℚ_[l] K]
     [FiniteDimensional ℚ_[l] K] (W : Scheme.{u})
     (P P' : (constructibleRationalHomPairs l K W).FullSubcategory)
@@ -926,21 +868,17 @@ variable (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The recorded common-stage pullback in its literally specified object coordinates.
-Only equality transport is used, preserving the prescribed representative maps.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+/-- The recorded common-stage pullback in its literally specified object coordinates. -/
 def commonPullback := (commonStageDerivedPullback l Ω g).copyObj
   (commonStagePullbackObject l Ω g)
   (fun P ↦ eqToIso ((podCommonStageObjectNormalizations l Ω).1 g P))
 
-/-- The recorded common-stage Hom in its literally specified compositum coordinates.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+/-- The recorded common-stage Hom in its literally specified compositum coordinates. -/
 def commonHom (W : Scheme.{u}) := (commonStageDerivedInternalHom l Ω W).copyObj
   (commonStageHomObject l Ω W)
   (fun P ↦ eqToIso ((podCommonStageObjectNormalizations l Ω).2.2 W P))
 
-/-- The recorded tensor in its literal compositum coordinates, by equality transport.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+/-- The recorded tensor in its literal compositum coordinates, by equality transport. -/
 def commonTensor (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)] :=
   (commonStageDerivedTensor l Ω W).copyObj
     (fun P ↦ commonStageTensorObject l Ω W P.1 P.2)
@@ -994,13 +932,7 @@ private def stagePullbackIntegralIso
     (constructibleIntegralPullback l (Coefficient.{u} l Ω L) g).mapIso
       (eqToIso (stageIntegralObject l Ω Y P L h).symm)
 
-/-- The specified common-stage pullback preserves the permitted Hom domain.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent).
-Proof (node Steps 13--14): represent the two objects at their compositum and apply
-integral_pair_permitted to the underlying integral pair. The rational scalar object
-formula and the pullback/scalar comparison identify both pulled-back stage objects
-with integral pullbacks. Apply internal Hom with its contravariant first argument,
-then transport constructibility through this isomorphism. -/
+/-- The specified common-stage pullback preserves the permitted Hom domain. -/
 theorem common_pair_permitted
     (P : (commonStageHomPairs l Ω Y).FullSubcategory) :
     commonStageHomPairs l Ω X
@@ -1022,8 +954,7 @@ theorem common_pair_permitted
 
 end CommonPairProof
 
-/-- The actual common-stage permitted-pair functor, with all quotient-class arrows.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+/-- The actual common-stage permitted-pair functor, with all quotient-class arrows. -/
 def commonPair : (commonStageHomPairs l Ω Y).FullSubcategory ⥤
     (commonStageHomPairs l Ω X).FullSubcategory :=
   (commonStageHomPairs l Ω X).lift
@@ -1031,9 +962,8 @@ def commonPair : (commonStageHomPairs l Ω Y).FullSubcategory ⥤
       (commonPullback l Ω g).op.prod (commonPullback l Ω g))
     (common_pair_permitted l Ω g)
 
-/-- Common-stage components are prescribed at every larger finite coefficient field.
-Both input comparisons use the original operation normalizations and variances.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+/-- The components of a common-stage comparison are given, at every larger finite coefficient
+field, by the rational comparison conjugated by the stage comparisons. -/
 def IsCommonNormalized
     (α : commonHom l Ω Y ⋙ commonPullback l Ω g ≅
       commonPair l Ω g ⋙ commonHom l Ω X) : Prop :=
@@ -1067,8 +997,7 @@ section CommonComparisonProof
 open CommonStageInternalHom
 open AlgebraicallyClosedCoefficients (coefficientInclusion)
 
-/-- Transition conjugates by the recorded stage identification.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+/-- Transition conjugates by the recorded stage identification. -/
 private theorem stageT_map (W : Scheme.{u}) {L M : Index l Ω} (k : L ≤ M)
     {A B : Stage l Ω W L} (f : A ⟶ B) :
     ((stageSystem l Ω W).T k).map f =
@@ -1078,8 +1007,7 @@ private theorem stageT_map (W : Scheme.{u}) {L M : Index l Ω} (k : L ≤ M)
   rw [← Category.assoc, ← (operationStageTransitionIso l Ω W L M k).hom.naturality f,
     Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
 
-/-- The pullback comparison at a larger stage, through the scalar pullback comparison.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+/-- The pullback comparison at a larger stage, through the scalar pullback comparison. -/
 private theorem pullbackComparison_hom_eq
     (K : generalAlgebraicallyClosedConstructibleCategory l Ω Y)
     (M : Index l Ω) (k : K.stage ≤ M) :
@@ -1093,8 +1021,7 @@ private theorem pullbackComparison_hom_eq
   unfold commonStagePullbackComparison
   rfl
 
-/-- Cancel the stage identification in the pullback coherence equation.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+/-- Cancel the stage identification in the pullback coherence equation. -/
 private theorem step_algebra {C D : Type*} [Category* C] [Category* D] (R : D ⥤ C)
     {U V W W' Z₀ : C} {x y z : D} (e0 : U ≅ V) (s : V ⟶ W) (e1 : W' ≅ W)
     (ρ : W ⟶ R.obj x) (ey : x ≅ y) (ay : y ≅ z) (aX : U ⟶ Z₀) (cM : Z₀ ⟶ R.obj z)
@@ -1104,8 +1031,7 @@ private theorem step_algebra {C D : Type*} [Category* C] [Category* D] (R : D �
   rw [← hc]
   simp
 
-/-- The pullback comparisons are compatible with one further transition.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+/-- The pullback comparisons are compatible with one further transition. -/
 private theorem pullback_step (K : generalAlgebraicallyClosedConstructibleCategory l Ω Y)
     {L M : Index l Ω} (h : K.stage ≤ L) (k : L ≤ M) :
     (transition l Ω X L M k).map (commonStagePullbackComparison l Ω g K L h).hom ≫
@@ -1159,13 +1085,7 @@ private theorem transportNatIso {C D : Type*} [Category* C] [Category* D]
 
 section CommonCompositorProof
 
-/-- The recorded scheme compositor in literal common-stage coordinates.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent).
-Proof (node Step 14): tensor-product induction proves rational compositor naturality.
-Represent each common-stage arrow over one field; the prescribed component formulas
-and cancellation of the operation comparisons give common-stage naturality. Form
-the natural isomorphism and transport it through the equality-only functor copies.
-Every component is prescribed, so componentwise extensionality proves uniqueness. -/
+/-- The recorded scheme compositor in literal common-stage coordinates. -/
 theorem common_compositor_existsUnique {Z : Scheme.{u}} (h : Z ⟶ X) [IsIso h]
     [∀ z : Z, Invertible (l : Z.residueField z)] :
     ∃! p : commonPullback l Ω (h ≫ g) ≅ commonPullback l Ω g ⋙ commonPullback l Ω h,

@@ -19,7 +19,6 @@ import all WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientPul
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true
@@ -36,7 +35,7 @@ theorem rationalCoefficientValue_ext (l : ℕ) [Fact l.Prime] (E : Type u)
     (a b : (rationalCoefficientSheaf l X E).obj.obj V)
     (hab : ∀ x, rationalCoefficientValue l E X V a x =
       rationalCoefficientValue l E X V b x) : a = b := by
-  letI := coefficientExtensionNormedField l E
+  let := coefficientExtensionNormedField l E
   apply ContinuousMap.ext
   intro x
   exact ULift.down_injective (hab x)
@@ -57,7 +56,7 @@ theorem rationalContinuousPullback_normalized
     [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     {Z X : Scheme.{u}} (h : Z ⟶ X) :
     rationalCoefficientRestrictionNormalized l E h (rationalContinuousPullback l E h) := by
-  letI := coefficientExtensionNormedField l E
+  let := coefficientExtensionNormedField l E
   exact continuousCoefficientPullback_normalized (ULift.{u + 1, u} E) h
 
 /-- The normalized integral and rational continuous coefficient pullbacks are

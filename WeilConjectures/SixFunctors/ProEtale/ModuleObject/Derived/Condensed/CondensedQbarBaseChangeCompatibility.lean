@@ -21,10 +21,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBa
 /-!
 # Condensed finite-to-algebraic-closure coefficient change and exchange
 
-Source: upstream `ModuleObject/Colimit/TwoColimit.lean`, final transport paragraph;
-`ModuleObject/ChangeOfCoefficients.lean`, Derived section
-(blueprint: prop-weil-pbc-qbar-condensed-basechange-compatibility).
-
 The coefficient ring is the finite-subextension-valued continuous-function ring
 `Profinite.padicAlgClRingObj`, not the full continuous-function ring. All categories below
 are the published bounded constructible full subcategories, without a completeness condition.
@@ -77,20 +73,7 @@ private theorem constructibleToQbarPushHom_isIso_of_isProper [IsProper f]
     (isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_app_of_isGE.{u}
       ℓ f E K.obj N)
 
-/-- Proper finite-to-Qbar coefficient change preserves the specified exchange arrow.
-Source: TwoColimit.lean, final transport paragraph; ChangeOfCoefficients.lean, Derived section
-(blueprint: prop-weil-pbc-qbar-condensed-basechange-compatibility).
-
-Proof: the chosen pullback makes f' proper. Extract a cohomological lower bound from
-each bounded constructible input and apply
-`isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_app_of_isGE`. That theorem combines
-the scalar-basis decomposition with copower continuity in these same internal condensed
-module categories (`lem-weil-pbc-condensed-subfield-bounded-copowers`). Transfer each
-component through `ObjectProperty.isIso_hom_iff` to the constructible full subcategory.
-The source and target comparisons are composites of these push isomorphisms with the
-published pull isomorphisms, so both are invertible. Finally apply the separately stated
-`constructibleToQbar_exchange_equality` to the specified square and input; it identifies
-exactly the displayed arrows without assuming either exchange transformation invertible. -/
+/-- Proper finite-to-Qbar coefficient change preserves the specified exchange arrow. -/
 theorem constructibleToQbar_baseChange_compatibility [IsProper f]
     (sq : ChosenCartesianSquare g' f' f g) :
     (∀ K : PadicSubfieldConstructible X ℓ E,

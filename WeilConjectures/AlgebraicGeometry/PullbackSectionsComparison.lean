@@ -72,7 +72,6 @@ private theorem pullbackSectionsEquiv_apply {R X : Scheme.{u}}
             (pullback.fst W.hom f ≫ W.hom) pullback.condition).inv.app G)) s := by
   rfl
 
-set_option linter.unusedVariables false in
 -- Projection equality proofs are referenced only through proof-irrelevant arguments.
 set_option maxRecDepth 4000 in
 -- The concrete abelian-sheaf functors require extra reduction during elaboration.
@@ -87,7 +86,7 @@ theorem pullbackSections_comparison (R : Scheme.{u})
       ∀ {X Y : Scheme.{u}} (h : X ⟶ Y) (f : Y ⟶ R) (g : X ⟶ R)
         (w : g = h ≫ f) (m : pullback W.hom g ⟶ pullback W.hom f)
         (hm : m ≫ pullback.fst W.hom f = pullback.fst W.hom g)
-        (hm' : m ≫ pullback.snd W.hom f = pullback.snd W.hom g ≫ h)
+        (_hm' : m ≫ pullback.snd W.hom f = pullback.snd W.hom g ≫ h)
         (s : ((lowerStar A f).obj ((upperStar A f).obj G)).obj.obj (op W)),
         e g (((lowerStar A f).map
             ((upperStarLowerStarAdjunction A h).unit.app ((upperStar A f).obj G)) ≫

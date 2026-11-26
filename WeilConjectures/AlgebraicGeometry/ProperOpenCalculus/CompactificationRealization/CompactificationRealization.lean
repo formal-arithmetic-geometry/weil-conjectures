@@ -24,7 +24,6 @@ attribute [local implicit_reducible] H Compactification.copy
 
 variable {A : Scheme.{u} → Prop} (F : ProperOpenCalculus.{u, v, w} A)
 
-set_option linter.checkUnivs false in
 /-- Fixed native functors and their comparison to the literal proper/open word.
 The comparison is part of the coordinates, not a map recovered by evaluation. -/
 structure CompactificationRealization where

@@ -149,7 +149,7 @@ theorem scalarToContinuous_isMonHom : IsMonHom (scalarToContinuous A) := by
 
 attribute [instance] scalarToContinuous_isMonHom
 
-set_option linter.unusedSectionVars false in
+omit [TopologicalSpace A] [IsTopologicalRing A] in
 /-- The constant scalar ring is commutative for the transported monoidal structure. -/
 theorem constantScalars_commutative :
     IsCommMonObj ((constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).obj

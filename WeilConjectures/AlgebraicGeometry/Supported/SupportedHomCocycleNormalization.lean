@@ -42,9 +42,6 @@ localized cocycle map. It uses the existing kernel functor in both topologies.
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option linter.unusedVariables false
-set_option linter.unusedSectionVars false
-set_option linter.unusedTactic false
 
 universe u
 
@@ -1143,7 +1140,7 @@ private theorem normalizationRHom
         psi G a ((DerivedCategory.Plus.homologyFunctor AddCommGrpCat.{u + 1} a).map
           ((preadditiveCoyoneda.obj (op B)).rightDerivedFunctorPlus.map v) x) =
           psi F a x ≫ (DerivedCategory.Plus.ι.map v)⟦a⟧') ∧
-      (∀ (I : CochainComplex.Plus D) (hi : ∀ n : ℤ, Injective (I.obj.X n))
+      (∀ (I : CochainComplex.Plus D) (_hi : ∀ n : ℤ, Injective (I.obj.X n))
           (a : ℤ) (f : B ⟶ I.obj.X a) (hf : f ≫ I.obj.d a (a + 1) = 0),
         let V := preadditiveCoyoneda.obj (op B)
         let VI := (V.mapHomologicalComplex (.up ℤ)).obj I.obj
@@ -1240,7 +1237,7 @@ private theorem normalizationDerivedComparison
         ((DerivedCategory.singleFunctor D 0).obj B ⟶ F.obj⟦a⟧),
       (∀ (F F' : DerivedCategory.Plus D) (v : F ⟶ F') (a : ℤ) (x),
         chi F' a ((RS a).map v x) = chi F a x ≫ (DerivedCategory.Plus.ι.map v)⟦a⟧') ∧
-      (∀ (I : CochainComplex.Plus D) (hi : ∀ n : ℤ, Injective (I.obj.X n))
+      (∀ (I : CochainComplex.Plus D) (_hi : ∀ n : ℤ, Injective (I.obj.X n))
           (F : DerivedCategory.Plus D) (eI : F ≅ DerivedCategory.Plus.Q.obj I) (a : ℤ)
           (x : ((S.mapHomologicalComplex (.up ℤ)).obj I.obj).cycles a),
         ∃! f : B ⟶ I.obj.X a,

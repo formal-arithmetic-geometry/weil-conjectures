@@ -17,9 +17,6 @@ import WeilConjectures.AlgebraicGeometry.GlobalTensorPullbackMatesIsIso
 @[expose] public section
 universe u
 set_option autoImplicit false
-set_option linter.style.longLine false
-set_option linter.style.haveILetI false
-set_option linter.unusedVariables false
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open AlgebraicGeometry TopologicalSpace
 namespace AlgebraicGeometry.Scheme.Modules

@@ -74,6 +74,7 @@ open AlgebraicGeometry.ProEtale
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
+-- Untyped proof-valued def: its type is inferred and downstream code unfolds it.
 set_option linter.defProp false in
 /-- The universal ordinary and derived scalar-extension witness on the slice.
 Its object and map equations determine ordinary tensor extension, while its

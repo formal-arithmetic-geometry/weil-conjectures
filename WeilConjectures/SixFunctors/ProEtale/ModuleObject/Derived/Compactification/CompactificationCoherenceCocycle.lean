@@ -157,10 +157,6 @@ import WeilConjectures.AlgebraicGeometry.Compactification.DenseRefinementMorphis
 /-!
 # Independence of compactification and the cocycle condition
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-sf-comp-coherence,
-proposition-construction-independence-rf-shriek (blueprint:
-proposition-construction-independence-rf-shriek).
-
 The domain is the recorded ambient localizing closure. The target remains the ordinary
 unbounded derived category of module objects. Comparisons are normalized by the existing
 open-adjunction refinement map and the canonical derived direct-image compositor.
@@ -272,9 +268,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 /-- The already defined compactification candidate, with source restricted to Loc(Dctf).
-No target preservation is assumed. Source: blueprint
-proposition-construction-independence-rf-shriek, opening formula and proof step 1 (blueprint:
-proposition-construction-independence-rf-shriek). -/
+No target preservation is assumed. -/
 abbrev compactificationLocalizingCandidate {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification.BoundaryCompactification f) :
     (localizingClosureProEtale Λ X).FullSubcategory ⥤
@@ -285,10 +279,7 @@ abbrev compactificationLocalizingCandidate {X Y : Scheme.{u}} {f : X ⟶ Y}
 
 /-- The component ρ_h : F_c(K) → F_d(K) for a boundary-preserving refinement h : d → c.
 It is Rp_* of the canonical open-adjunction map, followed by the inverse derived
-compositor and the structural triangle equality. This definition does not require either
-compactification to be dense and makes no arbitrary choice of a comparison.
-Source: blueprint proposition-construction-independence-rf-shriek, proof step 4
-(blueprint: proposition-construction-independence-rf-shriek). -/
+compositor and the structural triangle equality. -/
 def compactificationRefinementComponent {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c d : Compactification.BoundaryCompactification f} (h : d ⟶ c)
     (K : DerivedCategory
@@ -633,40 +624,7 @@ scheme-theoretically dense refinement, with identity normalization and the cocyc
 The first clause records that the refinement components used in the formula really are
 isomorphisms; the next clause is φ_{c₂,c₁} ρ_{h₂} = ρ_{h₁}, equivalently
 φ_{c₂,c₁} = ρ_{h₁} ρ_{h₂}⁻¹, for every common dense refinement and both its projections.
-The last two clauses are equalities of natural isomorphisms, not just objectwise existence.
-Source: blueprint main-20261015, proposition-construction-independence-rf-shriek
-(blueprint: proposition-construction-independence-rf-shriek).
-
-Proof, following the seven DAG steps:
-1. Work with F_c = Rp_* D(j_!) on ordinary unbounded module-object derived categories,
-restricting only the source to Loc(Dctf). The canonical derived composition comparison
-is normalized on K-injective complexes by the underived module compositor. Exact
-coefficient pullback makes direct image preserve K-injectives, so all parenthesizations
-use the same complex. The underived fibre-product identifications give associativity.
-2. For h : d → c with d dense, apply proper/open interchange at p = id_X and i = j_c,
-with dense compactification (j_d,h). Its unique identity-on-restriction arrow is the
-existing localizingRefinementMap, by the exact open derived adjunction. It is invertible
-on Loc(Dctf), naturally in K, even when c is not dense.
-3. Over V → X, the boundary equality identifies V ×_{Z_c} Z_d with V, with the same
-coefficient action. Exact restriction and preservation of K-injectives by the right
-adjoint of exact j_d! give j_c* Rh* ≅ j_d*. These identifications commute with composition.
-4. Apply Rp_* to the arrow in step 2 and invert the derived compositor, giving exactly
-compactificationRefinementComponent. For a further dense refinement, both open arrows
-restrict to the identity; uniqueness from interchange makes them equal. Naturality and
-associativity of the compositor give ρ_hk = ρ_h ρ_k. Identity follows the same way.
-5. Choose a common dense refinement using
-proposition-dense-compactifications-form-cofiltered-category--1. Define φ_{c₂,c₁} = ρ_{h₁} ρ_{h₂}⁻¹.
-The two arrows are invertible by step 4, and naturality gives an isomorphism of the restricted
-functors with ambient target.
-6. Dominate two chosen common dense refinements by another dense refinement. Schematic
-density of its source and separatedness of each proper target give equality of the two
-composites to each c_a, by proposition-dense-compactifications-form-cofiltered-category--2 (3). Step
-4 and cancellation of the intervening isomorphisms prove the normalization for every common
-refinement.
-7. Dominate three compactifications simultaneously using the finite-family conclusion
-of common dense refinement. Independence allows all three comparisons to be computed
-there, and the middle factors cancel, proving the cocycle. For φ_{c,c} use the same
-projection twice; this proves identity even for a nondense c. -/
+The last two clauses are equalities of natural isomorphisms, not just objectwise existence. -/
 theorem compactification_coherence_cocycle
     (ℓ : ℕ) [Fact ℓ.Prime] (_hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ)
     (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

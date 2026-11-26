@@ -183,19 +183,7 @@ private theorem chosenScalarPull_mate_iso
     (adj R f) (adj S f) (D φ V) (D φ U) (chosenScalarPull φ f)
 
 /-- Exchange is an isomorphism on constant-model constructible finite-Tor objects
-if it is so after an isomorphism of coefficients.
-
-Source: the coefficient-transport step in the proper base-change argument in
-blueprint `proposition-composition-base-change-rf-shriek--1`, proof (2). Scalar extension along the
-coefficient isomorphism is an equivalence and agrees with exact restriction along
-its inverse. It therefore preserves the constant-model constructible finite-Tor
-subcategory. Choose the normalized pullback comparisons; their right mates are
-isomorphisms because both scalar functors are equivalences. The scalar/geometric
-exchange rectangle identifies the image of the exchange map with a composite of
-these comparisons and the exchange map over the second coefficient ring. This
-composite is an isomorphism by the hypothesis. Finally the scalar equivalence
-reflects isomorphisms.
-(blueprint: lem-sfb-condensed-coefficient-iso-exchange) -/
+if it is so after an isomorphism of coefficients. -/
 theorem condensedAmbientExchange_coefficientIso
     {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]

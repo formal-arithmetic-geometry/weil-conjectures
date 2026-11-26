@@ -23,7 +23,6 @@ import WeilConjectures.AlgebraicGeometry.FieldPointFactorsThroughClosedImmersion
 @[expose] public section
 
 universe u
-set_option linter.style.haveILetI false
 open CategoryTheory
 open AlgebraicGeometry
 
@@ -44,11 +43,11 @@ theorem fieldPoint_factorsThrough_immersion
   let c := iota.liftCoborder
   let o := iota.coborderRange.ι
   have hfac : c ≫ o = iota := iota.liftCoborder_ι
-  letI : IsClosedImmersion c := inferInstance
-  letI : IsOpenImmersion o := inferInstance
-  letI : IsIso (c.residueFieldMap z) :=
+  have : IsClosedImmersion c := inferInstance
+  have : IsOpenImmersion o := inferInstance
+  have : IsIso (c.residueFieldMap z) :=
     Scheme.Hom.isIso_residueFieldMap c z
-  letI : IsIso (o.residueFieldMap (c.base z)) := inferInstance
+  have : IsIso (o.residueFieldMap (c.base z)) := inferInstance
   have hres : IsIso (iota.residueFieldMap z) := by
     rw [← hfac, Scheme.residueFieldMap_comp]
     infer_instance

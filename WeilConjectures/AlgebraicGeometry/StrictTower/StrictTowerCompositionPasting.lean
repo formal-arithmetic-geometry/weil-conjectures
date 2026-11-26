@@ -156,8 +156,6 @@ private theorem proper_pasting {U' U W' W Z' Z : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
--- The category and scheme universes meet in the functor categories used by this record.
-set_option linter.checkUnivs false in
 private structure RawPastingData where
   obj : Scheme.{u} → Type w
   [category (X : Scheme.{u}) : Category.{v} (obj X)]

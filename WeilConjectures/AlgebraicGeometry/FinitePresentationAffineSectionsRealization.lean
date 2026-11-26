@@ -86,5 +86,3 @@ theorem exists_finitePresentation_affine_sections_realization
     RY.mapIso (asIso (fromTildeΓ (B.obj P))) ≪≫ cancel.app P⟩
 
 end AlgebraicGeometry
-
-set_option linter.style.longLine false

@@ -261,9 +261,6 @@ def SystemGeometricInverseImageData.derivedEvaluation
 variable (SY : SystemScalarAssignment (J := J)) (TY : SystemTensorCoherence SY)
   (SX : SystemScalarAssignment (J := K)) (TX : SystemTensorCoherence SX)
 
-set_option linter.unusedVariables false
-set_option linter.unusedSectionVars false
-
 /-- Multiplication at the selected level of ordinary singleton extension. -/
 def systemSingletonOrdinaryMultiplication (n : ℕ) :
     systemSingleFunctor SY TY BY n ⋙ systemEvaluation BY n ≅ 𝟭 (systemLevel BY n) :=
@@ -327,7 +324,7 @@ def SystemSingletonGeometricComparisons
           (((u.inverse.map b) ≫ (I j).ringUnderlying.hom).hom.app W t)
           (((u.inverse.map x) ≫ (I n).moduleUnderlying.inv.app P).hom.app W t)) ∧
     -- above
-    (∀ (n j : ℕ) (h : n < j) (P : systemLevel BY n),
+    (∀ (n j : ℕ) (_h : n < j) (P : systemLevel BY n),
     ((ordinary n).hom.app P).app j = 0) ∧
     -- multiplication
     (∀ (n : ℕ) (P : systemLevel BY n),

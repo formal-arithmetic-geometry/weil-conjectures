@@ -8,9 +8,6 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.ContinuousLatticeSumFree
 
 /-! # Ranges in a continuous-function presentation
-
-Source: the continuous coefficient encoding and ordinary sectionwise range.
-(blueprint: def-sfb-continuous-function-presentation-range)
 -/
 
 @[expose] public noncomputable section
@@ -22,9 +19,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 attribute [local irreducible] continuousRingModuleEquivalence
 
 /-- The actual section range of an internal module map in a specified continuous
-function presentation.
-Source: blueprint, stratified lattice trace proof, Local computation.
-(blueprint: def-sfb-continuous-function-presentation-range) -/
+function presentation. -/
 def continuousFunctionPresentationRange
     {E : Type} [NormedField E] [IsTopologicalRing E]
     (A : Subring E) [TotallyDisconnectedSpace A] {Y : Scheme.{u}} {r : ℕ}
@@ -35,9 +30,7 @@ def continuousFunctionPresentationRange
   Set.range (fun x ↦ c.sections B
     (((continuousRingModuleEquivalence Y A).functor.map f).val.app (op B) x))
 
-/-- The section range construction is the ordinary range of the encoded map.
-Source: the defining formula.
-(blueprint: def-sfb-continuous-function-presentation-range) -/
+/-- The section range construction is the ordinary range of the encoded map. -/
 theorem continuousFunctionPresentationRange_eq
     {E : Type} [NormedField E] [IsTopologicalRing E]
     (A : Subring E) [TotallyDisconnectedSpace A] {Y : Scheme.{u}} {r : ℕ}

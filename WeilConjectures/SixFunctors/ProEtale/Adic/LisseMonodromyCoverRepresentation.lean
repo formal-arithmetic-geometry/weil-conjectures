@@ -407,12 +407,7 @@ include hU in
 /-- **Every continuous finite-dimensional representation is a monodromy representation**, for
 the monodromy from universal covers on which lisse sheaves are free. The lisse sheaf attached
 to `ρ` is the descent of `ℚ̄_ℓⁿ` along the universal cover `p : Ỹ_t ⟶ Y` for the loop cocycle
-of the matrix of `ρ` (`AlgebraicGeometry.Scheme.UniversalCovers.loopMatrix`,
-`AlgebraicGeometry.ProEtale.AdicSheaf.exists_iso_transitionMatrix_eq`): in the coordinates of
-the trivialisation over `Ỹ_t`, the transport along a loop `g` is the restriction along
-`(transport g)⁻¹`, which acts on constant sections by the transition matrix along the graph of
-`g`, that is by the matrix of `ρ(g)`
-(`AlgebraicGeometry.ProEtale.AdicSheaf.resOver_freeSection`). -/
+of the matrix of `ρ` (`AlgebraicGeometry.Scheme.UniversalCovers.loopMatrix`). -/
 theorem exists_lisseSheaf_rep (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
     (V : Type (u + 1)) [AddCommGroup V] [Module (PadicAlgCl l) V]
     [FiniteDimensional (PadicAlgCl l) V] (ρ : Representation (PadicAlgCl l) (Aut (fiber t)) V)

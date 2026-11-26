@@ -50,8 +50,6 @@ The concrete definitions are re-exported from PurCompletedReindexingData.
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 set_option linter.privateModule false
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme

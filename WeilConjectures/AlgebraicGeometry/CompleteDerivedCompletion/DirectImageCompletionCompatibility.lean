@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.DirectImageRe
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 
 universe u
 
@@ -117,18 +116,18 @@ theorem directImage_completion_compatibility :
   have hcomp := completeDerivedCompletion l E Y Y (𝟙 Y)
   have hcriterion := hcomp.2.2.2.2.2.2.2.1
   have hkX := (completeDerivedCompletion l E X X (𝟙 X)).2.2.2.2.2.2.2.1 K
-  letI : IsIso ((kappa l E X).app K) := hkX.mp hK
+  let : IsIso ((kappa l E X).app K) := hkX.mp hK
   have hmap : IsIso ((rpushModule l E f).map ((kappa l E X).app K)) := inferInstance
-  letI : IsIso ((rpushModule l E f).map ((kappa l E X).app K)) := hmap
-  letI : IsIso ((pushLimitIso l E f).hom.app ((red l E X).obj K)) := inferInstance
-  letI : IsIso ((pushReductionMap l E f).app K) := hpush K
-  letI : IsIso ((rlim l E Y).map ((pushReductionMap l E f).app K)) := inferInstance
+  let : IsIso ((rpushModule l E f).map ((kappa l E X).app K)) := hmap
+  let : IsIso ((pushLimitIso l E f).hom.app ((red l E X).obj K)) := inferInstance
+  let : IsIso ((pushReductionMap l E f).app K) := hpush K
+  let : IsIso ((rlim l E Y).map ((pushReductionMap l E f).app K)) := inferInstance
   have hky : IsIso ((kappa l E Y).app ((rpushModule l E f).obj K)) := by
     have hc : IsIso ((kappa l E Y).app ((rpushModule l E f).obj K) ≫
         (rlim l E Y).map ((pushReductionMap l E f).app K)) := by
       rw [← heq K]
       infer_instance
-    letI := hc
+    let := hc
     exact IsIso.of_isIso_comp_right
       ((kappa l E Y).app ((rpushModule l E f).obj K))
       ((rlim l E Y).map ((pushReductionMap l E f).app K))

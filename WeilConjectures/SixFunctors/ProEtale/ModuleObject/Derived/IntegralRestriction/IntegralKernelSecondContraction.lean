@@ -22,8 +22,6 @@ open DiagonalCoefficients
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
 /-- This is the second (pullback) contraction, a strict component of
 `integralKernel_contractions`.
-Source: sk-thm-int-restriction-line.proof.md, paragraph (1).
-(blueprint: lem-integral-kernel-second-contraction).
 The proof transports the corresponding trace/base-change rearrangement and section
 normalization through the canonical integral coefficient reference. -/
 theorem integralKernel_second_contraction

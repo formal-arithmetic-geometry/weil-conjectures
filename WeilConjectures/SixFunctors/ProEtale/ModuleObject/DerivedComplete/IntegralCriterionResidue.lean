@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.
 /-!
 # The integral constructibility criterion with condensed residue coefficients
 
-A variant of blueprint `proposition-integral-constructibility-criterion`, (2) ⇒ (1)
+A variant of the integral constructibility criterion, (2) ⇒ (1)
 (`ProEtale.boundedConstructible_of_derivedCompleteIntegers`), with the hypothesis on the
 reduction stated for the condensed coefficient ring `𝔽_{E,X}`: on a noetherian scheme `X`, a
 derived complete complex `K` of `𝒪_{E,X}`-modules whose derived extension of scalars
@@ -38,10 +38,9 @@ private lemma lt_or_lt_of_lt_sub_toNat_or_lt' {i a b : ℤ}
     (h : i < b - (b - a).toNat ∨ b < i) : i < a ∨ b < i := by
   omega
 
-/-- **The integral criterion with condensed residue coefficients** (blueprint
-`proposition-integral-constructibility-criterion`, (2) ⇒ (1); Bhatt–Scholze, Proposition 6.8.11): on
-a noetherian scheme `X`, a derived complete complex `K` of `𝒪_{E,X}`-modules whose derived extension
-of scalars `𝔽_{E,X} ⊗ᴸ K` is bounded constructible is bounded constructible. -/
+/-- **The integral criterion with condensed residue coefficients**: on
+a noetherian scheme `X`, a derived complete complex `K` of `𝒪_{E,X}`-modules whose derived
+extension of scalars `𝔽_{E,X} ⊗ᴸ K` is bounded constructible is bounded constructible. -/
 theorem boundedConstructible_of_derivedCompleteIntegers_of_residueField {X : Scheme.{u}}
     [IsNoetherian X]
     {K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})

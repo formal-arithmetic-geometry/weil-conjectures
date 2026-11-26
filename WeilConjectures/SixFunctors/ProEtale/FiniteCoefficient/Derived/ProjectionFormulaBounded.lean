@@ -62,11 +62,7 @@ lemma torAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek
 
 /-- Let `g : Z ⟶ Y`, let `M₀` and `L₀` be complexes of étale sheaves on `Z` and `Y` whose
 pro-étale realizations `N ≅ ν^* M₀` and `L ≅ ν^* L₀` are respectively of finite Tor amplitude
-and bounded. Then `M₀ ⊗ᴸ Lg^* L₀` is bounded below: its pro-étale realization is
-`N ⊗ᴸ Lg^* L`, which is bounded since `N` has finite Tor amplitude and `Lg^* L` is bounded.
-This is the variant of
-`AlgebraicGeometry.ProEtale.plus_derivedTensor_leftDerivedUpperStar_of_comparison` with the
-roles of the boundedness and of the Tor amplitude exchanged. -/
+and bounded. Then `M₀ ⊗ᴸ Lg^* L₀` is bounded below. -/
 lemma plus_derivedTensor_leftDerivedUpperStar_of_comparison_of_torAmplitudeIn
     [Etale.UpperStarPreservesFlat A] [∀ X : Scheme.{u}, (ν^*(X)[A]).PreservesFlat]
     {Y Z : Scheme.{u}} (g : Z ⟶ Y)

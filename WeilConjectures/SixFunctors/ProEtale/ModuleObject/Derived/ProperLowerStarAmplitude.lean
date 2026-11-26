@@ -21,14 +21,8 @@ into degrees `≤ d` every `Λ'_Z`-module `N` such that `N[0] ≅ Λ'_Z ⊗ᴸ K
 constructible `Λ_Z`-complex `K₀`
 (`ProEtale.CondensedRing.isLE_rightDerivedLowerStar_singleFunctor_of_extendScalars`).
 
-Indeed `Rp_*(N[0]) ≅ Λ'_Y ⊗ Rp_* K₀`. In the truncation triangle
-`τ^{< 1} K₀ ⟶ K₀ ⟶ τ^{≥ 1} K₀ ⟶`, the complex `Λ'_Y ⊗ Rp_* τ^{≥ 1} K₀ ≅ Rp_*(Λ'_Z ⊗ τ^{≥ 1} K₀)`
-vanishes, `Λ'_Z ⊗ -` commuting with truncations and `N[0]` being concentrated in degree `0`,
-while `Rp_* τ^{< 1} K₀` lies in degrees `≤ d` by dévissage
-(`DerivedCategory.isLE_obj_of_isLE_of_homologyProperty`).
-
 This is the passage from the integral to the rational coefficients, and from finite
-subextensions `E` to `ℚ̄_ℓ`, in the proof of blueprint `lemma-uniform-bound-proper-direct-image--1`.
+subextensions `E` to `ℚ̄_ℓ`, for the uniform amplitude bound.
 -/
 
 @[expose] public section

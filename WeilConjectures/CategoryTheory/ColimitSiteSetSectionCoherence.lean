@@ -121,8 +121,6 @@ private theorem sheaf_triangle_id
   simpa [b] using congrArg (fun z ↦ Arrow.mk (z.hom.app (op Y))) eq
 
 
--- The arrow binder in the given family m does not occur in its codomain.
-set_option linter.unusedVariables false in
 /-- Source: Stacks Project, Sites, Tag 0A35.
 
 Unit-compatible section maps satisfy the functor and cocone laws.
@@ -169,7 +167,7 @@ theorem colimit_site_set_section_coherence
                               (P i).toGrothendieck (P t'.right).toGrothendieck).unit.app
                                 G).hom.app (op X))))
     (U : F.obj i)
-    (m : ∀ (t t' : Under i) (b : t ⟶ t'), ((sheafPullback (F.map t.hom).toFunctor (Type u)
+    (m : ∀ (t t' : Under i) (_b : t ⟶ t'), ((sheafPullback (F.map t.hom).toFunctor (Type u)
         (P i).toGrothendieck (P t.right).toGrothendieck).obj G).obj.obj
           (op ((F.map t.hom).toFunctor.obj U)) ⟶ ((sheafPullback (F.map t'.hom).toFunctor (Type u)
         (P i).toGrothendieck (P t'.right).toGrothendieck).obj G).obj.obj

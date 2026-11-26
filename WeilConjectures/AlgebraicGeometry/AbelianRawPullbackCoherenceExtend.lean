@@ -213,7 +213,6 @@ private theorem abelianHigherDirectImageRawPullback_comp {S Y Y' Z : Scheme.{v}}
   exact pullbackHom_comp AddCommGrpCat.{v + 1} a b h _ F F' G φ ψ (p : ℤ) z
 
 
-set_option linter.unusedVariables false in
 /-- Natural transformations with the prescribed raw components obey the colimit cocone law
 (Stacks, Tags 09Z1 and 03CB). -/
 theorem abelianRawPullback_coherent_extend {S : Scheme.{v}}
@@ -223,9 +222,9 @@ theorem abelianRawPullback_coherent_extend {S : Scheme.{v}}
     (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1})
     (φ : ∀ {i j : I} (f : i ⟶ j),
       (((D.map f.op).left)^*[AddCommGrpCat.{v + 1}]).obj (F i) ⟶ F j)
-    (hφid : ∀ i : I, HEq (φ (𝟙 i))
+    (_hφid : ∀ i : I, HEq (φ (𝟙 i))
       ((upperStarId AddCommGrpCat.{v + 1} (D.obj (op i)).left).hom.app (F i)))
-    (hφcomp : ∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), HEq (φ (f ≫ g))
+    (_hφcomp : ∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), HEq (φ (f ≫ g))
       ((upperStarComp AddCommGrpCat.{v + 1} (D.map g.op).left
           (D.map f.op).left).hom.app (F i) ≫
         (((D.map g.op).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ φ g))

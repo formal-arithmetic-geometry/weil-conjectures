@@ -324,8 +324,6 @@ private theorem representative_acyclic (F : A ⥤ B) [F.Additive]
     (((DerivedCategory.homologyFunctorFactors A j).app K.obj).symm ≪≫
       (DerivedCategory.homologyFunctor A j).mapIso e))
 
-set_option linter.unusedVariables false in
-
 /-- The degree-zero second-page identification, with an object placed in degree q.
 This is the shift and ordinary-derived comparison, followed by the inverse of the degree-zero
 augmentation.
@@ -502,7 +500,6 @@ private theorem descent_data (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F
     rfl
   · simp [g, σ, RH, τ, truncProjection, TruncationCouple.projection]
 
-set_option linter.unusedVariables false in
 /-- The canonical acyclic-heart edge is invertible and natural, including in compatible
 morphisms of the derived-functor data. Compatibility is imposed only on shifted single
 objects, by their degree-zero augmentation comparisons, not on the edge to be proved.
@@ -524,7 +521,7 @@ theorem exists_acyclicHeartEdge (F : A ⥤ B) [F.Additive] [PreservesFiniteLimit
           edge M hM q =
         edge L hL q ≫ F.map ((DerivedCategory.homologyFunctor A q).map f.hom)) ∧
       (∀ (K : CochainComplex.Plus A)
-        (hK : ∀ (j : ℤ) (p : ℕ), 0 < p →
+        (_hK : ∀ (j : ℤ) (p : ℕ), 0 < p →
           IsZero ((F.rightDerived p).obj (K.obj.homology j))),
         (∀ n : ℤ,
           imageSubobject ((DerivedCategory.homologyFunctor B n).map

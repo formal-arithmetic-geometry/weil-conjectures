@@ -99,11 +99,6 @@ import WeilConjectures.PoincareDuality.Pod.PodSystemClosedCompatibility
 
 /-! # Internal Hom and evaluation under coefficient-site isomorphisms
 
-Source: Stacks Project, Modules on Sites, Tag 0GMX; the derived and completed
-normalization is the enhancement in the node's sixteen proof steps, supplying
-main-20261015 theorem-poincare-duality-frobenius--2 Steps 1, 2, 4 and 5.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation).
-
 Finite inputs are unbounded. Integral inputs have exactly the recorded
 Hom-constructibility condition. Completed inverse image is constructed from
 all coefficient projections; its comparison with tower pullback uses the
@@ -123,6 +118,14 @@ Rational maps are localized; algebraically closed maps use every common stage.
 * `derivedAutomorphismHomEvaluation`: the four evaluation-defined natural isomorphisms.
 * The `*_laws`, `*_shift`, `*_comp` declarations give all coherent identities.
 * `podHomReductionSquare`: the actual system-level reduction square.
+
+## References
+
+* [Stacks, Tag 0GMX](https://stacks.math.columbia.edu/tag/0GMX)
+* [Stacks, Tag 0H7J](https://stacks.math.columbia.edu/tag/0H7J)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
+* [Stacks, Tag 0038](https://stacks.math.columbia.edu/tag/0038)
+* [Stacks, Tag 03DA](https://stacks.math.columbia.edu/tag/03DA)
 -/
 
 @[expose] public noncomputable section
@@ -148,12 +151,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [∀ y : Y, Invertible (l : Y.residueField y)]
 
 /-- Integral invertibility, naturality, evaluation and every transpose, using
-completed tensor and exactly the stated Hom-constructible domain.
-Source: node proof steps 8--11.
-Proof: the four fields are `podIntegralHomComparison_isIso`,
-`podIntegralHomComparison_naturality`, `podIntegralHomComparison_evaluation` and
-`podIntegralHomComparison_transpose`.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+completed tensor and exactly the stated Hom-constructible domain. -/
 theorem podIntegralHomComparison_laws :
     PodPartialHomCompatibility (podIntegralClosed l E Y) (podIntegralClosed l E X)
       (constructibleIntegralPullback l E g) (podIntegralPairs_pullback l E g)
@@ -172,14 +170,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The rational transpose is the unique additive localization of the integral
 transpose. The equation fixes inverse transposition on every pure tensor in the
-actual localized Hom groups, including its scalar.
-Source: node proof step 14.
-Proof: integral transposition is O_E-linear, so tensor it with E. Its inverse
-localizes too. The unchanged integral objects and the prescribed rational
-operation formulas identify the endpoints. Pure tensors generate each Hom
-module, so the normalization determines both maps uniquely; balancing and
-naturality descend from their integral versions.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+actual localized Hom groups, including its scalar. -/
 theorem podRationalClosed_existsUnique :
     ∃! S : PodPartialClosed (rationalDerivedTensor l E W)
         (constructibleRationalHomPairs l E W) (rationalDerivedInternalHom l E W),
@@ -199,8 +190,7 @@ theorem podRationalClosed_existsUnique :
   intro S' hS'
   exact podRationalClosed_unique l E W S' S hS' hS
 
-/-- The uniquely localized completed closed data.
-Source: node proof step 14 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- The uniquely localized completed closed data. -/
 def podRationalClosed := (podRationalClosed_existsUnique l E W).exists.choose
 end RationalClosed
 
@@ -374,19 +364,14 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [∀ x : X, Invertible (l : X.residueField x)]
   [∀ y : Y, Invertible (l : Y.residueField y)]
 
-/-- Rational pullback preserves the same integral Hom-pair condition.
-Source: node proof step 14.
-Proof: the rational operations keep integral objects. Their object formulas
-identify this condition with podIntegralPairs_pullback.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- Rational pullback preserves the same integral Hom-pair condition. -/
 theorem podRationalPairs_pullback
     (P : (constructibleRationalHomPairs l E Y).FullSubcategory) :
     constructibleRationalHomPairs l E X
       (((rationalDerivedPullback l E g).op.prod (rationalDerivedPullback l E g)).obj P.obj) := by
   exact PodCoefficientDescent.rational_pair_permitted l E g P
 
-/-- The rational comparison uses precisely localized tensor and evaluation.
-Source: node proof step 14 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- The rational comparison uses precisely localized tensor and evaluation. -/
 def podRationalHomComparison :=
   podPartialHomComparison (podRationalClosed l E Y) (podRationalClosed l E X)
     (rationalDerivedPullback l E g) (podRationalPairs_pullback l E g)
@@ -465,13 +450,7 @@ attribute [local irreducible] rationalDerivedPullback rationalDerivedTensor
   rationalDerivedInternalHom constructibleIntegralPullback constructibleIntegralHom
 
 /-- Rational maps are the localized integral maps, and naturality holds for
-arbitrary localized Hom arrows, including sums of pure tensors.
-Source: node proof step 14.
-Proof: localize the integral comparison and its inverse. On pure tensors the
-closed normalization gives the displayed map; additivity and balancing extend
-this to all arrows. Expand each naturality and evaluation equation bilinearly
-and apply the integral equation to each summand. Transposition is linear too.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+arbitrary localized Hom arrows, including sums of pure tensors. -/
 theorem podRationalHomComparison_laws :
     PodPartialHomCompatibility (podRationalClosed l E Y) (podRationalClosed l E X)
       (rationalDerivedPullback l E g) (podRationalPairs_pullback l E g)
@@ -530,9 +509,7 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
 /-- Exact common-stage normalization of inverse transposition, at every finite
 stage containing the entries. The implications only reconcile the recorded
 operation objects with their literal pair representatives, whose equality is
-part of the owning operation definitions; they impose no condition on arrows.
-Source: node proof steps 15--16
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+part of the owning operation definitions; they impose no condition on arrows. -/
 def PodCommonTransposeNormalization
     (S : PodPartialClosed (commonStageDerivedTensor l Ω W)
       (commonStageHomPairs l Ω W) (commonStageDerivedInternalHom l Ω W)) : Prop :=
@@ -553,26 +530,14 @@ def PodCommonTransposeNormalization
               (φ ≫ (commonStageHomComparison l Ω W P F hP).hom)))
 
 /-- Common-stage closed maps are determined by rational transposition at every
-larger finite field, and are natural on the actual Hom-colimit category.
-Source: node proof steps 15--16.
-Proof: put the parameter, pair and arrow over a common finite field. Apply the
-rational inverse transpose, conjugating by the recorded tensor and Hom stage
-comparisons. Finite free coefficient extension preserves the evaluation formula,
-without requiring the first input to be perfect: Hom commutes with the finite
-direct sum of its coefficient copies. Transposition therefore commutes with
-further scalar extension. This proves independence of enlargement and eventual
-equality. The rational inverse maps prove bijectivity; addition and naturality
-can be checked at one common stage. Every arrow has such a representative, so
-the normalization determines the closed data uniquely.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+larger finite field, and are natural on the actual Hom-colimit category. -/
 theorem podCommonClosed_existsUnique :
     ∃! S : PodPartialClosed (commonStageDerivedTensor l Ω W)
       (commonStageHomPairs l Ω W) (commonStageDerivedInternalHom l Ω W),
       PodCommonTransposeNormalization l Ω W S := by
   sorry
 
-/-- The closed data normalized on all common finite-field representatives.
-Source: node proof step 16 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- The closed data normalized on all common finite-field representatives. -/
 def podCommonClosed := (podCommonClosed_existsUnique l Ω W).exists.choose
 end CommonClosed
 
@@ -587,12 +552,7 @@ attribute [local irreducible] commonStageHomPairs
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Isomorphism pullback preserves the permitted common-stage Hom pairs.
-Source: node proof steps 15--16.
-Proof: at the finite compositum use podRationalPairs_pullback, then the
-prescribed pullback/scalar comparison to identify both entries. Hom of the
-resulting pair is isomorphic to the pulled back Hom, so is constructible.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- Isomorphism pullback preserves the permitted common-stage Hom pairs. -/
 theorem podCommonPairs_pullback
     (P : (commonStageHomPairs l Ω Y).FullSubcategory) :
     commonStageHomPairs l Ω X
@@ -609,23 +569,14 @@ theorem podCommonPairs_pullback
   exact h
 
 /-- The common-stage comparison is the transpose of the prescribed common-stage
-tensor/evaluation composite on the actual pair category.
-Source: node proof step 16 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+tensor/evaluation composite on the actual pair category. -/
 def podCommonHomComparison :=
   podPartialHomComparison (podCommonClosed l Ω Y) (podCommonClosed l Ω X)
     (commonStageDerivedPullback l Ω g) (podCommonPairs_pullback l Ω g)
       (canonicalCommonStagePullbackTensor l Ω g)
 
 /-- Invertibility and all displayed identities on the algebraically closed
-coefficient category, naturally for arbitrary common-stage morphisms.
-Source: node proof steps 15--16.
-Proof: put every arrow in a proposed equation over one common finite field.
-The normalized transpose and tensor comparison identify the comparison there
-with the rational evaluation-defined comparison. Its inverse, naturality,
-evaluation and transposition equations hold by podRationalHomComparison_laws.
-Finite free scalar compatibility makes their classes independent of the
-chosen stage and arrow representative, including eventual equality.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+coefficient category, naturally for arbitrary common-stage morphisms. -/
 theorem podCommonHomComparison_laws :
     PodPartialHomCompatibility (podCommonClosed l Ω Y) (podCommonClosed l Ω X)
       (commonStageDerivedPullback l Ω g) (podCommonPairs_pullback l Ω g)
@@ -639,28 +590,14 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
 
 /-- The comparison is an actual map on the unbounded derived category of strict
-systems, defined before finite evaluation or total-limit realization.
-Source: node proof steps 12--13, Stacks 0941 and 0GMX
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+systems, defined before finite evaluation or total-limit realization. -/
 def podSystemHomComparison :=
   coefficientBaseChangeHom (pullbackTensorCalculus l E Y).systemClosed
     (pullbackTensorCalculus l E X).systemClosed (pullbackTensorSequenceDerived l E g)
       (pullbackTensorSystemComparison l E g)
 
 /-- System reindexing preserves internal Hom and the actual system evaluation,
-transposes and internal composition, without inferring equality from evaluations.
-Source: node proof step 12.
-Proof: identify the ordinary sequence inverse image with the integral-comparison
-pullback by their common ring map. Its derived composition and identity
-isomorphisms exhibit inverse reindexing as a quasi-inverse. For every test
-object in the image, the two closed adjunctions, full faithfulness and the
-tensor comparison identify postcomposition with the Hom comparison as a
-bijection. Essential surjectivity extends this to all test objects, so Yoneda
-proves invertibility. Naturality and transposition are the general closed
-adjunction calculations. The recorded tensor associativity and unit identities
-construct a strong monoidal structure with exactly the prescribed tensorator;
-the general evaluation/composition calculation then gives all remaining laws.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+transposes and internal composition, without inferring equality from evaluations. -/
 theorem podSystemHomComparison_laws :
     (∀ M N, IsIso (podSystemHomComparison l E g M N)) ∧
     CoefficientEvaluationCompatible (pullbackTensorCalculus l E Y).systemClosed
@@ -677,8 +614,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
 
 /-- Pullback of the nth completed-ring projection, followed by the uniquely
-constant-section-normalized finite coefficient map.
-Source: node proof step 1 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+constant-section-normalized finite coefficient map. -/
 def podCompletedRingProjection (n : ℕᵒᵖ) :
     (isoSectionwiseInverseImage g RingCat.{u+1}).obj
         (completedIntegralCoefficientSheafUnrestricted l E Y) ⟶
@@ -688,12 +624,7 @@ def podCompletedRingProjection (n : ℕᵒᵖ) :
     isoSectionwiseConstantMap.{u, u} g
       (CommRingCat.of (ULift.{u+1} (finiteCoefficientRing l E (n.unop + 1))))
 
-/-- The projection maps respect every coefficient quotient arrow.
-Source: node proof step 1, Stacks 0H7J.
-Proof: the limit projections respect every quotient. Constant-section maps
-commute with quotient homomorphisms by the sheafification universal property.
-Compose these two naturality equations.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- The projection maps respect every coefficient quotient arrow. -/
 theorem podCompletedRingProjection_naturality {m n : ℕᵒᵖ} (f : m ⟶ n) :
     podCompletedRingProjection l E g m ≫ (integralCoefficientSheafSystem l E X).map f =
       podCompletedRingProjection l E g n := by
@@ -703,8 +634,7 @@ theorem podCompletedRingProjection_naturality {m n : ℕᵒᵖ} (f : m ⟶ n) :
   simp only [Category.assoc, limit.w]
 
 /-- The actual completed coefficient transport, constructed by the limit lift
-of all finite projections. Source: node proof step 1, Stacks 0038
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+of all finite projections. -/
 def podCompletedRingMap :
     (isoSectionwiseInverseImage g RingCat.{u+1}).obj
         (completedIntegralCoefficientSheafUnrestricted l E Y) ⟶
@@ -716,11 +646,7 @@ def podCompletedRingMap :
                (Category.id_comp _).trans (podCompletedRingProjection_naturality l E g f).symm } }
 
 /-- Completed-ring transport is invertible with precisely the prescribed
-projections. Source: node proof step 1, Stacks 0038.
-Proof: the site equivalence preserves the inverse limit. Each finite coefficient
-comparison is invertible. The induced map of limit cones is therefore invertible.
-Its composites with the projections are the defining limit-lift equations.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+projections. -/
 theorem podCompletedRingMap_isIso : IsIso (podCompletedRingMap l E g) := by
   have he : podCompletedRingMap l E g = (isoReductionCompletedMap l E g).hom := by
     apply limit.hom_ext
@@ -730,47 +656,35 @@ theorem podCompletedRingMap_isIso : IsIso (podCompletedRingMap l E g) := by
   rw [he]
   infer_instance
 
-/-- Use the proved invertibility of the actual limit-lift map.
-Source: Stacks 0038 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- Use the proved invertibility of the actual limit-lift map. -/
 instance podCompletedRingMapIsIso : IsIso (podCompletedRingMap l E g) :=
   podCompletedRingMap_isIso l E g
 
 attribute [local irreducible] podCompletedRingMap
 
 /-- Exact inverse image on modules over the completed ring sheaf, sectionwise
-with the transported coefficient action. Source: node proof step 1
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+with the transported coefficient action. -/
 def podCompletedModuleInverseImage : integralTowerModules l E Y ⥤ integralTowerModules l E X :=
   isoSectionwiseModuleInverseImage.{u, u} g (podCompletedRingMap l E g)
 
-/-- Additivity inherited from the published exact sectionwise inverse image.
-Source: Stacks 03DA (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- Additivity inherited from the published exact sectionwise inverse image. -/
 instance podCompletedModuleAdditive : (podCompletedModuleInverseImage l E g).Additive :=
   isoSectionwiseModuleInverseImage_additive.{u, u} g (podCompletedRingMap l E g)
 
-/-- Left exactness inherited from the published inverse image.
-Source: Stacks 03DA (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- Left exactness inherited from the published inverse image. -/
 instance podCompletedModuleLimits : PreservesFiniteLimits (podCompletedModuleInverseImage l E g) :=
   isoSectionwiseModuleInverseImage_limits.{u, u} g (podCompletedRingMap l E g)
 
-/-- Right exactness inherited from the published inverse image.
-Source: Stacks 03DA (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- Right exactness inherited from the published inverse image. -/
 instance podCompletedModuleColimits :
     PreservesFiniteColimits (podCompletedModuleInverseImage l E g) :=
   isoSectionwiseModuleInverseImage_colimits.{u, u} g (podCompletedRingMap l E g)
 
 /-- The unbounded derived exact inverse-image equivalence, with the standard
-termwise localization and its standard shift comparison.
-Source: node proof steps 1--2 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+termwise localization and its standard shift comparison. -/
 def podCompletedDerivedInverseImage := (podCompletedModuleInverseImage l E g).mapDerivedCategory
 
-/-- Sectionwise completed inverse image is an equivalence.
-Source: node proof steps 1--2.
-Proof: reindex with the inverse scheme isomorphism and inverse coefficient map.
-Both composites are identity on every coefficient projection, hence on the
-completed ring and its actions. The identity-on-sections maps give the natural
-unit and counit. Deriving preserves their inverse identities.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- Sectionwise completed inverse image is an equivalence. -/
 theorem podCompletedInverseImage_equivalence :
     (podCompletedModuleInverseImage l E g).IsEquivalence ∧
       (podCompletedDerivedInverseImage l E g).IsEquivalence := by
@@ -782,20 +696,7 @@ theorem podCompletedInverseImage_equivalence :
     u + 2, u + 2} (podCompletedModuleInverseImage l E g)
 
 /-- Restriction and reindexing agree by the inverse-image unit on every local
-section. This specifies the ordinary comparison before passing to derived maps.
-Source: node proof steps 1 and 8.
-Proof: after scalar restriction the underlying sheaf of a finite module is
-unchanged. The canonical isomorphism from intrinsic inverse image to sectionwise
-reindexing sends its adjunction-unit section to restriction along the counit
-of postcomposition/base-change. The completed ring map commutes with the finite
-projection, so the same section map is linear for the completed action.
-The unit determines the comparison uniquely: the finite inverse image is an
-equivalence, so its adjunction unit is invertible. Cancel its section maps to
-compare transformations on base-changed objects. Base change is itself an
-equivalence of sites, so faithful precomposition extends this equality to every
-object. The left-adjoint uniqueness comparison supplies the normalized map,
-and the scalar-restriction square supplies its completed scalar action.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+section. This specifies the ordinary comparison before passing to derived maps. -/
 theorem podFiniteRestrictionOrdinary_existsUnique (n : ℕ) :
     ∃! e : sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) g ⋙
         scalarReductionRestriction l E X n ≅
@@ -875,14 +776,12 @@ theorem podFiniteRestrictionOrdinary_existsUnique (n : ℕ) :
   funext V
   exact hlevel V.unop
 
-/-- The uniquely section-normalized ordinary coefficient restriction comparison.
-Source: node proof step 8 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- The uniquely section-normalized ordinary coefficient restriction comparison. -/
 def podFiniteRestrictionOrdinary (n : ℕ) :=
   (podFiniteRestrictionOrdinary_existsUnique l E g n).exists.choose
 
 /-- Derived finite restriction/reindexing comparison induced from that same
-ordinary section map. Source: node proof step 8
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+ordinary section map. -/
 def podFiniteRestriction (n : ℕ) :
     finiteDerivedPullback l E n g ⋙ coefficientFiniteDerivedRestriction l E X n ≅
       coefficientFiniteDerivedRestriction l E Y n ⋙ podCompletedDerivedInverseImage l E g :=
@@ -896,16 +795,14 @@ def podFiniteRestriction (n : ℕ) :
       (Functor.mapDerivedCategoryCompIso (scalarReductionRestriction l E Y n)
         (podCompletedModuleInverseImage l E g)).symm
 
-/-- The actual ordinary limit projection, with the restriction/evaluation identity.
-Source: Stacks 0941 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- The actual ordinary limit projection, with the restriction/evaluation identity. -/
 def podOrdinaryProjection (W : Scheme.{u}) (n : ℕ) :
     pullbackTensorOrdinaryLimit l E W ⟶
       coefficientSequenceEvaluation l E W n ⋙ scalarReductionRestriction l E W n :=
   Functor.whiskerLeft (coefficientSequenceRestriction l E W) (lim.π (op n)) ≫
     eqToHom (coefficientSequenceRestriction_evaluation l E W n)
 
-/-- The unit-normalized ordinary system/finite pullback comparison.
-Source: node proof step 12 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- The unit-normalized ordinary system/finite pullback comparison. -/
 def podSystemEvaluationOrdinary (n : ℕ) :
     pullbackTensorSequenceInverse l E g ⋙ coefficientSequenceEvaluation l E X n ≅
       coefficientSequenceEvaluation l E Y n ⋙

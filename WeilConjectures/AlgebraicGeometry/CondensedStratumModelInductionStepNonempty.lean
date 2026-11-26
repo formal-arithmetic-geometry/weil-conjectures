@@ -21,7 +21,6 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-set_option linter.style.haveILetI false
 
 /-- Nonempty-support branch of the finite-coefficient support induction step. -/
 theorem exists_finiteCoefficient_model_on_closed_support_step_nonempty
@@ -58,8 +57,8 @@ theorem exists_finiteCoefficient_model_on_closed_support_step_nonempty
   obtain ⟨U, j, Z, k, hj, hk, hcover, hdisj, data⟩ :=
     exists_nonempty_support_open_closed_models T ℓ M S hS D hD Y i hYi
   obtain ⟨EU, PU, EZ, PZ, hPU, hPZ, eU, eZ⟩ := data
-  letI : IsOpenImmersion j := hj
-  letI : IsClosedImmersion k := hk
+  let : IsOpenImmersion j := hj
+  let : IsClosedImmersion k := hk
   exact glue_nonempty_support_open_closed_models T ℓ M i j k hcover hdisj
     EU PU EZ PZ hPU hPZ eU eZ
 

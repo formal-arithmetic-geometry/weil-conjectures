@@ -96,9 +96,6 @@ import all WeilConjectures.AlgebraicGeometry.Completed.CompletedRlimFunctor
 
 @[expose] public noncomputable section
 set_option autoImplicit false
--- Dependent scalar-extension proofs should not be replayed by tactic linting.
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
@@ -156,7 +153,6 @@ theorem completedTowerEvaluation_kinjective (T : Scheme.{t})
         (.up ℤ)).obj J) := by
   exact evaluationMapKInjective _ J (Opposite.op n)
 
-set_option linter.defProp false in
 /-- The exact K-injective normalization of tower direct-image evaluation. -/
 def AdicCoefficientDatum.IsTowerPushEvaluation (n : ℕ)
     (α : d.towerPush f ⋙
@@ -778,7 +774,6 @@ variable {B C : Type*} [Category B] [Abelian B] [Category C] [Abelian C]
 
 end GenericComparisonPredicate
 
-set_option linter.defProp false in
 /-- The strict quotient-unit normalized representative formula for the completed reduction
 pullback comparison. The ordinary comparison agrees with it by `ordinaryReduction_eq_stratum`. -/
 def IsCompletedReductionPullbackComparison

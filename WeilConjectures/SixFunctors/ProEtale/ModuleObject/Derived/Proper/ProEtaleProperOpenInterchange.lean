@@ -167,13 +167,8 @@ public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
 /-!
 # Proper direct image and open extension by zero
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-sf-comp-composition,
-proposition-composition-base-change-rf-shriek--1, clauses (1)--(3); Stacks Tag 09AH
-(blueprint: proposition-composition-base-change-rf-shriek--1).
-
-The auxiliary maps are constructed from the existing coefficient pullback comparisons and
-derived adjunctions. The normalization equation uses the two open units, so it expresses
-identity on restriction without choosing an unnormalized isomorphism.
+The proper direct image `Rp_*` and open extension by zero `j_!` interchange along the
+compactification square of a proper morphism followed by an open immersion.
 
 ## Main definitions
 
@@ -184,6 +179,16 @@ identity on restriction without choosing an unnormalized isomorphism.
 ## Main statement
 
 * `properOpenInterchange`: the geometric equality, unique arrow, and localizing isomorphism.
+
+## Implementation details
+
+The auxiliary maps are constructed from the existing coefficient pullback comparisons and
+derived adjunctions. The normalization equation uses the two open units, so it expresses
+identity on restriction without choosing an unnormalized isomorphism.
+
+## References
+
+* [Stacks, Tag 09AH](https://stacks.math.columbia.edu/tag/09AH)
 -/
 
 @[expose] public section
@@ -324,9 +329,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   {X Y Ybar : Scheme.{u}} (p : X ⟶ Y) (i : Y ⟶ Ybar)
   [IsOpenImmersion i] (c : Compactification.BoundaryCompactification (p ≫ i))
 
-/-- The canonical pullback comparison of the compactification square, applied termwise.
-Source: blueprint proposition-composition-base-change-rf-shriek--1, proof (2), square restriction
-(blueprint: proposition-composition-base-change-rf-shriek--1). -/
+/-- The canonical pullback comparison of the compactification square, applied termwise. -/
 noncomputable def compositionInterchangePullback :
     (upperStar Λ i).mapDerivedCategory ⋙ (upperStar Λ p).mapDerivedCategory ≅
       (upperStar Λ c.obj.obj.g).mapDerivedCategory ⋙
@@ -339,9 +342,7 @@ noncomputable def compositionInterchangePullback :
     (Functor.mapDerivedCategoryCompIso (upperStar Λ c.obj.obj.g) (upperStar Λ c.obj.obj.i)).symm
 
 /-- The restriction comparison `i^* Rr_* B → Rp_* j'^* B`, the adjoint mate of the
-canonical pullback square. This construction is defined before proving the square cartesian.
-Source: blueprint proposition-composition-base-change-rf-shriek--1, proof (2), Hom calculation
-(blueprint: proposition-composition-base-change-rf-shriek--1). -/
+canonical pullback square. This construction is defined before proving the square cartesian. -/
 noncomputable def compositionInterchangeRestriction
     (B : DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology c.obj.obj.Z) Ab.{u + 1})
       (condensedRingObj Λ c.obj.obj.Z))) :
@@ -358,9 +359,7 @@ noncomputable def compositionInterchangeRestriction
 
 /-- An interchange arrow restricts to the identity precisely when its open adjoint,
 followed by the canonical restriction comparison, is `Rp_*` of the source open unit.
-Both units are the units of the existing exact open derived adjunctions.
-Source: blueprint proposition-composition-base-change-rf-shriek--1, clause (2), proof (2)
-(blueprint: proposition-composition-base-change-rf-shriek--1). -/
+Both units are the units of the existing exact open derived adjunctions. -/
 def compositionInterchangeIsNormalized
     (A : DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X)))
@@ -677,30 +676,7 @@ private theorem properOpenInterchange_localizing
 
 /-- Proper/open interchange in the standing scheme setting, for all admissible coefficients.
 The coefficient disjunction lists the finite discrete rings killed by an ell power, Z_ell,
-Q_ell, integers and fields of finite subextensions, and the finite-subextension condensed Qbar.
-Source: blueprint main-20261015, proposition-composition-base-change-rf-shriek--1, clauses (1)--(3)
-(blueprint: proposition-composition-base-change-rf-shriek--1).
-
-Proof plan:
-1. In V = r^{-1}(Y), X is open and dense. Its map to V is proper, since X is proper
-   over Y and V is separated over Y (proper base change and proper-to-separated).
-   Its image is closed, hence all of V. The surjective open immersion identifies the
-   open subschemes and the commuting compactification triangle identifies r with p.
-2. Cartesian coefficients make pullback exact. Apply the open base-change isomorphism
-   of proposition-extension-zero-restriction-closed-subscheme termwise and use
-   exact-functor-derived- factorization. Termwise-adjunction-homotopy and adjunction-localization
-   descend the open adjunctions, with invertible open units. Combine these with module-derived-
-   pushpull. The natural Hom calculation identifies i^* Rr_* B with Rp_* j'^* B.
-   For B = j'_! A, both open units are invertible, so the identity under this
-   identification determines exactly one arrow. This is the displayed normalization.
-   Uniqueness also gives naturality and compatibility with shifts.
-3. For A in Dctf, proper-image-localizing-open puts j'_! A in Dctf. Proper base change
-   (finite, integral or rational as appropriate) identifies restriction to the closed
-   complement with pushforward from an empty support, hence zero. Open-closed-detection
-   makes the cone zero. The finite-subextension Qbar convention is essential here.
-   Compactification-coherence-single gives exactness and coproduct preservation of the
-   two functors; determination-localizing propagates invertibility from Dctf to Loc(Dctf).
--/
+Q_ell, integers and fields of finite subextensions, and the finite-subextension condensed Qbar. -/
 theorem properOpenInterchange
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

@@ -48,8 +48,6 @@ private theorem compose_comparison_squares
   rw [← Category.assoc, ht, Category.assoc, ← T.map_comp, ha, T.map_comp,
     Category.assoc]
 
--- The unchanged statement names its existential coherence witness without using it.
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The completed affine comparison is the section map of an algebraized adjunction.
@@ -88,7 +86,7 @@ theorem formalComparison_completed_affine_adjunction_model
         (adjR : Scheme.Modules.tensorPullback p ⊣ Scheme.Modules.pushforward p)
         (A₀ : CoherentModules (Spec (CommRingCat.of R))) (F₀ : CoherentModules Z)
         (b : (Scheme.Modules.tensorPullback p).obj A₀.obj ≅ F₀.obj)
-        (hD : RingedSpace.IsCoherent (Spec (CommRingCat.of R)).toRingedSpace
+        (_hD : RingedSpace.IsCoherent (Spec (CommRingCat.of R)).toRingedSpace
           ((Scheme.Modules.pushforward p).obj F₀.obj)),
         IsProper p ∧ IsIso (pullback.snd p (Scheme.Opens.ι Q.support.compl)) ∧
         ∃ eA₀ : limit (G.obj ⋙ SheafOfModules.evaluation Y.ringCatSheaf (op U.1)) ≅

@@ -170,6 +170,7 @@ def completedAdicScalar (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
     adicConstantRing T A ⟶ completedAdicCommRing T d :=
   (completedAdicScalar_exists T d).exists.choose
 
+-- Untyped proof-valued def: its type is inferred and downstream code unfolds it.
 set_option linter.defProp false in
 /-- The scalar-extension witness with its object and morphism tensor formulas. -/
 def completedAdicScalarExtensionData (T : Scheme.{t}) (d : AdicCoefficientDatum A) :=

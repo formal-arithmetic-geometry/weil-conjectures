@@ -20,8 +20,9 @@ import Mathlib.Topology.Algebra.OpenSubgroup
 
 /-! # Simultaneous continuous charts for embedded sheet lattices
 
-Source: blueprint, stratified lattice trace proof, Local computation, paragraph 2.
-(blueprint: lem-sfb-continuous-finite-etale-lattice-sheet-charts)
+## References
+
+* Bhatt--Scholze, Section 6.8
 -/
 
 @[expose] public noncomputable section
@@ -307,29 +308,7 @@ private theorem charts_of_cover
 
 /-- A finite family of sheet lattices becomes a family of fixed embedded full
 algebraic lattices in one rational continuous-function chart. This statement
-involves no trace morphism and no image of a sum.
-
-Source: blueprint, stratified lattice trace proof, Local computation, paragraph 2;
-Bhatt--Scholze, Section 6.8.
-(blueprint: lem-sfb-continuous-finite-etale-lattice-sheet-charts)
-
-Proof. Use continuousFiniteEtaleLattice_sheet_matrices to obtain a common
-rational frame and continuous invertible matrices for the sheet embeddings.
-The integral subring contains the open unit ball, hence is open. At each point,
-the matrix-coset neighbourhood theorem gives a neighbourhood on which each
-sheet matrix has constant integral right coset; intersect the finitely many
-neighbourhoods. For the matrix at the point define L_j by inverse-coordinate
-integrality. Multiplication by the matrix identifies A^r with L_j, and its
-columns give both the integral basis and a rational basis. Integral change
-matrices and their inverses preserve A^r, so equality of cosets identifies the
-variable coordinate test with membership in this fixed lattice. Continuous
-functions into a submodule are exactly the continuous vectors whose pointwise
-values belong to it, by the induced topology. Apply this on every pro-etale
-object in the open neighbourhood. The encoded actual sheet range is the range
-definition's explicit formula. Form the open cover by these neighbourhoods,
-weaken it to a pro-etale cover, and bind it with the matrix-coordinate cover.
-The construction includes rank zero and empty schemes. No object is defined
-by choosing a witness of an unproved existence statement. -/
+involves no trace morphism and no image of a sum. -/
 theorem continuousFiniteEtaleLattice_sheet_charts
     (l : ℕ) [Fact l.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

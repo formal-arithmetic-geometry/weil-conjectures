@@ -17,10 +17,6 @@ map with the degree-zero cone inclusion.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.setOption false
-set_option linter.unusedSimpArgs false
-set_option linter.unusedTactic false
-set_option linter.unnecessarySeqFocus false
 
 universe u
 
@@ -75,7 +71,7 @@ private theorem directImage_constantInterchange_factors
   have hG := Functor.mapDerivedCategoryCompIso_hom_app_factors
     (constant l E Y) (pull l E f) P
   dsimp [constantInterchange]
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
+  simp only [Category.assoc]
   rw [hG, Functor.mapDerivedCategoryNatIso_fac, ← hF]
   simp only [Iso.hom_inv_id_app_assoc, Category.assoc]
   simp only [NatIso.mapHomologicalComplex]

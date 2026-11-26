@@ -288,9 +288,6 @@ private theorem scalarGraph_naturality
       (L.map g).hom.app V ((q.inv.app T).hom.app V x) :=
   congrArg (fun z ↦ z.hom.app V x) (q.inv.naturality g)
 
--- The comparison is normalized by simp, then identity maps with transported endpoints
--- are rewritten explicitly. This intentionally uses the simplified goal in the next step.
-set_option linter.flexible false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The natural set comparisons for inverse image respect scalar multiplication on
 arbitrary generalized sections (Stacks, Tags 03D2, 03D3 and 04JC). -/

@@ -11,7 +11,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coeffici
 
 This module packages the comparison data used by the two strict substeps of the
 signed representative argument.
-(blueprint: lem-sfb-coefficient-scalar-tensor-representative-internal)
 -/
 
 @[expose] public noncomputable section

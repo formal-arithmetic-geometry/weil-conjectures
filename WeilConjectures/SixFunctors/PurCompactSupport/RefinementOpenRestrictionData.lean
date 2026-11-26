@@ -7,7 +7,12 @@ module
 
 public import WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSupportCoefficientComparison
 
-/-! A natural transformation with the specified refinement-restriction components. -/
+/-! A natural transformation with the specified refinement-restriction components.
+
+## References
+
+* Stacks Project, Tags `0F7B`, `0F7I`
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -47,14 +52,8 @@ private theorem exists_counitRestriction_of_eq
     ∃ θ : (K ⋙ P) ⋙ G ⟶ K ⋙ F, ∀ M, θ.app M = φ M := by
   exact ⟨Functor.whiskerLeft K (counitRestriction ε F α), fun M ↦ (h M).symm⟩
 
-/--
-Source: Stacks 0F7B and 0F7I, the restriction-to-open and proper-base-change
-construction.  The componentwise proper restriction maps are natural in the
-unbounded derived module category.  This is the component-construction part of
-`lem-sf-refinement-open-restriction`; invertibility and shift compatibility are
-recorded separately.
-(blueprint: lem-sf-refinement-open-restriction-data).
--/
+/-- The componentwise proper restriction maps are natural in the
+unbounded derived module category. -/
 theorem refinementRestriction_data :
     ∃ θ : ((openExtension R c.i).mapDerivedCategory ⋙ push R r.hom) ⋙ pull R d.i ⟶
         (openExtension R c.i).mapDerivedCategory ⋙ pull R c.i,

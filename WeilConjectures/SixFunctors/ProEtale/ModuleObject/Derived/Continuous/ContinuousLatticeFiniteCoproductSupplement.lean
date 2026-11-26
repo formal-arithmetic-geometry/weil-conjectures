@@ -156,8 +156,10 @@ public import WeilConjectures.AlgebraicGeometry.ContinuousLatticeFiniteCoproduct
 
 /-! # Integral lattices on finite disjoint unions
 
-Source: Stacks Project, Tag 04TR, sheaf gluing; Bhatt--Scholze, Lemma 6.8.13.
-(blueprint: lem-weil-pbc-continuous-lattice-finite-coproduct)
+## References
+
+* Stacks Project, Tag 04TR, sheaf gluing
+* Bhatt--Scholze, Lemma 6.8.13
 -/
 
 -- After pruning, this module only keeps private declarations.

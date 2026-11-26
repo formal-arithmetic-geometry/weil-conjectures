@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Compactification.DenseRefinementMorphis
 /-!
 # Pasting compact-support exchange with dense refinements
 
-Source: blueprint proposition-composition-base-change-rf-shriek--4, proof steps 4--7.
+Pasting of the compact-support exchange with dense refinements of compactifications.
 -/
 
 @[expose] public section

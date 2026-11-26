@@ -20,8 +20,6 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
-set_option linter.unusedVariables false
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
@@ -35,9 +33,9 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- The two coefficient functors of the actual pro-etale projection mate are exact,
 and its natural transformation respects shifts and is invertible at the ring. -/
 theorem proEtaleProjectionMateExact :
-    ∃ (sF : ((Functor.curryObj a.tensor).obj
+    ∃ (_sF : ((Functor.curryObj a.tensor).obj
         ((proEtaleRingDerivedDirectImage f R S c).obj E)).CommShift ℤ)
-      (sG : (proEtaleRingDerivedPullback f R S c ⋙
+      (_sG : (proEtaleRingDerivedPullback f R S c ⋙
         (Functor.curryObj b.tensor).obj E ⋙
           proEtaleRingDerivedDirectImage f R S c).CommShift ℤ),
       ((Functor.curryObj a.tensor).obj

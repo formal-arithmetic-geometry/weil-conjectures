@@ -94,12 +94,7 @@ theorem isColimit_lowerStar_mapCocone {T Y : Scheme.{u}} (g : T ⟶ Y) [QuasiCom
     exact ht
 
 /-- **A filtered colimit of injective sheaves is acyclic for the pushforward along a qcqs
-morphism**: by `AlgebraicGeometry.ProEtale.rightAcyclic_lowerStar_of_isZero_rightDerived` it
-suffices that its higher cohomology over `W ×_Y T` vanishes for `W` affine, and the restriction to
-the quasi-compact quasi-separated `W ×_Y T` is a filtered colimit of injective sheaves, which has
-no higher cohomology
-(`CategoryTheory.Sheaf.subsingleton_H_succ_of_isColimit_of_injective`).
--/
+morphism**. -/
 theorem rightAcyclic_lowerStar_of_isColimit_of_injective {T Y : Scheme.{u}} (g : T ⟶ Y)
     [QuasiCompact g] [QuasiSeparated g] {K : Type (u + 1)} [SmallCategory K] [IsFiltered K]
     {I : K ⥤ Sheaf (ProEt.topology T) AddCommGrpCat.{u + 1}} [∀ k, Injective (I.obj k)]

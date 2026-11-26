@@ -31,7 +31,6 @@ attribute [local irreducible] CategoryTheory.Functor.leftDerivedFunctorIsoMapDer
   CategoryTheory.Functor.mapDerivedCategory
 
 section HomFactorization
-set_option linter.unusedSectionVars false
 universe v w uI vI
 open CategoryTheory.Pretriangulated Preadditive
 namespace CategoryTheory
@@ -41,6 +40,8 @@ variable {D : Type w} [Category.{v} D] [HasZeroObject D] [HasShift D ℤ]
 
 private def factors (K : D) : Prop :=
   ∀ f : K ⟶ c.pt, ∃ (i : I) (g : K ⟶ N.obj i), f = g ≫ c.ι.app i
+omit [HasZeroObject D] [HasShift D ℤ] [Preadditive D] [∀ n : ℤ, (shiftFunctor D n).Additive]
+  [Pretriangulated D] [IsFiltered I] in
 private lemma factors_iso {K L : D} (e : K ≅ L) (h : factors c K) : factors c L := by
   intro f
   obtain ⟨i, g, hg⟩ := h (e.hom ≫ f)
@@ -50,6 +51,7 @@ private lemma factors_iso {K L : D} (e : K ≅ L) (h : factors c K) : factors c 
 private def shiftFactors : ObjectProperty D :=
   fun K ↦ ∀ n : ℤ, factors c (K⟦n⟧)
 
+omit [HasZeroObject D] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D] in
 private lemma shiftFactors_of_hom_colimit
     {A : Type*} [Category A] {J : Type v} [SmallCategory J] [IsFiltered J]
     (N : J ⥤ A) [HasColimit N] (Q : A ⥤ D) (S : D)
@@ -77,6 +79,8 @@ private lemma shiftFactors_of_hom_colimit
   apply (adj.homEquiv S _).injective
   rw [adj.homEquiv_naturality_right, Equiv.apply_symm_apply]
   exact he.symm
+omit [HasZeroObject D] [HasShift D ℤ] [Preadditive D] [∀ n : ℤ, (shiftFunctor D n).Additive]
+  [Pretriangulated D] in
 private lemma factors_of_colimit_cocone
     {A : Type*} [Category A] {J : Type*} [Category J] [IsFiltered J]
     (N : J ⥤ A) [HasColimit N] (Q : A ⥤ D) (c : Cocone N) (hc : IsColimit c) (K : D)

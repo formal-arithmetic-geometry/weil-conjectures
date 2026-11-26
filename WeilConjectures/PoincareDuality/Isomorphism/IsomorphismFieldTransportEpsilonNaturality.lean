@@ -10,7 +10,17 @@ import WeilConjectures.CategoryTheory.StageSystem.Functor
 import WeilConjectures.CategoryTheory.StageSystem.StageSystemFunctorDescent
 import WeilConjectures.SixFunctors.Common.CommonStagePullbackNormalizedDescent
 
-/-! # A finite-stage compatibility for normalized isomorphism transport -/
+/-! # A finite-stage compatibility for normalized isomorphism transport
+
+The own-stage rational counits of pullback along an isomorphism are natural on common-stage
+arrows.
+
+## Implementation details
+
+The scalar inverse laws make the finite-stage counits a morphism of stage-system morphisms to the
+identity; its descent to the common stage has the prescribed components, so any family with these
+components is natural.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -57,24 +67,9 @@ private theorem inverse_square_transport
   rw [hn, reassoc_of% (h K), ← i.hom.naturality_assoc]
   simp
 
-/-- Own-stage epsilon components are natural on common-stage quotient arrows.
-Source: current blueprint sec-six-functors/sk-rem-sf-pf-done/
-lem-fix-weil-operations.proof.md, inverse automorphism paragraph;
-step 2 of the common-stage transport argument.
-(blueprint: lem-pod-isomorphism-field-transport-epsilon-naturality).
-
-Proof: represent f over one finite field L containing both endpoint fields. The
-published representative formula for each of the two pullbacks conjugates the
-finite-stage image by the rational scalar comparisons. The scalar inverse law hS
-at each endpoint rewrites its own-stage epsilon after passage to L as the composite
-of these two scalar comparisons and epsilon at L. Substitute these two equations
-in the desired square. Finite-stage naturality of (S L).rationalEpsilon at the
-representative of f identifies the middle terms; the adjacent inverse scalar
-comparisons cancel. Include the resulting equality from L into the quotient.
-The common-stage functor's representative independence makes it an equality for
-f itself. The heterogeneous component formula he merely transports the endpoints
-along the published object formulas, so the same equation holds for the supplied
-e. No inverse family, coherent shift, or triangle preservation is assumed. -/
+/-- Under the rational scalar laws `hS`, any family `e` of isomorphisms whose components are the
+inclusions of the own-stage rational counits `(S P.stage).rationalEpsilon` is natural on
+common-stage arrows. -/
 theorem isomorphismFieldTransportEpsilonNaturality
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

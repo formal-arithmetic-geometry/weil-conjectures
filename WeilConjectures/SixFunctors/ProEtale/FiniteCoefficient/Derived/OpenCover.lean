@@ -169,15 +169,7 @@ variable {X : Scheme.{u}} {ι : Type*} (U : ι → X.Opens) (hU : ∀ x, ∃ i, 
 include hU in
 /-- **Étale origin is local.** Let `R` be a complex of pro-étale sheaves on `X` such that
 `Rν_* R` is bounded below, and whose restriction to every member of an open cover of `X` is of
-the form `ν^* N`. Then the counit `ν^* Rν_* R ⟶ R` is an isomorphism, so `R` is of étale origin.
-
-Let `C` be the cone of the counit. Since the unit is invertible on bounded below complexes,
-`Rν_*` of the counit is an isomorphism, so `Rν_* C = 0`. On a member `U` of the cover, maps
-from complexes of étale origin to `C|_U` vanish
-(`AlgebraicGeometry.ProEtale.eq_zero_of_isZero_rightDerivedComparisonLowerStar`). As `R|_U`
-and `(ν^* Rν_* R)|_U` are of étale origin, the triangle `(ν^* Rν_* R)|_U ⟶ R|_U ⟶ C|_U ⟶`
-then shows that `C|_U = 0`, and `C = 0` by
-`AlgebraicGeometry.ProEtale.isZero_of_forall_isZero_mapDerivedCategory_upperStar`. -/
+the form `ν^* N`. Then the counit `ν^* Rν_* R ⟶ R` is an isomorphism, so `R` is of étale origin. -/
 theorem isIso_derivedComparisonAdjunction_counit_app_of_openCover
     (R : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
     (hR : _root_.DerivedCategory.TStructure.t.plus ((R(ν_*(X)[A])).obj R))

@@ -80,13 +80,10 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 /-! ### For a compactification -/
 
 include ℓ k in
-/-- **The base change theorem for the compactly supported direct image attached to a
-compactification** of bounded constructible `E`-sheaves: for a compactification
-`c` of `f`, the compact-support base-change morphism `Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c.ofIsPullback
-sq}` is an isomorphism of functors `Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y')⟦E̲⟧`: in the defining pasting, the
-direct-image exchange is an isomorphism by proper base change for the proper structure morphism `p`
-of `c`, and the extension-by-zero exchange is an isomorphism by base change for extension by zero.
--/
+/-- **Base change for the compactly supported direct image attached to a compactification** of
+bounded constructible `E`-sheaves: for a compactification `c` of `f`, the compact-support
+base-change morphism `Rf_!^c ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!^{c.ofIsPullback sq}` is an isomorphism of
+functors `Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y')⟦E̲⟧`. -/
 theorem isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
     (c : Compactification f.left) (sq : IsPullback g' f' f g) :
     IsIso (ContinuousMapRingObj.boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
@@ -118,17 +115,7 @@ theorem isIso_boundedConstructibleLowerShriekOfCompactificationBaseChangePasting
 
 /-- **The base change theorem for the compactly supported direct image** of bounded
 constructible `E`-sheaves, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`: for a cartesian square of
-schemes
-
-```
-X' --g'--> X
-|          |
-f'         f
-v          v
-Y' --g---> Y
-```
-
-the compact-support base-change morphism `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` is an
+schemes, the compact-support base-change morphism `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` is an
 isomorphism of functors `Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y')⟦E̲⟧`, where `Rf_!` and `Rf'_!` are the lower
 shrieks `boundedConstructibleLowerShriek`. -/
 theorem isIso_boundedConstructibleLowerShriekBaseChange (sq : IsPullback g' f' f g) :

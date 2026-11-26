@@ -69,11 +69,13 @@ public import WeilConjectures.AlgebraicGeometry.ProperBaseChange.LatticeSheafBas
 
 /-! # Section-action module encodings in the scheme universe
 
-Source: Stacks Project, Tag 00YV; Bhatt--Scholze, Section 6.8.
-(blueprint: def-sfb-continuous-coefficient-module-equivalence-universe)
-
 These are the specified encodings formerly defined in IntegralScalarConstructibleImage.
 They are separated here so ordinary module and scalar comparison lemmas can use them.
+
+## References
+
+* Bhatt--Scholze, Section 6.8
+* Stacks Project, Tag 00YV
 -/
 
 @[expose] public noncomputable section
@@ -87,9 +89,7 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- The section-action encoding, using the canonical continuous chart in arbitrary universe.
-Source: Stacks Project, Tag 00YV; Bhatt--Scholze, Section 6.8.
-(blueprint: def-sfb-continuous-coefficient-module-equivalence-universe). -/
+/-- The section-action encoding, using the canonical continuous chart in arbitrary universe. -/
 def continuousRingModuleEquivalenceUniverse (X : Scheme.{u}) (T : Type u)
     [CommRing T] [TopologicalSpace T] [IsTopologicalRing T] [TotallyDisconnectedSpace T] :
     Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -109,26 +109,20 @@ def continuousRingModuleEquivalenceUniverse (X : Scheme.{u}) (T : Type u)
     ((InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u} J A).trans
       (ringModuleEquivalenceOfIso X (reconstructedRingIso X R).symm))
 
-/-- The two section-ring presentations agree by the identity on continuous functions.
-Source: Stacks Project, Tag 00YV; Bhatt--Scholze, Section 6.8.
-(blueprint: def-sfb-continuous-coefficient-module-equivalence-universe). -/
+/-- The two section-ring presentations agree by the identity on continuous functions. -/
 def continuousSectionRingIso (X : Scheme.{u}) (T : Type u)
     [CommRing T] [TopologicalSpace T] [IsTopologicalRing T] :
     latticeModuleRing X T ≅ continuousCoefficientRingSheaf X T :=
   ObjectProperty.isoMk _
     (NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ rfl))
 
-/-- The same encoding in the existing commutative coefficient-sheaf coordinates.
-Source: Stacks Project, Tag 00YV; Bhatt--Scholze, Section 6.8.
-(blueprint: def-sfb-continuous-coefficient-module-equivalence-universe). -/
+/-- The same encoding in the existing commutative coefficient-sheaf coordinates. -/
 def continuousLatticeModuleEquivalenceUniverse (X : Scheme.{u}) (T : Type u)
     [CommRing T] [TopologicalSpace T] [IsTopologicalRing T] [TotallyDisconnectedSpace T] :=
   (continuousRingModuleEquivalenceUniverse X T).trans
     (ringModuleEquivalenceOfIso X (continuousSectionRingIso X T))
 
-/-- The field encoding has the specified continuous section action.
-Source: Bhatt--Scholze, Section 6.8; Stacks Project, Tag 00YV.
-(blueprint: def-sfb-continuous-coefficient-module-equivalence-universe). -/
+/-- The field encoding has the specified continuous section action. -/
 def continuousFieldModuleEquivalenceUniverse (l : ℕ) [Fact l.Prime]
     (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E]
     (X : Scheme.{u}) :=

@@ -15,7 +15,6 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Monoida
 open CategoryTheory.Pretriangulated.Opposite Opposite
 namespace AlgebraicGeometry.Etale
 
-set_option linter.style.haveILetI false in
 /-- The normalized shifts and exact functor structures needed by the étale Hom comparison.
 See Stacks Project, Tags 08JC and 08J9. -/
 theorem etaleHomComparison_reversedExact_shiftData
@@ -42,7 +41,7 @@ theorem etaleHomComparison_reversedExact_shiftData
           (sB.commShiftIso n).hom.app (op ((scalarExtension φ X).obj K))) ∧
       (EtaleHomLeft X φ M).IsTriangulated ∧
       (EtaleHomRight X φ M).IsTriangulated := by
-  letI := etaleHomScalarCommShift X φ
+  let := etaleHomScalarCommShift X φ
   obtain ⟨sA, sB, hA, hB, hPsi, hTriA, hTriB⟩ :=
     etaleHomComparison_reversedExact_shiftCore X φ M
   let chiPhi : (EtaleHomLeft X φ M).CommShift ℤ :=
@@ -51,7 +50,7 @@ theorem etaleHomComparison_reversedExact_shiftData
   let chiPsi : (EtaleHomRight X φ M).CommShift ℤ :=
     @Functor.CommShift.comp _ _ _ _ _ _ _ _ ℤ _ _ _ _
       (Pretriangulated.Opposite.commShiftFunctorOpInt (scalarExtension φ X)) sB
-  letI : (EtaleHomLeft X φ M).CommShift ℤ := chiPhi
+  let : (EtaleHomLeft X φ M).CommShift ℤ := chiPhi
   refine ⟨sA, sB, chiPhi, chiPsi, hA, hB, ?_, hPsi, hTriA, hTriB⟩
   intro K n
   exact Functor.commShiftIso_comp_hom_app

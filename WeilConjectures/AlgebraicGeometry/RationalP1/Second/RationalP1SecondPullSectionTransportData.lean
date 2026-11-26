@@ -313,7 +313,6 @@ private theorem pullSectionTransportData_of_hom
   · simpa only [Category.assoc] using
       congrArg (fun m ↦ G.map e₂.hom ≫ m ≫ T.map (s₁.hom.app M)) hb
 
-set_option linter.unusedVariables false in
 -- The calculation below is elaborated with the native tensor instances of this section.
 private theorem second_pull_section_transport_data_aux
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
@@ -322,7 +321,7 @@ private theorem second_pull_section_transport_data_aux
     [hproj : ∀ x : ProjectiveLine Y, Invertible (l : (ProjectiveLine Y).residueField x)]
     [hdiag : ∀ x : diagonalSurface Y, Invertible (l : (diagonalSurface Y).residueField x)]
     (K : DerivedCategory (Modules (coefficient l c).X Y)) :
-    ∃ data : PullSectionTransportData
+    ∃ _data : PullSectionTransportData
       (F₁ := moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y))
       (F₂ := moduleObjectDerivedPullback (coefficient l c).X (secondProjection Y))
       (G := moduleObjectDerivedPullback (coefficient l c).X (diagonalImmersion Y))
@@ -392,7 +391,6 @@ open DiagonalCoefficients CondensedRing
 attribute [local irreducible] coefficient line twist firstProjection secondProjection square
 attribute [local irreducible] moduleObjectDerivedPullback moduleObjectDerivedPushforward
 
-set_option linter.unusedVariables false in
 /-- The native tensor and shift comparisons commute with restriction to the diagonal.
 The fields are exactly the two section naturality equations and the square comparison
 naturality equation needed by `pull_section_transport`. -/
@@ -403,7 +401,7 @@ theorem second_pull_section_transport_data
     [hproj : ∀ x : ProjectiveLine Y, Invertible (l : (ProjectiveLine Y).residueField x)]
     [hdiag : ∀ x : diagonalSurface Y, Invertible (l : (diagonalSurface Y).residueField x)]
     (K : DerivedCategory (Modules (coefficient l c).X Y)) :
-    ∃ data : PullSectionTransportData
+    ∃ _data : PullSectionTransportData
       (F₁ := moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y))
       (F₂ := moduleObjectDerivedPullback (coefficient l c).X (secondProjection Y))
       (G := moduleObjectDerivedPullback (coefficient l c).X (diagonalImmersion Y))

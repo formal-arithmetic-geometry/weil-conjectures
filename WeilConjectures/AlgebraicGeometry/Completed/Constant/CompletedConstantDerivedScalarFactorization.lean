@@ -24,7 +24,6 @@ import WeilConjectures.AlgebraicGeometry.Relative.RelativeFiniteCoefficientTrans
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
@@ -211,30 +210,30 @@ theorem completed_constant_derived_scalar_factorization
           (limit.lift (pbcAdicRings X d) (constantAdicFiniteCone X d)))) := by
   dsimp only
   intro hc hlim hcolim
-  letI := hc
-  letI := hlim
-  letI := hcolim
-  letI := d.noetherian
+  let := hc
+  let := hlim
+  let := hcolim
+  let := d.noetherian
   let C := AdicCompletion d.ideal A
-  letI := CompletedConstantReduction.constant_additive X C
-  letI := CompletedConstantReduction.constant_additive Y C
-  letI := (constantAdicFinite_constant_exact X C).1
-  letI := (constantAdicFinite_constant_exact X C).2
-  letI := (constantAdicFinite_constant_exact Y C).1
-  letI := (constantAdicFinite_constant_exact Y C).2
+  let := CompletedConstantReduction.constant_additive X C
+  let := CompletedConstantReduction.constant_additive Y C
+  let := (constantAdicFinite_constant_exact X C).1
+  let := (constantAdicFinite_constant_exact X C).2
+  let := (constantAdicFinite_constant_exact Y C).1
+  let := (constantAdicFinite_constant_exact Y C).2
   let F := adicLisseConstantModules Y C
   let E := pbcExtend φ
   have hE := scalarExtensionExact Y d.ideal φ hφ
-  letI := hE.1
-  letI := hE.2
+  let := hE.1
+  let := hE.2
   have hF := constantAdicFinite_constant_exact Y C
-  letI := hF.1
-  letI := hF.2
+  let := hF.1
+  let := hF.2
   have hFX := constantAdicFinite_constant_exact X C
-  letI := hFX.1
-  letI := hFX.2
-  haveI := inverseCompleted_isIso X Y g d β hβ
-  letI := relativeFiniteConstantInverseImage_isIso g C
+  let := hFX.1
+  let := hFX.2
+  have := inverseCompleted_isIso X Y g d β hβ
+  let := relativeFiniteConstantInverseImage_isIso g C
   let κ : (adicTowerInverseImage g).obj (adicLisseConstantRing X C) ≅
       adicLisseConstantRing Y C :=
     asIso (proEtaleConstantInverseImageMap g CommRingCat.{u + 1} (CommRingCat.of C))

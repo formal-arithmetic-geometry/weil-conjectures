@@ -10,10 +10,7 @@ public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.LocalizingAdmi
 public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
-/-! # Proper rigidity on a single closed lifted test
-
-Source: degree-zero closed-test calculation of compactification coherence, paragraph (2).
--/
+/-! # Proper rigidity on a single closed lifted test -/
 
 @[expose] public noncomputable section
 

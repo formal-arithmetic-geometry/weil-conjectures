@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.ProperExchangeFinite
 public import WeilConjectures.TraceFormula.Specialization.ResidueConstantSmoothExchange
 public import WeilConjectures.TraceFormula.Specialization.ThickOrigin
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginPowUnit
+import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 import WeilConjectures.Tactic.ExactModProofs
 
 /-!
@@ -50,6 +51,7 @@ universe u
 open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
+open scoped AlgebraicGeometry.ProEtale.CondensedRing.CachedModInstances
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -67,8 +69,6 @@ lemma plusEtaleOrigin_leftDerivedUpperStar_obj_unit {A B : Scheme.{u}} (f : A �
   (isEtaleOrigin_of_isConstructible T
     (boundedConstructible_leftDerivedUpperStar_obj_unit _ f)).plusEtaleOrigin
 
-set_option maxHeartbeats 1000000 in
--- the statements of the unit identity and of the goal carry different elaborations of proofs
 /-- **The restricted unit of a pushforward along a universally homeomorphic fibre** (arbitrary
 coefficients): for a commutative square of schemes `e' ≫ ν = q ≫ e` with `q` a universal
 homeomorphism, if the base change morphism `Le^* Rν_* ⟶ Rq_* Le'^*` is invertible at `Lν^* Λ`, then
@@ -90,7 +90,7 @@ theorem isIso_leftDerivedUpperStar_map_unit_app_unit_of_isIso_baseChangeMap
       (derivedUpperStarLowerStarAdjunction Λ q).unit.app ((L((e)^*⟦Λ⟧)).obj (𝟙_ _)) ≫
         (R((q)_*⟦Λ⟧)).map ((pullbackSquareComparison Λ sq).hom.app (𝟙_ _)) := by
     rw [baseChangeMap]
-    exact_mod_proofs key
+    cast_proofs key
   have := isEquivalence_upperStar_of_isUniversalHomeomorphism Λ q
   have : ((q)^*⟦Λ⟧).leftDerivedFunctor.IsEquivalence :=
     Functor.isEquivalence_of_iso (Functor.leftDerivedFunctorIsoMapDerivedCategory _).symm
@@ -157,6 +157,28 @@ theorem isIso_thickOriginPowSourceModel_unit_finiteCoefficient {n : ℕ} (hT : (
   exact NearbyCyclesModel.isIso_unit_of_hom _ (thickOriginToPowSourceModel k k' hm)
     (isIso_deformationModel_polyAffineThickOrigin_one_unit_finiteCoefficient T k' hT)
 
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
+private lemma isIso_powModel_pushforwardExchange {m : ℕ} (hm : m ≠ 0)
+    [QuasiCompact (thickOriginPowSourceModel k k' hm).j]
+    [QuasiSeparated (thickOriginPowSourceModel k k' hm).j] :
+    IsIso (((thickOriginPowModelHom k k' hm).pushforwardExchange
+      (Profinite.continuousMapRingObj.{u} T)).app
+        (L((𝟙 (polyAffine k 1).left)^*⟦Profinite.continuousMapRingObj.{u} T⟧).obj
+          (𝟙_ _))) := by
+  exact NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper_finiteCoefficient T
+    (thickOriginPowModelHom k k' hm) (isPullback_powModelHom_i k' hm _ _ _ _ _ _ _)
+    (isPullback_powModelHom_ε k' hm _ _ _ _ _ _ _ (IdealSheafData.deformationSpacePowMap_proj _))
+    _ (plusEtaleOrigin_leftDerivedUpperStar_obj_unit T (𝟙 (polyAffine k 1).left))
+
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
+private lemma isIso_powModel_fibre_unit {m : ℕ} (hm : m ≠ 0) :
+    IsIso (L((thickOriginPowImagePoint k k' hm)^*⟦
+      Profinite.continuousMapRingObj.{u} T⟧).map
+        ((derivedUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj.{u} T)
+          (thickOriginPowSpecialFibreMap k k' hm).left).unit.app (𝟙_ _))) :=
+  isIso_leftDerivedUpperStar_map_unit_app_unit_of_isPullback_finiteCoefficient T
+    (isPullback_thickOriginPowFibre_left k k' hm)
+
 /-- **The specialization unit of the thick origin on the zero section, with finite
 coefficients**: for the deformation `𝒟` of `V(x^m) ⊆ 𝔸¹_k` over `Spec k'⟦t⟧`, the restriction
 `Le^* σ_𝒟` of the specialization unit to the zero section is an isomorphism. -/
@@ -173,15 +195,16 @@ theorem isIso_upperStar_zeroSection_unit_polyAffineThickOrigin_finiteCoefficient
   have : QuasiSeparated (thickOriginPowSourceModel k k' hm).j :=
     inferInstanceAs (QuasiSeparated
       (deformationModel (polyAffine k 1) (polyAffineThickOrigin k 1) k').j)
-  have hχ := NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper_finiteCoefficient T
-    (thickOriginPowModelHom k k' hm) (isPullback_powModelHom_i k' hm _ _ _ _ _ _ _)
-    (isPullback_powModelHom_ε k' hm _ _ _ _ _ _ _ (IdealSheafData.deformationSpacePowMap_proj _))
-    _ (plusEtaleOrigin_leftDerivedUpperStar_obj_unit T (𝟙 (polyAffine k 1).left))
-  have he := isIso_leftDerivedUpperStar_map_unit_app_unit_of_isPullback_finiteCoefficient T
-    (isPullback_thickOriginPowFibre_left k k' hm)
+  have hχ := isIso_powModel_pushforwardExchange (k := k) T k' hm
+  have he := isIso_powModel_fibre_unit (k := k) T k' hm
   have hM := isIso_thickOriginPowSourceModel_unit_finiteCoefficient (k := k) T k' hT hm
-  have ho := NearbyCyclesModel.isIso_upperStar_unit_of_pushforwardExchange _
-    (thickOriginPowModelHom k k' hm) hχ hM (thickOriginPowImagePoint k k' hm) he
+  have hunit := NearbyCyclesModel.isIso_upperStar_unit_of_pushforwardExchange
+    (T := Spec (.of k'))
+    (Profinite.continuousMapRingObj.{u} T) (thickOriginPowModelHom k k' hm)
+  have hunitχ := hunit (by cast_proofs hχ)
+  have hunitχM := hunitχ hM
+  have hunitχMe := hunitχM (thickOriginPowImagePoint k k' hm)
+  have ho := hunitχMe he
   rw [thickOriginPowImagePoint_eq] at ho
   have : IsUniversalHomeomorphism (thickOriginZeroSectionPoint k k' m (Nat.pos_of_ne_zero hm) ≫
       (deformationSpecialFibre (centre (polyAffine k 1) (polyAffineThickOrigin k m)) ⊥

@@ -14,37 +14,30 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizi
 Let `Λ = E` (a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`) or `Λ = ℚ̄_ℓ`, with condensed ring `E̲`,
 resp. `ℚ̲̄_ℓ`, and let `Loc(Dctf(X, Λ)) = Loc(Dbc(X, Λ))` be the localizing closure of the bounded
 constructible complexes in `D(X_proét, Λ) = D(Mod_{Λ_X})`
-(`AlgebraicGeometry.ProEtale.CondensedRing.localizingBoundedConstructible`). This file proves
-blueprint `proposition-projection-formula-rational-coefficients`:
+(`AlgebraicGeometry.ProEtale.CondensedRing.localizingBoundedConstructible`). This file proves:
 
-* `Loc(Dbc(X, Λ))` is closed under `⊗ᴸ` (`proposition-projection-formula-rational-coefficients--1`);
+* `Loc(Dbc(X, Λ))` is closed under `⊗ᴸ`;
 * for `p : X ⟶ Y` proper, the projection formula map `Rp_*A ⊗ᴸ B ⟶ Rp_*(A ⊗ᴸ p^*B)` is an
-  isomorphism for `A ∈ Loc(Dbc(X, Λ))` and `B ∈ Loc(Dbc(Y, Λ))`
-  (`proposition-projection-formula-rational-coefficients--2`);
+  isomorphism for `A ∈ Loc(Dbc(X, Λ))` and `B ∈ Loc(Dbc(Y, Λ))`;
 * for a cartesian square with `p` proper, the base change map `g^*Rp_* ⟶ Rp'_*g'^*` is an
   isomorphism on `Loc(Dbc(X, Λ))`.
-
-Following the blueprint, each claim is obtained by fixing all but one variable and observing that
-the objects satisfying it form a localizing subcategory containing `Dbc`
-(`AlgebraicGeometry.ProEtale.CondensedRing.localizingBoundedConstructible_tensor`,
-`AlgebraicGeometry.ProEtale.CondensedRing.isIso_projectionMap_of_localizingBoundedConstructible`).
-The inputs on `Dbc` are the tensor closure `proposition-six-operations-dctf--14`, the projection
-formula on `Dbc` (`proposition-proper-direct-image-constructible-complexes`, part of
-`proposition-proper-direct-image-constructible-complexes`), the proper direct image on the
-localizing categories (`proposition-proper-direct-image-extension-zero`) and proper base change on
-the localizing categories (`proposition-proper-base-change-localizing-categories--1`), see
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocalizingInputs`.
 
 ## Main statements
 
 For `Λ = E̲` (suffix `continuousMapRingObj`) and `Λ = ℚ̲̄_ℓ` (suffix `padicAlgClRingObj`):
 
 - `tensor_mem_localizingBoundedConstructible_*`
-(`proposition-projection-formula-rational-coefficients--1`);
 - `isIso_projectionMap_of_localizingBoundedConstructible_*`
-(`proposition-projection-formula-rational-coefficients--2`);
 - `projectionFormula_baseChange_localizingBoundedConstructible_*`
-(`proposition-projection-formula-rational-coefficients`).
+
+## Implementation details
+
+Each claim is obtained by fixing all but one variable and observing that the objects satisfying it
+form a localizing subcategory containing `Dbc`
+(`AlgebraicGeometry.ProEtale.CondensedRing.localizingBoundedConstructible_tensor`,
+`AlgebraicGeometry.ProEtale.CondensedRing.isIso_projectionMap_of_localizingBoundedConstructible`).
+The inputs on `Dbc` are collected in
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocalizingInputs`.
 -/
 
 @[expose] public section
@@ -84,16 +77,8 @@ set_option hygiene false in
 local notation "𝐄" => Profinite.continuousMapRingObj.{u} E
 
 omit [Fact (ringChar k).Prime] [IsSeparated X.hom] in
-/-- Blueprint `proposition-projection-formula-rational-coefficients--1`: Tensor closure of the
-rational localizing categories; the case `Λ = E`.
-
-1. `Dbc(X, E)` is closed under `⊗ᴸ` in `D(X_proét, E)`;
-2. for `A, B ∈ Loc(Dbc(X, E))`, the derived tensor product `A ⊗ᴸ B`, formed in `D(X_proét, E)`,
-   lies in `Loc(Dbc(X, E))`.
-
-Part (1) is `proposition-six-operations-dctf--14`. For (2), fixing `B ∈ Dbc(X, E)`, the objects `A`
-of `Loc(Dbc(X, E))` with `A ⊗ᴸ B ∈ Loc(Dbc(X, E))` form a localizing subcategory containing
-`Dbc(X, E)`, since `- ⊗ᴸ B` is exact and preserves direct sums; then fix `A` and argue in `B`. -/
+/-- Tensor closure of the rational localizing categories, the case `Λ = E`: `Dbc(X, E)` and
+`Loc(Dbc(X, E))` are closed under `⊗ᴸ`. -/
 theorem tensor_mem_localizingBoundedConstructible_continuousMapRingObj :
     (∀ K L : 𝔻[𝐄](X.left), boundedConstructible (condensedRingObj 𝐄 X.left) K →
       boundedConstructible (condensedRingObj 𝐄 X.left) L →
@@ -104,15 +89,9 @@ theorem tensor_mem_localizingBoundedConstructible_continuousMapRingObj :
     fun _ _ hA hB ↦ localizingBoundedConstructible_tensor 𝐄
       (fun _ _ hK hL ↦ boundedConstructible_tensor_continuousMapRingObj ℓ E hK hL) hA hB⟩
 
-/-- Blueprint `proposition-projection-formula-rational-coefficients--2`: The proper projection
-formula on the rational localizing categories; the case `Λ = E`.
-
-Let `p : X ⟶ Y` be proper. For `A ∈ Loc(Dbc(X, E))` and `B ∈ Loc(Dbc(Y, E))` the projection
-formula map `(Rp_*A) ⊗ᴸ B ⟶ Rp_*(A ⊗ᴸ p^*B)` is an isomorphism. Both sides lie in
-`Loc(Dbc(Y, E))` and are exact, direct-sum preserving functors of each variable; the map is an
-isomorphism on `Dbc` (`proposition-proper-direct-image-constructible-complexes`), hence on the
-localizing categories, one variable at a time
-(`lemma-checking-isomorphisms-constructible-complexes--1`). -/
+/-- The proper projection formula on the rational localizing categories, the case `Λ = E`: for
+`p : X ⟶ Y` proper, `(Rp_*A) ⊗ᴸ B ⟶ Rp_*(A ⊗ᴸ p^*B)` is an isomorphism for
+`A ∈ Loc(Dbc(X, E))` and `B ∈ Loc(Dbc(Y, E))`. -/
 theorem isIso_projectionMap_of_localizingBoundedConstructible_continuousMapRingObj
     (p : X ⟶ Y) [IsProper p.left] {A : 𝔻[𝐄](X.left)} {B : 𝔻[𝐄](Y.left)}
     (hA : localizingBoundedConstructible 𝐄 X.left A)
@@ -128,15 +107,9 @@ theorem isIso_projectionMap_of_localizingBoundedConstructible_continuousMapRingO
     (properDirectImage_baseChange_projectionFormula_continuousMapRingObj (X' := X) (Y' := Y) ℓ E
       p).2.2 hA hB
 
-/-- Blueprint `proposition-projection-formula-rational-coefficients`: Projection formula and proper
-base change with rational coefficients; the case `Λ = E`.
-
-The category `Loc(Dctf(X, E)) = Loc(Dbc(X, E))` is closed under `⊗ᴸ`. For a proper
-`p : X ⟶ Y`, the projection formula map `(Rp_*A) ⊗ᴸ B ⟶ Rp_*(A ⊗ᴸ p^*B)` is an isomorphism for
-`A ∈ Loc(Dbc(X, E))` and `B ∈ Loc(Dbc(Y, E))`, and for a cartesian square
-`g' ≫ p = p' ≫ g` with `p` proper the base change map `g^*Rp_*A ⟶ Rp'_*g'^*A` is an isomorphism
-for `A ∈ Loc(Dbc(X, E))`. The base change statement is
-`proposition-proper-base-change-localizing-categories--1`. -/
+/-- Projection formula and proper base change with rational coefficients, the case `Λ = E`:
+`Loc(Dctf(X, E)) = Loc(Dbc(X, E))` is closed under `⊗ᴸ`, the projection formula map is an
+isomorphism on it for proper `p`, and base change holds for cartesian squares with `p` proper. -/
 theorem projectionFormula_baseChange_localizingBoundedConstructible_continuousMapRingObj :
     (∀ A B : 𝔻[𝐄](X.left), localizingBoundedConstructible 𝐄 X.left A →
       localizingBoundedConstructible 𝐄 X.left B →
@@ -163,17 +136,8 @@ set_option hygiene false in
 local notation "𝐐" => Profinite.padicAlgClRingObj.{u} ℓ
 
 omit [Fact (ringChar k).Prime] [IsSeparated X.hom] in
-/-- Blueprint `proposition-projection-formula-rational-coefficients--1`: Tensor closure of the
-rational localizing categories; the case `Λ = ℚ̄_ℓ`.
-
-1. `Dbc(X, ℚ̄_ℓ)` is closed under `⊗ᴸ` in `D(X_proét, ℚ̄_ℓ)`;
-2. for `A, B ∈ Loc(Dbc(X, ℚ̄_ℓ))`, the derived tensor product `A ⊗ᴸ B`, formed in
-   `D(X_proét, ℚ̄_ℓ)`, lies in `Loc(Dbc(X, ℚ̄_ℓ))`.
-
-Part (1) is `proposition-six-operations-dctf--14`. For (2), fixing `B ∈ Dbc(X, ℚ̄_ℓ)`, the objects
-`A` of `Loc(Dbc(X, ℚ̄_ℓ))` with `A ⊗ᴸ B ∈ Loc(Dbc(X, ℚ̄_ℓ))` form a localizing subcategory
-containing `Dbc(X, ℚ̄_ℓ)`, since `- ⊗ᴸ B` is exact and preserves direct sums; then fix `A` and argue
-in `B`. -/
+/-- Tensor closure of the rational localizing categories, the case `Λ = ℚ̄_ℓ`: `Dbc(X, ℚ̄_ℓ)` and
+`Loc(Dbc(X, ℚ̄_ℓ))` are closed under `⊗ᴸ`. -/
 theorem tensor_mem_localizingBoundedConstructible_padicAlgClRingObj :
     (∀ K L : 𝔻[𝐐](X.left), boundedConstructible (condensedRingObj 𝐐 X.left) K →
       boundedConstructible (condensedRingObj 𝐐 X.left) L →
@@ -184,15 +148,9 @@ theorem tensor_mem_localizingBoundedConstructible_padicAlgClRingObj :
     fun _ _ hA hB ↦ localizingBoundedConstructible_tensor 𝐐
       (fun _ _ hK hL ↦ boundedConstructible_tensor_padicAlgClRingObj ℓ hK hL) hA hB⟩
 
-/-- Blueprint `proposition-projection-formula-rational-coefficients--2`: The proper projection
-formula on the rational localizing categories; the case `Λ = ℚ̄_ℓ`.
-
-Let `p : X ⟶ Y` be proper. For `A ∈ Loc(Dbc(X, ℚ̄_ℓ))` and `B ∈ Loc(Dbc(Y, ℚ̄_ℓ))` the projection
-formula map `(Rp_*A) ⊗ᴸ B ⟶ Rp_*(A ⊗ᴸ p^*B)` is an isomorphism. Both sides lie in
-`Loc(Dbc(Y, ℚ̄_ℓ))` and are exact, direct-sum preserving functors of each variable; the map is an
-isomorphism on `Dbc` (`proposition-proper-direct-image-constructible-complexes`), hence on the
-localizing categories, one variable at a time
-(`lemma-checking-isomorphisms-constructible-complexes--1`). -/
+/-- The proper projection formula on the rational localizing categories, the case `Λ = ℚ̄_ℓ`: for
+`p : X ⟶ Y` proper, `(Rp_*A) ⊗ᴸ B ⟶ Rp_*(A ⊗ᴸ p^*B)` is an isomorphism for
+`A ∈ Loc(Dbc(X, ℚ̄_ℓ))` and `B ∈ Loc(Dbc(Y, ℚ̄_ℓ))`. -/
 theorem isIso_projectionMap_of_localizingBoundedConstructible_padicAlgClRingObj
     (p : X ⟶ Y) [IsProper p.left] {A : 𝔻[𝐐](X.left)} {B : 𝔻[𝐐](Y.left)}
     (hA : localizingBoundedConstructible 𝐐 X.left A)
@@ -206,15 +164,9 @@ theorem isIso_projectionMap_of_localizingBoundedConstructible_padicAlgClRingObj
     (properDirectImage_baseChange_projectionFormula_padicAlgClRingObj (X' := X) (Y' := Y) ℓ
       p).2.2 hA hB
 
-/-- Blueprint `proposition-projection-formula-rational-coefficients`: Projection formula and proper
-base change with rational coefficients; the case `Λ = ℚ̄_ℓ`.
-
-The category `Loc(Dctf(X, ℚ̄_ℓ)) = Loc(Dbc(X, ℚ̄_ℓ))` is closed under `⊗ᴸ`. For a proper
-`p : X ⟶ Y`, the projection formula map `(Rp_*A) ⊗ᴸ B ⟶ Rp_*(A ⊗ᴸ p^*B)` is an isomorphism for
-`A ∈ Loc(Dbc(X, ℚ̄_ℓ))` and `B ∈ Loc(Dbc(Y, ℚ̄_ℓ))`, and for a cartesian square
-`g' ≫ p = p' ≫ g` with `p` proper the base change map `g^*Rp_*A ⟶ Rp'_*g'^*A` is an isomorphism
-for `A ∈ Loc(Dbc(X, ℚ̄_ℓ))`. The base change statement is
-`proposition-proper-base-change-localizing-categories--1`. -/
+/-- Projection formula and proper base change with rational coefficients, the case `Λ = ℚ̄_ℓ`:
+`Loc(Dctf(X, ℚ̄_ℓ)) = Loc(Dbc(X, ℚ̄_ℓ))` is closed under `⊗ᴸ`, the projection formula map is an
+isomorphism on it for proper `p`, and base change holds for cartesian squares with `p` proper. -/
 theorem projectionFormula_baseChange_localizingBoundedConstructible_padicAlgClRingObj :
     (∀ A B : 𝔻[𝐐](X.left), localizingBoundedConstructible 𝐐 X.left A →
       localizingBoundedConstructible 𝐐 X.left B →

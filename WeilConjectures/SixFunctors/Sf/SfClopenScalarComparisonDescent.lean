@@ -89,10 +89,15 @@ import all WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 
 /-! # Descent of an ordinary scalar comparison
 
-Source: Stacks Project, sites-cohomology.tex, Tag 06YY, Lemma pullback-K-flat;
-derived.tex, Tag 06XN.
-(blueprint: lem-sf-clopen-scalar-comparison-descent).
+An ordinary scalar-extension comparison on a clopen component descends to the derived
+categories along the K-flat localization.
+
+## References
+
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks, Tag 06XN](https://stacks.math.columbia.edu/tag/06XN)
 -/
+
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -211,26 +216,7 @@ attribute [local irreducible] sfClopenCounitNat
   Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors
 
 /-- An ordinary natural scalar comparison descends through K-flat localization,
-with its universal counit square on every complex.
-
-Source: Stacks Project, sites-cohomology.tex, Lemma derived-base-change (Tag 06YY),
-Lemma pullback-K-flat; derived.tex, Tag 06XN.
-(blueprint: lem-sf-clopen-scalar-comparison-descent).
-
-Proof: restriction to the clopen component is projection under the finite-clopen
-module equivalence. Its termwise application preserves K-flat complexes with flat
-terms, since acyclicity and tensor products are componentwise. For such a complex,
-the two universal scalar-extension counits compute the two derived functors.
-Conjugating the ordinary comparison by these counits and the exact-restriction
-localization comparisons gives an isomorphism, natural on K-flat representatives.
-The K-flat localization equivalence descends it and its inverse to a natural
-isomorphism of the derived functors. For an arbitrary complex P, choose a K-flat
-resolution Q to P. The counit square commutes at Q by construction. Naturality of
-the ordinary comparison, both universal counits and the localization comparisons
-transports the square along Q to P; the resolution is inverted in the source
-derived category, so cancel its image. This proves the equation at P, without
-assuming P K-flat. The only comparison assumed here is between ordinary module
-functors; finite or completed quotient chain isomorphisms are not assumed. -/
+with its universal counit square on every complex. -/
 theorem sf_clopen_scalar_comparison_descent
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (T : Scheme.{t}) (U : T.Opens)

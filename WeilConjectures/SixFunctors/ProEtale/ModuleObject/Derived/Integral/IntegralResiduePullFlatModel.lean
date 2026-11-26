@@ -9,7 +9,12 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralResiduePullbackPreservesFlat
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralResiduePullFlatModelComparison
 
-/-! # Computing residue pullback on flat complexes -/
+/-! # Computing residue pullback on flat complexes
+
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Remark 6.8.15.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -25,26 +30,7 @@ attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFun
   Functor.mapDerivedCategory
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
-/-- On a flat-resolution complex the derived pull mate is the ordinary scalar comparison.
-
-Source: Bhatt--Scholze, Remark 6.8.15, derived scalar extension on flat resolutions.
-(blueprint: new-integral-residue-pull-flat-model)
-
-Proof. Inverse image of sheaves is exact and preserves colimits. Pullback of the
-coefficient ring is identified with the coefficient ring on the source. Thus pullback
-preserves flat objects (this can be checked on stalks, where it is scalar extension).
-The hypothesis presents P as a colimit of bounded above flat complexes. Pullback
-preserves that presentation and its terms are flat; therefore its image is K-flat by
-`kFlat_mapHomologicalComplex_obj_of_colimitsOfShape`. Consequently the extension counit
-on the pulled complex is invertible. Compare the two maps in the second clause by
-transposing under extension/restriction of scalars. The derived adjunction unit and
-counit factorization equations and the localization factors for exact pullback reduce
-this equality to the ordinary scalar square. The ordinary pull isomorphism is the
-conjugate of restriction/pushforward. The ordinary unit identity is isolated in
-`residueExchangePull_ordinary_unit`; it is the degreewise geometric/scalar mate
-compatibility. Applying this identity gives the homotopy comparison;
-localization gives the displayed equation. No residue flatness is used: only the input
-resolution and its pullback need compute derived scalar extension. -/
+/-- On a flat-resolution complex the derived pull mate is the ordinary scalar comparison. -/
 theorem residueExchangePull_flatModel
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex

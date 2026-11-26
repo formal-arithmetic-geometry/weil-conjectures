@@ -18,7 +18,6 @@ derived exterior product and the support units are natural in the cochain comple
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 
 universe u v
 
@@ -102,6 +101,7 @@ theorem exteriorProductResolutionComparison_naturality
 
 variable {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j]
 
+omit [Abelian.HasFunctorialFlatResolution C] [HasSmallSiteSheafify C] in
 /-- The defining property of the totalized supported pairing. -/
 @[reassoc]
 theorem ιTensorObj_exteriorSupportedSectionsComplex_f
@@ -119,6 +119,7 @@ theorem ιTensorObj_exteriorSupportedSectionsComplex_f
           r s n h) :=
   (existsUnique_exteriorSupportedSectionsComplex C f g i j P Q).exists.choose_spec r s n h
 
+omit [Abelian.HasFunctorialFlatResolution C] [HasSmallSiteSheafify C] in
 /-- The totalized supported pairing is natural in both cochain complexes. -/
 @[reassoc]
 theorem exteriorSupportedSectionsComplex_naturality

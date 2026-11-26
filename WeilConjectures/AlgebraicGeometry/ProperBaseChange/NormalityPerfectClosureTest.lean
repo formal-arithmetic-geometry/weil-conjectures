@@ -133,14 +133,12 @@ private theorem normal_spec_iff (A : Type u) [CommRing A] :
     let e := (Spec.stalkIso (CommRingCat.of A) x).commRingCatIsoToRingEquiv.symm
     exact ⟨e.symm.toMulEquiv.isDomain, IsIntegrallyClosed.of_equiv e⟩
 
--- This common-overfield proof uses only perfectness; retain the assigned signature.
-set_option linter.unusedVariables false in
 /-- A scheme becomes normal over a perfect purely inseparable extension exactly when it
 becomes normal over every field extension. Normality means that every stalk is an
 integrally closed domain; the scheme need not be integral or nonempty. -/
 theorem normal_stalks_perfectClosure_iff
     (k K : Type u) [Field k] [Field K] [Algebra k K] [PerfectField K]
-    (hpower : ∀ a : K, ∃ n : ℕ, ∃ b : k, algebraMap k K b = a ^ (ringExpChar k ^ n))
+    (_hpower : ∀ a : K, ∃ n : ℕ, ∃ b : k, algebraMap k K b = a ^ (ringExpChar k ^ n))
     (T : Scheme.{u}) (f : T ⟶ Spec (CommRingCat.of k)) :
     (∀ x : (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K))) : Scheme.{u}),
       IsDomain ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).presheaf.stalk x) ∧
