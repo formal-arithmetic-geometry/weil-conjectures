@@ -527,29 +527,65 @@ private theorem exact_adjunction_descends
 
 variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 
+private def restrictScalarIdentityRight
+    (A : Type v) [CommRing A] (R : Sheaf J CommRingCat.{u})
+    (a : A →+* RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)) (t : A)
+    (N : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj
+      (ringedLocalizationRing R (a t)))) (r : A) :
+    ((SheafOfModules.restrictScalars.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).map
+        (ringedLocalizationRingUnit R (a t)))).obj N) ⟶
+      ((SheafOfModules.restrictScalars.{u}
+        ((sheafCompose J (forget₂ CommRingCat RingCat)).map
+          (ringedLocalizationRingUnit R (a t)))).obj N) :=
+  let : Linear A (ringedSiteModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :=
+    scalarLocalizationCoefficientLinear A R a
+  let hmod : Module A
+      (((SheafOfModules.restrictScalars.{u}
+        ((sheafCompose J (forget₂ CommRingCat RingCat)).map
+          (ringedLocalizationRingUnit R (a t)))).obj N) ⟶
+        ((SheafOfModules.restrictScalars.{u}
+          ((sheafCompose J (forget₂ CommRingCat RingCat)).map
+            (ringedLocalizationRingUnit R (a t)))).obj N)) :=
+    Linear.homModule _ _
+  @SMul.smul A
+    (((SheafOfModules.restrictScalars.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).map
+        (ringedLocalizationRingUnit R (a t)))).obj N) ⟶
+      ((SheafOfModules.restrictScalars.{u}
+        ((sheafCompose J (forget₂ CommRingCat RingCat)).map
+          (ringedLocalizationRingUnit R (a t)))).obj N))
+    hmod.toSMul r (𝟙 _)
+
+private def restrictScalarIdentityStatement
+    (A : Type v) [CommRing A] (R : Sheaf J CommRingCat.{u})
+    (a : A →+* RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)) (t : A)
+    (N : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj
+      (ringedLocalizationRing R (a t)))) (r : A) : Prop :=
+  (fun [_src : Linear A (ringedSiteModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))]
+    [_tgt : Linear (Localization.Away t) (ringedSiteModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj
+        (ringedLocalizationRing R (a t))))] ↦
+    (SheafOfModules.restrictScalars.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).map
+        (ringedLocalizationRingUnit R (a t)))).map
+          (algebraMap A (Localization.Away t) r • 𝟙 N) =
+      restrictScalarIdentityRight A R a t N r)
+    (_src := scalarLocalizationCoefficientLinear A R a)
+    (_tgt := scalarLocalizationCoefficientLinear (Localization.Away t)
+      (ringedLocalizationRing R (a t)) (scalarLocalizationCoefficientMap A R a t))
+
 set_option backward.isDefEq.respectTransparency false in
-set_option synthInstance.maxHeartbeats 100000 in
--- Match the coefficient actions through the sheaf restriction functor.
 private theorem restrict_scalar_identity
     (A : Type v) [CommRing A] (R : Sheaf J CommRingCat.{u})
     (a : A →+* RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)) (t : A)
     (N : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj
       (ringedLocalizationRing R (a t)))) (r : A) :
-    (fun [_src : Linear A (ringedSiteModules.{u}
-        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))]
-      [_tgt : Linear (Localization.Away t) (ringedSiteModules.{u}
-        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj
-          (ringedLocalizationRing R (a t))))] ↦
-      (SheafOfModules.restrictScalars.{u}
-        ((sheafCompose J (forget₂ CommRingCat RingCat)).map
-          (ringedLocalizationRingUnit R (a t)))).map
-            (algebraMap A (Localization.Away t) r • 𝟙 N) =
-        r • 𝟙 ((SheafOfModules.restrictScalars.{u}
-          ((sheafCompose J (forget₂ CommRingCat RingCat)).map
-            (ringedLocalizationRingUnit R (a t)))).obj N))
-      (_src := scalarLocalizationCoefficientLinear A R a)
-      (_tgt := scalarLocalizationCoefficientLinear (Localization.Away t)
-        (ringedLocalizationRing R (a t)) (scalarLocalizationCoefficientMap A R a t)) := by
+    restrictScalarIdentityStatement A R a t N r := by
+  unfold restrictScalarIdentityStatement
+  unfold restrictScalarIdentityRight
   apply SheafOfModules.hom_ext
   apply PresheafOfModules.hom_ext
   intro V
