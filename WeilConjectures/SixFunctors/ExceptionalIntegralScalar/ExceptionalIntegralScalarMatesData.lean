@@ -38,7 +38,6 @@ set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genCtorIdx false
 set_option synthInstance.maxSize 2048
-set_option linter.unusedVariables false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall

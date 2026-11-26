@@ -273,6 +273,7 @@ variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ] [Finite (Λ �
   {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ})
   {k : Type u} [Field k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
 
+-- Keep the section instances as hypotheses of this public statement.
 set_option linter.unusedSectionVars false in
 include hϖ hI in
 /-- Integral constructible internal Hom.

@@ -63,7 +63,6 @@ private theorem ringOperationsCompExact {A B C : Type*} [Category* A] [Category*
   let := hG
   infer_instance
 
-set_option linter.unusedVariables false in
 /-- Finite and integral exceptional operation families with their compact-support
 left realizations exist for every compactification. -/
 theorem exists_exceptional_ring_operations
@@ -76,7 +75,7 @@ theorem exists_exceptional_ring_operations
     [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     (c : Compactification f) :
     ∃ operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l),
-      ∃ left : ∀ s : RingStage.{u} l,
+      ∃ _left : ∀ s : RingStage.{u} l,
         LeftRealization.{u} l Ω c s (operation s), True := by
   classical
   have finite (E : FieldStage.{u} l) (n : ℕ+) :
@@ -117,13 +116,13 @@ theorem exists_exceptional_ring_operations
     have := integralTriangulated l E Y
     let := ExceptionalIntegralScalar.inclusionShift.{u} l Ω X (.integral E)
     let := ExceptionalIntegralScalar.inclusionShift.{u} l Ω Y (.integral E)
-    let : (RingStage.inclusion.{u} l Ω X (.integral E)).IsTriangulated :=
+    have : (RingStage.inclusion.{u} l Ω X (.integral E)).IsTriangulated :=
       ⟨fun _ hT ↦ hT⟩
-    let : (RingStage.inclusion.{u} l Ω Y (.integral E)).Full :=
+    have : (RingStage.inclusion.{u} l Ω Y (.integral E)).Full :=
       (finiteTorConstructibleIntegral l E.carrier Y).fullyFaithfulι.full
-    let : (RingStage.inclusion.{u} l Ω Y (.integral E)).Faithful :=
+    have : (RingStage.inclusion.{u} l Ω Y (.integral E)).Faithful :=
       (finiteTorConstructibleIntegral l E.carrier Y).fullyFaithfulι.faithful
-    let : (RingStage.inclusion.{u} l Ω Y (.integral E)).IsTriangulated :=
+    have : (RingStage.inclusion.{u} l Ω Y (.integral E)).IsTriangulated :=
       ⟨fun _ hT ↦ hT⟩
     let := PurCompactSupport.imageCommShift (PurCompactSupport.completed l E.carrier) c
     obtain ⟨hpres, hadj⟩ := exists_integral_support_adjoint l D hl f c E
@@ -131,7 +130,7 @@ theorem exists_exceptional_ring_operations
       (finiteTorConstructibleIntegral l E.carrier Y).lift
       (RingStage.inclusion.{u} l Ω X (.integral E) ⋙
         PurCompactSupport.image (PurCompactSupport.completed l E.carrier) c) hpres
-    let : F.IsLeftAdjoint := hadj
+    have : F.IsLeftAdjoint := hadj
     let G := F.rightAdjoint
     let adj : F ⊣ G := Adjunction.ofIsLeftAdjoint F
     let r : F ⋙ RingStage.inclusion.{u} l Ω Y (.integral E) ≅
@@ -157,10 +156,10 @@ theorem exists_exceptional_ring_operations
         (ExceptionalIntegralScalar.inclusionShift.{u} l Ω X (.integral E))
         (PurCompactSupport.imageCommShift (PurCompactSupport.completed l E.carrier) c)
         inferInstance hj
-    let : F.IsTriangulated := (Functor.isTriangulated_iff_comp_right r).mpr ht
+    have : F.IsTriangulated := (Functor.isTriangulated_iff_comp_right r).mpr ht
     let := adj.rightAdjointCommShift ℤ
     let := adj.commShift_of_leftAdjoint ℤ
-    let := adj.right_adjoint_additive
+    have := adj.right_adjoint_additive
     exact ⟨{
       F := F
       G := G

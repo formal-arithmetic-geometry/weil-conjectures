@@ -71,8 +71,6 @@ namespace WeilConjectures.ConstructibleExceptionalCoefficients
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
--- The original interface retains hB and hD; the endpoint equalities suffice here.
-set_option linter.unusedVariables false in
 /-- Ambient equality underlying integral normalized scalar transport. -/
 theorem normalized_scalar_associator_integral_transport_core
     (E L M : FieldStage.{max u v} l)
@@ -87,10 +85,10 @@ theorem normalized_scalar_associator_integral_transport_core
     (hA : A.functor ⋙ (finiteTorConstructibleIntegral l L.carrier T).ι =
       (finiteTorConstructibleIntegral l E.carrier T).ι ⋙
         integralScalarExtensionOfUniverses l E.carrier L.carrier i T)
-    (hB : B.functor ⋙ (finiteTorConstructibleIntegral l M.carrier T).ι =
+    (_hB : B.functor ⋙ (finiteTorConstructibleIntegral l M.carrier T).ι =
       (finiteTorConstructibleIntegral l L.carrier T).ι ⋙
         integralScalarExtensionOfUniverses l L.carrier M.carrier j T)
-    (hD : D.functor ⋙ (finiteTorConstructibleIntegral l M.carrier T).ι =
+    (_hD : D.functor ⋙ (finiteTorConstructibleIntegral l M.carrier T).ι =
       (finiteTorConstructibleIntegral l E.carrier T).ι ⋙
         integralScalarExtensionOfUniverses l E.carrier M.carrier (j.comp i) T)
     (nA : ∀ K, HEq (A.realization.inv.app K)
