@@ -246,12 +246,10 @@ private theorem nativePull_preservesKFlat {X Z : Scheme.{u}} (j : X ⟶ Z)
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
--- Preserve the existing existential binder, whose witness is intentionally unrestricted.
-set_option linter.unusedVariables false in
 /-- Every positive finite coefficient stage admits the native open tensor datum. -/
 theorem nativeOpenTensor_finite_exists {X Z : Scheme.{u}} (j : X ⟶ Z)
     [IsOpenImmersion j] (n : ℕ) :
-    ∃ Dn : NativeOpenTensorPrimitives.FiniteOpenCochainsData l E j n, True := by
+    ∃ _Dn : NativeOpenTensorPrimitives.FiniteOpenCochainsData l E j n, True := by
   let B := compactSupportSystemLevel l E n
   let RZ := ProEtale.StrictTower.coefficients B Z
   let RX := ProEtale.StrictTower.coefficients B X
