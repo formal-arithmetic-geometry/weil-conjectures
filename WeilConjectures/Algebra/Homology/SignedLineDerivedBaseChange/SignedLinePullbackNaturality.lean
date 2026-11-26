@@ -23,7 +23,6 @@ import WeilConjectures.Algebra.Homology.SmoothPurity.PullbackPairingTransfer
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 4096
@@ -62,6 +61,10 @@ variable
   (P : KFlatFixedTensor.Modules R) (Q : KFlatFixedTensor.Modules S)
   (t : (pull a).obj P ≅ Q)
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat.{max u v w}]
+  [K.WEqualsLocallyBijective AddCommGrpCat.{max u v w}]
+  [HasWeakSheafify J AddCommGrpCat.{max u v w}]
+  [HasWeakSheafify K AddCommGrpCat.{max u v w}] in
 private theorem pullbackSection_natural
     {L M : KFlatFixedTensor.Modules R} (f : L ⟶ M) (V : C) (x : L.val.obj (op V)) :
     ((pull a).map f).val.app (op (U.obj V))

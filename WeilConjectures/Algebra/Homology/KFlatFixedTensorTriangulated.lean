@@ -998,14 +998,13 @@ private theorem resolvingProperty_shift : (resolvingProperty R).IsStableUnderShi
   · intro i
     exact h.2 (i + n)
 
-set_option linter.unusedVariables false in
 /-- Tensoring by a flat-term K-flat complex preserves all quasi-isomorphisms and has exact descent
 to the published derived tensor. The natural representative comparisons agree with the published
 comparisons on every resolving complex, and commute with the canonical signed chain shifts
 (`CommShift₂Int`). The induced `mapTriangle` includes the connecting arrow with its shift
 comparison. -/
 theorem kFlat_fixed_tensor_triangulated :
-    ∃ s : (derivedTensor R).CommShift₂Int,
+    ∃ _s : (derivedTensor R).CommShift₂Int,
       ∀ (A : CochainComplex (Modules R) ℤ)
         (hA : CochainComplex.IsKFlatIndependentCoefficients A)
         (hAf : ∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (A.X n)),

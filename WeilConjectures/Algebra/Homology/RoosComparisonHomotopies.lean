@@ -195,8 +195,6 @@ private theorem signed_cone_homotopy
       rw [hh]
       simp only [Preadditive.comp_add, Category.comp_id]
 
--- The supplied component equations suffice without the target presentation's extra hypotheses.
-set_option linter.unusedVariables false in
 /-- The maps induced by a homotopy retraction of towers form homotopy retractions of the
 termwise kernels and signed cones. The four component hypotheses specify induced maps,
 rather than arbitrary maps of these complexes. -/
@@ -223,17 +221,17 @@ theorem roos_comparison_homotopies
         (biprod.snd ≫ P.d (p + 1) (p + 1 + 1)))
     (PJ LJ CJ : CochainComplex A ℤ)
     (ePJ : ∀ p : ℤ, PJ.X p ≅ ∏ᶜ (fun n : ℕ ↦ (J.X p).obj (Opposite.op n)))
-    (hPJ : ∀ p q : ℤ, PJ.d p q ≫ (ePJ q).hom =
+    (_hPJ : ∀ p q : ℤ, PJ.d p q ≫ (ePJ q).hom =
       (ePJ p).hom ≫ Limits.Pi.map (fun n ↦ (J.d p q).app (Opposite.op n)))
     (sJ : PJ ⟶ PJ)
-    (hSJ : ∀ p : ℤ, sJ.f p = (ePJ p).hom ≫
+    (_hSJ : ∀ p : ℤ, sJ.f p = (ePJ p).hom ≫
       towerTransitionEndomorphism
         (fun n ↦ (J.X p).map (homOfLE (Nat.le_succ n)).op) ≫ (ePJ p).inv)
     (iJ : LJ ⟶ PJ)
     (hKJ : ∀ p : ℤ, iJ.f p ≫ sJ.f p = 0)
-    (hLJ : ∀ p : ℤ, IsLimit (KernelFork.ofι (iJ.f p) (hKJ p)))
+    (_hLJ : ∀ p : ℤ, IsLimit (KernelFork.ofι (iJ.f p) (hKJ p)))
     (eCJ : ∀ p : ℤ, CJ.X (p + 1) ≅ PJ.X p ⊞ PJ.X (p + 1))
-    (hCJ : ∀ p : ℤ, CJ.d (p + 1) (p + 1 + 1) ≫ (eCJ (p + 1)).hom =
+    (_hCJ : ∀ p : ℤ, CJ.d (p + 1) (p + 1 + 1) ≫ (eCJ (p + 1)).hom =
       (eCJ p).hom ≫ biprod.lift
         (-(biprod.fst ≫ PJ.d p (p + 1)) - biprod.snd ≫ sJ.f (p + 1))
         (biprod.snd ≫ PJ.d (p + 1) (p + 1 + 1)))

@@ -35,7 +35,6 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-set_option linter.unusedVariables false in
 /-- Ordinary affine mate calculation before extension of the source cohomology. -/
 theorem exists_affineBaseChangeTildeOrdinaryComparison
     (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']
@@ -78,7 +77,7 @@ theorem exists_affineBaseChangeTildeOrdinaryComparison
           DerivedCategory.homologyFunctor
             (SheafOfModules.{u} (moduleRings (Spec (.of R')).toRingedSpace)) i,
     let L : schemeDerivedQCohCategory (Spec (.of A')) := ⟨_, hL⟩
-    let V := (affineDerivedCohomologyModules A' i).obj L
+    let _V := (affineDerivedCohomologyModules A' i).obj L
     let T := tilde.functor (.of R')
     let H := DerivedCategory.homologyFunctor
       (SheafOfModules.{u} (moduleRings (Spec (.of R')).toRingedSpace)) i

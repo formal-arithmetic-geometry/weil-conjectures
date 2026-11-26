@@ -66,7 +66,7 @@ private noncomputable def chainEquivalenceGeneric
   (β_ P L).homFromEquiv.trans
     ((CochainComplex.internalHomEquiv L M P).trans e.symm.homToEquiv)
 
-set_option linter.unusedSectionVars false in
+omit [HasColimitsOfSize.{0, 0} D] in
 private theorem chainEquivalenceGeneric_symm_component
     (P L M K : CochainComplex D ℤ) (e : K ≅ CochainComplex.internalHomObj L M)
     (π : ∀ (n p q : ℤ), p + n = q → (K.X n ⟶ (ihom (L.X p)).obj (M.X q)))
@@ -91,7 +91,8 @@ private theorem chainEquivalenceGeneric_symm_component
   simp only [Units.smul_def, smul_smul, ← Units.val_mul, Int.units_mul_self, Units.val_one,
     one_smul]
 
-set_option linter.unusedSectionVars false in
+omit [HasLimitsOfSize.{0, 0} D] [HasColimitsOfSize.{0, 0} D]
+  [∀ (W X Y Z : GradedObject ℤ D), GradedObject.HasTensor₄ObjExt W X Y Z] in
 private theorem tensorMap_naturality
     (P P' L L' M M' : CochainComplex D ℤ)
     (f : P' ⟶ P) (g : L' ⟶ L) (h : M ⟶ M')
@@ -141,7 +142,7 @@ private noncomputable def homotopyEquivGeneric
           ((HomotopyCategory.quotient _ _).obj P) ((HomotopyCategory.quotient _ _).obj M)).trans
       ((HomotopyCategory.quotient _ _).mapIso (e)).symm.homToEquiv)
 
-set_option linter.unusedSectionVars false in
+omit [HasColimitsOfSize.{0, 0} D] in
 private theorem homotopyEquivGeneric_map
     (P L M K : CochainComplex D ℤ)
     (e : K ≅ CochainComplex.internalHomObj L M) (ψ : P ⊗ L ⟶ M) :
@@ -162,6 +163,7 @@ private theorem homotopyEquivGeneric_map
   unfold chainEquivalenceGeneric
   rfl
 
+omit [HasColimitsOfSize.{0, 0} D] in
 private theorem homotopyEquivGeneric_symm_map
     (P L M K : CochainComplex D ℤ)
     (e : K ≅ CochainComplex.internalHomObj L M)
@@ -461,7 +463,8 @@ private theorem nativeUncurry_eq
   erw [tensorHomAdjunction, Adjunction.mkOfHomEquiv_homEquiv]
   rfl
 
-set_option linter.unusedSectionVars false in
+omit [HasSheafify J AddCommGrpCat.{max c v u}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}] in
 private theorem baseLimits : HasLimitsOfSize.{0, 0} (Modules.{c, v, u} J R) :=
   hasLimitsOfSizeShrink.{0, 0, max c v u, max c v u} (Modules.{c, v, u} J R)
 attribute [local instance 1000] baseLimits
@@ -599,21 +602,27 @@ private theorem qHomEquiv_map
         ((HomotopyCategory.quotient (Modules.{c, v, u} J R) (.up ℤ)).map f) =
       DerivedCategory.Q.map f := GenericDerived.qHomEquiv_map P I f
 
-set_option linter.unusedSectionVars false in
+omit [HasSheafify J AddCommGrpCat.{max c v u}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}]
+  [HasDerivedCategory.{w} (Modules.{c, v, u} J R)] in
 private theorem baseFlat :
     Abelian.HasFunctorialFlatResolution (Modules.{c, v, u} J R) :=
   SheafOfModules.hasFunctorialFlatResolution_kfi R
 
 attribute [local instance 1000] baseFlat
 
-set_option linter.unusedSectionVars false in
+omit [HasSheafify J AddCommGrpCat.{max c v u}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}]
+  [HasDerivedCategory.{w} (Modules.{c, v, u} J R)] in
 private theorem auxTensorLeftColimits (M : Modules.{c, v, u} J R) :
     PreservesColimitsOfSize.{0, 0} (tensorLeft M) :=
   SheafOfModules.cochainTensorLeftPreservesColimits R M
 
 attribute [local instance 1000] auxTensorLeftColimits
 
-set_option linter.unusedSectionVars false in
+omit [HasSheafify J AddCommGrpCat.{max c v u}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}]
+  [HasDerivedCategory.{w} (Modules.{c, v, u} J R)] in
 private theorem auxTensorRightColimits (M : Modules.{c, v, u} J R) :
     PreservesColimitsOfSize.{0, 0} (tensorRight M) :=
   SheafOfModules.cochainTensorRightPreservesColimits R M
@@ -669,7 +678,7 @@ private theorem kFlatLocalization :
         infer_instance) rfl
   exact LocalizerMorphism.IsLocalizedEquivalence.isLocalization Φ DerivedCategory.Q
 
-set_option linter.unusedSectionVars false in
+omit [HasDerivedCategory.{w} (Modules.{c, v, u} J R)] in
 private theorem baseGrothendieck :
     IsGrothendieckAbelian.{max c v u} (Modules.{c, v, u} J R) :=
   (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{c, v, u}
@@ -677,6 +686,7 @@ private theorem baseGrothendieck :
 
 attribute [local instance 1000] baseGrothendieck
 
+omit [HasDerivedCategory.{w} (Modules.{c, v, u} J R)] in
 private theorem resolutionKInjective (M : CochainComplex (Modules.{c, v, u} J R) ℤ) :
     ((coefficientHomResolution.{u, c, v} J R).obj M).IsKInjective :=
   CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{max c v u} _ M
@@ -939,6 +949,7 @@ private theorem closedStructure_representatives
     (representativeFunctor.{c, v, u, w} J R) (representativeW.{c, v, u} J R)
     (representativeHomIso.{c, v, u, w} J R) (op P, (op L, M)) ξ
 
+-- Omitting the unused `HasDerivedCategory.{w}` drops universe `w`, which callers pass explicitly.
 set_option linter.unusedSectionVars false in
 private theorem chainEquiv_symm_pure
     (P L M : CochainComplex (Modules.{c, v, u} J R) ℤ)

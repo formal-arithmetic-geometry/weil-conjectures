@@ -42,7 +42,7 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex
       (.up ℤ)).obj Q) ⟶ N)
 
-set_option linter.unusedSectionVars false in
+omit [HasDerivedCategory (ModuleCat.{u} A)] in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The localized comparison on a direct sum is conjugate to the sum of the comparisons. -/
 theorem exists_localizedTensorComparison_direct_sum_square

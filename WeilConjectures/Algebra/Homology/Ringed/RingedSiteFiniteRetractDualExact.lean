@@ -71,6 +71,7 @@ private def finiteHom_sum_iso {D E : Type*} [Category* D] [Category* E]
     (κ : Type*) [Fintype κ] : H.obj (op (∐ fun _ : κ ↦ A)) ≅ ∐ fun _ : κ ↦ B :=
   finiteHom_iso H A B e κ ≪≫ biproduct.isoCoproduct _
 
+-- Replacing `[Fintype κ]` by `[Finite κ]` would change the statement.
 set_option linter.unusedFintypeInType false in
 private lemma finiteHom_coproduct_projection {E : Type*} [Category* E]
     [Preadditive E] [HasFiniteBiproducts E]
