@@ -188,8 +188,6 @@ lemma baseChangeTransport_self {X Y : Scheme.{u}} (s : Y ⟶ Y) (g : Y ⟶ X) [W
     (hs : s ≫ g = g) : baseChangeTransport s g hs = baseChangeAction g s hs :=
   rfl
 
-set_option linter.flexible false in
--- the components of the comparison are only reached after normalising with `simp`
 /-- The transpose of the composition isomorphism of base changes is the comparison
 `baseChangeTransport`. -/
 lemma mapComp_hom_app_comp_map_pullbackComp_hom_app {X Y Y' : Scheme.{u}} (s : Y' ⟶ Y)
@@ -205,9 +203,21 @@ lemma mapComp_hom_app_comp_map_pullbackComp_hom_app {X Y Y' : Scheme.{u}} (s : Y
       (baseChangeTransport s g rfl).app V := by
   refine MorphismProperty.Over.Hom.ext ?_
   apply pullback.hom_ext
-  · simp [baseChangeTransport]
+  · simp only [Functor.id_obj, Functor.const_obj_obj, Functor.comp_obj,
+      MorphismProperty.Over.mapPullbackAdj_counit_app, Functor.map_comp,
+      MorphismProperty.Comma.comp_hom, Comma.comp_left, MorphismProperty.Over.mapComp_hom_app_left,
+      MorphismProperty.Over.map_map_left, MorphismProperty.Over.pullbackComp_hom_app_left,
+      pullback.map_id, Category.id_comp, MorphismProperty.Over.homMk_hom, Over.homMk_left,
+      Category.assoc, baseChangeTransport, limit.lift_π, PullbackCone.mk_pt,
+      PullbackCone.mk_π_app, Category.comp_id]
     exact (Category.id_comp _).trans (pullbackLeftPullbackSndIso_inv_fst V.hom g s)
-  · simp [baseChangeTransport]
+  · simp only [Functor.id_obj, Functor.const_obj_obj, Functor.comp_obj,
+      MorphismProperty.Over.mapPullbackAdj_counit_app, Functor.map_comp,
+      MorphismProperty.Comma.comp_hom, Comma.comp_left, MorphismProperty.Over.mapComp_hom_app_left,
+      MorphismProperty.Over.map_map_left, MorphismProperty.Over.pullbackComp_hom_app_left,
+      pullback.map_id, Category.id_comp, MorphismProperty.Over.homMk_hom, Over.homMk_left,
+      Category.assoc, baseChangeTransport, limit.lift_π, PullbackCone.mk_pt,
+      PullbackCone.mk_π_app]
     exact (Category.id_comp _).trans (pullbackLeftPullbackSndIso_inv_fst_snd V.hom g s)
 
 /-- The morphism `g_* j_g^* H ⟶ p₁_* j_{p₁}^* H` of restriction along `baseChangeTransport`. -/

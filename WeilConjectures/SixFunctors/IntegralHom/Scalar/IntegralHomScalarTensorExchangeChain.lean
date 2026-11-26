@@ -23,7 +23,6 @@ pure total-tensor generators, without unfolding the derived constructions.
 @[expose] public section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option linter.style.haveILetI false
 universe d u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace WeilConjectures.IntegralHom
@@ -38,10 +37,10 @@ private theorem total_component_ext
         (AlgebraicGeometry.Scheme.ProEt.topology X) R P Q i j k hij U x y) =
       g.val.app U (coefficientTensorGenerator.{u, u + 1, u}
         (AlgebraicGeometry.Scheme.ProEt.topology X) R P Q i j k hij U x y)) : f = g := by
-  letI := tensorLocalization.{u, u} X R
-  letI := countableColimits.{u, u} X R
-  letI := ordinaryTensorZero.{u, u} X R
-  letI := ordinaryTensorObjZero.{u, u} X R
+  let := tensorLocalization.{u, u} X R
+  let := countableColimits.{u, u} X R
+  let := ordinaryTensorZero.{u, u} X R
+  let := ordinaryTensorObjZero.{u, u} X R
   apply HomologicalComplex.mapBifunctor.hom_ext
   intro i j hij
   let adj := PresheafOfModules.sheafificationAdjunction (𝟙

@@ -70,7 +70,6 @@ instance preservesKFlatQuasiIso_tensorRight : (tensorRight c).PreservesKFlatQuas
 noncomputable abbrev derivedSingle : DerivedCategory (Sheaf X.smallEtaleTopology A) :=
   DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj ((single _ (.up ℤ) 0).obj c))
 
-set_option linter.unusedSimpArgs false in
 /-- On homotopy categories, the tensor product with `c` placed in degree `0` is the degreewise
 tensor product with `c`. -/
 noncomputable def tensorSingleIso :
@@ -92,7 +91,7 @@ noncomputable def tensorSingleIso :
         have h' := Functor.LaxMonoidal.μ_natural_left (HomotopyCategory.quotient _ (.up ℤ)) f
           ((single (Sheaf X.smallEtaleTopology A) (.up ℤ) 0).obj c)
         dsimp at h h' ⊢
-        simp only [Functor.Monoidal.μIso_hom, Functor.mapIso_hom, Iso.app_hom, Category.assoc]
+        simp only [Category.assoc]
         rw [reassoc_of% h']
         congr 1
         exact (Functor.map_comp _ _ _).symm.trans

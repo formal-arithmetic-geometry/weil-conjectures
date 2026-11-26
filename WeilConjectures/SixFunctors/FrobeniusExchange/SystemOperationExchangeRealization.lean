@@ -105,8 +105,6 @@ of étale cohomology of constructible complexes, but over an arbitrary field it 
 -/
 
 @[expose] public noncomputable section
-set_option linter.unusedSectionVars false
-set_option linter.mathlibStandardSet false
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
@@ -537,7 +535,6 @@ section OpenEvaluationProof
 
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
-set_option linter.style.haveILetI false
 
 open Opposite
 
@@ -652,7 +649,7 @@ private theorem systemOpenEvaluationOrdinaryInv_isIso {U X : Scheme.{u}} (j : U 
       (TwoSquare.mk _ _ _ _
         (@asIso _ _ _ _ (systemPullEvaluationOrdinaryInv l E j n)
           (systemPullEvaluationOrdinaryInv_isIso l E j n)).inv)) := by
-  letI : (integralComparisonSequenceDirectImage l E j).IsRightAdjoint :=
+  let : (integralComparisonSequenceDirectImage l E j).IsRightAdjoint :=
     integralComparisonSequenceRightAdjoint l E j
   let b := sfIntrinsicConstantModuleAdjunction j
     (Padic.coefficientExtensionRing l E (n + 1))
@@ -674,7 +671,7 @@ private theorem systemOpenEvaluationOrdinaryInv_isIso {U X : Scheme.{u}} (j : U 
   have hi : IsIso ((mateEquiv (systemOpenAdjunction l E j) c).symm β.inv) :=
     inverseMate_isIso_of_counit
       (systemOpenAdjunction l E j) c β.inv e he
-  letI := hi
+  let := hi
   exact IntegralSystemRealization.inverseMate_change_left
     (systemOpenAdjunction l E j) (systemOpenAdjunction l E j)
     (sfIntrinsicOpenAdjunction (Padic.coefficientExtensionRing l E (n + 1)) j) c β.inv
@@ -685,21 +682,21 @@ end MateNormalization
 theorem systemOpenEvaluationInv_isIso {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (n : ℕ) : IsIso (systemOpenEvaluationInv l E j n) := by
   let A := Padic.coefficientExtensionRing l E (n + 1)
-  letI := sfIntrinsicPullback_additive A j
-  letI := sfIntrinsicPullback_preservesFiniteLimits A j
-  letI := sfIntrinsicPullback_preservesFiniteColimits A j
-  letI := sfIntrinsicExtensionByZero_additive j A
-  letI := sfIntrinsicExtensionByZero_preservesFiniteLimits j A
-  letI := sfIntrinsicExtensionByZero_preservesFiniteColimits j A
-  letI := coefficientSequenceEvaluation_additiveInstance l E U n
-  letI := coefficientSequenceEvaluation_additiveInstance l E X n
-  letI := coefficientSequenceEvaluation_limits l E U n
-  letI := coefficientSequenceEvaluation_limits l E X n
-  letI := coefficientSequenceEvaluation_colimits l E U n
-  letI := coefficientSequenceEvaluation_colimits l E X n
+  let := sfIntrinsicPullback_additive A j
+  let := sfIntrinsicPullback_preservesFiniteLimits A j
+  let := sfIntrinsicPullback_preservesFiniteColimits A j
+  let := sfIntrinsicExtensionByZero_additive j A
+  let := sfIntrinsicExtensionByZero_preservesFiniteLimits j A
+  let := sfIntrinsicExtensionByZero_preservesFiniteColimits j A
+  let := coefficientSequenceEvaluation_additiveInstance l E U n
+  let := coefficientSequenceEvaluation_additiveInstance l E X n
+  let := coefficientSequenceEvaluation_limits l E U n
+  let := coefficientSequenceEvaluation_limits l E X n
+  let := coefficientSequenceEvaluation_colimits l E U n
+  let := coefficientSequenceEvaluation_colimits l E X n
   let β := @asIso _ _ _ _ (systemPullEvaluationOrdinaryInv l E j n)
     (systemPullEvaluationOrdinaryInv_isIso l E j n)
-  letI : IsIso ((mateEquiv (systemOpenAdjunction l E j)
+  let : IsIso ((mateEquiv (systemOpenAdjunction l E j)
       (sfIntrinsicOpenAdjunction A j)).symm
       (TwoSquare.mk _ _ _ _ β.symm.hom)) := by
     simpa only [β, A, Iso.symm_hom] using systemOpenEvaluationOrdinaryInv_isIso l E j n
@@ -982,6 +979,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 include hl xo yo xft xqc yft yqc fo
 
+-- `hl`, `xo` and `yo` stay in the signature so that all operations share one argument list.
+set_option linter.unusedSectionVars false in
 /-- The integral direct-image construction is the recorded Roos object. -/
 theorem directImage_roos (K : sfIntegralConstructibleCategory l E X) :
     ∃ hprod : HasProduct (sfDirectImageTerm l E f K.obj),
@@ -1130,6 +1129,8 @@ def CompactRealizationSpec (c : Compactification f)
         (compactFiniteEvaluation l E c n).hom.app K.obj =
       (sfCompactSupportFiniteReductionIso l K₀ hl c E K n).hom
 
+omit [∀ x : X, Invertible (l : X.residueField x)]
+  [∀ y : Y, Invertible (l : Y.residueField y)] in
 /-- There is a projection-normalized identification of the recorded Rf_! with the
 simultaneous system realization, on the entire constructible category. -/
 theorem compactRealization_exists (c : Compactification f) :
@@ -1151,6 +1152,8 @@ theorem compactRealization_exists (c : Compactification f) :
       rw [compactFiniteEvaluation_hom_app]
       exact_by_kernel hγ K n)
 
+omit [∀ x : X, Invertible (l : X.residueField x)]
+  [∀ y : Y, Invertible (l : Y.residueField y)] in
 /-- Uniqueness of the projection-normalized identification, given that the shifted Hom
 groups from the recorded Rf_! into its finite restricted reductions are finite. -/
 theorem compactRealization_unique_of_finite (c : Compactification f)

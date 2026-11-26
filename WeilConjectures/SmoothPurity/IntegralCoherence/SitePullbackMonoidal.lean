@@ -22,7 +22,6 @@ adjunction-unit images of pure tensors.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option linter.unusedSectionVars false
 
 universe c v r uC vC w
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
@@ -178,11 +177,13 @@ theorem moduleTmul_restrict
   exact hi.symm.trans
     (congrArg ((SheafOfModules.tensorObjIsoSheafification M N).inv.val.app V) hu.symm)
 
+omit [EssentiallySmall.{w} C] in
 /-- Evaluation of a composite of sheaf-module morphisms on a section. -/
 theorem comp_val_app_apply {A B T : SheafOfModules.{w}
     ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)} (f : A ⟶ B) (g : B ⟶ T)
     (W : Cᵒᵖ) (z : A.val.obj W) : (f ≫ g).val.app W z = g.val.app W (f.val.app W z) := rfl
 
+omit [EssentiallySmall.{w} C] in
 /-- Evaluation of an identity of sheaf modules on a section. -/
 theorem id_val_app_apply {A : SheafOfModules.{w}
     ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)}
@@ -251,6 +252,7 @@ theorem ordinary_natural {M M' N N' : SheafOfModules.{r}
     adj).exists.choose.normalized.2 M M' N N' a b
 
 include adj in
+omit [EssentiallySmall.{r} C] [EssentiallySmall.{r} D] [RepresentablyFlat U] [F.Additive] in
 /-- Naturality of the adjunction unit, evaluated on a section. -/
 theorem unit_naturality_apply {A B : SheafOfModules.{r}
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)} (g : A ⟶ B)
@@ -259,6 +261,7 @@ theorem unit_naturality_apply {A B : SheafOfModules.{r}
       (adj.unit.app B).val.app (op V) (g.val.app (op V) a) :=
   (congrArg (fun k ↦ k.val.app (op V) a) (adj.unit.naturality g)).symm
 
+omit [EssentiallySmall.{r} D] [RepresentablyFlat U] [F.Additive] in
 /-- Maps out of the pullback of a tensor product are determined on unit images of pure
 tensors. -/
 theorem hom_ext_pure {M N : SheafOfModules.{r}
@@ -277,6 +280,7 @@ theorem hom_ext_pure {M N : SheafOfModules.{r}
   intro W x y
   exact h W.unop x y
 
+omit [EssentiallySmall.{r} D] [RepresentablyFlat U] [F.Additive] in
 /-- Maps out of the pullback of a triple tensor product are determined on unit images of
 pure triples. -/
 theorem hom_ext_pure₃ {M N P : SheafOfModules.{r}
@@ -321,6 +325,7 @@ def unitMap : F.obj (𝟙_ (SheafOfModules.{r}
 instance unitMap_isIso : IsIso (unitMap J K U R S φ F adj) :=
   unitMap₀_isIso J K U R S φ F adj
 
+omit [RepresentablyFlat U] [F.Additive] in
 /-- The unit comparison sends the unit image of a scalar to its image in the target ring. -/
 theorem unitMap_apply (V : C) (a : R.obj.obj (op V)) :
     (unitMap J K U R S φ F adj).val.app (op (U.obj V))

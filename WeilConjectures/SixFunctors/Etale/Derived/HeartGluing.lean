@@ -60,8 +60,6 @@ noncomputable def Etale.localizationRestrictionComp :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
--- the `simp` call computes the conjugate on sections
-set_option linter.flexible false in
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 lemma Etale.conjugateEquiv_localizationRestrictionComp_inv :
     conjugateEquiv (Etale.localizationRestrictionLowerStarAdjunction A g₁₂ h₁₂)
@@ -73,11 +71,20 @@ lemma Etale.conjugateEquiv_localizationRestrictionComp_inv :
   ext G : 2
   apply Sheaf.hom_ext
   refine NatTrans.ext (funext fun U ↦ ?_)
-  simp [conjugateEquiv_apply_app, Etale.localizationRestrictionLowerStarAdjunction,
-    Etale.localizationRestrictionComp, Etale.lowerStarComp, MorphismProperty.Over.mapPullbackAdj,
+  simp only [lowerStar, Functor.sheafPushforwardContinuous_obj_obj_obj, Functor.comp_obj,
+    localizationRestriction, localizationRestrictionLowerStarAdjunction,
+    MorphismProperty.Over.mapPullbackAdj, Functor.id_obj, MorphismProperty.Over.map_obj_left,
+    Functor.const_obj_obj, MorphismProperty.Over.map_obj_hom, localizationRestrictionComp,
     Functor.sheafPushforwardContinuousComp', Functor.sheafPushforwardContinuousComp,
-    Functor.sheafPushforwardContinuousIso, Etale.localizationRestriction,
-    Etale.lowerStar, ← Functor.map_comp]
+    Functor.sheafPushforwardContinuousIso, Iso.symm_inv, Iso.symm_hom, Iso.refl_trans, Iso.symm_mk,
+    conjugateEquiv_apply_app, Adjunction.comp_unit_app, Functor.comp_map, ← Functor.map_comp,
+    Category.assoc, ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
+    Adjunction.sheafPushforwardContinuous_unit_app_hom_app,
+    Functor.sheafPushforwardContinuous_obj_obj_map, Quiver.Hom.unop_op,
+    Functor.sheafPushforwardContinuous_map_hom_app, MorphismProperty.Over.pullback_obj_left,
+    MorphismProperty.Over.pullback_obj_hom, Functor.sheafPushforwardContinuousNatTrans_app_hom,
+    ObjectProperty.ι_obj, Functor.whiskerRight_app, Functor.op_obj, NatTrans.op_app,
+    Adjunction.sheafPushforwardContinuous_counit_app_hom_app, lowerStarComp]
   congr 1
   apply Quiver.Hom.unop_inj
   ext
@@ -269,8 +276,6 @@ lemma Etale.upperStarComp_conj {R S T : Scheme.{u}} (g₁ : T ⟶ S) (g₂ : S �
 variable {X : Scheme.{u}} {ι : Type u} {V : ι → Scheme.{u}} (e : ∀ j, V j ⟶ X)
   (he : ∀ j, Etale (e j))
 
--- the `simp` call computes the composite restrictions on sections
-set_option linter.flexible false in
 include he in
 theorem Etale.exists_hom_of_upperStar (hcov : ⋃ j, Set.range (e j).base = Set.univ)
     (F G : Sheaf X.smallEtaleTopology A) (φ : ∀ j, (e j)^*[A].obj F ⟶ (e j)^*[A].obj G)
@@ -300,9 +305,13 @@ theorem Etale.exists_hom_of_upperStar (hcov : ⋃ j, Set.range (e j).base = Set.
       Etale.upperStarComp_conj tk (e k) hb (he k) T.hom hk.symm T.prop] at E'
     let U₀ : T.left.Etale := MorphismProperty.Over.mk ⊤ (𝟙 T.left) inferInstance
     have E'' := congrArg (fun f ↦ f.hom.app (op U₀)) E'
-    simp [Etale.localizationRestrictionComp, Functor.sheafPushforwardContinuousComp',
-      Functor.sheafPushforwardContinuousComp, Functor.sheafPushforwardContinuousIso,
-      Etale.localizationRestriction] at E''
+    simp only [Functor.id_obj, Functor.const_obj_obj, localizationRestriction, Functor.comp_obj,
+      localizationRestrictionComp, Functor.sheafPushforwardContinuousComp',
+      Functor.sheafPushforwardContinuousComp, Functor.sheafPushforwardContinuousIso, Iso.symm_inv,
+      Iso.symm_hom, Iso.refl_trans, Iso.symm_mk, Functor.map_comp, Category.assoc,
+      ObjectProperty.FullSubcategory.comp_hom, Functor.sheafPushforwardContinuousNatTrans_app_hom,
+      ObjectProperty.ι_obj, NatTrans.comp_app, Functor.whiskerRight_app, Functor.op_obj,
+      NatTrans.op_app, Functor.sheafPushforwardContinuous_map_hom_app] at E''
     let ε : T ≅ (MorphismProperty.Over.map ⊤ T.prop).obj U₀ :=
       MorphismProperty.Over.isoMk (Iso.refl _) (Category.id_comp _)
     have side : ∀ (i : ι) (t : T.left ⟶ V i) (h : t ≫ e i = T.hom) (ht : Etale t),

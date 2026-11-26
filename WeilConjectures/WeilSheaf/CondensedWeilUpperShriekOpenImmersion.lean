@@ -100,13 +100,15 @@ noncomputable abbrev condensedOpenImmersionExchange :=
     (shriekCompactification k₀ f).i
     (comp_over (shriekCompactification k₀ f).i (Spec (CommRingCat.of k₀)))
 
-set_option linter.style.longLine false in
-set_option linter.unusedSectionVars false in
+omit [Fact (ringChar k₀ ≠ l)] [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] in
 variable (k₀) in
 /-- The condensed Weil pullback `D(i^*)` along the open immersion of the compactification
 preserves bounded constructible condensed Weil complexes. -/
 theorem condensedWeilObjectProperty_openImmersionUpperStar
-    (M : _root_.DerivedCategory (IsoAlgebra (condensedFrobenius k₀ l (shriekCompactification k₀ f).Z)))
+    (M : _root_.DerivedCategory
+      (IsoAlgebra (condensedFrobenius k₀ l (shriekCompactification k₀ f).Z)))
     (hM : condensedWeilObjectProperty k₀ l (shriekCompactification k₀ f).Z M) :
     condensedWeilObjectProperty k₀ l X
       ((IsoAlgebra.mapOfNatIso (condensedOpenImmersionExchange k₀ l f)).mapDerivedCategory.obj M) :=
@@ -139,10 +141,10 @@ noncomputable def condensedGeometricUpperShriek :
       (fun K hK ↦ CondensedRing.boundedConstructible_mapDerivedCategory_upperStar_obj _
         (condensedOpenImmersionMap k₀ f) K hK)
 
-set_option linter.style.longLine false in
 variable (k₀) in
 /-- The underlying bounded constructible condensed complex of a condensed Weil complex. -/
-noncomputable abbrev condensedForgetObj (L' : (condensedWeilObjectProperty k₀ l Y).FullSubcategory) :
+noncomputable abbrev condensedForgetObj
+    (L' : (condensedWeilObjectProperty k₀ l Y).FullSubcategory) :
     (condensedBoundedConstructible k₀ l Y).FullSubcategory :=
   ⟨(IsoAlgebra.forget _).mapDerivedCategory.obj L'.obj, L'.property⟩
 

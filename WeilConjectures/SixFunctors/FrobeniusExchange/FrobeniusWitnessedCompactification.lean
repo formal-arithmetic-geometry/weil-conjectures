@@ -48,7 +48,6 @@ transported from `ProEtale.compactification_coherence` through the explicit mode
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option Elab.async true
 set_option genInjectivity false
 set_option genSizeOfSpec false
@@ -396,6 +395,7 @@ variable (X : Scheme.{u})
 @[instance_reducible] private def recordedTopology : TopologicalSpace (ULift.{u + 1} A) := ⊥
 attribute [local instance] recordedTopology
 
+omit [CommRing A] [Finite A] in
 private theorem recordedDiscrete : @DiscreteTopology (ULift.{u + 1} A) (recordedTopology A) :=
   discreteTopology_bot _
 attribute [local instance] recordedDiscrete

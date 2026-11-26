@@ -66,15 +66,15 @@ noncomputable abbrev compactificationOpenImmersion :=
   Scheme.Hom.geometricFiberMap (shriekCompactification k₀ f).i
     (comp_over (shriekCompactification k₀ f).i (Spec (CommRingCat.of k₀)))
 
-set_option linter.style.longLine false in
 instance : IsOpenImmersion (compactificationOpenImmersion k₀ f) :=
-  have : IsOpenImmersion (shriekCompactification k₀ f).i := (shriekCompactification k₀ f).isOpenImmersion
+  have : IsOpenImmersion (shriekCompactification k₀ f).i :=
+    (shriekCompactification k₀ f).isOpenImmersion
   Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsOpenImmersion)
     (shriekCompactification k₀ f).i _ ‹_›
 
-set_option linter.style.longLine false in
 instance : QuasiCompact (compactificationOpenImmersion k₀ f) :=
-  have : IsOpenImmersion (shriekCompactification k₀ f).i := (shriekCompactification k₀ f).isOpenImmersion
+  have : IsOpenImmersion (shriekCompactification k₀ f).i :=
+    (shriekCompactification k₀ f).isOpenImmersion
   have : IsLocallyNoetherian Y :=
     LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (CommRingCat.of k₀))
   have : CompactSpace Y :=
@@ -90,7 +90,6 @@ instance : QuasiCompact (compactificationOpenImmersion k₀ f) :=
   Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @QuasiCompact)
     (shriekCompactification k₀ f).i _ ‹_›
 
-set_option linter.style.longLine false in
 variable (k₀) in
 /-- The levelwise derived adjunction `D(ī_!) ⊣ D(ī^*)`, restricted to bounded constructible adic
 complexes. -/
@@ -107,8 +106,9 @@ noncomputable abbrev openImmersionBoundedConstructibleAdjunction :
           ).liftFullSubcategory
         (DerivedCategory.boundedConstructibleAdic l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
         (adicUpperStar l (compactificationOpenImmersion k₀ f)).mapDerivedCategory
-        (fun _ hK ↦ ProEtale.DerivedCategory.boundedConstructibleAdic.mapDerivedCategory_adicUpperStar
-          (compactificationOpenImmersion k₀ f) hK) :=
+        (fun _ hK ↦
+          ProEtale.DerivedCategory.boundedConstructibleAdic.mapDerivedCategory_adicUpperStar
+            (compactificationOpenImmersion k₀ f) hK) :=
   ObjectProperty.liftFullSubcategoryAdjunction
     ((adicOpenImmersionLowerShriekAdjunction l
       (compactificationOpenImmersion k₀ f)).mapDerivedCategoryAdjunction) _ _
@@ -153,13 +153,12 @@ noncomputable def openImmersionBoundedConstructibleExchange :
 
 variable {f} [HasUpperShriek k₀ l f]
 
-set_option linter.style.whitespace false in
 /-- The adjunction `f̄_! ⊣ f̄^!` for `f̄_! = Rḡ_* ∘ ī_!` and `f̄^! = ī^* ∘ ḡ^!`. -/
 noncomputable abbrev compactifiedAdjunction
     (hR : PreservesBoundedConstructibleAdicLowerStar k₀ l f)
     {R' : (DerivedCategory.boundedConstructibleAdic l
-        (Over.mk (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).left
-          ).FullSubcategory ⥤
+        (Over.mk
+          (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).left).FullSubcategory ⥤
       (DerivedCategory.boundedConstructibleAdic l
         (geometricFiberHomCompactification (k₀ := k₀) f).overObj.left).FullSubcategory}
     (adjR' : (DerivedCategory.boundedConstructibleAdic l
@@ -187,7 +186,9 @@ noncomputable def compactifiedExchange (hR : PreservesBoundedConstructibleAdicLo
     Functor.isoWhiskerRight (openImmersionBoundedConstructibleExchange k₀ f) _ ≪≫
     Functor.associator _ _ _
 
-set_option linter.unusedSectionVars false in
+omit [Fact (ringChar k₀ ≠ l)] [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+  [HasUpperShriek k₀ l f] in
 lemma compactifiedExchange_hom_app (hR : PreservesBoundedConstructibleAdicLowerStar k₀ l f)
     (K) :
     (compactifiedExchange (f := f) hR).hom.app K =
@@ -210,15 +211,17 @@ lemma compactifiedExchange_hom_app (hR : PreservesBoundedConstructibleAdicLowerS
   simp [compactifiedExchange]
   rfl
 
-set_option linter.style.whitespace false in
+omit [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+  [HasUpperShriek k₀ l f] in
 /-- **The exceptional datum is the right Weil datum of `f̄_! ⊣ f̄^!`**: the unique Weil datum on
 `f̄^! L̄ = ī^* ḡ^! L̄` for which the counit `f̄_! f̄^! L̄ ⟶ L̄` is Frobenius equivariant, for the
 composite exchange of `f̄_! = Rḡ_* ∘ ī_!`. -/
 theorem upperShriekExceptionalDatum_eq_rightWeilDatum
     (hR : PreservesBoundedConstructibleAdicLowerStar k₀ l f)
     {R' : (DerivedCategory.boundedConstructibleAdic l
-        (Over.mk (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).left
-          ).FullSubcategory ⥤
+        (Over.mk
+          (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).left).FullSubcategory ⥤
       (DerivedCategory.boundedConstructibleAdic l
         (geometricFiberHomCompactification (k₀ := k₀) f).overObj.left).FullSubcategory}
     (adjR' : (DerivedCategory.boundedConstructibleAdic l

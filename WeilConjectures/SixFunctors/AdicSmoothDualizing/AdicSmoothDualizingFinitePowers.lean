@@ -65,12 +65,11 @@ private theorem etalePowerPresentation_eq (P : PurityFiniteSetting.{u})
       cases hc
       rfl
 
-set_option linter.unusedVariables false in
 /-- The canonical finite tensor presentation, with its full normalization stored
 in its type, is uniquely determined. -/
 theorem existsUnique_etalePowerPresentation (P : PurityFiniteSetting.{u}) (T : Scheme.{u})
     (hT : IsUnit (P.diagonalExponent : Γ(T, ⊤))) :
-    ∃! e : EtalePowerPresentation P T hT, True := by
+    ∃! _e : EtalePowerPresentation P T hT, True := by
   obtain ⟨e⟩ := etalePowerPresentation_nonempty P T hT
   exact ⟨e, trivial, fun other _ ↦ etalePowerPresentation_eq P T hT other e⟩
 
