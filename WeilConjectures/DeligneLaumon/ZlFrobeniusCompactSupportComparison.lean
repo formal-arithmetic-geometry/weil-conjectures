@@ -49,6 +49,7 @@ variable (D : FiniteFieldDatum.{u})
   [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
   (f₀ : X₀ ⟶ Y₀) (c₀ : Compactification f₀.left)
 
+-- Keep the section instances as hypotheses of this public statement.
 set_option linter.unusedSectionVars false in
 /-- The geometric-fibre factorization is the base change of the model factorization. -/
 theorem zlGeometricCompactification_comm :
@@ -65,6 +66,7 @@ theorem zlGeometricCompactification_comm :
     (congrArg (fun h ↦ h.left)
       (F.map_comp (zlCompactificationOpen D f₀ c₀) (zlCompactificationProper D f₀ c₀)))
 
+-- Keep the section instances as hypotheses of this public statement.
 set_option linter.unusedSectionVars false in
 /-- The geometric proper part is proper by stability under base change. -/
 theorem zlGeometricCompactification_isProper :
@@ -73,6 +75,7 @@ theorem zlGeometricCompactification_isProper :
     (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))
     (zlCompactificationProper D f₀ c₀) c₀.isProper
 
+-- Keep the section instances as hypotheses of this public statement.
 set_option linter.unusedSectionVars false in
 /-- The geometric open part is an open immersion by stability under base change. -/
 theorem zlGeometricCompactification_isOpenImmersion :

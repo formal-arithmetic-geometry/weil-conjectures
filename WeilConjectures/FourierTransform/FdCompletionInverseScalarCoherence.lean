@@ -67,7 +67,6 @@ set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false
 set_option synthInstance.maxSize 4096
-set_option linter.all false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 attribute [local irreducible] HasDerivedCategory.standard
@@ -185,8 +184,8 @@ def FdCompletionOrdinaryFamily
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
     (T : Scheme.{u}) [IsNoetherian T]
-    [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
-    [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
+    [_dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
+    [_iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
  :=
   ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
       FdOrdinaryScalarTransport l Ω T h
@@ -197,8 +196,8 @@ def FdCompletionAmbientFamily
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
     (T : Scheme.{u}) [IsNoetherian T]
-    [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
-    [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
+    [_dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
+    [_iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
  :=
   ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
       (sfIntegralConstructible l (pbcFiniteField.{u} l Ω E) T).ι ⋙
