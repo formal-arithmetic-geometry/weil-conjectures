@@ -37,7 +37,6 @@ local instance localizedModuleHomogeneousScalarsRestrictionLocalization (T : Sub
     (algebraMap (HomogeneousLocalization 𝒜 T) (Localization T))
 
 set_option quotPrecheck false
-set_option linter.unusedVariables false
 
 local notation "Fidx" => {p : S × ℕ // 0 < p.2 ∧ p.1 ∈ 𝒜 p.2}
 local notation "R[" f "]" => HomogeneousLocalization.Away 𝒜 (f).val.1
@@ -142,7 +141,7 @@ private theorem gradedModuleChart_restriction_constants
   rw [hi]
   exact canonical_chart_constants 𝒜 f g (hg ▸ D[f].ι_image_le V) _ l hl hrho x
 
-private theorem principalOpen_chart_power (U : ∀ (f g : Fidx), R[f])
+private theorem principalOpen_chart_power (U : ∀ (f _g : Fidx), R[f])
     (hU : ∀ (f g : Fidx), (U f g).val = Localization.mk (g.val.1 ^ f.val.2)
       (⟨f.val.1 ^ g.val.2, ⟨g.val.2, rfl⟩⟩ : Submonoid.powers f.val.1))
     (f : Fidx) (r : R[f]) :
@@ -258,7 +257,7 @@ theorem gradedModuleChart_restriction_isLocalized
     (Z : ∀ f : Fidx, Submodule R[f] N[f])
     (rhoS : ∀ (f g : Fidx), D[g] ≤ D[f] → R[f] →+* R[g])
     (rho : ∀ (f g : Fidx), D[g] ≤ D[f] → Z f →+ Z g)
-    (U : ∀ (f g : Fidx), R[f])
+    (U : ∀ (f _g : Fidx), R[f])
     (hU : ∀ (f g : Fidx), (U f g).val = Localization.mk (g.val.1 ^ f.val.2)
       (⟨f.val.1 ^ g.val.2, ⟨g.val.2, rfl⟩⟩ : Submonoid.powers f.val.1))
     (theta : ∀ (f g : Fidx), D[g] ≤ D[f] →

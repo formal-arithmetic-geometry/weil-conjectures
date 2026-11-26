@@ -40,8 +40,6 @@ import WeilConjectures.AlgebraicGeometry.RationalP1.RationalP1LineFromPreservati
 import Mathlib.CategoryTheory.ObjectProperty.Shift
 import Mathlib.CategoryTheory.Triangulated.Subcategory
 
-set_option linter.style.haveILetI false
-set_option linter.unusedVariables false
 
 /-! # The specified rational projective-line unit and counit
 -/

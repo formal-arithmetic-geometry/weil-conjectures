@@ -27,7 +27,6 @@ import WeilConjectures.AlgebraicGeometry.CompatibleStrictHenselizationResidueLif
 
 universe u
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 
 open CategoryTheory Limits
 
@@ -131,10 +130,10 @@ theorem Etale.compatibleStrictHenselization_residue_square
   obtain ⟨φ, hcomm, hbase⟩ :=
     Etale.exists_compatibleStrictHenselizationResidueLift
       σ τ ι hι ν eA eB ρA ρB hρA hρB r hres
-  haveI : IsLocalHom ((IsLocalRing.residue B).comp φ) := by
+  have : IsLocalHom ((IsLocalRing.residue B).comp φ) := by
     rw [hcomm]
     infer_instance
-  haveI : IsLocalHom φ := isLocalHom_of_comp φ (IsLocalRing.residue B)
+  have : IsLocalHom φ := isLocalHom_of_comp φ (IsLocalRing.residue B)
   have hr : IsLocalRing.ResidueField.map φ = r := by
     ext x
     obtain ⟨a, rfl⟩ := IsLocalRing.residue_surjective (R := A) x

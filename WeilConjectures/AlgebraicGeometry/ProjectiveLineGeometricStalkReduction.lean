@@ -22,7 +22,6 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveLineStrictLocalModelCompariso
 
 universe u
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 
 open CategoryTheory Limits
 
@@ -92,18 +91,18 @@ theorem Etale.geometricStalk_projectiveLine_of_strictLocal
             ((ProjectiveSpace.map _ σ)^*[ModuleCat.{u + 1} Λ].obj F)) q (e₁ x) := by
   obtain ⟨A, B, cA, cB, hmodel⟩ :=
     Etale.projectiveLine_strictLocal_modelComparison Λ sq σ τ ι hι hσ hτ F q
-  letI := cA
-  letI := cB
+  let := cA
+  let := cB
   obtain ⟨hA, hB, hmodel⟩ := hmodel
-  letI := hA
-  letI := hB
+  let := hA
+  let := hB
   obtain ⟨sA, sB, hmodel⟩ := hmodel
-  letI := sA
-  letI := sB
+  let := sA
+  let := sB
   obtain ⟨φ, hφ, hmodel⟩ := hmodel
-  letI := hφ
+  let := hφ
   obtain ⟨F₀, hF₀, a₁, a₂, b₁, b₂, ha, hb⟩ := hmodel
-  letI := hF₀
+  let := hF₀
   obtain ⟨e₁, e₂, he⟩ := hLocal A B φ F₀ q
   refine ⟨(a₁.trans e₁).trans b₁, (a₂.trans e₂).trans b₂, ?_⟩
   intro x

@@ -47,11 +47,8 @@ inverse ordinary exchange followed by the direct-image and open-extension compos
 set_option autoImplicit false
 set_option backward.defeqAttrib.useBackward true
 set_option maxErrors 1
-set_option linter.style.setOption false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-set_option linter.unusedSimpArgs false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Functor
@@ -220,7 +217,7 @@ private theorem tower_exchange_plus {H T V S : Scheme.{u}}
     ObjectProperty.ι_obj] at ht ⊢
   dsimp only [Functor.comp_obj, Functor.id_obj, ObjectProperty.ι_obj] at ht ⊢
   erw [CategoryTheory.Functor.map_id] at ht ⊢
-  simp only [Category.id_comp, Category.comp_id] at ht ⊢
+  simp only [Category.comp_id] at ht ⊢
   exact ht
 
 private theorem tower_site_inverse_unit [Finite Λ] {H T : Scheme.{u}}
@@ -300,12 +297,11 @@ private theorem tower_etale_restrictionPlus_hom [Finite Λ]
     ((Etale.openImmersionLowerShriek
       (ModuleCat.{u + 1} Λ) b).mapDerivedCategoryPlus.obj E)
   rw [← Etale.baseChange_eq_derivedBaseChangeMapPlus] at he
-  simp only [Etale.properOpenCoefficientTargetPlus, Iso.trans_hom, Iso.symm_hom,
+  simp only [Etale.properOpenCoefficientTargetPlus, Iso.trans_hom,
     Iso.app_hom, Functor.mapIso_hom, Functor.map_comp, Category.assoc,
-    Functor.mapDerivedCategoryPlusCompatibility, Iso.refl_hom, NatTrans.id_app,
-    CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp]
+    Functor.mapDerivedCategoryPlusCompatibility, Iso.refl_hom, NatTrans.id_app]
   dsimp only [Functor.comp_obj] at he ⊢
-  simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp]
   erw [he]
   have hu : DerivedCategory.Plus.ι.map
       ((Etale.derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus
@@ -325,14 +321,12 @@ private theorem tower_etale_restrictionPlus_hom [Finite Λ]
     (inv ((Etale.derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus
       (ModuleCat.{u + 1} Λ) b).unit.app E))
   dsimp only [Functor.comp_map] at hn
-  simp only [Functor.map_comp, CategoryTheory.Functor.map_id, Category.comp_id, Category.assoc]
-  simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
-    Category.id_comp]
+  simp only [Category.assoc]
+  simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app]
   rw [← hui, ← reassoc_of% hn]
-  simp only [Iso.hom_inv_id_app, Category.comp_id]
+  simp only [Iso.hom_inv_id_app]
   erw [CategoryTheory.Functor.map_id]
-  simp only [Category.comp_id, Category.id_comp, Iso.hom_inv_id_app,
-    CategoryTheory.Functor.map_id]
+  simp only [Category.id_comp]
   dsimp only [Functor.comp_obj, Functor.id_obj, ObjectProperty.ι_obj]
   simp only [Category.comp_id]
 
@@ -350,8 +344,8 @@ private theorem tower_site_lambda [Finite Λ]
     towerPlusLambda Λ b i r p sq.w
         ((comparisonUpperStar (ModuleCat.{u + 1} Λ) H).mapDerivedCategoryPlus.obj E) =
       (properOpenSiteRestrictionInverse Λ sq E).inv := by
-  letI := isIso_fixedComparisonDirectImageMatePlus Λ p
-  letI := isIso_fixedComparisonDirectImageMatePlus Λ r
+  let := isIso_fixedComparisonDirectImageMatePlus Λ p
+  let := isIso_fixedComparisonDirectImageMatePlus Λ r
   let C := (comparisonUpperStar (ModuleCat.{u + 1} Λ) H).mapDerivedCategoryPlus
   let P := (lowerStar (ModuleCat.{u + 1} Λ) p).rightDerivedFunctorPlus
   let R := (lowerStar (ModuleCat.{u + 1} Λ) r).rightDerivedFunctorPlus
@@ -386,8 +380,7 @@ private theorem tower_site_lambda [Finite Λ]
     Iso.app_hom, Iso.app_inv, Functor.mapIso_inv, asIso_hom, asIso_inv,
     Functor.map_comp, Category.assoc]
   dsimp only [I, P, Functor.comp_obj, Functor.id_obj]
-  simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app_assoc,
-    Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
+  simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app]
   erw [(lowerStar (ModuleCat.{u + 1} Λ) p).rightDerivedFunctorPlus.map_id,
     Category.id_comp]
   have hd := congr_app (IsIso.hom_inv_id (fixedComparisonDirectImageMatePlus Λ p))
@@ -503,7 +496,7 @@ private theorem tower_gamma_plus [Finite Λ]
             ((comparisonUpperStar (ModuleCat.{u + 1} Λ) H).mapDerivedCategoryPlus.obj E)) ≫
         towerGamma Λ b i r p sq.w _ hLambda := by
   let N := (comparisonUpperStar (ModuleCat.{u + 1} Λ) H).mapDerivedCategoryPlus.obj E
-  haveI : IsIso (towerLambda Λ b i r p sq.w N.obj) := hLambda
+  have : IsIso (towerLambda Λ b i r p sq.w N.obj) := hLambda
   let cp := (lowerStar (ModuleCat.{u + 1} Λ) p).rightDerivedFunctorPlusCompatibility
   let cr := (lowerStar (ModuleCat.{u + 1} Λ) r).rightDerivedFunctorPlusCompatibility
   have hl := tower_lambda_plus Λ b i r p sq.w N
@@ -531,7 +524,7 @@ private theorem tower_gamma_plus [Finite Λ]
   have hn := (derivedOpenImmersionLowerShriekUpperStarAdjunction
     (ModuleCat.{u + 1} Λ) i).unit.naturality (cr.hom.app N)
   dsimp only [Functor.id_map, Functor.comp_map] at hn
-  simp only [Adjunction.homEquiv_unit, Functor.map_comp, Category.assoc]
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp]
   dsimp only [Functor.id_obj, Functor.comp_obj, ObjectProperty.ι_obj] at hu
   erw [← hu]
   change DerivedCategory.Plus.ι.map
@@ -565,7 +558,7 @@ private theorem tower_lambda_model_isIso [Finite Λ]
   let N := (comparisonUpperStar (ModuleCat.{u + 1} Λ) H).mapDerivedCategoryPlus.obj E
   have hl := tower_lambda_plus Λ b i r p sq.w N
   rw [tower_site_lambda Λ sq E] at hl
-  haveI : IsIso ((towerPull Λ i).map
+  have : IsIso ((towerPull Λ i).map
       ((lowerStar (ModuleCat.{u + 1} Λ) p).rightDerivedFunctorPlusCompatibility.hom.app
         ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) b).mapDerivedCategoryPlus.obj N)) ≫
       towerLambda Λ b i r p sq.w N.obj) := by

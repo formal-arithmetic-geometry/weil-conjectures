@@ -117,18 +117,17 @@ private theorem exists_overlap_unit_expansion
   rw [hconst] at hval
   exact hval
 
-set_option linter.unusedVariables false in
 /-- Every unit on a distinct standard overlap has one Laurent exponent and a scalar
 coefficient.  This is the pairwise Laurent-polynomial calculation used by the
 normalization theorem.
 -/
 theorem exists_pairwise_laurent_unit_expansion (k : Type u) [Field k]
-    (r : ℕ) (hr : 3 ≤ r)
+    (r : ℕ) (_hr : 3 ≤ r)
     (t : ∀ i j : ULift.{u} (Fin r),
       Γ(ℙ(ULift.{u} (Fin r); Spec (.of k)),
         standardOpen _ (Spec (.of k)) i ⊓ standardOpen _ (Spec (.of k)) j)ˣ) :
-    ∃ e : ∀ i j : ULift.{u} (Fin r), ℤ,
-      ∃ c : ∀ i j : ULift.{u} (Fin r), kˣ,
+    ∃ e : ∀ _i _j : ULift.{u} (Fin r), ℤ,
+      ∃ c : ∀ _i _j : ULift.{u} (Fin r), kˣ,
         ∀ i j : ULift.{u} (Fin r), i ≠ j →
           (t i j).val =
             (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map

@@ -32,7 +32,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-set_option linter.checkUnivs false in
 /-- Categories, proper and quasi-compact open functors, and coherent invertible interchanges on the
 specified schemes. Opens are quasi-compact because the ambient arrows are finite type.
 The equations are at every object and hence

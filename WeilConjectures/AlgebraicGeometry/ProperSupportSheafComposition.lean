@@ -155,7 +155,6 @@ private theorem support_squareUpperStarIso {Λ : Type (u + 1)} [CommRing Λ]
     support_upperStarComp_hom a f (f' ≫ b) sq.w.symm]
   simp only [Category.assoc]
 
-set_option linter.unusedVariables false in
 /-- The proper-support subsheaves form functors, with composition, proper and open
 specializations, and base change compatible with composition.
 (Stacks, Tags 0F4X, 0F4Y, 0F50, 0F51, 0F55, 0F77)
@@ -198,7 +197,7 @@ theorem properSupportSheafComposition (Λ : Type (u + 1)) [CommRing Λ] :
           L f ⋙ L g ≅ L (f ≫ g))
         (e : ∀ (X Y X' Y' : Scheme.{u}) (f : X ⟶ Y) (a : X' ⟶ X)
           (b : Y' ⟶ Y) (f' : X' ⟶ Y') [IsSeparated f] [LocallyOfFiniteType f]
-          [IsSeparated f'] [LocallyOfFiniteType f'] (sq : IsPullback a f' f b),
+          [IsSeparated f'] [LocallyOfFiniteType f'] (_sq : IsPullback a f' f b),
           L f ⋙ upperStar (ModuleCat.{u + 1} Λ) b ≅
             upperStar (ModuleCat.{u + 1} Λ) a ⋙ L f'),
         (∀ (X Y Z : Scheme.{u}) (f : X ⟶ Y) (g : Y ⟶ Z)

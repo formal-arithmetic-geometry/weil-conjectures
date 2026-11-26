@@ -404,7 +404,6 @@ end AlgebraicGeometry.Scheme
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace SheafOfModules
 
-set_option linter.style.haveILetI false in
 private theorem counit_bijective_on_open {X : AlgebraicGeometry.Scheme.{u}}
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) RingCat.{u + 1})
     (U : X.ProEt) [AlgebraicGeometry.IsOpenImmersion U.hom]
@@ -424,9 +423,9 @@ private theorem counit_bijective_on_open {X : AlgebraicGeometry.Scheme.{u}}
     constructor
     intro V V' f
     exact ⟨Over.homMk f (@Subsingleton.elim _ (hsub V.left) _ _), rfl⟩
-  letI : (Over.forget U).Full := hfull
-  haveI : IsIso (Over.forgetAdjStar U).unit := inferInstance
-  haveI : IsIso b.counit := by
+  let : (Over.forget U).Full := hfull
+  have : IsIso (Over.forgetAdjStar U).unit := inferInstance
+  have : IsIso b.counit := by
     rw [NatTrans.isIso_iff_isIso_app]
     intro N
     rw [← isIso_iff_of_reflects_iso _
@@ -436,14 +435,14 @@ private theorem counit_bijective_on_open {X : AlgebraicGeometry.Scheme.{u}}
     change IsIso (N.val.presheaf.map ((Over.forgetAdjStar U).unit.app W.unop).op)
     infer_instance
   let t : Adjunction.Triple _ _ _ := ⟨aj, b⟩
-  haveI : IsIso aj.unit := t.isIso_unit_iff_isIso_counit.mpr inferInstance
-  haveI : IsIso ((overFunctor R U).map (aj.counit.app M)) := by
+  have : IsIso aj.unit := t.isIso_unit_iff_isIso_counit.mpr inferInstance
+  have : IsIso ((overFunctor R U).map (aj.counit.app M)) := by
     have htri := aj.right_triangle_components M
     have hcomp : IsIso (aj.unit.app ((overFunctor R U).obj M) ≫
         (overFunctor R U).map (aj.counit.app M)) := htri ▸ inferInstance
     exact IsIso.of_isIso_comp_left (aj.unit.app ((overFunctor R U).obj M)) _
   let E := evaluation (R.over U) (op (Over.mk φ))
-  haveI : IsIso (E.map ((overFunctor R U).map (aj.counit.app M))) := inferInstance
+  have : IsIso (E.map ((overFunctor R U).map (aj.counit.app M))) := inferInstance
   exact ConcreteCategory.bijective_of_isIso
     (E.map ((overFunctor R U).map (aj.counit.app M)))
 
