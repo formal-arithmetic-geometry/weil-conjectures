@@ -17,8 +17,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
 # Lisse and constructible `ℓ`-adic sheaves on the pro-étale site
 
 Let `X` be a scheme. Following Bhatt–Scholze (*The pro-étale topology for schemes*, §6.8) and
-the blueprint (`definition-constructible-sheaves`), a
-sheaf `F` of `ℚ̄_ℓ`-modules on the small pro-étale site of `X` is
+a sheaf `F` of `ℚ̄_ℓ`-modules on the small pro-étale site of `X` is
 
 - *lisse* (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf`) if it is pro-étale locally a finite
   direct sum of copies of the constant `ℓ`-adic sheaf `ℚ̄_ℓ`
@@ -35,10 +34,10 @@ fibre `E^n`. In particular a lisse sheaf has a finite field of definition, and t
 of constructible `ℚ̄_ℓ`-sheaves is the `2`-colimit over finite `E ⊆ ℚ̄_ℓ` of the categories of
 constructible `E`-sheaves.
 
-The strata are only required to be locally closed: on the noetherian schemes of the blueprint
+The strata are only required to be locally closed: on noetherian schemes
 every locally closed subset is constructible, and with this convention pullback along an
 arbitrary morphism preserves constructibility. The stratification is only required locally on
-`X`, so that constructibility is a local property; on the quasi-compact schemes of the blueprint
+`X`, so that constructibility is a local property; on quasi-compact schemes
 this is the same as a global finite stratification.
 
 ## Main definitions
@@ -114,7 +113,7 @@ lemma IsAdicLisseSheaf.of_isZero {F : AdicSheaf l X}
 /-- A sheaf of `ℚ̄_ℓ`-modules on the small pro-étale site of `X` is *stratified lisse* if `X` is
 the disjoint union of finitely many locally closed constructible subschemes `Z_k`, given by
 immersions `i_k : Z_k ⟶ X` whose images are constructible subsets partitioning `X`, such that
-each restriction `i_k^* F` is lisse (`definition-constructible-sheaves`). -/
+each restriction `i_k^* F` is lisse. -/
 def IsAdicStratifiedLisseSheaf (F : AdicSheaf l X) :
     Prop :=
   ∃ (ι : Type) (_ : Finite ι) (Z : ι → Scheme.{u}) (i : (k : ι) → Z k ⟶ X),

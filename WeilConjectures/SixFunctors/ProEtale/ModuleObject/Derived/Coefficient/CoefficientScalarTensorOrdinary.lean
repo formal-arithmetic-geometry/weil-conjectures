@@ -68,7 +68,10 @@ import all WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionConstraintCohe
 
 The internal scalar coequalizer and the tensor coequalizer reduce the square
 to normalized balanced generators. No complex or derived-category assertion is used.
-(blueprint: lem-sfb-coefficient-scalar-tensor-ordinary)
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03EK and 03EL
 -/
 
 @[expose] public noncomputable section
@@ -213,14 +216,7 @@ private theorem coefficient_pure_smul_unit (Z : Scheme.{u})
     Mod.extendRestrictAdjunction_unit_app_hom, map_smul] at hh
   exact hh
 
-/-- The ordinary scalar tensor square under the section equivalence.
-Source: Stacks Project, Modules on Sites, Tags 03EK and 03EL.
-Precompose with the scalar coequalizer and the internal tensor coequalizer.
-On a generator s tensor (x tensor y), scalar linearity reduces the internal
-normalization to its scalar-unit equation. Apply the two supplied generator
-formulas and naturality of pure tensor pairing. The maps agree on generators,
-so sheafification and the two coequalizer universal properties give equality.
-(blueprint: lem-sfb-coefficient-scalar-tensor-ordinary). -/
+/-- The ordinary scalar tensor square under the section equivalence. -/
 theorem coefficientScalarTensor_ordinary (Z : Scheme.{u})
     (d : CoefficientScalarTensorRepresentativeBasicData a Z)
     (h : CoefficientScalarTensorRepresentativeHypotheses a Z d)

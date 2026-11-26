@@ -17,8 +17,7 @@ import Mathlib.Tactic.Convert
 /-!
 # Local open-adjunction equation for compactification refinement
 
-Source: blueprint proposition-composition-base-change-rf-shriek--4, proof (3), before applying
-Rp'_*.
+The local open-adjunction equation for a compactification refinement, before applying `Rp'_*`.
 -/
 
 @[expose] public noncomputable section

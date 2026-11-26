@@ -56,12 +56,18 @@ public import Mathlib.CategoryTheory.Limits.Final
 
 /-! # Data for strict scalar pullback cone naturality
 
-Source: Bhatt--Scholze, Definition 3.4.10, Proposition 3.5.1 and Lemma 6.5.9(4);
-Stacks Tags 03EK, 014E, 06YT and 04VG. The strict construction is agent formulated.
-(blueprint: def-sf-scalar-pullback-strict-cone-data).
-
 Levels n denote positive exponents n+1. All tensors, inverse images, tower transitions
 and Roos cones below are the recorded constructions, before localization.
+
+## References
+
+* [Stacks, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks, Tag 014E](https://stacks.math.columbia.edu/tag/014E)
+* [Stacks, Tag 06YT](https://stacks.math.columbia.edu/tag/06YT)
+* [Stacks, Tag 04VG](https://stacks.math.columbia.edu/tag/04VG)
+* [Stacks, Tag 03D2](https://stacks.math.columbia.edu/tag/03D2)
+* [Stacks, Tag 08TC](https://stacks.math.columbia.edu/tag/08TC)
+* Bhatt--Scholze, Definition 3.4.10, Proposition 3.5.1 and Lemma 6.5.9(4)
 -/
 
 @[expose] public noncomputable section
@@ -81,15 +87,12 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-/-- The source tower D_E(P) with termwise ordinary scalar extension.
-Source: Stacks 03EK (blueprint: lem-weil-scalar-pullback-strict-cone-naturality). -/
+/-- The source tower D_E(P) with termwise ordinary scalar extension. -/
 def scalarPullbackSourceTower {X Y : AlgebraicGeometry.Scheme.{t}} (g : X ⟶ Y) :=
   integralOperationsPullbackTowerFunctor l E g ⋙
     (Functor.whiskeringRight _ _ _).obj (completedOrdinaryScalarComplex l E L ι X)
 
-/-- The local inverse-image tensor generator, including its finite scalar b.
-Source: Stacks 03D2, 03EK
-(blueprint: lem-weil-scalar-pullback-strict-cone-naturality). -/
+/-- The local inverse-image tensor generator, including its finite scalar b. -/
 def scalarPullbackGenerator {X Y : AlgebraicGeometry.Scheme.{t}} (g : X ⟶ Y)
     (n : ℕ) (P : CochainComplex (integralTowerModules l E Y) ℤ) (i : ℤ)
     (V : Y.ProEt) (p : (P.X i).val.obj (op V))
@@ -106,8 +109,7 @@ def scalarPullbackGenerator {X Y : AlgebraicGeometry.Scheme.{t}} (g : X ⟶ Y)
       (((unrestrictedIntegralFiniteComplex l E Y n).obj P).X i) V
         (unrestrictedIntegralTensorSection l E Y n (P.X i) (op V) a p)))
 
-/-- The endomorphism 1-s of a strict tower, used to expose both Roos coordinates.
-Source: Stacks 08TC (blueprint: lem-weil-scalar-pullback-strict-cone-naturality). -/
+/-- The endomorphism 1-s of a strict tower, used to expose both Roos coordinates. -/
 def scalarPullbackRoosEnd (X : AlgebraicGeometry.Scheme.{t})
     (T : ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l E X) ℤ) :=
   towerTransitionEndomorphism (K := fun n ↦ T.obj (op n)) (integralOperationsTowerStep T)

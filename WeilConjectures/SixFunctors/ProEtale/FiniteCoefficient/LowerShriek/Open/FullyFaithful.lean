@@ -94,13 +94,7 @@ instance ProEtale.faithful_openImmersionLowerShriek : (j)_!open[A].Faithful :=
   (ProEtale.fullyFaithfulOpenImmersionLowerShriek A j).faithful
 
 set_option backward.isDefEq.respectTransparency false in
-/-- `j^*` of the counit of `j_! ⊣ j^*` is an isomorphism at every sheaf `G` on `X`.
-
-This is the triangle identity read backwards: `η_{j^* G} ≫ j^*(ε_G) = 𝟙`, and `η` is an
-isomorphism by `ProEtale.isIso_openImmersionLowerShriekAdjunction_unit`, so `j^*(ε_G)` is
-its inverse. Note that `ε_G` itself is *not* an isomorphism — `j_! j^* G ⟶ G` is the
-"restriction to the image of `j`, extended by zero" map, which forgets the sections away
-from `j`. -/
+/-- `j^*` of the counit of `j_! ⊣ j^*` is an isomorphism at every sheaf `G` on `X`. -/
 instance ProEtale.isIso_openImmersionRestriction_map_lowerShriekAdjunction_counit
     (G : Sheaf (Scheme.ProEt.topology X) A) :
     IsIso ((ProEtale.openImmersionRestriction A j).map

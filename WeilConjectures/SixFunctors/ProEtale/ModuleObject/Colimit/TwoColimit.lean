@@ -510,7 +510,7 @@ private lemma single_model (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
   exact es ≪≫ (DerivedCategory.singleFunctor _ 0).mapIso e
 
 set_option backward.isDefEq.respectTransparency true in
-/-- **(Obj)** (blueprint `proposition-dctf-x-qbar-2-colimit--2`): every bounded constructible
+/-- **(Obj)**: every bounded constructible
 `ℚ̄_ℓ,X`-complex is isomorphic to the extension of
 scalars `T^X_{E,Ω} K_E` of a bounded constructible `E_X`-complex `K_E` for some finite
 subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`. See the module docstring. -/

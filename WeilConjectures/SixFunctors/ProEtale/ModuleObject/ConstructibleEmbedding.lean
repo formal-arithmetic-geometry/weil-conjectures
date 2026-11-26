@@ -12,8 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Cons
 # Constructible module objects embed into pushforwards of finitely presented ones
 
 Let `Λ` be a commutative condensed ring and `X` a scheme with noetherian underlying space. This
-file shows that the constructible module objects over `Λ_X` are essentially small (blueprint
-`lemma-hypotheses-brown-representability--5`).
+file shows that the constructible module objects over `Λ_X` are essentially small.
 
 * For finitely many quasi-compact morphisms `g k : W k ⟶ X` jointly covering `X`, the units
   `M ⟶ (g k)_* (g k)^* M` are jointly monomorphic
@@ -224,11 +223,10 @@ theorem exists_mono_of_isConstructibleModuleObject {X : Scheme.{u}}
   obtain ⟨i, z, hz, rfl⟩ := by simpa using hy
   exact ⟨⟨a, i⟩, ⟨z, hz⟩, by simp⟩
 
-/-- Blueprint `lemma-hypotheses-brown-representability--5` (constructible hearts): on a scheme with
-noetherian underlying space, the constructible module objects over `Λ_X` are essentially small. They
-embed into finite products of pushforwards of finitely presented module objects
-(`ProEtale.CondensedRing.exists_mono_of_isConstructibleModuleObject`), which form a set, and the
-category of module objects is well-powered. -/
+/-- On a scheme with noetherian underlying space, the constructible module objects over `Λ_X` are
+essentially small. They embed into finite products of pushforwards of finitely presented module
+objects (`ProEtale.CondensedRing.exists_mono_of_isConstructibleModuleObject`), which form a set, and
+the category of module objects is well-powered. -/
 theorem essentiallySmall_isConstructibleModuleObject_of_noetherianSpace (X : Scheme.{u})
     [TopologicalSpace.NoetherianSpace X] :
     ObjectProperty.EssentiallySmall.{u + 1}

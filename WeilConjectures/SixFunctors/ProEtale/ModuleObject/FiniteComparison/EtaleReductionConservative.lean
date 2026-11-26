@@ -21,15 +21,6 @@ reduction modulo `ℓⁿ` read on the small étale site
 (`AlgebraicGeometry.ProEtale.CondensedRing.isIso_of_isIso_etaleReduction_map`). This is the form
 of derived Nakayama used to check isomorphisms of `ℓ`-adic complexes at finite level, for
 instance the base change of the smooth orientation.
-
-## Proof
-
-The étale reading of `𝒪_E ⧸ ℓⁿ`-complexes is fully faithful
-(`ProEtale.CondensedRing.finiteEtaleReadingFullyFaithful`, the reading of a bounded
-constructible complex being of étale origin), so the reduction `φ ⊗ᴸ 𝒪_E ⧸ ℓⁿ` is an
-isomorphism. The cone `C` of `φ` is bounded constructible and its reduction vanishes; the
-reduction triangle `C --ℓⁿ--> C ⟶ C ⊗ᴸ 𝒪_E ⧸ ℓⁿ ⟶` shows that `ℓⁿ` acts invertibly on `C`, so
-`C = 0` by derived Nakayama (`ProEtale.isZero_of_isIso_pow_zsmul_id`).
 -/
 
 @[expose] public section
@@ -94,11 +85,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] (E : Type) [Field E
 
 /-- **The étale reduction modulo `ℓⁿ` reflects isomorphisms**, `n ≠ 0`: a morphism of bounded
 constructible `𝒪_E`-complexes whose reduction modulo `ℓⁿ`, read on the small étale site, is an
-isomorphism is an isomorphism. The Nakayama step is derived
-completeness: a bounded constructible complex is derived `ℓ`-complete
-(`derivedCompleteIntegers_of_boundedConstructible`), and a derived complete complex whose reduction
-vanishes is zero
-(`isZero_of_derivedCompleteIntegers_of_isZero_derivedReduction`). -/
+isomorphism is an isomorphism. -/
 theorem isIso_of_isIso_etaleReduction_map (hn : n ≠ 0)
     {K L : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧} (φ : K ⟶ L)
     (h : IsIso ((etaleReduction ℓ E n X).map φ)) : IsIso φ := by

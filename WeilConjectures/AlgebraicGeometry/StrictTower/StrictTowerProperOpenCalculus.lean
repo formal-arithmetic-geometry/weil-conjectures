@@ -1071,7 +1071,6 @@ theorem gamma_isIso {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     ((gamma B k r p i h).app M) (fun n ↦ heval n.unop)
 
 set_option backward.isDefEq.respectTransparency false in
-set_option linter.unusedVariables false in
 /-- Vertical, horizontal and base-change coherence for every commutative proper/open
 square, as equalities in derived strict-tower categories, without assuming evaluation
 faithful. -/
@@ -1114,7 +1113,7 @@ theorem normalizedProperOpenCalculus :
       (wk : d ≫ k = k₁ ≫ a) (wi : c ≫ i = i₁ ≫ b)
       (wp : a ≫ p = p₁ ≫ b) (wr : d ≫ r = r₁ ≫ c)
       (sk : IsPullback d k₁ k a) (si : IsPullback c i₁ i b)
-      (sp : IsPullback a p₁ p b) (sr : IsPullback d r₁ r c) (M : Derived B V),
+      (_sp : IsPullback a p₁ p b) (_sr : IsPullback d r₁ r c) (M : Derived B V),
       (G B b).map ((gamma B k r p i h).app M) ≫
           (exchange B a p₁ p b wp).app ((J B k).obj M) ≫
           (R B p₁).map ((beta B d k₁ k a wk sk).hom.app M) =

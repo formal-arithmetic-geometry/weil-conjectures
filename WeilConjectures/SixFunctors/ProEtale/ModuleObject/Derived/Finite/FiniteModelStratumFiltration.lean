@@ -21,14 +21,13 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherenc
 /-!
 # Finite open filtrations with finite constant models on reduced strata
 
-Source: Stacks Project, Topology, Tag 09Y5
-(`lemma-noetherian-partition-refined-by-stratification`), and Pro-etale Cohomology,
-Tag 09AH (`lemma-ses-associated-to-open`)
-(blueprint: lem-sfb-finite-model-stratum-filtration).
-Re-recorded by group NS on 2026-10-18; the statement and constructions are unchanged.
-
 The auxiliary functors name the actual extension-by-zero pieces and closed-stratum
 pieces. Cokernels in the functor category express naturality with the opens fixed.
+
+## References
+
+* Stacks Project, Topology, Tag 09Y5
+* Stacks Project, Pro-etale Cohomology, Tag 09AH
 -/
 
 @[expose] public section

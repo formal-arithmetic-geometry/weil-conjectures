@@ -30,6 +30,10 @@ finite-type `K`-schemes, but is itself not locally of finite type over `K`.
 ## Main statements
 
 - `AlgebraicGeometry.ProEtale.not_locallyOfFiniteType_locallyConstantProEt`.
+
+## References
+
+* [Bergfalk, Lambie-Hanson, arXiv:2412.19605](https://arxiv.org/abs/2412.19605)
 -/
 
 @[expose] public section

@@ -66,8 +66,11 @@ import WeilConjectures.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
 
 /-! # Generic normalized scalar comparison
 
-Source: Stacks 03D7, 03EK and 06YY.
-(blueprint: lem-sf-system-scalar-package-exists).
+## References
+
+* [Stacks, Tag 03D7](https://stacks.math.columbia.edu/tag/03D7)
+* [Stacks, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
 -/
 
 @[expose] public noncomputable section
@@ -84,14 +87,8 @@ variable {C : Type sa} [Category.{sb} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{sw}] [HasSheafify J AddCommGrpCat.{sw}]
   [EssentiallySmall.{sw} C]
 
-/-- Generic scalar comparison extracted from IntegralComparisonSequenceSystems.
-Source: Stacks 03D7, 03EK and 06YY
-(blueprint: lem-sf-system-scalar-package-exists).
-Proof: Choose the normalized derived counit comparison using the cochain universal property. The
-ordinary tensor/restriction adjunction gives its unique unit-normalized adjunction, and the
-derived Hom comparison gives the derived adjunction with the required transpose. The unit sends
-x to one tensor x by the ordinary unit formula; this constructs the scalar package without
-changing its cochain model. -/
+/-- Every derived change-of-rings cochain model `D` for `φ` extends to a scalar package: there is
+a `SystemScalarModel φ` whose cochain model is `D`. -/
 theorem scalarPackageExists
     {R S : Sheaf J CommRingCat.{sw}} (φ : R ⟶ S)
     (D : SheafOfModules.DerivedChangeOfRingsCochainModel φ) :

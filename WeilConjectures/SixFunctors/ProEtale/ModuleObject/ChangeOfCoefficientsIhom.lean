@@ -42,7 +42,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 /-- **Change of coefficients for internal Hom.** On a separated `k`-scheme of finite type `X`, the
 comparison `T RHom(A, B) ⟶ RHom(T A, T B)` for the extension of scalars `T` along `Λ ⟶ Λ'` is an
 isomorphism for all bounded constructible `A` and `B` when `Λ ⟶ Λ'` is
-1. the reduction `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ` (for all complexes `A` and `B`),
+1. the reduction `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`,
 2. the inclusion `E ⟶ F` of finite subextensions of `ℚ̄_ℓ / ℚ_ℓ`,
 3. the inclusion `𝒪_E ⟶ E`,
 4. the inclusion `E ⟶ ℚ̄_ℓ`,

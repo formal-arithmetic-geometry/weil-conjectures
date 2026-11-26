@@ -12,7 +12,16 @@ import WeilConjectures.SixFunctors.Sf.SfWeaklyContractibleProjective
 import WeilConjectures.SixFunctors.Sf.SfClopenCoefficientComparison
 import WeilConjectures.SixFunctors.Sf.SfClopenDerivedCompatibility
 
-/-! # Simultaneous clopen lisse trivialization and complete restriction -/
+/-! # Simultaneous clopen lisse trivialization and complete restriction
+
+## References
+
+* [Stacks, Tag 09C3](https://stacks.math.columbia.edu/tag/09C3)
+* [Stacks, Tag 098F](https://stacks.math.columbia.edu/tag/098F)
+* [Stacks, Tag 0946](https://stacks.math.columbia.edu/tag/0946)
+* [Stacks, Tag 015F](https://stacks.math.columbia.edu/tag/015F)
+* [Stacks, Tag 08TC](https://stacks.math.columbia.edu/tag/08TC)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -43,18 +52,7 @@ variable {l : ℕ} [Fact l.Prime] {E : Type u} [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- A common finite clopen partition trivializes finitely many finite lisse residue sheaves,
-and ordinary restriction preserves their completed coefficient and derived quotient data.
-
-Source: Stacks Project, proetale.tex, Tags 09C3 and 098F; sites-cohomology.tex, Tag 0946;
-derived.tex, Tags 015F and 08TC (blueprint: lem-sf-clopen-lisse-complete-localization).
-
-Proof: the coefficient DVR supplies the residue field. Form the common finite
-clopen free partition by sf_clopen_lisse_partition. The cover-geometry theorem
-passes terminal epimorphism-surjectivity to each component, in every coefficient
-universe containing the site. Its module version gives exact evaluation and finite
-free projectivity. Construct the normalized finite and completed coefficient datum
-by sf_clopen_coefficient_comparison, and apply sf_clopen_derived_compatibility to
-its clopen component. Assemble these conclusions with the free local models. -/
+and ordinary restriction preserves their completed coefficient and derived quotient data. -/
 theorem sf_clopen_lisse_complete_localization
     (T : Scheme.{t}) (hT : IsAffine T)
     (hweak : ∀ (F G : Sheaf (Scheme.ProEt.topology T) (Type (max u (t + 1))))

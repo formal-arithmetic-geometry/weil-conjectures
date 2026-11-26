@@ -177,23 +177,7 @@ theorem leftDerivedUpperStarSquareIso_eq_mapDerivedCategorySquareIso
 
 /-- The underived comparison pullbacks commute with the étale and the pro-étale square
 isomorphisms of a Cartesian square, written with `Etale.upperStarComp` and
-`ProEtale.upperStarComp`: the two pasted isomorphisms `g^* f'^* ν_{X'}^* ≅ ν_Y^* f^* g'^*`
-agree, that is, the cube formed by the two rows of comparison squares
-```
-  Sh(Y_ét) ───g^*──▶ Sh(Y'_ét) ───f'^*──▶ Sh(X'_ét)
-     │                   │                    │
-   ν_Y^*              ν_{Y'}^*             ν_{X'}^*
-     ▼                   ▼                    ▼
-  Sh(Y_proét) ─g^*─▶ Sh(Y'_proét) ─f'^*─▶ Sh(X'_proét)
-
-  Sh(Y_ét) ───f^*──▶ Sh(X_ét) ────g'^*──▶ Sh(X'_ét)
-     │                   │                    │
-   ν_Y^*               ν_X^*               ν_{X'}^*
-     ▼                   ▼                    ▼
-  Sh(Y_proét) ─f^*─▶ Sh(X_proét) ──g'^*─▶ Sh(X'_proét)
-```
-(`comparisonUpperStarCompUpperStarIso`), glued along the étale square isomorphism on top and the
-pro-étale square isomorphism at the bottom, commutes. -/
+`ProEtale.upperStarComp`: the two pasted isomorphisms `g^* f'^* ν_{X'}^* ≅ ν_Y^* f^* g'^*` agree. -/
 theorem comparisonUpperStarCompUpperStarIso_square
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
     (sq : IsPullback g' f' f g) :
@@ -224,23 +208,7 @@ theorem comparisonUpperStarCompUpperStarIso_square
   exact he.symm
 
 /-- The unbounded comparison isomorphisms `L(-^*) ν^* ≅ ν^* L(-^*)` commute with the étale and
-the pro-étale derived square isomorphisms of a Cartesian square: the cube
-```
-  D(Y_ét) ────Lg^*──▶ D(Y'_ét) ────Lf'^*──▶ D(X'_ét)
-     │                   │                    │
-    ν^*                 ν^*                  ν^*
-     ▼                   ▼                    ▼
-  D(Y_proét) ─Lg^*─▶ D(Y'_proét) ─Lf'^*─▶ D(X'_proét)
-
-  D(Y_ét) ────Lf^*──▶ D(X_ét) ─────Lg'^*──▶ D(X'_ét)
-     │                   │                    │
-    ν^*                 ν^*                  ν^*
-     ▼                   ▼                    ▼
-  D(Y_proét) ─Lf^*─▶ D(X_proét) ──Lg'^*─▶ D(X'_proét)
-```
-formed by the two rows of squares `leftDerivedUpperStarComparisonIsoUnbounded`, glued along
-`Etale.derivedSquareUpperStarIso` on top and `leftDerivedUpperStarSquareIso` at the bottom,
-commutes. -/
+the pro-étale derived square isomorphisms of a Cartesian square. -/
 theorem leftDerivedUpperStarComparisonIsoUnbounded_square
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
     (sq : IsPullback g' f' f g)
@@ -288,21 +256,9 @@ theorem leftDerivedUpperStarComparisonIsoUnbounded_square
     leftDerivedUpperStarSquareIso_eq_mapDerivedCategorySquareIso]
   exact h
 
-/-- **Transport of the unbounded exchange map along the site comparison.** For a Cartesian
-square
-```
-  X' ──g'──▶ X
-  │          │
-  f'         f
-  ▼          ▼
-  Y' ──g───▶ Y
-```
+/-- **Transport of the unbounded exchange map along the site comparison.** For a Cartesian square
 and `L ∈ D(X_ét, Λ)`, conjugating the étale exchange map `Lg^* Rf_* L ⟶ Rf'_* Lg'^* L` by the
-comparison maps `ν_{Y'}^* Lg^* Rf_* L ≅ Lg^* ν_Y^* Rf_* L ⟶ Lg^* Rf_* ν_X^* L` and
-`ν_{Y'}^* Rf'_* Lg'^* L ⟶ Rf'_* ν_{X'}^* Lg'^* L ≅ Rf'_* Lg'^* ν_X^* L` (built from
-`AlgebraicGeometry.ProEtale.unboundedDirectImageComparisonMap` and
-`AlgebraicGeometry.ProEtale.leftDerivedUpperStarComparisonIsoUnbounded`) gives the pro-étale
-exchange map at `ν_X^* L`. -/
+comparison maps gives the pro-étale exchange map at `ν_X^* L`. -/
 theorem comparison_derivedBaseChangeMap_unbounded
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
     (sq : IsPullback g' f' f g)

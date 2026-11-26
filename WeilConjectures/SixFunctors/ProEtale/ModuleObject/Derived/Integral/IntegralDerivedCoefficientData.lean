@@ -57,10 +57,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 /-!
 # Integral derived coefficient data
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-cor-int-compactness-ii,
-coefficient setup used by `proposition-proper-direct-image-extension-zero`
-(blueprint: def-sfb-integral-derived-coefficient-data).
-
 The declarations below are canonical names for the coefficient ring, its unbounded derived
 category on a scheme, and its derived reduction. Their data is delegated to the definitions in
 `DerivedNakayamaResolution`; this module introduces no second coefficient construction.
@@ -77,17 +73,13 @@ open AlgebraicGeometry Scheme
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- The condensed integral coefficient ring used by the integral six-functor statements.
-Source: coefficient setup in `sk-cor-int-compactness-ii`
-(blueprint: def-sfb-integral-derived-coefficient-data). -/
+/-- The condensed integral coefficient ring used by the integral six-functor statements. -/
 abbrev integralCoefficientRing (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
     Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} :=
   DerivedNakayama.integerRing l E
 
-/-- The ordinary unbounded derived category of integral module objects on a scheme.
-Source: coefficient setup in `sk-cor-int-compactness-ii`
-(blueprint: def-sfb-integral-derived-coefficient-data). -/
+/-- The ordinary unbounded derived category of integral module objects on a scheme. -/
 abbrev integralDerived (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) :=
   DerivedNakayama.Derived l E X

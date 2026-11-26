@@ -14,8 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Ten
 The derived tensor product `- ⊗ᴸ -` of `D(X_proét)`
 (`AlgebraicGeometry.ProEtale.derivedTensor`) is the left derived bifunctor of the tensor product
 of complexes of pro-étale sheaves along the K-flat left derivability structure. This file
-records the two properties of blueprint `prose-03-02` and
-`lem-weil-derived-tensor-functorial`:
+records the following two properties:
 
 * a quasi-isomorphism `P ⟶ P'` between K-flat complexes stays a quasi-isomorphism after
   tensoring with any complex (Stacks `064L`), so that `K₁ ⊗ᴸ K₂` may be computed as `P ⊗ K₂` for
@@ -30,6 +29,10 @@ records the two properties of blueprint `prose-03-02` and
 - `AlgebraicGeometry.ProEtale.isIso_μ_Qh_of_kFlat`: `Qh(P) ⊗ᴸ Qh(K₂) ≅ Qh(P ⊗ K₂)`
   for a K-flat `P`.
 - `AlgebraicGeometry.ProEtale.derivedTensor_map_app_comp_map`: functoriality in both variables.
+
+## References
+
+* [Stacks, Tag 064L](https://stacks.math.columbia.edu/tag/064L)
 -/
 
 @[expose] public section
@@ -46,15 +49,9 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] {X : Scheme.{u}}
 
-/-- Blueprint `prose-03-02`: Resolution independence of the
-derived tensor product.
-
-For complexes of `A`-valued sheaves on the small pro-étale site of `X`, a quasi-isomorphism
+/-- For complexes of `A`-valued sheaves on the small pro-étale site of `X`, a quasi-isomorphism
 `α : P ⟶ P'` between K-flat complexes induces a quasi-isomorphism `P ⊗ K₂ ⟶ P' ⊗ K₂` for every
-complex `K₂` (Stacks `064L`). In particular, for two K-flat resolutions `P ⟶ K₁` and `P' ⟶ K₁`,
-any lift `P ⟶ P'` of the identity of `K₁` in the homotopy category is a quasi-isomorphism, and so
-is the induced map `P ⊗ K₂ ⟶ P' ⊗ K₂`; the object `P ⊗ K₂` computing `K₁ ⊗ᴸ K₂`
-(`AlgebraicGeometry.ProEtale.isIso_μ_Qh_of_kFlat`) does not depend on the resolution. -/
+complex `K₂`. -/
 theorem quasiIso_whiskerRight_of_kFlat
     {P P' : HomotopyCategory (Sheaf (Scheme.ProEt.topology X) A) (ComplexShape.up ℤ)}
     (α : P ⟶ P') (hα : HomotopyCategory.quasiIso _ _ α)
@@ -72,7 +69,7 @@ theorem quasiIso_whiskerRight_of_kFlat
       (NatIso.ofComponents (fun Z ↦ β_ Y Z) (by intros; simp [curriedTensor]))
   exact MorphismProperty.whiskerRight_of_kFlat _ α hα hP hP' K₂
 
-/-- Blueprint `prose-03-02`: for a K-flat complex `P` of
+/-- For a K-flat complex `P` of
 pro-étale sheaves, the comparison `Qh(P) ⊗ᴸ Qh(K₂) ⟶ Qh(P ⊗ K₂)` is an isomorphism, so that the
 derived tensor product `K₁ ⊗ᴸ K₂` is computed by `P ⊗ K₂` for any K-flat resolution `P` of
 `K₁`. -/
@@ -83,9 +80,7 @@ theorem isIso_μ_Qh_of_kFlat
     IsIso (Functor.LaxMonoidal.μ DerivedCategory.Qh P K₂) :=
   DerivedCategory.isIso_μ_Qh_of_kFlat P K₂ hP
 
-/-- Blueprint `lem-weil-derived-tensor-functorial`: Functoriality of the derived tensor product.
-
-For morphisms `φ : K₁ ⟶ K₁'` and `ψ : K₂ ⟶ K₂'` in `D(X_proét)`, applying the derived tensor
+/-- For morphisms `φ : K₁ ⟶ K₁'` and `ψ : K₂ ⟶ K₂'` in `D(X_proét)`, applying the derived tensor
 product first in the first and then in the second variable agrees with the other order; the
 common value is the induced morphism `φ ⊗ ψ : K₁ ⊗ᴸ K₂ ⟶ K₁' ⊗ᴸ K₂'`. The derived tensor product
 being a bifunctor `D(X_proét) ⥤ D(X_proét) ⥤ D(X_proét)`, the assignment carries identities to

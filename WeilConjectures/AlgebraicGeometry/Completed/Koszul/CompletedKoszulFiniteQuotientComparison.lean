@@ -61,7 +61,6 @@ complexes concentrated in degree zero.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option linter.unusedVariables false
 universe t
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open scoped ChangeOfRings
@@ -121,7 +120,7 @@ private lemma finiteConstantIso_unit (T : Scheme.{t}) (Λ : Type (t + 1))
   rw [(finiteRingComparison_exists T Λ).choose_spec.1.2]
   rfl
 
-private def liftedQuotientEquiv (T : Scheme.{t}) {A : Type t} [CommRing A]
+private def liftedQuotientEquiv (_T : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (r : ℕ) (a : Fin r → A)
     (ha : Ideal.span (Set.range a) = d.ideal) (n : ℕ) :
     ((ULift.{t + 1} A) ⧸

@@ -23,16 +23,13 @@ Let `K` be a field, `Y` locally of finite type over `K`, `f : X ⟶ Y` smooth an
 This is the *lattice case* of
 `isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper`.
 
+## Implementation details
+
 For `Y` connected and quasi-compact
 (`isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_lattice_of_connectedSpace`),
-it is deduced from the integral statement
-`isAdicLisseSheaf_adicSheafExtendScalars_homology_rightDerivedPadicIntModPushforward_limit`
-using the compatibility of extension of scalars with `Rf_*`
-(`isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_rationalization`). In general,
-`Y` is covered by connected quasi-compact opens `U`
-(`Scheme.exists_isOpenImmersion_connectedSpace_compactSpace`),
-over which `Rf_*` is computed on `f⁻¹ U` by open base change, and the tower restricts to `f⁻¹ U`
-(`padicIntModUpperStarLimitComparisonPadicIntModTowerIso`).
+the statement is deduced from the integral statement
+`isAdicLisseSheaf_adicSheafExtendScalars_homology_rightDerivedPadicIntModPushforward_limit`;
+in general `Y` is covered by connected quasi-compact opens.
 
 The rationalization formula (`IsIso (rationalizationComparison l X)`, the comparison
 `⨁_B colim (M --ℓ--> M --ℓ--> ⋯) ⟶ ℚ̄_ℓ ⊗ M`) holds on every scheme
@@ -168,14 +165,9 @@ lemma _root_.AlgebraicGeometry.Scheme.exists_isOpenImmersion_connectedSpace_comp
     ⟨⟨⟨y, hyV⟩, mem_connectedComponent⟩, rfl⟩⟩
 
 /-- **The lattice case of lisse direct images along smooth proper morphisms**, for `Y` locally
-of finite type over a field `K`: if
-`F ≅ ℚ̄_ℓ ⊗ M` where `M` is the limit of the transport to `ℤ_ℓ,X`-modules of an `ℓ`-adic tower
-of finite locally constant étale sheaves of torsion `ℤ_ℓ`-modules, every `Hⁿ(Rf_* F[0])` is a
-lisse `ℓ`-adic sheaf. Being lisse is local on `Y`, which is covered by connected quasi-compact
-opens `U`; over `U`, `Rf_*` is computed on `f⁻¹ U` (open base change), to which the tower
-restricts, and
-`isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_lattice_of_connectedSpace`
-applies. -/
+of finite type over a field `K`: if `F ≅ ℚ̄_ℓ ⊗ M` where `M` is the limit of the transport to
+`ℤ_ℓ,X`-modules of an `ℓ`-adic tower of finite locally constant étale sheaves of torsion
+`ℤ_ℓ`-modules, every `Hⁿ(Rf_* F[0])` is a lisse `ℓ`-adic sheaf. -/
 theorem isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_lattice
     {K : Type u} [Field K] {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of K)) [LocallyOfFiniteType aY]
     (f : X ⟶ Y) [Smooth f] [IsProper f]

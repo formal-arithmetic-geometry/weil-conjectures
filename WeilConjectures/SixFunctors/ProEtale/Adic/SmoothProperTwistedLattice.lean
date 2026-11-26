@@ -141,15 +141,7 @@ lemma nonempty_retract_descentSheaf_integralCocycleInvMatrix {T V : Scheme.{u}} 
 `≠ ℓ`, `Y` affine and locally of finite type over `K`, `g : T ⟶ Y` smooth and proper, and `F` a
 lisse `ℓ`-adic sheaf on `T`, trivialised on an affine pro-étale cover `f₀ : V ⟶ T` with transition
 cocycle `γ` with values in `GL_n(E)`, together with a lattice: a twisted section `σ` of `γ`
-acting on the lattices of `Eⁿ`. Then every `Hᵏ(Rg_* F[0])` is lisse.
-
-In the coordinates of a basis of `E`, the lattice turns `γ` into an integral cocycle `γ'`
-(`AlgebraicGeometry.exists_isIntegralCocycle_of_isTwistedSection`), whose étale tower of twisted
-sections is an `ℓ`-adic tower of finite locally constant sheaves with limit `M`; the lattice case
-(`isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_lattice`) applies to
-`ℚ̄_ℓ ⊗ M`, the descent of `γ'⁻¹`
-(`nonempty_iso_descentSheaf_integralCocycleLattice`), and `F` is a retract of `ℚ̄_ℓ ⊗ M`
-(`nonempty_retract_descentSheaf_integralCocycleInvMatrix`). -/
+acting on the lattices of `Eⁿ`. Then every `Hᵏ(Rg_* F[0])` is lisse. -/
 theorem isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_isTwistedSection
     {K : Type u} [Field K] (hK : ringChar K ≠ l) {T Y : Scheme.{u}} (aY : Y ⟶ Spec (.of K))
     [LocallyOfFiniteType aY] [IsAffine Y] (g : T ⟶ Y) [Smooth g] [IsProper g]

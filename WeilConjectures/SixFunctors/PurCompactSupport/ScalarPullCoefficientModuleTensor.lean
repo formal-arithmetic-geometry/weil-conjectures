@@ -10,8 +10,9 @@ import all WeilConjectures.Algebra.Homology.ScalarHomOrdinary.ScalarHomOrdinaryT
 
 /-! # The ordinary module tensor square for a coefficient change
 
-Source: Stacks Project, Tags 03EL and 07A4.
-(blueprint: lem-sf-scalar-pull-coefficient-module-tensor).
+## References
+
+* Stacks Project, Tags `03EL`, `07A4`
 -/
 
 @[expose] public noncomputable section
@@ -157,22 +158,7 @@ private theorem geometric_tensor_unit {U V : Scheme.{u}} (g : U ⟶ V)
   exact (proEtaleOrdinaryTensorPullback_existsUnique g R S c).exists.choose_spec.2
     M N Z.unop x y
 
-/-- Scalar extension and geometric pullback respect the normalized ordinary tensor maps.
-
-Source: Stacks 03EL, the tensor universal property under the module adjunctions.
-(blueprint: lem-sf-scalar-pull-coefficient-module-tensor).
-
-Proof: the unit identity for uniqueness of left adjoints shows that the comparison
-carries the successive scalar and geometric units to the units in the other order.
-Transpose both tensor routes through the geometric and scalar adjunctions and test
-on sheaf tensor generators. Naturality of the geometric unit moves the scalar tensor
-comparison through it. The two normalized tensor formulas split the generator into
-the two successive units. Applying the comparison separately to these factors gives
-the units in the other order. On the other route, first apply the comparison to the
-whole tensor, use naturality of the target scalar unit, and apply the geometric and
-scalar tensor formulas. The two expressions are identical. Tensor sheafification
-extensionality and injectivity of the adjunction bijections finish. The argument
-uses no flatness and also applies to zero coefficient rings and zero modules. -/
+/-- Scalar extension and geometric pullback respect the normalized ordinary tensor maps. -/
 theorem scalarPull_coefficient_module_tensor {R S : Coefficients.{u}} (a : Change R S)
     {U V : Scheme.{u}} (g : U ⟶ V) (M N : pbcModules V (R.ring V)) :
     let F := proEtaleRingModulePullback g (R.ring V) (R.ring U) (R.pull g)

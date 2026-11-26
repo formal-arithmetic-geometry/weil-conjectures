@@ -610,8 +610,7 @@ variable (f g)
 /-- **The composition isomorphism of the lower shriek is computed by any triangle of
 compactifications** `T` of `f` and `g`: it is the comparison with the compactification
 `T.cfg` of `f ≫ g`, followed by the inverse of the composition isomorphism of `T` and the
-comparisons of `T.cf` and `T.cg` with the chosen compactifications (blueprint
-`proposition-composition-base-change-rf-shriek--1`, independence of the compactifications). -/
+comparisons of `T.cf` and `T.cg` with the chosen compactifications. -/
 theorem boundedConstructibleLowerShriekComp_padicAlgCl_hom_eq_triangle
     (T : AlgebraicGeometry.Compactification.Triangle f.left g.left) :
     haveI := isIso_baseChange_triangleShriekTriangle ℓ T

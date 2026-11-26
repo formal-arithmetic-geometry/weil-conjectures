@@ -42,36 +42,12 @@ image** `γ : πZ^* Rf^! ⟶ Rf'^! πP^*` on bounded constructible `ℚ̄_ℓ`-c
   isomorphism if and only if `Ri'^!(φ_X)` is; in particular `φ_Z` is an isomorphism if `φ_X` is
   (`ProEtale.CondensedRing.isIso_dualizingComplexBaseChange_of_isClosedImmersion`).
 
-## Proofs
-
-*Closed immersions.* As in
-`ProEtale.CondensedRing.nonempty_iso_upperShriek_closedImmersion_of_fieldExtension`, complete the
-unit `M ⟶ Rj_* j^* M` (`j` the open complement of `i`) to a distinguished triangle
-`X ⟶ M ⟶ Rj_* j^* M ⟶`; by
-`CategoryTheory.Pretriangulated.isIso_of_adjunction_triangle_of_fullyFaithful`
-its first map is the counit `Ri_* Ri^! M ⟶ M` up to isomorphism. By the counit property of mates,
-the transpose of `γ(M)` under `Ri'_* ⊣ Ri'^!` is `πP^*` of this counit read through proper base
-change, i.e. the first map of the pulled back triangle, whose third term
-`πP^* Rj_* j^* M ≅ Rj'_* πU^* j^* M` receives no maps from `Ri'_*`: the same lemma shows that `γ(M)`
-is invertible (`CategoryTheory.Pretriangulated.isIso_mateEquiv_inv_app_of_triangle`).
-
-*Composition with the comparison of dualizing complexes.* By uniqueness
-(`ProEtale.CondensedRing.eq_dualizingComplexBaseChange_of_trace`) it suffices to compute the
-trace of the right side. This uses the composition of traces
-(`ProEtale.CondensedRing.lowerStar_map_upperShriekDualizingComplexIso_hom_comp_trace`), the counit
-property of `γ`, the trace compatibility of `φ_X` and the vertical pasting of the proper base
-change maps of the squares `Z' ⟶ X'` and `X' ⟶ Spec L`
-(`ProEtale.CondensedRing.boundedConstructibleBaseChangeOfMap_app_comp_lowerStarCompOfEq_inv_app`,
-from `ProEtale.CondensedRing.mateEquiv_comp_aux`). The diagram chase is carried out in abstract
-categories (`CategoryTheory.Adjunction.app_comp_map_comp_trace_of_paste`).
-
-## Implementation notes
+## Implementation details
 
 As explained in `TraceFormula.Specialization.NearbyDualizingClosedImmersionLaw`, identifying
 concrete terms of bounded constructible complexes whose auxiliary proofs differ can make the kernel
 time out; the pasting law is therefore proved for arbitrary ambient transformations and
 instantiated once, and the composition of traces is transported with `exact_mod_proofs`.
-
 -/
 
 @[expose] public section
@@ -130,7 +106,7 @@ commuting with the shifts with `κ : H ⋙ ι' ≅ ι ⋙ Φ`. Let `Tr` be a dis
 with `Tr.obj₁ ≅ ι (L P)` and `Tr.obj₂ ≅ ι B`, whose image under `Φ` is distinguished, and such
 that `Tr.obj₃` (resp. `Φ Tr.obj₃`) and its shift by `-1` receive no nonzero maps from the
 `ι (L Q)` (resp. `ι' (L' Q)`). Then the mate `R B ⋙ G ⟶ R' (H B)` of `bc⁻¹` is an isomorphism at
-`B`: its transpose is the image under `Φ` of the first map of `Tr`. -/
+`B`. -/
 lemma isIso_mateEquiv_inv_app_of_triangle {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R)
     {L' : C' ⥤ D'} {R' : D' ⥤ C'} (adj' : L' ⊣ R') {G : C ⥤ C'} {H : D ⥤ D'}
     (bc : L ⋙ H ⟶ G ⋙ L') [IsIso bc] {ι : D ⥤ T} {ι' : D' ⥤ T'} (hι : ι.FullyFaithful)

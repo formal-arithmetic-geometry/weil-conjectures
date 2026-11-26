@@ -131,8 +131,10 @@ public import WeilConjectures.AlgebraicGeometry.ContinuousCoefficientModuleEncod
 
 /-! # Encoding continuous internal modules as sectionwise module sheaves
 
-Source: Stacks Project, Modules on Sites, and Bhatt--Scholze, Section 6.8.
-(blueprint: def-weil-pbc-continuous-coefficient-module-encoding)
+## References
+
+* Stacks Project, Modules on Sites
+* Bhatt--Scholze, Section 6.8
 -/
 
 -- After pruning, this module only keeps private declarations.

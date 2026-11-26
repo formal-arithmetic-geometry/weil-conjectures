@@ -182,10 +182,6 @@ import all Mathlib.Algebra.Homology.HomologicalComplexAbelian
 /-!
 # Continuity of derived Hom out of a stratum extension
 
-Source: blueprint main-20261015, sec-smooth-purity/sk-prop-sf-localization,
-sk-lem-constructible-ext-continuity-stratum.md and its proof
-(blueprint: lemma-continuity-ext-out-constructible-complex--1).
-
 The colimit is taken in complexes of coefficient modules, hence degreewise. Derived Hom
 is taken in the ordinary unbounded derived category, using the same extension i_* u_! L
 as the recorded stratum Hom lemma. The comparison is induced by the colimit cocone.
@@ -693,33 +689,7 @@ set_option linter.unusedVariables false in
 -- The preserved statement includes admissibility; the proof works for every coefficient ring.
 /-- The canonical map from the filtered colimit of Hom(a!L,K_t[q]) to Hom(a!L,K[q])
 is invertible, equivalently bijective, for every integer q and every diagram with one
-common strict lower bound. Here a!L is i_*u_!L placed in degree zero.
-
-Source: blueprint stratum continuity lemma and its proof
-(blueprint: lemma-continuity-ext-out-constructible-complex--1).
-Proof for stage 3, following the updated node:
-1. Closed i and the quasi-compact open uS make Z and S qcqs. The complementary
-   open j is already quasi-compact by hypothesis.
-2. Apply the natural recollement triangle to the uniformly bounded diagram and
-   its colimit. Homology and qcqs open pushforward commute with this colimit.
-   Exact filtered colimits and the five lemma give closed-costalk continuity;
-   exact fully faithful closed pushforward reflects the resulting isomorphism.
-3. On bounded-below injective complexes the natural right-derived comparison
-   identifies derived costalk with termwise costalk. The representative criterion
-   therefore makes the costalk of an injective quasi-colimit a quasi-colimit.
-4. Resolve the entire diagram and its colimit functorially by bounded injective
-   complexes retaining the common bound. Apply closed costalk and exact open
-   restriction. Derived adjunction identifies the original Hom diagram with the
-   shifted Hom diagram on S, compatibly at the colimit vertex and on every leg.
-5. Transport the lisse trivializations along the coefficient pullback isomorphism.
-   Internal Hom from L is exact and colimit-preserving, and its exact tensor left
-   adjoint makes it preserve K-injectives. Internal-Hom sections and derived
-   coyoneda evaluation identify shifted Hom with derived sections of termwise
-   internal Hom. Qcqs sections continuity proves this comparison invertible.
-6. The leg identities identify the original comparison, followed by the vertex
-   isomorphism, with the colimit of the diagram isomorphism followed by the
-   comparison of step 5. Cancel the invertible vertex map. All constructions
-   include empty strata and finite free modules of rank zero. -/
+common strict lower bound. Here a!L is i_*u_!L placed in degree zero. -/
 theorem constructibleExtContinuityStratum
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {S Z V X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]

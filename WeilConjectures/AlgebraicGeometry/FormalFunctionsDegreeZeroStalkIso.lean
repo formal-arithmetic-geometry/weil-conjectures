@@ -11,11 +11,10 @@ universe u
 set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
-set_option linter.unusedVariables false in
 /-- Degree-zero stalk comparison, obtained from the augmentation of the zeroth
 right-derived direct image. -/
 theorem formalFunctions_degreeZero_stalkIso {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y) :
-    ∃ a : (((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).obj
+    ∃ _a : (((RingedSpace.moduleStalkFunctor Y.toRingedSpace y).obj
         ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf))) ≃ₗ[
           Y.presheaf.stalk y]
         formalFunctionsStalk f y (SheafOfModules.unit X.ringCatSheaf) 0), True := by

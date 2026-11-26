@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.Exact.ExactLocalizationInverseMate
 set_option linter.privateModule false
 
 /-! The open projection square before the compactification pullback compositor.
-(blueprint: lem-sf-open-projection-iso-coefficient-change).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

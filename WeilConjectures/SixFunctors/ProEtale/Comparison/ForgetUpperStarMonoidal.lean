@@ -92,15 +92,8 @@ lemma μ_sheafComposeForget₂_comp_map_lowerStar_μ
   exact h
 
 /-- The identification `g^* (U M) ≅ U (g^* M)` of `sheafComposeForget₂CompUpperStarIso` is
-compatible with the tensor products: the square
-```
-g^*(U M ⊗ U N) ──g^* μ──▶ g^* U(M ⊗ N) ──≅──▶ U g^*(M ⊗ N) ──U δ──▶ U(g^* M ⊗ g^* N)
-      │                                                                  ▲
-      δ                                                                  μ
-      ▼                                                                  │
-g^* U M ⊗ g^* U N ─────────────────≅ ⊗ ≅──────────────────────▶ U g^* M ⊗ U g^* N
-```
-commutes, where `U` is the underlying abelian sheaf functor, lax monoidal. -/
+compatible with the tensor products, where `U` is the underlying abelian sheaf functor, lax
+monoidal. -/
 @[reassoc]
 lemma upperStar_map_μ_comp_sheafComposeForget₂CompUpperStarIso
     (M N : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ)) :

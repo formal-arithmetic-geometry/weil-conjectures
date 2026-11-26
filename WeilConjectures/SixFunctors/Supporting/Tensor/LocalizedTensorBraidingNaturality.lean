@@ -9,8 +9,10 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorIso
 
 /-! # Naturality of the localized tensor braiding
 
-Source: Stacks 06YS and 0941; derived pullback tensor isomorphism, step 11
-(blueprint: lem-coef-localized-tensor-braiding-naturality).
+## References
+
+* [Stacks, Tag 06YS](https://stacks.math.columbia.edu/tag/06YS)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public section
@@ -80,20 +82,7 @@ private theorem localizedBraiding_natural
     simp only [map_add, LinearMap.add_apply, Preadditive.add_comp,
       Preadditive.comp_add, hf, hf']
 
-/-- The normalized rational Koszul symmetry is natural for all rational arrows.
-Source: Stacks 06YS and 0941; derived-pullback-tensor-iso, proof step 11.
-Proof: the completed integral braiding is obtained from the natural system
-braiding by the normalized reduction/tensor comparison and derived limit.
-The coherent reduction counit equation and uniqueness identify this natural
-map with pullbackTensorIntegralBraiding. Thus it is natural integrally.
-The rational braiding is its localization, by its defining normalization.
-For pure-tensor arrows a tensor f and b tensor g, rational tensor bilinearity
-and localized composition make both sides a*b times integral naturality.
-Tensor-product induction in both arrows proves the equality for arbitrary
-sums. The object equalities in rationalDerivedTensor_existsUnique identify
-all endpoints; transporting along them preserves the equality. Coefficients
-have degree zero, so this preserves the specified Koszul sign.
-(blueprint: lem-coef-localized-tensor-braiding-naturality). -/
+/-- The normalized rational Koszul symmetry is natural for all rational arrows. -/
 theorem localizedTensorBraiding_naturality
     (hn : ∀ M M' N N' : sfIntegralConstructibleCategory l E W,
       ∀ (f : M ⟶ M') (g : N ⟶ N'),

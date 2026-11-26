@@ -27,7 +27,6 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
@@ -47,10 +46,10 @@ theorem finitePerfectAdicLiftedTransition_universal
       DerivedCategory (ModuleCat.{t + 1}
         (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1 + 1)))) :=
     normalizationModuleRestrict q
-  letI : F.IsRightAdjoint :=
+  let : F.IsRightAdjoint :=
     ModuleCat.derivedRestrictScalars_isRightAdjoint.{t + 1, 0} q
   let adj : F.leftAdjoint ⊣ F := Adjunction.ofIsRightAdjoint F
-  haveI : IsIso ((adj.homEquiv _ _).symm (finitePerfectAdicLiftedTransition T n)) :=
+  have : IsIso ((adj.homEquiv _ _).symm (finitePerfectAdicLiftedTransition T n)) :=
     finitePerfectAdicLiftedTransition_transpose_isIso T n adj
   let e := asIso ((adj.homEquiv _ _).symm (finitePerfectAdicLiftedTransition T n))
   have he : adj.unit.app _ ≫ F.map e.hom = finitePerfectAdicLiftedTransition T n := by

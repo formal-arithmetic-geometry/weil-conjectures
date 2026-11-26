@@ -8,7 +8,6 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarTensorData
 
 /-! # Basic comparison data for the scalar tensor representative reduction
-(blueprint: lem-sfb-coefficient-scalar-tensor-representative-internal)
 -/
 
 @[expose] public noncomputable section

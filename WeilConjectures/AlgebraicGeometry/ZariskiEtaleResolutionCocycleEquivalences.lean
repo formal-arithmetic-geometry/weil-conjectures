@@ -46,8 +46,6 @@ private theorem objectResolutionEquiv.{v, w, t}
   exact ⟨(AddEquiv.ulift.symm.trans a).trans
     (AddEquiv.ulift.trans h.symm.addCommGroupIsoToAddEquiv)⟩
 
--- The statement includes an unused comparison map and existential names.
-set_option linter.unusedVariables false in
 /-- Intermediate cocycle-comparison component for the Zariski–étale resolution comparison:
 section homology of the resolutions computes object cohomology on both sites. -/
 theorem zariski_etale_resolution_cocycle_equivalences
@@ -64,18 +62,18 @@ theorem zariski_etale_resolution_cocycle_equivalences
     (I : InjectiveResolution F)
     (R : InjectiveResolution ((i.sheafPushforwardContinuous AddCommGrpCat.{u + 1}
       (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).obj F))
-    (b : R.cocomplex ⟶
+    (_b : R.cocomplex ⟶
       ((i.sheafPushforwardContinuous AddCommGrpCat.{u + 1}
         (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).mapHomologicalComplex
           (ComplexShape.up ℕ)).obj I.cocomplex)
     (q : ℕ) (V : X.Opens) :
-    ∃ (e₁ : Sheaf.H' ((i.sheafPushforwardContinuous AddCommGrpCat.{u + 1}
+    ∃ (_e₁ : Sheaf.H' ((i.sheafPushforwardContinuous AddCommGrpCat.{u + 1}
         (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).obj F) q V ≃+
         ↑(HomologicalComplex.homology
           (((sheafToPresheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1} ⋙
             (evaluation X.Opensᵒᵖ AddCommGrpCat.{u + 1}).obj (op V)).mapHomologicalComplex
                (ComplexShape.up ℕ)).obj R.cocomplex) q))
-      (e₂ : Sheaf.H' F q (i.obj V) ≃+
+      (_e₂ : Sheaf.H' F q (i.obj V) ≃+
         ↑(HomologicalComplex.homology
           (((sheafToPresheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1} ⋙
             (evaluation X.Opensᵒᵖ AddCommGrpCat.{u + 1}).obj (op V)).mapHomologicalComplex

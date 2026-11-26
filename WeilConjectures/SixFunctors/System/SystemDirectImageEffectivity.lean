@@ -11,7 +11,10 @@ import WeilConjectures.SixFunctors.System.SystemDirectImageRoosPresentation
 
 /-! # Effectivity of whole-system direct image of a coherent reduction
 
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks Project, Tag 0941.
+## References
+
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
+* Zheng, Construction 4.1, Lemma 4.10
 -/
 
 @[expose] public noncomputable section

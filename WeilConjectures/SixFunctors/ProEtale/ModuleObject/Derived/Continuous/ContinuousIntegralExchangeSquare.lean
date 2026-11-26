@@ -13,7 +13,12 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.Cont
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.ContinuousIntegralExchangeEquality
 import WeilConjectures.AlgebraicGeometry.ContinuousIntegralPushComparison
 
-/-! # Scalar localization comparison for the specified proper exchange -/
+/-! # Scalar localization comparison for the specified proper exchange
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2 and Remark 6.8.15
+-/
 
 @[expose] public section
 
@@ -90,25 +95,7 @@ abbrev continuousIntegralExchangeSquareStatement
             (sq.toCommSq.asOver (Spec (.of k)))).app M).hom ≫
             t.hom
 
-/-- Source and target comparisons identify the specified integral and E exchange maps.
-Source: Bhatt--Scholze, Lemma 6.8.2 and Remark 6.8.15; scalar localization and
-unit-square-counit compatibility in the condensed realization argument.
-(blueprint: lem-weil-pbc-continuous-integral-exchange-square).
-
-Proof in words. On compact profinite tests, continuousIntegralFunctions_isLocalization
-identifies the coefficient map with inversion of ℓ. Exact inverse image from the point
-preserves this localization. Thus scalar extension is exact and commutes with pullback.
-For proper f and its base change f', ordinary derived pushforward commutes with the
-localization telescope on bounded-below objects: apply qcqs pushforward continuity to
-uniformly bounded-below representatives, all with the same lower bound. Compose the
-pullback comparison with the pullback of the pushforward comparison to obtain s.
-Compose the pushforward comparison with the pushforward of the pullback comparison
-to obtain t. Both are invertible by the same continuity result. These comparisons are
-mates of restriction-of-scalars comparisons. Hence they preserve units and counits,
-and their pullback comparisons preserve coherent composition. Expanding the specified
-exchange as unit insertion, square transport and counit contraction gives exactly the
-displayed commuting square. Restriction along fully faithful constructible inclusions
-preserves these identities. No invertibility of exchange itself enters this argument. -/
+/-- Source and target comparisons identify the specified integral and E exchange maps. -/
 theorem continuousIntegral_exchange_square [IsProper f]
     (sq : IsPullback g' f' f g) (M : integralConstructible ℓ E X)
     (hM : ProEtale.boundedConstructible

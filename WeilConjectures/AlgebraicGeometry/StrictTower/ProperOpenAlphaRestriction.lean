@@ -21,7 +21,6 @@ set_option autoImplicit false
 set_option Elab.async false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency.types true
-set_option linter.unusedSimpArgs false
 
 universe u
 open CategoryTheory CategoryTheory.Limits

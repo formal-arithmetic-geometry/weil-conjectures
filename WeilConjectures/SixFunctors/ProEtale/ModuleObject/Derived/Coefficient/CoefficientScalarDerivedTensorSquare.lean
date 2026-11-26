@@ -9,9 +9,11 @@ import WeilConjectures.CategoryTheory.SixFunctors.Monoidal
 
 /-! # Derived tensor equation from the ordinary coefficient square
 
-Source: Stacks Project, Tag 07A4; derived composition step of
-`lem-sfb-coefficient-scalar-tensor-realization`.
-(blueprint: lem-sfb-coefficient-scalar-derived-tensor-square).
+The derived tensor equation induced by the monoidal ordinary coefficient square.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 07A4
 -/
 
 @[expose] public noncomputable section
@@ -110,26 +112,7 @@ variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ Z : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules R Z)]
   [∀ Z : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules S Z)]
 set_option linter.unusedSectionVars false in
-/-- The monoidal ordinary coefficient square induces the specified derived tensor equation.
-
-Source: Stacks Project, Cohomology on Sites, Tag 07A4, compatibility of composite
-pullbacks and tensor products; step 4--5 of
-`lem-sfb-coefficient-scalar-tensor-realization`.
-(blueprint: lem-sfb-coefficient-scalar-derived-tensor-square).
-
-Proof: apply Functor.map_leftDerivedTensorComparison_comp_eq_of_iso to
-F1 = upperStar R f, F2 = extendScalars a_X, G1 = extendScalars a_Y,
-G2 = upperStar S f and tau = (pullIso a f).symm. All four functors are exact,
-additive, preserve flat objects and are left adjoints. The hypothesis supplies the
-ordinary monoidality required by that theorem. Its derived comparison is exactly
-coefficientScalarPathIso. The scalar comparisons are internalScalarTensorComparison
-by the definition using asIso of leftDerivedTensorComparison. The geometric comparison
-is leftDerivedTensorComparison by leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison.
-Precompose the theorem's equality by the hom component of coefficientScalarPathIso at
-A tensor B and cancel its adjacent inverse. Reverse the equality and expand tensorHom
-as whiskerRight followed by whiskerLeft. The result is the displayed equation. This
-argument takes place in the unbounded derived categories and uses no geometric
-finiteness assumptions. -/
+/-- The monoidal ordinary coefficient square induces the specified derived tensor equation. -/
 theorem coefficientScalarDerivedTensorSquare {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hmono : letI := internalScalarMonoidal a X
       letI := internalScalarMonoidal a Y

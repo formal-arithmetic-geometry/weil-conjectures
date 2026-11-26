@@ -23,7 +23,7 @@ monodromy representation of a lisse sheaf `G` on `Y`, and `f^* G ≅ G'` since b
 
 For an open `U` of a smooth curve and the open `V = U ∪ {z}` obtained by adding a boundary point,
 the kernel is the local inertia at `z`, and this says that a lisse sheaf with trivial local
-monodromy at `z` extends over `z` (blueprint `corollary-unramified-boundary-point--2`).
+monodromy at `z` extends over `z`.
 
 ## Main definitions
 
@@ -114,8 +114,7 @@ noncomputable def universalLisseMonodromy : LisseMonodromy l Y Ω :=
   (Scheme.universalCovers Y Ω).lisseMonodromy fun y G ↦
     IsAdicLisseSheaf.exists_iso_upperStar_universalCover _ y G.property
 
-/-- The monodromy from universal covers is an equivalence at every base point
-(`proposition-lattices-representations-normal-scheme`). -/
+/-- The monodromy from universal covers is an equivalence at every base point. -/
 theorem universalLisseMonodromy_isEquivalenceAt (t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) :
     (universalLisseMonodromy l Y Ω).IsEquivalenceAt t :=
   (Scheme.universalCovers Y Ω).lisseMonodromy_isEquivalenceAt _ t
@@ -142,10 +141,7 @@ variable {l : ℕ} [Fact l.Prime] {Y Y' : Scheme.{u}} {Ω : Type u} [Field Ω] {
 on `Y`, `Y'` compatible with `f : Y' ⟶ Y`, which are equivalences at `t ≫ f` and `t`, and assume
 that `π₁(Y', t) → π₁(Y, t ≫ f)` is surjective. If the monodromy representation of a lisse sheaf
 `G'` on `Y'` is trivial on the kernel of `π₁(Y', t) → π₁(Y, t ≫ f)`, then `G'` is the pullback
-of a lisse sheaf on `Y`: the representation of `π₁(Y', t)` factors through a representation of
-`π₁(Y, t ≫ f)`, continuous since `π₁(Y', t) → π₁(Y, t ≫ f)` is a quotient map of compact
-Hausdorff groups, which is the monodromy representation of a lisse `G` on `Y`; then `f^* G` and
-`G'` have the same representation of `π₁(Y', t)`, hence are isomorphic. -/
+of a lisse sheaf on `Y`. -/
 theorem exists_upperStar_iso_of_rep_eq_self {t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y'}
     (hM : M.IsEquivalenceAt (t ≫ f)) (hM' : M'.IsEquivalenceAt t) (hc : IsCompatible f M M')
     (hsurj : Function.Surjective (pullbackPathHom f t)) {G' : LisseSheaf l Y'}

@@ -21,9 +21,6 @@ import Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # Integral finiteness for the open term of localization
-
-Source: blueprint main-20261015, sk-thm-int-restriction-closed.proof.md,
-localization paragraph (blueprint: lem-sfb-int-closed-complement-finiteness).
 -/
 
 @[expose] public section
@@ -98,27 +95,6 @@ private theorem generators_triangulated
 /-- The integral constructible class is triangulated, and the open-complement term of
 localization belongs to it. This assertion concerns inverse image and open direct image;
 it involves neither sections with closed support nor a Brown adjoint.
-
-Source: blueprint main-20261015, sk-thm-int-restriction-closed.proof.md,
-"Its third term lies in Dbc", and DAG steps 1, 4, 5, 6
-(blueprint: lem-sfb-int-closed-complement-finiteness).
-
-Proof: X is Noetherian because its structure morphism to Spec k is of finite type.
-The existing integral constant-model heart closure theorem supplies ambient kernels,
-cokernels and short exact extensions in precisely padicIntegersRingObj coefficients.
-The zero module has the rank-zero scalar presentation on the identity cover and the
-single stratum X. The existing isomorphism-invariance theorem transports these models.
-The general weak Serre homology-property construction therefore makes bounded complexes
-with this cohomology triangulated. This is exactly the recorded generators predicate.
-
-For the open term, equip U with the composite structure map to Spec k. The open inclusion
-j is quasi-compact since X is locally Noetherian, and its composite structure morphism
-is separated and of finite type. IntegralModelsOperations(1) gives constructibility of
-j^*K. The existing localizingClosure_ctf_equals_bc theorem identifies this same class
-with its finite-Tor intersection. Apply integralOpenDirectImage in the exact recorded
-padicIntegersRingObj coefficients to this finite-Tor object. Its first conclusion is
-constructibility of Rj_*j^*K. No coefficient-presentation transport is required.
-Zero complexes, empty schemes and empty or whole open complements are included.
 -/
 theorem integralComplementFiniteness
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)

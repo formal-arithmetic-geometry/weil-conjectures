@@ -53,8 +53,7 @@ private lemma homotopy_comp_inv_app
   rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.id_comp] at h
   exact h
 
--- Preserve the original resolution hypothesis, although this calculation does not need it.
-set_option linter.unusedSectionVars false in
+omit [HasKInjectiveResolutions C] in
 /-- The canonical right-derived comparison is the mate of the localized left comparison.
 Source: Stacks Project, Derived Categories, Tags 09T5, 0DVC and 0FND. -/
 theorem derived_exact_forget_mate (a : L ⋙ V ≅ U ⋙ L₀) (b : R ⋙ U ≅ V ⋙ R₀)

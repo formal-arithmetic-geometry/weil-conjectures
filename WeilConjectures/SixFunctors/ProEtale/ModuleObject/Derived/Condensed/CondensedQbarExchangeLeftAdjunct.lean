@@ -162,27 +162,7 @@ attribute [local irreducible] constructibleToQbarPullIso constructibleToQbarPush
 set_option backward.isDefEq.respectTransparency true in
 attribute [-instance] catToReflQuiver in
 set_option backward.isDefEq.respectTransparency true in
-/-- Normalization of the left side of coefficient exchange under the pullback adjunction.
-Source: ModuleObject/Colimit/TwoColimit.lean, final transport paragraph;
-ChangeOfCoefficients.lean, derivedPullIso and derivedPushHom;
-Mathlib/CategoryTheory/Adjunction/Mates.lean
-(blueprint: lem-weil-pbc-qbar-condensed-exchange-left-adjunct).
-
-Proof in words. Expand the left adjunct using functoriality. The adjunct of the Omega base-change
-map is its square comparison followed by pullback of the counit: this follows by expanding
-the mate, then applying naturality and the triangle identity. Move the push comparison for f
-through the square by naturality. Its adjunct is inverse alpha_f followed by scalar extension
-of the E counit, since pushHomOfComapIso is the mate of inverse pullIsoOfComapIso; the
-iterated mate/conjugation identity proves this assertion. Coefficient pullback comparisons
-commute with the specified square comparison: restriction of scalars commutes strictly with
-pushforward, these comparisons respect pushforward composition after forgetting module
-actions, and localization uniqueness gives the corresponding right-derived coherence.
-Conjugating gives coherence for the specified derived pullback composition maps, hence for
-the square maps obtained from them and sq.w. Restrict along the fully faithful constructible
-inclusions. Substitute this cube identity, use naturality of alpha_g' on the E counit, and
-use the E base-change adjunct identity in reverse. Functoriality combines the E base-change
-map and its counit, giving exactly the displayed middle expression. Only pullback
-comparisons are inverted. No properness or Cartesianity is required. -/
+/-- Normalization of the left side of coefficient exchange under the pullback adjunction. -/
 theorem constructibleToQbar_exchange_left_adjunct
     (sq : CommSq g' f' f g) (K : PadicSubfieldConstructible X ℓ E) :
     (boundedConstructibleUpperStar (k := k)

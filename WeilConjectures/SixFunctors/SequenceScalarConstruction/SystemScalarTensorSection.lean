@@ -9,8 +9,11 @@ public import WeilConjectures.Algebra.Homology.System.SystemScalarModel
 
 /-! # Generic normalized scalar comparison
 
-Source: Stacks 03D7, 03EK and 06YY.
-(blueprint: lem-sf-system-scalar-tensor-section).
+## References
+
+* [Stacks, Tag 03D7](https://stacks.math.columbia.edu/tag/03D7)
+* [Stacks, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
 -/
 
 @[expose] public noncomputable section
@@ -27,12 +30,7 @@ variable {C : Type sa} [Category.{sb} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{sw}] [HasSheafify J AddCommGrpCat.{sw}]
   [EssentiallySmall.{sw} C]
 
-/-- Generic scalar comparison extracted from IntegralComparisonSequenceSystems.
-Source: Stacks 03D7, 03EK and 06YY
-(blueprint: lem-sf-system-scalar-tensor-section).
-Proof: Write the sheafification unit explicitly. Both the unit and the transport by the object
-equality are linear. Move the scalar through these two linear maps; multiplication by scalar s
-sends one tensor x to s tensor x in the balanced tensor product. -/
+/-- Generic scalar comparison extracted from IntegralComparisonSequenceSystems. -/
 theorem modelTmul_eq
     {R S : Sheaf J CommRingCat.{sw}} (φ : R ⟶ S)
     (D : SheafOfModules.DerivedChangeOfRingsCochainModel φ)

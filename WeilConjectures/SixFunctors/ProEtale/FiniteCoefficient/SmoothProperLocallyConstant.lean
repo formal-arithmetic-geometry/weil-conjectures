@@ -15,8 +15,8 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 
 Let `ν : X_proét ⟶ X_ét` be the comparison morphism of sites. For `f : X ⟶ Y` quasi-compact and
 quasi-separated and an étale sheaf `G`, the higher direct images on the pro-étale site of
-`ν^* G` are `ν^*` of the étale higher direct images of `G` (a consequence of
-`theorem-comparison-direct-images--1`, formalised as
+`ν^* G` are `ν^*` of the étale higher direct images of `G` (a consequence of the comparison of
+direct images, formalised as
 `AlgebraicGeometry.ProEtale.rightDerivedLowerStarMapDerivedCategoryObjIso`, and of the exactness
 of `ν^*`). Combined with the étale theorem
 `Etale.isFiniteLocallyConstantSheaf_homology_rightDerivedLowerStar_of_smooth_of_isProper`
@@ -59,7 +59,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 /-- For `f` quasi-compact and quasi-separated and an étale sheaf `G` placed in degree `0`, the
 pro-étale derived direct image of `ν^* G` is `ν^*` of the étale derived direct image of `G`
-(blueprint `theorem-comparison-direct-images--1`, applied to `L = G[0]`). -/
+(the comparison of direct images, applied to `L = G[0]`). -/
 noncomputable def rightDerivedLowerStarSingleComparisonUpperStarIso
     (G : Sheaf X.smallEtaleTopology A) :
     (R(ProEtale.lowerStar A f)).obj
@@ -93,12 +93,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 coefficient case. Let `k` be a field, `Λ` a finite ring killed by an integer invertible in `k`,
 `Y` of finite type over `k`, `f : X ⟶ Y` smooth and proper and `G` a finite locally constant
 sheaf of `Λ`-modules on `X_ét`. Then every pro-étale higher direct image `Rᵠf_* ν^* G` is
-locally constant with finite stalks.
-
-It is `ν^* Rᵠf_* G`
-(`AlgebraicGeometry.ProEtale.homologyRightDerivedLowerStarSingleComparisonUpperStarIso`), and
-`Rᵠf_* G` is finite locally constant by the étale theorem
-(`Etale.isFiniteLocallyConstantSheaf_homology_rightDerivedLowerStar_of_smooth_of_isProper`). -/
+locally constant with finite stalks. -/
 theorem isFiniteLocallyConstant_homology_rightDerivedLowerStar_of_smooth_of_isProper
     [Finite Λ] {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))]
     {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]

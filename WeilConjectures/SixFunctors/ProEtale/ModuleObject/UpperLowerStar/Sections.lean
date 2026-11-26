@@ -35,10 +35,8 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 variable {S T B : Scheme.{u}}
 
-/-- The unit of module objects, written in the syntactic form of the type of the unit
-comparisons `ε` of strong monoidal functors (see the implementation notes of
-`WeilConjectures.WeilObject.Sheaf.StalkUnit`): as a notation rather than a definition, since the
-kernel unfolds the pullbacks when a constant occurs as an argument of their components. -/
+/-- The unit of module objects, in the form of the type of the unit comparisons `ε` of strong
+monoidal functors. -/
 scoped notation "𝟙ₘ" =>
   @MonoidalCategoryStruct.tensorUnit _ _ MonoidalCategory.toMonoidalCategoryStruct
 

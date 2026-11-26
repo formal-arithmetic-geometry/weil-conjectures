@@ -119,10 +119,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Open extension preserves constructibility and specified Tor bounds
 
-Source: blueprint main-20261015, chap-Construction-of-f,
-sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md, proof (3)
-(blueprint: lem-sfb-open-extension-zero-constructible-finite-tor).
-
 The categories are the ordinary unbounded derived categories of internal modules.
 Constant scalar-model constructibility and general ring-object constructibility are
 kept distinct. The cohomology and Tor intervals are independent.
@@ -179,24 +175,7 @@ attribute [local irreducible] derivedTensor
 /-- Exact open extension preserves bounded constant-model constructibility, finite Tor
 amplitude, the supplied cohomological interval, and the supplied Tor interval. Its output
 is also bounded constructible in the general locally-finitely-presented ring-object sense.
-No admissibility or completeness hypothesis is imposed on the condensed coefficient ring.
-
-Source: blueprint main-20261015, det-sf-comp-composition-interchange.proof.md, proof (3);
-lem-sfb-dc-open-lower-shriek-preserves.proof.md; det-lem-int-tensor-projection.proof.md,
-open immersions and derived version
-(blueprint: lem-sfb-open-extension-zero-constructible-finite-tor).
-
-Proof: finite type over the field and quasi-compactness make U and X Noetherian.
-For every cohomology module use the proved module-level extension theorem, which
-adjoins the reduced closed complement with its zero scalar model. Transport the
-resulting models through the exact-functor homology isomorphism; exactness also
-preserves boundedness and the specified cohomology interval. For any test module N,
-the open projection isomorphism and the exact pullback comparison on N[0] identify
-the tensor of the extended complex with the extension of A tensor j^*N. Exactness
-preserves its cohomology interval [a,b], giving the stated Tor interval. Finally,
-finite constant local models imply local finite presentation. Restriction along
-the inverse coefficient isomorphism transports this to the general ring-object
-constructibility predicate on the same stratification. -/
+No admissibility or completeness hypothesis is imposed on the condensed coefficient ring. -/
 theorem openExtension_constructible_finiteTor
     (ℓ : ℕ) [Fact ℓ.Prime]
     (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

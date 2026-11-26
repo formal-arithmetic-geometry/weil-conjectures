@@ -14,8 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ConstantCompletionProjectionKernel
 * Stacks Project, Tag 093M
 -/
 @[expose] public noncomputable section
-set_option linter.style.haveILetI false
-set_option linter.style.longLine false
 open CategoryTheory CategoryTheory.Limits Opposite
 universe u
 namespace CategoryTheory.ConstantCompletion
@@ -28,22 +26,22 @@ theorem flat_and_quotients_projection (J : GrothendieckTopology C) (A : Type u)
         Ideal.span (Set.range (fun a : ↥(I ^ (n + 1)) ↦
           (algebraSection (coefficientMap J A I) a).val (op U))) := by
   let S := finiteSystemUnder J A I
-  letI : ∀ (n : ℕ) (U : Cᵒᵖ), Module (A ⧸ I ^ (n + 1)) (adicTerm J A S n U) :=
+  let : ∀ (n : ℕ) (U : Cᵒᵖ), Module (A ⧸ I ^ (n + 1)) (adicTerm J A S n U) :=
     finiteSystemModule J A I
   have hprops := finiteSystem_properties J A I
-  letI : ∀ (n : ℕ) (U : Cᵒᵖ), IsScalarTower A (A ⧸ I ^ (n + 1))
+  let : ∀ (n : ℕ) (U : Cᵒᵖ), IsScalarTower A (A ⧸ I ^ (n + 1))
       (adicTerm J A S n U) := hprops.1
   obtain ⟨e, he, _, _⟩ :=
     (sectionwise_adic_algebra_limit.{u, u} J A I S hprops.2.1 hprops.2.2.1 hprops.2.2.2).2.2.2.2.2
   intro n U
   let X := (constantSheaf J CommRingCat.{u}).obj (CommRingCat.of A)
-  letI : CreatesLimitsOfSize (Under.forget X) := Under.createsLimitsOfSize
-  letI : HasLimit (S ⋙ Under.forget X) := by
+  let : CreatesLimitsOfSize (Under.forget X) := Under.createsLimitsOfSize
+  let : HasLimit (S ⋙ Under.forget X) := by
     change HasLimit (finiteSystem J A I)
     infer_instance
-  letI : CreatesLimit S (Under.forget X) := by
+  let : CreatesLimit S (Under.forget X) := by
     exact CreatesLimitsOfShape.CreatesLimit
-  letI : PreservesLimit S (Under.forget X) :=
+  let : PreservesLimit S (Under.forget X) :=
     preservesLimit_of_createsLimit_and_hasLimit S (Under.forget X)
   let L := preservesLimitIso (Under.forget X) S
   have hsurj : Function.Surjective ((projection J A I n).hom.app (op U)) := by

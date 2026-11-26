@@ -12,8 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.IntegralResiduePullFlatModelMate
 
 /-! The counit-normalized mate calculation for the integral residue pull square.
 
-Source: Bhatt--Scholze, Remark 6.8.15.
-(blueprint: new-integral-residue-pull-flat-model-comparison-mate-normalized)
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Remark 6.8.15.
 -/
 
 @[expose] public section
@@ -158,8 +159,6 @@ private theorem reduction_unit_fac (T : Scheme.{u})
     (Mod.extendRestrictAdjunction (coefficientMap (integralReductionMap ℓ E) T)) H
 
 /-- Exact restriction/pullback compatibility with the localization counits.
-Source: Bhatt--Scholze, Remark 6.8.15.
-(blueprint: new-integral-residue-restrict-pull-counit-factorization)
 -/
 theorem restrict_pull_fac {X Y : Scheme.{u}} (f : X ⟶ Y)
     (N : HomotopyCategory
@@ -204,8 +203,6 @@ attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFun
   Functor.mapDerivedCategory
 -- The four concrete derived module functors occur in a single mate calculation.
 /-- Compatibility of the scalar mate with the derived reduction and pullback counits.
-Source: Bhatt--Scholze, Remark 6.8.15.
-(blueprint: new-integral-residue-scalar-mate-counit)
 -/
 theorem scalar_mate_counit {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
@@ -279,7 +276,6 @@ calculation is the scalar-adjunction square. The proof expands the two derived
 counits, transposes along `residueExchangeReductionAdjunction`, and applies
 `residueExchangePull_ordinary_unit`; naturality of the localization counits
 then gives the displayed normalized equation.
-(blueprint: new-integral-residue-pull-flat-model-comparison-mate-normalized)
 -/
 theorem residueExchangePull_flatModel_mate_normalized
     {X Y : Scheme.{u}} (f : X ⟶ Y)

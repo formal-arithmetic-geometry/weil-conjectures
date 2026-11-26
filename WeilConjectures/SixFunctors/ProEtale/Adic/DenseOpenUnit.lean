@@ -35,7 +35,7 @@ over `V` at the restriction of `F`.
 - `AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app`:
   the regular case.
 - `ProEtale.IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app_of_isIntegrallyClosed`:
-  the normal case (blueprint `theorem-purity-real-sheaves-curves`, part (3)).
+  the normal case.
 -/
 
 @[expose] public section
@@ -123,12 +123,7 @@ theorem isIso_openImmersionRestrictionLowerStarAdjunction_unit_app_of_iso_biprod
 weakly étale over `C` have integral local rings, `j : U ⟶ C` be a quasi-compact open immersion
 with dense image and `G` a sheaf on the pro-étale site of `C` whose restrictions to the members
 `V i` of a pro-étale cover are finite direct sums of copies of `ℚ̄_ℓ`. Then the unit
-`G ⟶ j_* j^* G` of the restriction adjunction is an isomorphism.
-
-By conservativity of the restrictions to a cover it suffices to check this over each `V i`.
-Over a weakly étale `T ⟶ V i`, the unit at `G` is the restriction of sections of `G` from `T` to
-`T ×_C U`, which is, up to the identification `T ×_C U ≅ T ×_{V i} (V i ×_C U)`, the unit over
-`V i` at the restriction of `G`, along the preimage `V i ×_C U ⟶ V i` of `U`. -/
+`G ⟶ j_* j^* G` of the restriction adjunction is an isomorphism. -/
 theorem isIso_openImmersionRestrictionLowerStarAdjunction_unit_app_of_cover
     {C U : Scheme.{u}}
     (hC : ∀ ⦃W : Scheme.{u}⦄ (f : W ⟶ C) [WeaklyEtale f] (w : W),
@@ -244,8 +239,8 @@ theorem IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app_of_isDo
     exact h
   exact isIso_of_reflects_iso _ (Mod.forget _)
 
-/-- **Lisse `ℓ`-adic sheaves extend uniquely over a dense open of a normal scheme** (blueprint
-`theorem-purity-real-sheaves-curves`, part (3), `ℓ`-adic level). Let `C` be a scheme whose local
+/-- **Lisse `ℓ`-adic sheaves extend uniquely over a dense open of a normal scheme.** Let `C` be a
+scheme whose local
 rings are integrally closed domains, `j : U ⟶ C` a quasi-compact open immersion with dense image
 and `F` a lisse `ℓ`-adic sheaf on `C`. Then the unit `F ⟶ j_* j^* F` of the adjunction
 `j^* ⊣ j_*` is an isomorphism: schemes weakly étale over `C` have integral local rings
@@ -262,8 +257,7 @@ theorem IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app_of_isIn
 /-- **Lisse `ℓ`-adic sheaves extend uniquely over a dense open.** Let `C` be a scheme with
 regular local rings, `j : U ⟶ C` a quasi-compact open immersion with dense image and `F` a lisse
 `ℓ`-adic sheaf on `C`. Then the unit `F ⟶ j_* j^* F` of the adjunction `j^* ⊣ j_*` is an
-isomorphism. This is the `ℓ`-adic content of blueprint `lemma-boundary-stalk--2`; the
-normal case is
+isomorphism. The normal case is
 `IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app_of_isIntegrallyClosed`. -/
 theorem IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app {C U : Scheme.{u}}
     (hC : ∀ c : C, IsRegularLocalRing (C.presheaf.stalk c)) (j : U ⟶ C) [IsOpenImmersion j]

@@ -53,7 +53,6 @@ private theorem unit_isIso_of_acyclic
     infer_instance
   exact this
 
-set_option linter.unusedVariables false in
 /-- Core alternating Cech resolution data and the four comparison isomorphisms.
 (Stacks, Tags 02KG and 02KH). -/
 theorem affineAlternatingCech_resolution_core
@@ -70,7 +69,7 @@ theorem affineAlternatingCech_resolution_core
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ))
       (a : (HomotopyCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G ⟶ D)
-      (q : ((Scheme.Modules.pushforward f).mapHomotopyCategory
+      (_q : ((Scheme.Modules.pushforward f).mapHomotopyCategory
           (ComplexShape.up ℤ)).obj D ≅
         (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
           (affineAlternatingCechModel f U G)),

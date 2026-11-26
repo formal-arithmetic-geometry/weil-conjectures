@@ -13,8 +13,9 @@ set_option linter.privateModule false
 
 /-! # Coefficient compatibility of the open projection factor
 
-Source: Stacks Project, Tags 0E8I, 07A6 and 0D6D.
-(blueprint: lem-sf-open-projection-factor-coefficient-change).
+## References
+
+* Stacks Project, Tags `0E8I`, `07A6`, `0D6D`
 -/
 
 @[expose] public noncomputable section

@@ -52,16 +52,15 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBaseChang
 /-!
 # Proper direct image with rational condensed coefficients: coefficient comparisons
 
-Source: current blueprint, chap-Construction-of-f,
-sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.md, clauses 1--2
-(blueprint: proposition-proper-direct-image-constructible-complexes).
+The canonical rationalization push comparison, the named preservation proofs for the two rational
+coefficient cases, the three bounded-below coefficient comparisons, and preservation of bounded
+constructibility.
 
-The first part of
+## Implementation details
+
+This is the first part of
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperBaseChangeRational`,
-split off for compile time: the
-canonical rationalization push comparison, the named preservation proofs for the two rational
-coefficient cases, the three bounded-below coefficient comparisons of clause 1 and preservation
-of bounded constructibility (clause 2).
+split off for compile time.
 -/
 
 @[expose] public noncomputable section
@@ -83,10 +82,7 @@ attribute [local irreducible] upperStarFromPoint
   moduleObjectProjectionMap
   DerivedCategory HasDerivedCategory.standard CategoryTheory.Mod.monoidalCategory
 
-/-- The canonical push comparison for the coefficient inclusion O_E -> E. Its definition
-only supplies the flatness proof to the recorded `derivedPushHom`; it does not choose a map.
-Source: blueprint rational proper direct image, clause 1, and its proof steps 1--2
-(blueprint: proposition-proper-direct-image-constructible-complexes). -/
+/-- The canonical push comparison for the coefficient inclusion `O_E → E`. -/
 def rationalizationPushHom (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) {X Y : Scheme.{u}} (p : X ⟶ Y) :
     (lowerStar (Profinite.padicIntegersRingObj ℓ E.1) p).rightDerivedFunctor ⋙
@@ -99,19 +95,13 @@ def rationalizationPushHom (ℓ : ℕ) [Fact ℓ.Prime]
       Exists.elim hj.2 fun _ ht ↦ Exists.elim ht.2.2 fun _ hα ↦ hα.2.2.2
   derivedPushHom (padicIntegersRingObjToContinuousMapRingObj ℓ E) p
 
-/-- The existing finiteness preservation proof for `ℚ̄_ℓ`, named to avoid repeated expansion
-in the canonical restricted base-change map. This supplies a proof, never extra map data.
-Source: blueprint rational proper direct image, clauses 2--3
-(blueprint: proposition-proper-direct-image-constructible-complexes). -/
+/-- Preservation of finiteness for `ℚ̄_ℓ` coefficients. -/
 abbrev rationalFinitenessPushforwardPreservation (ℓ : ℕ) [Fact ℓ.Prime]
     {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] :
     PreservesBoundedConstructiblePushforwards (Profinite.padicAlgClRingObj ℓ) k :=
   fun f K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f K
 
-/-- The existing finiteness preservation proof for a finite subextension `E`, named to avoid
-repeated expansion in the canonical restricted base-change map.
-Source: blueprint rational proper direct image, clauses 2--3
-(blueprint: proposition-proper-direct-image-constructible-complexes). -/
+/-- Preservation of finiteness for coefficients in a finite subextension `E`. -/
 abbrev ContinuousMapRingObj.rationalFinitenessPushforwardPreservation (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
     {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] :
@@ -126,10 +116,7 @@ attribute [local irreducible] rationalizationPushHom
   DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory
   Functor.mapDerivedCategory
 
-/-- The named preservation proof for precisely the two rational coefficient cases.
-The bundled ring equality fixes multiplication as well as the underlying coefficient sheaf.
-Source: blueprint rational proper direct image, clauses 2--3
-(blueprint: proposition-proper-direct-image-constructible-complexes). -/
+/-- Preservation of finiteness for the two rational coefficient cases. -/
 abbrev rationalCoefficientPushforwardPreservation
     (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}))
@@ -187,16 +174,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
   (p : X ⟶ Y) [IsProper p.left]
 
 include k in
-/-- Proper pushforward commutes with inverting ell on every bounded-below integral complex.
-Source: blueprint rational proper direct image, clause 1
-(blueprint: proposition-proper-direct-image-constructible-complexes).
-
-Proof: properness supplies the qcqs hypotheses of `lem-sfb-localized-direct-image-comparison`,
-`localizedDirectImageComparison_isIso`, which applies to every bounded-below integral complex.
-Unfold `localizedDirectImageComparison`, the proposition name and `rationalizationPushHom`:
-both are the same `derivedPushHom` component of the coefficient inclusion O_E -> E, with
-flatness proofs that agree by proof irrelevance. No comparison map is chosen.
--/
+/-- Proper pushforward commutes with inverting ell on every bounded-below integral complex. -/
 theorem isIso_rationalizationPushHom_boundedBelow
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
@@ -210,15 +188,7 @@ theorem isIso_rationalizationPushHom_boundedBelow
 
 include k in
 include k in
-/-- Proper pushforward commutes with extension to finite-subextension-valued condensed Qlbar.
-Source: blueprint rational proper direct image, clause 1
-(blueprint: proposition-proper-direct-image-constructible-complexes).
-
-Proof: extract an integer lower bound and install the corresponding `K.IsGE` instance.
-The existing bounded-below Qlbar push comparison
-`isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_app_of_isGE` then gives exactly
-the stated component's invertibility. Properness supplies its geometric hypotheses.
--/
+/-- Proper pushforward commutes with extension to finite-subextension-valued condensed Qlbar. -/
 theorem isIso_algClCoefficientPushHom_boundedBelow
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})

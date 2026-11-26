@@ -14,11 +14,10 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Con
 /-!
 # The constructible exceptional inverse image on the pro-étale site
 
-Blueprint `theorem-f-shriek-finite-coefficients` (and `theorem-f-shriek-ell-adic-coefficients--4`
-(vi)) defines, at a finite stage `A = A_{E,n}`, the exceptional inverse image on the pro-étale site
+At a finite coefficient stage `A`, the exceptional inverse image on the pro-étale site is defined
 as the étale right adjoint transported along the comparison,
 `Rf^! := ν_X^* ∘ f^× ∘ Rν_{Y,*}` (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`), and
-asserts as theorems:
+it satisfies:
 
 * on objects of étale origin `L ≅ ν_Y^* G` it is `ν_X^* f^× G`
   (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekComparisonIso`);
@@ -65,8 +64,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
 /-- On a bounded below complex of étale origin `ν_Y^* G`, the pro-étale exceptional inverse
 image is `ν_X^* f^× G`: the unit `G ⟶ Rν_* ν^* G` is an isomorphism on bounded below `G`
-(`AlgebraicGeometry.ProEtale.isIso_derivedComparisonAdjunction_unit_app`). This is the formula
-`Rf^! L = ν_X^* f^× G` of blueprint `theorem-f-shriek-finite-coefficients`. -/
+(`AlgebraicGeometry.ProEtale.isIso_derivedComparisonAdjunction_unit_app`). -/
 noncomputable def rightDerivedUpperShriekComparisonIso
     (G : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hG : _root_.DerivedCategory.TStructure.t.plus G) :
@@ -121,11 +119,10 @@ lemma constructibleTorAmplitudeIn_of_mapDerivedCategory_comparisonUpperStar {X :
   ⟨⟨hbc, homologyConcentratedIn_of_mapDerivedCategory_comparisonUpperStar Λ h.1.2⟩,
     (DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff a b G).1 h.2⟩
 
-/-- Blueprint `theorem-f-shriek-ell-adic-coefficients--4`, the comparison of (v) and (vi): if `G` is
-a right adjoint of `Rf_!` on the ambient derived categories (the ambient exceptional right adjoint
-`Rf^×`, which need not exist) and `G L` is bounded below of étale origin for a bounded below `L` (as
-the preservation clauses of `sk-def-sf-admissible` guarantee on `Dctf`), then `G L ≅ Rf^! L`, by
-uniqueness of adjoints on the bounded below objects of étale origin. -/
+/-- If `G` is a right adjoint of `Rf_!` on the ambient derived categories (the ambient exceptional
+right adjoint `Rf^×`, which need not exist) and `G L` is bounded below of étale origin for a bounded
+below `L`, then `G L ≅ Rf^! L`, by uniqueness of adjoints on the bounded below objects of étale
+origin. -/
 theorem nonempty_iso_rightDerivedUpperShriek_of_adjunction {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasCompactification f] [CompactSpace Y]
     {G : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)) ⥤
@@ -167,7 +164,7 @@ variable {k : Type u} [Field k] {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k))
 include aY
 
 omit [CompactSpace Y] in
-/-- Blueprint `theorem-f-shriek-finite-coefficients`: the pro-étale exceptional inverse image
+/-- The pro-étale exceptional inverse image
 carries `Dᵇc(Y, A)` into `Dᵇc(X, A)`, for a separated finite-type `f` over a finite-type
 `k`-scheme `Y` and a finite `Λ` whose exponent is invertible on `Y`. -/
 theorem boundedConstructible_rightDerivedUpperShriek
@@ -183,7 +180,7 @@ theorem boundedConstructible_rightDerivedUpperShriek
       (Etale.boundedConstructible_rightDerivedUpperShriek Λ aY f hG))
 
 omit [CompactSpace Y] in
-/-- Blueprint `theorem-f-shriek-finite-coefficients`: the explicit interval bounds. There is a
+/-- The explicit interval bounds. There is a
 shift `c`, depending only on `f`, such that `Rf^!` carries `D_c^[a, b](Y, A)` with Tor amplitude
 in `[a, b]` into `D_c^[a - c, b + c](X, A)` with Tor amplitude in `[a - c, b + c]`, for all
 `a, b` and independently of the finite coefficient ring (the étale bound `c = 2D + 2 dim Y + 1`
@@ -206,7 +203,7 @@ theorem exists_shift_constructibleTorAmplitudeIn_rightDerivedUpperShriek :
     (constructibleTorAmplitudeIn_mapDerivedCategory_comparisonUpperStar Λ (hc a b G hG'))
 
 omit [CompactSpace Y] in
-/-- Blueprint `theorem-f-shriek-finite-coefficients`: the pro-étale exceptional inverse image
+/-- The pro-étale exceptional inverse image
 carries `Dctf(Y, A)` into `Dctf(X, A)`. -/
 theorem constructibleFiniteTor_rightDerivedUpperShriek
     {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
@@ -239,7 +236,7 @@ theorem constructibleFiniteTor_rightDerivedLowerShriek
     (DerivedCategory.constructibleFiniteTor_mapDerivedCategory Λ
       (Etale.constructibleFiniteTor_rightDerivedLowerShriek Λ aY f hGt))
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients`: the adjunction
+/-- The adjunction
 `Hom_Y(Rf_! K, L) ≅ Hom_X(K, Rf^! L)` on the small categories `Dctf`, a theorem: the pro-étale
 exceptional adjunction on bounded below objects of étale origin
 (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekAdjunction`), restricted to `Dctf`, which

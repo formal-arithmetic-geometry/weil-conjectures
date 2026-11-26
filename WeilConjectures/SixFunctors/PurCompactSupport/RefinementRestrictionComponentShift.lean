@@ -9,7 +9,12 @@ public import WeilConjectures.SixFunctors.PurCompactSupport.RefinementOpenRestri
 import WeilConjectures.CategoryTheory.SmoothPurity.CanonicalRightDerivedAdjunctionShift
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 
-/-! The component calculation underlying shift compatibility of refinement restriction. -/
+/-! The component calculation underlying shift compatibility of refinement restriction.
+
+## References
+
+* Stacks Project, Tags `0F7B`, `0F7I`
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -84,14 +89,8 @@ variable (R : Coefficients.{u})
   (hi : R.pull (c.i ≫ r.hom) = proEtaleRingCompositeCoefficients c.i r.hom
     (R.ring d.Z) (R.ring c.Z) (R.ring X) (R.pull r.hom) (R.pull c.i))
 
-/--
-Source: Stacks 0F7B and 0F7I, the exact pullback compositor and proper counit
-calculation on the distinguished open component.
-Proof: the component map is the composite of the normalized pullback comparison with
-the derived proper counit.  Both factors commute with the canonical integer
-cochain shifts, and their composite gives the displayed equation.
-(blueprint: lem-sf-refinement-restriction-component-shift).
--/
+/-- The component of the refinement restriction on the distinguished open component commutes
+with the canonical integer shifts. -/
 theorem refinementRestriction_component_shift
     (n : ℤ) (M : DerivedCategory (pbcModules X (R.ring X))) :
     (( ((openExtension R c.i).mapDerivedCategory ⋙ push R r.hom) ⋙

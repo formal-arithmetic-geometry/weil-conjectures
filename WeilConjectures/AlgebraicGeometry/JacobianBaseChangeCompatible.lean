@@ -26,8 +26,6 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry
 
--- The original instance binder is used through typeclass inference.
-set_option linter.unusedVariables false in
 /-- The compatibility square for two Jacobian representing objects after base change (Picard
 base change and Yoneda). Proof: on each test scheme T over K, the iterated-pullback
 isomorphism identifies
@@ -51,7 +49,7 @@ theorem jacobian_compatibility
     [IsProper f] [GeometricallyIntegral f] :
     let b := Spec.map (CommRingCat.ofHom (algebraMap k K))
     let fK := pullback.snd f b
-    ∀ [hcurve : IsConnectedCurve fK],
+    ∀ [_hcurve : IsConnectedCurve fK],
     ∀ (J : Over (Spec (.of k))) [GrpObj J] [IsJacobian f J]
       (e : (picardFunctorDegree f 0).obj.RepresentableBy J), IsPicardZeroMul f e →
       ∀ (JK : Over (Spec (.of K))) [GrpObj JK] [IsJacobian fK JK]

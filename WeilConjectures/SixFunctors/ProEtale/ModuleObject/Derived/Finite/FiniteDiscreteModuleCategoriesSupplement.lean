@@ -14,7 +14,6 @@ public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteModuleCategories
 /-! # Categories for finite discrete coefficients, before bounded constructibility
 
 These are the unchanged ordinary internal module and module-valued sheaf categories.
-(blueprint: def-sfb-finite-discrete-module-categories)
 -/
 
 @[expose] public section

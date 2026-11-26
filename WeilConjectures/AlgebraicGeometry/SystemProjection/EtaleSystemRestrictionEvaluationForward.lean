@@ -29,7 +29,6 @@ comparison in `EtaleSystemRestrictionEvaluation`.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option linter.unusedSimpArgs false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 universe u
@@ -629,14 +628,14 @@ private theorem supportCube
   dsimp only [Functor.comp_map] at hn ht
   have ho' := (lowerStar (ModuleCat.{u + 1} (B.rings.obj (op n)))
     c.g).rightDerivedFunctor.congr_map (ho N)
-  simp only [Functor.map_comp, Category.assoc] at ho'
+  simp only [Functor.map_comp] at ho'
   dsimp only [Support.F]
   simp only [SupportEvaluation.iso, RestrictionSupport.iso, singleRestriction,
     Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom,
     Functor.isoWhiskerRight_hom, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Category.id_comp, Category.comp_id,
-    Functor.comp_map, Functor.comp_obj, Functor.map_comp, Functor.map_id, Category.assoc]
+    Functor.comp_map, Functor.comp_obj, Functor.map_comp, Category.assoc]
   erw [reassoc_of% hn, ← ho',
     ← reassoc_of% (hp ((t.support C).openImage.J.obj N)), reassoc_of% ht]
 

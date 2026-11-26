@@ -10,7 +10,12 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.Integr
 import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
-/-! # Invertibility from a flat-resolution computation -/
+/-! # Invertibility from a flat-resolution computation
+
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Remark 6.8.15.
+-/
 
 @[expose] public section
 
@@ -39,15 +44,7 @@ private theorem exists_flat_colimit_model
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
-/-- The inverse mate is invertible, by computation on flat K-flat resolutions.
-Source: Bhatt--Scholze, Remark 6.8.15.
-(blueprint: new-integral-residue-derived-pull-square-isIso)
-
-Proof. Choose a flat K-flat representative for the input complex. The flat-model
-identity expresses the canonical pull mate, followed by two invertible counits,
-as the composite of two invertible counits with the localized ordinary pull
-isomorphism. Cancel the invertible counits. Naturality transports invertibility
-from the chosen representative to the original complex. -/
+/-- The inverse mate is invertible, by computation on flat K-flat resolutions. -/
 theorem integralResidue_pullSquare_isIso :
     ∀ {X Y : Scheme.{u}} (f : X ⟶ Y), IsIso (residueExchangePullHom ℓ E f) := by
   intro X Y f

@@ -13,7 +13,10 @@ import all WeilConjectures.AlgebraicGeometry.FiniteConstantLocalModel
 
 /-! # Scalar models of finite projective constant modules
 
-Source: blueprint scalar-six-ctf (1), finite projective local models.
+## References
+
+* [Stacks, Tag 00NX](https://stacks.math.columbia.edu/tag/00NX)
+* [Stacks, Tag 099Y](https://stacks.math.columbia.edu/tag/099Y)
 -/
 
 @[expose] public noncomputable section
@@ -62,17 +65,7 @@ variable (A : Type) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
 omit [DiscreteTopology A] [Finite A] in
 /-- The specified finite comparison of a constant finite projective module is the
 finite scalar extension of a retract of a finite free scalar module.
-
-Source: blueprint scalar-six-ctf (1), finite ring generators; Stacks 00NX and 099Y.
-
-Proof: split a finite free surjection onto P using projectivity. The constant condensed
-model on the point is additive and sends the free module of rank n to the free condensed
-module, so the model of P is a retract of a free condensed module. Its idempotent has
-entries in Λ(*), and sections at the point give a retract Q of the free scalar module with
-the same scalar entries. The realization of the constant sheaf on P is pulled back from the
-point model, so both it and the scalar extension of Q are retracts of the free module on T
-for the same scalar matrix, hence isomorphic. This includes the zero ring, rank zero and
-the empty scheme. -/
+-/
 theorem finiteProjectiveConstantScalarModel
     (T : Scheme.{u})
     (P : ModuleCat.{u + 1} (ULift.{u + 1} A))

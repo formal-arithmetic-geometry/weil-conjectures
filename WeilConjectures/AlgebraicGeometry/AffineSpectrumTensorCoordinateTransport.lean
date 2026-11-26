@@ -19,7 +19,6 @@ public import WeilConjectures.AlgebraicGeometry.AffineSpectrumTensorCoherentCoor
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 universe u w
@@ -59,6 +58,8 @@ def ordinaryIsoPullbackStalkHomologyIso {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso 
     F0.mapIso (comparisonStalkHomologyIso Y y
       ((E.mapHomologicalComplex (.up ℤ)).obj P) i)
 
+omit [∀ Y : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] in
 private theorem restrict_forget_homology {R S : Type u} [CommRing R] [CommRing S] (e : R →+* S)
     (V : CochainComplex (ModuleCat.{u} S) ℤ) (i : ℤ) :
     let T := ModuleCat.restrictScalars.{u} e

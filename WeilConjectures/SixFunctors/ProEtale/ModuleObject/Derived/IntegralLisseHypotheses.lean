@@ -50,9 +50,7 @@ theorem lisseTensorHypotheses : LisseTensorHypotheses (Profinite.padicIntegersRi
     boundedConstructible_tensorObj_of_lisse_homology ℓ E Z hA hA' hL hL'
 
 /-- The derived internal hom `RHom(A, L)` from a bounded complex `A` of `𝒪̲_E`-module objects
-with lisse cohomology sheaves to a bounded constructible complex `L` is bounded constructible: by
-dévissage in `A` it suffices to treat `A = P[q]` with `P` lisse, and `P[q]` has a lisse left dual
-`D`, so that `RHom(P[q], L) ≅ D ⊗ᴸ L`. -/
+with lisse cohomology sheaves to a bounded constructible complex `L` is bounded constructible. -/
 theorem boundedConstructible_ihom_of_lisse_homology (Z : Scheme.{u})
     [TopologicalSpace.NoetherianSpace Z]
     {A L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})

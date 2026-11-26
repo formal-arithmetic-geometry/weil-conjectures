@@ -9,9 +9,16 @@ public import WeilConjectures.AlgebraicGeometry.ClopenData.ProEtaleClopenTotalTe
 public import WeilConjectures.Algebra.Homology.System.SystemScalarModel
 import all WeilConjectures.AlgebraicGeometry.ClopenScalar.ProEtaleClopenOrdinaryScalarComparison
 /-! # Restriction of the actual scalar tensor construction
-Source: Stacks Project, sites-cohomology.tex, Tag 06YY.
-(blueprint: lem-sf-clopen-scalar-raw-restriction-comparison).
+
+The actual scalar tensor construction commutes with restriction to a clopen component.
+
+## References
+
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks, Tag 03EL](https://stacks.math.columbia.edu/tag/03EL)
+* [Stacks, Tag 03CY](https://stacks.math.columbia.edu/tag/03CY)
 -/
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -217,16 +224,7 @@ private theorem sfClopenScalarRawBack_tensor
 
 attribute [local irreducible] sfClopenScalarRawBack
 
-/-- Restriction of a sheafified scalar tensor, transported through the recorded model.
-
-Source: Stacks Project, sites-modules.tex, Tags 03EL and 03CY.
-(blueprint: lem-sf-clopen-scalar-raw-restriction-comparison).
-
-Proof: cocontinuity identifies the restriction of the tensor-presheaf sheafification
-with the sheafification of the restricted tensor presheaf. Transport the comparison
-through the two functors' object and map equations. The sheafification-unit equation
-sends each pure tensor to the same pure tensor. Naturality follows from the tensor
-map equations; the inverse comes from the inverse sheafification comparison. -/
+/-- Restriction of a sheafified scalar tensor, transported through the recorded model. -/
 theorem sf_clopen_scalar_raw_restriction_comparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (T : Scheme.{t}) (U : T.Opens) (n : ℕ)

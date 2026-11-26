@@ -17,7 +17,6 @@ and compared with the fixed internal scalar functor.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -75,6 +74,8 @@ private theorem complex_leftDerived_unique
   simp only [NatTrans.id_app, Category.comp_id] at h
   exact h
 
+omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ T)]
+  [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ' T)] in
 private theorem compute_eq_scalarCounit (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
     (P : CochainComplex (Modules Λ T) ℤ) :
     compute a T P = (scalarCounit a T).app

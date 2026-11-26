@@ -16,7 +16,13 @@ import all WeilConjectures.AlgebraicGeometry.ContinuousConstructibleIntegralGlui
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteModelStratumFiltration
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 
-/-! # Generation using a fixed ordered reduced stratification -/
+/-! # Generation using a fixed ordered reduced stratification
+
+## References
+
+* Stacks Project, Tag 09AH
+* Stacks Project, Tag 09Y5
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -30,18 +36,7 @@ attribute [local irreducible] upperStar lowerStar upperStarComp lowerStarComp
   openImmersionLowerShriek
 
 /-- Localization on the successive closed tails places a module in the finite
-extension closure of its restrictions to a fixed stratification.
-Source: Stacks Tags 09AH and 09Y5; blueprint lemma-sections-support-closed-subscheme--3, step 6.
-(blueprint: lem-finite-constant-model-fixed-strata-generation).
-
-Proof: the closed tails have images complementary to the open prefixes. Reducedness
-factors each next tail through the preceding one, and this factor is a closed
-immersion. Its complement is the specified open stratum. Apply the open/closed
-short exact sequence to the restriction of the module to that tail. Exact closed
-pushforward gives a distinguished triangle on X. Reverse induction starts with
-the empty last tail and adds the stratum extensions. The first tail has full image;
-the closed adjunction unit identifies its restriction and pushforward with the
-original module. This also handles the empty stratification and zero module. -/
+extension closure of its restrictions to a fixed stratification. -/
 theorem finiteConstantModel_fixedStrata_generation
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]

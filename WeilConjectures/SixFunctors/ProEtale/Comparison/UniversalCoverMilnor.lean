@@ -61,10 +61,7 @@ finite stalks.** Let `c` be a homotopy limit cone (`R lim`) over a tower `F` in 
 category of pro-étale sheaves of `Λ`-modules on `Y`, whose degree `i - 1` cohomology tower is
 `ν^* Hₙ` for a tower `H` of étale sheaves with finite locally constant underlying sheaves of sets.
 Then after pulling back to the universal cover `Ỹ_y`,
-`Hⁱ(p^* R lim F) = lim_n Hⁱ(p^* Fₙ)`: pullback preserves the homotopy limit
-(`AlgebraicGeometry.ProEtale.isHomotopyLimit_upperStar_mapDerivedCategory_mapCone_moduleCat`), and
-the pulled back degree `i - 1` tower is Mittag-Leffler
-(`AlgebraicGeometry.Scheme.UniversalCovers.isMittagLefflerTower_comparisonUpperStar`). -/
+`Hⁱ(p^* R lim F) = lim_n Hⁱ(p^* Fₙ)`. -/
 noncomputable def UniversalCovers.isLimitHomologyUpperStarOfIsSetFLC {Λ : Type (u + 1)}
     [CommRing Λ] {F : ℕᵒᵖ ⥤ DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
     {c : Cone F} (hc : IsHomotopyLimit c) (i : ℤ)

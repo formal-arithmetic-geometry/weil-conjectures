@@ -48,7 +48,6 @@ theorem exists_canonicalDerivedTensorHom (X : Scheme.{uCD})
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option linter.style.haveILetI false in
 /-- Uniqueness of the family specified on representatives (Stacks, Tag 08DJ). -/
 theorem IsCanonicalDerivedTensorHom.unique (X : Scheme.{uCD})
     [HasDerivedCategory.{wCD} (SheafOfModules.{uCD} (moduleRings X.toRingedSpace))]

@@ -31,11 +31,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.Basic
 
 /-! # Frobenius tensor comparison and the actual completion unit
 
-Source: blueprint, sec-six-functors/sk-rem-sf-pf-done,
-fix-prop-projection-formula.proof.md, penultimate sentence, via original step 3 of
-lem-wf-tensor-completion-frobenius
-(blueprint: def-wf-tensor-unit-square-data).
-
 The strict statement uses the published constant-quotient presentation of the completed
 ring, conjugating the coefficient isomorphism by the finite-quotient ring comparison.
 It fixes every product projection and both mapping-fiber coordinates.
@@ -52,43 +47,31 @@ namespace WeilConjectures.WfTensorUnitSquare
 variable (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
   (d : AdicCoefficientDatum A) (e : Aut X) (p : A)
 
-/-- The existing completed quotient-ring presentation.
-Source: projection-formula equivariance
-(blueprint: def-wf-tensor-unit-square-data). -/
+/-- The existing completed quotient-ring presentation. -/
 abbrev ring := adicDatumRing X (intrinsicPresentationDatum d)
 
-/-- The given coefficient isomorphism, conjugated by its finite-quotient presentation.
-Source: projection-formula equivariance
-(blueprint: def-wf-tensor-unit-square-data). -/
+/-- The given coefficient isomorphism, conjugated by its finite-quotient presentation. -/
 def coefficientIso :
     (proEtaleSheafInverseImage e.asIso.hom CommRingCat.{u + 1}).obj (ring X d) ≅ ring X d :=
   (proEtaleSheafInverseImage e.asIso.hom CommRingCat.{u + 1}).mapIso
       (pbcCompletedComparison X d) ≪≫
     asIso (completedCoefficientMap e.asIso.hom d) ≪≫ (pbcCompletedComparison X d).symm
 
-/-- Exact module transport with this coefficient identification.
-Source: projection-formula equivariance
-(blueprint: def-wf-tensor-unit-square-data). -/
+/-- Exact module transport with this coefficient identification. -/
 abbrev transport := proEtaleRingModulePullback e.asIso.hom (ring X d) (ring X d)
   (coefficientIso X d e)
 
-/-- The termwise transport functor.
-Source: projection-formula equivariance
-(blueprint: def-wf-tensor-unit-square-data). -/
+/-- The termwise transport functor. -/
 abbrev complexes := (transport X d e).mapHomologicalComplex (.up ℤ)
 
-/-- The existing signed total tensor.
-Source: projection-formula equivariance
-(blueprint: def-wf-tensor-unit-square-data). -/
+/-- The existing signed total tensor. -/
 def tensor (U V : CochainComplex (adicDatumModules X (intrinsicPresentationDatum d)) ℤ) :
     CochainComplex (adicDatumModules X (intrinsicPresentationDatum d)) ℤ := by
   letI : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0, u, u + 1} _
   exact CochainComplex.mapBifunctor.{u+1,u+2,u+1,u+2,u+1,u+2} U V
     (proEtaleOrdinaryTensor X (ring X d))
 
-/-- The specified ordinary total comparison H(Tot(U tensor V)) to Tot(HU tensor HV).
-Source: projection-formula equivariance
-(blueprint: def-wf-tensor-unit-square-data). -/
+/-- The specified ordinary total comparison H(Tot(U tensor V)) to Tot(HU tensor HV). -/
 def alpha (U V : CochainComplex (adicDatumModules X (intrinsicPresentationDatum d)) ℤ) :
     (complexes X d e).obj (tensor X d U V) ≅
       tensor X d ((complexes X d e).obj U) ((complexes X d e).obj V) :=
@@ -97,60 +80,42 @@ def alpha (U V : CochainComplex (adicDatumModules X (intrinsicPresentationDatum 
 
 attribute [local irreducible] tensor alpha
 
-/-- The already constructed completed constant-module functor.
-Source: projection-formula equivariance
-(blueprint: def-wf-tensor-unit-square-data). -/
+/-- The already constructed completed constant-module functor. -/
 abbrev constants := completedKoszulConstant X (intrinsicPresentationDatum d)
 
-/-- The canonical constant section of an extended constant module.
-Source: projection-formula equivariance
-(blueprint: def-wf-tensor-unit-square-data). -/
+/-- The canonical constant section of an extended constant module. -/
 def generator (M : ModuleCat.{u + 1} A) (U : X.ProEtᵒᵖ) (x : M) :=
   adicDatumTensorSection X (adicDatumScalar X (intrinsicPresentationDatum d))
     ((adicLisseConstantModules X A).obj M) U 1 (completedConstantGenerator X A M U x)
 
-/-- The original rank-one Koszul complex; index m means the positive power m+1.
-Source: projection-formula equivariance
-(blueprint: def-wf-tensor-unit-square-data). -/
+/-- The original rank-one Koszul complex; index m means the positive power m+1. -/
 abbrev koszul (m : ℕ) := completedKoszulPowerSheaf X (intrinsicPresentationDatum d)
   1 (fun _ ↦ p) m
 
-/-- The existing strict Koszul tensor tower.
-Source: projection-formula equivariance
-(blueprint: def-wf-tensor-unit-square-data). -/
+/-- The existing strict Koszul tensor tower. -/
 abbrev tower (C : CochainComplex (adicDatumModules X (intrinsicPresentationDatum d)) ℤ) :=
   completedKoszulTensor X (intrinsicPresentationDatum d) 1 (fun _ ↦ p) C
 
-/-- Its original product.
-Source: projection-formula equivariance
-(blueprint: def-wf-tensor-unit-square-data). -/
+/-- Its original product. -/
 abbrev product (C : CochainComplex (adicDatumModules X (intrinsicPresentationDatum d)) ℤ) :=
   completedKoszulProduct X (intrinsicPresentationDatum d) 1 (fun _ ↦ p) C
 
-/-- Negative of one minus shift, as in the published mapping cocone.
-Source: projection-formula equivariance
-(blueprint: def-wf-tensor-unit-square-data). -/
+/-- Negative of one minus shift, as in the published mapping cocone. -/
 abbrev differential
     (C : CochainComplex (adicDatumModules X (intrinsicPresentationDatum d)) ℤ) :=
   -completedKoszulOneSubShift X (intrinsicPresentationDatum d) 1 (fun _ ↦ p) C
 
-/-- The original signed fiber complex.
-Source: projection-formula equivariance
-(blueprint: def-wf-tensor-unit-square-data). -/
+/-- The original signed fiber complex. -/
 abbrev fiber (C : CochainComplex (adicDatumModules X (intrinsicPresentationDatum d)) ℤ) :=
   completedKoszulFiber X (intrinsicPresentationDatum d) 1 (fun _ ↦ p) C
 
-/-- Its actual (u,0) chain-map unit.
-Source: projection-formula equivariance
-(blueprint: def-wf-tensor-unit-square-data). -/
+/-- Its actual (u,0) chain-map unit. -/
 abbrev unit (C : CochainComplex (adicDatumModules X (intrinsicPresentationDatum d)) ℤ) :=
   completedKoszulUnitComplex X (intrinsicPresentationDatum d) 1 (fun _ ↦ p) C
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The stipulated level comparison, with alpha and HQ_m to Q_m on the two factors.
-Source: projection-formula equivariance
-(blueprint: def-wf-tensor-unit-square-data). -/
+/-- The stipulated level comparison, with alpha and HQ_m to Q_m on the two factors. -/
 def beta (k : constants X d ⋙ transport X d e ≅ constants X d)
     (U V : CochainComplex (adicDatumModules X (intrinsicPresentationDatum d)) ℤ) (m : ℕ) :
     (complexes X d e).obj (tower X d p (tensor X d U V) m) ⟶
@@ -166,17 +131,13 @@ def beta (k : constants X d ⋙ transport X d e ≅ constants X d)
       (coefficientIso X d e) (tensor X d U V) (koszul X d p m)).inv ≫
     HomologicalComplex.mapBifunctorMap a q (proEtaleOrdinaryTensor X (ring X d)) (.up ℤ)
 
-/-- The ordinary derived comparison of the recorded tensor model.
-Source: projection-formula equivariance
-(blueprint: def-wf-tensor-unit-square-data). -/
+/-- The ordinary derived comparison of the recorded tensor model. -/
 abbrev ordinary (M N : PbcBoundedConstructibleComplete X d) :=
   (proEtaleCanonicalTensorComparison e.asIso.hom (pbcAdicCompletion X d)
     (pbcAdicCompletion X d) (asIso (completedCoefficientMap e.asIso.hom d))
     (wfTensorModel X d) (wfTensorModel X d)).app (M.obj, N.obj)
 
-/-- Its specified completed comparison before restricting to the complete subcategory.
-Source: projection-formula equivariance
-(blueprint: def-wf-tensor-unit-square-data). -/
+/-- Its specified completed comparison before restricting to the complete subcategory. -/
 def completed (hp : Ideal.span (Set.range (fun _ : Fin 1 ↦ p)) = d.ideal)
     (M N : PbcBoundedConstructibleComplete X d) :=
   wfPullbackCompletion X d 1 (fun _ ↦ p) hp e
@@ -184,9 +145,8 @@ def completed (hp : Ideal.span (Set.range (fun _ : Fin 1 ↦ p)) = d.ideal)
     (ObjectProperty.ι (WfIsComplete X d 1 (fun _ ↦ p) hp)).mapIso
       ((wfCompletion X d 1 (fun _ ↦ p) hp).mapIso (ordinary X d e M N))
 
-/-- The node's derived equation with its actual units and specified comparisons.
-Source: projection-formula equivariance
-(blueprint: def-wf-tensor-unit-square-data). -/
+/-- The derived tensor-unit square: the pullback of the completion unit, followed by the
+completed comparison, equals the ordinary comparison followed by the completion unit. -/
 def DerivedSquare (hp : Ideal.span (Set.range (fun _ : Fin 1 ↦ p)) = d.ideal)
     (M N : PbcBoundedConstructibleComplete X d) : Prop :=
   (pbcIsoAmbientPullback e.asIso.hom d).map

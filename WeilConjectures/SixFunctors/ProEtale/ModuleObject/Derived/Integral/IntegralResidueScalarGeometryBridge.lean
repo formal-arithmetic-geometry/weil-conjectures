@@ -13,14 +13,13 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.Integr
 
 /-! The residue tensor square on K-flat representatives with K-flat pullback.
 
-Source: Bhatt--Scholze, Remark 6.8.15 and the tensor-pullback identity in the
-proof of Lemma 6.5.9(5), p. 50; the balanced tensor and counit calculation below
-is the explicit formal comparison argument.
-(blueprint: new-integral-residue-scalar-geometry-component)
-
 Only the calculation on resolving representatives is left open here. The
 scalar-route module proves the passage to arbitrary derived objects by
 naturality and constructs the required resolutions itself.
+
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.5.9(5), Remark 6.8.15.
 -/
 
 @[expose] public section
@@ -41,37 +40,7 @@ attribute [local irreducible] Functor.leftDerivedFunctor Functor.mapDerivedCateg
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
 set_option linter.unusedVariables false in
-/-- The residue tensor square on a K-flat complex whose pullback is K-flat.
-
-Source: Bhatt--Scholze, Remark 6.8.15 and the proof of Lemma 6.5.9(5), p. 50;
-explicit balanced tensor calculation for the fixed derived comparisons.
-(blueprint: new-integral-residue-scalar-geometry-component)
-
-Proof. Write B for the residue regular module restricted to integral scalars.
-Since P is K-flat, B tensor P computes restricted derived scalar extension.
-Since the ordinary pullback of P is K-flat, its tensor with the pulled-back B
-also computes the corresponding derived tensor on X. The fixed derived tensor
-presentation is normalized by tensorPresentationDerivedCounit, and the derived
-pullback tensor comparison is normalized by leftDerivedFunctorCounit on both
-factors. Use these defining counit equations to express the two composites in
-these ordinary homotopy tensor models; all comparisons cancelled at this step
-are invertible by the two K-flat hypotheses and exactness of pullback.
-
-In the scalar composite, residueExchangePullComparisons_counit replaces the
-inverse scalar mate, followed by the extension counit, by the pullback of the
-extension counit. The coefficient identification in
-residueExchangeCoefficientPullIso is the ordinary restriction/pullback square
-on the residue regular module followed by the inverse ordinary monoidal unit.
-It therefore identifies the two ordinary coefficient actions. Forget the
-module action and precompose with the balanced tensor coequalizer epimorphism.
-Both resulting maps pull back a coefficient and an element of P and then apply
-the same coefficient multiplication. The balancing relations agree by
-naturality of the coefficient-ring map. The coequalizer universal property and
-faithfulness of the forgetful functor give equality of the module maps in
-every degree. These maps commute with differentials by naturality, so applying
-the homotopy quotient and Qh gives equality in the ordinary models. Cancel the
-invertible model comparisons to obtain the displayed equation. No flatness of
-B is used: the K-flat tensor factor is P, respectively its pullback. -/
+/-- The residue tensor square on a K-flat complex whose pullback is K-flat. -/
 theorem integralResidue_tensorGeometry_component {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hFlat : (f)^*⟦integralCoeff ℓ E⟧.PreservesFlat)
     (P : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})

@@ -68,12 +68,7 @@ variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [Dis
   [Finite T]
 
 /-- **Tensor products preserve module complexes of étale origin over a field**: if `T` is a field
-and `Φ C`, `Φ D` are bounded below of étale origin, so is `Φ (C ⊗ D)`. Write `Φ C ≅ ν^* Q` and
-`Φ D ≅ ν^* Q'` with `Q`, `Q'` bounded below; then `Φ (C ⊗ D) ≅ ν^* (Q ⊗ᴸ Q')`
-(`ProEtale.finiteCoefficientDerivedEquivalenceTensorIso`,
-`ProEtale.derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso`), and `Q ⊗ᴸ Q'` is
-bounded below as every étale sheaf of modules over a field is flat
-(`AlgebraicGeometry.Etale.flat_of_isField`). -/
+and `Φ C`, `Φ D` are bounded below of étale origin, so is `Φ (C ⊗ D)`. -/
 theorem plusEtaleOrigin_finiteCoefficientDerivedEquivalence_tensorObj (hT : IsField T)
     {X : Scheme.{u}}
     {C D : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

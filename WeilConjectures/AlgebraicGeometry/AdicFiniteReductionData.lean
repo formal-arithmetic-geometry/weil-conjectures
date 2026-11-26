@@ -34,7 +34,6 @@ are uniquely normalized by the ordinary scalar insertion and their K-flat comput
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.defProp false
 set_option synthInstance.maxSize 2048
 attribute [local irreducible] HasDerivedCategory.standard
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
@@ -1203,7 +1202,7 @@ def adicFiniteFactor {A : Type w} [CommRing A] (J : Ideal A)
 
 /-- The quotient-factor identity is the existing ideal quotient identity
 (Stacks, Tags 06YY, 09C2 and 09AL). -/
-def adicFiniteQuotientComp {A : Type w} [CommRing A] (J : Ideal A)
+theorem adicFiniteQuotientComp {A : Type w} [CommRing A] (J : Ideal A)
     {m n : ℕ} (h : n ≤ m) :
     adicFiniteQuotient J n = (adicFiniteFactor J h).comp (adicFiniteQuotient J m) :=
   (Ideal.Quotient.factor_comp_mk
@@ -1211,7 +1210,7 @@ def adicFiniteQuotientComp {A : Type w} [CommRing A] (J : Ideal A)
 
 /-- The quotient-factor cocycle is the existing factor composition identity
 (Stacks, Tags 06YY, 09C2 and 09AL). -/
-def adicFiniteFactorComp {A : Type w} [CommRing A] (J : Ideal A)
+theorem adicFiniteFactorComp {A : Type w} [CommRing A] (J : Ideal A)
     {r m n : ℕ} (hnm : n ≤ m) (hmr : m ≤ r) :
     adicFiniteFactor J (hnm.trans hmr) =
       (adicFiniteFactor J hnm).comp (adicFiniteFactor J hmr) :=
@@ -1228,7 +1227,7 @@ def adicFiniteExtension {A B : Type w} [CommRing A] [CommRing B]
 
 /-- Functoriality of the existing constant-sheaf construction on ring homomorphisms
 (Stacks, Tags 06YY and 09C2). -/
-def adicFiniteConstantComp {A B C : Type w} [CommRing A] [CommRing B] [CommRing C]
+theorem adicFiniteConstantComp {A B C : Type w} [CommRing A] [CommRing B] [CommRing C]
     {D : Type w} [SmallCategory D] (T : GrothendieckTopology D)
     (f : A →+* B) (g : B →+* C) (h : A →+* C) (e : h = g.comp f) :
     adicFiniteConstantMap h T = adicFiniteConstantMap f T ≫ adicFiniteConstantMap g T :=

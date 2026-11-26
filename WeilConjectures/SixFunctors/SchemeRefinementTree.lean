@@ -5,13 +5,15 @@ Authors: Bin Wu
 -/
 module
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-
 /-!
+
 # Recursive scheme refinement trees
 
 The data of a finite open/closed splitting tree, before assigning numerical vertex labels.
-Source: the binary refinement construction in Stacks Project, Topology, Tag 09Y4.
-(auxiliary; not a blueprint node)
+
+## References
+
+* [Stacks, Tag 09Y4](https://stacks.math.columbia.edu/tag/09Y4)
 -/
 
 @[expose] public section
@@ -23,9 +25,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- A finite splitting tree with prescribed admissible branches. The scheme at every vertex
-is qcqs and immersed in the ambient scheme; each split is complementary and quasi-compact.
-Source: Stacks Project, Topology, Tag 09Y4.
-(auxiliary; not a blueprint node) -/
+is qcqs and immersed in the ambient scheme; each split is complementary and quasi-compact. -/
 inductive SchemeRefinementTree (W : Scheme.{u})
     (allowed : ∀ (T : Scheme.{u}), (T ⟶ W) → ∀ (L R : Scheme.{u}),
       (L ⟶ T) → (R ⟶ T) → Prop) :

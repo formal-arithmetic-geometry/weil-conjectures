@@ -59,8 +59,6 @@ private theorem pinned_comparison_isComparison
   exact Classical.choose (Classical.choose_spec
     (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) k
 
-set_option linter.unusedVariables false in
--- Keep the original comparison-proof binder hc0; it is introduced again after the lets.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Open restriction compatibility for single modules in every integer degree
@@ -101,7 +99,7 @@ theorem restricted_base_change_compatibility_single_degree
         (DerivedCategory.singleFunctor
           (SheafOfModules.{u} (moduleRings (pullback fA gA).toRingedSpace)) n).obj
             ((Scheme.Modules.tensorPullback (pullback.fst fA gA)).obj H))
-    (hc0 : (∃ ε : DerivedCategory.Qh.{w} ⋙ derivedPullback (pullback.fst fA gA) ⟶
+    (_hc0 : (∃ ε : DerivedCategory.Qh.{w} ⋙ derivedPullback (pullback.fst fA gA) ⟶
           (Scheme.Modules.tensorPullback (pullback.fst fA gA)).mapHomotopyCategory
               (ComplexShape.up ℤ) ⋙
             DerivedCategory.Qh.{w} (C := SheafOfModules.{u}

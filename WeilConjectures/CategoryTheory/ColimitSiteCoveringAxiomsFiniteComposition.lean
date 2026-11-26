@@ -46,7 +46,6 @@ private theorem ofArrows_transport_eq {C : Type u} [Category.{u} C]
     obtain ⟨hX, _, h⟩ := (Arrow.mk_eq_mk_iff _ _).mp (ha i).symm
     exact Presieve.ofArrows.mk' i hX (by simpa using h)
 
-set_option linter.unusedVariables false in
 /-- Then $Q$ is stable under composition of finite indexed covering families, with finite inner
 index at each outer index.
 Source: Stacks Project, Sites, Tag 09YL. -/
@@ -59,7 +58,7 @@ theorem colimit_site_covering_axioms_FiniteComposition
       Finite R.uncurry)
     (hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X),
       R ∈ P j X → R.map (F.map a).toFunctor ∈ P k ((F.map a).toFunctor.obj X))
-    (hpullback : ∀ (j k : J) (a : j ⟶ k) (X Y Z : F.obj j) (R : Presieve X),
+    (_hpullback : ∀ (j k : J) (a : j ⟶ k) (X Y Z : F.obj j) (R : Presieve X),
       R ∈ P j X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →
         PreservesLimit (cospan f g) (F.map a).toFunctor)
     (V : Cocone F)

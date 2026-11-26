@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.RingObjects.Condensed.PadicAlgClGlobalSect
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open scoped CategoryTheory.Obj
@@ -48,7 +47,7 @@ theorem condensedArtinSchreierSheafOf_inverse
       condensedArtinSchreierSheafOf
         (Profinite.padicAlgClRingObj ℓ) k₀ X₀ ψ⁻¹ f) := by
   classical
-  letI : Fact (ringChar k₀).Prime := ⟨CharP.char_is_prime k₀ (ringChar k₀)⟩
+  let : Fact (ringChar k₀).Prime := ⟨CharP.char_is_prime k₀ (ringChar k₀)⟩
   obtain ⟨Ψ, a, hΨ, hψ', hcmp, hcmpinv⟩ :=
     condensedArtinSchreier_trace_bridge k₀ ℓ X₀ ψ hψ
   obtain ⟨⟨eadd⟩, ⟨einv⟩, ⟨einv'⟩, ⟨echar⟩⟩ :=

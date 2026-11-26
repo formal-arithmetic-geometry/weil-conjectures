@@ -16,8 +16,7 @@ For a cartesian square `sq : IsPullback g' f' f g` of separated `k`-schemes of f
 `ℚ̄_ℓ`-sheaves is the base change `Ex_* : Lg^* Rf_* ⟶ Rf'_* Lg'^*` through the identifications
 `Rf_! ≅ Rf_*` and `Rf'_! ≅ Rf'_*`
 (`ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_comp_isoLowerStar`,
-blueprint `def-exchange-projection`: `Ex_!` is represented by `Ex_*` for the compactification
-`f = f ∘ 𝟙` of a proper `f`).
+`Ex_!` is represented by `Ex_*` for the compactification `f = f ∘ 𝟙` of a proper `f`).
 
 The proof computes `Ex_!` through the trivial compactifications `X ⟶[𝟙] X ⟶[f] Y` and
 `X' ⟶[𝟙] X' ⟶[f'] Y'` (`boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_baseChange`),

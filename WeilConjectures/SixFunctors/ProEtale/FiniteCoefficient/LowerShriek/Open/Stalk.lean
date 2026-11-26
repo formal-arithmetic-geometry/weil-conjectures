@@ -15,10 +15,9 @@ Let `j : U ⟶ X` be an open immersion. The extension by zero `j_!` on sheaves f
 pro-étale sites is the exact left adjoint of `j^*`
 (`AlgebraicGeometry.ProEtale.openImmersionLowerShriekUpperStarAdjunction`,
 `AlgebraicGeometry.ProEtale.preservesFiniteLimits_openImmersionLowerShriek`), so it acts
-degreewise on complexes, as `D(j_!)`. This file proves the stalk prescription of blueprint
-`proposition-extension-zero-restriction-closed-subscheme`, in the form of the pullback along an
-arbitrary morphism `s : T ⟶ X` (for instance a geometric point `Spec k̄ ⟶ X`, along which the
-pullback computes the stalk):
+degreewise on complexes, as `D(j_!)`. This file proves the stalk prescription, in the form of the
+pullback along an arbitrary morphism `s : T ⟶ X` (for instance a geometric point `Spec k̄ ⟶ X`,
+along which the pullback computes the stalk):
 
 * if `s = t ≫ j` factors through `U`, then `s^* j_! K ≅ t^* K`
   (`AlgebraicGeometry.ProEtale.openImmersionLowerShriekCompUpperStarIsoOfFac`), by base change
@@ -85,28 +84,16 @@ noncomputable def mapDerivedCategoryOpenImmersionLowerShriekCompUpperStarIsoOfFa
   Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (openImmersionLowerShriekCompUpperStarIsoOfFac A j t s h)
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`: Extension by zero on the
-pro-etale site.
-
-The extension by zero `j_!` along an open immersion `j : U ⟶ X` on the small pro-étale sites is
-the exact left adjoint of `j^*`
-(`AlgebraicGeometry.ProEtale.openImmersionLowerShriekUpperStarAdjunction`,
-`AlgebraicGeometry.ProEtale.preservesFiniteLimits_openImmersionLowerShriek`), it acts degreewise
-on complexes, as `D(j_!)`, and it has the stalk prescription of the étale extension by zero:
-for a complex `K` on `U` and a morphism `s : T ⟶ X` (e.g. a geometric point of `X`),
-
-* if `s = t ≫ j` factors through `U`, then `s^* j_! K ≅ t^* K` (this statement);
-* if the range of `s` misses `U`, then `s^* j_! K = 0`
-  (`AlgebraicGeometry.ProEtale.isZero_mapDerivedCategory_upperStar_openImmersionLowerShriek`).
--/
+/-- Stalk prescription of the extension by zero along an open immersion `j : U ⟶ X`: for a
+complex `K` on `U` and a morphism `s : T ⟶ X` (e.g. a geometric point of `X`) with `s = t ≫ j`
+factoring through `U`, we have `s^* j_! K ≅ t^* K`. -/
 theorem nonempty_iso_mapDerivedCategory_upperStar_openImmersionLowerShriek (t : T ⟶ U)
     (s : T ⟶ X) (h : t ≫ j = s) (K : DerivedCategory (Sheaf (Scheme.ProEt.topology U) A)) :
     Nonempty (D((s)^*[A]).obj (D((j)_!open[A]).obj K) ≅ D((t)^*[A]).obj K) :=
   ⟨(mapDerivedCategoryOpenImmersionLowerShriekCompUpperStarIsoOfFac A j t s h).app K⟩
 
 /-- The pullback of a complex `D(j_!) K` along a morphism `s` missing the range of the open
-immersion `j` vanishes (blueprint `proposition-extension-zero-restriction-closed-subscheme`, the
-stalks outside `U`). -/
+immersion `j` vanishes (the stalks outside `U`). -/
 theorem isZero_mapDerivedCategory_upperStar_openImmersionLowerShriek (s : T ⟶ X)
     (hjs : Set.range j.base ∩ Set.range s.base = ∅)
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology U) A)) :

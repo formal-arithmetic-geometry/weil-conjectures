@@ -73,16 +73,10 @@ lemma derivedComparisonUpperStarUpperStarIso_inv_app_comp {T S R : Scheme.{u}} (
   subst hg
   simpa using derivedComparisonUpperStarUpperStarIso_compCoherence A g₁ g₂ M
 
-/-- **`D(ν^*)` carries the section isomorphisms of étale pullbacks to those of pro-étale
-pullbacks**: for a section `s` of `p : X ⟶ Y` and `K` on `Y_ét`, the square
-```
-Ls^* ν^* Lp^* K --(Ls^* (ν^* Lp^* ≅ Lp^* ν^*))--> Ls^* Lp^* ν^* K
-      |                                               |
-(Ls^* ν^* ≅ ν^* Ls^*)                         (Ls^* Lp^* ≅ 𝟭)
-      v                                               v
-ν^* Ls^* Lp^* K ------------(ν^* (Ls^* Lp^* ≅ 𝟭))------> ν^* K
-```
-commutes. -/
+/-- `D(ν^*)` carries the section isomorphisms of étale pullbacks to those of pro-étale
+pullbacks: for a section `s` of `p : X ⟶ Y` and `K` on `Y_ét`, the square formed by
+`Ls^* ν^* Lp^* K`, `Ls^* Lp^* ν^* K`, `ν^* Ls^* Lp^* K` and `ν^* K`, with the evident
+comparison isomorphisms, commutes. -/
 lemma derivedComparisonUpperStarUpperStarIso_inv_app_compSectionIso
     {X Y : Scheme.{u}} (s : Y ⟶ X) (p : X ⟶ Y) (h : s ≫ p = 𝟙 Y)
     (K : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :

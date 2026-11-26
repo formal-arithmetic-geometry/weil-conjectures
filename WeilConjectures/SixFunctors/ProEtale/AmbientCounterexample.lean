@@ -23,8 +23,8 @@ public import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
 /-!
 # The ambient exceptional right adjoint fails for an elliptic curve
 
-Blueprint `sk-rem-sf-fullcd-scope`: the ambient exceptional right adjoint datum
-`AlgebraicGeometry.ProEtale.HasAmbientExceptionalRightAdjoint` of `sk-def-sf-admissible` (1) is
+The ambient exceptional right adjoint datum
+`AlgebraicGeometry.ProEtale.HasAmbientExceptionalRightAdjoint` is
 *false in general*, already for the structure morphism `a_E : E ⟶ Spec k` of an elliptic curve
 over an algebraically closed field `k`.
 
@@ -37,7 +37,7 @@ cocontinuous functor `U_H` to `Λ[H]`-modules whose right adjoint `V_H` is exact
 
 * (i) `FullCD(a_E, Λ; c)` fails for every `c`
   (`AlgebraicGeometry.ProEtale.not_hasUniformCohomologicalDimensionLE_of_isAbelianVariety`), so
-  clause (1) of `sk-def-sf-admissible` fails
+  the ambient exceptional right adjoint datum fails
   (`AlgebraicGeometry.ProEtale.not_hasAmbientExceptionalRightAdjoint_of_isAbelianVariety`);
 * (ii) `Ra_{E!} = Ra_{E*}` does not preserve countable coproducts and has no right adjoint on
   `D(E_proét, Λ)`
@@ -47,19 +47,19 @@ cocontinuous functor `U_H` to `Λ[H]`-modules whose right adjoint `V_H` is exact
   (`AlgebraicGeometry.ProEtale.not_isLeftAdjoint_rightDerivedLowerShriekPlus_of_isAbelianVariety`).
 
 The sheaf `F` is not of étale origin. On the étale-origin class the exceptional adjoint is the
-unconditional constructible `Rf^!` of `theorem-f-shriek-ell-adic-coefficients--4` (vi), which is the
+unconditional constructible `Rf^!`, which is the
 only exceptional functor used downstream (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`).
 
 In particular, the exceptional right adjoint of `Rf_!` on unbounded (or bounded below) pro-étale
 complexes does not exist in general.
 
-## Implementation notes
+## Implementation details
 
 The construction works for abelian varieties of any positive dimension `g`, since then
 `T_r A ≅ ℤ_r^{2g}` surjects onto `ℤ_r`; elliptic curves are the case `IsAbelianVariety.dim E = 1`.
 The statements are made in that generality.
 
-The blueprint construction works for every nonzero coefficient ring `Λ`. The statements here
+The construction works for every nonzero coefficient ring `Λ`. The statements here
 take `Λ` to be a field, which suffices for a counterexample.
 
 The chosen compactification of the proper morphism `a_E` need not be the trivial one; it is
@@ -194,18 +194,11 @@ variable (Λ : Type (u + 1)) [Field Λ] {k : Type u} [Field k] [IsAlgClosed k]
 
 -- the group structure `[GrpObj E]` is part of the statement but is not needed in the proof
 set_option linter.unusedSectionVars false in
-/-- Blueprint `sk-rem-sf-fullcd-scope`, the evaluation functor of the counterexample: for an
-elliptic curve (more generally an abelian variety of positive dimension) `E` over an
-algebraically closed field `k` and a field `Λ`, there is an exact functor `U` from pro-étale
-sheaves of `Λ`-modules on `E` to `Λ`-linear representations of `H = ⊕_ℕ ℤ`, with an exact
-right adjoint `V`, sending the constant sheaf `Λ` to the trivial representation.
-
-`U` is evaluation at the pro-étale geometric generic point `T = Spec k(E)^sep`, which is
-weakly contractible, so `U` is exact; `H` is an abstract subgroup of
-`Gal(k(E)^sep / k(E))`, chosen inside the pro-`r` part of a procyclic subgroup on which the
-surjection `Gal(k(E)^sep / k(E)) ↠ T_r E ↠ ℤ_r` given by the multiplication covers `[r^m]` is
-injective. `H` acts freely on `Hom_E(T, W)` for every affine weakly contractible `W`, so `U` sends
-the representables `Λ[h_W]` to free `Λ[H]`-modules and its right adjoint `V` is exact. -/
+/-- The evaluation functor of the counterexample: for an elliptic curve (more generally an abelian
+variety of positive dimension) `E` over an algebraically closed field `k` and a field `Λ`, there is
+an exact functor `U` from pro-étale sheaves of `Λ`-modules on `E` to `Λ`-linear representations of
+`H = ⊕_ℕ ℤ`, with an exact right adjoint `V`, sending the constant sheaf `Λ` to the trivial
+representation. -/
 theorem exists_exact_evaluation (hE : 0 < IsAbelianVariety.dim E) :
     ∃ (U : Sheaf (Scheme.ProEt.topology E.left) (ModuleCat.{u + 1} Λ) ⥤
         Rep.{u + 1} Λ (Multiplicative (ULift.{u + 1} ℕ →₀ ℤ)))
@@ -231,18 +224,10 @@ theorem exists_exact_evaluation (hE : 0 < IsAbelianVariety.dim E) :
     Sheaf.evaluationRepConstantSheafIso a Λ _ _
       (bijective_toSheafify_app_genericPointSep E.left _)
 
-/-- Blueprint `sk-rem-sf-fullcd-scope`, the counterexample sheaf: for an elliptic curve (more
-generally an abelian variety of positive dimension) `E` over an algebraically closed field `k`
-and a field `Λ`, there is a pro-étale sheaf `F` of `Λ`-modules on `E` whose pro-étale cohomology
-`Hⁿ(E_proét, F) = Hⁿ(Ra_{E*} F)` is nonzero in every degree `n ≥ 1`.
-
-Take `F = V(Λ)` for the exact evaluation functor `U ⊣ V` of
-`AlgebraicGeometry.ProEtale.exists_exact_evaluation`. Both adjoints being exact,
-`Extⁿ(Λ_E, F) ≅ Extⁿ_H(U Λ_E, Λ) = Extⁿ_H(Λ, Λ) = Hⁿ(⊕_ℕ ℤ, Λ)`
-(`CategoryTheory.Adjunction.mapExtCounit_bijective`), which is nonzero
-(`groupCohomology.exists_ext_ne_zero_finsupp`); since the constant sheaf on `Spec k` is
-projective, a nonzero class in `Extⁿ(Λ_E, F)` forces `Rⁿa_{E*} F ≠ 0`
-(`AlgebraicGeometry.ProEtale.not_isZero_homology_of_ext_ne_zero`). -/
+/-- The counterexample sheaf: for an elliptic curve (more generally an abelian variety of positive
+dimension) `E` over an algebraically closed field `k` and a field `Λ`, there is a pro-étale sheaf
+`F` of `Λ`-modules on `E` whose pro-étale cohomology `Hⁿ(E_proét, F) = Hⁿ(Ra_{E*} F)` is nonzero in
+every degree `n ≥ 1`. -/
 theorem exists_forall_not_isZero_homology_rightDerivedLowerStar
     (hE : 0 < IsAbelianVariety.dim E) :
     ∃ F : Sheaf (Scheme.ProEt.topology E.left) (ModuleCat.{u + 1} Λ), ∀ n : ℤ, 0 < n →
@@ -278,10 +263,9 @@ theorem exists_forall_not_isZero_homology_rightDerivedLowerStar
     (m + 1) z fun h ↦ hy ?_
   rw [← hz, h, map_zero]
 
-/-- Blueprint `sk-rem-sf-fullcd-scope` (i): for the structure morphism `a_E` of an elliptic
-curve (more generally an abelian variety of positive dimension) over an algebraically closed
-field, `FullCD(a_E, Λ; c)` fails for every `c`. The base change along the terminal object of
-`(Spec k)_proét` already violates it, by
+/-- For the structure morphism `a_E` of an elliptic curve (more generally an abelian variety of
+positive dimension) over an algebraically closed field, `FullCD(a_E, Λ; c)` fails for every `c`. The
+base change along the terminal object of `(Spec k)_proét` already violates it, by
 `AlgebraicGeometry.ProEtale.exists_forall_not_isZero_homology_rightDerivedLowerStar`. -/
 theorem not_hasUniformCohomologicalDimensionLE_of_isAbelianVariety
     (hE : 0 < IsAbelianVariety.dim E) (c : ℕ) :
@@ -291,10 +275,9 @@ theorem not_hasUniformCohomologicalDimensionLE_of_isAbelianVariety
   exact hF (c + 1) (by omega) (h (Scheme.ProEt.mk (𝟙 _)) (𝟙 _) E.hom
     (IsPullback.id_horiz E.hom) F (c + 1) (by omega))
 
-/-- Blueprint `sk-rem-sf-fullcd-scope` (i): clause (1) of `sk-def-sf-admissible`, the ambient
-exceptional right adjoint datum, fails for the smooth proper structure morphism of an elliptic
-curve (more generally an abelian variety of positive dimension) over an algebraically closed
-field, whatever compactification is chosen. -/
+/-- The ambient exceptional right adjoint datum fails for the smooth proper structure morphism of an
+elliptic curve (more generally an abelian variety of positive dimension) over an algebraically
+closed field, whatever compactification is chosen. -/
 theorem not_hasAmbientExceptionalRightAdjoint_of_isAbelianVariety
     (hE : 0 < IsAbelianVariety.dim E) :
     ¬ HasAmbientExceptionalRightAdjoint (ModuleCat.{u + 1} Λ) E.hom := fun h ↦
@@ -302,19 +285,9 @@ theorem not_hasAmbientExceptionalRightAdjoint_of_isAbelianVariety
   not_hasUniformCohomologicalDimensionLE_of_isAbelianVariety Λ E hE c
     (hc.of_compactification _ _)
 
-/-- Blueprint `sk-rem-sf-fullcd-scope` (iii): for the structure morphism `a_E` of an elliptic
-curve (more generally an abelian variety of positive dimension) over an algebraically closed
-field, `Ra_{E!}` has no right adjoint on the bounded below derived category `D⁺(E_proét, Λ)`
-either.
-
-Let `F` be the sheaf of
-`AlgebraicGeometry.ProEtale.exists_forall_not_isZero_homology_rightDerivedLowerStar` and `I` an
-injective coseparator of the pro-étale sheaves on `Spec k`. As `Ra_{E!} ≅ Ra_{E*}`
-(`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekIsoOfIsProper`), `H⁰(Ra_{E!}(F[n])) =
-Hⁿ(E_proét, F) ≠ 0`, so `Hom(Ra_{E!}(F[n]), I) ≠ 0` for every `n ≥ 1`
-(`DerivedCategory.exists_ne_zero_hom_singleFunctor_obj`). A right adjoint `G` on `D⁺` would
-give `Hom(F[n], G(I)) ≠ 0` for all `n ≥ 1`, whereas `G(I)` is bounded below, so these groups
-vanish for `n` large by `t`-structure orthogonality. -/
+/-- For the structure morphism `a_E` of an elliptic curve (more generally an abelian variety of
+positive dimension) over an algebraically closed field, `Ra_{E!}` has no right adjoint on the
+bounded below derived category `D⁺(E_proét, Λ)` either. -/
 theorem not_isLeftAdjoint_rightDerivedLowerShriekPlus_of_isAbelianVariety
     (hE : 0 < IsAbelianVariety.dim E) :
     ¬ (R(E.hom)_![ModuleCat.{u + 1} Λ]+).IsLeftAdjoint := by

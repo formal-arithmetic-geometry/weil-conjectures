@@ -23,16 +23,13 @@ of `f'` lying over `c` along a morphism `h : c'.Z ⟶ c.Z` with cartesian square
 compact-support exchange map of the pair `(c, c')`
 (`ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationBaseChange`), conjugated
 by the comparison isomorphisms `Rf_! ≅ Rf_!^c` and `Rf'_!^{c'} ≅ Rf'_!` of the independence of the
-lower shriek from the compactification (blueprint `proposition-composition-base-change-rf-shriek`,
-clause (4): "`Ex_!` is independent of the chosen compactification and compatible with the refinement
-comparison isomorphisms").
+lower shriek from the compactification.
 
 The proof is formal: the compact-support exchange maps are those of the exchange formalism
 `ProEtale.CondensedRing.boundedConstructibleExchangeFormalism`, which are compatible with the
 comparisons along refinements
 (`CategoryTheory.ExchangeFormalism.shriekBaseChange_refinementComparison`),
-and the comparisons of compactifications are computed along common refinements (blueprint
-`proposition-construction-independence-rf-shriek`).
+and the comparisons of compactifications are computed along common refinements.
 
 -/
 
@@ -329,7 +326,7 @@ theorem boundedConstructibleLowerShriekOfCompactificationBaseChange_padicAlgCl_e
 compactification `c` of `f` and any compactification `c'` of `f'` lying over `c` along
 `h : c'.Z ⟶ c.Z` with cartesian squares, `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` is the
 compact-support exchange map of `(c, c')`, conjugated by the comparisons `Rf_! ≅ Rf_!^c` and
-`Rf'_!^{c'} ≅ Rf'_!` (blueprint `proposition-composition-base-change-rf-shriek`, clause (4)). -/
+`Rf'_!^{c'} ≅ Rf'_!`. -/
 theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_baseChange
     (c : Compactification f.left) (c' : Compactification f'.left)
     (h : c'.overObj ⟶ c.overObj) (hi : IsPullback g' c'.overI c.overI h)

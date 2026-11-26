@@ -114,13 +114,14 @@ import WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
 /-!
 # Canonical ambient exchange and its restriction
 
-Source: blueprint main-20261015, proper-base-change rational proof, paragraph (3)
-(blueprint: lem-sfb-derived-exchange-exact-normalization).
-
 The pullback comparison uses the published derived compositors. The exchange is their
 mate under the published derived adjunctions, with no cartesianness requirement. Pullback
 shifts are transported from the exact termwise functor along its canonical comparison;
 pushforward shifts are the canonical K-injective shifts.
+
+## References
+
+* [Stacks, Tag 015F](https://stacks.math.columbia.edu/tag/015F)
 -/
 
 @[expose] public noncomputable section
@@ -155,16 +156,12 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 /-- The canonical integer shifts on the actual K-flat pullback, transported along its
 canonical comparison with the exact termwise pullback. This fixes the shift structure,
-rather than selecting an unspecified one.
-Source: blueprint rational proof (3), exact derived factorization
-(blueprint: lem-sfb-derived-exchange-exact-normalization). -/
+rather than selecting an unspecified one. -/
 instance moduleObjectDerivedPullbackCommShift {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (moduleObjectDerivedPullback Λ f).CommShift ℤ :=
   Functor.CommShift.ofIso (leftDerivedUpperStarIsoMapDerivedCategory Λ f).symm ℤ
 
-/-- The canonical K-injective integer shifts on the total derived module pushforward.
-Source: Stacks Tag 015F, blueprint rational proof (3)
-(blueprint: lem-sfb-derived-exchange-exact-normalization). -/
+/-- The canonical K-injective integer shifts on the total derived module pushforward. -/
 instance moduleObjectDerivedPushforwardCommShift {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (moduleObjectDerivedPushforward Λ f).CommShift ℤ :=
   Functor.instCommShiftDerivedCategoryRightDerivedFunctorInt (lowerStar Λ f)
@@ -344,34 +341,7 @@ private theorem exchange_triangle
 
 /-- The ambient exchange has the prescribed counit normalization, both ambient functors
 are exact with their fixed canonical shifts, and the exchange commutes with every integer
-shift. No cartesian hypothesis is imposed.
-Source: blueprint rational proof paragraph (3)
-(blueprint: lem-sfb-derived-exchange-exact-normalization).
-
-Proof:
-1. The source exactness instances give the canonical comparison between the K-flat
-pullback and its termwise derived functor. Transport triangulatedness along this
-comparison, compatibly with the prescribed shifts. The K-injective construction makes the
-additive module pushforward exact. Compose these exact functors.
-2. Apply `lem-sp-canonical-right-derived-adjunction-shift` to the underived adjunction.
-The derived-counit factorization of `lem-sc-derived-adjunction-from-underived` identifies
-the published K-flat adjunction with its transport along the exact comparison: the two
-counits agree on K-injectives, and every derived object is isomorphic to one of these.
-Thus the actual unit and counit commute with the fixed shifts.
-3. Expand the published compositor through the exact derived comparisons. The source
-library's proved shift APIs for derived natural isomorphisms and composition comparisons
-show that every factor commutes with shifts. The inverse compositor and the square
-equality preserve this compatibility as well.
-4. Write a = theta followed by the pullback of the counit. The exchange component is
-G'(a) after the unit. Counit naturality and the adjunction triangle identity give
-P'(B) followed by the counit = a.
-5. The composition and whiskering rules of
-`lem-weil-pbc-commshift-nattrans-comp-whisker` apply to the three factors of the mate.
-They give the asserted compatibility with every canonical integer shift.
-6. Naturality gives the first two squares of the image triangle morphism. Naturality at
-its third arrow, followed by the shift equation for n = 1, gives the connecting square.
-Exactness makes both image triangles distinguished.
--/
+shift. No cartesian hypothesis is imposed. -/
 theorem moduleObjectDerivedExchange_exact_normalization :
     (∀ (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
         (condensedRingObj Λ X.left))), (moduleObjectDerivedPullback Λ p'.left).map
@@ -595,18 +565,7 @@ private theorem baseChange_of_counit_equations
 
 /-- The bounded-constructible instance of the restriction statement, expressed with the
 recorded base-change declaration. Triangulatedness and preservation are hypotheses;
-the comparison restriction hypothesis is the equality of the actual components.
-Source: blueprint rational proof (3), bounded-constructible specialization
-(blueprint: lem-sfb-derived-exchange-exact-normalization).
-
-Proof: identify the three-step restricted base-change map with `Adjunction.squareExchange`.
-Its counit equation follows from `Adjunction.squareExchange_map_counit`. The fully faithful
-restriction API identifies the underlying restricted counits with the ambient counits;
-the restricted pullback acts by the ambient map. Apply the square-component hypothesis
-to obtain the same ambient counit equation as the normalized exchange. The inverse of
-the ambient adjunction hom equivalence is injective, so the two components agree.
-All restricted functor and adjunction constructions remain the published ones.
--/
+the comparison restriction hypothesis is the equality of the actual components. -/
 theorem boundedConstructibleBaseChangeOfPreserves_app_eq_moduleObjectDerivedExchange
     (H : PreservesBoundedConstructiblePushforwards Λ k)
     [(boundedConstructible (condensedRingObj Λ X.left)).IsTriangulated]

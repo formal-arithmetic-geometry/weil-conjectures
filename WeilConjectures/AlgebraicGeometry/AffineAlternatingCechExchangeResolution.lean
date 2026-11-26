@@ -25,7 +25,6 @@ import WeilConjectures.AlgebraicGeometry.AffineAlternatingCechResolutionExchange
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-set_option linter.unusedVariables false
 universe u w
 open CategoryTheory Limits
 namespace AlgebraicGeometry
@@ -48,7 +47,7 @@ theorem exists_affineAlternatingCech_exchange_resolution
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ))
       (a : (HomotopyCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G ⟶ D)
-      (q : ((Scheme.Modules.pushforward f).mapHomotopyCategory
+      (_q : ((Scheme.Modules.pushforward f).mapHomotopyCategory
           (ComplexShape.up ℤ)).obj D ≅
         (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
           (affineAlternatingCechModel f U G)),

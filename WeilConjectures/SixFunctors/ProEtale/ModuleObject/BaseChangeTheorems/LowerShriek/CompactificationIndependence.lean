@@ -170,8 +170,7 @@ noncomputable def boundedConstructibleOpenImmersionLowerShriekRefinement (w : i 
     (boundedConstructibleOpenImmersionLowerShriekRefinementTriangleStep Λ ℓ w).hom ≫
     boundedConstructibleOpenImmersionLowerShriekRefinementCounitStep Λ ℓ
 
-/-- Compatibility required from `chap-The-pro-etale-site` (to be proved there): blueprint
-`lemma-passing-schematic-closure`.
+/-- Compatibility with passing to the schematic closure.
 
 The restriction comparison `i_! ⟶ i₁_! ⋙ Lh^*` is an isomorphism when the square
 ```
@@ -180,8 +179,7 @@ X --i--> Z
 v        v
 X --i₁-> Z₁
 ```
-is cartesian: since `h⁻¹(X) = X`, on stalks at points of `Z_proét` both sides are the stalk of
-`K` at points of `X` and vanish outside `X`. -/
+is cartesian. -/
 theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinement
     (sq : IsPullback (𝟙 X) i i₁ h) :
     IsIso (boundedConstructibleOpenImmersionLowerShriekRefinement Λ ℓ
@@ -408,14 +406,10 @@ variable {X Z Z₁ : Over (Spec (.of k))}
   {i : X ⟶ Z} {i₁ : X ⟶ Z₁} {h : Z ⟶ Z₁} [IsOpenImmersion i.left] [IsOpenImmersion i₁.left]
   [IsProper h.left]
 
-/-- Compatibility required from `chap-The-pro-etale-site` (to be proved there): blueprint
-`lemma-passing-schematic-closure`.
+/-- Compatibility with passing to the schematic closure.
 
 For bounded constructible `E`-sheaves, the pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` of a
-cartesian square `sq` with `h` proper is an isomorphism: over `X ⊆ Z₁` both sides
-restrict to the identity, and over the closed complement `Z₁ ∖ X` the stalks of `Rh_*(i_! K)` are,
-by proper base change, the cohomology of the fibres of `h` over `Z₁ ∖ X`, which do not meet `X ⊆ Z`,
-with coefficients in `i_! K`, hence vanish. -/
+cartesian square `sq` with `h` proper is an isomorphism. -/
 theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
     (sq : IsPullback (𝟙 X) i i₁ h) :
     IsIso (ContinuousMapRingObj.boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
@@ -441,8 +435,7 @@ theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
   infer_instance
 
-/-- Compatibility required from `chap-The-pro-etale-site` (to be proved there): blueprint
-`lemma-passing-schematic-closure`.
+/-- Compatibility with passing to the schematic closure (to be proved on the pro-étale site).
 
 For bounded constructible `ℚ̄_ℓ`-sheaves, the pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` of a
 cartesian square `sq` with `h` proper is an isomorphism. -/

@@ -26,8 +26,6 @@ import WeilConjectures.AlgebraicGeometry.ZeroDimensionalBaseChangePointsFibreTop
 * [Stacks, Tag 00P4]
 -/
 
-set_option linter.style.haveILetI false
-
 @[expose] public section
 
 universe v
@@ -49,10 +47,10 @@ theorem zeroDimensional_baseChange_fibre_homeomorphism
         (Spec.map (CommRingCat.ofHom (algebraMap k k')) )).base := by
   let f : C ⟶ Spec (.of k) := C ↘ Spec (.of k)
   let g := Spec.map (CommRingCat.ofHom (algebraMap k k'))
-  letI : DiscreteTopology C := (zeroDimensional_baseChange_geometry k C hC).2.1
-  letI : IsLocallyNoetherian (pullback f g) :=
+  let : DiscreteTopology C := (zeroDimensional_baseChange_geometry k C hC).2.1
+  let : IsLocallyNoetherian (pullback f g) :=
     LocallyOfFiniteType.isLocallyNoetherian (pullback.snd f g)
-  letI : IsLocallyArtinian (pullback f g) :=
+  let : IsLocallyArtinian (pullback f g) :=
     IsLocallyArtinian.of_topologicalKrullDim_le_zero
       (zeroDimensional_baseChange_fibre_topology k k' C hC)
   have hpoints := zeroDimensional_baseChange_fibre_points k k' C hC

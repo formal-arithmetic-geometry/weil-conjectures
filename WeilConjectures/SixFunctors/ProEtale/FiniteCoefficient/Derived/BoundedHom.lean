@@ -43,7 +43,7 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `proposition-compactness-finite-coefficients`: on a finite-type scheme `X` over a
+/-- On a finite-type scheme `X` over a
 field `k` of finite cohomological dimension, every object of `Dctf(X_ét, Λ)` is compact in
 `D(X_ét, Λ)` and has bounded morphisms, for a finite ring `Λ` whose exponent is invertible on `X`.
 The reduction to the generators `Rg_* Rj_! L` only uses that they generate `Dctf(X_ét, Λ)`. -/
@@ -95,7 +95,7 @@ lemma exists_compactBoundedHom_of_constructibleFiniteTor_of_generation
   exact ⟨C', Etale.compactBoundedHom_of_constructibleFiniteTor_of_generation Λ hk aX hC't, ⟨e⟩⟩
 
 include hk aX in
-/-- Blueprint `proposition-compactness-finite-coefficients--1`, the vanishing step: for `C` in
+/-- The vanishing step: for `C` in
 `Dctf(X, Λ)` there is `N` with `Hom(C, L) = 0` for every pro-étale complex `L` with cohomology
 sheaves of étale origin in degrees `≤ N`. -/
 lemma exists_forall_eq_zero_of_constructibleFiniteTor_of_generation

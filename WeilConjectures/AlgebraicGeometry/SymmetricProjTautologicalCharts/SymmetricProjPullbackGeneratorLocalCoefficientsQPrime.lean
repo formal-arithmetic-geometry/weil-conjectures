@@ -196,8 +196,6 @@ private theorem coefficients_for_definitions {S : Scheme.{u}} (E : S.Modules)
   change v.app Z (q.app Z s) = _
   rw [hc t, Hom.app_smul]
 
--- Keep the existing public binders, including the point-membership witness.
-set_option linter.unusedVariables false in
 /-- The matching local frame for the normalized second quotient map: given an open `Z`, a
 section `a` and coefficients `c` with `q(t) = c(t) • a`, there is a section `b'` with
 `q'(t) = c(t) • b'`. -/
@@ -235,7 +233,7 @@ theorem normalized_pullback_generator_local_coefficients_qprime
           ((Scheme.Modules.tensorPullback g).obj E)).relProjHom g).hom.app E ≫ D'.quotient
     ∀ (U : S.affineOpens) (W : T.Opens) (h : W ≤
       (b.relProjComparison ≫ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom) ⁻¹ᵁ U.1)
-      (x : T) (Z : T.Opens) (hZW : Z ≤ W) (hx : x ∈ Z)
+      (x : T) (Z : T.Opens) (hZW : Z ≤ W) (_hx : x ∈ Z)
       (a : Γ(P, Z)) (c : Γ(E, U.1) → Γ(T, Z)),
       (∀ t : Γ(E, U.1),
         let s := M.presheaf.map (homOfLE (hZW.trans h)).op

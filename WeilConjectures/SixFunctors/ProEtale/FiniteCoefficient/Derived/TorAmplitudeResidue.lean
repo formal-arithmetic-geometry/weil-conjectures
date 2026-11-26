@@ -16,8 +16,7 @@ Let `Λ` be a commutative ring and `ϖ ∈ Λ` a nilpotent element such that `κ
 field (the finite coefficient stage `A_{E,n} = 𝒪_E / ϖⁿ`, with residue field `κ`). For a scheme
 `T`, an object `K` of `D(T_proét, Λ)` has Tor amplitude in `[a, b]` if and only if
 `K ⊗ᴸ κ_T` has homology concentrated in `[a, b]`, where `κ_T` is the constant sheaf with value
-`κ` (`AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn_iff_homologyConcentratedIn_tensor`,
-blueprint `lemma-bounds-finite-reductions--2`).
+`κ` (`AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn_iff_homologyConcentratedIn_tensor`).
 
 This is the categorical residue test
 `DerivedCategory.torAmplitudeIn_iff_homologyConcentratedIn_tensor_singleFunctor`, whose two
@@ -115,17 +114,11 @@ open Scheme
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- Blueprint `lemma-bounds-finite-reductions--2`: The residue test on the pro-étale site.
-
-Let `ϖ ∈ Λ` be nilpotent with `Λ ⧸ (ϖ)` a field (for instance `Λ = A_{E,n} = 𝒪_E / ϖⁿ`), and let
-`κ_T` be the constant pro-étale sheaf on `T` with value the `Λ`-module `κ = Λ ⧸ (ϖ)`. Then
-`K ∈ D(T_proét, Λ)` has Tor amplitude in `[a, b]` if and only if `K ⊗ᴸ κ_T` has homology
-concentrated in `[a, b]`. The blueprint states this for bounded constructible `K`; it holds for
-every `K`, and needs neither the finiteness of `Λ` nor any hypothesis on `T`.
-
-This is `DerivedCategory.torAmplitudeIn_iff_homologyConcentratedIn_tensor_singleFunctor`, with
-`κ_T ≅ 𝟙 / ϖ` (`CategoryTheory.Sheaf.constantSheafQuotientIsoCokernel`) and the flatness of
-sheaves of `κ`-modules (`CategoryTheory.Sheaf.mono_whiskerRight_of_smul_id_eq_zero`). -/
+/-- Let `ϖ ∈ Λ` be nilpotent with `Λ ⧸ (ϖ)` a field (for instance `Λ = A_{E,n} = 𝒪_E / ϖⁿ`), and let
+`κ_T` be the constant pro-étale sheaf on `T` with value the `Λ`-module `κ = Λ ⧸ (ϖ)`. Then `K ∈
+D(T_proét, Λ)` has Tor amplitude in `[a, b]` if and only if `K ⊗ᴸ κ_T` has homology concentrated in
+`[a, b]`. This holds for every `K`, and needs neither the finiteness of `Λ` nor any hypothesis on
+`T`. -/
 theorem torAmplitudeIn_iff_homologyConcentratedIn_tensor (ϖ : Λ) (hϖ : IsNilpotent ϖ)
     [(Ideal.span {ϖ}).IsMaximal] {T : Scheme.{u}} (a b : ℤ)
     (K : _root_.DerivedCategory (Sheaf (ProEt.topology T) (ModuleCat.{u + 1} Λ))) :

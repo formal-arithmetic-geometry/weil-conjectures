@@ -9,8 +9,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Evaluati
 
 /-! The terminal sections adjunction of the terminal scalar realization.
 
-Source: Hemo--Richarz--Scholbach, Lemma 4.1(1), equations (3.1)--(3.2), Remark 3.2.
-(blueprint: new-lem-zl-contractible-realization-sections-adjunction-data).
+## References
+
+* Hemo--Richarz--Scholbach, Lemma 4.1(1), equations (3.1)--(3.2), Remark 3.2
 -/
 
 @[expose] public noncomputable section
@@ -252,22 +253,7 @@ private noncomputable def tensorAdjunction
 
 end ScalarExtension
 
-/-- The terminal scalar realization is left adjoint to the terminal sections functor.
-
-Source: Hemo--Richarz--Scholbach, Lemma 4.1(1), equations (3.1)--(3.2), Remark 3.2.
-(blueprint: new-lem-zl-contractible-realization-sections-adjunction-data).
-
-Proof: write `A = O_sec(U)`, `A_J` for its constant ring sheaf, `c_J` for the constant
-module realization, `s : A_J → O_sec` for `scalarMap` and `E` for the internal/section
-module equivalence. For an `O`-module `N`, `E` preserves sections, so
-`Hom_O(L M, N) = Hom_{O_sec}(E L M, E N)`. By the ringed-topoi module adjunction along
-`s` this is `Hom_{A_J}(c_J M, Res_s E N)`, and by the universal property of module
-sheafification it is the set of restriction-compatible families of `A`-linear maps
-`M → E N(V)`. Since `U` is terminal, such a family is determined by its component
-`M → E N(U) = sections N`, and every `A`-linear map `g` gives one by restriction along
-the unique `V → U`; the `A`-structure on `E N(U)` through `s_U` is the given one by the
-triangle identity. The bijection evaluates at `U` on `1 ⊗ m`, with inverse
-`o ⊗ m ↦ o · g(m)|_V`; naturality and both inverse identities hold on pure tensors. -/
+/-- The terminal scalar realization is left adjoint to the terminal sections functor. -/
 theorem contractible_realization_sections_adjunction_data
     {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     (J : GrothendieckTopology C) [(J.W (A := Ab.{u + 1})).IsMonoidal]

@@ -177,9 +177,7 @@ theorem isIso_projectionMorphism_residueField_of_etale [QuasiCompact f] [QuasiSe
 `f : Z ⟶ Y` quasi-compact and quasi-separated and module complexes `K` on `Z`, `L` on `Y` over
 `𝔽̲_E` with `Φ_Z K` and `Φ_Y L` bounded below of étale origin, the projection morphism
 `Rf_* K ⊗ᴸ L ⟶ Rf_*(K ⊗ᴸ Lf^* L)` is an isomorphism as soon as the étale projection map is an
-isomorphism at all pairs of bounded below complexes. Since `𝔽_E` is a field, `M ⊗ᴸ Lf^* N` is
-bounded below for `M`, `N` bounded below
-(`AlgebraicGeometry.Etale.plus_derivedTensor_leftDerivedUpperStar_of_isField`). -/
+isomorphism at all pairs of bounded below complexes. -/
 theorem isIso_projectionMorphism_residueField_of_plusEtaleOrigin [QuasiCompact f]
     [QuasiSeparated f]
     {K : DerivedCategory (Mod (Sheaf (ProEt.topology Z) Ab.{u + 1})
@@ -220,9 +218,7 @@ lemma _root_.AlgebraicGeometry.quasiSeparated_of_locallyOfFiniteType_spec_field 
 the characteristic of `𝔽_E` is invertible, `W = X ×_k Y` with `X`, `Y` quasi-compact and locally of
 finite type over `k`, and `A` on `X`, `B` on `Y` module complexes over `𝔽̲_E` bounded below of
 étale origin. Then the projection morphism `Rp₂_*(Lp₁^* A) ⊗ᴸ B ⟶ Rp₂_*(Lp₁^* A ⊗ᴸ Lp₂^* B)` is
-an isomorphism: this is the étale relative projection formula
-`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_leftDerivedUpperStar`, transported
-along `ν^*` and `Φ`. -/
+an isomorphism. -/
 theorem isIso_projectionMorphism_residueField_leftDerivedUpperStar {k : Type u} [Field k]
     [HasInvertibleExponent (ResidueFieldCoeff.{u} ℓ E) (Spec (.of k))] {X Y W : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
@@ -267,10 +263,7 @@ theorem isIso_projectionMorphism_residueField_leftDerivedUpperStar {k : Type u} 
 /-- **The projection formula over a separably closed point for module objects over `𝔽̲_E`.**
 Let `k` be separably closed, `a_Y : Y ⟶ Spec k` quasi-compact and locally of finite type, and
 `B` on `Y`, `C` on `Spec k` module complexes over `𝔽̲_E` bounded below of étale origin. Then the
-projection morphism `Ra_{Y*} B ⊗ᴸ C ⟶ Ra_{Y*}(B ⊗ᴸ La_Y^* C)` is an isomorphism: this is the
-étale projection formula over a separably closed point
-(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_app_app`), transported along
-`ν^*` and `Φ`. -/
+projection morphism `Ra_{Y*} B ⊗ᴸ C ⟶ Ra_{Y*}(B ⊗ᴸ La_Y^* C)` is an isomorphism. -/
 theorem isIso_projectionMorphism_residueField_of_isSepClosed {k : Type u} [Field k]
     [IsSepClosed k] {Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY]
     [QuasiCompact aY]

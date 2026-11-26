@@ -8,7 +8,12 @@ module
 public import WeilConjectures.SixFunctors.PurCompactSupport.RefinementOpenRestrictionData
 import WeilConjectures.SixFunctors.PurCompactSupport.RefinementRestrictionComponentShift
 
-/-! Shift compatibility of the specified refinement-restriction transformation. -/
+/-! Shift compatibility of the specified refinement-restriction transformation.
+
+## References
+
+* Stacks Project, Tags `0F7B`, `0F7I`
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -25,16 +30,10 @@ variable (R : Coefficients.{u})
   (hi : R.pull (c.i ≫ r.hom) = proEtaleRingCompositeCoefficients c.i r.hom
     (R.ring d.Z) (R.ring c.Z) (R.ring X) (R.pull r.hom) (R.pull c.i))
 
-/--
-Source: Stacks 0F7B and 0F7I, exact open restriction and canonical derived
-adjunction shifts.  The specified restriction transformation commutes with
+/-- The specified restriction transformation commutes with
 ordinary integer cochain shifts.  The component identification determines the
 transformation, so the shift square obtained from the clopen calculation is
-independent of the chosen presentation.
-Proof: the exact pullback compositor and derived adjunction counit commute with
-shifts, and the component formula is their composite.
-(blueprint: lem-sf-refinement-open-restriction-shift).
--/
+independent of the chosen presentation. -/
 theorem refinementRestriction_data_shift
     (θ : ((openExtension R c.i).mapDerivedCategory ⋙ push R r.hom) ⋙ pull R d.i ⟶
         (openExtension R c.i).mapDerivedCategory ⋙ pull R c.i)

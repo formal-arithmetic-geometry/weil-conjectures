@@ -30,24 +30,22 @@ attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tenso
   Scheme.Modules.tensorPullbackSectionComp Scheme.Modules.tensorPullbackSectionAdjunction
   Scheme.GradedAlgebraData.relProj Scheme.GradedAlgebraData.relProjι
 
--- The fixed interface includes hypotheses used by the two-quotient comparison.
-set_option linter.unusedVariables false in
 /-- A local frame and coefficient formula for the first pulled quotient map `q`. -/
 theorem normalized_pullback_generator_local_coefficients_q
     {X S : Scheme.{u}} (g : X ⟶ S) (E : S.Modules) [E.IsQuasicoherent]
     [((Scheme.Modules.tensorPullback g).obj E).IsQuasicoherent]
     (D : ProjectiveBundleQuotientGeometry.TautologicalQuotient E)
-    (D' : ProjectiveBundleQuotientGeometry.TautologicalQuotient
+    (_D' : ProjectiveBundleQuotientGeometry.TautologicalQuotient
       ((Scheme.Modules.tensorPullback g).obj E))
     (b : Scheme.GradedAlgebraData.PullbackData g (SymmetricAlgebraSheaf.gradedAlgebraData E)
       (SymmetricAlgebraSheaf.gradedAlgebraData ((Scheme.Modules.tensorPullback g).obj E)))
-    (hb : ∀ (U : S.affineOpens) (W : X.affineOpens) (h : W.1 ≤ g ⁻¹ᵁ U.1)
+    (_hb : ∀ (U : S.affineOpens) (W : X.affineOpens) (h : W.1 ≤ g ⁻¹ᵁ U.1)
       (m : E.val.obj (op U.1)),
       b.map h (SymmetricAlgebra.ι Γ(S, U.1) _ m) =
         SymmetricAlgebra.ι Γ(X, W.1) _
           (((Scheme.Modules.tensorPullback g).obj E).presheaf.map (homOfLE h).op
             (Scheme.Modules.tensorPullbackSection g E U.1 m)))
-    (e : (Scheme.Modules.tensorPullback
+    (_e : (Scheme.Modules.tensorPullback
         (b.relProjComparison ≫ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom)).obj E =
       (Scheme.Modules.tensorPullback
         ((SymmetricAlgebraSheaf.gradedAlgebraData

@@ -22,8 +22,7 @@ objects `Mod_{Λ_X}` over `Λ_X = p_X^* Λ`:
   (`ProEtale.CondensedRing.isZero_of_isZero_upperStar_of_isCompl`,
   `ProEtale.CondensedRing.jointlyReflectIsomorphisms_upperStar_of_isCompl`), from the same
   statement for abelian sheaves
-  (`ProEtale.isZero_of_isZero_upperStar_of_isCompl_addCommGrp`, blueprint
-  `proposition-extension-zero-restriction-closed-subscheme`);
+  (`ProEtale.isZero_of_isZero_upperStar_of_isCompl_addCommGrp`);
 * the pullback of an extension by zero `j_! M` along a morphism `g` whose range misses the
   range of `j` vanishes
   (`ProEtale.CondensedRing.isZero_upperStar_obj_openImmersionLowerShriek_of_disjoint`).
@@ -31,7 +30,6 @@ objects `Mod_{Λ_X}` over `Λ_X = p_X^* Λ`:
 Both reduce to abelian sheaves: the underlying sheaf of `g^* M` is `g^* M` up to isomorphism,
 the coefficient comparison `α_g` being an isomorphism, and a module object is zero as soon as
 its underlying sheaf is.
-
 -/
 
 @[expose] public section
@@ -50,9 +48,8 @@ namespace ProEtale
 
 variable {Z U X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [QuasiCompact j]
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`, for abelian sheaves: let
-`i : Z ⟶ X` be a closed immersion with quasi-compact open complement `j : U ⟶ X`. A pro-étale
-abelian sheaf `F` on `X` with `i^* F = 0` and `j^* F = 0` is zero. -/
+/-- Let `i : Z ⟶ X` be a closed immersion with quasi-compact open complement `j : U ⟶ X`. A
+pro-étale abelian sheaf `F` on `X` with `i^* F = 0` and `j^* F = 0` is zero. -/
 theorem isZero_of_isZero_upperStar_of_isCompl_addCommGrp
     (hij : IsCompl (Set.range i.base) (Set.range j.base))
     (F : Sheaf (ProEt.topology X) Ab.{u + 1})
@@ -107,9 +104,8 @@ lemma isZero_upperStar_obj_openImmersionLowerShriek_of_disjoint {U W X : Scheme.
 
 variable {Z U X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [QuasiCompact j]
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`, for module objects over
-`Λ`: let `i : Z ⟶ X` be a closed immersion with quasi-compact open complement `j : U ⟶ X`. A module
-object `M` over `Λ_X` with `i^* M = 0` and `j^* M = 0` is zero. -/
+/-- For module objects over `Λ`: let `i : Z ⟶ X` be a closed immersion with quasi-compact open
+complement `j : U ⟶ X`. A module object `M` over `Λ_X` with `i^* M = 0` and `j^* M = 0` is zero. -/
 theorem isZero_of_isZero_upperStar_of_isCompl
     (hij : IsCompl (Set.range i.base) (Set.range j.base))
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))

@@ -26,7 +26,6 @@ import WeilConjectures.RingTheory.Regular.RegularSequenceHigherRelations
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ConormalGradedAlgebra
@@ -270,8 +269,7 @@ theorem regular_ideal_conormal_coordinates {V S : Scheme.{u}}
         rw [hφX]
         change _ = SymmetricAlgebraSheaf.sectionMap N (op W) (ep (MvPolynomial.X j))
         change (SymmetricAlgebraSheaf.inclusion N).val.app (op W) (b j) = _
-        simp only [ep, RingHom.comp_apply, RingEquiv.trans_apply,
-          RingEquiv.coe_toRingHom, MvPolynomial.mapEquiv_apply, MvPolynomial.map_X,
+        simp only [ep, RingEquiv.trans_apply, MvPolynomial.mapEquiv_apply, MvPolynomial.map_X,
           AlgEquiv.coe_toRingEquiv]
         exact (congrArg (SymmetricAlgebraSheaf.sectionMap N (op W))
           (SymmetricAlgebra.equivMvPolynomial_symm_X b j)).symm

@@ -20,7 +20,6 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency true
-set_option linter.unusedSimpArgs false
 set_option linter.privateModule false
 
 private noncomputable def actualAdjunct

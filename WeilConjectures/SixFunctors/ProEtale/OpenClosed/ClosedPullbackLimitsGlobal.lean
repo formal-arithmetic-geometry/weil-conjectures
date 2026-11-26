@@ -12,9 +12,9 @@ public import WeilConjectures.SixFunctors.ProEtale.OpenClosed.ClosedPullbackLimi
 
 Let `X` be quasi-compact and quasi-separated, and `i : Z ⟶ X` a closed immersion with
 quasi-compact open complement `j`. The pullback `i^*` of pro-étale sheaves of modules preserves
-all small limits (`AlgebraicGeometry.ProEtale.preservesLimitsOfSize_upperStar_of_isCompl`,
-blueprint `proposition-extension-zero-restriction-closed-subscheme`). The affine case `X = Spec A`
-is `AlgebraicGeometry.ProEtale.preservesLimitsOfSize_upperStar_closedSpecι`; in general the
+all small limits (`AlgebraicGeometry.ProEtale.preservesLimitsOfSize_upperStar_of_isCompl`). The
+affine case `X = Spec A` is
+`AlgebraicGeometry.ProEtale.preservesLimitsOfSize_upperStar_closedSpecι`; in general the
 comparison map `i^* lim F ⟶ lim i^* F` is an isomorphism after restriction to the closed fibres
 of the members of a finite affine open cover of `X`, which jointly detect isomorphisms.
 -/
@@ -111,16 +111,9 @@ lemma preservesLimitsOfSize_upperStar_of_isAffine {Y : Scheme.{u}} [IsAffine Y] 
   exact preservesLimits_of_natIso
     (eqToIso (congrArg (fun f ↦ (f)^*[ModuleCat.{u + 1} R]) hi))
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme` (subsection
-`proposition-extension-zero-restriction-closed-subscheme`), part (2): let `X` be quasi-compact and
-quasi-separated and `i : Z ⟶ X` a closed immersion with quasi-compact open complement `j`. The
-pullback `i^*` of pro-étale sheaves of modules preserves all small limits. (It preserves all
-colimits, being a left adjoint, and it is exact.)
-
-Over a finite affine open cover `X = ⋃ Xₖ` this is
-`AlgebraicGeometry.ProEtale.preservesLimitsOfSize_upperStar_of_isAffine`, and the restrictions
-to the closed fibres `Zₖ = Z ×_X Xₖ` jointly detect isomorphisms
-(`AlgebraicGeometry.ProEtale.isIso_of_forall_isIso_upperStar_map`). -/
+/-- Let `X` be quasi-compact and quasi-separated and `i : Z ⟶ X` a closed immersion with
+quasi-compact open complement `j`. The pullback `i^*` of pro-étale sheaves of modules preserves
+all small limits. -/
 theorem preservesLimitsOfSize_upperStar_of_isCompl {X : Scheme.{u}} [CompactSpace X]
     [QuasiSeparatedSpace X] (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j]
     [QuasiCompact j] (hij : IsCompl (Set.range i.base) (Set.range j.base)) :

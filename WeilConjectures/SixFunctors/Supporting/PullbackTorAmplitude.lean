@@ -19,10 +19,13 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModul
 /-!
 # Pullback preserves finite Tor amplitude
 
-Source: Weil conjectures blueprint, sec-six-functors/sk-prop-sf-rf-shriek-preservation,
-order 2064 (blueprint: proposition-six-operations-dctf--1).
 The finite pullback below specializes the recorded ringed-site operation along the
 canonical constant-section coefficient isomorphism. It introduces no chosen ring map.
+
+## References
+
+* [Stacks, Tag 03D2](https://stacks.math.columbia.edu/tag/03D2)
+* [Stacks, Tag 0735](https://stacks.math.columbia.edu/tag/0735)
 -/
 
 @[expose] public section
@@ -37,9 +40,7 @@ namespace WeilConjectures
 
 /-- The finite-level derived pullback on the recorded constant-ring module category.
 The coefficient comparison is the canonical inverse-image map, whose invertibility
-is the recorded constant-coefficient theorem. Exact module pullback descends termwise.
-Source: blueprint order 2064, finite-level operation from order 1467;
-Stacks Tags 03D2 and 0735 (blueprint: proposition-six-operations-dctf--1). -/
+is the recorded constant-coefficient theorem. Exact module pullback descends termwise. -/
 noncomputable def sfFiniteDerivedPullback
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n)
@@ -125,24 +126,7 @@ private theorem comparison_tor_iff (T : Scheme.{u}) (A : Type u)
   exact h.trans ⟨fun h ↦ torAmplitude_of_iso T A e a b h,
     fun h ↦ torAmplitude_of_iso T A e.symm a b h⟩
 
-/-- Pullback preserves bounded constructibility and the very same Tor interval.
-Source: Weil blueprint, order 2064 (blueprint: proposition-six-operations-dctf--1).
-Proof:
-1. The coefficient quotient is finite. Apply the intrinsic finite-ring derived
-comparison to descend K to a bounded constructible etale complex L. Convert its
-finite-value constructibility and cohomological interval to the source library's
-bounded-constructibility predicate.
-2. Exact etale inverse image preserves bounded constructibility. The canonical
-comparison square, followed by the unit-preserving identification of constant-ring
-pullback with transported inverse image, identifies the intrinsic comparison of
-f^*L with the specified sfFiniteDerivedPullback of K.
-3. The comparison Tor-interval equivalence reflects the assumed interval [a,b]
-to L. The source library's torAmplitudeIn_leftDerivedUpperStar preserves this
-interval: choose a flat model in [a,b], pull it back termwise using preservation
-of flat module sheaves, and compute the tensor with each degree-zero sheaf.
-Apply the comparison Tor-interval equivalence on X and transport along the
-isomorphism of step 2. Its constructibility conclusion also gives the required
-finite support of intrinsic homology. -/
+/-- Pullback preserves bounded constructibility and the very same Tor interval. -/
 theorem sf_pullback_torAmplitude
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

@@ -14,9 +14,9 @@ import all WeilConjectures.SixFunctors.ProEtale.InternalFirstResidueRingIso
 
 /-! # The ordinary uniformizer action under the constant coefficient comparison
 
-Source: integral-models proof (1), constant coefficient comparison; Stacks Project,
-algebraization.tex, Lemma derived-completion-koszul (0A0E), rank-one scalar action.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tag 0A0E (derived completion, Koszul complexes)
 -/
 
 @[expose] public noncomputable section
@@ -585,29 +585,7 @@ end OrdinaryScalar
 /-- The canonical constant coefficient and quotient comparisons identify the action of
 one uniformizer on every ordinary module. This statement involves a single scalar and
 ordinary module objects; it makes no claim about regularity, ideals, powers, complexes,
-Koszul complexes or totalization.
-
-Source: integral-models proof (1), constant coefficient comparison; Stacks Project,
-algebraization.tex, Lemma derived-completion-koszul (0A0E), rank-one scalar action.
-(auxiliary; not a blueprint node).
-
-Proof: use the monoidal constant-sheaf/inverse-image comparison on the integer ring
-and its first quotient. Reconstruct section rings and restrict along AsSmall.down.
-Naturality for the quotient gives the displayed square. On the point, extensionality
-on continuous functions identifies d with multiplication by the chosen uniformizer.
-The pointComparison transports the identical continuous coefficient presentations.
-The constant coefficient map sends the sheafification-unit section of the uniformizer
-to its constant continuous function; the monoidal inverse-image comparison preserves
-this equation. For any module M, precompose the left-unitor expression defining
-scalarOnModules with the relative tensor projection. It becomes the module action
-of that constant section, by the unit and action identities. Both scalar restrictions
-leave the underlying additive map unchanged. The section-module equivalence identifies
-the internal action with the actual section action. Finally, the right unitor on
-ordinary module sheaves identifies this same action with tensoring by the endomorphism
-of the rank-one module associated to the section. This proves the equation for every
-M, without a flatness or boundedness hypothesis. All these maps are defined by the
-same unit, action and quotient maps, including for the empty scheme and zero modules.
--/
+Koszul complexes or totalization. -/
 theorem ordinary_uniformizer_scalar_comparison :
     ∃ e : IntegralConstantCompletion.constantRing l E X ≅ ring l E X,
     ∃ f : IntegralConstantCompletion.finiteRing l E X 0 ≅
