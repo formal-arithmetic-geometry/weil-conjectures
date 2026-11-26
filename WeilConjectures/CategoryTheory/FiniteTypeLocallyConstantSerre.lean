@@ -27,7 +27,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace SheafOfModules
 
-set_option linter.style.haveILetI false
 
 variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
   {B : Type u} [CommRing B]
@@ -81,9 +80,9 @@ private theorem finiteTypeLocallyConstant_kernel_cokernel [IsNoetherianRing B]
     (hF : IsFiniteTypeLocallyConstant J B F) (hG : IsFiniteTypeLocallyConstant J B G) :
     IsFiniteTypeLocallyConstant J B (kernel f) ∧
       IsFiniteTypeLocallyConstant J B (cokernel f) := by
-  letI : PreservesFiniteLimits (strictPerfectConstantSheaf J B) :=
+  let : PreservesFiniteLimits (strictPerfectConstantSheaf J B) :=
     (strictPerfectConstantSheaf_exact J B).1
-  letI : PreservesFiniteColimits (strictPerfectConstantSheaf J B) :=
+  let : PreservesFiniteColimits (strictPerfectConstantSheaf J B) :=
     (strictPerfectConstantSheaf_exact J B).2
   have hlocal (U : C) (M N : ModuleCat.{u} B) (hM : Module.Finite B M)
       (hN : Module.Finite B N)
@@ -97,10 +96,10 @@ private theorem finiteTypeLocallyConstant_kernel_cokernel [IsNoetherianRing B]
     obtain ⟨S, hS, h⟩ := exists_cover_constant_linearMap J B M N U φ
     refine ⟨S, hS, ?_⟩
     intro V a ha
-    letI : PreservesFiniteLimits (overFunctor.{u}
+    let : PreservesFiniteLimits (overFunctor.{u}
         ((constantSheaf J RingCat.{u}).obj (RingCat.of B)) V) :=
       (overFunctor_exact ((constantSheaf J RingCat.{u}).obj (RingCat.of B)) V).1
-    letI : PreservesFiniteColimits (overFunctor.{u}
+    let : PreservesFiniteColimits (overFunctor.{u}
         ((constantSheaf J RingCat.{u}).obj (RingCat.of B)) V) :=
       (overFunctor_exact ((constantSheaf J RingCat.{u}).obj (RingCat.of B)) V).2
     obtain ⟨g, hg⟩ := h V a ha
@@ -152,9 +151,9 @@ private theorem finiteTypeLocallyConstant_extension [IsNoetherianRing B]
     (hS : S.ShortExact) (h₁ : IsFiniteTypeLocallyConstant J B S.X₁)
     (h₃ : IsFiniteTypeLocallyConstant J B S.X₃) :
     IsFiniteTypeLocallyConstant J B S.X₂ := by
-  letI : PreservesFiniteLimits (strictPerfectConstantSheaf J B) :=
+  let : PreservesFiniteLimits (strictPerfectConstantSheaf J B) :=
     (strictPerfectConstantSheaf_exact J B).1
-  letI : PreservesFiniteColimits (strictPerfectConstantSheaf J B) :=
+  let : PreservesFiniteColimits (strictPerfectConstantSheaf J B) :=
     (strictPerfectConstantSheaf_exact J B).2
   let F := strictPerfectConstantSheaf J B
   let R := (constantSheaf J RingCat.{u}).obj (RingCat.of B)
@@ -175,8 +174,8 @@ private theorem finiteTypeLocallyConstant_extension [IsNoetherianRing B]
   obtain ⟨A'', hA'', h'⟩ := exists_cover_constant_linearMap J B K Q W φ
   apply J.superset_covering _ hA''
   intro Z c hc
-  letI : PreservesFiniteLimits (overFunctor.{u} R Z) := (overFunctor_exact R Z).1
-  letI : PreservesFiniteColimits (overFunctor.{u} R Z) := (overFunctor_exact R Z).2
+  let : PreservesFiniteLimits (overFunctor.{u} R Z) := (overFunctor_exact R Z).1
+  let : PreservesFiniteColimits (overFunctor.{u} R Z) := (overFunctor_exact R Z).2
   obtain ⟨g, hg⟩ := h' Z c hc
   let eK := (overFunctorMap R c).app (F.obj K)
   let eQ := (overFunctorMap R c).app (F.obj Q)

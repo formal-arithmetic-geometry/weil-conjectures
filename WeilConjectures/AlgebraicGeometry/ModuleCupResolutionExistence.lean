@@ -57,6 +57,7 @@ def CupResolutionPairing.ComponentData {F G : X.Modules} (D : CupResolutionPairi
       l i ≫ D.target.integerComplex.d i j =
         (D.left.integerComplex ⊗ D.right.integerComplex).d i j ≫ l j)
 
+omit [HasDerivedCategory.{u} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] in
 /-- The component assembly from restriction-compatible bilinear maps and Leibniz
 (Stacks, Tag 0FKU). -/
 theorem moduleCup_component_data_exists {F G : X.Modules} (D : CupResolutionPairing F G) :
@@ -64,6 +65,7 @@ theorem moduleCup_component_data_exists {F G : X.Modules} (D : CupResolutionPair
   obtain ⟨l, hl⟩ := moduleCup_component_section_map_exists D
   exact ⟨l, hl, moduleCup_component_chain_equation D l hl⟩
 
+omit [HasDerivedCategory.{u} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] in
 /-- A cochain realization exists (Stacks, Tag 0FKU). -/
 theorem moduleCup_resolution_realization_exists {F G : X.Modules} (D : CupResolutionPairing F G) :
     ∃ t : D.left.integerComplex ⊗ D.right.integerComplex ⟶ D.target.integerComplex,

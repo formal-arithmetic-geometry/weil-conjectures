@@ -69,6 +69,7 @@ lemma unitMatrix_sub (ψ ψ' : (⨁ fun _ : ι ↦ unit l V) ⟶ ⨁ fun _ : κ 
   simp only [unitMatrix, Preadditive.sub_comp, Preadditive.comp_sub, Matrix.sub_apply]
   exact unitEndFunAddHom.map_sub _ _
 
+-- Replacing the section variable `[Fintype ι]` by `Finite` would change the statement.
 set_option linter.unusedFintypeInType false in
 /-- For an idempotent endomorphism `p` of a finite free `ℚ̄_ℓ,V`-module, the kernel of `1 - p`
 is lisse: the pointwise ranks of `p` and `1 - p` are lower semicontinuous and add up to the rank

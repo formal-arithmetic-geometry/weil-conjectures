@@ -48,9 +48,7 @@ universe u
 
 noncomputable section
 
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency.types false
-set_option linter.unusedSimpArgs false
 
 open CategoryTheory Limits TensorProduct
 
@@ -127,6 +125,8 @@ abbrev P₂ : Scheme.{u} := pullback (pr₂ ι p V'' ≫ pS ι p) (pS ι p)
 abbrev π₁ : P₂ ι p V'' ⟶ P ι p V'' :=
   pullback.map _ _ _ _ (pr₁ ι p V'') (𝟙 W) (𝟙 S) (by simp [pullback.condition]) (by simp)
 
+omit [IsAffine S] [IsAffine W] [AlgebraicGeometry.Etale p] [Surjective p]
+  [V''.left.IsQuasiAffine] in
 @[reassoc]
 lemma pr₁_pr₂_p : pullback.fst (pr₂ ι p V'' ≫ pS ι p) (pS ι p) ≫ pr₂ ι p V'' ≫ p =
     pullback.snd (pr₂ ι p V'' ≫ pS ι p) (pS ι p) ≫ p := by
@@ -142,8 +142,12 @@ abbrev pT₂ : PT₂ ι p f V'' ⟶ P₂ ι p V'' := pullback.fst _ _
 /-- The projection `PT₂ ⟶ W_X`. -/
 abbrev qT₂ : PT₂ ι p f V'' ⟶ WX p f := pullback.snd _ _
 
+omit [IsAffine S] [IsOpenImmersion ι] [IsAffine W] [AlgebraicGeometry.Etale p] [Surjective p]
+  [IsUniversalHomeomorphism f] [V''.left.IsQuasiAffine] in
 lemma pT₂_cond : pT₂ ι p f V'' ≫ pullback.snd _ _ = qT₂ ι p f V'' ≫ f₀ p f := pullback.condition
 
+omit [IsAffine S] [IsAffine W] [AlgebraicGeometry.Etale p] [Surjective p]
+  [IsUniversalHomeomorphism f] [V''.left.IsQuasiAffine] in
 lemma pT₂_fst_pr₂_p :
     (pT₂ ι p f V'' ≫ pullback.fst _ _ ≫ pr₂ ι p V'') ≫ p = (qT₂ ι p f V'' ≫ π₀ p f) ≫ f := by
   simp only [Category.assoc]
@@ -153,9 +157,11 @@ variable {p f g V''}
 /-- The `U`-coordinate of a point of `V'' ×_W W_X`, via the isomorphism `e`. -/
 abbrev Ũ : PV p f V'' ⟶ U := e.hom.left ≫ pullback.snd (π₀ p f) g
 
+omit [IsAffine S] [IsAffine W] [AlgebraicGeometry.Etale p] [Surjective p]
+  [V''.left.IsQuasiAffine] in
 lemma vS_comp_eq : pr₁ ι p V'' ≫ v V'' ≫ p = pr₂ ι p V'' ≫ p := by
   have := pullback.condition (f := vS ι p V'') (g := pS ι p)
-  simp only [vS, pS, Category.assoc] at this
+  simp only [vS, pS] at this
   rw [← cancel_mono ι]
   simpa using this
 
@@ -169,23 +175,33 @@ def x'' : PT ι p f V'' ⟶ WX p f :=
 def m₁ : PT ι p f V'' ⟶ PV p f V'' :=
   pullback.lift (pT ι p f V'' ≫ pr₁ ι p V'') (x'' ι) (by simp [x''])
 
+omit [IsAffine S] [IsAffine W] [AlgebraicGeometry.Etale p] [Surjective p]
+  [IsUniversalHomeomorphism f] [V''.left.IsQuasiAffine] in
 @[reassoc]
 lemma m₁_snd : m₁ ι ≫ pullback.snd (v V'') (f₀ p f) = x'' ι := by
   simp [m₁]
 
+omit [IsAffine W] [AlgebraicGeometry.Etale p] [Surjective p] [IsUniversalHomeomorphism f]
+  [V''.left.IsQuasiAffine] in
 @[reassoc]
 lemma e_hom_left_fst : e.hom.left ≫ pullback.fst (π₀ p f) g = pullback.snd (v V'') (f₀ p f) :=
   MorphismProperty.Over.w e.hom
 
+omit [IsAffine W] [AlgebraicGeometry.Etale p] [Surjective p] [IsUniversalHomeomorphism f]
+  [V''.left.IsQuasiAffine] in
 @[reassoc]
 lemma e_inv_left_snd : e.inv.left ≫ pullback.snd (v V'') (f₀ p f) = pullback.fst (π₀ p f) g :=
   MorphismProperty.Over.w e.inv
 
+omit [IsAffine W] [AlgebraicGeometry.Etale p] [Surjective p] [IsUniversalHomeomorphism f]
+  [V''.left.IsQuasiAffine] in
 @[reassoc (attr := simp)]
 lemma e_inv_left_hom_left : e.inv.left ≫ e.hom.left = 𝟙 _ := by
   rw [← MorphismProperty.Comma.comp_left, e.inv_hom_id]
   rfl
 
+omit [IsAffine W] [AlgebraicGeometry.Etale p] [Surjective p] [IsUniversalHomeomorphism f]
+  [V''.left.IsQuasiAffine] in
 @[reassoc (attr := simp)]
 lemma e_hom_left_inv_left : e.hom.left ≫ e.inv.left = 𝟙 _ := by
   rw [← MorphismProperty.Comma.comp_left, e.hom_inv_id]
@@ -194,6 +210,8 @@ lemma e_hom_left_inv_left : e.hom.left ≫ e.inv.left = 𝟙 _ := by
 /-- The `U`-coordinate. -/
 def u : PT ι p f V'' ⟶ U := m₁ ι ≫ Ũ e
 
+omit [IsAffine S] [IsAffine W] [AlgebraicGeometry.Etale p] [Surjective p]
+  [IsUniversalHomeomorphism f] [V''.left.IsQuasiAffine] in
 lemma u_g : u ι e ≫ g = qT ι p f V'' ≫ π₀ p f := by
   have h1 : pullback.snd (π₀ p f) g ≫ g = pullback.fst (π₀ p f) g ≫ π₀ p f :=
     pullback.condition.symm
@@ -208,8 +226,12 @@ def m₂ : PT ι p f V'' ⟶ U' p f g :=
 /-- The morphism `a : PT ⟶ PV` which is the base change of the coaction. -/
 def a : PT ι p f V'' ⟶ PV p f V'' := m₂ ι e ≫ e.inv.left
 
+omit [IsAffine S] [IsAffine W] [AlgebraicGeometry.Etale p] [Surjective p]
+  [IsUniversalHomeomorphism f] [V''.left.IsQuasiAffine] in
 lemma a_def : a ι e = m₂ ι e ≫ e.inv.left := rfl
 
+omit [IsAffine S] [IsAffine W] [AlgebraicGeometry.Etale p] [Surjective p]
+  [IsUniversalHomeomorphism f] [V''.left.IsQuasiAffine] in
 lemma a_snd : a ι e ≫ pullback.snd (v V'') (f₀ p f) = qT ι p f V'' := by
   rw [a, Category.assoc, e_inv_left_snd, m₂, pullback.lift_fst]
 
@@ -219,6 +241,8 @@ def γ : P ι p V'' ⟶ V V'' :=
   (Scheme.Hom.existsUnique_of_isPullback (f₀ p f) (pr₂ ι p V'') (v V'')
     (IsPullback.of_hasPullback _ _) (IsPullback.of_hasPullback _ _) (a ι e) (a_snd ι e)).choose
 
+omit [IsAffine S] [IsAffine W] [AlgebraicGeometry.Etale p] [Surjective p]
+  [V''.left.IsQuasiAffine] in
 lemma γ_spec :
     γ ι e ≫ v V'' = pr₂ ι p V'' ∧
       pT ι p f V'' ≫ γ ι e = a ι e ≫ pullback.fst (v V'') (f₀ p f) :=
@@ -226,17 +250,24 @@ lemma γ_spec :
     (IsPullback.of_hasPullback _ _) (IsPullback.of_hasPullback _ _) (a ι e)
     (a_snd ι e)).choose_spec.1
 
+omit [IsAffine S] [IsAffine W] [AlgebraicGeometry.Etale p] [Surjective p]
+  [V''.left.IsQuasiAffine] in
 @[reassoc (attr := simp)]
 lemma γ_v : γ ι e ≫ v V'' = pr₂ ι p V'' := (γ_spec ι e).1
 
+omit [IsAffine S] [IsAffine W] [AlgebraicGeometry.Etale p] [Surjective p]
+  [V''.left.IsQuasiAffine] in
 lemma pT_γ : pT ι p f V'' ≫ γ ι e = a ι e ≫ pullback.fst (v V'') (f₀ p f) := (γ_spec ι e).2
 
+omit [IsAffine S] [IsAffine W] [AlgebraicGeometry.Etale p] [Surjective p]
+  [V''.left.IsQuasiAffine] in
 lemma a_eq : a ι e = pullback.lift (pT ι p f V'' ≫ γ ι e) (qT ι p f V'') (by
     rw [Category.assoc, γ_v, pullback.condition]) := by
   apply pullback.hom_ext
   · rw [pullback.lift_fst, pT_γ]
   · rw [pullback.lift_snd, a_snd]
 
+omit [IsAffine W] [AlgebraicGeometry.Etale p] [Surjective p] [V''.left.IsQuasiAffine] in
 /-- Uniqueness of `W`-morphisms `T ⟶ V''` with given base change to `W_X`. -/
 lemma hom_ext_of_pullback {T : Scheme.{u}} (t : T ⟶ W) {g₁ g₂ : T ⟶ V V''}
     (h₁ : g₁ ≫ v V'' = t) (h₂ : g₂ ≫ v V'' = t)
@@ -259,21 +290,29 @@ abbrev liftWX : Z ⟶ WX p f :=
 abbrev liftPV : Z ⟶ PV p f V'' :=
   pullback.lift (θ ≫ pr₁ ι p V'') (liftWX ι θ ζ hθζ) (by simp)
 
+omit [IsAffine S] [IsAffine W] [AlgebraicGeometry.Etale p] [Surjective p]
+  [IsUniversalHomeomorphism f] [V''.left.IsQuasiAffine] in
 lemma lift_m₁ : pullback.lift θ ζ hθζ ≫ m₁ ι = liftPV ι θ ζ hθζ := by
   apply pullback.hom_ext
   · simp [m₁]
   · rw [Category.assoc, m₁_snd, pullback.lift_snd, x'']
     apply pullback.hom_ext <;> simp
 
+omit [IsAffine S] [IsAffine W] [AlgebraicGeometry.Etale p] [Surjective p]
+  [IsUniversalHomeomorphism f] [V''.left.IsQuasiAffine] in
 lemma lift_u : pullback.lift θ ζ hθζ ≫ u ι e = liftPV ι θ ζ hθζ ≫ Ũ e := by
   rw [u, ← Category.assoc, lift_m₁]
 
+omit [IsAffine S] [IsAffine W] [AlgebraicGeometry.Etale p] [Surjective p]
+  [V''.left.IsQuasiAffine] in
 lemma lift_a :
     pullback.lift θ ζ hθζ ≫ a ι e =
       pullback.lift (θ ≫ γ ι e) ζ (by rw [Category.assoc, γ_v, hθζ]) := by
   rw [a_eq]
   apply pullback.hom_ext <;> simp
 
+omit [IsAffine S] [IsAffine W] [AlgebraicGeometry.Etale p] [Surjective p]
+  [V''.left.IsQuasiAffine] in
 /-- The key computation: the `U`-coordinate of `(γ θ, ζ)` equals that of `(pr₁ θ, liftWX)`. -/
 lemma lift_γ_Ũ :
     pullback.lift (θ ≫ γ ι e) ζ (by rw [Category.assoc, γ_v, hθζ]) ≫ Ũ e =
@@ -282,6 +321,8 @@ lemma lift_γ_Ũ :
     ← Category.assoc e.inv.left, e_inv_left_hom_left, Category.id_comp, m₂, pullback.lift_snd]
   rfl
 
+omit [IsAffine S] [IsAffine W] [AlgebraicGeometry.Etale p] [Surjective p]
+  [IsUniversalHomeomorphism f] [V''.left.IsQuasiAffine] in
 lemma lift_m₂ :
     pullback.lift θ ζ hθζ ≫ m₂ ι e = pullback.lift ζ (liftPV ι θ ζ hθζ ≫ Ũ e) (by
         rw [← lift_u, Category.assoc, u_g, pullback.lift_snd_assoc]) := by
@@ -292,6 +333,8 @@ lemma lift_m₂ :
 /-- The "unit" `V'' ⟶ P`, `x ↦ (x, v x)`. -/
 abbrev d : V V'' ⟶ P ι p V'' := pullback.lift (𝟙 _) (v V'') (by simp)
 
+omit [IsAffine S] [IsAffine W] [AlgebraicGeometry.Etale p] [Surjective p]
+  [V''.left.IsQuasiAffine] in
 /-- The counit identity for the coaction `γ`. -/
 lemma d_γ : d ι ≫ γ ι e = 𝟙 _ := by
   apply hom_ext_of_pullback (p := p) (f := f) (v V'') (by simp) (by simp)
@@ -324,6 +367,8 @@ abbrev γ₁ : P₂ ι p V'' ⟶ P ι p V'' :=
   pullback.map (pr₂ ι p V'' ≫ pS ι p) (pS ι p) (vS ι p V'') (pS ι p) (γ ι e) (𝟙 W) (𝟙 S)
     (by simp) (by simp)
 
+omit [IsAffine S] [IsAffine W] [AlgebraicGeometry.Etale p] [Surjective p]
+  [V''.left.IsQuasiAffine] in
 /-- The coassociativity identity for the coaction `γ`. -/
 lemma γ₁_γ : γ₁ ι e ≫ γ ι e = π₁ ι p V'' ≫ γ ι e := by
   apply hom_ext_of_pullback (p := p) (f := f) (pullback.snd _ _) (by simp) (by simp)
@@ -367,6 +412,7 @@ end Coaction
 
 section AffineDescent
 
+omit [Surjective p] in
 /-- The affine part of the descent: the global sections `E = Γ(V'')` descend to a `Γ(S)`-algebra
 `D₀`, giving an affine `S`-scheme `N = Spec D₀` with `N ×_S W ≅ Spec E`, compatibly with the
 coaction `γ`. -/
@@ -535,6 +581,8 @@ variable {N : Scheme.{u}} {nS : N ⟶ S} {q : Spec Γ(V V'', ⊤) ⟶ N} {w : Sp
 include ι in
 lemma quasiSeparatedSpace_Y : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated ι
 
+omit [IsAffine S] [IsAffine W] [AlgebraicGeometry.Etale p] [Surjective p]
+  [V''.left.IsQuasiAffine] in
 /-- Descent of the open `V'' ⊆ Spec Γ(V'')`: it is the preimage of its image in `N`. -/
 lemma mem_range_toSpecΓ_of_eq (hQ : IsPullback w q (pS ι p) nS)
     (hjw : (V V'').toSpecΓ ≫ w = v V'')

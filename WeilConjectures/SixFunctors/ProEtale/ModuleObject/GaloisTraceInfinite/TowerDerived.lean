@@ -25,9 +25,6 @@ transports along the automorphisms of `Y_∞` over `X` compatible with the Galoi
 
 @[expose] public section
 
--- several lemmas do not need all the instances of the section variables
-set_option linter.unusedSectionVars false
-
 universe u
 
 open CategoryTheory Category Limits

@@ -19,15 +19,14 @@ universe v
 open CategoryTheory Opposite MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option linter.unusedVariables false in
 /-- A chosen family of local wedge maps glues to a global morphism.
 -/
 theorem determinant_wedgeMorphism_glue_family {X : Scheme.{v}} (S : ShortComplex X.Modules)
     (hS : S.ShortExact) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)
     [S.X₁.IsFiniteLocallyFreeOfRank r₁]
-    (φU : ∀ U : X.Opens, exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₃ r₃ ⟶
+    (φU : ∀ _U : X.Opens, exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₃ r₃ ⟶
       exteriorPower S.X₂ r₂)
-    (hformula : ∀ (U : X.Opens)
+    (_hformula : ∀ (U : X.Opens)
       (a : Fin r₁ → S.X₁.val.obj (op U))
       (b : Fin r₃ → S.X₃.val.obj (op U)) (c : Fin r₃ → S.X₂.val.obj (op U)),
       (∀ i, S.g.val.app (op U) (c i) = b i) →
@@ -45,7 +44,7 @@ theorem determinant_wedgeMorphism_glue_family {X : Scheme.{v}} (S : ShortComplex
             (wedge (M := S.X₃) (r := r₃) (U := U) b)) =
           wedge (M := S.X₂) (r := r₂) (U := U)
             (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i)) := by
-  clear φU hformula
+  clear φU _hformula
   have : Epi S.g := hS.epi_g
   obtain ⟨q, hqepi, hq⟩ := exteriorTensor_quotient_exists S.X₁ S.X₂ S.X₃ S.g r₁ r₃
   have : Epi q := hqepi

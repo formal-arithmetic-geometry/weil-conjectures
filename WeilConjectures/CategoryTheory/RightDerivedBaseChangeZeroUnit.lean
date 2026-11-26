@@ -32,8 +32,7 @@ variable {B B' C C' : Type*} [Category* B] [Category* B'] [Category* C] [Categor
   [PreservesFiniteLimits β] [PreservesFiniteColimits β]
   [PreservesFiniteLimits γ] [PreservesFiniteColimits γ]
 
--- Keep the original left-exactness hypotheses in the public signature.
-set_option linter.unusedSectionVars false in
+omit [PreservesFiniteLimits G] [PreservesFiniteLimits G'] in
 /-- The classical degree-zero base-change map respects the augmentations from the
 underived functors.
 

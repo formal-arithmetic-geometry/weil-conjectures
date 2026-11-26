@@ -59,8 +59,6 @@ models of the specified derived operations, rather than additional geometric ass
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option linter.all false
-set_option linter.unusedVariables false
 universe u v w uA vA wA wTA uB vB wB wTB
 open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
@@ -138,9 +136,9 @@ private theorem rct_eval_fac
       (ringedConstantTowerEvaluation A n).hom.app (DerivedCategory.Q.obj I) := by
   have hc := Functor.mapDerivedCategoryCompIso_fac
     (Functor.const ℕᵒᵖ : A ⥤ _) ((evaluation ℕᵒᵖ A).obj n) I
-  simp only [rct_complex_refl, Functor.map_id, Category.comp_id] at hc
-  simp only [ringedConstantTowerEvaluation, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, Category.assoc, rct_id_fac]
+  simp only [rct_complex_refl] at hc
+  simp only [ringedConstantTowerEvaluation, Iso.trans_hom,
+    NatTrans.comp_app, rct_id_fac]
   rw [Functor.mapDerivedCategoryNatIso_fac, ← hc]
   simp only [Category.assoc]
   erw [Iso.hom_inv_id_app_assoc]

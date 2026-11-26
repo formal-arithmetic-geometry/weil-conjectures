@@ -303,7 +303,6 @@ set_option backward.isDefEq.lazyProjDelta false
 set_option backward.isDefEq.lazyWhnfCore false
 set_option backward.defeqAttrib.useBackward true
 
-set_option linter.all false in
 /-- The normalized coefficient lifts determine the vertex comparison of their
 concrete roof. -/
 theorem relativeMV_resolved_roof_vertex_normalization

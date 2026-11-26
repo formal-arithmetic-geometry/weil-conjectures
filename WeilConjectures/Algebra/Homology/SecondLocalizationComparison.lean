@@ -80,6 +80,7 @@ variable (R A B Bp D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
   [HasDerivedCategory.{w} (ModuleCat.{u} Bp)]
 
+-- The included scalar-tower hypotheses belong to the statement; the proof does not use them.
 set_option linter.unusedSectionVars false in
 include tRB tAD tBD tApD tBpD tBBpD in
 /-- The localized comparison commutes with the characterized coefficient map. -/

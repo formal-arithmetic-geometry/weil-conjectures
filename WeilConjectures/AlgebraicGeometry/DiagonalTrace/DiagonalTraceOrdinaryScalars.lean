@@ -22,7 +22,6 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 open SpTowerClasses
 
-set_option linter.unusedVariables false in
 /-- Construct the ordinary scalar restrictions, normalized coefficient cones, and
 sectionwise direct-image squares, before any right derivation.
 -/
@@ -47,7 +46,7 @@ theorem exists_diagonalTraceOrdinaryScalars (l : ℕ) [Fact l.Prime]
       Nonempty (Coefficients l E S cS rS) ∧
       Nonempty (Coefficients l E X cX rX) ∧
       ∃ varyingOrdinary : g.push ⋙ rS.F ≅ rX.F ⋙ diagonalTraceSystemPush l f,
-      ∃ varying_sections : ∀ (M : Systems X (Arings l E X)) (n : ℕ) (U : S.ProEtᵒᵖ)
+      ∃ _varying_sections : ∀ (M : Systems X (Arings l E X)) (n : ℕ) (U : S.ProEtᵒᵖ)
           (x : (((g.push ⋙ rS.F).obj M).obj (op n)).obj.obj U),
         HEq (((varyingOrdinary.hom.app M).app (op n)).hom.app U x) x,
       ∃ completedOrdinary : diagonalTracePush l f ⋙ diagonalCompletedRestriction l S ≅

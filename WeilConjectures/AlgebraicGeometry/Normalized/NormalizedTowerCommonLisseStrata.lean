@@ -233,7 +233,6 @@ import WeilConjectures.AlgebraicGeometry.Normalized.NormalizedTowerLissePropagat
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 
 universe u v w
 
@@ -858,7 +857,7 @@ theorem normalizedTower_common_lisse_strata
   refine ⟨S, ?_⟩
   apply normalizedTower_lisse_of_native_strata X d M S a b hab hbounded
   intro i q
-  haveI := NormalizedTowerCoefficients.constantRingInverseImage_isIso (S.immersion i) D
+  have := NormalizedTowerCoefficients.constantRingInverseImage_isIso (S.immersion i) D
   refine ⟨NormalizedTowerCoefficients.coefficientIso (S.immersion i) D, ?_⟩
   simpa only [NormalizedNativeSieveFiniteLisse, F, D] using hS i q
 

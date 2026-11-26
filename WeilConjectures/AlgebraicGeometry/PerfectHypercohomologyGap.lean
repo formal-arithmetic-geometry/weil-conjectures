@@ -53,17 +53,16 @@ private theorem tensor_single_homology_vanishes (X : Scheme.{uG})
 
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
-set_option linter.unusedVariables false in
 /-- A perfect object of Tor amplitude `[a,b]` tensors a cohomology gap in degrees
 `[j-b,j-a]` to vanishing in degree `j` (Stacks, Tag 09M4). -/
 theorem perfect_hypercohomology_gap (X : Scheme.{uG})
     [HasDerivedCategory.{wG} (SheafOfModules.{uG} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens,
       HasDerivedCategory.{wG} (SheafOfModules.{uG} ((moduleRings X.toRingedSpace).over U))]
-    (P L : schemeDerivedCategory X) (hP : X.IsPerfect P) (a b : ℤ)
+    (P L : schemeDerivedCategory X) (_hP : X.IsPerfect P) (a b : ℤ)
     (hTor : ∀ G : SheafOfModules.{uG} (moduleRings X.toRingedSpace),
       ∀ i : ℤ, i < a ∨ b < i → schemeDerivedTensorCohomologyVanishes X P G i)
-    (hL : schemeDerivedQCohProperty X L) (j : ℤ)
+    (_hL : schemeDerivedQCohProperty X L) (j : ℤ)
     (hgap : ∀ q : ℤ, j - b ≤ q → q ≤ j - a →
       IsZero ((DerivedCategory.homologyFunctor
         (SheafOfModules.{uG} (moduleRings X.toRingedSpace)) q).obj L)) :

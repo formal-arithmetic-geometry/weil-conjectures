@@ -30,7 +30,6 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Scheme
 
-set_option linter.unusedVariables false in
 /-- An ordinary Noetherian approximation of a normal integral scheme admits a normal
 integral refinement with dominant projections. -/
 theorem exists_normal_noetherian_refinement {S : Scheme.{u}} [CompactSpace S]
@@ -39,9 +38,9 @@ theorem exists_normal_noetherian_refinement {S : Scheme.{u}} [CompactSpace S]
     (N : S.NoetherianApproximation) :
     ∃ (I : Type u) (hcat : SmallCategory I),
       letI : SmallCategory I := hcat
-      ∃ (hco : IsCofiltered I) (X : I ⥤ Scheme.{u})
-        (α : (Functor.const I).obj S ⟶ X) (hα : IsLimit (Cone.mk S α))
-        (hI : ∀ i, IsIntegral (X.obj i)),
+      ∃ (_hco : IsCofiltered I) (X : I ⥤ Scheme.{u})
+        (α : (Functor.const I).obj S ⟶ X) (_hα : IsLimit (Cone.mk S α))
+        (_hI : ∀ i, IsIntegral (X.obj i)),
         (∀ {i j : I} (f : i ⟶ j), IsAffineHom (X.map f)) ∧
         (∀ i, IsDominant (α.app i)) ∧
         (∀ i, IsNoetherian (X.obj i) ∧ QuasiSeparatedSpace (X.obj i) ∧

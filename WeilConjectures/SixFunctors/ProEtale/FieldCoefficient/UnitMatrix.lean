@@ -528,10 +528,12 @@ lemma unitMatrix_blockMap :
     simp only [Limits.zero_comp]
     rcases x with a | ⟨i, hi⟩ <;> rfl
 
+-- `Fintype κ` is a section variable used to state the biproduct; keeping the statement
 set_option linter.unusedFintypeInType false in
 instance : Mono (biproduct.fromSubtype (fun _ : κ ↦ unit Λ V) (· ∈ Set.range ρ)) :=
   mono_of_mono_fac (biproduct.fromSubtype_toSubtype _ _)
 
+-- `Fintype ι` is a section variable used to state the biproduct; keeping the statement
 set_option linter.unusedFintypeInType false in
 instance : Epi (biproduct.toSubtype (fun _ : ι ↦ unit Λ V) (· ∈ Set.range γ)) :=
   epi_of_epi_fac (biproduct.fromSubtype_toSubtype _ _)

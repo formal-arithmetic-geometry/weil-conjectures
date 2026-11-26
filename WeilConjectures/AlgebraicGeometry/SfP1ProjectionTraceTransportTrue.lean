@@ -81,6 +81,7 @@ private theorem pastingWithFamily
   exact traceTransportPasting P Q F H R R₀ U V W₀ T b d s e c
     a v l k T₀ z (g B) u uQ uP uF τ (hb B) ha hu
 
+-- `def` with an inferred type: a `theorem` would need this long pasting statement spelled out.
 set_option linter.defProp false in
 /-- Fix the geometry before substituting any coefficient objects. -/
 @[irreducible] private def categoricalPasting
@@ -115,6 +116,7 @@ set_option linter.defProp false in
       (ProjectiveLine S ↘ S) f hi.symm)
     (presentationTrace A f i hi) (presentationExchange A f i hi)
 
+-- `def` with an inferred type: a `theorem` would need this long pasting statement spelled out.
 set_option linter.defProp false in
 @[irreducible] private def linePasting
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -207,6 +209,7 @@ private theorem coordinateTrace_true_eq
 
 end ProjectionNormalization
 
+-- `def` with an inferred type: a `theorem` would need this long pasting statement spelled out.
 set_option linter.defProp false in
 @[irreducible] private def rawPastingResult
     (A : Type (u + 1)) [CommRing A] [Finite A]

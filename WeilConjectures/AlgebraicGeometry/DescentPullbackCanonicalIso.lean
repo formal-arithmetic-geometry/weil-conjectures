@@ -295,13 +295,11 @@ private theorem pullback_exists {S X T : Scheme.{v}} (a : X ⟶ S) (b : T ⟶ S)
   obtain ⟨F, q, hp, hn⟩ := descent_pullback_construction a r
   exact ⟨F, q, fun D ↦ (hp D).choose, fun D ↦ (hp D).choose_spec, hn⟩
 
--- Keep the existing signature, including its named proof argument to `pull`.
-set_option linter.unusedVariables false in
 /-- Canonical comparisons of pullback of descent data over a fixed scheme.
 (Stacks, Tags 023Y and 02VS) -/
 theorem descent_pullback_canonical_iso (S : Scheme.{v}) :
     ∃ (pull : ∀ ⦃X T : Scheme.{v}⦄ (a : X ⟶ S) (b : T ⟶ S)
-        (r : T ⟶ X) (hr : r ≫ a = b), Over.DescentDataCategory a ⥤ Over.DescentDataCategory b)
+        (r : T ⟶ X) (_hr : r ≫ a = b), Over.DescentDataCategory a ⥤ Over.DescentDataCategory b)
       (q : ∀ ⦃X T : Scheme.{v}⦄ (a : X ⟶ S) (b : T ⟶ S)
         (r : T ⟶ X) (hr : r ≫ a = b) (D : Over.DescentDataCategory a),
           ((pull a b r hr).obj D).V.left ⟶ D.V.left)

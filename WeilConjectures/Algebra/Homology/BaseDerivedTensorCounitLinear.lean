@@ -32,10 +32,7 @@ namespace ModuleCat
 
 variable (R : Type uR) (A : Type uA) (B : Type uB) [CommRing R] [CommRing A] [CommRing B]
   [Algebra R A] [Algebra R B]
-  [HasDerivedCategory.{w} (ModuleCat.{max uR uA uB v} R)]
-  [HasDerivedCategory.{w} (ModuleCat.{max uR uA uB v} B)]
 
-set_option linter.unusedSectionVars false in
 private theorem tensorLinearLift
     (M N : ModuleCat.{max uR uA uB v} (A ⊗[R] B))
     (f : (restrictScalars
@@ -68,6 +65,9 @@ private theorem tensorLinearLift
         (congrArg₂ (· + ·) he he')
   · ext x
     rfl
+
+variable [HasDerivedCategory.{w} (ModuleCat.{max uR uA uB v} R)]
+  [HasDerivedCategory.{w} (ModuleCat.{max uR uA uB v} B)]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in

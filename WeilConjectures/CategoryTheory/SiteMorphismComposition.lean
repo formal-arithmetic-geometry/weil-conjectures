@@ -43,7 +43,6 @@ private theorem leftAdjointUniq_existsUnique
   exact (he X).trans (a.unit_leftAdjointUniq_hom_app b X).symm
 
 -- The original existential continuity binder is used only through instance synthesis.
-set_option linter.unusedVariables false in
 /-- The composite of two morphisms of sites, given by continuous functors whose sheaf
 pullbacks preserve finite limits and finite colimits, is a morphism of sites: the composite
 functor is continuous, its sheaf pullback is the composite of the sheaf pullbacks (with
@@ -83,7 +82,7 @@ theorem siteMorphism_composition
       R.map (V ⋙ U) ∈ J₁ ((V ⋙ U).obj X)) ∧
     (∀ (X Y Z : C₃) (R : Presieve X), R ∈ J₃ X →
       ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f → PreservesLimit (cospan f g) (V ⋙ U)) ∧
-    ∃ (hVU : (V ⋙ U).IsContinuous J₃.toGrothendieck J₁.toGrothendieck),
+    ∃ (_hVU : (V ⋙ U).IsContinuous J₃.toGrothendieck J₁.toGrothendieck),
       ((V ⋙ U).sheafPushforwardContinuous (Type u) J₃.toGrothendieck J₁.toGrothendieck =
         U.sheafPushforwardContinuous (Type u) J₂.toGrothendieck J₁.toGrothendieck ⋙
           V.sheafPushforwardContinuous (Type u) J₃.toGrothendieck J₂.toGrothendieck) ∧

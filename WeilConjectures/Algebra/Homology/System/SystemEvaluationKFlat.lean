@@ -96,7 +96,6 @@ import WeilConjectures.Algebra.Homology.System.SystemScalarCoherence
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 universe u v w

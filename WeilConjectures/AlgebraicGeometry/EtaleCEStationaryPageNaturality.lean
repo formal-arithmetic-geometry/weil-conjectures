@@ -148,7 +148,6 @@ private theorem comparison_transport
   simpa using sq
 
 set_option backward.isDefEq.respectTransparency false in
-set_option linter.unusedVariables false in
 -- Elaborate the dependent simultaneous page and presentation families.
 /-- Choose the stationary comparisons naturally for all sections-total filtered maps.
 No augmentation, pullback, ordinary first-page identification or CE lift is asserted
@@ -161,11 +160,11 @@ theorem exists_etaleCE_stationary_page_comparisons
       (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),
       EtaleCEQuotientRealization (D X K)) :
     ∃ (R : ∀ (X : Scheme.{uNatural})
-        (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))
-        (q n : ℤ), ℤ)
+        (_K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))
+        (_q _n : ℤ), ℤ)
       (eInf : ∀ (X : Scheme.{uNatural})
         (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))
-        (q n r : ℤ) (hr : 1 ≤ r) (hR : R X K q n ≤ r),
+        (q n r : ℤ) (hr : 1 ≤ r) (_hR : R X K q n ≤ r),
         ((D X K).sequence.page r hr).X (q, n - q) ≅ ((D X K).H n).gradedPiece q),
       ∀ {X Y : Scheme.{uNatural}}
         (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))
@@ -179,7 +178,7 @@ theorem exists_etaleCE_stationary_page_comparisons
           ∀ n : ℤ,
             ∃ (t : ∀ q : ℤ, (((D X K).H n).step q : AddCommGrpCat.{uNatural + 1}) ⟶
             (((D Y L).H n).step q : AddCommGrpCat.{uNatural + 1}))
-          (ht : ∀ q : ℤ, t q ≫ (((D Y L).H n).step q).arrow =
+          (_ht : ∀ q : ℤ, t q ≫ (((D Y L).H n).step q).arrow =
             (((D X K).H n).step q).arrow ≫
               (((D X K).c n).inv ≫
                 HomologicalComplex.homologyMap

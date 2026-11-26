@@ -65,7 +65,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (Y : AlgebraicGeometry.Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
 -- Preserve the original existential binder names.
-set_option linter.unusedVariables false in
 -- Use the existing sheafification at the coefficient universe for this declaration.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The restricted comparison has the signed Hom--tensor complex representative.
@@ -82,11 +81,11 @@ theorem comparison_representative
       (_ : flat.{t, u} Y R P) (_ : I.IsKInjective)
       (_ : Nonempty (Iso (C := DerivedCategory (Modules.{t, u} Y R)) (DerivedCategory.Q.obj P) K))
       (_ : Nonempty (Iso (C := DerivedCategory (Modules.{t, u} Y R)) (DerivedCategory.Q.obj I) L))
-      (hzero : ∀ k : ℤ, k ≠ -1 → k ≠ 0 → IsZero (Q.X k))
-      (eNeg : Q.X (-1) ≅ (show Modules.{t, u} Y R from SheafOfModules.unit
+      (_hzero : ∀ k : ℤ, k ≠ -1 → k ≠ 0 → IsZero (Q.X k))
+      (_eNeg : Q.X (-1) ≅ (show Modules.{t, u} Y R from SheafOfModules.unit
         ((sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology Y)
         (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj R)))
-      (eZero : Q.X 0 ≅ (show Modules.{t, u} Y R from SheafOfModules.unit
+      (_eZero : Q.X 0 ≅ (show Modules.{t, u} Y R from SheafOfModules.unit
         ((sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology Y)
         (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj R)))
       (f : ((totalTensor.{t, u} Y R).obj

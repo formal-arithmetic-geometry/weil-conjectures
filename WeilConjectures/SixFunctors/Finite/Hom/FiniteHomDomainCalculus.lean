@@ -144,9 +144,6 @@ and all identity quotients are included.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.style.haveILetI false
-set_option linter.unusedSimpArgs false
-set_option linter.unusedSectionVars false
 set_option synthInstance.maxSize 4096
 set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency true
@@ -211,7 +208,7 @@ private theorem domainEvaluation_natural
       (H.map (Prod.mkHom f.op (𝟙 M)) ≫ H.map (Prod.mkHom (𝟙 (op K')) g)) (𝟙 K') =
       Prod.mkHom (H.map (Prod.mkHom f.op (𝟙 M))) (𝟙 K') ≫
         Prod.mkHom (H.map (Prod.mkHom (𝟙 (op K')) g)) (𝟙 K') := by
-    ext <;> simp only [prod_comp_fst, prod_comp_snd, Category.comp_id, Category.id_comp]
+    ext <;> simp only [prod_comp_fst, prod_comp_snd, Category.comp_id]
   rw [ht, S.tensor.map_comp, Category.assoc, hg, ← Category.assoc, hf, Category.assoc]
 
 private theorem domainUncurry_pre
@@ -221,7 +218,7 @@ private theorem domainUncurry_pre
     (S.transpose U K M).symm (f ≫ g) =
       S.tensor.map (Prod.mkHom f (𝟙 K)) ≫ (S.transpose V K M).symm g := by
   rw [domainUncurry, domainUncurry, ← S.tensor.map_comp_assoc]
-  simp only [CategoryTheory.prod_comp, Category.comp_id, Category.id_comp]
+  simp only [CategoryTheory.prod_comp, Category.comp_id]
 
 private theorem domainUncurry_post
     {C : Type a₁} [Category.{b₁} C] {H : Cᵒᵖ × C ⥤ C}
@@ -271,6 +268,8 @@ variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   [hXsep : IsSeparated (X ↘ Spec (.of D.k))]
   [hXft : LocallyOfFiniteType (X ↘ Spec (.of D.k))] [hXqc : QuasiCompact (X ↘ Spec (.of D.k))]
 
+-- the included hypotheses are part of the intended statement
+set_option linter.unusedSectionVars false in
 include D hl hXover hXsep hXft hXqc in
 /-- For a bounded constructible `T` of Tor amplitude in `[a, b]`, the scheme `X` is
 Noetherian, `T` has a bounded flat constructible K-flat model `P` in `[a, b]` whose scalar
@@ -354,6 +353,8 @@ end Pullback
 end PullbackCompatibility
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
+-- the included hypotheses are part of the intended statement
+set_option linter.unusedSectionVars false in
 include D hl hXover hXsep hXft hXqc in
 /-- The canonical tensor and constant-unit comparisons make ambient coefficient change
 strong symmetric monoidal for the signed tensor and Koszul braiding; moreover

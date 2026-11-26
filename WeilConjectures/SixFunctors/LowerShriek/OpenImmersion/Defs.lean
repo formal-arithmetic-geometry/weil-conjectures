@@ -69,7 +69,6 @@ zero* functor. It is then fully faithful; for the small étale sites this is
 
 @[expose] public section
 
-set_option linter.style.show false
 
 universe w u' u
 
@@ -144,9 +143,9 @@ lemma isCocontinuous_overMap_of_le (hQP : Q ≤ P) :
       MorphismProperty.Over.homMk (𝟙 Y.left) hY
     have hge : (MorphismProperty.Over.map ⊤ h).map ψ = e ≫ φ := by
       apply MorphismProperty.Over.Hom.ext
-      show φ.left = 𝟙 Y.left ≫ φ.left
+      change φ.left = 𝟙 Y.left ≫ φ.left
       exact (Category.id_comp _).symm
-    show S.arrows ((MorphismProperty.Over.map ⊤ h).map ψ)
+    change S.arrows ((MorphismProperty.Over.map ⊤ h).map ψ)
     rw [hge]
     exact S.downward_closed hSφ e
 
@@ -198,7 +197,7 @@ lemma compatiblePreserving_overMap :
     let g₂' : W' ⟶ Y₂ := MorphismProperty.Over.homMk f₂.left hw
     have hcomm : g₁' ≫ g₁ = g₂' ≫ g₂ := by
       apply MorphismProperty.Over.Hom.ext
-      show f₁.left ≫ g₁.left = f₂.left ≫ g₂.left
+      change f₁.left ≫ g₁.left = f₂.left ≫ g₂.left
       exact hleft
     have hT' : 𝟙 T'.left ≫ (f₁.left ≫ Y₁.hom) ≫ f = T'.hom := by
       simp only [Category.id_comp, Category.assoc]
@@ -207,11 +206,11 @@ lemma compatiblePreserving_overMap :
       MorphismProperty.Over.homMk (𝟙 T'.left) hT'
     have hf₁ : f₁ = e ≫ (MorphismProperty.Over.map ⊤ h).map g₁' := by
       apply MorphismProperty.Over.Hom.ext
-      show f₁.left = 𝟙 T'.left ≫ f₁.left
+      change f₁.left = 𝟙 T'.left ≫ f₁.left
       exact (Category.id_comp _).symm
     have hf₂ : f₂ = e ≫ (MorphismProperty.Over.map ⊤ h).map g₂' := by
       apply MorphismProperty.Over.Hom.ext
-      show f₂.left = 𝟙 T'.left ≫ f₂.left
+      change f₂.left = 𝟙 T'.left ≫ f₂.left
       exact (Category.id_comp _).symm
     have key := hx g₁' g₂' hg₁ hg₂ hcomm
     rw [hf₁, hf₂, op_comp, op_comp, Functor.map_comp_apply, Functor.map_comp_apply]

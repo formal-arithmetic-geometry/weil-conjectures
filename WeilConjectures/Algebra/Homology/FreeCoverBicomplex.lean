@@ -94,7 +94,6 @@ private theorem totalAugmentation {A : Type u} [CommRing A]
   · intro p q n hp h
     exact (K.ι_totalDesc _ _ _ _).trans (hcn p q n (by omega) h)
 
-set_option linter.unusedVariables false in
 /-- Iteration of the free-complex cover, followed by direct-sum totalization. -/
 theorem exists_freeCoverBicomplex {A : Type u} [CommRing A]
     (M : CochainComplex (ModuleCat.{u} A) ℤ) :
@@ -102,7 +101,7 @@ theorem exists_freeCoverBicomplex {A : Type u} [CommRing A]
       ∃ (ε : K.total (ComplexShape.up ℤ) ⟶ M) (a : K.X 0 ⟶ M),
         (∀ p : ℤ, 0 < p → IsZero (K.X p)) ∧
         (∀ q : ℤ, K.ιTotal (ComplexShape.up ℤ) 0 q q (by simp) ≫ ε.f q = a.f q) ∧
-        (∀ (p q n : ℤ) (hp : p < 0)
+        (∀ (p q n : ℤ) (_hp : p < 0)
           (h : ComplexShape.π (ComplexShape.up ℤ)
             (ComplexShape.up ℤ) (ComplexShape.up ℤ) (p, q) = n),
           K.ιTotal (ComplexShape.up ℤ) p q n h ≫ ε.f n = 0) ∧

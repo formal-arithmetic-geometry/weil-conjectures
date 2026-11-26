@@ -32,7 +32,6 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-set_option linter.unusedVariables false
 
 section
 
@@ -86,7 +85,7 @@ theorem singleComplexOpen_pullback_counit_homotopy_factorization
       (Scheme.Modules.tensorPullback k).Additive :=
       @Classical.choose _ _ exists_derivedPullbackComposition
     let F := RingedSpace.moduleDirectImage f.toLRSHom.toShHom
-    let F₀ := RingedSpace.moduleDirectImage (f ∣_ V).toLRSHom.toShHom
+    let _F₀ := RingedSpace.moduleDirectImage (f ∣_ V).toLRSHom.toShHom
     let rY := schemeOpenRestriction Y V
     let rX := schemeOpenRestriction X (f ⁻¹ᵁ V)
     let a := @singleComplexOpenPinnedAdjunction.{u, w} _

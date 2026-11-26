@@ -545,7 +545,8 @@ end TensorModels
 variable (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G]
   (j : F →ₐ[ℚ_[l]] G) (sG : RationalModuleRealization l G X)
 
-set_option linter.unusedSectionVars false in
+omit [IsNoetherian X] [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]
+  [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))] in
 /-- Continuous postcomposition composes as the given field embeddings do. -/
 theorem rationalBalancedCoefficient_comp :
     rationalBalancedCoefficient l E F i X ≫ rationalBalancedCoefficient l F G j X =

@@ -108,7 +108,7 @@ def scalarPerfectRingUnit (R : Type s) [CommRing R] :
   Functor.whiskerRight (toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of R)))
     (forget₂ CommRingCat RingCat)
 
-set_option linter.unusedSectionVars false in
+omit [HasSheafify J AddCommGrpCat.{s}] [J.WEqualsLocallyBijective AddCommGrpCat.{s}] in
 /-- Forgetting commutativity leaves local bijectivity of the ring unit unchanged. -/
 theorem scalarPerfectRingUnit_locallyBijective (R : Type s) [CommRing R] :
     Presheaf.IsLocallyInjective J (scalarPerfectRingUnit J R) ∧
@@ -160,7 +160,7 @@ def scalarPerfectFunctor (R : Type s) [CommRing R]
   unfold scalarPerfectConstantFunctor
   infer_instance
 
-set_option linter.unusedSectionVars false in
+omit [HasSheafify J CommRingCat.{s}] in
 /-- Ordinary scalar extension is additive even for a nonflat coefficient map. -/
 @[instance] theorem scalarPerfectExtensionFunctor_additive
     {A B : Sheaf J CommRingCat.{s}} (φ : A ⟶ B) :

@@ -396,10 +396,8 @@ open SheafOfModules.OpenTensorNormalization in
 private alias exact_inverse_mate_isIso :=
   SemilinearProperOpenEvaluationAliases.exact_inverse_mate_isIso
 
--- Keep both proper-face pullback hypotheses of the cube statement.
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option linter.unusedVariables false in
 /-- Vertical, horizontal and base-change coherence for every commutative proper/open
 square, as equalities in derived semilinear-system categories, without assuming evaluation
 faithful. -/
@@ -442,7 +440,7 @@ theorem semilinearProperOpenMatePasting :
       (wk : d ≫ k = k₁ ≫ a) (wi : c ≫ i = i₁ ≫ b)
       (wp : a ≫ p = p₁ ≫ b) (wr : d ≫ r = r₁ ≫ c)
       (sk : IsPullback d k₁ k a) (si : IsPullback c i₁ i b)
-      (sp : IsPullback a p₁ p b) (sr : IsPullback d r₁ r c) (M : Derived C τ V),
+      (_sp : IsPullback a p₁ p b) (_sr : IsPullback d r₁ r c) (M : Derived C τ V),
       (P C τ b).map ((gamma C τ k r p i h).app M) ≫
           (exchange C τ a p₁ p b wp).app ((J C τ k).obj M) ≫
           (R C τ p₁).map ((beta C τ d k₁ k a wk sk).hom.app M) =

@@ -58,7 +58,6 @@ noncomputable def boundedConstructibleExceptionalProjectionOfCompactificationNat
   naturality _ _ h :=
     boundedConstructibleExceptionalProjectionMorphismOfCompactification_natural_right ℓ f c K h
 
-set_option linter.flexible false in
 set_option synthInstance.maxSize 4096 in
 -- the instance problems for the composite functors are large
 -- the instances of the composite functors are large
@@ -104,11 +103,26 @@ instance commShift_boundedConstructibleExceptionalProjectionOfCompactificationNa
       (exceptionalProjectionMorphismOfCompactificationNatTrans (Profinite.padicAlgClRingObj ℓ) c
           K.obj)) ?_
   refine NatTrans.ext (funext fun B ↦ ?_)
-  simp [e₂, ObjectProperty.tensorLeftCompιIso, ObjectProperty.tensorLeftIsoLift,
-    ObjectProperty.liftFullSubcategoryCompιIso, boundedConstructibleUpperStarCompatibility,
-    boundedConstructibleLowerShriekOfCompactificationCompatibility,
-    boundedConstructibleLowerStarOfIsProperCompatibility,
-    boundedConstructibleOpenImmersionLowerShriekCompatibility]
+  simp only [Functor.comp_obj, curriedTensor_obj_obj, ObjectProperty.ι_obj,
+    ObjectProperty.tensorObj_obj, Functor.whiskerRight_app,
+    boundedConstructibleExceptionalProjectionOfCompactificationNatTrans_app,
+    ObjectProperty.ι_map, ObjectProperty.homMk_hom, ObjectProperty.tensorLeftCompιIso,
+    ObjectProperty.tensorLeftIsoLift, ObjectProperty.liftFullSubcategoryCompιIso, Iso.trans_refl,
+    Functor.isoWhiskerRight_hom, Iso.symm_hom,
+    boundedConstructibleLowerShriekOfCompactificationCompatibility, Compactification.overObj_left,
+    boundedConstructibleLowerStarOfIsProper_eq, Compactification.overG_left,
+    boundedConstructibleLowerStarOfIsProperCompatibility, Compactification.overI_left,
+    boundedConstructibleOpenImmersionLowerShriekCompatibility, Functor.isoWhiskerLeft_trans,
+    Functor.isoWhiskerLeft_twice, Iso.trans_assoc, boundedConstructibleUpperStarCompatibility,
+    Functor.isoWhiskerRight_trans, Functor.isoWhiskerRight_twice, Iso.trans_inv,
+    Functor.isoWhiskerRight_inv, Iso.symm_inv, Category.assoc, Functor.isoWhiskerLeft_inv,
+    NatTrans.comp_app, NatIso.ofComponents_inv_app, Iso.refl_inv,
+    ObjectProperty.FullSubcategory.id_hom, Functor.whiskerLeft_app,
+    exceptionalProjectionMorphismOfCompactificationNatTrans_app, Functor.associator_inv_app,
+    Functor.comp_map, CategoryTheory.Functor.map_id, Functor.associator_hom_app,
+    boundedConstructibleUpperStar_obj_obj, ObjectProperty.liftCompιIso_inv_app,
+    curriedTensor_obj_map, whiskerLeft_id, NatIso.ofComponents_hom_app, Iso.refl_hom,
+    Category.comp_id, Category.id_comp, e₂]
   erw [Category.id_comp, CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
     Category.comp_id]
 

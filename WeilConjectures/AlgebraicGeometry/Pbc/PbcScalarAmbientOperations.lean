@@ -513,12 +513,11 @@ private theorem derivedConjugate_transport {C₁ C₂ : Type*} [Category C₁] [
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
   exact congrArg (_ ≫ ·) ((DerivedCategory.quotientCompQhIso C₂).inv_hom_id_app _)
 
-set_option linter.unusedVariables false in
 /-- The canonical pullback comparison is the localized termwise identification on
 flat-term K-flat complexes. -/
 theorem pbcPullComparison_app {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ)
-    (hp : PbcFlatKFlat Y d P) :
+    (_hp : PbcFlatKFlat Y d P) :
     (pbcPullComparison g d).app (DerivedCategory.Q.obj P) ≫
         pbcActualPullComplexCounit g d P =
       (proEtaleRingModulePullback g (pbcAdicCompletion Y d) (pbcAdicCompletion X d)
@@ -714,14 +713,13 @@ private theorem pbcPull_flatKFlat {A : Type (u + 1)} [CommRing A] (dA : AdicCoef
         (I.modules.map a)) P hp.1 hp.2
   simpa only [hI, pbcActualModulePull, completedModulePullback, PbcFlatKFlat] using hpres
 
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The derived scalar mate is the localized ordinary scalar mate on flat-term K-flat
 complexes with flat-term K-flat restriction. -/
 theorem pbcScalarPullMate_app
     (K : CochainComplex (pbcModules Y (pbcAdicCompletion Y (pbcIntegralDatum l F))) ℤ)
-    (hK : PbcFlatKFlat Y (pbcIntegralDatum l F) K)
+    (_hK : PbcFlatKFlat Y (pbcIntegralDatum l F) K)
     (hR : PbcFlatKFlat Y (pbcIntegralDatum l E)
       (((pbcRestrict (pbcScalarCoefficientMap l E F i Y)).mapHomologicalComplex (.up ℤ)).obj K)) :
     (pbcActualDerivedPull g (pbcIntegralDatum l E)).map

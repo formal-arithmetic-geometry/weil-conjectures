@@ -122,13 +122,12 @@ private lemma degreewiseCardinalGenerated_iff {B : CochainComplex C ℤ} (S : Su
       ∀ n, isCardinalGenerated G κ ((subobjectEval B n S : C)) :=
   forall_congr' fun n ↦ (isCardinalGenerated_subobjectEval_iff G κ S n).symm
 
-set_option linter.unusedVariables false in
 /-- A join of fewer than `κ` many degreewise `κ`-generated subcomplexes is degreewise
 `κ`-generated.
 
 The hypothesis `hκ` is part of the standing hypotheses of this development; it is not needed
 here, since the regularity of `κ` already provides `Cardinal.aleph0 ≤ κ`. -/
-lemma degreewiseCardinalGenerated_iSup [Fact κ.IsRegular] (hκ : Cardinal.aleph0 < κ)
+lemma degreewiseCardinalGenerated_iSup [Fact κ.IsRegular] (_hκ : Cardinal.aleph0 < κ)
     {B : CochainComplex C ℤ} {ι : Type w} (S : ι → Subobject B) (hι : HasCardinalLT ι κ)
     (hS : ∀ i, degreewiseCardinalGenerated G κ ((S i : CochainComplex C ℤ))) :
     degreewiseCardinalGenerated G κ ((⨆ i, S i : Subobject B) : CochainComplex C ℤ) := by

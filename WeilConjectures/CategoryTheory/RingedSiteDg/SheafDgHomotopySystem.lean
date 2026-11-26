@@ -28,7 +28,6 @@ module and sheaf tensor declarations; no second module category is defined.
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option linter.style.haveILetI false
 
 universe c v u
 

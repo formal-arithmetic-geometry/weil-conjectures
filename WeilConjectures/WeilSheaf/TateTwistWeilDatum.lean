@@ -55,7 +55,7 @@ noncomputable def tateTwistObjAdicConstantWeilIso (m : ℤ) :
         constantTwistCongrIso (mul_one _) _ ≪≫
         ((WeilSheaf.adicConstant k₀ l X).constantTwistObjIso _).symm))
 
-set_option linter.unusedSectionVars false in
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- Isomorphisms of Weil complexes are Frobenius equivariant for the derived structure
 isomorphisms. -/
 lemma isWeilEquivariant_forget_map {M N : WeilComplex k₀ l X} (u : M ⟶ N) :

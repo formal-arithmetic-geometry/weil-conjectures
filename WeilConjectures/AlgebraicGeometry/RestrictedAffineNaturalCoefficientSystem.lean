@@ -118,7 +118,6 @@ private noncomputable def restricted_limit_iso {S : Scheme.{v}} {I : Type v}
         (DerivedCategory.Q.obj (restrictedAffineL D c H U).pt) :=
   eqToIso (restricted_limit_cohomology_eq D c H p U)
 
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 private theorem exists_concrete_single_coherence {S : Scheme.{v}}
     {I : Type v} [Preorder I]
@@ -156,13 +155,13 @@ private theorem exists_concrete_single_coherence {S : Scheme.{v}}
     (ψ : ∀ {i j : Iᵒᵖ} (f : j ⟶ i),
       ((upperStar AddCommGrpCat.{v + 1} (D'.map f)).mapHomologicalComplex
         (ComplexShape.up ℤ)).obj (K i) ⟶ K j)
-    (hidentity : ∀ i : Iᵒᵖ, ψ (𝟙 i) =
+    (_hidentity : ∀ i : Iᵒᵖ, ψ (𝟙 i) =
       (NatIso.mapHomologicalComplex
         (eqToIso (congrArg (upperStar AddCommGrpCat.{v + 1}) (D'.map_id i)))
         (ComplexShape.up ℤ)).hom.app (K i) ≫
       (NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{v + 1} (D'.obj i))
         (ComplexShape.up ℤ)).hom.app (K i))
-    (hcomposition : ∀ (i j k : Iᵒᵖ) (f : j ⟶ i) (g : k ⟶ j),
+    (_hcomposition : ∀ (i j k : Iᵒᵖ) (f : j ⟶ i) (g : k ⟶ j),
       ψ (g ≫ f) =
         (NatIso.mapHomologicalComplex
           (upperStarComp AddCommGrpCat.{v + 1} (D'.map g) (D'.map f)
@@ -173,7 +172,7 @@ private theorem exists_concrete_single_coherence {S : Scheme.{v}}
     (eG : ∀ i : Iᵒᵖ, G.obj (op i) ≅
       ((upperStar AddCommGrpCat.{v + 1} (c'.π.app i)).mapHomologicalComplex
         (ComplexShape.up ℤ)).obj (K i))
-    (hG : ∀ (i j : Iᵒᵖ) (f : j ⟶ i), G.map f.op =
+    (_hG : ∀ (i j : Iᵒᵖ) (f : j ⟶ i), G.map f.op =
       (eG i).hom ≫
         (NatIso.mapHomologicalComplex
           (upperStarComp AddCommGrpCat.{v + 1} (c'.π.app j) (D'.map f)
@@ -194,7 +193,6 @@ private theorem exists_concrete_single_coherence {S : Scheme.{v}}
 attribute [local irreducible] rawAffineRestrictedCohomology
 
 -- Assemble the existential with abstract witnesses, keeping their types folded.
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency true in
 private theorem assemble_restricted_affine_system {S : Scheme.{v}}
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
@@ -202,21 +200,21 @@ private theorem assemble_restricted_affine_system {S : Scheme.{v}}
     [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f).left]
     [∀ i : Iᵒᵖ, QuasiCompact (D.obj i).hom]
     [∀ i : Iᵒᵖ, QuasiSeparated (D.obj i).hom]
-    (c : Cone D) (hc : IsLimit ((Over.forget S).mapCone c))
+    (c : Cone D) (_hc : IsLimit ((Over.forget S).mapCone c))
     [QuasiCompact c.pt.hom] [QuasiSeparated c.pt.hom]
     (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1})
     (φ : ∀ {i j : I} (f : i ⟶ j),
       (((D.map f.op).left)^*[AddCommGrpCat.{v + 1}]).obj (F i) ⟶ F j)
-    (hφid : ∀ i : I, HEq (φ (𝟙 i))
+    (_hφid : ∀ i : I, HEq (φ (𝟙 i))
       ((upperStarId AddCommGrpCat.{v + 1} (D.obj (op i)).left).hom.app (F i)))
-    (hφcomp : ∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), HEq (φ (f ≫ g))
+    (_hφcomp : ∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), HEq (φ (f ≫ g))
       ((upperStarComp AddCommGrpCat.{v + 1} (D.map g.op).left
           (D.map f.op).left).hom.app (F i) ≫
         (((D.map g.op).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ φ g))
     (H : I ⥤ Sheaf c.pt.left.smallEtaleTopology AddCommGrpCat.{v + 1})
     (eH : ∀ i : I, H.obj i ≅
       (((c.π.app (op i)).left)^*[AddCommGrpCat.{v + 1}]).obj (F i))
-    (hH : ∀ {i j : I} (f : i ⟶ j), H.map f =
+    (_hH : ∀ {i j : I} (f : i ⟶ j), H.map f =
       (eH i).hom ≫
         (upperStarComp AddCommGrpCat.{v + 1} (c.π.app (op j)).left (D.map f.op).left
           (c.π.app (op i)).left
@@ -288,22 +286,22 @@ private theorem assemble_restricted_affine_system {S : Scheme.{v}}
     ∃
     (D' : Iᵒᵖ ⥤ Scheme.{v})
     (c' : Cone D')
-    (hc : IsLimit c')
-    (compact : ∀ i : Iᵒᵖ, CompactSpace (D'.obj i))
-    (quasiSeparated : ∀ i : Iᵒᵖ, QuasiSeparatedSpace (D'.obj i))
-    (affine : ∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D'.map f))
+    (_hc : IsLimit c')
+    (_compact : ∀ i : Iᵒᵖ, CompactSpace (D'.obj i))
+    (_quasiSeparated : ∀ i : Iᵒᵖ, QuasiSeparatedSpace (D'.obj i))
+    (_affine : ∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D'.map f))
     (K : ∀ i : Iᵒᵖ, CochainComplex (Sheaf (D'.obj i).smallEtaleTopology
       AddCommGrpCat.{v + 1}) ℤ)
     (ψ : ∀ {i j : Iᵒᵖ} (f : j ⟶ i),
       ((upperStar AddCommGrpCat.{v + 1} (D'.map f)).mapHomologicalComplex
         (ComplexShape.up ℤ)).obj (K i) ⟶ K j)
-    (hidentity : ∀ i : Iᵒᵖ, ψ (𝟙 i) =
+    (_hidentity : ∀ i : Iᵒᵖ, ψ (𝟙 i) =
       (NatIso.mapHomologicalComplex
         (eqToIso (congrArg (upperStar AddCommGrpCat.{v + 1}) (D'.map_id i)))
         (ComplexShape.up ℤ)).hom.app (K i) ≫
       (NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{v + 1} (D'.obj i))
         (ComplexShape.up ℤ)).hom.app (K i))
-    (hcomposition : ∀ (i j k : Iᵒᵖ) (f : j ⟶ i) (g : k ⟶ j),
+    (_hcomposition : ∀ (i j k : Iᵒᵖ) (f : j ⟶ i) (g : k ⟶ j),
       ψ (g ≫ f) =
         (NatIso.mapHomologicalComplex
           (upperStarComp AddCommGrpCat.{v + 1} (D'.map g) (D'.map f)
@@ -311,12 +309,12 @@ private theorem assemble_restricted_affine_system {S : Scheme.{v}}
           (ComplexShape.up ℤ)).hom.app (K i) ≫
         ((upperStar AddCommGrpCat.{v + 1} (D'.map g)).mapHomologicalComplex
           (ComplexShape.up ℤ)).map (ψ f) ≫ ψ g)
-    (hbelow : ∀ (i : Iᵒᵖ) (n : ℤ), n < 0 → IsZero ((K i).X n))
+    (_hbelow : ∀ (i : Iᵒᵖ) (n : ℤ), n < 0 → IsZero ((K i).X n))
     (G : (Iᵒᵖ)ᵒᵖ ⥤ CochainComplex (Sheaf c'.pt.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)
     (eG : ∀ i : Iᵒᵖ, G.obj (op i) ≅
       ((upperStar AddCommGrpCat.{v + 1} (c'.π.app i)).mapHomologicalComplex
         (ComplexShape.up ℤ)).obj (K i))
-    (hG : ∀ (i j : Iᵒᵖ) (f : j ⟶ i), G.map f.op =
+    (_hG : ∀ (i j : Iᵒᵖ) (f : j ⟶ i), G.map f.op =
       (eG i).hom ≫
         (NatIso.mapHomologicalComplex
           (upperStarComp AddCommGrpCat.{v + 1} (c'.π.app j) (D'.map f)
@@ -324,8 +322,8 @@ private theorem assemble_restricted_affine_system {S : Scheme.{v}}
         ((upperStar AddCommGrpCat.{v + 1} (c'.π.app j)).mapHomologicalComplex
           (ComplexShape.up ℤ)).map (ψ f) ≫ (eG j).inv)
     (L : Cocone G)
-    (hL : IsColimit L)
-    (hbelowL : ∀ n : ℤ, n < 0 → IsZero (L.pt.X n))
+    (_hL : IsColimit L)
+    (_hbelowL : ∀ n : ℤ, n < 0 → IsZero (L.pt.X n))
     (r : ∀ i : Iᵒᵖ,
       rawAffineRestrictedCohomology (D.obj (op i.unop)).hom p (F i.unop) U ≅
         (cohomology AddCommGrpCat.{v + 1} (D'.obj i) (p : ℤ)).obj
@@ -352,7 +350,6 @@ private theorem assemble_restricted_affine_system {S : Scheme.{v}}
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency true in
-set_option linter.unusedVariables false in
 /-- Construct the base-changed schemes and their degree-zero coefficient complexes,
 including the coefficient colimit and its restriction comparisons. -/
 theorem exists_restricted_affine_natural_coefficient_system {S : Scheme.{v}}
@@ -386,22 +383,22 @@ theorem exists_restricted_affine_natural_coefficient_system {S : Scheme.{v}}
     ∃
     (D' : Iᵒᵖ ⥤ Scheme.{v})
     (c' : Cone D')
-    (hc : IsLimit c')
-    (compact : ∀ i : Iᵒᵖ, CompactSpace (D'.obj i))
-    (quasiSeparated : ∀ i : Iᵒᵖ, QuasiSeparatedSpace (D'.obj i))
-    (affine : ∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D'.map f))
+    (_hc : IsLimit c')
+    (_compact : ∀ i : Iᵒᵖ, CompactSpace (D'.obj i))
+    (_quasiSeparated : ∀ i : Iᵒᵖ, QuasiSeparatedSpace (D'.obj i))
+    (_affine : ∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D'.map f))
     (K : ∀ i : Iᵒᵖ, CochainComplex (Sheaf (D'.obj i).smallEtaleTopology
       AddCommGrpCat.{v + 1}) ℤ)
     (ψ : ∀ {i j : Iᵒᵖ} (f : j ⟶ i),
       ((upperStar AddCommGrpCat.{v + 1} (D'.map f)).mapHomologicalComplex
         (ComplexShape.up ℤ)).obj (K i) ⟶ K j)
-    (hidentity : ∀ i : Iᵒᵖ, ψ (𝟙 i) =
+    (_hidentity : ∀ i : Iᵒᵖ, ψ (𝟙 i) =
       (NatIso.mapHomologicalComplex
         (eqToIso (congrArg (upperStar AddCommGrpCat.{v + 1}) (D'.map_id i)))
         (ComplexShape.up ℤ)).hom.app (K i) ≫
       (NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{v + 1} (D'.obj i))
         (ComplexShape.up ℤ)).hom.app (K i))
-    (hcomposition : ∀ (i j k : Iᵒᵖ) (f : j ⟶ i) (g : k ⟶ j),
+    (_hcomposition : ∀ (i j k : Iᵒᵖ) (f : j ⟶ i) (g : k ⟶ j),
       ψ (g ≫ f) =
         (NatIso.mapHomologicalComplex
           (upperStarComp AddCommGrpCat.{v + 1} (D'.map g) (D'.map f)
@@ -409,12 +406,12 @@ theorem exists_restricted_affine_natural_coefficient_system {S : Scheme.{v}}
           (ComplexShape.up ℤ)).hom.app (K i) ≫
         ((upperStar AddCommGrpCat.{v + 1} (D'.map g)).mapHomologicalComplex
           (ComplexShape.up ℤ)).map (ψ f) ≫ ψ g)
-    (hbelow : ∀ (i : Iᵒᵖ) (n : ℤ), n < 0 → IsZero ((K i).X n))
+    (_hbelow : ∀ (i : Iᵒᵖ) (n : ℤ), n < 0 → IsZero ((K i).X n))
     (G : (Iᵒᵖ)ᵒᵖ ⥤ CochainComplex (Sheaf c'.pt.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)
     (eG : ∀ i : Iᵒᵖ, G.obj (op i) ≅
       ((upperStar AddCommGrpCat.{v + 1} (c'.π.app i)).mapHomologicalComplex
         (ComplexShape.up ℤ)).obj (K i))
-    (hG : ∀ (i j : Iᵒᵖ) (f : j ⟶ i), G.map f.op =
+    (_hG : ∀ (i j : Iᵒᵖ) (f : j ⟶ i), G.map f.op =
       (eG i).hom ≫
         (NatIso.mapHomologicalComplex
           (upperStarComp AddCommGrpCat.{v + 1} (c'.π.app j) (D'.map f)
@@ -422,8 +419,8 @@ theorem exists_restricted_affine_natural_coefficient_system {S : Scheme.{v}}
         ((upperStar AddCommGrpCat.{v + 1} (c'.π.app j)).mapHomologicalComplex
           (ComplexShape.up ℤ)).map (ψ f) ≫ (eG j).inv)
     (L : Cocone G)
-    (hL : IsColimit L)
-    (hbelowL : ∀ n : ℤ, n < 0 → IsZero (L.pt.X n))
+    (_hL : IsColimit L)
+    (_hbelowL : ∀ n : ℤ, n < 0 → IsZero (L.pt.X n))
     (r : ∀ i : Iᵒᵖ,
       rawAffineRestrictedCohomology (D.obj (op i.unop)).hom p (F i.unop) U ≅
         (cohomology AddCommGrpCat.{v + 1} (D'.obj i) (p : ℤ)).obj

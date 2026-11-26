@@ -136,7 +136,6 @@ private theorem orbit_deck_cover
   dsimp only [e]
   simp
 
-set_option linter.unusedVariables false in
 /-- Membership in one descended component is exactly membership in its label orbit. -/
 theorem affine_torsor_component_image_orbit
     (R H : CommRingCat.{u}) (g : R) (ι : R →+* H)
@@ -149,9 +148,9 @@ theorem affine_torsor_component_image_orbit
     (hne : algebraMap H C (ι g) ≠ 0)
     {Y : Scheme.{u}} (p : Y ⟶ Spec R)
     (j : Y ⟶ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen g))
-    (hj : j ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen g) = p)
+    (_hj : j ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen g) = p)
     [IsFinite j] [Etale j]
-    (hEt : Etale (Scheme.Opens.ι (X := Spec (CommRingCat.of C))
+    (_hEt : Etale (Scheme.Opens.ι (X := Spec (CommRingCat.of C))
       (PrimeSpectrum.basicOpen (algebraMap H C (ι g))) ≫
       Spec.map (CommRingCat.ofHom (algebraMap H C))))
     (hrot : ∀ (Ω : Type u) [Field Ω] (a b : C →+* Ω),
@@ -169,7 +168,7 @@ theorem affine_torsor_component_image_orbit
     (δ : pullback p t ≅ ∐ fun _ : Fin d ↦ T)
     (hδ : δ.hom ≫ Sigma.desc (fun _ : Fin d ↦ 𝟙 T) = pullback.snd p t)
     (x : Fin d) (K : Subgroup G)
-    (hK : ∀ ζ, ζ ∈ K ↔
+    (_hK : ∀ ζ, ζ ∈ K ↔
       fixedPunctureDescentAction R H g ι C G ρ hρone hρmul hne
         p T t k hk d δ hδ ζ x = x) :
     let F := (⨅ ζ : K, AlgHom.equalizer (ρ ζ.val) (AlgHom.id H C) : Subalgebra H C)

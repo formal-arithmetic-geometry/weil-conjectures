@@ -23,7 +23,6 @@ compatibility with the adjunction-normalized compositor.
 set_option autoImplicit false
 set_option Elab.async false
 set_option synthInstance.maxSize 4096
-set_option linter.unusedSectionVars false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
 

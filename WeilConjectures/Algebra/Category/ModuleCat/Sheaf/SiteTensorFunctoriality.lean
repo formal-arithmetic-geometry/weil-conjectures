@@ -62,7 +62,8 @@ variable {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{m}] [HasWeakSheafify J AddCommGrpCat.{m}]
   {A : Sheaf J CommRingCat.{r}}
 
-set_option linter.unusedSectionVars false in
+omit [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{m}] [HasWeakSheafify J AddCommGrpCat.{m}] in
 /-- The map on tensor presheaves in the second variable commutes with restrictions. -/
 theorem siteTensorSecondMap_naturality
     (M : PresheafOfModules.{m} (A.obj ⋙ forget₂ CommRingCat RingCat))

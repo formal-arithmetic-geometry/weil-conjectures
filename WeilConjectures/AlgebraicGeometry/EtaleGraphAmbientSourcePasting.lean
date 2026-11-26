@@ -18,7 +18,6 @@ import all WeilConjectures.AlgebraicGeometry.OpenExchangeTower
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 universe u
 open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Functor
@@ -102,9 +101,8 @@ private theorem source_core
   have hn := E.hom.naturality (c.hom.app M)
   simp only [Functor.comp_map, Functor.comp_obj] at hn
   rw [← hn, ← J.map_comp_assoc, ← hs]
-  simp only [c, B, Functor.comp_obj, Category.assoc, ← Functor.map_comp_assoc,
-    ← Functor.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
-    Category.id_comp, Category.comp_id]
+  simp only [c, B, Functor.comp_obj, Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app,
+    CategoryTheory.Functor.map_id, Category.comp_id]
   rfl
 
 private theorem proper_tail
@@ -165,7 +163,7 @@ private theorem proper_tail
     Category.comp_id] at h₁'
   rw [← reassoc_of% h₁', hu]
   have hn := n.hom.naturality (cp.hom.app M)
-  simp only [Functor.comp_map, Functor.id_map] at hn
+  simp only [Functor.id_map] at hn
   rw [← Category.assoc, hn, Category.assoc]
   change n.hom.app _ ≫ cp.hom.app M ≫ ct.inv.app M ≫
       R((v)_*[B]).map ((rightDerivedLowerStarComp B b t).inv.app M) = _
@@ -233,7 +231,7 @@ private theorem source_grid
         Q.map (T.map (S.inv.app (Z.obj M))) ≫
         Q.map (T.map (Ji.map (cW.hom.app M))) := by
   dsimp only
-  simp only [CategoryTheory.Functor.map_id, Category.id_comp]
+  simp only [CategoryTheory.Functor.map_id]
   erw [Category.id_comp, Category.id_comp]
   let B := ModuleCat.{u + 1} A
   let J := D((e)_!open[B])
@@ -376,7 +374,7 @@ theorem etaleGraphAmbientSourcePasting
       Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.associator_hom_app, Functor.associator_inv_app,
       Functor.rightUnitor_hom_app, Functor.comp_map, Functor.map_comp,
-      Functor.comp_obj, CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id,
+      Functor.comp_obj, Category.id_comp, Category.comp_id,
       Category.assoc]
     exact hg
   · apply Iso.ext
@@ -429,7 +427,7 @@ theorem etaleGraphAmbientSourcePasting
       Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.associator_hom_app, Functor.associator_inv_app,
       Functor.rightUnitor_hom_app, Functor.comp_map, Functor.map_comp,
-      Functor.comp_obj, CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id,
+      Functor.comp_obj, Category.id_comp, Category.comp_id,
       Category.assoc]
     exact hg
 end AlgebraicGeometry.Etale

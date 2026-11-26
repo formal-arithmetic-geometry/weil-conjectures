@@ -110,7 +110,7 @@ private noncomputable def tensorPure (A : Sheaf J CommRingCat.{r})
     (((PresheafOfModules.sheafificationAdjunction (𝟙 _)).unit.app
       (M.val ⊗ N.val)).app V (x ⊗ₜ[A.obj.obj V] y))
 
-set_option linter.unusedSectionVars false in
+omit [∀ A : Sheaf J CommRingCat.{r}, HasDerivedCategory.{w} (Modules A)] in
 private theorem tensorPure_map (A : Sheaf J CommRingCat.{r})
     {M M' N N' : Modules A} (f : M ⟶ M') (g : N ⟶ N')
     (V : Cᵒᵖ) (x : M.val.obj V) (y : N.val.obj V) :
@@ -146,7 +146,7 @@ private theorem tensorPure_map (A : Sheaf J CommRingCat.{r})
     (adj.unit.naturality (f.val ⊗ₘ g.val))
   exact hh.trans (congrArg ((tensorObjIsoSheafification M' N').inv.val.app V) hη.symm)
 
-set_option linter.unusedSectionVars false in
+omit [∀ A : Sheaf J CommRingCat.{r}, HasDerivedCategory.{w} (Modules A)] in
 private theorem tensorPure_hom_ext (A : Sheaf J CommRingCat.{r})
     (M N H : Modules A)
     {f g : (monoidalCategory A).tensorObj M N ⟶ H}
@@ -163,7 +163,8 @@ private theorem tensorPure_hom_ext (A : Sheaf J CommRingCat.{r})
   intro x y
   exact h V x y
 
-set_option linter.unusedSectionVars false in
+omit [EssentiallySmall.{r} C] [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+  [∀ A : Sheaf J CommRingCat.{r}, HasDerivedCategory.{w} (Modules A)] in
 private theorem restrictSheafify_hom_section
     {A D : Sheaf J RingCat.{r}} (a : A ⟶ D)
     (P : PresheafOfModules.{r} D.obj) (U : Cᵒᵖ)
@@ -172,6 +173,8 @@ private theorem restrictSheafify_hom_section
     (cancellationRestrictSheafifyIso a P).hom.val.app U x = x := by
   exact congrArg (fun k ↦ k.hom.app U x) (cancellationRestrictSheafifyHom_toSheaf a P)
 
+omit [EssentiallySmall.{r} C] [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+  [∀ A : Sheaf J CommRingCat.{r}, HasDerivedCategory.{w} (Modules A)] in
 private theorem restrictSheafify_inv_section
     {A D : Sheaf J RingCat.{r}} (a : A ⟶ D)
     (P : PresheafOfModules.{r} D.obj) (U : Cᵒᵖ)
@@ -227,6 +230,7 @@ private theorem restrictionExtensionTensorIso_pure
   rw [he, restrictSheafify_inv_section]
   exact congrArg ((tensorObjIsoSheafification M _).inv.val.app U) hn.symm
 
+omit [∀ A : Sheaf J CommRingCat.{r}, HasDerivedCategory.{w} (Modules A)] in
 private theorem cancellationSheafIso_inv_pure
     {A D : Sheaf J CommRingCat.{r}} (a : A ⟶ D)
     (M : Modules D) (K : Modules A) (U : Cᵒᵖ)

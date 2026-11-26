@@ -18,7 +18,6 @@ that it is natural and invertible at K-flat complexes.
 @[expose] public section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option linter.style.haveILetI false
 universe d u
 open CategoryTheory CategoryTheory.Functor Opposite
 namespace WeilConjectures.IntegralHom
@@ -59,7 +58,7 @@ theorem reductionCounit_isIso
     (P : CochainComplex (completedIntegralModuleSheaves l E X D hl) ℤ)
     (hP : flat.{u, u} X (completedIntegralCommRingSheaf l E X D hl) P) :
     IsIso (reductionCounit l E X D hl n P) := by
-  haveI := integralDerivedReduction_counit_isIso l E X D hl n P hP
+  have := integralDerivedReduction_counit_isIso l E X D hl n P hP
   unfold reductionCounit
   infer_instance
 end WeilConjectures.IntegralHom

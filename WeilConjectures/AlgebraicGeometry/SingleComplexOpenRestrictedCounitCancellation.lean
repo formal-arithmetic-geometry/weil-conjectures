@@ -55,8 +55,6 @@ private theorem cancel_restriction_counit
   simp only [hn]
   rw [reassoc_of% h]
 
-set_option linter.unusedVariables false in
--- Preserve the existing unused F₀ and a bindings in the public statement.
 /-- A separate step of the open counit factorization: cancelling the restricted homotopy
 counit comparisons. -/
 theorem singleComplexOpen_restricted_counit_cancellation
@@ -68,10 +66,10 @@ theorem singleComplexOpen_restricted_counit_cancellation
       (Scheme.Modules.tensorPullback k).Additive :=
       @Classical.choose _ _ exists_derivedPullbackComposition
     let F := RingedSpace.moduleDirectImage f.toLRSHom.toShHom
-    let F₀ := RingedSpace.moduleDirectImage (f ∣_ V).toLRSHom.toShHom
+    let _F₀ := RingedSpace.moduleDirectImage (f ∣_ V).toLRSHom.toShHom
     let rY := schemeOpenRestriction Y V
     let rX := schemeOpenRestriction X (f ⁻¹ᵁ V)
-    let a := @singleComplexOpenPinnedAdjunction.{u, w} _
+    let _a := @singleComplexOpenPinnedAdjunction.{u, w} _
     let c := @singleComplexOpenPinnedComposition.{u, w} _
     let ε := @Classical.choose _ _
       (Classical.choose_spec exists_derivedPullbackComposition)

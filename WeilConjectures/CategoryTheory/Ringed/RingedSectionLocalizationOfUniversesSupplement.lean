@@ -35,7 +35,6 @@ variable [HasSheafify J CommRingCat.{u}]
 variable [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
 variable (O : Sheaf J CommRingCat.{u})
 
-set_option linter.unusedSectionVars false in
 /-- The sectionwise units form a section of the localization presheaf.
 Source: Stacks Project, algebraization.tex, Tag 0996. -/
 theorem ringedSectionLocalizationPresheaf_one_naturalOfUniverses
@@ -125,7 +124,6 @@ section
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.defeqAttrib.useBackward true
-set_option linter.unusedSectionVars false
 
 /- The additive sheafification has a canonical multiplication: multiply local representatives
 and glue. Local injectivity makes the product independent of the representatives. The ring laws
@@ -138,6 +136,7 @@ variable {P : Cᵒᵖ ⥤ CommRingCat.{u}} {A : Sheaf J AddCommGrpCat.{u}}
 variable (η : (P ⋙ forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat) ⟶ A.obj)
 variable [Presheaf.IsLocallyInjective J η] [Presheaf.IsLocallySurjective J η]
 
+omit [Presheaf.IsLocallyInjective J η] [Presheaf.IsLocallySurjective J η] in
 private lemma natural {X Y : Cᵒᵖ} (f : X ⟶ Y) (p : P.obj X) :
     η.app Y (P.map f p) = A.obj.map f (η.app X p) :=
   NatTrans.naturality_apply η f p
@@ -147,6 +146,7 @@ private lemma ext {X : Cᵒᵖ} {x y : A.obj.obj X} (S : Sieve X.unop) (hS : S �
     x = y :=
   A.isSeparated _ _ hS x y (fun _ g hg ↦ h g hg)
 
+omit [Presheaf.IsLocallyInjective J η] in
 private lemma image_ext {X : Cᵒᵖ} (a b c : A.obj.obj X) {x y : A.obj.obj X}
     (h : ∀ ⦃Y : C⦄ (g : Y ⟶ X.unop) (p q r : P.obj (op Y)),
       η.app _ p = A.obj.map g.op a → η.app _ q = A.obj.map g.op b →
@@ -158,6 +158,7 @@ private lemma image_ext {X : Cᵒᵖ} (a b c : A.obj.obj X) {x y : A.obj.obj X}
   rintro Y g ⟨⟨⟨p, hp⟩, ⟨q, hq⟩⟩, ⟨r, hr⟩⟩
   exact h g p q r hp hq hr
 
+omit [Presheaf.IsLocallySurjective J η] in
 private lemma mul_eq {X : Cᵒᵖ} {p p' q q' : P.obj X}
     (hp : η.app X p = η.app X p') (hq : η.app X q = η.app X q') :
     η.app X (p * q) = η.app X (p' * q') := by
@@ -177,6 +178,7 @@ private def mulFamily {X : Cᵒᵖ} (a b : A.obj.obj X) :
   fun Y _ h ↦ η.app _ ((show P.obj (op Y) from h.1.choose) *
     (show P.obj (op Y) from h.2.choose))
 
+omit [Presheaf.IsLocallySurjective J η] in
 private lemma mulFamily_compatible {X : Cᵒᵖ} (a b : A.obj.obj X) :
     (mulFamily η a b).Compatible := by
   intro Y₁ Y₂ Z g₁ g₂ f₁ f₂ h₁ h₂ hcomm

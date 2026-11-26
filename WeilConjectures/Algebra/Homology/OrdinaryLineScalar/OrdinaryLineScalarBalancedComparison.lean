@@ -132,7 +132,6 @@ import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionBinaryCoherenceSup
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -253,6 +252,8 @@ private theorem balancedComponent_hom (α : R ⟶ S)
     ScalarHomOrdinary.pure_map S (extensionObjectIso α p M).inv b.hom U _ _,
     extensionObjectIso_inv_scalar α p M U s x]
 
+omit [∀ R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)},
+    HasDerivedCategory.{w} (Modules.{t, a} X R)] in
 private theorem pure_smul_first (A : Sheaf (Scheme.ProEt.topology X)
     CommRingCat.{max a (t + 1)}) (M N : Modules.{t, a} X A)
     (U : X.ProEtᵒᵖ) (s : A.obj.obj U) (x : M.val.obj U) (y : N.val.obj U) :
@@ -266,6 +267,8 @@ private theorem pure_smul_first (A : Sheaf (Scheme.ProEt.topology X)
     (M.val ⊗ N.val)).app U).hom.map_smul]
   exact ((tensorObjIsoSheafification M N).inv.val.app U).hom.map_smul s _
 
+omit [∀ R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)},
+    HasDerivedCategory.{w} (Modules.{t, a} X R)] in
 private theorem pure_smul_second (A : Sheaf (Scheme.ProEt.topology X)
     CommRingCat.{max a (t + 1)}) (M N : Modules.{t, a} X A)
     (U : X.ProEtᵒᵖ) (s : A.obj.obj U) (x : M.val.obj U) (y : N.val.obj U) :

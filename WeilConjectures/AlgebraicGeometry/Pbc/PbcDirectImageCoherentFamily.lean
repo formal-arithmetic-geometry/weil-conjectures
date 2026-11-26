@@ -273,6 +273,7 @@ variable {T S : Scheme.{u}} [IsNoetherian T] [IsNoetherian S]
   [dS : Fact (∃ n : ℕ, topologicalKrullDim S ≤ (n : WithBot ℕ∞))]
   [iS : Fact (∀ t : S, IsUnit (l : S.presheaf.stalk t))]
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem ambientTensor_eq (T : Scheme.{u}) [IsNoetherian T]
@@ -338,6 +339,7 @@ private theorem ambientAssociator_raw (T : Scheme.{u}) [IsNoetherian T]
         (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω G) j T)
         (finiteInclusion_comp l Ω h k).symm)
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem ambientPushComparison_exists {T S : Scheme.{u}} [IsNoetherian T] [IsNoetherian S]
@@ -363,6 +365,7 @@ private def ambientPushComparison {T S : Scheme.{u}} [IsNoetherian T] [IsNoether
         pbcActualDerivedPush f (pbcStageDatum.{u} l Ω F) :=
   (ambientPushComparison_exists l Ω f h).choose
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 private theorem ambientPushComparison_heq {V W : Scheme.{u}}
     [IsNoetherian V] [IsNoetherian W] (f : V ⟶ W)
     {E F : Padic.FiniteCoefficientFields l Ω} (h : E ≤ F)
@@ -378,6 +381,7 @@ private abbrev ambientStageSystem (T : Scheme.{u}) [IsNoetherian T] :
   assoc h k := pbcAmbientScalarAssociator l Ω T h k
   cocycle h k j K := pbcAmbientScalarAssociator_cocycle l Ω T h k j K
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem ambientTensor_comp_eq (V : Scheme.{u}) [IsNoetherian V]

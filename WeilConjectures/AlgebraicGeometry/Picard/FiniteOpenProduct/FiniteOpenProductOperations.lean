@@ -217,9 +217,8 @@ instance rightOpen_isOpenImmersion (a : Xb ⟶ B) (b : Zb ⟶ B) (k : Z ⟶ Zb)
   unfold rightOpen product
   exact Scheme.pullback_map_isOpenImmersion a (k ≫ b) a b (𝟙 Xb) k (𝟙 B) (by simp) (by simp)
 
-set_option linter.defProp false in
 /-- Product base change for the first open, with its two projection equations. -/
-def leftSquare (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb) :
+theorem leftSquare (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb) :
     IsPullback (first (j ≫ a) b) (leftOpen a b j) j (first a b) := by
   unfold first leftOpen product
   dsimp only [id_eq]
@@ -264,9 +263,8 @@ def leftComparison (a : Xb ⟶ B) (b : Zb ⟶ B) (j : X ⟶ Xb)
           dsimp only [id_eq]
           simp) M N
 
-set_option linter.defProp false in
 /-- Product base change for the second open. -/
-def rightSquare (a : Xb ⟶ B) (b : Zb ⟶ B) (k : Z ⟶ Zb) :
+theorem rightSquare (a : Xb ⟶ B) (b : Zb ⟶ B) (k : Z ⟶ Zb) :
     IsPullback (second a (k ≫ b)) (rightOpen a b k) k (second a b) := by
   unfold second rightOpen product
   dsimp only [id_eq]

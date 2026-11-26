@@ -27,8 +27,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
--- The map family is indexed by v although its result type does not depend on v.
-set_option linter.unusedVariables false in
 -- Elaborate the dependent presentation, page-realization and comparison families together.
 /-- Construct coherent first-page lifts with filtration bounds for every input support bound.
 No stationary comparison or map on the abutment is asserted.
@@ -40,7 +38,7 @@ theorem exists_etaleCE_supported_first_page_lifts :
       (M : ∀ {X Y : Scheme.{u}} (f : Y ⟶ X)
         (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
         (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}))
-        (v : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
+        (_v : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
           (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj),
         (D X K).sequence ⟶ (D Y L).sequence)
       (e : ∀ (X : Scheme.{u})

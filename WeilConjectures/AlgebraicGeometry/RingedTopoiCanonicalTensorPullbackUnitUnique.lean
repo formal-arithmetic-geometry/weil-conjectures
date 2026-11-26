@@ -33,12 +33,11 @@ variable {C D : Type u} [Category.{u} C] [Category.{u} D]
       L.obj M = changeOfRings c (I.modules.obj M))
 open scoped ChangeOfRings
 
-set_option linter.unusedVariables false in
 /--
 Any two unit isomorphisms of a canonical ringed tensor comparison that are compatible with the
 right unitors are equal. -/
 theorem canonicalRingedTensorComparison_unit_unique
-    (hmap : ∀ {M N : (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}
+    (_hmap : ∀ {M N : (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}
       RingCat.{u})).obj R))} (f : M ⟶ N), L.map f =
       eqToHom (hobj M) ≫ changeOfRingsHom c (I.modules.obj M) (I.modules.map f) ≫
         eqToHom (hobj N).symm)

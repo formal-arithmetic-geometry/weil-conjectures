@@ -55,8 +55,6 @@ private theorem resolution_bound_of_iso
     π := P.π ≫ (ChainComplex.single₀ (ModuleCat.{v} R)).map e.inv
     quasiIso := inferInstance }, hP⟩
 
--- The names of the hypotheses bound inside hIH are kept for interface compatibility.
-set_option linter.unusedVariables false in
 /-- Let `M` be the union of a well-ordered filtration `F` whose successive quotients have
 projective resolutions of length at most `n + 1`. Assuming the statement `hIH` in length `n`,
 there is a short exact sequence `0 → K → P → M → 0` with `P` projective and `K` admitting a
@@ -64,9 +62,9 @@ projective resolution of length at most `n`. -/
 theorem exists_shortExact_projective_middle_of_wellOrderedUnion_succ
     {R : Type u} [CommRing R] (n : ℕ)
     (hIH : ∀ (M : ModuleCat.{v} R) {E : Type w} [LinearOrder E]
-      [IsWellOrder E (· < ·)] (F : E → Submodule R M) (hF : Monotone F)
-      (hcover : ∀ x : M, ∃ e : E, x ∈ F e)
-      (hquot : ∀ e : E, HasProjectiveResolutionLE
+      [IsWellOrder E (· < ·)] (F : E → Submodule R M) (_hF : Monotone F)
+      (_hcover : ∀ x : M, ∃ e : E, x ∈ F e)
+      (_hquot : ∀ e : E, HasProjectiveResolutionLE
         (ModuleCat.of R ((F e) ⧸
           ((⨆ e' : {i : E // i < e}, F e'.val).comap (F e).subtype))) n),
       HasProjectiveResolutionLE M n)

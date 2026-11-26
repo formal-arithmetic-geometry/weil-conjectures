@@ -20,8 +20,6 @@ constructed together from the recorded Koszul symmetry.
 @[expose] public section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option linter.unusedSectionVars false
-set_option linter.style.haveILetI false
 set_option backward.isDefEq.respectTransparency false
 universe d t u a b
 open CategoryTheory CategoryTheory.Limits Opposite
@@ -51,7 +49,7 @@ private theorem transpose_symm {D : Type a} [Category.{b} D]
     (f : X ⟶ H.obj (op K, Y)) :
     (S.transpose X K Y).symm f =
       S.tensor.map (Prod.mkHom f (𝟙 K)) ≫ (S.adjunction K).counit.app Y := by
-  letI := S.monoidal
+  let := S.monoidal
   change _ = (f ⊗ₘ 𝟙 K) ≫ _
   rw [MonoidalCategory.tensorHom_id]
   rfl
@@ -63,8 +61,8 @@ private theorem tensor_swap_naturality {D : Type a} [Category.{b} D]
         (β.toBraidedCategory.braiding K Y).hom =
       (β.toBraidedCategory.braiding K X).hom ≫
         S.tensor.map (Prod.mkHom f (𝟙 K)) := by
-  letI := S.monoidal
-  letI := β
+  let := S.monoidal
+  let := β
   exact BraidedCategory.braiding_naturality (𝟙 K) f
 
 private theorem transported_evaluation {D : Type a} [Category.{b} D]
@@ -140,8 +138,8 @@ private theorem evaluation_for_adj
             (DerivedCategory.Q.map q ≫ homModelMap.{t, u} Y R P I)) ≫
           (adj (DerivedCategory.Q.obj P)).counit.app (DerivedCategory.Q.obj I) := by
   classical
-  letI := S.monoidal
-  letI := β
+  let := S.monoidal
+  let := β
   intro P I S' hP hS hI q
   have hswap := hβ P S' hP hS
   let s := hswap.choose

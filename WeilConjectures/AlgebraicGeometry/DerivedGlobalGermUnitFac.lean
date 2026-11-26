@@ -172,21 +172,19 @@ private theorem derived_unit_germ_fac
       e'.inv.app (L.obj (K.X n)) ≫ γ.app (F'.obj (L.obj (K.X n)))
   simp only [Category.id_comp]
 
--- The original interface retains the square and its unused source-side functors.
-set_option linter.unusedVariables false in
 /-- The target-side derived unit and germ, precomposed with the global-sections unit,
 are the localized section-unit-and-germ composite followed by the target units
 (Stacks, Tags 01EZ, 01F8 and 08J6). -/
 theorem derivedGlobalGerm_unit_fac
     {X X' Y Y' : Scheme.{u}} (f : X ⟶ Y) (f' : X' ⟶ Y')
-    (g : Y' ⟶ Y) (g' : X' ⟶ X) (sq : CommSq g' f' f g)
+    (g : Y' ⟶ Y) (g' : X' ⟶ X) (_sq : CommSq g' f' f g)
     {Ω : Type u} [Field Ω] [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ Y')
     (M : HomotopyCategory.Plus
       (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) :
     let B := AddCommGrpCat.{u + 1}
-    let F := lowerStar B f
+    let _F := lowerStar B f
     let F' := lowerStar B f'
-    let G := upperStar B g
+    let _G := upperStar B g
     let G' := upperStar B g'
     let R := lowerStar B g'
     let H := Sheaf.Γ X.smallEtaleTopology B

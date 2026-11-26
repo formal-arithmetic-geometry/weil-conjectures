@@ -75,8 +75,6 @@ private theorem comparison_square_cancel
     _ = l ≫ o := ho
     _ = l ≫ p ≫ e := by rw [← h]
 
-set_option linter.unusedVariables false in
--- Keep the original unused local H in the statement unchanged.
 /-- Open restriction transports the normalized tensor comparison on the literal
 termwise restriction of the source complex. There is no independently chosen
 restricted representative or representing isomorphism. -/
@@ -106,7 +104,7 @@ theorem exists_singleComplexOpen_termwise_comparison
     let F₀ := forget₂ (ModuleCat.{u} ((f' ⁻¹ᵁ V').toScheme.presheaf.stalk z)) AddCommGrpCat.{u}
     let F := forget₂ (ModuleCat.{u} (X'.presheaf.stalk z.val)) AddCommGrpCat.{u}
     let H₀ := comparisonStalkCohomology (f' ⁻¹ᵁ V').toScheme z i
-    let H := comparisonStalkCohomology X' z.val i
+    let _H := comparisonStalkCohomology X' z.val i
     let θ := singleComplexRestrictedCoefficient g' K ((derivedPullback g').obj K) (𝟙 _)
       (f ⁻¹ᵁ V) (f' ⁻¹ᵁ V') j hj
     ∃ (_hP₀ : CochainComplex.IsKFlatTensor (R := (f ⁻¹ᵁ V).toScheme.sheaf) Q),

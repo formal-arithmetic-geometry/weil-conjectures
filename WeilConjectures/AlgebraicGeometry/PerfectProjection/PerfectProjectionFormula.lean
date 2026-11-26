@@ -60,9 +60,6 @@ set_option cleanup.letToHave false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option autoImplicit false
--- Avoid scanning the large representative tactic states for unused tactics.
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 set_option synthInstance.maxSize 2048
 attribute [local irreducible] HasDerivedCategory.standard
   AlgebraicGeometry.Scheme.proEtaleRingModules_hasDerivedCategory
@@ -77,12 +74,10 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 
 namespace AlgebraicGeometry.Scheme.PerfectProjection
 
-set_option linter.flexible false in
 /-- Cached existing site infrastructure for the completed-coefficient proofs. -/
 theorem completedCommRingWeakSheafify (T : Scheme.{u}) :
     HasWeakSheafify (ProEt.topology T) CommRingCat.{u + 1} := inferInstance
 
-set_option linter.flexible false in
 /-- Cached existing site infrastructure for the completed-coefficient proofs. -/
 theorem completedCommRingLimits (T : Scheme.{u}) :
     HasLimitsOfSize.{u + 1, u + 1} (Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :=
@@ -92,19 +87,15 @@ attribute [local instance 3000] completedCommRingWeakSheafify completedCommRingL
 
 variable {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
-set_option linter.flexible false in
 /-- The recorded completed ring, in its constant finite-quotient presentation. -/
 def ring (T : Scheme.{u}) := adicLisseCompletedRing T d.ideal
 
-set_option linter.flexible false in
 /-- The existing module category over this completed ring, at the mandated coefficient size. -/
 abbrev modules (T : Scheme.{u}) := proEtaleRingModules T (ring d T)
 
-set_option linter.flexible false in
 /-- The ordinary localization of module complexes, with no completion condition. -/
 abbrev derived (T : Scheme.{u}) := DerivedCategory (modules d T)
 
-set_option linter.flexible false in
 /-- The residue as an object of the ordinary derived category over the completed ring. -/
 abbrev quotient (T : Scheme.{u}) (n : ℕ) : derived d T :=
   (DerivedCategory.singleFunctor (modules d T) 0).obj
@@ -112,7 +103,6 @@ abbrev quotient (T : Scheme.{u}) (n : ℕ) : derived d T :=
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-set_option linter.flexible false in
 /-- The projectionwise constant-ring comparison is a cone, including all tower arrows. -/
 theorem coefficientCone_naturality {n m : ℕᵒᵖ} (a : n ⟶ m) :
     𝟙 ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (ring d Y)) ≫
@@ -138,7 +128,6 @@ theorem coefficientCone_naturality {n m : ℕᵒᵖ} (a : n ⟶ m) :
   rw [Category.id_comp, Category.assoc, ← c.naturality]
   rw [Functor.comp_map, ← Category.assoc, ← Functor.map_comp, limit.w]
 
-set_option linter.flexible false in
 /-- The actual inverse-limit comparison, characterized by its quotient projections. -/
 def coefficientMap :
     (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (ring d Y) ⟶
@@ -151,7 +140,6 @@ def coefficientMap :
                 (CommRingCat.of (A ⧸ d.ideal ^ (n.unop + 1)))
              naturality := fun _ _ a ↦ coefficientCone_naturality d f a } }
 
-set_option linter.flexible false in
 /-- The specified comparison is invertible for the finite quotient tower. -/
 theorem coefficientMap_isIso : IsIso (coefficientMap d f) := by
   let Q : ℕᵒᵖ ⥤ CommRingCat.{u + 1} :=
@@ -188,19 +176,16 @@ theorem coefficientMap_isIso : IsIso (coefficientMap d f) := by
     ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).map (limMap (c Y)))
     (coefficientMap d f)
 
-set_option linter.flexible false in
 /-- The canonical coefficient identification; only its invertibility is postponed. -/
 def coefficients :
     (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (ring d Y) ≅
       ring d X :=
   @asIso _ _ _ _ (coefficientMap d f) (coefficientMap_isIso d f)
 
-set_option linter.flexible false in
 /-- The ordinary derived pullback with this specific completed coefficient identification. -/
 abbrev pullback :=
   proEtaleRingDerivedPullback f (ring d Y) (ring d X) (coefficients d f)
 
-set_option linter.flexible false in
 /-- The ordinary derived direct image with the same coefficient action. -/
 abbrev directImage :=
   proEtaleRingDerivedDirectImage f (ring d Y) (ring d X) (coefficients d f)
@@ -209,13 +194,11 @@ variable (aY : ProEtaleTensorModel Y (ring d Y))
   (aX : ProEtaleTensorModel X (ring d X))
   (K : derived d X)
 
-set_option linter.flexible false in
 /-- The existing canonical projection mate, with the completed coefficients specialized. -/
 abbrev projection (P : derived d Y) :=
   proEtaleProjectionFormulaMate f (ring d Y) (ring d X)
     (coefficients d f) aY aX K P
 
-set_option linter.flexible false in
 /-- The full isomorphism locus of the specified projection morphism. -/
 def locus : ObjectProperty (derived d Y) :=
   fun P ↦ IsIso (projection d f aY aX K P)
@@ -224,7 +207,6 @@ attribute [local irreducible] coefficients SheafOfModules.monoidalClosed_kfg
   SheafOfModules.monoidalCategory
   CategoryTheory.tensorAdjunctionTotalInverse CategoryTheory.tensorAdjunctionTotal
 
-set_option linter.flexible false in
 private theorem strictPerfect_mem
     {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
     {D : Type*} [Category* D] [HasZeroObject D] [Preadditive D]
@@ -250,7 +232,6 @@ private theorem strictPerfect_mem
   exact τ.isoLocus.prop_of_retract ((show Retract (T.X n)
     (∏ᶜ fun _ : Fin (rank n) ↦ B) from ⟨i n, p n, split n⟩).map H) hfree
 
-set_option linter.flexible false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Thick closure, the finite-free base case (including rank zero), and site-perfectness. -/
@@ -344,7 +325,6 @@ theorem perfect_projection_formula :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option linter.flexible false in
 private theorem moduleUnit_existsUnique
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
@@ -390,7 +370,6 @@ private theorem moduleUnit_existsUnique
     intro r
     exact hj' U r
 
-set_option linter.flexible false in
 private theorem restrictedUnit_existsUnique
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
@@ -464,7 +443,6 @@ private theorem restrictedUnit_existsUnique
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option linter.flexible false in
 /-- The canonical module pullback comparison is fixed by the constant-section adjunct. -/
 theorem quotientPullback_existsUnique (n : ℕ) :
     ∃! e : (proEtaleRingModulePullback f (ring d Y) (ring d X)
@@ -498,12 +476,10 @@ theorem quotientPullback_existsUnique (n : ℕ) :
   exact restrictedUnit_existsUnique f (ring d Y) (ring d X) RY RX aY aX
     (coefficients d f) c hc
 
-set_option linter.flexible false in
 /-- Pull back the quotient module by its uniquely normalized module comparison. -/
 def quotientPullback (n : ℕ) :=
   (quotientPullback_existsUnique d f n).exists.choose
 
-set_option linter.flexible false in
 /-- The derived comparison is the exact termwise pullback comparison in degree zero. -/
 def quotientDerivedPullback (n : ℕ) :
     (pullback d f).obj (quotient d Y n) ≅ quotient d X n :=
@@ -512,11 +488,9 @@ def quotientDerivedPullback (n : ℕ) :
       (CompletedConstantReduction.residue Y d.ideal n) ≪≫
     (DerivedCategory.singleFunctor (modules d X) 0).mapIso (quotientPullback d f n)
 
-set_option linter.flexible false in
 /-- K_n as an A_X-object: derived tensor with the restricted quotient sheaf. -/
 abbrev reduction (n : ℕ) := aX.tensor.obj (K, quotient d X n)
 
-set_option linter.flexible false in
 /-- The reduction projection map uses the canonical quotient pullback identification. -/
 def reductionMap (n : ℕ) :
     aY.tensor.obj ((directImage d f).obj K, quotient d Y n) ⟶
@@ -537,7 +511,6 @@ structure Resolution (n : ℕ) where
     ((adicLisseForget Y).obj (ring d Y)) coefficient
   representsQuotient : DerivedCategory.Q.obj coefficient ≅ quotient d Y n
 
-set_option linter.flexible false in
 set_option cleanup.letToHave true in
 /-- Every quotient admits the representatives used in the totalization comparison. -/
 theorem resolution_exists (n : ℕ) : Nonempty (Resolution d (X := X) (Y := Y) K n) := by
@@ -587,7 +560,6 @@ theorem resolution_exists (n : ℕ) : Nonempty (Resolution d (X := X) (Y := Y) K
     asIso (DerivedCategory.Q.map q')
   exact ⟨⟨I, hI, eI, C, ⟨a, b, hbounded⟩, pkg, eq⟩⟩
 
-set_option linter.flexible false in
 /-- Every positive quotient is site-perfect and its canonical projection map is invertible. -/
 theorem reductionMap_isIso (n : ℕ) :
     SheafOfModules.IsPerfectOnSmallRingedSite (ring d Y) (quotient d Y n) ∧
@@ -628,7 +600,6 @@ theorem reductionMap_isIso (n : ℕ) :
       (aX.tensor.mapIso (Iso.prod (Iso.refl K) (quotientDerivedPullback d f n))).hom)
   infer_instance
 
-set_option linter.flexible false in
 /-- The specified pi_n as an isomorphism, with the original projection map as its hom. -/
 def reductionIso (n : ℕ) :
     aY.tensor.obj ((directImage d f).obj K, quotient d Y n) ≅
@@ -636,11 +607,9 @@ def reductionIso (n : ℕ) :
   @asIso _ _ _ _ (reductionMap d f aY aX K n)
     (reductionMap_isIso d f aY aX K n).2
 
-set_option linter.flexible false in
 /-- rho_n is the unique inverse of the canonical, resolution-independent projection map. -/
 abbrev inverse (n : ℕ) := (reductionIso d f aY aX K n).inv
 
-set_option linter.flexible false in
 /-- The actual quotient homomorphism is linear for the completed coefficient action. -/
 theorem quotientModuleMap_existsUnique (T : Scheme.{u}) (n m : ℕ) (h : n ≤ m) :
     ∃! q : CompletedConstantReduction.residue T d.ideal m ⟶
@@ -681,18 +650,15 @@ theorem quotientModuleMap_existsUnique (T : Scheme.{u}) (n m : ℕ) (h : n ≤ m
   intro x
   exact hqm' U x
 
-set_option linter.flexible false in
 /-- The quotient tower map retains its uniquely specified sectionwise quotient formula. -/
 def quotientModuleMap (T : Scheme.{u}) (n m : ℕ) (h : n ≤ m) :=
   (quotientModuleMap_existsUnique d T n m h).exists.choose
 
-set_option linter.flexible false in
 /-- The positive quotient tower map in the ordinary completed-coefficient derived category. -/
 def quotientMap (T : Scheme.{u}) (n m : ℕ) (h : n ≤ m) :
     quotient d T m ⟶ quotient d T n :=
   (DerivedCategory.singleFunctor (modules d T) 0).map (quotientModuleMap d T n m h)
 
-set_option linter.flexible false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Quotient pullback comparisons commute with every quotient tower map. -/
@@ -748,7 +714,6 @@ theorem quotientDerivedPullback_naturality (n m : ℕ) (h : n ≤ m) :
   rw [← Category.assoc, hn]
   simp only [Category.assoc, ← Functor.map_comp, hm]
 
-set_option linter.flexible false in
 private theorem inverse_square {C : Type*} [Category C]
     {S S' T T' : C} (p : S ⟶ T) (p' : S' ⟶ T')
     [IsIso p] [IsIso p'] (a : S ⟶ S') (b : T ⟶ T')
@@ -757,7 +722,6 @@ private theorem inverse_square {C : Type*} [Category C]
   simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
   rw [← h, IsIso.inv_hom_id_assoc]
 
-set_option linter.flexible false in
 private theorem projection_naturality {P Q : derived d Y} (q : P ⟶ Q) :
     aY.tensor.map (Prod.mkHom (𝟙 ((directImage d f).obj K)) q) ≫
         projection d f aY aX K Q =
@@ -771,7 +735,6 @@ private theorem projection_naturality {P Q : derived d Y} (q : P ⟶ Q) :
       (coefficients d f) aY aX).hom ≫
         (Functor.curryObjProdComp (pullback d f) (pullback d f) aX.tensor).hom)).app K).naturality q
 
-set_option linter.flexible false in
 /-- Both the forward maps and their unique inverses commute with the whole quotient tower. -/
 theorem tower_compatibility (n m : ℕ) (h : n ≤ m) :
     reductionMap d f aY aX K m ≫
@@ -803,20 +766,17 @@ variable {n : ℕ} (r : Resolution d (X := X) (Y := Y) K n)
 
 attribute [local irreducible] proEtaleOrdinaryTensorPullback
 
-set_option linter.flexible false in
 /-- The signed total chain mate, with differential d_I tensor 1 + (-1)^a 1 tensor d_F. -/
 def Resolution.total :=
   SignedProjectionResolution.totalMate f (ring d Y) (ring d X) (coefficients d f)
     r.injective r.coefficient
 
-set_option linter.flexible false in
 /-- The normalized source comparison, specified by the mixed representative squares. -/
 def Resolution.sourceModel :=
   SignedProjectionResolution.sourceModel f (ring d Y) (ring d X) (coefficients d f)
     aY K (quotient d Y n) r.injective r.isKInjective r.representsK
     r.coefficient r.representsQuotient r.package r.bounded
 
-set_option linter.flexible false in
 /-- The normalized target comparison, using exact pullback, mixed tensor and the
 K-injective right-derived unit. -/
 def Resolution.targetModel :=
@@ -836,7 +796,6 @@ end TotalizationProof
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option linter.flexible false in
 private theorem coefficientMap_comp {Z : Scheme.{u}} (g : Y ⟶ Z) :
     coefficientMap d (f ≫ g) =
       (proEtaleRingInverseImageComp f g).hom.app (ring d Z) ≫
@@ -870,7 +829,6 @@ private theorem coefficientMap_comp {Z : Scheme.{u}} (g : Y ⟶ Z) :
   simp only [Category.assoc]
   rfl
 
-set_option linter.flexible false in
 private theorem coefficients_comp {Z : Scheme.{u}} (g : Y ⟶ Z) :
     proEtaleRingCompositeCoefficients f g (ring d Z) (ring d Y) (ring d X)
       (coefficients d g) (coefficients d f) = coefficients d (f ≫ g) := by
@@ -895,7 +853,6 @@ variable {X' Y' : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {g : Y' ⟶ Y}
   (aY' : ProEtaleTensorModel Y' (ring d Y'))
   (aX' : ProEtaleTensorModel X' (ring d X'))
 
-set_option linter.flexible false in
 /-- The canonical completed coefficient identifications agree around the square. -/
 theorem coefficients_square (sq : ChosenCartesianSquare g' f' f g) : HEq
     (proEtaleRingCompositeCoefficients g' f (ring d Y) (ring d X) (ring d X')
@@ -909,15 +866,12 @@ theorem coefficients_square (sq : ChosenCartesianSquare g' f' f g) : HEq
   cases h
   rfl
 
-set_option linter.flexible false in
 /-- The actual base-change morphism, with the canonical completed coefficient coherence. -/
 def exchange :=
   proEtaleAmbientRingedExchange sq (ring d X) (ring d Y) (ring d X') (ring d Y')
     (coefficients d f) (coefficients d g) (coefficients d g') (coefficients d f')
     (coefficients_square d f sq)
 
-set_option linter.flexible false in
-set_option linter.flexible false in
 attribute [local irreducible] proEtaleProjectionFormulaMate proEtaleAmbientRingedExchange
   proEtaleCanonicalTensorComparison
 

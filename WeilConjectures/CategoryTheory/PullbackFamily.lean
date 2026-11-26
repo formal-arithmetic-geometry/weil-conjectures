@@ -377,13 +377,7 @@ theorem PullbackPseudonatural.lifted (hθ : PullbackPseudonatural c Lc θ) :
   have hp : (ι X).map ((liftedPullbackComp Lc ι hι L' κ f g).hom.app K) =
       (κ (f ≫ g)).hom.app K ≫ (Lc f.hom.left g.hom.left).hom.app ((ι Z).obj K) ≫
         (L f.hom.left).map ((κ g).inv.app K) ≫ (κ f).inv.app ((L' g).obj K) := by
-    have := congrArg (fun α ↦ α.app K)
-      (((hι X).whiskeringRight (E' Z)).map_preimage
-        (κ (f ≫ g) ≪≫ Functor.isoWhiskerLeft _ (Lc f.hom.left g.hom.left) ≪≫
-          (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight (κ g).symm _ ≪≫
-          Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ (κ f).symm ≪≫
-          (Functor.associator _ _ _).symm).hom)
-    set_option linter.unnecessarySimpa false in simpa [liftedPullbackComp] using this
+    simp [liftedPullbackComp]
   have h := hθ.hom_app f.hom.left g.hom.left ((ι Z).obj K)
   have n₁ := (θ f.hom.left).hom.naturality ((κ g).inv.app K)
   simp only [Functor.comp_map] at n₁

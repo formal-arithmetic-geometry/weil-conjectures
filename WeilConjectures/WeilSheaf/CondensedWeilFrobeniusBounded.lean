@@ -39,7 +39,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fa
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-set_option linter.style.haveILetI false in
 /-- **The condensed Frobenius preserves and reflects bounded constructible complexes.** -/
 theorem boundedConstructible_lowerStar_frobenius_mapDerivedCategory_obj_iff
     (M : _root_.DerivedCategory (CategoryTheory.Mod
@@ -54,11 +53,11 @@ theorem boundedConstructible_lowerStar_frobenius_mapDerivedCategory_obj_iff
       boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj l)
         (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) M := by
   set E := adicSheafDerivedEquivCondensedMod l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
-  haveI : (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
+  have : (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
       (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).IsEquivalence :=
     (CondensedRing.lowerStarEquivalenceOfIso (Profinite.padicAlgClRingObj l)
       (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm).isEquivalence_functor
-  haveI : PreservesFiniteColimits (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
+  have : PreservesFiniteColimits (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
       (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv) :=
     inferInstance
   let c := Functor.mapDerivedCategoryCompIsoOfIso

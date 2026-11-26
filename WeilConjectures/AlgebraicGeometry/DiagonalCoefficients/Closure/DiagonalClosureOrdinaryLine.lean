@@ -16,7 +16,6 @@ set_option Elab.async false
 set_option genSizeOf false
 set_option genInjectivity false
 set_option synthInstance.maxSize 4096
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj CategoryTheory.Functor
@@ -33,7 +32,7 @@ theorem diagonalClosure_ordinaryLine
       Mod.extendUnitHom (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl l E) X)
           (spRationalTwist X l E) ≫ q.hom.hom = closureLineMap l E X := by
   obtain ⟨f, hf⟩ := diagonalClosure_ordinaryLine_factor l E X hX
-  haveI : IsIso f := diagonalClosure_ordinaryLine_factor_isIso l E X hX f hf
+  have : IsIso f := diagonalClosure_ordinaryLine_factor_isIso l E X hX f hf
   exact ⟨asIso f, hf⟩
 
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients

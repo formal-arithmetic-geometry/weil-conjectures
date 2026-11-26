@@ -28,7 +28,6 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.SingleComplexBaseChange
 
-set_option linter.unusedVariables false in
 /-- Open transport for the literal termwise restriction of a K-flat complex.
 Unlike transport to an arbitrary representative, this only compares a complex
 with its actual restriction, and constructs its derived identification. -/
@@ -49,13 +48,13 @@ theorem exists_open_restricted_comparison_transport
     ∃ η : H ≅ derivedPullback (pullback.fst g' U.ι) ⋙ HU,
       ∀ (K : schemeDerivedCategory X)
         (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-        (hP : P.IsKFlatTensor)
+        (_hP : P.IsKFlatTensor)
         (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
         (eP : DerivedCategory.Q.obj P ≅ K),
       let Q : CochainComplex
           (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) ℤ :=
         ((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj P
-      ∃ (hQ : Q.IsKFlatTensor) (hcQ : IsIso ((counit (pullback.snd g' U.ι)).app
+      ∃ (_hQ : Q.IsKFlatTensor) (hcQ : IsIso ((counit (pullback.snd g' U.ι)).app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)))
         (eQ : DerivedCategory.Q.obj Q ≅ (derivedPullback U.ι).obj K),
       let a := F.map (comparisonIntoPullback f f' g g' sq

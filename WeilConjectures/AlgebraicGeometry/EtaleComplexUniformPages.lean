@@ -33,7 +33,6 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
 -- Elaborate the dependent presentation family and its naturality equations.
-set_option linter.unusedVariables false in
 /-- Uniform pages and natural graded comparisons, before choosing any class representatives.
 (Stacks, Tags 015J and 0EZM). -/
 theorem exists_etaleComplex_uniform_pages
@@ -104,22 +103,22 @@ theorem exists_etaleComplex_uniform_pages
       (E' : SpectralSequence AddCommGrpCat.{u + 1}
       (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1)
       (v : ∀ i : Iᵒᵖ, E.obj i ⟶ E')
-      (compatible : ∀ {i j : Iᵒᵖ} (f : i ⟶ j), E.map f ≫ v j = v i)
+      (_compatible : ∀ {i j : Iᵒᵖ} (f : i ⟶ j), E.map f ≫ v j = v i)
       (firstIso : ∀ (i : I) (r : ℕ) (s : ℤ),
       ((E.obj (op i)).page 1 (le_refl 1)).X ⟨(r : ℤ), s⟩ ≅ AddCommGrpCat.of (Sheaf.H ((F i).X s) r))
       (firstIsoLimit : ∀ (r : ℕ) (s : ℤ),
       (E'.page 1 (le_refl 1)).X ⟨(r : ℤ), s⟩ ≅ AddCommGrpCat.of (Sheaf.H (L.pt.X s) r))
-      (first_transition : ∀ (i j : I) (f : j ⟶ i) (r : ℕ) (s : ℤ),
+      (_first_transition : ∀ (i j : I) (f : j ⟶ i) (r : ℕ) (s : ℤ),
       ((E.map f.op).hom 1 (le_refl 1)).f ⟨(r : ℤ), s⟩ ≫ (firstIso j r s).hom =
         (firstIso i r s).hom ≫ AddCommGrpCat.ofHom
           ((Sheaf.H.map ((φ f).f s) r).comp (cohomologyMap (D.map f) ((F i).X s) r)))
-      (first_comparison : ∀ (i : I) (r : ℕ) (s : ℤ),
+      (_first_comparison : ∀ (i : I) (r : ℕ) (s : ℤ),
       ((v (op i)).hom 1 (le_refl 1)).f ⟨(r : ℤ), s⟩ ≫ (firstIsoLimit r s).hom =
         (firstIso i r s).hom ≫ AddCommGrpCat.ofHom
           ((Sheaf.H.map (((eG i).inv ≫ L.ι.app (op i)).f s) r).comp
             (cohomologyMap (c.π.app i) ((F i).X s) r)))
-      (negative : ∀ (i : Iᵒᵖ) (r s : ℤ), r < 0 → IsZero (((E.obj i).page 1 (le_refl 1)).X ⟨r, s⟩))
-      (negativeLimit : ∀ r s : ℤ, r < 0 → IsZero ((E'.page 1 (le_refl 1)).X ⟨r, s⟩))
+      (_negative : ∀ (i : Iᵒᵖ) (r s : ℤ), r < 0 → IsZero (((E.obj i).page 1 (le_refl 1)).X ⟨r, s⟩))
+      (_negativeLimit : ∀ r s : ℤ, r < 0 → IsZero ((E'.page 1 (le_refl 1)).X ⟨r, s⟩))
       (hFK : ∀ i : I, CochainComplex.plus
         (Sheaf (D.obj i).smallEtaleTopology AddCommGrpCat.{u + 1}) (F i))
       (hLK : CochainComplex.plus
@@ -133,7 +132,7 @@ theorem exists_etaleComplex_uniform_pages
       (∀ (i j : I) (f : j ⟶ i),
         ∃ (t : ∀ z : ℤ, (((T i).H p).step z : AddCommGrpCat.{u + 1}) ⟶
             (((T j).H p).step z : AddCommGrpCat.{u + 1}))
-          (ht : ∀ z : ℤ, t z ≫ (((T j).H p).step z).arrow =
+          (_ht : ∀ z : ℤ, t z ≫ (((T j).H p).step z).arrow =
             (((T i).H p).step z).arrow ≫
               P (D.map f) (F i) ≫
               (cohomology AddCommGrpCat.{u + 1} (D.obj j) p).map
@@ -149,7 +148,7 @@ theorem exists_etaleComplex_uniform_pages
       (∀ i : I,
         ∃ (t : ∀ z : ℤ, (((T i).H p).step z : AddCommGrpCat.{u + 1}) ⟶
             ((T'.H p).step z : AddCommGrpCat.{u + 1}))
-          (ht : ∀ z : ℤ, t z ≫ ((T'.H p).step z).arrow =
+          (_ht : ∀ z : ℤ, t z ≫ ((T'.H p).step z).arrow =
             (((T i).H p).step z).arrow ≫
               P (c.π.app i) (F i) ≫
               (cohomology AddCommGrpCat.{u + 1} c.pt p).map

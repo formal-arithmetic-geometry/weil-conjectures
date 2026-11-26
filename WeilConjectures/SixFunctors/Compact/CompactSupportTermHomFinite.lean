@@ -98,7 +98,6 @@ of the constructible exceptional compositor; SGA 4½, Th. finitude, and scalar a
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 universe u
@@ -120,7 +119,7 @@ private theorem etale_hom_finite
     (hKt : Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K)
     (hMt : Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X c d M) :
     Finite (K ⟶ M) := by
-  letI : HasInvertibleExponent Λ X := HasInvertibleExponent.of_hom aX
+  let : HasInvertibleExponent Λ X := HasInvertibleExponent.of_hom aX
   let R := ((Etale.derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj M
   have hR := Etale.boundedConstructible_derivedHom Λ aX a b c d hK hKt hM hMt
   let P := (Etale.rightDerivedLowerStar (ModuleCat.{u + 1} Λ) aX).obj R
@@ -128,26 +127,26 @@ private theorem etale_hom_finite
     Λ aX aX (𝟙 _) (by simp) R hR
   let Γ := Etale.rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))
   let H0 := DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) 0
-  letI hC : IsConstructibleSheaf
+  let hC : IsConstructibleSheaf
       ((DerivedCategory.homologyFunctor _ 0).obj P) := hP.2 0
-  letI hFG : Module.Finite Λ ((Sheaf.Γ (Spec (.of k)).smallEtaleTopology
+  let hFG : Module.Finite Λ ((Sheaf.Γ (Spec (.of k)).smallEtaleTopology
       (ModuleCat.{u + 1} Λ)).obj ((DerivedCategory.homologyFunctor _ 0).obj P)) :=
     Etale.finite_Γ_of_isConstructibleSheaf _
   let e := (Etale.homologyRightDerivedGlobalSectionsIsoOfIsSepClosed 0).app P
-  letI : Module.Finite Λ ((DerivedCategory.homologyFunctor _ 0 ⋙
+  let : Module.Finite Λ ((DerivedCategory.homologyFunctor _ 0 ⋙
       Sheaf.Γ (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj P) := by
     change Module.Finite Λ ((Sheaf.Γ (Spec (.of k)).smallEtaleTopology
       (ModuleCat.{u + 1} Λ)).obj ((DerivedCategory.homologyFunctor _ 0).obj P))
     exact hFG
-  letI hF0 : Module.Finite Λ (H0.obj (Γ.obj P)) := Module.Finite.equiv e.toLinearEquiv.symm
-  letI hfin0 : Finite (H0.obj (Γ.obj P)) := Module.finite_of_finite Λ
-  letI hfin1 : Finite ((DerivedCategory.singleFunctor _ 0).obj (ModuleCat.of Λ Λ) ⟶ Γ.obj P) :=
+  let hF0 : Module.Finite Λ (H0.obj (Γ.obj P)) := Module.Finite.equiv e.toLinearEquiv.symm
+  let hfin0 : Finite (H0.obj (Γ.obj P)) := Module.finite_of_finite Λ
+  let hfin1 : Finite ((DerivedCategory.singleFunctor _ 0).obj (ModuleCat.of Λ Λ) ⟶ Γ.obj P) :=
     Finite.of_equiv _ (DerivedCategory.homSingleRingEquiv _).symm
-  letI hfin2 : Finite (𝟙_ (Etale.DerivedCategoryModule Λ (Spec (.of k))) ⟶ P) :=
+  let hfin2 : Finite (𝟙_ (Etale.DerivedCategoryModule Λ (Spec (.of k))) ⟶ P) :=
     Γ.finite_hom_of_fullyFaithful (Etale.rightDerivedGlobalSectionsUnitIso Λ k) (Iso.refl _)
   let adj := Etale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) aX
   let eU := Etale.leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} Λ) aX
-  letI hfin3 : Finite (𝟙_ (Etale.DerivedCategoryModule Λ X) ⟶ R) :=
+  let hfin3 : Finite (𝟙_ (Etale.DerivedCategoryModule Λ X) ⟶ R) :=
     @Finite.of_equiv _ _ hfin2 ((adj.homEquiv _ _).symm.trans
       (eU.homCongr (Iso.refl _)))
   exact @Finite.of_equiv _ _ hfin3
@@ -213,16 +212,16 @@ private theorem intrinsic_hom_finite
     Finite (K ⟶ M) := by
   classical
   let A := Padic.coefficientExtensionRing l E n
-  letI : Finite A := Padic.finite_coefficientExtensionRing l E n hn
-  letI : IsAlgClosed D.k := IsAlgClosure.isAlgClosed D.k₀
-  letI : HasInvertibleExponent (ULift.{u + 1, u} A) (Spec (.of D.k)) :=
+  let : Finite A := Padic.finite_coefficientExtensionRing l E n hn
+  let : IsAlgClosed D.k := IsAlgClosure.isAlgClosed D.k₀
+  let : HasInvertibleExponent (ULift.{u + 1, u} A) (Spec (.of D.k)) :=
     coefficient_has_invertible_exponent l E D.k
       (PurCompactSupport.coefficientPrimeUnit l D hl) n hn
   let J := ObjectProperty.ι (Etale.DerivedCategory.isBoundedConstructible
     (ULift.{u + 1, u} A) X) ⋙ ProEtale.finiteCoefficientIntrinsicDerivedComparison X A
   have hJ := finiteRing_constructibleDerived_origin X A
-  letI : J.Full := hJ.1
-  letI : J.Faithful := hJ.2.1
+  let : J.Full := hJ.1
+  let : J.Faithful := hJ.2.1
   have origin (L : proEtaleDerivedCategory X A)
       (hL : intrinsicFiniteTorsionConstructible l E n hn X L) : J.essImage L := by
     obtain ⟨lo, hlo⟩ := hL.1.bddBelow
@@ -241,11 +240,11 @@ private theorem intrinsic_hom_finite
     D l hl E n hn X a b K'.obj hKb.1.1 K hK hKt eK.symm
   have hMt' := finiteCoefficient_comparison_reflects_torAmplitude
     D l hl E n hn X c d M'.obj hMb.1.1 M hM hMt eM.symm
-  letI hfin : Finite (K'.obj ⟶ M'.obj) := etale_hom_finite (ULift.{u + 1, u} A) D.k X
+  let hfin : Finite (K'.obj ⟶ M'.obj) := etale_hom_finite (ULift.{u + 1, u} A) D.k X
     (X ↘ Spec (.of D.k)) K'.obj M'.obj hKb hMb a b c d
     (Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.mp hKt')
     (Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.mp hMt')
-  letI : Finite (K' ⟶ M') := @Finite.of_equiv _ _ hfin
+  let : Finite (K' ⟶ M') := @Finite.of_equiv _ _ hfin
     ((ObjectProperty.fullyFaithfulι
       (Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1, u} A) X)).homEquiv
         (X := K') (Y := M')).symm

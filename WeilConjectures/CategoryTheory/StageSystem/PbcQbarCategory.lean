@@ -47,7 +47,7 @@ variable {C : Padic.FiniteCoefficientFields l Qbar → Type u}
   [∀ E, Category.{v} (C E)] [∀ E, Preadditive (C E)] [∀ E, Linear E.val (C E)]
   (S : StageSystem C) [IsDirectedOrder (Padic.FiniteCoefficientFields l Qbar)]
 
-set_option linter.unusedSectionVars false in
+omit [IsDirectedOrder (Padic.FiniteCoefficientFields l Qbar)] in
 include qbarClosure in
 /-- A scalar in the algebraic closure generates a finite simple extension. -/
 theorem qbarScalarField_finite (α : Qbar) :
@@ -60,6 +60,7 @@ in morphism classes. -/
 def qbarScalarField (α : Qbar) : Padic.FiniteCoefficientFields l Qbar :=
   ⟨IntermediateField.adjoin ℚ_[l] ({α} : Set Qbar), qbarScalarField_finite l Qbar α⟩
 
+omit [IsDirectedOrder (Padic.FiniteCoefficientFields l Qbar)] in
 /-- The chosen finite field contains the scalar. -/
 theorem qbarScalarField_mem (α : Qbar) : α ∈ (qbarScalarField l Qbar α).val := by
   exact IntermediateField.subset_adjoin ℚ_[l] {α} (Set.mem_singleton α)
@@ -288,7 +289,7 @@ variable (l : ℕ) [Fact l.Prime] (Qbar : Type w)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option linter.unusedSectionVars false in
+omit [IsAlgClosure ℚ_[l] Qbar] in
 /-- The fraction field of the actual lifted integer ring is the original finite
 intermediate field, fixed by its inclusion of integral elements. -/
 theorem qbarStageFieldEquiv_exists (E : Padic.FiniteCoefficientFields l Qbar) :

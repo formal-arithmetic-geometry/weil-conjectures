@@ -60,6 +60,7 @@ variable {Λ : Type} [NormedField Λ] [IsUltrametricDist Λ] {T : Type*} [Topolo
   {κ ι : Type*} [Fintype κ]
   [Fintype ι]
 
+-- `Fintype κ` is a section instance; replacing it by `Finite κ` would change the statement
 set_option linter.unusedFintypeInType false in
 omit [IsUltrametricDist Λ] in
 /-- The rank of a matrix of continuous functions is lower semicontinuous. -/

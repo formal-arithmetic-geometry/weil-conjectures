@@ -488,7 +488,6 @@ private theorem comparison_computation
   rw [← hj]
   simp [Functor.map_comp, Category.assoc]
 
-set_option linter.unusedVariables false in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The unique exact-input transformation, its two-resolution computation and its
@@ -500,8 +499,8 @@ Stacks Project, Tags 05SE, 070Y and 070K. -/
 theorem exists_unique_exactInputDerivedTransformation :
     ∃ SF : (F.rightDerivedFunctorOfQuasiIsoResolutions hA).CommShift ℤ,
     ∃ SG : (G.rightDerivedFunctorOfQuasiIsoResolutions hB).CommShift ℤ,
-      (fun [sF : (F.rightDerivedFunctorOfQuasiIsoResolutions hA).CommShift ℤ]
-        [sG : (G.rightDerivedFunctorOfQuasiIsoResolutions hB).CommShift ℤ] ↦
+      (fun [_sF : (F.rightDerivedFunctorOfQuasiIsoResolutions hA).CommShift ℤ]
+        [_sG : (G.rightDerivedFunctorOfQuasiIsoResolutions hB).CommShift ℤ] ↦
         NatTrans.CommShift (F.rightDerivedFunctorOfQuasiIsoResolutionsUnit hA) ℤ ∧
         NatTrans.CommShift (G.rightDerivedFunctorOfQuasiIsoResolutionsUnit hB) ℤ ∧
         (F.rightDerivedFunctorOfQuasiIsoResolutions hA).IsTriangulated ∧
@@ -538,7 +537,7 @@ theorem exists_unique_exactInputDerivedTransformation :
                 (E.mapDerivedCategory ⋙
                   G.rightDerivedFunctorOfQuasiIsoResolutions hB).mapTriangle.obj T,
               t.hom₁ = τ.app T.obj₁ ∧ t.hom₂ = τ.app T.obj₂ ∧ t.hom₃ = τ.app T.obj₃))
-        (sF := SF) (sG := SG) := by
+        (_sF := SF) (_sG := SG) := by
   obtain ⟨SF, hSF, hTF⟩ := derived_shifts F hA
   obtain ⟨SG, hSG, hTG⟩ := derived_shifts G hB
   let := SF

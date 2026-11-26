@@ -29,7 +29,6 @@ section encodings, constructibility, and scalar-extension compatibilities.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.all false
 set_option synthInstance.maxSize 4096
 set_option genSizeOf false
 set_option genSizeOfSpec false
@@ -164,7 +163,7 @@ theorem finiteData_exists (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) [IsNoetheria
     [Fact (∀ x : T, IsUnit (l : T.presheaf.stalk x))] : Nonempty (FiniteCondensedData l T) := by
   classical
   obtain ⟨p, hp, hprime⟩ := Nat.exists_infinite_primes (l + 1)
-  letI : Fact p.Prime := ⟨hprime⟩
+  let : Fact p.Prime := ⟨hprime⟩
   let D : FiniteFieldDatum.{u} :=
     { p := p
       a := 1
@@ -184,11 +183,12 @@ variable (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) [IsNoetherian T]
   [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
   [Fact (∀ x : T, IsUnit (l : T.presheaf.stalk x))]
 
+omit [AlgebraicGeometry.IsNoetherian T] [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)] in
 /-- Extension along the specified coefficient isomorphism is an equivalence. -/
 theorem derivedExtendIso_isEquivalence
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (e : R ≅ S) :
     (pbcDerivedExtend e.hom).IsEquivalence := by
-  letI := derivedRestrictIso_isEquivalence e
+  let := derivedRestrictIso_isEquivalence e
   exact (pbcDerivedScalarAdjunction e.hom).isEquivalence_left_of_isEquivalence_right
 
 /-- The exact equivalence from internal finite coefficient modules to continuous modules.
@@ -267,7 +267,7 @@ def finiteCondensedFunctor (A : FiniteCondensedData l T)
 instance finiteCondensedFunctor_full (A : FiniteCondensedData l T)
     (E : Padic.FiniteCoefficientFields l (PadicAlgCl l)) :
     (finiteCondensedFunctor l T A E).Full := by
-  letI : (finiteFunctor l T A.toCore E).Full :=
+  let : (finiteFunctor l T A.toCore E).Full :=
     (finiteFunctor_fullyFaithful l T A E).full
   unfold finiteCondensedFunctor
   infer_instance
@@ -275,7 +275,7 @@ instance finiteCondensedFunctor_full (A : FiniteCondensedData l T)
 instance finiteCondensedFunctor_faithful (A : FiniteCondensedData l T)
     (E : Padic.FiniteCoefficientFields l (PadicAlgCl l)) :
     (finiteCondensedFunctor l T A E).Faithful := by
-  letI : (finiteFunctor l T A.toCore E).Faithful :=
+  let : (finiteFunctor l T A.toCore E).Faithful :=
     (finiteFunctor_fullyFaithful l T A E).faithful
   unfold finiteCondensedFunctor
   infer_instance

@@ -190,7 +190,6 @@ private theorem finiteSource_of_pushSquare
     ((sheafCompose (Scheme.ProEt.topology (ProjectiveLine Y))
       (forget₂ (ModuleCat.{u + 1} A) Ab.{u + 1})).map eP.unitIso.hom)).symm
 
-set_option linter.unusedVariables false in
 /-- Finite coefficient models, endpoints and direct-image squares, without any
 assertion about a cycle class or a trace arrow. -/
 theorem diagonalUniformizer_finiteModels
@@ -201,8 +200,8 @@ theorem diagonalUniformizer_finiteModels
     (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers l E)) (n : ℕ)
     [hfinite : Finite (ULift.{u + 1} (completedResidue l E π n))]
     (hA : ((l ^ (n + 1) : ℕ) : ULift.{u + 1} (completedResidue l E π n)) = 0)
-    (hYpow : IsUnit ((l ^ (n + 1) : ℕ) : Γ(Y, ⊤)))
-    (hWpow : IsUnit ((l ^ (n + 1) : ℕ) : Γ(diagonalSurface Y, ⊤)))
+    (_hYpow : IsUnit ((l ^ (n + 1) : ℕ) : Γ(Y, ⊤)))
+    (_hWpow : IsUnit ((l ^ (n + 1) : ℕ) : Γ(diagonalSurface Y, ⊤)))
     (rootsP : FiniteRoots (ProjectiveLine Y) (l ^ (n + 1)))
     (rootsW : FiniteRoots (diagonalSurface Y) (l ^ (n + 1))) :
     ∃ (eY : FiniteRealization
@@ -214,8 +213,8 @@ theorem diagonalUniformizer_finiteModels
     (eW : FiniteRealization
       (Profinite.continuousMapRingObj.{u} (completedResidue l E π n))
       (ULift.{u + 1} (completedResidue l E π n)) (diagonalSurface Y))
-      (lineP : QuotientLineRealization l E π n n hA (ProjectiveLine Y) eP)
-      (lineW : QuotientLineRealization l E π n n hA (diagonalSurface Y) eW),
+      (_lineP : QuotientLineRealization l E π n n hA (ProjectiveLine Y) eP)
+      (_lineW : QuotientLineRealization l E π n n hA (diagonalSurface Y) eW),
     Nonempty (FiniteSourceComparison
       (Profinite.continuousMapRingObj.{u} (completedResidue l E π n))
       (ULift.{u + 1} (completedResidue l E π n)) Y eP eW) ∧

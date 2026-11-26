@@ -88,7 +88,6 @@ private theorem finite_supported_coordinate_eq
   exact coordinate_composite_eq _ _ _ _ _ _
     (finiteSupportedComparison_hom A N hA i z v hz S) hb
 
-set_option linter.unusedVariables false in
 /-- A finite class satisfying the geometric Kummer Chern equation gives the
 normalized coefficient Chern arrow. This contains no strict class, source cone,
 or presentation. It applies to any finite Cartier class with the stated equation. -/
@@ -98,7 +97,7 @@ theorem diagonalTrace_supportedFiniteBoundary_targetStep
     [IsNoetherian (diagonalSurface Y)] (hY : IsUnit (l : Γ(Y, ⊤)))
     [DiagonalTraceLocalizations l (diagonalSurface Y)]
     (c : SpTowerClasses.Chern l (ULift.{u} (Padic l)) (diagonalSurface Y))
-    (hn : c.Normalized l (ULift.{u} (Padic l)))
+    (_hn : c.Normalized l (ULift.{u} (Padic l)))
     (hc : SpTowerClasses.FiniteChernNormalization l (ULift.{u} (Padic l)) c)
     (r : Restriction l (ULift.{u} (Padic l)) (diagonalSurface Y))
     (k : Coefficients l (ULift.{u} (Padic l)) (diagonalSurface Y) c r)
@@ -112,7 +111,7 @@ theorem diagonalTrace_supportedFiniteBoundary_targetStep
     a.cartierMap l Y hY c r k n L z =
       finiteChernComposite l (diagonalSurface Y) c r k L n
         (SpTowerClasses.diagonalPic Y) := by
-  clear hn
+  clear _hn
   obtain ⟨c₁, hb, hz₁⟩ :=
     diagonalTrace_concreteClass_identification l Y hY c hc r k n a z hz
   delta SupportedFiniteBoundaryFrame.cartierMap finiteChernComposite
