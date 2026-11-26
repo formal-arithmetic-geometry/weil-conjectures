@@ -146,7 +146,7 @@ Frobenius element at `z` in `π₁(C, s)`, along any path. -/
 theorem exists_mem_stabilizer_isFrobeniusElement
     (τ : fiber (pointOfAlgebra Ω (Spec.map (CommRingCat.ofHom
       (algebraMap Γ(C, W) C.functionField)) ≫ hW.fromSpec)) ≅ fiber s) :
-    ∃ σ ∈ MulAction.stabilizer Gal(Ω/C.functionField) Q,
+    ∃ σ ∈ affineIdealStabilizer hW Q,
       IsFrobeniusElement s G z (galoisToFundamentalGroup _ τ G σ) := by
   have : IsFractionRing Γ(C, W) C.functionField :=
     functionField_isFractionRing_of_isAffineOpen C W hW
@@ -207,7 +207,8 @@ theorem exists_mem_stabilizer_isFrobeniusElement
     (integralClosure Γ(C, W) Ω ⧸ Q)
   obtain ⟨⟨σ, hσ⟩, hσF⟩ := Ideal.Quotient.stabilizerHom_surjective_integralClosure
     (K := C.functionField) m Q F⁻¹
-  refine ⟨σ, hσ, isFrobeniusElement_galoisToFundamentalGroup hW.fromSpec z G hpt σ
+  refine ⟨σ, (mem_affineIdealStabilizer hW Q σ).2 hσ,
+    isFrobeniusElement_galoisToFundamentalGroup hW.fromSpec z G hpt σ
     (F⁻¹ : _ ≃ₐ[_] _).toRingEquiv ?_ ?_ τ⟩
   · ext b
     change _ = F⁻¹ (Ideal.Quotient.mk Q b)
