@@ -25,8 +25,6 @@ transpose. All complex functors below are termwise, before derived localization.
 
 @[expose] public noncomputable section
 
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency.types false

@@ -80,10 +80,7 @@ namespace ProEtale
 Mittag-Leffler.** Let `Y` be a scheme with noetherian underlying space and `T` a tower of sheaves
 of `Λ`-modules on `Y_proét` with `Tₙ ≅ ν^* Eₙ` for finite locally constant étale sheaves `Eₙ` with
 finite stalks. Then for every `n` there is `N ≥ n` such that the image of `T_N ⟶ Tₙ` is contained
-in the image of `T_k ⟶ Tₙ` for every `k ≥ n`. Indeed `ν^*` is fully faithful, so `T` is `ν^*` of
-a tower of étale sheaves, which is Mittag-Leffler
-(`AlgebraicGeometry.Etale.mittagLeffler_imageSubobject_of_isFiniteLocallyConstantSheaf`), and `ν^*`
-is exact. -/
+in the image of `T_k ⟶ Tₙ` for every `k ≥ n`. -/
 theorem mittagLeffler_imageSubobject_of_iso_comparisonUpperStar {Y : Scheme.{u}}
     [TopologicalSpace.NoetherianSpace Y]
     (T : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))
@@ -109,11 +106,7 @@ Mittag-Leffler.** Let `K` be a field, `Y` of finite type over `K`, `f : X ⟶ Y`
 and `G` a tower of étale sheaves of `Λ`-modules on `X` such that each `Gₙ` is the restriction of
 scalars of a finite locally constant sheaf `Fₙ` of `Λ ⧸ Iₙ`-modules, where `Λ ⧸ Iₙ` is finite and
 killed by an integer invertible in `K`. Then for every `i` the tower `(Rⁱf_* ν^* Gₙ)ₙ` of sheaves
-on `Y_proét` satisfies the Mittag-Leffler condition: for every `n` there is `N ≥ n` such that the
-image of `Rⁱf_* ν^* G_N ⟶ Rⁱf_* ν^* Gₙ` is contained in the image of `Rⁱf_* ν^* G_k ⟶ Rⁱf_* ν^* Gₙ`
-for every `k ≥ n`. This is the hypothesis `hML` of
-`AlgebraicGeometry.ProEtale.isIso_lift_homology_rightDerivedLowerStar_of_mittagLeffler` for the
-tower of complexes `ν^* Gₙ[0]`. -/
+on `Y_proét` satisfies the Mittag-Leffler condition. -/
 theorem mittagLeffler_homology_rightDerivedLowerStar_of_smooth_of_isProper
     {K : Type u} [Field K] {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of K)) [LocallyOfFiniteType aY]
     [QuasiCompact aY] (f : X ⟶ Y) [Smooth f] [IsProper f]
@@ -175,10 +168,7 @@ theorem mittagLeffler_homology_rightDerivedLowerStar_of_smooth_of_isProper
 situation of
 `AlgebraicGeometry.ProEtale.mittagLeffler_homology_rightDerivedLowerStar_of_smooth_of_isProper`,
 if moreover the transition maps of `G` are epimorphisms, then for `i + 1 = j` the map
-`Rʲf_* (lim ν^* Gₙ) ⟶ lim Rʲf_* ν^* Gₙ` induced by the projections is an isomorphism: the
-Milnor sequence
-(`AlgebraicGeometry.ProEtale.isIso_lift_homology_rightDerivedLowerStar_of_mittagLeffler`)
-applies, the tower `(Rⁱf_* ν^* Gₙ)ₙ` being Mittag-Leffler. -/
+`Rʲf_* (lim ν^* Gₙ) ⟶ lim Rʲf_* ν^* Gₙ` induced by the projections is an isomorphism. -/
 theorem isIso_lift_homology_rightDerivedLowerStar_of_smooth_of_isProper
     {K : Type u} [Field K] {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of K)) [LocallyOfFiniteType aY]
     [QuasiCompact aY] (f : X ⟶ Y) [Smooth f] [IsProper f]

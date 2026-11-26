@@ -200,7 +200,6 @@ private def localizedModelIso (X : Scheme.{t}) (B : Type t) [CommRing B]
       ((ProEt.topology X).over U) (ProEt.topology Z.left) D
         (Over.mkIdTerminal (X := U))).app N
 
-set_option linter.unusedVariables false in
 /-- Finite etale-local constant models of a single module sheaf descend on a chart.
 This is a statement in the abelian hearts; it has no complex or truncation bound. -/
 theorem finiteCoefficient_slice_heart_origin
@@ -212,7 +211,7 @@ theorem finiteCoefficient_slice_heart_origin
       (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R)) (V : X.Etale)
     (hloc : let R₀ := ((sheafCompose (ProEt.topology X)
       (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R);
-      ∀ (W : X.Etale) (g : W ⟶ V),
+      ∀ (W : X.Etale) (_g : W ⟶ V),
         ∃ S : Sieve W, S ∈ X.smallEtaleTopology W ∧
           ∀ (Z : X.Etale) (f : Z ⟶ W), S f →
             ∃ N : ModuleCat.{t} B, Module.Finite B N ∧ Nonempty

@@ -11,8 +11,13 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 
 /-! # Ordinary-limit comparison with the full Roos complex
 
-Source: Stacks 08TC and 0941; the normalization of
-`pullbackTensorRoosModel_existsUnique`.
+The ordinary limit of a strict system complex is compared with the full Roos complex, as
+normalized in `pullbackTensorRoosModel_existsUnique`.
+
+## References
+
+* [Stacks, Tag 08TC](https://stacks.math.columbia.edu/tag/08TC)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +35,7 @@ attribute [local irreducible] HasDerivedCategory.standard
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/- The elementary two-coordinate identity avoids importing the tensor theory.
-Source: Mathlib mappingCocone.id_X. -/
+/- The elementary two-coordinate identity avoids importing the tensor theory. -/
 private theorem mappingCocone_hom_ext {A : Type*} [Category A] [Abelian A]
     {K L M : CochainComplex A ℤ} (φ : K ⟶ L)
     {f g : M ⟶ CochainComplex.mappingCocone φ}
@@ -167,19 +171,7 @@ private theorem towerLimitUnit_roos (W : Scheme.{u})
 
 /-- The universal ordinary-to-derived limit map is the zero-homotopy Roos lift,
 after the prescribed comparison. This assertion is about an arbitrary strict
-system complex and does not involve tensor or any flatness hypothesis.
-
-Source: Stacks 08TC, 0941; normalization of the right-derived limit comparison.
-Proof: resolve the restricted tower by a K-injective tower. On that tower the
-right-derived comparison is the inverse ordinary-limit identification, so the
-normalization of pullbackTensorRoosModel cancels it and leaves exactly the
-(limit projections, zero) lift. Naturality of the universal derived-limit map,
-the Roos comparison and this chain lift transports the equality back to the
-original tower. The Roos image of the resolution is invertible because the
-published Roos model is an isomorphism of functors and derived localization
-inverts the resolution. Finally insert the complex-composition comparison for
-restriction followed by ordinary limit.
-(blueprint: lem-coef-limit-unit-roos-normalization). -/
+system complex and does not involve tensor or any flatness hypothesis. -/
 theorem pullbackTensorLimitUnit_roos (W : Scheme.{u})
     (C : CochainComplex (coefficientSequenceModules l E W) ℤ) :
     pullbackTensorLimitUnit l E W C ≫ (pullbackTensorLimitRoos l E W C).hom =

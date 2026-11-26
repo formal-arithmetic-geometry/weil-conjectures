@@ -14,8 +14,8 @@ set_option linter.privateModule false
 
 /-! # Multiplication of unshifted positive root powers
 
-Source: coefficient-twist tensor-power conventions and orientation comparison conventions.
--/
+Multiplicativity of positive root powers of the unshifted coefficient twist, compared with the
+orientation conventions. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

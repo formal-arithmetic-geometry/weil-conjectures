@@ -93,10 +93,7 @@ variable (R) in
 /-- **Restrictions along a quasi-compact jointly surjective family detect sections.** Let
 `g k : Z k ⟶ U` be finitely many quasi-compact morphisms jointly covering `U`. A section `s` of
 a pro-étale sheaf of modules `F` on `U` whose images under the units `F ⟶ (g k)_* (g k)^* F` all
-vanish is zero: `s` vanishes on weakly étale neighbourhoods of the points of every
-`V ×_U Z k` (`AlgebraicGeometry.ProEtale.exists_mem_precoverage_map_eq_zero`), and these
-neighbourhoods form a pro-étale cover of `V`
-(`AlgebraicGeometry.QuasiCompactCover.of_comp_factor`). -/
+vanish is zero. -/
 theorem eq_zero_of_forall_unit_app_eq_zero {κ : Type*} [Finite κ] {Z : κ → Scheme.{u}}
     (g : ∀ k, Z k ⟶ U) [∀ k, QuasiCompact (g k)] (hg : ∀ x, ∃ k, x ∈ Set.range (g k))
     (F : Sheaf (Scheme.ProEt.topology U) (ModuleCat.{u + 1} R)) {V : U.ProEt}

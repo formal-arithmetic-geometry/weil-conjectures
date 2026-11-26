@@ -20,7 +20,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [IsAlgClosed k]
 
 omit [IsAlgClosed k] in
 /-- Scalar extension preserves finite-limit. The copower adjunction and split vector-space
-sequences give the finite-limit conclusion (blueprint: lem-a1-condensed-point-scalar-limits). -/
+sequences give the finite-limit conclusion. -/
 theorem condensed_point_scalar_limits :
     PreservesFiniteLimits (condensedPointScalarExtension ℓ k)  := by
   let F := condensedPointScalarExtension ℓ k

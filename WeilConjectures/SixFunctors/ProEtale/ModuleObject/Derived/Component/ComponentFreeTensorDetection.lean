@@ -10,7 +10,9 @@ public import Mathlib.CategoryTheory.Generator.Sheaf
 
 /-! # Detecting free component tensors by integral functions
 
-Source: Hemo--Richarz--Scholbach, Construction (4.1), using the relative profinite tests.
+## References
+
+* Hemo--Richarz--Scholbach, Construction (4.1), using the relative profinite tests.
 -/
 
 @[expose] public noncomputable section

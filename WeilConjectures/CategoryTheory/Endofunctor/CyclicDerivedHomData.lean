@@ -275,7 +275,6 @@ end CategoryTheory.Endofunctor.IsoAlgebra
 
 namespace CategoryTheory.Endofunctor.IsoAlgebra
 
-set_option linter.checkUnivs false in
 /-- One vertex of a finite composable diagram: a Grothendieck abelian category, its additive
 autoequivalence, and the ordinary derived categories in chosen morphism universes. The object,
 morphism, base-localization and fixed-pair-localization universes remain separate. The universe

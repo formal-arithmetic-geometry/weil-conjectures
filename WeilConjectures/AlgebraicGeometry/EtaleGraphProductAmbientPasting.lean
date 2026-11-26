@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleGraphAmbientSquarePasting
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 
 universe u
 
@@ -58,17 +57,14 @@ private theorem paste_source_and_square
   simp only [Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
-    Functor.rightUnitor_hom_app, Category.id_comp, Category.comp_id,
-    Category.assoc] at hl' hs'
-  simp only [Functor.comp_obj, Functor.id_obj, Category.id_comp, Category.comp_id,
-    Category.assoc] at hl' hs'
+    Functor.rightUnitor_hom_app, Category.id_comp] at hl' hs'
+  simp only [Functor.comp_obj, Functor.id_obj, Category.id_comp] at hl' hs'
   simp only [Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
-    Functor.leftUnitor_hom_app, Functor.comp_map, Functor.map_comp,
-    Functor.map_id, Category.id_comp, Category.comp_id, Category.assoc]
-  simp only [Functor.comp_obj, Functor.id_obj, Category.id_comp, Category.comp_id,
-    Category.assoc]
+    Functor.leftUnitor_hom_app, Functor.comp_map,
+    Category.id_comp, Category.assoc]
+  simp only [Functor.comp_obj, Functor.id_obj, Category.id_comp]
   rw [hs', ← G₀.map_comp_assoc, hl']
   simp only [Functor.map_comp, Category.assoc]
   simpa only [Functor.comp_map, Functor.comp_obj, Category.assoc] using

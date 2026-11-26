@@ -21,8 +21,7 @@ For a morphism `f : X ⟶ Y` admitting a compactification `X ⟶[i] Z ⟶[g] Y`,
 is built from the base change map of `Ψ` along `Rg_*`, the mate of the commutation
 `AlgebraicGeometry.ProEtale.leftDerivedUpperStarExtendScalarsIso` of `Ψ` with `Lg^*`, and the
 commutation of `Ψ` with the exact extension by zero `i_!`. It is an isomorphism on bounded
-constructible complexes of finite Tor amplitude (blueprint
-`theorem-grothendieck-lefschetz-trace-formula--7`): restricted back to `R`, the base change map is
+constructible complexes of finite Tor amplitude: restricted back to `R`, the base change map is
 the projection map `Rg_* M ⊗ᴸ S_Y ⟶ Rg_* (M ⊗ᴸ S_Z)` for the constant sheaf `S_Y`, an isomorphism by
 the projection formula.
 
@@ -67,7 +66,7 @@ variable {f : X ⟶ Y} (c : Compactification f)
 
 /-- The comparison map `Ψ (Rf_!(c) K) ⟶ Rf_!(c) (Ψ K)` for a compactification
 `c = (X ⟶[i] Z ⟶[g] Y)` of `f`: the base change map `Ψ (Rg_* i_! K) ⟶ Rg_* Ψ (i_! K)` followed by
-`Rg_*` of `Ψ (i_! K) ≅ i_! (Ψ K)` (blueprint `theorem-grothendieck-lefschetz-trace-formula--7`). -/
+`Rg_*` of `Ψ (i_! K) ≅ i_! (Ψ K)`. -/
 noncomputable def rightDerivedLowerShriekOfCompactificationExtendScalarsMap :
     Rf_!(c)[ModuleCat.{u + 1} R] ⋙ L(sheafExtendScalars (algebraMap R S) Y) ⟶
       L(sheafExtendScalars (algebraMap R S) X) ⋙ Rf_!(c)[ModuleCat.{u + 1} S] :=
@@ -87,7 +86,7 @@ lemma rightDerivedLowerShriekOfCompactificationExtendScalarsMap_app
   rfl
 
 /-- **Derived scalar extension commutes with `Rf_!`**, for an arbitrary compactification `c` of
-`f` (blueprint `theorem-grothendieck-lefschetz-trace-formula--7`): for a finite ring `R`, the
+`f`: for a finite ring `R`, the
 comparison map `Ψ (Rf_!(c) K) ⟶ Rf_!(c) (Ψ K)` is an isomorphism for `K` bounded constructible of
 finite Tor amplitude. -/
 theorem isIso_rightDerivedLowerShriekOfCompactificationExtendScalarsMap_app [Finite R]
@@ -113,8 +112,7 @@ noncomputable def rightDerivedLowerShriekExtendScalarsMap :
   rightDerivedLowerShriekOfCompactificationExtendScalarsMap R S
     (HasCompactification.compactification f)
 
-/-- **Derived scalar extension commutes with `Rf_!`** (blueprint
-`theorem-grothendieck-lefschetz-trace-formula--7`): for a finite ring `R`, the comparison map
+/-- **Derived scalar extension commutes with `Rf_!`**: for a finite ring `R`, the comparison map
 `Ψ (Rf_! K) ⟶ Rf_! (Ψ K)` is an isomorphism for `K` bounded constructible of finite Tor
 amplitude. -/
 theorem isIso_rightDerivedLowerShriekExtendScalarsMap_app [Finite R]

@@ -75,7 +75,6 @@ private theorem pairLeg_exists {J : Type u} [Category J]
 set_option maxHeartbeats 200000 in
 -- The transported cohomology objects require extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency true in
-set_option linter.unusedVariables false in
 /-- Canonical restricted diagrams admit the compatible exact successor segment
 (Stacks, Tags 0A50 and 09YQ). -/
 theorem etale_limit_open_mayerVietoris_maps
@@ -85,10 +84,10 @@ theorem etale_limit_open_mayerVietoris_maps
     (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})
     (φ : ∀ {i j : I} (f : i ⟶ j),
       (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)
-    (hidentity : ∀ i : I, φ (𝟙 i) =
+    (_hidentity : ∀ i : I, φ (𝟙 i) =
       (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app
         (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i))
-    (hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),
+    (_hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),
       φ (f ≫ g) =
         (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)
           (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫
@@ -96,7 +95,7 @@ theorem etale_limit_open_mayerVietoris_maps
     (G : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})
     (eG : ∀ i : I, G.obj i ≅
       (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (F i))
-    (hG : ∀ (i j : I) (f : i ⟶ j), G.map f =
+    (_hG : ∀ (i j : I) (f : i ⟶ j), G.map f =
       (eG i).hom ≫
         (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)
           (c.π.app (op i)) (c.w f.op).symm).hom.app (F i) ≫

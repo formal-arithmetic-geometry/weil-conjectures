@@ -13,7 +13,11 @@ import WeilConjectures.CategoryTheory.Projection.ProjectionInternalHom
 
 The evaluation-normalized comparison maps are imported from the common maps module.
 The formal adjunction argument reduces the formulas to the natural tensor projections.
-Source: Bhatt--Scholze Lemma 6.7.13; Stacks Tag 08JB.
+
+## References
+
+* Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.7.13
+* Stacks Project, Tag 08JB
 -/
 
 @[expose] public section
@@ -206,44 +210,7 @@ private theorem closedProjection_naturality_left {Z X : Scheme.{u}} (i : Z ⟶ X
     ← tZ.map_comp, hc, tZ.map_comp, NatTrans.comp_app]
 
 /-- The two internal sheaf-valued derived-Hom formulas, normalized by evaluation and all
-adjunction transposes, natural contravariantly in L,P and covariantly in N.
-Source: Bhatt--Scholze Lemma 6.7.13, formal internal-adjunction calculation, and Stacks
-Tag 08JB (blueprint: lem-sfb-open-closed-internal-hom-formulas).
-
-Proof plan (the eleven steps of the node):
-1. Identify module objects with sectionwise modules over B_T=p_T^*Lambda. The relative
-   tensor coequalizer imposes bm tensor n = m tensor bn. Alpha is invertible, identifying
-   supportPullback with the recorded upperStar, and the lower-star and lower-shriek
-   actions with their ringed-site actions.
-2. Pro-etale open/closed localization gives exact j!,i*,i^*,j^*, the two restriction
-   identities, mixed vanishing, and the short exact localization sequence. Hence the
-   two restrictions detect isomorphisms, without global qcqs assumptions.
-3. The open unit gives openSupportProjection. The closed unit, pullback tensor map,
-   and closed counit give closedSupportProjection. Restricting to U,Z proves both
-   are isomorphisms; the inverse of the latter has the required projection direction.
-4. Each of j!,j^*,i*,i^* preserves coproducts by its left adjunction; for i* use its
-   support right adjoint. Ringed-site module categories have these small colimits.
-5. Sum the projection comparisons over p+q=n. Naturality intertwines both differential
-   terms with the same (-1)^p sign. Signed symmetry squares to the identity, since
-   (-1)^((p+1)q)=(-1)^(pq+q) and (-1)^(p(q+1)+p)=(-1)^pq.
-6. For e=j! or i* and r=j^* or i^*, test K-flatness against acyclic complexes using
-   eC tensor Q = e(C tensor rQ), exactness, re=id, and signed symmetry. The same
-   exact-functor composite shows preservation of flat terms in both directions.
-7. Resolve both inputs by flat-term K-flat complexes. The total-complex comparisons
-   descend separately along both resolving-class localization equivalences. Naturality
-   respects chain homotopies and inverses of quasi-isomorphisms, so is unbounded.
-8. Use actual units/counits of j! adjoint to j^*, j^* adjoint to Rj*, i^* adjoint
-   to exact i*, and exact i* adjoint to RclosedSupport. Exact functors are termwise;
-   homotopy adjunction and localization preserve the triangle identities.
-9. For every derived test object T, tensor-Hom, open projection, open adjunction,
-   tensor-Hom and j^* adjoint to Rj* identify Hom(T,H_X(j!L,N)) with
-   Hom(T,Rj*H_U(L,j^*N)), naturally in T,L,N.
-10. Similarly closed projection, i* adjoint to RclosedSupport, tensor-Hom and
-    i^* adjoint to i* identify Hom(T,H_X(i*P,N)) with Hom(T,i*H_Z(P,Ri!N)).
-11. Apply these bijections to identities to construct inverse object maps. Naturality
-    in the test object proves their inverse identities; naturality in L,P,N proves
-    the equations below. Transposing evaluation gives exactly openSupportHomMap and
-    closedSupportHomMap with the inverse closed projection, fixing the normalization. -/
+adjunction transposes, natural contravariantly in L,P and covariantly in N. -/
 theorem openClosedInternalHomFormulas {Z U X : Scheme.{u}}
     (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ) :

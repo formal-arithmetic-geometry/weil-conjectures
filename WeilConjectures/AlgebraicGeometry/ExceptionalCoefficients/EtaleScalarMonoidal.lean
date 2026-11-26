@@ -31,7 +31,6 @@ set_option autoImplicit false
 set_option Elab.async false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
-set_option linter.style.haveILetI false
 universe u u₁ u₂
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open CategoryTheory.Functor
@@ -58,7 +57,7 @@ private theorem core_tensor_normalized
       rightExactTensorModelNormalization F G r μ) :
     letI := F.leftDerivedFunctorMonoidal
     ∀ K L, ((Monoidal.coreMonoidalTransport e.symm).μIso K L).inv = (μ K L).inv := by
-  letI := F.leftDerivedFunctorMonoidal
+  let := F.leftDerivedFunctorMonoidal
   obtain ⟨ν, hν, huniq⟩ := rightExact_tensorComparison_existsUnique F G e r hr
   have hn : rightExactTensorModelNormalization F G r (normalizedTensorIso F G e) := by
     intro P Q _ _ _ _
@@ -87,14 +86,14 @@ private theorem core_braiding
     ∀ K L, (WeilConjectures.finiteHomKoszulIso D (G.obj K) (G.obj L)).hom ≫
         (c.μIso L K).hom =
       (c.μIso K L).hom ≫ G.map (WeilConjectures.finiteHomKoszulIso C K L).hom := by
-  letI := F.leftDerivedFunctorMonoidal
-  letI := DerivedCategory.braidedCategory' C
-  letI := DerivedCategory.braidedCategory' D
-  letI : F.leftDerivedFunctor.Braided := F.leftDerivedFunctorBraided hF
-  letI : G.Monoidal := Monoidal.transport e.symm
-  letI : NatTrans.IsMonoidal e.symm.hom :=
+  let := F.leftDerivedFunctorMonoidal
+  let := DerivedCategory.braidedCategory' C
+  let := DerivedCategory.braidedCategory' D
+  let : F.leftDerivedFunctor.Braided := F.leftDerivedFunctorBraided hF
+  let : G.Monoidal := Monoidal.transport e.symm
+  let : NatTrans.IsMonoidal e.symm.hom :=
     Monoidal.natTransIsMonoidal_of_transport e.symm
-  letI : G.LaxBraided := LaxBraided.ofNatIso e.symm
+  let : G.LaxBraided := LaxBraided.ofNatIso e.symm
   dsimp only
   intro K L
   exact (LaxBraided.braided (F := G) K L).symm
@@ -105,10 +104,10 @@ private theorem core_unit_unique
     (hi : ∀ K, (c.μIso (𝟙_ V) K).inv ≫ (i.hom ▷ H.obj K) ≫
       (λ_ (H.obj K)).hom = H.map (λ_ K).hom) :
     c.εIso.symm = i := by
-  letI := c.toMonoidal
+  let := c.toMonoidal
   let j : tensorRight (H.obj (𝟙_ V)) ≅ 𝟭 W :=
     (tensoringRight W).mapIso c.εIso.symm ≪≫ rightUnitorNatIso W
-  letI : (tensorRight (H.obj (𝟙_ V))).Faithful := Functor.Faithful.of_iso j.symm
+  let : (tensorRight (H.obj (𝟙_ V))).Faithful := Functor.Faithful.of_iso j.symm
   apply Iso.ext
   apply (tensorRight (H.obj (𝟙_ V))).map_injective
   apply (cancel_mono (λ_ (H.obj (𝟙_ V))).hom).1
@@ -135,7 +134,7 @@ private theorem normalized_core
       (∀ K L, (WeilConjectures.finiteHomKoszulIso D (G.obj K) (G.obj L)).hom ≫
         (c.μIso L K).hom =
         (c.μIso K L).hom ≫ G.map (WeilConjectures.finiteHomKoszulIso C K L).hom) := by
-  letI := F.leftDerivedFunctorMonoidal
+  let := F.leftDerivedFunctorMonoidal
   let c := Monoidal.coreMonoidalTransport e.symm
   have hc (K L) : (c.μIso K L).inv = (μ K L).inv :=
     core_tensor_normalized F G e r hr μ hμ K L
@@ -208,11 +207,11 @@ theorem scalarExtension_coreMonoidal (A B : Type (u + 1)) [CommRing A] [CommRing
   let E := ProEtale.etaleSheafExtendScalars φ T
   let U := Sheaf.restrictScalars T.smallEtaleTopology φ
   let adj : E ⊣ U := ProEtale.etaleSheafExtendScalarsAdjunction φ T
-  letI : E.IsLeftAdjoint := adj.isLeftAdjoint
-  letI : E.PreservesFlat := extension_preservesFlat φ T
-  letI : E.PreservesKFlatQuasiIso := extension_preservesKFlatQuasiIso φ T
-  letI : E.OplaxMonoidal := adj.leftAdjointOplaxMonoidal
-  letI : E.Monoidal := composeAndSheafifyMonoidal T.smallEtaleTopology
+  let : E.IsLeftAdjoint := adj.isLeftAdjoint
+  let : E.PreservesFlat := extension_preservesFlat φ T
+  let : E.PreservesKFlatQuasiIso := extension_preservesKFlatQuasiIso φ T
+  let : E.OplaxMonoidal := adj.leftAdjointOplaxMonoidal
+  let : E.Monoidal := composeAndSheafifyMonoidal T.smallEtaleTopology
     (ModuleCat.extendRestrictScalarsAdj.{u + 1} φ)
   let S := scalarExtension φ T
   obtain ⟨e, hr⟩ := scalarExtension_derivedComparison A B φ T

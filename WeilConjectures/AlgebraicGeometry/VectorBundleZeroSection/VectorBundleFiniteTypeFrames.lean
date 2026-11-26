@@ -190,14 +190,13 @@ private theorem restrictFrame_section (S : Scheme.{u}) (d : ℕ) (F : S.Modules)
   simp only [← ConcreteCategory.comp_apply, ← F.presheaf.map_comp]
   congr 1
 
-set_option linter.unusedVariables false in
 /-- A finite-type scheme over a field has finite affine module frames for every bundle
 of constant finite rank. Their induced bundle charts have separated finite-type total
 spaces, and frames compare on affine refinements of overlaps. -/
 theorem finite_type_frames (k : Type u) [Field k] (S : Scheme.{u})
     (f : S ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f]
     (d : ℕ) (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d] :
-    ∃ (hS : IsNoetherian S),
+    ∃ (_hS : IsNoetherian S),
       IsNoetherian (scheme S d F) ∧
       IsAffineHom (π S d F) ∧ QuasiCompact (π S d F) ∧ IsSeparated (π S d F) ∧
       LocallyOfFiniteType (π S d F) ∧ SmoothOfRelativeDimension d (π S d F) ∧

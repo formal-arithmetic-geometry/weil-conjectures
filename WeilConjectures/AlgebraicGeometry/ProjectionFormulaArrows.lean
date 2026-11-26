@@ -65,7 +65,6 @@ noncomputable def tensorAdjunctionTotal
 
 omit [Abelian A] [Abelian B] [MonoidalPreadditive A] [MonoidalPreadditive B]
   [HasCoproducts A] [HasCoproducts B] [L.Additive] [V.Additive] in
-set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency false in
 attribute [local irreducible] tensorAdjunctionTotal
 

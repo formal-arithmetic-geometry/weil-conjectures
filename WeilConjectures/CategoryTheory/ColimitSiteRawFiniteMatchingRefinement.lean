@@ -39,7 +39,6 @@ private theorem raw_arrow_transport {C : Type u} [Category.{u} C]
   obtain ⟨hx, hy, hh⟩ := (Arrow.mk_eq_mk_iff a b).mp h
   simpa using hh.symm
 
-set_option linter.unusedVariables false in
 /-- Stage sections `s` on a finite stage cover of `W` whose images in the colimit of the
 Kan-extended stage presheaves `B` form a compatible family are, at some later stage `t'`,
 represented by a compatible family `s'` of stage sections with the same images.
@@ -50,7 +49,7 @@ theorem colimit_site_raw_finite_matching_refinement
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))
     [∀ j, (P j).HasPullbacks]
-    (hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X),
+    (_hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X),
       R ∈ P j X → R.map (F.map a).toFunctor ∈ P k ((F.map a).toFunctor.obj X))
     (hpullback : ∀ (j k : J) (a : j ⟶ k) (X Y Z : F.obj j) (R : Presieve X),
       R ∈ P j X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →
@@ -119,7 +118,7 @@ theorem colimit_site_raw_finite_matching_refinement
         ((colimit.ι B t).app (op ((V.ι.app t.right).toFunctor.obj (Y p)))
           ((β t).app (op (Y p)) (s p))) := by
   classical
-  clear hcover
+  clear _hcover
   let A : ∀ v : Under i, (F.obj v.right)ᵒᵖ ⥤ Type u := fun v ↦
     ((sheafPullback (F.map v.hom).toFunctor (Type u)
       (P i).toGrothendieck (P v.right).toGrothendieck).obj G).obj

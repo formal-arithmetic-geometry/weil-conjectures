@@ -23,7 +23,6 @@ and Cohomology on Sites, Tag 07A4.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.checkUnivs false
 set_option linter.privateModule false
 set_option genInjectivity false
 set_option genSizeOf false

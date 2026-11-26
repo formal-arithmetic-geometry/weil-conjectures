@@ -119,7 +119,7 @@ noncomputable def supportClosedDerivedPlus :
   letI := preservesFiniteColimits_lowerStar_of_isCompl (R := Λ) s j hPair
   (lowerStar (ModuleCat.{u + 1} Λ) s).mapDerivedCategoryPlus
 
-set_option linter.unusedSectionVars false in
+omit [Finite Λ] in
 /-- A bounded below complex of injectives is K-injective. -/
 theorem supportModelKInjective (I : SupportComplex Λ X)
     (hI : IsSupportInjectiveModel Λ I) : I.IsKInjective := by
@@ -128,8 +128,8 @@ theorem supportModelKInjective (I : SupportComplex Λ X)
   have := hInj
   exact CochainComplex.isKInjective_of_injective I n
 
+omit [Finite Λ] hqc in
 include hj in
-set_option linter.unusedSectionVars false in
 /-- Open restriction of a bounded below injective model is K-injective. -/
 theorem supportOpenModelKInjective (I : SupportComplex Λ X)
     (hI : IsSupportInjectiveModel Λ I) :
@@ -196,7 +196,7 @@ private noncomputable def supportKernelIsKernel
     ((evaluation _ _).obj M)
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit
 
-set_option linter.unusedSectionVars false in
+omit [Finite Λ] hs hqc in
 private theorem supportMap_unit_zero
     (hPair : IsCompl (Set.range s) (Set.range j))
     (N : Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} Λ))

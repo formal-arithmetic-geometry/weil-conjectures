@@ -157,16 +157,15 @@ private theorem compact_unit
     singleFunctorObjUnitIso (ModuleCat.{u + 1} C) X
   exact compact_of_iso e' h
 
-set_option linter.unusedVariables false in
 -- The statement retains the paper's coefficient hypotheses, although finite torsion suffices.
 /-- A finite locally constant flat module sheaf, extended by zero from a locally closed
 stratum and then pushed forward to the ambient finite-type scheme, is compact in the
 unbounded ordinary étale derived category. No separatedness of `X` is assumed. -/
 theorem isCompactObject_lowerStar_openImmersionLowerShriek_of_isFiniteLocallyConstantSheaf
     {k : Type u} [Field k] [IsAlgClosed k]
-    (ell : ℕ) (hell : Nat.Prime ell) (hellk : IsUnit (ell : k))
+    (ell : ℕ) (_hell : Nat.Prime ell) (_hellk : IsUnit (ell : k))
     {C : Type (u + 1)} [CommRing C] [Finite C]
-    (hC : ∃ r : ℕ, (ell : C) ^ r = 0)
+    (_hC : ∃ r : ℕ, (ell : C) ^ r = 0)
     {X Z V : Scheme.{u}}
     (g : Z ⟶ X) [IsClosedImmersion g]
     (j : V ⟶ Z) [IsOpenImmersion j]

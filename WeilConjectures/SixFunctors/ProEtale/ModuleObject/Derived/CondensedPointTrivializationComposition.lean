@@ -9,9 +9,6 @@ public import WeilConjectures.WeilObject.Sheaf.Stalk
 import WeilConjectures.WeilObject.Sheaf.StalkFrobenius
 
 /-! # Composition of the specified separably closed point trivializations
-
-Source: the composition and source-reparametrization steps of the local Frobenius argument.
-(blueprint: lem-wf-condensed-point-trivialization-composition).
 -/
 
 @[expose] public noncomputable section
@@ -22,15 +19,7 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- The specified trivializations at a separably closed point respect composition.
-
-Source: pullback-composition paragraph of the current blueprint coefficient construction.
-Proof: on a module pulled back from the condensed point, each trivialization is the
-specified comparison from that point. Their composition equation is the already proved
-pseudonaturality equation for those comparisons. The pullback from the condensed point
-is essentially surjective, so the natural endomorphism obtained by dividing the two
-comparisons is the identity on every module.
-(blueprint: lem-wf-condensed-point-trivialization-composition). -/
+/-- The specified trivializations at a separably closed point respect composition. -/
 theorem sepClosedPointTrivialization_comp
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {Ω : Type u} [Field Ω] [IsSepClosed Ω]

@@ -315,12 +315,7 @@ noncomputable abbrev leftDerivedSheafExtendScalarsCompUpperStarIso :
 
 /-- **Extension of scalars commutes with `Rg_*`.** For a finite free algebra `S` over a
 Noetherian ring `R`, the base change map `L(S ⊗_R -) (Rg_* M) ⟶ Rg_* (L(S ⊗_R -) M)`, the mate of
-`AlgebraicGeometry.ProEtale.leftDerivedSheafExtendScalarsCompUpperStarIso`, is an isomorphism.
-
-Restriction of scalars `U` is conservative, and for a basis `b` of `S` the maps `M ⟶ U N M`
-given by the unit and the multiplications by the `b i` exhibit `U N M` as a sum of copies of
-`M`; the base change map commutes with these multiplications, both sides being `S`-linear, so
-`CategoryTheory.Adjunction.isIso_mateEquiv_app_of_isIso_biproductDesc` applies. -/
+`AlgebraicGeometry.ProEtale.leftDerivedSheafExtendScalarsCompUpperStarIso`, is an isomorphism. -/
 theorem isIso_mateEquiv_leftDerivedSheafExtendScalarsCompUpperStarIso_app
     (M : DerivedCategory (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} R))) :
     IsIso ((mateEquiv (derivedUpperStarLowerStarAdjunction _ g)
@@ -395,9 +390,7 @@ end OpenImmersion
 `S`.** Let `S` be a finite free algebra over a Noetherian ring `R`, both Noetherian, and let
 `c = (X ⟶[i] Z ⟶[g] Y)` be a compactification of `f : X ⟶ Y`. If the projection map
 `(Rf_! K) ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)` over `R` is an isomorphism, so is the one over `S` at the
-scalar extensions `(L(S ⊗_R -) K, L(S ⊗_R -) L)`: on the open part this is the commutation of
-extension of scalars with `i_!`, and on the proper part it is
-`AlgebraicGeometry.ProEtale.isIso_rightDerivedLowerStarProjectionMap_app_app_extendScalars`. -/
+scalar extensions `(L(S ⊗_R -) K, L(S ⊗_R -) L)`. -/
 theorem hasProjectionFormulaOfCompactification_extendScalars {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f)
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)))

@@ -13,7 +13,8 @@ set_option linter.privateModule false
 
 /-! # Composition of the normalized coefficient identifications
 
-Source: blueprint latest, det-prop-scalar-six-pullback.proof.md, (1)--(2).
+This file normalizes the transported coefficient identifications along a composite of two
+immersions.
 -/
 
 @[expose] public noncomputable section

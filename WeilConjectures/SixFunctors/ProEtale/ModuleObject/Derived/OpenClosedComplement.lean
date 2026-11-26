@@ -19,7 +19,6 @@ For an open immersion `j : X ⟶ Z` of `S`-schemes, the closed complement of `j`
 of module objects over a commutative condensed ring `Λ`, the extension by zero `j_!` along an open
 immersion is fully faithful (`fullyFaithfulBoundedConstructibleOpenImmersionLowerShriek`), so the
 unit of `j_! ⊣ Lj^*` is an isomorphism.
-
 -/
 
 @[expose] public section

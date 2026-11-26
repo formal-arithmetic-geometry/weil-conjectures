@@ -14,8 +14,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Amb
 Let `Λ` be a finite ring whose exponent is invertible on a finite-type `k`-scheme `Y`, and let
 `c = (X ⟶[j] X̄ ⟶[p] Y)` be a compactification of `f : X ⟶ Y`. Then the pro-étale
 compact-support functor `Rf_!(c) = Rp_* ∘ j_!` maps `Dctf(X, Λ)` into `Dctf(Y, Λ)`
-(`AlgebraicGeometry.ProEtale.constructibleFiniteTor_rightDerivedLowerShriekOfCompactification`,
-part of blueprint `proposition-construction-independence-rf-shriek`). On `ν^* G` it is
+(`AlgebraicGeometry.ProEtale.constructibleFiniteTor_rightDerivedLowerShriekOfCompactification`).
+On `ν^* G` it is
 `ν^* Rf_!^{ét}(c) G`
 (`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationWitnessIso`), and the étale
 `Rf_!^{ét}(c)` preserves `Dctf`
@@ -62,7 +62,7 @@ theorem Etale.constructibleFiniteTor_rightDerivedLowerShriekOfCompactification {
 
 namespace ProEtale
 
-/-- Part of blueprint `proposition-construction-independence-rf-shriek`: the pro-étale
+/-- The pro-étale
 compact-support functor `Rf_!(c) = Rp_* ∘ j_!` attached to an arbitrary compactification `c` of `f`,
 over a finite-type `k`-scheme `Y`, maps `Dctf(X, Λ)` into `Dctf(Y, Λ)` for a finite `Λ` whose
 exponent is invertible on `Y`. -/

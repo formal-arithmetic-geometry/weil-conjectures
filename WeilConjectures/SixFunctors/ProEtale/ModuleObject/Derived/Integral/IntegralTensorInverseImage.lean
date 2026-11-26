@@ -158,9 +158,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 /-!
 # Integral inverse image and uncompleted tensor
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-int-tensor/_section.md;
-Stacks Project, Tags 09BP, 09BM and 09AA (blueprint: lemma-inverse-image-tensor-product).
-
 The completed inverse-image comparison uses the existing intrinsic completeness
 predicate from IntegralModelsEmbedded, applied to the ordinary inverse image.
 The principal Koszul completion criterion identifies this with invertibility of
@@ -168,6 +165,10 @@ the canonical quotient completion unit. Uniformizer powers and ell powers are
 cofinal. The explicit ell-power cone reductions below remain available as models
 of these reductions, with their canonical inclusions and transition squares.
 No arbitrary comparison morphism or completion object is selected.
+
+## References
+
+- Stacks Project, Tags `0999`, `099M`, `099N`, `09AA`, `09BM`, `09BP`, `0A0E`.
 -/
 
 @[expose] public noncomputable section
@@ -195,26 +196,15 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField �
 /-- A concrete model of the uncompleted derived reduction of a complex P.
 The two-term flat resolution [O_E --ell^(n+1)--> O_E] of O_E/ell^(n+1)
 shows that this cone represents P tensor^L O_E/ell^(n+1), without any flatness
-assumption on P. Source: Stacks 099M and 099N (blueprint: lemma-inverse-image-tensor-product). -/
+assumption on P. -/
 abbrev integralFiniteComplex (X : Scheme.{u})
     (P : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X)) ℤ) (n : ℕ) :=
   CochainComplex.mappingCone (ℓ ^ (n + 1) • 𝟙 P)
 
 /-- The canonical completed inverse-image comparison is invertible when the ordinary
-inverse image is derived complete. We use the existing intrinsic completeness predicate
-on the equivalent small ringed site, with the actual first residue map. The witness
-is a generator of the maximal ideal, not a comparison morphism or a completion object.
-
-This is the same condition as the canonical ell-power cone triangle: exact inverse
-image carries the two-term scalar resolutions, their quotient units and transitions
-to those on the target. Uniformizer powers and ell powers are cofinal. The principal
-Koszul completion criterion identifies intrinsic completeness with invertibility of
-that quotient unit; its Roos triangle has the prescribed cone-inclusion product leg.
-Exact restriction of scalars preserves products and triangles and detects isomorphisms,
-so this is also the completed inverse image after restriction to constant O_E.
-Source: Stacks 099M, 099N(5), 0999 and 0A0E; integral models, clause (2)
-(blueprint: lemma-inverse-image-tensor-product). -/
+inverse image is derived complete, using the intrinsic
+completeness predicate and the actual first residue map. -/
 def IntegralPullbackIsCompleted {X Y : Scheme.{u}} (g : X ⟶ Y)
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) Y))) : Prop :=
@@ -225,23 +215,6 @@ def IntegralPullbackIsCompleted {X Y : Scheme.{u}} (g : X ⟶ Y)
 
 /-- Integral inverse image, its completed comparison, uncompleted tensor, extension by
 zero for a quasi-compact open immersion, and closed direct image preserve Dbc.
-
-Source: blueprint main-20261015, lemma-inverse-image-tensor-product; Stacks 09BP, 09BM and 09AA
-(blueprint: lemma-inverse-image-tensor-product).
-
-Proof:
-1. The existing exact derived inverse-image preservation theorem gives bounded
-constructibility. The coefficient-predicate comparison identifies this with finite
-constant-model constructibility. Clause (2) of integral_models then gives intrinsic
-derived completeness of the image, for a generator of the maximal ideal. The
-canonical completion criterion in IntegralPullbackIsCompleted identifies this with
-the completed inverse image, retaining the canonical quotient unit.
-2. Apply the existing integral instance of boundedConstructible_tensor_closure,
-which proves closure for the ambient uncompleted derived tensor by finite devissage.
-3. Apply the exact open-extension preservation theorem.
-4. For a closed immersion, condensed open-closed recollement supplies exactness.
-The exact derived homology comparisons and constructible closed-image theorem give
-bounded constructibility. Identify the exact and right-derived presentations.
 -/
 theorem integralTensorInverseImage (k : Type u) [Field k]
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

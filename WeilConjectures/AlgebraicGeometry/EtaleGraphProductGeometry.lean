@@ -17,7 +17,6 @@ public import WeilConjectures.AlgebraicGeometry.EtalePairwiseProductGraphNormali
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 set_option backward.isDefEq.respectTransparency false
 
 universe u
@@ -73,17 +72,16 @@ def productE :
 /-- Product k is open (Stacks, Tag 0F7J). -/
 instance productK_open : IsOpenImmersion (d₁.productK d₂) := by
   apply MorphismProperty.pullbackMap (P := @IsOpenImmersion) inferInstance inferInstance <;>
-    simp only [Category.assoc, d₁.square.w_assoc, d₂.square.w_assoc]
+    simp only [d₁.square.w_assoc, d₂.square.w_assoc]
 
 /-- Product p is proper (Stacks, Tag 0F7J). -/
 instance productP_proper : IsProper (d₁.productP d₂) := by
-  apply MorphismProperty.pullbackMap (P := @IsProper) inferInstance inferInstance <;>
-    simp only [Category.assoc, d₁.square.w_assoc, d₂.square.w_assoc]
+  apply MorphismProperty.pullbackMap (P := @IsProper) inferInstance inferInstance <;> rfl
 
 /-- Product r is proper (Stacks, Tag 0F7J). -/
 instance productR_proper : IsProper (d₁.productR d₂) := by
   apply MorphismProperty.pullbackMap (P := @IsProper) inferInstance inferInstance <;>
-    simp only [Category.assoc, d₁.square.w_assoc, d₂.square.w_assoc]
+    simp only [d₁.square.w_assoc, d₂.square.w_assoc]
 
 /-- Product e is open (Stacks, Tag 0F7J). -/
 instance productE_open : IsOpenImmersion (d₁.productE d₂) := by
@@ -112,10 +110,8 @@ theorem productE_productK :
       compactification, EtaleGraphPresentation.ofCompactification, pullback.mapDesc,
         pullback.congrHom_hom, pullback.map]
   apply pullback.hom_ext <;>
-    simp only [pullback.congrHom_hom, pullback.mapDesc, pullback.map,
-      Category.assoc, Category.comp_id, Category.id_comp,
-      pullback.lift_fst, pullback.lift_snd,
-      pullback.lift_fst_assoc, pullback.lift_snd_assoc]
+    simp only [Category.assoc, pullback.lift_fst, pullback.lift_snd, pullback.lift_fst_assoc,
+      pullback.lift_snd_assoc]
 
 /-- The product of p followed by q is the structural map of the product H (Stacks, Tag 0F7J). -/
 theorem productP_productQ :
@@ -123,9 +119,7 @@ theorem productP_productQ :
   dsimp only [productP, productG, productH, EtaleGraphPresentation.PairwiseProduct.presentation,
     EtaleGraphPresentation.PairwiseProduct.p, compositePresentation, sourcePresentation,
     compactification, EtaleGraphPresentation.ofCompactification]
-  simp only [Category.assoc, pullback.map, pullback.mapDesc, pullback.congrHom_hom,
-      pullback.lift_fst, pullback.lift_snd,
-      pullback.lift_fst_assoc, pullback.lift_snd_assoc, Category.comp_id, Category.id_comp]
+  simp only [Category.assoc, pullback.map, pullback.lift_fst_assoc]
 
 /-- The supplied square identifies the two structural maps to Z (Stacks, Tag 0F7J). -/
 theorem productR_to_base (d : EtaleGraphInterchangeDiagram f g) :
@@ -174,8 +168,7 @@ instance productBV_proper : IsProper (d₁.productBV d₂) := by
       EtaleGraphPresentation.PairwiseProduct.presentation]
     apply pullback.hom_ext <;>
       simp only [pullback.congrHom_hom, pullback.mapDesc, pullback.map, Category.assoc,
-        pullback.lift_fst, pullback.lift_snd,
-      pullback.lift_fst_assoc, pullback.lift_snd_assoc, Category.comp_id]
+        pullback.lift_fst, pullback.lift_snd, Category.comp_id]
   rw [he]
   infer_instance
 
@@ -189,8 +182,7 @@ instance productBW_proper : IsProper (d₁.productBW d₂) := by
       EtaleGraphPresentation.PairwiseProduct.presentation]
     apply pullback.hom_ext <;>
       simp only [pullback.congrHom_hom, pullback.mapDesc, pullback.map, Category.assoc,
-        pullback.lift_fst, pullback.lift_snd,
-      pullback.lift_fst_assoc, pullback.lift_snd_assoc, Category.comp_id]
+        pullback.lift_fst, pullback.lift_snd, Category.comp_id]
   rw [he]
   infer_instance
 
@@ -202,10 +194,7 @@ theorem productA_productBW :
       EtaleGraphPresentation.PairwiseProduct.a, pullback.mapDesc, pullback.congrHom_hom,
         pullback.map]
   apply pullback.hom_ext <;>
-    simp only [pullback.congrHom_hom, pullback.mapDesc, pullback.map,
-      Category.assoc, Category.comp_id, Category.id_comp,
-      pullback.lift_fst, pullback.lift_snd,
-      pullback.lift_fst_assoc, pullback.lift_snd_assoc]
+    simp only [Category.assoc, pullback.lift_fst, pullback.lift_snd]
 
 /-- Equality over Y gives the diagonal of g after applying the two r maps (Stacks, Tag 0F7J). -/
 theorem productBV_productR :
@@ -216,12 +205,10 @@ theorem productBV_productR :
     EtaleGraphPresentation.PairwiseProduct.a, EtaleGraphPresentation.PairwiseProduct.p,
     sourcePresentation, compactification, EtaleGraphPresentation.ofCompactification]
   apply pullback.hom_ext
-  · simp only [pullback.map, Category.assoc, pullback.lift_fst, pullback.lift_snd,
-      pullback.lift_fst_assoc, pullback.lift_snd_assoc,
-      Category.comp_id, Category.id_comp]
-  · simp only [pullback.map, Category.assoc, pullback.lift_fst, pullback.lift_snd,
-      pullback.lift_fst_assoc, pullback.lift_snd_assoc,
-      Category.comp_id, Category.id_comp]
+  · simp only [pullback.map, Category.assoc, pullback.lift_fst, pullback.lift_fst_assoc,
+      Category.comp_id]
+  · simp only [pullback.map, Category.assoc, pullback.lift_snd, pullback.lift_snd_assoc,
+      Category.comp_id]
     exact (pullback.condition (f := d₁.r) (g := d₂.r)).symm
 
 /-- The square comparing the two products of e commutes (Stacks, Tag 0F7J). -/
@@ -233,8 +220,7 @@ theorem productB_square :
     compactification, EtaleGraphPresentation.ofCompactification]
   constructor
   apply pullback.hom_ext <;>
-    simp only [pullback.map, Category.assoc, Category.comp_id, Category.id_comp,
-      pullback.lift_fst, pullback.lift_snd,
+    simp only [pullback.map, Category.assoc, pullback.lift_fst, pullback.lift_snd,
       pullback.lift_fst_assoc, pullback.lift_snd_assoc]
 
 end EtaleGraphInterchangeDiagram

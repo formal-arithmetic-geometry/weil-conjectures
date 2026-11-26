@@ -676,7 +676,6 @@ private noncomputable def constructedDerivedComparison
   refine ⟨Γ, hn, fun J _ I _ ρ _ => ?_⟩
   exact comparison_representative R P K E θ Γ J I ρ (hn _)
 
-set_option linter.unusedVariables false in
 /-- Unbounded proper/open interchange, including its representative, adjunction, pasting,
 identity and arbitrary base-change normalizations. -/
 theorem unboundedProperOpenInterchange (A : Type (u + 1)) [CommRing A] [Finite A] :
@@ -684,14 +683,14 @@ theorem unboundedProperOpenInterchange (A : Type (u + 1)) [CommRing A] [Finite A
         [IsNoetherian U] [IsNoetherian V] [IsNoetherian W] [IsNoetherian Z]
         (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
         [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]
-        (sq : CommSq k r p i),
+        (_sq : CommSq k r p i),
         (r)_*[ModuleCat.{u + 1} A] ⋙ (i)_!open[ModuleCat.{u + 1} A] ≅
           (k)_!open[ModuleCat.{u + 1} A] ⋙ (p)_*[ModuleCat.{u + 1} A])
       (Γ : ∀ {U V W Z : Scheme.{u}}
         [IsNoetherian U] [IsNoetherian V] [IsNoetherian W] [IsNoetherian Z]
         (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
         [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]
-        (sq : CommSq k r p i),
+        (_sq : CommSq k r p i),
         R((r)_*[ModuleCat.{u + 1} A]) ⋙ D((i)_!open[ModuleCat.{u + 1} A]) ≅
           D((k)_!open[ModuleCat.{u + 1} A]) ⋙ R((p)_*[ModuleCat.{u + 1} A])),
       (∀ {U V W Z : Scheme.{u}}

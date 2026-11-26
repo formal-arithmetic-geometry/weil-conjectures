@@ -195,7 +195,6 @@ instance pbcRestrict_additive : (pbcRestrict φ).Additive := by
 /-- Exact scalar restriction on unbounded derived categories. -/
 def pbcDerivedRestrict := (pbcRestrict φ).mapDerivedCategory
 
-set_option linter.defProp false in
 /-- The existing universal scalar-extension theorem, including its fixed objects,
 fixed maps and K-flat computation (Stacks, Tag 06YY). -/
 abbrev pbcExtensionExistence :=
@@ -208,10 +207,9 @@ abbrev pbcExtend : pbcModules X R ⥤ pbcModules X S := reductionChange X φ
 instance pbcExtend_additive : (pbcExtend φ).Additive :=
   (pbcExtensionExistence φ).choose_spec.choose_spec.choose_spec.choose
 
-set_option linter.defProp false in
 /-- The universal derived pair supplied by the existing K-flat scalar-extension theorem
 (Stacks, Tag 06YY). -/
-@[no_expose] def pbcDerivedExtensionExistence :
+theorem pbcDerivedExtensionExistence :
     ∃ (LF : DerivedCategory (pbcModules X R) ⥤ DerivedCategory (pbcModules X S))
       (ε : DerivedCategory.Qh ⋙ LF ⟶
         (pbcExtend φ).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh),

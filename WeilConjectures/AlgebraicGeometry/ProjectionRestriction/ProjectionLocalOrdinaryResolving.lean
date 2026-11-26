@@ -339,7 +339,6 @@ private theorem operationOfPresentation
 
 end FromPresentation
 
-set_option linter.unusedVariables false in
 /-- Localization of the ordinary exact module pullback preserves resolving complexes. -/
 theorem localOrdinaryResolving_exists {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
@@ -350,7 +349,7 @@ theorem localOrdinaryResolving_exists {X Y : Scheme.{u}} (f : X ⟶ Y)
         (R_X.over ((proEtaleBaseChange f).obj V)),
       (∀ T : Over V, o.coefficient.hom.app (op T) =
         g.operation.coefficient.hom.app (op T.left)) ∧
-      ∃ mu : o.OrdinaryTensor,
+      ∃ _mu : o.OrdinaryTensor,
         ∀ P, resolving (R_Y.over V) P →
           resolving (R_X.over ((proEtaleBaseChange f).obj V))
             ((o.pullback.mapHomologicalComplex (.up ℤ)).obj P) := by

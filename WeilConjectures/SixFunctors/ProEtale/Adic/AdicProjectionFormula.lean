@@ -56,7 +56,6 @@ shown to be
 the one induced by the strong monoidal structure of the pullback of the underlying sheaves of
 `ℚ̄_ℓ`-modules; `AlgebraicGeometry.ProEtale.isIso_adicProjectionMap_of_isIso` applies to any
 strong monoidal structure on `f^*` for which the pullback compatibility is monoidal.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section

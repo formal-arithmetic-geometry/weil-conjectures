@@ -131,13 +131,11 @@ lemma isClosedUnderFiniteProducts_isConstructibleModuleObject_padicIntegersRingO
     ⟨0, isZero_zero _, isConstructibleModuleObject_of_isZero _ (isZero_zero _)⟩
   P.isClosedUnderFiniteProducts_of_isClosedUnderExtensions
 
-/-- For a finite subextension
-`E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a noetherian scheme `X`, `Dᵇc(X, 𝒪_E)` is a triangulated subcategory of
-`D(X_proét, 𝒪_E)` of bounded objects, stable under the truncations `τ^{≤ n}` and `τ^{≥ n}`; its
-objects in degree `0` (the complexes concentrated in degree `0`, equivalently the sheaves placed
-in degree `0`) are the constructible sheaves `Cons(X, 𝒪_E)`, which form an essentially small
-abelian subcategory of `Mod(X_proét, 𝒪_E)`, closed under kernels, cokernels (so that the
-inclusion is exact) and extensions. -/
+/-- For a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a noetherian scheme `X`, `Dᵇc(X, 𝒪_E)` is a
+triangulated subcategory of `D(X_proét, 𝒪_E)` of bounded objects, stable under the truncations
+`τ^{≤ n}` and `τ^{≥ n}`; its objects in degree `0` are the constructible sheaves `Cons(X, 𝒪_E)`,
+which form an essentially small abelian subcategory of `Mod(X_proét, 𝒪_E)` closed under kernels,
+cokernels and extensions. -/
 theorem boundedConstructible_padicIntegersRingObj_structure :
     (boundedConstructible 𝒪X).IsTriangulated ∧
       boundedConstructible 𝒪X ≤ DerivedCategory.TStructure.t.bounded ∧

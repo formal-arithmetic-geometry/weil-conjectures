@@ -106,12 +106,7 @@ instance lowerShriek_additive : (lowerShriek A f).Additive := by
 /-- The lower shriek `f_!` on pro-étale sheaves with values in an abelian category is left
 exact, being the composition of the exact extension by zero along the open immersion of
 the chosen compactification with the left exact pushforward along its proper structure
-morphism.
-
-The extension by zero is sheafification composed with a left Kan extension, so left
-exactness of sheafification is needed here; see
-`AlgebraicGeometry.ProEtale.preservesFiniteLimits_openImmersionLowerShriek`. This is why
-`HasSheafify` appears in addition to the `HasWeakSheafify` that defines `f_!`. -/
+morphism. -/
 instance preservesFiniteLimits_lowerShriek :
     PreservesFiniteLimits (lowerShriek A f) := by
   rw [lowerShriek_eq]

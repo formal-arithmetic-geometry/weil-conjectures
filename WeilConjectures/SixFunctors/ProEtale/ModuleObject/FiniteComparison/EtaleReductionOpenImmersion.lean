@@ -19,28 +19,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 Write `red_X : Dᵇc(X)⟦𝒪_E⟧ ⥤ D(X_ét, 𝒪_E ⧸ ℓⁿ)` for the reduction modulo `ℓⁿ` read on the small
 étale site (`ProEtale.CondensedRing.etaleReduction`). This file proves that an open immersion
 `j : U ⟶ X` has a reduction comparison for `Rj_!` and `Rj^!`
-(`ProEtale.CondensedRing.hasEtaleReductionLowerShriekIso_of_isOpenImmersion`), the open-immersion
-case of blueprint `lemma-change-coefficients-exceptional-inverse-image`.
-
-## Strategy
-
-On both sides `Rj^!` is the pullback `j^*`: on bounded constructible `𝒪_E`-complexes, `Rj_!` is
-the extension by zero `j_!` by independence of the compactification
-(`ProEtale.CondensedRing.boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicIntegers`),
-and `Rj^! ≅ j^*` is its conjugate; on the étale side this is
-`Etale.rightDerivedUpperShriekIsoOfIsOpenImmersion`. As reduction commutes with pullback
-(`ProEtale.CondensedRing.etaleReductionUpperStarIso`), we get an isomorphism
-`δ : Rj^! ⋙ red_U ≅ red_X ⋙ Rj^!`
-(`ProEtale.CondensedRing.etaleReductionUpperShriekIsoOfIsOpenImmersion`). Let
-`θ : red_U ⋙ Rj_! ⟶ Rj_! ⋙ red_X` be the transpose of `δ` under `Rj_! ⊣ Rj^!`; its transpose
-back is `δ`, an isomorphism, and it remains to see that `θ` is an isomorphism. This is checked
-after restriction to `U` and to the closed complement `i : Z ⟶ X` of `j` (open–closed
-conservativity on `X_ét`):
-
-* after `j^*`, the map `θ_K` is identified, through the units of the two adjunctions
-  `Rj_! ⊣ Rj^!` (invertible, `j_!` being fully faithful on both sides), with `δ_{Rj_! K}`;
-* after `i^*`, source and target vanish: `i^* j_! = 0` on the étale side, and
-  `i^* red_X ≅ red_Z i^*` with `i^* j_! = 0` on the condensed side.
+(`ProEtale.CondensedRing.hasEtaleReductionLowerShriekIso_of_isOpenImmersion`).
 -/
 
 @[expose] public section
@@ -119,17 +98,9 @@ noncomputable irreducible_def etaleReductionUpperShriekIsoOfIsOpenImmersion :
       (Etale.leftDerivedUpperStarIsoMapDerivedCategory _ j.left ≪≫
         (Etale.rightDerivedUpperShriekIsoOfIsOpenImmersion _ j.left).symm)
 
-/-- Blueprint `lemma-change-coefficients-exceptional-inverse-image`, open-immersion case, for the
-coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale site. **Open immersions have a reduction
-comparison for `Rj_!` and `Rj^!`**: there is an isomorphism `γ : Rj_! ⋙ red_X ≅ red_U ⋙ Rj_!` whose
-transpose under `Rj_! ⊣ Rj^!` is an isomorphism.
-
-The comparison `γ` is the inverse of the transpose `θ` of
-`etaleReductionUpperShriekIsoOfIsOpenImmersion`, so that its own transpose is invertible by
-construction; `θ` is invertible by open–closed conservativity on `X_ét`. After `j^*`, it is
-identified with `δ_{Rj_! K}` through the units of the two adjunctions `Rj_! ⊣ Rj^!`, which are
-invertible as `j_!` is fully faithful on both sides (`CategoryTheory.unit_mateEquiv`); after
-`i^*`, for `i` the closed complement of `j`, both its source and target vanish. -/
+/-- **Open immersions have a reduction comparison for `Rj_!` and `Rj^!`**, read on the
+étale site: there is an isomorphism
+`γ : Rj_! ⋙ red_X ≅ red_U ⋙ Rj_!` whose transpose under `Rj_! ⊣ Rj^!` is an isomorphism. -/
 theorem hasEtaleReductionLowerShriekIso_of_isOpenImmersion :
     HasEtaleReductionLowerShriekIso ℓ E n j := by
   have := HasCompactification.of_over j

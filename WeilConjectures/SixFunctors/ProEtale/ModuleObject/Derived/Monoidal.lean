@@ -157,13 +157,11 @@ private lemma hasGoodTensorTensor₂₃_gradedModule (Z : Scheme.{u})
   have := preservesColimitsOfSize_tensorRight_monoidalModule Λ Z
   infer_instance
 
-set_option synthInstance.maxHeartbeats 200000 in
--- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology Z) Ab) _`
 instance hasTensor_cochainComplex (Z : Scheme.{u})
     (A B : CochainComplex
       (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) ℤ) :
     HomologicalComplex.HasTensor A B :=
-  inferInstance
+  hasTensor_gradedModule Λ Z A.X B.X
 
 set_option synthInstance.maxHeartbeats 200000 in
 -- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology Z) Ab) _`

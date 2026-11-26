@@ -27,14 +27,13 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-set_option linter.unusedVariables false in
 /-- The section resolution map induces a epimorphism on homology in each degree.
 (Stacks, Tags 08C2 and 071B). -/
 theorem affineBasisSections_resolution_homology_epi
     (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)
     (F J : CochainComplex X.Modules ℤ) [J.IsKInjective]
     (i : F ⟶ J) [QuasiIso i]
-    (hterms : ∀ (W : X.Opens), IsAffineOpen W → W ≤ V → ∀ (n : ℤ) (q : ℕ),
+    (_hterms : ∀ (W : X.Opens), IsAffineOpen W → W ≤ V → ∀ (n : ℤ) (q : ℕ),
       Subsingleton (((F.X n).restrict W.ι).H (q + 1)))
     (hcokernels : ∀ (W : X.Opens), IsAffineOpen W → W ≤ V → ∀ (n : ℤ) (q : ℕ),
       Subsingleton (((cokernel (F.d (n - 1) n)).restrict W.ι).H (q + 1)))
@@ -46,7 +45,7 @@ theorem affineBasisSections_resolution_homology_epi
         PresheafOfModules.evaluation.{u} (moduleRings X.toRingedSpace).obj (op V)).Additive)
     Epi (HomologicalComplex.homologyMap
       ((S.mapHomologicalComplex (ComplexShape.up ℤ)).map i) n) := by
-  clear hterms
+  clear _hterms
   dsimp
   let S := SheafOfModules.evaluation.{u} (moduleRings X.toRingedSpace) (op V)
   let : S.Additive := inferInstanceAs

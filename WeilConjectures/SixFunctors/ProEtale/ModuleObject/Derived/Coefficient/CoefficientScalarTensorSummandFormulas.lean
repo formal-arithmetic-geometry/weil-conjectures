@@ -11,7 +11,10 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coeffici
 
 Naturality of termwise comparison maps is checked with abstract additive functors.
 The proved private formulas expose the scalar and total comparison summands.
-(blueprint: lem-sfb-coefficient-scalar-tensor-summand-naturality)
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 07A4
 -/
 
 @[expose] public noncomputable section
@@ -61,13 +64,7 @@ private theorem scalar_total_summand (Z : Scheme.{u})
   exact HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX
     (Functor.OplaxMonoidal.δNatTrans d.b.extension) (.up ℤ) P Q p q n hpq
 
-/-- Naturality of a termwise comparison on a tensor summand.
-Source: Stacks Project, Cohomology on Sites, Tag 07A4, termwise total tensor maps.
-The graded tensor inclusion followed by the tensor of two graded maps equals
-that inclusion after the tensor of their two degree components. Apply
-GradedObject.Monoidal.ι_tensorHom. The termwise comparison components are exactly
-the components of the original functor comparison, giving the formula.
-(blueprint: lem-sfb-coefficient-scalar-tensor-summand-naturality). -/
+/-- Naturality of a termwise comparison on a tensor summand. -/
 theorem coefficientScalarTensor_summandNaturality (Z : Scheme.{u})
     (F₁ : ModuleRingedComparison.internalModules R Z ⥤
       ModuleRingedComparison.internalModules S Z)

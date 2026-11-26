@@ -15,8 +15,11 @@ import WeilConjectures.AlgebraicGeometry.CondensedCoverRestrictionConservative
 
 /-! # Affine descent for degree-zero condensed closed exchange
 
-Source: Stacks 0D6F and 07A7, and the affine-local final step of
-lem-sfb-proper-constructible-closed-exchange-heart.
+Affine-local descent for the closed exchange on constructible sheaves in degree zero.
+
+## References
+
+* Stacks Project, Tags 0D6F and 07A7
 -/
 
 @[expose] public noncomputable section

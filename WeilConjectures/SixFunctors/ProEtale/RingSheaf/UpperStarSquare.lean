@@ -19,8 +19,7 @@ square of schemes `h₁ ≫ f₁ = h₂ ≫ f₂ : T ⟶ Y`, the two iterated in
 algebra objects `ProEtale.RingSheaf.squareCoeffHom`, and the two iterated pullbacks of module
 sheaves agree up to restriction of scalars along it
 (`ProEtale.RingSheaf.upperStarSquareIso`). This is the bookkeeping of coefficient rings needed
-for the base change isomorphisms of part (4) of blueprint
-`proposition-extension-zero-restriction-closed-subscheme`.
+for the base change isomorphisms of the open–closed sequence.
 
 Both iterated pullbacks are compared with the pullback `(h₁ ≫ f₁)^*` by the composition
 isomorphisms of pullbacks, which are monoidal; the module-level statement is then
@@ -106,7 +105,7 @@ instance : IsIso (upperStarSquareHom f₁ f₂ h₁ h₂ w (R := R)) := by
   unfold upperStarSquareHom
   infer_instance
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`, part (4): for a commutative
+/-- For a commutative
 square `h₁ ≫ f₁ = h₂ ≫ f₂`, the isomorphism `h₁^* f₁^* B ≅ h₂^* f₂^* B` of the iterated inverse
 images of a sheaf of `R`-algebras `B` (a morphism of algebra objects), through `(h₁ ≫ f₁)^* B`. -/
 noncomputable def squareCoeffHom :
@@ -133,7 +132,7 @@ lemma squareCoeffHom_comp :
       Functor.compAlgHom _ _ (upperStarComp (ModuleCat.{u + 1} R) h₁ f₁).inv B := by
   rw [squareCoeffHom, Category.assoc, IsIso.inv_hom_id, Category.comp_id]
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`, part (4): for a commutative
+/-- For a commutative
 square `h₁ ≫ f₁ = h₂ ≫ f₂` and a sheaf of `R`-algebras `B`, the two iterated pullbacks of `B`-module
 sheaves agree, up to restriction of scalars along the isomorphism of coefficient rings
 `h₁^* f₁^* B ≅ h₂^* f₂^* B` (`ProEtale.RingSheaf.squareCoeffHom`). -/

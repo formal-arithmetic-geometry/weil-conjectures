@@ -13,7 +13,12 @@ import WeilConjectures.SixFunctors.Tensor.TensorReductionStrictConeCoordinates
 /-! # Degreewise coherent lifts of finite tensor comparisons
 
 Transpose the normalized strict tensor cone through the ordinary reduction/limit
-adjunction. Source: Stacks 07A4 and 0941.
+adjunction.
+
+## References
+
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -182,12 +187,7 @@ private theorem transpose_coordinate
 set_option cleanup.letToHave false in
 -- Several fixed model identifications occur in the two adjunctions.
 /-- In each degree the prescribed finite tensor maps are evaluations of one
-sequence-module map. Source: Stacks 07A4 and 0941. Transport the strict tensor cone
-by the fixed tensor-tower comparison, take its degreewise limit, and transpose
-through ordinary coherent reduction. The normalized finite adjunction equations
-and cone coordinate formula identify the evaluated map. Cancel the comparison
-isomorphisms to obtain the displayed formula. This uses no flatness or boundedness.
-(blueprint: lem-coef-tensor-reduction-finite-degree-lift). -/
+sequence-module map. -/
 theorem tensorReductionFiniteDegreeLift (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (i : ℤ) :
     let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)

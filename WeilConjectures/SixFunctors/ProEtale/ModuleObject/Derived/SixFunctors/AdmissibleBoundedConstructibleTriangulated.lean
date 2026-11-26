@@ -18,7 +18,7 @@ set_option linter.privateModule false
 
 /-! # Triangulated bounded constructibility
 
-Source: current blueprint, internal-Hom stability proof, Step 2.
+The subcategory of bounded constructible objects is closed under shifts and cones.
 -/
 
 @[expose] public noncomputable section

@@ -173,8 +173,6 @@ private lemma restrict_constUnit (k : Type u) [Field k] (r : ℕ)
         (standardOpenConstUnit k r i c).val = constMap k W c := by
   exact map_constMap k hi c
 
--- Preserve the named nondependent binders in the existing public statement.
-set_option linter.unusedVariables false in
 /-- The cocycle equation makes the exponents in pairwise Laurent expansions
 constant and the scalar coefficients a chart coboundary.
 -/
@@ -194,8 +192,8 @@ theorem exists_standardUnitCocycle_normalization_of_pairwise_laurent
           (homOfLE (le_inf hj hl)).op (t j l).val =
         (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map
           (homOfLE (le_inf hi hl)).op (t i l).val)
-    (e : ∀ i j : ULift.{u} (Fin r), ℤ)
-    (c : ∀ i j : ULift.{u} (Fin r), kˣ)
+    (e : ∀ _i _j : ULift.{u} (Fin r), ℤ)
+    (c : ∀ _i _j : ULift.{u} (Fin r), kˣ)
     (hpair : ∀ i j : ULift.{u} (Fin r), i ≠ j →
       (t i j).val =
         (ℙ(ULift.{u} (Fin r); Spec (.of k))).presheaf.map

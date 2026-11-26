@@ -45,9 +45,6 @@ import all WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.R
 @[expose] public noncomputable section
 
 set_option autoImplicit false
--- Avoid replaying the representative transport proof for tactic linting.
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false

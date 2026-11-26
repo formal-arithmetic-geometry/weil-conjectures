@@ -15,9 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.LocalizingClosureC
 /-!
 # The exceptional inverse image for rational and algebraically closed coefficients
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-existence/_section.md,
-clause (4) for the coefficients `E` and `Q̄_ℓ`, which the blueprint proves by
-theorem-f-shriek-ell-adic-coefficients (blueprint: theorem-f-shriek-ell-adic-coefficients).
 
 For a finite extension `E` of `ℚ_ℓ` inside `Q̄_ℓ`, and for `Q̄_ℓ` itself, the exceptional
 inverse image is the Brown right adjoint of the compactly supported direct image on the
@@ -54,20 +51,6 @@ local notation "L(" T ")" => localizingClosureProEtale Λ T
 /-- For coefficients `E` (a finite extension of `ℚ_ℓ` in `Q̄_ℓ`) or `Q̄_ℓ`, the compactly
 supported direct image of the chosen compactification preserves the localizing closures,
 agrees with that of every compactification, and has a right adjoint preserving `D_ctf`.
-
-Source: blueprint main-20261015, theorem-exceptional-inverse-image, clauses (2)--(4) for `E` and
-`Q̄_ℓ` (blueprint: theorem-f-shriek-ell-adic-coefficients).
-
-Proof:
-1. The coefficient is localizing-admissible. Brown representability
-   (`exists_localizingExceptionalAdjoint`) gives the preservation of the localizing closures,
-   the lower shriek on them and its right adjoint `G`.
-2. The compactification cocycle identifies the lower shriek of the chosen compactification
-   with the restriction of that of any other compactification.
-3. theorem-f-shriek-ell-adic-coefficients (`rationalRestrictionGlue`), applied to the same
-adjunction, shows
-   that `G` preserves bounded constructible objects. For these coefficients `D_ctf` equals
-   `D_bc` (det-def-localizing-closure-ctf-equals-bc), so `G` preserves `D_ctf`.
 -/
 theorem rationalExceptionalInverseImage_exists
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]

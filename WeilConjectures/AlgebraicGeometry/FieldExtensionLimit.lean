@@ -80,8 +80,6 @@ theorem exists_finiteSubext_isPullback {X : Scheme.{u}} (g : X ⟶ Spec (.of E))
 
 section Projections
 
-set_option linter.unusedSectionVars false
-
 variable (L : FiniteSubext F E)
 
 /-- The first projection `Spec (E ⊗_L E) ⟶ Spec E`. -/
@@ -92,6 +90,7 @@ noncomputable abbrev tensorSpecPr₁ : Spec (.of (E ⊗[L.1] E)) ⟶ Spec (.of E
 noncomputable abbrev tensorSpecPr₂ : Spec (.of (E ⊗[L.1] E)) ⟶ Spec (.of E) :=
   Spec.map (CommRingCat.ofHom Algebra.TensorProduct.includeRight.toRingHom)
 
+omit [Algebra.IsAlgebraic F E] in
 /-- `Spec (E ⊗_L E)` is the fibre product `Spec E ×_{Spec L} Spec E`. -/
 lemma isPullback_tensorSpecPr :
     IsPullback (tensorSpecPr₁ L) (tensorSpecPr₂ L)
@@ -99,6 +98,7 @@ lemma isPullback_tensorSpecPr :
       (Spec.map (CommRingCat.ofHom (algebraMap L.1 E))) :=
   isPullback_SpecMap_of_isPushout _ _ _ _ (CommRingCat.isPushout_tensorProduct L.1 E E)
 
+omit [Algebra.IsAlgebraic F E] in
 lemma diagonalSpecCone_π_comp_tensorSpecPr₁ :
     (diagonalSpecCone F E).π.app (.op L) ≫ tensorSpecPr₁ L = 𝟙 _ := by
   change Spec.map _ ≫ Spec.map _ = 𝟙 (Spec (.of E))
@@ -108,6 +108,7 @@ lemma diagonalSpecCone_π_comp_tensorSpecPr₁ :
   change (Algebra.TensorProduct.lmul' L.1 (S := E)) (x ⊗ₜ 1) = x
   simp
 
+omit [Algebra.IsAlgebraic F E] in
 lemma diagonalSpecCone_π_comp_tensorSpecPr₂ :
     (diagonalSpecCone F E).π.app (.op L) ≫ tensorSpecPr₂ L = 𝟙 _ := by
   change Spec.map _ ≫ Spec.map _ = 𝟙 (Spec (.of E))
@@ -119,12 +120,14 @@ lemma diagonalSpecCone_π_comp_tensorSpecPr₂ :
 
 variable {L} {L' : FiniteSubext F E}
 
+omit [Algebra.IsAlgebraic F E] in
 lemma map_comp_tensorSpecPr₁ (f : Opposite.op L' ⟶ .op L) :
     ((diagonalDiagram F E).op ⋙ Scheme.Spec).map f ≫ tensorSpecPr₁ L = tensorSpecPr₁ L' := by
   change Spec.map _ ≫ Spec.map _ = _
   rw [← Spec.map_comp]
   rfl
 
+omit [Algebra.IsAlgebraic F E] in
 lemma map_comp_tensorSpecPr₂ (f : Opposite.op L' ⟶ .op L) :
     ((diagonalDiagram F E).op ⋙ Scheme.Spec).map f ≫ tensorSpecPr₂ L = tensorSpecPr₂ L' := by
   change Spec.map _ ≫ Spec.map _ = _

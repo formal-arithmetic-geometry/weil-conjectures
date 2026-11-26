@@ -10,7 +10,9 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.FiniteCo
 
 /-! # Pullback of finite scalar realizations on constant charts
 
-Source: blueprint scalar-six-ctf (1), finite projective local models.
+## References
+
+* [Stacks, Tag 099Y](https://stacks.math.columbia.edu/tag/099Y)
 -/
 
 @[expose] public noncomputable section
@@ -33,16 +35,7 @@ variable (A : Type) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
 /-- On a constant ordinary comparison chart, the pullback of the finite scalar
 realization is the single complex of the realized constant module. This comparison
 requires no finiteness or projectivity of the constant module.
-
-Source: blueprint scalar-six-ctf (1), constant-model and pullback comparisons;
-Stacks 099Y and the exact-functor derived single comparison.
-
-Proof: commute each exact functor with the degree-zero single functor. The finite
-comparison realization commutes with scheme pullback, and restriction along e.hom
-commutes with inverse image via the coefficient-pullback comparison. Apply the given
-constant-chart isomorphism and compose these isomorphisms. Every comparison is an
-isomorphism on the whole module category, so empty charts and the zero ring cause no
-exception. -/
+-/
 theorem finiteScalarRealizationConstantChart
     (S T : Scheme.{u}) (f : T ⟶ S)
     (L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} A)))

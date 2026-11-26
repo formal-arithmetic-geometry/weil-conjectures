@@ -24,13 +24,12 @@ universe u v
 
 namespace LocalizedModule
 
-set_option linter.unusedVariables false in
 /-- Clearing denominators for degree-zero ring restriction maps. -/
 theorem gradedModuleAwayClearingRing
     {S : Type u} [CommRing S] {M : Type v} [AddCommGroup M] [Module S M]
     (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
-    (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜)
-    (hsmul : ∀ (n : ℕ) (z : ℤ) (a : S) (x : M),
+    (𝓜 : ℤ → AddSubgroup M) (_h𝓜 : DirectSum.IsInternal 𝓜)
+    (_hsmul : ∀ (n : ℕ) (z : ℤ) (a : S) (x : M),
       a ∈ 𝒜 n → x ∈ 𝓜 z → a • x ∈ 𝓜 (n + z)) :
     let F := {p : S × ℕ // 0 < p.2 ∧ p.1 ∈ 𝒜 p.2}
     let R := fun f : F ↦ HomogeneousLocalization.Away 𝒜 f.val.1
@@ -48,7 +47,7 @@ theorem gradedModuleAwayClearingRing
       (lambdaS : ∀ (f g : F), Rel f g → L f →+* L g)
       (rho : ∀ (f g : F), Rel f g → Z f →+ Z g)
       (rhoS : ∀ (f g : F), Rel f g → R f →+* R g)
-      (U : ∀ (f g : F), R f),
+      (U : ∀ (f _g : F), R f),
       (∀ (f g : F), (U f g).val = Localization.mk (g.val.1 ^ f.val.2)
         (⟨f.val.1 ^ g.val.2, ⟨g.val.2, rfl⟩⟩ : Submonoid.powers f.val.1)) ∧
       (∀ (f g : F) (p : Rel f g),

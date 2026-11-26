@@ -12,8 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 
 # Coherence of the comparisons of the lower shriek along refinements
 
-For bounded constructible `ℚ̄_ℓ`-sheaves, this file proves the coherence clauses of blueprint
-`proposition-construction-independence-rf-shriek` for the comparisons
+For bounded constructible `ℚ̄_ℓ`-sheaves, this file proves the coherence clauses for the comparisons
 `boundedConstructibleLowerShriekRefinementIso'` along refinements and
 `boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl` between compactifications:
 

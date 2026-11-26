@@ -17,8 +17,13 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherenc
 /-!
 # Natural successive open-extension quotients
 
-Source: Stacks Project, Tags 09AH, 03DI and 03DJ
-(blueprint: lem-sfb-open-filtration-successor).
+The quotient of two nested open extensions by zero, as an extension of the closed complement.
+
+## References
+
+* [Stacks, Tag 09AH](https://stacks.math.columbia.edu/tag/09AH)
+* [Stacks, Tag 03DI](https://stacks.math.columbia.edu/tag/03DI)
+* [Stacks, Tag 03DJ](https://stacks.math.columbia.edu/tag/03DJ)
 -/
 
 @[expose] public section
@@ -112,22 +117,7 @@ private theorem successor_of_adjunctions
       B.mapIso (PreservesCokernel.iso A a.counit).symm ≪≫
       isoWhiskerRight (isoWhiskerLeft R eQ) L⟩
 
-/-- The quotient for two nested opens is the extension of the closed complement.
-Source: Stacks Project, proetale.tex Tag 09AH and sites-modules.tex Tags 03DI--03DJ
-(blueprint: lem-sfb-open-filtration-successor).
-
-Proof in words. Put a : W → V. For the cokernel Q of the open counit on V,
-restriction to W vanishes by the triangle identity and the fully faithful open
-extension. Thus the closed-support theorem makes the closed adjunction unit on Q
-invertible. Restriction to S kills a_! a^*, so it sends the cokernel projection to
-an isomorphism. Whiskering these two natural isomorphisms identifies Q with t_* t^*.
-Precompose with restriction to V and postcompose with exact extension by zero to X.
-Composition of adjunctions and the pullback composition isomorphism identify the
-first term with W_! W^*. The uniqueness comparison for left adjoints identifies the
-composite counit with the W counit. Preservation of cokernels under both whiskering
-functors gives the asserted natural quotient. Equal opens, empty opens, and empty
-closed complements require no separate choices or nonemptiness hypotheses.
--/
+/-- The quotient for two nested opens is the extension of the closed complement. -/
 theorem exists_openFiltrationSuccessor
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}} (W V : X.Opens) (h : W ≤ V)

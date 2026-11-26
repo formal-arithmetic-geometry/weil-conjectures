@@ -19,9 +19,6 @@ import all WeilConjectures.CategoryTheory.ProperBaseChange.ExchangeMateCube
 @[expose] public noncomputable section
 set_option autoImplicit false
 
--- Avoid replaying the large dependent coefficient transports for tactic linting.
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false

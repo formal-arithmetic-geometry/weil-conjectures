@@ -125,16 +125,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 For every quasi-compact quasi-separated scheme `W` there is a ring isomorphism from the
 endomorphisms of the regular module `ℚ̲̄_ℓ,W` (that is, from `Γ(W, ℚ̲̄_ℓ,W)`) onto the continuous
 functions `W → ℚ̄_ℓ` with values in a finite subextension, compatible with restriction along every
-morphism `g : W' ⟶ W`, which on functions is precomposition with `g`.
-
-This is Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 4.2.12 together with the
-description of `ℚ̄_ℓ,W = colim_E E_W` of §6.8. The endomorphisms of the regular module are the
-global sections (`CategoryTheory.Mod.regularEndRingHom_bijective`), whose restriction is computed
-by `ProEtale.CondensedRing.restrictEnd_regularEndRingHom`; the global sections of `ℚ̲̄_ℓ,W` are
-computed by `ProEtale.padicAlgClSectionRingEquiv`, compatibly with pullback
-(`ProEtale.Γ_map_condensedPullbackHom_padicAlgClSectionRingHom`). The proof uses
-`ProEtale.isIso_continuousMapComparison`: the pullback of `C(-, E)` from the point
-is the sheaf `U ↦ C(U, E)`. -/
+morphism `g : W' ⟶ W`, which on functions is precomposition with `g`. -/
 theorem exists_endRegularRingEquiv :
     ∃ e : ∀ (W : Scheme.{u}) [CompactSpace W] [QuasiSeparatedSpace W],
         End (Mod.regular (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) W)) ≃+*

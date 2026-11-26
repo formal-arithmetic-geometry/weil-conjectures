@@ -26,9 +26,9 @@ K ⊗ᴸ Lj^*M --(η ⊗ᴸ 1)--> j^*(j_!K) ⊗ᴸ Lj^*M ≅ j^*(j_!K ⊗ᴸ M),
 where `η` is the unit of `j_! ⊣ j^*` and the isomorphism comes from the inverse of
 `AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorComparison`. It is an isomorphism.
 
-The projection map `PF : Rf_!K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^*L)` of the blueprint
-(`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Exchange`) goes in the opposite
-direction: its open part is the inverse `(derivedOpenImmersionLowerShriekProjectionIso j).inv`.
+The projection map `PF : Rf_!K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^*L)` of the compact-support direct image goes in
+the opposite direction: its open part is the inverse of
+`derivedOpenImmersionLowerShriekProjectionIso j`.
 
 ## Main definitions and results
 
@@ -39,7 +39,7 @@ direction: its open part is the inverse `(derivedOpenImmersionLowerShriekProject
 - `AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekProjectionIso j`: the resulting
   isomorphism of bifunctors.
 - `AlgebraicGeometry.ProEtale.derivedTensorOpenImmersionLowerShriekIso j K L`: the projection
-  formula `j_!K ⊗ᴸ L ≅ j_!(K ⊗ᴸ Lj^*L)` (blueprint `lemma-change-coefficients-compact-support`).
+  formula `j_!K ⊗ᴸ L ≅ j_!(K ⊗ᴸ Lj^*L)`.
 
 ## The argument
 
@@ -171,16 +171,7 @@ noncomputable def mapDerivedCategoryUpperStarDerivedTensorIso :
 /-- The **projection map** `j_!(K ⊗ᴸ Lj^*M) ⟶ j_!K ⊗ᴸ M` of bifunctors
 `D(U_proét) ⥤ D(X_proét) ⥤ D(X_proét)`, for an open immersion `j : U ⟶ X`: the projection map
 `Adjunction.projectionMap` of `D(j_!) ⊣ D(j^*)` with respect to
-`mapDerivedCategoryUpperStarDerivedTensorIso`. It is the composite
-```
-j_!(K ⊗ᴸ Lj^*M) --j_!(φ)--> j_! j^*(j_!K ⊗ᴸ M) --ε--> j_!K ⊗ᴸ M
-```
-where `ε` is the counit of `j_! ⊣ j^*` and `φ` is the composite
-```
-K ⊗ᴸ Lj^*M --(η ⊗ᴸ 1)--> j^*(j_!K) ⊗ᴸ Lj^*M ≅ j^*(j_!K ⊗ᴸ M).
-```
-The blueprint's projection map `PF` goes in the opposite direction; it is the inverse of
-`derivedOpenImmersionLowerShriekProjectionIso`. -/
+`mapDerivedCategoryUpperStarDerivedTensorIso`. -/
 noncomputable def derivedOpenImmersionLowerShriekProjectionMap :
     (Functor.postcompose₂.obj D((j)_!open[A])).obj
         (derivedTensorWhiskeringRightLeftDerivedUpperStar A j) ⟶
@@ -207,8 +198,7 @@ instance isIso_derivedOpenImmersionLowerShriekProjectionMap :
 
 /-- The **projection formula** for an open immersion `j : U ⟶ X`: the isomorphism
 `j_!(K ⊗ᴸ Lj^*M) ≅ j_!K ⊗ᴸ M` of bifunctors `D(U_proét) ⥤ D(X_proét) ⥤ D(X_proét)`, whose underlying
-morphism is `derivedOpenImmersionLowerShriekProjectionMap`. Its inverse is the open part of
-the blueprint's projection map `PF : Rf_!K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^*L)`. -/
+morphism is `derivedOpenImmersionLowerShriekProjectionMap`. -/
 noncomputable def derivedOpenImmersionLowerShriekProjectionIso :
     (Functor.postcompose₂.obj D((j)_!open[A])).obj
         (derivedTensorWhiskeringRightLeftDerivedUpperStar A j) ≅
@@ -222,10 +212,8 @@ lemma derivedOpenImmersionLowerShriekProjectionIso_hom :
   rfl
 
 
-/-- Blueprint `lemma-change-coefficients-compact-support`: Projection formula for extension by
-zero.
-
-For an open immersion `j : U ⟶ X`, `K` in `D(U_proét)` and `L` in `D(X_proét)`, the canonical map
+/-- For an open immersion `j : U ⟶ X`, `K` in `D(U_proét)` and `L` in `D(X_proét)`, the canonical
+map
 `(j_!K) ⊗ᴸ L ⟶ j_!(K ⊗ᴸ Lj^*L)` is an isomorphism; it is the inverse of the projection map
 `AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekProjectionMap` (the transpose along
 `j_! ⊣ j^*` of `(η ⊗ᴸ 1)`, `η` the unit of `j_! ⊣ j^*`). This holds for every coefficient category

@@ -24,7 +24,6 @@ set_option Elab.async false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 4096
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
@@ -110,20 +109,20 @@ theorem rationalP1_first_trace_transport
     ⟨(ProjectiveLine Y ↘ Y) ≫ (Y ↘ Spec (.of k))⟩
   let hW : (diagonalSurface Y).Over (Spec (.of k)) :=
     ⟨firstProjection Y ≫ (ProjectiveLine Y ↘ Y) ≫ (Y ↘ Spec (.of k))⟩
-  letI : (ProjectiveLine Y).Over (Spec (.of k)) := hP
-  letI : (diagonalSurface Y).Over (Spec (.of k)) := hW
-  letI : LocallyOfFiniteType (ProjectiveLine Y ↘ Spec (.of k)) :=
+  let : (ProjectiveLine Y).Over (Spec (.of k)) := hP
+  let : (diagonalSurface Y).Over (Spec (.of k)) := hW
+  let : LocallyOfFiniteType (ProjectiveLine Y ↘ Spec (.of k)) :=
     hc.geometry.standingP.2.1
-  letI : QuasiCompact (ProjectiveLine Y ↘ Spec (.of k)) :=
+  let : QuasiCompact (ProjectiveLine Y ↘ Spec (.of k)) :=
     hc.geometry.standingP.2.2
-  letI : IsSeparated (ProjectiveLine Y ↘ Spec (.of k)) := hc.geometry.standingP.1
-  letI : LocallyOfFiniteType (diagonalSurface Y ↘ Spec (.of k)) :=
+  let : IsSeparated (ProjectiveLine Y ↘ Spec (.of k)) := hc.geometry.standingP.1
+  let : LocallyOfFiniteType (diagonalSurface Y ↘ Spec (.of k)) :=
     hc.geometry.standingW.2.1
-  letI : QuasiCompact (diagonalSurface Y ↘ Spec (.of k)) :=
+  let : QuasiCompact (diagonalSurface Y ↘ Spec (.of k)) :=
     hc.geometry.standingW.2.2
-  letI : IsSeparated (diagonalSurface Y ↘ Spec (.of k)) := hc.geometry.standingW.1
-  letI : (firstProjection Y).IsOver (Spec (.of k)) := ⟨rfl⟩
-  letI : IsProper (firstProjection Y) := hc.geometry.properFirst
+  let : IsSeparated (diagonalSurface Y ↘ Spec (.of k)) := hc.geometry.standingW.1
+  let : (firstProjection Y).IsOver (Spec (.of k)) := ⟨rfl⟩
+  let : IsProper (firstProjection Y) := hc.geometry.properFirst
   have hline : CategoryTheory.localizingClosure
       (constantModelBoundedConstructible (coefficient l c).X (diagonalSurface Y))
       (((DerivedCategory.singleFunctor

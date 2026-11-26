@@ -542,6 +542,7 @@ def pbcScalarExtension (h : E ≤ F) :
     exact if e : E = F then e ▸ 𝟭 _ else
       (pbcRationalScalarExtension_exists l Ω T hdim hl h).exists.choose
 
+-- Omitting `[IsNoetherian T]` would drop it from the public signature and cascade downstream.
 set_option linter.unusedSectionVars false in
 /-- Coefficient maps compose exactly, including repeated fields. -/
 theorem pbcCompletedScalarMap_comp (h : E ≤ F) (k : F ≤ G) :
@@ -636,6 +637,7 @@ private theorem pbcTensorSection_smul
   simpa only [mul_one] using completedTensor_smul T φ M U r 1 x
 
 set_option backward.isDefEq.respectTransparency false in
+-- Omitting `[IsNoetherian T]` would drop it from the public signature and cascade downstream.
 set_option linter.unusedSectionVars false in
 /-- The tensor unit comparison is fixed on sheafified pure tensors. -/
 theorem pbcOrdinaryScalarUnit_exists (E : Padic.FiniteCoefficientFields l Ω) :

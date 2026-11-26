@@ -59,7 +59,6 @@ Any two compactifications `c₁` and `c₂` of `f` have a common refinement `c`
   along a refinement, whenever the exchange morphism is an isomorphism.
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl`: the
   isomorphism `Rf_!^{c₁} ≅ Rf_!^{c₂}` for `ℚ̄_ℓ`-sheaves.
-
 -/
 
 @[expose] public section
@@ -88,14 +87,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 
 /-- The isomorphism `i₁_! ⋙ Rp₁_* ≅ i_! ⋙ Rp_*` along a refinement `h : Z ⟶ Z₁` with
 `h ≫ p₁ = p` and cartesian square `sq`, when the exchange morphism
-`R(𝟙 X)_* ⋙ i₁_! ⟶ i_! ⋙ Rh_*` of `sq` is an isomorphism: the composite
-```
-i₁_! ⋙ Rp₁_* ≅ (R(𝟙 X)_* ⋙ i₁_!) ⋙ Rp₁_* ≅ (i_! ⋙ Rh_*) ⋙ Rp₁_* ≅ i_! ⋙ R(h ≫ p₁)_* = i_! ⋙ Rp_*
-```
-of `R(𝟙 X)_* ≅ 𝟭` (`boundedConstructibleLowerStarId`), the exchange isomorphism and the
-composition isomorphism `boundedConstructibleLowerStarComp`. For compactifications `c` and `c₁`
-of `f` with `i = c.overI`, `p = c.overG`, `i₁ = c₁.overI` and `p₁ = c₁.overG`, it is an
-isomorphism `Rf_!^{c₁} ≅ Rf_!^c`. -/
+`R(𝟙 X)_* ⋙ i₁_! ⟶ i_! ⋙ Rh_*` of `sq` is an isomorphism. For compactifications `c` and `c₁`
+of `f`, it is an isomorphism `Rf_!^{c₁} ≅ Rf_!^c`. -/
 noncomputable def boundedConstructibleLowerShriekRefinementIso'
     (sq : IsPullback (𝟙 X) i i₁ h)
     {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} (wp : h ≫ p₁ = p)

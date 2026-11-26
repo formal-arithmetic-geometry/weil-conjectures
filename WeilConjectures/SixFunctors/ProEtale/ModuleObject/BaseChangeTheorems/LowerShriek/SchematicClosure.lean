@@ -20,16 +20,14 @@ square of `j_Z`, `j` and `i` is cartesian, and `i` is proper. The pushforward co
 * `j_! K ≅ i_* j_{Z,!} K`, and
 * `Rp_* j_! K ≅ R(i ≫ p)_* j_{Z,!} K` for every `p : X̄ ⟶ Y`.
 
-This is blueprint `lemma-passing-schematic-closure`.
-
 ## Main definitions
 
 - `AlgebraicGeometry.overImageι`, `AlgebraicGeometry.overToImage`: the scheme-theoretic image of
   a morphism of `S`-schemes, as morphisms of `Over S`.
 - `ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekSchematicClosureIso`:
-  `j_! ≅ j_{Z,!} ⋙ i_*` (blueprint `lemma-passing-schematic-closure--1`).
+  `j_! ≅ j_{Z,!} ⋙ i_*`.
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekSchematicClosureIso`:
-  `j_! ⋙ Rp_* ≅ j_{Z,!} ⋙ R(i ≫ p)_*` (blueprint `lemma-passing-schematic-closure--2`).
+  `j_! ⋙ Rp_* ≅ j_{Z,!} ⋙ R(i ≫ p)_*`.
 
 Both come with `ContinuousMapRingObj` versions for the coefficient ring `E̲`.
 
@@ -119,12 +117,11 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField �
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (j : X ⟶ X') [IsOpenImmersion j.left]
 
-/-- **Passing to the schematic closure** (blueprint `lemma-passing-schematic-closure--1`,
-`ℚ̄_ℓ`-coefficient): for an open immersion `j : X ⟶ X̄`, the schematic closure
-`i : Z ⟶ X̄` of `X` and the induced open immersion `j_Z : X ⟶ Z`, there is a canonical
-isomorphism `j_! ≅ j_{Z,!} ⋙ i_*` on bounded constructible complexes. It is the pushforward
-comparison of the cartesian square `isPullback_overToImage_overImageι`, an isomorphism since `i`
-is proper. -/
+/-- **Passing to the schematic closure** (`ℚ̄_ℓ`-coefficient): for an open immersion `j : X ⟶ X̄`,
+the schematic closure `i : Z ⟶ X̄` of `X` and the induced open immersion `j_Z : X ⟶ Z`, there is a
+canonical isomorphism `j_! ≅ j_{Z,!} ⋙ i_*` on bounded constructible complexes. It is the
+pushforward comparison of the cartesian square `isPullback_overToImage_overImageι`, an isomorphism
+since `i` is proper. -/
 noncomputable def boundedConstructibleOpenImmersionLowerShriekSchematicClosureIso :
     boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j ≅
       boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
@@ -134,10 +131,10 @@ noncomputable def boundedConstructibleOpenImmersionLowerShriekSchematicClosureIs
   asIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward ℓ
     (isPullback_overToImage_overImageι j))
 
-/-- **Passing to the schematic closure** (blueprint `lemma-passing-schematic-closure--2`,
-`ℚ̄_ℓ`-coefficient): for an open immersion `j : X ⟶ X̄`, a morphism `p : X̄ ⟶ Y`, the
-schematic closure `i : Z ⟶ X̄` of `X` and the induced open immersion `j_Z : X ⟶ Z`, there is a
-canonical isomorphism `j_! ⋙ Rp_* ≅ j_{Z,!} ⋙ R(i ≫ p)_*` on bounded constructible complexes. -/
+/-- **Passing to the schematic closure** (`ℚ̄_ℓ`-coefficient): for an open immersion `j : X ⟶ X̄`, a
+morphism `p : X̄ ⟶ Y`, the schematic closure `i : Z ⟶ X̄` of `X` and the induced open immersion
+`j_Z : X ⟶ Z`, there is a canonical isomorphism `j_! ⋙ Rp_* ≅ j_{Z,!} ⋙ R(i ≫ p)_*` on bounded
+constructible complexes. -/
 noncomputable def boundedConstructibleLowerShriekSchematicClosureIso (p : X' ⟶ Y) :
     boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j ⋙
         boundedConstructibleLowerStar ℓ p ≅
@@ -149,10 +146,9 @@ noncomputable def boundedConstructibleLowerShriekSchematicClosureIso (p : X' ⟶
 
 namespace ContinuousMapRingObj
 
-/-- **Passing to the schematic closure** (blueprint `lemma-passing-schematic-closure--1`,
-`E`-coefficient): for an open immersion `j : X ⟶ X̄`, the schematic closure `i : Z ⟶ X̄` of
-`X` and the induced open immersion `j_Z : X ⟶ Z`, there is a canonical isomorphism
-`j_! ≅ j_{Z,!} ⋙ i_*` on bounded constructible complexes. -/
+/-- **Passing to the schematic closure** (`E`-coefficient): for an open immersion `j : X ⟶ X̄`, the
+schematic closure `i : Z ⟶ X̄` of `X` and the induced open immersion `j_Z : X ⟶ Z`, there is a
+canonical isomorphism `j_! ≅ j_{Z,!} ⋙ i_*` on bounded constructible complexes. -/
 noncomputable def boundedConstructibleOpenImmersionLowerShriekSchematicClosureIso :
     boundedConstructibleOpenImmersionLowerShriek (Profinite.continuousMapRingObj E) ℓ j ≅
       boundedConstructibleOpenImmersionLowerShriek (Profinite.continuousMapRingObj E) ℓ
@@ -162,10 +158,10 @@ noncomputable def boundedConstructibleOpenImmersionLowerShriekSchematicClosureIs
   asIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward ℓ E
     (isPullback_overToImage_overImageι j))
 
-/-- **Passing to the schematic closure** (blueprint `lemma-passing-schematic-closure--2`,
-`E`-coefficient): for an open immersion `j : X ⟶ X̄`, a morphism `p : X̄ ⟶ Y`, the schematic
-closure `i : Z ⟶ X̄` of `X` and the induced open immersion `j_Z : X ⟶ Z`, there is a canonical
-isomorphism `j_! ⋙ Rp_* ≅ j_{Z,!} ⋙ R(i ≫ p)_*` on bounded constructible complexes. -/
+/-- **Passing to the schematic closure** (`E`-coefficient): for an open immersion `j : X ⟶ X̄`, a
+morphism `p : X̄ ⟶ Y`, the schematic closure `i : Z ⟶ X̄` of `X` and the induced open immersion
+`j_Z : X ⟶ Z`, there is a canonical isomorphism `j_! ⋙ Rp_* ≅ j_{Z,!} ⋙ R(i ≫ p)_*` on bounded
+constructible complexes. -/
 noncomputable def boundedConstructibleLowerShriekSchematicClosureIso (p : X' ⟶ Y) :
     boundedConstructibleOpenImmersionLowerShriek (Profinite.continuousMapRingObj E) ℓ j ⋙
         boundedConstructibleLowerStar ℓ E p ≅

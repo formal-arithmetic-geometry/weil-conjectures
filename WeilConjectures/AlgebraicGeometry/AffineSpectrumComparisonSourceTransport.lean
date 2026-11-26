@@ -82,8 +82,6 @@ private theorem transport_representatives
     _ = _ := by simpa only [Category.assoc] using ht'
 
 
-set_option linter.unusedVariables false in
--- The quantified proof hypotheses occur only in the proof, not in the conclusion.
 /-- Transport the localized tensor comparison into derived pullback, independently
 of any coefficient morphism or target representative. -/
 theorem exists_affineSpectrum_comparisonIntoPullback_transport
@@ -107,13 +105,13 @@ theorem exists_affineSpectrum_comparisonIntoPullback_transport
         (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
         (Q : CochainComplex
           (SheafOfModules.{u} (moduleRings (Spec Γ(X, ⊤)).toRingedSpace)) ℤ)
-        (hP : P.IsKFlatTensor) (hQ : Q.IsKFlatTensor)
+        (_hP : P.IsKFlatTensor) (_hQ : Q.IsKFlatTensor)
         (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
         (hcQ : IsIso ((counit (Spec.map g'.appTop)).app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)))
         (e : DerivedCategory.Q.obj P ≅ K)
         (e0 : DerivedCategory.Q.obj Q ≅ affineSpectrumDerivedObject X K)
-        (hQ0 : Q = ((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex
+        (_hQ0 : Q = ((Scheme.Modules.tensorPullback X.isoSpec.inv).mapHomologicalComplex
           (.up ℤ)).obj P),
       ∃ l : F.obj (Arrow.mk (comparisonIntoPullback f f' g g' sq z P hcP i)).left ≅
           F0.obj (Arrow.mk

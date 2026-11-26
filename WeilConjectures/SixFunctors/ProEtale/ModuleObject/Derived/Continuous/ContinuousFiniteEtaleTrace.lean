@@ -67,7 +67,9 @@ import Mathlib.AlgebraicGeometry.Limits
 
 /-! # Existence and epimorphy of the normalized continuous finite etale trace
 
-Source: blueprint, stratified lattice proof, "Pushing down by the trace".
+## References
+
+* Bhatt--Scholze, Section 6.8
 -/
 
 @[expose] public noncomputable section
@@ -179,23 +181,7 @@ private theorem finiteEtaleTrace_of_compatible
   exact ⟨τ, hEpi (fun c ↦ sheetSum_epi Λ p P c), hτ⟩
 
 /-- A finite etale surjection has an epic normalized trace for every continuous
-rational module, without any local-freeness or integral-lattice hypothesis.
-Source: blueprint, stratified lattice proof, "Pushing down by the trace";
-Bhatt--Scholze, Section 6.8.
-(blueprint: lem-sfb-continuous-finite-etale-trace)
-
-Proof. On every weakly etale finite splitting chart of p take the sum of the
-canonical sheet projections, each the pullback of the actual counit at p^*P
-conjugated by the composition comparisons. These local sums agree on overlaps
-(finiteEtaleSheetSum_compatible), so they descend to a global map tau with the
-exact sheet-sum formula FiniteEtaleTraceFormula (finiteEtaleSplitHom_descent).
-Each local sum is epic: on a chart with at least one sheet, the canonical
-product comparison of splitProEtaleModuleProductMap_isIso is an isomorphism, and
-insertion into one chosen sheet followed by its inverse is a right inverse of
-the sum. A chart with no sheets has empty fibre product; surjectivity of p makes
-its base empty, and every internal module over the empty scheme is zero. The
-epimorphy clause of the descent theorem then makes tau epic. No choice of an
-integral lattice, trivialization of P, or division by the degree is used. -/
+rational module, without any local-freeness or integral-lattice hypothesis. -/
 theorem continuousFiniteEtaleTrace_exists
     (l : ℕ) [Fact l.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

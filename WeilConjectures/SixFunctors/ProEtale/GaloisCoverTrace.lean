@@ -29,8 +29,11 @@ it: this is the *trace* `t : g_* g^* H ⟶ H` (`AlgebraicGeometry.ProEtale.galoi
 So for `|Γ|` invertible on `H` (a `p`-group and `ℤ[1/p]`-linear coefficients) the unit is a split
 monomorphism, split by the normalized trace `|Γ|⁻¹ t`, whose idempotent is the average of the
 action (`CategoryTheory.comp_normalizedTrace`, `CategoryTheory.nsmul_normalizedTrace_comp_eq_sum`).
-This is the finite-level input of the averaging argument over a pro-`p` group (SGA 4½,
-[Th. finitude], §3; blueprint `prose-E-10`, `lemma-duality-invariants-pro-p--1`).
+This is the finite-level input of the averaging argument over a pro-`p` group.
+
+## References
+
+* SGA 4½, [Th. finitude], §3
 -/
 
 @[expose] public section

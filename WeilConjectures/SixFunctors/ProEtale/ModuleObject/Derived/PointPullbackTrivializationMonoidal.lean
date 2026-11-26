@@ -57,8 +57,27 @@ private theorem comap_delta {R S : C} [MonObj R] [MonObj S]
   rw [hδ, ← h, Category.assoc, ← Mod.comp_hom', Iso.hom_inv_id, Mod.id_hom',
     Category.comp_id]
 
-set_option synthInstance.maxHeartbeats 100000 in
--- Relative tensor functor instances require this local elaboration budget.
+private noncomputable instance mapModComp_lax (F : C ⥤ D) (G : D ⥤ E)
+    [F.Braided] [G.Braided]
+    [PreservesColimitsOfShape WalkingParallelPair F]
+    [PreservesColimitsOfShape WalkingParallelPair G]
+    (R : C) [MonObj R] [IsCommMonObj R] :
+    (F.mapMod R ⋙ G.mapMod (F.obj R)).LaxMonoidal :=
+  @Functor.LaxMonoidal.comp _ _ _ _ _ _ _ _ _
+    (F.mapMod R) (G.mapMod (F.obj R))
+    (Functor.monoidal_mapMod (F := F) (R := R)).toLaxMonoidal
+    (Functor.monoidal_mapMod (F := G) (R := F.obj R)).toLaxMonoidal
+
+private noncomputable instance mapModComap_lax (H : C ⥤ D) {R : C} {S : D}
+    [H.Braided] [PreservesColimitsOfShape WalkingParallelPair H]
+    [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
+    (φ : S ⟶ H.obj R) [IsMonHom φ] [IsIso φ] :
+    (H.mapMod R ⋙ Mod.comap φ).LaxMonoidal :=
+  @Functor.LaxMonoidal.comp _ _ _ _ _ _ _ _ _
+    (H.mapMod R) (Mod.comap φ)
+    (Functor.monoidal_mapMod (F := H) (R := R)).toLaxMonoidal
+    (Mod.monoidal_comap φ).toLaxMonoidal
+
 private theorem mapModComp_monoidal (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)
     [F.Braided] [G.Braided] [H.Braided]
     [F.PreservesEpimorphisms] [G.PreservesEpimorphisms]
@@ -98,8 +117,18 @@ private theorem mapModComp_monoidal (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)
       ((Mod.comap (Functor.compAlgHom F G τ R)).obj ((H.mapMod R).obj M))
       ((Mod.comap (Functor.compAlgHom F G τ R)).obj ((H.mapMod R).obj N))) ht.symm
 
-set_option synthInstance.maxHeartbeats 100000 in
--- Tensor instances for both restrictions need this local elaboration budget.
+private noncomputable instance comapComp_lax [MonoidalClosed C] [HasEqualizers C]
+    {R S : C} [MonObj R] [MonObj S]
+    [IsCommMonObj R] [IsCommMonObj S] (φ : R ⟶ S) [IsMonHom φ] [IsIso φ] :
+    ((Mod.comap φ : Mod C S ⥤ Mod C R) ⋙
+      (Mod.comap (asIso φ).inv : Mod C R ⥤ Mod C S)).LaxMonoidal := by
+  let first : (Mod.comap φ : Mod C S ⥤ Mod C R).LaxMonoidal :=
+    (Mod.monoidal_comap φ).toLaxMonoidal
+  let second : (Mod.comap (asIso φ).inv : Mod C R ⥤ Mod C S).LaxMonoidal :=
+    (Mod.monoidal_comap (asIso φ).inv).toLaxMonoidal
+  exact @Functor.LaxMonoidal.comp _ _ _ _ _ _ _ _ _
+    (Mod.comap φ) (Mod.comap (asIso φ).inv) first second
+
 private theorem comap_unit_monoidal [MonoidalClosed C] [HasEqualizers C]
     {R S : C} [MonObj R] [MonObj S]
     [IsCommMonObj R] [IsCommMonObj S] (φ : R ⟶ S) [IsMonHom φ] [IsIso φ] :
@@ -187,24 +216,7 @@ private theorem cancel_equivalence_monoidal {A B : Type*} [Category A] [Category
     Functor.isoWhiskerLeft_hom]
   infer_instance
 
-/-- The canonical trivialization of point pullback preserves tensor products.
-Source: the canonical point equivalence and coefficient comparison
-`upperStarFromPointModComp`; latest blueprint,
-realified-kernel proof Steps 1--2
-(blueprint: lem-fd-point-pullback-trivialization-monoidal).
-
-Proof: write P for pullback from condensed modules and Q for pullback along σ.
-The coefficient sheaf comparison P ⋙ Q ≅ P is strong monoidal: its underlying
-sheaf comparison is the pullback compositor, and extending scalars along its
-coefficient-ring component makes its tensorator the relative tensor comparison.
-To verify this, precompose both tensor maps with the extension-of-scalars unit
-and the balanced tensor-product projection. The two maps then become the same
-underlying pullback tensor map, by the monoidality of the sheaf compositor.
-The unit identity is `upperStarFromPointModComp_hom_app_unit`.
-Since P is a monoidal equivalence, equip its chosen inverse with the transported
-monoidal structure. Its counit and the associators and unitors are monoidal.
-The defining composite Q ≅ P⁻¹ ⋙ P ⋙ Q ≅ P⁻¹ ⋙ P ≅ id is therefore monoidal.
-This argument includes the zero coefficient ring and every endomorphism σ. -/
+/-- The canonical trivialization of point pullback preserves tensor products. -/
 theorem point_pullback_trivialization_monoidal {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (σ : Spec (.of Ω) ⟶ Spec (.of Ω)) :
     NatTrans.IsMonoidal (upperStarIsoIdOfIsSepClosed Λ σ).hom := by

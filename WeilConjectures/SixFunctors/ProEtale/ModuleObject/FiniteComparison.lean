@@ -128,13 +128,7 @@ variable (T : Type) [TopologicalSpace T] [Ring T] [IsTopologicalRing T] [Discret
   [Finite T]
 
 /-- For a finite discrete ring `T`, the comparison `T_X ⟶ Λ_X = p_X^* T̲` from the constant ring
-sheaf `T` on `X_proét` to the pullback of the condensed ring `T̲ = C(-, T)`: the composite
-```
-T_X ≅ π_X^* T_{Spec ℤ} ≅ π_X^* p^* T_* ≅ π_X^* p^* T̲ = p_X^* T̲
-```
-of the comparisons `constantSheafToUpperStarToSpecZ`, `constantSheafToPointUpperStar` for
-constant sheaves and the identification `T_* ≅ T̲` of
-`Profinite.constRingSheafToContinuousMapRingObj`. -/
+sheaf `T` on `X_proét` to the pullback of the condensed ring `T̲ = C(-, T)`. -/
 noncomputable def constRingSheafToCondensedRingObj :
     Sheaf.constRingSheaf (Scheme.ProEt.topology X) (ULift.{u + 1} T) ⟶
       condensedRingObj (Profinite.continuousMapRingObj T) X :=
@@ -191,9 +185,7 @@ discrete commutative ring `T`, module objects over the coefficient ring `Λ_X = 
 abelian sheaves on `X_proét` are the sheaves of `T`-modules on `X_proét`: restriction of
 scalars along the isomorphism of ring objects `T_X ≅ Λ_X`
 (`ProEtale.constRingSheafToCondensedRingObj`), followed by the identification of modules over
-the constant ring sheaf `T_X` with sheaves of `T`-modules
-(`CategoryTheory.Sheaf.modConstRingSheafEquivalence`). The underlying abelian sheaf is
-preserved (`ProEtale.finiteCoefficientModEquivalence_functor_comp_sheafCompose`). -/
+the constant ring sheaf `T_X` with sheaves of `T`-modules. -/
 noncomputable def finiteCoefficientModEquivalence :
     Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
         (condensedRingObj (Profinite.continuousMapRingObj T) X) ≌

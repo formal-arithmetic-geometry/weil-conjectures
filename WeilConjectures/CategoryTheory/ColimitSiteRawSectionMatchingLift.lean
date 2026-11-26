@@ -49,7 +49,6 @@ private theorem image_cover_eq
   · rintro Y f ⟨hf⟩
     exact Presieve.ofArrows.mk (⟨⟨_, L.map _⟩, .of hf⟩ : (R.map L).uncurry)
 
-set_option linter.unusedVariables false in
 /-- Matching families of sections of the raw colimit site lift to a finite stage.
 Stacks Project, Sites, Tag 0A35. -/
 theorem colimit_site_raw_section_matching_lift
@@ -73,7 +72,7 @@ theorem colimit_site_raw_section_matching_lift
     (hobjects : IsColimit (Cat.objects.mapCocone V))
     (harrows : IsColimit (Cat.arrows.mapCocone V))
     (Q : Precoverage V.pt)
-    (hVpullback : (∀ (j : J) (X Y Z : F.obj j) (R : Presieve X), R ∈ P j X →
+    (_hVpullback : (∀ (j : J) (X Y Z : F.obj j) (R : Presieve X), R ∈ P j X →
             ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →
               PreservesLimit (cospan f g) (V.ι.app j).toFunctor))
     [∀ j : J, (V.ι.app j).toFunctor.IsContinuous
@@ -111,7 +110,7 @@ theorem colimit_site_raw_section_matching_lift
     (j : J) (X : F.obj j) (R : Presieve X) (hR : R ∈ P j X)
     (x : (R.map (V.ι.app j).toFunctor).FamilyOfElements (colimit B))
     (hx : x.Compatible) :
-    ∃ (t : Under i) (W : F.obj t.right) (T : Presieve W) (hcoverT : T ∈ P t.right W)
+    ∃ (t : Under i) (W : F.obj t.right) (T : Presieve W) (_hcoverT : T ∈ P t.right W)
       (e : (V.ι.app t.right).toFunctor.obj W = (V.ι.app j).toFunctor.obj X)
       (hT : Presieve.ofArrows
         (fun p : T.uncurry ↦ (V.ι.app t.right).toFunctor.obj p.val.1)

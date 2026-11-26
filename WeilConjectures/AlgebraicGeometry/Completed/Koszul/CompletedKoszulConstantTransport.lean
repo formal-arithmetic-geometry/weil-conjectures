@@ -670,7 +670,6 @@ private theorem koszul_to_constant_completion
   rw [← E.functor.map_comp_assoc, he, hk]
   rfl
 
-set_option linter.style.haveILetI false in
 /-- A scalar-preserving completed coefficient isomorphism carries the localized
 Koszul fiber and its specified unit to constant-sheaf quotient completion. -/
 theorem completed_koszul_constant_transport
@@ -693,7 +692,7 @@ theorem completed_koszul_constant_transport
       F.map (DerivedCategory.Q.map (intrinsicCompletionComplexUnit T d r a C)) ≫ e.hom =
         (ConstantCompletion.completionUnit (completedCechTopology T) A d.ideal true).app
           (F.obj (DerivedCategory.Q.obj C)) := by
-  letI := reductionModulesHasDerivedCategory T (d.completedRing T)
+  let := reductionModulesHasDerivedCategory T (d.completedRing T)
   obtain ⟨e, he⟩ := koszul_to_constant_completion T d β hβ r a ha C
   let H := ConstantCompletion.completion (completedCechTopology T) A d.ideal true
   let κ := ConstantCompletion.completionUnit (completedCechTopology T) A d.ideal true

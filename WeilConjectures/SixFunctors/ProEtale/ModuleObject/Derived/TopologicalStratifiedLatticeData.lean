@@ -22,8 +22,12 @@ import WeilConjectures.AlgebraicGeometry.ContinuousIntegralUnderivedPushComparis
 import WeilConjectures.AlgebraicGeometry.ContinuousEtaleLocalLattices
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.ContinuousFiniteEtaleTraceLattice
 
-/-! Unordered stratified integral lattices
-(blueprint: lem-sfb-topological-stratified-lattice-data). -/
+/-! Unordered stratified integral lattices.
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.13
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -34,8 +38,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- Exact scalar extension identifies the trace image with the rational module.
 This uses the existing counit and ordinary pushforward comparisons with the given
-NormedField structure, avoiding any replacement of that structure.
-Source: blueprint stratified-lattice proof, pushing down by the trace. -/
+NormedField structure, avoiding any replacement of that structure. -/
 private theorem trace_image_adj_isIso
     (l : ℕ) [Fact l.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[l] E]
     (X : Scheme.{u})
@@ -85,22 +88,7 @@ private theorem trace_image_adj_isIso
 
 /-- A locally free rational module admits integral lattices on a finite locally closed
 stratification. This is the lattice-atlas, finite-etale stratification, and trace step;
-the ordered refinement is separate.
-
-Proof. A Noetherian underlying space is compact and quasi-separated. Apply the
-continuous etale-local lattice theorem to
-obtain a qcqs etale surjection and an integral locally free model upstairs. The
-coefficient-stratification argument restricts this model to the finite etale
-strata of that cover. On each stratum apply the continuous finite-etale trace
-theorem. Its locally free trace image embeds monomorphically into the rational
-module, and exact rationalization makes the actual scalar-extension adjoint an
-isomorphism. The generic coefficient-stratification argument packages these
-embedded lattices over the finite locally closed partition.
-
-Source: Bhatt--Scholze, Lemma 6.8.13, first paragraph, p. 61; blueprint
-`lem-sfb-topological-stratified-lattices`, steps 1--3.
-(blueprint: lem-sfb-topological-stratified-lattice-data).
--/
+the ordered refinement is separate. -/
 theorem exists_topologicalStratifiedLatticeData
     (l : ℕ) [Fact l.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

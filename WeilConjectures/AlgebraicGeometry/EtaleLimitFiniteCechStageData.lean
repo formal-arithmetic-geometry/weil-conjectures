@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleLimitFiniteCechCoefficientData
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Over
 import Mathlib.CategoryTheory.Limits.MorphismProperty
 
-set_option linter.unusedVariables false
 
 /-! # Canonical descended finite Čech comparison
 
@@ -97,7 +96,7 @@ theorem exists_etale_limit_finite_cech_stage_data
         (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)
           (c.π.app (op i)) (c.w f.op).symm).hom.app (F i) ≫
         (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φ f) ≫ (eG j).inv)
-    (L : Cocone G) (hL : IsColimit L)
+    (L : Cocone G) (_hL : IsColimit L)
     (U : c.pt.Etale) [CompactSpace U.left] [QuasiSeparatedSpace U.left]
     (K : Type (u + 1)) [Finite K] (V : K → c.pt.Etale) (f : ∀ k, V k ⟶ U)
     (hV : ∀ k, CompactSpace (V k).left ∧ QuasiSeparatedSpace (V k).left)

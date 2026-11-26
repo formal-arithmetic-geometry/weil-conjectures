@@ -22,7 +22,6 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true
 set_option Elab.async false
 set_option synthInstance.maxSize 2048
-set_option linter.unusedSimpArgs false
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale.StrictTower
@@ -88,7 +87,7 @@ private theorem cartesian_beta_restriction_cancelled {U' U X' X : Scheme.{u}}
     ((moduleSquareG B a j' j g w).symm.app ((moduleJ B j).obj M)) _ _).1
   simp only [Iso.app_hom, Iso.symm_hom]
   rw [← Category.assoc, cartesian_beta_restriction B a j' j g w sq M]
-  simp only [Category.assoc, asIso_hom, Iso.inv_hom_id_app_assoc]
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
   have hc := (asIso (moduleJAdj B j').unit).hom_inv_id_app
     ((modulePullback B a).obj M)
   simpa only [asIso_hom, Functor.id_obj, Functor.comp_obj, Category.assoc,
@@ -108,7 +107,7 @@ private theorem open_comp_congr_unit {U V X : Scheme.{u}}
         (modulePullback B s).map ((modulePullback B b).map
           (((openBetaModuleJComp B s b) ≪≫ singleJCongr B w).hom.app N)) := by
   subst k
-  simp only [Iso.trans_hom, NatTrans.comp_app, singleJCongr_refl, NatTrans.id_app,
+  simp only [Iso.trans_hom, singleJCongr_refl,
     Category.comp_id, moduleCompEq, eqToIso_refl, Iso.refl_trans]
   exact open_comp_unit B s b N
 

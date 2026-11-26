@@ -173,7 +173,6 @@ private theorem untransport_raw
   subst Y
   simpa using hz
 
-set_option linter.unusedVariables false in
 /-- Finitely many sections `x p` of the colimit of the Kan-extended stage presheaves `B` over the
 images of objects `Y p` of stage `j` all come from stage sections `s p` at one later stage `t`.
 
@@ -197,7 +196,7 @@ theorem colimit_site_raw_finite_sections_lift
                           (P t.right).toGrothendieck (P t'.right).toGrothendieck).obj
                           ((sheafPullback (F.map t'.hom).toFunctor (Type u)
                             (P i).toGrothendieck (P t'.right).toGrothendieck).obj G))
-    (hθ : ∀ (t t' : Under i) (b : t ⟶ t'),
+    (_hθ : ∀ (t t' : Under i) (b : t ⟶ t'),
       (∀ X : F.obj i,
                           Arrow.mk
                             (((sheafAdjunctionContinuous (F.map t.hom).toFunctor (Type u)

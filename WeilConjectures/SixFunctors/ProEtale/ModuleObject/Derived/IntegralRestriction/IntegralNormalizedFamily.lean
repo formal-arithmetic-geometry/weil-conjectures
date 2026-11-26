@@ -27,8 +27,6 @@ import Mathlib.CategoryTheory.ShrinkYoneda
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-! # A whole-system integral diagonal coefficient family
-
-Source: sk-thm-int-restriction-line.proof.md, paragraph (1).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -120,8 +118,7 @@ private theorem selectPresentation
   exact conclude z ⟨a, b, c, d, e, hp, hq, hr, f, g, h, i, ⟨hs, ht, hv⟩, hz⟩
 
 /-- The coefficient family comes from one completed whole-system diagonal class and
-its three normalized traces. Source: diagonal tower coefficients, clauses (1)--(3).
-(blueprint: lem-integral-normalized-family). -/
+its three normalized traces. -/
 def IntegralFamilyReference (Y : Scheme.{u}) (family : Family ℓ Y) : Prop :=
   ∃ (_hY : IsUnit (ℓ : Γ(Y, ⊤)))
     (aY : DiagonalTraceLocalizations ℓ Y)
@@ -134,15 +131,7 @@ def IntegralFamilyReference (Y : Scheme.{u}) (family : Family ℓ Y) : Prop :=
       Nonempty (Reference ℓ Y δ family)
 
 /-- Existence of a referenced integral coefficient family over a separated finite-type
-base. Source: diagonal tower limit and coefficient extension, paragraph (1).
-(blueprint: lem-integral-normalized-family).
-Proof: finite type over the field makes Y, its projective line and its self-square
-Noetherian. The characteristic assumption makes ell a unit on Y. Choose the localization
-sizes furnished by Grothendieck abelianity of the sheaf categories and their strict
-system categories. Construct the strict diagonal system, apply the completed limit
-statement, and take its unique completed diagonal arrow with all its normalizations.
-The coefficient extension theorem supplies the family and its completed reference.
-Retain the reference to the completed arrow in IntegralFamilyReference. -/
+base. -/
 theorem integralNormalizedFamily_exists
     (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))]

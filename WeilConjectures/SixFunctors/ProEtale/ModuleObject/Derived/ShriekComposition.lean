@@ -167,11 +167,9 @@ X' --i'--> Z'
 v          v
 X  --j---> Z
 ```
-with `j` and `i'` open immersions (`E`-coefficient): the mate, under the adjunctions `Lp^* ⊣ Rp_*`
-and `Lp'^* ⊣ Rp'_*`, of the extension-by-zero base-change isomorphism `j_! ⋙ Lp'^* ≅ Lp^* ⋙ i'_!`
-(`boundedConstructibleOpenImmersionLowerShriekBaseChangeIso`), assembled as the composite of the
-unit insertion, the square transport, and the counit contraction:
-`Rp_* ⋙ j_! ⟶ Rp_* ⋙ j_! ⋙ Lp'^* ⋙ Rp'_* ≅ Rp_* ⋙ Lp^* ⋙ i'_! ⋙ Rp'_* ⟶ i'_! ⋙ Rp'_*`. -/
+with `j` and `i'` open immersions (`E`-coefficient): the mate, under the adjunctions
+`Lp^* ⊣ Rp_*` and `Lp'^* ⊣ Rp'_*`, of the extension-by-zero base-change isomorphism
+`j_! ⋙ Lp'^* ≅ Lp^* ⋙ i'_!`. -/
 noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
     (sq : IsPullback p i' j p') :
     boundedConstructibleLowerStar ℓ E p ⋙ boundedConstructibleOpenImmersionLowerShriek
@@ -259,11 +257,9 @@ X' --i'--> Z'
 v          v
 X  --j---> Z
 ```
-with `j` and `i'` open immersions (`𝒪_E`-coefficient): the mate, under the adjunctions `Lp^* ⊣ Rp_*`
-and `Lp'^* ⊣ Rp'_*`, of the extension-by-zero base-change isomorphism `j_! ⋙ Lp'^* ≅ Lp^* ⋙ i'_!`
-(`boundedConstructibleOpenImmersionLowerShriekBaseChangeIso`), assembled as the composite of the
-unit insertion, the square transport, and the counit contraction:
-`Rp_* ⋙ j_! ⟶ Rp_* ⋙ j_! ⋙ Lp'^* ⋙ Rp'_* ≅ Rp_* ⋙ Lp^* ⋙ i'_! ⋙ Rp'_* ⟶ i'_! ⋙ Rp'_*`. -/
+with `j` and `i'` open immersions (`𝒪_E`-coefficient): the mate, under the adjunctions
+`Lp^* ⊣ Rp_*` and `Lp'^* ⊣ Rp'_*`, of the extension-by-zero base-change isomorphism
+`j_! ⋙ Lp'^* ≅ Lp^* ⋙ i'_!`. -/
 noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
     (sq : IsPullback p i' j p') :
     boundedConstructibleLowerStar ℓ E p ⋙ boundedConstructibleOpenImmersionLowerShriek
@@ -385,13 +381,9 @@ variable {X Y S : Over (Spec (.of k))}
   (f : X ⟶ Y) (g : Y ⟶ S)
 
 /-- The composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` for the derived lower shriek on
-bounded constructible `E`-sheaves: for the chosen compactifications `c = (X ⟶[i] Z
-⟶[p] Y)` of `f` and `c' = (Y ⟶[j] Z' ⟶[q] S)` of `g`, and a compactification `d = (Z ⟶[i'] W ⟶[p']
-Z')` of `p ≫ j` with cartesian square (`Compactification.exists_isPullback_overG_overI`), the
-composite of the independence of the compactification
-(`boundedConstructibleLowerShriekOfCompactificationIso`) for the composite compactification
-`X ⟶[i ≫ i'] W ⟶[p' ≫ q] S`, of the composition isomorphisms of `j_!` and `Rf_*`, and of the
-inverse of the exchange isomorphism `Rp_* ⋙ j_! ≅ i'_! ⋙ Rp'_*`. -/
+bounded constructible `E`-sheaves, built from the chosen compactifications of `f` and `g` and a
+compactification of the composite of the first compactification's proper part with the open
+immersion of the second. -/
 @[no_expose]
 noncomputable def boundedConstructibleLowerShriekComp :
     ContinuousMapRingObj.boundedConstructibleLowerShriek ℓ E (f ≫ g) ≅

@@ -38,8 +38,7 @@ the pullback comparison
 of mates (`CategoryTheory.mateEquiv_app_cube`) shows that the reduction carries the base change
 morphism `Lg^* Rf_* ⟶ Rf'_* Lg'^*` with `𝒪_E`-coefficients to the one with
 `𝒪_E ⧸ ℓⁿ`-coefficients
-(`ProEtale.CondensedRing.boundedConstructibleIntegersModPowReduction_baseChange`; blueprint
-`proposition-compatibility-purity-base-change`, direct images).
+(`ProEtale.CondensedRing.boundedConstructibleIntegersModPowReduction_baseChange`).
 -/
 
 @[expose] public section
@@ -151,16 +150,9 @@ for a commutative square `g' ≫ f = f' ≫ g` and `K ∈ Dᵇc(X)⟦𝒪_E⟧`,
 ```
 as morphisms `Lg^* red_Y Rf_* K ⟶ Rf'_* red_{X'} Lg'^* K`, where `Pull_h : Lh^* ⋙ red ≅ red ⋙ Lh^*`
 are the pullback comparisons (`boundedConstructibleUpperStarIntegersModPowReductionIso`),
-`γ_h = mateEquiv (Lh^* ⊣ Rh_*) (Lh^* ⊣ Rh_*) Pull_h⁻¹ : Rh_* ⋙ red ⟶ red ⋙ Rh_*` (by definition
-`boundedConstructibleLowerStarIntegersModPowReduction`) and
+`γ_h = mateEquiv (Lh^* ⊣ Rh_*) (Lh^* ⊣ Rh_*) Pull_h⁻¹ : Rh_* ⋙ red ⟶ red ⋙ Rh_*`, and
 `BC = mateEquiv (Lf^* ⊣ Rf_*) (Lf'^* ⊣ Rf'_*) θ_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` are the base
-change morphisms, the mates of the pullback square comparisons `θ_sq`.
-
-This is `CategoryTheory.mateEquiv_app_cube` for the cube condition
-`boundedConstructibleUpperStarIntegersModPowReductionIso_cube`. The statement is the type of the
-proof (`type_of%`), with `γ` written as a `mateEquiv`: a hand-written statement elaborates the
-instance arguments of the categories to terms whose identification with those of the
-instantiated `CategoryTheory.mateEquiv_app_cube` is very expensive. -/
+change morphisms, the mates of the pullback square comparisons `θ_sq`. -/
 theorem boundedConstructibleIntegersModPowReduction_baseChange (sq : CommSq g' f' f g)
     (K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
     type_of% (mateEquiv_app_cube

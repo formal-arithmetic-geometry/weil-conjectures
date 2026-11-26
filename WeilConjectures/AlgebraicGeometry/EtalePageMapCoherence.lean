@@ -31,7 +31,6 @@ private theorem apply_eq_index {A : Sort*} {B : A → Sort*} {R : Sort*}
 
 set_option backward.isDefEq.respectTransparency false in
 -- Elaborate the dependent inverse-image and spectral-page map families.
-set_option linter.unusedVariables false in
 /-- The supplied pullback page maps obey diagram and cocone equations
 (Stacks, Tags 015J, 015K and 0EZM). -/
 theorem etale_page_map_coherence
@@ -78,7 +77,7 @@ theorem etale_page_map_coherence
       (M : ∀ {X Y : Scheme.{u}} (f : Y ⟶ X)
         (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
         (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}))
-        (v : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
+        (_v : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
           (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj),
         (T₀ X K).sequence ⟶ (T₀ Y L).sequence)
     (hid : ∀ (X : Scheme.{u})

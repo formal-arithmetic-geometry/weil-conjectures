@@ -67,13 +67,12 @@ private theorem cohomology_middle_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
       ((congrArg (fun h ↦ Sheaf.H.map h n (cohomologyMap f S.X₂ n z))
         t.comm₂₃.symm).trans (Sheaf.H.map_comp_apply t.τ₂ S'.g _))
 
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 /-- Exact connecting rows and their comparison squares for an affine-stage system
 (Stacks, Tags 09YP, 0EXZ, 0739, 0EYL and 04HR). -/
 theorem etale_limit_affine_exact_ladder
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
-    (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)
+    (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (_hc : IsLimit c)
     [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]
     [∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D.map f)]
     [∀ i : Iᵒᵖ, IsAffine (D.obj i)]
@@ -101,10 +100,10 @@ theorem etale_limit_affine_exact_ladder
     (continuation : ∀ (E : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})
     (ψ : ∀ {i j : I} (f : i ⟶ j),
       (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (E i) ⟶ E j)
-    (hidE : ∀ i : I, ψ (𝟙 i) =
+    (_hidE : ∀ i : I, ψ (𝟙 i) =
       (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app
         (E i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (E i))
-    (hcompE : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),
+    (_hcompE : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),
       ψ (f ≫ g) =
         (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)
           (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (E i) ≫
@@ -112,28 +111,28 @@ theorem etale_limit_affine_exact_ladder
     (GE : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})
     (eGE : ∀ i : I, GE.obj i ≅
       (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (E i))
-    (hGE : ∀ (i j : I) (f : i ⟶ j), GE.map f =
+    (_hGE : ∀ (i j : I) (f : i ⟶ j), GE.map f =
       (eGE i).hom ≫
         (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)
           (c.π.app (op i)) (c.w f.op).symm).hom.app (E i) ≫
         (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (ψ f) ≫ (eGE j).inv)
-    (LE : Cocone GE) (hLE : IsColimit LE)
+    (LE : Cocone GE) (_hLE : IsColimit LE)
     (HE : I ⥤ AddCommGrpCat.{u + 1})
     (eHE : ∀ i : I, HE.obj i ≅ AddCommGrpCat.of (Sheaf.H (E i) n))
-    (hHE : ∀ (i j : I) (f : i ⟶ j), HE.map f =
+    (_hHE : ∀ (i j : I) (f : i ⟶ j), HE.map f =
       (eHE i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (D.map f.op) (E i) n) ≫
         AddCommGrpCat.ofHom (Sheaf.H.map (ψ f) n) ≫ (eHE j).inv)
     (BE : Cocone HE) (eBE : BE.pt ≅ AddCommGrpCat.of (Sheaf.H LE.pt n))
-    (hBE : ∀ i : I, BE.ι.app i ≫ eBE.hom =
+    (_hBE : ∀ i : I, BE.ι.app i ≫ eBE.hom =
       (eHE i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (c.π.app (op i)) (E i) n) ≫
         AddCommGrpCat.ofHom (Sheaf.H.map ((eGE i).inv ≫ LE.ι.app i) n))
     (R : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})
     (ρ : ∀ {i j : I} (f : i ⟶ j),
       (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (R i) ⟶ R j)
-    (hidentityR : ∀ i : I, ρ (𝟙 i) =
+    (_hidentityR : ∀ i : I, ρ (𝟙 i) =
       (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app
         (R i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (R i))
-    (hcompositionR : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),
+    (_hcompositionR : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),
       ρ (f ≫ g) =
         (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)
           (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (R i) ≫
@@ -141,12 +140,12 @@ theorem etale_limit_affine_exact_ladder
     (T : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})
     (eT : ∀ i : I, T.obj i ≅
       (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (R i))
-    (hT : ∀ (i j : I) (f : i ⟶ j), T.map f =
+    (_hT : ∀ (i j : I) (f : i ⟶ j), T.map f =
       (eT i).hom ≫
         (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)
           (c.π.app (op i)) (c.w f.op).symm).hom.app (R i) ≫
         (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (ρ f) ≫ (eT j).inv)
-    (K : Cocone T) (hK : IsColimit K)
+    (K : Cocone T) (_hK : IsColimit K)
     (δ : ∀ k : I, Sheaf.H (R k) n →+ Sheaf.H (F k) (n + 1))
     (α : ∀ k : I, HE.obj k →+ Sheaf.H (R k) n)
     (α₀ : BE.pt →+ Sheaf.H K.pt n)

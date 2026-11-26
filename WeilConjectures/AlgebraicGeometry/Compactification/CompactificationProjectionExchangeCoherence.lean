@@ -32,8 +32,6 @@ set_option linter.privateModule false
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
-set_option linter.unusedSectionVars false
 attribute [local instance 30000] isNoetherian_of_finite
   AlgebraicGeometry.ProEtale.preservesHomology_upperStar
   AlgebraicGeometry.ProEtale.preservesFiniteLimits_upperStar
@@ -62,10 +60,10 @@ private theorem compactification_chain
     a.inv ≫ b.hom ≫ c.inv ≫ d.hom ≫ e.inv ≫ i.inv ≫ h.hom = j.inv := by
   have e₁ : d.hom ≫ e.inv = k.inv ≫ i.hom := by
     rw [← cancel_epi k.hom, ← reassoc_of% h₁]
-    simp only [Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.comp_id]
+    simp only [Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.comp_id]
   have e₂ : b.hom ≫ c.inv = l.inv ≫ k.hom := by
     rw [← cancel_epi l.hom, reassoc_of% h₂]
-    simp only [Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.comp_id]
+    simp only [Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.comp_id]
   have e₃ : a.inv ≫ l.inv ≫ h.hom = j.inv := by
     rw [← cancel_epi (l.hom ≫ a.hom), Category.assoc, Iso.hom_inv_id_assoc,
       Iso.hom_inv_id_assoc, h₃]
@@ -127,6 +125,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 set_option synthInstance.maxSize 2048 in
 
+omit [MonoidalPreadditive A] [Abelian.HasFunctorialFlatResolution A] [UpperStarPreservesFlat A] in
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
 private theorem comp_monoidal {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     NatTrans.IsMonoidal (upperStarComp A f g).hom := by
@@ -140,12 +139,14 @@ private theorem comp_monoidal {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
   have : NatTrans.IsMonoidal (upperStarComp A f g).symm.hom := this
   exact inferInstanceAs (NatTrans.IsMonoidal (upperStarComp A f g).symm.inv)
 
+omit [MonoidalPreadditive A] [Abelian.HasFunctorialFlatResolution A] [UpperStarPreservesFlat A] in
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
 private theorem congr_monoidal {X Y : Scheme.{u}} {f g : X ⟶ Y} (e : f = g) :
     NatTrans.IsMonoidal (upperStarCongr A e).hom := by
   subst e
   change NatTrans.IsMonoidal (𝟙 (upperStar A f))
   infer_instance
+omit [UpperStarPreservesFlat A] in
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
 private theorem congr_eq {X Y : Scheme.{u}} {f g : X ⟶ Y} (e : f = g) :
     leftDerivedUpperStarCongr A e =
@@ -156,6 +157,7 @@ private theorem congr_eq {X Y : Scheme.{u}} {f g : X ⟶ Y} (e : f = g) :
     Functor.mapDerivedCategoryNatIso_refl]
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y}
   {g : Y' ⟶ Y}
+omit [MonoidalPreadditive A] [Abelian.HasFunctorialFlatResolution A] [UpperStarPreservesFlat A] in
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
 private theorem square_monoidal (sq : CommSq g' f' f g) :
     NatTrans.IsMonoidal (upperStarCompIso A sq.w.symm).hom := by
@@ -172,6 +174,7 @@ attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
 private noncomputable def squareLift (sq : CommSq g' f' f g) :=
   Functor.leftDerivedFunctorCompNatIso (upperStar A f) (upperStar A g')
     (upperStar A g) (upperStar A f') (upperStarCompIso A sq.w.symm)
+omit [UpperStarPreservesFlat A] in
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
 private theorem squareLift_eq (sq : CommSq g' f' f g) :
     squareLift A sq = leftDerivedUpperStarSquareIso A sq := by
@@ -181,7 +184,7 @@ private theorem squareLift_eq (sq : CommSq g' f' f g) :
     Functor.leftDerivedFunctorNatIso, Functor.leftDerivedFunctorCompIso,
     Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv, NatTrans.comp_app,
     Functor.mapDerivedCategoryNatIso_trans, Functor.mapDerivedCategoryNatIso_symm,
-    Category.assoc, Iso.inv_hom_id_app_assoc, Iso.hom_inv_id_app_assoc]
+    Category.assoc, Iso.inv_hom_id_app_assoc]
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
 private theorem square_tensor (sq : CommSq g' f' f g)
     (a b : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
@@ -201,7 +204,7 @@ private theorem square_tensor (sq : CommSq g' f' f g)
   rw [Functor.map_leftDerivedTensorComparison_comp_eq_of_iso
     (upperStar A f) (upperStar A g') (upperStar A g) (upperStar A f')
     (upperStarCompIso A sq.w.symm)]
-  simp only [squareLift, Category.assoc, Iso.hom_inv_id_app_assoc]
+  simp only [squareLift, Iso.hom_inv_id_app_assoc]
 
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
 private theorem proper_coherence (sq : CommSq g' f' f g)
@@ -391,18 +394,13 @@ private theorem mixed_tensor
       ← Functor.map_comp_assoc, ← NatTrans.comp_app, Iso.hom_inv_id_app,
       NatTrans.id_app, CategoryTheory.Functor.map_id, Category.id_comp]
     rw [← cancel_mono ((tL'.hom.app (H.obj X)).app (H.obj Y))]
-    simp only [Category.assoc, ← NatTrans.comp_app, Iso.inv_hom_id_app,
-      NatTrans.id_app, Category.comp_id]
+    simp only [Category.assoc, ← NatTrans.comp_app]
     rw [← cancel_mono (a.hom.app X ⊗ₘ a.hom.app Y)]
-    simp only [Category.assoc, tensorHom_comp_tensorHom, Iso.inv_hom_id_app,
-      id_tensorHom_id, Category.comp_id]
+    simp only [Category.assoc]
     rw [h, Iso.inv_hom_id_app_assoc]
-    simp only [← NatTrans.comp_app, Iso.inv_hom_id, NatTrans.id_app,
-      Category.id_comp, Category.comp_id, tensorHom_comp_tensorHom,
-      Iso.inv_hom_id_app, id_tensorHom_id]
+    simp only [Iso.inv_hom_id, NatTrans.id_app]
     dsimp [tt]
-    simp only [Category.assoc, Category.id_comp, tensorHom_comp_tensorHom,
-      Iso.inv_hom_id_app, id_tensorHom_id, Category.comp_id]
+    simp only [Category.id_comp, tensorHom_comp_tensorHom, Iso.inv_hom_id_app]
     dsimp only [Functor.comp_obj]
     simp only [id_tensorHom_id, Category.comp_id]
   have n := e'.hom.naturality ((tH.app X).app Y)
@@ -428,6 +426,7 @@ namespace AlgebraicGeometry.ProEtale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 variable {U' U Z' Z : Scheme.{u}} {g' : U' ⟶ U} {j' : U' ⟶ Z'} {j : U ⟶ Z}
   {g'' : Z' ⟶ Z} [IsOpenImmersion j] [IsOpenImmersion j']
+omit [IsOpenImmersion j] [IsOpenImmersion j'] in
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
 private theorem square_conjugate (sq : CommSq g' j' j g'') :
     conjugateEquiv
@@ -449,6 +448,7 @@ private theorem square_conjugate (sq : CommSq g' j' j g'') :
     conjugateEquiv_upperStarComp_hom, hcongr, conjugateEquiv_upperStarComp_inv]
   exact Category.assoc _ _ _
 
+omit [IsOpenImmersion j] [IsOpenImmersion j'] in
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
 private theorem baseChange_mate (sq : CommSq g' j' j g'') :
     baseChangeMap A sq = (mateEquiv (upperStarLowerStarAdjunction A g'')
@@ -480,8 +480,6 @@ private theorem open_unit (sq : CommSq g' j' j g'')
     (openImmersionLowerShriekUpperStarAdjunction A j') (upperStarLowerStarAdjunction A g')
     (upperStarLowerStarAdjunction A g'') (upperStarCompIso A sq.w).hom
     (baseChangeMap A sq) (baseChange_mate A sq) F
-variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A]
-  [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A] [UpperStarPreservesFlat A]
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
 private theorem upperCongr_symm {X Y : Scheme.{u}} {f g : X ⟶ Y} (e : f = g) :
     upperStarCongr A e.symm = (upperStarCongr A e).symm := by
@@ -493,7 +491,10 @@ private theorem derivedCongr_inv {X Y : Scheme.{u}} {f g : X ⟶ Y} (e : f = g) 
       (Functor.mapDerivedCategoryNatIso (upperStarCongr A e)).hom := by
   rw [upperCongr_symm A e]
   exact (Functor.mapDerivedCategoryNatIso_symm (upperStarCongr A e).symm).symm
+variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A]
+  [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A] [UpperStarPreservesFlat A]
 
+omit [UpperStarPreservesFlat A] in
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
 private theorem derivedOpenImmersionLowerShriekBaseChangeIso_mate (hsq : IsPullback g' j' j g'')
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology U) A)) :
@@ -518,6 +519,7 @@ private noncomputable def derivedOpenImmersionSquareMap (sq : CommSq g' j' j g''
     (Functor.mapDerivedCategorySquareIso (upperStarCompIso A sq.w)).hom ≫
     Functor.whiskerRight (leftDerivedUpperStarIsoMapDerivedCategory A g'').inv D((j')^*[A])
 
+omit [UpperStarPreservesFlat A] in
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
 /-- The square map `Dj^* ⋙ Lg'^* ⟶ Lg''^* ⋙ Dj'^*` is the inverse of the square isomorphism
 `Lg''^* ⋙ Lj'^* ≅ Lj^* ⋙ Lg'^*` of the derived pullbacks, read through `Lj^* ≅ Dj^*` and
@@ -543,6 +545,7 @@ private theorem derivedOpenImmersionSquareMap_app (sq : CommSq g' j' j g'')
   rw [reassoc_of% hnat, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
 
+omit [UpperStarPreservesFlat A] in
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
 /-- The derived base change isomorphism for the extension by zero is the mate of the square map
 `derivedOpenImmersionSquareMap`. -/
@@ -751,6 +754,7 @@ private noncomputable def exchange :
             D((c'.i)_!open[A])) R((c'.g)_*[A]) ≪≫
         Functor.associator _ _ _).hom
 
+omit [UpperStarPreservesFlat A] in
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
 private theorem exchange_app
     (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :
@@ -821,7 +825,7 @@ private theorem pasting
     exact E2
   have aux := open_coherence A sq c c' q hi hp K L
   have mapped := congrArg (R((c'.g)_*[A]).map) aux
-  simp only [Functor.map_comp, Category.assoc] at mapped
+  simp only [Functor.map_comp] at mapped
   simp only [Functor.comp_obj, Functor.comp_map] at n₁ n₂
   simp only [Functor.map_comp, Category.assoc, Functor.comp_map, NatTrans.comp_app]
   exact paste_chains n₁ n₂ E2' n₃ mapped

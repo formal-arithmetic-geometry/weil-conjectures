@@ -312,6 +312,7 @@ noncomputable instance integralCompletedRingHasDerivedCategory :
       (completedIntegralCoefficientSheafUnrestricted l E Y)) :=
   HasDerivedCategory.standard _
 
+-- Kept as a `def`: downstream code unfolds it and sets its reducibility attributes.
 set_option linter.defProp false in
 /-- The canonical scalar-extension witness, with explicit standard localizations. -/
 noncomputable def unrestrictedIntegralReductionExistence (n : ℕ) :=

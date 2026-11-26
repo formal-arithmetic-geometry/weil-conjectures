@@ -164,8 +164,6 @@ private theorem comparison_eventually_equal
   have hh := congrArg (fun Z ↦ v ⁻¹ᵁ Z) hl
   simpa [v, ← Scheme.Hom.comp_preimage] using hh
 
--- The unchanged signature names V' only as an implicit object family.
-set_option linter.unusedVariables false in
 /-- Finitely many affine local sections with a common image at the limit become
 compatible at some later stage. No covering hypothesis or covering conclusion is needed
 (Stacks, Tags 0A35 and 0EYL). -/
@@ -202,7 +200,7 @@ theorem etaleSet_eventualLocalStageCompatibility
         (congrArg (fun z : j'.left ⟶ op i₀ ↦ D.map z) r.w)
       let d := (MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤)
         (D.map r.left) (D.map j.hom) (D.map j'.hom) hr.symm).app W.obj
-      let V' := fun q ↦ b.obj (V q)
+      let _V' := fun q ↦ b.obj (V q)
       let a' := fun q ↦ b.map (a q) ≫ d.inv
       let s' := fun q ↦ (etaleSetSheafComparison (D.map r.left) (D.map j.hom)
         (D.map j'.hom) hr G).hom.app (op (V q)) (s q)

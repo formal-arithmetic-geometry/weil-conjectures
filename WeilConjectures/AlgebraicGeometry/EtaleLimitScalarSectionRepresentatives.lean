@@ -59,7 +59,6 @@ private theorem abelian_sections_colimit
   exact ⟨IsColimit.mapCoconeEquiv
     (Functor.isoWhiskerRight S.asEquivalence.counitIso Eab) hEV⟩
 
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
@@ -72,10 +71,10 @@ theorem etale_limit_scalar_sections_representatives
     (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})
     (φ : ∀ {i j : I} (f : i ⟶ j),
       (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)
-    (hidentity : ∀ i : I, φ (𝟙 i) =
+    (_hidentity : ∀ i : I, φ (𝟙 i) =
       (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app
         (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i))
-    (hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),
+    (_hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),
       φ (f ≫ g) =
         (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)
           (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫
@@ -109,7 +108,7 @@ theorem etale_limit_scalar_sections_representatives
         (δ j).hom.left ≫ pullback.fst T₀.hom (c.π.app (op i₀)) =
           pullback.fst (Tj j).hom (c.π.app (op j.val)) ≫
             pullback.fst T₀.hom (D.map (homOfLE j.property).op)) →
-    let ρ := fun (j k : J) (a : j ⟶ k) ↦
+    let _ρ := fun (j k : J) (a : j ⟶ k) ↦
       ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
         (D.map (show j.val ⟶ k.val from a).op)).unit.app (F j.val)).hom.app (op (Tj j)) ≫
         (φ (show j.val ⟶ k.val from a)).hom.app

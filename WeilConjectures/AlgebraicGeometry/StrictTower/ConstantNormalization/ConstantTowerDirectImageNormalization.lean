@@ -161,9 +161,6 @@ All tower derived categories localize strict diagrams before evaluation.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
--- Avoid replaying dependent scalar-extension calculations during tactic linting.
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 set_option backward.isDefEq.respectTransparency.types true
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
@@ -412,7 +409,7 @@ private theorem squareComparison_eq_mate
   rw [he] at h
   simp only [Functor.mapHomotopyCategoryCompIso_refl_hom_app, homotopy_comp_inv_id,
     Category.comp_id] at h
-  repeat' first | erw [Category.id_comp] at h | erw [Category.comp_id] at h
+  repeat' erw [Category.id_comp] at h
   exact h.symm
 
 

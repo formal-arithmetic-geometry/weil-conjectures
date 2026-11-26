@@ -30,8 +30,6 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
--- Keep the original signature, including its unused interval and arrow binders.
-set_option linter.unusedVariables false in
 /-- A bounded object with finite etale-local cohomology descends to the etale site
 of the chart. The final clause transports a supplied constant complex model; it
 asserts no existence of such a complex. -/
@@ -43,7 +41,7 @@ theorem finiteCoefficient_etale_slice_origin
     (φ : adicConstantRing X B ⟶ R) (hφ : IsIso φ)
     (K : DerivedCategory (SheafOfModules.{t + 1} ((sheafCompose (ProEt.topology X)
       (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R))) (V : X.Etale)
-    (a b : ℤ) (hab : a ≤ b)
+    (a b : ℤ) (_hab : a ≤ b)
     (hvan : let R₀ := ((sheafCompose (ProEt.topology X)
       (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R);
       ∀ q : ℤ, q < a ∨ b < q → IsZero
@@ -51,7 +49,7 @@ theorem finiteCoefficient_etale_slice_origin
           ((DerivedCategory.homologyFunctor _ q).obj K)))
     (hloc : let R₀ := ((sheafCompose (ProEt.topology X)
       (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R);
-      ∀ (q : ℤ) (W : X.Etale) (g : W ⟶ V),
+      ∀ (q : ℤ) (W : X.Etale) (_g : W ⟶ V),
         ∃ S : Sieve W, S ∈ X.smallEtaleTopology W ∧
           ∀ (Z : X.Etale) (f : Z ⟶ W), S f →
             ∃ N : ModuleCat.{t} B, Module.Finite B N ∧ Nonempty

@@ -88,8 +88,6 @@ private theorem reduction_square_of_units
   simp only [Category.assoc, Iso.hom_inv_id_app, Functor.comp_obj] at h'
   simpa only [Category.assoc, Category.comp_id, hn] using h'
 
--- Keep the name of the compatibility binder, unused in its conclusion.
-set_option linter.unusedVariables false in
 /-- Finite local diagrams and effective cones over the constant algebraic ring.
 This assertion has no completed ring sheaf, completed realization or scalar maps
 phi and beta. Inverse image retains exactly the constant algebraic coefficient ring. -/
@@ -143,7 +141,7 @@ theorem lisse_tower_constant_algebraic_reduction_diagram
               DerivedCategory (ModuleCat.{u + 1} (C ⧸ J ^ (n + 1))))
             (adj : ∀ n : ℕ, L n ⊣ (R n).mapDerivedCategory)
             (e₀ : ∀ n : ℕ, (L n).obj E ≅ K n)
-            (he₀ : ∀ (m n : ℕ) (h : n ≤ m),
+            (_he₀ : ∀ (m n : ℕ) (h : n ≤ m),
               (adj m).unit.app E ≫ (R m).mapDerivedCategory.map (e₀ m).hom ≫
                 (Functor.ofOpSequence
                   (X := fun k : ℕ ↦ (R k).mapDerivedCategory.obj (K k)) s).map

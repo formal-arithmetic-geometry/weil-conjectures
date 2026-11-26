@@ -102,7 +102,13 @@ import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscre
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.ContinuousCoefficientModuleEncodingSupplement
 public import Mathlib.Order.CompletePartialOrder
 
-/-! # Normalized integral restriction squares -/
+/-! # Normalized integral restriction squares
+
+## References
+
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* Bhatt–Scholze, *The pro-étale topology for schemes*
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -1091,20 +1097,7 @@ private def scalarSquare (n : ℕ) (A : Encoding l E X) :
       Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft V s ≪≫
         (Functor.associator _ _ _).symm
 
-/-- The integral-limit comparison admits identity-on-sections finite restriction squares.
-Source: blueprint integral-criterion-reductions, coefficient comparison; Stacks 06YY;
-Bhatt--Scholze, the integral-limit coefficient identification
-(blueprint: lem-pe-integral-normalized-restriction-squares).
-
-Proof: reconstruct commutative section rings from the monoidal integral-limit comparison.
-Its nth projection is the pulled-back quotient map. Use the normalized finite-discrete
-encodings of each positive quotient. Section reconstruction followed by scalar transport
-along the inverse integral comparison is an additive equivalence. On a finite-level module,
-the two restricted scalar actions agree because the integral comparison followed by its nth
-projection is the original quotient. The identity of its underlying abelian sheaf is therefore
-linear in both directions and gives the square. Its naturality is the identity on every
-module morphism. The displayed equation accounts for the recorded equalities of the concrete
-section-action functors; no derived functor or completeness hypothesis is used. -/
+/-- The integral-limit comparison admits identity-on-sections finite restriction squares. -/
 theorem integral_completion_normalized_squares :
     letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
     ∃ (A : Encoding l E X) (e : ∀ n : ℕ,

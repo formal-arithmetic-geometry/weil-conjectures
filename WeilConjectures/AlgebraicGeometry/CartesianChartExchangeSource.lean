@@ -19,7 +19,6 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency true
-set_option linter.unusedSimpArgs false
 set_option linter.privateModule false
 
 variable (A : Type (u + 2)) [Category.{u + 1} A]
@@ -89,6 +88,6 @@ private lemma square_single_source {B T T' Z Z' : Scheme.{u}}
     ((DerivedCategory.Plus.singleFunctor _ 0).obj M))]
   rw [single_source A t s s'
     (by rw [hs', ha, ← Category.assoc p' b a, ← sq.w, Category.assoc, ← hs]) M]
-  simp only [Category.assoc, Iso.hom_inv_id_app, Iso.hom_inv_id_app_assoc, Category.comp_id]
+  simp only [Iso.hom_inv_id_app_assoc]
 
 end AlgebraicGeometry.Etale

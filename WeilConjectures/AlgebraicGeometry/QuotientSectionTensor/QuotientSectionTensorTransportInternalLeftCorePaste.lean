@@ -124,15 +124,13 @@ private theorem paste_map_three {𝒞 𝒟 : Type*} [Category 𝒞] [Category �
     (h : a ≫ b ≫ c = d) : F.map a ≫ F.map b ≫ F.map c = F.map d := by
   rw [← F.map_comp, ← F.map_comp, h]
 
--- Preserve the existing binder names for the three inputs unused by this output-side proof.
-set_option linter.unusedVariables false in
 /--
 The algebraic paste for internal-left scalar tensor transport, given the three normalization
 equations as hypotheses.
 -/
  theorem section_tensor_transport_internal_left_paste (T : Scheme.{u})
     (c : ScalarSectionData a T) (hc : ScalarSectionNormalized a T c)
-    (b : TensorIso a T) (hb : TensorNormalized a T b)
+    (b : TensorIso a T) (_hb : TensorNormalized a T b)
     (barB : tensor Λ T ⋙ c.model.T ≅
       (c.model.T.prod c.model.T) ⋙ tensor Λ' T)
     (hbarB : TensorSectionCondition a T c b barB)
@@ -145,7 +143,7 @@ equations as hypotheses.
               (((QuotientChange.extension a T).mapHomologicalComplex (.up ℤ)).obj Q) =
         (D a T).map (Functor.LaxMonoidal.μ DerivedCategory.Q P Q) ≫
           compute a T (P ⊗ Q) ≫ DerivedCategory.Q.map (totalScalar a T P Q))
-    (hcn :
+    (_hcn :
       c.derived.hom.app (DerivedCategory.Q.obj (P ⊗ Q)) ≫
           c.model.T.map (sectionLocalizationComparison Λ T (P ⊗ Q)).hom ≫
             c.model.ε.app
@@ -155,7 +153,7 @@ equations as hypotheses.
             (((QuotientChange.extension a T).mapHomologicalComplex (.up ℤ)).obj (P ⊗ Q))).hom ≫
             DerivedCategory.Q.map
               ((NatIso.mapHomologicalComplex c.ordinary (.up ℤ)).hom.app (P ⊗ Q)))
-    (hqnorm :
+    (_hqnorm :
       (qTensor Λ T).app
           (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj P,
             ((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj Q) =
@@ -182,7 +180,7 @@ equations as hypotheses.
                 (((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj Q)) =
       scalarTensorSectionPath a T c P Q := by
   -- This output-side paste uses hc on P and Q, and the supplied tensor equation hbn.
-  clear hb hcn hqnorm
+  clear _hb _hcn _hqnorm
   let EP := ((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj P
   let EQ := ((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj Q
   let P' := ((extension a T).mapHomologicalComplex (.up ℤ)).obj P

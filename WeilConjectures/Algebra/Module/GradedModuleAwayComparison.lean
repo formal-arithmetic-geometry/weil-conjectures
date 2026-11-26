@@ -102,7 +102,6 @@ private theorem comparisonOfClearing
       _ = r s • (tR a • t x) := by
         rw [smul_smul, ← htR s, ← map_mul, mul_comm, hab, htR]
 
-set_option linter.unusedVariables false in
 /-- Principal localization comparisons for a fixed family of restriction maps. -/
 theorem gradedModuleAwayComparison
     {S : Type u} [CommRing S] {M : Type v} [AddCommGroup M] [Module S M]
@@ -126,7 +125,7 @@ theorem gradedModuleAwayComparison
       (lambdaS : ∀ (f g : F), Rel f g → L f →+* L g)
       (rho : ∀ (f g : F), Rel f g → Z f →+ Z g)
       (rhoS : ∀ (f g : F), Rel f g → R f →+* R g)
-      (U : ∀ (f g : F), R f),
+      (U : ∀ (f _g : F), R f),
       (∀ (f g : F), (U f g).val = Localization.mk (g.val.1 ^ f.val.2)
         (⟨f.val.1 ^ g.val.2, ⟨g.val.2, rfl⟩⟩ : Submonoid.powers f.val.1)) ∧
       (∀ (f g : F) (p : Rel f g),

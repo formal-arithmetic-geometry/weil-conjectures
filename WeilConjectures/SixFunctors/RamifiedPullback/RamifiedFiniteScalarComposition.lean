@@ -13,8 +13,12 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Composition of finite scalar extension and module pullback
 
-Source: Stacks Project, Tags 03CZ and 03EL. Composition of left adjoints
+Composition of left adjoints
 normalizes the two scalar-extension comparison maps on unit generators.
+
+## References
+
+* Stacks Project, Tags `03CZ`, `03EL`
 -/
 
 @[expose] public noncomputable section
@@ -336,22 +340,7 @@ private theorem reductionSquareIso_tensor (W : Scheme.{t}) (e : ℕ)
   exact (reduction_tensor_one l L W (index e n)
     ((scalar.{t, u} data.completedMap).obj M) U _ _).symm
 
-/-- Finite scalar extension commutes with reduction followed by geometric pullback.
-Source: Stacks Project, Tags 03CZ and 03EL.
-(blueprint: lem-weil-ramified-finite-scalar-composition).
-
-Proof: the scalar-restriction square on the source site commutes by
-source.ramified_projection. Compose the two scalar adjunctions along either
-path and use uniqueness of left adjoints. Their unit equation gives the
-normalized reduction comparison. Next the constant finite coefficient square
-commutes by naturality in the ring homomorphism j. Composing scalar and
-pullback adjunctions along either path gives a second isomorphism by uniqueness
-of left adjoints. Its unit equation sends 1 tensor g*(z) to g*(1 tensor z).
-Compose this isomorphism with pullback of the reduction comparison. Naturality
-of the pullback adjunction unit gives its value on generators. Finally source
-and target linearity of scalar tensor sections and the finite reduction tensor
-formula give the displayed arbitrary-coefficient formula. No completed scalar
-extension on X or coefficient base-change isomorphism is used. -/
+/-- Finite scalar extension commutes with reduction followed by geometric pullback. -/
 theorem finiteScalarComposition_exists {X Y : Scheme.{t}} (g : X ⟶ Y)
     (e : ℕ)
     (j : ∀ n : ℕ, Padic.coefficientExtensionRing l E (n + 1) →+*

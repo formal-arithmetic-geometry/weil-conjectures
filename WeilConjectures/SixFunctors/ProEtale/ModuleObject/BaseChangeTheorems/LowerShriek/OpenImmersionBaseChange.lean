@@ -103,16 +103,8 @@ noncomputable def boundedConstructibleOpenImmersionLowerShriekBaseChangeCounitSt
 variable {j g j' g'}
 
 /-- The canonical exchange morphism `Lg'^* ⋙ j'_! ⟶ j_! ⋙ Lg^*` on bounded constructible
-complexes for a commutative square
-```
-X' --g'--> X
-|          |
-j'         j
-v          v
-Z' --g---> Z
-```
-of schemes with `j` and `j'` open immersions, assembled as the composite of the unit insertion,
-the square transport, and the counit contraction. -/
+complexes for a commutative square with `g' ≫ j = j' ≫ g` of schemes with `j` and `j'` open
+immersions. -/
 @[no_expose]
 noncomputable def boundedConstructibleOpenImmersionLowerShriekBaseChange (sq : CommSq g' j' j g) :
     boundedConstructibleUpperStar Λ ℓ g' ⋙ boundedConstructibleOpenImmersionLowerShriek Λ ℓ j' ⟶
@@ -139,7 +131,7 @@ lemma boundedConstructibleOpenImmersionLowerShriekBaseChange_eq_exchangeLeft
   rfl
 
 
-/-- **Base change for extension by zero** (blueprint `sk-def-sfb-open-base-change`) on bounded
+/-- **Base change for extension by zero** on bounded
 constructible complexes: for a *cartesian* square with `j` and `j'` open immersions, the exchange
 morphism `Lg'^* ⋙ j'_! ⟶ j_! ⋙ Lg^*` is an isomorphism.
 

@@ -34,8 +34,10 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDi
 
 /-! # Comparison of integral reduction with finite etale exchange
 
-Source: Bhatt--Scholze, Sections 6.7--6.8
-(blueprint: lem-weil-pbc-integral-finite-exchange-comparison).
+
+## References
+
+* Bhatt--Scholze, Sections 6.7--6.8, Lemmas 6.5.4 and 6.5.11, Proposition 6.8.11(3)
 -/
 
 @[expose] public section
@@ -67,28 +69,7 @@ variable (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
   [f.IsOver (Spec (.of k))] [g.IsOver (Spec (.of k))]
   [f'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
 
-/-- Reduction identifies the specified integral exchange with finite etale exchange.
-Source: Bhatt--Scholze, Lemmas 6.5.4 and 6.5.11; Proposition 6.8.11(3);
-comparison of the actual adjunction mates in `lem-weil-pbc-condensed-e-realization`
-(blueprint: lem-weil-pbc-integral-finite-exchange-comparison).
-
-Proof in words. O_E is finite free over ℤ_ℓ. Thus A = O_E/ℓ has discrete quotient
- topology. The ring object pulled from its condensed continuous functions
- is the constant A coefficient sheaf. Passing between internal module objects and
- sheaves of A modules retains the underlying abelian sheaves and scalar actions; the
- inverse constructions give an exact equivalence on derived categories. The bounded
- constructible reduction of M has finite constructible
- cohomology, so it is the pro-etale inverse image of a bounded etale complex L.
- Reduction commutes with pullback by the scalar tensor comparison. For direct image,
- use `integralModuleReductionSequence_shortExact` and exact monoidal inverse image
- from the point for the two-term finite free resolution of A over O_E. Preservation of finite
- triangles by Rf_* gives the actual scalar direct-image comparison. Site
- comparison identifies etale and pro-etale derived direct images of bounded-below
- etale objects. All comparisons are induced by the same underived adjunction maps.
- Thus they preserve units, counits and coherent pullback composition. Substitution in
- the unit-square-counit formula gives the asserted isomorphism of arrows, with the
- image of the displayed etale exchange as its target. No properness or Cartesian hypothesis and
- no exchange invertibility is used. -/
+/-- Reduction identifies the specified integral exchange with finite etale exchange. -/
 theorem integralFiniteExchange_comparison
     (sq : CommSq g' f' f g)
     (M : integralConstructible ℓ E X) :

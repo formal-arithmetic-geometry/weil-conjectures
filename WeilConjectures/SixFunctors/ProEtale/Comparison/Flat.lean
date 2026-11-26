@@ -17,8 +17,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 For a Noetherian (for instance finite) commutative ring `Λ`, the inverse image
 `ν^* : Sh(X_ét, Λ) ⥤ Sh(X_proét, Λ)` along the inclusion of the small étale site into the small
 pro-étale site sends flat étale sheaves of `Λ`-modules to flat pro-étale sheaves
-(`AlgebraicGeometry.ProEtale.flat_comparisonUpperStar_obj`, blueprint
-`corollary-finite-tor-amplitude-under-comparison`).
+(`AlgebraicGeometry.ProEtale.flat_comparisonUpperStar_obj`).
 
 ## Main results
 
@@ -49,17 +48,9 @@ variable {X} {Λ : Type (u + 1)} [CommRing Λ] [IsNoetherianRing Λ]
 
 -- the instances `WEqualsLocallyBijective` and `HasSheafCompose` on the small étale and
 -- pro-étale sites take long to synthesize
-/-- Blueprint `corollary-finite-tor-amplitude-under-comparison`: Constant-coefficient inverse image
-preserves flat sheaves.
-
-For a Noetherian commutative ring `Λ`, for instance a finite one, the site inverse image
+/-- For a Noetherian commutative ring `Λ`, for instance a finite one, the site inverse image
 `ν^* : Sh(X_ét, Λ) ⥤ Sh(X_proét, Λ)` takes flat étale sheaves of `Λ`-modules to flat
-pro-étale sheaves of `Λ`-modules. Flat means that tensoring with the sheaf is exact.
-
-This is `CategoryTheory.flat_sheafPullback_obj` for the representably flat, cover-preserving
-inclusion `ν` of the small étale site into the small pro-étale site: the relation criterion
-for flatness holds locally for the flat étale sheaf, and is transported to the pro-étale site
-along the filtered colimits computing `ν^*`. -/
+pro-étale sheaves of `Λ`-modules. -/
 theorem flat_comparisonUpperStar_obj {F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
     (hF : ObjectProperty.flat F) :
     ObjectProperty.flat ((ν^*(X)[ModuleCat.{u + 1} Λ]).obj F) :=

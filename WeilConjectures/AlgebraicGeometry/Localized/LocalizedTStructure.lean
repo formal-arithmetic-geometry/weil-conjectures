@@ -33,7 +33,6 @@ variable [hNoeth : IsNoetherian T] [hDim : Fact (∃ n : ℕ, topologicalKrullDi
 variable [hInv : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
 include hNoeth hDim hInv
 
-set_option linter.defProp false in
 /-- The existing scalar-localization theorem specialized to the integral category.
 It fixes the induced shift, the identity comparison for Q, and exactly the isomorphic
 images of integral distinguished triangles. -/

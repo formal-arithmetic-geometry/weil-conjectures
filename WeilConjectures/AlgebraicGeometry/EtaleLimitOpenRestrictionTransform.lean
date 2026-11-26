@@ -23,7 +23,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
-set_option linter.unusedVariables false in
 /-- Construct only the restriction transformation, with its canonical components and right square
 (Stacks, Tags 0A50 and 09YQ). -/
 theorem etale_limit_open_restriction_transform

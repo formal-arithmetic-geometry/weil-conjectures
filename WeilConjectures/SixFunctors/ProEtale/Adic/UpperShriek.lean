@@ -32,16 +32,15 @@ For a morphism `f : X ⟶ Y` of schemes, `Y` of finite type over `k`, and a comp
   (`ProEtale.boundedConstructibleAdicUpperShriekOfCompactification`), where `Rg^!` is the right
   adjoint of `Rg_* : Dᵇc(Z, ℚ̄_ℓ) ⥤ Dᵇc(Y, ℚ̄_ℓ)`, and the adjunction `Rf_!(c) ⊣ Rf^!(c)`
   (`ProEtale.boundedConstructibleAdicUpperShriekOfCompactificationAdjunction`), the composite of
-  `j_! ⊣ j^*` and `Rg_* ⊣ Rg^!`. This is blueprint `theorem-f-shriek-finite-coefficients` at the
-  coefficient stage `ℚ̄_ℓ`. For the compactification chosen by `HasCompactification`, these are
+  `j_! ⊣ j^*` and `Rg_* ⊣ Rg^!`. For the compactification chosen by `HasCompactification`, these are
   `ProEtale.boundedConstructibleAdicUpperShriek` and
   `ProEtale.boundedConstructibleAdicUpperShriekAdjunction`.
 
 That `Rg_*` is a left adjoint on `Dᵇc(-, ℚ̄_ℓ)` for proper `g` is part of the constructible
-adjunction `Rf_! ⊣ Rf^!` of blueprint `theorem-verdier-biduality`
+adjunction `Rf_! ⊣ Rf^!`
 (not proved in the project). The constructions therefore take it as an instance argument.
 
-## Implementation notes
+## Implementation details
 
 `Rg^!` is `Functor.rightAdjoint`, an arbitrary choice of right adjoint extracted from the
 instance argument: only the adjunction should be used about it.
@@ -136,23 +135,16 @@ noncomputable def ProEtale.boundedConstructibleAdicLowerShriekOfCompactification
 
 variable [(ProEtale.boundedConstructibleAdicRightDerivedLowerStar (l := l) sY hk c.g).IsLeftAdjoint]
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients` (at the coefficient stage `ℚ̄_ℓ`): the
-exceptional inverse image `Rf^!(c) : Dᵇc(Y, ℚ̄_ℓ) ⥤ Dᵇc(X, ℚ̄_ℓ)` attached to a compactification
-`c = (X ⟶[j] Z ⟶[g] Y)` of `f`: a right adjoint `Rg^!` of the direct image
-`Rg_* : Dᵇc(Z, ℚ̄_ℓ) ⥤ Dᵇc(Y, ℚ̄_ℓ)` along the proper `g`, followed by the pullback `j^*` along the
-open immersion `j`. The blueprint characterizes it by the adjunction
-`Hom(Rf_! K, L) ≅ Hom(K, Rf^! L)` on `Dᵇc(-, ℚ̄_ℓ)`
-(`AlgebraicGeometry.ProEtale.boundedConstructibleAdicUpperShriekOfCompactificationAdjunction`).
-That `Rg_*` has a right adjoint is the instance argument; its existence is part of the
-constructible adjunction of blueprint `theorem-verdier-biduality` (another subsection). -/
+/-- The exceptional inverse image `Rf^!(c) : Dᵇc(Y, ℚ̄_ℓ) ⥤ Dᵇc(X, ℚ̄_ℓ)` attached to a
+compactification `c = (X ⟶[j] Z ⟶[g] Y)` of `f`: a right adjoint `Rg^!` of the direct image
+`Rg_*` along the proper `g`, followed by the pullback `j^*` along the open immersion `j`. -/
 noncomputable def ProEtale.boundedConstructibleAdicUpperShriekOfCompactification :
     (ProEtale.DerivedCategory.boundedConstructibleAdic l Y).FullSubcategory ⥤
       (ProEtale.DerivedCategory.boundedConstructibleAdic l X).FullSubcategory :=
   (ProEtale.boundedConstructibleAdicRightDerivedLowerStar (l := l) sY hk c.g).rightAdjoint ⋙
     ProEtale.boundedConstructibleAdicUpperStar l c.i
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients` (at the coefficient stage `ℚ̄_ℓ`, the
-characterizing adjunction): the adjunction `Rf_!(c) ⊣ Rf^!(c)` on `Dᵇc(-, ℚ̄_ℓ)`, the composite
+/-- The adjunction `Rf_!(c) ⊣ Rf^!(c)` on `Dᵇc(-, ℚ̄_ℓ)`, the composite
 of the adjunction `j_! ⊣ j^*` along the open immersion `j` and of the adjunction `Rg_* ⊣ Rg^!`
 along the proper `g`. -/
 noncomputable def ProEtale.boundedConstructibleAdicUpperShriekOfCompactificationAdjunction :
@@ -177,8 +169,7 @@ variable (f : X ⟶ Y) [HasCompactification f]
   [(ProEtale.boundedConstructibleAdicRightDerivedLowerStar (l := l) sY hk
     (HasCompactification.compactification f).g).IsLeftAdjoint]
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients` (at the coefficient stage `ℚ̄_ℓ`): the
-exceptional inverse image `Rf^! : Dᵇc(Y, ℚ̄_ℓ) ⥤ Dᵇc(X, ℚ̄_ℓ)` along `f`, the functor
+/-- The exceptional inverse image `Rf^! : Dᵇc(Y, ℚ̄_ℓ) ⥤ Dᵇc(X, ℚ̄_ℓ)` along `f`, the functor
 `ProEtale.boundedConstructibleAdicUpperShriekOfCompactification` attached to the chosen
 compactification `HasCompactification.compactification f`. -/
 noncomputable def ProEtale.boundedConstructibleAdicUpperShriek :
@@ -187,8 +178,7 @@ noncomputable def ProEtale.boundedConstructibleAdicUpperShriek :
   ProEtale.boundedConstructibleAdicUpperShriekOfCompactification hk sY
     (HasCompactification.compactification f)
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients` (at the coefficient stage `ℚ̄_ℓ`, the
-characterizing adjunction): the adjunction `Rf_! ⊣ Rf^!` on `Dᵇc(-, ℚ̄_ℓ)` for the chosen
+/-- The adjunction `Rf_! ⊣ Rf^!` on `Dᵇc(-, ℚ̄_ℓ)` for the chosen
 compactification of `f`. -/
 noncomputable def ProEtale.boundedConstructibleAdicUpperShriekAdjunction :
     ProEtale.boundedConstructibleAdicLowerShriekOfCompactification hk sY

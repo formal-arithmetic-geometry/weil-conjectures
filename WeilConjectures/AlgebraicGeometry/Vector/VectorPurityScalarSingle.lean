@@ -178,7 +178,6 @@ variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
   [PreservesFiniteLimits U] [PreservesFiniteColimits U]
   (adj : E ⊣ U) (L : DerivedCategory C ⥤ DerivedCategory D)
   (ad : L ⊣ U.mapDerivedCategory)
-set_option linter.flexible false in
 private theorem single_adjunction_formula (M : C) :
     (ad.homEquiv _ _).symm
       ((DerivedCategory.singleFunctor _ 0).map (adj.unit.app M) ≫
@@ -210,9 +209,15 @@ private theorem single_adjunction_formula (M : C) :
   intro i
   by_cases hi : i = 0
   · subst hi
-    simp [Functor.mapCochainComplexSingleFunctor, CochainComplex.singleFunctors,
+    simp only [CochainComplex.singleFunctors, Functor.comp_obj,
+      CochainComplex.shiftFunctor_obj_X', Functor.id_obj, Functor.mapHomologicalComplex_obj_X,
+      Functor.mapCochainComplexSingleFunctor, HomologicalComplex.comp_f,
       HomologicalComplex.single_map_f_self, HomologicalComplex.singleObjXSelf,
-      HomologicalComplex.singleObjXIsoOfEq]
+      HomologicalComplex.singleObjXIsoOfEq, eqToIso_refl, Iso.refl_hom, Iso.refl_inv,
+      Category.id_comp, HomologicalComplex.singleMapHomologicalComplex_inv_app_self,
+      Category.assoc, Adjunction.mapHomologicalComplex_unit_app_f,
+      Functor.mapHomologicalComplex_map_f,
+      HomologicalComplex.singleMapHomologicalComplex_hom_app_self, Functor.map_id]
     change adj.unit.app M ≫ (𝟙 _ ≫ U.map (𝟙 _)) = adj.unit.app M ≫ U.map (𝟙 _)
     rw [Category.id_comp]
   · exact (HomologicalComplex.isZero_single_obj_X _ _ _ _ hi).eq_of_src _ _

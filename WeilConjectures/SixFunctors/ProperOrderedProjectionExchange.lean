@@ -8,7 +8,12 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
 import WeilConjectures.AlgebraicGeometry.CompactProjectionExchange
 import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionProper
-/-! # Ordered proper projection and compact-support exchange -/
+/-! # Ordered proper projection and compact-support exchange
+
+## References
+
+* Stacks Project, Tag `0E48`
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -200,23 +205,7 @@ private theorem compactProjection_coefficient_naturality
     (mapSquare (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A)
       (HasCompactification.compactification q)) ht)
 
-/-- The forward ordered projection square with an arbitrary source coefficient.
-Source: blueprint prop-asd-smooth-base-change.proof.md, second paragraph, projection square;
-Stacks, Tag 0E48, compatibility with a diagram.
-(auxiliary; not a blueprint node)
-Proof: the compact-support projection square is
-projectionMap_rightDerivedLowerShriekBaseChangeMap. Conjugate its source and target
-by tensor symmetry to put the base coefficient first. Naturality of the symmetry
-moves it across the exchange arrow. Naturality of the target projection in the
-source coefficient then appends l. The pullback tensor comparison followed by the
-inverse-image square comparison is exactly ordinaryFiniteTwistedPullbackComparison.
-For proper maps, the compactification projection/forget-supports identity
-identifies the compact-support projection with ordinaryFiniteProjection, conjugated
-by the proper coincidence isomorphisms. Substitute these identifications in the
-square and cancel adjacent coincidence isomorphisms. No trace, projective-line
-presentation, splitting, exponent or adjunction of exceptional inverse images occurs.
-The identity square, zero coefficient complex and empty schemes obey the same
-naturality and cancellation equations. -/
+/-- The forward ordered projection square with an arbitrary source coefficient. -/
 theorem properOrderedProjection_exchange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' : Scheme.{u}} {q : X ⟶ Y} {q' : X' ⟶ Y'}

@@ -23,7 +23,6 @@ categorical constructor.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 open CategoryTheory.MonoidalCategory
@@ -66,10 +65,10 @@ private noncomputable def bottomForgetMonoidal
       IsIso (Functor.LaxMonoidal.μ V M N) := by
     dsimp only [Adjunction.rightAdjointLaxMonoidal_μ]
     rw [Adjunction.homEquiv_unit]
-    haveI : IsIso (Functor.OplaxMonoidal.δ L (V.obj M) (V.obj N)) := inferInstance
-    haveI : IsIso (adj.counit.app M) := inferInstance
-    haveI : IsIso (adj.counit.app N) := inferInstance
-    haveI : IsIso (adj.counit.app M ⊗ₘ adj.counit.app N) :=
+    have : IsIso (Functor.OplaxMonoidal.δ L (V.obj M) (V.obj N)) := inferInstance
+    have : IsIso (adj.counit.app M) := inferInstance
+    have : IsIso (adj.counit.app N) := inferInstance
+    have : IsIso (adj.counit.app M ⊗ₘ adj.counit.app N) :=
       (asIso (adj.counit.app M) ⊗ᵢ asIso (adj.counit.app N)).isIso_hom
     rw [V.map_comp]
     infer_instance
@@ -83,19 +82,19 @@ private theorem bottomForgetMonoidal_unit
     Functor.OplaxMonoidal.η (SheafOfModules.forget.{u} ((sheafCompose ⊥
       (forget₂ CommRingCat.{u} RingCat.{u})).obj O) ⋙
       PresheafOfModules.restrictScalars (𝟙 _)) = 𝟙 _ := by
-  letI := SheafOfModules.monoidalCategory O
+  let := SheafOfModules.monoidalCategory O
   let R := (sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj O
   let L := PresheafOfModules.sheafification.{u} (𝟙 R.obj)
   let V := SheafOfModules.forget.{u} R ⋙ PresheafOfModules.restrictScalars (𝟙 R.obj)
   let adj := PresheafOfModules.sheafificationAdjunction.{u} (𝟙 R.obj)
-  letI := SheafOfModules.sheafificationMonoidal O
-  letI := adj.rightAdjointLaxMonoidal
+  let := SheafOfModules.sheafificationMonoidal O
+  let := adj.rightAdjointLaxMonoidal
   have hη : Functor.OplaxMonoidal.η L = adj.counit.app (𝟙_ _) := rfl
   have hε : Functor.LaxMonoidal.ε V = 𝟙 _ := by
     change adj.unit.app _ ≫ V.map (Functor.OplaxMonoidal.η L) = _
     rw [hη]
     exact adj.right_triangle_components (SheafOfModules.unit R)
-  haveI : IsIso (Functor.LaxMonoidal.ε V) := by rw [hε]; infer_instance
+  have : IsIso (Functor.LaxMonoidal.ε V) := by rw [hε]; infer_instance
   change inv (Functor.LaxMonoidal.ε V) = _
   apply (cancel_mono (Functor.LaxMonoidal.ε V)).1
   simp only [IsIso.inv_hom_id, hε]
@@ -159,9 +158,9 @@ private theorem constantMonoidal_unit
     letI := constantMonoidal O
     Functor.OplaxMonoidal.η (ringFamilyConstantPresheaf O) = 𝟙 _ := by
   let A := CochainComplex.onePointRingSheaf (ringFamilyGlobalRing O)
-  letI := SheafOfModules.monoidalCategory A
-  letI := bottomForgetMonoidal A
-  letI := constantPresheafMonoidal O
+  let := SheafOfModules.monoidalCategory A
+  let := bottomForgetMonoidal A
+  let := constantPresheafMonoidal O
   change (constantComparison O).inv.app _ ≫
     (PresheafOfModules.pushforward₀OfCommRingCat
       ((Functor.const C).obj (Discrete.mk PUnit.unit)) A.obj).map
@@ -183,11 +182,11 @@ theorem ringFamilyGlobalExtension_oplax_normalized
     ∃ oplax : (ringFamilyGlobalExtension O).OplaxMonoidal,
       IsIso oplax.η ∧ (∀ M N, IsIso (oplax.δ M N)) ∧
         oplax.η = ringFamilyGlobalExtensionUnit O := by
-  letI := SheafOfModules.monoidalCategory O
-  letI := SheafOfModules.monoidalCategory
+  let := SheafOfModules.monoidalCategory O
+  let := SheafOfModules.monoidalCategory
     (CochainComplex.onePointRingSheaf (ringFamilyGlobalRing O))
   let R := (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O
-  letI := constantPresheafMonoidal O
+  let := constantPresheafMonoidal O
   let K := (Functor.const Cᵒᵖ).obj (ringFamilyGlobalRing O)
   let φ := ringFamilyGlobalEvaluation O
   let F := ringFamilyConstantPresheaf O
@@ -196,11 +195,11 @@ theorem ringFamilyGlobalExtension_oplax_normalized
   let a := PresheafOfModules.pullbackPushforwardAdjunction.{u} φ
   let b := PresheafOfModules.sheafificationAdjunction.{u} (𝟙 R.obj)
   obtain ⟨mon, hmon⟩ := PresheafOfModules.exists_pullback_monoidal_normalized K O.obj φ
-  letI : P.Monoidal := mon
-  letI : F.Monoidal := constantMonoidal O
-  letI : S.Monoidal := SheafOfModules.sheafificationMonoidal O
+  let : P.Monoidal := mon
+  let : F.Monoidal := constantMonoidal O
+  let : S.Monoidal := SheafOfModules.sheafificationMonoidal O
   -- Unfold the functor before composing, so its coherence data stay shared.
-  letI : (ringFamilyGlobalExtension O).Monoidal := by
+  let : (ringFamilyGlobalExtension O).Monoidal := by
     change (F ⋙ P ⋙ S).Monoidal
     infer_instance
   refine ⟨inferInstance, inferInstance, fun M N ↦ inferInstance, ?_⟩

@@ -354,13 +354,7 @@ def DerivedCategory.boundedConstructibleIn (T : Scheme.{u}) (a b : ℤ) : Object
 /-- An *integral lattice* for an object `K` of `D_comp(T, E)` is an object `L` of
 `Dᵇc(T_proét, 𝒪_E)` (`AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructibleComplete`)
 together with an isomorphism `L[1/ϖ] ≅ K`.
-
-The blueprint asks for this isomorphism in `Dᵇc(T, E)`, the rationalization of
-`Dᵇc(T_proét, 𝒪_E)`; this is a full subcategory of `D_comp(T, E)` (the rationalization of a fully
-faithful triangulated functor is fully faithful, `CategoryTheory.Rationalization.full_map` and
-`CategoryTheory.Rationalization.faithful_map`), so that an isomorphism in `Dᵇc(T, E)` is the same
-as one in `D_comp(T, E)`, and the objects of `D_comp(T, E)` admitting a lattice are those of
-`Dᵇc(T, E)`. -/
+-/
 structure IntegralLattice {T : Scheme.{u}}
     (K : DerivedCategoryDerivedCompleteRational (Scheme.ProEt.topology T) l E) where
   /-- The lattice `L ∈ Dᵇc(T_proét, 𝒪_E)`. -/
@@ -381,8 +375,7 @@ def IsFiniteLevelEtaleAdmissible (Λ : IntegralLattice l E K) : Prop :=
   DerivedCategory.ReductionsBoundedConstructible 𝔪 T Λ.obj
 
 /-- Every integral lattice is finite-level étale admissible: in this formalisation the étale
-origin of the reductions is part of the definition of `Dᵇc(T_proét, 𝒪_E)`, as it is in the
-blueprint. -/
+origin of the reductions is part of the definition of `Dᵇc(T_proét, 𝒪_E)`. -/
 lemma isFiniteLevelEtaleAdmissible (Λ : IntegralLattice l E K) :
     Λ.IsFiniteLevelEtaleAdmissible :=
   Λ.mem.reductionsBoundedConstructible

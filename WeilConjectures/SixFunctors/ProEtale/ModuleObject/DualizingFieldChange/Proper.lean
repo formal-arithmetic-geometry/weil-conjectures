@@ -24,33 +24,6 @@ Let `L/F` be a field extension, `X` a proper `F`-scheme, `X'` its base change to
 This file proves that `φ_X` is an isomorphism
 (`ProEtale.CondensedRing.isIso_dualizingComplexBaseChange_of_fieldExtension`), extending the
 projective case of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Smooth`.
-
-## Proof
-
-By noetherian induction on the closed subschemes of `X`
-(`ProEtale.CondensedRing.isIso_dualizingComplexBaseChange_of_forall_isClosedImmersion`). Let
-`h : Y ⟶ X` be a Chow modification: `Y` is closed in a projective space, hence `φ_Y` is invertible
-(`ProEtale.CondensedRing.isIso_dualizingComplexBaseChange_of_isClosedImmersion_projectiveSpace`),
-and `h` is an isomorphism over a dense open `U` of `X`, with closed complement `i : Z ⟶ X`.
-
-* *The open part.* By the composition law
-  `ProEtale.CondensedRing.dualizingComplexBaseChange_eq_comp_upperShriekBaseChangeOfMap`,
-  `φ_Y` is `γ(ω_X) ≫ Rh'^!(φ_X)` up to isomorphisms, `γ` the base change map of `Rh^!`. Over the
-  preimage of `U` the base change map is invertible
-  (`ProEtale.CondensedRing.isIso_upperStarOfMap_map_upperShriekBaseChangeOfMap_app`): by its counit
-  property this reduces to the invertibility of the counit of `Rh_* ⊣ Rh^!` over `U`
-  (`ProEtale.CondensedRing.isIso_upperStar_map_lowerStarUpperShriekAdjunction_counit_app`, from
-  the exceptional base change along the open immersion `U ⟶ X`) and to proper base change. Hence
-  the restriction of `φ_X` to the preimage `U'` of `U` is invertible
-  (`ProEtale.CondensedRing.isIso_upperStar_map_dualizingComplexBaseChange_of_isIso`).
-* *The closed part.* `φ_Z` is invertible by induction, hence so is `Ri'^! φ_X`
-  (`ProEtale.CondensedRing.isIso_dualizingComplexBaseChange_iff_of_isClosedImmersion`).
-* *Dévissage.* A morphism `φ` of bounded constructible complexes with `Lj'^* φ` and `Ri'^! φ`
-  invertible is invertible
-  (`ProEtale.CondensedRing.isIso_of_isIso_upperStar_map_of_isIso_upperShriek_map`): a complex
-  `A` with `Lj'^* A = 0` is `Ri'_* Li'^* A`, so that composition with `φ` is bijective on maps out
-  of `A`; apply this to the fibre of `φ` and its shift.
-
 -/
 
 @[expose] public section
@@ -353,10 +326,7 @@ variable {Y X U : Over (Spec (.of k₁))}
 immersion, and similarly over a second field, with a cartesian square `πY ≫ h = h' ≫ πX` and a
 commutative square `πU ≫ (j ≫ h) = (j' ≫ h') ≫ πX`. Then the restriction to `U'` of the base change
 map `πY^* Rh^! M ⟶ Rh'^! πX^* M` (`ProEtale.CondensedRing.upperShriekBaseChangeOfMap`) is an
-isomorphism. Indeed, by the counit property of the base change map and
-`ProEtale.CondensedRing.isIso_upperStar_map_lowerStarUpperShriekAdjunction_counit_app` its image
-under `Rh'_*` is invertible over `U'`, and `Rh'_*` restricted to `U'` is the restriction to `U'`
-of `Y'` (proper base change). -/
+isomorphism. -/
 theorem isIso_upperStarOfMap_map_upperShriekBaseChangeOfMap_app
     (sq : IsPullback j (𝟙 U) h (j ≫ h)) (sq' : IsPullback j' (𝟙 U') h' (j' ≫ h'))
     (sqf : IsPullback πY h'.left h.left πX) (w : πU ≫ (j ≫ h).left = (j' ≫ h').left ≫ πX)
@@ -414,9 +384,7 @@ theorem isIso_upperStarOfMap_map_upperShriekBaseChangeOfMap_app
 in the situation of `isIso_upperStarOfMap_map_upperShriekBaseChangeOfMap_app`, for proper
 `k₁`-schemes `X`, `Y` and their base changes `X'`, `Y'` along `πₛ`, if the comparison `φ_Y` of the
 dualizing complexes of `Y` is an isomorphism, then so is the restriction of `φ_X` to the open
-`U'` of `X'`. Indeed `φ_Y = πY^*(ρ⁻¹) ≫ γ(ω_X) ≫ Rh'^!(φ_X) ≫ ρ'`
-(`ProEtale.CondensedRing.dualizingComplexBaseChange_eq_comp_upperShriekBaseChangeOfMap`), the base
-change map `γ` is invertible over `U'`, and `j'^* Rh'^! ≅ R(j' ≫ h')^! ≅ (j' ≫ h')^*`. -/
+`U'` of `X'`. -/
 theorem isIso_upperStar_map_dualizingComplexBaseChange_of_isIso [IsProper (toPoint X).left]
     [IsProper (toPoint Y).left] [IsProper (toPoint X').left] [IsProper (toPoint Y').left]
     {πₛ : Spec (.of k₂) ⟶ Spec (.of k₁)}
@@ -610,16 +578,7 @@ theorem isIso_dualizingComplexBaseChange_of_isEmpty {X : Over (Spec (.of F))}
 /-- **The inductive step**: let `X` be a nonempty proper `F`-scheme such that the comparison of
 the dualizing complexes is an isomorphism for every closed subscheme `Z ⊊ X` and every base
 change of `Z` along `L/F`. Then the comparison `φ_X` is an isomorphism for every base change of
-`X` along `L/F`.
-
-Let `h : Y ⟶ X` be a Chow modification (`AlgebraicGeometry.ChowModification`): `Y` is closed in a
-projective space, so `φ_Y` is invertible, and `h` is an isomorphism over a dense open `U ⊆ X`.
-Hence `φ_X` is invertible over the preimage `U'` of `U`
-(`ProEtale.CondensedRing.isIso_upperStar_map_dualizingComplexBaseChange_of_isIso`), and
-`Ri'^! φ_X` is invertible for the reduced closed complement `i : Z ⟶ X` of `U` by the induction
-hypothesis (`ProEtale.CondensedRing.isIso_dualizingComplexBaseChange_iff_of_isClosedImmersion`).
-Thus `φ_X` is invertible
-(`ProEtale.CondensedRing.isIso_of_isIso_upperStar_map_of_isIso_upperShriek_map`). -/
+`X` along `L/F`. -/
 theorem isIso_dualizingComplexBaseChange_of_forall_isClosedImmersion
     (X : Over (Spec (.of F))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
     [IsSeparated X.hom] [IsProper (toPoint X).left]
@@ -780,10 +739,7 @@ theorem isIso_dualizingComplexBaseChange_of_forall_isClosedImmersion
 /-- **Base change of dualizing complexes of proper schemes along field extensions** (SGA 4½,
 [Th. finitude]): for a proper `F`-scheme `X`, its base change `X'` along a field extension `L/F`
 and an isomorphism `e : πₛ^* ℚ̄_ℓ ⟶ ℚ̄_ℓ`, the comparison `φ : π^* ω_X ⟶ ω_{X'}` of the dualizing
-complexes (`ProEtale.CondensedRing.dualizingComplexBaseChange`) is an isomorphism.
-
-The proof is by noetherian induction on the closed subschemes of `X`
-(`ProEtale.CondensedRing.isIso_dualizingComplexBaseChange_of_forall_isClosedImmersion`). -/
+complexes (`ProEtale.CondensedRing.dualizingComplexBaseChange`) is an isomorphism. -/
 theorem isIso_dualizingComplexBaseChange_of_fieldExtension
     {X : Over (Spec (.of F))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
     [IsSeparated X.hom] [IsProper (toPoint X).left]

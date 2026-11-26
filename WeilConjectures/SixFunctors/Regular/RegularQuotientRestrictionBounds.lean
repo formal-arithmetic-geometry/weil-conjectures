@@ -16,8 +16,17 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Uniform constructibility and Tor bounds for finite quotient restriction
 
-Source: Tags 06YY, 07A6, 0A70, 0BZE, 0BZH and 08FZ; Zheng Lemma 5.22 and Proposition 5.26.
-(blueprint: lem-sf-regular-quotient-restriction-bounds). -/
+## References
+
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
+* [Stacks, Tag 0A70](https://stacks.math.columbia.edu/tag/0A70)
+* [Stacks, Tag 0BZE](https://stacks.math.columbia.edu/tag/0BZE)
+* [Stacks, Tag 0BZH](https://stacks.math.columbia.edu/tag/0BZH)
+* [Stacks, Tag 08FZ](https://stacks.math.columbia.edu/tag/08FZ)
+* [Stacks, Tag 093U](https://stacks.math.columbia.edu/tag/093U)
+* Zheng, Lemma 5.22 and Proposition 5.26
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -32,19 +41,7 @@ open CategoryTheory.Limits
 /-- The cohomology sheaves of a finite reduction of the restriction of a finite-level complex
 `K` are controlled by those of `K`: the `i`-th one vanishes if the `i`-th and `(i+1)`-st
 cohomology sheaves of `K` vanish, and it is constructible if all cohomology sheaves of `K`
-are constructible.
-Source: Stacks Project, Tags 06YY, 093U and 0A70
-(blueprint: lem-sf-regular-quotient-restriction-bounds).
-
-Proof: let `M` be the restriction of `K` to the completed coefficient ring. The derived
-reduction triangle `M --ϖ^(m+1)--> M --> res_m(red_m M)` gives the exact sequence
-`H^i M --> H^i M --> res_m H^i(red_m M) --> H^(i+1) M --> H^(i+1) M`. Restriction is exact, so
-`H^j M` is the restriction of `H^j K`. For the vanishing, use exactness at the middle term
-and faithfulness of restriction. For constructibility, restrict everything to the finite
-quotient `A_(n+m+1)`, through which both restrictions factor, and lift the exact sequence
-there by full faithfulness of restriction. Constructibility over `A_(n+m+1)` is closed under
-kernels, cokernels and extensions, so the middle term is constructible over `A_(n+m+1)`, and
-restriction along the surjection `A_(n+m+1) → A_(m+1)` reflects constructibility. -/
+are constructible. -/
 theorem scalarReductionDerivedRestriction_reduction_homology
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (n : ℕ)
@@ -114,29 +111,7 @@ theorem scalarReductionDerivedRestriction_reduction_homology
       (coefficientExtensionRingMap_surjective l E hm) hP
 
 /-- Restriction of a finite-Tor constructible quotient complex has constructible finite
-reductions with one cohomological and Tor interval, independent of the reduction level.
-Source: Zheng, Lemma 5.22 and Proposition 5.26; Stacks Project, Tags 06YY, 07A6 and 08FZ.
-(blueprint: lem-sf-regular-quotient-restriction-bounds).
-
-Proof: choose a bounded flat representative in a Tor interval [a,b] for K. Each flat
-module over the fixed quotient B=A/(pi^(n+1)) has flat dimension at most one over A:
-tensor the length-one free resolution of B with it, or use the change-of-rings Tor
-spectral sequence and B-flatness. The bounded representative therefore has A-Tor
-amplitude [a-1,b]. Derived tensor with any quotient A/(pi^(m+1)) retains this same
-interval over the target quotient, by derived tensor associativity. Tensoring with
-the unit gives the same cohomological bound, for every m at once. To check
-constructibility, use a finite locally closed stratification trivializing the bounded
-constructible finite-Tor B-complex locally by bounded finite projective B-complexes.
-Resolve each finite projective term over A using the regular principal resolution,
-and tensor this finite model with A/(pi^(m+1)). Its cohomology is finite over the
-finite target ring, and the local constant models give constructible cohomology on
-each of the same strata. The normalized scalar-extension counit identifies these
-computations with the prescribed scalarReductionDerivedExtension, and exact scalar
-restriction identifies their input with scalarReductionDerivedRestriction. Isomorphism
-invariance transfers both predicates to those functors. Enlarge the two finite bounds
-if necessary to obtain ordered a,b common to cohomology and Tor. Positivity of n+1
-and m+1 includes level zero; zero complexes and empty strata satisfy the same bounds.
-This statement does not assert derived completeness or any adjunction. -/
+reductions with one cohomological and Tor interval, independent of the reduction level. -/
 theorem scalarReductionDerivedRestriction_bounds
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (n : ℕ)

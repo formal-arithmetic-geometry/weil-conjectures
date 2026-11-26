@@ -65,11 +65,7 @@ lemma isConstant_upperStar_comparisonUpperStar_obj {S U Z : Scheme.{u}} (u : U �
 by a jointly surjective family of étale morphisms `uᵢ : Uᵢ ⟶ S` (each `uᵢ^* F` constant), and
 `W` an object of the pro-étale site of `S` whose underlying scheme is the spectrum of a
 w-contractible ring. Then `W` is covered by pairwise disjoint open subschemes `Oⱼ` on each of
-which the comparison pullback `ν^* F` is constant: the pulled-back étale cover of `W` has a
-section, `W` being w-contractible
-(`AlgebraicGeometry.Scheme.ProEt.exists_disjoint_opens_of_forall_exists_retraction`). The cover
-does not depend on `F` beyond the trivialising family, so for a tower of sheaves trivialised by a
-common family it serves all levels at once. -/
+which the comparison pullback `ν^* F` is constant. -/
 theorem exists_disjoint_opens_isConstant_comparisonUpperStar {S : Scheme.{u}} {ι : Type u}
     {U : ι → Scheme.{u}} (u : ∀ i, U i ⟶ S) [∀ i, Etale (u i)]
     (hu : ∀ x, ∃ i, x ∈ Set.range (u i)) (F : Sheaf S.smallEtaleTopology A)

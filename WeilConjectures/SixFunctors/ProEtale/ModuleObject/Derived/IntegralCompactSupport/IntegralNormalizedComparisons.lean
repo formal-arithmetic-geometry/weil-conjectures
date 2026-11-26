@@ -204,26 +204,7 @@ private theorem comparisonsForCoefficient
   choose φ hi hc hn using @per_morphism
   exact ⟨φ, hi, hc, hn⟩
 
-/-- Normalized comparison maps and their groupoid equations.
-
-Source: blueprint proposition-construction-independence-rf-shriek, common dense refinement
-construction, and proposition-construction-independence-rf-shriek, comparison paragraph.
-(blueprint: lem-sfb-total-derived-normalized-comparisons).
-
-Proof: specialize localizingClosure_ctf_equals_bc to O_E using the identity
-coefficient isomorphism. Write he for the equality Loc(Dctf) = Loc(Dbc). Take the
-canonical comparison family from compactification_coherence_cocycle
-and restrict its source using he. Identity and cocycle follow componentwise. For a
-boundary refinement, choose a dense refinement of its source.
-The composite-law for normalized refinement components and cancellation of the dense
-component identify the canonical comparison with the inverse refinement component.
-The boundary-vanishing theorem makes the localizing refinement map invertible.
-Transport its normalization along the canonical comparison between termwise and total
-pullback. The open unit and proper counit are transported by the same adjunction
-isomorphism; its naturality cancels the transport factors. The derived pushforward
-compositor is the conjugate of the total pullback compositor by uniqueness of right
-adjoints, so its inverse is precisely pushComp. This gives refinementIso as stated.
-The argument allows empty distinguished opens and zero complexes. -/
+/-- Normalized comparison maps and their groupoid equations. -/
 theorem normalizedComparisons
     (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

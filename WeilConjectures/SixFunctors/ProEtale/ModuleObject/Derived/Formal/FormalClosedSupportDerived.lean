@@ -15,8 +15,11 @@ import Mathlib.AlgebraicGeometry.Noetherian
 # Derived sections with closed support
 
 The derived form of sections with closed support: the derived adjunction `Ri_* ⊣ RΓ_Z`, the
-global RHom comparison, the support triangle `i_* RΓ_Z K → K → Rj_* j^* K` and the fibre formula
-(Stacks Project, Tag 079P).
+global RHom comparison, the support triangle `i_* RΓ_Z K → K → Rj_* j^* K` and the fibre formula.
+
+## References
+
+* Stacks Project, Tag 079P
 -/
 
 @[expose] public noncomputable section
@@ -140,42 +143,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 /-- Derived adjunction, global RHom, injective-unit surjectivity, and the natural support
-triangle and fibre formula, using exactly the kernel functor of `formal_closed_support_sheaves`.
-
-Proof plan:
-1. Only a quasi-compact open immersion j is assumed; no finiteness over a field is needed.
-2. The sheaf adjunction and exact i_* are `formal_closed_support_sheaves`.
-   The exact-left-adjoint derived adjunction is adj.mapDerivedCategoryRightDerivedAdjunction.
-   On a K-injective I the total right derived functor is computed by H(I), via
-   Functor.rightDerivedFunctorObjQIso. The universal pair of the sections-with-closed-support lemma
-   agrees with this pair by its unit-compatible uniqueness. Apply the sheaf adjunction
-   componentwise to the Hom complexes: naturality intertwines their two differentials.
-   Both I and H(I) are K-injective, giving the displayed global RHom isomorphism.
-3. Clause (3) of the sections-with-closed-support lemma gives the epimorphic open unit
-   on injectives, after the canonical coefficient-transport comparison. Equivalently,
-   extend j_!j^*I -> I along the monomorphism j_!j^*I -> j_*j^*I by injectivity;
-   open full faithfulness makes the extension a section of the unit.
-4. Ring-sheaf modules are Grothendieck; the sections-with-closed-support lemma resolves
-   every unbounded complex by a K-injective complex with injective terms. Exact j_! is
-   left adjoint to j^*, so j^* preserves K-injectives. The kernel identification and
-   step 3 give a natural degreewise short exact sequence i_*H(I) -> I -> j_*j^*I.
-5. Apply the sections-with-closed-support lemma. Exact i_* computes its derived action.
-   The termwise homotopy adjunction and the Hom bijection into K-injectives show that
-   its second arrow is precisely the derived unit. Chain maps between resolutions
-   represent all derived morphisms; additive functors preserve homotopies. Therefore
-   the connecting arrows descend to the natural transformation delta in the statement.
-6. Rotate the distinguished triangle and compare it with the cone triangle of this
-   unit. TR3 and the sections-with-closed-support lemma identify i_*RH(K) with its shifted cone.
-   Apply exact i^* and its counit i^*i_* = id, giving the fibre formula. This uses the
-   actual unit on I, not a functorial cone chosen in an arbitrary triangulated category.
-
-The existential additive instance and ordinary adjunction only expose the structures
-already asserted by the sheaf-support dependency. They impose no new assumptions.
-The derived adjunction in (1) is the existing construction from this adjunction; its
-counit is the first triangle arrow. The component formula specifies the natural global
-RHom comparison. Every derived object admits the K-injective representative used in the
-last clause, whose cone shifted by -1 is the fibre of the specified derived unit.
--/
+triangle and fibre formula, using exactly the kernel functor of `formal_closed_support_sheaves`. -/
 theorem formal_closed_support_derived
     {X Z V : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i]

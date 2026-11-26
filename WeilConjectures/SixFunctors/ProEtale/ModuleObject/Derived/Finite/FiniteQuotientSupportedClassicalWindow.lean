@@ -85,8 +85,13 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 /-!
 # Finite quotient supported classical window
 
-Source: Stacks Project, etale-cohomology.tex, Tag 0A45; proetale.tex, Tags 09B1
-and 09AA; blueprint `lem-sfb-finite-quotient-supported-classical-window`.
+A bounded classical complex over a finite quotient of the coefficient ring has a bounded
+classical window of cohomology supported on a closed subscheme.
+
+## References
+
+* Stacks Project, Tag 0A45
+* Stacks Project, Tags 09B1 and 09AA
 -/
 
 @[expose] public section
@@ -620,42 +625,7 @@ private theorem window_support_classical
         ((lowerStar Λ i).mapDerivedCategory.obj A)).symm
   exact hAc r
 
-/-- A bounded classical finite quotient complex has a bounded closed-support window.
-
-Source: Stacks Project, etale-cohomology.tex, Tag 0A45; proetale.tex, Tags 09B1
-and 09AA; blueprint `lem-sfb-finite-quotient-supported-classical-window`.
-
-The ring objects `Λ_T = p_T^* Λ` carry the canonical transported multiplication
-`Functor.monObjObj` of the scoped `CategoryTheory.Obj` instance, as in the closed-support
-dependency module.
-
-Proof (the route of the Lean proof; it refines blueprint steps 1--8):
-1. Restrict `C` along `A_X → B_X` to the integral complex `K`; restriction is exact with
-   identical underlying abelian sheaves, so `K` has cohomology in `[a,b]`, classical.
-   `ℓ ∈ (π)` in the DVR `A`, so `ℓ ^ n = 0` in `B`; it kills the continuous coefficient
-   ring pointwise, hence `B_X`, hence (unit-action identity) every `B_X`-module, termwise
-   every complex, and so `ℓ ^ n • 𝟙 C = 0` and `ℓ ^ n • 𝟙 K = 0`.
-2. `J = j_A^* K` has cohomology in `[a,b]`; its underlying cohomology is classical (the
-   comparison inverse-image square) and killed by `ℓ ^ n`, hence `ℓ`-power torsion (the
-   `ℓ`-power kernel colimit is split by the stage-`n` inclusion).
-3. On a classical `ℓ`-power torsion heart object, `Rj_{*,Ab}` has range `[0,c]`: the lower
-   bound is the right-derived lower t-bound, the upper one the defining supremum
-   `cd_ℓ(j) ≤ c`.  Bounded-heart amplitude puts `Rj_{*,Ab}` of the underlying complex of `J`
-   in `[a,b+c]`.
-4. The integral forget/direct-image comparison (forgetting `A`-structure commutes with
-   `Rj_*`) and faithful exact forgetting give `L = Rj_{*,A} J` in `[a,b+c]`; its underlying
-   cohomology is classical by bounded étale descent along the comparison counit and the qcqs
-   direct-image comparison.
-5. The canonical support triangle `i_* RΓ_Z K → K → Rj_*j^*K`, transported to the published
-   `upperStar` presentation by uniqueness of adjoints, and the long exact sequence
-   `H^{q-1}(L) → H^q(i_* RΓ_Z K) → H^q(K)` put `RΓ_Z K` in `[a,b+c+1]` (`i_*` exact, faithful).
-6. The two outer terms of the forgotten triangle are bounded and classical, so they and their
-   arrow descend along the fully faithful bounded-below étale comparison and the fibre is
-   classical; the invertible closed counit reflects this from `i_*` to `Z`.  Derived support,
-   cohomology and forgetting are additive, so they keep `ℓ ^ n • 𝟙 = 0`: every cohomology
-   sheaf is `ℓ`-power torsion, equivalently locally `ℓ`-power torsion.
-No constructibility or finite Tor-amplitude is used.
-(blueprint: lem-sfb-finite-quotient-supported-classical-window). -/
+/-- A bounded classical finite quotient complex has a bounded closed-support window. -/
 theorem finite_quotient_supported_classical_window
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E]

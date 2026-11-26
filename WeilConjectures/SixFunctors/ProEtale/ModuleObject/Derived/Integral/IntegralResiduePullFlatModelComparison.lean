@@ -12,8 +12,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Counit
 
 /-! # Comparison equality for the integral residue pull model
 
-Source: Bhatt--Scholze, Remark 6.8.15.
-(blueprint: new-integral-residue-pull-flat-model-comparison)
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Remark 6.8.15.
 -/
 
 @[expose] public section
@@ -29,16 +30,8 @@ attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFun
   Functor.mapDerivedCategory
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
-/-- The comparison equality in the flat-model theorem.
-
-Source: Bhatt--Scholze, Remark 6.8.15; the derived mate calculation after
-restriction/pullback factorization. This is strictly the second conjunct of
-`residueExchangePull_flatModel`; its proof transposes the square under the
-extension/restriction adjunction, uses the exact pullback factorization and
-`residueExchangePull_ordinary_unit`, and then cancels the invertible localization
-factor.
-(blueprint: new-integral-residue-pull-flat-model-comparison)
--/
+/-- The comparison equality in the flat-model theorem: the second conjunct of
+`residueExchangePull_flatModel`. -/
 theorem residueExchangePull_flatModel_comparison
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex

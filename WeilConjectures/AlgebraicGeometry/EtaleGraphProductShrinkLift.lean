@@ -18,7 +18,6 @@ import all WeilConjectures.AlgebraicGeometry.SfExactExchangePasting
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 
 universe u
 
@@ -77,13 +76,13 @@ private theorem graph_square
       openImmersionLowerShriekLowerStarExchangeIso, asIso_hom, Functor.comp_obj,
       Functor.id_obj, Category.comp_id]
     rw [hp]
-    simp only [Category.assoc, ← Functor.map_comp]
+    simp only [Category.assoc]
     rw [← (rightDerivedLowerStarComp (ModuleCat.{u + 1} A) a r).hom.naturality]
     simp only [Functor.comp_map, Functor.map_comp, Category.assoc]
     rfl
   have hinv := IsIso.inv_eq_inv.mpr hnorm
   simp only [IsIso.inv_comp, ← Functor.map_inv, NatIso.inv_hom_app] at hinv
-  simp only [rightDerivedLowerStarCompOfEq, Iso.symm_inv, Iso.symm_hom]
+  simp only [rightDerivedLowerStarCompOfEq]
   rw [hinv]
   simp only [Category.assoc, Iso.hom_inv_id_app_assoc, NatIso.inv_inv_app]
 
@@ -211,12 +210,11 @@ private theorem horizontal_shrink
   simp only [IsIso.inv_comp, ← Functor.map_inv, NatIso.inv_hom_app,
     NatIso.inv_inv_app, Category.assoc, ← Functor.map_comp_assoc,
     Iso.inv_hom_id_app, CategoryTheory.Functor.map_id, Category.id_comp,
-    Iso.inv_hom_id_app_assoc, Category.comp_id] at hh
+    Category.comp_id] at hh
   simp only [open_comp, mapDerivedCategoryOpenImmersionLowerShriekCongr,
-    Iso.refl_trans, Iso.trans_hom, Iso.trans_inv, Iso.refl_hom, Iso.refl_inv,
-    NatTrans.id_app, Category.id_comp, Category.comp_id, NatTrans.comp_app,
-    Iso.symm_hom, Functor.comp_obj, Functor.id_obj, CategoryTheory.Functor.map_id,
-    Category.id_comp, Category.comp_id, Category.assoc] at hh ⊢
+    Iso.refl_trans, Iso.trans_hom, Iso.trans_inv,
+    NatTrans.comp_app,
+    Iso.symm_hom, Functor.comp_obj] at hh ⊢
   simpa only [CategoryTheory.Functor.map_id, Category.id_comp] using hh
 
 private theorem triangle_precomp
@@ -254,8 +252,7 @@ private theorem triangle_precomp
   simp only [Category.assoc]
   rw [← (rightDerivedLowerStarComp (ModuleCat.{u + 1} A) p q).hom.naturality]
   simp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj]
-  simp only [Category.assoc, ← Functor.map_comp_assoc,
-    Iso.inv_hom_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
+  simp only [Category.assoc, ← Functor.map_comp_assoc]
   simp only [← Functor.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
     Category.comp_id, Functor.id_obj]
 
@@ -292,10 +289,10 @@ private theorem middle_graph
   apply (cancel_mono (D((k)_!open[ModuleCat.{u + 1} A]).map
     ((rightDerivedLowerStarComp (ModuleCat.{u + 1} A) c' r').hom.app M))).1
   simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app,
-    CategoryTheory.Functor.map_id, Category.comp_id]
+    Category.comp_id]
   simp only [rightDerivedLowerStarCompOfEq] at hg
   rw [← hg]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
   rw [hi]
   simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
@@ -358,7 +355,7 @@ private theorem lift_formula
       Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom,
       Functor.isoWhiskerLeft_hom, NatTrans.comp_app, Functor.whiskerRight_app,
       Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app,
-      Functor.comp_obj, Functor.comp_map, CategoryTheory.Functor.map_id, Category.id_comp,
+      Functor.comp_obj, Functor.comp_map, Category.id_comp,
       Category.comp_id, Category.assoc]
   all_goals rfl
 
@@ -571,7 +568,7 @@ theorem etaleGraphProductShrinkLift
       (D((vg d₁ d₂ second)_!open[ModuleCat.{u + 1} A]).map
         ((d₁.productLiftInterchange d₂ A).hom.app M)) ≫ _ = _ at hn
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Functor.associator_inv_app, Category.id_comp, Category.comp_id,
+    Functor.associator_inv_app, Category.id_comp,
     Functor.map_comp, Category.assoc] at hh
   rw [hn] at hh
   simpa only [EtaleGraphPresentation.functor, Functor.comp_obj,
