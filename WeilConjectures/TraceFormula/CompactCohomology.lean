@@ -22,10 +22,9 @@ endomorphisms with `Φ_X ≫ f = f ≫ Φ_Y`. Unlike the case of automorphisms
 ```
 X' = X ×_{f, Y, Φ_Y} Y,   p : X' ⟶ X,   f' : X' ⟶ Y,   r = (Φ_X, f) : X ⟶ X',
 ```
-so that `r ≫ p = Φ_X` and `r ≫ f' = f`; `r` is the *relative Frobenius* of `f` (blueprint
-`lemma-comparison-via-relative-frobenius--text-1`). For the model Frobenii of a morphism of models
-over a finite field `r` is a finite universal homeomorphism. The Frobenius comparison of `Rf_!`
-(blueprint `lemma-comparison-via-relative-frobenius--2`) is then the composite
+so that `r ≫ p = Φ_X` and `r ≫ f' = f`; `r` is the *relative Frobenius* of `f`. For the model
+Frobenii of a morphism of models over a finite field `r` is a finite universal homeomorphism. The
+Frobenius comparison of `Rf_!` is then the composite
 ```
 θ_f : Φ_Y^* Rf_! ≅ Rf'_! p^*                    (compact-support base change)
           ≅ Rf'_! Rr_* r^* p^*                   (topological invariance: the unit of r^* ⊣ Rr_*)
@@ -48,9 +47,7 @@ RΓ_c(X, -) = ProEtale.CondensedRing.weilCompactCohomology :
 for every finite universal homeomorphism `Φ`. The *global operator* `F_{c,m}` of a Weil object
 `(K, φ)` is the Frobenius of the Weil object `RΓ_c(X, (K, φ_m))` for the identity of `s`, an
 automorphism of `RΓ_c(X, K) = Ra_{X!} K`
-(`ProEtale.CondensedRing.WeilBoundedConstructible.globalOperator`, blueprint
-`definition-frobenius-correspondences-their-operators` and
-`lemma-scheme-frobenius-geometric-frobenius--3`).
+(`ProEtale.CondensedRing.WeilBoundedConstructible.globalOperator`).
 
 The comparison uses topological invariance
 (`ProEtale.CondensedRing.isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction`): the unit
@@ -71,13 +68,12 @@ The comparison uses topological invariance
 ## Main statements
 
 - `ProEtale.CondensedRing.WeilBoundedConstructible.nonempty_hasRightDual_compactCohomology`:
-  `RΓ_c(X, K)` is perfect (blueprint `lemma-perfect-complexes-geometric-point`).
+  `RΓ_c(X, K)` is perfect.
 - `ProEtale.CondensedRing.nonempty_weilCompactCohomology_weilLowerShriekOfFrobenius_iso`: the
-  compactly supported cohomology of `Rf_! K` is that of `K`, as Weil objects (blueprint
-  `lemma-comparison-via-relative-frobenius--4`).
+  compactly supported cohomology of `Rf_! K` is that of `K`, as Weil objects.
 - `ProEtale.CondensedRing.nonempty_weilStalk_weilLowerShriekOfFrobenius_iso`: the stalk of
   `Rf_! K` at a fixed point `y` is the compactly supported cohomology of the fibre `X_y`, as Weil
-  objects (proper base change, blueprint `lemma-comparison-via-relative-frobenius--4`).
+  objects (proper base change).
 
 -/
 
@@ -146,14 +142,14 @@ omit ℓ k in
 cartesian square `sq : p ≫ f = f' ≫ Φ_Y` and the relative Frobenius `r` with `r ≫ p = Φ_X` and
 `r ≫ f' = f`, a finite universal homeomorphism: compact-support base change for `sq`, the unit
 of `Lr^* ⊣ Rr_*`, the identification `Rr_! ≅ Rr_*` and the composition isomorphisms of the
-lower shriek and of the pullback (blueprint `lemma-comparison-via-relative-frobenius--2`). -/
+lower shriek and of the pullback. -/
 noncomputable irreducible_def weilLowerShriekFrobeniusComparison :=
   @weilLowerShriekFrobeniusComparisonImpl
 
 /-- The *lower shriek of Weil objects* along a morphism `f` compatible with Frobenius
 endomorphisms: a Weil object `(K, φ)` for `Φ_X` is sent to `Rf_! K` with the Weil structure
 `Φ_Y^* Rf_! K ≅ Rf_! Φ_X^* K --Rf_! φ--> Rf_! K` given by
-`weilLowerShriekFrobeniusComparison` (blueprint `lemma-comparison-via-relative-frobenius`). -/
+`weilLowerShriekFrobeniusComparison`. -/
 noncomputable def weilLowerShriekOfFrobenius :
     WeilBoundedConstructible ℓ ΦX ⥤ WeilBoundedConstructible ℓ ΦY :=
   IsoAlgebra.mapOfNatIso (weilLowerShriekFrobeniusComparison ℓ ΦX ΦY f sq r hrp hrf)
@@ -221,11 +217,10 @@ lemma weilCompactCohomology_obj_str (K : WeilBoundedConstructible ℓ Φ) :
   weilLowerShriekOfFrobenius_obj_str ℓ _ _ _ _ _ _ _ K
 
 -- the rewrites unfold the restricted `ℚ̲̄_ℓ`-functors, which is expensive
-/-- **The Frobenius comparison of `RΓ_c` is the pullback along `Φ`** (blueprint
-`lemma-scheme-frobenius-geometric-frobenius--3`): for the trivial square of the structure
-morphism, the Frobenius comparison `θ : L(𝟙 s)^* Ra_{X!} ≅ Ra_{X!} LΦ^*` composed with the
-identity isomorphism `𝟭 ≅ L(𝟙 s)^*` is the pullback `Φ^♯ : RΓ_c(X, M) ⟶ RΓ_c(X, LΦ^* M)` of
-`ProEtale.CondensedRing.compactPullback`. -/
+/-- **The Frobenius comparison of `RΓ_c` is the pullback along `Φ`**: for the trivial square of
+the structure morphism, the Frobenius comparison `θ : L(𝟙 s)^* Ra_{X!} ≅ Ra_{X!} LΦ^*` composed
+with the identity isomorphism `𝟭 ≅ L(𝟙 s)^*` is the pullback `Φ^♯ : RΓ_c(X, M) ⟶ RΓ_c(X, LΦ^* M)`
+of `ProEtale.CondensedRing.compactPullback`. -/
 lemma boundedConstructibleUpperStarId_inv_app_comp_weilLowerShriekFrobeniusComparison_hom_app
     (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStarId _ ℓ (point k)).inv.app
@@ -310,11 +305,9 @@ base point. Explicitly it is
 ```
 RΓ_c(X, K) ≅ L(𝟙 s)^* Ra_{X!} K --θ_{a_X}--> Ra_{X!} LΦ_m^* K --Ra_{X!} φ_m--> Ra_{X!} K
 ```
-(blueprint `definition-frobenius-correspondences-their-operators` and
-`lemma-scheme-frobenius-geometric-frobenius--3`). It agrees with the global operator
-`T_{c_m}(φ_m)` of the graph correspondence `c_m = (𝟙, Φ_m)`
-(`ProEtale.CondensedRing.WeilBoundedConstructible.globalOperator_eq_correspondenceGlobalOperator`,
-blueprint `lemma-scheme-frobenius-geometric-frobenius--3`). -/
+It agrees with the global operator `T_{c_m}(φ_m)` of the graph correspondence `c_m = (𝟙, Φ_m)`
+(`ProEtale.CondensedRing.WeilBoundedConstructible.globalOperator_eq_correspondenceGlobalOperator`).
+-/
 noncomputable def globalOperator (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
     [IsFinite (frobeniusIterate Φ m).left] [IsUniversalHomeomorphism (frobeniusIterate Φ m).left] :
     (boundedConstructibleLowerShriek ℓ (toPoint X)).obj
@@ -349,8 +342,7 @@ lemma isoMk_condition_of_frobenius {A B : WeilBoundedConstructible ℓ (𝟙 X)}
     Functor.id_map, ← hB, ← reassoc_of% hA]
   exact h.symm
 /-- The compactly supported Frobenius of a Weil object `(K, φ)` is
-`RΓ_c(X, φ) ∘ Φ^♯ : RΓ_c(X, K) ⟶ RΓ_c(X, LΦ^* K) ⟶ RΓ_c(X, K)` (blueprint
-`lemma-scheme-frobenius-geometric-frobenius--3`). -/
+`RΓ_c(X, φ) ∘ Φ^♯ : RΓ_c(X, K) ⟶ RΓ_c(X, LΦ^* K) ⟶ RΓ_c(X, K)`. -/
 lemma compactFrobenius_eq (K : WeilBoundedConstructible ℓ Φ) [IsFinite Φ.left]
     [IsUniversalHomeomorphism Φ.left] :
     K.compactFrobenius =
@@ -364,8 +356,7 @@ lemma compactFrobenius_eq (K : WeilBoundedConstructible ℓ Φ) [IsFinite Φ.lef
     (boundedConstructibleUpperStarId_inv_app_comp_weilLowerShriekFrobeniusComparison_hom_app ℓ Φ
       K.carrier)
 
-/-- **The global operator as an explicit composite** (blueprint
-`lemma-scheme-frobenius-geometric-frobenius--3`): `F_{c,m} = RΓ_c(X, φ_m) ∘ Φ_m^♯`, the
+/-- **The global operator as an explicit composite**: `F_{c,m} = RΓ_c(X, φ_m) ∘ Φ_m^♯`, the
 pullback `Φ_m^♯ : RΓ_c(X, K) ⟶ RΓ_c(X, LΦ_m^* K)` of
 `ProEtale.CondensedRing.compactPullback` followed by the iterated Weil structure `φ_m`. -/
 theorem globalOperator_eq (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
@@ -390,8 +381,7 @@ theorem globalOperator_eq (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
   exact key _ (K.iterate_carrier m)
 
 /-- The global operator `F_{c,m}` of a Weil object is the global operator `F_{c,m}(φ)` of its
-structure isomorphism `φ` as a Frobenius coefficient morphism (blueprint
-`definition-frobenius-correspondences-their-operators`). -/
+structure isomorphism `φ` as a Frobenius coefficient morphism. -/
 lemma globalOperator_eq_frobeniusCompactOperator (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
     [IsProper Φ.left] [IsFinite (frobeniusIterate Φ m).left]
     [IsUniversalHomeomorphism (frobeniusIterate Φ m).left] :
@@ -399,7 +389,7 @@ lemma globalOperator_eq_frobeniusCompactOperator (K : WeilBoundedConstructible �
   rw [globalOperator_eq, iterateStr_hom_eq_frobeniusCoefficientIterate, frobeniusCompactOperator]
 
 /-- The global operator of degree `m` is the `m`-th power of the global operator of degree
-one, `F_{c,m} = F_{c,1}^m` (blueprint `lemma-comparison-via-relative-frobenius--2`). -/
+one, `F_{c,m} = F_{c,1}^m`. -/
 lemma globalOperator_eq_pow (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
     [IsFinite (frobeniusIterate Φ m).left] [IsUniversalHomeomorphism (frobeniusIterate Φ m).left]
     [IsFinite (frobeniusIterate Φ 1).left] [IsUniversalHomeomorphism (frobeniusIterate Φ 1).left] :
@@ -411,19 +401,17 @@ lemma globalOperator_eq_pow (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
   rw [globalOperator_eq_frobeniusCompactOperator, globalOperator_eq_frobeniusCompactOperator]
   exact frobeniusCompactOperator_eq_pow ℓ K.str.hom m
 
-/-- **Perfectness of compactly supported cohomology** (blueprint
-`lemma-perfect-complexes-geometric-point`): for `k` separably closed, `RΓ_c(X, K)` is a perfect
-complex, that is a dualizable object of `Dᵇc(s)⟦ℚ̲̄_ℓ⟧`. -/
+/-- **Perfectness of compactly supported cohomology**: for `k` separably closed, `RΓ_c(X, K)` is
+a perfect complex, that is a dualizable object of `Dᵇc(s)⟦ℚ̲̄_ℓ⟧`. -/
 theorem nonempty_hasRightDual_compactCohomology [IsSepClosed k]
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     Nonempty (HasRightDual
       ((boundedConstructibleLowerShriek ℓ (toPoint X)).obj K)) :=
   nonempty_hasRightDual_point ℓ k _
 
-/-- **Perfectness of the geometric stalks** (blueprint `lemma-perfect-complexes-geometric-point`,
-clause on derived geometric stalks; section `chap-Smooth-purity`): for `k` separably closed,
-the stalk `K_x̄ = Lx^* K` of a bounded constructible complex at a rational point is a perfect
-complex, that is a dualizable object of `Dᵇc(s)⟦ℚ̲̄_ℓ⟧`. -/
+/-- **Perfectness of the geometric stalks**: for `k` separably closed, the stalk `K_x̄ = Lx^* K`
+of a bounded constructible complex at a rational point is a perfect complex, that is a
+dualizable object of `Dᵇc(s)⟦ℚ̲̄_ℓ⟧`. -/
 theorem nonempty_hasRightDual_stalk [IsSepClosed k]
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (x : RationalPoint X) :
     Nonempty (HasRightDual
@@ -443,9 +431,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
   [IsSeparated X'.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
 
-/-- **The Frobenius comparison at a fibre** (blueprint `lemma-comparison-via-relative-frobenius--4`,
-proof of (2)): for the fibre `Z` of `f = r ≫ f'` over a point `y` fixed by `Φ_Y`, the base change
-`β : Ly^* Rf_! ≅ RΓ_c(Z, -)` intertwines `Ly^*(θ_f)` with the pullback `Φ_Z^♯`. -/
+/-- **The Frobenius comparison at a fibre**: for the fibre `Z` of `f = r ≫ f'` over a point `y`
+fixed by `Φ_Y`, the base change `β : Ly^* Rf_! ≅ RΓ_c(Z, -)` intertwines `Ly^*(θ_f)` with the
+pullback `Φ_Z^♯`. -/
 @[reassoc]
 lemma baseChange_comp_weilLowerShriekFrobeniusComparison_stalk {ΦY : Y ⟶ Y} {p : X' ⟶ X}
     {f' : X' ⟶ Y} {r : X ⟶ X'} {ΦZ : Z ⟶ Z} {j : Z ⟶ X'} {y : RationalPoint Y}
@@ -577,9 +565,9 @@ lemma compToPoint_inv_app_comp_eqToHom {a : X ⟶ X} {b : X ⟶ Y} (ha : a = ΦX
 
 omit [IsUniversalHomeomorphism ΦX.left] [IsUniversalHomeomorphism ΦY.left] in
 include sq hrp hrf in
-/-- **The Frobenius comparison of `Rf_!` on compactly supported cohomology** (blueprint
-`lemma-comparison-via-relative-frobenius--4`, proof of (1)): under the composition isomorphism
-`c_f : RΓ_c(Y, Rf_! K) ≅ RΓ_c(X, K)`, `RΓ_c(Y, θ_f) ∘ Φ_Y^♯` is `Φ_X^♯`. -/
+/-- **The Frobenius comparison of `Rf_!` on compactly supported cohomology**: under the
+composition isomorphism `c_f : RΓ_c(Y, Rf_! K) ≅ RΓ_c(X, K)`, `RΓ_c(Y, θ_f) ∘ Φ_Y^♯` is
+`Φ_X^♯`. -/
 @[reassoc]
 lemma compactPullback_comp_weilLowerShriekFrobeniusComparison
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -617,11 +605,9 @@ lemma compactPullback_comp_weilLowerShriekFrobeniusComparison
   simp only [Category.assoc]
 
 -- the defeq of the carriers of the lower shriek of Weil objects with `Rf_! K` is slow
-/-- **The Leray isomorphism for Weil objects** (blueprint
-`lemma-comparison-via-relative-frobenius--4`, the global operators): the compactly supported
-cohomology of `Rf_! K` is that of `K`, `RΓ_c(Y, Rf_! K) ≅ RΓ_c(X, K)`, as Weil objects for the
-identity of the base point. In particular the global operators of `K` and of `Rf_! K` have the same
-trace. -/
+/-- **The Leray isomorphism for Weil objects**: the compactly supported cohomology of `Rf_! K` is
+that of `K`, `RΓ_c(Y, Rf_! K) ≅ RΓ_c(X, K)`, as Weil objects for the identity of the base point.
+In particular the global operators of `K` and of `Rf_! K` have the same trace. -/
 theorem nonempty_weilCompactCohomology_weilLowerShriekOfFrobenius_iso
     (K : WeilBoundedConstructible ℓ ΦX) :
     Nonempty ((weilCompactCohomology ℓ ΦY).obj
@@ -646,12 +632,11 @@ variable {Z : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.h
 -- the defeq of the carriers of the lower shriek of Weil objects with `Rf_! K` is slow
 omit [IsFinite ΦY.left] [IsUniversalHomeomorphism ΦY.left] in
 include hZ in
-/-- **Proper base change for Weil objects** (blueprint `lemma-comparison-via-relative-frobenius--4`,
-the stalks): for a rational point `y` of `Y` fixed by `Φ_Y` with fibre `Z = X ×_Y y` carrying a
-Frobenius `Φ_Z` compatible with `Φ_X`, the stalk at `y` of `Rf_! K` is the compactly supported
-cohomology of the restriction of `K` to the fibre, `(Rf_! K)_ȳ ≅ RΓ_c(Z, K|_Z)`, as Weil objects
-for the identity of the base point. In particular the local Frobenius of `Rf_! K` at `y` and the
-global operator of `K|_Z` have the same trace. -/
+/-- **Proper base change for Weil objects**: for a rational point `y` of `Y` fixed by `Φ_Y` with
+fibre `Z = X ×_Y y` carrying a Frobenius `Φ_Z` compatible with `Φ_X`, the stalk at `y` of
+`Rf_! K` is the compactly supported cohomology of the restriction of `K` to the fibre,
+`(Rf_! K)_ȳ ≅ RΓ_c(Z, K|_Z)`, as Weil objects for the identity of the base point. In particular
+the local Frobenius of `Rf_! K` at `y` and the global operator of `K|_Z` have the same trace. -/
 theorem nonempty_weilStalk_weilLowerShriekOfFrobenius_iso (K : WeilBoundedConstructible ℓ ΦX) :
     Nonempty ((weilStalk ℓ ΦY y hy).obj
         ((weilLowerShriekOfFrobenius ℓ ΦX ΦY f sq r hrp hrf).obj K) ≅

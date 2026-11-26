@@ -18,8 +18,19 @@ import WeilConjectures.RingTheory.FiniteLengthGlobalSubmodule
 /-!
 # Krull–Akizuki Noetherianity for intermediate rings
 
-Source: Stacks Project, Algebra, Lemma 10.119.12 (Tag 00PG)
-(blueprint: lem-sc-krull-akizuki-noetherian).
+An intermediate ring between a one-dimensional Noetherian domain and a finite extension of its
+fraction field is Noetherian.
+
+## Implementation details
+
+Every nonzero ideal `I` of `D` contains a nonzero `x` of `R`, by algebraicity
+(`Ideal.comap_ne_bot_of_algebraic_mem`). Embedding `D` into a finite power of `K` shows that
+`D/xD` has finite length, hence is Noetherian; then `I` is finitely generated since its image in
+`D/(x)` is and `I ∩ (x) = (x)` is principal.
+
+## References
+
+* [Stacks, Tag 00PG]
 -/
 
 @[expose] public section
@@ -27,23 +38,7 @@ Source: Stacks Project, Algebra, Lemma 10.119.12 (Tag 00PG)
 universe uR uD uK uL
 
 /-- An intermediate ring between a one-dimensional Noetherian domain and a finite
-field extension is Noetherian.
-Source: Stacks Project, Algebra, Lemma 10.119.12 (Tag 00PG).
-
-Proof:
-1. Transfer the domain structure from `L` to `D`. Finite dimensionality makes
-   `L` algebraic over `K`, hence over its subring `R` after clearing
-   denominators. Injectivity of `D → L` makes `D` algebraic over `R` too.
-   Mathlib's `Ideal.comap_ne_bot_of_algebraic_mem` then shows that every
-   nonzero ideal `I` contains the image of some nonzero `x : R`.
-2. A finite `K`-basis of `L` embeds `D` as an `R`-submodule of a finite power
-   of `K`. Apply `lem-sc-finite-length-global-submodule` and transport along
-   this embedding to see that `D/xD` is Noetherian over `R`, hence also over
-   `D/xD`. Put `J = (x)`, which is contained in `I`. The image of `I` in
-   `D/J` is finitely generated, while `I ∩ ker(D → D/J) = J` is principal.
-   Mathlib's finite-generation lifting lemma therefore gives `I.FG`.
-   The zero ideal is finitely generated separately.
-(blueprint: lem-sc-krull-akizuki-noetherian). -/
+field extension is Noetherian. -/
 theorem krullAkizukiNoetherian
     {R : Type uR} {D : Type uD} {K : Type uK} {L : Type uL}
     [CommRing R] [IsDomain R] [IsNoetherianRing R]

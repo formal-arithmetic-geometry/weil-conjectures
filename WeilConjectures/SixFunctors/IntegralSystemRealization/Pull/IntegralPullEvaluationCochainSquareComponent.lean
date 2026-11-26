@@ -9,7 +9,14 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSyst
 public import Mathlib.CategoryTheory.Adjunction.Mates
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Pull.IntegralPullEvaluationCochainSquareComponentCore
 
-/-! Degreewise ordinary pullback evaluation transition square. -/
+/-! Degreewise ordinary pullback evaluation transition square.
+
+## References
+
+* [Stacks, Tag 03D2]
+* [Stacks, Tag 0941]
+* [Zheng, Construction 4.1 and Lemma 4.10]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -26,33 +33,14 @@ attribute [local irreducible] pullbackTensorInverseEvaluationComplex pullbackTen
 attribute [local implicit_reducible]
   coefficientSequenceEvaluation pullbackTensorSequenceInverse
 
-/-- The ordinary cochain comparison used by the degreewise square.
-Source: Zheng Construction 4.1 and Lemma 4.10.
-(blueprint: lem-sf-integral-pull-evaluation-cochain-square-component). -/
+/-- The ordinary cochain comparison used by the degreewise square. -/
 def ordinaryPullEvaluationComplex {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
   (pullbackTensorInverseEvaluationComplex l E f n).symm ≪≫
     Functor.isoWhiskerLeft
       ((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ))
       (NatIso.mapHomologicalComplex (pullbackTensorLevelIntrinsic l E f n) (.up ℤ))
 
-/-- The degreewise component of the ordinary cochain pullback evaluation transition square.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks Tags 03D2 and 0941.
-(blueprint: lem-sf-integral-pull-evaluation-cochain-square-component).
-
-Proof: this is the fixed ordinary sectionwise calculation at one cochain degree.
-The inverse-image/evaluation comparison is the inverse mate of the identity
-comparison for direct image and evaluation. The level intrinsic comparison is
-characterized by preservation of the ordinary adjunction unit. Restriction of
-scalars and direct image are identity on the relevant underlying sections, and
-coefficient transitions are restriction along the horizontal arrow
-(n,U) → (n+1,U). Naturality of the adjunction unit and the mate correspondence
-therefore identify the two composites on every generating section; sheaf
-extensionality gives equality of module maps. The same calculation applies to
-the displayed mate of r₀.inv because hr₀ identifies r₀ with the canonical
-identity-on-sections comparison. The mapHomologicalComplex component at i is
-exactly this module equality, with no differential or localization argument.
-Zero modules and n = 0 use the same section formula.
--/
+/-- The degreewise component of the ordinary cochain pullback evaluation transition square. -/
 theorem integralPullEvaluation_cochainSquare_component {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (r₀ : normalizedDVRModuleRes l E X (Nat.le_succ n) ⋙
         proEtaleConstantModuleDirectImage f (Padic.coefficientExtensionRing l E (n + 2)) ≅

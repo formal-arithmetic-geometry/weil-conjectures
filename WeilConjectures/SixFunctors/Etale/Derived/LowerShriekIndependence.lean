@@ -26,8 +26,14 @@ common refinement `e = Compactification.inf c d`, the closure of the graph of `X
 
 where both isomorphisms are comparisons along a refinement with cartesian square over `X`
 (`AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison`). Such a
-comparison is an isomorphism by proper base change. This is not proved yet and is stated
-here as an instance.
+comparison is an isomorphism for torsion coefficients.
+
+## Implementation details
+
+The comparison is an isomorphism because its unit factor is: the unit
+`j_! K ⟶ R⁺q_* q^* j_! K` is checked on the open `X`, where `q^* j_! = (c.i)_!` is fully
+faithful, and on its closed complement, where both sides vanish by proper base change for the
+proper `q`.
 
 ## Main definitions
 
@@ -40,8 +46,7 @@ here as an instance.
 ## Main results
 
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationPlusComparison`:
-  the comparison along a refinement with cartesian square over `X` is an isomorphism
-  (blueprint: `BA43-RHO`). Not proved yet.
+  the comparison along a refinement with cartesian square over `X` is an isomorphism.
 
 -/
 
@@ -71,15 +76,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 /-- **The unit of `D⁺(q^*) ⊣ R⁺q_*` at an extension by zero is an isomorphism**, for torsion
 coefficients. Let `r : c.Refinement d` be a refinement of compactifications whose square over
 `X` is cartesian, and write `q = r.hom : c.Z ⟶ d.Z` and `j = d.i`. Then the unit
-`j_! K ⟶ R⁺q_* q^* j_! K` is an isomorphism for every bounded below `K`. It is checked after
-the inclusion into the unbounded derived category, on the open `X` and on its closed
-complement `i : W ⟶ d.Z`:
-
-* over `X`, `q^* j_! = (c.i)_!` is fully faithful, so the unit is invisible to `j^*`
-  (`CategoryTheory.Adjunction.isIso_map_unit_app_obj`);
-* over `W`, both sides vanish: `i^* j_! K = 0`, and by proper base change for the proper `q`
-  (`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring`),
-  `i^* R⁺q_* q^* j_! K` is computed on `q⁻¹(W)`, which does not meet `X`. -/
+`j_! K ⟶ R⁺q_* q^* j_! K` is an isomorphism for every bounded below `K`. -/
 theorem isIso_derivedPlus_unit_app_openImmersionLowerShriek {c d : Compactification f}
     (r : c.Refinement d) (hcart : IsPullback c.i (𝟙 X) r.hom d.i)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -169,11 +166,7 @@ theorem isIso_derivedPlus_unit_app_openImmersionLowerShriek {c d : Compactificat
 
 /-- **The comparison of derived lower shrieks along a refinement is an isomorphism**, for
 torsion coefficients: for a refinement `r : c.Refinement d` whose square over `X` is cartesian,
-the comparison `Rf_!(d)[Λ]+ ⟶ Rf_!(c)[Λ]+` is an isomorphism. This is the isomorphism
-property of `(BA43-RHO)` in the blueprint. Its composition and base change factors are
-isomorphisms, and so is its unit factor by
-`isIso_derivedPlus_unit_app_openImmersionLowerShriek`, which rests on proper base change for
-`r.hom`. -/
+the comparison `Rf_!(d)[Λ]+ ⟶ Rf_!(c)[Λ]+` is an isomorphism. -/
 instance isIso_rightDerivedLowerShriekOfCompactificationPlusComparison
     {c d : Compactification f} (r : c.Refinement d) (hcart : IsPullback c.i (𝟙 X) r.hom d.i) :
     IsIso (rightDerivedLowerShriekOfCompactificationPlusComparison (ModuleCat.{u + 1} Λ) r

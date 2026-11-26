@@ -159,8 +159,7 @@ open scoped MonoidalClosed.FunctorCategory
 omit [(X.smallEtaleTopology.W (A := A)).IsMonoidal]
   [(V.smallEtaleTopology.W (A := A)).IsMonoidal] in
 /-- **Pullback along a étale morphism commutes with internal homs**: the comparison map
-`g^* [P, Q] ⟶ [g^* P, g^* Q]` is an isomorphism.
-(blueprint: `lem-weil-pbc-etale-pullback-internal-hom`) -/
+`g^* [P, Q] ⟶ [g^* P, g^* Q]` is an isomorphism. -/
 theorem Etale.isIso_ihomComparison_upperStar (P : Sheaf X.smallEtaleTopology A) :
     IsIso (ihomComparison (g)^*[A] P) := by
   let h : Etale g := hg

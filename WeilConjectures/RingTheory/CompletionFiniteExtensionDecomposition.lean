@@ -19,8 +19,20 @@ import WeilConjectures.RingTheory.CompletionTensorLocalMapsSurjective
 /-!
 # Finite-prime decomposition of completed tensors
 
-Source: Stacks Project, Algebra, Tag 07N9 (lemma-completion-finite-extension).
-(blueprint: lem-weil-pbc-completion-finite-extension-decomposition)
+For a finite algebra `S` over a Noetherian ring `R` and a prime `p`, the tensor product
+`R_p^∧ ⊗[R] S` decomposes as the product of the completions of `S_q` over the finitely many
+primes `q` above `p`.
+
+## Implementation details
+
+The maps `g q` are the maps of completions induced by `Localization.localRingHom`. The
+comparison map out of the tensor product is built from the tensor universal property, and
+its bijectivity comes from separate injectivity and surjectivity results for the completed
+tensor of the local maps.
+
+## References
+
+* [Stacks, Tag 07N9]
 -/
 
 @[expose] public section
@@ -66,21 +78,9 @@ private theorem mapCompletion_eval
 
 -- The unchanged statement contains an unused auxiliary ideal `J`.
 set_option linter.unusedVariables false in
-/-- The finite-prime decomposition and levelwise compatibility data in the completion theorem.
-Source: Stacks Project, Algebra, Lemma 10.97.8 (Tag 07N9), steps 1--4.
-(blueprint: lem-weil-pbc-completion-finite-extension-decomposition)
-
-The proof follows Tag 07N9 as follows. Localize at `p`, identify the resulting
-primes over the maximal ideal with `p.primesOver S`, and use finite generation and
-Noetherianity to obtain finiteness. At every level `n`, the quotient by the `n`th
-power of the maximal ideal is a finite zero-dimensional local algebra. The product
-of its localizations at its maximal ideals is therefore an isomorphism (with the
-empty product interpreted as the zero ring). Localization at a prime of a quotient
-identifies each factor with the corresponding quotient of `Localization.AtPrime q`.
-Passing to compatible inverse-limit sequences gives the displayed algebra equivalence
-`e`; the induced maps from `C` are the ring homomorphisms `g`, and the quotient
-identifications give the displayed levelwise equation. Evaluating the product
-equivalence on `a ⊗ 1` gives the final compatibility equation. -/
+/-- For a finite algebra `S` over a Noetherian ring `R` and a prime `p`, there are finitely
+many primes `q` over `p`, and `R_p^∧ ⊗[R] S` is isomorphic to the product of the completions
+of the `S_q`, compatibly with the maps `g q` induced by the local maps `R_p → S_q`. -/
 theorem completion_finite_extension_decomposition
     (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime] :

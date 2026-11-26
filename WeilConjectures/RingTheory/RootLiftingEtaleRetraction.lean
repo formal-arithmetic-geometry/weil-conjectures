@@ -14,8 +14,14 @@ import Mathlib.RingTheory.Unramified.LocalStructure
 /-!
 # Étale retractions from simple-root lifting
 
-Source: Stacks Project, Algebra, Lemma Tag 04GG, implication (1) ⇒ (8)
-(blueprint: lem-weil-pbc-root-lifting-etale-retraction).
+A local ring in which simple roots of monic polynomials over the residue field lift admits a
+unique retraction from an étale algebra through a prime with trivial residue field extension.
+
+## References
+
+* [Stacks, Tag 04GG], implication (1) ⇒ (8)
+* [Stacks, Tag 00UE]
+* [Stacks, Tag 06RR]
 -/
 
 @[expose] public section
@@ -30,22 +36,7 @@ open CategoryTheory in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A prime over the closed point with trivial scheme residue-field extension gives an
-R-algebra map to the residue field with that prime as its kernel.
-
-Source: Stacks Project, Algebra, Lemma Tag 04GG, proof of (1) ⇒ (8), and the description
-of affine residue fields as fraction fields of prime quotients.
-(blueprint: lem-weil-pbc-root-lifting-etale-retraction).
-
-Proof: Identify the scheme residue fields at q and its image with the fraction fields of
-S/q and R/m. Since R/m is already a field, its fraction field is itself. The bijective
-residue-field map identifies the fraction field of S/q with R/m. Compose S → S/q with
-its injection into this fraction field and the inverse identification to obtain ρ.
-Naturality of the residue-field map says that ρ composed with R → S is the residue map,
-so ρ is an R-algebra map. Its kernel is q because the quotient embeds into its fraction
-field and the identification is injective. In particular ρ is surjective, since its
-image contains the image of the surjective residue map of R. No étaleness or
-root-lifting assumption is used.
--/
+R-algebra map to the residue field with that prime as its kernel. -/
 private theorem exists_algHom_residueField_of_bijective_spec_residueFieldMap
     {R S : Type u} [CommRing R] [CommRing S] [IsLocalRing R] [Algebra R S]
     (q : Ideal S) [q.IsPrime]
@@ -118,19 +109,7 @@ private theorem exists_algHom_residueField_of_bijective_spec_residueFieldMap
   rw [e.symm.map_eq_zero_iff]
   exact Ideal.ext_iff.mp hβker s
 
-/-- A residue-field map from a standard étale algebra has a unique lift to R.
-
-Source: Stacks Project, Algebra, Lemma Tag 04GG, proof of (1) ⇒ (8), and Tag 06RR.
-(blueprint: lem-weil-pbc-root-lifting-etale-retraction).
-
-Proof: The image of X under the residue map is a simple root of the monic defining
-polynomial: the inverted polynomial and the standard étale identity make its derivative
-nonzero. Lift this root using hroot. The inverted polynomial has nonzero residue at the
-lift, hence is a unit in R, so the standard étale universal property supplies a map.
-Its reduction agrees with the original map because both have the same image of X.
-Any other lift sends X to a root in the same residue class. Its derivative is a unit,
-so Tag 06RR identifies the two roots, and hom_ext identifies the maps.
--/
+/-- A residue-field map from a standard étale algebra has a unique lift to R. -/
 private theorem standardEtale_unique_lift
     {R : Type u} [CommRing R] [IsLocalRing R]
     (hroot : ∀ f : Polynomial R, f.Monic → ∀ a₀ : ResidueField R,
@@ -174,31 +153,7 @@ private theorem standardEtale_unique_lift
     simpa using heq
 
 /-- A local ring in which simple residue roots of monic polynomials lift admits a unique
-retraction from an étale algebra through a prime with trivial residue field extension.
-
-Source: Stacks Project, Algebra, Lemma Tag 04GG, proof of (1) ⇒ (8), using Tags 00UE and 06RR.
-(blueprint: lem-weil-pbc-root-lifting-etale-retraction).
-
-Proof (the six steps of the DAG node):
-1. The residue-field isomorphism gives a surjective R-algebra map ρ : S → κ with kernel q
-   (`def-weil-residue-field`). Two surjective R-algebra maps to κ with kernel q agree,
-   since any R-algebra automorphism of κ is the identity. Thus a retraction has maximal
-   ideal preimage q exactly when its reduction is ρ.
-2. By `lem-weil-pbc-etale-locally-standard` (Stacks 00UE), choose g outside q and a standard
-   étale presentation S_g ≅ C = R[t][Y]/(f, Yh - 1), with f monic and f' p₁ + f p₂ = h^n.
-3. Extend ρ uniquely to S_g and transport it to ρ_C. Localization gives a bijection
-   between maps C → R reducing to ρ_C and retractions S → R with maximal ideal preimage q:
-   a retraction sends g to a unit, and equality of the reductions is checked on S.
-4. Put a₀ = ρ_C(t). By `lem-weil-pbc-standard-etale-pair-maps`, f̄(a₀) = 0 and h̄(a₀) ≠ 0.
-   Reduce the standard étale identity and evaluate at a₀ to get f̄'(a₀) ≠ 0.
-5. Apply the stated root-lifting hypothesis to obtain a root a of f reducing to a₀.
-   Then h(a) has nonzero residue, so is a unit. The universal property in
-   `lem-weil-pbc-standard-etale-pair-maps` gives a map C → R sending t to a; its reduction
-   is ρ_C since maps out of C are determined by t. Step 3 gives the required retraction.
-6. Two such retractions correspond to maps C → R sending t to roots a₁, a₂ with the same
-   residue a₀. Since f'(a₁) is a unit, `lem-weil-pbc-simple-root-uniqueness` (Stacks 06RR)
-   gives a₁ = a₂. Maps out of C are determined by t, and step 3 gives equality on S.
--/
+retraction from an étale algebra through a prime with trivial residue field extension. -/
 theorem existsUnique_algHom_of_monic_simple_root_lifting_etale
     {R S : Type u} [CommRing R] [CommRing S] [IsLocalRing R] [Algebra R S]
     (hroot : ∀ f : Polynomial R, f.Monic → ∀ a₀ : ResidueField R,

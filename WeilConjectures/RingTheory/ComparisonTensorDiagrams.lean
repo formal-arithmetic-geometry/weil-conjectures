@@ -19,31 +19,31 @@ import WeilConjectures.RingTheory.ComparisonTensorNaturalExtension
 import WeilConjectures.RingTheory.ComparisonTensorTransitionPushout
 
 /-! # Finite-stage tensor comparison diagrams
-Source: Stacks Project, Algebra, Tag 02JO (3), construction of Ψ, and Tag 00DD.
-(blueprint: lem-weil-pbc-comparison-tensor-diagrams-b4)
+
+A comparison map at one stage of a directed system of rings induces stage diagrams of tensor
+rings at all later stages, with a natural comparison between them.
+
+## Implementation details
+
+The `P`-action on `F(j) ⊗ B₀` is induced from `F(i) ⊗ B₀` along the canonical transition, and
+the stage tensor rings are lifted to one universe by `ULift`. The comparison is the scalar
+extension of `ψ` from `F(i)` to `F(j)`, cancelling iterated tensor products; tensor
+cancellation identifies the transition squares with base-change squares, which are pushouts.
+
+## References
+
+* [Stacks, Tag 02JO] (3), construction of `Ψ`
+* [Stacks, Tag 00DD]
 -/
 @[expose] public section
 open scoped TensorProduct
 open CategoryTheory CategoryTheory.Limits
 universe v w x y
 namespace RingHom
-/-- Construct just the finite-stage comparison diagrams, without cocones.
-Source: Stacks Project, Algebra, Tags 02JO (3) and 00DD.
-(blueprint: lem-weil-pbc-comparison-tensor-diagrams-b4)
-
-Proof: induce the P-action on B_j from B_i along the canonical transition.
-The initial transitions B_i to B_j are P-linear by construction.
-Use ULift ring equivalences to put all stage tensor rings in one universe.
-Conjugate the tensor transition maps to form D and E. Extend ψ by scalar
-extension from F(i) to F(j), cancelling
-iterated tensor products. Its value on b tensor q is the canonical φ_j(b)
-times the transition image of ψ(1 tensor q). The hypothesis hψ gives the
-balancing identity. This formula proves naturality, compatibility on the
-left inclusion, and the finite-stage Q-coordinate formula. Cancellation
-identifies the square at j to k with a tensor base-change square, so the
-tensor universal property proves it is a pushout. No limiting cocone is
-constructed here. Trivial rings and singleton index types cause no exception.
--/
+/-- Given a comparison map `ψ : (F(i) ⊗ B₀) ⊗[P] Q → F(i) ⊗ C₀` restricting to the base change of
+`φ₀`, there are stage diagrams `D`, `E` over the indices `j ≥ i`, identified with
+`(F(j) ⊗ B₀) ⊗[P] Q` and `F(j) ⊗ C₀`, and a natural transformation `D ⟶ E` extending `ψ`,
+whose transition squares are pushouts. No cocones are constructed. -/
 theorem exists_comparison_tensor_diagrams
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{v})

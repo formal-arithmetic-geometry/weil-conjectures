@@ -19,11 +19,8 @@ Weil sheaf.
 
 - `AlgebraicGeometry.WeilComplex.traceFunction_tensorLisse`: `t_{G ⊗ K} = t_G t_K`.
 
-## Blueprint
-
-These are the properties of the trace function (blueprint `definition-trace-function`,
-`definition-trace-function`) used in the proof of the Fourier trace formula
-(sketch blueprint `sec-The-Plancherel-formula`).
+This property of the trace function is used in the proof of the Fourier trace formula and the
+Plancherel formula.
 -/
 
 @[expose] public section
@@ -55,8 +52,7 @@ noncomputable def _root_.AlgebraicGeometry.WeilSheaf.ihomObjIso (D : WeilSheaf k
   Iso.refl _
 
 /-- The cohomology sheaves of the tensor product with a lisse Weil sheaf:
-`𝓗ʲ(G ⊗ K) ≅ [G^∨, 𝓗ʲ(K)] = G ⊗ 𝓗ʲ(K)`, the internal hom out of the lisse `G^∨` being exact
-(`AlgebraicGeometry.ProEtaleWeilSheaf.preservesFiniteColimits_ihomFunctor`). -/
+`𝓗ʲ(G ⊗ K) ≅ [G^∨, 𝓗ʲ(K)] = G ⊗ 𝓗ʲ(K)`. -/
 noncomputable def homologySheafTensorLisseIso
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l X)
     (hG : G.IsLisse) (K : WeilComplex k₀ l X) (j : ℤ) :
@@ -72,8 +68,7 @@ noncomputable def homologySheafTensorLisseIso
     (WeilSheaf.ihomObjIso _ hG.dual _).symm)
 
 /-- The trace function is multiplicative under the tensor product with a lisse Weil sheaf:
-`t_{G ⊗ K} = t_G · t_K`, the local Frobenius on `(G ⊗ K)_x̄ = G_x̄ ⊗ K_x̄` being the tensor
-product of the local Frobenius operators. -/
+`t_{G ⊗ K} = t_G · t_K`. -/
 theorem traceFunction_tensorLisse [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     (G : WeilSheaf k₀ l X) (hG : G.IsLisse)
     (K : WeilComplex k₀ l X) (n : ℕ)

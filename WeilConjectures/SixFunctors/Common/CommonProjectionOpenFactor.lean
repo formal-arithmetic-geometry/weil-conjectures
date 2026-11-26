@@ -12,7 +12,17 @@ import WeilConjectures.SixFunctors.Common.CommonProjectionOpenPullbackTensor
 
 /-! # Common-stage preservation of a projection factor
 
-Source: thm-sf-pf-field.proof.md, Compatibility.
+We show that finite-stage inclusion preserves the open projection factor and the final support
+identification, through the same canonical tensorator.
+
+## Implementation details
+
+The inverse open projection is expanded by `openProjectionNormalization`; the finite
+representative equation for `canonicalCommonStagePullbackTensor`, the open-adjunction unit
+equation and the `pullComposition` equation identify its pieces, and equality under the open
+adjunction Hom equivalence gives the square. Proper direct image is applied to this square and
+the inverse support identification is expanded into composition, proper and open
+identifications. No proper counit projection mate occurs.
 -/
 
 @[expose] public noncomputable section
@@ -427,28 +437,7 @@ end CoefficientCalculus
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Finite-stage inclusion preserves the open projection factor and the final
-support identification, through the same canonical tensorator.
-
-Source: thm-sf-pf-field.proof.md, Compatibility, and steps 2--4 of
-lem-sf-common-projection-tensor-compatibility.
-(blueprint: lem-sf-common-projection-open-factor).
-
-Proof: first compare the inverse open projection. By openProjectionNormalization
-it is open extension applied to the pullback compositor followed by the transpose
-of the tensor of the open unit with identity and the inverse canonical open
-pullback/tensor comparison. The finite representative equation for
-canonicalCommonStagePullbackTensor identifies the two tensor/pullback maps on
-included inputs. The coefficient open-adjunction unit equation and the
-pullComposition equation identify the remaining maps and their prescribed
-operation comparisons. Equality under the open adjunction Hom equivalence gives
-the square for the inverse open projection; conjugating with its inverse gives
-the forward square. Apply proper direct image to this square, using naturality
-of its coefficient comparison. Finally expand the inverse support identification
-as inverse composition, proper and open identifications. The coefficient laws
-for these three maps identify the final support comparison with target, including
-its inner pullback comparison. This proves the displayed square. No proper
-counit projection mate occurs in this argument. Empty opens, zero inputs and
-identity extensions obey the same adjunction and compositor equations. -/
+support identification, through the same canonical tensorator. -/
 theorem commonProjectionOpenFactor
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     (H : SixFunctorCommonStages D C) (E : Padic.FiniteCoefficientFields C.l C.Qbar)

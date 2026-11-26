@@ -14,7 +14,9 @@ import WeilConjectures.CategoryTheory.InverseMateEquivalence
 /-!
 # Comparison of restriction units under a change of topological universe
 
-Source: Stacks Project, Tag 09ZG, closed-image and universe-transport step.
+## References
+
+* Stacks Project, Tag 09ZG.
 -/
 
 @[expose] public section
@@ -27,28 +29,7 @@ namespace TopCat
 
 /-- Restriction along an embedding is conjugate to restriction to its image after
 transport by a homeomorphism, even when the ambient spaces have different universes.
-No spectrality, closedness, or connectedness is required for this comparison.
-
-Source: Stacks Project, Tag 09ZG, closed-image and universe-transport step;
-Mathlib `CategoryTheory.unit_mateEquiv_symm` supplies the unit comparison.
-(blueprint: lem-weil-pbc-closed-embedding-restriction-transport-square)
-
-Proof:
-1. The homeomorphism `e` gives an order isomorphism of open sets. Precompose `G`
-   with its functor on opposite open sets to obtain `F`. A homeomorphism preserves
-   open covers and their pullbacks, so matching families and their unique gluings
-   correspond, and `F` is a sheaf. At the top open this gives the equivalence `a`.
-2. Since `i` is an embedding, its range with the subspace topology is homeomorphic
-   to its domain. Combining this homeomorphism with the restriction of `e` gives
-   a homeomorphism between `Z` and `D`. Precomposition on opens identifies the two
-   pushforward functors under these sheaf equivalences.
-3. Take the mate of the pushforward comparison under the inverse-image
-   adjunctions. It is invertible because the vertical sheaf functors are
-   equivalences, by `isIso_inverseMate_of_equivalences`. The equation `unit_mateEquiv_symm`
-   relates the two units. Compose the global-sections transport, the pushforward
-   comparison, and the inverse mate to obtain `b`. Naturality of the
-   global-sections transport and the unit equation give the displayed square.
-   This includes empty spaces and empty images; no choice of a point is used. -/
+No spectrality, closedness, or connectedness is required for this comparison. -/
 theorem closed_embedding_restriction_transport_square
     {X Z : TopCat.{u}} (i : Z ⟶ X) (hi : Topology.IsEmbedding i)
     (Y : TopCat.{u + 1}) (e : Y ≃ₜ X) :

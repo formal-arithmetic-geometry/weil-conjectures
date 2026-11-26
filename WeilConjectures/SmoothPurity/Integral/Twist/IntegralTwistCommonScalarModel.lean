@@ -8,10 +8,7 @@ module
 public import WeilConjectures.SmoothPurity.Integral.Twist.IntegralTwistDerivedScalarCanonical
 public import WeilConjectures.FourierTransform.CompletedLineTensor.CompletedLineTensorCoherence
 
-/-! # Normalization of a common ordinary twist/scalar model
-
-Source: blueprint `definition-tate-twists--10`, final integral/common-stage sentence.
--/
+/-! # Normalization of a common ordinary twist/scalar model -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

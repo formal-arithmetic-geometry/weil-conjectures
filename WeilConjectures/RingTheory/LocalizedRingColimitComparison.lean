@@ -12,24 +12,26 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 import Mathlib.Algebra.Category.Ring.FilteredColimits
 /-! # Localized ring comparison
-Source: Stacks Project, Algebra, Tag 037D, proof first paragraph.
-(blueprint: lem-pc-localized-ring-colimit-comparison) -/
+
+Localizing a filtered ring diagram at contracted primes gives a diagram whose colimit is the
+localization of the colimit ring.
+
+## Implementation details
+
+Surjectivity of the comparison follows by lifting numerators and denominators to a common
+stage; injectivity by lifting a multiplier witnessing equality of fractions and using the
+filtered colimit equality criterion.
+
+## References
+
+* [Stacks, Tag 037D] (proof, first paragraph)
+-/
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace Algebra
-/-- Canonical localized ring colimit comparison.
-Source: Stacks Project, Algebra, Tag 037D, proof first paragraph.
-(blueprint: lem-pc-localized-ring-colimit-comparison)
-Proof: The stage local maps form a cocone, since their restrictions to the original
-rings agree. Lift each numerator and denominator through the supplied ring colimit and
-pass to a common stage; the lifted denominator avoids the contracted prime. This proves
-surjectivity of the induced map. For injectivity, lift a multiplier outside the prime
-witnessing equality of fractions. The zero cross difference holds at a later stage by
-the filtered colimit equality criterion. The multiplier remains outside the prime,
-so the fractions agree there. Hence the induced map is a bijective ring map. Its inverse
-is a ring map and the coprojection formula is its defining factorization equation.
-The numerator transition equation determines each entire localized transition map. -/
+/-- Canonical localized ring colimit comparison. The numerator transition equation determines
+each localized transition map. -/
 theorem localizedRingColimitComparison
     {Λ : Type u} [Preorder Λ] [Nonempty Λ] [IsDirected Λ (· ≤ ·)]
     {T : Type u} [CommRing T] (F L : Λ ⥤ CommRingCat.{u})

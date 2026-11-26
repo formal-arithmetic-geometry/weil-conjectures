@@ -14,7 +14,14 @@ import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Monoidal
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 
 /-! # K-injectivity after tensoring with a two-term unit complex
-Source: Stacks Tags 08J7 and 08J9; the blueprint finite-free coefficient argument.
+
+We show that tensoring a K-injective complex with a two-term complex of units preserves
+K-injectivity.
+
+## References
+
+* [Stacks, Tag 08J7]
+* [Stacks, Tag 08J9]
 -/
 
 @[expose] public section
@@ -41,18 +48,7 @@ attribute [local instance 5000] signedComplexMonoidal signedComplexBraided
 attribute [local instance 10000] signedComplexStruct
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- Tensoring a K-injective complex with a two-term complex of units preserves K-injectivity.
-Source: the finite-free argument in paragraph 1 of
-`lem-coef-integral-hom-reduction.proof.md`; Stacks Tags 08J7 and 08J9.
-(blueprint: lem-sf-two-term-unit-tensor-kinjective).
-
-Proof: the coefficient terms are dualizable, including the zero terms. Its bounded
-termwise right dual D has flat terms and is K-flat by the bounded-above flat criterion.
-The bounded duality descends through the strong monoidal homotopy quotient. The
-adjunction (-) tensor D left adjoint to (-) tensor Q identifies maps from an acyclic
-A to I tensor Q with maps from A tensor D to I. The source is acyclic by K-flatness
-of D, and the latter maps vanish by K-injectivity of I. Thus every original chain
-map is nullhomotopic. This includes zero coefficients and the empty site. -/
+/-- Tensoring a K-injective complex with a two-term complex of units preserves K-injectivity. -/
 theorem twoTermUnit_tensor_isKInjective
     (I Q : CochainComplex (Modules.{t, u} Y R) ℤ) (hI : I.IsKInjective)
     (hzero : ∀ k : ℤ, k ≠ -1 → k ≠ 0 → IsZero (Q.X k))

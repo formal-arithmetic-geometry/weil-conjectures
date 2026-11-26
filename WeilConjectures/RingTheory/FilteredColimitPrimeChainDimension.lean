@@ -17,8 +17,18 @@ import WeilConjectures.RingTheory.FilteredColimitPrimeChainDimensionBound
 /-!
 # Prime chains and dimension of filtered ring colimits
 
-Source: Stacks Project, More on Algebra, Tag 06LK, converse inequality in the proof
-(blueprint: lem-sc-filtered-colimit-prime-chain-dimension).
+A finite strict prime chain in a filtered colimit of rings contracts strictly at some stage, so
+the Krull dimension of the colimit is at most the supremum of the stage dimensions.
+
+## Implementation details
+
+For each adjacent pair of primes one chooses an element of the larger one not in the smaller,
+represents it at a stage, and uses filteredness to find one stage receiving all of them. For a
+chain of length zero any object of the nonempty filtered category works.
+
+## References
+
+* [Stacks, Tag 06LK], converse inequality in the proof
 -/
 
 @[expose] public section
@@ -30,19 +40,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CommRingCat
 
 /-- A finite strict prime chain in a filtered colimit contracts strictly at some stage;
-its Krull dimension is therefore bounded by the supremum of the stage dimensions.
-Source: Stacks Project, Tag 06LK, converse inequality in the proof
-(blueprint: lem-sc-filtered-colimit-prime-chain-dimension).
-
-Proof:
-1. For each adjacent pair of primes choose an element in the larger but not the smaller.
-   By `lem-pc-filtered-colimit-commrings-elementwise`, each chosen element comes from a
-   stage. Filteredness supplies one stage receiving all finitely many stages. Contraction
-   preserves primality and inclusion; the chosen representatives witness strictness.
-   For a chain of length zero, choose any object of the nonempty filtered category.
-2. Each finite chain length is thus bounded by the dimension of some stage, and hence by
-   the supremum of all stage dimensions. Taking the supremum over finite chain lengths
-   yields the dimension inequality, using `def-weil-pbc-krull-dimension-ring`. -/
+its Krull dimension is therefore bounded by the supremum of the stage dimensions. -/
 theorem filteredColimit_prime_chain_and_dimension
     {I : Type u} [SmallCategory I] [IsFiltered I]
     (R : I ⥤ CommRingCat.{u}) :

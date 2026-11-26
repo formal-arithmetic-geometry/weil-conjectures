@@ -226,8 +226,9 @@ import WeilConjectures.AlgebraicGeometry.Koszul.KoszulReconstruction
 
 /-! # Ordinary completed-ring realization of integral recollement
 
-Source: Weil blueprint, main-20261015, smooth-purity localization, Integral stage
-(blueprint: lem-sf-integral-ordinary-recollement-realization).
+## References
+
+* Stacks Project, Tags 03D2, 06YY, 07A6, 08TC, 099N and 09AA.
 -/
 
 @[expose] public noncomputable section
@@ -252,10 +253,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The completed-coefficient direct image is the pro-étale ringed direct image for the
-canonical completed inverse-image identification `PurCompactSupport.completed`.
-Source: Stacks 03D2 (blueprint: lem-sf-integral-ordinary-recollement-realization).
-Proof: both are pushforwards along base change; their ring maps agree since the
-coefficient identification is the adjoint of `sfCompletedCoefficientMap`. -/
+canonical completed inverse-image identification `PurCompactSupport.completed`. -/
 theorem proEtaleRingModuleDirectImage_completed_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
     proEtaleRingModuleDirectImage f (completedIntegralCommRingSheafUnrestricted l E Y)
         (completedIntegralCommRingSheafUnrestricted l E X)
@@ -269,8 +267,7 @@ theorem proEtaleRingModuleDirectImage_completed_eq {X Y : Scheme.{u}} (f : X ⟶
   rw [he]
 
 /-- The exact pro-étale ringed module pullback is left adjoint to the
-completed-coefficient direct image.
-Source: Stacks 03D2 (blueprint: lem-sf-integral-ordinary-recollement-realization). -/
+completed-coefficient direct image. -/
 def sfCompletedModulePullbackAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     proEtaleRingModulePullback f (completedIntegralCommRingSheafUnrestricted l E Y)
         (completedIntegralCommRingSheafUnrestricted l E X)
@@ -279,55 +276,36 @@ def sfCompletedModulePullbackAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ((PurCompactSupport.completed l E).pull f)).2.2.2.2.some.ofNatIsoRight
     (eqToIso (proEtaleRingModuleDirectImage_completed_eq l E f))
 
-/-- Ordinary completed-coefficient direct image is a right adjoint.
-Source: Stacks 03D2; localization proof step 1
-(blueprint: lem-sf-integral-ordinary-recollement-realization).
-Proof: the canonical completed structural map defines a morphism of ringed topoi.
-Its module tensor inverse image is left adjoint to the specified module direct image. -/
+/-- Ordinary completed-coefficient direct image is a right adjoint. -/
 @[instance] theorem sfOrdinaryModulePush_isRightAdjoint
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (sfCompletedModuleDirectImage l E f).IsRightAdjoint := by
   exact (sfCompletedModulePullbackAdjunction l E f).isRightAdjoint
 
 /-- The actual ordinary tensor inverse image, as Mathlib's left adjoint to the
-specified completed-coefficient module direct image.
-Source: Stacks 03D2; localization proof step 1
-(blueprint: lem-sf-integral-ordinary-recollement-realization). -/
+specified completed-coefficient module direct image. -/
 def sfOrdinaryModulePull {X Y : Scheme.{u}} (f : X ⟶ Y) :
     scalarReductionSource l E Y ⥤ scalarReductionSource l E X :=
   (sfCompletedModuleDirectImage l E f).leftAdjoint
 
-/-- The ordinary module adjunction, retaining its unit and counit.
-Source: Stacks 03D2; localization proof step 1
-(blueprint: lem-sf-integral-ordinary-recollement-realization). -/
+/-- The ordinary module adjunction, retaining its unit and counit. -/
 def sfOrdinaryModuleAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     sfOrdinaryModulePull l E f ⊣ sfCompletedModuleDirectImage l E f :=
   Adjunction.ofIsRightAdjoint (sfCompletedModuleDirectImage l E f)
 
-/-- Additivity of ordinary tensor inverse image.
-Source: Stacks 03D2; localization proof step 1
-(blueprint: lem-sf-integral-ordinary-recollement-realization).
-Proof: the module inverse-image adjunction is additive: its tensor and sheafification
-constructions preserve addition of module maps. -/
+/-- Additivity of ordinary tensor inverse image. -/
 @[instance] theorem sfOrdinaryModulePull_additive
     {X Y : Scheme.{u}} (f : X ⟶ Y) : (sfOrdinaryModulePull l E f).Additive := by
   exact (sfOrdinaryModuleAdjunction l E f).left_adjoint_additive
 
-/-- Exactness of ordinary immersion inverse image, with completed coefficients.
-Source: Stacks 09AA, 099N; localization proof steps 1--2
-(blueprint: lem-sf-integral-ordinary-recollement-realization).
-Proof: the canonical coefficient inverse-image isomorphism commutes with each finite
-projection. Immersion inverse image is exact, and coefficient transport is exact. -/
+/-- Exactness of ordinary immersion inverse image, with completed coefficients. -/
 @[instance] theorem sfOrdinaryModulePull_preservesFiniteLimits
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsImmersion f] :
     PreservesFiniteLimits (sfOrdinaryModulePull l E f) := by
   exact preservesFiniteLimits_of_natIso ((sfOrdinaryModuleAdjunction l E f).leftAdjointUniq
     (sfCompletedModulePullbackAdjunction l E f)).symm
 
-/-- Ordinary inverse image preserves finite colimits.
-Source: Stacks 03D2; localization proof step 2
-(blueprint: lem-sf-integral-ordinary-recollement-realization).
-Proof: the specified functor is a left adjoint and therefore preserves colimits. -/
+/-- Ordinary inverse image preserves finite colimits. -/
 @[instance] theorem sfOrdinaryModulePull_preservesFiniteColimits
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteColimits (sfOrdinaryModulePull l E f) := by
@@ -335,24 +313,18 @@ Proof: the specified functor is a left adjoint and therefore preserves colimits.
     (sfOrdinaryModuleAdjunction l E f).leftAdjoint_preservesColimits
   infer_instance
 
-/-- Exact descent of ordinary immersion pullback.
-Source: Stacks 06YY; localization proof step 2
-(blueprint: lem-sf-integral-ordinary-recollement-realization). -/
+/-- Exact descent of ordinary immersion pullback. -/
 def sfOrdinaryDerivedPull {X Y : Scheme.{u}} (f : X ⟶ Y) [IsImmersion f] :
     DerivedCategory (scalarReductionSource l E Y) ⥤
       DerivedCategory (scalarReductionSource l E X) :=
   (sfOrdinaryModulePull l E f).mapDerivedCategory
 
-/-- Ordinary unbounded pullback/direct-image adjunction.
-Source: Stacks 07A6; localization proof step 5
-(blueprint: lem-sf-integral-ordinary-recollement-realization). -/
+/-- Ordinary unbounded pullback/direct-image adjunction. -/
 def sfOrdinaryDerivedAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) [IsImmersion f] :
     sfOrdinaryDerivedPull l E f ⊣ sfCompletedDerivedDirectImage l E f :=
   (sfOrdinaryModuleAdjunction l E f).mapDerivedCategoryRightDerivedAdjunction
 
-/-- The canonical ordinary finite-reduction adjunct of a direct image.
-Source: Stacks 07A6; localization proof steps 3--4
-(blueprint: lem-sf-integral-ordinary-recollement-realization). -/
+/-- The canonical ordinary finite-reduction adjunct of a direct image. -/
 def sfOrdinaryPushReduction {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : DerivedCategory (scalarReductionSource l E X)) (n : ℕ) :
     (scalarReductionDerivedExtension l E Y n).obj
@@ -362,9 +334,7 @@ def sfOrdinaryPushReduction {X Y : Scheme.{u}} (f : X ⟶ Y)
       (sfDerivedRestrictionComparison l E f n).hom.app
         ((scalarReductionDerivedExtension l E X n).obj K))
 
-/-- The actual nth strict Roos projection, before localization.
-Source: Stacks 08TC; localization proof step 2
-(blueprint: lem-sf-integral-ordinary-recollement-realization). -/
+/-- The actual nth strict Roos projection, before localization. -/
 def sfOrdinaryPullRoosProjection {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : (integralOperationsGoodComplex l E Y).FullSubcategory) (n : ℕ) :
     integralOperationsRoos ((integralOperationsPullbackTowerFunctor l E f).obj P.obj) ⟶
@@ -377,9 +347,7 @@ def sfOrdinaryPullRoosProjection {X Y : Scheme.{u}} (f : X ⟶ Y)
     Pi.π (fun m : ℕ ↦
       ((integralOperationsPullbackTowerFunctor l E f).obj P.obj).obj (op m)) n
 
-/-- The homotopy coordinate of the strict Roos complex.
-Source: Stacks 08TC; localization proof step 2
-(blueprint: lem-sf-integral-ordinary-recollement-realization). -/
+/-- The homotopy coordinate of the strict Roos complex. -/
 def sfOrdinaryPullRoosZeroCoordinate {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : (integralOperationsGoodComplex l E Y).FullSubcategory) (q : ℤ) :=
   (CochainComplex.mappingCocone.snd
@@ -391,9 +359,7 @@ def sfOrdinaryPullRoosZeroCoordinate {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- The canonical quotient-augmentation leg, transposed through the ordinary
 pullback adjunction. This is reduction unit followed by the finite pullback unit,
-with the scalar-restriction/direct-image comparison in its specified direction.
-Source: localization proof steps 2 and 5; Stacks 03D2, 07A6
-(blueprint: lem-sf-integral-ordinary-recollement-realization). -/
+with the scalar-restriction/direct-image comparison in its specified direction. -/
 def sfOrdinaryPullAugmentationLeg {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : (integralOperationsGoodComplex l E Y).FullSubcategory) (n : ℕ) (q : ℤ) :
     P.obj.X q ⟶ (sfCompletedModuleDirectImage l E f).obj
@@ -416,9 +382,7 @@ attribute [local irreducible] sfOrdinaryModulePull sfCompletedModuleDirectImage
 
 /-- Normalized comparisons for one immersion, in the actual completed and finite
 module categories. All positive exponents occur as n+1. The representative equation
-specifies the whole Roos augmentation, including its zero homotopy coordinate.
-Source: localization Integral stage, proof steps 2--7
-(blueprint: lem-sf-integral-ordinary-recollement-realization). -/
+specifies the whole Roos augmentation, including its zero homotopy coordinate. -/
 structure SfOrdinaryIntegralComparison {X Y : Scheme.{u}} (f : X ⟶ Y) [IsImmersion f] where
   diagrams : CompletedCoefficientPushforward.ComparisonData l E f
   diagrams_structure : diagrams.structureMap =

@@ -9,10 +9,13 @@ public import WeilConjectures.SmoothPurity.Compact.CompactSupportNativeTowerPres
 
 /-! # The specification of a compact-support reduction tower
 
+`CompactSupportReductionTowerFunctorSpec` is the proposition that a functor into derived
+coefficient towers is a linear triangulated compact-support reduction tower, with canonical
+evaluations compatible with the quotient transitions and a native presentation.
+
+## Implementation details
+
 Naming the proposition keeps repeated dependent choice predicates small.
-Source: the coherent compact-support tower construction and its canonical
-coefficient comparisons, blueprint `lemma-change-coefficients-compact-support`.
-(blueprint: def-weil-compact-support-reduction-tower-functor-spec).
 -/
 
 @[expose] public noncomputable section
@@ -28,9 +31,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Linear (Padic.coefficientExtensionIntegers l E) (scalarReductionSource l E Y)]
 
 /-- The linearity, exactness, canonical evaluations, quotient transitions, and
-native presentation of one compact-support reduction tower.
-Source: blueprint `lemma-change-coefficients-compact-support`, canonical coefficient comparisons.
-(blueprint: def-weil-compact-support-reduction-tower-functor-spec). -/
+native presentation of one compact-support reduction tower. -/
 def CompactSupportReductionTowerFunctorSpec
     (T : DerivedCategory (scalarReductionSource l E X) ⥤
       DerivedCategory (pbcTowers Y (completedIntegralCommRingSheafUnrestricted l E Y))) : Prop :=

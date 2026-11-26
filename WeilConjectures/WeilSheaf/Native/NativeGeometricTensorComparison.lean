@@ -16,11 +16,19 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDeri
 
 /-! # Tensor comparison for the native geometric realization
 
-Source: blueprint latest, fix-lem-tensor-adjunction.proof.md, Step 1, tensor objects;
-native closed-forgetful proof, Step 5, followed by the coefficient realization.
-(blueprint: lem-sf-native-geometric-tensor-comparison).
+The specified native geometric realization preserves the ambient derived tensor. This compares
+the two ambient tensor functors and asserts no constructibility.
 
-This compares the two ambient tensor functors and asserts no constructibility.
+## Implementation details
+
+Let `F` be forgetting scalar linearity followed by restriction along
+`nativeModuleCoefficientIso`; it is an exact equivalence. The relative tensors before and after
+`F` represent the same balanced bilinear maps, and the comparison maps on the relative tensor
+coequalizers send a pure tensor to the same pure tensor. Applied in each bidegree and to the sum
+total complexes, this shows that `F` preserves and reflects K-flatness, so the ordinary native
+tensor of `NativeOrdinaryTensorModels` and the condensed `derivedTensor` agree after `F` on
+K-flat resolutions; localization gives the natural isomorphism. It is then composed with the
+`tensorComparison` of `nativeDerivedClosedComparison`, whiskered by `F.mapDerivedCategory`.
 -/
 
 @[expose] public section
@@ -145,40 +153,7 @@ private noncomputable def closedTensorIso {H : Dᵒᵖ × D ⥤ D}
 
 end TensorComparisonProof
 
-/-- The specified native geometric realization preserves the ambient derived tensor.
-Source: blueprint latest, fix-lem-tensor-adjunction.proof.md, Step 1;
-lem-sf-weil-native-closed-forgetful, Step 5; and the coefficient/module realization
-of lem-sf-weil-verdier-module-constructibility-comparison.
-(blueprint: lem-sf-native-geometric-tensor-comparison).
-
-Proof:
-1. Put Y equal to the geometric fiber and let F be forgetting scalar linearity
-followed by restriction along nativeModuleCoefficientIso. The coefficient isomorphism
-is an isomorphism of ring objects. Native scalar forgetting is an equivalence: the
-scalar action is recovered by restriction to constant coefficient sections. Thus F
-is an exact equivalence, preserves sums, and reflects acyclic complexes.
-2. The relative tensors before and after F represent the same balanced bilinear
-maps. Every map balanced for the coefficient ring is balanced for its constant
-scalar sections, so forgetting scalar linearity loses no balancing relation.
-The mutually inverse maps on the relative tensor coequalizers send a pure tensor
-m tensor n to the same pure tensor. Restriction along the coefficient ring
-isomorphism has the same property. These maps are natural in both modules.
-3. Apply these maps to each bidegree and then to the sum total complexes. Additivity
-preserves the differential d tensor 1 + (-1)^p 1 tensor d. The inverse equivalence
-has the inverse tensor comparison, so F preserves and reflects K-flatness: tensor
-against an arbitrary acyclic complex can be tested after the inverse equivalence.
-Consequently the ordinary native tensor supplied by NativeOrdinaryTensorModels
-and the existing condensed derivedTensor agree after F on K-flat resolutions.
-Localization of the natural total-complex comparison gives a natural isomorphism
-on both ordinary derived variables; it is independent of the resolutions by the
-universal property of localization.
-4. Compose this isomorphism with the tensorComparison of the specified
-nativeDerivedClosedComparison, whiskered by F.mapDerivedCategory. Associativity
-of functor composition identifies the composite forgetful functor with
-nativeGeometricForget. This gives the displayed natural isomorphism, with the
-input order unchanged. No constructibility, pointwise stalk detection, or
-identification of derived Weil objects with fixed derived objects is used.
--/
+/-- The specified native geometric realization preserves the ambient derived tensor. -/
 theorem nativeGeometricForget_tensorComparison
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]

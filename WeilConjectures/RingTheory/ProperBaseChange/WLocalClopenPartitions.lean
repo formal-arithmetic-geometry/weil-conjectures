@@ -10,9 +10,14 @@ public import WeilConjectures.RingTheory.ProEtale.WLocal
 /-!
 # Clopen partitions of a w-local affine spectrum
 
-Source: blueprint, sec-proper-base-change/sk-thm-properbasechange,
-node proposition-w-local-components--1, order 1221
-(blueprint: proposition-w-local-components--1).
+Patch compactness of the spectrum, and the description of clopen partitions of a w-local
+spectrum by clopen partitions of its closed points.
+
+## Implementation details
+
+A continuous retraction `r` onto the closed points sends each point to the closed point of its
+component; clopen membership is constant on components, so partitions of the closed points lift
+uniquely by inverse image under `r`.
 -/
 
 @[expose] public section
@@ -22,27 +27,7 @@ universe u w
 namespace PrimeSpectrum
 
 /-- Patch compactness and the closed-point description of clopen partitions of a w-local
-spectrum. Source: blueprint, sec-proper-base-change/sk-thm-properbasechange,
-node proposition-w-local-components--1, order 1221
-(blueprint: proposition-w-local-components--1).
-
-Proof:
-1. Mathlib gives compactness of the constructible topology. A compact open is clopen in
-   that topology. The compact-open basis and T0 separation therefore make it totally
-   separated and hence Hausdorff.
-2. The closed points of a w-local space form a closed spectral T1 subspace, hence are
-   compact, Hausdorff and totally disconnected, by the source library's instances.
-3. The proved source-library homeomorphism from closed points to connected components
-   gives a continuous retraction `r` onto closed points. It fixes closed points and sends
-   each point to the closed point of its component. Clopen membership is constant on a
-   component, so `x ∈ U ↔ r x ∈ U` for every clopen `U`.
-4. Lift each partition part by inverse image under `r`. Inverse image preserves
-   clopenness, disjointness and arbitrary unions, and restriction recovers each part.
-   Any other lift agrees pointwise by the clopen-membership equivalence, proving uniqueness.
-   Conversely restriction of a partition preserves the same three properties.
-5. Every point specializes to a closed point. That specialization lies in the same
-   component, so w-local uniqueness identifies it with the component's closed point.
-   An open containing that closed point contains its generalizations. -/
+spectrum. -/
 theorem wLocal_clopen_partition_properties (A : Type u) [CommRing A] :
     (CompactSpace (WithConstructibleTopology (PrimeSpectrum A)) ∧
       T2Space (WithConstructibleTopology (PrimeSpectrum A))) ∧

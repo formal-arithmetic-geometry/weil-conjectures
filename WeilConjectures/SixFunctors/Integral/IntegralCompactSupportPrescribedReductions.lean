@@ -103,15 +103,16 @@ import WeilConjectures.SmoothPurity.Normalized.NormalizedDVREffectivity
 /-!
 # Integral compact supports have the prescribed reductions
 
-Source: Weil conjectures blueprint, sec-six-functors/sk-prop-sf-biduality-general,
-order 2135 (blueprint: lemma-change-coefficients-compact-support).
-
 The integral value is specified by a Roos triangle of the very tower used in
 `sfIntegralCompactSupportValue`. Specifying its projection retains the data needed
 for the canonical coefficient maps, which are their tensor/restriction adjoints.
 The result applies to every realization of that defining derived limit, including
 its chosen value, and imposes no extra condition on the input. Natural index n
 always denotes the positive exponent n+1.
+
+## References
+
+* [Stacks, Tag 07KC]
 -/
 
 @[expose] public section
@@ -131,9 +132,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
 
 /-- Countable products for the defining compact-support tower, obtained from the
-recorded completed-coefficient derived products, with no extra existence assumption.
-Source: blueprint order 2135, Proof paragraph 2; Stacks Tag 07KC
-(blueprint: lemma-change-coefficients-compact-support). -/
+recorded completed-coefficient derived products, with no extra existence assumption. -/
 noncomputable instance coefCompactSupportHasProduct
     (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) :
     HasProduct (sfCompactSupportTerm l E c K) := by

@@ -11,8 +11,22 @@ import Mathlib.Algebra.Category.Ring.FilteredColimits
 
 /-! # The actual finite constant-coefficient ring adjunct
 
-Source: Stacks Tags 04B3, 0H7J, 09A5 and 03CY.
-(blueprint: lem-fix-qcqs-ordinary-finite-coefficient-isos).
+We show that for every scheme morphism the ring adjunct of the finite coefficient
+constant-section map is invertible, with independent scheme and coefficient universes.
+
+## Implementation details
+
+Constant sheafification is left adjoint to evaluation at the terminal site object, which
+base change preserves; uniqueness of left adjoints then identifies the adjunct with an
+isomorphism. The argument is made for an arbitrary commutative ring before specializing to
+the lifted quotient ring, and includes the zero ring.
+
+## References
+
+* [Stacks, Tag 04B3]
+* [Stacks, Tag 0H7J]
+* [Stacks, Tag 09A5]
+* [Stacks, Tag 03CY]
 -/
 
 @[expose] public noncomputable section
@@ -222,22 +236,7 @@ private theorem constant_ring_adjunct_isIso
   exact IsIso.of_isIso_comp_right _ eX.hom
 
 /-- The actual finite coefficient constant-section map has invertible ring adjunct,
-with independent scheme and coefficient universes, for every scheme morphism.
-
-Source: Stacks Tags 04B3, 0H7J, 09A5 and 03CY.
-(blueprint: lem-fix-qcqs-ordinary-finite-coefficient-isos)
-
-Proof: constant sheafification is left adjoint to evaluation at a terminal site
-object. Base change preserves that terminal object. Composing its ring inverse-image
-adjunction with the constant-sheaf adjunction gives another left adjoint to the same
-evaluation functor. Uniqueness of left adjoints identifies the adjunct of the
-constant-section direct map with an isomorphism. Forgetting commutativity commutes
-with sheafification: the comparison respects the sheafification unit. Its unit
-equation identifies the prescribed forgotten commutative-ring map with the ring
-constant-section map, conjugated by the two constant-sheaf comparison isomorphisms.
-Transpose this square through the ring adjunction and cancel those isomorphisms.
-The argument is made for an arbitrary commutative ring before specializing to the
-lifted quotient ring; it needs no nonemptiness assumption and includes the zero ring. -/
+with independent scheme and coefficient universes, for every scheme morphism. -/
 theorem ordinaryFiniteCoefficientMap_isIso
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

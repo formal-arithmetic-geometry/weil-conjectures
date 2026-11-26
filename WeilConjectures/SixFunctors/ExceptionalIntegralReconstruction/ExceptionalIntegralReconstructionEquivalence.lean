@@ -9,10 +9,23 @@ public import WeilConjectures.SixFunctors.ExceptionalIntegralReconstruction.Inte
 import WeilConjectures.SixFunctors.Supporting.PurSequenceAdjointResolutionShifts
 import Mathlib.CategoryTheory.Adjunction.Restrict
 
-/-! # Restriction of actual reconstruction to uniform finite-Tor bounds
+/-!
+# Restriction of actual reconstruction to uniform finite-Tor bounds
 
-Source: Zheng, Section 4; integral reconstruction proof, step 1.
-(blueprint: lem-sf-exceptional-integral-reconstruction-equivalence).
+The reduction/limit adjunction restricts to an equivalence between the finite-Tor constructible
+integral objects and the normalized coefficient systems with uniform bounds.
+
+## Implementation details
+
+Reduction is normalized by its K-flat model, and its evaluation comparison transports the common
+intervals. Conversely, the counit of a normalized system is invertible, so the total limit is
+complete with the same intervals. The ambient adjunction is restricted along the full
+inclusions; its unit and counit are the ambient maps and are invertible by normalized
+reconstruction.
+
+## References
+
+* [Zheng, Section 4]
 -/
 
 @[expose] public noncomputable section
@@ -28,18 +41,8 @@ open IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The actual adjunction restricts to the uniform bounded finite-Tor categories.
-Source: Zheng, Section 4, and step 1 of integral reconstruction.
-(blueprint: lem-sf-exceptional-integral-reconstruction-equivalence).
-
-Proof: reduction is normalized by its K-flat model. Its evaluation comparison
-transports the two common intervals without changing their endpoints. Conversely,
-the actual counit of a normalized system is invertible; its evaluations transport
-those same intervals to the reductions of the total limit, which is complete.
-Restrict the ambient adjunction along the full inclusions. Its unit and counit
-are the actual ambient maps and are invertible by normalized reconstruction, so
-it is an equivalence. Finally retain the resolution and shift comparisons of the
-same calculus. This also applies to zero objects and empty schemes. -/
+/-- The reduction/limit adjunction restricts to an equivalence of the uniformly bounded
+finite-Tor categories, giving a `Reconstruction` of `T`. -/
 theorem exceptionalIntegralReconstructionEquivalence
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) (T : Scheme.{u})
     [T.Over (Spec (.of D.k))]

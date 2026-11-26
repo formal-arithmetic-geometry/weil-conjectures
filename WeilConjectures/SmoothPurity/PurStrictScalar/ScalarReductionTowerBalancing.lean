@@ -17,8 +17,18 @@ import WeilConjectures.SmoothPurity.PurStrictScalar.ScalarTargetCounitUniversal
 
 /-! # Finite scalar proper/open mate on strict compact-support reduction towers
 
-Source: Stacks 07A6, 0B56, 0940 and 0E8I.
-(blueprint: def-pur-strict-scalar-reduction-balancing).
+## Implementation details
+
+The ordinary balancing isomorphism sends `b ⊗ (1 ⊗ x)` to `1 ⊗ (b ⊗ x)`; the equality
+`tB = v^e B` identifies the target quotient. The formula commutes with all site restrictions,
+coefficient quotient maps and module morphisms, and local pure tensors generate after
+sheafification, so it determines the isomorphism uniquely. The derived balancing is obtained
+from simultaneous K-flat replacements in the diagram category, finite freeness of `B` over `A`
+making constant tensor exact, and derived-functor uniqueness.
+
+## References
+
+* [Stacks Project, Tags 03CY, 03EK, 06YY, 07A6, 0B56, 0940, 0941 and 0E8I]
 -/
 
 @[expose] public noncomputable section
@@ -40,37 +50,31 @@ variable (l : ℕ) [Fact l.Prime]
   (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (i : E →ₐ[ℚ_[l]] F)
 
-/-- The retained arithmetic levels n+1 go to e(n+1), with composite transitions.
-Source: Stacks 0940 (blueprint: def-pur-strict-scalar-reduction-balancing). -/
+/-- The retained arithmetic levels n+1 go to e(n+1), with composite transitions. -/
 abbrev subsequence (W : Scheme.{u}) (e : ℕ) :=
   CategoryTheory.StrictTowerArithmetic.derivedRestriction
     (Modules (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) W) e
 
-/-- The underlying exact arithmetic restriction on module towers.
-Source: Stacks 0940 (blueprint: def-pur-strict-scalar-reduction-balancing). -/
+/-- The underlying exact arithmetic restriction on module towers. -/
 abbrev ordinarySubsequence (W : Scheme.{u}) (e : ℕ) :=
   CategoryTheory.StrictTowerArithmetic.restriction
     (Modules (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) W) e
 
-/-- Exactness of the constant finite-free tensor, with the fixed coefficient map.
-Source: Stacks 03CY (blueprint: def-pur-strict-scalar-reduction-balancing). -/
+/-- Exactness of the constant finite-free tensor, with the fixed coefficient map. -/
 instance scalarTensor_limits (W : Scheme.{u}) :
     PreservesFiniteLimits (tensor l E F i W) := (tensor_exact l E F i W).1
 
-/-- Exactness of the same tensor on cokernels.
-Source: Stacks 03CY (blueprint: def-pur-strict-scalar-reduction-balancing). -/
+/-- Exactness of the same tensor on cokernels. -/
 instance scalarTensor_colimits (W : Scheme.{u}) :
     PreservesFiniteColimits (tensor l E F i W) := (tensor_exact l E F i W).2
 
-/-- The actual ordinary quotient reduction, then restriction to discrete scalars.
-Source: Stacks 0940 (blueprint: def-pur-strict-scalar-reduction-balancing). -/
+/-- The actual ordinary quotient reduction, then restriction to discrete scalars. -/
 def ordinaryConstantReduction (W : Scheme.{u}) :
     scalarReductionSource l E W ⥤
       Towers (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W :=
   ordinaryReduction l E W ⋙ systemRestriction l E W
 
-/-- Additivity of ordinary constant reduction.
-Source: Stacks 03EK (blueprint: def-pur-strict-scalar-reduction-balancing). -/
+/-- Additivity of ordinary constant reduction. -/
 instance ordinaryConstantReduction_additive (W : Scheme.{u}) :
     (ordinaryConstantReduction l E W).Additive :=
   haveI := ordinaryReduction_additive l E W
@@ -78,8 +82,7 @@ instance ordinaryConstantReduction_additive (W : Scheme.{u}) :
   inferInstanceAs ((ordinaryReduction l E W ⋙ systemRestriction l E W).Additive)
 
 /-- The level of the actual ordinary adjunction unit. It is 1 tensor x in the
-quotient module, with no basis chosen.
-Source: Stacks 03EK (blueprint: def-pur-strict-scalar-reduction-balancing). -/
+quotient module, with no basis chosen. -/
 def ordinaryReductionUnitSection (W : Scheme.{u}) (M : scalarReductionSource l E W)
     (n : ℕ) (U : W.ProEtᵒᵖ) (x : M.val.obj U) :=
   (((ordinaryReductionAdj l E W).unit.app M ≫
@@ -87,8 +90,7 @@ def ordinaryReductionUnitSection (W : Scheme.{u}) (M : scalarReductionSource l E
       ((ordinaryReduction l E W).obj M)) (op n)).val.app U) x
 
 /-- The canonical cochain reduction counit, obtained from the specified whole-system
-adjunction, before finite evaluation.
-Source: Stacks 06YY, 0941 (blueprint: def-pur-strict-scalar-reduction-balancing). -/
+adjunction, before finite evaluation. -/
 def nativeReductionCounit (W : Scheme.{u})
     (S : CoefficientDerivedSystemCalculus.{u, u} l E W)
     (P : CochainComplex (scalarReductionSource l E W) ℤ) :=
@@ -99,8 +101,7 @@ def nativeReductionCounit (W : Scheme.{u})
     (DerivedCategory.quotientCompQhIso _).hom.app
       (((ordinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj P)
 
-/-- Its exact coefficient restriction to the constant integral tower category.
-Source: Stacks 06YY, 0941 (blueprint: def-pur-strict-scalar-reduction-balancing). -/
+/-- Its exact coefficient restriction to the constant integral tower category. -/
 def constantReductionCounit (W : Scheme.{u})
     (S : CoefficientDerivedSystemCalculus.{u, u} l E W)
     (P : CochainComplex (scalarReductionSource l E W) ℤ) :
@@ -111,25 +112,21 @@ def constantReductionCounit (W : Scheme.{u})
     (systemRestriction l E W).mapDerivedCategoryFactors.hom.app
       (((ordinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj P)
 
-/-- Source of ordinary ramified balancing on whole strict towers.
-Source: Stacks 03EK, 0940 (blueprint: def-pur-strict-scalar-reduction-balancing). -/
+/-- Source of ordinary ramified balancing on whole strict towers. -/
 def ordinaryScalarSource (W : Scheme.{u}) :=
   ordinaryConstantReduction l E W ⋙ tensor l E F i W
 
-/-- Target of ordinary ramified balancing, including its retained transitions.
-Source: Stacks 03EK, 0940 (blueprint: def-pur-strict-scalar-reduction-balancing). -/
+/-- Target of ordinary ramified balancing, including its retained transitions. -/
 def ordinaryScalarTarget (W : Scheme.{u}) (e : ℕ) :=
   pbcExtend (completedCoefficientMap l E F i W) ⋙
     ordinaryConstantReduction l F W ⋙ ordinarySubsequence l F W e
 
-/-- Additivity of the ordinary balancing source.
-Source: Stacks 03EK (blueprint: def-pur-strict-scalar-reduction-balancing). -/
+/-- Additivity of the ordinary balancing source. -/
 instance ordinaryScalarSource_additive (W : Scheme.{u}) :
     (ordinaryScalarSource l E F i W).Additive :=
   inferInstanceAs ((ordinaryConstantReduction l E W ⋙ tensor l E F i W).Additive)
 
-/-- Additivity of the ordinary balancing target.
-Source: Stacks 03EK (blueprint: def-pur-strict-scalar-reduction-balancing). -/
+/-- Additivity of the ordinary balancing target. -/
 instance ordinaryScalarTarget_additive (W : Scheme.{u}) (e : ℕ) :
     (ordinaryScalarTarget l E F i W e).Additive :=
   inferInstanceAs ((pbcExtend (completedCoefficientMap l E F i W) ⋙
@@ -191,13 +188,7 @@ private theorem reductionUnit_transition (W : Scheme.{u})
   exact congrArg (fun k ↦ k.val.app U x) hh
 
 /-- Ordinary ramified quotient balancing is fixed on local pure tensors and on
-all horizontal transitions simultaneously.
-Source: Stacks 03EK, 0940 (blueprint: def-pur-strict-scalar-reduction-balancing).
-Proof: identify the ordinary quotient extension using its adjunction unit. The map
-sends b tensor (1 tensor x) to 1 tensor (b tensor x). The equality tB=v^eB identifies
-the target quotient. Tensor balancing gives its inverse. The same formula commutes
-with all site restrictions, coefficient quotient maps and module morphisms. Local
-pure tensors generate after sheafification, so the formula determines the iso uniquely. -/
+all horizontal transitions simultaneously. -/
 theorem ordinaryBalancing_existsUnique (W : Scheme.{u}) (e : ℕ)
     (he : PurCompactSupport.Ramification l E F i e) (hepos : 1 ≤ e) :
     ∃! β : ordinaryScalarSource l E F i W ≅ ordinaryScalarTarget l E F i W e,
@@ -295,14 +286,12 @@ theorem ordinaryBalancing_existsUnique (W : Scheme.{u}) (e : ℕ)
   intro U c x
   exact (hB' M n.unop U c x).trans (hβ M n.unop U c x).symm
 
-/-- The pure-tensor normalized whole-quotient balancing, with composite transitions.
-Source: Stacks 03EK, 0940 (blueprint: def-pur-strict-scalar-reduction-balancing). -/
+/-- The pure-tensor normalized whole-quotient balancing, with composite transitions. -/
 def ordinaryBalancing (W : Scheme.{u}) (e : ℕ)
     (he : PurCompactSupport.Ramification l E F i e) (hepos : 1 ≤ e) :=
   (ordinaryBalancing_existsUnique l E F i W e he hepos).choose
 
-/-- Canonical computation map for tensor of the E reduction on every complex.
-Source: Stacks 06YY (blueprint: def-pur-strict-scalar-reduction-balancing). -/
+/-- Canonical computation map for tensor of the E reduction on every complex. -/
 def sourceCounit (W : Scheme.{u}) (S : CoefficientDerivedSystemCalculus.{u, u} l E W)
     (P : CochainComplex (scalarReductionSource l E W) ℤ) :
     (reduction l E W S ⋙ T l E F i W).obj (DerivedCategory.Q.obj P) ⟶
@@ -312,8 +301,7 @@ def sourceCounit (W : Scheme.{u}) (S : CoefficientDerivedSystemCalculus.{u, u} l
     (tensor l E F i W).mapDerivedCategoryFactors.hom.app
       (((ordinaryConstantReduction l E W).mapHomologicalComplex (.up ℤ)).obj P)
 
-/-- Canonical computation map for ramified F reduction of completed scalar extension.
-Source: Stacks 06YY (blueprint: def-pur-strict-scalar-reduction-balancing). -/
+/-- Canonical computation map for ramified F reduction of completed scalar extension. -/
 def targetCounit (W : Scheme.{u}) (S : CoefficientDerivedSystemCalculus.{u, u} l F W)
     (e : ℕ) (P : CochainComplex (scalarReductionSource l E W) ℤ) :
     (pbcDerivedExtend (completedCoefficientMap l E F i W) ⋙
@@ -330,13 +318,7 @@ def targetCounit (W : Scheme.{u}) (S : CoefficientDerivedSystemCalculus.{u, u} l
 
 /-- Whole-diagram derived balancing is uniquely determined by its universal counits
 and the specified ordinary pure-tensor map. This condition is imposed before any
-evaluation or inverse limit, so it does not use faithfulness of finite evaluation.
-Source: Stacks 06YY, 0940 (blueprint: def-pur-strict-scalar-reduction-balancing).
-Proof: derive the ordinary balancing square with simultaneous K-flat replacements
-in the diagram category. Finite freeness of B over A makes constant tensor exact
-and preserves the replacements. The recorded reduction adjunction and the canonical
-right-derived unit give its universal counit. Derived-functor uniqueness yields the
-iso and precisely the displayed counit equation on every complex. -/
+evaluation or inverse limit, so it does not use faithfulness of finite evaluation. -/
 theorem reductionBalancing_existsUnique (W : Scheme.{u})
     (S : CoefficientDerivedSystemCalculus.{u, u} l E W)
     (S' : CoefficientDerivedSystemCalculus.{u, u} l F W) (e : ℕ)
@@ -387,8 +369,7 @@ theorem reductionBalancing_existsUnique (W : Scheme.{u})
     rw [ht, hk, hσ]
     exact hκ' P
 
-/-- The canonical balancing used in the actual strict-tower mate.
-Source: Stacks 06YY, 0940 (blueprint: def-pur-strict-scalar-reduction-balancing). -/
+/-- The canonical balancing used in the actual strict-tower mate. -/
 def reductionBalancing (W : Scheme.{u})
     (S : CoefficientDerivedSystemCalculus.{u, u} l E W)
     (S' : CoefficientDerivedSystemCalculus.{u, u} l F W) (e : ℕ)

@@ -56,6 +56,12 @@ The purity of the geometric coinvariants is
 - The quotient map `F_s̄ ↠ geometricCoinvariants F` at a geometric point `s̄`, the dual of
   `AlgebraicGeometry.WeilSheaf.globalSectionsToStalkObj` for `F^∨` composed with
   `(F^∨)_s̄ ≅ (F_s̄)^∨`, together with its compatibility with the Frobenius at closed points.
+
+## Implementation details
+
+The universe `max (u + 1) 0 = u + 1` of `FrobeniusModule.dual` in
+`AlgebraicGeometry.WeilSheaf.geometricCoinvariants` agrees with that of the global sections,
+since the coefficients `ℚ̄_ℓ` live in universe `0`.
 -/
 
 @[expose] public section
@@ -137,8 +143,7 @@ noncomputable def ProEtaleWeilSheaf.ihom (A B : ProEtaleWeilSheaf k₀ l X) :
 
 omit [Fact (ringChar k₀ ≠ l)] in
 /-- The Weil structure of the internal hom `[A, B]` is natural in `B`: a morphism `f : B ⟶ B'` of
-pro-étale Weil sheaves induces a morphism `[A, B] ⟶ [A, B']` of pro-étale Weil sheaves. All
-three constituents of the Weil structure are natural in the second variable. -/
+pro-étale Weil sheaves induces a morphism `[A, B] ⟶ [A, B']` of pro-étale Weil sheaves. -/
 lemma ProEtaleWeilSheaf.ihom_map_comm (A : ProEtaleWeilSheaf k₀ l X)
     {B B' : ProEtaleWeilSheaf k₀ l X} (f : B ⟶ B') :
     (WeilSheaf.frobeniusPullback k₀ l X).map
@@ -224,7 +229,7 @@ noncomputable def dualStr (F : WeilSheaf k₀ l X) :
         (ProEtaleWeilSheaf.adicConstant k₀ l X).carrier :=
   (ProEtaleWeilSheaf.ihom k₀ l X F.obj (ProEtaleWeilSheaf.adicConstant k₀ l X)).str
 
--- TODO(unify): definition-weil-representation
+-- TODO(unify): unify with the Weil representation of a lisse Weil sheaf.
 /-- The dual `F^∨ = [F, ℚ̄_ℓ]` of a lisse Weil sheaf: the internal hom into the constant Weil
 sheaf `ℚ̄_ℓ`, with the Weil structure `AlgebraicGeometry.WeilSheaf.dualStr`. It is lisse
 (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.ihom`), hence constructible. -/
@@ -236,7 +241,7 @@ noncomputable def dual (F : WeilSheaf k₀ l X) (hF : F.IsLisse) : WeilSheaf k�
 theorem IsLisse.dual {F : WeilSheaf k₀ l X} (hF : F.IsLisse) : (F.dual hF).IsLisse :=
   ProEtale.IsAdicLisseSheaf.ihom hF (ProEtale.isAdicLisseSheaf_adicConstantSheaf _)
 
--- TODO(unify): definition-weil-representation
+-- TODO(unify): unify with the Weil representation of a lisse Weil sheaf.
 /-- The geometric coinvariants of a lisse Weil sheaf `F`: the dual `Γ(X̄, F^∨)^∨` of the global
 sections of the dual `F^∨`, with the dual of the Frobenius of
 `AlgebraicGeometry.WeilSheaf.globalSections`.
@@ -246,10 +251,7 @@ representation of `π₁(X̄)`, the global sections are
 `Γ(X̄, F^∨) = (V^∨)^{π₁(X̄)} = (V_{π₁(X̄)})^∨`, so this is the space of coinvariants
 `V_{π₁(X̄)}` with the Frobenius induced from the Weil structure: the maximal geometrically
 constant quotient of `F`. If `X̄` is not connected, `Γ(X̄, -)` is a sum over its connected
-components.
-
-The universe `max (u + 1) 0 = u + 1` of `FrobeniusModule.dual` agrees with that of the global
-sections, since the coefficients `ℚ̄_ℓ` live in universe `0`. -/
+components. -/
 noncomputable def geometricCoinvariants [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l X)
     (hF : F.IsLisse) : FrobeniusModule.{u + 1, 0} (PadicAlgCl l) :=
@@ -326,9 +328,7 @@ lemma evaluationPairing_stalkAt_frobenius (F : WeilSheaf k₀ l X) (hF : F.IsLis
       (Mod.evaluation F.obj.carrier (adicConstant k₀ l X).obj.carrier)) h hA d x
 
 /-- The stalk of the dual of a lisse Weil sheaf at a geometric point is the dual of the stalk,
-compatibly with the Frobenius: the pairing of stalks induced by the evaluation is perfect
-(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.bijective_evaluationPairing`) and invariant
-under the Frobenius (`AlgebraicGeometry.WeilSheaf.evaluationPairing_stalkAt_frobenius`). -/
+compatibly with the Frobenius. -/
 noncomputable def stalkAtDualEquiv (F : WeilSheaf k₀ l X) (hF : F.IsLisse) :
     ((F.dual hF).stalkAt s m hs).Equiv (F.stalkAt s m hs).dual where
   toLinearEquiv := LinearEquiv.ofBijective

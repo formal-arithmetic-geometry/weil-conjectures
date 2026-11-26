@@ -18,12 +18,12 @@ the pullback exchange `α_f : f_s^* S_W ⟶ S_V f^*`, the compact-support exchan
 `β_f : S_V Rf^! ⟶ Rf_s^! S_W`. Write `π : Rf_!(f^* N ⊗ X) ≅ N ⊗ Rf_! X` for the projection
 formula and `t_f : f^* N ⊗ Rf^! M ⟶ Rf^!(N ⊗ M)` for its mate with the exceptional counit.
 
-Blueprint `lemma-compatibilities-base-change-maps` (2) is the identity
+The compatibility of the exceptional exchange with the projection formula is the identity
 
 `β_f S_V(t_f) μ_V(α_f ⊗ 1) = f_s^! μ_W t_{f_s}(1 ⊗ β_f)`
 
-of maps `f_s^* S_W N ⊗ S_V f^! M ⟶ f_s^! S_W(N ⊗ M)`. It follows from (1), the compatibility of
-`ν_f` with the projection formula, by passing to adjoints
+of maps `f_s^* S_W N ⊗ S_V f^! M ⟶ f_s^! S_W(N ⊗ M)`. It follows from the compatibility of `ν_f`
+with the projection formula, by passing to adjoints
 (`CategoryTheory.whiskerRight_comp_μ_comp_map_comp_mateEquiv_app`).
 
 -/
@@ -39,12 +39,10 @@ variable {V V' W W' : Type*} [Category V] [Category V'] [Category W] [Category W
   {SV : V ⥤ V'} {SW : W ⥤ W'} [SV.LaxMonoidal] [SW.LaxMonoidal]
   {F : V ⥤ W} {G : W ⥤ V} {F' : V' ⥤ W'} {G' : W' ⥤ V'} {Lp : W ⥤ V} {Lp' : W' ⥤ V'}
 
-/-- **The exceptional exchange and the projection formula** (blueprint
-`lemma-compatibilities-base-change-maps`, (1) ⇒ (2)): let `β` be the mate of `ν` for the adjunctions
-`F ⊣ G` and `F' ⊣ G'`, `t` and `t'` the maps adjoint to `π ≫ (1 ◁ ε)` for projection-formula
-maps `π`, `π'`, natural in the second variable along `β`. If `ν` is compatible with the projection
-formula (`h₁`), then
-`(α ▷ 1) ≫ μ_V ≫ S_V(t) ≫ β = (1 ◁ β) ≫ t' ≫ G'(μ_W)`. -/
+/-- **The exceptional exchange and the projection formula**: let `β` be the mate of `ν` for the
+adjunctions `F ⊣ G` and `F' ⊣ G'`, `t` and `t'` the maps adjoint to `π ≫ (1 ◁ ε)` for
+projection-formula maps `π`, `π'`, natural in the second variable along `β`. If `ν` is compatible
+with the projection formula (`h₁`), then `(α ▷ 1) ≫ μ_V ≫ S_V(t) ≫ β = (1 ◁ β) ≫ t' ≫ G'(μ_W)`. -/
 theorem whiskerRight_comp_μ_comp_map_comp_mateEquiv_app (a : F ⊣ G) (a' : F' ⊣ G')
     (α : SW ⋙ Lp' ⟶ Lp ⋙ SV) (ν : SV ⋙ F' ⟶ F ⋙ SW) (N M : W)
     (π : F.obj (Lp.obj N ⊗ G.obj M) ⟶ N ⊗ F.obj (G.obj M))

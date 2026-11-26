@@ -11,8 +11,12 @@ public import WeilConjectures.SmoothPurity.Supporting.CoefDerivedSystemEvaluatio
 
 /-! # Transport of evaluation tensor-model normalization
 
-Source: Stacks Tags 07A4, 0941 and 03D2.
-(blueprint: lem-pur-completed-pullback-tensor-evaluation-model-transport).
+The evaluation normalization of tensor models is stable under isomorphisms of the finite
+tensor factors.
+
+## References
+
+* [Stacks, Tags 07A4, 0941 and 03D2](https://stacks.math.columbia.edu/tag/07A4)
 -/
 
 @[expose] public noncomputable section
@@ -95,14 +99,7 @@ private theorem finite_model_naturality (W : Scheme.{u}) (n : ℕ)
     (Prod.mkHom (ObjectProperty.homMk (X := ⟨P, hP⟩) (Y := ⟨P', hP'⟩) a)
       (ObjectProperty.homMk (X := ⟨Q, hQ⟩) (Y := ⟨Q', hQ'⟩) b))
 
-/-- Evaluation normalization is stable under isomorphisms of the finite tensor factors.
-Source: Stacks Tags 0941 and 03D2, naturality of tensor models
-(blueprint: lem-pur-completed-pullback-tensor-evaluation-model-transport).
-Proof: apply the supplied evaluation normalization to the two sequence complexes.
-Naturality of the finite tensor model moves the two finite isomorphisms through
-that model. Functoriality combines the factorization maps with these isomorphisms.
-Associativity then pastes the two equalities.
--/
+/-- Evaluation normalization is stable under isomorphisms of the finite tensor factors. -/
 theorem completedPullbackTensor_evaluation_model_transport (X : Scheme.{u}) (n : ℕ)
     (hx : CoefficientEvaluationTensorNormalization l E X
       (pullbackTensorCalculus l E X).toCoefficientDerivedSystemReduction)

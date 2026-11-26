@@ -13,12 +13,10 @@ public import WeilConjectures.WeilSheaf.LowerStarId
 /-!
 # The compact support package for Weil complexes
 
-Forms of clauses 3 and 4 of the coefficient and functor package (blueprint
-`prop-functor-package`) and of the projection formula (blueprint `sec-Weil-complexes`) for the
-direct image with compact support `Rf_!` of Weil complexes
-(`AlgebraicGeometry.WeilComplex.derivedLowerShriek`), in the shape used by the Fourier
-transform computations of `chap-The-Deligne-Laumon-theorem-for-curves`. They are derived from the
-statements of those nodes in `WeilConjectures.WeilSheaf.LowerShriekFunctoriality` and
+The composition law, base change and the projection formula for the direct image with compact
+support `Rf_!` of Weil complexes (`AlgebraicGeometry.WeilComplex.derivedLowerShriek`), in the
+shape used by the Fourier transform computations for curves. They are derived from
+`WeilConjectures.WeilSheaf.LowerShriekFunctoriality` and
 `WeilConjectures.WeilSheaf.FourierInversion.OtherSections`.
 
 ## Main statements
@@ -48,8 +46,7 @@ namespace WeilComplex
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
 /-- **Composition of direct images with compact support**: for morphisms `f : X ⟶ Y` and
-`g : Y ⟶ W` of `k₀`-schemes with composite `h = f ≫ g`, `Rh_! ≅ Rg_! ∘ Rf_!` on Weil complexes.
-(blueprint: `prop-functor-package`, clause 3) -/
+`g : Y ⟶ W` of `k₀`-schemes with composite `h = f ≫ g`, `Rh_! ≅ Rg_! ∘ Rf_!` on Weil complexes. -/
 theorem nonempty_derivedLowerShriekCompIso {X Y W : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     [W.Over (Spec (CommRingCat.of k₀))]
@@ -69,9 +66,7 @@ theorem nonempty_derivedLowerShriekCompIso {X Y W : Scheme.{u}}
   exact nonempty_derivedLowerShriek_comp_iso f g
 
 /-- **The identity equation of the composition law**: the direct image with compact support along
-the identity is the identity, `R(𝟙)_! K ≅ K`: the identity is proper, so `R(𝟙)_! K ≅ R(𝟙)_* K`,
-and the pushforward along the identity is the identity. (blueprint: `prop-functor-package`,
-clause 3) -/
+the identity is the identity, `R(𝟙)_! K ≅ K`. -/
 theorem nonempty_derivedLowerShriekIdIso (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
@@ -83,7 +78,7 @@ theorem nonempty_derivedLowerShriekIdIso (X : Scheme.{u}) [X.Over (Spec (CommRin
       (Functor.mapDerivedCategoryIdIso _).app K.obj)⟩
 
 /-- **Compact support and ordinary direct image agree for proper morphisms**: `Rf_! ≅ Rf_*` for a
-proper morphism `f` of `k₀`-schemes. (blueprint: `prop-functor-package`, clause 3) -/
+proper morphism `f` of `k₀`-schemes. -/
 theorem nonempty_derivedLowerShriekIsoDerivedLowerStar {X Y : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsProper f]
@@ -100,8 +95,7 @@ triangle
 
 `R(fj)_! j^*K ⟶ Rf_! K ⟶ R(fi)_! i^*K ⟶ R(fj)_! j^*K[1]`.
 
-The composites `fj = j ≫ f` and `fi = i ≫ f` are given as separate morphisms.
-(blueprint: `prop-functor-package`, clause 3) -/
+The composites `fj = j ≫ f` and `fi = i ≫ f` are given as separate morphisms. -/
 theorem exists_distTriang_derivedLowerShriek_openClosed_comp {U X Z Y : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))]
     [Z.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
@@ -143,8 +137,7 @@ f'            f
 v             v
 Y' --- h ---> Y
 ```
-of `k₀`-schemes, `h^* Rf_! K ≅ Rf'_! g^* K` for Weil complexes `K` on `X`.
-(blueprint: `prop-functor-package`, clause 4) -/
+of `k₀`-schemes, `h^* Rf_! K ≅ Rf'_! g^* K` for Weil complexes `K` on `X`. -/
 theorem nonempty_upperStarDerivedLowerShriekIso_of_isPullback {X Y X' Y' : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     [X'.Over (Spec (CommRingCat.of k₀))] [Y'.Over (Spec (CommRingCat.of k₀))]
@@ -165,7 +158,7 @@ theorem nonempty_upperStarDerivedLowerShriekIso_of_isPullback {X Y X' Y' : Schem
 
 /-- **The projection formula** for the tensor product with a lisse Weil sheaf: for a morphism
 `f : X ⟶ Y` of `k₀`-schemes, a lisse Weil sheaf `L` on `Y` and a Weil complex `K` on `X`,
-`L ⊗ Rf_! K ≅ Rf_!(f^*L ⊗ K)`. (blueprint: `sec-Weil-complexes`) -/
+`L ⊗ Rf_! K ≅ Rf_!(f^*L ⊗ K)`. -/
 theorem nonempty_tensorLisseDerivedLowerShriekIso {X Y : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]

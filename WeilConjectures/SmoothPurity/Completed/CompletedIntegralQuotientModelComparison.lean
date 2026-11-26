@@ -76,9 +76,21 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 
 /-! # Balanced realization of the principal quotient completion model
 
-Source: Stacks Project, Tags 093M, 03EK, 06YT and 08TC;
-Bhatt--Scholze, Definition 3.4.10 and Proposition 3.5.1.
-(blueprint: lem-weil-completed-integral-quotient-model-comparison).
+Completing ordinary extension of scalars is the coefficient-reduction Roos functor, with the
+specified scalar augmentation, on every input.
+
+## Implementation details
+
+On a flat K-flat representative `P`, tensor associativity and balancing identify
+`(P ⊗ S) ⊗ B_n` with `P ⊗ B_n`, compatibly with the quotient transitions and differentials;
+this gives an isomorphism of strict towers and hence of the signed mapping cocones. The
+comparison then descends through the K-flat resolving localization. No completeness of `P`,
+finite basis or boundedness is used.
+
+## References
+
+* Stacks Project, Tags 093M, 03EK, 06YT and 08TC.
+* Bhatt--Scholze, Definition 3.4.10 and Proposition 3.5.1.
 -/
 
 @[expose] public section
@@ -228,9 +240,7 @@ private theorem sheafification_map_unit_apply
 
 end
 
-/-- The canonical map from the presheaf tensor to the underlying sheaf tensor.
-Source: Stacks Project, Modules on Sites, Tag 03EK.
-(blueprint: lem-weil-pbc-extension-tensor-comparison). -/
+/-- The canonical map from the presheaf tensor to the underlying sheaf tensor. -/
 private noncomputable def tensorPresheafUnit
     (M N : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
     M.val ⊗ N.val ⟶ ((monoidalCategory R).tensorObj M N).val :=
@@ -240,18 +250,7 @@ private noncomputable def tensorPresheafUnit
 
 set_option maxHeartbeats 50000 in
 -- Mixed tensor coefficient structures require additional elaboration.
-/-- Restricted extension of scalars is tensoring with the restricted target ring.
-Source: Stacks Project, Modules on Sites, Tag 03EK.
-(blueprint: lem-weil-pbc-extension-tensor-comparison).
-
-Proof: the presheaf tensor of the restricted target ring with M has exactly the
-same section modules as restricted sectionwise scalar extension. Both restriction
-maps send s tensor m to the tensor of the two restrictions, so the identity maps
-form an isomorphism. Sheafify it over R. Restriction commutes with sheafification:
-after forgetting to abelian sheaves the comparison is the identity of the same
-sheafification, and forgetting reflects isomorphisms. Compose with the canonical
-tensor-sheafification comparison. Naturality of the sheafification unit gives the
-pure-tensor formula. No flatness or localization assumption is used. -/
+/-- Restricted extension of scalars is tensoring with the restricted target ring. -/
 private theorem exists_extensionTensorComparison (φ : R ⟶ S)
     (M : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
     ∃ e : (monoidalCategory R).tensorObj
@@ -1068,31 +1067,7 @@ attribute [local semireducible] PrincipalQuotientCompletion.quotientRoos
 
 -- The normalized tower and cone comparisons involve independent site/coefficient sizes.
 /-- Completing ordinary extension is the actual coefficient-reduction Roos functor,
-with the specified scalar augmentation, on every input.
-
-Source: Stacks Project, Tags 093M, 03EK, 06YT and 08TC;
-Bhatt--Scholze, Definition 3.4.10 and Proposition 3.5.1.
-(blueprint: lem-weil-completed-integral-quotient-model-comparison).
-
-Proof: on a flat K-flat representative P, ordinary scalar extension is again flat
-and K-flat. The normalized completed quotient presentation identifies the target
-principal cokernel with its actual constant residue module. Tensor associativity
-then identifies (P tensor S) tensor B_n with P tensor B_n: on local pure tensors it
-sends (s tensor x) tensor z to residue(s) z tensor x. The inverse sends z tensor x
-to (1 tensor x) tensor z. Balancing makes these maps inverse; equality on presheaf
-tensors followed by sheafification proves the identities for arbitrary sheaf sections.
-The same formulas commute with the quotient transitions and the chain differentials,
-so they give an isomorphism of strict towers. Apply the termwise products and the
-signed mapping cocone. Both cone blocks use that same tower isomorphism; the quotient
-augmentation maps to the displayed scalar augmentation, with zero shifted component.
-The counit of C computes on the extended K-flat complex. Its universal property and
-that of the ordinary change-of-rings model descend this comparison. On the resolving
-subcategory the other side is exactly integralScalarOnGood; its normalized localization
-comparison therefore supplies the displayed natural isomorphism on the full derived
-category. The two-coordinate uniqueness of the strict cone lift identifies its unit
-with any beta satisfying the stated equations. This proof uses no completeness of P,
-no finite basis and no boundedness. It also covers the identity inclusion, P=0 and
-the empty site. -/
+with the specified scalar augmentation, on every input. -/
 theorem completedIntegralQuotientModelComparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

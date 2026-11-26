@@ -77,8 +77,9 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Constant-scalar bilinearity of integral derived internal Hom
 
-Source: Stacks Project, Section 08J7 and Lemma 0A95; the rational internal-Hom
-paragraph of blueprint `prose-03-02`.
+## References
+
+* Stacks Project, Section 08J7 and Lemma 0A95
 -/
 
 @[expose] public section
@@ -147,28 +148,7 @@ private theorem closedHom_bilinear
   ext <;> simp
 
 /-- The ambient integral internal-Hom action is bilinear for the published constant
-valuation-ring action. The first arrow is contravariant; the second is covariant.
-Source: Stacks Project, Section 08J7 and Lemma 0A95; blueprint
-`prose-03-02`, rational internal-Hom paragraph.
-(blueprint: lem-sf-integral-derived-hom-bilinear).
-
-Proof: compute the second input with a K-injective resolution. On the sheaf Hom
-complex, precomposition and postcomposition are additive in their arrows. For a
-constant valuation-ring scalar a, their sectionwise formulas are h ↦ h ∘ (a f)
-and h ↦ (a g) ∘ h. Module-linearity of h and of the differentials identifies these
-with a times the corresponding maps. These identities hold degreewise in the
-products defining the Hom complex, hence also for its differential. Pass to the
-derived category. An arbitrary first-variable derived arrow is a roof, and Hom
-into a K-injective complex inverts its quasi-isomorphism leg by Lemma 0A95.
-Arbitrary second-variable arrows are represented between K-injective complexes;
-the equivalence between their homotopy category and the derived category preserves
-addition and the constant scalar action. The Hom-complex equations therefore give
-separate additivity and linearity for the two derived arrow maps. Conjugating by
-the canonical replacement comparisons preserves these equations since composition
-is linear for the published constant-section action. Package the simultaneous
-arrow action in the two nested linear maps displayed below. No constructibility,
-completeness, flatness or boundedness is assumed, and zero objects and torsion
-inputs obey the same degreewise formulas. -/
+valuation-ring action. The first arrow is contravariant; the second is covariant. -/
 theorem integralDerivedHom_bilinear (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (W : Scheme.{u})

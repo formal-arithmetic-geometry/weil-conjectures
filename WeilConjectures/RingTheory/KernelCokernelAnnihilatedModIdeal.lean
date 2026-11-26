@@ -15,9 +15,13 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 /-!
 # Scalar quasi-inverses and reduction modulo an ideal
 
-Source: Stacks Project, Cohomology of Schemes, Remark 0888, the commutative algebra
-argument and its limit argument
-(blueprint: theorem-finite-etale-covers-proper-henselian--2).
+If the kernel and cokernel of a linear map `u` are killed by `K^t`, then for `f, g ∈ K^t` there
+is a quasi-inverse `h` with `h ∘ u = fg` and `u ∘ h = fg`, natural in `u`, and the kernel and
+cokernel of `u` modulo any ideal `J` are killed by `K^(2t)`.
+
+## References
+
+* [Stacks, Tag 0888]
 -/
 
 @[expose] public section
@@ -30,14 +34,8 @@ open scoped ZeroObject
 
 namespace LinearMap
 
-/-- Source: Stacks Project, Remark 0888, the exact-sequence hypothesis
-(blueprint: theorem-finite-etale-covers-proper-henselian--2).
-
-The kernel/cokernel formulation is equivalent to the exact-sequence formulation.
-Proof: the inclusion of the kernel, `u`, and the projection to `N / range u` give the
-canonical exact sequence (def-weil-pbc-exact-sequence). Conversely, exactness identifies
-`T` with `ker u` and `Q` with `N / range u` by linear isomorphisms, which preserve
-annihilation by every scalar. Thus the two annihilator conditions are equivalent. -/
+/-- The kernel and cokernel of `u` are killed by `K^t` if and only if there is an exact
+sequence `0 → T → M → N → Q → 0` through `u` with `T` and `Q` killed by `K^t`. -/
 theorem ker_coker_annihilated_iff_exists_exact_sequence
     {A : Type u} [CommRing A]
     {M N : Type v} [AddCommGroup M] [Module A M] [AddCommGroup N] [Module A N]
@@ -107,13 +105,8 @@ theorem ker_coker_annihilated_iff_exists_exact_sequence
         rw [p.hom.map_smul, Module.mem_annihilator.mp (hQ hf) (p y)]
 
 
-/-- Source: Stacks Project, Remark 0888, the final scalar-composite argument
-(blueprint: theorem-finite-etale-covers-proper-henselian--2).
-
-Each product `f * g` kills the kernel by the first composite and kills the quotient
-by the range by the second composite. Since `K^(2*t) = K^t * K^t`, ideal multiplication
-extends the annihilation of products to the whole ideal. This is clause (d), isolated
-as a proved private helper so that it can also be used for the reduced map in (c). -/
+/-- If for all `f, g ∈ K^t` a map `v` has a quasi-inverse `k` with both composites equal to
+`f * g`, then the kernel and cokernel of `v` are killed by `K^(2t)`. -/
 private theorem annihilated_of_scalar_composites
     {A : Type u} [CommRing A] (K : Ideal A) (t : ℕ)
     {P : Type z} {R : Type z'} [AddCommGroup P] [Module A P]
@@ -143,31 +136,11 @@ private theorem annihilated_of_scalar_composites
       refine ⟨k y, ?_⟩
       exact congrArg (fun l : R →ₗ[A] R ↦ l y) hk
 
-/-- Source: Stacks Project, Remark 0888, the maps "fg", reduction modulo `J`, and
-compatibility and annihilation used in the limit argument
-(blueprint: theorem-finite-etale-covers-proper-henselian--2).
-
-Proof, following the eight elementary steps of the node:
-1. The exact-sequence convention is given by def-weil-pbc-exact-sequence, and its
-   equivalence with the hypothesis is the preceding statement.
-2. Since `f` kills the class of `y` in the cokernel, `f • y` lies in the range of `u`.
-3. Two lifts differ by an element of `ker u`, killed by `g`, so `g • x` is independent
-   of the lift.
-4. Sums and scalar multiples of lifts lift the corresponding sums and scalar multiples;
-   independence therefore makes the resulting map `h` linear.
-5. Choose `f • m` as the lift of `u m` to obtain `h.comp u = (f*g) • id`.
-   Applying `u` to `g • x` gives the other composite.
-6. In a commuting square, `a x` lifts `f • b y`; the lifting formula for `h'` then
-   gives `a.comp h = h'.comp b`.
-7. For any map `v` admitting the stated two scalar composites, each `f*g` kills its
-   kernel and its cokernel. Finite sums of these products generate `K^(2*t)`, so that
-   ideal kills both modules.
-8. Linearity makes `u` and `h` preserve the submodules `J • ⊤`. Their induced maps
-   on the quotients retain both scalar composites; step 7 proves clause (c).
-The cokernel is the quotient by the range; the reduced map `M/JM → N/JN` is the
-induced map `Submodule.mapQ` on the quotients by `J • ⊤`. Naturality is quantified
-over every map with the lifting formula, hence over the canonical map of clause (a),
-without choosing new definitions. -/
+/-- Let the kernel and cokernel of `u : M → N` be killed by `K^t`. For `f, g ∈ K^t`, every
+`f • y` lifts along `u`, the element `g • x` does not depend on the lift `x`, and the resulting
+map `h : N → M` satisfies `h ∘ u = fg` and `u ∘ h = fg` and is natural in `u`. Moreover the
+reduced map `M/JM → N/JN` has kernel and cokernel killed by `K^(2t)` for every ideal `J`, and so
+does any map admitting such quasi-inverses. -/
 theorem ker_coker_annihilated_mod_ideal
     {A : Type u} [CommRing A]
     {M : Type v} {N : Type v'}

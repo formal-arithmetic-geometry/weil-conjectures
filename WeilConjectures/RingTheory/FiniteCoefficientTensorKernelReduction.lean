@@ -15,8 +15,21 @@ import Mathlib.RingTheory.Smooth.Quotient
 /-!
 # Vanishing of the tensor-map kernel modulo the target maximal ideal
 
-Source: Stacks Project, Remark 07NS (part (4)) and Proposition 07NQ, kernel argument.
-(blueprint: lem-weil-pbc-finite-coefficient-tensor-kernel-reduction)
+For local rings `A₀ → A → B` and `A₀ → C → B` with `A → B` flat, a surjective tensor map
+`F : C ⊗[A₀] A → B` whose closed-fibre kernel on `C` is `m₀ C` has kernel `K` with `K = m_A K`.
+
+## Implementation details
+
+Tensoring the exact sequence `0 → K → D → B → 0` (with `D = C ⊗[A₀] A`) with `A / m_A` keeps
+`K / m_A K → D / m_A D` injective by flatness of `B`. Residue surjectivity reduces every class
+of `D / m_A D` to some `c ⊗ 1`, and the kernel equality shows that `D / m_A D → B / m_A B` is
+injective; hence `K / m_A K = 0`. Finiteness, Noetherianity, completeness and formal smoothness
+are not used.
+
+## References
+
+* [Stacks, Remark 07NS] (4)
+* [Stacks, Tag 07NQ]
 -/
 
 @[expose] public section
@@ -25,14 +38,8 @@ universe u v w z
 
 namespace RingHom
 
-/-- The closed-fibre calculation isolated as quotient vanishing.
-Source: Stacks Project, Remark 07NS (part (4)).
-(blueprint: lem-weil-pbc-finite-coefficient-tensor-kernel-reduction-quotient)
-
-Proof: flat tensor exactness injects the kernel modulo the maximal ideal. Residue
-surjectivity reduces tensors to `c ⊗ 1`; the kernel equality puts such a class in
-the maximal-ideal multiple of the kernel, so its quotient class is zero.
--/
+/-- Under the hypotheses of `finite_coefficient_tensor_kernel_reduction`, every element of the
+kernel `K` of `C ⊗[A₀] A → B` vanishes in `K / m_A K`. -/
 theorem finite_coefficient_tensor_kernel_reduction_quotient
     {A₀ : Type u} {A : Type v} {B : Type w} {C : Type z}
     [CommRing A₀] [CommRing A] [CommRing B] [CommRing C]
@@ -80,26 +87,8 @@ theorem finite_coefficient_tensor_kernel_reduction_quotient
   rw [Ideal.smul_restrictScalars]
   exact hxIK
 
-/-- Flatness and the correct closed-fibre kernel make K/m_A K vanish.
-Source: Stacks Project, Remark 07NS (part (4)); Proposition 07NQ, tensor exactness argument.
-(blueprint: lem-weil-pbc-finite-coefficient-tensor-kernel-reduction)
-
-Proof:
-1. The pure-tensor formula identifies the restrictions of F to A and C with φ and ψ.
-   Put D = C ⊗[A₀] A and K = ker F. Surjectivity gives an exact sequence
-   0 → K → D → B → 0 of A-modules, with B flat over A. Tensoring with k = A/m_A
-   preserves injectivity at K by `LinearMap.lTensor_injective_of_exact_of_flat`.
-   Identify the three tensor products with their quotients modulo m_A.
-2. Residue surjectivity gives A = α(A₀) + m_A. Balancing reduces every pure tensor
-   modulo m_A D to c ⊗ 1; sums do too. If this class maps to zero, ψ(c) lies in
-   m_A B, so the given kernel equality implies c ∈ m₀C. Expand c as a finite
-   sum γ(x_i)c_i, with x_i ∈ m₀. Then c ⊗ 1 = Σ c_i ⊗ α(x_i) lies in m_A D,
-   since α is local. Hence D/m_A D → B/m_A B is injective.
-3. Its kernel is zero; exactness and the injection from K/m_A K therefore force
-   K/m_A K = 0. This means K = m_A K as A-submodules, equivalently
-   K = (m_A D)K as D-submodules. In particular K ≤ (m_A D)K as asserted.
-   Finiteness, Noetherianity, completeness, and formal smoothness are not used.
--/
+/-- If `φ` is flat and `C ⊗[A₀] A → B` is surjective with the correct closed-fibre kernel, then
+its kernel `K` satisfies `K ≤ m_A K`. -/
 theorem finite_coefficient_tensor_kernel_reduction
     {A₀ : Type u} {A : Type v} {B : Type w} {C : Type z}
     [CommRing A₀] [CommRing A] [CommRing B] [CommRing C]

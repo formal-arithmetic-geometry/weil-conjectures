@@ -15,8 +15,20 @@ import WeilConjectures.Topology.TopologicalTerminalResolutionExtComparison
 
 /-! # The topological Leray spectral object and its augmentation
 
-Source: Stacks Project, Tags 015N, 015J and 01F2.
-(blueprint: lem-sc-topological-leray-spectral-object-augmentation)
+The Leray spectral object of a continuous map, with its abutment and interval comparisons and
+the bottom augmentation on cocycles.
+
+## Implementation details
+
+The spectral object comes from the Grothendieck construction for direct image and terminal
+sections; the truncations of the derived direct image give a first-quadrant spectral object,
+and no unbounded K-injective resolution is needed. The comparisons use the Cartan--Eilenberg
+total augmentation; lifts to Cartan--Eilenberg resolutions are homotopic, which makes them
+natural. Pages, transitions and filtrations are extracted separately.
+
+## References
+
+* [Stacks Project, Tags 015N, 015J and 01F2](https://stacks.math.columbia.edu/tag/015N)
 -/
 
 @[expose] public section
@@ -96,30 +108,7 @@ private theorem assemble_firstQuadrant
     exact (S.obj X).isZero₂_of_isFirstQuadrant i j hij n hi
 
 /-- The spectral object before extracting pages or a filtration, with its canonical
-abutment and single-interval comparisons and the bottom augmentation on cocycles.
-
-Source: Stacks Project, Tags 015N, 015J and 01F2.
-(blueprint: lem-sc-topological-leray-spectral-object-augmentation)
-
-Proof: Apply the Grothendieck construction to direct image and terminal sections.
-Direct image preserves injectives; terminal sections is left exact. Mathlib
-supplies the Grothendieck abelian and enough-injectives instances for abelian
-sheaves on the small opens sites; no unbounded K-injective resolution is needed. The truncations
-of the derived direct image give a first-quadrant spectral object, with interval
-cohomology R^p Gamma_X(R^q f_* F). Use the Cartan--Eilenberg total augmentation
-and its acyclic first filtration to compare the total cohomology with Gamma_Z(I).
-These comparisons are natural: lifts of sheaf maps to resolutions and their
-Cartan--Eilenberg resolutions are homotopic, and hence act identically on the
-spectral object and on total cohomology. Identify the interval and abutment functors
-with HX and HZ using hX and hZ. The bottom spectral-object map comes from the
-resolution-degree-zero augmentation. On a resolution cocycle s its comparison
-into f_*I is s followed by phi. The formula for a identifies global sections of
-f_*I with those of I, so a followed by f_*z = s followed by phi identifies the
-resulting cocycle with z. The canonical injective-resolution cohomology comparison
-then gives I.extMk z. Comparison homotopies prove this for every I,J,phi, not just
-the chosen resolutions. No pages, transitions, or filtration factorization are
-asserted here; these belong to the separate generic spectral-object argument.
--/
+abutment and single-interval comparisons and the bottom augmentation on cocycles. -/
 theorem exists_topological_leray_spectral_object_augmentation
     {Z X : TopCat.{u}} (f : Z ⟶ X) [(TopCat.Sheaf.pushforwardAb f).Additive]
     (HX : ℕ → (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u}))

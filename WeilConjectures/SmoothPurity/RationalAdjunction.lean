@@ -18,7 +18,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 Let `ℓ` be a prime, `k` a field of characteristic `p ≠ ℓ`, `E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ`,
 and `f : X ⟶ Y` a morphism of separated `k`-schemes of finite type which is smooth of pure
-relative dimension `d`. This file proves blueprint `proposition-sp-rational`: the lower shriek
+relative dimension `d`. This file proves that the lower shriek
 `Rf_{!,E} : Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` is left adjoint to the twisted pullback
 `K ↦ f_E^* K (d)[2d]`
 (`ProEtale.CondensedRing.ContinuousMapRingObj.nonempty_adjunction_lowerShriek_twistedUpperStar`).
@@ -27,32 +27,29 @@ relative dimension `d`. This file proves blueprint `proposition-sp-rational`: th
 
 The integral Tate twist `𝒪_{E,X}(d)` is `ProEtale.integralTateTwistBoundedConstructible`, and
 `E_X(d)[n]` is its extension of scalars along `𝒪_E ⟶ E`, that is `𝒪_{E,X}(d)[n]` with `ℓ`
-inverted (blueprint `definition-tate-twists--6`):
+inverted:
 `ProEtale.CondensedRing.ContinuousMapRingObj.boundedConstructibleTateTwist`. For a complex `K`,
-`K(d)[2d]` is `K ⊗ᴸ Λ_X(d)[2d]` (blueprint `definition-tate-twists--13`); the twisted pullbacks
+`K(d)[2d]` is `K ⊗ᴸ Λ_X(d)[2d]`; the twisted pullbacks
 `K ↦ f^* K ⊗ᴸ Λ_X(d)[2d]` are `PadicIntegersRingObj.twistedUpperStar` and
 `ContinuousMapRingObj.twistedUpperStar`.
 
 ## The proof
 
-As in the blueprint, the adjunction over `E` is obtained by inverting `ℓ` in the integral one.
+The adjunction over `E` is obtained by inverting `ℓ` in the integral one.
 The extension of scalars `T : Dᵇc(-)⟦𝒪̲_E⟧ ⥤ Dᵇc(-)⟦E̲⟧` is a localization functor
-(`ProEtale.isLocalization_boundedConstructibleExtendScalars`, blueprint
-`proposition-inverting-ell--2`). It commutes with `Rf^!`
+(`ProEtale.isLocalization_boundedConstructibleExtendScalars`). It commutes with `Rf^!`
 (`ProEtale.CondensedRing.boundedConstructibleUpperShriekExtendScalarsIso`), with `Lf^*`
 (`ProEtale.CondensedRing.boundedConstructibleUpperStarExtendScalarsIso`) and with the tensor
 product (it is strong monoidal), hence with the twisted pullbacks
 (`ContinuousMapRingObj.twistedUpperStarExtendScalarsIso`). The integral purity isomorphism
-`f^*_{𝒪_E}(-)(d)[2d] ≅ f^!_{𝒪_E}` (blueprint
-`theorem-smooth-purity-all-admissible-coefficients--2`,
-`PadicIntegersRingObj.nonempty_twistedUpperStarIsoUpperShriek`) therefore gives an isomorphism
+`f^*_{𝒪_E}(-)(d)[2d] ≅ f^!_{𝒪_E}`
+(`PadicIntegersRingObj.nonempty_twistedUpperStarIsoUpperShriek`) therefore gives an isomorphism
 `T ⋙ f^*_E(-)(d)[2d] ≅ T ⋙ f^!_E`, which descends along the localization `T` to an isomorphism
 `f^*_E(-)(d)[2d] ≅ f^!_E`. Composing the adjunction `Rf_{!,E} ⊣ Rf^!_E` with it gives the
 adjunction.
 
-The integral purity isomorphism is the only `sorry` used: it is constructed in the blueprint from
-the adjunction on constructible towers (blueprint `proposition-sp-tower-geometric`) and the
-integral right adjoint built from towers (blueprint `proposition-sp-integral-adjunction`).
+The integral purity isomorphism is the only `sorry` used: mathematically it comes from the
+adjunction on constructible towers and the integral right adjoint built from towers.
 -/
 
 @[expose] public section
@@ -83,17 +80,15 @@ noncomputable def boundedConstructibleTateTwist (d : ℕ) (n : ℤ) :
   (shiftFunctor _ n).obj (integralTateTwistBoundedConstructible ℓ E.1 X.hom d)
 
 /-- The integral twisted pullback `K ↦ f^* K (d)[2d] = f^* K ⊗ᴸ 𝒪_{E,X}(d)[2d]` on bounded
-constructible complexes (blueprint `definition-tate-twists--13`). -/
+constructible complexes. -/
 noncomputable def twistedUpperStar (f : X ⟶ Y) (d : ℕ) :
     Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧ ⥤
       Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧ :=
   boundedConstructibleUpperStar _ ℓ f ⋙ tensorRight (boundedConstructibleTateTwist ℓ E X d (2 * d))
 
-/-- Blueprint `theorem-smooth-purity-all-admissible-coefficients--2`: **smooth purity with
-coefficients in `𝒪_E`**. For `f` smooth of pure relative dimension `d` there is an isomorphism,
-natural in `K ∈ Dᵇc(Y)⟦𝒪̲_E⟧`, `γ_{f,𝒪_E}(K) : f^*_{𝒪_E} K (d)[2d] ≅ f^!_{𝒪_E} K`.
-In the blueprint it is the derived limit of the isomorphism on constructible towers (9.19),
-through the integral right adjoint built from towers (`proposition-sp-integral-adjunction`). -/
+/-- **Smooth purity with coefficients in `𝒪_E`**. For `f` smooth of pure relative dimension `d`
+there is an isomorphism, natural in `K ∈ Dᵇc(Y)⟦𝒪̲_E⟧`,
+`γ_{f,𝒪_E}(K) : f^*_{𝒪_E} K (d)[2d] ≅ f^!_{𝒪_E} K`. -/
 theorem nonempty_twistedUpperStarIsoUpperShriek (f : X ⟶ Y) (d : ℕ)
     [SmoothOfRelativeDimension d f.left] :
     Nonempty (twistedUpperStar ℓ E f d ≅ boundedConstructibleUpperShriek ℓ E.1 f) := by
@@ -108,16 +103,15 @@ variable {X Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
 variable (X) in
-/-- The shifted Tate twist `E_X(d)[n] = 𝒪_{E,X}(d)[n] [1/ℓ]` (blueprint
-`definition-tate-twists--6`), as a bounded constructible complex: the extension of scalars along
-`𝒪_E ⟶ E` of the integral Tate twist. -/
+/-- The shifted Tate twist `E_X(d)[n] = 𝒪_{E,X}(d)[n] [1/ℓ]`, as a bounded constructible
+complex: the extension of scalars along `𝒪_E ⟶ E` of the integral Tate twist. -/
 noncomputable def boundedConstructibleTateTwist (d : ℕ) (n : ℤ) :
     Dᵇc(X.left)⟦Profinite.continuousMapRingObj E.1⟧ :=
   (boundedConstructibleExtendScalars X.left ℓ E).obj
     (PadicIntegersRingObj.boundedConstructibleTateTwist ℓ E X d n)
 
 /-- The twisted pullback `K ↦ f_E^* K (d)[2d] = f_E^* K ⊗ᴸ E_X(d)[2d]` on bounded constructible
-complexes with coefficients in `E` (blueprint `definition-tate-twists--13`). -/
+complexes with coefficients in `E`. -/
 noncomputable def twistedUpperStar (f : X ⟶ Y) (d : ℕ) :
     Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E.1⟧ ⥤
       Dᵇc(X.left)⟦Profinite.continuousMapRingObj E.1⟧ :=
@@ -136,10 +130,8 @@ noncomputable def twistedUpperStarExtendScalarsIso (f : X ⟶ Y) (d : ℕ) :
     Functor.isoWhiskerRight (boundedConstructibleUpperStarExtendScalarsIso ℓ E f) _ ≪≫
     Functor.associator _ _ _
 
-/-- Blueprint `proposition-sp-rational`, as an isomorphism of right adjoints: for `f` smooth of
-pure relative dimension `d`, `f_E^* K (d)[2d] ≅ f^!_E K`, naturally in `K ∈ Dᵇc(Y)⟦E̲⟧`. It is
-the integral purity isomorphism with `ℓ` inverted: both functors commute with the extension of
-scalars `T` along `𝒪_E ⟶ E`, and isomorphisms descend along the localization `T`. -/
+/-- Rational smooth purity as an isomorphism of right adjoints: for `f` smooth of pure relative
+dimension `d`, `f_E^* K (d)[2d] ≅ f^!_E K`, naturally in `K ∈ Dᵇc(Y)⟦E̲⟧`. -/
 theorem nonempty_twistedUpperStarIsoUpperShriek (f : X ⟶ Y) (d : ℕ)
     [SmoothOfRelativeDimension d f.left] :
     Nonempty (twistedUpperStar ℓ E f d ≅ boundedConstructibleUpperShriek ℓ E f) := by
@@ -151,9 +143,9 @@ theorem nonempty_twistedUpperStarIsoUpperShriek (f : X ⟶ Y) (d : ℕ)
     ((twistedUpperStarExtendScalarsIso ℓ E f d).symm ≪≫ Functor.isoWhiskerRight γ _ ≪≫
       boundedConstructibleUpperShriekExtendScalarsIso ℓ E f)⟩
 
-/-- Blueprint `proposition-sp-rational` (and its clause `proposition-sp-rational--1`): **smooth
-purity with coefficients in `E`**. For `E/ℚ_ℓ` finite and `f` smooth of pure relative dimension
-`d`, `Rf_{!,E} ⊣ (K ↦ f_E^* K (d)[2d])` as functors between `Dᵇc(X)⟦E̲⟧` and `Dᵇc(Y)⟦E̲⟧`. -/
+/-- **Smooth purity with coefficients in `E`**. For `E/ℚ_ℓ` finite and `f` smooth of pure
+relative dimension `d`, `Rf_{!,E} ⊣ (K ↦ f_E^* K (d)[2d])` as functors between `Dᵇc(X)⟦E̲⟧`
+and `Dᵇc(Y)⟦E̲⟧`. -/
 theorem nonempty_adjunction_lowerShriek_twistedUpperStar (f : X ⟶ Y) (d : ℕ)
     [SmoothOfRelativeDimension d f.left] :
     Nonempty (boundedConstructibleLowerShriek ℓ E f ⊣ twistedUpperStar ℓ E f d) :=

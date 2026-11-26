@@ -13,8 +13,9 @@ import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Stalks of extension by zero of an abelian sheaf
 
-Source: Stacks Project, Sheaves, Lemma 00A5, parts (2), (3), (5), and Modules,
-Lemma 02UT (blueprint: lem-sc-topological-extension-by-zero-stalks).
+## References
+
+* Stacks Project, Tags 00A5 and 02UT.
 -/
 
 @[expose] public section
@@ -111,24 +112,10 @@ private theorem extension_stalk_outside {X : TopCat.{w}} (U : Opens X)
   exact hp.of_iso (asIso ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{w} x).map
     (toSheafify (Opens.grothendieckTopology X) P))).symm
 
-/-- The stalk is the original stalk on U and zero outside U, naturally in the sheaf.
-The isomorphisms are specified by their values on germs of sections on opens contained
-in U, so they are the canonical maps, rather than arbitrary abstract isomorphisms.
-Under the canonical restriction-stalk identification, the counit induces the identity.
-Source: Stacks, Sheaves, Lemma 00A5 and Modules, Lemma 02UT
-(blueprint: lem-sc-topological-extension-by-zero-stalks).
-
-Proof: (1) Apply `stalkFunctor_map_unit_toSheafify_isIso`, the recorded
-`lem-weil-pbc-stalk-sheafification-space`, to the extension presheaf. This preserves germs.
-(2) Outside U, every neighborhood has no inclusion into U, so its section group is the
-empty direct sum, zero. Its filtered colimit and therefore its sheafified stalk are zero.
-(3) Inside U, neighborhoods contained in U are cofinal. Each has precisely one summand,
-with the original restriction maps. The colimit comparison followed by (1) is the
-canonical stalk isomorphism, with the displayed germ equation.
-(4) All comparisons commute with sheaf morphisms because restrictions, direct-sum
-injections and the sheafification unit do. The presheaf counit is identity on each sole
-summand and zero on an empty sum. Thus its stalk map, after the two canonical germ
-identifications, is identity on F_x. This gives the final compatibility equation. -/
+/-- The stalk is the original stalk on `U` and zero outside `U`, naturally in the sheaf.
+The isomorphisms are the canonical maps, specified by their values on germs of sections on opens
+contained in `U`. Under the canonical restriction-stalk identification, the counit induces the
+identity. -/
 theorem abelianOpenExtensionByZero_stalks (X : TopCat.{w}) (U : Opens X) :
     ∃ e : ∀ (x : U)
         (G : TopCat.Sheaf AddCommGrpCat.{w} ((Opens.toTopCat X).obj U)),

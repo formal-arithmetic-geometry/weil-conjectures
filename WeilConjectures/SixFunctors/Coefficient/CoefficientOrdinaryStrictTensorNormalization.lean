@@ -13,7 +13,12 @@ import WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryReductionPrese
 
 /-! # Strict tensor normalization of reduction from the ordinary quotient model
 
-Source: Stacks 06YS, 06YY, 07A4 and 0941.
+## References
+
+* [Stacks, Tag 06YS]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -41,8 +46,7 @@ attribute [local irreducible] DerivedCategory _root_.instCategoryDerivedCategory
 
 /-- A strict tensor comparison of the ordinary quotient-system functor whose finite
 evaluations are the scalar tensor comparisons gives a reduction tensor comparison with
-the simultaneous representative normalization.
-Source: Stacks 07A4, proof of lemma-pullback-tensor-product, and 0941. -/
+the simultaneous representative normalization. -/
 theorem reductionTensorNormalization_of_quotientTensor (M : OrdinaryModel l E W)
     (R : CoefficientDerivedSystemReduction l E W)
     (b : coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)

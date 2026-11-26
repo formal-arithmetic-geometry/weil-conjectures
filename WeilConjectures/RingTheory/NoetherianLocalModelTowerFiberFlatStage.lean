@@ -13,17 +13,29 @@ import Mathlib.Algebra.Category.Ring.FilteredColimits
 import WeilConjectures.RingTheory.ColimitEventuallyFlat
 import WeilConjectures.RingTheory.FlatSemilinearEquiv
 
+/-!
+# A fibre-flat stage in a Noetherian local model tower
+
+If the limit closed-fibre module is flat, some stage closed-fibre module is flat.
+
+## Implementation details
+
+The quotient directed systems are constructed, their colimits are identified with the closed
+fibre, and `RingTheory.exists_flat_stage` is applied.
+
+## References
+
+* [Stacks, Tag 00R7] (second paragraph of the proof)
+-/
+
 @[expose] public section
 
 universe u v w t
 open scoped TensorProduct
 namespace Module
 
-/-- Existence of one fibre-flat stage in a Noetherian local model tower.
-Source: Stacks Project, Algebra, proof of Tag 00R7, second paragraph.
-The proof constructs the quotient directed systems, identifies their colimits with the
-closed fibre, and applies `RingTheory.exists_flat_stage`.
-(blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-flat-stage) -/
+/-- If the limit closed fibre is flat, some stage of a Noetherian local model tower is
+fibre-flat. -/
 theorem NoetherianLocalModelTower.exists_fiberFlat_stage
     {R : Type u} {S : Type v} {S' : Type w} {M : Type t}
     [CommRing R] [CommRing S] [CommRing S'] [IsLocalRing R] [AddCommGroup M]

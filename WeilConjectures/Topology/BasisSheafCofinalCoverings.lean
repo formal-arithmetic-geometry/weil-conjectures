@@ -13,8 +13,9 @@ public import Mathlib.CategoryTheory.Types.Basic
 /-!
 # Gluing on cofinal coverings of a basis
 
-Source: Stacks Project, Sheaves on Spaces, Tags 009J, 009K and 009L
-(blueprint: lem-weil-pbc-basis-sheaf-cofinal-coverings).
+## References
+
+* Stacks Project, Tags 009J, 009K and 009L.
 -/
 
 @[expose] public section
@@ -27,28 +28,11 @@ open CategoryTheory Opposite TopologicalSpace
 
 namespace TopologicalSpace.Opens
 
-/-- Source: Stacks Project, Tags 009K and 009L.
-(blueprint: lem-weil-pbc-basis-sheaf-cofinal-coverings)
-A presheaf of sets on an intersection-closed basis glues on all coverings if it glues on
+/-- A presheaf of sets on an intersection-closed basis glues on all coverings if it glues on
 cofinally many coverings. Families are indexed by arbitrary types, including empty types.
 The predicate `C U I V` selects the cofinal coverings; it is only used when `V` covers `U`.
 The local notation `meet` is intersection in the basis, and `res` is the functor's restriction.
-
-Proof:
-1. Refine an arbitrary covering `V` of `U` by a selected covering `W`, with refinement map
-   `α`. All pairwise intersections belong to the basis by the intersection hypothesis.
-2. Sections agreeing on `V` agree on `W` by functoriality. Uniqueness of gluing on `W`
-   therefore gives uniqueness on every covering of every basis member.
-3. Given a compatible family `s`, restrict `s (α j)` to `W j`. The resulting family is
-   compatible on intersections by transitivity of restrictions and compatibility of `s`.
-   Gluing on the selected covering gives a section `t` over `U`.
-4. For each `i`, the intersections of `V i` with all `W j` cover `V i`. The restrictions
-   of `t` and `s i` agree there by compatibility and functoriality. Apply the uniqueness
-   from step 2 over `V i` to obtain that `t` restricts to `s i`.
-5. Step 4 gives existence and step 2 gives uniqueness on the original covering.
-For the empty covering of the empty basis member, a refinement has empty index type,
-and the selected gluing condition forces the set of sections to have exactly one element.
-No subsidiary nodes are used: all five steps of the blueprint proof are elementary. -/
+-/
 theorem gluing_of_cofinal_coverings
     {X : Type u} [TopologicalSpace X] (B : Set (Opens X))
     (hB : IsBasis B)

@@ -27,8 +27,7 @@ public import WeilConjectures.TraceFormula.TransverseBoundary.PuncturedTraitChar
 
 # The curves `D'`, `H'`, `B'` of the surface `T'` of a cover datum
 
-Part of blueprint `lemma-tangent-cones-on-cover`. The strict local ring `R'` of `T'` is a
-regular local ring of dimension two
+The strict local ring `R'` of `T'` is a regular local ring of dimension two
 (`AlgebraicGeometry.Scheme.isRegularLocalRing_strictHenselization_of_smoothOfRelativeDimension`)
 with maximal ideal `(ξ, η)`, where a point of `T'` lies over `c` in the first (second) factor iff
 `ξ` (`η`) vanishes at it (`AlgebraicGeometry.Etale.CurveLocalModel.CoverDatum.exists_parameters`).
@@ -606,8 +605,7 @@ lemma exists_mem_b_ne_closedPoint : ∃ P : D.T', D.π P ∈ Set.range M.b ∧
     rwa [e, ← Scheme.Hom.comp_apply D.s', D.s'_fst] at h2
 
 
-/-- The curves `D'`, `H'`, `B'` pass through the closed point of `T'`
-(blueprint `lemma-tangent-cones-on-cover`). -/
+/-- The curves `D'`, `H'`, `B'` pass through the closed point of `T'`. -/
 theorem nonempty_curves' : Nonempty D.D' ∧ Nonempty D.H' ∧ Nonempty D.B' := by
   have key (Z : Set D.T') (hZ : closedPoint (strictHenselization D.s') ∈ Z) :
       Nonempty (reducedClosed (strictHenselization D.s') Z) := by
@@ -620,8 +618,8 @@ theorem nonempty_curves' : Nonempty D.D' ∧ Nonempty D.H' ∧ Nonempty D.B' := 
     key _ (D.π_closedPoint_mem M.horizontal M.y M.y_comp_horizontal),
     key _ (D.π_closedPoint_mem (pullback.diagonal M.f) M.y M.y_comp_diagonal)⟩
 
-/-- The curve `H'` is regular: its ring is a discrete valuation ring (blueprint
-`lemma-tangent-cones-on-cover` (ii): `H'` is the axis `η = 0` of `T'`). -/
+/-- The curve `H'` is regular: its ring is a discrete valuation ring (`H'` is the axis `η = 0` of
+`T'`). -/
 theorem isDiscreteValuationRing_H'' :
     ∃ _ : IsDomain Γ(D.H', ⊤), IsDiscreteValuationRing Γ(D.H', ⊤) := by
   obtain ⟨ξ, η, hm, -, hη⟩ := D.exists_parameters
@@ -646,7 +644,7 @@ theorem isDiscreteValuationRing_H'' :
   exact ⟨inferInstance,
     IsRegularLocalRing.isDiscreteValuationRing _ ((ringKrullDim_eq_of_ringEquiv e).trans hdimq)⟩
 
-/-- The curves `D'` and `B'` have dimension one (blueprint `lemma-tangent-cones-on-cover`). -/
+/-- The curves `D'` and `B'` have dimension one. -/
 theorem ringKrullDim_D'_B'' : ringKrullDim Γ(D.D', ⊤) = 1 ∧ ringKrullDim Γ(D.B', ⊤) = 1 := by
   obtain ⟨ξ, η, hm, hξ, hη⟩ := D.exists_parameters
   obtain ⟨hreg, hdim⟩ := D.regular

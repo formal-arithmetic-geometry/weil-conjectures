@@ -20,8 +20,21 @@ import WeilConjectures.RingTheory.FlatSemilinearEquiv
 
 /-! # Canonical diagrams localized at contracted primes
 
-Source: Stacks Project, Algebra, Tag 02JO, first paragraph; Tag 037D.
-(blueprint: lem-pc-localized-approximation-colimits)
+Localizing compatible ring and module colimit diagrams at the contractions of a prime `q`
+identifies the localized colimits, their scalar actions and the induced map on limits.
+
+## Implementation details
+
+Localization commutes with the ring colimits (`filteredColimitLocalizationAtPrime`). For modules,
+numerators and denominators are represented at a common stage, and zero relations descend to a
+later stage, which gives the group colimit criterion. The scalar action and `ψ` are determined by
+their formulas on coprojections, so they are universal constructions. Flatness is transported
+along the resulting isomorphisms.
+
+## References
+
+* [Stacks, Tag 02JO] (first paragraph)
+* [Stacks, Tag 037D]
 -/
 
 @[expose] public section
@@ -190,32 +203,6 @@ end Comparison
 
 /-- Localization of supplied compatible colimits identifies the canonical localized
 colimits and their scalar actions. No finiteness, base-change, or flatness is assumed.
-
-Source: Stacks Project, Algebra, Tag 02JO, first paragraph, and Tag 037D.
-(blueprint: lem-pc-localized-approximation-colimits)
-
-Proof:
-1. The cocone equation contracts q through η and κ to the contraction of p in A_i,
-   where p is the contraction of q in R. The naturality equations show that the
-   explicitly defined fraction maps give cocones with vertices R_p, S_q, and M_q.
-2. Localization commutes with the ring colimits. Transport the supplied colimit
-   cocones to canonical ones and apply filteredColimitLocalizationAtPrime. The
-   resulting comparison maps are isomorphisms, determined by their fraction formulas.
-3. For modules, represent a numerator and a denominator at a common stage using
-   the supplied colimits. The lifted denominator is outside the contracted prime.
-   If two fractions agree, a multiplier outside q kills their cross difference.
-   Lift this multiplier and descend the zero relation to a later stage using the
-   original additive-group colimit. Semilinearity makes the cross difference there
-   the correct one. Joint surjectivity and eventual equality give the group colimit
-   criterion, so its canonical comparison with M_q is an additive isomorphism.
-4. Transport the S_q action through these canonical comparisons to the group colimit.
-   On fraction representatives the action satisfies the displayed scalar equation.
-   The localized stage maps likewise induce ψ. Its equation on coprojections uniquely
-   determines it; joint surjectivity determines the module action from the scalar
-   equation. Thus these are universal constructions, not arbitrary choices of data.
-5. The comparisons intertwine ψ with the local map R_p to S_q, as checked on stage
-   numerators and then on fractions. Flatness is invariant under these ring and
-   module isomorphisms, giving the displayed equivalence.
 -/
 theorem localized_approximation_colimits
     (R S : Type u) (M : Type v) [CommRing R] [CommRing S] [Algebra R S]

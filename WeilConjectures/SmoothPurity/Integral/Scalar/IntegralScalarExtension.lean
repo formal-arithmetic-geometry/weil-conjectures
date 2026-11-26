@@ -14,9 +14,10 @@ import all WeilConjectures.Algebra.Homology.Finite.FiniteFreeScalarExtension
 
 /-! # Completed integral scalar extension
 
-Source: Weil conjectures blueprint, sec-smooth-purity/sk-def-sf-operations,
-order 1460; Bhatt--Scholze, Definition 3.4.10
-(blueprint: def-weil-integral-scalar-extension).
+## References
+
+* B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, Definition 3.4.10 and
+  Proposition 3.5.1
 -/
 
 @[expose] public section
@@ -37,24 +38,19 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- Completed extension, obtained by the universal localization of the specified
 strict Roos construction on K-flat complexes with flat terms. The construction has
 actual data: its tower, transition maps and diagonal cone maps are those of
-`integralScalarOnGood`, not arbitrary maps between homotopy limits.
-Source: blueprint order 1460; Bhatt--Scholze, Definition 3.4.10
-(blueprint: def-weil-integral-scalar-extension). -/
+`integralScalarOnGood`, not arbitrary maps between homotopy limits. -/
 noncomputable def integralScalarExtension :
     DerivedCategory (integralTowerModules l E Y) ⥤
       DerivedCategory (integralTowerModules l L Y) :=
   (integralScalarExtensionWellDefined l E L ι Y).2.choose
 
-/-- The representative comparison is part of the universal localization datum.
-Source: blueprint order 1460; Bhatt--Scholze, Definition 3.4.10
-(blueprint: def-weil-integral-scalar-extension). -/
+/-- The representative comparison is part of the universal localization datum. -/
 noncomputable def integralScalarExtensionComparison :
     integralOperationsGoodLocalization l E Y ⋙ integralScalarExtension l E L ι Y ≅
       integralScalarOnGood l E L ι Y :=
   (integralScalarExtensionWellDefined l E L ι Y).2.choose_spec.choose
 
-/-- Additivity of the specified completed extension.
-Source: blueprint order 1460 (blueprint: def-weil-integral-scalar-extension). -/
+/-- Additivity of the specified completed extension. -/
 noncomputable instance integralScalarExtension_additive :
     (integralScalarExtension l E L ι Y).Additive :=
   (integralScalarExtensionWellDefined l E L ι Y).2.choose_spec.choose_spec.1
@@ -70,11 +66,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
   (ι : E →ₐ[Padic l] L) (Y : AlgebraicGeometry.Scheme.{u})
 
-/-- The completed coefficient map, uniquely fixed by its finite quotient projections.
-Source: Bhatt--Scholze, Definition 3.4.10
-(blueprint: def-weil-integral-scalar-extension).
-Proof: the quotient inclusion maps commute with reduction. The limit universal property
-therefore gives the completed map; joint monicity of its projections gives uniqueness. -/
+/-- The completed coefficient map, uniquely fixed by its finite quotient projections. -/
 theorem integralCompletedScalarMap_existsUnique :
     ∃! φ : completedIntegralCommRingSheafUnrestricted l E Y ⟶
         completedIntegralCommRingSheafUnrestricted l L Y,
@@ -131,21 +123,13 @@ theorem integralCompletedScalarMap_existsUnique :
   have h := congrArg forgetComm.map ((hψ n.unop).trans (hφ n.unop).symm)
   simpa only [Functor.map_comp, hproj] using h
 
-/-- The actual map of completed coefficient rings, fixed at every finite level.
-Source: Bhatt--Scholze, Definition 3.4.10
-(blueprint: def-weil-integral-scalar-extension). -/
+/-- The actual map of completed coefficient rings, fixed at every finite level. -/
 noncomputable def integralCompletedScalarMap :
     completedIntegralCommRingSheafUnrestricted l E Y ⟶
       completedIntegralCommRingSheafUnrestricted l L Y :=
   (integralCompletedScalarMap_existsUnique l E L ι Y).exists.choose
 
-/-- The ordinary tensor functor with its prescribed object and morphism formulas.
-Source: Bhatt--Scholze, Definition 3.4.10
-(blueprint: def-weil-integral-scalar-extension).
-Proof: use the sectionwise balanced tensor map on each sheaf morphism and then
-sheafify. The tensor identity and composition equations descend by the universal
-property of sheafification. Additivity holds on tensor generators and hence locally
-on all sections. Both objects and maps are specified, so no arbitrary functor is chosen. -/
+/-- The ordinary tensor functor with its prescribed object and morphism formulas. -/
 theorem integralOrdinaryScalarWitness :
     ∃ (F : integralTowerModules.{u, u} l E Y ⥤ integralTowerModules.{u, u} l L Y)
       (h : ∀ N, F.obj N = SheafOfModules.changeOfRings
@@ -167,16 +151,12 @@ theorem integralOrdinaryScalarWitness :
       (integralCompletedScalarMap l E L ι Y)
   exact ⟨F, hobj, hmap, hadd⟩
 
-/-- Ordinary tensor with the finite free completed coefficient extension.
-Source: Bhatt--Scholze, Definition 3.4.10
-(blueprint: def-weil-integral-scalar-extension). -/
+/-- Ordinary tensor with the finite free completed coefficient extension. -/
 noncomputable def integralOrdinaryScalar :
     integralTowerModules.{u, u} l E Y ⥤ integralTowerModules.{u, u} l L Y :=
   (integralOrdinaryScalarWitness l E L ι Y).choose
 
-/-- Additivity of ordinary extension of scalars.
-Source: Bhatt--Scholze, Definition 3.4.10
-(blueprint: def-weil-integral-scalar-extension). -/
+/-- Additivity of ordinary extension of scalars. -/
 noncomputable instance integralOrdinaryScalar_additive :
     (integralOrdinaryScalar l E L ι Y).Additive :=
   (integralOrdinaryScalarWitness l E L ι Y).choose_spec.choose_spec.choose_spec
@@ -260,15 +240,7 @@ private theorem finiteFreeOrdinary_exact
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Finite coefficient extensions are finite free, so their ordinary sheaf tensor is exact.
-Source: Bhatt--Scholze, Proposition 3.5.1
-(blueprint: def-weil-integral-scalar-extension).
-Proof: O_L is finite free over O_E. Choose an integral basis only in the proof. Tensor
-with that finite free module commutes with the finite coefficient limits defining the
-completed sheaf, since finite products and finite sums agree for modules. Thus the
-completed coefficient extension is finite locally free. Sectionwise tensor followed by
-exact sheafification is exact. Its adjunction gives preservation of finite colimits,
-and flatness gives preservation of finite limits. No geometric finiteness is used. -/
+/-- Finite coefficient extensions are finite free, so their ordinary sheaf tensor is exact. -/
 theorem integralOrdinaryScalar_exact :
     PreservesFiniteLimits (integralOrdinaryScalar l E L ι Y) ∧
       PreservesFiniteColimits (integralOrdinaryScalar l E L ι Y) := by
@@ -286,22 +258,18 @@ theorem integralOrdinaryScalar_exact :
     (integralOrdinaryScalar l E L ι Y) (integralOrdinaryScalar_obj l E L ι Y)
     (fun f ↦ integralOrdinaryScalar_map l E L ι Y f)
 
-/-- Exactness on finite limits. Source: Bhatt--Scholze, Proposition 3.5.1
-(blueprint: def-weil-integral-scalar-extension). -/
+/-- Exactness on finite limits. -/
 noncomputable instance integralOrdinaryScalar_finiteLimits :
     PreservesFiniteLimits (integralOrdinaryScalar l E L ι Y) :=
   (integralOrdinaryScalar_exact l E L ι Y).1
 
-/-- Exactness on finite colimits. Source: Bhatt--Scholze, Proposition 3.5.1
-(blueprint: def-weil-integral-scalar-extension). -/
+/-- Exactness on finite colimits. -/
 noncomputable instance integralOrdinaryScalar_finiteColimits :
     PreservesFiniteColimits (integralOrdinaryScalar l E L ι Y) :=
   (integralOrdinaryScalar_exact l E L ι Y).2
 
 /-- Exact ordinary extension, computed termwise on derived complexes. On complete
-objects this is the completed scalar extension; that assertion is recorded separately.
-Source: Bhatt--Scholze, Proposition 3.5.1
-(blueprint: def-weil-integral-scalar-extension). -/
+objects this is the completed scalar extension; that assertion is recorded separately. -/
 noncomputable abbrev integralOrdinaryDerivedScalar :=
   (integralOrdinaryScalar l E L ι Y).mapDerivedCategory
 

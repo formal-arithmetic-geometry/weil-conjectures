@@ -10,8 +10,22 @@ public import WeilConjectures.SixFunctors.OpenProjectionRoos.OpenProjectionRoosC
 
 /-! # Open-factor data in the fixed coefficient presentation
 
-Source: blueprint proposition-composition-base-change-rf-shriek--1, open-factor paragraph;
-Bhatt--Scholze 3.4.10, 6.5.5, 6.5.8; Stacks 099N, 09BN, 0GL1.
+The completed projection and its restriction, realized on the fixed tensor models
+(`openFactorProjectionRealization`).
+
+## Implementation details
+
+The intended proof transports the open slice operations to the fixed operations, identifies
+the ordinary projection with `openProjectionIso` (both inverses are the open-unit transpose on
+pure tensors) and the completed map with `gamma`. Constructible tensor completion makes the
+`chi` maps invertible on constructible pairs; restricting the strict tensor tower and cancelling
+the two `chi` maps gives the restriction equation. No finite evaluation is used to detect
+equality of completed morphisms.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, 3.4.10, 6.5.5, 6.5.8
+* Stacks Project, Tags 099N, 09BN, 09BP, 0GL1
 -/
 
 @[expose] public noncomputable section
@@ -29,27 +43,7 @@ namespace WeilConjectures.OpenFactorCoherence
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Realize the completed projection and restriction on the fixed tensor models.
-Source: Stacks 099N, 09BP and 0GL1; Bhatt--Scholze 6.5.5 and 6.5.8.
-(blueprint: lem-sf-open-factor-projection-realization).
-
-Proof: use the constant-section and quotient-projection normalization to transport
-the open slice operations in q to the fixed operations. The representative equation
-for the ordinary map in hc identifies it with openProjectionIso: both inverses are
-the open-unit transpose, computed on the same total pure tensors. Its Roos
-representative and augmentation equation identify the completed map with gamma;
-Open.unit_commutes and its uniqueness fix the extension/completion comparison.
-The first and shifted coordinates of q.tensorX and q.tensorU are the actual chi
-coordinates, hence constructible tensor completion makes each chi invertible on
-all constructible pairs. Restricting the same entire strict tensor tower gives a
-natural tensorRestriction on ambient pairs. Its augmentation equation is precisely
-restriction_unit. Restrict the completed projection equation in hc. The ordinary
-projection restricts to the identity by its open-unit transpose; the restricted
-Roos product comparison is identity on every projection and both signed summands.
-Cancel the two invertible chi maps to obtain gamma_restriction, with the actual
-restrictionIso of od, whose inverse is fixed by section_unit. No separate finite
-evaluation is used to detect equality of completed morphisms. The construction is
-unchanged for zero inputs and the empty or identity open. -/
+/-- Realize the completed projection and restriction on the fixed tensor models. -/
 theorem openFactorProjectionRealization
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (SX : CoefficientDerivedSystemCalculus l E X)

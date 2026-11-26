@@ -13,12 +13,13 @@ import all WeilConjectures.SmoothPurity.CompletedScalarAssociator.CompletedScala
 
 /-! # Normalized associators for the recorded completed coefficient extensions
 
-Source: Stacks Tags 06YY and 07A4; blueprint Proof (3).
-(blueprint: lem-pur-completed-scalar-associator-exists).
-
 The comparison uses the actual ordinary functors, derived functors and universal
 counits already recorded for completed coefficient sheaves. No new scalar-extension
 model or completion construction is introduced.
+
+## References
+
+* [Stacks: Tags 06YY, 07A4, 07A6]
 -/
 
 @[expose] public noncomputable section
@@ -155,21 +156,7 @@ private theorem counit_hom_ext
     rfl
   exact (cancel_mono (completedScalarCounit l E G (j.comp ι) X P.obj)).mp (h P)
 
-/-- The recorded scalar extensions have normalized ordinary and derived associators.
-Source: Stacks Tags 06YY and 07A4; blueprint Proof (3)
-(blueprint: lem-pur-completed-scalar-associator-exists).
-Proof: completed coefficient maps compose because their finite quotient projections do.
-Bundle the recorded extension functors and universal counits as presentations. Their
-extension-restriction adjunctions compose, and uniqueness of left adjoints gives the
-ordinary and derived associators. The ordinary units are tensors with one, so the
-ordinary comparison sends t tensor (s tensor x) to t*j(s) tensor x. The derived hom
-comparison identifies its representative with the composite of the two universal
-counits and the localized ordinary comparison. Finally, applying the two ordinary
-adjunction hom-equivalences shows that the tensor formula determines the ordinary
-comparison uniquely. On good complexes the direct counit is invertible, so equality
-of the derived components after that counit implies equality of components. Faithful
-precomposition by the good-complex localization then determines the derived map.
-This includes repeated fields and all unbounded complexes. -/
+/-- The recorded scalar extensions have normalized ordinary and derived associators. -/
 private theorem exists_normalized :
     ∃ (o : completedOrdinaryScalarExtension l E F ι X ⋙
         completedOrdinaryScalarExtension l F G j X ≅
@@ -239,13 +226,7 @@ private theorem exists_normalized :
     apply Iso.ext
     exact counit_hom_ext l E X F ι G j d'.hom d.hom h
 
-/-- The recorded scalar associator is uniquely fixed by tensor sections and good counits.
-Source: Stacks Tags 06YY and 07A6; blueprint Proof (3)
-(blueprint: lem-pur-completed-scalar-associator-exists).
-Proof: use the normalized comparison for the actual recorded presentations. Restrict
-its all-complex representative formula to good complexes. The tensor formula fixes
-the ordinary isomorphism, and equality after the direct counit on good complexes
-fixes the derived isomorphism by faithful localization and K-flat counit cancellation. -/
+/-- The recorded scalar associator is uniquely fixed by tensor sections and good counits. -/
 theorem exists_unique :
     let lift := fun (o : completedOrdinaryScalarExtension l E F ι X ⋙
         completedOrdinaryScalarExtension l F G j X ≅

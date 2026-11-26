@@ -62,6 +62,12 @@ Spec A/I --> Spec A
 - `Scheme.isEquivalence_pullback_finiteEtale_and_bijective_cohomology_one_of_henselianRing`:
   both, with the target identified with `H¹(Y₀, M)`.
 
+## Implementation details
+
+The `H¹` comparison uses that both sides classify `M`-torsors, i.e. finite étale schemes with a
+simply transitive `M`-action (`AlgebraicGeometry.Scheme.EtaleTorsor.exists_quotientEquivSheafH`),
+and that these correspond under the finite étale lifting.
+
 ## References
 
 - Stacks Project, Section 59.91, <https://stacks.math.columbia.edu/tag/0A3S>
@@ -89,13 +95,8 @@ namespace AlgebraicGeometry
 * every finite locally constant sheaf of sets `E` is isomorphic to the sheaf of sections of
   a finite étale `T`-scheme.
 
-These are the two object-level halves of the blueprint node. Together with the Yoneda lemma
-(morphisms of the sheaves of sections are `T`-morphisms) they give the equivalence between
-finite étale `T`-schemes and finite locally constant sheaves of sets, and with it the
-statement about finite group actions; neither is stated here.
-(blueprint: `lemma-weil-pbc-finite-locally-constant-etale-equivalence`) 
-(blueprint: lem-galois-flc-representable)
-(blueprint: lemma-weil-pbc-finite-locally-constant-etale-equivalence)
+Together with the Yoneda lemma these give the equivalence between finite étale `T`-schemes and
+finite locally constant sheaves of sets, which is not stated here.
 -/
 theorem Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso (T : Scheme.{u}) :
     (∀ (P : Scheme.{u}) (π : P ⟶ T) [IsFinite π] [Etale π],
@@ -118,8 +119,6 @@ henselian pair, `f : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y` the closed fibre 
 Then restriction `Γ(Y, 𝒪_Y) ⟶ Γ(Y₀, 𝒪_{Y₀})` induces a bijection between the idempotents
 of the two rings; equivalently the open and closed subschemes of `Y₀` are exactly the closed
 fibres of those of `Y`. The restriction map itself need not be bijective.
-(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) 
-(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 -/
 @[stacks 0A0B]
 theorem Scheme.bijective_appTop_idempotent_of_henselianRing
@@ -152,8 +151,6 @@ Then base change along `i` is an equivalence from the category of finite étale 
 to the category of finite étale `Y₀`-schemes. In particular morphisms, and hence finite
 group actions (finitely many automorphisms subject to finitely many equations), lift
 uniquely.
-(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) 
-(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 -/
 @[stacks 0A48]
 theorem Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing
@@ -195,8 +192,6 @@ change along `i` is an equivalence from the category of finite étale `Y`-scheme
 category of finite étale `Y₀`-schemes; in particular morphisms and finite group actions
 lift uniquely. This is the case `I = 𝔪` of
 `AlgebraicGeometry.Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing`.
-(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) 
-(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 -/
 theorem Scheme.isEquivalence_pullback_finiteEtale_of_henselianLocalRing
     {A : Type u} [CommRing A] [HenselianLocalRing A]
@@ -210,12 +205,7 @@ theorem Scheme.isEquivalence_pullback_finiteEtale_of_henselianLocalRing
 /-- **The `H¹` comparison for a finite constant sheaf over a henselian pair.** Let `(A, I)` be
 a henselian pair, `f : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y` the closed fibre over `Spec A/I`.
 For every finite abelian group `M`, restriction `H¹(Y, M) ⟶ H¹(Y₀, M)` along `i` is
-bijective. Both sides classify `M`-torsors, i.e. finite étale schemes with a simply
-transitive `M`-action (`AlgebraicGeometry.Scheme.EtaleTorsor.exists_quotientEquivSheafH`),
-and these correspond under the finite étale lifting
-`AlgebraicGeometry.Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing`.
-(blueprint: `theorem-finite-etale-covers-proper-henselian--3`) 
-(blueprint: theorem-finite-etale-covers-proper-henselian--3)
+bijective.
 -/
 theorem Etale.bijective_cohomologyMap_one_constantSheaf_of_henselianRing
     {A : Type u} [CommRing A] (I : Ideal A) [HenselianRing A I]

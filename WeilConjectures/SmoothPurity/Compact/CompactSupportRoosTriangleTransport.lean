@@ -9,8 +9,12 @@ public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 
 /-! # CompactSupportRoosTriangleTransport
 
-A proved generic calculation for the compact-support finite action.
-(blueprint: lem-weil-compact-support-roos-triangle-transport).
+Transport of a derived-limit (Roos) triangle along compatible isomorphisms of towers and
+vertices, used for the compact-support finite action.
+
+## References
+
+* [Stacks Project, Tag 08TC](https://stacks.math.columbia.edu/tag/08TC)
 -/
 
 @[expose] public noncomputable section
@@ -18,13 +22,9 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace WeilConjectures
 
-/-- Transport of a specified Roos triangle through compatible tower and vertex isomorphisms.
-Source: Stacks Project, Derived limits, Tag 08TC; triangle isomorphism axioms.
-(blueprint: lem-weil-compact-support-roos-triangle-transport).
-Proof: Construct the product isomorphism from the levelwise isomorphisms. The two
-compatibilities give the first two squares of an isomorphism of Roos triangles;
-transport the connecting map through the product and vertex isomorphisms.
-Distinguished triangles are invariant under this isomorphism. -/
+/-- If `K ⟶ ∏ X` is part of a derived-limit triangle for the tower `X`, and `X ≅ Y`, `K ≅ L`
+are compatible isomorphisms of towers and cones, then `L ⟶ ∏ Y` is part of a derived-limit
+triangle for the tower `Y`. -/
 theorem compactSupportRoosTriangleTransport {C : Type*} [Category C] [HasZeroObject C]
     [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]
     [Pretriangulated C] {X Y : ℕ → C}

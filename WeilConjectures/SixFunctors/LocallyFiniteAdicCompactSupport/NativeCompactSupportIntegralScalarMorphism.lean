@@ -10,7 +10,12 @@ public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.Native
 
 import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeCompactSupportIntegralScalarMorphismNormalization
 
-/-! # Integral scalar-mate steps for native compact support -/
+/-! # Integral scalar-mate steps for native compact support
+
+## References
+
+* [Bhatt--Scholze, Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -40,23 +45,20 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   (P : CoefficientConstruction l (ULift.{u} (PadicAlgCl l)) D hl (f := f))
   (c : Compactification f)
 
-/-- Source of the finite-stage comparison, before extending morphisms to fractions.
-Source: the finite-stage inclusion (blueprint: lem-sf-native-integral-scalar-morphism). -/
+/-- Source of the finite-stage comparison, before extending morphisms to fractions. -/
 abbrev finiteSource (target : Realization l Y)
     (stage : StageAction l D hl P c) (E : Index l (PadicAlgCl l)) :=
   GeneralAlgebraicallyClosedCoefficients.inclusion
     (l := l) (Ω := PadicAlgCl l) (Y := X) E ⋙ stage.system.functor ⋙ target.J
 
-/-- Target of the finite-stage comparison.
-Source: the finite-stage inclusion (blueprint: lem-sf-native-integral-scalar-morphism). -/
+/-- Target of the finite-stage comparison. -/
 abbrev finiteTarget (source : Realization l X)
     (E : Index l (PadicAlgCl l)) :=
   GeneralAlgebraicallyClosedCoefficients.inclusion
     (l := l) (Ω := PadicAlgCl l) (Y := X) E ⋙ source.J ⋙ actual l c
 
-/-- The original six-arrow formula at one integral finite-Tor input.
-Source: Bhatt--Scholze, Remark 6.8.15; the existing IntegralNormalization definition.
-(blueprint: lem-sf-native-integral-scalar-morphism). -/
+/-- The original six-arrow formula of `IntegralNormalization` at one integral finite-Tor
+input. -/
 def IntegralComponent [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)
     (change : ∀ E : Index l (PadicAlgCl l),
@@ -69,22 +71,8 @@ def IntegralComponent [G : NativeGeometry.{u} l]
     ((PurCompactSupport.comparison (change E) c).app K.obj) m
 
 /-- Construct the integral natural morphism, with its typed scalar-mate factorization.
-This theorem asserts neither invertibility nor naturality on rationalized arrows.
-Source: Bhatt--Scholze, Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15;
-steps 4 and 8 of the native compact-support finite comparison plan.
-(blueprint: lem-sf-native-integral-scalar-morphism).
-
-Proof: restrict the StageAction inclusion comparison to integral objects and compose
-with P.ring.rationalLeft. The recorded rational compact-support operation is the raw
-localization of its integral functor. The target integral realization followed by the
-inverse of sfQcqsCompactSupportRealization therefore gives the first three arrows of
-the original formula. Apply the proper/open scalar mate, then compact support of the
-inverse source integral realization and inverse operationTransport. All operations and
-comparisons are natural on integral derived morphisms, giving tau. The factors before
-and after the scalar mate are composites of isomorphisms; group them as b and d.
-The coefficient equalities hs and ht transport their endpoints without changing maps.
-Unpack their definitions to get exactly the six-arrow IntegralComponent formula.
-This construction uses the specified compactification and quotient transitions. -/
+Its components are the six-arrow `IntegralComponent` formula, factored as an isomorphism,
+the proper/open scalar mate, and an isomorphism. -/
 theorem native_integral_scalar_morphism [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)
     (stage : StageAction l D hl P c)

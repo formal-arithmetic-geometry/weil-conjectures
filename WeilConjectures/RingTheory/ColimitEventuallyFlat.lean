@@ -23,9 +23,26 @@ import WeilConjectures.RingTheory.ColimitMaximalKernelDescent
 /-!
 # Flatness at a stage of a directed colimit
 
-Source: Stacks Project, Algebra, Tag 00R6 (lemma-colimit-eventually-flat), with the
-system of Tag 00QX and the hypotheses used by Tag 00MO.
-(blueprint: lem-weil-pbc-colimit-eventually-flat)
+Let `A → B` be a directed system of local homomorphisms of noetherian local rings and `N` a
+compatible system of finite `B`-modules, with transition maps satisfying the localization and
+base-change hypotheses of the local flatness criterion. If the colimit module is flat over the
+colimit of `A`, then some stage `N i` is flat over `A i` (`RingTheory.exists_flat_stage`).
+
+## Implementation details
+
+Fix a stage `i`. The kernel of the multiplication map `mᵢ ⊗ Nᵢ → Nᵢ` is finite, so it has
+finitely many generators. Flatness of the colimit writes their images as finite sums in the
+kernel of the multiplication map over the colimit; these finitely many relations descend to a
+common later stage `j`, where the generators, and hence the whole kernel, map to zero in
+`mᵢ A_j ⊗ N_j`. The local flatness criterion then gives flatness of `N_j`, transported through the
+tensor base-change isomorphism. This isomorphism uses the factors in the opposite order to
+[Stacks, Tag 00QX]; tensor symmetry identifies it with the canonical map there.
+
+## References
+
+* [Stacks, Tag 00R6]
+* [Stacks, Tag 00QX]
+* [Stacks, Tag 00MO]
 -/
 
 @[expose] public section
@@ -37,40 +54,8 @@ open scoped TensorProduct
 
 namespace RingTheory
 
-/-- A flat colimit is flat at some stage.
-The forgetful functor to sets preserves the specified colimit of `A`.
-Source: Stacks Project, Algebra, Tag 00R6,
-with Noetherian local stages and localization as in Tag 00MO.
-(blueprint: lem-weil-pbc-colimit-eventually-flat)
-
-Proof:
-1. Fix an index and restrict to the cofinal directed set above it, using
-   `lem-weil-pbc-colimit-initial-full-subcategory`.
-2. The kernel of the maximal-ideal multiplication map is finite over the stage's
-   second ring, by `lem-weil-pbc-noetherian-submodule-finite`; choose generators.
-3. Regard the ring and group colimits as modules over the fixed first-stage ring,
-   using `lem-weil-pbc-filtered-colimit-modules-criterion`,
-   `lem-weil-pbc-filtered-colimit-algebras-elementwise`,
-   `lem-weil-pbc-filtered-colimit-rings-zero`, and
-   `lem-weil-pbc-filtered-colimit-modules-elementwise`. Tensoring with its maximal
-   ideal commutes with these colimits by `lem-weil-pbc-tensor-commutes-with-colimits`.
-4. Apply `lem-weil-pbc-flat-tensor-exact` to the kernel of the multiplication map
-   from the maximal ideal tensored with the limit ring. Flatness of the limit
-   module writes the images of the chosen generators as finite sums of kernel
-   elements tensored with module elements.
-5. Descend those finitely many elements to a common stage, then descend their
-   vanishing and equality using `lem-weil-pbc-filtered-colimit-rings-zero` and
-   `lem-weil-pbc-filtered-colimit-modules-elementwise`.
-6. The generators, and hence the whole kernel by scalar compatibility, map to
-   zero in the extended maximal ideal tensored with the later-stage module.
-7. Apply `lem-weil-pbc-flat-another-variant-local-criterion`: the localization
-   hypothesis holds, the residue-field module is flat by
-   `lem-weil-pbc-module-over-field-flat`, and the kernel map is zero. Transport
-   flatness through the specified tensor base-change isomorphism.
-
-The tensor base-change isomorphism uses the factors in the opposite order to
-Tag 00QX; tensor symmetry identifies it with that tag's canonical map.
--/
+/-- A flat colimit is flat at some stage: if the colimit of the modules `N i` is flat over the
+colimit of the local rings `A i`, then some `N i` is flat over `A i`. -/
 theorem exists_flat_stage
     {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]
     (A : Λ ⥤ CommRingCat.{v}) (B : Λ ⥤ CommRingCat.{w})

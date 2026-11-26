@@ -22,8 +22,20 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
 /-! # Acyclicity after restriction of strict coefficient systems
 
-Source: Stacks Project, Cohomology on Sites, Tag 0D6E, on sequence ringed topoi.
-(blueprint: lem-pur-completed-coefficient-system-restriction-acyclic).
+Restricting a K-injective strict coefficient system gives an acyclic input for the tower
+direct image.
+
+## Implementation details
+
+Strict systems are presented as module sheaves over the quotient-ring diagram on the sequence
+site, so that `systemRestriction` becomes scalar restriction along the map from the constant
+completed ring diagram, retaining every transition. The ringed-topos derived composition
+theorem is applied to this exact restriction followed by the tower direct image. The result
+is acyclicity of the restriction; it is not claimed that restriction preserves K-injectives.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 0D6E, on sequence ringed topoi.
 -/
 
 @[expose] public noncomputable section
@@ -347,27 +359,8 @@ private theorem restricted_system_sections_quasiIso (W : Scheme.{t})
       ((ev.mapHomologicalComplex (.up ℤ)).map ((ER.mapHomologicalComplex (.up ℤ)).map j))
   exact hq'
 
-/-- Restricting a K-injective system gives an acyclic input for tower direct image.
-This concerns a fixed derived unit, and constructs no system direct-image functor.
-Source: Stacks Project, Tag 0D6E, lemma-derived-pushforward-composition, applied to
-restriction along the completed projection diagram followed by direct image
-(blueprint: lem-pur-completed-coefficient-system-restriction-acyclic).
-
-Proof: Present strict systems as module sheaves over the quotient-ring diagram on
-the sequence site. The completed projections give a map from the constant completed
-ring diagram to the quotient-ring diagram. The generator normalization of finiteIso,
-together with systemEvaluation_identity, systemTransition and systemMap, identifies
-source.systemRestriction with scalar restriction along this map. This identification
-retains every transition, rather than just identifying the separate evaluations.
-Transport to an equivalent small site in the coefficient universe. Apply the normalized
-ringed-topos derived composition theorem to this scalar-restriction morphism followed
-by the completed-module tower direct image. At a K-injective system I, the unit for
-the composite is invertible. The restriction is exact, so its unit is invertible on
-all complexes. In the composition-unit equation, cancel this latter unit and the
-composition isomorphism. The tower-image unit at the restricted I is consequently
-invertible. Finally the unique isomorphism between normalized right derived models
-intertwines this unit with towerImage.unit; transport back to the original sites.
-This uses acyclicity, and does not assert that restriction preserves K-injectives. -/
+/-- Restricting a K-injective system gives an acyclic input for tower direct image: the
+tower-image unit at the restricted system is an isomorphism. -/
 theorem systemRestriction_push_acyclic {X Y : Scheme.{t}} (f : X ⟶ Y)
     (source : SystemRestrictionData l E X)
     (c : R l E Y ⟶ (ringPush.{t, u} f).obj (R l E X))

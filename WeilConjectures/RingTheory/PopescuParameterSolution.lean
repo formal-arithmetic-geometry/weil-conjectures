@@ -17,8 +17,19 @@ import WeilConjectures.RingTheory.PopescuParameterCoefficients
 /-!
 # Parameters and coefficient solutions for the explicit standardizer
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 07FJ,
-items item-NP through item-choose-deltai and item-eighth-resolve.
+We choose parameters and a coefficient solution for the explicitly presented standardizer
+algebra `B`.
+
+## Implementation details
+
+No improved presentation `C₀` is an input or an output; the conclusion concerns `B` itself and
+can therefore be combined with any improved presentation retracting onto `B`. The coefficient
+solution `D'` lives in `Type (max u v)`, independently of `w`, via finite polynomial models.
+The case `d = 0` is included.
+
+## References
+
+* [Stacks, Tag 07FJ] (proof)
 -/
 
 @[expose] public section
@@ -112,52 +123,7 @@ private theorem presentation_ringHom_ext
   exact DFunLike.congr_fun heval x
 
 /-- Choose parameters and a coefficient solution for the explicitly presented
-standardizer. No improved presentation C₀ is an input or an output; the conclusion
-concerns B itself and thus can be combined with any improved presentation retracting
-onto B.
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 07FJ,
-items item-NP, item-choose-pii, item-modify-pii, item-choose-deltai,
-item-set-map-R, item-sixth-resolve, item-eighth-resolve, and item-done.
-(blueprint: lem-weil-pbc-popescu-parameter-solution).
-
-Proof: Put L = Λ_q and d = dim L; geometric regularity makes L regular, so d is
-also the minimal number of generators of its maximal ideal, the supplied hd.
-Set e = 8c and n = N + de. Apply 07FH to the images of finite algebra generators
-of A modulo m_L^n. This gives a polynomial base k[y], its prime p, a flat local
-map P₀ = k[y]_p → L with pL = m_L, and an essentially smooth local Artinian
-solution D₀ over P₀/p^n, flat locally over L/m_L^n. The last map is faithfully
-flat and injective, so the generator images define A → D₀. The flat height
-formula identifies dim P₀ with d. Choose parameters u_i in p generating the
-maximal ideals of P₀ and L. Put R = k[y,t_0,...,t_(d-1)] and map k[x] to R by
-X_i ↦ u_i t_i. Apply Ogoma successively to the modules R/((u_jt_j)^e:j<i),
-rescaling u_i by elements outside p, to equalize the first and square kernels.
-For each i, faithful-flat contraction puts u_i^N in (a_j)D₀. Lift coefficients
-into L, correct the error in m_L^(n-N), and multiply by u_i^N to obtain
-u_i^(2N) = sum_j a_j w_j with the correct images modulo m_L^n. Clear the finitely
-many denominators, and multiply by a further denominator killing the equality's
-error in Λ. This yields (s u_i)^(2N) = sum_j a_j μ_j in Λ. Use 07FI to enlarge D₀
-until a positive power of s lies in it, rescaling μ_j. Ogoma on
-Λ/((δ_ju_j)^e:j<i) and a second use of 07FI supply δ_i outside q and λ_ij with
-(δ_i u_i)^(2N) = sum_j a_j λ_ij, the first/square kernel equality, and both
-δ_i and λ_ij in the enlarged coefficient solution D'. Earlier conditions persist.
-Map R to Λ by t_i ↦ δ_i. Map B to Λ using its presentation P, taking x_i to
-δ_i u_i and z_ij to λ_ij; this respects the displayed relations and agrees with α
-on A. Take I₀ = p^nR and K = m_L^n. In Q all t_i are units, so the pigeonhole
-bound m_L^(d(e-1)+1) ⊆ (u_i^e)L and its counterpart in P₀ prove the three ideal
-containments, since n = N + de is positive. Put E = D'[t]. The map R/I₀ to
-(P₀/p^n)[t] is a localization. Polynomial extension of D' is essentially smooth
-by base change, and composition makes E essentially smooth over R/I₀.
-Map B to E by sending A to its image in D', x_i to u_i t_i and z_ij to
-bar(λ_ij)t_i^(2N)bar(δ_i)^(-2N). The δ_i are units because D' → L/K is local;
-faithful-flat injectivity checks all relations in D'[t]. Evaluation t_i ↦ δ_i
-and the coefficient map D' → L/K give b. These maps agree with B → Λ → L/K
-on coefficients and every generator of P. Replace the parameter list (u_it_i)^c
-by that list with a final zero. The two kernel equalities persist for positive
-powers by induction, and the appended zero contributes no generator to J.
-Finite polynomial models for the smooth coefficient algebras and their
-localizations give D' in Type(max u v), independently of w. Identify R with a
-polynomial algebra on Fin m by reindexing its finitely many variables. For d = 0,
-m_L = 0, n = N, J = 0 and the same construction and containments apply. -/
+standardizer. -/
 theorem exists_popescu_parameter_solution
     {k : Type u} {A : Type v} {Λ : Type w}
     [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]

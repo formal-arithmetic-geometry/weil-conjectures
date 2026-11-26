@@ -24,7 +24,7 @@ In particular, if `Ω[A⁄R]` is free of rank `d`, then `Ω[A[X_1, …, X_e]⁄R
 * `KaehlerDifferential.mvPolynomialKaehlerEquiv`: the corresponding linear equivalence.
 * `KaehlerDifferential.mvPolynomialBasisOfBasis`: a basis of `Ω[A[X_1, …, X_e]⁄R]` indexed by
   `Fin (d + e)` from a basis of `Ω[A⁄R]` indexed by `Fin d`.
-* `KaehlerDifferential.mvPolynomial_kaehler_bijective_and_basis`: the blueprint statement.
+* `KaehlerDifferential.mvPolynomial_kaehler_bijective_and_basis`: the combined statement.
 -/
 
 @[expose] public section
@@ -104,7 +104,7 @@ noncomputable def mvPolynomialBasisOfBasis {d : ℕ} (b : Basis (Fin d) A Ω[A�
 `e : ℕ` and `B = A[X_1, …, X_e]`. Then the `B`-linear map
 `(B ⊗[A] Ω[A⁄R]) × Bᵉ → Ω[B⁄R]`, `(b ⊗ dα, (b_j)) ↦ b dα + ∑ b_j dX_j`, is bijective; in
 particular, if `Ω[A⁄R]` is a free `A`-module of rank `d`, then `Ω[B⁄R]` is a free `B`-module of
-rank `d + e`. (blueprint: `theorem-finite-etale-covers-proper-henselian--2`) -/
+rank `d + e`. -/
 theorem mvPolynomial_kaehler_bijective_and_basis (e : ℕ) :
     Function.Bijective (mvPolynomialKaehlerMap R A (Fin e)) ∧
       ∀ d : ℕ, Nonempty (Basis (Fin d) A Ω[A⁄R]) →

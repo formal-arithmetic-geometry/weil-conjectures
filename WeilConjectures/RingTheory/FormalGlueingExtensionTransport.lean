@@ -13,8 +13,19 @@ import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 /-!
 # Transport of glueing maps along a localized isomorphism
 
-Source: Stacks Project, More on Algebra, Proposition 05ER.
-(blueprint: lem-weil-pbc-formal-glueing-extension-transport).
+A morphism `Can(H) → X` of formal glueing data is transported along a map `H → E` which is
+bijective after each localization, producing a morphism `Can(E) → X` with bijective components.
+
+## Implementation details
+
+The prime map is `θ` and each chart map is `ψ.chart i` composed with the inverse of the
+localized `j`. The compatibilities are checked after precomposing with bijective localizations
+of `j`, using naturality of the comparison and interchange maps. Only the canonical objects of
+`Can` enter, not its action on morphisms.
+
+## References
+
+* [Stacks, Tag 05ER]
 -/
 
 @[expose] public section
@@ -136,25 +147,10 @@ private theorem canonical_piece {R : Type u} [CommRing R]
   ext r x
   exact IsScalarTower.algebraMap_smul (Localization.Away a) r x
 
-/-- Transport the chart maps across localizations of an extension injection.
-Source: Stacks Project, More on Algebra, Proposition 05ER, third paragraph.
-(blueprint: lem-weil-pbc-formal-glueing-extension-transport).
-Proof: identify the restricted canonical chart with the localized R-module by
-module extensionality and algebraMap_smul. The bundled object equalities transport
-the component maps, and the heterogeneous equalities identify the structural maps.
-Define the prime map to be theta and each chart map to be psi.chart i
-composed with the inverse of j localized at f i. The chart maps are bijective.
-To check the prime compatibility, precompose with the localization of the scalar
-extension of j. It is bijective because comparison identifies it with the scalar
-extension of the bijective localized j. Naturality of comparison and the equation
-theta composed with the scalar extension of j equals psi.prime reduce both sides
-to psi's prime compatibility. For the overlap compatibility, precompose with j
-localized first at f i and then at f k. Localization preserves inverses, so this
-map is bijective. Naturality of interchange reduces both sides to psi's overlap
-compatibility. These two equations define the required morphism. The prime map
-is bijective by theta, and the chart maps are composites of bijections.
-No condition on Can's morphism maps is used: only its canonical object maps enter.
-For an empty chart set only the prime map and its bijectivity remain. -/
+/-- Transport the chart maps across localizations of an extension injection: given
+`ψ : Can(H) → X` with bijective chart maps, a linear map `j : H → E` which is bijective after
+each localization, and `θ : S ⊗ E ≃ X.M'` with `θ ∘ (S ⊗ j) = ψ.prime`, there is a morphism
+`Can(E) → X` whose prime and chart maps are bijective. -/
 theorem exists_extension_transport {R : Type u} {S : Type v}
     [CommRing R] [CommRing S] (φ : R →+* S) (t : ℕ) (f : Fin t → R)
     (Can : ModuleCat.{max u v w} R ⥤ Data.{u, v, max u v w} φ f)

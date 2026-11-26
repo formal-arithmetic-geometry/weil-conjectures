@@ -16,8 +16,18 @@ import Mathlib.RingTheory.Finiteness.Small
 /-!
 # Smooth presentation with free conormal module
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07CE, clause (1) for `a = 1`, smooth case
-(blueprint: lem-weil-pbc-improve-presentation-smooth-conormal-free).
+A smooth algebra `A` is a retract of a smooth `A`-algebra `C` that admits a polynomial
+presentation with free conormal module.
+
+## Implementation details
+
+`C` is the symmetric algebra of the (finite projective) conormal module of a finite presentation
+of `A`, shrunk to the universe of `A`. The presentation of `C` evaluates the first variables at
+the generators of `A` and the remaining ones at the degree-one classes of the relations.
+
+## References
+
+* [Stacks, Tag 07CE]
 -/
 
 @[expose] public section
@@ -27,22 +37,8 @@ universe u v
 namespace Algebra
 
 /--
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07CE, clause (1) for `a = 1`, with
-`R → A` smooth (blueprint: lem-weil-pbc-improve-presentation-smooth-conormal-free).
-
-Proof. Choose a finite polynomial presentation `P` of `A`. Mathlib's formally smooth
-cotangent criterion splits its conormal differential into the finite free cotangent space,
-so the conormal module is projective. The finite set of relations makes it finite.
-Shrink this module to the universe of `A`, preserving its module structure and the linear
-equivalence, and construct `C` as its symmetric algebra. The finite-projective symmetric
-algebra lemma makes `A → C` smooth; the lift of the zero linear map gives its augmentation
-`ρ : C →ₐ[A] A`, which is a retraction by the algebra-homomorphism commutation equation.
-Evaluate the first `n` polynomial variables at the images of `P.val` and the remaining `m`
-at the degree-one images of its relations. The relation classes span the conormal module.
-Submodule induction shows that all degree-one elements belong to the range, and symmetric
-algebra induction proves that this evaluation is surjective. Finally,
-lem-weil-pbc-symmetric-conormal-free-presentation gives freeness of the conormal module of
-this explicit map. Take `J` to be its kernel.
+A smooth `R`-algebra `A` is a retract of a smooth `A`-algebra `C` admitting a surjection
+`R[x₁, …, xₘ] → C` whose kernel `J` has free conormal module `J/J²`.
 -/
 theorem improve_presentation_smooth_conormal_free
     (R : Type u) [CommRing R] (A : Type v) [CommRing A] [Algebra R A]

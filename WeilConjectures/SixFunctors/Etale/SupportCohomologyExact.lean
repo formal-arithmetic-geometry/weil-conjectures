@@ -24,7 +24,7 @@ sheaves
 
 is a short exact sequence of complexes. The resulting distinguished triangle
 `RΓ_Z(X, K) ⟶ RΓ(X, K) ⟶ RΓ(U, K) ⟶ RΓ_Z(X, K)[1]`, with a connecting map natural in `K`, and the
-long exact sequence of cohomology with support (blueprint `thm-pur-with-support-exactness`) are
+long exact sequence of cohomology with support are
 `AlgebraicGeometry.Etale.sectionsWithSupportTriangle` and
 `AlgebraicGeometry.Etale.exact_derivedSupportCohomology_sectionsWithSupportTriangle`
 (`WeilConjectures.SixFunctors.Etale.SupportCohomologyTriangle`).

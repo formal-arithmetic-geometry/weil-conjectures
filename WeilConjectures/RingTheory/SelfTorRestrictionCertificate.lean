@@ -15,8 +15,14 @@ public import Mathlib.CategoryTheory.Monoidal.Tor
 
 /-! # Resolution certificate for restriction of algebraic self-Tor
 
-Source: Stacks Project, Tags 00LS and 06YH.
-(blueprint: new-t2-self-tor-restriction-certificate). -/
+We define when a map `Tor_n^A(A/I, A/I) → Tor_n^B(B/J, B/J)` along a ring map `φ : A → B` is
+the restriction map, by a certificate in terms of augmented projective resolution comparisons.
+
+## References
+
+* [Stacks, Tag 00LS]
+* [Stacks, Tag 06YH]
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -27,9 +33,7 @@ namespace AlgebraicGeometry
 
 /-- A restriction map is induced by augmented resolution comparison and quotient
 change of scalars. The condition on all cycles fixes the entire map, including
-Tor classes not in the image of the conormal exterior power.
-Source: Stacks Project, Tags 00LS and 06YH.
-(blueprint: new-t2-self-tor-restriction-certificate). -/
+Tor classes not in the image of the conormal exterior power. -/
 def IsSelfTorRestrictionMap (A B : Type u) [CommRing A] [CommRing B]
     (I : Ideal A) (J : Ideal B) (φ : A →+* B) (n : ℕ)
     (q : (((Tor' (ModuleCat.{u} A) n).obj (ModuleCat.of A (A ⧸ I))).obj

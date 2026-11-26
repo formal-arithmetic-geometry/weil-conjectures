@@ -18,8 +18,23 @@ import WeilConjectures.RingTheory.FormalGlueingEssentialSurjectivity
 /-!
 # The canonical functor for formal glueing
 
-Source: Stacks Project, More on Algebra, Remark 05EL and Proposition 05ER
-(blueprint: prop-weil-pbc-formal-glueing-equivalence).
+For a ring map `R → S` and `f₁, …, fₜ ∈ R`, the canonical functor from `R`-modules to formal
+glueing data is constructed; if `R → S` is flat and induces an isomorphism modulo
+`I = (f₁, …, fₜ)`, it is fully faithful and essentially surjective.
+
+## Implementation details
+
+Faithfulness follows from injectivity of the first map in the exact formal glueing complex, and
+fullness is proved separately. For essential surjectivity, a glueing datum is compared with the
+canonical datum of its module `H⁰` of compatible families; the kernel and cokernel of the
+comparison on the prime module are `I`-power torsion, and flat base change and descent of
+torsion modules and extensions produce a module whose canonical datum is isomorphic to the given
+one.
+
+## References
+
+* [Stacks, Tag 05EL]
+* [Stacks, Tag 05ER]
 -/
 
 @[expose] public section
@@ -32,54 +47,8 @@ namespace FormalGlueing
 
 /-- The canonical comparison and interchange maps are isomorphisms, and the prescribed
 objects and maps form a functor. Under flatness and the quotient isomorphism this functor
-is fully faithful and essentially surjective. Heterogeneous equalities identify structural
-maps after the preceding equalities of their bundled source and target modules; they
-specify the actual canonical maps, not merely isomorphic choices of those maps.
-Source: Stacks Project, More on Algebra, Remark 05EL and Proposition 05ER
-(blueprint: prop-weil-pbc-formal-glueing-equivalence).
-
-Proof (the node's eleven steps):
-1. The interchange map has inverse the reverse interchange; comparison commutes with
-   extension of scalars [lem-weil-pbc-formal-glueing-canonical-maps]. The square for the
-   canonical object takes each double fraction of a pure tensor to the same fraction
-   of that tensor. The cocycle takes each triple fraction to the fraction in reverse
-   order on both sides. Additivity extends the square from pure tensors to all elements.
-2. Naturality of comparison and interchange follows on fractions from the formulas for
-   localization and base change [def-weil-pbc-module-localization,
-   def-weil-module-base-change]. Their compatibility with identities and composition
-   gives the functor laws [lem-weil-pbc-formal-glueing-canonical-maps].
-3. Under the additional hypotheses the exact glueing complex identifies an R-module N
-   with compatible families in its scalar extension and localizations
-   [lem-weil-pbc-formal-glueing-complex-exact].
-4. Equality of two elements after iterated localization implies equality in N localized
-   at the product: clear each denominator successively
-   [def-weil-pbc-module-localization-away].
-5. If two maps have the same canonical components, apply injectivity of the initial map
-   in the exact complex to their values on each element. This proves faithfulness.
-6. For a morphism between canonical objects, its components on m give a compatible
-   family by naturality and step 4. Exactness gives a unique preimage u(m). Injectivity
-   proves linearity; agreement on pure tensors and fractions identifies all components
-   with the base change and localizations of u. Thus the functor is full.
-7. For a glueing datum form H^0, the module of compatible families. Its chart projections
-   extend to bijections from its localizations [lem-weil-pbc-formal-glueing-H0-localization].
-   Its prime projection extends by tensoring to Psi'. The fraction formulas verify that
-   Psi is a morphism from the canonical datum of H^0 to the given datum.
-8. Every localization of Psi' is bijective by its compatibility with the chart maps.
-   Exact localization [lem-weil-pbc-localization-module-exact] makes its kernel and
-   cokernel vanish locally. Finitely many annihilating powers of the generators imply
-   that both are I-power torsion.
-9. Torsion base change [lem-weil-pbc-torsion-submodule-flat-base-change-iso] writes an
-   element of the kernel as h tensor 1 with h torsion in H^0. Its prime projection and
-   all chart projections vanish; hence h = 0 and Psi' is injective.
-10. The cokernel Q identifies with its base change
-    [lem-weil-pbc-torsion-module-flat-base-change-iso]. Descend the resulting extension
-    of Q tensor S by H^0 tensor S to an extension E of Q by H^0
-    [lem-weil-pbc-torsion-extension-flat-descent], with E tensor S isomorphic to M'.
-11. Q vanishes in each localization, so H^0 -> E is locally bijective. Combine its
-    localized inverses with the chart maps of Psi and the prime isomorphism to obtain
-    Can(E) -> M. Precompose the compatibility equations with these local bijections
-    to check them. Componentwise inverses satisfy the same equations and give an inverse
-    morphism. This proves essential surjectivity, and step 6 gives the equivalence. -/
+is fully faithful and essentially surjective. The heterogeneous equalities say that the
+structural maps are the actual canonical maps, not merely isomorphic choices of them. -/
 theorem exists_canonical_equivalence {R : Type u} {S : Type v}
     [CommRing R] [CommRing S] (φ : R →+* S) (t : ℕ) (f : Fin t → R) :
     (∀ (P : ModuleCat.{max u v w} R) (a b : R),

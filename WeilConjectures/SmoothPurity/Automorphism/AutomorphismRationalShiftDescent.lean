@@ -12,8 +12,6 @@ import WeilConjectures.SmoothPurity.Integral.IntegralDerivedPullbackLinear
 
 /-! # Rational localization of automorphism square shifts
 
-Source: current blueprint, Weil-structures paragraph of the open-closed triangle.
-(blueprint: lem-sf-automorphism-rational-shift-descent).
 The finite and integral constructions are re-exported from the stage core.
 This module proves the rational localization step before common-stage descent.
 -/
@@ -235,12 +233,7 @@ private theorem rational_square_shift
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
   exact eq_of_heq (hl.trans ((heq_of_eq he).trans hr.symm))
 
-/-- Rational localization of the three normalized integral pullbacks preserves their square.
-Source: current blueprint, Weil-structures paragraph, rationalization step.
-(blueprint: lem-sf-automorphism-rational-shift-descent).
-Proof: take the signed integral shift witness, localize each exact linear pullback,
-and apply rational localization to the integral square equation at shift one.
-The integer shift coherence laws extend that equation to every integer. -/
+/-- Rational localization of the three normalized integral pullbacks preserves their square. -/
 theorem automorphismRationalShiftDescent
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

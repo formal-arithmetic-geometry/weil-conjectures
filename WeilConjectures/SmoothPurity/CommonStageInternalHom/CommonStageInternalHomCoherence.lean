@@ -8,9 +8,16 @@ module
 public import WeilConjectures.SmoothPurity.Common.CommonStageInternalHomData
 import all WeilConjectures.SmoothPurity.CommonStageInternalHom.CommonStageInternalHomCoherenceLemmas
 
-/-! The missing normalized Hom comparison coherence for common-stage transport.
-Source: the common-stage internal-Hom paragraph of prose-03-02.
-(blueprint: lem-weil-common-stage-internal-hom-coherence).
+/-! # Coherence of the normalized common-stage Hom comparison
+
+This file proves the normalized Hom comparison coherence for common-stage transport.
+
+## Implementation details
+
+Each comparison is expanded into its operation-stage transition, the normalized rational Hom
+comparison, and the two recorded stage associators. The scalar Hom tower equation and its
+naturality identify the middle square; functoriality of derived internal Hom cancels the
+inverse first associator and the forward second associator.
 -/
 
 @[expose] public noncomputable section
@@ -239,16 +246,7 @@ private theorem comparison_tower
   rw [comparison_eq_step, comparison_eq_step]
   exact step_tower l Ω W P le_rfl h k
 
-/-- The normalized Hom comparison square at one coefficient extension.
-Source: the common-stage internal-Hom paragraph of prose-03-02;
-The specified rational scalar Hom tower and naturality supply the finite-stage equations.
-(blueprint: lem-weil-common-stage-internal-hom-coherence).
-
-Proof: expand each comparison into its operation-stage transition, normalized rational Hom
-comparison, and the two recorded stage associators. The scalar Hom tower equation and its
-naturality identify the middle square; functoriality of derived internal Hom cancels the
-inverse first associator and forward second associator. The remaining operation-stage
-transition and stage-system associators are exactly the displayed transport isomorphisms. -/
+/-- The normalized Hom comparison square at one coefficient extension. -/
 theorem commonStageHomComparison_hom_square
     (M : Index l Ω) (k : L ≤ M) :
     let cP_L := commonStageHomComparison l Ω W P L h

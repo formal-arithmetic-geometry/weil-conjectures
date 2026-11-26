@@ -14,8 +14,23 @@ import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Exists
 
 /-! # Bounded-free comparison for a strict DVR model
 
-Source: Stacks Tags 06YS, 06YY, 03EK and 05RT; blueprint DVR effectivity,
-proof paragraphs 3--4. (blueprint: lem-coef-normalized-dvr-bounded-free-cone).
+This file shows that tensoring a Roos limit with the principal two-term resolution of
+`ϖ^(n+1)` gives the homotopy limit of the multiplication cones, compatibly with the augmented
+projection (`normalizedDVR_bounded_free_cone`).
+
+## Implementation details
+
+The proof forms the universal localization `G` of the explicit scalar cone, which commutes with
+shifts, is exact and preserves countable products; the coefficient-augmentation lemma identifies
+the restricted derived scalar reduction with `G`. The given Roos triangle and the successor
+equations identify `M` with the canonical Roos object up to a finite tail, and `G` applied to the
+`(n+1)`-step tail gives the homotopy limit of the multiplication cones. No invertibility of the
+projection is used; the exponent `n+1` is positive even at `n = 0`.
+
+## References
+
+* [B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, Lemmas 3.5.4--3.5.5][BS15]
+* [Stacks Project, Tags 06YS, 06YY, 03EK, 05RT, 0941 and 07KC][stacks-project]
 -/
 
 @[expose] public noncomputable section
@@ -105,32 +120,7 @@ private theorem isoLeg {C : Type*} [Category C] {X Y Z W : C}
   rw [← Category.assoc, h, Category.assoc, Iso.inv_hom_id, Category.comp_id]
 
 /-- Tensoring the Roos limit with the principal two-term resolution gives the
-homotopy limit of multiplication cones, preserving the augmented projection.
-Source: Bhatt--Scholze, Lemmas 3.5.4--3.5.5; Stacks Tags 0941, 07KC and 06YS;
-blueprint DVR effectivity, bounded-free tensor calculation.
-(blueprint: lem-coef-normalized-dvr-bounded-free-cone).
-
-Proof: form the universal localization G of the explicit scalar cone. The generic
-bounded-free lemma gives its commutative shift, exactness and preservation of
-countable products. The separate coefficient-augmentation lemma identifies
-restricted derived scalar reduction with G, naturally on the canonical Roos
-object, and fixes its augmented projection. The selected level is supplied as a
-strict finite-coefficient complex with its compatible finite-derived comparison;
-this is passed unchanged to the augmentation lemma.
-
-The given Roos triangle supplies a homotopy-limit cone with vertex exactly M and
-legs p followed by the product projections. The successor equations heU make eU
-a natural tower isomorphism from the one-step tail of U. Homotopy-limit uniqueness
-and finite-tail invariance give e from M to the canonical Roos object, with its
-projection equations. Apply G to the (n+1)-step tail of the canonical cone and
-transport its representative comparison to the multiplication-cone tower. This
-constructs c and proves its homotopy-limit property. Compose the coefficient
-comparison with G(e) to construct a. Adjoint naturality in the source and
-naturality of the coefficient comparison transport the canonical augmented
-projection equation along e to the required equality. No assertion of
-invertibility of that projection or nilpotent-fibre calculation is used.
-Exponent n+1 is positive even at n=0, and the same construction handles zero
-towers and the empty scheme. -/
+homotopy limit of multiplication cones, preserving the augmented projection. -/
 theorem normalizedDVR_bounded_free_cone
     (T : NormalizedDVRTower l E X D hl)
     (M : completedIntegralDerivedCategory l E X D hl)

@@ -11,12 +11,12 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 
 /-! # Ind-etale, principal ind-Zariski, and weakly etale algebras
 
-Source: blueprint, proper base change, definition of ind-etale and ind-Zariski algebras
-(blueprint: definition-ind-etale-pro-etale-weakly).
+The notions of ind-étale, principal ind-Zariski and weakly étale algebras, mostly expressed by
+existing Mathlib notions.
 
 ## Main definitions
 
-- `Algebra.IsIndPrincipalZariski`: the blueprint's filtered-colimit definition with terms
+- `Algebra.IsIndPrincipalZariski`: the filtered-colimit definition with terms
   finite products of principal localizations. Upstream `Algebra.IndZariski` instead allows
   arbitrary local isomorphisms as terms, so it does not express this clause verbatim.
 - Ind-etale means the existing `Algebra.IndEtale`. Its stages are `Algebra.Etale`, which
@@ -36,10 +36,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace Algebra
 
-/-- An `A`-algebra `B` is ind-Zariski in the blueprint's principal-localization sense if it
-is a filtered colimit of finite products of algebras `A_f`. The empty finite product is
-allowed. Source: blueprint, proper base change, definition of ind-etale and ind-Zariski
-algebras (blueprint: definition-ind-etale-pro-etale-weakly). -/
+/-- An `A`-algebra `B` is ind-Zariski in the principal-localization sense if it is a filtered
+colimit of finite products of algebras `A_f`. The empty finite product is allowed. -/
 def IsIndPrincipalZariski (A B : Type u) [CommRing A] [CommRing B] [Algebra A B] : Prop :=
   ∃ (I : Type u) (_ : SmallCategory I) (_ : IsFiltered I)
     (P : ColimitPresentation I (CommAlgCat.of A B)),

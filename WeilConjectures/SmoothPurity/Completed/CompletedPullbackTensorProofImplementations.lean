@@ -220,11 +220,17 @@ import WeilConjectures.Algebra.Homology.SmoothPurity.ChangeOfRingsTensorCancella
 
 /-! # Private implementations for the completed pullback tensor comparison
 
-These proved helpers retain the exact composite-localization, ordinary quotient-unit,
-and K-flat pullback arguments of `CompletedPullbackTensorComparison`. Keeping their
-implementations separate reduces repeated elaboration in that large module.
-Source: Stacks Tags 05RR, 06YY, 07A4 and 03D2.
-(blueprint: def-pur-completed-pullback-tensor-comparison).
+Helper results for `CompletedPullbackTensorComparison`: the exact composite-localization,
+ordinary quotient-unit and K-flat pullback arguments.
+
+## Implementation details
+
+Keeping these implementations separate reduces repeated elaboration in the large module
+`CompletedPullbackTensorComparison`.
+
+## References
+
+* [Stacks Project, Tags 05RR, 06YY, 07A4 and 03D2](https://stacks.math.columbia.edu/tag/05RR)
 -/
 
 @[expose] public noncomputable section
@@ -268,16 +274,9 @@ private theorem completedPullbackLocalizationIso_existsUnique
   apply (cancel_mono (b.hom.app P)).1
   exact (he' P).trans (he P).symm
 
-/-- Descend an exact cochain composite comparison, with its factorization square.
-Source: Stacks Tag 05RR, exact-functor localization
-(blueprint: lem-pur-completed-pullback-exact-composite).
-Proof: whisker the exact-functor factorization isomorphisms to obtain the two
-factorizations through the cochain localization Q. Compose the ordinary cochain
-comparison with the cochain image of the final functor isomorphism. Localization
-lifts this comparison to the derived composites; its component formula is the
-required square after functoriality and reassociation. Any other comparison
-with that square agrees after precomposing by Q, hence agrees by localization
-extensionality. Cancellation of the factorization isomorphisms proves uniqueness. -/
+/-- For exact functors, an isomorphism of cochain-level composites `A ⋙ B ≅ C ⋙ D₀` together
+with `D₀ ≅ D` descends to a unique isomorphism of derived composites `A ⋙ B ≅ C ⋙ D`
+compatible with the factorizations through the localization `Q`. -/
 theorem completedPullbackDerivedCompositeIso_existsUnique
     {C₁ C₂ D₁ D₂ : Type*} [Category C₁] [Category C₂] [Category D₁] [Category D₂]
     [Abelian C₁] [Abelian C₂] [Abelian D₁] [Abelian D₂]

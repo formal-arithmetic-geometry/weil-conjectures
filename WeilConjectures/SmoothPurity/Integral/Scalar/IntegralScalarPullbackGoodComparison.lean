@@ -12,8 +12,9 @@ import all WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarPullbackCh
 
 /-! # Scalar pullback comparison on good representatives
 
-Source: Stacks 07A4 and 0941; categories.tex, Tag 04VK.
-(blueprint: lem-pur-integral-scalar-pullback-good-comparison).
+## References
+
+* Stacks Project, Tags 04VK, 07A4, 0941 and 099N
 -/
 
 @[expose] public noncomputable section
@@ -77,15 +78,7 @@ local notation "t" => I ⋙ integralOperationsPullbackComplexFunctor l E f
 local notation "s" => ObjectProperty.ι (integralOperationsGoodComplex l L Y) ⋙
   integralOperationsPullbackComplexFunctor l L f
 
-/-- The localized pullback chain maps form a uniquely normalized natural isomorphism.
-Source: Stacks 07A4, 0941 and 099N.
-(blueprint: lem-pur-integral-scalar-pullback-good-comparison).
-Proof: each Q-image of the prescribed chain map is invertible by the existing
-pullback chain quasi-isomorphism theorem on good inputs. Naturality of that chain
-map, followed by functoriality of Q, assembles these components into a natural
-isomorphism. Its components are the prescribed Q-images by asIso_hom. Two such
-isomorphisms agree on every hom component, so natural transformation extensionality
-and isomorphism extensionality prove uniqueness. -/
+/-- The localized pullback chain maps form a uniquely normalized natural isomorphism. -/
 theorem integralScalarPullbackGoodComparison :
     ∃! c : t ⋙ SX ⋙ DerivedCategory.Q ≅ k ⋙ s ⋙ DerivedCategory.Q,
       ∀ P, c.hom.app P = DerivedCategory.Q.map (scalarPullbackChain l E L ι f P.obj) := by

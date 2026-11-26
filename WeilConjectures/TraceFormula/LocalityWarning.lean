@@ -14,12 +14,12 @@ public import WeilConjectures.TraceFormula.CurveLocal.ExtensionByZero
 /-!
 # Local terms are not computed stalk by stalk
 
-Blueprint `remark-locality-warning`: the stalk functor does not commute with the internal hom.
+The stalk functor does not commute with the internal hom.
 For the open complement `j : 𝔾_m ⟶ 𝔸¹_k` of the zero section `s` over a separably closed field
 `k` and `K = j_! Λ`, the stalk `Ls^* K` of `K` at the origin vanishes, but
 `RHom(j_! Λ, j_! Λ) ≅ Rj_* Λ` has nonzero stalk there.
 
-## The argument
+## Implementation details
 
 For an open immersion `j : U ⟶ X` both `N ↦ RHom(j_! M, N)` and `N ↦ Rj_* RHom(M, Lj^* N)` are
 right adjoint to `T ↦ j_! M ⊗ᴸ T`, using the projection formula
@@ -40,8 +40,8 @@ right adjoint to `T ↦ j_! M ⊗ᴸ T`, using the projection formula
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.isZero_leftDerivedUpperStar_zeroSection_and_not_isZero_ihom`
-  (`remark-locality-warning`): `Ls^*(j_! Λ) = 0` but `Ls^* RHom(j_! Λ, j_! Λ) ≠ 0`.
+- `AlgebraicGeometry.Etale.isZero_leftDerivedUpperStar_zeroSection_and_not_isZero_ihom`:
+  `Ls^*(j_! Λ) = 0` but `Ls^* RHom(j_! Λ, j_! Λ) ≠ 0`.
 -/
 
 @[expose] public section
@@ -100,9 +100,7 @@ noncomputable def ihomOpenImmersionLowerShriekIso
       (derivedEtaleLowerShriekLeftDerivedUpperStarAdjunction j)
       (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j) M).app N
 
-/-- Blueprint `remark-locality-warning`: for an open immersion `j : U ⟶ X`,
-`RHom(j_! Λ_U, j_! Λ_U) ≅ Rj_* Λ_U`, by `AlgebraicGeometry.Etale.ihomOpenImmersionLowerShriekIso`,
-`Lj^* j_! ≅ 𝟭` and `RHom(Λ_U, -) ≅ 𝟭`. -/
+/-- For an open immersion `j : U ⟶ X`, `RHom(j_! Λ_U, j_! Λ_U) ≅ Rj_* Λ_U`. -/
 noncomputable def ihomOpenImmersionLowerShriekConstantIso :
     (ihom (D((j)_!open[ModuleCat.{u + 1} Λ]).obj (constantComplex Λ U))).obj
         (D((j)_!open[ModuleCat.{u + 1} Λ]).obj (constantComplex Λ U)) ≅
@@ -121,12 +119,11 @@ variable [Finite Λ] [Nontrivial Λ] [HasTateTwist Λ] [HasTateTwist.IsNormalize
   (k : Type u) [Field k] [IsSepClosed k] [HasInvertibleExponent Λ (Spec (.of k))]
   {G : Scheme.{u}} (j : G ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k))) [IsOpenImmersion j]
 
-/-- Blueprint `remark-locality-warning`: Local terms are not computed stalk by stalk.
-
-Let `j : G ⟶ 𝔸¹_k` be the open complement of the zero section `s` over a separably closed field
-`k`, and `K = j_! Λ_G`. The stalk `Ls^* K` of `K` at the origin vanishes, but the stalk of
-`RHom(K, K) ≅ Rj_* Λ_G` (`AlgebraicGeometry.Etale.ihomOpenImmersionLowerShriekConstantIso`) at
-the origin does not. Hence the stalk functor does not commute with this internal hom. -/
+/-- **Local terms are not computed stalk by stalk.** Let `j : G ⟶ 𝔸¹_k` be the open complement of
+the zero section `s` over a separably closed field `k`, and `K = j_! Λ_G`. The stalk `Ls^* K` of `K`
+at the origin vanishes, but the stalk of `RHom(K, K) ≅ Rj_* Λ_G`
+(`AlgebraicGeometry.Etale.ihomOpenImmersionLowerShriekConstantIso`) at the origin does not. Hence
+the stalk functor does not commute with this internal hom. -/
 theorem isZero_leftDerivedUpperStar_zeroSection_and_not_isZero_ihom
     (hj : Set.range j.base =
       (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) (Spec (.of k))).base)ᶜ) :

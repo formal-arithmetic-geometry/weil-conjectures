@@ -12,7 +12,23 @@ import all WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowe
 
 /-! # Augmented strict quotient towers under qcqs restriction
 
-Source: Stacks Tags 06YY and 07A4. -/
+We show that ordinary pullback commutes with the strict finite quotient tower and its
+augmentation.
+
+## Implementation details
+
+The pullback of each finite constant coefficient sheaf is identified with the same
+coefficient sheaf by its constant-section map, so tensor base change identifies pullback of
+reduction at `n` with reduction of pullback at `n`, sending `m ⊗ a` to the pulled-back
+`m ⊗ a`. These isomorphisms form a map of strict towers and preserve the augmentation
+generator `m ⊗ 1`. This is a chain-level comparison without derived descent.
+
+## References
+
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A4]
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.5.8(1)]
+-/
 
 noncomputable section
 set_option autoImplicit false
@@ -226,24 +242,7 @@ end Assembly
 
 @[expose] public section
 
-/-- Pullback commutes with the strict finite quotient tower and its augmentation.
-
-Source: Stacks Tags 06YY and 07A4; Bhatt--Scholze Lemma 6.5.8(1).
-(blueprint: lem-fix-qcqs-ordinary-quotient-restriction).
-Proof: identify the pullback of each finite constant coefficient sheaf with the
-same coefficient sheaf on S by its constant-section map. The completed coefficient
-map commutes with the projections to these sheaves by adjunction and the defining
-projection equations for ordinaryCompletedRingMap. Tensor base change therefore
-identifies pullback of reduction at n with reduction of pullback at n. The natural
-isomorphism sends the generator m tensor a to the pulled-back m tensor the same a.
-The transition from n+1 to n has the same formula on both sides, because the
-constant-section maps commute with quotient homomorphisms. The generators determine
-maps after sheafification, so these isomorphisms form a map of strict towers.
-Apply degreewise to complexes; naturality preserves every differential. The
-augmentation generator is m tensor 1, which the isomorphism preserves, giving the
-stated augmentation equality. The argument also covers zero modules, n=0 (the
-first quotient, at exponent one), and the empty scheme. This is an ordinary
-chain-level tensor comparison and uses no derived descent or Roos construction. -/
+/-- Pullback commutes with the strict finite quotient tower and its augmentation. -/
 theorem qcqsOrdinaryQuotientRestriction
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

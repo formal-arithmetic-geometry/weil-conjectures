@@ -18,12 +18,12 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.GaloisCoverPullback
 /-!
 # Finite `ℓ`-group monodromy of the tensor product of two lisse complexes
 
-This file proves the step "the complex `N' ⊠ Q'` has finite `ℓ`-group monodromy" of blueprint
-`lemma-tangent-cones-on-cover` (i). Let `P₁, P₂` be bounded flat complexes on `V₁, V₂` whose
-termwise pullbacks to Galois covers `c₁, c₂` with finite `ℓ`-groups `G₁, G₂` are constant
-complexes on bounded complexes of finite `Λ`-modules, and let `ψᵢ : W ⟶ Vᵢ`. Then
-`E = Lψ₁^* P₁ ⊗ᴸ Lψ₂^* P₂` is bounded and its cohomology sheaves become constant on finite
-`Λ`-modules on the Galois cover `W ×_{V₁ × V₂} (c₁ × c₂)` of `W`, with group `G₁ × G₂`.
+This file proves that the complex `N' ⊠ Q'` on the cover has finite `ℓ`-group monodromy. Let
+`P₁, P₂` be bounded flat complexes on `V₁, V₂` whose termwise pullbacks to Galois covers `c₁, c₂`
+with finite `ℓ`-groups `G₁, G₂` are constant complexes on bounded complexes of finite `Λ`-modules,
+and let `ψᵢ : W ⟶ Vᵢ`. Then `E = Lψ₁^* P₁ ⊗ᴸ Lψ₂^* P₂` is bounded and its cohomology sheaves become
+constant on finite `Λ`-modules on the Galois cover `W ×_{V₁ × V₂} (c₁ × c₂)` of `W`, with group
+`G₁ × G₂`.
 
 ## Main statements
 
@@ -120,7 +120,7 @@ attribute [local instance] Sheaf.monoidalCategory
 /-- Let `P` be a complex of étale sheaves on `V` whose termwise pullback along `π : P' ⟶ V` is
 the constant complex on a complex `C` of `Λ`-modules. If `ψ : W ⟶ V` and `r : T ⟶ W` are such
 that `r ≫ ψ` factors through `π` (as `q ≫ π`), then the termwise pullback of `P` to `T` is
-the constant complex on `C` (blueprint `lemma-tangent-cones-on-cover`). -/
+the constant complex on `C`. -/
 noncomputable def upperStarMapHomologicalComplexConstantIso {V W T P' : Scheme.{u}}
     {π : P' ⟶ V} {ψ : W ⟶ V} (q : T ⟶ P') (r : T ⟶ W) (h : r ≫ ψ = q ≫ π)
     {P : CochainComplex (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ}
@@ -188,12 +188,10 @@ noncomputable def homologyQObjConstantSheafIso (X : Scheme.{u})
       (.up ℤ) n).app C
 
 /-- **The tensor product of two complexes with constant pullbacks has constant pulled back
-cohomology** (blueprint `lemma-tangent-cones-on-cover`, the complex `N' ⊠ Q'`). Let
-`P₁, P₂` be complexes on `V₁, V₂`, with `P₁` bounded flat, whose termwise pullbacks along
-`π₁ : P₁' ⟶ V₁` and `π₂ : P₂' ⟶ V₂` are the constant complexes on complexes `C₁, C₂` of
-`Λ`-modules. Let `ψᵢ : W ⟶ Vᵢ` and `r : T ⟶ W` be such that each `r ≫ ψᵢ` factors through
-`πᵢ`. Then the pullback to `T` of `Hⁿ(Lψ₁^* P₁ ⊗ᴸ Lψ₂^* P₂)` is the constant sheaf on
-`Hⁿ(C₁ ⊗ C₂)`. -/
+cohomology**. Let `P₁, P₂` be complexes on `V₁, V₂`, with `P₁` bounded flat, whose termwise
+pullbacks along `π₁ : P₁' ⟶ V₁` and `π₂ : P₂' ⟶ V₂` are the constant complexes on complexes `C₁, C₂`
+of `Λ`-modules. Let `ψᵢ : W ⟶ Vᵢ` and `r : T ⟶ W` be such that each `r ≫ ψᵢ` factors through `πᵢ`.
+Then the pullback to `T` of `Hⁿ(Lψ₁^* P₁ ⊗ᴸ Lψ₂^* P₂)` is the constant sheaf on `Hⁿ(C₁ ⊗ C₂)`. -/
 noncomputable def upperStarHomologyDerivedTensorIso {W V₁ V₂ T P₁' P₂' : Scheme.{u}}
     (ψ₁ : W ⟶ V₁) (ψ₂ : W ⟶ V₂) {π₁ : P₁' ⟶ V₁} {π₂ : P₂' ⟶ V₂} (r : T ⟶ W)
     (q₁ : T ⟶ P₁') (q₂ : T ⟶ P₂') (h₁ : r ≫ ψ₁ = q₁ ≫ π₁) (h₂ : r ≫ ψ₂ = q₂ ≫ π₂)
@@ -260,13 +258,12 @@ lemma isGE_isLE_derivedTensor_leftDerivedUpperStar {W V₁ V₂ : Scheme.{u}}
   exact ⟨DerivedCategory.TStructure.t.isGE_of_iso e.symm _,
     DerivedCategory.TStructure.t.isLE_of_iso e.symm _⟩
 
-/-- **The complex `N' ⊠ Q'` has finite `ℓ`-group monodromy** (blueprint
-`lemma-tangent-cones-on-cover` (i)). Let `P₁, P₂` be bounded flat complexes of étale sheaves of
-`Λ`-modules on `V₁, V₂`, and `c₁, c₂` Galois covers of `V₁, V₂` with finite `ℓ`-groups
-`G₁, G₂` such that the termwise pullback of `Pᵢ` to `cᵢ` is (as a complex) the constant complex
-on a bounded complex of finite `Λ`-modules. Then for `ψᵢ : W ⟶ Vᵢ`, the derived tensor product
-`E = Lψ₁^* P₁ ⊗ᴸ Lψ₂^* P₂` is bounded, and every cohomology sheaf of `E` becomes constant on a
-finite `Λ`-module after pullback to the Galois cover `W ×_{V₁ × V₂} (c₁ × c₂)` of `W`, with
+/-- **The complex `N' ⊠ Q'` has finite `ℓ`-group monodromy**. Let `P₁, P₂` be bounded flat complexes
+of étale sheaves of `Λ`-modules on `V₁, V₂`, and `c₁, c₂` Galois covers of `V₁, V₂` with finite
+`ℓ`-groups `G₁, G₂` such that the termwise pullback of `Pᵢ` to `cᵢ` is (as a complex) the constant
+complex on a bounded complex of finite `Λ`-modules. Then for `ψᵢ : W ⟶ Vᵢ`, the derived tensor
+product `E = Lψ₁^* P₁ ⊗ᴸ Lψ₂^* P₂` is bounded, and every cohomology sheaf of `E` becomes constant on
+a finite `Λ`-module after pullback to the Galois cover `W ×_{V₁ × V₂} (c₁ × c₂)` of `W`, with
 group the finite `ℓ`-group `G₁ × G₂`.
 
 The hypothesis on `Pᵢ` asks for an isomorphism of complexes, not only of the terms: the

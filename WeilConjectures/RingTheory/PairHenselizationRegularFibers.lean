@@ -18,9 +18,22 @@ import Mathlib.RingTheory.TensorProduct.Maps
 /-!
 # Regular fibres after an ind-etale extension
 
-Source: Stacks Project, More on Algebra, Tag 0AH3, final fibre calculation,
-using Tag 0AH1 and Algebra Tag 07QH.
-(blueprint: lem-weil-pbc-pair-henselization-regular-fibers).
+A map out of a Noetherian pair henselization has geometrically regular fibres if its composite
+with the structure map from the base is regular.
+
+## Implementation details
+
+The fibre of the henselization over a prime `p` of `A` is a finite product of residue fields with
+separable algebraic extensions of `κ(p)` (Tag 0AH1). After tensoring with `C`, the fibre over a
+prime `q` is a localization of the geometrically regular fibre over `p`, and Tag 07QH replaces
+`κ(p)` by `κ(q)`.
+
+## References
+
+* [Stacks, Tag 0AH3]
+* [Stacks, Tag 0AH1]
+* [Stacks, Tag 07QH]
+* [Stacks, Tag 0A02]
 -/
 
 @[expose] public section
@@ -74,25 +87,7 @@ private theorem geometricallyRegular_localization (k R S : Type u)
 
 /-- A map out of a Noetherian henselization colimit has geometrically regular fibres
 if its composite with the base structure map is regular. No completion, henselian
-pair, or G-ring hypothesis is involved in this fibre calculation.
-
-Source: Stacks Project, More on Algebra, Tag 0AH3, displayed product-of-fibres
-calculation and its following paragraph; Tag 0AH1; Algebra Tag 07QH.
-(blueprint: lem-weil-pbc-pair-henselization-regular-fibers).
-
-Proof: The indexing category is filtered by Tag 0A02. Regard its diagram and colimit
-as A-algebras, and apply Tag 0AH1. For a prime q of B = c.pt.right, with contraction
-p in A, this gives B tensor_A kappa(p) as a finite product of residue fields at all
-primes above p, and kappa(q)/kappa(p) is separable algebraic. Tensor this product
-with C over B. The resulting algebra kappa(p) tensor_A C is the finite product
-of kappa(q_i) tensor_B C. The projection onto the q component is localization at
-an idempotent. Regularity of the composite makes the product geometrically regular
-over kappa(p); localization commutes with every finite purely inseparable base
-extension, so its q component is geometrically regular over kappa(p) too. Its
-Noetherianity follows as a quotient of the Noetherian product. Apply Tag 07QH to
-replace kappa(p) by its separable algebraic extension kappa(q). This proves the
-required geometric regularity. If the product has no factors, there is no prime q
-to check; a zero component has vacuous regularity and causes no exception. -/
+pair, or G-ring hypothesis is involved. -/
 theorem pair_henselization_regular_fibers
     (A : Type u) [CommRing A] (I : Ideal A)
     (c : Cocone (ObjectProperty.ι

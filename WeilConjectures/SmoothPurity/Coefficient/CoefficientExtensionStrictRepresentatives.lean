@@ -42,7 +42,20 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Strict representatives for finite coefficient extension
 
-Source: the integral-operations tensor associator; Stacks 03EK and 03D7.
+We construct simultaneous strict finite quotient representatives of derived coefficient
+extension.
+
+## Implementation details
+
+The representatives are the ordinary strict system whose `n`th term is tensor with the `n`th
+target quotient, applied degreewise to flat-term K-flat complexes. Balanced associations
+identify the evaluated complexes with the iterated finite scalar models; normalization follows
+from the universal Hom criterion, first on good representatives and then on every derived
+object by a K-flat resolution.
+
+## References
+
+* [Stacks Project, Tags 03EK, 03D7, 06YY, 07A6, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -109,23 +122,7 @@ private theorem coefficientExtensionGoodRepresentative
 
 variable (A : CoefficientExtensionSystems l E L ι W)
 
-/-- Simultaneous strict finite quotient representatives of derived coefficient extension.
-Source: integral operations, Stacks 06YY, 07A6 and 0941
-(blueprint: stage3-pur-extension-strict-representatives).
-Proof: use the ringed sequence projection to form the ordinary strict system whose
-nth term is tensor with the nth target quotient. Its tensor generators determine
-its quotient transitions. Apply it degreewise to flat-term K-flat complexes.
-The given balanced associations identify the evaluated complexes with the iterated
-finite scalar models. Transpose the ordinary units, using the reduction unit and
-scalar evaluation formulas, to obtain a natural comparison from the specified
-derived extension. At each level this is the composite of the two universal
-K-flat comparisons and the given association. Both scalar extensions preserve
-K-flatness, so these comparisons are invertible. The jointly conservative
-evaluations make the system comparison invertible. For m at least n, scalar
-extension of the mth term to the nth quotient is identified with the nth term by
-balanced tensor association. Its adjoint is precisely the specified quotient
-transition. Thus the universal Hom criterion gives normalization, first on good
-representatives and then on every derived object by a K-flat resolution. -/
+/-- Derived coefficient extension admits simultaneous strict finite quotient representatives. -/
 theorem coefficientExtensionStrictRepresentative_exists
     (SE : CoefficientDerivedSystemCalculus l E W)
     (association : ∀ n : ℕ,

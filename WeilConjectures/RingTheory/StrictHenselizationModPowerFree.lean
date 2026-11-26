@@ -16,8 +16,22 @@ import WeilConjectures.RingTheory.FixedQuotientBasesCompletion
 /-!
 # Fixed bases for strict henselization quotients and their completed comparison
 
-Source: Stacks Project, More on Algebra, Tag 07QM(4) and the proof of Tag 06LJ(c)
-(blueprint: lem-sc-strict-henselization-mod-power-free).
+For a strict henselization `C` of a Noetherian local ring `A` with maximal ideal `n`, there
+are fixed elements of `C` whose classes form bases of every quotient `C ⧸ (nC)^r` over
+`A ⧸ n^r`, and the induced compatible isomorphisms identify the `nC`-adic completion of `C`
+with the `n`-adic completion of the free `A`-module on these elements.
+
+## Implementation details
+
+The quotient isomorphisms are written as `A`-linear equivalences. Both sides are annihilated
+by the same power of the maximal ideal, so this is exactly linearity over `A ⧸ n^r`. The
+completed comparison is the canonical inverse-limit comparison induced by the quotient bases,
+characterized by its value at each positive-power coordinate.
+
+## References
+
+* [Stacks, Tag 07QM], part (4)
+* [Stacks, Tag 06LJ], proof of (c)
 -/
 
 @[expose] public section
@@ -28,27 +42,7 @@ namespace Algebra
 
 /-- There are fixed lifts in the strict henselization giving bases of every positive-power
 quotient, and the induced compatible quotient isomorphisms identify its ring completion
-with the module completion of the free module on those lifts.
-Source: Stacks Project, Tag 07QM(4) and proof of Tag 06LJ(c)
-(blueprint: lem-sc-strict-henselization-mod-power-free).
-
-The quotient isomorphisms are written as `A`-linear equivalences. Both sides are annihilated
-by the same power of the maximal ideal, so this is exactly linearity over the base quotient.
-The final equality specifies the completed comparison at each positive-power coordinate;
-it is therefore the canonical inverse-limit comparison induced by the quotient bases.
-The target of that comparison is the ring completion itself, using `AdicCompletion` with
-ideal `nC`. The source is the displayed inverse limit of the quotients of `X →₀ A`.
-
-Proof:
-1. Obtain the fixed lifts and quotient equivalences from
-Algebra.strictHenselization_quotient_bases, the quotient part of Tag 07QM(4).
-2. Apply AdicCompletion.equiv_of_fixed_quotient_bases to these equivalences. It identifies
-free-module quotients by coefficient reduction, proves transition compatibility from the
-fixed-generator formula, and constructs mutually inverse coordinatewise linear maps on
-compatible families. Its evaluation formula is precisely the required final clause.
-3. Package the fixed lifts, quotient equivalences, generator formula and completed
-comparison into the displayed existential statement.
--/
+with the module completion of the free module on those lifts. -/
 theorem strictHenselization_mod_power_free
     (A K C : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A] [Field K]
     [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K]

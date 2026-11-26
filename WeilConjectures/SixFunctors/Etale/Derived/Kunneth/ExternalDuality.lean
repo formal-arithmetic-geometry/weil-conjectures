@@ -15,7 +15,7 @@ Let `k` be a field, `Λ` a finite ring whose exponent is invertible in `k`, `X` 
 `k`-scheme of finite type with projections `p₁, p₂ : X ×_k X ⟶ X`, and `K ∈ Dctf(X, Λ)`. For a
 correspondence `c : C ⟶ X ×_k X` with legs `c₁ = c ≫ p₁`, `c₂ = c ≫ p₂`, the sheaf of
 cohomological correspondences is identified with the exceptional inverse image of
-`P_X = K ⊠ 𝔻_X K` (blueprint `lemma-external-duality-trace-morphism`):
+`P_X = K ⊠ 𝔻_X K`:
 
 `𝓗_c(K) = RHom(c₂^* K, Rc₁^! K) ≅ Rc^! (K ⊠ 𝔻_X K)`
 
@@ -49,9 +49,9 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
   [HasInvertibleExponent Λ (Spec (.of k))]
 
-/-- Blueprint `lemma-external-duality-trace-morphism`, second isomorphism, with finite
-coefficients: for a separated `k`-scheme of finite type `X`, `K ∈ Dctf(X, Λ)` and a
-correspondence `c : C ⟶ X ×_k X` with legs `c₁ = c ≫ p₁` and `c₂ = c ≫ p₂`,
+/-- External duality for correspondences with finite coefficients: for a separated `k`-scheme of
+finite type `X`, `K ∈ Dctf(X, Λ)` and a correspondence `c : C ⟶ X ×_k X` with legs `c₁ = c ≫ p₁` and
+`c₂ = c ≫ p₂`,
 
 `RHom(c₂^* K, Rc₁^! K) ≅ Rc^! (K ⊠ 𝔻_X K)`. -/
 theorem nonempty_iso_derivedHom_rightDerivedUpperShriek_externalProduct {X C : Scheme.{u}}

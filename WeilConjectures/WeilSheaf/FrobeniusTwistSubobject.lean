@@ -34,9 +34,8 @@ defined over the extension of degree `N` of `k₀`: such a subsheaf carries the 
 algebra for the `N`-th Frobenius pullback (`AlgebraicGeometry.WeilSheaf.stableIsoAlgebra`),
 compatibly with the iterated structure `φ_N` of `F` (`AlgebraicGeometry.WeilSheaf.powIsoAlgebra`).
 
-This is the sheaf-theoretic side of the geometric constituents of a Weil sheaf (blueprint
-`lemma-geometric-constituents-after-constant-extension--1`): an irreducible lisse Weil sheaf has a
-geometrically irreducible subsheaf defined over a finite extension
+This is the sheaf-theoretic side of the geometric constituents of a Weil sheaf: an irreducible
+lisse Weil sheaf has a geometrically irreducible subsheaf defined over a finite extension
 (`AlgebraicGeometry.WeilSheaf.exists_isIrreducibleAdicLocalSystem_frobeniusTwist_iterate_eq`),
 and its Frobenius conjugates span the whole sheaf
 (`AlgebraicGeometry.WeilSheaf.iSup_frobeniusTwist_iterate_eq_top`).
@@ -437,8 +436,7 @@ lemma globalSectionsTransport_frobeniusPowStr_comm' {s s' : Spec (.of (Algebraic
     F.globalSectionsTransport_frobeniusPowStr_comp' j m hg hs' rfl h₂]
   exact F.globalSectionsTransport_frobeniusPowStr_congr (Nat.add_comm m j) hcomm h₁ h₂
 
-/-- The Frobenius of the stalk at `s` relative to `𝔽_{qᵐ}` (the definition, stated separately so
-that the kernel checks the unfolding in isolation). -/
+/-- The Frobenius of the stalk at `s` relative to `𝔽_{qᵐ}`, unfolded. -/
 private lemma stalkAt_frobenius_eq_linearEquivOfIso
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) (m : ℕ)
     (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
@@ -656,10 +654,9 @@ section Constituents
 
 variable (F : WeilSheaf k₀ l X)
 
-/-- **Geometric constituents** (blueprint:
-`lemma-geometric-constituents-after-constant-extension--1`, sheaf form). A nonzero lisse Weil sheaf
-`F` on `X`, with `X̄` connected, regular and locally Noetherian, has a subsheaf `P ⊆ F̄` which is an
-irreducible local system and is fixed by some positive iterate of the Frobenius twist, i.e. is
+/-- **Geometric constituents** (sheaf form). A nonzero lisse Weil sheaf `F` on `X`, with `X̄`
+connected, regular and locally Noetherian, has a subsheaf `P ⊆ F̄` which is an irreducible local
+system and is fixed by some positive iterate of the Frobenius twist, i.e. is
 defined over a finite extension of `k₀`. -/
 theorem exists_isIrreducibleAdicLocalSystem_frobeniusTwist_iterate_eq
     [ConnectedSpace (X ↘ Spec (CommRingCat.of k₀)).geometricFiber]
@@ -701,11 +698,9 @@ theorem exists_isIrreducibleAdicLocalSystem_frobeniusTwist_iterate_eq
   · rw [hTP, hCeq, hPC]
   · rw [hTP, hCeq, hPC]
 
-/-- **The Frobenius conjugates of a geometric constituent span** (blueprint:
-`theorem-real-constructible-sheaves-are-mixed--1`, descent of the constant extension). Let `F` be an
-irreducible lisse Weil sheaf and `P ⊆ F̄` a nonzero lisse subsheaf fixed by `T^M`, `M > 0`, for the
-Frobenius twist `T`. Then `P, T P, …, T^{M-1} P` span `F̄`: their sum is fixed by `T`, hence
-underlies a nonzero lisse Weil subsheaf of `F`, which is `F`. -/
+/-- **The Frobenius conjugates of a geometric constituent span.** Let `F` be an irreducible lisse
+Weil sheaf and `P ⊆ F̄` a nonzero lisse subsheaf fixed by `T^M`, `M > 0`, for the Frobenius twist
+`T`. Then `P, T P, …, T^{M-1} P` span `F̄`. -/
 theorem iSup_frobeniusTwist_iterate_eq_top
     [IsLocallyNoetherian (X ↘ Spec (CommRingCat.of k₀)).geometricFiber]
     (hF : F.IsIrreducibleLisse) {P : Subobject F.obj.carrier}

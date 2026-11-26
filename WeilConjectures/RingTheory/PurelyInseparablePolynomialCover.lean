@@ -16,7 +16,20 @@ import WeilConjectures.RingTheory.FiniteFractionRootSubstitution
 /-!
 # A coefficient-root cover for a purely inseparable polynomial field extension
 
-Source: Stacks Project, Algebra, Lemma 10.161.13 (Tag 032O), second assertion.
+A finite purely inseparable extension of `Frac(R[X])` embeds in the fraction field of a
+polynomial ring over the integral closure of `R` in a finite coefficient extension.
+
+## Implementation details
+
+With `F = Frac(R[X])` and common exponent `n`, iterated Frobenius descends to `φ : L → F`. Applying
+the finite-fraction root-substitution theorem to `φ(b_i)` for an `F`-basis `b` of `L` gives `E`,
+`h : F → Frac(A[T])` with `A = integralClosure R E`, and `z_i` with `z_i^(p^n) = h(φ(b_i))`. The map
+`f(y) = Σ_i h((b.repr y)_i) z_i` satisfies `f(y)^(p^n) = h(φ(y))`, and injectivity of Frobenius
+in the target field makes it a ring map extending `h`.
+
+## References
+
+* [Stacks, Tag 032O] (second assertion)
 -/
 
 @[expose] public section
@@ -60,24 +73,7 @@ private theorem extend_from_basis_roots
 /-- A finite purely inseparable extension of `Frac(R[X])` embeds in the fraction
 field of a polynomial ring over the integral closure of R in a finite coefficient
 extension. The map sends X to a positive power of the new variable. No Japanese,
-Noetherian, or normality hypothesis on R is required.
-
-Source: Stacks Project, Algebra, Lemma 10.161.13 (Tag 032O), coefficient-root cover
-in the proof of the second assertion.
-(blueprint: lem-weil-pbc-purely-inseparable-polynomial-cover).
-
-Proof: Put F = Frac(R[X]). The finite purely inseparable extension has a common
-exponent n. Its descended iterated Frobenius is a ring map φ : L → F satisfying
-φ(c) = c^(p^n) for c in F. Choose a finite F-basis b of L. Apply the finite-fraction
-root-substitution theorem to the family φ(b_i): it constructs a finite coefficient
-extension E, the substitution map h : F → Frac(A[T]) with A = integralClosure R E,
-and elements z_i with z_i^(p^n) = h(φ(b_i)). Explicitly set
-f(y) = Σ_i h((b.repr y)_i) z_i. The Frobenius sum and product identities and the
-basis expansion show f(y)^(p^n) = h(φ(y)). Since iterated Frobenius is injective in
-the target field, this identity proves that f preserves zero, one, addition and
-multiplication, and f(c) = h(c) for every c in F. The scalar-tower identity and the
-substitution formula for h give the displayed equation on R[X]. The exponent
-q = p^n is positive, and every construction preserves the universe of R. -/
+Noetherian, or normality hypothesis on R is required. -/
 theorem exists_purelyInseparable_polynomial_cover
     (R : Type u) [CommRing R] [IsDomain R]
     (p : ℕ) [Fact p.Prime] [CharP (FractionRing (Polynomial R)) p]

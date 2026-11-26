@@ -15,12 +15,21 @@ public import Mathlib.FieldTheory.IsSepClosed
 /-!
 # Ring strict henselization
 
-Source: Stacks Project, Algebra, Lemma Tag 04GW, with the pointed-algebra description in
-its proof (blueprint: def-sc-ring-strict-henselization).
+We define when an `A`-algebra is the strict henselization of a local ring `A`, as the colimit of
+the étale `A`-algebras pointed in a separable closure of the residue field.
+
+## Implementation details
 
 The predicate specifies the colimit by an actual universal cocone, rather than choosing
 its underlying ring. The large category of pointed etale algebras is essentially small:
 finite presentation gives a set of representatives. No large-colimit instance is assumed.
+
+An algebra map `S → K` is equivalent to a prime `q = ker(S → K)` and an embedding of its residue
+field into `K` over the residue field of `A`.
+
+## References
+
+* [Stacks, Tag 04GW]
 -/
 
 @[expose] public section
@@ -33,12 +42,7 @@ namespace Algebra
 
 /-- The `A`-algebra `C` is the strict henselization of the local ring `A` relative to the
 chosen separable closure `K` of its residue field if it is a colimit of etale `A`-algebras
-pointed in `K`. Source: Stacks Project, Tag 04GW (blueprint: def-sc-ring-strict-henselization).
-An algebra map `S → K` is equivalent to a prime `q = ker(S → K)` and an embedding of
-its residue field into `K` over the residue field of `A`. Morphisms commute with these
-maps to `K`. The forgetful diagram retains `S` and its `A`-algebra transition maps.
-`Nonempty (IsColimit c)` is the usual universal property, and the final algebra isomorphism
-identifies the cocone vertex with `C`, including its structural map from `A`. -/
+pointed in `K`, by an isomorphism of `A`-algebras. -/
 def IsStrictHenselization (A K C : Type u) [CommRing A] [IsLocalRing A] [Field K]
     [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K]
     [Algebra A K] [IsScalarTower A (IsLocalRing.ResidueField A) K]

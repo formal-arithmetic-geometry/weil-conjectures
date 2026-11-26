@@ -383,17 +383,7 @@ end Neighbourhoods
 /-- **Stalks of a proper direct image are sections over the geometric fibre.** Let
 `f : X ⟶ Y` be proper and `y : Spec Ω ⟶ Y` a geometric point with `Ω` algebraically closed,
 with geometric fibre `a : X_y ⟶ X`. For every abelian étale sheaf `F` on `X`, the comparison map
-`(f_* F)_y ⟶ Γ(X_y, a^* F)` is bijective.
-
-The stalk is the colimit of the sections of `F` over the `V ×_Y X` for the affine pointed étale
-neighbourhoods `(V, v)` of `y`, which is the group of sections over `S_(y) ×_Y X` for the strict
-localization `S_(y)` by continuity of sections at inverse limits
-(`AlgebraicGeometry.Etale.strictLocalizationPullback_sections`); the ring of `S_(y)` is
-strictly henselian, so these are the sections over the closed geometric fibre
-(`AlgebraicGeometry.Etale.bijective_restrictAlong_fibreToStrictLocalization`), which are the
-sections over `X_y` by the invariance of sections under extension of algebraically closed base
-fields.
-(blueprint: `proposition-proper-base-change-degree-zero`, the stalk formula) -/
+`(f_* F)_y ⟶ Γ(X_y, a^* F)` is bijective. -/
 @[stacks 0A3S]
 theorem bijective_stalkToFibreSections_of_isProper [IsProper f] [IsAlgClosed Ω]
     (h : IsPullback a b f y) :

@@ -23,7 +23,17 @@ import all WeilConjectures.CategoryTheory.BilinearCoefficientDescent.BilinearCoe
 
 The common-stage associator and braiding constraints, using the finite
 normalized constraints and the directed-stage representative calculation.
-(blueprint: lem-pur-derived-pullback-tensor-constraints).
+
+## Implementation details
+
+The common-stage associator is obtained by conjugating the rational associator at a common
+finite stage by the transition and tensor comparisons; the scalar-extension cocycles show that
+the result is independent of the enlargement, and a representative determines its colimit hom
+class uniquely.
+
+## References
+
+* Stacks Project, Tags 06YS, 07A4, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -197,15 +207,7 @@ private theorem scalarAssoc_integral_naturality
       Functor.prod_obj, ObjectProperty.ι_obj]
     exact (pullbackTensorIntegralAssociator_existsUnique l E W M N P).exists.choose_spec
 
-/-- The prescribed rational tensor associator is natural in all three arrows.
-Source: Stacks 06YS, 07A4, 0941; the proved private calculations of
-`CommonStageTensorLineCoherenceNaturality`.
-(blueprint: lem-pur-rational-pullback-tensor-associator-natural).
-Proof: coherent reduction reflects the integral associator square, because its
-tensor comparison is natural and the system associator is natural. For rational
-arrows, use the prescribed bilinear tensor formulas. On three pure scalar tensors
-both sides are the localized integral square with the same product of scalars.
-Tensor-product induction extends the equality to arbitrary arrows. -/
+/-- The prescribed rational tensor associator is natural in all three arrows. -/
 private theorem scalarAssoc_rationalAssociator_natural
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -299,12 +301,7 @@ private theorem scalarAssoc_rationalAssociator_natural
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Integral scalar extension carries the integral associator to the integral associator,
-conjugated by the prescribed integral scalar tensor comparisons.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: apply coherent reduction. The
-coherent scalar tensor normalization identifies the reduced tensor comparison with the
-whole-system scalar tensorator, which is associative (`systemScalarTensorAssociativity`);
-conclude with the reduced associativity calculation and faithfulness of coherent reduction. -/
+conjugated by the prescribed integral scalar tensor comparisons. -/
 theorem integralScalarAssociatorSquare
     (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
     (ι : E →ₐ[Padic l] L) (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
@@ -367,10 +364,7 @@ theorem integralScalarAssociatorSquare
     (fun A B C ↦ systemScalarTensorAssociativity l E L ι W A B C) M N P
 
 /-- Rational scalar extension carries the rational associator to the rational associator,
-conjugated by the prescribed rational scalar tensor comparisons.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: every arrow is the
-localization of the corresponding integral arrow; apply `integralScalarAssociatorSquare`. -/
+conjugated by the prescribed rational scalar tensor comparisons. -/
 theorem rationalScalarAssociatorSquare
     (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
     (ι : E →ₐ[Padic l] L) (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
@@ -525,9 +519,7 @@ variable (l : ℕ) [Fact l.Prime]
 variable (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω]
   [IsAlgClosure (Padic l) Ω]
 
-/-- The left nested tensor expressed at an arbitrary common finite stage.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- The left nested tensor expressed at an arbitrary common finite stage. -/
 def pullbackTensorCommonLeft (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M N P : generalAlgebraicallyClosedConstructibleCategory l Ω W)
@@ -540,9 +532,7 @@ def pullbackTensorCommonLeft (W : Scheme.{u})
       (Iso.prod (commonStageTensorComparison l Ω W M N L (((Padic.finiteCoefficientFields_properties
         l Ω).1 (commonStageTensorObject l Ω W M N).stage P.stage).1.trans h)) (Iso.refl _))
 
-/-- The right nested tensor expressed at an arbitrary common finite stage.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- The right nested tensor expressed at an arbitrary common finite stage. -/
 def pullbackTensorCommonRight (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M N P : generalAlgebraicallyClosedConstructibleCategory l Ω W)
@@ -799,9 +789,8 @@ end CommonAssociatorTransport
 
 attribute [local irreducible] pullbackTensorCommonLeft pullbackTensorCommonRight
 
-/-- Existence half of the normalized constraint; uniqueness is proved by the parent theorem.
-Source: Stacks 06YS, 07A4, 0941.
-(blueprint: lem-pur-derived-pullback-tensor-constraints-common-associator-existence). -/
+/-- There is a common-stage associator with the prescribed representative at every larger
+field. -/
 theorem pullbackTensorCommonAssociator_exists (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M N P : generalAlgebraicallyClosedConstructibleCategory l Ω W) :
@@ -831,13 +820,8 @@ theorem pullbackTensorCommonAssociator_exists (W : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The common-stage associator has its prescribed representative at every larger field.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: Conjugate the rational associator
-by the
-  displayed transition/tensor comparisons. Their scalar-extension cocycles show independence of
-  enlargement. The inverse formula gives an inverse class. Directedness supplies common stages, and
-  a representative determines its colimit hom class uniquely. -/
+/-- The common-stage associator has its prescribed representative at every larger field,
+and it is the unique such isomorphism. -/
 theorem pullbackTensorCommonAssociator_existsUnique (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M N P : generalAlgebraicallyClosedConstructibleCategory l Ω W) :
@@ -874,9 +858,7 @@ theorem pullbackTensorCommonAssociator_existsUnique (W : Scheme.{u})
   let hT := ((Padic.finiteCoefficientFields_properties l Ω).1 S.stage T.stage).2
   exact eq_of_heq ((hd L hS hT).trans (he L hS hT).symm)
 
-/-- The stage-independent rational associator class.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+/-- The stage-independent rational associator class. -/
 def pullbackTensorCommonAssociator (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M N P : generalAlgebraicallyClosedConstructibleCategory l Ω W) :=

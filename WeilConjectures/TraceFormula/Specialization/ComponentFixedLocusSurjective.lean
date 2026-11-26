@@ -13,22 +13,11 @@ public import WeilConjectures.TraceFormula.Specialization.TraitPowMap
 /-!
 # The deformed fixed locus has no further points
 
-Let `c` be contracting at `y`, `F` a fixed locus of `c` and `j : B ⟶ F` with a rational point `b`
-of `B` over `y`. The map `ι_F : 𝒟_b B ⟶ F̃` of total spaces (`componentFixedLocusTotalLift`) is
-surjective as soon as `j` is (blueprint `lemma-fixed-point-scheme-deformation`, last assertion,
-for `Z = {x}`). Following the blueprint, a point `p` of `F̃ ⊂ 𝒞` lies over the closed or over the
-generic point of the trait:
-
-* over the closed point, `p` comes from a point `s` of the special fibre `C' = N_y C ⊗ k'` with
-  `γ₁ s = γ₂ s`; as `γ₂` lands in the zero section, so does `γ₁ s`, hence `s` lies on the zero
-  section of `C'`, which is a single point, the image of the vertex of `B''`;
-* over the generic point, `p` comes from a point of the geometric generic fibre
-  `𝒞_Ω = C ×_k Spec Ω`, whose image in `C` lies in `F` since the projection `F̃ ⟶ 𝒞 ⟶ C`
-  equalizes `c₁` and `c₂`; as `𝒟_b B_Ω = B ×_C 𝒞_Ω`, it comes from `B` if `j` is surjective.
-
-If moreover `B ⊂ F ⊂ C` is closed, `ι_F` is a surjective closed immersion, hence a universal
-homeomorphism. If `F` is connected, `j` is automatically surjective, since then `F` is a single
-point (`Correspondence.IsContractingAt.subsingleton_component`).
+Let `c` be contracting at `y`, `F` a fixed locus of `c` and `j : B ⟶ F` with a rational point `b` of
+`B` over `y`. The map `ι_F : 𝒟_b B ⟶ F̃` of total spaces (`componentFixedLocusTotalLift`) is
+surjective as soon as `j` is. If moreover `B ⊂ F ⊂ C` is closed, `ι_F` is a surjective closed
+immersion, hence a universal homeomorphism. If `F` is connected, `j` is automatically surjective,
+since then `F` is a single point (`Correspondence.IsContractingAt.subsingleton_component`).
 
 ## Main statements
 
@@ -41,6 +30,17 @@ point (`Correspondence.IsContractingAt.subsingleton_component`).
 - `IsContractingAt.isUniversalHomeomorphism_componentFixedLocusTotalLift_of_connected`:
   the case of a connected fixed locus.
 - `Correspondence.IsContractingAt.isIso_componentFixedLocusTotalLift_of_isReduced`.
+
+## Implementation details
+
+A point `p` of `F̃ ⊂ 𝒞` lies over the closed or over the generic point of the trait:
+
+* over the closed point, `p` comes from a point `s` of the special fibre `C' = N_y C ⊗ k'` with
+  `γ₁ s = γ₂ s`; as `γ₂` lands in the zero section, so does `γ₁ s`, hence `s` lies on the zero
+  section of `C'`, which is a single point, the image of the vertex of `B''`;
+* over the generic point, `p` comes from a point of the geometric generic fibre
+  `𝒞_Ω = C ×_k Spec Ω`, whose image in `C` lies in `F` since the projection `F̃ ⟶ 𝒞 ⟶ C` equalizes
+  `c₁` and `c₂`; as `𝒟_b B_Ω = B ×_C 𝒞_Ω`, it comes from `B` if `j` is surjective.
 -/
 
 @[expose] public section
@@ -199,11 +199,8 @@ lemma isPullback_componentGenericMap :
   rw [← e₁, ← e₂] at s
   exact IsPullback.of_right s (componentModelHom k' j hb).comm_ε t
 
-/-- **`ι_F` is surjective** (blueprint `lemma-fixed-point-scheme-deformation`, last assertion, for
-`Z = {x}`): if `j : B ⟶ F` is surjective, every point of the total space `F̃` of the deformed fixed
-locus comes from the deformation `𝒟_b B`. Over the closed point of the trait, a fixed point lies on
-the zero section of `N_y C ⊗ k'`, which is the single point given by the vertex; over the generic
-point, the deformation is the base change of `B ⟶ C`, and `F̃ ⟶ C` lands in `F`. -/
+/-- **`ι_F` is surjective**: if `j : B ⟶ F` is surjective, every point of the total space `F̃` of
+the deformed fixed locus comes from the deformation `𝒟_b B`. -/
 theorem surjective_componentFixedLocusTotalLift [Surjective j.left] :
     Surjective (componentFixedLocusTotalLift hc k' F j hb) := by
   refine ⟨fun p ↦ ?_⟩
@@ -264,19 +261,17 @@ theorem surjective_componentFixedLocusTotalLift [Surjective j.left] :
     rw [← hg, ← hw, ← e₂]
     exact e.symm
 
-/-- **`ι_F` is a universal homeomorphism** (blueprint `lemma-fixed-point-scheme-deformation`, last
-assertion, for `Z = {x}`): if `B ⊂ F ⊂ C` is closed and `j` is surjective, `ι_F : 𝒟_b B ⟶ F̃` is a
-surjective closed immersion; in particular `(ι_F)_red` is an isomorphism. -/
+/-- **`ι_F` is a universal homeomorphism**: if `B ⊂ F ⊂ C` is closed and `j` is surjective,
+`ι_F : 𝒟_b B ⟶ F̃` is a surjective closed immersion; in particular `(ι_F)_red` is an isomorphism. -/
 theorem isUniversalHomeomorphism_componentFixedLocusTotalLift [IsClosedImmersion (j ≫ F.ι).left]
     [Surjective j.left] : IsUniversalHomeomorphism (componentFixedLocusTotalLift hc k' F j hb) :=
   have := isClosedImmersion_componentFixedLocusTotalLift hc k' F j hb
   have := surjective_componentFixedLocusTotalLift hc k' F j hb
   {}
 
-/-- **`ι_F` is a universal homeomorphism for a connected fixed locus** (blueprint
-`lemma-fixed-point-scheme-deformation`, `Z = {x}`): if the fixed locus `F` is connected, it is the
-single point `y` (`subsingleton_component`), so every `j : B ⟶ F` with `B ⊂ F` closed is
-surjective, and `ι_F : 𝒟_b B ⟶ F̃` is a surjective closed immersion. -/
+/-- **`ι_F` is a universal homeomorphism for a connected fixed locus**: if the fixed locus `F` is
+connected and `j : B ⟶ F` is a closed subscheme, `ι_F : 𝒟_b B ⟶ F̃` is a surjective closed
+immersion. -/
 theorem isUniversalHomeomorphism_componentFixedLocusTotalLift_of_connected
     [IsClosedImmersion (j ≫ F.ι).left] [ConnectedSpace F.F.left] :
     IsUniversalHomeomorphism (componentFixedLocusTotalLift hc k' F j hb) := by
@@ -290,8 +285,7 @@ theorem isUniversalHomeomorphism_componentFixedLocusTotalLift_of_connected
   exact isUniversalHomeomorphism_componentFixedLocusTotalLift hc k' F j hb
 
 /-- If the total space `F̃` of the deformed fixed locus is reduced, `ι_F : 𝒟_b B ⟶ F̃` is an
-isomorphism (blueprint `lemma-fixed-point-scheme-deformation`, `Z = {x}`): a surjective closed
-immersion into a reduced scheme is an isomorphism. -/
+isomorphism. -/
 theorem isIso_componentFixedLocusTotalLift_of_isReduced [IsClosedImmersion (j ≫ F.ι).left]
     [Surjective j.left] [IsReduced (deformedFixedLocusTotal hc k' F)] :
     IsIso (componentFixedLocusTotalLift hc k' F j hb) :=

@@ -30,8 +30,6 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Module.ProEtaleModulePullb
 
 /-! # Canonical Frobenius on coefficient twists
 
-Source: main-20261015, prose-10-21, clauses 1--5
-(blueprint: prose-10-21).
 The first map below is an actual map of root towers. Its inverse limit, rather than
 an arbitrary trivialization of a Tate line, determines the signed coefficient maps.
 -/
@@ -63,10 +61,8 @@ attribute [local instance_reducible] PurCompactSupport.completed IntegralOnSlice
   integralOperationsRoosFunctor integralOperationsRoos
   sfRationalTwistingFunctor sfQbarTwistingFunctor
 
-/-- The native additive structure, retained as a named instance presentation.
-Source: the existing completed-coefficient module category and Mathlib's
-`SheafOfModules` preadditive instance
-(blueprint: prose-10-21). -/
+/-- The native additive structure, retained as a named instance presentation of Mathlib's
+`SheafOfModules` preadditive instance. -/
 @[instance_reducible]
 def coefficientPreadditive (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (W : Scheme.{u}) :
@@ -87,9 +83,7 @@ private theorem coefficientSiteSmall (W : Scheme.{u}) :
 
 attribute [local instance] coefficientSiteSmall
 
-/-- The existing nonnegative completed root powers.
-Source: definition clauses 2--3
-(blueprint: prose-10-21). -/
+/-- The existing nonnegative completed root powers. -/
 abbrev positiveLine (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (T : Scheme.{u}) (d : ℕ) :=
@@ -97,9 +91,7 @@ abbrev positiveLine (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     (R := completedIntegralCommRingSheafUnrestricted l E T)
     (purTwistIntegralModule T l E) d
 
-/-- Pure local tensors in the existing completed root powers.
-Source: definition clauses 2--3, normalization on root tensors
-(blueprint: prose-10-21). -/
+/-- Pure local tensors in the existing completed root powers. -/
 def generator (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (T : Scheme.{u}) (W : T.ProEtᵒᵖ)
@@ -114,9 +106,7 @@ def generator (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
       (generator l E T W a (d + 1) (fun i ↦ x i.castSucc))
       (purTwistIntegralTensor T l E W 1 (x (Fin.last (d + 1))))
 
-/-- The root comparisons with their actual power transitions.
-Source: definition clause 2, inverse images of roots of unity
-(blueprint: prose-10-21). -/
+/-- The root comparisons with their actual power transitions. -/
 def rootTowerMap (l : ℕ) [Fact l.Prime] {X Y : Scheme.{u}} (g : X ⟶ Y) :
     proEtaleRootsOfUnityTower Y l (Fact.out : l.Prime) ⋙
         proEtaleSheafInverseImage g AddCommGrpCat.{u + 1} ⟶
@@ -154,9 +144,7 @@ private theorem rootTowerMap_eq (l : ℕ) [Fact l.Prime]
 attribute [local irreducible] rootTowerMap
 
 /-- The inverse-limit comparison followed by the inverse limit of the root maps.
-This formula retains all the projections of the completed root line.
-Source: definition clause 2, tau for Z_l(1)
-(blueprint: prose-10-21). -/
+This formula retains all the projections of the completed root line. -/
 def rootLineMap (l : ℕ) [Fact l.Prime] {X Y : Scheme.{u}} (g : X ⟶ Y) :
     (proEtaleSheafInverseImage g AddCommGrpCat.{u + 1}).obj (purTwistZlOne Y l) ⟶
       purTwistZlOne X l :=
@@ -167,9 +155,7 @@ def rootLineMap (l : ℕ) [Fact l.Prime] {X Y : Scheme.{u}} (g : X ⟶ Y) :
 attribute [local irreducible] rootLineMap
 
 /-- Pull a compatible root section through the specified inverse-image unit and
-the specified inverse-limit root map. This is defined before extending coefficients.
-Source: definition clause 2
-(blueprint: prose-10-21). -/
+the specified inverse-limit root map. This is defined before extending coefficients. -/
 def rootSection (l : ℕ) [Fact l.Prime] {X Y : Scheme.{u}} (g : X ⟶ Y)
     (V : Y.ProEt) (x : (purTwistZlOne Y l).obj.obj (op V)) :
     (purTwistZlOne X l).obj.obj (op ((proEtaleBaseChange g).obj V)) :=
@@ -178,9 +164,7 @@ def rootSection (l : ℕ) [Fact l.Prime] {X Y : Scheme.{u}} (g : X ⟶ Y)
       (purTwistZlOne Y l)).hom.app (op V) x)
 
 /-- The ordinary completed-coefficient module pullback, with the existing
-projection-normalized coefficient identification.
-Source: definition clause 1
-(blueprint: prose-10-21). -/
+projection-normalized coefficient identification. -/
 abbrev modulePull (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {X Y : Scheme.{u}} (g : X ⟶ Y) :=
   proEtaleRingModulePullback g
@@ -188,9 +172,7 @@ abbrev modulePull (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     ((PurCompactSupport.completed l E).ring X)
     ((PurCompactSupport.completed l E).pull g)
 
-/-- Insertion of a section into the preceding module pullback.
-Source: definition clause 1, coefficient-linear inverse image
-(blueprint: prose-10-21). -/
+/-- Insertion of a section into the preceding module pullback. -/
 def moduleSection (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {X Y : Scheme.{u}} (g : X ⟶ Y)
     (M : integralTowerModules l E Y) (V : Y.ProEt)
@@ -204,14 +186,7 @@ def moduleSection (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The nonnegative powers are fixed on every scalar and root tensor, including
 the coefficient unit at zero. This is the coefficient extension of rootLineMap,
-followed by its tensor powers, not an unnormalized line isomorphism.
-Source: definition clauses 2--3
-(blueprint: prose-10-21).
-Proof: extend the inverse-limit root map along the constant integer coefficients.
-The specified completed coefficient comparison makes it linear. The tensor
-universal property gives the powers; at zero use the coefficient comparison.
-For an isomorphism of schemes all these factors are isomorphisms. The displayed
-local generators determine each sheaf map uniquely, including on the empty site. -/
+followed by its tensor powers, not an unnormalized line isomorphism. -/
 theorem existsUnique_positiveLineMaps (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
@@ -296,9 +271,7 @@ theorem existsUnique_positiveLineMaps (l : ℕ) [Fact l.Prime] (E : Type u) [Fie
   intro V a x
   exact (hQ d V.unop a x).trans (hP d V.unop a x).symm
 
-/-- The tensor-power comparisons selected from their unique scalar/root formulas.
-Source: definition clauses 2--3
-(blueprint: prose-10-21). -/
+/-- The tensor-power comparisons selected from their unique scalar/root formulas. -/
 def positiveLineMaps (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {X Y : Scheme.{u}}
     (g : X ⟶ Y) [IsIso g] (d : ℕ) :
@@ -308,9 +281,7 @@ def positiveLineMaps (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 attribute [local irreducible] positiveLineMaps
 
-/-- Signed lines use the published positive tensor powers and internal duals.
-Source: definition clause 3
-(blueprint: prose-10-21). -/
+/-- Signed lines use the published positive tensor powers and internal duals. -/
 abbrev line (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (m : ℤ) :=
   coefficientTwistLine T
@@ -319,15 +290,7 @@ abbrev line (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The negative powers are fixed by evaluation, which is precisely conjugation
 by the positive comparison and the coefficient comparison. Positive powers retain
-their previously fixed root-tensor maps.
-Source: definition clause 3
-(blueprint: prose-10-21).
-Proof: for negative powers transport internal Hom through the isomorphism of sites.
-Send phi to c composed with phi composed with the inverse positive comparison.
-Evaluation on all local sections gives the displayed equation. The positive maps
-are invertible and their local images generate, so this equation determines the
-negative map uniquely. Inverting the conjugation gives its inverse. The clauses
-cover zero, every positive integer and every negative integer without overlap. -/
+their previously fixed root-tensor maps. -/
 theorem existsUnique_signedLineMaps (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
@@ -351,9 +314,7 @@ theorem existsUnique_signedLineMaps (l : ℕ) [Fact l.Prime] (E : Type u) [Field
     ((PurCompactSupport.completed l E).pull g) (purTwistIntegralModule Y l E)
     (purTwistIntegralModule X l E) (positiveLineMaps l E g)
 
-/-- The unique signed inverse-image comparisons at completed coefficients.
-Source: definition clause 3
-(blueprint: prose-10-21). -/
+/-- The unique signed inverse-image comparisons at completed coefficients. -/
 def signedLineMaps (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {X Y : Scheme.{u}}
     (g : X ⟶ Y) [IsIso g] (m : ℤ) :
@@ -474,9 +435,7 @@ private def canonicalAugmentation (l : ℕ) [Fact l.Prime] (E : Type u) [Field E
   towerAugmentation _ _ (augmentationTower l E g)
 
 /-- The two prescribed coordinate equations for the strict pullback augmentation.
-This is exactly the scalar-generator formula and the vanishing shifted component.
-Source: definition clause 4
-(blueprint: prose-10-21). -/
+This is exactly the scalar-generator formula and the vanishing shifted component. -/
 def pullbackAugmentationNormalization (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X Y : Scheme.{u}} (g : X ⟶ Y)
@@ -556,15 +515,7 @@ attribute [local irreducible] canonicalAugmentation
 
 /-- The strict comparison from ordinary inverse image to the specified completed
 pullback Roos complex. Both cone components are fixed, so this does not choose a
-map of homotopy limits from its finite evaluations.
-Source: definition clause 4, lambda; the isomorphism-derived-pullback construction
-(blueprint: prose-10-21).
-Proof: reduce a module section x at each positive quotient and apply the finite
-inverse-image unit. These maps are completed-linear, since the coefficient maps
-commute with the quotient projections. They commute with every strict transition.
-Their product is killed by 1-s. The mapping-cocone lift with zero second component
-gives the comparison. The displayed two component equations determine it uniquely
-in every degree and prove its naturality in the original complex. -/
+map of homotopy limits from its finite evaluations. -/
 theorem existsUnique_pullbackAugmentation (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X Y : Scheme.{u}} (g : X ⟶ Y) :
@@ -592,9 +543,7 @@ end AugmentationProof
 
 attribute [local irreducible] canonicalAugmentation
 
-/-- The uniquely normalized strict augmentation.
-Source: definition clause 4
-(blueprint: prose-10-21). -/
+/-- The uniquely normalized strict augmentation. -/
 def pullbackAugmentation (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {X Y : Scheme.{u}}
     (g : X ⟶ Y) :
@@ -652,14 +601,7 @@ attribute [local irreducible] pullbackAugmentation IntegralOnSlice.roosUnit
 attribute [local instance_reducible] IntegralOnSlice.roos
 
 /-- Ordinary inverse image along an isomorphism preserves completeness; the
-specified augmentation is therefore a quasi-isomorphism on complete good inputs.
-Source: definition clause 4 and lem-weil-isomorphism-derived-pullback
-(blueprint: prose-10-21).
-Proof: identify inverse image with reindexing the equivalent pro-etale site.
-It preserves the strict quotient tower, its products and its Roos differential.
-The augmentation becomes the usual derived-completeness unit, which is invertible
-on a complete input. The finite reductions and the common constructibility interval
-are preserved by this exact relabelling. -/
+specified augmentation is therefore a quasi-isomorphism on complete good inputs. -/
 theorem pullbackAugmentation_isIso (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
@@ -688,9 +630,7 @@ end AugmentationIdentification
 attribute [local irreducible] pullbackAugmentation
 
 /-- Lambda on a good complete representative: normalized descent to the strict
-Roos complex, followed by the inverse of its specified augmentation.
-Source: definition clause 4
-(blueprint: prose-10-21). -/
+Roos complex, followed by the inverse of its specified augmentation. -/
 def completedToOrdinaryOnGood (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
@@ -736,14 +676,8 @@ attribute [local irreducible] completedToOrdinaryOnGood
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 
-/-- The full lambda comparison has the strict representative normalization retained.
-Source: definition clause 4
-(blueprint: prose-10-21).
-Proof: resolve each integral constructible object by a flat-term K-flat complex.
-The previous comparison gives the component there. Naturality of the strict
-augmentation and the normalized descent makes it independent of resolution and
-natural in every localized arrow. Every object has such a representative, so the
-displayed formula also proves uniqueness. No arbitrary natural isomorphism is chosen. -/
+/-- The full lambda comparison exists uniquely with the strict representative
+normalization. -/
 theorem existsUnique_completedToOrdinary (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
@@ -781,9 +715,7 @@ theorem existsUnique_completedToOrdinary (l : ℕ) [Fact l.Prime] (E : Type u) [
 
 end CompletedComparisonProof
 
-/-- The canonical lambda comparison determined on all good representatives.
-Source: definition clause 4
-(blueprint: prose-10-21). -/
+/-- The canonical lambda comparison determined on all good representatives. -/
 def completedToOrdinary (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :=
@@ -792,9 +724,7 @@ def completedToOrdinary (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local irreducible] completedToOrdinary
 
 /-- The ordinary signed line placed in degree zero with its actual inverse-image
-comparison, before completed pullback is identified with ordinary pullback.
-Source: definition clause 4
-(blueprint: prose-10-21). -/
+comparison, before completed pullback is identified with ordinary pullback. -/
 def ordinaryDerivedLineMap (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] (m : ℤ) :
@@ -806,9 +736,7 @@ def ordinaryDerivedLineMap (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 attribute [local irreducible] ordinaryDerivedLineMap
 
-/-- The integral theta is exactly tau after the specified lambda.
-Source: definition clause 4
-(blueprint: prose-10-21). -/
+/-- The integral theta is exactly tau after the specified lambda. -/
 def integralDerivedLineMap (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
@@ -824,9 +752,7 @@ def integralDerivedLineMap (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local irreducible] integralDerivedLineMap
 
 /-- The unchanged rational coefficient-line object is the localization of its
-specified complete integral representative.
-Source: definition clause 4
-(blueprint: prose-10-21). -/
+specified complete integral representative. -/
 abbrev rationalLine (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
     [∀ t : T, Invertible (l : T.residueField t)] (m : ℤ) :
@@ -835,9 +761,7 @@ abbrev rationalLine (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Theta at rational coefficients is exactly the localized integral theta, with
 the recorded pullback's unchanged-object identification. No stable lattice for
-any other Weil complex enters this definition.
-Source: definition clause 4
-(blueprint: prose-10-21). -/
+any other Weil complex enters this definition. -/
 def rationalDerivedLineMap (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
@@ -878,9 +802,7 @@ attribute [local irreducible] ScalarLocalization.category
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The common-stage theta is represented by the same rational root map at the
-least finite coefficient stage, with the prescribed pullback object identification.
-Source: definition clause 4
-(blueprint: prose-10-21). -/
+least finite coefficient stage, with the prescribed pullback object identification. -/
 def commonDerivedLineMap (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
@@ -902,9 +824,7 @@ set_option allowUnsafeReducibility true in
 attribute [local irreducible] commonDerivedLineMap commonStageDerivedPullback
 attribute [local irreducible] commonStageDerivedTensor rationalDerivedTensor
 
-/-- The rational coefficient Weil line, using the geometric semilinear Frobenius.
-Source: definition clauses 4--5
-(blueprint: prose-10-21). -/
+/-- The rational coefficient Weil line, using the geometric semilinear Frobenius. -/
 def rationalWeilLine (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (Y₀ : Over (Spec (.of D.k₀)))
     [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (E : Type u) [Field E]
@@ -919,9 +839,7 @@ def rationalWeilLine (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l
 
 attribute [local irreducible] rationalWeilLine
 
-/-- The coefficient Weil line in the literal common-stage category.
-Source: definition clauses 4--5
-(blueprint: prose-10-21). -/
+/-- The coefficient Weil line in the literal common-stage category. -/
 def commonWeilLine (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (Y₀ : Over (Spec (.of D.k₀)))
     [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]

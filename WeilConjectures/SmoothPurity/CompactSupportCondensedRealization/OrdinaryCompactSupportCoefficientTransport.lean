@@ -20,9 +20,23 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 
 /-! # Ordinary compact-support coefficient system transport
 
-Source: blueprint theorem-smooth-purity-all-admissible-coefficients, Steps 2--3; the compact-support
-realization prerequisite, proof Steps 2--3 and 8--11 (agent-formulated constructions).
-(blueprint: def-pur-ordinary-compact-support-coefficient-transport). -/
+This file defines whole-system compact support `systemSupport` (extension by zero followed by
+derived proper direct image) on the ringed sequence site of finite coefficient quotients, the
+exact restriction `systemRestriction` along a coefficient map `i : E → F`, and the comparison
+isomorphisms between restriction and pullback, proper pushforward, open extension and compact
+support. It ends with the coefficient projection `systemProjection`, the scalar-adjunction mate
+of the compact-support restriction square.
+
+## Implementation details
+
+The restriction comparisons are identities on underlying sections; none of them needs flatness
+of the finite quotients, and coefficient restriction is not required to preserve K-injectives.
+
+## References
+
+* Zheng, Construction 4.1 and 4.10.
+* Stacks Project, Tags 03D7, 03DI, 03EK, 0D6E.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -65,9 +79,8 @@ variable {A : Type a} [Category.{av} A] [Abelian A] [HasDerivedCategory.{w} A]
   {B : Type b} [Category.{bv} B] [Abelian B] [HasDerivedCategory.{w} B]
   [Abelian.HasKInjectiveResolutions A] (G : A ⥤ B) [G.Additive]
 
-/-- The universal right-derived unit on complexes, including the canonical homotopy
-quotient comparisons. Source: Stacks 0D6E; blueprint proof Steps 2--3
-(blueprint: def-pur-ordinary-compact-support-coefficient-transport). -/
+/-- The universal right-derived unit `Q(G K) ⟶ RG(Q K)` on a complex `K`, including the
+canonical homotopy quotient comparisons. -/
 def rightUnitApp (K : CochainComplex A ℤ) :
     DerivedCategory.Q.obj ((G.mapHomologicalComplex (.up ℤ)).obj K) ⟶
       G.rightDerivedFunctor.obj (DerivedCategory.Q.obj K) :=
@@ -76,20 +89,14 @@ def rightUnitApp (K : CochainComplex A ℤ) :
     G.rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj K) ≫
     G.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso A).hom.app K)
 
-/-- Naturality of the same universal unit, before any coefficient evaluation.
-Source: Stacks 0D6E; blueprint proof Steps 2--3
-(blueprint: def-pur-ordinary-compact-support-coefficient-transport).
-Proof: compose naturality of quotientCompQhIso, the derived unit, and the quotient
-comparison. The functoriality of G and associativity give the displayed equation. -/
+/-- Naturality of `rightUnitApp` in chain maps. -/
 theorem rightUnitApp_naturality {K L : CochainComplex A ℤ} (f : K ⟶ L) :
     DerivedCategory.Q.map ((G.mapHomologicalComplex (.up ℤ)).map f) ≫ rightUnitApp G L =
       rightUnitApp G K ≫ G.rightDerivedFunctor.map (DerivedCategory.Q.map f) := by
   change _ ≫ G.rightDerivedFunctorUnitQ L = G.rightDerivedFunctorUnitQ K ≫ _
   exact G.rightDerivedFunctorUnitQ_naturality f
 
-/-- The actual universal right-derived unit as one natural transformation on complexes.
-Source: Stacks 0D6E; blueprint proof Steps 2--3
-(blueprint: def-pur-ordinary-compact-support-coefficient-transport). -/
+/-- The universal right-derived unit as a natural transformation on complexes. -/
 def rightUnit : G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
     DerivedCategory.Q ⋙ G.rightDerivedFunctor where
   app := rightUnitApp G
@@ -123,24 +130,18 @@ private theorem composed_rightUnit_naturality
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E]
   [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The existing finite quotient rings, with the site-size lift.
-Source: blueprint proof Step 2
-(blueprint: def-pur-ordinary-compact-support-coefficient-transport). -/
+/-- The finite coefficient quotient rings, lifted to the site universe. -/
 abbrev quotientRings (n : ℕ) : CommRingCat.{u + 1} :=
   CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))
 
-/-- The actual adjacent quotient maps, retaining their scalar actions.
-Source: blueprint proof Step 2
-(blueprint: def-pur-ordinary-compact-support-coefficient-transport). -/
+/-- The transition maps between adjacent finite coefficient quotients. -/
 def quotientMaps (n : ℕ) : quotientRings l E (n + 1) ⟶ quotientRings l E n :=
   CommRingCat.ofHom
     (ULift.ringEquiv.symm.toRingHom.comp
       ((Padic.coefficientExtensionTransition l E (n + 1)).comp ULift.ringEquiv.toRingHom))
 
-/-- Whole-system compact support: exact extension by zero followed by separately
-right-derived proper direct image, on the ringed sequence site itself.
-Source: blueprint proof Steps 2--3, Zheng Construction 4.1
-(blueprint: def-pur-ordinary-compact-support-coefficient-transport). -/
+/-- Whole-system compact support along a compactification: extension by zero followed by
+derived proper direct image, on the ringed sequence site. -/
 def systemSupport {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     coefficientSequenceDerived.{u, u} l E X ⥤ coefficientSequenceDerived.{u, u} l E Y :=
   AlgebraicGeometry.ProEtale.SemilinearProperOpen.J (quotientRings l E) (quotientMaps l E) c.i ⋙
@@ -155,11 +156,8 @@ variable (l : ℕ) [Fact l.Prime] (E F : Type u) [NormedField E] [NormedField F]
   [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] F]
   (i : E →ₐ[ℚ_[l]] F)
 
-/-- The finite scalar maps commute with the adjacent quotient transitions, even when
-ramified. Source: blueprint proof Steps 8--11
-(blueprint: def-pur-ordinary-compact-support-coefficient-transport).
-Proof: both composites are induced from the same integer-ring inclusion and target
-quotient. Quotient induction and constant sheafification give the equality. -/
+/-- The finite scalar maps commute with the adjacent quotient transitions, even when the
+extension is ramified. -/
 theorem scalarQuotients_commute (W : Scheme.{u}) (n : ℕ) :
     integralScalarQuotientSheafMap.{u, u} l E F i W (n + 1) ≫
         coefficientSequenceCommRingTransition.{u, u} l F W n =
@@ -176,9 +174,7 @@ theorem scalarQuotients_commute (W : Scheme.{u}) (n : ℕ) :
   ext x
   exact RingHom.congr_fun (integralScalarQuotientMap_transition l E F i n) x.down
 
-/-- The actual ring map on the entire vertical sequence site.
-Source: blueprint proof Steps 9--11; semilinear systemMap
-(blueprint: def-pur-ordinary-compact-support-coefficient-transport). -/
+/-- The coefficient ring map on the whole sequence site induced by the finite scalar maps. -/
 def scalarSystemMap (W : Scheme.{u}) :=
   SemilinearSections.systemMap (ProEt.topology W)
     (integralCoefficientCommRingSheaf.{u, u} l E W)
@@ -187,21 +183,15 @@ def scalarSystemMap (W : Scheme.{u}) :=
     (coefficientSequenceCommRingTransition.{u, u} l F W)
     (integralScalarQuotientSheafMap.{u, u} l E F i W) (scalarQuotients_commute l E F i W)
 
-/-- Exact restriction of the full semilinear system along the actual coefficient map.
-Source: blueprint proof Steps 9--11
-(blueprint: def-pur-ordinary-compact-support-coefficient-transport). -/
+/-- Exact restriction of semilinear systems along the coefficient map. -/
 abbrev systemRestriction (W : Scheme.{u}) :=
   SemilinearSections.res (scalarSystemMap l E F i W)
 
-/-- Exact derived coefficient restriction on whole systems.
-Source: blueprint proof Steps 9--11
-(blueprint: def-pur-ordinary-compact-support-coefficient-transport). -/
+/-- Derived coefficient restriction on semilinear systems. -/
 abbrev derivedSystemRestriction (W : Scheme.{u}) :=
   (systemRestriction l E F i W).mapDerivedCategory
 
-/-- The existing universal, K-flat normalized whole-system scalar extension.
-Source: blueprint proof Step 10; lem-coef-semilinear-derived-sections
-(blueprint: def-pur-ordinary-compact-support-coefficient-transport). -/
+/-- The universal, K-flat normalized scalar extension on semilinear systems. -/
 def systemScalarData (W : Scheme.{u}) :
     SemilinearSections.ScalarSystems.{u + 1, u, u + 1} (ProEt.topology W)
       (integralCoefficientCommRingSheaf.{u, u} l E W)
@@ -296,12 +286,8 @@ private theorem restriction_push_iso
   exact (hd' M U x).trans (show (d.hom.app M).val.app U x = x from rfl).symm
 
 attribute [-instance] WeilConjectures.completedOrdinaryScalarExtension_additive in
-/-- Restriction commutes with ordinary geometric pushforward by the identity on sections.
-Source: blueprint proof Step 10; Stacks 03D7
-(blueprint: def-pur-ordinary-compact-support-coefficient-transport).
-Proof: both objects have sections M_n(U times_Y X), with the same source-ring action
-through the quotient inclusion. Identity maps give a natural isomorphism and commute
-with every index arrow. Sections at (n,U) prove uniqueness. -/
+/-- There is a unique isomorphism between restriction followed by ordinary pushforward and
+pushforward followed by restriction that is the identity on sections. -/
 theorem systemRestrictionPush_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! d : systemRestriction l E F i X ⋙
           SemilinearProperOpen.push (quotientRings l E) (quotientMaps l E) f ≅
@@ -332,9 +318,8 @@ theorem systemRestrictionPush_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
   intro d' hd'
   exact hu d' (fun M U x ↦ eq_of_heq (hd' M U.unop.1 U.unop.2 x))
 
-/-- The ordinary inverse-image comparison is the specified pushforward mate.
-Source: blueprint proof Step 10
-(blueprint: def-pur-ordinary-compact-support-coefficient-transport). -/
+/-- The ordinary inverse-image comparison, the adjunction mate of the pushforward
+comparison. -/
 def systemRestrictionPullInv {X Y : Scheme.{u}} (f : X ⟶ Y) :
     systemRestriction l E F i Y ⋙
         SemilinearProperOpen.pull (quotientRings l E) (quotientMaps l E) f ⟶
@@ -417,12 +402,7 @@ private theorem evaluations_reflect_iso
     isIso_of_reflects_iso _ (PresheafOfModules.toPresheaf _)
   exact isIso_of_reflects_iso g (SheafOfModules.forget _)
 
-/-- The pullback comparison is invertible without quotient flatness.
-Source: blueprint proof Step 10; Stacks 03EK
-(blueprint: def-pur-ordinary-compact-support-coefficient-transport).
-Proof: inverse image uses identified coefficient sheaves. The displayed mate is the
-identity on the underlying additive inverse images, with the same restricted action.
-It has the inverse identity map, at every index simultaneously. -/
+/-- The ordinary inverse-image comparison is an isomorphism. -/
 @[instance] theorem systemRestrictionPullInv_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     IsIso (systemRestrictionPullInv l E F i f) := by
   have hM (M : VaryingRing.Modules (quotientRings l F) (quotientMaps l F) Y) :
@@ -435,8 +415,7 @@ It has the inverse identity map, at every index simultaneously. -/
 
 end PullbackIso
 
-/-- The recorded exact pullback has its recorded additive structure.
-Source: Zheng 4.10 (blueprint: def-pur-ordinary-compact-support-coefficient-transport). -/
+/-- The ordinary pullback of semilinear systems is additive. -/
 instance systemPullAdditive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (SemilinearProperOpen.pull (quotientRings l E) (quotientMaps l E) f).Additive :=
   (SemilinearProperOpen.pull_exact (quotientRings l E) (quotientMaps l E) f).1
@@ -445,9 +424,7 @@ attribute [-instance] systemPullAdditive
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The exact localization of the normalized ordinary pullback square.
-Source: blueprint proof Step 10
-(blueprint: def-pur-ordinary-compact-support-coefficient-transport). -/
+/-- The derived pullback/restriction square, induced by the ordinary one. -/
 def systemRestrictionPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
     SemilinearProperOpen.P (quotientRings l F) (quotientMaps l F) f ⋙
         derivedSystemRestriction l E F i X ≅
@@ -465,9 +442,8 @@ def systemRestrictionPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 attribute [local irreducible] systemRestrictionPull
 
-/-- The proper-image restriction arrow is the actual derived adjunction mate.
-Source: blueprint proof Step 10
-(blueprint: def-pur-ordinary-compact-support-coefficient-transport). -/
+/-- The proper direct image/restriction comparison, the derived adjunction mate of
+`systemRestrictionPull`. -/
 def systemRestrictionPush {X Y : Scheme.{u}} (f : X ⟶ Y) :
     SemilinearProperOpen.R (quotientRings l F) (quotientMaps l F) f ⋙
         derivedSystemRestriction l E F i Y ⟶
@@ -507,13 +483,7 @@ private theorem scalar_push_resolution {X Y : Scheme.{u}} (f : X ⟶ Y)
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] WeilConjectures.completedOrdinaryScalarExtension_additive in
-/-- The normalized proper-image restriction comparison is an isomorphism.
-Source: blueprint proof Step 10; derived ring-sheaf change adjunction
-(blueprint: def-pur-ordinary-compact-support-coefficient-transport).
-Proof: derive the actual ordinary restriction/direct-image square on simultaneous
-K-injective resolutions. The universal derived comparison identifies that square with
-the displayed adjunction mate. Its sectionwise identity inverse gives invertibility,
-without requiring coefficient restriction to preserve K-injectives. -/
+/-- The proper direct image/restriction comparison is an isomorphism. -/
 @[instance] theorem systemRestrictionPush_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     IsIso (systemRestrictionPush l E F i f) := by
   let e := asIso (systemRestrictionPullInv l E F i f)
@@ -544,9 +514,8 @@ without requiring coefficient restriction to preserve K-injectives. -/
 
 attribute [local irreducible] SemilinearProperOpen.J SemilinearProperOpen.jAdj
 
-/-- The open restriction arrow is fixed by the same pullback square and the open unit.
-Source: blueprint proof Step 10
-(blueprint: def-pur-ordinary-compact-support-coefficient-transport). -/
+/-- The extension-by-zero/restriction comparison along an open immersion, the inverse mate of
+`systemRestrictionPull`. -/
 def systemRestrictionOpenInv {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :
     derivedSystemRestriction l E F i X ⋙
         SemilinearProperOpen.J (quotientRings l E) (quotientMaps l E) j ⟶
@@ -559,12 +528,7 @@ def systemRestrictionOpenInv {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j
 attribute [local irreducible] systemRestrictionOpenInv
 
 attribute [-instance] WeilConjectures.completedOrdinaryScalarExtension_additive in
-/-- The open-unit mate is invertible on the whole ordinary derived system category.
-Source: blueprint proof Step 10; Stacks 03DI
-(blueprint: def-pur-ordinary-compact-support-coefficient-transport).
-Proof: the underlying ordinary extension has the original sections on the open and
-zero outside. Scalar restriction keeps both pieces and their open unit, so its mate
-is identity on the original summands. Exact localization preserves its inverse. -/
+/-- The extension-by-zero/restriction comparison is an isomorphism. -/
 @[instance] theorem systemRestrictionOpenInv_isIso {X Z : Scheme.{u}} (j : X ⟶ Z)
     [IsOpenImmersion j] : IsIso (systemRestrictionOpenInv l E F i j) := by
   have := SemilinearProperOpen.jAdj_unit_isIso (quotientRings l F) (quotientMaps l F) j
@@ -589,9 +553,8 @@ is identity on the original summands. Exact localization preserves its inverse. 
     (derivedSystemRestriction l E F i X) (derivedSystemRestriction l E F i Z)
     (systemRestrictionPull l E F i j) hc
 
-/-- The canonical restriction square for the entire proper/open system functor.
-Source: blueprint proof Step 10
-(blueprint: def-pur-ordinary-compact-support-coefficient-transport). -/
+/-- The isomorphism between restriction followed by compact support and compact support
+followed by restriction. -/
 def systemSupportRestriction {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     derivedSystemRestriction l E F i X ⋙ systemSupport l E c ≅
       systemSupport l F c ⋙ derivedSystemRestriction l E F i Y :=
@@ -605,9 +568,8 @@ attribute [local irreducible] systemSupportRestriction
 
 attribute [local semireducible] scalarSystemMap
 
-/-- The whole-system coefficient projection is this actual scalar-adjunction mate.
-Source: blueprint proof Step 10
-(blueprint: def-pur-ordinary-compact-support-coefficient-transport). -/
+/-- The coefficient projection for compact support, the scalar-adjunction mate of
+`systemSupportRestriction`. -/
 def systemProjection {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     systemSupport l E c ⋙ (systemScalarData l E F i Y).scalar.T ⟶
       (systemScalarData l E F i X).scalar.T ⋙ systemSupport l F c :=

@@ -15,8 +15,18 @@ import WeilConjectures.RingTheory.HenselianPairDomainConnected
 /-!
 # Connected zero loci over a henselian pair
 
-Source: Stacks Project, More on Algebra, Lemma 15.11.16 (Tag 09Y6)
-(blueprint: lem-weil-pbc-henselian-pair-prime-connected).
+For a henselian pair `(A, I)` and a prime `p` of `A`, the closed subset `V(p + I)` of `Spec A` is
+connected (`PrimeSpectrum.connectedSpace_zeroLocus_sup_of_henselian`).
+
+## Implementation details
+
+The pair `(A ⧸ p, I(A ⧸ p))` is henselian since `A ⧸ p` is integral over `A`, so the domain case
+`connectedSpace_zeroLocus_of_henselian_domain` applies; `V(p + I)` is the image of the
+corresponding closed subset of `Spec (A ⧸ p)`.
+
+## References
+
+* [Stacks, Tag 09Y6]
 -/
 
 @[expose] public section
@@ -26,19 +36,7 @@ universe u
 namespace PrimeSpectrum
 
 /-- For a henselian pair `(A, I)` and a prime ideal `p`, the closed subset `V(p + I)`
-is connected in its subspace topology, including nonemptiness.
-Source: Stacks Project, More on Algebra, Lemma 15.11.16 (Tag 09Y6)
-(blueprint: lem-weil-pbc-henselian-pair-prime-connected).
-
-Proof:
-1. Apply `henselianRing_of_isIntegral` to the integral quotient A → A/p.
-   The quotient is a nonzero domain because p is prime.
-2. Apply `connectedSpace_zeroLocus_of_henselian_domain` to the image of I in A/p.
-   That theorem lifts roots of X(X - 1), making every quotient idempotent zero or one,
-   and uses the clopen-idempotent criterion for connectedness, including nonemptiness.
-3. Take the continuous image under the quotient-spectrum map. Mathlib's
-   `image_comap_zeroLocus_eq_zeroLocus_comap` and the ideal comap-map identity
-   identify this image with V(p ⊔ I). -/
+is connected in its subspace topology, including nonemptiness. -/
 theorem connectedSpace_zeroLocus_sup_of_henselian {A : Type u} [CommRing A]
     (I : Ideal A) [HenselianRing A I] (p : Ideal A) [p.IsPrime] :
     ConnectedSpace (zeroLocus ((p ⊔ I : Ideal A) : Set A)) := by

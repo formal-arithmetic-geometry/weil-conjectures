@@ -12,11 +12,25 @@ import WeilConjectures.SmoothPurity.Qcqs.QcqsCompactSupportFiniteMates
 
 /-! # Finite comparisons for qcqs completed compact support
 
-Source: Bhatt--Scholze, Definition 6.7.6 and Lemma 6.7.7; Stacks Tag 0F7J
-(blueprint: lem-qcqs-compact-support-finite-comparison).
-
 The comparison below is the actual scalar-adjunction mate on constructible integral
 inputs. Its source is the ordinary completed proper/open composite.
+
+## Implementation details
+
+The schemes are Noetherian and qcqs, being of finite type over a field, and the input is
+complete by integral constructibility. On a K-flat representative open extension is exact and
+the quotient tensor comparison is the extension-summand tensor map. Quasi-compact open extension
+preserves completeness, and proper direct image commutes with the total derived inverse limit
+by its right adjunction; the perfect two-term quotient resolution identifies its scalar mate
+with proper image of the quotient tensor map. The unit/counit factorization of the composite is
+precisely `comparison (reduction ...) c`, so this specific mate is invertible. No separatedness
+of either structure morphism is used.
+
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 6.7.6 and Lemmas 6.1.13,
+  6.7.7]
+* [Stacks Project, Tags 0E8I and 0F7J]
 -/
 
 @[expose] public noncomputable section
@@ -48,26 +62,7 @@ include K₀ hl Xbase Ybase Xft Xqc Yft Yqc fbase fs fft fqc
 integral constructible inputs; its scalar-adjunction mate to each positive finite
 quotient is invertible.
 This statement concerns the ambient proper/open functor, without the recorded integral
-functor or any choice of realization map.
-
-Source: Bhatt--Scholze, Lemmas 6.7.7 and 6.1.13; Stacks Tags 0E8I and 0F7J
-(blueprint: lem-qcqs-compact-support-finite-comparison).
-
-Proof: the schemes are Noetherian and qcqs because they are finite type over a field.
-The input is complete by integral constructibility. On a K-flat representative, open
-extension is exact and the quotient tensor comparison is the extension-summand tensor
-map. It preserves the canonical quotient units. Quasi-compact open extension
-preserves completeness using the normalized quotient tower and its completion unit.
-Proper direct image commutes with the total derived inverse limit by its right
-adjunction. The perfect two-term quotient resolution identifies its scalar mate with
-proper image of the quotient tensor map. This identifies the
-completion unit of the proper image with proper image of the original completion unit,
-followed by the proper image/total-limit comparison. Thus the proper image is complete.
-Compose the proper comparison with proper image of the open comparison. Their actual
-unit/counit factorization is precisely `comparison (reduction ...) c`, so this specific
-mate is invertible, rather than merely its endpoints being isomorphic. No separatedness
-of either structure morphism is used. The zero object and empty open give zero objects;
-the identity compactification gives the scalar-adjunction identity comparison. -/
+functor or any choice of realization map. -/
 theorem sfQcqsCompactSupport_finiteComparison
     (K : sfIntegralConstructibleCategory l E X) :
     IsSfDerivedComplete l E Y ((image (completed l E) c).obj K.obj) ∧

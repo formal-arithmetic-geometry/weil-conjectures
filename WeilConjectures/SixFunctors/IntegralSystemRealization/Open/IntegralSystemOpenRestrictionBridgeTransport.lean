@@ -9,7 +9,12 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.Canonical.In
 import all WeilConjectures.CategoryTheory.SixFunctors.SystemProperOpenLambdaExchange
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Open.IntegralSystemOpenCompositorBridge
 
-/-! Transport of the open-restriction factor through the canonical bridge. -/
+/-! # Transport of the open-restriction factor through the canonical bridge
+
+## References
+
+* [Stacks, Tag 03DI], [Stacks, Tag 07A7], [Stacks, Tag 0F7B]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -327,14 +332,7 @@ private theorem pull_inverse_factor_naturality (o : Operations l E)
   exact (modelBridgeP l E o b j).hom.naturality
     ((c.openComp l E s j ≪≫ openCongr l E o h).inv.app M)
 
-/-- The open-restriction factor is compatible with the canonical bridge.
-Source: Stacks 03DI, 07A7 and 0F7B; blueprint fix-prop-coherence.
-Proof: adjoint uniqueness transports the open unit, and isomorphism cancellation
-transports its inverse. The existing open-compositor bridge compares the composite
-open map, including equality transport of its factorization. Expand both restriction
-factors as the pull of the inverse compositor followed by the inverse unit.
-Naturality of the pull bridge and of the inverse unit then gives the equation.
-(blueprint: lem-sf-integral-system-open-restriction-bridge-transport). -/
+/-- The open-restriction factor is compatible with the canonical bridge. -/
 theorem openRestrictionBridge_transport (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) (b : CanonicalBridge l E o)
     {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W)

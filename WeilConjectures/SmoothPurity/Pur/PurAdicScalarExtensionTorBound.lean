@@ -13,9 +13,17 @@ import all WeilConjectures.AlgebraicGeometry.Scalar.ScalarExtensionFunctor
 /-!
 # Finite coefficient extension preserves the uniform Tor interval
 
-Source: literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md,
-Unit Step 2: ordinary derived coefficient extension preserves the finite-Tor domain
-(blueprint: lem-pur-adic-scalar-extension-tor-bound).
+Ordinary derived coefficient extension preserves the finite-Tor domain.
+
+## Implementation details
+
+The comparison between completed scalar extension and reduction is obtained from the defining
+residue equation of `completedCoefficientMap`, which identifies the composites `R → S → C` and
+`R → A → C`, together with the composition of derived reductions.
+
+## References
+
+* [Stacks Project, Tags 06YY and 0G7E]
 -/
 
 -- After pruning, this module only keeps private declarations.
@@ -34,20 +42,7 @@ namespace WeilConjectures
 /-- Ordinary completed scalar extension commutes with reduction at the same positive
 exponent. This comparison requires neither constructibility nor derived completeness.
 The integer inclusion sends the source uniformizer into the target maximal ideal,
-so the same exponent is always sufficient, even for ramified extensions.
-
-Source: blueprint scalar-extension tower proof, first paragraph; Stacks Tags 06YY
-and 0G7E (blueprint: lem-pur-adic-scalar-extension-tor-bound).
-
-Proof: the defining residue equation of `completedCoefficientMap` identifies the
-composites R -> S -> C and R -> A -> C. Resolve an arbitrary R-complex by a K-flat
-complex P with flat terms. Change of rings preserves these two properties. Thus
-both iterated derived extensions are computed by their termwise scalar extensions.
-Associativity sends (c tensor s) tensor p to c*s tensor p, and its inverse inserts
-1 in the intermediate scalar factor. Sheafification preserves these mutually inverse
-balanced maps. They commute with differentials and augmentations. The universal
-left-derived properties descend this natural comparison to the derived categories;
-the comparison is invertible because it is invertible on every K-flat resolution. -/
+so the same exponent is always sufficient, even for ramified extensions. -/
 private theorem completedScalarReductionComparison
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E]

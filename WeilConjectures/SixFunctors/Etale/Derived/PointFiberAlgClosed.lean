@@ -15,9 +15,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ScalarExtension
 
 The `ℚ̄_ℓ`-coefficient category `Dᵇc(Y, ℚ̄_ℓ)` is the filtered 2-colimit over the finite
 subextensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` of the rational stages `Dᵇc(Y, E)`, along the scalar extensions
-`- ⊗_E F`, and blueprint `lemma-perfect-complexes-geometric-point` defines
-`Dᵇ_fd(ℚ̄_ℓ) = 2-colim_E Dᵇ_fd(E)`. The evaluation at the geometric point of `s = Spec k`,
-`Fib_s : Dᵇc(s, ℚ̄_ℓ) ⥤ Dᵇ_fd(ℚ̄_ℓ)`, is obtained stagewise from the equivalences
+`- ⊗_E F`, and `Dᵇ_fd(ℚ̄_ℓ) = 2-colim_E Dᵇ_fd(E)`. The evaluation at the geometric point of
+`s = Spec k`, `Fib_s : Dᵇc(s, ℚ̄_ℓ) ⥤ Dᵇ_fd(ℚ̄_ℓ)`, is obtained stagewise from the equivalences
 `Fib_s : Dᵇc(s, E) ≌ Dᵇ_fd(E)` (`AlgebraicGeometry.Etale.pointFiberRationalEquivalence`), which are
 compatible with the scalar extensions, and passed to the colimit.
 
@@ -279,9 +278,8 @@ lemma integralStageTransition_map_smul (r : StageInt.{u} l E) {X Y} (f : X ⟶ Y
       integersStageMap h r • (integralStageTransition k h).map f :=
   ObjectProperty.hom_ext _ (derivedBaseChange_map_smul _ _ _ r f.hom)
 
-/-- The scalar extension `- ⊗_E F : Dᵇc(s, E) ⥤ Dᵇc(s, F)` of blueprint
-`proposition-inverting-ell--2` over `s = Spec k`: the functor induced on the
-rationalizations by the derived base change along `𝒪_E ⟶ 𝒪_F`. -/
+/-- The scalar extension `- ⊗_E F : Dᵇc(s, E) ⥤ Dᵇc(s, F)` over `s = Spec k`: the functor induced on
+the rationalizations by the derived base change along `𝒪_E ⟶ 𝒪_F`. -/
 noncomputable def rationalStageTransition : RationalPointStage l k E ⥤ RationalPointStage l k F :=
   Rationalization.mapOfRingHom (R := StageInt.{u} l E) (R' := StageInt.{u} l F)
     (integersStageMap.{u} h) (integersStageMap_nonZeroDivisors_le h) (integralStageTransition k h)
@@ -408,18 +406,16 @@ noncomputable def pointFiberCocone :
   (fdCocone l).transport (fun h ↦ rationalStageTransition k h)
     (fun E ↦ (pointFiberStageEquivalence l k E).functor) (fun h ↦ pointFiberStageTransitionIso k h)
 
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finite coefficient categories over a point
-(stage `ℚ̄_ℓ`).
-
-At the algebraically closed coefficient `ℚ̄_ℓ`, `Dᵇc(s, ℚ̄_ℓ)` is the filtered 2-colimit
-`2-colim_E Dᵇc(s, E)` over the finite subextensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` along the scalar extensions
-`- ⊗_E F`, and `Dᵇ_fd(ℚ̄_ℓ) = 2-colim_E Dᵇ_fd(E)` is the bounded derived category of
-finite-dimensional `ℚ̄_ℓ`-vector spaces (`PadicAlgCl.fdCocone_isFilteredTwoColimit`). The evaluation
-at the geometric point of `s = Spec k`, obtained stagewise from the equivalences
-`Fib_s : Dᵇc(s, E) ≌ Dᵇ_fd(E)` (`AlgebraicGeometry.Etale.pointFiberStageEquivalence`), which commute
-with the scalar extensions (`AlgebraicGeometry.Etale.pointFiberStageTransitionIso`), and passed to
-the colimit, identifies `2-colim_E Dᵇc(s, E)` with `Dᵇ_fd(ℚ̄_ℓ)`: the cocone `E ↦ Fib_s ⊗_E ℚ̄_ℓ`
-with vertex `Dᵇ_fd(ℚ̄_ℓ)` is a filtered 2-colimit, i.e. `Fib_s : Dᵇc(s, ℚ̄_ℓ) ≌ Dᵇ_fd(ℚ̄_ℓ)`. -/
+/-- **Coefficient categories over a point**, stage `ℚ̄_ℓ`. At the algebraically closed coefficient
+`ℚ̄_ℓ`, `Dᵇc(s, ℚ̄_ℓ)` is the filtered 2-colimit `2-colim_E Dᵇc(s, E)` over the finite subextensions
+`E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` along the scalar extensions `- ⊗_E F`, and `Dᵇ_fd(ℚ̄_ℓ) = 2-colim_E Dᵇ_fd(E)` is
+the bounded derived category of finite-dimensional `ℚ̄_ℓ`-vector spaces
+(`PadicAlgCl.fdCocone_isFilteredTwoColimit`). The evaluation at the geometric point of `s = Spec k`,
+obtained stagewise from the equivalences `Fib_s : Dᵇc(s, E) ≌ Dᵇ_fd(E)`
+(`AlgebraicGeometry.Etale.pointFiberStageEquivalence`), which commute with the scalar extensions
+(`AlgebraicGeometry.Etale.pointFiberStageTransitionIso`), and passed to the colimit, identifies
+`2-colim_E Dᵇc(s, E)` with `Dᵇ_fd(ℚ̄_ℓ)`: the cocone `E ↦ Fib_s ⊗_E ℚ̄_ℓ` with vertex `Dᵇ_fd(ℚ̄_ℓ)`
+is a filtered 2-colimit, i.e. `Fib_s : Dᵇc(s, ℚ̄_ℓ) ≌ Dᵇ_fd(ℚ̄_ℓ)`. -/
 theorem pointFiberCocone_isFilteredTwoColimit : (pointFiberCocone l k).IsFilteredTwoColimit :=
   (fdCocone_isFilteredTwoColimit l).transport
 

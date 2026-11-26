@@ -15,7 +15,17 @@ public import Mathlib.RingTheory.AdjoinRoot
 /-!
 # Base change of a simple degree-p field presentation
 
-Source: Stacks Project, More on Algebra, Tag 07PR, binomial presentation paragraph.
+If `L = M(z)` with `z ^ p = a ∈ M` and `[L : M] = p`, then for every `K`-algebra `F` the ring
+`L ⊗_K F` is the quotient of `(M ⊗_K F)[Z]` by `Z ^ p - a ⊗ 1`.
+
+## Implementation details
+
+The polynomial `X ^ p - a` is the minimal polynomial of `z`, so `M[Z] / (Z ^ p - a) ≃ L`; this
+presentation is base changed along `M → M ⊗_K F`, using tensor associativity on the target.
+
+## References
+
+* [Stacks, Tag 07PR]
 -/
 
 @[expose] public section
@@ -24,18 +34,8 @@ universe u
 
 namespace MvPowerSeries
 
-/-- Base change of a simple degree-p field presentation at its specified coefficient.
-Source: Stacks Project, More on Algebra, Tag 07PR, binomial presentation paragraph.
-(blueprint: new-lem-weil-pbc-degree-p-quotient-component)
-
-Proof: The element z generates L over M, and its degree is p. The monic polynomial
-X^p - a vanishes at z and has degree p, so it is the minimal polynomial of z.
-Evaluation therefore identifies M[Z]/(Z^p-a) with L as an M-algebra. Tensor this
-presentation over M with R = M tensor_K F. Polynomial base change and quotient
-base change identify its source with R[Z]/(Z^p-i(a)), where i(a) = a tensor 1.
-Tensor associativity identifies the target L tensor_M R with L tensor_K F.
-Compose these algebra equivalences and forget their algebra structure.
-This argument also holds when F is zero: both sides are zero rings. -/
+/-- If `L = M(z)` with `z ^ p = a ∈ M` and `[L : M] = p`, then
+`(M ⊗_K F)[Z] / (Z ^ p - a ⊗ 1)` is isomorphic as a ring to `L ⊗_K F`. -/
 theorem nonempty_quotient_X_pow_sub_C_ringEquiv_tensorProduct
     (K L : Type u) [Field K] [Field L] [Algebra K L]
     (M : IntermediateField K L)

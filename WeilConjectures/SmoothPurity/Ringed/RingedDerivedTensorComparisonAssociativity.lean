@@ -9,7 +9,19 @@ public import WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.Rin
 import WeilConjectures.SmoothPurity.Ringed.RingedTensorRepresentativeTransport
 
 /-! # Derived associativity from coherent tensor representatives
-Source: Stacks 0FPT, 06YU and 07A4.
+
+Four normalized binary representative squares and chain coherence imply associativity of the
+derived tensor comparison.
+
+## Implementation details
+
+The proof forms the two source and two target nested total models; the chosen tensor
+coherences supply pure-triple associators, and the generic representative pasting argument
+cancels the nested model isomorphisms.
+
+## References
+
+* Stacks Project, Tags 0FPT, 06YU and 07A4.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -44,16 +56,7 @@ variable {V' : Type c'} [Category.{v'} V'] (J' : GrothendieckTopology V')
   (TU : CoefficientTensorModels.{r', c', v', d'} J' R' SU)
 
 -- The model comparison uses four nested representative squares.
-/-- Four normalized binary squares and chain coherence imply derived associativity.
-Source: Stacks 0FPT, 06YU and 07A4
-(blueprint: lem-pur-ringed-derived-tensor-comparison-associativity).
-Proof: form the two source and two target nested total models. The chosen tensor
-coherences supply pure-triple associators and their derived conjugation equations.
-Replace their one-K-flat comparisons by the simultaneous tensor-model comparisons.
-The four binary squares, model naturality, and chain associativity are precisely
-the hypotheses of the generic representative pasting argument. That argument
-cancels the nested model isomorphisms and gives the derived associativity equation.
-Only the five displayed pullback K-flat assertions are needed. -/
+/-- Four normalized binary squares and chain coherence imply derived associativity. -/
 theorem ringedDerivedTensorComparison_associativity
     (U : RingedTensorModules.{c, v, r} J R ⥤ RingedTensorModules.{c', v', r'} J' R')
     [U.Additive]

@@ -9,7 +9,15 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Ordinary.IntegralOr
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 
-/-! # Normalized reduction and geometric pullback -/
+/-! # Normalized reduction and geometric pullback
+
+## References
+
+* [Stacks, Tag 03D7]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 07A7]
+* [Stacks, Tag 0941]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -122,19 +130,7 @@ private theorem realization_of_ordinary (o : Operations l E) (a : OrdinaryLimitM
   choose r hr using @derived
   exact ⟨⟨a, @r, @hr⟩⟩
 
-/-- The ordinary sectionwise limit comparison descends to coherent derived reduction.
-Source: Stacks 03D7, 07A6, 07A7 and 0941; primitive realization Step 3
-(blueprint: lem-sf-integral-reduction-pullback-model).
-
-Proof: commute geometric direct image with the ordinary limit of restricted modules.
-The comparison is identity on the compatible families of sections, and its projections
-are precisely the finite direct-image comparisons. Take its ordinary left-adjoint
-conjugate. On flat-term K-flat representatives it commutes with quotient reduction.
-The adjunction-normalized reduction models identify this cochain comparison with the
-specified derived reductions. Localize the good representatives, using their functorial
-K-flat resolutions. Full faithfulness of restriction along that localization gives a
-natural derived isomorphism and its displayed whole-system representative equation.
-No faithfulness of finite derived evaluation is used. -/
+/-- The ordinary sectionwise limit comparison descends to coherent derived reduction. -/
 theorem integralReductionPullbackModel (o : Operations l E) :
     Nonempty (RealizationModel l E o) := by
   obtain ⟨a⟩ := integralOrdinaryLimitModel l E

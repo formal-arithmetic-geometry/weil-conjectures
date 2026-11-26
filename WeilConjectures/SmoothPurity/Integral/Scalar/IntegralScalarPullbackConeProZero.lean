@@ -14,8 +14,9 @@ import WeilConjectures.Algebra.Homology.SmoothPurity.DiagonalConeTransitionHomot
 
 /-! # Pro-zero cone of the normalized finite scalar pullback map
 
-Source: Stacks Tags 07A4 and 0941, and the cofinal uniformizer-filtration
-argument of lem-pur-integral-scalar-pullback-roos-quasi-iso.
+## References
+
+* Stacks Project, Tags 07A4, 0941, 08TC and 099N
 -/
 
 @[expose] public section
@@ -59,28 +60,7 @@ variable (l : ℕ) [Fact l.Prime]
   (ι : E →ₐ[ℚ_[l]] L)
 
 /-- The cone of the finite scalar pullback comparison has eventually nullhomotopic
-transitions, before taking products or a Roos complex.
-Source: Stacks, sites-cohomology.tex, Tags 07A4 and 0941; derived.tex Tag 08TC;
-proetale.tex Tag 099N. This is the finite-filtration part of the parent argument.
-(blueprint: lem-pur-integral-scalar-pullback-cone-pro-zero).
-
-Proof: write the image of the source uniformizer as a unit times the e-th power
-of the target uniformizer, where e is positive. The completed constant-sheaf
-quotient identification and tensor associativity identify the source tower with
-the subsequence of the target tower at e(n+1)-1. The identification is compatible
-with inverse image and all strict transitions. The generator equation identifies
-alpha with the transition from this subsequence to level n: the balanced tensor
-and inverse-image universal properties determine a map from the displayed generators.
-For fixed n choose m at least e(n+1)-1. The transition from target level m to n
-then factors through the subsequence at n. On the mapping cones the induced
-transition is nullhomotopic: its degree-minus-one off-diagonal entry is this
-factorization map, and the cone differential gives its two diagonal entries;
-the remaining entries cancel because the factorization is a chain map.
-Consequently this cone transition is zero after localization. K-flatness and flat
-terms allow the displayed finite tensors to compute the derived reductions.
-For e=1 alpha is an isomorphism and its cone is contractible; zero complexes and
-empty sites obey the same formulas. Neither products nor completeness of P enter.
--/
+transitions, before taking products or a Roos complex. -/
 theorem integralScalarPullbackConeProZero {X Y : AlgebraicGeometry.Scheme.{u}}
     (f : X ⟶ Y) (P : CochainComplex (integralTowerModules l E Y) ℤ)
     (hP : integralOperationsGoodComplex l E Y P)

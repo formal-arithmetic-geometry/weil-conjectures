@@ -17,11 +17,17 @@ import WeilConjectures.SmoothPurity.GeneralAlgebraicallyClosedCoefficients.Intri
 
 /-! # The intrinsic scalar associator commutes with integer shifts
 
-Source: blueprint order 1462, common-stage shift clause, and
-`sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/def-sfb-derived-extend-comp-iso.proof.md`,
-exact derived scalar composition, with the intrinsic normalization specified in
-`SfScalarExtensionComposition.lean` and `GeneralAlgebraicallyClosedCoefficientStages.lean`
-(blueprint: lem-pur-intrinsic-associator-shift-square).
+The intrinsic scalar associator, with the normalization specified in
+`SfScalarExtensionComposition.lean` and `GeneralAlgebraicallyClosedCoefficientStages.lean`,
+commutes with the coherent integer shifts of the common coefficient stages.
+
+## Implementation details
+
+On cochain representatives the ordinary associator at `P[n]` is degreewise the ordinary
+associator, giving the ordinary derived square by uniqueness of localization descent. The
+integral square follows through the faithful integral inclusion, and the rational square by
+conjugating with the localization comparisons and rationalizing. No finite-field datum or
+hypothesis on `Y` is used.
 -/
 
 @[expose] public section
@@ -441,45 +447,7 @@ set_option backward.isDefEq.respectTransparency.types false
 coherent integer shifts. The composite functor has the composite shift comparison.
 Thus at every integer `n` and object `K`, its hom at `K[n]` followed by the direct
 transition's comparison equals the composite comparison followed by its shifted hom.
-Repeated fields are permitted, with the actual coefficient-composition equality transports.
-
-Source: blueprint order 1462, retained common-stage shift clause, and
-`def-sfb-derived-extend-comp-iso.proof.md`, exact derived scalar composition
-(blueprint: lem-pur-intrinsic-associator-shift-square).
-
-Proof: (1) Apply lem-pur-intrinsic-scalar-normalization-formulas to the three actual
-coefficient inclusions. Its formulas fix the ordinary, integral and rational associators
-and the ordinary-to-completed integral shifts, including the endpoint transports.
-(2) On a cochain representative, the ordinary associator at `P[n]` has degree `r`
-component the ordinary associator at `P^(r+n)`: both send `c ⊗ (b ⊗ x)` to
-`c j(b) ⊗ x`. The termwise comparisons are identities and both differentials have
-sign `(-1)^n`. The shift-compatible exact-functor factorization and uniqueness of
-localization descent (situation-conventions and
-lem-weil-pbc-localization-universal-property) give the ordinary derived square.
-(3) The normalization formula makes the ordinary-to-completed comparison and its
-inverse shift-compatible. Composition and whiskering preserve this property by
-lem-weil-pbc-commshift-nattrans-comp-whisker. Apply the faithful full integral inclusion
-to the required integral square, expand its shift comparison, and cancel the final
-invertible inclusion comparison. The remainder is the ordinary square from (2).
-(4) Conjugate the localized integral shift by the localization comparisons `q`:
-`q_L ∘ Q_L(τ) ∘ T(q_E⁻¹)` in right-to-left mathematical composition order.
-Integral naturality gives naturality on `f ⊗ 1`; scalar multiplication and addition
-give it on every rational arrow. Localized inverses give inverses. The zero and
-addition equations follow by cancelling adjacent `q⁻¹ q` and using the corresponding
-equations for `q` and the integral shifts. At shift one the normalization is the
-specified integral image, so transitionCommShift_existsUnique identifies this coherent
-datum with the published transitionCommShift in every degree. This uses
-lem-weil-linear-scalar-localization-triangulated, def-weil-linear-scalar-localization,
-def-weil-rationalization-karoubi and lem-general-algebraically-closed-coefficient-stages.
-(5) Apply rationalization to (3). The normalization formulas identify the localized
-integral associator with the actual rational associator. Precompose the proposed square
-by the invertible composite transition applied to `q_E`. Substitute (4); naturality of
-the associator and `q_M` cancels the intermediate comparisons. The two paths become
-`q_M` after the rationalization of the two sides of (3), so they agree. Cancel the
-invertible precomposition. Every rational object is an integral object, so this proves
-the asserted square on the entire raw rational category. Keep the inclusion equality
-casts throughout, also for repeated indices; no finite-field datum or hypothesis on
-`Y` is used. -/
+Repeated fields are permitted, with the actual coefficient-composition equality transports. -/
 theorem associator_commShift
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]

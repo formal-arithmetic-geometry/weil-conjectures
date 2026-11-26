@@ -12,8 +12,18 @@ import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 
 /-! # Inverse image of the regular module
 
-Source: Stacks Project, Tags 008X and 008A.
-(blueprint: stage3-inverse-image-regular-module).
+The inverse image of a regular module is the regular module of the inverse-image ring.
+
+## Implementation details
+
+The filtered colimit defining the presheaf inverse image commutes with forgetting commutative
+rings to additive groups, and so does sheafification; this gives an additive sheaf isomorphism
+preserving the inverse-image units. Its linearity is checked on pairs of unit images and extended
+to all sections by `inverseImageOperation_ext`.
+
+## References
+
+* [Stacks Project, Tags 008X and 008A](https://stacks.math.columbia.edu/tag/008X)
 -/
 
 @[expose] public section
@@ -155,26 +165,7 @@ private theorem inverseRegularAbIso_smul (W : (Opens X)ᵒᵖ)
     W r m
 
 /-- The inverse image of a regular module is the regular inverse-image ring module,
-with the comparison carrying the additive inverse-image unit to the ring unit.
-Source: Stacks Project, Tags 008X and 008A.
-(blueprint: stage3-inverse-image-regular-module).
-
-Proof: On each source open, the regular module's additive group is the additive group
-of the section ring. The filtered colimit defining presheaf inverse image commutes
-with forgetting commutative rings to additive groups: both colimits identify local
-representatives after passage to a common neighbourhood. The comparison sends a
-representative to the same representative, and thus preserves the colimit units.
-Sheafify this comparison. The associated additive sheaf of the inverse-image ring
-is the sheafification of the underlying additive presheaf, since gluing and equality
-are checked on the same locally represented sections. These two identifications
-produce an additive sheaf isomorphism q preserving the inverse-image units.
-Its linearity is checked on pairs of unit images: the inverse-image module unit is
-semilinear, the ring unit preserves multiplication, and the original regular action
-is multiplication. Both operations commute with restriction, so
-inverseImageOperation_ext extends that identity to every pair of local sections.
-The additive inverse is linear by applying q's injectivity. These maps give the
-asserted module isomorphism and its unit formula. Empty opens and the zero ring
-use the same colimit and sheafification comparisons. -/
+with the comparison carrying the additive inverse-image unit to the ring unit. -/
 theorem exists_inverseImage_regularModule_iso :
     ∃ e : inverseImageModule f R (SheafOfModules.unit (𝓡 R)) ≅
       SheafOfModules.unit (𝓡 (inverseImageRing f R)),

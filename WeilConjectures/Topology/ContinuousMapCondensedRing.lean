@@ -10,9 +10,7 @@ public import WeilConjectures.CategoryTheory.SheafTensor
 /-!
 # Continuous-map condensed rings with arbitrary coefficient universe
 
-Source: blueprint `sec-proetale-coefficients/sk-def-sfb-condensed-ring/`
-`def-sfb-continuous-map-condensed-ring.md`
-(blueprint: proposition-pro-etale-site-separably-closed--3).
+## Implementation details
 
 The upstream continuous-map construction fixes the coefficient ring in `Type 0`.
 These universe-polymorphic versions retain the same sections, restrictions and canonical
@@ -30,9 +28,7 @@ open scoped CategoryTheory.MonoidalClosed
 namespace Profinite
 
 /-- Continuous maps into an arbitrary topological ring, with pointwise operations and
-precomposition restrictions. The lift changes only the universe of sections.
-Source: blueprint `def-sfb-continuous-map-condensed-ring.md`, displayed formula
-(blueprint: proposition-pro-etale-site-separably-closed--3). -/
+precomposition restrictions. The lift changes only the universe of sections. -/
 noncomputable def continuousMapRingPresheafOfUniverse (T : Type v) [TopologicalSpace T]
     [Ring T] [IsTopologicalRing T] : Profinite.{u}ᵒᵖ ⥤ RingCat.{max u v + 1} where
   obj S := RingCat.of (ULift.{max u v + 1} C(S.unop, T))
@@ -43,19 +39,7 @@ noncomputable def continuousMapRingPresheafOfUniverse (T : Type v) [TopologicalS
   map_id _ := rfl
   map_comp _ _ := rfl
 
-/-- The continuous-map presheaf is a sheaf of unital rings.
-Source: blueprint `def-sfb-continuous-map-condensed-ring.proof.md`, conditions (a),(b)
-(blueprint: proposition-pro-etale-site-separably-closed--3).
-
-Proof: identify the underlying type-valued presheaf with the universe lift of
-`ContinuousMap.yonedaPresheaf`. Universe lifting preserves sheafness. Apply
-`lem-sfb-profinite-coherent-sheaf-criterion` to this presheaf: finite coproducts give
-products, including the empty coproduct. For an effective epimorphism of profinite sets,
-`Profinite.effectiveEpi_tfae` gives surjectivity, and
-`lem-sfb-compact-hausdorff-surjection-quotient` makes it a quotient map. The existing
-`equalizerCondition_yonedaPresheaf` descends compatible functions along that quotient.
-Finally the forgetful functor from rings to types reflects finite limits, so
-`Presheaf.isSheaf_coherent_of_hasPullbacks_of_comp` gives the ring-valued sheaf condition. -/
+/-- The continuous-map presheaf is a sheaf of unital rings. -/
 theorem isSheaf_continuousMapRingPresheafOfUniverse (T : Type v) [TopologicalSpace T]
     [Ring T] [IsTopologicalRing T] :
     Presheaf.IsSheaf (coherentTopology Profinite.{u})
@@ -81,18 +65,14 @@ theorem isSheaf_continuousMapRingPresheafOfUniverse (T : Type v) [TopologicalSpa
     (continuousMapRingPresheafOfUniverse.{u, v} T)
     (forget RingCat.{max u v + 1}) h
 
-/-- The condensed ring with sections C(S,T) and precomposition restrictions.
-Source: blueprint `def-sfb-continuous-map-condensed-ring.md`, sheaf assertion
-(blueprint: proposition-pro-etale-site-separably-closed--3). -/
+/-- The condensed ring with sections `C(S, T)` and precomposition restrictions. -/
 noncomputable def continuousMapRingSheafOfUniverse (T : Type v) [TopologicalSpace T]
     [Ring T] [IsTopologicalRing T] :
     Sheaf (coherentTopology Profinite.{u}) RingCat.{max u v + 1} :=
   ⟨continuousMapRingPresheafOfUniverse T,
     isSheaf_continuousMapRingPresheafOfUniverse T⟩
 
-/-- The actual abelian sheaf underlying the continuous-map condensed ring.
-Source: blueprint `def-sfb-continuous-map-condensed-ring.md`, last sentence
-(blueprint: proposition-pro-etale-site-separably-closed--3). -/
+/-- The actual abelian sheaf underlying the continuous-map condensed ring. -/
 noncomputable def continuousMapRingObjOfUniverse (T : Type v) [TopologicalSpace T]
     [Ring T] [IsTopologicalRing T] :
     Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{max u v + 1} :=
@@ -100,11 +80,8 @@ noncomputable def continuousMapRingObjOfUniverse (T : Type v) [TopologicalSpace 
     (forget₂ RingCat.{max u v + 1} AddCommGrpCat.{max u v + 1})).obj
       (continuousMapRingSheafOfUniverse T)
 
-/-- The canonical ring-object structure, obtained by the ring-sheaf construction of
-`sk-def-sfb-ring-object`, for the sheafified tensor over the integers. This transports the
-sectionwise multiplication and integer unit along the sheafification counit.
-Source: blueprint `def-sfb-continuous-map-condensed-ring.md`, last sentence
-(blueprint: proposition-pro-etale-site-separably-closed--3). -/
+/-- The canonical ring-object structure for the sheafified tensor over the integers,
+transporting the sectionwise multiplication and integer unit along the sheafification counit. -/
 @[instance_reducible]
 noncomputable def continuousMapRingObjOfUniverseMonObj (T : Type v) [TopologicalSpace T]
     [Ring T] [IsTopologicalRing T] :
@@ -130,16 +107,7 @@ section
 open CategoryTheory Opposite
 open scoped CategoryTheory.MonoidalClosed
 
-/-- The canonical ring object is commutative when the topological ring is commutative.
-Source: blueprint `def-sfb-continuous-map-condensed-ring.md`, final clause
-(blueprint: proposition-pro-etale-site-separably-closed--3).
-
-Proof: for sections a,b, evaluation at every point gives a(s)b(s)=b(s)a(s).
-Their lifted section rings are therefore commutative. Apply the commutative case of
-`sk-def-sfb-ring-object`, specifically `Sheaf.isCommMonObj_sheafCompose_obj`, to the
-continuous-map sheaf. Its counit-transport construction is exactly the monoid structure
-`continuousMapRingObjOfUniverseMonObj`; the tensor and braiding are the canonical
-sheafified tensor over the integers supplied by `sk-def-sfb-sheaf-tensor`. -/
+/-- The canonical ring object is commutative when the topological ring is commutative. -/
 theorem isCommMonObj_continuousMapRingObjOfUniverse (T : Type v) [TopologicalSpace T]
     [CommRing T] [IsTopologicalRing T] :
     @IsCommMonObj

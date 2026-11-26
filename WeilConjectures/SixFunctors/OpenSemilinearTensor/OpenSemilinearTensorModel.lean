@@ -30,14 +30,22 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Simultaneous open tensor comparison before scalar restriction
 
-Source: Stacks Project, sites-modules.tex, Tag 0E8I, and sites-cohomology.tex,
-Tag 0GL1; the simultaneous refinement in the node's seven proof steps
-(blueprint: lem-sf-open-semilinear-tensor-model).
-
 The coefficient index n means exponent n+1. All complexes are unbounded. The existing
 open-operation interfaces are reused; the completeness-restricted comparison theorem
 in their module is not used. Ordinary reduction and its comparison are natural
 transformations of strict semilinear systems, before any localization or forgetting.
+
+## Implementation details
+
+The comparison is built on extension-presheaf generators, sending `[x] ⊗ a` to
+`[x ⊗ a|_slice]`, summed over total degrees and specialized simultaneously to every quotient
+coefficient; it is then localized along flat-term K-flat models. The input calculi and the
+semilinear section construction are the specified ones, so the level extension evaluation is the
+actual summand identification, not one twisted by a levelwise automorphism.
+
+## References
+
+* [Stacks Project, Tags 0E8I, 0GL1]
 -/
 
 @[expose] public noncomputable section
@@ -332,42 +340,7 @@ private theorem kflat_of_totalComparison (o : Operations l E j)
 attribute [-instance] WeilConjectures.SemilinearSections.moduleAbelian
   WeilConjectures.SemilinearSections.hasDerived in
 /-- Existence of the simultaneous, generator-normalized, unbounded open comparison.
-The input calculi and semilinear section construction are fixed, not replaced by arbitrary
-families of evaluated arrows. The section construction is the specified one: its slice
-restriction evaluation is the identity on sections, so by its unit equation the level
-extension evaluation is the actual summand identification, not one twisted by a levelwise
-automorphism. Neither completeness nor quasi-compactness is assumed.
-
-Source: Stacks sites-modules.tex, Tag 0E8I; sites-cohomology.tex, Tag 0GL1.
-(blueprint: lem-sf-open-semilinear-tensor-model).
-
-Proof:
-1. Identify the open site with the ambient slice. On extension-presheaf generators
-send [x] tensor a to [x tensor a restricted to the slice]. Tensor balancing,
-restriction compatibility and bilinear sheafification existence give the map;
-bilinear sheafification uniqueness proves naturality.
-2. Transpose the open unit tensored with 1, using restriction/tensor comparison.
-It sends [x tensor a] back to [x] tensor a. The two inverse identities follow on
-these generators, by sheafification uniqueness and the tensor universal property.
-3. Sum the ordinary maps over a+b=d. Extension preserves these direct sums as a
-left adjoint. Naturality in the two differentials gives the chain equation for
-d_Q tensor 1 + (-1)^a 1 tensor d_F; the same calculation gives chain naturality.
-This works without boundedness, since each source summand has two outgoing terms.
-4. Exact restriction, tensoring by a flat term, and exact extension prove flatness
-of every extended term. The ringed open total-tensor K-flat theorem proves K-flatness
-and preservation of resolutions, so the extended representative computes j_!K.
-5. Specialize simultaneously to every quotient coefficient in degree zero.
-The generator formulas commute with every quotient and with x mapped to x tensor 1
-on both sides. Thus the natural maps form an isomorphism of strict semilinear
-systems, whose termwise extension to complexes is already a chain isomorphism.
-6. Localize this single chain isomorphism using the augmented computation comparisons.
-Descent along the localization of flat-term K-flat models gives the natural r on
-all derived inputs. Its model square proves independence under changes of representative.
-7. At every level the inverse is the open-unit tensor adjunct from step 2, hence
-is the canonical normalized derived open tensor inverse. The same strict chain
-maps, quotient identities and scalar augmentations are used for the specified
-semilinear section construction before scalar restriction. No argument infers
-equality of arbitrary system arrows from equality of their evaluations. -/
+Neither completeness nor quasi-compactness is assumed. -/
 theorem openSemilinearTensorModel
     (_hlX : IsUnit (l : Γ(X, ⊤))) (_hlU : IsUnit (l : Γ(U, ⊤)))
     (SX : CoefficientDerivedSystemCalculus l E X)

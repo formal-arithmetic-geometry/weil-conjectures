@@ -12,8 +12,19 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Finite evaluation of the normalized tensor unit
 
-Source: Stacks 0941, 0D6E, 07A6 and 09T5.
-(blueprint: lem-trf-completion-unit-finite-mate-comparison).
+A comparison with the normalized ordinary tensor unit has the fixed finite values.
+
+## Implementation details
+
+The finite values are computed by projecting the unit equation to each level: the normalization
+of the total-limit projection on K-injective towers, extended to all towers by a K-injective
+resolution, identifies one side with the finite scalar adjunction transpose, and the ordinary
+unit sends `x` to `1 ⊗ x`. The argument uses equality of adjunction mates, never joint
+faithfulness of derived evaluations.
+
+## References
+
+* [Stacks Project, Tags 0941, 0D6E, 06YY, 07A6 and 09T5](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -275,31 +286,7 @@ private theorem system_projection
 
 /-- A comparison with the normalized ordinary tensor unit has the fixed finite values.
 This is solely the finite adjunction-mate calculation: it constructs no derived
-functor, comparison, adjunction or system unit.
-
-Source: Stacks 07A6 and 0941, the finite-mate calculation in step 3 of
-lem-trf-completion-unit-derived-adjunction-comparison, and the coefficient scalar
-adjunction normalization from 06YY and 09T5.
-(blueprint: lem-trf-completion-unit-finite-mate-comparison).
-
-Proof: First compute eta followed by the actual nth total-limit projection on a
-K-injective tower, using hηnorm and the defining normalization of that projection.
-The result is the localization of c inverse followed by the ordinary degreewise
-projection. Naturality and a K-injective resolution extend this identity to every
-tower; exact evaluation sends that resolution to a quasi-isomorphism, so its
-localized map can be cancelled. Transport through the exact-restriction evaluation
-factors. The identities hc and M.limitComparison_projection identify the resulting
-projection of the displayed composite with the ordinary limit projection.
-Now project hunit to level n. S.unit_projection and naturality of the projection
-identify its left side with the finite scalar adjunction transpose of the evaluated
-comparison, conjugated by S.reductionEvaluation. The ordinary unit on its right side
-is x mapped to 1 tensor x by M.unit_tensor and M.evaluation. The normalized finite
-scalar derived unit on a K-flat representative has exactly this value, after
-coefficientFiniteReductionModel and the exact scalar-restriction factors.
-The finite Hom equivalence is injective; cancelling its common invertible factors
-gives the displayed equality. This uses equality of adjunction mates, never joint
-faithfulness of derived evaluations. The argument includes n = 0, the zero complex,
-and unbounded complexes; flat terms are only used for the stated K-flat model. -/
+functor, comparison, adjunction or system unit. -/
 theorem finiteComparison_of_unit
     (S : CoefficientDerivedSystemCalculus l E W) (M : OrdinaryModel l E W)
     (c : (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤

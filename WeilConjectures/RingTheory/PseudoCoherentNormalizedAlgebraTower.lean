@@ -18,10 +18,12 @@ import WeilConjectures.RingTheory.PseudoCoherentInverseRingReconstruction
 /-!
 # Effectivity of a normalized algebra tower
 
-Source: Stacks Project, More on Algebra, Tags 09AV and 066E,
-lemma-Rlim-pseudo-coherent-gives-complete-pseudo-coherent and
-lemma-Noetherian-pseudo-coherent
-(auxiliary; not a blueprint node).
+Facts about the tower of quotients `C/J^n` of an adically complete ring used to reconstruct
+pseudo-coherent objects over it.
+
+## References
+
+* [Stacks, Tags 09AV, 066E, 0CQF]
 -/
 
 @[expose] public section
@@ -34,13 +36,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace DerivedCategory
 
-/-- An adically complete ring is the limit of its positive-power quotients.
-Source: Stacks Project, More on Algebra, Tags 09AV and 0CQF
-(auxiliary; not a blueprint node).
-
-Proof: Lift the compatible quotient elements to a sequence in the ring. Compatibility
-makes the lifts an adic Cauchy sequence. Precompleteness supplies a limit with the required
-images, and Hausdorff separatedness makes that limit unique. -/
+/-- An adically complete ring is the limit of its positive-power quotients. -/
 theorem adic_quotient_limit {C : Type u} [CommRing C]
     (J : Ideal C) [IsAdicComplete J C]
     (x : ∀ n : ℕ, C ⧸ J ^ (n + 1))
@@ -81,12 +77,7 @@ theorem adic_quotient_limit {C : Type u} [CommRing C]
       (fun n _ ↦ (hb n).trans (hqa n).symm)
   exact congrFun he ()
 
-/-- Each consecutive positive-power quotient map has square-zero kernel.
-Source: Stacks Project, More on Algebra, Tag 0CQF
-(auxiliary; not a blueprint node).
-
-Proof: The kernel is the image of `J^(n+1)` modulo `J^(n+2)`. Its square is the image
-of `J^(2n+2)`, which is contained in `J^(n+2)` for every natural number `n`. -/
+/-- Each consecutive positive-power quotient map has square-zero kernel. -/
 theorem adic_step_nilpotent {C : Type u} [CommRing C] (J : Ideal C) (n : ℕ) :
     IsNilpotent (RingHom.ker (Ideal.Quotient.factor
       (Ideal.pow_le_pow_right (I := J) (Nat.le_succ (n + 1))))) := by
@@ -102,12 +93,7 @@ theorem adic_step_nilpotent {C : Type u} [CommRing C] (J : Ideal C) (n : ℕ) :
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical derived restriction-composition isomorphism agrees with its
-normalization on complexes.
-Source: Stacks Project, More on Algebra, Tag 0CQF; derived-functor factorization formulas
-(auxiliary; not a blueprint node).
-
-Proof: Apply the composition factorization formula, simplify the identity comparison,
-and then apply the natural-isomorphism factorization formula. -/
+normalization on complexes. -/
 theorem restrictScalarsComp_derived_factors
     {R S T : Type u} [CommRing R] [CommRing S] [CommRing T]
     [HasDerivedCategory.{w} (ModuleCat.{max u v} R)]

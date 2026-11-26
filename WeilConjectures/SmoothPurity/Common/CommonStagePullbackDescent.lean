@@ -12,9 +12,15 @@ import WeilConjectures.SmoothPurity.NormalizedPairDescent.PairDescentPrescribedC
 
 /-! # Coherent comparisons and descent for common-stage pullback
 
-These are the existing complete pullback proofs, isolated after profiling the item.
-(blueprint: lem-weil-common-stage-pullback-comparison-data;
-lem-weil-common-stage-pullback-descent-from-data).
+We show that the normalized rational pullback comparisons form a coherent stage-system morphism,
+and descend the rational pullback to the common stage system from such a coherent family.
+
+## Implementation details
+
+The comparison components and their `pairFunctorCoherent` equation come from the normalized
+scalar-extension tower calculation. Descent applies the `StageSystem` coefficient-pair descent
+constructor and rewrites the descended representative formula using the supplied comparison
+components. These proofs are isolated in this file for profiling reasons.
 -/
 
 @[expose] public noncomputable section
@@ -67,11 +73,8 @@ set_option backward.isDefEq.respectTransparency.types false
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
 
-/- The scalar comparisons form a coherent stage-system morphism.  The proof is
-   the tower coherence calculation for the normalized rational pullback
-   comparisons (blueprint: lem-weil-common-stage-pullback-comparison-data).
-   The normalized scalar-extension tower calculation supplies the comparison
-   components and their pairFunctorCoherent equation. -/
+/- The scalar comparisons of the normalized rational pullbacks form a coherent stage-system
+   morphism. -/
 theorem commonStagePullback_comparison_data {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] :
@@ -109,12 +112,8 @@ theorem commonStagePullback_comparison_data {X Y : Scheme.{u}} (f : X ⟶ Y)
       commonStagePullbackObject]
   exact ⟨heq_of_eq (congrArg Iso.hom hi), heq_of_eq (congrArg Iso.inv hi)⟩
 
-/-- Descent from a fixed coherent pullback comparison family.
-Source: the common-stage pullback paragraph of the blueprint.
-(blueprint: lem-weil-common-stage-pullback-descent-from-data).
-The proof applies the StageSystem coefficient-pair descent constructor and then
-rewrites the descended representative formula using the supplied comparison
-components. -/
+/-- Descent of the rational pullback to the common stage system, from a fixed coherent family of
+pullback comparisons. -/
 theorem commonStagePullback_descent_from_data {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

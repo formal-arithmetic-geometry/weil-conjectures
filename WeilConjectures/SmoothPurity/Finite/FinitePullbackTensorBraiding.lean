@@ -30,10 +30,15 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
 /-! # Signed total and derived braiding
 
-Source: Stacks 06YS (K-flat resolutions), the symmetry paragraph after
-06YU (definition-derived-tor), and More on Algebra 0FNG, item-flip-tensor-product.
-(blueprint: def-pur-finite-pullback-tensor-braiding).
-The constructions and their existing uniqueness proofs are extracted unchanged.
+We construct the signed Koszul symmetry of the total tensor complex, fixed on pure tensors by
+`x ⊗ y ↦ (-1)^(pq) y ⊗ x`, and the derived braiding obtained from it by descent along K-flat
+representatives.
+
+## References
+
+* Stacks Project, Tag 06YS (K-flat resolutions), the symmetry paragraph after Tag 06YU, and
+  Tag 0FNG (sign rules).
+* Stacks Project, Tag 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -56,8 +61,7 @@ attribute [local irreducible] CochainComplex.Monoidal.braiding
   SheafOfModules.monoidalCategory PresheafOfModules.sheafificationAdjunction
   SheafOfModules.tensorObjIsoSheafification
 universe a b
-/-- The ordinary swap functor on a product category.
-Source: Stacks 07A4 (blueprint: def-pur-finite-pullback-tensor-braiding). -/
+/-- The ordinary swap functor on a product category. -/
 def pullbackTensorSwap (D : Type a) [Category.{b} D] : D × D ⥤ D × D where
   obj P := (P.2,P.1)
   map a := Prod.mkHom a.2 a.1
@@ -181,13 +185,7 @@ private theorem pullbackTensorSignedTotal_formula
   exact (CategoryTheory.RingedDerivedNative.complexConstraints.{u + 1, u, u} J A).symmetry
     P Q p q k h ((add_comm q p).trans h) U x y
 
-/-- The signed symmetry is fixed on every pure tensor by (-1)^(pq).
-Source: Stacks 0FNG, section-sign-rules, item-flip-tensor-product
-(blueprint: def-pur-finite-pullback-tensor-braiding).
-Proof: swap the two tensor factors in each total summand and multiply by
-(-1)^(pq). The two differential identities follow from the Koszul sign rule.
-Swapping twice gives the identity. Tensor generators, sheafification and the
-coproduct injections uniquely determine the chain map, hence the isomorphism. -/
+/-- The signed symmetry is fixed on every pure tensor by (-1)^(pq). -/
 theorem pullbackTensorSignedTotal_existsUnique
     (P Q : CochainComplex (SheafOfModules.{u + 1}
       ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A)) ℤ) :
@@ -218,9 +216,7 @@ theorem pullbackTensorSignedTotal_existsUnique
     intro x y
     exact (hb p q k hpq U x y).trans (he p q k hpq U x y).symm
 
-/-- The chain-level Koszul braiding, including its prescribed sign.
-Source: Stacks 0FNG, section-sign-rules, item-flip-tensor-product
-(blueprint: def-pur-finite-pullback-tensor-braiding). -/
+/-- The chain-level Koszul braiding, including its prescribed sign. -/
 def pullbackTensorSignedTotal
     (P Q : CochainComplex (SheafOfModules.{u + 1}
       ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj A)) ℤ) :=
@@ -244,12 +240,7 @@ variable [EssentiallySmall.{u + 1} C]
   (T : CoefficientTensorModels.{u, u + 1, u, u + 2} J A S)
 
 /-- The derived braiding is the descent of the signed total symmetry, fixed on
-the full K-flat representative comparison.
-Source: Stacks 06YS and 06YU (blueprint: def-pur-finite-pullback-tensor-braiding).
-Proof: the generator formula is natural in both cochain inputs and preserves
-quasi-isomorphisms between K-flat pairs. Localize that natural isomorphism.
-The displayed representative square fixes every component by K-flat resolution
-and hence gives uniqueness. -/
+the full K-flat representative comparison. -/
 theorem pullbackTensorBraiding_existsUnique :
     ∃! e : S.tensor ≅ pullbackTensorSwap _ ⋙ S.tensor,
       ∀ (P Q : CochainComplex (SheafOfModules.{u + 1}
@@ -307,8 +298,7 @@ theorem pullbackTensorBraiding_existsUnique :
     unfold pullbackTensorNative at h
     exact h
 
-/-- The signed derived braiding prescribed by the recorded tensor models.
-Source: Stacks 06YS and 06YU (blueprint: def-pur-finite-pullback-tensor-braiding). -/
+/-- The signed derived braiding prescribed by the recorded tensor models. -/
 def pullbackTensorBraiding :=
   (pullbackTensorBraiding_existsUnique J A S T).exists.choose
 end SignedBraiding

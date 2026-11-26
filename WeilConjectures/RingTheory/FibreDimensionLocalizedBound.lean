@@ -16,8 +16,20 @@ import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 /-!
 # A localized fibre comparison used by the principal-neighbourhood theorem
 
-Source: Stacks Project, Algebra, Tags 00DK, 00DL and 00E4; Topology, Tag 0B7I.
-(blueprint: lem-weil-pbc-fibre-dimension-neighborhood-localized-bound).
+If every point of a basic open `D(g) ⊆ Spec S` has local fibre dimension at most `d`, then every
+nonempty fibre of `R → S_g` has dimension at most `d`.
+
+## Implementation details
+
+For a base prime `p`, put `F = κ(p) ⊗[R] S` and `a = 1 ⊗ g`. Base change of principal
+localization identifies `κ(p) ⊗[R] S_g` with `F_a`, and `Spec F_a` embeds as the open `D(a)` of
+`Spec F`. Local dimension is monotone along inducing maps and unchanged on open subspaces, so
+each point of the localized fibre has dimension at most `d`; the dimension-supremum formula then
+bounds the whole fibre. Empty fibres are covered too, their dimension being `⊥`.
+
+## References
+
+* [Stacks, Tag 00DK], [Stacks, Tag 00DL], [Stacks, Tag 00E4], [Stacks, Tag 0B7I]
 -/
 
 @[expose] public section
@@ -26,8 +38,8 @@ universe u v
 
 namespace Algebra
 
-/-- An inducing map bounds local dimension by that at its image, even when it is
-not surjective or injective: restriction to each inverse-image neighbourhood is inducing. -/
+/-- For an inducing map `f`, the local dimension at `x` is at most the local dimension
+at `f x`. -/
 private theorem dimAt_inducing_le {X : Type*} {Y : Type*}
     [TopologicalSpace X] [TopologicalSpace Y] {f : X → Y}
     (hf : Topology.IsInducing f) (x : X) :
@@ -64,25 +76,7 @@ private theorem fibre_bound_at_fixed_base
   rwa [he] at hg
 
 /-- If all points of the basic open `D(g)` have local fibre dimension at most `d`,
-then every nonempty fibre after localizing away from `g` has global dimension at most `d`.
-Source: Stacks Project, Algebra, Tags 00DK, 00DL and 00E4; Topology, Tag 0B7I.
-(blueprint: lem-weil-pbc-fibre-dimension-neighborhood-localized-bound).
-
-Proof:
-1. For a fixed base prime `p`, put `F = κ(p) ⊗[R] S` and `a = 1 ⊗ g`.
-   Base change of principal localization identifies `κ(p) ⊗[R] S_g` with `F_a`.
-2. Contraction embeds `Spec F_a` as the open `D(a)` in `Spec F`. Each contracted
-   fibre prime `Q` corresponds to a prime `q` of `S` over `p`. The inverse fibre
-   equivalence contracts along the right tensor inclusion, so `a ∉ Q` gives
-   `g ∉ q`. Reindexing the hypothesis at `p` gives `dim_Q Spec F ≤ d`.
-3. Restriction of an inducing map to inverse-image open neighbourhoods is inducing;
-   monotonicity of dimension for inducing maps bounds local dimension.
-   Apply this to the spectrum homeomorphism in step 1 and to the homeomorphism
-   onto the open range in step 2. Local dimension on an open subspace equals
-   ambient local dimension, hence every point of the localized fibre has dimension
-   at most `d`.
-4. The dimension-supremum formula bounds the whole localized fibre by `d`.
-   The proof also covers empty fibres, whose dimension is bottom. -/
+then every nonempty fibre after localizing away from `g` has global dimension at most `d`. -/
 theorem localized_fibre_dimension_le_of_basicOpen
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
     [FiniteType R S] (g : S) (d : ℕ)

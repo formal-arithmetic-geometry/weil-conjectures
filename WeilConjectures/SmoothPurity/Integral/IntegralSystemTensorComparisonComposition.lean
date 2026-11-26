@@ -14,9 +14,6 @@ import all WeilConjectures.Algebra.Homology.RingedDerivedTensorHomAdjunction
 
 /-! # Composition law of the coherent system pullback/tensor comparison
 
-Source: Stacks 07A4, 0D6D and 0941
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced).
-
 The coherent system comparison `pullbackTensorSystemComparison` is written on the
 derived inverse image of the sequence-site interface `pullbackTensorSequenceInverse`.
 Transporting it along the proved equality with the strict inverse image
@@ -24,6 +21,10 @@ Transporting it along the proved equality with the strict inverse image
 images. It is the descent of the generator-normalized strict cochain comparison, and
 therefore inherits the strict composition law with the adjunction-normalized compositor.
 All maps are maps of entire coefficient systems, before any finite evaluation.
+
+## References
+
+* Stacks Project, Tags 03D2, 05RU, 06YU, 07A4, 0941, 0D6D and 0DEN
 -/
 
 @[expose] public noncomputable section
@@ -48,16 +49,12 @@ universe u
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The derived identification of the two names of the strict sequence inverse image.
-Source: Stacks 03D2, 0941
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced). -/
+/-- The derived identification of the two names of the strict sequence inverse image. -/
 def sequenceDerivedPullbackBridge {X Y : Scheme.{u}} (f : X ⟶ Y) :
     pullbackTensorSequenceDerived l E f ≅ integralComparisonDerivedSequencePullback l E f :=
   Functor.mapDerivedCategoryNatIso (eqToIso (CompletedQuotient.sequencePullback_eq l E f))
 
-/-- The derived bridge is the localization of the strict bridge.
-Source: Stacks 03D2, 0941
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced). -/
+/-- The derived bridge is the localization of the strict bridge. -/
 theorem sequenceDerivedPullbackBridge_factors {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : CochainComplex (coefficientSequenceModules l E Y) ℤ) :
     (pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app A ≫
@@ -68,9 +65,7 @@ theorem sequenceDerivedPullbackBridge_factors {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact (Functor.mapDerivedCategoryNatIso_fac
     (eqToIso (CompletedQuotient.sequencePullback_eq l E f)) A).symm
 
-/-- Strict inverse image preserves K-flat strict quotient complexes.
-Source: Stacks 0DEN, 07A4
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced). -/
+/-- Strict inverse image preserves K-flat strict quotient complexes. -/
 theorem integralComparisonSequenceGood {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (coefficientSequenceModules l E Y) ℤ)
     (hP : @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
@@ -84,9 +79,7 @@ theorem integralComparisonSequenceGood {X Y : Scheme.{u}} (f : X ⟶ Y)
       (((integralComparisonSequencePullback l E f).mapHomologicalComplex (.up ℤ)).obj P) := by
   with_unfolding_all exact pullbackTensorSequenceGood l E f P hP
 
-/-- The coherent system pullback/tensor comparison on the derived strict inverse images.
-Source: Stacks 07A4, 0941
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced). -/
+/-- The coherent system pullback/tensor comparison on the derived strict inverse images. -/
 def integralSystemTensorComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (pullbackTensorCalculus l E Y).systemClosed.tensor ⋙
         integralComparisonDerivedSequencePullback l E f ≅
@@ -98,9 +91,7 @@ def integralSystemTensorComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Functor.isoWhiskerRight (NatIso.prod (sequenceDerivedPullbackBridge l E f)
       (sequenceDerivedPullbackBridge l E f)) _
 
-/-- The generator-normalized strict cochain comparison on the strict inverse images.
-Source: Stacks 07A4
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced). -/
+/-- The generator-normalized strict cochain comparison on the strict inverse images. -/
 def strictTensorComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     coefficientTotalTensor.{u, u + 1, u}
         (coefficientSequenceTopology (Scheme.ProEt.topology Y))
@@ -116,9 +107,7 @@ def strictTensorComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Functor.isoWhiskerRight (NatIso.prod (CompletedQuotient.pullBridge l E f)
       (CompletedQuotient.pullBridge l E f)) _
 
-/-- The components of the strict comparison are the recorded quotient comparisons.
-Source: Stacks 07A4
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced). -/
+/-- The components of the strict comparison are the recorded quotient comparisons. -/
 theorem strictTensorComparison_app {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : StrictQuotient.Complex l E Y) :
     (strictTensorComparison l E f).app (P, Q) = CompletedQuotient.comparison l E f P Q := by
@@ -136,13 +125,7 @@ attribute [local irreducible] pullbackTensorCalculus pullbackTensorSystemModel
   CompletedQuotient.pullBridge sequenceDerivedPullbackBridge Functor.mapDerivedCategory
   Functor.leftAdjoint HasDerivedCategory.standard Scheme.residueField
 
-/-- The transported system comparison is the descent of the strict cochain comparison.
-Source: Stacks 06YU, 07A4
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced).
-Proof: insert the derived bridge, whose localization formula is the strict bridge, into
-the defining K-flat normalization of `pullbackTensorSystemComparison`. Naturality of the
-bridge and of the target tensor model move the strict bridges to the cochain level,
-where they assemble to the strict comparison. -/
+/-- The transported system comparison is the descent of the strict cochain comparison. -/
 theorem integralSystemTensorComparison_square {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (coefficientSequenceModules l E Y) ℤ)
     (hP : @CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
@@ -254,9 +237,7 @@ variable {C D F : Type*} [Category C] [Category D] [Category F]
   [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory F]
 
 /-- The derived compositor of exact functors induced by `e : H ≅ F₁ ⋙ F₂` is the
-localization of the termwise compositor.
-Source: Stacks 05RU, 0D6D
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced). -/
+localization of the termwise compositor. -/
 theorem mapDerivedCategoryComposition_factors (F₁ : C ⥤ D) (F₂ : D ⥤ F) (H : C ⥤ F)
     [F₁.Additive] [F₂.Additive] [H.Additive]
     [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
@@ -275,14 +256,7 @@ theorem mapDerivedCategoryComposition_factors (F₁ : C ⥤ D) (F₂ : D ⥤ F) 
 end Factors
 
 /-- The coherent system pullback/tensor comparisons satisfy the composition law with the
-derived adjunction-normalized compositor.
-Source: Stacks 07A4, 0D6D and 0941
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced).
-Proof: all three comparisons are descents of the strict generator-normalized cochain
-comparisons, and the derived compositor is the localization of the strict compositor.
-The strict comparisons satisfy the cochain composition law
-(`sequenceComparison_compositionLaw`). Restriction to pairs of K-flat representatives is
-faithful on natural transformations, so the law descends. -/
+derived adjunction-normalized compositor. -/
 theorem integralSystemTensorComparison_comp {X Y Z : Scheme.{u}} (h : Z ⟶ X) (f : X ⟶ Y)
     (A B : coefficientSequenceDerived l E Y) :
     (integralSystemTensorComparison l E (h ≫ f)).hom.app (A, B) ≫

@@ -14,8 +14,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.IsIso
 /-!
 # A lift of the fibre idempotent gives the localization isomorphism
 
-Source: literature/stacks-project/more-algebra.tex:2542-2549, proof of Lemma Tag 09XH
-(blueprint: `lem-weil-pbc-integral-closure-finite-fibre-choose-g`)
+## References
+
+* [Stacks, Tag 09XH]
 -/
 
 @[expose] public section
@@ -26,11 +27,7 @@ universe u v w₁ w₂ w₃ w₄
 
 
 /-- A neighbourhood of the first factor of a finite fibre contains a principal open
-on which the integral-closure map is an isomorphism.
-
-Source: literature/stacks-project/more-algebra.tex:2542-2549, proof of Lemma Tag 09XH
-(blueprint: `lem-weil-pbc-integral-closure-finite-fibre-choose-g`).
-Here `B'` is `integralClosure A B`. -/
+on which the integral-closure map is an isomorphism. Here `B'` is `integralClosure A B`. -/
 theorem integralClosure.exists_bijective_awayMap_of_isIso_restrict
     (A : Type v) (B : Type u)
     (C₁ : Type w₁) (C₂ : Type w₂) (C₁' : Type w₃) (C₂' : Type w₄)

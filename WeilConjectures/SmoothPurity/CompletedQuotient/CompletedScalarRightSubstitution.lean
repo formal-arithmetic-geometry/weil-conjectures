@@ -90,7 +90,12 @@ import WeilConjectures.SmoothPurity.CompletedQuotient.CompletedScalarPullbackSub
 
 /-! # Quotient realization steps
 
-Source: integral comparison proof, quotient normalization and coherent substitution.
+This file proves the right scalar coordinate of the quotient scalar route for arbitrary good
+quotient substitutions.
+
+## References
+
+* [Stacks, Tags 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -188,13 +193,7 @@ end
 attribute [local irreducible] coefficientSequenceLimit coefficientConstantTowerLimit
   HasDerivedCategory.standard
 
-/-- The right scalar coordinate for arbitrary good quotient substitutions.
-Source: Stacks 07A4 and 0941; the categorical part of the right route coordinate.
-(blueprint: lem-pur-completed-scalar-right-substitution).
-
-Proof: scalar substitution naturality moves t across the given compatible strict
-comparison. Apply tensor scalar substitution at X, scalar pullback substitution
-on both inputs, and tensor substitution naturality for the two kappa maps. -/
+/-- The right scalar coordinate for arbitrary good quotient substitutions. -/
 theorem scalarRouteRightSubstitution
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]

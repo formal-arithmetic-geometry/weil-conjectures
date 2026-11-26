@@ -21,7 +21,7 @@ points, and `Λ` a commutative ring. For a complex `M` of étale sheaves of `Λ`
 pullback `RΓ(Y, M) ⟶ RΓ(Y', π^* M)` of derived global sections
 (`CategoryTheory.Functor.rightDerivedPullback` along `π^*` and
 `AlgebraicGeometry.Etale.ΓPullback`) admits a trace `RΓ(Y', π^* M) ⟶ RΓ(Y, M)` such that the
-composite is multiplication by `d` (blueprint `lemma-descent-vanishing-finite-etale`).
+composite is multiplication by `d`.
 
 The trace is `RΓ(Y', π^* M) ⟶ RΓ(Y, π_* π^* M) ⟶ RΓ(Y, M)`: the pullback map of derived global
 sections along the exact functor `π_*`, followed by the counit `π_* π^* ⟶ 𝟭` of `π_* ⊣ π^*`. The
@@ -188,9 +188,8 @@ attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimi
 variable {Λ : Type (u + 1)} [CommRing Λ] {Y Y' : Scheme.{u}} (π : Y' ⟶ Y) [IsFinite π]
   [Etale π] (d : ℕ)
 
-/-- **The finite étale trace on derived global sections** (blueprint
-`lemma-descent-vanishing-finite-etale`): for a finite étale `π : Y' ⟶ Y` all of whose
-geometric fibres have `d` points, the pullback `RΓ(Y, M) ⟶ RΓ(Y', π^* M)` of derived global
+/-- **The finite étale trace on derived global sections**: for a finite étale `π : Y' ⟶ Y` all of
+whose geometric fibres have `d` points, the pullback `RΓ(Y, M) ⟶ RΓ(Y', π^* M)` of derived global
 sections admits a trace `RΓ(Y', π^* M) ⟶ RΓ(Y, M)` whose composite with it is multiplication by
 `d`. -/
 theorem exists_rightDerivedPullback_app_comp_eq_smul
@@ -292,10 +291,10 @@ namespace AlgebraicGeometry.Etale
 variable {Λ : Type (u + 1)} [CommRing Λ] {Y Y' : Scheme.{u}} (π : Y' ⟶ Y) [IsFinite π]
   [Etale π] (d : ℕ)
 
-/-- **The finite étale trace on the restriction of derived sections** (blueprint
-`lemma-descent-vanishing-finite-etale`): for a finite étale `π : Y' ⟶ Y` all of whose geometric
-fibres have `d` points, the restriction `RΓ(Y, M) ⟶ RΓ(Y', π^* M)` of derived sections over the
-terminal étale schemes, followed by a trace, is multiplication by `d`. -/
+/-- **The finite étale trace on the restriction of derived sections**: for a finite étale
+`π : Y' ⟶ Y` all of whose geometric fibres have `d` points, the restriction
+`RΓ(Y, M) ⟶ RΓ(Y', π^* M)` of derived sections over the terminal étale schemes, followed by a trace,
+is multiplication by `d`. -/
 theorem exists_sectionsRestriction_app_comp_eq_smul
     (hdeg : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y),
       Nat.card (π.GeometricFiber s) = d)

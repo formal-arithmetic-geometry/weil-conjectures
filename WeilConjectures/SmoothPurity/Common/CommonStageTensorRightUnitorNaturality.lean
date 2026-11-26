@@ -10,8 +10,18 @@ import WeilConjectures.SmoothPurity.Integral.IntegralSystemReductionFullyFaithfu
 
 /-! # Naturality of the prescribed common-stage right unitor
 
-Source: Stacks Project, Tags 07A4 and 0941; coefficient operations blueprint.
-(blueprint: lem-pur-common-stage-tensor-right-unitor-natural).
+This file proves that the canonical right unitor for the reconstructed common-stage tensor
+unit is natural.
+
+## Implementation details
+
+The integral square is reduced faithfully to right-unitor naturality in the coherent
+system monoidal category; localizing gives the rational square, and a common finite
+coefficient stage for source, target and arrow transports it to the common stage.
+
+## References
+
+* Stacks Project, Tags 07A4, 0941
 -/
 
 @[expose] public noncomputable section
@@ -201,23 +211,7 @@ attribute [local irreducible] commonStageDerivedTensor rationalDerivedTensor
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Naturality of the canonical right unitor for the reconstructed common-stage unit.
-
-Source: Stacks Project, Tags 07A4 and 0941; coefficient operations blueprint.
-(blueprint: lem-pur-common-stage-tensor-right-unitor-natural).
-
-Proof: apply faithful coherent reduction to the integral square and substitute
-its normalized tensor and unit comparisons. The resulting square is precisely
-right-unitor naturality in the coherent system monoidal category. Localizing
-the integral equality proves the rational square on pure scalar tensors;
-bilinearity extends it to all rational maps. Choose a common finite coefficient
-stage for the source, target and a representative of the given arrow. The
-common-stage unitor and tensor representative formulas conjugate the square
-to the rational square: functoriality moves the unit comparison past the
-first-variable arrow, and inverse tensor comparisons cancel. The rational square
-commutes, so the two representatives agree at that stage and give equal
-common-stage morphisms. The argument also applies to the zero arrow and to
-identity arrows. -/
+/-- Naturality of the canonical right unitor for the reconstructed common-stage unit. -/
 theorem commonStageTensorRightUnitor_naturality
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     [∀ x : X, Invertible (l : X.residueField x)]

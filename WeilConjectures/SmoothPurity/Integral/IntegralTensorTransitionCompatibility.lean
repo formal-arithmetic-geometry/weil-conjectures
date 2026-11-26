@@ -75,8 +75,10 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Compatibility of the normalized tensor comparison with quotient transitions
 
-Source: Stacks Project, Modules on Sites, tensor-product section, Tag 03EL;
-Bhatt--Scholze, Definition 3.4.10.
+## References
+
+* Stacks Project, Modules on Sites, tensor-product section, Tag 03EL
+* B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, Definition 3.4.10
 -/
 
 @[expose] public noncomputable section
@@ -492,22 +494,7 @@ private theorem integralTensorComparison_apply_scalar
 
 -- Compare the two scalar presentations and their maps on total summand generators.
 /-- The generator-normalized total scalar-extension comparison commutes with the
-actual consecutive quotient transitions.
-Source: Stacks 03EL, tensor-product section; Bhatt--Scholze, Definition 3.4.10
-(blueprint: lem-pur-integral-tensor-transition-compatibility).
-Proof: work in a fixed degree and precompose with each extended total summand.
-The extension functor and scalar restriction preserve these coproducts. On each
-summand, sheafification and tensor generation reduce the equation to the sections
-s tensor (x tensor y). Linearity over the finite coefficient ring extends the
-normalization from scalar 1 to scalar s. The left route reduces s and then sends
-it to (rho(s) tensor x) tensor (1 tensor y). The right route first sends it to
-(s tensor x) tensor (1 tensor y), then applies the two normalized reduction maps,
-with exactly the same result. The generator equations of the recorded tensor
-transition give this last assertion for all finite sections. The generators
-locally generate the sheafified tensors, so the maps on each summand agree;
-the coproduct injections give equality in every degree, hence of chain maps.
-Naturality gives the displayed equality of natural transformations. No boundedness
-or flatness assumption is used; the proof also applies to the zero ring or empty site. -/
+actual consecutive quotient transitions. -/
 theorem integralTensorTransitionCompatibility
     (b : ∀ n : ℕ, coefficientTotalTensor.{u, t + 1, t}
       (AlgebraicGeometry.Scheme.ProEt.topology X)

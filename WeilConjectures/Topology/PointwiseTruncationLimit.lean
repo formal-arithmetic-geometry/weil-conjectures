@@ -15,8 +15,19 @@ import WeilConjectures.Topology.PointwiseTruncationLimitIsIso
 
 /-! # Pointwise bounds and the derived limit of lower truncations
 
-Source: Stacks Project, Cohomology, Tag 0D62; Derived Categories, Remark 0H72
-(blueprint: lem-pc-ringed-space-pointwise-truncation-limit).
+Local bounds on the cohomology of the cohomology sheaves of a complex of modules imply that the
+complex is the derived limit of its lower truncations.
+
+## Implementation details
+
+The compatible map exists by exactness of Hom into the Roos triangle. Under the local bounds, the
+transitions of the truncation tower on open cohomology are eventually isomorphisms near every
+point, which kills `R¹ lim` and gives injectivity, hence bijectivity, on stalks of cohomology
+sheaves.
+
+## References
+
+* [Stacks Project, Tags 0D62 and 0H72](https://stacks.math.columbia.edu/tag/0D62)
 -/
 
 @[expose] public section
@@ -28,28 +39,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace AlgebraicGeometry.RingedSpace
 
 /-- Local bounds on the cohomology of the cohomology sheaves imply that every compatible
-map to a derived limit of the lower truncations is an isomorphism; such a map exists.
-Source: Stacks Project, Cohomology, Tag 0D62; Derived Categories, Remark 0H72
-(blueprint: lem-pc-ringed-space-pointwise-truncation-limit).
-
-Proof:
-1. The maps to the standard truncations are compatible. Their product map is killed by
-`1-s`. Exactness of Hom into the Roos triangle (lem-weil-pbc-hom-into-triangle-exact)
-gives the lift, as in Remark 0H72. Truncation induces an isomorphism on degree m
-cohomology for n >= -m (def-sbc-standard-tstructure-derived-category).
-2. For each x and m choose n(x) to be the maximum of zero and one plus the maximum of
--m, p(x,m-1)-m, p(x,m)-m-1 and p(x,m+1)-m-2. The hypothesis kills the three groups
-in degrees m+n, m+n+1 and m+n+2 with coefficients H^(-n-1)(E), for n >= n(x).
-3. The successive-truncation triangle (lem-pc-derived-lower-truncation-step-triangle)
-and its long exact cohomology sequence make the transitions on H^(m-1)(U,-) and
-H^m(U,-) isomorphisms on the fundamental system for n >= n(x).
-4. By lem-pc-derived-limit-roos-abelian-groups, eventual isomorphisms kill R^1 lim:
-solve b_n-g_n(b_(n+1))=a_n forwards using the inverse transitions after n(x), then
-backwards before n(x). Together with lem-pc-ringed-space-rgamma-derived-limit this
-allows lem-pc-ringed-space-derived-limit-stalk-injective to give injectivity of
-H^m(K)_x -> H^m(K_(n(x)))_x. For any compatible c the composite with H^m(c)_x is
-the truncation isomorphism; therefore H^m(c)_x is bijective. Stalkwise detection
-of isomorphisms and the cohomology criterion in the derived category finish. -/
+map to a derived limit of the lower truncations is an isomorphism; such a map exists. -/
 theorem pointwise_truncation_limit (X : RingedSpace.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]
     (E : DerivedCategory (SheafOfModules.{u} (moduleRings X)))

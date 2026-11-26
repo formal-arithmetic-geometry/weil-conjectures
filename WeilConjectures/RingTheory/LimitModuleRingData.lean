@@ -17,17 +17,30 @@ public import Mathlib.LinearAlgebra.TensorProduct.Basic
 public import Mathlib.LinearAlgebra.Quotient.Basic
 import WeilConjectures.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
 import WeilConjectures.RingTheory.LimitModuleRingDataCore
+
+/-!
+# Ring data for directed descent of local algebras
+
+A localization of a finitely presented algebra over the colimit of a directed system of local
+rings descends to a compatible system of local algebras over the stages.
+
+## Implementation details
+
+The finitely many coefficients of a polynomial quotient descend to a common stage, the stage
+algebras are localized at the inverse-image primes, and the colimit and localization assertions
+are verified elementwise using finite coefficient witnesses.
+
+## References
+
+* [Stacks, Tag 00QV]
+-/
+
 @[expose] public section
 universe u v p
 open CategoryTheory CategoryTheory.Limits
 namespace RingHom
-/-- Ring-theoretic part of the directed descent construction.
-Source: Stacks Project, Algebra, Tag 00QV.
-(blueprint: lem-weil-pbc-limit-module-essentially-finite-presentation-over-system-ring).
-
-Proof: Descend the finitely many coefficients of a polynomial quotient to a common stage,
-localize at the inverse-image prime, and verify the colimit and localization assertions
-elementwise using finite coefficient witnesses. -/
+/-- Ring-theoretic part of the directed descent construction for a localization of a finitely
+presented algebra. -/
 theorem exists_limit_module_ring_data
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) (c : Cocone F) (hc : IsColimit c)

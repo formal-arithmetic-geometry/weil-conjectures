@@ -16,7 +16,21 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 /-!
 # Depth in a short exact sequence
 
-Source: Stacks Project, Algebra, Lemma Tag 00LX (blueprint: lem-weil-pbc-depth-in-ses).
+For a short exact sequence `0 → N' → N → N'' → 0` of nonzero finite modules over a Noetherian
+local ring, `depth N ≥ min(depth N', depth N'')`, `depth N'' ≥ min(depth N, depth N' - 1)` and
+`depth N' ≥ min(depth N, depth N'' + 1)`.
+
+## Implementation details
+
+Each depth is the least degree of a nonzero `Ext` from the residue field (Tag 00LW), so the
+inequalities follow from the long exact `Ext` sequence (Tag 00LU). Truncated subtraction on
+`ℕ∞` makes the second inequality automatic when `depth N' = 0`.
+
+## References
+
+* [Stacks, Tag 00LX]
+* [Stacks, Tag 00LW]
+* [Stacks, Tag 00LU]
 -/
 
 @[expose] public section
@@ -55,25 +69,8 @@ private theorem depth_equiv {R : Type u} [CommRing R] [IsLocalRing R]
     · rintro ⟨rs, hreg, hmem, rfl⟩
       exact ⟨rs, (e.isRegular_congr rs).mpr hreg, hmem, rfl⟩
 
-/-- Stacks Project, Algebra, Lemma Tag 00LX (blueprint: lem-weil-pbc-depth-in-ses).
-The depth inequalities for a short exact sequence of nonzero finite modules over a
-Noetherian local ring, proved as follows.
-
-1. By Tag 00LW (lem-weil-pbc-depth-ext), each depth is the least degree of a nonzero
-   Ext group from the residue field. Thus depth at least n is equivalent to Ext
-   vanishing in every degree i with 0 ≤ i < n.
-2. Tag 00LU (lem-weil-pbc-ext-long-exact-second-variable) gives the three consecutive
-   pieces of the long exact Ext sequence, and injectivity of Hom into the middle
-   term. In an exact triple, zero outer terms force the middle term to be zero.
-3. For n = min(depth N', depth N''), both outer Ext groups vanish for i < n.
-   Exactness forces Ext of N to vanish in those degrees, proving (1).
-4. For n = min(depth N, depth N' - 1), Ext of N in degree i and of N' in degree
-   i + 1 vanish when 0 ≤ i < n. Exactness gives vanishing of Ext of N'', proving
-   (2). When depth N' = 0, the inequality is automatic by nonnegativity; truncated
-   subtraction on extended naturals expresses the same bound.
-5. For n = min(depth N, depth N'' + 1), Ext of N vanishes for i < n. In degree
-   zero, injectivity gives vanishing for N'. In degree i ≥ 1, Ext of N'' in degree
-   i - 1 also vanishes, so exactness gives vanishing for N', proving (3). -/
+/-- The depth inequalities for a short exact sequence `0 → N' → N → N'' → 0` of nonzero
+finite modules over a Noetherian local ring. -/
 theorem depth_in_short_exact
     {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     {N' : Type v₁} [AddCommGroup N'] [Module R N'] [Module.Finite R N'] [Nontrivial N']

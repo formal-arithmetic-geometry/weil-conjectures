@@ -47,8 +47,18 @@ import all WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComp
 
 /-! # Underlying sheaf extensionality for nested scalar tensors
 
-Source: Stacks Project, Tag 0941; Bhatt--Scholze, Proposition 3.5.1.
-(blueprint: lem-trf-nested-chosen-scalar-tensor-val-ext)
+Two morphisms out of a nested completed scalar extension have equal underlying presheaf maps
+whenever they agree on nested pure tensor sections (`nestedChosenScalarTensor_val_ext`).
+
+## Implementation details
+
+This is the sectionwise tensor-induction step; the categorical equality of morphisms is
+obtained by `SheafOfModules.hom_ext`.
+
+## References
+
+* [Stacks: Tag 0941]
+* [B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, Proposition 3.5.1]
 -/
 
 @[expose] public noncomputable section
@@ -124,11 +134,7 @@ end NestedChosenTensorProof
 /--
 Tensor induction and sheafification identify the underlying presheaf maps of two
 morphisms in a nested completed scalar extension whenever they agree on nested
-pure tensor sections. This is the sectionwise tensor-induction substep; the
-categorical equality of morphisms is obtained by `SheafOfModules.hom_ext`.
-
-Source: Stacks 0941; Bhatt--Scholze, Proposition 3.5.1.
-(blueprint: lem-trf-nested-chosen-scalar-tensor-val-ext)
+pure tensor sections.
 -/
 theorem nestedChosenScalarTensor_val_ext
     (M : integralTowerModules l E X)

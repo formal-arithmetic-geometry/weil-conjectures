@@ -11,9 +11,9 @@ import all WeilConjectures.SmoothPurity.Supporting.IsomorphismDerivedPullback
 
 /-! # Ordinary pullback and normalized sectionwise inverse image
 
-Source: Stacks Tags 03D2 and 03EL; expanded clause 4 of
-prose-10-21.
-(blueprint: lem-pur-isomorphism-ordinary-module-normalization).
+## References
+
+* Stacks Project, Tags 03D2 and 03EL.
 -/
 
 @[expose] public noncomputable section
@@ -155,12 +155,7 @@ private theorem ordinarySectionwiseIso_unit
       (completedIntegralCoefficientSheafUnrestricted l E X)
       (inverseImageCompletedCoefficientMap l E g)).choose_spec M (op V) x)
 
-/-- Ordinary pullback agrees with sectionwise inverse image, with the unit fixed.
-Source: Stacks Tag 03D2, via the site adjunction and left-adjoint uniqueness.
-(blueprint: lem-pur-isomorphism-ordinary-module-normalization).
-Proof: the completed coefficient maps agree by all finite projections. Transport the
-sectionwise module adjunction along this equality. Its unit is restriction along the
-site counit, and left-adjoint uniqueness gives the asserted normalized isomorphism. -/
+/-- Ordinary pullback agrees with sectionwise inverse image, with the unit fixed. -/
 theorem isomorphismOrdinaryModuleNormalization
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

@@ -15,48 +15,26 @@ import Mathlib.RingTheory.AdicCompletion.LocalRing
 /-!
 # Checking the G-ring condition at maximal ideals
 
-Source: Stacks Project, More on Algebra, Lemma 07PT
-(blueprint: lem-weil-pbc-g-ring-maximal-ideal-criterion).
+A Noetherian ring is a G-ring iff the completion maps of its localizations at maximal ideals are
+regular.
+
+## Implementation details
+
+For a prime `p` contained in a maximal ideal `m`, set `A = R_m`, choose a prime of `Â` over
+`p A`, and let `B` be the localization of `Â` there; `Â` is a G-ring, being complete local. The
+map `R_p → B̂` is regular, and the induced map of completions `R̂_p → B̂` is faithfully flat, so
+regularity descends to `R_p → R̂_p`.
+
+## References
+
+* [Stacks, Tag 07PT]
 -/
 
 @[expose] public section
 
 universe w
 
-/-- A Noetherian ring is a G-ring iff all maximal local completion maps are regular.
-Source: Stacks Project, More on Algebra, Lemma 07PT
-(blueprint: lem-weil-pbc-g-ring-maximal-ideal-criterion).
-
-Proof plan, following the nine steps of the node:
-1. A maximal ideal is prime, so the forward direction is immediate from
-   theorem-finite-etale-covers-proper-henselian--2.
-2. Conversely, for a prime p choose a maximal ideal m containing p. Put A = R_m and
-   c : A → completion(A). Localization-at-prime and lem-weil-pbc-flat-local-ring-maps
-   give Noetherian local rings A and R_p.
-3. The lemmas lem-weil-pbc-adic-completion-noetherian,
-   lem-weil-pbc-local-completion-local-ring and lem-weil-pbc-adic-completion-mod-ideal
-   make completion(A) Noetherian complete local. By
-   lem-weil-pbc-local-completion-faithfully-flat, choose a prime p' over pA.
-4. Put B = completion(A)_(p'). By lem-weil-pbc-complete-local-g-ring applied to
-   completion(A), its local completion map c_B : B → completion(B) is regular.
-5. By lem-weil-pbc-flat-local-ring-maps, c induces a flat local map phi : R_p → B.
-   Localization-at-prime identifies A_(pA) with R_p, and phi composed with A → R_p
-   equals c followed by the localization lambda : completion(A) → B.
-6. The map c is regular by hypothesis, lambda by lem-weil-pbc-localization-regular,
-   and c_B by step 4. The targets B and completion(B) are Noetherian by step 5 and
-   lem-weil-pbc-adic-completion-noetherian; their fibres are quotients of localizations,
-   hence Noetherian. Twice apply lem-weil-pbc-regular-composition to obtain regularity
-   of c_B composed with lambda composed with c.
-7. By lem-weil-pbc-regular-through-localization, the resulting map
-   c_B composed with phi : R_p → completion(B) is regular.
-8. Complete phi to phi_hat : completion(R_p) → completion(B). This is flat by
-   lem-weil-pbc-flat-completion, and local by lem-weil-pbc-local-completion-local-ring
-   and compatibility with the completion maps. Thus
-   lem-weil-pbc-flat-local-hom-faithfully-flat makes its map on spectra surjective.
-9. Apply lem-weil-pbc-regular-permanence to R_p → completion(R_p) → completion(B):
-   the composite is regular by step 7 and the second map is flat and surjective on
-   spectra by step 8. The first map is therefore regular. Since p was arbitrary,
-   theorem-finite-etale-covers-proper-henselian--2 gives IsGRing R. -/
+/-- A Noetherian ring is a G-ring iff all maximal local completion maps are regular. -/
 theorem isGRing_iff_maximalIdeal
     (R : Type w) [CommRing R] [IsNoetherianRing R] :
     IsGRing R ↔

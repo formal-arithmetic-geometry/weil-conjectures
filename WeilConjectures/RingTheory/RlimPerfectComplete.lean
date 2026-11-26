@@ -17,13 +17,21 @@ import WeilConjectures.RingTheory.PseudoCoherentNormalizedAlgebraTower
 /-!
 # Perfect inverse-limit reconstruction over a complete ring
 
-Source: Stacks Project, More on Algebra, Tag 09AW, lemma-Rlim-perfect-gives-complete
-(auxiliary; not a blueprint node).
+Compatible perfect complexes over the quotients `A ⧸ I ^ (n + 1)` of an `I`-adically complete
+ring `A` have a derived limit that is perfect and derived complete, with reductions recovering
+the given complexes.
+
+## Implementation details
 
 The index `n : ℕ` denotes level `n + 1`. Derived scalar extension is specified by its
 universal property as the left adjoint to exact restriction of scalars. We allow any
 realization of this adjunction; all maps below are its adjoint transposes, so no arbitrary
 comparison map is supplied. The derived limit includes its Roos triangle and projections.
+
+## References
+
+* [Stacks, Tag 09AW]
+* [Stacks, Tag 0CQF]
 -/
 
 @[expose] public section
@@ -34,9 +42,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace DerivedCategory
 
-/-- Exact restriction from the `(n+1)`st quotient to the complete ring.
-Source: Stacks Project, Tag 09AW
-(auxiliary; not a blueprint node). -/
+/-- Exact restriction from the `(n+1)`st quotient to the complete ring. -/
 noncomputable def adicLevelRestriction {A : Type u} [CommRing A] (I : Ideal A)
     [HasDerivedCategory.{u} (ModuleCat.{u} A)]
     [∀ n : ℕ, HasDerivedCategory.{u} (ModuleCat.{u} (A ⧸ I ^ (n + 1)))] (n : ℕ) :
@@ -44,18 +50,14 @@ noncomputable def adicLevelRestriction {A : Type u} [CommRing A] (I : Ideal A)
       DerivedCategory (ModuleCat.{u} A) :=
   (ModuleCat.restrictScalars (Ideal.Quotient.mk (I ^ (n + 1)))).mapDerivedCategory
 
-/-- Exact restriction between consecutive quotient rings.
-Source: Stacks Project, Tag 09AW
-(auxiliary; not a blueprint node). -/
+/-- Exact restriction between consecutive quotient rings. -/
 noncomputable def adicStepRestriction {A : Type u} [CommRing A] (I : Ideal A)
     [∀ n : ℕ, HasDerivedCategory.{u} (ModuleCat.{u} (A ⧸ I ^ (n + 1)))] (n : ℕ) :
     DerivedCategory (ModuleCat.{u} (A ⧸ I ^ (n + 1))) ⥤
       DerivedCategory (ModuleCat.{u} (A ⧸ I ^ (n + 1 + 1))) :=
   (ModuleCat.restrictScalars (Ideal.Quotient.factorPowSucc I (n + 1))).mapDerivedCategory
 
-/-- The canonical identification of iterated restriction with direct restriction.
-Source: Stacks Project, Tag 09AW; both underived maps send every element to itself.
-(auxiliary; not a blueprint node). -/
+/-- The canonical identification of iterated restriction with direct restriction. -/
 noncomputable def adicRestrictionComp {A : Type u} [CommRing A] (I : Ideal A)
     [HasDerivedCategory.{u} (ModuleCat.{u} A)]
     [∀ n : ℕ, HasDerivedCategory.{u} (ModuleCat.{u} (A ⧸ I ^ (n + 1)))] (n : ℕ) :
@@ -68,9 +70,7 @@ noncomputable def adicRestrictionComp {A : Type u} [CommRing A] (I : Ideal A)
       (Ideal.Quotient.factor_comp_mk (Ideal.pow_le_pow_right (Nat.le_succ (n + 1)))).symm) ≪≫
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- Restrict a supplied transition in `D(A/I^(n+2))` to `D(A)`.
-Source: Stacks Project, Tag 09AW
-(auxiliary; not a blueprint node). -/
+/-- Restrict a supplied transition in `D(A/I^(n+2))` to `D(A)`. -/
 noncomputable def adicTowerTransition {A : Type u} [CommRing A] (I : Ideal A)
     [HasDerivedCategory.{u} (ModuleCat.{u} A)]
     [∀ n : ℕ, HasDerivedCategory.{u} (ModuleCat.{u} (A ⧸ I ^ (n + 1)))]
@@ -80,9 +80,7 @@ noncomputable def adicTowerTransition {A : Type u} [CommRing A] (I : Ideal A)
       (adicLevelRestriction I n).obj (K n) :=
   (adicLevelRestriction I (n + 1)).map (t n) ≫ (adicRestrictionComp I n).inv.app (K n)
 
-/-- The canonical reduction map: transpose the projection of the specified Roos triangle.
-Source: Stacks Project, Tag 09AW
-(auxiliary; not a blueprint node). -/
+/-- The canonical reduction map: transpose the projection of the specified Roos triangle. -/
 noncomputable def adicLimitReduction {A : Type u} [CommRing A] (I : Ideal A)
     [HasDerivedCategory.{u} (ModuleCat.{u} A)]
     [∀ n : ℕ, HasDerivedCategory.{u} (ModuleCat.{u} (A ⧸ I ^ (n + 1)))]
@@ -266,10 +264,7 @@ private theorem tensor_bound_of_perfect_scalar_model
     ((homologyFunctor (ModuleCat.{u} A) i).mapIso
       (QObjTensorSingleFunctorObjIso P hPk (res.obj N) ≪≫ eD.symm))
 
-/-- The two bounded-above flat models needed for the residue-field argument.
-Keeping these fields in a record avoids repeatedly specializing reconstruction's much larger
-witness statement. Source: Stacks Project, Tag 0CQF
-(auxiliary; not a blueprint node). -/
+/-- The two bounded-above flat models needed for the residue-field argument. -/
 private structure ScalarReductionModel {A S : Type u} [CommRing A] [CommRing S]
     [HasDerivedCategory.{u} (ModuleCat.{u} A)]
     [HasDerivedCategory.{u} (ModuleCat.{u} S)]
@@ -287,11 +282,8 @@ private structure ScalarReductionModel {A S : Type u} [CommRing A] [CommRing S]
   reduction : ((ModuleCat.extendScalars q).mapHomologicalComplex (.up ℤ)).obj P ≅ P₀
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Project the existing generic reconstruction onto its scalar-reduction model interface,
-before specializing the rings. This forgets transition and normalization data already used
-inside reconstruction, while retaining the two marked flat models and their reduction.
-Source: Stacks Project, Tag 0CQF
-(auxiliary; not a blueprint node). -/
+/-- Project the generic reconstruction onto the scalar-reduction model interface, retaining
+the two marked flat models and their reduction. -/
 private theorem reconstruction_scalar_model
     (R : ℕ → Type u) [∀ n, CommRing (R n)]
     (φ : ∀ n, R (n + 1) →+* R n)
@@ -354,32 +346,7 @@ private theorem reconstruction_scalar_model
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Perfect compatible reductions reconstruct a perfect, derived complete object, and its
-projection-induced reductions are isomorphisms compatible with the transition maps.
-Source: Stacks Project, More on Algebra, Tag 09AW
-(auxiliary; not a blueprint node).
-
-Proof:
-1. Represent `K 0` by a bounded finite-projective complex and retract each term from a
-   finite free module, choosing rank zero above the bound. Transfer the differential using
-   these retractions. This gives a chain retract of a bounded-above finite-free complex.
-   A split triangle and `lem-pc-ring-pseudo-coherent-summand` give pseudo-coherence.
-2. The quotient transitions are surjective with square-zero kernels. Completeness identifies
-   their inverse limit with `A`. Apply `lem-weil-pbc-pseudocoherent-inverse-ring-reconstruction`
-   to obtain compatible finite-free models and a bounded-above finite-free limit model,
-   with projection-induced reduction isomorphisms. In particular the limit is pseudo-coherent.
-3. Every maximal ideal contains `I` by `lem-weil-pbc-adic-complete-jacobson-radical`.
-   The existing source K-flat single-module tensor comparison, the ordinary natural
-   tensor/restriction comparison, and exact restriction of scalars identify homology with
-   that of `K 0` tensored with the residue module. A bounded finite-projective model of
-   `K 0` therefore supplies one interval bounding all residue-field cohomologies.
-4. Apply `lem-weil-pbc-pseudocoherent-maximal-fibre-perfect` to conclude perfectness.
-5. For `f ∈ I`, multiplication by `f^(n+1)` on the restricted `K n` is zero. Apply
-   `lem-weil-pbc-nilpotent-torsion-derived-limit-complete` to obtain derived completeness
-   in the vanishing sense of `def-weil-point-derived-complete-module-complex`.
-6. The first two arrows of the Roos triangle compose to zero, so `p (1 - shift) = 0`.
-   Composing with each product projection gives compatibility of the projections. The
-   adjunction unit formula identifies them with the transposes defining
-   `adicLimitReduction`, which proves exactly the displayed compatibility. -/
+projection-induced reductions are isomorphisms compatible with the transition maps. -/
 theorem rlim_perfect_complete {A : Type u} [CommRing A] (I : Ideal A)
     [IsAdicComplete I A]
     [HasDerivedCategory.{u} (ModuleCat.{u} A)]

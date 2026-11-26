@@ -22,8 +22,20 @@ import Mathlib.Algebra.Category.Ring.FilteredColimits
 /-!
 # Finite relation factorization for an elementwise ring colimit
 
-Source: Stacks Project, Tags 00HK and 00R6, equational flatness and finite-data descent.
-(blueprint: lem-weil-pbc-colimit-flat-relation-descent-elementwise)
+A relation at a stage of a directed system of modules, whose colimit is flat over the colimit of
+the coefficient rings, factors through a trivial relation at a later stage.
+
+## Implementation details
+
+The relation is mapped to the colimit, where the equational criterion of flatness gives a
+factorization. The finitely many coefficients and elements are represented at stages, and all
+equations descend to a common later stage by eventual equality in the colimits. No
+tensor-colimit or finite presentation theorem, nor Noetherian or local hypothesis, is needed.
+
+## References
+
+* [Stacks, Tag 00HK]
+* [Stacks, Tag 00R6]
 -/
 
 @[expose] public section
@@ -52,30 +64,11 @@ private theorem additive_colimit_eventual_eq
   exact ⟨j, f, congrArg ULift.down hj⟩
 
 
-/-- A relation becomes trivial at a later stage when the ring colimit is elementwise.
-The explicit preservation assumption ensures that ring colimit representatives and
-zero relations descend even when the indexing and ring universes are independent.
-Source: Stacks Project, Tags 00HK and 00R6.
-(blueprint: lem-weil-pbc-colimit-flat-relation-descent-elementwise)
-
-Proof: Map the given relation to N_infty. The compatibility of psi with phi
-and of the module coprojections with the scalar actions gives a relation
-with coefficients a_i(a_p) in A_infty. Flatness and the equational criterion
-00HK give finitely many coefficients c_pq in A_infty and elements y_q in
-N_infty, with n_i(x_p)=sum_q c_pq*y_q and sum_p a_i(a_p)*c_pq=0.
-Represent the finitely many coefficients and module elements at stages of the
-ring and additive-group colimits, and move all representatives to one stage
-above i by directedness. Scalar compatibility identifies the images of the
-stage expressions with these expressions in N_infty. Eventual zero in the
-ring colimit makes all column relations zero at a common later stage, and
-eventual equality in the additive-group colimit makes all row expressions
-equal there. Move both sets of equations to a further common stage; ring
-maps, additive maps and scalar compatibility preserve them. These descended
-coefficients and vectors give the stated factorization. Empty row or column
-sets are allowed, with empty sums equal to zero. No tensor-colimit or finite
-presentation theorem, nor Noetherian or local hypothesis, is needed.
-(blueprint: lem-weil-pbc-colimit-flat-relation-descent)
--/
+/-- Let `A → B` be compatible directed systems of rings and `N` a compatible system of
+`B`-modules whose colimit is flat over the colimit of `A`. A relation `∑ a_p • x_p = 0` at a
+stage `i` factors at a later stage `j` as `x_p = ∑_q c_pq • y_q` with `∑_p a_p c_pq = 0`. The
+explicit preservation assumption lets ring colimit representatives and zero relations descend
+when the indexing and ring universes are independent. -/
 theorem exists_stage_flat_relation_factorization_of_preserves
     {Λ : Type u} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ]
     (A : Λ ⥤ CommRingCat.{v}) (B : Λ ⥤ CommRingCat.{w})

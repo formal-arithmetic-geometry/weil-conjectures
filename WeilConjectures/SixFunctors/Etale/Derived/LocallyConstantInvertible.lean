@@ -21,13 +21,8 @@ public import WeilConjectures.SixFunctors.OpenClosed.Conservative
 Let `Λ` be a commutative ring and `L` a locally constant sheaf of `Λ`-modules on the small étale
 site of a scheme `X` whose stalk at every geometric point is free of rank one. Then `L` is
 ⊗-invertible, with inverse its dual `L^∨ = [L, Λ_X]`: the evaluation `L ⊗ L^∨ ⟶ Λ_X` is an
-isomorphism. On a trivialising étale cover `U_i ⟶ X` the pullback of `L` is the constant sheaf
-`Λ_{U_i}`, so this follows from the general criterion for sheaves which are trivial étale-locally
-(`AlgebraicGeometry.Etale.isIso_ihom_ev_app_unit_of_upperStar_iso`).
-
-Placed in any degree, such an `L` is then invertible in `D(X_ét, Λ)`.
-
-This is step (4c) of the proof of blueprint `proposition-exceptional-inverse-image-smooth-morphism`.
+isomorphism. Placed in any degree, such an `L` is then invertible in `D(X_ét, Λ)`. This is an
+ingredient of the computation of the exceptional inverse image along a smooth morphism.
 
 ## Main statements
 
@@ -35,6 +30,13 @@ This is step (4c) of the proof of blueprint `proposition-exceptional-inverse-ima
   `L ⊗ [L, Λ_X] ⟶ Λ_X` of a locally constant sheaf with free rank-one stalks is an isomorphism.
 - `AlgebraicGeometry.Etale.isInvertible_shift_singleFunctor_obj_of_isLocallyConstantSheaf`:
   such a sheaf, placed in any degree, is invertible in `D(X_ét, Λ)`.
+
+## Implementation details
+
+On a trivialising étale cover `U_i ⟶ X` the pullback of `L` is the constant sheaf `Λ_{U_i}` on
+every nonempty member, and the nonempty members still cover `X`, so invertibility follows from
+the general criterion for sheaves which are trivial étale-locally
+(`AlgebraicGeometry.Etale.isIso_ihom_ev_app_unit_of_upperStar_iso`).
 -/
 
 @[expose] public section
@@ -66,14 +68,9 @@ lemma nonempty_iso_unit_of_isConstant (F : Sheaf X.smallEtaleTopology (ModuleCat
   exact ⟨eM.symm ≪≫ (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapIso eΛ ≪≫
     (Functor.Monoidal.εIso (presheafToSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))).symm⟩
 
-/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism`, step (4c): a lisse sheaf of
-rank one is invertible.
-
-For a locally constant sheaf `L` of `Λ`-modules on `X_ét` whose stalk at every geometric point
-is `Λ`, the evaluation `L ⊗ [L, Λ_X] ⟶ Λ_X` is an isomorphism. On every nonempty member `U_i` of
-a trivialising étale cover, `L|_{U_i}` is constant with stalks `Λ`, hence isomorphic to the unit
-(`AlgebraicGeometry.Etale.nonempty_iso_unit_of_isConstant`), and the nonempty members still cover
-`X`; conclude by `AlgebraicGeometry.Etale.isIso_ihom_ev_app_unit_of_upperStar_iso`. -/
+/-- A lisse sheaf of rank one is invertible: for a locally constant sheaf `L` of `Λ`-modules on
+`X_ét` whose stalk at every geometric point is `Λ`, the evaluation `L ⊗ [L, Λ_X] ⟶ Λ_X` is an
+isomorphism. -/
 theorem isIso_ihom_ev_app_unit_of_isLocallyConstantSheaf
     (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsLocallyConstantSheaf L]
     (hL : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
@@ -96,11 +93,8 @@ theorem isIso_ihom_ev_app_unit_of_isLocallyConstantSheaf
   exact (nonempty_iso_unit_of_isConstant (G.obj L) t
     ((Etale.upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) (𝒰.f i) t).app L ≪≫ eL)).some
 
-/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism`, step (4c): a lisse sheaf of
-rank one is invertible.
-
-A locally constant sheaf `L` of `Λ`-modules on `X_ét` whose stalks are `Λ` has the tensor inverse
-`[L, Λ_X]`. -/
+/-- A locally constant sheaf `L` of `Λ`-modules on `X_ét` whose stalks are `Λ` has the tensor
+inverse `[L, Λ_X]`. -/
 noncomputable def tensorIhomUnitIsoOfIsLocallyConstantSheaf
     (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsLocallyConstantSheaf L]
     (hL : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
@@ -117,8 +111,8 @@ variable {A : Type*} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u 
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] {X : Scheme.{u}}
 
-/-- A sheaf `L` with a tensor inverse `L'`, placed in degree zero, is invertible in `D(X_ét)`:
-both are flat, so `L[0] ⊗ᴸ L'[0] ≅ (L ⊗ L')[0] ≅ 𝟙[0]`, and symmetrically using the braiding. -/
+/-- A sheaf `L` with a tensor inverse `L'`, placed in degree zero, is invertible in
+`D(X_ét)`. -/
 theorem Etale.isInvertible_singleFunctor_obj_of_tensorIso {L L' : Sheaf X.smallEtaleTopology A}
     (e : L ⊗ L' ≅ 𝟙_ _) :
     IsInvertible ((_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj L) :=
@@ -134,9 +128,8 @@ namespace Etale
 
 variable {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}}
 
-/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism`, step (4d): a lisse sheaf of
-rank one is invertible in `D(X_ét, Λ)`: `L[0]` has the tensor inverse `[L, Λ_X][0]`
-(`AlgebraicGeometry.Etale.isInvertible_singleFunctor_obj_of_tensorIso`). -/
+/-- A lisse sheaf of rank one is invertible in `D(X_ét, Λ)`: `L[0]` has the tensor inverse
+`[L, Λ_X][0]`. -/
 theorem isInvertible_singleFunctor_obj_of_isLocallyConstantSheaf
     (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsLocallyConstantSheaf L]
     (hL : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
@@ -144,10 +137,7 @@ theorem isInvertible_singleFunctor_obj_of_isLocallyConstantSheaf
     IsInvertible ((_root_.DerivedCategory.singleFunctor _ 0).obj L) :=
   isInvertible_singleFunctor_obj_of_tensorIso (tensorIhomUnitIsoOfIsLocallyConstantSheaf L hL)
 
-/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism`, step (4d): a lisse sheaf of
-rank one placed in any degree is invertible in `D(X_ét, Λ)`
-(`AlgebraicGeometry.Etale.isInvertible_singleFunctor_obj_of_isLocallyConstantSheaf`), shifts of
-invertible complexes being invertible. -/
+/-- A lisse sheaf of rank one placed in any degree is invertible in `D(X_ét, Λ)`. -/
 theorem isInvertible_shift_singleFunctor_obj_of_isLocallyConstantSheaf
     (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsLocallyConstantSheaf L]
     (hL : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),

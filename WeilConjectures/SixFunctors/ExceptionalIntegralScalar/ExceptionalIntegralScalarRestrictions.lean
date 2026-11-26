@@ -16,7 +16,25 @@ import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Subcategory
 import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 import all WeilConjectures.SmoothPurity.Pur.PurAdicScalarExtensionTorBound
 
-/-! # Normalized scalar restrictions, independently of exceptional operations -/
+/-!
+# Normalized scalar restrictions, independently of exceptional operations
+
+This file constructs the scalar-only part of the left comparison construction: restrictions of
+scalar extension to the normalized finite-Tor constructible categories.
+
+## Implementation details
+
+On finite targets, ordinary derived extension is restricted literally; finite coefficient
+changes preserve constructibility and the Tor interval, using bounded flat étale models. At a
+completed target, an allowed map is identified with its induced integral coefficient embedding
+and the strict-tower extension is restricted; the finite-free completed comparison supplies the
+inverse realization. The construction uses actual coefficient maps, hence does not depend on the
+proof of `Allowed`.
+
+## References
+
+* [Zheng, Construction 4.1 and Propositions 5.24 and 5.26]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -35,9 +53,7 @@ variable (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l)
 
 -- Coefficient presentations and full-subcategory instances need this reduction budget.
 /-- The scalar-only part of the left comparison construction. It contains neither
-an exceptional operation nor a proper/open comparison.
-Source: Zheng, Construction 4.1 and Proposition 5.24.
-(blueprint: def-sf-integral-scalar-restrictions). -/
+an exceptional operation nor a proper/open comparison. -/
 structure ScalarRestrictions (T : Scheme.{u}) where
   scalar {s t : RingStage.{u} l}
       (a : PurCompactSupport.Change (s.coefficients l) (t.coefficients l))
@@ -595,23 +611,7 @@ private theorem assembleScalarRestrictions (T : Scheme.{u})
     tor_interval := tor_interval }⟩
 
 -- Coefficient presentations and full-subcategory instances need this reduction budget.
-/-- Scalar restrictions exist independently of any exceptional operation.
-Source: Zheng, Construction 4.1 and Propositions 5.24 and 5.26.
-
-Proof: on finite targets, restrict ordinary derived extension literally. Integral
-reductions are finite-Tor constructible by their defining reductions; finite coefficient
-changes preserve constructibility and the same Tor interval, using bounded flat etale
-models. The tensor associator handles composite changes and the tensor unitor handles
-identities. At a completed target, identify an allowed map with its induced integral
-coefficient embedding and restrict the published strict-tower extension. The finite-free
-completed comparison is invertible on derived-complete inputs and supplies the inverse
-realization. Its normalized finite reductions give constructibility and the unchanged
-Tor interval. Choose the inherited exact shift via the full inclusion so that this
-realization commutes with shifts. The construction uses actual coefficient maps, hence
-is independent of the Allowed proof and has the prescribed canonical realization for
-every completed generator. Positive levels include the residue level; the empty scheme
-is handled by the same full-subcategory restriction.
-(blueprint: lem-sf-integral-scalar-restrictions). -/
+/-- Scalar restrictions exist independently of any exceptional operation. -/
 theorem scalarRestrictions_exists (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (T : Scheme.{u}) [T.Over (Spec (.of D.k))]
     [LocallyOfFiniteType (T ↘ Spec (.of D.k))]

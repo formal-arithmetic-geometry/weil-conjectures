@@ -15,7 +15,30 @@ import Mathlib.RingTheory.FiniteStability
 import WeilConjectures.RingTheory.ComparisonMapFiniteStage
 import WeilConjectures.RingTheory.ComparisonMapBaseChangeSystem
 
-/-! # Descending a comparison map and its filtered pushout system -/
+/-!
+# Descending a comparison map and its filtered pushout system
+
+A finitely presented comparison map over a filtered colimit of rings descends to a filtered
+system of finitely presented ring maps whose transition squares are pushouts.
+
+## Main results
+
+* `RingHom.exists_finitePresentation_comparison_system`
+
+## Implementation details
+
+One works in the cofinal upper set of a stage where `P` and the map from `Q` are defined.
+The stage maps `ψⱼ : Bⱼ ⊗_P Q → Cⱼ` are finitely presented by the finite-type cancellation
+theorem, their transition squares are pushouts by tensor cancellation, and their colimit
+comparison is the given equivalence `e`. Only the comparison maps, not their inverses, are
+descended. Rings are lifted to a common universe through the ring equivalences `dⱼ` and `cⱼ`.
+
+## References
+
+* [Stacks, Tag 02JO] (construction of the comparison map)
+* [Stacks, Tag 00QO]
+* [Stacks, Tag 05N9]
+-/
 
 @[expose] public section
 
@@ -56,39 +79,9 @@ private theorem finitePresentation_tensorMap {R B C T : Type*}
   rw [he]
   exact (RingHom.FinitePresentation.of_bijective e.bijective).comp hincl
 
-/-- The comparison descends as a finitely presented ring map, in a filtered system
-of pushout squares. No stage map is asserted to be bijective.
-
-Source: Stacks Project, Algebra, Tag 02JO (3), construction of the comparison map;
-Tags 00QO and 05N9 (2); tensor base change and cancellation.
-(blueprint: lem-weil-pbc-finite-presentation-comparison-system)
-
-Proof: work in the cofinal upper set of i₀. The systems Aⱼ tensor B₀ and Aⱼ tensor
-C₀ have the indicated tensor colimits: representatives and eventual equality are
-provided by the elementwise base-change lemma. Define the universal ring map
-on representatives; eventual equality makes it well defined, and ring operations
-are checked at common upper bounds. Finite presentation of P over Z
-factors P into one B stage. After restricting to the upper set of that stage,
-transport this structure by transition maps. Composing e with the inclusion of Q
-makes Q a P-algebra map into the limit C ring. Finite presentation of Q over P
-factors this map into a later C stage as a P-algebra map, so compatibility with P
-holds already at that stage. Restrict again
-and denote the starting index by i. For j above i, give Cⱼ its P-structure through
-Bⱼ and the base change of φ₀, and extend the Q map by transition maps.
-The tensor universal property gives ψⱼ : Bⱼ tensor_P Q → Cⱼ, sending b tensor q
-to φⱼ(b) times the chosen image of q. This proves its left-inclusion compatibility.
-These maps commute with transitions by checking pure tensors. Tensor cancellation
-shows each transition square of ψ is a pushout: both sides at a later index are
-base changes along Bⱼ → Bₖ. The target Cⱼ is finitely presented over Bⱼ by base
-change of φ₀; the source is finitely presented over Bⱼ by base change of P → Q.
-The finite-type cancellation theorem therefore makes ψⱼ finitely presented.
-Tensor products commute with the filtered colimit, so the source has colimit
-B tensor_P Q and the target has colimit C. Their colimit comparison is e,
-hence bijective. Lift rings to the common universe if necessary and record the
-canonical ring equivalences dⱼ and cⱼ; these change none of the identities.
-Only the comparison maps, not their inverses, have been descended in this step.
-The construction works for zero rings and empty presentations.
--/
+/-- The comparison map over a filtered colimit descends to a filtered system of finitely
+presented ring maps whose transition squares are pushouts and whose colimit is bijective.
+No stage map is asserted to be bijective. -/
 theorem exists_finitePresentation_comparison_system
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{v}) [HasColimit F]

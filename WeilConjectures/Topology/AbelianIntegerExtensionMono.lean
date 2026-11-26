@@ -14,8 +14,9 @@ import Mathlib.Topology.Sheaves.Over
 
 /-! # Integer extensions by zero embed in the constant integer sheaf
 
-Source: Stacks Project, Cohomology, Lemma 02UX, third paragraph of the proof.
-(blueprint: lem-sc-abelian-integer-extension-mono).
+## References
+
+* Stacks Project, Tag 02UX.
 -/
 
 @[expose] public section
@@ -47,25 +48,7 @@ private noncomputable def integerRestrictionIso (X : TopCat.{u}) (U : Opens X) :
   exact (e.app M).symm ≪≫ U.sheafEquivOver.functor.mapIso
     ((J.overPullbackConstantSheafIso A U).app M).symm
 
-/-- The integer extension by zero on any open embeds in the constant integer sheaf.
-
-Source: Stacks Project, Cohomology, Lemma 02UX
-(label `lemma-vanishing-generated-one-section`), the assertion that the kernel
-of a one-section presentation is a subsheaf of the constant integer sheaf.
-
-Proof:
-1. Restriction of the constant integer sheaf on X to U is the constant integer
-   sheaf on U: both are the sheaf of locally constant integer-valued functions.
-   This identification commutes with the germ of each constant section.
-2. Apply extension by zero to this identification, and then the counit
-   j_! j^* Z_X → Z_X. This gives the required morphism.
-3. At a point in U, the extension-by-zero stalk and restriction-stalk
-   identifications turn this map into the identity of the integer stalk.
-   Outside U its source stalk is zero. All stalk maps are therefore injective,
-   and the stalkwise criterion for monomorphisms proves that the map is monic.
-   No compactness is used; U = ∅ gives the zero-source map, and U = X gives
-   the identity up to the canonical identifications.
-(blueprint: lem-sc-abelian-integer-extension-mono). -/
+/-- The integer extension by zero on any open embeds in the constant integer sheaf. -/
 theorem abelianIntegerExtension_exists_mono (X : TopCat.{u}) (U : Opens X) :
     ∃ ι : (TopCat.Sheaf.abelianOpenExtensionByZero U).obj
       ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj U))

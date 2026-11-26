@@ -13,8 +13,17 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 /-!
 # Module localization as the colimit of multiplication by one element
 
-Source: Stacks Project, Section 10.9 (Tag 00CM), module localization at the powers of an
-element (auxiliary; not a blueprint node).
+The localization `M_f` is the colimit of `M --f--> M --f--> M --f--> ⋯`.
+
+## Implementation details
+
+The maps `m ↦ m / f^e` are compatible and induce a map from the colimit, which is surjective since
+every element of `M_f` is a fraction. If `m / f^e = n / f^d`, then
+`f^r • (f^d • m - f^e • n) = 0` for some `r`, and the representatives agree at stage `e + d + r`.
+
+## References
+
+* [Stacks, Tag 00CM] (module localization at the powers of an element)
 -/
 
 @[expose] public section
@@ -26,22 +35,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace ModuleCat
 
 set_option backward.isDefEq.respectTransparency false in
-/-- (auxiliary; not a blueprint node) Stacks Project, Tag 00CM:
-the canonical map from the colimit of `M --f--> M --f--> M --f--> ...` to `M_f` is an
+/-- The canonical map from the colimit of `M --f--> M --f--> M --f--> ...` to `M_f` is an
 `R`-linear isomorphism, sending the class of `m` at stage `e` to `m / f^e`.
-
-Proof:
-1. Index the copies of `M` by the filtered poset of natural numbers; successive maps
-   multiply by `f`. The linear maps `m ↦ m / f^e` are compatible, because
-   `(f • m) / f^(e+1) = m / f^e`, and induce a map from the colimit by its universal
-   property (def-weil-pbc-category-colimit).
-2. Every element of the localization is a fraction `m / f^e`, so this map is surjective
-   (def-weil-pbc-module-localization-away; lem-weil-pbc-filtered-colimit-modules-elementwise).
-3. If `m / f^e = n / f^d`, the localization equality criterion gives some `r` with
-   `f^r • (f^d • m - f^e • n) = 0`. At stage `E = e + d + r` the representatives have
-   difference `f^(E-e) • m - f^(E-d) • n = 0`. Thus they represent the same colimit element
-   (def-weil-pbc-module-localization-away; lem-weil-pbc-filtered-colimit-modules-elementwise).
-4. The induced linear map is bijective and hence a linear isomorphism, with the given formula.
 -/
 theorem localization_away_colimit
     {R : Type u} [CommRing R] (f : R)

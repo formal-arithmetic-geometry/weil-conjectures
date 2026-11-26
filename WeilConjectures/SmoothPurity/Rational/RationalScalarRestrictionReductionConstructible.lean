@@ -36,7 +36,13 @@ coefficient reduction of the original object. The same finite stratifications,
 interval, and local models are retained after restriction of scalars. This is
 separated from completeness because it is a finite-level constructibility
 assertion.
-(blueprint: lem-sf-rational-scalar-restriction-reduction-constructible)
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.8.2(1), Proposition 6.8.14(2),
+  Remark 6.8.15.
+* Serre, *Local Fields*, Chapter I, Proposition 9.
+* Stacks Project, Tags 03CZ, 03DA, 03EK, 06YQ, 06YY, 093I, 093M, 09AJ.
 -/
 
 @[expose] public section
@@ -54,7 +60,7 @@ variable (l : ℕ) [Fact l.Prime]
 section RamifiedSquare
 
 /-- The ramification index `e` of the integral coefficient extension, with
-`ι(ϖ_E) O_F = ϖ_F^e O_F`. Source: Serre, Local Fields, Chapter I, Proposition 9. -/
+`ι(ϖ_E) O_F = ϖ_F^e O_F`. -/
 theorem exists_coefficientRamification :
     ∃ e : ℕ, 1 ≤ e ∧
       Ideal.span ({(integralScalarIntegerInclusion l E F ι
@@ -71,8 +77,7 @@ theorem ramifiedIndex_add_one {e : ℕ} (he : 1 ≤ e) (n : ℕ) :
   simp only [RamifiedPullback.index]
   omega
 
-/-- A source uniformizer power maps into the ramified target ideal.
-Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
+/-- A source uniformizer power maps into the ramified target ideal. -/
 theorem ramifiedCoefficientQuotient_kernel {e : ℕ} (he : 1 ≤ e)
     (hideal : Ideal.span ({(integralScalarIntegerInclusion l E F ι
       (Padic.coefficientExtensionUniformizer l E))} :
@@ -92,8 +97,7 @@ theorem ramifiedCoefficientQuotient_kernel {e : ℕ} (he : 1 ≤ e)
   rw [← hi]
   exact Ideal.mem_map_of_mem _ hx
 
-/-- The ramified quotient map `O_E/ϖ_E^(n+1) → O_F/ϖ_F^(e(n+1))` induced by `ι`.
-Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
+/-- The ramified quotient map `O_E/ϖ_E^(n+1) → O_F/ϖ_F^(e(n+1))` induced by `ι`. -/
 noncomputable def ramifiedCoefficientQuotient {e : ℕ} (he : 1 ≤ e)
     (hideal : Ideal.span ({(integralScalarIntegerInclusion l E F ι
       (Padic.coefficientExtensionUniformizer l E))} :
@@ -107,8 +111,7 @@ noncomputable def ramifiedCoefficientQuotient {e : ℕ} (he : 1 ≤ e)
       (integralScalarIntegerInclusion l E F ι))
     (ramifiedCoefficientQuotient_kernel l E F ι he hideal n)
 
-/-- The completed coefficient inclusion reduces to the ramified quotient map.
-Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
+/-- The completed coefficient inclusion reduces to the ramified quotient map. -/
 theorem completedCoefficientMap_ramifiedProjection {e : ℕ} (he : 1 ≤ e)
     (hideal : Ideal.span ({(integralScalarIntegerInclusion l E F ι
       (Padic.coefficientExtensionUniformizer l E))} :
@@ -122,8 +125,7 @@ theorem completedCoefficientMap_ramifiedProjection {e : ℕ} (he : 1 ≤ e)
   RamifiedPullback.ramified_projection l E F ι e he
     (ramifiedCoefficientQuotient l E F ι he hideal) (fun _ _ ↦ rfl) W n
 
-/-- The completed coefficient projections are surjective on sections.
-Source: Stacks Project, Tag 093M. -/
+/-- The completed coefficient projections are surjective on sections. -/
 theorem completedIntegralProjection_surjective (n : ℕ) (U : W.ProEtᵒᵖ) :
     Function.Surjective
       ((completedIntegralCommRingProjectionUnrestricted l E W n).hom.app U) :=
@@ -133,8 +135,7 @@ theorem completedIntegralProjection_surjective (n : ℕ) (U : W.ProEtᵒᵖ) :
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The completed ramified coefficient square is a pushout on every section ring:
-`R_F(U) ⊗_{R_E(U)} A_E(U) = A_F(U)`. Source: Stacks Project, Tag 093M;
-Bhatt--Scholze, Lemma 6.8.2(1). -/
+`R_F(U) ⊗_{R_E(U)} A_E(U) = A_F(U)`. -/
 theorem completedRamifiedSquare_isPushout {e : ℕ} (he : 1 ≤ e)
     (hideal : Ideal.span ({(integralScalarIntegerInclusion l E F ι
       (Padic.coefficientExtensionUniformizer l E))} :
@@ -207,15 +208,13 @@ variable {e : ℕ} (he : 1 ≤ e)
       Set (Padic.coefficientExtensionIntegers l F)) =
     Ideal.span {Padic.coefficientExtensionUniformizer l F ^ e}) (n : ℕ)
 
-/-- The ordinary reduction functor is change of rings along the finite projection on objects.
-Source: Stacks Project, Tag 03EK. -/
+/-- The ordinary reduction functor is change of rings along the finite projection on objects. -/
 theorem scalarReductionExtension_obj_eq (M : scalarReductionSource l E W) :
     (scalarReductionExtension l E W n).obj M =
       SheafOfModules.changeOfRings (completedIntegralCommRingProjectionUnrestricted l E W n) M :=
   (scalarReductionExistence l E W n).choose_spec.choose M
 
-/-- The ordinary reduction functor is change of rings along the finite projection on maps.
-Source: Stacks Project, Tag 03EK. -/
+/-- The ordinary reduction functor is change of rings along the finite projection on maps. -/
 theorem scalarReductionExtension_map_eq {M N : scalarReductionSource l E W} (φ : M ⟶ N) :
     (scalarReductionExtension l E W n).map φ =
       eqToHom (scalarReductionExtension_obj_eq l E W n M) ≫
@@ -224,7 +223,7 @@ theorem scalarReductionExtension_map_eq {M N : scalarReductionSource l E W} (φ 
   (scalarReductionExistence l E W n).choose_spec.choose_spec.choose φ
 
 /-- Restriction of scalars along the ramified finite coefficient map
-`A_{E,n} → A_{F,e(n+1)-1}`. Source: Stacks Project, Tag 03CZ. -/
+`A_{E,n} → A_{F,e(n+1)-1}`. -/
 noncomputable abbrev ramifiedReductionRestriction :
     scalarReductionTarget l F W (RamifiedPullback.index e n) ⥤ scalarReductionTarget l E W n :=
   SheafOfModules.restrictScalars
@@ -232,8 +231,7 @@ noncomputable abbrev ramifiedReductionRestriction :
       (RamifiedPullback.ramifiedMap l E F W e n
         (ramifiedCoefficientQuotient l E F ι he hideal n)))
 
-/-- The component of the reduction base-change isomorphism at one module.
-Source: Stacks Project, Tag 03EK; Bhatt--Scholze, Lemma 6.8.2(1). -/
+/-- The component of the reduction base-change isomorphism at one module. -/
 noncomputable def scalarReductionRestrictionBaseChangeApp (M : scalarReductionSource l F W) :
     (scalarReductionExtension l E W n).obj ((rationalScalarModuleRestriction l E F ι W).obj M) ≅
       (ramifiedReductionRestriction l E F ι W he hideal n).obj
@@ -276,8 +274,7 @@ theorem scalarReductionRestrictionBaseChangeApp_naturality
     (completedRamifiedSquare_isPushout l E F ι W he hideal n) φ)
   erw [reassoc_of% key]
 
-/-- The completed coefficient ring sheaf `R_E` is flat as a module over itself.
-Source: Stacks Project, Tag 06YQ. -/
+/-- The completed coefficient ring sheaf `R_E` is flat as a module over itself. -/
 theorem completedIntegralUnit_isFlatOnSite :
     SheafOfModules.IsFlatOnSite (J := ProEt.topology W)
       (R := completedIntegralCommRingSheafUnrestricted l E W)
@@ -315,8 +312,7 @@ theorem completedIntegralUnitPi_isFlatOnSite (d : ℕ) :
     exact SheafOfModules.flatOnSite_of_iso R (e ≪≫ (biprod.isoProd _ _).symm).symm
       (SheafOfModules.flatOnSite_biprod R _ _ (completedIntegralUnit_isFlatOnSite l E W) ih)
 
-/-- The completed coefficient sheaf `R_F` is flat as an `R_E`-module, being finite free.
-Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
+/-- The completed coefficient sheaf `R_F` is flat as an `R_E`-module, being finite free. -/
 theorem completedCoefficientRestrictionUnit_isFlatOnSite :
     SheafOfModules.IsFlatOnSite (J := ProEt.topology W)
       (R := completedIntegralCommRingSheafUnrestricted l E W)
@@ -370,8 +366,7 @@ noncomputable def scalarReductionRestrictionComplexIso
     (fun i j _ ↦ (scalarReductionRestrictionBaseChangeApp_naturality l E F ι W he hideal n
       (P.d i j)).symm)
 
-/-- Derived reduction of a K-flat complex is computed termwise.
-Source: Stacks Project, Tag 06YY. -/
+/-- Derived reduction of a K-flat complex is computed termwise. -/
 noncomputable def scalarReductionDerivedExtensionKFlatIso (k : ℕ)
     (P : CochainComplex (scalarReductionSource l E W) ℤ)
     (hP : CochainComplex.IsKFlatIndependentCoefficients
@@ -392,8 +387,7 @@ noncomputable def scalarReductionDerivedExtensionKFlatIso (k : ℕ)
       (((scalarReductionExtension l E W k).mapHomologicalComplex (.up ℤ)).obj P)
 
 /-- Derived reduction modulo `ϖ_E^(n+1)` of the derived restriction is the restriction of the
-derived reduction modulo `ϖ_F^(e(n+1))`. Source: Stacks Project, Tag 06YY;
-Bhatt--Scholze, Lemma 6.8.2(1). -/
+derived reduction modulo `ϖ_F^(e(n+1))`. -/
 theorem nonempty_scalarReductionDerivedRestrictionIso
     (X : DerivedCategory (scalarReductionSource l F W)) :
     Nonempty ((scalarReductionDerivedExtension l E W n).obj
@@ -434,8 +428,7 @@ theorem ramifiedReductionRestriction_eq :
   congr 4
 
 /-- Constructibility and cohomological bounds of a finite `F`-reduction pass to its
-restriction along the ramified finite coefficient map.
-Source: Stacks Project, Tags 093I, 09AJ and 03DA. -/
+restriction along the ramified finite coefficient map. -/
 theorem intrinsicFiniteTorsionConstructible_of_iso_ramifiedRestriction {a b : ℤ}
     (Z : DerivedCategory (scalarReductionTarget l F W (RamifiedPullback.index e n)))
     (Y : DerivedCategory (scalarReductionTarget l E W n))
@@ -471,16 +464,7 @@ theorem intrinsicFiniteTorsionConstructible_of_iso_ramifiedRestriction {a b : �
     ((proEtaleModuleRestriction W (Padic.coefficientExtensionRing l E (n + 1))).mapIso e.symm) h
 end ReductionBaseChange
 
-/-- Restricted reductions remain intrinsically constructible in one common interval.
-Source: Bhatt--Scholze, Proposition 6.8.14(2), Remark 6.8.15.
-Proof: use the finite quotient square induced by the completed coefficient map and
-exactness of scalar restriction to identify homology of every E-reduction with a
-restricted F-reduction. Reuse the F object's finite stratifications and degree
-interval. Restriction of each finite constant local model remains finite over the
-source quotient ring, and the sheafification comparison is sectionwise. Taking
-the interval supplied by `K.property` gives the common bounds for all levels.
-No Noetherian hypothesis on `W` is used.
-(blueprint: lem-sf-rational-scalar-restriction-reduction-constructible) -/
+/-- Restricted reductions remain intrinsically constructible in one common interval. -/
 theorem rationalScalarDerivedRestriction_reduction_constructible
     (K : sfIntegralConstructibleCategory l F W) :
     ∃ a b : ℤ, a ≤ b ∧ ∀ n : ℕ,

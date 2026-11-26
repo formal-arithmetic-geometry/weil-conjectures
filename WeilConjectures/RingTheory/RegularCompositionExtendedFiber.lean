@@ -15,7 +15,20 @@ import Mathlib.RingTheory.IsTensorProduct
 /-!
 # The map between extended fibres of a tower
 
-Source: Stacks Project, More on Algebra, proof of Lemma 07QI, the base-change reduction.
+For a tower `A → B → C` with `B → C` regular, the fibres of the induced map between finite
+extensions of the fibres over a prime of `A` are regular.
+
+## Implementation details
+
+With `k = κ(p)` and `B_K = K ⊗_k (k ⊗_A B)`, tensor cancellation identifies the fibre at `q'`
+with `κ(q') ⊗_{κ(q)} (κ(q) ⊗_B C)`. Since `B → B_K` is essentially of finite type, `κ(q')/κ(q)`
+is finitely generated, and Lemma 0381 makes this tensor product of the geometrically regular
+fibre regular. No regularity of `A → B` and no purely inseparable hypothesis on `K` are used.
+
+## References
+
+* [Stacks, Tag 07QI]
+* [Stacks, Tag 0381]
 -/
 
 @[expose] public section
@@ -49,21 +62,7 @@ private theorem regular_fibre_baseChange
 
 attribute [local instance] Algebra.TensorProduct.rightAlgebra in
 /-- A fibre of the map between finite extensions of the fibres of a tower is regular
-when the upper map is regular.
-Source: Stacks Project, More on Algebra, proof of Lemma 07QI, and Algebra, Lemma 0381
-(blueprint: lem-weil-pbc-regular-composition-extended-fiber).
-
-Proof: Write k = κ(p), B_K = K ⊗[k] (k ⊗[A] B), and similarly C_K.
-At q' in Spec B_K, let q be its contraction in B. Tensor cancellation identifies
-the fibre of B_K → C_K at q' with κ(q') ⊗[κ(q)] (κ(q) ⊗[B] C).
-The map B → B_K is essentially of finite type: A → κ(p) is a localization followed
-by a quotient, and K/κ(p) is finite. Hence κ(q')/κ(q) is finitely generated as a
-field extension. The original fibre is geometrically regular because B → C is
-regular. Lemma 0381 makes its tensor product with κ(q') regular. Transport regularity
-through the fibre isomorphism to conclude. Noetherianity of the resulting fibre is part
-of the conclusion of Lemma 0381.
-No regularity of A → B and no purely inseparable hypothesis on K are used.
-If C_K is zero the fibre is zero, which is regular. If B_K is zero it has no primes. -/
+when the upper map is regular. -/
 theorem IsRegular.extendedFiber_regular
     {A : Type u} {B : Type v} {C : Type w}
     [CommRing A] [CommRing B] [CommRing C]

@@ -21,9 +21,9 @@ set_option linter.privateModule false
 
 /-! # Completion-unit realization of the strict open tensor map
 
-Source: Stacks Project, sites-cohomology.tex Tag 0GL1 and sites-modules.tex Tag 0E8I;
-strict-system and completion-unit refinement, node proof steps 4--9
-(blueprint: lem-pur-completed-open-tensor-system-realization).
+## References
+
+* Stacks Project, Tags 0GL1 and 0E8I.
 -/
 
 @[expose] public noncomputable section

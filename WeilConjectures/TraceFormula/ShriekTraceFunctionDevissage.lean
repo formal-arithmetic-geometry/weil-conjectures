@@ -22,17 +22,18 @@ immersion with closed complement `i : Z ⟶ X`, both stable under `e_X`. The she
 compatibility (`ProEtale.CondensedRing.ShriekTraceFunctionAt`) along `j ≫ f` and along `i ≫ f`
 gives it along `f` (`ProEtale.CondensedRing.shriekTraceFunctionAt_of_isCompl`).
 
+## Implementation details
+
 The proof splits the points of `X` over `ȳ` into those of `U` and those of `Z`, and uses two
 inputs, stated here as separate lemmas:
 
 - `ProEtale.CondensedRing.weilStalkTraceAlternatingSum_weilLowerShriek_eq_add`: the local trace of
-  `Rf_!^Weil K` is the sum of those of `R(j ≫ f)_!^Weil j^* K` and `R(i ≫ f)_!^Weil i^* K`. It
-  comes from the localization triangle `j_! j^* K ⟶ K ⟶ i_* i^* K ⟶` of Weil objects, the
-  compatibility of the Frobenius with its connecting morphism (blueprint
-  `lemma-additivity-open-subscheme-complement`, Step 2) and the additivity of the supertrace along
-  the long exact sequence of stalks of homology sheaves. It is deduced from the Weil distinguished
-  triangles of `ProEtale.CondensedRing.WeilBoundedConstructible.IsDistTriang` and the
-  composition isomorphisms `weilLowerShriekCompIso`.
+  `Rf_!^Weil K` is the sum of those of `R(j ≫ f)_!^Weil j^* K` and `R(i ≫ f)_!^Weil i^* K`. It comes
+  from the localization triangle `j_! j^* K ⟶ K ⟶ i_* i^* K ⟶` of Weil objects, the compatibility of
+  the Frobenius with its connecting morphism and the additivity of the supertrace along the long
+  exact sequence of stalks of homology sheaves. It is deduced from the Weil distinguished triangles
+  of `ProEtale.CondensedRing.WeilBoundedConstructible.IsDistTriang` and the composition isomorphisms
+  `weilLowerShriekCompIso`.
 - `ProEtale.CondensedRing.weilStalkTraceAlternatingSum_weilUpperStar`: the local trace of a pullback
   `g^* K` at `w̄` is the local trace of `K` at `w̄ ≫ g`. It is deduced from the pullback of Weil
   sheaves `ProEtale.CondensedRing.weilSheafUpperStar`. Its model-Frobenius analogue is
@@ -251,15 +252,10 @@ lemma unit_comm_weilStr (K : WeilBoundedConstructible ℓ eX.hom) :
     K.str.hom).symm
 
 omit [Finite k] in
-/-- **The localization triangle of Weil objects** (blueprint
-`proposition-extension-zero-restriction-closed-subscheme--8` and
-`lemma-additivity-open-subscheme-complement`, Step 2): for an open immersion `j` with closed
-complement `i`, both stable under `e_X`, the counit `Rj_! Lj^* K ⟶ K` and the unit `K ⟶ Ri_! Li^* K`
-are morphisms of Weil objects (`counit_comm_weilStr`, `unit_comm_weilStr`) and extend to a
-distinguished triangle of Weil objects. The triangle is
-`ProEtale.CondensedRing.exists_distTriang_openClosed`, through `Ri_! ≅ Ri_*`; the Frobenius
-compatibility of its connecting morphism is
-`ProEtale.CondensedRing.map_comp_connecting_eq_of_isCompl`. -/
+/-- **The localization triangle of Weil objects**: for an open immersion `j` with closed complement
+`i`, both stable under `e_X`, the counit `Rj_! Lj^* K ⟶ K` and the unit `K ⟶ Ri_! Li^* K` are
+morphisms of Weil objects (`counit_comm_weilStr`, `unit_comm_weilStr`) and extend to a distinguished
+triangle of Weil objects. -/
 theorem exists_isDistTriang_openClosed
     (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
     (K : WeilBoundedConstructible ℓ eX.hom) :

@@ -16,8 +16,14 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleF
 
 /-! # The finite quotient of the normalized integral coefficient unit
 
-Source: Stacks 099N(5) and the normalized strict Roos construction of the constant unit.
-(blueprint: lem-pur-integral-constant-regular-reduction-model).
+The canonical regular-module reduction of the normalized integral coefficient unit, and the
+identification of its finite quotient model (from the normalized strict Roos construction of
+the constant unit) with this reduction map.
+
+## References
+
+* [Stacks: Tag 099N(5)]
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Sections 3.5 and 6.5]
 -/
 
 @[expose] public noncomputable section
@@ -40,9 +46,7 @@ namespace WeilConjectures.ConstantGeometricStalkUnit
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The canonical regular-module reduction, transposed from the coefficient projection.
-Source: Bhatt--Scholze, Sections 3.5 and 6.5; constant coefficient constructibility.
-(blueprint: lem-pur-integral-constant-regular-reduction-model). -/
+/-- The canonical regular-module reduction, transposed from the coefficient projection. -/
 def integralConstantReduction (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (X : Scheme.{u}) (n : ℕ) :
     (scalarReductionDerivedExtension l E X n).obj (integralConstantCoefficientObject l E X) ≅
@@ -89,9 +93,7 @@ private theorem regular_reduction_unit (W : Scheme.{u}) (n : ℕ) :
   change 1 = (completedIntegralCommRingProjectionUnrestricted l E W n).hom.app (op T) 1 * 1
   simp only [map_one, one_mul]
 
-/-- The quotient model is the canonical reduction map.
-Source: Stacks 099N(5), regular K-flat computation.
-(blueprint: lem-pur-integral-constant-regular-reduction-model). -/
+/-- The quotient model is the canonical reduction map. -/
 private theorem regular_reduction_model (W : Scheme.{u}) (n : ℕ) :
     (coefficientFiniteReductionModel l E W (constantWeilIntegralComplex l E W)
       (constantWeilIntegralComplex_good l E W).1 n).hom ≫

@@ -16,9 +16,6 @@ import all Mathlib.CategoryTheory.Limits.HasLimits
 import all WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientsSupplement
 
 /-! # Normalized reduction of signed completed Tate lines
-
-Source: definition-tate-twists--10, proof steps 1 and 6.
-(blueprint: lem-weil-signed-twist-reduction-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -315,27 +312,7 @@ private theorem reduction_unique (n : ℕ) (c d : ReductionMaps l E S n)
         exact hd.2.2.2 k V _ x
       _ = _ := (hc.2.2.2 k V _ x).symm
 
-/-- Reduction respects signed powers, dual evaluation, and exact derived line tensor.
-Source: blueprint definition-tate-twists--10, proof steps 1 and 6
-(blueprint: lem-weil-signed-twist-reduction-comparison).
-
-Proof: the integral first line reduces to its prescribed finite line by the original
-quotient tensor construction. The reduction of the unit is the coefficient projection.
-Tensor these maps recursively to obtain the positive powers. For a negative power,
-use the unique map of duals compatible with the evaluation pairing. On a cover
-trivializing the integral line these maps are the quotient coefficient maps, and
-the induced scalar extensions are the identity on the quotient coefficient unit.
-Thus all induced extension maps are isomorphisms. They glue because their equations
-on tensors and evaluations are independent of the local basis. These equations also
-prove uniqueness, first at zero and one, then by induction on positive powers and
-by nondegeneracy of the dual pairing at negative powers. For derived comparisons,
-resolve K by a flat-term K-flat complex P. Exact line tensor preserves K-flatness
-and flat terms. Reduction of P is K-flat over the quotient ring. Rebracketing sends
-(x tensor y) tensor a to (x tensor a) tensor (y tensor 1), and its inverse multiplies
-the two quotient coefficients. The balanced maps commute with differentials and
-with every chain map, so descend to the displayed natural derived isomorphism.
-The same computation on the flat degree-zero line gives the single-object comparison.
-All formulas commute with quotient transitions and the unit augmentations. -/
+/-- Reduction respects signed powers, dual evaluation, and exact derived line tensor. -/
 theorem signedTwistReduction_comparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (S : Scheme.{u})

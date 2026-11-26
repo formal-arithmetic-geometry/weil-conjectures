@@ -14,7 +14,12 @@ import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Exceptio
 
 The output fields retain literal rationalized integral objects and maps. The common-stage
 record includes its action on every transition followed by a stage arrow, as constructed
-by the pair-category representative formula. -/
+by the pair-category representative formula.
+
+## References
+
+* [Zheng, Lemma 5.22 and Proposition 5.24]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -47,30 +52,7 @@ private theorem representativeAction_transition
   erw [← CategoryTheory.Category.assoc, CategoryTheory.Iso.hom_inv_id_app,
     CategoryTheory.Category.id_comp]
 
-/-- Construct the coefficient stages before choosing any refinement maps.
-Source: Zheng, Lemma 5.22, Proposition 5.24 and the exceptional coefficient construction,
-steps 1--5 (blueprint: lem-sf-constructible-exceptional-coefficient-stages).
-
-Proof: restrict the finite etale compact-support adjunction to bounded constructible
-finite-Tor objects and transport by the canonical site comparison. Use the adjoint
-right shift and the coefficient-independent dimension bounds. Literal derived scalar
-restrictions give finite scalars, and the proper/open projection mate and its counit
-transpose give the invertible q and b. Use the actual strict-system adjunction and
-normalized reduction/limit equivalence to construct the integral operations. Identify
-its left functor with the prescribed integral compact support using the canonical
-ambient realization. Completed scalar extension and cofinal ramified reduction give
-integral scalars and all allowed composites. The tensor unitor and associator give
-scalar identity and composition maps independently of compactification. Transport
-linear Hom bijections through this prescribed left identification, localize the
-integral adjunctions and scalar maps, then descend over common finite fields. Take
-rational and closed left objects to be their literal represented compact-support
-objects; the rationalization q is identity there. Define the closed left functor on
-pair-category arrows through the common-stage transitions and the rational scalar q, so
-it sends each transition isomorphism to that q (commonTransitionNatural). Choose the
-localization and inclusion shifts from the coefficient functors themselves, so they are independent
-of compactification. All ring left realizations commute with these inherited shifts.
-Empty schemes give zero functors; repeated levels give tensor unitors. No refinement
-map, refinement unit equation or refinement counit equation is constructed here. -/
+/-- Construct the coefficient stages before choosing any refinement maps. -/
 theorem exists_coefficient_stages (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} (f : X ⟶ Y)
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]

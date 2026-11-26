@@ -14,8 +14,18 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Unbounded derived sections of modules over an open
 
-Source: Stacks Project, Cohomology, Tag 0D60 and Injectives, Tag 079P
-(blueprint: def-pc-open-module-derived-sections).
+The unbounded derived functor `RΓ(U, -)` of sections of modules over an open `U`.
+
+## Implementation details
+
+`RΓ(U, -)` is computed by K-injective resolutions: on a K-injective complex it is represented by
+its termwise sections (`Functor.rightDerivedFunctorObjQIso`). The K-injective resolutions of
+module sheaves come from `moduleGrothendieckAbelian` (as for `derivedModuleDirectImage`) through
+`Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian`.
+
+## References
+
+* [Stacks Project, Tags 0D60 and 079P](https://stacks.math.columbia.edu/tag/0D60)
 -/
 
 @[expose] public section
@@ -26,15 +36,9 @@ open CategoryTheory TopologicalSpace
 
 namespace AlgebraicGeometry.RingedSpace
 
-/-- `RΓ(U,-)` is the unbounded right derived functor of sections over `U`, computed
-by K-injective resolutions: on a K-injective complex it is represented by its
-termwise sections (`Functor.rightDerivedFunctorObjQIso`). The K-injective resolutions
-of module sheaves come from `moduleGrothendieckAbelian` (as for
-`derivedModuleDirectImage`) through
-`Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian`. Cohomology over `U` in
-integer degree `m` is the composite with `DerivedCategory.homologyFunctor`.
-Source: Stacks Project, Cohomology, Tag 0D60
-(blueprint: def-pc-open-module-derived-sections). -/
+/-- `RΓ(U,-)`, the unbounded right derived functor of sections of module sheaves over `U`.
+Cohomology over `U` in integer degree `m` is the composite with
+`DerivedCategory.homologyFunctor`. -/
 noncomputable abbrev openModuleDerivedSections (X : RingedSpace.{a}) (U : Opens X)
     [HasDerivedCategory.{b} (SheafOfModules.{a} (moduleRings X))]
     [HasDerivedCategory.{c} AddCommGrpCat.{a}] :

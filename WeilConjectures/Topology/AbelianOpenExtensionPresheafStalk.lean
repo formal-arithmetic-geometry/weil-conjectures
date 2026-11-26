@@ -11,7 +11,9 @@ import Mathlib.Geometry.RingedSpace.Stalks
 
 /-! # Interior stalk comparison before sheafification
 
-Source: Stacks Project, Sheaves, Lemma 00A5(3), (4).
+## References
+
+* Stacks Project, Tags 00A4 and 00A5.
 -/
 
 @[expose] public section
@@ -24,24 +26,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace TopCat.Sheaf
 
 open Classical in
-/-- The direct-sum extension presheaf has the original stalk at an interior point.
-Source: Stacks Project, Sheaves, Definition 00A4 and Lemma 00A5(3), (4)
-(blueprint: lem-sc-abelian-open-extension-presheaf-stalk).
-
-Proof: Restrict the extension presheaf to U using the open-image functor. First
-compare G with its precomposition by open image followed by preimage; these functors
-are naturally isomorphic to the identity because the inclusion is injective. The
-injection into the summand indexed by the inclusion of the open image in U is natural:
-on each section, the direct-sum restriction sends this injection to the corresponding
-injection after applying the restriction of G. There is a unique inclusion of every
-open image into U, so each injection is an isomorphism, inverse to summing the single
-component. This gives an isomorphism of presheaves on U and hence of their stalks.
-Compose with Mathlib's canonical restriction-stalk isomorphism, whose neighborhood
-functor is cofinal by the open-image/preimage adjunction. The stalk-map germ formula
-and the restriction-isomorphism germ formula compute the composite. For V ≤ U the
-image of its preimage is V; transporting along this equality reduces the composite
-to the displayed direct-sum injection followed by the germ on V. The empty U case
-has no x, and for U = X or G = 0 the same single-summand construction applies. -/
+/-- The direct-sum extension presheaf has the original stalk at an interior point. -/
 theorem abelianOpenExtensionPresheaf_stalk (X : TopCat.{w}) (U : Opens X)
     (x : U) (G : TopCat.Sheaf AddCommGrpCat.{w} ((Opens.toTopCat X).obj U)) :
     ∃ e : TopCat.Presheaf.stalk G.obj x ≅

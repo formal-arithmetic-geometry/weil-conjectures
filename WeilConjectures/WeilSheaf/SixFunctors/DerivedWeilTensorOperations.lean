@@ -13,19 +13,27 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Operations on the native derived Weil category
 
-Source: main-20261015, fix-cor-verdier-exchange.proof.md, steps 1--2;
-DerivedHom.lean and VerdierDual.lean in the live native realization
-(blueprint: def-sf-derived-weil-category-and-operations).
+This file defines the tensor operations on the native derived Weil category.
 
 The ordinary tensor and internal Hom are the existing relative module-sheaf
 constructions with diagonal and conjugation actions. The total tensor below
-orders the left degree first. Derived Hom is exactly ProEtaleWeilSheaf.derivedHom,
+orders the left degree first. Derived Hom is exactly `ProEtaleWeilSheaf.derivedHom`,
 including its product-total sign convention. The Verdier-dependent declarations remain in
-DerivedWeilOperations, which re-exports
-this module. The tensor declarations and their bodies are unchanged.
+`DerivedWeilOperations`, which re-exports this module.
+
+## Implementation details
+
+The tensor map `nativeTensorMap` is obtained from `tensorIhomAdjunction` by transposing
+precomposition of the internal Hom; its functoriality follows from the identity and composition
+laws for `conjugateEquiv`. Additivity of the tensor in each variable comes from the left adjoint
+of the additive internal Hom, and, in the right variable, from the inverse-mates formula.
+
+## References
+
+* [Stacks, Tags 03EK, 012Z, 06YL]
 -/
 
-/-! Factored construction (blueprint: def-sf-native-derived-tensor-layer). -/
+/-! Factored construction. -/
 
 @[expose] public section
 
@@ -126,19 +134,13 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- Tensoring a map in the fixed right factor, obtained by transposing
-precomposition of the existing sheaf internal Hom. This is the module tensor map.
-Source: TensorHomAdjunction.lean, tensorIhomAdjunction
-(blueprint: def-sf-derived-weil-category-and-operations). -/
+precomposition of the existing sheaf internal Hom. This is the module tensor map. -/
 noncomputable def nativeTensorMap {A B : ProEtaleWeilSheaf k₀ l X} (f : A ⟶ B) :
     tensorFunctor k₀ l X A ⟶ tensorFunctor k₀ l X B :=
   (conjugateEquiv (tensorIhomAdjunction k₀ l X B)
     (tensorIhomAdjunction k₀ l X A)).symm ((ihomBifunctor k₀ l X).map f.op)
 
-/-- The tensor map respects identity maps.
-Source: TensorHomAdjunction.lean and the identity law for conjugateEquiv
-(blueprint: def-sf-derived-weil-category-and-operations).
-Proof: internal-Hom precomposition sends the identity to the identity. The
-conjugate of the identity under the same adjunction is the identity. -/
+/-- The tensor map respects identity maps. -/
 theorem nativeTensorMap_id (A : ProEtaleWeilSheaf k₀ l X) :
     nativeTensorMap k₀ l X (𝟙 A) = 𝟙 (tensorFunctor k₀ l X A) := by
   unfold nativeTensorMap
@@ -148,11 +150,7 @@ theorem nativeTensorMap_id (A : ProEtaleWeilSheaf k₀ l X) :
   rw [(ihomBifunctor k₀ l X).map_id]
   exact conjugateEquiv_symm_id (tensorIhomAdjunction k₀ l X A)
 
-/-- Tensor maps respect composition.
-Source: TensorHomAdjunction.lean and conjugateEquiv_symm_comp
-(blueprint: def-sf-derived-weil-category-and-operations).
-Proof: precomposition reverses composition. Conjugation of transformations
-between right adjoints reverses composition again, giving the displayed order. -/
+/-- Tensor maps respect composition. -/
 theorem nativeTensorMap_comp {A B C : ProEtaleWeilSheaf k₀ l X}
     (f : A ⟶ B) (g : B ⟶ C) :
     nativeTensorMap k₀ l X (f ≫ g) =
@@ -162,9 +160,7 @@ theorem nativeTensorMap_comp {A B C : ProEtaleWeilSheaf k₀ l X}
   exact (conjugateEquiv_symm_comp (tensorIhomAdjunction k₀ l X C)
     (tensorIhomAdjunction k₀ l X B) (tensorIhomAdjunction k₀ l X A) _ _).symm
 
-/-- The existing relative tensor, curried with its right argument first.
-Source: Dual.lean, tensor and tensorFunctor; TensorHomAdjunction.lean
-(blueprint: def-sf-derived-weil-category-and-operations). -/
+/-- The existing relative tensor, curried with its right argument first. -/
 noncomputable def nativeTensorBifunctor :
     ProEtaleWeilSheaf k₀ l X ⥤ ProEtaleWeilSheaf k₀ l X ⥤ ProEtaleWeilSheaf k₀ l X where
   obj := tensorFunctor k₀ l X
@@ -172,12 +168,7 @@ noncomputable def nativeTensorBifunctor :
   map_id := nativeTensorMap_id k₀ l X
   map_comp := nativeTensorMap_comp k₀ l X
 
-/-- The flipped tensor is additive in its left argument.
-Source: relative module tensor, Stacks 03EK
-(blueprint: def-sf-derived-weil-category-and-operations).
-Proof: evaluate the natural transformations at each fixed right factor. The
-resulting functor is the left adjoint in tensorIhomAdjunction. Its right adjoint,
-the sheaf internal Hom, is additive, so Mathlib gives additivity of the left adjoint. -/
+/-- The flipped tensor is additive in its left argument. -/
 @[instance] theorem nativeTensorBifunctor_flip_additive :
     (nativeTensorBifunctor k₀ l X).flip.Additive := by
   constructor
@@ -188,12 +179,7 @@ the sheaf internal Hom, is additive, so Mathlib gives additivity of the left adj
     (tensorIhomAdjunction k₀ l X T).left_adjoint_additive
   exact (tensorFunctor k₀ l X T).map_add
 
-/-- The flipped tensor is additive in its right argument.
-Source: relative module tensor, Stacks 03EK
-(blueprint: def-sf-derived-weil-category-and-operations).
-Proof: the inverse mates formula uses the unit, the additive tensor functor,
-and the counit. Internal-Hom precomposition preserves sums. Distribute the tensor
-functor over that sum and use bilinearity of composition. -/
+/-- The flipped tensor is additive in its right argument. -/
 @[instance] theorem nativeTensorBifunctor_flip_obj_additive
     (A : ProEtaleWeilSheaf k₀ l X) :
     ((nativeTensorBifunctor k₀ l X).flip.obj A).Additive := by
@@ -207,9 +193,7 @@ functor over that sum and use bilinearity of composition. -/
     Preadditive.add_comp, Preadditive.comp_add]
 
 /-- Direct-sum total tensor with left degree first and differential
-`d_P tensor 1 + (-1)^p 1 tensor d_T` on the (p,q) summand.
-Source: Stacks 012Z, 06YL; def-pc-tensor-complex-sheaves
-(blueprint: def-sf-derived-weil-category-and-operations). -/
+`d_P tensor 1 + (-1)^p 1 tensor d_T` on the (p,q) summand. -/
 noncomputable def nativeTensorTotal :
     CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ ⥤
       CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ ⥤
@@ -217,9 +201,7 @@ noncomputable def nativeTensorTotal :
   (nativeTensorBifunctor k₀ l X).flip.map₂CochainComplex
 
 /-- The two-sided total-tensor preservation test defining K-flatness, specialized
-to the native Weil tensor. No monoidal structure on complexes is assumed.
-Source: def-sfb-preserves-kflat-quasi-iso, the two quasi-isomorphism tests
-(blueprint: def-sf-derived-weil-category-and-operations). -/
+to the native Weil tensor: tensoring with `P` on either side preserves quasi-isomorphisms. -/
 def NativeIsKFlat (P : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) : Prop :=
   (∀ {Q Q' : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ} (s : Q ⟶ Q'),
     QuasiIso s → QuasiIso (((nativeTensorTotal k₀ l X).obj P).map s)) ∧
@@ -230,18 +212,14 @@ variable [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
   [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- The native closed derived tensor structure supplied by the recorded theorem.
-Its tensor is determined up to the adjunction-compatible unique isomorphism by
-the specified internal Hom, with the K-flat normalization in that theorem.
-Source: native_closed_forgetful, steps 3--7
-(blueprint: def-sf-derived-weil-category-and-operations). -/
+/-- The native closed derived tensor structure: its tensor is determined, up to the
+adjunction-compatible unique isomorphism, by the specified internal Hom, with the K-flat
+normalization. -/
 noncomputable def nativeDerivedClosedComparison : NativeClosedComparison k₀ l X :=
   (native_closed_forgetful k₀ l X).2.2.2.2.choose
 
 /-- Derived relative tensor on the ambient native category, supplied by the
-closed structure constructed by localization of total K-flat tensors.
-Source: native_closed_forgetful, steps 3--5
-(blueprint: def-sf-derived-weil-category-and-operations). -/
+closed structure constructed by localization of total K-flat tensors. -/
 noncomputable def nativeDerivedTensor :
     DerivedCategory (ProEtaleWeilSheaf k₀ l X) ×
       DerivedCategory (ProEtaleWeilSheaf k₀ l X) ⥤

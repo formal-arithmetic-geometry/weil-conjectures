@@ -87,10 +87,23 @@ import WeilConjectures.CategoryTheory.Monoidal.BraidedLocalizationSquare
 import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 import all WeilConjectures.CategoryTheory.Constant.ConstantTowerNormalization
 
-/-! # The natural derived DVR tower comparison on resolutions
+/-!
+# The natural derived DVR tower comparison on resolutions
 
-Source: Stacks Tag 06XN, comparison using a resolving class.
-(blueprint: lem-sf-open-dvr-derived-tower-comparison).
+We construct a natural derived tower isomorphism from ordinary tensor transport and a
+flat-resolution comparison.
+
+## Implementation details
+
+Both the completed-adic reduction counit (after scalar restriction and coefficient transport)
+and the given comparison target the same localized ordinary tensor tower, and both are
+isomorphisms on K-flat complexes. Since flat-term K-flat complexes resolve every complex, the
+comparison on a resolving class extends to a natural isomorphism. No adjunction-unit
+normalization, augmentation or total-limit map is used.
+
+## References
+
+* [Stacks: Tag 06XN]
 -/
 
 @[expose] public noncomputable section
@@ -153,20 +166,7 @@ private theorem coefficientKFlatTransport
     (R := completedAdicCommRing T d) (C.complexes.obj Q)).mp
   simpa only [OpenDvrCoefficientModel.complexes, C.modules_functor] using h
 
-/-- Ordinary tensor transport and a flat-resolution comparison give a natural derived tower iso.
-Source: Stacks Tag 06XN (comparison on resolutions)
-(blueprint: lem-sf-open-dvr-derived-tower-comparison).
-
-Proof: compare the completed-adic reduction counit with epsilon after exact scalar
-restriction and coefficient transport, followed by the inverse ordinary tensor
-comparison. Both target the same localized ordinary tensor tower. The first is an
-isomorphism on K-flat complexes by Koszul reconstruction and preservation of
-K-flatness under the coefficient ring isomorphism. The second is an isomorphism
-there by the hypothesis on epsilon. Flat-term K-flat complexes resolve every
-complex. Apply comparison_from_resolutions to get t. Its representative equality,
-after cancellation of the localized inverse ordinary comparison, is precisely the
-displayed counit square. This argument uses no adjunction-unit normalization and
-constructs neither an augmentation nor a total-limit map. -/
+/-- Ordinary tensor transport and a flat-resolution comparison give a natural derived tower iso. -/
 theorem openDvrDerivedTowerComparison
     (d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E))
     (T : Scheme.{u}) (C : OpenDvrCoefficientModel l E d T)

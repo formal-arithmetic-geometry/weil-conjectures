@@ -14,8 +14,23 @@ import Mathlib.Data.Finset.Order
 
 /-! # Descending an algebra structure on a tensor colimit
 
-Source: Stacks Project, Algebra, Tags 00QO and 00DD.
-(blueprint: lem-weil-pbc-tensor-algebra-structure-finite-stage)
+If `P` is a finitely presented `ℤ`-algebra acting on `colim F ⊗[F i₀] B₀` for a directed system
+of commutative rings `F`, then the action descends to some finite stage `F i ⊗[F i₀] B₀`.
+
+## Implementation details
+
+The system is restricted to the upper tail of `i₀`. Choosing a presentation
+`π : ℤ[X₁, …, Xₙ] → P` with finitely generated kernel, the images of the generators are
+represented at a common stage, and each kernel generator evaluates there to an element vanishing
+in the colimit. Passing to a stage where all of these vanish, the evaluation descends through
+`π` via `RingHom.liftOfSurjective`. The nonempty upper tail supplies bounds even when the
+generator or relation sets are empty.
+
+## References
+
+* [Stacks, Tag 00QO]
+* [Stacks, Tag 00DD]
+* [Stacks, Tag 02JO]
 -/
 
 @[expose] public section
@@ -27,28 +42,10 @@ universe v w x y
 
 namespace RingHom
 
-/-- A finitely presented integer algebra acting on a tensor colimit acts at a stage.
-
-Source: Stacks Project, Algebra, Tag 00QO (lemma-characterize-finite-presentation),
-and Tag 00DD (tensor products commute with colimits), used in Tag 02JO (3).
-(blueprint: lem-weil-pbc-tensor-algebra-structure-finite-stage)
-
-Proof: restrict F to the nonempty directed upper tail of i₀. Define the
-canonical tensor ring maps and transition maps; tensor induction proves their
-compatibility and composition laws. The elementwise base-change lemma gives
-representatives and eventual vanishing. Choose a finite polynomial presentation
-π : ℤ[X₁,...,Xₙ] → P with finitely generated kernel. Represent the images of
-its generators at stages and move them to one upper stage. Evaluate polynomials
-there. Its composite with the canonical map equals algebraMap P B composed
-with π, by polynomial extensionality. Each kernel generator therefore evaluates
-to an element that is zero in the limit. Move to a common stage where all these
-elements vanish; transition composition ensures that the evaluation kills the
-whole kernel. Descend it through the surjection π using liftOfSurjective. The
-resulting ring map P → Bᵢ defines aPi, and its composite with Bᵢ → B equals
-algebraMap P B by surjectivity of π, yielding μB as a P-algebra map. Nonempty
-upper tails supply bounds even when the finite generator or relation sets are
-empty. No injectivity or nonzero-ring assumption is used.
--/
+/-- Let `F` be a directed system of commutative rings, `B₀` an `F i₀`-algebra and `P` a finitely
+presented `ℤ`-algebra. A `P`-algebra structure on `colim F ⊗[F i₀] B₀` descends to a
+`P`-algebra structure on `F i ⊗[F i₀] B₀` for some `i ≥ i₀`, for which the canonical map
+`F i ⊗[F i₀] B₀ → colim F ⊗[F i₀] B₀` is a `P`-algebra homomorphism. -/
 theorem exists_tensor_algebra_structure_finite_stage
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{v}) [HasColimit F]

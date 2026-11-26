@@ -22,10 +22,9 @@ Borel–Moore section `z` is the specialization of the integral of `z` over `B`:
 (`ProEtale.CondensedRing.Correspondence.TraceSpecialization.integral_sp_eq_map_integral_restrict`).
 
 For the deformation to the normal cone of a contracting point `y`, where `F_red` is the constant
-family of the point `{y}` (blueprint `corollary-specialization-when-fixed-point-scheme`),
-integration identifies Borel–Moore sections of the thickened point `B` and of the one-point
-special fixed locus `F'` with `End(ℚ̄_ℓ)`, and under these identifications `sp_F` is the
-trait specialization `Ψ_s` conjugated by the unit `σ_s`
+family of the point `{y}`, integration identifies Borel–Moore sections of the thickened point `B`
+and of the one-point special fixed locus `F'` with `End(ℚ̄_ℓ)`, and under these identifications
+`sp_F` is the trait specialization `Ψ_s` conjugated by the unit `σ_s`
 (`ProEtale.CondensedRing.Correspondence.IsContractingAt.integral_sp_eq_map_integral_restrict`).
 -/
 
@@ -58,9 +57,8 @@ variable {ℓ : ℕ} [Fact ℓ.Prime]
     Dᵇc((point k').left)⟦Profinite.padicAlgClRingObj ℓ⟧}
   (σpt : 𝟙_ _ ⟶ Ψpt.obj (𝟙_ _)) [IsIso σpt]
 
-/-- **Specialization on a component is the specialization of integrals** (blueprint
-`corollary-specialization-when-fixed-point-scheme`): if `θ_F` is the dualizing map of `ν_F` and
-`ν_F` specializes the class of the proper open subscheme `j : B ⟶ F`, then
+/-- **Specialization on a component is the specialization of integrals**: if `θ_F` is the dualizing
+map of `ν_F` and `ν_F` specializes the class of the proper open subscheme `j : B ⟶ F`, then
 `∫_{F'} sp_F(z) = σ_s⁻¹ ∘ Ψ_s(∫_B z|_B) ∘ σ_s` for every Borel–Moore section `z` of `F`. -/
 theorem integral_sp_eq_map_integral_restrict [IsProper F'.F.hom]
     (νF : T.ΨF ⋙ boundedConstructibleLowerShriek ℓ
@@ -92,14 +90,12 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {νc : hc.SupportCompactSupportExchange (ℓ := ℓ) k'}
   {νX : PointCompactSupportExchange (ℓ := ℓ) X k' (y ≫ c.c₁)} {F : c.FixedLocus}
 
-/-- **Specialization when the fixed point scheme is a constant family** (blueprint
-`corollary-specialization-when-fixed-point-scheme`, the case `F_red = {y} × S`): for the trace
+/-- **Specialization when the fixed point scheme is a constant family**: for the trace
 specialization of the deformation to the normal cone of a contracting point `y`, and a component
 `B ∋ y` of the fixed locus, open, closed, proper and with underlying set `{y}`, whose class is
-specialized by `ν_c`, `ν_X`, the specialization `sp_F` is the identity under the identifications
-of Borel–Moore sections of `B` and of the special fixed locus with `End(ℚ̄_ℓ)` given by
-integration: `∫ sp_F(z) = σ_s⁻¹ ∘ Ψ_s(∫_B z|_B) ∘ σ_s`, and `Ψ_s` is injective on `End(ℚ̄_ℓ)`
-(`traitSpecialization_map_eq_zero_iff`). -/
+specialized by `ν_c`, `ν_X`, the specialization `sp_F` is the identity under the identifications of
+Borel–Moore sections of `B` and of the special fixed locus with `End(ℚ̄_ℓ)` given by integration:
+`∫ sp_F(z) = σ_s⁻¹ ∘ Ψ_s(∫_B z|_B) ∘ σ_s`. -/
 theorem integral_sp_eq_map_integral_restrict {B : Over (Spec (.of k))} [QuasiCompact B.hom]
     [IsProper B.hom] (j : B ⟶ F.F) [IsOpenImmersion j.left]
     (hS : hc.SpecializesComponentClass k' νc νX F j) (z : BorelMooreSection ℓ F.F) :

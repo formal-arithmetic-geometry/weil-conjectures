@@ -29,26 +29,32 @@ Spec Ω -t-> Spec R
 ```
 
 the base change. Let `Λ` be a coefficient ring killed by an integer `N ≠ 0` invertible in `R`
-and `F` a locally constant sheaf of `Λ`-modules on `X_ét`. This file proves Step 1 of the
-blueprint proof of `theorem-purity-higher-direct-images-under` (the specialization isomorphism):
+and `F` a locally constant sheaf of `Λ`-modules on `X_ét`. This file proves the specialization
+isomorphism, the first step towards purity of higher direct images:
 
 - **local acyclicity along the closed fibre**: for every morphism `i : Z ⟶ X` landing in the
   closed fibre, `i^*(F ⟶ Rh_* h^* F)` is an isomorphism
-  (`AlgebraicGeometry.Etale.isIso_upperStar_map_unit_of_smooth`). Étale locally on `X` the
-  sheaf `F` is constant; by smooth base change (`theorem-smooth-base-change-classical-torsion--1`)
-  along `U ⟶ Spec R` and `t`, `Rh_{U*} M ≅ (U → Spec R)^* Rt_* M`, and the stalk at the closed point
-  of `M ⟶ Rt_* t^* M` is an isomorphism since `Spec R` is strictly local and `Ω` is separably
-  closed
-  (`Etale.isIso_upperStar_map_unit_constantSheaf_of_isStrictlyHenselianLocalRing`).
+  (`AlgebraicGeometry.Etale.isIso_upperStar_map_unit_of_smooth`).
 - **the specialization isomorphism**: if moreover `π` is proper, the closed stalk of
   `Rπ_* F ⟶ Rπ_* Rh_* h^* F` is an isomorphism
-  (`AlgebraicGeometry.Etale.isIso_upperStar_map_lowerStar_map_unit_of_smooth_of_isProper`): by
-  proper base change for the closed fibre `X_s` it is `Rπ_{s*}` of the restriction to `X_s` of
-  `F ⟶ Rh_* h^* F`.
+  (`AlgebraicGeometry.Etale.isIso_upperStar_map_lowerStar_map_unit_of_smooth_of_isProper`).
 
 Since `Spec R` is strictly local, the closed stalk of `Rπ_* K` is `RΓ(X, K)`, and
 `Rπ_* Rh_* = Rt_* Rπ_{t*}`; thus the second statement says that the restriction
 `Hᵠ(X, F) ⟶ Hᵠ(X_t, h^* F)` is bijective.
+
+## Implementation details
+
+For local acyclicity: étale locally on `X` the sheaf `F` is constant. On a trivialising étale
+cover `U ⟶ X`, by étale base change the unit of `h` restricts to the unit of
+`h_U : U ×_X X_t ⟶ U` at the constant sheaf; by smooth base change along `e : U ⟶ Spec R` and
+`t`, this is the pullback along `e` of the unit `M ⟶ Rt_* t^* M`, whose stalk at the closed point
+is an isomorphism since `Spec R` is strictly local and `Ω` is separably closed
+(`Etale.isIso_upperStar_map_unit_constantSheaf_of_isStrictlyHenselianLocalRing`).
+
+For the specialization isomorphism: by proper base change for the closed fibre `X_s`, the closed
+stalk of `Rπ_* F ⟶ Rπ_* Rh_* h^* F` is `Rπ_{s*}` of the restriction to `X_s` of
+`F ⟶ Rh_* h^* F`, which is an isomorphism by local acyclicity.
 -/
 
 @[expose] public section
@@ -130,13 +136,7 @@ variable {R : Type u} [CommRing R] [IsStrictlyHenselianLocalRing R]
 henselian local ring, `t : Spec Ω ⟶ Spec R` a geometric point with base change
 `h_U : U_t ⟶ U`, and `M` a module over a coefficient ring killed by an integer `N ≠ 0`
 invertible in `R`. For every `v : V ⟶ U` landing over the closed point of `Spec R`,
-`v^*(e^* M ⟶ Rh_{U*} h_U^* e^* M)` is an isomorphism.
-
-By smooth base change (`theorem-smooth-base-change-classical-torsion--1`) the unit of `h_U` at
-`e^* M` is the pullback along `e` of the unit `M ⟶ Rt_* t^* M`, whose restriction to the closed
-point is an isomorphism
-(`Etale.isIso_upperStar_map_unit_constantSheaf_of_isStrictlyHenselianLocalRing`).
--/
+`v^*(e^* M ⟶ Rh_{U*} h_U^* e^* M)` is an isomorphism. -/
 theorem Etale.isIso_upperStar_map_unit_upperStar_constantSheaf_of_smooth
     {U Ut V : Scheme.{u}} (e : U ⟶ Spec (.of R)) [Smooth e] {et : Ut ⟶ Spec (.of Ω)}
     {hU : Ut ⟶ U} (sq : IsPullback et hU t e) (N : ℕ) (hN₀ : N ≠ 0) (hN : (N : Λ) = 0)
@@ -170,18 +170,12 @@ lemma _root_.CategoryTheory.NatTrans.isIso_map_app_iff_of_iso {C D E : Type*} [C
     IsIso (Φ.map (α.app K)) ↔ IsIso (Φ.map (α.app K')) :=
   NatTrans.isIso_app_iff_of_iso (Functor.whiskerRight α Φ) e
 
-/-- **Local acyclicity along the closed fibre** (Step 1 of the blueprint proof of
-`theorem-purity-higher-direct-images-under`). Let `π : X ⟶ Spec R` be smooth over a
+/-- **Local acyclicity along the closed fibre.** Let `π : X ⟶ Spec R` be smooth over a
 strictly henselian local ring, `t : Spec Ω ⟶ Spec R` a geometric point with base change
 `h : X_t ⟶ X`, and `F` a locally constant sheaf of modules over a coefficient ring killed by
-an integer `N ≠ 0`
-invertible in `R`. For every morphism `i : Z ⟶ X` landing in the closed fibre (for instance the
-closed fibre itself), `i^*(F ⟶ Rh_* h^* F)` is an isomorphism in `D⁺(Z_ét)`.
-
-The question is local on a trivialising étale cover `U_j ⟶ X` of `F`; by étale (smooth) base
-change the unit of `h` restricts on `U_j` to the unit of `h_{U_j} : U_j ×_X X_t ⟶ U_j` at the
-constant sheaf, where
-`AlgebraicGeometry.Etale.isIso_upperStar_map_unit_upperStar_constantSheaf_of_smooth` applies. -/
+an integer `N ≠ 0` invertible in `R`. For every morphism `i : Z ⟶ X` landing in the closed fibre
+(for instance the closed fibre itself), `i^*(F ⟶ Rh_* h^* F)` is an isomorphism in
+`D⁺(Z_ét)`. -/
 theorem Etale.isIso_upperStar_map_unit_of_smooth {X Xt Z : Scheme.{u}} (π : X ⟶ Spec (.of R))
     [Smooth π] {πt : Xt ⟶ Spec (.of Ω)} {h : Xt ⟶ X} (sq : IsPullback πt h t π) (N : ℕ)
     (hN₀ : N ≠ 0) (hN : (N : Λ) = 0) (hNR : IsUnit (N : Γ(Spec (.of R), ⊤))) (i : Z ⟶ X)
@@ -238,17 +232,12 @@ theorem Etale.isIso_upperStar_map_unit_of_smooth {X Xt Z : Scheme.{u}} (π : X �
     (pullback.snd (𝒰.f j) i ≫ πs) ?_ M
   rw [reassoc_of% pullback.condition, hi, Category.assoc]
 
-/-- **The specialization isomorphism over a strictly local base** (Step 1 of the blueprint proof
-of `theorem-purity-higher-direct-images-under`). Let `π : X ⟶ Spec R` be smooth and proper over a
+/-- **The specialization isomorphism over a strictly local base.** Let `π : X ⟶ Spec R` be
+smooth and proper over a
 strictly henselian local ring, with closed fibre `i : X_s ⟶ X`, let `t : Spec Ω ⟶ Spec R` be a
 geometric point with base change `h : X_t ⟶ X`, and let `F` be a locally constant sheaf of
 modules over a coefficient ring killed by an integer `N ≠ 0` invertible in `R`. Then the
-restriction to the closed point of `Rπ_* F ⟶ Rπ_* Rh_* h^* F` is an isomorphism.
-
-By proper base change (`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring`)
-for the closed fibre, this map is `Rπ_{s*}` of `i^*(F ⟶ Rh_* h^* F)`, an isomorphism by
-`AlgebraicGeometry.Etale.isIso_upperStar_map_unit_of_smooth`. As `Spec R` is strictly local, the
-closed stalk of `Rπ_* K` is `RΓ(X, K)` and `Rπ_* Rh_* = Rt_* Rπ_{t*}`, so this says that the
+restriction to the closed point of `Rπ_* F ⟶ Rπ_* Rh_* h^* F` is an isomorphism, i.e. the
 restriction `Hᵠ(X, F) ⟶ Hᵠ(X_t, h^* F)` is bijective for every `q`. -/
 theorem Etale.isIso_upperStar_map_lowerStar_map_unit_of_smooth_of_isProper
     {X Xt Xs : Scheme.{u}} (π : X ⟶ Spec (.of R)) [Smooth π] [IsProper π]

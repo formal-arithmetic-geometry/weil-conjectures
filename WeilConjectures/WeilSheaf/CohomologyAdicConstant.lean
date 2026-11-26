@@ -70,10 +70,8 @@ theorem subsingleton_cohomology_adicConstant_of_two_mul_lt (e : ℕ)
         (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure e he r
         (by exact_mod_cast hr))
 
-/-- Blueprint `lemma-perfect-complexes-geometric-point` (constant-sheaf clause,
-`theorem-trace-isomorphism-top-degree--8`): the cohomology `Hⁱ(X ⊗ k̄, ℚ̄_ℓ)` of a smooth
-`k₀`-scheme of finite type and pure dimension `d` vanishes for `i ∉ [0, 2d]`: the fibrewise
-cohomological dimension of `X ⊗ k̄` over the algebraically closed field `k̄` is `2d`. -/
+/-- The cohomology `Hⁱ(X ⊗ k̄, ℚ̄_ℓ)` of a smooth `k₀`-scheme of finite type and pure dimension `d`
+vanishes for `i ∉ [0, 2d]`. -/
 theorem subsingleton_cohomology_adicConstant (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
     (d : ℕ) [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]

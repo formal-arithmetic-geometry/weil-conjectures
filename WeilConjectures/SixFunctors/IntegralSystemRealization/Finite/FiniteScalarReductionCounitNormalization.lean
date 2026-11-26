@@ -9,7 +9,12 @@ import all WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitFiniteMateC
 import WeilConjectures.SixFunctors.PurCompactSupport.ScalarComplexAdjunctionNormalization
 import WeilConjectures.CategoryTheory.Normalized.NormalizedAdjunctionComposition
 
-/-! # Counit normalization of the finite scalar presentation -/
+/-! # Counit normalization of the finite scalar presentation
+
+## References
+
+* [Stacks, Tag 07A6], [Stacks, Tag 06YY]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -34,15 +39,7 @@ attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficien
 attribute [local instance] coefficientFiniteExtensionAdditive
 
 /-- The canonical finite scalar presentation carries the canonical counit on K-flat
-complexes to the scalar reduction computation map.
-Source: Stacks Tags 07A6 and 06YY
-(blueprint: lem-sf-finite-scalar-reduction-counit-normalization).
-Proof: transpose through the pbc scalar adjunction. The left-adjoint uniqueness
-map transfers the first transpose to the finite scalar adjunction. Its K-flat unit
-normalization gives the localized ordinary finite scalar unit. ScalarComplexTranspose
-computes the other transpose. The ordinary left-adjoint uniqueness unit equation
-identifies it with the same unit. Cancel the exact restriction computation map and
-use injectivity of the pbc scalar Hom equivalence. -/
+complexes to the scalar reduction computation map. -/
 theorem finiteScalarReductionCounitNormalization (W : Scheme.{u}) (n : ℕ)
     (P : (integralOperationsGoodComplex l E W).FullSubcategory) :
     let := sfExtensionAdditive l E W n

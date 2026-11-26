@@ -22,12 +22,21 @@ import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-! # Proper/open interchange for native Weil complexes
 
-Source: Stacks Project, Tag 0F7B, `lemma-shriek-proper-and-open`, for the geometric
-pattern; the native bounded constructible coefficient realization and proof are those of
-(blueprint: lem-sf-native-weil-open-proper-interchange).
-
 The source is the bounded constructible full subcategory of the ordinary native derived
 category. The target is the ordinary derived category of all pro-etale Weil sheaves.
+
+## Implementation details
+
+The comparison morphism `j_! Rp'_* K ⟶ Rp_* j'_! K` is constructed as a morphism of the native
+derived category (the adjunct of the inverse of the comparison `j^* Rp_* j'_! K ≅ Rp'_* K`
+obtained from K-injective representatives), so it includes the Weil structure. Its
+invertibility is then detected after forgetting the Weil structure, using the open-closed
+localization sequence and continuous-adic proper base change on the closed complement, which
+only applies to bounded constructible inputs.
+
+## References
+
+Stacks Project, Tag 0F7B.
 -/
 
 @[expose] public section
@@ -493,135 +502,7 @@ namespace AlgebraicGeometry.WeilComplex
 /-- Proper/open interchange for a commutative, possibly non-Cartesian square of finite-type
 schemes over a finite field, with proper vertical maps and quasi-compact open horizontal maps.
 Both the isomorphism and its inverse are morphisms in the native derived category and hence
-include the Weil structure.
-
-Source: Stacks Project, Tag 0F7B, `lemma-shriek-proper-and-open`, for the proper/open pattern;
-the native coefficient realization uses the following argument
-(blueprint: lem-sf-native-weil-open-proper-interchange).
-
-Proof:
-1. Form $V=X'\times_XU$, with $b:V\to X'$ and $q:V\to U$, and let $s:U'\to V$ be induced by
-$(j',p')$. The base-change lemma makes $b$ open; $s$ identifies $U'$ with the open subscheme
-$j'(U')$ of $V$, since $j'$ factors through $b$ and both are open embeddings. Proper base change
-for morphisms of schemes makes $q$ proper, hence separated. Since $qs=p'$ is proper,
-proper-over-separated makes $s$ proper; a proper immersion is closed. Thus $s$ is clopen, with
-open-and-closed complement $C$ in $V$. These are constructions over $k_0$. All schemes remain
-finite type: $q$ and $s$ are proper, and finite-type morphisms compose. Moreover $b$ is
-quasi-compact: a quasi-compact open immersion is finite type (locally it is an open embedding,
-hence locally of finite type), and finite type is stable under base change. No absolute
-separatedness was used.
-
-2. On geometric base changes write the same letters for the maps. The framework identifies the
-site of an open with the localized site, and its coefficient ring is the restriction of $B$. The
-ringed-site adjunction gives exact functors $a_!\dashv a^*$ for each open $a=j,j',b,s$. These
-adjunctions lift to native Weil sheaves: the adjunction bijection sends $u:a_!M\to N$ to $a^*u$
-composed with the unit. Naturality of unit and counit under Frobenius identifies the
-commuting-structure-map condition on the two sides, so it restricts to a bijection on
-equivariant morphisms. Exactness is detected by the exact conservative native forgetful functor.
-Both functors preserve quasi-isomorphisms, and adjunction localization gives $J_a\dashv a^*$ in
-ordinary native derived categories. The open unit $a^*J_a\cong1$ is the termwise sheaf unit.
-
-3. Apply the arbitrary-ring clopen gluing equivalence to $V=U'\amalg C$ and $B_V$. Since both
-components are defined over $k_0$, Frobenius preserves each of them. Under this equivalence a
-Frobenius isomorphism is a pair of Frobenius isomorphisms; imposing the commuting condition on a
-morphism also does so componentwise. We therefore obtain the same exact product equivalence for
-native Weil sheaves. In it $s_!$ is $M\mapsto(M,0)$, also equal to $s_*$, and $s^*$ is first
-projection. Thus $s_!$ is right adjoint to the exact $s^*$. The right-adjoint lemma shows that
-$s_!$ preserves K-injectives. Likewise $b^*$ preserves K-injectives, since it is right adjoint
-to the exact $b_!$ of step 2.
-
-4. Let $K\in\mathrm{WC}^{\mathrm{der}}(U')$. Native sheaf categories are Grothendieck abelian,
-so the general functorial-resolution lemma supplies a native K-injective representative $I$ for
-$K$, and a K-injective resolution $t:j'_!I\to L$ on $X'$. The sheaf adjunctions of step 2 give,
-naturally in $M,N$,
-$$\operatorname{Hom}(b_!s_!M,N)\cong\operatorname{Hom}(M,s^*b^*N)=\operatorname{Hom}(M,j'^*N)\co
-ng\operatorname{Hom}(j'_!M,N).$$
-Thus $b_!s_!\cong j'_!$ by uniqueness of a left adjoint; applying $b^*$ and its invertible open
-unit gives $b^*j'_!\cong s_!$ already on sheaves, hence termwise. Both $s_!I$ and $b^*L$ are
-K-injective by step 3. Therefore $b^*t:s_!I\to b^*L$ is a quasi-isomorphism between K-injectives
-and is a homotopy equivalence. Applying the additive functor $q_*$ keeps it a homotopy
-equivalence.
-
-5. Direct image and open restriction give $j^*p_*L=q_*b^*L$: on an object $T\to\bar U$ both
-sides evaluate $L$ on $T\times_{\bar X}\bar X'$. The coefficient actions are the same
-precomposition of locally finite functions. The clopen section formula gives $q_*s_!I=p'_*I$:
-evaluation on $T\times_{\bar U}\bar V$ takes the product of $I(T\times_{\bar U}\bar U')$ with
-the zero module from $C$. These identities respect Frobenius, since the fibre-product
-identifications commute with its action. The homotopy equivalence of step 4 and the K-injective
-evaluation of total right derived functors now give an isomorphism
-$$r_K:j^*Rp_*J_{j'}K\xrightarrow{\sim}Rp'_*K.$$ It is natural: a morphism of derived inputs is
-represented by a unique homotopy class between their K-injective representatives; applying the
-displayed section identities to that class commutes with $t$. Changing the resolutions gives the
-same morphism by the same unique homotopy comparison. This calculation requires no proper
-base-change assertion for arbitrary unbounded modules.
-
-6. Define $\gamma_K:J_jRp'_*K\to Rp_*J_{j'}K$ to be the adjunct of $r_K^{-1}$ under the native
-derived adjunction of step 2. It is natural in $K$, since $r$ and that adjunction are natural.
-If $\eta$ is the open unit, its defining equality is $j^*\gamma_K\circ\eta_{Rp'_*K}=r_K^{-1}$.
-The unit is invertible, so $j^*\gamma_K$ is an isomorphism. This constructs an actual native
-morphism; no lifting of an underlying derived morphism through a forgetful functor is being
-assumed.
-
-7. Write $\operatorname{For}$ for forgetting the Weil structure, also on derived categories. The
-underlying module-sheaf categories on the chosen small pro-etale sites are Grothendieck abelian
-by the arbitrary-ringed-site theorem, and Frobenius pullbacks are additive autoequivalences (the
-geometric Frobenius is a scheme automorphism). Thus the fixed-pair comparison applies to the
-actual left exact direct image: it gives a natural identification $\operatorname{For}Rp_*\cong
-R\bar p_*\operatorname{For}$, and derived forgetting is conservative. It commutes with termwise
-open extension and restriction directly from the definition of the lifted operations. We use
-this comparison to prove vanishing of objects and finally to detect invertibility of the already
-constructed $\gamma$, not to infer equality of native morphisms from their underlying morphisms.
-
-8. Give $Z=X\setminus j(U)$ its reduced induced closed subscheme structure $i:Z\hookrightarrow
-X$. Put $P=X'\times_XZ$, with $d:P\hookrightarrow X'$ and $p_Z:P\to Z$. Base change makes $d$
-closed and $p_Z$ proper; $P$ is complementary to the open $b:V\hookrightarrow X'$. Closed
-immersions are quasi-compact: over an affine they are
-$\operatorname{Spec}(A/I)\to\operatorname{Spec}A$. They are proper and thus finite type;
-consequently $Z,P$ are finite type over $k_0$. After base change to the algebraic closure $k$,
-the base $\bar X$ is finite type over $k$, $\bar p$ is proper and $\bar i$ is a quasi-compact
-closed (in particular locally closed) immersion. On $\bar Z,\bar P$ retain the inverse-image
-rings $\bar i^{-1}B_X,\bar d^{-1}B_{X'}$; no identification with $B_Z,B_P$ or scalar-extension
-assertion is needed.
-
-9. First take a constructible native sheaf $F$ on $U'$, in degree zero, and put
-$M=\operatorname{For}(j'_!F)$. Exact constructibility preservation for the native open extension
-says that $M$ satisfies precisely the finite locally closed stratification and pro-etale locally
-finite-free hypothesis of continuous-adic proper base change. The ring $\mathcal R_{\bar X'}$
-there is $B_{X'}$ here: its presheaf consists of the same locally finite-span continuous
-functions, already a sheaf in the framework. Since $j'=bs$, $M=b_!\operatorname{For}(s_!F)$, so
-the ringed open-closed vanishing gives $\bar d^{-1}M=0$. Apply continuous-adic proper base
-change with $p=\bar p$, $h=\bar i$ and this sheaf $M$ to obtain $$\bar i^{-1}R\bar
-p_*(M[0])\cong Rp_{\bar Z*}((\bar d^{-1}M)[0])=0.$$ By step 7 this is $\bar
-i^{-1}\operatorname{For}(Rp_*J_{j'}(F[0]))=0$. Only a constructible sheaf in degree zero has
-been passed to that base-change lemma.
-
-10. Set $T(K)=\bar i^{-1}\operatorname{For}(Rp_*J_{j'}K)$. On $D^+(\mathcal W_{U'})$ this is
-triangulated: $j'_!$, forgetting, and the topos inverse image with inverse-image coefficients
-are exact, and the right derived functor of the additive left exact $p_*$ is triangulated on
-$D^+$: its hypothesis holds because $\mathcal W_{X'}$ is Grothendieck abelian and hence has
-enough injectives. Choose $a\le b$ containing the cohomological support of $K$. The canonical
-truncation triangle for each $n$ has third term $H^n(K)[-n]$. Start with $\tau_{\le a-1}K=0$,
-which follows from the cohomology isomorphism criterion. Suppose $T(\tau_{\le n-1}K)=0$. The
-sheaf $H^n(K)$ is constructible by the definition of the source category, so step 9 and shift
-compatibility give $T(H^n(K)[-n])=0$. Apply $T$ to that triangle: its long exact cohomology
-sequence forces all cohomology of $T(\tau_{\le n}K)$ to vanish, hence that object is zero.
-Finite induction up to $b$, with $\tau_{\le b}K\cong K$, proves $T(K)=0$. This finite argument
-makes no assertion for an arbitrary unbounded source.
-
-11. The closed restriction of $\operatorname{For}(J_jRp'_*K)$ is zero termwise by $\bar
-i^{-1}\bar j_!=0$; that of $\operatorname{For}(Rp_*J_{j'}K)$ is zero by step 10. The open
-restriction of $\operatorname{For}(\gamma_K)$ is an isomorphism by step 6. Exact inverse images
-commute with cohomology, as follows by applying them to kernels and images. For any $n$ put
-$N=H^n\operatorname{For}(J_jRp'_*K)$ and $N'=H^n\operatorname{For}(Rp_*J_{j'}K)$. Both closed
-restrictions vanish. The ringed open-closed localization sequence consequently identifies the
-counits $\bar j_!\bar j^{-1}N\to N$ and $\bar j_!\bar j^{-1}N'\to N'$ as isomorphisms. Their
-naturality identifies $H^n\operatorname{For}(\gamma_K)$ with extension by zero of its open
-restriction, an isomorphism. The cohomology criterion implies that
-$\operatorname{For}(\gamma_K)$ is invertible, and conservative derived forgetting implies that
-$\gamma_K$ is invertible in $D(\mathcal W_X)$. These components give the required natural
-isomorphism; naturality of the inverse follows by multiplying the naturality square by the
-component inverses. Those inverses are native morphisms too, so include Frobenius compatibility.
--/
+include the Weil structure. -/
 theorem nonempty_extensionByZero_rightDerivedLowerStar_iso
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] {U' X' U X : Scheme.{u}}

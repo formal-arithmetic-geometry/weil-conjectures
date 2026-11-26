@@ -18,13 +18,12 @@ public import WeilConjectures.SixFunctors.OpenClosed.Exact
 Let `π : Y ⟶ X` be proper and an isomorphism over an open `j : U ⟶ X`, with closed complement
 `i : Z ⟶ X`. This file proves:
 
-- `AlgebraicGeometry.Etale.nonempty_rightDerivedLowerStar_openImmersionLowerShriek_iso`
-  (`proposition-proper-direct-image-finite-coefficients`): `Rπ_*(j'_! G') ≅ j_! G` for a sheaf `G`
-  on `U` with pullback `G'` to `U' = π⁻¹(U)`; that is, `π_* j'_! G' = j_! G` and
-  `Rᵠπ_* j'_! G' = 0` for `q > 0`. This uses proper base change along `i`.
-- `AlgebraicGeometry.Etale.HasConstructibleDirectImages.of_modification`
-  (`proposition-proper-direct-image-finite-coefficients`): `𝒞(π ≫ f)` and `𝒞(i ≫ f)` imply `𝒞(f)`,
-  by the open–closed short exact sequence `0 ⟶ j_! j^* F ⟶ F ⟶ i_* i^* F ⟶ 0`.
+- `AlgebraicGeometry.Etale.nonempty_rightDerivedLowerStar_openImmersionLowerShriek_iso`:
+  `Rπ_*(j'_! G') ≅ j_! G` for a sheaf `G` on `U` with pullback `G'` to `U' = π⁻¹(U)`; that is,
+  `π_* j'_! G' = j_! G` and `Rᵠπ_* j'_! G' = 0` for `q > 0`. This uses proper base change along `i`.
+- `AlgebraicGeometry.Etale.HasConstructibleDirectImages.of_modification`: `𝒞(π ≫ f)` and
+  `𝒞(i ≫ f)` imply `𝒞(f)`, by the open–closed short exact sequence
+  `0 ⟶ j_! j^* F ⟶ F ⟶ i_* i^* F ⟶ 0`.
 -/
 
 @[expose] public section
@@ -72,19 +71,13 @@ noncomputable def upperStarRightDerivedLowerStarSingleIso {X Y X' Y' : Scheme.{u
 
 variable [Finite Λ]
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Extension by zero under a
-proper modification.
+/-- Extension by zero under a proper modification.
 
 Let `π : Y ⟶ X` be proper and `j : U ⟶ X` an open immersion such that `π⁻¹(U) ⟶ U` is an
 isomorphism: here `j' : U' ⟶ Y`, `π' : U' ⟶ U` is a pullback square with `π'` an isomorphism.
 For an étale sheaf `G` of `Λ`-modules on `U` with pullback `G' = π'^* G` to `U'`,
 `Rπ_*(j'_! G') ≅ j_! G`, i.e. `π_* j'_! G' ≅ j_! G` and `Rᵠπ_* j'_! G' = 0` for `q > 0`. Here
-`Λ` is a finite ring, as proper base change is used.
-
-Write `M = Rπ_*(j'_! G')` and let `i` be the closed complement of `j`. By proper base change,
-`i^* M` is the derived direct image of the restriction of `j'_! G'` to `π⁻¹(Z)`, which is zero;
-so the counit `j_! j^* M ⟶ M` is an isomorphism, by the open–closed triangle. By étale base
-change, `j^* M ≅ Rπ'_*(j'^* j'_! G') ≅ Rπ'_*(π'^* G) ≅ G`, `π'` being an isomorphism. -/
+`Λ` is a finite ring, as proper base change is used. -/
 theorem nonempty_rightDerivedLowerStar_openImmersionLowerShriek_iso {X Y U U' : Scheme.{u}}
     (π : Y ⟶ X) [IsProper π] (j : U ⟶ X) [IsOpenImmersion j] (j' : U' ⟶ Y) [IsOpenImmersion j']
     (π' : U' ⟶ U) [IsIso π'] (sq : IsPullback j' π' π j)
@@ -134,22 +127,13 @@ theorem nonempty_rightDerivedLowerStar_openImmersionLowerShriek_iso {X Y U U' : 
   exact ⟨(asIso ((derivedOpenImmersionLowerShriekUpperStarAdjunction A j).counit.app M)).symm ≪≫
     D((j)_!open[A]).mapIso e₁ ≪≫ (((j)_!open[A]).mapDerivedCategorySingleFunctor 0).app G⟩
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Proper modification transfer
-without an amplitude claim.
+/-- Proper modification transfer without an amplitude claim.
 
 Let `f : X ⟶ S` be a morphism and `π : Y ⟶ X` proper, an isomorphism over the open
 `j : U ⟶ X` (that is, the projection `π⁻¹(U) ⟶ U` is an isomorphism), and let `i : Z ⟶ X` be a
 closed immersion with range the complement of `U`. If `𝒞(π ≫ f)` and `𝒞(i ≫ f)` hold, then
-`𝒞(f)` holds. Here `Λ` is a finite ring. The blueprint takes `f` proper and `Z` with its reduced
-structure; neither is needed. The open immersion `j` is assumed quasi-compact (automatic for `X`
-Noetherian, e.g. of finite type over a field as in the blueprint), so that extension by zero
-along its base change preserves constructibility.
-
-The open–closed sequence `0 ⟶ j_! j^* F ⟶ F ⟶ i_* i^* F ⟶ 0` gives a distinguished triangle;
-`Rf_*(j_! j^* F) ≅ R(π ≫ f)_*(j'_! G')` by
-`AlgebraicGeometry.Etale.nonempty_rightDerivedLowerStar_openImmersionLowerShriek_iso` and
-`Rf_*(i_* i^* F) ≅ R(i ≫ f)_*(i^* F)` since `i_*` is exact, and constructible homology is a
-triangulated property. -/
+`𝒞(f)` holds. Here `Λ` is a finite ring, `f` need not be proper and `Z` need
+not be reduced. The open immersion `j` is assumed quasi-compact (automatic for `X` Noetherian). -/
 theorem HasConstructibleDirectImages.of_modification {X Y Z U S : Scheme.{u}} (f : X ⟶ S)
     (π : Y ⟶ X) [IsProper π] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] (i : Z ⟶ X)
     [IsClosedImmersion i] (hij : Set.range i.base = (Set.range j.base)ᶜ)

@@ -15,8 +15,7 @@ public import WeilConjectures.WeilSheaf.UpperShriekWeilDatumComposite
 The target `WeilComplex.exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso`
 (an isomorphism of the underlying complexes `Rf^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` commuting with the Frobenius
 structures) follows from a *geometric orientation* `o : ī^* (ḡ^! ℚ̄_ℓ) ≅ ℚ̄_ℓ(d)[2d]` on `X̄` which
-is
-equivariant for the exceptional datum `AlgebraicGeometry.WeilComplex.upperShriekExceptionalDatum`
+is equivariant for the exceptional datum `AlgebraicGeometry.WeilComplex.upperShriekExceptionalDatum`
 and the Frobenius structure of `ℚ̄_ℓ(d)[2d]`: compose with the comparison
 `AlgebraicGeometry.WeilComplex.exists_forget_upperShriek_obj_iso_isWeilEquivariant`, which carries
 the Frobenius structure of `Rf^! ℚ̄_ℓ` to the exceptional datum.
@@ -100,8 +99,7 @@ theorem exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_isWeilE
 
 set_option linter.style.longLine false in
 set_option linter.style.whitespace false in
-/-- **The Weil orientation from the trace square** (the uniqueness route, blueprint
-`proposition-purity-trace-commute-frobenius`): let `o : f̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` be an
+/-- **The Weil orientation from the trace square**: let `o : f̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` be an
 orientation on `X̄` (`f̄^! = ī^* ∘ ḡ^!` for the compactification), whose trace
 `f̄_! ℚ̄_ℓ(d)[2d] ⟶ ℚ̄_ℓ` is Frobenius equivariant for the composite exchange of `f̄_!` and the
 structures of `ℚ̄_ℓ(d)[2d]` and `ℚ̄_ℓ`. Then the underlying complex of `Rf^! ℚ̄_ℓ` is isomorphic to

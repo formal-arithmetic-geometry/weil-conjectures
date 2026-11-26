@@ -32,8 +32,13 @@ import all WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowe
 
 /-! # The finite tensor tower and right shifts
 
-Source: Stacks Project, Tags 011G, 012Z and 03EK.
-(blueprint: lem-sf-completed-tensor-finite-shift).
+The strict finite tensor towers carry a signed right shift isomorphism.
+
+## References
+
+* [Stacks, Tag 011G]
+* [Stacks, Tag 012Z]
+* [Stacks, Tag 03EK]
 -/
 
 @[expose] public section
@@ -454,27 +459,7 @@ private noncomputable abbrev towerShiftNatIso (W : AlgebraicGeometry.Scheme.{t})
     simp only [finiteShiftNatIso_hom_app] at h
     convert h using 1 <;> with_unfolding_all rfl)
 
-/-- The signed right shift isomorphism of the strict finite tensor towers.
-Source: Stacks Project, Tags 011G, 012Z and 03EK; steps 1 and 3 of
-`lem-sf-completed-tensor-shift-right`
-(blueprint: lem-sf-completed-tensor-finite-shift).
-
-Proof: ordinary reduction and scalar restriction act termwise, so their shift
-comparisons are the identities on the reindexed terms. Between them use the
-right total-bifunctor shift isomorphism: its (i,j)-summand map is multiplication
-by (-1)^(ri). The first differential raises i, contributing the additional
-(-1)^r from shifting the total; the second differential has the usual (-1)^i
-and the shift of Q contributes (-1)^r. These are precisely the two chain-map
-identities. The inverse has the same signs. All comparisons are natural in
-both complexes. The quotient transition sends a tensor x tensor y to the
-tensor of the two reductions; reduction is termwise and preserves degree and
-integer multiplication. Thus each transition square commutes. This can also
-be deduced from the existing uniqueness characterization of the tensor
-transition by conjugating with the shift isomorphisms. The component
-isomorphisms therefore form a natural isomorphism of tower-valued functors.
-The total-bifunctor injection formula, followed by evaluation on a sheafified
-pure tensor, is the displayed equality. The argument includes r=0, negative
-shifts, zero complexes, and the empty site. -/
+/-- The signed right shift isomorphism of the strict finite tensor towers. -/
 theorem integralCompletedTensorFiniteShift (W : AlgebraicGeometry.Scheme.{t}) (r : ℤ) :
     ∃ β : ((𝟭 (CochainComplex (integralTowerModules l E W) ℤ)).prod
         (shiftFunctor (CochainComplex (integralTowerModules l E W) ℤ) r)) ⋙

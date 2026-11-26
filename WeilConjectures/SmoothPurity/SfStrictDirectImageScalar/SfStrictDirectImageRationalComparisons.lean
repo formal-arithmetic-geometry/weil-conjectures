@@ -10,8 +10,7 @@ public import WeilConjectures.CategoryTheory.ScalarLocalization.PbcRationalTrans
 
 /-! # Assembly of the explicit raw rational direct image
 
-Source: strict direct-image scalar comparison, Step 8.
-(blueprint: lem-sf-strict-direct-image-scalar-comparison)
+This is the final assembly step of the strict direct-image scalar comparison.
 -/
 
 @[expose] public noncomputable section

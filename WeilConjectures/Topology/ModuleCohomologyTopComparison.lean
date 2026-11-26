@@ -8,6 +8,22 @@ module
 
 public import WeilConjectures.Topology.OpenModuleCohomology
 
+/-!
+# Module cohomology and open module cohomology at the whole space
+
+Forgetting global scalars identifies the cohomology of a sheaf of modules on a ringed space with
+its open module cohomology at the whole space.
+
+## Implementation details
+
+Both derived functors are computed with the same injective resolution; forgetting scalars is
+exact, so it commutes with taking homology of the global-sections complex.
+
+## References
+
+* [Stacks Project, Tag 01DZ](https://stacks.math.columbia.edu/tag/01DZ)
+-/
+
 @[expose] public section
 
 universe u
@@ -15,25 +31,7 @@ open CategoryTheory TopologicalSpace Opposite
 namespace AlgebraicGeometry.RingedSpace
 
 /-- Forgetting global scalars identifies module cohomology with open module cohomology
-at the whole space, naturally in the module sheaf.
-
-Source: Stacks Project, Cohomology, Tag 01DZ, the injective-module-resolution definition
-of cohomology; the exact forgetful functor preserves homology.
-(blueprint: lem-weil-pbc-module-cohomology-top-comparison).
-
-Proof: Global sections followed by forgetting scalars is naturally identical to
-`openModuleSections X ⊤`: both evaluate the underlying module presheaf at the top open
-and forget its scalar action. Use the same injective resolution of each module sheaf
-for both derived functors. Forgetting scalars preserves kernels and cokernels, so its
-application to the homology of the global-sections complex is canonically the homology
-of that complex after forgetting scalars. This last complex is the top-open-sections
-complex. Compose this homology comparison with the two injective-resolution comparisons
-to obtain the displayed isomorphism on each object. A lift of any sheaf morphism to its
-injective resolutions commutes with evaluation and scalar forgetting; naturality of
-the homology comparison and the resolution comparisons therefore makes these object
-isomorphisms a natural isomorphism. Homotopic choices of lifts give the same homology
-map, so the construction is independent of the lift. This works in degree zero and
-for the empty ringed space, and requires no compactness hypothesis. -/
+at the whole space, naturally in the module sheaf. -/
 theorem nonempty_moduleCohomology_top_iso (X : RingedSpace.{u}) (p : ℕ) :
     Nonempty ((moduleCohomology X p ⋙
       forget₂ (ModuleCat.{u} ((moduleRings X).obj.obj (op ⊤))) AddCommGrpCat.{u}) ≅

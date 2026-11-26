@@ -10,14 +10,15 @@ public import WeilConjectures.TraceFormula.Integral.IntegralComparisonSequenceSy
 
 /-! # The finite-system compositor is the strict sequence compositor
 
-Source: Stacks 0D6D and 03D3
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced).
-
 The coherent finite systems with the positive uniformizer quotients are the strict
 quotient systems on the ringed sequence site, and their inverse images are the same
 left adjoints of the same sectionwise direct images. Both compositors are the mates of
 the sectionwise fibre-product pasting map, hence they agree, before and after
 localization.
+
+## References
+
+* Stacks Project, Tags 015F, 03D3 and 0D6D
 -/
 
 @[expose] public noncomputable section
@@ -31,9 +32,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The finite-system adjunction is the universal adjunction of the strict sequence
-direct image.
-Source: Stacks 03D3
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced). -/
+direct image. -/
 theorem finiteSystemAdjunction_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
     finiteSystemAdjunction (integralSystemRings l E) (integralSystemTransition l E) f =
       (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E f) :
@@ -108,11 +107,7 @@ private theorem finiteSystemComposition_heq {V W Z : Scheme.{u}}
   ext M U x
   exact (e1.2 M U.unop.1 U.unop.2 x).trans (e2.2 M U.unop.1 U.unop.2 x).symm
 
-/-- The finite-system compositor is the strict sequence compositor.
-Source: Stacks 0D6D, 03D3
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced).
-Proof: both are characterized as the unique mates of the sectionwise fibre-product
-pasting isomorphism for the same direct images and adjunctions. -/
+/-- The finite-system compositor is the strict sequence compositor. -/
 theorem finiteSystemComposition_eq {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) :
     finiteSystemComposition (integralSystemRings l E) (integralSystemTransition l E) h k =
       integralComparisonSequenceComposition l E h k := by
@@ -215,9 +210,7 @@ private theorem finiteSystemDerivedComposition_heq {V W Z : Scheme.{u}}
     (by exact HEq.rfl) (by exact HEq.rfl) (by exact HEq.rfl)
     (finiteSystemComposition_heq l E h k)
 
-/-- The derived finite-system compositor is the derived strict sequence compositor.
-Source: Stacks 0D6D, 015F
-(blueprint: lem-pur-pullback-tensor-integral-composition-reduced). -/
+/-- The derived finite-system compositor is the derived strict sequence compositor. -/
 theorem finiteSystemDerivedComposition_eq {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) :
     finiteSystemDerivedComposition (integralSystemRings l E) (integralSystemTransition l E) h k =
       integralComparisonSystemComposition l E h k := by

@@ -36,26 +36,24 @@ Frobenius `F`. Poincaré duality says:
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilSheaf.exists_traceCup_poincareDuality`
-(`theorem-poincare-duality-frobenius`):
-  the six clauses above, without graded commutativity.
-- `AlgebraicGeometry.WeilSheaf.exists_traceCup_poincarePairing` (`corollary-cup-product-pairing`):
-  the trace isomorphism, the perfect pairings and the equivalent equivariant duality
-  isomorphisms, the Frobenius similitude, and graded commutativity.
-- `AlgebraicGeometry.WeilSheaf.poincareDuality` (`theorem-poincare-duality-frobenius`): the six
-clauses,
-  with graded commutativity in clause (3).
+- `AlgebraicGeometry.WeilSheaf.exists_traceCup_poincareDuality`: the six clauses above, without
+  graded commutativity.
+- `AlgebraicGeometry.WeilSheaf.exists_traceCup_poincarePairing`: the trace isomorphism, the
+  perfect pairings and the equivalent equivariant duality isomorphisms, the Frobenius
+  similitude, and graded commutativity.
+- `AlgebraicGeometry.WeilSheaf.poincareDuality`: the six clauses, with graded commutativity in
+  clause (3).
 
-## Implementation notes
+## Implementation details
 
-*Coefficients.* The blueprint states the theorem with coefficients `ℚ_ℓ` and proves it at the
+*Coefficients.* The theorem is usually stated with coefficients `ℚ_ℓ`; here it is proved at the
 coefficient stage `ℚ̄_ℓ`. The `ℓ`-adic cohomology with Frobenius available in the repository is
 that of Weil sheaves, whose coefficients are `ℚ̄_ℓ` (`AlgebraicGeometry.WeilSheaf`), so the
 theorem is stated at `ℚ̄_ℓ`; the `ℚ_ℓ` statement follows by the flat base change
 `Hⁱ(X, ℚ̄_ℓ) = Hⁱ(X, ℚ_ℓ) ⊗ ℚ̄_ℓ`, which the repository cannot state for lack of `ℚ_ℓ`-sheaves.
 
-*The trace–cup structure.* The cup product and the trace map of `corollary-cup-product-pairing--1`
-are defined in the repository for étale sheaves of `Λ`-modules
+*The trace–cup structure.* The cup product and the trace map are defined in the repository for
+étale sheaves of `Λ`-modules
 (`AlgebraicGeometry.Etale.cupProduct`, `AlgebraicGeometry.Etale.TateOrientation.untwistedTraceMap`),
 not for Weil complexes, which have no tensor product of complexes, `Ra^!` or orientation yet. The
 statements are therefore existential: there is a trace–cup structure (`FrobeniusModule.TraceCup`) on
@@ -71,14 +69,12 @@ groups vanish and perfectness is automatic.
 *Ingredients.* The theorem is deduced by linear algebra
 (`WeilConjectures.ZetaLinearAlgebra.TraceCup`) from three statements about Weil sheaves:
 `AlgebraicGeometry.WeilSheaf.subsingleton_cohomology_adicConstant` (vanishing outside
-`[0, 2d]`, `lemma-perfect-complexes-geometric-point`, proved through the pro-étale cohomological
-dimension of `ℚ̄_ℓ`), `AlgebraicGeometry.WeilSheaf.exists_linearEquiv_cohomology_baseChangeField`
+`[0, 2d]`, proved through the pro-étale cohomological dimension of `ℚ̄_ℓ`),
+`AlgebraicGeometry.WeilSheaf.exists_linearEquiv_cohomology_baseChangeField`
 (the Frobenius of `k₀'` is `F^r`, proved by transporting Weil structures along the base change) and
 `AlgebraicGeometry.WeilSheaf.exists_traceCup_isPerfect` (trace isomorphism and perfectness at
-the coefficient stage `ℚ̄_ℓ`, `corollary-cup-product-pairing--1`,
-`corollary-degreewise-duality-over-fields`, `theorem-poincare-duality--9`,
-`theorem-poincare-duality-frobenius`). The last is built from the cup product of `ℚ̄_ℓ`-cohomology
-transported from the finite levels, and its only open input is
+the coefficient stage `ℚ̄_ℓ`, via degreewise duality over fields). The last is built from the
+cup product of `ℚ̄_ℓ`-cohomology transported from the finite levels, and its only open input is
 `AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_adicConstant`.
 -/
 
@@ -104,14 +100,11 @@ section Ingredients
 
 variable (k₀ l) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `corollary-cup-product-pairing--1`, `corollary-degreewise-duality-over-fields`
-(degreewise, with `K = ℚ̄_ℓ`, via `theorem-poincare-duality--9`) and
-`theorem-poincare-duality-frobenius` (a), at the coefficient stage `ℚ̄_ℓ`: for `X` smooth proper
-geometrically connected of pure dimension `d` over `k₀`, the cohomology `H^• = H^•(X ⊗ k̄, ℚ̄_ℓ)`
-carries a trace–cup structure — the graded-commutative cup product of
-`corollary-cup-product-pairing--1`, compatible with Frobenius, and the trace
-`tr : H^{2d} ⟶ ℚ̄_ℓ(-d)`, on whose target Frobenius acts by `q^d` — whose trace is an isomorphism
-and whose pairings `⟨x, y⟩ = tr (x ⌣ y)` are perfect. -/
+/-- For `X` smooth proper geometrically connected of pure dimension `d` over `k₀`, the
+cohomology `H^• = H^•(X ⊗ k̄, ℚ̄_ℓ)` carries a trace–cup structure — a graded-commutative cup
+product compatible with Frobenius, and a trace `tr : H^{2d} ⟶ ℚ̄_ℓ(-d)`, on whose target
+Frobenius acts by `q^d` — whose trace is an isomorphism and whose pairings
+`⟨x, y⟩ = tr (x ⌣ y)` are perfect. -/
 theorem exists_traceCup_isPerfect (d : ℕ) [IsProper (X ↘ Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] :
@@ -121,13 +114,9 @@ theorem exists_traceCup_isPerfect (d : ℕ) [IsProper (X ↘ Spec (CommRingCat.o
   obtain ⟨tr, htr⟩ := hprop ‹_›
   exact exists_traceCup_isPerfect_of_linearEquiv X d tr htr
 
-/-- Blueprint `prose-10-19` (the geometric-Frobenius convention
-`Frob_{q^r} = Frob_q^r`), for the Weil structures of `definition-weil-structure` and the Frobenius
-operators of `definition-frobenius-operator--1`: for a finite extension `k₀'/k₀` of degree `r`, the
-cohomology of the base change `X ×_{k₀} k₀'` is that of `X`, the geometric Frobenius of `k₀'`
-corresponding to the `r`-th power `F^r` of the geometric Frobenius of `k₀`. This is item (6) of
-the proof of `theorem-poincare-duality-frobenius`; see
-`AlgebraicGeometry.WeilSheaf.exists_linearEquiv_cohomology_adicConstant_baseChangeField`. -/
+/-- For a finite extension `k₀'/k₀` of degree `r`, the cohomology of the base change
+`X ×_{k₀} k₀'` is that of `X`, the geometric Frobenius of `k₀'` corresponding to the `r`-th
+power `F^r` of the geometric Frobenius of `k₀` (`Frob_{q^r} = Frob_q^r`). -/
 theorem exists_linearEquiv_cohomology_baseChangeField
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
@@ -155,7 +144,7 @@ local notation "𝐇" => WeilSheaf.cohomology (adicConstant k₀ l X)
 /-- The multiplier `q^d` by which Frobenius acts on `ℚ̄_ℓ(-d)`. -/
 local notation "𝐪" => (Nat.card k₀ : PadicAlgCl l) ^ d
 
-/-- Blueprint `theorem-poincare-duality-frobenius`: Poincaré duality for smooth proper schemes.
+/-- Poincaré duality for smooth proper schemes.
 
 Let `X` be smooth, proper and geometrically connected of pure dimension `d` over the finite
 field `k₀ = 𝔽_q`, and write `Hⁱ = Hⁱ(X ⊗ k̄, ℚ̄_ℓ)`, with geometric Frobenius `F`. There is a
@@ -213,7 +202,7 @@ theorem exists_traceCup_poincareDuality :
   rw [Module.natCard_eq_pow_finrank (K := k₀) (V := k₀'), Nat.cast_pow, ← pow_mul, ← pow_mul,
     mul_comm d]
 
-/-- Blueprint `corollary-cup-product-pairing`: Poincaré duality and Frobenius similitude.
+/-- Poincaré duality and Frobenius similitude.
 
 For `X` smooth, proper and geometrically connected of pure dimension `d` over `k₀ = 𝔽_q`, with
 `Hⁱ = Hⁱ(X ⊗ k̄, ℚ̄_ℓ)` and geometric Frobenius `F`, there is a trace–cup structure on `H^•`,
@@ -239,7 +228,7 @@ theorem exists_traceCup_poincarePairing :
   exact ⟨T, htr, hF, fun i j h ↦ ⟨hp i j h, (hrec i j h).1, hsim i j h,
     T.pairing_comm_of_eq_two_mul rfl i j h⟩⟩
 
-/-- Blueprint `theorem-poincare-duality-frobenius`: Poincaré duality.
+/-- Poincaré duality.
 
 For `X` smooth, proper and geometrically connected of pure dimension `d` over `k₀ = 𝔽_q`, with
 `Hⁱ = Hⁱ(X ⊗ k̄, ℚ̄_ℓ)` and geometric Frobenius `F`, there is a trace–cup structure on `H^•`,

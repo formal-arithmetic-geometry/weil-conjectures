@@ -131,14 +131,9 @@ private lemma sliceKunnethFormula_padicAlgCl_isIso {n : ℕ}
   simpa only [s] using isIso_map_kunnethMap_of_iso _ _ φ₁ φ₂ eA.symm eB.symm key
 
 -- the Künneth maps of the derived categories of module objects are large terms
-/-- **The generic-slicing step with `ℚ̄_ℓ`-coefficients from the `𝒪_E` ones** (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, "Finite support"): if the generic-slicing step
-holds with `𝒪_E`-coefficients in chart dimension `n` for every finite subextension `E ⊆ ℚ̄_ℓ`, it
-holds with `ℚ̄_ℓ`-coefficients. Bounded constructible `A`, `B` on the noetherian schemes `X`, `Y`
-have integral models `A₀`, `B₀` over a common `𝒪_E`
-(`ProEtale.exists_derivedExtendScalars_iso_integralModel_pair`), and the pullback of `Π_{A,B}` is
-invertible since that of `Π_{A₀,B₀}` is
-(`NearbyCyclesModel.isIso_map_map_map_kunnethMap_iff_padicAlgCl`). -/
+/-- **The generic-slicing step with `ℚ̄_ℓ`-coefficients from the `𝒪_E` ones**: if the
+generic-slicing step holds with `𝒪_E`-coefficients in chart dimension `n` for every finite
+subextension `E ⊆ ℚ̄_ℓ`, it holds with `ℚ̄_ℓ`-coefficients. -/
 theorem sliceKunnethFormula_padicAlgCl {n : ℕ}
     (h : ∀ E : PadicAlgCl.FiniteIntermediateField ℓ,
       SliceKunnethFormula (Profinite.padicIntegersRingObj ℓ E.1) k' n) :
@@ -146,14 +141,10 @@ theorem sliceKunnethFormula_padicAlgCl {n : ℕ}
   sliceKunnethFormula_padicAlgCl_isIso h
 
 -- the Künneth maps of the derived categories of module objects are large terms
-/-- **Gabber's Künneth formula for proper models with `ℚ̄_ℓ`-coefficients from the `𝒪_E` ones**
-(blueprint `proposition-external-kunneth-formula-nearby-cycles`): if Gabber's Künneth formula with
-`𝒪_E`-coefficients holds in chart dimension `n` for every finite subextension `E ⊆ ℚ̄_ℓ`, then
-the Künneth formula for proper models with `ℚ̄_ℓ`-coefficients holds in chart dimension `n`
-(`NearbyCyclesModel.ProperKunnethFormula`). Bounded constructible `A`, `B` on the noetherian
-schemes `X`, `Y` have integral models `A₀`, `B₀` over a common `𝒪_E`
-(`ProEtale.exists_derivedExtendScalars_iso_integralModel_pair`), and `Π_{A,B}` is invertible
-since `Π_{A₀,B₀}` is (`NearbyCyclesModel.isIso_map_map_kunnethMap_iff_padicAlgCl`). -/
+/-- **Gabber's Künneth formula for proper models with `ℚ̄_ℓ`-coefficients from the `𝒪_E` ones**:
+if Gabber's Künneth formula with `𝒪_E`-coefficients holds in chart dimension `n` for every finite
+subextension `E ⊆ ℚ̄_ℓ`, then the Künneth formula for proper models with `ℚ̄_ℓ`-coefficients holds
+in chart dimension `n` (`NearbyCyclesModel.ProperKunnethFormula`). -/
 theorem properKunnethFormula_padicAlgCl_of_integral {n : ℕ}
     (h : ∀ E : PadicAlgCl.FiniteIntermediateField ℓ,
       KunnethFormula (Profinite.padicIntegersRingObj ℓ E.1) k' n) :
@@ -188,12 +179,9 @@ theorem properKunnethFormula_padicAlgCl_of_integral {n : ℕ}
     (Functor.map_isIso _ _)
   exact isIso_kunnethMap_of_iso _ φ₁ φ₂ eA.symm eB.symm key
 
-/-- **Gabber's Künneth formula with `ℚ̄_ℓ`-coefficients from the `𝒪_E` ones** (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`): if Gabber's Künneth formula with
-`𝒪_E`-coefficients holds in chart dimension `n` for every finite subextension `E ⊆ ℚ̄_ℓ`, so does
-the one with `ℚ̄_ℓ`-coefficients. By the reduction to proper models
-(`NearbyCyclesModel.isIso_kunnethMap_of_properKunnethFormula`), this is
-`NearbyCyclesModel.properKunnethFormula_padicAlgCl_of_integral`. -/
+/-- **Gabber's Künneth formula with `ℚ̄_ℓ`-coefficients from the `𝒪_E` ones**: if Gabber's
+Künneth formula with `𝒪_E`-coefficients holds in chart dimension `n` for every finite subextension
+`E ⊆ ℚ̄_ℓ`, so does the one with `ℚ̄_ℓ`-coefficients. -/
 theorem kunnethFormula_padicAlgCl_of_integral {n : ℕ}
     (h : ∀ E : PadicAlgCl.FiniteIntermediateField ℓ,
       KunnethFormula (Profinite.padicIntegersRingObj ℓ E.1) k' n) :

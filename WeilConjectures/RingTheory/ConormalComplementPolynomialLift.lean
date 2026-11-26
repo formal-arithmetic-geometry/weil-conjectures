@@ -11,8 +11,20 @@ public import Mathlib.RingTheory.Extension.Cotangent.Basic
 /-!
 # Polynomial lifts annihilating a conormal complement
 
-Source: Stacks Project, Algebra, Lemma 04EB, the polynomial lift correction argument.
-(blueprint: lem-weil-pbc-conormal-complement-polynomial-lift).
+Let `P → S` be a presentation with kernel `J` and `K ⊆ J` an ideal whose conormal map to
+`S ⊗_P Ω[P/R]` is bijective. For a square-zero ideal `I` of `A`, every `R`-algebra map
+`S → A/I` lifts uniquely to an algebra map `P → A` killing `K`.
+
+## Implementation details
+
+Any lift `β` restricts to a map `K/(K ∩ J²) → I`; composing its negative with the inverse of
+the conormal isomorphism gives a derivation `D : P → I`, and `β + D` kills `K`. Uniqueness
+holds because the difference of two lifts is a derivation into `I` vanishing on the image of
+`K`, which spans.
+
+## References
+
+* [Stacks, Tag 04EB]
 -/
 
 @[expose] public section
@@ -161,24 +173,7 @@ private theorem polynomialLift_unique
   exact sub_eq_zero.mp (congrArg Subtype.val hDx)
 
 /-- A polynomial lift can be uniquely corrected to annihilate an ideal whose conormal
-map is an isomorphism onto the base changed differential module.
-Source: Stacks Project, Algebra, Lemma 04EB, from the choice of `β` to the last sentence.
-(blueprint: lem-weil-pbc-conormal-complement-polynomial-lift).
-
-Proof: Lift the images of the polynomial variables through the surjection `A → A/I`.
-This gives an algebra map `β` with the prescribed reduction. Its restriction to `K`
-takes values in `I` and vanishes on `J²`, since `β(J) ⊆ I` and `I² = 0`.
-The restriction descends to `K/(K ∩ J²) → I`. The two differential hypotheses
-identify `K/(K ∩ J²)` with `S ⊗[P] Ω[P/R]` as `P`-modules.
-Compose the negative obstruction map with this inverse and the universal differential
-to obtain an `R`-derivation `D : P → I`. Then `β + D` is an algebra map: the Leibniz
-identity gives multiplicativity because products of two elements of `I` vanish.
-It has the same reduction as `β` and vanishes on `K` by the definition of `D`.
-For uniqueness, the difference of any two lifts is an `R`-derivation into `I`.
-The square-zero hypothesis gives `I` an `A/I`-module structure, hence an `S`-module
-structure through `a`, compatible with its `P`-action. The difference derivation thus
-factors through `S ⊗[P] Ω[P/R]` and vanishes on the image of `K`.
-Surjectivity of that image forces the derivation to be zero, hence the lifts agree. -/
+map is an isomorphism onto the base changed differential module. -/
 theorem conormalComplement_polynomial_lift
     (R S : Type u) [CommRing R] [CommRing S] [Algebra R S]
     {ι : Type u} (G : Generators R S ι) (K : Ideal G.Ring)

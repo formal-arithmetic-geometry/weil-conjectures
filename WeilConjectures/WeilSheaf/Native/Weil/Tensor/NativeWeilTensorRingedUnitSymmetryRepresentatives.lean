@@ -13,8 +13,20 @@ import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedSwapLo
 
 /-! # Coherence component of the native ringed derived square
 
-Source: Stacks 06YU, 0FPT; blueprint step 3 of
-`lem-sf-native-weil-tensor-ringed-derived-square-native-data`.
+We prove the unit and signed-symmetry squares of the native ringed tensor on native K-flat
+representatives.
+
+## Implementation details
+
+The unit and symmetry squares are first proved on native K-flat representatives: the signed
+balanced-summand equations identify the ordinary derived tensor models, the localized signed
+swap gives the native braiding square, and cancelling the ordinary model gives the symmetry
+equation. Essential surjectivity of K-flat localization transfers it to all derived inputs, and
+the right-unit equation follows from `ρ_P = β(P, 1) ≫ λ_P`.
+
+## References
+
+* Stacks Project, Tags 06YU and 0FPT.
 -/
 
 @[expose] public section
@@ -105,27 +117,7 @@ attribute [local irreducible] Functor.mapDerivedCategory
   instCategoryDerivedCategory NativeOrdinaryKFlat NativeTensorKFlat
 
 -- The normalization compares independently presented total-complex models.
-/-- Unit and signed-symmetry squares on native K-flat representatives.
-
-Source: Stacks 06YU, 0FPT; native tensor transport, unit and symmetry parts of step 3.
-(blueprint: lem-sf-native-weil-tensor-ringed-unit-symmetry-representatives).
-
-Proof: obtain one epsilon and the left-unit equation from the left-unit
-representative calculation. The signed balanced-summand equations identify the
-two canonical total comparisons by tensor and coproduct extensionality; their
-heterogeneous normalization equations then identify the ordinary derived tensor
-models on two K-flat inputs. For a pair of native K-flat representatives, hforget
-identifies the native model comparison with t followed by the ordinary model.
-The localized signed-swap calculation supplies the native braiding square;
-the braiding square in hS supplies the ordinary one. Cancel the ordinary model
-to obtain the symmetry equation for t. Naturality and the essential surjectivity
-of K-flat localization from A.localization transfer this equation to any two
-derived inputs, in particular to a pair containing the tensor unit. Finally use
-rho_P = beta(P,1);lambda_P, naturality of the ordinary braiding with respect to
-epsilon, and the left-unit equation to prove the right-unit equation with the
-same epsilon. The left-unit and localized signed-swap calculations are separate
-named lemmas; all model identification, cancellation and transfer steps are
-proved here. Zero complexes, empty sites and all integer degrees are included. -/
+/-- Unit and signed-symmetry squares on native K-flat representatives. -/
 theorem native_weil_tensor_ringed_unit_symmetry_representatives
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})

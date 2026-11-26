@@ -13,9 +13,9 @@ public import WeilConjectures.WeilSheaf.FieldCoefficientCohomology
 
 Let `k₀` be a finite field with algebraic closure `k̄`, `X` a scheme over `k₀` with geometric
 fiber `X̄ = X ×_{k₀} k̄` and geometric Galois Frobenius `Fr_X : X̄ ≅ X̄`, and let `E ⊆ ℚ̄_ℓ` be a
-finite extension of `ℚ_ℓ` with ring of integers `𝒪_E = PadicAlgCl.integers ℓ E`. Following
-blueprint `def-weil-ordinary-compact-cohomology`, the coefficient object of the stage
-`Λ = 𝒪_E` is the completed coefficient sheaf `𝒪̂_{E,X̄} : U ↦ C(U, 𝒪_E)` on the pro-étale site
+finite extension of `ℚ_ℓ` with ring of integers `𝒪_E = PadicAlgCl.integers ℓ E`. The
+coefficient object of the stage `Λ = 𝒪_E` is the completed coefficient sheaf
+`𝒪̂_{E,X̄} : U ↦ C(U, 𝒪_E)` on the pro-étale site
 (`AlgebraicGeometry.ProEtale.FieldSheaf.unit`), and its Tate twist is
 
 `𝒪_E(m)_X̄ = 𝒪̂_{E,X̄} ⊗ 𝒪_E(m)`, `𝒪_E(1) = ℤ_ℓ(1) ⊗_{ℤ_ℓ} 𝒪_E = lim_r μ_{ℓ^r} ⊗_{ℤ_ℓ} 𝒪_E`.
@@ -201,16 +201,11 @@ lemma tateTwist_tateTwist (F : ProEtaleIntegralWeilSheaf k₀ (PadicAlgCl.intege
   rw [tateTwist, tateTwist, tateTwist, constantTwist_constantTwist, zpow_add]
 
 variable (k₀ X E) in
-/-- Blueprint `def-weil-ordinary-compact-cohomology`: Ordinary and compactly supported
-cohomology, stage `Λ = 𝒪_E`, the Tate twisted coefficient object.
-
-The Tate twisted constant coefficient object `𝒪_E(m)_X = 𝒪̂_{E,X} ⊗ 𝒪_E(m)`, `m ∈ ℤ`, for the
+/-- The Tate twisted constant coefficient object `𝒪_E(m)_X = 𝒪̂_{E,X} ⊗ 𝒪_E(m)`, `m ∈ ℤ`, for the
 ring of integers `𝒪_E` of a subfield `E` of `ℚ̄_ℓ` (for instance a finite extension of `ℚ_ℓ`):
 the completed coefficient sheaf `𝒪̂_{E,X̄} : U ↦ C(U, 𝒪_E)` on the geometric fiber, whose
 canonical Weil structure is multiplied by `χ_ℓ(σ)ᵐ ∈ 𝒪_Eˣ`, `σ` the geometric Frobenius of `k̄`
-and `χ_ℓ` the `ℓ`-adic cyclotomic character: `𝒪_E(1) = ℤ_ℓ(1) ⊗_{ℤ_ℓ} 𝒪_E` is constant on the
-geometric fiber, the geometric Frobenius acting on `ℤ_ℓ(1)(k̄) = lim_r μ_{ℓ^r}(k̄)` by `χ_ℓ(σ)`,
-which is `q⁻¹` for `ℓ ≠ p`. -/
+and `χ_ℓ` the `ℓ`-adic cyclotomic character. -/
 noncomputable def tateTwistConstant (m : ℤ) :
     ProEtaleIntegralWeilSheaf k₀ (PadicAlgCl.integers l E) X :=
   (constant k₀ (PadicAlgCl.integers l E) X).tateTwist m
@@ -273,10 +268,7 @@ variable {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   (E : IntermediateField ℚ_[l] (PadicAlgCl l))
 
 variable (k₀ X) in
-/-- Blueprint `def-weil-ordinary-compact-cohomology`: Ordinary and compactly supported
-cohomology, stage `Λ = 𝒪_E`, with a Tate twist.
-
-The cohomology `Hⁱ(X̄, 𝒪_E(m)) = Hⁱ(X̄, For(𝒪_E(m)_X))` of the geometric fiber `X̄` of a
+/-- The cohomology `Hⁱ(X̄, 𝒪_E(m)) = Hⁱ(X̄, For(𝒪_E(m)_X))` of the geometric fiber `X̄` of a
 `k₀`-scheme `X` with coefficients in the Tate twist `𝒪_E(m)`: the cohomology
 `Hⁱ(RΓ(X̄, -))`, `RΓ(X̄, -) = Fib_s ∘ Ra_*` (`AlgebraicGeometry.ProEtale.fieldCohomology`), of the
 twisted completed coefficient sheaf `𝒪_E(m)_X̄ = 𝒪̂_{E,X̄} ⊗ 𝒪_E(m)`
@@ -286,10 +278,7 @@ noncomputable def cohomologyTateTwist (m i : ℤ) :
   (tateTwistConstant k₀ X E m).cohomology i
 
 variable (k₀ X) in
-/-- Blueprint `def-weil-ordinary-compact-cohomology`: Ordinary and compactly supported
-cohomology, stage `Λ = 𝒪_E`, with a Tate twist.
-
-The compactly supported cohomology `Hⁱ_c(X̄, 𝒪_E(m)) = Hⁱ_c(X̄, For(𝒪_E(m)_X))`: the cohomology
+/-- The compactly supported cohomology `Hⁱ_c(X̄, 𝒪_E(m)) = Hⁱ_c(X̄, For(𝒪_E(m)_X))`: the cohomology
 of `RΓ_c(X̄, -) = Fib_s ∘ Ra_!`
 (`AlgebraicGeometry.ProEtale.fieldCompactlySupportedCohomology`) of the twisted completed
 coefficient sheaf `𝒪_E(m)_X̄` (`AlgebraicGeometry.ProEtaleIntegralWeilSheaf.tateTwistConstant`).

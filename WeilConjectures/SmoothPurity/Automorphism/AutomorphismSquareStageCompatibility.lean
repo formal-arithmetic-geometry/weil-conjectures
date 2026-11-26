@@ -12,9 +12,18 @@ import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarPullbackComple
 
 /-! # The coefficient transition equation for normalized automorphism squares
 
-Source: the Weil-structures paragraph of the open-closed localization proof,
-steps 7--9 of lem-sf-automorphism-constructible-stage-equivalence.
-(blueprint: lem-sf-automorphism-square-stage-compatibility).
+We show that the rational square obtained by localizing a normalized integral automorphism square
+is compatible with the coefficient stage transitions. This is the Weil-structures step of the
+open-closed localization argument.
+
+## Implementation details
+
+The proof uses the normalized mixed scalar/composition equation for the pairs `(eY, f)` and
+`(f, eX)`, cancels the invertible compositors, and identifies the resulting scalar comparisons
+with `integralPullbackScalarComparison` via the representative normalization of
+`IntegralComparisonSystem`. Rational localization then gives the raw rational scalar equation,
+and `commonStagePullbackTransition` is substituted using naturality of
+`operationStageTransitionIso`. No faithfulness of finite reduction is used.
 -/
 
 @[expose] public section
@@ -418,28 +427,8 @@ private theorem conjugate_square
   dsimp only [Functor.comp_map] at nb
   rw [nb]
 
-/-- The localized normalized integral square satisfies the scalar transition square.
-Source: literature/blueprint/latest/blueprint/sec-smooth-purity/
-sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md,
-Weil-structures paragraph; steps 7--9 of the automorphism stage-equivalence proof
-(blueprint: lem-sf-automorphism-square-stage-compatibility).
-
-Proof: first use the normalized mixed scalar/composition equation for the pairs
-(eY,f) and (f,eX). Their composite scheme maps are equal by h. Cancel the two
-invertible compositors; the equality gives compatibility of the integral square
-with the two composite scalar comparisons. The representative normalization of
-IntegralComparisonSystem identifies these scalar comparisons with the prescribed
-integralPullbackScalarComparison, independently of the chosen system C.
-Apply rational localization to this full morphism equation. The component formula
-hb identifies the square components with the localized integral components. The
-prescribed object and pure-tensor formulas for rational pullback and coefficient
-extension identify the other four arrows with their localized integral maps.
-Functoriality of localization then gives the raw rational scalar equation.
-Finally substitute commonStagePullbackTransition: each is the raw scalar comparison
-conjugated by operationStageTransitionIso. Naturality of these identifications
-moves them past the square components. The two intermediate identifications cancel,
-leaving exactly the equation below. This includes identity fields, empty schemes,
-and semilinear automorphisms, and uses no faithfulness of finite reduction. -/
+/-- For automorphisms `eX`, `eY` commuting with `f : Y ⟶ X`, the localized normalized integral
+square `b` commutes with the coefficient stage transitions along `E ≤ L`. -/
 theorem automorphismSquareStageCompatibility
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

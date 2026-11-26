@@ -11,7 +11,20 @@ import Mathlib.Algebra.TrivSqZeroExt.Basic
 
 /-! # Reduced differentials of a tensor product
 
-Source: Stacks Project, Tags 07M7 and 00RO; restriction of derivations to the factors.
+Restricting derivations on `S ⊗_A B` to the two factors splits the reduced relative
+differentials of the tensor product.
+
+## Implementation details
+
+An `R`-derivation on `D = S ⊗_A B` restricts to derivations on `S` and `B`; conversely
+`s ⊗ b ↦ σ(b) dS(s) + τ(s ⊗ 1) dB(b)` is `A`-balanced and satisfies Leibniz. The universal
+properties of differentials and base change turn this natural bijection into a `Q`-linear
+equivalence. No flatness, smoothness or finite generation is assumed.
+
+## References
+
+* [Stacks, Tag 07M7]
+* [Stacks, Tag 00RO]
 -/
 
 @[expose] public section
@@ -53,27 +66,7 @@ private def derivationLift
       rfl
 
 /-- Restricting a derivation on a tensor product to its two factors splits reduced
-relative differentials, before calculating either factor.
-
-Source: Stacks Project, Tag 07M7, first paragraph, differential calculation;
-Tag 00RO, universal property of differentials.
-(blueprint: lem-weil-pbc-reduced-tensor-differentials)
-
-Proof: put D = S tensor_A B. For each Q-module N, an R-derivation on D restricts
-along s -> s tensor 1 and b -> 1 tensor b to an R-derivation on S and an
-A-derivation on B, with N acted on through tau. Conversely define the derivation
-of a pure tensor by sigma(b) dS(s) + tau(s tensor 1) dB(b). The restrictions kill
-A, so this formula is A-balanced. Expanding the product of two pure tensors
-proves Leibniz; killing R follows from the R-linearity of dS and the fact that
-R maps into the S factor. Pure tensors span D, so extension and restriction
-are inverse. The differential and base-change universal properties turn this
-natural bijection into a Q-linear equivalence. Explicitly its inverse sends
-(q tensor ds, q' tensor db) to q tensor d(s tensor 1) + q' tensor d(1 tensor b).
-The forward and inverse maps agree on these differential generators, proving
-the two inverse identities. The hypotheses identify the B and R actions with
-sigma and eta, respectively. The calculation allows zero rings and zero
-modules and does not assume flatness, smoothness or finite generation.
--/
+relative differentials, before calculating either factor. -/
 theorem reduced_tensor_differentials
     (A R S B Q : Type u)
     [CommRing A] [CommRing R] [CommRing S] [CommRing B] [CommRing Q]

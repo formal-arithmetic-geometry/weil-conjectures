@@ -12,8 +12,6 @@ import all WeilConjectures.SixFunctors.GeneratorReduction.OpenReconstructionEffe
 import WeilConjectures.SmoothPurity.Pur.PurNormalizedReconstructionAdjunctionCalculus
 
 /-! # Transposing ordinary expression reduction
-
-Source: blueprint fix-prop-coherence, primitive coefficient transpose and finite recursion.
 -/
 
 @[expose] public noncomputable section
@@ -212,20 +210,7 @@ private theorem open_transpose (o : Operations l E) (a : AmbientModels l E o)
 
 -- The tensor case unifies the two recursive normalizations through nested chart transports.
 /-- The transpose of the explicit ordinary coefficient recursion, followed by any
-comparison satisfying the recursion laws, is the actual expression completion map.
-Source: blueprint fix-prop-coherence, primitive transpose and expression-tree recursion.
-(blueprint: lem-sf-integral-ordinary-expression-normalization).
-
-Proof: induct on the expression. The variable case is inputNormalization. Naturality
-of each primitive coefficient map substitutes the transpose of the child coefficient
-map. The quotient augmentation equations identify the pull and tensor transposes.
-For proper image, the adjoint-conjugate comparison has exactly the transpose of its
-reduction mate. For open extension, transpose openNormalization and cancel the unit
-at the good open image; its fixed reduction mate is invertible. Apply the recursion
-law for the parent comparison, cancel its primitive isomorphism and use the child
-induction hypothesis. At tensor do this in both slots. Compact support is exactly
-open extension followed by proper image, with the recorded good open intermediate.
-No structural generator or pair of expressions is used. -/
+comparison satisfying the recursion laws, is the actual expression completion map. -/
 theorem ordinaryExpressionNormalization (D : FiniteFieldDatum.{u})
     (o : Operations l E) (a : AmbientModels l E o)
     (comparison : ExpressionRecursion.Comparisons l E D o)

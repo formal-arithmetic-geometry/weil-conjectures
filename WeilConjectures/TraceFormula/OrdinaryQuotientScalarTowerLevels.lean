@@ -12,8 +12,12 @@ import all WeilConjectures.SmoothPurity.CoefficientExtensionAssociation.Coeffici
 
 /-! # Finite levels of the ordinary scalar tower
 
-Source: the integral-operations tensor associator; Stacks 03EK and 03D7.
-(blueprint: def-trf-ordinary-quotient-scalar-tower-levels).
+The finite levels of the direct scalar tower, built from the integral-operations tensor
+associator.
+
+## References
+
+* Stacks Project, Tags 03EK, 03D7
 -/
 
 @[expose] public noncomputable section

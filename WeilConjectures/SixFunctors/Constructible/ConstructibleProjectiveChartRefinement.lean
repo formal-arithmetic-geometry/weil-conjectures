@@ -48,11 +48,13 @@ import WeilConjectures.SixFunctors.Supporting.AffineCommonProjectiveCharts
 /-!
 # Common projective sheaf charts for two integral constructible complexes
 
-Source: Stacks Project, proetale.tex, Tag 09C3; Bhatt--Scholze, Lemmas 6.5.5 and 6.5.8
-(blueprint: lem-fix-constructible-projective-chart-refinement).
-
 All restrictions below are ordinary uncompleted derived ringed pullbacks. Coefficient
 index zero is exponent one. Finite products of the unit module are finite direct sums.
+
+## References
+
+* [Stacks, Tag 09C3]
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Lemmas 6.5.5 and 6.5.8]
 -/
 
 @[expose] public section
@@ -67,29 +69,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Sc
 namespace WeilConjectures
 
 /-- Two integral constructible complexes have simultaneous bounded projective sheaf
-models after a finite open--closed refinement and weakly contractible affine covers.
-
-Source: Stacks Project, Tag 09C3; Bhatt--Scholze, Lemmas 6.5.5 and 6.5.8
-(blueprint: lem-fix-constructible-projective-chart-refinement).
-
-Proof:
-1. Apply `constructible_residue_tree`. It retains all given stratum factorizations
-   and makes the two ordinary restrictions complete, with bounded finite lisse
-   residue, on every qcqs weakly etale object of each nonempty leaf. Identity
-   restriction gives the required completeness and residue assertions on the leaf.
-2. Clause (2) of the single-affine hypercover theorem supplies a covering object
-   with w-contractible ring. The weak-contractibility equivalences applied in its
-   own small pro-etale site give the epimorphism-evaluation property on this affine.
-3. Apply `affine_common_projective_charts` to the two ordinary restrictions on this
-   cover. The existing bounded-field Tor lemma gives the all-resolutions Tor
-   bound; bounded finite local residue models give intrinsic constructibility. The
-   existing projective-model theorem and the common clopen transport lemma supply
-   one finite disjoint cover with both composite ordinary projective models.
-4. Identify the covering arrow with the canonical arrow to the terminal object.
-   The pro-etale precoverage gives surjectivity on points. Lift a leaf point to the
-   affine cover, then to one member of the finite open cover. This proves that the
-   chart composites cover the leaf. Reassociate their composites to identify the
-   displayed model isomorphisms. Empty leaves have no chart condition. -/
+models after a finite open--closed refinement and weakly contractible affine covers. -/
 theorem constructible_projective_chart_refinement
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

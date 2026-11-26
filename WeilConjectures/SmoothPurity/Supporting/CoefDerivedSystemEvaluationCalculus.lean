@@ -121,8 +121,17 @@ import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSystemP
 
 /-! # Assembly of the coherent derived coefficient-system evaluation calculus
 
-Source: Stacks 06YS, 0A95, 0941, 079P; the sequence and enriched-adjunction route
-(blueprint: lem-coef-derived-system-evaluation-calculus). -/
+## Implementation details
+
+The calculus is assembled from `coefficientDerivedSystemResolutionModels` and
+`coefficientDerivedSystemProjectionFormulas`; the enriched invertibility fields are
+`coefficientClosedEnriched_isIso`. No reconstruction or invertibility of `beta` or of the
+reconstruction unit on arbitrary inputs is claimed.
+
+## References
+
+* Stacks Project, Tags 06YS, 0A95, 0941 and 079P.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -180,27 +189,7 @@ end CategoricalComposition
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-/-- The full coherent derived reduction, limit adjunction and fiberwise evaluation calculus.
-Source: Stacks 06YS, 0A95, 0941, 079P; the enriched varying-coefficient comparison
-is the agent-formulated construction in the node
-(blueprint: lem-coef-derived-system-evaluation-calculus).
-
-Proof, following the node step by step:
-1. By coefficientDerivedSystemResolutionModels (lem-coef-derived-system-resolution-models)
-choose normalized fibers F, the global-limit comparison kappa, the resolution coherence D
-and the projection-model equations H. Construct S from F and kappa; its enriched_isIso field
-is coefficientClosedEnriched_isIso: the evaluation-defined enriched adjunct is the inverse of
-the five-Hom-bijection comparison ClosedScalarHom.iso (lem-sfb-closed-scalar-hom-comparison).
-2. coefficientDerivedSystemProjectionFormulas (lem-coef-derived-system-projection-formulas)
-applied to S, D and H gives the gamma projection and Hom-zero projection fields.
-3. Finite enriched invertibility is coefficientClosedEnriched_isIso for the finite scalar
-adjunction and its tensor comparison. Gamma naturality: apply integral sections to
-coefficientClosedEnriched_naturality, then naturality of kappa.
-4. Composition: by left and right naturality of the reduction adjunction Hom bijection,
-both sides are adjuncts; naturality of the tensor comparison at (1, f) and functoriality
-of the system tensor identify them, the right side being tensorLimitMap, the counit mate.
-Steps 3 and 4 are elementary and fully proved here. No reconstruction or invertibility of
-beta or the reconstruction unit on arbitrary inputs is claimed. -/
+/-- The full coherent derived reduction, limit adjunction and fiberwise evaluation calculus. -/
 theorem coefficientDerivedSystemEvaluationCalculus :
     ∃ S : CoefficientDerivedSystemCalculus l E W,
       Nonempty (CoefficientDerivedSystemCoherence l E W S) := by

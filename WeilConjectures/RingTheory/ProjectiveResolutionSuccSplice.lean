@@ -12,7 +12,21 @@ import Mathlib.Algebra.Homology.Augment
 import Mathlib.CategoryTheory.Abelian.Projective.Resolution
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
-/-! A projective presentation splices a resolution of its kernel. -/
+/-!
+# Splicing a projective presentation with a resolution of its kernel
+
+A projective presentation splices with a resolution of its kernel.
+
+## Implementation details
+
+The construction uses the projective middle term as degree zero and shifts the supplied
+projective resolution of the kernel; short exactness identifies the resulting augmentation
+kernel and preserves exactness in every positive degree.
+
+## References
+
+* [Stacks, Tag 065S]
+-/
 
 @[expose] public section
 
@@ -22,14 +36,7 @@ namespace ModuleCat
 
 open CategoryTheory CategoryTheory.Category CategoryTheory.Limits HomologicalComplex
 
-/-- Splicing a projective presentation with a resolution of its kernel.
-Source: Stacks Project, Algebra, Lemma 065S and the horseshoe argument.
-(blueprint: lem-weil-pbc-projective-resolution-succ-splice).
-
-The proof is the standard mapping-cone construction: use the projective middle
-term as degree zero and shift the supplied projective resolution of the kernel;
-the short exactness identifies the resulting augmentation kernel and preserves
-exactness in every positive degree. -/
+/-- Splicing a projective presentation with a resolution of its kernel. -/
 theorem hasProjectiveResolutionLE_of_shortExact_projective_middle
     {R : Type u} [CommRing R] (n : ℕ)
     (S : ShortComplex (ModuleCat.{v} R)) (hS : S.ShortExact)

@@ -50,8 +50,7 @@ noncomputable def cohomologyMapCompIso (f : X ⟶ Y) (g : Y ⟶ Z) (k : X ⟶ Z)
 
 /-- **Composition of pullback maps on étale cohomology.** Pulling a class back along
 `g : Y ⟶ Z` and then along `f : X ⟶ Y` is pulling it back along `k = f ≫ g`, up to the
-composition isomorphism `k^* F ≅ f^* g^* F` and an automorphism of the constant sheaf `ℤ`.
-(blueprint: `proposition-cohomology-p-1-over-henselian--1`, composition) -/
+composition isomorphism `k^* F ≅ f^* g^* F` and an automorphism of the constant sheaf `ℤ`. -/
 theorem cohomologyMap_cohomologyMap_of_comp_eq (f : X ⟶ Y) (g : Y ⟶ Z) (k : X ⟶ Z)
     (hk : f ≫ g = k) (F : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) {n : ℕ}
     (x : Sheaf.H F n) :

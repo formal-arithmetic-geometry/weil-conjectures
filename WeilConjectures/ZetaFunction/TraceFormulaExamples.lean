@@ -21,6 +21,8 @@ cup-product pairing on `H¹` being alternating with similitude factor `q`
 Cayley–Hamilton for `F` show that `P₁ = det(1 - T F | H¹) = 1 - (1 + q - N₁) T + q T²` and that
 `N₁` determines every `N_m`. For `q = 3`, `N₁ = 4` (the running example `y² = x³ - x` over `𝔽₃`)
 this gives `P₁ = 1 + 3T²`, `N₂ = 16`, `N₃ = 28` and `Z(C₀, T) = (1 + 3T²) / ((1 - T)(1 - 3T))`.
+The curve `y² = x³ - x` itself, and the count `N₁ = 4` of its `𝔽₃`-points, are not constructed
+in the library; the genus and `N₁ = 4` are hypotheses.
 
 *The projective line.* `Z(ℙ¹, T) = 1 / ((1 - T)(1 - qT))` satisfies
 `Z(ℙ¹, 1/(qT)) = q T² Z(ℙ¹, T)`.
@@ -31,10 +33,10 @@ this gives `P₁ = 1 + 3T²`, `N₂ = 16`, `N₃ = 28` and `Z(C₀, T) = (1 + 3T
   `LinearMap.BilinForm.det_eq_of_isAlt_of_finrank_eq_two`: linear algebra in dimension two.
 - `AlgebraicGeometry.Scheme.frobeniusCharpolyRev_one_of_finrank_eq_two`,
   `AlgebraicGeometry.Scheme.pointCount_eq_of_pointCount_one_eq`,
-  `AlgebraicGeometry.Scheme.runningExample_trace_formula`: blueprint
-  `example-running-example-trace-formula`.
-- `AlgebraicGeometry.projectiveLine_functional_equation`: blueprint
-  `example-functional-equation-projective-line`.
+  `AlgebraicGeometry.Scheme.runningExample_trace_formula`: the trace formula for genus-one
+  curves and the running example.
+- `AlgebraicGeometry.projectiveLine_functional_equation`: the functional equation for the
+  projective line.
 -/
 
 @[expose] public section
@@ -135,8 +137,7 @@ theorem trace_frobeniusEnd_cohomology_zero_pow_of_curve (m : ℕ) :
     WeilSheaf.finrank_cohomology_zero_adicConstant, Nat.cast_one]
 
 /-- On a smooth proper geometrically connected curve, `H²(C ⊗ k̄, ℚ̄_ℓ)` is a line on which
-Frobenius acts by `q` (Poincaré duality,
-`AlgebraicGeometry.Scheme.exists_linearEquiv_cohomology_endpoints`). -/
+Frobenius acts by `q`. -/
 theorem finrank_cohomology_two_and_frobeniusEnd_of_curve :
     Module.finrank (PadicAlgCl l) ((WeilSheaf.adicConstant k₀ l C).cohomology 2).carrier = 1 ∧
       ((WeilSheaf.adicConstant k₀ l C).cohomology 2).frobeniusEnd =
@@ -150,8 +151,7 @@ theorem finrank_cohomology_two_and_frobeniusEnd_of_curve :
   rfl
 
 /-- On a smooth proper geometrically connected curve with `dim H¹(C ⊗ k̄, ℚ̄_ℓ) = 2`, Frobenius on
-`H¹` has determinant `q`: by Poincaré duality (`AlgebraicGeometry.WeilSheaf.poincareDuality`) the
-cup-product pairing on `H¹` is perfect, alternating and multiplied by `q` under Frobenius. -/
+`H¹` has determinant `q`. -/
 theorem det_frobeniusEnd_cohomology_one_of_finrank_eq_two
     (hg : Module.finrank (PadicAlgCl l)
       ((WeilSheaf.adicConstant k₀ l C).cohomology 1).carrier = 2) :
@@ -206,17 +206,12 @@ theorem pointCount_eq_one_sub_trace_add_of_curve {m : ℕ} (hm : 1 ≤ m) :
   rw [← sub_eq_add_neg]
   rfl
 
-/-- Blueprint `example-running-example-trace-formula` (genus-one curves): let `C₀` be a smooth
-proper geometrically connected curve over `k₀ = 𝔽_q` with `dim H¹(C₀ ⊗ k̄, ℚ̄_ℓ) = 2`. By Poincaré
-duality `H²` is a line on which Frobenius acts by `q`, and `det(F | H¹) = q`
-(`AlgebraicGeometry.Scheme.det_frobeniusEnd_cohomology_one_of_finrank_eq_two`). Then
+/-- **Genus-one curves**: let `C₀` be a smooth proper geometrically connected curve over
+`k₀ = 𝔽_q` with `dim H¹(C₀ ⊗ k̄, ℚ̄_ℓ) = 2`, and `F` the Frobenius on `H¹`. Then
 
 * `P₁ = det(1 - T F | H¹) = 1 - (1 + q - N₁) T + q T²`;
 * `sₘ = 1 + qᵐ - Nₘ = Tr(Fᵐ | H¹)` satisfies `s₂ = s₁² - 2q` and
-  `s_{m+2} = s₁ s_{m+1} - q sₘ` for `m ≥ 1`,
-
-so that `N₁` determines every `Nₘ`
-(`AlgebraicGeometry.Scheme.pointCount_eq_of_pointCount_one_eq`). -/
+  `s_{m+2} = s₁ s_{m+1} - q sₘ` for `m ≥ 1`. -/
 theorem frobeniusCharpolyRev_one_of_finrank_eq_two
     (hg : Module.finrank (PadicAlgCl l)
       ((WeilSheaf.adicConstant k₀ l C).cohomology 1).carrier = 2) :
@@ -265,10 +260,9 @@ theorem frobeniusCharpolyRev_one_of_finrank_eq_two
     push_cast
     ring
 
-/-- Blueprint `example-running-example-trace-formula` (the number `N₁` determines every `Nₘ`):
-two smooth proper geometrically connected curves `C₀`, `C₀'` over `k₀` with `dim H¹ = 2`
-(genus one) and with the same number
-of `k₀`-points have the same number of `𝔽_{qᵐ}`-points for every `m ≥ 1`. -/
+/-- **The number `N₁` determines every `Nₘ`**: two smooth proper geometrically connected curves
+`C₀`, `C₀'` over `k₀` with `dim H¹ = 2` (genus one) and with the same number of `k₀`-points have
+the same number of `𝔽_{qᵐ}`-points for every `m ≥ 1`. -/
 theorem pointCount_eq_of_pointCount_one_eq {C' : Scheme.{u}}
     [C'.Over (Spec (CommRingCat.of k₀))] [IsProper (C' ↘ Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension 1 (C' ↘ Spec (CommRingCat.of k₀))]
@@ -306,16 +300,13 @@ theorem pointCount_eq_of_pointCount_one_eq {C' : Scheme.{u}}
     rw [e1, ih.1, ih.2] at r
     linarith
 
-/-- Blueprint `example-running-example-trace-formula` (the running example): for a smooth proper
-geometrically connected curve `C₀` over a field `k₀` with `3` elements, with
-`dim H¹(C₀ ⊗ k̄, ℚ̄_ℓ) = 2` and `N₁ = 4` (as for `y² = x³ - x` over `𝔽₃`):
+/-- **The running example**: for a smooth proper geometrically connected curve `C₀` over a field
+`k₀` with `3` elements, with `dim H¹(C₀ ⊗ k̄, ℚ̄_ℓ) = 2` and `N₁ = 4` (as for `y² = x³ - x` over
+`𝔽₃`):
 
 * `Tr(F | H¹) = 0` and `det(1 - T F | H¹) = 1 + 3T²`;
 * `N₂ = 16` and `N₃ = 28`;
-* `Z(C₀, T) (1 - T)(1 - 3T) = 1 + 3T²`, i.e. `Z(C₀, T) = (1 + 3T²) / ((1 - T)(1 - 3T))`.
-
-The curve `y² = x³ - x` itself, and the count `N₁ = 4` of its `𝔽₃`-points, are not constructed
-in the library; the genus and `N₁ = 4` are hypotheses here. -/
+* `Z(C₀, T) (1 - T)(1 - 3T) = 1 + 3T²`, i.e. `Z(C₀, T) = (1 + 3T²) / ((1 - T)(1 - 3T))`. -/
 theorem runningExample_trace_formula (hq : Nat.card k₀ = 3)
     (hg : Module.finrank (PadicAlgCl l)
       ((WeilSheaf.adicConstant k₀ l C).cohomology 1).carrier = 2)
@@ -392,7 +383,7 @@ theorem projectiveLine_functional_equation_eval {K : Type*} [Field K] {q : K} (h
     ring
   rw [h, mul_inv, inv_inv, mul_comm]
 
-/-- Blueprint `example-functional-equation-projective-line`: for `X₀ = ℙ¹` over `k = 𝔽_q`,
+/-- **Functional equation of the projective line**: for `X₀ = ℙ¹` over `k = 𝔽_q`,
 `Z(ℙ¹, T) (1 - T)(1 - qT) = 1`, so `Z(ℙ¹, T)` is the rational function `1 / ((1 - T)(1 - qT))`,
 and this rational function satisfies `Z(ℙ¹, 1/(qT)) = q T² Z(ℙ¹, T)` at every `t ≠ 0` of every
 field of characteristic zero. -/

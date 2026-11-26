@@ -79,10 +79,7 @@ noncomputable def tensorObj (F G : WeilSheaf k₀ l X) (hF : F.IsLisse) : WeilSh
 
 /-- The constant Weil twist `F ⊗ 𝓑_b` of a Weil sheaf by a unit `b ∈ ℚ̄_ℓˣ`: the tensor product
 of `F` with the geometrically constant Weil line `𝓑_b` on which the geometric Frobenius acts
-by `b`. It is the underlying sheaf of `F` with the Weil structure `b • φ`, so that at a point with
-values in `𝔽_{qᵐ}` its local Frobenius is `bᵐ` times that of `F`, and every eigenvalue `α` of
-the local Frobenius of `F` at a closed point of degree `m` becomes `bᵐ α`.
-(blueprint: `proposition-twisting-weight-zero-adding-dual--2`) -/
+by `b`, i.e. the underlying sheaf of `F` with the Weil structure `b • φ`. -/
 noncomputable def constantTwist (F : WeilSheaf k₀ l X) (b : (PadicAlgCl l)ˣ) :
     WeilSheaf k₀ l X where
   obj := .mk F.obj.carrier (F.obj.str ≪≫ WeilCoefficients.smulIso b F.obj.carrier)

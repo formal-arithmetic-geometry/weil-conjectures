@@ -17,8 +17,21 @@ import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Integral compact-support constructibility
 
-Source: Bhatt--Scholze, Definition 6.7.6 and Lemma 6.7.7; Stacks Tag 0GL0
-(blueprint: lem-sf-integral-compact-support-constructible).
+Every derived limit of the finite-level compact-support tower is bounded constructible and
+derived complete.
+
+## Implementation details
+
+The proof applies integral direct-image constructibility to the proper map of the chosen
+compactification, after identifying the slice, proper/support and intrinsic towers. Their
+product isomorphisms intertwine the Roos endomorphisms, which identifies any chosen derived limit
+with the constructed proper image; no canonical comparison between arbitrary chosen derived
+limits is asserted.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 6.7.6 and Lemma 6.7.7.
+* Stacks Project, Tag 0GL0.
 -/
 
 @[expose] public section
@@ -92,30 +105,7 @@ private theorem compactSupport_complete_iff
     exact (sfDerivedComplete_iff_legacy l E T D hl K).mpr hK
 
 /-- Every derived limit of the specified finite-level compact-support tower is bounded
-constructible and derived complete, with one cohomological interval for all reductions.
-Source: Bhatt--Scholze, Definition 6.7.6 and Lemma 6.7.7; Stacks Tag 0GL0
-(blueprint: lem-sf-integral-compact-support-constructible).
-
-Proof:
-1. Give the compactification's middle scheme the field structure induced by its proper
-map to Y. It is finite type and Noetherian, its open part is quasi-compact, and l is
-invertible in its stalks.
-2. Obtain the normalized slice open operation, its strict completed reduction comparison,
-and the proper/support tower comparison. Identify its finite open functors and the two
-whole inverse systems with the intrinsic consumer presentations.
-3. Convert the input's derived completeness to the unrestricted comparison predicate.
-The completed open-reduction theorem gives completeness of its extension by zero.
-4. The evaluated reduction comparison identifies every reduction of that extension with
-intrinsic finite extension by zero. Finite open constructibility preserves the original
-common interval; isomorphism transport gives integral constructibility of the extension.
-5. Apply integral direct-image constructibility to the proper map. Its ordinary image has
-constructible reductions, derived completeness and one uniformly enlarged interval.
-6. Compose the ordinary-to-slice, slice proper-to-support, and support-to-intrinsic tower
-isomorphisms. Their product isomorphisms intertwine the Roos endomorphisms. Complete
-these to an isomorphism of rotated distinguished triangles and rotate back to identify
-any chosen derived limit with the constructed proper image.
-7. Transport integral constructibility through that object isomorphism. No canonical
-comparison between arbitrary chosen derived limits is asserted. -/
+constructible and derived complete, with one cohomological interval for all reductions. -/
 theorem sfIntegralCompactSupport_constructible
     (K₀ : Type u) [Field K₀] (_hl : IsUnit (l : K₀))
     [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))]

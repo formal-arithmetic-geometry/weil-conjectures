@@ -19,8 +19,7 @@ the preimage `C_Z = c₁⁻¹(Z)` into `Z`; in particular `c₁⁻¹(Z) ⊆ c₂
 Then the trace class of `u` is the sum of the trace classes of the open piece coefficient
 `u_U = [j]_! (u|_U)` on `K_U = j_! Lj^* K` and of the closed piece coefficient
 `u_Z = [i, i']_! u_{|Z}` on `K_Z = Ri_* Li^* K`, the pushforward of the restriction of `u` to `Z`
-(`ProEtale.CondensedRing.Correspondence.traceClass_eq_add_of_isClosedImmersion`, blueprint
-`proposition-additivity-trace-classes`, item 2):
+(`ProEtale.CondensedRing.Correspondence.traceClass_eq_add_of_isClosedImmersion`):
 ```
 Tr_c(u) = Tr_c(u_U) + Tr_c(u_Z).
 ```
@@ -243,10 +242,9 @@ lemma eq_zero_of_lowerShriek_support_of_isClosedImmersion
 
 variable [IsClosedImmersion i.left]
 
-/-- **Additivity of trace classes along an invariant open–closed decomposition** (blueprint
-`proposition-additivity-trace-classes`, item 2; Varshavsky, Prop. 1.5.10): let `i : Z ⟶ X` be a
-closed immersion with open complement `U`, and suppose that `c₂` maps `C_Z = c₁⁻¹(Z)` (the
-cartesian square `i' ≫ c₁ = c_{1Z} ≫ i`) into `Z`, `i' ≫ c₂ = c_{2Z} ≫ i`. Then
+/-- **Additivity of trace classes along an invariant open–closed decomposition** (Varshavsky, Prop.
+1.5.10): let `i : Z ⟶ X` be a closed immersion with open complement `U`, and suppose that `c₂` maps
+`C_Z = c₁⁻¹(Z)` (the cartesian square `i' ≫ c₁ = c_{1Z} ≫ i`) into `Z`, `i' ≫ c₂ = c_{2Z} ≫ i`. Then
 `Tr_c(u) = Tr_c(u_U) + Tr_c(u_Z)`, where `u_U` is the open piece coefficient on `j_! Lj^* K` and
 `u_Z = [i, i']_! u_{|Z}` the pushforward of the restriction `u_{|Z}` of `u` to the correspondence
 `c_Z` on `(Z, Li^* K)`. -/
@@ -279,8 +277,7 @@ lemma eq_zero_of_isZero_upperStar_shift {T : Dᵇc(X.left)⟦Profinite.padicAlgC
   rw [← cancel_mono e.inv, zero_comp]
   exact eq_zero_of_isZero_upperStar i hT _
 
-/-- **Uniqueness of the open piece coefficient** (blueprint
-`lemma-lift-correspondence-invariant-decomposition`): when `c₂` maps `C_Z = c₁⁻¹(Z)` into the
+/-- **Uniqueness of the open piece coefficient**: when `c₂` maps `C_Z = c₁⁻¹(Z)` into the
 closed complement `Z` of `U`, the open piece coefficient `u_U` is the only coefficient map on
 `K_U = j_! Lj^* K` compatible with `u` along the counit `ε : K_U ⟶ K`. -/
 theorem eq_openPieceCoeff_of_comp_map_counit (U : X.left.Opens)
@@ -319,8 +316,7 @@ theorem eq_openPieceCoeff_of_comp_map_counit (U : X.left.Opens)
       rw [Preadditive.sub_comp, hv, openPieceCoeff_comp_map_counit, sub_self])
   rw [hg, key g, zero_comp]
 
-/-- **Uniqueness of the closed piece coefficient** (blueprint
-`lemma-lift-correspondence-invariant-decomposition`, `lemma-closed-piece-pushforward`): when `c₂`
+/-- **Uniqueness of the closed piece coefficient**: when `c₂`
 maps `C_Z = c₁⁻¹(Z)` into `Z`, the closed piece coefficient `u_Z = [i, i']_! u_{|Z}` is the only
 coefficient map on `K_Z = Ri_* Li^* K` compatible with `u` along the unit `η : K ⟶ K_Z`. -/
 theorem eq_closedPieceCoeff_of_upperStar_map_unit_comp (U : X.left.Opens)

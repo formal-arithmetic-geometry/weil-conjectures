@@ -15,7 +15,13 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChan
 
 /-! # Scalar restriction and the derived pullback mate
 
-Source: Stacks Tags 0D6E and 0D6J, with the exact-pullback adjunction normalization.
+We show that the inverse mate of the fixed derived scalar comparison is the localization of
+the ordinary inverse mate.
+
+## References
+
+* [Stacks, Tag 0D6E], [Stacks, Tag 0D6J]
+* [Zheng, Lemma 4.10]
 -/
 
 @[expose] public noncomputable section
@@ -198,23 +204,7 @@ end MateModel
 
 /-- The inverse mate of the fixed derived scalar comparison is the localization
 of the ordinary inverse mate. This assertion involves one finite coefficient
-module complex, and no coefficient system or evaluation transition.
-Source: Stacks 0D6E and 0D6J; Zheng Lemma 4.10
-(blueprint: lem-sf-integral-scalar-pullback-mate-normalization).
-
-Proof: apply the derived adjunction Hom bijection to the desired equation.
-The exact-localization factor and the right-derived unit express the transpose
-of a cochain map as the localization of its ordinary transpose followed by
-that unit. This follows from derivedη_fac_app at the homotopy quotient.
-The ordinary inverse-mate unit identity computes its transpose. The derived
-inverse-mate unit identity and naturality move the low-level localization
-factor past the specified derived direct-image comparison. Its all-complex
-unit equation is compactSupportScalarDirectNormalization, which was proved
-using K-injective resolutions without asserting that scalar restriction
-preserves K-injectivity. Finally, naturality of the restriction localization
-factor identifies the two transposes. Injectivity gives the result. The
-hypotheses hr₀ and hr transport the equal quotient-restriction presentations.
-Zero complexes and n = 0 require no separate hypotheses. -/
+module complex, and no coefficient system or evaluation transition. -/
 theorem integralScalarPullback_mateNormalization {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (r₀ : normalizedDVRModuleRes l E X (Nat.le_succ n) ⋙
         proEtaleConstantModuleDirectImage f (Padic.coefficientExtensionRing l E (n + 2)) ≅

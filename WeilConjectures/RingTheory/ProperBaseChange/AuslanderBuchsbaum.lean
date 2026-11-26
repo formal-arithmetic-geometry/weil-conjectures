@@ -27,8 +27,13 @@ import Mathlib.CategoryTheory.Abelian.Projective.Resolution
 /-!
 # The Auslander–Buchsbaum depth formula
 
-Source: Stacks Project, Algebra, Tag 090V, proposition-Auslander-Buchsbaum
-(blueprint: lem-weil-pbc-auslander-buchsbaum).
+Auxiliary results for the Auslander–Buchsbaum formula
+`depth M + pd M = depth R` for finite modules of finite projective dimension over a Noetherian
+local ring.
+
+## References
+
+* [Stacks, Tag 090V]
 -/
 
 -- After pruning, this module only keeps private declarations.

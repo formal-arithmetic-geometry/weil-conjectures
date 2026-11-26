@@ -12,13 +12,12 @@ public import WeilConjectures.TraceFormula.Specialization.DefectLocal
 
 # Generic vanishing of the defect near the generic points of the centre
 
-Let `X` be a separated `k`-scheme of finite type, `Z = V(I) ⊆ X` a closed subscheme and
-`g : V ⟶ X` an open immersion such that `Z ∩ V` is dense in `Z`, i.e. `V` contains every generic
-point of `Z`. If the defect `C_{V, Z ∩ V}(g^* L)` vanishes generically on `Z ∩ V`, then
-`C_{X,Z}(L)` vanishes generically on `Z`
-(`ProEtale.CondensedRing.genericallyVanishingDefect_of_isOpenImmersion`). This is the reduction
-"near a generic point `ζ` of `Z`" in the proof of blueprint
-`lemma-vanishing-generic-points-principal-divisor--1`.
+Let `X` be a separated `k`-scheme of finite type, `Z = V(I) ⊆ X` a closed subscheme and `g : V ⟶ X`
+an open immersion such that `Z ∩ V` is dense in `Z`, i.e. `V` contains every generic point of `Z`.
+If the defect `C_{V, Z ∩ V}(g^* L)` vanishes generically on `Z ∩ V`, then `C_{X,Z}(L)` vanishes
+generically on `Z` (`ProEtale.CondensedRing.genericallyVanishingDefect_of_isOpenImmersion`).
+
+## Implementation details
 
 The proof uses the smooth exchange for the defect along `g`
 (`ProEtale.CondensedRing.nonempty_specializationDefect_upperStar_iso`) and the identification of

@@ -18,11 +18,27 @@ import WeilConjectures.SmoothPurity.CompactSupportCondensedRealization.CompactSu
 import WeilConjectures.CategoryTheory.Localization.ResolutionNormalizedComparison
 import WeilConjectures.SmoothPurity.CompactSupportCondensedRealization.CoefficientRestrictionLimitAcyclicity
 
-/-! # SemilinearCompactSupportCoefficientTransport
+/-! # Coefficient transport for semilinear compact-support systems
 
-Source: blueprint theorem-smooth-purity-all-admissible-coefficients, Steps 2--3; the compact-support
-realization prerequisite, proof Steps 2--3 and 8--11 (agent-formulated constructions).
-(blueprint: def-pur-semilinear-compact-support-coefficient-transport). -/
+For a finite extension `i : E → F` of `ℚ_[l]`-coefficient fields, this file compares ordinary
+and derived inverse limits of strict coefficient systems with restriction along the completed
+coefficient inclusion, and defines the induced reduction/scalar balancing isomorphism
+`reductionScalar`.
+
+## Implementation details
+
+The derived comparison `limitRestriction` is characterized by the universal normalization
+equation `IsLimitRestrictionNormalized` on whole complexes rather than by evaluated derived
+arrows. It is constructed on functorial K-injective resolutions, where both universal limit units
+are invertible by restricted system acyclicity; scalar restriction need not preserve K-injectives.
+The strict tower comparison `restrictionTower` is the identity on underlying sections and uses no
+flatness of the finite quotients.
+
+## References
+
+* Zheng, 4.1.
+* Stacks Project, Tags 0941, 03DA, 06YY, 0A07, 0D6E.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -66,9 +82,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E]
 
 attribute [local irreducible] coefficientSequenceRestriction rightUnitApp rightUnit
 
-/-- The ordinary limit of a strict semilinear system after its actual coefficient
-restriction. Source: Zheng 4.1; blueprint proof Step 3
-(blueprint: def-pur-semilinear-compact-support-coefficient-transport). -/
+/-- The ordinary inverse limit of a strict semilinear system after coefficient
+restriction. -/
 def ordinarySystemLimit (W : Scheme.{u}) :
     coefficientSequenceModules.{u, u} l E W ⥤ scalarReductionSource.{u, u} l E W :=
   coefficientSequenceRestriction.{u, u} l E W ⋙
@@ -76,21 +91,15 @@ def ordinarySystemLimit (W : Scheme.{u}) :
       scalarReductionSource.{u, u} l E W)
 
 attribute [-instance] WeilConjectures.completedOrdinaryScalarExtension_additive in
-/-- Additivity of the actual strict-system limit.
-Source: Stacks 0941 (blueprint: def-pur-semilinear-compact-support-coefficient-transport).
-Proof: restriction of scalars is additive and limits in module sheaves are formed
-on the underlying additive sheaves. Thus the map of a sum of compatible sections
-is the sum of their limit maps. The universal projections detect this equation. -/
+/-- The ordinary strict-system limit is additive. -/
 @[instance] theorem ordinarySystemLimit_additive (W : Scheme.{u}) :
     (ordinarySystemLimit l E W).Additive := by
   have h := coefficientConstantTowerLimitAdditive l E W
   change (coefficientSequenceRestriction l E W ⋙ lim).Additive
   infer_instance
 
-/-- The natural comparison from an ordinary limit on complexes to the specified total
-limit: the real limit derived unit followed by exact coefficient-restriction descent.
-Source: Stacks 0D6E; blueprint proof Step 3
-(blueprint: def-pur-semilinear-compact-support-coefficient-transport). -/
+/-- The comparison from the ordinary limit of a complex to the derived total limit: the
+derived limit unit followed by the comparison for exact coefficient restriction. -/
 def limitUnitApp (W : Scheme.{u}) (K : CochainComplex
     (coefficientSequenceModules.{u, u} l E W) ℤ) :=
   (rightUnit (lim : (ℕᵒᵖ ⥤ scalarReductionSource.{u, u} l E W) ⥤
@@ -99,11 +108,7 @@ def limitUnitApp (W : Scheme.{u}) (K : CochainComplex
     (coefficientConstantTowerLimit.{u, u} l E W).map
       ((coefficientSequenceRestriction.{u, u} l E W).mapDerivedCategoryFactors.inv.app K)
 
-/-- Naturality of the specified whole-system limit unit.
-Source: Stacks 0D6E; blueprint proof Step 3
-(blueprint: def-pur-semilinear-compact-support-coefficient-transport).
-Proof: naturality of the real right-derived limit unit and of exact restriction's
-localization comparison paste to this equation on all chain maps. -/
+/-- Naturality of `limitUnitApp` in chain maps. -/
 theorem limitUnitApp_naturality (W : Scheme.{u})
     {K L : CochainComplex (coefficientSequenceModules.{u, u} l E W) ℤ} (f : K ⟶ L) :
     DerivedCategory.Q.map (((ordinarySystemLimit l E W).mapHomologicalComplex (.up ℤ)).map f) ≫
@@ -113,9 +118,8 @@ theorem limitUnitApp_naturality (W : Scheme.{u})
   exact composed_rightUnit_naturality (coefficientSequenceRestriction l E W)
     (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W) f
 
-/-- The actual total-limit comparison on complexes, retained to normalize coefficient
-transport before evaluation. Source: blueprint proof Steps 3 and 10
-(blueprint: def-pur-semilinear-compact-support-coefficient-transport). -/
+/-- The natural transformation from the ordinary limit on complexes to the derived total
+limit. -/
 def limitUnit (W : Scheme.{u}) :
     (ordinarySystemLimit l E W).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
       DerivedCategory.Q ⋙ coefficientSequenceLimit.{u, u} l E W where
@@ -131,9 +135,7 @@ variable (l : ℕ) [Fact l.Prime] (E F : Type u) [NormedField E] [NormedField F]
   [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] F]
   (i : E →ₐ[ℚ_[l]] F)
 
-/-- Actual restriction along the residue-normalized completed coefficient inclusion.
-Source: blueprint proof Steps 7--11
-(blueprint: def-pur-semilinear-compact-support-coefficient-transport). -/
+/-- Restriction of scalars along the completed coefficient inclusion. -/
 abbrev completedRestriction (W : Scheme.{u}) :=
   pbcRestrict (completedCoefficientMap l E F i W)
 
@@ -358,14 +360,9 @@ private theorem restrictionTower_level (W : Scheme.{u}) (n : ℕ) :
 set_option maxHeartbeats 200000 in
 -- Assemble the level comparisons with the sectionwise transition formulas.
 attribute [-instance] WeilConjectures.completedOrdinaryScalarExtension_additive in
-/-- Restriction after forgetting a semilinear system equals termwise completed scalar
-restriction, by the identity on underlying sections. This retains the strict diagram.
-Source: blueprint proof Step 10
-(blueprint: def-pur-semilinear-compact-support-coefficient-transport).
-Proof: the completed inclusion followed by a target finite projection equals the
-source finite projection followed by the same-index quotient inclusion. Thus the two
-restricted coefficient actions agree. Identity section maps commute with all index
-arrows; sectionwise faithfulness proves uniqueness. No quotient flatness is used. -/
+/-- There is a unique isomorphism between system restriction followed by passage to the
+underlying tower and the underlying tower followed by termwise completed restriction, which is
+the identity on underlying sections. -/
 theorem restrictionTower_existsUnique (W : Scheme.{u}) :
     ∃! d : systemRestriction l E F i W ⋙ coefficientSequenceRestriction.{u, u} l E W ≅
         coefficientSequenceRestriction.{u, u} l F W ⋙
@@ -432,9 +429,8 @@ theorem restrictionTower_existsUnique (W : Scheme.{u}) :
 
 end TowerComparisonProof
 
-/-- The uniquely section-normalized strict tower comparison.
-Source: blueprint proof Step 10
-(blueprint: def-pur-semilinear-compact-support-coefficient-transport). -/
+/-- The strict tower comparison of `restrictionTower_existsUnique`, the identity on
+sections. -/
 def restrictionTower (W : Scheme.{u}) :
     systemRestriction l E F i W ⋙ coefficientSequenceRestriction.{u, u} l E W ≅
       coefficientSequenceRestriction.{u, u} l F W ⋙
@@ -490,13 +486,9 @@ private theorem limit_comparison_existsUnique
   simpa only [Category.assoc] using (hd' M n).trans (hd M n).symm
 
 attribute [-instance] WeilConjectures.completedOrdinaryScalarExtension_additive in
-/-- The ordinary limit comparison is fixed by every actual strict-tower projection.
-Source: Stacks 0A07; blueprint proof Step 11
-(blueprint: def-pur-semilinear-compact-support-coefficient-transport).
-Proof: coefficient restriction creates limits, as it leaves the underlying abelian
-sheaf unchanged. Its projection cone, followed by restrictionTower inverse, is a
-limiting cone on the restricted strict system. The limit universal property supplies
-the displayed isomorphism and proves uniqueness from these projection equations. -/
+/-- There is a unique isomorphism between the ordinary limit followed by completed
+restriction and system restriction followed by the ordinary limit, compatible with the limit
+projections and `restrictionTower`. -/
 theorem ordinaryLimitRestriction_existsUnique (W : Scheme.{u}) :
     ∃! d : ordinarySystemLimit l F W ⋙ completedRestriction l E F i W ≅
         systemRestriction l E F i W ⋙ ordinarySystemLimit l E W,
@@ -517,20 +509,15 @@ theorem ordinaryLimitRestriction_existsUnique (W : Scheme.{u}) :
     (restrictionTower l E F i W)
   exact ⟨d, fun M n ↦ hd M (op n), fun d' hd' ↦ hu d' (fun M n ↦ hd' M n.unop)⟩
 
-/-- The canonical ordinary limit/restriction comparison.
-Source: blueprint proof Step 11
-(blueprint: def-pur-semilinear-compact-support-coefficient-transport). -/
+/-- The canonical ordinary limit/restriction comparison of
+`ordinaryLimitRestriction_existsUnique`. -/
 def ordinaryLimitRestriction (W : Scheme.{u}) :
     ordinarySystemLimit l F W ⋙ completedRestriction l E F i W ≅
       systemRestriction l E F i W ⋙ ordinarySystemLimit l E W :=
   (ordinaryLimitRestriction_existsUnique l E F i W).exists.choose
 
 attribute [-instance] WeilConjectures.completedOrdinaryScalarExtension_additive in
-/-- Zero preservation of the displayed ordinary composite.
-Source: blueprint proof Steps 10--12; Stacks 03DA
-(blueprint: def-pur-semilinear-compact-support-coefficient-transport).
-Proof: Restriction is additive sectionwise and the sectionwise inverse limit preserves zero. Their
-composite therefore maps each zero arrow to zero. -/
+/-- System restriction followed by the ordinary limit preserves zero morphisms. -/
 @[instance] theorem systemRestrictionLimit_zero (W : Scheme.{u}) :
     (systemRestriction l E F i W ⋙ ordinarySystemLimit l E W).PreservesZeroMorphisms := by
   constructor
@@ -541,11 +528,7 @@ composite therefore maps each zero arrow to zero. -/
   simp only [Functor.map_zero]
 
 attribute [-instance] WeilConjectures.completedOrdinaryScalarExtension_additive in
-/-- Zero preservation of the opposite ordinary normalization composite.
-Source: blueprint proof Steps 10--12; Stacks 03DA
-(blueprint: def-pur-semilinear-compact-support-coefficient-transport).
-Proof: both factors are additive on section morphisms and map zero to zero.
-Their composite therefore maps the zero arrow between any two modules to zero. -/
+/-- The ordinary limit followed by completed restriction preserves zero morphisms. -/
 theorem systemLimitRestriction_zero (W : Scheme.{u}) :
     (ordinarySystemLimit l F W ⋙ completedRestriction l E F i W).PreservesZeroMorphisms := by
   constructor
@@ -556,9 +539,8 @@ theorem systemLimitRestriction_zero (W : Scheme.{u}) :
 
 attribute [local irreducible] ordinaryLimitRestriction
 
-/-- The exact universal normalization equation on whole complexes.
-Source: blueprint proof Steps 10--12; Stacks 06YY and 0D6E
-(blueprint: def-pur-semilinear-compact-support-coefficient-transport). -/
+/-- A derived limit/restriction comparison `d` is normalized if, on every complex, it is
+compatible with the limit units and the ordinary comparison `ordinaryLimitRestriction`. -/
 def IsLimitRestrictionNormalized (W : Scheme.{u})
     (d : coefficientSequenceLimit.{u, u} l F W ⋙
           (completedRestriction l E F i W).mapDerivedCategory ≅
@@ -580,17 +562,9 @@ def IsLimitRestrictionNormalized (W : Scheme.{u})
 
 open SheafOfModules
 
-/-- Derived limit/restriction is normalized by the real universal comparison on whole
-complexes, not selected by evaluated derived arrows.
-Source: Stacks 0D6E and 0A07; blueprint proof Step 11
-(blueprint: def-pur-semilinear-compact-support-coefficient-transport).
-Proof: form the two actual universal-unit transformations from the ordinary limit
-square. On functorial K-injective system resolutions both are invertible, by restricted
-system acyclicity for the target projection cone and for its composite with the completed
-coefficient map. Fully faithful precomposition with derived localization descends their
-comparison. Naturality along the resolution map proves the displayed normalization on
-all complexes, and cancellation on resolutions proves uniqueness. Scalar restriction
-need not preserve K-injectives. -/
+/-- There is a unique isomorphism between the derived limit followed by derived completed
+restriction and derived system restriction followed by the derived limit satisfying
+`IsLimitRestrictionNormalized`. -/
 theorem limitRestriction_existsUnique (W : Scheme.{u}) :
     ∃! d : coefficientSequenceLimit.{u, u} l F W ⋙
           (completedRestriction l E F i W).mapDerivedCategory ≅
@@ -657,9 +631,8 @@ theorem limitRestriction_existsUnique (W : Scheme.{u}) :
     O S T U κ α β hα hβ
   exact ⟨d, hd, fun e he ↦ huniq e he⟩
 
-/-- The normalized whole-system derived limit comparison.
-Source: blueprint proof Step 11
-(blueprint: def-pur-semilinear-compact-support-coefficient-transport). -/
+/-- The normalized derived limit/restriction comparison of
+`limitRestriction_existsUnique`. -/
 def limitRestriction (W : Scheme.{u}) :
     coefficientSequenceLimit.{u, u} l F W ⋙
         (completedRestriction l E F i W).mapDerivedCategory ≅
@@ -668,11 +641,8 @@ def limitRestriction (W : Scheme.{u}) :
 
 attribute [local semireducible] scalarSystemMap
 
-/-- Reduction/scalar balancing is the conjugate of the specified limit restriction
-square under the actual scalar and reduction adjunctions. This defines the comparison
-on the whole derived ringed sequence site.
-Source: blueprint proof Steps 10--11
-(blueprint: def-pur-semilinear-compact-support-coefficient-transport). -/
+/-- The reduction/scalar balancing isomorphism, the conjugate of `limitRestriction` under
+the scalar-extension and reduction adjunctions. -/
 def reductionScalar (W : Scheme.{u})
     (RE : CoefficientDerivedSystemCalculus.{u, u} l E W)
     (RF : CoefficientDerivedSystemCalculus.{u, u} l F W) :

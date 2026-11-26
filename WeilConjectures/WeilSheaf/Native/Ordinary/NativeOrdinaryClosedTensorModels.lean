@@ -12,8 +12,18 @@ import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryRepresentativeCur
 
 /-! # Ordinary tensor on prescribed product-Hom representatives
 
-Source: Stacks 06YS, 08J9 and 0A97; native tensor transport, ordinary part of step 1
-(blueprint: lem-sf-native-ordinary-closed-tensor-models).
+## Implementation details
+
+The one-K-flat models and signed symmetry come from the balanced native tensor comparison and the
+canonical localization tensorator (`native_ordinary_tensor_representatives`). For the Hom part,
+the normalized ringed tensor-Hom calculation is transported to the specified product-total
+representatives; the row-sign change `(-1)^(np)` and the reversed tensor order give unsigned
+degree-zero uncurrying (`native_ordinary_representative_currying`), and
+`Adjunction.mkOfHomEquiv` constructs the adjunctions.
+
+## References
+
+* Stacks Project, Tags 06YS, 08J9 and 0A97.
 -/
 
 @[expose] public section
@@ -76,25 +86,7 @@ private theorem closed_of_natural_currying
 
 /-- The ordinary closed tensor can be normalized against any specified natural
 product-total Hom representatives. This construction involves no Weil structure
-or forgetful comparison.
-
-Source: Stacks 06YS, 08J9 and 0A97; ordinary part of step 1 of
-lem-sf-weil-native-tensor-transport
-(blueprint: lem-sf-native-ordinary-closed-tensor-models).
-
-Proof: construct the one-K-flat models and signed symmetry directly from the
-balanced native tensor comparison and the canonical localization tensorator.
-For the Hom part, transport the normalized ringed tensor-Hom calculation to the
-specified product-total representatives R. The row-sign change (-1)^(np) and
-the reversed tensor order give unsigned degree-zero uncurrying.
-The tensor part is isolated as native_ordinary_tensor_representatives and the
-Hom-set calculation as native_ordinary_representative_currying. From its natural
-bijections, Adjunction.mkOfHomEquiv constructs the adjunctions. Applying inverse
-currying naturality twice to identity maps proves evaluation_naturality in the
-Hom source. Its transpose is the supplied bijection, so the representative
-uncurrying equation and the tensor braiding square give NativeOrdinaryTensorModels.
-These constructions apply also to zero complexes and to the empty scheme;
-no boundedness, constructibility or finite-type assumption is used. -/
+or forgetful comparison. -/
 theorem native_ordinary_closed_tensor_models
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (H : (DerivedCategory (ProEtale.AdicSheaf l Y))ᵒᵖ ×

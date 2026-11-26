@@ -35,8 +35,9 @@ import all WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientsS
 
 /-! # Derived quotient reduction of a flat line
 
-Source: Stacks 06YY and 07A4; definition-tate-twists--10, integral finite-level step.
-(blueprint: lem-weil-flat-line-derived-reduction).
+## References
+
+* Stacks Project, Tags 06YY and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -97,24 +98,7 @@ private theorem derived_tensor_identification
     (HomologicalComplex.quasiIso A (.up ℤ)) _ _ _ _ c⟩
 
 /-- Derived quotient extension computes a line in degree zero and commutes with
-exact tensor by that line, after any specified ordinary reduction identification.
-Source: Stacks 06YY and 07A4; definition-tate-twists--10, integral finite-level step.
-(blueprint: lem-weil-flat-line-derived-reduction).
-
-Proof: a locally free rank-one sheaf is flat, so its degree-zero single complex is
-K-flat. The universal scalar-extension counit on this complex is invertible; compose
-it with the single-complex comparison and the specified ordinary isomorphism b.
-For the functor comparison, resolve an arbitrary complex by a flat-term K-flat
-complex P. Tensor by L preserves K-flatness: tensor an acyclic complex with P first,
-then apply exact tensor by L, using associativity of total tensor and the fact that
-L is in degree zero. Base extension preserves K-flat flat-term complexes. The
-termwise balanced isomorphism sends a tensor (x tensor y) to
-(a tensor x) tensor b(1 tensor y); its inverse uses b inverse and multiplies the
-quotient coefficients. The two maps respect balanced relations, restrictions, and
-differentials. They are mutually inverse and natural in P. The K-flat scalar counits
-and exact tensor factorization maps descend this natural isomorphism through
-localization at quasi-isomorphisms. Every object has a K-flat resolution, so this
-gives the natural isomorphism on the full unbounded derived categories. -/
+exact tensor by that line, after any specified ordinary reduction identification. -/
 theorem flatLineDerivedReduction
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (S : Scheme.{u}) (n : ℕ)

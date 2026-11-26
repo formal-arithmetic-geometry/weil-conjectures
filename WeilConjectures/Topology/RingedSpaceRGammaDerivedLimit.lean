@@ -21,8 +21,19 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 /-!
 # Cohomology over an open and derived inverse limits
 
-Source: literature/stacks-project/cohomology.tex, Tag 0D60, label
-lemma-RGamma-commutes-with-Rlim (blueprint: lem-pc-ringed-space-rgamma-derived-limit).
+Derived sections of modules over an open preserve Roos triangles and satisfy the Milnor short
+exact sequence.
+
+## Implementation details
+
+The derived product of a tower is represented by the termwise product of K-injective resolutions;
+sections identify it with the product of the sections complexes, and products of abelian groups
+are exact. The triangulated functor `RΓ(U, -)` then sends the Roos triangle to the target Roos
+triangle, and `milnor_shortExact` applies to the image tower.
+
+## References
+
+* [Stacks Project, Tags 0D60 and 08U1](https://stacks.math.columbia.edu/tag/0D60)
 -/
 
 @[expose] public section
@@ -196,33 +207,7 @@ private theorem map_isDerivedLimitTriangle_of_preservesProduct
 
 /-- Derived sections over an open preserve Roos triangles and satisfy the Milnor
 short exact sequence.  The functor `RΓ(U,-)` is represented by K-injective
-resolutions of complexes of modules, via `openModuleDerivedSections`.
-Source: literature/stacks-project/cohomology.tex, Tag 0D60, label
-lemma-RGamma-commutes-with-Rlim (blueprint: lem-pc-ringed-space-rgamma-derived-limit).
-
-Proof, following Tag 0D60:
-1. The site of opens is small. K-injective resolutions exist by
-   `prop-pur-kinjective-resolutions-exist`, and sections preserve limits by
-   `situation-conventions`. The right derived functor
-   is triangulated (`lem-pc-right-derived-functor-triangulated`). Products exist
-   by the generic K-injective product construction and
-   `lemma-reduction-derived-nakayama`, using exact products in abelian groups
-   (`lem-pc-abelian-groups-exact-products`).
-2. Resolve each tower term by a K-injective complex. Its termwise product is
-   K-injective and represents the derived product
-   (`lem-pc-ringed-space-product-kinjective`). Sections identify it with the
-   product of the sections complexes; exact products of abelian groups identify
-   this with the target derived product (`lemma-reduction-derived-nakayama`).
-   The projection equations characterize the comparison. The triangulated
-   functor sends the Roos triangle to the target Roos triangle
-   by a triangle isomorphism. Its middle square follows after every product projection
-   by functoriality and additivity (`def-weil-derived-limit`).
-3. Apply `milnor_shortExact` (`lem-pc-derived-limit-milnor-sequence`) to the
-   image tower and its specified Roos triangle. Its right-map projection equations
-   become the claimed equations using the comparison projection equations and
-   functoriality. The association of the three composed functors is normalized
-   explicitly when checking these equations.
--/
+resolutions of complexes of modules, via `openModuleDerivedSections`. -/
 theorem rgamma_derivedLimit (X : RingedSpace.{u}) (U : TopologicalSpace.Opens X)
     [HasDerivedCategory.{v} (SheafOfModules.{u} (moduleRings X))]
     [HasDerivedCategory.{w} AddCommGrpCat.{u}]

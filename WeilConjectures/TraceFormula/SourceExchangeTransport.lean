@@ -15,8 +15,7 @@ For a proper morphism `f : X ⟶ Y`, `q = f × f` and `K' = Rf_* K`, the *transp
 `Rp₁'_! (Lp₂'^* K' ⊗ Rq_* Z) ⟶ Rf_* Rp₁_! (Lp₂^* K ⊗ Z)`, natural in `Z`
 (`ProEtale.CondensedRing.classTransport`), defines the transport map
 `Φ : Rq_* RHom(Lp₂^* K, Rp₁^! K) ⟶ RHom(Lp₂'^* K', Rp₁'^! K')`
-(`ProEtale.CondensedRing.classTransportMap`, blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1`, Step 1). Its test maps are computed by
+(`ProEtale.CondensedRing.classTransportMap`). Its test maps are computed by
 `ProEtale.CondensedRing.classTest_map_comp_classTransportMap`.
 
 -/
@@ -86,8 +85,7 @@ noncomputable def classTransport :
       (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom ≫
     (Functor.associator _ _ _).hom
 
-/-- The *transport map* `Φ : Rq_* RHom(Lp₂^* K, Rp₁^! K) ⟶ RHom(Lp₂'^* K', Rp₁'^! K')`
-(blueprint `theorem-proper-pushforward-lefschetz-verdier--1`, Step 1). -/
+/-- The *transport map* `Φ : Rq_* RHom(Lp₂^* K, Rp₁^! K) ⟶ RHom(Lp₂'^* K', Rp₁'^! K')`. -/
 noncomputable def classTransportMap :
     (boundedConstructibleLowerStar ℓ (prod.map f f)).obj
         ((ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj K)).obj
@@ -101,9 +99,8 @@ noncomputable def classTransportMap :
         (𝟙 _))))
 
 -- the compactly supported direct images are unfolded in the defeq checks
-/-- **The test maps of the transport map** (blueprint
-`theorem-proper-pushforward-lefschetz-verdier--1`, Step 1): `test(Rq_* ψ ≫ Φ) = Rf_* test(ψ)` read
-through the transport. -/
+/-- **The test maps of the transport map**: `test(Rq_* ψ ≫ Φ) = Rf_* test(ψ)` read through the
+transport. -/
 lemma classTest_map_comp_classTransportMap {Z : Dᵇc((X ⨯ X).left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (ψ : Z ⟶ (ihom ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ X ⟶ X)).obj K)).obj
       ((boundedConstructibleUpperShriek ℓ (prod.fst : X ⨯ X ⟶ X)).obj K)) :

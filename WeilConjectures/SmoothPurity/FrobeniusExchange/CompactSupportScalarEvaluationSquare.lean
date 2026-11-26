@@ -14,8 +14,20 @@ import all WeilConjectures.AlgebraicGeometry.FiniteCompactScalar.FiniteCompactSc
 
 /-! # Evaluation of the proper/open scalar word
 
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 0941, 06YY and 07A6;
-the compact-support paragraph of `proposition-six-operations-change-coefficients`.
+The compact-support system scalar mate, evaluated at a finite level, is the intrinsic finite
+scalar transpose of the compact-support restriction comparison.
+
+## Implementation details
+
+The proper factor is computed from the unit and counit equations of the evaluation
+adjunctions; the open factor uses the exact open adjunction. Scalar mate pasting identifies
+the composite of the two transposes with the intrinsic compact-support scalar transpose. All
+equations are checked on ordinary units and universal cochain counits before localization.
+
+## References
+
+* W. Zheng, Construction 4.1 and Lemma 4.10
+* Stacks Project, Tags 0941, 06YY and 07A6
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +39,7 @@ namespace WeilConjectures.FrobeniusExchange
 open AlgebraicGeometry.Scheme.FiniteCompactScalar
 
 /-- Finite evaluation of compact support on an arbitrary derived system. Both
-factors are the specified direct-image and open-adjunction evaluation mates.
-Source: Zheng 4.10 (blueprint: lem-sf-compact-scalar-evaluation-square). -/
+factors are the specified direct-image and open-adjunction evaluation mates. -/
 def systemCompactEvaluation
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E]
@@ -236,35 +247,7 @@ private theorem systemCompactScalar_evaluation_of_factors
 /-- The evaluated system scalar word is the intrinsic finite scalar transpose,
 through scalar evaluation and the fixed proper/open evaluation maps. This is an
 identity of arrows for arbitrary systems, without constructibility, boundedness,
-Noetherian, completeness or cartesian-system hypotheses.
-
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 0941, 06YY, 07A6;
-`proposition-six-operations-change-coefficients`, compact-support paragraph, and step 3 of
-`lem-sf-compact-support-system-scalar-finite-invertible`.
-(blueprint: lem-sf-compact-scalar-evaluation-square).
-
-Proof: on the vertical sequence site use the compatible quotient ring maps
-induced by the embedding. The ScalarSystems evaluation comparison is the
-transpose of identity-on-sections restriction evaluation. Transport its source
-model to integralComparisonSequenceScalarModel using the unique isomorphism of
-universal cochain left-derived pairs. Transport each target model to the fixed
-pbcDerivedExtend in the same way. This gives the scalar evaluation isomorphisms
-s below, normalized on K-flat representatives by tensor evaluation.
-
-Evaluate the unit, pullback/scalar comparison, and counit defining
-systemDirectScalar. The unit and counit equations in AdjunctionEvaluation and
-SemilinearSections.evaluation_mate identify the resulting word with the finite
-proper scalar mate. For the open factor apply that calculation to the exact
-open adjunction; evaluation preserves its inverse because the open mate is an
-isomorphism. The resulting finite open map is the transpose of sfOpenRestriction.
-Scalar mate pasting identifies the composite of these two transposes with the
-transpose of sfCompactSupportRestriction, namely intrinsicCompactScalar.
-Naturality moves the two scalar evaluation comparisons to the ends and gives
-exactly the displayed equality, using the specified systemCompactEvaluation.
-All equations are checked on the same ordinary units and universal cochain
-counits before localization; no equality is inferred from derived evaluations.
-The construction includes n=0, zero complexes, empty schemes and identity
-embeddings, and does not require any finite quotient map to be flat. -/
+Noetherian, completeness or cartesian-system hypotheses. -/
 theorem systemCompactScalar_evaluation_square
     (l : ℕ) [Fact l.Prime]
     (E L : Type u) [Field E] [Field L]

@@ -15,8 +15,19 @@ import WeilConjectures.RingTheory.LocalTensorQuotientComponentMap
 /-!
 # Detection of tensor quotients modulo the extended base ideal
 
-Source: Stacks Project, Tag 07N9, quotient-product argument.
-(blueprint: lem-weil-pbc-local-tensor-quotient-base-ideal-detection)
+An element of `(R_p/m^n) ⊗_R S` vanishes as soon as its images in all `S_q/m^n S_q`, for primes
+`q` of `S` over `p`, vanish.
+
+## Implementation details
+
+For `S` finite over `R`, the ring `C = B/m^n B` with `B = R_p ⊗_R S` is Artinian, hence the
+product of its localizations, which are the rings `S_q/m^n S_q`. If there are no primes over
+`p`, then `C` is the zero ring.
+
+## References
+
+* [Stacks, Tag 07N9] (quotient-product argument)
+* [Stacks, Tags 00JA, 00CT]
 -/
 
 @[expose] public section
@@ -25,23 +36,7 @@ universe u v w
 open scoped TensorProduct
 namespace AdicCompletion
 
-/-- Local membership in the extended base-ideal power detects a tensor quotient.
-Source: Stacks Project, Tag 07N9, with Tags 00JA and 00CT.
-(blueprint: lem-weil-pbc-local-tensor-quotient-base-ideal-detection)
-
-Proof: Set A = R_p, m = its maximal ideal, and B = A tensor_R S. Localization and
-finite base change make B a finite Noetherian A-algebra. For n > 0, A/m^n is
-Artinian: its maximal ideal is nilpotent and its successive quotients are finite
-dimensional over A/m. Hence C = B/m^n B is Artinian. Integral-extension and
-localization prime correspondence identify its primes with Q = p.primesOver S.
-The product decomposition of an Artinian ring into its localizations identifies
-C with the product of S_q/(m^n)S_q for q in Q; localization commutes with quotient.
-Under this identification the class of a pure tensor r tensor s has q-component
-the class of phi_q(r)*(s/1). The assumed membership kills the finite sum in every
-component, so injectivity of the product map kills its class in C. The tensor
-quotient equivalence identifies C with (A/m^n) tensor_R S, with exactly the pure
-tensor formula in the conclusion. If Q is empty, C has no prime ideals and is
-the zero ring, so this reasoning still applies. The empty sum is zero. -/
+/-- Local membership in the extended base-ideal power detects a tensor quotient. -/
 theorem local_tensor_quotient_base_ideal_detection
     (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime]

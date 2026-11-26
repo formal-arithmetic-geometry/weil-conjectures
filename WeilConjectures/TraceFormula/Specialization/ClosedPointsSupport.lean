@@ -14,18 +14,21 @@ public import WeilConjectures.TraceFormula.Specialization.PointsSupport
 
 # Complexes supported at finitely many closed points
 
-Let `V` be a separated scheme of finite type over a separably closed field `k` and `S` a finite
-set of closed points of `V`. A bounded constructible `ℚ̄_ℓ`-complex `C` on `V` whose restriction to
+Let `V` be a separated scheme of finite type over a separably closed field `k` and `S` a finite set
+of closed points of `V`. A bounded constructible `ℚ̄_ℓ`-complex `C` on `V` whose restriction to
 `V ∖ S` vanishes, and whose global sections `RΓ(V, C)` vanish, is zero
-(`ProEtale.CondensedRing.isZero_of_isZero_upperStar_finsetComplOpens`, blueprint
-`lemma-finite-support-global-sections--1`).
+(`ProEtale.CondensedRing.isZero_of_isZero_upperStar_finsetComplOpens`).
 
 The closed points need not be rational: `k` need not be perfect. This generalises
-`WeilConjectures.TraceFormula.Specialization.PointsSupport` (rational points). The residue field
-`κ(z)` of a closed point is finite, hence purely inseparable, over `k`, so it is separably closed
-(`ProEtale.CondensedRing.isSepClosed_of_locallyOfFiniteType`). Every bounded constructible complex
-on `Spec κ(z)` is then a finite direct sum of shifts of the unit, and `RΓ(Spec κ(z), -)` detects
-vanishing (`ProEtale.CondensedRing.isZero_of_isZero_lowerStar_toPoint_of_isSepClosed`): a summand
+`WeilConjectures.TraceFormula.Specialization.PointsSupport` (rational points).
+
+## Implementation details
+
+The residue field `κ(z)` of a closed point is finite, hence purely inseparable, over `k`, so it is
+separably closed (`ProEtale.CondensedRing.isSepClosed_of_locallyOfFiniteType`). Every bounded
+constructible complex on `Spec κ(z)` is then a finite direct sum of shifts of the unit, and
+`RΓ(Spec κ(z), -)` detects vanishing
+(`ProEtale.CondensedRing.isZero_of_isZero_lowerStar_toPoint_of_isSepClosed`): a summand
 `𝟙⟦d⟧ = La^* 𝟙⟦d⟧ ⟶ E` is adjoint to a morphism into `Ra_* E = 0`. The open–closed triangle at a
 closed point then splits as for rational points, and one concludes by induction on `S`.
 
@@ -120,11 +123,9 @@ section Point
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
 
-/-- **Global sections detect vanishing on a separably closed point**: let `P` be a `k`-scheme
-of finite type whose underlying scheme is `Spec K` for a separably closed field `K`. A bounded
-constructible complex `E` on `P` with `RΓ(P, E) = 0` vanishes. Indeed `E` is a finite direct sum of
-shifts `𝟙⟦d⟧` of the unit, and every morphism `𝟙⟦d⟧ = La^* 𝟙⟦d⟧ ⟶ E` is adjoint to a morphism
-`𝟙⟦d⟧ ⟶ Ra_* E = 0`. -/
+/-- **Global sections detect vanishing on a separably closed point**: let `P` be a `k`-scheme of
+finite type whose underlying scheme is `Spec K` for a separably closed field `K`. A bounded
+constructible complex `E` on `P` with `RΓ(P, E) = 0` vanishes. -/
 theorem isZero_of_isZero_lowerStar_toPoint_of_isSepClosed {P : Over (Spec (.of k))}
     [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom]
     (K : Type u) [Field K] [IsSepClosed K] [Fact (ringChar K).Prime] [Fact (ringChar K ≠ ℓ)]
@@ -475,11 +476,10 @@ theorem isZero_of_isZero_upperStar_finsetComplOpens_of_isZero_lowerStar (S : Fin
           not_or] at hy ⊢
         exact ⟨h, hy⟩
 
-/-- **Global sections detect complexes supported at finitely many closed points** (blueprint
-`lemma-finite-support-global-sections--1`): let `X` be a separated scheme of finite type over a
-separably closed field `k` and `S` a finite set of closed points of `X`. A bounded constructible
-complex `C` on `X` whose restriction to `X ∖ S` vanishes and whose global sections `RΓ(X, C)`
-vanish is zero. The points of `S` need not be rational. -/
+/-- **Global sections detect complexes supported at finitely many closed points**: let `X` be a
+separated scheme of finite type over a separably closed field `k` and `S` a finite set of closed
+points of `X`. A bounded constructible complex `C` on `X` whose restriction to `X ∖ S` vanishes and
+whose global sections `RΓ(X, C)` vanish is zero. The points of `S` need not be rational. -/
 theorem isZero_of_isZero_upperStar_finsetComplOpens (S : Finset X.left)
     (hS : ∀ x ∈ S, IsClosed {x})
     (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})

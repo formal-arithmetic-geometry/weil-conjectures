@@ -24,11 +24,11 @@ of `Ex_!` with the units of `Lf^* ⊣ Rf_!` for proper `f`.
 
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz`,
   `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert`: the
-  exchange of a pasted cartesian rectangle is the composite of the exchanges of the two squares
-  (blueprint `proposition-composition-base-change-rf-shriek`, item (2)).
+  exchange of a pasted cartesian rectangle is the composite of the exchanges of the two squares.
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isProper`: for
-  proper vertical maps, `Ex_!` is `Ex_*` through `Rf_! ≅ Rf_*` (blueprint
-  `def-exchange-projection`, the compactification `f = f ∘ 𝟙`).
+  proper vertical maps, `Ex_!` is `Ex_*` through `Rf_! ≅ Rf_*` (the compactification `f = f ∘ 𝟙`).
+
+## Implementation details
 
 All three are deduced from the description of `Ex_!` through any compactification and its base
 change
@@ -101,8 +101,8 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz'
     (boundedConstructibleLowerShriekOfCompactificationBaseChange_paste_horiz ℓ _ _ _ _ _
       hi₂ hp₂ hi₁ hp₁)
 
-/-- **Horizontal pasting of `Ex_!`** (blueprint `proposition-composition-base-change-rf-shriek`,
-item (2)): for cartesian squares `g'₁ ≫ f₂ = f₁ ≫ g₁` and `g'₂ ≫ f = f₂ ≫ g₂`, the exchange of the
+/-- **Horizontal pasting of `Ex_!`**: for cartesian squares `g'₁ ≫ f₂ = f₁ ≫ g₁` and
+`g'₂ ≫ f = f₂ ≫ g₂`, the exchange of the
 outer rectangle is `L(g₁ ≫ g₂)^* Rf_! ≅ Lg₁^* Lg₂^* Rf_! ⟶ Lg₁^* Rf₂_! Lg'₂^* ⟶ Rf₁_! Lg'₁^* Lg'₂^*
 ≅ Rf₁_! L(g'₁ ≫ g'₂)^*`. -/
 theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz
@@ -126,8 +126,8 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_horiz
     Functor.associator_inv_app, Category.id_comp, Category.assoc] at h
   exact h
 
-/-- **Vertical pasting of `Ex_!`** (blueprint `proposition-composition-base-change-rf-shriek`, item
-(2)): for cartesian squares `h ≫ v₂ = v₁ ≫ k` and `k ≫ w₂ = w₁ ≫ l`, the exchange of the outer
+/-- **Vertical pasting of `Ex_!`**: for cartesian squares `h ≫ v₂ = v₁ ≫ k` and
+`k ≫ w₂ = w₁ ≫ l`, the exchange of the outer
 rectangle is `Ll^* R(v₂ ≫ w₂)_! ≅ Ll^* Rw₂_! Rv₂_! ⟶ Rw₁_! Lk^* Rv₂_! ⟶ Rw₁_! Rv₁_! Lh^*
 ≅ R(v₁ ≫ w₁)_! Lh^*`. -/
 theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert
@@ -189,8 +189,8 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isProper'
   rw [reassoc_of% hc]
   rw [boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsProper ℓ sq]
 
-/-- **`Ex_!` for proper vertical maps is `Ex_*`** (blueprint `def-exchange-projection`: `Ex_!` is
-represented by `Ex_*` for the compactification `f = f ∘ 𝟙` of a proper `f`): under the
+/-- **`Ex_!` for proper vertical maps is `Ex_*`** (`Ex_!` is represented by `Ex_*` for the
+compactification `f = f ∘ 𝟙` of a proper `f`): under the
 identifications `Rf_! ≅ Rf_*` and `Rf'_! ≅ Rf'_*`, the compact-support base change of a
 cartesian square with `f` and `f'` proper is the direct-image base change. -/
 theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isProper

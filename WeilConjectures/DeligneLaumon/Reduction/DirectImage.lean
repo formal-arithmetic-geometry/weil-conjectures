@@ -11,11 +11,11 @@ public import WeilConjectures.DeligneLaumon.Reduction.RelativeLineStep
 /-!
 # The Deligne–Laumon direct-image bound
 
-This file states the two main results of the blueprint section
-`chap-The-Deligne-Laumon-theorem-in-general`: for a separated finite-type morphism `f : X ⟶ Y` of
-schemes of finite type over `k₀ = 𝔽_q` and a constructible Weil sheaf `F` mixed of weights at most
-`w`, the sheaf `Rʳf₀!F` is mixed of weights at most `w + r` for every `r`; and the derived form,
-that `Rf₀!K` is mixed of weights at most `w` whenever the bounded constructible Weil complex `K` is.
+This file states the two main results of the Deligne–Laumon theorem in general: for a separated
+finite-type morphism `f : X ⟶ Y` of schemes of finite type over `k₀ = 𝔽_q` and a constructible
+Weil sheaf `F` mixed of weights at most `w`, the sheaf `Rʳf₀!F` is mixed of weights at most
+`w + r` for every `r`; and the derived form, that `Rf₀!K` is mixed of weights at most `w`
+whenever the bounded constructible Weil complex `K` is.
 
 ## Implementation notes
 
@@ -29,6 +29,14 @@ that `Rf₀!K` is mixed of weights at most `w` whenever the bounded constructibl
   affine-line projection is handled by the relative affine-line step
   `AlgebraicGeometry.hasDirectImageWeightBound_affineLine`; the composition lemma assembles them.
   Composing with immersions of the target avoids any stratification of the target.
+- For `AlgebraicGeometry.exists_hasDirectImageWeightBound_opensι_comp_of_isAffine`: factor the ring
+  map `A ⟶ B` of `g₀` as `A ↠ A' ↪ B` with `A'` a domain. Generic Noether normalization gives a
+  principal open `D(s)` of `Spec A'` over which `Spec B ⟶ Spec A'` factors as a finite morphism to
+  `𝔸ᵈ_{D(s)}` followed by `d` affine-line projections. The finite morphism and the immersion
+  `D(s) ⟶ Y` are quasi-finite, so the quasi-finite lemma, the relative affine-line step and the
+  composition lemma apply. `AlgebraicGeometry.exists_hasDirectImageWeightBound_opensι_comp` takes
+  an affine open `U₁` inside an irreducible open of `T` mapping into an affine open of `Y`; `U₁` is
+  integral, so the affine case applies.
 - For `AlgebraicGeometry.WeilComplex.IsMixedOfWeightsAtMost.derivedLowerShriek`: the finite
   hypercohomology spectral sequence `Rᵃf₀!𝓗ᵇ(K) ⇒ 𝓗ᵃ⁺ᵇ(Rf₀!K)`, whose left-hand term is mixed of
   weights at most `w + a + b` by the theorem above
@@ -40,8 +48,8 @@ that `Rf₀!K` is mixed of weights at most `w` whenever the bounded constructibl
   weights at most `w` is mixed of weights at most `w + r`.
 - `AlgebraicGeometry.exists_hasDirectImageWeightBound_opensι_comp`: the generic step of its
   Noetherian induction.
-- `AlgebraicGeometry.WeilComplex.IsMixedOfWeightsAtMost.derivedLowerShriek`: blueprint
-  `theorem-weights-rf-shriek--1`.
+- `AlgebraicGeometry.WeilComplex.IsMixedOfWeightsAtMost.derivedLowerShriek`: `Rf₀!` of a complex
+  mixed of weights at most `w` is mixed of weights at most `w`.
 
 ## References
 
@@ -73,15 +81,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 
 /-- Let `g₀ : T ⟶ Y₀` be a morphism of finite type from an integral affine scheme to an affine
 scheme, followed by an immersion `a : Y₀ ⟶ Y`. Then the direct-image weight assertion holds for
-`g₀ ≫ a` restricted to some nonempty affine open `V` of `T` (blueprint:
-`theorem-direct-image-mixed-sheaf--1`, the generic step on an integral affine source).
-
-Factor the ring map `A ⟶ B` of `g₀` as `A ↠ A' ↪ B` with `A'` a domain. Generic Noether
-normalization (`lemma-relative-noether-normalization-over-stratification`) gives a principal open
-`D(s)` of `Spec A'` over which `Spec B ⟶ Spec A'` factors as a finite morphism to `𝔸ᵈ_{D(s)}`
-followed by `d` affine-line projections. The finite morphism and the immersion `D(s) ⟶ Y` are
-quasi-finite, so the quasi-finite lemma, the relative affine-line step and the composition lemma
-apply. -/
+`g₀ ≫ a` restricted to some nonempty affine open `V` of `T`. -/
 theorem exists_hasDirectImageWeightBound_opensι_comp_of_isAffine {T Y₀ : Scheme.{u}}
     [T.Over (Spec (CommRingCat.of k₀))] [IsAffine T] [IsIntegral T] [IsAffine Y₀]
     (g₀ : T ⟶ Y₀) [LocallyOfFiniteType g₀] (a : Y₀ ⟶ Y) [IsImmersion a]
@@ -184,11 +184,8 @@ theorem exists_hasDirectImageWeightBound_opensι_comp_of_isAffine {T Y₀ : Sche
         (.of_locallyQuasiFinite c))))
 
 /-- Let `g : T ⟶ Y` be a separated morphism of finite type from a nonempty reduced `k₀`-scheme.
-Then the direct-image weight assertion holds for `g` restricted to some nonempty open `U` of `T`
-(blueprint: `theorem-direct-image-mixed-sheaf--1`, the generic step of the Noetherian induction).
-
-Take an affine open `U₁` inside an irreducible open of `T` and mapping into an affine open `W` of
-`Y`; `U₁` is integral, and `exists_hasDirectImageWeightBound_opensι_comp_of_isAffine` applies. -/
+Then the direct-image weight assertion holds for `g` restricted to some nonempty open `U` of `T`.
+-/
 theorem exists_hasDirectImageWeightBound_opensι_comp {T : Scheme.{u}}
     [T.Over (Spec (CommRingCat.of k₀))] [IsReduced T] [Nonempty T] (g : T ⟶ Y)
     [g.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated g] [LocallyOfFiniteType g]
@@ -252,12 +249,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 
 /-- For a separated finite-type morphism `f : X ⟶ Y` of schemes of finite type over `k₀ = 𝔽_q` and
 a constructible Weil sheaf `F` on `X` mixed of weights at most `w`, the sheaf `Rʳf₀!F` is mixed of
-weights at most `w + r`, for every `r`.
-
-Noetherian induction on the closed subsets of `X`: for a reduced closed subscheme `T` of `X`, the
-assertion holds for `T ⟶ Y` over a nonempty open `U` of `T`
-(`exists_hasDirectImageWeightBound_opensι_comp`) and, by induction, over the reduced complement of
-`U`; the open–closed reduction `lemma-weight-bounds-partitions--1` glues the two. -/
+weights at most `w + r`, for every `r`. -/
 theorem hasDirectImageWeightBound_over_finiteField (ι : PadicAlgCl l →+* ℂ) (f : X ⟶ Y)
     [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
@@ -320,8 +312,7 @@ theorem hasDirectImageWeightBound_over_finiteField (ι : PadicAlgCl l →+* ℂ)
 
 
 /-- If `K` is a bounded constructible Weil complex on `X` mixed of weights at most `w`, then
-`Rf₀!K` is mixed of weights at most `w` (blueprint: `theorem-weights-rf-shriek--1`,
-`theorem-weights-rf-shriek--1`). -/
+`Rf₀!K` is mixed of weights at most `w`. -/
 theorem WeilComplex.IsMixedOfWeightsAtMost.derivedLowerShriek
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] {ι : PadicAlgCl l →+* ℂ} {w : ℝ}
     {K : WeilComplex k₀ l X} (hK : K.IsMixedOfWeightsAtMost ι w) (f : X ⟶ Y)

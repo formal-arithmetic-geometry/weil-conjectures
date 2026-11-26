@@ -150,13 +150,13 @@ namespace WeilComplexTwoColimit
 
 variable [Fact (ringChar k₀ ≠ l)] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `definition-weil-structure`: `D^b_{c,W}(X, ℚ̄_ℓ) = 2-colim_E D^b_{c,W}(X, E)` is
-a pretriangulated category, the distinguished triangles being the triangles isomorphic to the
-images of distinguished triangles of a finite stage `D^b_{c,W}(X, E)`. -/
+/-- `D^b_{c,W}(X, ℚ̄_ℓ) = 2-colim_E D^b_{c,W}(X, E)` is a pretriangulated category, the
+distinguished triangles being the triangles isomorphic to the images of distinguished triangles
+of a finite stage `D^b_{c,W}(X, E)`. -/
 noncomputable instance pretriangulated : Pretriangulated (WeilComplexTwoColimit k₀ l X) :=
   StageSystem.PairCategory.pretriangulated (S := FieldWeilComplex.stageSystem (l := l) k₀ X)
 
-/-- Blueprint `definition-weil-structure`: `D^b_{c,W}(X, ℚ̄_ℓ)` is a triangulated category. -/
+/-- `D^b_{c,W}(X, ℚ̄_ℓ)` is a triangulated category. -/
 instance isTriangulated : IsTriangulated (WeilComplexTwoColimit k₀ l X) :=
   StageSystem.PairCategory.isTriangulated (S := FieldWeilComplex.stageSystem (l := l) k₀ X)
 
@@ -170,11 +170,7 @@ example (E : FiniteIntermediateField l) :
 
 `D^b_{c,W}(X, ℚ̄_ℓ) = 2-colim_E D^b_{c,W}(X, E)` (`AlgebraicGeometry.WeilComplexTwoColimit`) is
 idempotent complete, and the canonical functor into its Karoubi envelope is an exact
-equivalence: every stage `D^b_{c,W}(X, E)` is idempotent complete, an idempotent of the
-`2`-colimit is represented, and splits, at a finite stage
-(`CategoryTheory.StageSystem.PairCategory.isIdempotentComplete`), and the canonical functor of a
-pretriangulated category into its Karoubi envelope is triangulated
-(`CategoryTheory.Idempotents.toKaroubi.isTriangulated`). -/
+equivalence. -/
 theorem isIdempotentComplete_and_isEquivalence_toKaroubi_and_isTriangulated :
     IsIdempotentComplete (WeilComplexTwoColimit k₀ l X) ∧
       (Idempotents.toKaroubi (WeilComplexTwoColimit k₀ l X)).IsEquivalence ∧

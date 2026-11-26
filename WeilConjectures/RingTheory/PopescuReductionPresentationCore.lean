@@ -12,7 +12,17 @@ public import Mathlib.RingTheory.Ideal.Over
 public import Mathlib.RingTheory.Smooth.StandardSmooth
 import WeilConjectures.RingTheory.PopescuStandardReductionFactorCore
 
-/-! A reduced factorization through one standard smooth algebra. -/
+/-!
+# A reduced factorization through one standard smooth algebra
+
+If `Λ / IΛ` is a filtered colimit of standard smooth `R/I`-algebras, the reduction modulo `I` of
+a map from a finitely presented `R`-algebra to `Λ` factors through a standard smooth
+`R/I`-algebra.
+
+## References
+
+* [Stacks, Tag 07CK] (the finite-presentation factorization in the proof)
+-/
 
 @[expose] public section
 
@@ -44,12 +54,7 @@ noncomputable def reducedAlgHom
         obtain ⟨r, rfl⟩ := Ideal.Quotient.mk_surjective r
         simp [f] }
 
-/--
-The construction is the finite-presentation factorization in Tag 07CK. Apply the
-finite-presentation factorization criterion to the reduced map and retain the chosen
-standard smooth stage and its two factor maps.
-(blueprint: new-lem-popescu-reduction-factor)
--/
+/-- The reduction `A/IA → Λ/IΛ` of `φ` factors through a standard smooth `R/I`-algebra. -/
 theorem exists_popescu_reduction_factor
     (R : Type u) [CommRing R] (Λ : Type (max u v)) [CommRing Λ] [Algebra R Λ]
     (I : Ideal R)

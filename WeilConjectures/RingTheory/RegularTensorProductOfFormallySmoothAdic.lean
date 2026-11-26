@@ -13,8 +13,23 @@ import WeilConjectures.RingTheory.PurelyInseparableBaseChangeLocalRing
 import WeilConjectures.RingTheory.RegularLocalLocalization
 import WeilConjectures.RingTheory.RegularLocalOfFormallySmoothAdic
 
-/-! Intermediate regularity assertion for a purely inseparable base change.
-(blueprint: lem-weil-pbc-fs-adic-field-geometrically-regular-regular-base-change) -/
+/-!
+# Purely inseparable base change of a formally smooth adic local algebra
+
+A finite purely inseparable base change of a local algebra over a field, formally smooth for the
+maximal-ideal-adic topology, is regular.
+
+## Implementation details
+
+Formal smoothness is preserved by base change; the adic topology of the extended maximal ideal
+agrees with that of the unique maximal ideal, so Tag 07EI applies, and regularity follows by
+localizing at primes. The tensor-factor swap is handled by `Algebra.TensorProduct.comm`.
+
+## References
+
+* [Stacks, Tag 07EL] (steps 1–4 of the proof)
+* [Stacks, Tag 07EI]
+-/
 
 @[expose] public section
 
@@ -25,10 +40,7 @@ universe u v
 namespace Algebra
 
 /-- A finite purely inseparable base change of a formally smooth adic local algebra is regular.
-The proof follows Steps 1--4 of Tag 07EL: base-change formal smoothness, upgrade the adic
-topology from the extended maximal ideal to the unique maximal ideal, apply Tag 07EI, and
-localize at primes. The tensor-factor swap is handled by `Algebra.TensorProduct.comm`.
-(blueprint: lem-weil-pbc-fs-adic-field-geometrically-regular-regular-base-change) -/
+-/
 theorem isRegularRing_tensorProduct_of_formallySmoothAdic
     (k : Type u) (C : Type v) (k' : Type (max u v))
     [Field k] [CommRing C] [Algebra k C] [IsNoetherianRing C] [IsLocalRing C]

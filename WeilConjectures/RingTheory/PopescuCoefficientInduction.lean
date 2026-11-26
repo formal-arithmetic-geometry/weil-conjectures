@@ -21,8 +21,23 @@ import WeilConjectures.RingTheory.EssentiallySmoothComp
 /-!
 # Coefficient enlargement along fixed parameters
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07FJ, item-choose-deltai.
-(blueprint: lem-weil-pbc-popescu-coefficient-induction).
+Fixed polynomial parameters can be rescaled by units so that their `2N`-th powers lie in the
+singular ideal with coefficients in an enlarged Artinian coefficient solution, and the
+annihilator conditions hold in `Λ`.
+
+## Implementation details
+
+Induct on the parameters. Faithfully flat ideal contraction writes `π_i^N` in the singular ideal of
+the coefficient ring; clearing denominators and Ogoma's lemma give the rescaling factor, and
+Tag 07FI enlarges the coefficient ring to contain the needed powers. The span of the preceding
+powered parameters is unchanged (`prefix_span_update`). Finally
+`exists_essentiallySmooth_small_local_model` shrinks the coefficient ring into `Type (max u v)`.
+No polynomial reindexing or polynomial kernel conclusion is asserted.
+
+## References
+
+* [Stacks, Tag 07FJ]
+* [Stacks, Tag 07FI]
 -/
 
 @[expose] public section
@@ -47,52 +62,8 @@ private theorem prefix_span_update
     exact ⟨k, hk, by simpa only [Function.update_of_ne hki] using hy⟩
 
 set_option linter.unusedVariables false in
-/-- Rescale fixed polynomial parameters in Lambda while retaining an Artinian coefficient
-solution. Source: Stacks Project, Smoothing Ring Maps, Lemma 07FJ,
-`item-choose-deltai`, together with localization and the coefficient descent in item 25.
-(blueprint: lem-weil-pbc-popescu-coefficient-induction).
-
-Proof: A flat local map of local rings is faithfully flat and injective. Lift the
-finite presentation generators of A to D0 using hinc0. Injectivity checks the relations
-and their scalar compatibility, so they give a k-algebra map A to D0. Set n=N+d(8c).
-Induct on i, retaining a local essentially smooth coefficient enlargement and all
-previous rescaling factors, coefficients, and Lambda kernel equalities. The image of
-uP_i^N lies in the extended singular ideal by hpower. Faithful-flat ideal contraction
-writes its residue as sum a_j d_j in the current coefficient ring. Lift d_j to L.
-The error lies in m_L^n, contained in m_L^(n-N) times the singular ideal. Thus write
-the error as sum a_j c'_j with c'_j in m_L^(n-N). Multiplication by uP_i^N kills
-these corrections modulo m_L^n. Set w_j=uP_i^N*(c_j+c'_j); then
-uP_i^(2N)=sum w_j*a_j exactly in L, and the residue of w_j is the product
-of the coefficient-ring image of uP_i^N with d_j, hence belongs to that image.
-
-Choose a common denominator s0 outside q for these coefficients, and a second factor
-s1 outside q annihilating the cleared relation's error. Put s=s0*s1 and
-mu_j=s^(2N-1)*s1*v_j when w_j=v_j/s0. Then (s*uP_i)^(2N)=sum mu_j*a_j in
-Lambda and mu_j/s^(2N)=w_j in L. Apply 07FI to include a positive power s^r in an
-essentially smooth enlargement. Replace mu_j by s^(2N*(r-1))*mu_j and s by s^r;
-the relation and coefficient residues are preserved. Regular-sequence powers applied
-to hsequence give zero kernels after localization modulo preceding parameter powers.
-Ogoma supplies a new clearing factor, all positive powers of which equalize the two
-kernels in Lambda. Use 07FI again to include one such power in the coefficient ring,
-and multiply the rescaling factor and coefficients by this power and its 2N-th power.
-Previous claims persist because only the new index is changed and coefficient maps
-remain injective. Locality makes lifts of all rescaling factors units.
-
-The initial coefficient algebra is essentially smooth over B by localization and
-composition. At each successor step, compose its B-algebra structure with the new
-k-algebra map and use essential-smoothness composition. Update only the current factor
-and coefficient row; the span of preceding powered parameters is unchanged, as proved
-by prefix_span_update. Transport earlier coefficient witnesses through the commuting
-ring maps. Finite induction gives the state at d, including the case d=0.
-
-Finally apply exists_essentiallySmooth_small_local_model to shrink the coefficient
-ring and its smooth localization model into Type(max u v). Transport the B-algebra
-structure, form the compatible k-structure through B, and transport the A-map and
-flat local target map along the algebra equivalence. Choose lifts of the factors and
-coefficients from their proved range memberships. The factor residues are units,
-since tLambda_i is outside q; a local homomorphism reflects units, so these lifts
-supply delta_i. All displayed identities follow by the equivalence's commutation and
-inverse laws. No polynomial reindexing or polynomial kernel conclusion is asserted. -/
+/-- Rescale fixed polynomial parameters in `Λ` while retaining an Artinian coefficient
+solution. -/
 theorem exists_popescu_coefficient_induction
     {k : Type u} {A : Type v} {Λ : Type w}
     [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]

@@ -11,19 +11,24 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 /-!
 # Quotient localizations after clearing the difference of ideals
 
-Source: Stacks Project, Algebra, Lemma 00SC (lemma-lci), proof of (2) implies (1).
+If `J ≤ I` and `A I ≤ J`, the quotient map `R/J → R/I` becomes an isomorphism after inverting
+`A B`.
+
+## Implementation details
+
+`A` is a unit in the localization, so every element of `I` already vanishes in the
+localization of `R/J`; this gives the inverse map by the universal properties. The case `B = 0`
+needs no separate argument.
+
+## References
+
+* [Stacks, Tag 00SC] (proof of (2) implies (1))
 -/
 @[expose] public section
 universe u v
 namespace Ideal
-/-- (blueprint: lem-weil-pbc-quotient-away-clearing)
-Source: Stacks Project, Algebra, Lemma 00SC, proof of (2) implies (1).
-For J contained in I and A I contained in J, the canonical quotient map becomes
-an isomorphism after inverting A B. Indeed A is a unit there, so every element of
-I already vanishes in the localization of R/J. This gives an inverse map from
-R/I and then from its localization by the universal property. Both composites
-fix the base ring, hence are identities by quotient and localization uniqueness.
-This remains valid for B=0, when both localizations are the zero ring. -/
+/-- For `J` contained in `I` and `A I` contained in `J`, the canonical quotient map becomes
+an isomorphism after inverting `A B`. -/
 theorem nonempty_quotient_away_equiv_of_clearing
     {k : Type u} {R : Type v} [CommRing k] [CommRing R] [Algebra k R]
     (J I : Ideal R) (hJI : J ≤ I) (A B : R)

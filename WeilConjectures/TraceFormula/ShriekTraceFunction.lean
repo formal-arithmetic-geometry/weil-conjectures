@@ -23,8 +23,8 @@ proves the formal reduction steps of its proof:
 - the local trace only depends on the Weil object up to isomorphism
   (`ProEtale.CondensedRing.weilStalkTraceAlternatingSum_congr`);
 - the lower shriek of Weil objects is compatible with composition
-  (`ProEtale.CondensedRing.weilLowerShriekCompIso`), through the pasting law of the
-  compact-support base change (blueprint `proposition-composition-base-change-rf-shriek`, item (2));
+  (`ProEtale.CondensedRing.weilLowerShriekCompIso`), through the pasting law of the compact-support
+  base change;
 - the compatibility is stable under composition
   (`ProEtale.CondensedRing.shriekTraceFunctionAt_comp`): a fibration `X ⟶ Z ⟶ Y` reduces it to
   the two factors.
@@ -100,8 +100,7 @@ lemma comp_comm_of_comp_comm : eX.hom ≫ h ≫ g = (h ≫ g) ≫ eY.hom := by
 /-- **The lower shriek of Weil objects is compatible with composition**:
 `R(h ≫ g)_!^Weil K ≅ Rg_!^Weil Rh_!^Weil K`, the composition isomorphism of the lower shriek,
 compatible with the Frobenius structures by the pasting law of the compact-support base change
-(`boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert`, blueprint
-`proposition-composition-base-change-rf-shriek`, item (2)). -/
+(`boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert`). -/
 noncomputable def weilLowerShriekCompIso (K : WeilBoundedConstructible ℓ eX.hom) :
     (weilLowerShriek ℓ eX eY (comp_comm_of_comp_comm eX eY eZ hh hg)).obj K ≅
       (weilLowerShriek ℓ eZ eY hg).obj ((weilLowerShriek ℓ eX eZ hh).obj K) :=

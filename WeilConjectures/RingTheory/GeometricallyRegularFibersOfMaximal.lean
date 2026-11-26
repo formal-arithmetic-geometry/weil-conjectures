@@ -15,8 +15,17 @@ import Mathlib.RingTheory.TensorProduct.Finite
 /-!
 # Geometric regularity of a fibre from maximal target localizations
 
-Source: Stacks Project, More on Algebra, Lemma 07C0, fibre argument.
-(blueprint: lem-weil-pbc-geometrically-regular-fiber-of-maximal).
+For a fixed prime `p` of `R`, geometric regularity of the fibre of `R → S` over `p` can be
+checked after localizing `S` at each maximal ideal. Flatness is not required.
+
+## Implementation details
+
+For a finite purely inseparable extension `K` of `κ(p)`, every localization of the extended
+fibre `F_K` at a prime is a localization of the extended fibre of some `S_m`, hence regular.
+
+## References
+
+* [Stacks, Tag 07C0]
 -/
 
 @[expose] public section
@@ -71,22 +80,7 @@ private theorem regular_tensor_of_maximal
         exact he))
 
 /-- For a fixed source prime, geometric regularity of the fibre can be checked after
-localizing the target at each maximal ideal. Flatness is not required.
-Source: Stacks Project, More on Algebra, Lemma 07C0, the fibre part of (3) implies (1).
-(blueprint: lem-weil-pbc-geometrically-regular-fiber-of-maximal).
-
-Proof: Write F = kappa(p) tensor_R S. It is a localization of S/pS, hence Noetherian.
-Fix a finite purely inseparable extension K of kappa(p). The extended fibre F_K is
-finite over F, hence Noetherian. Fix a prime n of F_K. Its contraction q to S is a
-prime ideal. Choose a maximal ideal m containing q. By hypothesis, the fibre
-kappa(p) tensor_R S_m is geometrically regular. Its scalar extension to K is
-therefore regular. Tensor product commutes with localization, so this extended
-local fibre is the localization of F_K at the images of S minus m. The prime n
-avoids these images because its contraction q is contained in m. Thus (F_K)_n is
-a localization of the regular extended local fibre and is regular local. The
-regular-ring local criterion proves F_K regular. Since K was arbitrary, F is
-geometrically regular. For S = 0, all these fibres are zero and regular, so the
-vacuous maximal-ideal hypothesis also gives the conclusion. -/
+localizing the target at each maximal ideal. Flatness is not required. -/
 theorem isGeometricallyRegular_fiber_of_localizations_maximal
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
     [IsNoetherianRing S] (p : Ideal R) [p.IsPrime]

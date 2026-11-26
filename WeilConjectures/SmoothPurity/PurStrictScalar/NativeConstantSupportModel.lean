@@ -37,8 +37,28 @@ import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingProperOpenArrows
 
 /-! # The native compact-support tower with discrete constant coefficients
 
-Source: Stacks 03DA, 0D6E, 0E8I and 0940.
-(blueprint: def-pur-native-constant-support-model).
+## Implementation details
+
+* Restriction of scalars leaves underlying abelian sheaves unchanged, and limits and colimits
+  of strict towers are computed pointwise; this gives the exactness statements.
+* `systemProperOrdinary_existsUnique`: after restriction both objects have the sections of `N`
+  at the same base-change object `(n, V)`, and identity on these sections is the comparison.
+* `systemProper_existsUnique`: restriction is viewed as the direct image of the identity ringed
+  diagram topos, so derived composition gives the comparison; restriction need not preserve
+  K-injectives.
+* `systemPullMap_isIso`: tensor balancing identifies both module inverse images with the same
+  sheafified module presheaf, and the mate sends `1 ⊗ x` to the inverse-image unit.
+* `systemOpenMap_isIso`: on the open the map is the identity on the restricted module, and off
+  the open both sides are zero.
+* `ordinaryLimit_rightAdjoint`: module extension to the quotient sequence ring is left adjoint
+  to restriction; compose with the diagonal/limit adjunction on completed modules.
+* `reductionRightComparison_existsUnique`: restrictions of injective resolutions in the ringed
+  sequence site are inverse-limit acyclic by the level/coextension adjunction.
+
+## References
+
+* [Stacks Project, Tags 03D2, 03DA, 03DI, 03EK, 06YY, 079P, 07A6, 0940, 0941, 099M, 0D6E
+  and 0E8I]
 -/
 
 @[expose] public noncomputable section
@@ -217,37 +237,29 @@ set_option backward.isDefEq.respectTransparency.types false
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Restriction from the completed coefficient sheaf to its actual constant scalars.
-Source: Stacks 03DA, 099M (blueprint: def-pur-native-constant-support-model). -/
+/-- Restriction from the completed coefficient sheaf to its actual constant scalars. -/
 abbrev constantRestriction (W : Scheme.{u}) :=
   SheafOfModules.restrictScalars.{u + 1} (integralConstantToCompletionOfUniverses l E W)
 
-/-- The same exact restriction on whole strict towers.
-Source: Stacks 0940 (blueprint: def-pur-native-constant-support-model). -/
+/-- The same exact restriction on whole strict towers. -/
 abbrev towerConstantRestriction (W : Scheme.{u}) :=
   (Functor.whiskeringRight ℕᵒᵖ _ _).obj (constantRestriction l E W)
 
-/-- Restriction remains exact on the diagram category.
-Source: Stacks 03DA, 0940 (blueprint: def-pur-native-constant-support-model).
-Proof: restriction leaves underlying abelian sheaves unchanged and is exact.
-Limits and colimits of strict towers are computed pointwise. -/
+/-- Restriction remains exact on the diagram category. -/
 theorem towerConstantRestriction_exact (W : Scheme.{u}) :
     PreservesFiniteLimits (towerConstantRestriction l E W) ∧
       PreservesFiniteColimits (towerConstantRestriction l E W) := by
   exact scalarRestrictionTower_exact (ProEt.topology W)
     (integralConstantToCompletionOfUniverses l E W)
 
-/-- Restriction of the native varying-ring system to discrete integral towers.
-Source: Stacks 0940 (blueprint: def-pur-native-constant-support-model). -/
+/-- Restriction of the native varying-ring system to discrete integral towers. -/
 def systemRestriction (W : Scheme.{u}) :
     ProEtale.VaryingRing.Modules (compactSupportSystemLevel l E)
       (compactSupportSystemQuotient l E) W ⥤
         Towers (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W :=
   coefficientSequenceRestriction.{u, u} l E W ⋙ towerConstantRestriction l E W
 
-/-- Exactness of restriction of the native quotient diagram.
-Source: Stacks 03DA, 0940 (blueprint: def-pur-native-constant-support-model).
-Proof: both restrictions are exact and their composite is exact. -/
+/-- Exactness of restriction of the native quotient diagram. -/
 theorem systemRestriction_exact (W : Scheme.{u}) :
     (systemRestriction l E W).Additive ∧
       PreservesFiniteLimits (systemRestriction l E W) ∧
@@ -261,24 +273,20 @@ theorem systemRestriction_exact (W : Scheme.{u}) :
   dsimp only [systemRestriction]
   exact ⟨inferInstance, inferInstance, inferInstance⟩
 
-/-- Exact limits for the native restriction. Source: Stacks 03DA
-(blueprint: def-pur-native-constant-support-model). -/
+/-- Exact limits for the native restriction. -/
 instance systemRestriction_limits (W : Scheme.{u}) :
     PreservesFiniteLimits (systemRestriction l E W) := (systemRestriction_exact l E W).2.1
 
-/-- Exact colimits for the native restriction. Source: Stacks 03DA
-(blueprint: def-pur-native-constant-support-model). -/
+/-- Exact colimits for the native restriction. -/
 instance systemRestriction_colimits (W : Scheme.{u}) :
     PreservesFiniteColimits (systemRestriction l E W) := (systemRestriction_exact l E W).2.2
 
-/-- Additivity is inherited from the two coefficient restrictions.
-Source: Stacks 03DA (blueprint: def-pur-native-constant-support-model). -/
+/-- Additivity is inherited from the two coefficient restrictions. -/
 instance systemRestriction_additive (W : Scheme.{u}) :
     (systemRestriction l E W).Additive :=
   (systemRestriction_exact l E W).1
 
-/-- Its exact localization, with the standard derived categories at both ends.
-Source: Stacks 0940 (blueprint: def-pur-native-constant-support-model). -/
+/-- Its exact localization, with the standard derived categories at both ends. -/
 def systemU (W : Scheme.{u}) :
     ProEtale.VaryingRing.Derived (compactSupportSystemLevel l E)
       (compactSupportSystemQuotient l E) W ⥤
@@ -517,12 +525,7 @@ private theorem towerIso_ext
   intro V x
   exact congrFun (eq_of_heq (h N n V)) x
 
-/-- The section-normalized ordinary diagram direct-image comparison is unique.
-Source: Stacks 03DA, 0D6E (blueprint: def-pur-native-constant-support-model).
-Proof: after restriction, both objects have the sections of N at the same
-base-change object (n,V). The coefficient square identifies their scalar actions.
-Identity on these sections is a module map, is natural in V,n,N, and is invertible.
-Sectionwise extensionality gives uniqueness. This includes empty objects. -/
+/-- The section-normalized ordinary diagram direct-image comparison is unique. -/
 theorem systemProperOrdinary_existsUnique {X Y : Scheme.{u}} (g : X ⟶ Y) :
     ∃! d : ProEtale.VaryingRing.push (compactSupportSystemLevel l E)
         (compactSupportSystemQuotient l E) g ⋙ systemRestriction l E Y ≅
@@ -566,8 +569,7 @@ theorem systemProperOrdinary_existsUnique {X Y : Scheme.{u}} (g : X ⟶ Y) :
     exact (ha N n V).trans (hb N n V).symm
 
 /-- The ordinary comparison is selected by identity on sections, not by existence
-of an unspecified isomorphism.
-Source: Stacks 0D6E (blueprint: def-pur-native-constant-support-model). -/
+of an unspecified isomorphism. -/
 def systemProperOrdinary {X Y : Scheme.{u}} (g : X ⟶ Y) :
     ProEtale.VaryingRing.push (compactSupportSystemLevel l E)
         (compactSupportSystemQuotient l E) g ⋙ systemRestriction l E Y ≅
@@ -575,27 +577,20 @@ def systemProperOrdinary {X Y : Scheme.{u}} (g : X ⟶ Y) :
         towerDirectImage (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) g :=
   (systemProperOrdinary_existsUnique l E g).choose
 
-/-- The recorded additive native pushforward at the fixed coefficient universes.
-Source: Stacks 03DA (blueprint: def-pur-native-constant-support-model). -/
+/-- The recorded additive native pushforward at the fixed coefficient universes. -/
 instance nativePush_additive {X Y : Scheme.{u}} (g : X ⟶ Y) :
     (ProEtale.VaryingRing.push (compactSupportSystemLevel l E)
       (compactSupportSystemQuotient l E) g).Additive :=
   ProEtale.VaryingRing.push_additive _ _ g
 
-/-- K-injective resolutions from the recorded native ringed sequence site.
-Source: Stacks 079P, 0941 (blueprint: def-pur-native-constant-support-model). -/
+/-- K-injective resolutions from the recorded native ringed sequence site. -/
 instance nativeSequence_kInjective (W : Scheme.{u}) :
     Abelian.HasKInjectiveResolutions (coefficientSequenceModules.{u, u} l E W) :=
   ProEtale.VaryingRing.modules_kInjective (compactSupportSystemLevel l E)
     (compactSupportSystemQuotient l E) W
 
 /-- The whole-system derived direct-image comparison is characterized by the two
-actual derived units, before evaluating any level.
-Source: Stacks 0D6E (blueprint: def-pur-native-constant-support-model).
-Proof: view restriction as the direct image of the identity ringed diagram topos.
-The two composites are the same ringed-topos morphism. Derived composition gives
-an isomorphism commuting with both resolution units. The universal property of
-the derived composite gives uniqueness. Restriction need not preserve K-injectives. -/
+actual derived units, before evaluating any level. -/
 theorem systemProper_existsUnique {X Y : Scheme.{u}} (g : X ⟶ Y) :
     ∃! d : ProEtale.VaryingRing.P (compactSupportSystemLevel l E)
         (compactSupportSystemQuotient l E) g ⋙ systemU l E Y ≅
@@ -624,16 +619,14 @@ theorem systemProper_existsUnique {X Y : Scheme.{u}} (g : X ⟶ Y) :
   intro I _ T _ j _
   exact nativeConstantRestriction_push_quasiIso l E g I T j
 
-/-- The normalized derived comparison, retaining its whole-diagram universal unit.
-Source: Stacks 0D6E (blueprint: def-pur-native-constant-support-model). -/
+/-- The normalized derived comparison, retaining its whole-diagram universal unit. -/
 def systemProper {X Y : Scheme.{u}} (g : X ⟶ Y) :
     ProEtale.VaryingRing.P (compactSupportSystemLevel l E)
         (compactSupportSystemQuotient l E) g ⋙ systemU l E Y ≅
       systemU l E X ⋙ R (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) g :=
   (systemProper_existsUnique l E g).choose
 
-/-- The inverse-image restriction square is the mate of identity on sections.
-Source: Stacks 07A6 (blueprint: def-pur-native-constant-support-model). -/
+/-- The inverse-image restriction square is the mate of identity on sections. -/
 def systemPullMap {X Y : Scheme.{u}} (g : X ⟶ Y) :
     systemRestriction l E Y ⋙
         towerPullback (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) g ⟶
@@ -718,11 +711,7 @@ private theorem explicitConstantPullMate_isIso {X Y : Scheme.{u}} (g : X ⟶ Y)
     (C.rho Y) (C.rho X) (G.d g).hom (G.b g)
     (ProEtale.VaryingRing.OrdinaryScalarAdjunctions.unit R φ B ψ C G g)
 
-/-- This coefficient inverse-image square is cartesian and its mate is invertible.
-Source: Stacks 03D2, 07A6 (blueprint: def-pur-native-constant-support-model).
-Proof: base change pulls back the same constant quotient ring and constant-to-completed
-map. Tensor balancing identifies both module inverse images with the same sheafified
-module presheaf. The mate sends 1 tensor x to the inverse-image unit, so is this iso. -/
+/-- This coefficient inverse-image square is cartesian and its mate is invertible. -/
 theorem systemPullMap_isIso {X Y : Scheme.{u}} (g : X ⟶ Y) :
     IsIso (systemPullMap l E g) := by
   let P (V : coefficientSequenceModules.{u, u} l E X ⥤
@@ -747,8 +736,7 @@ theorem systemPullMap_isIso {X Y : Scheme.{u}} (g : X ⟶ Y) :
   exact hP (systemProperOrdinary l E g)
     (systemProperOrdinary_existsUnique l E g).choose_spec.1
 
-/-- The ordinary open restriction square is the geometric open-adjunction mate.
-Source: Stacks 03DI, 0E8I (blueprint: def-pur-native-constant-support-model). -/
+/-- The ordinary open restriction square is the geometric open-adjunction mate. -/
 def systemOpenMap {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :
     systemRestriction l E X ⋙
         towerJ (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) j ⟶
@@ -802,11 +790,7 @@ private theorem inverseOpenMate_isIso_of_support
     l.map (𝟙 _) ≫ 𝟙 _ ≫ b.counit.app (G.obj (L.obj M)) ≫ 𝟙 _)
   infer_instance
 
-/-- Open restriction is invertible with ordinary tensor/unit normalization.
-Source: Stacks 03DI, 0E8I (blueprint: def-pur-native-constant-support-model).
-Proof: transpose using the open unit. On the open the map is identity on the
-restricted module, and off the open both sides are zero. These local formulas
-identify the inverse and commute with every horizontal quotient transition. -/
+/-- Open restriction is invertible with ordinary tensor/unit normalization. -/
 theorem systemOpenMap_isIso {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :
     IsIso (systemOpenMap l E j) := by
   have := systemPullMap_isIso l E j
@@ -823,8 +807,7 @@ theorem systemOpenMap_isIso {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j]
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Exact descent of that specified ordinary open map.
-Source: Stacks 0E8I (blueprint: def-pur-native-constant-support-model). -/
+/-- Exact descent of that specified ordinary open map. -/
 def systemOpen {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :
     systemU l E X ⋙ J (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) j ≅
       ProEtale.VaryingRing.J (compactSupportSystemLevel l E)
@@ -844,14 +827,12 @@ def systemOpen {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :
     (compactSupportSystemQuotient l E) j
   Functor.mapDerivedCategorySquareIso (asIso (systemOpenMap l E j))
 
-/-- The native reduction lift restricted to the discrete constant integral sheaf.
-Source: Stacks 0940; recorded reduction-tower construction
-(blueprint: def-pur-native-constant-support-model). -/
+/-- The native reduction lift restricted to the discrete constant integral sheaf. -/
 def reduction (W : Scheme.{u}) (S : CoefficientDerivedSystemCalculus.{u, u} l E W) :=
   S.reduction ⋙ systemU l E W
 
 /-- The actual ordinary limit of the quotient system after completed coefficient
-restriction. Source: Stacks 0940 (blueprint: def-pur-native-constant-support-model). -/
+restriction. -/
 def ordinaryLimit (W : Scheme.{u}) :
     coefficientSequenceModules.{u, u} l E W ⥤ scalarReductionSource l E W :=
   coefficientSequenceRestriction.{u, u} l E W ⋙
@@ -860,38 +841,28 @@ def ordinaryLimit (W : Scheme.{u}) :
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- The ordinary quotient system is left adjoint to its ordinary inverse limit.
-Source: Stacks 03EK, 0940 (blueprint: def-pur-native-constant-support-model).
-Proof: module extension to the quotient sequence ring is left adjoint to restriction.
-Compose this adjunction with the diagonal/limit adjunction on completed modules.
-This constructs the required left adjoint and its unit on the entire diagram. -/
+/-- The ordinary quotient system is left adjoint to its ordinary inverse limit. -/
 theorem ordinaryLimit_rightAdjoint (W : Scheme.{u}) :
     (ordinaryLimit l E W).IsRightAdjoint := by
   have := (nativeSequenceRestriction_properties l E W).1
   dsimp only [ordinaryLimit]
   infer_instance
 
-/-- The right adjoint structure of the ordinary limit.
-Source: Stacks 0940 (blueprint: def-pur-native-constant-support-model). -/
+/-- The right adjoint structure of the ordinary limit. -/
 instance ordinaryLimit_isRightAdjoint (W : Scheme.{u}) :
     (ordinaryLimit l E W).IsRightAdjoint := ordinaryLimit_rightAdjoint l E W
 
-/-- The actual ordinary quotient-system extension, specified by its universal property.
-Source: Stacks 03EK, 0940 (blueprint: def-pur-native-constant-support-model). -/
+/-- The actual ordinary quotient-system extension, specified by its universal property. -/
 def ordinaryReduction (W : Scheme.{u}) :
     scalarReductionSource l E W ⥤ coefficientSequenceModules.{u, u} l E W :=
   (ordinaryLimit l E W).leftAdjoint
 
-/-- Its canonical adjunction. Source: Stacks 0940
-(blueprint: def-pur-native-constant-support-model). -/
+/-- Its canonical adjunction. -/
 def ordinaryReductionAdj (W : Scheme.{u}) :
     ordinaryReduction l E W ⊣ ordinaryLimit l E W :=
   Adjunction.ofIsRightAdjoint (ordinaryLimit l E W)
 
-/-- Additivity of the ordinary adjunction functors.
-Source: Stacks 03DA, 03EK (blueprint: def-pur-native-constant-support-model).
-Proof: the ordinary limit is additive since restriction and limits are additive.
-Its left adjoint is additive by the additive-adjunction criterion. -/
+/-- Additivity of the ordinary adjunction functors. -/
 theorem ordinaryReduction_additive_data (W : Scheme.{u}) :
     (ordinaryLimit l E W).Additive ∧ (ordinaryReduction l E W).Additive := by
   have h : (ordinaryLimit l E W).Additive := by
@@ -899,23 +870,16 @@ theorem ordinaryReduction_additive_data (W : Scheme.{u}) :
     infer_instance
   exact ⟨h, (ordinaryReductionAdj l E W).left_adjoint_additive⟩
 
-/-- Additivity of the actual ordinary limit. Source: Stacks 03DA
-(blueprint: def-pur-native-constant-support-model). -/
+/-- Additivity of the actual ordinary limit. -/
 instance ordinaryLimit_additive (W : Scheme.{u}) :
     (ordinaryLimit l E W).Additive := (ordinaryReduction_additive_data l E W).1
 
-/-- Additivity of the actual quotient extension. Source: Stacks 03EK
-(blueprint: def-pur-native-constant-support-model). -/
+/-- Additivity of the actual quotient extension. -/
 instance ordinaryReduction_additive (W : Scheme.{u}) :
     (ordinaryReduction l E W).Additive := (ordinaryReduction_additive_data l E W).2
 
 /-- The two ways of deriving the actual system limit agree, with the canonical
-resolution unit on every whole-system complex.
-Source: Stacks 0940, 0941 (blueprint: def-pur-native-constant-support-model).
-Proof: use injective resolutions in the ringed sequence site. Their restrictions
-are inverse-limit acyclic by the level/coextension adjunction. The derived-composite
-comparison is invertible. Its universal derived unit gives the displayed equation
-and determines it uniquely; no equality is inferred from finite evaluation. -/
+resolution unit on every whole-system complex. -/
 theorem reductionRightComparison_existsUnique (W : Scheme.{u}) :
     ∃! d : (ordinaryLimit l E W).rightDerivedFunctor ≅ coefficientSequenceLimit l E W,
       ∀ K : CochainComplex (coefficientSequenceModules.{u, u} l E W) ℤ,
@@ -935,15 +899,13 @@ theorem reductionRightComparison_existsUnique (W : Scheme.{u}) :
   exact derivedUnit_isIso_of_resolution H ((U.mapHomologicalComplex (.up ℤ)).obj I)
     (fun T _ j _ ↦ (nativeSequenceRestriction_properties l E W).2 I T j)
 
-/-- The unit-normalized derived-limit comparison. Source: Stacks 0941
-(blueprint: def-pur-native-constant-support-model). -/
+/-- The unit-normalized derived-limit comparison. -/
 def reductionRightComparison (W : Scheme.{u}) :=
   (reductionRightComparison_existsUnique l E W).choose
 
 /-- The whole-diagram reduction counit is the mate of the actual right-derived
 unit, under the ordinary quotient/limit adjunction and the recorded reduction
-adjunction. Thus it is fixed before evaluating any quotient.
-Source: Stacks 06YY, 0941 (blueprint: def-pur-native-constant-support-model). -/
+adjunction. Thus it is fixed before evaluating any quotient. -/
 def systemReductionCounit (W : Scheme.{u})
     (S : CoefficientDerivedSystemCalculus.{u, u} l E W) :
     DerivedCategory.Qh ⋙ S.reduction ⟶
@@ -953,9 +915,7 @@ def systemReductionCounit (W : Scheme.{u})
     (S.adjunction.ofNatIsoRight (reductionRightComparison l E W).symm)).symm
       (TwoSquare.mk _ _ _ _ (ordinaryLimit l E W).rightDerivedFunctorUnit))
 
-/-- The recorded separately derived proper/open lift, then coefficient restriction.
-Source: Stacks 0940; recorded reduction-tower construction
-(blueprint: def-pur-native-constant-support-model). -/
+/-- The recorded separately derived proper/open lift, then coefficient restriction. -/
 def support {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (S : CoefficientDerivedSystemCalculus.{u, u} l E X) :=
   S.reduction ⋙ ProEtale.VaryingRing.J (compactSupportSystemLevel l E)
@@ -964,8 +924,7 @@ def support {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
       (compactSupportSystemQuotient l E) c.g ⋙ systemU l E Y
 
 /-- The canonical identification with proper/open operations on constant towers.
-Both factors are fixed by their derived units or ordinary open-adjunction units.
-Source: Stacks 0D6E, 0E8I (blueprint: def-pur-native-constant-support-model). -/
+Both factors are fixed by their derived units or ordinary open-adjunction units. -/
 def supportModel {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (S : CoefficientDerivedSystemCalculus.{u, u} l E X) :
     support l E c S ≅ reduction l E X S ⋙ image l E c :=

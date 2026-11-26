@@ -10,10 +10,17 @@ import WeilConjectures.SmoothPurity.Compact.CompactSupportNativeSystemEvaluation
 
 /-! # Native presentation of a coherent compact-support tower
 
-Source: the canonical coefficient comparisons in blueprint
-`lem-coef-integral-compact-support.proof.md`, paragraphs 1–2, and the native
-construction of `lem-weil-compact-support-reduction-tower-functor`.
-(blueprint: def-weil-compact-support-native-tower-presentation).
+The predicate that a compact-support tower and its evaluations come from the native
+construction through the canonical coefficient comparisons, before taking a limit.
+
+## Implementation details
+
+The predicate is irreducible: keeping it abstract prevents the canonical evaluation pasting
+from being expanded in the predicates of every downstream choice expression.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Definition 6.7.6.
 -/
 
 @[expose] public noncomputable section
@@ -31,12 +38,9 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
 
-/-- A tower and its evaluations retain their native construction, before taking a limit.
-Keeping the condition abstract prevents the canonical evaluation pasting from being
-expanded in the predicates of every downstream choice expression.
-Source: blueprint `lem-coef-integral-compact-support.proof.md`, paragraphs 1–2;
-Bhatt--Scholze, Definition 6.7.6.
-(blueprint: def-weil-compact-support-native-tower-presentation). -/
+/-- The tower `T` with evaluations `e` has its native presentation: `T` is the native
+reduction followed by compact-support pushforward and sequence restriction, and `e` is the
+canonical pasting of the evaluation isomorphisms. -/
 @[no_expose, irreducible]
 def IsNativeCompactSupportTowerPresentation
     (T : DerivedCategory (scalarReductionSource l E X) ⥤

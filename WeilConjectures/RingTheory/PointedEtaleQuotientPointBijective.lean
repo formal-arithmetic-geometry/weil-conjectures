@@ -11,7 +11,17 @@ public import WeilConjectures.RingTheory.SurjectiveQuotientBaseChange
 
 /-! # Bijection on hom sets into a residue-field point
 
-Source: Stacks Project, Tag 05WS, and the universal property of the ring pushout.
+For a surjective local homomorphism `π : A → B`, extension of scalars along `π` induces a
+bijection on algebra maps into a separable closure `K` of the residue field.
+
+## Implementation details
+
+Since `ker π` acts trivially on `K`, the canonical map `K → B ⊗[A] K` is an isomorphism, and the
+unit of the base-change adjunction (via `Under.mapPushoutAdj`) at `K` is invertible.
+
+## References
+
+* [Stacks, Tag 05WS]
 -/
 
 @[expose] public section
@@ -109,20 +119,7 @@ private theorem map_bijective_of_unit_iso
   rw [hf, hg, h]
 
 
-/-- Maps from an A-algebra to K are unchanged by extension of scalars along π.
-Source: Stacks Project, Tag 05WS, the fact that ker π acts trivially on K.
-(blueprint: lem-sbc-pointed-etale-quotient-point-bijective)
-
-Proof: A surjective local map is local, so ker π is in the maximal ideal of A.
-Consequently it acts by zero on K. Descend A -> K to β:B -> K. The cocone
-with legs id_K and β is a pushout: its universal map is the K-leg, compatibility
-with its B-leg is checked after π, and uniqueness follows from its identity leg.
-Thus the canonical K -> H(K) is an isomorphism. Use the explicit base-change
-adjunction, obtained by composing the two algebra/under-category equivalences
-with Under.mapPushoutAdj. Its unit at K has this canonical underlying map,
-so it too is an isomorphism. The adjunction hom equivalence and the inverse
-unit give surjectivity on maps to K. For injectivity, naturality of the unit
-and cancellation of its component at K suffice. -/
+/-- Maps from an `A`-algebra to `K` are unchanged by extension of scalars along `π`. -/
 theorem quotientBaseChange_point_bijective
     (A K B : Type u) [CommRing A] [IsLocalRing A] [Field K]
     [Algebra (IsLocalRing.ResidueField A) K] [Algebra A K]

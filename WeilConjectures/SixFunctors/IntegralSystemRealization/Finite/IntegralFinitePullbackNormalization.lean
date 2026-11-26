@@ -10,7 +10,12 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.Finite.Integ
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Reduction.IntegralReductionPullFiniteSquare
 import WeilConjectures.CategoryTheory.Normalized.NormalizedAdjunctionComposition
 
-/-! # Proper finite projection in scalar reduction coordinates -/
+/-! # Proper finite projection in scalar reduction coordinates
+
+## References
+
+* [Stacks, Tag 03D7], [Stacks, Tag 03EL], [Stacks, Tag 07A6], [Stacks, Tag 0941]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -160,24 +165,7 @@ private theorem finiteScalarPullback_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : �
     Functor.whiskerLeft_app, Functor.whiskerRight_app, NatTrans.comp_app]
   rw [← (finiteRingPullbackIso l E f n).hom.naturality]
 
-/-- Finite coordinates of the inverse quotient/pullback comparison on a good complex.
-
-Source: Stacks Tags 03D7, 03EL, 07A6, 0941; current blueprint
-fix-prop-coherence.proof.md, preservation of coefficient comparisons of units and counits.
-(blueprint: lem-sf-integral-finite-pullback-normalization).
-
-Proof: the existing integralReductionPullFiniteSquare gives the forward equation
-on every derived object. Its finite geometric comparison is obtained by deriving
-finitePullbackIso, whereas finiteScalarPullback uses uniqueness of the derived
-left adjoints. The derived Hom transpose equation and normalized adjoint
-uniqueness identify these two geometric comparisons. Naturality moves the finite
-reduction presentation through this common comparison, identifying the two scalar
-pullback isomorphisms. Specialize the forward equation to Q(P), view it as equality
-of composite isomorphisms, and take inverses. Functors preserve these inverses,
-and reassociation gives exactly the displayed equation. This uses no new finite
-normalization obligation and no property of P beyond its underlying complex.
-Empty schemes, the zero complex, the identity morphism and n=0 obey the same
-adjunction and inverse identities. -/
+/-- Finite coordinates of the inverse quotient/pullback comparison on a good complex. -/
 theorem integralFinitePullback_onGood (o : Operations l E)
     (model : RealizationModel l E o) {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : (integralOperationsGoodComplex l E Y).FullSubcategory) (n : ℕ) :

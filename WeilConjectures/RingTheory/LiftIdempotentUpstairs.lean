@@ -18,8 +18,20 @@ import WeilConjectures.RingTheory.EtaleMakeTensorPairCoprime
 /-!
 # Lifting an idempotent upstairs after an étale neighbourhood
 
-Source: literature/stacks-project/more-algebra.tex, Lemma Tag 07M4
-(blueprint: lem-weil-pbc-lift-idempotent-upstairs).
+An idempotent of `B/IB`, for `B` integral over `A`, lifts to an idempotent of `B ⊗[A] D` for
+some étale `A`-algebra `D` with `A/I ≃ D/ID`.
+
+## Implementation details
+
+A lift `y` of `ebar` is annihilated by a monic `f` reducing to `X^d (X - 1)^d` with `d ≥ 1`.
+This coprime factorization lifts over an étale `C` preserving the quotient; evaluating at
+`y ⊗ 1` gives `x, z` with `x z = 0` and coprime reductions. A further étale `C → D` makes `x, z`
+coprime (`exists_etale_isCoprime_tensor_of_isCoprime_quotient`). Writing `1 = u x + v z`, the
+element `e = u x` is idempotent and reduces to `ebar`.
+
+## References
+
+* [Stacks, Tag 07M4]
 -/
 
 @[expose] public section
@@ -68,33 +80,9 @@ private theorem tensor_quotient_equiv
   rfl
 
 /-- An idempotent modulo an ideal lifts after an étale base change preserving the
-quotient.  The equivalence `β` records the canonical tensor--quotient
+quotient. The equivalence `β` records the canonical tensor--quotient
 identification induced by `α`; the final equality is precisely the lifting
 condition under that identification.
-Source: Stacks Project, More on Algebra, Lemma Tag 07M4
-(blueprint: lem-weil-pbc-lift-idempotent-upstairs).
-
-Proof:
-1. Lift `ebar` to `y`. The integral annihilator lemma gives a monic `f`
-   with `f(y) = 0` reducing to `X^d * (X - 1)^d`, with `d ≥ 1`.
-2. The identity `1*X + (-1)*(X - 1) = 1` and Mathlib's coprime-power
-   lemma show the factors are coprime. Lift this factorization over an étale
-   `A`-algebra `C` inducing an isomorphism modulo `I`.
-3. In `T = B ⊗[A] C`, evaluate the lifted factors at `y ⊗ 1` to obtain
-   `x,z` with `x*z = 0`. Their reductions are coprime by evaluating the
-   coprime polynomial factors. The reduction of `x` equals that of `y ⊗ 1`
-   because this is an idempotent and `d` is positive. The private tensor
-   quotient equivalence checks this identification on representatives.
-4. Apply `exists_etale_isCoprime_tensor_of_isCoprime_quotient`: separation
-   of the closed integral image and principal localization give a further
-   étale `C → D`, preserving `C/IC`, in which the images of `x,z` are coprime.
-5. Write `1 = u*x + v*z` in `B ⊗[A] D`, and set `e = u*x`. Since `x*z = 0`,
-   `e² = e*(u*x + v*z) = e`. In the quotient let `t` be the transported
-   `ebar`. Then `x mod I = t` and `t² = t`; multiplying the reduced Bézout
-   identity by `t` gives `u*t = t`, because `z*t = 0`. Thus `e` reduces to `t`.
-6. Compose the étale maps and the quotient isomorphisms. The tensor quotient
-   equivalence for the composite has the required values on representatives,
-   and the preceding equality is exactly the asserted lifting condition.
 -/
 theorem exists_etale_lift_isIdempotentElem
     {A : Type u} {B : Type v} [CommRing A] [CommRing B] (I : Ideal A)

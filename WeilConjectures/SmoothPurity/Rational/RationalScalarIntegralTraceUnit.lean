@@ -19,7 +19,17 @@ For the completed coefficient map `𝒪_E^∧ ⟶ 𝒪_F^∧`, the Frobenius uni
 `K ⟶ 𝒪_F^∧ ⊗_{𝒪_E^∧} Res K`, `k ↦ ∑ᵢ bᵢ ⊗ cᵢ k`, followed by the multiplication counit
 `𝒪_F^∧ ⊗_{𝒪_E^∧} Res K ⟶ K` is multiplication by the constant `∑ᵢ bᵢ cᵢ ∈ 𝒪_F`, which is
 nonzero. After a further multiplication it becomes multiplication by a nonzero integer.
-(blueprint: lem-sf-rational-scalar-integral-denominator-split).
+
+## Implementation details
+
+For a Frobenius system `(t, (bᵢ), (cᵢ))` of the completed coefficient map, the constant
+`w = ∑ᵢ bᵢ cᵢ ∈ 𝒪_F` is nonzero and divides `ℓ ^ k` in the discrete valuation ring `𝒪_F`, so
+precomposing with multiplication by `ℓ ^ k / w` gives multiplication by `ℓ ^ k`.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.14(2), Remark 6.8.15.
+* Stacks Project, Tag 090W.
 -/
 
 @[expose] public section
@@ -43,16 +53,7 @@ variable (l : ℕ) [Fact l.Prime]
 
 /-- The integral trace on module sheaves: natural maps
 `σ : K ⟶ 𝒪_F^∧ ⊗_{𝒪_E^∧} Res K` and `τ : 𝒪_F^∧ ⊗_{𝒪_E^∧} Res K ⟶ K` whose composite is
-multiplication by a nonzero integer `N`.
-
-Source: Bhatt--Scholze, Proposition 6.8.14(2), Remark 6.8.15; Stacks Tag 090W.
-(blueprint: lem-sf-rational-scalar-integral-denominator-split).
-
-Proof: `τ` is the counit of extension ⊣ restriction, `s ⊗ k ↦ s k`. For a Frobenius system
-`(t, (bᵢ), (cᵢ))` of the completed coefficient map, the Frobenius unit `k ↦ ∑ᵢ bᵢ ⊗ cᵢ k`
-followed by `τ` is multiplication by the constant section of `w = ∑ᵢ bᵢ cᵢ ∈ 𝒪_F`, and
-`w ≠ 0`. Since `w ∣ ℓ ^ k` in the discrete valuation ring `𝒪_F`, precomposing with
-multiplication by `ℓ ^ k / w` gives multiplication by `N = ℓ ^ k`. -/
+multiplication by a nonzero integer `N`. -/
 theorem rationalScalarIntegral_unit_comp_counit :
     ∃ (N : ℕ) (σ : 𝟭 (scalarReductionSource l F W) ⟶
         rationalScalarModuleRestriction l E F ι W ⋙ integralOrdinaryScalar l E F ι W)

@@ -19,12 +19,12 @@ constructible complex of `𝔽_E`-module objects on `X ∖ Z`. The restriction `
 nearby cycles of the deformation to the normal cone to the zero section vanishes over a
 neighbourhood of `ζ`
 (`ProEtale.CondensedRing.exists_isZero_upperStar_nearbyCycles_lowerShriek_residueField`). This is
-blueprint `lemma-vanishing-generic-points-principal-divisor--1` for finite coefficients and
-complexes `L = j_! F` with `Li^* L = 0`.
+the generic vanishing along a principal divisor for finite coefficients and complexes `L = j_! F`
+with `Li^* L = 0`.
 
-## Proof
+## Implementation details
 
-The blueprint argument, with finite coefficients throughout:
+The argument, with finite coefficients throughout:
 
 * shrink `X` around `ζ` until the étale model of `F` has finite locally constant cohomology on
   `X ∖ Z` (`exists_opens_lisse_reduction`, `GenericDivisorLisseLocus.lean`);
@@ -55,11 +55,9 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)] (k' : Type u) [Field k'] [Algebra k k']
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
-/-- **Generic vanishing along a divisor for finite coefficients** (blueprint
-`lemma-vanishing-generic-points-principal-divisor--1` with coefficients `𝔽_E`, for extensions by
-zero from the complement of the divisor): let `X` be normal, `Z = V(h)` for a nonzero global
-function `h`, `j : X ∖ Z ⟶ X` the complement, `ζ` a generic point of an irreducible component of
-`Z`, and `F` a bounded constructible complex of `𝔽_E`-module objects on `X ∖ Z`. Then
+/-- **Generic vanishing along a divisor for finite coefficients**: let `X` be normal, `Z = V(h)` for
+a nonzero global function `h`, `j : X ∖ Z ⟶ X` the complement, `ζ` a generic point of an irreducible
+component of `Z`, and `F` a bounded constructible complex of `𝔽_E`-module objects on `X ∖ Z`. Then
 `Le^* Ψ_X(j_! F)` vanishes over a neighbourhood of `ζ`. -/
 theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_residueField
     [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]

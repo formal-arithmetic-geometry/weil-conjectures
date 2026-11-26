@@ -28,7 +28,19 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
 /-! # Signed exchange for coherent pullback tensor representatives
 
-Source: Stacks 07A4 and the Koszul sign rules, Tag 0FNG.
+The coherent pullback/tensor comparison is compatible with the signed braidings on K-flat
+representatives.
+
+## Implementation details
+
+In bidegree `(p, q)` both chain maps send the adjunction-unit section of `x ⊗ y` to
+`(-1)^(p*q)` times the tensor of the unit sections of `y` and `x`. Extension to arbitrary
+derived objects follows separately from naturality and K-flat resolutions.
+
+## References
+
+* [Stacks Project, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks Project, Tag 0FNG](https://stacks.math.columbia.edu/tag/0FNG) (Koszul sign rules)
 -/
 
 @[expose] public noncomputable section
@@ -213,18 +225,8 @@ private theorem coherentSignedTotal {X Y : Scheme.{u}} (f : X ⟶ Y)
     exact hσX p q k hpq _ _ _
 
 -- The normalization square retains both unbounded K-flat tensor models.
-/-- Signed exchange for the coherent comparison on K-flat representatives.
-Source: Stacks 07A4, the total tensor construction, and the symmetry sign rule
-of Tag 0FNG (blueprint: lem-pur-completed-pullback-tensor-signed-representatives).
-Proof: in bidegree (p,q), both chain maps send the adjunction-unit section of
-x tensor y to (-1)^(p*q) times the tensor of the unit sections of y and x.
-Naturality of the unit, linearity, tensor sheafification and total summand
-injections prove equality of these chain maps. Apply the derived quotient.
-The normalization of the coherent comparison and the normalization of both
-signed braidings identify its four sides with the displayed derived square.
-Cancel the invertible tensor-model comparisons and pullback factorizations.
-This is the calculation on K-flat complexes; extension to arbitrary derived
-objects follows separately from naturality and K-flat resolutions. -/
+/-- For K-flat complexes `P`, `Q` with images `M`, `N` in the derived category, the coherent
+comparison `f^*(M ⊗ N) ≅ f^*M ⊗ f^*N` commutes with the signed braidings. -/
 theorem completedPullbackTensor_signed_representatives {X Y : Scheme.{u}}
     (f : X ⟶ Y) (P Q : CochainComplex (coefficientSequenceModules l E Y) ℤ)
     (hP : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}

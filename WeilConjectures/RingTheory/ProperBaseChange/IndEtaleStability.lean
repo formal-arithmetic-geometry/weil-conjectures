@@ -13,8 +13,25 @@ import Mathlib.RingTheory.Localization.Pi
 
 /-! # Stability of ind-etale and principal ind-Zariski maps
 
-Source: blueprint, proper base change, lemma "Stability and diagonal of an ind-etale algebra"
-(blueprint: lemma-stability).
+Stability under base change, composition and filtered colimits of ind-étale and principal
+ind-Zariski maps, and of weakly étale maps.
+
+## Implementation details
+
+Filtered colimits are expressed in the arrow category, allowing varying source rings. The
+principal ind-Zariski condition is evaluated using the algebra structure of each ring map.
+
+Ind-étale base change and composition, weak étaleness of ind-étale maps, relative
+ind-étaleness and weakly étale composition come from existing APIs; weakly étale base change
+follows from the tensor-product instance and invariance under ring isomorphism.
+
+For principal ind-Zariski maps, finite products of principal localizations are used as building
+blocks. Tensor products preserve them, they compose (if `g = a/f^N` in `A_f` then `(A_f)_g` is
+`A_(fa)`), are finitely presented, and spread over filtered colimits, so the composition theorem
+for ind-properties of finitely presented morphisms applies. For filtered colimits with varying
+bases, each stage arrow is pushed out to the colimit source, giving a filtered diagram with fixed
+source and the same target colimit. Twice-ind presentations are flattened using
+`RingHom.IndEtale.iff_ind_indEtale` and `MorphismProperty.ind_ind`.
 -/
 
 @[expose] public section
@@ -413,38 +430,7 @@ namespace RingHom
 
 /-- Stability under base change, composition and filtered colimits of ind-etale and principal
 ind-Zariski maps; weak etaleness of ind-etale maps; the relative ind-etale assertion; and
-composition and base-change stability of weakly etale maps.
-Source: blueprint, proper base change, lemma "Stability and diagonal of an ind-etale algebra"
-(blueprint: lemma-stability).
-
-Filtered colimits are expressed in the arrow category, allowing varying source rings.
-The principal ind-Zariski condition is evaluated using the algebra structure of each ring map.
-
-Proof:
-
-The source library already proves ind-etale base change and composition, weak etaleness of
-ind-etale maps, relative ind-etaleness by cancellation, and weakly etale composition. Weakly
-etale base change follows from the tensor-product instance and invariance under ring isomorphism.
-
-For principal ind-Zariski maps, use finite products of principal localizations as building
-blocks. Tensor product preserves these blocks: it distributes over finite products and changes
-localization at f into localization at the image of f. The base-change functor on algebra
-categories preserves colimits, giving base-change stability of their filtered colimits.
-
-The blocks are finitely presented because they are etale. They compose: localizing a product
-amounts to localizing each factor, and if g = a/f^N in A_f then (A_f)_g is A_(fa). Flatten the
-resulting finite product. They also spread over filtered colimits: finitely many denominators
-have representatives at a common stage. Apply the source library's composition theorem for
-ind-properties of finitely presented morphisms that spread.
-
-For filtered colimits with varying bases, push each stage arrow out to the colimit source.
-These pushouts form a filtered diagram with that fixed source, whose target colimit is the
-original target colimit. Construct its universal property using the two original colimit
-universal properties and pushout descent; filteredness identifies all the source injections.
-Cobase-change stability makes its stages satisfy the original property, so the colimit arrow
-satisfies its ind-property. Finally flatten twice-ind presentations, using
-`RingHom.IndEtale.iff_ind_indEtale` and `MorphismProperty.ind_ind`, respectively.
--/
+composition and base-change stability of weakly etale maps. -/
 theorem indEtale_principalZariski_stability :
     RingHom.IsStableUnderBaseChange (@RingHom.IndEtale.{u}) ∧
     RingHom.IsStableUnderBaseChange

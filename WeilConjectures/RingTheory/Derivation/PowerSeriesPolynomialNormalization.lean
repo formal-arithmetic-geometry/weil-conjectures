@@ -26,8 +26,25 @@ import Mathlib.Algebra.MvPolynomial.Equiv
 /-!
 # Power series polynomial normalization of a finite type domain
 
-Source: Stacks Project, More on Algebra, Tag 07PH, first two proof paragraphs.
-(blueprint: lem-weil-pbc-power-series-polynomial-normalization)
+A finite type domain over a complete Noetherian local base contains a polynomial ring over a
+power series ring over a field, with a finite extension of fraction fields.
+
+## Implementation details
+
+Replace the base by its image in the domain `B`; this is again complete Noetherian local, of
+characteristic `p`. By the Cohen structure theorem its coefficient subring is a power series
+ring `S = k[[x_1, ..., x_n]]` (the Cohen-ring alternative is impossible as `p = 0`), and the
+image is finite over `S`. Noether normalization over `S` gives a polynomial ring `C` over `S`
+and `C ⊆ B0 ⊆ B` with `B0` finite over `C` and `B0[1/g] = B[1/g]` for some nonzero `g ∈ S`.
+Then `Frac B0 = Frac B` is finite over `Frac C`. All embeddings are the inclusions into `B`
+followed by its fraction-field map.
+
+## References
+
+* [Stacks, Tag 07PH]
+* [Stacks, Tag 0325]
+* [Stacks, Tag 032D]
+* [Stacks, Tag 07NA]
 -/
 
 @[expose] public section
@@ -37,30 +54,7 @@ universe u v w
 namespace Derivation
 
 /-- A finite type domain over a complete Noetherian local base contains a polynomial
-ring over a power series field, with a finite extension of fraction fields.
-Source: Stacks Project, More on Algebra, Tag 07PH (`lemma-find-D`), first two
-proof paragraphs, using Algebra Tags 0325, 032D and 07NA.
-(blueprint: lem-weil-pbc-power-series-polynomial-normalization)
-
-Proof: replace the base by its image in B, the quotient by the prime kernel.
-A proper quotient remains Noetherian, local and complete (0325). The image
-has characteristic p because it embeds in B. Apply 032D to this complete local
-domain. Its regular coefficient subring is a power series ring over a field:
-the Cohen-ring alternative is impossible, since its uniformizer is a nonzero
-prime integer whereas, in this subring, p is zero and every other prime
-integer is a unit by Bezout. Thus this subring is S = k[[x_1,...,x_n]], and the image base is
-finite over S. Finite-type transitivity makes B finite type over S.
-Apply 07NA to S inside B. It gives an embedded polynomial ring C over S
-and C inside B0 inside B with B0 finite over C and B0[1/g] = B[1/g]
-for nonzero g in S. Finite S-algebra generators of B still generate over C.
-Consequently B is finite type over C. Localization equality identifies
-Frac(B0) with M. Localizing the finite C-module B0 at all nonzero elements
-of C gives a finite-dimensional domain over K = Frac(C); it is a field,
-because multiplication by any nonzero element is an injective and hence
-surjective endomorphism of a finite-dimensional vector space. It is therefore
-Frac(B0). These identifications supply the compatible C-K-M algebra tower
-and finite-dimensionality asserted below. All embeddings are the inclusions
-in B followed by its fraction-field map. -/
+ring over a power series field, with a finite extension of fraction fields. -/
 theorem exists_powerSeries_polynomial_normalization
     (p : ℕ) [Fact p.Prime]
     (B : Type u) [CommRing B] [IsDomain B] [CharP B p]

@@ -11,8 +11,18 @@ import WeilConjectures.SixFunctors.Supporting.SemilinearTotalTensorEvaluation
 
 /-! # Ordinary total-tensor evaluation for the actual coefficient sequence
 
-Source: Stacks 03EK, 07A4 and 0941.
-(blueprint: lem-coef-actual-total-tensor-evaluation)
+## Implementation details
+
+The actual coefficient ring sequence has the same ringed sequence sheaf and vertical evaluation
+as the generic semilinear construction, by definition, so the generic total-tensor theorem
+applies; the actual section transport is heterogeneously the identity. No flatness or
+normalization assumption is needed.
+
+## References
+
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public section
@@ -35,15 +45,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
 /-- Evaluation of the actual coefficient sequence commutes with ordinary total tensor,
-uniquely on all pure generators and with the specified underlying-section transport.
-Source: Stacks 03EK, 07A4 and 0941
-(blueprint: lem-coef-actual-total-tensor-evaluation).
-Proof: the actual coefficient ring sequence has the same ringed sequence sheaf and
-vertical evaluation as the generic semilinear construction, by their definitions.
-Supply this functor equality and its actual zero-morphism preservation instance to
-the generic total-tensor theorem. Its generator formula and uniqueness then give
-the displayed assertion for every unbounded pair of complexes, with no flatness
-or normalization assumption. -/
+uniquely on all pure generators and with the specified underlying-section transport. -/
 private theorem coefficientTotalTensorEvaluation_general (n : ℕ)
     (σ : ∀ (M : coefficientSequenceModules l E W) (U : W.ProEtᵒᵖ),
       M.val.obj (op (n, U.unop)) →
@@ -95,13 +97,7 @@ private theorem transport_heq {A B : AddCommGrpCat.{w}}
   cases h
   rfl
 
-/-- The actual coefficient section transport fixes total-tensor evaluation uniquely.
-Source: Stacks 03EK, 07A4 and 0941
-(blueprint: lem-coef-actual-total-tensor-evaluation).
-Proof: specialize the ordinary total-tensor evaluation comparison to the canonical
-eqToHom transport between the recorded abelian section objects. Equality elimination
-shows that this transport is heterogeneously the identity. The general comparison
-then supplies the isomorphism, its generator formula, and its uniqueness. -/
+/-- The actual coefficient section transport fixes total-tensor evaluation uniquely. -/
 theorem coefficientTotalTensorEvaluation_existsUnique (n : ℕ)
     (P Q : CochainComplex (coefficientSequenceModules l E W) ℤ) :
     ∃! e : ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex

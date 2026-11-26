@@ -13,8 +13,18 @@ import Mathlib.LinearAlgebra.TensorProduct.Prod
 /-!
 # Coordinates for adjoining the final Koszul generator
 
-Source: Stacks Project, Tags 0628 and 0629.
-(blueprint: lem-weil-pbc-koszul-tensor-cone-coordinates).
+Adjoining a final generator `f_last` to a sequence presents `K(f) ⊗ M` in coordinates as the
+cone of multiplication by `f_last` on `K(f_prefix) ⊗ M`.
+
+## Implementation details
+
+The exterior-power basis of `R^(r+1)` is split according to whether the last generator occurs,
+via `(a, b) ↦ a + e_last ∧ b`. The graded Leibniz rule gives
+`d(e_last ∧ b) = f_last b - e_last ∧ d b`.
+
+## References
+
+* [Stacks, Tags 0628, 0629]
 -/
 
 @[expose] public section
@@ -114,19 +124,9 @@ private theorem boundary_assembly_zero {R : Type u} [CommRing R] {r : ℕ}
   simp only [prefix_map_coe, contract_prefix]
   rfl
 
-/-- Source: Stacks Project, Tags 0628 and 0629
-(blueprint: lem-weil-pbc-koszul-tensor-cone-coordinates).
-
-Proof: split the exterior-power basis of `R^(r+1)` according to whether its
-last generator occurs. Send `(a,b)` to `a + e_last ∧ b`, with the last generator
-placed first in the second summand. The resulting basis bijections give linear
-isomorphisms in each positive degree; degree zero is the identity on scalars.
-Tensor these isomorphisms with `M`. Contraction with the sequence's linear form
-restricts to the prefix contraction on the first summand. On the second summand,
-the graded Leibniz rule gives `d(e_last ∧ b) = f_last b - e_last ∧ d b`.
-This proves both displayed differential formulas, including the separate formula
-from degree one to degree zero. When `r=0`, the positive prefix exterior powers
-are zero and the same basis argument and formulas still hold. -/
+/-- The Koszul complex tensored with `M` on `r + 1` generators has degreewise coordinates
+`B_(n+1) ≃ A_(n+1) × A_n` in terms of the complex `A` on the first `r` generators, in which the
+differential is `(a, b) ↦ (d a + f_last • b, -d b)`. -/
 theorem exists_koszulTensorConeCoordinates {R : Type u} [CommRing R]
     (M : Type v) [AddCommGroup M] [Module R M] {r : ℕ} (f : Fin (r + 1) → R) :
     let A := koszulComplexTensor R r (fun i ↦ f i.castSucc) M

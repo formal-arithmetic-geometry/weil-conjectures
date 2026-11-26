@@ -13,7 +13,15 @@ import WeilConjectures.SmoothPurity.CompletedQuotient.CompletedQuotientReduction
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 
-/-! # Finite scalar pullback in the canonical quotient coordinates -/
+/-! # Finite scalar pullback in the canonical quotient coordinates
+
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 0D6D]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -173,24 +181,7 @@ private theorem on_good (o : Operations l E) (model : RealizationModel l E o)
     hY' hn he hm hf ho hX ht
     (integralFiniteScalarPullCochainModel l E f n P PX.property)
 
-/-- Finite evaluation of the whole-system pullback model is the canonical scalar square.
-Source: Stacks 07A4, 07A6, 0941 and 0D6D; fix-prop-coherence, coefficient
-comparisons before taking open mates
-(blueprint: lem-sf-integral-reduction-pull-finite-square).
-
-Proof: choose a flat-term K-flat representative P of H. Geometric inverse image
-preserves flat terms and K-flatness, so model.model applies to P and its inverse
-image. Evaluate that equation at n. The ordinary limit projection equation in
-model.ordinary identifies the evaluated ordinary conjugate with quotient/pullback
-interchange: after inserting the scalar units, both section maps send a section
-and its quotient coefficient to the same pulled-back tensor. The unit-normalized
-restriction/direct-image comparison defining integralFiniteScalarPull has that
-same transpose. The reductionModel equations of the calculus and the cochain
-normalization of pullbackTensorDerivedEvaluation cancel the computation
-isomorphisms on both sides. This proves the displayed equation on Q(P).
-Naturality and the K-flat resolution isomorphism transport it to H. No open
-extension, open mate, constructibility, completeness or nonempty-scheme
-hypothesis is used; zero complexes and n=0 obey the same tensor equation. -/
+/-- Finite evaluation of the whole-system pullback model is the canonical scalar square. -/
 theorem integralReductionPullFiniteSquare (o : Operations l E)
     (model : RealizationModel l E o) {X Y : Scheme.{u}} (f : X ⟶ Y)
     (H : Integral l E Y) (n : ℕ) :

@@ -17,7 +17,18 @@ import WeilConjectures.RingTheory.SmoothOfLocalizationSpanUniverses
 /-!
 # The polynomial quotient used in separable Popescu preparation
 
-Source: Stacks Project, proof of Lemma 07FE, first paragraph.
+We define the explicit quotient `A[X_i, Z_ij] / (X_i^n - ∑_j Z_ij a_j)` over `k[X_i]` and show
+that it is finitely presented, with smooth principal opens at the singular-ideal generators
+`a_j` and at the base variables `X_i`.
+
+## Implementation details
+
+The degenerate cases `m = 0` (where the localization at `X_i` is the zero ring), `d = 0` (where
+the construction is `A` itself) and zero rings are included.
+
+## References
+
+* [Stacks, Tag 07FE] (first paragraph of the proof)
 -/
 
 @[expose] public section
@@ -26,44 +37,26 @@ universe u v
 
 namespace Algebra
 
-/-- The equations of the explicit quotient in Stacks, proof of Lemma 07FE.
-(blueprint: lem-weil-pbc-popescu-polynomial-quotient-smooth). -/
+/-- The equations of the explicit quotient in Stacks, proof of Lemma 07FE. -/
 noncomputable def popescuPolynomialRelations {A : Type v} [CommRing A] (d n : ℕ) {m : ℕ}
     (a : Fin m → A) (i : Fin d) : MvPolynomial (Fin d ⊕ (Fin d × Fin m)) A :=
   MvPolynomial.X (Sum.inl i) ^ n -
     ∑ j : Fin m, MvPolynomial.X (Sum.inr (i, j)) * MvPolynomial.C (a j)
 
-/-- The actual polynomial quotient, before improving its presentation.
-(blueprint: lem-weil-pbc-popescu-polynomial-quotient-smooth). -/
+/-- The actual polynomial quotient, before improving its presentation. -/
 abbrev PopescuPolynomialQuotient {A : Type v} [CommRing A] (d n : ℕ) {m : ℕ}
     (a : Fin m → A) :=
   MvPolynomial (Fin d ⊕ (Fin d × Fin m)) A ⧸
     Ideal.span (Set.range (popescuPolynomialRelations d n a))
 
-/-- The polynomial base map sends `X i` to the class of the corresponding variable.
-(blueprint: lem-weil-pbc-popescu-polynomial-quotient-smooth). -/
+/-- The polynomial base map sends `X i` to the class of the corresponding variable. -/
 noncomputable def popescuPolynomialBaseMap {k : Type u} {A : Type v}
     [CommRing k] [CommRing A] [Algebra k A] (d n : ℕ) {m : ℕ} (a : Fin m → A) :
     MvPolynomial (Fin d) k →ₐ[k] PopescuPolynomialQuotient d n a :=
   MvPolynomial.aeval (fun i ↦ Ideal.Quotient.mk _ (MvPolynomial.X (Sum.inl i)))
 
 /-- The explicit quotient is finitely presented over the polynomial base; its opens at
-singular-ideal generators and at the base variables are smooth.
-Source: Stacks Project, proof of Lemma 07FE, first paragraph.
-(blueprint: lem-weil-pbc-popescu-polynomial-quotient-smooth).
-
-Proof: write `P=A[X_i,Z_ij]` and impose the finitely many displayed relations. The
-finite presentation of A over k, together with the finitely many Z variables and
-relations, gives a finite presentation over R=k[X_i]. For each generator a_j,
-A_(a_j) is smooth over k because a_j belongs to H_(A/k). Invert a_j and solve each
-relation uniquely for Z_ij; this identifies B_(a_j) with a polynomial ring in the
-remaining Z variables over A_(a_j)[X_i]. Smoothness follows by base change,
-polynomial smoothness and composition. In B_(X_i), the equation X_i^n=Σ Z_ij a_j
-shows that the images of all a_j generate the unit ideal. Smoothness is local on
-this principal cover, so B_(X_i) is smooth over R. If m=0, that equation says
-X_i^n=0; its localization is the zero ring, which is smooth over R. If d=0,
-there are no relations or X opens and the construction is A itself. These
-arguments apply also when A or a localization is the zero ring. -/
+singular-ideal generators and at the base variables are smooth. -/
 theorem popescuPolynomialQuotient_smooth
     {k : Type u} {A : Type v} [Field k] [CommRing A] [Algebra k A]
     [FinitePresentation k A] (d n : ℕ) (hn : 1 ≤ n) {m : ℕ} (a : Fin m → A)

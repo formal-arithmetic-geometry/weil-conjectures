@@ -13,8 +13,21 @@ import WeilConjectures.SixFunctors.Normalized.NormalizedDVRStrictCoefficientAdjo
 
 /-! # Coefficient augmentation of the canonical strict DVR Roos object
 
-Source: Stacks Tags 06YS, 06YY, 03EK and 05RT; blueprint DVR effectivity,
-proof paragraphs 3--4. (blueprint: lem-coef-normalized-dvr-roos-augmentation).
+This file interprets the scalar cone on the canonical strict Roos object in terms of coefficients,
+together with its augmentation (`normalizedDVR_roos_augmentation`).
+
+## Implementation details
+
+The proof applies the strict finite-coefficient adjoint calculation to the normalized reduction
+from the zeroth tail term and transports it through the finite-derived compatibility and the
+canonical homotopy-limit projection. The finite-coefficient compatibility of the level
+comparisons is essential: successor compatibility in the completed derived category alone
+permits off-diagonal Bockstein twists of the level comparison. The canonical strict model
+supplies the finite data by its `finiteModel` construction.
+
+## References
+
+* [Stacks Project, Tags 06YS, 06YY, 03EK, 05RT, 07A6 and 0941][stacks-project]
 -/
 
 @[expose] public noncomputable section
@@ -151,30 +164,9 @@ private theorem factorThroughCone
   rw [h, Q.map_comp]
   simp only [Category.assoc]
 
-/- STATEMENT-DISPUTED (pre-repair): successor-compatible D(R) level isomorphisms
-allow Bockstein twists. The finite coefficient compatibility below repairs this;
-see coord/changes/W3-DVR-strict-coefficient-augmentation.md for the counterexample. -/
-
 /-- The coefficient interpretation of the scalar cone on the canonical Roos
 object, with its specified augmentation. This statement supplies no assertion
-about preservation of homotopy limits by the scalar cone functor.
-
-Source: blueprint DVR effectivity proof, paragraphs 1 and 4; Stacks 06YY, 07A6 and
-0941. (blueprint: lem-coef-normalized-dvr-roos-augmentation).
-
-Proof: apply the strict finite-coefficient adjoint calculation to the normalized
-reduction from the zeroth tail term followed by iN. Its cone map has zero shifted
-component and unshifted component the reduction followed by iN. The normalized
-cokernel augmentation has those same components after iN, by the cokernel descent
-equation. The finite-derived compatibility hN identifies its target with T.M n;
-right naturality of the adjunction transports the calculation through eN. Finally
-precompose with the canonical homotopy-limit projection and use left naturality
-of the adjunction and naturality of the coefficient comparison A.
-
-The finite-coefficient compatibility is essential: completed-derived successor
-compatibility alone permits off-diagonal Bockstein twists of the level comparison.
-The canonical strict model supplies N, iN and eN by its finiteModel construction.
-The argument includes exponent one, the zero tower and the empty site. -/
+about preservation of homotopy limits by the scalar cone functor. -/
 theorem normalizedDVR_roos_augmentation
     (T : NormalizedDVRTower l E X D hl) (n : ℕ)
     (adj : scalarReductionDerivedExtension l E X n ⊣

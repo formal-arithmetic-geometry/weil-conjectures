@@ -10,6 +10,28 @@ public import WeilConjectures.RingTheory.TorKernelBoundaryConstruction
 import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
+/-!
+# Exactness on the right of the constructed Tor boundary
+
+For a surjection `q : F → N` with kernel `K`, the sequence
+`Tor₁(N, M) → K ⊗ M → F ⊗ M` formed with `torKernelBoundary` and the kernel inclusion is exact.
+
+## Implementation details
+
+Let `P` be the chosen projective resolution of `N`, `e : P₀ → F` the augmentation lift and
+`D : P₁ → K` the lifted differential, so that `i ∘ D = e ∘ d`. The map `K × P₀ → F`,
+`(k, p) ↦ i k + e p`, is surjective with kernel the image of `z ↦ (D z, -d z)`. Right exactness
+of the tensor product then lifts every `x` in `K ⊗ M` killed by `i ⊗ 1` to a cycle `z` of
+`P ⊗ M` with boundary `x`. Conversely `i ∘ D = e ∘ d` shows that every boundary is killed by
+`i ⊗ 1`. No projectivity of `F` is required.
+
+## References
+
+* [Stacks, Tag 00M0]
+* [Stacks, Tag 00LZ]
+* [Stacks, Tag 0111]
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory
@@ -17,25 +39,8 @@ open scoped TensorProduct
 namespace CategoryTheory
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Exactness of the constructed boundary at the tensor of the kernel.
-
-Source: Stacks Project, Algebra, Tags 00M0 and 00LZ; Homology, Tag 0111.
-
-Proof: Put K = ker(q). Let P be the chosen projective resolution of N, with
-augmentation epsilon and differential d : P1 -> P0. Its augmentation lift
-e : P0 -> F defines D : P1 -> K with i D = e d, where i is the kernel inclusion.
-The map s : K × P0 -> F, s(k,p) = i(k) + e(p), is surjective: lift q(f) through
-epsilon to p and use (f - e(p), p). The relation map j(z) = (D(z), -d(z)) has
-image ker(s), by exactness of d followed by epsilon.
-
-Tensor right exactness now lifts (x,0), for any x in K tensor M killed by i tensor 1,
-to z in P1 tensor M with (D tensor 1)(z) = x and (d tensor 1)(z) = 0. Thus z is a
-cycle. The cokernel formula defining torKernelHomologyBoundary sends its homology
-class to x; transport through the resolution isomorphism gives a Tor class with
-boundary x. Conversely i D = e d shows that the boundary of every cycle is killed
-by i tensor 1. Since the homology projection is epic, the same holds for the
-homology boundary and hence torKernelBoundary. No projectivity of F is required.
-(blueprint: lem-sc-p1-tor-kernel-boundary-construction-exact-right) -/
+/-- Exactness of the constructed boundary at the tensor of the kernel: the kernel of
+`ker q ⊗ M → F ⊗ M` is the image of `torKernelBoundary`. -/
 theorem tor_kernel_boundary_construction_exact_right
     (R : Type u) [CommRing R] (M : ModuleCat.{u} R)
     (F N : ModuleCat.{u} R) (q : F →ₗ[R] N) (hq : Function.Surjective q) :

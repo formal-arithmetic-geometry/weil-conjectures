@@ -11,9 +11,9 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 
 # The compact-support exchange of an open immersion along a proper refinement
 
-Blueprint `prose-E-15` defines `ν_f = χ_p⁻¹ ∘ Rp_{s*}(ν_h)` through a compactification
-`f = p ∘ h`, and shows that it does not depend on the compactification: two compactifications
-have a common proper refinement `q`, with `h = q ∘ h''`, and the key step is that `ν_h` agrees with
+The compact-support exchange `ν_f = χ_p⁻¹ ∘ Rp_{s*}(ν_h)` is defined through a compactification
+`f = p ∘ h`, and does not depend on the compactification: two compactifications have a common proper
+refinement `q`, with `h = q ∘ h''`, and the key step is that `ν_h` agrees with
 `χ_q⁻¹ ∘ Rq_{s*}(ν_{h''})` under the proper base change identification `h_! ≅ Rq_* h''_!`.
 
 This file proves that key step abstractly
@@ -43,8 +43,9 @@ variable {A B E A' B' E' : Type*} [Category A] [Category B] [Category E] [Catego
   {Dh' : A' ⥤ B'} {Lh' : B' ⥤ A'} {De' : A' ⥤ E'} {Le' : E' ⥤ A'} {Lq' : B' ⥤ E'}
   {Rq' : E' ⥤ B'}
 
-/-- **The compact-support exchange of an open immersion along a proper refinement** (blueprint
-`prose-E-15`, independence of the compactification, key step). -/
+/-- **The compact-support exchange of an open immersion along a proper refinement**: under the
+hypotheses listed in the module docstring, `ν_h ≫ Ψ(e) ≫ χ_q = e' ≫ Rq_{s*}(ν_{h''})`. This is the
+key step of the independence of the compact-support exchange from the compactification. -/
 theorem compactSupportExchange_refinement (adjh : Dh ⊣ Lh) (adje : De ⊣ Le) (adjq : Lq ⊣ Rq)
     (adjh' : Dh' ⊣ Lh') (adje' : De' ⊣ Le') (adjq' : Lq' ⊣ Rq')
     (c : Lh ≅ Lq ⋙ Le) (c' : Lh' ≅ Lq' ⋙ Le')

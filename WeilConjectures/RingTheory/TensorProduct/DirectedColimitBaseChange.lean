@@ -174,9 +174,7 @@ lemma directLimitTensorEquiv_of [DecidableEq {i // i₀ ≤ i}] (hc : IsColimit 
   simp [fromDirectLimit]
 
 /-- **Base change along a directed colimit: elements come from a stage.** Every element of
-`A ⊗_{A_{i₀}} M₀` is the image of an element of `A_i ⊗_{A_{i₀}} M₀` for some `i ≥ i₀`.
-
-(blueprint: `lem-weil-pbc-directed-colimit-base-change-elementwise`) -/
+`A ⊗_{A_{i₀}} M₀` is the image of an element of `A_i ⊗_{A_{i₀}} M₀` for some `i ≥ i₀`. -/
 theorem exists_rTensor_toPoint_eq (hc : IsColimit c) (x : Point F c ⊗[F.obj i₀] M₀) :
     ∃ (i : {i // i₀ ≤ i}) (t : Stage F i₀ i ⊗[F.obj i₀] M₀),
       (toPoint F c i₀ i).toLinearMap.rTensor M₀ t = x := by
@@ -188,9 +186,7 @@ theorem exists_rTensor_toPoint_eq (hc : IsColimit c) (x : Point F c ⊗[F.obj i�
 
 /-- **Base change along a directed colimit: zero elements vanish at a stage.** If
 `t ∈ A_i ⊗_{A_{i₀}} M₀` maps to zero in `A ⊗_{A_{i₀}} M₀`, then it maps to zero in
-`A_j ⊗_{A_{i₀}} M₀` for some `j ≥ i`.
-
-(blueprint: `lem-weil-pbc-directed-colimit-base-change-elementwise`) -/
+`A_j ⊗_{A_{i₀}} M₀` for some `j ≥ i`. -/
 theorem exists_rTensor_transition_eq_zero (hc : IsColimit c) (i : {i // i₀ ≤ i})
     (t : Stage F i₀ i ⊗[F.obj i₀] M₀) (ht : (toPoint F c i₀ i).toLinearMap.rTensor M₀ t = 0) :
     ∃ (j : {i // i₀ ≤ i}) (h : i ≤ j), (transition F i₀ h).toLinearMap.rTensor M₀ t = 0 := by

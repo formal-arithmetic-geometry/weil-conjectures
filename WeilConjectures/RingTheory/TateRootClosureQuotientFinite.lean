@@ -20,8 +20,23 @@ import Mathlib.Algebra.Field.Shrink
 /-!
 # Finiteness of the quotient by a root of the parameter
 
-Source: Stacks Project, Algebra, Tag 032P (lemma-tate-japanese), the residue-field argument.
-(blueprint: lem-weil-pbc-tate-root-closure-quotient-finite).
+Let `R` be a Noetherian normal domain of characteristic `p`, `L` a finite extension of its
+fraction field `K` with `L^(p^e) ⊆ K`, and `S` the integral closure of `R` in `L`. If
+`y ∈ S` satisfies `y^(p^e) = x` and `R/xR` is an N-2 domain, then `S/yS` is a finite
+`R`-module.
+
+## Implementation details
+
+If `x = 0` then `y = 0`, and the N-2 condition on `R` gives finiteness of `S` directly
+(replacing the finite extension by a small isomorphic copy when universes differ). Otherwise
+`yS` is prime with contraction `xR`, and applying Tag 031F to `R_(xR) → S_(yS)` shows that
+`κ(yS)` is finite over `κ(xR) = Frac(R/xR)`. The N-2 property of `R/xR` then makes the integral
+closure of `R/xR` in `κ(yS)` finite, and `S/yS` embeds into it.
+
+## References
+
+* [Stacks, Tag 032P]
+* [Stacks, Tag 031F]
 -/
 
 @[expose] public section
@@ -64,29 +79,9 @@ private theorem finite_integral_algebra_of_isN2
   exact Module.Finite.of_injective f
     (fun a b h ↦ IsFractionRing.injective B (FractionRing B) (congrArg Subtype.val h))
 
-/-- The quotient by a root of the prime parameter is finite.
-Source: Stacks Project, Algebra, Tag 032P (lemma-tate-japanese), from the description
-of the prime over `xR` through the finiteness of `S/yS`.
-(blueprint: lem-weil-pbc-tate-root-closure-quotient-finite).
-
-Proof: If x = 0, positivity of p^e gives y = 0. Transport the N-2 condition
-along R/(0) = R and the unique equivalence of fraction fields; apply it to L.
-For different universes replace the finite-dimensional extension by a small
-isomorphic field, using a finite basis. Thus S itself is finite in this case.
-Otherwise x and y are nonzero. For a in S, the common-power hypothesis puts
-its p^e-th power in K, and integrality and normality put this power in R.
-The ideal yS consists exactly of the a for which a^(p^e) lies in xR:
-if a^(p^e) = xr, then (a/y)^(p^e) = r, so a/y is integral over R.
-This description shows yS is prime and its contraction is xR. Localizing R
-at xR gives a one-dimensional Noetherian local domain, by the principal
-ideal height theorem and the nonzero chain (0) < xR. Apply Tag 031F to
-R_(xR) -> S_(yS), whose fraction fields are K and L, to obtain finiteness
-of kappa(yS) over kappa(xR). The latter is a fraction field of R/xR.
-N-2, transported to this fraction field and a small isomorphic copy of the
-finite residue extension if necessary, makes its integral closure finite.
-Reducing integral equations embeds S/yS into that closure. Since R/xR is
-Noetherian, this submodule is finite. Restrict scalars along the finite
-quotient map R -> R/xR to obtain the assertion. -/
+/-- Let `R` be a Noetherian normal domain of characteristic `p` with fraction field `K`, `L/K`
+a finite extension with `L^(p^e) ⊆ K`, and `y` in the integral closure `S` of `R` in `L` with
+`y^(p^e) = x`. If `R/xR` is an N-2 domain, then `S/yS` is a finite `R`-module. -/
 theorem tate_root_closure_quotient_finite
     (R : Type u) (K L : Type v) [CommRing R] [IsDomain R]
     [Field K] [Field L] [Algebra R K] [IsFractionRing R K]

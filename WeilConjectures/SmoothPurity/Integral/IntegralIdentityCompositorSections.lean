@@ -9,8 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Integral.IntegralInverseImageCom
 
 /-! # The sectionwise identity compositor
 
-Source: Stacks Tag 03D6, the identity normalization in the Weil-structures paragraph.
-(blueprint: lem-sf-integral-identity-compositor-sections)
+## References
+
+* Stacks Project, Tag 03D6
 -/
 
 @[expose] public noncomputable section

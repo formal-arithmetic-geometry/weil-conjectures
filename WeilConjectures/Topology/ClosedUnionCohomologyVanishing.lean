@@ -20,8 +20,9 @@ public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Gluing universal vanishing over two closed subsets
 
-Source: Stacks Project, Proposition 02UZ, component-reduction argument.
-(blueprint: lem-sc-closed-union-cohomology-vanishing).
+## References
+
+* Stacks Project, Tags 02UZ, 02UV and 02UT.
 -/
 
 @[expose] public section
@@ -55,23 +56,7 @@ private lemma zero_cohomology_of_closed_embedding
     AddCommGrpCat.isZero_of_subsingleton _
   exact hz.of_iso e
 
-/-- Universal degree-q vanishing is stable under a binary union of closed subsets.
-Source: Stacks Project, Proposition 02UZ, component-reduction argument, using
-Lemma 02UV and the open-closed short exact sequence of Modules, Lemma 02UT.
-(blueprint: lem-sc-closed-union-cohomology-vanishing).
-
-Proof: Work on T = Z ∪ W, which is Noetherian as a subspace of X. Regard Z and
-W as closed subspaces of T with their unchanged intrinsic topologies. Put
-U = T \ Z. The open-closed short exact sequence for F has right term the
-closed pushforward of F restricted to Z, whose degree-q cohomology is zero
-by closed-pushforward comparison and hZ. Its left term j_!j^*F is the closed
-pushforward of a sheaf G on closure(U). Since W is closed and contains U,
-closure(U) is contained in W. Push G forward along the closed inclusion
-closure(U) → W. Hypothesis hW and closed-pushforward comparison imply that
-H^q(closure(U),G) is zero, hence the left term has zero degree-q cohomology
-on T. Exactness at H^q(T,F) now makes it zero. For q=0 use the initial left
-exact part of the same sequence. Empty, equal, and nested Z and W cause no
-exception: the inclusions and support statement still apply. -/
+/-- Universal degree-q vanishing is stable under a binary union of closed subsets. -/
 theorem cohomology_vanishing_of_closed_union
     (X : Type u) [TopologicalSpace X] [NoetherianSpace X]
     (Z W : Closeds X) (q : ℕ)

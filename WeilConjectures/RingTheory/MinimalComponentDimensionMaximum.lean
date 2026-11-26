@@ -12,34 +12,34 @@ public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
 import WeilConjectures.RingTheory.MinimalComponentDimensionMaximumData
 
+/-!
+# Dimensions of the minimal components through a prime
+
+For a prime `p` of a finite type algebra `S` over a field, the maximum of `dim S/q` over the
+minimal primes `q ⊆ p` equals `dim S_p + trdeg κ(p)`.
+
+## Implementation details
+
+Every maximal chain of primes in `S/p` has length `r = trdeg κ(p)` (Stacks 00P0, 00OS). For each
+minimal `q ⊆ p`, a saturated chain from `q` to `p` of greatest length `s(q) ≤ d` is concatenated
+with a fixed maximal chain above `p`, giving a maximal chain in `S/q`, so `dim S/q = s(q) + r`;
+some `q` attains `s(q) = d`. No topological dimension-at-point formula is used.
+
+## References
+
+* [Stacks, Tag 00P1] (proof, the prime-chain argument)
+* [Stacks, Tags 00P0, 00OS]
+-/
+
 @[expose] public section
 
 universe u v
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Algebra, proof of Tag 00P1, the prime-chain argument.
-(blueprint: lem-weil-pbc-minimal-component-dimension-maximum).
-The maximum dimension of the minimal components through a prime is the sum of the
+/-- The maximum dimension of the minimal components through a prime is the sum of the
 local-ring dimension and the residue transcendence degree. This is a ring-theoretic
-statement, before identifying that maximum with topological dimension at the point.
-
-Proof: The quotient S/p is a finite type domain with fraction field kappa(p).
-Tag 00P0 identifies its dimension with r, and Tag 00OS says that every maximal
-prime chain in S/p has length r. Fix one such chain; its lift starts at p.
-The ring S is Noetherian, so the set J of minimal primes q below p is finite
-and nonempty. Localization identifies these with the minimal primes of S_p.
-For each q in J choose a saturated chain from q to p of greatest length s(q).
-These lengths exist: all such chains have length at most d, by the prime
-correspondence and dim S_p = d. Conversely, every chain in S_p can be extended
-at its bottom to a minimal prime and at its top to p. The supremum defining d
-is attained because its lengths are natural numbers bounded by d; consequently
-max s(q) = d. Concatenate each chosen chain with the fixed chain above p.
-The resulting chain is maximal in S/q: it starts at its zero prime, ends at a
-maximal ideal, and no insertion is possible, including at the joining prime p.
-By Tag 00OS its length is dim S/q, hence dim S/q = s(q) + r.
-Thus every component dimension is at most d+r, and a q attaining s(q)=d gives
-equality. No topological dimension-at-point formula is used in this argument. -/
+statement, before identifying that maximum with topological dimension at the point. -/
 theorem minimal_component_dimension_maximum
     {k : Type u} [Field k] {S : Type v} [CommRing S] [Algebra k S]
     [Algebra.FiniteType k S] (p : Ideal S) [p.IsPrime]

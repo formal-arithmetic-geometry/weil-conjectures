@@ -15,6 +15,19 @@ public import Mathlib.LinearAlgebra.Dimension.Finrank
 import WeilConjectures.RingTheory.SmoothQuotientFibreFinrankAddLe
 import WeilConjectures.RingTheory.SmoothQuotientFibreFinrankEqSub
 
+/-!
+# Rank additivity for fibres of a smooth polynomial quotient
+
+For a smooth polynomial quotient in `n` variables whose conormal module is free of rank `c`, we
+show that the fibre of the Kähler differentials at any point over a prime of the base has
+dimension `n - c`, in the additive form `c + d = n`.
+
+## References
+
+* [Stacks, Tag 07CG]
+* [Stacks, Tag 07CH]
+-/
+
 @[expose] public section
 
 
@@ -24,17 +37,10 @@ open scoped TensorProduct
 
 namespace Algebra
 
-/-- Intermediate rank-additivity for fibres of a smooth polynomial quotient.
-
-Source: Stacks Project, Smoothing Ring Maps, Lemmas 07CG and 07CH.
-(blueprint: lem-weil-pbc-smooth-quotient-fibre-finrank-add)
-
-Proof. Tensor the split conormal sequence with the residue field at the chosen
-prime. The conormal basis and polynomial coordinate basis give ranks `c` and
-`n`; differential base change and tensor associativity identify the remaining
-summand with the displayed differential fibre. The direct-sum dimension formula
-therefore gives the additive equality `c + d = n`.
--/
+/-- For a smooth polynomial quotient `C = R[x₁, ..., xₙ]/(f₁, ..., f_c)` whose conormal module is
+free with basis indexed by `Fin c`, and a point `q` of the fibre of `C` over a prime `p` of `R`,
+`c` plus the dimension over `κ(q)` of the fibre of the Kähler differentials of `C ⊗ κ(p)` over
+`κ(p)` equals `n`. -/
 theorem smooth_quotient_fibre_finrank_add
     {R : Type u} [CommRing R] {n c : ℕ} (f : Fin c → MvPolynomial (Fin n) R)
     [Smooth R (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))]

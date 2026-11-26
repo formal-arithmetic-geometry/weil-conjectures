@@ -10,7 +10,12 @@ public import WeilConjectures.WeilSheaf.Native.NativeRingedForgetTensorChainComp
 import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedUnderivedBinarySquare
 import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidalComp
 
-/-! # The binary square for normalized native tensor complexes -/
+/-! # The binary square for normalized native tensor complexes
+
+## References
+
+* Stacks Project, Tags 06YN, 06YS, 06YU and 0FPT
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -56,8 +61,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   (D : NativeWeilTensorRingedAssociatorChainData k₀ l X T)
 
 /-- Apply the bridge square termwise. All components are the specified underived
-square components, so no comparison data are selected by this construction.
-Source: Stacks 06YN (blueprint: new-sf-native-weil-tensor-ringed-binary-chain-square). -/
+square components. -/
 def nativeRingedChainBridgeSquare :
     D.b.native.functor.mapHomologicalComplex (.up ℤ) ⋙
         D.b.forget.mapHomologicalComplex (.up ℤ) ≅
@@ -66,21 +70,7 @@ def nativeRingedChainBridgeSquare :
 
 -- Both normalized site tensors occur in this square.
 -- The degreewise comparison crosses three concrete total constructions.
-/-- The normalized comparisons commute for a single pair of native complexes.
-Source: Stacks 06YS, 06YU and 0FPT
-(blueprint: new-sf-native-weil-tensor-ringed-binary-chain-square).
-
-Proof: first compare underived inverses by their tensor--Hom mates. The native
-uncurrying equation, the equation `he` for ordinary forgetting, and the Hom square
-of the bridge give the same mate after applying the ordinary adjunction. Cancel
-the sheaf tensor braidings using symmetry of the restriction tensorator. This
-proves the underived binary square. Next use coproduct extensionality after the
-native equivalence. The equations `hchain`, the native summand equation, the
-ordinary normalized summand equation and the restriction summand equation reduce
-the two sides to this underived square. Naturality of the termwise bridge square
-moves each summand inclusion through it. Both exchanges contribute the same
-scalar (-1)^(pq), and additivity moves that scalar through the comparisons.
-This calculation uses only two factors and no associator. -/
+/-- The normalized comparisons commute for a single pair of native complexes. -/
 theorem native_weil_tensor_ringed_binary_chain_square
     (d : NativeOrdinaryRingedTensorUnderivedData D.b)
     (o : NativeOrdinaryRingedTensorChainComparison D.b D.κ d)

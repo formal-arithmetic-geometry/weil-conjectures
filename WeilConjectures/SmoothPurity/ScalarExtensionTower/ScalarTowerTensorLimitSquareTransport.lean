@@ -10,13 +10,14 @@ import WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarTowerTensorLimitT
 
 /-! # Transport of the normalized strict tensor comparison to total limits
 
-Source: Stacks 07A4 and 0941; realization step 8 of
-lem-pur-scalar-extension-tower-coherence.
-
 This module isolates the localization and total-limit transport step.  The
 strict tensor comparison itself is supplied as `DerivedSigmaModel`; the
 remaining equation is the passage from its normalized cochain coordinates to
 the named completed comparison and realization maps.
+
+## References
+
+* Stacks Project, Tags 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -44,20 +45,6 @@ realization models and the completed scalar tensor comparison.  This is the
 localization and total-limit part of the tensor word calculation: all finite
 quotient and signed-total identities are contained in `hα` and are not
 reproved here.
-
-Source: Stacks 07A4 and 0941; the localization and derived-limit part of
-realization step 8 of `lem-pur-scalar-extension-tower-coherence`.
-
-Proof: choose simultaneous flat-term K-flat representatives of the two
-constructible inputs.  Apply the normalization equations of `SY` and `TL` to
-their quotient presentations, then use the `DerivedSigmaModel` equation `hα`
-to identify the strict scalar/tensor map.  Naturality of the Roos bridge and
-of the completion isomorphisms transports this equality from representatives
-to the completed objects.  The localization universal property removes the
-representative choices, and functoriality of the total limit gives the displayed
-equality.  The same argument includes zero complexes, identity coefficient
-maps, and ramified quotient transitions.
-(blueprint: stage3-pur-scalar-tensor-limit-transport)
 -/
 theorem scalarTowerTensorLimitSquare_of_derivedSigmaModel (W : Scheme.{u})
     (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)

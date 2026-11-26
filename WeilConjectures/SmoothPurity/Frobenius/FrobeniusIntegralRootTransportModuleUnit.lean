@@ -27,12 +27,7 @@ attribute [local instance_reducible] PurCompactSupport.completed
 attribute [local implicit_reducible] PurCompactSupport.completed
   completedIntegralCommRingSheafUnrestricted
 
-/-- The module adjunction unit is invertible along an isomorphism of schemes.
-Source: Stacks Project, Modules on Sites, Tags 09A5 and 03EL.
-Proof: inverse image of sheaves on the pro-etale site is an equivalence for an
-isomorphism of schemes; transport this equivalence through scalar extension and
-reflect its unit along the underlying sheaf functor.
-(blueprint: new-weil-frobenius-integral-root-transport-module-unit). -/
+/-- The module adjunction unit is invertible along an isomorphism of schemes. -/
 theorem frobeniusIntegralRootTransport_moduleUnit_isIso
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

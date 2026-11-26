@@ -12,9 +12,19 @@ import WeilConjectures.RingTheory.FormallySmoothAdicDiagonalStep
 /-!
 # Compatible lifts on a finite quotient grid
 
-Source: Stacks Project, More on Algebra, proof of Lemma 15.38.5 (Tag 07NJ),
-the quotient grid and induction paragraphs
-(blueprint: lem-weil-pbc-fs-adic-compatible-quotient-grid).
+An algebra formally smooth for an adic topology admits compatible maps to all quotients
+`A ⧸ (J ^ a ⊔ I ^ b)` lifting a given map to `A ⧸ J`.
+
+## Implementation details
+
+Diagonal stages `A ⧸ (J ^ (k + 1) ⊔ I ^ (k + 1))` are built recursively with
+`Algebra.FormallySmoothAdic.exists_diagonal_successor`, starting from the reduction of `g`
+modulo `J ⊔ I`. The entry at `(a, b)` is the projection of the diagonal stage at index
+`max a b`. Choice is only used inside the existence proof.
+
+## References
+
+* [Stacks, Tag 07NJ], proof: the quotient grid and induction paragraphs
 -/
 
 @[expose] public section
@@ -73,30 +83,7 @@ private theorem first_row_kills_power
 
 /-- Adic formal smoothness constructs compatible maps to `A / (J ^ a + I ^ b)`
 whose first row is the reduction of `g`. No completeness, closedness of `J`, or
-comparison between powers of `J` and `I` is needed at this finite-stage step.
-Source: Stacks Project, More on Algebra, proof of Lemma 15.38.5 (Tag 07NJ),
-the quotient grid and induction paragraphs.
-(blueprint: lem-weil-pbc-fs-adic-compatible-quotient-grid)
-
-Proof:
-1. The reduction of `g` modulo `J + I ^ b` annihilates `n ^ (r*b)` for positive
-   `b`: take powers of the ideal-image inclusion and then apply the quotient map.
-2. Use diagonal stages with exponent `k+1`, carrying their annihilation exponent
-   and prescribed reduction to the first row. The initial stage is the reduction
-   of `g` modulo `J + I`. The one-step theorem `exists_diagonal_successor` extends
-   any stage using the next first-row reduction of `g`.
-3. A proved dependent recursion lemma constructs a tower with adjacent transition
-   compatibility. Induction on an inequality gives every diagonal transition.
-4. Define the entry at `(a,b)` by projecting the diagonal stage at index
-   `max a b`, whose exponent is `max a b + 1`. Monotonicity of `max` and quotient
-   factor composition give all the required transition equations.
-5. Project the prescribed first-row identity at that diagonal index to obtain the
-   desired reduction of `g` at `(1,b)`. The same construction handles either zero
-   index, since its quotient is a quotient of every diagonal stage.
-6. The one-step lifting theorem proves the square-zero and continuity conditions
-   and the independent-universe reduction through a small generated subalgebra.
-   Choice is used only in this theorem-level existence proof; no definition
-   selects arbitrary data from an unproved existence statement. -/
+comparison between powers of `J` and `I` is needed. -/
 theorem FormallySmoothAdic.exists_quotient_grid
     {R : Type u} {S : Type v} {A : Type w}
     [CommRing R] [CommRing S] [CommRing A] [Algebra R S] [Algebra R A]

@@ -14,8 +14,22 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Completed pullback versus normalized clopen restriction
 
-Source: Stacks Project, proetale.tex, Tag 09C3; derived.tex, Tag 08TC.
-(blueprint: lem-sf-clopen-complete-pullback-comparison).
+On a complete input, the completed pullback along a clopen immersion is ordinary restriction.
+
+## Implementation details
+
+The finite coefficient identifications are fixed by their values on constant sections, so
+sheafification uniqueness identifies them with the normalized open coefficient identifications;
+the inverse-limit universal property then identifies the completed coefficient maps, and hence
+their module restrictions and derived descents. The completed pullback is identified with
+ordinary restriction of the quotient completion, and the completion unit of a complete input is
+invertible. No constructibility or Tor condition is needed; the empty open and the zero complex
+are included.
+
+## References
+
+* [Stacks, Tag 09C3]
+* [Stacks, Tag 08TC]
 -/
 
 @[expose] public section
@@ -39,25 +53,7 @@ private instance (priority := 10000) residueBasesAbLocallyBijective (X : Scheme.
     (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   integralCoefficientAbLocallyBijective.{u, u} X
 
-/-- On a complete input, the completed clopen pullback is ordinary restriction.
-
-Source: Stacks Project, proetale.tex, Tag 09C3, restriction to the disjoint affine
-opens; derived.tex, Tag 08TC. This is the comparison needed in step 3 of
-lem-sf-residue-lisse-clopen-bases.
-(blueprint: lem-sf-clopen-complete-pullback-comparison).
-
-Proof: the finite coefficient identifications in d are fixed by their values on
-constant sections. Sheafification uniqueness identifies them with the normalized
-open coefficient identifications. The equations with every quotient projection
-then identify the completed coefficient maps, by the inverse-limit universal
-property. Consequently their module restrictions, and their exact termwise
-derived descents, are naturally isomorphic. Apply
-clopenIntegralCompletionRestriction to identify the specified completed pullback
-with ordinary restriction of quotient completion. The canonical completion unit
-of K is invertible by canonicalCompletionUnitCriterion. Applying ordinary
-restriction to that unit and composing with the preceding comparisons gives the
-asserted isomorphism. This argument imposes no constructibility or Tor condition;
-it includes the empty open and the zero complex. -/
+/-- On a complete input, the completed clopen pullback is ordinary restriction. -/
 theorem sf_clopen_complete_pullback_comparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

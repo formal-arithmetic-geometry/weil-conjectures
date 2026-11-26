@@ -10,7 +10,11 @@ public import Mathlib.CategoryTheory.NatIso
 
 /-! # Semilinear comparison of localized bilinear functors
 
-Extracted proved scalar-localization calculus used by the derived-operation construction.
+Scalar-localization calculus used by the derived-operation construction.
+
+## References
+
+* Stacks Project, Tags 00CV and 00CX.
 -/
 
 @[expose] public noncomputable section
@@ -136,17 +140,7 @@ private theorem rawBilinearIso_existsUnique
 section SemilinearTensorComparison
 set_option backward.defeqAttrib.useBackward false
 
-/-- Semilinear comparison of localized bilinear functors.
-Source: module base change (Stacks 00CV, 00CX), and the rational paragraph of
-blueprint `prose-03-02`.
-(blueprint: lem-sf-localized-bilinear-comparison).
-Proof: Construct a normalized natural isomorphism by conjugating localized integral components
-with the object equalities. Double tensor induction proves naturality from the integral naturality
-square and coefficient multiplication. For the semilinear composite, postcompose the source
-bilinear Hom map with the additive scalar functor; precompose the target bilinear Hom map with
-that functor in both arguments. The pure-tensor map formula and multiplicativity of the
-coefficient homomorphism identify both comparisons with the normalized integral comparison.
-Component extensionality proves uniqueness. -/
+/-- Semilinear comparison of localized bilinear functors. -/
 theorem bilinearComparison_existsUnique
     {R : Type r} [CommRing R] {S : Type s} [CommRing S]
     {C : Type u₁} [Category.{v₁} C] [Preadditive C] [Linear R C]

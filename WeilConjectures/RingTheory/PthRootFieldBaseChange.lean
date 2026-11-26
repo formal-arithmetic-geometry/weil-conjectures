@@ -18,7 +18,20 @@ import Mathlib.Algebra.Field.ULift
 
 /-! # The p-root quotient as base change by a field
 
-Source: Stacks Project, More on Algebra, Tag 07E5, proof of (2) ⇒ (4).
+If the coefficients have independent differentials, the `p`-root quotient over `A` is the base
+change of `A` by a finite purely inseparable field extension of `k`.
+
+## Implementation details
+
+The `p`-root quotient `Q` over `k` is a finite field with all `p`-th powers in `k`, hence purely
+inseparable; `F = ULift Q` meets the universe bound. The polynomial and quotient tensor
+equivalences identify `A ⊗_k Q` with the quotient over `A`. The quotient is constructed
+explicitly, and no regularity, locality or Noetherianity of `A` is needed.
+
+## References
+
+* [Stacks, Tag 07E5] (proof of (2) ⇒ (4))
+* [Stacks, Tag 07DZ]
 -/
 
 @[expose] public section
@@ -30,21 +43,7 @@ open scoped TensorProduct
 namespace Algebra
 
 /-- Independent coefficient differentials identify the actual p-root quotient with
-base change by a finite purely inseparable field extension.
-
-Source: Stacks Project, More on Algebra, Tag 07E5, proof of (2) ⇒ (4), first paragraph;
-Algebra, Tag 07DZ. (blueprint: lem-weil-pbc-pth-root-field-base-change).
-
-Proof: Let Q be the actual p-root quotient over k. The field-quotient theorem
-makes Q a finite field extension with every p-th power in k, hence purely
-inseparable by the power criterion. Set F = ULift Q to meet the universe bound;
-the canonical algebra equivalence transports finiteness and pure inseparability.
-The polynomial tensor equivalence and the quotient tensor equivalence identify
-A tensor_k Q with the actual quotient over A: the image of each defining generator
-is X_i^p-C(a_i). Tensor the lift equivalence to obtain the claimed isomorphism.
-For n = 0 these are the tensor unit isomorphisms. The quotient is constructed
-explicitly; no arbitrary witness of an unproved existence theorem is chosen.
-No regularity, locality or Noetherianity of A is needed. -/
+base change by a finite purely inseparable field extension. -/
 theorem pthRootAlgebra_equiv_field_baseChange
     (k : Type u) (A : Type v) [Field k] [CommRing A] [Algebra k A]
     (p : ℕ) [Fact p.Prime] [CharP k p] (n : ℕ) (a : Fin n → k) :

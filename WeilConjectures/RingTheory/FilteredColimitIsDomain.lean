@@ -10,15 +10,23 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Limits.HasLimits
 import Mathlib.Algebra.Category.Ring.FilteredColimits
 
+/-!
+# Filtered colimits of domains
+
+A filtered colimit of commutative rings that are domains is a domain.
+
+## Implementation details
+
+Two factors of a product are represented at a common stage, where the domain property applies;
+filteredness detects the vanishing of the product at a later stage.
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace CommRingCat
 /-- A filtered colimit cocone of domains has a domain as its vertex, transported
-along an equality of the vertex with a specified ring.
-(blueprint: new-filtered-colimit-domain-cocone)
-The proof represents two factors at stages, lifts them to a common stage, and
-uses the domain property there; filteredness detects the zero relation later. -/
+along an equality of the vertex with a specified ring. -/
 theorem isDomain_of_filtered_colimit_cocone
     {I : Type u} [SmallCategory I] [IsFiltered I]
     (D : I ⥤ CommRingCat.{u}) (c : Cocone D) (hc : IsColimit c)

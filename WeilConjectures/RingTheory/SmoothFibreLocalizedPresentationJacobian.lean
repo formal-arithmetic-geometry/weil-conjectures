@@ -18,8 +18,14 @@ import WeilConjectures.RingTheory.RelativeGlobalCompleteIntersectionSmoothJacobi
 /-!
 # A Jacobian minor from a smooth fibre of a localized presentation
 
-Source: Stacks Project, Algebra, proof of Lemma 00TF, applying Lemma 00TE to the fibre.
-(blueprint: lem-weil-pbc-smooth-fibre-localized-presentation-jacobian).
+If the fibre of `R → S` at a prime `q` of `S` is smooth, then for any relative global complete
+intersection presentation of a principal neighbourhood `S_g` of `q`, some maximal Jacobian minor
+avoids the prime corresponding to `q`.
+
+## References
+
+* [Stacks, Tag 00TF]
+* [Stacks, Tag 00TE]
 -/
 
 @[expose] public section
@@ -62,33 +68,7 @@ private theorem smoothAt_away {R A : Type*} [CommRing R] [CommRing A] [Algebra R
     ((IsLocalization.algEquiv (.powers (g * h)) Ahg Agh).restrictScalars R)
 
 /-- A smooth fibre at a prime supplies a maximal Jacobian minor of any relative global
-complete intersection presentation of a principal neighbourhood, avoiding the lifted prime.
-Source: Stacks Project, Algebra, proof of Lemma 00TF, and Lemma 00TE.
-(blueprint: lem-weil-pbc-smooth-fibre-localized-presentation-jacobian).
-
-Proof:
-1. Put `p = q ∩ R`, `k = κ(p)` and `T = R[x]/(f)`. The base-change theorem 00SS
-   gives `Tbar = k[x]/(fbar) ≃ₐ[k] _root_.TensorProduct R k T`, with each variable sent to its pure
-   tensor, and proves that `fbar` is a relative global complete intersection presentation.
-2. Let `Q` be the fibre prime over `q`. Its contraction is `q`. Since the image of `g`
-   is a unit in `S_g`, the prime `qg` implies `g ∉ q`, hence `1 ⊗ g ∉ Q`. Lift `Q`
-   to a prime `Qg` of the localization of the fibre at `1 ⊗ g`.
-3. Smoothness persists at `Qg`: if the fibre localized at `h ∉ Q` is smooth, further
-   localize at the image of `g`. Both orders of localization give the localization at
-   `(1 ⊗ g) * h`. Tensoring `e` and commuting localization with tensor product give
-   an equivalence `E : Tbar ≃ₐ[k] (p.Fiber S)_(1 ⊗ g)`. Pull back `Qg` along `E`;
-   smooth principal neighbourhoods transport along algebra equivalences.
-4. Apply 00TE to `fbar` at this pulled-back prime to obtain the required increasing
-   choice of columns. Coefficient reduction commutes with partial derivatives and
-   determinants, so this minor is the coefficient reduction of the original minor.
-5. The variable formula of the base-change equivalence extends to all polynomials by
-   extensionality of algebra homomorphisms. Contracting `Qg` through the tensor and
-   localization equivalences gives a prime of `S_g` whose contraction is `q`; injectivity
-   of contraction for localization identifies it with `qg`. Thus reduced polynomial
-   membership in the pulled-back prime is precisely original polynomial membership in
-   `comap e.symm qg`. The minor obtained in step 4 therefore avoids that prime.
-The argument includes `c = 0`: the empty determinant is one. When `c > n`, the
-base-changed complete-intersection hypothesis and the prime exclude that case. -/
+complete intersection presentation of a principal neighbourhood, avoiding the lifted prime. -/
 theorem exists_jacobian_minor_of_smooth_fibre_localizedPresentation
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
     (q : PrimeSpectrum S) (g : S)

@@ -28,7 +28,7 @@ variable {X : TopCat.{u}} {C : Type*} [Category C]
 
 /-- The canonical map `colim_i D_i(U) → (colim D)(U)` for a diagram of sheaves `D` and an open
 `U`; its composite with the `i`-th coprojection is the component at `U` of the coprojection
-`D_i → colim D`. (blueprint: `aux-directed-colimit-map`) -/
+`D_i → colim D`. -/
 noncomputable def Sheaf.colimitSectionsMap {J : Type*} [Category J] (D : J ⥤ X.Sheaf C)
     [HasColimit D] (U : (Opens X)ᵒᵖ)
     [HasColimit (D ⋙ sheafToPresheaf _ C ⋙ (evaluation _ C).obj U)] :

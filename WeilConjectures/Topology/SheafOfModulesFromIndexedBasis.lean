@@ -14,8 +14,18 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 /-!
 # Extending modules on an indexed basis
 
-Source: Stacks Project, Sheaves on Spaces, Section 009H, Tags 009L, 009N, 009T and 009U.
-(blueprint: lem-weil-pbc-sheaf-of-modules-from-indexed-basis)
+A version of the extension of a presheaf of modules from a basis to a sheaf of modules, in which
+the basis is indexed and the same open may have several representatives.
+
+## Implementation details
+
+Choosing one index for each open of the basis reduces to `exists_sheafOfModules_from_basis`;
+restrictions between two representatives of the same open are mutually inverse and identify all
+representatives.
+
+## References
+
+* [Stacks Project, Tags 009L, 009N, 009T and 009U](https://stacks.math.columbia.edu/tag/009H)
 -/
 
 @[expose] public section
@@ -100,31 +110,7 @@ private theorem indexedModule_isIso
 
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The basis-extension theorem with repeated representatives of the same open allowed.
-Source: Stacks Project, Sheaves on Spaces, Section 009H, Tags 009L, 009N, 009T and 009U.
-(blueprint: lem-weil-pbc-sheaf-of-modules-from-indexed-basis)
-
-Proof:
-1. Set B=range U and choose one index c(V) for each V in B. Give V the module Q(c(V)),
-   transported along U(c(V))=V. Restriction is r between the chosen indices. The identity,
-   composition and scalar laws descend to this presheaf of modules.
-2. For any i,j with U i=U j, restriction in each direction is inverse to the other:
-   apply composition and then identity. These inverse maps identify all representatives.
-   In particular the chosen representative of an intersection identifies with cap i j.
-3. The finite refinement hypothesis descends to B: index a covering by its members,
-   choose an index for each, apply hrefine and take the displayed finite basis opens.
-   Transport each compatible finite family to the chosen representatives. Composition
-   and the inverse identifications from step 2 translate overlap equality into hglue.
-   Transport its unique glued element back to obtain finite unique gluing on B.
-4. Apply exists_sheafOfModules_from_basis. For each original i compose its chosen-basis
-   section equivalence with the inverse representative identification of step 2 to obtain
-   iota i. Composition proves its restriction law.
-5. A compatible linear family psi restricts to the chosen representatives. Apply the
-   basis-extension universal property to obtain its unique morphism. Composition extends
-   its section formula to every original index, and uniqueness on chosen indices proves
-   uniqueness on all indices. If every psi i is bijective, so is every chosen map, and
-   the basis-extension isomorphism criterion applies. Empty covers are included in hglue,
-   so this construction also applies to the empty space and empty basis. -/
+/-- The basis-extension theorem with repeated representatives of the same open allowed. -/
 theorem exists_sheafOfModules_from_indexed_basis
     (X : TopCat.{u}) (I : Type u) (U : I → Opens X)
     (hB : IsBasis (Set.range U))

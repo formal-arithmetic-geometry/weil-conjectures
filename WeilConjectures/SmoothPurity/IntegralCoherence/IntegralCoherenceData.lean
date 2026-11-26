@@ -34,13 +34,15 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificat
 public import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 /-! # Integral coherence before and after the derived limit
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0941;
-blueprint main-20261015, coefficient twists, simultaneous strict quotient-tower extraction
-(blueprint: lem-pur-integral-coherence-tower).
+## Implementation details
 
 The ringed sequence site encodes strict semilinear quotient towers. Thus every
 cochain map below commutes with every quotient transition before localization.
 The index n denotes the positive exponent n+1; there is no boundedness condition.
+
+## References
+
+* Stacks Project, Tags 03D2, 03EL, 06YN, 07A4, 0941 and 0D6D.
 -/
 
 @[expose] public noncomputable section
@@ -67,8 +69,7 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Strict quotient systems of unbounded cochains, not towers in a derived category.
-Source: Stacks 0941 (blueprint: lem-pur-integral-coherence-tower). -/
+/-- Strict quotient systems of unbounded cochains, not towers in a derived category. -/
 abbrev Complex (W : Scheme.{t}) := CochainComplex (coefficientSequenceModules l E W) ℤ
 
 local instance sequenceMonoidal (V : Scheme.{t}) :
@@ -100,20 +101,17 @@ local instance sequenceRight (V : Scheme.{t})
 local instance complexMonoidal (V : Scheme.{t}) :
     MonoidalCategory (Complex l E V) := inferInstance
 
-/-- The actual termwise inverse image on the sequence site.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-coherence-tower). -/
+/-- The actual termwise inverse image on the sequence site. -/
 abbrev pull {X Y : Scheme.{t}} (f : X ⟶ Y) :=
   (integralComparisonSequencePullback l E f).mapHomologicalComplex (.up ℤ)
 
-/-- The adjunction-normalized composition map, lifted termwise before localization.
-Source: Stacks 0D6D, 07A4 (blueprint: lem-pur-integral-coherence-tower). -/
+/-- The adjunction-normalized composition map, lifted termwise before localization. -/
 def compositor {X Y Z : Scheme.{t}} (h : Z ⟶ X) (f : X ⟶ Y) :
     pull l E (h ≫ f) ≅ pull l E f ⋙ pull l E h :=
   (Functor.mapHomologicalComplexCompIso
     (integralComparisonSequenceComposition l E h f).symm (.up ℤ)).symm
 
-/-- The actual adjunction-unit generator, read as a section on the base-changed object.
-Source: Stacks 03D2 (blueprint: lem-pur-integral-coherence-tower). -/
+/-- The actual adjunction-unit generator, read as a section on the base-changed object. -/
 def generator {X Y : Scheme.{t}} (f : X ⟶ Y)
     (M : coefficientSequenceModules l E Y) (n : ℕ) (U : Y.ProEt)
     (x : M.val.obj (op (n, U))) :
@@ -123,8 +121,7 @@ def generator {X Y : Scheme.{t}} (f : X ⟶ Y)
 
 /-- The normalized total comparison on strict systems. Its generator equation fixes
 c on 1 tensor (x tensor y); linearity gives the stated s tensor formula, and the
-inverse contracts the two scalars. Units are fixed by the action equations below.
-Source: Stacks 07A4, 03EL (blueprint: lem-pur-integral-coherence-tower). -/
+inverse contracts the two scalars. Units are fixed by the action equations below. -/
 structure PullbackComparison {X Y : Scheme.{t}} (f : X ⟶ Y)
     extends (pull l E f).CoreMonoidal where
   generators : ∀ (P Q : Complex l E Y) (p q k : ℤ) (hpq : p + q = k)
@@ -144,27 +141,23 @@ structure PullbackComparison {X Y : Scheme.{t}} (f : X ⟶ Y)
         (generator l E f (Q.X q) n U y)
 
 /-- The forward cochain comparison; CoreMonoidal records its naturality,
-associativity and both action-unit equations in the inverse orientation.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-coherence-tower). -/
+associativity and both action-unit equations in the inverse orientation. -/
 def PullbackComparison.tensor {X Y : Scheme.{t}} {f : X ⟶ Y}
     (c : PullbackComparison l E f) (P Q : Complex l E Y) := (c.μIso P Q).symm
 
-/-- The action-unit identification, with the coefficient in degree zero.
-Source: Stacks 03EL (blueprint: lem-pur-integral-coherence-tower). -/
+/-- The action-unit identification, with the coefficient in degree zero. -/
 def PullbackComparison.unit {X Y : Scheme.{t}} {f : X ⟶ Y}
     (c : PullbackComparison l E f) := c.εIso.symm
 
 /-- Signed symmetry for the same CoreMonoidal comparison. Its other fields
-are exactly the naturality, associativity and two action-unit equations.
-Source: Stacks 07A4 (blueprint: lem-pur-integral-coherence-tower). -/
+are exactly the naturality, associativity and two action-unit equations. -/
 def Coherent {X Y : Scheme.{t}} (f : X ⟶ Y) (c : PullbackComparison l E f) : Prop :=
   ∀ P Q : Complex l E Y,
     (pull l E f).map (CochainComplex.Monoidal.braiding P Q).hom ≫ (c.tensor l E Q P).hom =
       (c.tensor l E P Q).hom ≫
         (CochainComplex.Monoidal.braiding ((pull l E f).obj P) ((pull l E f).obj Q)).hom
 
-/-- The composition identity with the prescribed adjunction-normalized compositor.
-Source: Stacks 07A4, 0D6D (blueprint: lem-pur-integral-coherence-tower). -/
+/-- The composition identity with the prescribed adjunction-normalized compositor. -/
 def CompositionLaw {X Y Z : Scheme.{t}} (h : Z ⟶ X) (f : X ⟶ Y)
     (cf : PullbackComparison l E f) (ch : PullbackComparison l E h)
     (chf : PullbackComparison l E (h ≫ f)) : Prop :=
@@ -178,9 +171,7 @@ def CompositionLaw {X Y Z : Scheme.{t}} (h : Z ⟶ X) (f : X ⟶ Y)
 variable {S : Type s} {W : S → Scheme.{t}}
 
 /-- A finite expression evaluated on strict quotient complexes. The syntax is the
-recorded completed-operation syntax; only its interpretation changes here.
-Source: node first two paragraphs, Stacks 07A4 and 0941
-(blueprint: lem-pur-integral-coherence-tower). -/
+recorded completed-operation syntax; only its interpretation changes here. -/
 def value {I : Type i} {location : I → S}
     (N : ∀ k : I, Complex l E (W (location k))) {a : S} :
     CompletedOperations.Expression W location a → Complex l E (W a)
@@ -189,9 +180,7 @@ def value {I : Type i} {location : I → S}
   | .tensor P Q => value N P ⊗ value N Q
   | .pullback f P => (pull l E f).obj (value N P)
 
-/-- K-flatness with flat terms in the recorded independent-coefficient interface.
-This predicate merely joins the two hypotheses, without defining either again.
-Source: Stacks 06YN, 07A4 (blueprint: lem-pur-integral-coherence-tower). -/
+/-- K-flatness with flat terms in the recorded independent-coefficient interface. -/
 def Good (a : S) (P : Complex l E (W a)) : Prop :=
   CochainComplex.IsKFlatIndependentCoefficients
       (R := coefficientSequenceCommRingSheaf l E (W a)) P ∧
@@ -200,8 +189,7 @@ def Good (a : S) (P : Complex l E (W a)) : Prop :=
       (R := coefficientSequenceCommRingSheaf l E (W a)) (P.X k)
 
 /-- Interpret the named structural maps on strict cochain systems, including their
-inverses and contexts. Symmetry is the existing Koszul-signed cochain braiding.
-Source: Stacks 07A4 and 0D6D (blueprint: lem-pur-integral-coherence-tower). -/
+inverses and contexts. Symmetry is the existing Koszul-signed cochain braiding. -/
 def structuralValue {I : Type i} {location : I → S}
     (N : ∀ k : I, Complex l E (W (location k))) {a : S}
     {P Q : CompletedOperations.Expression W location a}
@@ -220,9 +208,7 @@ def structuralValue {I : Type i} {location : I → S}
 
 /-- The simultaneous realization of every finite strict expression. The recursive
 normalizations fix its vertices and structural arrows; the completed and reduction
-isomorphisms are pinned by the coherent counit, including quotient transitions.
-Source: node last paragraph, Stacks 07A4 and 0941
-(blueprint: lem-pur-integral-coherence-tower). -/
+isomorphisms are pinned by the coherent counit, including quotient transitions. -/
 structure Realization (M : CompletedOperations.Models l E W)
     {I : Type i} {location : I → S} (N : ∀ k : I, Complex l E (W (location k))) where
   good : ∀ {a : S} (P : CompletedOperations.Expression W location a),

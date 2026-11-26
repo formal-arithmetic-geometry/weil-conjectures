@@ -31,15 +31,20 @@ import Mathlib.Algebra.Homology.HomotopyCategory.ShiftSequence
 
 /-! # Right shifts of the completed integral tensor
 
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 3.4.12(4), and the last sentence
-of the main-20261015 blueprint proof of `theorem-poincare-duality--2`;
-Stacks Project, Tags 011G, 012Z, 014E and 08TC
-(blueprint: lem-sf-completed-tensor-shift-right).
-
 The finite comparison has the same signed formula as Mathlib's right tensor shift.
 Its formula is imposed directly on the recorded reduced tensor generators, without
 extra tensor structure hypotheses. The strict tower comparison and the product and
 cone formulas normalize the derived natural isomorphism on every good model.
+
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 3.4.10 and
+  Lemma 3.4.12(4)]
+* [Stacks, Tag 011G]
+* [Stacks, Tag 012Z]
+* [Stacks, Tag 014E]
+* [Stacks, Tag 08TC]
+* [Stacks, Tag 06YT]
 -/
 
 @[expose] public section
@@ -61,8 +66,7 @@ attribute [local irreducible] unrestrictedIntegralReductionFunctor
   unrestrictedIntegralReductionExistence
   integralCompletedTensor
 
-/-- Shift the second input of a bifunctor, retaining the first input.
-Source: Stacks Tag 011G (blueprint: lem-sf-completed-tensor-shift-right). -/
+/-- Shift the second input of a bifunctor, retaining the first input. -/
 noncomputable abbrev completedTensorShiftSecond (A : Type a) [Category.{b} A] [HasShift A ℤ]
     (r : ℤ) : A × A ⥤ A × A :=
   (𝟭 A).prod (shiftFunctor A r)
@@ -71,8 +75,7 @@ section ProductCone
 
 variable {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
 
-/-- The degreewise product shift identification, after the specified tower comparison.
-Source: Stacks Tags 011G and 08TC (blueprint: lem-sf-completed-tensor-shift-right). -/
+/-- The degreewise product shift identification, after the specified tower comparison. -/
 noncomputable def completedTensorShiftProductIso
     (C D : ℕᵒᵖ ⥤ CochainComplex A ℤ) (r : ℤ)
     (α : D ≅ C ⋙ shiftFunctor (CochainComplex A ℤ) r) :
@@ -81,16 +84,14 @@ noncomputable def completedTensorShiftProductIso
     (PreservesProduct.iso (shiftFunctor (CochainComplex A ℤ) r)
       (fun n : ℕ ↦ C.obj (op n))).symm
 
-/-- The actual endomorphism 1-s of the product of a strict tower.
-Source: Stacks Tag 08TC (blueprint: lem-sf-completed-tensor-shift-right). -/
+/-- The actual endomorphism 1-s of the product of a strict tower. -/
 noncomputable def completedTensorShiftOneSub
     (C : ℕᵒᵖ ⥤ CochainComplex A ℤ) :=
   towerTransitionEndomorphism (K := fun n ↦ C.obj (op n)) (integralOperationsTowerStep C)
 
 /-- Cone compatibility: the unshifted summand has coefficient 1 and the shifted
 summand has coefficient (-1)^r, after the product identification. Mathlib orders
-these summands as A[1], B, opposite to the written B ⊕ A[1].
-Source: Stacks Tag 014E (blueprint: lem-sf-completed-tensor-shift-right). -/
+these summands as A[1], B, opposite to the written B ⊕ A[1]. -/
 def completedTensorShiftConeFormula
     (C D : ℕᵒᵖ ⥤ CochainComplex A ℤ) (r : ℤ)
     (α : D ≅ C ⋙ shiftFunctor (CochainComplex A ℤ) r)
@@ -112,8 +113,7 @@ def completedTensorShiftConeFormula
           (CochainComplex.mappingCone (completedTensorShiftOneSub C)) r j (j + r) rfl).inv))
 
 /-- Shift the cone comparison by -1 and interchange the two shifts. This is the
-specified comparison of the product mapping-fiber complexes, without cone choices.
-Source: Stacks Tags 014E and 08TC (blueprint: lem-sf-completed-tensor-shift-right). -/
+specified comparison of the product mapping-fiber complexes, without cone choices. -/
 noncomputable def completedTensorShiftRoosIso
     (C D : ℕᵒᵖ ⥤ CochainComplex A ℤ) (r : ℤ)
     (δ : CochainComplex.mappingCone (completedTensorShiftOneSub D) ≅
@@ -367,8 +367,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The signed formula on every finite-level total-tensor generator. The source
 uses Q[r], so its q-th term is Q^(q+r); the target is reindexed by the displayed
-shift identification. The tower isomorphism itself asserts transition compatibility.
-Source: Stacks Tags 011G and 012Z (blueprint: lem-sf-completed-tensor-shift-right). -/
+shift identification. The tower isomorphism itself asserts transition compatibility. -/
 def integralCompletedTensorFiniteShiftFormula (W : AlgebraicGeometry.Scheme.{t})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (r : ℤ)
     (α : (integralOperationsTensorTowerFunctor l E W).obj (P, Q⟦r⟧) ≅
@@ -393,9 +392,7 @@ attribute [local irreducible] integralOperationsTensorTowerFunctor
 /-- Normalization on every flat-term K-flat pair. The finite signed tower map
 induces the product map, then the specified cone map, then its [-1] shift.
 The last equality identifies this concrete map with the derived natural comparison.
-It quantifies over all resolutions, rather than selecting a special pair.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 3.4.12(4); Stacks Tags 014E,
-08TC and 06YT (blueprint: lem-sf-completed-tensor-shift-right). -/
+It quantifies over all resolutions, rather than selecting a special pair. -/
 def integralCompletedTensorRightShiftProperty (W : AlgebraicGeometry.Scheme.{t}) (r : ℤ)
     (σ : completedTensorShiftSecond (DerivedCategory (integralTowerModules l E W)) r ⋙
         integralCompletedTensor l E W ≅

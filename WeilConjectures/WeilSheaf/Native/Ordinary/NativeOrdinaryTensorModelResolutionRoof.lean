@@ -11,9 +11,9 @@ import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 
 /-! # Common K-flat roofs for ordinary tensor resolutions
 
-Source: Stacks 06YS, 06YU; blueprint step 1 of
-`lem-sf-native-weil-tensor-ringed-derived-square-ordinary-resolution-extension`.
-(blueprint: lem-sf-native-weil-tensor-resolution-roof)
+## References
+
+* Stacks Project, Tags 06YS and 06YU.
 -/
 
 @[expose] public section
@@ -28,13 +28,6 @@ set_option linter.unusedVariables false in
 Every map of second complexes admits a common K-flat roof whose two
 augmentations are quasi-isomorphisms and whose comparison commutes up to a
 chain homotopy.
-
-Source: Stacks Tags 06YS and 06YU, common K-flat roof paragraph.  Resolve the
-middle object of a homotopy-category common refinement by a K-flat complex and
-compose its augmentation with the two refinement legs.  Two-out-of-three
-preserves the quasi-isomorphism assertions, while the refinement equality
-lifts to the displayed homotopy.
-(blueprint: lem-sf-native-weil-tensor-resolution-roof)
 -/
 theorem native_ordinary_tensor_model_resolution_roof
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) :

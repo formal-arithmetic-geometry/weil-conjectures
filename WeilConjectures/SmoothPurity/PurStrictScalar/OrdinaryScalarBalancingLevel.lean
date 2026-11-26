@@ -12,7 +12,18 @@ import all WeilConjectures.AlgebraicGeometry.Completed.Adic.CompletedAdicCoeffic
 
 /-! # Ordinary scalar reduction at one quotient level
 
-Source: Stacks 03EK and 0940.
+## Implementation details
+
+For `ordinaryScalarBalancingLevel_exists`, the ramification equality identifies the extension of
+the source uniformizer power to `B` with the retained target uniformizer ideal, so tensor
+associativity gives `B ⊗_A (M / t^(n+1)) ≅ (B̂ ⊗_Â M) / v^(e(n+1))`, sending
+`b ⊗ (1 ⊗ x)` to `1 ⊗ (b ⊗ x)`. Module sheafification preserves the inverse maps, and the
+quotient adjunction unit is transported by uniqueness of left adjoints. Existence is asserted
+separately for each `M` and `n`; naturality is proved by the consuming tower construction.
+
+## References
+
+* [Stacks Project, Tags 03EK and 0940]
 -/
 
 @[expose] public noncomputable section
@@ -261,22 +272,7 @@ private theorem iso_section_injective (W : Scheme.{u})
     congrArg (fun f ↦ f.val.app U z) t.hom_inv_id
   exact (hi x).symm.trans ((congrArg (t.inv.val.app U) h).trans (hi y))
 
-/-- At a single quotient level the scalar reassociation has its prescribed tensor formula.
-Source: Stacks 03EK (tensor/restriction adjunction), 0940 (quotient systems).
-Proof: evaluation of the quotient-system left adjoint identifies its unit with the
-quotient map M to M modulo the source uniformizer power. The ramification equality
-identifies its extension to B with the retained target uniformizer ideal. Tensor
-associativity and the quotient tensor equivalence therefore give an isomorphism
-B tensor_A (M modulo t^(n+1)) to (Bhat tensor_Ahat M) modulo v^(e(n+1)).
-Send b tensor (1 tensor x) to 1 tensor (b tensor x). The inverse is the reverse
-reassociation, using the quotient ideal equality; both composites are identity on
-local tensor generators. Apply module sheafification, whose universal property
-preserves these inverse maps and the formula. Transport the quotient adjunction
-unit by uniqueness of left adjoints to obtain exactly the unit appearing here.
-This only asserts existence separately for M,n; horizontal and module naturality
-are proved by the consuming tower construction. Positivity ensures the retained
-exponent is positive, and the zero module and empty site object cause no exception.
-(blueprint: lem-pur-ordinary-scalar-balancing-level). -/
+/-- At a single quotient level the scalar reassociation has its prescribed tensor formula. -/
 theorem ordinaryScalarBalancingLevel_exists (W : Scheme.{u}) (e : ℕ)
     (he : PurCompactSupport.Ramification l E F i e) (hepos : 1 ≤ e) :
     let ηE (M : scalarReductionSource l E W) (n : ℕ) (U : W.ProEtᵒᵖ)

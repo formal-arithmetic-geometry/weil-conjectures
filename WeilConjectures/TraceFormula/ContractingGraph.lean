@@ -22,8 +22,7 @@ is the pushforward of the trace class of the restricted coefficient map `u_Z : K
 change of `R(𝟙)_!` along `x` is the identity up to the identity isomorphisms
 (`ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_app_of_id`), and so
 `u_Z` is the stalk map `v_x` (`Correspondence.contractingStalkMap_ofGraph`). Hence the local term
-at `x` is `tr(v_x)` (blueprint `corollary-contracting-local-terms-point`, item 1; Varshavsky, Thm.
-2.1.3, Fujiwara's theorem).
+at `x` is `tr(v_x)` (Fujiwara's theorem).
 
 ## Main statements
 
@@ -35,6 +34,24 @@ at `x` is `tr(v_x)` (blueprint `corollary-contracting-local-terms-point`, item 1
   Varshavsky's theorem for graphs, through the additivity of trace classes for graphs.
 - `ProEtale.CondensedRing.Correspondence.localTerm_traceClass_ofGraph_eq_trace_of_isContractingAt`:
   the local term of a contracting graph correspondence is the trace of the stalk map.
+
+## Implementation details
+
+Varshavsky's theorem for graphs (`restrict_traceClass_ofGraph_eq_pushforward_of_isContractingAt`)
+is proved through the additivity of trace classes for graphs (`traceClass_ofGraph_eq_add`)
+instead of the additivity for arbitrary correspondences (`traceClass_eq_add_of_isPullback`). This
+keeps the graph case, which carries every current user, independent of the mate description of
+the compact-support base change
+(`boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_mateEquiv`) that the general closed
+piece needs. The trace class is the sum of the trace classes of `u^Z` on
+`K^Z = Rx_* Lx^* K` and `u^U` on `K^U = j_! Lj^* K`; the first is the pushforward of the trace
+class of `v_x` by proper pushforward compatibility, and the second vanishes on `B` since the
+stalk of `K^U` at `x` is zero.
+
+## References
+
+* Varshavsky, *Lefschetz–Verdier trace formula and a generalization of a theorem of Fujiwara*,
+  Theorem 2.1.3.
 
 -/
 
@@ -137,8 +154,7 @@ variable {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.h
 
 /-! ### The local term at a contracting point -/
 
-/-- **The local term at a contracting point** (blueprint
-`theorem-contracting-correspondences-local-terms` for `Z = {c₁(y)}`, Varshavsky, Thm. 2.1.3): if `c`
+/-- **The local term at a contracting point** (Varshavsky, Thm. 2.1.3, for `Z = {c₁(y)}`): if `c`
 is contracting at the fixed point `y` and `B` is an open and closed subscheme of the fixed locus,
 proper over `s`, with underlying set `{y}`, the local term along `B` is the integral of the trace
 class of the restricted coefficient map `u_Z` on the stalk `L(y ≫ c₁)^* K` over the point. -/
@@ -276,24 +292,14 @@ theorem contractingStalkMap_ofGraph (h : X ⟶ X)
   dsimp only [Functor.id_obj]
   simp only [Category.comp_id]
 
-/-- **Contracting graph correspondences and local terms** (blueprint
-`theorem-contracting-correspondences-local-terms` for the graph correspondence `(𝟙, h)` and
-`Z = {x}`; Varshavsky, Thm. 2.1.3): if the graph correspondence `(𝟙, h)` with coefficient map
+/-- **Contracting graph correspondences and local terms** (Varshavsky, Thm. 2.1.3, for the graph
+correspondence `(𝟙, h)` and `Z = {x}`): if the graph correspondence `(𝟙, h)` with coefficient map
 `v : Lh^* K ⟶ K` is contracting at the fixed rational point `x`, and `B` is an open and closed
 subscheme of the fixed locus, proper over `s`, with underlying set `{x}` and point `e : s ⟶ B`,
 the restriction of the trace class to `B` is the pushforward along `e` of the trace class of
 the restricted coefficient map `u_Z`, which is the stalk map `v_x` (`contractingStalkMap_ofGraph`).
-
-This is the special case `c = (𝟙, h)` of `restrict_traceClass_eq_pushforward_of_isContractingAt`,
-proved through the additivity of trace classes for graphs (`traceClass_ofGraph_eq_add`) instead of
-the additivity for arbitrary correspondences (`traceClass_eq_add_of_isPullback`). It keeps
-the graph case, which carries every current user, independent of the mate description of the
-compact-support base change (`boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_mateEquiv`)
-that the general closed piece needs. The proof: the
-trace class is the sum of the trace classes of `u^Z` on `K^Z = Rx_* Lx^* K` and `u^U` on
-`K^U = j_! Lj^* K`; the first is the pushforward of the trace class of `v_x` by proper pushforward
-compatibility (`ProperPushforwardDiagram.traceClassPushforward_eq`), and the second vanishes on
-`B` since the stalk of `K^U` at `x` is zero (`restrict_traceClass_eq_zero_of_isContractingAt`). -/
+This is the special case `c = (𝟙, h)` of `restrict_traceClass_eq_pushforward_of_isContractingAt`.
+-/
 theorem restrict_traceClass_ofGraph_eq_pushforward_of_isContractingAt (h : X ⟶ X)
     (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj K ⟶ K)
     (F : (ofGraph K h v).FixedLocus) {x : RationalPoint X}
@@ -340,18 +346,12 @@ theorem restrict_traceClass_ofGraph_eq_pushforward_of_isContractingAt (h : X ⟶
   rw [← hZ, BorelMooreSection.restrict_pushforward_self]
   exact congrArg _ (traceClass_ofEnd_of_eq_eqToHom _ (contractingStalkMap_ofGraph K h v hc)).symm
 
-/-- **Local terms of contracting graph correspondences** (blueprint
-`corollary-contracting-local-terms-point`, item 1, for correspondences with exceptional leg
-`c₁ = 𝟙`; Varshavsky, Thm. 2.1.3): if the graph correspondence `(𝟙, h)` with coefficient map
-`v : Lh^* K ⟶ K` is contracting at the fixed rational point `x`, and `B` is an open and closed
-subscheme of the fixed locus, proper over `s`, with underlying set `{x}`, then the local term along
-`B` is the trace of the stalk map `v_x : K_x ⟶ K_x`. No invertibility of `v` is required.
-
-By Varshavsky's theorem for graphs
-(`restrict_traceClass_ofGraph_eq_pushforward_of_isContractingAt`) the local term is the integral
-of the trace class of the restricted coefficient map `u_Z`, which is the stalk map `v_x`
-(`contractingStalkMap_ofGraph`), and the trace class of an endomorphism of the point integrates
-to its trace (point normalization). -/
+/-- **Local terms of contracting graph correspondences** (Varshavsky, Thm. 2.1.3, for
+correspondences with exceptional leg `c₁ = 𝟙`): if the graph correspondence `(𝟙, h)` with
+coefficient map `v : Lh^* K ⟶ K` is contracting at the fixed rational point `x`, and `B` is an
+open and closed subscheme of the fixed locus, proper over `s`, with underlying set `{x}`, then
+the local term along `B` is the trace of the stalk map `v_x : K_x ⟶ K_x`. No invertibility of `v`
+is required. -/
 theorem localTerm_traceClass_ofGraph_eq_trace_of_isContractingAt (h : X ⟶ X)
     (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj K ⟶ K)
     (F : (ofGraph K h v).FixedLocus) (x : RationalPoint X)

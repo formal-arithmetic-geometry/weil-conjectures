@@ -9,11 +9,13 @@ public import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarExtensi
 
 /-! # Integral scalar extension with independent coefficient and site universes
 
-Source: blueprint integral scalar extension, order 1460; Bhatt--Scholze,
-Definition 3.4.10 (blueprint: def-weil-integral-scalar-extension).
 The published resolving-class construction already permits independent universes.
 This interface exposes that same construction without identifying those universes.
 The original equal-universe interface is publicly retained.
+
+## References
+
+* B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, Definition 3.4.10
 -/
 
 @[expose] public noncomputable section
@@ -30,25 +32,19 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The existing strict Roos construction localized on its flat-term K-flat class.
 Its universal normalized comparison determines the functor up to the unique
-comparison-preserving isomorphism. No site or coefficient universe is restricted.
-Source: Bhatt--Scholze, Definition 3.4.10
-(blueprint: def-weil-integral-scalar-extension). -/
+comparison-preserving isomorphism. No site or coefficient universe is restricted. -/
 def integralScalarExtensionOfUniverses :
     DerivedCategory (integralTowerModules.{t, u} l E Y) ⥤
       DerivedCategory (integralTowerModules.{t, u} l L Y) :=
   (integralScalarExtensionWellDefined.{t, u} l E L ι Y).2.choose
 
-/-- The retained comparison with the actual strict-tower functor on resolving complexes.
-Source: Bhatt--Scholze, Definition 3.4.10
-(blueprint: def-weil-integral-scalar-extension). -/
+/-- The retained comparison with the actual strict-tower functor on resolving complexes. -/
 def integralScalarExtensionComparisonOfUniverses :
     integralOperationsGoodLocalization.{t, u} l E Y ⋙ integralScalarExtensionOfUniverses l E L ι Y ≅
       integralScalarOnGood.{t, u} l E L ι Y :=
   (integralScalarExtensionWellDefined.{t, u} l E L ι Y).2.choose_spec.choose
 
-/-- Additivity from the same universal localization witness.
-Source: Bhatt--Scholze, Definition 3.4.10
-(blueprint: def-weil-integral-scalar-extension). -/
+/-- Additivity from the same universal localization witness. -/
 instance integralScalarExtensionOfUniverses_additive :
     (integralScalarExtensionOfUniverses l E L ι Y).Additive :=
   (integralScalarExtensionWellDefined.{t, u} l E L ι Y).2.choose_spec.choose_spec.1

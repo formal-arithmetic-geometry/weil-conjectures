@@ -16,8 +16,13 @@ import WeilConjectures.RingTheory.NakayamaNilpotent
 /-!
 # Factoring through a quotient of a smooth algebra over a square-zero base
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 16.5.1, Tag 07CK
-(blueprint: lem-weil-pbc-popescu-lift-once).
+A map from a finitely presented algebra to `Λ` factors through `B / J` with `B` smooth and
+`J` finitely generated and contained in the extended square-zero ideal, provided that
+`Λ / IΛ` is a filtered colimit of smooth algebras.
+
+## References
+
+* [Stacks, Tag 07CK]
 -/
 
 @[expose] public section
@@ -30,46 +35,7 @@ namespace Algebra
 
 /-- A map from a finitely presented algebra factors through `B / J`, with `B` smooth and
 `J` finitely generated and contained in the extended square-zero base ideal, provided the
-reduction of the target algebra is a filtered colimit of smooth algebras.
-
-Source: Stacks Project, Smoothing Ring Maps, Lemma 16.5.1, Tag 07CK
-(blueprint: lem-weil-pbc-popescu-lift-once).
-
-Proof (the twelve steps of the node):
-1. Reduce a finite polynomial presentation of `A` modulo `I`. This gives a finite
-   presentation of `A / IA` over `R / I` and an induced map to `Λ / IΛ`.
-2. Use lem-weil-pbc-colimit-standard-smooth-algebras (07CI) to express `Λ / IΛ` as a
-   filtered colimit of standard smooth algebras. Use
-   lem-weil-pbc-filtered-colimit-algebras-elementwise and
-   lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit (00QO) to factor
-   the reduced map through a standard smooth algebra `Bbar`.
-3. By lem-weil-pbc-finite-presentation-over-finite-type-algebra (00F4), present `Bbar`
-   by finitely many variables `t` and relations `gbar` over `A / IA`.
-4. Lift the images of `t` to elements `λ` of `Λ` and lift `gbar` to polynomials `g`
-   over `A`. Their evaluations lie in `IΛ`; write each as a finite sum `ε * μ`
-   with `ε` in `I`.
-5. Adjoin variables `δ` to `A[t]` and impose the relations `g - sum ε * δ`.
-   The resulting algebra `A'` maps to `Λ` by `t ↦ λ`, `δ ↦ μ`, extending the original
-   map. It is finitely presented over `R` by
-   lem-weil-pbc-finite-presentation-base-change-composition.
-6. Modulo `I`, the algebra `A'` is `Bbar[δ]`, hence standard smooth. Choose a
-   standard smooth presentation with an invertible Jacobian minor determinant.
-7. Lift its equations to `R`, and invert the lifted determinant by adjoining one
-   variable with relation `x * determinant - 1`. The resulting algebra `B` is
-   standard smooth: the enlarged Jacobian minor has determinant the square of the
-   original determinant. It is smooth by lem-weil-pbc-standard-smooth-is-smooth.
-8. Reduction identifies `B / IB` with `A' / IA'`: the extra variable is the inverse
-   of the Jacobian determinant. Check the inverse maps on all generators.
-9. By lem-weil-pbc-smooth-ring-map-square-zero-lifting (00TN), lift the map
-   `B → A' / IA'` to `θ : B → A'`, since `(IA')² = 0`. Its reduction is the
-   isomorphism from step 8.
-10. Apply lem-weil-pbc-nakayama-nilpotent (00DV) to conclude that `θ` is surjective.
-11. Put `J = ker θ`. Injectivity modulo `I` gives `J ≤ IB`. Finite presentation of
-    `A'` and lem-weil-pbc-finite-presentation-surjection-kernel-fg (00R2) show the
-    kernel of the polynomial presentation mapping to `A'` is finitely generated.
-    Its image under the surjection to `B` is `J`, so `J` is finitely generated.
-12. Identify `B / J` with `A'` and compose the maps from `A` and to `Λ`.
-    Their composite is the original algebra map by step 5. -/
+reduction of the target algebra is a filtered colimit of smooth algebras. -/
 theorem exists_smooth_quotient_factorization
     (R : Type u) [CommRing R] (Λ : Type (max u v)) [CommRing Λ] [Algebra R Λ]
     (I : Ideal R) (hI : I ^ 2 = ⊥)

@@ -11,7 +11,25 @@ import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdi
 
 /-! # Coherence before rational localization
 
-Source: Bhatt--Scholze, Propositions 3.5.1 and 6.8.14(2); Stacks Tag 06YY.
+The integral tensor comparison maps commute with shifts and are compatible with towers of
+coefficient fields, before rational localization.
+
+## Implementation details
+
+The ordinary tensor comparison and its quotient-completion chain map commute with the
+degreewise shift; the universal derived counits lift these squares. For a tower
+`E ⊆ L ⊆ M`, the integral associator is rewritten as the conjugate of ordinary derived
+balancing by the three completion comparisons; the remaining equality is associativity of the
+balanced derived tensor with the native ring, checked on ordinary tensor units and on K-flat
+complexes and descended along the universal derived counit. The defining equation of
+`integralTensorAssociator` is exposed as a separate lemma so that component proofs do not
+normalize large scalar-extension functors.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Propositions 3.5.1 and 6.8.14(2),
+  Remark 6.8.15
+* Stacks Project, Tag 06YY
 -/
 
 @[expose] public noncomputable section
@@ -29,8 +47,7 @@ open AlgebraicallyClosedCoefficients (Index Coefficient coefficientInclusion)
 
 variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
 
-/-- The integral scalar associator with the literal field-inclusion transport.
-Source: blueprint order 1462 (blueprint: lem-sf-native-integral-tensor-coherence). -/
+/-- The integral scalar associator with the literal field-inclusion transport. -/
 @[irreducible] def integralTensorAssociator
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
     {E L M : Index l Ω} (h : E ≤ L) (k : L ≤ M) :=
@@ -45,9 +62,7 @@ Source: blueprint order 1462 (blueprint: lem-sf-native-integral-tensor-coherence
       ((AlgebraicallyClosedCoefficients.coefficientInclusion_laws l Ω).2
         E L M h k))
 
-/-- The defining equation is exposed separately so component proofs do not normalize
-large scalar-extension functors. Source: blueprint order 1462
-(blueprint: lem-sf-native-integral-tensor-coherence). -/
+/-- The defining equation of `integralTensorAssociator`. -/
 theorem integralTensorAssociator_eq
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
     {E L M : Index l Ω} (h : E ≤ L) (k : L ≤ M) :
@@ -68,25 +83,8 @@ theorem integralTensorAssociator_eq
 variable [IsCommMonObj (abRing l X)] [(sections l X).Additive]
   [PreservesFiniteLimits (sections l X)] [PreservesFiniteColimits (sections l X)]
 
-/-- The explicit inverse-balancing and completion maps respect shifts and field towers.
-
-Source: Bhatt--Scholze, Propositions 3.5.1 and 6.8.14(2), Remark 6.8.15;
-Stacks Tag 06YY (blueprint: lem-sf-native-integral-tensor-coherence).
-
-Proof: the ordinary tensor comparison commutes with the degreewise shift, as does
-its quotient-completion chain map. The universal derived counits uniquely lift
-these squares. The integral transition shift is defined by this ordinary tensor
-normalization, hence the inverse-balancing/completion map commutes with every
-integer shift. For a tower E ⊆ L ⊆ M, use the canonical completed scalar associator
-formula to replace the integral associator by the conjugate of ordinary derived
-balancing with the three completion comparisons. Naturality moves the completion
-comparisons across the outer tensor functor, and their inverse identities cancel.
-The remaining equality is associativity of balanced derived tensor with the native
-ring: both maps send a pure triple tensor c ⊗ b ⊗ x to c b ⊗ x. Check it on
-ordinary tensor units, then on K-flat complexes, and descend by the universal
-derived counit. The coefficient-system scalar equation identifies the direct ring
-map. Equality transport along the field-inclusion composition law yields exactly
-the displayed integral associator, including repeated fields. -/
+/-- The explicit inverse-balancing and completion maps commute with shifts and are compatible
+with the integral associators of field towers `E ⊆ L ⊆ M`. -/
 theorem integralTensorComparison_coherent (C : CoefficientSystem l X) :
     (∀ {E L : Index l (PadicAlgCl l)} (h : E ≤ L),
       NatTrans.CommShift (integralTensorComparison l X C h) ℤ) ∧

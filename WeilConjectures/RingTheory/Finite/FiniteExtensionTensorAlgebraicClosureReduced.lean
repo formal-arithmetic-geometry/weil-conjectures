@@ -14,9 +14,19 @@ import WeilConjectures.FieldTheory.Picard.InseparableTensorNilpotent
 /-!
 # Reduced tensor products and separability of finite field extensions
 
-Source: Stacks Project, Algebra, Lemma Tag 030W (implication (4) => (1)),
-together with Lemma Tag 030V
-(blueprint: lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable).
+If `K / k` is finite and `K ⊗[k] kbar` is reduced for an algebraic closure `kbar` of `k`, then
+`K / k` is separable.
+
+## Implementation details
+
+The proof is by contradiction: a nonseparable finite extension has an element with inseparable
+minimal polynomial, which yields a nonzero nilpotent in the tensor product with an algebraic
+closure.
+
+## References
+
+* [Stacks, Tag 030W] (implication (4) ⇒ (1))
+* [Stacks, Tag 030V]
 -/
 
 @[expose] public section
@@ -28,16 +38,7 @@ open scoped TensorProduct
 namespace Algebra
 
 /-- If the tensor product of a finite field extension with an algebraic closure is
-reduced, then the extension is separable.
-Source: Stacks Project, Algebra, Lemma Tag 030W (implication (4) => (1)),
-together with Lemma Tag 030V.
-(blueprint: lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable).
-The proof is by contradiction: a nonseparable finite extension has an element
-with inseparable minimal polynomial (the node
-`lem-pc-finite-inseparable-element`), which yields a nonzero nilpotent in the
-tensor product with an algebraic closure (the node
-`lem-pc-inseparable-tensor-nilpotent`), contradicting reducedness.
--/
+reduced, then the extension is separable. -/
 theorem finiteExtension_tensor_algebraicClosure_reduced_isSeparable
     (k : Type u) (K : Type v) (kbar : Type w)
     [Field k] [Field K] [Field kbar] [Algebra k K] [Algebra k kbar]

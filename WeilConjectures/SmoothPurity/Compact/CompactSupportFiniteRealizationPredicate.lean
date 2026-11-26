@@ -9,9 +9,13 @@ public import WeilConjectures.SmoothPurity.Compact.CompactSupportRepresentativeI
 
 /-! # The existing compact-support realization predicate
 
-The predicate is unchanged; its own module prevents repeated checking of its large
-choice telescope while compiling the finite-action constructions.
-(blueprint: def-weil-compact-support-finite-realization-predicate).
+This module defines the predicate recording a strict-tower realization of the compact-support
+integral functor.
+
+## Implementation details
+
+The predicate lives in its own module to avoid repeated checking of its large choice telescope
+while compiling the finite-action constructions.
 -/
 
 @[expose] public noncomputable section
@@ -40,11 +44,8 @@ variable (l : ℕ) [Fact l.Prime]
   [f.IsOver (Spec (.of K₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
   (c : Compactification f)
 
-/-- The exact integral-functor predicate of the already recorded strict-tower realization.
-The predicate retains the chosen tower, derived limit and projection normalizations.
-Naming the predicate keeps the large proof-normalized realization out of later types.
-Source: blueprint order 1494, proof steps 1--4
-(blueprint: def-weil-compact-support-finite-realization-predicate). -/
+/-- The predicate that an integral functor is the strict-tower realization, retaining the chosen
+tower, derived limit and projection normalizations. -/
 def SfCompactSupportFiniteRealizationSpec
     (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] :

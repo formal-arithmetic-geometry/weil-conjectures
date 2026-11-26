@@ -18,8 +18,20 @@ public import Mathlib.RingTheory.Flat.Localization
 /-!
 # Flatness of successive localized complete-intersection quotients
 
-Source: Stacks Project, Algebra, Lemma 00SV (2)
-(blueprint: lem-weil-pbc-relative-global-complete-intersection-partial-local-flat).
+Every initial quotient of the polynomial local ring at a prime of a relative global complete
+intersection is flat over the base.
+
+## Implementation details
+
+Over a Noetherian base, the equations are regular in the closed fibre of the flat local map
+`R_p → R[x]_Q`, and the flat closed-fibre lifting theorem gives flatness of every prefix
+quotient. In general, Noetherian approximation gives a finite type `ℤ`-subring `R₀` with
+equations `f₀`; base change preserves the complete intersection condition for every finite type
+subring containing `R₀`, and finite-coefficient flatness descent gives the result.
+
+## References
+
+* [Stacks, Tag 00SV] (2)
 -/
 
 @[expose] public section
@@ -57,24 +69,7 @@ private theorem noetherian_prefix_flat
     (Localization.AtPrime p) p.primeCompl (S ⧸ J)).mp hquot
 
 /-- Every initial quotient of the polynomial local ring at a prime of a relative global
-complete intersection is flat over the base.
-Source: Stacks Project, Algebra, Lemma 00SV (2)
-(blueprint: lem-weil-pbc-relative-global-complete-intersection-partial-local-flat).
-
-Proof:
-1. Over a Noetherian base, contract the polynomial prime to `p` in `R`. The canonical
-   local map `R_p → R[x]_Q` is flat. The existing closed-fibre theorem supplies regularity
-   of the equations; Grothendieck's lifting theorem gives flatness of every prefix quotient
-   over `R_p`. Restrict scalars to `R`, using the canonical scalar tower.
-2. Noetherian approximation supplies a finite type integer subring `R₀` and equations
-   `f₀` whose coefficientwise images are `f`. For every finite type integer subring `B`
-   containing `R₀`, base change preserves the specified complete-intersection condition.
-3. Contract the polynomial prime to each `B[x]`. Composition of coefficient maps shows
-   all equations lie in this contracted prime. Since `B` is Noetherian, step 1 makes its
-   localized prefix quotient flat over `B`.
-4. Apply finite-coefficient flatness descent to these prefix quotients. The initial list
-   of equations generates exactly the displayed image-set ideal, by list membership and
-   `Ideal.map_ofList`. This identifies the resulting flat quotient with the conclusion. -/
+complete intersection is flat over the base. -/
 theorem relativeGlobalCompleteIntersection_partial_local_flat
     (R : Type v) [CommRing R] (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R)
     (h : IsRelativeGlobalCompleteIntersectionPresentation f)

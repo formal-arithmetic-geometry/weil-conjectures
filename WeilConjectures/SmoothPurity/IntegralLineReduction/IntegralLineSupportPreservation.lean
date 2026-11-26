@@ -14,7 +14,9 @@ import all WeilConjectures.Algebra.Homology.ScalarHomOrdinary.ScalarHomOrdinaryT
 
 /-! # Support preservation for finite ordinary line tensor
 
-(blueprint: lem-pur-integral-line-support-preservation).
+## References
+
+* Stacks Project, Tags 010N and 06YU.
 -/
 
 @[expose] public noncomputable section
@@ -113,17 +115,7 @@ private theorem finite_power_rank
   rw [finitePower_eq_coefficient]
   exact (signedLineTensor_equivalence X S (line l E X L n) m).1
 
-/-- Tensoring by a finite signed line does not enlarge cohomological support.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 06YU and 010N; blueprint proof
-of `lem-pur-integral-line-derived-comparisons`, final support sentence.
-Proof: the finite signed line is finite locally free of rank one, hence flat. On a
-K-flat representative, tensoring by its degree-zero single complex is exact and the
-canonical homology comparison identifies each cohomology object with the original
-cohomology tensored by the line. Exact tensoring sends a zero cohomology object to
-zero, which is precisely the asserted inclusion of supports.
-(blueprint: lem-pur-integral-line-support-preservation).
--/
+/-- Tensoring by a finite signed line does not enlarge cohomological support. -/
 theorem finite_ordinary_support_subset
     (L : scalarReductionSource.{u, u} l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (n : ℕ) (m : ℤ) (K : DerivedCategory (scalarReductionTarget.{u, u} l E X n)) :

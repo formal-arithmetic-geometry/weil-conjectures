@@ -12,8 +12,17 @@ import Mathlib.RingTheory.RingHom.Etale
 
 /-! # The pointed extension-of-scalars functor
 
-Source: Stacks Project, Tag 05WS, and the first step of
-`lem-sbc-pointed-etale-quotient-final`.
+Extension of scalars along `A → B` as a functor between categories of pointed étale algebras.
+
+## Implementation details
+
+The functor is a construction, with no choice of lifted étale algebras; its underlying algebra
+diagram is extension of scalars.
+
+## References
+
+* [Stacks, Tag 05WS]
+* [Stacks, Tag 00U2]
 -/
 
 @[expose] public section
@@ -22,12 +31,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace Algebra
 
-/-- Etaleness is preserved by the pushout defining extension of scalars.
-Source: Stacks Project, Tag 00U2 (base change of etale ring maps).
-(blueprint: lem-sbc-pointed-etale-quotient-functor)
-
-Proof: Apply stability under cobase change of the etale ring-map property to
-A -> S and A -> B. The other side of the pushout is the structural B-algebra map. -/
+/-- Étaleness is preserved by the pushout defining extension of scalars. -/
 theorem quotientBaseChange_etale {A B : Type u} [CommRing A] [CommRing B]
     (π : A →+* B) (S : CommAlgCat.{u} A) (hS : Etale A S) :
     Etale B ((quotientBaseChange π).obj S) := by
@@ -40,10 +44,8 @@ theorem quotientBaseChange_etale {A B : Type u} [CommRing A] [CommRing B]
     ((RingHom.etale_algebraMap).mpr hS)
   exact (RingHom.etale_algebraMap).mp h
 
-/-- Postcompose the base-changed point with the specified comparison to L, then restrict
- to etale algebras. This is a construction, with no choice of lifted etale algebras.
-Source: Stacks Project, Tag 05WS.
-(blueprint: lem-sbc-pointed-etale-quotient-functor) -/
+/-- The pointed base-change functor from pointed étale `A`-algebras to pointed étale
+`B`-algebras: extend scalars and postcompose the base-changed point with the comparison to `L`. -/
 noncomputable def pointedEtaleBaseChange {A K B L : Type u}
     [CommRing A] [CommRing K] [Algebra A K]
     [CommRing B] [CommRing L] [Algebra B L]
@@ -56,9 +58,7 @@ noncomputable def pointedEtaleBaseChange {A K B L : Type u}
       Over.post (quotientBaseChange π) ⋙ Over.map c)
     (fun S ↦ quotientBaseChange_etale π S.obj.left S.property)
 
-/-- The underlying algebra diagram of pointed base change is extension of scalars.
-Source: Stacks Project, Tag 05WS.
-(blueprint: lem-sbc-pointed-etale-quotient-functor) -/
+/-- The underlying algebra diagram of pointed base change is extension of scalars. -/
 noncomputable def pointedEtaleBaseChange_forgetIso {A K B L : Type u}
     [CommRing A] [CommRing K] [Algebra A K]
     [CommRing B] [CommRing L] [Algebra B L]

@@ -58,17 +58,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [∀ P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ, P.HasMapBifunctor Q T]
 
 set_option synthInstance.maxSize 4096 in
-/-- The normalized native tensor admits functorial K-flat replacements.
-Source: Stacks 06YS, the unbounded K-flat replacement construction.
-(blueprint: lem-sf-native-weil-tensor-ringed-kflat-resolution)
-
-Use the functorial flat resolution on the ringed presentation, whose sum total
-is K-flat. Conjugate its resolution functor and augmentation by the additive
-native equivalence. The normalized total-tensor comparison transports the
-acyclic-test K-flat property back to native complexes; exactness of the inverse
-equivalence transports the quasi-isomorphism. Functoriality, rather than a strict
-fraction calculus on complexes, supplies the subsequent localization argument.
--/
+/-- The normalized native tensor admits functorial K-flat replacements. -/
 theorem native_weil_tensor_ringed_kflat_resolution
     (b : NativeWeilTensorRingedBridge k₀ l X) (adj : T ⊣₂ ihomBifunctor k₀ l X) :
     ∃ (ρ : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ ⥤

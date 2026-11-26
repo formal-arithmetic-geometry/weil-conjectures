@@ -23,8 +23,12 @@ import WeilConjectures.TraceFormula.Ordinary.OrdinaryQuotientPullbackTowerCompar
 
 /-! # Fixed cochain coordinates for the scalar/pullback calculation
 
-Source: Stacks 06YY, 07A4 and 0941. The coordinates are constructed from the
-ordinary scalar/pullback chain map and a coherent quotient presentation.
+The coordinates are constructed from the ordinary scalar/pullback chain map and a coherent
+quotient presentation.
+
+## References
+
+* Stacks Project, Tags 06YY, 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -52,8 +56,7 @@ attribute [local implicit_reducible] integralCoefficientCommRingSheaf integralCo
 
 /-- Transport a whole-system map to fixed strict Roos coordinates.
 Every factor is specified; no realization model of scalar extension or pullback
-occurs in this construction.
-Source: Stacks 06YY, 0941 (blueprint: stage3-pur-scalar-pullback-roos-coordinates). -/
+occurs in this construction. -/
 def scalarPullbackRoosCoordinate
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : (integralOperationsGoodComplex.{u, u} l E Y).FullSubcategory)
@@ -88,8 +91,7 @@ def scalarPullbackRoosCoordinate
     (integralComparisonRoosBridge.{u, u} l L X ρ _).hom ≫
     DerivedCategory.Q.map (integralOperationsRoosFunctor.map q.hom)
 
-/-- The fixed ordinary scalar/pullback chain map, transported only at its source.
-Source: Stacks 07A4, 0941 (blueprint: stage3-pur-scalar-pullback-roos-coordinates). -/
+/-- The fixed ordinary scalar/pullback chain map, transported only at its source. -/
 def scalarPullbackRoosChain {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : (integralOperationsGoodComplex.{u, u} l E Y).FullSubcategory)
     (K : DerivedCategory (scalarReductionSource.{u, u} l E Y))
@@ -110,19 +112,7 @@ def scalarPullbackRoosChain {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- The nested scalar/pullback strict quotient coordinates exist.
 This statement involves no completed
-comparison map and no scalar or pullback realization model.
-Source: Stacks 06YY, 07A4 and 0941; the quotient and localization parts of step 8
-of lem-pur-scalar-extension-tower-coherence.
-(blueprint: stage3-pur-scalar-pullback-roos-coordinates).
-
-Proof: compare C with the ordinary quotient system using whole-system coherence.
-At level n associate B_n tensor over A_n (A_n tensor P) with B_n tensor P, and
-identify this with B_n tensor over the completed B ring (B tensor P). Pull back
-this association, retaining the actual quotient transitions, and restrict to the
-completed coefficient ring. The resulting isomorphism is q. Both associations
-send the three unit factors to the same generator, giving the displayed formula.
-The construction is ordinary tensor association and uses no flatness of B_n over A_n;
-zero P, n=0, identity maps, empty sites and ramified inclusions use the same tensors. -/
+comparison map and no scalar or pullback realization model. -/
 theorem scalarPullbackRoosCoordinates_exists
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : (integralOperationsGoodComplex.{u, u} l E Y).FullSubcategory)
@@ -188,13 +178,7 @@ theorem scalarPullbackRoosCoordinates_exists
     (congrArg (integralOperationsPullbackGenerator l L f n
       (((unrestrictedIntegralFiniteComplex l L Y n).obj SP).X i) U) hn)
 
-/-- Scalar derived extension computes on the pulled coherent quotient complex.
-Source: Stacks 06YY and 07A4
-(blueprint: stage3-pur-scalar-pullback-roos-coordinates).
-
-Evaluation identifies C with the finite scalar extensions of P. K-flatness and
-flatness pass through these isomorphisms and are detected on the sequence site.
-Exact inverse image preserves this resolving class; the scalar model computes. -/
+/-- Scalar derived extension computes on the pulled coherent quotient complex. -/
 theorem scalarPullbackQuotient_computes {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : (integralOperationsGoodComplex.{u, u} l E Y).FullSubcategory)
     (C : CochainComplex (coefficientSequenceModules.{u, u} l E Y) ℤ)

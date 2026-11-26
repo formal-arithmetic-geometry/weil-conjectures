@@ -13,6 +13,17 @@ import WeilConjectures.RingTheory.PopescuLifting
 public import WeilConjectures.RingTheory.SingularIdeal
 import WeilConjectures.RingTheory.PopescuSmoothQuotientFactor
 
+/-!
+# Pointwise smoothness of the Popescu lifting construction
+
+Applying the Popescu lifting lemma to a smooth factorization modulo `π⁸` gives a finitely
+presented algebra, smooth at every prime, with a compatible map modulo `π⁴`.
+
+## References
+
+* [Stacks, Tag 07F5] (proof)
+-/
+
 @[expose] public section
 
 universe u v
@@ -36,21 +47,8 @@ private theorem smoothAtPrime_of_smooth
     Algebra.Smooth.of_isLocalization_Away 1
   exact Algebra.Smooth.comp S C _
 
-/-- Auxiliary output of the Popescu lifting construction, including pointwise smoothness.
-
-(blueprint: lem-weil-pbc-popescu-smooth-lift-data)
-
-Proof: Construct a finite polynomial presentation and apply `popescu_lifting` as in
-Stacks Project Lemma 07F5. Injectivity of multiplication by `π` gives the required
-annihilator equalities. The quotient maps give the compatible map modulo `π⁴`.
-Clause (b) of the lifting lemma handles primes away from `π`; clause (c), together
-with smoothness of the chosen smooth quotient algebra, handles primes over `π`.
-Thus the resulting finitely presented algebra is smooth at every prime.
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07F5, proof (blueprint:
-lem-weil-pbc-popescu-smooth-lift-modulo-eight).
-The construction produces a finitely presented algebra, a compatible map modulo π⁴,
-and smoothness at every prime; the detailed polynomial construction is the content of
-this intermediate assertion. -/
+/-- Auxiliary output of the Popescu lifting construction: a finitely presented algebra smooth at
+every prime, with a compatible map modulo `π⁴`. -/
 theorem exists_popescu_smooth_lift_data
     (R : Type u) (Λ : Type (max u v)) [CommRing R] [CommRing Λ] [Algebra R Λ]
     [IsNoetherianRing R]

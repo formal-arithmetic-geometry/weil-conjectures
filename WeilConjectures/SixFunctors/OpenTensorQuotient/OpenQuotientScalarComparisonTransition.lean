@@ -10,8 +10,18 @@ import WeilConjectures.SixFunctors.OpenTensorQuotient.OpenQuotientScalarComparis
 
 /-! # Transition coherence for the open scalar comparison
 
-Source: Stacks Project, Tags 0E8I and 0941.
-(blueprint: lem-sf-open-quotient-scalar-comparison-transition).
+We show that the finite open scalar comparison maps commute with the successor maps of the
+unrestricted integral quotient complexes.
+
+## Implementation details
+
+Both composites are evaluated on the sheafified pure tensors generating each unrestricted
+reduction; the generator formula for `tc.ordinary`, the section formula for `sc.finite`, and
+naturality of extension by zero identify both sides with the same coefficient transition.
+
+## References
+
+* Stacks 0E8I, 0941
 -/
 
 @[expose] public noncomputable section
@@ -27,13 +37,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The finite comparison maps commute with the successor maps of the unrestricted
 integral quotient complexes. This is the strict transition part of the normalized
-open scalar comparison. It is proved by evaluating both composites on the
-sheafified pure tensors that generate each unrestricted reduction; the generator
-formula for tc.ordinary, the section formula for sc.finite, and naturality of
-extension by zero identify both sides with the same coefficient transition.
-Source: Stacks Tags 0E8I and 0941; degreewise comparison and transition coherence.
-(blueprint: lem-sf-open-quotient-scalar-comparison-transition).
--/
+open scalar comparison. -/
 theorem openQuotientScalarComparisonTransition
     (o : IntegralOpenReduction.Operations l E j)
     (tc : IntegralOpenReduction.TensorComparison l E j o)

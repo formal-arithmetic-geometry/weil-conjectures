@@ -45,13 +45,23 @@ import WeilConjectures.Algebra.Homology.SmoothPurity.ChangeOfRingsTensorCancella
 
 /-! # Data for mixed geometric and scalar coherence on strict quotient systems
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6D and the generator calculations
-of the DAG node (blueprint: lem-trf-quotient-system-mixed-coherence).
-
 The equations are asserted both before localization and in the unbounded derived
 categories of entire quotient diagrams. Finite geometric coherence quantifies over
 all binary assemblies of an arbitrary path, including the empty path. No realization,
 normalization, boundedness, Tor-amplitude or flatness assumption is imposed.
+
+## Implementation details
+
+The derived scalar associator and unitor are constructed on flat-term K-flat representatives
+on the sequence site: ordinary scalar extension preserves these, so the universal cochain
+counits are invertible there, and the localized ordinary associator
+(`c ⊗ (b ⊗ x) ↦ c * j(b) ⊗ x`) and multiplication unitor, conjugated by these counits,
+descend to the derived category. Uniqueness follows by cancelling the resolution
+isomorphisms. Neither flatness of the ring maps nor a bound on the input complex is used.
+
+## References
+
+* Stacks Project, Tags 06YY, 0D6D.
 -/
 
 @[expose] public noncomputable section
@@ -107,17 +117,8 @@ variable (l : ℕ) [Fact l.Prime]
   [Field M] [Algebra ℚ_[l] M] [FiniteDimensional ℚ_[l] M]
   (ι : E →ₐ[ℚ_[l]] L) (j : L →ₐ[ℚ_[l]] M)
 
-/-- The scalar associator is uniquely determined by its ordinary tensor formula and
-universal cochain counits. Source: Stacks 06YY, 0D6D
-(blueprint: lem-trf-quotient-system-mixed-coherence).
-Proof: resolve an input by one flat-term K-flat complex on the sequence site.
-Ordinary extension preserves these complexes, including under successive coefficient
-maps. The three universal counits are therefore invertible. Conjugate the localization
-of the ordinary associator, c tensor (b tensor x) to c*j(b) tensor x, by these counits.
-Naturality and the universal derived property descend this map to the localization;
-the inverse ordinary associator gives its inverse. Cancellation of the resolution
-isomorphisms proves uniqueness. The calculation uses neither flatness of the ring maps
-nor a bound on the input complex. -/
+/-- The derived scalar associator is uniquely determined by its ordinary tensor formula and
+the universal cochain counits. -/
 theorem integralComparisonSystemScalarComposition_existsUnique (X : Scheme.{t}) :
     ∃! a : integralComparisonDerivedSequenceScalar l E L ι X ⋙
         integralComparisonDerivedSequenceScalar l L M j X ≅
@@ -196,22 +197,15 @@ theorem integralComparisonSystemScalarComposition_existsUnique (X : Scheme.{t}) 
   apply (cancel_mono (mc.ε.app P)).mp
   exact (hb P hP).trans (hc P).symm
 
-/-- The canonical derived associator, with multiplication normalization before localization.
-Source: Stacks 06YY, 0D6D
-(blueprint: lem-trf-quotient-system-mixed-coherence). -/
+/-- The canonical derived associator, normalized by multiplication before localization. -/
 def integralComparisonSystemScalarComposition (X : Scheme.{t}) :
     integralComparisonDerivedSequenceScalar l E L ι X ⋙
       integralComparisonDerivedSequenceScalar l L M j X ≅
         integralComparisonDerivedSequenceScalar l E M (j.comp ι) X :=
   (integralComparisonSystemScalarComposition_existsUnique l E L M ι j X).exists.choose
 
-/-- The derived scalar unit is the localization of multiplication, with its canonical
-cochain counit. Source: Stacks 06YY
-(blueprint: lem-trf-quotient-system-mixed-coherence).
-Proof: on a K-flat representative localize the ordinary multiplication unitor and
-precede it by the universal derived counit. This is invertible there. K-flat resolutions
-and naturality extend it to every derived object; cancellation of each resolution
-isomorphism gives uniqueness. The inverse inserts the scalar one. -/
+/-- The derived scalar unit is uniquely determined as the localization of multiplication,
+with its canonical cochain counit. -/
 theorem integralComparisonSystemScalarUnit_existsUnique (X : Scheme.{t}) :
     ∃! a : integralComparisonDerivedSequenceScalar l E E (AlgHom.id ℚ_[l] E) X ≅ 𝟭 _,
       ∀ (P : CochainComplex (coefficientSequenceModules l E X) ℤ),
@@ -246,8 +240,7 @@ theorem integralComparisonSystemScalarUnit_existsUnique (X : Scheme.{t}) :
   apply Iso.ext
   exact sequenceDerived_ext l E X b.hom c.hom (fun P hP ↦ (hb P hP).trans (hc P).symm)
 
-/-- The derived scalar multiplication unitor on the whole quotient diagram.
-Source: Stacks 06YY (blueprint: lem-trf-quotient-system-mixed-coherence). -/
+/-- The derived scalar multiplication unitor on the whole quotient diagram. -/
 def integralComparisonSystemScalarUnit (X : Scheme.{t}) :
     integralComparisonDerivedSequenceScalar l E E (AlgHom.id ℚ_[l] E) X ≅
       𝟭 (coefficientSequenceDerived l E X) :=
@@ -258,18 +251,14 @@ end ScalarComparisons
 attribute [local irreducible] integralComparisonSystemScalarComposition
   integralComparisonSystemScalarUnit
 
-/-- Every scheme occurring in the finite string has ell invertible.
-Source: the standing scheme hypothesis of the node
-(blueprint: lem-trf-quotient-system-mixed-coherence). -/
+/-- Every scheme occurring in the finite string has `l` invertible. -/
 def IntegralQuotientPathInvertible (l : ℕ) {X : Scheme.{t}} :
     ∀ {Y : Scheme.{t}}, Quiver.Path X Y → Prop
   | _, .nil => ∀ x : X, Nonempty (Invertible (l : X.residueField x))
   | Y, .cons p _ => IntegralQuotientPathInvertible l p ∧
       ∀ y : Y, Nonempty (Invertible (l : Y.residueField y))
 
-/-- Binary parenthesizations of a fixed finite string, with empty pieces permitted.
-Source: the finite-string assertion of the node, Stacks 0D6D
-(blueprint: lem-trf-quotient-system-mixed-coherence). -/
+/-- Binary parenthesizations of a fixed finite string, with empty pieces permitted. -/
 inductive IntegralQuotientBracketing :
     {X Y : Scheme.{t}} → Quiver.Path X Y → Type (t + 1)
   | nil (X : Scheme.{t}) : IntegralQuotientBracketing (Quiver.Path.nil : Quiver.Path X X)
@@ -278,9 +267,7 @@ inductive IntegralQuotientBracketing :
       (a : IntegralQuotientBracketing p) (b : IntegralQuotientBracketing q) :
       IntegralQuotientBracketing (p.comp q)
 
-/-- Interpret the parenthesized string by iterated pullback, retaining its entire diagram.
-Source: finite-string clause, Stacks 0D6D
-(blueprint: lem-trf-quotient-system-mixed-coherence). -/
+/-- Interpret the parenthesized string by iterated pullback, retaining its entire diagram. -/
 @[reducible]
 def integralQuotientBracketFunctor
     (D : Scheme.{t} → Type a) [∀ X : Scheme.{t}, Category.{v} (D X)]
@@ -294,10 +281,8 @@ def integralQuotientBracketFunctor
       integralQuotientBracketFunctor D U b ⋙ integralQuotientBracketFunctor D U a
 termination_by structural b
 
-/-- The comparison associated to a parenthesization, recursively using only the given
-canonical compositor and inverse-image unitor. Equal composites use equality transport.
-Source: finite-string clause, Stacks 0D6D
-(blueprint: lem-trf-quotient-system-mixed-coherence). -/
+/-- The comparison associated to a parenthesization, built recursively from the given
+compositor and inverse-image unitor. -/
 @[reducible]
 def integralQuotientBracketComparison
     (D : Scheme.{t} → Type a) [∀ X : Scheme.{t}, Category.{v} (D X)]

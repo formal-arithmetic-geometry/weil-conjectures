@@ -21,9 +21,9 @@ The normalized ordinary unit is checked on sections. Composition compatibility a
 naturality then force kappa to respect the completed unit, giving the inverse
 cancellation identity without another normalization assumption.
 
-Source: the Weil-structures paragraph of the open-closed triangle proof; Stacks
-Tags 03D6, 015F and 04VG.
-(blueprint: lem-sf-integral-automorphism-cancellation-precomposition)
+## References
+
+* Stacks Project, Tags 03D6, 015F and 04VG
 -/
 
 @[expose] public noncomputable section

@@ -16,11 +16,19 @@ For a finite coefficient ring `Λ` and a compactification `c = (X ⟶[i] Z ⟶[g
 `f : X ⟶ Y`, the derived lower shriek `Rf_!(c) = D(i_!) ⋙ Rg_*` on the unbounded derived
 categories of étale sheaves of `Λ`-modules is triangulated, commutes with coproducts and, for
 `Y` of finite type over a field on which the exponent of `Λ` is invertible, carries `Dctf(X, Λ)`
-into `Dctf(Y, Λ)` (blueprint `proposition-construction-independence-rf-shriek`).
+into `Dctf(Y, Λ)`.
 
 ## Main results
 
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactification_isTriangulated_and_ctf`.
+
+## Implementation details
+
+The compactly supported direct image `Rf_!(c)` is modelled for finite `Λ` on the whole unbounded
+derived category of the étale site, and localizing closures `Loc(Dctf(-, Λ))` are not modelled.
+Restricting to `Loc(Dctf)` is automatic from the three clauses proved here: the objects whose
+image lies in `Loc(Dctf(Y, Λ))` form a triangulated subcategory closed under coproducts
+containing `Dctf(X, Λ)`.
 -/
 
 @[expose] public section
@@ -42,26 +50,11 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
   {X Y : Scheme.{u}} {f : X ⟶ Y}
 
-/-- Blueprint `proposition-construction-independence-rf-shriek`: compact support along one
-compactification.
-
-Let `c = (X ⟶[i] Z ⟶[g] Y)` be a compactification of `f`, with `i` an open immersion and `g`
-proper. Then `Rf_!(c) = D(i_!) ⋙ Rg_* : D(X_ét, Λ) ⥤ D(Y_ét, Λ)` is a triangulated functor,
-preserves coproducts, and, if `f` is quasi-compact and `Y` is of finite type over a field `k`
-with the exponent of `Λ` invertible on `Y`, it carries `Dctf(X, Λ)` into `Dctf(Y, Λ)`.
-
-The blueprint states this for admissible `Λ` on the pro-étale site, as a functor between the
-localizing closures `Loc(Dctf(-, Λ))`. The repository models the compactly supported direct image
-`Rf_!(c)` for finite `Λ` on the whole unbounded derived category of the étale site, and does not
-model localizing closures. Restricting to `Loc(Dctf)` is then automatic from the three clauses
-proved here: the objects whose image lies in `Loc(Dctf(Y, Λ))` form a triangulated subcategory
-closed under coproducts containing `Dctf(X, Λ)`.
-
-The proof is the blueprint's: `D(i_!)` is triangulated, a left adjoint, and preserves `Dctf`
-(`AlgebraicGeometry.Etale.constructibleTorAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek`);
-`Rg_*` is triangulated, preserves coproducts since `g` is proper
-(`AlgebraicGeometry.Etale.preservesColimitsOfShape_rightDerivedLowerStar_of_isProper`) and
-preserves `Dctf` (`AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedLowerStar`). -/
+/-- **Compact support along one compactification.** Let `c = (X ⟶[i] Z ⟶[g] Y)` be a
+compactification of `f`, with `i` an open immersion and `g` proper. Then
+`Rf_!(c) = D(i_!) ⋙ Rg_* : D(X_ét, Λ) ⥤ D(Y_ét, Λ)` is a triangulated functor, preserves coproducts,
+and, if `f` is quasi-compact and `Y` is of finite type over a field `k` with the exponent of `Λ`
+invertible on `Y`, it carries `Dctf(X, Λ)` into `Dctf(Y, Λ)`. -/
 theorem rightDerivedLowerShriekOfCompactification_isTriangulated_and_ctf
     (c : Compactification f) :
     (Rf_!(c)[ModuleCat.{u + 1} Λ]).IsTriangulated ∧

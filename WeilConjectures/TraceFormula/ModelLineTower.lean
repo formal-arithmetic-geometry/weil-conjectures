@@ -16,8 +16,7 @@ public import WeilConjectures.TraceFormula.ModelProjectiveImmersion
 Let `Φ` be the model Frobenius of `X = X₀ ×_{k₀} k`. A `k₀`-morphism `f₀' : X₀ ⟶ P` to a scheme
 `P` of finite type over `k₀` base-changes to a morphism `f : X ⟶ Y = P ×_{k₀} k`, commuting with
 the model Frobenii (`ProEtale.CondensedRing.IsModelFrobenius.exists_comp_eq_comp`). Two cases are
-used in the proof of the trace formula for Frobenius correspondences (blueprint
-`theorem-trace-formula-frobenius-correspondence`):
+used in the proof of the trace formula for Frobenius correspondences:
 
 * an immersion `X₀ ⟶ ℙ¹_{k₀} ×_{k₀} ⋯ ×_{k₀} ℙ¹_{k₀}` of an affine model
   (`AlgebraicGeometry.Scheme.exists_isImmersion_projectiveLineTower`), whose fibres over the
@@ -42,8 +41,7 @@ variable {k : Type u} [Field k] {X : Over (Spec (.of k))} {Φ : X ⟶ X}
   {k₀ : Type u} [Field k₀] [Finite k₀] [Algebra k₀ k] {X₀ : Scheme.{u}}
   {f₀ : X₀ ⟶ Spec (.of k₀)} {p : X.left ⟶ X₀}
 
-/-- **Morphisms of models base-change** (blueprint
-`lemma-comparison-via-relative-frobenius--text-1`, `lemma-comparison-via-relative-frobenius`): for
+/-- **Morphisms of models base-change**: for
 the model Frobenius `Φ` of `X = X₀ ×_{k₀} k` and a `k₀`-morphism `f₀' : X₀ ⟶ P` to a scheme `P` of
 finite type over `k₀`, the base change `Y = P ×_{k₀} k` carries the model Frobenius `Φ_Y` of `P`,
 and `f₀'` base-changes to a morphism `f : X ⟶ Y` with `Φ ≫ f = f ≫ Φ_Y`, the base change of `f₀'`

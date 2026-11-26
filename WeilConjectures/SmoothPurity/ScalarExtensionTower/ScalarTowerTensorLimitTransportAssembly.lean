@@ -11,14 +11,14 @@ import WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarTowerTensorLimitR
 
 /-! # Assembly of strict scalar/tensor representatives
 
-Source: Stacks 07A4 and 0941; localization and total-limit transport in
-realization step 8 of `lem-pur-scalar-extension-tower-coherence`.
-
 The remaining assembly takes strict representative witnesses as input and
 passes them through the localization, completion, realization and total-limit
 maps.  It is separated from the strict representative calculation so that the
 two arguments can be proved independently.
-(blueprint: stage3-pur-scalar-tensor-limit-transport-assembly)
+
+## References
+
+* Stacks Project, Tags 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -42,13 +42,8 @@ attribute [local irreducible]
 
 set_option linter.unusedVariables false in
 /-- Assemble strict representative witnesses into the completed limit square.
-
-This is the localization and total-limit part of the proof.  The hypothesis
-has only strict cochain data; in particular it contains no asserted equality
-between the two completed composites in the conclusion.  Its proof is the
-Roos-bridge naturality and localization argument from Stacks 07A4 and 0941.
-Source: Stacks 07A4 and 0941 (blueprint: stage3-pur-scalar-tensor-limit-transport-assembly).
--/
+The hypothesis has only strict cochain data; in particular it contains no asserted equality
+between the two completed composites in the conclusion. -/
 theorem scalarTowerTensorLimitSquare_of_strictWitnesses (W : Scheme.{u})
     (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)
     (SL : CoefficientDerivedSystemCalculus.{u, u} l L W)

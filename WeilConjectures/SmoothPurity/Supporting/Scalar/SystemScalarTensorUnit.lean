@@ -21,10 +21,11 @@ import WeilConjectures.SixFunctors.CoefficientClosedStructure.CoefficientRingedT
 /-! # Scalar extension of coherent systems is unital and associative
 
 The whole-system scalar tensorator `ScalarExtensionTower.derivedSigma` is compatible with the
-associators and unitors of the published coherent system monoidal structures.
+associators and unitors of the coherent system monoidal structures.
 
-Source: Stacks Project, Tags 03EL and 07A4.
-(blueprint: lem-pur-system-scalar-tensor-braiding).
+## References
+
+* Stacks Project, Tags 03EL, 06YN, 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -76,13 +77,8 @@ private theorem scalarAssoc_sectionSquare
     tB (κB (ηB (σ x))) = τ (tA (κA (ηA x))) := by
   rw [hσ, hκB, htB, hκA, htA, hτ]
 
-/-- The strict scalar tensorator commutes with cochain reassociation.
-Source: Stacks 07A4, with the unsigned reassociation of Tag 06YN.
-(blueprint: lem-pur-system-scalar-tensor-braiding).
-
-Proof: transpose both chain maps by the scalar-extension adjunction; detect equality on
-local pure triples. Both routes send `x ⊗ y ⊗ z` to the tensor of the three unit images, with
-the right parenthesization. -/
+/-- The strict scalar tensorator commutes with cochain reassociation: both routes send
+`x ⊗ y ⊗ z` to the tensor of the three unit images, with the right parenthesization. -/
 theorem scalarSigma_cochain_associativity (P Q N : ScalarExtensionTower.Complex l E W)
     (aY : (ScalarExtensionTower.tensor l E W).obj
         ((ScalarExtensionTower.tensor l E W).obj (P, Q), N) ≅
@@ -252,9 +248,7 @@ private theorem scalarAssoc_localization_paste
   simpa only [Functor.map_comp, Category.assoc] using
     congrArg (fun f ↦ e.app P ≫ G.map f) h
 
-/-- Categorical pasting, from naturality and cancellation.
-Source: Stacks 07A4
-(blueprint: lem-pur-completed-pullback-tensor-associativity-representatives). -/
+/-- Categorical pasting, from naturality and cancellation. -/
 private theorem scalarAssoc_left_square {B : Type*} [Category B] [MonoidalCategory B]
     {A : Type*} [Category A] [MonoidalCategory A]
     (F : B ⥤ A)
@@ -285,9 +279,7 @@ private theorem scalarAssoc_left_square {B : Type*} [Category B] [MonoidalCatego
       simp only [← tensorHom_id, tensorHom_comp_tensorHom, Category.comp_id, Category.assoc]
     _ = _ := by rw [hj]; simp only [Category.assoc]
 
-/-- Categorical pasting, from naturality and cancellation.
-Source: Stacks 07A4
-(blueprint: lem-pur-completed-pullback-tensor-associativity-representatives). -/
+/-- Categorical pasting, from naturality and cancellation. -/
 private theorem scalarAssoc_right_square {B : Type*} [Category B] [MonoidalCategory B]
     {A : Type*} [Category A] [MonoidalCategory A]
     (F : B ⥤ A)
@@ -318,9 +310,7 @@ private theorem scalarAssoc_right_square {B : Type*} [Category B] [MonoidalCateg
       simp only [← id_tensorHom, tensorHom_comp_tensorHom, Category.comp_id, Category.assoc]
     _ = _ := by rw [hj]; simp only [Category.assoc]
 
-/-- Categorical pasting, from naturality and cancellation.
-Source: Stacks 07A4
-(blueprint: lem-pur-completed-pullback-tensor-associativity-representatives). -/
+/-- Categorical pasting, from naturality and cancellation. -/
 private theorem scalarAssoc_transport
     {B : Type*} [Category B] [MonoidalCategory B]
     {A : Type*} [Category A] [MonoidalCategory A]
@@ -360,8 +350,7 @@ private theorem scalarAssoc_transport
       simp only [Category.assoc]
       rfl
 
-/-- The selected calculus retains the system normalization from its resolution model.
-Source: Stacks 07A4 and 0941 (blueprint: lem-pur-system-scalar-tensor-braiding). -/
+/-- The selected calculus retains the system normalization from its resolution model. -/
 private theorem scalar_systemTensorCoherence (D : Type u) [Field D] [Algebra (Padic l) D]
     [FiniteDimensional (Padic l) D] (W : Scheme.{u}) :
     ∃ β : @SymmetricCategory (coefficientSequenceDerived l D W) _
@@ -455,10 +444,7 @@ private theorem scalarAssoc_tensor_normalization (P Q : ScalarExtensionTower.Com
   obtain ⟨_, _, h⟩ := h P Q hP hQ
   exact h
 
-/-- Associativity of the scalar tensorator on three good representatives.
-Source: Stacks 07A4, total tensor construction (blueprint: lem-pur-system-scalar-tensor-braiding).
-Proof: insert the cochain normalizations of the scalar tensorator, of the tensor models and of
-the system associators; the strict scalar tensorator is associative on cochains. -/
+/-- Associativity of the scalar tensorator on three good representatives. -/
 private theorem scalarAssoc_representatives (A B C : ScalarExtensionTower.Complex l E W)
     (hA : ScalarExtensionTower.Good l E W A) (hB : ScalarExtensionTower.Good l E W B)
     (hC : ScalarExtensionTower.Good l E W C) :
@@ -666,18 +652,7 @@ private theorem scalarAssoc_representatives (A B C : ScalarExtensionTower.Comple
 end Representatives
 
 
-/-- The normalized whole-system scalar tensorator is associative.
-
-Source: Stacks 07A4, total tensor construction; the scalar calculation of
-lem-pur-system-scalar-tensor-braiding.
-(blueprint: lem-pur-system-scalar-tensor-braiding).
-
-Proof plan: take simultaneous flat-term K-flat representatives. By `DerivedSigmaModel` the
-derived scalar tensorator is the localization of the strict scalar tensorator, conjugated by
-the fixed tensor models and scalar counits; the system associators are the localizations of the
-total reassociation maps with the same models. On a homogeneous local tensor both strict routes
-send `c ⊗ ((x ⊗ y) ⊗ z)` to `(c x) ⊗ (y ⊗ z)` without a sign. These generators span the
-sheafified total tensors, so the chain maps agree; localize and extend by naturality. -/
+/-- The normalized whole-system scalar tensorator is associative. -/
 theorem systemScalarTensorAssociativity
     (M N P : coefficientSequenceDerived l E W) :
     let H := integralComparisonDerivedSequenceScalar l E L ι W
@@ -717,14 +692,7 @@ theorem systemScalarTensorAssociativity
 
 
 /-- Scalar extension of coherent systems sends the coefficient-ring unit to the
-coefficient-ring unit.
-
-Source: Stacks 03EL; extension of scalars of a free module of rank one.
-(blueprint: lem-pur-system-scalar-tensor-braiding).
-
-Proof: the coherent unit is the degree-zero single complex on the structure sheaf; it is
-flat-term K-flat, so the scalar model computes its derived extension by the underived one, and
-extension of scalars of the structure sheaf is the structure sheaf. -/
+coefficient-ring unit. -/
 theorem systemScalarTensorUnitObject :
     Nonempty ((integralComparisonDerivedSequenceScalar l E L ι W).obj
         (pullbackTensorCalculus l E W).systemClosed.monoidal.tensorUnit ≅
@@ -775,13 +743,7 @@ private theorem scalarAssociativity_from_tensorHom
   dsimp only [Functor.comp_obj, tensor_obj, Functor.prod_obj] at h' ⊢
   simpa only [MonoidalCategory.id_tensorHom, MonoidalCategory.tensorHom_id] using h'
 
-/-- Both unit equations for the normalized whole-system scalar tensorator.
-
-Source: Stacks 03EL and 07A4.
-(blueprint: lem-pur-system-scalar-tensor-braiding).
-
-Proof: the associativity equation and any identification of the scalar extension of the unit
-are combined by the monoidal unit extraction lemma. -/
+/-- Both unit equations for the normalized whole-system scalar tensorator. -/
 theorem systemScalarTensorUnit :
     let H := integralComparisonDerivedSequenceScalar l E L ι W
     let σ := ScalarExtensionTower.derivedSigma l E L ι W

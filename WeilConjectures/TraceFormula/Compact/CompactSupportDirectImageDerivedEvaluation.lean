@@ -15,12 +15,22 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Derived direct-image evaluation for compact support
 
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 07A4 and 0941.
-(blueprint: lem-trf-compact-support-direct-image-derived-evaluation).
+This is the derived component of the direct-image evaluation theorem: derived evaluation, its
+arbitrary-resolution normalization, and the two mate equations.
 
-This is the derived component of the direct-image evaluation theorem.  The ordinary
-comparison is supplied as an input, so this statement is strictly smaller than the
-parent existence theorem.
+## Implementation details
+
+The ordinary comparison is supplied as an input, so this statement is strictly smaller than the
+parent existence theorem. The inverse ordinary mate is invertible by the sequence-module
+evaluation theorem; localizing it gives `left`, and its derived adjunction mate gives `right`. On
+K-injective systems, finite direct-image acyclicity of evaluation makes both right-derived units
+invertible; naturality extends the formula to arbitrary finite-level K-injective resolutions.
+Evaluation itself is not assumed to preserve K-injective complexes.
+
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10.
+* [Stacks Project, Tags 07A4 and 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -154,21 +164,7 @@ end FormalNormalization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Derived evaluation, arbitrary-resolution normalization, and the two mate equations.
-
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 07A4 and 0941.
-Take the inverse ordinary mate and use the sequence-module evaluation theorem to
-prove it invertible. Localizing it gives `left`; its derived adjunction mate gives
-`right`. The cochain mate normalization identifies this mate with the ordinary
-comparison and the two canonical right-derived units. On K-injective systems,
-finite direct-image acyclicity of evaluation makes both units invertible, hence
-makes the mate invertible. Naturality of the right-derived unit then proves the
-formula for an arbitrary finite-level K-injective resolution. Finally the unit-mate
-and counit-mate identities give the two displayed equations. The finite-prefix
-derived-extension argument is confined to the acyclicity lemma; evaluation itself
-is not assumed to preserve K-injective complexes.
-(blueprint: lem-trf-compact-support-direct-image-derived-evaluation).
--/
+/-- Derived evaluation, arbitrary-resolution normalization, and the two mate equations. -/
 theorem compactSupportDirectImageDerivedEvaluation
     {Z Y : Scheme.{t}} (p : Z ⟶ Y)
     [(integralComparisonSequenceDirectImage l E p).Additive]

@@ -15,8 +15,7 @@ public import WeilConjectures.WeilSheaf.FieldCoefficientExtendScalars
 /-!
 # The directed system of the `E`-stages `D^b_{c,W}(X, E)` and its cocone to `D^b_{c,W}(X, ℚ̄_ℓ)`
 
-Following blueprint `definition-weil-structure`, the `ℚ̄_ℓ`-stage of Weil complexes is the
-`2`-colimit
+The `ℚ̄_ℓ`-stage of Weil complexes is the `2`-colimit
 
 `D^b_{c,W}(X, ℚ̄_ℓ) = 2-colim_E D^b_{c,W}(X, E)`
 
@@ -120,9 +119,7 @@ variable {l : ℕ} [Fact l.Prime] {Λ Λ' : Type} [NormedField Λ] [IsUltrametri
 
 /-- The identification `ℚ̄_ℓ ⊗_Λ - ≅ ℚ̄_ℓ ⊗_{Λ'} (Λ' ⊗_Λ -)` is compatible with the commutations
 of the extensions of scalars with the Frobenius pullbacks: the commutation of `ℚ̄_ℓ ⊗_Λ -` is the
-composite of those of `Λ' ⊗_Λ -` and `ℚ̄_ℓ ⊗_{Λ'} -`. This follows from the compatibility with
-the pullback along the geometric Frobenius
-(`AlgebraicGeometry.ProEtale.fieldExtendScalarsCompExtendScalarsToAdicIso_paste`). -/
+composite of those of `Λ' ⊗_Λ -` and `ℚ̄_ℓ ⊗_{Λ'} -`. -/
 lemma fieldExtendScalarsCompExtendScalarsToAdicIso_frobenius :
     Functor.whiskerRight (fieldExtendScalarsCompExtendScalarsToAdicIso he hc he' hc'
         (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).hom (WeilSheaf.frobeniusPullback k₀ l X) ≫
@@ -160,14 +157,9 @@ noncomputable def ProEtaleFieldWeilSheaf.extendScalarsCompExtendScalarsToAdicIso
 
 variable [Fact (ringChar k₀ ≠ l)]
 
-/-- Blueprint `definition-weil-structure`: the compatibility of the transition functors with
-the functors to the stage `ℚ̄_ℓ`.
-
-Extending scalars from `D^b_{c,W}(X, Λ)` to `D^b_{c,W}(X, Λ')` and then to `D^b_{c,W}(X, ℚ̄_ℓ)`
-is extending scalars from `D^b_{c,W}(X, Λ)` to `D^b_{c,W}(X, ℚ̄_ℓ)`: the exact functors of
-pro-étale Weil sheaves agree
-(`AlgebraicGeometry.ProEtaleFieldWeilSheaf.extendScalarsCompExtendScalarsToAdicIso`), hence so
-do the functors they induce on derived categories. -/
+/-- The compatibility of the transition functors with the functors to the stage `ℚ̄_ℓ`:
+extending scalars from `D^b_{c,W}(X, Λ)` to `D^b_{c,W}(X, Λ')` and then to `D^b_{c,W}(X, ℚ̄_ℓ)`
+is extending scalars from `D^b_{c,W}(X, Λ)` to `D^b_{c,W}(X, ℚ̄_ℓ)`. -/
 noncomputable def FieldWeilComplex.extendScalarsCompExtendScalarsToAdicIso :
     FieldWeilComplex.extendScalars he hc k₀ X ⋙
         FieldWeilComplex.extendScalarsToAdic he' hc' k₀ X ≅
@@ -197,17 +189,15 @@ lemma _root_.PadicAlgCl.continuous_algebraMap_intermediateField
     (E : IntermediateField ℚ_[l] (PadicAlgCl l)) : Continuous (algebraMap ℚ_[l] E) :=
   (continuous_algebraMap ℚ_[l] (PadicAlgCl l)).subtype_mk _
 
-/-- Blueprint `definition-weil-structure`: the transition functor
-`D^b_{c,W}(X, E) ⥤ D^b_{c,W}(X, F)` of the directed system of the `E`-stages, for finite
-extensions `E ⊆ F` of `ℚ_ℓ` inside `ℚ̄_ℓ`: the extension of scalars `F ⊗_E -`
+/-- The transition functor `D^b_{c,W}(X, E) ⥤ D^b_{c,W}(X, F)` of the directed system of the
+`E`-stages, for finite extensions `E ⊆ F` of `ℚ_ℓ` inside `ℚ̄_ℓ`: the extension of scalars `F ⊗_E -`
 (`AlgebraicGeometry.FieldWeilComplex.extendScalars` along the inclusion `E → F`). -/
 noncomputable def FieldWeilComplex.transition {E F : FiniteIntermediateField l} (h : E ≤ F) :
     FieldWeilComplex k₀ E.1 X ⥤ FieldWeilComplex k₀ F.1 X :=
   FieldWeilComplex.extendScalars (continuous_inclusion_finiteIntermediateField h)
     (continuous_algebraMap_intermediateField E.1) k₀ X
 
-/-- Blueprint `definition-weil-structure`: Weil sheaf and Weil complex, the `2`-colimit
-`D^b_{c,W}(X, ℚ̄_ℓ) = 2-colim_E D^b_{c,W}(X, E)`.
+/-- The cocone realising the `2`-colimit `D^b_{c,W}(X, ℚ̄_ℓ) = 2-colim_E D^b_{c,W}(X, E)`.
 
 The cocone of categories, on the directed system `E ↦ D^b_{c,W}(X, E)` of the stages at the
 finite extensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` with the extensions of scalars

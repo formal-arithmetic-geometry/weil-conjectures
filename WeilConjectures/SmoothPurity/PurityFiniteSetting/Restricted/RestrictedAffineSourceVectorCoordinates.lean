@@ -8,7 +8,16 @@ module
 public import WeilConjectures.AlgebraicGeometry.VectorBundleZeroSection.VectorBundleZeroSection
 public import WeilConjectures.AlgebraicGeometry.Affine.Linear.AffineLinearTraceAction
 
-/-! # Vector coordinates for a section of an ordered affine tower -/
+/-!
+# Vector coordinates for a section of an ordered affine tower
+
+## Implementation details
+
+The given tower coordinates identify a section with a vector `a` of global functions in the
+global frame of the free rank-`d` module. Translation by `-a` sends that section to zero, with
+inverse translation by `a`; the projection and section identities follow from the affine-space
+universal property.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -60,16 +69,7 @@ private theorem freeBundleCoordinates (B : Scheme.{u}) [IsNoetherian B] (d : ℕ
       AffineSpace.zeroSection_comp_map, ← Category.assoc,
       B.topIso.inv_hom_id, Category.id_comp]
 
-/-- A section of an ordered affine tower becomes the zero section of the free bundle.
-Source: smooth-purity, Agreement on the model, subtraction of the diagonal section.
-(blueprint: lem-pur-restricted-affine-source-vector-coordinates).
-
-Proof: use the global frame of the free rank-d module. The given tower coordinates
-identify the section with a vector a of global functions. Translation by -a sends
-that section to zero, and translation by a is its inverse. Compose the inverse
-translated coordinates with the free-bundle frame. Projection and section identities
-follow by the affine-space universal property. The empty coordinate list and empty
-base satisfy the same identities. -/
+/-- A section of an ordered affine tower becomes the zero section of the free bundle. -/
 theorem affineTowerSection_vectorCoordinates (B : Scheme.{u}) [IsNoetherian B] (d : ℕ)
     {T : Scheme.{u}} (g : T ⟶ B) (s : B ⟶ T) (hs : s ≫ g = 𝟙 B)
     (r : T ≅ affineTraceTower B d) (hr : r.hom ≫ affineTraceProjection B d = g) :

@@ -74,6 +74,14 @@ the `SixFunctors` folder.
   `AlgebraicGeometry.Etale.isIso_sheafFiber_baseChangeHomologyMap_strictLocal`: its stalk is an
   isomorphism when the residue field map is.
 
+## Implementation details
+
+The acyclicity bound requires torsion, as in Gabber's affine comparison, which is the input of
+the case of one affine open; the induction on the number of affine opens is the Mayer–Vietoris
+sequence of the closed fibre. In degree `1` on `ℙ¹_κ`, each class is written as a sum of images
+of classes of finite pushforwards of constant sheaves, which lift to `ℙ¹_A`, where the
+underlying abelian sheaf of an injective sheaf is acyclic.
+
 ## References
 
 - Stacks Project, Section 59.91, <https://stacks.math.columbia.edu/tag/0A3S>
@@ -94,10 +102,6 @@ open Scheme Etale
 fibre over `Spec A/I`. Suppose `Y` is covered by `n + 1` affine opens. Then for every
 injective torsion sheaf `J` of `Λ`-modules on `Y_ét`, the restriction `J|_{Y₀}` has vanishing
 cohomology in degrees `q > n`.
-
-Here torsion is required, as in Gabber's affine comparison, which is the input of the case
-`n = 0`; the induction on `n` is the Mayer–Vietoris sequence of the closed fibre.
-(blueprint: lemma-acyclicity-closed-fibre--1)
 -/
 theorem Etale.subsingleton_H_upperStar_of_injective_of_iSup_eq_top
     (Λ : Type (u + 1)) [CommRing Λ] {A : Type u} [CommRing A] (I : Ideal A) [HenselianRing A I]
@@ -133,7 +137,6 @@ sheaf of `𝔽_r`-modules on `X`. Every class `c ∈ H¹(X₀, I₀)` is a finit
 and of finite presentation, `Mⱼ` is a finite `𝔽_r`-module with constant sheaf `Mⱼ` on `Vⱼ`,
 and `ψⱼ : (hⱼ)_* Mⱼ ⟶ I` is a morphism of sheaves. (Equivalently `c` is the image of a class
 of `H¹(X₀, (⊕ⱼ (hⱼ)_* Mⱼ)₀)` under a map `⊕ⱼ (hⱼ)_* Mⱼ ⟶ I`.)
-(blueprint: lemma-acyclicity-closed-fibre--1)
 -/
 theorem Etale.exists_sum_eq_of_injective_projectiveLine (r : ℕ) [Fact r.Prime]
     (I : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology
@@ -210,10 +213,7 @@ theorem Etale.exists_sum_eq_of_injective_projectiveLine (r : ℕ) [Fact r.Prime]
 
 /-- **Acyclicity on the closed projective line in degrees at least two.** Let `A` be henselian
 local, `X = ℙ¹_A`, `ι : X₀ = ℙ¹_κ ⟶ X` the closed fibre and `r` a prime. For every injective
-sheaf `I` of `𝔽_r`-modules on `X`, `Hᵠ(X₀, I₀) = 0` for `q ≥ 2`: this is the acyclicity bound
-`AlgebraicGeometry.Etale.subsingleton_H_upperStar_of_injective_of_iSup_eq_top` for the cover of
-`ℙ¹_A` by its two standard affine opens. This is the first step of the proof of the blueprint
-node `lemma-acyclicity-closed-fibre--1`. -/
+sheaf `I` of `𝔽_r`-modules on `X`, `Hᵠ(X₀, I₀) = 0` for `q ≥ 2`. -/
 theorem Etale.subsingleton_H_projectiveLine_closedFibre_of_injective_of_one_lt (r : ℕ)
     [Fact r.Prime] (I : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology
       (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))) [Injective I] (q : ℕ) (hq : 1 < q) :
@@ -236,15 +236,7 @@ theorem Etale.subsingleton_H_projectiveLine_closedFibre_of_injective_of_one_lt (
 
 /-- **Acyclicity on the closed projective line.** Let `A` be henselian local, `X = ℙ¹_A`,
 `ι : X₀ = ℙ¹_κ ⟶ X` the closed fibre and `r` a prime. For every injective sheaf `I` of
-`𝔽_r`-modules on `X`, `Hᵠ(X₀, I₀) = 0` for `q > 0`. Degrees `q ≥ 2` are
-`AlgebraicGeometry.Etale.subsingleton_H_projectiveLine_closedFibre_of_injective_of_one_lt`. In
-degree `1`, write a class as `∑ⱼ ψⱼ(xⱼ)` with `xⱼ ∈ H¹(X₀, ((hⱼ)_* Mⱼ)₀)`
-(`AlgebraicGeometry.Etale.exists_sum_eq_of_injective_projectiveLine`); each `xⱼ` lifts to
-`H¹(X, (hⱼ)_* Mⱼ)`
-(`AlgebraicGeometry.Etale.surjective_cohomologyMap_one_lowerStar_constantSheaf`),
-and its image in `H¹(X, I)` vanishes since the underlying abelian sheaf of `I` is acyclic
-(`CategoryTheory.Sheaf.subsingleton_H_forget₂_of_injective`).
-(blueprint: lemma-acyclicity-closed-fibre--1)
+`𝔽_r`-modules on `X`, `Hᵠ(X₀, I₀) = 0` for `q > 0`.
 -/
 theorem Etale.subsingleton_H_projectiveLine_closedFibre_of_injective (r : ℕ) [Fact r.Prime]
     (I : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology
@@ -305,9 +297,7 @@ theorem Etale.subsingleton_H_projectiveLine_closedFibre_of_injective (r : ℕ) [
 /-- **Acyclicity of injectives on `ℙ¹_κ`.** Let `A` be henselian local, `X = ℙ¹_A` and
 `ι : X₀ = ℙ¹_κ ⟶ X` the closed fibre. For a prime `ℓ` and an injective sheaf `I` of
 `𝔽_ℓ`-modules on `X`, the restriction `I₀` is `Γ(X₀, -)`-acyclic: `Hᵠ(X₀, I₀) = 0` for all
-`q > 0`. In Lean this is the same statement as
-`AlgebraicGeometry.Etale.subsingleton_H_projectiveLine_closedFibre_of_injective`.
-(blueprint: `lemma-acyclicity-closed-fibre--1`) -/
+`q > 0`. -/
 alias Etale.subsingleton_H_projectiveLine_residueField_of_injective :=
   Etale.subsingleton_H_projectiveLine_closedFibre_of_injective
 
@@ -388,7 +378,6 @@ theorem Etale.bijective_cohomologyMap_projectiveLine_residueField_zmod (r : ℕ)
 residue field `κ` and `ι : ℙ¹_κ ⟶ ℙ¹_A` the closed fibre. For every torsion sheaf `F` of
 `Λ`-modules on `ℙ¹_A` and every `q ≥ 0`, restriction `Hᵠ(ℙ¹_A, F) ⟶ Hᵠ(ℙ¹_κ, F₀)` is
 bijective.
-(blueprint: proposition-cohomology-p-1-over-henselian--1)
 -/
 theorem Etale.bijective_cohomologyMap_projectiveLine_residueField
     (Λ : Type (u + 1)) [CommRing Λ]
@@ -452,13 +441,9 @@ Spec B -g-> Spec A
 Let `F` be a torsion sheaf of `Λ`-modules on `ℙ¹_A` and `q ≥ 0`. Then the stalk at the closed
 geometric point `Spec κ_B ⟶ Spec B` of the degree-`q` exchange morphism
 `g⁻¹ Rᵠp_* F ⟶ Rᵠp'_* g'⁻¹ F` is, up to isomorphisms of its source and target, the pullback
-map `Hᵠ(ℙ¹_{κ_A}, F₀) ⟶ Hᵠ(ℙ¹_{κ_B}, F₀|)` along `ℙ¹_{κ_B} ⟶ ℙ¹_{κ_A}`. The isomorphisms are
-the strictly henselian comparisons on the two closed fibres.
-
-**Form of the statement.** The statement asserts the existence of additive
-isomorphisms of the two stalks with closed-fibre cohomology that make the
-exchange square commute.
-(blueprint: proposition-proper-base-change-projective-line--1)
+map `Hᵠ(ℙ¹_{κ_A}, F₀) ⟶ Hᵠ(ℙ¹_{κ_B}, F₀|)` along `ℙ¹_{κ_B} ⟶ ℙ¹_{κ_A}`: there are additive
+isomorphisms of the two stalks with closed-fibre cohomology, given by the strictly henselian
+comparisons, making the exchange square commute.
 -/
 theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_strictLocal
     (F : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -518,10 +503,7 @@ theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_strictLocal
 
 /-- If the residue field map `κ_A ⟶ κ_B` of a local morphism of strictly henselian local
 rings is an isomorphism, the stalk at the closed geometric point of `Spec B` of the
-exchange morphism of `ℙ¹` is an isomorphism. This is the second assertion of the
-blueprint node `proposition-proper-base-change-projective-line--1`, deduced from
-`AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_strictLocal`: the
-pullback along the isomorphism `ℙ¹_{κ_B} ⟶ ℙ¹_{κ_A}` is bijective on cohomology. -/
+exchange morphism of `ℙ¹` is an isomorphism. -/
 theorem Etale.isIso_sheafFiber_baseChangeHomologyMap_strictLocal
     (hφ : Function.Bijective (IsLocalRing.ResidueField.map φ))
     (F : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology (ModuleCat.{u + 1} Λ))

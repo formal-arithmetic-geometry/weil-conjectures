@@ -19,8 +19,13 @@ import WeilConjectures.RingTheory.SmoothAtPrimeDifferentialData
 /-!
 # Free conormal basis near a smooth prime
 
-Source: literature/stacks-project/smoothing.tex, Lemma Tag 07C6
-(blueprint: lem-weil-pbc-smooth-at-prime-free-conormal-basis).
+Near a smooth prime of a quotient of a polynomial ring, some of the defining equations form a
+basis of the localized conormal module, and the localized module of differentials is free of
+complementary rank.
+
+## References
+
+* [Stacks, Tag 07C6]
 -/
 
 @[expose] public section
@@ -30,28 +35,7 @@ universe u
 namespace Algebra
 
 /-- Near a smooth prime of a polynomial quotient, selected defining equations form a
-basis of the localized conormal module, and the differentials are free of complementary rank.
-Source: Stacks Project, Smoothing Ring Maps, Lemma Tag 07C6
-(blueprint: lem-weil-pbc-smooth-at-prime-free-conormal-basis).
-
-Proof, following the four steps of the node:
-1. Choose a smooth principal neighbourhood using `IsSmoothAtPrime`. The lemma
-   `lem-weil-pbc-smooth-localization-conormal-split` makes the conormal module and the
-   differential module direct summands of the free module of rank n, hence finite projective.
-2. The given relations span the conormal fibre at q. Choose a subset V giving a basis
-   of cardinality c. Tensoring the split sequence with the residue field shows c ≤ n
-   and differential fibre dimension n-c; the subset condition also gives c ≤ m.
-3. Finite projective modules are finitely presented and locally free
-   (`lem-weil-pbc-finite-projective-finitely-presented` and
-   `lem-weil-pbc-finite-projective-rank-locally-constant`). The conormal rank at q is c.
-   Use `lem-weil-pbc-prescribed-residue-basis-spreads` to spread the selected classes
-   to a basis outside q. Clear denominators and combine localization elements.
-   Smoothness persists by `lem-weil-pbc-smooth-ring-map-principal-localization`.
-4. Apply `lem-weil-pbc-finitely-presented-free-at-prime-spreads` to the differential
-   module of rank n-c. Clear denominators and take a common shrink, preserving the
-   selected conormal basis and smoothness. Identify the resulting differentials using
-   `lem-weil-pbc-kahler-differentials-localization`.
--/
+basis of the localized conormal module, and the differentials are free of complementary rank. -/
 theorem exists_smoothAtPrime_free_conormal_basis
     (R : Type u) [CommRing R] (n m : ℕ)
     (f : Fin m → MvPolynomial (Fin n) R)

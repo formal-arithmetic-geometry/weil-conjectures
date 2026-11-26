@@ -34,9 +34,11 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
 /-! # Constant-scalar bilinearity of the normalized integral completed tensor
 
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 3.4.12(4); Stacks Project,
-Tags 06YS and 099N; the assigned integral-to-rational tensor construction.
-(blueprint: lem-sf-integral-completed-tensor-bilinear).
+## References
+
+* B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, Definition 3.4.10 and
+  Lemma 3.4.12(4)
+* Stacks Project, Tags 06YS and 099N
 -/
 
 @[expose] public section
@@ -481,30 +483,7 @@ private theorem tensorDerived_linear (M : DerivedCategory (integralTowerModules 
 end TensorDescent
 
 /-- The normalized ambient completed tensor has a separately linear arrow action
-for the published constant valuation-ring action.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 3.4.12(4); Stacks Project,
-Tags 06YS and 099N; the integral-to-rational tensor construction in blueprint
-`prose-03-02`.
-(blueprint: lem-sf-integral-completed-tensor-bilinear).
-
-Proof: represent both inputs by K-flat complexes with flat terms. Finite reduction
-is extension of scalars, so it preserves addition and the constant valuation-ring
-action on maps. On each summand of the total tensor its arrow map is the ordinary
-balanced tensor of the two component maps. Tensor balancing identifies the action
-of a constant scalar on either input with that scalar acting on the output;
-additivity in each input holds on every summand. The signed differential and the
-finite-reduction transitions commute with these identities. Restriction of scalars,
-products and the shifted cone defining the Roos complex preserve them, giving
-separate linearity on good representatives. Derived localization preserves the
-published constant action, since the scalar chain transformation descends to the
-scalar derived transformation defining that action. Every derived object has a
-good representative; derived arrows are roofs between such representatives.
-Naturality of the normalized descent comparison transports the equations to those
-roofs. Inverses of quasi-isomorphisms commute with the same scalar action, so the
-equations hold for all arrows, independently of the roofs. Package separate
-additivity and scalar preservation as the two nested linear maps below. This
-argument uses no torsion cancellation, boundedness or constructibility hypothesis;
-in particular it also applies to zero maps, zero objects and torsion inputs. -/
+for the published constant valuation-ring action. -/
 theorem integralCompletedTensor_bilinear (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (W : Scheme.{u})

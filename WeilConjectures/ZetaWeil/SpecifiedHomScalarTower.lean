@@ -13,7 +13,16 @@ The ordinary internal-Hom tower equation is conjugated by the normalized complet
 maps, restricted to constructible objects, and then carried through rational localization.
 The first Hom variable uses the inverse scalar associator throughout.
 
-(blueprint: lem-zl-specified-hom-scalar-rational-tower).
+## Implementation details
+
+The ordinary tower is first conjugated by the normalized completion maps (by naturality of the
+completion comparison and of ordinary Hom) and restricted to permitted integral pairs, using the
+ordinary tower and completion normalizations in `IntegralOperationsScalarComparisons` and
+`SfScalarExtensionComposition`. Rational Hom and scalar extension have the prescribed integral
+objects and maps; their normalization identifies the three Hom comparisons and the scalar
+associator with the localized integral components, and functoriality of localization carries
+the integral equation to the rational one. Endpoint equalities are handled explicitly; no
+faithfulness of the rational localization is required.
 -/
 
 @[expose] public noncomputable section
@@ -27,9 +36,7 @@ namespace WeilConjectures
 attribute [local irreducible] HasDerivedCategory.standard integralCoefficientLinear
   Padic.coefficientExtensionIntegers Padic.coefficientExtensionUniformizer
   Padic.coefficientExtensionAbsoluteValue
-/-- Conjugating an internal-Hom tower by objectwise isomorphisms preserves its equation.
-Move the completion comparison past the first arrow by naturality, use naturality of
-ordinary Hom on the two input comparisons, and cancel the adjacent inverse factors. -/
+/-- Conjugating an internal-Hom tower by objectwise isomorphisms preserves its equation. -/
 private theorem conjugatedHomTower
     {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
     {E : Type u₃} [Category.{v₃} E]
@@ -135,8 +142,7 @@ variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
-/-- The full-subcategory completion comparison has the specified ambient components.
-Both are normalized by the same quotient maps, so the recorded uniqueness applies. -/
+/-- The full-subcategory completion comparison has the specified ambient components. -/
 private theorem completion_app (X : Scheme.{u})
     (K : sfIntegralConstructibleCategory l E X) :
     (sfIntegralOrdinaryComparison l E L ι X).app K =
@@ -155,8 +161,7 @@ private theorem completion_app (X : Scheme.{u})
   apply Iso.ext
   exact (congrArg (fun a ↦ a.hom.app K) he).symm
 
-/-- The restricted integral associator is the ordinary associator conjugated by completion.
-This is its defining component normalization, with the completion isomorphisms identified. -/
+/-- The restricted integral associator is the ordinary associator conjugated by completion. -/
 private theorem integralComp_app (X : Scheme.{u})
     (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
     (j : L →ₐ[ℚ_[l]] F) (K : sfIntegralConstructibleCategory l E X) :
@@ -199,11 +204,7 @@ private theorem integralComp_app (X : Scheme.{u})
     congrArg Iso.hom he]
   rfl
 
-/-- The ordinary Hom tower descends to the permitted constructible integral pairs.
-Apply the categorical conjugation calculation to the three scalar completion maps.
-The prescribed integral associator has exactly the conjugated components, and the
-full-subcategory inclusion is faithful. Source: the ordinary tower and completion
-normalizations in `IntegralOperationsScalarComparisons` and `SfScalarExtensionComposition`. -/
+/-- The ordinary Hom tower descends to the permitted constructible integral pairs. -/
 private theorem integralHomTower (X : Scheme.{u})
     (P : (constructibleIntegralHomPairs l E X).FullSubcategory)
     (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
@@ -383,16 +384,7 @@ private theorem compInv (X : Scheme.{u})
     ((sfRationalScalarComp_existsUnique l E L ι X 0
       (Nat.Prime.ne_zero (Fact.out : l.Prime)) F j).exists.choose_spec K)
 
-/-- The specified Hom comparison satisfies scalar tower coherence after rationalization.
-Source: the scalar-extension compatibility clause of the finite/rational operations
-interface and the specified Hom comparison (blueprint: lem-zl-specified-hom-scalar-rational-tower).
-Proof: first conjugate the ordinary tower by the normalized completion maps and restrict
-it to permitted integral pairs. Rational Hom and scalar extension have the prescribed
-integral objects and maps. Their normalization identifies the three Hom comparisons and
-the scalar associator with the localized integral components, including the inverse in
-the first Hom variable. Functoriality of localization carries the integral equation to
-the displayed one. Endpoint equalities are handled explicitly; no faithfulness of the
-rational localization is required. -/
+/-- The specified Hom comparison satisfies scalar tower coherence after rationalization. -/
 theorem specifiedHomScalarRational_tower (X : Scheme.{u})
     (P : (constructibleRationalHomPairs l E X).FullSubcategory)
     (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]

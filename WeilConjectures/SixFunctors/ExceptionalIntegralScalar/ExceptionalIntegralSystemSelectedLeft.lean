@@ -9,9 +9,14 @@ public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalI
 import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalIntegralSystemSelectedLeftComparison
 import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalIntegralSystemSelectedLeftCompat
 
-/-! # Whole-system scalar transport before selected finite-level compatibility
-Source: Zheng, Construction 4.1, Lemma 5.22 and Proposition 5.26.
-(blueprint: lem-sf-exceptional-integral-system-selected-left)
+/-! # Selected ramified evaluations of the whole-system left scalar mate
+
+The normalized whole-system left scalar mate has selected ramified evaluations compatible with
+the specified completed comparison.
+
+## References
+
+* [Zheng, Construction 4.1, Lemma 5.22 and Proposition 5.26]
 -/
 
 @[expose] public noncomputable section
@@ -46,22 +51,7 @@ private theorem selectedSquareAux
   rw [eq_of_heq (ha T)]
   exact PurCompactSupport.ramified_reduction_square l E.carrier L.carrier i e he e.pos n hn T
 
-/-- Selected ramified evaluations of the normalized whole-system left scalar mate.
-Source: Zheng, Construction 4.1 and Proposition 5.26; the selected-level coefficient
-projection square of the exceptional coefficient construction.
-Proof: use the cofinal restriction/left-extension unit and counit to evaluate at the
-actual exponent e(n+1). The balanced derived tensor square compares extension then
-reduction with reduction then the ramified finite extension. Apply it to the
-reconstruction unit and the representative-normalized scalar reduction counit; its
-transition naturality supplies a whole-system comparison. The defining realization
-of core.reduction identifies this map with the specified completed comparison.
-The finite scalar equality realizations and the normalized red evaluations give
-selected_balanced. For q_selected, substitute the proper coefficient projection
-and open balancing definitions into d.comparison_normalized; the system proper/open
-realization and transport.evaluation_support identify both paths with the same
-projection. No equality is inferred from finite evaluations being faithful. All
-exponents are transported along z.exponent and all ring maps along z.actual.
-(blueprint: lem-sf-exceptional-integral-system-selected-left). -/
+/-- Selected ramified evaluations of the normalized whole-system left scalar mate. -/
 theorem exceptionalIntegralSystemSelectedLeft
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

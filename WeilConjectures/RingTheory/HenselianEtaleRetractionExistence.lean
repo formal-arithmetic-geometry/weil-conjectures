@@ -12,11 +12,23 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 import WeilConjectures.RingTheory.RootLiftingEtaleRetraction
 import WeilConjectures.RingTheory.HenselianLocalRootLifting
 
-/-! Existence part of the henselian étale retraction theorem.
+/-!
+# Existence of retractions of étale algebras over henselian local rings
 
-This is the existence portion of the six-step argument in Stacks Project, Tag 04GG,
-using the standard étale presentation and simple-root lifting.
-(blueprint: lem-weil-pbc-henselian-etale-retraction-existence)
+Let `S` be a henselian local ring and `B` an étale `S`-algebra. Every prime `q'` of `B` over the
+maximal ideal of `S` with trivial residue field extension is the preimage of the maximal ideal
+under some `S`-algebra map `B →ₐ[S] S` (`exists_algHom_of_henselianLocalRing_etale`).
+
+## Implementation details
+
+Locally at an element outside `q'`, the étale algebra has a standard étale presentation. The
+given residue field point corresponds to a simple root of the defining polynomial, which lifts
+to `S` since `S` is henselian; the universal property of the standard étale algebra and
+localization then give the map on `B`.
+
+## References
+
+* [Stacks, Tag 04GG]
 -/
 
 @[expose] public section
@@ -25,14 +37,9 @@ universe u
 
 open AlgebraicGeometry
 
-/-- The theorem is the existence portion of Stacks Project Lemma Tag 04GG, implication
- (1) => (8).  Reduce the etale algebra locally to a standard etale presentation,
- identify the given residue-field point with a simple root of the defining polynomial,
- lift that root by the root-lifting characterization of a henselian local ring, and
- use the standard-etale universal property to obtain the algebra map.  Localization
- at an element outside q' descends this map to B and the residue calculation gives
- the stated inverse image of the maximal ideal.
- (blueprint: lem-weil-pbc-henselian-etale-retraction-existence)
+/-- Over a henselian local ring `S`, an étale `S`-algebra `B` with a prime `q'` over the maximal
+ideal having trivial residue field extension admits an `S`-algebra map `B →ₐ[S] S` under which
+the preimage of the maximal ideal is `q'`.
 -/
 theorem exists_algHom_of_henselianLocalRing_etale
     {S B : Type u} [CommRing S] [CommRing B] [HenselianLocalRing S]

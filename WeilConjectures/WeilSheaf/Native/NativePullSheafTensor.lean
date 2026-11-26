@@ -10,7 +10,12 @@ import WeilConjectures.CategoryTheory.Monoidal.Mod.IsoAlgebraTensor
 import WeilConjectures.WeilSheaf.IhomLisse.UpperStar
 import all WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorSheafComparisons
 
-/-! # Native sheaf tensor and inverse image for any finite-field morphism -/
+/-! # Native sheaf tensor and inverse image for any finite-field morphism
+
+## References
+
+* Stacks Project, Tag 07A4
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -159,18 +164,7 @@ private theorem pull_tensor_iso_of_components
           N.carrier).hom.app M.carrier) := by
   exact ⟨sheafRestrictionIso_abstract k₀ l p R e hR rho hrho, hrho⟩
 
-/-- Balanced sheaf inverse image commutes with the native diagonal tensor.
-Source: Stacks 07A4 and the coefficient Frobenius precomposition equation.
-(blueprint: lem-sf-native-pull-sheaf-tensor).
-
-Proof: the ordinary adic tensor pullback comparison is invertible. Its square
-with Frobenius follows from the monoidality of the coefficient exchange map.
-The structure isomorphism of a native tensor is exactly tensorStr, and the
-structure of inverse image is upperStarStr. The generic restriction_tensor_comm
-lifts the ordinary comparison to invertible Frobenius algebras. Naturality in
-both inputs follows by faithful forgetting, using the ordinary naturality
-and the inverse-mate description of nativeTensorMap. No open-immersion property
-is used; zero inputs, identity maps and empty schemes use the same formulas. -/
+/-- Balanced sheaf inverse image commutes with the native diagonal tensor. -/
 theorem native_pull_sheaf_tensor :
     ∃ rho : nativeOpenSheafTensor k₀ l Y ⋙ upperStar k₀ l p ≅
       (upperStar k₀ l p).prod (upperStar k₀ l p) ⋙ nativeOpenSheafTensor k₀ l Z,

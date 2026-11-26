@@ -12,31 +12,31 @@ public import Mathlib.CategoryTheory.Category.Preorder
 
 
 /-! # A step of finite-stage tensor comparison
-Source: Stacks Project, Algebra, Tags 02JO (3) and 00DD.
+
+A comparison map at one stage of a directed system extends to a natural transformation between
+the stage diagrams of tensor rings at all later stages.
+
+## Implementation details
+
+The component at `j` is the tensor product map of `φ_j : F(j) ⊗ B₀ → F(j) ⊗ C₀` and the
+`P`-algebra map `Q → F(j) ⊗ C₀` obtained by composing `ψ` with the right tensor inclusion and
+the canonical transition. The construction uses no injectivity, flatness, or nonzero-ring
+assumption.
+
+## References
+
+* [Stacks, Tag 02JO] (3)
+* [Stacks, Tag 00DD]
 -/
 @[expose] public section
 open scoped TensorProduct
 open CategoryTheory
 universe v w x y
 namespace RingHom
-/-- A component of the finite-stage tensor comparison construction.
-Source: Stacks Project, Algebra, Tags 02JO (3) and 00DD.
-(blueprint: lem-weil-pbc-comparison-tensor-natural-extension-j3)
-
-Proof: Let q_i:Q→C_i be ψ composed with the right tensor inclusion, and
-q_j the canonical C_i→C_j transition composed with q_i. Give C_j the
-P-action through φ_j composed with P→B_j. The equality hψ and the tensor
-balancing relation identify q_i(algebraMap(p)) with φ_i(algebraMap(p)).
-The P-linearity of βs_j and the tensor identity e_ij φ_i=φ_j βs_j then
-show q_j is a P-algebra map. Define χ_j as the actual tensor product map
-of the P-algebra maps φ_j:B_j→C_j and q_j:Q→C_j. Thus χ_j(b⊗q)=φ_j(b)q_j(q).
-Canonical tensor transitions commute with φ, and q_j is compatible with
-transitions by functoriality. Induction on tensors proves χ is compatible
-with the prescribed D and E transitions. Conjugating by d_j and c_j
-therefore defines a natural transformation. Its left inclusion identity
-follows by setting q=1; its Q-coordinate identity follows by setting b=1.
-The construction uses no injectivity, flatness, or nonzero-ring assumption.
--/
+/-- Given a comparison map `ψ : (F(i) ⊗ B₀) ⊗[P] Q → F(i) ⊗ C₀` restricting to the base change of
+`φ₀`, and stage diagrams `D`, `E` identified with `(F(j) ⊗ B₀) ⊗[P] Q` and `F(j) ⊗ C₀` for
+`j ≥ i`, there is a natural transformation `D ⟶ E` whose components are the tensor product maps
+of the base changes of `φ₀` and of `Q → F(j) ⊗ C₀` induced by `ψ`. -/
 theorem exists_comparison_tensor_natural_extension
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{v})

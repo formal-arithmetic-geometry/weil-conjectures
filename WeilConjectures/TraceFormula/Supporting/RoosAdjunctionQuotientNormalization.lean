@@ -15,14 +15,17 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 
 /-! # Simultaneous Roos, counit and strict quotient-unit normalization
 
-Source: Stacks Project, Cohomology on Sites, Tag 0941, lemma-derived-limit-is-ok;
-whole-system adjunction and quotient-unit refinements extracted from the integral
-trace-transport construction (blueprint: lem-trf-roos-adjunction-quotient-normalization).
+Whole-system adjunction and quotient-unit refinements of the Roos normalization of derived
+limits, used in the integral trace transport.
 
-The coefficient field F is arbitrary: apply this statement to each of E, L and M.
-No distinctness or compatibility between different coefficient fields is required.
-Index n denotes the positive quotient exponent n+1. The site and coefficient
-universes remain independent. All categories are ordinary unbounded derived categories.
+The coefficient field `F` is arbitrary, and no compatibility between different coefficient
+fields is required. Index `n` denotes the positive quotient exponent `n + 1`. The site and
+coefficient universes are independent. All categories are ordinary unbounded derived
+categories.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 0941.
 -/
 
 -- After pruning, this module only keeps private declarations.

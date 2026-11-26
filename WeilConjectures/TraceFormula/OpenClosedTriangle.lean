@@ -13,8 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 
 For an open immersion `j : U ⟶ X` and a closed immersion `i : Z ⟶ X` onto its complement, the
 open–closed triangle `Rj_! Lj^* K ⟶ K ⟶ Ri_* Li^* K ⟶ Rj_! Lj^* K[1]` of the ambient derived
-category (`ProEtale.CondensedRing.exists_distTriang_openClosed`, blueprint
-`proposition-extension-zero-restriction-closed-subscheme--8`) is a distinguished triangle of the
+category (`ProEtale.CondensedRing.exists_distTriang_openClosed`) is a distinguished triangle of the
 pretriangulated category `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`
 (`ProEtale.CondensedRing.exists_distTriang_openClosed_boundedConstructible`).
 -/

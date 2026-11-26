@@ -14,12 +14,17 @@ import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Native derived-Weil tensor preserves bounded constructible complexes
 
-Source: blueprint main-20261015, fix-lem-tensor-adjunction.proof.md, Step 1,
-first and fourth Hom bijections, in the native derived-Weil realization
-(blueprint: lem-sf-derived-weil-tensor-hom-adjunction).
+The native derived tensor of bounded constructible Weil complexes is again bounded
+constructible.
 
-The tensor is the recorded ambient native tensor. The conclusion uses the
-framework's existing bounded-constructible object property.
+## Implementation details
+
+The tensor is the recorded ambient native tensor, and the conclusion uses the existing
+bounded-constructible object property. The proof transfers the question along
+`nativeGeometricForget` to the geometric fiber, where the cohomological criterion
+`weil_geometric_hom_constructibility` and `adicConstructibilityPredicateComparison` reduce it to
+the ordinary tensor closure `boundedConstructible_tensor_closure`, through the comparison
+`nativeGeometricForget_tensorComparison`.
 -/
 
 @[expose] public section
@@ -34,29 +39,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.WeilComplex
 
 /-- The native derived tensor of bounded constructible Weil complexes is bounded
-with constructible cohomology after forgetting the Weil structure.
-Source: main-20261015, fix-lem-tensor-adjunction.proof.md, Step 1, first and fourth
-Hom bijections; native refinement in the DAG proof
-(blueprint: lem-sf-derived-weil-tensor-hom-adjunction).
-
-Proof:
-1. The geometric fiber Y is separated and finite type over the algebraic closure
-of k₀, hence Noetherian; its characteristic is different from l by invariance
-of ringChar under field extension.
-2. The cohomological criterion of weil_geometric_hom_constructibility identifies
-WeilComplex.objectProperty with constantModelBoundedConstructible after the
-specified nativeGeometricForget functor. Apply it to both A and B.
-3. On Y, adicConstructibilityPredicateComparison identifies the constant-model
-predicate with boundedConstructible for the finite-subextension-valued condensed
-coefficient ring. Apply boundedConstructible_tensor_closure to the two images,
-in the order B,A.
-4. nativeGeometricForget_tensorComparison identifies the realized native tensor
-with that ordinary condensed tensor. Transfer boundedness and each constructible
-cohomology sheaf across its component isomorphism. Return through the criterion
-in step 2. The separate tensor comparison asserts no constructibility and is the
-only new intermediate statement; the existing ordinary tensor-closure proof
-supplies the stratification and local tensor computation.
--/
+with constructible cohomology after forgetting the Weil structure. -/
 theorem nativeDerivedTensor_mem_weilComplex
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]

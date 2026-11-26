@@ -13,8 +13,17 @@ import WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorCanonicalData
 
 /-! # Derived unit normalization for the native open tensor
 
-Source: Stacks 0GL1 and 0E8I, native open tensor proof step 7
-(blueprint: new-lem-sf-native-open-tensor-unit-normalization).
+We show that the supplied native presentation satisfies the derived unit transpose equation.
+
+## Implementation details
+
+The derived unit transpose equation is proved by totalizing the sheaf inverse-unit equation on
+summands, applying the specified K-flat models, and descending the resulting identity through
+the exact derived localization.
+
+## References
+
+* Stacks Project, Tags 0GL1 and 0E8I.
 -/
 
 @[expose] public noncomputable section
@@ -294,13 +303,7 @@ private theorem native_presentation_unit_normalization
   · exact native_model_first_naturality k₀ l U
   · simpa only [nativeOpenSheafTensor] using hc
 
-/-- The supplied native presentation satisfies the derived unit transpose equation.
-
-Source: Stacks 0GL1 and 0E8I; the localized representative squares and the
-open-unit transpose. The proof totalizes the sheaf inverse-unit equation on
-summands, applies the specified K-flat models, and descends the resulting
-identity through the exact derived localization.
-(blueprint: new-lem-sf-native-open-tensor-unit-normalization). -/
+/-- The supplied native presentation satisfies the derived unit transpose equation. -/
 theorem native_open_tensor_unit_normalization (s : NativeOpenTensorData k₀ l j)
     (rho : nativeDerivedTensor k₀ l Z ⋙ nativeOpenPull k₀ l j ≅
       (nativeOpenPull k₀ l j).prod (nativeOpenPull k₀ l j) ⋙ nativeDerivedTensor k₀ l U)

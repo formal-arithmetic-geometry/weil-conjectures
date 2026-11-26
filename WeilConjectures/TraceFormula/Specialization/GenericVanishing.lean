@@ -23,21 +23,17 @@ public import WeilConjectures.TraceFormula.Specialization.ClosedPointsSupport
 
 # Bounded constructible complexes vanishing over the generic point of a curve
 
-Let `Y` be a scheme of finite type over a field `k` and `C` a bounded constructible
-`ℚ̄_ℓ`-complex on `Y_proét`. This file proves that `C` has a constructible *support*: a
-constructible subset `s ⊆ Y` such that `C` vanishes on every open disjoint from `s`, while `s`
-meets the image of no morphism `g : W ⟶ Y` with `Lg^* C = 0`
-(`ProEtale.CondensedRing.exists_isConstructible_support`). Consequently, for a morphism
-`b : Y ⟶ 𝔸¹_k`, if `C` vanishes after pullback to `Y ×_{𝔸¹} Spec K` for a point
-`Spec K ⟶ 𝔸¹_k` over the generic point, then `C` vanishes on `Y ∖ b⁻¹(F)` for a finite set `F`
-of closed points of `𝔸¹_k`
-(`ProEtale.CondensedRing.exists_finset_isZero_leftDerivedUpperStar_of_isZero_pullback`). This is
-the last step of the finite-support part of Gabber's Künneth formula for nearby cycles (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, "Finite support": the support of the cone has
-no point over the generic point of a special-fibre coordinate line; its image in that line is
-constructible and omits the generic point, so is a finite set of closed points).
+Let `Y` be a scheme of finite type over a field `k` and `C` a bounded constructible `ℚ̄_ℓ`-complex
+on `Y_proét`. This file proves that `C` has a constructible *support*: a constructible subset
+`s ⊆ Y` such that `C` vanishes on every open disjoint from `s`, while `s` meets the image of no
+morphism `g : W ⟶ Y` with `Lg^* C = 0` (`ProEtale.CondensedRing.exists_isConstructible_support`).
+Consequently, for a morphism `b : Y ⟶ 𝔸¹_k`, if `C` vanishes after pullback to `Y ×_{𝔸¹} Spec K` for
+a point `Spec K ⟶ 𝔸¹_k` over the generic point, then `C` vanishes on `Y ∖ b⁻¹(F)` for a finite set
+`F` of closed points of `𝔸¹_k`
+(`ProEtale.CondensedRing.exists_finset_isZero_leftDerivedUpperStar_of_isZero_pullback`). This is the
+last step of the finite-support part of Gabber's Künneth formula for nearby cycles.
 
-## The argument
+## Implementation details
 
 The cohomology sheaves `Hᵠ(C)`, finitely many of them nonzero, are constructible: lisse on the
 strata `ι : D ⟶ Y` of a stratification. The rank function of the lisse sheaf `ι^* Hᵠ(C)`
@@ -179,10 +175,7 @@ variable {k : Type u} [Field k]
 
 /-- **A lisse `ℚ̄_ℓ`-sheaf with vanishing rank function is zero.** Let `M` be a pro-étale locally
 finitely presented module over `ℚ̲̄_ℓ` on a scheme `Z` of finite type over a field, whose rank
-function vanishes identically. Every point of a member of a pro-étale cover over which `M` is
-finitely presented has an open neighbourhood over which `M` is free
-(`ProEtale.CondensedRing.exists_isOpenImmersion_isFree`), of rank the value of the rank function,
-that is, of rank `0`; and vanishing is local for the pro-étale topology. -/
+function vanishes identically. Then `M = 0`. -/
 theorem isZero_of_forall_fiberRankFun_eq_zero (Z : Over (Spec (.of k)))
     [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
     {M : Mod (Sheaf (Scheme.ProEt.topology Z.left) Ab.{u + 1})
@@ -255,11 +248,8 @@ lemma isConstructible_image_setOf_fiberRankFun_ne_zero {D : Scheme.{u}} (ι : D 
     (isClopen_setOf_fiberRankFun_ne_zero Y ι hN).isClosed.isConstructible_of_noetherianSpace
 
 /-- **Vanishing on an open from the rank functions on the strata.** Let `G` be a `ℚ̄_ℓ`-sheaf on
-`Y`, lisse on the strata `ι : D ⟶ Y` of a stratification, and `U` an open of `Y` such that the
-rank function of `ι^* G` vanishes at the points of `D` mapping into `U`. Then `G|_U = 0`: the
-restriction of `ι^* G` to `ι⁻¹ U` is lisse with vanishing rank function, hence zero
-(`ProEtale.CondensedRing.isZero_of_forall_fiberRankFun_eq_zero`), and the finitely many
-quasi-compact restrictions `ι⁻¹ U ⟶ U` of the strata jointly cover `U`. -/
+`Y`, lisse on the strata `ι : D ⟶ Y` of a stratification, and `U` an open of `Y` such that the rank
+function of `ι^* G` vanishes at the points of `D` mapping into `U`. Then `G|_U = 0`. -/
 lemma isZero_upperStar_of_forall_fiberRankFun_eq_zero
     (G : Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left))
@@ -350,9 +340,7 @@ constructible `ℚ̄_ℓ`-complex on a scheme `Y` of finite type over a field. T
 subset `s ⊆ Y` such that `C` vanishes on every open disjoint from `s`, and such that `s` is disjoint
 from the image of every morphism `g` with `Lg^* C = 0`: the union of the supports
 (`ProEtale.CondensedRing.exists_isConstructible_support_of_isConstructibleModuleObject`) of the
-finitely many nonzero cohomology sheaves of `C`, the derived pullbacks commuting with the
-cohomology sheaves. Blueprint `proposition-external-kunneth-formula-nearby-cycles`, "Finite
-support". -/
+finitely many nonzero cohomology sheaves of `C`. -/
 theorem exists_isConstructible_support
     {C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left))}
@@ -390,18 +378,11 @@ section AffineLine
 variable {k : Type u} [Field k] (Y : Over (Spec (.of k))) [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom]
 
-/-- **A bounded constructible complex vanishing over the generic point of a line vanishes away
-from finitely many fibres.** Let `Y` be of finite type over a field `k`, `b : Y ⟶ 𝔸¹_k` locally of
-finite type, and `C` a bounded constructible `ℚ̄_ℓ`-complex on `Y`. Let `g : W ⟶ Y` be a morphism
-whose image contains every point of `Y` lying over the generic point of `𝔸¹_k`. If `Lg^* C = 0`,
-then there is a finite set `F` of closed points of `𝔸¹_k` such that `C` vanishes on
-`Y ∖ b⁻¹(F)`.
-
-Indeed the constructible support `s` of `C`
-(`ProEtale.CondensedRing.exists_isConstructible_support`)
-has no point over the generic point, so its image `b(s)`, constructible by Chevalley's theorem,
-is a finite set of closed points. Blueprint `proposition-external-kunneth-formula-nearby-cycles`,
-"Finite support". -/
+/-- **A bounded constructible complex vanishing over the generic point of a line vanishes away from
+finitely many fibres.** Let `Y` be of finite type over a field `k`, `b : Y ⟶ 𝔸¹_k` locally of finite
+type, and `C` a bounded constructible `ℚ̄_ℓ`-complex on `Y`. Let `g : W ⟶ Y` be a morphism whose
+image contains every point of `Y` lying over the generic point of `𝔸¹_k`. If `Lg^* C = 0`, then
+there is a finite set `F` of closed points of `𝔸¹_k` such that `C` vanishes on `Y ∖ b⁻¹(F)`. -/
 theorem exists_finset_isZero_leftDerivedUpperStar_of_isZero_of_range
     {n : Type u} [Unique n] (b : Y.left ⟶ 𝔸(n; Spec (.of k))) [LocallyOfFiniteType b]
     {C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
@@ -426,13 +407,11 @@ theorem exists_finset_isZero_leftDerivedUpperStar_of_isZero_of_range
   have : b y ∈ (F : Set 𝔸(n; Spec (.of k))) := hFs ▸ ⟨y, hy, rfl⟩
   exact hyU this
 
-/-- **A bounded constructible complex vanishing over the generic point of a line vanishes away
-from finitely many fibres** (blueprint `proposition-external-kunneth-formula-nearby-cycles`, "Finite
-support"). Let `Y` be of finite type over a field `k`, `b : Y ⟶ 𝔸¹_k` locally of finite type, `C` a
-bounded constructible `ℚ̄_ℓ`-complex on `Y`, and `ξ : Spec K ⟶ 𝔸¹_k` a point over the generic point.
-If the pullback of `C` to `Y ×_{𝔸¹} Spec K` vanishes, then `C` vanishes on `Y ∖ b⁻¹(F)` for a
-finite set `F` of closed points of `𝔸¹_k`: every point of `Y` over the generic point lifts to
-`Y ×_{𝔸¹} Spec K`. -/
+/-- **A bounded constructible complex vanishing over the generic point of a line vanishes away from
+finitely many fibres**. Let `Y` be of finite type over a field `k`, `b : Y ⟶ 𝔸¹_k` locally of finite
+type, `C` a bounded constructible `ℚ̄_ℓ`-complex on `Y`, and `ξ : Spec K ⟶ 𝔸¹_k` a point over the
+generic point. If the pullback of `C` to `Y ×_{𝔸¹} Spec K` vanishes, then `C` vanishes on
+`Y ∖ b⁻¹(F)` for a finite set `F` of closed points of `𝔸¹_k`. -/
 theorem exists_finset_isZero_leftDerivedUpperStar_of_isZero_pullback
     {n : Type u} [Unique n] (b : Y.left ⟶ 𝔸(n; Spec (.of k))) [LocallyOfFiniteType b]
     {C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})

@@ -27,8 +27,7 @@ dimension at most one
 - the open–closed exact sequence `H_c^r(U, G|_U) ⟶ H_c^r(X, G) ⟶ H_c^r(Z, G|_Z)` for an open `U`
   with closed complement `Z`;
 - for `X` smooth of relative dimension one and `G` lisse, `H_c^r(X, G)` vanishes for `r > 2`: it is
-  Poincaré dual to `H^{2 - r}(X, G^∨(1))`, which vanishes in negative degrees
-  (blueprint `corollary-degreewise-duality-over-fields--1`);
+  Poincaré dual to `H^{2 - r}(X, G^∨(1))`, which vanishes in negative degrees;
 - on the affine line, `G` is lisse on a dense open with finite complement, so `H_c^r` vanishes for
   `r > 2`;
 - on an affine scheme of dimension at most one, a finite morphism to the affine line (Noether
@@ -66,7 +65,7 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- **The open–closed exact sequence.** Let `j : U ⟶ X` be a quasi-compact open immersion with
 closed complement `i : Z ⟶ X`. If `H_c^r(U ⊗ k̄, G|_U)` and `H_c^r(Z ⊗ k̄, G|_Z)` vanish, so does
-`H_c^r(X ⊗ k̄, G)`, by the exact sequence `H_c^r(U, G|_U) ⟶ H_c^r(X, G) ⟶ H_c^r(Z, G|_Z)`. -/
+`H_c^r(X ⊗ k̄, G)`. -/
 theorem subsingleton_compactlySupportedCohomology_of_openClosed {U Z : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] [IsSeparated (U ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
@@ -103,8 +102,7 @@ theorem subsingleton_compactlySupportedCohomology_of_openClosed {U Z : Scheme.{u
 
 /-- **Vanishing above degree two for a lisse sheaf on a smooth curve.** If `X` is smooth of
 relative dimension one over `k₀` and `F` is a lisse Weil sheaf on `X`, then `H_c^r(X ⊗ k̄, F) = 0`
-for `r > 2`: by Poincaré duality it is dual to `H^{2 - r}(X ⊗ k̄, F^∨(1))`, which vanishes since
-`2 - r < 0` (blueprint: `corollary-degreewise-duality-over-fields--1`). -/
+for `r > 2`. -/
 theorem subsingleton_compactlySupportedCohomology_of_isLisse
     [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l X}
     (hF : F.IsLisse) {r : ℤ} (hr : 2 < r) :
@@ -125,9 +123,7 @@ end General
 section AffineLine
 
 /-- **Vanishing above degree two on the affine line.** For a Weil sheaf `G` on `𝔸¹_{k₀}`,
-`H_c^r(𝔸¹ ⊗ k̄, G) = 0` for `r > 2`: `G` is lisse on a dense open `U` with finite complement `Z`;
-`H_c^r(U, G|_U)` vanishes by Poincaré duality on the smooth curve `U`, `H_c^r(Z, G|_Z)` because
-`Z` is finite, and the open–closed exact sequence glues the two. -/
+`H_c^r(𝔸¹ ⊗ k̄, G) = 0` for `r > 2`. -/
 theorem subsingleton_compactlySupportedCohomology_affineLine
     (G : WeilSheaf k₀ l 𝔸(PUnit.{u + 1}; Spec (CommRingCat.of k₀))) {r : ℤ} (hr : 2 < r) :
     Subsingleton (G.compactlySupportedCohomology r).carrier := by
@@ -188,10 +184,7 @@ theorem subsingleton_compactlySupportedCohomology_affineLine
 end AffineLine
 
 /-- **Vanishing above degree two on an affine curve.** For an affine `k₀`-scheme `C` of finite
-type of dimension at most one and a Weil sheaf `F` on `C`, `H_c^r(C ⊗ k̄, F) = 0` for `r > 2`: a
-finite morphism `f : C ⟶ 𝔸¹_{k₀}` (Noether normalization) identifies `H_c^r(C, F)` with
-`H_c^r(𝔸¹, f₀*F)`, which vanishes for `r > 2`
-(`AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_affineLine`). -/
+type of dimension at most one and a Weil sheaf `F` on `C`, `H_c^r(C ⊗ k̄, F) = 0` for `r > 2`. -/
 theorem subsingleton_compactlySupportedCohomology_of_isAffine_of_two_lt {C : Scheme.{u}}
     [C.Over (Spec (CommRingCat.of k₀))] [IsAffine C]
     [LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀))] (hC : ringKrullDim Γ(C, ⊤) ≤ 1)

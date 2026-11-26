@@ -10,9 +10,15 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryHomology
 
 /-! # Exact forgetting computes the action on native cohomology
 
+## Implementation details
+
 The private composition lemmas adapt the kernel/quotient proof in
 `WeilConjectures.CategoryTheory.DerivedCategory.SmoothPurity.GoodTruncationNormalization` to every
 degree.
+
+## References
+
+* Beilinson--Bernstein--Deligne, *Faisceaux pervers*, 1.3.3.
 -/
 
 @[expose] public noncomputable section
@@ -142,22 +148,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (.of k₀))]
 
 /-- Native cohomology agrees, including its action, with cohomology of the ordinary
-derived pair obtained by exact forgetting.
-
-Source: BBD 1.3.3; exact derived forgetting in the final exceptional-adjunction
-paragraph of cor-coef-verdier-weil-equivariance.proof.md.
-(blueprint: lem-sf-native-pair-homology-comparison)
-
-Proof: let U forget a native sheaf's invertible Frobenius structure. The functor U
-is exact. Its canonical cohomology comparison H^n(-) U = D(U) H^n(-) gives the
-underlying sheaf isomorphism. On a complex of native sheaves, the action is the
-termwise structure map U F -> U. Naturality of homology with respect to that map,
-and compatibility of exact-functor homology comparisons with composition, say
-precisely that this isomorphism intertwines the two Frobenius actions. Both the
-action and the comparison descend through the same localization at quasi-isomorphisms,
-so this equality holds for every derived object, not just objects of the heart.
-Lift the sheaf isomorphism to IsoAlgebra using this equality. The argument is
-degree-independent and includes acyclic complexes and the empty scheme. -/
+derived pair obtained by exact forgetting. -/
 theorem native_homology (K : WeilComplex k₀ l X) (n : ℤ) :
     Nonempty (((WeilComplex.homologySheaf n).obj K).obj ≅
       (homology k₀ l X n).obj ((native k₀ l X).obj K))  := by

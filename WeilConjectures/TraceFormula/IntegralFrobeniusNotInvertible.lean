@@ -15,8 +15,7 @@ public import Mathlib.Algebra.Polynomial.Inductions
 
 Let `R` be a commutative ring with an injective algebra map to a field (resp. ring) `K`, and let
 `x ∈ R` be a nonzero non-unit. In the application `R = 𝒪_E`, `K = E` and `x = ℓ` (or the
-uniformizer `π_E`). This file proves the two elementary facts behind blueprint
-`remark-integral-frobenius-correspondences-not-invertible`, which explains why the integral model
+uniformizer `π_E`). This file proves the two elementary facts which explain why the integral model
 `θ` of a rational Frobenius correspondence `ψ_E`
 (`ProEtale.CondensedRing.exists_integralModel_frobeniusCorrespondence`)
 needs the factor `ℓ^N` and need not be invertible:
@@ -47,8 +46,7 @@ section Field
 variable [Field K] [Algebra R K] [FaithfulSMul R K]
 
 /-- If `x ∈ R` is nonzero and the inverse of its image in `K` is integral over `R`, then `x` is a
-unit of `R`: reversing an integral equation for `x⁻¹` gives `1 + x s = 0` for some `s ∈ R`
-(blueprint `remark-integral-frobenius-correspondences-not-invertible`, auxiliary). -/
+unit of `R`. -/
 theorem isUnit_of_isIntegral_inv_algebraMap {x : R} (hx : x ≠ 0)
     (h : IsIntegral R (algebraMap R K x)⁻¹) : IsUnit x := by
   obtain ⟨p, hp, hpy⟩ := h
@@ -64,10 +62,9 @@ theorem isUnit_of_isIntegral_inv_algebraMap {x : R} (hx : x ≠ 0)
   simp only [eval_add, eval_mul, eval_X, eval_C] at h1
   exact IsUnit.of_mul_eq_one (-(reverse p).divX.eval x) (by linear_combination -h1)
 
-/-- **No lattice is stable under `x⁻¹`** (blueprint
-`remark-integral-frobenius-correspondences-not-invertible`: on a point, the automorphism `ℓ⁻¹` of
-`E` preserves no lattice). If `x ∈ R` is a nonzero non-unit, then every finitely generated
-`R`-submodule `M` of `K` with `x⁻¹ M ⊆ M` is zero. -/
+/-- **No lattice is stable under `x⁻¹`** (on a point, the automorphism `ℓ⁻¹` of `E` preserves no
+lattice). If `x ∈ R` is a nonzero non-unit, then every finitely generated `R`-submodule `M` of `K`
+with `x⁻¹ M ⊆ M` is zero. -/
 theorem Submodule.eq_bot_of_fg_of_inv_mul_mem {x : R} (hx0 : x ≠ 0) (hx : ¬IsUnit x)
     {M : Submodule R K} (hM : M.FG) (h : ∀ m ∈ M, (algebraMap R K x)⁻¹ * m ∈ M) : M = ⊥ := by
   by_contra hne
@@ -80,8 +77,7 @@ section Ring
 
 variable [CommRing K] [Algebra R K] [FaithfulSMul R K]
 
-/-- If `c` and `c x` are both images of units of `R`, then `x` is a unit of `R` (blueprint
-`remark-integral-frobenius-correspondences-not-invertible`, auxiliary). -/
+/-- If `c` and `c x` are both images of units of `R`, then `x` is a unit of `R`. -/
 theorem isUnit_of_algebraMap_units_eq_mul {x : R} {c : K} (u v : Rˣ)
     (hu : algebraMap R K u = c) (hv : algebraMap R K v = c * algebraMap R K x) : IsUnit x := by
   have : (v : R) = u * x :=
@@ -89,11 +85,10 @@ theorem isUnit_of_algebraMap_units_eq_mul {x : R} {c : K} (u v : Rˣ)
   have hx : x = ((u⁻¹ * v : Rˣ) : R) := by simp [this]
   exact hx ▸ Units.isUnit _
 
-/-- **The eigenvalues of `diag(1, x)` cannot both become units** (blueprint
-`remark-integral-frobenius-correspondences-not-invertible`: on `E²`, the two eigenvalues of
-`diag(1, ℓ)` cannot both become units after multiplying the operator by a single scalar). If
-`x ∈ R` is not a unit, there is no `c ∈ K` such that the eigenvalues `c` and `c x` of
-`c • diag(1, x)` are both images of units of `R`. -/
+/-- **The eigenvalues of `diag(1, x)` cannot both become units** (on `E²`, the two eigenvalues of
+`diag(1, ℓ)` cannot both become units after multiplying the operator by a single scalar). If `x ∈ R`
+is not a unit, there is no `c ∈ K` such that the eigenvalues `c` and `c x` of `c • diag(1, x)` are
+both images of units of `R`. -/
 theorem not_exists_algebraMap_units_eq_and_eq_mul {x : R} (hx : ¬IsUnit x) :
     ¬∃ c : K, (∃ u : Rˣ, algebraMap R K u = c) ∧
       ∃ v : Rˣ, algebraMap R K v = c * algebraMap R K x := by

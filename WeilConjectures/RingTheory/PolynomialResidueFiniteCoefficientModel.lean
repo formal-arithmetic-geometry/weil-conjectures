@@ -15,7 +15,19 @@ import Mathlib.RingTheory.DedekindDomain.IntegralClosure
 /-!
 # A finite coefficient model for a polynomial residue field extension
 
-Source: Stacks Project, More on Algebra, Tag 07PU, first paragraph.
+A finite extension `L` of the residue field of a nonzero prime `r` of `A[X]` above zero is the
+residue field of a nonzero prime above zero of `B[X]`, for a finite `A`-subalgebra `B` of `L`.
+
+## Implementation details
+
+The residue field of `r` is finite over the fraction field `K` of `A`. Scaling a `K`-basis of `L`
+to integral elements gives `B`, finite over `A` with fraction field `L` (the denominator
+calculation also occurs in `MvPolynomial.exists_finite_subalgebra_fraction_field`); the prime is
+the kernel of evaluation `B[X] → L`.
+
+## References
+
+* [Stacks, Tag 07PU] (first paragraph of the proof)
 -/
 
 @[expose] public section
@@ -24,9 +36,7 @@ universe u
 
 namespace Polynomial
 
-/-- The image of `X` generates the residue field over the fraction field and is algebraic.
-The fraction presentation of the polynomial quotient proves that the intermediate field
-it generates contains every element of the residue field. -/
+/-- The image of `X` generates the residue field over the fraction field and is algebraic. -/
 private theorem residue_finite_over_fraction_field
     (A : Type u) [CommRing A] [IsDomain A]
     (r : Ideal (Polynomial A)) [r.IsPrime] (hr : r ≠ ⊥)
@@ -68,9 +78,8 @@ private theorem residue_finite_over_fraction_field
     exact F.div_mem (hp a) (hp b)
   exact Module.Finite.of_surjective F.val.toLinearMap hs
 
-/-- Adjoin an integral basis, then clear denominators in the basis coordinates.
-This is the finite-model construction of Stacks Tag 07PU; the denominator calculation
-also occurs in `MvPolynomial.exists_finite_subalgebra_fraction_field`. -/
+/-- A finite extension `L` of the fraction field of `A` contains a finite `A`-subalgebra with
+fraction field `L`. -/
 private theorem finite_subalgebra_with_fraction_field
     (A : Type u) [CommRing A] [IsDomain A]
     (K : Type u) [Field K] [Algebra A K] [IsFractionRing A K]
@@ -105,29 +114,7 @@ private theorem finite_subalgebra_with_fraction_field
 
 /-- A finite extension of a nonzero polynomial residue field above zero has a finite
 coefficient model inside the extension field. Its evaluation prime has that extension
-as residue field, compatibly with the original polynomial map.
-Source: Stacks Project, More on Algebra, Tag 07PU, first paragraph.
-(blueprint: lem-weil-pbc-polynomial-residue-finite-coefficient-model)
-
-Proof:
-Let K be the fraction field of A. Localization at the nonzero elements of A carries
-r to a nonzero prime of K[X]. A nonzero prime of the PID K[X] is maximal, and its
-quotient is finite over K, by reducing powers of X modulo a monic generator.
-Localization preserves the residue field, so kappa(r), and then L, is finite over K.
-Scale a finite K-basis of L by a common nonzero element of A so all basis elements
-are integral over A. Let B be their A-subalgebra in L. Finite integral generation
-makes B finite over A. Clearing denominators of the coordinates of each element of
-L expresses it as a quotient of elements of B, so L is a fraction field of B.
-Evaluate B[X] in L with X equal to the image of X under A[X] to kappa(r) to L.
-Let s be the kernel. It is prime since L is a field and contracts to zero in B
-since B is a subalgebra of L. A nonzero polynomial in r stays nonzero under the
-injective coefficient map A[X] to B[X] and lies in s, so s is nonzero.
-The quotient B[X]/s embeds in L and contains B. Since L is the fraction field of
-B, it is also the fraction field of this quotient: every element is a quotient
-of elements of B. Uniqueness of fraction fields identifies kappa(s) with L.
-This identification is a B-algebra equivalence and agrees with evaluation on
-B[X], hence on the mapped polynomials from A[X]. Transporting the fraction-field
-structure along this equivalence proves the last required structure. -/
+as residue field, compatibly with the original polynomial map. -/
 theorem exists_finite_coefficient_model
     (A : Type u) [CommRing A] [IsDomain A]
     (r : Ideal (Polynomial A)) [r.IsPrime] (hr : r ≠ ⊥)

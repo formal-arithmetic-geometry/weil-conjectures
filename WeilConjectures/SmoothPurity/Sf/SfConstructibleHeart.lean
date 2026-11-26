@@ -15,16 +15,13 @@ import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.Heart
 
 /-! # Constructible hearts on the intrinsic coefficient categories
 
-Source: Weil blueprint, order 1506, constructible heart and its standard t-structure
-(blueprint: def-weil-constructible-heart).
-The existing heart module uses the earlier integral predicate. Here the same standard
-classes are placed on the currently recorded intrinsic rational and common-stage categories.
+The standard cohomological classes on the intrinsic integral and rational constructible
+categories, from which the constructible heart and its standard t-structure are built.
 
 ## Main definitions
 
-- `sfRationalHeart`: the full heart in the intrinsic rational category.
-- `sfCommonStageHeart`: the full heart in the general common-stage category.
-- `sfRationalStandardTStructure` and `sfCommonStageStandardTStructure`: standard t-structures.
+- `sfIntegralStandardClass`: the integral standard class, with either cohomological inequality.
+- `sfRationalStandardClass`: its isomorphism closure in the rational category.
 -/
 
 @[expose] public noncomputable section
@@ -36,15 +33,13 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (Y : Scheme.{u})
 
-/-- The integral standard class, with either cohomological inequality.
-Source: blueprint order 1506 (blueprint: def-weil-constructible-heart). -/
+/-- The integral standard class, with either cohomological inequality. -/
 def sfIntegralStandardClass (nonpositive : Bool) (n : ℤ) :
     ObjectProperty (sfIntegralConstructibleCategory l E Y) :=
   fun K ↦ ∀ i : ℤ, (if nonpositive then n < i else i < n) →
     IsZero ((DerivedCategory.homologyFunctor (scalarReductionSource l E Y) i).obj K.obj)
 
-/-- Rational standard classes are the isomorphism closures of the integral classes.
-Source: blueprint order 1506 (blueprint: def-weil-constructible-heart). -/
+/-- Rational standard classes are the isomorphism closures of the integral classes. -/
 def sfRationalStandardClass (nonpositive : Bool) (n : ℤ) :
     ObjectProperty (sfRationalConstructibleCategory l E Y) :=
   fun K ↦ ∃ M : sfIntegralConstructibleCategory l E Y,

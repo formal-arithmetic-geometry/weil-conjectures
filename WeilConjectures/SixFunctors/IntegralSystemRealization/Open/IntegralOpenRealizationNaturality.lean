@@ -10,7 +10,7 @@ import WeilConjectures.SmoothPurity.Pur.PurNormalizedReconstructionAdjunctionCal
 
 /-! # Realization squares for canonical expression pairs
 
-Source: blueprint fix-prop-coherence, strict-system expression realization.
+We show that the normalized open comparison is natural on its good domain.
 -/
 
 @[expose] public noncomputable section
@@ -26,16 +26,7 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Naturality of the normalized open comparison on its good domain.
-Source: blueprint fix-prop-coherence, open reconstruction normalization.
-(blueprint: lem-sf-integral-open-realization-naturality).
-
-Proof: write the openNormalization equations at M and N. Naturality of the actual
-counit moves s past the reconstruction map; naturality of openReduction moves its
-limit map past L(s). The reconstruction unit is natural and invertible on the
-completed open images, and the counits at the normalized systems are invertible.
-Cancel those factors to get the displayed square. Empty opens and zero objects
-satisfy the same triangle identities. No expression recursion occurs here. -/
+/-- Naturality of the normalized open comparison on its good domain. -/
 theorem integralOpenRealizationNaturality
     (o : Operations l E) (a : AmbientModels l E o)
     {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersion j] (hq : QuasiCompact j)

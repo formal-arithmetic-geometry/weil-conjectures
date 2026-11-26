@@ -27,8 +27,7 @@ of `x`, the punctured part `Spec A ×_C̄ Ū` is the spectrum of the fixed field
 (`Ideal.isLocalization_away_inertiaInvariants`), and `Gal(Ω / K')` is the inertia group
 (`Ideal.fixingSubgroup_fixedField_inertia`). These are the data required by
 `AlgebraicGeometry.WeilSheaf.exists_injective_stalk_directImage_range_eq_invariants`, which
-computes the boundary stalk of `j_* F` for a lisse Weil sheaf `F` as Galois invariants
-(blueprint `lemma-boundary-stalk--1`).
+computes the boundary stalk of `j_* F` for a lisse Weil sheaf `F` as Galois invariants.
 -/
 
 @[expose] public section
@@ -205,11 +204,8 @@ noncomputable abbrev sectionsStructHom : k₀ →+* Γ(C, W) :=
 omit [IsDedekindDomain Γ(C, W)] [Finite k₀] in
 include hxW in
 /-- **An algebraic closure of `k₀` in `B_Q^{I_Q}`.** Let `ε₀ : k̄ ⟶ Ω` be an embedding over `k₀`.
-Its image lies in `B_Q^{I_Q}`: it consists of elements integral over `k₀`, which are fixed by
-inertia since a nonzero element integral over `k₀` is a unit of `B`. This gives
-`ε : k̄ ⟶ B_Q^{I_Q}`, and `r : B_Q^{I_Q} ⟶ k̄` with kernel the maximal ideal such that
-`r ∘ ε = id`: the residue field of `B_Q^{I_Q}` is algebraic over `k₀`, hence its embedding of
-`k̄` is an isomorphism, whose inverse gives `r`. -/
+Then `ε₀` factors through `ε : k̄ ⟶ B_Q^{I_Q}`, and there is `r : B_Q^{I_Q} ⟶ k̄` with kernel the
+maximal ideal such that `r ∘ ε = id`. -/
 theorem exists_algebraicClosure_inertiaInvariants (ε₀ : AlgebraicClosure k₀ →+* Ω)
     (hε₀ : ε₀.comp (algebraMap k₀ (AlgebraicClosure k₀)) =
       (algebraMap Γ(C, W) Ω).comp (sectionsStructHom hW)) :

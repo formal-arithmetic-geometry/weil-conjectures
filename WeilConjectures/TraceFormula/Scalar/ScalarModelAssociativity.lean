@@ -14,9 +14,13 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 
 /-! # Scalar model normalization before inverting completion
 
-Source: Bhatt--Scholze, Definition 3.4.10 and Proposition 3.5.1;
-Stacks Project, Tags 06YY and 0941.
-(blueprint: lem-trf-scalar-model-associativity)
+Ordinary scalar associativity commutes with quotient-normalized realization, before any completion
+map is inverted.
+
+## References
+
+* Bhatt--Scholze, Definition 3.4.10, Proposition 3.5.1 and Lemma 3.5.7.
+* Stacks Project, Tags 06YY and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -43,28 +47,8 @@ variable (l : ℕ) [Fact l.Prime]
   (ι : E →ₐ[ℚ_[l]] L) (j : L →ₐ[ℚ_[l]] F)
   (X : Scheme.{u})
 
-/-- Ordinary scalar associativity commutes with quotient-normalized realization,
-before any completion map is inverted. This holds on the ambient derived category.
-Source: Bhatt--Scholze, Definition 3.4.10, Proposition 3.5.1 and Lemma 3.5.7;
-Stacks 06YY, 0941, the scalar calculation in steps 8--10 of the parent.
-(blueprint: lem-trf-scalar-model-associativity)
-
-Proof: take a flat-term K-flat complex representing K, and a simultaneous strict
-quotient presentation for its reduction. The three scalar-model normalizations
-identify their realization maps with the Roos maps of the actual quotient tensors.
-The initial completion maps have the quotient tensor maps in their unshifted
-coordinates and zero shifted coordinates, by quotient_scalar_comparison_descent.
-Use integralConeCounitRealization to replace insertion of the whole-system counit
-by the original compatible family of quotient maps. The adjuncts of both displayed
-arrows then have, at each quotient, the same map on generators:
-c tensor (b tensor (a tensor x)) maps to c*j(b)*j(iota(a)) tensor x.
-Balancing gives equality on all sections; sheafification preserves it. Multiplication
-commutes with quotient transitions, restrictions, and the cochain differential.
-Thus this is equality of strict diagram morphisms before localization. The universal
-cochain counits identify their localizations with the specified ordinary and system
-associators. The adjunction Hom bijection gives the displayed equality. Naturality
-and K-flat resolutions transport it to arbitrary K. No separate evaluation functor
-is assumed faithful, and no completion chain map is inverted. -/
+/-- Ordinary scalar associativity commutes with quotient-normalized realization, before any
+completion map is inverted. This holds on the ambient derived category. -/
 theorem scalarModelAssociativity
     (SE : CoefficientDerivedSystemCalculus l E X)
     (SL : CoefficientDerivedSystemCalculus l L X)

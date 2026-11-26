@@ -8,7 +8,13 @@ module
 public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Finite.FiniteRingFixedCoordinates
 import all WeilConjectures.AlgebraicGeometry.Finite.FiniteIntrinsicPullbackUnitComposition
 
-/-! # Ordinary section-normalized finite direct-image compositor -/
+/-! # Ordinary section-normalized finite direct-image compositor
+
+## References
+
+* [Stacks, Tag 03D1]
+* [Stacks, Tag 03D6]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -24,9 +30,7 @@ namespace WeilConjectures.ConstructibleExceptionalCoefficients
 variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra (Padic l) E]
   [FiniteDimensional (Padic l) E] (n : ℕ)
 
-/-- Transport an ordinary compositor through equal scalar maps.
-Source: Stacks 03D1 and 03D6
-(blueprint: lem-sf-finite-ring-ordinary-compositor-normalization). -/
+/-- Transport an ordinary compositor through equal scalar maps. -/
 def finiteScalarTransportCompositor {U V W : Scheme.{w}}
     (h : U ⟶ V) (k : V ⟶ W)
     (R : Sheaf (ProEt.topology U) CommRingCat.{w + 1})
@@ -96,8 +100,7 @@ private theorem scalar_transport_normalizes {U V W : Scheme.{w}}
   exact (scalar_transport_sections h k R S T a a' b b' c c' ha hb hc d M Z x).trans
     (hd M Z x)
 
-/-- The intrinsic ordinary compositor, as the mate of pullback composition.
-Source: Stacks 03D6 (blueprint: lem-sf-finite-ring-ordinary-compositor-normalization). -/
+/-- The intrinsic ordinary compositor, as the mate of pullback composition. -/
 def finiteIntrinsicOrdinaryCompositor {U V W : Scheme.{w}} (h : U ⟶ V) (k : V ⟶ W) :
     let A := Padic.coefficientExtensionRing l E (n + 1)
     proEtaleConstantModuleDirectImage h A ⋙ proEtaleConstantModuleDirectImage k A ≅
@@ -107,9 +110,7 @@ def finiteIntrinsicOrdinaryCompositor {U V W : Scheme.{w}} (h : U ⟶ V) (k : V 
     (sfIntrinsicConstantModuleAdjunction h A))
     (sfIntrinsicConstantModuleAdjunction (h ≫ k) A) (sfIntrinsicPullbackComp A h k)
 
-/-- Transport the constant-section compositor along the finite scalar-map equalities.
-Source: Stacks 03D1 and 03D6
-(blueprint: lem-sf-finite-ring-ordinary-compositor-normalization). -/
+/-- Transport the constant-section compositor along the finite scalar-map equalities. -/
 def finiteTransportedOrdinaryCompositor {U V W : Scheme.{w}} (h : U ⟶ V) (k : V ⟶ W) :=
   let R := PurCompactSupport.finite l E (n + 1) (Nat.succ_pos n)
   let A := Padic.coefficientExtensionRing l E (n + 1)
@@ -127,14 +128,7 @@ def finiteTransportedOrdinaryCompositor {U V W : Scheme.{w}} (h : U ⟶ V) (k : 
 attribute [local implicit_reducible] finiteScalarDirectImage
   proEtaleRingModuleDirectImage proEtaleConstantModuleDirectImage SheafOfModules.pushforward
 
-/-- The transported ordinary compositor has the specified action on sections.
-Source: Stacks 03D1 and 03D6
-(blueprint: lem-sf-finite-ring-ordinary-compositor-normalization).
-
-Proof: equality elimination in the three scalar-map equalities removes every
-transport from the section map. The remaining intrinsic mate acts by restriction
-along pullbackComp, by intrinsic_compositor_sections. This calculation uses no
-coefficient composition hypothesis and no derived category. -/
+/-- The transported ordinary compositor has the specified action on sections. -/
 theorem finiteTransportedOrdinaryCompositor_normalization
     {U V W : Scheme.{w}} (h : U ⟶ V) (k : V ⟶ W) :
     let R := PurCompactSupport.finite l E (n + 1) (Nat.succ_pos n)

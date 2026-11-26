@@ -10,8 +10,12 @@ public import Mathlib.Topology.KrullDimension
 
 /-! # Dimension of a proper closed complement
 
-Source: Stacks Project, Cohomology, Proposition 02UZ, final induction step
-(blueprint: new-node-irreducible-open-complement-dimension).
+The complement of a nonempty open in an irreducible space of dimension at most `d` is empty or
+has dimension at most some `e < d`.
+
+## References
+
+* [Stacks Project, Tag 02UZ](https://stacks.math.columbia.edu/tag/02UZ), final induction step.
 -/
 
 @[expose] public section
@@ -20,16 +24,8 @@ set_option autoImplicit false
 universe u
 open TopologicalSpace
 
-/-- Source: Stacks Project, Cohomology, Proposition 02UZ, final induction step.
-(blueprint: new-node-irreducible-open-complement-dimension).
-
-Proof: the complement Z is a proper closed subset because U is nonempty. A chain of
-nonempty irreducible closed subsets of Z maps to such a chain in X, since Z is closed.
-Appending the irreducible closed subset X strictly extends the chain. Thus every chain
-of length n in Z gives a chain of length n+1 in X. If d=0, Z has no nonempty irreducible
-closed subsets; the closure of any point would be one, so Z is empty. If d>0, the same
-chain bound gives dimension Z at most d-1, and e=d-1 is strictly less than d. This
-argument does not require separation, sobriety or Noetherianity. -/
+/-- In an irreducible space of dimension at most `d`, the complement of a nonempty open `U` is
+either empty or has dimension at most some `e < d`. -/
 theorem irreducible_open_complement_dimension
     (X : Type u) [TopologicalSpace X] [IrreducibleSpace X]
     (d : ℕ) (hdim : topologicalKrullDim X ≤ (d : WithBot ℕ∞))

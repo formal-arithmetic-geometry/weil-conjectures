@@ -8,7 +8,19 @@ module
 public import WeilConjectures.SmoothPurity.CompletedOpenTensor.CompletedOpenTensorRepresentativeData
 import WeilConjectures.SmoothPurity.CompletedOpenTensor.OpenTensorGoodPresentations
 
-/-! # The ordinary open comparison on good complexes -/
+/-! # The ordinary open comparison on good complexes
+
+The natural strict open tensor comparison on flat-term K-flat representatives.
+
+## Implementation details
+
+Only the representative comparison is constructed here; no completion or localization
+descent is asserted.
+
+## References
+
+* [Stacks, Tags 0GL1 and 0E8I]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -28,17 +40,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {U V : Scheme.{t}} (j : U ⟶ V) [IsOpenImmersion j]
 
-/-- The natural strict open tensor comparison on flat-term K-flat representatives.
-Source: Stacks sites-cohomology.tex Tag 0GL1 and sites-modules.tex Tag 0E8I;
-representative part of original step 4.
-(blueprint: lem-pur-open-tensor-good-comparison).
-
-Proof: include good complexes into the K-flat tensor models. Whisker the canonical
-natural tensor comparisons by exact extension and restriction and their representative
-counits. TotalComparison.naturality makes its chain maps a natural isomorphism of
-total complexes. Compose these three isomorphisms and the inverse extension counit.
-Their components are definitionally the source and open representatives in the formula.
-No completion or localization descent is asserted in this lemma. -/
+/-- The natural strict open tensor comparison on flat-term K-flat representatives. -/
 theorem openTensorGoodComparison (C : Context l E j) :
     ∃ γ₀ : ((integralOperationsGoodLocalization l E U).prod
           (integralOperationsGoodLocalization l E V)) ⋙ ordinarySource l E j C ≅

@@ -22,8 +22,21 @@ public import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 /-!
 # Equations of a global complete intersection at a prime
 
-Source: Stacks Project, Algebra, proofs of Lemmas 10.135.3 and 10.135.4 (Tags 00SB, 00SC)
-(blueprint: lem-weil-pbc-global-complete-intersection-local-regular-sequence).
+For a nonzero quotient of an `m`-variable polynomial ring over a field by `t` equations, of
+dimension `m - t`, the equations form a regular sequence after localization at any prime
+containing them.
+
+## Implementation details
+
+First localize at a maximal ideal containing the prime: this is a regular local ring of
+dimension `m`, the local quotient has dimension exactly `m - t` (height bound and comparison
+with the global dimension), so the equations form a regular sequence by the Cohen-Macaulay
+dimension-drop criterion. Regularity then passes to the further localization at the prime.
+
+## References
+
+* [Stacks, Tag 00SB]
+* [Stacks, Tag 00SC]
 -/
 
 @[expose] public section
@@ -32,33 +45,10 @@ universe u
 
 namespace MvPolynomial
 
-/-- (blueprint: lem-weil-pbc-global-complete-intersection-local-regular-sequence)
-Stacks Project, Algebra, proof of Tag 00SB and the last paragraph of the proof of Tag 00SC.
-For a nonzero quotient of an `m`-variable polynomial ring by `t` equations of dimension
+/-- For a nonzero quotient of an `m`-variable polynomial ring by `t` equations of dimension
 `m - t`, the equations form a regular sequence after localization at any prime containing
 these equations. The dimension hypothesis is written additively, avoiding truncated
-subtraction when `t > m`.
-
-Proof (the six steps of the node):
-1. Choose a maximal ideal containing the given prime and localize there. All equations
-lie in the maximal ideal of this local ring (`def-weil-pbc-localization-at-prime`).
-2. This is a regular local ring of dimension `m`, by
-`lem-weil-pbc-polynomial-ring-field-regular-ring` and
-`lem-weil-pbc-polynomial-ring-maximal-localization-dimension`. Its maximal ideal has a
-regular sequence of `m` generators by `lem-weil-pbc-regular-local-generators-regular-sequence`,
-so its depth is at least `m` (`def-weil-pbc-depth`).
-3. Apply `lem-weil-pbc-noetherian-height-quotient-bound` to the `t` equations: the local
-quotient has dimension at least `m - t` (`def-weil-pbc-krull-dimension-ring`).
-4. Lift chains of primes of the local quotient to the global quotient via the prime correspondence
-for localizations. Thus its dimension is at most the global dimension `m - t`
-(`def-kun-topological-krull-dimension`), giving equality.
-5. Apply `lem-weil-pbc-cm-local-dimension-drop-regular-sequence` to obtain regularity at
-this maximal ideal (`def-weil-pbc-regular-sequence`).
-6. Localize further at the given prime using
-`lem-weil-pbc-weakly-regular-sequence-localization-prime`; identify this iterated localization with
-the original localization (localization at a prime commutes with a previous localization). The
-isomorphism preserves the successive quotients and multiplication maps, hence regularity. This final
-passage from a maximal ideal to the given prime is the node's elaboration of Tag 00SC. -/
+subtraction when `t > m`. -/
 theorem isRegular_localizationAtPrime_of_quotient_dimension
     (k : Type u) [Field k] (m t : ℕ) (f : Fin t → MvPolynomial (Fin m) k)
     [Nontrivial (MvPolynomial (Fin m) k ⧸ Ideal.span (Set.range f))]

@@ -13,7 +13,16 @@ import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorEvaluationE
 /-! # The ordinary pullback tensor evaluation square
 
 The unit-normalized sequence and finite total tensor maps agree after evaluation.
-Source: Stacks Tags 07A4, 0941 and 03D2.
+
+## Implementation details
+
+The proof transposes each degree through the finite inverse-image adjunction and checks the
+equality on pure-tensor generators of the total tensor. It works with arbitrary unbounded
+complexes and uses no K-flat or derived data.
+
+## References
+
+* Stacks Project, Tags 07A4, 0941 and 03D2.
 -/
 
 @[expose] public noncomputable section
@@ -65,23 +74,7 @@ private theorem cochain_comp3_section
   rfl
 
 -- Section transports in the chosen evaluation functors have large implicit types.
-/-- Ordinary total tensor commutes with the unit-normalized evaluation mate.
-Source: Stacks, sites-cohomology.tex, Tag 07A4, final total-complex comparison;
-Tags 0941 and 03D2 for evaluation and the adjunction mate
-(blueprint: lem-pur-completed-pullback-tensor-evaluation-cochain).
-Proof: precompose with the inverse evaluation mate and the inverse ordinary
-Y tensor-evaluation comparison. Transpose each degree through the finite
-inverse-image adjunction. Maps out of the resulting total tensor are determined
-on the pure-tensor summands. Lift their two sections through the canonical
-section transports of evaluation. The evaluation comparisons preserve these
-generators; the sequence tensor comparison sends the sequence unit of their
-tensor to the tensor of the sequence units. The mate equation identifies those
-units with finite inverse-image units, and hc transports them to the intrinsic
-units. The normalization hk sends their tensor to that same pair of units.
-Thus both adjuncts agree on every generator. Injectivity of the adjunction,
-total-tensor extensionality and degreewise extensionality give the chain equality.
-This argument uses arbitrary unbounded complexes and no K-flat or derived data.
--/
+/-- Ordinary total tensor commutes with the unit-normalized evaluation mate. -/
 theorem completedPullbackTensor_evaluation_cochain {X Y : Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ)
     (c : integralOperationsLevelPullback l E f n ≅

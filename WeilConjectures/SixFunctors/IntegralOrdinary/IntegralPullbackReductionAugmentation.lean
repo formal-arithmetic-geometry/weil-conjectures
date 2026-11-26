@@ -12,7 +12,24 @@ import WeilConjectures.SixFunctors.IntegralOrdinary.IntegralPullbackReductionAug
 
 /-! # The coherent reduction mate of ordinary pullback
 
-Source: Stacks 03D2, 07A6 and 0941. No tensor comparison occurs here.
+We construct the unique unit-preserving comparison between ordinary inverse image and
+coherent derived reduction, whose adjunct is the forward pullback augmentation in the
+normalized limit model. No tensor comparison occurs here.
+
+## Implementation details
+
+On modules the two composite scalar-extension/inverse-image left adjoints have the same
+right adjoint, so uniqueness of left adjoints gives the unit-preserving comparison. It is
+derived on flat-term K-flat representatives, where the quotient units have the same
+projections and transitions, and descends along good-complex localization. Uniqueness
+follows from the reduction/limit Hom bijection.
+
+## References
+
+* [Stacks, Tag 03D2]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 08TC]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -27,25 +44,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- Ordinary inverse image commutes with coherent derived reduction. Its adjunct is
-exactly the recorded forward pullback augmentation in the normalized limit model.
-
-Source: Stacks 03D2, 07A6, 08TC and 0941.
-(blueprint: lem-sf-pullback-reduction-augmentation).
-
-Proof: on modules, the two composite scalar-extension/inverse-image left adjoints
-have the same right adjoint. Its equality follows from directRing_eq and the
-projection equations for the completed coefficient map. Uniqueness of left
-adjoints gives their unit-preserving comparison. Derive on flat-term K-flat
-representatives, using the unit-normalized reduction model and ordinary pullIso.
-The quotient units have the same finite projections and the same transitions.
-Their maps into the strict Roos complex have identical product components and
-zero shifted component. Product and mapping-cocone extensionality identify the
-whole chain maps. The reduction model and the prescribed limit/Roos comparison
-therefore give the displayed adjunct equation, including the pullback-model
-transport. Good-complex localization descends it to all derived inputs. The
-reduction/limit Hom bijection determines every component of a from this equation,
-so the natural isomorphism is unique. No tensor, constructibility, properness,
-Noetherianness, or dimension hypothesis is used. -/
+exactly the recorded forward pullback augmentation in the normalized limit model. -/
 theorem pullbackReductionAugmentation_exists {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ a : PurCompactSupport.pull (PurCompactSupport.completed l E) f ⋙
         (pullbackTensorCalculus l E X).reduction ≅
@@ -59,9 +58,7 @@ theorem pullbackReductionAugmentation_exists {X Y : Scheme.{u}} (f : X ⟶ Y) :
   obtain ⟨a, ha⟩ := pullbackReductionAugmentation_good l E f
   exact ⟨a, pullbackReductionAugmentation_of_good l E f a ha⟩
 
-/-- An adjunction determines the coherent inverse-image comparison from its adjunct.
-Source: Stacks 07A6; the reduction/limit adjunction
-(blueprint: lem-sf-pullback-reduction-augmentation). -/
+/-- An adjunction determines the coherent inverse-image comparison from its adjunct. -/
 theorem pullbackReductionAugmentation_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! a : PurCompactSupport.pull (PurCompactSupport.completed l E) f ⋙
         (pullbackTensorCalculus l E X).reduction ≅
@@ -81,8 +78,7 @@ theorem pullbackReductionAugmentation_existsUnique {X Y : Scheme.{u}} (f : X ⟶
   apply ((pullbackTensorCalculus l E X).adjunction.homEquiv _ _).injective
   simpa only [Adjunction.homEquiv_unit] using (hb K).symm.trans (ha K)
 
-/-- The unique unit-preserving coherent reduction/pullback comparison.
-Source: Stacks 03D2 and 0941 (blueprint: lem-sf-pullback-reduction-augmentation). -/
+/-- The unique unit-preserving coherent reduction/pullback comparison. -/
 def pullbackReductionComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (pullbackReductionAugmentation_existsUnique l E f).exists.choose
 

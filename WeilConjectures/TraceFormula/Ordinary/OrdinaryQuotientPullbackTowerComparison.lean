@@ -15,8 +15,12 @@ import all WeilConjectures.TraceFormula.Ordinary.OrdinaryQuotientPullbackSuccess
 
 /-! # Strict pullback comparison for ordinary quotient systems
 
-Source: Stacks 06YY, 0941 and 099N(5), the strict quotient-system construction.
-(blueprint: lem-trf-ordinary-quotient-pullback-tower-comparison)
+Ordinary pullback of a strict quotient system is the defining pullback tower, naturally on all
+complexes, with the tensor-unit generator normalization (`ordinaryQuotientPullbackTowerComparison`).
+
+## References
+
+* Stacks Project, Tags 06YY, 0941, 099N
 -/
 
 @[expose] public noncomputable section
@@ -98,11 +102,7 @@ attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficien
   PresheafOfModules.pushforward₀Obj PresheafOfModules.restrictScalars
   PresheafOfModules.restrictScalarsObj ModuleCat.restrictScalars
   coefficientSequenceEvaluation coefficientProEtaleModuleDirectImage in
-/-- Direct image on sequences commutes with evaluation by the identity on sections.
-Source: Stacks 03D1 and 0941 (blueprint: lem-trf-ordinary-quotient-pullback-tower-comparison).
-Proof: both functors evaluate M at (n, f-basechange U) with scalar action through
-the same constant-section coefficient map. The identity section maps give the
-natural isomorphism. Sectionwise extensionality proves uniqueness. -/
+/-- Direct image on sequences commutes with evaluation by the identity on sections. -/
 private theorem canonical_exists
     {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ) :
     ∃ e : integralComparisonSequenceDirectImage l E f ⋙ coefficientSequenceEvaluation l E Y n ≅
@@ -478,24 +478,7 @@ private theorem pullTower_map_app_f {X Y : Scheme.{t}} (f : X ⟶ Y)
 end OrdinaryTowerProof
 
 /-- Ordinary pullback of a strict quotient system is the defining pullback tower,
-naturally on all complexes, with the tensor-unit generator normalization.
-Source: Stacks 099N(5), 03D2, 0941, pullback of modules and quotient systems.
-(blueprint: lem-trf-ordinary-quotient-pullback-tower-comparison).
-
-Proof: at every quotient level, transpose the tensor-unit map through the actual
-sequence inverse-image adjunction. The resulting evaluation comparison identifies
-sequence inverse image with the finite constant-coefficient inverse image. Compose
-with M.evaluation and then restrict coefficients to the completed ring. On unit
-generators this sends the image of x to the image of its finite comparison.
-These comparisons commute with quotient transitions because both adjuncts are the
-same constant-section map followed by the actual quotient reduction. They commute
-with differentials and every chain map by naturality of adjunction units. Their
-inverses assemble too, giving the natural isomorphism θ on the entire strict tower.
-For any strict presentation isomorphism a, pull back a inverse and compose with θ.
-Naturality of the sequence inverse-image unit and the finite comparison equation
-turn its generator formula into the displayed one. Restriction leaves the section
-type unchanged through the recorded casts. No infinite product passes through
-inverse image, and this statement uses no derived-limit comparison. -/
+naturally on all complexes, with the tensor-unit generator normalization. -/
 theorem ordinaryQuotientPullbackTowerComparison {X Y : Scheme.{t}} (f : X ⟶ Y)
     (M : CompletionUnit.OrdinaryModel l E Y) :
     let T := (integralComparisonSequencePullback l E f).mapHomologicalComplex (.up ℤ) ⋙

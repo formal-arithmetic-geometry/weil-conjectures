@@ -19,13 +19,24 @@ universe u
 
 namespace Polynomial
 
-/-! Auxiliary decomposition of the lifting theorem. -/
+/-!
+# Core of lifting monic coprime factorizations after an étale extension
 
-/-- The universal étale construction and the first coefficient reduction in Tag 0ALH;
-the remaining coefficient reduction is isolated below for a separate proof.
-Proof: follow the universal coprime factorization ring, the quotient section, and the
-étale idempotent localization from the six-step proof of Tag 0ALH.
-(blueprint: lem-weil-pbc-lift-monic-coprime-factorization-etale-core) -/
+Auxiliary decomposition of the lifting theorem: the universal étale construction with the
+first coefficient reduction, and the derivation of the second reduction from the first.
+
+## Implementation details
+
+The construction follows the universal coprime factorization ring, the quotient section and
+the étale idempotent localization.
+
+## References
+
+* [Stacks, Tag 0ALH]
+-/
+
+/-- The universal étale construction and the first coefficient reduction in the lifting of
+monic coprime factorizations; the remaining coefficient reduction is proved separately. -/
 theorem exists_etale_lift_monic_coprime_factorization_core
     {A : Type u} [CommRing A] (I : Ideal A) (f : A[X]) (hf : f.Monic)
     (g₀ h₀ : (A ⧸ I)[X]) (hg₀ : g₀.Monic) (hh₀ : h₀.Monic)
@@ -154,10 +165,7 @@ theorem exists_etale_lift_monic_coprime_factorization_core
       exact hsG
 
 /-- The second factor reduction follows from the product identity and the first factor
-reduction, coefficientwise in the quotient polynomial ring.
-Proof: map the product identity to the quotient, rewrite the first factor by the
-given reduction, and cancel the monic first factor using the prescribed factorization.
-(blueprint: lem-weil-pbc-lift-monic-coprime-factorization-etale-h-reduction) -/
+reduction, coefficientwise in the quotient polynomial ring. -/
 theorem lift_monic_coprime_factorization_h_reduction
     {A : Type u} [CommRing A] (I : Ideal A) (f : A[X])
     (g₀ h₀ : (A ⧸ I)[X]) (hg₀ : g₀.Monic) (hh₀ : h₀.Monic)

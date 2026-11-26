@@ -10,9 +10,12 @@ import WeilConjectures.SmoothPurity.Integral.IntegralSystemReductionFullyFaithfu
 
 /-! # Naturality of the common-stage tensor coherence components
 
-Source: Stacks Project, Tags 06YS, 07A4 and 0941; the common-stage paragraph
-of the coefficient operations blueprint.
-(blueprint: lem-pur-common-stage-tensor-associator-natural).
+This file proves naturality of the prescribed common-stage tensor associator in all three
+input arrows.
+
+## References
+
+* Stacks Project, Tags 06YS, 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -338,25 +341,7 @@ attribute [local irreducible] Padic.coefficientExtensionIntegers
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Naturality of the prescribed associator on all three input arrows.
-
-Source: Stacks Project, Tags 06YS, 07A4 and 0941; the common-stage paragraph
-of the coefficient operations blueprint.
-(blueprint: lem-pur-common-stage-tensor-associator-natural).
-
-Proof: first apply faithful coherent reduction to the integral associator
-square. Naturality of the reduction/tensor comparison changes its two sides
-into the usual associator square in the coherent system monoidal category.
-The normalized formula for the integral associator then proves equality.
-Localize: on each pure scalar tensor the equation is the integral equation
-multiplied by the product of the three scalars; additivity extends it to
-arbitrary rational arrows. Represent the three common-stage input arrows
-over one finite extension containing all source and target coefficient fields.
-Expand the common-stage associator and tensor maps using their representative
-formulas. Functoriality cancels the comparison isomorphisms around the rational
-square. The two resulting arrows are equal at that finite stage by rational
-associator naturality, so their common-stage classes are equal. This includes identity and zero
-arrows and imposes no Tor-amplitude hypothesis. -/
+/-- Naturality of the prescribed associator on all three input arrows. -/
 theorem commonStageTensorAssociator_naturality
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     [∀ x : X, Invertible (l : X.residueField x)]

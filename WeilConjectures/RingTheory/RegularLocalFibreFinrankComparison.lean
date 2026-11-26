@@ -21,6 +21,27 @@ import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 
+/-!
+# Fibre dimension of the differentials at a separable prime
+
+For a finite type algebra `S` over a field `k` and a prime `q` with separable residue field
+`K = κ(q)` of transcendence degree `r`, the dimension of `K ⊗_S Ω[S/k]` is the embedding
+dimension of `S_q` plus `r`.
+
+## Implementation details
+
+With `R = S_q` and maximal ideal `m`, the conormal sequence
+`m/m² → K ⊗_R Ω[R/k] → Ω[K/k] → 0` is short exact by separability (Tag 00TU). A separating
+transcendence basis of `K/k` has `r` elements and its differentials form a basis of
+`Ω[K/k]`. Localization of differentials and tensor cancellation identify the middle term with
+`K ⊗_S Ω[S/k]`, and rank-nullity gives the formula.
+
+## References
+
+* [Stacks, Tag 00TV] (proof)
+* [Stacks, Tags 00TU, 00RT]
+-/
+
 @[expose] public section
 
 open scoped TensorProduct
@@ -30,20 +51,7 @@ universe u v
 namespace Algebra
 
 
-/-- Conormal decomposition with an explicit finite function-space summand.
-Source: Stacks Project, Algebra, proof of Lemma Tag 00TV, using Tags 00TU and 00RT.
-(blueprint: lem-weil-pbc-regular-local-fibre-finrank-add-fin-fun)
-
-Proof: put R = S_q and K = kappa(q). Finite type makes R Noetherian and K finitely
- generated as a field. Identify the cotangent space with the kernel ideal's cotangent,
-and extend its conormal map from R-scalars to K-scalars using the surjective residue map.
-The separable-residue lemma makes this map injective; Mathlib's conormal sequence makes
-its image the kernel of the surjective map to Omega[K/k]. Localization of differentials
-and tensor cancellation identify the middle term with K tensor_S Omega[S/k], which is
-finite dimensional. Rank-nullity therefore gives the sum of the two outer dimensions.
-Transport the separating transcendence basis from the top intermediate field to K,
-use its cardinality and hr to reindex it by Fin r, and apply the existing differential
-basis dimension theorem. Its dimension is r, also the dimension of Fin r -> K. -/
+/-- Conormal decomposition with an explicit finite function-space summand. -/
 theorem fibre_finrank_eq_cotangent_finrank_add_fin_fun
     (k : Type u) (S : Type v) [Field k] [CommRing S] [Algebra k S]
     [Algebra.FiniteType k S] (q : Ideal S) [q.IsPrime]
@@ -126,25 +134,7 @@ theorem fibre_finrank_eq_cotangent_finrank_add_fin_fun
   rfl
 
 /-- The residue-field fibre of the differentials has dimension equal to the embedding
-dimension plus the residue-field transcendence degree.
-Source: Stacks Project, Algebra, proof of Lemma Tag 00TV, using Tag 00TU.
-(blueprint: lem-weil-pbc-regular-local-fibre-finrank-comparison).
-
-Proof:
-Put R = S_q and K = kappa(q). Finite type over k makes R Noetherian and K finitely
-generated as a field. Its maximal ideal m is finitely generated, so m/m^2 is finite
-dimensional over K. The quotient conormal sequence
-m/m^2 -> K tensor_R Omega[R/k] -> Omega[K/k] -> 0 is right exact.
-Separability of K/k makes the first map injective by Tag 00TU. A separating
-transcendence basis of K/k has r elements by hr; its differentials form a basis
- of Omega[K/k], since the remaining algebraic extension is finite separable.
-Thus the outer terms are finite dimensional, and short-exact-sequence dimension
-additivity gives dimension of the middle term equal to dim_K(m/m^2) + r.
-Localization of differentials gives Omega[R/k] = R tensor_S Omega[S/k]. Tensor
-associativity identifies K tensor_R Omega[R/k] with K tensor_S Omega[S/k].
-The canonical residue-field identification identifies m/m^2 with the cotangent
-space of R, including its K scalar action. Transporting finranks proves the formula.
--/
+dimension plus the residue-field transcendence degree. -/
 theorem fibre_finrank_eq_cotangent_finrank_add
     (k : Type u) (S : Type v) [Field k] [CommRing S] [Algebra k S]
     [Algebra.FiniteType k S] (q : Ideal S) [q.IsPrime]

@@ -27,6 +27,10 @@ cycles of the trait on the cohomology of the geometric generic fibres
 of complexes supported on finitely many closed points by their global sections
 (`ProEtale.CondensedRing.isZero_of_isZero_upperStar_finsetComplOpens`).
 
+## References
+
+* L. Illusie, *Autour du théorème de monodromie locale*, Thm. 4.7
+
 -/
 
 @[expose] public section
@@ -50,12 +54,11 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
   {gM : M.generic ⟶ Spec (.of (traitGenericField k'))} {qN : N.total ⟶ trait k'}
   {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
-/-- **Gabber's Künneth formula for proper models, `ℚ̄_ℓ`-coefficients, given the slices**
-(Illusie, *Autour du théorème de monodromie locale*, Thm. 4.7; blueprint
-`proposition-external-kunneth-formula-nearby-cycles`): for the product `P` over the strictly
-henselian trait of models `M`, `N` of finite type along proper structure morphisms whose total
-spaces locally embed into `𝔸ᵐ_S`, `𝔸^{m'}_S`, if the generic-slicing step holds in chart dimension
-`m + m' - 1`, the Künneth map `Π_{A,B}` is an isomorphism for bounded constructible `A`, `B`. -/
+/-- **Gabber's Künneth formula for proper models, `ℚ̄_ℓ`-coefficients, given the slices**: for
+the product `P` over the strictly henselian trait of models `M`, `N` of finite type along proper
+structure morphisms whose total spaces locally embed into `𝔸ᵐ_S`, `𝔸^{m'}_S`, if the
+generic-slicing step holds in chart dimension `m + m' - 1`, the Künneth map `Π_{A,B}` is an
+isomorphism for bounded constructible `A`, `B`. -/
 theorem isIso_kunnethMap_padicAlgCl_of_isProper [TopologicalSpace.NoetherianSpace X]
     [TopologicalSpace.NoetherianSpace Y] [TopologicalSpace.NoetherianSpace Z]
     (hM : M.IsTraitModelOver qM gM)

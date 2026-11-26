@@ -26,8 +26,7 @@ where the number of classes is `h = #Pic⁰(C)` if `n` lies in the subgroup `δ 
 line bundles and `0` otherwise. With the Riemann hypothesis for the middle factor `P₁` of a Weil
 factorization `Z = P₁ / ((1 - T) (1 - q T))` this forces `deg P₁ = 2 g`
 (`AlgebraicGeometry.IsWeilFactorization.natDegree_eq_two_mul_of_coeff`). This is
-F. K. Schmidt's argument; it gives Step 4 of the blueprint proof of
-`corollary-point-count-estimates--2`, `dim H¹(C ⊗ k̄, ℚ̄_ℓ) = 2 g`, without `ℓ`-adic cohomology.
+F. K. Schmidt's argument; it gives `dim H¹(C ⊗ k̄, ℚ̄_ℓ) = 2 g` without `ℓ`-adic cohomology.
 
 ## Main statements
 
@@ -149,8 +148,7 @@ theorem Divisor.picDegreeHom_idealSheafClass (E : closedPoints C →₀ ℕ) :
 
 /-- **The effective divisors in a class of large degree.** If `c ∈ Pic(C)` has degree `-n`
 with `n ≥ 2 g - 1`, then the effective divisors `E` with `[𝒪_C(-E)] = c` number
-`(q^{n + 1 - g} - 1) / (q - 1)`: they are the points of the complete linear system of a line
-bundle of degree `n`, whose `h⁰` is `n + 1 - g` by Riemann–Roch. -/
+`(q^{n + 1 - g} - 1) / (q - 1)`. -/
 theorem Divisor.sub_one_mul_card_idealSheafClass_eq (c : C.Pic) {n : ℕ}
     (hc : picDegreeHom k C c = .ofAdd (-(n : ℤ)))
     (hn : 2 * (arithmeticGenus k C : ℤ) - 1 ≤ n) :
@@ -236,12 +234,7 @@ theorem Divisor.sub_one_mul_card_effective_eq {n : ℕ} (hn : 2 * (arithmeticGen
 /-- **The degree of the middle Weil factor of a curve is twice the genus** (F. K. Schmidt). Let
 `C` be a smooth proper integral curve over a finite field `k` with `H⁰(C, 𝒪_C) = k`, of genus
 `g = h¹(C, 𝒪_C)`. If its zeta function has a Weil factorization `Z = P₁ / ((1 - T) (1 - q T))`
-whose middle factor satisfies the Riemann hypothesis, then `deg P₁ = 2 g`.
-
-By Riemann–Roch the number `A_n` of effective divisors of degree `n ≥ 2 g - 1` is
-`h (q^{n + 1 - g} - 1) / (q - 1)` if `n` lies in the subgroup `δ ℤ` of degrees of line bundles,
-where `h = #Pic⁰(C)`, and `0` otherwise; and `A_n` is the `n`-th coefficient of `Z`. The
-arithmetic of `IsWeilFactorization.natDegree_eq_two_mul_of_coeff` concludes. -/
+whose middle factor satisfies the Riemann hypothesis, then `deg P₁ = 2 g`. -/
 theorem natDegree_eq_two_mul_arithmeticGenus_of_isWeilFactorization
     {P : Fin (2 * 1 + 1) → Polynomial ℤ}
     (hfact : IsWeilFactorization (Nat.card k) 1 (C ↘ Spec (.of k)).zetaSeries P)

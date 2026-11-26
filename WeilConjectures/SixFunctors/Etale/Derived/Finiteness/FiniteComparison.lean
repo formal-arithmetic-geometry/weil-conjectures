@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.InvertibleRestriction
 Let `f : X ⟶ S` be proper, and let `ν : Y ⟶ X` be finite, surjective, and an isomorphism over
 the complement `U` of a closed subscheme `i : Z ⟶ X` on which `f` is finite. For a finite
 `Λ`-module `M`, the higher direct images of the constant sheaf `M` along `f` and along `ν ≫ f`
-are compared (`proposition-proper-direct-image-finite-coefficients`): the cokernel of the unit
+are compared: the cokernel of the unit
 `M_X ⟶ ν_* ν^* M_X` is supported on `Z`, whose direct images along `f` are concentrated in
 degree `0`.
 
@@ -150,8 +150,7 @@ noncomputable def rightDerivedLowerStarUnitComparison {X Y S : Scheme.{u}} (f : 
       ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) ν).unit.app F)) ≫
     (rightDerivedLowerStarSingleLowerStarIso ν f _).hom
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Constant coefficients under a
-finite normalization comparison.
+/-- Constant coefficients under a finite normalization comparison.
 
 Let `f : X ⟶ S` be proper with `S` of finite type over a field `k`, and let `ν : Y ⟶ X` be finite
 and surjective. Suppose `ν` is an isomorphism over the open `j : U ⟶ X` complementary to a
@@ -159,7 +158,7 @@ closed immersion `i : Z ⟶ X` for which `i ≫ f` is finite. Put `v = ν ≫ f`
 `Λ`-module, with constant sheaf `M_X` on `X` (and `ν^* M_X = M_Y` on `Y`). If all `Rᵠv_*(M_Y)`
 are constructible, then so are all `Rᵠf_*(M_X)`, and the natural map
 `Rᵠf_*(M_X) ⟶ Rᵠv_*(M_Y)` (`AlgebraicGeometry.Etale.rightDerivedLowerStarUnitComparison`) is an
-isomorphism for every `q ≥ 2`. The blueprint takes `Z` reduced; this is not needed. -/
+isomorphism for every `q ≥ 2`. The closed subscheme `Z` need not be reduced. -/
 theorem constructible_and_isIso_rightDerivedLowerStarUnitComparison {k : Type u} [Field k]
     {X Y Z U S : Scheme.{u}} (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS]
     (f : X ⟶ S) [IsProper f] (ν : Y ⟶ X) [IsFinite ν] [Surjective ν]

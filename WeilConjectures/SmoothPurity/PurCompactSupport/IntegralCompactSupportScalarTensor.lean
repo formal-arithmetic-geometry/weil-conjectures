@@ -40,9 +40,24 @@ import WeilConjectures.Algebra.Homology.KFlatTotalTensorModel.KFlatTotalTensorMo
 
 /-! # Normalized scalar tensor comparison for compact support
 
-The self-contained tensor construction formerly in IntegralCompactSupportCoefficientComparison.
-Source: Stacks Tags 03EL, 06YY, 07A4.
-(blueprint: def-sf-compact-support-scalar-tensor-balancing).
+The self-contained tensor construction, split off from
+`IntegralCompactSupportCoefficientComparison`.
+
+## Implementation details
+
+* `tensorModel_exists`: choose flat K-flat resolutions of both variables and use the signed
+  direct-sum total tensor; localization in both variables descends this functor. This is the
+  `ProEtaleTensorModel` interface.
+* `scalarOrdinaryTensor_existsUnique`: send `s ⊗ (m ⊗ n)` to `(s ⊗ m) ⊗ (1 ⊗ n)`; the inverse
+  multiplies the two `S` coefficients. These formulas determine the comparison on sheafified
+  pure tensors.
+* `scalarTensor_exists`, `scalarTensor_unique`, `scalarTensor_existsUnique`: the signed total
+  comparison descends through K-flat representatives and localization; resolving
+  representatives are jointly conservative, which gives uniqueness.
+
+## References
+
+* [Stacks Project, Tags 03EL, 06YY and 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -69,48 +84,34 @@ attribute [local irreducible] CategoryTheory.presheafToSheaf CategoryTheory.Func
   CategoryTheory.Functor.mapBifunctorHomologicalComplex
 
 -- Use the canonical concrete site instances throughout this proof context.
-/-- Canonical smallness of the coefficient site.
-Source: the existing integral coefficient site instances.
-(blueprint: def-sf-compact-support-scalar-tensor-balancing). -/
+/-- Canonical smallness of the coefficient site. -/
 theorem coefficientSiteSmall (W : Scheme.{u}) :
     EssentiallySmall.{u + 1} W.ProEt := essentiallySmallSelf.{0, u, u + 1} _
 
 attribute [local instance 100000] coefficientSiteSmall
 
-/-- Canonical ring sheafification on the coefficient site.
-Source: the existing integral coefficient site instances.
-(blueprint: def-sf-compact-support-scalar-tensor-balancing). -/
+/-- Canonical ring sheafification on the coefficient site. -/
 theorem coefficientRingSheafify (W : Scheme.{u}) :
     HasSheafify (ProEt.topology W) CommRingCat.{u + 1} :=
   WeilConjectures.integralCoefficientRingSheafify.{u, 0} W
 
 attribute [local instance 100000] coefficientRingSheafify
 
-/-- Canonical abelian sheafification on the coefficient site.
-Source: the existing integral coefficient site instances.
-(blueprint: def-sf-compact-support-scalar-tensor-balancing). -/
+/-- Canonical abelian sheafification on the coefficient site. -/
 theorem coefficientAbSheafify (W : Scheme.{u}) :
     HasSheafify (ProEt.topology W) AddCommGrpCat.{u + 1} :=
   WeilConjectures.integralCoefficientAbSheafify.{u, 0} W
 
 attribute [local instance 100000] coefficientAbSheafify
 
-/-- Canonical local bijectivity criterion on the coefficient site.
-Source: the existing integral coefficient site instances.
-(blueprint: def-sf-compact-support-scalar-tensor-balancing). -/
+/-- Canonical local bijectivity criterion on the coefficient site. -/
 theorem coefficientAbLocallyBijective (W : Scheme.{u}) :
     (ProEt.topology W).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} W
 
 attribute [local instance 100000] coefficientAbLocallyBijective
 
-/-- Every coefficient sheaf has a model of its actual derived tensor.
-Source: Stacks Tag 07A4
-(blueprint: def-sf-compact-support-scalar-tensor-balancing).
-Proof: choose flat K-flat resolutions of both variables and use the signed direct-sum
-total tensor. Quasi-isomorphisms between these representatives are inverted by tensor.
-Localization in both variables descends this functor and gives its representative
-isomorphism. This is precisely the published ProEtaleTensorModel interface. -/
+/-- Every coefficient sheaf has a model of its actual derived tensor. -/
 theorem tensorModel_exists (W : Scheme.{u})
     (R : Sheaf (ProEt.topology W) CommRingCat.{u + 1}) :
     Nonempty (ProEtaleTensorModel W R) := by
@@ -209,13 +210,7 @@ private theorem scalarTensorSection_smul {W : Scheme.{u}}
   with_unfolding_all
     simpa only [mul_one] using completedTensor_smul W a M U s 1 x
 
-/-- The ordinary scalar/tensor comparison is fixed on sheafified pure tensors.
-Source: Stacks Tags 03EL, 06YY
-(blueprint: def-sf-compact-support-scalar-tensor-balancing).
-Proof: send s tensor (m tensor n) to (s tensor m) tensor (1 tensor n).
-Balancing makes this a sheafified linear map. Its inverse multiplies the two
-S coefficients. These formulas are inverse on tensor generators, commute with
-restriction and module maps, and determine the comparison uniquely. -/
+/-- The ordinary scalar/tensor comparison is fixed on sheafified pure tensors. -/
 theorem scalarOrdinaryTensor_existsUnique {W : Scheme.{u}}
     {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S) :
     ∃! μ : ∀ M N : pbcModules W R,
@@ -291,9 +286,7 @@ theorem scalarOrdinaryTensor_existsUnique {W : Scheme.{u}}
     intro U x y
     exact (hν' M N U 1 x y).trans (hν M N U x y).symm
 
-/-- The unique ordinary balancing isomorphism, independently of any integral basis.
-Source: Stacks Tags 03EL, 06YY
-(blueprint: def-sf-compact-support-scalar-tensor-balancing). -/
+/-- The unique ordinary balancing isomorphism, independently of any integral basis. -/
 def scalarOrdinaryTensor {W : Scheme.{u}}
     {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S) :
     ∀ M N : pbcModules W R,
@@ -304,11 +297,7 @@ def scalarOrdinaryTensor {W : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Naturality of ordinary scalar balancing.
-Source: Stacks Tag 03EL
-(blueprint: def-sf-compact-support-scalar-tensor-balancing).
-Proof: both routes send s tensor (m tensor n) to (s tensor v(m)) tensor
-(1 tensor z(n)); these sections generate after sheafification. -/
+/-- Naturality of ordinary scalar balancing. -/
 theorem scalarOrdinaryTensor_naturality {W : Scheme.{u}}
     {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S)
     {M M' N N' : pbcModules W R} (v : M ⟶ M') (z : N ⟶ N') :
@@ -350,9 +339,7 @@ attribute [local irreducible] proEtaleFlatRepresentatives
 attribute [local irreducible] scalarOrdinaryTensor tensorPullbackTotal
   tensorPullbackTotalComponent
 
-/-- Signed total of the inverse ordinary tensor-balancing maps.
-Source: Stacks Tag 07A4
-(blueprint: def-sf-compact-support-scalar-tensor-balancing). -/
+/-- Signed total of the inverse ordinary tensor-balancing maps. -/
 def scalarTensorTotal {W : Scheme.{u}}
     {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S)
     (P Q : CochainComplex (pbcModules W R) ℤ) :
@@ -371,11 +358,7 @@ def scalarTensorTotal {W : Scheme.{u}}
         MonoidalCategory.tensorHom_def, Category.assoc] using
           scalarOrdinaryTensor_naturality a v z) P Q
 
-/-- The total map is invertible, since scalar extension is a left adjoint.
-Source: Stacks Tag 07A4
-(blueprint: def-sf-compact-support-scalar-tensor-balancing).
-Proof: tensorPullbackTotal_isIso applies to the scalar adjunction. Each summand
-is invertible and the left adjoint preserves the direct sums defining the total. -/
+/-- The total map is invertible, since scalar extension is a left adjoint. -/
 theorem scalarTensorTotal_isIso {W : Scheme.{u}}
     {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S)
     (P Q : CochainComplex (pbcModules W R) ℤ) : IsIso (scalarTensorTotal a P Q) := by
@@ -433,11 +416,7 @@ private theorem tensorTotal_flatRepresentatives {W : Scheme.{u}}
     ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat Q).2 hq.1) hp.2 hq.2
   exact ⟨(CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat _).1 ht.1, ht.2.1⟩
 
-/-- Existence of the normalized derived scalar/tensor comparison.
-Source: Stacks Tags 06YY, 07A4.
-The proof descends the signed total comparison through K-flat representatives and
-localization; the representative normalization is exactly the displayed equation.
-(blueprint: def-sf-compact-support-scalar-tensor-balancing). -/
+/-- Existence of the normalized derived scalar/tensor comparison. -/
 theorem scalarTensor_exists {W : Scheme.{u}}
     {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S)
     (r : ProEtaleTensorModel W R) (s : ProEtaleTensorModel W S) :
@@ -515,12 +494,7 @@ theorem scalarTensor_exists {W : Scheme.{u}}
   dsimp only [tR, Functor.uncurry_obj_obj, Functor.map₂HomologicalComplex] at hh
   exact hh
 
-/-- Uniqueness of a normalized derived scalar/tensor comparison.
-Source: Stacks Tags 06YY, 07A4.
-The K-flat representative normalization determines each component after localization;
-resolving representatives are jointly conservative, so two normalized isomorphisms
-are equal by extensionality.
-(blueprint: def-sf-compact-support-scalar-tensor-balancing). -/
+/-- Uniqueness of a normalized derived scalar/tensor comparison. -/
 theorem scalarTensor_unique {W : Scheme.{u}}
     {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S)
     (r : ProEtaleTensorModel W R) (s : ProEtaleTensorModel W S)
@@ -573,13 +547,7 @@ theorem scalarTensor_unique {W : Scheme.{u}}
     (s.tensor.map (Prod.mkHom (pbcComplexCounit a P) (pbcComplexCounit a Q)))).1
   simpa only [Category.assoc] using hμ'.trans hν'.symm
 
-/-- Tensor balancing on derived categories is uniquely fixed on flat K-flat pairs.
-Source: Stacks Tags 06YY, 07A4
-(blueprint: def-sf-compact-support-scalar-tensor-balancing).
-Proof: base change preserves flat terms and K-flat complexes. On these pairs use
-ordinary signed total balancing and the universal derived counits. Tensor descent
-extends the map naturally. Every derived pair admits these representatives, and the
-counits there are invertible, proving uniqueness and the inverse identities. -/
+/-- Tensor balancing on derived categories is uniquely fixed on flat K-flat pairs. -/
 theorem scalarTensor_existsUnique {W : Scheme.{u}}
     {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S)
     (r : ProEtaleTensorModel W R) (s : ProEtaleTensorModel W S) :
@@ -603,9 +571,7 @@ theorem scalarTensor_existsUnique {W : Scheme.{u}}
   intro ν hν
   exact (scalarTensor_unique a r s μ ν hμ hν).symm
 
-/-- The specified ordinary derived scalar/tensor comparison.
-Source: Stacks Tags 06YY, 07A4
-(blueprint: def-sf-compact-support-scalar-tensor-balancing). -/
+/-- The specified ordinary derived scalar/tensor comparison. -/
 def scalarTensor {W : Scheme.{u}}
     {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S)
     (r : ProEtaleTensorModel W R) (s : ProEtaleTensorModel W S) :

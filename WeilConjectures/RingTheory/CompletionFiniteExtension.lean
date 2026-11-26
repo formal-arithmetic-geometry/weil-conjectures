@@ -19,8 +19,23 @@ import WeilConjectures.RingTheory.LocalizationPrimeResidueFieldIso
 /-!
 # Completion of a finite algebra over a prime
 
-Source: Stacks Project, Algebra, Lemma 10.97.8 (Tag 07N9)
-(blueprint: lem-weil-pbc-completion-finite-extension).
+The completion of a finite algebra `S` over a Noetherian ring `R` at a prime `p` decomposes as
+the product of the completions of `S_q` over the primes `q` above `p`.
+
+## Implementation details
+
+The factors are indexed by all primes lying over `p`, with finiteness a conclusion. The maps
+`g q` are specified modulo every power of the maximal ideals, so they are exactly the completion
+maps induced by `Localization.localRingHom`. The equation on `a ⊗ₜ 1` expresses compatibility
+with the completed-base algebra structures.
+
+The proof localizes at `p`, decomposes each quotient `B ⧸ p^n B` (which has finitely many
+maximal ideals and nil Jacobson radical) as a product of localizations, and passes to the limit;
+the tensor description comes from completion of finite modules.
+
+## References
+
+* [Stacks, Tag 07N9]
 -/
 
 @[expose] public section
@@ -31,33 +46,10 @@ open scoped TensorProduct
 
 namespace AdicCompletion
 
-/-- Completion of a finite algebra decomposes over the primes above a prime of the base.
-Source: Stacks Project, Algebra, Lemma 10.97.8 (Tag 07N9)
-(blueprint: lem-weil-pbc-completion-finite-extension).
-
-The factors are indexed by all primes lying over `p`, with finiteness a conclusion.
-The maps `g q` are specified modulo every power of the maximal ideals, so they are
-exactly the completion maps induced by `Localization.localRingHom`. The equation on
-`a ⊗ₜ 1` expresses compatibility with the completed-base algebra structures.
-
-Proof:
-1. Localize at `p`: put `A = R_p`, `B = A ⊗ S`. Localization-base-change and
-   localization-prime-residue-field-iso identify the primes over the maximal ideal of
-   `A` with the primes over `p`, and their localizations with `S_q`. The localization
-   is Noetherian by localization-noetherian; finite-type-algebra-noetherian applies to `S`.
-2. For each positive `n`, finite-over-zero-dim-local-discrete-spectrum shows that
-   `B / p^n B` has exactly these finitely many maximal ideals and nil Jacobson radical.
-   Product-of-localizations-at-maximal decomposes this quotient, including the zero ring
-   when there are no primes over `p`.
-3. Localization-at-prime-of-quotient identifies each factor with `S_q / p^n S_q`.
-   These identifications commute with reduction. Taking compatible sequences componentwise
-   gives the product decomposition of the `p B`-adic completion of `B`.
-4. Finite-after-completion identifies the `p`-adic and maximal-ideal-adic completions of
-   each `S_q`, compatibly with both `S` and the completion of `A`.
-5. Completion-finite-module-tensor gives `A^ ⊗_A B ≃ B^` and
-   tensor-cancel-base-change identifies the source with `A^ ⊗_R S`.
-6. Compose these isomorphisms. They are `S`-linear and compatible with the completed
-   base; both sides are isomorphic to `B^`. An empty product is the zero ring. -/
+/-- For a finite algebra `S` over a Noetherian ring `R` and a prime `p`, there are finitely
+many primes `q` over `p`, and `R_p^∧ ⊗[R] S` is isomorphic to the product of the completions
+of the `S_q`, compatibly with the maps `g q` induced by the local maps `R_p → S_q`. It is also
+isomorphic to the `p`-adic completion of `R_p ⊗[R] S`. -/
 theorem completion_finite_extension
     (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime] :

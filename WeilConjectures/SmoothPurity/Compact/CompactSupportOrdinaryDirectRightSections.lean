@@ -11,8 +11,11 @@ import all WeilConjectures.SmoothPurity.Compact.CompactSupportCoefficientTransit
 
 /-! # Sections of the right ordinary direct-evaluation composite
 
-Source: Stacks 03DI and 0D6E
-(blueprint: lem-weil-compact-support-ordinary-direct-right-sections).
+This module computes the right ordinary coefficient-transition composite on sections.
+
+## References
+
+* Stacks Project, Tags 03DI and 0D6E
 -/
 
 @[expose] public noncomputable section
@@ -57,12 +60,8 @@ attribute [local irreducible] compactSupportOrdinaryDirectEvaluation
   compactSupportOrdinaryCoefficientTransition
 
 -- The formula compares scalar actions on the same underlying section carriers.
-/-- The right ordinary coefficient-transition composite is horizontal restriction.
-Source: Stacks 03DI and 0D6E.
-(blueprint: lem-weil-compact-support-ordinary-direct-right-sections).
-Proof: Ordinary evaluation is identity on section carriers. The horizontal coefficient
-map on M is restriction along the horizontal product arrow. Ordinary direct image
-leaves the underlying component maps unchanged, so the composite has the stated formula. -/
+/-- The right ordinary coefficient-transition composite is restriction along the horizontal
+product arrow. -/
 theorem compactSupportOrdinaryDirectRightSections
     {Z Y : Scheme.{u}} (g : Z ⟶ Y) {m n : ℕ} (h : n ≤ m)
     (M : coefficientSequenceModules.{u, u} l E Z) (V : Y.ProEtᵒᵖ)

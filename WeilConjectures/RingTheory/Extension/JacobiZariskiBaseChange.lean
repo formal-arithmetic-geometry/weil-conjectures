@@ -103,8 +103,7 @@ theorem range_rTensor_h1Cotangentι [Module.Projective S Ω[S⁄R]] :
 
 end Extension
 
-/-- (blueprint: `theorem-finite-etale-covers-proper-henselian--2`)
-Let `R → S` be a ring map with `H₁(L_{S/R}) = 0` and `Ω[S⁄R]` projective, let `𝔞` be an
+/-- Let `R → S` be a ring map with `H₁(L_{S/R}) = 0` and `Ω[S⁄R]` projective, let `𝔞` be an
 ideal of `S` and `C = S ⧸ 𝔞`. For the naive cotangent complex
 `δ : I/I² → S ⊗[P] Ω[P⁄R]`
 of the canonical presentation `P = R[S] → S`, the map `H₁(L_{S/R}) ⊗ C → I/I² ⊗ C`

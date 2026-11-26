@@ -16,17 +16,16 @@ public import Mathlib.RingTheory.Unramified.LocalStructure
 /-!
 # Retractions and strictly henselian local rings
 
-This file proves blueprint `lemma:retractions-strictly-henselian`: if every faithfully flat
-étale ring map out of `A` admits a retraction, then the local rings of `A` at maximal ideals
-are strictly henselian. As a corollary (blueprint `cor:strictly-henselian-etale-contraction`),
-the local rings of `IndEtaleContraction R` at maximal ideals are strictly henselian.
+If every faithfully flat étale ring map out of `A` admits a retraction, then the local rings of
+`A` at maximal ideals are strictly henselian. As a corollary, the local rings of
+`IndEtaleContraction R` at maximal ideals are strictly henselian.
 
 ## Outline
 
 The key technical statement is
 `Algebra.Etale.exists_algHom_localization_atPrime_comap_eq`: for every étale `A`-algebra `C`
 and every prime `q` of `C` lying over a maximal ideal `m` of `A`, there is an `A`-algebra map
-`ρ : C →ₐ[A] Aₘ` with `ρ⁻¹(m Aₘ) = q`. It is proven following the blueprint:
+`ρ : C →ₐ[A] Aₘ` with `ρ⁻¹(m Aₘ) = q`. The proof goes as follows:
 
 1. By quasi-finiteness of `C` over `A` there are only finitely many primes of `C` over `m`;
    choose `g ∈ C` contained in all of them except `q` (prime avoidance,
@@ -71,10 +70,10 @@ lemma pi_mul_single_eq_single {ι : Type*} [DecidableEq ι] {M : ι → Type*}
   · simpa using h
   · simp [Pi.single_eq_of_ne hj]
 
-/-- Blueprint `lemma:retractions-strictly-henselian`, main step: assume that every étale
-`A`-algebra `B` with surjective `Spec B → Spec A` admits a retraction. Then for every étale
-`A`-algebra `C` and every prime `q` of `C` lying over a maximal ideal `m`, there is an
-`A`-algebra map `ρ : C →ₐ[A] Aₘ` such that the preimage of the maximal ideal is `q`. -/
+/-- Main step: assume that every étale `A`-algebra `B` with surjective `Spec B → Spec A` admits
+a retraction. Then for every étale `A`-algebra `C` and every prime `q` of `C` lying over a
+maximal ideal `m`, there is an `A`-algebra map `ρ : C →ₐ[A] Aₘ` such that the preimage of the
+maximal ideal is `q`. -/
 theorem Algebra.Etale.exists_algHom_localization_atPrime_comap_eq
     (H : ∀ (B : Type u) [CommRing B] [Algebra A B], Algebra.Etale A B →
       Function.Surjective (PrimeSpectrum.comap (algebraMap A B)) →
@@ -477,9 +476,8 @@ theorem HenselianLocalRing.localization_atPrime_of_forall_retraction :
 
 end Consumers
 
-/-- Blueprint `lemma:retractions-strictly-henselian`: if every faithfully flat étale ring map
-out of `A` has a retraction, then the local rings of `A` at maximal ideals are strictly
-henselian. -/
+/-- If every faithfully flat étale ring map out of `A` has a retraction, then the local rings of
+`A` at maximal ideals are strictly henselian. -/
 theorem IsStrictlyHenselianLocalRing.localization_atPrime_of_forall_retraction
     {A : Type u} [CommRing A]
     (H : ∀ (B : Type u) [CommRing B] [Algebra A B], Algebra.Etale A B →
@@ -491,8 +489,8 @@ theorem IsStrictlyHenselianLocalRing.localization_atPrime_of_forall_retraction
     ⟨HenselianLocalRing.localization_atPrime_of_forall_retraction H m,
       IsSepClosed.residueField_localization_atPrime_of_forall_retraction H m⟩
 
-/-- Blueprint `cor:strictly-henselian-etale-contraction`: the local rings of the ind-étale
-contraction of a ring at maximal ideals are strictly henselian. -/
+/-- The local rings of the ind-étale contraction of a ring at maximal ideals are strictly
+henselian. -/
 theorem IsStrictlyHenselianLocalRing.localization_atPrime_indEtaleContraction
     (R : Type u) [CommRing R] (m : Ideal (IndEtaleContraction R)) [m.IsMaximal] :
     IsStrictlyHenselianLocalRing (Localization.AtPrime m) :=

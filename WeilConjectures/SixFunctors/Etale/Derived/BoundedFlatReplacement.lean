@@ -15,8 +15,9 @@ Every bounded above complex `K` of étale sheaves (with values in a coefficient 
 with functorial flat resolutions, e.g. `A = ModuleCat Λ`) has a functorial flat replacement:
 a bounded above complex `Φ(K)` of flat sheaves, vanishing in the degrees where `K` strictly
 vanishes from some degree `N` on, with a termwise epimorphic quasi-isomorphism `Φ(K) ⟶ K`
-(`AlgebraicGeometry.Etale.exists_boundedAbove_flat_replacement`, blueprint
-`proposition-open-direct-image-preserves-finite`).
+(`AlgebraicGeometry.Etale.exists_boundedAbove_flat_replacement`).
+
+## Implementation details
 
 `Φ(K)` is the total complex of the bicomplex obtained by resolving each term `Kᵖ` by the
 functorial flat resolution of `A`
@@ -87,16 +88,12 @@ lemma _root_.CategoryTheory.Abelian.LeftResolution.isStrictlyLE_minusResolutionF
   inferInstanceAs (CochainComplex.IsStrictlyLE
     ((Λ.bicomplexFunctor.obj K.obj).total (ComplexShape.up ℤ)) N)
 
-/-- Blueprint `proposition-open-direct-image-preserves-finite`: Functorial bounded-above flat
-replacement.
-
-There is a functor `Φ` on bounded above complexes of étale sheaves on `X` together with a
-natural transformation `π : Φ ⟶ 𝟭` such that for every bounded above complex `K`: the terms of
-`Φ(K)` are flat, `π_K : Φ(K) ⟶ K` is a quasi-isomorphism and a termwise epimorphism, and `Φ(K)`
-is strictly concentrated in degrees `≤ N` whenever `K` is. In particular every bounded above
-complex of étale sheaves of `Λ`-modules is quasi-isomorphic to a bounded above complex of flat
-sheaves. Here `Φ(K)` is the total complex of the termwise functorial flat resolutions of `K`
-(`CategoryTheory.Abelian.LeftResolution.minusResolutionFunctor`). -/
+/-- Functorial bounded-above flat replacement: there is a functor `Φ` on bounded above complexes of
+étale sheaves on `X` together with a natural transformation `π : Φ ⟶ 𝟭` such that for every bounded
+above complex `K`: the terms of `Φ(K)` are flat, `π_K : Φ(K) ⟶ K` is a quasi-isomorphism and a
+termwise epimorphism, and `Φ(K)` is strictly concentrated in degrees `≤ N` whenever `K` is. In
+particular every bounded above complex of étale sheaves of `Λ`-modules is quasi-isomorphic to a
+bounded above complex of flat sheaves. -/
 theorem exists_boundedAbove_flat_replacement :
     ∃ (Φ : CochainComplex.Minus (Sheaf X.smallEtaleTopology A) ⥤
         CochainComplex.Minus (Sheaf X.smallEtaleTopology A)) (π : Φ ⟶ 𝟭 _),

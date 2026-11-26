@@ -16,18 +16,19 @@ public import WeilConjectures.TraceFormula.Specialization.FiniteSupportConservat
 
 For `X = 𝔸^{N+1}_k = Spec k[X₀, …, X_N]` and the coordinate hyperplane `Z = V(X_N)`, the defect
 `C_{X,Z}(L)` of `ProEtale.CondensedRing.specializationDefect` vanishes for every bounded
-constructible `ℚ̄_ℓ`-complex `L` (`ProEtale.CondensedRing.isZero_specializationDefect_polyAffine`,
-blueprint `theorem-verdier-s-theorem-specialization-zero`). Consequently the defect vanishes along
-the principal divisor of a global function on an affine `k`-scheme of finite type
+constructible `ℚ̄_ℓ`-complex `L` (`ProEtale.CondensedRing.isZero_specializationDefect_polyAffine`).
+Consequently the defect vanishes along the principal divisor of a global function on an affine
+`k`-scheme of finite type
 (`ProEtale.CondensedRing.isZero_specializationDefect_ofIdealTop_span_singleton`).
 
-The proof follows the blueprint, by induction on `N`.
+## Implementation details
+
+The proof is by induction on `N`.
 * Replacing `L` by `j_! j^* L` does not change the defect, so we may assume `Li^* L = 0`
   (`ProEtale.CondensedRing.isZero_specializationDefect_of_forall_isZero_upperStar`).
 * The defect then vanishes over a dense open `U ⊆ Z`
-  (`ProEtale.CondensedRing.exists_dense_isZero_specializationDefect`, blueprint
-  `lemma-vanishing-generic-points-principal-divisor--1`). For `N = 0` the hyperplane is a point, so
-  `U = Z`.
+  (`ProEtale.CondensedRing.exists_dense_isZero_specializationDefect`). For `N = 0` the hyperplane
+  is a point, so `U = Z`.
 * For `N + 1`, after an automorphism of `X` preserving `Z` the projection `q : X ⟶ X'` forgetting
   `X₀` is finite on `Y = Z ∖ U` (`AlgebraicGeometry.exists_isFinite_polyAffineProj`). Compactify
   `q` by `v : X ⟶ X̄ = ℙ¹_{X'}`, `q̄ : X̄ ⟶ X'`. The proper exchange along `q̄` and the induction
@@ -35,8 +36,12 @@ The proof follows the blueprint, by induction on `N`.
   restriction of `C_{X̄, Z̄}(v_! L)` to `Z` with `C_{X,Z}(L)`. So `C_{X̄, Z̄}(v_! L)` is supported
   on `Y ∪ (Z̄ ∖ Z)`, which is finite over `Z'`, and it vanishes because direct image is
   conservative on finite support
-  (`ProEtale.CondensedRing.isZero_of_isZero_rightDerivedLowerStar_of_isFinite`, blueprint
-  `lemma-nearby-cycles-constant-family`).
+  (`ProEtale.CondensedRing.isZero_of_isZero_rightDerivedLowerStar_of_isFinite`).
+* Along a principal divisor `V(h)` of an affine `V`, embed `V(h) ⊆ V` into a coordinate hyperplane
+  of an affine space by a closed immersion `a`
+  (`AlgebraicGeometry.exists_isClosedImmersion_comap_polyAffineHyperplane`); the proper exchange
+  gives `C_{𝔸, V(X_n)}(Ra_* L) ≅ Ra_{Z*} C_{V, a⁻¹ V(X_n)}(L)`, and `Ra_{Z*}` is fully faithful
+  since `a_Z` is a closed immersion.
 
 -/
 
@@ -99,8 +104,7 @@ include hk' hk'ℓ
 
 
 /-- The base case `N = 0` of `ProEtale.CondensedRing.isZero_specializationDefect_polyAffine`: the
-coordinate hyperplane of the affine line is a point, so the generic vanishing of the defect
-(`ProEtale.CondensedRing.exists_dense_isZero_specializationDefect`) is vanishing. -/
+defect vanishes for the coordinate hyperplane of the affine line. -/
 theorem isZero_specializationDefect_polyAffine_zero
     (L : Dᵇc((polyAffine k 1).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsZero (specializationDefect (polyAffine k 1) (polyAffineHyperplane k 0) k'
@@ -282,9 +286,9 @@ theorem isZero_specializationDefect_polyAffine_succ (N : ℕ)
   rw [← IdealSheafData.comap_comp, h, IdealSheafData.comap_comp,
     comap_polyAffineProj_polyAffineHyperplane, hψ]
 
-/-- **Vanishing of the defect for a coordinate hyperplane** (blueprint
-`theorem-verdier-s-theorem-specialization-zero`): for `X = 𝔸^{N+1}_k` and the coordinate hyperplane
-`Z = V(X_N)`, the defect `C_{X,Z}(L)` vanishes for every bounded constructible `L`. -/
+/-- **Vanishing of the defect for a coordinate hyperplane**: for `X = 𝔸^{N+1}_k` and the
+coordinate hyperplane `Z = V(X_N)`, the defect `C_{X,Z}(L)` vanishes for every bounded
+constructible `L`. -/
 theorem isZero_specializationDefect_polyAffine (N : ℕ)
     (L : Dᵇc((polyAffine k (N + 1)).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsZero (specializationDefect (polyAffine k (N + 1)) (polyAffineHyperplane k N) k'
@@ -295,10 +299,7 @@ theorem isZero_specializationDefect_polyAffine (N : ℕ)
 
 
 /-- The defect vanishes for the inverse image of the coordinate hyperplane under a closed immersion
-`a : V ⟶ 𝔸^{n+1}_k`: the proper exchange gives
-`C_{𝔸, V(X_n)}(Ra_* L) ≅ Ra_{Z*} C_{V, a⁻¹ V(X_n)}(L)`, the left side vanishes by
-`ProEtale.CondensedRing.isZero_specializationDefect_polyAffine`, and `Ra_{Z*}` is fully faithful
-since `a_Z` is a closed immersion. -/
+`a : V ⟶ 𝔸^{n+1}_k`. -/
 theorem isZero_specializationDefect_comap_polyAffineHyperplane {V : Over (Spec (.of k))}
     [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom] {n : ℕ}
     (a : V ⟶ polyAffine k (n + 1)) [IsClosedImmersion a.left]
@@ -324,10 +325,7 @@ theorem isZero_specializationDefect_comap_polyAffineHyperplane {V : Over (Spec (
     (specializationDefect V ((polyAffineHyperplane k n).comap a.left) k' Λ L.obj))
   exact h₁.of_iso e₁.symm
 
-/-- The defect vanishes for a principal divisor `V(h)` of an affine `k`-scheme of finite type
-(proof of blueprint `theorem-verdier-s-theorem-specialization-zero--1`): embed `V(h) ⊆ V` into a
-coordinate hyperplane of an affine space by a closed immersion
-(`AlgebraicGeometry.exists_isClosedImmersion_comap_polyAffineHyperplane`). -/
+/-- The defect vanishes for a principal divisor `V(h)` of an affine `k`-scheme of finite type. -/
 theorem isZero_specializationDefect_ofIdealTop_span_singleton {V : Over (Spec (.of k))}
     [IsAffine V.left] [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
     (h : Γ(V.left, ⊤)) (L : Dᵇc(V.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :

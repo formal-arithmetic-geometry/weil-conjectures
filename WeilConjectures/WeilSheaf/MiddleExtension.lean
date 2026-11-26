@@ -19,7 +19,7 @@ public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
 
 If `F` is a lisse Weil sheaf on a smooth curve `C₀` over `k₀` and `j : U₀ ⟶ C₀` is a dense
 quasi-compact open immersion, then the unit `F ⟶ j_* j^* F` of the adjunction `j^* ⊣ j_*` is an
-isomorphism (blueprint: `lemma-boundary-stalk--2`). The étale finite-coefficient version is
+isomorphism. The étale finite-coefficient version is
 `AlgebraicGeometry.Etale.isIso_unit_upperStarLowerStarAdjunction`.
 
 On the geometric fibres this is
@@ -33,8 +33,7 @@ every dense open subset.
 ## Main statements
 
 - `AlgebraicGeometry.WeilSheaf.IsLisse.isIso_upperStarLowerStarAdjunction_unit_app` and
-  `AlgebraicGeometry.WeilSheaf.IsLisse.nonempty_iso_directImage_upperStar`: blueprint
-  `lemma-boundary-stalk--2`.
+  `AlgebraicGeometry.WeilSheaf.IsLisse.nonempty_iso_directImage_upperStar`: `F ≅ j_* j^* F`.
 -/
 
 @[expose] public section
@@ -44,8 +43,7 @@ universe u
 open CategoryTheory Topology TopologicalSpace
 
 /-- In a Noetherian space, a dense open subset contains the generic points of all irreducible
-components: the complement of the other components is a nonempty open subset of a component,
-which meets the dense open. -/
+components. -/
 theorem genericPoints_subset_of_isOpen_of_dense {α : Type*} [TopologicalSpace α]
     [NoetherianSpace α] {U : Set α} (hU : IsOpen U) (hd : Dense U) : genericPoints α ⊆ U := by
   intro c hc
@@ -76,9 +74,7 @@ theorem Scheme.genericPoints_subset_of_isOpen_of_dense {X : Scheme.{u}} [IsLocal
 variable {k₀ : Type u} [Field k₀]
 
 /-- The base change `j̄ : Ū ⟶ C̄` to the algebraic closure of an open immersion `j : U ⟶ C` with
-dense image into a `k₀`-scheme locally of finite type has dense image: its image is the preimage
-of the image of `j` under the flat projection `C̄ ⟶ C`, which maps generic points of `C̄` to
-generic points of `C`, and these lie in the dense open image of `j`. -/
+dense image into a `k₀`-scheme locally of finite type has dense image. -/
 theorem Scheme.Hom.dense_range_geometricFiberMap {U C : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀))] (j : U ⟶ C) [IsOpenImmersion j]
@@ -118,10 +114,7 @@ variable [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
 /-- **Recovery from a dense lisse open**, strong form. Let `C₀` be a smooth curve over `k₀`,
 `j : U₀ ⟶ C₀` a quasi-compact open immersion with dense image and `F` a lisse Weil sheaf on
-`C₀`. Then the unit `F ⟶ j_* j^* F` of the adjunction `j^* ⊣ j_*` is an isomorphism: on the
-geometric fibres this is
-`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app`.
-(blueprint: `lemma-boundary-stalk--2`) -/
+`C₀`. Then the unit `F ⟶ j_* j^* F` of the adjunction `j^* ⊣ j_*` is an isomorphism. -/
 theorem WeilSheaf.IsLisse.isIso_upperStarLowerStarAdjunction_unit_app {U C : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
@@ -140,11 +133,7 @@ theorem WeilSheaf.IsLisse.isIso_upperStarLowerStarAdjunction_unit_app {U C : Sch
 
 /-- **Recovery from a dense lisse open.** Let `C₀` be a smooth curve over `k₀`, `j : U₀ ⟶ C₀` a
 quasi-compact open immersion with dense image and `F` a lisse Weil sheaf on `C₀`. Then
-`F ≅ j_* j^* F`: on `U₀` this is clear, and at a removed point `x` the stalk of `j_* j^* F` is
-the inertia invariants `(F_η̄)^{I_x} = F_x̄`, the inertia acting trivially since `F` is lisse at
-`x`. The isomorphism is the unit of `j^* ⊣ j_*`
-(`AlgebraicGeometry.WeilSheaf.IsLisse.isIso_upperStarLowerStarAdjunction_unit_app`).
-(blueprint: `lemma-boundary-stalk--2`) -/
+`F ≅ j_* j^* F`. -/
 theorem WeilSheaf.IsLisse.nonempty_iso_directImage_upperStar {U C : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]

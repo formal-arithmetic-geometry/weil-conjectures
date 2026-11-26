@@ -19,9 +19,22 @@ import WeilConjectures.RingTheory.FiniteTypeDomainDimensionTrdeg
 /-!
 # The maximum dimension of minimal components below a prime
 
-Source: Stacks Project, Algebra, proof of Tag 00P1. The proof combines the common
-maximal-chain length theorem for finite type domains (Tag 00OS) with the dimension
-and transcendence degree theorem (Tag 00P0).
+For a prime `p` of a finite type algebra `S` over a field, with `dim S_p = d` and
+`trdeg κ(p) = r`, every minimal component `S/q` below `p` has dimension at most `d + r`, and
+some minimal component attains this bound.
+
+## Implementation details
+
+The residue field of `p` is the fraction field of `S/p`, so `dim S/p = r` (Stacks 00P0) and
+every maximal chain above `p` has length `r` (Stacks 00OS). A longest chain from `q` to `p`, of
+length `s ≤ d`, concatenated with a maximal chain above `p` is a maximal chain of the domain
+`S/q`, so `dim S/q = s + r`. Since `d` is finite, some chain below `p` has length exactly `d`, and
+it starts at a minimal prime.
+
+## References
+
+* [Stacks, Tag 00P1] (proof)
+* [Stacks, Tags 00OS, 00P0]
 -/
 
 @[expose] public section
@@ -163,21 +176,6 @@ private theorem domain_dimension_sum
   rfl
 
 /-- The dimension bound for every minimal component below a prime.
-Source: Stacks Project, Algebra, proof of Tag 00P1, lines 28238-28267.
-(blueprint: lem-weil-pbc-minimal-component-dimension-maximum-bound).
-Proof: put A = S/q and let P be the image of p in A. Ideal correspondence
-identifies primes of A with primes of S containing q. The residue field of P
-is canonically the residue field of p; it is the fraction field of A/P = S/p.
-Thus the finite type domain dimension/transcendence-degree theorem gives
-`dim(S/p) = r`. The maximal-chain theorem for that domain supplies a saturated
-chain from p to a maximal ideal of S of length r.
-Since hd bounds every chain below p by d, choose a longest chain from q to p,
-of length s <= d. Such a chain exists: q <= p, and the set of possible natural
-lengths is nonempty and bounded by d. It is saturated, and its first member is q.
-Append the chosen chain above p, counting p only once. In the domain A, the
-resulting chain starts at zero, ends at a maximal ideal, and is saturated, hence
-is a maximal chain. The finite type domain maximal-chain theorem says its length
-s+r is dim(A). Therefore dim(S/q) = s+r <= d+r.
 -/
 theorem minimal_component_dimension_maximum_bound
     {k : Type u} [Field k] {S : Type v} [CommRing S] [Algebra k S]
@@ -208,22 +206,6 @@ theorem minimal_component_dimension_maximum_bound
   exact WithBot.coe_mono (by simpa only [Nat.cast_add, add_comm] using add_le_add_right hh r)
 
 /-- Some minimal component below a prime attains the dimension bound.
-Source: Stacks Project, Algebra, proof of Tag 00P1, lines 28238-28267.
-(blueprint: lem-weil-pbc-minimal-component-dimension-maximum-attained).
-Proof: localization prime correspondence identifies the lengths of chains
-below p with those in S_p. Since hd is the finite natural number d, the supremum
-of these lengths is attained: if no chain had length d, all lengths would be
-at most d-1 (and for d=0 the single-prime chain already attains it).
-A length-d chain below p ends at p and starts at a minimal prime q of S;
-otherwise appending p or prepending a smaller prime would contradict the bound d.
-It is saturated for the same reason. Ideal correspondence gives a saturated
-chain from zero to the image of p in the finite type domain S/q.
-The residue field of p is the fraction field of S/p. The finite type domain
-dimension/transcendence-degree theorem and hr give dim(S/p) = r, and the
-maximal-chain theorem supplies a saturated chain of length r above p ending
-at a maximal ideal. Append this to the length-d chain, counting p only once.
-It is a maximal chain in S/q. The domain maximal-chain theorem makes its length
-d+r equal to dim(S/q), giving the required q, its primality and minimality.
 -/
 theorem minimal_component_dimension_maximum_attained
     {k : Type u} [Field k] {S : Type v} [CommRing S] [Algebra k S]

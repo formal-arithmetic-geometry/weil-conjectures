@@ -35,8 +35,7 @@ X' --p'--> S'            X' --uX--> X            S' --u---> S
 whose top face `sq'` is the pulled-back square. Pasting the faces `bT` and `sq'`, and the faces
 `sq` and `bX`, give the same composite square `Y' ⟶ T` over `X' ⟶ S`, so the pasting law
 `AlgebraicGeometry.Etale.baseChange_app_paste_horiz_of_eq` computes its exchange morphism in two
-ways (`AlgebraicGeometry.Etale.baseChange_app_cube`, blueprint
-`corollary-open-direct-image-over-field--2`):
+ways (`AlgebraicGeometry.Etale.baseChange_app_cube`):
 
 `p'^*(BC_bT) ≫ BC_sq'(uT^* K) = uX^*(BC_sq K) ≫ BC_bX(e^* K)`
 
@@ -70,8 +69,7 @@ variable {X S T Y X' S' T' Y' : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y �
   {u : S' ⟶ S} {uT : T' ⟶ T} {uX : X' ⟶ X} {uY : Y' ⟶ Y} {g' : T' ⟶ S'} {p' : X' ⟶ S'}
   {e' : Y' ⟶ T'} {h' : Y' ⟶ X'}
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`: base change maps are compatible with
-further base change.
+/-- Base change maps are compatible with further base change.
 
 For a square `sq` on `p : X ⟶ S` along `g : T ⟶ S` and a cube over `u : S' ⟶ S` with top face
 `sq'` (the pulled-back square) and side faces `bT` (on `g` along `u`) and `bX` (on `h` along
@@ -288,8 +286,7 @@ private lemma isIso_baseChangeHomologyMap_upperStar_iff (sq' : IsPullback e' h' 
       ((((uT)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0)) _ _ _).symm.trans
       (isIso_map_app_comp_obj_iff _ _ _ _ _))
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`, for the degree-`q` base change maps of a
-sheaf `F`: in a cube of cartesian squares over `u : S' ⟶ S` as in
+/-- In a cube of cartesian squares over `u : S' ⟶ S` as in
 `AlgebraicGeometry.Etale.baseChange_app_cube`, if the degree-`q` base change maps of the faces `bT`
 (at `F`) and `bX` (at `e⁻¹ F`) are isomorphisms, then the degree-`q` base change map
 `p'⁻¹ R^q g'_* (uT⁻¹ F) ⟶ R^q h'_* e'⁻¹ uT⁻¹ F` of the pulled-back square is an isomorphism if and

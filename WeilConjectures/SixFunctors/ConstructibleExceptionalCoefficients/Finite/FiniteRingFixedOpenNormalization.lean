@@ -8,7 +8,14 @@ module
 public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Finite.FiniteRingFixedCoordinates
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Finite.FiniteRingOpenRestrictionCoordinates
 
-/-! # Open-unit normalization of the explicit finite proper/open comparison -/
+/-! # Open-unit normalization of the explicit finite proper/open comparison
+
+## References
+
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 03D6]
+* [Stacks, Tag 0F7B]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -48,28 +55,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra (Padic l) E]
   [FiniteDimensional (Padic l) E] (n : ℕ)
 
 /-- Transport of the canonical proper/open map preserves the open-adjunction transpose.
-This is only the open triangle: no outer proper map or compact-support coordinate occurs.
-Source: compactification-coherence proof, first paragraph; Stacks 03DI, 03D6 and 0F7B
-(blueprint: lem-sf-finite-ring-fixed-open-normalization).
-
-Proof: first work at the retained etale antecedent O.L. The proper/open map there
-is the transpose of the inverse proper restriction identification. Its restriction
-identification is the inverse-image compositor followed by the proper counit;
-properOpenIdentification_unit gives precisely its equation with the open unit.
-Transport this identity through the comparison inverse image. The extension-by-zero
-comparison is the mate of the pullback comparison, and comparisonDirectImage is
-its counit-normalized mate, so their unit and counit equations transport the identity.
-The canonical bounded-below inclusion comparisons preserve those same derived
-units and counits. This proves the equation for properOpenProEtaleIso.
-Conjugate along fixedOriginWitness to obtain the equation for fixedRefinementOpen.
-Finally finitePullbackIso is left-adjoint uniqueness for finiteDirectImage_eq,
-and finiteOpenIso is left-adjoint uniqueness for the open adjunction after this
-pullback comparison. Their unit equations identify the transported open units.
-The section-normalized module compositor underlying geometricPullComposition
-identifies the transported inverse-image compositor. Substitute these comparisons
-and cancel their inverse pairs. The resulting map is exactly finiteFixedRefinementOpenIso
-and the resulting restriction is refinementRestriction. Identity maps, empty opens,
-and zero objects use the same triangle and inverse-pair identities. -/
+This is only the open triangle: no outer proper map or compact-support coordinate occurs. -/
 theorem finiteFixedRefinementOpenIso_normalization
     {X Y : Scheme.{w}} {f : X ⟶ Y} {c d : Compactification f}
     (r : c.Refinement d)

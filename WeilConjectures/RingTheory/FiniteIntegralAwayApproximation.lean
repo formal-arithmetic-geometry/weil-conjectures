@@ -15,8 +15,12 @@ import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 /-!
 # Finite approximation of an integral-closure localization
 
-Source: Stacks Project, Tag 09XI, proof of (5) implies (2), construction of B''.
-(blueprint: lem-weil-pbc-finite-integral-away-approximation)
+A localization isomorphism from the integral closure of `A` in a finite type `A`-algebra
+descends to a module-finite subalgebra.
+
+## References
+
+* [Stacks, Tag 09XI]
 -/
 
 @[expose] public section
@@ -26,22 +30,7 @@ universe u v
 namespace Algebra
 
 /-- A principal localization isomorphism from the integral closure descends to a finite
-subalgebra, retaining an idempotent congruence for its parameter.
-
-Source: Stacks Project, Tag 09XI, proof of (5) implies (2), construction of B''.
-(blueprint: lem-weil-pbc-finite-integral-away-approximation)
-
-Proof:
-1. Choose finitely many algebra generators x of B. Surjectivity of the localization
-map gives y in the integral closure and n with y = g^n x in B, for each generator.
-2. Express g*g-g as a finite sum of elements of I times integral-closure elements.
-Generate an A-subalgebra by g, all y, and the elements in this expression. Their
-integrality and finiteness make this subalgebra D module-finite over A.
-3. The recorded expression gives b*b-b in ID, where b is g regarded in D, so its
-quotient image is idempotent. Localized inclusion is injective, since any equality
-of fractions can be cleared in B and hence in its subring D. It is surjective:
-the image contains the inverse of g and the generators x=y/g^n, so every fraction
-in B[1/g] is in its image. -/
+subalgebra, retaining an idempotent congruence for its parameter. -/
 theorem exists_finite_integral_away_approximation
     (A : Type u) (B : Type v) [CommRing A] [CommRing B] [Algebra A B]
     [Algebra.FiniteType A B] (I : Ideal A) (g : integralClosure A B)

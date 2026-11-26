@@ -15,7 +15,21 @@ import WeilConjectures.RingTheory.GlobalCompleteIntersectionLocalRegularSequence
 
 /-! # Regularity of complete-intersection equations in the polynomial closed fibre
 
-Source: Stacks Project, Algebra, Tag 00SV, first paragraph of the proof, using 00SC.
+The equations of a relative complete intersection `R[x_1, …, x_n]/(f_1, …, f_c)` form a regular
+sequence in the closed fibre of `R_p → R[x]_Q` at every prime `Q` containing them.
+
+## Implementation details
+
+The fibre ring is `κ(p)[x]`, and base change (Tag 00SS) preserves the relative complete
+intersection, whose fibre over `κ(p)` has dimension `n - c`. The field case (Tag 00SC) gives
+regularity at the fibre prime, and the fibre local ring isomorphism (Remark 0H9M) identifies this
+ring with the closed fibre. No Noetherian hypothesis is needed.
+
+## References
+
+* [Stacks, Tag 00SV] (first paragraph of the proof)
+* [Stacks, Tags 00SC, 00SS]
+* [Stacks, Remark 0H9M]
 -/
 
 @[expose] public section
@@ -55,26 +69,7 @@ private theorem fieldCase
   exact Nat.sub_add_cancel hc
 
 /-- The equations are regular in the closed fibre of the polynomial local map, before
-lifting regularity to the polynomial local ring itself.
-Source: Stacks Project, Algebra, Tag 00SV, first paragraph of the proof, using 00SC.
-(blueprint: lem-weil-pbc-relative-ci-closed-fiber-regular-sequence).
-
-Proof: Put `P = R[x]` and contract `Q` to `p` in `R`. The fibre-prime correspondence
-provides a prime of `κ(p) ⊗[R] P` contracting to `Q`. Polynomial scalar extension
-identifies this fibre ring with `κ(p)[x]`, taking each equation to its coefficientwise
-residue-field image. The corresponding prime contains these images, so the quotient
-by their ideal is nonzero. Base change (00SS) preserves the specified relative complete
-intersection, and its only nonempty fibre over the field `κ(p)` has dimension `n-c`,
-with `c ≤ n`. Equivalently its dimension plus `c` is `n`. Apply the field-case theorem
-00SC to obtain regularity at the corresponding polynomial fibre prime. The natural
-fibre-local-ring isomorphism (0H9M) identifies this ring with the closed fibre of the
-map `R_p → P_Q`. Indeed the extended maximal ideal of `R_p` equals the extension of
-`p`, since the denominators in `R \ p` become units. The isomorphism carries each
-closed-fibre equation to the equation used in 00SC; transport regularity through it.
-For no equations the fibre local ring is still nonzero; if the original quotient is
-zero no prime containing all equations exists. No Noetherian hypothesis is needed for
-this identification and field-case argument.
--/
+lifting regularity to the polynomial local ring itself. -/
 theorem isRegular_closedFiber_of_relativeCompleteIntersection
     {R : Type u} [CommRing R] {n c : ℕ}
     (f : Fin c → MvPolynomial (Fin n) R)

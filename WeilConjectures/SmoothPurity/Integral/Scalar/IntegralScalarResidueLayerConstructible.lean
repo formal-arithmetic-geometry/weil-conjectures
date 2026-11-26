@@ -24,19 +24,18 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 This is the constructibility clause of the residue-layer argument.  It isolates the
 finite-residue scalar-extension and local finite-model comparison from the support
 clause of the parent theorem.
-Source: Stacks, sites-modules, lemma-tensor-product-locally-constant; proetale,
-lemma-constructible-serre; parent finite-filtration argument.
-(blueprint: lem-sf-integral-scalar-residue-layer-constructible).
 
-Proof: the quotient of two consecutive powers of the target uniformizer is the
-finite target residue field.  Multiplication by the appropriate power of the
-uniformizer identifies the quotient with that residue field; cancellation in the
-DVR proves injectivity.  The coefficient map factors through the source residue
-field.  Balanced tensor associativity identifies the resulting layer complex with
-finite-field scalar extension of the source residue reduction.  Exact finite-field
-scalar extension preserves the given finite local models, and restriction to the
-finite quotient ring preserves those models.  Derived homology agrees with the
-homology of the K-flat representative.
+## Implementation details
+
+Multiplication by a power of the target uniformizer identifies the layer quotient with
+the finite target residue field. The coefficient map factors through the source residue
+field, so balanced tensor associativity identifies the layer complex with finite-field
+scalar extension of the source residue reduction, which preserves the given finite local
+models.
+
+## References
+
+* Stacks Project, Tag 093V
 -/
 
 @[expose] public noncomputable section
@@ -206,8 +205,7 @@ private noncomputable def finiteFieldConstantRingMap
   (constantSheaf (ProEt.topology Y) CommRingCat.{u + 1}).map
     (CommRingCat.ofHom (RingHom.ulift.{u + 1, u + 1} f))
 
-/-- Tensor extension of pro-etale module sheaves along a finite-field map.
-Source: Stacks Project, Tag 093V. -/
+/-- Tensor extension of pro-etale module sheaves along a finite-field map. -/
 private noncomputable def finiteFieldScalarExtension
     (Y : AlgebraicGeometry.Scheme.{u}) {k k' : Type u} [Field k] [Field k']
     (f : k →+* k') :
@@ -216,7 +214,6 @@ private noncomputable def finiteFieldScalarExtension
   pbcExtend (finiteFieldConstantRingMap Y f)
 
 /-- Scalar extension is additive, hence preserves zero morphisms.
-Source: Stacks Project, Tag 093V, lemma-tensor-product-locally-constant;
 finite-field coefficient specialization. -/
 private noncomputable instance finiteFieldScalarExtension_additive
     (Y : AlgebraicGeometry.Scheme.{u}) {k k' : Type u} [Field k] [Field k']
@@ -313,10 +310,7 @@ variable (l : ℕ) [Fact l.Prime]
   (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
   (ι : E →ₐ[Padic l] L) (Y : AlgebraicGeometry.Scheme.{u})
 
-/-- The finite-model constructibility part of the residue-layer estimate.
-Source: Stacks, sites-modules, lemma-tensor-product-locally-constant; proetale,
-lemma-constructible-serre; parent finite-filtration argument.
-(blueprint: lem-sf-integral-scalar-residue-layer-constructible). -/
+/-- The finite-model constructibility part of the residue-layer estimate. -/
 theorem integralScalarResidueLayer_constructible
     (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
     (P : (integralOperationsGoodComplex l E Y).FullSubcategory)

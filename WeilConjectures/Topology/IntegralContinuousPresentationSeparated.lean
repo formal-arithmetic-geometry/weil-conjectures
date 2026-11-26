@@ -15,6 +15,17 @@ public import Mathlib.RingTheory.AdicCompletion.Noetherian
 The compact space of solutions of a finite system of integral linear equations
 has a continuous section over an extremally disconnected compact space.
 This is the compact-solution substep of ordinary integral quotient separation.
+
+## Implementation details
+
+At a point of the test space, the approximation hypothesis makes the class of `b` in the
+cokernel of the matrix infinitely divisible by `r`, so it vanishes by the Krull intersection
+theorem. The space of pointwise solutions is compact Hausdorff and surjects onto the test
+space, and projectivity of extremally disconnected compact spaces gives a continuous section.
+
+## References
+
+* Hemo, Richarz, Scholbach, *Constructible sheaves on schemes*, Proposition 5.1.
 -/
 
 @[expose] public section
@@ -57,20 +68,7 @@ private theorem exists_matrix_solution
   simpa [ContinuousMap.coe_sum, hs] using (t s).property i
 
 /-- A continuous finite presentation on a Stonean test is separated for powers
-of an element of the maximal ideal of a compact Noetherian local ring.
-
-Source: the finite-presentation substep of ordinary integral quotient reconstruction,
-motivated by Hemo--Richarz--Scholbach, Proposition 5.1. The argument here combines
-Krull intersection with projectivity of extremally disconnected compact spaces.
-(blueprint: lem-sp-integral-continuous-presentation-separated).
-
-Proof. At a point of the test space, pass to the finite module which is the
-cokernel of the matrix. The approximation hypothesis makes the class of b
-infinitely divisible by r. Krull intersection makes this class zero. The
-space of all pointwise solutions is a closed subspace of S times a finite
-power of R, hence compact Hausdorff. Its projection to S is surjective.
-Projectivity of the extremally disconnected compact space S gives a
-continuous section, whose coordinates are the required solution. -/
+of an element of the maximal ideal of a compact Noetherian local ring. -/
 theorem exists_matrix_solution_of_forall_pow
     {S : Type*} {R : Type} [TopologicalSpace S] [CompactSpace S] [T2Space S]
     [ExtremallyDisconnected S] [CommRing R] [TopologicalSpace R]

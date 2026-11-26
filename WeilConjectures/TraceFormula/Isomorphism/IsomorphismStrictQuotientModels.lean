@@ -72,9 +72,11 @@ public import WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosCompatibi
 
 /-! # Multiplication and product comparison on entire strict quotient cones
 
-Source: blueprint main-20261015, sec-trace-formula/sk-d-weil/
-prop-trf-rational-frobenius-integral-model.proof.md, (2)--(3); Stacks Tags 0941 and 08TC
-(blueprint: def-trf-isomorphism-strict-quotient-models).
+We define the strict quotient towers, the inverse image of a complex along a scheme
+isomorphism, the quotient difference maps and the canonical product comparison used to compare
+multiplication with the product comparison on strict quotient cones.
+
+## Implementation details
 
 The positive exponent is n+1. The finite pullbacks and quotient transitions are the
 published strict constructions. Multiplication is specified on their sheafified
@@ -82,6 +84,10 @@ unit generators; bundled linearity gives all scalar multiples. The two existing
 mapping-cocone projections specify the product comparison on both coordinates,
 including zero off-diagonal entries. The completion comparison is normalized on
 every simultaneous quotient presentation through the existing K-injective-normalized Roos model.
+
+## References
+
+* Stacks Project, Tags 0941, 08TC
 -/
 
 @[expose] public noncomputable section
@@ -103,34 +109,26 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
 
-/-- The actual strict quotient tower D, functorial in the original complex.
-Source: blueprint rational-frobenius-integral-model (2); Stacks 06YY and 0941
-(blueprint: def-trf-isomorphism-strict-quotient-models). -/
+/-- The actual strict quotient tower D, functorial in the original complex. -/
 def trfQuotientTowerFunctor (W : Scheme.{t}) :
     CochainComplex (integralTowerModules l E W) ℤ ⥤
       ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l E W) ℤ :=
   (Functor.ofOpSequence (X := fun n ↦ unrestrictedIntegralComplexFunctor l E W n)
     (unrestrictedIntegralTransition l E W)).flip
 
-/-- Termwise completed inverse image, with scalar action through c inverse.
-Source: blueprint rational-frobenius-integral-model (2); Stacks 03D6
-(blueprint: def-trf-isomorphism-strict-quotient-models). -/
+/-- Termwise completed inverse image, with scalar action through c inverse. -/
 @[reducible]
 def trfInverseImageComplex {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g] :=
   (inverseImageIntegralModules l E g).mapHomologicalComplex (.up ℤ)
 
-/-- Postcomposition on strict towers, retaining their transition maps.
-Source: blueprint rational-frobenius-integral-model (2); Stacks 0941
-(blueprint: def-trf-isomorphism-strict-quotient-models). -/
+/-- Postcomposition on strict towers, retaining their transition maps. -/
 @[reducible]
 def trfInverseImageTower {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g] :=
   (Functor.whiskeringRight ℕᵒᵖ
     (CochainComplex (integralTowerModules l E Y) ℤ)
     (CochainComplex (integralTowerModules l E X) ℤ)).obj (trfInverseImageComplex l E g)
 
-/-- The existing difference 1-s on the product of the quotient tower D(Q).
-Source: blueprint rational-frobenius-integral-model (2); Stacks 08TC
-(blueprint: def-trf-isomorphism-strict-quotient-models). -/
+/-- The existing difference 1-s on the product of the quotient tower D(Q). -/
 @[reducible]
 def trfQuotientDifference (W : Scheme.{t})
     (Q : CochainComplex (integralTowerModules l E W) ℤ) :=
@@ -138,9 +136,7 @@ def trfQuotientDifference (W : Scheme.{t})
     (K := fun n : ℕ ↦ ((trfQuotientTowerFunctor l E W).obj Q).obj (op n))
     (integralOperationsTowerStep ((trfQuotientTowerFunctor l E W).obj Q))
 
-/-- The same difference on GD(Q), with the actual inverse-image transitions.
-Source: blueprint rational-frobenius-integral-model (2); Stacks 08TC
-(blueprint: def-trf-isomorphism-strict-quotient-models). -/
+/-- The same difference on GD(Q), with the actual inverse-image transitions. -/
 @[reducible]
 def trfInverseQuotientDifference {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
     (Q : CochainComplex (integralTowerModules l E Y) ℤ) :=
@@ -150,9 +146,7 @@ def trfInverseQuotientDifference {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
     (integralOperationsTowerStep
       ((trfInverseImageTower l E g).obj ((trfQuotientTowerFunctor l E Y).obj Q)))
 
-/-- The canonical product arrow phi, characterized by its product projections.
-Source: blueprint rational-frobenius-integral-model (2); Stacks 0941
-(blueprint: def-trf-isomorphism-strict-quotient-models). -/
+/-- The canonical product arrow phi, characterized by its product projections. -/
 @[reducible]
 def trfQuotientProductComparison {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
     (Q : CochainComplex (integralTowerModules l E Y) ℤ) :=
@@ -166,9 +160,7 @@ adjunction-coherent presentations. The whole-system adjunction coherence fixes e
 before taking a limit.
 The section formula fixes the strict tower identification a to the actual finite
 comparison kappa. The final
-formula is its total-limit/Roos realization, including the specified comparison e.
-Source: blueprint rational-frobenius-integral-model (2)--(3); Stacks 06YY and 0941
-(blueprint: def-trf-isomorphism-strict-quotient-models). -/
+formula is its total-limit/Roos realization, including the specified comparison e. -/
 def TrfCompletionRoosNormalized (W : Scheme.{t})
     (S : CoefficientDerivedSystemCalculus l E W)
     (r : IntegralComparisonRoosModel l E W)

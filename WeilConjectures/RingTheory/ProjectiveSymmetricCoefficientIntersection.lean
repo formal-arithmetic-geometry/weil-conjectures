@@ -13,9 +13,23 @@ public import Mathlib.RingTheory.Ideal.Cotangent
 
 /-! # The coefficient ideal intersection in a projective symmetric presentation
 
-Source: Stacks Project, Smoothing Ring Maps, Tag 07CE, equation-sequence;
-More on Algebra, Tags 07CX and 07D4, specialized to a split symmetric presentation.
-(blueprint: lem-weil-pbc-projective-symmetric-coefficient-intersection)
+For a projective symmetric presentation, the square of the presentation kernel intersects the
+coefficient ideal in their product.
+
+## Implementation details
+
+Put `A = P/I`, `M = I/I²`, `Q = P[y]`, `B = A[y]`, `π : Q → B`, `H = ker π` and `J = ker φ`.
+Projectivity splits `q`, and the symmetric-algebra universal property gives a section
+`σ : Sym_A M → B`. Lifting `σ(α(y_j))` through `π` defines `β : Q → Q` fixing coefficients with
+`β(J) ⊆ H`, `H ⊆ J` and `β(x) - x ∈ J`; for `x ∈ H` one gets `β(x) - x ∈ HJ`. Hence
+`H ∩ J² ⊆ HJ`, and the converse inclusion holds since `H ≤ J`. No nonzero-ring hypothesis or
+nonempty basis is used.
+
+## References
+
+* [Stacks, Tag 07CE]
+* [Stacks, Tag 07CX]
+* [Stacks, Tag 07D4]
 -/
 
 @[expose] public section
@@ -24,26 +38,7 @@ universe u
 
 namespace Algebra
 
-/-- The square of the presentation kernel intersects the coefficient ideal in their product.
-Source: Stacks Project, More on Algebra, Tags 07CX and 07D4, as used in the proof of
-Smoothing Ring Maps, Tag 07CE, equation-sequence.
-(blueprint: lem-weil-pbc-projective-symmetric-coefficient-intersection)
-
-Proof (direct algebraic argument, F4). Put A = P/I, M = I/I², Q = P[y],
-B = A[y], π : Q → B, H = ker π, and J = ker φ. Projectivity splits q by a
-linear section s. The linear map k : A^m → B taking basis vectors to variables
-satisfies αk = ιq. The symmetric-algebra universal property therefore extends ks
-to σ : Sym_A M → B with ασ = id. Lift each σ(α(y_j)) through the surjective
-coefficient reduction π, and substitute these lifts to define β : Q → Q, fixing
-coefficients. Then πβ = σαπ and φβ = φ. Hence β(J) is contained in H, H is
-contained in J, and β(x) - x is in J for every x in Q.
-If x is in H, all its coefficients reduce to zero. Expanding x as a finite sum
-of coefficient constants times monomials shows β(x) - x is in HJ: β fixes the
-constants, and the difference on each monomial belongs to J.
-For x in H ∩ J², β(x) belongs to H², hence HJ. Subtracting β(x) - x shows
-x belongs to HJ. Conversely HJ is contained in H and in J² because H ≤ J.
-No nonzero-ring hypothesis or nonempty basis is used, so the proof includes
-I = P and m = 0. -/
+/-- The square of the presentation kernel intersects the coefficient ideal in their product. -/
 theorem projective_symmetric_coefficient_intersection
     (P : Type u) [CommRing P] (I : Ideal P) (m : ℕ)
     [Module.Projective (P ⧸ I) I.Cotangent]

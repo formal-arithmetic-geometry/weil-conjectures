@@ -12,8 +12,21 @@ import WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryQuotientTensor
 
 /-! # A functorial strict complex model of normalized coefficient reduction
 
-Source: Stacks 06YS, 06YY, 07A4 and 0941.
-(blueprint: lem-coef-strict-reduction-functor-model).
+## Implementation details
+
+The ordinary sequence projection pullback is applied to each term and differential, and the
+strict scalar systems are transported to modules on the sequence site; its scalar tensor maps
+assemble naturally over the total coproducts. Pullback preserves flat-term K-flat complexes, and
+its universal left-derived counit gives the comparison. Normalization is checked on local tensor
+generators in the strict system category before localization; it is not inferred from equality
+of finite evaluations of derived system maps.
+
+## References
+
+* [Stacks, Tag 06YS]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public section
@@ -37,9 +50,7 @@ attribute [local irreducible] DerivedCategory _root_.instCategoryDerivedCategory
   CochainComplex.IsKFlatIndependentCoefficients SheafOfModules.IsFlatOnSite
 
 /-- A strict complex presentation, with a binary normalization and ordinary chain
-coherence. No associator of either derived closed structure occurs in these data.
-Source: Stacks 07A4 and 0941
-(blueprint: lem-coef-strict-reduction-functor-model). -/
+coherence. No associator of either derived closed structure occurs in these data. -/
 structure CoefficientStrictReductionFunctorModel
     (R : CoefficientDerivedSystemReduction l E W) where
   /-- The ordinary pullback applied to complexes, before localization. -/
@@ -90,28 +101,7 @@ structure CoefficientStrictReductionFunctorModel
         (preserves P hP fP) (preserves Q hQ fQ)).hom
 
 /-- The pairwise strict reduction normalization has a functorial complex realization.
-This is a binary model assertion; it makes no claim about derived associators.
-
-Source: Stacks, sites-cohomology.tex, Tag 07A4, proof of
-`lemma-pullback-tensor-product`, together with the sequence projection of Tag 0941.
-(blueprint: lem-coef-strict-reduction-functor-model).
-
-Proof: apply the ordinary sequence projection pullback to each term and differential
-and transport the strict scalar systems to modules on the sequence site. Its ordinary
-scalar tensor maps assemble naturally over the total coproducts. On a triple summand
-both composites insert the scalar unit in each factor and reassociate without a
-permutation; sheaf tensor generation and coproduct extensionality give the displayed
-ordinary chain equation. Pullback preserves flat-term K-flat complexes. Its universal
-left-derived counit, transported to R.reduction by the normalized reduction/limit
-adjunction, gives comparison and computes. On a pair of flat-term K-flat inputs,
-compare these functorial presentations with those in hR using the normalized ordinary
-pullback/limit adjunction. The finite projection equations identify their ordinary
-scalar units and transition adjuncts. The strict maps then agree on every local tensor
-generator before localization. The last square of hR, transported along these
-presentation comparisons, is precisely normalization. This argument takes place in
-the strict system category before localization; it does not infer equality of derived
-system maps merely from equality of their finite evaluations. The construction also
-applies to the zero complex and the empty scheme. -/
+This is a binary model assertion; it makes no claim about derived associators. -/
 theorem coefficientStrictReductionFunctorModel
     (R : CoefficientDerivedSystemReduction l E W)
     (hR : CoefficientReductionTensorNormalization l E W R) :

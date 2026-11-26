@@ -14,8 +14,23 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 
 /-! # Ordinary pullback of one finite quotient module
 
-Source: Stacks Project, Modules on Sites, lemma-tensor-product-pullback (03EL),
-and Cohomology on Sites, Tags 06YY and 07A4. -/
+We compare the ordinary pullback of a single finite quotient `Q_n ⊗ M` with the finite
+quotient of the pullback, normalized on adjunction-unit generators.
+
+## Implementation details
+
+The normalized quotient unit `M → Q_n ⊗ M` is the cokernel of multiplication by the
+`(n+1)`-st uniformizer power, for every module and without flatness. Ordinary pullback is
+additive, a left adjoint and preserves constant integral scalars, so it preserves these
+cokernels; uniqueness of cokernels gives the comparison, and uniqueness is checked by
+transposing through `ordinaryAdjunction`.
+
+## References
+
+* [Stacks, Tag 03EL]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A4]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -28,9 +43,7 @@ namespace WeilConjectures.IntegralOnSlice
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- One ordinary quotient, with the completed coefficient action restored.
-Source: Stacks 03EL and 06YY
-(blueprint: lem-fix-ordinary-quotient-module-comparison). -/
+/-- One ordinary quotient, with the completed coefficient action restored. -/
 abbrev ordinaryQuotientModule (W : Scheme.{t}) (n : ℕ) :
     Mod l E W none ⥤ Mod l E W none :=
   reduction l E W none n ⋙ SheafOfModules.restrictScalars
@@ -411,28 +424,7 @@ private theorem generator_lift (W : Scheme.{t}) (n : ℕ) (M : Mod l E W none)
     (projection l E W none n).hom.app V r * 1
   exact (mul_one _).symm
 
-/-- Pullback of a single finite quotient, normalized on adjunction-unit generators.
-
-Source: Stacks Project, Modules on Sites, lemma-tensor-product-pullback (03EL),
-and Cohomology on Sites, Tags 06YY and 07A4.
-(blueprint: lem-fix-ordinary-quotient-module-comparison).
-Proof: the normalized quotient unit M → Q_n tensor M is the cokernel of
-multiplication by the (n+1)-st uniformizer power. Indeed, the completed projection
-is surjective on sections and its kernel consists of multiples of that power.
-The sheaf tensor quotient kernel calculation then gives the asserted cokernel
-for every module, without flatness. The completed direct coefficient map preserves
-constant integral scalars: test against every finite projection and use naturality
-of constant-section maps. Consequently ordinary pullback takes the uniformizer
-endomorphism of M to that of its pullback, by the specified module adjunction.
-Pullback is additive and left adjoint, so it preserves these cokernels. Uniqueness
-of cokernels gives the component isomorphisms preserving the quotient units;
-the same universal property proves naturality. Lift an arbitrary finite section
-a to a completed coefficient r. Tensor balancing writes a tensor x as the quotient
-unit of r times x. Naturality and semilinearity of the ordinary adjunction unit,
-together with the finite-projection square, give the displayed normalization.
-For uniqueness transpose maps through ordinaryAdjunction and use pure-tensor
-extensionality of reduction. No transition, complex, tower or derived comparison
-is needed. This includes n=0, zero modules and the empty scheme. -/
+/-- Pullback of a single finite quotient, normalized on adjunction-unit generators. -/
 theorem ordinaryQuotientModuleComparison
     {X Y : Scheme.{t}} (f : X ⟶ Y) [IsIso (ordinaryCoefficientMap l E f)] (n : ℕ) :
     ∃! e : ordinaryQuotientModule l E Y n ⋙ ordinaryPull l E f ≅

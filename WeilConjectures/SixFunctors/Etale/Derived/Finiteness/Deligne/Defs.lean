@@ -11,10 +11,9 @@ public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 /-!
 # Generic constructibility and base change of a direct image
 
-The property appearing in Deligne's generic constructibility theorem
-(`theorem-generic-constructibility-base-change-rj`): over a subset `U` of the base `S`, the derived
-direct image of a sheaf `F` along a morphism `j : X ⟶ Y` of `S`-schemes is bounded constructible,
-and its formation commutes with every base change from a noetherian scheme
+The property appearing in Deligne's generic constructibility theorem: over a subset `U` of the base
+`S`, the derived direct image of a sheaf `F` along a morphism `j : X ⟶ Y` of `S`-schemes is bounded
+constructible, and its formation commutes with every base change from a noetherian scheme
 (`AlgebraicGeometry.Etale.HasConstructibleDirectImageBaseChangeOn`).
 -/
 

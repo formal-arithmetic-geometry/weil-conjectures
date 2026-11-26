@@ -16,8 +16,20 @@ import WeilConjectures.RingTheory.ClosedFiberDefectDerivationExtension
 
 /-! # Formal smoothness of parameter-preserving power-series maps
 
-Source: Stacks Project, Tag 07NQ, final lifting argument after the base-change reduction.
-(blueprint: lem-weil-pbc-power-series-parameter-map-fs-adic)
+A map between field or Cohen power-series rings carrying parameters into parameters is adically
+formally smooth if its closed fibre is.
+
+## Implementation details
+
+No arbitrary complete local rings or flat maps occur in this criterion: it is the coordinate
+lifting step of Stacks Tag 07NQ.
+
+## References
+
+* [Stacks, Tag 07NQ] (proof of (2) implies (3), final lifting argument)
+* [Stacks, Tag 07NM]
+* [Stacks, Tag 07NL]
+* [Stacks, Tag 07EL]
 -/
 
 @[expose] public section
@@ -29,42 +41,7 @@ open IsLocalRing
 namespace MvPowerSeries
 
 /-- A map between field or Cohen power-series rings carrying parameters into parameters
-is adically formally smooth if its closed fibre is. No arbitrary complete local rings or
-flat maps occur in this criterion: it is the coordinate lifting step of Tag 07NQ.
-
-Source: Stacks Project, Tag 07NQ, proof of (2) implies (3), last paragraphs from
-"Choose elements y" through the correction psi' = psi - D'.
-(blueprint: lem-weil-pbc-power-series-parameter-map-fs-adic)
-
-Proof:
-1. For a continuous square-zero lifting problem T -> N/J over R, the quotient map
-makes J a T-module because J^2 = 0. If the map kills m_T^e then m_T^e J = 0.
-Filter J by J_a = {j : m_T^a j = 0}. The successive quotients are annihilated by m_T.
-Descend from N/J_e to N/J_0. A lift killing m_T^b modulo a square-zero kernel kills
-m_T^(2b), so every stage remains continuous. The action on the next kernel is the
-original action since changing representatives by J has zero product with J.
-2. Thus assume m_T J = 0, making J a vector space over the residue field K of T.
-Tag 07NM gives coordinates t,y (with p omitted as a variable in the Cohen case).
-Tag 07NL gives an unrestricted lift over Q or Z. In characteristic zero N is a
-Q-algebra: integers are units modulo J, and a unit modulo a square-zero ideal lifts
-to a unit. Keep the coefficient map and change the t-variable values to their
-prescribed images from R; the variable images are nilpotent, so evaluation uses
-finite truncations. The new lift agrees on all parameters of R, including p.
-3. Its defect on R is a derivation into J, annihilating the parameters. The universal
-property of differentials and the exact quotient differential sequence make it
-factor through Omega_(k/Z), where k is the residue field of R: the R-action on J
-factors through k, and the differentials of the parameters generate the conormal
-image. Tensor this k-linear map with K.
-4. Formal smoothness of the closed fibre gives injectivity of
-Omega_(k/Z) tensor_k K -> Omega_(T/m_R T / Z) tensor_T K by Tag 07EL.
-Extend the defect functional along this injection by extending a vector-space basis.
-Compose with the differential of T -> T/m_R T to obtain a derivation D' on T
-whose restriction to R is the defect. Subtract D' from the unrestricted lift.
-Leibniz and J^2 = 0 prove multiplicativity; derivations kill 1. The correction
-vanishes modulo J and cancels the defect on R, so the corrected lift is R-linear.
-Apply this at every stage of the filtration in step 1. This solves all lifting problems.
-Empty parameter lists and the case J = 0 require no parameter correction.
--/
+is adically formally smooth if its closed fibre is. -/
 theorem formallySmoothAdic_of_parameters_closedFiber
     (ΛR : Type u) (ΛT : Type v) [CommRing ΛR] [CommRing ΛT] (n m : ℕ)
     [IsRegularLocalRing (MvPowerSeries (Fin n) ΛR)]

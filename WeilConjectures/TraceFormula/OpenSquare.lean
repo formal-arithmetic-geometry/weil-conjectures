@@ -14,19 +14,19 @@ public import WeilConjectures.TraceFormula.Frobenius
 
 Let `j : U ⟶ Y` be an open immersion of separated `k`-schemes of finite type.
 
-* **Frobenius open squares** (blueprint `lemma-additivity-open-subscheme-complement--1`). If `Φ_Y`
+* **Frobenius open squares**. If `Φ_Y`
 is the model
   Frobenius of `Y = Y₀ ×_{k₀} k`, `j` is the base change of an open immersion `j₀ : U₀ ⟶ Y₀` and
   `Φ_U ≫ j = j ≫ Φ_Y`, then every square `Φ_U^m ≫ j = j ≫ Φ_Y^m` is cartesian
   (`ProEtale.CondensedRing.isPullback_frobeniusIterate_of_isOpenImmersion`). The reason is that
   the `q`-power Frobenius of `Y₀` is the identity on points, so `Φ_Y⁻¹(U) = U`; the general
   criterion is `AlgebraicGeometry.IsOpenImmersion.isPullback_of_preimage_range_subset`.
-* **The open-square exchange** (blueprint `proposition-composition-base-change-rf-shriek--4`). For a
+* **The open-square exchange**. For a
 cartesian square
   `g_U ≫ j = j' ≫ g` with `j`, `j'` open immersions, `b_g : Lg^* j_! ≅ j'_! Lg_U^*`
   (`ProEtale.CondensedRing.openSquareExchange`); its restriction to `U'` is the identity
   (`ProEtale.CondensedRing.unit_comp_map_openSquareExchange_inv`).
-* **The Weil extension by zero** (blueprint `lemma-additivity-open-subscheme-complement--1`). For a
+* **The Weil extension by zero**. For a
 cartesian square
   `Φ_U ≫ j = j ≫ Φ_Y`, a Weil object `(K, φ)` for `Φ_U` gives the Weil object
   `(j_! K, j_! φ ∘ b_{Φ_Y})` for `Φ_Y` (`ProEtale.CondensedRing.weilOpenLowerShriek`), functorially.
@@ -76,12 +76,11 @@ variable {k : Type u} [Field k] {Y U : Over (Spec (.of k))} {ΦY : Y ⟶ Y}
   {k₀ : Type u} [Field k₀] [Finite k₀] [Algebra k₀ k] {Y₀ : Scheme.{u}}
   {f₀ : Y₀ ⟶ Spec (.of k₀)} {p : Y.left ⟶ Y₀}
 
-/-- **Frobenius preserves an open subscheme defined over the finite field** (blueprint
-`lemma-additivity-open-subscheme-complement--1`): let `Φ_Y` be the model Frobenius of
-`Y = Y₀ ×_{k₀} k`, let `j : U ⟶ Y` be the base change of an open immersion `j₀ : U₀ ⟶ Y₀` (the
-square `q ≫ j₀ = j ≫ p` is cartesian) and let `Φ_U : U ⟶ U` satisfy `Φ_U ≫ j = j ≫ Φ_Y`. Then for
-every `m ≥ 0` the square `Φ_U^m ≫ j = j ≫ Φ_Y^m` is cartesian: the Frobenius of `Y₀` is the identity
-on points, so `Φ_Y⁻¹(U) = U`. -/
+/-- **Frobenius preserves an open subscheme defined over the finite field**: let `Φ_Y` be the model
+Frobenius of `Y = Y₀ ×_{k₀} k`, let `j : U ⟶ Y` be the base change of an open immersion
+`j₀ : U₀ ⟶ Y₀` (the square `q ≫ j₀ = j ≫ p` is cartesian) and let `Φ_U : U ⟶ U` satisfy
+`Φ_U ≫ j = j ≫ Φ_Y`. Then for every `m ≥ 0` the square `Φ_U^m ≫ j = j ≫ Φ_Y^m` is cartesian: the
+Frobenius of `Y₀` is the identity on points, so `Φ_Y⁻¹(U) = U`. -/
 theorem isPullback_frobeniusIterate_of_isOpenImmersion (hΦ : IsModelFrobenius ΦY f₀ p)
     {U₀ : Scheme.{u}} (j₀ : U₀ ⟶ Y₀) {q : U.left ⟶ U₀} (j : U ⟶ Y) [IsOpenImmersion j.left]
     (hq : IsPullback q j.left j₀ p) {ΦU : U ⟶ U} (hw : ΦU ≫ j = j ≫ ΦY) (m : ℕ) :
@@ -118,7 +117,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {j : U ⟶ Y} {g : Y' ⟶ Y} {j' : U' ⟶ Y'} {gU : U' ⟶ U}
   [IsOpenImmersion j.left] [IsOpenImmersion j'.left]
 
-/-- **The open-square exchange** (blueprint `proposition-composition-base-change-rf-shriek--4`): for
+/-- **The open-square exchange**: for
 a cartesian square `g_U ≫ j = j' ≫ g` with `j`, `j'` open immersions, the base change isomorphism
 `b_g : Lg^* j_! ≅ j'_! Lg_U^*` of the extension by zero, the inverse of the canonical exchange
 morphism `Lg_U^* ⋙ j'_! ⟶ j_! ⋙ Lg^*`. -/
@@ -157,10 +156,9 @@ lemma unit_comp_map_baseChangeIso_inv_aux (Λ : Sheaf (coherentTopology Profinit
   rw [boundedConstructibleOpenImmersionLowerShriekBaseChangeIso'_inv]
   exact Adjunction.unit_comp_map_exchangeLeft_app _ _ _ K
 
-/-- **The open-square exchange restricts to the identity on `U'`** (blueprint
-`proposition-composition-base-change-rf-shriek--4`): after restriction along `Lj'^*`, the inverse of
-`b_g` at `K` is the pullback comparison `Lj^* ⋙ Lg_U^* ≅ Lg^* ⋙ Lj'^*` of the square at `j_! K`, up
-to the units of `j_! ⊣ Lj^*` and `j'_! ⊣ Lj'^*` (which are isomorphisms):
+/-- **The open-square exchange restricts to the identity on `U'`**: after restriction along `Lj'^*`,
+the inverse of `b_g` at `K` is the pullback comparison `Lj^* ⋙ Lg_U^* ≅ Lg^* ⋙ Lj'^*` of the square
+at `j_! K`, up to the units of `j_! ⊣ Lj^*` and `j'_! ⊣ Lj'^*` (which are isomorphisms):
 ```
 Lg_U^* K ⟶ Lj'^* j'_! Lg_U^* K --Lj'^* b_g⁻¹--> Lj'^* Lg^* j_! K
   =  Lg_U^* K ⟶ Lg_U^* Lj^* j_! K ≅ Lj'^* Lg^* j_! K.
@@ -244,9 +242,8 @@ lemma baseChangeIso_inv_app_of_id_aux
   exact Adjunction.exchangeLeft_app_of_iso_id _ _ _ _
     (boundedConstructiblePullbackSquareComparison_hom_app_of_id ℓ Λ j _) K
 
-/-- **The open-square exchange of an identity square is the identity** (blueprint
-`proposition-composition-base-change-rf-shriek--4`): for the square `𝟙 ≫ j = j ≫ 𝟙`,
-`b_𝟙 : L(𝟙)^* j_! ≅ j_! L(𝟙)^*` is `L(𝟙)^* j_! ≅ j_! ≅ j_! L(𝟙)^*`. -/
+/-- **The open-square exchange of an identity square is the identity**: for the square
+`𝟙 ≫ j = j ≫ 𝟙`, `b_𝟙 : L(𝟙)^* j_! ≅ j_! L(𝟙)^*` is `L(𝟙)^* j_! ≅ j_! ≅ j_! L(𝟙)^*`. -/
 lemma openSquareExchange_inv_app_of_id (j : U ⟶ Y) [IsOpenImmersion j.left]
     (sq : IsPullback (𝟙 U) j j (𝟙 Y)) (K : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (openSquareExchange ℓ sq).inv.app K =
@@ -268,17 +265,16 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   {ΦU : U ⟶ U} {ΦY : Y ⟶ Y} {j : U ⟶ Y} [IsOpenImmersion j.left]
 
-/-- **The Weil extension by zero** (blueprint `lemma-additivity-open-subscheme-complement--1`): for
+/-- **The Weil extension by zero**: for
 an open immersion `j : U ⟶ Y` and a cartesian square `Φ_U ≫ j = j ≫ Φ_Y` (for instance that of
 `isPullback_frobeniusIterate_of_isOpenImmersion`), a Weil object `(K, φ)` for `Φ_U` is sent to
 `(j_! K, j_! φ ∘ b_{Φ_Y})`, with
 ```
 LΦ_Y^* j_! K --b_{Φ_Y}--> j_! LΦ_U^* K --j_! φ--> j_! K,
 ```
-`b_{Φ_Y}` the open-square exchange `openSquareExchange` (blueprint
-`rem-ptr-trf-weil-extension-zero-10`). Being a functor between categories of Weil objects, the
-pair `(j_! K, j_! φ ∘ b_{Φ_Y})` is again a Weil object and the construction is functorial in
-`(K, φ)` (blueprint `lemma-additivity-open-subscheme-complement--1`). -/
+`b_{Φ_Y}` the open-square exchange `openSquareExchange`. Being a functor between categories of Weil
+objects, the pair `(j_! K, j_! φ ∘ b_{Φ_Y})` is again a Weil object and the construction is
+functorial in `(K, φ)`. -/
 noncomputable def weilOpenLowerShriek (sq : IsPullback ΦU j j ΦY) :
     WeilBoundedConstructible ℓ ΦU ⥤ WeilBoundedConstructible ℓ ΦY :=
   IsoAlgebra.mapOfNatIso (openSquareExchange ℓ sq)
@@ -291,8 +287,7 @@ lemma weilOpenLowerShriek_obj_carrier (sq : IsPullback ΦU j j ΦY)
         K.carrier :=
   rfl
 
-/-- The Weil structure of the extension by zero is `j_! φ ∘ b_{Φ_Y}` (blueprint
-`lemma-additivity-open-subscheme-complement--1`). -/
+/-- The Weil structure of the extension by zero is `j_! φ ∘ b_{Φ_Y}`. -/
 lemma weilOpenLowerShriek_obj_str (sq : IsPullback ΦU j j ΦY)
     (K : WeilBoundedConstructible ℓ ΦU) :
     ((weilOpenLowerShriek ℓ sq).obj K).str =

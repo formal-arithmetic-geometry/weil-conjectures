@@ -11,7 +11,11 @@ public import WeilConjectures.CategoryTheory.SixFunctors.TransportedTensorCompar
 
 /-! # Binary native tensor models and the transported counit
 
-Source: Stacks 06YN, 06YU, 0FPT. Transport the explicit chain models through localization.
+We transport the explicit chain models through localization, using Mathlib's monoidal transport.
+
+## References
+
+* Stacks Project, Tags 06YN, 06YU and 0FPT.
 -/
 
 @[expose] public noncomputable section
@@ -46,9 +50,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   (βB : @SymmetricCategory _ _ SB.monoidal)
   (cB : RingedDerivedTensorCoherence b.J b.R SB TB βB)
 
-/-- The counit tensor comparison for the native transported monoidal structure.
-Source: Mathlib monoidal transport
-(blueprint: lem-sf-native-weil-ringed-binary-model-comparison). -/
+/-- The counit tensor comparison for the native transported monoidal structure. -/
 def nativeRingedTensorComparison :
     let := SB.monoidal
     letI := nativeWeilRingedMonoidal b SB
@@ -61,9 +63,7 @@ def nativeRingedTensorComparison :
   let := SB.monoidal
   exact transportedTensorComparison (nativeWeilRingedDerivedEquivalence b)
 
-/-- The native transported counit comparison satisfies associativity.
-Source: Mathlib monoidal transport
-(blueprint: lem-sf-native-weil-ringed-binary-model-comparison). -/
+/-- The native transported counit comparison satisfies associativity. -/
 theorem nativeRingedTensorComparison_associativity
     (P Q N : DerivedCategory (ProEtaleWeilSheaf k₀ l X)) :
     let := SB.monoidal
@@ -77,12 +77,7 @@ theorem nativeRingedTensorComparison_associativity
   let := SB.monoidal
   exact transportedTensorComparison_associativity (nativeWeilRingedDerivedEquivalence b) P Q N
 
-/-- The explicit binary model is compatible with the transported counit comparison.
-Source: Stacks 0FPT; definition of the native derived tensor model
-(blueprint: lem-sf-native-weil-ringed-binary-model-comparison).
-
-Proof: expand the preimage isomorphism, use full faithfulness to map its inverse,
-and cancel the adjacent counit and localization-factor inverse pairs. -/
+/-- The explicit binary model is compatible with the transported counit comparison. -/
 theorem nativeRingedTensorModel_binary
     (P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
     (hQ : NativeTensorKFlat k₀ l X T Q) :

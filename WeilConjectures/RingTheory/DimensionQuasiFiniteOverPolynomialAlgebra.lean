@@ -17,8 +17,17 @@ public import Mathlib.RingTheory.KrullDimension.Zero
 /-!
 # Dimension of a quasi-finite algebra over affine space
 
-Source: Stacks Project, Algebra, Lemma Tag 00QG
-(blueprint: lem-weil-pbc-dimension-quasi-finite-over-polynomial-algebra).
+## Implementation details
+
+For a prime `q` of `T` over `p` in the polynomial ring `P`, the local dimension inequality for
+quasi-finite maps bounds `dim T_q` by `dim P_p ≤ dim P = n`. The spectrum dimension equals the
+ring dimension, which is bounded via `ringKrullDim_le_iff_height_le`; this includes the empty
+spectrum, so no nontriviality assumption on `T` is needed.
+
+## References
+
+* [Stacks, Tag 00QG]
+* [Stacks, Tag 00QF]
 -/
 
 @[expose] public section
@@ -28,25 +37,7 @@ universe u v
 namespace AlgebraicGeometry
 
 /-- A finite-type `k`-algebra with a quasi-finite `k`-algebra map from the polynomial
-ring in `n` variables has spectrum of dimension at most `n` (Stacks Project, Tag 00QG).
-(blueprint: lem-weil-pbc-dimension-quasi-finite-over-polynomial-algebra)
-
-Proof, step 1: for a prime `q` of `T`, contract it to `p` in the polynomial ring
-`P`. The local dimension inequality of Tag 00QF
-(`lem-weil-pbc-dimension-inequality-quasi-finite`) bounds `dim T_q` by `dim P_p`.
-Rewrite both local dimensions as prime heights using
-`IsLocalization.AtPrime.ringKrullDim_eq_height`
-(`lem-weil-pbc-localization-dimension-chains-below-prime`). A prime height is at most
-the ring dimension by `Ideal.height_le_ringKrullDim_of_isPrime`.
-Mathlib's `MvPolynomial.ringKrullDim_of_isNoetherianRing` computes `dim P = n`,
-since a field has dimension zero. This replaces the maximal-ideal localization detour.
-
-Step 2: `PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim`
-(`lem-weil-pbc-spec-topological-krull-dimension-ring`) identifies the spectrum dimension
-with the ring dimension. By `ringKrullDim_le_iff_height_le`, it suffices to bound all
-prime heights of `T`, which step 1 does. This criterion is the supremum-of-heights
-identity (`lem-pc-ring-dimension-supremum-heights`), including the empty spectrum,
-whose dimension is bottom. No nontriviality assumption on `T` is needed. -/
+ring in `n` variables has spectrum of dimension at most `n`. -/
 theorem topologicalKrullDim_spec_le_of_quasiFinite_over_mvPolynomial
     (k : Type u) [Field k] (n : ℕ) (T : Type v) [CommRing T] [Algebra k T]
     [Algebra.FiniteType k T] (φ : MvPolynomial (Fin n) k →ₐ[k] T)

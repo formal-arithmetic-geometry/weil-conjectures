@@ -17,7 +17,9 @@ import WeilConjectures.RingTheory.FiniteModuleSurjectiveModIdeal
 /-!
 # Lifting a finite stably free module
 
-Source: Stacks Project, More on Algebra, Tag 0BC5.
+## References
+
+* [Stacks, Tag 0BC5]
 -/
 
 @[expose] public section
@@ -54,22 +56,7 @@ private theorem lift_reduced_map {R : Type u} [CommRing R] (I : Ideal R)
   simpa only [TensorProduct.smul_tmul', smul_eq_mul, mul_one, ← a.map_smul]
     using congrArg (s • ·) hm
 
-/-- A finite stably free module over a Jacobson quotient lifts to a finite stably free module.
-Source: Stacks Project, More on Algebra, Tag 0BC5 (lemma-lift-stably-free)
-(blueprint: lem-sc-finite-stably-free-module-lift).
-
-Proof: Choose a finite free complement F such that E × F is finite free. Choose free
-R-modules A and B with bases indexed by bases of E × F and F; their reductions are
-isomorphic to these modules. Lift the reduced projection E × F → F to f : A → B
-by projectivity of A and surjectivity of B → B/IB. The reduction of f is surjective,
-so Nakayama makes f surjective. The free target B supplies a section g. Let P = ker f.
-The splitting A ≃ P × B shows P is finite stably free. The kernel inclusion has a
-left inverse, so its base change is injective. Tensor right exactness identifies its
-image with the kernel of the reduced projection. Projection onto E then gives a
-linear equivalence (R/I) ⊗ P ≃ E, and hence the requested module isomorphism.
-This is the kernel construction in Tag 0BC5, obtaining the splitting directly by
-Nakayama and projectivity instead of normalizing a separately lifted section.
-Zero rings and empty basis indices require no separate choice or nontriviality hypothesis. -/
+/-- A finite stably free module over a Jacobson quotient lifts to a finite stably free module. -/
 theorem exists_finite_stablyFree_lift
     {R : Type u} [CommRing R] (I : Ideal R)
     (hunits : ∀ x : I, IsUnit (1 + (x : R)))

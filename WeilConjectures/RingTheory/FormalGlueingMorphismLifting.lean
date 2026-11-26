@@ -15,8 +15,21 @@ import WeilConjectures.RingTheory.FormalGlueingComplexExact
 /-!
 # Lifting morphisms of canonical formal glueing data
 
-Source: Stacks Project, More on Algebra, Lemmas 05EK and 05EM.
-(blueprint: lem-weil-pbc-formal-glueing-morphism-lifting).
+If `R → S` is flat and induces an isomorphism modulo `(f₁, …, fₜ)`, every morphism between
+canonical formal glueing data of `R`-modules `M` and `N` comes from a linear map `M → N`.
+
+## Implementation details
+
+For a morphism `z` and `m ∈ M`, the tuple `(z.prime (1 ⊗ m), (z.chart i (m/1))ᵢ)` lies in the
+kernel of the formal glueing complex of `N`, so exactness gives a unique preimage `u m`.
+Injectivity of the first map of the complex shows that `u` is linear, and `Can.map u = z` is
+checked componentwise on pure tensors and fractions.
+
+## References
+
+* [Stacks, Tag 05EK]
+* [Stacks, Tag 05EM]
+* [Stacks, Tag 05ER]
 -/
 
 @[expose] public section
@@ -78,22 +91,8 @@ private theorem components_ext {R : Type u} {S : Type v}
   cases funext hc
   rfl
 
-/-- Every morphism between canonical objects lifts to a linear map.
-Source: Stacks, More on Algebra, Lemmas 05EK and 05EM; steps 3–4 and 6 of
-Proposition 05ER's formal-glueing equivalence proof.
-(blueprint: lem-weil-pbc-formal-glueing-morphism-lifting).
-Proof: for a morphism z and m in M, form the tuple (z.prime (1 tensor m),
-(z.chart i (m/1))_i). The prime compatibility equation says its first compatibility
-difference is zero under the canonical comparison. The chart compatibility equation
-says the two chart values agree in the iterated localization. Clearing both denominators
-shows they agree in the product localization, so every overlap difference is zero.
-Exactness of the formal glueing complex produces a preimage in N; its injective initial
-map makes that preimage unique. Define u(m) by this unique preimage. Injectivity applied
-to the images of sums and scalar multiples proves that u is linear. On pure tensors,
-u extended to S agrees with z.prime. On m/1 each localized u agrees with z.chart i;
-uniqueness for localization extends this to every fraction. Thus Can.map u = z by
-componentwise equality. Empty chart families are covered by the same exact complex;
-zero charts and zero modules do not require cancellation in R. -/
+/-- Every morphism between canonical objects lifts to a linear map: under flatness and the
+quotient isomorphism, the canonical functor is full. -/
 theorem canonical_map_surjective {R : Type u} {S : Type v}
     [CommRing R] [CommRing S] (φ : R →+* S) (t : ℕ) (f : Fin t → R)
     (Can : ModuleCat.{max u v w} R ⥤ Data.{u, v, max u v w} φ f)

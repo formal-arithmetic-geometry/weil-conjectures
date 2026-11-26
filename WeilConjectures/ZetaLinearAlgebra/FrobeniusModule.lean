@@ -48,6 +48,16 @@ reversed characteristic polynomial, for an integral weight and with the normaliz
 - `FrobeniusModule.prod`: the direct sum `M ⊕ N`.
 - `FrobeniusModule.IsPureOfWeight.isReal_prod_rescale_dual`: for `M` pure of weight `w` and
   `ι c = q ^ w`, the sum `M ⊕ M^∨(c)` is `ι`-real.
+
+## Implementation details
+
+The carrier `Module.Dual K M.carrier` of `FrobeniusModule.dual` lives in universe `max u v`,
+since the linear maps `M → K` involve both the carrier of `M` and the field `K`.
+
+For `FrobeniusModule.IsPureOfWeight.isReal_prod_rescale_dual`: over the algebraically closed
+field `K` the Frobenius `F` has eigenvalues `α₁, …, αₙ`; those of the second summand are the
+`c αᵢ⁻¹`, and `ι (c αᵢ⁻¹) = |ι αᵢ|² / ι αᵢ = conj (ι αᵢ)`. Hence the local polynomial of the sum
+is `Q · conj Q` for `Q = ∏ (1 - ι αᵢ T)`, which has real coefficients.
 -/
 
 @[expose] public section
@@ -301,10 +311,7 @@ theorem IsPureOfWeight.tateTwist {ι : K →+* ℂ} {q : ℕ} (hq : 0 < q)
 
 /-- The dual `M^∨ = Hom_K(M, K)` of a Frobenius module, with the inverse transpose
 `f ↦ f ∘ F⁻¹` of the Frobenius `F`, so that the evaluation pairing `M^∨ ⊗ M → K` is
-Frobenius-invariant (`FrobeniusModule.dual_frobenius_comp_frobenius`).
-
-The carrier `Module.Dual K M.carrier` lives in universe `max u v`, since the linear maps
-`M → K` involve both the carrier of `M` and the field `K`. -/
+Frobenius-invariant (`FrobeniusModule.dual_frobenius_comp_frobenius`). -/
 noncomputable def dual (M : FrobeniusModule.{u, v} K) : FrobeniusModule.{max u v, v} K where
   carrier := Module.Dual K M.carrier
   frobenius := M.frobenius.symm.dualMap
@@ -425,11 +432,7 @@ theorem IsReal.of_localPolynomial_eq {ι : K →+* ℂ} {M : FrobeniusModule.{u,
 
 /-- **A pure Frobenius module is realizable.** If `M` is `ι`-pure of weight `w` relative to `q`
 and `ι c = q ^ w`, then `M ⊕ M^∨(c)`, the sum of `M` and of its dual with the Frobenius rescaled
-by `c`, is `ι`-real. Over the algebraically closed field `K` the Frobenius `F` has eigenvalues
-`α₁, …, αₙ`; those of the second summand are the `c αᵢ⁻¹`, and
-`ι (c αᵢ⁻¹) = |ι αᵢ|² / ι αᵢ = conj (ι αᵢ)`. Hence the local polynomial of the sum is
-`Q · conj Q` for `Q = ∏ (1 - ι αᵢ T)`, which has real coefficients.
-(blueprint: `proposition-twisting-weight-zero-adding-dual`) -/
+by `c`, is `ι`-real. -/
 theorem IsPureOfWeight.isReal_prod_rescale_dual [IsAlgClosed K] {ι : K →+* ℂ} {q : ℕ}
     (hq : 0 < q) {M : FrobeniusModule.{u, v} K} {w : ℝ} (h : M.IsPureOfWeight ι q w) {c : K}
     (hc : ι c = (((q : ℝ) ^ w : ℝ) : ℂ)) :

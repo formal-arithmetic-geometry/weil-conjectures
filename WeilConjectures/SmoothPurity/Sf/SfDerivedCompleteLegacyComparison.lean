@@ -12,7 +12,12 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedComplete
 
 /-! # Comparison of the two augmented reduction towers
 
-Source: Bhatt--Scholze, Definition 3.5.2; Stacks Tags 06YY and 06YL.
+Intrinsic derived completeness agrees with the K-flat augmented-tower definition.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 3.5.2.
+* Stacks Project, Tags 06YY and 06YL.
 -/
 
 @[expose] public section
@@ -211,15 +216,7 @@ private theorem resolution_completeness (D : FiniteFieldDatum.{d}) (hl : l ≠ D
       (fun f ↦ e.inv ≫ (integralTowerAugmentationIso l E Y D hl q hq).inv ≫
         DerivedCategory.Q.map f) (unit_eq l E Y D hl P n).symm)
 
-/-- Intrinsic derived completeness agrees with the K-flat augmented-tower definition.
-Source: Bhatt--Scholze, Definition 3.5.2; Stacks Tags 06YY and 06YL
-(blueprint: lem-sf-derived-complete-legacy-comparison).
-Proof: choose a K-flat representative. The derived tensor counits identify the intrinsic
-reductions with the ordinary tensor complexes. The normalized derived adjunction identifies
-its unit with the localized chain unit. Uniqueness on pure tensors identifies the transitions.
-The resulting isomorphism of augmented towers induces an isomorphism of their product Roos
-triangles, which preserves distinguishedness. Every derived object has such a representative,
-so the same argument gives both implications. -/
+/-- Intrinsic derived completeness agrees with the K-flat augmented-tower definition. -/
 theorem sfDerivedComplete_iff_legacy (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
     (K : DerivedCategory (scalarReductionSource.{u, u} l E Y)) :
     IsSfDerivedComplete l E Y K ↔ IsDerivedComplete l E Y D hl K := by

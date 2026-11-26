@@ -13,7 +13,17 @@ import Mathlib.RingTheory.TensorProduct.Maps
 
 /-! # Localization of the closed-fibre ring transitions
 
-Source: Stacks Project, Algebra, Tag 00R7, proof by Noetherian approximation.
+The closed-fibre ring transitions of a Noetherian local model tower are localizations.
+
+## Implementation details
+
+The transition is a quotient of the localization `fibreTransition`; the kernel of
+`T_j → B_j` is contained in the extension of the kernel of the quotient map on the source, so
+`IsLocalization.of_surjective` applies. No flatness is used.
+
+## References
+
+* [Stacks, Tag 00R7] (proof by Noetherian approximation)
 -/
 
 @[expose] public section
@@ -25,31 +35,8 @@ open scoped TensorProduct
 
 namespace Module
 
-/-- Localization survives passage to the stage closed fibres.
-
-Source: Stacks Project, Algebra, Tag 00R7, the quotient systems before the second use
-of Tag 00R6.
-(blueprint: lem-weil-pbc-noetherian-local-model-tower-fiber-localization)
-
-Proof: For a transition i to j, let g : T_i tensor over S_i with S_j to T_j
-and U be the localization supplied by X.fibreTransition. The commuting quotient
-square defines a ring homomorphism q : B_i tensor over A_i with A_j to B_j,
-with q(b tensor a) = image(b) * phi_j(a), by the tensor universal property.
-The three quotient maps give P : T_i tensor over S_i with S_j to
-B_i tensor over A_i with A_j. It is surjective: lift both factors of a pure
-tensor to quotient representatives, then use additive induction on tensors.
-The square consisting of g, P, q and the quotient map T_j to B_j commutes,
-as checked on pure tensors and then by additive induction.
-
-The image in the source of the extended maximal ideal of S_j lies in ker(P),
-since its image in A_j is zero. Its image under g is the extended maximal
-ideal in T_j, by the formula g(1 tensor a) = algebraMap(S_j,T_j)(a) and
-transitivity of extension of ideals. Hence ker(T_j to B_j) is contained in
-the extension of ker(P) along g. Apply IsLocalization.of_surjective to this
-square, its two surjective quotient maps and that kernel inclusion. It gives
-IsLocalization (U.map P) B_j with precisely the constructed q as algebra map.
-The argument uses no flatness and also applies to identity transitions.
--/
+/-- The closed-fibre ring transitions `B_i ⊗[A_i] A_j → B_j` of a Noetherian local model tower
+are localizations. -/
 theorem NoetherianLocalModelTower.fiber_localization
     {R : Type u} {S : Type v} {S' : Type w} {M : Type t}
     [CommRing R] [CommRing S] [CommRing S'] [IsLocalRing R] [AddCommGroup M]

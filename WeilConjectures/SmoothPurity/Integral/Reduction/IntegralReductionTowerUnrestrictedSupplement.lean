@@ -47,13 +47,15 @@ public import WeilConjectures.AlgebraicGeometry.IntegralReductionTowerUnrestrict
 
 /-! # Integral reduction towers without a finite-field datum
 
-Source: Bhatt--Scholze, Definition 3.5.2; Stacks Project, Tags 03EK and 06YY
-(blueprint: def-weil-integral-reduction-tower).
-
 The completion and its projections already have unrestricted versions. This supplies
 the same reduction tower without the irrelevant global finite-field datum. The completed
 coefficient sheaf is shared with the finite-field interface.
 Index n means exponent n+1.
+
+## References
+
+* B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, Definition 3.5.2
+* Stacks Project, Tags 03EK and 06YY
 -/
 
 @[expose] public section
@@ -451,9 +453,7 @@ private theorem unrestrictedReduction_hom_ext (n : ℕ) (M N : integralTowerModu
 
 attribute [local irreducible] unrestrictedModuleStep
 
-/-- The strict reduction tower before localization, retaining its canonical transitions.
-Source: Bhatt--Scholze, Definition 3.5.2
-(blueprint: def-weil-integral-reduction-tower). -/
+/-- The strict reduction tower before localization, retaining its canonical transitions. -/
 noncomputable def unrestrictedIntegralComplexTower
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :
     ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l E Y) ℤ :=

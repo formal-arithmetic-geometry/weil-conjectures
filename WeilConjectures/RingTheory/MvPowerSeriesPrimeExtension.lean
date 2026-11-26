@@ -16,8 +16,18 @@ import Mathlib.RingTheory.Ideal.Span
 /-!
 # Prime ideals extended to a power-series ring
 
-Source: Stacks Project, Tags 0312 and 0EY9, coefficientwise quotient argument.
-(blueprint: lem-sbc-power-series-prime-extension)
+Extending a prime ideal `p` of a Noetherian ring `A` to `A⟦x₁, …, x_d⟧` gives a prime ideal.
+
+## Implementation details
+
+Coefficientwise reduction onto `(A/p)⟦x⟧` is surjective with kernel the series with all
+coefficients in `p`. Expressing each coefficient in finitely many generators `a_i` of `p` writes
+such a series as `∑ C(a_i) f_i`, so the kernel is `p.map C`, and it is prime since `(A/p)⟦x⟧` is a
+domain.
+
+## References
+
+* [Stacks, Tags 0312, 0EY9] (coefficientwise quotient argument)
 -/
 
 @[expose] public section
@@ -56,22 +66,7 @@ private theorem mem_map_C_of_coeff_mem_span
     · exact (Ideal.map_mono (Ideal.span_mono (by simp))) (ih k hc)
 
 /-- Extending a prime ideal from a Noetherian coefficient ring to finitely many
-power-series variables gives a prime ideal.
-
-Source: Stacks Project, Tags 0312 and 0EY9, the coefficientwise quotient
-argument in the associated-prime calculation.
-(blueprint: lem-sbc-power-series-prime-extension)
-
-Proof: Reduce coefficients modulo p. This is a surjective ring homomorphism
-onto the power-series ring over A/p: choose a lift of each coefficient.
-Its kernel consists of series all of whose coefficients lie in p.
-Choose finitely many generators a_1,...,a_r of p, possible by Noetherianity.
-For each coefficient choose its expression as a sum of a_i times scalars.
-For every i the scalars form a power series f_i. The original series is
-sum_i C(a_i)*f_i by coefficient extensionality. Thus the kernel is exactly
-p.map C. The target is a domain, since A/p is a domain, so the kernel is prime.
-For d=0 the coefficient reduction is the ordinary quotient map. The zero ring
-has no prime ideal, and p=bot in a domain gives the domain power-series ring. -/
+power-series variables gives a prime ideal. -/
 theorem isPrime_map_C (A : Type u) [CommRing A] [IsNoetherianRing A]
     (d : ℕ) (p : Ideal A) (hp : p.IsPrime) :
     (p.map (C (σ := Fin d))).IsPrime := by

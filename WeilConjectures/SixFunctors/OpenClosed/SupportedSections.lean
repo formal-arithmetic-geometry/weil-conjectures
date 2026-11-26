@@ -25,8 +25,8 @@ restriction to `U` vanishes, so it is the pushforward of a sheaf on `Z`, namely 
 The functor `s^!` is right adjoint to `s_*`; this sheaf-level adjunction is
 `AlgebraicGeometry.Etale.lowerStarClosedUpperShriekAdjunction`, defined together with `𝒢_Z` and
 `s^!` in `WeilConjectures.SixFunctors.Etale.Derived.ClosedImmersionUpperShriek`. This file
-records the additional facts used in the purity chapter: the identification `s_* s^! ≅ 𝒢_Z`, the
-description of the counit of `s_* ⊣ s^!`, and flasqueness for the pair.
+records the additional facts used in the purity chapter: the identification
+`s_* s^! ≅ 𝒢_Z`, the description of the counit of `s_* ⊣ s^!`, and flasqueness for the pair.
 
 A sheaf `I` is *flasque for the pair* if `I ⟶ j_* j^* I` is an epimorphism; injective sheaves
 are flasque.
@@ -41,6 +41,14 @@ are flasque.
 - `AlgebraicGeometry.Etale.lowerStarClosedUpperShriekAdjunction_counit_app`: the counit of
   `s_* ⊣ s^!` is `s_* s^! M ≅ 𝒢_Z M ⟶ M`.
 - `AlgebraicGeometry.Etale.isFlasqueFor_of_injective`
+
+## Implementation details
+
+Everything is formalised on the small étale site, the site of the purity chapter. The pro-étale
+forms are `AlgebraicGeometry.ProEtale.sectionsWithSupport`,
+`AlgebraicGeometry.ProEtale.closedUpperShriek` (with
+`AlgebraicGeometry.ProEtale.closedUpperShriekCompLowerStarIso`) and
+`AlgebraicGeometry.ProEtale.IsFlasqueFor`.
 -/
 
 @[expose] public section
@@ -84,21 +92,9 @@ lemma isIso_sectionsWithSupportι_app_of_isZero {M : Sheaf X.smallEtaleTopology 
 
 variable [IsClosedImmersion s] [IsOpenImmersion j]
 
-/-- Blueprint `definition-local-cohomology`: Supported sections and flasque objects
-
-`s_* s^! M ≅ 𝒢_Z M`: the sheaf `𝒢_Z M = ker (M ⟶ j_* j^* M)` of sections of `M` supported on
-the closed complement `Z` of the open immersion `j : U ⟶ X`
-(`AlgebraicGeometry.Etale.sectionsWithSupport`) is the pushforward of
-`s^! M = s^* 𝒢_Z M` (`AlgebraicGeometry.Etale.closedUpperShriek`), through the unit of
-`s^* ⊣ s_*`, which is invertible on sheaves vanishing on the open part. The functor `s^!` is
-right adjoint to `s_*` (`AlgebraicGeometry.Etale.lowerStarClosedUpperShriekAdjunction`), and it
-is distinct from the ordinary restriction `s^*`.
-
-The blueprint node is stated on the pro-étale site; it is formalised here on the small étale
-site, the site of the purity chapter (`def-pur-conventions`); the pro-étale forms are
-`AlgebraicGeometry.ProEtale.sectionsWithSupport`, `AlgebraicGeometry.ProEtale.closedUpperShriek`
-(with `AlgebraicGeometry.ProEtale.closedUpperShriekCompLowerStarIso`) and
-`AlgebraicGeometry.ProEtale.IsFlasqueFor`. -/
+/-- `s_* s^! M ≅ 𝒢_Z M`: the sheaf `𝒢_Z M = ker (M ⟶ j_* j^* M)` of sections of `M`
+supported on the closed complement `Z` of the open immersion `j : U ⟶ X` is the pushforward of
+`s^! M = s^* 𝒢_Z M`, through the unit of `s^* ⊣ s_*`. -/
 noncomputable def closedUpperShriekCompLowerStarIso
     (hjs : Set.range s.base = (Set.range j.base)ᶜ) :
     closedUpperShriek A s j ⋙ (s)_*[A] ≅ sectionsWithSupport A j :=
@@ -130,12 +126,8 @@ instance (hjs : Set.range s.base = (Set.range j.base)ᶜ) (M : Sheaf X.smallEtal
   rw [lowerStarClosedUpperShriekAdjunction_counit_app]
   infer_instance
 
-/-- Blueprint `definition-local-cohomology`: Supported sections and flasque objects
-
-A sheaf `I` on `X` is *flasque for the pair* `(Z, U)` if the restriction `I ⟶ j_* j^* I` to the
-open part is an epimorphism; then `0 ⟶ 𝒢_Z I ⟶ I ⟶ j_* j^* I ⟶ 0` is exact. As for
-`AlgebraicGeometry.Etale.sectionsWithSupport`, this is the étale version; the pro-étale version
-is `AlgebraicGeometry.ProEtale.IsFlasqueFor`. -/
+/-- A sheaf `I` on `X` is *flasque for the pair* `(Z, U)` if the restriction `I ⟶ j_* j^* I` to
+the open part is an epimorphism; then `0 ⟶ 𝒢_Z I ⟶ I ⟶ j_* j^* I ⟶ 0` is exact. -/
 def IsFlasqueFor (I : Sheaf X.smallEtaleTopology A) : Prop :=
   Epi ((upperStarLowerStarAdjunction A j).unit.app I)
 
@@ -149,9 +141,7 @@ variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
   [hJX : X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
 include hJX hJZ in
-/-- Injective sheaves are flasque for the pair: the restriction `I ⟶ j_* j^* I` is even a split
-epimorphism
-(`AlgebraicGeometry.Etale.isSplitEpi_upperStarLowerStarAdjunction_unit_app_of_injective`). -/
+/-- Injective sheaves are flasque for the pair. -/
 lemma isFlasqueFor_of_injective (hjs : Set.range s.base = (Set.range j.base)ᶜ)
     (I : Sheaf X.smallEtaleTopology A) [Injective I] : IsFlasqueFor A j I := by
   have := isSplitEpi_upperStarLowerStarAdjunction_unit_app_of_injective A j s hjs I

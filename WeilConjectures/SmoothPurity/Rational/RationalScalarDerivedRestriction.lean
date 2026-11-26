@@ -10,8 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleTowe
 /-!
 # Exact derived restriction of completed coefficients
 
-Source: Bhatt--Scholze, Proposition 6.8.14(2), Remark 6.8.15; restriction step of the
-finite coefficient argument (blueprint: def-sf-rational-scalar-derived-restriction).
+This is the restriction step of the finite coefficient argument.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.14(2), Remark 6.8.15.
 -/
 
 @[expose] public noncomputable section
@@ -26,30 +29,22 @@ variable (l : ℕ) [Fact l.Prime]
   (E F : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (ι : E →ₐ[ℚ_[l]] F) (W : AlgebraicGeometry.Scheme.{u})
-/-- Actual restriction along the completed coefficient inclusion.
-Source: finite coefficient restriction
-(blueprint: def-sf-rational-scalar-derived-restriction). -/
+/-- Actual restriction along the completed coefficient inclusion. -/
 noncomputable def rationalScalarModuleRestriction :
     scalarReductionSource l F W ⥤ scalarReductionSource l E W :=
   AlgebraicGeometry.Scheme.pbcRestrict (completedCoefficientMap l E F ι W)
-/-- Restriction is additive on underlying morphisms.
-Source: finite coefficient restriction
-(blueprint: def-sf-rational-scalar-derived-restriction). -/
+/-- Restriction is additive on underlying morphisms. -/
 noncomputable instance rationalScalarModuleRestriction_additive :
     (rationalScalarModuleRestriction l E F ι W).Additive :=
   inferInstanceAs (AlgebraicGeometry.Scheme.pbcRestrict
     (completedCoefficientMap l E F ι W)).Additive
-/-- Restriction preserves finite limits and colimits.
-Source: finite coefficient restriction
-(blueprint: def-sf-rational-scalar-derived-restriction). -/
+/-- Restriction preserves finite limits and colimits. -/
 theorem rationalScalarModuleRestriction_exact :
     PreservesFiniteLimits (rationalScalarModuleRestriction l E F ι W) ∧
       PreservesFiniteColimits (rationalScalarModuleRestriction l E F ι W) :=
   ⟨AlgebraicGeometry.Scheme.pbcRestrict_limits _,
     AlgebraicGeometry.Scheme.pbcRestrict_colimits _⟩
-/-- The derived functor of exact completed coefficient restriction.
-Source: finite coefficient restriction
-(blueprint: def-sf-rational-scalar-derived-restriction). -/
+/-- The derived functor of exact completed coefficient restriction. -/
 noncomputable def rationalScalarDerivedRestriction :
     DerivedCategory (scalarReductionSource l F W) ⥤
       DerivedCategory (scalarReductionSource l E W) := by

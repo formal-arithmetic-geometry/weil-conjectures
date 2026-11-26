@@ -29,7 +29,14 @@ punctured part is the spectrum of a field `K'`, and a Galois extension `Ω / K'`
 injective linear map from the stalk `(j_* F)_x̄` to `Γ(Spec Ω, η^* F)` with image the
 `Gal(Ω / K')`-invariants, intertwining the Frobenius of the stalk with the transport along a lift
 of the Frobenius (`AlgebraicGeometry.WeilSheaf.exists_stalk_directImage_linearMap_invariants`).
-This is the stalk side of blueprint `lemma-boundary-stalk--1`.
+This is the stalk side of the computation of boundary stalks.
+
+## Implementation details
+
+`AlgebraicGeometry.WeilSheaf.stalk_frobenius_apply_eq` is stated through `congrArg`, since the
+kernel checks the direct definitional unfolding slowly, and the intertwining lemmas for the
+Frobenius of the stalk are stated for an arbitrary Weil sheaf `G`, since the kernel checks the
+identification of the stalk with the global sections slowly for explicit `G`.
 -/
 
 @[expose] public section
@@ -102,8 +109,7 @@ lemma stalkAt_frobenius_apply
       (globalSectionsTransport _ hs.symm (G.frobeniusPowStr m))).hom v :=
   LinearMap.congr_fun (frobeniusEnd_stalkAt G s m hs) v
 
-/-- The geometric stalk at a closed point is the stalk at the attached geometric point. (Stated
-through `congrArg`: the kernel checks the direct definitional unfolding slowly.) -/
+/-- The geometric stalk at a closed point is the stalk at the attached geometric point. -/
 lemma stalk_frobenius_apply_eq (x : X.finitePoints) (v : (G.stalk x).carrier) :
     (G.stalk x).frobenius v = (G.stalkAt _ _
       (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
@@ -123,8 +129,7 @@ lemma stalk_frobenius_apply (x : X.finitePoints) (v) :
 
 /-- A linear map `S` out of the global sections at the geometric point of a closed point `x`
 intertwining the transport along the iterated Weil structure with `Ψ` intertwines the Frobenius
-of the stalk with `Ψ`. (Stated for an arbitrary `G`: the kernel checks the identification of the
-stalk with the global sections slowly for explicit `G`.) -/
+of the stalk with `Ψ`. -/
 lemma stalk_frobenius_intertwine {W : Type*} [AddCommGroup W] [Module (PadicAlgCl l) W]
     (x : X.finitePoints)
     (S : (WeilCoefficients.toModuleCat l).obj ((Sheaf.Γ _ _).obj
@@ -327,8 +332,7 @@ Frobenius `Frᵐ`, `m = deg x`, to `Spec A` and `a` to `Spec Ω`, compatible wit
 and with the generic point `Spec Ω ⟶ Spec A`, there is an injective linear map
 `(j_* F)_x̄ ⟶ Γ(Spec Ω, η^* F)`, `η : Spec Ω ⟶ Spec K' ⟶ Ū`, with image the
 `Gal(Ω / K')`-invariants, intertwining the Frobenius of the stalk with the transport along
-`a ≫ η = η ≫ Frᵐ` and the Weil structure of `F`.
-(blueprint: `lemma-boundary-stalk--1`) -/
+`a ≫ η = η ≫ Frᵐ` and the Weil structure of `F`. -/
 theorem exists_stalk_directImage_linearMap_invariants (hF : F.IsLisse)
     (ht : (t.left ≫ pullback.fst h _) (IsLocalRing.closedPoint (AlgebraicClosure k₀)) =
       IsLocalRing.closedPoint A)

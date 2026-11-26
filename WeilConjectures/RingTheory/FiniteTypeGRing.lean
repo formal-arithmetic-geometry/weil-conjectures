@@ -13,19 +13,24 @@ import WeilConjectures.RingTheory.FiniteTypeGRingAux
 /-!
 # Finite type algebras over G-rings
 
-Source: Stacks Project, More on Algebra, Proposition 07PV (blueprint:
-lem-weil-pbc-finite-type-over-g-ring).
+A finite type algebra over a G-ring is a G-ring.
+
+## Implementation details
+
+The proof reduces a finite type algebra to a quotient of a polynomial algebra, uses stability
+of G-rings under polynomial extension and quotient, and reduces the regularity of completion
+maps to the local complete case via base change and faithfully flat descent.
+
+## References
+
+* [Stacks, Tag 07PV]
 -/
 
 @[expose] public section
 
 universe u v
 
-/-- A finite type algebra over a G-ring is a G-ring. Source: Stacks Project,
-More on Algebra, Proposition 07PV, proof (blueprint: lem-weil-pbc-finite-type-over-g-ring).
-The proof reduces a finite type algebra to a quotient of a polynomial algebra, uses stability
-of G-rings under polynomial extension and quotient, and then reduces the regularity of
-completion maps to the local complete case via base change and faithfully flat descent.
+/-- A finite type algebra over a G-ring is a G-ring.
 -/
 theorem isGRing_of_finiteType {R : Type u} {S : Type v} [CommRing R] [CommRing S]
     [Algebra R S] (hR : IsGRing R) [Algebra.FiniteType R S] : IsGRing S := by

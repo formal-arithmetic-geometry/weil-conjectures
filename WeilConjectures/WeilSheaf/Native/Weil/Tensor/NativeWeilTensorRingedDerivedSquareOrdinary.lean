@@ -11,8 +11,9 @@ import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryTensorModelResolu
 
 /-! # Ordinary model part of the native ringed derived square
 
-Source: Stacks 06YU, 0FPT; blueprint step 1 of
-`lem-sf-native-weil-tensor-ringed-derived-square`.
+## References
+
+* Stacks Project, Tags 06YU and 0FPT.
 -/
 
 @[expose] public section
@@ -22,19 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
 /-- The ordinary one-K-flat representative, its adjunction normalization, and its
-naturality are the ordinary part of the derived-square construction.
-
-Source: Stacks 06YU, 0FPT; blueprint:
-`lem-sf-native-weil-tensor-ringed-derived-square`.
-
-Proof: extract the normalized ordinary model supplied by `NativeOrdinaryTensorModels`.
-By `native_ordinary_tensor_model_naturality_kflat`, the normalization (componentwise
-uncurrying against K-injective targets) forces naturality when both second inputs are
-K-flat.  By `native_ordinary_tensor_model_resolution_extension`, the K-flat replacement
-theorem then yields a new model, equal to the given one on K-flat second inputs (hence
-still normalized) and natural in both representative complexes for arbitrary second
-inputs.  The signed swap is used only for the later coherence step and is therefore not
-part of this intermediate assertion. -/
+naturality are the ordinary part of the derived-square construction. -/
 theorem native_weil_tensor_ringed_derived_square_ordinary_data
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})

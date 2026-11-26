@@ -13,22 +13,18 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 /-!
 # Localizations of the auxiliary algebra in height-zero delocalization
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 16.9.4, Tag 07FA
-(blueprint: lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations).
+The first localization assertion: the auxiliary algebra `B` localized at `z` is the localization
+of a polynomial algebra over `C` at `z`.
 
-The first conjunct asserts an A-algebra map from the auxiliary quotient B to the
-localization of the polynomial ring over C, with prescribed images of x, y, z, and t.
-It also asserts an algebra equivalence between B_z and that target restricting to the map.
-This is the first localization assertion in Stacks Project Tag 07FA; its proof uses
-universal properties of polynomial rings, quotients, and localization and checks generators.
+## Implementation details
 
-(blueprint: lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations-part1).
+The maps are constructed by the universal properties of multivariate polynomial rings, ideal
+quotients, and localization away from one element; the generator formulas and extensionality
+establish the assertion.
 
-Proof: construct the maps by the universal properties of multivariate polynomial rings,
-ideal quotients, and localization away from one element; verify the displayed generator
-formulas and use extensionality on polynomial generators and localization.
-the maps by universal properties of polynomial rings, quotients, and localization and checks
-the generators.
+## References
+
+* [Stacks, Tag 07FA]
 -/
 
 @[expose] public section
@@ -41,12 +37,9 @@ open scoped BigOperators
 namespace Algebra
 
 
-/-- This intermediate statement is the corresponding localization conjunct from Stacks
-Project Tag 07FA.
-The maps are constructed by the universal properties of multivariate polynomial rings, ideal
-quotients, and localization away from one element; the displayed generator formulas and
-extensionality on generators establish the assertion.
-(blueprint: lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations-part1). -/
+/-- The first localization of the auxiliary algebra: an `A`-algebra map from `B` to the
+localization of `C[t, z]` at `z`, with prescribed images of `x`, `y`, `z` and `t`, which induces
+an equivalence from `B_z`. -/
 theorem popescu_auxiliaryAlgebra_localizations_part1
     (A : Type u) [CommRing A] (n m r : ℕ) (hr : 1 ≤ r)
     (f : Fin m → MvPolynomial (Fin n) A) :

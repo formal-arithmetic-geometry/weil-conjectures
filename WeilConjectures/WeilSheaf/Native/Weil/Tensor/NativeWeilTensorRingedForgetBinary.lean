@@ -13,7 +13,9 @@ import WeilConjectures.CategoryTheory.SixFunctors.TransportedTensorComparison
 
 /-! # The normalized inverse binary forgetting square
 
-Source: Stacks 06YU, 0FPT; direct native tensor transport on representatives.
+## References
+
+* Stacks Project, Tags 06YU and 0FPT.
 -/
 
 @[expose] public section
@@ -34,12 +36,7 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
   nativeWeilRingedTensorComplexModel
 
 -- Elaborate the explicit binary comparison without unfolding localization structures.
-/-- The inverse native binary model square under ordinary canonical normalization.
-Source: Stacks 06YU, 0FPT
-(blueprint: lem-sf-native-weil-ringed-forget-binary).
-Proof: rewrite the supplied representative square by its normalized ordinary
-model. Invert the native model and the canonical localization tensorator, then
-compose with the signed total comparison. -/
+/-- The inverse native binary model square under ordinary canonical normalization. -/
 theorem nativeRingedTensorModel_forget_binary
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})

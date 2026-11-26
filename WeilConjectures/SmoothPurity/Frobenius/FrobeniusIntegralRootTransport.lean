@@ -14,7 +14,19 @@ import WeilConjectures.SmoothPurity.Frobenius.FrobeniusIntegralRootTransportModu
 
 /-! # Transport of the first integral root line
 
-Source: expanded DAG prose-10-21, clause 2.
+The root-limit comparison along an isomorphism of schemes extends to the first completed
+integral coefficient line.
+
+## Implementation details
+
+The inverse limit of the finite root comparisons is preserved by inverse image along the
+scheme isomorphism; its adjunct is extended through the constant `O_E` scalar tensor and the
+completed coefficient pushout. The inverse is built from the inverse scheme isomorphism and the
+inverse comparisons. Invertibility of `l` on the schemes is not used.
+
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EL
 -/
 
 @[expose] public noncomputable section
@@ -32,26 +44,9 @@ attribute [local irreducible] proEtaleRingModulePullback proEtaleRingModuleAdjun
 attribute [local implicit_reducible] purTwistZlOne proEtaleRootsOfUnityTower
   PurCompactSupport.completed completedIntegralCommRingSheafUnrestricted
 
-/-- The prescribed root-limit comparison extends to the first
-completed integral coefficient line. This statement concerns only the first line,
-without tensor powers, signed powers, or a uniqueness assertion.
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/
-def-weil-frobenius-coefficient-twists.md, natural Weil isomorphism;
-expanded DAG clause 2; Stacks, Modules on Sites, Tag 03EL.
-(blueprint: lem-weil-frobenius-integral-root-transport).
-Proof: the finite root comparisons commute with the power transitions. Their inverse
-limit is the displayed r; inverse image along the scheme isomorphism preserves this
-limit. Its adjunct respects completed Z_l scalars because the scalar actions and r
-are determined by their finite projections. Extend this semilinear map through the
-constant O_E scalar tensor. The completed coefficient comparison respects both scalar
-inclusions into the coefficient pushout, so the extended map respects the recorded
-completed action. Completed linearity carries the formula on 1 tensor x to the displayed formula for
-  every completed scalar a.
-The inverse construction uses the inverse scheme isomorphism and the inverse root
-and coefficient comparisons. The two composites are identities by tensor generation
-and sheafification. No invertibility of l on the schemes is used: only invertibility
-of g is needed to commute with the root limit. The same argument includes the empty
-scheme and every ramification index. -/
+/-- The prescribed root-limit comparison extends to the first completed integral coefficient
+line, compatibly with completed scalars. This concerns only the first line, without tensor
+powers, signed powers, or a uniqueness assertion. -/
 theorem frobeniusIntegralRootTransport
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

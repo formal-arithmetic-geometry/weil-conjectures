@@ -14,8 +14,7 @@ public import WeilConjectures.TraceFormula.TransverseBoundary.Basic
 Let `C` be a transverse corner (`AlgebraicGeometry.Scheme.TransverseCorner`). On the open
 subscheme `W = Z - X`, which contains `Y - z`, the immersion `i : Z - (X ∪ Y) ⟶ Z - Y` restricts
 to the identity of `W - Y`, so `i_! E` restricts to `E` and `M|_W = R j_{W*} E` for the open
-immersion `j_W : Z - (X ∪ Y) = W - Y ⟶ W`: only the regular divisor `Y` remains (blueprint
-`lemma-cohomology-near-two-transverse-divisors--1`, *Reduction to one divisor*).
+immersion `j_W : Z - (X ∪ Y) = W - Y ⟶ W`: only the regular divisor `Y` remains.
 
 ## Main definitions
 
@@ -87,10 +86,8 @@ lemma isPullback_i_jW : IsPullback C.i C.jW C.j C.W.ι := by
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- The restriction of `M = Rj_* i_! E` to `W = Z - X` is `R j_{W*} E`, for a bounded below `E`:
-étale base change along the open immersion `W ⟶ Z`
-(`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_etale`) for the cartesian square
-`AlgebraicGeometry.Scheme.TransverseCorner.isPullback_i_jW`, and `i^* i_! E ≅ E`. -/
+/-- The restriction of `M = Rj_* i_! E` to `W = Z - X` is `R j_{W*} E`, for a bounded below
+`E`. -/
 noncomputable def leftDerivedUpperStarBoundaryComplexIso
     (E : DerivedCategory (Sheaf C.V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (a : ℤ)
     [E.IsGE a] :

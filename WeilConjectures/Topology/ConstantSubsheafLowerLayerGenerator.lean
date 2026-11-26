@@ -16,8 +16,9 @@ import WeilConjectures.Topology.ConstantSubsheafQuotientSection
 
 /-! # The lower integer layer and its quotient generator
 
-Source: Stacks Project, Cohomology, Lemma 0A38, first and filtration paragraphs
-(blueprint: lem-sc-constant-subsheaf-lower-layer-generator).
+## References
+
+* Stacks Project, Tag 0A38.
 -/
 
 @[expose] public section
@@ -28,30 +29,7 @@ universe u
 
 namespace TopCat.Sheaf
 
-/-- Construct the lower layer and the quotient generator, without asserting exactness.
-
-Source: Stacks Project, Cohomology, Lemma 0A38, first and filtration paragraphs.
-Proof: choose the constant-sheaf identification. The finite generating maps are sections
-on compact opens. Refine each by a finite partition into compact clopen sets on which its
-integer value is constant, remove zero values, and replace negative values by their
-negatives. Adjoin intersections for all nonempty subsets with their positive gcd labels;
-Bezout supplies the corresponding sections. Pairwise compact-intersection closure gives
-compactness of these finite intersections. The gcd of the labels active at a point is
-then itself an active label. The arbitrary identifications e differ from the canonical
-integer stalk coordinates only by sign, so the positive generator satisfies the given
-bound. Discard labels above b+1: at every nonzero stalk a retained label generates that
-stalk, hence the retained sections still generate K. Take L to be the image of the sum
-of sections with labels at most b, with its image inclusion l. This gives the displayed
-finite-generation epimorphism and monomorphism. Its stalk generator is zero off their
-union V and at most b on V. Put U equal to the union of all retained opens. Both unions
-are compact, and V is contained in U. Gcd closure implies L and K have equal stalks on V;
-K vanishes off U. Thus the cokernel stalks vanish on V and off U. On U minus V the active
-gcd is exactly b+1 and L vanishes. The classes of the section b+1 agree on all opens
-labelled b+1. Glue these classes to zero on V (the quotient restricted to V is zero),
-obtaining a quotient section on U. The constant-sheaf and extension-by-zero adjunctions
-turn it into q. Its stalk map on U minus V sends 1 to the positive generator b+1,
-and is an isomorphism. Empty families give U=V empty; an empty top layer gives U=V.
-(blueprint: lem-sc-constant-subsheaf-lower-layer-generator). -/
+/-- Construct the lower layer and the quotient generator, without asserting exactness. -/
 theorem constantSubsheaf_lower_layer_generator
     (X : TopCat.{u})
     (hqc : ∀ U V : Opens X, IsCompact (U : Set X) → IsCompact (V : Set X) →

@@ -9,7 +9,12 @@ public import WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarExtensionT
 public import WeilConjectures.SixFunctors.Scalar.ScalarRoosComparison
 import all WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarTensorStrictQuotientTower
 
-/-! # Roos transport of the strict scalar tensor quotient calculation -/
+/-! # Roos transport of the strict scalar tensor quotient calculation
+
+## References
+
+* Stacks Project, Tags 07A4 and 0941.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -50,16 +55,8 @@ attribute [local irreducible] HasDerivedCategory.standard integralOrdinaryScalar
 attribute [local implicit_reducible] tensor integralOperationsTensorTowerFunctor
   integralOperationsRoosFunctor NatIso.mapHomologicalComplex
 
-/-- Apply Roos naturality to the strict quotient tensor calculation.
-Source: Stacks 07A4 and 0941; naturality of the two-coordinate Roos construction.
-(blueprint: lem-pur-scalar-tensor-roos-quotient-chain).
-
-Proof: the strict quotient tower theorem identifies the composite of the inverse
-E tensor quotient map, the ordinary scalar model, the scalar restriction map,
-strict sigma and the L tensor quotient map with scalarTensorTower. Naturality of
-scalarRoos with respect to the model isomorphism and the inverse quotient map
-transports this equality through both Roos coordinates. Functoriality identifies
-the resulting map with the defining scalarTensorChain. -/
+/-- Roos naturality applied to the strict quotient tensor calculation: the transported
+composite is `scalarTensorChain`. -/
 theorem scalarTensorRoosQuotientChain (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ)
     (C D : Complex l E W)

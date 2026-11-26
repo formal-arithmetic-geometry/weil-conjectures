@@ -27,10 +27,24 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import Mathlib.CategoryTheory.Limits.Preserves.Basic
 import all Mathlib.CategoryTheory.Limits.HasLimits
-/-! # Reduction and augmentation under canonical DVR coefficients
+/-!
+# Reduction and augmentation under canonical DVR coefficients
 
-Source: Stacks Tags 0941, 099B and 0A0E; canonical coefficient transport.
-(blueprint: lem-sf-open-dvr-augmented-reduction-comparison).
+We show that the strict scalar tensor augmentation computes the reduction/limit unit after
+canonical coefficient transport.
+
+## Implementation details
+
+The quotient tower functors are identified via the tensor universal property and the universal
+left-derived property. On a flat-term K-flat representative, the sequence tensor augmentation
+identifies the adjunction unit with the localization of the compatible family `x ⊗ 1`;
+uniqueness of derived left adjoints and localization naturality extend this to every object.
+No completeness hypothesis, regular generator, open immersion or exactness of countable products
+is used.
+
+## References
+
+* [Stacks: Tags 0941, 099B, 0A0E, 07A6 and 0D6E]
 -/
 
 @[expose] public noncomputable section
@@ -45,8 +59,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The reduction-only part of the augmented comparison, relative to the separately
-constructed normalized limit comparison. Source: Stacks 07A6, 0D6E and 0941
-(blueprint: lem-sf-open-dvr-augmented-reduction-comparison). -/
+constructed normalized limit comparison. -/
 structure OpenDvrAugmentedReductionComparison
     {d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E)} {T : Scheme.{u}}
     (C : OpenDvrCoefficientModel l E d T) (S : CoefficientDerivedSystemCalculus.{u, u} l E T)
@@ -280,23 +293,7 @@ private theorem augmentedUnit_on_flat
     (DerivedCategory.Q.map (C.complexes.map h)) (DerivedCategory.Q.map σ.inv)
     (reconstructionRlimComparison T d (C.towerComplexes.obj B)))
 
-/-- The strict scalar tensor augmentation computes the actual unit after coefficient transport.
-Source: Stacks Tags 07A6, 0D6E and 0941
-(blueprint: lem-sf-open-dvr-augmented-reduction-comparison).
-
-Proof: finite constants and completed projections identify the two ringed quotient
-diagrams. On modules the tensor universal property identifies the quotient functors,
-with identity on pure tensors and compatibility with each transition. The universal
-left-derived property gives tower. For a flat-term K-flat representative Q, transpose
-the actual scalar tensor complex to B. The same pure-tensor comparison gives kappa,
-tau and the reduction counit comparison e, including the ordinary augmentation equation.
-Apply sequenceTensorAugmentationUnit to the projection cone: its total-limit equation
-identifies the actual adjunction unit with the localization of the ordinary compatible
-family x tensor one. Uniqueness of derived left adjoints carries this equality to S.
-The supplied limit_model equation transports this representative equation through M.
-Finally the normalized reconstructionCompletionUnit equation on K-flat representatives
-and localization naturality extend the result to every P. No completeness hypothesis,
-regular generator, open immersion or exactness of countable products is used. -/
+/-- The strict scalar tensor augmentation computes the actual unit after coefficient transport. -/
 theorem openDvrAugmentedReductionComparison
     (d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E))
     (T : Scheme.{u}) (C : OpenDvrCoefficientModel l E d T)

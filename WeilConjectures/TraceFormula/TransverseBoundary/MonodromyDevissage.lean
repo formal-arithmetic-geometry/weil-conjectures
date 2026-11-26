@@ -16,16 +16,9 @@ public import WeilConjectures.TraceFormula.TransverseBoundary.DevissageStep
 Let `V` be a connected scheme, `ℓ` a prime and `Λ` a finite commutative ring with `ℓ` nilpotent
 in `Λ`. Every sheaf `H` of `Λ`-modules on `V_ét` with finite `ℓ`-group monodromy
 (`AlgebraicGeometry.Etale.HasFiniteEllGroupMonodromy`) is an iterated extension of constant
-sheaves `N_V` with `N` a finite `Λ`-module killed by `ℓ`: after replacing the trivializing Galois
-cover by a connected subcover (`AlgebraicGeometry.Scheme.GaloisCover.exists_connected_subcover`),
-the `ℓ`-group `G` acts `Λ`-linearly on the nonzero finite `ℓ`-group `M = Γ(P, π^* H)` and has a
-nonzero fixed vector `v` with `ℓ v = 0`; the fixed vector descends to a section of `H` over `V`,
-which spans an injection `(Λ v)_V ↪ H` whose cokernel is trivialized by the same cover with the
-smaller value `M / Λ v`. By induction on the cardinality of `M`, and by truncation for bounded
-complexes, a property of objects of `D(V_ét, Λ)` stable under isomorphisms, shifts and extensions
-which holds for these constant sheaves holds for every bounded complex whose cohomology sheaves
-have finite `ℓ`-group monodromy (blueprint `lemma-cohomology-near-two-transverse-divisors--1`,
-dévissage).
+sheaves `N_V` with `N` a finite `Λ`-module killed by `ℓ`. Consequently a property of objects of
+`D(V_ét, Λ)` stable under isomorphisms, shifts and extensions which holds for these constant
+sheaves holds for every bounded complex whose cohomology sheaves have finite `ℓ`-group monodromy.
 
 ## Main statements
 
@@ -33,6 +26,15 @@ dévissage).
   sheaves.
 - `AlgebraicGeometry.Etale.prop_of_isBoundedFiniteEllGroupMonodromy`: the dévissage for bounded
   complexes.
+
+## Implementation details
+
+After replacing the trivializing Galois cover by a connected subcover
+(`AlgebraicGeometry.Scheme.GaloisCover.exists_connected_subcover`), the `ℓ`-group `G` acts
+`Λ`-linearly on the nonzero finite `ℓ`-group `M = Γ(P, π^* H)` and has a nonzero fixed vector `v`
+with `ℓ v = 0`; the fixed vector descends to a section of `H` over `V`, which spans an injection
+`(Λ v)_V ↪ H` whose cokernel is trivialized by the same cover with the smaller value `M / Λ v`.
+One concludes by induction on the cardinality of `M`, and by truncation for bounded complexes.
 -/
 
 @[expose] public section
@@ -76,12 +78,9 @@ lemma prop_of_isZero (K : DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat
 
 omit [ConnectedSpace V] in
 include hΛ hext hconst in
-/-- The dévissage for a sheaf trivialized by a Galois cover with connected total space, by
-induction on the cardinality of the value `M` of the trivialization: a nonzero global section
-killed by `ℓ` (`AlgebraicGeometry.Etale.exists_ne_zero_smul_eq_zero_of_connected_cover`) spans
-a constant subsheaf whose quotient is trivialized by the same cover with smaller value
-(`AlgebraicGeometry.Etale.exists_mono_constantSheaf_of_connected_cover`)
-(blueprint `lemma-cohomology-near-two-transverse-divisors--1`). -/
+/-- The dévissage for a sheaf trivialized by a Galois cover with connected total space and
+`ℓ`-group as Galois group: a property as in the dévissage holds for such a sheaf, placed in
+degree `0`. -/
 theorem prop_singleFunctor_of_connected_cover {G : Type (u + 1)} [Group G] [Finite G]
     (hG : IsPGroup ℓ G) (c : V.GaloisCover G) [ConnectedSpace c.P]
     (H : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (M : ModuleCat.{u + 1} Λ) [Finite M]
@@ -105,11 +104,10 @@ theorem prop_singleFunctor_of_connected_cover {G : Type (u + 1)} [Group G] [Fini
     (ih _ hcard (cokernel χ) M' φ' rfl)
 
 include hΛ hext hconst in
-/-- **Dévissage of sheaves with finite `ℓ`-group monodromy** (blueprint
-`lemma-cohomology-near-two-transverse-divisors--1`): on a connected scheme, a property of objects of
-`D(V_ét, Λ)` stable under isomorphisms and extensions which holds for the constant sheaves `N_V`,
-`N` a finite `Λ`-module killed by `ℓ`, holds for every sheaf with finite `ℓ`-group monodromy,
-placed in degree `0`. -/
+/-- **Dévissage of sheaves with finite `ℓ`-group monodromy**: on a connected scheme, a property
+of objects of `D(V_ét, Λ)` stable under isomorphisms and extensions which holds for the constant
+sheaves `N_V`, `N` a finite `Λ`-module killed by `ℓ`, holds for every sheaf with finite
+`ℓ`-group monodromy, placed in degree `0`. -/
 theorem prop_singleFunctor_of_hasFiniteEllGroupMonodromy
     (H : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hH : HasFiniteEllGroupMonodromy ℓ H) :
     P ((DerivedCategory.singleFunctor _ 0).obj H) := by
@@ -121,10 +119,9 @@ theorem prop_singleFunctor_of_hasFiniteEllGroupMonodromy
       (Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) i).app M)
 
 include hΛ hshift hext hconst in
-/-- **Dévissage of complexes with finite `ℓ`-group monodromy** (blueprint
-`lemma-cohomology-near-two-transverse-divisors--1`): on a connected scheme, a property of objects of
-`D(V_ét, Λ)` stable under isomorphisms, shifts and extensions which holds for the constant
-sheaves `N_V`, `N` a finite `Λ`-module killed by `ℓ`, holds for every bounded complex whose
+/-- **Dévissage of complexes with finite `ℓ`-group monodromy**: on a connected scheme, a property
+of objects of `D(V_ét, Λ)` stable under isomorphisms, shifts and extensions which holds for the
+constant sheaves `N_V`, `N` a finite `Λ`-module killed by `ℓ`, holds for every bounded complex whose
 cohomology sheaves have finite `ℓ`-group monodromy. -/
 theorem prop_of_isBoundedFiniteEllGroupMonodromy
     (E : DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)))

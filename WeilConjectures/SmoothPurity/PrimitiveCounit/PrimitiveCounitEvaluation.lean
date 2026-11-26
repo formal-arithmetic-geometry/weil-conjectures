@@ -71,12 +71,17 @@ import WeilConjectures.SixFunctors.SequenceModuleEvaluation.SequenceModulePullba
 
 /-! # Quotient-limit realization and primitive coherent-counit comparisons
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0941, lemma-derived-limit-is-ok,
-with the strict Roos normalization and the coherent coefficient-system adjunction
-(blueprint: lem-pur-completed-primitive-counit-comparison).
+## Implementation details
 
 Natural number n means positive coefficient exponent n+1. All systems are derived
 before evaluation, and the site has independent object and morphism universes t+1 and t.
+The construction uses the strict Roos normalization and the coherent coefficient-system
+adjunction.
+
+## References
+
+* Stacks Project, Tags 03D2, 03D3, 03D7, 0941, 09A5 and 0H7J.
+* Zheng, Construction 4.1.
 -/
 
 @[expose] public noncomputable section
@@ -119,18 +124,11 @@ namespace PrimitiveCounit
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The actual base-change functor of the vertical sequence sites.
-Source: Stacks 0941 and 09A5
-(blueprint: lem-pur-completed-primitive-counit-comparison). -/
+/-- The actual base-change functor of the vertical sequence sites. -/
 def base {X Y : Scheme.{t}} (f : X ⟶ Y) : ℕ × Y.ProEt ⥤ ℕ × X.ProEt :=
   (𝟭 ℕ).prod (Scheme.proEtaleBaseChange f)
 
-/-- Vertical sequence base change is continuous.
-Source: Stacks 0941 and 09A5
-(blueprint: lem-pur-completed-primitive-counit-comparison).
-Proof: restrict a vertical covering sieve to its fixed coefficient level. Its image
-is a pro-etale covering by continuity of pro-etale base change. Horizontal arrows
-keep the same level, so the slice sheaf conditions assemble on the sequence site. -/
+/-- Vertical sequence base change is continuous. -/
 theorem base_continuous {X Y : Scheme.{t}} (f : X ⟶ Y) :
     (base f).IsContinuous (coefficientSequenceTopology (Scheme.ProEt.topology Y))
       (coefficientSequenceTopology (Scheme.ProEt.topology X)) := by
@@ -138,10 +136,7 @@ theorem base_continuous {X Y : Scheme.{t}} (f : X ⟶ Y) :
 
 attribute [instance] base_continuous
 
-/-- The sequence ring's section at (n,U) is the actual finite constant-ring section.
-Source: Stacks 0941 (blueprint: lem-pur-completed-primitive-counit-comparison).
-Proof: unfold the sequence presheaf, uncurry and ofOpSequence at the object (n,U).
-The object is the finite constant sheaf evaluated at U; no transition is involved. -/
+/-- The sequence ring's section at (n,U) is the actual finite constant-ring section. -/
 theorem section_eq (W : Scheme.{t}) (U : (ℕ × W.ProEt)ᵒᵖ) :
     (coefficientSequenceCommRingSheaf l E W).obj.obj U =
       ((constantSheaf (Scheme.ProEt.topology W) CommRingCat.{max u (t + 1)}).obj
@@ -150,9 +145,7 @@ theorem section_eq (W : Scheme.{t}) (U : (ℕ × W.ProEt)ᵒᵖ) :
   unfold coefficientSequenceCommRingSheaf coefficientSequenceCommRingPresheaf
   rfl
 
-/-- The constant-section component, transported through the explicit section identity.
-Source: Stacks 0H7J, 0941
-(blueprint: lem-pur-completed-primitive-counit-comparison). -/
+/-- The constant-section component, transported through the explicit section identity. -/
 def ringComponent {X Y : Scheme.{t}} (f : X ⟶ Y) (U : (ℕ × Y.ProEt)ᵒᵖ) :
     (coefficientSequenceCommRingSheaf l E Y).obj.obj U ⟶
       (coefficientSequenceCommRingSheaf l E X).obj.obj ((base f).op.obj U) :=
@@ -165,12 +158,7 @@ def ringComponent {X Y : Scheme.{t}} (f : X ⟶ Y) (U : (ℕ × Y.ProEt)ᵒᵖ) 
 attribute [local semireducible] coefficientSequenceCommRingSheaf
   coefficientSequenceCommRingPresheaf
 
-/-- Constant-section components respect vertical and quotient arrows simultaneously.
-Source: Stacks 0H7J, 0941
-(blueprint: lem-pur-completed-primitive-counit-comparison).
-Proof: vertical naturality is that of the constant-section map; horizontal naturality
-is its naturality in the coefficient ring, checked under sheafification adjunction.
-Both transposes send a coefficient to the same constant section after quotient. -/
+/-- Constant-section components respect vertical and quotient arrows simultaneously. -/
 theorem ringMap_natural {X Y : Scheme.{t}} (f : X ⟶ Y)
     {U V : (ℕ × Y.ProEt)ᵒᵖ} (a : U ⟶ V) :
     (coefficientSequenceCommRingSheaf l E Y).obj.map a ≫ ringComponent l E f V =
@@ -178,9 +166,7 @@ theorem ringMap_natural {X Y : Scheme.{t}} (f : X ⟶ Y)
         (coefficientSequenceCommRingSheaf l E X).obj.map ((base f).op.map a) := by
   exact integralComparisonSequenceRing_naturality l E f a
 
-/-- The sequence ring map assembled from the actual constant-section components.
-Source: Stacks 0H7J, 0941
-(blueprint: lem-pur-completed-primitive-counit-comparison). -/
+/-- The sequence ring map assembled from the actual constant-section components. -/
 def ringMap {X Y : Scheme.{t}} (f : X ⟶ Y) :
     coefficientSequenceCommRingSheaf l E Y ⟶
       ((base f).sheafPushforwardContinuous CommRingCat.{max u (t + 1)}
@@ -190,86 +176,59 @@ def ringMap {X Y : Scheme.{t}} (f : X ⟶ Y) :
   ⟨{ app := ringComponent l E f
      naturality := fun {_ _} a ↦ ringMap_natural l E f a }⟩
 
-/-- Canonical sectionwise system direct image with restricted coefficient action.
-Source: Stacks 03D7, 0941
-(blueprint: lem-pur-completed-primitive-counit-comparison). -/
+/-- Canonical sectionwise system direct image with restricted coefficient action. -/
 def direct {X Y : Scheme.{t}} (f : X ⟶ Y) :
     coefficientSequenceModules l E X ⥤ coefficientSequenceModules l E Y :=
   SheafOfModules.pushforward (F := base f)
     ⟨Functor.whiskerRight (ringMap l E f).hom
       (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})⟩
 
-/-- The system inverse image is the left adjoint to this specified direct image.
-Source: Stacks 03D3 and 0941
-(blueprint: lem-pur-completed-primitive-counit-comparison).
-Proof: transport the vertical sequence sites to coefficient-sized skeletons.
-Module left Kan extension followed by module sheafification gives a left adjoint
-to the displayed pushforward. Transport back along the site equivalences. This
-retains all quotient arrows and the prescribed scalar action. -/
+/-- The system inverse image is the left adjoint to this specified direct image. -/
 theorem direct_isRightAdjoint {X Y : Scheme.{t}} (f : X ⟶ Y) :
     (direct l E f).IsRightAdjoint := by
   exact integralComparisonSequenceDirectImage_isRightAdjoint l E f
 
 attribute [instance] direct_isRightAdjoint
 
-/-- Geometric inverse image on whole strict systems, defined by its universal property.
-Source: Stacks 03D3, 0941
-(blueprint: lem-pur-completed-primitive-counit-comparison). -/
+/-- Geometric inverse image on whole strict systems, defined by its universal property. -/
 def inverse {X Y : Scheme.{t}} (f : X ⟶ Y) := (direct l E f).leftAdjoint
 
-/-- Constant-coefficient geometric inverse image is exact on whole systems.
-Source: Stacks 03D2, 0941; lem-coef-semilinear-derived-sections
-(blueprint: lem-pur-completed-primitive-counit-comparison).
-Proof: evaluation of the adjunction identifies its left adjoint with the canonical
-finite-level module inverse image. Those functors are exact for constant coefficients.
-Kernels and cokernels of systems are computed at every level. Their comparisons
-are therefore isomorphisms. The additive right adjoint makes the left adjoint additive. -/
+/-- Constant-coefficient geometric inverse image is exact on whole systems. -/
 theorem inverse_exact {X Y : Scheme.{t}} (f : X ⟶ Y) :
     (inverse l E f).Additive ∧ PreservesFiniteLimits (inverse l E f) ∧
       PreservesFiniteColimits (inverse l E f) := by
   exact integralComparisonSequencePullback_exact l E f
 
-/-- Additivity of geometric system inverse image.
-Source: Stacks 03D2, 0941
-(blueprint: lem-pur-completed-primitive-counit-comparison). -/
+/-- Additivity of geometric system inverse image. -/
 instance inverseAdditive {X Y : Scheme.{t}} (f : X ⟶ Y) :
     (inverse l E f).Additive := (inverse_exact l E f).1
 
-/-- Left exactness of geometric system inverse image.
-Source: Stacks 03D2, 0941
-(blueprint: lem-pur-completed-primitive-counit-comparison). -/
+/-- Left exactness of geometric system inverse image. -/
 instance inverseLimits {X Y : Scheme.{t}} (f : X ⟶ Y) :
     PreservesFiniteLimits (inverse l E f) := (inverse_exact l E f).2.1
 
-/-- Right exactness of geometric system inverse image.
-Source: Stacks 03D2, 0941
-(blueprint: lem-pur-completed-primitive-counit-comparison). -/
+/-- Right exactness of geometric system inverse image. -/
 instance inverseColimits {X Y : Scheme.{t}} (f : X ⟶ Y) :
     PreservesFiniteColimits (inverse l E f) := (inverse_exact l E f).2.2
 
-/-- The exact geometric inverse image on ordinary unbounded derived whole systems.
-Source: Stacks 03D2, 0941
-(blueprint: lem-pur-completed-primitive-counit-comparison). -/
+/-- The exact geometric inverse image on ordinary unbounded derived whole systems. -/
 def pull {X Y : Scheme.{t}} (f : X ⟶ Y) :
     coefficientSequenceDerived l E Y ⥤ coefficientSequenceDerived l E X :=
   (inverse l E f).mapDerivedCategory
 
-/-- Additivity of finite geometric inverse image from its existing adjunction theorem.
-Source: Stacks 03D2 (blueprint: lem-pur-completed-primitive-counit-comparison). -/
+/-- Additivity of finite geometric inverse image from its existing adjunction theorem. -/
 instance levelAdditive {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ) :
     (integralOperationsLevelPullback l E f n).Additive :=
   integralOperationsLevelPullback_additive l E f n
 
-/-- Exactness at each finite constant coefficient, for the derived evaluation formula.
-Source: Stacks 03D2 (blueprint: lem-pur-completed-primitive-counit-comparison). -/
+/-- Exactness at each finite constant coefficient, for the derived evaluation formula. -/
 instance levelLimits {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ) :
     PreservesFiniteLimits (integralOperationsLevelPullback l E f n) :=
   (Scheme.coefficientProEtaleModulePullback_exact.{t, u} f
     (CommRingCat.of (ULift.{t + 1}
       (Padic.coefficientExtensionRing l E (n + 1))))).1
 
-/-- Right exactness at each finite constant coefficient.
-Source: Stacks 03D2 (blueprint: lem-pur-completed-primitive-counit-comparison). -/
+/-- Right exactness at each finite constant coefficient. -/
 instance levelColimits {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ) :
     PreservesFiniteColimits (integralOperationsLevelPullback l E f n) :=
   (Scheme.coefficientProEtaleModulePullback_exact.{t, u} f
@@ -287,13 +246,7 @@ attribute [local irreducible] Functor.leftAdjoint ringMap
 attribute [local semireducible] coefficientSequenceCommRingSheaf
   coefficientSequenceCommRingPresheaf
 
-/-- Sectionwise direct image commutes with finite evaluation, including its scalar action.
-Source: Stacks 03D7, 0941
-(blueprint: lem-pur-completed-primitive-counit-comparison).
-Proof: both functors evaluate sections at (n,baseChange U), with the same module map.
-The structural ring homomorphism is ringComponent, whose transports are the explicit
-sequence-section identities. Unfold them; equality of ring actions and morphisms
-then gives equality of module sheaves and of functors. -/
+/-- Sectionwise direct image commutes with finite evaluation, including its scalar action. -/
 theorem directEvaluation_eq {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ) :
     direct l E f ⋙ coefficientSequenceEvaluation l E Y n =
       coefficientSequenceEvaluation l E X n ⋙
@@ -363,9 +316,7 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 attribute [local irreducible] Functor.leftAdjoint
 
-/-- Cancel the invertible mate in Mathlib’s unit-mate equation.
-Source: Mathlib unit_mateEquiv_symm and inverse cancellation
-(blueprint: lem-pur-completed-primitive-counit-evaluation-existence). -/
+/-- Cancel the invertible mate in Mathlib’s unit-mate equation. -/
 private theorem inverseMate_exists
     {C D A B : Type*} [Category C] [Category D] [Category A] [Category B]
     {F : C ⥤ D} {G : D ⥤ C} {L : A ⥤ B} {R : B ⥤ A}
@@ -388,12 +339,7 @@ section EvaluationProofs
 attribute [local irreducible] Scheme.coefficientProEtaleModuleAdjunction
   Scheme.coefficientProEtaleModulePullback SheafOfModules.pushforward ringMap
 
-/-- Existence half of the unit-normalized ordinary evaluation comparison.
-Source: Zheng, Construction 4.1; Mathlib unit_mateEquiv_symm.
-Proof: the sequence-site coextension theorem makes the canonical inverse mate
-invertible. Invert that mate. Its unit-mate equation and inverse cancellation
-give exactly the required normalization.
-(blueprint: lem-pur-completed-primitive-counit-comparison). -/
+/-- Existence half of the unit-normalized ordinary evaluation comparison. -/
 theorem inverseEvaluation_exists {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ) :
     ∃ ξ : inverse l E f ⋙ coefficientSequenceEvaluation l E X n ≅
       coefficientSequenceEvaluation l E Y n ⋙ integralOperationsLevelPullback l E f n,
@@ -454,9 +400,7 @@ theorem inverseEvaluation_exists {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ) :
     (U := coefficientSequenceEvaluation l E Y n)
     (V := coefficientSequenceEvaluation l E X n) adj adjn d
 
-/-- A normalized inverse has its prescribed adjoint transpose, which determines it.
-Source: Mathlib Adjunction.homEquiv_unit
-(blueprint: lem-pur-completed-primitive-counit-evaluation-uniqueness). -/
+/-- A normalized inverse has its prescribed adjoint transpose, which determines it. -/
 private theorem unitNormalizedIso_unique
     {C D : Type*} [Category C] [Category D] {F : C ⥤ D} {G : D ⥤ C}
     (adj : F ⊣ G) {A : C} {B : D} (a : A ⟶ G.obj B)
@@ -476,9 +420,7 @@ private theorem unitNormalizedIso_unique
   have hs : e.symm = e'.symm := Iso.ext hi
   simpa only [Iso.symm_symm_eq] using congrArg Iso.symm hs
 
-/-- Apply the adjunction uniqueness calculation componentwise.
-Source: Mathlib Iso.ext and NatTrans.ext
-(blueprint: lem-pur-completed-primitive-counit-evaluation-uniqueness). -/
+/-- Apply the adjunction uniqueness calculation componentwise. -/
 private theorem unitNormalizedNatIso_unique
     {C D I : Type*} [Category C] [Category D] [Category I]
     {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
@@ -492,12 +434,7 @@ private theorem unitNormalizedNatIso_unique
   exact congrArg Iso.hom (unitNormalizedIso_unique adj (a i)
     (e.app i) (e'.app i) (he i) (he' i))
 
-/-- Uniqueness half for the unit-normalized ordinary evaluation comparison.
-Source: Stacks 03D3, 0941; Mathlib Adjunction.homEquiv_unit.
-Proof: compose each unit equation with the direct image of the inverse comparison.
-Both inverses then have the same adjoint transpose. The adjunction hom-bijection
-is injective, so they agree. Invert again and apply natural-transformation extensionality.
-(blueprint: lem-pur-completed-primitive-counit-comparison). -/
+/-- Uniqueness half for the unit-normalized ordinary evaluation comparison. -/
 theorem inverseEvaluation_unique {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ)
     (ξ η : inverse l E f ⋙ coefficientSequenceEvaluation l E X n ≅
       coefficientSequenceEvaluation l E Y n ⋙ integralOperationsLevelPullback l E f n)
@@ -538,10 +475,7 @@ theorem inverseEvaluation_unique {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ)
 
 end EvaluationProofs
 
-/-- The ordinary inverse-image evaluation is uniquely normalized by the actual units.
-Source: Stacks 03D3, 0941
-(blueprint: lem-pur-completed-primitive-counit-comparison).
-Proof: assemble the existence and uniqueness halves above. -/
+/-- The ordinary inverse-image evaluation is uniquely normalized by the actual units. -/
 theorem inverseEvaluation_existsUnique {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ) :
     ∃! ξ : inverse l E f ⋙ coefficientSequenceEvaluation l E X n ≅
       coefficientSequenceEvaluation l E Y n ⋙ integralOperationsLevelPullback l E f n,
@@ -561,9 +495,7 @@ theorem inverseEvaluation_existsUnique {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ
   intro η hη
   exact (inverseEvaluation_unique l E f n ξ η hξ hη).symm
 
-/-- The canonical ordinary evaluation comparison, fixed by the universal generator.
-Source: Stacks 03D3, 0941
-(blueprint: lem-pur-completed-primitive-counit-comparison). -/
+/-- The canonical ordinary evaluation comparison, fixed by the universal generator. -/
 def inverseEvaluation {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ) :
     inverse l E f ⋙ coefficientSequenceEvaluation l E X n ≅
       coefficientSequenceEvaluation l E Y n ⋙ integralOperationsLevelPullback l E f n :=

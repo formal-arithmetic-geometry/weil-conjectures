@@ -17,8 +17,18 @@ public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Passing from the whole closed subtype to the ambient space
 
-Source: Stacks Project, Lemma 02UV, applied to the inclusion of the whole space.
-(blueprint: lem-sc-whole-closed-subtype-cohomology-vanishing).
+If cohomology vanishes on the whole space viewed as a closed subtype of itself, it vanishes on
+the space.
+
+## Implementation details
+
+The subtype inclusion `i` has continuous inverse `j`, and `i_* j_* F ≅ F`; the closed-pushforward
+comparison then transports vanishing. `Ext` change-of-universe equivalences transfer
+subsingletonness between the small `Ext` groups in the statement and the standard `Ext` model.
+
+## References
+
+* [Stacks Project, Tag 02UV](https://stacks.math.columbia.edu/tag/02UV)
 -/
 
 @[expose] public section
@@ -31,18 +41,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace TopCat
 
-/-- Universal vanishing on the whole closed subtype implies ambient vanishing.
-Source: Stacks Project, Lemma 02UV, applied to the whole-space inclusion.
-(blueprint: lem-sc-whole-closed-subtype-cohomology-vanishing).
-
-Proof: The subtype inclusion i has continuous inverse j. Push F forward along
-j to obtain G on the whole closed subtype. Closed-pushforward comparison
-identifies its cohomology with that of i_*G. The equality j ≫ i = id and the
-pushforward composition and identity isomorphisms identify i_*G with F. Apply
-cohomology to that sheaf isomorphism and transport zero cohomology across both
-isomorphisms. Ext change-of-universe equivalences transfer subsingletonness
-between the small Ext groups in the statement and the standard Ext model in
-the closed-pushforward comparison. No Noetherian hypothesis is required. -/
+/-- Universal vanishing on the whole closed subtype implies ambient vanishing. -/
 theorem cohomology_vanishing_of_whole_closed_subtype
     (X : Type u) [TopologicalSpace X] (q : ℕ)
     (h : ∀ G : CategoryTheory.Sheaf (Opens.grothendieckTopology (Set.univ : Set X))

@@ -14,13 +14,16 @@ import WeilConjectures.RingTheory.FiniteTypeDomainDimensionLocalRingChains
 
 /-! Localization dimension part of the finite type domain dimension theorem.
 
-Source: Stacks Project, Algebra, Lemma Tag 00OS, proof steps 1--5
-(blueprint: lem-weil-pbc-finite-type-domain-dimension-local-ring-localization)
+## Implementation details
 
-Proof: use the common maximal-chain length theorem for finite type domains.
-A prime chain realizing the height of a maximal ideal is saturated and has
-minimal and maximal endpoints, hence is maximal. Its length is therefore the
-dimension of the domain. Localization dimension equals that ideal height.
+This uses the common maximal-chain length theorem for finite type domains. A prime chain
+realizing the height of a maximal ideal is saturated and has minimal and maximal endpoints,
+hence is maximal, so its length is the dimension of the domain. The dimension of the
+localization equals that height.
+
+## References
+
+* [Stacks, Tag 00OS]
 -/
 
 @[expose] public section
@@ -28,14 +31,7 @@ dimension of the domain. Localization dimension equals that ideal height.
 universe u v
 
 /-- Every maximal localization of a finite type domain over a field has the
-same Krull dimension as the domain. Source: Stacks Project, Algebra, Tag 00OS.
-
-Proof: the common-chain-length theorem gives a finite dimension d. Choose a
-prime chain realizing the height of the given maximal ideal. Each term has
-height equal to its index, so the chain starts at a minimal prime and is
-saturated. Its maximal endpoint makes it a maximal chain, hence its length
-is d. Rewrite localization dimension as the height of the maximal ideal.
-(blueprint: lem-weil-pbc-finite-type-domain-dimension-local-ring-localization) -/
+same Krull dimension as the domain. -/
 theorem finiteTypeDomain_ringKrullDim_localizationAtMaximal_localization
     {k : Type u} [Field k] {S : Type v} [CommRing S] [Algebra k S]
     [Algebra.FiniteType k S] [IsDomain S] :

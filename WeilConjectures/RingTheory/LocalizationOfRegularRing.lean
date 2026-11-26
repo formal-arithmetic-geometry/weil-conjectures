@@ -12,8 +12,19 @@ import Mathlib.RingTheory.Localization.LocalizationLocalization
 /-!
 # A localization of a regular ring is regular
 
-Source: Stacks Project, Algebra, proof of Lemma Tag 0381, Step 3
-(blueprint: theorem-finite-etale-covers-proper-henselian--2).
+A ring `R'` with a map from a regular ring `R` satisfying the characterization of a localization
+at `M` is regular.
+
+## Implementation details
+
+The hypotheses give `IsLocalization M R'`. The canonical `Localization M` is Noetherian and its
+localization at a prime is the localization of `R` at the contracted prime
+(`IsLocalization.localizationLocalizationAtPrimeIsoLocalization`), so it is regular; uniqueness
+of localization and `IsRegularRing.of_ringEquiv` transport regularity to `R'`.
+
+## References
+
+* [Stacks, Tag 0381] (proof, step 3)
 -/
 
 @[expose] public section
@@ -23,20 +34,6 @@ universe u v
 namespace RingTheory
 
 /-- A localization of a regular ring is regular.
-
-Source: Stacks Project, Algebra, proof of Lemma Tag 0381, Step 3
-(blueprint: theorem-finite-etale-covers-proper-henselian--2).
-
-Give `R'` the algebra structure induced by `φ`. The three hypotheses imply
-`IsLocalization M R'`: the fraction presentation gives surjectivity after multiplying by the
-denominator, and applying `hzero` to `x - y` gives the equality criterion. First prove that the
-canonical localization `Localization M` is regular. It is Noetherian by localization, and
-Mathlib's `IsLocalization.localizationLocalizationAtPrimeIsoLocalization` identifies its
-localization at any prime with the localization of `R` at the contracted prime. Transport
-regular localness along this isomorphism. Finally, uniqueness of localization gives
-`Localization M ≃ₐ[R] R'`, and `IsRegularRing.of_ringEquiv` transports regularity to `R'`.
-This uses `lem-weil-pbc-localization-noetherian`,
-`lem-weil-pbc-localization-of-localization`, and the Mathlib ring-equivalence transport lemmas.
 -/
 theorem isRegularRing_of_localization
     (R : Type u) (R' : Type v) [CommRing R] [CommRing R'] [IsRegularRing R]

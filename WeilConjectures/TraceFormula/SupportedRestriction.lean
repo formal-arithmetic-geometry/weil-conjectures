@@ -18,12 +18,11 @@ Let `c = (C, c₁, c₂, u)` be an endocorrespondence of `(X, K)` with support m
 `c = (c₁, c₂) : C ⟶ X × X`, fixed locus `ι : Fix(c) ⟶ C` and `d = ι ≫ c₁ : Fix(c) ⟶ X`, so
 that the fixed square `ι ≫ c = d ≫ Δ_X` is cartesian, and put `P = K ⊠ D_X K` on `X × X`.
 
-* The *supported class* of `u` (blueprint `lemma-local-term-restriction-map--1`, (1)) is the section
-  `[u] : ℚ̄_ℓ,C ⟶ Rc^! P`, the mate of `u` read through the external duality isomorphism
-  `𝓗_c(K) ≅ Rc^! P` (`Correspondence.mate`, `Correspondence.verdierDualityIso`); its cohomology
-  class lives in `H⁰ RΓ(C, Rc^! P) = H⁰ RΓ_c(X × X, P)`.
-* The *supported restriction* (blueprint `lemma-local-term-restriction-map--1`, (2)) is the exchange
-  morphism
+* The *supported class* of `u` is the section `[u] : ℚ̄_ℓ,C ⟶ Rc^! P`, the mate of `u` read
+  through the external duality isomorphism `𝓗_c(K) ≅ Rc^! P` (`Correspondence.mate`,
+  `Correspondence.verdierDualityIso`); its cohomology class lives in
+  `H⁰ RΓ(C, Rc^! P) = H⁰ RΓ_c(X × X, P)`.
+* The *supported restriction* is the exchange morphism
   ```
   ρ_P : Lι^* Rc^! P ⟶ Rd^! LΔ^* P
   ```
@@ -31,9 +30,7 @@ that the fixed square `ι ≫ c = d ≫ Δ_X` is cartesian, and put `P = K ⊠ D
   adjoint of `Rc^! P ⟶ Rc^! RΔ_* LΔ^* P ≅ Rι_* Rd^! LΔ^* P`, the unit of `LΔ^* ⊣ RΔ_*` followed
   by base change in the fixed square. Its `Rd_! ⊣ Rd^!` adjoint is the ordinary pullback along
   the diagonal of the support object `Rc_! Rc^! P ⟶ P`, followed by base change
-  (`Correspondence.FixedLocus.homEquiv_symm_supportedRestriction`): this is the description of
-  the blueprint, "the ordinary pullback along `b` of the support object, followed by the
-  exchange morphism to local cohomology with support in the intersection". Taking sections over
+  (`Correspondence.FixedLocus.homEquiv_symm_supportedRestriction`). Taking sections over
   `Fix(c)`, it maps `H⁰ RΓ_c(X × X, P)` to the local cohomology `H⁰ RΓ_{Fix(c)}(X, LΔ^* P)`.
 * The *evaluation* (`Correspondence.FixedLocus.supportedEvaluation`) is
   `Rd^! LΔ^* P ≅ Rd^! (K ⊗ D_X K) --Rd^! ev--> Rd^! ω_X ≅ ω_Fix(c)`.
@@ -45,26 +42,22 @@ that the fixed square `ι ≫ c = d ≫ Δ_X` is cartesian, and put `P = K ⊠ D
   Rd^! LΔ^* P --ev--> ω_Fix(c)`.
 - `ProEtale.CondensedRing.Correspondence.localTerm_traceClass_eq_integral_supportedRestriction`:
   the local term along an open and closed subscheme `j : B ⟶ Fix(c)` proper over `s` is the
-  integral over `B` of the restriction of this composite to `B` (blueprint
-  `lemma-local-term-restriction-map--1`, `lemma-local-term-restriction-map`).
+  integral over `B` of the restriction of this composite to `B`.
 - `ProEtale.CondensedRing.Correspondence.localTerm_traceClass_eq_zero_of_supportedRestriction`:
   if the supported restriction vanishes on `B`, so does the local term.
 
-## Implementation notes
+## Implementation details
 
-The blueprint states `lemma-local-term-restriction-map` on the strict localization `T` of
-`X × X` at a fixed point `(y, y)` of the Frobenius graph of a curve, and with coefficients in a
-finite `ℓ`-primary ring; the trace class of the library is defined over `ℚ̄_ℓ` on schemes of
-finite type over `s`. Here the supported restriction is formed on the whole fixed locus and then
-restricted to an open and closed subscheme `B` of `Fix(c)`. When `B` is the reduced point `y`
-(which is the case for the Frobenius graph, blueprint `lemma-frobenius-fixed-scheme`), its
-restriction to `B` is the stalk at `y`: the source `(Rc^! P)_y = RΓ_a(T, P)` is the sections with
-support on the graph over the strict localization (`c` is finite), and the target
-`(Rd^! LΔ^* P)_y = RΓ_y(X, LΔ^* P)` is the local cohomology at `y`, as in the blueprint. The
-identity of the lemma does not use that `X` is a curve nor that `c` is a Frobenius graph; the
-curve enters only through the vanishing of the supported restriction (blueprint
-`lemma-vanishing-local-term-zero-stalk`). The product factors are in the order `K ⊠ D_X K` of the
-library, the blueprint's lemma uses the transposed graph and `D_X K ⊠ K`.
+The supported restriction is formed on the whole fixed locus, over `ℚ̄_ℓ` on schemes of finite
+type over `s`, and then restricted to an open and closed subscheme `B` of `Fix(c)`, rather than on
+the strict localization `T` of `X × X` at a fixed point `(y, y)` with finite `ℓ`-primary
+coefficients. When `B` is the reduced point `y` (as for the Frobenius graph), its restriction to
+`B` is the stalk at `y`: the source `(Rc^! P)_y = RΓ_a(T, P)` is the sections with support on the
+graph over the strict localization (`c` is finite), and the target
+`(Rd^! LΔ^* P)_y = RΓ_y(X, LΔ^* P)` is the local cohomology at `y`. The identity does not use
+that `X` is a curve nor that `c` is a Frobenius graph; the curve enters only through the
+vanishing of the supported restriction. The product factors are in the order `K ⊠ D_X K`; using
+the transposed graph instead gives `D_X K ⊠ K`.
 
 -/
 
@@ -160,15 +153,13 @@ namespace FixedLocus
 
 variable (F : c.FixedLocus)
 
-/-- The *supported restriction* `ρ_P : Lι^* Rc^! P ⟶ Rd^! LΔ^* P` (blueprint
-`lemma-local-term-restriction-map--1`, (2)): the `Lι^* ⊣ Rι_*` adjoint of
+/-- The *supported restriction* `ρ_P : Lι^* Rc^! P ⟶ Rd^! LΔ^* P`: the `Lι^* ⊣ Rι_*`
+adjoint of
 ```
 Rc^! P ⟶ Rc^! RΔ_* LΔ^* P ≅ Rι_* Rd^! LΔ^* P,
 ```
 the unit of `LΔ^* ⊣ RΔ_*` followed by base change in the fixed square
-(`FixedLocus.upperShriekLowerStarIso`). On sections it maps the classes supported on the
-support `c` of the correspondence to the local cohomology of `LΔ^* P` with support in the fixed
-locus. -/
+(`FixedLocus.upperShriekLowerStarIso`). -/
 noncomputable def supportedRestriction (P : Dᵇc((X ⨯ X).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar _ ℓ F.ι).obj
         ((boundedConstructibleUpperShriek ℓ c.support).obj P) ⟶
@@ -179,8 +170,7 @@ noncomputable def supportedRestriction (P : Dᵇc((X ⨯ X).left)⟦Profinite.pa
         ((boundedConstructibleUpperStarLowerStarAdjunction ℓ (diag X)).unit.app P) ≫
       (F.upperShriekLowerStarIso.app _).hom)
 
-/-- The *evaluation* `Rd^! LΔ^* (K ⊠ D_X K) ⟶ ω_Fix(c)` (blueprint
-`lemma-local-term-restriction-map--1`): `Rd^!` of the identification
+/-- The *evaluation* `Rd^! LΔ^* (K ⊠ D_X K) ⟶ ω_Fix(c)`: `Rd^!` of the identification
 `LΔ^* (K ⊠ D_X K) ≅ K ⊗ D_X K` followed by the evaluation `K ⊗ D_X K ⟶ ω_X`, and the
 composition isomorphism `Rd^! ω_X ≅ ω_Fix(c)`. -/
 noncomputable def supportedEvaluation :
@@ -203,11 +193,10 @@ lemma homEquiv_supportedRestriction (P : Dᵇc((X ⨯ X).left)⟦Profinite.padic
   rw [supportedRestriction, Equiv.apply_symm_apply]
 
 
-/-- **The supported restriction as a pullback of the support object** (blueprint
-`lemma-local-term-restriction-map--1`, (2), second description): the `Rd_! ⊣ Rd^!` adjoint of the
-supported restriction `ρ_P` is the ordinary pullback along the diagonal of the support object
-`Rc_! Rc^! P ⟶ P`, read through compact-support base change `Rd_! Lι^* ≅ LΔ^* Rc_!` in the fixed
-square. -/
+/-- **The supported restriction as a pullback of the support object**: the `Rd_! ⊣ Rd^!`
+adjoint of the supported restriction `ρ_P` is the ordinary pullback along the diagonal of the
+support object `Rc_! Rc^! P ⟶ P`, read through compact-support base change
+`Rd_! Lι^* ≅ LΔ^* Rc_!` in the fixed square. -/
 lemma homEquiv_symm_supportedRestriction
     (P : Dᵇc((X ⨯ X).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     ((boundedConstructibleUpperShriekAdjunction ℓ F.d).homEquiv _ _).symm
@@ -223,17 +212,13 @@ end FixedLocus
 
 variable (c) (F : c.FixedLocus)
 
-/-- **The trace class through the supported restriction** (blueprint
-`lemma-local-term-restriction-map--1`, `lemma-local-term-restriction-map`, before
-restriction to a fixed point): the trace class `Tr_c(u)` is the composite
+/-- **The trace class through the supported restriction**: the trace class `Tr_c(u)`
+is the composite
 ```
 ℚ̄_ℓ,Fix(c) ≅ Lι^* ℚ̄_ℓ,C --Lι^* [u]--> Lι^* Rc^! P --ρ_P--> Rd^! LΔ^* P --ev--> ω_Fix(c)
 ```
 of the supported class `[u]` (the mate of `u` read through external duality), the supported
-restriction and the evaluation, `P = K ⊠ D_X K`. As in the blueprint proof, the evaluation
-kernel `K ⊠ D_X K ⟶ RΔ_* ω_X` defining the trace morphism is the adjoint of the evaluation, so
-both sides are adjoint to the composite `Rc^! P ⟶ Rc^! RΔ_* LΔ^* P ⟶ Rc^! RΔ_* ω_X`, and base
-change in the fixed square is natural. -/
+restriction and the evaluation, `P = K ⊠ D_X K`. -/
 theorem traceClass_eq_supportedRestriction :
     c.traceClass F =
       (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ F.ι)).hom ≫
@@ -272,15 +257,10 @@ theorem restrict_traceClass_eq_supportedRestriction [LocallyOfFiniteType B.hom] 
     _ _ _ _ _ _
 
 
-/-- **The local term through the supported restriction** (blueprint
-`lemma-local-term-restriction-map--1`, `lemma-local-term-restriction-map`): for an open and
-closed subscheme `j : B ⟶ Fix(c)` proper over `s`, the local term `LT_B(u)` is the integral over
-`B` of the composite of the restrictions to `B` of the supported class `[u]`, the supported
-restriction `ρ_P` and the evaluation `ev : Rd^! LΔ^* P ⟶ ω_Fix(c)`, `P = K ⊠ D_X K`. When `B` is
-a reduced fixed point `y`, the restrictions to `B` are stalks at `y`: `ρ_P` restricts to the
-supported restriction `RΓ_c(T, P) ⟶ RΓ_y(X, LΔ^* P)` on the strict localization `T` of `X × X`
-at `(y, y)`, and the integral over `B ≅ s` is the identification `RΓ_y(X, ω_X) ≅ RΓ(y, ω_y)`
-followed by `∫_y`. -/
+/-- **The local term through the supported restriction**: for an open and closed subscheme
+`j : B ⟶ Fix(c)` proper over `s`, the local term `LT_B(u)` is the integral over `B` of the
+composite of the restrictions to `B` of the supported class `[u]`, the supported restriction
+`ρ_P` and the evaluation `ev : Rd^! LΔ^* P ⟶ ω_Fix(c)`, `P = K ⊠ D_X K`. -/
 theorem localTerm_traceClass_eq_integral_supportedRestriction [IsProper B.hom] (j : B ⟶ F.F)
     [IsOpenImmersion j.left] [IsClosedImmersion j.left] :
     (c.traceClass F).localTerm j =
@@ -295,10 +275,9 @@ theorem localTerm_traceClass_eq_integral_supportedRestriction [IsProper B.hom] (
           (dualizingComplexComp ℓ j).hom) :=
   congrArg BorelMooreSection.integral (restrict_traceClass_eq_supportedRestriction c F j)
 
-/-- **Vanishing of the local term through the supported restriction** (blueprint
-`lemma-vanishing-local-term-zero-stalk--2`, proof): if the supported restriction `ρ_P`,
-`P = K ⊠ D_X K`, vanishes on the open and closed subscheme `j : B ⟶ Fix(c)` proper over `s`, then
-the local term `LT_B(u)` is zero. -/
+/-- **Vanishing of the local term through the supported restriction**: if the supported
+restriction `ρ_P`, `P = K ⊠ D_X K`, vanishes on the open and closed subscheme `j : B ⟶ Fix(c)`
+proper over `s`, then the local term `LT_B(u)` is zero. -/
 theorem localTerm_traceClass_eq_zero_of_supportedRestriction [IsProper B.hom] (j : B ⟶ F.F)
     [IsOpenImmersion j.left] [IsClosedImmersion j.left]
     (h : (boundedConstructibleUpperStar _ ℓ j).map
@@ -307,18 +286,15 @@ theorem localTerm_traceClass_eq_zero_of_supportedRestriction [IsProper B.hom] (j
   rw [localTerm_traceClass_eq_integral_supportedRestriction, h, Limits.zero_comp,
     Limits.comp_zero, Limits.comp_zero, BorelMooreSection.integral_zero]
 
-/-- **The local term at a fixed point through the supported restriction** (blueprint
-`lemma-local-term-restriction-map--1`, `lemma-local-term-restriction-map`): let
-`y : s ⟶ Fix(c)` be a fixed point that is open and closed in the fixed locus. Then the local
+/-- **The local term at a fixed point through the supported restriction**: let `y : s ⟶ Fix(c)`
+be a fixed point that is open and closed in the fixed locus. Then the local
 term `LT_y(u)` is the composite in `End(ℚ̄_ℓ,s)`
 ```
 ℚ̄_ℓ,s ≅ (ℚ̄_ℓ,C)_y --[u]_y--> (Rc^! P)_y --(ρ_P)_y--> (Rd^! LΔ^* P)_y --ev_y--> (ω_Fix(c))_y
   ≅ Ry^! ω_Fix(c) ≅ ω_s ≅ ℚ̄_ℓ,s
 ```
 of the stalks at `y` of the supported class, the supported restriction and the evaluation,
-`P = K ⊠ D_X K`. Here `(Rc^! P)_y = RΓ_a(T, P)` and `(Rd^! LΔ^* P)_y = RΓ_y(X, LΔ^* P)`, for the
-strict localization `T` of `X × X` at `(y, y)`, and the last isomorphisms are
-`RΓ_y(X, ω_X) ≅ RΓ(y, ω_y)` followed by `∫_y`. -/
+`P = K ⊠ D_X K`. -/
 theorem localTerm_point_traceClass_eq_supportedRestriction (y : point k ⟶ F.F)
     [IsOpenImmersion y.left] [IsClosedImmersion y.left] :
     (c.traceClass F).localTerm y =

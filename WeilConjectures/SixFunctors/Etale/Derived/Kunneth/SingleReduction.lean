@@ -20,7 +20,9 @@ map (`AlgebraicGeometry.Etale.tensorBaseChangeMap`)
 We show that it is an isomorphism for every `E` of Tor amplitude in `[n, ∞)` and every bounded
 below `F` as soon as it is an isomorphism when `E` is a flat sheaf and `F` is a sheaf, both
 placed in degree `0` (`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_of_single`). This is the
-first part of the proof of blueprint `lemma-kunneth-field-coefficients--1`.
+first part of the proof of `AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap`.
+
+## Implementation details
 
 * In the variable `F`, for `E` a flat sheaf: both sides do not lower the cohomological degree, so
   in a fixed degree they only depend on a truncation `τ^{≤ q} F`, which is bounded
@@ -32,8 +34,8 @@ first part of the proof of blueprint `lemma-kunneth-field-coefficients--1`.
   handled by the stupid truncations
   (`DerivedCategory.isIso_app_Q_obj_of_isStrictlyGE_of_isStrictlyLE_of_prop`).
 
-The blueprint truncates a bounded below flat model of `E` directly; such a complex need not be
-K-flat, which is why we truncate the K-flat flat resolution instead.
+Truncating a bounded below flat model of `E` directly does not work, since such a complex need
+not be K-flat; this is why we truncate the K-flat flat resolution instead.
 -/
 
 @[expose] public section
@@ -267,12 +269,7 @@ lemma isIso_tensorBaseChangeMap_of_torAmplitudeIn (p : X' ⟶ X)
 
 /-- Reduction of the base change map `Lp^* E ⊗ᴸ Lf'^* Rg_* F ⟶ Rh_* (Lh^* Lp^* E ⊗ᴸ Le^* F)`,
 for `F` bounded below and `E` of Tor amplitude in `[n, ∞)`, to flat sheaves `E` placed in degree
-`0`.
-
-Represent `E` by a complex `P` of flat sheaves whose pullbacks are K-flat. In a fixed degree `q`,
-for `N` large, both sides vanish in degrees `q` and `q + 1` on `σ^{≥ N + 1} P`, so the map in
-degree `q` is the one for `σ^{≤ N} P`. The latter has Tor amplitude in `[n, N]`
-(`AlgebraicGeometry.Etale.torAmplitudeIn_Q_obj_stupidTruncLE`). -/
+`0`. -/
 lemma isIso_tensorBaseChangeMap_of_isIso_flat (p : X' ⟶ X)
     (F : DerivedCategory (Sheaf T.smallEtaleTopology A)) (m : ℤ) [F.IsGE m]
     (hflat : ∀ 𝓔 : Sheaf X.smallEtaleTopology A, ObjectProperty.flat 𝓔 →
@@ -330,12 +327,10 @@ lemma isIso_tensorBaseChangeMap_of_isIso_flat (p : X' ⟶ X)
   · exact _root_.DerivedCategory.isZero_of_isGE _ (N + 1 + m) q (by lia) (hX := h₂)
   · exact _root_.DerivedCategory.isZero_of_isGE _ (N + 1 + m) (q + 1) (by lia) (hX := h₂)
 
-/-- First step of the proof of blueprint `lemma-kunneth-field-coefficients--1`: reduction to single
-sheaves.
-
-The base change map `Lp^* E ⊗ᴸ Lf'^* Rg_* F ⟶ Rh_* (Lh^* Lp^* E ⊗ᴸ Le^* F)` is an isomorphism
-for every `E` of Tor amplitude in `[n, ∞)` and every `F` concentrated in degrees `≥ m`, provided
-it is an isomorphism when `E` is a flat sheaf and `F` is a sheaf, both placed in degree `0`. -/
+/-- Reduction to single sheaves: the base change map
+`Lp^* E ⊗ᴸ Lf'^* Rg_* F ⟶ Rh_* (Lh^* Lp^* E ⊗ᴸ Le^* F)` is an isomorphism for every `E` of Tor
+amplitude in `[n, ∞)` and every `F` concentrated in degrees `≥ m`, provided it is an isomorphism
+when `E` is a flat sheaf and `F` is a sheaf, both placed in degree `0`. -/
 theorem isIso_tensorBaseChangeMap_of_single (p : X' ⟶ X)
     (E : DerivedCategory (Sheaf X.smallEtaleTopology A))
     (F : DerivedCategory (Sheaf T.smallEtaleTopology A)) (m n : ℤ) [F.IsGE m]

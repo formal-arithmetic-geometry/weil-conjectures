@@ -47,8 +47,24 @@ import WeilConjectures.AlgebraicGeometry.Tensor.TensorComparisonComposition
 
 /-! # Components of ambient pullback coherence
 
-Source: Stacks 03CB, 03D3, 03EL, 07A4 and 04VG.
-(blueprint: lem-sf-ambient-normalized-tensor-composition).
+We show that normalized tensor data for `f`, `g` and `f ≫ g` are compatible with the
+pullback compositor, for the ordinary, chain and derived tensor products.
+
+## Implementation details
+
+All steps take place on the sequence site itself and use no cartesian-system or
+flat-transition hypothesis.
+
+## References
+
+* [Stacks, Tag 03CB]
+* [Stacks, Tag 03D3]
+* [Stacks, Tag 03EL]
+* [Stacks, Tag 06YN]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 04VG]
+* [Stacks, Tag 0G7E]
+* [Stacks, Tag 0G7D]
 -/
 
 @[expose] public noncomputable section
@@ -187,26 +203,10 @@ private theorem ordinary_composition {X Y Z : Scheme.{t}}
   rw [_hgen, _hgen, _hgen, _hKh.1]
   simp only [scalar, map_one, one_mul]
 
-/-- Ordinary tensor composition and its total and derived representative equations.
-Source: Stacks 03EL, 06YN, 07A4, 0G7E and 0G7D
-(blueprint: lem-sf-ambient-normalized-tensor-composition).
-Proof: transpose the ordinary equality under the composite module adjunction and
-test on sheafified pure tensors. The three normalization equations and hgen send
-both routes to the tensor of the two composite generators, with the product of
-intermediate scalars in the first factor and 1 in the second. Tensor balancing
-and the sheafification universal property extend equality to module morphisms.
-For complexes, invert the ordinary equality and use the model.summand equations.
-The total tensor functor maps the two chain comparators degreewise. Its summand
-inclusions reduce the displayed chain equality to that inverse ordinary equation;
-naturality handles both signed differentials. Direct-sum universality proves the
-chain equality. Resolve both inputs on the whole ringed site by flat-term K-flat
-complexes. The normalization hypotheses preserve that representative class under
-successive pullback. Substitute the model.derived equations and the exact
-factorization of derivedComp into the localization of the chain equality, and
-cancel the invertible representative comparisons. Cochain tensor rigidity, or
-the resolving-subcategory localization universal property, extends the resulting
-natural-transformation equality to all unbounded inputs. These steps are on the
-sequence site itself and use no cartesian-system or flat-transition hypothesis. -/
+/-- For normalized tensor data `Kf`, `Kg`, `Kh` along `f`, `g` and `f ≫ g`, compatible with
+the compositor on generators, the ordinary, chain (on flat representatives) and derived
+tensor comparisons compose: the comparison for `f ≫ g` is the composite of those for `g` and
+`f`, up to the pullback compositor. -/
 theorem normalizedTensor_composition {X Y Z : Scheme.{t}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (s : Option ℕ)
     (A : Tensor ell E Z s) (B : Tensor ell E Y s) (C : Tensor ell E X s)

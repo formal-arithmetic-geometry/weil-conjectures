@@ -19,9 +19,19 @@ import Mathlib.LinearAlgebra.Finsupp.LSum
 import Mathlib.Tactic.Abel
 
 /-! # Canonical induced presentation for a polynomial module
-Source: Weibel, An Introduction to Homological Algebra, Theorem 4.3.7,
-pp. 101–102, sequence (*) and its exactness proof.
-(blueprint: lem-pc-polynomial-induced-presentation)
+
+Every module `M` over a polynomial ring `R[t]` has a canonical short exact sequence
+`0 → R[t] ⊗[R] M → R[t] ⊗[R] M → M → 0`.
+
+## Implementation details
+
+The first map is `f ⊗ m ↦ t f ⊗ m - f ⊗ t m` and the second is multiplication. Injectivity of
+the first map and exactness in the middle are proved by comparing highest coefficients, using
+the `R`-basis `1, t, t², …`. No Tor bound, finiteness, or domain assumption is involved.
+
+## References
+
+* [Weibel, *An Introduction to Homological Algebra*, Theorem 4.3.7]
 -/
 
 @[expose] public section
@@ -86,25 +96,9 @@ private lemma seqDelta_correction (T : Module.End R M) (q : ℕ →₀ M) :
 end Sequences
 
 set_option backward.isDefEq.respectTransparency false in
-/-- An S-module has a length-one presentation by two copies of the module
-induced from its restriction to the coefficient ring R.
-Source: Weibel, An Introduction to Homological Algebra, Theorem 4.3.7,
-pp. 101–102, sequence (*).
-Proof: identify S with R[t], with t the last variable and R included by
-rename Fin.castSucc. Put L = M restricted to R and E = S tensor_R L.
-Define delta(f tensor m) = (t*f) tensor m - f tensor (t*m) and
-pi(f tensor m) = f*m. Both respect the R-balancing relation and are S-linear;
-pi delta = 0 by associativity. Since S has R-basis 1,t,t^2,..., E identifies
-with finitely supported sequences in L. A nonzero sequence with highest
-nonzero coefficient m_k has coefficient m_k in degree k+1 of delta, so
-delta is injective. The argument uses a coefficient in L, not cancellation
-in the ring. For an element in ker pi, subtract delta(t^(k-1) tensor m_k)
-to eliminate its highest coefficient, and descend by induction on k. In
-degree zero the condition pi = 0 forces the coefficient to vanish.
-Thus ker pi = im delta. Finally pi(1 tensor m) = m proves surjectivity.
-This proves short exactness, including n=0, zero modules, and the zero ring.
-No Tor bound, finiteness, or domain assumption is involved.
-(blueprint: lem-pc-polynomial-induced-presentation) -/
+/-- A module `M` over `S = A[x₀, …, xₙ]` has a length-one presentation
+`0 → S ⊗[R] M → S ⊗[R] M → M → 0` by two copies of the module induced from its restriction
+to `R = A[x₀, …, xₙ₋₁]`. -/
 theorem exists_polynomial_induced_presentation
     {A : Type u} [CommRing A] (n : ℕ)
     (M : ModuleCat.{u} (MvPolynomial (Fin (n + 1)) A)) :

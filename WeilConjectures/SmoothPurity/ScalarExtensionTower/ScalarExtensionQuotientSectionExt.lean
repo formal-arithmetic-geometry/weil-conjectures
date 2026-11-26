@@ -13,6 +13,10 @@ import all WeilConjectures.SmoothPurity.Coefficient.CoefficientExtensionOrdinary
 
 The existing quotient section construction and its proved generator criterion
 are isolated to keep the scalar-extension coherence file within its compile budget.
+
+## References
+
+* Stacks Project, Tags 03EL and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +39,7 @@ variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-/-- The actual local section of a strict quotient model specified by its evaluation iso.
-Source: node proof step 2 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
+/-- The actual local section of a strict quotient model specified by its evaluation iso. -/
 def modelSection (W : Scheme.{u})
     (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)
     (SL : CoefficientDerivedSystemCalculus.{u, u} l L W)
@@ -51,14 +54,7 @@ def modelSection (W : Scheme.{u})
     ((((d.directEvaluation n).inv.app P).f i).val.app U
       (integralScalarTensorSection.{u, u} l E L ι W n (P.obj.X i) U b x))
 
-/-- Quotient-model tensor generators determine a whole sequence-site module map.
-Source: quotient uniqueness in proof steps 1--2 of scalar-extension tower coherence;
-Stacks 03EL and 07A4 (blueprint: stage3-pur-scalar-quotient-section-extensionality).
-Proof: evaluate at each quotient level and precompose with the inverse of the
-specified direct-evaluation isomorphism. Forget the module action. The sheafified
-finite scalar tensors generate, so the section hypothesis makes the evaluated
-maps equal. Extensionality on the product sequence site then proves equality
-of the whole maps, including all transition data. -/
+/-- Quotient-model tensor generators determine a whole sequence-site module map. -/
 theorem quotientModelSection_hom_ext (W : Scheme.{u})
     (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)
     (SL : CoefficientDerivedSystemCalculus.{u, u} l L W)

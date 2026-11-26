@@ -14,9 +14,14 @@ import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 /-!
 # Abelian sections and directed colimits on compact opens
 
-Source: Stacks Project, Cohomology, Lemma 01FF, degree-zero argument;
-Sheaves, Lemma 009F(4).
-(blueprint: lem-sc-topological-abelian-sections-filtered-colimit).
+## Implementation details
+
+The private helpers adapt the proof of `SheavesDirectedColimitSections` to abelian groups using
+Mathlib's concrete-colimit API.
+
+## References
+
+* Stacks Project, Tags 01FF, 009E, 009F and 01AH.
 -/
 
 @[expose] public section
@@ -103,13 +108,8 @@ private theorem abelian_colimit_sections_eventually_equal
       ← NatTrans.comp_app, ← ObjectProperty.FullSubcategory.comp_hom,
       ← Functor.map_comp, homOfLE_comp] using e
 
-/-- Compact-open injectivity, from Stacks 009F(2), using 009E(5).
-Equality of images gives equality of germs. Stalks preserve sheaf colimits,
-so filtered-colimit equality gives a common stage at each point. Equality
-of germs gives a neighborhood of agreement. A finite subcover and a common
-upper bound give global equality by sheaf separation. Finally represent
-arbitrary colimit elements by sections to prove injectivity of the map.
-(blueprint: lem-sc-topological-abelian-sections-filtered-colimit) -/
+/-- On a compact open, the comparison from the colimit of sections to the sections of the
+colimit sheaf is injective. -/
 private theorem abelian_colimit_sections_injective
     (X : TopCat.{u}) (I : Type u) [Preorder I] [Nonempty I]
     [IsDirected I (· ≤ ·)]
@@ -172,14 +172,8 @@ private theorem abelian_colimit_sections_locally_lift
   rw [NatTrans.naturality_apply]
   exact he
 
-/-- Finite-cover bijectivity, from Stacks 009F(4), using 009E(5).
-The finite-refinement hypothesis implies compactness, hence injectivity.
-Stalk-colimit representability and equality of germs give local section lifts.
-Refine their cover to the finite cover with compact overlaps. On each overlap,
-compact-open eventual equality supplies a stage of agreement. Choose an upper
-bound for all local stages and overlap stages, then glue in that sheaf. The
-image of the glued section equals the original section by sheaf separation.
-(blueprint: lem-sc-topological-abelian-sections-filtered-colimit) -/
+/-- Under the finite-refinement hypothesis, the comparison from the colimit of sections to the
+sections of the colimit sheaf is surjective. -/
 private theorem abelian_colimit_sections_surjective
     (X : TopCat.{u}) (I : Type u) [Preorder I] [Nonempty I]
     [IsDirected I (· ≤ ·)]
@@ -289,25 +283,7 @@ private theorem abelian_colimit_sections_surjective
 
 
 /-- Sections on compact opens preserve directed colimits under the compact-basis and
-compact-intersection hypotheses.
-Source: Stacks Project, Cohomology, Lemma 01FF, degree-zero argument;
-Sheaves, Lemma 009F(4), with Modules, Lemma 01AH.
-(blueprint: lem-sc-topological-abelian-sections-filtered-colimit).
-
-Proof: every open covering of a compact open admits a finite refinement by compact
-opens: refine pointwise using the basis and then take a finite subcover. Pairwise
-intersections are compact by hypothesis. Stalk functors on abelian sheaves preserve
-colimits, and the forgetful functor on abelian groups preserves filtered colimits.
-Representability and eventual equality in those stalk colimits give local lifts and
-local eventual equality of sections. Compactness gives eventual equality on a whole
-compact open. On the finite refinement, choose local lifts and one common upper stage
-for all lifts and their agreements on compact overlaps, and glue in that sheaf.
-The image of the glued section is the original section by separation. Thus the
-canonical section comparison is bijective, hence an isomorphism of abelian groups.
-This proves preservation of the diagram's colimit; quantify over all diagrams.
-Empty opens give the zero group and the empty finite covering; no separation or
-compactness of the whole space is required. The private helpers adapt the proof of
-`SheavesDirectedColimitSections` to abelian groups using Mathlib's concrete-colimit API. -/
+compact-intersection hypotheses. -/
 theorem abelianSections_preservesDirectedColimits
     (X : Type u) [TopologicalSpace X]
     (hbas : ∀ (V : Set X), IsOpen V → ∀ x ∈ V, ∃ W : Set X, IsOpen W ∧

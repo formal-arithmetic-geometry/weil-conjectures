@@ -56,14 +56,19 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 /-!
 # Ordinary scalar and geometric interchange on strict quotient systems
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6D (ordinary composition);
-sites-modules.tex, tensor/restriction adjunction, Tags 03D7 and 03EK;
-the agent-formulated whole-sequence calculation extracted from mixed coherence
-(blueprint: lem-trf-sequence-scalar-generator-interchange).
+Ordinary scalar change and geometric inverse image commute on whole strict quotient systems: the six
+routes below are composites of the recorded ordinary comparisons.
 
-The six routes below are composites of the recorded ordinary comparisons.
-Functor associators only make the parenthesization explicit. No derived scalar
-functor, K-flat hypothesis, realization or flatness of quotient maps is used.
+## Implementation details
+
+Functor associators only make the parenthesization explicit. No derived scalar functor, K-flat
+hypothesis, realization or flatness of quotient maps is used. Equalities are tested on unit tensor
+generators through the tensor/restriction and inverse-image adjunctions; sheafification uniqueness
+removes any need to write arbitrary sheaf sections as global pure tensors.
+
+## References
+
+* Stacks Project, Tags 0D6D, 03D7, 03EK, 0DV0 and 010V.
 -/
 
 @[expose] public noncomputable section
@@ -291,9 +296,7 @@ private theorem scalar_pullback_tensor {X Y : Scheme.{t}} (f : X ⟶ Y)
   exact (generator_smul l L f _ n U b
     (integralComparisonSequenceTensorSection l E L ι Y N (op (n, U)) 1 x)).symm
 
-/-- The route through the geometric compositor over E and then both scalar squares.
-Source: Stacks 0D6D, tensor/restriction adjunction, 03D7 and 03EK
-(blueprint: lem-trf-sequence-scalar-generator-interchange). -/
+/-- The route through the geometric compositor over E and then both scalar squares. -/
 def sequenceScalarGeometricLeft {V W Z : Scheme.{t}} (h : Z ⟶ W) (k : W ⟶ V) :=
   Functor.whiskerRight
       (integralComparisonSequenceComposition l E h k).hom
@@ -313,26 +316,20 @@ def sequenceScalarGeometricLeft {V W Z : Scheme.{t}} (h : Z ⟶ W) (k : W ⟶ V)
       (integralComparisonSequencePullback l L k)
       (integralComparisonSequencePullback l L h)).hom
 
-/-- The route through the composite scalar square and the geometric compositor over L.
-Source: Stacks 0D6D, tensor/restriction adjunction, 03D7 and 03EK
-(blueprint: lem-trf-sequence-scalar-generator-interchange). -/
+/-- The route through the composite scalar square and the geometric compositor over L. -/
 def sequenceScalarGeometricRight {V W Z : Scheme.{t}} (h : Z ⟶ W) (k : W ⟶ V) :=
   (integralComparisonSequenceScalarPullback l E L ι (h ≫ k)).hom ≫
     Functor.whiskerLeft (integralComparisonSequenceScalarModel l E L ι V).E
       (integralComparisonSequenceComposition l L h k).hom
 
-/-- The identity-coefficient square followed by multiplication at the source.
-Source: Stacks 0D6D, tensor/restriction adjunction, 03D7 and 03EK
-(blueprint: lem-trf-sequence-scalar-generator-interchange). -/
+/-- The identity-coefficient square followed by multiplication at the source. -/
 def sequenceScalarUnitLeft {X Y : Scheme.{t}} (f : X ⟶ Y) :=
   (integralComparisonSequenceScalarPullback l E E (AlgHom.id ℚ_[l] E) f).hom ≫
     Functor.whiskerRight
       (integralComparisonSequenceScalarUnit l E Y).hom (integralComparisonSequencePullback l E f) ≫
     (Functor.leftUnitor (integralComparisonSequencePullback l E f)).hom
 
-/-- Multiplication at the target after ordinary geometric inverse image.
-Source: Stacks 0D6D, tensor/restriction adjunction, 03D7 and 03EK
-(blueprint: lem-trf-sequence-scalar-generator-interchange). -/
+/-- Multiplication at the target after ordinary geometric inverse image. -/
 def sequenceScalarUnitRight {X Y : Scheme.{t}} (f : X ⟶ Y) :=
   Functor.whiskerLeft (integralComparisonSequencePullback l E f)
       (integralComparisonSequenceScalarUnit l E X).hom ≫
@@ -341,9 +338,7 @@ def sequenceScalarUnitRight {X Y : Scheme.{t}} (f : X ⟶ Y) :=
 variable (M : Type u) [Field M] [Algebra ℚ_[l] M] [FiniteDimensional ℚ_[l] M]
   (j : L →ₐ[ℚ_[l]] M)
 
-/-- The two scalar squares followed by multiplication of the coefficient factors.
-Source: Stacks 0D6D, tensor/restriction adjunction, 03D7 and 03EK
-(blueprint: lem-trf-sequence-scalar-generator-interchange). -/
+/-- The two scalar squares followed by multiplication of the coefficient factors. -/
 def sequenceScalarTowerLeft {X Y : Scheme.{t}} (f : X ⟶ Y) :=
   (Functor.associator (integralComparisonSequencePullback l E f)
       (integralComparisonSequenceScalarModel l E L ι X).E
@@ -363,22 +358,13 @@ def sequenceScalarTowerLeft {X Y : Scheme.{t}} (f : X ⟶ Y) :=
       (integralComparisonSequenceScalarComposition l E L ι M j Y).hom
       (integralComparisonSequencePullback l M f)
 
-/-- Multiplication of coefficient factors followed by the composite scalar square.
-Source: Stacks 0D6D, tensor/restriction adjunction, 03D7 and 03EK
-(blueprint: lem-trf-sequence-scalar-generator-interchange). -/
+/-- Multiplication of coefficient factors followed by the composite scalar square. -/
 def sequenceScalarTowerRight {X Y : Scheme.{t}} (f : X ⟶ Y) :=
   Functor.whiskerLeft (integralComparisonSequencePullback l E f)
       (integralComparisonSequenceScalarComposition l E L ι M j X).hom ≫
     (integralComparisonSequenceScalarPullback l E M (j.comp ι) f).hom
 
-/-- Equality is determined on local iterated-unit tensor generators by adjunction.
-Source: Stacks tensor/restriction adjunction, 03D7, 03EK and 0DV0
-(blueprint: lem-trf-sequence-scalar-generator-interchange).
-Proof: transpose first along tensor/restriction, then along inverse image/direct
-image. The displayed values are exactly the section values of the transposes.
-They agree at every sequence-site object and section, hence the transposes and
-therefore the original maps agree. This uses sheafification uniqueness rather
-than a claim that all sections are globally pure tensors. -/
+/-- Equality is determined on local iterated-unit tensor generators by adjunction. -/
 theorem sequenceScalarPullback_hom_ext
     {X Y : Scheme.{t}} (f : X ⟶ Y)
     (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
@@ -408,15 +394,7 @@ theorem sequenceScalarPullback_hom_ext
     (fun P A x ↦ integralComparisonSequenceTensorSection l E L ι X P A 1 x) hu]
   exact hab n U x
 
-/-- The twice-iterated adjunction also determines maps on unit tensor generators.
-Source: Stacks tensor/restriction adjunction, 03D7, 03EK and 0DV0
-(blueprint: lem-trf-sequence-scalar-generator-interchange).
-Proof: transpose successively through the outer tensor adjunction, the inner
-tensor adjunction, and the inverse-image adjunction. The displayed composites
-are exactly the values of the transposes on every local section of N. Sectionwise
-equality gives equality of the transposes and injectivity of the three adjunction
-bijections gives equality of the original maps. Sheafification uniqueness removes
-any need to write arbitrary sheaf sections as global pure tensors. -/
+/-- The twice-iterated adjunction also determines maps on unit tensor generators. -/
 theorem sequenceScalarTowerPullback_hom_ext
     {X Y : Scheme.{t}} (f : X ⟶ Y)
     (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
@@ -459,13 +437,7 @@ theorem sequenceScalarTowerPullback_hom_ext
     (fun P A x ↦ integralComparisonSequenceTensorSection l L M j X P A 1 x) hu']
   exact hab n U x
 
-/-- The common scalar-unit route sends 1 tensor gamma_f(x) to gamma_f(x).
-Source: Stacks tensor/restriction adjunction, 03D7, 03EK
-(blueprint: lem-trf-sequence-scalar-generator-interchange).
-Proof: the scalar square sends the input to gamma_f(1 tensor x).
-Naturality of gamma_f with the multiplication unitor gives gamma_f(x).
-The other route multiplies the scalar 1 directly; ordinary unit interchange
-identifies the routes on the whole system. -/
+/-- The common scalar-unit route sends 1 tensor gamma_f(x) to gamma_f(x). -/
 theorem sequenceScalarUnit_generator
     {X Y : Scheme.{t}} (f : X ⟶ Y)
     (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
@@ -496,14 +468,8 @@ theorem sequenceScalarUnit_generator
   erw [hu, one_smul] at hn
   exact hn
 
-/-- The common geometric route has the specified iterated-unit tensor value.
-The restriction along fibre-product pasting makes the two test objects explicit.
-Source: Stacks 0D6D, 03D7, 03EK; mixed calculation on adjunction-unit generators
-(blueprint: lem-trf-sequence-scalar-generator-interchange).
-Proof: apply the unit equation for the prescribed compositor mate, then the
-scalar/pullback generator equation twice and naturality of gamma_h. Both routes
-give gamma_h(gamma_k(1 tensor x)), restricted along the canonical pasting map.
-This proves the value on every source section, not only global sections. -/
+/-- The common geometric route has the specified iterated-unit tensor value. The restriction along
+fibre-product pasting makes the two test objects explicit. -/
 theorem sequenceScalarGeometric_generator
     {V W Z : Scheme.{t}} (h : Z ⟶ W) (k : W ⟶ V)
     (_hV : ∀ x : V, IsUnit (l : V.presheaf.stalk x))
@@ -568,16 +534,8 @@ theorem sequenceScalarGeometric_generator
   erw [hk]
   rfl
 
-/-- The common tower route has value gamma_f(c*j(b) tensor x), with source-local
-coefficients transported by the recorded constant-coefficient maps.
-Source: Stacks tensor/restriction adjunction, 03D7, 03EK
-(blueprint: lem-trf-sequence-scalar-generator-interchange).
-Proof: the two scalar squares give c tensor gamma_f(b tensor x), then
-gamma_f(c tensor (b tensor x)). Naturality with the recorded scalar associator
-multiplies the coefficients to c*j(b). The other route multiplies them first.
-The adjunction argument proves equality for arbitrary target-local sections;
-this explicit value only uses b,c on the source test object. All restriction
-maps preserve products and intertwine j, including non-flat quotient maps. -/
+/-- The common tower route has value gamma_f(c*j(b) tensor x), with source-local coefficients
+transported by the recorded constant-coefficient maps. -/
 theorem sequenceScalarTower_generator
     {X Y : Scheme.{t}} (f : X ⟶ Y)
     (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
@@ -626,18 +584,7 @@ theorem sequenceScalarTower_generator
     l E L ι M j Y).exists.choose_spec N (op (n, U)) c b x
   erw [ha]
 
-/-- Geometric composition and scalar change commute on the whole sequence site.
-Source: Stacks 0D6D, 03D7, 03EK; ordinary mixed tensor calculation
-(blueprint: lem-trf-sequence-scalar-generator-interchange).
-Proof: transpose twice, using tensor/restriction and inverse-image adjunctions
-and their composite. Equality is tested on every local section x through
-1 tensor gamma_kh(x). The unit equation for the prescribed pasting mate sends
-gamma_kh(x) to gamma_h(gamma_k(x)). Both routes therefore give
-gamma_h(gamma_k(1 tensor x)). This is an equality of whole-system maps:
-vertical restrictions preserve units and tensors, while horizontal restrictions
-are the actual semilinear quotient maps and preserve 1. Sheafification uniqueness
-extends the equality from tensors; arbitrary sheaf sections need not be pure.
-Naturality in N gives the displayed equality of natural transformations. -/
+/-- Geometric composition and scalar change commute on the whole sequence site. -/
 theorem sequenceScalarGeometric_interchange
     {V W Z : Scheme.{t}} (h : Z ⟶ W) (k : W ⟶ V)
     (_hV : ∀ x : V, IsUnit (l : V.presheaf.stalk x))
@@ -656,15 +603,7 @@ theorem sequenceScalarGeometric_interchange
   simp only [PresheafOfModules.comp_app, ModuleCat.comp_apply]
   erw [hs, composition_generator l L h k]
 
-/-- The scalar unit commutes with ordinary inverse image of whole quotient systems.
-Source: Stacks tensor/restriction adjunction, 03D7, 03EK
-(blueprint: lem-trf-sequence-scalar-generator-interchange).
-Proof: transpose through both adjunctions. On 1 tensor gamma_f(x) the scalar
-square gives gamma_f(1 tensor x), and naturality of gamma_f with multiplication
-gives gamma_f(x). Multiplication at X gives the same section. The transposes
-agree on all source-local sections, hence the maps agree. Quotient maps and
-vertical restrictions preserve 1 and multiplication, so this is a whole-system
-identity, without flatness or cancellation of coefficients. -/
+/-- The scalar unit commutes with ordinary inverse image of whole quotient systems. -/
 theorem sequenceScalarUnit_interchange
     {X Y : Scheme.{t}} (f : X ⟶ Y)
     (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
@@ -683,18 +622,7 @@ theorem sequenceScalarUnit_interchange
     (integralComparisonSequenceGenerator l E f N n U x)
   exact (hu.trans (one_smul _ _)).symm
 
-/-- The scalar tower associator commutes with ordinary inverse image.
-Source: Stacks tensor/restriction adjunction, 03D7, 03EK
-(blueprint: lem-trf-sequence-scalar-generator-interchange).
-Proof: the twice-composed adjunction tests on 1 tensor (1 tensor gamma_f(x)).
-The left route gives successively 1 tensor gamma_f(1 tensor x),
-gamma_f(1 tensor (1 tensor x)), and gamma_f(1 tensor x); the right gives the
-same. For source-local coefficient sections b,c, linearity and the recorded
-associator give gamma_f(c*j(b) tensor x) on c tensor (b tensor gamma_f(x)).
-Horizontal quotients are ring maps and commute with j, so q(c*j(b)) =
-q(c)*j(q(b)); vertical restrictions satisfy the same formula. Adjunction and
-sheafification uniqueness prove equality on entire systems, without any
-assumption that target-local coefficients come from the source or are flat. -/
+/-- The scalar tower associator commutes with ordinary inverse image. -/
 theorem sequenceScalarTower_interchange
     {X Y : Scheme.{t}} (f : X ⟶ Y)
     (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
@@ -720,16 +648,7 @@ theorem sequenceScalarTower_interchange
   exact ((integralComparisonSequenceScalarPullback_existsUnique
     l E M (j.comp ι) f).exists.choose_spec N n U x).symm
 
-/-- The geometric interchange is equality of cochain maps of arbitrary unbounded complexes.
-Source: Stacks 010V and the ordinary whole-system calculation, 0D6D, 03D7, 03EK
-(blueprint: lem-trf-sequence-scalar-generator-interchange).
-Proof: use the ordinary geometric interchange in every degree. Both ordinary
-functors are additive, hence preserve zero morphisms, so their degreewise images
-are complexes. Naturality with the differential is the cochain-map condition.
-Degreewise equality gives equality of cochain maps. Every component is still a
-map of sequence-site sheaves, retaining all vertical and horizontal restrictions.
-No totalization, sum, resolution or localization is taken, hence no boundedness
-or quotient-flatness assumption is needed. -/
+/-- The geometric interchange is equality of cochain maps of arbitrary unbounded complexes. -/
 theorem sequenceScalarGeometric_interchange_cochain
     {V W Z : Scheme.{t}} (h : Z ⟶ W) (k : W ⟶ V)
     (_hV : ∀ x : V, IsUnit (l : V.presheaf.stalk x))

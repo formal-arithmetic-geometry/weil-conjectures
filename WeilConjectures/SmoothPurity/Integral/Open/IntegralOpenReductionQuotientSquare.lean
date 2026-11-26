@@ -41,8 +41,9 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # The consecutive quotient square for normalized open reduction
 
-Source: Stacks Tags 0E8I, 0GL1, 06YY and 0941; the strict-model normalization in
-`lem-sf-integral-open-reduction-comparison`.
+## References
+
+* Stacks Project, Tags 0E8I, 0GL1, 06YY and 0941
 -/
 
 @[expose] public noncomputable section
@@ -134,27 +135,7 @@ private def alphaIso
       (compactSupportCanonicalJLevel l E j o n)
 
 /-- Finite open extension commutes with successive scalar restriction, and the
-strict open-reduction comparison respects the actual adjunction-transpose quotient maps.
-Source: Stacks Tags 0E8I (open tensor compatibility), 06YY (K-flat scalar change),
-and 0941 (strict coefficient systems); proof Step 1 of
-`lem-sf-compact-support-proper-image-tower`.
-(blueprint: lem-sf-integral-open-reduction-quotient-square).
-
-Proof: integralOpenTensorQuotientModel constructs the ordinary finite restriction
-square with its generator normalization and proves the quotient square on the
-explicit tensor isomorphisms beta_n(Q), independently of a strict comparison.
-Choose a flat-term K-flat resolution Q representing K. Transport completeness along
-the localization isomorphism. integralOpenTensorRepresentative, using r.strictModel,
-identifies alpha_n with beta_n(Q) at every level. Substitution gives the required
-square on the representative. The alpha components form a natural isomorphism:
-whisker and compose the inverse target reduction evaluation, r, canonical open
-evaluation, and source reduction evaluation. The two quotient maps and the exact
-open restriction comparison are natural transformations. Apply their naturality
-equations to the representative isomorphism, and cancel the image of that
-isomorphism under the larger-level reduction of open extension. The resulting
-equality is the required square on K. This uses no finite-evaluation faithfulness,
-boundedness, or flatness of a coefficient quotient. Empty opens, zero complexes,
-and n=0 are included in the two model statements. -/
+strict open-reduction comparison respects the actual adjunction-transpose quotient maps. -/
 theorem integralOpenReductionQuotientSquare
     (SV : CoefficientDerivedSystemCalculus l E V)
     (SX : CoefficientDerivedSystemCalculus l E X)

@@ -96,9 +96,10 @@ import WeilConjectures.TraceFormula.Supporting.StrictQuotientCompletionRealizati
 
 /-! # Multiplication and product comparison on entire strict quotient cones
 
-Source: blueprint main-20261015, sec-trace-formula/sk-d-weil/
-prop-trf-rational-frobenius-integral-model.proof.md, (2)--(3); Stacks Tags 0941 and 08TC
-(blueprint: lem-trf-isomorphism-multiplication-cone-descent).
+Multiplication and the canonical product comparison give the same natural isomorphism on all
+strict quotient cones and after localization (`isomorphismMultiplicationConeDescent`).
+
+## Implementation details
 
 The positive exponent is n+1. The finite pullbacks and quotient transitions are the
 published strict constructions. Multiplication is specified on their sheafified
@@ -106,6 +107,10 @@ unit generators; bundled linearity gives all scalar multiples. The two existing
 mapping-cocone projections specify the product comparison on both coordinates,
 including zero off-diagonal entries. The completion comparison is normalized on
 every simultaneous quotient presentation through the existing K-injective-normalized Roos model.
+
+## References
+
+* Stacks Project, Tags 0941, 08TC
 -/
 
 @[expose] public noncomputable section
@@ -353,44 +358,7 @@ attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
 
 -- The fixed statement elaborates both strict section and derived-category coordinates.
 /-- Multiplication and the canonical product comparison give the same natural
-isomorphism on all strict quotient cones and after localization.
-
-Source: blueprint main-20261015, sec-trace-formula/sk-d-weil/
-prop-trf-rational-frobenius-integral-model.proof.md (2)--(3); Stacks 0941 and 08TC
-(blueprint: lem-trf-isomorphism-multiplication-cone-descent).
-
-Proof, following the ten steps of the node:
-1. The site equivalence identifies inverse-image sections with sections after
-postcomposition by g. Transport through c inverse preserves addition, kernels,
-cokernels and sectionwise products. Product projections fix phi and its inverse.
-2. Resolve by one flat-term K-flat Q. The derived-system evaluation calculus gives
-its entire strict quotient system. The ambient pullback is H(C), and normalized
-strict Roos comparison identifies L R with H(D), without completeness or bounds.
-3. Scalar extension through c_n has multiplication inverse to x to x tensor 1.
-The completed projection equation proves completed linearity. Both composites
-are identities by the tensor balancing relation, also after sheafification.
-4. The actual quotient transition sends x tensor a to tau(x) tensor reduction(a).
-The coefficient square shows multiplication commutes with this map. Restrictions,
-differentials and arbitrary chain maps satisfy the same generator identities.
-5. Product projections give phi G(s)=s phi and hence the difference square.
-Apply phi to both coordinates of the shifted cone. Its differential is
-(-db-(1-s)a,da), so this is an invertible chain map with no cross terms. The
-exact-product derived-limit comparison gives this same map under normalized Roos
-identifications: (b,a) to (a,-b) converts its signed-coordinate convention.
-6. Apply H to the strict multiplication isomorphism and follow by eta inverse.
-Products and cone coordinates prove naturality of this entire chain isomorphism.
-7. A homotopy h acts on reductions and their products, commuting with the quotient
-shift. On the cone its homotopy is (-h,h); the cross term h(1-s)-(1-s)h vanishes.
-Thus both constructions and their natural isomorphism respect homotopies.
-8. The ambient-operation well-definedness theorem inverts quasi-isomorphisms on
-good representatives. On the other side, reduction, strict Roos localization and
-exact inverse image invert them too. Their normalized comparisons are functorial.
-9. The resolving-class localization theorem extends the strict natural isomorphism
-and its inverse uniquely to the ordinary unbounded derived category. Uniqueness
-makes both composites identity and proves naturality on every derived morphism.
-10. The representative equation below holds after every isomorphism Q(P) to N.
-Consequently every allowed resolution gives this same component through its
-canonical comparisons. No completeness, constructibility or boundedness is used. -/
+isomorphism on all strict quotient cones and after localization. -/
 theorem isomorphismMultiplicationConeDescent
     {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
     (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))

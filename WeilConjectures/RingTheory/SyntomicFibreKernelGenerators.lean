@@ -16,8 +16,23 @@ import Mathlib.RingTheory.Polynomial.Basic
 /-!
 # Fibre generators in a fixed polynomial presentation
 
-Source: Stacks Project, Tag 00SY, proof of (3) implies (2); Tag 00SC.
-(blueprint: lem-weil-pbc-syntomic-fibre-kernel-generators).
+For a polynomial presentation `φ : R[x_1, …, x_n] → S` whose fibre at a prime `q` is a global
+complete intersection near `q`, at most `n` elements of the kernel generate it in the polynomial
+local ring modulo the base prime.
+
+## Implementation details
+
+The fibre is identified with a quotient of `κ(p)[x_1, …, x_n]`. Its localized conormal module is
+free of rank `c = n - d ≤ n`; representatives in `I = ker φ` of a basis of its residue vector
+space generate the fibre ideal by Nakayama's lemma in the fibre local ring `P_Q / p P_Q`, and
+taking inverse images gives the stated containment. Denominators coming from `κ(p)` or from
+outside the inverse-image prime are units in `P_Q`, so they do not affect the choice of basis.
+This argument needs no flatness.
+
+## References
+
+* [Stacks, Tag 00SY], proof of (3) ⇒ (2)
+* [Stacks, Tag 00SC]
 -/
 
 set_option autoImplicit false
@@ -77,28 +92,9 @@ private theorem lift_generators_from_localized_quotient
   simpa only [Ideal.comap_map_of_surjective π Ideal.Quotient.mk_surjective,
     ← RingHom.ker_eq_comap_bot, π, Ideal.mk_ker, J] using hle
 
-/-- Bounded equations generate the presentation kernel modulo the base prime in the
-polynomial local ring. Source: Stacks Project, Tag 00SY, proof of (3) implies (2),
-choice of equations; Tag 00SC, conormal rank.
-(blueprint: lem-weil-pbc-syntomic-fibre-kernel-generators).
-
-Proof: Put p = q ∩ R and Q = φ⁻¹(q). Base change the surjection to κ(p) and identify
-κ(p) ⊗ P with κ(p)[x₁,…,xₙ], and its quotient with κ(p) ⊗ S. Transport the prime
-corresponding to q and the given complete-intersection neighbourhood to this quotient.
-The conormal rank theorem gives a basis with c = n - d ≤ n elements. The images of
-I = ker φ generate the fibre ideal and therefore its conormal residue vector space.
-The residue field at the fibre prime equals that at Q. In this vector space the
-images of I are a spanning set, so select c of them forming a basis and take their
-original representatives fᵢ ∈ I. Every coefficient denominator from κ(p) comes
-from R ∖ p, hence is invertible in P_Q; every polynomial denominator lies outside
-the inverse-image prime, hence is invertible in P_Q as well. Multiplying a chosen
-basis vector by such a denominator preserves a basis. The polynomial fibre ring
-is Noetherian; its localized ideal is therefore finite. Nakayama in that local
-ring makes the fᵢ generate the fibre ideal. The fibre local ring is P_Q/pP_Q,
-by the fibre-local-ring comparison.
-Taking the inverse image of this equality says I P_Q ⊆ (fᵢ)P_Q + pP_Q.
-This argument needs no flatness. For c = 0 the fibre ideal is zero and the same
-containment holds with the zero ideal. The specified prime excludes a zero fibre. -/
+/-- Let `φ : P = R[x_1, …, x_n] → S` be surjective with kernel `I`, and let `q` be a prime of `S`
+whose fibre is a global complete intersection near the fibre prime. Then there are `c ≤ n`
+elements `f_i ∈ I` with `I P_Q ⊆ (f_i) P_Q + p P_Q`, where `Q = φ⁻¹(q)` and `p = q ∩ R`. -/
 theorem exists_bounded_fibre_kernel_generators
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
     (q : PrimeSpectrum S) (n : ℕ) (φ : MvPolynomial (Fin n) R →ₐ[R] S)

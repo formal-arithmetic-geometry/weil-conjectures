@@ -15,9 +15,18 @@ import WeilConjectures.RingTheory.NoetherianLocalModelTowerBaseFlatStage
 /-!
 # Base flatness eventually holds in a Noetherian local model tower
 
-Source: Stacks Project, Algebra, proof of Tag 00R7, second paragraph, application
-of Tag 00R6 to the base and top rings.
-(blueprint: lem-weil-pbc-noetherian-local-model-tower-base-flat).
+If the limit module is flat over the base, then the stage modules are flat over the stage base
+rings from some index on.
+
+## Implementation details
+
+A flat stage is provided by `exists_baseFlat_stage`. Flatness persists at later stages because
+the transition `T_i ⊗[R_i] R_j → T_j` is a localization and base change preserves flatness.
+
+## References
+
+* [Stacks, Tag 00R7] (second paragraph of the proof)
+* [Stacks, Tag 00R6]
 -/
 
 @[expose] public section
@@ -94,25 +103,7 @@ private theorem flat_of_localized_baseChange
   let ec := (AlgebraTensorModule.cancelBaseChange B C B' B' N).restrictScalars A'
   exact Module.Flat.of_linearEquiv (ec.trans (e.restrictScalars A')).symm
 
-/-- Base flatness of the limit module descends to a tail of the model tower.
-Source: Stacks Project, Algebra, proof of Tag 00R7, second paragraph, application
-of Tag 00R6 to the base and top rings.
-(blueprint: lem-weil-pbc-noetherian-local-model-tower-base-flat).
-
-Proof:
-1. Apply `exists_baseFlat_stage` to the tower. Its proof constructs categorical colimits,
-   transports the assumed limit flatness, and applies `RingTheory.exists_flat_stage`.
-   It gives an index whose stage module is flat over the stage base ring.
-2. For any later index, form C = T_i tensor_{R_i} R_j. Base change makes
-   C tensor_{T_i} N_i flat over R_j, using `Algebra.IsPushout.cancelBaseChange`.
-   The canonical map C to T_j is a localization by `baseTransition`, so T_j is
-   flat over C. Tensor associativity and the injectivity criterion for flatness show
-   that extending a module flat over R_j along this flat C-algebra remains flat over R_j.
-3. Cancel the iterated tensor product and compose with `moduleTransition` to identify
-   the extension with N_j. The commuting ring squares and scalar towers identify the
-   resulting R_j-action with its specified action. Linear equivalences transport
-   flatness, proving the tail assertion, including its first index and the zero module.
--/
+/-- Base flatness of the limit module descends to a tail of the model tower. -/
 theorem NoetherianLocalModelTower.eventually_baseFlat
     {R : Type u} {S : Type v} {S' : Type w} {M : Type t}
     [CommRing R] [CommRing S] [CommRing S'] [AddCommGroup M]

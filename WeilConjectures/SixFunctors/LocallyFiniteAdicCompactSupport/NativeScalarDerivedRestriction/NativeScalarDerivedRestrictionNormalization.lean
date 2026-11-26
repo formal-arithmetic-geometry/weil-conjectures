@@ -10,8 +10,9 @@ import WeilConjectures.CategoryTheory.Right.RightDerivedExactRestrictionNormaliz
 
 /-! # Full-unit normalizations of the presentation comparisons
 
-Source: Stacks, Modules on Sites, Tags 03D6 and 03D7; Cohomology on Sites, Tag 0D6E.
-(blueprint: lem-sf-native-scalar-derived-restriction-normalization).
+## References
+
+* [Stacks, Tags 03D6, 03D7 and 0D6E]
 -/
 
 @[expose] public noncomputable section
@@ -38,11 +39,7 @@ attribute [local instance] nativeScalarModuleClosed nativeScalarModuleSymmetric
   nativeScalarModuleTensorFour nativeScalarModuleGoodTensorLeft nativeScalarModuleGoodTensorRight
   nativeScalarIntegralExact
 
-/-- The inverse integral comparison has the full cochain-unit normalization.
-Source: Stacks, Cohomology on Sites, Tag 0D6E.
-(blueprint: lem-sf-native-scalar-derived-restriction-normalization).
-Proof: unfold the named comparison and apply the canonical exact-equivalence
-normalization. This keeps the concrete comparison folded for the cube calculation. -/
+/-- The inverse integral comparison has the full cochain-unit normalization. -/
 theorem integral_normalized (l : ℕ) [Fact l.Prime] (E : Index l (PadicAlgCl l))
     {R S : PurCompactSupport.Coefficients.{u}} (a : PurCompactSupport.Change R S)
     (P : NativeScalarRingModel l E a) {U V : Scheme.{u}} (g : U ⟶ V)
@@ -64,11 +61,7 @@ theorem integral_normalized (l : ℕ) [Fact l.Prime] (E : Index l (PadicAlgCl l)
     (proEtaleRingModuleDirectImage g (R.ring V) (R.ring U) (R.pull g))
     (P.integralEquivalence U) (P.integralEquivalence V) x
 
-/-- The inverse closure comparison has the full cochain-unit normalization.
-Source: Stacks, Cohomology on Sites, Tag 0D6E.
-(blueprint: lem-sf-native-scalar-derived-restriction-normalization).
-Proof: unfold the named comparison and apply the canonical exact-equivalence
-normalization. This keeps the concrete comparison folded for the cube calculation. -/
+/-- The inverse closure comparison has the full cochain-unit normalization. -/
 theorem closure_normalized (l : ℕ) [Fact l.Prime] (E : Index l (PadicAlgCl l))
     {R S : PurCompactSupport.Coefficients.{u}} (a : PurCompactSupport.Change R S)
     (P : NativeScalarRingModel l E a) {U V : Scheme.{u}} (g : U ⟶ V)
@@ -90,10 +83,7 @@ theorem closure_normalized (l : ℕ) [Fact l.Prime] (E : Index l (PadicAlgCl l))
     (proEtaleRingModuleDirectImage g (S.ring V) (S.ring U) (S.pull g))
     (P.closureEquivalence U) (P.closureEquivalence V) x
 
-/-- The canonical condensed comparison has its full right-derived unit normalization.
-Source: Stacks, Cohomology on Sites, Tag 0D6E.
-(blueprint: lem-sf-native-scalar-derived-restriction-normalization).
-Proof: unfold the specified derived comparison and use exact-restriction normalization. -/
+/-- The canonical condensed comparison has its full right-derived unit normalization. -/
 theorem condensed_normalized
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']

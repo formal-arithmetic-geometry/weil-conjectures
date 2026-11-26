@@ -35,6 +35,15 @@ public import WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Composit
 
 See `WeilConjectures.SixFunctors.Etale.Derived.KernelTransform` for the implementation notes.
 
+## Implementation details
+
+Both statements are torsion statements: compact-support base change, the projection formula
+and the composition law of `Rf_!` need `[Finite Λ]`. For the composition of kernel transforms,
+the composition law of `Rf_!` is applied to `r₁₃ ≫ s₂ = r₂₃ ≫ q₂`, with
+`s₂ : V ×ₛ V'' ⟶ V''` the second projection, which is why that composite is assumed to admit a
+compactification. For the diagonal kernel, `[IsSeparated π]` makes `Δ` a closed immersion, so
+that `Δ_* = Δ_!`.
+
 -/
 
 @[expose] public section
@@ -118,13 +127,7 @@ The composite is read on the triple product, in the cartesian square
 ```
 
 with `r₁₃ : V ×ₛ V' ×ₛ V'' ⟶ V ×ₛ V''` the remaining projection and
-`q₂ : V' ×ₛ V'' ⟶ V''` the second projection.
-
-Class: torsion; decided by compact-support base change and the projection formula for `Rf_!`,
-which need `[Finite Λ]`. The composition law of `Rf_!` is applied
-to `r₁₃ ≫ s₂ = r₂₃ ≫ q₂`, `s₂ : V ×ₛ V'' ⟶ V''` being the second projection, which is why that
-composite is assumed to admit a compactification.
-(sketch blueprint: `proposition-fourier-inversion`; blueprint: `proposition-fourier-inversion`) -/
+`q₂ : V' ×ₛ V'' ⟶ V''` the second projection. -/
 theorem nonempty_iso_kernelTransform_comp [Finite Λ]
     [LocallyOfFiniteType π] [QuasiCompact π] [LocallyOfFiniteType π'] [QuasiCompact π']
     [HasCompactification (pullback.tripleProj₁₃ π π' π'')]
@@ -165,14 +168,7 @@ naturally in `K`, where `Δ` is the diagonal of the separated morphism `π`:
             ──────▶ V
 ```
 
-with `Δ ≫ p₁ = 𝟙 = Δ ≫ p₂`. For `N = Λ` this says that `Δ_* Λ` is the identity kernel.
-
-Class: torsion. The blueprint proof is formal: the projection formula for the closed immersion
-`Δ`, `Δ_* = Δ_!` and `Δ ≫ p₂ = 𝟙`
-(`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_diagonal_of_nonempty_iso`). Here
-`[Finite Λ]` enters through the projection formula and the composition law of `Rf_!`, and
-`[IsSeparated π]` makes `Δ` a closed immersion.
-(sketch blueprint: `sec-Fourier-inversion`, proof) -/
+with `Δ ≫ p₁ = 𝟙 = Δ ≫ p₂`. For `N = Λ` this says that `Δ_* Λ` is the identity kernel. -/
 theorem nonempty_iso_kernelTransform_diagonal [Finite Λ] [IsSeparated π] [QuasiCompact π]
     [HasCompactification (pullback.snd π π)]
     (N : DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :

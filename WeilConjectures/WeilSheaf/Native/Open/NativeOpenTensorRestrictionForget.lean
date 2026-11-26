@@ -11,8 +11,22 @@ import WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorRestrictionForgetKF
 
 /-! # Forgetting the restriction tensor square
 
-Source: Stacks 0E8I, 0GL1 and 015F.
-(blueprint: lem-sf-native-open-tensor-restriction-forget).
+## Implementation details
+
+The balanced restriction comparison on ordinary sheaves sends both tensor generators to their
+restrictions; it is invertible since the coefficient map on the geometric open is the
+localized coefficient isomorphism, and it is applied on every total-complex summand. Exact
+restriction preserves K-flat complexes, so localization gives an ordinary natural
+restriction/tensor isomorphism for the fixed ordinary tensor models of
+`nativeDerivedClosedComparison`. On forgotten equivariant representatives,
+`s.restriction_forget` identifies the sheaf map with this balanced map; `restriction_summands`
+fixes each total summand and `restriction_model` descends the equality. Forgetting preserves
+flat-term K-flat representatives by the Frobenius resolution theorem, and the two-variable
+localization universal property extends the equality to all derived inputs.
+
+## References
+
+* Stacks 0E8I, 0GL1, 015F
 -/
 
 @[expose] public noncomputable section
@@ -49,25 +63,7 @@ variable {U Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
   [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
 
-/-- The ordinary restriction comparison agrees with the supplied native one.
-
-Source: Stacks 0GL1 (sites-cohomology.tex, lemma-j-shriek-and-tensor), native
-open tensor proof step 8, and Stacks 015F.
-
-Proof: The balanced restriction comparison on ordinary sheaves sends both
-tensor generators to their restrictions. It is invertible since the coefficient
-map on the geometric open is the localized coefficient isomorphism. Apply it on
-every total-complex summand. Exact restriction preserves K-flat complexes, so
-localization gives an ordinary natural restriction/tensor isomorphism for the
-fixed ordinary tensor models of nativeDerivedClosedComparison. On forgotten
-equivariant representatives, s.restriction_forget identifies the sheaf map with
-this balanced map. The presentation's restriction_summands fixes each total
-summand, and restriction_model descends the equality using its specified models.
-Forgetting preserves flat-term K-flat representatives by the Frobenius resolution
-theorem. The fixed tensor comparisons and exact-functor compositors identify the
-two localization factorizations. The two-variable localization universal property
-extends equality to all derived inputs. This asserts only the restriction square.
-(blueprint: lem-sf-native-open-tensor-restriction-forget). -/
+/-- The ordinary restriction comparison agrees with the supplied native one. -/
 theorem native_open_tensor_restriction_forget (s : NativeOpenTensorData k₀ l j)
     (rho : nativeDerivedTensor k₀ l Z ⋙ nativeOpenPull k₀ l j ≅
       (nativeOpenPull k₀ l j).prod (nativeOpenPull k₀ l j) ⋙ nativeDerivedTensor k₀ l U)

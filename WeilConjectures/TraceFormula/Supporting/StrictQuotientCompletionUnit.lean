@@ -15,7 +15,22 @@ import all WeilConjectures.TraceFormula.Coherent.CoherentPrimitiveReductionPrese
 
 /-! # The actual completion unit in the strict quotient cone
 
-Source: blueprint main-20261015, rational Frobenius integral model, proof (2)--(3).
+The actual adjunction unit, followed by the normalized Roos realization, is identified with
+the strict quotient cone augmentation.
+
+## Implementation details
+
+The ordinary model's degreewise tensor is used as the simultaneous quotient presentation of
+the given flat-term K-flat complex. The ordinary adjunction transpose of the identity has
+`n`th component the ordinary unit followed by the `n`th limit projection, so under the strict
+tower isomorphism it becomes the quotient map `x ↦ 1 ⊗ x`; with zero shifted component this
+is the strict quotient cone augmentation. The normalization equations of the comparison
+system identify its localized class with the adjunction unit followed by the inverse of the
+completion comparison. No completeness or boundedness assumption is used.
+
+## References
+
+* Stacks Project, Tags 06YY, 07A6, 09T5, 0D6E, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -146,32 +161,9 @@ private theorem normalized_tower_map
 
 -- Explicit comparison between the two published strict quotient presentations.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- The actual adjunction unit in the normalized strict quotient cone.
-Source: blueprint main-20261015, sec-trace-formula/sk-d-weil/
-prop-trf-rational-frobenius-integral-model.proof.md (2)--(3), step 1 of the
-normalization node; Stacks 06YY, 07A6, 09T5, 0D6E and 0941.
-(blueprint: lem-trf-strict-quotient-completion-unit).
-
-Proof: use M.tensor applied degreewise to P as the simultaneous quotient
-presentation. D.reductionComparison is invertible on the given flat-term K-flat
-P. The evaluation comparisons are M.evaluation applied to complexes; their
-finite equations are D.reduction_evaluation and their horizontal equations are
-M.transition. Apply hrho to this presentation. Its strict tower isomorphism a
-identifies the original sections through the finite evaluation comparisons.
-The ordinary adjunction transpose of the identity has nth component the ordinary
-unit followed by the nth limit projection. M.unit_tensor and
-M.limitComparison_projection therefore make its image under a the actual
-quotient map x to 1 tensor x. The Roos inclusion has zero shifted component.
-Both cocone coordinates show that its image under H(a) is exactly
-trfStrictQuotientConeAugmentation. D.hom_normalization on the identity, together
-with D.systemUnit_composition and D.roos_normalization, identifies its localized
-class with the actual S.adjunction.unit, followed by the inverse of
-D.completionComparison. The specified compatibility hr identifies r with
-D.roos inverse, as holds for the model explicitly constructed in the main proof.
-Substitute hrho,
-cancel the finite reductionComparison and exact restriction factors, and obtain
-the displayed equality of entire derived maps. Zero complexes use the same
-universal properties; there is no completeness or boundedness assumption. -/
+/-- The actual adjunction unit in the normalized strict quotient cone: on a good complex, the
+adjunction unit followed by the normalized Roos realization `rho` is the class of the strict
+quotient cone augmentation. -/
 theorem strictQuotientCompletionUnit
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

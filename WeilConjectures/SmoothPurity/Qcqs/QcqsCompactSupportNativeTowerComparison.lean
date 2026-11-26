@@ -9,7 +9,24 @@ public import WeilConjectures.SixFunctors.Compact.CompactSupportReductionTower
 public import WeilConjectures.SmoothPurity.Compact.CompactSupportNativeSystemEvaluation
 import all WeilConjectures.SmoothPurity.Compact.CompactSupportNativeTowerPresentation
 
-/-! Comparison of the recorded and native compact-support towers, before total limit. -/
+/-!
+# Comparison of the recorded and native compact-support towers, before total limit
+
+## Implementation details
+
+The native presentation of the chosen recorded tower from
+`exists_compactSupportReductionTower` is retained. Both `S.reduction` and `SX.reduction` are left
+adjoint to `coefficientSequenceLimit`, so uniqueness of left adjoints gives an isomorphism of
+whole derived systems preserving the units. The `unit_projection` equations identify its finite
+scalar-restriction transpose, and whiskering by native open extension, proper image and
+completed restriction gives the displayed equation. No faithfulness of finite evaluation is
+required.
+
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 6.7.6]
+* [Stacks Project, Tags 06YY, 0941 and 0A95]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -28,9 +45,7 @@ variable (l : ℕ) [Fact l.Prime]
   [f.IsOver (Spec (.of K₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
   (c : Compactification f)
 
-/-- The actual native composite before taking a total inverse limit.
-Source: blueprint coefficient comparisons, paragraphs 1–2.
-(blueprint: def-weil-compact-support-native-tower-presentation). -/
+/-- The actual native composite before taking a total inverse limit. -/
 private def nativeCompactSupportTower (S : CoefficientDerivedSystemCalculus l E X) :
     DerivedCategory (scalarReductionSource l E X) ⥤
       DerivedCategory (pbcTowers Y (completedIntegralCommRingSheafUnrestricted l E Y)) :=
@@ -41,9 +56,7 @@ private def nativeCompactSupportTower (S : CoefficientDerivedSystemCalculus l E 
       (compactSupportSystemQuotient l E) c.g ⋙
     coefficientSequenceDerivedRestriction l E Y
 
-/-- The canonical pasting of native finite evaluations, with its full type retained.
-Source: blueprint coefficient comparisons, paragraphs 1–2.
-(blueprint: def-weil-compact-support-native-tower-presentation). -/
+/-- The canonical pasting of native finite evaluations, with its full type retained. -/
 private def nativeCompactSupportTowerEvaluations (S : CoefficientDerivedSystemCalculus l E X) :
     ∀ n : ℕ, nativeCompactSupportTower l E c S ⋙
       pbcTowerEvaluation Y (completedIntegralCommRingSheafUnrestricted l E Y) n ≅
@@ -163,26 +176,7 @@ private theorem nativePresentation_comparison
 
 -- Retain the original base-compatibility instance binder.
 set_option linter.unusedSectionVars false in
-/-- Compare the whole recorded reduction tower with native proper/open reduction.
-
-Source: the coherent tower construction in blueprint order 1494, first sentence;
-Bhatt--Scholze, Definition 6.7.6; Stacks Tags 06YY, 0941 and 0A95.
-(blueprint: lem-qcqs-compact-support-native-tower-comparison).
-
-Proof: retain the native presentation of the chosen recorded tower from
-exists_compactSupportReductionTower, including the pasted evaluation comparisons.
-Let S be its reduction calculus. Both S.reduction and SX.reduction are left adjoint
-to the specified coefficientSequenceLimit, so uniqueness of left adjoints gives
-an isomorphism of whole derived systems. The comparison preserves their adjunction
-units. Compose this identity with the limit projection and use naturality of that
-projection. The unit_projection equations for S and SX then identify its finite
-scalar-restriction transpose. Injectivity of the finite adjunction Hom equivalence
-shows that finite evaluation of this comparison followed by SX.reductionEvaluation
-is S.reductionEvaluation. Whisker the comparison by native open extension, proper
-image and completed restriction. Naturality of compactSupportSystemEvaluation and
-coefficientRestrictedEvaluationIso gives exactly the displayed equation. This uses
-whole derived system maps; no faithfulness of finite evaluation is required. It
-also applies to zero inputs and empty opens. -/
+/-- Compare the whole recorded reduction tower with native proper/open reduction. -/
 theorem qcqsCompactSupport_nativeTowerComparison
     (SX : CoefficientDerivedSystemCalculus l E X) :
     let hT := exists_compactSupportReductionTower l E K₀ X Y f hl c

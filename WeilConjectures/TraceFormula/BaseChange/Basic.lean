@@ -39,9 +39,6 @@ model-Frobenius setting of the Lefschetz–Verdier formula, living over `Ω` wit
   (`ProEtale.CondensedRing.frobeniusFixedPoints e (n + 1)`) are the rational points of `X̄` fixed by
   `Φ = (e^{n+1} ≫ F_X^{n+1}) ×_k k̄` (`AlgebraicGeometry.frobeniusFixedPointsEquiv`).
 
-The statements are made for a general field `Ω` and specialized to `Ω = k̄` only at the end:
-statements about the categories of sheaves on the concrete scheme `Spec k̄` hit kernel timeouts.
-
 ## Main definitions
 
 - `AlgebraicGeometry.overFrobenius`: the `q`-power Frobenius of a scheme over `Spec k`.
@@ -53,6 +50,11 @@ statements about the categories of sheaves on the concrete scheme `Spec k̄` hit
   morphism `Spec Ω ⟶ X` over `Spec k`.
 - `AlgebraicGeometry.frobeniusFixedPointsEquiv`: the points of degree `n + 1` for `e` are
   the rational points of `X̄ = X ×_k k̄` fixed by the model Frobenius.
+
+## Implementation details
+
+The statements are made for a general field `Ω` and specialized to `Ω = k̄` only at the end:
+statements about the categories of sheaves on the concrete scheme `Spec k̄` hit kernel timeouts.
 
 -/
 
@@ -269,7 +271,7 @@ lemma modelFrobenius_id (N : ℕ) :
   | succ N ih => rw [frobeniusIterate_succ, frobeniusIterate_succ, Functor.map_comp, ih]
 
 /-- For `g = 𝟙`, the model Frobenius `F_X ×_k Ω` is the model Frobenius of the model `X` of
-`X̄` over `k` (blueprint `definition-frobenius-correspondences-their-operators`). -/
+`X̄` over `k`. -/
 theorem isModelFrobenius_modelFrobenius_one :
     IsModelFrobenius (baseChangeModelFrobenius Ω X 1 (𝟙 X)) X.hom (geometricBaseChangeProj X) where
   isPullback := isPullback_geometricBaseChangeProj X
@@ -277,8 +279,7 @@ theorem isModelFrobenius_modelFrobenius_one :
     rw [modelFrobenius_left_comp_proj, Category.id_comp, frobeniusIterate_one]⟩
 
 /-- For `g = 𝟙`, `Ω` algebraically closed and `N ≠ 0`, the model Frobenius `F_X^N ×_k Ω` is the
-model Frobenius of a model of `X̄` over the subfield `𝔽_{q^N}` of `Ω` (blueprint
-`definition-frobenius-correspondences-their-operators`). -/
+model Frobenius of a model of `X̄` over the subfield `𝔽_{q^N}` of `Ω`. -/
 theorem exists_isModelFrobenius_modelFrobenius_id [IsAlgClosed Ω] [LocallyOfFiniteType X.hom]
     {N : ℕ} (hN : N ≠ 0) :
     ∃ (k₁ : Type u) (_ : Field k₁) (_ : Finite k₁) (_ : Algebra k₁ Ω)

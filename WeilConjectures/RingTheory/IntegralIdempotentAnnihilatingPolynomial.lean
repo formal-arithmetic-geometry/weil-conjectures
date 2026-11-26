@@ -16,8 +16,16 @@ public import Mathlib.Algebra.Group.Idempotent
 /-!
 # An annihilating polynomial for an integral lift of an idempotent
 
-Source: Stacks Project, More on Algebra, Lemma Tag 09XG (lemma-helper-integral)
-(blueprint: lem-weil-pbc-integral-idempotent-annihilating-polynomial).
+## Implementation details
+
+For `z = b² - b ∈ IB`, a monic `g` annihilating `z` with non-leading coefficients in `I`
+(Stacks Tag 00H5) gives `f = (X * g).comp (X * (X - 1))`, which annihilates `b` and reduces to
+`X^d (X - 1)^d` modulo `I`.
+
+## References
+
+* [Stacks, Tag 09XG]
+* [Stacks, Tag 00H5]
 -/
 
 @[expose] public section
@@ -27,20 +35,7 @@ universe u v
 namespace Polynomial
 
 /-- An element of an integral algebra that is idempotent modulo the extended ideal has
-an annihilating monic polynomial reducing to `X ^ d * (X - 1) ^ d` for some `d ≥ 1`.
-Source: Stacks Project, More on Algebra, Lemma Tag 09XG (lemma-helper-integral).
-(blueprint: lem-weil-pbc-integral-idempotent-annihilating-polynomial)
-
-Proof: First put `z = b² - b`. Idempotence in the quotient says that `z` belongs to `IB`.
-Apply `lem-weil-pbc-integral-extended-ideal-element-monic` (Stacks Tag 00H5, Mathlib's
-`Polynomial.exists_monic_aeval_eq_zero_forall_mem_of_mem_map`) to obtain a monic `g`
-annihilating `z`, with all non-leading coefficients in `I`. Replace `g` uniformly
-by `h = X * g`, with positive degree `d = g.natDegree + 1`. Put
-`f = h.comp (X * (X - 1))`. Composition of monic polynomials makes `f` monic,
-and evaluation gives `f(b) = h(z) = 0`. Reducing coefficients modulo `I`
-sends `g` to `X ^ g.natDegree` and `h` to `X ^ d`; it commutes with composition,
-giving `(X * (X - 1))^d = X^d * (X - 1)^d`. If `A` is the zero ring, its algebra
-`B` is also the zero ring, and `d = 1`, `f = 1` satisfy all requirements. -/
+an annihilating monic polynomial reducing to `X ^ d * (X - 1) ^ d` for some `d ≥ 1`. -/
 theorem exists_monic_aeval_eq_zero_map_eq_of_isIdempotentElem_quotient
     {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B]
     [Algebra.IsIntegral A B] (I : Ideal A) (b : B)

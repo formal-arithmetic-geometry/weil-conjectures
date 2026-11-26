@@ -12,8 +12,11 @@ public import Mathlib.Algebra.Category.ModuleCat.Free
 /-!
 # Pseudo-coherence through degree m over a ring
 
-Source: Stacks Project, More on Algebra, Definition 15.66.1 (Tag 064Q)
-(blueprint: def-pc-ring-m-pseudo-coherent).
+This file defines `m`-pseudo-coherent objects of the derived category of a commutative ring.
+
+## References
+
+* [Stacks, Tag 064Q]
 -/
 
 @[expose] public section
@@ -26,8 +29,7 @@ namespace DerivedCategory
 
 /-- An object of the derived category of a commutative ring is `m`-pseudo-coherent if a
 bounded complex of finite free modules maps to it, inducing cohomology isomorphisms above
-`m` and a surjection in degree `m` (Stacks, Tag 064Q).
-(blueprint: def-pc-ring-m-pseudo-coherent) -/
+`m` and a surjection in degree `m`. -/
 def IsMPseudoCoherent {R : Type u} [CommRing R]
     [HasDerivedCategory.{w} (ModuleCat.{v} R)]
     (m : ℤ) (C : DerivedCategory (ModuleCat.{v} R)) : Prop :=

@@ -12,7 +12,17 @@ import WeilConjectures.SixFunctors.Common.CommonProjectionPullbackTensorCompatib
 
 /-! # Common-stage preservation of a projection factor
 
-Source: thm-sf-pf-field.proof.md, Compatibility.
+We show that finite-stage inclusion preserves the proper counit factor, including the initial
+support identification, through the canonical tensorator.
+
+## Implementation details
+
+The support functor is identified with open extension followed by proper direct image by
+expanding `sixFunctorFactoredSupportIdentification`. The proper counit mates are compared after
+transposing under the pull/direct adjunctions: each transpose is the canonical tensor/pullback
+comparison followed by the counit in the first tensor variable, and the finite-representative
+formula of `canonicalCommonStagePullbackTensor` identifies the included rational formula. Only
+the proper factor is compared; the open projection map is absent.
 -/
 
 @[expose] public noncomputable section
@@ -307,28 +317,7 @@ private theorem properFactor_preserved_of_tensor
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Finite-stage inclusion preserves the proper counit factor, including the
-initial support identification, through the canonical tensorator.
-
-Source: thm-sf-pf-field.proof.md, Compatibility, and steps 2--3 of
-lem-sf-common-projection-tensor-compatibility.
-(blueprint: lem-sf-common-projection-proper-factor).
-
-Proof: identify the support functor with open extension followed by proper direct
-image. The comparison for this identification is the composite of the open and
-direct-image comparisons: expand sixFunctorFactoredSupportIdentification and
-apply the coefficient composition, openIdentification and properIdentity laws.
-Naturality of commonProjectionTensorComparison carries the initial tensor of
-this identification across inclusion. It remains to compare the proper counit
-mates at the open-extended input. Transpose under the prescribed pull/direct
-adjunctions. Each transpose is the canonical tensor/pullback comparison followed
-by the counit in the first tensor variable. The finite-representative formula
-of canonicalCommonStagePullbackTensor identifies its included rational formula,
-using the canonical tensorator at the target and compactifying space. The
-recorded coefficient counit equation identifies the other factor. Naturality in
-the open-extension comparison then gives exactly the intermediate comparison
-middle. Cancel the adjunction Hom equivalence to obtain the square below.
-Only the proper factor is compared; the open projection map is absent. The
-argument uses the same formulas for empty schemes, zero inputs and identities. -/
+initial support identification, through the canonical tensorator. -/
 theorem commonProjectionProperFactor
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     (H : SixFunctorCommonStages D C) (E : Padic.FiniteCoefficientFields C.l C.Qbar)

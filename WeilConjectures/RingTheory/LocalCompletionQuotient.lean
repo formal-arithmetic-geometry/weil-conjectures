@@ -14,9 +14,21 @@ import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 /-!
 # Completion of a quotient of a Noetherian local ring
 
-Source: Stacks Project, Algebra, Tag 00MA, parts (2) and (3), and the proof of
-Tag 00MB; the module/ring completion identification used in Tag 0325
-(blueprint: lem-weil-pbc-local-completion-quotient).
+For a surjection `φ : A → B` from a Noetherian local ring, the completion of `B` at the image of
+the maximal ideal is the completion of `A` modulo the extended kernel.
+
+## Implementation details
+
+Surjectivity gives `m^k B = n^k`, so the module completion of `B` over `A` is its ring
+completion. Exactness of completion on finite modules, applied to `0 → J → A → B → 0`, makes
+the induced map surjective with kernel the image of the completion of `J`, which is
+`J.map cA` since completion of a finite module is base change.
+
+## References
+
+* [Stacks, Tag 00MA] (parts (2) and (3))
+* [Stacks, Tag 00MB]
+* [Stacks, Tag 0325]
 -/
 
 @[expose] public section
@@ -28,27 +40,7 @@ namespace AdicCompletion
 /-- For a surjection `φ : A →+* B`, completion at the image of the maximal ideal is
 completion of `A` modulo the extended kernel. The maps `θk` are the induced surjections
 on quotient rings. Their compatibility with evaluations specifies `θ` coordinatewise;
-the last equation says that the quotient isomorphism is induced by this same `θ`.
-Source: Stacks Project, Algebra, Tag 00MA (2), (3), Tag 00MB, and Tag 0325
-(blueprint: lem-weil-pbc-local-completion-quotient).
-
-Proof:
-1. Regard `B` as an `A`-module via `φ`. Surjectivity gives `m^k B = n^k`, where
-   `m` is the maximal ideal of `A` and `n = m.map φ`. Thus the module completion of `B`
-   at `m` is its ring completion at `n` (def-weil-pbc-adic-completion). The quotient maps
-   induced by `φ` are surjective and compatible. They define the coordinatewise ring map
-   `θ`, which commutes with the canonical maps from `A` and `B`.
-2. Noetherianity makes `J = ker φ` finite, and `A` and `B` are cyclic `A`-modules
-   (def-weil-pbc-noetherian-ring, def-weil-finitely-generated-module).
-   Apply lem-weil-pbc-completion-exact-finite-modules (00MA (2)) to `0 → J → A → B → 0`.
-   This makes `θ` surjective and identifies its kernel with the image of the completion
-   of `J` in the completion of `A`.
-3. By lem-weil-pbc-completion-finite-module-tensor (00MA (3)), the completed `J` is
-   the tensor product of the completed `A` with `J` (def-weil-module-base-change).
-   Naturality identifies its image with the finite sums `Σ y_i * cA(j_i)`, exactly the
-   ideal `J.map cA`. This is the image identification used in the proof of 00MB.
-4. The ring homomorphism theorem gives the quotient isomorphism, sending the class of
-   `x` to `θ x`. -/
+the last equation says that the quotient isomorphism is induced by this same `θ`. -/
 theorem exists_local_completion_quotient
     (A : Type u) (B : Type v) [CommRing A] [CommRing B]
     [IsNoetherianRing A] [IsLocalRing A]

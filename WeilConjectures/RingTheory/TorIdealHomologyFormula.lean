@@ -17,7 +17,21 @@ import Mathlib.RingTheory.Flat.Basic
 
 /-! # Cycle formula on the homology of a free resolution
 
-Source: Stacks Project, Algebra, Tags 00M5 and 00M6.
+For an ideal `I` and a free resolution `P` of `M`, we construct a linear map from the first
+homology of `P ⊗ R/I` to `I ⊗ M` sending the class of a cycle lifted to `y` with
+`d y = ∑ aⱼ • pⱼ` to `∑ aⱼ ⊗ π(pⱼ)`.
+
+## Implementation details
+
+Tensoring `0 → I → R → R/I → 0` with the free terms gives short exact sequences, by flatness
+and right exactness. The map on cycles chooses an ideal-tensor preimage of `d y` and sends it to
+`I ⊗ M` via the augmentation; independence of the choices is the private lemma
+`cycleMap_of_exact`. The map vanishes on boundaries and so descends to homology.
+
+## References
+
+* [Stacks, Tag 00M5]
+* [Stacks, Tag 00M6]
 -/
 
 @[expose] public section
@@ -75,20 +89,8 @@ private theorem cycleMap_of_exact
         rfl }
   exact ⟨δ, compare⟩
 
-/-- Source: Stacks Project, Algebra, proof of Tag 00M5 and Remark 00M6.
-(blueprint: lem-weil-pbc-tor-ideal-homology-formula)
-
-Proof in words: tensor the exact sequence of the ideal, ring and quotient with
-all free resolution terms. Flatness gives injective ideal-tensor maps and right
-exactness identifies their cokernels with the quotient-tensor terms. For a
-quotient cycle lift y, choose an ideal-tensor preimage of d y. Send it to I ⊗ M
-by tensor symmetry and the augmentation. Changing the ideal-tensor preimage
-has no effect by injectivity, and changing the lift adds the differential of
-an ideal tensor, killed by augmentation. This gives a linear map on cycles
-which vanishes on boundaries, hence a linear map on homology. For a finite
-expression d y = Σ a_j p_j, choose Σ p_j ⊗ a_j as preimage, giving the formula.
-The construction also applies to the zero and unit ideals and the zero module.
--/
+/-- For a free resolution `P` of `M`, there is a linear map `δH : H₁(P ⊗ R/I) → I ⊗ M` sending
+the class of a cycle lifted to `y` with `d y = ∑ j, a j • p j` to `∑ j, a j ⊗ π (p j)`. -/
 theorem exists_tor_ideal_homology_formula
     {R : Type u} [CommRing R] (I : Ideal R) (M : ModuleCat.{u} R)
     (P : ProjectiveResolution M) (hP : ∀ n : ℕ, Module.Free R (P.complex.X n))

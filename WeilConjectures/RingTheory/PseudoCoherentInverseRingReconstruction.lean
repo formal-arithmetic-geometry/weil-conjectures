@@ -13,9 +13,27 @@ import WeilConjectures.RingTheory.PseudoCoherentInverseRingReconstructionModels
 /-!
 # Pseudo-coherent reconstruction over a tower of nilpotent quotients
 
-Source: Stacks Project, More on Algebra, Tag 0CQF,
-lemma-Rlim-pseudo-coherent-gives-pseudo-coherent
-(auxiliary; not a blueprint node).
+Let `A = lim A_n` be the limit of a tower of rings with surjective transitions and nilpotent
+kernels, and `E = R lim E_n` for a compatible tower of objects `E_n ∈ D(A_n)` with `E_1`
+pseudo-coherent. Then `E` is pseudo-coherent, represented by the limit of compatible finite-free
+models of the `E_n`, and the comparison maps `E ⊗^L_A A_n → E_n` are isomorphisms.
+
+## Implementation details
+
+By nilpotent invariance every `E_n` is pseudo-coherent. Marked free-complex lifting across each
+nilpotent quotient builds a strictly compatible tower of finite-free complexes `P_n`, all zero
+above one cutoff `b`, with degreewise surjective transitions `u_n` representing the given
+transitions. Bases lift through the `u_n` (a lift of a basis modulo a nilpotent ideal is a basis,
+by inverting `gf` and `fg` with geometric sums), so the termwise limit `P` is finite free with
+`P ⊗_A A_n ≅ P_n`. The surjective module-complex tower lemma identifies `Q(P)` with the derived
+limit, and comparing Roos triangles via TR3 gives a projection-respecting isomorphism
+`Q(P) ≅ E` (no canonical choice is asserted). Finally, finite free bounded-above complexes are
+K-flat and projective, so derived change of rings is computed by the ordinary tensor complex and
+the derived comparison is represented by the chain isomorphism `P ⊗_A A_n → P_n`.
+
+## References
+
+* [Stacks, Tag 0CQF]
 -/
 
 @[expose] public section
@@ -34,95 +52,7 @@ is the compatible-tuple construction, invariant under its unique ring isomorphis
 The left adjoints `L` and `M` of derived restriction of scalars denote derived tensor.
 The normalization `hχ` specifies the canonical composition of restrictions. The maps
 `η` and the equation for `γ` identify ordinary and derived tensor on the free model,
-so the last equality identifies the actual projection-induced comparison maps.
-
-Source: Stacks Project, More on Algebra, Tag 0CQF
-(auxiliary; not a blueprint node).
-
-Proof, following the node's six steps:
-
-1. Induct on $n$ to show that every $E_n$ is pseudo-coherent. The base $n=1$ is assumed. At the
-induction step apply nilpotent invariance to $A_{n+1}\twoheadrightarrow A_n$ and $E_{n+1}$: its
-derived reduction is isomorphic to $E_n$ by the specified transition. Thus the pseudo-coherence of
-$E_n$ implies that of $E_{n+1}$. Choose a bounded-above finite-free representative $P_1^\bullet$
-of $E_1$, an isomorphism $\beta_1:Q(P_1^\bullet)\xrightarrow{\sim}E_1$, and an integer $b$ above
-which it is zero.
-
-2. Suppose $P_n$, $\beta_n$, and the transitions through level $n$ have been chosen, with
-$P_n^i=0$ for $i>b$. Set $I=\ker(A_{n+1}\to A_n)$. If $I^N=0$, each $1+x$ with $x\in I$ has
-inverse $\sum_{j=0}^{N-1}(-x)^j$. Apply marked free-complex lifting to $R=A_{n+1}$, $R/I=A_n$,
-$K=E_{n+1}$, $F=P_n$, and the specified isomorphism $\alpha=\beta_n^{-1}\circ\overline
-t_n:E_{n+1}\otimes^L_{A_{n+1}}A_n\xrightarrow{\sim}Q(P_n)$, where $\overline t_n$ is induced by
-$t_n$. This gives $P_{n+1}$ zero above the same $b$, $\beta_{n+1}$, and
-$\theta_n:P_{n+1}\otimes_{A_{n+1}}A_n\xrightarrow{\sim}P_n$, with
-$Q(\theta_n)=\beta_n^{-1}\overline t_n(\beta_{n+1}\otimes^L A_n)$. Define $u_n:P_{n+1}\to P_n$ as
-the quotient map followed by $\theta_n$. It is a chain map, degreewise surjective, and the marking
-equation says that it represents the given transition $t_n$ under the $\beta$'s. Repeating this
-induction constructs the entire strictly compatible complex tower.
-
-3. Construct compatible finite bases separately in each degree $i$. Choose a basis of $P_1^i$ of
-size $r_i$. Given the basis at level $n$, lift its vectors through the surjection $u_n^i$ to
-$P_{n+1}^i$. They form a basis: put $R=A_{n+1}$ and let $f:R^{r_i}\to P_{n+1}^i$ send the standard
-vectors to these lifts. Its reduction modulo $I$ is an isomorphism. Since $P_{n+1}^i$ is finite
-free, lift the matrix of the inverse reduced map to an $R$-linear $g:P_{n+1}^i\to R^{r_i}$. Both
-$gf-1$ and $fg-1$ have matrices in $I$; their $N$th powers vanish, so geometric sums invert $gf$
-and $fg$. Consequently $f$ has a left inverse $(gf)^{-1}g$ and a right inverse $g(fg)^{-1}$; these
-coincide, and $f$ is an isomorphism. This also covers $r_i=0$. The bases so constructed make
-$u_n^i$ the coordinatewise ring reduction $A_{n+1}^{r_i}\to A_n^{r_i}$.
-
-4. Let $P^i=\varprojlim_n P_n^i$, with differential $(x_n)\mapsto(d_nx_n)$; compatibility follows
-from $u_nd_{n+1}=d_nu_n$, and $d^2=0$ holds coordinatewise. In the compatible bases of step 3, a
-compatible vector tuple is exactly $r_i$ compatible scalar tuples, so $P^i\cong(\varprojlim_n
-A_n)^{r_i}=A^{r_i}$. All $P^i$ vanish for $i>b$. Projection is coordinatewise $A^{r_i}\to
-A_n^{r_i}$. Therefore $P^i\otimes_A A_n\to P_n^i$, $(x_m)_m\otimes a\mapsto ax_n$, is an
-isomorphism. Its inverse in these bases sends the $j$th standard vector to the compatible $j$th
-basis tuple tensor $1$. The projections commute with differentials, so these degreewise maps
-assemble into chain isomorphisms $P^\bullet\otimes_A A_n\xrightarrow{\sim}P_n^\bullet$.
-
-5. Restrict all $P_n$ to $A$. The maps $u_n$ are degreewise surjective, so the surjective module-
-complex tower lemma identifies $Q(P)$, with its literal projections, as a derived limit of
-$(Q(P_n),Q(u_n))$ in $D(A)$. The compatible isomorphisms $\beta_n$ identify this system with
-$(E_n,t_n)$; the induced isomorphism of products is obtained componentwise, with inverse the
-product of the $\beta_n^{-1}$. It conjugates $1-s$ to $1-s$ because
-$\beta_nQ(u_n)=t_n\beta_{n+1}$. Write $B_P=\prod_nQ(P_n)$, $B_E=\prod_nE_n$,
-$v=\prod_n\beta_n:B_P\xrightarrow{\sim}B_E$, and let $j:Q(P)\to B_P$ and $\delta_P:B_P\to Q(P)[1]$
-be the arrows of its Roos triangle. The triangle
-$Q(P)\xrightarrow{vj}B_E\xrightarrow{1-s}B_E\xrightarrow{\delta_Pv^{-1}}Q(P)[1]$ is isomorphic to
-that triangle by $(1,v,v)$: the first square is $vj=vj$, the second is $v(1-s)=(1-s)v$, and the
-last is $(\delta_Pv^{-1})v=\delta_P$. Thus TR1 makes it distinguished, with projections
-$\beta_nQ(P\to P_n)$. Compare with the chosen Roos triangle defining $E$: rotate both triangles so
-$1-s$ is their first arrow, use TR3 with identities on the two product objects, and rotate back.
-The triangle isomorphism lemma makes the resulting map $Q(P)\to E$ an isomorphism. The first
-square says it respects every projection. No canonical choice of this isomorphism is asserted.
-
-6. A finite free module is flat: its tensor functor is a finite direct sum of the identity
-functor, hence preserves exact sequences componentwise. Thus the bounded-above complexes $P$ over
-$A$ and $P_n$ over $A_n$ are K-flat by the bounded-flat K-flat criterion. On the category with one
-object and only its identity morphism, a presheaf is its value at that object and the identity-
-cover sheaf condition imposes no restriction. Ring sheaves, module sheaves, their complexes and
-tensor products are therefore ordinary rings, modules, complexes and tensor products. Derived
-change of rings on this site computes $Q(P)\otimes_A^L A_n$ by the ordinary tensor complex
-$P\otimes_A A_n$. Under the projection-respecting isomorphism in step 5, the projection-induced
-comparison is represented by the chain map $P\otimes_A A_n\to P_n$, $x\otimes a\mapsto
-a\,\mathrm{pr}_n(x)$, followed by $\beta_n$. To justify that this is the specified derived map,
-use the scalar-extension Hom bijection degreewise: $f:P\to P_n$ corresponds to $\widetilde
-f:P\otimes_A A_n\to P_n$, $\widetilde f(x\otimes a)=af(x)$. The chain-map equations correspond
-under this bijection by evaluating on $x\otimes1$, and a homotopy $h$ corresponds to $\widetilde
-h(x\otimes a)=ah(x)$, since $d\widetilde h+\widetilde h d$ is the transpose of $dh+hd$. Hence it
-is a bijection on homotopy classes. Every finite free module is projective: lift a map through a
-surjection by choosing a preimage for each basis vector. Both $P$ over $A$ and $P\otimes_A A_n$
-over $A_n$ are bounded above projective. The derived-map-representative lemma identifies both
-homotopy Hom sets with their derived Hom sets. We therefore obtain a bijection
-$\operatorname{Hom}_{D(A_n)}(Q(P\otimes_A
-A_n),Q(P_n))\cong\operatorname{Hom}_{D(A)}(Q(P),Q(P_n))$, computed by composition with $x\mapsto
-x\otimes1$. In particular the transpose of the projection is exactly the displayed chain map.
-Composing with the markings and the projection-respecting isomorphism of step 5 gives precisely
-the projection-induced derived comparison. This calculation also justifies the transition-map
-representation from the marking equation in step 2, with $A_{n+1}\to A_n$ in place of $A\to A_n$.
-Step 4 proves this chain map is an isomorphism, so the derived comparison is an isomorphism.
-Finally $P$ is bounded above finite free by step 4 and represents $E$ by step 5, which proves
-pseudo-coherence by its definition and all the more precise clauses.
--/
+so the last equality identifies the actual projection-induced comparison maps. -/
 theorem isPseudoCoherent_inverse_ring_reconstruction
     (R : ℕ → Type u) [∀ n, CommRing (R n)]
     (φ : ∀ n, R (n + 1) →+* R n)

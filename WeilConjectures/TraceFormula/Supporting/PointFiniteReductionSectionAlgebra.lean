@@ -25,8 +25,12 @@ import WeilConjectures.SixFunctors.ProEtale.AlgClosedFieldSiteColimits
 
 /-! # Ordinary finite quotient sections and flatness
 
-Source: Stacks Tags 093J, 03EK and 00HD; steps 2--3 of
-`lem-trf-point-sections-finite-reduction`.
+Algebraic input on sections with finite quotient coefficients and flatness, used in the
+finite coefficient reduction of point sections.
+
+## References
+
+* Stacks Tags 093J, 03EK, 00HD.
 -/
 
 -- After pruning, this module only keeps private declarations.

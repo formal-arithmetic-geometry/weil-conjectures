@@ -19,8 +19,29 @@ import Mathlib.RingTheory.IsTensorProduct
 
 /-! # A coherent tensor comparison diagram
 
-Source: Stacks Project, Algebra, Tag 02JO (3), final paragraph; Tag 05N9.
-(blueprint: lem-pc-tensor-model-comparison-diagram)
+A tensor model `colim F ⊗ B ≅ (colim F ⊗ A) ⊗[P] Q` of finitely presented algebras over a
+directed colimit of rings gives, on a tail of the system, a coherent diagram of finitely
+presented comparison maps `(F j ⊗ A) ⊗[P] Q → F j ⊗ B` whose transition squares are pushouts
+and whose colimit is bijective. Only the comparison maps are constructed, not a stagewise
+inverse.
+
+## Implementation details
+
+On the upper tail of `i`, tensoring `F` with `A` and `B` commutes with the colimit. Finite
+presentation over `ℤ` factors the `P`-structure on `colim F ⊗ A` through a stage, and finite
+presentation of `Q` over `P` factors the `P`-linear map `Q → colim F ⊗ B` through a later
+stage; the comparison maps `ψ j` are then given by the tensor universal property. The stage
+rings are lifted to a common universe via `ULift`. Transition squares are pushouts by tensor
+associativity and cancellation, and the induced map of colimits is conjugate to `e`. Finite
+presentation of `ψ j` follows from finite-type cancellation and base change. The arguments use
+neither injective transition maps nor nonzero rings.
+
+## References
+
+* [Stacks, Tag 02JO]
+* [Stacks, Tag 00QO]
+* [Stacks, Tag 00DD]
+* [Stacks, Tag 05N9]
 -/
 
 @[expose] public section
@@ -217,32 +238,15 @@ private theorem comparison_core
 
 
 
-/-- Construct the coherent comparison diagram, retaining its right-leg limit identity.
-
-Source: Stacks Project, Algebra, Tag 02JO (3), construction of Ψ; Tags 00QO, 00DD,
-and 05N9. (blueprint: lem-pc-tensor-model-comparison-diagram)
-
-Proof: on the cofinal upper tail of i, tensoring F with A and B gives the
-colimits X and Y, by stage representatives and eventual equality. Finite
-presentation over the integers factors the P-structure of X through an A
-stage. Above that stage use the induced P-structures on both tensor diagrams.
-The map Q to Y given by the right inclusion followed by e is P-linear, since
-he identifies the left inclusion. Finite presentation of Q over P factors
-this map through a B stage. At every later j, extend the factor through the
-transition and form ψj by the tensor universal property. Its left restriction
-is id tensor f; its right restriction has the asserted image in Y.
-Lift the stage rings to the common universe and conjugate their maps by the
-ULift equivalences. Tensor associativity and cancellation identify every
-transition square as a pushout. The two canonical cocones are colimits by
-tensor universal properties; their comparison is conjugate to e by checking
-both tensor inclusions, so it is bijective. Finally B is finitely presented
-over A by finite-type cancellation, and base change gives this at every
-stage. The source of ψj is finitely presented over the A stage by base change
-of P to Q. Finite-type cancellation therefore makes ψj finitely presented.
-Directed upper tails are nonempty, even for empty generator sets. These
-arguments use neither injective transitions nor nonzero rings.
-This statement only constructs comparison maps, not a stage inverse.
--/
+/-- Let `f : A → B` be a map of finitely presented `F i`-algebras, `P → Q` a finitely presented
+map with `P` finitely presented over `ℤ`, and `e : (colim F ⊗ A) ⊗[P] Q ≅ colim F ⊗ B` an
+isomorphism compatible with `f`. Then on the tail `J` of stages `j ≥ r` for some `r ≥ i` there
+are `P`-structures on `F j ⊗ A` compatible with the one on the colimit, and a natural
+transformation `α : D ⟶ E` between diagrams of rings with `D j ≅ (F j ⊗ A) ⊗[P] Q` and
+`E j ≅ F j ⊗ B`, such that every `α j` is finitely presented, all transition squares are
+pushouts, the induced map of colimits is bijective, and each comparison map
+`ψ j : (F j ⊗ A) ⊗[P] Q → F j ⊗ B` restricts to `id ⊗ f` on the left and is compatible with
+`e` on the right. -/
 theorem exists_tensor_model_comparison_diagram
     {I : Type v} [Preorder I] [IsDirectedOrder I]
     (F : I ⥤ CommRingCat.{v}) (c : Cocone F) (hc : IsColimit c)

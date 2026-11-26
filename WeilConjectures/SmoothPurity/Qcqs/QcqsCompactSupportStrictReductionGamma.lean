@@ -11,8 +11,22 @@ public import WeilConjectures.SmoothPurity.Compact.CompactSupportNativeSystemEva
 import all WeilConjectures.SmoothPurity.Compact.CompactSupportRepresentativeIndependence
 import WeilConjectures.SmoothPurity.Qcqs.QcqsCompactSupportNativeTowerComparison
 
-/-! The total-limit projection identity for the strict compact-support system.
-(blueprint: lem-qcqs-compact-support-strict-reduction-comparison) -/
+/-!
+# The total-limit projection identity for the strict compact-support system
+
+## Implementation details
+
+For `qcqsCompactSupport_strictReductionGamma`, restrict the coherent compact-support tower to
+completed scalars and use the specified right-derived total-limit comparison. The
+representative-independence comparison then provides `γ`; normalization of the derived-limit
+projections gives the displayed finite scalar-adjunction equation. This subclaim concerns the
+projection identity only.
+
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 6.7.6 and Lemma 6.7.7]
+* [Stacks Project, Tags 0941 and 0F7J]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -345,16 +359,7 @@ variable (l : ℕ) [Fact l.Prime]
 
 -- SY is retained verbatim in the existing public interface.
 set_option linter.unusedVariables false in
-/-- The recorded integral comparison has the prescribed native finite projections.
-
-Source: Bhatt--Scholze, Definition 6.7.6 and Lemma 6.7.7; Stacks 0941, 0F7J
-(blueprint: lem-qcqs-compact-support-strict-reduction-comparison).
-
-Restrict the coherent compact-support tower to completed scalars and use the specified
-right-derived total-limit comparison.  The representative-independence comparison then
-provides `γ`; normalization of the derived-limit projections gives the displayed finite
-scalar-adjunction equation.  This subclaim concerns the projection identity only.
--/
+/-- The recorded integral comparison has the prescribed native finite projections. -/
 theorem qcqsCompactSupport_strictReductionGamma
     (SX : CoefficientDerivedSystemCalculus l E X)
     (SY : CoefficientDerivedSystemCalculus l E Y) :

@@ -13,9 +13,12 @@ import WeilConjectures.TraceFormula.Integral.IntegralScalarOrdinaryModelCoherenc
 
 /-! # Multiplication and associativity for scalar realization counits
 
-Source: Stacks 06YY and 0941; the scalar normalization calculation in
-lem-trf-normalized-integral-scalar-coherence.
-(blueprint: lem-trf-integral-scalar-counit-normalization).
+The reduction mates of the prescribed scalar realizations respect the published completed
+multiplication and associator (`integralScalarCounitNormalization`).
+
+## References
+
+* Stacks Project, Tags 06YY, 0941
 -/
 
 @[expose] public section
@@ -58,32 +61,7 @@ private theorem scalarCounit_comp
   simpa only [Functor.map_comp, Category.assoc, hn] using hh
 
 /-- The reduction mates of the prescribed scalar realizations respect the published
-completed multiplication and associator, before introducing any scheme pullback.
-Source: Stacks sites-cohomology.tex, lemma-derived-base-change (06YY) and
-lemma-derived-limit-is-ok (0941), and the scalar normalization paragraph of
-lem-trf-normalized-integral-scalar-coherence.
-
-Proof: identify finite-free ordinary scalar extension with the universal derived
-change-of-rings model by its sheafified pure tensor formula and its universal
-K-flat counit. The identification carries multiplication to multiplication and
-successive extension to the tensor associator: on sections the two expressions
-send s tensor x to sx and t tensor (s tensor x) to t*j(s) tensor x, respectively.
-These formulas commute with all restrictions and differentials. Localization on
-flat-term K-flat resolutions preserves the equations and determines the derived
-comparisons. The completion maps agree since both have the actual quotient
-augmentation in the unshifted Roos coordinate and zero shifted coordinate.
-Apply scalarModelUnit and scalarModelAssociativity through these identifications.
-Cancel the completion isomorphisms at the complete input and its scalar extension.
-For the unit, the resulting equation is b times limit(system multiplication)
-= completed multiplication times the reconstruction unit. Transpose it under the
-actual reduction/limit adjunction; counit naturality and the left triangle give
-the first displayed equation. For the tower, move the first realization through
-the second counit by naturality. Transpose the associator equation: the composite
-mate is c_LM at T_EL(K), followed by S_LM(c_EL), followed by system associativity.
-The other mate is reduction of the completed associator. This gives the second
-equation. This argument applies to equal fields and identity embeddings, zero
-objects, and arbitrary ramification; no finite quotient map is assumed flat.
-(blueprint: lem-trf-integral-scalar-counit-normalization). -/
+completed multiplication and associator, before introducing any scheme pullback. -/
 theorem integralScalarCounitNormalization
     (l : ℕ) [Fact l.Prime] (D : IntegralComparisonSystem.{u} l) :
     (∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

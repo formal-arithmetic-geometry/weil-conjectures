@@ -13,27 +13,28 @@ public import Mathlib.RingTheory.Polynomial.Basic
 import WeilConjectures.RingTheory.MonogenicResidueLeadingRelation
 import WeilConjectures.RingTheory.MonogenicPrincipalLocalizationModel
 
-/-! # Monogenic residue polynomial and finite splitting data
-Source: Stacks Project, Algebra, Tag 0334, Step 5.
-(blueprint: lem-weil-pbc-monogenic-residue-polynomial-model). -/
+/-!
+# Monic residue relation after a principal localization
+
+If `S = R[x]` and `m` is a maximal ideal of `S`, then after localizing at a suitable nonzero
+coefficient `a`, the presentation `S_a ≃ A[y]` carries a monic positive-degree relation for `y`
+lying in the extension of `m`.
+
+## Implementation details
+
+The residue relation `p` with leading coefficient `a ∉ m` makes `a` a unit after localization, and
+`f = c(a)⁻¹ · c(p)` is monic of the same positive degree.
+
+## References
+
+* [Stacks, Tag 0334] (step 5)
+-/
 
 @[expose] public section
 
 universe u v
 
-/-- A monic residue relation after a principal localization, before splitting its roots.
-Source: Stacks Project, Algebra, Tag 0334, Step 5.
-(blueprint: lem-weil-pbc-monogenic-residue-polynomial-model).
-
-Proof: The residue-leading-relation lemma gives a polynomial p of positive degree
-with p(x) in m and leading coefficient a whose image is outside m. Hence a is
-nonzero. Use the principal-localization-model lemma to present S_a as A[y] in
-the required universe. Its coefficient map c is injective and c(a) is a unit.
-Set f = C(c(a)^{-1}) times p mapped by c, using the inverse of that unit. The
-leading coefficient is one and its degree equals that of p, so f is monic of
-positive degree. The coefficient and generator compatibility of the model
-identifies the evaluation of p mapped by c at y with the image of p(x).
-It belongs to the extended ideal, as does its multiple by c(a)^{-1}. -/
+/-- A monic residue relation after a principal localization, before splitting its roots. -/
 theorem exists_monogenic_residue_polynomial_model
     (R : Type u) (K : Type v) [CommRing R] [IsDomain R] [IsIntegrallyClosed R]
     [Field K] [Algebra R K] [IsFractionRing R K] (hR : IsNagataRing R) (x : K)

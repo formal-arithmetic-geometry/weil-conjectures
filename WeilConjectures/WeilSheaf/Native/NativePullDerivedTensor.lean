@@ -42,6 +42,20 @@ it is `AlgebraicGeometry.ProEtaleWeilSheaf.native_open_derived_tensor`.
   complexes.
 - `AlgebraicGeometry.ProEtaleWeilSheaf.exists_nativePullDerivedTensor`: the native derived
   pullback/tensor comparison, with its sheaf and representative normalizations.
+
+## Implementation details
+
+In `exists_nativeDerivedRestrictionTensor` the functor `R` is kept abstract so that no operation
+is unfolded; for `R` the pullback along a morphism of `k₀`-schemes, its hypotheses are
+`AlgebraicGeometry.ProEtaleWeilSheaf.native_pull_sheaf_tensor` and
+`AlgebraicGeometry.ProEtaleWeilSheaf.nativeIsKFlat_upperStar_mapHomologicalComplex_obj`.
+The descent along the K-flat localization uses that precomposition with a localization is
+fully faithful: on K-flat representatives one composes the target model, the exact-derived factor
+of `R`, the total comparison and the inverse source models.
+
+## References
+
+* [Stacks Project, Tags 06YN, 07A4 and 012Z](https://stacks.math.columbia.edu)
 -/
 
 @[expose] public noncomputable section
@@ -200,21 +214,15 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fa
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
 
 -- the total and derived comparisons are matched with the canonical insertions
-/-- **Derived restriction of the native tensor product** (blueprint:
-`fix-prop-projection-formula`, the comparison `Lf^*(K ⊗ L) ≅ Lf^* K ⊗ Lf^* L` entering the
-projection map). Let `R` be an exact functor from pro-étale Weil sheaves on `Y` to those on `Z`
-which preserves coproducts and native K-flatness, with a balanced comparison
+/-- **Derived restriction of the native tensor product**. Let `R` be an exact functor from
+pro-étale Weil sheaves on `Y` to those on `Z` which preserves coproducts and native K-flatness,
+with a balanced comparison
 `r : R (M ⊗ N) ≅ R M ⊗ R N`. Then there are
 
 * the totalization `t : R (P ⊗ T) ≅ R P ⊗ R T` of `r` on complexes, equal to `r` on each
   summand;
 * a natural isomorphism `R (A ⊗ T) ≅ R A ⊗ R T` of native derived categories, which on K-flat
-  complexes is the localization of `t`.
-
-For `R` the pullback along any morphism of `k₀`-schemes, the hypotheses are
-`AlgebraicGeometry.ProEtaleWeilSheaf.native_pull_sheaf_tensor` and
-`AlgebraicGeometry.ProEtaleWeilSheaf.nativeIsKFlat_upperStar_mapHomologicalComplex_obj`. The
-functor is kept abstract so that no operation is unfolded. -/
+  complexes is the localization of `t`. -/
 theorem exists_nativeDerivedRestrictionTensor
     (R : ProEtaleWeilSheaf k₀ l Y ⥤ ProEtaleWeilSheaf k₀ l Z)
     [R.Additive] [PreservesFiniteLimits R] [PreservesFiniteColimits R]
@@ -276,13 +284,7 @@ namespace NativeRestrictionDescentProof
 
 /-- Descent of a total comparison for an exact functor `R` along full K-flat
 localizations, retaining the representative square. This is
-`restriction_derived_representative` without the extension functor.
-
-Source: Stacks 06YN; fully faithful precomposition with a localization
-(blueprint: fix-prop-projection-formula).
-Proof: on K-flat representatives compose the target model, the exact-derived factor of
-`R`, the total comparison and the inverse source models; the product localization
-descends this, and the inverse pairs cancel. -/
+`restriction_derived_representative` without the extension functor. -/
 theorem exact_derived_representative
     {A B : Type a} [Category.{b} A] [Category.{b} B] [Abelian A] [Abelian B]
     [HasDerivedCategory.{b} A] [HasDerivedCategory.{b} B]
@@ -386,8 +388,7 @@ attribute [local irreducible] upperStar nativeTensorTotal nativeDerivedTensor Na
   nativeOpenTensorModel nativeOpenTensorInsertion
 
 /-- The summand normalization of a total pullback/tensor comparison `t`: on every
-homogeneous summand it is the balanced sheaf comparison `r` followed by the insertion.
-Source: Stacks 012Z (blueprint: fix-prop-projection-formula). -/
+homogeneous summand it is the balanced sheaf comparison `r` followed by the insertion. -/
 def NativePullTensorSummands
     (R : ProEtaleWeilSheaf k₀ l Y ⥤ ProEtaleWeilSheaf k₀ l Z) [R.PreservesZeroMorphisms]
     (r : nativeOpenSheafTensor k₀ l Y ⋙ R ≅ R.prod R ⋙ nativeOpenSheafTensor k₀ l Z)
@@ -403,8 +404,7 @@ def NativePullTensorSummands
 /-- The representative normalization of a derived pullback/tensor comparison `mu`: it is
 exactly `OpenTensorRestrictionNormalization` for the native tensor models, the native
 K-flat predicates and the total comparison `t`, as produced by
-`NativeRestrictionDescentProof.restriction_derived_representative`.
-Source: Stacks 06YN (blueprint: fix-prop-projection-formula). -/
+`NativeRestrictionDescentProof.restriction_derived_representative`. -/
 def NativePullDerivedNormalization
     (R : ProEtaleWeilSheaf k₀ l Y ⥤ ProEtaleWeilSheaf k₀ l Z)
     [R.Additive] [PreservesFiniteLimits R] [PreservesFiniteColimits R]
@@ -471,15 +471,8 @@ attribute [local irreducible] nativeTensorTotal nativeDerivedTensor NativeIsKFla
   nativeOpenTensorModel nativeOpenTensorInsertion
 
 /-- The derived balanced pullback/tensor comparison along an arbitrary morphism, given
-that pullback preserves native two-sided K-flatness.
-
-Source: Stacks 07A4, 06YN, 012Z (blueprint: fix-prop-projection-formula).
-Proof: the balanced sheaf comparison `r` of `native_pull_sheaf_tensor` totalizes to a
-chain isomorphism `t` with the prescribed summands (`restriction_total_with_insertions`;
-pullback is a left adjoint, so it preserves coproducts). On native K-flat representatives,
-which pullback preserves by `hR`, compose the normalized tensor models with `t`; the full
-K-flat localization descends this to `mu`, with the representative square
-`OpenTensorRestrictionNormalization`. -/
+that pullback preserves native two-sided K-flatness: it is the localization on K-flat complexes
+of the totalization of the balanced sheaf comparison. -/
 theorem native_pull_derived_tensor_of_kflat
     (hR : ∀ T, NativeIsKFlat k₀ l Y T →
       NativeIsKFlat k₀ l Z (((upperStar k₀ l p).mapHomologicalComplex (.up ℤ)).obj T)) :

@@ -14,9 +14,20 @@ import Mathlib.RingTheory.Localization.BaseChange
 /-!
 # Module localization from a lifted tensor comparison
 
-Source: Stacks Project, Algebra, proof of Tag 00R7, first two paragraphs;
-localization and tensor products (Tag 00DK).
-(blueprint: lem-weil-pbc-localized-module-lifted-tensor-comparison).
+A localization comparison for rings and a module base-change isomorphism make the base-changed
+module a localization, even when the limit rings were lifted to a larger universe.
+
+## Implementation details
+
+With `E = S ⊗_B C`, the ring comparison is transported to a localization `E → ULift T`, and
+pushout tensor cancellation gives `E ⊗_C N ≃ S ⊗_B N`. The localized-module tensor theorem then
+shows that `E ⊗_C N → ULift T ⊗_C N` is a localization. All module structures are explicit
+transports through specified tensor equivalences.
+
+## References
+
+* [Stacks, Tag 00R7] (proof, first two paragraphs)
+* [Stacks, Tag 00DK]
 -/
 
 @[expose] public section
@@ -28,22 +39,7 @@ open scoped TensorProduct
 namespace Module
 
 /-- A localization comparison for rings and a module base-change isomorphism give
-localization of the base-changed module, even when the limit rings were lifted.
-Source: Stacks Project, Algebra, proof of Tag 00R7, first two paragraphs, and Tag 00DK.
-(blueprint: lem-weil-pbc-localized-module-lifted-tensor-comparison).
-
-Proof: put E = S tensor over B C, with C acting through the right factor. Tensor
-symmetry and the lift equivalence identify C tensor over B ULift S with E. Transport
-φ and its inverted submonoid to obtain a localization E → ULift T at W. The two formulas
-for φ prove the scalar towers with S and C. Pushout tensor cancellation gives the explicit
-S-linear equivalence eL : E tensor over C N ≃ S tensor over B N. Transport the E-action
-through eL to L = S tensor over B N; since eL is S-linear, this action is compatible with S.
-The localized-module tensor theorem applied to E → ULift T, tensoring over C with N,
-shows that E tensor over C N → ULift T tensor over C N is localization at W. Precompose
-with the E-linear version of eL.symm. The canonical localization isomorphism now gives
-W⁻¹L ≃ ULift T tensor over C N. Restrict scalars to S and compose with the supplied
-module equivalence, also restricted to S. All module structures used here are explicit
-transports through specified tensor equivalences, and no arbitrary witness is chosen. -/
+localization of the base-changed module, even when the limit rings were lifted. -/
 theorem localizedModule_of_liftedTensorComparison
     (S : Type v) (T : Type w) (B C : Type u) (N : Type t) (M : Type t)
     [CommRing S] [CommRing T] [CommRing B] [CommRing C]

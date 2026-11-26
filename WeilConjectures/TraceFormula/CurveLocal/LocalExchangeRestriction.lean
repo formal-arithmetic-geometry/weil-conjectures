@@ -18,8 +18,7 @@ public import WeilConjectures.TraceFormula.CurveLocal.SupportTriangleCounit
 
 On the strictly local model `M` of a curve (`AlgebraicGeometry.Etale.CurveLocalModel`), with
 closed immersions `a : G ⟶ T`, `b : B ⟶ T` and `Y = G ×_T B`, this file compares two forms of
-the supported restriction of blueprint `lemma-local-term-restriction-map--1`, (2), for a bounded
-below complex `Q` on `T`:
+the supported restriction for a bounded below complex `Q` on `T`:
 
 * the classical `ρ_{a,b} : RΓ_G(T, Q) ⟶ RΓ_Y(B, b^* Q)`
   (`AlgebraicGeometry.Etale.sectionsWithSupportRestriction`), a map of localization triangles;
@@ -29,7 +28,7 @@ below complex `Q` on `T`:
 Under the identifications `RΓ_G(T, Q) ≅ RΓ(G, Ra^! Q)` and `RΓ(Y, Ry_B^! N) ≅ RΓ_Y(B, N)`, the
 first is the restriction from `G` to `Y` followed by the second.
 
-## Proof
+## Implementation details
 
 Let `ε : E = Ra_! Ra^! Q ⟶ Q` be the counit. By naturality of `ρ` in `Q`,
 `ρ_Q = RΓ_G(ε)⁻¹ ≫ ρ_E ≫ RΓ_Y(b^* ε)`, where `RΓ_G(ε)` is an isomorphism

@@ -13,8 +13,19 @@ import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorEvaluationM
 
 /-! # Pasting the normalized tensor-model faces
 
-Source: Stacks Tags 07A4, 0941 and 03D2.
-(blueprint: lem-pur-completed-pullback-tensor-evaluation-pasting).
+Given normalized tensor-model faces and a prescribed total diagonal, we paste them into the
+pullback/tensor evaluation cube on K-flat representatives.
+
+## Implementation details
+
+The four corners of the cube are the system tensor models and the finite tensor models; the
+faces are supplied by the evaluation normalizations, the system and finite normalizations,
+the factor compatibility `he` and the assumed total diagonal. This step neither proves the
+ordinary diagonal nor constructs the finite normalization.
+
+## References
+
+* [Stacks, Tags 07A4, 0941 and 03D2](https://stacks.math.columbia.edu/tag/07A4)
 -/
 
 @[expose] public noncomputable section
@@ -124,17 +135,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 -- The cube carries the chosen tensor models and exact-functor factorizations.
-/-- Paste normalized tensor-model faces and a prescribed total diagonal into the cube.
-Source: Stacks Tag 07A4, representative tensor-model pasting
-(blueprint: lem-pur-completed-pullback-tensor-evaluation-pasting).
-Proof: use the system tensor models and finite tensor models as the four corners.
-The two given evaluation normalizations and the system comparison normalization
-supply three faces, the finite normalization supplies the fourth, and he gives
-the two factor faces. The assumed total diagonal supplies the last face.
-Naturality of tensor comparisons pastes these faces; cancellation of the model
-isomorphisms gives the asserted derived cube. This step does not prove the
-ordinary diagonal or obtain the finite normalization.
--/
+/-- Normalized tensor-model faces and a prescribed total diagonal paste to the
+pullback/tensor evaluation cube on K-flat representatives `P` and `Q`. -/
 theorem completedPullbackTensor_evaluation_pasting {X Y : Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]

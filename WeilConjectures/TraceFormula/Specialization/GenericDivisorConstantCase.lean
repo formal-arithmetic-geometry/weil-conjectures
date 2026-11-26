@@ -46,8 +46,7 @@ coordinate back to a uniformizer of `𝒪_{X,ζ}`
 * Non-constant lisse `M` (finite étale trivialisation, normalisation and proper exchange).
 
 The vanishing of the thick origin,
-`isZero_specializationDefect_polyAffineThickOrigin_unit_padicAlgCl`, is proved in another
-subsection.
+`isZero_specializationDefect_polyAffineThickOrigin_unit_padicAlgCl`, is proved elsewhere.
 
 -/
 
@@ -68,13 +67,10 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
-/-- **The defect near a smooth multiple divisor, for complexes locally isomorphic to
-`j_! ℚ̄_ℓ`**: let `W` be an open of `X` with a smooth `f : W ⟶ 𝔸¹_k` such that
-`Z ∩ W = f⁻¹ V(x^m)`, `m ≥ 1`, and let `L` be a complex on `X` with `L|_W ≅ (j_! ℚ̄_ℓ)|_W` for
-the complement `j : X ∖ Z ⟶ X`. Then `C_{W, Z ∩ W}(L|_W) = 0`. Indeed, by the smooth exchange for
-the open immersion `g : W ⟶ X`,
-`C_W(g^* j_! ℚ̄_ℓ) ≅ g_Z^* C_X(j_! ℚ̄_ℓ) ≅ g_Z^* C_X(ℚ̄_ℓ) ≅ C_W(ℚ̄_ℓ)`,
-which vanishes by the smooth exchange along `f` and the thick origin. -/
+/-- **The defect near a smooth multiple divisor, for complexes locally isomorphic to `j_! ℚ̄_ℓ`**:
+let `W` be an open of `X` with a smooth `f : W ⟶ 𝔸¹_k` such that `Z ∩ W = f⁻¹ V(x^m)`, `m ≥ 1`, and
+let `L` be a complex on `X` with `L|_W ≅ (j_! ℚ̄_ℓ)|_W` for the complement `j : X ∖ Z ⟶ X`. Then
+`C_{W, Z ∩ W}(L|_W) = 0`. -/
 theorem isZero_specializationDefect_upperStar_of_smooth (I : X.left.IdealSheafData)
     (W : X.left.Opens) (f : overRestrict X W ⟶ polyAffine k 1) [Smooth f.left] {m : ℕ}
     (hm : 0 < m)
@@ -113,11 +109,9 @@ theorem isZero_specializationDefect_upperStar_of_smooth (I : X.left.IdealSheafDa
   exact h₀.of_iso (e₁ ≪≫ e₂ ≪≫ Functor.mapIso _ e₃ ≪≫ e₄.symm ≪≫ e₅)
 
 /-- **The codimension-one core for constant coefficients near a smooth multiple divisor**: let `ζ`
-be a point of `Z = V(I)` with an open neighbourhood `W` in `X` and a smooth `f : W ⟶ 𝔸¹_k` such
-that `Z ∩ W = f⁻¹ V(x^m)`, `m ≥ 1`, and let `N` be a complex on `X ∖ Z` such that `j_! N` and
-`j_! ℚ̄_ℓ` have isomorphic restrictions to `W`. Then `Le^* Ψ_X(j_! N)` vanishes near `ζ`: the
-defect `C_{W, Z ∩ W}((j_! N)|_W)` vanishes (`isZero_specializationDefect_upperStar_of_smooth`),
-vanishing near a point is local on `X`, and the defect of `j_! N` is `Le^* Ψ_X(j_! N)[1]`. -/
+be a point of `Z = V(I)` with an open neighbourhood `W` in `X` and a smooth `f : W ⟶ 𝔸¹_k` such that
+`Z ∩ W = f⁻¹ V(x^m)`, `m ≥ 1`, and let `N` be a complex on `X ∖ Z` such that `j_! N` and `j_! ℚ̄_ℓ`
+have isomorphic restrictions to `W`. Then `Le^* Ψ_X(j_! N)` vanishes near `ζ`. -/
 theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_of_smooth (I : X.left.IdealSheafData)
     (ζ : (centre X I).left) (W : X.left.Opens) (hζW : I.subschemeι ζ ∈ W)
     (f : overRestrict X W ⟶ polyAffine k 1) [Smooth f.left] {m : ℕ} (hm : 0 < m)
@@ -246,11 +240,8 @@ lemma nonempty_upperStar_openImmersionLowerShriek_iso {I : X.left.IdealSheafData
 
 /-- **A lisse generator with constant coefficients is constant where it is lisse**: let
 `g : Z₀ ⟶ X ∖ Z` be a closed immersion, `j' : U₀ ⟶ Z₀` an open immersion, `N ≅ Rg_! Rj'_! M` with
-`M ≅ ℚ̄_ℓ`, and `W` an open of the reduced scheme `X` such that `W ∖ Z` is contained in the image
-of `U₀`. Then `j_! N` and `j_! ℚ̄_ℓ` have isomorphic restrictions to `W`. Indeed, over `W ∖ Z` the
-immersion `c = g ∘ j'` restricts to a surjective immersion onto a reduced scheme, hence to an
-isomorphism `c_W`, and `(Rc_! M)|_{W ∖ Z} ≅ Rc_{W!} (M|_{c⁻¹(W ∖ Z)}) ≅ Rc_{W!} Lc_W^* ℚ̄_ℓ ≅ ℚ̄_ℓ`
-by base change. -/
+`M ≅ ℚ̄_ℓ`, and `W` an open of the reduced scheme `X` such that `W ∖ Z` is contained in the image of
+`U₀`. Then `j_! N` and `j_! ℚ̄_ℓ` have isomorphic restrictions to `W`. -/
 theorem nonempty_upperStar_lowerShriek_iso_unit_of_subset_range [IsReduced X.left]
     {I : X.left.IdealSheafData}
     {Z₀ : Over (Spec (.of k))} [LocallyOfFiniteType Z₀.hom] [QuasiCompact Z₀.hom]
@@ -307,13 +298,10 @@ theorem nonempty_upperStar_lowerShriek_iso_unit_of_subset_range [IsReduced X.lef
     (boundedConstructibleUpperStar _ ℓ (overRestrictι _ U)).mapIso
       (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ ι))
 
-/-- **The codimension-one core for constant coefficients near a smooth multiple divisor** (route
-(i) of `exists_isZero_upperStar_nearbyCycles_lowerShriek_of_subset_range`, blueprint
-`lemma-vanishing-generic-points-principal-divisor`): the hypotheses of the core with `X` reduced,
-`M ≅ ℚ̄_ℓ`, and an open neighbourhood `W ⊆ V` of `ζ` with a smooth `f : W ⟶ 𝔸¹_k` such that
-`Z ∩ W = f⁻¹ V(x^m)`, `m ≥ 1`. Then `Le^* Ψ_X(j_! N)` vanishes near `ζ`: `j_! N` and `j_! ℚ̄_ℓ`
-agree on `W` (`nonempty_upperStar_lowerShriek_iso_unit_of_subset_range`), and the constant case is
-`exists_isZero_upperStar_nearbyCycles_lowerShriek_of_smooth`. -/
+/-- **The codimension-one core for constant coefficients near a smooth multiple divisor**: the
+hypotheses of the core `exists_isZero_upperStar_nearbyCycles_lowerShriek_of_subset_range` with `X`
+reduced, `M ≅ ℚ̄_ℓ`, and an open neighbourhood `W ⊆ V` of `ζ` with a smooth `f : W ⟶ 𝔸¹_k` such that
+`Z ∩ W = f⁻¹ V(x^m)`, `m ≥ 1`. Then `Le^* Ψ_X(j_! N)` vanishes near `ζ`. -/
 theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_of_subset_range_of_unit
     (k' : Type u) [Field k'] [Algebra k k'] [IsSepClosed k'] [Fact (ringChar k').Prime]
     [Fact (ringChar k' ≠ ℓ)] [IsReduced X.left] {I : X.left.IdealSheafData}
@@ -342,15 +330,11 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_of_subset_range_of_unit
     fun _ hx ↦ hV ⟨hWV hx.1, hx.2⟩
   exact exists_isZero_upperStar_nearbyCycles_lowerShriek_of_smooth k' I ζ W hζW f hm hI N eW
 
-/-- **The codimension-one core for constant coefficients near a smooth uniformizer** (route (i)
-of `exists_isZero_upperStar_nearbyCycles_lowerShriek_of_subset_range`, blueprint
-`lemma-vanishing-generic-points-principal-divisor`): the hypotheses of the core with `M ≅ ℚ̄_ℓ`,
+/-- **The codimension-one core for constant coefficients near a smooth uniformizer**: the hypotheses
+of the core `exists_isZero_upperStar_nearbyCycles_lowerShriek_of_subset_range` with `M ≅ ℚ̄_ℓ`,
 together with an open neighbourhood `W₀ ⊆ V` of `ζ` and a smooth `f₀ : W₀ ⟶ 𝔸¹_k` such that `f₀^* x`
 is a uniformizer of the discrete valuation ring `𝒪_{X,ζ}`. Then `Le^* Ψ_X(j_! N)` vanishes near `ζ`.
-Indeed, on a smaller neighbourhood `W` of `ζ`, `h = (unit) · (f₀^* x)^m` with `m ≥ 1`
-(`Scheme.exists_span_eq_span_pow_of_irreducible_germ`), so `Z ∩ W = f⁻¹ V(x^m)` for the
-restriction `f` of `f₀` to `W`, and
-`exists_isZero_upperStar_nearbyCycles_lowerShriek_of_subset_range_of_unit` applies. -/
+-/
 theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_of_subset_range_of_uniformizer
     (k' : Type u) [Field k'] [Algebra k k'] [IsSepClosed k'] [Fact (ringChar k').Prime]
     [Fact (ringChar k' ≠ ℓ)] (hX : IsNormalScheme X.left) {h : Γ(X.left, ⊤)} (hh : h ≠ 0)

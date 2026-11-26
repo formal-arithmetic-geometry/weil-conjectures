@@ -180,8 +180,7 @@ noncomputable def Etale.localizationRestrictionLowerStarAdjunction :
 
 /-- For an étale `f`, the pullback `f^*` is computed by restriction along the localization
 functor: both are left adjoint to `f_*`. In particular `f^*` needs no sheafification in this
-case, and its sections are given by `Etale.localizationRestriction_obj_val_obj`.
-(blueprint: `lem-weil-pbc-etale-inverse-image-restriction`) -/
+case, and its sections are given by `Etale.localizationRestriction_obj_val_obj`. -/
 noncomputable def Etale.upperStarIsoLocalizationRestriction :
     (f)^*[A] ≅ Etale.localizationRestriction A f h :=
   (Etale.upperStarLowerStarAdjunction A f).leftAdjointUniq
@@ -289,11 +288,8 @@ instance Etale.openImmersionRestriction_linear (Λ : Type*) [Semiring Λ] [Linea
 
 namespace Etale
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--7`: Extension by zero for
-open immersions
-
-The lower shriek `j_!` along an open immersion `j : U ⟶ X` on sheaves for the small
-étale sites: the left adjoint of the restriction `j^*`
+/-- **Extension by zero for open immersions.** The lower shriek `j_!` along an open immersion
+`j : U ⟶ X` on sheaves for the small étale sites: the left adjoint of the restriction `j^*`
 (`AlgebraicGeometry.Etale.localizationLowerShriek`). Its geometric stalks are those of `F` at
 points of `U` (`AlgebraicGeometry.Etale.openImmersionLowerShriekCompUliftSheafFiberIso`) and
 zero elsewhere (`AlgebraicGeometry.Etale.isZero_uliftSheafFiber_openImmersionLowerShriek_obj`). -/
@@ -331,15 +327,7 @@ instance Etale.openImmersionLowerShriek_linear (Λ : Type*) [Semiring Λ] [Linea
   (Etale.openImmersionLowerShriekAdjunction A j).left_adjoint_linear
 
 /-- The extension by zero `j_!` along an open immersion on étale sheaves with values in an
-abelian category is exact. This is the left exactness half.
-
-`j_!` is the presheaf-level left Kan extension followed by sheafification, and both factors
-are left exact: the first by
-`AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overMap`, the second by
-the left exactness of sheafification, which is the content of `HasSheafify` beyond the
-`HasWeakSheafify` needed to define `j_!`; both are provided for the Grothendieck abelian
-coefficient category `A`, the second by the instance of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. -/
+abelian category is exact. This is the left exactness half. -/
 instance Etale.preservesFiniteLimits_openImmersionLowerShriek :
     PreservesFiniteLimits (j)_!open[A] := by
   have heq : (j)_!open[A] =
@@ -366,7 +354,7 @@ noncomputable def Etale.upperStarIsoOpenImmersionRestriction :
   Etale.upperStarIsoLocalizationRestriction A j inferInstance
 
 /-- The adjunction `j_! ⊣ j^*` between the lower shriek along an open immersion and the
-pullback `Etale.upperStar`. (blueprint: `lem-weil-pbc-extension-by-zero-adjunction`) -/
+pullback `Etale.upperStar`. -/
 noncomputable def Etale.openImmersionLowerShriekUpperStarAdjunction :
     (j)_!open[A] ⊣ (j)^*[A] :=
   Etale.localizationLowerShriekUpperStarAdjunction A j inferInstance

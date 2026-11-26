@@ -30,9 +30,11 @@ takes as input inclusions of ideals on pairs of affine opens `U' ⊆ c_i⁻¹ U`
 2. `(c₂^* I)(U')^n ⊆ J(U')^{n+1}` for the `n ≥ 1` of the contraction condition
    (`ProEtale.CondensedRing.Correspondence.IsContractingAt.ker_map_pow_le`).
 
-For the second, `J(U')` is either `Γ(U')` (if `y ∉ U'`) or the maximal ideal `𝔭` of `y` in
-`Γ(U')`. The power `𝔭^{n+1}` is `𝔭`-primary, hence the contraction of its extension
-`𝔪_y^{n+1}` to the stalk `𝒪_{C,y} = Γ(U')_𝔭`, and in the stalk
+## Implementation details
+
+For the second condition, `J(U')` is either `Γ(U')` (if `y ∉ U'`) or the maximal ideal `𝔭` of `y` in
+`Γ(U')`. The power `𝔭^{n+1}` is `𝔭`-primary, hence the contraction of its extension `𝔪_y^{n+1}` to
+the stalk `𝒪_{C,y} = Γ(U')_𝔭`, and in the stalk
 `(c₂^* I)(U')^n 𝒪_{C,y} ⊆ (c₂^♯ 𝔪_x)^n ⊆ (c₁^♯ 𝔪_x)^{n+1} ⊆ 𝔪_y^{n+1}`.
 
 -/
@@ -154,18 +156,16 @@ lemma ker_map_le_of_comp_eq (h : c.C ⟶ X) (x : RationalPoint X) (hx : y ≫ h 
 
 namespace IsContractingAt
 
-/-- **The first ideal condition for `c₁`** (blueprint `lemma-normal-cones-contracting-ideals`): for
-`c` contracting at `y` and `x = c₁(y)`, functions vanishing at `x` pull back along `c₁` to functions
-vanishing at `y`. -/
+/-- **The first ideal condition for `c₁`**: for `c` contracting at `y` and `x = c₁(y)`, functions
+vanishing at `x` pull back along `c₁` to functions vanishing at `y`. -/
 lemma ker_map_le_c₁ (_hc : c.IsContractingAt y) ⦃U' : c.C.left.AffineZariskiSite⦄
     ⦃U : X.left.AffineZariskiSite⦄ (hU : U'.1 ≤ c.c₁.left ⁻¹ᵁ U.1) :
     ((y ≫ c.c₁).left.ker.siteIdeal U).map (c.c₁.left.appLE U.1 U'.1 hU).hom ≤
       y.left.ker.siteIdeal U' :=
   ker_map_le_of_comp_eq c.c₁ _ rfl hU
 
-/-- **The first ideal condition for `c₂`** (blueprint `lemma-normal-cones-contracting-ideals`): for
-`c` contracting at `y` and `x = c₁(y) = c₂(y)`, functions vanishing at `x` pull back along `c₂` to
-functions vanishing at `y`. -/
+/-- **The first ideal condition for `c₂`**: for `c` contracting at `y` and `x = c₁(y) = c₂(y)`,
+functions vanishing at `x` pull back along `c₂` to functions vanishing at `y`. -/
 lemma ker_map_le_c₂ (hc : c.IsContractingAt y) ⦃U' : c.C.left.AffineZariskiSite⦄
     ⦃U : X.left.AffineZariskiSite⦄ (hU : U'.1 ≤ c.c₂.left ⁻¹ᵁ U.1) :
     ((y ≫ c.c₁).left.ker.siteIdeal U).map (c.c₂.left.appLE U.1 U'.1 hU).hom ≤
@@ -231,9 +231,9 @@ lemma ker_map_pow_le_of_le_pow (hc : c.IsContractingAt y) {n : ℕ}
           (c.c₁.left.stalkMap y₀).hom) ^ (n + 1) := hle
     _ ≤ _ := Ideal.pow_right_mono (map_maximalIdeal_le _) _
 
-/-- **The contraction condition on ideals** (blueprint `lemma-normal-cones-contracting-ideals`): for
-`c` contracting at `y`, `x = c₁(y)`, `I` the ideal of `x` and `J` the ideal of `y`, there is `n ≥ 1`
-with `(c₂^* I)(U')^n ⊆ J(U')^{n+1}` for all affine opens `U' ⊆ c₂⁻¹ U`. -/
+/-- **The contraction condition on ideals**: for `c` contracting at `y`, `x = c₁(y)`, `I` the ideal
+of `x` and `J` the ideal of `y`, there is `n ≥ 1` with `(c₂^* I)(U')^n ⊆ J(U')^{n+1}` for all affine
+opens `U' ⊆ c₂⁻¹ U`. -/
 lemma ker_map_pow_le (hc : c.IsContractingAt y) : ∃ n : ℕ, 0 < n ∧
     ∀ ⦃U' : c.C.left.AffineZariskiSite⦄ ⦃U : X.left.AffineZariskiSite⦄
       (hU : U'.1 ≤ c.c₂.left ⁻¹ᵁ U.1),

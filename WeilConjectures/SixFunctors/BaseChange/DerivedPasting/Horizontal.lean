@@ -54,9 +54,7 @@ horizontally, the derived base change map of the pasted square is the composite
 `(h ≫ g)^* Rf_* ≅ h^* g^* Rf_* ⟶ h^* Rf'_* g'^* ⟶ Rf''_* g''^* g'^* ≅ Rf''_* (g'' ≫ g')^*` of
 the derived base change maps of the two squares, modulo the composition isomorphisms
 `AlgebraicGeometry.Etale.upperStarCompDerivedPlus` of the derived pullbacks along the
-horizontal maps.
-(blueprint: `lemma-identity-pasting`,
-`lemma-identity-pasting`) -/
+horizontal maps. -/
 lemma Etale.derivedBaseChangeMapPlus_paste_horiz (sq₁ : CommSq g' f' f g)
     (sq₂ : CommSq g'' f'' f' h) (sq : CommSq (g'' ≫ g') f'' f (h ≫ g)) :
     Etale.derivedBaseChangeMapPlus A sq =

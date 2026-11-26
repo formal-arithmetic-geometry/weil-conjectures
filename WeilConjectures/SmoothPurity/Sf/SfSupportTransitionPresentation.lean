@@ -9,8 +9,10 @@ public import WeilConjectures.SmoothPurity.Sf.SfFiniteOpenPresentation
 
 /-! # Transport of the compact-support adjacent coefficient square
 
-Source: Stacks Tags 03DI, 0E8I, 06YY and 0D6E; Bhatt--Scholze, Definition 6.7.6.
-(blueprint: lem-sf-support-adjacent-presentation).
+## References
+
+* Stacks Project, Tags 015F, 03DI, 06YY, 0D6E and 0E8I.
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 6.7.6.
 -/
 
 @[expose] public noncomputable section
@@ -26,8 +28,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {X Y : Scheme.{u}} {f : X ⟶ Y}
 
 /-- The level comparison is constructed by exact localization, direct image and restriction.
-It uses a supplied finite comparison, and chooses no data from an existence theorem.
-Source: Stacks 015F, 03DI (blueprint: lem-sf-support-adjacent-presentation). -/
+It uses a supplied finite comparison, and chooses no data from an existence theorem. -/
 def sfSupportPresentationLevel (c : Compactification f)
     (o : IntegralOpenReduction.Operations l E c.i)
     (d : CompactSupportProperImageTower.DirectData l E c.g)
@@ -426,29 +427,7 @@ private theorem restrictedComparison
 /-- The constructed level comparisons commute with one adjacent support arrow.
 The hypothesis is the ordinary finite open square, before either derivation or direct
 image. The conclusion is an equality of specified morphisms, with no inverse-system
-existence conclusion and no completeness hypothesis on K.
-
-Source: Stacks Tags 03DI, 0E8I, 06YY, 0D6E and 015F; Bhatt--Scholze, Definition 6.7.6.
-(blueprint: lem-sf-support-adjacent-presentation).
-
-Proof: apply exact derived localization to the finite coefficient square hι. Its
-localization factors identify it with the square between openRestriction and the
-specified sfOpenRestriction. Naturality of the derived comparison ι at reductionMap
-then commutes extension with quotient reduction. The adjunct defining reductionMap
-is the same as sfCompactSupportReductionTransition: both use the published scalar
-adjunction, its lower unit, and the identity-on-sections restriction associator.
-The two restriction associators agree after the quotient identification
-sfFiniteOpenPresentation_restriction_eq, since their ordinary maps preserve every
-section; exact localization preserves this equality. Apply the higher finite
-right-derived direct image. Its normalized scalar square d.comparison agrees with
-sfDerivedImageRestriction after the same coefficient identification: resolve a
-K-injective representative after restriction and use the two normalization equations
-on that resolution. This does not require preservation of K-injectives. Naturality
-of that square at the localized ι moves the lower comparison past direct image.
-Finally apply completed scalar restriction and its natural composition comparison.
-Functoriality and associativity give exactly the displayed equality, including the
-last restriction-composition map in sfCompactSupportTransition. The same equations
-hold for the empty or identity open and for zero complexes. -/
+existence conclusion and no completeness hypothesis on K. -/
 theorem sfSupportTransition_presentation
     (c : Compactification f) (o : IntegralOpenReduction.Operations l E c.i)
     (d : CompactSupportProperImageTower.DirectData l E c.g)

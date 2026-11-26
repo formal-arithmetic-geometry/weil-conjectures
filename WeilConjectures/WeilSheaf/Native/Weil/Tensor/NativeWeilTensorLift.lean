@@ -13,8 +13,22 @@ import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorCoherence
 
 /-! # Equivariant lift of a fixed normalized ordinary tensor
 
-Source: native tensor transport, action-site part of steps 1--2; Stacks 06YS and 08J9
-(blueprint: lem-sf-native-weil-tensor-lift).
+This is the action-site part of native tensor transport.
+
+## Implementation details
+
+`native_weil_tensor_adjoints` supplies a tensor bifunctor `T`, its adjunctions to
+`M.weilHom`, counit naturality in the tensor parameter, and an invertible comparison `τ`,
+whose inverse is the ordinary transpose inverse of the image of the native adjunction unit
+followed by `η`. Associators, unitors and symmetry come from `native_weil_tensor_coherence`,
+which keeps exactly `T` and `τ`. For the uncurrying law, naturality of `η` and of ordinary
+uncurrying turn the unit-mate formula into `uncurry_S(F(f) ≫ η) = τ⁻¹ ≫ F(g)` with
+`g = uncurry_W(f)`; the private lemma `uncurry_of_tensor_unit` proves this for arbitrary
+categories.
+
+## References
+
+* Stacks 06YS, 08J9, 0A97
 -/
 
 @[expose] public section
@@ -165,28 +179,8 @@ namespace AlgebraicGeometry.ProEtaleWeilSheaf
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- Lift a specified ordinary normalized tensor to native Weil complexes.
-The canonical ordinary monoidal structure and its adjunction normalization are
-inputs. The conclusion supplies the equivariant lift, coefficient-unit
-identifications and uncurrying law; it does not construct an ordinary tensor.
-
-Source: native tensor transport, action-site part of steps 1--2; Stacks 06YS,
-08J9 and 0A97 (blueprint: lem-sf-native-weil-tensor-lift).
-
-Proof: native_weil_tensor_adjoints supplies a tensor bifunctor T, its
-adjunctions to M.weilHom, counit naturality in the tensor parameter, and an
-invertible comparison tau. Its inverse is the ordinary transpose inverse of
-the image of the native adjunction unit followed by eta. The construction of
-associators, unitors and symmetry is isolated in native_weil_tensor_coherence;
-it keeps exactly T and tau and gives the required coefficient-unit equation.
-Assemble W from that monoidal structure and the supplied adjunctions.
-For an arbitrary f:A -> M.weilHom(K,L), put g = uncurry_W(f). The adjunction
-identity is unit_A followed by Hom(K,g) = f. Naturality of eta at (id_K,g),
-then naturality of ordinary uncurrying, turns the unit-mate formula into
-uncurry_S(F(f) followed by eta) = tau inverse followed by F(g).
-The private lemma uncurry_of_tensor_unit proves this argument for arbitrary
-categories. Thus no uncurrying statement for arbitrary arrows is left as a
-hole, and the comparison used throughout is the supplied eta. -/
+/-- A specified ordinary normalized tensor lifts to native Weil complexes, with an
+equivariant lift, coefficient-unit identifications and an uncurrying law. -/
 theorem native_weil_tensor_lift
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]

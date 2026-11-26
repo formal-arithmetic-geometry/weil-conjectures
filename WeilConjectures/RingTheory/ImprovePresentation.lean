@@ -20,13 +20,24 @@ import WeilConjectures.RingTheory.SymmetricAlgebraSmooth
 /-!
 # Improving a presentation by a symmetric algebra
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07CE and its proof, restricted to
-smooth localizations (blueprint: lem-weil-pbc-improve-presentation).
+A finitely presented algebra `A` is a retract of a finite type `A`-algebra `C` whose
+localizations over smooth localizations of `A` are smooth with free differentials; one may take
+`C` to be the symmetric algebra of the conormal module `I/I²` of a presentation.
 
 ## Main statements
 
 * `Algebra.exists_finiteType_retract_smooth_free_differentials`: the finite type retract.
 * `Algebra.Presentation.symmetricAlgebra_improves`: the specified conormal construction.
+
+## Implementation details
+
+For a smooth localization `A_a`, the localized conormal module is a finite projective direct
+summand of `A_a^n`; hence `C_a` is a symmetric algebra of a finite projective module, smooth
+over `A_a`, and its differentials are the base change of a free module.
+
+## References
+
+* [Stacks, Tag 07CE]
 -/
 
 @[expose] public section
@@ -35,23 +46,9 @@ universe u v
 
 namespace Algebra
 
-/-- Stacks Project, proof of Lemma 07CE: for any finite presentation one may take
-`Sym_A(I/I²)` and its degree-zero projection
-(blueprint: lem-weil-pbc-improve-presentation).
-
-Proof: the relations generate the conormal module, by Mathlib's
-`Extension.Cotangent.finite`. Its finite module generators generate the symmetric algebra
-by `SymmetricAlgebra.generators_and_finitePresentation`. The zero linear map induces the
-retraction `SymmetricAlgebra.lift 0`, whose restriction to `A` is the identity.
-For a smooth `A_a`, `Presentation.localized_conormal_equiv`
-(lem-weil-pbc-presentation-localized-conormal-split) identifies the product of the localized
-conormal module and base differentials with `A_a^n`. The conormal module is therefore a
-finite projective direct summand. Tensor localization and `baseChange_bijective` identify
-`C_a` with its symmetric algebra, which is smooth over `A_a` by
-`SymmetricAlgebra.smooth_of_finite_projective`, hence smooth over `R` by composition.
-Finally `SymmetricAlgebra.localized_differentials_equiv`
-(lem-weil-pbc-localized-symmetric-differentials-split) identifies the differentials with
-the base change of that free product, hence they are free. -/
+/-- For a finite presentation of `A` with conormal module `I/I²`, the symmetric algebra
+`C = Sym_A(I/I²)` is of finite type over `A`, retracts onto `A` by its degree-zero projection,
+and for every `a` with `A_a` smooth over `R`, `C_a` is smooth over `R` with free differentials. -/
 theorem Presentation.symmetricAlgebra_improves
     {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A]
     {n m : ℕ} (P : Presentation R A (Fin n) (Fin m)) :
@@ -120,13 +117,8 @@ theorem Presentation.symmetricAlgebra_improves
       Eq.mp (congrArg F hpowers) hF
     exact hF'
 
-/-- Stacks Project, Lemma 07CE, smooth case
-(blueprint: lem-weil-pbc-improve-presentation).
-
-Proof: Mathlib's `Presentation.exists_presentation_fin` supplies a finite polynomial
-presentation `P`. Apply `Presentation.symmetricAlgebra_improves` to its explicitly
-constructed symmetric algebra, taking the retraction to be `SymmetricAlgebra.lift 0`.
-The symmetric algebra lives in `Type (max u v)`, as required. -/
+/-- A finitely presented `R`-algebra `A` is a retract of a finite type `A`-algebra `C` such that
+for every `a` with `A_a` smooth over `R`, `C_a` is smooth over `R` with free differentials. -/
 theorem exists_finiteType_retract_smooth_free_differentials
     (R : Type u) (A : Type v) [CommRing R] [CommRing A] [Algebra R A]
     [FinitePresentation R A] :

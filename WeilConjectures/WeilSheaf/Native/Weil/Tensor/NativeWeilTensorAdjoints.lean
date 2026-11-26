@@ -14,8 +14,20 @@ import WeilConjectures.WeilSheaf.Native.Weil.NativeWeilUnitMateIsIso
 
 /-! # Native derived tensor adjoints and their invertible forgetful mate
 
-Source: Stacks 06YS, 08J9 and 0A97; the adjoint-construction part of
-lem-sf-native-weil-tensor-lift (blueprint: lem-sf-native-weil-tensor-adjoints).
+We construct the tensor bifunctor representing native internal Hom and show that its forgetful
+mate is invertible.
+
+## Implementation details
+
+Weil sheaves are presented as modules on the Frobenius ringed action site; the ringed tensor-Hom
+adjunction, transported through this equivalence and compared with the native internal Hom on
+K-injective targets, gives the adjoints. The forgetful mate is identified on flat-term K-flat
+representatives with the sum-total of the underived identity, hence is invertible there, and
+extends to all derived pairs by the universal property of tensor localization.
+
+## References
+
+* Stacks Project, Tags 06YS, 08J9 and 0A97.
 -/
 
 @[expose] public section
@@ -310,34 +322,8 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- Construct the tensor bifunctor representing native internal Hom and identify
-its forgetful mate. This assertion concerns adjoints and an invertible natural
-transformation; it supplies no associator, unitors, tensor unit or symmetry.
-
-Source: Stacks 06YS, 08J9 and 0A97; native tensor lift, step 1 and the
-representative comparison in step 2
-(blueprint: lem-sf-native-weil-tensor-adjoints).
-
-Proof: present Weil sheaves as modules on the Frobenius ringed action site using
-frobenius_action_resolutions. The additive equivalence preserves products and
-coproducts and takes K-flat and K-injective resolutions to the native ones.
-The ringed tensor-Hom adjunction, transported through this equivalence, identifies
-maps out of its total tensor with maps into the product-total native Hom.
-Compare this Hom with M.weilHom on every source complex and K-injective target
-using M.weilRepresentatives.model. Their naturality descends through the
-K-injective localization equivalence in both variables. Conjugate the right
-adjoints by these comparisons. Parameter naturality of the chain evaluation
-then gives the displayed counit equation, including morphisms in K.
-Apply the ordinary adjunction to the image of each resulting native unit,
-followed by eta. On flat-term K-flat representatives, hη identifies this mate
-with the sum-total of the underived identity on relative tensor factors:
-project the Hom comparison to each (p,q) component and use the ordinary
-normalization hS. The row-sign conversions cancel on these components.
-Forgetting preserves both resolutions, so this mate is invertible on every
-K-flat pair. Naturality on complex maps and the universal property of tensor
-localization extend it and its inverse to every derived pair. The displayed
-formula specifies its inverse as the mate of the unit; no associativity,
-unitality or symmetry assertion is needed for this construction. Zero complexes
-and the empty scheme use the same universal properties without an exception. -/
+its forgetful mate as an invertible natural transformation. No associator, unitors,
+tensor unit or symmetry are supplied. -/
 theorem native_weil_tensor_adjoints
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]

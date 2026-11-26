@@ -18,9 +18,18 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 import WeilConjectures.Algebra.Homology.TensorRestrictExtendScalarsModule
 
 /-! # Tor comparison for flat extension of scalars
-Source: Weibel, An Introduction to Homological Algebra, Corollary 4.3.6,
-pp. 101–102, projective-resolution argument.
-(blueprint: lem-pc-flat-scalar-extension-tor-comparison)
+For a flat ring map `R → S`, extension of scalars commutes with `Tor` after restricting the
+result back to `R`.
+
+## Implementation details
+
+A projective resolution of `L` extends along the flat map to a projective resolution of
+`S ⊗[R] L`; in each degree `(S ⊗[R] P) ⊗[S] N` is identified with `P ⊗[R] N`, and restriction
+is exact, so it commutes with homology.
+
+## References
+
+* [Weibel, *An Introduction to Homological Algebra*, Corollary 4.3.6]
 -/
 
 @[expose] public section
@@ -30,19 +39,9 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace ModuleCat
 
-/-- Flat scalar extension commutes with Tor after restricting the result.
-Source: Weibel, An Introduction to Homological Algebra, Corollary 4.3.6,
-p. 101, its projective-resolution argument; tensor associativity.
-Proof: extend a projective resolution of L along the flat ring map f. Extension
-is exact and preserves projectives by its adjunction with exact restriction,
-so it gives a projective resolution of the induced module. In every degree,
-identify (S tensor_R P) tensor_S N with P tensor_R N, restricted to R,
-using tensor commutativity and cancellation of scalar extension. Naturality
-makes these maps a chain isomorphism. Restriction is exact and therefore
-commutes with homology. The projective-resolution computation of Tor gives
-the claimed isomorphism. Flatness is the only hypothesis; degree zero, zero
-rings, and zero modules are included.
-(blueprint: lem-pc-flat-scalar-extension-tor-comparison) -/
+/-- Flat scalar extension commutes with Tor after restricting the result: for a flat ring map
+`f : R → S`, `Tor_i^S(S ⊗[R] L, N)` restricted to `R` is isomorphic to `Tor_i^R(L, N)`, with
+`N` restricted to `R`. -/
 theorem nonempty_flat_scalar_extension_tor_iso
     {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S) (hf : f.Flat)
     (L : ModuleCat.{u} R) (N : ModuleCat.{u} S) (i : ℕ) :

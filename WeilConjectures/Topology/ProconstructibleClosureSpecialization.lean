@@ -13,8 +13,12 @@ import WeilConjectures.Topology.SpectralSpace.Constructible
 /-!
 # Specializations in the closure of an intersection of constructible sets
 
-Source: Stacks Project, Topology, Tag 0903, part (1)
-(blueprint: lem-weil-pbc-spectral-proconstructible-closure-specialization).
+In a spectral space, every point in the closure of an intersection of constructible sets is a
+specialization of a point of that intersection.
+
+## References
+
+* [Stacks Project, Tag 0903](https://stacks.math.columbia.edu/tag/0903), part (1)
 -/
 
 @[expose] public section
@@ -24,15 +28,7 @@ universe u v
 namespace Topology
 
 /-- In a spectral space, every point in the closure of an intersection of constructible sets
-is a specialization of a point of that intersection. Source: Stacks Project, Topology,
-Tag 0903, part (1)
-(blueprint: lem-weil-pbc-spectral-proconstructible-closure-specialization).
-
-Proof: Each `E a` is clopen in the constructible topology, so their intersection is
-closed in that topology. Apply the existing Stacks 0903 (1) theorem
-`exists_specializes_of_isClosed_constructibleTopology_of_mem_closure` to obtain a point
-`e` of the intersection specializing to `x`. The equivalence
-`specializes_iff_mem_closure` gives the required closure membership. -/
+is a specialization of a point of that intersection. -/
 theorem exists_mem_iInter_closure_singleton {X : Type u} [TopologicalSpace X]
     [SpectralSpace X] {A : Type v} (E : A → Set X)
     (hE : ∀ a : A, IsConstructible (E a)) {x : X} (hx : x ∈ closure (⋂ a : A, E a)) :

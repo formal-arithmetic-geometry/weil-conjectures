@@ -22,9 +22,18 @@ import all WeilConjectures.WeilSheaf.SixFunctors.CanonicalOrdinaryTensorInverseP
 
 /-! # The inverse tensor comparison on pure tensors, canonical form
 
-Source: Stacks 03EK and 03EO, pure tensors and evaluation-normalized inverse mates.
-Auxiliary lemmas for `canonical_ordinary_tensor_inverse_associativity`
-(blueprint: new-sf-canonical-ordinary-tensor-inverse-associativity).
+Auxiliary lemmas for `canonical_ordinary_tensor_inverse_associativity`, describing the
+evaluation-normalized inverse mates on pure tensors.
+
+## Implementation details
+
+`comparison_pure_canonical` spells out its Hom comparison exactly as in
+`canonical_ordinary_tensor_inverse_associativity`, so that the main theorem applies it without
+converting between the two presentations.
+
+## References
+
+* Stacks 03EK, 03EO
 -/
 
 -- This module only keeps private helpers for the inverse associativity theorem.
@@ -43,9 +52,8 @@ attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
 
 -- Elaborating the concrete tensor instances requires large definitional comparisons.
 -- The native and ringed tensor instances have separate coefficient and site universes.
-/-- `comparison_pure` with its Hom comparison spelled out exactly as in
-`canonical_ordinary_tensor_inverse_associativity`, so that the main theorem applies it without
-converting between the two presentations. -/
+/-- The inverse tensor comparison `ν` sends a pure tensor `x ⊗ y` to the native pure tensor,
+with the Hom comparison written in canonical form. -/
 private theorem comparison_pure_canonical
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (H : ProEtale.AdicModuleHomComparisonCore l Y) :

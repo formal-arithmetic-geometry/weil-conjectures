@@ -10,8 +10,10 @@ import all WeilConjectures.SixFunctors.Scalar.ScalarRoosComparison
 
 /-! # Naturality of the scalar tensor Roos map
 
-Source: Stacks 03EL, 07A4, 0941 and 08TC; Bhatt--Scholze, Proposition 3.5.1.
-(blueprint: lem-pur-integral-scalar-tensor-chain-naturality).
+## References
+
+* Stacks Project, Tags 03EL, 07A4, 0941 and 08TC.
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 3.5.1.
 -/
 
 @[expose] public noncomputable section
@@ -57,10 +59,7 @@ variable (l : ℕ) [Fact l.Prime]
 attribute [local irreducible] integralOperationsTensorTowerFunctor
 attribute [local implicit_reducible] integralOperationsTensorComplexFunctor
 
-/-- Naturality follows by specializing the additive Roos natural transformation.
-Source: Stacks 08TC (blueprint: lem-pur-integral-scalar-tensor-chain-naturality).
-Proof: apply scalarRoosTransformation to scalarTensorTower and read its
-naturality equation, unfolding only the Roos tensor functor and chain map. -/
+/-- The scalar tensor Roos chain map is natural in the input pair. -/
 theorem scalarTensorChain_naturality (W : AlgebraicGeometry.Scheme.{u})
     {P Q : CochainComplex (integralTowerModules l E W) ℤ ×
       CochainComplex (integralTowerModules l E W) ℤ} (a : P ⟶ Q) :

@@ -18,9 +18,9 @@ public import WeilConjectures.Mathlib.CategoryTheory.Functor.Category
 /-!
 # The closed–open step of the detection of a failure of base change
 
-Step (3) of the blueprint lemma `lemma-reduction-field--1`: if a cokernel element survives over
-`T'` and `Z ⊆ T'` is closed with quasi-compact open complement `V`, then it survives over `V` or
-over `Z` (`AlgebraicGeometry.Etale.survivesBaseChange_or_of_isClosedImmersion`). This file
+A step of the reduction of a failure of base change to a field: if a cokernel element survives
+over `T'` and `Z ⊆ T'` is closed with quasi-compact open complement `V`, then it survives over `V`
+or over `Z` (`AlgebraicGeometry.Etale.survivesBaseChange_or_of_isClosedImmersion`). This file
 provides the ingredients.
 
 For `k : T₁ ⟶ T` and a square `e' ≫ k = a ≫ e`, the transition map of the targets of the

@@ -14,18 +14,33 @@ import WeilConjectures.RingTheory.FormallySmoothAdicCompletion
 import Mathlib.RingTheory.AdicCompletion.Completeness
 import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
+/-!
+# Transfer of adic formal smoothness to completions
+
+For a local homomorphism `A → B` of Noetherian local rings and a compatible map `Â → B̂` of
+maximal-ideal completions, formal smoothness of `B` over `A` for the maximal-ideal-adic
+topology implies formal smoothness of `B̂` over `Â` for the extended maximal ideal.
+
+## Implementation details
+
+A lifting problem over `Â` is restricted to `A`, solved using formal smoothness of `B̂` over
+`A`, and the lift is shown to be `Â`-linear by approximating elements of the finitely
+generated adic completion `Â` by elements of `A` modulo a suitable power of its maximal ideal.
+
+## References
+
+* [Stacks, Tag 07ED], (1) implies (3)
+-/
+
 @[expose] public section
 
 universe u v
 
 namespace Algebra
 
-/-- Transfer of adic formal smoothness across the completion map of a local homomorphism.
-Source: Stacks Project, More on Algebra, Lemma 15.38.4 (Tag 07ED), (1) implies (3).
-The proof restricts a lifting problem over the source completion to the source, applies
-formal smoothness after completion of the target, and uses the quotient approximation
-of a finitely generated adic completion to recover linearity over the source completion.
-(blueprint: lem-weil-pbc-fs-adic-completion-transfer) -/
+/-- Transfer of adic formal smoothness across the completion map of a local homomorphism:
+if `B` is formally smooth over `A` for the maximal-ideal-adic topology, then the completion
+of `B` is formally smooth over the completion of `A` for the extended maximal ideal. -/
 theorem formallySmoothAdic_completion_transfer
     (A : Type u) (B : Type v) [CommRing A] [CommRing B]
     [IsLocalRing A] [IsLocalRing B] [IsNoetherianRing A] [IsNoetherianRing B]

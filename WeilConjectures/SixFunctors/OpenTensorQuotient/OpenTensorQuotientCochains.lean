@@ -14,8 +14,10 @@ import WeilConjectures.SixFunctors.OpenTensorQuotient.OpenTensorQuotientRoosNorm
 
 /-! # Strict quotient tensor comparison on compatible open models
 
-Source: Stacks Tags 0E8I, 0GL1 and 0941; Bhatt--Scholze Definition 3.4.10.
-(blueprint: lem-sf-open-quotient-normalized-cochains).
+## References
+
+- Stacks Project, Tags 0E8I, 0GL1 and 0941.
+- Bhatt--Scholze, Definition 3.4.10.
 -/
 
 @[expose] public noncomputable section
@@ -134,36 +136,7 @@ private theorem augmentation_square
 
 /-- Strict coefficient restriction, balancing, and scalar-unit augmentation on the
 already compatible open models. No geometric preservation or choice of derived
-open operations is asserted here.
-
-Source: Stacks Tags 0E8I, 0GL1 and 0941; Bhatt--Scholze Definition 3.4.10.
-(blueprint: lem-sf-open-quotient-normalized-cochains).
-
-Proof: take normalized tensor-completion presentations on X and U from their
-existing model-existence theorem. Global invertibility supplies the residue-field
-invertibility needed there. The scalar-unit compatibility lemma supplies sc and r
-with their finite component and system evaluation equations.
-
-The normalized integral tensor-tower comparison gives balancing isomorphisms on
-both pairs, with formula (x tensor y) tensor a sent to (x tensor a) tensor (y tensor 1).
-Conjugate the fixed integral chain comparison through these balancing maps and r
-to obtain gamma. Completed-to-finite scalar restriction is fully faithful because
-the coefficient projection is locally surjective. Lift gamma, after removing the
-finite scalar compatibility, to finiteGamma. The lifting equation gives its scalar
-restriction formula; cancellation of balancing gives reduction. This construction
-retains all quotient transitions and the signed unbounded total differential.
-
-Define upper and lower by the scalar-adjunction units followed by balancing.
-Their coefficient formulas give the required sections formulas. Define lowerRoute
-by the constant tower of the integral chain map followed by extension of lower.
-Naturality of the scalar unit, the reduction equation and scalar-unit compatibility
-give square. Applying transpose and localization gives derivedSquare by
-functoriality of composition. Finally the sections formulas for upper and lower
-agree with the first Roos coordinates specified by Tensor.canonical. Tensor and
-sheafification universal properties and total-sum extensionality give equality of
-the degree maps, proving both RoosNormalization assertions. No limit is interchanged
-with extension and no faithfulness of separate derived evaluations is used.
-Zero complexes, the empty open and identity open are included. -/
+open operations is asserted here. -/
 theorem openQuotientNormalizedCochains [IsNoetherian X] [IsNoetherian U]
     (hlX : IsUnit (l : Γ(X, ⊤))) (hlU : IsUnit (l : Γ(U, ⊤)))
     (C : CompletedOpenTensor.Context l E j) :

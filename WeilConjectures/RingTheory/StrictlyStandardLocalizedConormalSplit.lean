@@ -16,7 +16,23 @@ import Mathlib.LinearAlgebra.Matrix.ToLin
 /-!
 # Splitting the localized conormal differential of a strictly standard presentation
 
-Source: Stacks Project, Smoothing Ring Maps, Lemmas 07CA and 07ET.
+If `a` satisfies the two strictly standard conditions for a finite presentation, then the
+conormal differential of the presentation has a left inverse after base change to `A_a`
+(`Algebra.Presentation.strictlyStandard_localized_conormal_split`).
+
+## Implementation details
+
+Let `E : A^c → I/I²` send the basis vectors to the classes of the first `c` relations and let
+`D` be the conormal differential. In the polynomial cotangent basis, `D ∘ E` has the evaluated
+Jacobian matrix `M`, and the minor condition gives a matrix `B` with `B M = a • 1`. After
+localizing, `a⁻¹ B` represents a left inverse `g` of `D ∘ E`. The relation condition makes `E`
+surjective after localization, so `E ∘ g` is a left inverse of `D`. The cases `c = 0` and the
+zero localization are covered by the same argument.
+
+## References
+
+* [Stacks, Tag 07CA], first paragraph of the proof
+* [Stacks, Tag 07ET]
 -/
 
 @[expose] public section
@@ -27,25 +43,8 @@ open scoped TensorProduct
 
 namespace Algebra.Presentation
 
-/-- The two strictly standard conditions split the localized conormal differential.
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma Tag 07CA, first paragraph,
-using the matrix identity of Lemma Tag 07ET.
-(blueprint: lem-weil-pbc-strictly-standard-localized-conormal-split).
-
-Proof: let E be the map from A^c to I/I² sending each basis vector to the class of the
-corresponding initial relation, and D the conormal differential. In the polynomial
-cotangent-space basis, D E has the evaluated Jacobian matrix M. The displayed minor
-combination and the adjugate identity give a matrix B with B M = a times the identity;
-transposing the row convention of the displayed determinants does not change them.
-After scalar extension to A_a, a is a unit, so a⁻¹ B is a left inverse of D E.
-The relation condition says that a times every remaining relation class lies in the
-span of the initial classes, since I² vanishes in I/I². Thus E becomes surjective after
-localization: all relation classes generate I/I² and the remaining ones are now in
-its image. Surjectivity alone now suffices: if g D E = id, then E g D E = E.
-Evaluating this equality on a preimage under E gives E g D = id. Thus E g is
-the required left inverse of D, with g represented by a⁻¹ B.
-For c = 0 the relation condition makes the localized conormal module zero, so its
-unique map back is a left inverse. The same argument covers the zero localization. -/
+/-- If `a` satisfies the two strictly standard conditions for the presentation `P`, then the
+conormal differential of `P`, base changed to `A_a`, has a left inverse. -/
 theorem strictlyStandard_localized_conormal_split
     {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A]
     {n m c : ℕ} (P : Presentation R A (Fin n) (Fin m))

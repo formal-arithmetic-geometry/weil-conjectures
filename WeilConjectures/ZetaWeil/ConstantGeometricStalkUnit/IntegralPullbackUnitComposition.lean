@@ -15,9 +15,26 @@ import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Composition of normalized integral coefficient units
 
-Source: the constant comparison preceding Step 1 of purity and trace equivariance;
-Stacks 099N(5) and 0D6D, with the normalized strict coefficient units.
-(blueprint: lem-pur-integral-pullback-unit-composition).
+This file shows that the normalized integral coefficient units are compatible with composition
+of scheme morphisms.
+
+## Implementation details
+
+Use the canonical regular K-flat representative on `Y` and `Z`. Reducing each integral unit gives
+finite multiplication by `integralUnit_reduction`; the projection-normalized integral compositor
+has the finite compositor as its reduction, and naturality of its single-arrow reduction
+comparison moves the unit for `g` through the pullback for `f`. Pasting these equations and using
+`finiteUnit_composition` gives the finite statement.
+
+To detect the resulting integral equality, its source is isomorphic to the completed regular
+sheaf in degree zero, and the target is derived complete with finite reductions that are sheaves
+in degree zero. Every Hom from the source shifted by one to these reductions is zero by the
+standard t-structure, so the finite-shifted-Hom detection theorem applies. Identity maps, empty
+schemes and the first positive quotient require no exception.
+
+## References
+
+* [Stacks, Tags 099N, 0D6D]
 -/
 
 @[expose] public noncomputable section
@@ -147,27 +164,7 @@ private theorem constant_reduction_ext
       (t.zero_of_isLE_of_isGE b (-1) 0 (by decide) hp' hq).symm⟩
   infer_instance
 
-/-- The normalized integral unit respects one composition of scheme morphisms.
-
-Source: the constant comparison preceding Step 1 of purity and trace equivariance;
-Stacks 099N(5), 0D6D; the constant-ring composition equation.
-(blueprint: lem-pur-integral-pullback-unit-composition).
-
-Proof: use the canonical regular K-flat representative on Y and Z. Reducing each
-integral unit gives finite multiplication by integralUnit_reduction. The
-projection-normalized integral compositor has the published finite compositor as its
-reduction. Naturality of its single-arrow reduction comparison moves the unit for g
-through the pullback for f. Paste these equations, then use finiteUnit_composition,
-transported through the unit-preserving finite coordinate isomorphisms.
-
-To detect the resulting integral equality, its source is isomorphic to the completed
-regular sheaf in degree zero via the already constructed unit for f followed by g.
-The target is derived complete. Its restricted finite reductions are also sheaves in
-degree zero: use the canonical regular reduction isomorphism and exact scalar
-restriction. Every Hom from the source shifted by one to these reductions is zero by
-the standard t-structure. The proved finite-shifted-Hom detection theorem therefore
-applies. No joint faithfulness assertion for arbitrary derived systems is used.
-Identity maps, empty schemes and the first positive quotient require no exception. -/
+/-- The normalized integral unit respects one composition of scheme morphisms. -/
 theorem integralUnit_composition
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

@@ -19,11 +19,8 @@ import Mathlib.LinearAlgebra.TensorProduct.Map
 import WeilConjectures.CategoryTheory.ScalarLocalization.SemilinearScalarLocalization
 /-! # Rationalized constructible integral categories and coefficient extension
 
-Source: Weil conjectures blueprint, sec-smooth-purity/sk-def-sf-operations,
-order 1460 (blueprint: def-weil-rationalization-karoubi).
-
 This is raw Hom scalar localization, with the same integral objects. The canonical
-localization isomorphism identifies its Hom modules with Hom tensor E. No retracts
+localization isomorphism identifies its Hom modules with Hom tensor `E`. No retracts
 are adjoined. The coefficient functor is fixed uniquely on objects and pure tensors.
 -/
 
@@ -42,8 +39,7 @@ variable (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   (Y : AlgebraicGeometry.Scheme.{u})
 
-/-- The raw rationalized category, without idempotent completion.
-Source: blueprint order 1460 (blueprint: def-weil-rationalization-karoubi). -/
+/-- The raw rationalized category, without idempotent completion. -/
 noncomputable abbrev rationalConstructibleCategory :=
   ScalarLocalization (Padic.coefficientExtensionIntegers l E)
     (boundedConstructibleDerivedCompleteIntegralCategory D l hl E Y)
@@ -51,8 +47,7 @@ noncomputable abbrev rationalConstructibleCategory :=
 
 set_option linter.defProp false in
 /-- The recorded raw scalar-localization theorem supplies precisely the induced shift
-and image triangles, with exact localization and no new objects.
-Source: blueprint order 1460 (blueprint: def-weil-rationalization-karoubi). -/
+and image triangles, with exact localization and no new objects. -/
 noncomputable def rationalTriangulationDatum :=
   letI := integralConstructibleShift_linear l E Y D hl (1 : ℤ)
   ScalarLocalization.exists_triangulated_scalarLocalization
@@ -60,27 +55,23 @@ noncomputable def rationalTriangulationDatum :=
     (boundedConstructibleDerivedCompleteIntegralCategory D l hl E Y)
     (Padic.coefficientExtensionUniformizer l E)
 
-/-- The zero object in raw rationalization.
-Source: blueprint order 1460 (blueprint: def-weil-rationalization-karoubi). -/
+/-- The zero object in raw rationalization. -/
 noncomputable instance rationalConstructibleZero :
     CategoryTheory.Limits.HasZeroObject (rationalConstructibleCategory D l hl E Y) :=
   (rationalTriangulationDatum D l hl E Y).choose
 
-/-- The induced shift, with the tensor-Hom shift specified by the triangulation datum.
-Source: blueprint order 1460 (blueprint: def-weil-rationalization-karoubi). -/
+/-- The induced shift, with the tensor-Hom shift specified by the triangulation datum. -/
 noncomputable instance rationalConstructibleShift :
     HasShift (rationalConstructibleCategory D l hl E Y) ℤ :=
   (rationalTriangulationDatum D l hl E Y).choose_spec.choose
 
-/-- Additivity of every induced rational shift.
-Source: blueprint order 1460 (blueprint: def-weil-rationalization-karoubi). -/
+/-- Additivity of every induced rational shift. -/
 noncomputable instance rationalConstructibleShiftAdditive (n : ℤ) :
     (shiftFunctor (rationalConstructibleCategory D l hl E Y) n).Additive :=
   (rationalTriangulationDatum D l hl E Y).choose_spec.choose_spec.2.choose n
 
 /-- The canonical integral-to-rational functor is the identity on objects and tensors
-morphisms with one. Source: blueprint order 1460
-(blueprint: def-weil-rationalization-karoubi). -/
+morphisms with one. -/
 noncomputable def rationalConstructibleLocalization :
     boundedConstructibleDerivedCompleteIntegralCategory D l hl E Y ⥤
       rationalConstructibleCategory D l hl E Y :=
@@ -88,27 +79,23 @@ noncomputable def rationalConstructibleLocalization :
     (boundedConstructibleDerivedCompleteIntegralCategory D l hl E Y)
     (Padic.coefficientExtensionUniformizer l E)
 
-/-- The canonical shift comparison for localization.
-Source: blueprint order 1460 (blueprint: def-weil-rationalization-karoubi). -/
+/-- The canonical shift comparison for localization. -/
 noncomputable instance rationalLocalizationCommShift :
     (rationalConstructibleLocalization D l hl E Y).CommShift ℤ :=
   (rationalTriangulationDatum D l hl E Y).choose_spec.choose_spec.2.choose_spec.choose
 
-/-- The image-triangle pretriangulation of the raw localized category.
-Source: blueprint order 1460 (blueprint: def-weil-rationalization-karoubi). -/
+/-- The image-triangle pretriangulation of the raw localized category. -/
 noncomputable instance rationalConstructiblePretriangulated :
     Pretriangulated (rationalConstructibleCategory D l hl E Y) :=
   (rationalTriangulationDatum D l hl E Y).choose_spec.choose_spec.2.choose_spec.choose_spec.2.choose
 
-/-- Triangulation for exactly the image triangles.
-Source: blueprint order 1460 (blueprint: def-weil-rationalization-karoubi). -/
+/-- Triangulation for exactly the image triangles. -/
 noncomputable instance rationalConstructibleTriangulated :
     IsTriangulated (rationalConstructibleCategory D l hl E Y) :=
   (rationalTriangulationDatum D l hl E Y).choose_spec.choose_spec.2.choose_spec.choose_spec.2
     |>.choose_spec.1
 
-/-- The canonical localized coefficient field identification, fixed on fractions.
-Source: blueprint order 1460 (blueprint: def-weil-rationalization-karoubi). -/
+/-- The canonical localized coefficient field identification, fixed on fractions. -/
 noncomputable def rationalCoefficientEquiv :
     Localization.Away (Padic.coefficientExtensionUniformizer l E) ≃ₐ[
       Padic.coefficientExtensionIntegers l E] E :=
@@ -118,15 +105,7 @@ variable (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic 
   (ι : E →ₐ[Padic l] L)
 
 /-- Rational scalar extension is uniquely specified by integral extension and the
-field inclusion on scalar factors. This is the well-definedness needed by its definition.
-Source: blueprint order 1460 (blueprint: def-weil-rationalization-karoubi).
-Proof: integral scalar extension is additive and linear for the integer inclusion.
-Transport localized scalars through rationalCoefficientEquiv, the inclusion ι and
-its target inverse. The tensor universal property therefore gives the stated map
-on each Hom group. The integral functor laws and the multiplication law for scalar
-factors show that it preserves identities and composition, first on pure tensors
-and then on finite sums. Pure tensors generate every Hom module, proving uniqueness.
-The object map is the actual restricted completed extension. -/
+field inclusion on scalar factors. -/
 theorem rationalScalarExtension_existsUnique :
     ∃! F : rationalConstructibleCategory D l hl E Y ⥤
         rationalConstructibleCategory D l hl L Y,
@@ -209,16 +188,13 @@ theorem rationalScalarExtension_existsUnique :
     erw [Preadditive.add_comp, Preadditive.comp_add]
     exact congrArg₂ (· + ·) hx hy
 
-/-- The specified scalar-extension functor on the raw rationalized categories.
-Its defining theorem uniquely determines the whole functor, rather than merely
-asserting existence of an unspecified comparison.
-Source: blueprint order 1460 (blueprint: def-weil-rationalization-karoubi). -/
+/-- The specified scalar-extension functor on the raw rationalized categories, uniquely
+determined by `rationalScalarExtension_existsUnique`. -/
 noncomputable def rationalScalarExtension :
     rationalConstructibleCategory D l hl E Y ⥤ rationalConstructibleCategory D l hl L Y :=
   (rationalScalarExtension_existsUnique D l hl E Y L ι).exists.choose
 
-/-- Rational coefficient extension is additive, as specified in its defining property.
-Source: blueprint order 1460 (blueprint: def-weil-rationalization-karoubi). -/
+/-- Rational coefficient extension is additive, as specified in its defining property. -/
 noncomputable instance rationalScalarExtension_additive :
     (rationalScalarExtension D l hl E Y L ι).Additive :=
   (rationalScalarExtension_existsUnique D l hl E Y L ι).exists.choose_spec.1
@@ -236,8 +212,7 @@ variable (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
 variable (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
   (ι : E →ₐ[Padic l] L)
 
-/-- The induced map on localized scalar rings, through their canonical field coordinates.
-Source: blueprint order 1460 (blueprint: def-weil-rationalization-karoubi). -/
+/-- The induced map on localized scalar rings, through their canonical field coordinates. -/
 noncomputable def rationalCoefficientMap :
     Localization.Away (Padic.coefficientExtensionUniformizer l E) →+*
       Localization.Away (Padic.coefficientExtensionUniformizer l L) :=
@@ -301,13 +276,7 @@ private theorem coefficientMap_eq :
   rw [AlgEquiv.apply_symm_apply, AlgEquiv.commutes, AlgEquiv.commutes]
   rfl
 
-/-- The unique additive map induced by scalar extension on the tensor Hom module.
-Source: blueprint order 1460 (blueprint: def-weil-rationalization-karoubi).
-Proof: ordinary sheaf tensor is additive, and its balanced relations respect the
-constant-section action through the completed coefficient inclusion. The fraction-field
-coordinate maps respect the
-integer inclusion. Thus the stated formula is additive and balanced over O_E. The tensor
-universal property gives the map; pure tensors generate, proving uniqueness. -/
+/-- The unique additive map induced by scalar extension on the tensor Hom module. -/
 theorem rationalScalarHom_existsUnique
     (K M : boundedConstructibleDerivedCompleteIntegralCategory D l hl E Y) :
     ∃! f : (Localization.Away (Padic.coefficientExtensionUniformizer l E) ⊗[
@@ -326,18 +295,12 @@ theorem rationalScalarHom_existsUnique
     (ordinaryIntegralScalar_semilinear D l hl E Y L ι) K M
   simpa only [coefficientMap_eq l E L ι] using h
 
-/-- The actual tensor Hom map, selected from its uniquely determining formula.
-Source: blueprint order 1460 (blueprint: def-weil-rationalization-karoubi). -/
+/-- The actual tensor Hom map, selected from its uniquely determining formula. -/
 noncomputable def rationalScalarHom
     (K M : boundedConstructibleDerivedCompleteIntegralCategory D l hl E Y) :=
   (rationalScalarHom_existsUnique D l hl E Y L ι K M).exists.choose
 
-/-- The tensor Hom maps respect identities and composition.
-Source: blueprint order 1460 (blueprint: def-weil-rationalization-karoubi).
-Proof: on pure tensors, the formulas for the uniquely specified Hom map and for
-ScalarLocalization.composition reduce this to functoriality of integral scalar extension
-and multiplicativity of rationalCoefficientMap. Bilinearity extends the identities to
-all tensor morphisms. -/
+/-- The tensor Hom maps respect identities and composition. -/
 theorem rationalScalarHom_laws :
     (∀ K : boundedConstructibleDerivedCompleteIntegralCategory D l hl E Y,
       rationalScalarHom D l hl E Y L ι K K (1 ⊗ₜ 𝟙 K) =
@@ -371,8 +334,7 @@ theorem rationalScalarHom_laws :
     | add g g' hg hg' => simp [map_add, hg, hg']
 
 /-- Scalar extension on raw rational stages: integral scalar extension on objects,
-and the specified tensor map on morphisms.
-Source: blueprint order 1460 (blueprint: def-weil-rationalization-karoubi). -/
+and the specified tensor map on morphisms. -/
 noncomputable def rationalOrdinaryScalarExtension :
     rationalConstructibleCategory D l hl E Y ⥤ rationalConstructibleCategory D l hl L Y where
   obj K := ⟨(integralConstructibleScalarExtension D l hl E L ι Y).obj K.obj⟩
@@ -450,13 +412,7 @@ private instance rationalOrdinary_additive :
     exact (rationalScalarHom D l hl E Y L ι K.obj M.obj).map_add f g
 
 /-- The ordinary-model functor identifies with the published completed scalar extension
-by tensoring the normalized quotient completion comparison with one.
-Source: blueprint order 1460 (blueprint: def-weil-rationalization-karoubi).
-Proof: use integralConstructibleScalarComparison on every integral object. The published
-rationalScalarExtension has the specified integral object map and balanced tensor map.
-Integral comparison naturality therefore gives naturality on pure rational tensors and
-then on sums. Rationalizing its inverse gives the inverse; the displayed components
-uniquely fix the natural isomorphism, including all newly localized morphisms. -/
+by tensoring the normalized quotient completion comparison with one. -/
 theorem rationalOrdinaryComparison_existsUnique :
     ∃! c : rationalOrdinaryScalarExtension D l hl E Y L ι ≅
         rationalScalarExtension D l hl E Y L ι,
@@ -479,8 +435,7 @@ theorem rationalOrdinaryComparison_existsUnique :
       ((rationalScalarHom_existsUnique D l hl E Y L ι K M).exists.choose_spec a f))
     (rationalScalarExtension_existsUnique D l hl E Y L ι).exists.choose_spec.2.2
 
-/-- The normalized comparison to the existing completed rational scalar functor.
-Source: blueprint order 1460 (blueprint: def-weil-rationalization-karoubi). -/
+/-- The normalized comparison to the existing completed rational scalar functor. -/
 noncomputable def rationalOrdinaryComparison :=
   (rationalOrdinaryComparison_existsUnique D l hl E Y L ι).exists.choose
 

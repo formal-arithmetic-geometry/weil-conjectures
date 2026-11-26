@@ -18,9 +18,16 @@ import WeilConjectures.SmoothPurity.Scalar.ScalarExtensionComposition
 
 /-! # Exactness of finite scalar extension
 
-Source: blueprint `sec-smooth-purity/sk-prop-sf-pf-reduction`, order 1883
-(blueprint: lem-weil-scalar-extension-exact-triangulated).
-The shift comparison is specified on integral representatives, including its sign.
+Finite scalar extension of rational constructible complexes is exact. The shift comparison is
+specified on integral representatives, including its sign.
+
+## Implementation details
+
+The integral shift comparison is the canonical derived shift comparison of the termwise exact
+tensor functor, lifted uniquely along the fully faithful inclusions. The rational one is the
+integral one tensored with one; a coherent comparison for integer shifts is determined by its
+component at one. The published completed functor gets its shift comparison by conjugating with
+`rationalOrdinaryComparison`, which then transports exactness.
 -/
 
 @[expose] public section
@@ -58,11 +65,7 @@ private theorem integralLiftCommShift_spec (n : ℤ)
     (fun K ↦ integralOrdinaryDerivedScalar_constructible D l hl E L ι Y K.obj K.property) n K
 
 set_option linter.unusedVariables false in
-/-- The full subcategory inherits the ordinary derived tensor shift comparison.
-Source: blueprint order 1883 (blueprint: lem-weil-scalar-extension-exact-triangulated).
-Proof: the ambient termwise exact tensor functor has its canonical derived shift
-comparison. Full faithfulness of the inclusions lifts it uniquely. The ambient zero
-and addition coherence equations imply the same equations after this lift. -/
+/-- The full subcategory inherits the ordinary derived tensor shift comparison. -/
 theorem integralConstructibleScalarCommShift_existsUnique :
     ∃! c : (integralConstructibleScalarExtension D l hl E L ι Y).CommShift ℤ,
       (fun [commInst :
@@ -79,8 +82,7 @@ theorem integralConstructibleScalarCommShift_existsUnique :
   ext K
   exact eq_of_heq ((hc n K).trans (integralLiftCommShift_spec D l hl E Y L ι n K).symm)
 
-/-- The uniquely normalized integral shift comparison.
-Source: blueprint order 1883 (blueprint: lem-weil-scalar-extension-exact-triangulated). -/
+/-- The uniquely normalized integral shift comparison. -/
 noncomputable instance integralConstructibleScalarCommShift :
     (integralConstructibleScalarExtension D l hl E L ι Y).CommShift ℤ :=
   (integralConstructibleScalarCommShift_existsUnique D l hl E Y L ι).exists.choose
@@ -202,13 +204,7 @@ private theorem rationalOrdinaryLocalizedCommShift_spec
   exact comp_eqToHom_heq _ _
 
 set_option linter.unusedVariables false in
-/-- The rational shift comparison is the integral one tensored with one.
-Source: blueprint order 1883 (blueprint: lem-weil-scalar-extension-exact-triangulated).
-Proof: localize the integral shift comparison and inverse. Naturality on pure tensors
-extends by additivity. The rational shift by one is the tensor-induced integral shift;
-its localization comparison is the identity. Thus the displayed normalization holds.
-Iteration and inverse shifts give a coherent comparison for every integer. A coherent
-comparison for integer shifts is determined by its component at one, proving uniqueness. -/
+/-- The rational shift comparison is the integral one tensored with one. -/
 theorem rationalOrdinaryScalarCommShift_existsUnique :
     ∃! c : (rationalOrdinaryScalarExtension D l hl E Y L ι).CommShift ℤ,
       (fun [commInst :
@@ -225,8 +221,7 @@ theorem rationalOrdinaryScalarCommShift_existsUnique :
   exact Functor.commShift_ext_of_one _ _ (fun K ↦
     eq_of_heq ((hc K).trans (rationalOrdinaryLocalizedCommShift_spec D l hl E Y L ι K).symm))
 
-/-- The normalized rational shift comparison.
-Source: blueprint order 1883 (blueprint: lem-weil-scalar-extension-exact-triangulated). -/
+/-- The normalized rational shift comparison. -/
 noncomputable instance rationalOrdinaryScalarCommShift :
     (rationalOrdinaryScalarExtension D l hl E Y L ι).CommShift ℤ :=
   (rationalOrdinaryScalarCommShift_existsUnique D l hl E Y L ι).exists.choose
@@ -258,12 +253,7 @@ private theorem rationalOrdinaryScalar_isTriangulated :
 
 set_option linter.unusedVariables false in
 /-- The published completed functor carries the unique shift comparison making its
-normalized comparison with ordinary tensor commute with every integer shift.
-Source: blueprint order 1883 (blueprint: lem-weil-scalar-extension-exact-triangulated).
-Proof: conjugate the ordinary derived tensor comparison by rationalOrdinaryComparison.
-The ordinary comparison satisfies zero and addition coherence; naturality of the
-conjugating isomorphism carries both equations to the completed functor. The displayed
-commutation fixes every component uniquely, including the signed shift by one. -/
+normalized comparison with ordinary tensor commute with every integer shift. -/
 theorem rationalConstructibleScalarCommShift_existsUnique :
     ∃! c : (rationalScalarExtension D l hl E Y L ι).CommShift ℤ,
       (fun [commInst : (rationalScalarExtension D l hl E Y L ι).CommShift ℤ] ↦
@@ -274,19 +264,12 @@ theorem rationalConstructibleScalarCommShift_existsUnique :
   intro c hc
   exact Functor.commShift_ext_of_iso _ _ _ hc (Functor.CommShift.ofIso_compatibility _ _)
 
-/-- The shift comparison transported through the canonical completion comparison.
-Source: blueprint order 1883 (blueprint: lem-weil-scalar-extension-exact-triangulated). -/
+/-- The shift comparison transported through the canonical completion comparison. -/
 noncomputable instance rationalConstructibleScalarCommShift :
     (rationalScalarExtension D l hl E Y L ι).CommShift ℤ :=
   (rationalConstructibleScalarCommShift_existsUnique D l hl E Y L ι).exists.choose
 
-/-- The existing completed scalar functor is exact for its specified shift comparison.
-Source: blueprint order 1883 (blueprint: lem-weil-scalar-extension-exact-triangulated).
-Proof: ordinary finite free tensor is exact on sheaves and hence on derived complexes.
-Restriction to the constructible full subcategories and rationalization preserve its
-image triangles, proving rationalOrdinaryScalar_exact. The normalized natural
-isomorphism rationalOrdinaryComparison commutes with the displayed shifts, so its
-triangle isomorphisms transport preservation to the published completed functor. -/
+/-- The existing completed scalar functor is exact for its specified shift comparison. -/
 theorem rationalConstructibleScalar_exact :
     (rationalScalarExtension D l hl E Y L ι).IsTriangulated := by
   have : NatTrans.CommShift (rationalOrdinaryComparison D l hl E Y L ι).hom ℤ :=
@@ -295,8 +278,7 @@ theorem rationalConstructibleScalar_exact :
   exact (Functor.isTriangulated_iff_of_iso (rationalOrdinaryComparison D l hl E Y L ι)).1
     inferInstance
 
-/-- The published scalar functor is additive by its original tensor-Hom specification.
-Source: blueprint order 1883 (blueprint: lem-weil-scalar-extension-exact-triangulated). -/
+/-- The published scalar functor is additive by its original tensor-Hom specification. -/
 noncomputable instance rationalConstructibleScalar_additive :
     (rationalScalarExtension D l hl E Y L ι).Additive :=
   rationalScalarExtension_additive D l hl E Y L ι

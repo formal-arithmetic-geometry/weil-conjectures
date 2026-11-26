@@ -17,9 +17,7 @@ Let `Φ` be the model Frobenius of an affine model `X₀` of `X = X₀ ×_{k₀}
 the finite field `k₀`. An immersion `X₀ ⟶ ℙ^N_{k₀}` over `k₀`
 (`AlgebraicGeometry.exists_isImmersion_projectiveSpace`) base changes to a morphism `f : X ⟶ Y`
 to the proper scheme `Y = ℙ^N_k` with its model Frobenius, commuting with the model Frobenii,
-whose fibres over the rational points of `Y` are empty or a point, hence proper (blueprint
-`theorem-trace-formula-frobenius-correspondence--1`, Steps 2–4, where the compactification of the
-affine line plays this role).
+whose fibres over the rational points of `Y` are empty or a point, hence proper.
 
 ## Main results
 
@@ -53,12 +51,11 @@ variable {k : Type u} [Field k] {X : Over (Spec (.of k))} [LocallyOfFiniteType X
   {f₀ : X₀ ⟶ Spec (.of k₀)} {p : X.left ⟶ X₀}
 
 omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
-/-- **An affine model embeds into a proper model** (blueprint
-`theorem-trace-formula-frobenius-correspondence--1`, Steps 2–4): for the model Frobenius `Φ` of an
-affine model `X₀` of finite type over `k₀`, there are a proper `Y` over `k` with the model
-Frobenius `Φ_Y` of a model `Y₀` of finite type over `k₀` and a morphism `f : X ⟶ Y`, the base
-change of a `k₀`-morphism `f₀ : X₀ ⟶ Y₀`, with `Φ ≫ f = f ≫ Φ_Y`, whose fibres over the rational
-points of `Y` are proper over `k`. -/
+/-- **An affine model embeds into a proper model**: for the model Frobenius `Φ` of an affine model
+`X₀` of finite type over `k₀`, there are a proper `Y` over `k` with the model Frobenius `Φ_Y` of a
+model `Y₀` of finite type over `k₀` and a morphism `f : X ⟶ Y`, the base change of a `k₀`-morphism
+`f₀ : X₀ ⟶ Y₀`, with `Φ ≫ f = f ≫ Φ_Y`, whose fibres over the rational points of `Y` are proper over
+`k`. -/
 theorem IsModelFrobenius.exists_isProper_pullback [IsAlgClosed k] [LocallyOfFiniteType f₀]
     [IsAffine X₀] (hΦ : IsModelFrobenius Φ f₀ p) :
     ∃ (Y : Over (Spec (.of k))) (_ : LocallyOfFiniteType Y.hom) (_ : QuasiCompact Y.hom)

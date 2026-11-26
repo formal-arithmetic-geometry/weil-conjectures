@@ -20,9 +20,6 @@ commutes (`scalarRoosChain_commShift`); the latter follows from level squares
 (`scalarRoos_productSquare`).
 
 This is the chain-level step of the proof of `rationalPullbackTransitionShift`.
-Source: current blueprint sec-smooth-purity/sk-prop-sf-localization,
-prop-sf-open-closed-triangle-all-stages.proof.md, Weil-structures paragraph.
-(blueprint: lem-sf-rational-pullback-transition-shift).
 -/
 
 @[expose] public section

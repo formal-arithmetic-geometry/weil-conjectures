@@ -30,6 +30,10 @@ trace is additive on `E₀`, and `Tr [φ, ψ] = 0` if `φ ∈ E₀, ψ ∈ E` or
 
 - `TateResidue.tateTrace_add_of_mem`: additivity of the trace on `E₀`.
 - `TateResidue.tateTrace_commutator_eq_zero`, `TateResidue.tateTrace_commutator_eq_zero'`.
+
+## References
+
+* [J. Tate, *Residues of differentials on curves*]
 -/
 
 @[expose] public section
@@ -41,8 +45,7 @@ namespace Submodule
 variable {k V V₂ : Type*} [Field k] [AddCommGroup V] [Module k V] [AddCommGroup V₂]
   [Module k V₂]
 
-/-- `X` is *almost contained* in `Y`: `X ⊆ Y + W` for a finite-dimensional subspace `W`
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`). -/
+/-- `X` is *almost contained* in `Y`: `X ⊆ Y + W` for a finite-dimensional subspace `W`. -/
 def AlmostLE (X Y : Submodule k V) : Prop :=
   ∃ W : Submodule k V, W.FG ∧ X ≤ Y ⊔ W
 
@@ -128,8 +131,7 @@ open Submodule
 
 variable {k V : Type*} [Field k] [AddCommGroup V] [Module k V] (A : Submodule k V)
 
-/-- Tate's algebra `E`: endomorphisms `φ` with `φ(A) ≺ A`
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`). -/
+/-- Tate's algebra `E`: endomorphisms `φ` with `φ(A) ≺ A`. -/
 def E (φ : Module.End k V) : Prop := (A.map φ).AlmostLE A
 
 /-- Tate's ideal `E₁`: endomorphisms `φ` with `φ(V) ≺ A`. -/

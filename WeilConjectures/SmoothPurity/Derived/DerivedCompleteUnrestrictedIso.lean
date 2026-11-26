@@ -10,8 +10,12 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 
 /-! # Isomorphism invariance of unrestricted derived completeness
 
-Source: Bhatt--Scholze, Definition 3.5.2; Stacks Project, Tag 08TC.
-(blueprint: lem-pur-unrestricted-completeness-iso)
+Unrestricted derived completeness is invariant under isomorphisms of derived objects.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 3.5.2
+* Stacks Project, Tag 08TC
 -/
 
 @[expose] public section
@@ -29,15 +33,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : AlgebraicGeometry.Scheme.{t})
 
-/-- Unrestricted completeness is invariant under an isomorphism of derived objects.
-Source: Bhatt--Scholze, Definition 3.5.2; Stacks Project, Tag 08TC
-(blueprint: lem-pur-unrestricted-completeness-iso).
-Proof: retain the K-flat representative, its resolution and reduction tower.
-Compose its identification with the given isomorphism and postcompose the connecting
-arrow by its shifted hom. The new canonical augmentation is the old one precomposed
-with the inverse isomorphism. Projectionwise product extensionality identifies the
-first triangle square; the other two squares are identity and inverse cancellation.
-Thus the new Roos triangle is isomorphic to the original distinguished triangle. -/
+/-- Unrestricted completeness is invariant under an isomorphism of derived objects. -/
 theorem isDerivedCompleteUnrestricted_of_iso
   {K M : DerivedCategory (integralTowerModules l E X)} (e : K ≅ M)
   (hK : IsDerivedCompleteUnrestricted l E X K) :

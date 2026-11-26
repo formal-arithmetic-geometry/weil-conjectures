@@ -45,9 +45,6 @@ import Mathlib.Algebra.CharP.CharAndCard
 
 /-!
 # Direct images preserve bounded constructibility
-
-Source: Weil blueprint, `def-weil-ordinary-compact-cohomology` (blueprint:
-lem-weil-structure-direct-images-constructible).
 -/
 
 @[expose] public section
@@ -57,13 +54,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Sc
 namespace WeilConjectures
 open AlgebraicallyClosedCoefficients (Coefficient)
 
-/-- The coefficient prime is a unit in the finite-field fibre.
-Source: blueprint `def-weil-ordinary-compact-cohomology`, finite-field hypotheses
-(blueprint: lem-weil-structure-direct-images-constructible).
-Proof: the cardinality of the base field gives characteristic D.p, and its algebraic
-closure has the same characteristic. If the image of l vanished, D.p would divide l.
-Since both are prime, this would force l = D.p, contrary to hl. Thus l is nonzero
-in the field D.k, and hence is a unit. -/
+/-- The coefficient prime is a unit in the finite-field fibre. -/
 theorem finiteFieldDatumPrimeUnit
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) :
     IsUnit (l : D.k) := by

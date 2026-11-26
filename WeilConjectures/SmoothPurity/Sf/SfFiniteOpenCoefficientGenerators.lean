@@ -10,8 +10,10 @@ import WeilConjectures.SmoothPurity.Sf.SfIntrinsicOpenUnitGenerators
 
 /-! # Coefficient restriction on finite open extension generators
 
-Source: Stacks Tags 03DI, 03DJ and 0E8I.
-(blueprint: lem-sf-finite-open-coefficient-generators).
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 3.5.2.
+* Stacks Project, Tags 03DA, 03DI, 03DJ and 0E8I.
 -/
 
 @[expose] public noncomputable section
@@ -22,9 +24,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The quotient in the slice tower is the specified adjacent coefficient quotient.
-Source: Bhatt--Scholze, Definition 3.5.2; Stacks 03DA
-(blueprint: lem-sf-finite-open-coefficient-generators). -/
+/-- The quotient in the slice tower is the specified adjacent coefficient quotient. -/
 theorem sfFiniteOpenPresentation_restriction_eq (T : Scheme.{u}) (n : ℕ) :
     normalizedDVRModuleRes l E T (Nat.le_succ n) =
       sfCompactSupportFiniteRestriction l E T n := by
@@ -32,29 +32,25 @@ theorem sfFiniteOpenPresentation_restriction_eq (T : Scheme.{u}) (n : ℕ) :
   rw [Functor.ofOpSequence_map_homOfLE_succ]
   rfl
 
-/-- Change only the presentation of the same adjacent restriction functor.
-Source: Stacks 03DA (blueprint: lem-sf-finite-open-coefficient-generators). -/
+/-- Change only the presentation of the same adjacent restriction functor. -/
 def sfFiniteOpenPresentationRestriction (T : Scheme.{u}) (n : ℕ) :
     normalizedDVRModuleRes l E T (Nat.le_succ n) ≅
       sfCompactSupportFiniteRestriction l E T n :=
   eqToIso (sfFiniteOpenPresentation_restriction_eq l E T n)
 
-/-- Restriction along an arbitrary ring-sheaf map leaves the section carrier unchanged.
-Source: Stacks 03DA (blueprint: lem-sf-finite-open-coefficient-generators). -/
+/-- Restriction along an arbitrary ring-sheaf map leaves the section carrier unchanged. -/
 @[irreducible] def sfSheafScalarSection (T : Scheme.{u})
     {R S : Sheaf (ProEt.topology T) RingCat.{u + 1}} (φ : R ⟶ S)
     (N : SheafOfModules.{u + 1} S) (W : T.ProEtᵒᵖ) (x : N.val.obj W) :
     ((SheafOfModules.restrictScalars φ).obj N).val.obj W := x
 
-/-- The inverse identity on carriers, with the ring-sheaf map kept abstract.
-Source: Stacks 03DA (blueprint: lem-sf-finite-open-coefficient-generators). -/
+/-- The inverse identity on carriers, with the ring-sheaf map kept abstract. -/
 @[irreducible] def sfSheafUnscalarSection (T : Scheme.{u})
     {R S : Sheaf (ProEt.topology T) RingCat.{u + 1}} (φ : R ⟶ S)
     (N : SheafOfModules.{u + 1} S) (W : T.ProEtᵒᵖ)
     (x : ((SheafOfModules.restrictScalars φ).obj N).val.obj W) : N.val.obj W := x
 
-/-- Convert a heterogeneous section-function identity using the explicit carrier maps.
-Source: Stacks 03DA (blueprint: lem-sf-finite-open-coefficient-generators). -/
+/-- Convert a heterogeneous section-function identity using the explicit carrier maps. -/
 private theorem sfSheafSection_heq (T U : Scheme.{u})
     {R S : Sheaf (ProEt.topology T) RingCat.{u + 1}} (φ : R ⟶ S)
     {R' S' : Sheaf (ProEt.topology U) RingCat.{u + 1}} (ψ : R' ⟶ S')
@@ -68,24 +64,19 @@ private theorem sfSheafSection_heq (T U : Scheme.{u})
   unfold sfSheafScalarSection sfSheafUnscalarSection
   exact congrFun (eq_of_heq h) x
 
-/-- The generic carrier identity, instantiated at a normalized coefficient quotient.
-Source: Stacks 03DA (blueprint: lem-sf-finite-open-coefficient-generators). -/
+/-- The generic carrier identity, instantiated at a normalized coefficient quotient. -/
 @[irreducible] def sfNormalizedDVRSection (T : Scheme.{u}) {m n : ℕ} (h : n ≤ m)
     (N : normalizedDVRModules l E T n) (W : T.ProEtᵒᵖ) (x : N.val.obj W) :
     ((normalizedDVRModuleRes l E T h).obj N).val.obj W :=
   sfSheafScalarSection T (normalizedDVRQuotient l E T h) N W x
 
-/-- The inverse carrier identity at a normalized coefficient quotient.
-Source: Stacks 03DA (blueprint: lem-sf-finite-open-coefficient-generators). -/
+/-- The inverse carrier identity at a normalized coefficient quotient. -/
 @[irreducible] def sfNormalizedDVRUnsection (T : Scheme.{u}) {m n : ℕ} (h : n ≤ m)
     (N : normalizedDVRModules l E T n) (W : T.ProEtᵒᵖ)
     (x : ((normalizedDVRModuleRes l E T h).obj N).val.obj W) : N.val.obj W :=
   sfSheafUnscalarSection T (normalizedDVRQuotient l E T h) N W x
 
-/-- The heterogeneous section law in the normalized quotient presentation.
-Source: Stacks 03DA (blueprint: lem-sf-finite-open-coefficient-generators).
-Proof: unfold only the two quotient-carrier wrappers and use the generic
-ring-sheaf section identity, keeping both quotient maps as parameters. -/
+/-- The heterogeneous section law in the normalized quotient presentation. -/
 theorem sfNormalizedDVRSection_heq (T U : Scheme.{u}) (n : ℕ)
     (M : normalizedDVRModules l E T n) (N : normalizedDVRModules l E U n)
     (V : T.ProEtᵒᵖ) (W : U.ProEtᵒᵖ)
@@ -269,8 +260,7 @@ private theorem leftComparison_generator (n : ℕ)
   unfold sfFiniteOpenLeftComparison sfFiniteOpenAdjunction
   exact result
 
-/-- The intrinsic side of the adjacent coefficient square, before evaluating sections.
-Source: Stacks 0E8I (blueprint: lem-sf-finite-open-coefficient-generators). -/
+/-- The intrinsic side of the adjacent coefficient square, before evaluating sections. -/
 @[reducible] def sfFiniteOpenIntrinsicCoefficient (n : ℕ)
     (r : IntegralOpenReduction.finiteRestriction l E j o (n + 1) ≅
       sfIntrinsicOpenRestriction j (Padic.coefficientExtensionRing l E (n + 2))) :
@@ -284,8 +274,7 @@ Source: Stacks 0E8I (blueprint: lem-sf-finite-open-coefficient-generators). -/
       (sfIntrinsicExtensionByZero j (Padic.coefficientExtensionRing l E (n + 2))) ≪≫
     sfOpenRestriction j (Padic.coefficientExtensionTransition l E (n + 1))
 
-/-- The target presentation of the lower extension comparison.
-Source: Stacks 0E8I (blueprint: lem-sf-finite-open-coefficient-generators). -/
+/-- The target presentation of the lower extension comparison. -/
 @[reducible] def sfFiniteOpenLowerCoefficient (n : ℕ)
     (r : IntegralOpenReduction.finiteRestriction l E j o n ≅
       sfIntrinsicOpenRestriction j (Padic.coefficientExtensionRing l E (n + 1))) :
@@ -301,22 +290,7 @@ Source: Stacks 0E8I (blueprint: lem-sf-finite-open-coefficient-generators). -/
 
 /-- The intrinsic coefficient comparison preserves a single extension generator.
 The two left comparisons are constructed from the supplied, section-normalized
-right comparisons. No ordinary slice coefficient comparison is assumed.
-Source: Stacks 03DI, 03DJ and 0E8I
-(blueprint: lem-sf-finite-open-coefficient-generators).
-
-Proof: apply the intrinsic open restriction to the proposed equality and precompose
-with the open adjunction unit. The left-adjoint uniqueness unit equation identifies
-the two left comparisons with the supplied right comparisons. Their section
-normalizations identify their values with the represented section x. The published
-`sfOpenRestriction_normalized_unique` unit equation identifies the coefficient
-comparison with the same section, restricted along the quotient ring map. Thus both
-sides agree on the indicated generator. The constant units commute with the quotient
-map by naturality, and `o.finiteConstants` identifies the scalar actions. The slice
-counit and realization counit cancel with their units; the only remaining maps are
-the displayed canonical restriction comparison components. This argument is for a
-single generator and a single adjacent quotient, before sheafification extensionality;
-it uses neither a tower nor a choice of an ordinary coefficient comparison. -/
+right comparisons. No ordinary slice coefficient comparison is assumed. -/
 @[irreducible] def SfFiniteOpenCoefficientGenerator (n : ℕ)
     (r₀ : IntegralOpenReduction.finiteRestriction l E j o n ≅
       sfIntrinsicOpenRestriction j (Padic.coefficientExtensionRing l E (n + 1)))
@@ -337,22 +311,7 @@ it uses neither a tower nor a choice of an ordinary coefficient comparison. -/
           (sfNormalizedDVRUnsection l E X (Nat.le_succ n) M
             (op ((IntegralOpenReduction.sliceSite j).obj (Over.mk a))) x)))
 
-/-- The intrinsic coefficient comparison preserves the represented section function.
-Source: Stacks 03DI, 03DJ, 0E8I
-(blueprint: lem-sf-finite-open-coefficient-generators).
-
-Proof: the realization unit is invertible on underlying abelian sheaves, so its
-inverse and the realization counit identify an intrinsic open-restriction section
-with an ambient section. Evaluating the intrinsic adjunction unit this way defines
-an intrinsic generator. The supplied right-comparison normalization and the
-left-adjoint uniqueness unit equation compute each finite left comparison on its
-actual direct-sum generator. Naturality of realization and its sectionwise scalar
-normalization show that this evaluation commutes with the coefficient square.
-The normalized sfOpenRestriction unit equation therefore preserves the intrinsic
-generator. Naturality under the source presentation isomorphism identifies the upper
-route, while the lower one-coefficient computation identifies the lower route.
-Heterogeneous section identities keep the quotient carriers abstract until both
-routes have the same target, when their equality gives the stated result. -/
+/-- The intrinsic coefficient comparison preserves the represented section function. -/
 theorem sfFiniteOpenCoefficient_generator (n : ℕ)
     (r₀ : IntegralOpenReduction.finiteRestriction l E j o n ≅
       sfIntrinsicOpenRestriction j (Padic.coefficientExtensionRing l E (n + 1)))

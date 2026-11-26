@@ -14,14 +14,26 @@ import WeilConjectures.Algebra.ExtOneDirectSum
 /-!
 # Descent of extensions with direct-sum quotient
 
-Source: Stacks Project, More on Algebra, proof of Lemma 05EG
-(blueprint: lem-weil-pbc-direct-sum-extension-assembly).
+If every extension with quotient a base-changed summand descends along a flat ring map, then so
+does every extension with quotient the base-changed direct sum.
+
+## Implementation details
 
 Base change is written `S ⊗[R] M`, as in `LinearMap.baseChange`; tensor symmetry identifies
-this with the source's `M ⊗[R] S`. Short exactness is expressed by injectivity, `Function.Exact`,
+this with `M ⊗[R] S`. Short exactness is expressed by injectivity, `Function.Exact`,
 and surjectivity, the module interpretation of `CategoryTheory.ShortComplex.ShortExact`
 via `ShortExact.moduleCat_exact_iff_function_exact` and its injective/surjective lemmas,
 as in `LinearMap.exists_cyclic_extension_flat_descent`.
+
+The proof pulls the extension back along each base-changed inclusion (the pullbacks are
+submodules of `T`, so they stay in universe `z`), descends each summand, and assembles the
+classes using that `Ext¹` turns direct sums into products. Pullbacks commute with flat base
+change, so the assembled extension has the same pullback classes, and injectivity of the
+`Ext¹` comparison over `S` gives an isomorphism of extensions fixing both ends.
+
+## References
+
+* [Stacks, Tag 05EG]
 -/
 
 @[expose] public section
@@ -148,29 +160,9 @@ private theorem extension_map_ext
   rw [hxn, map_add, map_add, hgi]
   exact congrArg (g' (i n) + ·) (DFunLike.congr_fun hgfs d)
 
-/-- Source: Stacks Project, More on Algebra, proof of Lemma 05EG, the reduction using
-compatibility of Ext with arbitrary direct sums
-(blueprint: lem-weil-pbc-direct-sum-extension-assembly).
-
-If every extension with quotient a base-changed summand descends along a flat ring map,
+/-- If every extension with quotient a base-changed summand descends along a flat ring map,
 then every extension with quotient the base-changed direct sum descends, fixing both ends.
-The middle modules `T` range over one universe `z` in the hypothesis and the conclusion;
-the pullbacks `T_j` of the proof are submodules of `T`, so they lie in that universe.
-
-Proof: Pull back the given extension along each base-changed canonical inclusion, and use
-its descent hypothesis to choose an R-extension of that summand. Surjectivity of the
-Ext-one direct-sum comparison (theorem-finite-etale-covers-proper-henselian--2) assembles these
-classes into an R-extension of the direct sum. Base-changing extension equivalences preserves their
-fixed endpoints, by identity and composition compatibility of def-weil-module-base-change.
-Next use lem-weil-pbc-tensor-commutes-with-colimits to identify the base-changed direct sum
-and its inclusions. The assembled sequence stays short exact by lem-weil-pbc-flat-tensor-exact
-and lem-weil-pbc-tensor-right-exact. Pullbacks commute with flat base change: describe a
-pullback as the kernel of the difference map out of a finite direct sum, use tensor's
-compatibility with finite sums, and apply lem-weil-pbc-flat-tensor-exact to that kernel.
-Consequently the assembled base-changed extension has the same pullback class on each
-summand as the original extension. Injectivity of the Ext-one direct-sum comparison over S
-(theorem-finite-etale-covers-proper-henselian--2) gives an isomorphism of extensions fixing both
-ends. -/
+The middle modules `T` range over one universe `z` in the hypothesis and the conclusion. -/
 theorem extension_descends_of_summands
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
     (hflat : (algebraMap R S).Flat)

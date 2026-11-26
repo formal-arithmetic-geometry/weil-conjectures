@@ -30,11 +30,7 @@ import WeilConjectures.SmoothPurity.Supporting.DirectImagesConstructible
 import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulated
 import WeilConjectures.ZetaSeries
 
-/-! # Assembly of normalized integral support operations
-
-Source: smooth-purity localization support paragraphs
-(blueprint: lem-sf-integral-support-functor-normalization).
--/
+/-! # Assembly of normalized integral support operations -/
 
 @[expose] public noncomputable section
 

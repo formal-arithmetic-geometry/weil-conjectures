@@ -18,7 +18,9 @@ import WeilConjectures.Tactic.TransportExact
 # The exceptional exchanges and the twists by invertible objects
 
 The inputs `m`, `n`, `hm`, `hκP` of `NearbyCyclesModel.exists_twist_of_composition_law` for the
-twist `T = ℚ̄_ℓ(0)[n]` (blueprint `lemma-nearby-duality-slice--1`, the twist (1)).
+twist `T = ℚ̄_ℓ(0)[n]` (the twist (1) in the slice step of nearby duality).
+
+## Implementation details
 
 For a morphism of models `φ : N ⟶ M` over proper `i₁`, `i₂`, the exceptional exchange
 `β = exceptionalExchange ν` of a compact-support exchange `ν` inverse to the proper exchange
@@ -116,10 +118,9 @@ lemma mate_twist_compat (adj : L ⊣ R) (adj' : L' ⊣ R')
   rfl
 
 /-- **The exceptional exchange and the twists**: in the situation of
-`CategoryTheory.mate_twist_compat`, with `χ`, `βr`, `βs` invertible (e.g. by proper base change,
-`T` invertible), the mate `β : U ⋙ Ψ_N ⟶ Ψ_M ⋙ U'` of `χ⁻¹` for adjunctions `R ⊣ U`,
-`R' ⊣ U'` is compatible with the mates `γr`, `γs` of `βr⁻¹`, `βs⁻¹` and the inverses of `κ_M`,
-`κ_N`. -/
+`CategoryTheory.mate_twist_compat`, with `χ`, `βr`, `βs` invertible, the mate
+`β : U ⋙ Ψ_N ⟶ Ψ_M ⋙ U'` of `χ⁻¹` for adjunctions `R ⊣ U`, `R' ⊣ U'` is compatible with the
+mates `γr`, `γs` of `βr⁻¹`, `βs⁻¹` and the inverses of `κ_M`, `κ_N`. -/
 lemma mate_inv_twist_compat (adj : L ⊣ R) (adj' : L' ⊣ R') (adjU : R ⊣ U) (adjU' : R' ⊣ U')
     (e : tensorRight TX ⋙ L ≅ L ⋙ tensorRight TY)
     (e' : tensorRight TX' ⋙ L' ≅ L' ⋙ tensorRight TY')

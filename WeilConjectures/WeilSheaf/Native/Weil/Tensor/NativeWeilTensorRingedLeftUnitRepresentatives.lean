@@ -15,8 +15,20 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # The left-unit representative calculation
 
-Source: Stacks 06YU, 0FPT; blueprint step 3 of
-`lem-sf-native-weil-tensor-ringed-derived-square-native-data`.
+This is part of the final step in constructing the native data for the native ringed derived
+tensor square.
+
+## Implementation details
+
+The unit comparison `ε` is obtained categorically: the associativity equation on native K-flat
+representatives (`nativeRingedAssociatorRepresentatives_normalized`) is transported to all
+derived objects along the essentially surjective localization, and
+`exists_leftUnit_of_associative_tensor` then produces a unit comparison compatible with the left
+unitors, starting from the forgotten coefficient unit.
+
+## References
+
+* Stacks 06YU, 0FPT
 -/
 
 @[expose] public section
@@ -141,29 +153,7 @@ namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
 -- The unchanged signature keeps d, which the shorter categorical proof does not use.
 set_option linter.unusedVariables false in
-/-- The degree-zero calculation for the left unit of the native tensor comparison.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 06YU and 0FPT; the left-unit
-part of step 2 of lem-sf-native-weil-tensor-ringed-unit-symmetry-representatives.
-(blueprint: lem-sf-native-weil-tensor-ringed-left-unit-representatives).
-
-Proof: use the unit comparison of d.coherence, the native and ordinary derived
-equivalences, and the degree-zero coefficient identifications to define epsilon.
-Represent a native K-flat input by a flat-term K-flat complex using b.native.
-The unit is represented by the coefficient ring in degree zero. Expand hforget
-for this unit and the chosen input, and use cB.leftUnitor_model and the left-unit
-law of the canonical ordinary localization tensorator. The normalized formula
-hcanonical fixes ordinaryModel on two K-flat inputs. Its naturality and a
-K-flat replacement of the second input extend that formula to the one-K-flat
-pairs occurring here. After cancellation of the model isomorphisms, the desired
-identity is the localization of the underived left-unit square. Test it on total
-summands: all summands with unit degree different from zero vanish; on the
-(0,n) summand the sign is one. The single-complex comparison and
-d.unit_normalization identify the unit arrow, and b.underived.coherence.left_unit
-is the remaining equality. The balanced tensor and coproduct universal properties
-give equality of chain maps. Naturality under the replacement returns the equation
-to the original input. The constructed epsilon is fixed independently of that
-input. No right-unit or braiding equation is asserted. -/
+/-- The degree-zero calculation for the left unit of the native tensor comparison. -/
 theorem native_weil_tensor_ringed_left_unit_representatives
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})

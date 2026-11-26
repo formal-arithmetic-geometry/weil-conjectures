@@ -19,8 +19,20 @@ import WeilConjectures.AlgebraicGeometry.DegreePExtensionRegular
 /-!
 # The degree-p step for formally smooth complete local algebras
 
-Source: Stacks Project, More on Algebra, Proposition 07PM, last two paragraphs.
-(blueprint: lem-weil-pbc-fs-complete-degree-p-regular)
+Regularity of `L ⊗[A] C` ascends along a degree-`p` purely inseparable step `M ⊆ L` of
+extensions of the fraction field, for `C` formally smooth and complete over a complete regular
+local domain `A`.
+
+## Implementation details
+
+The presentation `L ⊗[A] C ≃ (M ⊗[A] C)[z]/(z^p - f)`, with a derivation `D` such that `D f` is
+a unit, comes from `FormallySmoothCompleteDegreePUnitDerivation`. Regularity of the polynomial
+quotient follows from Stacks 07PG and is transported along the isomorphism.
+
+## References
+
+* [Stacks, Tag 07PM] (last two paragraphs)
+* [Stacks, Tag 07PG]
 -/
 
 @[expose] public section
@@ -31,16 +43,8 @@ namespace Algebra
 
 attribute [-instance] IntermediateField.module' in
 /-- Regularity ascends along a degree-p purely inseparable fraction-field step
-for a formally smooth complete local algebra.
-Source: Stacks Project, More on Algebra, Proposition 07PM, final paragraph.
-(blueprint: lem-weil-pbc-fs-complete-degree-p-regular)
-
-Proof: The construction lem-weil-pbc-fs-complete-degree-p-unit-derivation gives
-f in M tensor_A C, a derivation D with D(f) a unit, and a ring isomorphism
-from (M tensor_A C)[z]/(z^p-f) to L tensor_A C. The hypothesis makes the
-coefficient ring regular. Apply 07PG with n = p (a prime is at least one)
-to make the polynomial quotient regular, and transport regularity across
-the supplied ring isomorphism. This includes the zero-ring case. -/
+for a formally smooth complete local algebra: if `M ⊗[A] C` is regular and `[L : M] = p`, then
+`L ⊗[A] C` is regular. -/
 theorem isRegularRing_tensorProduct_of_formallySmoothAdic_degree_p
     (A : Type u) (C : Type v) (K : Type u) (L : Type w)
     [CommRing A] [IsDomain A] [IsRegularLocalRing A]

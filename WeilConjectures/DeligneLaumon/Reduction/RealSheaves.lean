@@ -17,10 +17,9 @@ public import WeilConjectures.WeilSheaf.UpperStarFiniteEtale
 
 A constructible Weil sheaf is `ι`-*real* (`AlgebraicGeometry.WeilSheaf.IsReal`) if the realization
 under `ι` of every local Frobenius characteristic polynomial has real coefficients. Over a curve
-this forces purity on a dense open, which is the content of the blueprint section
-`chap-Purity-of-real-sheaves`; this file states the extension of that statement to an arbitrary
-separated finite-type `k₀`-scheme, which is the input the Deligne–Laumon reduction needs in order
-to turn the reality of a local `L`-factor into a weight bound.
+this forces purity on a dense open; this file extends that statement to an arbitrary separated
+finite-type `k₀`-scheme, which is the input the Deligne–Laumon reduction needs in order to turn
+the reality of a local `L`-factor into a weight bound.
 
 ## Implementation notes
 
@@ -30,6 +29,15 @@ A Noetherian induction reduces to a real sheaf on a nonempty open, which may be 
 (`AlgebraicGeometry.WeilSheaf.IsReal.exists_isPunctuallyPureOfWeight_cokernel_of_smooth`, by
 curve testing and purity on curves), so it is mixed, and mixedness is spliced back along the
 open–closed sequence.
+
+In `AlgebraicGeometry.WeilSheaf.IsReal.exists_isMixed_upperStar_opensι`, a nonempty open `W` of
+`T` is finite étale over a nonempty open `O` of some `𝔸ᵈ`
+(`AlgebraicGeometry.exists_isFinite_etale_to_affineSpace`) by `π : W ⟶ O`. The direct image
+`π_* (G|W)` is real, hence mixed on a nonempty open `O'` of `O`; pulling back, `π^* π_* (G|W)` is
+mixed over `π⁻¹ O'`, and so is its quotient `G|W` under the counit of `π^* ⊣ π_*`, an
+epimorphism since `π` is finite étale. Purity on curves enters through curve testing
+(`AlgebraicGeometry.WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar`) and
+`AlgebraicGeometry.WeilSheaf.IsReal.exists_isPunctuallyPureOfWeight_cokernel`.
 
 ## Main statements
 
@@ -89,8 +97,7 @@ theorem exists_isMixed_upperStar_opensι_of_isEmpty {n : Type u} [IsEmpty n]
   exact ⟨⊤, ⟨o, trivial⟩, isMixed_of_locallyQuasiFinite ι _⟩
 
 /-- An `ι`-real Weil sheaf on a nonempty open of the affine line `𝔸¹` (with any one-element index
-type) is `ι`-mixed on a nonempty open:
-it is lisse on a dense open, a smooth geometrically connected curve. -/
+type) is `ι`-mixed on a nonempty open. -/
 theorem IsReal.exists_isMixed_upperStar_opensι_of_card_eq_one {n : Type u} [Finite n]
     (hn : Nat.card n = 1) (O : 𝔸(n; Spec (CommRingCat.of k₀)).Opens) [Nonempty O]
     {G : WeilSheaf k₀ l O}
@@ -126,9 +133,7 @@ theorem IsReal.exists_isMixed_upperStar_opensι_of_card_eq_one {n : Type u} [Fin
   exact ⟨U, hne, (hG.upperStar U.ι).isMixed_of_isLisse hlisse⟩
 
 /-- An `ι`-real Weil sheaf on a nonempty open subscheme of `𝔸ᵈ` over `k₀` is `ι`-mixed on a
-nonempty open, granted the case `d ≥ 2` (the hypothesis `h`, which carries the curve argument of
-`theorem-real-constructible-sheaves-are-mixed--1`: curve testing and purity of real lisse sheaves on
-curves): for `d = 0` every Weil sheaf on a point is mixed and for `d = 1` this is the curve case. -/
+nonempty open, granted the case `d ≥ 2` (the hypothesis `h`). -/
 theorem IsReal.exists_isMixed_upperStar_opensι_of_affineSpace
     (h : ∀ (d : ℕ), 2 ≤ d → ∀ (O : 𝔸(ULift.{u} (Fin d); Spec (CommRingCat.of k₀)).Opens)
       [Nonempty O] (G : WeilSheaf k₀ l O), G.IsReal ι →
@@ -145,9 +150,7 @@ theorem IsReal.exists_isMixed_upperStar_opensι_of_affineSpace
   · exact hG.exists_isMixed_upperStar_opensι_of_card_eq_one (by simp) O
 
 open ZeroObject in
-/-- A Weil sheaf on a scheme without points is mixed of weights at most `w`, for every `w`: the
-filtration `0 ⊆ F` has the single quotient `F`, which is punctually pure of weight `w` since
-there are no closed points. -/
+/-- A Weil sheaf on a scheme without points is mixed of weights at most `w`, for every `w`. -/
 theorem isMixedOfWeightsAtMost_of_isEmpty {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] [IsEmpty X] (F : WeilSheaf k₀ l X)
     (w : ℝ) : F.IsMixedOfWeightsAtMost ι w :=
@@ -271,8 +274,7 @@ theorem isMixed_of_forall_exists_isMixed_upperStar_opensι
       exact h T G hG.1)
     ⟨hF, inferInstance⟩
 
-/-- Mixedness is preserved by pullback along any morphism of `k₀`-schemes: the pullback is exact
-and preserves punctual purity. -/
+/-- Mixedness is preserved by pullback along any morphism of `k₀`-schemes. -/
 theorem IsMixed.upperStar {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
     [Y.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l Y}
@@ -313,10 +315,7 @@ theorem IsMixed.upperStar_opensRange_ι {W T : Scheme.{u}} [W.Over (Spec (CommRi
 
 /-- **Real lisse sheaves on smooth affine schemes are mixed.** Let `X₀` be a smooth geometrically
 connected affine scheme of dimension `d ≥ 2` over `k₀` and `𝒢` an `ι`-real lisse Weil sheaf on
-`X₀`. Then `𝒢` is `ι`-mixed: the successive quotients of a filtration with irreducible lisse
-quotients are punctually pure
-(`AlgebraicGeometry.WeilSheaf.IsReal.exists_isPunctuallyPureOfWeight_cokernel_of_smooth`)
-(blueprint: `theorem-real-constructible-sheaves-are-mixed--1`, the lisse stratum). -/
+`X₀`. Then `𝒢` is `ι`-mixed. -/
 theorem IsReal.isMixed_of_isLisse_of_smooth {X₀ : Scheme.{u}}
     [X₀.Over (Spec (CommRingCat.of k₀))] [IsAffine X₀] {d : ℕ} (hd : 2 ≤ d)
     [SmoothOfRelativeDimension d (X₀ ↘ Spec (CommRingCat.of k₀))]
@@ -337,9 +336,7 @@ theorem IsReal.isMixed_of_isLisse_of_smooth {X₀ : Scheme.{u}}
     (Finset.single_le_sum (fun j _ ↦ abs_nonneg (w j)) (Finset.mem_univ i))
 
 /-- An `ι`-real Weil sheaf on a nonempty open subscheme of `𝔸ᵈ` over `k₀`, `d ≥ 2`, is `ι`-mixed
-on a nonempty open: it is lisse on a dense open, which contains a nonempty affine open, smooth
-and geometrically connected over `k₀` (blueprint:
-`theorem-real-constructible-sheaves-are-mixed--1`). -/
+on a nonempty open. -/
 theorem IsReal.exists_isMixed_upperStar_opensι_of_two_le {d : ℕ} (hd : 2 ≤ d)
     (O : 𝔸(ULift.{u} (Fin d); Spec (CommRingCat.of k₀)).Opens) [Nonempty O]
     {G : WeilSheaf k₀ l O} (hG : G.IsReal ι) :
@@ -386,12 +383,7 @@ theorem IsReal.exists_isMixed_upperStar_opensι_of_two_le {d : ℕ} (hd : 2 ≤ 
   exact ⟨V, ⟨x, hxV⟩, (hG.upperStar V.ι).isMixed_of_isLisse_of_smooth hd hVlisse⟩
 
 /-- An `ι`-real Weil sheaf on a nonempty reduced separated `k₀`-scheme `T` of finite type is
-`ι`-mixed on a nonempty open of `T` (blueprint: `theorem-real-constructible-sheaves-are-mixed--1`,
-the step on a nonempty open). A nonempty open `W` of `T` is finite étale over a nonempty open `O` of
-some `𝔸ᵈ` (`AlgebraicGeometry.exists_isFinite_etale_to_affineSpace`) by `π : W ⟶ O`. The direct
-image `π_* (G|W)` is real, hence mixed on a nonempty open `O'` of `O`; pulling back, `π^* π_* (G|W)`
-is mixed over `π⁻¹ O'`, and so is its quotient `G|W` under the counit of `π^* ⊣ π_*`, an
-epimorphism since `π` is finite étale. -/
+`ι`-mixed on a nonempty open of `T`. -/
 theorem IsReal.exists_isMixed_upperStar_opensι (T : Scheme.{u})
     [T.Over (Spec (CommRingCat.of k₀))] [IsReduced T] [Nonempty T]
     [IsSeparated (T ↘ Spec (CommRingCat.of k₀))]
@@ -441,18 +433,7 @@ theorem IsReal.exists_isMixed_upperStar_opensι (T : Scheme.{u})
   rw [Scheme.Hom.mem_preimage, hp]
   exact ho
 
-/-- Every constructible `ι`-real Weil sheaf on a separated finite-type `k₀`-scheme is `ι`-mixed.
-
-By Noetherian induction
-(`AlgebraicGeometry.WeilSheaf.isMixed_of_forall_exists_isMixed_upperStar_opensι`) it suffices
-to make a real sheaf mixed on a nonempty open
-(`AlgebraicGeometry.WeilSheaf.IsReal.exists_isMixed_upperStar_opensι`): after shrinking, the
-sheaf is lisse on a smooth affine stratum, where curve testing
-(`AlgebraicGeometry.WeilSheaf.exists_isClosedImmersion_isIrreducibleLocalSystem_upperStar`) and
-purity of real lisse sheaves on curves
-(`AlgebraicGeometry.WeilSheaf.IsReal.exists_isPunctuallyPureOfWeight_cokernel`) make the
-geometric constituents pure
-(`AlgebraicGeometry.WeilSheaf.IsReal.exists_isPunctuallyPureOfWeight_cokernel_of_smooth`). -/
+/-- Every constructible `ι`-real Weil sheaf on a separated finite-type `k₀`-scheme is `ι`-mixed. -/
 theorem IsReal.isMixed {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
     [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]

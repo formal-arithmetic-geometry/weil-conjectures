@@ -15,8 +15,9 @@ import all WeilConjectures.SmoothPurity.ScalarExtensionTower.OrdinaryScalarTower
 
 /-! # Homogeneous generators of the transported strict quotient tensor tower
 
-Source: Stacks 03EL, 07A4 and 0941; step 3 of
-stage3-pur-scalar-tensor-model-normalization.
+## References
+
+* Stacks Project, Tags 03EL, 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -35,22 +36,7 @@ attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoida
 variable (l : ℕ) [Fact l.Prime]
 variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Tensoring strict quotient identifications gives the specified generator formula.
-Source: Stacks 03EL, 07A4 and 0941; step 3 of
-stage3-pur-scalar-tensor-model-normalization.
-(blueprint: lem-pur-strict-quotient-tensor-generator).
-
-Proof: evaluate the restricted tensor of the inverse isomorphisms a,b at level n.
-Naturality of restriction/evaluation and the normalized tensor evaluation comparison
-identifies its composite with the reference tower comparison with the finite total
-tensor of kappaC,kappaD. This uses the two displayed evaluation equations and cancels
-the reference evaluation isomorphisms. The tensor evaluation comparison carries a
-homogeneous generator to the tensor of its evaluated sections. A total tensor map
-applies its two component chain maps to these sections. Scalar restriction leaves
-the section unchanged. These three equations give the displayed formula. The maps
-are already strict tower maps; no new transition compatibility or derived
-faithfulness is asserted. All total degrees and the zero and first-quotient cases
-are included. -/
+/-- Tensoring strict quotient identifications gives the specified generator formula. -/
 theorem strictQuotientTensorGenerator (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules.{u, u} l E W) ℤ)
     (C D : Complex l E W)

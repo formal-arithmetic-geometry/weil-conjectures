@@ -22,8 +22,20 @@ import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 /-! # Transport of normalized Koszul test cycles between quotient resolutions
 
-Source: Stacks Project, Tags 062H and 00LS.
-(blueprint: new-t2-koszul-restriction-test-cycles). -/
+An augmented comparison of quotient resolutions carries compatible Koszul test cycles to each
+other, at the chain level.
+
+## Implementation details
+
+The Koszul augmentation of `g` is lifted into `P`, extended to `B` and transported along the
+scalar-extension isomorphism of Koszul complexes, which preserves standard wedges since
+`φ(g_j) = g'_j`. All quotient-tensored Koszul differentials vanish, so standard top wedges are
+cycles. No acyclicity of the Koszul complexes or flatness of `φ` is used.
+
+## References
+
+* [Stacks, Tags 062H, 00LS, 0623]
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -197,26 +209,7 @@ end
 
 /-- An augmented comparison of quotient resolutions carries compatible Koszul test
 cycles to each other. This is a chain-level statement: it mentions neither Tor
-coordinates nor the normalized exterior-to-Tor comparison.
-Source: Stacks Project, Tag 062H (Koszul scalar extension), Tag 00LS (Koszul
-augmentation lifts), and Tag 0623 (the quotient-tensored Koszul differential).
-(blueprint: new-t2-koszul-restriction-test-cycles).
-
-Proof: Lift the Koszul augmentation of g into P. Extend this lift to B and compose
-with the adjoint of a. The standard scalar-extension isomorphism from the Koszul
-complex on g to that on g' sends each standard exterior basis vector to the same
-basis vector: the contraction formula commutes with φ because φ(g_j)=g'_j.
-Transport the extended lift by the inverse of this isomorphism to obtain aB.
-In degree zero both augmentations send the empty wedge to 1; the ring map ψ
-preserves 1, so ha proves its displayed augmentation equation. All
-quotient-tensored Koszul differentials vanish, since their coefficients lie
-in I or J. Thus the standard top wedges tensored with 1 have cycle preimages
-zA,zB. Tensor compatibility hk identifies the images of these two wedges
-under the resolution lifts: ψ preserves 1 and scalar extension preserves
-standard wedges. Naturality of the cycles inclusion gives exactly the last
-equation. No acyclicity of either Koszul complex or flatness of φ is used.
-For n=0 use the empty wedge and the degree-zero augmentation. For zero quotient
-rings the tensor complexes vanish, and the cycle representatives are zero. -/
+coordinates nor the normalized exterior-to-Tor comparison. -/
 theorem exists_koszul_restriction_test_cycles
     (A B : Type u) [CommRing A] [CommRing B] (I : Ideal A) (J : Ideal B)
     (φ : A →+* B) (n : ℕ) (g : Fin n → I) (g' : Fin n → J)

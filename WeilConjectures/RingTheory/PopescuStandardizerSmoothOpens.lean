@@ -13,8 +13,17 @@ import WeilConjectures.RingTheory.SingularIdealLocalizationSmooth
 /-!
 # Smooth opens of the polynomial standardizer
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 07FJ,
-items item-standardizer and item-elkik.
+The principal opens of the standardizer `B = A[X_i, Z_il]/(X_i^(2N) - ∑_l Z_il a_l)` at the
+singular-ideal generators `a_j` are smooth over the polynomial parameter ring.
+
+## Implementation details
+
+Smoothness is proved via the square-zero lifting criterion, correcting one auxiliary generator in
+each relation. The cases `s = 0` and `d = 0` are included, and no ring is assumed nontrivial.
+
+## References
+
+* [Stacks, Tag 07FJ] (proof)
 -/
 
 @[expose] public section
@@ -51,28 +60,7 @@ private theorem lift_presentation
     simpa only [ev, P.algebraMap_apply, MvPolynomial.aeval_X, MvPolynomial.eval₂Hom_X'] using hh
 
 /-- The coefficient opens of the standardizer are smooth over the
-polynomial parameter ring.
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 07FJ,
-items item-standardizer and item-elkik.
-(blueprint: lem-weil-pbc-popescu-standardizer-smooth-opens).
-
-Proof: The coefficient localization A[1/a_j] is smooth over k because a_j
-belongs to the singular ideal. B[1/a_j] is finitely presented over S: B is of
-finite type over k, hence over S, the polynomial ring S is Noetherian, and a
-principal localization preserves finite presentation. Use the square-zero
-lifting criterion for formal smoothness. Given B[1/a_j] → T/I over S with
-I²=0, extend its coefficient map to A[1/a_j] and lift that map over k to T.
-This gives a lifted coefficient map α with α(a_j) invertible. Choose arbitrary
-lifts z_il of the given auxiliary generators. In each relation, the discrepancy
-ε_i = X_i^(2N) - sum_l z_il α(a_l) maps to zero in T/I. Replace z_ij by
-z_ij + ε_i α(a_j)^(-1), keeping all other generators unchanged. All relations
-now hold exactly, and every corrected generator has the prescribed reduction.
-The universal property of the presentation gives B → T. This map respects S
-because its x_i-values were fixed by S, and extends to B[1/a_j] because α(a_j)
-is a unit. Checking coefficients and generators shows that its reduction is
-the given map. Thus B[1/a_j] is formally smooth and finitely presented over S.
-If s=0 there is no coefficient-open assertion; d=0 gives the same proof with
-no auxiliary relations to correct. No ring is assumed nontrivial. -/
+polynomial parameter ring. -/
 theorem popescu_standardizer_coefficient_smooth
     {k : Type u} {A : Type v} {B : Type t}
     [Field k] [CommRing A] [CommRing B] [Algebra k A] [Algebra k B]

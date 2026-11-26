@@ -16,8 +16,23 @@ import WeilConjectures.RingTheory.EtaleResidueTriplesFiltered
 /-!
 # Comparing two colimit presentations of strict henselization
 
-Source: Stacks Project, Algebra, Tag 04GW, the pointed-algebra description of triples.
-(blueprint: lem-sc-strict-henselization-triples-presentation).
+A strict henselization of a local ring `R`, defined as a colimit of pointed étale
+`R`-algebras, is also a colimit of the étale residue triples at the closed point of `Spec R`,
+with the same structural map from `R`.
+
+## Implementation details
+
+A residue triple `(B, q, φ)` gives the étale `R`-algebra `B` pointed in `K` by evaluation at
+`q` followed by the residue embedding; conversely, a pointed étale algebra `B → K` determines
+its prime and residue embedding via the induced morphism `Spec K → Spec B`. This is an
+equivalence of index categories which leaves the underlying rings unchanged; it works for
+arbitrary `p` and any field `K`. Forgetting the algebra structure preserves the transported
+colimit, since the triples category is filtered, hence connected, and a ring cocone acquires a
+unique compatible `R`-algebra structure from the common maps out of `R`.
+
+## References
+
+* [Stacks, Tag 04GW]
 -/
 
 @[expose] public section
@@ -229,22 +244,7 @@ private lemma triplesPointedEssSurj
   ext x
   exact (congrArg (fun g : B ⟶ CommRingCat.of K ↦ g.hom x) hφ).symm
 
-/-- Residue triples identify the diagram of pointed etale algebras, including its base maps.
-Source: Stacks Project, Algebra, Tag 04GW, proof of Lemma 10.155.11.
-
-Proof: Equip the ring B of a triple with the R-algebra structure given by its map alpha.
-The pointing B to K is evaluation followed by the residue embedding. The hypothesis hchi
-and the triple compatibility say it is an R-algebra map. The affine criterion for etaleness
-identifies the scheme and algebra etale conditions. Send a morphism to the same ring map;
-the equations in the induced under-over category say precisely that it commutes with R
-and K. This identifies each hom set. Conversely an etale R-algebra pointed in K gives a
-morphism Spec K to Spec B. The field-point/residue-field correspondence supplies its
-prime q and residue embedding. Compatibility on R forces q to lie above p, so it is a
-triple. This yields essential surjectivity and hence an equivalence. The underlying ring
-is unchanged in this construction; identity maps give the natural diagram isomorphism,
-and its compatibility with alpha is the definition of the induced R-algebra structure.
-The argument applies to arbitrary p and arbitrary field K; it uses no closure property.
-(blueprint: lem-sc-strict-henselization-triples-presentation). -/
+/-- Residue triples identify the diagram of pointed etale algebras, including its base maps. -/
 private theorem etaleResidueTriples_pointed_comparison
     (R K : Type u) [CommRing R] [Field K] [Algebra R K]
     (p : Spec (CommRingCat.of R))
@@ -279,28 +279,7 @@ private theorem etaleResidueTriples_pointed_comparison
 
 
 /-- A strict henselization specified using pointed etale algebras is also a colimit
-of residue triples, with exactly the original structural map from the base ring.
-Source: Stacks Project, Tag 04GW, the identification of triples with pointed algebras.
-
-Proof: Take the point `p` corresponding to the maximal ideal of `R`. Its scheme
-residue field is canonically isomorphic over `R` to `R/m`. Transport the given algebra
-structure and separable-closure structure on `K` along this isomorphism.
-Send a residue triple to its etale `R`-algebra `B` with map to `K` given by evaluation
-at its prime followed by its residue embedding. The compatibility equation makes
-this an `R`-algebra map. Morphisms are precisely the algebra maps commuting with
-these maps to `K`, so this functor is fully faithful. Conversely, for a pointed
-etale algebra `B → K`, use `SpecToEquivOfField` on the induced morphism `Spec K → Spec B`
-to obtain its prime and residue embedding. Apply `Spec.map` to the compatibility
-equation and evaluate at the unique point of `Spec K` to show the prime lies over `p`.
-The identity on `B` gives an isomorphism back to the pointed algebra. Thus the functor
-is an equivalence, identifying the ring diagrams and their structural maps from `R`.
-Transport the universal cocone in `hC` along this equivalence and the given
-isomorphism of its vertex with `C`. Forgetting the algebra structure preserves
-this colimit: the triples category is filtered, hence nonempty and connected;
-a ring cocone acquires a unique compatible `R`-algebra structure from the common
-maps out of `R`. Thus the transported cocone is a ring colimit with vertex `C`.
-Every leg is an `R`-algebra map, giving the final displayed compatibility.
-(blueprint: lem-sc-strict-henselization-triples-presentation). -/
+of residue triples, with exactly the original structural map from the base ring. -/
 theorem IsStrictHenselization.triples_presentation
     (R K C : Type u) [CommRing R] [IsLocalRing R] [Field K]
     [Algebra (IsLocalRing.ResidueField R) K] [IsSepClosure (IsLocalRing.ResidueField R) K]

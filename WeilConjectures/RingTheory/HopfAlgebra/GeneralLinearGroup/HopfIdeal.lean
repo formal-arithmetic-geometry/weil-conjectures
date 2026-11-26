@@ -102,28 +102,6 @@ as `g h g⁻¹` or `g h g⁻¹ h⁻¹`, is then evaluated on the universal pair 
 The constructions on `(A ⧸ I) ⊗[k] (A ⧸ J)` are stated for an arbitrary `k`-algebra `A` and only
 then specialised to the coordinate ring of `GL_n`: elaborating them directly at the localization
 `CoordinateRing n k` makes instance unification time out.
-
-## Blueprint
-
-- `det-d-geometry`: matrix algebraic groups as reduced closed subgroups of `GL(V)`, their identity
-  component and centre.
-- `def-wf-algebraic-components`: the identity component `identityComponent`, with its `k`-points
-  `identityComponentSubgroup`.
-- `lemma-normality-geometric-monodromy--1`: the Zariski closure of a subgroup of `GL n k` is a
-closed
-  subgroup.
-- `lemma-restriction-normal-subgroup`: the Zariski closure of a subgroup of `GL n k` is an algebraic
-group, and
-  closure preserves normalizing and commutator inclusions.
-- `proposition-central-element-arithmetic-monodromy-group--2`: closed stabilizers and density.
-- `lemma-determinant-weight-from-central-scalar--1`: the determinant character of a subquotient has
-finite image on the closure of a
-  subgroup on which it has finite image.
-- `lemma-connected-components-images-homomorphisms`: the identity component is cut out by a Hopf
-ideal.
-- `lemma-connected-components-images-homomorphisms--3` (clause (1)),
-`lemma-connected-components-images-homomorphisms--3`: connected
-  matrix groups are irreducible; equal dimension forces equality.
 -/
 
 @[expose] public section
@@ -173,8 +151,7 @@ theorem evalAlgHom_eq_zero_of_mem_inv (I : Ideal (CoordinateRing n k)) [I.IsHopf
   exact hg _ (Ideal.IsHopfIdeal.antipode_mem (R := k) ha)
 
 /-- The `R`-points of the closed subgroup scheme `V(I)` of `GL_n` cut out by a Hopf ideal `I`: the
-invertible matrices over `R` on which every equation in `I` vanishes.
-(blueprint: `det-d-geometry`) -/
+invertible matrices over `R` on which every equation in `I` vanishes. -/
 noncomputable def zeroLocus (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] (R : Type*)
     [CommRing R] [Algebra k R] : Subgroup (GL n R) where
   carrier := {g | ∀ a ∈ I, evalAlgHom g a = 0}
@@ -221,7 +198,7 @@ theorem zeroLocus.coe_map_apply {I : Ideal (CoordinateRing n k)} [I.IsHopfIdeal 
   rfl
 
 /-- The ideal of equations vanishing on a set `S` of invertible matrices over `k`. For a subgroup
-`S`, it cuts out the Zariski closure of `S`. (blueprint: `lemma-restriction-normal-subgroup`) -/
+`S`, it cuts out the Zariski closure of `S`. -/
 noncomputable def vanishingIdeal (S : Set (GL n k)) : Ideal (CoordinateRing n k) :=
   ⨅ g ∈ S, RingHom.ker (evalAlgHom (k := k) g)
 
@@ -465,8 +442,7 @@ theorem evalAlgHom_map_liftQuotient_eq_zero {A : Type*} [CommRing A] [Algebra k 
 equations vanishing on the subgroup is a Hopf ideal.
 
 For the comultiplication, the image of `Δ(a)` in `k[Γ̄] ⊗ k[Γ̄]` vanishes at every pair of points
-`(γ, δ)` of `Γ × Γ`, where it takes the value `a(γδ) = 0`; by schematic density it is zero.
-(blueprint: `lemma-normality-geometric-monodromy--1`, `lemma-restriction-normal-subgroup`) -/
+`(γ, δ)` of `Γ × Γ`, where it takes the value `a(γδ) = 0`; by schematic density it is zero. -/
 instance instIsHopfIdealVanishingIdeal (Γ : Subgroup (GL n k)) :
     (vanishingIdeal (Γ : Set (GL n k))).IsHopfIdeal k where
   counit_eq_zero a ha := mem_vanishingIdeal.1 ha 1 Γ.one_mem
@@ -532,8 +508,7 @@ normalizes the Zariski closure of `Δ`, on `R`-points for every `k`-algebra `R`.
 The conjugate `x y x⁻¹` of the universal pair of points `(x, y)` of `Γ̄ × Δ̄` satisfies the
 equations of `Δ̄`, because its specializations `γ δ γ⁻¹` at the points of `Γ × Δ` lie in `Δ` and
 `Γ × Δ` is schematically dense in `Γ̄ × Δ̄` (`evalAlgHom_map_liftQuotient_eq_zero`); specializing
-along `Algebra.TensorProduct.liftQuotient` gives the statement on `R`-points.
-(blueprint: `lemma-restriction-normal-subgroup`) -/
+along `Algebra.TensorProduct.liftQuotient` gives the statement on `R`-points. -/
 theorem zeroLocus_vanishingIdeal_le_normalizer {Γ Δ : Subgroup (GL n k)}
     (hΓ : Γ ≤ Subgroup.normalizer (Δ : Set (GL n k)))
     (R : Type*) [CommRing R] [Algebra k R] :
@@ -565,8 +540,7 @@ the Zariski closure of `Γ` lie in the Zariski closure of `Δ`, on `R`-points fo
 `R`.
 
 As in `zeroLocus_vanishingIdeal_le_normalizer`, by the schematic density of `Γ × Γ` in
-`Γ̄ × Γ̄`, applied to the commutator `⁅x, y⁆` of the universal pair of points `(x, y)`.
-(blueprint: `lemma-restriction-normal-subgroup`) -/
+`Γ̄ × Γ̄`, applied to the commutator `⁅x, y⁆` of the universal pair of points `(x, y)`. -/
 theorem commutator_zeroLocus_vanishingIdeal_le {Γ Δ : Subgroup (GL n k)} (hΓ : ⁅Γ, Γ⁆ ≤ Δ)
     (R : Type*) [CommRing R] [Algebra k R] :
     ⁅zeroLocus (vanishingIdeal (Γ : Set (GL n k))) R,
@@ -603,9 +577,7 @@ theorem evalAlgHom_linearFormEquation (φ : Module.Dual k (n → k)) (u : n → 
 
 /-- **Closed stabilizers and density.** A subspace `S ⊆ k^n` stable under a subgroup `Γ` of
 `GL n k` is stable under its Zariski closure: the stabilizer of `S` is cut out by the linear
-equations `φ(g x) = 0`, for `x ∈ S` and `φ` in the annihilator of `S`.
-(blueprint: `proposition-central-element-arithmetic-monodromy-group--2`,
-`lemma-restriction-normal-subgroup`) -/
+equations `φ(g x) = 0`, for `x ∈ S` and `φ` in the annihilator of `S`. -/
 theorem mulVec_mem_of_mem_zeroLocus_vanishingIdeal {Γ : Subgroup (GL n k)}
     {S : Submodule k (n → k)} (hΓ : ∀ g ∈ Γ, ∀ x ∈ S, (g : Matrix n n k) *ᵥ x ∈ S) {g : GL n k}
     (hg : g ∈ zeroLocus (vanishingIdeal (Γ : Set (GL n k))) k) {x : n → k} (hx : x ∈ S) :
@@ -617,8 +589,7 @@ theorem mulVec_mem_of_mem_zeroLocus_vanishingIdeal {Γ : Subgroup (GL n k)}
   exact (Submodule.mem_dualAnnihilator φ).1 hφ _ (hΓ γ hγ x hx)
 
 /-- A subspace `U ⊆ k^n` is stable under a subgroup `Γ` of `GL n k` if and only if it is stable
-under its Zariski closure. (blueprint:
-`proposition-central-element-arithmetic-monodromy-group--2`) -/
+under its Zariski closure. -/
 theorem forall_mulVec_mem_iff_forall_mem_zeroLocus_vanishingIdeal {Γ : Subgroup (GL n k)}
     {U : Submodule k (n → k)} :
     (∀ g ∈ Γ, ∀ u ∈ U, (g : Matrix n n k) *ᵥ u ∈ U) ↔
@@ -631,8 +602,7 @@ theorem forall_mulVec_mem_iff_forall_mem_zeroLocus_vanishingIdeal {Γ : Subgroup
 `g` stabilizing `U ≤ S` is a polynomial function of the entries of `g`: there is one `p` in the
 coordinate ring of `GL_n` with `p(g) = det f` for every `g` and every endomorphism `f` of `S ⧸ U`
 induced by `g`.  In a basis `(mk sⱼ)` of `S ⧸ U`, with coordinate forms extended to linear forms
-`νᵢ` on `k^n`, the matrix of `f` is `(νᵢ(g sⱼ))ᵢⱼ`, whose entries are linear in `g`.
-(blueprint: `lemma-determinant-weight-from-central-scalar--1`) -/
+`νᵢ` on `k^n`, the matrix of `f` is `(νᵢ(g sⱼ))ᵢⱼ`, whose entries are linear in `g`. -/
 theorem exists_evalAlgHom_eq_det_of_mk_eq (S U : Submodule k (n → k)) :
     ∃ p : CoordinateRing n k, ∀ (g : GL n k) (f : Module.End k (S ⧸ U.comap S.subtype)),
       (∀ x : S, ∃ y : S, (y : n → k) = (g : Matrix n n k) *ᵥ x ∧
@@ -654,7 +624,7 @@ theorem exists_evalAlgHom_eq_det_of_mk_eq (S U : Submodule k (n → k)) :
 
 /-- A polynomial function `p` on `GL_n` whose values on a subgroup `Γ` lie in a finite set `A`
 has its values in `A` on the whole Zariski closure of `Γ`: the product `∏_{a ∈ A} (p - a)`
-vanishes on `Γ`. (blueprint: `lemma-determinant-weight-from-central-scalar--1`) -/
+vanishes on `Γ`. -/
 theorem evalAlgHom_mem_of_mem_zeroLocus_vanishingIdeal {Γ : Subgroup (GL n k)}
     (p : CoordinateRing n k) {A : Set k} (hA : A.Finite) (hΓ : ∀ γ ∈ Γ, evalAlgHom γ p ∈ A)
     {g : GL n k} (hg : g ∈ zeroLocus (vanishingIdeal (Γ : Set (GL n k))) k) :
@@ -691,14 +661,13 @@ theorem vanishingIdeal_setOf_le_radical [IsAlgClosed k] (J : Ideal (CoordinateRi
   exact mem_vanishingIdeal.1 ha g fun b hb ↦ hJm hb
 
 /-- The Nullstellensatz for closed subgroup schemes of `GL_n`: the ideal of the `k`-points of
-`V(I)` is the radical of `I`. (blueprint: `det-d-geometry`) -/
+`V(I)` is the radical of `I`. -/
 theorem vanishingIdeal_zeroLocus_eq_radical [IsAlgClosed k] (I : Ideal (CoordinateRing n k))
     [I.IsHopfIdeal k] : vanishingIdeal (zeroLocus I k : Set (GL n k)) = I.radical :=
   le_antisymm (vanishingIdeal_setOf_le_radical I)
     ((isRadical_vanishingIdeal _).radical_le_iff.2 (le_vanishingIdeal_zeroLocus I))
 
-/-- Over an algebraically closed field, a radical Hopf ideal is the ideal of its `k`-points.
-(blueprint: `det-d-geometry`) -/
+/-- Over an algebraically closed field, a radical Hopf ideal is the ideal of its `k`-points. -/
 theorem vanishingIdeal_zeroLocus_le_of_isRadical [IsAlgClosed k] (I : Ideal (CoordinateRing n k))
     [I.IsHopfIdeal k] (hI : I.IsRadical) : vanishingIdeal (zeroLocus I k : Set (GL n k)) ≤ I :=
   ((vanishingIdeal_zeroLocus_eq_radical I).trans hI.radical).le
@@ -726,8 +695,7 @@ theorem toPrimeSpectrum_injective :
 
 /-- The ideal of the reduced identity component `G°` of the closed subscheme `V(I)` of `GL_n`: the
 functions vanishing on the connected component of `V(I)` containing the identity matrix. The set
-`π₀(G)` of connected components is Mathlib's `ConnectedComponents` of the underlying space.
-(blueprint: `det-d-geometry`, `def-wf-algebraic-components`) -/
+`π₀(G)` of connected components is Mathlib's `ConnectedComponents` of the underlying space. -/
 noncomputable def identityComponent (I : Ideal (CoordinateRing n k)) :
     Ideal (CoordinateRing n k) :=
   PrimeSpectrum.vanishingIdeal
@@ -958,8 +926,7 @@ section IdentityComponent
 
 variable (I) in
 /-- The `k`-points of the identity component `G°` of `G = V(I)`, as a subgroup of `GL n k`: the
-matrices whose point lies in the connected component of `V(I)` containing the identity.
-(blueprint: `def-wf-algebraic-components`) -/
+matrices whose point lies in the connected component of `V(I)` containing the identity. -/
 noncomputable def identityComponentSubgroup : Subgroup (GL n k) where
   carrier := {g | toPrimeSpectrum g ∈ connectedComponentIn
     (PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k))) (toPrimeSpectrum 1)}
@@ -997,7 +964,7 @@ theorem mem_identityComponentSubgroup_iff {g : GL n k} :
 
 /-- The identity component of an algebraic group over an algebraically closed field is a closed
 subgroup scheme: its ideal is radical, and its `k`-points form the subgroup
-`identityComponentSubgroup I`. (blueprint: `lemma-connected-components-images-homomorphisms`) -/
+`identityComponentSubgroup I`. -/
 instance [IsAlgClosed k] (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] :
     (identityComponent I).IsHopfIdeal k :=
   isHopfIdeal_of_isRadical (isRadical_identityComponent I) (identityComponentSubgroup I)
@@ -1021,7 +988,7 @@ theorem one_mem_zeroLocus_identityComponent [IsAlgClosed k] (I : Ideal (Coordina
 
 /-- The matrices of `G(k)` commuting with all of `G(k)`, for `G = V(I)`: the `k`-points of the
 centre `Z(G)` when `k` is algebraically closed, and in general the subgroup `Z(G)(k) ⊆ G(k)` of
-`k`-points of the centre that are central in `G(k)`. (blueprint: `det-d-geometry`) -/
+`k`-points of the centre that are central in `G(k)`. -/
 noncomputable def centerPoints (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] :
     Subgroup (GL n k) :=
   zeroLocus I k ⊓ Subgroup.centralizer (zeroLocus I k : Set (GL n k))
@@ -1035,8 +1002,7 @@ theorem mem_centerPoints_iff (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] 
 `k` algebraically closed: the Zariski closure of the matrices of `G(k)` commuting with all of
 `G(k)`. Over an algebraically closed field the `k`-points are dense in the reduced centre, so this
 is its ideal; over a general field the closure of `centerPoints I` can be strictly smaller (for
-`k = 𝔽_q` and `G = GL_n` it is finite), which is why `k` is assumed algebraically closed.
-(blueprint: `det-d-geometry`) -/
+`k = 𝔽_q` and `G = GL_n` it is finite), which is why `k` is assumed algebraically closed. -/
 noncomputable def center [IsAlgClosed k] (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] :
     Ideal (CoordinateRing n k) :=
   vanishingIdeal (centerPoints I : Set (GL n k))
@@ -1051,7 +1017,7 @@ theorem le_center [IsAlgClosed k] (I : Ideal (CoordinateRing n k)) [I.IsHopfIdea
   (le_vanishingIdeal_zeroLocus I).trans (vanishingIdeal_anti fun _ hg ↦ hg.1)
 
 /-- The `k`-points of the centre of `G = V(I)` are the matrices of `G(k)` commuting with all of
-`G(k)`. (blueprint: `det-d-geometry`) -/
+`G(k)`. -/
 theorem mem_zeroLocus_center_iff [IsAlgClosed k] (I : Ideal (CoordinateRing n k))
     [I.IsHopfIdeal k] {g : GL n k} :
     g ∈ zeroLocus (center I) k ↔ g ∈ zeroLocus I k ∧ ∀ h ∈ zeroLocus I k, g * h = h * g := by
@@ -1081,8 +1047,7 @@ theorem mem_zeroLocus_center_iff [IsAlgClosed k] (I : Ideal (CoordinateRing n k)
       ⟨hg, Subgroup.mem_centralizer_iff.2 fun h hh ↦ (hc h hh).symm⟩
 
 /-- An element commuting with a subgroup `Γ` of `GL n k` commutes with the `k`-points of its
-Zariski closure: the commutator equations are closed. (blueprint:
-`lemma-restriction-normal-subgroup`) -/
+Zariski closure: the commutator equations are closed. -/
 theorem commute_of_mem_zeroLocus_vanishingIdeal {Γ : Subgroup (GL n k)} {z : GL n k}
     (hz : ∀ g ∈ Γ, z * g = g * z) {g : GL n k}
     (hg : g ∈ zeroLocus (vanishingIdeal (Γ : Set (GL n k))) k) : z * g = g * z := by
@@ -1096,8 +1061,7 @@ open scoped commutatorElement in
 /-- Over an algebraically closed field, the points of the reduced centre `Z(G)` of a reduced
 `G = V(I)` commute with the points of `G`, with values in any `k`-algebra `R`: the commutator of
 the universal pair of points of `Z(G) × G` is trivial at every pair of `k`-points, hence trivial by
-the schematic density of the `k`-points (`evalAlgHom_map_liftQuotient_eq_zero`).
-(blueprint: `lemma-stable-subspaces-center`) -/
+the schematic density of the `k`-points (`evalAlgHom_map_liftQuotient_eq_zero`). -/
 theorem commute_of_mem_zeroLocus_center [IsAlgClosed k] {I : Ideal (CoordinateRing n k)}
     [I.IsHopfIdeal k] (hI : I.IsRadical) {R : Type*} [CommRing R] [Algebra k R] {g h : GL n R}
     (hg : g ∈ zeroLocus (center I) R) (hh : h ∈ zeroLocus I R) : Commute g h := by
@@ -1131,8 +1095,7 @@ variable {m : Type*} [Fintype m] [DecidableEq m]
 
 /-- A homomorphism `r : GL n k →* GL m k` given by polynomials (an algebra map `φ` of coordinate
 rings with `evalAlgHom (r g) = evalAlgHom g ∘ φ`) maps the `k`-points of the Zariski closure of a
-subgroup `Γ` into the Zariski closure of any subgroup `Γ'` containing `r(Γ)`.
-(blueprint: `lemma-restriction-normal-subgroup`) -/
+subgroup `Γ` into the Zariski closure of any subgroup `Γ'` containing `r(Γ)`. -/
 theorem map_mem_zeroLocus_vanishingIdeal (r : GL n k →* GL m k)
     (φ : CoordinateRing m k →ₐ[k] CoordinateRing n k)
     (hφ : ∀ g : GL n k, (evalAlgHom g).comp φ = evalAlgHom (r g)) {Γ : Subgroup (GL n k)}
@@ -1201,7 +1164,7 @@ closed field, the ideal of a connected closed subgroup `V(I)` of `GL_n` is prime
 By Cartier's lemma the functions vanishing near a point `c` of `V(I)` form a prime ideal, contained
 in every prime of `V(I)` through `c`: a single irreducible component passes through each point,
 so the irreducible components of `V(I)` are pairwise disjoint, and the connected `V(I)` has only
-one. (blueprint: `lemma-connected-components-images-homomorphisms--3`, clause (1)) -/
+one. -/
 theorem IsConnected.isPrime [IsAlgClosed k] [CharZero k] {I : Ideal (CoordinateRing n k)}
     [I.IsHopfIdeal k] (hconn : IsConnected I) : I.IsPrime := by
   have := Algebra.FiniteType.isNoetherianRing k (CoordinateRing n k)
@@ -1265,8 +1228,7 @@ theorem IsConnected.isPrime [IsAlgClosed k] [CharZero k] {I : Ideal (CoordinateR
   exact hP
 
 /-- **A closed subgroup of full dimension is everything**: if `V(I)` is irreducible and
-`V(J) ⊆ V(I)` has the same dimension, then `J = I`. (blueprint:
-`lemma-connected-components-images-homomorphisms--3`)
+`V(J) ⊆ V(I)` has the same dimension, then `J = I`.
 -/
 theorem eq_of_le_of_ringKrullDim_eq (I : Ideal (CoordinateRing n k)) [I.IsPrime]
     {J : Ideal (CoordinateRing n k)} (hIJ : I ≤ J)

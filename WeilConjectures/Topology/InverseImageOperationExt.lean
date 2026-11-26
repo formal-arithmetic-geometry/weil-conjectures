@@ -19,6 +19,17 @@ import Mathlib.CategoryTheory.Sites.LocallySurjective
 
 The local representatives used in Stacks Tags 008X and 0089 determine operations
 commuting with restriction, independently of any module structure.
+
+## Implementation details
+
+Near any point, each input section comes from a section of the presheaf inverse image, which is
+represented on a neighbourhood of the image point. On a smaller open both inputs are thus
+restrictions of unit images, and separatedness of the output sheaf concludes. No additivity or
+scalar action is assumed.
+
+## References
+
+* [Stacks Project, Tags 008X, 007X and 0078](https://stacks.math.columbia.edu/tag/008X)
 -/
 
 @[expose] public section
@@ -45,21 +56,7 @@ local notation "η" A =>
     (Opens.grothendieckTopology Y) (Opens.grothendieckTopology X)).unit
 
 /-- Two binary operations with sheaf-valued output on inverse-image sections agree if
-both commute with restriction and agree on pairs of unit images.
-Source: Stacks Tags 008X (inverse image as sheafified presheaf inverse image), 007X
-(local representatives in sheafification), and 0078 (separatedness of a sheaf).
-Proof: near any point of an open, each of the two input sections comes from a
-section of the presheaf inverse image, since sheafification is locally surjective.
-The filtered colimit defining that presheaf is represented by a section on a
-neighbourhood of the image point. Shrink the open around the original point and
-intersect the two image neighbourhoods; restrict both representatives to this
-intersection. The inputs on the smaller open are restrictions of unit images
-from this single neighbourhood. The assumed unit equality, followed by the two
-restriction laws, gives equality on this smaller open. These smaller opens cover
-the original open, so separatedness of the output sheaf gives equality there.
-On the empty open the output sheaf has exactly one section, so equality also holds.
-No additivity or scalar action is assumed.
-(blueprint: lem-pc-inverse-image-operation-ext). -/
+both commute with restriction and agree on pairs of unit images. -/
 theorem inverseImageOperation_ext
     (R : CategoryTheory.Sheaf (Opens.grothendieckTopology Y) CommRingCat.{u})
     (F : CategoryTheory.Sheaf (Opens.grothendieckTopology Y) AddCommGrpCat.{u})

@@ -9,7 +9,12 @@ public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRinge
 import all WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForgetTensorDescent
 import all WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForgetTensorChainAssociativity
 
-/-! # The normalized ringed restriction comparison on complexes -/
+/-! # The normalized ringed restriction comparison on complexes
+
+## References
+
+* Stacks 06YN and 0FPT.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -154,9 +159,7 @@ set_option maxHeartbeats 1200000 in
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 -- The two independently chosen site tensors occur in the same field.
-/-- The normalized restriction tensorator and its associativity equation.
-Source: Stacks 06YN and 0FPT
-(blueprint: new-sf-native-ringed-forget-tensor-chain-comparison). -/
+/-- The normalized restriction tensorator and its associativity equation. -/
 structure NativeRingedForgetTensorChainComparison where
   tensor : MonoidalCategory.tensor
       (CochainComplex (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R) ℤ) ⋙
@@ -184,16 +187,7 @@ structure NativeRingedForgetTensorChainComparison where
 -- The independently chosen site tensors require large definitional equalities.
 -- Elaborate the two site tensors through their comparison APIs.
 /-- Restriction has the comparison obtained by summing its underived tensorators.
-Its summand equations determine it uniquely.
-Source: Stacks 06YN and 0FPT
-(blueprint: new-sf-native-ringed-forget-tensor-chain-comparison).
-
-Proof: curry the underived tensorator and apply the generic total-complex
-comparison. Convert between the curried tensor total and the monoidal tensor by
-its identity-component natural isomorphism. The generic summand formula gives
-the stated normalization. Cancel the underived isomorphisms to put their
-associativity in inverse form; the generic triple-summand associativity theorem
-then gives associativity on complexes. -/
+Its summand equations determine it uniquely. -/
 theorem native_ringed_forget_tensor_chain_comparison :
     Nonempty (NativeRingedForgetTensorChainComparison b) := by
   let B := RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R

@@ -10,7 +10,14 @@ public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.F
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Finite.FiniteRingOrdinaryPushCoordinates
 import all WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Finite.FiniteCoordinateCalculus
 
-/-! # Proved finite coefficient coordinate calculus -/
+/-! # Proved finite coefficient coordinate calculus
+
+The ordinary finite pull compositor and its preservation by the finite pullback presentation.
+
+## References
+
+* [Stacks, Tag 03D6]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -31,7 +38,6 @@ attribute [local implicit_reducible] Equivalence.mapDerivedCategory
 set_option backward.defeqAttrib.useBackward true
 
 /-- The ordinary pull compositor determined by the unique normalized direct-image compositor.
-Source: Stacks 03D6 (blueprint: lem-sf-finite-ring-pull-compositor).
 The adjunction conjugation equivalence determines it uniquely. -/
 def finiteOrdinaryPullComp
     (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra (Padic l) E]
@@ -57,12 +63,7 @@ def finiteOrdinaryPullComp
 
 attribute [local irreducible] finiteOrdinaryPullComp
 
-/-- The finite pullback presentation preserves the ordinary pull compositor.
-Source: Stacks 03D6 (blueprint: lem-sf-finite-ring-pull-compositor).
-Proof: apply the generic uniqueness compositor transport identity to the three
-finiteDirectImage_eq equalities. Substitute finiteOrdinaryPushComposition and
-unfold the named inverse conjugate. This identifies the specified left-adjoint
-uniqueness comparison with the composite of the two factor comparisons. -/
+/-- The finite pullback presentation preserves the ordinary pull compositor. -/
 theorem finite_pull_comp_ordinary
     (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ)

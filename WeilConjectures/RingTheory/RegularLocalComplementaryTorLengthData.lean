@@ -17,9 +17,22 @@ import Mathlib.LinearAlgebra.TensorProduct.Quotient
 import Mathlib.RingTheory.SimpleModule.Basic
 import Mathlib.RingTheory.TensorProduct.Quotient
 
-/-! Auxiliary Tor and length data for complementary regular local quotients.
-Source: Stacks Project, `intersection.tex`, Tag 0B1I.
-(blueprint: new-d3-regular-local-complementary-tor-length-data)
+/-!
+# Tor and length data for complementary regular local quotients
+
+Given a finite free Koszul resolution of `A/I` whose tensor with `A/J` has homology concentrated
+in degree zero, the higher Tor of `A/I` and `A/J` vanishes, `Tor_0` is the residue field, and
+all lengths are finite with alternating sum `1`.
+
+## Implementation details
+
+`(K, ε)` is a projective resolution of `A/I`, so `Tor_i(A/I, A/J)` is the homology of
+`K ⊗ A/J`. In degree zero, `fromLeftDerivedZero` is an isomorphism and multiplication identifies
+`A/I ⊗ A/J` with `A/(I ⊔ J) = A/m`. The residue field has length one as an `A`-module.
+
+## References
+
+* [Stacks, Tag 0B1I]
 -/
 
 @[expose] public section
@@ -35,25 +48,7 @@ namespace RingTheory
 
 /-- The Tor and length conclusions follow from a finite free Koszul resolution
 whose tensor homology is concentrated in degree zero. This statement isolates
-that derived-category calculation from the explicit Koszul construction.
-Source: Stacks Project, `intersection.tex`, Tag 0B1I.
-(blueprint: new-d3-regular-local-complementary-tor-length-data)
-
-Proof:
-1. The Koszul terms are free, hence projective, and `ε` is a quasi-isomorphism to
-   `A/I` in degree zero, so `(K, ε)` is a projective resolution of `A/I`. By
-   `def-weil-pbc-tor-modules`, `Tor'_i(A/I, A/J)` is the `i`-th homology of
-   `K ⊗ A/J`, which is `koszulComplexTensor A r g (A/J)`; `hpositive` gives
-   `Tor'_i = 0` for `i > 0`.
-2. In degree zero, `fromLeftDerivedZero` is an isomorphism because `- ⊗ A/J` is
-   right exact. Multiplication identifies `A/I ⊗ A/J` with `A/(I ⊔ J)`, which is
-   `A/m`, the residue field, by `htrans`; this is `eTensor`, with
-   `(a+I) ⊗ (b+J) ↦ residue (a b)`. Put `eTor = fromLeftDerivedZero ≫ eTensor`.
-3. Every `A`-submodule of the residue field is a subspace over it, since `A`
-   surjects onto it; so its length is one (`def-weil-pbc-module-length`), and the
-   zero modules `Tor'_i`, `i > 0`, have length zero. All lengths are finite and the
-   alternating sum over `0 ≤ i ≤ r` is `1`.
--/
+that derived-category calculation from the explicit Koszul construction. -/
 theorem regularLocal_complementary_tor_length_data
     (A : Type u) [CommRing A] [IsRegularLocalRing A]
     (r : ℕ) (I J : Ideal A) (g : Fin r → A)

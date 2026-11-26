@@ -9,7 +9,13 @@ public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.Locall
 import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeProperScalarMatePresentation
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBaseChange.Compatibility
 
-/-! # Restricted native proper scalar mate -/
+/-! # Restricted native proper scalar mate
+
+## References
+
+* [Bhatt--Scholze, Remark 6.8.15]
+* [Hemo--Richarz--Scholbach, Lemma 5.3(1)]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -52,11 +58,7 @@ private theorem scalarMate_mapIso_of_arrowIso
   infer_instance
 
 /-- The native proper scalar mate becomes invertible after restriction to the
-completed coefficient ring. This is the coefficient-presentation comparison,
-proved by normalized finite quotient projections, localization comparison, and
-bounded proper push comparison described in the parent node.
-Source: Bhatt--Scholze, Remark 6.8.15; Hemo--Richarz--Scholbach, Lemma 5.3(1).
-(blueprint: lem-sf-native-proper-scalar-mate-bounded-below-restricted).
+completed coefficient ring.
 -/
 theorem native_proper_scalar_mate_bounded_below_restricted
     (l : ℕ) [Fact l.Prime] [N : NativeRings.{u} l]

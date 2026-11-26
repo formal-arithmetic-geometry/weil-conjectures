@@ -15,7 +15,18 @@ import Mathlib.LinearAlgebra.TensorProduct.Quotient
 import Mathlib.Algebra.BigOperators.Fin
 
 /-! # Lifts of cycles in a quotient tensor complex
-Source: Stacks Project, Algebra, proof of Tag 00M5 and Remark 00M6.
+A degree-one cycle of `P ⊗ R/I`, for a projective resolution `P`, lifts to an element `y` of
+`P₁` whose differential is a finite sum of ideal multiples.
+
+## Implementation details
+
+Tensoring a module `E` with `R/I` is identified with `E/IE` by
+`TensorProduct.tensorQuotEquivQuotSMul`; no freeness is needed.
+
+## References
+
+* [Stacks, Tag 00M5]
+* [Stacks, Tag 00M6]
 -/
 
 @[expose] public section
@@ -25,21 +36,8 @@ open CategoryTheory CategoryTheory.MonoidalCategory
 open scoped TensorProduct BigOperators
 namespace ModuleCat
 
-/-- Source: Stacks Project, Algebra, proof of Tag 00M5 and Remark 00M6;
-Step 2 of the ideal comparison compatibility argument.
-(blueprint: lem-weil-pbc-quotient-cycle-lift).
-
-Proof in words: tensoring a module E with R/I identifies it with E/IE by
-TensorProduct.tensorQuotEquivQuotSMul. Surjectivity of the quotient map
-therefore lifts iCycles(z) to y ⊗ 1. Since z is a cycle, its differential
-vanishes, so (d y) ⊗ 1 = 0. Under the same quotient identification in degree
-zero, this says d y belongs to I times the whole degree-zero module.
-That submodule consists precisely of finite sums of a • p with a in I:
-its generating products are closed under addition and scalar multiplication,
-and coefficients can be absorbed in a. Index such a finite sum by Fin k.
-This gives the claimed expression. The argument requires no freeness; for
-I = 0 the expression is the empty sum, and for I = R all tensors vanish.
--/
+/-- Every degree-one cycle `z` of `P ⊗ R/I` is of the form `y ⊗ 1` for some `y : P₁`, and
+then `d y = ∑ j, a j • p j` for finitely many `a j ∈ I` and `p j : P₀`. -/
 theorem exists_quotient_cycle_lift
     {R : Type u} [CommRing R] (I : Ideal R) (M : ModuleCat.{u} R)
     (P : ProjectiveResolution M)

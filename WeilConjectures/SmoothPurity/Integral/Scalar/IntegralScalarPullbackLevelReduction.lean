@@ -14,7 +14,10 @@ import all WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowe
 
 /-! # Consecutive reduction for integral scalar pullback comparisons
 
-Source: Stacks 03D2, 03EL, and 07A4; Bhatt--Scholze, Definition 3.4.10.
+## References
+
+* Stacks Project, Tags 03D2, 03EL and 07A4
+* B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, Definition 3.4.10
 -/
 
 @[expose] public section
@@ -96,23 +99,7 @@ private theorem scalar_pullback_hom_ext {X Y : AlgebraicGeometry.Scheme.{u}}
   ext U x
   with_unfolding_all exact congrArg (fun k ↦ k.val.app U x) hl
 
-/-- Normalized scalar pullback level maps commute with a single quotient reduction.
-Source: Stacks, Modules on Sites, Tags 03D2 and 03EL; Cohomology on Sites,
-Tag 07A4; Bhatt--Scholze, Definition 3.4.10.
-(blueprint: lem-pur-integral-scalar-pullback-level-reduction).
-Proof: in each degree use the scalar-extension adjunction to remove the outer
-ordinary scalar tensor. The finite-reduction adjunction and the pullback
-Kan-extension adjunction then reduce equality to generators
-1 tensor f-star(1 tensor x) over the base-changed objects. The hypothesis fixes
-the action of each level map on these generators. The recorded pullback
-transition reduces its input generator, and the quotient tensor transition sends
-1 tensor x to 1 tensor x. Naturality of the scalar tensor unit therefore makes
-both routes equal to f-star(1 tensor (1 tensor x)) at level n. Completed-ring
-linearity extends this to all finite coefficients, since the completed projection
-onto the finite quotient is locally surjective. Kan-extension generation,
-sheafification and separatedness identify the module maps; chain-map and
-natural-transformation extensionality identify the transformations. No flatness
-or nonempty-site assumption occurs. -/
+/-- Normalized scalar pullback level maps commute with a single quotient reduction. -/
 theorem integralScalarPullbackLevelReduction {X Y : AlgebraicGeometry.Scheme.{u}}
     (f : X ⟶ Y)
     (α : ∀ n : ℕ, integralOperationsPullbackLevel l E f n ⋙

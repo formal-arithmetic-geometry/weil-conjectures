@@ -15,8 +15,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjectiv
 Every complex of étale sheaves (for instance of sheaves of `R`-modules) admits a K-injective
 resolution, functorially; two K-injective resolutions of one complex are chain-homotopy
 equivalent; and a bounded-below complex of injective objects is K-injective
-(`AlgebraicGeometry.Etale.kInjectiveResolutions_exist`, blueprint
-`prop-weil-pbc-kinjective-resolutions-exist`).
+(`AlgebraicGeometry.Etale.kInjectiveResolutions_exist`).
 
 The three statements are instances of general facts on Grothendieck abelian categories:
 the functorial K-injective replacement `CochainComplex.kInjectiveResolutionFunctor`, the
@@ -34,7 +33,7 @@ namespace AlgebraicGeometry
 
 namespace Etale
 
-/-- Blueprint `prop-weil-pbc-kinjective-resolutions-exist`: Existence of K-injective resolutions.
+/-- Existence of K-injective resolutions.
 
 Let `A` be a Grothendieck abelian coefficient category (for instance `ModuleCat R`) and `X` a
 scheme. Then, for complexes of `A`-valued étale sheaves on `X`:

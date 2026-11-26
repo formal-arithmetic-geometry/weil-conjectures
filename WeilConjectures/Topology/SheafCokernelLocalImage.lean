@@ -13,8 +13,12 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 /-!
 # Kernel of the sheafified sectionwise quotient
 
-Source: Stacks Project, Sheaves of Modules, Tag 01AH; Sites, Tags 00WB and 00WK
-(blueprint: lem-weil-pbc-sheaf-cokernel-local-image).
+For a morphism of sheaves of modules, the kernel of the map to the sheafified sectionwise
+quotient consists of the sections that are locally in the image.
+
+## References
+
+* [Stacks Project, Tags 01AH, 00WB and 00WK](https://stacks.math.columbia.edu/tag/01AH)
 -/
 
 @[expose] public section
@@ -27,29 +31,8 @@ namespace AlgebraicGeometry.RingedSpace
 
 /-- The kernel of the map to the sheafified sectionwise quotient consists precisely of
 sections locally in the image. The quotient map is epic and annihilates the original map.
-`X` is a ringed space with module sheaves over `moduleRings X`. The presheaf
-`cokernel φ.val` is the sectionwise quotient, since presheaf-module evaluation preserves
-cokernels. The equality `hq` ties `q` to the canonical composite: the quotient projection
-followed by the unit of module sheafification; it is construction data, rather than a
-condition on the original morphism.
-
-Source: Stacks Project, Sheaves of Modules, Tag 01AH; Sites, Tags 00WB and 00WK
-(blueprint: lem-weil-pbc-sheaf-cokernel-local-image).
-
-Proof:
-1. The equality `hq` and the cokernel condition show that `φ ≫ q = 0`, by
-faithfulness of the forgetful functor from module sheaves.
-2. If two morphisms agree after `q`, the sheafification adjunction identifies them
-with presheaf morphisms out of the cokernel. Cancel its epic projection and use
-injectivity of the adjunction's hom equivalence. This proves `Epi q`.
-3. Evaluation preserves finite colimits, so evaluating the cokernel short complex
-on any open gives an exact complex of modules. A section killed by the quotient
-projection therefore has a preimage under the corresponding component of `φ`.
-4. The underlying additive-group sheafification unit is locally injective. If
-`q(s) = 0`, its equalizer sieve for the quotient class of `s` and zero covers the
-open. Naturality and Step 3 give a preimage on a neighborhood of each point.
-Conversely, local preimages and Step 1 make `q(s)` locally zero; separatedness of
-the sheafified quotient makes it zero. This also applies to the empty open. -/
+The presheaf `cokernel φ.val` is the sectionwise quotient, and the equality `hq` ties `q` to
+the canonical composite of the quotient projection with the unit of module sheafification. -/
 theorem sheafified_cokernel_local_image (X : RingedSpace.{u})
     {F G : SheafOfModules.{u} (moduleRings X)} (φ : F ⟶ G)
     (q : G ⟶ (PresheafOfModules.sheafification (𝟙 (moduleRings X).obj)).obj (cokernel φ.val))

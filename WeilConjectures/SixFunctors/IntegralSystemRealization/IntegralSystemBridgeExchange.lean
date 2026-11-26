@@ -10,8 +10,16 @@ import all WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSystemB
 
 /-! # Canonical bridge comparison for a single proper exchange
 
-Source: Stacks 07A7; blueprint fix-prop-coherence, coefficient comparisons of
-adjunction units and counits (blueprint: lem-sf-integral-system-bridge-exchange).
+We show that the canonical bridge intertwines the proper-adjunction exchange for one square.
+
+## Implementation details
+
+The proof is a whole-system mate calculation; no cartesianness, proper base-change
+invertibility, or faithfulness of finite evaluation is used.
+
+## References
+
+* [Stacks, Tag 07A7]
 -/
 
 @[expose] public noncomputable section
@@ -190,19 +198,7 @@ attribute [local irreducible] CanonicalBridge.pull CanonicalBridge.push
 
 -- Fix the category presentation once, rather than repeatedly converting between
 -- the two definitionally equal presentations in a large diagram proof.
-/-- The canonical bridge intertwines the proper-adjunction exchange for one square.
-Source: Stacks 07A7; blueprint fix-prop-coherence, transport of adjunction units and
-counits (blueprint: lem-sf-integral-system-bridge-exchange).
-
-Proof: the section identities for the ordinary bridge and the ordinary compositor
-identify their two composites on every section. Transpose through the ordinary
-pullback adjunctions, then localize the equality on complexes. The recorded
-pullComp_model equations identify the resulting derived square with c.square.
-Conjugating through the direct adjunctions identifies its mate with the intrinsic
-exchange. The bridge push comparison is exactly this adjoint conjugate of bridge
-pull, so the mate's unit and counit squares give the displayed equation. No
-cartesianness, proper base-change invertibility, or faithfulness of finite
-evaluation is used. Identity and empty squares obey the same mate calculation. -/
+/-- The canonical bridge intertwines the proper-adjunction exchange for one square. -/
 theorem integralSystemBridgeExchange (o : Operations l E) (c : Compositors l E o)
     (b : CanonicalBridge l E o)
     {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W)

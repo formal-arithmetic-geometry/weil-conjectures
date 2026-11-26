@@ -81,10 +81,8 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntri
 
 /-! # The finite and integral automorphism stage constructions
 
-Source: literature/blueprint/main-20261015/blueprint/sec-smooth-purity/
-sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md,
-Weil-structures paragraph, first two sentences
-(blueprint: lem-sf-automorphism-constructible-stage-equivalence).
+The finite, integral, rational and algebraically closed coefficient stages for the
+automorphism-twisted constructible categories, with their comparison maps.
 
 ## Main statements
 
@@ -120,12 +118,7 @@ attribute [local irreducible] sfIntrinsicModuleEquivalence
   HasDerivedCategory.standard integralDerivedPullback scalarReductionExistence
   scalarReductionDerivedExistence completedIntegralCoefficientSheafUnrestricted
 
-/-- Prime-to-characteristic coefficients are invertible on each scheme in the statement.
-Source: the global finite-field datum and the Weil-structures paragraph
-(blueprint: lem-sf-automorphism-constructible-stage-equivalence).
-Proof: the cardinality of k₀ gives characteristic p, also on its algebraic closure.
-The prime l is distinct from p, hence nonzero and a unit in k. Every local ring
-and residue field of a k-scheme inherits this unit under its structure map. -/
+/-- Prime-to-characteristic coefficients are invertible on each scheme in the statement. -/
 theorem automorphismConstructibleStage_units
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (T : Over (Spec (.of D.k))) :
@@ -161,18 +154,14 @@ set_option backward.isDefEq.respectTransparency.types true
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Positive coefficient levels have their existing finite-ring structure.
-Source: the coefficient convention in the Weil-structures paragraph
-(blueprint: lem-sf-automorphism-constructible-stage-equivalence). -/
+/-- Positive coefficient levels have their existing finite-ring structure. -/
 instance automorphismConstructibleStage_finiteRing
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (n : ℕ) :
     Finite (finiteCoefficientRing l E (n + 1)) :=
   Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n))
 
-/-- The finite commuting-square map is the prescribed pair of pullback compositors.
-Source: Weil-structures paragraph, the maps b and d
-(blueprint: lem-sf-automorphism-constructible-stage-equivalence). -/
+/-- The finite commuting-square map is the prescribed pair of pullback compositors. -/
 def automorphismStageFiniteSquare (A : Type u) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : Y ⟶ X) (eX : Aut X) (eY : Aut Y)
     (h : eY.asIso.hom ≫ f = f ≫ eX.asIso.hom) :
@@ -236,12 +225,8 @@ private theorem integral_congr_component
   cases h
   rfl
 
-/-- The normalized integral commuting-square comparison is uniquely specified by the
-actual completed pullback compositors. Source: Weil-structures paragraph, b and d
-(blueprint: lem-sf-automorphism-constructible-stage-equivalence).
-Proof: invert the compositor for e_Y followed by f, identify the two equal scheme maps,
-and apply the compositor for f followed by e_X. Each compositor is natural, so the
-result is a natural isomorphism. Its displayed components determine it uniquely. -/
+/-- The normalized integral commuting-square comparison is uniquely specified by the actual
+completed pullback compositors. -/
 theorem automorphismStageIntegralSquare_existsUnique
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (C : IntegralComparisonSystem.{u} l)
@@ -282,9 +267,7 @@ theorem automorphismStageIntegralSquare_existsUnique
   apply ObjectProperty.hom_ext
   exact (ha K).trans (hb K).symm
 
-/-- The actual integral square, with the component normalization just stated.
-Source: Weil-structures paragraph, b and d
-(blueprint: lem-sf-automorphism-constructible-stage-equivalence). -/
+/-- The actual integral square, with the component normalization just stated. -/
 def automorphismStageIntegralSquare
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (C : IntegralComparisonSystem.{u} l)
@@ -352,13 +335,7 @@ private theorem rawIso_existsUnique
   funext K
   exact eq_of_heq ((hα K).trans (ha K).symm)
 
-/-- Rationalization retains the normalized integral square on every component.
-Source: Weil-structures paragraph, rationalized b and d
-(blueprint: lem-sf-automorphism-constructible-stage-equivalence).
-Proof: apply the integral-to-rational localization to each component. Integral
-naturality extends to pure tensors by linearity and then to sums by additivity.
-The localized inverse gives a natural inverse. The specified components determine
-the natural isomorphism uniquely. -/
+/-- Rationalization retains the normalized integral square on every component. -/
 theorem automorphismStageRationalSquare_existsUnique
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (C : IntegralComparisonSystem.{u} l)
@@ -423,9 +400,7 @@ theorem automorphismStageRationalSquare_existsUnique
       (ho eX.asIso.hom _) (ho eX.asIso.hom _) (hm eX.asIso.hom K M a z)).trans
         (hm f _ _ ((constructibleIntegralPullback l E eX.asIso.hom).map a) z)
 
-/-- The rational square is exactly the rationalization of the integral one.
-Source: Weil-structures paragraph, b and d
-(blueprint: lem-sf-automorphism-constructible-stage-equivalence). -/
+/-- The rational square is exactly the rationalization of the integral one. -/
 def automorphismStageRationalSquare
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (C : IntegralComparisonSystem.{u} l)
@@ -445,14 +420,8 @@ attribute [local irreducible] HasDerivedCategory.standard
   rationalDerivedPullback commonStageDerivedPullback constructibleIntegralPullback
   sfRationalConstructibleLocalization integralComparisonComposition
 
-/-- Common-stage b and d have exactly the rational components over each representative's
-coefficient field. Source: Weil-structures paragraph, common-stage b and d
-(blueprint: lem-sf-automorphism-constructible-stage-equivalence).
-Proof: the integral scalar-composition equation gives the square for b by cancellation
-of the invertible compositors, and likewise for d. Rationalize that equation. Thus the
-rational component families descend through coherent finite-field descent. The actual
-prescribed operation formulas identify the resulting functors with the displayed ones.
-Every object is a literal pair, so these components uniquely determine the comparison. -/
+/-- Common-stage b and d have exactly the rational components over each representative's coefficient
+field. -/
 theorem automorphismStageQbarSquare_existsUnique
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -482,9 +451,7 @@ theorem automorphismStageQbarSquare_existsUnique
           (automorphismStageRationalSquare_existsUnique l E C f eX eY h).exists.choose_spec K)
       E L w K)
 
-/-- The common-stage square with the exact specified representative normalization.
-Source: Weil-structures paragraph, b and d
-(blueprint: lem-sf-automorphism-constructible-stage-equivalence). -/
+/-- The common-stage square with the exact specified representative normalization. -/
 def automorphismStageQbarSquare
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -552,9 +519,7 @@ private theorem finite_shift (A : Type u) [CommRing A] [Finite A] {X Y : Scheme.
 
 end FiniteCoherence
 
-/-- Integral reduction in the prescribed intrinsic finite-coefficient coordinates.
-Source: Weil-structures paragraph, displayed reduction comparison
-(blueprint: lem-sf-automorphism-constructible-stage-equivalence). -/
+/-- Integral reduction in the prescribed intrinsic finite-coefficient coordinates. -/
 def automorphismStageIntegralFiniteReduction
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -580,15 +545,7 @@ set_option allowUnsafeReducibility true in
 attribute [local irreducible] integralDerivedPullback scalarPullbackCompleted
   integralComparisonLambda integralComparisonMu
 
-/-- A simultaneous normalized calculus and its coherent scalar comparisons exist.
-Source: Weil-structures paragraph, scalar-extension and composition coherence
-(blueprint: lem-sf-automorphism-constructible-stage-equivalence).
-Proof: use the quotient coefficient diagrams simultaneously for all finite fields.
-Their tensor generators fix the scalar units, associators and pullback compositors.
-Derive these strict diagrams, apply their actual counits, and realize by Roos
-limits. The identity, associativity and scalar equations on whole systems survive
-realization. Uniqueness of the representative-normalized comparisons identifies
-these with the scalar maps used by the prescribed common-stage operations. -/
+/-- A simultaneous normalized calculus and its coherent scalar comparisons exist. -/
 theorem automorphismConstructibleStage_comparison_system (l : ℕ) [Fact l.Prime] :
     ∃ C : IntegralComparisonSystem.{u} l,
       ∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -652,10 +609,7 @@ set_option allowUnsafeReducibility true in
 attribute [local irreducible] constructibleIntegralPullback integralDerivedPullback
   rationalDerivedPullback commonStageDerivedPullback
 
-/-- A restricted integral shift is the signed Roos shift descended from good representatives.
-This predicate only spells out the normalization of the comparison in this node.
-Source: Weil-structures paragraph, canonical shift clause
-(blueprint: lem-sf-automorphism-constructible-stage-equivalence). -/
+/-- A restricted integral shift is the signed Roos shift descended from good representatives. -/
 def automorphismStageIntegralShiftNormalization
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -671,12 +625,10 @@ def automorphismStageIntegralShiftNormalization
         HEq (((constructibleIntegralPullback l E f).commShiftIso (self := s) r).hom.app K).hom
           (((integralDerivedPullback l E f).commShiftIso (self := d) r).hom.app K.obj)
 
-/-- The rational shift is the localization of the normalized integral shift.
-At one the localization comparisons are identities, giving the displayed component formula.
-For every integer the identity-component comparison retains both localization shift factors;
-its `CommShift` condition expresses the coherent localization square.
-Source: Weil-structures paragraph, rationalization of shifts
-(blueprint: lem-sf-automorphism-constructible-stage-equivalence). -/
+/-- The rational shift is the localization of the normalized integral shift. At one the localization
+comparisons are identities, giving the displayed component formula. For every integer the
+identity-component comparison retains both localization shift factors; its `CommShift` condition
+expresses the coherent localization square. -/
 def automorphismStageRationalShiftNormalization
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -699,9 +651,7 @@ def automorphismStageRationalShiftNormalization
              ((sfRationalConstructibleLocalization l E X).obj K)))) ∧
          NatTrans.CommShift b.hom ℤ)
 
-/-- The algebraically closed shift is the same normalized rational shift in every finite stage.
-Source: Weil-structures paragraph, coherent finite-field descent of shifts
-(blueprint: lem-sf-automorphism-constructible-stage-equivalence). -/
+/-- The algebraically closed shift is the same normalized rational shift in every finite stage. -/
 def automorphismStageQbarShiftNormalization
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -724,16 +674,7 @@ def automorphismStageQbarShiftNormalization
               (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) f).commShiftIso
                 (self := c) r).hom.app K))
 
-/-- Canonical signed shifts descend to all the integral pullbacks in a commuting square.
-Source: Weil-structures paragraph, canonical shift comparisons
-(blueprint: lem-sf-automorphism-constructible-stage-equivalence).
-Proof: shift the good representative and its quotient tower termwise. The product
-shift fixes the unshifted Roos coordinate and multiplies the shifted coordinate
-by (-1)^r. This is precisely ShiftCoordinates. Localization gives ShiftDescent.
-The full constructible inclusion inherits that shift comparison. The specified
-compositors come from the same shifted system maps, so their square commutes
-with shifts. Cone sequences of representatives are termwise split and preserved
-by the entire construction, proving exactness. -/
+/-- Canonical signed shifts descend to all the integral pullbacks in a commuting square. -/
 theorem automorphismConstructibleStage_integral_shifts
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

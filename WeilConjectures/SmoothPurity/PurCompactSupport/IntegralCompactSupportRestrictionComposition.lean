@@ -13,13 +13,14 @@ import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 
 /-! # Composition of compact-support coefficient restrictions
 
-Source: Stacks Project, Tags 03DA, 0D6E and 07A6
-(blueprint: lem-pur-compact-support-integral-coefficient-comparison).
-
 Successive coefficient restrictions of the compact-support functor compose to the
 restriction along the composite coefficient change. On the ordinary level all comparison
 maps are identity on sections; the derived statement follows from the mate calculus and
 the unit normalization of derived direct images.
+
+## References
+
+* [Stacks Project, Tags 03DA, 0D6E and 07A6]
 -/
 
 @[expose] public noncomputable section

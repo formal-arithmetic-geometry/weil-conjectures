@@ -13,11 +13,19 @@ import WeilConjectures.SmoothPurity.Qcqs.QcqsCompactSupportProperComplete
 /-! # Completeness of qcqs compact-support images
 
 This is the completeness component of the finite-comparison theorem.
-Source: Bhatt--Scholze, Lemmas 6.7.7 and 6.1.13; Stacks Tags 0E8I and 0F7J
-(blueprint: lem-qcqs-compact-support-finite-comparison).
 
-The proof is split from the finite-mate component so that the proper/open
-completion argument can be developed independently.
+## Implementation details
+
+The proof is split from the finite-mate component so that the proper/open completion argument
+can be developed independently. The completed open extension is identified with the normalized
+quotient tower; exactness and quasi-compactness transport its completion unit, and the
+right-adjoint proper direct-image/total-limit comparison shows that the completion unit of the
+proper/open image is invertible.
+
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Lemmas 6.1.13 and 6.7.7]
+* [Stacks Project, Tags 0E8I and 0F7J]
 -/
 
 @[expose] public noncomputable section
@@ -42,17 +50,7 @@ variable (l : ℕ) [Fact l.Prime]
 
 include K₀ hl Xbase Ybase Xft Xqc Yft Yqc fbase fs fft fqc
 
-/-- The completed proper/open image of an integral constructible input is derived complete.
-
-Source: Bhatt--Scholze, Lemmas 6.7.7 and 6.1.13; Stacks Tags 0E8I and 0F7J.
-Proof: identify the completed open extension with the normalized quotient tower,
-use exactness and quasi-compactness to transport its completion unit, and apply the
-right-adjoint proper direct-image/total-limit comparison. The completion unit of the
-input is invertible, so the transported unit for the proper/open image is invertible.
-The argument covers zero objects and empty opens by the same unit equations.
-(blueprint: lem-qcqs-compact-support-finite-comparison).
-(blueprint: lem-qcqs-compact-support-image-complete).
--/
+/-- The completed proper/open image of an integral constructible input is derived complete. -/
 theorem sfQcqsCompactSupport_image_complete
     (K : sfIntegralConstructibleCategory l E X) :
     IsSfDerivedComplete l E Y ((image (completed l E) c).obj K.obj) := by

@@ -9,7 +9,14 @@ public import WeilConjectures.TraceFormula.Integral.IntegralComparisonSequenceSy
 import WeilConjectures.TraceFormula.Supporting.TransportedReductionSystemsNormalized
 import WeilConjectures.SmoothPurity.Pur.PurNormalizedReconstructionAdjunctionCalculus
 
-/-! The pullback components of the completed pullback counit comparison. -/
+/-! # Pullback components of the completed pullback counit comparison
+
+The reconstruction counit is invertible on the derived inverse image of a reduced system.
+
+## References
+
+* Stacks Project, Tag 0941.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -23,14 +30,8 @@ universe u v
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The counit on a derived inverse image of a reduced system is invertible.
-Source: the normalized pullback effectivity step of Stacks 0941
-(blueprint: lem-pur-completed-pullback-tensor-pullback-counit).
-Proof: identify G with the specified exact sequence inverse image. Apply
-transportedReductionSystems_normalized with the identity coefficient extension:
-its first component says that the pulled reduction is normalized, independently
-of the scalar component. Apply normalized reconstruction for C to this system.
-Its counit conclusion is precisely the displayed actual adjunction counit. -/
+/-- The reconstruction counit on the derived inverse image, along the sequence pullback `G`,
+of the reduction of `M` is an isomorphism. -/
 theorem completedPullbackTensor_pullback_counit
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (_hX : ∀ x : X, IsUnit (l : X.residueField x))

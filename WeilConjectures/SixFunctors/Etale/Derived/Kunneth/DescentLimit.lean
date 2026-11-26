@@ -15,16 +15,22 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 Let `X = lim Xᵢ` be a cofiltered limit of quasi-compact quasi-separated schemes with affine
 transition maps, with projections `pᵢ : X ⟶ Xᵢ`. For every étale sheaf `F` of `Λ`-modules on
 `X`, the canonical map `colimᵢ pᵢ^* pᵢ_* F ⟶ F` is an isomorphism
-(`AlgebraicGeometry.Etale.isColimitDescentCocone`, Stacks 0EYN).
+(`AlgebraicGeometry.Etale.isColimitDescentCocone`, [Stacks, Tag 0EYN]).
 
 The diagram `i ↦ pᵢ^* pᵢ_* F` is `AlgebraicGeometry.Etale.descentDiagram`, and the cocone of
 counits is `AlgebraicGeometry.Etale.descentCocone`.
+
+## Implementation details
 
 The proof checks the statement on geometric stalks. The stalk of `pᵢ^* pᵢ_* F` at a geometric
 point `x̄` of `X` is the stalk of `pᵢ_* F` at `pᵢ ∘ x̄`, that is, the colimit of the sections
 `F(V ×_{Xᵢ} X)` over the étale neighbourhoods `V` of `pᵢ ∘ x̄`; every étale neighbourhood of
 `x̄` in `X` is refined by one of this form, and so are the morphisms between them, by the
 descent of affine étale schemes and of morphisms of finite presentation along the limit.
+
+## References
+
+* [Stacks, Tag 0EYN]
 -/
 
 @[expose] public section
@@ -46,13 +52,12 @@ instance : HasColimitsOfShape Iᵒᵖ (Sheaf c.pt.smallEtaleTopology (ModuleCat.
   Sheaf.instHasColimitsOfShape
 
 include hc in
-/-- Blueprint `corollary-open-direct-image-over-field--2`: **a sheaf on a limit of schemes is the
-colimit of the pullbacks of its pushforwards** (Stacks 0EYN). Let `X = lim Xᵢ` be a cofiltered limit
-of quasi-compact quasi-separated schemes (for example affine schemes, or quasi-compact opens of
-affine schemes) with affine transition maps, and write `pᵢ : X ⟶ Xᵢ`. For every étale sheaf
-`F` of `Λ`-modules on `X`, the canonical map `colimᵢ pᵢ^* pᵢ_* F ⟶ F` induced by the counits
-`pᵢ^* pᵢ_* F ⟶ F` is an isomorphism. Here `i ↦ pᵢ^* pᵢ_* F` is
-`AlgebraicGeometry.Etale.descentDiagram`. -/
+/-- **A sheaf on a limit of schemes is the colimit of the pullbacks of its pushforwards.**
+Let `X = lim Xᵢ` be a cofiltered limit of quasi-compact quasi-separated schemes (for example affine
+schemes, or quasi-compact opens of affine schemes) with affine transition maps, and write
+`pᵢ : X ⟶ Xᵢ`. For every étale sheaf `F` of `Λ`-modules on `X`, the canonical map
+`colimᵢ pᵢ^* pᵢ_* F ⟶ F` induced by the counits `pᵢ^* pᵢ_* F ⟶ F` is an isomorphism. Here
+`i ↦ pᵢ^* pᵢ_* F` is `AlgebraicGeometry.Etale.descentDiagram`. -/
 theorem isIso_colimitDesc_descentCocone :
     IsIso (colimit.desc _ (descentCocone (ModuleCat.{u + 1} Λ) c F)) := by
   refine Scheme.isIso_of_isIso_sheafFiber_map _ fun s ↦ ?_
@@ -76,8 +81,7 @@ theorem isIso_colimitDesc_descentCocone :
   infer_instance
 
 /-- The counits `pᵢ^* pᵢ_* F ⟶ F` exhibit `F` as the colimit of the sheaves `pᵢ^* pᵢ_* F`
-(blueprint `corollary-open-direct-image-over-field--2`, see
-`AlgebraicGeometry.Etale.isIso_colimitDesc_descentCocone`). -/
+(see `AlgebraicGeometry.Etale.isIso_colimitDesc_descentCocone`). -/
 noncomputable def isColimitDescentCocone :
     IsColimit (descentCocone (ModuleCat.{u + 1} Λ) c F) :=
   have : IsIso ((colimit.isColimit (descentDiagram _ c F)).desc (descentCocone _ c F)) :=

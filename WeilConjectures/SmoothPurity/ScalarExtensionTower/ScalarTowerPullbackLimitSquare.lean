@@ -11,8 +11,9 @@ import WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarTowerPullbackStri
 
 /-! # Canonical scalar comparison in total-limit coordinates
 
-Source: Stacks 07A4 and 0941; realization step 8 of
-lem-pur-scalar-extension-tower-coherence.
+## References
+
+* Stacks Project, Tags 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -36,25 +37,7 @@ attribute [local irreducible]
 
 /-- The pullback scalar comparison in its specified total-limit coordinates.
 This fixes the comparison before transposing through coherent reduction; it does
-not assert the tensor comparison or existence of realization models.
-Source: Stacks 07A4, 0941; original realization step 8
-(blueprint: stage3-pur-scalar-pullback-limit-square).
-
-Proof: choose a flat-term K-flat representative of M. Use the simultaneous
-quotient presentation from the reduction model at Y and its scalar and pullback
-presentations. The normalization fields of SX, SY and the two pullback models
-identify the displayed coordinates with their strict quotient Roos maps. On each
-local generator the two scalar/pullback associations multiply the same coefficient
-and insert one. This is an equality of chain maps on the whole quotient tower,
-including all transitions. The normalized scalar completion comparison has the
-same quotient augmentation, with zero shifted Roos coordinate. Its ordinary
-pullback normalization therefore identifies the specified scalarPullbackCompleted
-with this map. Naturality of the normalized Roos bridge gives the displayed
-limit equation. Localization from good representatives and naturality along their
-resolution isomorphisms give the equation for M. The input hF only supplies the
-completion inverse; proof irrelevance removes its choice. This argument includes
-identity maps, empty schemes and ramified coefficient inclusions without assuming
-flatness of finite quotient ring maps. -/
+not assert the tensor comparison or existence of realization models. -/
 theorem scalarTowerPullbackLimitSquare (W : Bool → Scheme.{u})
     (ME : CompletedOperations.Models.{u, u} l E W)
     (ML : CompletedOperations.Models.{u, u} l L W)

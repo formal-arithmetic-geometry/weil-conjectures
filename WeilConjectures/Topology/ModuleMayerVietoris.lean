@@ -15,8 +15,18 @@ import Mathlib.Topology.Sheaves.MayerVietoris
 
 /-! # Mayer--Vietoris for modules on a ringed space
 
-Source: Stacks Project, Cohomology, Lemma 20.8.2, Tag 01EB
-(blueprint: lem-sc-mayer-vietoris-ringed-space).
+The Mayer--Vietoris long exact sequence for modules on a ringed space, natural in the module and
+compatible with restriction.
+
+## Implementation details
+
+Restricting an injective resolution to an open gives an injective resolution, and on a two-open
+cover the sections of an injective sheaf form a short exact sequence of complexes. The long exact
+sequence is the homology sequence of the resulting short exact sequence of section complexes.
+
+## References
+
+* [Stacks Project, Tag 01EB](https://stacks.math.columbia.edu/tag/01EB)
 -/
 
 @[expose] public section
@@ -110,27 +120,7 @@ private noncomputable def sectionSquare (X : RingedSpace.{v}) (U V : Opens X) :
 /-- The Mayer--Vietoris long exact sequence for `O_X`-modules. We state it for every
 pair of opens simultaneously, on their union; taking `U ⊔ V = ⊤` gives the sequence
 on `X`. The connecting maps are natural transformations, hence natural in the module.
-The last equality is compatibility with restriction to any open `W`. The remaining
-squares commute by functoriality of cohomology restriction.
-
-Source: Stacks Project, Cohomology, Lemma 20.8.2, Tag 01EB
-(blueprint: lem-sc-mayer-vietoris-ringed-space).
-
-Proof: Choose an injective resolution of the module
-(`def-sc-ringed-space-module-cohomology`). Its restriction to every open remains an
-injective resolution (`lem-sc-ringed-space-restrict-injective-resolution`). The sheaf
-condition gives left exactness of sections on the two-open cover, and injectivity
-makes the difference of restrictions surjective
-(`lem-sc-ringed-space-injective-restriction-surjective`). This is a short exact
-sequence of section complexes. Its long exact cohomology sequence
-(`lem-weil-pbc-complex-ses-homology-long-exact`) has the indicated restriction maps.
-For a module morphism, lift to injective resolutions
-(`lem-weil-pbc-derived-functor-map-via-lift`) and restrict these lifts to the opens.
-Naturality of the complex long exact sequence
-(`lem-weil-pbc-complex-ses-long-exact-naturality`) gives natural connecting maps,
-independent of the lift. Finally restrict the chosen resolution to `W`; it remains
-injective, and restriction of sections is a morphism of the two short exact sequences
-of complexes. The same long exact sequence naturality gives the last equality. -/
+The last equality is compatibility with restriction to any open `W`. -/
 theorem module_mayerVietoris (X : RingedSpace.{v}) :
     let H := openModuleCohomology X
     let r : ∀ (p : ℕ) {U V : Opens X}, (V ⟶ U) → (H p U ⟶ H p V) :=

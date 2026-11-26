@@ -12,8 +12,19 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 
 /-! # The coefficient portion of the strict open tensor square
 
-Source: Stacks Project, Tags 0E8I, 0GL1 and 0941.
-(blueprint: lem-sf-open-quotient-coefficient-comparisons).
+We prove normalized balancing and finite coefficient interchange for the fixed ordinary open
+tensor comparison.
+
+## Implementation details
+
+The comparison `gamma` is defined by conjugation: inverse balancing on `X`, reduction of the
+fixed integral total comparison, `r`, and extension of balancing on `U`. Since the completed
+coefficient projection is locally surjective, scalar restriction on complexes of sheaf modules
+is fully faithful; `finiteGamma` is the unique lift of `gamma` through it.
+
+## References
+
+* [Stacks Project, Tags 0E8I, 0GL1, 0941, 03EL, 07A4, 03EK]
 -/
 
 @[expose] public noncomputable section
@@ -33,8 +44,8 @@ namespace WeilConjectures.OpenTensorQuotient
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The existing normalized tensor-tower comparison supplies balancing on every pair
-of complexes. Source: Stacks 03EL, 07A4 and 0941. -/
+/-- Every pair of complexes admits a balancing, given by the normalized tensor-tower
+comparison. -/
 theorem balanced_nonempty (W : Scheme.{u})
     (P Q : CochainComplex (scalarReductionSource l E W) ℤ) :
     Nonempty (Balanced l E W P Q) := by
@@ -102,8 +113,7 @@ variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
   (balancingX : Balanced l E X ((OpenSemilinearTensor.extensionComplex l E j o).obj Q) F)
   (balancingU : Balanced l E U Q ((OpenSemilinearTensor.restrictionComplex l E j o).obj F))
 
-/-- The finite coefficient data, before adjoining any scalar-unit augmentation.
-Source: Stacks 0E8I and 0GL1. -/
+/-- The finite coefficient data, before adjoining any scalar-unit augmentation. -/
 structure CoefficientComparisons where
   gamma : (integralOperationsTensorTowerFunctor l E X).obj
       ((OpenSemilinearTensor.extensionComplex l E j o).obj Q, F) ≅
@@ -135,27 +145,7 @@ structure CoefficientComparisons where
         (IntegralOpenReduction.extension l E j o).map ((balancingU.iso.hom.app n).f i))
 
 /-- Normalized balancing and finite coefficient interchange for the fixed ordinary
-open tensor comparison. The assertion has no augmentation, Roos presentation, or
-square of augmented maps.
-
-Source: Stacks Project, Modules on Sites, Tag 0E8I; Cohomology on Sites, Tag 0GL1;
-cochain coefficient coherence, Tag 03EK; strict systems, Tag 0941.
-(blueprint: lem-sf-open-quotient-coefficient-comparisons).
-
-Proof: define gamma by conjugation: inverse balancing on X, reduction of the
-fixed integral total comparison, r, and extension of balancing on U. Cancelling
-the first balancing isomorphism gives the reduction equation as an equality of
-strict tower maps, hence also in every degree and level.
-
-The completed coefficient projection is locally surjective. Scalar restriction
-on sheaf modules is therefore full, by local lifting of coefficients, and faithful.
-Its functor on complexes is also fully faithful. At each level, compose gamma
-with the inverse of the complex comparison induced by sc.finite. Lift that
-isomorphism uniquely through scalar restriction to define finiteGamma. Applying
-scalar restriction to the lift and cancelling the inverse comparison gives
-finiteGammaRestriction. No transition compatibility of finiteGamma beyond the
-already strict gamma tower is required by its type. The construction works for
-unbounded complexes, including negative degrees, zero complexes and empty opens. -/
+open tensor comparison. -/
 theorem openQuotientCoefficientComparisons :
     Nonempty (CoefficientComparisons l E j o tc sc st r Q F balancingX balancingU) := by
   let H := (OpenSemilinearTensor.total l E U).obj

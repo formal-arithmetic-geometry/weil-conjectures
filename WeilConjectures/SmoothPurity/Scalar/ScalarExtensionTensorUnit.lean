@@ -22,8 +22,12 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 
 /-! # Identity scalar extension and the signed tensor
 
-Source: Stacks Project, Modules on Sites, Tag 03EL; Cohomology on Sites, Tag 07A4
-(blueprint: lem-pur-scalar-tensor-unit).
+A scalar tensor comparison normalized on homogeneous unit tensors is compatible with the scalar
+action unitor.
+
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EL; Cohomology on Sites, Tag 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -237,21 +241,7 @@ private theorem scalar_unit_inv_section
     PresheafOfModules.id_app, ModuleCat.id_apply] using hh.symm
 
 /-- A scalar tensor comparison normalized on homogeneous unit tensors is compatible
-with the scalar action unitor. Only the identity coefficient map is involved.
-Source: Stacks 03EL and 07A4; scalar-extension tower coherence, proof step 7
-(blueprint: lem-pur-scalar-tensor-unit).
-
-Proof: precompose the asserted equality with the inverse scalar unitor of the
-source tensor. Its value on a local homogeneous tensor x tensor y is the scalar
-unit tensor 1 tensor (x tensor y). The assumed normalization sends it to
-(1 tensor x) tensor (1 tensor y). Applying the two action unitors gives x tensor y.
-The other route is the scalar unitor composed with its inverse, hence also fixes
-x tensor y. Naturality of the sheafified tensor pairing commutes with both action
-unitors. Pure tensors generate each presheaf tensor; the sheafification adjunction
-extends equality to each tensor sheaf. The coproduct universal property extends it
-to each total degree, and extensionality of chain maps and natural transformations
-proves the claimed equality. Empty sites and zero complexes are included by these
-same universal properties; no boundedness, flatness or invertibility of l is used. -/
+with the scalar action unitor. Only the identity coefficient map is involved. -/
 theorem scalarExtensionTensorUnit
     (sigma : (coefficientTotalTensor.{u, u + 1, u}
       (coefficientSequenceTopology (Scheme.ProEt.topology W))

@@ -11,9 +11,20 @@ import WeilConjectures.SmoothPurity.ProEtale.ProEtaleSignedTensorPullbackTotal
 
 /-! # Signed exchange on flat K-flat representatives
 
-Source: Stacks 07A4, lemma-pullback-tensor-product, with the symmetry paragraph
-after definition-derived-tor (06YU) and the signs of 0FNG.
-(blueprint: lem-pur-finite-pullback-tensor-signed-representatives).
+The canonical pullback tensor comparison preserves the signed exchange of tensor factors
+on flat K-flat representatives.
+
+## Implementation details
+
+Only coherence on flat K-flat complexes is proved here; the extension to arbitrary derived
+objects is a separate naturality argument.
+
+## References
+
+* [Stacks, Tag 07A4] (pullback of a derived tensor product)
+* [Stacks, Tag 06YS] (K-flat resolutions)
+* [Stacks, Tag 06YU] and the following symmetry paragraph
+* [Stacks, Tag 0FNG] (sign rules)
 -/
 
 @[expose] public noncomputable section
@@ -257,27 +268,7 @@ private theorem canonicalSignedRepresentatives {X Y : Scheme.{u}} (f : X ⟶ Y)
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The canonical comparison preserves signed exchange on flat K-flat inputs.
-Source: Stacks Project, Cohomology on Sites, Tag 07A4, final displayed total map;
-Tag 06YS for K-flat resolutions; Tag 06YU and its following symmetry paragraph;
-More on Algebra, Tag 0FNG, section-sign-rules, item-flip-tensor-product.
-(blueprint: lem-pur-finite-pullback-tensor-signed-representatives).
-Proof: pullback preserves the flat K-flat representative class by
-proEtaleCanonicalTensorPullback. Use its normalization square for (P,Q) and (Q,P).
-The two signed braidings are fixed on these representatives by
-pullbackTensorBraiding_existsUnique. In total degree k, restrict the ordinary
-pullback comparison to the summand P^p tensor Q^q with p+q=k. Its defining
-ordinary tensor map sends the pullback of x tensor y to f*x tensor f*y.
-Exchanging before or after this map sends that generator to
-(-1)^(p*q) f*y tensor f*x. The ordinary map is linear, so it commutes with this
-sign, including negative degrees. The tensor generators, module sheafification
-and total coproduct injections determine the chain maps. Thus the signed
-chain square commutes. Apply the derived quotient and insert the two
-representative normalization squares. Finally conjugate with the recorded
-tensor-model isomorphisms and the unit-normalized realization. Naturality
-cancels those conjugations and gives the displayed square. This only proves
-coherence on the displayed flat K-flat complexes; extension to arbitrary
-derived objects is a separate naturality argument. -/
+/-- The canonical comparison preserves signed exchange on flat K-flat inputs. -/
 theorem finitePullbackTensor_signed_representatives {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]

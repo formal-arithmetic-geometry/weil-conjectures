@@ -108,8 +108,23 @@ import Mathlib.CategoryTheory.Sites.CoverPreserving
 
 /-! # Maps between strict quotient presentations
 
-Source: Stacks Project, Tags 03CZ and 0941. This is an ordinary chain-map
-assembly statement, without a derived category or an open immersion.
+An integral chain map induces a strict chain-system map between quotient presentations. This
+is an ordinary chain-map assembly statement, without a derived category or an open immersion.
+
+## Implementation details
+
+At each degree and coefficient level the map is `κC`, followed by scalar extension of the
+integral chain map, followed by `κD⁻¹`. These commute with horizontal restrictions by
+naturality of the quotient transformation and the horizontal equations, and with vertical
+ones by naturality of the finite module-sheaf maps. Since every arrow of the product site is
+a horizontal arrow followed by a vertical one, they assemble to a module-sheaf map on the
+sequence site. The chain-map equations are checked on the jointly faithful ordinary
+coefficient evaluations.
+
+## References
+
+* [Stacks, Tag 03CZ]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -323,20 +338,7 @@ private theorem assemble_evaluation (n : ℕ) :
 end Assembly
 
 /-- An integral chain map gives a strict chain-system map between any two
-quotient presentations with their actual horizontal transition equations.
-Source: Stacks Project, Tags 03CZ and 0941; ordinary assembly in step 3 of
-`lem-sf-open-restriction-counit-on-good-complexes`.
-(blueprint: lem-sf-strict-reduction-presentation-map).
-
-Proof: at each degree and coefficient level take kappaC, followed by scalar
-extension of h, followed by kappaD inverse. Naturality of the quotient
-transformation and the two assumed horizontal equations show that these maps
-commute with horizontal restrictions. Their vertical naturality is that of the
-finite module-sheaf maps. Since every arrow of the product site is a horizontal
-arrow followed by a vertical arrow, they assemble to a module-sheaf map on the
-sequence site. The chain-map equations follow from those of h and the kappa
-isomorphisms, checked on ordinary coefficient evaluations, which are jointly
-faithful. Thus these degreewise maps form the required strict chain map. -/
+quotient presentations with their actual horizontal transition equations. -/
 theorem strictReductionPresentationMap
     (Q R : CochainComplex (scalarReductionSource l E W) ℤ)
     (C D : CochainComplex (coefficientSequenceModules l E W) ℤ)

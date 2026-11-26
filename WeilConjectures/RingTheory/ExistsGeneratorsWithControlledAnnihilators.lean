@@ -17,8 +17,25 @@ import WeilConjectures.RingTheory.RegularSequencePowers
 /-!
 # Generators of a regular prime with controlled annihilators
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07FD
-(blueprint: lem-weil-pbc-popescu-find-sequence).
+Let `q` be a prime of a Noetherian ring `R` with `R_q` regular of dimension `d`, and `I ≤ q` with
+`qⁿ R_q ⊆ I R_q`. We find `π₁, …, π_d` in `R` generating `q R_q`, with `πᵢⁿ ∈ I`, such that `πᵢ`
+and `πᵢ²` have the same annihilator on `R / (π₁ᵉ, …, πᵢ₋₁ᵉ)`.
+
+## Implementation details
+
+Generators of the maximal ideal of `R_q` are lifted to `R` and multiplied by elements of `R \ q`
+so that their `n`-th powers lie in `I`; these conditions persist under further such
+multiplication. By induction on `i`, the localized generators form a regular sequence, so their
+powers do too, and the next generator and its square act injectively on the localized quotient.
+Ogoma's lemma then provides an element of `R \ q` whose product with the next generator has
+equal annihilators for its first and second powers. The exponent `n` is the given exponent.
+
+## References
+
+* [Stacks, Tag 07FD]
+* [Stacks, Tag 07FC]
+* [Stacks, Tag 00NQ]
+* [Stacks, Tag 07DV]
 -/
 
 @[expose] public section
@@ -179,24 +196,9 @@ private theorem localized_previous_annihilators
   · intro hx
     exact hlocalized.right_eq_zero_of_smul hx
 
-/-- Source: Stacks Project, Lemma 07FD
-(blueprint: lem-weil-pbc-popescu-find-sequence).
-The exponent `n` is the given exponent, as obtained by the source's proof.
-
-Proof: Set S = R \ q. Lift d generators of the maximal ideal of the regular local ring
-R_q to numerators in R. Their n-th powers belong to I after localization; clearing
-denominators and multiplying each generator by an element of S puts these powers in I.
-Both generation after localization and membership of the n-th powers in I persist under
-further multiplication by elements of S. Induct on the length of the initial segment for
-which the annihilator equality holds. The localized generators form a regular sequence
-by 00NQ (lem-weil-pbc-regular-local-generators-regular-sequence), and their positive powers
-are regular by 07DV (lem-weil-pbc-regular-sequence-powers). Thus the next generator and
-its square both act injectively on the localized quotient by previous e-th powers.
-Localization is exact (lem-weil-pbc-localization-module-exact), identifying this quotient
-with the localization of the finitely generated module R modulo the previous powers.
-Ogoma's lemma 07FC (lem-weil-pbc-ogoma) then supplies an element of S whose product with
-the next generator has equal annihilators for its first and second powers on that module.
-This preserves all preceding conditions, completing the induction. -/
+/-- Let `q` be a prime of a Noetherian ring `R` with `R_q` regular of dimension `d`, and let
+`I ≤ q` with `qⁿ R_q ⊆ I R_q`. There are `π₁, …, π_d` in `R` generating `q R_q` with `πᵢⁿ ∈ I`,
+such that `πᵢ` and `πᵢ²` have the same annihilator on `R / (πⱼᵉ : j < i)`. -/
 theorem exists_generators_with_controlled_annihilators
     {R : Type u} [CommRing R] [IsNoetherianRing R]
     (I q : Ideal R) [q.IsPrime] (hIq : I ≤ q)

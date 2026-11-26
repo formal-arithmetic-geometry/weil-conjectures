@@ -24,31 +24,31 @@ sheaf, the geometric Frobenius `Fᵢ` on them, and the polynomials
 
 `Z(X₀, T) = ∏ᵢ P_{i,ℓ}(T)^{(-1)^{i+1}}` in `ℚ̄_ℓ⟦T⟧`.
 
-## Coefficients
-
-The cohomology with Frobenius available in this repository is that of Weil sheaves, with
-coefficients `ℚ̄_ℓ` (`AlgebraicGeometry.WeilSheaf.cohomology`). The blueprint's `ℚ_ℓ`-family is
-recovered from it by the flat base change `Hⁱ(X, ℚ_ℓ) ⊗ ℚ̄_ℓ = Hⁱ(X, ℚ̄_ℓ)`, which does not change
-`P_{i,ℓ}`; so everything is stated with the `ℚ̄_ℓ`-family, as for Poincaré duality
-(`AlgebraicGeometry.WeilSheaf.poincareDuality`).
-
 ## Main definitions
 
-- `AlgebraicGeometry.Scheme.frobeniusCharpolyRev`: the polynomial `P_{i,ℓ}`
-  (`prose-19-07`).
+- `AlgebraicGeometry.Scheme.frobeniusCharpolyRev`: the polynomial `P_{i,ℓ}`.
 - `AlgebraicGeometry.Scheme.IsIntegralFrobeniusFactor`: an integral polynomial realizing
-  `P_{i,ℓ}` for every `ℓ ≠ p` (`theorem-weil-conjectures-smooth-proper-schemes--1`).
+  `P_{i,ℓ}` for every `ℓ ≠ p`.
 - `AlgebraicGeometry.Scheme.oddFrobeniusProduct`, `AlgebraicGeometry.Scheme.evenFrobeniusProduct`:
-  the parity products `N_ℓ`, `D_ℓ` (`lemma-reciprocal-roots-zeta`).
+  the parity products `N_ℓ`, `D_ℓ`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.exists_traceDatum`: the cohomological family is a trace datum whose
   integers are the point counts.
 - `AlgebraicGeometry.Scheme.map_zetaSeries_mul_evenFrobeniusProduct`: the trace-to-determinant
-  identity (`corollary-point-counting-zeta-function--5`).
+  identity.
 - `LinearMap.inv_alternatingCharpolyRevProd_eq_exp` and
-  `AlgebraicGeometry.Scheme.trace_determinant`: `lemma-logarithm-determinant--3`.
+  `AlgebraicGeometry.Scheme.trace_determinant`: the logarithm of the alternating determinant is
+  the alternating trace series.
+
+## Implementation details
+
+The cohomology with Frobenius available in this repository is that of Weil sheaves, with
+coefficients `ℚ̄_ℓ` (`AlgebraicGeometry.WeilSheaf.cohomology`). The `ℚ_ℓ`-family is
+recovered from it by the flat base change `Hⁱ(X, ℚ_ℓ) ⊗ ℚ̄_ℓ = Hⁱ(X, ℚ̄_ℓ)`, which does not change
+`P_{i,ℓ}`; so everything is stated with the `ℚ̄_ℓ`-family, as for Poincaré duality
+(`AlgebraicGeometry.WeilSheaf.poincareDuality`).
 -/
 
 @[expose] public section
@@ -65,8 +65,7 @@ variable {K : Type*} [Field K] [CharZero K] {W : ℤ → Type*} [∀ i, AddCommG
 /-- The exponential form of the trace-to-determinant identity for a finite graded family
 `(W i, u i)`: the inverse of the alternating determinant
 `∏ᵢ det (1 - T uᵢ)^{(-1)^i}` is `exp (∑_{n ≥ 1} (∑ᵢ (-1)ⁱ Tr(uᵢⁿ)) Tⁿ / n)`, the exponential of
-the alternating trace series. Equivalently, `log Δ` is the alternating trace series, for
-`Δ = ∏ᵢ det (1 - T uᵢ)^{(-1)^{i+1}}` (blueprint `lemma-logarithm-determinant--3`). -/
+the alternating trace series. -/
 theorem inv_alternatingCharpolyRevProd_eq_exp (s : Finset ℤ) (u : ∀ i, Module.End K (W i)) :
     (alternatingCharpolyRevProd s u 1)⁻¹ =
       (PowerSeries.exp K).subst (alternatingTraceSeries s u) := by
@@ -156,17 +155,9 @@ variable (k₀ l) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `prose-19-07` (and `prose-19-07`): the
-determinant factor
-
-`P_{i,ℓ}(T) = det(1 - T Fᵢ | Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ))`
-
-of the geometric Frobenius `Fᵢ` on the cohomology of the constant Weil sheaf, the reverse
-characteristic polynomial `FrobeniusModule.localPolynomial` of the Frobenius module
-`Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)`. It has constant coefficient `1`, degree `dim Hⁱ` and leading coefficient
-`(-1)^{dim Hⁱ} det Fᵢ` (`AlgebraicGeometry.Scheme.coeff_zero_frobeniusCharpolyRev`,
-`AlgebraicGeometry.Scheme.natDegree_frobeniusCharpolyRev`,
-`AlgebraicGeometry.Scheme.leadingCoeff_frobeniusCharpolyRev`). -/
+/-- The determinant factor `P_{i,ℓ}(T) = det(1 - T Fᵢ | Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ))` of the geometric
+Frobenius `Fᵢ` on the cohomology of the constant Weil sheaf, i.e. the reverse characteristic
+polynomial `FrobeniusModule.localPolynomial` of the Frobenius module `Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)`. -/
 noncomputable def frobeniusCharpolyRev (i : ℤ) : Polynomial (PadicAlgCl l) :=
   ((WeilSheaf.adicConstant k₀ l X).cohomology i).localPolynomial
 
@@ -175,19 +166,18 @@ theorem frobeniusCharpolyRev_def (i : ℤ) :
       ((WeilSheaf.adicConstant k₀ l X).cohomology i).localPolynomial :=
   rfl
 
-/-- `P_{i,ℓ}` has constant coefficient `1` (`prose-19-07`). -/
+/-- `P_{i,ℓ}` has constant coefficient `1`. -/
 @[simp]
 theorem coeff_zero_frobeniusCharpolyRev (i : ℤ) : (frobeniusCharpolyRev k₀ l X i).coeff 0 = 1 :=
   FrobeniusModule.coeff_zero_localPolynomial _
 
-/-- `P_{i,ℓ}` has degree `dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` (`prose-19-07`). -/
+/-- `P_{i,ℓ}` has degree `dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)`. -/
 theorem natDegree_frobeniusCharpolyRev (i : ℤ) :
     (frobeniusCharpolyRev k₀ l X i).natDegree =
       Module.finrank (PadicAlgCl l) ((WeilSheaf.adicConstant k₀ l X).cohomology i).carrier :=
   FrobeniusModule.natDegree_localPolynomial _
 
-/-- `P_{i,ℓ}` has leading coefficient `(-1)^{dim Hⁱ} det Fᵢ`
-(`prose-19-07`). -/
+/-- `P_{i,ℓ}` has leading coefficient `(-1)^{dim Hⁱ} det Fᵢ`. -/
 theorem leadingCoeff_frobeniusCharpolyRev (i : ℤ) :
     (frobeniusCharpolyRev k₀ l X i).leadingCoeff =
       (-1) ^ Module.finrank (PadicAlgCl l)
@@ -195,22 +185,19 @@ theorem leadingCoeff_frobeniusCharpolyRev (i : ℤ) :
         LinearMap.det ((WeilSheaf.adicConstant k₀ l X).cohomology i).frobeniusEnd :=
   FrobeniusModule.leadingCoeff_localPolynomial _
 
-/-- Blueprint `lemma-reciprocal-roots-zeta`: the odd parity product
-`N_ℓ(T) = ∏_{0 ≤ i ≤ 2d, i odd} P_{i,ℓ}(T)`. -/
+/-- The odd parity product `N_ℓ(T) = ∏_{0 ≤ i ≤ 2d, i odd} P_{i,ℓ}(T)`. -/
 noncomputable def oddFrobeniusProduct (d : ℕ) : Polynomial (PadicAlgCl l) :=
   ∏ i ∈ (Finset.range (2 * d + 1)).filter Odd, frobeniusCharpolyRev k₀ l X i
 
-/-- Blueprint `lemma-reciprocal-roots-zeta`: the even parity product
-`D_ℓ(T) = ∏_{0 ≤ i ≤ 2d, i even} P_{i,ℓ}(T)`. -/
+/-- The even parity product `D_ℓ(T) = ∏_{0 ≤ i ≤ 2d, i even} P_{i,ℓ}(T)`. -/
 noncomputable def evenFrobeniusProduct (d : ℕ) : Polynomial (PadicAlgCl l) :=
   ∏ i ∈ (Finset.range (2 * d + 1)).filter Even, frobeniusCharpolyRev k₀ l X i
 
 end Defs
 
-/-- Blueprint `theorem-weil-conjectures-smooth-proper-schemes--1`: an *integral
-realization-independent factor* in degree `i` of a `k₀`-scheme `X₀` is a polynomial `P ∈ ℤ[T]` whose
-coefficientwise extension `P^{(ℓ)}` to `ℚ̄_ℓ` is the determinant factor `P_{i,ℓ}` of
-`AlgebraicGeometry.Scheme.frobeniusCharpolyRev`, for every prime `ℓ ≠ p`. -/
+/-- An *integral realization-independent factor* in degree `i` of a `k₀`-scheme `X₀` is a
+polynomial `P ∈ ℤ[T]` whose coefficientwise extension `P^{(ℓ)}` to `ℚ̄_ℓ` is the determinant
+factor `P_{i,ℓ}` of `AlgebraicGeometry.Scheme.frobeniusCharpolyRev`, for every prime `ℓ ≠ p`. -/
 def IsIntegralFrobeniusFactor (k₀ : Type u) [Field k₀] [Finite k₀] (X : Scheme.{u})
     [X.Over (Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
@@ -226,9 +213,7 @@ variable (k₀ l) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] (d : �
 
 /-- The smooth-proper cohomological family is a trace datum: the cohomology groups
 `Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)`, `0 ≤ i ≤ 2d`, with the geometric Frobenius, and the point counts
-`N_n = #X₀(𝔽_{qⁿ})`, related by the Grothendieck–Lefschetz trace formula
-(`AlgebraicGeometry.WeilSheaf.pointCount_eq_sum_trace_cohomology`). The spaces and the
-endomorphisms are the cohomology groups and their Frobenius, on the nose. -/
+`N_n = #X₀(𝔽_{qⁿ})`, related by the Grothendieck–Lefschetz trace formula. -/
 theorem exists_traceDatum :
     ∃ D : TraceDatum.{0, u + 1} (PadicAlgCl l) (2 * d),
       (∀ i, D.V i = ((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).carrier) ∧
@@ -243,15 +228,9 @@ theorem exists_traceDatum :
          (((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).frobeniusEnd ^ n)) _).symm },
     fun _ ↦ rfl, fun _ ↦ rfl, fun _ ↦ rfl⟩
 
-/-- Blueprint `corollary-point-counting-zeta-function--5` and
-`corollary-point-counting-zeta-function--5` (trace-to-determinant identity): for `X₀` smooth and
-proper of pure dimension `d`,
-
-`Z(X₀, T) = ∏_{i = 0}^{2d} P_{i,ℓ}(T)^{(-1)^{i+1}}` in `ℚ̄_ℓ⟦T⟧`,
-
-stated with the denominators cleared:
-`Z(X₀, T) · ∏_{i even} P_{i,ℓ}(T) = ∏_{i odd} P_{i,ℓ}(T)`. The right hand side is a quotient of
-polynomials with constant coefficient `1`, so the identity holds in `ℚ̄_ℓ(T) ∩ ℚ̄_ℓ⟦T⟧`. -/
+/-- Trace-to-determinant identity: for `X₀` smooth and proper of pure dimension `d`,
+`Z(X₀, T) = ∏_{i = 0}^{2d} P_{i,ℓ}(T)^{(-1)^{i+1}}` in `ℚ̄_ℓ⟦T⟧`, stated with the denominators
+cleared: `Z(X₀, T) · ∏_{i even} P_{i,ℓ}(T) = ∏_{i odd} P_{i,ℓ}(T)`. -/
 theorem map_zetaSeries_mul_evenFrobeniusProduct :
     PowerSeries.map (algebraMap ℚ (PadicAlgCl l)) (X ↘ Spec (CommRingCat.of k₀)).zetaSeries *
         (evenFrobeniusProduct k₀ l X d : PowerSeries (PadicAlgCl l)) =
@@ -273,20 +252,16 @@ theorem map_zetaSeries_mul_evenFrobeniusProduct :
   rw [hpar Even, hpar Odd] at h
   exact h
 
-/-- Blueprint `lemma-logarithm-determinant--3` (trace-to-determinant factorization): for a finite
-graded family `(Vᵢ, uᵢ)_{i ∈ I}` of endomorphisms of finite-dimensional vector spaces over a
-field `K` of characteristic zero, with `Pᵢ(T) = det(1 - T uᵢ | Vᵢ)` and
-`Δ(T) = ∏ᵢ Pᵢ(T)^{(-1)^{i+1}}`,
+/-- Trace-to-determinant factorization: for a finite graded family `(Vᵢ, uᵢ)_{i ∈ I}` of
+endomorphisms of finite-dimensional vector spaces over a field `K` of characteristic zero, with
+`Pᵢ(T) = det(1 - T uᵢ | Vᵢ)` and `Δ(T) = ∏ᵢ Pᵢ(T)^{(-1)^{i+1}}`,
 
-* `-log Pᵢ(T) = ∑_{n ≥ 1} Tr(uᵢⁿ | Vᵢ) Tⁿ / n` for every `i`
-  (`LinearMap.logOf_charpolyRev`);
-* `Δ(T) = exp (∑_{n ≥ 1} (∑ᵢ (-1)ⁱ Tr(uᵢⁿ | Vᵢ)) Tⁿ / n)`, i.e. `log Δ` is the alternating
-  trace series (`LinearMap.inv_alternatingCharpolyRevProd_eq_exp`; the alternating determinant
-  `LinearMap.alternatingCharpolyRevProd` is `Δ⁻¹`);
+* `-log Pᵢ(T) = ∑_{n ≥ 1} Tr(uᵢⁿ | Vᵢ) Tⁿ / n` for every `i`;
+* `Δ(T) = exp (∑_{n ≥ 1} (∑ᵢ (-1)ⁱ Tr(uᵢⁿ | Vᵢ)) Tⁿ / n)`;
 
 and, for `X₀` smooth and proper of pure dimension `d` over `k₀`,
-`Z(X₀, T) = ∏_{i = 0}^{2d} P_{i,ℓ}(T)^{(-1)^{i+1}}` in `ℚ̄_ℓ⟦T⟧`, with the denominators cleared
-(`AlgebraicGeometry.Scheme.map_zetaSeries_mul_evenFrobeniusProduct`). -/
+`Z(X₀, T) = ∏_{i = 0}^{2d} P_{i,ℓ}(T)^{(-1)^{i+1}}` in `ℚ̄_ℓ⟦T⟧`, with the denominators
+cleared. -/
 theorem trace_determinant {K : Type*} [Field K] [CharZero K] {W : ℤ → Type*}
     [∀ i, AddCommGroup (W i)] [∀ i, Module K (W i)] [∀ i, FiniteDimensional K (W i)]
     (s : Finset ℤ) (u : ∀ i, Module.End K (W i)) :

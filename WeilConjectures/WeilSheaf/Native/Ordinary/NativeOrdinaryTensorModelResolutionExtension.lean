@@ -11,9 +11,24 @@ import WeilConjectures.WeilSheaf.Native.Ordinary.NativeOrdinaryTensorModelResolu
 
 /-! # Extension of ordinary tensor models through K-flat resolutions
 
-Source: Stacks 06YS, 06YU, 0FPT; blueprint step 1 of
-`lem-sf-native-weil-tensor-ringed-derived-square-ordinary-data`.
-(blueprint: lem-sf-native-weil-tensor-ringed-derived-square-ordinary-resolution-extension)
+This is the first step in constructing the ordinary data for the native ringed derived
+tensor square.
+
+## Implementation details
+
+The extension chooses the degreewise-epimorphic K-flat resolutions supplied by
+`CochainComplex.exists_isKFlatResolutionIndependentCoefficients`; for a K-flat second input
+the given model is kept, so the normalization (which only constrains K-flat second inputs)
+holds unchanged. Since `P` is K-flat, tensoring with `P` sends the resolution to a
+quasi-isomorphism. The K-flat naturality square `hkflat` (applied also to roofs through a
+further K-flat resolution) transports the model across each resolution, and the derived
+tensor localization identifies the transported value with the original input. The same
+comparison transports the normalized uncurrying equation and gives naturality for arbitrary
+maps in the second variable.
+
+## References
+
+* Stacks 06YS, 06YU, 0FPT
 -/
 
 @[expose] public section
@@ -23,20 +38,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
-/-- Extend normalized tensor representatives from K-flat second inputs to all inputs.
-
-Choose the degreewise-epimorphic K-flat resolutions supplied by
-`CochainComplex.exists_isKFlatResolutionIndependentCoefficients`; for a
-K-flat second input keep the given model, so the normalization (which only
-constrains K-flat second inputs) holds unchanged.  Since `P` is K-flat,
-tensoring with `P` sends the resolution to a quasi-isomorphism.  The
-K-flat naturality square `hkflat` (applied also to roofs through a further
-K-flat resolution, to handle derived maps between resolutions) transports the
-model across each resolution; the
-quasi-isomorphism and the derived tensor localization identify the transported
-value with the original input.  The same comparison transports the normalized
-uncurrying equation and gives naturality for arbitrary maps in the second
-variable. -/
+/-- Normalized tensor representatives on K-flat second inputs extend to all second inputs,
+keeping the normalization and naturality in both variables. -/
 theorem native_ordinary_tensor_model_resolution_extension
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (H : (DerivedCategory (ProEtale.AdicSheaf l Y))ᵒᵖ ×

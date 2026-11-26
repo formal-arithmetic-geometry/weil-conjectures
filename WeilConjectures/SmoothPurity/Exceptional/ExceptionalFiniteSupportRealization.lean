@@ -9,8 +9,10 @@ public import WeilConjectures.SmoothPurity.Exceptional.ExceptionalFiniteSupportP
 import WeilConjectures.CategoryTheory.SixFunctors.MateIsoAlongEquivalences
 import WeilConjectures.CategoryTheory.InverseMateEquivalence
 /-! # Compact-support realization of the actual finite adjunction
-Source: blueprint theorem-f-shriek-finite-coefficients.
-(blueprint: def-pur-adic-support-realization).
+
+This file constructs the open-extension realization, its exact derived comparison, the
+compact-support realization (the open comparison followed by the proper comparison) and the
+finite right-adjoint comparison obtained as its mate.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -114,12 +116,7 @@ variable (c : Compactification g)
     (integralExceptionalUniformizer l E) c)
 
 /-- Open-extension realization is the mate of the unit-normalized inverse-image
-comparison. Its Hom-transpose equation determines the map itself.
-Source: blueprint integral exceptional image (blueprint: def-pur-adic-support-realization).
-Proof: extension by zero is left adjoint to the exact open inverse image in both
-presentations. Transport these adjunctions along the realization equivalences and
-take the mate of integralExceptionalEtaleInverse. The displayed equation is its
-adjunction characterization; bijectivity of the Hom transposes gives uniqueness. -/
+comparison. Its Hom-transpose equation determines the map itself. -/
 theorem integralExceptionalEtaleOpen_existsUnique (n : ℕ) :
     ∃! e : S.val.levelOpen n ⋙ integralExceptionalEtaleRealization l E c.Z n ≅
       integralExceptionalEtaleRealization l E X n ⋙
@@ -140,8 +137,7 @@ theorem integralExceptionalEtaleOpen_existsUnique (n : ℕ) :
     (Etale.openImmersionLowerShriekUpperStarAdjunction _ c.i)
     (integralExceptionalEtaleInverse l E c.i S.openImage n)
 
-/-- The ordinary open-extension mate, fixed by its transpose equation.
-Source: blueprint integral exceptional image (blueprint: def-pur-adic-support-realization). -/
+/-- The ordinary open-extension mate, fixed by its transpose equation. -/
 def integralExceptionalEtaleOpen (n : ℕ) :
     S.val.levelOpen n ⋙ integralExceptionalEtaleRealization l E c.Z n ≅
       integralExceptionalEtaleRealization l E X n ⋙
@@ -149,9 +145,7 @@ def integralExceptionalEtaleOpen (n : ℕ) :
           (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) c.i :=
   (integralExceptionalEtaleOpen_existsUnique l E g c S n).choose
 
-/-- The full exact-localization square on every cochain representative.
-Source: blueprint integral exceptional realization
-(blueprint: def-pur-adic-support-realization). -/
+/-- The full exact-localization square on every cochain representative. -/
 def IsIntegralExceptionalEtaleDerivedOpen (n : ℕ)
     (e : S.levelDerivedOpen n ⋙
       (integralExceptionalEtaleRealization l E c.Z n).mapDerivedCategory ≅
@@ -180,12 +174,7 @@ def IsIntegralExceptionalEtaleDerivedOpen (n : ℕ)
           (integralExceptionalEtaleOpen l E g c S n).hom (.up ℤ)).app J)
 
 /-- The exact derived open comparison is fixed on every cochain representative by
-the recorded exact factorization and the ordinary adjunction mate.
-Source: blueprint integral exceptional image (blueprint: def-pur-adic-support-realization).
-Proof: apply the exact localization functor to the ordinary comparison. The defining
-localization factorization is precisely the displayed square. Every derived object
-has a complex representative and every derived arrow is a roof; hence that square
-also determines the natural isomorphism uniquely. -/
+the recorded exact factorization and the ordinary adjunction mate. -/
 theorem integralExceptionalEtaleDerivedOpen_existsUnique (n : ℕ) :
     ∃! e : S.levelDerivedOpen n ⋙
       (integralExceptionalEtaleRealization l E c.Z n).mapDerivedCategory ≅
@@ -248,8 +237,7 @@ theorem integralExceptionalEtaleDerivedOpen_existsUnique (n : ℕ) :
       Category.comp_id, hγ]
   exact ⟨e, (normalize e).mpr he, fun e' he' ↦ hu e' ((normalize e').mp he')⟩
 
-/-- The exact derived open comparison, specified by its representative square.
-Source: blueprint integral exceptional image (blueprint: def-pur-adic-support-realization). -/
+/-- The exact derived open comparison, specified by its representative square. -/
 def integralExceptionalEtaleDerivedOpen (n : ℕ) :
     S.levelDerivedOpen n ⋙
       (integralExceptionalEtaleRealization l E c.Z n).mapDerivedCategory ≅
@@ -259,8 +247,7 @@ def integralExceptionalEtaleDerivedOpen (n : ℕ) :
   (integralExceptionalEtaleDerivedOpen_existsUnique l E g c S n).choose
 
 /-- The compact-support realization, literally the open comparison followed by the
-proper comparison. Each factor retains its universal normalization.
-Source: blueprint integral exceptional image (blueprint: def-pur-adic-support-realization). -/
+proper comparison. Each factor retains its universal normalization. -/
 def integralExceptionalEtaleSupportComparison (n : ℕ) :
     S.levelFunctor n ⋙ (integralExceptionalEtaleRealization l E Y n).mapDerivedCategory ≅
       (integralExceptionalEtaleRealization l E X n).mapDerivedCategory ⋙
@@ -274,9 +261,7 @@ def integralExceptionalEtaleSupportComparison (n : ℕ) :
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight (integralExceptionalEtaleDerivedOpen l E g c S n) _ ≪≫
     Functor.associator _ _ _
-/-- The full compact-support adjunction-transpose normalization.
-Source: blueprint integral exceptional realization
-(blueprint: def-pur-adic-support-realization). -/
+/-- The full compact-support adjunction-transpose normalization. -/
 def IsIntegralExceptionalEtaleRightAdjoint (n : ℕ)
     (G : StrictEtaleExceptionalAdjoint (integralExceptionalIntegers l E)
       (integralExceptionalUniformizer l E) c S)
@@ -303,12 +288,7 @@ def IsIntegralExceptionalEtaleRightAdjoint (n : ℕ)
           ((G.levelAdjunction n).homEquiv _ _ h) ≫ e.hom.app N
 
 /-- The finite exceptional realization is the mate of the already specified compact-
-support realization. The Hom-transpose equation fixes its map, including the counit.
-Source: blueprint integral exceptional image (blueprint: def-pur-adic-support-realization).
-Proof: compose the generic finite adjunction with the realization equivalences. The
-compact-support comparison identifies its left adjoint with the fixed finite compact-
-support functor. The induced right-adjoint comparison is uniquely determined by the
-Hom-transpose equation. Applying the inverse realization gives its inverse. -/
+support realization. The Hom-transpose equation fixes its map, including the counit. -/
 theorem integralExceptionalEtaleRightAdjoint_existsUnique (n : ℕ)
     (G : StrictEtaleExceptionalAdjoint (integralExceptionalIntegers l E)
       (integralExceptionalUniformizer l E) c S)
@@ -327,8 +307,7 @@ theorem integralExceptionalEtaleRightAdjoint_existsUnique (n : ℕ)
   exact supportRightMate (G.levelAdjunction n) adj
     (integralExceptionalEtaleSupportComparison l E g c S n).symm
 
-/-- The finite right-adjoint comparison, fixed by the compact-support counit equation.
-Source: blueprint integral exceptional image (blueprint: def-pur-adic-support-realization). -/
+/-- The finite right-adjoint comparison, fixed by the compact-support counit equation. -/
 @[no_expose] def integralExceptionalEtaleRightAdjoint (n : ℕ)
     (G : StrictEtaleExceptionalAdjoint (integralExceptionalIntegers l E)
       (integralExceptionalUniformizer l E) c S)

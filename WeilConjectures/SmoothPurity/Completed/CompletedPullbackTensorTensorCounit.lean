@@ -8,7 +8,15 @@ module
 public import WeilConjectures.TraceFormula.Integral.IntegralComparisonSequenceSystems
 import WeilConjectures.SmoothPurity.Pur.PurNormalizedReconstructionAdjunctionCalculus
 
-/-! The tensor component of the completed pullback counit comparison. -/
+/-! # Tensor component of the completed pullback counit comparison
+
+The reconstruction counit is invertible on the tensor product of two reduced systems.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, 3.4.12.
+* Stacks Project, Tag 0941.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -26,13 +34,8 @@ universe u v
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The counit on a tensor of two reduced systems is invertible.
-Source: the counit-effectivity step of Stacks 0941 and Bhatt--Scholze 3.4.12
-(blueprint: lem-pur-completed-pullback-tensor-counit).
-Proof: the reduction tensor comparison identifies this tensor with the reduction
-of the integral tensor of M and N. Reconstruction inverts the counit on that
-reduction. Naturality of the actual counit conjugates it along the reduction tensor
-comparison; cancel the isomorphism on its source to obtain the desired counit. -/
+/-- The reconstruction counit on the tensor product of the reductions of `M` and `N` is an
+isomorphism. -/
 theorem completedPullbackTensor_tensor_counit
     (W : Scheme.{u}) (_hW : ∀ w : W, IsUnit (l : W.residueField w))
     (C : CoefficientDerivedSystemCalculus l E W)

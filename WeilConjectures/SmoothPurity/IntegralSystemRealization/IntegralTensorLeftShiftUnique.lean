@@ -8,7 +8,12 @@ public import WeilConjectures.SmoothPurity.IntegralSystemRealization.IntegralTen
 import all WeilConjectures.SixFunctors.Completed.CompletedTensorFiniteShift
 import all WeilConjectures.SixFunctors.Completed.CompletedTensorShiftRight
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
-/-! # Unique normalized shift in the unsigned completed first slot -/
+/-! # Unique normalized shift in the unsigned completed first slot
+
+## References
+
+* Stacks Project, Tags 011G, 012Z, 014E, 06YU and 0941.
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.defeqAttrib.useBackward true
@@ -843,19 +848,7 @@ attribute [local irreducible] integralTensorLeftModelProperty integralTensorLeft
   completedTensorShiftConeFormula completedTensorShiftRoosIso
 attribute [local instance 3000] integralOperationsCommHasDerivedCategory
 
-/-- The unsigned finite tensor shift descends to a unique normalized completed shift.
-Source: Stacks 011G, 012Z, 014E, 06YU, 0941; blueprint purity transport, Step 2
-(blueprint: lem-pur-integral-tensor-left-shift-unique).
-
-Proof: reduction and restriction act termwise, so the first tensor shift has
-coefficient one on each generator. Conjugating the quotient transition by these
-comparisons gives its original generator formula, hence the same transition.
-The comparisons therefore assemble into a natural tower isomorphism. Apply the
-product/cone comparison with coordinates (1,(-1)^r), shift by -1, and commute
-shifts. Shift preserves good complexes. Localize this natural comparison and use
-the universal property of the completed tensor descent to obtain the derived
-isomorphism and its normalization on every good pair. Representative
-extensionality proves uniqueness. -/
+/-- The unsigned finite tensor shift descends to a unique normalized completed shift. -/
 theorem integralTensorLeftShift_existsUnique (W : Scheme.{u}) (r : ℤ) :
     ∃! σ : tensorShiftFirst (Integral l E W) r ⋙ integralCompletedTensor l E W ≅
       integralCompletedTensor l E W ⋙ shiftFunctor (Integral l E W) r,

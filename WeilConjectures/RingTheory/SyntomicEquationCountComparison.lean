@@ -18,8 +18,22 @@ import WeilConjectures.RingTheory.SyntomicEquationCountComparisonDimension
 /-!
 # An equation-count comparison quotient at a syntomic prime
 
-Source: Stacks Project, Algebra, Tag 00SY, middle of the proof of (3) ⇒ (2).
-(blueprint: lem-weil-pbc-syntomic-equation-count-comparison).
+A finitely presented algebra satisfying the syntomic hypotheses at a prime is locally isomorphic
+to a quotient of a polynomial ring by exactly the fibre codimension many equations.
+
+## Implementation details
+
+Given a presentation `φ : P → S` with kernel `I`, the local kernel generators `f` satisfy
+`IP_Q = (f)P_Q`. Since `I` is finitely generated, clearing denominators gives `s ∉ Q` with
+`s • I ⊆ (f)`; the induced map `(P/(f))_s → S_{φ(s)}` is then bijective, and the local fibre
+dimensions are compared through the resulting open embedding of spectra.
+
+## References
+
+* [Stacks, Tag 00SY], proof of (3) ⇒ (2)
+* [Stacks, Tag 00SG]
+* [Stacks, Tag 00SC]
+* [Stacks, Tag 00P2]
 -/
 
 @[expose] public section
@@ -27,22 +41,10 @@ Source: Stacks Project, Algebra, Tag 00SY, middle of the proof of (3) ⇒ (2).
 universe u v
 namespace Algebra
 
-/-- A finitely presented algebra with the syntomic local hypotheses is locally a quotient
-with exactly the fibre codimension many equations. No global fibre condition is asserted.
-Source: Stacks Project, Algebra, Tag 00SY, proof of (3) ⇒ (2), from choosing a presentation
-through Nakayama, with Tags 00SG, 00SC and 00P2 for the fibre dimension.
-(blueprint: lem-weil-pbc-syntomic-equation-count-comparison).
-
-Proof: Choose a finite polynomial presentation φ : P → S. The counted local
-kernel-generator theorem chooses c ≤ n and f in ker φ, with equality of the two
-ideals after localization at φ⁻¹(q), and fibre dimension n-c for S. Since ker φ
-is finite, clear the finitely many denominators in this ideal equality to obtain
-s outside φ⁻¹(q) with s · ker φ contained in (f). Put T = P/(f), let π : T → S
-be the quotient lift, and let u be the class of s. The lift is surjective and
-π(u) is outside q. Each kernel element of π is killed by u, so the induced map
-T_u → S_{π(u)} is injective; surjectivity follows from that of π. The proved
-dimension-transport theorem identifies the local fibre dimensions through the
-spectrum embedding on an open neighbourhood, giving n-c for T as required. -/
+/-- A finitely presented algebra with the syntomic local hypotheses at `q` is, after inverting an
+element `u` with `π u ∉ q`, a quotient `T = R[x_1, …, x_n] / (f_1, …, f_c)` with `c ≤ n`, where
+the fibre of `T` has local dimension `n - c` at the prime corresponding to `q`. No global fibre
+condition is asserted. -/
 theorem exists_equationCount_comparison_of_syntomicAtPrime
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
     (q : PrimeSpectrum S)

@@ -11,8 +11,18 @@ public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 /-!
 # Homogeneous zero relations on a regular sequence
 
-Source: Stacks Project, Algebra, Tag 00LN, proof of (1).
-(blueprint: lem-pur-regular-sequence-higher-homogeneous-relations).
+The coefficients of a homogeneous zero relation on a regular sequence lie in its ideal.
+
+## Implementation details
+
+The assertion is proved for relations in the next ideal power, by induction on the length.
+After reducing to a zero relation, split off the last generator and induct on its largest
+exponent; regularity modulo the prefix cancels powers of the last generator, and one factor is
+moved into the coefficients of the preceding exponent.
+
+## References
+
+* [Stacks, Tag 00LN] (proof of (1))
 -/
 
 @[expose] public section
@@ -257,21 +267,7 @@ private theorem weakly_regular_relation {R : Type u} [CommRing R] {c : ℕ}
     rw [hd, ← MvPolynomial.optionEquivLeft_coeff_some_coeff_none R (Fin c) m q]
     exact hall (m none) m.some
 
-/-- Coefficients of any homogeneous zero relation on a regular sequence lie in its ideal.
-Source: Stacks Project, Algebra, Tag 00LN, proof of (1).
-(blueprint: lem-pur-regular-sequence-higher-homogeneous-relations).
-
-Proof: prove the coefficient assertion for relations in the next ideal power, by induction
-on the sequence length. Subtract a homogeneous expansion with coefficients in the ideal
-to reduce to a zero relation. Split off the last variable and induct on its largest exponent.
-The lower-exponent terms lie in a higher power of the prefix ideal. The length induction
-therefore puts the top coefficients multiplied by a power of the last generator in the
-prefix ideal. Cancel this power using regularity modulo the prefix. Expand the resulting
-prefix-ideal coefficients in its generators, raising the prefix degree by one. Move one
-last-generator factor into the coefficients of the preceding exponent and apply the inner
-induction. Its coefficient corrections lie in the full ideal, giving the original assertion.
-The empty sequence is the constant-polynomial case; the zero exponent is the prefix case.
--/
+/-- Coefficients of any homogeneous zero relation on a regular sequence lie in its ideal. -/
 theorem regularSequence_homogeneous_relation {R : Type u} [CommRing R]
     {c : ℕ} (f : Fin c → R) (hf : RingTheory.Sequence.IsRegular R (List.ofFn f))
     (n : ℕ) (p : MvPolynomial (Fin c) R) (hp : p.IsHomogeneous n) (hz : p.eval f = 0) :

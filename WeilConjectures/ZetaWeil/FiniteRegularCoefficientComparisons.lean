@@ -12,13 +12,23 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorHom
 
 /-! # Finite regular coefficient comparison data
 
-Source: Stacks 03D6 and 0D6D; main-20261015, constant-sheaf clause of
-theorem-grothendieck-lefschetz-trace-formula--8 (blueprint:
-def-zl-finite-regular-coefficient-comparisons).
+The composition isomorphism `(f ≫ g)^* ≅ g^* ⋙ f^*` of the derived pullbacks with finite
+regular coefficients, used for the constant-sheaf case of the Grothendieck–Lefschetz trace
+formula.
+
+## Implementation details
 
 The regular complex and c, kappa and lambda below are transparent aliases of the
 published constructions, not new choices or copies. Composition is the prescribed
 ringed-site compositor, transported by the published unit-preserving coordinate maps.
+The middle factor of the compositor is exactly the specialization of the ringed-site
+compositor for pro-étale derived pullbacks; the other factors are the uniquely
+unit-preserving change of presentation, descended termwise. In particular this does not
+introduce an independently chosen intrinsic compositor.
+
+## References
+
+* [Stacks, Tags 03D6 and 0D6D]
 -/
 
 @[expose] public noncomputable section
@@ -31,13 +41,8 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The prescribed finite compositor in the intrinsic pullback coordinates.
-The middle factor is exactly the specialization of the ringed-site compositor in
-lem-weil-pbc-proetale-derived-pullback-composition. The other factors are the uniquely
-unit-preserving published change of presentation, descended termwise. In particular
-this does not introduce an independently chosen intrinsic compositor.
-Source: Stacks 0D6D, canonical termwise pullback composition
-(blueprint: def-zl-finite-regular-coefficient-comparisons). -/
+/-- The canonical composition isomorphism `(f ≫ g)^* ≅ g^* ⋙ f^*` of the finite derived
+pullbacks at level `m`, in the intrinsic pullback coordinates. -/
 @[no_expose]
 def finiteCanonicalPullbackComposition {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (m : ℕ) :
     finiteDerivedPullback l E m (f ≫ g) ≅

@@ -13,10 +13,14 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 /-!
 # Bounded constructible derived-complete integral coefficients
 
-Source: Weil conjectures blueprint, `sec-smooth-purity/sk-def-sf-operations`,
-order 1459 (blueprint: def-weil-derived-complete-integral-detailed).
-The integral triangulation statement compiles this same canonical interface in a
-paired source packet to retain its recorded independent coefficient universes.
+The derived-complete integral objects whose reductions are finite-torsion constructible in a
+common cohomological interval, and the full subcategory `Dᵇ_c(Y, O_E)` they span.
+
+## Implementation details
+
+The reduction at level `n + 1` is `integralDerivedReduction`; the predicate
+`intrinsicFiniteTorsionConstructible` expresses bounded constructibility, and
+`proEtaleCohomologicalSupport` expresses the support condition.
 -/
 
 @[expose] public section
@@ -30,11 +34,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
 /-- The bounded constructible derived-complete integral objects are the objects whose
-reductions are finite-torsion constructible in a common cohomological interval.
-Source: blueprint order 1459 (blueprint: def-weil-derived-complete-integral-detailed).
-The reduction at level `n + 1` is `integralDerivedReduction`; the predicate
-`intrinsicFiniteTorsionConstructible` renders bounded constructibility, and
-`proEtaleCohomologicalSupport` renders the support condition. -/
+reductions are finite-torsion constructible in a common cohomological interval. -/
 noncomputable def boundedConstructibleDerivedCompleteIntegral
     (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E]
@@ -53,9 +53,7 @@ noncomputable def boundedConstructibleDerivedCompleteIntegral
 
 /-- The full subcategory `Dᵇ_c(Y, O_E)` on the derived-complete integral objects with
 constructible reductions in one common cohomological interval. Triangulated closure
-is a separate theorem and is not assumed in this definition.
-Source: Weil conjectures blueprint, order 1459
-(blueprint: def-weil-derived-complete-integral-detailed). -/
+is a separate theorem and is not assumed in this definition. -/
 noncomputable abbrev boundedConstructibleDerivedCompleteIntegralCategory
     (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E]
@@ -63,5 +61,3 @@ noncomputable abbrev boundedConstructibleDerivedCompleteIntegralCategory
   (boundedConstructibleDerivedCompleteIntegral D l hl E Y).FullSubcategory
 
 end WeilConjectures
-
-/- Stage-2 paired-interface rebuild for NZ integral Tor triangulation. -/

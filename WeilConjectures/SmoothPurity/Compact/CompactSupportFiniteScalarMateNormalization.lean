@@ -12,7 +12,8 @@ import WeilConjectures.SmoothPurity.Compact.CompactSupportRealizedScalarTranspos
 
 /-! # A step of normalized compact-support scalar comparison
 
-Source: proposition-six-operations-change-coefficients, compact-support and final paragraphs.
+A step in the normalized comparison of compact-support pushforward with change of
+coefficients.
 -/
 
 @[expose] public noncomputable section

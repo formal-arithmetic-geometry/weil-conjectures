@@ -12,17 +12,19 @@ public import Mathlib.CategoryTheory.Limits.Types.Filtered
 
 /-! # The ring colimit of the middle closed fibres
 
-Source: Stacks Project, Algebra, Tag 00R7, quotient systems before the second use of 00R6.
-(blueprint: def-weil-pbc-noetherian-local-model-tower-fiber-ring-colimit)
+The colimit of the middle closed fibres `S_i / m_i S_i` of a Noetherian local model tower is the
+closed fibre `S / m_R S` of the limit.
 
-The limit map is explicitly descended to each quotient. The union of the images of
-stage ideals is an ideal, since directedness lets any two representatives move to
-one stage. It contains every image of a coefficient in the maximal ideal of R:
-lift that coefficient along rlimit_surj; a unit lift would have a unit image.
-Thus every element of the extended maximal ideal comes from a stage ideal.
-Using slimit_eq after moving representatives to a common stage proves eventual
-equality in the quotients. Together with slimit_surj this identifies the cocone
-as a colimit. Its unique comparison with the categorical colimit constructs fiberAEquiv.
+## Implementation details
+
+The union of the images of the stage ideals is an ideal, since directedness lets any two
+representatives move to one stage, and it contains the extended maximal ideal of `R`. Eventual
+equality in the quotients follows from `slimit_eq`; together with `slimit_surj` this identifies
+the cocone as a colimit, whose comparison with the categorical colimit gives `fiberAEquiv`.
+
+## References
+
+* [Stacks, Tag 00R7] (quotient systems before the second use of Tag 00R6)
 -/
 
 @[expose] public section
@@ -83,18 +85,14 @@ attribute [local instance] Module.NoetherianLocalModelTower.preorder
   Module.NoetherianLocalModelTower.algRLimit Module.NoetherianLocalModelTower.algSLimit
 
 omit [IsLocalRing R] in
-/-- The middle stage ideals are compatible with transitions. 
-(blueprint: def-weil-pbc-noetherian-local-model-tower-fiber-ring-colimit)
--/
+/-- The middle stage ideals are compatible with transitions. -/
 theorem fiberIdealS_transition (i j : X.ι) (h : i ≤ j) :
     X.fiberIdealS i ≤ (X.fiberIdealS j).comap (X.smap i j h) := by
   let := X.rmap_local i j h
   exact Ideal.map_le_iff_le_comap.mp
     (map_fiberIdeal_le (X.rmap i j h) (X.smap i j h) _ _ (X.rs_comm i j h))
 
-/-- The middle stage ideals map into the closed-fibre ideal in the limit ring. 
-(blueprint: def-weil-pbc-noetherian-local-model-tower-fiber-ring-colimit)
--/
+/-- The middle stage ideals map into the closed-fibre ideal in the limit ring. -/
 theorem fiberIdealS_limit (i : X.ι) :
     X.fiberIdealS i ≤
       (Ideal.map (algebraMap R S) (IsLocalRing.maximalIdeal R)).comap
@@ -104,9 +102,7 @@ theorem fiberIdealS_limit (i : X.ι) :
     (map_fiberIdeal_le (algebraMap (X.R₀ i) R) (algebraMap (X.S₀ i) S)
       _ _ (X.rs_limit_comm i))
 
-/-- Every element of the limit closed-fibre ideal comes from a stage ideal. 
-(blueprint: def-weil-pbc-noetherian-local-model-tower-fiber-ring-colimit)
--/
+/-- Every element of the limit closed-fibre ideal comes from a stage ideal. -/
 theorem fiberIdealS_limit_rep (s : S)
     (hs : s ∈ Ideal.map (algebraMap R S) (IsLocalRing.maximalIdeal R)) :
     ∃ i a, a ∈ X.fiberIdealS i ∧ algebraMap (X.S₀ i) S a = s := by
@@ -123,9 +119,7 @@ theorem fiberIdealS_limit_rep (s : S)
     exact (RingHom.congr_fun (X.rs_limit_comm i) a).trans (congrArg (algebraMap R S) ha)
   exact hJ hs
 
-/-- A middle quotient representative killed in the limit is killed at a later stage. 
-(blueprint: def-weil-pbc-noetherian-local-model-tower-fiber-ring-colimit)
--/
+/-- A middle quotient representative killed in the limit is killed at a later stage. -/
 theorem fiberS_eventual_zero (i : X.ι) (a : X.S₀ i)
     (ha : algebraMap (X.S₀ i) S a ∈
       Ideal.map (algebraMap R S) (IsLocalRing.maximalIdeal R)) :
@@ -143,21 +137,15 @@ theorem fiberS_eventual_zero (i : X.ι) (a : X.S₀ i)
   rw [← hl] at hmem
   simpa only [X.sSystem.map_map] using hmem
 
-/-- The middle closed fibre of the limit. 
-(blueprint: def-weil-pbc-noetherian-local-model-tower-fiber-ring-colimit)
--/
+/-- The middle closed fibre of the limit. -/
 abbrev FiberLimitS :=
   S ⧸ Ideal.map (algebraMap R S) (IsLocalRing.maximalIdeal R)
 
-/-- The stage quotient map to the limit quotient. 
-(blueprint: def-weil-pbc-noetherian-local-model-tower-fiber-ring-colimit)
--/
+/-- The stage quotient map to the limit quotient. -/
 def fiberSLimit (i : X.ι) : X.FiberS i →+* FiberLimitS (R := R) (S := S) :=
   Ideal.quotientMap _ (algebraMap (X.S₀ i) S) (X.fiberIdealS_limit i)
 
-/-- The ring cocone of the middle closed fibres. 
-(blueprint: def-weil-pbc-noetherian-local-model-tower-fiber-ring-colimit)
--/
+/-- The ring cocone of the middle closed fibres. -/
 def fiberSCocone : Cocone X.fiberA where
   pt := CommRingCat.of (ULift.{max u v w} (FiberLimitS (R := R) (S := S)))
   ι := {
@@ -174,9 +162,7 @@ def fiberSCocone : Cocone X.fiberA where
       exact congrArg (fun s ↦ ULift.up (Ideal.Quotient.mk _ s))
         (RingHom.congr_fun (X.slimit_comm i j (leOfHom f)) a) }
 
-/-- The middle closed-fibre cocone is a colimit. 
-(blueprint: def-weil-pbc-noetherian-local-model-tower-fiber-ring-colimit)
--/
+/-- The middle closed-fibre cocone is a colimit. -/
 noncomputable def fiberSCoconeIsColimit : IsColimit X.fiberSCocone := by
   letI := reflectsColimit_of_reflectsIsomorphisms X.fiberA (forget CommRingCat)
   apply isColimitOfReflects (forget CommRingCat)
@@ -203,9 +189,7 @@ noncomputable def fiberSCoconeIsColimit : IsColimit X.fiberSCocone := by
     rw [← sub_eq_zero, ← map_sub, Ideal.Quotient.eq_zero_iff_mem, ← map_sub]
     exact hj
 
-/-- The categorical middle closed-fibre colimit is the limit quotient. 
-(blueprint: def-weil-pbc-noetherian-local-model-tower-fiber-ring-colimit)
--/
+/-- The categorical middle closed-fibre colimit is the limit quotient. -/
 noncomputable def fiberAEquiv :
     (colimit X.fiberA : CommRingCat.{max u v w}) ≃+* FiberLimitS (R := R) (S := S) :=
   ((colimit.isColimit X.fiberA).coconePointUniqueUpToIso

@@ -19,8 +19,7 @@ public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
 
 The reflection `x ↦ -x` of the affine line commutes with the Artin–Schreier map, so it acts on
 `AS_* ℚ̄_ℓ`, conjugating the translation `σ_c` into `σ_{-c}`; it therefore carries the
-`ψ`-isotypic component `ℒ_ψ` to the `ψ⁻¹`-isotypic component `ℒ_{ψ⁻¹}` (blueprint
-`lemma-artin-schreier-character-sheaf`).
+`ψ`-isotypic component `ℒ_ψ` to the `ψ⁻¹`-isotypic component `ℒ_{ψ⁻¹}`.
 
 ## Main declarations
 
@@ -439,7 +438,7 @@ section Carrier
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- The composition isomorphism of pushforwards at the underlying sheaf of `ℚ̄_ℓ`, as the unit
-`ℓ`-adic sheaf (stated to rewrite with, see the implementation notes). -/
+`ℓ`-adic sheaf. -/
 lemma WeilSheaf.adicConstant_carrier_comp_hom {Z T : Scheme.{u}}
     (f : (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ⟶ Z) (h : Z ⟶ T) :
     (ProEtale.adicLowerStarComp l f h).hom.app (WeilSheaf.adicConstant k₀ l X).obj.carrier =
@@ -673,8 +672,8 @@ theorem WeilSheaf.nonempty_iso_upperStar_obj_of_iso {X Y : Scheme.{u}}
   obtain ⟨e'⟩ := WeilSheaf.nonempty_iso_upperStar_obj_upperStar_obj φ g g' h G
   exact ⟨(WeilSheaf.upperStar φ).mapIso e ≪≫ e'⟩
 
-/-- Blueprint `lemma-artin-schreier-character-sheaf`: `ℒ_{ψ⁻¹} ≅ [-1]^* ℒ_ψ`, the reflection
-carrying the projector `e_ψ` of `AS_* ℚ̄_ℓ` to `e_{ψ⁻¹}`. -/
+/-- `ℒ_{ψ⁻¹} ≅ [-1]^* ℒ_ψ`: the Artin–Schreier sheaf of the inverse character is the pullback of
+`ℒ_ψ` along the reflection `x ↦ -x`. -/
 theorem WeilSheaf.nonempty_iso_image_artinSchreierIdempotent_inv
     (ψ : AddChar k₀ (PadicAlgCl l)) :
     Nonempty (image (WeilSheaf.artinSchreierIdempotent ψ⁻¹) ≅
@@ -702,8 +701,7 @@ theorem WeilSheaf.nonempty_iso_upperStar_smul_image_inv (ψ : AddChar k₀ (Padi
     (affineLine.smul k₀ (-1)) (affineLine.smul k₀ (-a))
     (by rw [← affineLine.smul_mul, mul_neg_one]) e
 
-/-- Blueprint `lemma-artin-schreier-character-sheaf` (the clause `ℒ_{ψ⁻¹,f} ≅ ℒ_{ψ,-f}` for
-`f = a x`): `ℒ_{ψ⁻¹(a x)} ≅ ℒ_{ψ(-a x)}`. -/
+/-- `ℒ_{ψ⁻¹(a x)} ≅ ℒ_{ψ(-a x)}`, i.e. `ℒ_{ψ⁻¹,f} ≅ ℒ_{ψ,-f}` for `f = a x`. -/
 theorem nonempty_artinSchreier_inv_iso (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :
     Nonempty (artinSchreier ψ⁻¹ a ≅ artinSchreier ψ (-a)) := by
   rw [artinSchreier, artinSchreier, WeilSheaf.image_artinSchreierIdempotent_eq ψ⁻¹,

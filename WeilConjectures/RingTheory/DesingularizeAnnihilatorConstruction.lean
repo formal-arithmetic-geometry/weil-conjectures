@@ -16,8 +16,21 @@ import WeilConjectures.RingTheory.SingularIdealMapEquiv
 
 /-! # Desingularization with an annihilator bound
 
-Source: Stacks Project, Tag 07CT, first paragraph of the proof, applying Tag 07CR.
-(blueprint: lem-weil-pbc-desingularize-annihilator-construction).
+A factorization through a finitely presented algebra whose singular ideal is bounded by the
+annihilator of `Ann_D(π²)/Ann_D(π)`.
+
+## Implementation details
+
+`D` is Noetherian, being finitely presented over `R`. Base change `A` to `D ⊗[R] A`, where
+strict standardness is preserved; the quotient map in `hquot` induces a `D`-algebra section
+modulo `π⁴`, checked on pure tensors. Then desingularization over `D` applies, and the
+resulting factorization is restricted to the two factors.
+
+## References
+
+* [Stacks, Tag 07CT]
+* [Stacks, Tag 07CR]
+* [Stacks, Tag 07CC]
 -/
 
 @[expose] public section
@@ -26,24 +39,8 @@ universe u v w z
 
 namespace Algebra
 
-/-- Construct a factorization with the relative annihilator bound, before any comparison
-with the singular ideal of `D` over `R`. No annihilator equality in `R` is needed here.
-
-Source: Stacks Project, Tag 07CT, first paragraph of the proof, applying Tag 07CR.
-
-Proof: `D` is Noetherian since it is finitely presented over the Noetherian ring `R`.
-Base change `A` to `D ⊗[R] A`, which is finitely presented over `D`. Give `Λ` its
-`D`-algebra structure induced by `δ`. The tensor map sends `d ⊗ a` to `δ d * α a`.
-Strict standardness is preserved by base change (Tag 07CC). The quotient map in `hquot`
-induces the `D`-algebra section sending the class of `d ⊗ a` to `d` times the image of
-`a` in `D/π⁴D`. On pure tensors its composite with the map to `Λ/π⁴Λ` agrees with the
-tensor map by `hquot`; additive generation by pure tensors gives agreement everywhere.
-Apply desingularization (Tag 07CR) over `D`. Retain its finite presentation over `D` and
-its bound by the annihilator of `Ann_D(π²)/Ann_D(π)`. An element `r` is in that annihilator
-exactly when `π_D² * x = 0` implies `r * π_D * x = 0` for every `x`. Restrict the tensor
-factorization to the two factors and restrict the scalars of the map to `Λ` to `R`.
-The structure map `dB` supplies the indicated `D`-algebra structure on `B`.
-(blueprint: lem-weil-pbc-desingularize-annihilator-construction). -/
+/-- There is a factorization with the relative annihilator bound, before any comparison
+with the singular ideal of `D` over `R`. No annihilator equality in `R` is needed here. -/
 theorem exists_desingularization_annihilator_bound
     (R : Type u) (Λ : Type v) (A : Type w) (D : Type z)
     [CommRing R] [CommRing Λ] [CommRing A] [CommRing D]

@@ -9,8 +9,13 @@ public import WeilConjectures.SmoothPurity.Compact.CompactSupportNativeSystemEva
 
 /-! # Ordinary inverse-image evaluation preserves the unit
 
-Source: Stacks Project, Tag 03DA; Zheng 4.1.
-(blueprint: lem-weil-compact-support-ordinary-pullback-unit).
+Ordinary inverse-image evaluation of the positive coefficient tower preserves the
+adjunction unit.
+
+## References
+
+* Stacks Project, Tag 03DA.
+* Zheng, 4.1.
 -/
 
 @[expose] public noncomputable section
@@ -24,12 +29,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The native unit equation in the ordinary coefficient-system coordinates.
-Source: Stacks Tag 03DA; Zheng 4.1.
-(blueprint: lem-weil-compact-support-ordinary-pullback-unit).
-Proof: specialize the defining unit normalization of moduleEvalG to the positive
-coefficient tower. The sequence-site evaluation and the normalized finite-coefficient
-evaluation have identical module carriers and the specified ring identifications. -/
+/-- The native unit equation in the ordinary coefficient-system coordinates. -/
 theorem compactSupportOrdinaryPullbackUnit {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (N : coefficientSequenceModules.{u, u} l E Y) :
     (coefficientSequenceEvaluation l E Y n).map

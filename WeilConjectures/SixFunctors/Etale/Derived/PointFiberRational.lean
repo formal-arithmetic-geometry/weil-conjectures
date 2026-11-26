@@ -16,9 +16,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.RationalStage
 # Rational constructible complexes over a geometric point
 
 Let `Λ` be a complete discrete valuation ring with finite residue field and maximal ideal
-`I = (ϖ)` (in the blueprint `Λ = 𝒪_E`), `M` a submonoid of `Λ` and `K` a field which is the
-localization of `Λ` at `M` (in the blueprint `M = Λ ∖ {0}` and `K = E`). Following blueprint
-`proposition-inverting-ell--2`, the rational stage over a scheme `X` is the rationalization
+`I = (ϖ)` (for instance `Λ = 𝒪_E`), `M` a submonoid of `Λ` and `K` a field which is the
+localization of `Λ` at `M` (for instance `M = Λ ∖ {0}` and `K = E`). The rational stage over a
+scheme `X` is the rationalization
 
 `Dᵇc(X, E) = Dᵇc(X, 𝒪_E)[M⁻¹]`
 
@@ -217,18 +217,15 @@ instance : (pointFiberRational I M K k).EssSurj where
 
 instance : (pointFiberRational I M K k).IsEquivalence where
 
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finite coefficient categories over a point
-(rational stage `E`).
-
-Let `Λ` be a complete discrete valuation ring with finite residue field and maximal ideal
-`I = (ϖ)`, and `K` the localization of `Λ` at a submonoid `M` (in the blueprint `Λ = 𝒪_E`,
-`K = E`, see `AlgebraicGeometry.Etale.pointFiberFieldEquivalence`), and `k` a separably closed
-field. The evaluation at the geometric point of `s = Spec k`,
-`Fib_s : Dᵇc(s, E) ⥤ Dᵇ_fd(E)` (`AlgebraicGeometry.Etale.pointFiberRational`), is an equivalence
-from the rational stage `Dᵇc(s, E) = Dᵇc(s, 𝒪_E)[M⁻¹]` (the rationalization of the integral
-stage, blueprint `proposition-inverting-ell--2`) onto the bounded complexes of `K`-vector
-spaces with finite-dimensional cohomology, that is the bounded derived category of
-finite-dimensional `K`-vector spaces. -/
+/-- **Coefficient categories over a point**, rational stage `E`. Let `Λ` be a complete discrete
+valuation ring with finite residue field and maximal ideal `I = (ϖ)`, and `K` the localization of
+`Λ` at a submonoid `M` (for instance `Λ = 𝒪_E`, `K = E`, see
+`AlgebraicGeometry.Etale.pointFiberFieldEquivalence`), and `k` a separably closed field. The
+evaluation at the geometric point of `s = Spec k`, `Fib_s : Dᵇc(s, E) ⥤ Dᵇ_fd(E)`
+(`AlgebraicGeometry.Etale.pointFiberRational`), is an equivalence from the rational stage
+`Dᵇc(s, E) = Dᵇc(s, 𝒪_E)[M⁻¹]` (the rationalization of the integral stage) onto the bounded
+complexes of `K`-vector spaces with finite-dimensional cohomology, that is the bounded derived
+category of finite-dimensional `K`-vector spaces. -/
 noncomputable def pointFiberRationalEquivalence :
     Rationalization M 𝐂 ≌ DerivedCategory.BoundedFiniteCohomology K :=
   (pointFiberRational I M K k).asEquivalence
@@ -264,17 +261,14 @@ local instance fact_maximalIdealShrink :
       PadicAlgCl.maximalIdealShrink l E = Ideal.span {ϖ}) :=
   ⟨PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l E⟩
 
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finite coefficient categories over a point
-(rational stage `E`).
-
-For a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ` and a separably closed field `k`, evaluation at
-the geometric point of `s = Spec k` is an equivalence `Fib_s : Dᵇc(s, E) ≌ Dᵇ_fd(E)` between the
-rational stage `Dᵇc(s, E) = Dᵇc(s, 𝒪_E)[1/ϖ_E]` (the rationalization of the integral stage at
-the nonzero elements of `𝒪_E`, blueprint `proposition-inverting-ell--2`) and the bounded
-complexes of `E`-vector spaces with finite-dimensional cohomology, i.e. the bounded derived
-category of finite-dimensional `E`-vector spaces (`E` being represented by its universe `u + 1`
-copy `Shrink E`). This is `AlgebraicGeometry.Etale.pointFiberRationalEquivalence` for
-`Λ = 𝒪_E`; the integral stage is `AlgebraicGeometry.Etale.pointFiberIntegerRingEquivalence`. -/
+/-- **Coefficient categories over a point**, rational stage `E`. For a finite extension `E` of `ℚ_ℓ`
+inside `ℚ̄_ℓ` and a separably closed field `k`, evaluation at the geometric point of `s = Spec k` is
+an equivalence `Fib_s : Dᵇc(s, E) ≌ Dᵇ_fd(E)` between the rational stage
+`Dᵇc(s, E) = Dᵇc(s, 𝒪_E)[1/ϖ_E]` (the rationalization of the integral stage at the nonzero elements
+of `𝒪_E`) and the bounded complexes of `E`-vector spaces with finite-dimensional cohomology, i.e.
+the bounded derived category of finite-dimensional `E`-vector spaces (`E` being represented by its
+universe `u + 1` copy `Shrink E`). This is `AlgebraicGeometry.Etale.pointFiberRationalEquivalence`
+for `Λ = 𝒪_E`; the integral stage is `AlgebraicGeometry.Etale.pointFiberIntegerRingEquivalence`. -/
 noncomputable def pointFiberFieldEquivalence :
     Rationalization (nonZeroDivisors (Shrink.{u + 1} (PadicAlgCl.integers l E)))
       (DerivedCategory.boundedConstructibleIntegral (PadicAlgCl.maximalIdealShrink l E)

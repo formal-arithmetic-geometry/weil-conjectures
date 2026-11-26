@@ -33,8 +33,8 @@ For a Weil sheaf placed in degree zero, the stalk cohomology is the stalk itself
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilComplex.coeff_prod_inv_alternatingCharpolyRevProd_stalk`
-  (`theorem-trace-formula-euler-product`): the Euler-product form of the trace formula.
+- `AlgebraicGeometry.WeilComplex.coeff_prod_inv_alternatingCharpolyRevProd_stalk`:
+  the Euler-product form of the trace formula.
 - `AlgebraicGeometry.WeilSheaf.coeff_prod_inv_localPolynomial_stalk`: its form for a Weil
   sheaf.
 
@@ -44,9 +44,9 @@ For a Weil sheaf placed in degree zero, the stalk cohomology is the stalk itself
 choosing a topology on `ℚ̄_ℓ⟦T⟧` in which it converges, the statement is coefficientwise: the
 coefficient of `T ^ n` of the finite product over any finite set of closed points containing
 all points of degree at most `n` is the coefficient of `T ^ n` of the cohomological side. This
-is the `T`-adic local finiteness of item (1) of the blueprint theorem, together with item (2).
-Item (3), the curve case, is obtained from it with the vanishing of `H_cⁱ` outside `[0, 2]`,
-and item (4), the transport along `ι : ℚ̄_ℓ → ℂ`, by applying `ι` coefficientwise.
+is the `T`-adic local finiteness of the product. The curve case is obtained from it with the
+vanishing of `H_cⁱ` outside `[0, 2]`, and the transport along `ι : ℚ̄_ℓ → ℂ` by applying `ι`
+coefficientwise.
 
 *Degrees.* The finite products over the cohomological degrees run over finite sets `S` and `T`
 of integers outside of which the compactly supported cohomology, respectively the cohomology
@@ -55,9 +55,9 @@ sheaves, vanish; such sets exist by finiteness
 `AlgebraicGeometry.WeilComplex.exists_finset_isZero_homologySheaf`), and enlarging them does
 not change the alternating determinants, the added factors being `1`.
 
-*Hypotheses.* The blueprint theorem is stated for a Weil complex satisfying the finite-level
-hypotheses of the trace formula with `E`-coefficients (étale-origin witnesses and compactification
-admissibility for the reductions of a lattice of a representative). The Weil complexes of this
+*Hypotheses.* The trace formula with `E`-coefficients is proved for Weil complexes satisfying
+finite-level hypotheses (étale-origin witnesses and compactification admissibility for the
+reductions of a lattice of a representative). The Weil complexes of this
 repository are constructible `ℚ̄_ℓ`-complexes on the pro-étale site of `X`, built directly from
 pro-étale sheaves with no chosen lattice; those hypotheses are properties of the integral
 models used in the proof, and are not part of the statement.
@@ -92,7 +92,7 @@ variable [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
 
 namespace WeilComplex
 
-/-- Blueprint `theorem-trace-formula-euler-product`: Euler-product form of the trace formula.
+/-- Euler-product form of the trace formula.
 
 Let `X₀` be a separated scheme of finite type over `k₀ = 𝔽_q` and `K` a Weil complex on `X₀`
 with coefficients in `ℚ̄_ℓ`, `ℓ ≠ p`. Write `F` for the global geometric Frobenius on
@@ -106,8 +106,7 @@ as formal power series over `ℚ̄_ℓ`, the product over the closed points bein
 for every `n`, the coefficient of `T ^ n` of the finite product over any finite set `s` of
 closed points containing those of degree at most `n` is the coefficient of `T ^ n` of the
 right-hand side. Here `S` and `T` are finite sets of degrees outside of which `H_cⁱ(X, K)`,
-respectively the cohomology sheaves `𝓗ʲ(K)`, vanish. This is assertion (2) of the blueprint
-node, for `Λ = ℚ̄_ℓ`, with the local finiteness of assertion (1). -/
+respectively the cohomology sheaves `𝓗ʲ(K)`, vanish. -/
 theorem coeff_prod_inv_alternatingCharpolyRevProd_stalk (K : WeilComplex k₀ l X)
     {S T : Finset ℤ}
     (hS : ∀ i ∉ S, Subsingleton (WeilComplex.compactlySupportedCohomology K i).carrier)
@@ -174,9 +173,7 @@ for every `n` and every finite set `s` of closed points containing those of degr
 `coeff_n ∏_{x ∈ s} det (1 - T ^ {e_x} F_x ∣ F_x̄)⁻¹`
 `  = coeff_n ∏_i det (1 - T F ∣ H_cⁱ(X, F)) ^ ((-1) ^ (i + 1))`,
 
-for a finite set `S` of degrees outside of which `H_cⁱ(X, F)` vanishes. This is
-`AlgebraicGeometry.WeilComplex.coeff_prod_inv_alternatingCharpolyRevProd_stalk` for the Weil
-complex `F[0]`, whose only cohomology sheaf is `𝓗⁰ = F`. -/
+for a finite set `S` of degrees outside of which `H_cⁱ(X, F)` vanishes. -/
 theorem coeff_prod_inv_localPolynomial_stalk (F : WeilSheaf k₀ l X) {S : Finset ℤ}
     (hS : ∀ i ∉ S, Subsingleton (F.compactlySupportedCohomology i).carrier) (n : ℕ)
     (s : Finset X.finitePoints)

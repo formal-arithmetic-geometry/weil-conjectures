@@ -14,8 +14,18 @@ import WeilConjectures.RingTheory.PopescuDelocalizeDenominators
 /-!
 # Polynomial certificates for delocalization
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma Tag 07F4.
-(blueprint: lem-weil-pbc-popescu-delocalize-certificate).
+Polynomial relations and identities certifying that the product of the delocalization
+denominators is elementary standard in the quotient.
+
+## Implementation details
+
+The relations are the denominator-scaled smooth equations followed by the original relations.
+The Jacobian determinant is scaled by the product of the denominators, and span induction moves
+the denominator identities into the initial relation ideal. Empty families are allowed.
+
+## References
+
+* [Stacks, Tag 07F4]
 -/
 
 @[expose] public section
@@ -50,25 +60,7 @@ private theorem product_mul_mem_scaled_span
 
 /-- Turn the denominator-clearing data into polynomial certificates for the quotient.
 The output consists entirely of polynomials and their evaluation and ideal identities;
-no factorization algebra is chosen here.
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma Tag 07F4, the quotient
-construction and the last paragraph verifying the product of denominators.
-(blueprint: lem-weil-pbc-popescu-delocalize-certificate).
-
-Proof: take `f`, `l`, `s₀`, `a₀`, `a`, `sg`, `sf` from
-`exists_delocalization_denominator_data`. Put the first `c` relations of `F` equal to
-`C (sf j).val * f j` and the last `t` equal to the renamed original relations. Their
-evaluations vanish: the first ones by the denominator data, the last ones because `l`
-agrees with `α` on the generators of `A`. Put `ug = ∏ sg`, `uf = ∏ sf`, and
-`s = s₀ * ug * uf`. Every `C uf.val * f j` belongs to the initial relation ideal,
-since `uf` is divisible by `sf j`; span induction gives the same assertion for every
-polynomial in the ideal `(f)`. Applying this to `∑ a j * f j` and multiplying by `ug`
-converts the denominator identity into the Jacobian congruence for `F`: the derivative
-of `C (sf j).val * f j` is `C (sf j).val` times the derivative of `f j`, so its determinant
-is `C uf.val` times the old determinant. Applying the same span argument to each
-`C (sg j).val * g j`, then multiplying by `s₀` and all the other `sg` factors, gives
-the remaining-relation condition. Finite products and empty determinants make this
-argument valid for empty families as well. -/
+no factorization algebra is chosen here. -/
 theorem exists_delocalization_polynomial_certificate
     {R : Type u} {A : Type v} {Λ : Type w}
     [CommRing R] [CommRing A] [CommRing Λ] [Algebra R A] [Algebra R Λ]

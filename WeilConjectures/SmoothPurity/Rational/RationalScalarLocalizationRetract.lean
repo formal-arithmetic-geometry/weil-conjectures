@@ -12,7 +12,11 @@ import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationFullS
 /-! # Descent of the ambient trace retract to the constructible subcategory
 
 This module records the full-subcategory descent needed after the ambient trace
-calculation.  (blueprint: lem-sf-rational-scalar-localization-retract).
+calculation.
+
+## References
+
+* Stacks Project, Tags 090W and 02FL.
 -/
 
 @[expose] public section
@@ -23,18 +27,7 @@ namespace WeilConjectures
 
 /-- An ambient trace retract whose two objects are constructible lifts to the
 raw rational constructible category.  The full-subcategory inclusion preserves
-its section and retraction maps literally.
-
-Source: the full-subcategory localization construction in the definition of raw
-rationalization; Stacks Project Tags 090W and 02FL.
-(blueprint: lem-sf-rational-scalar-localization-retract).
-
-Proof: the inclusion of the scalar-localized constructible full subcategory into the
-ambient scalar localization is fully faithful
-(`ScalarLocalization.fullyFaithfulFullSubcategoryInclusion`) and sends an object to
-the ambient object with the same underlying complex.  Take the preimages of the two
-ambient maps.  The inclusion maps their composite to the ambient composite, which is
-the identity; faithfulness gives the retract equation. -/
+its section and retraction maps literally. -/
 theorem rationalScalar_constructible_trace_retract
     (l : ℕ) [Fact l.Prime]
     (E F : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

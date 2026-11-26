@@ -17,8 +17,20 @@ import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 /-!
 # Completion maps of G-rings are regular
 
-Source: Stacks Project, More on Algebra, Lemma Tag 0AH2 (Matsumura, Theorem 79)
-(blueprint: lem-weil-pbc-g-ring-completion-regular).
+The canonical map from a G-ring to its completion along any ideal is regular.
+
+## Implementation details
+
+Regularity is checked after localizing at each maximal ideal `m'` of the completion. With `m`
+its inverse image in `A`, the local map `A_m → B = (Â)_{m'}` is flat, extends `m` to the maximal
+ideal of `B`, and induces an isomorphism of completions. Composing gives a faithfully flat map
+`B → Â_m` through which the (regular) completion map of `A_m` factors, so regularity descends
+to `A_m → B`.
+
+## References
+
+* [Stacks, Tag 0AH2]
+* [Matsumura, *Commutative Ring Theory*, Theorem 79]
 -/
 
 @[expose] public section
@@ -27,40 +39,7 @@ universe u
 
 namespace AdicCompletion
 
-/-- The canonical map from a G-ring to its completion along any ideal is regular.
-Source: Stacks Project, More on Algebra, Lemma Tag 0AH2
-(blueprint: lem-weil-pbc-g-ring-completion-regular).
-
-Proof:
-1. The G-ring hypothesis gives Noetherianity (`theorem-finite-etale-covers-proper-henselian--2`).
-The completion is
-   Noetherian (`lem-weil-pbc-adic-completion-noetherian`), and its canonical map is flat
-   (`lem-weil-pbc-noetherian-completion-flat`). The ideal is finitely generated.
-2. By `lem-weil-pbc-regular-local-maximal`, it suffices to check regularity after localizing
-   at every maximal ideal m' of the completion. Write m for its inverse image and B for
-   the localization at m' (`def-weil-pbc-localization-at-prime`).
-3. The projection to A/I is surjective with kernel I times the completion, and the
-   completion is complete for that extended ideal (`lem-weil-pbc-adic-completion-mod-ideal`).
-   That ideal lies in m' by `lem-weil-pbc-adic-complete-jacobson-radical`.
-4. Every element b of the completion has a representative a in A modulo the projection's
-   kernel. If b lies in m', then so does the image of a; since I lies in m, this proves
-   m' is the extension of m. The same representatives give surjectivity on the residue
-   fields of A_m and B; injectivity follows from locality.
-5. The localized map φ from A_m to B is flat and local between Noetherian local rings
-   (`lem-weil-pbc-flat-local-ring-maps`). Mapping the equality of step 4 into B shows
-   that φ extends the maximal ideal of A_m to the maximal ideal of B
-   (`def-weil-pbc-localization-at-prime`).
-6. The localized map induces an isomorphism e between the maximal-ideal-adic completions
-   of A_m and B, commuting with their canonical maps
-   (`lem-weil-pbc-flat-local-completion-iso`, `def-weil-pbc-adic-completion`).
-7. Compose B's completion map with e⁻¹ to obtain g : B → completion(A_m). The commuting
-   square in step 6 proves g ∘ φ is exactly the completion map of A_m. It is regular
-   by `theorem-finite-etale-covers-proper-henselian--2`.
-8. The map g is flat: B's completion map is flat and e⁻¹ is bijective. It is also local,
-   as both factors are local homomorphisms. Therefore it is faithfully flat, and its
-   spectrum map is surjective (`lem-weil-pbc-local-completion-faithfully-flat`).
-9. Descend regularity to A_m to B by `lem-weil-pbc-regular-permanence`. As m' was arbitrary,
-   step 2 proves regularity of the original completion map. -/
+/-- The canonical map from a G-ring to its completion along any ideal is regular. -/
 theorem isRegular_of_isGRing (A : Type u) [CommRing A] (I : Ideal A) (hA : IsGRing A) :
     RingHom.IsRegular (algebraMap A (AdicCompletion I A)) := by
   have : IsNoetherianRing A := hA.1

@@ -8,7 +8,13 @@ public import WeilConjectures.TraceFormula.Isomorphism.IsomorphismMultiplication
 public import WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowerCanonical
 
 /-! # The actual strict quotient cone augmentation
-Source: Stacks 03EK, 08TC and 0941; blueprint rational Frobenius integral model (2)--(3).
+
+The augmentation of a complex into the Roos cone of its tower of quotients, given by the
+quotient units `x ↦ 1 ⊗ x` with zero shifted coordinate.
+
+## References
+
+* Stacks Project, Tags 03EK, 08TC, 0941.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -39,11 +45,7 @@ private theorem tuple_difference_zero
     Preadditive.comp_sub, Preadditive.sub_comp, Category.assoc, hγ]
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- Consecutive quotient maps preserve the actual tensor unit.
-Source: Stacks 03EK and blueprint rational Frobenius integral model (2)--(3).
-(blueprint: lem-trf-strict-quotient-unit-compatible).
-Proof: on sections quotient reduction sends 1 tensor x to 1 tensor x; use
-extensionality for chain maps and sheaf module maps. -/
+/-- Consecutive quotient maps preserve the actual tensor unit. -/
 theorem trfStrictQuotientUnit_compatible
     (P : CochainComplex (integralTowerModules l E Y) ℤ) (n : ℕ) :
     unrestrictedTowerUnit l E Y P (n + 1) ≫
@@ -63,11 +65,7 @@ theorem trfStrictQuotientUnit_compatible
 
 -- Reconcile the two published scalar-restriction product presentations explicitly.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- The tuple of quotient units is killed by one minus transition shift.
-Source: Stacks 08TC and blueprint rational Frobenius integral model (2)--(3).
-(blueprint: lem-trf-strict-quotient-unit-condition).
-Proof: after the nth product projection the composite is the nth unit minus
-the next unit followed by transition, zero by the preceding compatibility. -/
+/-- The tuple of quotient units is killed by one minus the transition shift. -/
 theorem trfStrictQuotientUnit_condition
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :
     CochainComplex.HomComplex.δ (-1) 0
@@ -98,9 +96,8 @@ theorem trfStrictQuotientUnit_condition
     CochainComplex.HomComplex.Cochain.ofHom_zero, add_zero]
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- The constructed quotient tuple with zero shifted coordinate.
-Source: Stacks 08TC; blueprint rational Frobenius integral model (2)--(3).
-(blueprint: def-trf-strict-quotient-cone-augmentation). -/
+/-- The map into the Roos cone given by the tuple of quotient units with zero shifted
+coordinate. -/
 def trfStrictQuotientConeAugmentation
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :
     P ⟶ integralOperationsRoos ((trfQuotientTowerFunctor l E Y).obj P) :=

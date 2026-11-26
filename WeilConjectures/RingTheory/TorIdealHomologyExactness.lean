@@ -21,7 +21,20 @@ import Mathlib.Algebra.Homology.ConcreteCategory
 
 /-! # Exactness of the ideal homology connecting map
 
-Source: Stacks Project, Algebra, Tags 00M5 and 00M6.
+A map `δH` from the first homology of `P ⊗ R/I` to `I ⊗ M` given by the cycle-lift formula is
+injective, with range the kernel of the multiplication map `I ⊗ M → M`.
+
+## Implementation details
+
+Surjectivity onto the kernel lifts a tensor through `I ⊗ P₀` by right exactness and uses
+exactness of the resolution in degree zero. For injectivity, a cycle whose image vanishes is
+corrected by an element of `I P₁` to an actual cycle of `P`, which is a boundary by exactness in
+degree one. Right exactness of the tensor product suffices; freeness is not used.
+
+## References
+
+* [Stacks, Tag 00M5]
+* [Stacks, Tag 00M6]
 -/
 
 @[expose] public section
@@ -30,22 +43,9 @@ open CategoryTheory CategoryTheory.MonoidalCategory
 open scoped TensorProduct BigOperators
 namespace ModuleCat
 
-/-- Source: Stacks Project, Algebra, proof of Tag 00M5 and Remark 00M6.
-(blueprint: lem-weil-pbc-tor-ideal-homology-exactness)
-
-Proof in words: every quotient tensor is represented by y ⊗ 1, since a scalar
-in R/I lifts to R; every differential of a quotient cycle belongs to I P₀,
-so it has a finite expression Σ a_j p_j. The formula implies μ δH = 0
-because ε d = 0. Conversely a tensor in ker μ lifts through I ⊗ P₀ by
-right exactness. Its image in P₀ is killed by ε, hence is d y by resolution
-exactness, giving a quotient cycle whose image is the original tensor.
-For injectivity, if δH of a quotient cycle is zero, right exactness for
-I ⊗ P identifies its ideal-tensor lift as an ideal-tensor boundary. Subtract
-the corresponding element of I P₁ from y; the difference is an actual cycle
-in P₁. Exactness of P in degree one makes it a boundary from P₂. Reducing
-modulo I shows the original quotient cycle is a boundary. Thus δH is injective.
-These arguments include the zero ideal, unit ideal and zero module.
--/
+/-- If `δH : H₁(P ⊗ R/I) → I ⊗ M` sends the class of a cycle lifted to `y` with
+`d y = ∑ j, a j • p j` to `∑ j, a j ⊗ π (p j)`, then `δH` is injective and its range is the
+kernel of the multiplication map `μR : I ⊗ M → M`. -/
 theorem tor_ideal_homology_exactness
     {R : Type u} [CommRing R] (I : Ideal R) (M : ModuleCat.{u} R)
     (P : ProjectiveResolution M) (hP : ∀ n : ℕ, Module.Free R (P.complex.X n))

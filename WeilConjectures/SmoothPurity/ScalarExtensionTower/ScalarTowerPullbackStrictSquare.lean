@@ -11,8 +11,12 @@ import all WeilConjectures.SmoothPurity.Scalar.ScalarExtensionTensorUnit
 
 /-! # Strict scalar/pullback square below the total-limit comparison
 
-Source: Stacks 03EL and 07A4; strict part of
-lem-pur-scalar-extension-tower-coherence.
+This is the strict part of scalar-extension tower coherence, before localization and total
+limits.
+
+## References
+
+* Stacks Project, Tags 03EL and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -35,17 +39,8 @@ variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-/-- Equality of normalized scalar/pullback maps before localization and total limit.
-The proof is the homogeneous generator calculation: both routes send a generator
-`b ⊗ (x ⊗ y)` to `(b ⊗ x) ⊗ (1 ⊗ y)`, and the equality is retained by every
-quotient transition.  This is strictly below the target's realization and limit
-statement.
-Source: Stacks 03EL and 07A4
-(blueprint: stage3-pur-scalar-pullback-strict-square).
-Proof: compare homogeneous generators after applying the scalar adjunction
-transpose; the scalar and pullback formulas agree and preserve every quotient
-transition.
--/
+/-- Equality of normalized scalar/pullback maps before localization and total limit: both
+routes send a generator `b ⊗ (x ⊗ y)` to `(b ⊗ x) ⊗ (1 ⊗ y)`. -/
 theorem scalarTowerPullbackStrictSquare {X Y : Scheme.{u}} (f : X ⟶ Y) :
     leftRoute l E L ι f = rightRoute l E L ι f := by
   apply Iso.ext

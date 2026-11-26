@@ -36,16 +36,17 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteLocalCons
 /-!
 # Integral pullback and completed tensor preserve constructibility
 
-Source: Bhatt--Scholze, Lemmas 6.5.3--6.5.5 and 6.5.9(5); Stacks Project,
-Tags 099M, 099N, 09BQ and 054I
-(blueprint: lem-pur-integral-operations-preserve-constructible).
-
 Finite reductions use index `n` for the positive exponent `n + 1`. The reduction
 comparisons below are the adjoints of the actual Roos projections, transported
 through the defining representative comparisons of the integral operations.
 Their targets compute the finite pullback and finite derived tensor on K-flat
 representatives. All good representatives and all identifications with the input
 objects are allowed; no resolutions or comparison morphisms are extra hypotheses.
+
+## References
+
+* [Bhatt--Scholze, Definition 3.4.10, Lemmas 6.5.3--6.5.5 and 6.5.9(5)]
+* [Stacks, Tag 099M], [Stacks, Tag 099N], [Stacks, Tag 09BQ], [Stacks, Tag 054I]
 -/
 
 @[expose] public noncomputable section
@@ -69,9 +70,7 @@ attribute [local irreducible] integralDerivedPullback integralCompletedTensor
 
 /-- The canonical reduction comparison for integral pullback. Its adjoint is the
 Roos projection, after the defining representative comparison and exact-restriction
-factorization. Thus this map is fixed, rather than an arbitrary isomorphism.
-Source: Stacks Tag 099N(5); Bhatt--Scholze, Lemma 6.5.9(5)
-(blueprint: lem-pur-integral-operations-preserve-constructible). -/
+factorization. Thus this map is fixed, rather than an arbitrary isomorphism. -/
 def integralPullbackFiniteComparison {X Y : AlgebraicGeometry.Scheme.{u}}
     (f : X ⟶ Y) (K : DerivedCategory (integralTowerModules l E Y))
     (P : (integralOperationsGoodComplex l E Y).FullSubcategory)
@@ -88,9 +87,7 @@ def integralPullbackFiniteComparison {X Y : AlgebraicGeometry.Scheme.{u}}
 
 /-- The canonical reduction comparison for the completed integral tensor.
 Its adjoint is the actual projection to `Res_n(P_n tensor Q_n)` of the defining Roos
-complex. The finite tensor is computed on reduced K-flat representatives.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5; Stacks Tags 099M and 09BQ
-(blueprint: lem-pur-integral-operations-preserve-constructible). -/
+complex. The finite tensor is computed on reduced K-flat representatives. -/
 def integralTensorFiniteComparison (W : AlgebraicGeometry.Scheme.{u})
     (M N : DerivedCategory (integralTowerModules l E W))
     (P Q : (integralOperationsGoodComplex l E W).FullSubcategory)
@@ -507,34 +504,7 @@ private theorem tensor_constructible (W : AlgebraicGeometry.Scheme.{u})
     support_iso l E W n ec.symm (a + c) (b + d') hf.2⟩
 
 /-- Integral pullback and completed tensor preserve the bounded constructible
- derived-complete category, and their canonical finite-reduction maps are isomorphisms.
-
-Source: Bhatt--Scholze, Lemmas 6.5.3--6.5.5 and 6.5.9(5); Stacks Tags 099M, 099N,
-09BQ and 054I (blueprint: lem-pur-integral-operations-preserve-constructible).
-
-Proof:
-1. Choose good representatives by the independent-coefficient K-flat resolution theorem,
-transporting categorical flatness to site flatness with siteSheafTensorRightIso.
-2. The separate integralOperationRoos_effectivity theorem gives completeness and the
-canonical reduction comparisons on arbitrary good representatives. Its unbounded
-normalization calculation is independent of the constructibility argument below.
-3. At each finite level, use integralFinitePullbackModel to identify finite pullback
-with the exact constant-module inverse image. Pull back the finite stratification.
-The constant-module composition comparison and finite-local-constancy pullback theorem
-show constructibility on the pulled-back strata. Exactness identifies cohomology and
-preserves vanishing outside the original common interval.
-4. For tensor use integral_residue_tor on the first input's residue interval.
-Compare each actual reduced good complex with the concrete change-of-rings complex
-to establish K-flatness. Its identity is therefore an allowed K-flat resolution.
-5. Convert the first finite reduction's Tor condition to categorical Tor amplitude.
-The proved source-library homologyConcentratedIn_tensor_of_torAmplitudeIn_left adds
-this interval to the second reduction's cohomology interval. The K-flat comparison
-identifies categorical tensor with the specified total tensor of the actual reductions.
-6. finiteTensor_constructible_cohomology supplies all constructible cohomology sheaves.
-The uniform support interval makes their support finite. Transport these conclusions
-through the canonical reduction isomorphisms; together with completeness they give
-exactly sfIntegralConstructible for each operation. Both comparison assertions hold
-for all representatives because step 2 did not require chosen ones. -/
+derived-complete category, and their canonical finite-reduction maps are isomorphisms. -/
 theorem integralOperations_preserve_constructible
     {X Y : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]

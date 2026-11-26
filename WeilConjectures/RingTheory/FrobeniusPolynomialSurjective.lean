@@ -15,8 +15,17 @@ import WeilConjectures.RingTheory.FrobeniusPolynomialSolution
 /-!
 # Surjectivity of the Frobenius polynomial solution scheme
 
-Source: Stacks Project, Tag 0GKU, proof of lemma-frobenius-linear-on-vb.
-(blueprint: lem-fd-frobenius-polynomial-surjective).
+The map on spectra induced by an inhomogeneous Frobenius polynomial solution algebra is
+surjective.
+
+## Implementation details
+
+At a prime `q` of the coefficient ring, a solution over an algebraic closure of the residue field
+of `q` gives a prime of the solution algebra lying over `q`.
+
+## References
+
+* [Stacks, Tag 0GKU] (proof)
 -/
 
 @[expose] public section
@@ -31,16 +40,6 @@ namespace Algebra
 
 /-- The spectrum of an inhomogeneous Frobenius polynomial solution algebra covers
 the spectrum of the coefficient ring.
-
-Source: Stacks Project, Tag 0GKU, proof of lemma-frobenius-linear-on-vb.
-(blueprint: lem-fd-frobenius-polynomial-surjective).
-
-Proof: at a prime of the coefficient ring, pass to an algebraic closure of its
-residue field. The Frobenius polynomial solution theorem gives a homomorphism from
-the solution algebra to this field over the coefficient ring. The inverse image of
-the zero ideal is a prime of the solution algebra. Its contraction is the chosen
-prime, because the residue-field map has exactly that kernel and the algebraic
-closure inclusion is injective. The proof also covers rank zero.
 -/
 theorem frobenius_polynomial_surjective
     (R : Type u) [CommRing R] (p : ℕ) [Fact p.Prime] [CharP R p]

@@ -28,16 +28,19 @@ tr(T_{c_m}(φ_m) | RΓ(X, K)) = ∑_{x ∈ X(k), Φ_m x = x} tr(F_{x,m} | K_x)
 (`ProEtale.CondensedRing.WeilBoundedConstructible.trace_globalOperator_graph_eq_sum`), and the
 same for the global Frobenius of the compactly supported cohomology of the Weil object
 (`WeilBoundedConstructible.trace_globalOperator_eq_sum_of_smoothOfRelativeDimension_one`).
-This is the curve case in Step 2 of the proof of blueprint
-`theorem-trace-formula-frobenius-correspondence--1`, for the proper curve itself.
+
+## Implementation details
 
 The local term at a fixed point `x` is the trace of the local Frobenius `F_{x,m}`, which is the
-stalk map of `φ_m` at `x` (`WeilBoundedConstructible.stalkFrobenius_eq_graphStalkMap`). It is
-taken from the curve route of SGA 5, III B (blueprint `corollary-contracting-local-terms-point`,
-item 3, `proposition-frobenius-local-term-curve`, `lemma-vanishing-local-term-zero-stalk--2`:
-`ProEtale.CondensedRing.Correspondence.localTerm_traceClass_frobeniusGraph_eq_trace_of_smooth`),
-not from Varshavsky's theorem for contracting correspondences, so the trace formula does not
-depend on nearby cycles.
+stalk map of `φ_m` at `x` (`WeilBoundedConstructible.stalkFrobenius_eq_graphStalkMap`). It is taken
+from the curve route of SGA 5, III B
+(`ProEtale.CondensedRing.Correspondence.localTerm_traceClass_frobeniusGraph_eq_trace_of_smooth`),
+not from Varshavsky's theorem for contracting correspondences, so the trace formula does not depend
+on nearby cycles.
+
+## References
+
+* SGA 5, III B.
 
 -/
 
@@ -61,9 +64,9 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {k₀ : Type u} [Field k₀] [Finite k₀] [Algebra k₀ k] {X₀ : Scheme.{u}}
   {f₀ : X₀ ⟶ Spec (.of k₀)} {p : X.left ⟶ X₀} {Φ : X ⟶ X} {m : ℕ}
 
-/-- **The fixed locus of the Frobenius graph** (blueprint `lemma-frobenius-fixed-scheme--1`): for
-the model Frobenius `Φ` and `m ≥ 1`, the disjoint union `∐ Spec k` of the rational points fixed
-by `Φ_m` is a fixed locus of the graph correspondence `c_m = (𝟙, Φ_m)` of a Weil object. -/
+/-- **The fixed locus of the Frobenius graph**: for the model Frobenius `Φ` and `m ≥ 1`, the
+disjoint union `∐ Spec k` of the rational points fixed by `Φ_m` is a fixed locus of the graph
+correspondence `c_m = (𝟙, Φ_m)` of a Weil object. -/
 noncomputable def IsModelFrobenius.graphFixedLocus (hΦ : IsModelFrobenius Φ f₀ p) (hm : 1 ≤ m)
     [Finite (FixedPoint Φ m)] (K : WeilBoundedConstructible ℓ Φ) : (K.graph m).FixedLocus where
   F := sigmaPoint k (FixedPoint Φ m)
@@ -83,14 +86,10 @@ lemma IsModelFrobenius.fixedLocusPoint_graphFixedLocus (hΦ : IsModelFrobenius �
       (sigmaPointι_fixedPointsι Φ m x).symm)
 
 set_option linter.overlappingInstances false in
-/-- **The trace formula on a proper smooth curve** (blueprint
-`theorem-trace-formula-frobenius-correspondence--1`, Step 2, for a proper curve; from
-`theorem-proper-pushforward-lefschetz-verdier`, `proposition-frobenius-local-term-curve--1` on
-curves (`corollary-contracting-local-terms-point`, item 3) and `lemma-frobenius-fixed-scheme--1`):
-for a proper smooth curve `X` with the model Frobenius `Φ`, a Weil object `(K, φ)` and `m ≥ 1`, the
-trace of the global operator of the graph correspondence `c_m = (𝟙, Φ_m)` on `RΓ(X, K)` is the sum
-over the rational points `x` fixed by `Φ_m` of the traces of the local Frobenius `F_{x,m}` on the
-stalks `K_x`. -/
+/-- **The trace formula on a proper smooth curve**: for a proper smooth curve `X` with the model
+Frobenius `Φ`, a Weil object `(K, φ)` and `m ≥ 1`, the trace of the global operator of the graph
+correspondence `c_m = (𝟙, Φ_m)` on `RΓ(X, K)` is the sum over the rational points `x` fixed by `Φ_m`
+of the traces of the local Frobenius `F_{x,m}` on the stalks `K_x`. -/
 theorem WeilBoundedConstructible.trace_globalOperator_graph_eq_sum [IsProper X.hom]
     [SmoothOfRelativeDimension 1 X.hom] [LocallyOfFiniteType f₀]
     (hΦ : IsModelFrobenius Φ f₀ p) (K : WeilBoundedConstructible ℓ Φ) (hm : 1 ≤ m)
@@ -126,9 +125,7 @@ theorem WeilBoundedConstructible.trace_globalOperator_graph_eq_sum [IsProper X.h
 
 set_option linter.overlappingInstances false in
 /-- **The trace formula on a proper smooth curve**, for the global Frobenius `F_{c,m}` of the
-compactly supported cohomology of the Weil object (blueprint
-`theorem-trace-formula-frobenius-correspondence--1`, Step 2, for a proper curve, with
-`lemma-scheme-frobenius-geometric-frobenius--3`). -/
+compactly supported cohomology of the Weil object. -/
 theorem WeilBoundedConstructible.trace_globalOperator_eq_sum_of_smoothOfRelativeDimension_one
     [IsProper X.hom] [SmoothOfRelativeDimension 1 X.hom] [LocallyOfFiniteType f₀]
     (hΦ : IsModelFrobenius Φ f₀ p) (K : WeilBoundedConstructible ℓ Φ) (hm : 1 ≤ m)

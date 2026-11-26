@@ -28,9 +28,20 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjec
 
 /-! # Strict realization of coherent finite coefficient systems
 
-Source: the strict representative step in the inverse-limit assertion of
-proposition-sp-integral-adjunction; Stacks, Derived Categories, lemma-K-injective.
-(blueprint: lem-coef-normalized-dvr-strict-realization).
+This file shows that a coherent finite coefficient system admits a derived strict
+completed-coefficient realization (`normalizedDVR_strict_realization`).
+
+## Implementation details
+
+The restricted finite objects form an inverse diagram in the derived category. Representing them
+by K-injective complexes (the module-sheaf category is Grothendieck), each successor morphism is
+represented by a chain map; composing these gives a strict inverse sequence, whose localization
+is the realization. The squares for longer transitions follow by induction on the distance, using
+the quotient cocycle and restriction-composition coherence.
+
+## References
+
+* [Stacks Project, Derived Categories, Lemma "K-injective"][stacks-project]
 -/
 
 @[expose] public section
@@ -91,27 +102,7 @@ private def transposeTower {A : Type*} [Category A] [HasZeroMorphisms A]
     exact (T.obj n).d_comp_d i j k
 
 /-- A coherent finite coefficient system admits a derived strict completed-coefficient
-realization. This assertion does not impose normalization or identify a limit.
-
-Source: the strict representative step of lem-coef-integral-dualizing-roos-model,
-expanded from the inverse-limit paragraph of proposition-sp-integral-adjunction;
-Stacks, Derived Categories, lemma-K-injective.
-(blueprint: lem-coef-normalized-dvr-strict-realization).
-
-Proof: restrict each finite object to the completed coefficient sheaf. The canonical
-restriction-composition comparisons and the two given identities make these objects
-an inverse diagram in the derived category. Choose K-injective complexes representing
-its objects, using the Grothendieck property of the module-sheaf category. Each successor
-morphism is represented by a homotopy class of chain maps into its K-injective target;
-choose a chain map in that class. Form the strict inverse sequence from these successor
-maps, composing them for longer transitions, and transpose the resulting diagram of
-complexes to a complex of diagrams. Localize it to obtain Z. The chosen representative
-isomorphisms give e. For successors the required square is the defining equation of
-the lifted chain map. The identity case follows from the restriction unit, and induction
-on the distance m-n, using the quotient cocycle and restriction-composition coherence,
-gives the displayed square for every h. No uniform bound, normalization, or product
-exactness is needed. On the empty scheme the same construction is the zero diagram;
-identity transitions and constant systems satisfy exactly the same recursion. -/
+realization. This assertion does not impose normalization or identify a limit. -/
 theorem normalizedDVR_strict_realization
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

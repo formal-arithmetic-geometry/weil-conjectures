@@ -15,11 +15,7 @@ set_option autoImplicit false
 open CategoryTheory MonoidalCategory
 namespace WeilConjectures.PurityFiniteSetting.AffineOrdinaryIntegrationCoordinates
 
-/-- Cancellation of the three orientation isomorphisms, before adjunction.
-Source: composition proof Step 1, the last cancellation.
-(blueprint: new-pur-affine-integration-ordinary-counit-calculus).
-Proof: postcompose the forward square with the total inverse, then precompose by the
-inverse source and coefficient comparisons. For the converse cancel the same maps. -/
+/-- Cancellation of the three orientation isomorphisms, before adjunction. -/
 theorem orientation_square_iff_inverse
     {C : Type*} [Category C] {U V W T : C}
     (a : U ≅ V) (m : V ≅ W) (o : T ≅ W) (s : U ⟶ T) :
@@ -35,12 +31,7 @@ theorem orientation_square_iff_inverse
       Category.comp_id] using hh.symm
 
 /-- An orientation square is equivalent to equality of the inverse maps after the actual
-exceptional counit. No faithfulness of the exceptional left adjoint is assumed.
-Source: composition proof Step 1, cancellation of the normalized integration isomorphisms.
-(blueprint: new-pur-affine-integration-ordinary-counit-calculus).
-Proof: the adjunction Hom equivalence detects equality of the inverse arrows. Precompose
-by the two source isomorphisms and postcompose by the total orientation to recover the
-forward square. Conversely cancel the same invertible maps in the forward square. -/
+exceptional counit. No faithfulness of the exceptional left adjoint is assumed. -/
 theorem orientation_square_iff_counit
     {C D : Type*} [Category C] [Category D]
     {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R)
@@ -63,12 +54,7 @@ theorem orientation_square_iff_counit
     simpa only [Category.assoc, Iso.hom_inv_id_assoc, Iso.inv_hom_id,
       Category.comp_id] using hh
 
-/-- The actual conjugate of a compact-support compositor obeys the two-counit equation.
-Source: composition proof Step 1, the exceptional map as the mate of compact support.
-(blueprint: new-pur-affine-integration-ordinary-counit-calculus).
-Proof: the inverse of the conjugate is the conjugate of the inverse compositor.
-The defining counit equation for conjugation applies. Naturality of the compositor moves
-an arbitrary source arrow through it; expand the actual composite adjunction counit. -/
+/-- The actual conjugate of a compact-support compositor obeys the two-counit equation. -/
 theorem conjugate_composite_counit
     {X Y Z : Type*} [Category X] [Category Y] [Category Z]
     {Lq : X ⥤ Y} {Rq : Y ⥤ X} {Lp : Y ⥤ Z} {Rp : Z ⥤ Y}
@@ -91,13 +77,7 @@ theorem conjugate_composite_counit
 
 /-- Counit of the ordered tensor of two integration adjuncts, with the actual
 conjugate of the compact-support compositor. This is a formal calculation and contains
-no smoothness or orientation compatibility hypothesis.
-Source: composition proof Step 1, direct-sum integration and adjunction transposition.
-(blueprint: new-pur-affine-integration-ordinary-counit-calculus).
-Proof: extend the first unit adjunct to its normalized tensor family. Naturality moves
-the second adjunct past this family. The defining counit equation for the tensor family
-leaves inverse projection and the first scalar trace. The conjugate-compositor counit
-law and the second scalar counit give precisely the displayed iterated integration. -/
+no smoothness or orientation compatibility hypothesis. -/
 theorem ordered_tensor_counit
     {X Y Z : Type*} [Category X] [Category Y] [Category Z]
     [MonoidalCategory X] [MonoidalCategory Y]

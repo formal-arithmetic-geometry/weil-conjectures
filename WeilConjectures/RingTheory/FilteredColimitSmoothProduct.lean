@@ -15,8 +15,22 @@ import Mathlib.Algebra.Category.Ring.FilteredColimits
 /-!
 # Filtered colimits of smooth algebras and products
 
-Source: literature/stacks-project/smoothing.tex, Lemma Tag 07F3 (lemma-product)
-(blueprint: lem-weil-pbc-popescu-product).
+If `Λ₁` is a filtered colimit of smooth `R₁`-algebras and `Λ₂` a filtered colimit of smooth
+`R₂`-algebras, then `Λ₁ × Λ₂` is a filtered colimit of smooth `R₁ × R₂`-algebras.
+
+## Implementation details
+
+The product diagram `(i, j) ↦ Aᵢ × Bⱼ` is indexed by the filtered category `I × J`, with
+smooth terms over `R₁ × R₂`. To see that `Λ₁ × Λ₂` is its colimit, each coordinate algebra
+colimit is forgotten to rings and then to types, where the filtered colimit criterion
+(`Types.FilteredColimit.isColimitOf'`) is checked coordinatewise; the resulting ring colimit is
+lifted back to algebras by checking compatibility with structure maps at one index.
+
+Algebras and index categories live in universe `max u v`, as in the other Popescu-type results.
+
+## References
+
+* [Stacks, Tag 07F3]
 -/
 
 @[expose] public section
@@ -144,42 +158,7 @@ private def productMap {R₁ R₂ : Type u} [CommRing R₁] [CommRing R₂]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The product of two filtered colimits of smooth algebras is such a colimit over the
-product base ring.
-
-Source: literature/stacks-project/smoothing.tex, Lemma Tag 07F3 (lemma-product).
-(blueprint: lem-weil-pbc-popescu-product).
-
-Proof:
-1. By def-weil-pbc-filtered-colimit-smooth-algebras, choose small filtered diagrams
-   `A : I ⥤ CommAlgCat R₁` and `B : J ⥤ CommAlgCat R₂`, with smooth terms and colimit
-   cocones `ιᵢ : Aᵢ → Λ₁` and `κⱼ : Bⱼ → Λ₂` (def-weil-pbc-category-colimit).
-   The category `I × J` is nonempty. Common upper objects and equalizers of parallel
-   arrows are obtained componentwise, so it is small and filtered.
-2. Define `D(i,j) = Aᵢ × Bⱼ` over `R₁ × R₂`, with transition maps the products of the
-   component transition maps. Identities and composition hold componentwise. Each term
-   is smooth by lem-weil-pbc-smooth-over-product-ring and def-weil-pbc-smooth-ring-map.
-3. The maps `θ(i,j) = ιᵢ × κⱼ` are algebra maps to `Λ₁ × Λ₂` for the product structure
-   map. Componentwise cocone compatibility makes them a cocone on `D`, in the sense of
-   def-weil-pbc-category-colimit.
-4. Forget each coordinate algebra colimit to rings: give any ring cocone apex its
-   algebra structure using a leg at one index; common upper objects make all legs
-   compatible with it. The algebra universal property then gives the ring universal
-   property. Mathlib preserves these filtered ring colimits on underlying types.
-   Every pair in `Λ₁ × Λ₂` is represented at `(i,j)` by representing its coordinates
-   separately. If two pairs at `(i,j)` have equal images, the filtered type-colimit
-   equality criterion gives arrows `i → k` and `j → l` making their respective
-   coordinates equal. Their product arrow makes the pairs equal. Mathlib's
-   `Types.FilteredColimit.isColimitOf'` therefore proves the type cocone colimiting.
-   Reflect this colimit to rings, then lift each universal ring map to an algebra
-   map: its compatibility with the structure map follows by evaluating the
-   factorization identity on a base-ring element at one index. Factorization and
-   uniqueness follow from the ring universal property, proving the algebra colimit
-   in def-weil-pbc-category-colimit.
-5. The small filtered product diagram has smooth terms and the required colimit cocone,
-   so def-weil-pbc-filtered-colimit-smooth-algebras gives the conclusion.
-
-Algebras and index categories live in universe `max u v`, as in the Popescu siblings
-(lem-weil-pbc-colimit-standard-smooth-algebras, lem-weil-pbc-popescu-lift-once). -/
+product base ring. -/
 theorem ind_smooth_prod
     (R₁ R₂ : Type u) (Λ₁ Λ₂ : Type (max u v))
     [CommRing R₁] [CommRing R₂] [CommRing Λ₁] [CommRing Λ₂]

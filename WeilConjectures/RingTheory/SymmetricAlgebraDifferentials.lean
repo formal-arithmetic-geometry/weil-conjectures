@@ -12,7 +12,23 @@ import Mathlib.Algebra.TrivSqZeroExt.Basic
 
 /-! # Differentials of a symmetric algebra
 
-Source: Stacks Project, Tags 00DM and 00RO, applied in Tag 07M7.
+For an `R`-module `K`, the module of differentials of `Sym_R(K)` over `R` is
+`Sym_R(K) ⊗[R] K`, with `d(ι k)` corresponding to `1 ⊗ k`
+(`AlgebraicGeometry.symmetric_algebra_differentials`).
+
+## Implementation details
+
+An `R`-linear map `v : K → N` into a `Sym_R(K)`-module extends to a derivation by lifting
+`k ↦ (ι k, v k)` to an algebra map into the square-zero extension `Sym_R(K) ⊕ N` and taking
+its second component. The isomorphism is built from the derivation extending `k ↦ 1 ⊗ k` and
+the scalar extension of `k ↦ d(ι k)`; both composites are checked on generators. No finiteness
+or projectivity hypothesis on `K` is needed.
+
+## References
+
+* [Stacks, Tag 00DM]
+* [Stacks, Tag 00RO]
+* [Stacks, Tag 07M7]
 -/
 
 @[expose] public section
@@ -77,27 +93,8 @@ private theorem symmetricDerivation_ext
   | add a b ha hb => simp only [map_add, ha, hb]
 
 /-- The differentials of a symmetric algebra are the scalar extension of its
-module of generators, without any finite generation or projectivity hypothesis.
-
-Source: Stacks Project, Tag 00DM (symmetric algebra universal property),
-Tag 00RO (differential universal property); the calculation used in Tag 07M7.
-(blueprint: lem-weil-pbc-symmetric-algebra-differentials)
-
-Proof: put S = Sym_R(K). For an S-module N, restriction along iota sends an
-R-derivation S -> N to an R-linear map K -> N. Given such a map v, the linear
-map k -> (iota(k), v(k)) lifts to an R-algebra map S -> S plus N, with square-zero
-multiplication (s,n)(t,m) = (st, s m + t n). Its first component is the identity
-because it agrees with the identity on all iota(k). Thus its second component
-is an R-derivation extending v. Any derivation gives the corresponding algebra
-map s -> (s,d(s)), and uniqueness in the symmetric algebra universal property
-proves that extension and restriction are inverse. Combining this natural
-bijection with the universal properties of differentials and base change gives
-Omega[S/R] equiv S tensor_R K, sending d(iota(k)) to 1 tensor k. Equivalently,
-construct the map from the universal derivation extending k -> 1 tensor k and
-construct its inverse by scalar extension of k -> d(iota(k)); the two composites
-are identities by the preceding uniqueness and the tensor generators. This
-also handles K = 0, nonfree K, and the zero ring.
--/
+module of generators, without any finite generation or projectivity hypothesis: there is an
+isomorphism `Ω[Sym_R(K)⁄R] ≃ Sym_R(K) ⊗[R] K` sending `d(ι k)` to `1 ⊗ k`. -/
 theorem symmetric_algebra_differentials
     (R K : Type u) [CommRing R] [AddCommGroup K] [Module R K] :
     ∃ e : KaehlerDifferential R (SymmetricAlgebra R K) ≃ₗ[SymmetricAlgebra R K]

@@ -14,7 +14,17 @@ import Mathlib.RingTheory.Localization.BaseChange
 
 /-! # Unpointed affine étale descent at a prime
 
-Source: Stacks Project, Tag 00U2 (9), (10), and Tags 00CR and 00CP.
+An étale algebra over `R_p` comes from an étale `R`-algebra by localization.
+
+## Implementation details
+
+The statement has no field, prime over `p` or residue-field pointing; those data and all
+pointing identities are constructed by the caller.
+
+## References
+
+* [Stacks, Tag 00U2] (parts (9) and (10))
+* [Stacks, Tag 00CR] and [Stacks, Tag 00CP]
 -/
 
 @[expose] public section
@@ -24,29 +34,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
-/-- An étale algebra over R_p comes from an étale R-algebra by localization.
-Source: Stacks Project, Tag 00U2 (9), (10), and Tags 00CR and 00CP.
-(blueprint: new-lem-sbc-prime-localization-etale-algebra-model)
-
-Proof: Use `CommRingCat.isColimitAwayProdCocone` to identify R_p with the
-filtered colimit A of the principal localizations S = R[1/product(s)], where
-s ranges over finite subsets of R minus p. Transport the given structure map
-to A and apply `exists_etale_algebra_of_filteredColimit` (00U2 (9)). This gives
-an etale S-algebra C and an A-algebra isomorphism B = A tensor_S C.
-Compose R to S with S to C to obtain a. Principal localization is etale,
-and etale maps compose, so a is etale (00U2 (1), (2)). Define i by the right
-tensor inclusion followed by the inverse model isomorphism. Tensor balancing,
-A-linearity of the isomorphism, and the colimit comparison identity show that
-a followed by i is the original structure map R to R_p to B.
-Transport the prime localization structure from R_p to A. The colimit comparison
-identity makes R, S, A a scalar tower. Since the powers of product(s) are contained
-in the complement of p, `isLocalization_of_submonoid_le` makes A a localization
-of S at the image N of that complement. Tensor base change (`tensorRight`)
-makes A tensor_S C a localization of C at the image M of N. Finally transport
-this structure along the inverse model isomorphism. Its C-algebra map is exactly i.
-
-This statement has no field, prime over p in B, or residue-field pointing.
-Those data and all pointing identities are constructed in the caller. -/
+/-- An étale algebra over R_p comes from an étale R-algebra by localization. -/
 theorem primeLocalization_etale_algebra_model
     (R : CommRingCat.{u}) (p : Spec R) (B : CommRingCat.{u})
     (α : CommRingCat.of (Localization.AtPrime p.asIdeal) ⟶ B)

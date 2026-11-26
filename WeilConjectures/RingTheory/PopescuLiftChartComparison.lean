@@ -11,8 +11,19 @@ import Mathlib.Tactic.Ring
 
 /-! # Comparing the partial chart with the full Popescu lifting algebra
 
-Source: Stacks Project, Tag 07CP, the final local kernel calculation.
-(blueprint: lem-weil-pbc-popescu-lift-chart-relations).
+The local ring of a partial chart is compared with the corresponding localization of the full
+Popescu lifting algebra: the equations of the other charts are `π`-divisible there, and the
+comparison map is bijective.
+
+## Implementation details
+
+`chart_relations_pi_divisible` uses no flatness or equality-of-annihilators hypothesis; the
+`π`-torsion of the other charts' equations is the separate statement
+`chart_other_equation_pi_mul_eq_zero`.
+
+## References
+
+* [Stacks, Tag 07CP] (the final local kernel calculation)
 -/
 
 @[expose] public section
@@ -23,23 +34,7 @@ namespace Algebra.PopescuLiftPresentation
 
 
 /-- The coefficients comparing two cleared relations vanish after localization
-of the reduced coefficient quotient.
-
-Source: Stacks Project, Tag 07CP, the paragraph beginning “The relations (4) imply”.
-(blueprint: lem-weil-pbc-popescu-lift-chart-relations).
-
-Proof: Reduce the cleared relations modulo pi squared and apply the quotient map
-I -> I/I squared, then localize at a_k. Multiplying the k-th expression for f_l
-by a_kprime and substituting the k-th expressions into the kprime-th expression
-produces a zero combination of the specified conormal basis. Its coordinate at j
-is the displayed coefficient, hence this coefficient is zero in the localized
-quotient. The localization equality criterion gives a power of a_k annihilating
-its quotient class. Thus the reduced polynomial belongs to the ideal of the
-reduced f_l. Lift a finite ideal expression to R[x] using surjectivity of reduction.
-The residual polynomial reduces to zero, so C(pi squared) divides it. This gives
-membership in the sum of the original relation ideal and (C(pi squared)). Empty
-E has no j to check; zero rings and nilpotent a_k are handled by the same
-localization equality criterion, and no cancellation of pi is used. -/
+of the reduced coefficient quotient. -/
 private theorem chart_coefficient_clearing {R : Type a} {Cbar : Type c}
     [CommRing R] [CommRing Cbar] [Algebra R Cbar] (π : R)
     [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]
@@ -142,29 +137,7 @@ private theorem chart_coefficient_clearing {R : Type a} {Cbar : Type c}
   simpa only [add_sub_cancel] using hadd
 
 
-/-- Other charts' equations are pi-divisible in the partial chart local ring.
-
-Source: Stacks Project, Tag 07CP (lemma-lifting), final three paragraphs.
-(blueprint: lem-weil-pbc-popescu-lift-chart-relations).
-
-Proof: Write u_l=f_l-pi*z_l and p_kl for the chart relations. The identity
-pi*p_kl=-a_k*u_l+sum(h_klj*u_j) and invertibility of a_k show that every u_l
-vanishes in the chart local ring (chart_original_equation_eq_zero). Compare the
-conormal expressions for charts k and k': independence of the prepared conormal
-basis makes b_j=a_k'*h_klj-sum(h_k'lj'*h_kj'j) vanish in Cbar localized at a_k.
-Clear finitely many denominators to obtain a_k^N*b_j in I+pi^2*P. Multiplying
-once more by a_k and using the cleared f-relations puts it in I_Ek+pi^2*P.
-The exact expansion is
- a_k*p_k'l-a_k'*p_kl+sum(h_k'lj'*p_kj')=sum(b_j*z_j)+pi*delta,
-where delta=-a_k*g_k'l+a_k'*g_kl-sum(h_k'lj'*g_kj'). Multiply by a_k^N.
-The b_j terms now belong to I_Ek+pi^2*P, hence their multiples by z_j belong
-to pi*D_k, since f_j=pi*z_j for j in E_k. The p_kl and p_kj' terms vanish
-in D_k (normalization handles indices in E_k). Thus a_k^(N+1)*p_k'l is
-in pi*D_k. Invert the unit a_k^(N+1) in the local ring and use membership
-in the principal ideal (pi) to obtain p_k'l=pi*y. This gives the asserted divisibility, without
-any flatness or equality-of-annihilators hypothesis. The separate, proved key
-identity gives pi-torsion (chart_other_equation_pi_mul_eq_zero), which is not
-part of this remaining statement. -/
+/-- Other charts' equations are `π`-divisible in the partial chart local ring. -/
 theorem chart_relations_pi_divisible {R : Type a} {Cbar : Type c}
     [CommRing R] [CommRing Cbar] [Algebra R Cbar] (π : R)
     [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]
@@ -334,10 +307,8 @@ private theorem localRingHom_bijective_of_kernel_vanishes
     congr 1
     exact Subtype.ext hs
 
-/-- Kill the extra equations using the chart's annihilator equality, then localize.
-
-Source: Stacks Project, Tag 07CP, the final annihilator argument.
-(blueprint: lem-weil-pbc-popescu-lift-chart-relations). -/
+/-- Under the chart's annihilator equality, the local comparison map from the partial chart
+to the full lifting algebra is bijective. -/
 theorem chart_comparison_bijective {R : Type a} {Cbar : Type c}
     [CommRing R] [CommRing Cbar] [Algebra R Cbar] (π : R)
     [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]

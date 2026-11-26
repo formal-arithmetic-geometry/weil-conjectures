@@ -10,7 +10,12 @@ import WeilConjectures.CategoryTheory.SixFunctors.TransportedTensorComparison
 import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedBinaryChainSquare
 import all WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForgetTensorChainAssociativity
 
-/-! Homogeneous transport for the explicit associator chain. -/
+/-! Homogeneous transport for the explicit associator chain.
+
+## References
+
+* Stacks Project, Tags 0FPQ, 0FNG, 06YU and 0FPT.
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -217,17 +222,7 @@ private theorem nativeChainForget_transport_map
   · exact ha
 
 /-- The ringed associator square, after one outer homogeneous inclusion, transports
-through the ordinary comparison and the signed balanced tensor quotient.
-Source: Stacks 0FPQ, 0FNG, 06YU, 0FPT.
-(blueprint: new-sf-native-weil-ringed-associator-chain-component).
-
-Proof: first promote the supplied component squares to the full ringed chain
-map equality. The binary chain square identifies each normalized native tensor
-comparison across the bridge. Paste its four instances with the restriction and
-ordinary tensorator associativity laws, using naturality of the bridge and
-faithfulness of the ordinary equivalence. This gives the full ordinary chain
-equality. Take its degree component and precompose the specified outer inclusion.
-The binary chain calculation and ordinary normalization are separate dependencies. -/
+through the ordinary comparison and the signed balanced tensor quotient. -/
 theorem nativeChainForgetComponent_transport
     {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}}

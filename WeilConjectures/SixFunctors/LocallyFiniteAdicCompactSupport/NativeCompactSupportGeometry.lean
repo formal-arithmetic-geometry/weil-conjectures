@@ -16,7 +16,22 @@ import WeilConjectures.CategoryTheory.Sites.SheafComposeBraided
 
 /-! # Native locally finite coefficient transport
 
-Source: Bhatt--Scholze, Section 6.8; Stacks Tags 03D6, 03D7 and 03DI.
+The native section presentation of locally finite adic coefficients respects pullback,
+direct image and open extension.
+
+## Implementation details
+
+The construction forgets the constant algebraic-closure vector-space action on a native
+internal module (an exact additive equivalence) and then uses the section-module
+equivalence. Both direct images evaluate the same module on the same base-changed test
+object, so the direct-image comparison is the identity on sections; pullback and open
+extension are obtained by conjugating the native adjunctions through the section
+equivalences. No finite-type or separatedness hypothesis is used.
+
+## References
+
+* [Bhatt--Scholze, Section 6.8]
+* [Stacks, Tags 03D6, 03D7 and 03DI]
 -/
 
 @[expose] public noncomputable section
@@ -48,26 +63,8 @@ private theorem native_commutative (T : Scheme.{u}) : IsCommMonObj (abRing l T) 
     CategoryTheory.sheafComposeLaxBraided _ _
   exact Functor.isCommMonObj_obj (F := ProEtale.weilCoefficientsForgetAb l T)
 
-/-- The native section presentation respects pullback, direct image and open extension.
-Source: Bhatt--Scholze, Section 6.8, and Stacks Tags 03D6, 03D7, 03DI.
-(blueprint: lem-sf-native-compact-support-geometry).
-
-Proof: forget the constant algebraic-closure vector-space action on a native internal
-module. Restriction along constant functions recovers this action, so this is an exact
-additive equivalence with modules over the underlying abelian coefficient ring.
-The section-module equivalence then gives sections. Pointwise commutativity of locally
-finite functions supplies the commutative ring object. Precomposition along base change
-identifies the inverse-image coefficient ring with the coefficient ring on the source:
-locally finite functions are the sheaf colimit of the finite-subextension-valued
-continuous functions, whose inverse-image identifications are compatible with inclusions.
-The structural ring map is precomposition on functions, giving pull_normalized.
-Both direct images evaluate the same module on the same base-changed test object;
-the comparison is identity on sections. Conjugate the native pullback adjunction through
-the section equivalences and use uniqueness of left adjoints for upper. Its mate is
-therefore this lower comparison. Repeat for the open-extension adjunction to obtain
-extension, whose mate is upper. The equivalences preserve finite limits and colimits
-and addition. These constructions give every field of NativeGeometry simultaneously,
-for all schemes and morphisms; no finite-type or separatedness hypothesis is used. -/
+/-- The native section presentation respects pullback, direct image and open extension:
+there is a `NativeGeometry` structure. -/
 theorem native_compact_support_geometry : Nonempty (NativeGeometry.{u} l) := by
   classical
   let commutative : ∀ T : Scheme.{u}, IsCommMonObj (abRing l T) :=

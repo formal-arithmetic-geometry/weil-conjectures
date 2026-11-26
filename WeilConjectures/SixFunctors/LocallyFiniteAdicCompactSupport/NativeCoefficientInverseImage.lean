@@ -37,7 +37,10 @@ import WeilConjectures.CategoryTheory.Sites.SheafComposePushforwardMonoidal
 
 /-! # Normalized inverse image of the native coefficient ring
 
-Source: Bhatt--Scholze, Section 6.8, and Stacks, Tag 03D7.
+## References
+
+* [Bhatt--Scholze, Section 6.8, Lemma 6.8.2 and Proposition 6.8.14]
+* [Stacks, Tag 03D7]
 -/
 
 @[expose] public noncomputable section
@@ -225,21 +228,8 @@ private theorem nativeInverseImageMap_isIso
     IsIso.of_isIso_comp_left ((forgetPullbackIso g FR).inv.app _) _
   exact isIso_of_reflects_iso f (sheafCompose (ProEt.topology U) FR)
 
-/-- The inverse image of locally finite coefficient functions, normalized on every section.
-Source: Bhatt--Scholze, Section 6.8, Lemma 6.8.2 and Proposition 6.8.14;
-Stacks, Tag 03D7.
-(blueprint: lem-sf-native-coefficient-inverse-image).
-
-Proof: precomposition with the first pullback projection defines a morphism of
-coefficient ring sheaves to direct image. Its underlying map of sheaves of sets agrees
-with the canonical map for module-valued adic coefficient sheaves. The latter's adjunct
-is already an isomorphism. Inverse image commutes with forgetting to sets: base change
-preserves finite limits, its opposite Kan-extension indexing categories are filtered,
-and both forgetful functors preserve filtered colimits and sheafification. The
-unit-compatible comparison therefore transfers the module isomorphism to the ring
-adjunct, since forgetting reflects isomorphisms. The adjunction identity gives the
-normalization formula. Pointwise extensionality and injectivity of the adjunction Hom
-bijection give uniqueness. The argument also applies to empty test objects. -/
+/-- The inverse image of locally finite coefficient functions, normalized on every section:
+it is given by precomposition with the pullback projection, uniquely so. -/
 theorem native_coefficient_inverse_image
     [∀ T : Scheme.{u}, IsCommMonObj (abRing l T)]
     {U V : Scheme.{u}} (g : U ⟶ V) :

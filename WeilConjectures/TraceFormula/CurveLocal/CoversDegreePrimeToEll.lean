@@ -17,16 +17,15 @@ public import Mathlib.RingTheory.Polynomial.RationalRoot
 /-!
 # Covers of degree prime to `ℓ`: the field-theoretic core
 
-Field-theoretic core of blueprint `lemma-covers-degree-prime-to-ell`. Let `L / F` be a finite
-Galois extension with group `G` (in the blueprint, `F` is the fraction field of a strictly
-henselian discrete valuation ring and `L` trivializes the given finite locally constant sheaves),
-`P` an `ℓ`-Sylow subgroup of `G` and `F₁ = L^P`. Then `d₁ = [F₁ : F] = [G : P]` is prime to `ℓ`.
-If `F₁` is the fraction field of a discrete valuation ring `R₁` (in the blueprint, the
-normalization `S₁`), then for every multiple `d = d₁ e` of `d₁` there is a monic Eisenstein
-polynomial `g` over `R₁` of degree `e` (`z ^ e + t z - t` for a uniformizer `t`, or `z - t` if
-`e = 1`) which is irreducible and separable over `F₁`; so `F' = F₁[z] / (g)` is a separable
-extension of `F` of degree `d`, totally ramified over `F₁`. Finally, any automorphism over `F₁`
-(in particular over `F'`) of a field containing `L` acts on `L` through `P`: the monodromy
+Let `L / F` be a finite Galois extension with group `G` (in the application, `F` is the fraction
+field of a strictly henselian discrete valuation ring and `L` trivializes the given finite locally
+constant sheaves), `P` an `ℓ`-Sylow subgroup of `G` and `F₁ = L^P`. Then `d₁ = [F₁ : F] = [G : P]`
+is prime to `ℓ`. If `F₁` is the fraction field of a discrete valuation ring `R₁` (in the
+application, the normalization `S₁`), then for every multiple `d = d₁ e` of `d₁` there is a monic
+Eisenstein polynomial `g` over `R₁` of degree `e` (`z ^ e + t z - t` for a uniformizer `t`, or
+`z - t` if `e = 1`) which is irreducible and separable over `F₁`; so `F' = F₁[z] / (g)` is a
+separable extension of `F` of degree `d`, totally ramified over `F₁`. Finally, any automorphism over
+`F₁` (in particular over `F'`) of a field containing `L` acts on `L` through `P`: the monodromy
 factors through the `ℓ`-group `P`.
 
 ## Main statements
@@ -47,7 +46,7 @@ namespace IsDiscreteValuationRing
 variable {R K : Type*} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [Field K]
   [Algebra R K] [IsFractionRing R K]
 
-/-- **An Eisenstein polynomial of degree `e`** (blueprint `lemma-covers-degree-prime-to-ell`):
+/-- **An Eisenstein polynomial of degree `e`**:
 over a discrete valuation ring `R` with fraction field `K`, for every `e ≥ 1` there is a monic
 polynomial of degree `e`, Eisenstein at the maximal ideal, which is irreducible and separable
 over `K` (`z ^ e + t z - t` for a uniformizer `t` if `e ≥ 2`, also when the characteristic
@@ -135,17 +134,16 @@ theorem finrank_fixedField_sylow : finrank F F₁ = (P : Subgroup Gal(L/F)).inde
   rw [mul_comm] at h₁
   exact Nat.eq_of_mul_eq_mul_left hpos h₁
 
-/-- Blueprint `lemma-covers-degree-prime-to-ell`: the degree `d₁ = [L^P : F]` of the fixed field
+/-- The degree `d₁ = [L^P : F]` of the fixed field
 of an `ℓ`-Sylow subgroup `P` of `Gal(L/F)` is prime to `ℓ`. -/
 theorem not_dvd_finrank_fixedField_sylow : ¬ ℓ ∣ finrank F F₁ := by
   rw [finrank_fixedField_sylow]
   exact P.not_dvd_index
 
-/-- **Covers of degree prime to `ℓ`, field-theoretic core** (blueprint
-`lemma-covers-degree-prime-to-ell`): let `L / F` be finite Galois, `P` an `ℓ`-Sylow subgroup of
-`Gal(L/F)` and `F₁ = L^P`, the fraction field of a discrete valuation ring `R₁`. Then
-`d₁ = [F₁ : F]` is prime to `ℓ`, and for every multiple `d` of `d₁` prime to `ℓ` there is a monic
-Eisenstein polynomial `g` over `R₁`, irreducible over `F₁`, such that `F' = F₁[z]/(g)` is a
+/-- **Covers of degree prime to `ℓ`, field-theoretic core**: let `L / F` be finite Galois, `P` an
+`ℓ`-Sylow subgroup of `Gal(L/F)` and `F₁ = L^P`, the fraction field of a discrete valuation ring
+`R₁`. Then `d₁ = [F₁ : F]` is prime to `ℓ`, and for every multiple `d` of `d₁` prime to `ℓ` there is
+a monic Eisenstein polynomial `g` over `R₁`, irreducible over `F₁`, such that `F' = F₁[z]/(g)` is a
 separable extension of `F` of degree `d` (totally ramified of degree `d / d₁` over `F₁`). -/
 theorem exists_coversDegreePrimeToEll (R₁ : Type*) [CommRing R₁] [IsDomain R₁]
     [IsDiscreteValuationRing R₁] [Algebra R₁ F₁] [IsFractionRing R₁ F₁] :
@@ -179,7 +177,7 @@ theorem exists_coversDegreePrimeToEll (R₁ : Type*) [CommRing R₁] [IsDomain R
     exact Algebra.IsSeparable.trans F F₁ (AdjoinRoot f)
 
 omit [IsGalois F L] [Fact ℓ.Prime] in
-/-- **The monodromy factors through `P`** (blueprint `lemma-covers-degree-prime-to-ell` (3)):
+/-- **The monodromy factors through `P`**:
 let `E` be a field over `F₁ = L^P` and `ι : L →ₐ[F₁] E` an embedding. If an automorphism `σ` of
 `E` over `F₁` (for instance over an extension `F'` of `F₁`) restricts on `ι(L)` to `g ∈ Gal(L/F)`,
 then `g ∈ P`. -/

@@ -15,8 +15,8 @@ public import WeilConjectures.Tactic.TransportExact
 
 For the specialization `Sp_{X,x}` to the normal cone of a rational point, the comparison
 `ρ = (1 ⊠ δ_K) ∘ Π⁻¹ : Sp(K ⊠ D K) ⟶ K' ⊠ D K'` of the universal kernels
-(`ProEtale.CondensedRing.universalKernelSpecialization`) satisfies the second identity of
-blueprint `lemma-nearby-cycles-universal-kernel`,
+(`ProEtale.CondensedRing.universalKernelSpecialization`) satisfies the second identity for the
+nearby cycles of the universal kernel,
 
 `e_{K'} ∘ ρ = RΔ_{s*} θ_X ∘ χ_Δ ∘ S(e_K)`
 
@@ -52,8 +52,7 @@ variable {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
 -- the ambient identity is transported to the bounded constructible forms of the objects
 /-- The restriction of the Künneth map `Π_{K,L}` to the diagonal is the lax tensor map `μ_X` of
 the specialization, through the pullback exchange `α_Δ` and the identifications
-`LΔ^*(M ⊠ N) ≅ M ⊗ N` (the composition law and monoidality of the pullback exchanges, with
-`p_i ∘ Δ = 1`). -/
+`LΔ^*(M ⊠ N) ≅ M ⊗ N`. -/
 lemma map_specializationKunnethMap_comp_pullbackExchange
     (K L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleUpperStar _ ℓ (diag (deformationSpecialFibre X x.left.ker k'))).map
@@ -131,8 +130,8 @@ lemma map_specializationKunnethMap_comp_pullbackExchange
 variable (D : NearbyCyclesModel.NearbyDualizingData k k' ℓ)
 
 -- matching the abstract statements against the concrete functors
-/-- **Nearby cycles of the universal kernel**, second identity (blueprint
-`lemma-nearby-cycles-universal-kernel`): for `ρ = (1 ⊠ δ_K) ∘ Π⁻¹`, the evaluation kernels satisfy
+/-- **Nearby cycles of the universal kernel**, second identity: for
+`ρ = (1 ⊠ δ_K) ∘ Π⁻¹`, the evaluation kernels satisfy
 `e_{K'} ∘ ρ = RΔ_{s*} θ_X ∘ χ_Δ ∘ S(e_K)`, with `K' = Sp_{X,x}(K)`. -/
 theorem universalKernelSpecialization_comp_evaluationKernel
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :

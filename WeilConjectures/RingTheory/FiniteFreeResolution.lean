@@ -13,8 +13,16 @@ import Mathlib.RingTheory.Noetherian.Basic
 /-!
 # Finite free resolutions over Noetherian rings
 
-Source: Stacks Project, Algebra, Lemma 10.71.1 (Tag 00LP), part (2)
-(blueprint: lem-weil-pbc-finite-free-resolution-noetherian).
+Every finite module over a Noetherian ring admits a resolution by finite free modules.
+
+## Implementation details
+
+Choose a finite free surjection onto `M`, then repeatedly cover the (finitely generated) kernel
+of the last map by a finite free module; the construction is a recursion on the degree.
+
+## References
+
+* [Stacks, Tag 00LP] (2)
 -/
 
 @[expose] public section
@@ -24,23 +32,8 @@ universe u v
 namespace Module
 
 /-- Every finite module over a (left) Noetherian ring admits an infinite resolution
-by finite free modules. Source: Stacks Project, Algebra, Lemma 10.71.1 (Tag 00LP), part (2)
-(blueprint: lem-weil-pbc-finite-free-resolution-noetherian).
-
-Proof plan, following the four steps of the node:
-1. Choose finitely many generators of `M` (def-weil-finitely-generated-module) and send
-   the standard basis of `R^{n₀}` to them. This gives a surjective augmentation `ε`.
-2. The kernel of any map out of a finite free module is finitely generated, since `R`
-   is Noetherian (def-weil-pbc-noetherian-ring and
-   lem-weil-pbc-noetherian-submodule-finite). Choose a finite free surjection onto this
-   kernel and compose it with the kernel's inclusion to obtain the next differential.
-3. Iterate this construction recursively for every natural-number degree, obtaining
-   the sequence of ranks and differentials with image equal to the preceding kernel.
-4. Surjectivity gives exactness at `M`; the kernel-image equalities give exactness at
-   every free term, and also imply that consecutive maps compose to zero.
-
-The finite function module `Fin (n i) → R` represents `R^{⊕ nᵢ}`. The map `d i` is the
-node's `d_{i+1}`, so its target is the free term of degree `i`. -/
+by finite free modules. Here `Fin (n i) → R` represents `R^{⊕ nᵢ}` and `d i` maps the free
+term of degree `i + 1` to that of degree `i`. -/
 theorem exists_finite_free_resolution
     (R : Type u) [Ring R] [IsNoetherianRing R]
     (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] :

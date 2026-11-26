@@ -10,7 +10,12 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Native.IntegralNati
 import all WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralDirectEvaluationMateInvertible
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
-/-! # Derived native pullback evaluation -/
+/-! # Derived native pullback evaluation
+
+## References
+
+* [Stacks, Tag 03D2], [Stacks, Tag 0941]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -105,15 +110,8 @@ private theorem localizePullSquare
     Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app] using
     congrArg (fun z ↦ z.hom.app M) hd
 
-/-- The specified native inverse-image comparison preserves derived finite evaluation.
-Source: Stacks 03D2 and 0941; blueprint fix-prop-coherence, coefficient comparisons.
-(blueprint: lem-sf-integral-native-pull-evaluation).
-
-Proof: localize the ordinary normalized pullback evaluation square. Localization of
-whiskered natural isomorphisms and the standard exact-functor composition isomorphisms
-preserves its composite. The cochain normalization of pullbackTensorDerivedEvaluation
-identifies the resulting square with the specified comparison, on arbitrary unbounded
-systems. No properness or faithfulness of evaluation is needed. -/
+/-- The specified native inverse-image comparison preserves derived finite evaluation, on
+arbitrary unbounded systems. -/
 theorem integralNativePullEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (M : System l E Y) :
     let := sfIntrinsicPullback_additive (finiteCoefficientRing l E (n + 1)) f

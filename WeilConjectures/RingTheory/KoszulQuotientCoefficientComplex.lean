@@ -11,9 +11,13 @@ public import Mathlib.RingTheory.Ideal.Quotient.Defs
 
 /-! # Reduction of coefficients in a dual Koszul complex
 
-Source: Stacks Project, Tag 0BQZ, the coefficient comparison in
-lemma-regular-immersion-ext.
-(blueprint: new-j3-koszul-quotient-coefficient-complex). -/
+The signed complex `Hom_A(K(f), A/I)` and the coefficient reduction morphism from the dual
+Koszul complex `Hom_A(K(f), A)` to it.
+
+## References
+
+* [Stacks, Tags 0BQZ, 0623]
+-/
 
 @[expose] public section
 
@@ -23,10 +27,7 @@ open CategoryTheory
 
 namespace ExteriorAlgebra
 
-/-- Signed precomposition in the Hom complex with quotient coefficients.
-Source: Stacks Project, Tag 0BQZ. 
-(blueprint: new-j3-koszul-quotient-coefficient-complex)
--/
+/-- Signed precomposition in the Hom complex with quotient coefficients. -/
 noncomputable def koszulQuotientDualBoundary
     (A : Type u) [CommRing A] (I : Ideal A) (r n : ℕ) (f : Fin r → A) :
     ((koszulComplex A r f).X n ⟶ ModuleCat.of A (A ⧸ I)) →ₗ[A]
@@ -34,10 +35,7 @@ noncomputable def koszulQuotientDualBoundary
   (-1 : A) ^ (n + 1) •
     Linear.leftComp A (ModuleCat.of A (A ⧸ I)) ((koszulComplex A r f).d (n + 1) n)
 
-/-- Precomposition has square zero, since the Koszul boundary has square zero.
-Source: Stacks Project, Tag 0623. 
-(blueprint: new-j3-koszul-quotient-coefficient-complex)
--/
+/-- Precomposition has square zero, since the Koszul boundary has square zero. -/
 theorem koszulQuotientDualBoundary_comp
     (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A) (n : ℕ) :
     ModuleCat.ofHom (koszulQuotientDualBoundary A I r n f) ≫
@@ -49,10 +47,7 @@ theorem koszulQuotientDualBoundary_comp
     (koszulQuotientDualBoundary A I r n f x) = 0
   simp [koszulQuotientDualBoundary, Linear.leftComp]
 
-/-- The actual signed complex `Hom_A(K(f), A/I)`, without derived choices.
-Source: Stacks Project, Tag 0BQZ. 
-(blueprint: new-j3-koszul-quotient-coefficient-complex)
--/
+/-- The actual signed complex `Hom_A(K(f), A/I)`, without derived choices. -/
 noncomputable def koszulQuotientDualComplex
     (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A) :
     CochainComplex (ModuleCat.{u} A) ℕ :=
@@ -61,20 +56,14 @@ noncomputable def koszulQuotientDualComplex
     (fun n ↦ ModuleCat.ofHom (koszulQuotientDualBoundary A I r n f))
     (koszulQuotientDualBoundary_comp A I r f)
 
-/-- Reduction of the value of a dual cochain modulo the ideal.
-Source: Stacks Project, Tag 0BQZ. 
-(blueprint: new-j3-koszul-quotient-coefficient-complex)
--/
+/-- Reduction of the value of a dual cochain modulo the ideal. -/
 noncomputable def koszulCoefficientReductionDegree
     (A : Type u) [CommRing A] (I : Ideal A) (r n : ℕ) (f : Fin r → A) :
     (koszulDualComplex A r f).X n ⟶ (koszulQuotientDualComplex A I r f).X n :=
   ModuleCat.ofHom (Linear.rightComp A ((koszulComplex A r f).X n)
     (ModuleCat.ofHom I.mkQ))
 
-/-- Reduction of values commutes with signed precomposition.
-Source: Stacks Project, Tag 0BQZ. 
-(blueprint: new-j3-koszul-quotient-coefficient-complex)
--/
+/-- Reduction of values commutes with signed precomposition. -/
 theorem koszulCoefficientReductionDegree_comm
     (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A) (n : ℕ) :
     (koszulDualComplex A r f).d n (n + 1) ≫
@@ -90,9 +79,7 @@ theorem koszulCoefficientReductionDegree_comm
   simp [koszulCoefficientReductionDegree, koszulDualComplex, koszulQuotientDualComplex,
     koszulDualBoundary, koszulQuotientDualBoundary, Linear.leftComp, Linear.rightComp]
 
-/-- The coefficient morphism of the two dual Koszul complexes.
-Source: Stacks Project, Tag 0BQZ.
-(blueprint: new-j3-koszul-quotient-coefficient-complex). -/
+/-- The coefficient morphism of the two dual Koszul complexes. -/
 noncomputable def koszulCoefficientReduction
     (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A) :
     koszulDualComplex A r f ⟶ koszulQuotientDualComplex A I r f :=

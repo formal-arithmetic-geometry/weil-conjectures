@@ -12,8 +12,12 @@ import Mathlib.Tactic.LinearCombination
 
 /-! # The diagram for the explicit Popescu quotient
 
-Source: Stacks Project, Tag 07CP, the construction of D → Λ and Cbar → D/πD.
-(blueprint: lem-weil-pbc-popescu-lift-maps).
+We construct the maps `D → Λ` and `Cbar → D/πD` for the prepared polynomial quotient `D`, and
+check their compatibilities.
+
+## References
+
+* [Stacks, Tag 07CP] (the paragraph after the definition of `p_{kl}`)
 -/
 
 @[expose] public section
@@ -22,27 +26,7 @@ universe a b c
 
 namespace Algebra
 
-/-- Construct the compatible maps for the prepared polynomial quotient.
-
-Source: Stacks Project, Tag 07CP, the paragraph after the definition of p_{kl};
-the original blueprint steps 6 and 7.
-(blueprint: lem-weil-pbc-popescu-lift-maps).
-
-Proof: Lift the finitely many images j(ε(X_i)) to λ_i in Λ. Since ε kills the
-reduced f_j, evaluating f_j at λ lies in π²Λ; choose μ_j with f_j(λ)=π²μ_j.
-Evaluate the polynomial ring Q by x_i ↦ λ_i and z_j ↦ πμ_j. The equations
-f_j-πz_j vanish. Evaluating a_k f_l=Σ h_{klj}f_j+π²g_{kl} shows that
-Y=a_k(λ)μ_l-Σ h_{klj}(λ)μ_j-g_{kl}(λ) is killed by π². The annihilator
-hypothesis then gives πY=0, so p_{kl} vanishes too. Factor this evaluation
-through Q/J and transport along ULift to obtain φ. It induces ψ modulo π.
-The canonical reduction modulo π² then π gives red. Sending x_i to the class
-of x_i in D/πD kills π² and all f_j, so it factors through the surjection ε
-whose kernel is the ideal of the reduced f_j, yielding c. This c kills πCbar
-and therefore induces cmod. Their composites with quotient maps give the
-three quotient compatibilities. The right square agrees on ε(X_i) and on
-scalars; since ε is surjective, this proves the final diagram equality.
-The construction of c gives exactly the displayed generator equation.
--/
+/-- Construct the compatible maps for the prepared polynomial quotient. -/
 theorem exists_popescu_lift_maps (R : Type a) (Λ : Type b) (Cbar : Type c)
     [CommRing R] [CommRing Λ] [CommRing Cbar] [Algebra R Λ] [Algebra R Cbar]
     (π : R)

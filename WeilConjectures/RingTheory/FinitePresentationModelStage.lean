@@ -12,7 +12,28 @@ public import Mathlib.Algebra.Category.Ring.Colimits
 import WeilConjectures.RingTheory.FinitePresentationComparisonSystem
 import WeilConjectures.RingTheory.FilteredPushoutBijectiveStage
 
-/-! # A finitely presented comparison model reaches a stage -/
+/-!
+# A finitely presented comparison model reaches a stage
+
+Over a filtered colimit `A = colim Aᵢ`, an isomorphism `(A ⊗ B₀) ⊗[P] Q ≃ A ⊗ C₀` with `P`
+and `Q` finitely presented descends to an isomorphism at some stage `Aᵢ`.
+
+## Main results
+
+* `RingHom.exists_finitePresentation_model_stage`
+
+## Implementation details
+
+The comparison maps are descended to a filtered system of finitely presented maps with pushout
+transition squares (`RingHom.exists_finitePresentation_comparison_system`); a map in such a
+system whose colimit is bijective is bijective at some stage. No flatness of `P → Q` is used.
+
+## References
+
+* [Stacks, Tag 02JO]
+* [Stacks, Tag 00QO]
+* [Stacks, Tag 05N9]
+-/
 
 @[expose] public section
 
@@ -24,28 +45,8 @@ universe v w x y
 
 namespace RingHom
 
-/-- Descend a finitely presented model and its comparison isomorphism to a stage.
-(blueprint: lem-weil-pbc-finite-presentation-model-stage)
-
-Source: Stacks Project, Algebra, Tag 02JO (3), proof after the application of (1);
-Tags 00QO and 05N9 (2), (3) supply factorization and eventual equality.
-
-Proof: restrict to the indices above i₀. Tensor products commute with these
-filtered colimits, so the systems Aᵢ ⊗ B₀ and Aᵢ ⊗ C₀ have colimits A ⊗ B₀ and
-A ⊗ C₀. Factor the map P → A ⊗ B₀ through a stage using the finite presentation
-of P over the integers. Above that stage use this factorization to make both
-systems P-algebras. The map Q → A ⊗ C₀ induced by the given isomorphism factors
-through a later stage, since Q is finitely presented over P. The resulting map
-from (Aᵢ ⊗ B₀) ⊗[P] Q to Aᵢ ⊗ C₀ becomes the given isomorphism at the limit.
-Its source is finitely presented by base change; its target is finitely
-presented over Aᵢ ⊗ B₀ by tensor cancellation and the finite presentation of φ₀.
-Factor the inverse isomorphism through a later stage using Tag 05N9 (2).
-The two inverse identities hold at the limit, so each holds at a later stage
-by Tag 05N9 (3). Take a common upper bound. The descended maps are inverse ring
-homomorphisms there, giving eᵢ. Compatibility with the stage map holds by the
-construction of the comparison on pure tensors. This argument uses no
-flatness of P → Q and applies also to zero rings and empty presentations.
--/
+/-- A finitely presented model `(A ⊗ B₀) ⊗[P] Q ≃ A ⊗ C₀` of the base change of `φ₀` to the
+colimit `A`, compatible with `φ₀`, descends to such an isomorphism over some stage `Aᵢ`. -/
 theorem exists_finitePresentation_model_stage
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{v}) [HasColimit F]

@@ -14,8 +14,23 @@ import Mathlib.Tactic.LinearCombination
 
 /-! # Extending a parameter-vanishing defect derivation
 
-Source: Stacks Project, Tags 07NQ and 07EL, the differential extension argument.
-(blueprint: lem-weil-pbc-closed-fiber-defect-derivation-extension)
+Let `R → T` be a local map with formally smooth closed fibre and `f : T → D` a ring map lifting
+an `R`-algebra map `T → D ⧸ J` along a square-zero ideal `J`. If `f` agrees with the structure map
+on generators of the maximal ideal of `R`, the defect `f ∘ (R → T) - (R → D)` extends to a
+derivation `T → J`.
+
+## Implementation details
+
+The defect is a derivation `R → J` vanishing on the generators `t`, hence on `m_R`; since `J` is
+a vector space over the residue field of `T`, it factors through the differentials of the residue
+field of `R`. Formal smoothness of the closed fibre makes the base-field differential map
+injective after tensoring with the residue field of `T`, and the functional extends along this
+injection (`Derivation.exists_extension_of_closedFiber`).
+
+## References
+
+* [Stacks, Tag 07NQ]
+* [Stacks, Tag 07EL]
 -/
 
 @[expose] public section
@@ -26,27 +41,11 @@ open IsLocalRing
 
 namespace Algebra
 
-/-- The defect of a ring lift agreeing on generators of the base maximal ideal extends
-to a derivation on the target. The displayed additive map is a Z-derivation with
-values in J, using the T-action induced by f.
-Source: Stacks Project, Tag 07NQ, differential factorization and extension before psi'.
-(blueprint: lem-weil-pbc-closed-fiber-defect-derivation-extension)
-
-Proof: Give J its T-module structure through f; square-zero makes this independent
-of the representative of g. The annihilation hypothesis makes J a vector space over
-K = T/m_T, and the local map makes its R-action factor through k = R/m_R.
-The difference f composed with R -> T minus R -> D is additive, satisfies Leibniz,
-and has values in J. It vanishes on t. Its differential functional therefore kills
-the conormal image for m_R: the differentials of the generators t span this image,
-and m_R acts trivially on J. The quotient differential exact sequence factors the
-functional through Omega_(k/Z). Extend scalars to K. Adic formal smoothness of the
-closed fibre gives injectivity of its base-field differential map after tensoring
-with K (Tag 07EL). Extend the functional along this injection using a vector-space
-basis, and precompose with the differential of T -> T/L. This gives the required
-derivation delta on T, with the prescribed restriction. Its values lie in J,
-Leibniz uses the f-action, and every derivation kills 1. For J = 0 use the zero map;
-for t empty the base maximal ideal is zero and the same factorization applies.
--/
+/-- If the closed fibre of `R → T` is formally smooth, `J` is a square-zero ideal of `D`, and
+`f : T → D` lifts an `R`-algebra map `T → D ⧸ J`, agrees with `R → D` on the generators `t` of the
+maximal ideal of `R`, and is such that `m_T` acts trivially on `J`, then there is an additive map
+`δ : T → J` satisfying the Leibniz rule for the `T`-action through `f` and restricting on `R` to
+the defect `f ∘ (R → T) - (R → D)`. -/
 theorem exists_closedFiber_defect_derivation
     (R : Type u) (T : Type v) [CommRing R] [CommRing T]
     [IsLocalRing R] [IsLocalRing T] [IsNoetherianRing T]

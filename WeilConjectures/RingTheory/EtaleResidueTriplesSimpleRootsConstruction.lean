@@ -14,10 +14,26 @@ import WeilConjectures.RingTheory.EtaleResidueTriplesColimit
 import Mathlib.Algebra.Polynomial.Lifts
 import Mathlib.RingTheory.Etale.StandardEtale
 
-/-! Construction of a finite etale stage carrying a prescribed simple root.
+/-!
+# A finite étale stage carrying a prescribed simple root
 
-Source: Stacks Project, Algebra, Tags 04GN and 04GP.
-(blueprint: lem-weil-pbc-etale-triples-colimit-simple-roots-construction)
+Given a colimit of pointed étale residue triples, a monic polynomial over the colimit and a
+simple root in `K`, we construct a single triple whose ring contains a root of the polynomial
+mapping to the prescribed root.
+
+## Implementation details
+
+The union of the stage images is shown to be a subring by filteredness; restricting the cocone
+maps to it gives a retraction of the inclusion, so every colimit element comes from a stage. This
+argument needs no smallness assumption on the indexing category. The coefficients of the monic
+polynomial are lifted to a common stage keeping the leading coefficient. Then the standard étale
+algebra for the lifted polynomial and its derivative is formed; evaluation at the simple root
+defines a map to `K`, whose kernel and induced residue-field embedding give a later triple.
+
+## References
+
+* [Stacks, Tag 04GN]
+* [Stacks, Tag 04GP]
 -/
 
 @[expose] public section
@@ -36,10 +52,8 @@ private theorem stage_range_subset {J : Type*} [Category J]
   refine ⟨F.map a x, ?_⟩
   exact DFunLike.congr_fun (congrArg CommRingCat.Hom.hom (c.w a)) x
 
-/-- The union of the stage images is a subring by filteredness. Restricting the cocone
-maps to that subring and applying the colimit universal property gives a retraction
-of its inclusion, so every colimit element lies in a stage image. This argument works
-without a smallness assumption on the indexing category. -/
+/-- Every element of the colimit of a filtered diagram of commutative rings lies in the image of
+some stage. -/
 private theorem stage_jointly_surjective {J : Type*} [Category J] [IsFiltered J]
     (F : J ⥤ CommRingCat.{u}) (c : Cocone F) (hc : IsColimit c) (x : c.pt) :
     ∃ j, x ∈ Set.range (c.ι.app j) := by
@@ -86,8 +100,8 @@ private theorem stage_jointly_surjective {J : Type*} [Category J] [IsFiltered J]
     DFunLike.congr_fun (congrArg CommRingCat.Hom.hom he) x
   exact hx ▸ ((hc.desc d).hom x).property
 
-/-- Lift the finite set of coefficients to a common stage, then use Mathlib's monic
-polynomial lifting theorem to preserve the leading coefficient. -/
+/-- A monic polynomial over the colimit of a filtered diagram of commutative rings is the image of
+a monic polynomial over some stage. -/
 private theorem stage_monic_polynomial {J : Type*} [Category J] [IsFiltered J]
     (F : J ⥤ CommRingCat.{u}) (c : Cocone F) (hc : IsColimit c)
     (f : Polynomial c.pt) (hf : f.Monic) :
@@ -105,9 +119,7 @@ private theorem stage_monic_polynomial {J : Type*} [Category J] [IsFiltered J]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The map from a triple's ring to the field has kernel its distinguished prime:
-the scheme residue field is identified with the ideal residue field, and all subsequent
-maps between fields are injective. -/
+/-- The map from a triple's ring to the field `K` has kernel the distinguished prime. -/
 private theorem triple_map_eq_zero {R : CommRingCat.{u}} {p : Spec R}
     {K : Type u} [Field K] {χ : (Spec R).residueField p ⟶ CommRingCat.of K}
     (t : EtaleResidueTriples R p K χ) (x : t.B) :
@@ -126,10 +138,8 @@ private theorem triple_map_eq_zero {R : CommRingCat.{u}} {p : Spec R}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Form the standard étale algebra for the polynomial and its derivative. Evaluation
-at the simple root defines a map to the field; its kernel and the induced residue-field
-embedding define a later triple. The image of the universal root has the required
-polynomial equation and field value. -/
+/-- A monic polynomial over a triple's ring with a simple root in `K` acquires a root mapping to
+that simple root in some later triple. -/
 private theorem triple_simple_root_extension {R : CommRingCat.{u}} {p : Spec R}
     {K : Type u} [Field K] {χ : (Spec R).residueField p ⟶ CommRingCat.of K}
     (t : EtaleResidueTriples R p K χ) (g : Polynomial t.B) (hg : g.Monic)
@@ -212,17 +222,10 @@ private theorem triple_simple_root_extension {R : CommRingCat.{u}} {p : Spec R}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The finite stage construction in the proof of the simple-root lifting lemma.
-The polynomial and its root descend to one pointed etale residue triple; the
-universal root in that stage maps to the prescribed simple root in `K`.
-Source: Stacks Project, Algebra, Tags 04GN and 04GP.
-Proof: Filteredness descends the coefficients and simple-root data to one pointed
-etale residue triple.
-Adjoin a universal root using the standard etale algebra for a monic polynomial and its
-invertible derivative, then use the root in K to define a residue embedding. The induced
-triple morphism supplies the stage element, whose polynomial equation and image in K
-follow by functoriality.
-(blueprint: lem-weil-pbc-etale-triples-colimit-simple-roots-construction) -/
+/-- Let `c` be a colimit of pointed étale residue triples with compatible map `ψ : c.pt → K`.
+For every monic polynomial `f` over `c.pt` with a simple root `a₀` in `K` under `ψ`, there is a
+triple `t` and an element `x` of its ring whose image in `c.pt` is a root of `f` mapping to
+`a₀`. -/
 theorem etaleResidueTriples_simple_root_stage
     (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]
     [Algebra ((Spec R).residueField p) K] [IsSepClosure ((Spec R).residueField p) K]

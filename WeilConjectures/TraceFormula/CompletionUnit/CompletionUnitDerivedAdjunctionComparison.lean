@@ -33,8 +33,21 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
 /-! # Normalized derived tensor adjunction comparison
 
-Source: Stacks 07A6, 09T5 and 0D6E, canonical-model construction steps 2--3.
-(blueprint: lem-trf-completion-unit-derived-adjunction-comparison).
+The ordinary tensor adjunction is derived and compared with a fixed coherent coefficient
+calculus.
+
+## Implementation details
+
+`M.tensor` is derived on flat-term K-flat representatives and `M.ordinaryLimit` on K-injective
+systems. Restriction of coefficient rings is exact, and the normalized pushforward/limit
+composition theorem identifies the right-derived unit with `systemLimitUnit M η`; this uses
+limit-acyclicity, not preservation of K-injectivity by scalar restriction. The unique isomorphism
+of left adjoints of `coefficientSequenceLimit` transports the derived comparison to `ε`, so the
+original calculus `S` and its coherence are retained.
+
+## References
+
+* [Stacks Project, Tags 07A6, 09T5 and 0D6E](https://stacks.math.columbia.edu/tag/07A6)
 -/
 
 @[expose] public noncomputable section
@@ -54,9 +67,7 @@ namespace WeilConjectures.CompletionUnit
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-/-- The actual composite unit for exact scalar restriction followed by total limit.
-Source: Stacks 0D6E
-(blueprint: lem-trf-completion-unit-derived-adjunction-comparison). -/
+/-- The actual composite unit for exact scalar restriction followed by total limit. -/
 def systemLimitUnit (M : OrdinaryModel l E W)
     (η : roosLimitFunctor ⋙ DerivedCategory.Q ⟶
       DerivedCategory.Q ⋙ coefficientConstantTowerLimit l E W) :
@@ -227,34 +238,7 @@ private theorem tensor_derived_exists
 /-- Derive the ordinary tensor adjunction and compare it with a fixed coherent calculus.
 The right comparison is the displayed composite, not a choice of a system unit.
 This supplies only the derived-adjunction part of the canonical models: the ordinary
-model, constant-tower derived unit and Roos comparison are separate inputs or results.
-
-Source: Stacks sites-cohomology.tex, lemma-adjoint (07A6),
-lemma-derived-pushforward-composition (0D6E), and derived.tex,
-lemma-derived-adjoint-functors (09T5), with the coefficient adjunction-mate
-normalization in steps 2--3 of lem-trf-completion-unit-canonical-models.
-(blueprint: lem-trf-completion-unit-derived-adjunction-comparison).
-
-Proof: Derive M.tensor on flat-term K-flat representatives and M.ordinaryLimit on
-K-injective systems using the resolving-class derived adjunction theorem. Restriction
-of coefficient rings is exact; the normalized pushforward/limit composition theorem
-identifies the right-derived unit with systemLimitUnit M η, including its value on
-every chain map and its invertibility on K-injective systems. This argument uses
-limit-acyclicity supplied by the composition theorem, not preservation of
-K-injectivity by scalar restriction. Both the resulting left functor and S.reduction
-are left adjoints to the same coefficientSequenceLimit. The unique isomorphism
-compatible with the two adjunctions transports the universal left-derived comparison
-to ε. Its universal property and invertibility on flat-term K-flat objects transport
-along this isomorphism. The resolving-class Hom equation then gives the last clause
-for every Q, I and chain map a, without assuming either is a resolution.
-To verify the finite comparison, take the finite scalar adjunction mates of the
-evaluated counits. S.counit_projection identifies one mate with the actual total-limit
-projection; the normalized sequence pushforward/limit theorem gives the same projection
-for the other mate. Injectivity of the finite Hom bijection identifies the counits.
-On a flat-term K-flat representative, the normalized finite scalar comparison turns
-this counit equality into the displayed evaluation equation for ε. Thus the original
-S and its coherence are retained, rather than replacing S by a different calculus.
-All universal properties are unbounded and apply also to zero objects and degree zero. -/
+model, constant-tower derived unit and Roos comparison are separate inputs or results. -/
 theorem derivedAdjunctionComparison_exists
     [∀ x : W, Invertible (l : W.residueField x)]
     (S : CoefficientDerivedSystemCalculus l E W)

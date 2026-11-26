@@ -19,7 +19,7 @@ This file records two properties of the field coefficient stages:
 * the common-stage category `Dᵇc(X, ℚ̄_ℓ)` is idempotent complete, so that the canonical functor
   into its Karoubi envelope is an equivalence;
 * at a field coefficient, every bounded constructible complex has finite Tor amplitude, so that
-  `Dᵇctf = Dᵇc` (`proposition-ctf-equals-bc`, from `proposition-ctf-equals-bc`).
+  `Dᵇctf = Dᵇc`.
 
 ## Implementation notes
 
@@ -30,8 +30,13 @@ This file records two properties of the field coefficient stages:
 * The derived tensor product of the field stages is only available, in this repository, for
   étale sheaves of modules over a discrete coefficient field `F`; the Tor amplitude statements
   are made there.
-* The idempotent completeness of `Dᵇc(X, ℚ̄_ℓ)` and the lemma `proposition-ctf-equals-bc` belong
-  to other parts of the blueprint. In the Bhatt–Scholze model, idempotent completeness of
+* The finite Tor amplitude statement is naturally stated for the rationalized category
+  `Dᵇc(Y, E)` and the common-stage category `Dᵇc(Y, ℚ̄_ℓ)`; these have no derived tensor
+  product with sheaves here, so it is formalised for étale sheaves of modules over a discrete
+  field `F`. Every sheaf of `F`-modules is flat, so each sheaf placed in degree `0` has Tor
+  amplitude in `[0, 0]`, and finite Tor amplitude, being triangulated, holds for every bounded
+  complex by induction along truncation triangles.
+* In the Bhatt–Scholze model, idempotent completeness of
   `Dᵇc(X, ℚ̄_ℓ)` needs no descent to finite stages: an idempotent of a bounded object of
   `D(X_proét, ℚ̄_ℓ)` splits (`CategoryTheory.Triangulated.TStructure.isSplit_of_isGE_of_isLE`),
   and `Dᵇc(X, ℚ̄_ℓ)` is stable under retracts, retracts of constructible sheaves being
@@ -51,9 +56,7 @@ open Pretriangulated
 variable {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
 
 /-- A triangulated property of objects of `D(C)`, closed under isomorphisms, which holds for
-every object of `C` placed in degree `0` holds for every bounded object: by induction on the
-length of the range of `K`, along the truncation triangle `τ_{< b} K ⟶ K ⟶ τ_{≥ b} K ⟶` whose
-third term is `Hᵇ K` placed in degree `b`. -/
+every object of `C` placed in degree `0` holds for every bounded object. -/
 lemma prop_of_isGE_of_isLE_of_forall_singleFunctor (P : ObjectProperty (DerivedCategory C))
     [P.IsTriangulated] [P.IsClosedUnderIsomorphisms]
     (h : ∀ G : C, P ((singleFunctor C 0).obj G)) (K : DerivedCategory C) (a b : ℤ)
@@ -142,19 +145,11 @@ section FieldTorAmplitude
 
 variable (F : Type (u + 1)) [Field F] (X : Scheme.{u})
 
-/-- Blueprint `proposition-ctf-equals-bc`: Finite Tor amplitude at field coefficients.
+/-- Finite Tor amplitude at field coefficients.
 
 For a coefficient field `F`, every bounded constructible complex `K` of étale sheaves of
 `F`-modules has finite Tor amplitude: there are `a ≤ b` with `𝓗ʳ(K ⊗ᴸ_F M) = 0` for `r ∉ [a, b]`
-and every sheaf `M` of `F`-modules.
-
-The blueprint node is stated for the rationalized category `Dᵇc(Y, E)` and for the common-stage
-category `Dᵇc(Y, ℚ̄_ℓ)`. In this repository these have no derived tensor product with sheaves, so
-the statement is formalised for étale sheaves of modules over a discrete field `F`.
-
-Every sheaf of `F`-modules is flat (its stalks are `F`-vector spaces), so each sheaf placed in
-degree `0` has Tor amplitude in `[0, 0]`; finite Tor amplitude is a triangulated property, so it
-holds for every bounded complex, by induction along truncation triangles. -/
+and every sheaf `M` of `F`-modules. -/
 theorem Etale.DerivedCategory.finiteTorAmplitude_of_boundedConstructible_of_field
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} F))}
     (hK : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} F) X K) :
@@ -165,13 +160,11 @@ theorem Etale.DerivedCategory.finiteTorAmplitude_of_boundedConstructible_of_fiel
   exact (Etale.flat_iff_forall_flat_sheafFiber_obj G).2 fun _ ↦
     (ModuleCat.flat_iff_flat _).2 inferInstance
 
-/-- Blueprint `proposition-ctf-equals-bc`: Pointer to the properties of finite Tor
-amplitude.
+/-- Pointer to the properties of finite Tor amplitude.
 
 At a field coefficient `F` the finite-Tor category is the bounded constructible one,
 `Dᵇctf(X, F) = Dᵇc(X, F)`, consistently with the amplitude condition: every bounded constructible
-complex at a field coefficient has finite Tor amplitude (blueprint
-`proposition-ctf-equals-bc`). -/
+complex at a field coefficient has finite Tor amplitude. -/
 theorem Etale.DerivedCategory.constructibleFiniteTor_eq_boundedConstructible_of_field :
     Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} F) X =
       Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} F) X := by

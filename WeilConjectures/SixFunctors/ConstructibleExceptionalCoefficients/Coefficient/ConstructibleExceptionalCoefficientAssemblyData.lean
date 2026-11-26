@@ -12,7 +12,19 @@ public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.C
 
 The coefficient-stage records retain the literal rational object and localized integral-arrow
 normalizations and the closed functor action on representative arrows. The additional
-normalization below records the shift and transition properties used for refinement descent. -/
+normalization below records the shift and transition properties used for refinement descent.
+
+## Implementation details
+
+The closed category is the pair category, whose arrows between different finite stages are
+not images of one stage inclusion. Without the normalization of the closed-stage left functor
+on transition isomorphisms, the closed functors of two compactifications could differ by a
+stage-dependent sign twist on such arrows, and no natural refinement map would exist.
+
+## References
+
+* [Zheng, Lemma 5.22]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -27,9 +39,7 @@ namespace WeilConjectures.ConstructibleExceptionalCoefficients
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-/-- The inherited shift on the full ring-stage inclusion.
-Source: full coefficient subcategories in the exceptional construction
-(blueprint: def-sf-constructible-exceptional-assembly-data). -/
+/-- The inherited shift on the full ring-stage inclusion. -/
 @[instance_reducible]
 def constructionInclusionShift (T : Scheme.{max u v}) (s : RingStage.{max u v} l) :
     (RingStage.inclusion.{u, v} l Ω T s).CommShift ℤ :=
@@ -46,17 +56,11 @@ variable (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
   [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]
   [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
 
-/-- Additional normalizations retained before constructing refinement comparisons.
-The ring realizations preserve the inherited shifts. Scalar shifts are chosen independently
-of compactification, and raw rationalization preserves the represented left object literally.
-The closed-stage left functor sends the common-stage transition isomorphisms to the
-rational scalar q: the closed category is the pair category, whose arrows between
-different finite stages are not images of one stage inclusion, so without this field the
-closed functors of two compactifications could differ by a stage-dependent sign twist
-on such arrows and no natural refinement map would exist.
-These are properties of the chosen stage data, not refinement maps or refinement existence.
-Source: Zheng 5.22 and raw localization; exceptional construction steps 3--5
-(blueprint: def-sf-constructible-exceptional-assembly-data). -/
+/-- Additional normalizations retained before constructing refinement comparisons: the ring
+realizations preserve the inherited shifts, scalar shifts are chosen independently of the
+compactification, raw rationalization preserves the represented left object literally, and the
+closed-stage left functor sends the common-stage transition isomorphisms to the rational
+scalar q. -/
 structure CoefficientConstructionNormalization
     (R : CoefficientConstructionRing.{u, v} l Ω D hl (f := f))
     (F : CoefficientConstructionFields.{u, v} l Ω D hl R)
@@ -91,9 +95,7 @@ structure CoefficientConstructionNormalization
 
 /-- Only the left geometric refinement maps, with their realization and descent equations.
 The right maps in the normalization predicate are the explicit adjunction conjugates;
-no right comparison, unit equation, or counit equation is assumed as input data.
-Source: proper/open refinement, raw localization, and common-field descent
-(blueprint: def-sf-constructible-exceptional-assembly-data). -/
+no right comparison, unit equation, or counit equation is assumed as input data. -/
 structure CoefficientLeftRefinements
     (R : CoefficientConstructionRing.{u, v} l Ω D hl (f := f))
     (F : CoefficientConstructionFields.{u, v} l Ω D hl R)

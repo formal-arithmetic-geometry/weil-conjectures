@@ -13,8 +13,14 @@ import WeilConjectures.RingTheory.JacobiZariskiLeftTermVanishing
 
 /-! # Jacobi–Zariski sequence for a quotient of a smooth algebra
 
-Source: Stacks Project, Algebra, Lemma Tags 00S2, 07BP and 00RU
-(blueprint: lem-weil-pbc-jacobi-zariski-quotient-smooth).
+For `A → B` with `H₁(L_{B/A}) = 0` and `Ω_{B/A}` projective, and `C = B/a`, the Jacobi–Zariski
+sequence becomes `0 → H₁(L_{C/A}) → a/a² → C ⊗ Ω_{B/A} → Ω_{C/A} → 0`.
+
+## References
+
+* [Stacks, Tag 00S2]
+* [Stacks, Tag 07BP]
+* [Stacks, Tag 00RU]
 -/
 
 @[expose] public section
@@ -26,17 +32,8 @@ namespace Algebra
 
 set_option backward.isDefEq.respectTransparency false in
 /--
-Source: Stacks Project, Algebra, Lemma Tag 00S2, with Tags 07BP and 00RU
-(blueprint: lem-weil-pbc-jacobi-zariski-quotient-smooth).
-Proof:
-1. Apply lem-weil-pbc-jacobi-zariski-homology-sequence to A → B → C (Tag 00S2).
-2. Use lem-weil-pbc-jacobi-zariski-surjection-h1 and
-   lem-weil-pbc-jacobi-zariski-surjection-differentials (Tag 07BP) to identify
-   the relative first homology with a.Cotangent and the relative differentials with zero.
-3. Apply theorem-finite-etale-covers-proper-henselian--2: projectivity kills
-   the two Tor groups, and the first homology vanishing kills the left endpoint.
-4. Use lem-weil-pbc-jacobi-zariski-differential-maps (Tag 00RU) for the two
-   displayed formulas. Truncate the sequence at its zero endpoints.
+If `H₁(L_{B/A}) = 0` and `Ω_{B/A}` is projective, then for `C = B/a` there is an exact
+sequence `0 → H₁(L_{C/A}) → a/a² → C ⊗[B] Ω_{B/A} → Ω_{C/A} → 0` with the displayed maps.
 -/
 theorem jacobiZariski_quotient_smooth
     (A : Type u) (B : Type v) [CommRing A] [CommRing B] [Algebra A B]

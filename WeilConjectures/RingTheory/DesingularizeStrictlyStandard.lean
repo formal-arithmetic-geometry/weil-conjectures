@@ -16,8 +16,19 @@ import WeilConjectures.RingTheory.SingularIdealsOfAnnihilatorBound
 /-!
 # Desingularization along a strictly standard element
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma Tag 07CT
-(blueprint: lem-weil-pbc-popescu-desingularize-strictly-standard).
+## Implementation details
+
+Compatibility modulo the fourth power is stated on representatives; since every quotient class
+has a representative, this is exactly the commuting triangle. The proof base changes to
+`A ⊗[R] D` (with `D` Noetherian), where the element remains strictly standard, and applies
+desingularization over `D` to obtain `B` with `aB ≤ H_{B/D}`, where `a` annihilates
+`Ann_D(π²)/Ann_D(π)`. At `R`-flat primes of `D` this quotient vanishes, so `a` lies in no
+smooth prime; the radical criterion then gives `H_{D/R}B ≤ H_{B/D}` and, by smooth base change
+and composition, the inclusion into `H_{B/R}`.
+
+## References
+
+* [Stacks, Tag 07CT]
 -/
 
 @[expose] public section
@@ -26,32 +37,9 @@ universe u v w z
 
 namespace Algebra
 
-/-- Desingularization along a strictly standard element, Stacks Project, Lemma Tag 07CT.
-Compatibility modulo the fourth power is tested on representatives: if the image of `a`
-under the quotient map is represented by `d`, their images in the quotient of `Λ` agree.
-Every quotient class has a representative, so this is exactly the commuting triangle.
-
-Proof: (1) `D` is Noetherian by finite type over `R`
-(`lem-weil-pbc-finite-type-algebra-noetherian`). Form `A' = A ⊗[R] D` and the map to `Λ`.
-Finite presentation is preserved by base change
-(`lem-weil-pbc-finite-presentation-base-change-composition`).
-(2) The element remains strictly standard by `lem-weil-pbc-strictly-standard-base-change`.
-The given quotient map induces the section for `A'` modulo the fourth power; the
-annihilator condition on `Λ` is unchanged.
-(3) Apply `lem-weil-pbc-popescu-desingularize` over `D` to obtain `B`, with
-`aB ≤ H_{B/D}`, where `a` annihilates `Ann_D(π²)/Ann_D(π)`. Composition gives finite
-presentation over `R` and the two compatible factorization maps.
-(4) At an `R`-flat prime of `D`, the quotient of annihilators vanishes by
-`lem-weil-pbc-annihilator-element-flat-base-change`. It is finite since `D` is Noetherian;
-`lem-weil-pbc-finite-module-support-annihilator` shows `a` is not contained in that prime.
-(5) A smooth prime is flat by `lem-weil-pbc-smooth-ring-map-flat`, localization flatness
-(`lem-weil-pbc-localization-flat`), and `lem-weil-pbc-flat-ring-map-comp`.
-(6) Thus primes of `B` over the smooth locus of `D/R` are smooth for `B/D`.
-The zero-locus/radical criterion (`lem-weil-pbc-zero-locus-eq-iff-radical-eq`) gives
-`H_{D/R}B ≤ H_{B/D}`.
-(7) Smooth base change and composition (`lem-weil-pbc-smooth-ring-map-base-change-composition`)
-make those primes smooth for `B/R`; the same radical criterion gives the second inclusion.
-(blueprint: lem-weil-pbc-popescu-desingularize-strictly-standard). -/
+/-- Desingularization along a strictly standard element. Compatibility modulo the fourth
+power is tested on representatives: if the image of `a` under the quotient map is represented
+by `d`, their images in the quotient of `Λ` agree. -/
 theorem exists_desingularization_strictlyStandard
     (R : Type u) (Λ : Type v) (A : Type w) (D : Type z)
     [CommRing R] [CommRing Λ] [CommRing A] [CommRing D]

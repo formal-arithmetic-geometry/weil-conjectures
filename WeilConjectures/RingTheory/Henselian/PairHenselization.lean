@@ -49,7 +49,7 @@ lemma isPairEtaleNeighborhood_le_finiteType (J : Ideal B) :
 /-- The full category of `B`-algebras `D` with `Spec D → Spec B` étale and `B/J → D/JD`
 bijective, with all `B`-algebra maps as morphisms, is essentially small in the universe of `B`:
 it embeds fully faithfully into the essentially small category of finitely generated
-`B`-algebras. (blueprint: `lem-weil-pbc-pair-henselization-essentially-small`) -/
+`B`-algebras. -/
 theorem essentiallySmall_isPairEtaleNeighborhood (J : Ideal B) :
     EssentiallySmall.{u} (IsPairEtaleNeighborhood J).FullSubcategory :=
   essentiallySmall_of_fully_faithful

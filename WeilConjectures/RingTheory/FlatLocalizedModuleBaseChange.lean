@@ -14,8 +14,21 @@ import WeilConjectures.Mathlib.RingTheory.Flat.Localization
 /-!
 # Base change of flatness at a module point
 
-Source: Stacks Project, Algebra, Theorem Tag 00RC, reduction paragraph;
-Tags 00HI and 00HT. (blueprint: lem-weil-pbc-flat-localized-module-base-change)
+Flatness of a localized module at the contracted prime persists under a scalar pushout and
+module base change.
+
+## Implementation details
+
+The base change of the flat module `N_p` is flat, and the base change of the localization
+map `N → N_p` is again a localization map. An element of the kernel of `M ⊗ J → M` therefore
+dies after multiplication by a denominator outside `q`, and the criterion
+`Module.flat_localizedModule_iff` gives flatness of `M_q`.
+
+## References
+
+* [Stacks, Tag 00RC], reduction paragraph
+* [Stacks, Tag 00HI]
+* [Stacks, Tag 00HT]
 -/
 
 @[expose] public section
@@ -51,28 +64,7 @@ private theorem flat_at_prime_of_flat_localization
   exact ⟨t, hT t.2, ht⟩
 
 /-- Flatness at the contracted prime persists under a scalar pushout and module base change.
-
-Source: Stacks Project, Algebra, Theorem Tag 00RC, reduction paragraph, and
-Tags 00HI (flat base change) and 00HT (localization and flatness).
-(blueprint: lem-weil-pbc-flat-localized-module-base-change)
-
-Proof:
-1. Put p = q intersect B. Base change the flat A-module N_p along A -> R. It is flat
-   over R by `Module.Flat.baseChange`. The pushout cancellation equivalence identifies
-   S tensor_B N_p with R tensor_A N_p, so the former is R-flat as well.
-2. Tensor the localization map N -> N_p with S. Tensor symmetry and
-   `IsLocalizedModule.rTensor` show that this S-linear map is a localization at
-   the image of B minus p. Precompose it with the inverse of the given equivalence.
-   This gives a localization map from M to the flat R-module S tensor_B N_p.
-3. For an ideal J of R, take an element of the kernel of M tensor_R J -> M tensor_R R.
-   Its image in (S tensor_B N_p) tensor_R J vanishes, since the latter module is flat
-   over R and tensor maps commute with the localization map. The zero criterion for
-   localized modules, applied to this map tensored with J, supplies a denominator
-   in the image of B minus p which annihilates the element.
-4. Such a denominator is outside q by the definition of p. The criterion
-   `Module.flat_localizedModule_iff` therefore proves that M_q is flat over R.
-
-No finiteness or Noetherian assumption is needed, and q is allowed to be any prime. -/
+No finiteness or Noetherian assumption is needed, and `q` may be any prime. -/
 theorem localizedModule_of_isPushout
     {A : Type u} {B : Type v} {R : Type w} {S : Type x}
     {N : Type y} {M : Type z}

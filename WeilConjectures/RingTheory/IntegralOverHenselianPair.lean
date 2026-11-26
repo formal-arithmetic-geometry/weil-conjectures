@@ -15,13 +15,22 @@ import WeilConjectures.RingTheory.MonicFactorizationOfIdempotent
 /-!
 # Integral algebras over henselian pairs
 
-Source: Stacks Project, More on Algebra, Lemma 15.11.8 (Tag 09XK, label
-`lemma-integral-over-henselian-pair`) (blueprint: lem-weil-pbc-integral-over-henselian-pair).
-
 ## Main statements
 
 * `henselianRing_of_isIntegral`: an integral algebra over a henselian pair is
   henselian for the extended ideal.
+
+## Implementation details
+
+The extended ideal lies in the Jacobson radical by integrality. A coprime factorization of a
+monic polynomial `f` modulo the extended ideal gives an idempotent of `B[X]/(f)` modulo the
+ideal, which lifts since `B[X]/(f)` is integral over `A` (idempotent-lifting characterization,
+Tag 09XI); the lifted idempotent lifts the factorization.
+
+## References
+
+* [Stacks, Tag 09XK]
+* [Stacks, Tag 09XI]
 -/
 
 @[expose] public section
@@ -29,24 +38,7 @@ Source: Stacks Project, More on Algebra, Lemma 15.11.8 (Tag 09XK, label
 universe u v
 
 /-- If `(A, I)` is a henselian pair and `B` is an integral `A`-algebra, then the
-extended ideal pair `(B, IB)`, with `IB = I.map (algebraMap A B)`, is henselian.
-
-Source: Stacks Project, More on Algebra, Lemma 15.11.8 (Tag 09XK), using the
-idempotent-lifting characterization in Lemma 15.11.6 (Tag 09XI).
-Proof:
-1. Put `J = I.map (algebraMap A B)`. Each maximal ideal of `B` contracts to
-   a maximal ideal of `A` by integrality, so `J` lies in the Jacobson radical.
-2. For monic `f : B[X]`, `C = AdjoinRoot f` is finite over `B`, hence integral
-   over `A` by transitivity. The ideals `JC` and `IC` agree by `Ideal.map_map`.
-   Apply `Algebra.existsUnique_isIdempotentElem_of_henselianRing` over `(A,I)`
-   to lift idempotents of `C/JC`.
-3. Given a coprime monic factorization modulo `J`, Bezout coefficients give
-   its Chinese remainder idempotent. Lift it using step 2 and compute its
-   residues as `1` and `0` in the two factor quotients. Apply
-   `Polynomial.exists_monic_factorization_of_idempotent` to lift the factors.
-4. Apply `henselianRing_iff_factorization_criterion` to steps 1 and 3 to
-   obtain Mathlib's simple-root henselian predicate.
-(blueprint: lem-weil-pbc-integral-over-henselian-pair). -/
+extended ideal pair `(B, IB)`, with `IB = I.map (algebraMap A B)`, is henselian. -/
 theorem henselianRing_of_isIntegral
     (A : Type u) [CommRing A] (I : Ideal A) [HenselianRing A I]
     (B : Type v) [CommRing B] [Algebra A B] [Algebra.IsIntegral A B] :

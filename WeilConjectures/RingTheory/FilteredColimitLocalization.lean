@@ -35,6 +35,11 @@ closed domains then so is `R_p`.
 - `CommRingCat.isDomain_and_isIntegrallyClosed_localization_of_isColimit`: Stacks 037D for the
   localization at a prime.
 
+## Implementation details
+
+For integral closedness, a fraction `a / b` integral over the colimit is handled by lifting
+`a`, `b` and a monic equation to a common stage, where `b` divides `a`.
+
 ## References
 
 - Stacks Project, Lemma 10.37.5, <https://stacks.math.columbia.edu/tag/037D>
@@ -126,9 +131,7 @@ lemma isDomain_of_isColimit (hc : IsColimit c) [∀ j, IsDomain (F.obj j)] : IsD
     rw [← ι_app_map_apply c (IsFiltered.rightToMax i j), ← ι_app_map_apply c f, h, map_zero]
 
 /-- **Filtered colimits of integrally closed domains.** A filtered colimit of integrally closed
-domains is an integrally closed domain: a fraction `a / b` integral over the colimit is, after
-lifting `a`, `b` and a monic equation to a common stage, integral over that stage, hence a
-quotient there. -/
+domains is an integrally closed domain. -/
 theorem isDomain_and_isIntegrallyClosed_of_isColimit (hc : IsColimit c)
     [∀ j, IsDomain (F.obj j)] [∀ j, IsIntegrallyClosed (F.obj j)] :
     IsDomain c.pt ∧ IsIntegrallyClosed c.pt := by
@@ -178,9 +181,7 @@ lemma comap_comap_ι_app {i j : J} (f : i ⟶ j) :
 
 /-- The diagram `i ↦ (R_i)_{p_i}` of localizations of the stages `R_i` of a cocone with point
 `R` at the contractions `p_i = ι_i⁻¹(p)` of a prime `p` of `R`, with the transition maps
-`x / s ↦ R(a)(x) / R(a)(s)`.
-
-(blueprint: `lemma-quasi-finite-coordinates--1`) -/
+`x / s ↦ R(a)(x) / R(a)(s)`. -/
 noncomputable def localizationAtPrimeDiagram : J ⥤ CommRingCat.{u} where
   obj j := .of (Localization.AtPrime (p.comap (c.ι.app j).hom))
   map {i j} f := ofHom (Localization.localRingHom _ _ (F.map f).hom
@@ -198,9 +199,7 @@ noncomputable def localizationAtPrimeDiagram : J ⥤ CommRingCat.{u} where
     ext x
     simp [Localization.localRingHom_to_map]
 
-/-- The cocone `κ_i : (R_i)_{p_i} → R_p`, `x / s ↦ ι_i(x) / ι_i(s)`.
-
-(blueprint: `lemma-quasi-finite-coordinates--1`) -/
+/-- The cocone `κ_i : (R_i)_{p_i} → R_p`, `x / s ↦ ι_i(x) / ι_i(s)`. -/
 noncomputable def localizationAtPrimeCocone : Cocone (localizationAtPrimeDiagram c p) where
   pt := .of (Localization.AtPrime p)
   ι :=
@@ -236,9 +235,7 @@ variable [IsFiltered J]
 
 /-- **Localization at a prime commutes with filtered colimits of rings.** If `R = colim_i R_i`
 is a filtered colimit of commutative rings and `p` is a prime of `R` with contractions
-`p_i = ι_i⁻¹(p)`, then `R_p = colim_i (R_i)_{p_i}`.
-
-(blueprint: `lemma-quasi-finite-coordinates--1`) -/
+`p_i = ι_i⁻¹(p)`, then `R_p = colim_i (R_i)_{p_i}`. -/
 noncomputable def isColimitLocalizationAtPrimeCocone (hc : IsColimit c) :
     IsColimit (localizationAtPrimeCocone c p) := by
   have := reflectsColimitsOfShape_of_reflectsIsomorphisms (G := forget CommRingCat.{u}) (J := J)
@@ -292,9 +289,7 @@ noncomputable def isColimitLocalizationAtPrimeCocone (hc : IsColimit c) :
 /-- **Localizations of filtered colimits of normal rings are integrally closed.** If
 `R = colim_i R_i` is a filtered colimit of commutative rings and `p` is a prime of `R` such
 that all localizations `(R_i)_{p_i}` at the contractions `p_i = ι_i⁻¹(p)` are integrally closed
-domains, then `R_p` is an integrally closed domain.
-
-(blueprint: `proposition-proper-direct-image-constructible-complexes`) -/
+domains, then `R_p` is an integrally closed domain. -/
 theorem isDomain_and_isIntegrallyClosed_localization_of_isColimit (hc : IsColimit c)
     (h : ∀ j, IsDomain (Localization.AtPrime (p.comap (c.ι.app j).hom)) ∧
       IsIntegrallyClosed (Localization.AtPrime (p.comap (c.ι.app j).hom))) :

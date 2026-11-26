@@ -49,7 +49,12 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 
 /-! # The scalar identity unitor on all cochain representatives
 
-Source: Stacks 06YY; blueprint Proof (3), ordinary identity normalization.
+The derived identity scalar extension is isomorphic to the identity, with its specified
+formula on every cochain representative.
+
+## References
+
+* Stacks Project, Tag 06YY
 -/
 
 @[expose] public noncomputable section
@@ -140,16 +145,7 @@ private theorem line_unit_from_model
   intro P
   rw [he, eq_of_heq (hc P)]
 
-/-- The derived identity scalar extension has its specified formula on every complex.
-Source: Stacks 06YY; blueprint Proof (3)
-(blueprint: lem-pur-ordinary-scalar-unit-all-complexes).
-Proof: ordinary multiplication identifies the cochain extension with the identity.
-Consequently it inverts quasi-isomorphisms after localization. The universal derived
-counit is therefore invertible. Descend this counit followed by cochain multiplication
-through the fully faithful localization whiskering functor. Its preimage is the
-claimed isomorphism, and the preimage equation gives the formula on every complex.
-The recorded cochain model and its counit identify these abstract maps with the
-specified scalar extension and multiplication. -/
+/-- The derived identity scalar extension has its specified formula on every complex. -/
 theorem ordinaryUnitOnComplexes_exists :
     ∃ e : completedDerivedScalarExtension l E E (AlgHom.id ℚ_[l] E) X ≅ 𝟭 _,
       ∀ P : CochainComplex (integralTowerModules l E X) ℤ,

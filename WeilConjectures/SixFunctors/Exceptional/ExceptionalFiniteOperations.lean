@@ -25,13 +25,35 @@ import WeilConjectures.AlgebraicGeometry.Open.OpenExtensionFiniteTor
 /-!
 # Exact finite-coefficient exceptional adjunctions
 
-Source: Zheng, Propositions 2.23, 2.29, 3.16, Lemma 5.22 and Proposition 5.24;
-blueprint exceptional inverse-image construction
-(blueprint: lem-sf-exceptional-finite-operations).
-
 The categories are the published full intrinsic constant-coefficient categories.
 The normalization is expressed in their canonical fixed-module coordinates, using
-exactly the specified-compactification ordinary etale adjunction.
+exactly the specified-compactification ordinary étale adjunction.
+
+## Implementation details
+
+The proof of `WeilConjectures.exists_sfFiniteExceptionalOperations` runs as follows.
+
+1. Properness makes `c.g` of finite type, so `c.Z` is of finite type over `k`, and `X`, `Y`
+   and `c.Z` are Noetherian. A dimension bound `d` independent of the coefficients exists
+   (`0` for an empty `c.Z`).
+2. Extension by zero preserves constructibility and the Tor interval; the proper pro-étale
+   direct image with bound `2d` gives `[a, b + 2d]`. The actual functor is restricted to the
+   full categories, and the compact-support exact structure gives coherent integer shifts.
+3. The finite-coefficient bounds for the comparison-transported exceptional functor give the
+   interval `[a - 2D, b + 2e + 1]`, both cohomologically and for Tor, from finitely many affine
+   presentations fixed independently of `E` and `n`; an empty `X` gives zero outputs.
+4. The ordinary étale adjunction is transported: each input is written as `ν^* K_e`, and the
+   proper/open comparison, `ν^* ⊣ Rν_*`, the ordinary adjunction, full faithfulness of the
+   comparison and the origin isomorphism are composed. This is independent of the origin
+   witness, and a natural bijection gives the adjunction.
+5. The right adjoint is equipped with the unique coherent adjoint shift structure; it is then
+   exact and additive.
+6. This is repeated at every `c`, `E`, `n`, with no coefficient or refinement compatibility
+   imposed.
+
+## References
+
+* [Zheng, Propositions 2.23, 2.29, 3.16, Lemma 5.22 and Proposition 5.24]
 -/
 
 @[expose] public noncomputable section
@@ -46,47 +68,7 @@ namespace WeilConjectures
 
 /-- Choice of exact additive adjunctions on the actual full finite-Tor categories,
 with the specified ambient functors, transported Hom normalization and uniform bounds.
-The right shift is precisely the adjoint of the chosen left shift.
-Source: Zheng, Propositions 2.23, 2.29, 3.16; Section 5, Lemma 5.22 and Proposition 5.24;
-blueprint exceptional inverse-image construction
-(blueprint: lem-sf-exceptional-finite-operations).
-
-Proof:
-1. Properness makes c.g finite type. By finite-type composition c.Z is finite type over k.
-   Finite type over the Noetherian field makes X, Y and c.Z Noetherian. The finite-dimension
-   lemma supplies a nonnegative bound, independent of coefficients; for an empty c.Z use 0.
-   Uses def-weil-proper-morphism, lem-sfb-finite-type-composition-base-change,
-   lem-weil-pbc-finite-type-over-noetherian and lem-kun-dimension-finite-type.
-2. Extend by zero, preserving constructibility and the Tor interval. Apply proper pro-etale
-   direct image with bound 2d to obtain [a,b+2d]. Restrict the actual functor, including its
-   morphisms, to the full categories. The compact-support exact structure and the inherited
-   triangulation give coherent integer shifts. Uses
-   proposition-proper-direct-image-extension-zero--8, proposition-six-operations-dctf--2,
-   proposition-construction-independence-rf-shriek--1 and lem-weil-finite-ctf-triangulated.
-3. Apply theorem-f-shriek-finite-coefficients--1 to the specified comparison-transported
-   exceptional functor. Fix finitely many affine presentations once, independently of E,n.
-   For nonempty X their dimensions give D=max d_U and e=dim Y; the bound is
-   [a-2D,b+2e+1] both cohomologically and for Tor. Empty X gives zero outputs.
-4. Choose the ordinary etale adjunction. Constructible origin writes each input as nu^* K_e.
-   Compose proper/open comparison, nu^* adjoint Rnu_*, the ordinary etale adjunction,
-   comparison full faithfulness and the origin isomorphism. The class-adjoint theorem makes
-   this independent of the origin witness. Both values belong to the full finite-Tor
-   categories by steps 2 and 3. The natural-bijection theorem gives the adjunction, its unit
-   as the transpose of the identity, its counit as the inverse transpose of the identity,
-   and both triangles. Uses theorem-existence-exceptional-inverse-image--1,
-   theorem-comparison-constructible-sheaves, proposition-comparison-immersions--4,
-   theorem-bounded-below-cohomology-comparison, thm-sf-ambient-adjoint-class and
-   lem-weil-pbc-adjunction-of-natural-bijection.
-5. Equip the right adjoint with the unique coherent adjoint shift structure. The shift
-   adjunction theorem gives shift compatibility of both unit and counit. The exact-right-
-   adjoint theorem gives exactness. Additivity follows by applying the inverse Hom bijection
-   to G(u)+G(v) and G(u+v): counit naturality and additivity of F give the same inverse
-   transpose. The zero case is identical. Uses
-   lem-weil-pbc-adjunction-shift-compatibility-unique and lem-sf-triangulated-right-adjoint.
-6. Repeat at every c,E,n, with no coefficient or refinement compatibility imposed here.
-   If c.Z is empty then X is empty and all output objects are zero; d=0 works. The
-   construction includes n=1, zero objects and identity morphisms with the same full sites.
--/
+The right shift is precisely the adjoint of the chosen left shift. -/
 theorem exists_sfFiniteExceptionalOperations (D : FiniteFieldDatum.{u})
     (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]

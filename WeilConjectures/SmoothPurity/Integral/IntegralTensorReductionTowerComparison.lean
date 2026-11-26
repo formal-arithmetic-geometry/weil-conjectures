@@ -80,8 +80,10 @@ import WeilConjectures.SmoothPurity.Integral.IntegralTensorTransitionCompatibili
 
 /-! # Tensor comparison for the strict finite-reduction towers
 
-Source: Stacks Project, Modules on Sites, Tag 03EL; Cohomology on Sites,
-Tags 06YM and 06YY; Bhatt--Scholze, Definition 3.4.10.
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EL; Cohomology on Sites, Tags 06YM and 06YY
+* B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, Definition 3.4.10
 -/
 
 @[expose] public noncomputable section
@@ -459,17 +461,7 @@ private theorem finiteTensorComparison (n : ℕ) :
 attribute [local irreducible] coefficientTotalTensor
 
 /-- Scalar extension of the ordinary total tensor identifies its strict quotient
- tower with the tower of the two separately reduced total tensors.
-Source: Stacks 03EL, 06YM, 06YY; Bhatt--Scholze, Definition 3.4.10
-(blueprint: lem-pur-integral-tensor-reduction-tower-comparison).
-Proof: in bidegree (p,q) send s tensor (x tensor y) to
-(s tensor x) tensor (1 tensor y). The inverse multiplies the two scalar factors.
-The balanced tensor identities give inverse linear maps. Sheafify and sum over
-p+q=k; these maps commute with each signed differential summand. They are natural
-in chain maps. Consecutive quotient maps send each scalar to its reduction, so
-both routes send s tensor (x tensor y) to (rho(s) tensor x) tensor (1 tensor y).
-Pure tensors, sheafification and the total coproduct determine the equality.
-Thus the level isomorphisms give the asserted natural isomorphism of strict towers. -/
+ tower with the tower of the two separately reduced total tensors. -/
 theorem integralTensorReductionTowerComparison :
     Nonempty (coefficientTotalTensor.{u, t + 1, t}
       (AlgebraicGeometry.Scheme.ProEt.topology X)

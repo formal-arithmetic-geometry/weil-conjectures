@@ -17,11 +17,18 @@ import WeilConjectures.CategoryTheory.Exact.ExactRestrictionCompositionSupplemen
 
 /-! # Ordinary signed-line scalar evaluation
 
-Source: blueprint sk-def-sp-tate-twist-locally-free, Proof (3), evaluation compatibility.
-(blueprint: lem-pur-completed-line-ordinary-evaluation)
-
 The normalized ordinary comparisons preserve evaluation before completion. This is
 the ordinary square used to prove the completed evaluation square by conjugation.
+
+## Implementation details
+
+The derived square is obtained from the ordinary sheaf square applied termwise to flat-term
+K-flat representatives, and transported to every unbounded object through resolutions. Only
+ordinary derived extension is used, with no completeness assumption.
+
+## References
+
+* [Stacks, Tags 03D7, 03EK, 03EL, 03EO, 06YS, 06YY]
 -/
 
 @[expose] public noncomputable section
@@ -63,8 +70,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 section SheafSquare
 
-/-- Ordinary completed scalar extension is left adjoint to restriction, with unit `1 ⊗ x`.
-Source: Stacks 03D7 (blueprint: lem-pur-completed-line-ordinary-evaluation). -/
+/-- Ordinary completed scalar extension is left adjoint to restriction, with unit `1 ⊗ x`. -/
 private theorem scalarAdjunction :
     ∃ a : completedOrdinaryScalarExtension l E F ι X ⊣
         SheafOfModules.restrictScalars
@@ -90,8 +96,7 @@ private theorem scalarAdjunction :
   with_unfolding_all exact h
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Coefficient scalars pass through the scalar-extension generator `1 ⊗ x`.
-Source: Stacks 03EK, balancing (blueprint: lem-pur-completed-line-ordinary-evaluation). -/
+/-- Coefficient scalars pass through the scalar-extension generator `1 ⊗ x`. -/
 private theorem scalarTensorSection_smul (M : integralTowerModules l E X) (U : X.ProEtᵒᵖ)
     (p : (completedIntegralCommRingSheafUnrestricted l E X).obj.obj U) (x : M.val.obj U) :
     smul l F X ((completedOrdinaryScalarExtension l E F ι X).obj M) U
@@ -103,12 +108,7 @@ private theorem scalarTensorSection_smul (M : integralTowerModules l E X) (U : X
   rw [ha, ha] at h
   exact h.symm
 
-/-- Normalized line comparisons multiply the signed pairing by the coefficient map.
-Source: Stacks 03EO; blueprint Proof (3), pairing clause of `IsPairNormalized`
-(blueprint: lem-pur-completed-line-ordinary-evaluation).
-Proof: at zero both lines are the unit comparison and pairing is multiplication; for a
-positive exponent this is the pairing clause; for a negative exponent apply that clause
-with the two factors interchanged. -/
+/-- Normalized line comparisons multiply the signed pairing by the coefficient map. -/
 private theorem pairing_line (L : integralTowerModules l E X)
     [L.IsFiniteLocallyFreeOfRank 1] (N : integralTowerModules l F X)
     [N.IsFiniteLocallyFreeOfRank 1]
@@ -168,13 +168,7 @@ private theorem pairing_line (L : integralTowerModules l E X)
     rw [one_mul, one_mul] at h
     exact h
 
-/-- The ordinary sheaf square: the normalized ordinary comparisons preserve evaluation.
-Source: Stacks 03EK, 03EO; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-ordinary-evaluation).
-Proof: transpose along the scalar-extension adjunction and test on nested pure
-tensors `(x ⊗ p) ⊗ q`. The comparisons move the line factors past the scalar, the
-evaluation multiplies by the pairing, and `pairing_line` identifies that scalar with
-the image of the original pairing. -/
+/-- The ordinary sheaf square: the normalized ordinary comparisons preserve evaluation. -/
 private theorem sheaf_square (L : integralTowerModules l E X)
     [L.IsFiniteLocallyFreeOfRank 1] (N : integralTowerModules l F X)
     [N.IsFiniteLocallyFreeOfRank 1]
@@ -235,17 +229,14 @@ end SheafSquare
 
 section DerivedSquare
 
-/-- Signed evaluation applied termwise to a complex.
-Source: Stacks 03EO (blueprint: lem-pur-completed-line-ordinary-evaluation). -/
+/-- Signed evaluation applied termwise to a complex. -/
 private def evaluationComplex (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (m : ℤ) (K : CochainComplex (integralTowerModules l E X) ℤ) :
     (complex l E X L (-m)).obj ((complex l E X L m).obj K) ⟶ K where
   f i := (evaluation l E X L m).hom.app (K.X i)
   comm' i j _ := ((evaluation l E X L m).hom.naturality (K.d i j)).symm
 
-/-- The derived evaluation on a representative is the termwise evaluation.
-Source: Stacks 06YY, localization of exact functors
-(blueprint: lem-pur-completed-line-ordinary-evaluation). -/
+/-- The derived evaluation on a representative is the termwise evaluation. -/
 private theorem epsilon_app_Q (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (m : ℤ) (K : CochainComplex (integralTowerModules l E X) ℤ) :
     (epsilon l E X L m).hom.app (DerivedCategory.Q.obj K) =
@@ -287,8 +278,7 @@ private theorem epsilon_app_Q (L : integralTowerModules l E X) [L.IsFiniteLocall
 
 set_option backward.isDefEq.respectTransparency false in
 attribute [local semireducible] completedOrdinaryScalarComplex in
-/-- Components of the termwise ordinary comparison.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-ordinary-evaluation). -/
+/-- Components of the termwise ordinary comparison. -/
 private theorem comparisonComplex_hom_f (L : integralTowerModules l E X)
     [L.IsFiniteLocallyFreeOfRank 1] (N : integralTowerModules l F X)
     [N.IsFiniteLocallyFreeOfRank 1] (m : ℤ)
@@ -300,8 +290,7 @@ private theorem comparisonComplex_hom_f (L : integralTowerModules l E X)
 
 set_option backward.isDefEq.respectTransparency false in
 attribute [local semireducible] completedOrdinaryScalarComplex in
-/-- Termwise ordinary comparisons commute with termwise evaluation.
-Source: Stacks 03EO (blueprint: lem-pur-completed-line-ordinary-evaluation). -/
+/-- Termwise ordinary comparisons commute with termwise evaluation. -/
 private theorem chain_square (L : integralTowerModules l E X)
     [L.IsFiniteLocallyFreeOfRank 1] (N : integralTowerModules l F X)
     [N.IsFiniteLocallyFreeOfRank 1]
@@ -324,8 +313,7 @@ private theorem chain_square (L : integralTowerModules l E X)
 set_option backward.isDefEq.respectTransparency false in
 attribute [local semireducible] completedScalarCounit completedDerivedScalarExtension
   completedOrdinaryScalarComplex completedOrdinaryScalarExtension completedScalarChangeData in
-/-- Naturality of the universal counit for chain maps.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-ordinary-evaluation). -/
+/-- Naturality of the universal counit for chain maps. -/
 private theorem counit_naturality {K K' : CochainComplex (integralTowerModules l E X) ℤ}
     (g : K ⟶ K') :
     (completedDerivedScalarExtension l E F ι X).map (DerivedCategory.Q.map g) ≫
@@ -342,8 +330,7 @@ private theorem counit_naturality {K K' : CochainComplex (integralTowerModules l
 set_option backward.isDefEq.respectTransparency false in
 attribute [local semireducible] completedScalarCounit completedDerivedScalarExtension
   completedOrdinaryScalarComplex completedOrdinaryScalarExtension completedScalarChangeData in
-/-- The universal counit is invertible on K-flat complexes.
-Source: Stacks 06YY (blueprint: lem-pur-completed-line-ordinary-evaluation). -/
+/-- The universal counit is invertible on K-flat complexes. -/
 private theorem counit_isIso (K : CochainComplex (integralTowerModules l E X) ℤ)
     (hK : CochainComplex.IsKFlatIndependentCoefficients
       (J := AlgebraicGeometry.Scheme.ProEt.topology X)
@@ -352,8 +339,7 @@ private theorem counit_isIso (K : CochainComplex (integralTowerModules l E X) �
   rw [← completedScalarCochainModel_counit]
   exact (completedScalarCochainModel l E F ι X).computes K hK
 
-/-- Every complex has a good quasi-isomorphic resolution.
-Source: Stacks 06YS (blueprint: lem-pur-completed-line-ordinary-evaluation). -/
+/-- Every complex has a good quasi-isomorphic resolution. -/
 private theorem good_resolution (c : CochainComplex (integralTowerModules l E X) ℤ) :
     ∃ (P : (integralOperationsGoodComplex l E X).FullSubcategory) (r : P.obj ⟶ c),
       QuasiIso r := by
@@ -365,10 +351,7 @@ private theorem good_resolution (c : CochainComplex (integralTowerModules l E X)
 
 
 /-- The counit normalization of `IsPairNormalized`, extended from good complexes to all
-complexes through good resolutions.
-Source: Stacks 06YY and 06YS (blueprint: lem-pur-completed-line-ordinary-evaluation).
-Proof: choose a good quasi-isomorphic resolution; every map in the square is natural
-for chain maps, and the derived image of the resolution is invertible. -/
+complexes through good resolutions. -/
 private theorem pair_counit (L : integralTowerModules l E X)
     [L.IsFiniteLocallyFreeOfRank 1] (N : integralTowerModules l F X)
     [N.IsFiniteLocallyFreeOfRank 1]
@@ -433,22 +416,7 @@ private theorem pair_counit (L : integralTowerModules l E X)
   exact congrArg (fun z ↦ z ≫ Q'.map ((complex l F X N m).map (O.map r))) hP
 end DerivedSquare
 
-/-- The ordinary scalar comparison respects the specified signed-line evaluation.
-Source: Stacks 03EL, 03EO, 06YY; blueprint Proof (3), inverse-pair compatibility
-(blueprint: lem-pur-completed-line-ordinary-evaluation).
-Proof: first check the ordinary sheaf square on sections. The two scalar-line
-comparisons move the two line factors past the scalar factor. Evaluation then
-multiplies by the image of their pairing. For positive exponents this is precisely
-IsPairNormalized's negative pairing clause; for negative exponents interchange the
-paired factors, and for zero use multiplication. The defining evaluation formula
-identifies the other path with scalar extension of evaluation. Sheafified tensor
-generators determine these maps. Apply the square termwise to a flat-term K-flat
-representative. Exact line tensor preserves these representatives. Substitute the
-universal-counit normalizations of the two ordinary comparisons and the exact
-localization comparisons of evaluation. Naturality and cancellation of the invertible
-K-flat counits give the derived square. Every derived object has such a resolution,
-so naturality transports the equality to every unbounded object. This argument uses
-ordinary derived extension only, with no completeness assumption. -/
+/-- The ordinary scalar comparison respects the specified signed-line evaluation. -/
 theorem ordinary_evaluation_compatibility (L : integralTowerModules l E X)
     [L.IsFiniteLocallyFreeOfRank 1] (N : integralTowerModules l F X)
     [N.IsFiniteLocallyFreeOfRank 1]

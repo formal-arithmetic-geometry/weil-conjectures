@@ -15,8 +15,20 @@ import WeilConjectures.SixFunctors.NativeExtensionDescentProof.NativeOpenTensorD
 
 /-! # Normalized native open tensor extension descent
 
-Source: Stacks 0GL1, 06YN and 012Z; native open tensor proof steps 3--6.
-(blueprint: lem-sf-native-open-tensor-extension-descent)
+The sheaf-level projection comparison `j_!(M ⊗ j^* N) ≅ j_! M ⊗ N` for an open immersion `j`
+is totalized and descended to the derived category of native Weil sheaves.
+
+## Implementation details
+
+The sheaf projection map is applied in each bidegree of the total tensor complex; exact
+extension by zero preserves the countable coproducts of the total complex and the degree-zero
+comparison commutes with both signed differentials. The resulting chain isomorphism is then
+descended along K-flat resolving representatives (preserved by extension and restriction), so
+the derived comparison `gamma` is constructed rather than chosen in advance.
+
+## References
+
+* Stacks Project, Tags 0GL1, 06YN, 06YS and 012Z.
 -/
 
 @[expose] public noncomputable section
@@ -420,37 +432,8 @@ private theorem nativePacket (s : NativeOpenTensorData k₀ l j)
     (hd : HEq d.gamma g) : Nonempty (NativeOpenTensorExtensionDescentData k₀ l j s) :=
   ⟨{ models := m, component := d, compatible := hc, gamma := g, gamma_compatible := hd }⟩
 
-/-- Totalize the specified sheaf projection map and descend that map to the derived category.
-
-Source: Stacks Project, sites-cohomology.tex, Lemma j-shriek-and-tensor (Tag 0GL1),
-K-flat resolutions (Tag 06YS), and homology.tex, associated simple complex (Tag 012Z).
-(blueprint: lem-sf-native-open-tensor-extension-descent)
-
-Proof: first record the actual native representative models, summand insertions
-and the sheaf comparisons of s. Transport across the unique zero-morphism
-structures if necessary, retaining heterogeneous equality to each native
-function. The preservation fields are the given properties of s.
-
-Then the inverse-unit equation in s identifies the inverse sheaf comparison
-with the adjoint transpose of tensor of the unit followed by inverse restriction.
-The underlying restriction map is the balanced pullback tensor comparison, so it
-is natural. Naturality of the adjunction and of tensor then gives naturality of
-the sheaf projection map in both arguments. Apply this map and its inverse in
-each bidegree (p,q). Exact additive extension preserves the countable coproducts
-of the total complex, and the degree-zero comparison commutes with both signed
-differentials. The resulting chain isomorphism has precisely the displayed
-summand formula. Use equivariant K-flat resolutions, constructed on the twisted
-action site, to restrict the localized calculation to resolving representatives.
-Extension and restriction preserve these representatives by s.extension_kflat
-and s.restriction_kflat. Compose Q of the chain map with the inverse source model,
-the target model, and the exact-derived factorization isomorphisms. Naturality of
-nativeOpenTensorModel follows from nativeDerivedTensor_models.choose_spec.
-Fully faithful restriction to the resolving representatives descends this natural
-isomorphism to the ambient derived categories. Its representative square is the
-second conclusion. There is no choice of a previously fixed derived comparison;
-the descent constructs gamma. Retain this same comparison with exactly the
-native functor types and its heterogeneous equality to the generic comparison.
-Zero complexes and the empty open have the same construction, with zero summands. -/
+/-- The sheaf projection comparison for extension by zero along an open immersion, totalized
+and descended to the derived category, yields native open tensor extension descent data. -/
 theorem native_open_tensor_extension_descent (s : NativeOpenTensorData k₀ l j) :
     Nonempty (NativeOpenTensorExtensionDescentData k₀ l j s) := by
   obtain ⟨gamma, d, hd⟩ := extensionAbstract k₀ l

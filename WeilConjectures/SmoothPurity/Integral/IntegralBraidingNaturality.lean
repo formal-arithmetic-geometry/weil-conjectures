@@ -9,10 +9,12 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorConstrai
 
 /-! # Naturality of the integral Koszul braiding
 
-Source: literature/stacks-project/sites-cohomology.tex, Tag 0FPQ
-(lemma-symmetric-monoidal-cat-complexes), signed total symmetry and its naturality;
-specialization to the coherently reduction-normalized completed integral tensor
-(blueprint: lem-pur-integral-braiding-naturality).
+The signed total symmetry of complexes, specialized to the coherently
+reduction-normalized completed integral tensor, is natural in both inputs.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 0FPQ
 -/
 
 @[expose] public noncomputable section
@@ -87,23 +89,7 @@ private theorem completedBraiding_normalization_R4
     ((pullbackTensorIntegralBraiding_existsUnique l E W M N).exists.choose_spec) he
   exact congrArg (fun i ↦ i.hom.hom) h
 
-/-- The coherently normalized integral Koszul braiding is natural in both inputs.
-
-Source: literature/stacks-project/sites-cohomology.tex, Tag 0FPQ
-(lemma-symmetric-monoidal-cat-complexes), signed total symmetry and its naturality;
-specialization to the coherently reduction-normalized completed integral tensor
-(blueprint: lem-pur-integral-braiding-naturality).
-
-Proof: compose the existing integral tensor model with the strict-system braiding and
-its swapped inverse model to obtain a natural completed tensor braiding. For each
-constructible pair, package its component as an integral isomorphism and verify the
-normalization equation by unfolding the model and using adjunction-counit naturality.
-The uniqueness theorem defining `pullbackTensorIntegralBraiding` identifies that
-component with the selected integral braiding. Full-subcategory hom extensionality
-then reduces the target equality to naturality of the completed braiding. The proof
-covers arbitrary arrows, including identities, zero arrows, repeated objects, and the
-zero object, under exactly the stated constructible integral hypotheses.
--/
+/-- The coherently normalized integral Koszul braiding is natural in both inputs. -/
 theorem pullbackTensorIntegralBraiding_naturality
     (M M' N N' : sfIntegralConstructibleCategory l E W)
     (a : M ⟶ M') (b : N ⟶ N') :

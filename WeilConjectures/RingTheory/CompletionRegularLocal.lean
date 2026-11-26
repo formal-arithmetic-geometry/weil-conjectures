@@ -14,8 +14,17 @@ import WeilConjectures.RingTheory.CompletionDimension
 /-!
 # Regularity and completion of Noetherian local rings
 
-Source: Stacks Project, More on Algebra, Lemma Tag 07NY
-(blueprint: lem-weil-pbc-completion-regular-local).
+A Noetherian local ring is regular if and only if its completion is.
+
+## Implementation details
+
+Both sides are rewritten with `isRegularLocalRing_iff`; the completion has the same number of
+generators of the maximal ideal (`AdicCompletion.spanFinrank_maximalIdeal_eq`) and the same
+dimension.
+
+## References
+
+* [Stacks, Tag 07NY]
 -/
 
 @[expose] public section
@@ -26,14 +35,7 @@ universe u
 namespace AdicCompletion
 
 /-- A Noetherian local ring is regular if and only if its maximal-ideal-adic completion
-is regular. Source: Stacks Project, More on Algebra, Lemma Tag 07NY
-(blueprint: lem-weil-pbc-completion-regular-local).
-
-Proof: install the Noetherian instance for the completion using
-`lem-weil-pbc-adic-completion-noetherian`. Rewrite both predicates with Mathlib's
-`isRegularLocalRing_iff`; rewrite the maximal-ideal span finrank using
-`AdicCompletion.spanFinrank_maximalIdeal_eq`, and rewrite the completion dimension using
-`lem-weil-pbc-completion-dimension`. The two sides then coincide. -/
+is regular. -/
 theorem isRegularLocalRing_iff (A : Type u) [CommRing A] [IsNoetherianRing A]
     [IsLocalRing A] :
     IsRegularLocalRing A ↔ IsRegularLocalRing (AdicCompletion (IsLocalRing.maximalIdeal A) A) := by

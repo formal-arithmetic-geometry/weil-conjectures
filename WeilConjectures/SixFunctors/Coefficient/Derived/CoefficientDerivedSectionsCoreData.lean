@@ -31,9 +31,24 @@ import all WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResoluti
 import Mathlib.CategoryTheory.Preadditive.Yoneda.Limits
 import WeilConjectures.SixFunctors.CoefficientSectionsCoreComparison.NormalizedSectionsLimitComparison
 
-/-! Transported data for the normalized coefficient-sections core.
-Source: Stacks 03CZ, 079P, 08JA, 0D6E and 0941.
-(blueprint: lem-coef-derived-sections-core-data)
+/-! # Transported data for the normalized coefficient-sections core
+
+## Implementation details
+
+Normalized derived sections are chosen for the completed coefficient ring and its quotient
+tower; their scalar and evaluation comparisons are transported through the exact sequence-site
+restriction, and the ordinary and derived limit comparisons through the same equivalence.
+Derived global sections commute with restriction of scalars to a quotient level because both
+composites are right derived functors of ordinary sections (restricted K-injectives are
+sections-acyclic), so right-derived uniqueness gives the comparison with its unit equation.
+
+## References
+
+* [Stacks, Tag 03CZ]
+* [Stacks, Tag 079P]
+* [Stacks, Tag 08JA]
+* [Stacks, Tag 0D6E]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public section
@@ -70,8 +85,7 @@ private noncomputable def ordinaryScalarSectionsEquiv (n : ℕ)
     simp only [i, one_smul]
     rfl
 
-/-- Ordinary global sections commute with restriction of scalars to the quotient ring.
-Source: Stacks 03CZ, 08JA. -/
+/-- Ordinary global sections commute with restriction of scalars to the quotient ring. -/
 private noncomputable def ordinaryScalarSectionsIso (n : ℕ) :
     scalarReductionRestriction l E W n ⋙
       coefficientOrdinarySections.{u, t+1, t} (Scheme.ProEt.topology W)
@@ -146,8 +160,7 @@ private noncomputable def sectionsLimIso :
     rfl)
 
 open SheafOfModules in
-/-- Restricted K-injective complexes compute derived global sections over the completed ring.
-Source: Stacks 0D6E, through `coefficientRestrictionSections_quasiIso`. -/
+/-- Restricted K-injective complexes compute derived global sections over the completed ring. -/
 private theorem restrictedSectionsUnit_isIso (n : ℕ)
     (I : CochainComplex (scalarReductionTarget l E W n) ℤ) (hI : I.IsKInjective) :
     letI : IsGrothendieckAbelian.{max u (t+1)} (scalarReductionSource l E W) :=
@@ -187,10 +200,7 @@ private theorem restrictedSectionsUnit_isIso (n : ℕ)
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Derived global sections commute with restriction of scalars to a quotient level,
-compatibly with the ordinary comparison on all complexes.
-Source: Stacks 079P, 08JA, 0D6E. Both composites are right derived functors of
-ordinary sections, the first since restricted K-injectives are sections-acyclic;
-right-derived uniqueness gives the comparison with its unit equation. -/
+compatibly with the ordinary comparison on all complexes. -/
 private theorem scalarSectionsDerived (n : ℕ) :
     ∃ σ : coefficientFiniteDerivedRestriction l E W n ⋙ coefficientIntegralSections l E W ≅
         coefficientFiniteSections l E W n,
@@ -280,15 +290,7 @@ private theorem totalSectionsLimitExists :
   let : PreservesLimitsOfSize.{0, 0} F := preservesLimitsOfSize_shrink F
   exact ⟨(CoefficientSectionsCoreComparison.comparison_exists F).choose⟩
 
-/-- The scalar, finite-evaluation and total-limit data before their two equations.
-Source: Stacks 03CZ, 079P, 08JA, 0D6E and 0941; transport through the coefficient
-sequence equivalence.
-Proof: choose normalized derived sections for the completed coefficient ring and its
-quotient tower, transport their scalar and evaluation comparisons through the exact
-sequence-site restriction, and transport the ordinary and derived limit comparisons
-through the same equivalence. The resulting three fields have exactly the displayed
-endpoints.
-(blueprint: lem-coef-derived-sections-core-data) -/
+/-- The scalar, finite-evaluation and total-limit data before their two equations. -/
 structure CoefficientDerivedSectionsCoreData
     (R : CoefficientDerivedSystemReduction l E W) where
   scalar : CoefficientDerivedSystemScalarCoherence l E W
@@ -303,10 +305,7 @@ structure CoefficientDerivedSectionsCoreData
         coefficientMappingLimit.{max u (t + 1)}
 
 open SheafOfModules in
-/-- The transported scalar/evaluation/limit data exist under finite tensor normalization.
-Source: Stacks 03CZ, 079P, 08JA, 0D6E and 0941; extracted construction step of the
-normalized coefficient-sections package.
-(blueprint: lem-coef-derived-sections-core-data) -/
+/-- The transported scalar/evaluation/limit data exist under finite tensor normalization. -/
 theorem coefficientDerivedSectionsCoreData
     (R : CoefficientDerivedSystemReduction l E W)
     (hF : CoefficientFiniteTensorNormalization l E W R) :

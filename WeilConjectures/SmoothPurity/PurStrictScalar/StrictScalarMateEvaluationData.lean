@@ -17,8 +17,23 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-! # Canonical evaluation data for strict compact-support scalar mates
 
-Source: Stacks 07A6, 0B56, 0940 and 0E8I.
-(blueprint: def-pur-strict-scalar-mate-evaluation-data).
+## Implementation details
+
+* The arithmetic restriction of strict towers has a left adjoint replacing level `m + 1` by
+  level `⌈(m + 1)/e⌉` with composite transitions; it is exact, being pointwise evaluation, so
+  arithmetic restriction preserves K-injectives.
+* Coefficient restrictions leave the underlying abelian sheaf and its maps unchanged, hence
+  preserve kernels, cokernels and addition of morphisms; comparisons between restrictions with
+  the same section groups are identity on sections.
+* One finite `A`-basis of `B` identifies the restriction of scalar extension with a finite
+  biproduct, which detects exactness.
+* The finite quotient balancing uses `B ⊗_A A_n = B_n` and `tB = v^e B`; local pure tensors
+  generate, so the comparisons are natural and unique. Their derived versions are obtained by
+  localizing the ordinary balancing, using that finite free scalar tensors are exact.
+
+## References
+
+* [Stacks Project, Tags 03CY, 03DA, 03EK, 06YY, 07A6, 0B56, 0940, 0D6E and 0E8I]
 -/
 
 @[expose] public noncomputable section
@@ -52,12 +67,7 @@ variable (l : ℕ) [Fact l.Prime]
   (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (i : E →ₐ[ℚ_[l]] F)
 
-/-- Positive arithmetic selection preserves K-injective tower complexes.
-Source: Stacks 0940; tower evaluation argument
-(blueprint: def-pur-strict-scalar-mate-evaluation-data).
-Proof: the left adjoint replaces level m+1 by level ceil((m+1)/e) and uses
-composite transitions. It is exact because it is pointwise evaluation. The
-adjunction on complexes is termwise, so the exact-left-adjoint criterion applies. -/
+/-- Positive arithmetic selection preserves K-injective tower complexes. -/
 theorem subsequence_preservesKInjective (W : Scheme.{u}) (e : ℕ) (he : 1 ≤ e) :
     (ordinarySubsequence l F W e).PreservesKInjectiveComplexes := by
   constructor
@@ -65,8 +75,7 @@ theorem subsequence_preservesKInjective (W : Scheme.{u}) (e : ℕ) (he : 1 ≤ e
   exact CategoryTheory.StrictTowerArithmetic.restriction_preservesKInjectives
     (Modules (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) W) e he K
 
-/-- The sectionwise identity square for ordinary pushforward and selection.
-Source: Stacks 03DA, 0940 (blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+/-- The sectionwise identity square for ordinary pushforward and selection. -/
 def reindexProperOrdinary {X Y : Scheme.{u}} (g : X ⟶ Y) (e : ℕ) :
     towerDirectImage (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) g ⋙
         ordinarySubsequence l F Y e ≅
@@ -74,8 +83,7 @@ def reindexProperOrdinary {X Y : Scheme.{u}} (g : X ⟶ Y) (e : ℕ) :
         towerDirectImage (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) g :=
   Iso.refl _
 
-/-- Derived reindexing of proper image, with its standard derived-composite units.
-Source: Stacks 0940 (blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+/-- Derived reindexing of proper image, with its standard derived-composite units. -/
 def reindexProper {X Y : Scheme.{u}} (g : X ⟶ Y) (e : ℕ) (he : 1 ≤ e) :
     R (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) g ⋙ subsequence l F Y e ≅
       subsequence l F X e ⋙ R (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) g :=
@@ -89,8 +97,7 @@ def reindexProper {X Y : Scheme.{u}} (g : X ⟶ Y) (e : ℕ) (he : 1 ≤ e) :
     Functor.isoWhiskerRight
       (ordinarySubsequence l F X e).rightDerivedFunctorIsoMapDerivedCategory _
 
-/-- The ordinary exact open comparison with arithmetic selection is identity.
-Source: Stacks 0E8I, 0940 (blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+/-- The ordinary exact open comparison with arithmetic selection is identity. -/
 def reindexOpenOrdinary {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] (e : ℕ) :
     towerJ (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) j ⋙
         ordinarySubsequence l F Y e ≅
@@ -98,15 +105,13 @@ def reindexOpenOrdinary {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] (e 
         towerJ (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) j :=
   Iso.refl _
 
-/-- The canonical exact localization of the open selection square.
-Source: Stacks 0E8I, 0940 (blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+/-- The canonical exact localization of the open selection square. -/
 def reindexOpen {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] (e : ℕ) :
     J (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) j ⋙ subsequence l F Y e ≅
       subsequence l F X e ⋙ J (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) j :=
   Functor.mapDerivedCategorySquareIso (reindexOpenOrdinary l F j e)
 
-/-- Selection through the separately derived proper/open functor.
-Source: Stacks 0E8I, 0940 (blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+/-- Selection through the separately derived proper/open functor. -/
 def reindexImage {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (e : ℕ) (he : 1 ≤ e) :
     image l F c ⋙ subsequence l F Y e ≅ subsequence l F X e ⋙ image l F c :=
@@ -117,9 +122,7 @@ def reindexImage {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
 
 /-- The actual B-linear strict support-tower map. The middle factors are the
 proper scalar mate and proper image of open tensor balancing in that order.
-All endpoint identifications are fixed by whole-diagram units and tensor formulas.
-Source: Stacks 07A6, 0B56, 0E8I, 0940
-(blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+All endpoint identifications are fixed by whole-diagram units and tensor formulas. -/
 def arrow {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (S : CoefficientDerivedSystemCalculus.{u, u} l E X)
     (S' : CoefficientDerivedSystemCalculus.{u, u} l F X) (e : ℕ)
@@ -150,15 +153,11 @@ private theorem exact_of_tower {C D : Type*} [Category C] [Category D]
   have hC := comp_preservesFiniteColimits (Functor.const ℕᵒᵖ : C ⥤ _) (H ⋙ V)
   exact ⟨hL, hC⟩
 
-/-- Positive-exponent finite restriction to the constant integral ring.
-Source: Stacks 03DA (blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+/-- Positive-exponent finite restriction to the constant integral ring. -/
 def ordinaryPositiveRestriction (W : Scheme.{u}) (m : ℕ) (hm : 1 ≤ m) :=
   pbcRestrict (PurCompactSupport.projection l E m hm W) ⋙ constantRestriction l E W
 
-/-- The positive-exponent restriction is additive and exact.
-Source: Stacks 03DA (blueprint: def-pur-strict-scalar-mate-evaluation-data).
-Proof: both restrictions preserve the underlying abelian sheaf and its maps, hence
-preserve kernels, cokernels and addition of morphisms. -/
+/-- The positive-exponent restriction is additive and exact. -/
 theorem ordinaryPositiveRestriction_exact (W : Scheme.{u}) (m : ℕ) (hm : 1 ≤ m) :
     (ordinaryPositiveRestriction l E W m hm).Additive ∧
       PreservesFiniteLimits (ordinaryPositiveRestriction l E W m hm) ∧
@@ -171,64 +170,52 @@ theorem ordinaryPositiveRestriction_exact (W : Scheme.{u}) (m : ℕ) (hm : 1 ≤
   unfold ordinaryPositiveRestriction
   exact ⟨inferInstance, inferInstance, inferInstance⟩
 
-/-- Additivity at a positive exponent. Source: Stacks 03DA
-(blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+/-- Additivity at a positive exponent. -/
 instance positiveRestriction_additive (W : Scheme.{u}) (m : ℕ) (hm : 1 ≤ m) :
     (ordinaryPositiveRestriction l E W m hm).Additive :=
   (ordinaryPositiveRestriction_exact l E W m hm).1
 
-/-- Finite limits at a positive exponent. Source: Stacks 03DA
-(blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+/-- Finite limits at a positive exponent. -/
 instance positiveRestriction_limits (W : Scheme.{u}) (m : ℕ) (hm : 1 ≤ m) :
     PreservesFiniteLimits (ordinaryPositiveRestriction l E W m hm) :=
   (ordinaryPositiveRestriction_exact l E W m hm).2.1
 
-/-- Finite colimits at a positive exponent. Source: Stacks 03DA
-(blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+/-- Finite colimits at a positive exponent. -/
 instance positiveRestriction_colimits (W : Scheme.{u}) (m : ℕ) (hm : 1 ≤ m) :
     PreservesFiniteColimits (ordinaryPositiveRestriction l E W m hm) :=
   (ordinaryPositiveRestriction_exact l E W m hm).2.2
 
-/-- The specified positive-exponent exact restriction on derived categories.
-Source: Stacks 03DA (blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+/-- The specified positive-exponent exact restriction on derived categories. -/
 def positiveRestriction (W : Scheme.{u}) (m : ℕ) (hm : 1 ≤ m) :=
   (ordinaryPositiveRestriction l E W m hm).mapDerivedCategory
 
-/-- Restriction of a positive finite quotient to the actual constant integral ring.
-Source: Stacks 03DA (blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+/-- Restriction of a positive finite quotient to the actual constant integral ring. -/
 def ordinaryFiniteRestriction (W : Scheme.{u}) (n : ℕ) :=
   ordinaryPositiveRestriction l E W (n + 1) (Nat.le_add_left 1 n)
 
-/-- Exactness and additivity of this specified coefficient restriction.
-Source: Stacks 03DA (blueprint: def-pur-strict-scalar-mate-evaluation-data).
-Proof: both restrictions leave the underlying abelian sheaf unchanged. Kernels,
-cokernels and addition of morphisms are consequently preserved. -/
+/-- Exactness and additivity of this specified coefficient restriction. -/
 theorem ordinaryFiniteRestriction_exact (W : Scheme.{u}) (n : ℕ) :
     (ordinaryFiniteRestriction l E W n).Additive ∧
       PreservesFiniteLimits (ordinaryFiniteRestriction l E W n) ∧
         PreservesFiniteColimits (ordinaryFiniteRestriction l E W n) := by
   exact ordinaryPositiveRestriction_exact l E W (n + 1) (Nat.le_add_left 1 n)
 
-/-- Additivity of finite restriction. Source: Stacks 03DA
-(blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+/-- Additivity of finite restriction. -/
 instance finiteRestriction_additive (W : Scheme.{u}) (n : ℕ) :
     (ordinaryFiniteRestriction l E W n).Additive :=
   (ordinaryFiniteRestriction_exact l E W n).1
 
-/-- Finite limits under finite restriction. Source: Stacks 03DA
-(blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+/-- Finite limits under finite restriction. -/
 instance finiteRestriction_limits (W : Scheme.{u}) (n : ℕ) :
     PreservesFiniteLimits (ordinaryFiniteRestriction l E W n) :=
   (ordinaryFiniteRestriction_exact l E W n).2.1
 
-/-- Finite colimits under finite restriction. Source: Stacks 03DA
-(blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+/-- Finite colimits under finite restriction. -/
 instance finiteRestriction_colimits (W : Scheme.{u}) (n : ℕ) :
     PreservesFiniteColimits (ordinaryFiniteRestriction l E W n) :=
   (ordinaryFiniteRestriction_exact l E W n).2.2
 
-/-- The specified exact finite restriction on ordinary unbounded derived categories.
-Source: Stacks 03DA (blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+/-- The specified exact finite restriction on ordinary unbounded derived categories. -/
 def finiteRestriction (W : Scheme.{u}) (n : ℕ) :=
   (ordinaryFiniteRestriction l E W n).mapDerivedCategory
 
@@ -253,10 +240,7 @@ private theorem moduleSheafFunctor_identity_iso
     have hd' := (hd N U).trans (id_heq_of_eq (hT N U)).symm
     exact congrFun (eq_of_heq hd') x
 
-/-- Evaluation and restriction have a unique identity-on-sections identification.
-Source: Stacks 03DA, 0940 (blueprint: def-pur-strict-scalar-mate-evaluation-data).
-Proof: both functors give the same section groups, actions and restriction maps.
-Identity on every section is natural and invertible, and determines the comparison. -/
+/-- Evaluation and restriction have a unique identity-on-sections identification. -/
 theorem evaluationRestriction_existsUnique (W : Scheme.{u}) (n : ℕ) :
     ∃! d : systemRestriction l E W ⋙
           (evaluation ℕᵒᵖ
@@ -292,15 +276,13 @@ theorem evaluationRestriction_existsUnique (W : Scheme.{u}) (n : ℕ) :
     PresheafOfModules.pushforward₀, PresheafOfModules.pushforward₀Obj]
   rfl
 
-/-- The unique ordinary evaluation/restriction identification.
-Source: Stacks 0940 (blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+/-- The unique ordinary evaluation/restriction identification. -/
 def evaluationRestrictionOrdinary (W : Scheme.{u}) (n : ℕ) :=
   (evaluationRestriction_existsUnique l E W n).choose
 
 attribute [local irreducible] evaluationRestrictionOrdinary
 
-/-- Exact descent of the identity-on-sections evaluation/restriction square.
-Source: Stacks 0940 (blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+/-- Exact descent of the identity-on-sections evaluation/restriction square. -/
 def evaluationRestriction (W : Scheme.{u}) (n : ℕ) :
     systemU l E W ⋙ ev (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W n ≅
       coefficientSequenceDerivedEvaluation.{u, u} l E W n ⋙ finiteRestriction l E W n :=
@@ -317,9 +299,7 @@ def evaluationRestriction (W : Scheme.{u}) (n : ℕ) :
 
 /-- Canonical evaluation of the native support tower restricted to constants. It
 uses the recorded singleton-adjunction comparison, then its normalized finite
-proper/open and coefficient reduction identifications.
-Source: Stacks 0D6E, 0E8I, 0940
-(blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+proper/open and coefficient reduction identifications. -/
 def supportEvaluation {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (S : CoefficientDerivedSystemCalculus.{u, u} l E X) (n : ℕ) :
     support l E c S ⋙ ev (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) Y n ≅
@@ -344,10 +324,7 @@ def supportEvaluation {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
       (pbcDerivedExtend (PurCompactSupport.projection l E (n + 1) (Nat.le_add_left 1 n) X))
       (Functor.isoWhiskerRight (PurCompactSupport.finiteImageIso l E n c).symm _)
 
-/-- Ordinary constant scalar extension is exact, also on single module sheaves.
-Source: Stacks 03CY (blueprint: def-pur-strict-scalar-mate-evaluation-data).
-Proof: one finite A-basis of B identifies its restriction with a finite biproduct.
-This detects exactness, including the zero module and empty site objects. -/
+/-- Ordinary constant scalar extension is exact, also on single module sheaves. -/
 theorem baseTensor_exact (W : Scheme.{u}) :
     PreservesFiniteLimits (pbcExtend (constantMap l E F i W)) ∧
       PreservesFiniteColimits (pbcExtend (constantMap l E F i W)) := by
@@ -355,15 +332,13 @@ theorem baseTensor_exact (W : Scheme.{u}) :
   have := (tensor_exact l E F i W).2
   exact exact_of_tower (pbcExtend (constantMap l E F i W))
 
-/-- The actual exact constant scalar functor on a single site.
-Source: Stacks 03CY (blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+/-- The actual exact constant scalar functor on a single site. -/
 def baseTensor (W : Scheme.{u}) :=
   haveI := (baseTensor_exact l E F i W).1
   haveI := (baseTensor_exact l E F i W).2
   (pbcExtend (constantMap l E F i W)).mapDerivedCategory
 
-/-- Evaluation of constant tensor is localization of its ordinary identity square.
-Source: Stacks 0940 (blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+/-- Evaluation of constant tensor is localization of its ordinary identity square. -/
 def tensorEvaluation (W : Scheme.{u}) (n : ℕ) :
     T l E F i W ⋙ ev (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) W n ≅
       ev (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W n ⋙ baseTensor l E F i W :=
@@ -371,8 +346,7 @@ def tensorEvaluation (W : Scheme.{u}) (n : ℕ) :
   haveI := (baseTensor_exact l E F i W).2
   Functor.mapDerivedCategorySquareIso (Iso.refl _)
 
-/-- Exact constant tensor has its canonical complex-to-derived computation map.
-Source: Stacks 06YY (blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+/-- Exact constant tensor has its canonical complex-to-derived computation map. -/
 def baseTensorCounit (W : Scheme.{u})
     (P : CochainComplex (Modules
       (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) W) ℤ) :
@@ -431,11 +405,7 @@ private theorem tensorUnit_map (W : Scheme.{u})
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The ordinary restriction/tensor balancing at a positive ramified quotient is
-uniquely determined by b tensor x mapping to the quotient of b tensor x.
-Source: Stacks 03EK, 0940 (blueprint: def-pur-strict-scalar-mate-evaluation-data).
-Proof: use B tensor_A An=Bn and the finite quotient identification from tB=v^eB.
-The formula and its inverse respect balanced relations and sheafification. Local
-pure tensors generate, so these comparisons are natural and unique. -/
+uniquely determined by b tensor x mapping to the quotient of b tensor x. -/
 theorem finiteOrdinaryBalancing_existsUnique (W : Scheme.{u}) (e : ℕ)
     (he : PurCompactSupport.Ramification l E F i e) (hepos : 1 ≤ e) (n : ℕ) :
     ∃! β : ordinaryFiniteRestriction l E W n ⋙ pbcExtend (constantMap l E F i W) ≅
@@ -525,8 +495,7 @@ theorem finiteOrdinaryBalancing_existsUnique (W : Scheme.{u}) (e : ℕ)
     intro V x
     exact (hγ M V 1 x).trans (hb M V 1 x).symm
 
-/-- The ordinary finite scalar comparison fixed on every local pure tensor.
-Source: Stacks 03EK (blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+/-- The ordinary finite scalar comparison fixed on every local pure tensor. -/
 def finiteOrdinaryBalancing (W : Scheme.{u}) (e : ℕ)
     (he : PurCompactSupport.Ramification l E F i e) (hepos : 1 ≤ e) (n : ℕ) :
     ordinaryFiniteRestriction l E W n ⋙ pbcExtend (constantMap l E F i W) ≅
@@ -626,11 +595,7 @@ private theorem restrictionComposite_conservative
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The finite derived balancing is uniquely fixed on all cochain counits, using
-the same ordinary tensor map, without selecting independently evaluated maps.
-Source: Stacks 06YY (blueprint: def-pur-strict-scalar-mate-evaluation-data).
-Proof: finite freeness makes both scalar tensors exact. The canonical universal
-counit identifies their derived functors with termwise tensor. Localize the ordinary
-balancing and its pure-tensor formula. The universal property gives uniqueness. -/
+the same ordinary tensor map, without selecting independently evaluated maps. -/
 theorem finiteBalancing_existsUnique (W : Scheme.{u}) (e : ℕ)
     (he : PurCompactSupport.Ramification l E F i e) (hepos : 1 ≤ e) (n : ℕ) :
     ∃! κ : finiteRestriction l E W n ⋙ baseTensor l E F i W ≅
@@ -687,8 +652,7 @@ theorem finiteBalancing_existsUnique (W : Scheme.{u}) (e : ℕ)
       (pbcExtend (constantMap l E F i W)) (pbcExtend a) U (pbcDerivedExtend a) c
       (finiteOrdinaryBalancing l E F i W e he hepos n)
 
-/-- The canonical derived finite coefficient balancing.
-Source: Stacks 06YY (blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+/-- The canonical derived finite coefficient balancing. -/
 def finiteBalancing (W : Scheme.{u}) (e : ℕ)
     (he : PurCompactSupport.Ramification l E F i e) (hepos : 1 ≤ e) (n : ℕ) :
     finiteRestriction l E W n ⋙ baseTensor l E F i W ≅
@@ -701,8 +665,7 @@ def finiteBalancing (W : Scheme.{u}) (e : ℕ)
 attribute [local irreducible] finiteBalancing
 
 /-- Positive-exponent evaluation, retaining the exponent rather than renaming its
-predecessor. Source: Stacks 0940
-(blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+predecessor. -/
 def positiveSupportEvaluation {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (S : CoefficientDerivedSystemCalculus.{u, u} l E X) (m : ℕ) (hm : 1 ≤ m) :
     support l E c S ⋙ ev (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) Y (m - 1) ≅
@@ -713,8 +676,7 @@ def positiveSupportEvaluation {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactifica
   | 0, h => False.elim (Nat.not_succ_le_zero 0 h)
   | n + 1, _ => supportEvaluation l E c S n
 
-/-- Evaluation of the exact arithmetic selection uses the actual retained index.
-Source: Stacks 0940 (blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+/-- Evaluation of the exact arithmetic selection uses the actual retained index. -/
 def subsequenceEvaluation (W : Scheme.{u}) (e n : ℕ) :
     subsequence l F W e ⋙
         ev (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) W n ≅

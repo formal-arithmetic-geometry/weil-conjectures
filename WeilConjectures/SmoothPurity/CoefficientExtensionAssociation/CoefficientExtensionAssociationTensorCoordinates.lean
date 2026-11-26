@@ -14,8 +14,11 @@ import all WeilConjectures.SmoothPurity.CoefficientExtensionAssociation.Coeffici
 
 /-! # Pure tensors in balanced scalar association coordinates
 
-Source: Stacks 03D7 and 03EK; the sequence site preceding 0941.
 The inverse coordinate formula and its successor use only ordinary adjunctions.
+
+## References
+
+- Stacks Project, Tags 03D7 and 03EK; the sequence site preceding Tag 0941.
 -/
 
 @[expose] public noncomputable section
@@ -127,18 +130,8 @@ private theorem scalar_unit_transition
     (Nat.le_succ n) U (quotientUnitSection l E W M K (n + 1) U x)
     (quotientUnitSection l E W M K n U x) (quotientUnitSection_transition l E W M K n U x)
 
-/-- The successor in balanced association coordinates reduces the coefficient of a pure tensor.
-
-Source: Stacks 03D7 and 03EK; sequence-site construction preceding 0941.
-(blueprint: stage3-pur-extension-associated-tensor-transition).
-
-Proof: naturality of the finite scalar unit and the balanced association formula
-at coefficient one identify the inverse coordinate of b tensor x with b times
-the evaluated scalar unit of the quotient unit section. Quotient units commute
-with successors, and scalar unit naturality preserves that compatibility.
-The successor is semilinear, so it reduces b and carries this unit section to
-the lower one. The inverse coordinate formula at the lower level gives exactly
-the asserted reduced tensor. No nonzero, flatness, or good-complex condition is used. -/
+/-- The successor in balanced association coordinates reduces the coefficient of a pure
+tensor. -/
 theorem associatedTensor_transition
     (A : CoefficientExtensionSystems l E L ι W)
     (M : CompletionUnit.OrdinaryModel l E W)

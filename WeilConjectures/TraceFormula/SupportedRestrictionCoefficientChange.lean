@@ -13,9 +13,9 @@ public import WeilConjectures.TraceFormula.SupportedRestriction
 # The supported restriction under a change of coefficients
 
 The supported restriction `ρ_P : Lι^* Rc^! P ⟶ Rd^! LΔ^* P` of a fixed square
-(`ProEtale.CondensedRing.Correspondence.FixedLocus.supportedRestriction`, blueprint
-`lemma-local-term-restriction-map--1`) is a formal consequence of the adjunctions `c_! ⊣ c^!`,
-`d_! ⊣ d^!` and of compact-support base change `σ : c_! ⋙ Δ^* ≅ ι^* ⋙ d_!`: it is the mate
+(`ProEtale.CondensedRing.Correspondence.FixedLocus.supportedRestriction`) is a formal
+consequence of the adjunctions `c_! ⊣ c^!`, `d_! ⊣ d^!` and of compact-support base change
+`σ : c_! ⋙ Δ^* ≅ ι^* ⋙ d_!`: it is the mate
 `c^! ⋙ ι^* ⟶ Δ^* ⋙ d^!` of `σ⁻¹` (`FixedLocus.supportedRestriction_eq_mateEquiv`). This file
 proves that such a mate commutes with any change of coefficients `T` which commutes with `c_!`,
 `d_!`, `ι^*` and `Δ^*` compatibly with base change
@@ -23,10 +23,8 @@ proves that such a mate commutes with any change of coefficients `T` which commu
 restriction, followed by the exchange `T ⋙ Rd^! ⟶ Rd'^! ⋙ T` (the mate of the lower-shriek
 comparison), is the exchange for `c^!` followed by the supported restriction for the new
 coefficients. This is the coefficient compatibility of `ρ` used to transport the vanishing of the
-supported restriction between coefficient rings (blueprint `lemma-vanishing-local-term-zero-stalk`,
-last step); the inputs are the coefficient comparisons of blueprint
-`proposition-six-operations-change-coefficients` and the compatibility of base change with them
-(blueprint `sk-thm-sf-compatibility`, (7)).
+supported restriction between coefficient rings; the inputs are the coefficient comparisons of
+the six operations and the compatibility of base change with them.
 
 -/
 

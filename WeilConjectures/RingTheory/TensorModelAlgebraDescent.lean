@@ -14,8 +14,25 @@ import WeilConjectures.RingTheory.TensorModelPushoutBaseChange
 
 /-! # Descending the algebra part of a tensor model
 
-Source: Stacks Project, Algebra, Tag 02JO (3), final paragraph; Tag 05N9.
-(blueprint: lem-pc-tensor-model-algebra-descent)
+A tensor model `colim F ⊗ B ≅ (colim F ⊗ A) ⊗[P] Q` of finitely presented algebras over a
+directed colimit of rings descends to a compatible family of pushout squares at the finite
+stages of a tail of the system.
+
+## Implementation details
+
+On the tail above `i`, tensor products with `A` and `B` commute with the filtered colimit.
+The map `P → colim F ⊗ A` factors through a stage by finite presentation of `P` over `ℤ`, and
+the `P`-linear map `Q → colim F ⊗ B` through a stage by finite presentation of `Q` over `P`.
+Both sides of the resulting comparison are finitely presented over the stage, so the inverse
+of `e` and both inverse identities descend to a common stage by Tag 05N9. Base change then
+extends the algebra isomorphism and structure maps to all later stages; no flatness or
+nonvanishing hypothesis is needed.
+
+## References
+
+* [Stacks, Tag 02JO]
+* [Stacks, Tag 00QO]
+* [Stacks, Tag 05N9]
 -/
 
 @[expose] public section
@@ -38,31 +55,12 @@ private theorem tensor_map_comp_left
   exact DFunLike.congr_fun
     (Algebra.TensorProduct.map_comp v u (AlgHom.id R B) (AlgHom.id R B)).symm x
 
-/-- The algebra part of a finitely presented tensor model descends to a compatible
-family of pushout squares on a tail. The `P`-structure at the first stage `k` maps to
-the given `P`-structure on the limit, and at every later stage it is the one induced by
-the transition map. This statement involves no modules.
-
-Source: Stacks Project, Algebra, Tag 02JO (3), final paragraph; Tags 00QO and 05N9.
-(blueprint: lem-pc-tensor-model-algebra-descent)
-
-Proof:
-1. On the cofinal tail above i, the tensors with A and B have colimits X and Y.
-   Tensor products commute with filtered colimits, by representatives and eventual
-   equality. Factor P to X through one stage using finite presentation over Z.
-2. The map Q to Y induced by e is P-linear, by he. Factor it through a B stage
-   using finite presentation of Q over P. The tensor universal property produces
-   a comparison from the model algebra to the prescribed algebra there.
-3. B is finitely presented over A: finite presentation over the common base and
-   finite type of A imply this. Both sides of the comparison are therefore
-   finitely presented over the A stage. Descend the inverse of e and both inverse
-   identities by Tag 05N9, then take a common upper bound.
-4. Extend the resulting algebra isomorphism and the two structure maps to every
-   later stage by base change. Its tensor universal property is precisely the
-   pushout square asserted here. The maps from Q are compatible with transition
-   maps and with the given map to Y by construction. Zero rings and empty
-   presentations require no separate nonvanishing or flatness hypothesis.
--/
+/-- Let `f : A → B` be a map of finitely presented `F i`-algebras, `P → Q` a finitely presented
+map with `P` finitely presented over `ℤ`, and suppose `colim F ⊗ B ≅ (colim F ⊗ A) ⊗[P] Q`
+compatibly with `f`. Then on a tail `j ≥ k` this tensor model descends to a
+compatible family of pushout squares: there are maps `Q → F j ⊗ B` compatible with the
+transition maps and with `e`, and a `P`-structure on `F k ⊗ A` mapping to the given one on the
+colimit, whose base changes to later stages are the induced ones. -/
 theorem exists_tensor_model_algebra_tail
     {I : Type v} [Preorder I] [IsDirectedOrder I]
     (F : I ⥤ CommRingCat.{v}) (c : Cocone F) (hc : IsColimit c)

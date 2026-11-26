@@ -16,8 +16,18 @@ import WeilConjectures.RingTheory.LocalCompletionQuotient
 /-!
 # Quotient identification of formal fibres
 
-Source: Stacks Project, More on Algebra, proof of Lemma 07PN.
-(blueprint: lem-weil-pbc-formal-fibre-quotient-iso)
+For primes `q ≤ p` of a Noetherian ring `R`, the formal fibre of `R_p` over `q` is the generic
+formal fibre of `(R/q)_(p/q)`.
+
+## Implementation details
+
+Localization of a quotient identifies `(R/q)_(p/q)` with `R_p / q R_p`, whose completion is
+`completion(R_p) / q completion(R_p) = (R/q) ⊗_R completion(R_p)`. Tensor cancellation over
+`R/q` and tensor symmetry then give a `κ(q)`-algebra isomorphism.
+
+## References
+
+* [Stacks, Tag 07PN]
 -/
 
 @[expose] public section
@@ -25,22 +35,7 @@ Source: Stacks Project, More on Algebra, proof of Lemma 07PN.
 universe u
 
 /-- The formal fibre of the completion of `R_p` at `q ≤ p` is the generic formal
-fibre of the completion of `(R/q)_(p/q)`, as an algebra over `κ(q)`.
-Source: Stacks Project, More on Algebra, proof of Lemma 07PN.
-(blueprint: lem-weil-pbc-formal-fibre-quotient-iso)
-
-Proof:
-1. Localization of a quotient identifies `(R/q)_(p/q)` with `R_p/qR_p`.
-   The induced surjection of local rings carries the maximal ideal onto the
-   maximal ideal, and its kernel is `qR_p`.
-2. Completion of this surjection identifies the completion of `(R/q)_(p/q)`
-   with `completion(R_p)/q completion(R_p)`, compatibly with the structure maps.
-   This uses completion of a quotient of a Noetherian local ring.
-3. The tensor-quotient identification writes this quotient as
-   `(R/q) ⊗[R] completion(R_p)`. Tensor cancellation over `R/q`, followed by
-   tensor symmetry, identifies its tensor product with `κ(q)` with
-   `κ(q) ⊗[R] completion(R_p)`. All maps fix the `κ(q)` factor, so the
-   resulting ring isomorphism is a `κ(q)`-algebra isomorphism. -/
+fibre of the completion of `(R/q)_(p/q)`, as an algebra over `κ(q)`. -/
 theorem nonempty_formalFibre_quotient_algEquiv
     (R : Type u) [CommRing R] [IsNoetherianRing R]
     (q p : Ideal R) [q.IsPrime] [p.IsPrime] (hqp : q ≤ p) :

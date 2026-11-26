@@ -14,8 +14,21 @@ import WeilConjectures.RingTheory.NagataLocalization
 import WeilConjectures.RingTheory.FiniteOverNagata
 
 /-! # A principal localization of a fractional monogenic algebra
-Source: Stacks Project, Algebra, Tag 0334, Step 5, and Tag 032U.
-(blueprint: lem-weil-pbc-monogenic-principal-localization-model). -/
+
+Localizing the coefficients `R` and a monogenic algebra `S = R[x]` at the same nonzero
+coefficient `a` gives a monogenic presentation `S_a ≃ A[y]` over a normal Nagata domain `A`.
+
+## Implementation details
+
+`B = R_a` is a normal Nagata domain (Stacks 032U) with fraction field `K`; it is moved to a larger
+universe as `A = ULift B`. The map `S → A[y]` sends `a` to a unit and so extends to `S_a`; it is
+injective, and surjective by induction on the adjoin since `A` and `y` lie in its range.
+
+## References
+
+* [Stacks, Tag 0334] (step 5)
+* [Stacks, Tag 032U]
+-/
 
 @[expose] public section
 
@@ -24,24 +37,7 @@ universe u v
 open scoped nonZeroDivisors
 
 /-- Localizing coefficients and a monogenic algebra at the same nonzero coefficient
-produces a monogenic presentation, with explicit compatibility on coefficients and generator.
-Source: Stacks Project, Algebra, Tag 0334, Step 5, and Tag 032U.
-(blueprint: lem-weil-pbc-monogenic-principal-localization-model).
-
-Proof: Let B = R_a. Since a is nonzero, B is a normal domain, is Nagata by
-Tag 032U, and embeds in K. Extend R -> K across B using localization; K is
-still a fraction field of B. Let A = ULift B in Type(max u v). Transport the
-fraction-field and normality properties through ULift.ringEquiv. The map B -> A
-is finite and bijective, so finite Nagata ascent proves A Nagata. Set L = Frac(A),
-and use uniqueness of fraction fields to identify K and L over A. Let y be the
-image of x. Restrict this field embedding to g : S -> A[y]. The image g(a) is a
-unit, so g extends to e₀ : S_a -> A[y]. Injectivity follows from the injective
-maps S -> S_a and S -> A[y]. For surjectivity, map B into S_a by coefficient
-localization and hence A into S_a by ULift.down. The composite with e₀ is the
-coefficient inclusion A -> A[y], checked on R by localization extensionality.
-Also y is the image of x. Induction on the adjoin therefore shows every element
-of A[y] belongs to the range of e₀. Bundle the bijective homomorphism as e;
-localization's lift equations give its coefficient and generator equations. -/
+produces a monogenic presentation, with explicit compatibility on coefficients and generator. -/
 theorem exists_monogenic_principal_localization_model
     (R : Type u) (K : Type v) [CommRing R] [IsDomain R] [IsIntegrallyClosed R]
     [Field K] [Algebra R K] [IsFractionRing R K] (hR : IsNagataRing R) (x : K)

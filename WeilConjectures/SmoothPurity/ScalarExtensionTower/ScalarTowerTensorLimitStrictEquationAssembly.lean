@@ -17,7 +17,10 @@ stage is the strict calculation on K-flat good representatives.  The second
 stage is the localization, completion, and total-limit argument.  Keeping the
 representative equality as an explicit hypothesis makes the latter a genuine
 transport statement rather than a restatement of DerivedSigmaModel.
-(blueprint: stage3-pur-scalar-tensor-limit-strict-equation-assembly)
+
+## References
+
+* Stacks Project, Tags 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -51,12 +54,6 @@ private theorem transport_natural_eq
 /--
 Localization, completion, and total-limit functoriality assemble the square
 from the prescribed ordinary-source equation on K-flat good representatives.
-Both ordinary-source word maps are natural. Essential surjectivity extends their
-equality to every input, and invertibility of source completion on the complete
-tensor gives the specified completed comparison. The cochain-level predicate
-DerivedSigmaModel is not used by this transport step.
-Source: Stacks 07A4 and 0941 (blueprint:
-stage3-pur-scalar-tensor-limit-strict-equation-assembly).
 -/
 theorem scalarTowerTensorLimitSquare_of_representativeTransport
     (W : Scheme.{u})

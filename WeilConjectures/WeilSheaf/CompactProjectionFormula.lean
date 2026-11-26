@@ -13,8 +13,8 @@ public import WeilConjectures.WeilSheaf.Native.Open.NativeOpenDerivedTensor
 # The compact-support projection formula for Weil complexes
 
 For a separated morphism of finite type `f : X ⟶ Y` of separated `k₀`-schemes of finite type,
-the projection formula `Rf₀! M ⊗ T ≅ Rf₀!(M ⊗ f^* T)` for Weil complexes, natural in `M` and `T`
-(blueprint: `fix-prop-projection-formula`). The tensor product is the native derived tensor
+the projection formula `Rf₀! M ⊗ T ≅ Rf₀!(M ⊗ f^* T)` for Weil complexes, natural in `M` and `T`.
+The tensor product is the native derived tensor
 product of pro-étale Weil sheaves restricted to Weil complexes
 (`AlgebraicGeometry.WeilComplex.nativeConstructibleTensor`), and the two sides are
 `AlgebraicGeometry.WeilComplex.nativeCompactProjectionLeft` and
@@ -53,10 +53,10 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
   [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
 
-/-- **The compact-support projection formula for Weil complexes** (blueprint:
-`fix-prop-projection-formula`, for `Λ = ℚ̄_ℓ` with Weil structures): for a separated morphism of
-finite type `f : X ⟶ Y` of separated `k₀`-schemes of finite type,
-`Rf₀! M ⊗ T ≅ Rf₀!(M ⊗ f^* T)`, naturally in the Weil complexes `M` on `X` and `T` on `Y`. -/
+/-- **The compact-support projection formula for Weil complexes** (for `Λ = ℚ̄_ℓ` with Weil
+structures): for a separated morphism of finite type `f : X ⟶ Y` of separated `k₀`-schemes of
+finite type, `Rf₀! M ⊗ T ≅ Rf₀!(M ⊗ f^* T)`, naturally in the Weil complexes `M` on `X` and `T`
+on `Y`. -/
 theorem nonempty_nativeCompactProjectionLeft_iso :
     Nonempty (nativeCompactProjectionLeft k₀ l f ≅ nativeCompactProjectionRight k₀ l f) := by
   let c := nativeProjectionCompactification k₀ f

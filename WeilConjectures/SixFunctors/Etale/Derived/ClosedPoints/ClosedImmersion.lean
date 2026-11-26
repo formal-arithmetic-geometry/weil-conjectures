@@ -17,13 +17,17 @@ public import WeilConjectures.ConstructibleSheaf.AdicImageTower
 
 For a closed immersion `i : Z ⟶ X`, the pushforward `i_*` of étale sheaves of `Λ`-modules is
 fully faithful with left inverse `i^*`, and its essential image consists of the sheaves whose
-geometric stalks vanish at the points outside `Z` (blueprint
-`proposition-extension-zero-restriction-closed-subscheme--5`).
+geometric stalks vanish at the points outside `Z`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.mem_essImage_lowerStar_iff_isZero_sheafFiber`
-(`proposition-extension-zero-restriction-closed-subscheme--5`).
+- `AlgebraicGeometry.Etale.mem_essImage_lowerStar_iff_isZero_sheafFiber`.
+
+## Implementation details
+
+Both conditions on a sheaf `K` say that the restriction of `K` to the open complement `U` of `Z`
+vanishes (`AlgebraicGeometry.Etale.mem_essImage_lowerStar_of_isZero_upperStar`), and the stalks
+of that restriction are those of `K` at the points of `U`.
 -/
 
 @[expose] public section
@@ -40,15 +44,11 @@ namespace Etale
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--5`: **pushforward along a
-closed immersion.** Let `i : Z ⟶ X` be a closed immersion. The pushforward `i_*` is fully faithful
-(`AlgebraicGeometry.Etale.fullyFaithfulLowerStar`), `i^*` is a left inverse
-(`AlgebraicGeometry.Etale.isIso_upperStarLowerStarAdjunction_counit`), and a sheaf `K` on `X`
-is in the essential image of `i_*` if and only if its support is contained in `Z`, that is, its
-stalks at the geometric points over the points outside `Z` vanish. Indeed, both conditions say
-that the restriction of `K` to the open complement `U` of `Z` vanishes
-(`AlgebraicGeometry.Etale.mem_essImage_lowerStar_of_isZero_upperStar`), and the stalks of that
-restriction are those of `K` at the points of `U`. -/
+/-- **Pushforward along a closed immersion.** Let `i : Z ⟶ X` be a closed immersion. The pushforward
+`i_*` is fully faithful (`AlgebraicGeometry.Etale.fullyFaithfulLowerStar`), `i^*` is a left inverse
+(`AlgebraicGeometry.Etale.isIso_upperStarLowerStarAdjunction_counit`), and a sheaf `K` on `X` is in
+the essential image of `i_*` if and only if its support is contained in `Z`, that is, its stalks at
+the geometric points over the points outside `Z` vanish. -/
 theorem mem_essImage_lowerStar_iff_isZero_sheafFiber {X Z : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] (K : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     (i)_*[ModuleCat.{u + 1} Λ].essImage K ↔

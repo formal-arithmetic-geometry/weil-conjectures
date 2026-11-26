@@ -14,8 +14,9 @@ import WeilConjectures.SmoothPurity.IntegralSupportNormalization.IntegralClosedA
 
 /-! # Closed support comparison and normalized restricted adjunction
 
-Source: smooth-purity localization support paragraphs; Stacks 03DI, 0GL1, 0A07
-(blueprint: lem-sf-closed-support-normalization).
+## References
+
+* Stacks Project, Tags 03DI, 0GL1 and 0A07.
 -/
 
 @[expose] public noncomputable section

@@ -20,9 +20,17 @@ import Mathlib.FieldTheory.FinTrdeg
 /-!
 # Dimension at a point of a finite type algebra over a field
 
-Source: Stacks Project, Algebra, Lemma 00P1
-(`lemma-dimension-at-a-point-finite-type-field`)
-(blueprint: lem-weil-pbc-dimension-at-point-local-ring-trdeg).
+## Implementation details
+
+Natural-number witnesses express finiteness without losing the cardinal-valued meaning of
+`Algebra.trdeg`. With `r = trdeg_k κ(p)`, maximal chains above `p` have length `r`; for the
+finitely many minimal primes `q_j ⊆ p` with maximal chains to `p` of length `s(j)`, one has
+`dim S_p = max_j s(j)` and `dim (S/q_j) = s(j) + r`, so the components description of the
+dimension at a point gives `dim_p Spec S = dim S_p + r`.
+
+## References
+
+* [Stacks, Tag 00P1]
 -/
 
 @[expose] public section
@@ -31,29 +39,8 @@ universe u v
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Algebra, Lemma 00P1
-(`lemma-dimension-at-a-point-finite-type-field`).
-(blueprint: lem-weil-pbc-dimension-at-point-local-ring-trdeg).
-The local topological dimension, local-ring dimension, and residue-field transcendence degree
-are finite, and the first is the sum of the other two. Natural-number witnesses express
-finiteness without losing the cardinal-valued meaning of `Algebra.trdeg`.
-
-Proof:
-1. Set r = trdeg_k κ(p). The spectrum of S/p is V(p), and its fraction field is κ(p).
-   By `lem-weil-pbc-finite-type-domain-dimension-trdeg`, its dimension is r and is finite.
-   By `lem-weil-pbc-finite-type-domain-dimension-local-ring`, a maximal chain above p
-   has length r.
-2. By `lem-weil-pbc-finite-type-algebra-noetherian` and
-   `lem-weil-pbc-noetherian-finitely-many-minimal-primes`, S has finitely many minimal primes.
-   Those q_j below p form a nonempty list by `lem-weil-pbc-prime-contains-minimal-prime`.
-   By the prime correspondence for localizations, they correspond to the minimal primes of S_p.
-3. Choose maximal chains from each q_j to p, of lengths s(j). By
-   `lem-weil-pbc-localization-dimension-chains-below-prime` and the prime correspondence,
-   dim S_p = max_j s(j), which is finite.
-4. By `lem-weil-pbc-dimension-at-point-components`, dim_p Spec S = max_j dim(S/q_j).
-   Concatenate each chain below p with the chain above p. By
-   `lem-weil-pbc-finite-type-domain-dimension-local-ring`, dim(S/q_j) = s(j) + r.
-   Taking maxima gives dim_p Spec S = dim S_p + r, also finite. -/
+/-- The local topological dimension, local-ring dimension, and residue-field transcendence degree
+are finite, and the first is the sum of the other two. -/
 theorem topologicalKrullDimAt_eq_ringKrullDim_add_trdeg
     {k : Type u} [Field k] {S : Type v} [CommRing S] [Algebra k S]
     [Algebra.FiniteType k S] (p : Ideal S) [p.IsPrime] :

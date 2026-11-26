@@ -19,7 +19,12 @@ import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 
 /-! # Full parameter coordinates over a Cohen ring
 
-Source: Stacks Project, More on Algebra, Lemma Tag 07NM (3).
+Parameters complementary to the uniformizer `p` of a Cohen ring give coordinates on power series
+over that Cohen ring.
+
+## References
+
+* [Stacks, Tag 07NM] (part (3))
 -/
 
 @[expose] public section
@@ -30,28 +35,7 @@ set_option autoImplicit false
 
 namespace MvPowerSeries
 
-/-- Parameters complementary to the coefficient uniformizer give Cohen coordinates.
-Source: Stacks Project, More on Algebra, Lemma Tag 07NM (3).
-(blueprint: lem-weil-pbc-power-series-full-coordinates-cohen)
-
-Proof: Obtain completeness, domain structure, dimension n+1 and the maximal-ideal
-presentation from `power_series_field_cohen_regular_complete`. Each entry of t lies
-in the maximal ideal. Apply `exists_ringHom_of_isAdicComplete` to the coefficient
-inclusion and these entries, obtaining a ring endomorphism f fixing constants and
-sending the variables to t. It maps the maximal ideal onto itself: constants fix its
-coefficient generator, while the images of variables are t. If the completeness
-presentation uses a different prime p', the coefficient ideals (p') and (p) are equal
-because both are the coefficient maximal ideal; map this equality along C.
-Modulo the maximal ideal f is surjective, since any series is congruent to its constant
-coefficient (the difference is in the variables ideal by `quotient_first_variables`).
-Completeness and `surjective_of_mk_map_comp_surjective` give surjectivity of f.
-A nonzero kernel element is a nonzero divisor in this domain, so
-`ringKrullDim_succ_le_of_surjective` would give (n+1)+1 <= n+1. This is impossible.
-Hence f is bijective. It fixes coefficients, so it gives a coefficient-algebra
-equivalence. Rename the variables along hlen to obtain the displayed domain and
-variable values. This also covers n=0, when the parameter system consists just of p.
-No quotient or witness of an unproved existence theorem is used.
--/
+/-- Parameters complementary to the coefficient uniformizer give Cohen coordinates. -/
 theorem exists_algEquiv_full_parameters_cohen
     (Λ : Type u) [CommRing Λ] [IsLocalRing Λ] [IsNoetherianRing Λ]
     (p n : ℕ) (hΛ : IsCohenRing p Λ) (t : List (MvPowerSeries (Fin n) Λ))

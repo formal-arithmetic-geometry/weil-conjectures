@@ -17,7 +17,23 @@ import WeilConjectures.RingTheory.SymmetricProjectivePresentationConormal
 
 /-! # Free conormal presentation of the symmetric algebra of a projective conormal module
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 07CE, lines 357–414.
+If a finite polynomial presentation `P` of `A` has projective conormal module `M`, then the
+symmetric algebra `Sym_A(M)` has a finite polynomial presentation with free conormal module
+(`Algebra.Presentation.symmetric_conormal_free_presentation`).
+
+## Implementation details
+
+The classes of the `m` relations give a surjection `q : A^m → I/I²`, which splits by
+projectivity; with `K = ker q` this identifies `I/I² × K` with `A^m`. Presenting the symmetric
+algebra by `R[x, y]`, with each `y` sent to the class of the corresponding relation, the
+conormal module is `Sym_A(I/I²) ⊗_A (I/I² × K)`, hence free
+(`symmetric_projective_presentation_conormal`). The result is then transported along
+`P.quotientEquiv` and the given equivalence with `M`, and the variables are reindexed by
+`Fin (n + m)` (`symmetric_conormal_presentation_transport`).
+
+## References
+
+* [Stacks, Tag 07CE], proof, at `a = 1`
 -/
 
 @[expose] public section
@@ -52,23 +68,7 @@ private noncomputable def conormalQuotientEquiv
 
 /-- A finite polynomial presentation with projective conormal module produces a symmetric
 algebra whose canonical finite polynomial map has free conormal module. The linear
-equivalence permits a universe change of the conormal module.
-
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 07CE, lines 357–414, at `a = 1`.
-(blueprint: lem-weil-pbc-symmetric-conormal-free-presentation)
-
-Proof. Write `P = R[x]/I`, and let the `m` relations generate `I`. Their classes give a
-surjection `q : A^m → P.toExtension.Cotangent`. Projectivity splits this map; if `K` is its
-kernel, the splitting identifies `P.toExtension.Cotangent × K` with `A^m`. Present the
-symmetric algebra by `R[x,y]`, sending each `y` to the class of the corresponding relation.
-The symmetric-projective-presentation-conormal lemma gives the conormal module of this
-surjection as `Sym_A(I/I²) ⊗_A ((I/I²) × K)`, hence as the free module `Sym_A(I/I²)^m`.
-Use `P.quotientEquiv` to identify `R[x]/I` with `A`, and the given equivalence to identify
-its conormal module with `M`. The universal property transports the symmetric algebra and
-its polynomial surjection along these equivalences. Reindex the two finite sets of
-variables by `Fin (n + m)`. The induced isomorphisms of ideals, their squares and their
-quotients transport the free conormal module to the kernel of the resulting map. These
-operations also apply when either finite index is empty or `A` is the zero ring. -/
+equivalence permits a universe change of the conormal module. -/
 theorem symmetric_conormal_free_presentation
     {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A]
     {n m : ℕ} (P : Algebra.Presentation R A (Fin n) (Fin m))

@@ -12,8 +12,21 @@ import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearSystemIsoAssembly
 
 /-! # Strict scalar comparison transported from the open slice
 
-Source: Stacks Project, Tags 03DI, 03EK, 0941 and 0E8I.
-(blueprint: lem-sf-open-strict-scalar-transport).
+This file transports the strict scalar comparison from the open slice: there is a
+strict-system comparison whose evaluated finite maps preserve the scalar units on every
+extension summand.
+
+## Implementation details
+
+The comparison is built from `exists_semilinearSliceScalarGenerators` applied to the completed
+projection cone on the quotient tower. Its scalar tower functors are identified levelwise with
+the recorded finite adjunctions by the unique unit-preserving left-adjoint comparison; the
+quotient equations of the reductions ensure that these level identifications are maps of
+strict systems rather than unrelated choices at each coefficient.
+
+## References
+
+* Stacks Project, Tags 03DI, 03EK, 0941 and 0E8I.
 -/
 
 @[expose] public noncomputable section
@@ -57,9 +70,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (o : Operations l E j) (AX : OrdinaryReduction l E X) (AU : OrdinaryReduction l E U)
 
 /-- The finite comparison obtained by evaluating one ordinary strict-system
-comparison and conjugating by the recorded evaluations. This is a construction,
-with no choice of a finite comparison.
-Source: Stacks 0941 (blueprint: lem-sf-open-strict-scalar-transport). -/
+comparison and conjugating by the recorded evaluations. -/
 def ordinaryScalarEvaluationComparison
     (a : IntegralOpenReduction.extension l E j o ⋙ AX.functor ≅
       AU.functor ⋙ IntegralOpenReduction.systemExtension l E j o) (n : ℕ) :
@@ -83,32 +94,7 @@ private theorem systemHom_ext {A B : coefficientSequenceModules l E X} {f g : A 
   exact congrArg (fun k ↦ k.val.app (op W.unop.2) x) (h W.unop.1)
 
 /-- There is a strict-system comparison whose evaluated finite maps preserve the
-actual scalar units on every extension summand. Only the scalar part is asserted:
-the open operations and both quotient-compatible ordinary reductions are inputs.
-Source: Stacks 03DI, 03EK, 0941 and 0E8I
-(blueprint: lem-sf-open-strict-scalar-transport).
-
-Proof: form the completed projection cone on the actual quotient tower of X and
-apply `exists_semilinearSliceScalarGenerators`. Its two scalar tower functors
-have the actual quotient tensors at every level, with every horizontal map fixed
-on pure tensors. Identify them with AX and the slice transport of AU as follows.
-At level n compare the scalar-extension adjunction with the recorded finite
-adjunction by the unique unit-preserving left-adjoint comparison; compose with
-AX.evaluation n or AU.evaluation n. On unit tensors the two transition composites
-both insert the quotient coefficient map. Scalar-extension Hom extensionality
-therefore proves the transition squares for all indices, giving isomorphisms of
-strict systems, natural in the original module. The same procedure for the
-termwise slice extension and o.openSystems.extension uses their adjunctions:
-the identity-on-sections restriction evaluation and the recorded unit-evaluation
-equation make the level comparison preserve each original extension summand.
-Transport the generic strict comparison along these three system isomorphisms
-and along o.systems. This gives a single natural isomorphism a before evaluation.
-By the generic `component_eq`, evaluation of a, conjugated by AX.evaluation,
-extensionEvaluation and AU.evaluation, is its coefficient-linear component.
-The generic `generator` with coefficient one is precisely the displayed formula,
-since the finite-adjoint comparisons preserve units. The quotient equations in
-AX and AU are essential here: they ensure these level identifications are maps
-of strict systems rather than unrelated choices at each coefficient. -/
+scalar units on every extension summand. -/
 theorem openStrictScalarTransport
     (hrestriction : ∀ (n : ℕ) N V x,
       HEq ((((o.openSystems.restrictionEvaluation n).hom.app N).val.app V) x) x) :

@@ -8,7 +8,12 @@ public import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTowerCore
 public import WeilConjectures.SmoothPurity.Finite.FiniteTensorReductionComparison
 public import WeilConjectures.SmoothPurity.Coefficient.CoefficientEvaluationTensorNaturality
 
-/-! # The natural comparison of coherent tensor levels -/
+/-! # The natural comparison of coherent tensor levels
+
+## References
+
+* Stacks Project, Tags 07A4 and 0941.
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option linter.all false
@@ -27,8 +32,7 @@ attribute [local irreducible] Functor.leftAdjoint HasDerivedCategory.standard
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Reorder scalar restriction and evaluation on complexes.
-Source: Stacks 07A4, 0941 (blueprint: def-pur-natural-coherent-tensor-level). -/
+/-- Reorder scalar restriction and evaluation on complexes. -/
 def pullbackTensorRestrictionEvaluation (W : Scheme.{u}) (n : ℕ) :=
   Functor.mapHomologicalComplexCompIso
     (Iso.refl (coefficientSequenceRestriction l E W ⋙
@@ -39,8 +43,7 @@ def pullbackTensorRestrictionEvaluation (W : Scheme.{u}) (n : ℕ) :=
       (Iso.refl (coefficientSequenceEvaluation l E W n ⋙
         scalarReductionRestriction l E W n)) (.up ℤ)).symm
 
-/-- Package the normalized tensor evaluation maps as a natural isomorphism.
-Source: Stacks 07A4, 0941 (blueprint: def-pur-natural-coherent-tensor-level). -/
+/-- Package the normalized tensor evaluation maps as a natural isomorphism. -/
 def pullbackTensorEvaluationComparison (W : Scheme.{u}) (n : ℕ) :
     coefficientTotalTensor.{u, u + 1, u}
       (coefficientSequenceTopology (ProEt.topology W)) (coefficientSequenceCommRingSheaf l E W) ⋙
@@ -53,12 +56,9 @@ def pullbackTensorEvaluationComparison (W : Scheme.{u}) (n : ℕ) :
     (fun g ↦ pullbackTensorEvaluationTensor_naturality l E W n g.1 g.2)
 
 attribute [local irreducible] coefficientTotalTensor in
-/-- A natural comparison with the actual finite tensor-level functor.
-Source: Stacks 07A4, 0941
-(blueprint: def-pur-natural-coherent-tensor-level).
-The construction composes reordering, the generator-normalized evaluation tensor
-comparison and the tensor of inverse reduction evaluations, followed by scalar
-restriction. Their naturality supplies the naturality field. -/
+/-- A natural comparison with the actual finite tensor-level functor: reordering, the
+generator-normalized evaluation tensor comparison and the tensor of inverse reduction
+evaluations, followed by scalar restriction. -/
 def pullbackTensorTensorLevelComparison (W : Scheme.{u}) (n : ℕ) :
     (((((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).prod
       ((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ))) ⋙

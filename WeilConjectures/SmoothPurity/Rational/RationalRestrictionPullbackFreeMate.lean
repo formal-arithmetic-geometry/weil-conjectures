@@ -11,9 +11,24 @@ import WeilConjectures.SmoothPurity.Rational.RationalRestrictionPullbackFreeMate
 
 /-! # The normalized restriction mate on scalar-extended objects
 
-Source: Bhatt--Scholze, Proposition 6.8.14(2), Remark 6.8.15;
-the finite-free trace calculation on scalar-extended complexes.
-(blueprint: lem-sf-rational-restriction-pullback-free-mate).
+The finite-free trace calculation on scalar-extended complexes.
+
+## Implementation details
+
+Fix an `E`-basis `b_i` of `F` and its trace-dual basis `c_i`. For an `E`-object `M`, finite-free
+tensor coordinates identify `Hom_F(T_W(M), T_W(N))` with `Hom_E(F^∨ ⊗_E M, N)`, so `U_W(T_W(M))`
+is represented by a finite sum of copies of `M`; the trace pairing identifies `F^∨` with `F`.
+The unit on `T_W(M)` is `x ↦ ∑ b_i ⊗ c_i x` and the counit is the trace sum. This only
+represents the adjunction on free inputs, without defining a restriction functor on arbitrary
+`F`-objects. Pullback preserves these finite sums and basis maps, so in these coordinates the
+left mate of the tensor/pullback comparison is the identity. `finiteFreeCompletedScalarComparison`
+and the representative formula for `rationalPullbackScalarComparison` identify this with the
+recorded inverse comparison. No geometric right adjoints are assumed.
+
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.14(2) and
+  Remark 6.8.15]
 -/
 
 @[expose] public section
@@ -53,36 +68,7 @@ private theorem inverseMate_component_transport
     infer_instance
   exact IsIso.of_isIso_comp_left (e₂.hom.app (G.obj K)) (w.app K)
 
-/-- The left mate of the normalized comparison is invertible on scalar-extended inputs.
-
-Source: Bhatt--Scholze, Proposition 6.8.14(2), Remark 6.8.15;
-the dual-basis calculation of step 2 of lem-sf-rational-restriction-pullback-unit,
-restricted to inputs extended from E.
-(blueprint: lem-sf-rational-restriction-pullback-free-mate).
-
-Proof: fix an E-basis b_i of F and its trace-dual basis c_i. For an E-object M,
-use bW.homEquiv on T_W(M). Finite-free tensor coordinates identify
-Hom_F(T_W(M), T_W(N)) with Hom_E(F-dual tensor_E M, N), naturally in every
-E-object N. Thus U_W(T_W(M)) is represented by the finite sum of copies of M
-indexed by the basis of F-dual. The trace pairing identifies F-dual with F.
-Yoneda identifies these coordinates with the supplied adjunction; its unit on
-T_W(M) is x maps to sum_i b_i tensor c_i x and its counit is the trace sum.
-This only represents the adjunction on free inputs, without defining a
-restriction functor on arbitrary F-objects.
-
-Pullback preserves these finite sums and their basis maps. In these coordinates
-the left mate of ordinary tensor/pullback comparison is the identity, hence
-invertible. To check the exact recorded comparison, use
-finiteFreeCompletedScalarComparison to replace ordinary finite-free tensor by
-the normalized completed tensor on complete representatives. Its quotient-tower
-normalization and the representative formula for rationalPullbackScalarComparison
-identify the comparison in this calculation with the recorded inverse comparison,
-including its direction. The unit calculation is equality of the displayed
-finite sums; resolving by K-flat complexes and clearing trace denominators
-preserve it in the raw localized Hom groups. Naturality and the representing
-Hom equivalences identify the resulting mate with mateEquiv for bX and bY.
-The calculation does not choose arbitrary data from adjoint existence and covers rank one,
-zero complexes and empty schemes, without assuming geometric right adjoints. -/
+/-- The left mate of the normalized comparison is invertible on scalar-extended inputs. -/
 theorem rationalRestrictionPullback_freeMate
     (l : ℕ) [Fact l.Prime]
     (E F : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

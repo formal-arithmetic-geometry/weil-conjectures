@@ -12,6 +12,26 @@ import WeilConjectures.RingTheory.GlobalCompleteIntersectionPrincipalLocalizatio
 import Mathlib.RingTheory.Localization.BaseChange
 import all WeilConjectures.RingTheory.SmoothLocalCompleteIntersection
 
+/-!
+# Transport of complete-intersection fibre witnesses across principal localization
+
+A global complete intersection neighbourhood of a fibre prime of `R → S` yields one for the
+corresponding fibre prime of `R → S_g`.
+
+## Implementation details
+
+With `p = q ∩ R`, `k = κ(p)`, `F = k ⊗[R] S` and `a = 1 ⊗ g`, base change of principal
+localization identifies the fibre `k ⊗[R] S_g` with `F_a`, and the fibre prime of `q₁`
+corresponds to that of `q`. For the given witness `h`, the localization at the image of `h` is
+isomorphic to `(F_h)_{a/1}`, a global complete intersection by [Stacks, Tag 00SA] (1), and
+global complete intersections are transported along `k`-algebra isomorphisms.
+
+## References
+
+* [Stacks, Tag 00SY], proof of (3) ⇒ (2)
+* [Stacks, Tag 00SA]
+-/
+
 @[expose] public section
 
 universe u v
@@ -97,32 +117,9 @@ private theorem fibre_transport_same_base
       (Submonoid.map_powers e.symm b))
     (globalCI_away_away a h hci)
 
-/-- Transport of a complete-intersection fibre witness across principal localization,
-for a fixed prime `q₁` contracting to `q`.
-
-Source: Stacks Project, Algebra, Tag 00SY, first sentence of (3) ⇒ (2), and Tag 00SA (1).
-(blueprint: lem-weil-pbc-syntomic-principal-localization-fibre-transport).
-
-Proof: put `p = q ∩ R`, `k = κ(p)`, `F = k ⊗[R] S`, and `a = 1 ⊗ g`.
-The scalar tower and the contraction equality give `q₁ ∩ R = p`, identifying the two
-base residue fields as `k`. Base change of principal localization identifies the new
-fibre `F₁ = k ⊗[R] S_g` with `F_a`: denominators are powers of `a` and the map
-`φ : F → F₁` sends `x ⊗ s` to `x ⊗ (s/1)`.
-
-The inverse of `PrimeSpectrum.preimageEquivFiber` contracts a fibre prime along
-the right tensor inclusion. The pure-tensor formula for the base-change equivalence
-and `q₁ ∩ S = q` therefore show that `φ⁻¹(Q₁)` contracts to `q` in `S`.
-Injectivity of this inverse equivalence gives `φ⁻¹(Q₁) = Q`.
-Choose the witness `h` from `hci` and set `h₁ = φ(h)`.
-It is outside `Q₁` because `h` is outside `Q`.
-
-The localization `(F₁)_{h₁}` is a `k`-algebra isomorphic to `(F_h)_{a/1}`:
-both have the universal property of inverting `a` and `h` in `F`. The given `F_h`
-is a global complete intersection, so its principal localization at `a/1` is one
-by Tag 00SA (1). Transport this conclusion along the `k`-algebra isomorphism:
-the zero-ring clause is preserved; otherwise compose the polynomial-quotient
-presentation with the isomorphism and use its homeomorphism on prime spectra to
-preserve Krull dimension. This supplies the required witness `h₁`. -/
+/-- If the fibre of `R → S` is a global complete intersection near the fibre prime of `q`, and
+`q₁` is a prime of `S_g` contracting to `q`, then the fibre of `R → S_g` is a global complete
+intersection near the fibre prime of `q₁`. -/
 theorem exists_completeIntersection_fibre_transport
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
     (q : PrimeSpectrum S) (g : S) (hg : g ∉ q.asIdeal)

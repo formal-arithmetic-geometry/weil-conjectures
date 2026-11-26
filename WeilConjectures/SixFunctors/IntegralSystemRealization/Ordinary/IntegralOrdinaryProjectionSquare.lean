@@ -11,12 +11,15 @@ import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCompat
 
 /-! # Ordinary coefficient projection square
 
-Source: blueprint fix-prop-coherence, the projection component of the normalized
-mate argument for `lem-sf-integral-ordinary-exchange-projection-squares`.
-
 The ordinary tensor/pullback comparison supplies the compatibility hypothesis
 of the generic right-adjoint projection mate theorem. Naturality then inserts
-the two expression coefficient maps. -/
+the two expression coefficient maps.
+
+## References
+
+* [Stacks, Tag 07A7]
+* [Stacks, Tag 0E48]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -57,15 +60,7 @@ private theorem inverseComparisonSquare {C : Type*} [Category C]
   rw [← Category.assoc, h, Category.assoc, s.hom_inv_id, Category.comp_id]
   simp
 
-/-- The coefficient comparison required by the generic mate lemma.
-
-Source: `canonicalReductionTensorPull`, the normalized tensor/pullback square
-in blueprint fix-prop-coherence. Invert the tensor of the pullback coefficient
-isomorphisms and the pullback coefficient isomorphism of the tensor object.
-Currying the resulting identity gives exactly the generic mate hypothesis.
-
-(blueprint: lem-sf-integral-ordinary-projection-square)
--/
+/-- The coefficient comparison required by the generic mate lemma. -/
 private theorem projectionMateCompatibility
     (o : Operations l E) (a : AmbientModels l E o)
     {B : Scheme.{u}} {U V : Over B} (f : U ⟶ V) :
@@ -151,17 +146,7 @@ private theorem projectionNaturality
   simpa only [← Functor.map_comp, prod_comp, Prod.mkHom, Category.comp_id, Category.id_comp]
     using h
 
-/-- Projection component of the ordinary coefficient mate square.
-Source: Stacks Tags 07A7 and 0E48; blueprint fix-prop-coherence.
-(blueprint: lem-sf-integral-ordinary-projection-square).
-
-Proof: invert `canonicalReductionTensorPull` to obtain the compatibility
-hypothesis of `Adjunction.rightAdjointProjectionMap_mate`. The counit mate
-identity identifies its direct-image comparison with `ordinaryPushReduction`.
-Postcompose the mate equation with the tensor of the two expression coefficient
-maps. Cancel the inverse/hom pullback coefficient maps and use naturality of
-the proper projection to obtain the displayed equality.
--/
+/-- Projection component of the ordinary coefficient mate square. -/
 theorem ordinaryProjectionSquare
     (o : Operations l E) (a : AmbientModels l E o)
     {B : Scheme.{u}} {I : Type u} {X : I → Over B}

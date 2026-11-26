@@ -13,6 +13,21 @@ import Mathlib.RingTheory.Etale.Kaehler
 import Mathlib.LinearAlgebra.TensorProduct.Prod
 import Mathlib.LinearAlgebra.TensorProduct.Free
 
+/-!
+# A differential basis on a smooth conormal chart
+
+For a smooth quotient `C = R[x₁, …, xₙ]/(f₁, …, f_c)` with free conormal module, the Kähler
+differentials of any localization of `C[y₁, …, y_c]` at one element are free of rank `n`.
+
+## References
+
+* [Stacks, Tag 07CH]
+* [Stacks, Tag 031J]
+* [Stacks, Tag 00RS]
+* [Stacks, Tag 00RX]
+* [Stacks, Tag 00RV]
+-/
+
 @[expose] public section
 
 set_option autoImplicit false
@@ -24,22 +39,7 @@ open scoped TensorProduct
 namespace KaehlerDifferential
 
 /-- The differentials of a smooth quotient with free conormal module become free
-of rank `n` after adjoining `c` variables and localizing.
-
-Source: Stacks Project, proof of Lemma 07CH, its split conormal sequence;
-Tags 031J, 00RS, 00RX, and 00RV.
-(blueprint: lem-weil-pbc-smooth-conormal-chart-differential-basis).
-
-Proof. Write P = R[x_1,...,x_n], J = (f), C = P/J, and D = C[y_1,...,y_c].
-Smoothness splits the conormal sequence 0 -> J/J^2 -> C tensor_P Omega(P/R)
--> Omega(C/R) -> 0. The polynomial differential basis and the given conormal
-basis therefore give C^n isomorphic to Omega(C/R) plus C^c. Tensor this split
-isomorphism with D over C. The polynomial-extension decomposition identifies
-D tensor_C Omega(C/R) plus D^c with Omega(D/R), hence gives a Fin n basis of
-Omega(D/R). Localization is formally etale, so its differential base-change
-isomorphism carries the localized basis to Omega(D_g/R). No condition on g is
-needed; localization at zero and zero coefficient rings give zero modules
-with the same basis equations. No map from P to D_g is used. -/
+of rank `n` after adjoining `c` variables and localizing. -/
 theorem nonempty_basis_smooth_conormal_chart
     (R : Type u) [CommRing R] (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R)
     [Algebra.Smooth R (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))]

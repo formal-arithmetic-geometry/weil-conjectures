@@ -12,6 +12,22 @@ import Mathlib.Topology.Sheaves.Stalks
 import Mathlib.Topology.Sheaves.Sheafify
 import WeilConjectures.Topology.SpectralClosedRestrictionSurjective
 
+/-!
+# Restriction of sheaves of sets to a closed subset of a spectral space
+
+For a closed subset `Z` of a spectral space meeting every point closure in a connected set,
+restriction of global sections of a sheaf of sets to `Z` is bijective.
+
+## Implementation details
+
+Injectivity holds because every point specializes to a point of `Z`, where stalks are compared
+via the inverse-image stalk isomorphism. Surjectivity is `spectral_closed_restriction_surjective`.
+
+## References
+
+* [Stacks Project, Tags 008H, 09ZG and 0CAM](https://stacks.math.columbia.edu/tag/09ZG)
+-/
+
 @[expose] public section
 
 universe u
@@ -20,18 +36,7 @@ open CategoryTheory Opposite TopologicalSpace
 
 namespace TopCat
 
-/-- Source: Stacks Project, Sheaves, Tag 008H; Etale Cohomology, Tag 09ZG,
-first paragraph. Stalk comparison used in the injectivity step of Tag 09ZG.
-
-Proof: the stalk of the inverse-image sheaf at `z` is canonically isomorphic to
-`F`'s stalk at its image. The comparison is the presheaf inverse-image stalk
-isomorphism followed by the stalk map of the sheafification unit; both maps are
-isomorphisms. Compatibility of this comparison with germs identifies the germ
-of the image of each global section with the image of its original germ. Apply
-the germ map to the assumed equality of restricted sections, and cancel the
-comparison isomorphism. This argument holds for every subset, including the
-empty subset (where the assertion has no points); no closedness or spectrality
-is needed. -/
+/-- Global sections whose restrictions to `Z` agree have the same germ at every point of `Z`. -/
 private theorem restriction_eq_implies_germ_eq
     (X : TopCat.{u}) (Z : Set X) (F : X.Sheaf (Type u))
     (s t : F.1.obj (op ⊤))
@@ -95,21 +100,8 @@ private theorem restriction_eq_implies_germ_eq
   convert hg using 1
 
 
-/-- Source: Stacks Project, Etale Cohomology, Lemma 59.82.1 (Tag 09ZG).
-(blueprint: lem-weil-pbc-h0-spectral-closed-restriction)
- Proof (Stacks 09ZG): (1) restriction commutes with sheaf morphisms and is identified
- on stalks with the inverse-image stalk bijection. Every point of X specializes to Z,
- so equality on Z gives equality on all stalks and injectivity. (2) For a finite constant
- sheaf, restriction of locally constant maps is bijective by induction on the number of
- values, using the connectedness hypothesis and the clopen decomposition lift (0CAM).
- (3) The same holds for finite products of pushed-forward finite constant sheaves, by
- finite-product compatibility and the closed-subspace spectrality lemma. (4) A subsheaf
- injecting sectionwise into such a product has surjective restriction: lift locally on
- stalks, then glue using sectionwise injectivity. (5) Express an arbitrary sheaf as a
- filtered colimit of these subsheaves; restriction and sections commute with the colimit
- on the spectral closed subspace, yielding surjectivity. Together with (1), the map is
- bijective. These steps use the proof dependencies recorded in the blueprint node.
--/
+/-- For a closed subset `Z` of a spectral space meeting every point closure in a connected set,
+restriction of global sections of a sheaf of sets to `Z` is bijective. -/
 theorem spectral_closed_restriction
     (X : TopCat.{u}) [SpectralSpace X]
     (Z : Set X) (hZ : IsClosed Z)

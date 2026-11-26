@@ -14,8 +14,20 @@ import WeilConjectures.RingTheory.GeometricallyRegularDescent
 /-!
 # Permanence of regular ring maps
 
-Source: Stacks Project, More on Algebra, Lemma Tag 07NT
-(blueprint: lem-weil-pbc-regular-permanence).
+If `A → C` is regular and `B → C` is flat with surjective map on spectra, then `A → B` is
+regular.
+
+## Implementation details
+
+`B → C` is faithfully flat, so flatness of `A → B` descends
+(`Module.Flat.of_flat_of_faithfullyFlat`). Each fibre `p.Fiber C ≅ (p.Fiber B) ⊗[B] C` is a
+faithfully flat extension of `p.Fiber B`, and geometric regularity descends by
+`Algebra.isGeometricallyRegular_of_faithfullyFlat`.
+
+## References
+
+* [Stacks, Tag 07NT]
+* [Stacks, Tags 039V, 07NH]
 -/
 
 @[expose] public section
@@ -24,19 +36,7 @@ universe u v w
 
 namespace RingHom
 
-/-- Regularity descends along a flat map inducing a surjection on spectra.
-Source: Stacks Project, More on Algebra, Lemma Tag 07NT; proof via Algebra Lemmas 039V and 07NH
-(blueprint: lem-weil-pbc-regular-permanence).
-
-Proof: Since `B → C` is flat and its prime-spectrum map is surjective, it is faithfully flat.
-The already proved `Module.Flat.of_flat_of_faithfullyFlat` descends flatness of `A → B`.
-For each prime `p` of `A`, tensor cancellation identifies `p.Fiber C` with
-`(p.Fiber B) ⊗[B] C`, compatibly with the fibre map `1 ⊗ (B → C)`.
-Mathlib's faithfully flat base-change instance makes this a faithfully flat extension
-of `p.Fiber B`. Geometric regularity, including Noetherianity, descends along this map
-by `Algebra.isGeometricallyRegular_of_faithfullyFlat`. Together with flatness, this
-is exactly regularity of `A → B`.
--/
+/-- Regularity descends along a flat map inducing a surjection on spectra. -/
 theorem isRegular_of_isRegular_comp
     {A : Type u} {B : Type v} {C : Type w}
     [CommRing A] [CommRing B] [CommRing C]

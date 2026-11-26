@@ -8,7 +8,17 @@ module
 public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Coefficient.ConstructibleExceptionalCoefficientConstructionData
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Normalized.NormalizedIntegralScalarUnitUnderlying
 
-/-! # Normalized integral scalar identity under rationalization -/
+/-! # Normalized integral scalar identity under rationalization
+
+A multiplication-normalized restricted integral unit localizes to the specified rational unit.
+
+## Implementation details
+
+The integral normalization theorem identifies the underlying unit arrows; full-subcategory
+faithfulness lifts the comparison to the intrinsic integral category, and the component
+characterization in `sfRationalScalarUnit_existsUnique` concludes after raw rational
+localization.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -34,17 +44,7 @@ private theorem faithful_heq {A B : Type*} [Category A] [Category B]
   subst Y Z
   exact heq_of_eq (G.map_injective (eq_of_heq ha))
 
-/-- A multiplication-normalized restricted unit localizes to the specified rational unit.
-Source: exceptional coefficient construction, integral-to-rational identity paragraph;
-scalar extension composition, identity clause
-(blueprint: lem-sf-normalized-integral-scalar-unit).
-
-Proof: the integral normalization theorem identifies the underlying unit arrows.
-The functor equality hS identifies their source objects. Full-subcategory faithfulness
-lifts the underlying comparison to the intrinsic integral category. Apply raw
-rational localization, then use the component characterization in
-sfRationalScalarUnit_existsUnique. The integral representative is unchanged,
-including at the zero object. -/
+/-- A multiplication-normalized restricted unit localizes to the specified rational unit. -/
 theorem normalized_integral_scalar_unit
     (E : FieldStage.{max u v} l) (T : Scheme.{max u v})
     (S : Scalar.{u, v} l Ω (s := .integral E) (t := .integral E)

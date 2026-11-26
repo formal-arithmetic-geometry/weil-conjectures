@@ -25,8 +25,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
 
 Let `k₀` be a finite field with algebraic closure `k̄`, `X` a scheme over `k₀`,
 `X̄ = X ×_{k₀} k̄` its geometric fiber and `Fr_X = 𝟙 × σ : X̄ ≅ X̄` its geometric Galois Frobenius
-(`AlgebraicGeometry.Scheme.Hom.geometricGaloisFrobenius`). Following the blueprint
-(`definition-weil-structure`, `definition-weil-representation--1`):
+(`AlgebraicGeometry.Scheme.Hom.geometricGaloisFrobenius`). Then:
 
 - a *Weil sheaf* on `X` is a constructible `ℓ`-adic sheaf `F` on the small pro-étale site of
   `X̄` together with an isomorphism `φ : Fr_X^* F ≅ F`;
@@ -43,7 +42,7 @@ if `X̄` has, locally, a finite stratification by locally closed subschemes on w
 pro-étale locally a finite sum of copies of the constant `ℓ`-adic sheaf `ℚ̄_ℓ,X̄` of continuous
 functions (`AlgebraicGeometry.ProEtale.adicConstantSheaf`), i.e. a constructible
 `ℚ̄_ℓ,X̄`-module in the sense of Bhatt–Scholze. Each such sheaf has a finite field of
-definition `E ⊆ ℚ̄_ℓ`, so this is the `ℚ̄_ℓ`-stage `2-colim_E Sh_c(X̄, E)` of the blueprint; we work
+definition `E ⊆ ℚ̄_ℓ`, so this is the `ℚ̄_ℓ`-stage `2-colim_E Sh_c(X̄, E)`; we work
 with `ℚ̄_ℓ` directly since the weights, the additive characters of the Fourier transform and the
 embedding `ι : ℚ̄_ℓ →+* ℂ` all live there.
 
@@ -64,12 +63,12 @@ quasi-isomorphisms, which are exactly the equivariant quasi-isomorphisms. A *Wei
 objects are Weil sheaves; these form a triangulated subcategory, so `WeilComplex k₀ l X` is a
 triangulated category, and its morphisms are the `Ext` groups of Weil sheaves: a nonsplit
 Frobenius extension of `ℚ̄_ℓ` by `ℚ̄_ℓ` (a Jordan block) is a nonzero morphism
-`ℚ̄_ℓ ⟶ ℚ̄_ℓ[1]`. The blueprint localizes bounded complexes of *constructible* Weil sheaves; we
+`ℚ̄_ℓ ⟶ ℚ̄_ℓ[1]`. Instead of localizing bounded complexes of *constructible* Weil sheaves, we
 allow arbitrary pro-étale Weil sheaves as terms and impose constructibility on cohomology, which
 gives a triangulated category with the same objects up to isomorphism in which the six
 operations, being derived functors of functors defined on all pro-étale Weil sheaves, can be
 constructed (see `WeilConjectures.WeilSheaf.LowerStar` and
-`WeilConjectures.WeilSheaf.LowerShriek`). The functor from the blueprint's category,
+`WeilConjectures.WeilSheaf.LowerShriek`). The functor
 `D^b(WeilSheaf k₀ l X) ⥤ WeilComplex k₀ l X`, induced by the exact inclusion of Weil sheaves, is
 the realization functor; it is the identity on the heart.
 
@@ -106,6 +105,12 @@ both notions pull back along morphisms of `k₀`-schemes (`WeilSheaf.upperStar`,
 The coefficient ring `ℚ̄_ℓ = PadicAlgCl l` lives in `Type`, while the sheaf categories on the
 sites of `Scheme.{u}` have `Hom`-types in `Type (u + 1)`; hence the `ULift` in
 `AlgebraicGeometry.WeilCoefficients`.
+
+`AlgebraicGeometry.WeilSheaf.IsIrreducibleLisse` is weaker than simplicity in the category of all
+Weil sheaves: a nonzero lisse sheaf `M` on a curve `U₀` is never simple there, since for a closed
+point `x` the extension by zero of `M|_{U₀ ∖ x}` is a nonzero proper subsheaf. On a connected
+normal `X` it says that the representation of the Weil group on the geometric generic stalk is
+irreducible.
 -/
 
 @[expose] public section
@@ -160,18 +165,14 @@ noncomputable abbrev WeilComplex.objectProperty :
 
 end Frobenius
 
-/-- Blueprint `definition-weil-structure`: Weil sheaf and Weil complex.
-
-The category of constructible Weil `ℚ̄_ℓ`-sheaves on a `k₀`-scheme `X`: constructible
+/-- The category of constructible Weil `ℚ̄_ℓ`-sheaves on a `k₀`-scheme `X`: constructible
 `ℓ`-adic sheaves `F` on the pro-étale site of the geometric fiber `X̄` with an isomorphism
 `Fr_X^* F ≅ F`, where `Fr_X` is the geometric Galois Frobenius of `X̄`. -/
 def WeilSheaf (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :=
   (WeilSheaf.objectProperty k₀ l X).FullSubcategory
 
-/-- Blueprint `definition-weil-structure`: Weil sheaf and Weil complex.
-
-The triangulated category of Weil complexes on a `k₀`-scheme `X`: the objects of the derived
+/-- The triangulated category of Weil complexes on a `k₀`-scheme `X`: the objects of the derived
 category of pro-étale Weil sheaves on `X̄` which are bounded with constructible cohomology. -/
 def WeilComplex (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :=
@@ -333,14 +334,7 @@ theorem IsLisse.biprod {F G : WeilSheaf k₀ l X} (hF : F.IsLisse) (hG : G.IsLis
 
 /-- A Weil sheaf `F` is *irreducible lisse* if it is lisse and nonzero, and every lisse Weil
 subsheaf of `F` is zero or all of `F`: it is a simple object of the category of lisse Weil
-sheaves, the meaning of "nonzero irreducible lisse Weil sheaf" in the blueprint. On a connected
-normal `X` it says that the representation of the Weil group on the geometric generic stalk is
-irreducible.
-
-This is weaker than simplicity in the category of all Weil sheaves: a nonzero lisse sheaf `M`
-on a curve `U₀` is never simple there, since for a closed point `x` the extension by zero of
-`M|_{U₀ ∖ x}` is a nonzero proper subsheaf. (blueprint:
-`lemma-unramified-at-infinity-no-linear-characters--1`) -/
+sheaves. -/
 def IsIrreducibleLisse (F : WeilSheaf k₀ l X) : Prop :=
   F.IsLisse ∧ ¬ IsZero F ∧
     ∀ (G : WeilSheaf k₀ l X) (i : G ⟶ F), Mono i → G.IsLisse → IsZero G ∨ IsIso i

@@ -18,8 +18,26 @@ import WeilConjectures.Mathlib.RingTheory.Filtration
 /-!
 # The Noetherian fibre criterion for flatness
 
-Source: Stacks Project, Algebra, Tag 00MP, lemma-criterion-flatness-fibre-Noetherian
-(blueprint: lem-weil-pbc-criterion-flatness-fibre-noetherian).
+For local homomorphisms of Noetherian local rings `R → S → S'` and a nonzero finite `S'`-module
+`M` flat over `R` whose fibre `M / m_R M` is flat over `S / m_R S`, the ring `S` is flat over
+`R` and `M` is flat over `S`.
+
+## Implementation details
+
+With `I = m_R S`, the map `m_R ⊗[R] M → I ⊗[S] M` is surjective, so flatness over `R` makes
+`I ⊗[S] M → M` injective; the local criterion for flatness (Tag 00ML) then gives flatness of `M`
+over `S`. Nakayama (Tag 00DV) gives `M ≠ m_S M`, so `M` is faithfully flat over `S` (Tag 00HP),
+and flatness of `S` over `R` descends from `M` (Tag 039V). The tensor fibre is canonically
+isomorphic to `M / m_R M`, not definitionally equal to it.
+
+## References
+
+* [Stacks, Tag 00MP]
+* [Stacks, Tag 00M6]
+* [Stacks, Tag 00ML]
+* [Stacks, Tag 00DV]
+* [Stacks, Tag 00HP]
+* [Stacks, Tag 039V]
 -/
 
 @[expose] public section
@@ -30,30 +48,9 @@ universe u v w z
 
 namespace Module
 
-/-- The Noetherian fibre criterion, Stacks Project, Algebra, Tag 00MP
-(blueprint: lem-weil-pbc-criterion-flatness-fibre-noetherian).
-
-The scalar towers express restriction along the local maps `R → S → S'`.
-The tensor fibre is canonically isomorphic to `M / mM`, not definitionally equal to it.
-
-Proof following the seven steps of the node:
-1. Put `I = mS`. Locality gives `I ⊆ m_S`, so `I` is proper. Scalar compatibility
-   gives `IM = mM`, and hence the fibre hypothesis says `M/IM` is flat over `S/I`.
-2. The map `m ⊗[R] M → I ⊗[S] M`, sending `a ⊗ x` to `φ(a) ⊗ x`, is surjective:
-   write `b ∈ I` as a sum of `φ(a_j)s_j`, and move each `s_j` onto the module factor.
-   Its composite with multiplication `I ⊗[S] M → M` is multiplication over `R`.
-3. Flatness over `R` makes `m ⊗[R] M → M` injective. The surjection of step 2
-   therefore makes `I ⊗[S] M → M` injective (Tag 00M6 identifies its kernel with Tor).
-4. Apply `lem-weil-pbc-flat-variant-local-criterion` (Tag 00ML) to `S → S'`,
-   the proper ideal `I`, finite `M`, step 3 and fibre flatness. Thus `M` is flat over `S`.
-5. By `lem-weil-pbc-nakayama-jacobson` (Tag 00DV), finiteness and nonzero `M` give
-   `m_{S'}M ≠ M`. Locality gives `m_S M ⊆ m_{S'}M`, hence `M/m_S M ≠ 0`.
-6. By `lem-weil-pbc-flat-module-faithfully-flat-maximal-ideals` (Tag 00HP), step 4
-   and step 5 make `M` faithfully flat over `S`.
-7. Apply `lem-weil-pbc-flat-permanence` (Tag 039V) to `M`, flat over `R` and
-   faithfully flat over `S`, to deduce that `S` is flat over `R`. This is the node's
-   descent version of the second paragraph of Tag 00MP. Together with step 4 it
-   gives both conclusions.
+/-- The Noetherian fibre criterion: let `R → S → S'` be local homomorphisms of Noetherian local
+rings and `M` a nonzero finite `S'`-module that is flat over `R`. If `(S / m_R S) ⊗[S] M` is
+flat over `S / m_R S`, then `S` is flat over `R` and `M` is flat over `S`.
 -/
 theorem flat_and_flat_of_flat_fibre_noetherian
     (R : Type u) (S : Type v) (S' : Type w) (M : Type z)

@@ -12,12 +12,25 @@ import Mathlib.RingTheory.LocalProperties.IntegrallyClosed
 import Mathlib.RingTheory.Noetherian.Basic
 import WeilConjectures.AlgebraicGeometry.NormalLocusOpen
 
+/-!
+# A finite family of normal fibre covers
+
+For a generically normal Noetherian domain with finite normal approximations at all maximal
+ideals, finitely many finite intermediate algebras are normal over every prime of the base.
+The proof uses quasi-compactness of the spectrum and openness of the normal locus.
+
+## References
+
+* [Stacks, Tag 0332]
+* [Stacks, Tag 0333]
+-/
+
 @[expose] public section
 
 universe u v
 
-/-- A birational integral algebra has the same normal principal open as its base.
-Source: Stacks Project, Algebra, Tag 0333, reverse implication, first paragraph. -/
+/-- If `A` becomes integrally closed after inverting `f`, then so does every intermediate
+algebra contained in the integral closure of `A` in its fraction field. -/
 private theorem normal_away_intermediate (A : Type u) (K : Type v)
     [CommRing A] [IsDomain A] [Field K] [Algebra A K] [IsFractionRing A K]
     (f : A) (hf : f ≠ 0) [IsIntegrallyClosed (Localization.Away f)]
@@ -53,23 +66,9 @@ private theorem normal_away_intermediate (A : Type u) (K : Type v)
     IsLocalization.algEquiv (Submonoid.powers g) T (Localization.Away g)
   exact IsIntegrallyClosed.of_equiv eC.toRingEquiv
 
-/-- A finite family whose normal fibers cover every prime of the base.
-Source: Stacks Project, Algebra, Tag 0333, reverse implication, paragraphs defining
-`Z_C` and extracting a finite collection; Tag 0332 for openness of the normal locus.
-(blueprint: lem-weil-pbc-finite-normal-cover-family)
-
-Proof: Choose the nonzero f of hAway. The local criterion for normality makes A_f
-normal. For each finite intermediate C contained in the integral closure, C_f is
-integral over A_f inside their common fraction field K, hence C_f = A_f. The ring C
-is a Noetherian domain and its normal locus is open by Tag 0332. Since C is integral
-over A, Spec C -> Spec A is closed, so the image Z_C of the non-normal locus is closed.
-For each maximal m, hLocal supplies a C for which m is outside Z_C. Each prime p is
-contained in a maximal m. If p belonged to that Z_C, specialization-closedness would
-put m in Z_C too. Therefore the opens Spec A \ Z_C cover Spec A. Quasi-compactness
-extracts finitely many C, forming s. Every member satisfies the original finiteness
-and containment conditions. For any prime p, membership in one of these opens says
-exactly that every prime of the corresponding C contracting to p has normal
-localization, which is the final clause below. -/
+/-- Under the hypotheses of the normal cover theorem, there is a finite family of finite
+intermediate algebras in the integral closure such that every prime of `A` has a member of
+the family that is normal at all primes lying over it. -/
 theorem exists_finite_normal_cover_family (A : Type u) (K : Type v)
     [CommRing A] [IsDomain A] [IsNoetherianRing A]
     [Field K] [Algebra A K] [IsFractionRing A K]

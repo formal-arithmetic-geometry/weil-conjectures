@@ -17,9 +17,24 @@ import WeilConjectures.RingTheory.FormalGlueingReplacePrimeTo
 /-!
 # Algebraization of a map that is an isomorphism away from an ideal
 
-Source: Stacks Project, More on Algebra, Lemma 0ALK, proof of part (1),
-using Remark 05EL and Proposition 05ER 
-(blueprint: lem-weil-pbc-formal-glueing-map-to-algebraization).
+Let `R → S` be flat, inducing an isomorphism modulo a finitely generated ideal `I`. An
+`S`-linear map `Q → S ⊗_R P` with `I`-power torsion kernel and cokernel is the base change of an
+`R`-linear map `T → P` with `I`-power torsion kernel and cokernel.
+
+## Implementation details
+
+Choose generators `fᵢ` of `I`; torsion vanishes after localization at each `fᵢ`, so the given
+map is bijective on each chart. Replacing the prime component of the canonical datum of `P` by
+`Q` gives a glueing datum with a morphism to the canonical datum, which essential surjectivity
+and fullness of the canonical functor algebraize. An element killed by `fᵢ ^ eᵢ` for all `i` is
+killed by `I ^ (1 + ∑ eᵢ)`. No comparison equivalences are asserted here; they are proved
+separately using flat tensor exactness and torsion base change.
+
+## References
+
+* [Stacks, Tag 0ALK]
+* [Stacks, Tag 05EL]
+* [Stacks, Tag 05ER]
 -/
 
 @[expose] public section
@@ -123,28 +138,10 @@ private theorem extendMap_algebraMap {M N : ModuleCat.{w} R} (h : M →ₗ[R] N)
   cases ha
   rfl
 
-/-- Algebraize the map and retain ideal-power torsion of its kernel and cokernel.
-Source: Stacks Project, More on Algebra, Lemma 0ALK, proof of part (1),
-with Remark 05EL and Proposition 05ER 
-(blueprint: lem-weil-pbc-formal-glueing-map-to-algebraization).
-
-Choose a finite generating family of I. At each generator f, every torsion element
-vanishes after localization: an annihilating ideal power supplies an annihilating
-power of f. Exact localization therefore makes the given map bijective on each
-chart. Start with the canonical datum of P, replace its S-component by Q, and
-compose its comparison with the localized given map.
-The overlap and cocycle identities follow from those for the canonical datum and
-naturality of localization. The given map and the identity chart maps form a
-morphism of data to the canonical datum. Essential surjectivity of the canonical equivalence
-algebraizes the modified datum. Fullness algebraizes that morphism; its first
-component gives the displayed factorization, and each chart component is an
-isomorphism. Exact localization now makes the kernel and cokernel of the descended
-map vanish on every chart. For any element choose positive exponents e_i killing
-it at the finitely many generators. Every monomial of degree 1 + sum e_i contains
-one generator to at least its e_i-th power, so that power of I kills the element.
-If there are no generators then I = 0, and its first power already kills every
-element. This proves both torsion assertions. No comparison equivalence is asserted
-here; those are proved separately using flat tensor exactness and torsion base change.
+/-- Algebraize the map and retain ideal-power torsion of its kernel and cokernel: an
+`S`-linear map `φ' : Q → S ⊗[R] P` with `I`-power torsion kernel and cokernel is, up to an
+isomorphism `β : Q ≃ S ⊗[R] T`, the base change of an `R`-linear map `ψ : T → P` with `I`-power
+torsion kernel and cokernel.
 -/
 theorem exists_map_to_algebraization
     (hflat : (algebraMap R S).Flat) (I : Ideal R) (hI : I.FG)

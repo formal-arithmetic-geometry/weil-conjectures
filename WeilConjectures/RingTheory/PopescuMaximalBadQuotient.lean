@@ -16,7 +16,15 @@ import Mathlib.RingTheory.TensorProduct.Quotient
 import WeilConjectures.Algebra.IndSmoothQuotientCompatibility
 import Mathlib.RingTheory.Smooth.StandardSmoothCotangent
 
-/-! # Maximal bad quotients for Popescu's theorem -/
+/-! # Maximal bad quotients for Popescu's theorem
+
+If a regular map from a Noetherian ring is not ind-smooth, there is an ideal `I`, maximal among
+those for which `R/I → Λ/IΛ` is not ind-smooth, and `R/I` is nonzero.
+
+## References
+
+* [Stacks, Tag 07F5] (first paragraph of the proof)
+-/
 
 @[expose] public section
 
@@ -56,20 +64,7 @@ private theorem nontrivial_of_bad
     exact False.elim (hbad (ObjectProperty.le_ind _ _ hsmooth))
   · exact hn
 
-/-- A failure of ind-smoothness has a nonzero maximal bad quotient.
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma Tag 07F5,
-first paragraph, lines 2011--2026 (blueprint: lem-weil-pbc-popescu-maximal-bad-quotient).
-
-Proof: For the given regular map, consider the ideals I for which the induced map
-R/I → Λ/IΛ is not ind-smooth. The zero ideal belongs to this set: the quotient by
-zero is canonically isomorphic to the original algebra. The ascending chain condition
-on ideals gives a maximal member I. Quotients are Noetherian, and regular base change
-along R → R/I gives regularity of the quotient map, using the tensor-quotient
-isomorphism. Every nonzero ideal J of R/I comes from an ideal strictly containing I;
-maximality and the quotient-of-quotient isomorphisms give ind-smoothness modulo J.
-The quotient R/I is nonzero, since a zero base forces a zero target, which is itself
-smooth over that base and hence a constant filtered colimit. All algebra and colimit
-properties are transported along the canonical quotient isomorphisms. -/
+/-- A failure of ind-smoothness has a nonzero maximal bad quotient. -/
 theorem exists_popescu_maximal_bad_quotient
     (R : Type u) (Λ : Type (max u v)) [CommRing R] [CommRing Λ] [Algebra R Λ]
     [IsNoetherianRing R] [IsNoetherianRing Λ]

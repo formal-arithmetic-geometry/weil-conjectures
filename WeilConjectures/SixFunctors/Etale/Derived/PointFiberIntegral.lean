@@ -29,12 +29,11 @@ are derived complete.
 - `AlgebraicGeometry.Etale.boundedConstructibleIntegral_iff_boundedConstructible`: on `Spec k`,
   the integral stage consists of the bounded constructible complexes.
 - `AlgebraicGeometry.Etale.pointFiberIntegralEquivalence` and, for `Λ = 𝒪_E`,
-  `AlgebraicGeometry.Etale.pointFiberIntegerRingEquivalence`
-  (`lemma-perfect-complexes-geometric-point`, integral stage): `Fib_s : Dᵇc(Spec k, Λ) ≌ Dᵇ_fg(Λ)`.
+  `AlgebraicGeometry.Etale.pointFiberIntegerRingEquivalence`: `Fib_s : Dᵇc(Spec k, Λ) ≌ Dᵇ_fg(Λ)`.
 - `DerivedCategory.boundedFiniteCohomology_rightOrthogonal`: the objects of `Dᵇ_fg(Λ)` are
   derived complete, i.e. receive no nonzero map from an object on which `ϖ` acts invertibly.
 
-## Proof
+## Implementation details
 
 If `K` is bounded constructible, the dévissage of bounded complexes reduces the claim to a
 constructible sheaf, the constant sheaf on a finitely generated `Λ`-module, which is a cokernel of
@@ -178,22 +177,19 @@ noncomputable def pointFiberIntegral :
         (Fact.out : ∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ}).choose_spec.1
         (Fact.out : ∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ}).choose_spec.2 K.property))
 
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finite coefficient categories over a point
-(integral stage `𝒪_E`).
-
-Let `Λ` be a complete discrete valuation ring with finite residue field and maximal ideal
-`I = (ϖ)` (in the blueprint `Λ = 𝒪_E`, see
+/-- **Coefficient categories over a point**, integral stage `𝒪_E`. Let `Λ` be a complete discrete
+valuation ring with finite residue field and maximal ideal `I = (ϖ)` (for instance `Λ = 𝒪_E`, see
 `AlgebraicGeometry.Etale.pointFiberIntegerRingEquivalence`) and `k` a separably closed field. The
-evaluation at the geometric point of `s = Spec k`,
-`Fib_s : Dᵇc(s, Λ) ⥤ Dᵇ_fg(Λ)` (`AlgebraicGeometry.Etale.pointFiberIntegral`), is an equivalence
-from the integral stage `Dᵇc(s, Λ)` (derived complete objects of `D(s_ét, Λ)` whose reductions
-modulo `Iⁿ⁺¹` are bounded constructible of uniformly bounded Tor amplitude,
-`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral`) onto the bounded
-complexes of `Λ`-modules with finitely generated cohomology modules. These complexes are derived
-complete (`DerivedCategory.boundedFiniteCohomology_rightOrthogonal`), so that the target is the
-category `Dᵇ_fg(𝒪_E)` of bounded derived-complete complexes with finitely generated cohomology of
-the blueprint. It is the restriction of the equivalence `D(Γ) : D(s_ét, Λ) ≌ D(Λ)`, the integral
-stage over `s` being the bounded constructible objects
+evaluation at the geometric point of `s = Spec k`, `Fib_s : Dᵇc(s, Λ) ⥤ Dᵇ_fg(Λ)`
+(`AlgebraicGeometry.Etale.pointFiberIntegral`), is an equivalence from the integral stage
+`Dᵇc(s, Λ)` (derived complete objects of `D(s_ét, Λ)` whose reductions modulo `Iⁿ⁺¹` are bounded
+constructible of uniformly bounded Tor amplitude,
+`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral`) onto the bounded complexes
+of `Λ`-modules with finitely generated cohomology modules. These complexes are derived complete
+(`DerivedCategory.boundedFiniteCohomology_rightOrthogonal`), so that the target is the category
+`Dᵇ_fg(𝒪_E)` of bounded derived-complete complexes with finitely generated cohomology. It is the
+restriction of the equivalence `D(Γ) : D(s_ét, Λ) ≌ D(Λ)`, the integral stage over `s` being the
+bounded constructible objects
 (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_iff_boundedConstructible`). -/
 noncomputable def pointFiberIntegralEquivalence :
     (DerivedCategory.boundedConstructibleIntegral I (Spec (.of k))).FullSubcategory ≌
@@ -285,15 +281,12 @@ instance _root_.PadicAlgCl.finite_quotient_maximalIdealShrink :
     inferInstanceAs (Finite (IsLocalRing.ResidueField (PadicAlgCl.integers l E)))
   Finite.of_equiv _ (Ideal.quotientEquiv _ _ (PadicAlgCl.shrinkRingEquiv l E) rfl).toEquiv
 
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finite coefficient categories over a point
-(integral stage `𝒪_E`).
-
-For a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ` and a separably closed field `k`, evaluation at
-the geometric point of `s = Spec k` is an equivalence
-`Fib_s : Dᵇc(s, 𝒪_E) ≌ Dᵇ_fg(𝒪_E)` between the integral stage
+/-- **Coefficient categories over a point**, integral stage `𝒪_E`. For a finite extension `E` of
+`ℚ_ℓ` inside `ℚ̄_ℓ` and a separably closed field `k`, evaluation at the geometric point of
+`s = Spec k` is an equivalence `Fib_s : Dᵇc(s, 𝒪_E) ≌ Dᵇ_fg(𝒪_E)` between the integral stage
 `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral 𝔪_E s` and the bounded
-complexes of `𝒪_E`-modules with finitely generated cohomology modules (which are derived
-complete, `DerivedCategory.boundedFiniteCohomology_rightOrthogonal`). This is
+complexes of `𝒪_E`-modules with finitely generated cohomology modules (which are derived complete,
+`DerivedCategory.boundedFiniteCohomology_rightOrthogonal`). This is
 `AlgebraicGeometry.Etale.pointFiberIntegralEquivalence` for `Λ = 𝒪_E`, whose maximal ideal is
 generated by a nonzerodivisor (`PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span`).
 The finite stage is `AlgebraicGeometry.Etale.pointFiberEquivalence`. -/

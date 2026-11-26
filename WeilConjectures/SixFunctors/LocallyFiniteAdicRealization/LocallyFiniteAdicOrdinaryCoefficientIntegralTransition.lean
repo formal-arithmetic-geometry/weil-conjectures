@@ -12,8 +12,20 @@ public import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFi
 
 /-! # Integral normalization of the ordinary finite closure comparison
 
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-(blueprint: lem-sf-finite-ordinary-coefficient-integral-transition)
+The completion comparison is preserved by the prescribed integral coefficient tensor transport.
+
+## Implementation details
+
+The ordinary scalar and completion models are compared on all universal cochain counits, so
+the normalization holds for every derived representative and is independent of choices. Both
+ways of transporting the ordinary scalar comparison are mates of the same restriction square,
+and the restriction compositors have their sectionwise identity cocycle. No finite quotient
+scalar map is inverted.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.8.2 and
+  Proposition 6.8.14(2)
 -/
 
 @[expose] public noncomputable section
@@ -49,9 +61,7 @@ variable [IsNoetherian X]
   [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]
 
 /-- Integral coefficient transport after the continuous realization, with the
-ordinary coefficient extensions still separate on its source.
-Source: BS 6.8.2 and 6.8.14(2), the prescribed integral coefficient square.
-(blueprint: lem-sf-finite-ordinary-coefficient-integral-transition). -/
+ordinary coefficient extensions still separate on its source. -/
 @[irreducible] def finiteOrdinaryCoefficientIntegralModel (A : FiniteCondensedData l X)
     (C : CoefficientSystem l X) (E : Index l (PadicAlgCl l)) :
     letI := C.commutative
@@ -91,29 +101,7 @@ Source: BS 6.8.2 and 6.8.14(2), the prescribed integral coefficient square.
   exact f ≪≫ j ≪≫ k
 
 /-- The completion comparison is preserved by the prescribed coefficient tensor
-transport, independently of raw-stage rationalization or section reconstruction.
-Source: BS 6.8.2, 6.8.14(2), and the quotient-normalized completion comparison.
-(blueprint: lem-sf-finite-ordinary-coefficient-integral-transition).
-
-Proof in words: retain the specified ambient completed comparison of A.raw.integral.
-Package the given raw stage and scalar data as the finite coefficient comparison.
-Apply the normalized common-stage descent theorem, retaining its scalar comparison. The fixed
-coefficient scalar completion identification gives inverse ordinary coefficient
-transport followed by detailed transport of scalarCompletionIso. Compare the
-ordinary scalar and completion models on all universal cochain counits; their
-normalized comparison sends the latter map to completedTensorComparison. The
-integral coefficient square identifies each source coefficient ring isomorphism
-with purCoefficientIso, and the native balancing square identifies its target.
-Both ways of transporting the ordinary scalar comparison are mates of the same
-restriction square. The restriction compositors have their sectionwise identity
-cocycle, so left-adjoint composition associativity identifies these tensor maps.
-Naturality then moves the completed comparison through the native balancing
-isomorphism. The result is native restriction of inverse reduction normalization
-followed by native extension of completedTensorComparison. The normalization
-uses all cochain counits, so it holds for every derived representative and is
-independent of choices. Equal fields, ramified extensions and zero objects obey
-the same comparison equation; no finite quotient scalar map is inverted.
--/
+transport, independently of raw-stage rationalization or section reconstruction. -/
 theorem finiteOrdinaryCoefficientIntegralModel_transition
     (A : FiniteCondensedData l X) (C : CoefficientSystem l X) :
     letI := C.commutative

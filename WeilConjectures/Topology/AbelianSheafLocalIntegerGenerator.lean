@@ -11,7 +11,9 @@ public import WeilConjectures.Topology.AbelianOpenExtensionByZero
 
 /-! # A local section as an integer generator
 
-Source: Stacks Project, Cohomology, Lemma 02UX, first paragraph.
+## References
+
+* Stacks Project, Tags 02UX and 00A5.
 -/
 
 @[expose] public section
@@ -70,17 +72,7 @@ private theorem extensionSection_counit {X : TopCat.{u}} (U : Opens X)
   exact DirectSum.toAddMonoid_of _ _ _
 
 
-/-- Every section on an open defines an integer extension-by-zero map that lifts its germs.
-
-Source: Stacks Project, Cohomology, Lemma 02UX, first paragraph; Sheaves, Lemma 00A5.
-Proof: On the open subspace U, send an integer to its multiple of the restriction of s.
-These maps commute with restriction and define a map from the constant presheaf.
-Sheafify it, then apply extension by zero and compose with the restriction counit.
-For each x in U, take the germ of the image of integer 1 under the sheafification unit
-and the canonical extension section. Naturality of the unit and the counit section
-formula show that its image is the germ of s. This works for s = 0; for empty U the
-last assertion is vacuous. No compactness or basis hypothesis is required.
-(blueprint: lem-sc-abelian-sheaf-local-integer-generator). -/
+/-- Every section on an open defines an integer extension-by-zero map that lifts its germs. -/
 theorem abelianSheaf_local_integer_generator
     (X : TopCat.{u}) (F : X.Sheaf AddCommGrpCat.{u})
     (U : Opens X) (s : F.obj.obj (op U)) :

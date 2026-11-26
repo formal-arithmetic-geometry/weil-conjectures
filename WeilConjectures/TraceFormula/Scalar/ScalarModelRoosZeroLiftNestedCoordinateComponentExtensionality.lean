@@ -10,8 +10,12 @@ import WeilConjectures.TraceFormula.Supporting.NestedChosenScalarTensorValExt
 
 /-! # Nested scalar tensor component extensionality
 
-Source: Stacks Project, Tag 0941; Bhatt--Scholze, Proposition 3.5.1.
-(blueprint: lem-trf-scalar-model-roos-zero-lift-nested-coordinate-component-extensionality)
+Nested scalar tensor generators determine a single sheaf-module morphism.
+
+## References
+
+* Stacks Project, Tag 0941.
+* Bhatt--Scholze, Proposition 3.5.1.
 -/
 
 @[expose] public noncomputable section
@@ -34,13 +38,7 @@ variable (l : ℕ) [Fact l.Prime]
   (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (ι : E →ₐ[ℚ_[l]] L) (j : L →ₐ[ℚ_[l]] F) (X : Scheme.{u})
 
-/-- Nested scalar tensor generators determine a single sheaf-module morphism.
-
-Source: Stacks 0941; Bhatt--Scholze, Proposition 3.5.1.
-Proof in words: apply the sheafification adjunction and module tensor universal
-property first to the inner extension and then to the outer extension. Tensor
-induction and separatedness identify the resulting morphisms on all sections.
-(blueprint: lem-trf-scalar-model-roos-zero-lift-nested-coordinate-component-extensionality) -/
+/-- Nested scalar tensor generators determine a single sheaf-module morphism. -/
 theorem completedNestedScalarTensor_ext
     (M : integralTowerModules l E X)
     (Q : integralTowerModules l F X)

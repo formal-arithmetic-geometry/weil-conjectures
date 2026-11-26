@@ -13,8 +13,13 @@ import all WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComp
 
 /-! # Comparison of the two ordinary scalar models
 
-Source: Stacks Tags 06YY and 0941; the finite-free tensor normalization.
-(blueprint: lem-trf-integral-scalar-ordinary-model-comparison).
+The two ordinary scalar models admit a pure-tensor-normalized isomorphism, whose universal
+derived comparison preserves both the cochain counit and the scalar completion
+(`integralScalarOrdinaryModelComparison`).
+
+## References
+
+* Stacks Project, Tags 06YY, 0941
 -/
 
 @[expose] public section
@@ -125,19 +130,7 @@ private theorem scalarModelTensor
   exact ordinaryScalarModelIso_transport l E L ι X N U s x
 
 /-- The ordinary scalar models admit a pure-tensor-normalized isomorphism, whose
-universal derived comparison preserves both the cochain counit and scalar completion.
-Source: Stacks 06YY and 0941; the strict quotient-completion normalization.
-
-Proof: use the canonical identification of the two sheafified change-of-rings
-models. It sends each sheafified pure tensor s tensor x to the same tensor.
-Lift it through the universal left-derived counits to obtain the derived
-isomorphism and its counit equation on all complexes. On good complexes the two
-completion comparisons have the same quotient augmentation and the same zero
-shifted coordinate. The chain transport equation therefore identifies their
-normalized descents. Uniqueness of the completed comparison, followed by
-cancellation of the model isomorphism, gives the completion identity.
-This construction applies to zero objects, identity embeddings and equal fields.
-(blueprint: lem-trf-integral-scalar-ordinary-model-comparison). -/
+universal derived comparison preserves both the cochain counit and scalar completion. -/
 theorem integralScalarOrdinaryModelComparison
     (l : ℕ) [Fact l.Prime]
     (E L : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

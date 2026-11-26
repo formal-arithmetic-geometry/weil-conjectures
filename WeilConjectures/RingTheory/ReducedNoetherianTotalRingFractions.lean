@@ -18,8 +18,21 @@ import Mathlib.RingTheory.Spectrum.Prime.Topology
 /-!
 # Total ring of fractions of a reduced Noetherian ring
 
-Source: literature/stacks-project/algebra.tex, Lemma Tag 02LX (blueprint:
-lem-weil-pbc-reduced-noetherian-total-ring-fractions).
+The total ring of fractions of a reduced Noetherian ring is the finite product of the
+localizations at its minimal primes, which are fields.
+
+## Implementation details
+
+Minimal primes are finite in number, and the localization at each is a field with zero extended
+prime. The zero-divisors are the union of the minimal primes, so the localization maps factor
+through the total fraction ring. By prime avoidance its primes are the extended minimal primes,
+all maximal, and the product decomposition for a ring with finitely many maximal ideals
+identifies it with the product of its localizations there.
+
+## References
+
+* [Stacks, Tag 02LX]
+* [Stacks, Tags 00EW, 00EU, 00FR]
 -/
 
 @[expose] public section
@@ -158,9 +171,7 @@ private theorem fraction_components_bijective
     simpa only [z, Equiv.piCongrLeft_apply_apply] using hi
 
 /-- The component map is injective; this is the injectivity half of the finite
-product decomposition of the total ring of fractions.
-(blueprint: lem-weil-pbc-fraction-ring-pi-injective)
--/
+product decomposition of the total ring of fractions. -/
 theorem fractionRing_pi_injective_of_compatible
     {R : Type u} [CommRing R] [IsNoetherianRing R] [IsReduced R]
     {t : ℕ} {q : Fin t ≃ {p : PrimeSpectrum R // p.asIdeal ∈ minimalPrimes R}}
@@ -171,9 +182,7 @@ theorem fractionRing_pi_injective_of_compatible
   exact (fraction_components_bijective φ hφ).1
 
 /-- The component map is surjective; this is the surjectivity half of the finite
-product decomposition of the total ring of fractions.
-(blueprint: lem-weil-pbc-fraction-ring-pi-surjective)
--/
+product decomposition of the total ring of fractions. -/
 theorem fractionRing_pi_surjective_of_compatible
     {R : Type u} [CommRing R] [IsNoetherianRing R] [IsReduced R]
     {t : ℕ} {q : Fin t ≃ {p : PrimeSpectrum R // p.asIdeal ∈ minimalPrimes R}}
@@ -184,23 +193,7 @@ theorem fractionRing_pi_surjective_of_compatible
   exact (fraction_components_bijective φ hφ).2
 
 /-- The total ring of fractions of a reduced Noetherian ring is the product of
-localizations at its minimal primes
-(blueprint: lem-weil-pbc-reduced-noetherian-total-ring-fractions).
-Proof steps (Stacks Tags 00EW, 00EU, 00FR, 02LX): (1) finiteness of the minimal
-primes gives the finite indexing equivalence; at each minimal prime, reducedness
-and minimality make the localization a field with zero extended prime, so it is
-the residue field. (2) The zero-divisors are the union of the minimal primes, so
-the nonzerodivisors avoid each one; the universal property of localization gives
-the unique compatible maps from the total fraction ring. (3) Localization's prime
-correspondence and prime avoidance show that the primes of the total fraction
-ring are precisely the extended minimal primes, which are all maximal. (4) The
-product decomposition for a ring with finitely many maximal ideals identifies the
-total fraction ring with the product of its localizations there. (5) The
-localization correspondence identifies each factor with the corresponding
-localization of the original ring, and uniqueness identifies the resulting map
-with the componentwise map in the statement. 
-(blueprint: lem-weil-pbc-fraction-ring-pi-bijective-compatible)
--/
+localizations at its minimal primes. -/
 theorem fractionRing_pi_bijective_of_compatible
     {R : Type u} [CommRing R] [IsNoetherianRing R] [IsReduced R]
     {t : ℕ} {q : Fin t ≃ {p : PrimeSpectrum R // p.asIdeal ∈ minimalPrimes R}}
@@ -211,7 +204,8 @@ theorem fractionRing_pi_bijective_of_compatible
   exact ⟨fractionRing_pi_injective_of_compatible φ hφ,
     fractionRing_pi_surjective_of_compatible φ hφ⟩
 
-/-- (blueprint: lem-weil-pbc-reduced-noetherian-total-ring-fractions) -/
+/-- For a reduced Noetherian ring, the localizations at its finitely many minimal primes are
+fields with zero extended prime, and the total ring of fractions is their product. -/
 theorem reduced_noetherian_total_ring_fractions
     {R : Type u} [CommRing R] [IsNoetherianRing R] [IsReduced R] :
     ∃ t : ℕ,

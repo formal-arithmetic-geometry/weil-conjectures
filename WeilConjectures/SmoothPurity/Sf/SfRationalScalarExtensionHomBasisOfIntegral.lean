@@ -16,9 +16,18 @@ complexes is uniquely of the form `∑ i, β i • Ext (h i)`. Then after ration
 for any `E`-basis `v` of `F`, every morphism `T N ⟶ T Z` is uniquely of the form
 `∑ i, v i • T (g i)`.
 
-Source: Bhatt--Scholze, *The pro-étale topology for schemes*, Section 6.8 (Lemma 6.7.2,
-Proposition 6.8.14(2), Remark 6.8.15).
-(blueprint: def-weil-rationalization-karoubi).
+## Implementation details
+
+Hom groups of the rationalization are `Loc ⊗ Hom`, and `T` sends `a ⊗ f` to `a ⊗ Ext f`. The
+integral hypothesis says that `Ext` is a base change of Hom modules along `𝒪_E → 𝒪_F`;
+composing with base change along `𝒪_F → Loc_F` shows that `Loc_E ⊗ Hom → Loc_F ⊗ Hom_F` is a
+base change along `Loc_E → Loc_F`, which gives the claim for any `Loc_E`-basis of `Loc_F`
+(`TensorProduct.bijective_sum_smul_of_bijective_sum_basis_smul`).
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.7.2, Proposition 6.8.14(2),
+  Remark 6.8.15.
 -/
 
 @[expose] public section
@@ -31,15 +40,9 @@ open CategoryTheory TensorProduct
 
 namespace WeilConjectures
 
-/-- The rational finite free Hom formula follows from the integral one.
-
-Mathematics: Hom groups of the rationalization are `Loc ⊗ Hom`, and after conjugating by the
-object equations `T` sends `a ⊗ f` to `a ⊗ Ext f`. The integral hypothesis says that `Ext` is a
-base change of Hom modules along `𝒪_E → 𝒪_F`; composing with base change along
-`𝒪_F → Loc_F` and cancelling base change along `𝒪_E → Loc_E` shows that
-`Loc_E ⊗ Hom → Loc_F ⊗ Hom_F` is a base change along `Loc_E → Loc_F`. Since `v` is a
-`Loc_E`-basis of `Loc_F`, this is the claimed bijectivity
-(`TensorProduct.bijective_sum_smul_of_bijective_sum_basis_smul`). -/
+/-- The rational finite free Hom formula follows from the integral one: if every morphism of
+integral scalar extensions is uniquely `∑ i, β i • Ext (h i)`, then every morphism `T N ⟶ T Z`
+is uniquely `∑ i, v i • T (g i)`. -/
 theorem sfRationalScalarExtension_map_basis_bijective_of_integral (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (W : AlgebraicGeometry.Scheme.{u}) (p : ℕ) (hl : l ≠ p)

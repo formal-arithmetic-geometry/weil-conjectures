@@ -20,7 +20,6 @@ morphism of deformation models `Y × S ⟶ S × Spec k = 𝒟_⊥ (Spec k)` whos
 is smooth, being a base change of `Y ⟶ Spec k`. By the smooth exchange of nearby cycles its
 pullback exchange is invertible at the unit, and the specialization unit of the constant family of
 the point is invertible; so the specialization unit `σ_Y : Λ ⟶ Ψ_{Y × S}(Λ)` is an isomorphism.
-This is the case `L = Λ` of blueprint `lemma-nearby-cycles-constant-family` for smooth `Y`.
 
 ## Main results
 
@@ -59,11 +58,8 @@ instance smooth_constantFamilyToPointModelHom_total [Smooth Y.hom] :
 variable {ℓ : ℕ} [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k').Prime]
   [Fact (ringChar k' ≠ ℓ)]
 
-/-- **The constant family of a smooth scheme** (blueprint `lemma-nearby-cycles-constant-family`,
-for `L = ℚ̄_ℓ` and `Y` smooth): for a smooth separated `k`-scheme `Y` of finite type, the
-specialization unit `σ_Y : ℚ̄_ℓ ⟶ Ψ_{Y × S}(ℚ̄_ℓ)` of the constant family `Y × S` is an
-isomorphism. The pullback exchange of `Y × S ⟶ 𝒟_⊥ (Spec k)` is invertible at the unit by the
-smooth exchange, and the specialization unit of the constant family of the point is an
+/-- **The constant family of a smooth scheme**: for a smooth separated `k`-scheme `Y` of finite
+type, the specialization unit `σ_Y : ℚ̄_ℓ ⟶ Ψ_{Y × S}(ℚ̄_ℓ)` of the constant family `Y × S` is an
 isomorphism. -/
 theorem isIso_deformationModel_bot_unit_of_smooth [Fact (ringChar k).Prime]
     [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType Y.hom]
@@ -85,10 +81,9 @@ theorem isIso_deformationModel_bot_unit_of_smooth [Fact (ringChar k).Prime]
 variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [DiscreteTopology T]
   [Finite T]
 
-/-- **The constant family of a smooth scheme, with finite coefficients** (blueprint
-`lemma-nearby-cycles-constant-family`, for `L = T̲` and `Y` smooth, with `T` a finite ring killed
-by a power of a prime `ℓ ≠ char k'`): for a smooth separated `k`-scheme `Y` of finite type, the
-specialization unit `σ_Y : T̲ ⟶ Ψ_{Y × S}(T̲)` of the constant family `Y × S` is an isomorphism. -/
+/-- **The constant family of a smooth scheme, with finite coefficients**: for a smooth separated
+`k`-scheme `Y` of finite type, the specialization unit `σ_Y : T̲ ⟶ Ψ_{Y × S}(T̲)` of the constant
+family `Y × S` is an isomorphism. -/
 theorem isIso_deformationModel_bot_unit_of_smooth_finiteCoefficient [LocallyOfFiniteType Y.hom]
     [QuasiCompact Y.hom] [IsSeparated Y.hom] [Smooth Y.hom] {n : ℕ}
     (hT : (ℓ : T) ^ n = 0) :

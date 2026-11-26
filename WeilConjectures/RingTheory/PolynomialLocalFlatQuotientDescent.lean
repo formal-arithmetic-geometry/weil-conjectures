@@ -17,8 +17,21 @@ import Mathlib.RingTheory.Localization.Ideal
 
 /-! # Flatness of polynomial local quotients over finite coefficient subrings
 
-Source: Stacks Project, Algebra, Tag 00SV, second paragraph of the proof, and Tag 05UU (2).
-(blueprint: lem-weil-pbc-polynomial-local-flat-quotient-descent).
+If a prefix quotient of a localized polynomial ring is flat over every finite type coefficient
+subring, it is flat over the full coefficient ring.
+
+## Implementation details
+
+The proof uses the equational criterion of flatness (Tag 00HK). A relation in the full quotient
+is lifted, after clearing denominators and expressing ideal membership as a finite sum, to an
+explicitly adjoined finite type subring, where flatness trivializes it. Empty relations and
+equation lists and zero quotients are covered by the same argument.
+
+## References
+
+* [Stacks, Tag 00SV] (second paragraph of the proof)
+* [Stacks, Tag 05UU] (2)
+* [Stacks, Tag 00HK]
 -/
 
 @[expose] public section
@@ -200,29 +213,7 @@ private theorem finite_relation_stage
     exact hm'
 
 /-- Flatness of a fixed prefix quotient passes from finite type coefficient subrings to
-an arbitrary coefficient ring. No complete-intersection or regularity assumption is used.
-Source: Stacks Project, Algebra, Tag 00SV, second paragraph of the proof; Tag 05UU (2).
-(blueprint: lem-weil-pbc-polynomial-local-flat-quotient-descent).
-
-Proof: Apply the equational criterion of flatness (Stacks Tag 00HK). Lift the elements
-of a finite relation in the full quotient to the localized polynomial ring and clear
-a common denominator `d` outside `Q`, obtaining polynomial numerators `zⱼ`. If
-`v = ∑ C(rⱼ) * zⱼ`, the relation says its localization belongs to the prefix ideal.
-Localized ideal membership supplies `t` outside `Q` with `t * v` in the polynomial
-prefix ideal; write this as a finite sum of polynomial multiples of the equations.
-Adjoin the relation scalars and the coefficients of `d`, `t`, the numerators and
-these multiples to `R₀`. This constructs a subring `B` finite type over the integers.
-Injectivity of the polynomial coefficient inclusion transfers the identity to `B`;
-no injectivity of its localization is needed. The lifted denominators remain outside
-the contracted prime, so the lifted fractions satisfy the relation in the stage quotient.
-The localization map carries the equations to their full-ring images and induces a
-quotient map compatible with scalar inclusion. By `hstage`, the stage quotient is flat;
-the forward equational criterion trivializes its relation. Map those element expansions
-and coefficient equations to the full quotient to trivialize the original relation.
-The backward equational criterion gives flatness. Empty relations and equation lists,
-`i=0`, `i≥c`, and zero quotients are covered by the same finite sums and list operations.
-The subring is an explicit adjoin, and all existence theorems used here are proved.
--/
+an arbitrary coefficient ring. No complete-intersection or regularity assumption is used. -/
 theorem flat_polynomial_local_quotient_of_finiteType_subrings
     {R : Type u} [CommRing R] (R₀ : Subring R)
     (hR₀ : Algebra.FiniteType ℤ R₀) {n c : ℕ}

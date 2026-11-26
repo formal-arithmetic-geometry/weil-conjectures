@@ -15,8 +15,13 @@ import WeilConjectures.AlgebraicGeometry.PrincipalLocalizationNaiveCotangent
 /-!
 # Split conormal sequence of a smooth principal localization
 
-Source: Stacks Project, Smoothing Ring Maps, proofs of Tags 07EZ (part (e)) and 07C6
-(blueprint: lem-weil-pbc-smooth-localization-conormal-split).
+For a polynomial presentation `A = R[x₁, ..., xₙ]/I` and `a ∈ A` with `B = A_a` smooth over `R`,
+we show that the localized conormal sequence `(I/I²)_a → Bⁿ → Ω[B/R] → 0` is split exact.
+
+## References
+
+* [Stacks, Tag 07EZ]
+* [Stacks, Tag 07C6]
 -/
 
 @[expose] public section
@@ -40,31 +45,8 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The localized conormal differential of a polynomial presentation splits when the localized
 quotient is smooth. The two maps are specified by their values on `g mod I²` divided by one
-and on the coordinate basis vectors. These values uniquely determine the localized differential
-and the map to Kähler differentials. The finite free module is represented by `Fin n → B`,
-and the sum of the conormal and differential modules by their product.
-
-Source: Stacks Project, Smoothing Ring Maps, proofs of Tags 07EZ (part (e)) and 07C6
-(blueprint: lem-weil-pbc-smooth-localization-conormal-split).
-
-Proof:
-1. Use the quotient presentation `P` and adjoin a generator for `1/a` to obtain `Q`.
-   The polynomial algebra of `Q` is formally smooth. Smoothness of `B` annihilates its
-   first cotangent homology, so Mathlib's `cotangentComplex_injective_iff` makes the
-   differential of `Q` injective. The injectivity equivalence of
-   `principal_localization_naive_cotangent` transfers this to the base change of `P`.
-2. Identify `P`'s conormal module with `I.Cotangent`, then use the universal property of
-   module localization to identify its localization with its base change to `B`.
-   The base change of the polynomial differential basis identifies the middle module
-   with `Fin n → B`. Differentials commute with localization, giving the isomorphism
-   `B ⊗[A] Ω[A/R] ≃ Ω[B/R]`. Conjugate the base-changed conormal sequence by these
-   three equivalences. Tensor right exactness gives exactness and surjectivity.
-   On an equation class its coordinates are the partial derivatives, by
-   `cotangentComplex_mk` and `cotangentSpaceBasis_repr_one_tmul`. On a coordinate
-   basis vector the quotient map is the differential of the corresponding variable.
-3. Smoothness makes `Ω[B/R]` projective. Lift its identity along the surjection to
-   obtain a section. `Exact.splitSurjectiveEquiv` gives the product decomposition;
-   projection onto its first factor is the left inverse of the conormal differential. -/
+and on the coordinate basis vectors. The finite free module is represented by `Fin n → B`,
+and the sum of the conormal and differential modules by their product. -/
 theorem smooth_localization_conormal_split
     [Smooth R B] :
     ∃ (d : M →ₗ[B] (Fin n → B)) (π : (Fin n → B) →ₗ[B] KaehlerDifferential R B),

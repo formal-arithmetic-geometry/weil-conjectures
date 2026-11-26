@@ -15,8 +15,7 @@ Künneth chapter says that for every base change `f' : X' ⟶ S'` of `f`, every 
 quasi-separated `g : T ⟶ S'` with base change `Y = X' ×_{S'} T`, and every sheaf `F` of
 `ℤ/n`-modules on `T_ét`, the exchange morphism `f'^* Rg_* F ⟶ Rh_* e^* F` is an isomorphism on
 cohomology sheaves in degrees `q ≤ q₀`
-(`AlgebraicGeometry.Etale.KunnethBaseChangeProperty`, blueprint
-`lemma-kunneth-finite-direct-image--1`).
+(`AlgebraicGeometry.Etale.KunnethBaseChangeProperty`).
 
 It is the universal base change property `AlgebraicGeometry.Etale.UniversalBaseChangeProperty`
 of the smooth base change chapter, for the coefficients `ℤ/n` and all degrees `q ≤ q₀`. The
@@ -36,13 +35,11 @@ namespace Etale
 
 variable {X S : Scheme.{u}}
 
-/-- Blueprint `lemma-kunneth-finite-direct-image--1`: the base change property `BC(f, n, q₀)`.
-
-`BC(f, n, q₀)` holds if for every base change `f' : X' ⟶ S'` of `f` along some `S' ⟶ S`, every
-quasi-compact quasi-separated `g : T ⟶ S'`, the cartesian square `Y = X' ×_{S'} T` with
-projections `e : Y ⟶ T`, `h : Y ⟶ X'`, every sheaf `F` of `ℤ/n`-modules on `T_ét` (an abelian
-sheaf annihilated by `n`) and every `q ≤ q₀`, the exchange morphism `f'^* Rg_* F ⟶ Rh_* e^* F`
-is an isomorphism on `q`-th cohomology sheaves, i.e. the base change map
+/-- The base change property: `BC(f, n, q₀)` holds if for every base change `f' : X' ⟶ S'` of `f`
+along some `S' ⟶ S`, every quasi-compact quasi-separated `g : T ⟶ S'`, the cartesian square
+`Y = X' ×_{S'} T` with projections `e : Y ⟶ T`, `h : Y ⟶ X'`, every sheaf `F` of `ℤ/n`-modules on
+`T_ét` (an abelian sheaf annihilated by `n`) and every `q ≤ q₀`, the exchange morphism
+`f'^* Rg_* F ⟶ Rh_* e^* F` is an isomorphism on `q`-th cohomology sheaves, i.e. the base change map
 `f'⁻¹ R^q g_* F ⟶ R^q h_* e⁻¹ F` of `AlgebraicGeometry.Etale.baseChangeHomologyMap` is an
 isomorphism. The integer `n` is not required to be invertible on `S`. The unfolded form is
 `AlgebraicGeometry.Etale.kunnethBaseChangeProperty_iff`, and the form with the unbounded exchange
@@ -75,10 +72,10 @@ lemma kunnethBaseChangeProperty_iff (f : X ⟶ S) (n : ℕ) (q₀ : ℤ) :
 
 open _root_.DerivedCategory in
 /-- The base change property `BC(f, n, q₀)` in terms of the unbounded exchange morphism
-`AlgebraicGeometry.Etale.unboundedExchange` (`definition-derived-base-change-map`): it holds if and
-only if, for every diagram as in `AlgebraicGeometry.Etale.kunnethBaseChangeProperty_iff` and every
-sheaf `F` of `ℤ/n`-modules on `T_ét`, the exchange morphism `f'^* Rg_* F ⟶ Rh_* e^* F` induces
-isomorphisms on the cohomology sheaves in degrees `q ≤ q₀`. -/
+`AlgebraicGeometry.Etale.unboundedExchange`: it holds if and only if, for every diagram as in
+`AlgebraicGeometry.Etale.kunnethBaseChangeProperty_iff` and every sheaf `F` of `ℤ/n`-modules on
+`T_ét`, the exchange morphism `f'^* Rg_* F ⟶ Rh_* e^* F` induces isomorphisms on the cohomology
+sheaves in degrees `q ≤ q₀`. -/
 lemma kunnethBaseChangeProperty_iff_unboundedExchange (f : X ⟶ S) (n : ℕ) (q₀ : ℤ) :
     KunnethBaseChangeProperty f n q₀ ↔
       ∀ ⦃S' X' T Y : Scheme.{u}⦄ (a : S' ⟶ S) (b : X' ⟶ X) (f' : X' ⟶ S'),

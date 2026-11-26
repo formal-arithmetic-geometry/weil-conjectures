@@ -15,8 +15,19 @@ import WeilConjectures.RingTheory.PointedEtaleQuotientCommaRefinement
 
 /-! # Finality of pointed etale base change
 
-Source: Stacks Project, Tag 05WS, with the pointed-algebra argument of
+Base change of pointed étale algebras along a surjective local homomorphism is a final functor.
+
+## Implementation details
+
+Every comma category `(T ↓ F)` is nonempty by the coefficient-lift theorem, and any two of its
+objects have a common successor, obtained from filteredness of source and target and the relative
+étale lifting lemma. The connected-comma criterion then gives finality. No strict henselization
+or colimit hypothesis is used. This is the pointed-algebra argument used in
 `IsStrictHenselization.surjective_quotient`.
+
+## References
+
+* [Stacks, Tag 05WS]
 -/
 
 @[expose] public section
@@ -25,26 +36,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace Algebra
 
-/-- Base change of pointed etale algebras along a surjective local map is final.
-Source: Stacks Project, Tag 05WS; pointed-colimit proof as recorded in
-lem-sbc-strict-henselization-surjective-quotient.
-(blueprint: lem-sbc-pointed-etale-quotient-final)
-
-Proof: The residue-field map induced by π is an isomorphism. Transport the
-separable closures across it and identify H(K) with L, where H is extension of
-scalars. Apply H to each pointed algebra S -> K and compose with this comparison;
-etaleness is stable under base change. This constructs F. Its underlying algebra
-diagram is definitionally H applied to the original diagram.
-
-The coefficient-lift theorem produces an etale lift of every underlying target
-algebra. The bijection on maps into K supplies its compatible point, so every
-comma category (T down F) is nonempty. For two comma objects, choose a common
-source successor using filteredness. Equalize their induced arrows in the target,
-which is also filtered. Lift that equalizing etale morphism relative to its source
-algebra using the same coefficient-lift construction. Its reduction isomorphism
-produces a common successor in the comma category. Thus the two objects are
-linked by a two-arrow zigzag. The connected-comma criterion gives finality.
-No strict henselization C or colimit hypothesis is used. -/
+/-- Base change of pointed étale algebras along a surjective local map is final. -/
 theorem pointedEtaleQuotient_final
     (A K B L : Type u) [CommRing A] [IsLocalRing A] [Field K]
     [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K]

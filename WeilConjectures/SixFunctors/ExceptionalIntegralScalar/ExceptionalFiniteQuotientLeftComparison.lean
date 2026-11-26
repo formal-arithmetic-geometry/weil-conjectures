@@ -10,8 +10,11 @@ import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalFiniteSc
 import all WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSupportCoefficientComparison
 /-! # The canonical finite quotient left comparison
 
-Source: Zheng, Lemma 5.22 and Propositions 5.24 and 5.26.
-(blueprint: lem-sf-finite-quotient-left-comparison)
+The finite quotient proper/open comparison is invertible on its finite-Tor domain.
+
+## References
+
+* [Zheng, Construction 2.26, Proposition 2.29, Lemma 5.22 and Propositions 5.24 and 5.26]
 -/
 
 @[expose] public noncomputable section
@@ -31,15 +34,7 @@ variable (l : ℕ) [Fact l.Prime]
 variable (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
 -- The chosen derived presentations require an extended conversion budget.
-/-- The finite quotient proper/open comparison is invertible on its finite-Tor domain.
-Source: Zheng, Lemma 5.22; finite scalar mates, Construction 2.26 and Proposition 2.29.
-
-Proof: specialize the finite coefficient comparison theorem to the quotient factor
-map. The literal finiteQuotientChange sheaf maps are its constant sheaf maps, by
-finiteQuotient_eq_map. The comparison theorem supplies precisely the actual proper/open
-mate, so no flatness of the quotient map is asserted. This includes exponent one,
-equal exponents, and empty schemes, with no absolute separatedness assumption.
-(blueprint: lem-sf-finite-quotient-left-comparison). -/
+/-- The finite quotient proper/open comparison is invertible on its finite-Tor domain. -/
 theorem finiteQuotientLeftComparison_isIso
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

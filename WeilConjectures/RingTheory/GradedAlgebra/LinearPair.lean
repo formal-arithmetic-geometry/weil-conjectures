@@ -150,8 +150,7 @@ lemma isNoetherianRing (𝒜 : ℕ → Submodule k S) [GradedAlgebra 𝒜] [IsSt
 
 /-- Let `S` be a standard graded algebra over an infinite field `k` which is a domain, such
 that `Proj S` has dimension one. Then there are linear forms `l₀, l₁ ∈ S₁` without common zero
-on `Proj S`.
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+on `Proj S`. -/
 theorem exists_basicOpen_sup_eq_top [Infinite k] [IsDomain S]
     (hdim : topologicalKrullDim (ProjectiveSpectrum 𝒜) = 1) :
     ∃ l₀ ∈ 𝒜 1, ∃ l₁ ∈ 𝒜 1, basicOpen 𝒜 l₀ ⊔ basicOpen 𝒜 l₁ = ⊤ := by

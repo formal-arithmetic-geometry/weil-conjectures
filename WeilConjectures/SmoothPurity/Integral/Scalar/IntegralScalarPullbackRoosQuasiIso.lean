@@ -76,9 +76,11 @@ import Mathlib.Algebra.BigOperators.Ring.Finset
 
 /-! # Quasi-isomorphism of the normalized finite pullback Roos map
 
-Source: Stacks, sites-cohomology.tex, Tags 07A4 and 0941; derived.tex,
-Tag 08TC; proetale.tex, Tag 099N (completion context). This is the
-cofinal-filtration specialization in the integral scalar comparison proof.
+This is the cofinal-filtration specialization used in the integral scalar comparison.
+
+## References
+
+* Stacks Project, Tags 07A4, 0941, 08TC and 099N
 -/
 
 @[expose] public section
@@ -291,32 +293,7 @@ private theorem roos_pro_zero (W : AlgebraicGeometry.Scheme.{u})
 end Proofs
 
 /-- The strict, generator-normalized pullback comparison is a quasi-isomorphism
-on a good representative, after applying the additive Roos comparison.
-Source: Stacks, sites-cohomology.tex, Tags 07A4 and 0941; derived.tex,
-Tag 08TC; proetale.tex, Tag 099N supplies the completion context.
-This generator-normalized specialization is extracted from the item proof.
-(blueprint: lem-pur-integral-scalar-pullback-roos-quasi-iso).
-Proof: write the source uniformizer as a unit times the e-th power of the target
-uniformizer, with e positive. Completed constant-sheaf reduction and tensor
-associativity identify the scalar extension of the source level n with target
-level e(n+1)-1. Under this identification, the assumed generator equation makes
-alpha the transition from that level to n. These identifications respect every
-strict transition and the differentials, by the balanced tensor and inverse-image
-universal properties. Finite freeness of the completed coefficient extension
-commutes with countable products; the two equations for kappa identify it with
-the diagonal product comparison on both summands of the shifted cone. Thus the
-displayed composite is the cofinal-filtration comparison on the two Roos
-coordinates. Cofinality makes this map a quasi-isomorphism: the transition map from
-the arithmetic subsequence to the original tower induces the identity on the
-identified inverse limits. Countable products are exact on the pro-etale site.
-One may forget to abelian sheaves: the exact conservative forgetful functor
-creates products, preserves the Roos coordinates, and detects quasi-isomorphisms.
-Applying K-injective tower resolutions and the Roos comparison then proves the
-assertion by two-out-of-three. Equivalently, finite
-transition sums give a telescoping chain homotopy inverse. K-flatness and termwise flatness
-of P identify all finite tensor models with their derived reductions. For e=1
-the comparison is the termwise tensor-association isomorphism; zero complexes
-and empty sites satisfy the same formulas. No completeness of P is assumed. -/
+on a good representative, after applying the additive Roos comparison. -/
 theorem integralScalarPullbackRoosQuasiIso {X Y : AlgebraicGeometry.Scheme.{u}}
     (f : X ⟶ Y) (P : CochainComplex (integralTowerModules l E Y) ℤ)
     (hP : integralOperationsGoodComplex l E Y P)

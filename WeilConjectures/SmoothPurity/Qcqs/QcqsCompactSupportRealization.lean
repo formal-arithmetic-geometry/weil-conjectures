@@ -16,12 +16,21 @@ import WeilConjectures.SmoothPurity.Derived.DerivedCompleteFiniteReductionDetect
 
 /-! # Compact-support realization without separated structure morphisms
 
-Source: Bhatt--Scholze, Definition 6.7.6 and Lemma 6.7.7; Stacks Tag 0F7J
-(blueprint: def-weil-integral-rational-qbar-compact-support).
-
 The object values and the integral and rational actions are the published ones.
 The comparison below retains their chosen Roos projections, on every constructible
 integral input, without requiring the schemes themselves to be separated over the field.
+
+## Implementation details
+
+The realization map transposes the actual reduction unit and total-limit projection under the
+finite scalar adjunction. Its finite reductions are the invertible proper/open coefficient
+mates; completeness of the output then gives constructibility, and the constructible cone has
+zero reductions, so its completeness Roos triangle makes it zero.
+
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 6.7.6 and Lemma 6.7.7]
+* [Stacks Project, Tags 0941 and 0F7J]
 -/
 
 @[expose] public noncomputable section
@@ -48,8 +57,7 @@ variable (l : ℕ) [Fact l.Prime]
 /-- Projection normalization for the ambient realization of the recorded integral functor.
 The finite comparison is the actual scalar-adjunction mate of open extension followed
 by proper image; its source projection is the chosen Roos projection, not a freely
-chosen reduction isomorphism. Source: Bhatt--Scholze, Definition 6.7.6
-(blueprint: def-weil-integral-rational-qbar-compact-support). -/
+chosen reduction isomorphism. -/
 def SfQcqsCompactSupportRealizationSpec
     (τ : (sfIntegralConstructible l E X).ι ⋙ image (completed l E) c ≅
       sfCompactSupportFiniteIntegralFunctor l K₀ hl c E ⋙
@@ -65,8 +73,6 @@ def SfQcqsCompactSupportRealizationSpec
           ((finiteReductionIso l E X n).hom.app K.obj)
 
 /-- The actual strict reduction-unit/proper-open-mate/total-limit composite.
-Source: Bhatt--Scholze, Definition 6.7.6; Stacks 0941, 0F7J
-(blueprint: def-weil-integral-rational-qbar-compact-support).
 
 The chosen data consist of a whole coherent strict comparison and its recorded
 limit identification. The map is their displayed universal-adjunction composite. -/
@@ -83,13 +89,7 @@ def sfQcqsCompactSupportRealizationMap :
     Functor.whiskerRight (Functor.whiskerLeft (sfIntegralConstructible l E X).ι β)
       (coefficientSequenceLimit l E Y) ≫ γ.inv
 
-/-- The explicit universal comparison has the finite proper/open projection coordinates.
-Source: Bhatt--Scholze, Definition 6.7.6; Stacks 0941, 0F7J
-(blueprint: def-weil-integral-rational-qbar-compact-support).
-
-Proof: transpose the actual reduction unit and total-limit projection under the
-finite scalar adjunction. The normalized strict comparison equations identify the
-two resulting factors with the actual proper/open mate in the stated coordinates. -/
+/-- The explicit universal comparison has the finite proper/open projection coordinates. -/
 theorem sfQcqsCompactSupportRealizationMap_spec :
     ∀ (K : sfIntegralConstructibleCategory l E X) (n : ℕ),
       (scalarReductionDerivedExtension l E Y n).map
@@ -115,14 +115,7 @@ theorem sfQcqsCompactSupportRealizationMap_spec :
     (β.app K.obj) (γ.app K)
     _ (sfCompactSupportFiniteReductionIso l K₀ hl c E K n).hom (hγ K n)).trans (hβ K.obj n)
 
-/-- The explicit comparison is invertible on every integral constructible input.
-Source: Bhatt--Scholze, Lemma 6.7.7; Stacks 0941, 0F7J
-(blueprint: def-weil-integral-rational-qbar-compact-support).
-
-Proof: its finite reductions are the invertible proper/open coefficient mates.
-Completeness of the actual output and these reductions give its constructibility.
-The constructible cone then has zero reductions; its completeness Roos triangle
-makes it zero. Componentwise invertibility gives invertibility of the transformation. -/
+/-- The explicit comparison is invertible on every integral constructible input. -/
 theorem sfQcqsCompactSupportRealizationMap_isIso :
     IsIso (sfQcqsCompactSupportRealizationMap l E K₀ hl c) := by
   let τ := sfQcqsCompactSupportRealizationMap l E K₀ hl c
@@ -149,9 +142,7 @@ theorem sfQcqsCompactSupportRealizationMap_isIso :
   let : ∀ K, IsIso (τ.app K) := hcomponent
   exact NatIso.isIso_of_isIso_app τ
 
-/-- The constructed realization of the recorded integral compact-support action.
-Source: Bhatt--Scholze, Definition 6.7.6 and Lemma 6.7.7; Stacks 0941, 0F7J
-(blueprint: def-weil-integral-rational-qbar-compact-support). -/
+/-- The constructed realization of the recorded integral compact-support action. -/
 def sfQcqsCompactSupportRealization :
     (sfIntegralConstructible l E X).ι ⋙ image (completed l E) c ≅
       sfCompactSupportFiniteIntegralFunctor l K₀ hl c E ⋙
@@ -159,11 +150,7 @@ def sfQcqsCompactSupportRealization :
   letI := sfQcqsCompactSupportRealizationMap_isIso l E K₀ hl c
   asIso (sfQcqsCompactSupportRealizationMap l E K₀ hl c)
 
-/-- The constructed realization has the actual finite proper/open projection coordinates.
-Source: Bhatt--Scholze, Definition 6.7.6; Stacks 0941, 0F7J
-(blueprint: def-weil-integral-rational-qbar-compact-support).
-
-Proof: these are the projection equations of the explicit universal comparison. -/
+/-- The constructed realization has the actual finite proper/open projection coordinates. -/
 theorem sfQcqsCompactSupportRealization_spec :
     SfQcqsCompactSupportRealizationSpec l E K₀ hl c
       (sfQcqsCompactSupportRealization l E K₀ hl c) :=

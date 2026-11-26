@@ -103,9 +103,15 @@ import Mathlib.CategoryTheory.Monoidal.Preadditive
 
 /-! # The normalized completion unit of the completed coefficient sheaf
 
-Source: Bhatt--Scholze, Propositions 3.1.9--3.1.10 and Lemma 6.5.5;
-Stacks Project, Tags 099I and 0941.
-(blueprint: lem-sf-completed-coefficient-unit-complete)
+The completion unit of the completed coefficient sheaf, placed in degree zero, is an
+isomorphism in the derived category.
+
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Propositions 3.1.9--3.1.10 and
+  Lemma 6.5.5]
+* [Stacks, Tag 099I]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public section
@@ -291,32 +297,7 @@ private theorem coefficientUnit_roos_quasiIso :
 end
 
 /-- The actual quotient augmentation of the coefficient unit in degree zero
-is an isomorphism after passing to the derived category.
-
-Source: Bhatt--Scholze, Propositions 3.1.9--3.1.10, pp. 17--18, and
-Lemma 6.5.5, pp. 49--50; Stacks Project, Tags 099I and 0941
-(blueprint: lem-sf-completed-coefficient-unit-complete).
-
-Proof: the coefficient sheaf B is the inverse limit of the finite quotient
-coefficient sheaves. Tensoring B with each quotient and then restricting scalars
-identifies its ordinary reduction with that quotient, by multiplication; the
-quotient unit becomes the actual inverse-limit projection. These identifications
-commute with the specified successor transitions. The completed-free-cell
-ordinary-limit theorem at rank one and degree zero supplies this augmented
-limit cone and epimorphic transitions. Its finite-field datum can be chosen
-with any prime characteristic different from l and imposes no condition on T.
-The pro-etale surjective-tower theorem makes one minus shift on the countable
-product epimorphic. The kernel of this map is the ordinary inverse limit, with
-its specified projections. Thus the short exact sequence from B[0] into the
-product and then one minus shift identifies B[0] quasi-isomorphically with the
-product mapping fibre, by the lift having zero shifted-product coordinate.
-The coefficient unit is flat and its single complex is K-flat by the bounded
-flat theorem, so it is a good representative. completionComparison computes
-completion on this representative. The normalization in
-completionUnit_existsUnique identifies the quasi-isomorphism just constructed
-with completionUnit followed by this comparison. Cancel the comparison to
-obtain the assertion. The rank-one product-to-unit isomorphism preserves the
-augmentation by naturality. -/
+is an isomorphism after passing to the derived category. -/
 theorem completedCoefficientUnit_completionUnit_isIso
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

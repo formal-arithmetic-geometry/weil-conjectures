@@ -16,8 +16,21 @@ import WeilConjectures.RingTheory.FlatAlgebraPowerBasis
 /-!
 # Fixed bases for strict henselization quotients
 
-Source: Stacks Project, More on Algebra, Tag 07QM(4) and the proof of Tag 06LJ(c)
-(blueprint: lem-sc-strict-henselization-quotient-bases).
+For a strict henselization `C` of a Noetherian local ring `A` with maximal ideal `n`, lifts to
+`C` of a basis of `C ⧸ nC` over `A ⧸ n` give bases of `C ⧸ (nC)^r` over `A ⧸ n^r` for every
+`r ≥ 1`.
+
+## Implementation details
+
+Since `C` is faithfully flat over `A`, it is flat, and the nilpotent local basis criterion
+over `A ⧸ n^r` applies to the fixed lifts. There is no need to identify `C ⧸ nC` with `K`.
+
+## References
+
+* [Stacks, Tag 07QM], part (4)
+* [Stacks, Tag 06LJ], proof of (c)
+* [Stacks, Tag 051F]
+* [Stacks, Tag 00HI]
 -/
 
 @[expose] public section
@@ -26,21 +39,7 @@ universe u
 
 namespace Algebra
 
-/-- Fixed residue-field lifts are bases of every positive-power quotient.
-Source: Stacks Project, Tag 07QM(4), using Tag 051F and flat base change Tag 00HI.
-(blueprint: lem-sc-strict-henselization-quotient-bases).
-
-Proof: Use the existing triples-presentation theorem to present C as a ring colimit
-with its original structural A-map. Faithful flatness of this colimit makes C flat
-as an A-module. The quotient C/nC is a vector space over the field A/n; choose any
-basis and lift its vectors through the surjective quotient map C -> C/nC. There is
-no need to identify this vector space with K. For each positive r, the generic
-flat-algebra power-basis lemma applies the nilpotent local basis criterion over
-A/n^r to these same lifts. Invert each basis representation and restrict scalars
-to A. Ideal.map_pow identifies n^r C with (nC)^r, so the quotient equivalence sends
-each standard generator to the class of its fixed lift. No completion comparison
-is asserted here.
--/
+/-- Fixed residue-field lifts are bases of every positive-power quotient. -/
 theorem strictHenselization_quotient_bases
     (A K C : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A] [Field K]
     [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K]

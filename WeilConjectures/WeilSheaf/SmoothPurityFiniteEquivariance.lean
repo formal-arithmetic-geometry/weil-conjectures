@@ -8,9 +8,13 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.FrobeniusOrientation
 
 /-! # Relative finite-coefficient equivariance of the smooth orientation
 
-This uses the existing finite-coefficient purity base-change theorem. Its upstream
-`proposition-compatibility-purity-base-change` admission remains a dependency and is not discharged
-here.
+Relative finite purity intertwines the Tate datum and the exceptional datum for every cartesian
+endomorphism square.
+
+## Implementation details
+
+This uses the existing finite-coefficient purity base-change theorem. The compatibility of
+purity with base change that it admits remains a dependency and is not discharged here.
 -/
 
 @[expose] public section
@@ -40,7 +44,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
   [HasInvertibleExponent Λ X] {k : Type u} [Field k]
 
 /-- Relative finite purity intertwines the Tate datum and the exceptional datum for every
-cartesian endomorphism square. This is the relative form needed before integral lifting. -/
+cartesian endomorphism square. -/
 theorem isWeilMorphism_dualizingComplexTwistShiftIso_inv
     (sq : IsPullback gX f f gY)
     (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY] :

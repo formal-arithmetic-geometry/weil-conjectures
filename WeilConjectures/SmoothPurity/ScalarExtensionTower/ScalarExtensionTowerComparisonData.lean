@@ -43,9 +43,6 @@ import all WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorIntegra
 
 /-! # Normalized comparisons on strict quotient models
 
-Source: main-20261015 blueprint, prose-03-02, integral operations;
-Stacks Tags 03EL and 07A4 (blueprint: lem-pur-scalar-extension-tower-coherence).
-
 ## Main definitions
 
 * `Comparisons`: the pure-tensor-normalized comparisons on whole quotient systems.
@@ -55,9 +52,20 @@ Stacks Tags 03EL and 07A4 (blueprint: lem-pur-scalar-extension-tower-coherence).
 
 * `comparisons_existsUnique`: the unique comparisons with their pure-tensor normalization.
 
-This is the self-contained comparison construction formerly in
-`WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarExtensionTowerCoherence`,
-which publicly re-exports this module.
+## Implementation details
+
+The comparisons are the ordinary sheaf tensor comparisons for the geometric inverse image and
+for the identity inverse image with the coefficient map, totalized over `p + q = n`. They
+preserve bidegrees, hence commute with both differential terms including the sign `(-1)^p`, and
+with the quotient transitions and restrictions. Pure tensors locally generate the sheaf tensor
+and its direct-sum total, which gives uniqueness.
+
+This module is re-exported by
+`WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarExtensionTowerCoherence`.
+
+## References
+
+* Stacks Project, Tags 03D2, 03EK, 03EL, 06YY, 07A4, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -86,19 +94,16 @@ open scoped ChangeOfRings
 namespace WeilConjectures.ScalarExtensionTower
 
 attribute [local semireducible] coefficientTotalTensor in
-/-- The sequence site has the small pro-etale site's original size.
-Source: Stacks 0941 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
+/-- The sequence site has the small pro-etale site's original size. -/
 instance (priority := 3000) sequenceSmall (W : Scheme.{u}) :
     EssentiallySmall.{u + 1} (ℕ × W.ProEt) :=
   coefficientSequenceEssentiallySmall.{u, 0} W
 
-/-- The original small pro-etale site, with object size u+1 and Hom size u.
-Source: blueprint size convention (blueprint: lem-pur-scalar-extension-tower-coherence). -/
+/-- The original small pro-etale site, with object size u+1 and Hom size u. -/
 instance (priority := 3000) siteSmall (W : Scheme.{u}) : EssentiallySmall.{u + 1} W.ProEt :=
   essentiallySmallSelf.{0, u, u + 1} _
 
-/-- The scalar-first route, abstracted over its categories.
-Source: Stacks 03EL, 07A4 (blueprint: def-pur-scalar-extension-tower-data). -/
+/-- The scalar-first route, abstracted over its categories. -/
 def leftRouteCore {C D A B : Type*}
     [Category C] [Category D] [Category A] [Category B]
     (T : C × C ⥤ C) (TA : A × A ⥤ A) (TB : B × B ⥤ B)
@@ -109,8 +114,7 @@ def leftRouteCore {C D A B : Type*}
   Functor.isoWhiskerLeft T k ≪≫ Functor.isoWhiskerRight s K ≪≫
     Functor.isoWhiskerLeft (G.prod G) c
 
-/-- The pullback-first route, abstracted over its categories.
-Source: Stacks 03EL, 07A4 (blueprint: def-pur-scalar-extension-tower-data). -/
+/-- The pullback-first route, abstracted over its categories. -/
 def rightRouteCore {C D A B : Type*}
     [Category C] [Category D] [Category A] [Category B]
     (T : C × C ⥤ C) (TD : D × D ⥤ D) (TB : B × B ⥤ B)
@@ -121,24 +125,18 @@ def rightRouteCore {C D A B : Type*}
   Functor.isoWhiskerRight c H ≪≫ Functor.isoWhiskerLeft (F.prod F) s ≪≫
     Functor.isoWhiskerRight (NatIso.prod k k) TB
 
-/-- The unit square for a functor and two specified action unitors.
-Source: the strict categorical composites in Stacks 03EL, 07A4
-(blueprint: def-pur-scalar-extension-tower-data). -/
+/-- The unit square for a functor and two specified action unitors. -/
 def UnitSquare {C D : Type*} [Category C] [Category D]
     (F : C ⥤ D) (U : C ⥤ C) (V : D ⥤ D)
     (k : F ⋙ V ≅ U ⋙ F) (u : U ≅ 𝟭 C) (v : V ≅ 𝟭 D) : Prop :=
   k ≪≫ Functor.isoWhiskerRight u F = Functor.isoWhiskerLeft F v
 
-/-- The tensor comparison commutes with the specified action unitor.
-Source: the strict categorical composites in Stacks 03EL, 07A4
-(blueprint: def-pur-scalar-extension-tower-data). -/
+/-- The tensor comparison commutes with the specified action unitor. -/
 def TensorUnitSquare {C : Type*} [Category C] (T : C × C ⥤ C)
     (U : C ⥤ C) (s : T ⋙ U ≅ U.prod U ⋙ T) (u : U ≅ 𝟭 C) : Prop :=
   s ≪≫ Functor.isoWhiskerRight (NatIso.prod u u) T = Functor.isoWhiskerLeft T u
 
-/-- Two successive coefficient squares under their specified associators.
-Source: the strict categorical composites in Stacks 03EL, 07A4
-(blueprint: def-pur-scalar-extension-tower-data). -/
+/-- Two successive coefficient squares under their specified associators. -/
 def CompositionSquare {A B C D E F : Type*}
     [Category A] [Category B] [Category C] [Category D] [Category E] [Category F]
     (p : A ⥤ B) (q : C ⥤ D) (r : E ⥤ F)
@@ -149,9 +147,7 @@ def CompositionSquare {A B C D E F : Type*}
   Functor.isoWhiskerRight k t' ≪≫ Functor.isoWhiskerLeft s h ≪≫
       Functor.isoWhiskerRight a r = Functor.isoWhiskerLeft p b ≪≫ d
 
-/-- Tensor comparison for two successive scalar extensions.
-Source: the strict categorical composites in Stacks 03EL, 07A4
-(blueprint: def-pur-scalar-extension-tower-data). -/
+/-- Tensor comparison for two successive scalar extensions. -/
 def TensorCompositionSquare {A B C : Type*} [Category A] [Category B] [Category C]
     (TA : A × A ⥤ A) (TB : B × B ⥤ B) (TC : C × C ⥤ C)
     (s : A ⥤ B) (t : B ⥤ C) (v : A ⥤ C)
@@ -173,25 +169,19 @@ private theorem map_unit_square {A B : Type*} [Category A] [Category B]
       (NatIso.mapHomologicalComplex v (.up ℤ)) := by
   exact congrArg (fun a ↦ NatIso.mapHomologicalComplex a (.up ℤ)) h
 
-/-- Equality of a five-map composite with a specified morphism.
-Source: the strict categorical composites in Stacks 03EL, 07A4
-(blueprint: def-pur-scalar-extension-tower-data). -/
+/-- Equality of a five-map composite with a specified morphism. -/
 def FiveStepEquation {C : Type*} [Category C] {A B D E F G : C}
     (a : A ⟶ B) (b : B ⟶ D) (c : D ⟶ E) (d : E ⟶ F) (e : F ⟶ G)
     {α : Type*} (f : α) : Prop := HEq (a ≫ b ≫ c ≫ d ≫ e) f
 
 variable (l : ℕ) [Fact l.Prime]
 
-/-- Cochain quotient systems, with every transition retained in their module structure.
-Source: blueprint integral operations; Stacks 0941
-(blueprint: lem-pur-scalar-extension-tower-coherence). -/
+/-- Cochain quotient systems, with every transition retained in their module structure. -/
 abbrev Complex (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (W : Scheme.{u}) :=
   CochainComplex (coefficientSequenceModules.{u, u} l E W) ℤ
 
-/-- Signed direct-sum total tensor on the actual quotient sequence site.
-Source: blueprint integral operations; Stacks 07A4
-(blueprint: lem-pur-scalar-extension-tower-coherence). -/
+/-- Signed direct-sum total tensor on the actual quotient sequence site. -/
 def tensor (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (W : Scheme.{u}) : Complex l E W × Complex l E W ⥤ Complex l E W :=
   coefficientTotalTensor.{u, u + 1, u}
@@ -202,49 +192,37 @@ variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-/-- Additivity of the actual ordinary sequence-site scalar extension.
-Source: Stacks 06YY (blueprint: lem-pur-scalar-extension-tower-coherence). -/
+/-- Additivity of the actual ordinary sequence-site scalar extension. -/
 instance scalarAdditive (W : Scheme.{u}) :
     (integralComparisonSequenceScalarModel.{u, u} l E L ι W).E.Additive :=
   (integralComparisonSequenceScalarModel.{u, u} l E L ι W).additive
 
-/-- Termwise scalar extension through the actual quotient-ring inclusions.
-Source: blueprint integral operations; Stacks 06YY
-(blueprint: lem-pur-scalar-extension-tower-coherence). -/
+/-- Termwise scalar extension through the actual quotient-ring inclusions. -/
 abbrev scalar (ι : E →ₐ[ℚ_[l]] L) (W : Scheme.{u}) :
     Complex l E W ⥤ Complex l L W :=
   (integralComparisonSequenceScalarModel.{u, u} l E L ι W).E.mapHomologicalComplex (.up ℤ)
 
-/-- Termwise constant-coefficient pro-etale pullback of entire quotient systems.
-Source: blueprint integral operations; Stacks 03D2
-(blueprint: lem-pur-scalar-extension-tower-coherence). -/
+/-- Termwise constant-coefficient pro-etale pullback of entire quotient systems. -/
 abbrev pull {X Y : Scheme.{u}} (f : X ⟶ Y) : Complex l E Y ⥤ Complex l E X :=
   (integralComparisonSequencePullback.{u, u} l E f).mapHomologicalComplex (.up ℤ)
 
-/-- The specified scalar-association isomorphism, lifted termwise.
-Source: blueprint integral operations, proof step 3; Stacks 03EL
-(blueprint: lem-pur-scalar-extension-tower-coherence). -/
+/-- The specified scalar-association isomorphism, lifted termwise. -/
 def kappa {X Y : Scheme.{u}} (f : X ⟶ Y) :
     pull l E f ⋙ scalar l E L ι X ≅ scalar l E L ι Y ⋙ pull l L f :=
   NatIso.mapHomologicalComplex (integralComparisonSequenceScalarPullback.{u, u} l E L ι f) (.up ℤ)
 
-/-- The scalar action unitor on the same strict quotient complexes.
-Source: blueprint integral operations, proof step 7
-(blueprint: lem-pur-scalar-extension-tower-coherence). -/
+/-- The scalar action unitor on the same strict quotient complexes. -/
 def scalarUnit (W : Scheme.{u}) : scalar l E E (AlgHom.id ℚ_[l] E) W ≅ 𝟭 _ :=
   NatIso.mapHomologicalComplex (integralComparisonSequenceScalarUnit.{u, u} l E W) (.up ℤ)
 
-/-- Successive extension is identified by multiplication of the coefficient factors.
-Source: blueprint integral operations, proof step 7
-(blueprint: lem-pur-scalar-extension-tower-coherence). -/
+/-- Successive extension is identified by multiplication of the coefficient factors. -/
 def scalarComp (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
     (j : L →ₐ[ℚ_[l]] F) (W : Scheme.{u}) :
     scalar l E L ι W ⋙ scalar l L F j W ≅ scalar l E F (j.comp ι) W :=
   NatIso.mapHomologicalComplex
     (integralComparisonSequenceScalarComposition.{u, u} l E L ι F j W) (.up ℤ)
 
-/-- Tensor generator in the (p,q) summand of the signed direct-sum total.
-Source: Stacks 03EK, 07A4 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
+/-- Tensor generator in the (p,q) summand of the signed direct-sum total. -/
 abbrev generator (W : Scheme.{u}) (P Q : Complex l E W) (p q : ℤ)
     (U : (ℕ × W.ProEt)ᵒᵖ) (x : (P.X p).val.obj U) (y : (Q.X q).val.obj U) :
     (((tensor l E W).obj (P, Q)).X (p + q)).val.obj U :=
@@ -252,8 +230,7 @@ abbrev generator (W : Scheme.{u}) (P Q : Complex l E W) (p q : ℤ)
     (coefficientSequenceTopology (Scheme.ProEt.topology W))
     (coefficientSequenceCommRingSheaf.{u, u} l E W) P Q p q (p + q) rfl U x y
 
-/-- The adjunction-unit generator read as a section on the base-change object.
-Source: Stacks 03D2 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
+/-- The adjunction-unit generator read as a section on the base-change object. -/
 def pullSection {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : coefficientSequenceModules.{u, u} l E Y) (n : ℕ) (U : Y.ProEt)
     (x : M.val.obj (op (n, U))) :
@@ -261,8 +238,7 @@ def pullSection {X Y : Scheme.{u}} (f : X ⟶ Y)
       (op (n, (Scheme.proEtaleBaseChange f).obj U)) :=
   integralComparisonSequenceGenerator.{u, u} l E f M n U x
 
-/-- The pure-tensor formula for a scalar comparison on the whole sequence site.
-Source: Stacks 03EL, 07A4 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
+/-- The pure-tensor formula for a scalar comparison on the whole sequence site. -/
 def ScalarFormula (sigma : ∀ (A B : Type u) [Field A] [Algebra ℚ_[l] A] [FiniteDimensional ℚ_[l] A]
     [Field B] [Algebra ℚ_[l] B] [FiniteDimensional ℚ_[l] B]
     (i : A →ₐ[ℚ_[l]] B) (W : Scheme.{u}),
@@ -282,8 +258,7 @@ def ScalarFormula (sigma : ∀ (A B : Type u) [Field A] [Algebra ℚ_[l] A] [Fin
         (integralComparisonSequenceTensorSection.{u, u} l A B i W (P.X p) U b x)
         (integralComparisonSequenceTensorSection.{u, u} l A B i W (Q.X q) U 1 y)
 
-/-- The unit formula for a tensor-pullback comparison on the whole sequence site.
-Source: Stacks 03D2, 07A4 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
+/-- The unit formula for a tensor-pullback comparison on the whole sequence site. -/
 def PullFormula (c : ∀ (A : Type u) [Field A] [Algebra ℚ_[l] A] [FiniteDimensional ℚ_[l] A]
     {X Y : Scheme.{u}} (f : X ⟶ Y),
     tensor l A Y ⋙ pull l A f ≅ (pull l A f).prod (pull l A f) ⋙ tensor l A X) : Prop :=
@@ -304,9 +279,7 @@ def PullFormula (c : ∀ (A : Type u) [Field A] [Algebra ℚ_[l] A] [FiniteDimen
         (pullSection l A f (Q.X q) n U y)
 
 /-- Pure-tensor-normalized tensor comparisons on strict quotient systems.
-All components, including their inverses, are chain maps of actual sequence-site modules.
-Source: blueprint integral operations, proof steps 3--6; Stacks 03EL and 07A4
-(blueprint: lem-pur-scalar-extension-tower-coherence). -/
+All components, including their inverses, are chain maps of actual sequence-site modules. -/
 structure ComparisonData (Sigma Pullback : Type*)
     (sigmaFormula : Sigma → Prop) (pullFormula : Pullback → Prop) where
   sigma : Sigma
@@ -314,8 +287,7 @@ structure ComparisonData (Sigma Pullback : Type*)
   c : Pullback
   c_formula : pullFormula c
 
-/-- The original two comparisons and their exact generator formulas.
-Source: Stacks 03EL, 07A4 (blueprint: def-pur-scalar-extension-tower-data). -/
+/-- The original two comparisons and their exact generator formulas. -/
 abbrev Comparisons :=
   ComparisonData (∀ (A B : Type u) [Field A] [Algebra ℚ_[l] A] [FiniteDimensional ℚ_[l] A]
     [Field B] [Algebra ℚ_[l] B] [FiniteDimensional ℚ_[l] B]
@@ -579,16 +551,7 @@ private theorem chosen_c_formula {X Y : Scheme.{u}} (f : X ⟶ Y)
     ((pullback_comparison l E X Y f).choose_spec P Q p q m U x y)).trans
       (generator_smul l E X _ _ p q _ b _ _).symm)
 
-/-- Existence and uniqueness of the two specified chain comparisons.
-Source: blueprint integral operations, proof steps 3--4; Stacks 03EL and 07A4
-(blueprint: stage3-pur-normalized-scalar-tower-comparisons).
-Proof: apply the ordinary sheaf tensor comparison to the geometric inverse image
-and to identity inverse image with the actual coefficient map. Its insertion and
-multiplication formulas are inverse by balancing. Totalize over all p+q=n. The
-comparison preserves bidegrees, so commutes with both differential terms, including
-(-1)^p. These formulas commute with horizontal quotient maps and vertical restrictions,
-hence are maps on the sequence site. Pure tensors locally generate the sheaf tensor
-and its direct-sum total; this proves uniqueness as well as naturality. -/
+/-- Existence and uniqueness of the two specified chain comparisons. -/
 theorem comparisons_existsUnique : Nonempty (Unique (Comparisons l)) := by
   let c : Comparisons l :=
     { sigma := fun A B _ _ _ _ _ _ i W ↦ chosen_sigma l A B i W
@@ -599,14 +562,12 @@ theorem comparisons_existsUnique : Nonempty (Unique (Comparisons l)) := by
         chosen_c_formula l A f P Q p q n U b x y }
   exact ⟨⟨⟨c⟩, fun d ↦ comparisons_unique l d c⟩⟩
 
-/-- Canonical comparisons fixed by their pure-tensor characterization.
-Source: Stacks 03EL, 07A4 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
+/-- Canonical comparisons fixed by their pure-tensor characterization. -/
 def comparisons : Comparisons l := (Classical.choice (comparisons_existsUnique l)).default
 
 attribute [local irreducible] comparisons
 
-/-- The left route around the scalar-extension square, as an actual strict chain iso.
-Source: node proof steps 3--6 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
+/-- The left route around the scalar-extension square, as an actual strict chain iso. -/
 def leftRoute {X Y : Scheme.{u}} (f : X ⟶ Y) :
     tensor l E Y ⋙ pull l E f ⋙ scalar l E L ι X ≅
       (scalar l E L ι Y).prod (scalar l E L ι Y) ⋙
@@ -615,8 +576,7 @@ def leftRoute {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (pull l E f) (scalar l E L ι Y) (scalar l E L ι X) (pull l L f)
     (kappa l E L ι f) ((comparisons l).sigma E L ι Y) ((comparisons l).c L f)
 
-/-- The right route, using the same scalar-association maps on both tensor factors.
-Source: node proof steps 3--6 (blueprint: lem-pur-scalar-extension-tower-coherence). -/
+/-- The right route, using the same scalar-association maps on both tensor factors. -/
 def rightRoute {X Y : Scheme.{u}} (f : X ⟶ Y) :
     tensor l E Y ⋙ pull l E f ⋙ scalar l E L ι X ≅
       (scalar l E L ι Y).prod (scalar l E L ι Y) ⋙

@@ -15,7 +15,7 @@ public import WeilConjectures.WeilSheaf.Category
 # The lisse locus of a Weil sheaf
 
 A Weil sheaf on a reduced `k₀`-scheme of finite type is lisse on a dense open subscheme
-(generic lissity, used in blueprint `proposition-relative-affine-line--1`).
+(generic lissity).
 
 ## Main results
 
@@ -42,8 +42,7 @@ namespace ProEtale
 variable {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
 
 /-- **Lissity is Zariski local.** If every point of `X` has an open neighbourhood on which `F`
-is lisse, then `F` is lisse: the composites of the trivialising covers with the open cover form a
-pro-étale covering family. -/
+is lisse, then `F` is lisse. -/
 theorem IsAdicLisseSheaf.of_forall_exists_opens {F : AdicSheaf l X}
     (h : ∀ x : X, ∃ W : X.Opens, x ∈ W ∧ IsAdicLisseSheaf ((W.ι)^*ᵃ[l].obj F)) :
     IsAdicLisseSheaf F := by
@@ -62,9 +61,7 @@ theorem IsAdicLisseSheaf.of_forall_exists_opens {F : AdicSheaf l X}
   exact ⟨n, ⟨(adicUpperStarComp l _ _).app F ≪≫ e⟩⟩
 
 /-- On a reduced scheme, the restriction of a sheaf to an open subscheme contained in the image
-of an immersion `f` on which the sheaf is lisse, is lisse: the open subscheme is isomorphic to its
-preimage under `f`, the restriction of `f` being a surjective closed immersion onto a reduced
-scheme. -/
+of an immersion `f` on which the sheaf is lisse, is lisse. -/
 theorem IsAdicLisseSheaf.upperStar_opensι_of_subset_range [IsReduced X] {F : AdicSheaf l X}
     {Z : Scheme.{u}} (f : Z ⟶ X) [IsImmersion f] (hf : IsAdicLisseSheaf ((f)^*ᵃ[l].obj F))
     (W : X.Opens) (hW : (W : Set X) ⊆ Set.range f) :
@@ -85,8 +82,7 @@ theorem IsAdicLisseSheaf.upperStar_opensι_of_subset_range [IsReduced X] {F : Ad
 
 /-- **Generic lissity of constructible sheaves.** On a reduced scheme whose underlying space is
 Noetherian, a constructible `ℓ`-adic sheaf is lisse on an open neighbourhood of every generic
-point of an irreducible component: the stratum through the generic point has constructible image,
-hence contains an open neighbourhood of it. -/
+point of an irreducible component. -/
 theorem IsAdicConstructibleSheaf.exists_opens_isAdicLisseSheaf [IsReduced X]
     [TopologicalSpace.NoetherianSpace X] {F : AdicSheaf l X} (hF : IsAdicConstructibleSheaf F)
     {ξ : X} (hξ : ξ ∈ genericPoints X) :
@@ -106,8 +102,7 @@ open scoped ProEtale
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
 /-- **Generic lissity.** A Weil sheaf on a reduced `k₀`-scheme of finite type is lisse on a dense
-open subscheme (blueprint: `proposition-relative-affine-line--1`, the lissity loci chosen over
-the finite-field model). -/
+open subscheme. -/
 theorem WeilSheaf.exists_dense_isLisse_upperStar {X : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [IsReduced X] (F : WeilSheaf k₀ l X) :
@@ -178,8 +173,7 @@ theorem isLisse_upperStar_congr {φ φ' : X ⟶ Y} [φ.IsOver (Spec (CommRingCat
   exact ⟨fun h ↦ ProEtale.IsAdicLisseSheaf.of_iso ((ProEtale.adicUpperStarCongr l e).app _) h,
     fun h ↦ ProEtale.IsAdicLisseSheaf.of_iso ((ProEtale.adicUpperStarCongr l e).symm.app _) h⟩
 
-/-- The pullback along a composite is lisse if and only if the iterated pullback is: on
-underlying sheaves the two are isomorphic. -/
+/-- The pullback along a composite is lisse if and only if the iterated pullback is. -/
 theorem isLisse_upperStar_comp_iff (φ : X ⟶ Y) (ψ : Y ⟶ Z) [φ.IsOver (Spec (CommRingCat.of k₀))]
     [ψ.IsOver (Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l Z) :
     ((WeilSheaf.upperStar (φ ≫ ψ)).obj F).IsLisse ↔

@@ -134,10 +134,8 @@ lemma exists_comp_eq_of_geometricFrobenius_pow {T : Scheme.{u}} (N : ℕ)
 
 
 /-- **Finiteness of the points of degree `n + 1`** for an automorphism `e` of finite order of a
-scheme of finite type over a finite field (the finiteness part of blueprint
-`lemma-frobenius-fixed-scheme--1`, for the Frobenius twisted by `e`): a point `x̄` with
-`x̄ ≫ e^{n+1} = σ^{n+1} ≫ x̄` is fixed by `σ^{(n+1)(m+1)}` when `e^{m+1} = 𝟙`, so it factors
-through `Spec L` for the finite field `L` fixed by `σ^{(n+1)(m+1)}`. -/
+scheme of finite type over a finite field: there are finitely many points `x̄` with
+`x̄ ≫ e^{n+1} = σ^{n+1} ≫ x̄` when `e^{m+1} = 𝟙`. -/
 theorem finite_frobeniusFixedPoints_of_pow_eq_refl {X : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] (e : X ≅ X)
     (he : ∃ m : ℕ, e.pow (m + 1) = Iso.refl X) (n : ℕ) :
@@ -182,13 +180,9 @@ theorem finite_frobeniusFixedPoints_of_pow_eq_refl {X : Over (Spec (.of k))}
       exact congrArg (_ ≫ ·) (congrArg Subtype.val h))
 
 /-- **Finiteness of the points of degree `n + 1`** of a separated scheme of finite type over a
-finite field, for the Frobenius twisted by an automorphism `e` (the twisted analogue of the
-finiteness part of blueprint `lemma-frobenius-fixed-scheme--1`, which is stated for the model
-Frobenius, `ProEtale.CondensedRing.IsModelFrobenius.finite_fixedPoint`): a point `x̄` with
-`x̄ ≫ e^{n+1} = σ^{n+1} ≫ x̄` is fixed by `e^{n+1} ≫ Fr^{(q^{n+1})}`, since
-`σ^{n+1} ≫ Fr^{(q^{n+1})} = 𝟙` on `Spec k̄`, and the fixed points of a Frobenius twisted by an
-endomorphism are finite (`AlgebraicGeometry.Scheme.Hom.finite_fixedPoints_comp_absoluteFrobenius`).
--/
+finite field, for the Frobenius twisted by an automorphism `e` (the twisted analogue of
+`ProEtale.CondensedRing.IsModelFrobenius.finite_fixedPoint`): there are finitely many points `x̄`
+with `x̄ ≫ e^{n+1} = σ^{n+1} ≫ x̄`. -/
 theorem finite_frobeniusFixedPoints {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom]
     [QuasiCompact X.hom] [IsSeparated X.hom] (e : X ≅ X) (n : ℕ) :
     Finite (frobeniusFixedPoints e (n + 1)) := by

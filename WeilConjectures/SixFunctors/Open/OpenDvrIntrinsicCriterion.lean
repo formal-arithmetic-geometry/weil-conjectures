@@ -27,10 +27,24 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import Mathlib.Data.Nat.Prime.Infinite
 
-/-! # The intrinsic DVR completion criterion under canonical coefficient transport
+/-!
+# The intrinsic DVR completion criterion under canonical coefficient transport
 
-Source: Stacks Tags 0941, 099B and 0A0E; canonical coefficient transport.
-(blueprint: lem-sf-open-dvr-intrinsic-criterion).
+We show that quotient Roos completeness is equivalent to invertibility of the intrinsic Koszul
+unit, after canonical coefficient transport.
+
+## Implementation details
+
+The completed constant-sheaf reduction theorem transports the two-term free resolutions of the
+DVR quotients, so the uniformizer is regular with the finite coefficients as power quotients.
+The criterion `regular_roos_koszul_unit` is then transported along the exact scalar equivalence,
+which identifies the Koszul units. The auxiliary finite-field datum in
+`IsDerivedCompleteUnrestricted` plays no role; one of `F_2` and `F_3` always has characteristic
+different from `l`.
+
+## References
+
+* [Stacks: Tags 0941, 093M, 099B and 0A0E]
 -/
 
 @[expose] public noncomputable section
@@ -47,25 +61,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [-instance] IntegralOnSlice.abSheafify IntegralOnSlice.abLocallyBijective
   IntegralOnSlice.hasDerived integralOperationsAbSheafify integralOperationsAbLocallyBijective
   integralOperationsSiteSmall integralOperationsCommHasDerivedCategory in
-/-- Quotient Roos completeness is invertibility of the specified intrinsic Koszul unit.
-Source: Stacks Tags 093M, 099B and 0A0E
-(blueprint: lem-sf-open-dvr-intrinsic-criterion).
-
-Proof: the completed constant-sheaf reduction theorem transports the two-term free
-resolution of the positive DVR quotients to the completed coefficient sheaf. Thus the
-uniformizer section is regular and its positive power quotients are precisely the
-finite coefficients, with their prescribed quotient maps. On a single flat-term K-flat
-representative the principal quotient tensor tower is therefore the recorded integral
-reduction tower, including its augmentation. Apply regular_roos_koszul_unit. Its
-existential Roos-triangle condition is the definition of quotient completeness; its
-Koszul unit is the localized signed singleton Koszul fiber unit. The finite-constant
-and completed-projection normalizations of C transport multiplication by t and every
-power of t to those in completedAdicIntrinsicUnit. Exact scalar equivalence preserves
-cones, products and the signed fiber inclusion, hence identifies these units by an
-isomorphism. Transport the theorem's TFAE between its first and third conditions.
-The auxiliary finite-field datum in IsDerivedCompleteUnrestricted affects none of
-these constructions; one of F_2 and F_3 always has characteristic different from ell.
-The empty scheme, zero complex and arbitrary unbounded complexes are included. -/
+/-- Quotient Roos completeness is invertibility of the specified intrinsic Koszul unit. -/
 theorem openDvrIntrinsicCriterion
     (d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E))
     (hd : Ideal.span (Set.range (fun _ : Fin 1 ↦

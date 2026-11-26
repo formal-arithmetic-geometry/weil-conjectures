@@ -13,8 +13,9 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 
 /-! # Normalized scalar pullback comparison by localization
 
-Source: Stacks 07A4, 0941, 099N.
-(blueprint: lem-pur-normalized-integral-scalar-pullback-comparison).
+## References
+
+* Stacks Project, Tags 07A4, 0941 and 099N.
 -/
 
 @[expose] public noncomputable section
@@ -73,15 +74,7 @@ attribute [local implicit_reducible] integralOperationsPullbackOnGood
   integralOperationsGoodLocalization integralOperationsPullbackComplexFunctor
   integralOperationsPullbackTowerFunctor
 
-/-- The ordinary scalar/pullback comparison is the localization of scalarPullbackChain.
-Source: Stacks 07A4, 099N (blueprint: lem-pur-normalized-integral-scalar-pullback-comparison).
-Proof: the prescribed level generator maps are natural and commute with strict
-reductions. The two Roos coordinates therefore give scalarPullbackChain. Finite
-freeness commutes with countable products; cofinality of uniformizer filtrations
-makes this chain map a quasi-isomorphism on good representatives. Localize the
-map, conjugating by the two displayed representative comparisons. Good K-flat
-resolutions compute all objects and roofs, giving naturality and invertibility.
-The same localization property gives uniqueness with this normalization. -/
+/-- The ordinary scalar/pullback comparison is the localization of scalarPullbackChain. -/
 theorem normalizedIntegralScalarPullbackComparison {X Y : AlgebraicGeometry.Scheme.{u}}
     (f : X ⟶ Y) :
     ∃! α : integralDerivedPullback l E f ⋙ integralOrdinaryDerivedScalar l E L ι X ≅

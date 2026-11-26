@@ -13,8 +13,23 @@ import WeilConjectures.RingTheory.FiniteProjectivePrimeLocalFree
 
 /-! # A finite standard free cover for a finite projective module
 
-Source: Stacks Project, Lemma Tag 00NX, (3)⇒(7), and Definition Tag 00NW
-in Section Tag 00NV (blueprint: lem-weil-pbc-finite-projective-standard-free-cover).
+A finite projective module is finite free on the members of a finite standard open cover.
+
+## Main results
+
+* `Module.exists_standardFreeCover_of_finite_projective`
+
+## Implementation details
+
+Each prime `p` has an `f ∉ p` with `M_f` finite free
+(`Module.exists_localizationAway_equiv_finsupp_of_finite_projective`). The principal opens
+`D(f)` cover `Spec A`, and quasi-compactness picks finitely many whose elements generate the
+unit ideal. The ranks may differ between members of the cover.
+
+## References
+
+* [Stacks, Tag 00NX] ((3) ⇒ (7))
+* [Stacks, Tag 00NW]
 -/
 
 @[expose] public section
@@ -24,16 +39,7 @@ universe u v
 namespace Module
 
 /-- A finite projective module is finite free on a finite standard cover.
-Source: Stacks Project, Lemma Tag 00NX, (3)⇒(7), and Definition Tag 00NW
-(blueprint: lem-weil-pbc-finite-projective-standard-free-cover).
-Proof, step 1: a direct summand of a finite free module is finite projective.
-For each prime p, `proposition-projective-line-rational-coefficients--1` gives an element
-fₚ outside p such that M localized away from fₚ is finite free.
-Step 2: these principal opens cover Spec A. Apply quasi-compactness and the
-principal-open/unit-ideal criterion in
-`lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact` to choose finitely many of
-them whose elements generate the unit ideal. Each chosen localization remains
-finite free by step 1. The ranks may differ between members of the cover. -/
+There are `f₁, …, f_r` generating the unit ideal such that each `M_{f_i}` is finite free. -/
 theorem exists_standardFreeCover_of_finite_projective
     (A : Type u) (M : Type v) [CommRing A] [AddCommGroup M] [Module A M]
     [Module.Finite A M] [Module.Projective A M] :

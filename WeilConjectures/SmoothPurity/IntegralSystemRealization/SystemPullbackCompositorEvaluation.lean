@@ -11,9 +11,9 @@ import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 
 /-! # Finite evaluation of the specified system pullback compositor
 
-Source: Stacks 03D8, 0D6D, 0941; the last pullback identification in the
-finite-evaluation step of lem-pur-system-level-projection-formula-coherence.
-(blueprint: lem-pur-system-pullback-compositor-evaluation).
+## References
+
+* Stacks Project, Tags 03D8, 0941 and 0D6D.
 -/
 
 @[expose] public noncomputable section
@@ -123,26 +123,7 @@ private theorem reverse_square {C : Type*} [Category C] {A B D T : C}
     Category.comp_id] using h'.symm
 
 /-- Evaluation respects the inverse of the specified section-normalized pullback
-compositor, on every strict system. This concerns only inverse image: no compact
-support, tensor product, projection map, or boundedness hypothesis occurs.
-Source: Stacks 03D8, 0D6D, 0941; ordinaryCompositionEvaluation and the cochain
-normalizations of Compositors.pullComp and pullbackTensorDerivedEvaluation.
-(blueprint: lem-pur-system-pullback-compositor-evaluation).
-Proof: first identify c.ordinaryDirect with the canonical section compositor:
-c.sections gives equality on every generalized section at (n,U), hence equality
-of module-sheaf maps and of natural transformations. The conjugate equation
-c.conjugate then identifies c.ordinaryPull with the canonical inverse-image
-compositor, since the adjunction conjugacy equivalence is injective. Apply
-ordinaryCompositionEvaluation at level n. Transport the finite level functors
-through pullbackTensorLevelIntrinsic, whose inverse-image comparison is fixed by
-the same ordinary adjunction units. This gives the ordinary square with the
-intrinsic finite compositor. Apply the exact cochain functors and localize.
-Compositors.pullComp_model and the unique cochain normalization of
-pullbackTensorDerivedEvaluation identify the two derived sides on Q(P).
-Every derived object is isomorphic to Q(P); naturality transports the equality
-along that isomorphism. Finally invert the three comparison isomorphisms to
-obtain the displayed inverse-compositor orientation. Identity morphisms and
-zero systems give the usual unit identifications; n=0 is exponent one. -/
+compositor, on every strict system. -/
 theorem systemPullbackCompositorEvaluation
     (o : Operations l E) (c : Compositors l E o)
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (n : ℕ) (N : System l E Z) :

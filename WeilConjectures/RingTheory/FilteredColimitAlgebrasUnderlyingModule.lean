@@ -14,9 +14,19 @@ import Mathlib.CategoryTheory.Limits.Types.Filtered
 /-!
 # Underlying modules of filtered colimits of commutative algebras
 
-Source: Stacks Project, Algebra, Tag 00D6 (lemma-directed-colimit); the algebra version is
-used implicitly in Tag 07RI (lemma-colimit-etale).
-(blueprint: theorem-finite-etale-covers-proper-henselian--2)
+The underlying module of a filtered colimit of commutative `R`-algebras is the colimit of the
+underlying modules.
+
+## Implementation details
+
+The colimit cocone is first shown to be a colimit of rings. Two representatives of an element
+agree exactly when they agree at a common later stage, so a compatible family of linear maps
+descends to a well-defined map, linear because sums and scalar multiples can be computed at a
+common stage.
+
+## References
+
+* [Stacks, Tag 00D6]; the algebra version is used implicitly in [Stacks, Tag 07RI]
 -/
 
 @[expose] public section
@@ -27,8 +37,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CommAlgCat
 
--- This proves clause (1) of the elementwise node. The argument is reused from
--- the private helper in Sheaf.RingTheory.EtaleColimitNormalLocalDomain.
+-- The argument is reused from the private helper in
+-- Sheaf.RingTheory.EtaleColimitNormalLocalDomain.
 -- Forgetting the algebra structure preserves this filtered colimit, even when
 -- the base ring and the diagram rings live in different universes.
 private noncomputable def ringColimit
@@ -89,28 +99,7 @@ private noncomputable def ringColimit
     exact congrArg (fun f ↦ U.map f) he
 
 /-- The underlying module of the filtered colimit `colimit F` of commutative `R`-algebras,
-with the coprojections `colimit.ι F i`, satisfies the module colimit universal property.
-Source: Stacks Project, Algebra, Tag 00D6 (lemma-directed-colimit), transcribed to algebras,
-as used implicitly in Tag 07RI (lemma-colimit-etale).
-(blueprint: theorem-finite-etale-covers-proper-henselian--2)
-
-Proof, following the node's five steps:
-1. By `lem-weil-pbc-filtered-colimit-algebras-elementwise`, the colimit cocone is also a ring
-   colimit and every element is represented at a stage. Apply
-   `lem-weil-pbc-filtered-colimit-rings-zero` to this ring colimit: two representatives
-   agree exactly when their images agree at a common later object.
-2. Algebra maps are additive and commute with the structure maps from `R`, hence are
-   `R`-linear. The algebra cocone identities therefore give a module cocone, using
-   `def-weil-pbc-category-colimit`.
-3. Define the descended map on an element represented by `a` at stage `i` to be `f i a`.
-   The equality criterion and compatibility of the family make this independent of
-   the representative, and give the required identities on all coprojections.
-4. Represent two elements at a common later object, using filteredness. Addition and
-   scalar multiplication are computed there, so linearity follows from linearity of
-   the stage map.
-5. Every element comes from a stage. Thus any map with the required identities agrees
-   with the descended map on every element, proving uniqueness and the universal property.
--/
+with the coprojections `colimit.ι F i`, satisfies the module colimit universal property. -/
 theorem filtered_colimit_algebras_underlying_module
     {R : Type u} [CommRing R] {I : Type v} [SmallCategory I] [IsFiltered I]
     (F : I ⥤ CommAlgCat.{v} R) [HasColimit F]

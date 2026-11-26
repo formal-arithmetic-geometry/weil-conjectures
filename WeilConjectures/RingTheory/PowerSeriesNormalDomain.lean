@@ -16,12 +16,18 @@ import Mathlib.RingTheory.IntegralClosure.IsIntegral.AlmostIntegral
 /-!
 # Power series over a Noetherian normal domain
 
-Source: Stacks Project, Algebra, Lemma 10.37.9 (Tag 0BI0)
-(blueprint: lem-weil-pbc-power-series-normal-domain).
+A one-variable power series ring over a Noetherian normal domain is a Noetherian normal domain.
 
-The one-variable ring is Mathlib's `PowerSeries R`, the one-variable case of the
-recorded power series notion.
-Normality for a domain is `IsIntegrallyClosed`, integrality in its fraction field.
+## Implementation details
+
+The one-variable ring is Mathlib's `PowerSeries R`. Normality for a domain is
+`IsIntegrallyClosed`, integrality in its fraction field. The negative-order argument of Stacks is
+replaced by Mathlib's normality of power series over a field, followed by a coefficientwise
+descent of almost integral coefficients.
+
+## References
+
+* [Stacks, Tag 0BI0]
 -/
 
 @[expose] public section
@@ -31,7 +37,7 @@ universe u
 namespace PowerSeries
 
 /-- The first potentially nonzero coefficient of an almost integral power series is
-almost integral. Source: Stacks 0BI0, the lowest-term calculation. -/
+almost integral. -/
 private theorem coeff_almostIntegral (R K : Type u) [CommRing R] [IsDomain R]
     [Field K] [Algebra R K] [IsFractionRing R K]
     (f : PowerSeries K) (hf : IsAlmostIntegral (PowerSeries R) f)
@@ -69,8 +75,8 @@ private theorem coeff_almostIntegral (R K : Type u) [CommRing R] [IsDomain R]
           rfl
     simpa only [Algebra.smul_def] using heq'
 
-/-- Subtract the polynomial of previously descended coefficients, then apply the
-lowest-term calculation. Source: Stacks 0BI0, the induction on coefficients. -/
+/-- Every coefficient of a power series over `K = Frac(R)` that is almost integral over `R[[x]]`
+lies in `R`. -/
 private theorem coeff_mem_range (R K : Type u) [CommRing R] [IsNoetherianRing R]
     [IsDomain R] [IsIntegrallyClosed R] [Field K] [Algebra R K] [IsFractionRing R K]
     (f : PowerSeries K) (hf : IsAlmostIntegral (PowerSeries R) f) (n : ℕ) :
@@ -114,29 +120,7 @@ private theorem coeff_mem_range (R K : Type u) [CommRing R] [IsNoetherianRing R]
     exact ⟨a, ha.trans hgncoeff⟩
 
 /-- A one-variable power series ring over a Noetherian normal domain is a Noetherian normal
- domain. Source: Stacks Project, Algebra, Lemma 10.37.9 (Tag 0BI0)
-(blueprint: lem-weil-pbc-power-series-normal-domain).
-
-Proof following Stacks 0BI0, with the negative-order argument replaced by Mathlib's
-normality of power series over a field:
-
-1. Mathlib supplies Noetherianity and the domain property.
-2. Put `K = Frac(R)` and embed `Frac(R[[x]])` into `K((x))` by the fraction-field lift of
-coefficientwise inclusion followed by `HahnSeries.ofPowerSeries`.
-3. An integral element maps to an element integral over `K[[x]]`. Power series over a field
-are a unique factorization domain, hence integrally closed, and `K((x))` is their fraction
-field. Thus the Laurent image is a power series `f` over `K`.
-4. Transport the almost-integrality witness of the original fraction to `f`. If coefficients
-below `n` vanish, factor `f = X^n * g`. For a nonzero witness `h`, put `m = order(h)` and
-factor `h = X^m * h.divXPowOrder`. The coefficient of `h*f^e` at `m+n*e` is
-`coeff m h * (coeff n f)^e`. It belongs to `R` for every `e`, so `coeff n f` is almost
-integral over `R`. Noetherianity and normality put this coefficient in `R`.
-5. Induct on `n`, subtracting the finite polynomial of already descended coefficients.
-Almost integral elements form a subalgebra, so the difference remains almost integral.
-Apply step 4 to obtain its coefficient at `n`, which equals that of `f`.
-6. Choose coefficient preimages from these proved membership statements and form the power
-series over `R` using `PowerSeries.mk`. Its Laurent image equals the image of the original
-fraction. Injectivity of the fraction-field lift finishes the proof. -/
+domain. -/
 theorem noetherian_normal_domain (R : Type u) [CommRing R] [IsNoetherianRing R]
     [IsDomain R] [IsIntegrallyClosed R] :
     IsNoetherianRing (PowerSeries R) ∧

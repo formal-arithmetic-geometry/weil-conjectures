@@ -15,10 +15,10 @@ public import WeilConjectures.TraceFormula.SourceExchangeTransport
 # Left projection morphisms of compactly supported direct images
 
 The left projection morphisms `A ⊗ Rx_! T ⟶ Rx_! (Lx^* A ⊗ T)` of the compactly supported direct
-images compose (`ProEtale.CondensedRing.leftProjection_lowerShriek_comp`), and for a proper `g`
-the left projection morphism at the unit is the unit of `Lg^* ⊣ Rg_*`
+images compose (`ProEtale.CondensedRing.leftProjection_lowerShriek_comp`), and for a proper `g` the
+left projection morphism at the unit is the unit of `Lg^* ⊣ Rg_*`
 (`ProEtale.CondensedRing.leftProjection_lowerShriek_unit`). These are steps of the class of the
-coefficient pushforward (blueprint `theorem-proper-pushforward-lefschetz-verdier--1`, Step 2).
+coefficient pushforward.
 
 -/
 

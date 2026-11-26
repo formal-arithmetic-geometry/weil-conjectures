@@ -8,7 +8,13 @@ module
 public import WeilConjectures.SixFunctors.OpenProjectionRoos.OpenProjectionRoosCompletionData
 import WeilConjectures.SixFunctors.OpenTensorAugmentation.OpenTensorAugmentationLimitSquare
 
-/-! # Descent of the augmented open tensor square through completion -/
+/-! # Descent of the augmented open tensor square through completion
+
+## References
+
+* Bhatt--Scholze, Lemmas 6.5.5 and 6.5.8
+* Stacks Project, Tag 0940
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -39,21 +45,9 @@ attribute [local irreducible] integralOperationsTensorTowerFunctor
   completedIntegralCommRingSheafUnrestricted completedIntegralCoefficientSheafUnrestricted
   unrestrictedIntegralComplexFunctor scalarReductionExistence unrestrictedIntegralReductionExistence
 
-/-- The completed open tensor isomorphism and its actual augmentation square.
-Source: Bhatt--Scholze 6.5.5 and 6.5.8; Stacks 0940
-(blueprint: lem-sf-open-projection-completed-square).
-
-Proof: on flat-term K-flat representatives use q.squares to form the strict finite
-quotient square. Apply the Roos functor to its tower isomorphism and compose with
-the inverse of extension.derived. Descend by the recorded completed tensor
-comparisons; naturality of the strict square gives a natural isomorphism gamma.
-The openTensorAugmentationLimitSquare theorem identifies the two augmentations
-with the actual chi maps. Its final equality, after cancelling the invertible
-extension comparison, gives the unit square. Constructibility is preserved by
-q.integralGeometry, so constructible tensor completion makes both chi maps
-invertible. The same descent formula, before cancelling the representative
-comparisons, gives the displayed representative equation for every normalized
-strict square, including every quotient transition. -/
+/-- There is a completed open tensor isomorphism `gamma` compatible with the augmentations
+`chi` (which are invertible on constructible inputs) and satisfying the completed
+representative equation. -/
 theorem openProjectionCompletedSquare
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     [U.Over (Spec (.of D.k))] [X.Over (Spec (.of D.k))]

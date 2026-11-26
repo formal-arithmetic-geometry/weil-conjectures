@@ -11,7 +11,18 @@ import WeilConjectures.CategoryTheory.K.KInjectiveHomComparisonDescent
 
 /-! # Existence of the Hom comparison for prescribed native representatives
 
-Source: Stacks 0A95 and 08J7; native ringed tensor model, Hom comparison step.
+Prescribed natural native and ordinary product-total models admit a projection-normalized
+forgetful Hom comparison.
+
+## Implementation details
+
+The comparison is obtained from the standard-sign two-injective chain model, conjugated by the
+row-sign isomorphisms, via `kInjectiveHomComparisonDescent`; on each `(n,p,q)` projection the two
+sign factors `(-1)^(np)` cancel.
+
+## References
+
+* Stacks Project, Tags 0A95 and 08J7
 -/
 
 @[expose] public noncomputable section
@@ -77,23 +88,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- Prescribed natural native and ordinary product-total models admit a
-projection-normalized forgetful Hom comparison.
-
-Source: Stacks 0A95 and 08J7; native ringed tensor model, step 2 and Hom part of step 3.
-(blueprint: lem-sf-native-hom-representative-existence).
-
-Proof: take the existing standard-sign two-injective chain model. For each
-of the two prescribed representative systems, compose its model map with the
-inverse row-sign isomorphism. Naturality follows by conjugating the given
-representative naturality by the row-sign naturality square. Apply
-kInjectiveHomComparisonDescent to these standard representatives and the
-existing chain comparison. Conjugate the resulting representative square back
-to row signs. The chain comparison is conjugated by exactly the same two sign
-maps. On its (n,p,q) projection the two factors (-1)^(np) cancel, so that the
-projection is precisely forgetting the original native projection. Forgetting
-preserves K-injectives, supplying both required witnesses. The localization
-square retains both exact-functor factorization maps. This construction uses
-no tensor structure, and also applies to zero complexes and the empty site. -/
+projection-normalized forgetful Hom comparison. -/
 theorem native_hom_representative_exists
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]

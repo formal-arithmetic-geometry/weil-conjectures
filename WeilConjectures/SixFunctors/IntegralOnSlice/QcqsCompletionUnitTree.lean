@@ -11,8 +11,28 @@ import WeilConjectures.SixFunctors.IntegralOnSlice.QcqsCompletionUnitRestriction
 import WeilConjectures.SixFunctors.IntegralOnSlice.QcqsCompletionUnitCriterion
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
-/-! Source: Stacks Tags 099M, 09BL and 09BM; blueprint: lem-fix-qcqs-completion-unit-tree.
-This is a separately stated component of the locality argument. -/
+/-! # Detection of the completion unit along a finite open--closed tree
+
+We show that invertibility of the canonical completion unit, and hence derived completeness,
+is detected along a finite tree of open--closed decompositions. This is a separately stated
+component of the locality argument for completion units.
+
+## Implementation details
+
+The proof inducts on the number of vertex indices greater than the given vertex: a nonempty
+leaf uses cover conservativity, an empty leaf the zero category, and an internal vertex
+open--closed conservativity. Completeness follows from the canonical-unit criterion at the
+root and at the covering domains.
+
+## References
+
+* [Stacks, Tag 099M]
+* [Stacks, Tag 09AH]
+* [Stacks, Tag 09BL]
+* [Stacks, Tag 09BM]
+* [Stacks, Tag 04TQ]
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Remark 6.5.10]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -49,19 +69,7 @@ attribute [local irreducible] ordinaryPull ordinaryDerivedPull ordinaryComplexCo
   ordinaryCoefficientMap tower completion completionComparison completionUnit
 
 set_option linter.unusedVariables false in
-/-- Detection of the specified completion unit along a finite open--closed tree.
-
-Source: Stacks Tags 09AH, 09BM, 04TQ and Bhatt--Scholze Remark 6.5.10
-(blueprint: lem-fix-qcqs-completion-unit-tree).
-Proof: fix the original unit morphism. Induct on the number of vertex indices
-strictly greater than the given vertex. A nonempty leaf uses cover conservativity;
-an empty leaf uses the zero category. At an internal vertex both children have
-larger indices, and open--closed conservativity combines their conclusions. At the
-root, restriction along its isomorphism with the base reflects invertibility.
-For completeness, compare the actual unit of each covering-domain pullback with
-the image of the original unit, and apply the canonical-unit criterion at the
-root and the covering domains. The induction also includes height-zero trees
-and empty open or closed children. -/
+/-- Detection of the specified completion unit along a finite open--closed tree. -/
 theorem qcqsCompletionUnitTree
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

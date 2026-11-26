@@ -152,12 +152,10 @@ theorem nonempty_homologySheaf_derivedLowerStar_dual_iso (d : ℕ)
     (WeilComplex.homologySheaf (-i)).mapIso e⟩
 
 
-/-- **Poincaré duality for a lisse Weil sheaf, as an isomorphism of Frobenius modules**
-(blueprint `corollary-degreewise-duality-over-fields--1`, with the Frobenius equivariance of
-`theorem-poincare-duality-frobenius--3`): for `X₀` smooth, separated, of finite type and
-pure dimension `d` over `k₀`, `F` lisse and `i + j = 2d`,
-`H^j(X₀ ⊗ k̄, F^∨(d)) ≅ H_c^i(X₀ ⊗ k̄, F)^∨`, the dual carrying the inverse transpose of the
-Frobenius. Here `F^∨(d)` is the constant twist of `F^∨` by `χ_ℓ(σ)ᵈ`. -/
+/-- **Poincaré duality for a lisse Weil sheaf, as an isomorphism of Frobenius modules**:
+for `X₀` smooth, separated, of finite type and pure dimension `d` over `k₀`, `F` lisse and
+`i + j = 2d`, `H^j(X₀ ⊗ k̄, F^∨(d)) ≅ H_c^i(X₀ ⊗ k̄, F)^∨`, the dual carrying the inverse
+transpose of the Frobenius. Here `F^∨(d)` is the constant twist of `F^∨` by `χ_ℓ(σ)ᵈ`. -/
 theorem nonempty_equiv_cohomology_dual_compactlySupportedCohomology (d : ℕ)
     [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l X}
     (hF : F.IsLisse) (i j : ℤ) (h : i + j = 2 * d) :

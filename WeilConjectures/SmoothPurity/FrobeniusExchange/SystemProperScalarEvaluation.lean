@@ -11,7 +11,21 @@ import WeilConjectures.SmoothPurity.FrobeniusExchange.SystemProperScalarEvaluati
 
 /-! # Evaluation of the proper scalar mate
 
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 06YY, 07A6 and 0941.
+Evaluation takes the system direct-image scalar mate to the finite scalar transpose of the
+direct-image restriction comparison.
+
+## Implementation details
+
+The system mate is expanded as unit, inverse scalar/pullback comparison and counit; the
+evaluated unit and counit equations and `SemilinearSections.evaluation_mate` give the finite
+geometric scalar mate, whose scalar transpose is identified with the normalized direct-image
+restriction comparison by iterated mate interchange. No faithfulness of derived evaluation
+or preservation of K-injectives by scalar restriction is used.
+
+## References
+
+* W. Zheng, Construction 4.1 and Lemma 4.10
+* Stacks Project, Tags 06YY, 07A6, 0941 and 0D6E
 -/
 
 @[expose] public noncomputable section
@@ -24,8 +38,7 @@ namespace WeilConjectures.FrobeniusExchange
 open AlgebraicGeometry.Scheme.FiniteCompactScalar
 open WeilConjectures.SemilinearSections
 
-/-- The finite scalar transpose of the specified direct-image restriction comparison.
-Source: Stacks 0D6E and 07A6 (blueprint: lem-sf-system-proper-scalar-evaluation). -/
+/-- The finite scalar transpose of the specified direct-image restriction comparison. -/
 def finiteDirectScalar
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -35,8 +48,7 @@ def finiteDirectScalar
     (pbcDerivedScalarAdjunction (scalarRingMap φ Y))).symm
     (TwoSquare.mk _ _ _ _ (sfDerivedImageRestriction f φ).hom))
 
-/-- Finite evaluation of direct image by the specified geometric mate.
-Source: Zheng 4.10 (blueprint: lem-sf-system-proper-scalar-evaluation). -/
+/-- Finite evaluation of direct image by the specified geometric mate. -/
 def systemDirectFiniteEvaluation
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
@@ -70,29 +82,7 @@ private def evaluationOfMate
     exact mateEquiv_counit a b e.inv B
 
 /-- Evaluation takes the system direct-image scalar mate to the finite scalar transpose.
-This concerns arbitrary unbounded systems; it asserts no invertibility of the scalar mate.
-
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 06YY, 07A6, 0941 and 0D6E;
-step 2 of lem-sf-compact-scalar-evaluation-square.
-(blueprint: lem-sf-system-proper-scalar-evaluation).
-
-Proof: on the vertical sequence site, evaluate the ordinary inverse-image unit and
-counit against the identity-on-sections direct-image comparison. The scalar/pullback
-comparison sends 1 tensor gamma(x) to gamma(1 tensor x). Use the universal cochain
-counits to transport this equality to the fixed derived scalar models. The normalized
-scalar evaluation isomorphism is the transpose of the restriction/evaluation identity;
-the two adjoint-uniqueness comparisons in its definition preserve that transpose.
-Expand systemDirectScalar as unit, inverse scalar/pullback comparison and counit.
-The evaluated unit and counit equations, followed by evaluation_mate, give the finite
-geometric scalar mate. Iterated mate interchange identifies its scalar transpose with
-the normalized direct-image restriction comparison: on a K-injective target, resolve
-its scalar restriction and use the geometric triangle identity; the resulting map is
-the inverse of direct image of the resolution, which specifies sfDerivedImageRestriction.
-The finite scalar Hom bijection identifies the maps. Naturality carries the two scalar
-evaluation comparisons to the ends, giving the displayed equation. This is an equation
-of localized, normalized mate words; no faithfulness of derived evaluation or preservation
-of K-injectives by scalar restriction is used. The argument includes n=0, the zero
-complex, empty schemes and identity embeddings, without quotient-flatness hypotheses. -/
+This concerns arbitrary unbounded systems; it asserts no invertibility of the scalar mate. -/
 theorem systemDirectScalar_finiteEvaluation
     (l : ℕ) [Fact l.Prime]
     (E L : Type u) [Field E] [Field L]

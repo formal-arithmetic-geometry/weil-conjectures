@@ -15,8 +15,21 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Ordinary restriction for the fixed closed tensor models
 
-Source: Stacks 0E8I and 0GL1; uniqueness of tensor--Hom adjoints.
-(blueprint: lem-sf-native-ordinary-restriction-tensor).
+The comparisons are determined by uniqueness of tensor--Hom adjoints.
+
+## Implementation details
+
+The ordinary restriction/tensor comparison is constructed independently of the native open
+presentation: the normalized ordinary closed tensor theorem is applied to the fixed
+product-total Hom representatives on each scheme, giving closed structures whose monoidal
+structures are the standard ones. Left-adjoint uniqueness identifies their tensors with the
+fixed ordinary tensors, and counit naturality makes these identifications natural in both
+variables. The invertible tensorator of the exact strong monoidal pullback is transported
+along these identifications, as in `nativeOrdinaryRestrictionTensor`.
+
+## References
+
+* Stacks 0E8I, 0GL1, 08J9, 015F
 -/
 
 @[expose] public noncomputable section
@@ -125,9 +138,7 @@ private def adjointTensorIso {C : Type v} [Category.{w} C]
   simpa only [Category.assoc, Iso.app_hom] using
     congrArg (fun z ↦ z ≫ R.map (X := (Q.1, P.2)) (Y := Q) (𝟙 _, f.2)) hn
 
-/-- Identity comparison of the sliced tensor bifunctor with right tensoring.
-Source: definition of tensorRight
-(blueprint: lem-sf-native-ordinary-restriction-tensor). -/
+/-- Identity comparison of the sliced tensor bifunctor with right tensoring. -/
 def nativeOrdinaryTensorSliceIso {C : Type v} [Category.{w} C]
     (m : MonoidalCategory C) (K : C) :
     Prod.sectL C K ⋙ @MonoidalCategory.tensor C _ m ≅
@@ -166,9 +177,7 @@ private def closedTensorIsoAux {C : Type v} [Category.{w} C]
     simpa only [CoefficientClosedStructure.tensor, MonoidalCategory.tensor_map,
       MonoidalCategory.tensor_obj, tensorHom_id, id_tensorHom] using hn
 
-/-- The tensor comparison determined by uniqueness of left adjoints with fixed counit.
-Source: uniqueness of tensor--Hom adjoints, Stacks 08J9
-(blueprint: lem-sf-native-ordinary-restriction-tensor). -/
+/-- The tensor comparison determined by uniqueness of left adjoints with fixed counit. -/
 def nativeOrdinaryClosedTensorIso {C : Type v} [Category.{w} C]
     {H : Cᵒᵖ × C ⥤ C} (S T : CoefficientClosedStructure H) : S.tensor ≅ T.tensor :=
   NatIso.ofComponents (fun P ↦
@@ -183,9 +192,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)]
 
 /-- A normalization against the standard ordinary tensor, with the adjunction fixed
-by the existing product-total Hom representatives. No existence witness is selected
-by this definition. Source: Stacks 08J9 and the ordinary native tensor construction.
-(blueprint: lem-sf-native-ordinary-restriction-tensor). -/
+by the existing product-total Hom representatives. -/
 structure NativeOrdinaryTensorIdentification (X : Scheme.{u})
     [X.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
@@ -200,9 +207,7 @@ structure NativeOrdinaryTensorIdentification (X : Scheme.{u})
     (nativeDerivedClosedComparison k₀ l X).homModels.ordinaryHom
     (nativeDerivedClosedComparison k₀ l X).homModels.ordinaryRepresentatives standard symmetry
 
-/-- The adjunction-determined identification with the standard ordinary tensor.
-Source: uniqueness of left adjoints, Stacks 08J9.
-(blueprint: lem-sf-native-ordinary-restriction-tensor). -/
+/-- The adjunction-determined identification with the standard ordinary tensor. -/
 def NativeOrdinaryTensorIdentification.tensorIso {X : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
@@ -226,9 +231,7 @@ variable {U Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
 
 /-- Restriction/tensor for the fixed ordinary models, transported from the exact
-strong monoidal pullback using the adjunction-determined identifications.
-Source: Stacks 0E8I, 0GL1 and 015F.
-(blueprint: lem-sf-native-ordinary-restriction-tensor). -/
+strong monoidal pullback using the adjunction-determined identifications. -/
 def nativeOrdinaryRestrictionTensor
     (dU : NativeOrdinaryTensorIdentification k₀ l U)
     (dZ : NativeOrdinaryTensorIdentification k₀ l Z) :
@@ -264,18 +267,8 @@ def nativeOrdinaryRestrictionTensor
     Functor.isoWhiskerLeft (R.mapDerivedCategory.prod R.mapDerivedCategory)
       (dU.tensorIso k₀ l).symm
 
-/-- The ordinary comparison can be constructed independently of the native open
-presentation. Source: Stacks 0E8I and 0GL1, ordinary restriction/tensor.
-(blueprint: lem-sf-native-ordinary-restriction-tensor).
-
-Proof: apply the existing normalized ordinary closed tensor theorem to the fixed
-product-total Hom representatives on each scheme. It constructs closed structures
-whose monoidal structures are the standard ones. Left-adjoint uniqueness identifies
-their tensors with the fixed ordinary tensors; counit naturality makes these
-identifications natural in both tensor variables. Exact pullback has its canonical
-strong monoidal derived structure. Transport its invertible tensorator along these
-two identifications, as in nativeOrdinaryRestrictionTensor. This construction also
-covers empty opens and zero complexes and uses no native open comparison. -/
+/-- The ordinary restriction/tensor comparison exists, independently of the native open
+presentation. -/
 theorem native_ordinary_tensor_identifications :
     Nonempty (NativeOrdinaryTensorIdentification k₀ l U) ∧
       Nonempty (NativeOrdinaryTensorIdentification k₀ l Z) := by

@@ -6,18 +6,20 @@ Authors: Bin Wu
 module
 public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 import Mathlib.Tactic.CategoryTheory.Slice
-/-! # The projection/counit calculation with pointwise scalar comparison inverses -/
+/-! # The projection/counit calculation with pointwise scalar comparison inverses
+
+## Implementation details
+
+In `ProjectionCounitData`, only the three specified compact-support comparison components
+are inverted. The exceptional-unit map is constrained by its own counit equation; no theta
+compatibility is a field.
+-/
 @[expose] public section
 set_option autoImplicit false
 universe u
 open CategoryTheory MonoidalCategory
 
-/-- The evaluated squares used in the projection/counit calculation. Only the
-three specified compact-support comparison components are inverted. The
-exceptional-unit map is constrained by its own counit equation; no theta
-compatibility is a field.
-Source: finite-reduction proof Steps 3--4
-(blueprint: lem-pur-projection-counit-pointwise-data). -/
+/-- The evaluated squares used in the projection/counit calculation. -/
 structure ProjectionCounitData where
   C : Type (u + 1)
   D : Type (u + 1)
@@ -104,14 +106,7 @@ def t : T.QX.obj (T.U ⊗ T.W) ⟶ T.V ⊗ T.Z :=
   T.mu.hom ≫ (T.cK.hom ⊗ₘ T.w)
 end ProjectionCounitData
 
-/-- Pointwise compact-support inverses suffice for the projection/counit calculation.
-Source: finite-reduction proof Steps 3--4
-(blueprint: lem-pur-projection-counit-pointwise-data).
-Proof: naturality moves the initial symmetry past the scalar comparison. The
-inverse projection square and scalar tensor/unit equations move the projection
-and counit past reduction. Rewrite the reduced unit counit using its mate
-identity, use projection naturality at the exceptional-unit map, and use
-braiding naturality to move that map into the tensor source. -/
+/-- Pointwise compact-support inverses suffice for the projection/counit calculation. -/
 theorem projectionCounitReduction (T : ProjectionCounitData.{u}) :
     T.qC ≫ T.QY.map T.aA = T.FB.map T.t ≫ T.aB := by
   have htail :
@@ -182,8 +177,7 @@ theorem projectionCounitReduction (T : ProjectionCounitData.{u}) :
   simp only [Category.assoc]
 
 /-- Inverting the three vertical/projection maps in a forward scalar projection
-square gives the inverse projection square. Source: finite-reduction Step 3
-(blueprint: lem-pur-projection-counit-pointwise-data). -/
+square gives the inverse projection square. -/
 theorem inverseProjectionScalarSquare
     {D E F : Type*} [Category D] [Category E] [Category F]
     [MonoidalCategory F]

@@ -14,9 +14,17 @@ public import WeilConjectures.SmoothPurity.IntegralOnSlice.IntegralDerivedOperat
 
 /-! # Canonical integral tensor presentations of the completion calculus
 
-Source: Stacks 07A6, 09T5, 0D6E and 0941; canonical-model construction with
-its integral tensor fixed before constructing the ordinary and derived comparisons.
-(blueprint: lem-pur-canonical-integral-completion-models).
+Existence of ordinary and derived completion models for the canonical integral evaluation
+calculus.
+
+## Implementation details
+
+The integral tensor of the calculus is fixed before constructing the ordinary and derived
+comparisons, and no separate existential choice of a different calculus is made.
+
+## References
+
+* [Stacks: Tags 07A6, 09T5, 0D6E, 0941](https://stacks.math.columbia.edu)
 -/
 
 @[expose] public noncomputable section
@@ -30,21 +38,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-/-- Ordinary and derived completion models for the canonically presented calculus.
-Source: Stacks 07A6, 09T5, 0D6E and 0941; completion-unit canonical models.
-(blueprint: lem-pur-canonical-integral-completion-models).
-
-Proof: the global-section unit maps to a unit in every residue field. Choose the
-coherent calculus with its integral tensor fixed, then choose the ordinary model.
-Use the existing termwise-limit comparison and its actual limit projections,
-the constant-limit derived unit and its K-injective normalization, and the
-normalized Roos comparison. The derived adjunction comparison applies to this
-very calculus and coherence witness: it supplies the quotient comparison,
-left-derived universal property, K-flat invertibility, evaluation equation and
-Hom-adjunction equation. Assemble DerivedModel with these maps. Its system unit
-is the specified composite through the ordinary limit comparison, so the
-composition equation is reflexivity. The integral tensor equality is retained.
-No separate existential choice of a different calculus is made. -/
+/-- Ordinary and derived completion models for the canonically presented calculus. -/
 theorem canonicalIntegralCompletionModels (hl : IsUnit (l : Γ(W, ⊤))) :
     ∃ (S : CoefficientDerivedSystemCalculus l E W)
       (_coherence : CoefficientDerivedSystemCoherence l E W S)

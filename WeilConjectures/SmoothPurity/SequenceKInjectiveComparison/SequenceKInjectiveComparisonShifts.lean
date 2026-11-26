@@ -141,14 +141,14 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionIn
 
 /-! # Resolution-normalized comparison for the quotient sequence projection
 
-Source: Stacks 0D6E, 070I, 070K and 070Y; the coefficient-comparison paragraph of
-`fix-prop-coherence.proof.md`
-(blueprint: lem-pur-sequence-kinjective-comparison-shifts).
-
 The constant-ring factorization has exact direct image `coefficientSequenceRestriction`
 and second direct image `lim`. Thus the direct image of the supplied ringed projection
 is their composite `push`. All module categories below are the recorded actual coefficient
 categories, retaining the independent scheme and coefficient universes.
+
+## References
+
+* Stacks Project, Tags 05RU, 070H, 070I, 070K, 070Y, 0941 and 0D6E.
 -/
 
 @[expose] public noncomputable section
@@ -284,9 +284,7 @@ variable {A B C : Type*} [Category A] [Category B] [Category C]
   (F : A ⥤ B) (G : B ⥤ C) [F.Additive] [G.Additive]
   [PreservesFiniteLimits F] [PreservesFiniteColimits F]
 
-/-- Localization, followed by the supplied replacement and its K-injective limit model.
-Source: Stacks 070K and 070Y
-(blueprint: lem-pur-sequence-kinjective-comparison-shifts). -/
+/-- Localization, followed by the supplied replacement and its K-injective limit model. -/
 def comparisonIso (N : CochainComplex A ℤ)
     (J : CochainComplex B ℤ) [J.IsKInjective]
     (v : (F.mapHomologicalComplex (.up ℤ)).obj N ⟶ J) [QuasiIso v] :
@@ -296,9 +294,7 @@ def comparisonIso (N : CochainComplex A ℤ)
     G.rightDerivedFunctor.mapIso (asIso (DerivedCategory.Q.map v)) ≪≫
       G.rightDerivedFunctorObjQIso J
 
-/-- Supplied-replacement shift equation for exact restriction followed by an additive functor.
-Source: Stacks 070K and 070Y
-(blueprint: lem-pur-sequence-kinjective-comparison-shifts). -/
+/-- Supplied-replacement shift equation for exact restriction followed by an additive functor. -/
 def ReplacementShiftsFor : Prop :=
   ∀ (N : CochainComplex A ℤ) (J : CochainComplex B ℤ) [J.IsKInjective]
     (v : (F.mapHomologicalComplex (.up ℤ)).obj N ⟶ J) [QuasiIso v] (r : ℤ),
@@ -339,9 +335,7 @@ private theorem comparisonIso_shifts : ReplacementShiftsFor F G := by
 end GenericComparison
 
 attribute [local irreducible] ReplacementShiftsFor comparisonIso
-/-- Representative shift identities for two additive termwise functors.
-Source: Stacks 070H, 070I, 070K
-(blueprint: lem-pur-sequence-kinjective-comparison-shifts). -/
+/-- Representative shift identities for two additive termwise functors. -/
 def RepresentativeShiftsFor
     {A B C : Type*} [Category* A] [Category* B] [Category* C]
     [Abelian A] [Abelian B] [Abelian C]
@@ -378,9 +372,7 @@ variable {A B C : Type*} [Category A] [Category B] [Category C]
   (F : A ⥤ B) (G : B ⥤ C) [F.Additive] [G.Additive]
   [PreservesFiniteLimits F] [PreservesFiniteColimits F]
 
-/-- Transport a localized morphism through exact restriction.
-Source: Stacks 05RU
-(blueprint: lem-pur-sequence-kinjective-comparison-shifts). -/
+/-- Transport a localized morphism through exact restriction. -/
 def restrictedMapFor {N N' : CochainComplex A ℤ}
     (f : DerivedCategory.Q.obj N ⟶ DerivedCategory.Q.obj N') :
     DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj N) ⟶
@@ -388,9 +380,7 @@ def restrictedMapFor {N N' : CochainComplex A ℤ}
   F.mapDerivedCategoryFactors.inv.app N ≫ F.mapDerivedCategory.map f ≫
     F.mapDerivedCategoryFactors.hom.app N'
 
-/-- Generic Normalization predicate for an exact additive first factor.
-Source: Stacks 070I, 070K, 070Y and 0D6E
-(blueprint: lem-pur-sequence-kinjective-comparison-shifts). -/
+/-- Generic Normalization predicate for an exact additive first factor. -/
 def NormalizationFor
     (RP : DerivedCategory A ⥤ DerivedCategory (C))
     (η : (F ⋙ G).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
@@ -407,9 +397,7 @@ def NormalizationFor
         (comparisonIso F G I J j).hom =
           DerivedCategory.Q.map ((G.mapHomologicalComplex (.up ℤ)).map j)
 
-/-- Generic DerivedNaturality predicate for an exact additive first factor.
-Source: Stacks 070I, 070K, 070Y and 0D6E
-(blueprint: lem-pur-sequence-kinjective-comparison-shifts). -/
+/-- Generic DerivedNaturality predicate for an exact additive first factor. -/
 def DerivedNaturalityFor : Prop :=
   ∀ (N N' I I' : CochainComplex (A) ℤ)
     [I.IsKInjective] [I'.IsKInjective]
@@ -432,9 +420,7 @@ def DerivedNaturalityFor : Prop :=
         (comparisonIso F G N J v).hom ≫
           DerivedCategory.Q.map ((G.mapHomologicalComplex (.up ℤ)).map s)
 
-/-- Generic ResolutionCocycle predicate for an exact additive first factor.
-Source: Stacks 070I, 070K, 070Y and 0D6E
-(blueprint: lem-pur-sequence-kinjective-comparison-shifts). -/
+/-- Generic ResolutionCocycle predicate for an exact additive first factor. -/
 def ResolutionCocycleFor : Prop :=
   ∀ (N : CochainComplex (A) ℤ)
     (J₀ J₁ J₂ : CochainComplex B ℤ)
@@ -456,9 +442,7 @@ def ResolutionCocycleFor : Prop :=
           DerivedCategory.Q.map ((G.mapHomologicalComplex (.up ℤ)).map s₀₂) ∧
       DerivedCategory.Q.map ((G.mapHomologicalComplex (.up ℤ)).map s₀₀) = 𝟙 _
 
-/-- Generic SystemResolutionCocycle predicate for an exact additive first factor.
-Source: Stacks 070I, 070K, 070Y and 0D6E
-(blueprint: lem-pur-sequence-kinjective-comparison-shifts). -/
+/-- Generic SystemResolutionCocycle predicate for an exact additive first factor. -/
 def SystemResolutionCocycleFor : Prop :=
   ∀ (N I₀ I₁ I₂ : CochainComplex (A) ℤ)
     [I₀.IsKInjective] [I₁.IsKInjective] [I₂.IsKInjective]
@@ -480,14 +464,12 @@ end GenericProperties
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- The actual termwise scalar restriction on cochain complexes.
-Source: Stacks 0941 (blueprint: lem-pur-sequence-kinjective-comparison-shifts). -/
+/-- The actual termwise scalar restriction on cochain complexes. -/
 def restrict : CochainComplex (coefficientSequenceModules l E W) ℤ ⥤
     CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ :=
   (coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)
 
-/-- Termwise inverse limit of the recorded constant-coefficient towers.
-Source: Stacks 0941 (blueprint: lem-pur-sequence-kinjective-comparison-shifts). -/
+/-- Termwise inverse limit of the recorded constant-coefficient towers. -/
 def limitComplex : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ ⥤
     CochainComplex (scalarReductionSource l E W) ℤ :=
   Functor.mapHomologicalComplex
@@ -495,31 +477,23 @@ def limitComplex : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) �
 
 /-- The ordinary module direct image of the quotient projection, factored through `cA`.
 Its first factor changes only scalars along the completion projections; the second
-forms the actual limit cone. This fixes `a_* = U`, `g_* = lim`, and `p_* = g_* a_*`.
-Source: Stacks 0D6E, 0941
-(blueprint: lem-pur-sequence-kinjective-comparison-shifts). -/
+forms the actual limit cone. This fixes `a_* = U`, `g_* = lim`, and `p_* = g_* a_*`. -/
 def push : coefficientSequenceModules l E W ⥤ scalarReductionSource l E W :=
   coefficientSequenceRestriction l E W ⋙
   (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W)
 
-/-- The factored direct image is additive.
-Source: Stacks 0941
-(blueprint: lem-pur-sequence-kinjective-comparison-shifts). -/
+/-- The factored direct image is additive. -/
 instance push_additive : (push l E W).Additive :=
   inferInstanceAs ((coefficientSequenceRestriction l E W ⋙
     (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W)).Additive)
 
-/-- The fixed exact-localization comparison for restriction, without choosing resolutions.
-Source: Stacks 05RU, 0941
-(blueprint: lem-pur-sequence-kinjective-comparison-shifts). -/
+/-- The fixed exact-localization comparison for restriction, without choosing resolutions. -/
 def restrictionFactors :
     DerivedCategory.Q ⋙ coefficientSequenceDerivedRestriction l E W ≅
       restrict l E W ⋙ DerivedCategory.Q :=
   (coefficientSequenceRestriction l E W).mapDerivedCategoryFactors
 
-/-- The canonical comparison to total inverse limit on every tower complex.
-Source: Stacks 070K, 070Y
-(blueprint: lem-pur-sequence-kinjective-comparison-shifts). -/
+/-- The canonical comparison to total inverse limit on every tower complex. -/
 def limitUnit (J : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) :
     DerivedCategory.Q.obj ((limitComplex l E W).obj J) ⟶
       (coefficientConstantTowerLimit l E W).obj (DerivedCategory.Q.obj J) :=
@@ -528,8 +502,7 @@ def limitUnit (J : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) �
 
 attribute [local irreducible] restrictionFactors limitUnit
 
-/-- Transport an arbitrary derived morphism through the exact localization comparison.
-Source: Stacks 05RU (blueprint: lem-pur-sequence-kinjective-comparison-shifts). -/
+/-- Transport an arbitrary derived morphism through the exact localization comparison. -/
 def restrictedMap {N N' : CochainComplex (coefficientSequenceModules l E W) ℤ}
     (f : DerivedCategory.Q.obj N ⟶ DerivedCategory.Q.obj N') :
     DerivedCategory.Q.obj ((restrict l E W).obj N) ⟶
@@ -540,8 +513,7 @@ def restrictedMap {N N' : CochainComplex (coefficientSequenceModules l E W) ℤ}
 
 attribute [local irreducible] restrictedMap
 
-/-- The composite total limit has the standard coherent cochain shifts.
-Source: Stacks 070K (blueprint: lem-pur-sequence-kinjective-comparison-shifts). -/
+/-- The composite total limit has the standard coherent cochain shifts. -/
 instance totalLimitCommShift : (coefficientSequenceLimit l E W).CommShift ℤ :=
   inferInstanceAs (((coefficientSequenceRestriction l E W).mapDerivedCategory ⋙
     Functor.rightDerivedFunctor
@@ -550,9 +522,7 @@ instance totalLimitCommShift : (coefficientSequenceLimit l E W).CommShift ℤ :=
 attribute [local irreducible] NormalizationFor
   DerivedNaturalityFor ResolutionCocycleFor SystemResolutionCocycleFor
 
-/-- The normalization of the natural comparison at every K-injective system.
-Source: Stacks 0D6E and 070Y
-(blueprint: lem-pur-sequence-kinjective-comparison-shifts). -/
+/-- The normalization of the natural comparison at every K-injective system. -/
 def Normalization
     (RP : coefficientSequenceDerived l E W ⥤ DerivedCategory (scalarReductionSource l E W))
     (η : (push l E W).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶

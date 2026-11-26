@@ -13,8 +13,17 @@ public import Mathlib.RingTheory.Spectrum.Prime.RingHom
 /-!
 # The induced map on completions of prime localizations
 
-Source: Stacks Project, Algebra, the natural map in Lemma Tag 07NC
-(blueprint: lem-weil-pbc-completion-local-map-at-prime).
+For a prime `q` of `S` over `p` in `R`, the local map `R_p → S_q` induces a map of completions
+at the maximal ideals.
+
+## Implementation details
+
+The map is obtained from `AdicCompletion.liftRingHom` applied to the induced maps on the
+quotients by powers of the maximal ideals. No finiteness hypothesis is needed.
+
+## References
+
+* [Stacks, Tag 07NC], the natural map
 -/
 
 @[expose] public section
@@ -23,18 +32,8 @@ universe u v
 
 namespace Algebra
 
-/-- The local map on completions at a prime, with its levelwise formula.
-Source: Stacks Project, Algebra, the natural map in Lemma Tag 07NC
-(blueprint: lem-weil-pbc-completion-local-map-at-prime).
-
-Proof: the local homomorphism sends the source maximal ideal into the target
-maximal ideal, and therefore sends every power into the corresponding power.
-It induces maps on the quotients by these powers. Their composites with the
-source completion evaluations form a compatible family, since all reduction
-maps send the class of an element to its class at the lower level.
-`AdicCompletion.liftRingHom` takes the inverse limit of this family;
-`AdicCompletion.evalₐ_liftRingHom` gives the required formula. No finiteness or
-quasi-finiteness hypothesis is needed. -/
+/-- The local map `R_p → S_q` induces a ring map on completions at the maximal ideals,
+compatible with the local map at every finite level. -/
 theorem exists_completion_map_atPrime
     (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     (q : PrimeSpectrum S) :

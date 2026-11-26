@@ -12,24 +12,25 @@ import WeilConjectures.RingTheory.N2AscendsFiniteDomainExtension
 /-!
 # A Nagata domain is Japanese
 
-Source: Stacks Project, Algebra, Definition Tag 032R and Proposition Tag 0334,
-implication (2) to (3), applied to the zero prime
-(blueprint: lem-weil-pbc-nagata-domain-n2).
+A Nagata domain is N-2 (Japanese).
+
+## Implementation details
+
+The Nagata hypothesis applied to the zero prime makes `S/(0)` N-2, and N-2 ascends along the
+isomorphism `S/(0) ≃ S`, viewed as a finite extension of domains (Stacks 032I).
+
+## References
+
+* [Stacks, Tag 032R]
+* [Stacks, Tag 0334] ((2) implies (3))
+* [Stacks, Tag 032I]
 -/
 
 @[expose] public section
 
 universe u
 
-/-- A Nagata domain is N-2.
-
-Source: Stacks Project, Algebra, Definition Tag 032R and Proposition Tag 0334,
-implication (2) to (3) (blueprint: lem-weil-pbc-nagata-domain-n2).
-
-Proof: The zero ideal is prime. The Nagata hypothesis makes its quotient N-2.
-The quotient is isomorphic to the original domain. Regard that isomorphism as
-an injective finite algebra map and apply ascent of N-2 along a finite domain
-extension (Tag 032I). Noetherianity comes from the Nagata hypothesis. -/
+/-- A Nagata domain is N-2. -/
 theorem isN2_of_isNagataRing_domain (S : Type u) [CommRing S] [IsDomain S]
     (hS : IsNagataRing S) : IsN2 S (FractionRing S) := by
   let e := RingEquiv.quotientBot S

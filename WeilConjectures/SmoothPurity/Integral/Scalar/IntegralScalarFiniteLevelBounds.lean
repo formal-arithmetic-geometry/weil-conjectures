@@ -13,8 +13,9 @@ import Mathlib.Data.Int.Interval
 
 /-! # Uniform constructibility of finite scalar tensor levels
 
-Source: Bhatt--Scholze, Proposition 3.5.1; integral scalar constructibility proof.
-(blueprint: lem-sf-integral-scalar-finite-level-bounds).
+## References
+
+* B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, Proposition 3.5.1
 -/
 
 @[expose] public section
@@ -29,23 +30,7 @@ variable (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
   (ι : E →ₐ[Padic l] L) (Y : AlgebraicGeometry.Scheme.{u})
 
-/-- Finite scalar tensor levels have the same constructibility interval as the residue level.
-Source: Bhatt--Scholze, Proposition 3.5.1; the finite filtration argument in
-lem-weil-integral-scalar-extension-constructible, steps 1, 3--5.
-(blueprint: lem-sf-integral-scalar-finite-level-bounds).
-Proof: factor the completed source map to the target residue field through the source
-residue field. Balanced tensor associativity identifies the target residue complex
-with finite field extension of the source residue complex. Finite field scalar extension
-is exact and preserves constructibility, with the same cohomological interval. For
-exponent n+1 filter the target quotient by its uniformizer ideals. Each successive
-quotient is its residue field. Regard its finite constant models as modules over the
-target quotient. Flatness of every term of P gives short exact tensor sequences for
-this filtration. The filtered coefficient tensor bounds theorem gives constructibility
-and the same interval at every target level. The balanced associators identify its
-complexes with integralScalarFiniteComplex. The argument uses only the source residue
-reduction; neither source completeness nor bounds on the higher source reductions are
-assumed. At n=0 it is precisely finite residue field extension; the zero complex and
-empty scheme obey the same argument. -/
+/-- Finite scalar tensor levels have the same constructibility interval as the residue level. -/
 theorem integralScalarFiniteLevel_bounds
     (P : (integralOperationsGoodComplex l E Y).FullSubcategory)
     (r s : ℤ) (hrs : r ≤ s)

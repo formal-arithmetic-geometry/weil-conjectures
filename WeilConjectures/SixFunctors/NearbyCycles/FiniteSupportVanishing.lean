@@ -30,8 +30,7 @@ form for morphisms (the cone of a morphism) is
 `NearbyCyclesModel.isIso_of_isIso_leftDerivedUpperStar_finsetComplOpens_map`.
 
 The bounded constructible `ℚ̄_ℓ` case is
-`ProEtale.CondensedRing.isZero_of_isZero_upperStar_finsetComplOpens` (blueprint
-`lemma-finite-support-global-sections--1`).
+`ProEtale.CondensedRing.isZero_of_isZero_upperStar_finsetComplOpens`.
 
 ## Proof
 
@@ -44,6 +43,10 @@ separably closed point is conservative
 (`ProEtale.CondensedRing.isIso_of_isIso_map_rightDerivedLowerStar_of_isFinite`: on the finite
 discrete scheme `Z`, a module is the direct sum of the pushforwards from its points, and the
 pushforward between separably closed points is an equivalence), so `Li^* C = 0` and `C = 0`.
+
+## References
+
+* [SGA 4½], [Th. finitude], proof of 3.7.
 -/
 
 @[expose] public section
@@ -172,8 +175,8 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {X X' : Scheme.{u}} {M : NearbyCyclesModel X X'} {q : M.total ⟶ Spec (.of R)}
   [LocallyOfFiniteType q] {p : X' ⟶ Spec (.of κ)}
 
-/-- **The finite-support criterion on the special fibre of a model** (SGA 4½, [Th. finitude],
-proof of 3.7): let `M` be a model locally of finite type over `Spec R` along `q`, whose special
+/-- **The finite-support criterion on the special fibre of a model**: let `M` be a model
+locally of finite type over `Spec R` along `q`, whose special
 fibre `p : X' ⟶ Spec κ` is the base change of `q` along `b : R ⟶ κ`, `κ` separably closed (for
 instance the residue field of a strictly henselian trait). A complex `C` of `Λ`-modules on the
 special fibre `X'` which vanishes away from a finite set `S` of closed points and has no

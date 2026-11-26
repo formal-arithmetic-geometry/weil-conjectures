@@ -14,7 +14,19 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 
 /-! # The prescribed ordinary quotient reduction presentation
 
-Source: Stacks 0941 and 06YY; the normalized coherent reduction model.
+We show that the ordinary quotient complex of a representative, with its fixed
+reduction-model and ordinary evaluation isomorphisms, is a coherent reduction presentation.
+
+## Implementation details
+
+The reduction-model component is transposed under the reduction/limit adjunction and then
+under the finite scalar-extension/restriction adjunction; uniqueness of adjoints gives the
+coefficient comparison and transition equations. No replacement complex or new representative
+is chosen.
+
+## References
+
+* Stacks Project, Tags 06YY, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -341,25 +353,7 @@ private theorem ordinaryComplex_unit (Y : Scheme.{u})
   rfl
 
 /-- The actual ordinary quotient complex, with its fixed reduction-model and
-ordinary evaluation isomorphisms, is a coherent reduction presentation.
-Source: Stacks 0941 and 06YY; the adjunction normalizations of
-pullbackTensorReductionModel_existsUnique and pullbackTensorReductionEvaluation_existsUnique
-(blueprint: lem-pur-completed-quotient-reduction-presentation).
-
-Proof: transpose the fixed reduction-model component under the reduction/limit
-adjunction. Its defining equation is the localization of the ordinary quotient
-unit followed by the canonical total-limit comparison. Project to level n and
-transpose under the finite scalar-extension/restriction adjunction. The ordinary
-evaluation comparison is normalized by exactly this projected ordinary unit.
-The finite K-flat reduction comparison is likewise normalized by this unit;
-uniqueness of adjoints gives the CoefficientComparisonEquation. For m >= n,
-transpose the two composites of the ordinary evaluation isomorphisms with the
-quotient transition under the ordinary extension/restriction adjunction. Both
-are the same ordinary quotient unit followed by the quotient map. Injectivity
-of the Hom equivalence gives the CoefficientTransitionEquation; applying the
-cochain-complex functors preserves the equality. No replacement complex or
-new representative is chosen. The argument applies to zero complexes, n=0
-(the exponent-one quotient), and m=n, where the quotient map is the identity. -/
+ordinary evaluation isomorphisms, is a coherent reduction presentation. -/
 theorem completedQuotientReductionPresentation
     (Y : Scheme.{u})
     (P : (integralOperationsGoodComplex l E Y).FullSubcategory) :

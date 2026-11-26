@@ -40,8 +40,11 @@ import Mathlib.CategoryTheory.Adjunction.Evaluation
 
 /-! # K-injective resolutions for completed towers
 
-Source: Stacks Project, Cohomology on Sites, Tags 0A07 and 0D6E.
-(blueprint: lem-pur-completed-coefficient-tower-limit-acyclic-resolution).
+Existence of K-injective resolutions of pushed-forward complexes of towers of modules.
+
+## References
+
+* [Stacks Project, Tags 0A07 and 0D6E](https://stacks.math.columbia.edu/tag/0A07)
 -/
 
 @[expose] public noncomputable section
@@ -63,11 +66,8 @@ local instance {X Y : Scheme.{t}} (f : X ⟶ Y)
     ((Functor.whiskeringRight ℕᵒᵖ _ _).obj (push f c)).PreservesZeroMorphisms :=
   inferInstance
 
-/-- A K-injective resolution exists for every completed tower complex used here.
-This is the Grothendieck-module resolution step in the proof of Stacks Tags 0A07
-and 0D6E.
-(blueprint: lem-pur-completed-coefficient-tower-limit-acyclic-resolution)
--/
+/-- The pushforward along `f` of a complex of towers of modules admits a quasi-isomorphism to
+a K-injective complex. -/
 theorem completedTower_exists_isKInjective {X Y : Scheme.{t}} (f : X ⟶ Y)
     (c : R l E Y ⟶ (ringPush.{t, u} f).obj (R l E X))
     (I : CochainComplex (ℕᵒᵖ ⥤ Mod X (R l E X)) ℤ) :

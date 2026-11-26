@@ -14,9 +14,12 @@ import Mathlib.CategoryTheory.Yoneda
 
 /-! # Objectwise trace splitting for rational scalar extension
 
-Source: Bhatt--Scholze, Proposition 6.8.14(2), Remark 6.8.15;
-finite-free trace coordinates.
-(blueprint: new-sf-rational-scalar-extension-counit-objectwise-split)
+The counit of the restriction--extension adjunction splits objectwise, via finite-free trace
+coordinates.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.14(2), Remark 6.8.15.
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -181,16 +184,7 @@ private theorem integral_restriction_retract
 
 /-- The counit of the restriction--extension adjunction is split at every rational
 E-object. The splitting is induced by a trace-dual basis of the finite separable
-coefficient extension and is the objectwise part of the conservativity argument.
-
-Proof: choose an E-basis of F and its trace-dual basis. On complete integral
-representatives, send an E-vector to the finite sum of the basis tensors with
-its dual-basis coefficients. The trace identity says that composing with the
-restriction--extension counit is the identity. Clear one common denominator in
-this finite sum, then pass through the finite-free completed comparison and the
-raw localization. The resulting localized morphism is the required section;
-its equation is preserved by the comparison isomorphisms.
-(blueprint: new-sf-rational-scalar-extension-counit-objectwise-split). -/
+coefficient extension. -/
 theorem rationalScalarExtension_counit_objectwise_split
     (l : ℕ) [Fact l.Prime]
     (E F : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

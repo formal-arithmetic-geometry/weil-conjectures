@@ -14,8 +14,20 @@ import WeilConjectures.Topology.ModuleObjectOpenDescent
 /-!
 # Glueing morphisms and sheaves of modules along an open covering
 
-Source: Stacks Project, Sheaves, Section 00AK, Lemmas 04TN, 00AL and 00AM
-(blueprint: lem-weil-pbc-glue-sheaves-of-modules).
+Morphisms of sheaves of modules glue along an open covering, and sheaves of modules glue along
+an open covering given glueing isomorphisms satisfying the cocycle condition.
+
+## Implementation details
+
+Restrictions to an open `U` use the localized site `Over U`, whose objects are precisely the
+opens `W ≤ U`, and restrictions of modules use `SheafOfModules.overMap`. Agreement on overlaps
+is expressed at every such open `W`, so no choices of comparison isomorphisms for iterated
+restriction enter the statement. The glued sheaf has as sections over `W` the compatible
+families in the product of the `Fᵢ(W ∩ Uᵢ)`.
+
+## References
+
+* [Stacks Project, Tags 04TN, 00AL, 00AM](https://stacks.math.columbia.edu/tag/00AK)
 -/
 
 @[expose] public section
@@ -155,28 +167,10 @@ private theorem module_hom_gluing_exists
   rw [show a j (W.unop.left ⊓ U j) inf_le_right =
       a i (W.unop.left ⊓ U j) (inf_le_left.trans W.unop.hom.le) from hφ j i _ _ _]
 
-/-- Glueing morphisms and sheaves of modules on an open cover.
-Restrictions to `U` use the localized site `Over U`: its objects are precisely the
-opens `W ≤ U`. Restrictions of local modules use `SheafOfModules.overMap`.
-Equality of maps on overlaps is expressed at every such open `W`, so no choices
-of comparison isomorphisms for iterated restriction enter the statement.
-
-Source: Stacks Project, Sheaves, Section 00AK, Lemmas 04TN, 00AL and 00AM
-(blueprint: lem-weil-pbc-glue-sheaves-of-modules).
-Proof (using situation-conventions throughout):
-1. For `s ∈ F(W)`, glue the sections `φᵢ(s|W ∩ Uᵢ)` in `G` using overlap agreement.
-2. Check naturality, additivity and O-linearity after restriction to `W ∩ Uᵢ`;
-   separation of `G` makes these local identities global.
-3. At `W ≤ Uᵢ` this construction equals `φᵢ`; uniqueness of glued sections proves
-   uniqueness of the morphism and the stated equality criterion for two morphisms.
-4. The cocycle gives `φᵢᵢ = id`. Define `H(W)` as compatible families in the product
-   of `Fᵢ(W ∩ Uᵢ)`. Linearity makes this an O(W)-submodule; restriction is componentwise.
-5. Glue families componentwise using each `Fᵢ`'s sheaf axiom; separation checks overlap
-   compatibility and uniqueness, giving the sheaf axiom for `H`.
-6. On `W ≤ Uᵢ`, projection to component `i` is a linear isomorphism: all other
-   components are recovered by `φᵢⱼ` from that component, and the cocycle ensures
-   these recovered components agree. These maps and inverses commute with restriction.
-7. The defining equations of compatible families give `φᵢ ≫ φᵢⱼ = φⱼ` on overlaps. -/
+/-- Glueing morphisms and sheaves of modules on an open cover: local morphisms agreeing on
+overlaps glue uniquely, morphisms are determined by their restrictions, and local sheaves of
+modules with glueing isomorphisms satisfying the cocycle condition glue to a sheaf of modules
+restricting to the given ones. -/
 theorem glue_sheaves_of_modules
     (X : RingedSpace.{u}) (I : Type w) (U : I → Opens X)
     (hcover : ⨆ i, U i = ⊤) :

@@ -23,9 +23,22 @@ import all WeilConjectures.RingTheory.PseudoCoherentNilpotentInvariance
 /-!
 # Pseudo-coherent reconstruction over a tower of nilpotent quotients
 
-Source: Stacks Project, More on Algebra, Tag 0CQF,
-lemma-Rlim-pseudo-coherent-gives-pseudo-coherent
-(auxiliary; not a blueprint node).
+The compatible finite-free models used in the reconstruction of a pseudo-coherent object over a
+tower of nilpotent quotients, with all chain-level compatibility clauses.
+
+## Implementation details
+
+Marked finite-free lifting is applied inductively across each nilpotent quotient, preserving
+one common upper cutoff and the transition marking. Compatible bases are lifted degree by
+degree, so all terms become coordinatewise finite free and every transition is coordinate
+reduction. The termwise inverse-limit complex and its projections are identified with the
+supplied derived limit by the surjective tower limit theorem. Bounded-flat K-flatness, derived
+change of rings and the normalized coefficient adjunction give the projection and transition
+comparison equations.
+
+## References
+
+* [Stacks, Tag 0CQF]
 -/
 
 @[expose] public section
@@ -1257,18 +1270,7 @@ private theorem reconstruction_transition_compatible
 
 include R φ hsurj hnil A q hq hlim L adjφ M adjq χ hχ Eₙ t hred hpc E pE δ hE
 
-/-- The compatible finite-free models and all chain-level compatibility clauses.
-Source: Stacks Project, More on Algebra, Tag 0CQF.
-(auxiliary; not a blueprint node).
-
-Proof plan: inductively apply marked finite-free lifting across each nilpotent quotient, preserving
-one common upper cutoff and the transition marking. Lift compatible bases degree by degree, so
-all terms become coordinatewise finite free and every transition is coordinate reduction. Form
-the termwise inverse-limit complex and use the surjective tower limit theorem to identify its
-localized object and projections with the supplied derived limit. Finally apply bounded-flat
-K-flatness, derived change of rings, and the normalized coefficient adjunction to establish the
-projection and transition comparison equations.
--/
+/-- The compatible finite-free models and all chain-level compatibility clauses. -/
 theorem reconstruction_models :
     ∃ (Pₙ : ∀ n, CochainComplex (ModuleCat.{max u v} (R n)) ℤ)
       (b : ℤ) (βₙ : ∀ n, Q.obj (Pₙ n) ≅ Eₙ n)

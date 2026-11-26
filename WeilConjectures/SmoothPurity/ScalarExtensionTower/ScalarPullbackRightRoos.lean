@@ -10,8 +10,12 @@ import WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarPullbackRightRoos
 
 /-! # Fixed cochain coordinates for the scalar/pullback calculation
 
-Source: Stacks 06YY, 07A4 and 0941. The coordinates are constructed from the
-ordinary scalar/pullback chain map and a coherent quotient presentation.
+The coordinates are constructed from the ordinary scalar/pullback chain map and a coherent
+quotient presentation.
+
+## References
+
+* Stacks Project, Tags 06YY, 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -29,27 +33,7 @@ variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E
   (ι : E →ₐ[ℚ_[l]] L)
 
 /-- Compute the route using pullback normalization for E and scalar normalization
-at X. There is no scalar model at Y or pullback realization with coefficients L.
-Source: Stacks 06YY, 07A4, 0941; the right route in realization step 8 of
-lem-pur-scalar-extension-tower-coherence.
-(blueprint: stage3-pur-scalar-pullback-right-roos).
-
-Proof: first use the E-pullback normalization on C to identify its realization
-with the actual strict pullback quotient tower. Transpose through the reduction
-adjunction: its coherent counit is precisely pullbackReduction. Resolve this
-pulled object by a flat-term K-flat representative and compare its quotient
-presentation with the pulled presentation using their whole-system tensor-unit
-transposes. Apply SX.normalization on this representative. Naturality of the
-scalar cochain counit and of the Roos bridge cancels the resolution comparison.
-The scalar/pullback system isomorphism is localized from the strict scalar/unit
-association, so its defining cochain equation identifies the output with the
-pulled scalar tower. On the nested unit generators q is the same association;
-scalarPullbackLevel and its quotient transitions therefore give its strict map.
-The zero shifted completion coordinate and scalarRoosMap give exactly
-scalarPullbackChain after applying Roos. The scalar completion normalization
-then gives the source inverse in scalarPullbackRoosChain. Naturality along eP
-transports the result back to K. This calculation involves only SX and the
-E-pullback model, and retains entire-system coherence before passing to limits. -/
+at X. There is no scalar model at Y or pullback realization with coefficients L. -/
 theorem scalarPullbackRightRoos (W : Bool → Scheme.{u})
     (ME : CompletedOperations.Models.{u, u} l E W)
     (ρ : IntegralComparisonRoosModel.{u, u} l L (W true))

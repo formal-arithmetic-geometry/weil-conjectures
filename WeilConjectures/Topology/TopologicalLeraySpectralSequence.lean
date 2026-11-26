@@ -19,13 +19,20 @@ import WeilConjectures.Topology.TopologicalLerayBottomRealization
 
 /-! # Leray spectral sequence for a continuous map of spaces
 
-Source: Stacks Project, Cohomology, Lemma 01F2 (cohomology-lemma-Leray),
-specialized to abelian sheaves concentrated in degree zero; Section 01DZ;
-Derived Categories, Lemma 015N (blueprint: lem-sc-topological-leray-spectral-sequence).
+The first-quadrant Leray spectral sequence `E₂^{a,b} = H^a(X, R^b f_* F) ⇒ H^{a+b}(Z, F)` of a
+continuous map `f : Z ⟶ X`, with its canonical bottom edge.
+
+## Implementation details
 
 The spectral sequence lives in the abelian category of functors from abelian sheaves
 on the source to abelian groups. Thus its differentials, page identifications, filtration
-subobjects, graded isomorphisms and edge maps are all natural in the sheaf.
+subobjects, graded isomorphisms and edge maps are all natural in the sheaf. It is the
+Grothendieck spectral sequence for direct image followed by global sections: direct image
+preserves injectives, which are acyclic for global sections.
+
+## References
+
+* [Stacks Project, Tags 01F2, 01DZ and 015N](https://stacks.math.columbia.edu/tag/01F2)
 -/
 
 @[expose] public section
@@ -36,12 +43,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 
 namespace CategoryTheory
 
-/-- Direct image of abelian sheaves is additive, being precomposition on sections.
-Source: Stacks Project, Cohomology, Section 01DZ and Lemma 01F2
-(blueprint: lem-sc-topological-leray-spectral-sequence).
-
-Proof: Direct image evaluates a sheaf on inverse-image opens. Addition of sheaf morphisms
-is sectionwise, so precomposition preserves addition. -/
+/-- Direct image of abelian sheaves is additive, being precomposition on sections. -/
 theorem topological_pushforwardAb_additive {Z X : TopCat.{u}} (f : Z ⟶ X) :
     (TopCat.Sheaf.pushforwardAb f).Additive := by
   constructor
@@ -52,8 +54,6 @@ theorem topological_pushforwardAb_additive {Z X : TopCat.{u}} (f : Z ⟶ X) :
 attribute [instance] topological_pushforwardAb_additive
 
 /-- The functorial first-quadrant Leray spectral sequence, including its canonical bottom edge.
-Source: Stacks Project, Cohomology, Lemma 01F2 (cohomology-lemma-Leray), Section 01DZ,
-and Derived Categories, Lemma 015N (blueprint: lem-sc-topological-leray-spectral-sequence).
 
 `HX` and `HZ` are identified by equality with the recorded cohomology functors evaluated
 at the terminal opens (their values are `Sheaf.H'`). They are not arbitrary abutments.
@@ -62,25 +62,7 @@ sequence's own page isomorphism. Its iterates `b` start with the identity on pag
 The isomorphism `k` identifies the stable bottom term with the final nonzero filtration step,
 compatibly with the graded quotient `g`. The resulting map `edge` is characterized on
 injective-resolution cocycles using the canonical map `a` of free abelian terminal sheaves.
-This is precisely the map induced by `f`, with no acyclicity hypothesis on the sheaf.
-
-Proof:
-1. Abelian sheaves on Z and X have enough injectives and form Grothendieck abelian categories
-   (def-sc-topological-abelian-cohomology, prop-pur-kinjective-resolutions-exist). Direct image
-   is left exact and additive, and global sections computes H by right derivation
-   (def-sp-left-exact-additive).
-2. Direct image preserves injectives (lem-sc-topological-pushforward-injective). These are
-   global-sections-acyclic (lemma-weil-pbc-leray-acyclicity, def-sp-acyclic), giving the
-   composable-pair hypothesis (def-sp-composite-acyclicity).
-3. Apply thm-sp-grothendieck: the second page is H^a(X,R^b f_*F). The composite of direct
-   image and global sections is global sections on Z, giving the abutment H^n(Z,F).
-4. The double-complex construction (thm-sp-double-complex-spectral-sequences) gives the
-   pages and homology identifications (def-sp-spectral-sequence), stabilization, and the
-   finite decreasing filtration (def-sp-filtration). All are natural in F. On the bottom
-   row the outgoing differential is zero; quotient by incoming boundaries gives each
-   transition. Their composite reaches the stable term and then the abutment filtration.
-   The injective-resolution comparison sends the same global cocycle to Z, proving that
-   this bottom edge is the map induced by f. -/
+This is precisely the map induced by `f`, with no acyclicity hypothesis on the sheaf. -/
 theorem exists_topological_leray_spectralSequence {Z X : TopCat.{u}} (f : Z ⟶ X) :
     ∃ HX : ℕ → (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u}),
       ∃ HZ : ℕ → (Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u}),

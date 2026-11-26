@@ -10,8 +10,7 @@ import WeilConjectures.SixFunctors.Compact.CompactSupportQuotientOutputIdentity
 
 /-! # Original presentation of the output quotient identity
 
-Source: the current blueprint finite-level coefficient comparison
-(blueprint: lem-coef-compact-support-quotient-raw-output-identity).
+We restate the transported identity law with exactly the original compact-support expressions.
 -/
 
 @[expose] public noncomputable section
@@ -76,11 +75,7 @@ private theorem rawIdentity_resId {X Y : Scheme.{u}} {f : X ⟶ Y}
       (Padic.coefficientExtensionRing l E (n + 1)))
   exact eq_of_heq (rawIdentity_app_heq (compactSupportQuotientResId l E Y n).hom he)
 
-/-- The transported identity with exactly the original compact-support expressions.
-Source: identity coefficient normalization and functoriality
-(blueprint: lem-coef-compact-support-quotient-raw-output-identity).
-Proof: rewrite the intrinsic functor to its identical ambient presentation, and
-apply the proved output identity. Every quotient wrapper retains its actual value. -/
+/-- The transported identity with exactly the original compact-support expressions. -/
 theorem compactSupportQuotient_raw_output_identity
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (K : DerivedCategory (scalarReductionSource.{u, u} l E X))

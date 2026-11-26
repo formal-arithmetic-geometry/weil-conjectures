@@ -62,8 +62,7 @@ abbrev nativeRingedTensorObjData (P Q : ProEtaleWeilSheaf k₀ l X) :=
   (SheafOfModules.monoidalCategory b.R).tensorObj (b.native.functor.obj Q)
     (b.native.functor.obj P)
 
-/-- The underived comparison and its evaluation normalization.
-Source: Stacks 06YS and 06YU (blueprint: lem-sf-native-weil-tensor-ringed-underived-data). -/
+/-- The underived comparison and its evaluation normalization. -/
 structure NativeWeilRingedTensorUnderivedData where
   underived (P Q : ProEtaleWeilSheaf k₀ l X) :
     b.native.functor.obj ((T.obj P).obj Q) ≅ nativeRingedTensorObjData b P Q
@@ -80,16 +79,7 @@ structure NativeWeilRingedTensorUnderivedData where
             (b.native.functor.map f ≫ b.nativeHom.hom.app (op P, I))
 
 set_option linter.unusedSectionVars false in
-/-- The underived comparison fixed by the native and ringed tensor-Hom adjunctions.
-Source: Stacks 06YS and 06YU; the uniqueness-of-left-adjoints step in the native
-tensor model proof (blueprint: lem-sf-native-weil-tensor-ringed-underived-data).
-
-Proof: transport the native parameter adjunction through the additive equivalence
-`b.native`, compare its right adjoint with the sheaf tensor-Hom adjunction by
-`b.nativeHom`, and use uniqueness of left adjoints.  The counit identity is the
-displayed uncurrying equation; naturality in the parameter gives the required
-two-variable comparison.  The construction is independent of all derived data.
--/
+/-- The underived comparison fixed by the native and ringed tensor-Hom adjunctions. -/
 theorem native_weil_tensor_ringed_underived_data :
     Nonempty (NativeWeilRingedTensorUnderivedData b T adj) := by
   classical
