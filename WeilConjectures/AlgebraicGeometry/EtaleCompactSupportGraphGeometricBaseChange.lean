@@ -456,10 +456,14 @@ private noncomputable def clopenUpperStarLowerShriekAdjunction :
 
 attribute [local irreducible] clopenUpperStarLowerShriekAdjunction
 
-omit [HasSmallSiteSheafify Λ] in
+omit [HasSmallSiteSheafify Λ] [MonoidalCategory Λ] [MonoidalPreadditive Λ]
+    [SymmetricCategory Λ] [MonoidalClosed Λ] [Abelian.HasFunctorialFlatResolution Λ] in
 /-- The counit of `Lσ^* ⊣ Dσ_!` is the inverse of the unit of `Dσ_! ⊣ Lσ^*`. -/
 @[reassoc (attr := simp)]
 private lemma unit_app_clopenUpperStarLowerShriekAdjunction_counit_app
+    [HasSmallSiteSheafify Λ] [MonoidalCategory Λ] [MonoidalPreadditive Λ] [SymmetricCategory Λ]
+    [MonoidalClosed Λ] [Abelian.HasFunctorialFlatResolution Λ]
+    {X W : Scheme.{u}} (σ : X ⟶ W) [IsOpenImmersion σ] [IsClosedImmersion σ]
     (S : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (Λ))) :
     (graphOpenAdjunction Λ σ).unit.app S ≫
       (clopenUpperStarLowerShriekAdjunction Λ σ).counit.app S = 𝟙 S := by
@@ -483,9 +487,13 @@ private lemma unit_app_clopenUpperStarLowerShriekAdjunction_counit_app
       (sheafClopenAdjunction Λ σ).mapDerivedCategoryAdjunction
       (leftDerivedUpperStarIsoMapDerivedCategory (Λ) σ) hd S
 
-omit [HasSmallSiteSheafify Λ] in
+omit [HasSmallSiteSheafify Λ] [MonoidalCategory Λ] [MonoidalPreadditive Λ]
+    [SymmetricCategory Λ] [MonoidalClosed Λ] [Abelian.HasFunctorialFlatResolution Λ] in
 /-- The counit of `Lσ^* ⊣ Dσ_!` is the inverse of the unit of `Dσ_! ⊣ Lσ^*`. -/
 private lemma clopenUpperStarLowerShriekAdjunction_counit_app
+    [HasSmallSiteSheafify Λ] [MonoidalCategory Λ] [MonoidalPreadditive Λ] [SymmetricCategory Λ]
+    [MonoidalClosed Λ] [Abelian.HasFunctorialFlatResolution Λ]
+    {X W : Scheme.{u}} (σ : X ⟶ W) [IsOpenImmersion σ] [IsClosedImmersion σ]
     (S : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (Λ))) :
     (clopenUpperStarLowerShriekAdjunction Λ σ).counit.app S =
       inv ((graphOpenAdjunction Λ σ).unit.app S) := by
@@ -493,9 +501,13 @@ private lemma clopenUpperStarLowerShriekAdjunction_counit_app
     unit_app_clopenUpperStarLowerShriekAdjunction_counit_app, IsIso.hom_inv_id]
   rfl
 
-omit [HasSmallSiteSheafify Λ] in
+omit [HasSmallSiteSheafify Λ] [MonoidalCategory Λ] [MonoidalPreadditive Λ]
+    [SymmetricCategory Λ] [MonoidalClosed Λ] [Abelian.HasFunctorialFlatResolution Λ] in
 /-- `Lσ^*` of the unit of `Lσ^* ⊣ Dσ_!` is the unit of `Dσ_! ⊣ Lσ^*`. -/
 private lemma leftDerivedUpperStar_map_clopenUpperStarLowerShriekAdjunction_unit_app
+    [HasSmallSiteSheafify Λ] [MonoidalCategory Λ] [MonoidalPreadditive Λ] [SymmetricCategory Λ]
+    [MonoidalClosed Λ] [Abelian.HasFunctorialFlatResolution Λ]
+    {X W : Scheme.{u}} (σ : X ⟶ W) [IsOpenImmersion σ] [IsClosedImmersion σ]
     (T : _root_.DerivedCategory (Sheaf W.smallEtaleTopology (Λ))) :
     L((σ)^*[Λ]).map ((clopenUpperStarLowerShriekAdjunction Λ σ).unit.app T) =
       (graphOpenAdjunction Λ σ).unit.app
@@ -522,9 +534,13 @@ private noncomputable def clopenTransfer
 
 attribute [local irreducible] clopenTransfer
 
-omit [HasSmallSiteSheafify Λ] in
+omit [HasSmallSiteSheafify Λ] [MonoidalCategory Λ] [MonoidalPreadditive Λ]
+    [SymmetricCategory Λ] [MonoidalClosed Λ] [Abelian.HasFunctorialFlatResolution Λ] in
 /-- `clopenTransfer` is natural in both variables. -/
 private lemma clopenTransfer_comp
+    [HasSmallSiteSheafify Λ] [MonoidalCategory Λ] [MonoidalPreadditive Λ] [SymmetricCategory Λ]
+    [MonoidalClosed Λ] [Abelian.HasFunctorialFlatResolution Λ]
+    {X W : Scheme.{u}} (σ : X ⟶ W) [IsOpenImmersion σ] [IsClosedImmersion σ]
     {T₀ T₁ T₂ T₃ : _root_.DerivedCategory (Sheaf W.smallEtaleTopology (Λ))}
     (a : T₀ ⟶ T₁)
     (ψ : L((σ)^*[Λ]).obj T₁ ⟶ L((σ)^*[Λ]).obj T₂)
@@ -818,8 +834,13 @@ section Unfold
 variable {X Y : Scheme.{u}} (e : X ⟶ Y) [_root_.AlgebraicGeometry.Etale e]
   (c : Compactification e)
 
-omit [_root_.AlgebraicGeometry.Etale e] [HasSmallSiteSheafify Λ] in
+omit [_root_.AlgebraicGeometry.Etale e] [HasSmallSiteSheafify Λ] [MonoidalCategory Λ]
+    [MonoidalPreadditive Λ] [SymmetricCategory Λ] [MonoidalClosed Λ]
+    [Abelian.HasFunctorialFlatResolution Λ] in
 private lemma compactificationEtaleGraphIso_hom_app
+    [HasSmallSiteSheafify Λ] [MonoidalCategory Λ] [MonoidalPreadditive Λ] [SymmetricCategory Λ]
+    [MonoidalClosed Λ] [Abelian.HasFunctorialFlatResolution Λ]
+    {X Y : Scheme.{u}} (e : X ⟶ Y) (c : Compactification e)
     (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (Λ))) :
     have : IsOpenImmersion c.i := c.isOpenImmersion
     (compactificationEtaleGraphIso Λ e c).hom.app N =
@@ -836,8 +857,12 @@ private lemma compactificationEtaleGraphIso_hom_app
     (leftDerivedUpperStarComp Λ c.graphExchangeSection (pullback.fst c.g e) c.i
       c.graphExchangeSection_fst.symm) N
 
-omit [HasSmallSiteSheafify Λ] in
+omit [HasSmallSiteSheafify Λ] [MonoidalCategory Λ] [MonoidalPreadditive Λ]
+    [SymmetricCategory Λ] [MonoidalClosed Λ] [Abelian.HasFunctorialFlatResolution Λ] in
 private lemma compactificationEtaleGraphMap_app
+    [HasSmallSiteSheafify Λ] [MonoidalCategory Λ] [MonoidalPreadditive Λ] [SymmetricCategory Λ]
+    [MonoidalClosed Λ] [Abelian.HasFunctorialFlatResolution Λ]
+    {X Y : Scheme.{u}} (e : X ⟶ Y) [_root_.AlgebraicGeometry.Etale e] (c : Compactification e)
     (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (Λ))) :
     (compactificationEtaleGraphMap Λ e c).app N =
       clopenTransfer Λ ((compactificationEtaleGraphIso Λ e c).hom.app N) :=
@@ -1350,10 +1375,12 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A]
 private noncomputable abbrev sectionMap : U ⟶ pullback c.g f :=
   c.graphExchangeSection
 omit [Etale f] [IsSeparated f] in
-private theorem section_fst : sectionMap f c ≫ pullback.fst c.g f = c.i :=
+private theorem section_fst [Etale f] [IsSeparated f] (c : Compactification f) :
+    sectionMap f c ≫ pullback.fst c.g f = c.i :=
   pullback.lift_fst _ _ _
 omit [Etale f] [IsSeparated f] in
-private theorem section_snd : sectionMap f c ≫ pullback.snd c.g f = 𝟙 U :=
+private theorem section_snd [Etale f] [IsSeparated f] (c : Compactification f) :
+    sectionMap f c ≫ pullback.snd c.g f = 𝟙 U :=
   pullback.lift_snd _ _ _
 private noncomputable def sectionIso :
     upperStar (A) (pullback.snd c.g f) ⋙
@@ -1399,6 +1426,9 @@ attribute [local irreducible] transfer
 omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
     [Abelian.HasFunctorialFlatResolution A] [IsSeparated f] in
 private theorem transfer_formula
+    [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+    [Abelian.HasFunctorialFlatResolution A] {U X : Scheme.{u}} (f : U ⟶ X) [Etale f]
+    [IsSeparated f] (c : Compactification f)
     (M : Sheaf U.smallEtaleTopology (A)) :
     (transfer A f c).app M =
       (projection A f c).app M ≫
@@ -1422,6 +1452,9 @@ attribute [local irreducible] clopenAdjunction
 omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
     [Abelian.HasFunctorialFlatResolution A] [IsSeparated f] in
 private theorem projection_formula
+    [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+    [Abelian.HasFunctorialFlatResolution A] {U X : Scheme.{u}} (f : U ⟶ X) [Etale f]
+    [IsSeparated f] (c : Compactification f)
     (M : Sheaf U.smallEtaleTopology (A)) :
     (projection A f c).app M =
       (clopenAdjunction A f c).unit.app _ ≫
@@ -1441,6 +1474,9 @@ private theorem projection_formula
 omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
     [Abelian.HasFunctorialFlatResolution A] [IsSeparated f] in
 private theorem transfer_clopen
+    [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+    [Abelian.HasFunctorialFlatResolution A] {U X : Scheme.{u}} (f : U ⟶ X) [Etale f]
+    [IsSeparated f] (c : Compactification f)
     (M : Sheaf U.smallEtaleTopology (A)) :
     (transfer A f c).app M =
       (clopenAdjunction A f c).unit.app _ ≫
@@ -1472,7 +1508,8 @@ attribute [local irreducible] delta
   etaleLowerShriek
   openImmersionLowerShriek
 omit [IsSeparated f] in
-private theorem transfer_eq (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) :
+private theorem transfer_eq [IsSeparated f] (c : Compactification f)
+    (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     (transfer (ModuleCat.{u + 1} A) f c).app M =
       ((etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A)
         (pullback.fst c.g f) inferInstance).homEquiv _ _)
@@ -1670,8 +1707,11 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A]
   [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A]
   [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
-omit [HasSmallSiteSheafify A] in
+omit [HasSmallSiteSheafify A] [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A]
+    [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A] in
 private theorem clopenTransfer_fac
+    [HasSmallSiteSheafify A] [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A]
+    [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
     {X W : Scheme.{u}} (s : X ⟶ W) [IsOpenImmersion s] [IsClosedImmersion s]
     (M N : HomotopyCategory (Sheaf W.smallEtaleTopology A) (.up ℤ))
     {T₁ T₂ : _root_.DerivedCategory (Sheaf W.smallEtaleTopology A)}

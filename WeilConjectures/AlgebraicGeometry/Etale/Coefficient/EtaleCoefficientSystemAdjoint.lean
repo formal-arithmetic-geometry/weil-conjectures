@@ -193,8 +193,6 @@ private theorem brownFiniteAmplitude
   obtain ⟨r, hr⟩ := ht
   exact ⟨r, fun z ↦ by rw [hr, zero_mul]⟩
 
--- Removing deprecated `TwoSquare.natTrans` would change the statement text.
-set_option linter.deprecated false in
 private theorem brownFiniteQuotient
     (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     {X Y : Scheme.{u}}
@@ -217,7 +215,7 @@ private theorem brownFiniteQuotient
         Etale.scalarExtension a Y ≅ Etale.scalarExtension a X ⋙
           Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} B) c,
       q.hom = Etale.compactScalarMap a c ∧
-        IsIso (mateEquiv aa ab (.mk _ _ _ _ q.inv)).natTrans := by
+        IsIso (mateEquiv aa ab (.mk _ _ _ _ q.inv)) := by
   obtain ⟨q, hq, r, _, rho, _, _, b, hb, _⟩ :=
     Etale.etaleCoefficientQuotientNormalization D l hl f c A B
       (by simpa only [Nat.cast_pow] using ha)
@@ -239,8 +237,6 @@ private theorem brownInverseWord {C : Type*} [Category C]
   simp only [Category.assoc, Iso.hom_inv_id_assoc, Category.comp_id,
     Iso.hom_inv_id]
 
--- Removing deprecated `TwoSquare.natTrans` would change the statement text.
-set_option linter.deprecated false in
 private theorem brownCubeMate_isIso
     {A B C D A' B' C' D' : Type*}
     [Category A] [Category B] [Category C] [Category D]
@@ -258,10 +254,10 @@ private theorem brownCubeMate_isIso
     (hc : ∀ X : A,
       K'.map (pG.inv.app X) ≫ pK.inv.app (G.obj X) ≫ d.map (θ.app X) =
         θ'.app (a.obj X) ≫ H'.map (pF.inv.app X) ≫ pH.inv.app (F.obj X))
-    (hF : IsIso (mateEquiv adj adj' (.mk _ _ _ _ pF.inv)).natTrans)
-    (hK : IsIso (mateEquiv adjK adjK' (.mk _ _ _ _ pK.inv)).natTrans)
-    (hθ : IsIso (mateEquiv adj' adjK' (.mk _ _ _ _ θ')).natTrans) :
-    IsIso (mateEquiv adj adjK (.mk _ _ _ _ θ)).natTrans := by
+    (hF : IsIso (mateEquiv adj adj' (.mk _ _ _ _ pF.inv)))
+    (hK : IsIso (mateEquiv adjK adjK' (.mk _ _ _ _ pK.inv)))
+    (hθ : IsIso (mateEquiv adj' adjK' (.mk _ _ _ _ θ'))) :
+    IsIso (mateEquiv adj adjK (.mk _ _ _ _ θ)) := by
   have hFapp (M : B) : IsIso ((mateEquiv adj adj'
       (.mk _ _ _ _ pF.inv)).app M) := NatIso.isIso_app_of_isIso _ M
   have hKapp (M : D) : IsIso ((mateEquiv adjK adjK'

@@ -593,12 +593,23 @@ noncomputable def toSheafAlgebraHomResolution :
 
 section
 
-variable [HasDerivedCategory.{wB} (SheafOfModules.{u}
+variable (hB : B.toModule.IsQuasicoherent)
+  [HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y)
+      (forget₂ CommRingCat RingCat)).obj Y.sheaf))]
+  [HasDerivedCategory.{wB} (SheafOfModules.{u}
     ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat RingCat)).obj B.right))]
 
+omit [HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y)
+      (forget₂ CommRingCat RingCat)).obj Y.sheaf))]
+  [HasDerivedCategory.{wB} (SheafOfModules.{u}
+    ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat RingCat)).obj B.right))] in
 /-- The resolution followed by termwise algebra-valued Hom inverts quasi-isomorphisms
 after localization in D(B) (Stacks, Tags 0BV0 and 0A95). -/
-theorem sheafAlgebraHomResolution_inverts :
+theorem sheafAlgebraHomResolution_inverts
+    [HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y)
+      (forget₂ CommRingCat RingCat)).obj Y.sheaf))]
+    [HasDerivedCategory.{wB} (SheafOfModules.{u}
+      ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat RingCat)).obj B.right))] :
     (HomologicalComplex.quasiIso (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y)
       (forget₂ CommRingCat RingCat)).obj Y.sheaf))
       (ComplexShape.up ℤ)).IsInvertedBy

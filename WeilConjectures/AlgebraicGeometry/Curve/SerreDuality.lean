@@ -216,7 +216,8 @@ over `k` and `t ∈ k(X)` transcendental over `k`. Then there is a morphism `π_
 The local rings of `X` are discrete valuation rings or fields (`valuationRing_stalk`), so by the
 valuative criterion for the proper `ℙ¹_k` this point extends over every point of `X`
 (`exists_hom_of_valuationRing_stalk`). -/
-theorem exists_hom_projectiveLine_of_functionField [IsIntegral X] (t : X.functionField)
+theorem exists_hom_projectiveLine_of_functionField [IsProper (X ↘ Spec (.of k))] [IsIntegral X]
+    (t : X.functionField)
     (_ht : letI := (functionFieldRingHom k X).toAlgebra; Transcendental k t) :
     ∃ π : X ⟶ ProjectiveLine (Spec (.of k)), π.IsOver (Spec (.of k)) ∧
       ∀ hs, X.fromSpecFunctionField ≫ π = ProjectiveSpace.homOfSections
@@ -769,14 +770,15 @@ theorem _root_.MvPolynomial.isMaximal_span_X_of_unique {K : Type*} [Field K] {σ
   rw [h]
   infer_instance
 
-omit [IsProper (X ↘ Spec (.of k))] in
+omit [IsProper (X ↘ Spec (.of k))] [IsAlgClosed k] in
 /-- **Degree of pullbacks of divisors.** Let `π : X ⟶ Y` be a finite flat morphism of proper
 smooth integral curves over an algebraically closed field `k`, of degree `d`, so that `π_* 𝒪_X`
 is locally free of rank `d`. Let `y` be a closed point of `Y` with uniformizer `t`, a section on
 an open `V ∋ y` whose germ generates the maximal ideal of `𝒪_{Y,y}`. Then the pullback divisor
 `π^*[y] = ∑_{π(x) = y} v_x(π^* t) [x]` has degree `d`. By linearity `deg π^* D = d · deg D` for
 every divisor `D` on `Y`. -/
-theorem finsum_ord_eq_finrank [IsIntegral X] [IsLocallyNoetherian X] {Y : Scheme.{u}}
+theorem finsum_ord_eq_finrank [IsProper (X ↘ Spec (.of k))] [IsAlgClosed k] [IsIntegral X]
+    [IsLocallyNoetherian X] {Y : Scheme.{u}}
     [Y.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (Y ↘ Spec (.of k))]
     [IsProper (Y ↘ Spec (.of k))] [IsIntegral Y] (π : X ⟶ Y) [π.IsOver (Spec (.of k))]
     [IsFinite π] [Flat π] {y : Y} (hy : IsClosed {y}) {V : Y.Opens} (hyV : y ∈ V)
@@ -950,7 +952,6 @@ theorem finsum_ord_eq_finrank [IsIntegral X] [IsLocallyNoetherian X] {Y : Scheme
       Ideal.map_span, Set.image_singleton, Scheme.Hom.germ_stalkMap_apply]
   rw [Ideal.ramificationIdx_eq_ord p q.1 _ hs]
 
-omit [IsProper (X ↘ Spec (.of k))] in
 /-- **The order of a rational function along a chart of `ℙ¹`.** Let `π : X ⟶ ℙ¹_k` be finite
 flat, and let `χ : Spec k[T] ⟶ ℙ¹_k` be an open immersion through which the generic point
 `Spec k(X) ⟶ ℙ¹_k` of `π` factors as `Spec` of `T ↦ u`. Then at the point `y = χ(T = 0)` the

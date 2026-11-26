@@ -235,7 +235,8 @@ theorem etaleHorizontalDoubleCounit :
   rw [Equiv.symm_apply_apply, Adjunction.homEquiv_counit]
   exact hs.symm
 
-omit [IsSeparated h] [IsSeparated h'] [LocallyOfFiniteType h] [LocallyOfFiniteType h'] in
+-- Omitting the unused section instances would change the signature.
+set_option linter.unusedSectionVars false in
 /-- The explicit formula rho inverse, inverse first conjugate compositor, second
 conjugate compositor, and rho. A common right adjoint for the equal composites is
 arbitrary, and both occurrences use the same adjunction. -/

@@ -62,24 +62,26 @@ variable (A : Type (u + 1)) [CommRing A]
   {U X : Scheme.{u}} (f : U ⟶ X) [Etale f] [IsSeparated f] (c : Compactification f)
 private noncomputable abbrev sectionMap : U ⟶ pullback c.g f :=
   pullback.lift c.i (𝟙 U) (by simpa using c.comm.symm)
-omit [IsSeparated f] in
-private theorem section_open : IsOpenImmersion (sectionMap f c) := by
+omit [IsSeparated f] c in
+private theorem section_open [IsSeparated f] (c : Compactification f) :
+    IsOpenImmersion (sectionMap f c) := by
   have : IsOpenImmersion (sectionMap f c ≫ pullback.fst c.g f) := by
     simpa only [sectionMap, pullback.lift_fst] using
       (inferInstance : IsOpenImmersion c.i)
   exact FormallyUnramified.isOpenImmersion_of_comp (pullback.fst c.g f) (sectionMap f c)
 attribute [local instance] section_open
 
-omit [Etale f] [IsSeparated f] in
-private theorem section_closed : IsClosedImmersion (sectionMap f c) := by
+omit [Etale f] [IsSeparated f] c in
+private theorem section_closed [Etale f] [IsSeparated f] (c : Compactification f) :
+    IsClosedImmersion (sectionMap f c) := by
   have : IsClosedImmersion (sectionMap f c ≫ pullback.snd c.g f) := by
     simpa only [sectionMap, pullback.lift_snd] using
       (inferInstance : IsClosedImmersion (𝟙 U))
   exact IsClosedImmersion.of_comp (sectionMap f c) (pullback.snd c.g f)
 attribute [local instance] section_closed
 
-omit [IsSeparated f] in
-private theorem section_comparison_iso :
+omit [IsSeparated f] c in
+private theorem section_comparison_iso [IsSeparated f] (c : Compactification f) :
     IsIso (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) (sectionMap f c)) :=
   isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range _ _
     (sectionMap f c).isClosedEmbedding.isClosed_range
@@ -128,8 +130,8 @@ private noncomputable def transfer :
     erw [(composition A f c).hom.naturality]
     simp only [Functor.map_comp]
 attribute [local irreducible] transfer
-omit [IsSeparated f] in
-private theorem transfer_formula
+omit [IsSeparated f] c in
+private theorem transfer_formula [IsSeparated f] (c : Compactification f)
     (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     (transfer A f c).app M =
       (projection A f c).app M ≫
@@ -173,8 +175,8 @@ private theorem transfer_formula
     (upperStarComp (ModuleCat.{u + 1} A) (sectionMap f c) (pullback.fst c.g f) c.i
       (pullback.lift_fst c.i (𝟙 U) (by simpa using c.comm.symm)).symm) M
   simpa only [composition, transfer] using congrArg (fun z => (projection A f c).app M ≫ z) hv
-omit [IsSeparated f] in
-private theorem transfer_toLowerStar
+omit [IsSeparated f] c in
+private theorem transfer_toLowerStar [IsSeparated f] (c : Compactification f)
     (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     (transfer A f c).app M ≫
         (upperStar (ModuleCat.{u + 1} A) (pullback.fst c.g f)).map
@@ -211,8 +213,8 @@ private theorem transfer_toLowerStar
       (pullback.lift_fst c.i (𝟙 U) (by simpa using c.comm.symm)).symm).hom.naturality]
   rw [reassoc_of% hunit]
 
-omit [IsSeparated f] in
-private theorem comparison_at_restriction
+omit [IsSeparated f] c in
+private theorem comparison_at_restriction [IsSeparated f] (c : Compactification f)
     (N : Sheaf (pullback c.g f).smallEtaleTopology (ModuleCat.{u + 1} A)) :
     (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) (sectionMap f c)).app
         ((upperStar (ModuleCat.{u + 1} A) (sectionMap f c)).obj N) =
@@ -227,8 +229,8 @@ private theorem comparison_at_restriction
   exact (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A)
     (sectionMap f c)).left_triangle_components N |>.symm
 
-omit [IsSeparated f] in
-private theorem section_extension_zero
+omit [IsSeparated f] c in
+private theorem section_extension_zero [IsSeparated f] (c : Compactification f)
     (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))
     (B : (pullback c.g f).Etale)
     (h : IsEmpty ((MorphismProperty.Over.pullback @Etale ⊤ (sectionMap f c)).obj B).left) :
@@ -246,8 +248,8 @@ private theorem section_extension_zero
         HasZeroObject.zeroIsTerminal)
   exact hz.of_iso (ev.mapIso e)
 
-omit [IsSeparated f] in
-private theorem transfer_toLowerStar_postunit
+omit [IsSeparated f] c in
+private theorem transfer_toLowerStar_postunit [IsSeparated f] (c : Compactification f)
     (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     (transfer A f c).app M ≫
         (upperStar (ModuleCat.{u + 1} A) (pullback.fst c.g f)).map
@@ -283,8 +285,9 @@ private noncomputable def delta :
   (etaleLowerShriekBaseChangeIso A (IsPullback.of_hasPullback c.g f)).hom ≫
     Functor.whiskerRight (projection A f c) _ ≫ (composition A f c).hom
 attribute [local irreducible] delta
-omit [IsSeparated f] in
-private theorem transfer_eq (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) :
+omit [IsSeparated f] c in
+private theorem transfer_eq [IsSeparated f] (c : Compactification f)
+    (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     (transfer A f c).app M =
       ((etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A)
         (pullback.fst c.g f) inferInstance).homEquiv _ _)
@@ -377,8 +380,8 @@ private noncomputable def normalizedTransfer
         (ModuleCat.{u + 1} A) c.i).app M)
 attribute [local irreducible] normalizedTransfer
 
-omit [IsSeparated f] in
-private theorem siteBC_iso :
+omit [IsSeparated f] c in
+private theorem siteBC_iso [IsSeparated f] (c : Compactification f) :
     IsIso (MorphismProperty.Over.pullbackMapComparison
       (inferInstance : Etale f) (inferInstance : Etale (pullback.fst c.g f))
         (IsPullback.of_hasPullback c.g f).toCommSq.flip) :=
@@ -408,8 +411,8 @@ private noncomputable def graphTestMap' (W : U.Etale) :
       (MorphismProperty.Over.map ⊤
         (inferInstance : Etale (pullback.fst c.g f))).map (graphTestMap f c W)
 
-omit [IsSeparated f] in
-private theorem graphTestMap_geometry (W : U.Etale) :
+omit [IsSeparated f] c in
+private theorem graphTestMap_geometry [IsSeparated f] (c : Compactification f) (W : U.Etale) :
     Scheme.Etale.graph f W ≫
       (MorphismProperty.Over.pullbackComp c.i c.g f c.comm).hom.app
         ((MorphismProperty.Over.map ⊤ (inferInstance : Etale f)).obj W) ≫
@@ -434,8 +437,8 @@ private theorem graphTestMap_geometry (W : U.Etale) :
         MorphismProperty.Over.pullbackMapComparison_app_left, sectionMap]
   · simp [graphTestMap', graphTestMap, testObject, Scheme.Etale.graph_left]
 
-omit [IsSeparated f] in
-private theorem transfer_restriction
+omit [IsSeparated f] c in
+private theorem transfer_restriction [IsSeparated f] (c : Compactification f)
     (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     (upperStar (ModuleCat.{u + 1} A) (sectionMap f c)).map
       ((transfer A f c).app M ≫
@@ -457,8 +460,8 @@ private theorem transfer_restriction
           ((openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) c.i).app M))
   exact hn.symm.trans (transfer_toLowerStar_postunit A f c M)
 
-omit [IsSeparated f] in
-private theorem normalizedTransfer_restriction
+omit [IsSeparated f] c in
+private theorem normalizedTransfer_restriction [IsSeparated f] (c : Compactification f)
     (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     (localizationRestriction (ModuleCat.{u + 1} A) (sectionMap f c) inferInstance).map
         (normalizedTransfer A f c M) =
@@ -503,8 +506,8 @@ private theorem normalizedTransfer_restriction
     IsIso.inv_hom_id_assoc] at he'
   rw [reassoc_of% he']
 
-omit [IsSeparated f] in
-private theorem restrictionBC_iso :
+omit [IsSeparated f] c in
+private theorem restrictionBC_iso [IsSeparated f] (c : Compactification f) :
     IsIso (localizationRestrictionBaseChangeMap (ModuleCat.{u + 1} A)
       (IsPullback.of_hasPullback c.g f).toCommSq.flip) :=
   isIso_localizationRestrictionBaseChangeMap_of_isPullback
@@ -512,8 +515,8 @@ private theorem restrictionBC_iso :
 
 attribute [local instance] restrictionBC_iso
 
-omit [IsSeparated f] in
-private theorem restrictionBC_inv_app
+omit [IsSeparated f] c in
+private theorem restrictionBC_inv_app [IsSeparated f] (c : Compactification f)
     (N : Sheaf c.Z.smallEtaleTopology (ModuleCat.{u + 1} A)) (W : U.Etaleᵒᵖ) :
     (inv ((localizationRestrictionBaseChangeMap (ModuleCat.{u + 1} A)
       (IsPullback.of_hasPullback c.g f).toCommSq.flip).app N)).hom.app W =
@@ -541,8 +544,8 @@ private theorem restrictionBC_inv_app
 
 attribute [local irreducible] upperStarLowerStarAdjunction
 
-omit [IsSeparated f] in
-private theorem graph_unit
+omit [IsSeparated f] c in
+private theorem graph_unit [IsSeparated f] (c : Compactification f)
     (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (W : U.Etale) :
     ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} A)
       (pullback.snd c.g f)).unit.app M).hom.app (op W) ≫
@@ -621,8 +624,8 @@ private theorem graph_unit
     ← op_comp, Quiver.Hom.unop_op, ha] at hh'
   exact hh'.symm
 
-omit [IsSeparated f] in
-private theorem normalizedTransfer_graph
+omit [IsSeparated f] c in
+private theorem normalizedTransfer_graph [IsSeparated f] (c : Compactification f)
     (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (W : U.Etale) :
     ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} A)
       (pullback.snd c.g f)).unit.app M).hom.app (op W) ≫
@@ -680,8 +683,9 @@ private noncomputable def toTest (W : U.Etale) :
       (IsPullback.of_hasPullback c.g f).toCommSq.flip).app W))).left ≫
   pullback.fst ((testObject f c W).hom ≫ pullback.fst c.g f) c.i
 
-omit [IsSeparated f] in
-private theorem toTest_open (W : U.Etale) : IsOpenImmersion (toTest f c W) := by
+omit [IsSeparated f] c in
+private theorem toTest_open [IsSeparated f] (c : Compactification f)
+    (W : U.Etale) : IsOpenImmersion (toTest f c W) := by
   unfold toTest
   infer_instance
 
@@ -689,8 +693,8 @@ attribute [local instance] toTest_open
 
 attribute [local irreducible] toTest
 
-omit [IsSeparated f] in
-private theorem toTest_fst (W : U.Etale) :
+omit [IsSeparated f] c in
+private theorem toTest_fst [IsSeparated f] (c : Compactification f) (W : U.Etale) :
     toTest f c W ≫ pullback.fst W.hom (pullback.snd c.g f) =
       pullback.fst (W.hom ≫ f) f := by
   let b := (MorphismProperty.Over.pullbackMapComparison
@@ -714,8 +718,8 @@ private theorem toTest_fst (W : U.Etale) :
   erw [pullback.lift_fst, Category.comp_id]
   rfl
 
-omit [IsSeparated f] in
-private theorem toTest_base (W : U.Etale) :
+omit [IsSeparated f] c in
+private theorem toTest_base [IsSeparated f] (c : Compactification f) (W : U.Etale) :
     toTest f c W ≫ (testObject f c W).hom ≫ pullback.fst c.g f =
       pullback.snd (W.hom ≫ f) f ≫ c.i := by
   unfold toTest
