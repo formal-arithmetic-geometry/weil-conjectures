@@ -464,7 +464,6 @@ private theorem constructible_hom_continuity
       (show CompactSpace X ∧ QuasiSeparatedSpace X from
         ⟨inferInstance, inferInstance⟩)] using h
 
-set_option linter.unusedSectionVars false in
 /-- Ext continuity out of an integral constructible complex over a Noetherian scheme.
 The base field of `integralExtHomContinuous` only makes the scheme Noetherian. -/
 theorem integralExtHomContinuous_of_isNoetherian

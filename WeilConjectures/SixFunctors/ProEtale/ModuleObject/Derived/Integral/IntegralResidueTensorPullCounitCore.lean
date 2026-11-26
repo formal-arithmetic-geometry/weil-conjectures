@@ -105,7 +105,6 @@ attribute [local instance 20000] Functor.tensorModelDerivedMonoidal
   Functor.tensorModelHomotopyMonoidal
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.mapDerivedCategory
 set_option backward.isDefEq.respectTransparency false in
-set_option linter.unusedVariables false in
 /-- The coefficient-adjusted tensor model composite factors through the inverse of
 its X tensor presentation. This is strictly weaker than
 the full tensor-pull counit identity. -/

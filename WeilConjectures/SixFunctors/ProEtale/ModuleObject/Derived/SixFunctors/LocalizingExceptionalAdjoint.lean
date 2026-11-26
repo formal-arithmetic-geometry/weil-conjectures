@@ -170,7 +170,6 @@ noncomputable instance localizingLowerShriekCommShift (c : Compactification f)
     ((localizingClosureProEtale Λ X).ι ⋙ rightDerivedLowerShriekOfCompactification Λ c)
     (fun K ↦ h K.obj K.property)).CommShift ℤ)
 
-set_option linter.unusedVariables false in
 /-- The compactification lower shriek on localizing closures has an exact right adjoint,
 unique up to the unique counit-compatible isomorphism, and that adjoint preserves all small
 coproducts. The base field has finite ℓ-cohomological dimension `hcd`. -/
@@ -191,8 +190,8 @@ theorem exists_localizingExceptionalAdjoint
           ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K))
       (hX : (localizingClosureProEtale Λ X).IsTriangulated)
       (hY : (localizingClosureProEtale Λ Y).IsTriangulated),
-      (fun [triX : (localizingClosureProEtale Λ X).IsTriangulated]
-          [triY : (localizingClosureProEtale Λ Y).IsTriangulated] ↦
+      (fun [_triX : (localizingClosureProEtale Λ X).IsTriangulated]
+          [_triY : (localizingClosureProEtale Λ Y).IsTriangulated] ↦
         (localizingLowerShriek Λ c.obj.obj h).IsTriangulated ∧
         Nonempty (HasCoproducts.{u + 1} (localizingClosureProEtale Λ X).FullSubcategory) ∧
         Nonempty (HasCoproducts.{u + 1} (localizingClosureProEtale Λ Y).FullSubcategory) ∧
@@ -201,7 +200,7 @@ theorem exists_localizingExceptionalAdjoint
         ∃ G : (localizingClosureProEtale Λ Y).FullSubcategory ⥤
             (localizingClosureProEtale Λ X).FullSubcategory,
           ∃ s : G.CommShift ℤ,
-            (fun [comm : G.CommShift ℤ] ↦
+            (fun [_comm : G.CommShift ℤ] ↦
               G.IsTriangulated ∧
               (∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I) G) ∧
               ∃ adj : localizingLowerShriek Λ c.obj.obj h ⊣ G,
@@ -211,8 +210,8 @@ theorem exists_localizingExceptionalAdjoint
                   ∃! e : G ≅ J, ∀ N,
                     (localizingLowerShriek Λ c.obj.obj h).map (e.hom.app N) ≫
                       adjJ.counit.app N = adj.counit.app N)
-              (comm := s))
-        (triX := hX) (triY := hY) := by
+              (_comm := s))
+        (_triX := hX) (_triY := hY) := by
   classical
   let hBX := brownHypotheses ℓ (ringChar k) (Fact.out : (ringChar k).Prime).pos
     (Fact.out : ringChar k ≠ ℓ) hcd (X ↘ Spec (.of k)) Λ _hΛ
