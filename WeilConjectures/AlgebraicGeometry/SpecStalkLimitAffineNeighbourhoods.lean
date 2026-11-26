@@ -32,7 +32,6 @@ namespace AlgebraicGeometry.Scheme
 
 set_option autoImplicit false
 
-set_option linter.unusedVariables false in
 /-- Affine neighbourhoods are cofinal and directed, their inclusion maps form an inverse
 system with affine transitions and qcqs objects, and `Spec O_{X,x}` is its limit. -/
 theorem fromSpecStalk_limit_affine_neighbourhoods (X : Scheme.{u}) (x : X) :
@@ -50,7 +49,7 @@ theorem fromSpecStalk_limit_affine_neighbourhoods (X : Scheme.{u}) (x : X) :
       CompactSpace W.1.toScheme ∧ QuasiSeparatedSpace W.1.toScheme) ∧
     (∀ (W V : {W : X.Opens // IsAffineOpen W ∧ x ∈ W}) (hVW : V.1 ≤ W.1),
       IsOpenImmersion (X.homOfLE hVW) ∧ IsAffineHom (X.homOfLE hVW)) ∧
-    (∀ (U : X.Opens) (hxU : x ∈ U),
+    (∀ (U : X.Opens) (_hxU : x ∈ U),
       ∃! g : Spec (X.presheaf.stalk x) ⟶ U.toScheme, g ≫ U.ι = X.fromSpecStalk x) ∧
     (∀ (W V : {W : X.Opens // IsAffineOpen W ∧ x ∈ W}) (hVW : V.1 ≤ W.1),
       V.1.fromSpecStalkOfMem x V.2.2 ≫ X.homOfLE hVW =

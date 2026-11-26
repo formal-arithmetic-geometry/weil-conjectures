@@ -175,7 +175,6 @@ private theorem sourceFreeSectionsComplexIso_naturality
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-set_option linter.unusedVariables false in
 /-- Naturality of evaluation of the Hom complex at the free sheaf generator.
 
 This is the degreewise Yoneda calculation: the free-sheaf evaluation sends
@@ -187,7 +186,7 @@ theorem smallModel_sourceDerivedSections_naturality_evaluation
     [HasDerivedCategory.{v + 1} (Sheaf T AddCommGrpCat.{v + 1})]
     (K : DerivedCategory.Plus (Sheaf T AddCommGrpCat.{v + 1}))
     (L : CochainComplex (Sheaf T AddCommGrpCat.{v + 1}) ℤ) [L.IsKInjective]
-    (q : K.obj ≅ DerivedCategory.Q.obj L) (n : ℤ) {U V : C} (a : U ⟶ V) :
+    (_q : K.obj ≅ DerivedCategory.Q.obj L) (n : ℤ) {U V : C} (a : U ⟶ V) :
     let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{v + 1} (.up ℤ) n
     let e₁ := fun W : C ↦
       (smallModel_sourceClassDerivedHomIso ((strictLocalFreeSheaf T).obj W) L n).symm ≪≫
@@ -200,7 +199,7 @@ theorem smallModel_sourceDerivedSections_naturality_evaluation
       (e₁ V).hom ≫ H.map
         ((NatTrans.mapHomologicalComplex
           ((sheafSections T AddCommGrpCat.{v + 1}).map a.op) (.up ℤ)).app L) := by
-  clear q K
+  clear _q K
   dsimp only
   rw [← cancel_epi (smallModel_sourceClassDerivedHomIso ((strictLocalFreeSheaf T).obj V) L n).hom]
   simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc]

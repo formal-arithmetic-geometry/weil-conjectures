@@ -29,8 +29,6 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
--- Preserve the existing names of the existential proof witnesses in the statement.
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 /-- Coherent transitions and cone comparisons for the concrete restricted single complexes. -/
 theorem exists_restricted_affine_single_coherence {S : Scheme.{v}}
@@ -72,13 +70,13 @@ theorem exists_restricted_affine_single_coherence {S : Scheme.{v}}
     (ψ : ∀ {i j : Iᵒᵖ} (f : j ⟶ i),
       ((upperStar AddCommGrpCat.{v + 1} (D'.map f)).mapHomologicalComplex
         (ComplexShape.up ℤ)).obj (K i) ⟶ K j)
-    (hidentity : ∀ i : Iᵒᵖ, ψ (𝟙 i) =
+    (_hidentity : ∀ i : Iᵒᵖ, ψ (𝟙 i) =
       (NatIso.mapHomologicalComplex
         (eqToIso (congrArg (upperStar AddCommGrpCat.{v + 1}) (D'.map_id i)))
         (ComplexShape.up ℤ)).hom.app (K i) ≫
       (NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{v + 1} (D'.obj i))
         (ComplexShape.up ℤ)).hom.app (K i))
-    (hcomposition : ∀ (i j k : Iᵒᵖ) (f : j ⟶ i) (g : k ⟶ j),
+    (_hcomposition : ∀ (i j k : Iᵒᵖ) (f : j ⟶ i) (g : k ⟶ j),
       ψ (g ≫ f) =
         (NatIso.mapHomologicalComplex
           (upperStarComp AddCommGrpCat.{v + 1} (D'.map g) (D'.map f)
@@ -89,7 +87,7 @@ theorem exists_restricted_affine_single_coherence {S : Scheme.{v}}
     (eG : ∀ i : Iᵒᵖ, G.obj (op i) ≅
       ((upperStar AddCommGrpCat.{v + 1} (c'.π.app i)).mapHomologicalComplex
         (ComplexShape.up ℤ)).obj (K i))
-    (hG : ∀ (i j : Iᵒᵖ) (f : j ⟶ i), G.map f.op =
+    (_hG : ∀ (i j : Iᵒᵖ) (f : j ⟶ i), G.map f.op =
       (eG i).hom ≫
         (NatIso.mapHomologicalComplex
           (upperStarComp AddCommGrpCat.{v + 1} (c'.π.app j) (D'.map f)

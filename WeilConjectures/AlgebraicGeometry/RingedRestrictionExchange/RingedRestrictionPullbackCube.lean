@@ -677,6 +677,7 @@ private def stageBase
     (ringedMap f r.RY r.RX r.cf) (ringedMap f' r.RY' r.RX' r.cf')
     (ringedMap g r.RY r.RY' r.cg) (ringedMap g' r.RX r.RX' r.cg')
 
+-- The type is inferred; a `theorem` would need the long statement spelled out.
 set_option linter.defProp false in
 private def stageCoherence
     {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
@@ -696,6 +697,7 @@ private def stageCoherence
     (square_map_eq C.baseFace).symm (square_map_eq C.upperFace).symm
     (square_map_eq C.localRings)
 
+-- The type is inferred; a `theorem` would need the long statement spelled out.
 set_option linter.defProp false in
 private def stageFaces
     {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
@@ -706,6 +708,7 @@ private def stageFaces
     r.exchangeModuleSquare.hom C.localRings.exchangeModuleSquare.hom
     C.sourceFace.exchangeModuleSquare.hom C.upperFace.exchangeModuleSquare.hom
 
+-- The type is inferred; a `theorem` would need the long statement spelled out.
 set_option linter.defProp false in
 private def stageProof
     {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
@@ -719,6 +722,7 @@ private def stageProof
     (square_eq C.sourceFace (square_map_eq C.sourceFace).symm)
     (square_eq C.upperFace (square_map_eq C.upperFace).symm)
 
+-- The type is inferred; a `theorem` would need the long statement spelled out.
 set_option linter.defProp false in
 private def pointwiseBase
     {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
@@ -727,6 +731,7 @@ private def pointwiseBase
     (M : proEtaleRingModules Y r.RY) :=
   stageProof r C M (Cat.of (proEtaleRingModules C.XU' C.localRings.RX')) rfl
 
+-- The type is inferred; a `theorem` would need the long statement spelled out.
 set_option linter.defProp false in
 private def pointwiseRight
     {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
@@ -741,6 +746,7 @@ private def pointwiseRight
     ((upperPull C.localRings).map (C.sourceFace.exchangeModuleSquare.hom.app M))
     (C.upperFace.exchangeModuleSquare.hom.app ((verticalPull r).obj M))
 
+-- The type is inferred; a `theorem` would need the long statement spelled out.
 set_option linter.defProp false in
 private def pointwiseObjects
     {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
@@ -750,6 +756,7 @@ private def pointwiseObjects
   pointwiseRight r C M (by cube_objects) (by cube_objects) (by cube_objects)
     (by cube_objects) (by cube_objects) (by cube_objects)
 
+-- The type is inferred; a `theorem` would need the long statement spelled out.
 set_option linter.defProp false in
 private def pointwiseFace1
     {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
@@ -762,6 +769,7 @@ private def pointwiseFace1
     · cube_objects
     · cube_apps)
 
+-- The type is inferred; a `theorem` would need the long statement spelled out.
 set_option linter.defProp false in
 private def pointwiseFace2
     {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
@@ -770,6 +778,7 @@ private def pointwiseFace2
     (M : proEtaleRingModules Y r.RY) :=
   pointwiseFace1 r C M (by cube_apps)
 
+-- The type is inferred; a `theorem` would need the long statement spelled out.
 set_option linter.defProp false in
 private def pointwiseFace3
     {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
@@ -782,6 +791,7 @@ private def pointwiseFace3
     · cube_objects
     · cube_apps)
 
+-- The type is inferred; a `theorem` would need the long statement spelled out.
 set_option linter.defProp false in
 private def pointwiseFace4
     {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
@@ -790,6 +800,7 @@ private def pointwiseFace4
     (M : proEtaleRingModules Y r.RY) :=
   pointwiseFace3 r C M (by cube_apps)
 
+-- The type is inferred; a `theorem` would need the long statement spelled out.
 set_option linter.defProp false in
 private def pointwiseFace5
     {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
@@ -802,6 +813,7 @@ private def pointwiseFace5
     · cube_objects
     · cube_apps)
 
+-- The type is inferred; a `theorem` would need the long statement spelled out.
 set_option linter.defProp false in
 private def pointwiseFace6
     {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}

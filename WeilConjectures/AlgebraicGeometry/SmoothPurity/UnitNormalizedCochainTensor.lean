@@ -38,7 +38,6 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.all false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true

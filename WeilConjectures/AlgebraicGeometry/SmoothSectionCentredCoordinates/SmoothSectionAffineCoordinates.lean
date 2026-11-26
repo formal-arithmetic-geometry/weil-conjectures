@@ -33,7 +33,6 @@ The geometric construction of centred étale charts, with its affine ideal equat
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.SmoothSectionCentredCoordinates

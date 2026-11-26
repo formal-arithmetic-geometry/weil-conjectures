@@ -30,7 +30,6 @@ variable {C D E B : Type*} [Category C] [Category D] [Category E] [Category B]
   [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
   [HasDerivedCategory B]
 
-set_option linter.flexible false in
 private lemma single_hom (G : C ⥤ D) [G.Additive]
     [Limits.PreservesFiniteLimits G] [Limits.PreservesFiniteColimits G] (n : ℤ) (X : C) :
     (G.mapDerivedCategorySingleFunctor n).hom.app X =
@@ -38,7 +37,11 @@ private lemma single_hom (G : C ⥤ D) [G.Additive]
         ((HomologicalComplex.single C (.up ℤ) n).obj X) ≫
       DerivedCategory.Q.map
         ((HomologicalComplex.singleMapHomologicalComplex G (.up ℤ) n).hom.app X) := by
-  simp [mapDerivedCategorySingleFunctor, DerivedCategory.singleFunctorIsoCompQ]
+  simp only [comp_obj, mapDerivedCategorySingleFunctor, DerivedCategory.singleFunctorIsoCompQ,
+    isoWhiskerRight_refl, isoWhiskerLeft_refl, Iso.refl_symm, Iso.refl_trans, Iso.trans_hom,
+    isoWhiskerLeft_hom, Iso.symm_hom, isoWhiskerRight_hom, Iso.refl_hom, NatTrans.comp_app,
+    associator_hom_app, whiskerLeft_app, associator_inv_app, DerivedCategory.Q_obj_single_obj,
+    whiskerRight_app, NatTrans.id_app, Category.comp_id, Category.id_comp]
   erw [Category.id_comp]
 
 omit [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E] in

@@ -43,10 +43,8 @@ theorem semilocal_dim_one_conductor_power
   intro x y hx hJ
   obtain ⟨A, hfin, hfrac, hxm, hym, m, hm, a, haK, haJ⟩ :=
     exists_finite_adjoin_with_jacobson_power B K x y hJ
-  set_option linter.style.haveILetI false in
-    letI : Module.Finite B A := hfin
-  set_option linter.style.haveILetI false in
-    letI : IsFractionRing A K := hfrac
+  let : Module.Finite B A := hfin
+  let : IsFractionRing A K := hfrac
   obtain ⟨r, hr, hconductor⟩ := Subalgebra.exists_jacobson_pow_mul_mem_base hdim A
   have hpow : a ^ r ∈
       (Ideal.map (algebraMap B A) (Ideal.jacobson (⊥ : Ideal B))) ^ r :=

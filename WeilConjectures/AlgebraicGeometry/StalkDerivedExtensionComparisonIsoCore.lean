@@ -161,8 +161,6 @@ private theorem derivedPullback_stalk_isLeftDerivedFunctor (z : X') :
       (fun P ↦ G.derives_kFlat.isIso_of_isLeftDerivedFunctor (counit g') P)
       (comparisonDerivedStalk X' z)
 
--- Keep the original named proof binders, even though they do not occur in the conclusion.
-set_option linter.unusedVariables false in
 set_option synthInstance.maxSize 2048 in
 /-- A natural comparison with the specified K-flat representative equation, without an
 invertibility assertion. -/
@@ -179,12 +177,12 @@ theorem exists_stalkDerivedExtensionComparisonTransformation (z : X') :
           ((algebraMap (A g' z ⊗[R f g' z] B f' z) (C z)).comp
             (algebraMap (A g' z) (A g' z ⊗[R f g' z] B f' z)))).mapHomotopyCategory
               (.up ℤ) ⋙ DerivedCategory.Qh)
-      (hL : L.IsLeftDerivedFunctor ε
+      (_hL : L.IsLeftDerivedFunctor ε
         (HomotopyCategory.quasiIso (ModuleCat.{u} (A g' z)) (.up ℤ))),
     ∃ j : comparisonDerivedStalk X (g' z) ⋙ L ⟶
         derivedPullback g' ⋙ comparisonDerivedStalk X' z,
       ∀ (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-        (hP : P.IsKFlatTensor)
+        (_hP : P.IsKFlatTensor)
         (hcP : IsIso ((counit g').app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj P))),
         L.map ((RingedSpace.moduleStalkFunctor X.toRingedSpace

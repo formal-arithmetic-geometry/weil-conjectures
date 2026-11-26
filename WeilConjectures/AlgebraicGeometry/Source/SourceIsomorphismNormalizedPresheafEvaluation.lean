@@ -21,7 +21,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictSc
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
@@ -201,7 +200,7 @@ private theorem etale_coefficient_mate_eq (q : R →+* S)
     Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app, NatTrans.id_app,
     CategoryTheory.Functor.map_id, Category.id_comp, Adjunction.homEquiv_counit]
   dsimp only [Functor.comp_obj, Functor.comp_map]
-  simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp]
   rfl
 
 private theorem etale_localization_coefficient_mate (q : R →+* S)
@@ -347,7 +346,7 @@ private theorem etaleDerivedSliceCoefficients_pasting (U : X.Etale) (q : R →+*
     (etaleSliceRestrictionIso X S U).symm
     (etaleSliceCoefficients_pasting X U q) M
   simp only [etaleNormalizationCoefficients, etaleDerivedSliceRestrictionIso,
-    etaleDerivedSliceEquivalenceCoefficients, etaleDerivedSliceEquivalence_functor,
+    etaleDerivedSliceEquivalenceCoefficients,
     sliceRestrictScalarsIso,
     Functor.mapDerivedCategorySquareIso, Functor.mapDerivedCategoryTriangleIso,
     Functor.mapDerivedCategoryNatIso_symm, Iso.trans_hom, Iso.trans_inv,
@@ -382,7 +381,7 @@ private theorem etale_source_slice_normalization
   apply (cancel_mono ((normalizationRestrict V.left.smallEtaleTopology q).map
     ((etaleDerivedSliceRestrictionIso X S V).inv.app A'))).mp
   simp only [Category.assoc, ← Functor.map_comp,
-    Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.comp_id]
+    Iso.hom_inv_id_app]
   rw [hp]
   simp only [Functor.map_comp, Category.assoc, Iso.hom_inv_id_app_assoc]
   erw [CategoryTheory.Functor.map_id, Category.comp_id]
@@ -604,7 +603,7 @@ theorem sourceIsomorphism_normalized_presheaf_evaluation
         (((comparisonSetUpperStar Y).map (F.map p)).hom.app (op U) s) := by
     have hm : δs.inv ≫ F.map r = F.map p ≫ εs.inv := by
       simp only [r, δs, εs, etaleIsomorphismSheafIso, F, Functor.map_comp,
-        Functor.mapIso_hom, Functor.mapIso_inv, Category.assoc]
+        Functor.mapIso_inv]
       rw [← Functor.map_comp_assoc, δ.inv_hom_id]
       simp only [CategoryTheory.Functor.map_id, Category.id_comp, ε]
     have h := congrArg
