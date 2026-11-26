@@ -337,7 +337,7 @@ private theorem ind_of_eventually_constant {J C : Type*} [Category* J] [Category
     (hevent : F.IsEventuallyConstantFrom j₀) :
     ∃ X, IsEssentiallyConstantIndDiagram F X := by
   let c := hevent.cocone
-  letI : IsIso (c.ι.app j₀) := hevent.isIso_ι_of_isColimit hevent.isColimitCocone
+  have : IsIso (c.ι.app j₀) := hevent.isIso_ι_of_isColimit hevent.isColimitCocone
   refine ⟨c.pt, ⟨inferInstance, c.ι, j₀, (asIso (c.ι.app j₀)).inv, ?_, ?_⟩⟩
   · exact (asIso (c.ι.app j₀)).inv_hom_id
   · intro j
@@ -345,7 +345,7 @@ private theorem ind_of_eventually_constant {J C : Type*} [Category* J] [Category
     let a : j₀ ⟶ k := IsFiltered.leftToMax _ _
     let b : j ⟶ k := IsFiltered.rightToMax _ _
     refine ⟨k, a, b, ?_⟩
-    letI : IsIso (c.ι.app k) := hevent.isIso_ι_of_isColimit' hevent.isColimitCocone k a
+    have : IsIso (c.ι.app k) := hevent.isIso_ι_of_isColimit' hevent.isColimitCocone k a
     apply (cancel_mono (c.ι.app k)).1
     rw [c.ι.naturality b]
     simp only [Functor.const_obj_map, Category.assoc]
@@ -366,7 +366,7 @@ private theorem exactFunctor_ind_essentialConstancy
   let J := W.Under ⊤ X
   let D := MorphismProperty.Under.forget W ⊤ X ⋙ Under.forget X ⋙
     R.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
-  letI : IsFiltered J := by
+  have : IsFiltered J := by
     let j₀ : J := MorphismProperty.Under.mk ⊤ (𝟙 X) (W.id_mem X)
     refine { nonempty := ⟨j₀⟩, cocone_objs := ?_, cocone_maps := ?_ }
     · intro j j'
@@ -396,7 +396,7 @@ private theorem exactFunctor_ind_essentialConstancy
       apply (HomotopyCategory.quotient_map_mem_quasiIso_iff g).1
       rw [hg]
       exact hf
-    letI : QuasiIso g := hq
+    have : QuasiIso g := hq
     have hmap : HomologicalComplex.quasiIso A (.up ℤ)
         ((R.mapHomologicalComplex (.up ℤ)).map g) := by
       exact HomologicalComplex.quasiIso_map_of_preservesHomology g R

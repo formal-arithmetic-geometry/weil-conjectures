@@ -163,9 +163,9 @@ theorem completedPullbackTensor_unit_of_associativity
             ((pullbackTensorSequenceDerived l E f).obj M)).hom =
         (pullbackTensorSequenceDerived l E f).map
           ((pullbackTensorCalculus l E Y).systemClosed.monoidal.rightUnitor M).hom) := by
-  letI : MonoidalCategory (coefficientSequenceDerived l E Y) :=
+  let : MonoidalCategory (coefficientSequenceDerived l E Y) :=
     (pullbackTensorCalculus l E Y).systemClosed.monoidal
-  letI : MonoidalCategory (coefficientSequenceDerived l E X) :=
+  let : MonoidalCategory (coefficientSequenceDerived l E X) :=
     (pullbackTensorCalculus l E X).systemClosed.monoidal
   let F := pullbackTensorSequenceDerived l E f
   let μ := pullbackTensorSystemComparison l E f

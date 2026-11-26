@@ -400,28 +400,28 @@ theorem automorphismConstructibleStage_descended_shifts
         automorphismStageRationalShiftNormalization l E f cf ∧
         automorphismStageRationalShiftNormalization l E eX.asIso.hom cX ∧
         automorphismStageRationalShiftNormalization l E eY.asIso.hom cY ∧
-        (fun [sf : (rationalDerivedPullback l E f).CommShift ℤ]
-          [sX : (rationalDerivedPullback l E eX.asIso.hom).CommShift ℤ]
-          [sY : (rationalDerivedPullback l E eY.asIso.hom).CommShift ℤ] ↦
+        (fun [_sf : (rationalDerivedPullback l E f).CommShift ℤ]
+          [_sX : (rationalDerivedPullback l E eX.asIso.hom).CommShift ℤ]
+          [_sY : (rationalDerivedPullback l E eY.asIso.hom).CommShift ℤ] ↦
           (rationalDerivedPullback l E f).IsTriangulated ∧
             (rationalDerivedPullback l E eX.asIso.hom).IsTriangulated ∧
             (rationalDerivedPullback l E eY.asIso.hom).IsTriangulated ∧
             NatTrans.CommShift (automorphismStageRationalSquare l E C f eX eY h).hom ℤ)
-          (sf := cf) (sX := cX) (sY := cY)) ∧
+          (_sf := cf) (_sX := cX) (_sY := cY)) ∧
     ∃ (cf : (commonStageDerivedPullback l Ω f).CommShift ℤ)
       (cX : (commonStageDerivedPullback l Ω eX.asIso.hom).CommShift ℤ)
       (cY : (commonStageDerivedPullback l Ω eY.asIso.hom).CommShift ℤ),
       automorphismStageQbarShiftNormalization l Ω f cf ∧
       automorphismStageQbarShiftNormalization l Ω eX.asIso.hom cX ∧
       automorphismStageQbarShiftNormalization l Ω eY.asIso.hom cY ∧
-      (fun [sf : (commonStageDerivedPullback l Ω f).CommShift ℤ]
-        [sX : (commonStageDerivedPullback l Ω eX.asIso.hom).CommShift ℤ]
-        [sY : (commonStageDerivedPullback l Ω eY.asIso.hom).CommShift ℤ] ↦
+      (fun [_sf : (commonStageDerivedPullback l Ω f).CommShift ℤ]
+        [_sX : (commonStageDerivedPullback l Ω eX.asIso.hom).CommShift ℤ]
+        [_sY : (commonStageDerivedPullback l Ω eY.asIso.hom).CommShift ℤ] ↦
         (commonStageDerivedPullback l Ω f).IsTriangulated ∧
           (commonStageDerivedPullback l Ω eX.asIso.hom).IsTriangulated ∧
           (commonStageDerivedPullback l Ω eY.asIso.hom).IsTriangulated ∧
           NatTrans.CommShift (automorphismStageQbarSquare l Ω C f eX eY h).hom ℤ)
-        (sf := cf) (sX := cX) (sY := cY) := by
+        (_sf := cf) (_sX := cX) (_sY := cY) := by
   classical
   constructor
   · intro E _ _ _

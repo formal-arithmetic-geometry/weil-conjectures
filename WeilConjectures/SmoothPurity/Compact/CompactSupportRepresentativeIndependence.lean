@@ -68,7 +68,7 @@ private noncomputable def rationalExtension
     [Linear R A] [Linear R B] (F : A ⥤ B) [F.Additive] [F.Linear R] :
     ScalarLocalization R A p ⥤ ScalarLocalization R B p where
   obj K := ⟨F.obj K.obj⟩
-  map {K L} := (F.mapLinearMap R).baseChange (Localization.Away p)
+  map {_ _} := (F.mapLinearMap R).baseChange (Localization.Away p)
   map_id K := (compactSupportScalarExtensionLaws p F).1 K.obj
   map_comp {K L M} f g := (compactSupportScalarExtensionLaws p F).2 K.obj L.obj M.obj f g
 
@@ -375,7 +375,7 @@ theorem exists_compactSupportRepresentativeComparison
     (f : X ⟶ Y) [f.IsOver (Spec (.of K₀))]
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     (c : Compactification f) :
-    (fun [hproducts : HasCountableProducts
+    (fun [_hproducts : HasCountableProducts
         (DerivedCategory (scalarReductionSource l E Y))] ↦
     ∃ (T : DerivedCategory (scalarReductionSource l E X) ⥤
         DerivedCategory (pbcTowers Y (completedIntegralCommRingSheafUnrestricted l E Y)))
@@ -469,7 +469,7 @@ theorem exists_compactSupportRepresentativeComparison
         (a'' : (sfRationalConstructibleLocalization l E X).obj K'' ≅ M),
         beta K K' (a ≪≫ a'.symm) ≪≫ beta K' K'' (a' ≪≫ a''.symm) =
           beta K K'' (a ≪≫ a''.symm)))
-      (hproducts := integralOperationsDerivedCountableProducts l E Y) := by
+      (_hproducts := integralOperationsDerivedCountableProducts l E Y) := by
   classical
   have hT := exists_compactSupportReductionTower l E K₀ X Y f hl c
   let T : DerivedCategory (scalarReductionSource l E X) ⥤

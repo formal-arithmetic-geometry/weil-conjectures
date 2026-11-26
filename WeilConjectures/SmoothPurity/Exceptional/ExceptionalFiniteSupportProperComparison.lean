@@ -31,7 +31,7 @@ variable (c : Compactification g)
 /-- The proper derived comparison is also available with the strict coefficient
 presentation used by the compact-support level. -/
 theorem integralExceptionalEtaleProperDerivedRight_exists (n : ℕ) :
-    ∃ e : (S.properDerived.level n).direct ⋙
+    ∃ _e : (S.properDerived.level n).direct ⋙
       (integralExceptionalEtaleRealization l E Y n).mapDerivedCategory ≅
       (integralExceptionalEtaleRealization l E c.Z n).mapDerivedCategory ⋙
         (Etale.lowerStar

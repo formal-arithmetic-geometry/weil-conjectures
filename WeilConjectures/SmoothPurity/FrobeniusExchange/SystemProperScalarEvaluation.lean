@@ -102,8 +102,8 @@ theorem systemDirectScalar_finiteEvaluation
           ((systemDirectFiniteEvaluation l E f n).hom.app N) ≫
     (finiteDirectScalar (integralScalarQuotientMap l E L ι n) f).app
           ((coefficientSequenceDerivedEvaluation l E X n).obj N) := by
-  letI := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
-  letI := Padic.finite_coefficientExtensionRing l L (n + 1) (Nat.succ_pos n)
+  have := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
+  have := Padic.finite_coefficientExtensionRing l L (n + 1) (Nat.succ_pos n)
   let adjE := systemAdjunction l E f
   let adjL := systemAdjunction l L f
   let levelE := (sfIntrinsicConstantModuleAdjunction f

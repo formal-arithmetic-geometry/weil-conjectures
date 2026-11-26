@@ -624,6 +624,8 @@ theorem pointSectionsTensor_existsUnique :
 noncomputable def pointSectionsTensor :=
   (pointSectionsTensor_existsUnique k l E L ι).exists.choose
 
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- Finite-free ordinary completed coefficient extension is exact. -/
 theorem pointCompletedOrdinary_exact :
     PreservesFiniteLimits (completedOrdinaryScalarExtension.{u, u} l E L ι (Spec (.of k))) ∧
@@ -680,6 +682,8 @@ noncomputable def pointDerivedSectionsTensor :
     Functor.isoWhiskerRight (pointOrdinaryDerivedComparison k l E L ι).symm
       (pointCompletedDerivedSections k l L)
 
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- Multiplication on ordinary sheaf tensor fixes the identity-extension identification. -/
 theorem pointOrdinaryTensorUnit_existsUnique :
     ∃! μ : completedOrdinaryScalarExtension.{u, u} l E E (AlgHom.id ℚ_[l] E) (Spec (.of k)) ≅

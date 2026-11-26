@@ -82,7 +82,7 @@ theorem systemOpenScalar_finiteEvaluation
           ((coefficientSequenceDerivedEvaluation l E X n).obj N) := by
   let _ := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
   let _ := Padic.finite_coefficientExtensionRing l L (n + 1) (Nat.succ_pos n)
-  haveI : IsIso (systemOpenScalarInv l E L ι j) :=
+  have : IsIso (systemOpenScalarInv l E L ι j) :=
     systemOpenScalarInv_isIso l E L ι j
   have h := systemOpenScalarInv_finiteEvaluation_core l E L ι j n N
   dsimp only [systemOpenFiniteEvaluation, finiteOpenScalar] at h ⊢

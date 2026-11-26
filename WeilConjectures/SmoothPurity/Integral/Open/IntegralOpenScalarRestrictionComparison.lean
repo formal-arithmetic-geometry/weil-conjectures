@@ -416,6 +416,8 @@ private theorem finiteGenericSquare (n : ℕ) : finiteGenericRingMap l E j o (n 
           (normalizedDVRQuotient l E V (Nat.le_succ n)) ≫ finiteGenericRingMap l E j o n :=
   finiteRingSquare l E j o n
 
+-- Untyped partial application of a Prop-valued declaration; no ascription to make it a theorem.
+set_option linter.defProp false in
 @[instance_reducible] private def nativeRings (n : ℕ) :=
     @openScalarComparison.{t + 1, t + 1, t, t, max u (t + 1)}
       V.ProEt inferInstance X.ProEt inferInstance (ProEt.topology V) (ProEt.topology X)
@@ -429,21 +431,31 @@ private theorem finiteGenericSquare (n : ℕ) : finiteGenericRingMap l E j o (n 
       (integralCoefficientSheaf l E X (n + 1)) (integralCoefficientSheaf l E X n)
       (normalizedDVRQuotient l E X (Nat.le_succ n))
 
+-- Untyped partial application of a Prop-valued declaration; no ascription to make it a theorem.
+set_option linter.defProp false in
 @[instance_reducible] private def nativeMaps (n : ℕ) :=
   nativeRings l E j n
     (finiteGenericRingMap l E j o (n + 1)) (finiteGenericRingMap l E j o n)
 
+-- Untyped partial application of a Prop-valued declaration; no ascription to make it a theorem.
+set_option linter.defProp false in
 @[instance_reducible] private def nativeFunctors (n : ℕ) :=
   nativeMaps l E j o n
     (finiteGenericFunctor l E j o (n + 1)) (finiteGenericFunctor l E j o n)
 
+-- Untyped partial application of a Prop-valued declaration; no ascription to make it a theorem.
+set_option linter.defProp false in
 @[instance_reducible] private def nativeIsos (n : ℕ) :=
   nativeFunctors l E j o n (finiteGenericIso l E j o (n + 1)) (finiteGenericIso l E j o n)
 
+-- Untyped partial application of a Prop-valued declaration; no ascription to make it a theorem.
+set_option linter.defProp false in
 @[instance_reducible] private def nativeQuotient (n : ℕ) :=
   nativeIsos l E j o n
     (normalizedDVRQuotient l E V (Nat.le_succ n)) (finiteQuotient_forget l E V n)
 
+-- Untyped partial application of a Prop-valued declaration; no ascription to make it a theorem.
+set_option linter.defProp false in
 @[instance_reducible] private def nativeComparison (n : ℕ) :=
   nativeQuotient l E j o n (finiteGenericSquare l E j o n)
 
@@ -465,6 +477,8 @@ private def genericOrdinary (n : ℕ) :=
     (finiteGenericIso l E j o (n + 1)) (finiteGenericIso l E j o n)
     (normalizedDVRQuotient l E V (Nat.le_succ n)) (genericResult l E j o n)
 
+-- Untyped partial application of a Prop-valued declaration; no ascription to make it a theorem.
+set_option linter.defProp false in
 private def genericGenerators (n : ℕ) :=
   @OpenScalarResult.generators.{t + 1, t + 1, t, t, max u (t + 1)}
     V.ProEt inferInstance X.ProEt inferInstance (ProEt.topology V) (ProEt.topology X)
@@ -483,6 +497,8 @@ private def genericGenerators (n : ℕ) :=
 private def genericPointIso (n : ℕ) (M : normalizedDVRModules l E X n) :=
   (genericOrdinary l E j o n).app M
 
+-- Untyped partial application of a Prop-valued declaration; no ascription to make it a theorem.
+set_option linter.defProp false in
 private def genericNaturality (n : ℕ) {M N : normalizedDVRModules l E X n} (f : M ⟶ N) :=
   (genericOrdinary l E j o n).hom.naturality f
 

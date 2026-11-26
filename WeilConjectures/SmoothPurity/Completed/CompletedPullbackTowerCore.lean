@@ -168,7 +168,7 @@ private def pullbackRoosSignIso :
   Functor.isoWhiskerRight pullbackRoosSign pullbackCoconeFunctor
 
 variable [HasLimitsOfShape ℕᵒᵖ B]
-private def pullbackPositiveCondition (X : CochainComplex (ℕᵒᵖ ⥤ B) ℤ) :
+private theorem pullbackPositiveCondition (X : CochainComplex (ℕᵒᵖ ⥤ B) ℤ) :
     CochainComplex.HomComplex.δ (-1) 0
         (0 : CochainComplex.HomComplex.Cochain
           (ExactProductsRoos.ordinary.obj X) (ExactProductsRoos.product.obj X) (-1)) +
@@ -181,6 +181,7 @@ private def pullbackPositiveComparison (X : CochainComplex (ℕᵒᵖ ⥤ B) ℤ
   CochainComplex.mappingCocone.lift (ExactProductsRoos.difference.app X)
     (ExactProductsRoos.inclusion.app X) 0 (pullbackPositiveCondition X)
 
+omit [HasCountableProducts B] [HasLimitsOfShape ℕᵒᵖ B] in
 private theorem pullbackZeroLift_f {M K L : CochainComplex B ℤ} (φ : K ⟶ L)
     (α : M ⟶ K)
     (h : CochainComplex.HomComplex.δ (-1) 0
@@ -219,8 +220,9 @@ private theorem pullbackPositiveComparison_sign (X : CochainComplex (ℕᵒᵖ �
   simp only [Homotopy.trans_hom, Homotopy.ofEq_hom, Homotopy.compLeft_hom,
     Pi.zero_apply, zero_add, add_zero]
   erw [HomologicalComplex.homotopyCofiber.inrCompHomotopy_hom]
-  simp
-  all_goals change p + -1 + 1 = p; omega
+  · simp
+  · change p + -1 + 1 = p
+    omega
 
 variable [HasExactLimitsOfShape (Discrete ℕ) B] [HasDerivedCategory.{w} B]
   [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ B)] [IsGrothendieckAbelian.{g} (ℕᵒᵖ ⥤ B)]
@@ -242,7 +244,7 @@ private theorem pullbackRoosComparison_exists :
       naturality := fun {_ _} f ↦ L.rightDerivedFunctorUnitQ_naturality f }
   obtain ⟨e, he⟩ := ExactProductsRoos.comparisonIso L.rightDerivedFunctor η (by
     intro I hI
-    letI := hI
+    have := hI
     change IsIso (L.rightDerivedFunctorUnitQ I)
     rw [L.rightDerivedFunctorUnitQ_eq]
     infer_instance)
@@ -261,6 +263,7 @@ private theorem pullbackRoosComparison_exists :
   dsimp only [Iso.symm_hom]
   rw [Iso.inv_hom_id_app, Category.assoc, hn, hη, Iso.hom_inv_id]
 
+omit [HasExactLimitsOfShape (Discrete ℕ) B] [IsGrothendieckAbelian.{g} (ℕᵒᵖ ⥤ B)] in
 private theorem pullbackRoosComparison_unique
     (e e' : DerivedCategory.Q ⋙ (lim : (ℕᵒᵖ ⥤ B) ⥤ B).rightDerivedFunctor ≅
       HomologicalComplex.complexOfFunctorsToFunctorToComplex ⋙
@@ -271,8 +274,8 @@ private theorem pullbackRoosComparison_unique
   apply NatTrans.ext
   funext X
   obtain ⟨I, hI, q, _, hq⟩ := Abelian.HasKInjectiveResolutions.exists_isKInjective X
-  letI := hI
-  letI := hq
+  have := hI
+  have := hq
   have : IsIso (DerivedCategory.Q.map q) :=
     (DerivedCategory.isIso_Q_map_iff_quasiIso _ q).2 inferInstance
   have : IsIso ((DerivedCategory.Q ⋙
@@ -602,7 +605,6 @@ theorem pullbackTensorReductionEvaluation_existsUnique (W : Scheme.{u}) (n : ℕ
             (eqToIso (coefficientSequenceRestriction_evaluation l E W n)).hom.app
               ((pullbackTensorOrdinaryReduction l E W).obj M) :=
       pullbackTensorReductionEvaluation_normalization l E W O n M
-
     refine ⟨e, he, ?_⟩
     intro e' he'
     apply Iso.ext
@@ -662,7 +664,7 @@ theorem pullbackTensorSequenceInverseEvaluation_existsUnique
       (coefficientSequenceTopology (ProEt.topology Y))
       (coefficientSequenceTopology (ProEt.topology X)) :=
     pullbackTensorSequenceBase_continuous f
-  have : IsIso ((mateEquiv adj adjn).symm d.hom).natTrans :=
+  have : IsIso ((mateEquiv adj adjn).symm d.hom) :=
     SequenceModuleEvaluation.sequenceModulePullbackEvaluation_isIso
       (ProEt.topology Y) (ProEt.topology X) (proEtaleBaseChange f)
       ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
@@ -679,7 +681,7 @@ theorem pullbackTensorSequenceInverseEvaluation_existsUnique
           (CommRingCat.of (ULift.{u + 1} (finiteCoefficientRing l E (n + 1))))))
       (pullbackTensorSequenceInverse l E f) (integralOperationsLevelPullback l E f n)
       adj adjn d
-  let e := asIso ((mateEquiv adj adjn).symm d.hom).natTrans
+  let e := asIso ((mateEquiv adj adjn).symm d.hom)
   have he (M : coefficientSequenceModules l E Y) :
       adjn.homEquiv _ _ (e.hom.app M) =
         (coefficientSequenceEvaluation l E Y n).map (adj.unit.app M) ≫
@@ -797,13 +799,13 @@ theorem pullbackTensorRoosModel_existsUnique (W : Scheme.{u}) :
   set_option backward.isDefEq.respectTransparency false in
   set_option backward.isDefEq.respectTransparency.types false in
     let A := integralTowerModules l E W
-    letI : IsGrothendieckAbelian.{u + 1} A :=
+    have : IsGrothendieckAbelian.{u + 1} A :=
       SheafOfModules.isGrothendieckAbelianOfUniverses.{u + 1, u, u + 1, 0} _ _
-    letI : IsGrothendieckAbelian.{u + 1} (ℕᵒᵖ ⥤ A) := by
+    have : IsGrothendieckAbelian.{u + 1} (ℕᵒᵖ ⥤ A) := by
       have := diagrams_isGrothendieckAbelian A (AsSmall.{u + 1} ℕᵒᵖ)
       exact IsGrothendieckAbelian.of_equivalence
         (Equivalence.congrLeft (AsSmall.equiv (C := ℕᵒᵖ)).symm)
-    letI : HasExactLimitsOfShape (Discrete ℕ) A :=
+    have : HasExactLimitsOfShape (Discrete ℕ) A :=
       integralOperationsExactProducts l E W
     obtain ⟨e, he⟩ := pullbackRoosComparison_exists (B := A)
     refine ⟨e, he, ?_⟩
@@ -1028,7 +1030,7 @@ theorem pullbackTensorReductionModel_existsUnique (W : Scheme.{u}) :
         (Iso.refl (coefficientSequenceRestriction l E W ⋙
           pullbackTensorConstantLimit l E W)) (.up ℤ)).inv.app C = 𝟙 _ := rfl
     simp only [pullbackTensorLimitUnit, hcomp]
-    erw [CategoryTheory.Functor.map_id, Category.id_comp] <;> rfl
+    erw [CategoryTheory.Functor.map_id, Category.id_comp]
   obtain ⟨_, ε, _, hε, _, hhom⟩ :=
     CompletionUnit.fixedDerivedComparison l E W (pullbackTensorCalculus l E W) M c
       (CompletionUnit.termwiseLimitComparison_projection l E W) η hη
@@ -1151,17 +1153,16 @@ private theorem pullbackTensorPullbackTower_degree {X Y : Scheme.{u}}
         (pullbackTensorPullbackTowerLevel l E f P n).hom.f i := by
   let M := pullbackTensorOrdinaryModel l E Y O
   change (OrdinaryTowerProof.moduleLevel l E f M n).hom.app (P.X i) = _
-  have ht : M.tensor = pullbackTensorOrdinaryReduction l E Y := rfl
   have heval : M.evaluation n = (pullbackTensorReductionEvaluation l E Y n).symm := rfl
   simp only [OrdinaryTowerProof.moduleLevel, pullbackTensorPullbackTowerLevel,
     pullbackTensorRestrictedLevel, pullbackTensorInverseEvaluationComplex_eq,
     pullbackTensorReductionEvaluationComplex, pullbackTensorInverseEvaluation_eq]
-  simp only [ht, heval, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
+  simp only [heval, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
     Iso.app_hom, Iso.app_inv,
-    NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerLeft_inv,
-    Functor.isoWhiskerRight_hom, Functor.isoWhiskerRight_inv,
+    NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.isoWhiskerRight_hom,
     Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.mapIso_hom, Functor.mapIso_inv,
+    Functor.mapIso_hom,
     Functor.mapHomologicalComplexCompIso_hom_app_f,
     Functor.mapHomologicalComplexCompIso_inv_app_f,
     NatIso.mapHomologicalComplex_hom_app_f,
@@ -1169,16 +1170,16 @@ private theorem pullbackTensorPullbackTower_degree {X Y : Scheme.{u}}
     Functor.mapHomologicalComplex_map_f,
     HomologicalComplex.comp_f, Iso.refl_hom, Iso.refl_inv,
     Functor.associator_hom_app, Functor.associator_inv_app,
-    NatTrans.id_app, CategoryTheory.Functor.map_id,
-    Category.id_comp, Category.comp_id, CategoryTheory.Functor.map_comp, Category.assoc] <;>
-    exact pullbackTensor_identityFactors
-      (scalarReductionRestriction l E X n) (integralOperationsLevelPullback l E f n)
-      ((eqToIso (coefficientSequenceRestriction_evaluation l E X n)).hom.app
-        ((pullbackTensorSequenceInverse l E f).obj
-          ((pullbackTensorOrdinaryReduction l E Y).obj (P.X i))))
-      ((OrdinaryTowerProof.inverseEvaluation l E f n).inv.app
-        ((pullbackTensorOrdinaryReduction l E Y).obj (P.X i)))
-      ((pullbackTensorReductionEvaluation l E Y n).inv.app (P.X i))
+    NatTrans.id_app,
+    Category.id_comp, CategoryTheory.Functor.map_comp, Category.assoc]
+  exact pullbackTensor_identityFactors
+    (scalarReductionRestriction l E X n) (integralOperationsLevelPullback l E f n)
+    ((eqToIso (coefficientSequenceRestriction_evaluation l E X n)).hom.app
+      ((pullbackTensorSequenceInverse l E f).obj
+        ((pullbackTensorOrdinaryReduction l E Y).obj (P.X i))))
+    ((OrdinaryTowerProof.inverseEvaluation l E f n).inv.app
+      ((pullbackTensorOrdinaryReduction l E Y).obj (P.X i)))
+    ((pullbackTensorReductionEvaluation l E Y n).inv.app (P.X i))
 
 private theorem pullbackTensorPullbackTower_component {X Y : Scheme.{u}}
     (f : X ⟶ Y) (O : PurSequenceOrdinaryAdjoints l E Y)

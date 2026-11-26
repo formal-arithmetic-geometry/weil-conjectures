@@ -289,10 +289,10 @@ private theorem scalarTensorTotal_summand {X : Scheme.{u}}
       (scalarOrdinaryTensor φ (P.X a) (Q.X b)).inv ≫
         (pbcExtend φ).map
           (CochainComplex.ιMapBifunctor P Q (proEtaleOrdinaryTensor X R) a b n h) := by
-  letI := SheafOfModules.monoidalCategory R
-  letI := SheafOfModules.monoidalCategory S
-  letI := proEtaleTensorPreadditive X R
-  letI := proEtaleTensorPreadditive X S
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.monoidalCategory S
+  let := proEtaleTensorPreadditive X R
+  let := proEtaleTensorPreadditive X S
   simp only [scalarTensorTotal, tensorPullbackTotal, tensorPullbackTotalComponent,
     HomologicalComplex.ι_mapBifunctorDesc]
 

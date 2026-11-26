@@ -122,9 +122,9 @@ def intrinsicQbarScalarAction (α : Ω)
 existing colimit abelian-group structures. -/
 theorem intrinsicQbarLinear_existsUnique :
     ∃! q : Linear Ω (generalAlgebraicallyClosedConstructibleCategory l Ω Y),
-      (fun [qInst : Linear Ω (generalAlgebraicallyClosedConstructibleCategory l Ω Y)] ↦
+      (fun [_qInst : Linear Ω (generalAlgebraicallyClosedConstructibleCategory l Ω Y)] ↦
         ∀ (K L : generalAlgebraicallyClosedConstructibleCategory l Ω Y) (α : Ω) (f : K ⟶ L),
-          α • f = intrinsicQbarScalarAction l Ω Y α f) (qInst := q) := by
+          α • f = intrinsicQbarScalarAction l Ω Y α f) (_qInst := q) := by
   have hp : (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y).pairPreadditive =
       GeneralAlgebraicallyClosedCoefficients.preadditive (l := l) (Ω := Ω) (Y := Y) := by
     exact Subsingleton.elim _ _

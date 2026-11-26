@@ -514,8 +514,8 @@ theorem pullbackTensorSequenceCochain_existsUnique {X Y : Scheme.{u}} (f : X ⟶
           p q k h (op ((pullbackTensorSequenceBase f).obj V))
           (((pullbackTensorSequenceAdjunction l E f).unit.app (P.X p)).val.app (op V) x)
           (((pullbackTensorSequenceAdjunction l E f).unit.app (Q.X q)).val.app (op V) y) := by
-  letI : RepresentablyFlat (proEtaleBaseChange f) := flat_of_preservesFiniteLimits _
-  letI : RepresentablyFlat (pullbackTensorSequenceBase f) := by
+  let : RepresentablyFlat (proEtaleBaseChange f) := flat_of_preservesFiniteLimits _
+  let : RepresentablyFlat (pullbackTensorSequenceBase f) := by
     refine ⟨fun W ↦ ?_⟩
     exact IsCofiltered.of_equivalence
       (StructuredArrow.prodEquivalence W.1 W.2 (𝟭 ℕ) (proEtaleBaseChange f)).symm
@@ -594,7 +594,7 @@ theorem pullbackTensorSystemComparison_existsUnique {X Y : Scheme.{u}} (f : X �
       (ℕ × X.ProEt) _ (pullbackTensorSequenceSmall X) JX AX
   let V := (HomologicalComplex.quasiIso (coefficientSequenceModules l E Y) (.up ℤ)).inverseImage
     PY.ι
-  letI : (PY.ι ⋙ DerivedCategory.Q).IsLocalization V :=
+  let : (PY.ι ⋙ DerivedCategory.Q).IsLocalization V :=
     CategoryTheory.RingedDerivedNative.kFlatLocalization.{u + 1, u, u} JY AY
   let ff' := Localization.fullyFaithfulWhiskeringLeft
     ((PY.ι ⋙ DerivedCategory.Q).prod (PY.ι ⋙ DerivedCategory.Q)) (V.prod V)

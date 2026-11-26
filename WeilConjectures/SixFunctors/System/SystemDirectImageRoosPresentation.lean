@@ -50,7 +50,7 @@ theorem systemDirectImage_roosPresentation
               e.hom ≫ L.projection ≫ Pi.π (sfDirectImageTerm l E f K) n := by
   dsimp
   obtain ⟨hprod, L, e, _⟩ := systemDirectImage_roosExistence l E f S K
-  letI := hprod
+  have := hprod
   obtain ⟨a, ha⟩ := systemDirectImage_roosEvaluation l E f S K L e
   exact ⟨hprod, L, e, a, ha⟩
 

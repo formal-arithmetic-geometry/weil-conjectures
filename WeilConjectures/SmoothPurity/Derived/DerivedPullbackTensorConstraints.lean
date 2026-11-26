@@ -808,7 +808,7 @@ theorem integralScalarTensorUnit_exists
       rw [← hn]
       simp only [← I.map_comp_assoc, prod_comp, Category.assoc, Category.id_comp,
         Category.comp_id, Iso.inv_hom_id, H, R, Functor.comp_obj, Iso.prod_hom, Iso.trans_hom,
-        Iso.symm_hom, Iso.refl_hom, Iso.inv_hom_id_assoc, Iso.app_hom]
+        Iso.symm_hom, Iso.refl_hom, Iso.app_hom]
     · simpa only [a₀, b₀, Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom,
         Iso.refl_hom, Iso.app_hom, Category.assoc] using
         scalarConjugate_tensor_comparison R Q F H U V J I a b p ν μ hμ
@@ -861,7 +861,7 @@ theorem integralScalarTensorUnit_exists
       rw [← hn]
       simp only [← I.map_comp_assoc, prod_comp, Category.assoc, Category.id_comp,
         Category.comp_id, Iso.inv_hom_id, H, R, Functor.comp_obj, Iso.prod_hom, Iso.trans_hom,
-        Iso.symm_hom, Iso.refl_hom, Iso.inv_hom_id_assoc, Iso.app_hom]
+        Iso.symm_hom, Iso.refl_hom, Iso.app_hom]
     · simpa only [a₀, b₀, Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom,
         Iso.refl_hom, Iso.app_hom, Category.assoc] using
         scalarConjugate_tensor_comparison R Q F H U V J I a b p ν μ hμ
@@ -1433,7 +1433,7 @@ private theorem scalarUnit_tensorStageComparison_endpoint
     Functor.whiskerLeft_app, Functor.whiskerRight_app, NatTrans.comp_app,
     NatIso.prod_hom, NatTrans.prod, Iso.prod_hom, Functor.mapIso_hom]
   simp only [Category.assoc, ← Functor.map_comp, prod_comp, Iso.prod_hom, Iso.trans_hom,
-    Iso.symm_hom, Iso.app_inv]
+    Iso.symm_hom]
 
 attribute [local semireducible] operationStageTransitionIso commonStageTensorComparison in
 /-- The common-stage tensor comparison is the descent endpoint of the stage comparisons. -/
@@ -1510,17 +1510,19 @@ private theorem cu_tower (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueF
     StageTensorTower (stageSystem l Ω W) (cuT l Ω W) (fun h ↦ cuc l Ω W h) :=
   fun h h' X Y ↦ rationalTensorStageComparison_coherent l Ω W h h' X Y
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 private theorem cu_hlu (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)] :
     ∀ i {X Y : Stage l Ω W i} (f : X ⟶ Y),
       (cuT l Ω W i).map (Prod.mkHom (𝟙 (cuUn l Ω W i)) f) ≫ (culu l Ω W i Y).hom =
         (culu l Ω W i X).hom ≫ f :=
-  fun i X Y f ↦ scalarUnit_rationalLeftUnitor_natural l _ W f
+  fun _ _ _ f ↦ scalarUnit_rationalLeftUnitor_natural l _ W f
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 private theorem cu_hru (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)] :
     ∀ i {X Y : Stage l Ω W i} (f : X ⟶ Y),
       (cuT l Ω W i).map (Prod.mkHom f (𝟙 (cuUn l Ω W i))) ≫ (curu l Ω W i Y).hom =
         (curu l Ω W i X).hom ≫ f :=
-  fun i X Y f ↦ scalarUnit_rationalRightUnitor_natural l _ W f
+  fun _ _ _ f ↦ scalarUnit_rationalRightUnitor_natural l _ W f
 
 private theorem cu_hL (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)] :
     ∀ {i j : AlgebraicallyClosedCoefficients.Index l Ω} (h : i ≤ j) (X : Stage l Ω W i),

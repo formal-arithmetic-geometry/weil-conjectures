@@ -470,10 +470,10 @@ theorem publishedSystemTransportedTensor_eq_of_flat_normalized {X Y : Scheme.{u}
         (pullbackTensorSequenceSmall Y)
         (coefficientSequenceTopology (ProEt.topology Y))
         (coefficientSequenceCommRingSheaf l E Y) Q)
-      (flatP : SemilinearSections.flatTerms.{u + 1, u, u + 1}
+      (_flatP : SemilinearSections.flatTerms.{u + 1, u, u + 1}
         (coefficientSequenceTopology (ProEt.topology Y))
         (coefficientSequenceCommRingSheaf l E Y) P)
-      (flatQ : SemilinearSections.flatTerms.{u + 1, u, u + 1}
+      (_flatQ : SemilinearSections.flatTerms.{u + 1, u, u + 1}
         (coefficientSequenceTopology (ProEt.topology Y))
         (coefficientSequenceCommRingSheaf l E Y) Q),
       (pullbackTensorSequenceDerived l E f).map

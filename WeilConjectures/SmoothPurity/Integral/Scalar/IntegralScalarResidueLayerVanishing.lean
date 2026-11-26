@@ -172,8 +172,8 @@ variable (l : ℕ) [Fact l.Prime]
 theorem integralScalarResidueLayer_vanishing
     (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
     (P : (integralOperationsGoodComplex l E Y).FullSubcategory)
-    (r s : ℤ) (hrs : r ≤ s)
-    (h₁ : intrinsicFiniteTorsionConstructible l E 1 (by omega) Y
+    (r s : ℤ) (_hrs : r ≤ s)
+    (_h₁ : intrinsicFiniteTorsionConstructible l E 1 (by omega) Y
       ((integralDerivedReduction l E Y D hl 0).obj (DerivedCategory.Q.obj P.obj)))
     (hbound : ∀ i : ℤ,
       i ∈ proEtaleCohomologicalSupport
@@ -195,7 +195,7 @@ theorem integralScalarResidueLayer_vanishing
           (integralScalarRho l E L ι Y n) P.obj
           (ModuleCat.of B ((F j.castSucc) ⧸
             (F j.succ).comap (F j.castSucc).subtype))).homology i)) := by
-  clear h₁ hrs
+  clear _h₁ _hrs
   let p := completedIntegralCommRingProjectionUnrestricted l E Y 0
   let f := integralScalarQuotientSheafMap l E L ι Y 0
   let F₀ := pbcExtend p

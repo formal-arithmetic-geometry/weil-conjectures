@@ -236,6 +236,8 @@ noncomputable def coefficientInclusion (E L : Index l Ω) (h : E ≤ L) :
   (Shrink.algEquiv (Padic l) L.val).symm.toAlgHom.comp
     ((IntermediateField.inclusion h).comp (Shrink.algEquiv (Padic l) E.val).toAlgHom)
 
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- The size transports preserve identity and composition of field inclusions. -/
 theorem coefficientInclusion_laws :
     (∀ E : Index l Ω, coefficientInclusion.{u} l Ω E E le_rfl =

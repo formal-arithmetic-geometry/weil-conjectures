@@ -353,7 +353,7 @@ theorem completedComparisonQuotientNormalization
     (φ : ∀ i : Fin 3, DerivedCategory.Q.obj (P i).obj ≅ (M i).obj)
     :
     ∃ (good : GoodExpressions l E h f P)
-      (invertible : ∀ {W : Scheme.{u}} (A : StrictQuotient.Expression h f 3 W),
+      (_invertible : ∀ {W : Scheme.{u}} (A : StrictQuotient.Expression h f 3 W),
         IsIso (substitution l E P (fun i ↦ (M i).obj) φ good A)),
     (∀ {W : Scheme.{u}} (A : StrictQuotient.Expression h f 3 W),
       (∀ n : ℕ, StrictQuotient.Good l E

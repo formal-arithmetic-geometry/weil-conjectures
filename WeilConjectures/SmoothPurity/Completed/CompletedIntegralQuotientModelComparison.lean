@@ -157,6 +157,7 @@ private noncomputable def restrictedTensorPresheafIso (φ : R ⟶ S)
         changeOfRingsMap φ M f (s ⊗ₜ[R.obj.obj V, (φ.hom.app V).hom] m)
       exact (Classical.choose_spec (exists_changeOfRingsMap φ M f) s m).symm
 
+omit [EssentiallySmall.{r} C₀] in
 private theorem restrictedTensorPresheafIso_hom_app (φ : R ⟶ S)
     (M : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
     (U : C₀ᵒᵖ)
@@ -180,7 +181,7 @@ private noncomputable def restrictionSheafificationComparison
     ((PresheafOfModules.restrictScalars α.hom).map
       ((PresheafOfModules.sheafificationAdjunction (𝟙 B₀.obj)).unit.app P))
 
-omit [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] in
+omit [EssentiallySmall.{r} C₀] [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] in
 private theorem restrictionSheafificationComparison_isIso
     (α : R₀ ⟶ B₀) (P : PresheafOfModules.{r} B₀.obj) :
     IsIso (restrictionSheafificationComparison α P) := by
@@ -206,7 +207,7 @@ private theorem restrictionSheafificationComparison_isIso
     rw [PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app]
     exact J.W_toSheafify _
 
-omit [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] in
+omit [EssentiallySmall.{r} C₀] [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] in
 private theorem restrictionSheafificationComparison_unit
     (α : R₀ ⟶ B₀) (P : PresheafOfModules.{r} B₀.obj)
     (W : C₀ᵒᵖ) (x : P.obj W) :
@@ -223,6 +224,7 @@ private theorem restrictionSheafificationComparison_unit
       ((PresheafOfModules.sheafificationAdjunction (𝟙 B₀.obj)).unit.app P))
   exact congrArg (fun k ↦ (k.app W) x) h
 
+omit [EssentiallySmall.{r} C₀] [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] in
 private theorem sheafification_map_unit_apply
     (P Q : PresheafOfModules.{r} R₀.obj) (f : P ⟶ Q)
     (V : C₀ᵒᵖ) (z : P.obj V) :
@@ -343,6 +345,8 @@ private theorem transpose_pure (φ : R ⟶ S)
 
 variable [HasSheafify J AddCommGrpCat.{r}]
 
+omit [EssentiallySmall.{r} C₀] [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
+    [HasWeakSheafify J AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}] in
 private theorem restrictionComposition_hom_app {B : Sheaf J CommRingCat.{r}}
     (φ : R ⟶ S) (c : S ⟶ B) (g : R ⟶ B) (hg : g = φ ≫ c)
     (N : ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))
@@ -360,6 +364,7 @@ private noncomputable def extensionComp {B : Sheaf J CommRingCat.{r}}
       (SheafOfModules.systemScalarRestrictionComposition φ c g hg))
     (extensionAdjunction g)
 
+omit [HasSheafify J AddCommGrpCat.{r}] in
 -- Comparing successive scalar adjunctions elaborates three coefficient actions.
 private theorem extensionComp_pure {B : Sheaf J CommRingCat.{r}}
     (φ : R ⟶ S) (c : S ⟶ B) (g : R ⟶ B) (hg : g = φ ≫ c)
@@ -406,6 +411,7 @@ private theorem laxMonoidal_unit_iso
   rw [← Category.assoc, leftUnitor_naturality, Category.assoc, Iso.inv_hom_id,
     Category.comp_id]
 
+omit [HasSheafify J AddCommGrpCat.{r}] in
 private theorem tensor_unit_hom
     (M : ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
     let A := PresheafOfModules.sheafification
@@ -425,6 +431,7 @@ private theorem tensor_unit_hom
   rw [hu]
   exact laxMonoidal_unit_iso A M.val (ε.app M)
 
+omit [HasSheafify J AddCommGrpCat.{r}] in
 private theorem tensorPresheafUnit_naturality
     {M M' N N' : ringedSiteModules.{r}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)}
@@ -454,12 +461,14 @@ private noncomputable def regularIso
     (asIso (PresheafOfModules.sheafificationAdjunction
       (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)).counit).app M
 
+omit [HasSheafify J AddCommGrpCat.{r}] in
 private theorem regularIso_eq
     (M : ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
     regularIso M = λ_ M := by
   apply Iso.ext
   exact tensor_unit_hom M
 
+omit [HasSheafify J AddCommGrpCat.{r}] in
 private theorem unit_inv_apply
     (M : ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
     (V : C₀ᵒᵖ) (x : M.val.obj V) :
@@ -486,6 +495,7 @@ private theorem unit_inv_apply
   erw [← h]
   rfl
 
+omit [HasSheafify J AddCommGrpCat.{r}] in
 private theorem exists_levelIso {B : Sheaf J CommRingCat.{r}}
     (φ : R ⟶ S) (c : S ⟶ B) (g : R ⟶ B) (hg : g = φ ≫ c)
     (M : ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
@@ -572,13 +582,13 @@ private theorem quotientMap_degree
   erw [HomologicalComplex.ι_mapBifunctorMap]
   dsimp only [CochainComplex.singleFunctor, CochainComplex.singleFunctors]
   simp only [HomologicalComplex.id_f, CategoryTheory.Functor.map_id,
-    NatTrans.id_app, Category.id_comp]
+    Category.id_comp]
   dsimp only [quotientDegreeIso, HomologicalComplex.Hom.isoApp,
     HomologicalComplex.eval_map, CategoryTheory.Functor.mapIso_inv]
-  (simp only [HomologicalComplex.eval_map, CochainComplex.mapBifunctorSingle₁Iso_inv_f,
+  (simp only [CochainComplex.mapBifunctorSingle₁Iso_inv_f,
     HomologicalComplex.single_map_f_self, CategoryTheory.Functor.map_comp, NatTrans.comp_app,
-    curriedTensor_map_app, CategoryTheory.Functor.map_id, Category.id_comp, Category.assoc,
-    comp_whiskerRight, inv_hom_whiskerRight_assoc]; rfl)
+    curriedTensor_map_app, Category.assoc,
+    inv_hom_whiskerRight_assoc]; rfl)
 
 private theorem quotientMap_degree_epi
     (t₀ : (SheafOfModules.unit
@@ -586,7 +596,7 @@ private theorem quotientMap_degree_epi
     (P : CochainComplex (ringedSiteModules.{r}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ) (n : ℕ) (i : ℤ) :
     Epi ((PrincipalQuotientCompletion.quotientMap R t₀ P n).f i) := by
-  letI := SheafOfModules.symmetricCategory R
+  let := SheafOfModules.symmetricCategory R
   have (M : ringedSiteModules.{r}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
       PreservesColimitsOfSize.{0, 0} (tensorLeft M) := by
@@ -604,6 +614,7 @@ private theorem quotientMap_degree_epi
       P.X i) := this
   infer_instance
 
+omit [HasWeakSheafify J AddCommGrpCat.{r}] in
 private theorem quotientProduct_π_degree
     (t₀ : (SheafOfModules.unit
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)).sections)
@@ -614,15 +625,16 @@ private theorem quotientProduct_π_degree
         (op m)) n).f i = (PrincipalQuotientCompletion.quotientMap R t₀ P n).f i :=
   congrArg (fun f ↦ f.f i) (Pi.lift_comp_π (PrincipalQuotientCompletion.quotientMap R t₀ P) n)
 
+omit [HasSheafify J AddCommGrpCat.{r}] in
 private theorem extension_ext (φ : R ⟶ S)
     (M : ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
     (N : ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))
     (f g : changeOfRings φ M ⟶ N)
     (h : ∀ U (s : S.obj.obj U) (x : M.val.obj U),
       f.val.app U ((toSheafify J (changeOfRingsPresheaf φ M).presheaf).app U
-          (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x)) =
+          (s ⊗ₜ[R.obj.obj U,(φ.hom.app U).hom] x)) =
         g.val.app U ((toSheafify J (changeOfRingsPresheaf φ M).presheaf).app U
-          (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x))) : f = g := by
+          (s ⊗ₜ[R.obj.obj U,(φ.hom.app U).hom] x))) : f = g := by
   apply ((PresheafOfModules.sheafificationAdjunction (𝟙 _)).homEquiv _ _).injective
   apply PresheafOfModules.hom_ext
   intro U
@@ -642,6 +654,7 @@ private noncomputable def roosTransposeIso :
     rw [WeilConjectures.cofiberMap_eq_coneMap _ _ _ _ (integralOperationsRoos_square f)]
     rfl)
 
+omit [HasWeakSheafify J AddCommGrpCat.{r}] in
 private theorem roosTransposeIso_hom_app
     (T : ℕᵒᵖ ⥤ CochainComplex (ringedSiteModules.{r}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ) :
@@ -658,6 +671,7 @@ private noncomputable def roosTowerIso {D : Type*} [Category D]
     CategoryTheory.Functor.associator W (PrincipalQuotientCompletion.transpose R) roosF ≪≫
     CategoryTheory.Functor.isoWhiskerLeft W (roosTransposeIso (R := R))
 
+omit [HasWeakSheafify J AddCommGrpCat.{r}] in
 private theorem roosTowerIso_hom_app {D : Type*} [Category D]
     (X : D ⥤ CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{r}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)
@@ -693,7 +707,7 @@ private theorem towerFactorIso
     (hq : ∀ P n i, Epi ((q P n).f i)) :
     ∃ τ : X ≅ Y, ∀ P n i,
       (q P n).f i ≫ ((τ.hom.app P).f i).app (op n) = (a P n).f i := by
-  letI := hq
+  have := hq
   have hs (P : D) (n : ℕ) (i : ℤ) :
       ((X.obj P).X i).map (homOfLE (Nat.le_succ n)).op ≫ (e P n i).hom =
         (e P (n + 1) i).hom ≫ ((Y.obj P).X i).map (homOfLE (Nat.le_succ n)).op := by
@@ -841,8 +855,8 @@ private theorem normalizedFunctorDescent
       (CategoryTheory.Functor.whiskerRight ε U ≫
         CategoryTheory.Functor.whiskerLeft K ν ≫ CategoryTheory.Functor.whiskerRight δ.hom H)
   have hη (g : G) : IsIso (η.app g) := by
-    letI := hε g
-    letI := hν g
+    have := hε g
+    have := hν g
     exact (U.mapIso (asIso (ε.app (i.obj g))) ≪≫
       asIso (ν.app (K.obj (i.obj g))) ≪≫ H.mapIso (δ.app (i.obj g))).isIso_hom
   let e := isoOfComponentIsos η hη
@@ -910,7 +924,7 @@ private theorem integralLevelIso_exists
               (φ.hom.app U).hom] x))) =
           integralScalarTensorSection l E L ι Y n M U
             ((completedIntegralCommRingProjectionUnrestricted l L Y n).hom.app U s) x := by
-  haveI := (PrincipalKoszulStrictReplacement.completed_exact l L Y n).2
+  have := (PrincipalKoszulStrictReplacement.completed_exact l L Y n).2
   let eQ := asIso (PrincipalKoszulStrictReplacement.quotientComparison l L Y n)
   have hQ : ∀ U, eQ.hom.val.app U
       ((cokernel.π (PrincipalKoszulStrictReplacement.multiplication l L Y n)).val.app U
@@ -1005,7 +1019,7 @@ private theorem completedIntegralComparison_descent
     (ι : E →ₐ[ℚ_[l]] L) (Y : AlgebraicGeometry.Scheme.{t})
     (φ : completedIntegralCommRingSheafUnrestricted l E Y ⟶
       completedIntegralCommRingSheafUnrestricted l L Y)
-    (hφ : ∀ n : ℕ, φ ≫ completedIntegralCommRingProjectionUnrestricted l L Y n =
+    (_hφ : ∀ n : ℕ, φ ≫ completedIntegralCommRingProjectionUnrestricted l L Y n =
       completedIntegralCommRingProjectionUnrestricted l E Y n ≫
         integralScalarQuotientSheafMap l E L ι Y n)
     (F : @SheafOfModules.DerivedChangeOfRingsCochainModel.{t + 1, t, max u (t + 1),
@@ -1124,10 +1138,10 @@ theorem completedIntegralQuotientModelComparison
             (integralScalarExtensionComparisonOfUniverses l E L ι Y).hom.app P =
           F.ε.app P.obj ≫ DerivedCategory.Q.map (β.app P.obj) := by
   classical
-  letI : EssentiallySmall.{max u (t + 1)} Y.ProEt := essentiallySmallSelf.{u} _
-  letI : HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
+  have : EssentiallySmall.{max u (t + 1)} Y.ProEt := essentiallySmallSelf.{u} _
+  have : HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
       AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbSheafify.{t, u} Y
-  letI : (AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
+  have : (AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
       AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbLocallyBijective.{t, u} Y
   let R := completedIntegralCommRingSheafUnrestricted l L Y
   let t₀ : (SheafOfModules.unit

@@ -282,29 +282,29 @@ theorem openRestrictionMap_isIso {R S : Coefficients.{u}} (a : Change R S)
   let LS := SheafOfModules.localizedModuleExtension.{u} (S.ring V) (ProEt.mk j)
   let adjR := openAdjunction R j
   let adjS := openAdjunction S j
-  letI := SheafOfModules.localizedUnit_isIso j (R.ring V)
-  letI := SheafOfModules.localizedUnit_isIso j (S.ring V)
-  letI : LR.Full :=
+  have := SheafOfModules.localizedUnit_isIso j (R.ring V)
+  have := SheafOfModules.localizedUnit_isIso j (S.ring V)
+  have : LR.Full :=
     (SheafOfModules.localizedModuleAdjunctionIndependent
       (R.ring V) (ProEt.mk j)).fullyFaithfulLOfIsIsoUnit.full
-  letI : LR.Faithful :=
+  have : LR.Faithful :=
     (SheafOfModules.localizedModuleAdjunctionIndependent
       (R.ring V) (ProEt.mk j)).fullyFaithfulLOfIsIsoUnit.faithful
-  letI : LS.Full :=
+  have : LS.Full :=
     (SheafOfModules.localizedModuleAdjunctionIndependent
       (S.ring V) (ProEt.mk j)).fullyFaithfulLOfIsIsoUnit.full
-  letI : LS.Faithful :=
+  have : LS.Faithful :=
     (SheafOfModules.localizedModuleAdjunctionIndependent
       (S.ring V) (ProEt.mk j)).fullyFaithfulLOfIsIsoUnit.faithful
-  letI : (openExtension R j).Full := Functor.Full.of_iso hR.symm
-  letI : (openExtension R j).Faithful := Functor.Faithful.of_iso hR.symm
-  letI : (openExtension S j).Full := Functor.Full.of_iso hS.symm
-  letI : (openExtension S j).Faithful := Functor.Faithful.of_iso hS.symm
-  letI : IsIso adjS.unit := adjS.unit_isIso_of_L_fully_faithful
+  have : (openExtension R j).Full := Functor.Full.of_iso hR.symm
+  have : (openExtension R j).Faithful := Functor.Faithful.of_iso hR.symm
+  have : (openExtension S j).Full := Functor.Full.of_iso hS.symm
+  have : (openExtension S j).Faithful := Functor.Faithful.of_iso hS.symm
+  have : IsIso adjS.unit := adjS.unit_isIso_of_L_fully_faithful
   obtain ⟨_, _, scalarIso, _, _⟩ :=
     SheafOfModules.RingedOpenScalar.comparison.{u + 1, u, 0, u + 2}
       (ProEt.mk j) (a.map V)
-  letI := proEtaleRingRestrictionPullbackInv_isIso
+  have := proEtaleRingRestrictionPullbackInv_isIso
     j (R.ring V) (S.ring V) (R.ring U) (S.ring U)
       (a.map V) (a.map U) (R.pull j) (S.pull j) (a.square j)
   rw [NatTrans.isIso_iff_isIso_app]
@@ -318,7 +318,7 @@ theorem openRestrictionMap_isIso {R S : Coefficients.{u}} (a : Change R S)
   have ht : (eR.functor ⋙ LR).essImage
       ((proEtaleRingRestrictScalars (a.map V)).obj ((openExtension S j).obj M)) :=
     Functor.essImage_comp_apply_of_essSurj.mpr hs
-  haveI : IsIso (adjR.counit.app
+  have : IsIso (adjR.counit.app
       ((proEtaleRingRestrictScalars (a.map V)).obj ((openExtension S j).obj M))) :=
     adjR.isIso_counit_app_iff_mem_essImage.mpr (Functor.essImage.ofNatIso hR.symm ht)
   let t := inv (proEtaleRingRestrictionPullbackInv
@@ -498,8 +498,8 @@ private theorem openExtension_derivedSlicePresentation (R : Coefficients.{u})
         (SheafOfModules.localizedModuleExtension.{u} (R.ring V) (ProEt.mk j)).mapDerivedCategory)
         := by
   obtain ⟨e, ⟨he⟩⟩ := proEtaleOpen_slicePresentation j (R.ring V) (R.ring U) (R.pull j)
-  letI : e.functor.Additive := Functor.additive_of_preserves_binary_products _
-  letI : e.inverse.Additive := Functor.additive_of_preserves_binary_products _
+  have : e.functor.Additive := Functor.additive_of_preserves_binary_products _
+  have : e.inverse.Additive := Functor.additive_of_preserves_binary_products _
   exact ⟨e.mapDerivedCategory,
     ⟨Functor.mapDerivedCategoryNatIso he ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm⟩⟩
 
@@ -524,7 +524,7 @@ private theorem sliceTensor_supported {V : Scheme.{u}}
   let N := DerivedCategory.Q.objPreimage F
   obtain ⟨Q, q, hk, hf, hq, _⟩ :=
     CochainComplex.exists_isKFlatResolutionIndependentCoefficients N
-  haveI : IsIso (DerivedCategory.Q.map q) :=
+  have : IsIso (DerivedCategory.Q.map q) :=
     (DerivedCategory.isIso_Q_map_iff_quasiIso _ q).2 hq
   let hQ : proEtaleFlatRepresentatives V R Q := ⟨hk, fun n ↦
     (exactFunctor _ _).prop_of_iso
@@ -563,13 +563,13 @@ theorem openProjectionInverse_isIso (R : Coefficients.{u}) {U V : Scheme.{u}}
   let L := (SheafOfModules.localizedModuleExtension.{u} (R.ring V)
     (ProEt.mk j)).mapDerivedCategory
   let adjL := SheafOfModules.localizedModuleDerivedAdjunction.{u} (R.ring V) (ProEt.mk j)
-  letI : IsIso adjL.unit := SheafOfModules.localizedDerivedUnit_isIso j (R.ring V)
-  letI : L.Full := adjL.fullyFaithfulLOfIsIsoUnit.full
-  letI : L.Faithful := adjL.fullyFaithfulLOfIsIsoUnit.faithful
-  letI : (openExtension R j).mapDerivedCategory.Full := Functor.Full.of_iso he.symm
-  letI : (openExtension R j).mapDerivedCategory.Faithful := Functor.Faithful.of_iso he.symm
+  have : IsIso adjL.unit := SheafOfModules.localizedDerivedUnit_isIso j (R.ring V)
+  have : L.Full := adjL.fullyFaithfulLOfIsIsoUnit.full
+  have : L.Faithful := adjL.fullyFaithfulLOfIsIsoUnit.faithful
+  have : (openExtension R j).mapDerivedCategory.Full := Functor.Full.of_iso he.symm
+  have : (openExtension R j).mapDerivedCategory.Faithful := Functor.Faithful.of_iso he.symm
   let adj := openDerivedAdjunction R j
-  letI : IsIso adj.unit := adj.unit_isIso_of_L_fully_faithful
+  have : IsIso adj.unit := adj.unit_isIso_of_L_fully_faithful
   have hs : L.essImage
       (b.tensor.obj ((openExtension R j).mapDerivedCategory.obj M, N)) :=
     Functor.essImage.ofIso
@@ -578,11 +578,11 @@ theorem openProjectionInverse_isIso (R : Coefficients.{u}) {U V : Scheme.{u}}
   have ht : (e.functor ⋙ L).essImage
       (b.tensor.obj ((openExtension R j).mapDerivedCategory.obj M, N)) :=
     Functor.essImage_comp_apply_of_essSurj.mpr hs
-  haveI : IsIso (adj.counit.app
+  have : IsIso (adj.counit.app
       (b.tensor.obj ((openExtension R j).mapDerivedCategory.obj M, N))) :=
     adj.isIso_counit_app_iff_mem_essImage.mpr (Functor.essImage.ofNatIso he.symm ht)
   let q := Prod.mkHom (adj.unit.app M) (𝟙 ((pull R j).obj N))
-  haveI : IsIso q := (isIso_prod_iff _ _).2 ⟨inferInstance, inferInstance⟩
+  have : IsIso q := (isIso_prod_iff _ _).2 ⟨inferInstance, inferInstance⟩
   change IsIso ((adj.homEquiv _ _).symm
     (a.tensor.map q ≫
       (proEtaleCanonicalTensorComparison j (R.ring V) (R.ring U) (R.pull j) b a).inv.app
@@ -648,7 +648,7 @@ theorem projectionComparisons_existsUnique (R : Coefficients.{u})
     (d : ProEtaleTensorModel Y (R.ring Y))
     (hc : R.pull (c.i ≫ c.g) = proEtaleRingCompositeCoefficients c.i c.g
       (R.ring Y) (R.ring c.Z) (R.ring X) (R.pull c.g) (R.pull c.i)) :
-    ∃! data : ProjectionComparisons R c a b d hc, True := by
+    ∃! _data : ProjectionComparisons R c a b d hc, True := by
   let J := (openExtension R c.i).mapDerivedCategory
   let P := pull R c.g
   let I := pull R c.i

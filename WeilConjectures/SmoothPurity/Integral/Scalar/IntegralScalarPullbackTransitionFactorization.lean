@@ -121,7 +121,7 @@ private theorem scalar_comparison_transport {X Y : AlgebraicGeometry.Scheme.{u}}
 
 private theorem ramified_level {X Y : AlgebraicGeometry.Scheme.{u}}
     (f : X ⟶ Y) (P : CochainComplex (integralTowerModules l E Y) ℤ) (n : ℕ) :
-    ∃ (m : ℕ) (h : n ≤ m)
+    ∃ (m : ℕ) (_h : n ≤ m)
       (d : ((integralOrdinaryScalar l E L ι X).mapHomologicalComplex (.up ℤ)).obj
           ((integralOperationsPullbackLevel l E f n).obj P) ≅
         (integralOperationsPullbackLevel l L f m).obj

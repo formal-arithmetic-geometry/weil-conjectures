@@ -61,7 +61,7 @@ variable (l : ℕ) [Fact l.Prime]
 transitions, before taking products or a Roos complex. -/
 theorem integralScalarPullbackConeProZero {X Y : AlgebraicGeometry.Scheme.{u}}
     (f : X ⟶ Y) (P : CochainComplex (integralTowerModules l E Y) ℤ)
-    (hP : integralOperationsGoodComplex l E Y P)
+    (_hP : integralOperationsGoodComplex l E Y P)
     (α : ((integralOperationsPullbackTowerFunctor l E f).obj P) ⋙
         (integralOrdinaryScalar l E L ι X).mapHomologicalComplex (.up ℤ) ⟶
       (integralOperationsPullbackTowerFunctor l L f).obj

@@ -465,19 +465,19 @@ theorem rationalScalarAssociatorSquare
   have h1 := hmap
     (A := (rationalDerivedTensor l E W).obj ((rationalDerivedTensor l E W).obj (M, N), P))
     (B := (rationalDerivedTensor l E W).obj (M, (rationalDerivedTensor l E W).obj (N, P)))
-    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl)
-    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl) _ _
+    (by simp only [hTE]; rfl)
+    (by simp only [hTE]; rfl) _ _
     (pullbackTensorRationalAssociator_existsUnique l E W M N P).exists.choose_spec
   have h2 := (hc M ((rationalDerivedTensor l E W).obj (N, P))).trans (hμ rfl (hTEobj N P))
   have h3 := htmap (hG M) (hG M)
-    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl)
-    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl) (𝟙 _)
+    (by simp only [Functor.comp_obj, hG, hTE]; rfl)
+    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTL]; rfl) (𝟙 _)
     ((rationalTensorScalarComparison l E L ι W).hom.app (N, P))
     (𝟙 _) (μ N.obj P.obj).hom (hid M) (hc N P)
   have h4 := (hc ((rationalDerivedTensor l E W).obj (M, N)) P).trans (hμ (hTEobj M N) rfl)
   have h5 := htmap
-    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl)
-    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl)
+    (by simp only [Functor.comp_obj, hG, hTE]; rfl)
+    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTL]; rfl)
     (hG P) (hG P) ((rationalTensorScalarComparison l E L ι W).hom.app (M, N)) (𝟙 _)
     (μ M.obj N.obj).hom (𝟙 _) (hc M N) (hid P)
   have h6 := (pullbackTensorRationalAssociator_existsUnique l L W
@@ -486,21 +486,21 @@ theorem rationalScalarAssociatorSquare
     ((sfRationalScalarExtension l E W 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj
       P)).exists.choose_spec.trans (hαL (hbase M) (hbase N) (hbase P))
   have hl := heq_comp
-    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl)
-    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl)
-    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl) h1
+    (by simp only [hG, hTE]; rfl)
+    (by simp only [hG, hTE]; rfl)
+    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTL]; rfl) h1
     (heq_comp
+      (by simp only [hG, hTE]; rfl)
       (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl)
-      (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl)
-      (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl) h2 h3)
+      (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTL]; rfl) h2 h3)
   have hr := heq_comp
+    (by simp only [Functor.comp_obj, hG, hTE]; rfl)
     (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl)
-    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl)
-    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl) h4
+    (by simp only [hG, hTL]; rfl) h4
     (heq_comp
       (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl)
-      (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl)
-      (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl) h5 h6)
+      (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTL]; rfl)
+      (by simp only [hG, hTL]; rfl) h5 h6)
   apply eq_of_heq
   refine hl.trans ((heq_of_eq ?_).trans hr.symm)
   have h := congrArg Q.map (integralScalarAssociatorSquare l E L ι W M.obj N.obj P.obj)
@@ -616,7 +616,7 @@ private theorem scalarAssoc_tensorStageComparison_endpoint
     Functor.whiskerLeft_app, Functor.whiskerRight_app, NatTrans.comp_app,
     NatIso.prod_hom, NatTrans.prod, Iso.prod_hom, Functor.mapIso_hom]
   simp only [Category.assoc, ← Functor.map_comp, prod_comp, Iso.prod_hom, Iso.trans_hom,
-    Iso.symm_hom, Iso.app_inv]
+    Iso.symm_hom]
 
 attribute [local semireducible] operationStageTransitionIso commonStageTensorComparison in
 /-- The common-stage tensor comparison is the descent endpoint of the stage comparisons. -/
@@ -680,13 +680,14 @@ private theorem ca_tower (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueF
     StageTensorTower (stageSystem l Ω W) (caT l Ω W) (fun h ↦ cac l Ω W h) :=
   fun h h' X Y ↦ rationalTensorStageComparison_coherent l Ω W h h' X Y
 
+omit [IsAlgClosure (Padic l) Ω] in
 private theorem ca_hα (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)] :
     ∀ i {X X' Y Y' Z Z' : Stage l Ω W i} (f : X ⟶ X') (g : Y ⟶ Y') (h : Z ⟶ Z'),
       (caT l Ω W i).map (Prod.mkHom ((caT l Ω W i).map (Prod.mkHom f g)) h) ≫
           (caα l Ω W i X' Y' Z').hom =
         (caα l Ω W i X Y Z).hom ≫ (caT l Ω W i).map (Prod.mkHom f
           ((caT l Ω W i).map (Prod.mkHom g h))) :=
-  fun i _ _ _ _ _ _ f g h ↦ scalarAssoc_rationalAssociator_natural l _ W f g h
+  fun _ _ _ _ _ _ _ f g h ↦ scalarAssoc_rationalAssociator_natural l _ W f g h
 
 private theorem ca_hAS (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)] :
     ∀ {i j : AlgebraicallyClosedCoefficients.Index l Ω} (h : i ≤ j)

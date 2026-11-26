@@ -108,6 +108,8 @@ private theorem directRestrictionComp_eq (W : Scheme.{u}) (n : ℕ) :
   rw [h]
   rfl
 
+-- Untyped partial application of a Prop-valued declaration; no ascription to make it a theorem.
+set_option linter.defProp false in
 private def directDerivedBase {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
   letI := proEtaleConstantModuleDirectImage_additive f
     (Padic.coefficientExtensionRing l E (n + 1))
@@ -151,6 +153,8 @@ private def directDerivedBase {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
     (S1 := integralCoefficientSheaf l E Y (n + 1))
     Fn Fm G PX RX QX PY RY QY
 
+-- Untyped partial application of a Prop-valued declaration; no ascription to make it a theorem.
+set_option linter.defProp false in
 private def directPastingHead {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
   let q := compactSupportLevelQuotient l E (n + 1) n n.le_succ
   directDerivedBase l E f n
@@ -161,11 +165,15 @@ private def directPastingHead {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
     (sfDerivedRestrictionComparison l E f (n + 1))
     (sfDerivedRestrictionComparison l E f n) (sfDerivedImageRestriction f q)
 
+-- Untyped partial application of a Prop-valued declaration; no ascription to make it a theorem.
+set_option linter.defProp false in
 private def directPastingCompletedNormalized {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
   directPastingHead l E f n
     (sfDerivedRestrictionComparison_existsUnique l E f (n + 1)).exists.choose_spec
     (sfDerivedRestrictionComparison_existsUnique l E f n).exists.choose_spec
 
+-- Untyped partial application of a Prop-valued declaration; no ascription to make it a theorem.
+set_option linter.defProp false in
 private def directPastingFiniteNormalized {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
   let q := compactSupportLevelQuotient l E (n + 1) n n.le_succ
   directPastingCompletedNormalized l E f n
@@ -173,6 +181,8 @@ private def directPastingFiniteNormalized {X Y : Scheme.{u}} (f : X ⟶ Y) (n : 
       intro J hJ I hI r hr
       exact ((proEtaleDerivedDirectImage_restrictScalars f q).choose_spec J I r).2)
 
+-- Untyped partial application of a Prop-valued declaration; no ascription to make it a theorem.
+set_option linter.defProp false in
 private def directPastingRestrictionSections {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
   directPastingFiniteNormalized l E f n (scalarRestriction_identity l E Y (n + 1))
 
@@ -187,10 +197,14 @@ private theorem inverseDirectSections
     (fun U x ↦ heq_of_eq
       ((proEtaleCoefficientDirectImageComparison_existsUnique f q).choose_spec.1 M U x)) U x
 
+-- Untyped partial application of a Prop-valued declaration; no ascription to make it a theorem.
+set_option linter.defProp false in
 private def directPastingFiniteSections {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
   directPastingRestrictionSections l E f n
     (inverseDirectSections f (compactSupportLevelQuotient l E (n + 1) n n.le_succ))
 
+-- Untyped partial application of a Prop-valued declaration; no ascription to make it a theorem.
+set_option linter.defProp false in
 private def completeDirectPasting {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
   directPastingFiniteSections l E f n
     (completedComparison_identity l E f n)
@@ -391,7 +405,7 @@ theorem systemDirectImage_restrictedTowerComparison
   let G : coefficientSequenceModules l E X ⥤ coefficientSequenceModules l E Y :=
     ProEtale.VaryingRing.push (compactSupportSystemLevel l E)
       (compactSupportSystemQuotient l E) f
-  letI : G.Additive :=
+  have : G.Additive :=
     ProEtale.VaryingRing.push_additive (compactSupportSystemLevel l E)
       (compactSupportSystemQuotient l E) f
   let a := Functor.rightDerivedFunctorNatIso
