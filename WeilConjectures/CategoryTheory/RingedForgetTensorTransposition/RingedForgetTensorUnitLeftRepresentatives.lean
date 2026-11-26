@@ -307,8 +307,8 @@ variable [HasDerivedCategory.{wb} (RingedTensorModules.{c, v, r} J R)]
   (cA : RingedDerivedTensorCoherence.{d, vd, s, wa} J' R' SA TA βA)
 
 include u SB TB βB cB SA TA βA cA
-omit [∀ I : Type (max c v r), PreservesLimitsOfShape (Discrete I) U]
-  [U.PreservesKInjectiveComplexes] in
+-- Kept in the public interface: `omit` makes downstream proofs warn about these instances.
+set_option linter.unusedSectionVars false in
 /--
 The representative unit calculation for the left unitor is reduced to the
 componentwise model equation for the normalized tensor comparison. -/
