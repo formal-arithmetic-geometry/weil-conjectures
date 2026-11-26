@@ -269,7 +269,6 @@ section Groups
 
 variable {j} {z : C} (c : BoundaryChart p j z)
 
--- instance search through `SeparableClosure` and its integral closures is slow
 /-- The decomposition group in `π₁(U₀)` of a point `Q` over the boundary point `z`: the image of
 the stabiliser of `Q`. -/
 noncomputable def decompositionGroup (Q : Ideal (integralClosure Γ(C, c.W) Ω)) : Subgroup GU :=
@@ -419,8 +418,6 @@ lemma BoundaryChart.restrictionMap_genericGaloisMap (σ : Gal(Ω/C.functionField
   refine IsFundamentalGroup.non_trivial (F := fiber sC) _ fun P y ↦ ?_
   rw [mul_smul, key, smul_inv_smul]
 
-set_option synthInstance.maxHeartbeats 200000 in
--- instance search through `SeparableClosure` and its integral closures is slow
 omit [Finite K] [GeometricallyConnected p] [IsCurve pU] [GeometricallyConnected pU] in
 /-- **Frobenius lifts in the decomposition group.** Some element of the decomposition group of `Q`
 restricts to a Frobenius element at `z` in `π₁(C₀)`: one inducing the inverse of the arithmetic
@@ -428,13 +425,13 @@ Frobenius on the residue field of `Q`, an algebraic closure of `κ(z)`. -/
 theorem BoundaryChart.exists_mem_stabilizer_isFrobeniusElement_restrictionMap
     [Finite (C.residueField z)] (Q : Ideal (integralClosure Γ(C, c.W) Ω)) [Q.IsMaximal]
     [Q.LiesOver c.ideal] :
-    ∃ σ ∈ MulAction.stabilizer Gal(Ω/C.functionField) Q,
+    ∃ σ ∈ affineIdealStabilizer c.isAffineOpen Q,
       IsFrobeniusElement sC GC z (restrictionMap j τ GU GC (genericGaloisMap j sU GU σ)) := by
   have := c.isMaximal_ideal
   have := isDedekindDomain_of_isAffineOpen p c.isAffineOpen
   obtain ⟨σ, hσ, hF⟩ := exists_mem_stabilizer_isFrobeniusElement c.isAffineOpen z c.mem Q GC
     (c.path sU τ)
-  exact ⟨σ, hσ, by
+  exact ⟨σ, (mem_affineIdealStabilizer c.isAffineOpen Q σ).2 hσ, by
     rw [c.restrictionMap_genericGaloisMap (sU := sU) (GU := GU) (τ := τ) (GC := GC)]; exact hF⟩
 
 end Groups
@@ -457,12 +454,11 @@ noncomputable def boundaryInertia (z : ↥((Set.range j.base)ᶜ)) :
   (inertiaGroup sU GU (boundaryChart (p := p) j z) (boundaryChart (p := p) j z).point).comap
     ((MonoidHom.fst _ _).comp (weilGroup pU sU GU).subtype) ⊓ (weilGroupDeg pU sU GU).ker
 
-set_option synthInstance.maxHeartbeats 200000 in
--- instance search through `SeparableClosure` and its integral closures is slow
 omit [GeometricallyConnected p] in
 lemma exists_boundaryFrobeniusLift (z : ↥((Set.range j.base)ᶜ)) :
     have : Finite (C.residueField z.1) := boundary_subset_finitePoints (p := p) j z.2
-    ∃ σ ∈ MulAction.stabilizer Gal(Ω/C.functionField) (boundaryChart (p := p) j z).point,
+    ∃ σ ∈ affineIdealStabilizer (boundaryChart (p := p) j z).isAffineOpen
+      (boundaryChart (p := p) j z).point,
       IsFrobeniusElement sC GC z.1 (restrictionMap j τ GU GC (genericGaloisMap j sU GU σ)) :=
   have : Finite (C.residueField z.1) := boundary_subset_finitePoints (p := p) j z.2
   (boundaryChart (p := p) j z).exists_mem_stabilizer_isFrobeniusElement_restrictionMap sU GU τ GC _
@@ -473,13 +469,12 @@ its residue field. -/
 noncomputable def boundaryFrobeniusLift (z : ↥((Set.range j.base)ᶜ)) : Gal(Ω/C.functionField) :=
   (exists_boundaryFrobeniusLift (p := p) j sU GU τ GC z).choose
 
-set_option synthInstance.maxHeartbeats 200000 in
--- instance search through `SeparableClosure` and its integral closures is slow
 omit [GeometricallyConnected p] in
 lemma boundaryFrobeniusLift_mem_stabilizer (z : ↥((Set.range j.base)ᶜ)) :
     boundaryFrobeniusLift (p := p) j sU GU τ GC z ∈
-      MulAction.stabilizer Gal(Ω/C.functionField) (boundaryChart (p := p) j z).point :=
-  (exists_boundaryFrobeniusLift (p := p) j sU GU τ GC z).choose_spec.1
+      affineIdealStabilizer (boundaryChart (p := p) j z).isAffineOpen
+        (boundaryChart (p := p) j z).point := by
+  exact (exists_boundaryFrobeniusLift (p := p) j sU GU τ GC z).choose_spec.1
 
 omit [GeometricallyConnected p] in
 lemma isFrobeniusElement_boundaryFrobeniusLift (z : ↥((Set.range j.base)ᶜ)) :
@@ -517,14 +512,13 @@ lemma isConj_restrictionHom_boundaryResidueFrobenius (z : ↥((Set.range j.base)
     Multiplicative.ofAdd (p.degreeOver z.1 : ℤ)
   rw [mul_comm n, mul_assoc, mul_inv_cancel, mul_one]
 
-set_option synthInstance.maxHeartbeats 200000 in
--- instance search through `SeparableClosure` and its integral closures is slow
 omit [GeometricallyConnected p] [IsCurve pU] in
 /-- An element of `W(U₀)` mapping into the decomposition group conjugates the inertia group at `z`
 into itself. -/
 lemma conj_mem_boundaryInertia (z : ↥((Set.range j.base)ᶜ)) (r : weilGroup pU sU GU)
     {σ : Gal(Ω/C.functionField)}
-    (hσ : σ ∈ MulAction.stabilizer Gal(Ω/C.functionField) (boundaryChart (p := p) j z).point)
+    (hσ : σ ∈ affineIdealStabilizer (boundaryChart (p := p) j z).isAffineOpen
+      (boundaryChart (p := p) j z).point)
     (hr : (r : GU × Multiplicative ℤ).1 = genericGaloisMap j sU GU σ) {x : weilGroup pU sU GU}
     (hx : x ∈ boundaryInertia (p := p) (pU := pU) j sU GU z) :
     r * x * r⁻¹ ∈ boundaryInertia (p := p) (pU := pU) j sU GU z := by
