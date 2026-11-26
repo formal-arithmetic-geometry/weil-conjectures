@@ -1,0 +1,12 @@
+Stage G fresh replay (pinned Lean 4.33.1 / historical source snapshot)
+
+Direct extraction probe p6-direct3.out:
+- checked provider original: inferInstance; stored provider original: inferInstance.
+- Checked/stored provider WHNF both expose MonoidalCategoryStruct.mk with 10 fields; the extracted checked and stored structures have distinct hashes/sizes in the fresh fvar context.
+- Existing exact extraction also reports checked provider instance WHNF as canonical-containing and stored provider instance WHNF as shortcut-containing; this is the fresh replay counterpart of the reported asymmetry.
+- The two reduced tensorObj fields are distinct hashes/sizes but Kernel DefEq returns true on the direct field pair.
+- Original root replay (field-replay3) returned true after 6,269,620 DefEq calls, 77,998 ms wall time, 26,238 ms reduction-exclusive, 91,5896 ms lazy-delta reduction aggregate (trace summary); this is downstream root cost, not a standalone delta cost.
+
+Attempted G1-G5 focused probe p6_probe.lean was terminated after >50s with no output because exact root extraction reached the expensive comparison before emitting; no claim is based on its absent output.
+
+Evidence labels: [FRESH-REPLAY] p6-direct3.out; [HISTORICAL-ROOT-REPLAY] field-replay3.err/field-replay-analysis.txt; [UNKNOWN] no serialized historical root and no completed focused G1-G5 caller-swapped run.

@@ -1,0 +1,31 @@
+Stage D fresh measurement (pinned Lean 4.33.1 / historical source)
+
+Evidence [D1] declaration audit:
+- HomotopyCategory.MonoidalCategory.instMonoidalCategory: def, regular(24), three universe parameters.
+- instMonoidalCategoryHomotopyCategoryIntUp_weilConjectures: def, regular(25), two universe parameters.
+- DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory: def, regular(27).
+- CategoryTheory.MonoidalCategory.ofBifunctor: def, regular(5).
+- CategoryTheory.MonoidalCategoryStruct.tensorObj: def, abbrev.
+- CategoryTheory.MonoidalCategoryStruct.whiskerRight: def, abbrev.
+- CategoryTheory.Functor.uncurry: def, regular(3).
+- CategoryTheory.Functor.whiskeringRight: def, regular(4).
+
+Evidence [D2] default options from the same fresh elaboration:
+backward.isDefEq.lazyProjDelta=true
+backward.isDefEq.lazyWhnfCore=true
+backward.isDefEq.respectTransparency=true
+backward.isDefEq.implicitBump=true
+
+Evidence [D3] pinned source implementation:
+- whnfCore does not delta-unfold constants.
+- When lazyWhnfCore is true, whnfCoreAtDefEq runs whnfCore with projection mode yesWithDeltaI.
+- yesWithDeltaI reduces projections while using whnfAtMostI on the major; this can unfold at most instances transparency.
+- isDefEqProjDelta first whnfCore-normalizes both sides, then isDefEqDeltaStep chooses a side by comparing declaration hints. If only one side is a delta candidate, that side is unfolded. If both are candidates, lower hint unfolds first; higher unfolds first on the other side; equal hints unfold both (or same-head heuristic may avoid unfolding).
+- The lazy projection path is enabled only when lazyProjDelta is true and the pair has matching projection name/index outside typeclass-resolution mode.
+
+Evidence [D4] disposable regular-height control:
+- regular(1) identity unfolds under reducible, instances, default, and all.
+- regular(2) and regular(3) identity wrappers remain at reducible and instances, but unfold at default and all.
+- The source marks regular declarations with height > 2 as nontrivial before its simple-body heuristic. Height therefore affects the heuristic classification, but no control shows that regular(24) versus regular(25) alone selects the historical side.
+
+Conclusion [I,D1-D4]: the metadata records canonical at regular(24) and shortcut at regular(25), but the heights do not by themselves explain the observed checked/stored asymmetry. A projection comparison can request the lazy delta path; the actual side choice must be attributed to the parent projection/DefEq context and the current candidate heads. No Kernel semantics were changed.
