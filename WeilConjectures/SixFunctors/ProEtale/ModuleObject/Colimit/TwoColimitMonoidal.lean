@@ -76,8 +76,13 @@ lemma isMonoidal_derivedExtendScalarsCompIso_hom (X : Scheme.{u})
   let := Mod.extendScalarsMonoidal (padicSubfieldRingObjToPadicAlgCl X ℓ E)
   let := Mod.extendScalarsMonoidal
     (padicSubfieldRingObjMap X ℓ h ≫ padicSubfieldRingObjToPadicAlgCl X ℓ F)
-  have := Mod.isMonoidal_extendScalarsComp_hom (padicSubfieldRingObjMap X ℓ h)
-    (padicSubfieldRingObjToPadicAlgCl X ℓ F)
+  let : (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h) ⋙
+      Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ F)).LaxMonoidal :=
+    Functor.LaxMonoidal.comp _ _
+  have : NatTrans.IsMonoidal
+      (Mod.extendScalarsComp (padicSubfieldRingObjMap X ℓ h)
+        (padicSubfieldRingObjToPadicAlgCl X ℓ F)).hom :=
+    Mod.isMonoidal_extendScalarsComp_hom _ _
   have := Mod.isMonoidal_extendScalarsIsoOfEq_hom
     (padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ h)
   have : NatTrans.IsMonoidal ((Mod.extendScalarsComp (padicSubfieldRingObjMap X ℓ h)
