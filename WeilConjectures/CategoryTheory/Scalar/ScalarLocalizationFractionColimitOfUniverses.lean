@@ -354,6 +354,7 @@ private theorem transport_scalar_colimitAux
   rw [Category.assoc, h n]
   simp only [Iso.inv_hom_id_assoc]
 
+omit [HasSheafify J CommRingCat] in
 private theorem regular_tensor_scalar_applyAux
     (R : Sheaf J CommRingCat.{u})
     (M : SheafOfModules ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))

@@ -139,7 +139,7 @@ theorem ODcomp_app_eq {E L M : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)
       (pbcFiniteField.{u} l Ω M) ι T) (inclusion_comp l Ω h k))).hom.app X := by
   rw [ODcomp_eq]
 
-omit [AlgebraicGeometry.IsNoetherian T] in
+omit [AlgebraicGeometry.IsNoetherian T] [IsAlgClosure ℚ_[l] Ω] in
 private theorem counit_isIso {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)
     (P : CochainComplex (pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))) ℤ) :
     IsIso ((pbcCounitNT (pbcCompletedScalarMap l Ω T h)).app P) := by
