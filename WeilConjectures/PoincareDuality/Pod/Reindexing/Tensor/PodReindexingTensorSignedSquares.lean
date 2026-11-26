@@ -55,7 +55,6 @@ private theorem goodRepresentative (W : Scheme.{u})
   have : L.EssSurj := Localization.essSurj L V
   exact ⟨L.objPreimage M, ⟨L.objObjPreimageIso M⟩⟩
 
-set_option linter.unusedVariables false in
 /-- For signed shifts satisfying the generator and model laws, the completed tensor
 reindexing commutes with the left and right tensor-factor shift isomorphisms.
 
@@ -71,7 +70,7 @@ theorem podReindexingTensorSignedShifts_tensorSquares
     (hSY : SY.Generators l E) (hSX : SX.Generators l E)
     (mSY : SY.Model l E D.shiftSource) (mSX : SX.Model l E D.shiftTarget) :
     (∀ (M N M' N' : sfIntegralConstructibleCategory l E Y) (r : ℤ)
-      (a : M'.obj ≅ M.obj⟦r⟧) (b : N'.obj ≅ N.obj⟦r⟧),
+      (a : M'.obj ≅ M.obj⟦r⟧) (_b : N'.obj ≅ N.obj⟦r⟧),
       ((podOrdinaryReindex l E g).map (SY.left M N M' r a).hom ≫
           ((podOrdinaryReindex l E g).commShiftIso r).hom.app _ ≫ (T.tensor M N).hom⟦r⟧' =
         (T.tensor M' N).hom ≫
@@ -80,7 +79,7 @@ theorem podReindexingTensorSignedShifts_tensorSquares
             ((podOrdinaryReindex l E g).mapIso a ≪≫
               ((podOrdinaryReindex l E g).commShiftIso r).app M.obj)).hom)) ∧
     (∀ (M N M' N' : sfIntegralConstructibleCategory l E Y) (r : ℤ)
-      (a : M'.obj ≅ M.obj⟦r⟧) (b : N'.obj ≅ N.obj⟦r⟧),
+      (_a : M'.obj ≅ M.obj⟦r⟧) (b : N'.obj ≅ N.obj⟦r⟧),
       ((podOrdinaryReindex l E g).map (SY.right M N N' r b).hom ≫
           ((podOrdinaryReindex l E g).commShiftIso r).hom.app _ ≫ (T.tensor M N).hom⟦r⟧' =
         (T.tensor M N').hom ≫
