@@ -497,7 +497,7 @@ structure IntegralComparisonRealizationCoherence
         (integralComparisonScalar l E L ι D f J).hom =
       (integralComparisonScalar l E L ι D f K).hom ≫
         (integralDerivedPullback l L f).map ((integralScalarExtension l E L ι Y).map r.hom)
-  /-- The node's displayed equation, with its specified integral families. -/
+  /-- Scalar comparison is compatible with composition of morphisms. -/
   scalarComposition : ∀ {V W Z : Scheme.{u}}
     [∀ v : V, Invertible (l : V.residueField v)]
     [∀ w : W, Invertible (l : W.residueField w)]

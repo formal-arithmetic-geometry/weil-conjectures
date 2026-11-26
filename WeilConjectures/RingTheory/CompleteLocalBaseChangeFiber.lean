@@ -169,7 +169,6 @@ private theorem complete_local_baseChange_closedFiber_equiv
 
 set_option linter.unusedVariables false in
 /-- Base change of a complete local algebra along a surjective local map remains
-complete local, and preserves an identified closed fibre compatibly with the new base.
 complete local, and preserves an identified closed fibre compatibly with the new base. -/
 theorem complete_local_baseChange_closedFiber
     (R : Type w) (A : Type u) (T : Type w) (E : Type v)

@@ -76,9 +76,8 @@ attribute [local instance] fact_ringChar_prime_of_finite
     ProEtale.CondensedRing.fintypeFrobeniusFixedPoints
 
 open ProEtale.CondensedRing in
-/-- **Weil complexes have the traces of Weil objects of `Dᵇc(-)⟦ℚ̲̄_ℓ⟧`** (comparison of the
-zeta-function chapter with the trace formula chapter): a Weil complex `K` on `X₀` has the
-same traces as a Weil object `K'` for `𝟙 X₀`. There is an additive map
+/-- **Weil complexes have the traces of Weil objects of `Dᵇc(-)⟦ℚ̲̄_ℓ⟧`**: a Weil complex `K` on
+`X₀` has the same traces as a Weil object `K'` for `𝟙 X₀`. There is an additive map
 `ι : End (𝟙 Mod_{Spec k̄}) ⟶ ℚ̄_ℓ` such that, for every `n`,
 * `ι` of the global trace of `K'` in degree `n + 1` is
   `∑ᵢ (-1)ⁱ Tr(F^{n+1} | H_c^i(X₀ ⊗ k̄, K))`, and

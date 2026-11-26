@@ -47,7 +47,6 @@ universe u v
 namespace Algebra
 
 /-- Appending elements of the prime whose images form a regular sequence in the first
-closed fibre preserves flatness of the localized polynomial coordinate map.
 closed fibre preserves flatness of the localized polynomial coordinate map. -/
 theorem flat_polynomial_append_of_fibre_regular_sequence
     (k : Type u) (Λ : Type v) [Field k] [CommRing Λ] [Algebra k Λ]

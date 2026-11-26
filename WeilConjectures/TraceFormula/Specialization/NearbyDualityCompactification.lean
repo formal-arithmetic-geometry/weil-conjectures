@@ -53,7 +53,7 @@ for trait models over a generic base
 (`IsTraitModelOfGenericBase.genericBaseMeasure_genericSliceBase_add_one_le`). The slice step is
 `NearbyCyclesModel.isIso_map_sliceSpecialMap_nearbyDualityMapOfGenericBase`.
 
-The node for nearby duality is usually stated for finite `ℓ`-primary coefficients and `D^b_ctf`; for
+Nearby duality is usually stated for finite `ℓ`-primary coefficients and `D^b_ctf`; for
 bounded constructible `ℚ̄_ℓ`-complexes the canonical map is the limit of the finite ones
 (Bhatt–Scholze, §6.8).
 
