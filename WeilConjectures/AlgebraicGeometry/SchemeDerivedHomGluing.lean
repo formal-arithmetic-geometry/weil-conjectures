@@ -72,16 +72,14 @@ private theorem lifted_morphism_eq
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
 -- Additivity of the three-fold composite restriction functors exceeds the default size.
-set_option maxHeartbeats 500000 in
--- Elaborating the restriction functors and their comparison isomorphisms needs this budget.
-/-- Compatible local morphisms between two fixed global derived objects lift globally. -/
-theorem scheme_derived_hom_gluing
-    (X : Scheme.{u}) (U V : X.Opens) (hcover : U ⊔ V = ⊤)
+/-- Compatible local morphisms between two global derived objects lift to a global morphism. -/
+def schemeDerivedHomGluingClaim
+    (X : Scheme.{u}) (U V : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (U ⊓ V).toScheme.toRingedSpace))]
-    (F E : schemeDerivedCategory X) :
+    (F E : schemeDerivedCategory X) : Prop :=
     let R_U := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙
           Equivalence.functor
             (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
@@ -171,8 +169,18 @@ theorem scheme_derived_hom_gluing
     ∀ (a : R_U.obj F ⟶ R_U.obj E) (b : R_V.obj F ⟶ R_V.obj E),
       eU.inv.app F ≫ S_U.map a ≫ eU.hom.app E =
         eV.inv.app F ≫ S_V.map b ≫ eV.hom.app E →
-      ∃ (f : F ⟶ E), R_U.map f = a ∧ R_V.map f = b := by
-  dsimp only
+      ∃ (f : F ⟶ E), R_U.map f = a ∧ R_V.map f = b
+
+/-- Compatible local morphisms between two fixed global derived objects lift globally. -/
+theorem scheme_derived_hom_gluing
+    (X : Scheme.{u}) (U V : X.Opens) (hcover : U ⊔ V = ⊤)
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (U ⊓ V).toScheme.toRingedSpace))]
+    (F E : schemeDerivedCategory X) :
+    schemeDerivedHomGluingClaim X U V F E := by
+  dsimp only [schemeDerivedHomGluingClaim]
   intro a b hab
   let eU : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ≌
       SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) :=
