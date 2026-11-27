@@ -79,25 +79,55 @@ private abbrev P := CondensedRing.lowerStar (DerivedNakayama.integerRing l E) f
 private abbrev adj := CondensedRing.upperStarLowerStarAdjunction (DerivedNakayama.integerRing l E) f
 
 /-- The finite reduction functor at level `n`. -/
-private abbrev C (T : Scheme.{u}) (n : ℕ) := red l E T ⋙ dev l E T n
+private def C (T : Scheme.{u}) (n : ℕ) :
+    DerivedCategory (AdicCompletion.Modules l E T) ⥤ DerivedCategory (AdicCompletion.Modules l E T) :=
+  red l E T ⋙ dev l E T n
+
+private theorem C_map (T : Scheme.{u}) (n : ℕ) {K L : DerivedCategory (AdicCompletion.Modules l E T)}
+    (g : K ⟶ L) : (C l E T n).map g = (dev l E T n).map ((red l E T).map g) := rfl
 
 /-- The strict model of the finite reduction functor at level `n`. -/
-private abbrev Φ (T : Scheme.{u}) (n : ℕ) :
+private def Φ (T : Scheme.{u}) (n : ℕ) :
     CochainComplex (AdicCompletion.Modules l E T) ℤ ⥤ CochainComplex (AdicCompletion.Modules l E T) ℤ :=
   strictRed l E T ⋙ (ev l E T n).mapHomologicalComplex (.up ℤ)
 
-/-- The finite reduction functor computed on the strict model. -/
-private def e (T : Scheme.{u}) (n : ℕ) :
-    DerivedCategory.Q ⋙ C l E T n ≅ Φ l E T n ⋙ DerivedCategory.Q :=
-  (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight (redFactors l E T) (dev l E T n) ≪≫
-    Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft (strictRed l E T) (ev l E T n).mapDerivedCategoryFactors
+/-- The finite reduction functor computed on the strict model, at a complex. -/
+private def eI (T : Scheme.{u}) (n : ℕ) (M : CochainComplex (AdicCompletion.Modules l E T) ℤ) :
+    (C l E T n).obj (DerivedCategory.Q.obj M) ≅ DerivedCategory.Q.obj ((Φ l E T n).obj M) :=
+  (dev l E T n).mapIso ((redFactors l E T).app M) ≪≫
+    (ev l E T n).mapDerivedCategoryFactors.app ((strictRed l E T).obj M)
 
-private theorem e_hom_app (T : Scheme.{u}) (n : ℕ)
+private theorem eI_hom (T : Scheme.{u}) (n : ℕ)
     (M : CochainComplex (AdicCompletion.Modules l E T) ℤ) :
-    (e l E T n).hom.app M = (dev l E T n).map ((redFactors l E T).hom.app M) ≫
-      (ev l E T n).mapDerivedCategoryFactors.hom.app ((strictRed l E T).obj M) := by
-  simp [e]
+    (eI l E T n M).hom = ((dev l E T n).map ((redFactors l E T).hom.app M) ≫
+      (ev l E T n).mapDerivedCategoryFactors.hom.app ((strictRed l E T).obj M) :
+        (C l E T n).obj (DerivedCategory.Q.obj M) ⟶ DerivedCategory.Q.obj ((Φ l E T n).obj M)) :=
+  rfl
+
+private theorem eI_inv (T : Scheme.{u}) (n : ℕ)
+    (M : CochainComplex (AdicCompletion.Modules l E T) ℤ) :
+    (eI l E T n M).inv = ((ev l E T n).mapDerivedCategoryFactors.inv.app
+      ((strictRed l E T).obj M) ≫ (dev l E T n).map ((redFactors l E T).inv.app M) :
+        DerivedCategory.Q.obj ((Φ l E T n).obj M) ⟶ (C l E T n).obj (DerivedCategory.Q.obj M)) :=
+  rfl
+
+private theorem eI_naturality (T : Scheme.{u}) (n : ℕ)
+    {M N : CochainComplex (AdicCompletion.Modules l E T) ℤ} (g : M ⟶ N) :
+    (C l E T n).map (DerivedCategory.Q.map g) ≫ (eI l E T n N).hom =
+      (eI l E T n M).hom ≫ DerivedCategory.Q.map ((Φ l E T n).map g) := by
+  have h : (dev l E T n).map ((red l E T).map (DerivedCategory.Q.map g)) ≫
+      (dev l E T n).map ((redFactors l E T).hom.app N) ≫
+      (ev l E T n).mapDerivedCategoryFactors.hom.app ((strictRed l E T).obj N) =
+      ((dev l E T n).map ((redFactors l E T).hom.app M) ≫
+        (ev l E T n).mapDerivedCategoryFactors.hom.app ((strictRed l E T).obj M)) ≫
+      DerivedCategory.Q.map (((ev l E T n).mapHomologicalComplex (.up ℤ)).map
+        ((strictRed l E T).map g)) := by
+    rw [← Functor.map_comp_assoc]
+    erw [(redFactors l E T).hom.naturality g]
+    rw [Functor.map_comp_assoc]
+    erw [(ev l E T n).mapDerivedCategoryFactors_hom_naturality]
+    rw [Category.assoc]
+  exact h
 
 /-- The strict pullback comparison of the finite reductions. -/
 private def s (n : ℕ) :
@@ -112,7 +142,8 @@ private def s (n : ℕ) :
     exact h
 
 /-- The derived pullback comparison of the finite reductions. -/
-private def ψ (n : ℕ) : TwoSquare (C l E Y n) (dpullModule l E f) (dpullModule l E f) (C l E X n) :=
+private def ψ (n : ℕ) :
+    TwoSquare (C l E Y n) (dpullModule l E f) (dpullModule l E f) (C l E X n) :=
   TwoSquare.mk _ _ _ _ (pullReduction l E f).hom ≫ₕ
     TwoSquare.mk _ _ _ _ (pullEvaluation l E f n).inv
 
@@ -122,15 +153,53 @@ private def φ (n : ℕ) :=
 
 /-- The ordinary mate of the strict comparison. -/
 private def m (n : ℕ) :=
-  mateEquiv ((adj l E f).mapHomologicalComplex (.up ℤ)) ((adj l E f).mapHomologicalComplex (.up ℤ))
-    (TwoSquare.mk _ _ _ _ (s l E f n))
+  mateEquiv ((adj l E f).mapHomologicalComplex (.up ℤ))
+    ((adj l E f).mapHomologicalComplex (.up ℤ)) (TwoSquare.mk _ _ _ _ (s l E f n))
 
-private theorem ψ_normalization (n : ℕ) (M : CochainComplex (AdicCompletion.Modules l E Y) ℤ) :
-    (dpullModule l E f).map ((e l E Y n).inv.app M) ≫ (ψ l E f n).app (DerivedCategory.Q.obj M) ≫
-        (C l E X n).map ((H l E f).mapDerivedCategoryFactors.hom.app M) ≫
-        (e l E X n).hom.app (((H l E f).mapHomologicalComplex (.up ℤ)).obj M) =
-      (H l E f).mapDerivedCategoryFactors.hom.app ((Φ l E Y n).obj M) ≫
-        DerivedCategory.Q.map ((s l E f n).app M) := by
+private theorem ψ_naturality (n : ℕ) {M N : DerivedCategory (AdicCompletion.Modules l E Y)}
+    (g : M ⟶ N) :
+    (dpullModule l E f).map ((C l E Y n).map g) ≫ (ψ l E f n).app N =
+      (ψ l E f n).app M ≫ (C l E X n).map ((dpullModule l E f).map g) :=
+  (ψ l E f n).naturality g
+
+private theorem φ_counit (n : ℕ) (K : DerivedCategory (AdicCompletion.Modules l E X)) :
+    (dpullModule l E f).map ((φ l E f n).app K) ≫
+        (moduleAdjunction l E f).counit.app ((C l E X n).obj K) =
+      (ψ l E f n).app ((rpushModule l E f).obj K) ≫
+        (C l E X n).map ((moduleAdjunction l E f).counit.app K) :=
+  mateEquiv_counit _ _ (ψ l E f n) K
+
+private theorem m_counit (n : ℕ) (I : CochainComplex (AdicCompletion.Modules l E X) ℤ) :
+    ((H l E f).mapHomologicalComplex (.up ℤ)).map ((m l E f n).app I) ≫
+      ((adj l E f).mapHomologicalComplex (.up ℤ)).counit.app ((Φ l E X n).obj I) =
+      (s l E f n).app (((P l E f).mapHomologicalComplex (.up ℤ)).obj I) ≫ (Φ l E X n).map
+        (((adj l E f).mapHomologicalComplex (.up ℤ)).counit.app I) :=
+  mateEquiv_counit _ _ (TwoSquare.mk _ _ _ _ (s l E f n)) I
+
+private theorem cochain_counit' (I : CochainComplex (AdicCompletion.Modules l E X) ℤ) :
+    (dpullModule l E f).map (UnboundedExactTower.cochainUnit (P l E f) I) ≫
+        (moduleAdjunction l E f).counit.app (DerivedCategory.Q.obj I) =
+      (H l E f).mapDerivedCategoryFactors.hom.app
+          (((P l E f).mapHomologicalComplex (.up ℤ)).obj I) ≫
+        DerivedCategory.Q.map (((adj l E f).mapHomologicalComplex (.up ℤ)).counit.app I) :=
+  UnboundedExactTower.cochain_counit (adj l E f) I
+
+private theorem ψ_normalization_aux (n : ℕ)
+    (M : CochainComplex (AdicCompletion.Modules l E Y) ℤ) :
+    (dpullModule l E f).map ((ev l E Y n).mapDerivedCategoryFactors.inv.app
+        ((strictRed l E Y).obj M)) ≫
+      (dpullModule l E f).map ((dev l E Y n).map ((redFactors l E Y).inv.app M)) ≫
+      (pullEvaluation l E f n).inv.app ((red l E Y).obj (DerivedCategory.Q.obj M)) ≫
+      (dev l E X n).map ((pullReduction l E f).hom.app (DerivedCategory.Q.obj M)) ≫
+      (dev l E X n).map ((red l E X).map ((H l E f).mapDerivedCategoryFactors.hom.app M)) ≫
+      (dev l E X n).map ((redFactors l E X).hom.app
+        (((H l E f).mapHomologicalComplex (.up ℤ)).obj M)) ≫
+      (ev l E X n).mapDerivedCategoryFactors.hom.app
+        ((strictRed l E X).obj (((H l E f).mapHomologicalComplex (.up ℤ)).obj M)) =
+      (H l E f).mapDerivedCategoryFactors.hom.app
+          (((ev l E Y n).mapHomologicalComplex (.up ℤ)).obj ((strictRed l E Y).obj M)) ≫
+        DerivedCategory.Q.map (((ev l E X n).mapHomologicalComplex (.up ℤ)).map
+          ((strictPullReduction l E f).hom.app M)) := by
   let K := (strictRed l E Y).obj M
   let r := (redFactors l E Y).inv.app M
   have hpr : (dpull l E f).map r ≫ (pullReduction l E f).hom.app (DerivedCategory.Q.obj M) ≫
@@ -151,14 +220,7 @@ private theorem ψ_normalization (n : ℕ) (M : CochainComplex (AdicCompletion.M
   have hnat := (pullEvaluation l E f n).inv.naturality r
   have hev := (ev l E X n).mapDerivedCategoryFactors.hom.naturality
     ((strictPullReduction l E f).hom.app M)
-  have hinv : (e l E Y n).inv.app M = (ev l E Y n).mapDerivedCategoryFactors.inv.app K ≫
-      (dev l E Y n).map r := by
-    rw [← cancel_epi ((e l E Y n).hom.app M), Iso.hom_inv_id_app, e_hom_app, Category.assoc,
-      Iso.hom_inv_id_app_assoc, ← Functor.map_comp, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id]
-    rfl
   simp only [Functor.comp_obj, Functor.comp_map] at hnat hev
-  simp only [ψ, TwoSquare.hComp_app, hinv, e_hom_app, Functor.map_comp, Category.assoc,
-    Functor.comp_map]
   rw [reassoc_of% hnat]
   have h2 := congrArg (dev l E X n).map hpr
   simp only [Functor.map_comp] at h2
@@ -166,7 +228,25 @@ private theorem ψ_normalization (n : ℕ) (M : CochainComplex (AdicCompletion.M
   erw [hev]
   rw [reassoc_of% hpe', ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
+
+private theorem ψ_app (n : ℕ) (N : DerivedCategory (AdicCompletion.Modules l E Y)) :
+    (ψ l E f n).app N = ((pullEvaluation l E f n).inv.app ((red l E Y).obj N) ≫
+      (dev l E X n).map ((pullReduction l E f).hom.app N) :
+        (dpullModule l E f).obj ((C l E Y n).obj N) ⟶ (C l E X n).obj ((dpullModule l E f).obj N)) := by
+  simp [ψ]
   rfl
+
+private theorem ψ_normalization (n : ℕ) (M : CochainComplex (AdicCompletion.Modules l E Y) ℤ) :
+    (dpullModule l E f).map (eI l E Y n M).inv ≫ (ψ l E f n).app (DerivedCategory.Q.obj M) ≫
+        (C l E X n).map ((H l E f).mapDerivedCategoryFactors.hom.app M) ≫
+        (eI l E X n (((H l E f).mapHomologicalComplex (.up ℤ)).obj M)).hom =
+      (H l E f).mapDerivedCategoryFactors.hom.app ((Φ l E Y n).obj M) ≫
+        DerivedCategory.Q.map ((s l E f n).app M) := by
+  have h := ψ_normalization_aux l E f n M
+  simp only [ψ, TwoSquare.hComp_app, C, Φ, eI, s, Iso.trans_inv, Iso.trans_hom,
+    Functor.mapIso_inv, Functor.mapIso_hom, Iso.app_inv, Iso.app_hom, Functor.comp_obj,
+    Functor.comp_map, Functor.map_comp, Category.assoc]
+  exact h
 
 private theorem m_isIso (n : ℕ) (I : CochainComplex (AdicCompletion.Modules l E X) ℤ) :
     IsIso ((m l E f n).app I) := by
@@ -194,14 +274,52 @@ private theorem Φ_isKInjective (n : ℕ) (I : CochainComplex (AdicCompletion.Mo
   exact CochainComplex.isKInjective_of_iso
     (CochainComplex.mappingCone.mapHomologicalComplexIso _ (ev l E X n)).symm
 
-private theorem φ_normalization (n : ℕ) (I : CochainComplex (AdicCompletion.Modules l E X) ℤ) :
-    (e l E Y n).inv.app (((P l E f).mapHomologicalComplex (.up ℤ)).obj I) ≫
+/-- The transpose of the left side of the normalization of `φ`. -/
+private theorem φ_normalization_left (n : ℕ)
+    (I : CochainComplex (AdicCompletion.Modules l E X) ℤ) :
+    (dpullModule l E f).map ((eI l E Y n (((P l E f).mapHomologicalComplex (.up ℤ)).obj I)).inv ≫
         (C l E Y n).map (UnboundedExactTower.cochainUnit (P l E f) I) ≫
         (φ l E f n).app (DerivedCategory.Q.obj I) ≫
-        (rpushModule l E f).map ((e l E X n).hom.app I) =
+        (rpushModule l E f).map (eI l E X n I).hom) ≫
+      (moduleAdjunction l E f).counit.app (DerivedCategory.Q.obj ((Φ l E X n).obj I)) =
+    (H l E f).mapDerivedCategoryFactors.hom.app
+        ((Φ l E Y n).obj (((P l E f).mapHomologicalComplex (.up ℤ)).obj I)) ≫
+      DerivedCategory.Q.map ((s l E f n).app (((P l E f).mapHomologicalComplex (.up ℤ)).obj I)) ≫
+      DerivedCategory.Q.map ((Φ l E X n).map
+        (((adj l E f).mapHomologicalComplex (.up ℤ)).counit.app I)) := by
+  simp only [Functor.map_comp, Category.assoc]
+  erw [(moduleAdjunction l E f).counit_naturality]
+  rw [reassoc_of% φ_counit, reassoc_of% ψ_naturality, ← Functor.map_comp_assoc, cochain_counit',
+    Functor.map_comp_assoc, eI_naturality l E X n (M := ((H l E f).mapHomologicalComplex (.up ℤ)).obj
+      (((P l E f).mapHomologicalComplex (.up ℤ)).obj I)) (N := I),
+    reassoc_of% ψ_normalization]
+
+/-- The transpose of the right side of the normalization of `φ`. -/
+private theorem φ_normalization_right (n : ℕ)
+    (I : CochainComplex (AdicCompletion.Modules l E X) ℤ) :
+    (dpullModule l E f).map (DerivedCategory.Q.map ((m l E f n).app I) ≫
+        UnboundedExactTower.cochainUnit (P l E f) ((Φ l E X n).obj I)) ≫
+      (moduleAdjunction l E f).counit.app (DerivedCategory.Q.obj ((Φ l E X n).obj I)) =
+    (H l E f).mapDerivedCategoryFactors.hom.app
+        ((Φ l E Y n).obj (((P l E f).mapHomologicalComplex (.up ℤ)).obj I)) ≫
+      DerivedCategory.Q.map ((s l E f n).app (((P l E f).mapHomologicalComplex (.up ℤ)).obj I)) ≫
+      DerivedCategory.Q.map ((Φ l E X n).map
+        (((adj l E f).mapHomologicalComplex (.up ℤ)).counit.app I)) := by
+  rw [Functor.map_comp, Category.assoc, cochain_counit']
+  erw [(H l E f).mapDerivedCategoryFactors_hom_naturality_assoc]
+  rw [← Functor.map_comp, ← Functor.map_comp, m_counit]
+  rfl
+
+private theorem φ_normalization (n : ℕ) (I : CochainComplex (AdicCompletion.Modules l E X) ℤ) :
+    (eI l E Y n (((P l E f).mapHomologicalComplex (.up ℤ)).obj I)).inv ≫
+        (C l E Y n).map (UnboundedExactTower.cochainUnit (P l E f) I) ≫
+        (φ l E f n).app (DerivedCategory.Q.obj I) ≫
+        (rpushModule l E f).map (eI l E X n I).hom =
       DerivedCategory.Q.map ((m l E f n).app I) ≫
         UnboundedExactTower.cochainUnit (P l E f) ((Φ l E X n).obj I) := by
-  sorry
+  apply ((moduleAdjunction l E f).homEquiv _ _).symm.injective
+  simp only [Adjunction.homEquiv_counit]
+  exact (φ_normalization_left l E f n I).trans (φ_normalization_right l E f n I).symm
 
 private theorem φ_isIso (n : ℕ) : IsIso (φ l E f n) := by
   have hI (I : CochainComplex (AdicCompletion.Modules l E X) ℤ) (_ : I.IsKInjective) :
@@ -215,10 +333,10 @@ private theorem φ_isIso (n : ℕ) : IsIso (φ l E f n) := by
       infer_instance
     have := m_isIso l E f n I
     have h := φ_normalization l E f n I
-    have : IsIso ((e l E Y n).inv.app (((P l E f).mapHomologicalComplex (.up ℤ)).obj I) ≫
+    have : IsIso ((eI l E Y n (((P l E f).mapHomologicalComplex (.up ℤ)).obj I)).inv ≫
         (C l E Y n).map (UnboundedExactTower.cochainUnit (P l E f) I) ≫
         (φ l E f n).app (DerivedCategory.Q.obj I) ≫
-        (rpushModule l E f).map ((e l E X n).hom.app I)) := by
+        (rpushModule l E f).map (eI l E X n I).hom) := by
       rw [h]
       infer_instance
     simpa only [isIso_comp_left_iff, isIso_comp_right_iff] using this
@@ -252,11 +370,12 @@ theorem directImage_pushReductionMap_levelwiseIso :
   have : IsIso ((pushEvaluationMap l E f n).app ((red l E X).obj K)) := by
     rw [← hβ n]
     infer_instance
-  change IsIso ((mateEquiv (moduleAdjunction l E f) (moduleAdjunction l E f)
-    (ψ l E f n)).app K) at hφ
-  rw [ψ, hK] at hφ
-  simp only [TwoSquare.vComp_app, Functor.comp_obj] at hφ
-  change IsIso (_ ≫ (pushEvaluationMap l E f n).app _) at hφ
+  have hφ' : IsIso ((mateEquiv (moduleAdjunction l E f) (moduleAdjunction l E f)
+      ((TwoSquare.mk _ _ _ _ (pullReduction l E f).hom).hComp
+        (TwoSquare.mk _ _ _ _ (pullEvaluation l E f n).inv))).app K) := hφ
+  rw [hK] at hφ'
+  simp only [TwoSquare.vComp_app, Functor.comp_obj] at hφ'
+  change IsIso (_ ≫ (pushEvaluationMap l E f n).app _) at hφ'
   exact IsIso.of_isIso_comp_right _ ((pushEvaluationMap l E f n).app ((red l E X).obj K))
 
 end AlgebraicGeometry.ProEtale.CompleteDerivedCompletion
