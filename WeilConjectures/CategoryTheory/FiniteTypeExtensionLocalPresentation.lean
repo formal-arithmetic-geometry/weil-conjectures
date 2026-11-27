@@ -25,7 +25,6 @@ attribute [local instance] Abelian.hasFiniteBiproducts
   preservesBinaryBiproducts_of_preservesBinaryProducts
 
 namespace SheafOfModules
-set_option linter.style.haveILetI false
 variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
   {B : Type u} [CommRing B]
 
@@ -44,9 +43,9 @@ theorem exists_cover_constant_presentation [IsNoetherianRing B]
         ∃ a : ((strictPerfectConstantSheaf J B).obj K).over V ⟶
           ((strictPerfectConstantSheaf J B).obj Q).over V,
           Nonempty (S.X₂.over V ≅ cokernel a) := by
-  letI : PreservesFiniteLimits (strictPerfectConstantSheaf J B) :=
+  let : PreservesFiniteLimits (strictPerfectConstantSheaf J B) :=
     (strictPerfectConstantSheaf_exact J B).1
-  letI : PreservesFiniteColimits (strictPerfectConstantSheaf J B) :=
+  let : PreservesFiniteColimits (strictPerfectConstantSheaf J B) :=
     (strictPerfectConstantSheaf_exact J B).2
   let := hM
   let := hN
@@ -66,8 +65,8 @@ theorem exists_cover_constant_presentation [IsNoetherianRing B]
     ((F.map q).over U ≫ eN.inv)
   refine ⟨A, hA, ?_⟩
   intro V f hf
-  letI : PreservesFiniteLimits (overFunctor.{u} R V) := (overFunctor_exact R V).1
-  letI : PreservesFiniteColimits (overFunctor.{u} R V) := (overFunctor_exact R V).2
+  let : PreservesFiniteLimits (overFunctor.{u} R V) := (overFunctor_exact R V).1
+  let : PreservesFiniteColimits (overFunctor.{u} R V) := (overFunctor_exact R V).2
   obtain ⟨l, hl⟩ := h V f hf
   let eMV := restrictIso S.X₁ (F.obj M) f.op eM
   let eNV := restrictIso S.X₃ (F.obj N) f.op eN

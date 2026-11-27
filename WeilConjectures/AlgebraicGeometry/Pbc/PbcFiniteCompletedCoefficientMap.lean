@@ -81,8 +81,7 @@ def pbcIntegerInclusion (h : E ≤ F) :
       (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω F)
       (pbcFiniteFieldInclusion.{u} l Ω h))
 
--- Keep the existing algebraic-closure parameter in the public signature.
-set_option linter.unusedSectionVars false in
+omit [IsAlgClosure ℚ_[l] Ω] in
 /-- Integer inclusion preserves every power of the maximal ideal. -/
 theorem pbcIntegerInclusion_ideal (h : E ≤ F) (n : ℕ) :
     (pbcStageDatum.{u} l Ω E).ideal ^ (n + 1) ≤
@@ -133,6 +132,7 @@ def pbcFiniteScalarMap (h : E ≤ F) (n : ℕ) :
       (CommRingCat.ofHom (pbcQuotientInclusion l Ω h n)) ≫
     (pbcLevelConstantComparison T (pbcStageDatum.{u} l Ω F) n).hom
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 /-- The finite projections determine a unique map of completed coefficient sheaves. -/
 theorem pbcCompletedScalarMap_exists (h : E ≤ F) :
     ∃! c : pbcAdicCompletion T (pbcStageDatum.{u} l Ω E) ⟶

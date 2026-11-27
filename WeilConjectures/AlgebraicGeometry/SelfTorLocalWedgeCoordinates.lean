@@ -165,7 +165,6 @@ private theorem local_wedge_agreement_of_ideal_generators
   exact heq
 
 
-set_option linter.unusedVariables false in
 /-- Normalized affine coordinates agree locally on a single pure wedge: near each point of
 `W` the two chart values agree after restriction. -/
 theorem exists_local_wedge_selfTor_coordinates
@@ -194,7 +193,7 @@ theorem exists_local_wedge_selfTor_coordinates
       ∀ (V U : Y.affineOpens) (h : V.1 ≤ U.1)
         (W : Z.Opens) (hW : W ≤ i ⁻¹ᵁ V.1)
         (a : Fin n → ((Scheme.Modules.tensorPullback i).obj i.ker.toModules).val.obj (op W))
-        (x : Z) (hx : x ∈ W),
+        (x : Z) (_hx : x ∈ W),
         ∃ (W' : Z.Opens) (hW' : W' ≤ W), x ∈ W' ∧
           Q.presheaf.map (homOfLE hW').op
               ((φ U).val.app (op (Over.mk (homOfLE

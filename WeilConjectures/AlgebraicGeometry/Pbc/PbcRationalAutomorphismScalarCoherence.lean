@@ -413,7 +413,7 @@ private def complexAssociator (h : E ≤ F) (k : F ≤ G) :
         (.up ℤ) :=
   Functor.mapHomologicalComplexCompIso (ordinaryAssociator l Ω h k) (.up ℤ)
 
-omit [IsNoetherian T] in
+omit [IsNoetherian T] [IsAlgClosure ℚ_[l] Ω] in
 private theorem right_comparison_section (h : E ≤ F)
     (M : pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω F)))
     (U : T.ProEtᵒᵖ)
@@ -474,7 +474,7 @@ private theorem ordinary_coherence (h : E ≤ F) (k : F ≤ G)
   unfold ordinaryAssociator pbcIsoOrdinaryScalarComparison
   exact hh
 
-omit [IsNoetherian T] in
+omit [IsNoetherian T] [IsAlgClosure ℚ_[l] Ω] in
 private theorem complexComparison_eq (h : E ≤ F) :
     pbcIsoOrdinaryComplexComparison l Ω e h =
       complexComparison (pbcExtend (pbcCompletedScalarMap l Ω T h))
@@ -576,7 +576,7 @@ private theorem ambientAssociator_normalization (h : E ≤ F) (k : F ≤ G)
     (pbcCompletedScalarMap l Ω T h) (pbcCompletedScalarMap l Ω T k)
     (pbcCompletedScalarMap l Ω T (h.trans k)) (pbcCompletedScalarMap_comp l Ω T h k) P
 
-omit [IsNoetherian T] in
+omit [IsNoetherian T] [IsAlgClosure ℚ_[l] Ω] in
 private theorem ambient_comparison_normalization (h : E ≤ F)
     (P : CochainComplex
       (pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))) ℤ) :
@@ -634,6 +634,7 @@ private theorem ambient_coherence (h : E ≤ F) (k : F ≤ G)
 variable (hdim : ∃ m : ℕ, topologicalKrullDim T ≤ m)
   (hl : ∀ t : T, IsUnit (l : T.presheaf.stalk t))
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 private theorem integral_comparison_hom (h : E ≤ F)
     (K : pbcIntegralStage l Ω T E) :
     ((pbcIsoIntegralScalarComparison l Ω e hdim hl h).hom.app K).hom =
@@ -671,12 +672,14 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type c) [Field Ω] [Algebra (Padic l) Ω
   (hl : ∀ t : T, IsUnit (l : T.presheaf.stalk t))
   {E F G : Padic.FiniteCoefficientFields l Ω}
 
+omit [IsAlgClosure ℚ_[l] Ω] [IsNoetherian T] in
 private theorem rationalization_hom (H : Padic.FiniteCoefficientFields l Ω)
     (K : pbcIntegralStage l Ω T H) :
     (eqToIso (pbcIsoRationalization l Ω e H)).hom.app K = 𝟙 _ := by
   simp only [eqToIso.hom, eqToHom_app]
   rfl
 
+omit [IsAlgClosure ℚ_[l] Ω] [IsNoetherian T] in
 private theorem rationalization_inv (H : Padic.FiniteCoefficientFields l Ω)
     (K : pbcIntegralStage l Ω T H) :
     (eqToIso (pbcIsoRationalization l Ω e H)).inv.app K = 𝟙 _ := by

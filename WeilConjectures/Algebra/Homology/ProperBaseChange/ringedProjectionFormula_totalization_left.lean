@@ -37,6 +37,5 @@ attribute [local instance 2000] Limits.instHasColimitOfHasColimitsOfShape
 
 set_option backward.isDefEq.respectTransparency true
 set_option synthInstance.maxSize 4096
-set_option linter.unusedVariables false
 -- The counit calculation keeps the signed total-complex representatives explicit.
 end SheafOfModules

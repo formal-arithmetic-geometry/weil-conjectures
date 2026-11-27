@@ -421,7 +421,6 @@ private noncomputable def tensorPullbackTotalNatIso
 end CanonicalTensorPullbackProof
 
 set_option synthInstance.maxSize 2048 in
-set_option linter.style.longLine false in
 /-- Canonical derived comparison, uniquely characterized on K-flat flat-term representatives. -/
 theorem ringedTopoiCanonicalDerivedTensorPullback
     {C D : Type u} [Category.{u} C] [Category.{u} D]

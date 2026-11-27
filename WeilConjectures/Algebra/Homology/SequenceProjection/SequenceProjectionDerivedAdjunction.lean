@@ -181,7 +181,6 @@ extends precisely this ordinary correspondence to fractions. Index `n` means lev
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -294,6 +293,7 @@ private def extensionMap {M M' : Modules A} (f : M ⟶ M') :
       systemScalarModel_map_tmul]
     rfl
 
+omit [EssentiallySmall.{w} C] in
 private theorem system_ext {M N : StrictRingSystem B} (f g : M ⟶ N)
     (h : ∀ n, f.app n = g.app n) : f = g := by
   cases f
@@ -346,11 +346,13 @@ private def projection (N : StrictRingSystem B) (n : ℕ) :
     (directImage A B α).obj N ⟶ (restriction A B α n).obj (N.level n) :=
   limit.π (restrictedDiagram A B α N) (op n)
 
+omit [EssentiallySmall.{w} C] in
 private theorem projection_natural {N N' : StrictRingSystem B} (f : N ⟶ N') (n : ℕ) :
     (directImage A B α).map f ≫ projection A B α N' n =
       projection A B α N n ≫ (restriction A B α n).map (f.app n) :=
   limMap_π _ (op n)
 
+omit [EssentiallySmall.{w} C] in
 private theorem projection_compatible (N : StrictRingSystem B) {m n : ℕ} (h : m ≤ n)
     (U : Cᵒᵖ) (x : ((directImage A B α).obj N).val.obj U) :
     (projection A B α N m).val.app U x =
@@ -371,6 +373,7 @@ private def familyCone (M : Modules A) (N : StrictRingSystem B)
         ext U x
         exact hf (leOfHom h.unop) U x }
 
+omit [EssentiallySmall.{w} C] in
 private theorem projection_limit (M : Modules A) (N : StrictRingSystem B)
     (f : ∀ n : ℕ, M ⟶ (restriction A B α n).obj (N.level n))
     (hf : ∀ {m n : ℕ} (h : m ≤ n) (U : Cᵒᵖ) (x : M.val.obj U),

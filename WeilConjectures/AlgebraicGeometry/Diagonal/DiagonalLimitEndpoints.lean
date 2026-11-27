@@ -32,11 +32,10 @@ attribute [local irreducible] diagonalCompletedSource diagonalOrdinaryRlim
   HomotopyCategory.singleFunctors diagonalScalarExtension diagonalScalarAdjunction
   diagonalIntegralBoundary diagonalDerivedSingleCounit
 
-set_option linter.unusedVariables false in
 /-- The ordinary supported constant and root limits, their canonical derived-limit
 comparisons, and intrinsic completeness of the two completed endpoints. -/
 theorem diagonal_limit_endpoints (ℓ : ℕ) [Fact ℓ.Prime]
-    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ)
+    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (_hpℓ : p ≠ ℓ)
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))]
     [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
     [IsSeparated (Y ↘ Spec (.of k))] (hY : IsUnit (ℓ : Γ(Y, ⊤)))
@@ -48,7 +47,7 @@ theorem diagonal_limit_endpoints (ℓ : ℕ) [Fact ℓ.Prime]
     [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalCompleted ℓ (diagonalSurface Y))]
     [HasExt.{u + 1} (DiagonalSystems ℓ (diagonalSurface Y))]
     (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ (diagonalSurface Y)))
-    (hcompletion : DiagonalCompletionSpec ℓ (diagonalSurface Y) D)
+    (_hcompletion : DiagonalCompletionSpec ℓ (diagonalSurface Y) D)
     (H : DiagonalSystems ℓ (diagonalSurface Y))
     (roots : H ⋙ diagonalForget ℓ (diagonalSurface Y) ≅
       Scheme.proEtaleRootsOfUnityTower (diagonalSurface Y) ℓ (Fact.out : ℓ.Prime))
@@ -84,7 +83,7 @@ theorem diagonal_limit_endpoints (ℓ : ℕ) [Fact ℓ.Prime]
         IsIso (ℓ • 𝟙 V) → Subsingleton (V ⟶
           (diagonalCompletedUnderlying ℓ (diagonalSurface Y)).obj
             (diagonalCompletedCodomain ℓ Y))) := by
-  clear hpℓ hcompletion
+  clear _hpℓ _hcompletion
   classical
   let X := diagonalSurface Y
   let S := D.ordinary.E.obj (diagonalIntegralSource Y)

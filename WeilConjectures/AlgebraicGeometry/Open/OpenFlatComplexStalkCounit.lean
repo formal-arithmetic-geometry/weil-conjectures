@@ -108,7 +108,6 @@ private theorem tensorStalkIsoAt
     (NatIso.mapHomologicalComplex t.symm (.up ℤ)).app K ≪≫
       (Functor.mapHomologicalComplexCompIso (Iso.refl _) (.up ℤ)).symm.app K⟩
 
-set_option linter.unusedVariables false in
 /-- The stalk scalar-extension counit computes the local sheaf pullback counit
 on a bounded-above flat sheaf complex, including transport of both local rings. -/
 theorem openFlatComplex_stalk_counit
@@ -139,7 +138,7 @@ theorem openFlatComplex_stalk_counit
       (ε : DerivedCategory.Qh ⋙ LF ⟶
         (ModuleCat.extendScalars (g.stalkMap a).hom).mapHomotopyCategory (.up ℤ) ⋙
           DerivedCategory.Qh)
-      (hLF : LF.IsLeftDerivedFunctor ε
+      (_hLF : LF.IsLeftDerivedFunctor ε
         (HomotopyCategory.quasiIso (ModuleCat.{u} R) (.up ℤ))) (n : ℤ),
       ∃ (l : F.obj ((DerivedCategory.homologyFunctor _ n).obj
             ((derivedPullback j).obj (DerivedCategory.Qh.obj qK))) ≅

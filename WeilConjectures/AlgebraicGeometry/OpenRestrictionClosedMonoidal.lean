@@ -82,7 +82,6 @@ private theorem closedRestriction_tensorHomEquiv_comp (X : Scheme.{u})
     (a ⊗ₘ 𝟙 K) ≫ schemeDerivedTensorHomEquiv X A K N f ≫ 𝟙 N at hn
   simpa only [CategoryTheory.Functor.map_id, Category.comp_id] using hn
 
-set_option linter.style.haveILetI false in
 /-- Exact restriction carries compatible strong tensor and internal-Hom comparisons.
 (Stacks, Tags 06YH, 08DJ and 08DL) No evaluation map is asserted to be invertible. -/
 theorem exists_openRestriction_closedMonoidal (X : Scheme.{u})

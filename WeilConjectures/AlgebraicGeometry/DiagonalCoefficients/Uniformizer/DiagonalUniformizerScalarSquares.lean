@@ -66,7 +66,6 @@ private theorem rankOneScalarSquares
   let sq := hh.1.some
   exact ⟨⟨{ square := sq, isIso := hh.2 sq }⟩, hh.2⟩
 
-set_option linter.unusedVariables false in
 /-- Uniformizer reduction has a normalized restriction/direct-image square whose
 scalar mate is invertible on every complex. The exponent is `n+1`, so `n = 0` is the
 residue field case. -/

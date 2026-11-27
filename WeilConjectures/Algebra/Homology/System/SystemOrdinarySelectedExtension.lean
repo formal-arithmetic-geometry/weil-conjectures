@@ -19,7 +19,6 @@ import WeilConjectures.Algebra.Homology.System.SystemOrdinarySingleExtension
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 universe u v w
@@ -259,6 +258,8 @@ theorem systemSelectedAtSelected_inv_tmul
           (systemSelectedIndexCast B r P (systemNextSelected_at r i).symm U x) :=
   systemSelectedEqualIndex_inv_tmul S T B r P (systemNextSelected_at r i) _ U x
 
+omit [EssentiallySmall.{w} C] [J.WEqualsLocallyBijective AddCommGrpCat.{w}]
+  [HasSheafify J AddCommGrpCat.{w}] in
 /-- Index transport commutes with strict transitions. -/
 theorem systemSelectedIndexCast_transition (P : StrictRingSystem (selectedSystemRings B r))
     {a b a' b' : ℕ} (ha : a = a') (hb : b = b') (h : b ≤ a) (h' : b' ≤ a')
@@ -269,6 +270,8 @@ theorem systemSelectedIndexCast_transition (P : StrictRingSystem (selectedSystem
   subst b'
   rfl
 
+omit [EssentiallySmall.{w} C] [J.WEqualsLocallyBijective AddCommGrpCat.{w}]
+  [HasSheafify J AddCommGrpCat.{w}] in
 /-- Transport across an equal-index transition cancels its index cast. -/
 theorem systemSelectedIndexCast_identity (P : StrictRingSystem (selectedSystemRings B r))
     {a i : ℕ} (ha : a = i) (h : i ≤ a) (U : Cᵒᵖ) (x : (P.level i).val.obj U) :
@@ -352,6 +355,7 @@ def systemSelectedAdjunct (P : StrictRingSystem (selectedSystemRings B r))
   app := systemSelectedAdjunctLevel S B r P M f
   comm := systemSelectedAdjunct_comm S T B r P M f
 
+omit [EssentiallySmall.{w} C] in
 /-- A selected restriction map and its equal-index transition cancel the index cast. -/
 theorem systemSelectedAdjunct_selected
     (P : StrictRingSystem (selectedSystemRings B r)) (M : StrictRingSystem B)

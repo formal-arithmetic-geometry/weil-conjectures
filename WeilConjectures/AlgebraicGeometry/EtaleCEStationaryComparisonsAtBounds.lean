@@ -86,8 +86,6 @@ private theorem stationary_cycle_comparison
   simpa only [filteredComplexPageπ, haq] using he
 
 -- Elaborate the dependent presentation, page-realization and comparison families together.
-set_option linter.unusedVariables false in
--- The existing hR and ht binders in the signature are used only implicitly.
 /-- Stationary comparison naturality whenever the two outer filtration steps stabilize.
 There is no support assumption, first-page formula, augmentation, or inverse-image lift.
 (Stacks, Tag 012K) -/
@@ -100,7 +98,7 @@ theorem exists_etaleCE_stationary_comparisons_at_bounds
       EtaleCEQuotientRealization (D X K)) :
     ∃ (eInf : ∀ (X : Scheme.{u})
         (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
-        (q n r : ℤ) (hr : 1 ≤ r) (hR : (D X K).L.complexStep (q + r) (n + 1) = ⊥ ∧
+        (q n r : ℤ) (hr : 1 ≤ r) (_hR : (D X K).L.complexStep (q + r) (n + 1) = ⊥ ∧
           (D X K).L.complexStep (q - r + 1) (n - 1) = ⊤),
         ((D X K).sequence.page r hr).X (q, n - q) ≅ ((D X K).H n).gradedPiece q),
       ∀ {X Y : Scheme.{u}}
@@ -115,7 +113,7 @@ theorem exists_etaleCE_stationary_comparisons_at_bounds
           ∀ n : ℤ,
             ∃ (t : ∀ q : ℤ, (((D X K).H n).step q : AddCommGrpCat.{u + 1}) ⟶
             (((D Y L).H n).step q : AddCommGrpCat.{u + 1}))
-          (ht : ∀ q : ℤ, t q ≫ (((D Y L).H n).step q).arrow =
+          (_ht : ∀ q : ℤ, t q ≫ (((D Y L).H n).step q).arrow =
             (((D X K).H n).step q).arrow ≫
               (((D X K).c n).inv ≫
                 HomologicalComplex.homologyMap

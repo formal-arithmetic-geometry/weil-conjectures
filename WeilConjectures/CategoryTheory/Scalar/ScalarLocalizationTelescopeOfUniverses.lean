@@ -43,7 +43,6 @@ Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2); Stacks Tags 093W 
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option synthInstance.maxSize 2048
 set_option maxRecDepth 2048
 universe uC vC u v w uD vD uT vT uB vB r a b
@@ -103,6 +102,7 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
   [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasSheafify J CommRingCat.{u}]
   [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
+omit [EssentiallySmall C] in
 private theorem restrict_scalar_identity
     (A : Type v) [CommRing A] (R : Sheaf J CommRingCat.{u})
     (a : A →+* RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)) (t : A)

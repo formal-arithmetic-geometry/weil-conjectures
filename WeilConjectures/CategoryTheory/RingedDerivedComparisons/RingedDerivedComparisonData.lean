@@ -205,7 +205,6 @@ open CategoryTheory CategoryTheory.Limits WeilConjectures SheafOfModules
 
 namespace CategoryTheory.RingedDerivedComparisons
 
-set_option linter.checkUnivs false in
 /-- A presentation of the ordinary derived category with its recorded signed tensor model.
 Source: Stacks 0FPT, 06YN.
 These are the witnesses of `ringedDerived_closed_symmetric_monoidal`, not new tensor data. -/
@@ -474,7 +473,6 @@ structure TwoIso {X Y : Site.{u, w}} {h k : Morphism X Y}
     lh.edge.derivedAdjunction.homEquiv U E (pullback.hom.app U ≫ b) =
       lk.edge.derivedAdjunction.homEquiv U E b ≫ pushforward.hom.app E
 
-set_option linter.checkUnivs false in
 /-- All clauses of the normalization statement, universally over the presented sites.
 Source: Stacks 07A4, 0D6D, 07A6, 0D6E, 0FPI.
 The auxiliary morphism k is the composite represented by theta; allowing any such

@@ -45,7 +45,6 @@ private theorem covering_map_iso_id
       (fun i => inferInstance) (fun i => (e.inv.naturality (f i)).symm)).2
 
 -- The existential continuity witnesses in the unchanged statement are used by instance search.
-set_option linter.unusedVariables false in
 /-- An equivalence of Stacks sites `p : A ⥤ C` with quasi-inverse `p'` such that a family
 is a covering of `A` iff its image is a covering of `C` satisfies: (1) a family is a
 covering of `C` iff its image under `p'` is a covering of `A`; (2) `p` and `p'` are
@@ -75,8 +74,8 @@ theorem site_equivalence_is_morphism_of_sites
       ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f → PreservesLimit (cospan f g) p) ∧
     (∀ (X Y Z : C) (R : Presieve X), R ∈ JC X →
       ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f → PreservesLimit (cospan f g) p') ∧
-    ∃ (hp : p.IsContinuous JA.toGrothendieck JC.toGrothendieck),
-      ∃ (hp' : p'.IsContinuous JC.toGrothendieck JA.toGrothendieck),
+    ∃ (_hp : p.IsContinuous JA.toGrothendieck JC.toGrothendieck),
+      ∃ (_hp' : p'.IsContinuous JC.toGrothendieck JA.toGrothendieck),
       Nonempty (p.sheafPushforwardContinuous (Type u)
         JA.toGrothendieck JC.toGrothendieck ⋙
         p'.sheafPushforwardContinuous (Type u)

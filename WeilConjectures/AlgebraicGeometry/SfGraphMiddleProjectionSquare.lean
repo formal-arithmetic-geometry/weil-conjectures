@@ -524,9 +524,6 @@ private theorem word_strength_generic
   erw [(openImmersionLowerShriek B b).mapDerivedCategory.map_id,
     (lowerStar B p).rightDerivedFunctor.map_id, Category.id_comp]
 
--- Branch usage depends on the imported wrapper version, not on the mathematical goal.
-set_option linter.unusedTactic false in
-set_option linter.unreachableTactic false in
 private theorem word_strength_source
     (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (t : EtaleGraphPresentation f)
@@ -543,20 +540,11 @@ private theorem word_strength_source
             (by rw [← fac, Category.assoc, t.fac])).inv.app K)).app M) =
       sfGraphWordProjection A t M K := by
   subst a
-  -- Support the published inline body and the current generic graph-word wrapper.
-  first
-  | simp only [innerStrength, compStrength_app, properStrength_app, properTwistedStrength_app,
-      openStrength_app, CategoryTheory.Functor.map_id, Functor.map_comp,
-      Category.assoc, sfGraphWordProjection, sfGraphProjectionWord, Functor.comp_obj]
-    erw [(openImmersionLowerShriek (ModuleCat.{u + 1} A) t.e).mapDerivedCategory.map_id,
-      (lowerStar (ModuleCat.{u + 1} A) t.p).rightDerivedFunctor.map_id, Category.id_comp]
-  | simp only [innerStrength, compStrength_app, properStrength_app, properTwistedStrength_app,
-      openStrength_app, CategoryTheory.Functor.map_id, Functor.map_comp,
-      Category.assoc, sfGraphWordProjection, Iso.trans_hom, Iso.symm_hom,
-      Functor.associator_hom_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
-      NatTrans.comp_app, Functor.comp_obj, Category.id_comp]
-    erw [(openImmersionLowerShriek (ModuleCat.{u + 1} A) t.e).mapDerivedCategory.map_id,
-      (lowerStar (ModuleCat.{u + 1} A) t.p).rightDerivedFunctor.map_id, Category.id_comp]
+  simp only [innerStrength, compStrength_app, properStrength_app, properTwistedStrength_app,
+    openStrength_app, CategoryTheory.Functor.map_id, Functor.map_comp,
+    Category.assoc, sfGraphWordProjection, sfGraphProjectionWord, Functor.comp_obj]
+  erw [(openImmersionLowerShriek (ModuleCat.{u + 1} A) t.e).mapDerivedCategory.map_id,
+    (lowerStar (ModuleCat.{u + 1} A) t.p).rightDerivedFunctor.map_id, Category.id_comp]
 
 private theorem projectionWord_eq_source
     (A : Type (u + 1)) [CommRing A]

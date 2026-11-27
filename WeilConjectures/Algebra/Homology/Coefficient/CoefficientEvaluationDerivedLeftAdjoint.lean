@@ -40,12 +40,10 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [∀ n : ℕ, HasDerivedCategory.{d} (coefficientLevelModules (J := J) O ell n)]
   [HasDerivedCategory.{d} (CoefficientSystem (J := J) O ell)]
 
--- The original signature retains regularity, although this construction does not need it.
-set_option linter.unusedVariables false in
 /-- Derived extension from a single varying-coefficient level, with strict models,
 coherent truncation maps, and their specified adjunction mates. -/
 theorem coefficientEvaluationDerivedLeftAdjoint
-    (hregular : ∀ x : O, ell * x = 0 → x = 0)
+    (_hregular : ∀ x : O, ell * x = 0 → x = 0)
     [IsAdicComplete (Ideal.span ({ell} : Set O)) O] :
     Nonempty (CoefficientEvaluationDerivedPackage (J := J) (O := O) (ell := ell)) := by
   classical

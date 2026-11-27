@@ -28,13 +28,12 @@ attribute [local irreducible] RingedSpace.moduleCohomology
   boundaryCoefficientCohomologyIso canonicalTensorBoundaryComparisons
 noncomputable section
 
-set_option linter.unusedVariables false in
 /-- Compatibility of the degree-n(e+1) section x on the degree-n coefficient. -/
 theorem tensorGradedAction_projection_second {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)
     (hD : canonicalTensorBoundaryComparisons j L hI n = D)
-    (e : ℕ) (f : 𝟙_ Z.Modules ⟶ ((tensorPullback j).obj L).tensorPow n)
+    (e : ℕ) (_f : 𝟙_ Z.Modules ⟶ ((tensorPullback j).obj L).tensorPow n)
     (x : 𝟙_ Z.Modules ⟶ (((tensorPullback j).obj L).tensorPow n).tensorPow (e + 1))
     (σ : ∀ U : X.Opens, T.C.right.obj.obj (op U) →+*
       Module.End ((moduleRings X.toRingedSpace).obj.obj (op U)) (T.I.val.obj (op U)))
@@ -46,7 +45,7 @@ theorem tensorGradedAction_projection_second {X Z : Scheme.{u}} (j : Z ⟶ X)
       @id (T.B.right.obj.obj (op U))
         (T.i.val.app (op U) (σ U (T.p.right.hom.app (op U) b) y)) =
         b * @id (T.B.right.obj.obj (op U)) (T.i.val.app (op U) y))
-    (hrestrict : ∀ (U V : X.Opens) (a : V ⟶ U)
+    (_hrestrict : ∀ (U V : X.Opens) (a : V ⟶ U)
       (g : T.C.right.obj.obj (op U)) (y : T.I.val.obj (op U)),
       T.I.val.map a.op (σ U g y) = σ V (T.C.right.obj.map a.op g) (T.I.val.map a.op y))
     (hglobal : ∀ (g : T.C.right.obj.obj (op ⊤)) (U : X.Opens)
@@ -55,7 +54,7 @@ theorem tensorGradedAction_projection_second {X Z : Scheme.{u}} (j : Z ⟶ X)
     (haction : ∀ g : T.C.right.obj.obj (op ⊤), ρ g =
       ((RingedSpace.moduleCohomology X.toRingedSpace 1).map (μ g).asHom).hom) :
     let F : Z.Modules := (tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow n)
-    let N : Z.Modules := ((tensorPullback j).obj L).tensorPow n
+    let _N : Z.Modules := ((tensorPullback j).obj L).tensorPow n
     let H := RingedSpace.moduleCohomology Z.toRingedSpace 1
     (∀ z : (RingedSpace.moduleCohomology X.toRingedSpace 1).obj T.I,
       tensorGradedCoefficientProjection T D (e + 1) (ρ (tensorGradedSection T D e x) z) =

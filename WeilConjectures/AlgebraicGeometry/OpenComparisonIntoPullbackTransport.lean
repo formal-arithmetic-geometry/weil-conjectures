@@ -70,7 +70,6 @@ private theorem additive_comparisonIntoPullback_naturality
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option linter.unusedVariables false in
 /-- Open restriction transports the comparison into derived pullback, before any
 coefficient morphism or target representative is supplied. The right vertical map
 is a natural isomorphism on the entire target derived category (Stacks, Tags 0DJ8, 0DJ9). -/
@@ -92,7 +91,7 @@ theorem exists_open_comparisonIntoPullback_transport
       ∀ (K : schemeDerivedCategory X)
         (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
         (Q : CochainComplex (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) ℤ)
-        (hP : P.IsKFlatTensor) (hQ : Q.IsKFlatTensor)
+        (_hP : P.IsKFlatTensor) (_hQ : Q.IsKFlatTensor)
         (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
         (hcQ : IsIso ((counit (pullback.snd g' U.ι)).app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)))

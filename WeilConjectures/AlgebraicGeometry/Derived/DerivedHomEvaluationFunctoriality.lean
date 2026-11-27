@@ -19,7 +19,6 @@ sheafification unit is then cancelled.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 

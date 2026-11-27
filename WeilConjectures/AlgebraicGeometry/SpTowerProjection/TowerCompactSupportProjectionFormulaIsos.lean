@@ -312,11 +312,10 @@ private theorem projection_iso_of_property
 
 attribute [local irreducible] ProEtale.HasProjectionFormulaOfCompactification
 
-set_option linter.style.haveILetI false in
 private theorem map_isIso_of_proof
     {C D : Type*} [Category C] [Category D]
     (F : C ⥤ D) {M N : C} (f : M ⟶ N) (hf : IsIso f) : IsIso (F.map f) := by
-  letI := hf
+  let := hf
   exact F.map_isIso f
 
 end AlgebraicGeometry.ProEtale.SpTowerProjection

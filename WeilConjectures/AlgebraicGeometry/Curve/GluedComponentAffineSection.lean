@@ -31,7 +31,6 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option linter.unusedVariables false in
 /-- Ample modules on the components can be powered and glued, with an affine section
 neighbourhood of their intersections. Ampleness on the ambient scheme is not asserted. -/
 theorem exists_glued_component_affine_section
@@ -45,7 +44,7 @@ theorem exists_glued_component_affine_section
     (hfinite : T.Finite) (hclosed : ∀ x ∈ T, IsClosed ({x} : Set X))
     (M : ∀ a, (C a).Modules) [∀ a, (M a).IsInvertible]
     (hM : ∀ a, IsAmple (C a) (M a)) :
-    ∃ (L : X.Modules) (hL : L.IsInvertible),
+    ∃ (L : X.Modules) (_hL : L.IsInvertible),
       (∀ a, ∃ h : ((tensorPullback (i a)).obj L).IsInvertible,
         @IsAmple (C a) ((tensorPullback (i a)).obj L) h) ∧
       ∃ s : (L.tensorPow 1).val.presheaf.obj (Opposite.op ⊤),

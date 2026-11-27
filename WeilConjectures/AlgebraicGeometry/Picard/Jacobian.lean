@@ -808,7 +808,8 @@ variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))] [IsSepC
   [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
   [GeometricallyIntegral (X ↘ Spec (.of k))]
 
-set_option linter.unusedSectionVars false in
+omit [IsSepClosed k] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
+  [GeometricallyIntegral (X ↘ Spec (.of k))] in
 /-- **The fibrewise degree is locally constant.** For a connected `k`-scheme `T` and a class
 `ℒ ∈ Pic (X_T)`, all the fibrewise degrees `deg ℒ_t` agree. -/
 theorem picardFibreDegree_eq_of_connectedSpace (T : Over (Spec (.of k)))
@@ -824,7 +825,8 @@ theorem picardFibreDegree_eq_of_connectedSpace (T : Over (Spec (.of k)))
     picardFibreDegree_eq_picardPresheafDegree _ L t' s']
   exact (isLocallyConstant_picardPresheafDegree _ L).apply_eq_of_preconnectedSpace _ _
 
-set_option linter.unusedSectionVars false in
+omit [IsSepClosed k] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
+  [GeometricallyIntegral (X ↘ Spec (.of k))] in
 /-- **The degree decomposition of the Picard scheme, with compatible representations.** Let `X`
 be a smooth projective curve over a separably closed field `k` and let `P` represent the Picard
 functor `Pic_{X/k}`, with universal class of degree `δ: P → ℤ`. Then `P` is the disjoint union
@@ -955,7 +957,8 @@ theorem exists_decomposition_picardFunctor_representableBy (P : Over (Spec (.of 
     congr_arg (fun φ ↦ (φ.app (.op T) ⟨L, hL⟩).down) fac
   exact (congr_arg (· ≫ j d) h).trans (lift_j ⟨L, hL⟩)
 
-set_option linter.unusedSectionVars false in
+omit [IsSepClosed k] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
+  [GeometricallyIntegral (X ↘ Spec (.of k))] in
 /-- **The degree decomposition of the Picard scheme.** Let `X` be a smooth projective curve over
 a separably closed field `k` and let `P` represent the Picard functor `Pic_{X/k}`.  Then `P` is
 the disjoint union `∐_{d ∈ ℤ} P^d` of a family of open and closed subschemes indexed by `ℤ`,

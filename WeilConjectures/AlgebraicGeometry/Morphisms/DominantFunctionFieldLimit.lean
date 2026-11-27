@@ -198,19 +198,18 @@ private theorem dominantGenericSpecCone_isLimit {I : Type u} [SmallCategory I]
       z.π.app i ≫ (X.obj i).fromSpecStalk (genericPoint (X.obj i))
     simpa only [Category.assoc, dominantGenericSpecMap_fromSpecStalk] using hi
 
-set_option linter.unusedVariables false in
 /-- The spectra of the stage function fields have the spectrum of the limit function
 field as their limit, compatibly with the generic point inclusions. -/
 theorem exists_dominant_function_field_limit {I : Type u} [SmallCategory I]
     [IsCofiltered I] {S : Scheme.{u}} [IsIntegral S]
     (X : I ⥤ Scheme.{u}) [∀ i, IsIntegral (X.obj i)]
-    (hXqc : ∀ i, CompactSpace (X.obj i)) (hXqs : ∀ i, QuasiSeparatedSpace (X.obj i))
+    (_hXqc : ∀ i, CompactSpace (X.obj i)) (_hXqs : ∀ i, QuasiSeparatedSpace (X.obj i))
     (hXa : ∀ {i j : I} (f : i ⟶ j), IsAffineHom (X.map f))
     (α : (Functor.const I).obj S ⟶ X) (hα : IsLimit (Cone.mk S α))
     (hdom : ∀ i, IsDominant (α.app i)) :
     ∃ (K : I ⥤ Scheme.{u}) (b : (Functor.const I).obj (Spec S.functionField) ⟶ K)
       (t : K ⟶ X) (e : ∀ i, K.obj i ≅ Spec (X.obj i).functionField)
-      (hb : IsLimit (Cone.mk (Spec S.functionField) b)),
+      (_hb : IsLimit (Cone.mk (Spec S.functionField) b)),
       (∀ i, CompactSpace (K.obj i)) ∧ (∀ i, QuasiSeparatedSpace (K.obj i)) ∧
       (∀ {i j : I} (f : i ⟶ j), IsAffineHom (K.map f)) ∧
       (∀ i, (e i).inv ≫ t.app i = (X.obj i).fromSpecStalk (genericPoint (X.obj i))) ∧

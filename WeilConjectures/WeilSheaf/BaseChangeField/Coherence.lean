@@ -92,7 +92,6 @@ lemma lowerStarFactor_exchange_comp {Z P : Scheme.{u}} (p : Z ⟶ P) (a₁ a₂ 
   all_goals simp [MorphismProperty.Over.pullback,
     MorphismProperty.Over.mk, MorphismProperty.Over.pullbackComp]
 
-set_option linter.flexible false in
 /-- The exchange isomorphism of identities, written with factorisation isomorphisms, is the
 identity. -/
 lemma lowerStarFactor_exchange_id {Z P : Scheme.{u}} (p : Z ⟶ P) (c : Z ⟶ P)
@@ -110,9 +109,8 @@ lemma lowerStarFactor_exchange_id {Z P : Scheme.{u}} (p : Z ⟶ P) (c : Z ⟶ P)
   ext : 1
   simp only [MorphismProperty.Comma.comp_left]
   repeat' apply pullback.hom_ext
-  all_goals try simp [MorphismProperty.Over.pullback, MorphismProperty.Over.pullbackId,
-    MorphismProperty.Over.mk, MorphismProperty.Over.pullbackComp]
-  all_goals exact pullback.condition.symm
+  all_goals simp [MorphismProperty.Over.pullback, MorphismProperty.Over.pullbackId,
+    MorphismProperty.Over.mk, MorphismProperty.Over.pullbackComp, pullback.condition]
 
 /-- Two exchange isomorphisms, written with factorisation isomorphisms, pasted along a
 commutative cube agree. The vertical morphisms are `θ : Z ⟶ Z'`, `ψ : P ⟶ P'`, the

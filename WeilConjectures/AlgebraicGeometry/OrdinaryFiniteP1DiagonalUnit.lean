@@ -26,15 +26,13 @@ namespace AlgebraicGeometry.Etale
 attribute [local irreducible] ordinaryFinitePullback ordinaryFinitePushforward
   ordinaryFiniteTensor
 
--- Preserve the existing binder names in the public statement.
-set_option linter.unusedVariables false in
 /-- The supported diagonal gives a unit for the already specified trace counit.
 The decomposition and Chern arrows are inputs; no decomposition is asserted here. -/
 theorem ordinaryFiniteP1_diagonal_unit (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA) (c : OrdinaryFiniteP1ChernFamily A N hA)
     (hc : OrdinaryFiniteP1ChernFamilySpec A N hA c)
-    (b : ∀ (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))),
+    (b : ∀ (S : Scheme.{u}) [IsNoetherian S] (_hS : IsUnit (N : Γ(S, ⊤))),
       ((ordinaryFiniteLine A N hA S)⟦(2 : ℤ)⟧ ⊞ ordinaryFiniteUnit A S) ≅
         (ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).obj
           ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧))

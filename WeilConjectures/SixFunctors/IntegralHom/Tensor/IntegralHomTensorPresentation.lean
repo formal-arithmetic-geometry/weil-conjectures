@@ -28,7 +28,6 @@ square, and the cone criterion makes the construction independent of the chosen 
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 
@@ -47,12 +46,12 @@ theorem tensor_presentation_exists :
     Nonempty (TensorPresentation.{t, u} Y
         (completedIntegralCommRingSheaf l E Y D hl)) := by
   classical
-  letI : EssentiallySmall.{t + 1} Y.ProEt := essentiallySmallSelf.{0, t, t + 1} _
-  letI : HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
+  let : EssentiallySmall.{t + 1} Y.ProEt := essentiallySmallSelf.{0, t, t + 1} _
+  let : HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
       AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbSheafify.{t, u} Y
-  letI : (AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
+  let : (AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
       AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbLocallyBijective.{t, u} Y
-  letI : HasDerivedCategory (Modules.{t, u} Y
+  let : HasDerivedCategory (Modules.{t, u} Y
       (completedIntegralCommRingSheaf l E Y D hl)) := HasDerivedCategory.standard _
   obtain ⟨S, T, _, _⟩ :=
     CategoryTheory.ringedDerived_closed_symmetric_monoidal.{t + 1, t, u,

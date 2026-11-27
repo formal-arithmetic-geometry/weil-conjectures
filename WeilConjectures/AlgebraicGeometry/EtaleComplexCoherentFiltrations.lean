@@ -143,7 +143,6 @@ private theorem coherentFiltration_step_bot (X : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency true in
 -- Elaborate the dependent page isomorphisms and all filtration-degree witnesses.
-set_option linter.unusedVariables false in
 /-- One diagram of pages with categorical abutment filtrations at every degree.
 This statement constructs no reindexing, subgroup presentation, or quotient homomorphism
 (Stacks, Tags 015J, 015K and 0EZM). -/
@@ -214,20 +213,20 @@ theorem exists_etale_complex_coherent_filtrations
       (E' : SpectralSequence AddCommGrpCat.{u + 1}
         (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1)
       (v0 : ∀ i : Iᵒᵖ, E0.obj i ⟶ E')
-      (compatible : ∀ {i j : Iᵒᵖ} (f : i ⟶ j), E0.map f ≫ v0 j = v0 i)
+      (_compatible : ∀ {i j : Iᵒᵖ} (f : i ⟶ j), E0.map f ≫ v0 j = v0 i)
       (firstIso : ∀ (i : I) (r : ℕ) (s : ℤ),
       ((E0.obj (op i)).page 1).X ⟨(r : ℤ), s⟩ ≅ AddCommGrpCat.of (Sheaf.H ((F i).X s) r))
       (firstIsoLimit : ∀ (r : ℕ) (s : ℤ),
       (E'.page 1).X ⟨(r : ℤ), s⟩ ≅ AddCommGrpCat.of (Sheaf.H (L.pt.X s) r))
-      (first_transition : ∀ (i j : I) (f : j ⟶ i) (r : ℕ) (s : ℤ),
+      (_first_transition : ∀ (i j : I) (f : j ⟶ i) (r : ℕ) (s : ℤ),
       ((E0.map f.op).hom 1).f ⟨(r : ℤ), s⟩ ≫ (firstIso j r s).hom =
         (firstIso i r s).hom ≫ complexTermCohomologyMap (D.map f) (F i) (F j) (φ f) r s)
-      (first_comparison : ∀ (i : I) (r : ℕ) (s : ℤ),
+      (_first_comparison : ∀ (i : I) (r : ℕ) (s : ℤ),
       ((v0 (op i)).hom 1).f ⟨(r : ℤ), s⟩ ≫ (firstIsoLimit r s).hom =
         (firstIso i r s).hom ≫ complexTermCohomologyMap (c.π.app i) (F i) L.pt
           ((eG i).inv ≫ L.ι.app (op i)) r s)
-      (negative : ∀ (i : Iᵒᵖ) (r s : ℤ), r < 0 → IsZero (((E0.obj i).page 1).X ⟨r, s⟩))
-      (negativeLimit : ∀ r s : ℤ, r < 0 → IsZero ((E'.page 1).X ⟨r, s⟩))
+      (_negative : ∀ (i : Iᵒᵖ) (r s : ℤ), r < 0 → IsZero (((E0.obj i).page 1).X ⟨r, s⟩))
+      (_negativeLimit : ∀ r s : ℤ, r < 0 → IsZero ((E'.page 1).X ⟨r, s⟩))
       (V : ∀ i : I, DecreasingFiltration
         ((cohomology AddCommGrpCat.{u + 1} (D.obj i) p).obj (DerivedCategory.Q.obj (F i))))
       (W : DecreasingFiltration
@@ -239,7 +238,7 @@ theorem exists_etale_complex_coherent_filtrations
         ∀ i : I,
           ∃ (t : ∀ z : ℤ, ((V i).step z : AddCommGrpCat.{u + 1}) ⟶
               (W.step z : AddCommGrpCat.{u + 1}))
-            (ht : ∀ z : ℤ, t z ≫ (W.step z).arrow =
+            (_ht : ∀ z : ℤ, t z ≫ (W.step z).arrow =
               ((V i).step z).arrow ≫ P (c.π.app i) (F i) ≫
                 (cohomology AddCommGrpCat.{u + 1} c.pt p).map
                   (DerivedCategory.Q.map ((eG i).inv ≫ L.ι.app (op i))))

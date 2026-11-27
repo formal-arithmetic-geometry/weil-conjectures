@@ -20,7 +20,6 @@ The scalar-first tensor order is the convention of `LinearMap.baseChange`.
 
 @[expose] public section
 
-set_option linter.unusedVariables false
 
 universe r u v
 
@@ -134,10 +133,10 @@ theorem exists_linear_scalarLocalization_category
         ∀ (f : L ⟶ M) (g : K ⟶ L) (a b : Localization.Away p),
           β (a ⊗ₜ[R] f) (b ⊗ₜ[R] g) = (a * b) ⊗ₜ[R] (g ≫ f)) ∧
     ∃ d : Category.{max r v} (ULift.{0} C),
-      (fun [catInst : Category.{max r v} (ULift.{0} C)] ↦
-        ∃ a : Preadditive (ULift.{0} C), (fun [addInst : Preadditive (ULift.{0} C)] ↦
+      (fun [_catInst : Category.{max r v} (ULift.{0} C)] ↦
+        ∃ a : Preadditive (ULift.{0} C), (fun [_addInst : Preadditive (ULift.{0} C)] ↦
           ∃ l : Linear (Localization.Away p) (ULift.{0} C),
-            (fun [linInst : Linear (Localization.Away p) (ULift.{0} C)] ↦
+            (fun [_linInst : Linear (Localization.Away p) (ULift.{0} C)] ↦
               ∃ e : ∀ K L : C, (Localization.Away p ⊗[R] (K ⟶ L))
                   ≃ₗ[Localization.Away p] (ULift.up K ⟶ ULift.up L),
                 (∀ K : C, e K K (1 ⊗ₜ[R] 𝟙 K) = 𝟙 (ULift.up K)) ∧
@@ -145,7 +144,7 @@ theorem exists_linear_scalarLocalization_category
                     (a b : Localization.Away p),
                   e K L (b ⊗ₜ[R] g) ≫ e L M (a ⊗ₜ[R] f) =
                     e K M ((a * b) ⊗ₜ[R] (g ≫ f))) ∧
-                ∃ lr : Linear R (ULift.{0} C), (fun [rlinInst : Linear R (ULift.{0} C)] ↦
+                ∃ lr : Linear R (ULift.{0} C), (fun [_rlinInst : Linear R (ULift.{0} C)] ↦
                   (∀ (K L : ULift.{0} C) (r : R) (f : K ⟶ L),
                     r • f = (algebraMap R (Localization.Away p) r) • f) ∧
                   ∃ Q : C ⥤ ULift.{0} C,
@@ -167,8 +166,8 @@ theorem exists_linear_scalarLocalization_category
                             (e (S.obj K) (S.obj L) (a ⊗ₜ[R] S.map f))) ∧
                         T' ⋙ S' = 𝟭 (ULift.{0} C) ∧ S' ⋙ T' = 𝟭 (ULift.{0} C) ∧
                         T ⋙ Q = Q ⋙ T'
-                ) (rlinInst := lr)
-            ) (linInst := l)) (addInst := a)) (catInst := d) := by
+                ) (_rlinInst := lr)
+            ) (_linInst := l)) (_addInst := a)) (_catInst := d) := by
   refine ⟨?_, category R C p, ?_⟩
   · intro K L M
     exact ⟨composition R C p K L M, composition_tmul R C p K L M,

@@ -299,7 +299,6 @@ import all WeilConjectures.AlgebraicGeometry.Open.OpenSupportGraphExchange
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 universe u
 open CategoryTheory Limits
 open scoped CategoryTheory.Functor
@@ -337,7 +336,7 @@ private theorem open_exchange_congr
   subst s s'
   simp only [mapDerivedCategoryOpenImmersionLowerShriekCongr,
     Iso.refl_hom, NatTrans.id_app, CategoryTheory.Functor.map_id,
-    Category.id_comp, Category.comp_id]
+    Category.id_comp]
   exact (Category.comp_id
     ((mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso
       (ModuleCat.{u + 1} Λ) sq).inv.app K)).symm
@@ -394,8 +393,8 @@ private theorem openWord_exchange
   dsimp only [A]
   simp only [Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
   rw [← hA]
-  simp only [← Functor.map_comp_assoc, ← Functor.map_comp, Iso.hom_inv_id_app,
-    CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app,
+    CategoryTheory.Functor.map_id, Category.id_comp]
   simp only [Functor.map_comp, Category.assoc]
   rw [hC, reassoc_of% hI]
 
@@ -432,7 +431,7 @@ private theorem properOpen_cube_forward
   rw [hCart k r p j sq, hCart k' r' p' j' sq'] at H
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
-    Category.id_comp, Category.comp_id, Category.assoc] at H
+    Category.id_comp, Category.comp_id] at H
   have H' := congrArg (fun q =>
     (mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso
       (ModuleCat.{u + 1} Λ) sqJ).hom.app (R((r)_*[ModuleCat.{u + 1} Λ]).obj M) ≫
@@ -459,10 +458,10 @@ private theorem tail_hom
   simp only [openSupportTailIso, openWordIso,
     openImmersionLowerShriekLowerStarExchangeIso, asIso_hom,
     Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom,
-    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_inv,
-    Functor.isoWhiskerLeft_inv, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.isoWhiskerLeft_hom,
+    NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
-    Functor.map_comp, Category.assoc, Category.id_comp, Category.comp_id]
+    Functor.map_comp, Category.id_comp, Category.comp_id]
 
 private theorem tail_exact
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
@@ -531,11 +530,11 @@ private theorem tail_exact
       (D((cq.i)_!open[A]).obj K) ≫ q ≫ D((df.i)_!open[A]).map
       ((mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso A sqA).hom.app K)) hO
   dsimp only [A, df, cq, dq] at hOmixed
-  simp only [Category.assoc, ← Functor.map_comp_assoc, ← Functor.map_comp,
+  simp only [Category.assoc, ← Functor.map_comp,
     Iso.inv_hom_id_app, Iso.hom_inv_id_app_assoc, CategoryTheory.Functor.map_id,
-    Functor.comp_obj, Category.id_comp, Category.comp_id] at hOmixed
+    Functor.comp_obj, Category.comp_id] at hOmixed
   have hM := congrArg (R((df.g)_*[A]).map) hOmixed
-  simp only [Functor.map_comp, Category.assoc] at hM
+  simp only [Functor.map_comp] at hM
   simp only [Functor.comp_obj, Functor.comp_map] at hP hN
   rw [tail_hom, tail_hom]
   dsimp only [A, df, cq, dq, k, k', z, si, sp, H]
@@ -543,7 +542,7 @@ private theorem tail_exact
   simp only [compactificationExactExchange, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
-    Functor.map_comp, Category.assoc, Category.id_comp, Category.comp_id]
+    Functor.map_comp, Category.assoc, Category.id_comp]
   dsimp only [rightDerivedLowerShriekOfCompactification, rightDerivedLowerStar,
     Functor.comp_obj, Functor.comp_map] at hP hN hC hM ⊢
   erw [reassoc_of% hP, reassoc_of% hC, hM, ← reassoc_of% hN]
@@ -609,7 +608,7 @@ theorem openSupportTail_cube
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.map_comp, Category.assoc]
   simp only [← Functor.map_comp_assoc, ← Functor.map_comp, Iso.inv_hom_id_app,
-    CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+    CategoryTheory.Functor.map_id, Category.id_comp]
   simp only [Functor.map_comp, Category.assoc]
   dsimp only [rightDerivedLowerShriekOfCompactification, rightDerivedLowerStar,
     Functor.comp_obj, Functor.comp_map] at Hg HT hcf hcq Hd ⊢
@@ -617,7 +616,7 @@ theorem openSupportTail_cube
   simp only [compactificationSupportBaseChangeIso, asIso_hom]
   rw [← hcf]
   have hcqJ := congrArg (D((j')_!open[A]).map) hcq
-  simp only [Functor.map_comp, Category.assoc] at hcqJ
+  simp only [Functor.map_comp] at hcqJ
   rw [← reassoc_of% hcqJ]
   dsimp only [A]
   simp only [CategoryTheory.Functor.map_id, Category.comp_id]

@@ -40,7 +40,6 @@ open scoped TensorProduct
 
 namespace Algebra
 
-set_option linter.unusedVariables false in
 /-- Let `S` be a finite type algebra over a field `k` and `q` a prime of `S`. There is an
 algebraically closed field `K` over `k` and a maximal ideal `qK` of `K ⊗[k] S` lying over `q`
 such that the fibres of the modules of differentials at `qK` and at `q` have the same
@@ -48,7 +47,7 @@ dimension over the respective residue fields. -/
 theorem exists_algClosed_prime_over_finrank_differentials_eq
     {k : Type u} [Field k] {S : Type v} [CommRing S] [Algebra k S] [FiniteType k S]
     (q : PrimeSpectrum S) :
-    ∃ (K : Type (max u v)) (hK : Field K) (hAk : Algebra k K) (hCK : IsAlgClosed K)
+    ∃ (K : Type (max u v)) (_hK : Field K) (_hAk : Algebra k K) (_hCK : IsAlgClosed K)
       (qK : PrimeSpectrum (K ⊗[k] S)),
       qK.asIdeal.IsMaximal ∧
         PrimeSpectrum.comap

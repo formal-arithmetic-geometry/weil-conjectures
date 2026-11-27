@@ -71,14 +71,13 @@ private theorem adjoint_evaluation
       (g.ordinaryPullEvaluation n) (g.ordinaryPushEvaluation n)
       (SpTowerShriek.geometry_unit_evaluation l E b g n M) h
 
-set_option linter.unusedVariables false in
 /-- The normalized Tate line is cartesian for the unit-normalized tensor inverse image. -/
 theorem linePullback_nonempty
     {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} (f : X ⟶ Y)
     (g : SpTowerShriek.Geometry l E b f)
-    (q : CoefficientPullback l E b f g) (k : TensorPullback l E f g)
+    (_q : CoefficientPullback l E b f g) (_k : TensorPullback l E f g)
     (hY : IsUnit (l : Γ(Y, ⊤))) (cY : Chern l E Y) (cX : Chern l E X)
-    (nY : cY.Normalized l E) (nX : cX.Normalized l E) :
+    (_nY : cY.Normalized l E) (_nX : cX.Normalized l E) :
     Nonempty (LinePullback l E f g cY cX) := by
   obtain ⟨δ, hδ⟩ := finiteLineComparisons_exists l E (b := b) f hY
   let d := fun n ↦ (g.ordinaryPullEvaluation n).app (lineModule l E cY) ≪≫

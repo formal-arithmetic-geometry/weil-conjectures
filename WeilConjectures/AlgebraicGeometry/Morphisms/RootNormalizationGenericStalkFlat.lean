@@ -34,12 +34,11 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-set_option linter.unusedVariables false in
 /-- The finite relative normalization of a punctured finite etale cover has flat stalks
 above the generic point of the root divisor. No ramification bound is needed for flatness. -/
 theorem root_normalization_generic_stalk_flat
     (H : CommRingCat.{u}) [IsNoetherianRing H] (g : H)
-    (hg : IsSMulRegular H g) [IsDomain (H ⧸ Ideal.span {g})]
+    (_hg : IsSMulRegular H g) [IsDomain (H ⧸ Ideal.span {g})]
     (n : ℕ) (hn : 0 < n) :
     let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ n - Polynomial.C g)
     let N := Spec (CommRingCat.of A)

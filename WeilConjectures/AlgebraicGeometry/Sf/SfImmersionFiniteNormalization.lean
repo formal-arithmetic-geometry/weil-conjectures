@@ -34,11 +34,6 @@ The generic adic-datum calculations used by the immersion pullback comparison.
 set_option autoImplicit false
 set_option Elab.async false
 set_option synthInstance.maxSize 4096
-set_option linter.unusedVariables false
-set_option linter.unusedSectionVars false
-set_option linter.unusedSimpArgs false
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 universe u
 open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits Opposite
 open AlgebraicGeometry AlgebraicGeometry.ProEtale WeilConjectures

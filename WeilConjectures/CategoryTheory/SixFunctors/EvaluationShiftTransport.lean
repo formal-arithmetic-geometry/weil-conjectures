@@ -12,7 +12,6 @@ public import Mathlib.CategoryTheory.Triangulated.Opposite.Functor
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true
-set_option linter.unusedSimpArgs false
 universe u v
 open CategoryTheory Opposite
 open CategoryTheory.Pretriangulated CategoryTheory.Pretriangulated.Opposite
@@ -99,7 +98,7 @@ theorem evaluation_shift_transport
         ew (T.obj (K⟦-n⟧)) := by
     rw [← ewnat]
     simp only [← U.map_comp_assoc, prod_comp,
-      Category.comp_id, Category.id_comp, Iso.hom_inv_id_app,
+      Category.id_comp, Iso.hom_inv_id_app,
       Functor.comp_obj]
     congr 2; simp
   rw [hr, hbeta]
@@ -155,7 +154,7 @@ theorem commShift_of_reindexed_components
     ((shiftFunctorOpIso C n (-n) (add_neg_cancel n)).inv.app K)))).1
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.commShiftIso_comp_hom_app, Functor.op_commShiftIso_hom_app
-      _ _ n (-n) (add_neg_cancel n), Functor.op_map, e.map_comp, Category.assoc]
+      _ _ n (-n) (add_neg_cancel n), e.map_comp, Category.assoc]
   have hb := beta.naturality
     ((shiftFunctorOpIso C n (-n) (add_neg_cancel n)).inv.app K)
   dsimp only [Functor.comp_map, Functor.op_map] at hb

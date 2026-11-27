@@ -20,7 +20,6 @@ set_option genInjectivity false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj CategoryTheory.Functor
@@ -203,7 +202,7 @@ private theorem normalized_transport_core
           (DerivedCategory.singleFunctor D 0).map t.hom ≫
           (@AlgebraicGeometry.ProEtale.diagonalTraceRightSingle C _ _ D _ _ _ _ G _ RG M') := by
   have hsq := restriction_single_square F G U V RF RG q sq M
-  letI : IsIso (diagonalTraceRightSingle F RF M) := r.acyclic
+  let : IsIso (diagonalTraceRightSingle F RF M) := r.acyclic
   have hacyc : IsIso
       (V.mapDerivedCategory.map (diagonalTraceRightSingle F RF M)) := by
     infer_instance
@@ -212,7 +211,7 @@ private theorem normalized_transport_core
         sq.iso.hom.app ((DerivedCategory.singleFunctor A 0).obj M) ≫
         RG.R.map ((U.mapDerivedCategorySingleFunctor 0).hom.app M)) := by
     infer_instance
-  letI : IsIso
+  let : IsIso
       (V.mapDerivedCategory.map (diagonalTraceRightSingle F RF M) ≫
         sq.iso.hom.app ((DerivedCategory.singleFunctor A 0).obj M) ≫
         RG.R.map ((U.mapDerivedCategorySingleFunctor 0).hom.app M)) := hleft
@@ -222,7 +221,7 @@ private theorem normalized_transport_core
         diagonalTraceRightSingle G RG (U.obj M)) := by
     rw [← hsq]
     infer_instance
-  letI : IsIso
+  let : IsIso
       ((V.mapDerivedCategorySingleFunctor 0).hom.app (F.obj M) ≫
         (DerivedCategory.singleFunctor D 0).map (q.hom.app M) ≫
         diagonalTraceRightSingle G RG (U.obj M)) := hright
@@ -232,7 +231,7 @@ private theorem normalized_transport_core
           (DerivedCategory.singleFunctor D 0).map (q.hom.app M)) ≫
           diagonalTraceRightSingle G RG (U.obj M)) := by
       simpa only [Category.assoc] using hright
-    letI := hright'
+    let := hright'
     exact IsIso.of_isIso_comp_left
       ((V.mapDerivedCategorySingleFunctor 0).hom.app (F.obj M) ≫
         (DerivedCategory.singleFunctor D 0).map (q.hom.app M))

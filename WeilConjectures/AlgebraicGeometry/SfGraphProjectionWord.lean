@@ -28,7 +28,6 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 set_option backward.defeqAttrib.useBackward true
-set_option linter.unusedSimpArgs false
 
 attribute [local implicit_reducible] CategoryTheory.catToReflQuiver
 

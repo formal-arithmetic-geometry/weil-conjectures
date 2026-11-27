@@ -83,7 +83,6 @@ private theorem ordinary_coefficient_naturality
     Iso.inv_hom_id_assoc, Iso.hom_inv_id_assoc] using
       congrArg (fun t ↦ (ceRowOrdinaryIso X G R p).hom ≫ t) hnat.symm
 
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 -- Elaborate the dependent CE and normalized page data together.
 /-- Construct normalized presentations and pin their first-page comparison to the
@@ -91,7 +90,7 @@ concrete signed row comparison. No scheme-map naturality is asserted here
 (Stacks, Tags 015J, 015K, 012K and 06XR). -/
 theorem exists_etaleCE_normalized_row_presentations
     (I : ∀ (X : Scheme.{uNatural})
-      (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),
+      (_K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),
       HomologicalComplex₂ (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})
         (ComplexShape.up ℤ) (ComplexShape.up ℕ))
     (a : ∀ (X : Scheme.{uNatural})
@@ -126,7 +125,7 @@ theorem exists_etaleCE_normalized_row_presentations
         EtaleTermwiseHypercohomology X K)
       (δ : ∀ (X : Scheme.{uNatural})
         (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))
-        (r : ℤ) (hr : 1 ≤ r),
+        (r : ℤ) (_hr : 1 ≤ r),
         FilteredComplexPageDifferential (P X K).sectionsTotal (P X K).L r)
       (j : ∀ (X : Scheme.{uNatural})
         (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))

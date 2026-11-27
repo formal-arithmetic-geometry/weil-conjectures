@@ -27,6 +27,7 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
     (o : Operations (finiteInput A gU j' j g sq) t)
     (e : FiniteComparisons A o)
 
+-- False positive: the statement does not elaborate without `[IsOpenImmersion j']`.
 set_option linter.unusedSectionVars false in
 /-- The left half: the restricted tensor model, the open pin and the mixed representative
 equation. -/

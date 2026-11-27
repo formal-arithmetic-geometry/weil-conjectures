@@ -37,9 +37,6 @@ where they form finite sums, and the retraction has components
 
 @[expose] public section
 
--- several declarations do not need all the instances of the section variables
-set_option linter.unusedSectionVars false
-
 universe u
 
 open CategoryTheory Category Limits
@@ -374,12 +371,14 @@ end Action
 
 /-! ### Uniqueness of invariant retractions -/
 
+omit [WeaklyEtale ginf] in
 /-- The terms of the endomorphism of `M∞` induced by an endomorphism `α` of `g_{∞*} g_∞^*`. -/
 lemma mapHomologicalComplex_app_f_aux
     (α : (ginf)^*⟦Λ⟧ ⋙ (ginf)_*⟦Λ⟧ ⟶ (ginf)^*⟦Λ⟧ ⋙ (ginf)_*⟦Λ⟧) (n : ℤ) :
     ((NatTrans.mapHomologicalComplex α _).app K).f n = α.app (K.X n) :=
   NatTrans.mapHomologicalComplex_app_f α _ K n
 
+omit [WeaklyEtale ginf] in
 /-- The unit transport along an automorphism `σ` of `Y_∞` over `X`, applied termwise to `M∞`, is
 `GaloisTower.infAction`. -/
 lemma unitTransport_app_f (σ : Yinf ⟶ Yinf) (hσ : σ ≫ ginf = ginf) (n : ℤ) :
@@ -395,6 +394,7 @@ variable (a : ℤ) [K.IsStrictlyGE a]
     DerivedCategory.Q.obj K}
 
 include hK in
+omit [WeaklyEtale ginf] in
 /-- A retraction `R` of the derived unit, read on `M∞`, is a retraction of the levelwise unit. -/
 lemma Q_map_unit_comp_derivedUnitIso_hom_comp
     (hR : (CondensedRing.derivedUpperStarLowerStarAdjunction Λ ginf).unit.app _ ≫ R = 𝟙 _) :
@@ -423,6 +423,7 @@ lemma Q_map_complexTrace_comp_unit_comp_derivedUnitIso_hom_comp
   exact comp_id _
 
 include hK in
+omit [WeaklyEtale ginf] in
 /-- A retraction of the derived unit invariant under the unit transport along `σ`, read on `M∞`,
 is invariant under the levelwise unit transport. -/
 lemma comp_derivedUnitIso_hom_comp (σ : Yinf ⟶ Yinf) (hσ : σ ≫ ginf = ginf)

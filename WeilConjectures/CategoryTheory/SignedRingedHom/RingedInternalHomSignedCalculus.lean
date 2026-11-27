@@ -225,7 +225,7 @@ noncomputable instance derivedBraiding : BraidedCategory (D J R) :=
 
 set_option backward.isDefEq.respectTransparency false
 
-set_option linter.unusedSectionVars false in
+omit [HasDerivedCategory (Modules J R)] in
 /-- The total tensor used in the representative model is the native complex tensor.
 Source: Stacks 06YL. -/
 theorem totalTensor_eq_native (P L : CochainComplex (Modules J R) ℤ) :

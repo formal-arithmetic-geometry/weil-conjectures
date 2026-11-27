@@ -190,12 +190,14 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω
   [IsAlgClosure (Padic l) Ω]
   (T : Scheme.{u}) {E F : Padic.FiniteCoefficientFields l Ω}
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 /-- Ordinary finite coefficient extension between stages preserves finite limits. -/
 theorem pbcExtend_completedScalarMap_preservesFiniteLimits (h : E ≤ F) :
     PreservesFiniteLimits (pbcExtend (pbcCompletedScalarMap l Ω T h)) := by
   rw [pbcStageCoefficientMap_eq l Ω T h]
   exact (WeilConjectures.scalarExtension_exact l _ _ _ T).1
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 /-- Ordinary finite coefficient extension between stages preserves finite colimits. -/
 theorem pbcExtend_completedScalarMap_preservesFiniteColimits (h : E ≤ F) :
     PreservesFiniteColimits (pbcExtend (pbcCompletedScalarMap l Ω T h)) := by
@@ -220,7 +222,7 @@ attribute [instance] Base.isOver Base.finiteTypeLocal Base.finiteTypeCompact Bas
 
 variable {k : Type u} [Field k] (l : ℕ) [Fact l.Prime] [hl : Fact (IsUnit (l : k))]
 
-set_option linter.unusedSectionVars false in
+omit [Fact l.Prime] in
 include hl in
 /-- Finite type over a field gives exactly the hypotheses of the recorded adic categories. -/
 theorem base_properties (W : Base k) :

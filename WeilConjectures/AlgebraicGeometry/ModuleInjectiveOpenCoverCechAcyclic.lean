@@ -27,12 +27,11 @@ namespace AlgebraicGeometry.Scheme.Modules
 * [Stacks, Tag 01EP](https://stacks.math.columbia.edu/tag/01EP)
 -/
 
-set_option linter.unusedVariables false in
 /-- An injective sheaf of `𝒪_X`-modules has vanishing positive Čech cohomology for
 any open covering of any open subscheme (Stacks, Tag 01EP). -/
 theorem module_injective_open_cover_cech_acyclic {X : Scheme.{u}}
     (I : X.Modules) [Injective I] (U : X.Opens) (ι : Type w)
-    (V : ι → X.Opens) (hV : ∀ i, V i ≤ U) (hcover : ⨆ i, V i = U)
+    (V : ι → X.Opens) (hV : ∀ i, V i ≤ U) (_hcover : ⨆ i, V i = U)
     (S : CategoryTheory.SiteCechComplex V (fun i => homOfLE (hV i))) :
     ∀ p : ℕ, 0 < p →
       IsZero ((S.cohomologyFunctor p).obj

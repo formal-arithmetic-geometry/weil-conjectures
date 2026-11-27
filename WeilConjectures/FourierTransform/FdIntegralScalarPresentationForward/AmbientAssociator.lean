@@ -136,7 +136,6 @@ private theorem pbcExtendComp_mate (X : pbcModules T R) :
     ((pbcExtendComp φ ψ χ hc).hom.app X) = _ at h
   rw [h, Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
 
-set_option linter.flexible false in
 private theorem pbcExtendCompC_mate (P : CochainComplex (pbcModules T R) ℤ) :
     (((pbcScalarAdjunction φ).mapHomologicalComplex (.up ℤ)).comp
         ((pbcScalarAdjunction ψ).mapHomologicalComplex (.up ℤ))).homEquiv _ _
@@ -148,7 +147,10 @@ private theorem pbcExtendCompC_mate (P : CochainComplex (pbcModules T R) ℤ) :
   intro n
   have h := pbcExtendComp_mate φ ψ χ hc (P.X n)
   rw [Adjunction.homEquiv_unit] at h ⊢
-  simp [pbcExtendCompC]
+  simp only [Functor.mapHomologicalComplex_obj_X, Functor.comp_obj, Adjunction.comp_unit_app,
+    pbcExtendCompC, Functor.comp_map, Category.assoc, HomologicalComplex.comp_f,
+    Adjunction.mapHomologicalComplex_unit_app_f, Functor.mapHomologicalComplex_map_f,
+    Functor.mapHomologicalComplexCompIso_hom_app_f]
   exact h
 
 private theorem pbcRestrictComp_factors (K : CochainComplex (pbcModules T B) ℤ) :

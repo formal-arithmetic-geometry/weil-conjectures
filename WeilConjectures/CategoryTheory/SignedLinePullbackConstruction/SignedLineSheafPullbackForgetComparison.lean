@@ -14,7 +14,6 @@ public import Mathlib.CategoryTheory.Sites.Pullback
 @[expose] public section
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.unusedSectionVars false
 universe u v w e
 open CategoryTheory CategoryTheory.Limits
 open CategoryTheory.Functor.sheafPullbackConstruction

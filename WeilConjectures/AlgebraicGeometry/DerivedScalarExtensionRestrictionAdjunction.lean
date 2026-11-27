@@ -248,13 +248,12 @@ end SheafOfModules.ScalarReductionProof
 
 namespace ScalarReductionDerivedProof
 
-set_option linter.style.haveILetI false in
 private theorem ind_of_eventually_constant {J C : Type*} [Category* J] [Category* C]
     [IsFiltered J] (F : J ⥤ C) (j₀ : J)
     (hevent : F.IsEventuallyConstantFrom j₀) :
     ∃ X, IsEssentiallyConstantIndDiagram F X := by
   let c := hevent.cocone
-  letI : IsIso (c.ι.app j₀) := hevent.isIso_ι_of_isColimit hevent.isColimitCocone
+  let : IsIso (c.ι.app j₀) := hevent.isIso_ι_of_isColimit hevent.isColimitCocone
   refine ⟨c.pt, ⟨inferInstance, c.ι, j₀, (asIso (c.ι.app j₀)).inv, ?_, ?_⟩⟩
   · exact (asIso (c.ι.app j₀)).inv_hom_id
   · intro j
@@ -262,14 +261,13 @@ private theorem ind_of_eventually_constant {J C : Type*} [Category* J] [Category
     let a : j₀ ⟶ k := IsFiltered.leftToMax _ _
     let b : j ⟶ k := IsFiltered.rightToMax _ _
     refine ⟨k, a, b, ?_⟩
-    letI : IsIso (c.ι.app k) := hevent.isIso_ι_of_isColimit' hevent.isColimitCocone k a
+    let : IsIso (c.ι.app k) := hevent.isIso_ι_of_isColimit' hevent.isColimitCocone k a
     apply (cancel_mono (c.ι.app k)).1
     rw [c.ι.naturality b]
     simp only [Functor.const_obj_map, Category.assoc]
     rw [← Category.assoc, c.ι.naturality a]
     simp
 
-set_option linter.style.haveILetI false in
 private theorem exactFunctor_ind_essentialConstancy
     {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
     [HasDerivedCategory A] [HasDerivedCategory B]
@@ -284,7 +282,7 @@ private theorem exactFunctor_ind_essentialConstancy
   let J := W.Under ⊤ X
   let D := MorphismProperty.Under.forget W ⊤ X ⋙ Under.forget X ⋙
     R.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
-  letI : IsFiltered J := by
+  let : IsFiltered J := by
     let j₀ : J := MorphismProperty.Under.mk ⊤ (𝟙 X) (W.id_mem X)
     refine { nonempty := ⟨j₀⟩, cocone_objs := ?_, cocone_maps := ?_ }
     · intro j j'
@@ -314,7 +312,7 @@ private theorem exactFunctor_ind_essentialConstancy
       apply (HomotopyCategory.quotient_map_mem_quasiIso_iff g).1
       rw [hg]
       exact hf
-    letI : QuasiIso g := hq
+    let : QuasiIso g := hq
     have hmap : HomologicalComplex.quasiIso A (.up ℤ)
         ((R.mapHomologicalComplex (.up ℤ)).map g) := by
       exact HomologicalComplex.quasiIso_map_of_preservesHomology g R
@@ -524,6 +522,7 @@ theorem scalarReductionRestrictionColimits :
 
 attribute [local instance] scalarReductionRestrictionColimits
 
+-- Inferred-type def whose reducibility is toggled here and downstream; a theorem cannot be.
 set_option linter.defProp false in
 /-- The canonical universal derived-change-of-rings witness for the limit projection
 (Stacks, Tag 06YY). -/
@@ -560,6 +559,7 @@ attribute [local irreducible] scalarReductionExistence scalarReductionExtension
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
+-- Downstream files toggle its reducibility, which is not allowed for a theorem.
 set_option linter.defProp false in
 /-- The universal derived pair, including the K-flat computation and exactness (Stacks, Tag 06YY).
 -/

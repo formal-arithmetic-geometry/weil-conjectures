@@ -75,7 +75,6 @@ private theorem finitePresentation_toSheafify (n : ℕ) (V : (AlgebraicGeometry.
   exact (congrArg (((constantCommuteCompose J U).inv.app X).hom.app V) h4.symm).trans
     (h3 _)
 
-set_option linter.unusedVariables false in
 /-- The completed unit of the constant section `x` of `𝒪_L` is the constant section
 `integralScalarConstant x` of the completed coefficient sheaf. -/
 private theorem completionPresentation_unit_eq (V : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)

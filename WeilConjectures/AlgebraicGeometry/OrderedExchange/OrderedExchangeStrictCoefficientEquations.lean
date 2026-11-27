@@ -281,7 +281,6 @@ end OrdinaryPull
 
 section GenericRhoPull
 
-set_option linter.defProp false in
 /-- The complex-level normalization of a comparison `ρ` between a derived reduction tower
 followed by restriction and restriction followed by a derived reduction model, in the
 shape of `RhoNormalization`, for abstract categories and functors. -/
@@ -305,7 +304,6 @@ def GenRhoNorm {B C T TC : Type*} [Category B] [Category C] [Category T] [Catego
         tR.mapDerivedCategoryFactors.hom.app ((RT.mapHomologicalComplex (.up ℤ)).obj P) ≫
         DerivedCategory.Q.map ((NatIso.mapHomologicalComplex oρ.symm (.up ℤ)).hom.app P)
 
-set_option linter.unusedVariables false in
 /-- The compatibility of a reduction comparison with pullback, for abstract exact functors
 and derived reduction models. -/
 theorem rho_pull_generic

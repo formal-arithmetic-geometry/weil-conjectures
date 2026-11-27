@@ -49,6 +49,7 @@ local elab "routeField% " i:num d:term:max : term => do
   let e ← Lean.Elab.Term.elabTerm d none
   return Lean.mkProj ``FiniteRouteData i.getNat e
 
+-- Irreducible def with inferred type; reducibility attributes cannot be set on a theorem.
 set_option linter.defProp false in
 /-- The cyclic realized class is the image of the supplied initial arrow. -/
 @[irreducible] def UniformizerSquareData.cyclic_realization

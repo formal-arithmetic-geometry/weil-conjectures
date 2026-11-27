@@ -467,9 +467,8 @@ variable [HasZeroObject C] [HasShift C ℤ]
       ∃ Δ₀ : Triangle D, Δ₀ ∈ distTriang D ∧
         Nonempty (Δ ≅ (localization S D b).mapTriangle.obj Δ₀))
 
-set_option linter.unusedSectionVars false in
-set_option linter.unusedVariables false in
 include triC triD triLC triLD hshiftC hshiftD hQC hQD hdistC hdistD in
+omit triD triLC triLD in
 /-- Exactness with the localized, specified shift comparison. The ambient structures
 and their normalizations are exactly those provided by
 `exists_triangulated_scalarLocalization`, separately for C and D.
@@ -477,12 +476,12 @@ Source: Stacks Tag 05R6. -/
 theorem extension_exact (F : C ⥤ D) [F.Additive] (hF : IsSemilinear φ F)
     [F.CommShift ℤ] [F.IsTriangulated] :
     ∃ cs : (extension t b φ h F hF).CommShift ℤ,
-      (fun [commInst : (extension t b φ h F hF).CommShift ℤ] ↦
+      (fun [_commInst : (extension t b φ h F hF).CommShift ℤ] ↦
         (extension t b φ h F hF).IsTriangulated ∧
         ∀ K : C,
           HEq (((extension t b φ h F hF).commShiftIso (1 : ℤ)).hom.app ⟨K⟩)
             ((localization S D b).map ((F.commShiftIso (1 : ℤ)).hom.app K)))
-        (commInst := cs) := by
+        (_commInst := cs) := by
   classical
   have : ∀ n : ℤ, (shiftFunctor C n).Linear R := semilinear_all_shift_linear R C
   let Q := localization R C t

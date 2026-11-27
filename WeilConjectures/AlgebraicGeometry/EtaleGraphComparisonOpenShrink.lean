@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleGraphShrinkMiddlePasting
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 
 universe u
 
@@ -97,9 +96,9 @@ private theorem side_square_pasting
       Iso.trans_hom, Functor.isoWhiskerRight_hom, NatTrans.comp_app,
       Functor.whiskerRight_app, Functor.leftUnitor_hom_app,
       openImmersionLowerShriekLowerStarExchangeIso, asIso_hom, Functor.comp_obj,
-      Functor.id_obj, Functor.id_map, Category.comp_id]
+      Functor.id_obj, Category.comp_id]
     rw [cv, ve]
-    simp only [Category.assoc, ← Functor.map_comp]
+    simp only [Category.assoc]
     rw [← (rightDerivedLowerStarComp (ModuleCat.{u + 1} A) s q).hom.naturality]
     simp only [Functor.comp_map, Functor.map_comp, Category.assoc]
   rw [cv, ch, cs] at ho
@@ -131,7 +130,7 @@ private theorem side_square_pasting
           Q.map (δ.inv.app M) at hh
     simp only [Category.assoc, Iso.inv_hom_id_app_assoc,
       Iso.hom_inv_id_app_assoc, ← Functor.map_comp, Iso.hom_inv_id_app,
-      Functor.comp_obj, Functor.map_id, Category.comp_id] at hh
+      Functor.comp_obj] at hh
     rw [Q.map_id, Category.comp_id] at hh
     exact hh
   change γs.hom.app _ = α.hom.app _ ≫ E.map (γv.hom.app _) ≫
@@ -146,7 +145,7 @@ private theorem side_square_pasting
   -- Substitute horizontal pasting and move the inverse triangle through D_H.
   rw [ho]
   rw [← reassoc_of% α.inv.naturality (C'.inv.app M)]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Functor.map_comp]
+  simp only [Iso.inv_hom_id_app_assoc, Functor.map_comp]
   rw [← reassoc_of% γ.hom.naturality (δ.inv.app M)]
   change E.map (C.inv.app M) ≫ E.map (Q.map (δ.inv.app M)) ≫ _ =
     E.map (η.inv.app M) ≫ E.map (V.map (C'.inv.app M)) ≫ E.map (γv.hom.app _) ≫ _
@@ -232,8 +231,8 @@ theorem etaleGraphComparisonFromOpen_openShrink
       Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom,
       Functor.isoWhiskerLeft_hom, NatTrans.comp_app, Functor.whiskerRight_app,
       Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app,
-      Functor.comp_obj, Functor.comp_map, Category.comp_id, Category.id_comp,
-      rightDerivedLowerStarCompOfEq, Iso.refl_hom, Functor.map_id, Category.assoc]
+      Functor.comp_obj, Functor.comp_map, Category.id_comp,
+      rightDerivedLowerStarCompOfEq, Category.assoc]
     rw [← reassoc_of% C.hom.naturality, ← C.hom.naturality]
     simpa only [R, C, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
       Functor.map_comp, Functor.comp_map, Category.assoc,

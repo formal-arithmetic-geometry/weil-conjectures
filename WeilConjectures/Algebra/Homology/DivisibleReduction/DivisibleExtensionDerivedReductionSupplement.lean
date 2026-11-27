@@ -408,7 +408,6 @@ private theorem scalarForget_preservesFiniteColimits (A : Sheaf J RingCat.{r}) :
       (isColimitOfPreserves (L ⋙ toSheaf.{r} A) hc)
   exact preservesColimit_of_iso_diagram (toSheaf.{r} A) e
 
-set_option linter.unusedSectionVars false in
 private noncomputable abbrev sr {D : Type u} [Category.{v} D] (K : GrothendieckTopology D)
     [K.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
     (A : Sheaf K CommRingCat.{r}) := derivedChangeRingIndependentCoefficients K A

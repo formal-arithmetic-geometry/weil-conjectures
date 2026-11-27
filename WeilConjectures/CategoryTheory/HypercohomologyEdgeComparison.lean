@@ -278,8 +278,7 @@ lemma hypercohomologyExactComparisonH_app (e : G ⋙ 𝟭 C ⟶ β ⋙ G')
           K).hom) :=
   rfl
 
--- Keep the original Grothendieck hypotheses in the public signature.
-set_option linter.unusedSectionVars false in
+omit [IsGrothendieckAbelian.{vC} C] in
 /-- Exact comparison preserves the canonical normalized hypercohomology left edge. -/
 theorem hypercohomologyLeftEdge_exactComparison (e : G ⋙ 𝟭 C ⟶ β ⋙ G')
     (K : DerivedCategory.Plus B) [K.IsGE 0]

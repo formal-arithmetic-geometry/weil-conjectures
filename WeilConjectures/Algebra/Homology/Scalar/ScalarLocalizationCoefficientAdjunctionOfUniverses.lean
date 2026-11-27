@@ -19,7 +19,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option synthInstance.maxSize 2048
 set_option maxRecDepth 2048
 universe uC vC u v w uD vD uT vT uB vB r a b

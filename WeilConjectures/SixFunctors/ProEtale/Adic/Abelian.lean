@@ -53,6 +53,7 @@ namespace PadicAlgCl
 variable {l : ℕ} [Fact l.Prime] {T : Type*} [TopologicalSpace T] {κ ι : Type*} [Fintype κ]
   [Fintype ι]
 
+-- `Fintype κ` is a section instance; replacing it by `Finite κ` would change the statement
 set_option linter.unusedFintypeInType false in
 /-- The rank of a matrix of locally finite functions is lower semicontinuous. -/
 lemma isOpen_setOf_le_rank (M : Matrix κ ι (locallyFiniteFunctions l T)) (j : ℕ) :

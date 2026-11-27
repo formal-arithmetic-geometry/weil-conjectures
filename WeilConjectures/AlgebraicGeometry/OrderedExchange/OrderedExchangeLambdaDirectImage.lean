@@ -310,7 +310,6 @@ local notation "αV" => (Functor.mapDerivedCategorySquareIso (ordinaryScalarDiag
 local notation "αU" => (Functor.mapDerivedCategorySquareIso (ordinaryScalarDiagonal d U).symm).hom
 local notation "βR" => (Functor.mapDerivedCategorySquareIso (exchangeModuleResPull d u).symm).hom
 
-set_option linter.flexible false in
 /-- The cube of exact-descent squares underlying `lambda_directImageRlimIso_aux`. -/
 theorem restriction_cube (P : d.derived V) :
     (exchangeConstantPull (A := A) u).map ((αV).app P) ≫
@@ -324,8 +323,14 @@ theorem restriction_cube (P : d.derived V) :
     (ordinaryDiagonalPullIso (A := A) u) (exchangeOrdinaryResPull d u)
     (ordinaryScalarDiagonal d U).symm (fun M ↦ ?_) P
   ext n
-  simp [ordinaryScalarDiagonal, exchangeModuleResPull, AdicCoefficientDatum.constantPullbackIso,
-    ordinaryDiagonalPullIso]
+  simp only [Functor.comp_obj, Functor.whiskeringRight_obj_obj, Functor.const_obj_obj,
+    ordinaryScalarDiagonal, Iso.symm_hom, NatIso.ofComponents_inv_app,
+    Functor.whiskeringRight_obj_map, exchangeModuleResPull, Functor.isoWhiskerLeft_inv,
+    AdicCoefficientDatum.constantPullbackIso, NatIso.ofComponents_hom_app, NatTrans.comp_app,
+    Functor.whiskerRight_app, Iso.refl_inv, Functor.whiskerLeft_app, Iso.refl_hom,
+    CategoryTheory.Functor.map_id, Category.comp_id, SheafOfModules.comp_val,
+    PresheafOfModules.comp_app, ModuleCat.hom_comp, LinearMap.coe_comp, Function.comp_apply,
+    ordinaryDiagonalPullIso, Functor.const_map_app, Category.id_comp]
   erw [CategoryTheory.Functor.map_id]
   rfl
 

@@ -105,7 +105,6 @@ private theorem exists_affinePerfect_full_realization
     G F c
   exact ⟨F, Functor.Full.of_iso d, inferInstance, ⟨H.mapDerivedCategoryFactors⟩⟩
 
-set_option linter.unusedVariables false in
 /-- Affine restriction admits a bounded finite-projective source model and a target
 whose cohomology is elementwise power torsion. The comparison is full and additive
 and intertwines the scalar identity of the source with restriction of global scalars.
@@ -137,7 +136,7 @@ theorem perfect_support_affine_module_model
       (∀ (i : ℤ) (m : (DerivedCategory.homologyFunctor (ModuleCat.{u} A) i).obj M),
         ∃ n : ℕ, (f.val (op U)) ^ n • m = 0) ∧
       ∃ (eP : F.obj (DerivedCategory.Q.obj P) ≅ R.obj E.obj)
-        (eM : F.obj M ≅ R.obj (E'.obj⟦k⟧)),
+        (_eM : F.obj M ≅ R.obj (E'.obj⟦k⟧)),
         ∀ a : RingCat.sectionsSubring (X.sheaf.obj ⋙ forget₂ CommRingCat RingCat.{u}),
           F.map ((show A from a.val (op U)) • 𝟙 (DerivedCategory.Q.obj P)) ≫ eP.hom =
             eP.hom ≫ R.map (schemeDerivedScalar X a (𝟙 E.obj)) := by

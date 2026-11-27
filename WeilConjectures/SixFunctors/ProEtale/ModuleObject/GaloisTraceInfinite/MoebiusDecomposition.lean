@@ -35,9 +35,6 @@ maps.
 
 universe u
 
--- several declarations do not need all the instances of the section variables
-set_option linter.unusedSectionVars false
-
 open CategoryTheory Category Limits
 
 open scoped CategoryTheory.Obj

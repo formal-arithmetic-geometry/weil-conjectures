@@ -408,7 +408,6 @@ local notation "cB(" J ", " B ")" => strictPerfectConstantPresheaf (C := C) B �
     (toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of B)))
     (forget₂ CommRingCat.{u} RingCat.{u}))
 
-set_option linter.unusedVariables false in
 set_option synthInstance.maxSize 256 in
 /-- Local finite free models of the two relevant good truncations compute a fixed
 degree of the original K-flat tensor. The models are given, so neither Noetherianity
@@ -423,17 +422,17 @@ theorem site_tensor_local_model_comparison
     (i : ℤ) (U : C) :
     letI := HasDerivedCategory.standard (SheafOfModules.{u} ((𝓡(J, B)).over U))
     ∀ (E F : CochainComplex (ModuleCat.{u} B) ℤ)
-    (hEb : ∃ b : ℤ, ∀ j : ℤ, b < j → IsZero (E.X j))
-    (hFb : ∃ b : ℤ, ∀ j : ℤ, b < j → IsZero (F.X j))
-    (hE : ∀ j : ℤ, Module.Free B (E.X j) ∧ Module.Finite B (E.X j))
-    (hF : ∀ j : ℤ, Module.Free B (F.X j) ∧ Module.Finite B (F.X j))
-    (eE : Nonempty
+    (_hEb : ∃ b : ℤ, ∀ j : ℤ, b < j → IsZero (E.X j))
+    (_hFb : ∃ b : ℤ, ∀ j : ℤ, b < j → IsZero (F.X j))
+    (_hE : ∀ j : ℤ, Module.Free B (E.X j) ∧ Module.Finite B (E.X j))
+    (_hF : ∀ j : ℤ, Module.Free B (F.X j) ∧ Module.Finite B (F.X j))
+    (_eE : Nonempty
       (DerivedCategory.Q.obj
           (((overFunctor.{u} (𝓡(J, B)) U).mapHomologicalComplex (.up ℤ)).obj
             (P.truncGE (i - bQ))) ≅
         DerivedCategory.Q.obj
           ((((cB(J, B)) ⋙ overFunctor.{u} (𝓡(J, B)) U).mapHomologicalComplex (.up ℤ)).obj E)))
-    (eF : Nonempty
+    (_eF : Nonempty
       (DerivedCategory.Q.obj
           (((overFunctor.{u} (𝓡(J, B)) U).mapHomologicalComplex (.up ℤ)).obj
             (Q.truncGE (i - bP))) ≅

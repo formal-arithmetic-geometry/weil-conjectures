@@ -26,7 +26,6 @@ local section and all restriction maps. Mathlib orders the cone summands as A[1]
 
 @[expose] public section
 
-set_option linter.unusedSectionVars false
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -181,6 +180,7 @@ private lemma proj_eq {H : HomData D} (P : Spec H F) (K I : CochainComplex D ℤ
 
 set_option backward.isDefEq.respectTransparency false in
 -- Step 1: signed reindexing, its inverse and naturality.
+omit [HasBinaryBiproducts D] in
 private lemma shift_exists {H : HomData D} (P : Spec H F) (I K : CochainComplex D ℤ) (m : ℤ) :
     ∃ s : hc F (K⟦m⟧) I ≅ (hc F K I)⟦-m⟧,
       ∀ (q a : ℤ),
@@ -276,6 +276,7 @@ private lemma shift_exists {H : HomData D} (P : Spec H F) (I K : CochainComplex 
     CochainComplex.shiftFunctor_obj_X', CochainComplex.shiftFunctor_obj_X] using
     (proj_eq P S I q p (p + m - m) _ (by omega) rfl)
 
+omit [HasBinaryBiproducts D] in
 private lemma shift_natural {H : HomData D} (P : Spec H F) (I : CochainComplex D ℤ)
     (s : ∀ (K : CochainComplex D ℤ) (m : ℤ),
       hc F (K⟦m⟧) I ≅ (hc F K I)⟦-m⟧)
@@ -969,6 +970,7 @@ private lemma proj_degree {H : HomData D} (P : Spec H F)
   subst n'
   simp only [HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom, Category.id_comp]
 
+omit [HasBinaryBiproducts D] in
 private lemma shift_inverse_one {H : HomData D} (P : Spec H F) (I : CochainComplex D ℤ)
     (s : ∀ (K : CochainComplex D ℤ) (m : ℤ),
       hc F (K⟦m⟧) I ≅ (hc F K I)⟦-m⟧)
@@ -1028,6 +1030,7 @@ private lemma shift_proj_general {H : HomData D} (P : Spec H F)
       ((congrArg (fun z ↦ P.π (K⟦m⟧) I q a (a + q) rfl ≫ z)
         (H.map_id (K.X (a + m)) (I.X (a + q)))).trans (Category.comp_id _)).symm
 
+omit [HasBinaryBiproducts D] in
 private lemma chi_proj {H : HomData D} (P : Spec H F) (I : CochainComplex D ℤ)
     (s : ∀ (K : CochainComplex D ℤ) (m : ℤ),
       hc F (K⟦m⟧) I ≅ (hc F K I)⟦-m⟧)

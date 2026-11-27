@@ -108,7 +108,6 @@ No existence choice of an unspecified object or map is used in a definition.
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 universe u v r wB wA wS wT
 open CategoryTheory CategoryTheory.Limits
 open scoped ChangeOfRings
@@ -151,6 +150,8 @@ private noncomputable def restrictSheafifyHom
     ((PresheafOfModules.restrictScalars α.hom).map
       ((PresheafOfModules.sheafificationAdjunction (𝟙 S.obj)).unit.app M))
 
+omit [EssentiallySmall.{r} C] [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+  [HasSheafify J AddCommGrpCat.{r}] in
 private theorem restrictSheafifyHom_toSheaf
     {R S : Sheaf J RingCat.{r}} (α : R ⟶ S) (M : PresheafOfModules.{r} S.obj) :
     (toSheaf R).map (restrictSheafifyHom α M) =
@@ -166,6 +167,8 @@ private theorem restrictSheafifyHom_toSheaf
 
 attribute [local irreducible] restrictSheafifyHom
 
+omit [EssentiallySmall.{r} C] [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+  [HasSheafify J AddCommGrpCat.{r}] in
 private theorem restrictSheafifyHom_isIso
     {R S : Sheaf J RingCat.{r}} (α : R ⟶ S) (M : PresheafOfModules.{r} S.obj) :
     IsIso (restrictSheafifyHom α M) := by
@@ -185,6 +188,8 @@ private noncomputable def restrictSheafifyIso
 
 attribute [local irreducible] restrictSheafifyIso
 
+omit [EssentiallySmall.{r} C] [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+  [HasSheafify J AddCommGrpCat.{r}] in
 @[simp] private theorem restrictSheafifyIso_hom_toSheaf
     {R S : Sheaf J RingCat.{r}} (α : R ⟶ S) (M : PresheafOfModules.{r} S.obj) :
     (toSheaf R).map (restrictSheafifyIso α M).hom =
@@ -193,6 +198,8 @@ attribute [local irreducible] restrictSheafifyIso
   unfold restrictSheafifyIso
   exact restrictSheafifyHom_toSheaf α M
 
+omit [EssentiallySmall.{r} C] [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+  [HasSheafify J AddCommGrpCat.{r}] in
 @[simp] private theorem restrictSheafifyIso_inv_toSheaf
     {R S : Sheaf J RingCat.{r}} (α : R ⟶ S) (M : PresheafOfModules.{r} S.obj) :
     (toSheaf R).map (restrictSheafifyIso α M).inv =
@@ -225,6 +232,7 @@ private noncomputable def swapApp {B S : Sheaf J CommRingCat.{r}} (φ : B ⟶ S)
         | add x y hx hy => simpa only [smul_add] using congrArg₂ (· + ·) hx hy }
   exact (e.trans (TensorProduct.comm _ _ _)).toModuleIso
 
+omit [EssentiallySmall.{r} C] [HasSheafify J AddCommGrpCat.{r}] in
 private theorem swapApp_tmul {B S : Sheaf J CommRingCat.{r}} (φ : B ⟶ S)
     (M : SheafOfModules.{r} (𝓡 B)) (U : Cᵒᵖ) (s : S.obj.obj U) (m : M.val.obj U) :
     (swapApp φ M U).hom (s ⊗ₜ[B.obj.obj U, (φ.hom.app U).hom] m) =
@@ -251,6 +259,7 @@ private noncomputable def swapPresheafIso {B S : Sheaf J CommRingCat.{r}} (φ : 
       rw [swapApp_tmul]
       rfl)
 
+omit [EssentiallySmall.{r} C] [HasSheafify J AddCommGrpCat.{r}] in
 private theorem swapPresheafIso_tmul {B S : Sheaf J CommRingCat.{r}} (φ : B ⟶ S)
     (M : SheafOfModules.{r} (𝓡 B)) (U : Cᵒᵖ) (s : S.obj.obj U) (m : M.val.obj U) :
     (swapPresheafIso φ M).hom.app U (s ⊗ₜ[B.obj.obj U, (φ.hom.app U).hom] m) =
@@ -272,6 +281,7 @@ private noncomputable def changeMap {B S : Sheaf J CommRingCat.{r}} (φ : B ⟶ 
   app U := (ModuleCat.extendScalars (φ.hom.app U).hom).map (a.val.app U)
   naturality := changeOfRingsHom_naturality φ M a
 
+omit [EssentiallySmall.{r} C] [HasSheafify J AddCommGrpCat.{r}] in
 private theorem swapSheafIso_toSheaf {B S : Sheaf J CommRingCat.{r}} (φ : B ⟶ S)
     (M : SheafOfModules.{r} (𝓡 B)) :
     (toSheaf (𝓡 B)).map (swapSheafIso φ M).hom =
@@ -287,6 +297,7 @@ private theorem swapSheafIso_toSheaf {B S : Sheaf J CommRingCat.{r}} (φ : B ⟶
 
 attribute [local irreducible] swapSheafIso
 
+omit [EssentiallySmall.{r} C] [HasSheafify J AddCommGrpCat.{r}] in
 private theorem swapSheafIso_naturality {B S : Sheaf J CommRingCat.{r}} (φ : B ⟶ S)
     {M N : SheafOfModules.{r} (𝓡 B)} (a : M ⟶ N) :
     (restrictedTensorScalars φ).map (changeOfRingsHom φ M a) ≫
@@ -319,6 +330,7 @@ private theorem swapSheafIso_naturality {B S : Sheaf J CommRingCat.{r}} (φ : B 
   simp only [← Functor.map_comp]
   rw [hp]
 
+omit [EssentiallySmall.{r} C] [HasSheafify J AddCommGrpCat.{r}] in
 private theorem swapSheafIso_tmul {B S : Sheaf J CommRingCat.{r}} (φ : B ⟶ S)
     (M : SheafOfModules.{r} (𝓡 B)) (U : Cᵒᵖ) (s : S.obj.obj U) (m : M.val.obj U) :
     (swapSheafIso φ M).hom.val.app U

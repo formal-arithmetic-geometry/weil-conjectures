@@ -311,8 +311,6 @@ structure AmbTateRootProjectionData where
         (ambTateDirectSection l E n v (b v) U x))
 
 set_option backward.isDefEq.respectTransparency true
--- The generic scalar-extension API has expensive universe-polymorphic section variables.
-set_option linter.unusedSectionVars false
 
 private def ambReassoc (T : AmbTateBase l) :
     purTwistFiniteOne T.val l E n ≅ ambTateReduced l E n T.val :=

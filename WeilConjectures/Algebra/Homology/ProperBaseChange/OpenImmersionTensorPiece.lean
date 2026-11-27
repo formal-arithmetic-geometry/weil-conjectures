@@ -84,7 +84,6 @@ set_option linter.privateModule false
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
-set_option linter.style.haveILetI false
 
 universe u
 
@@ -133,7 +132,7 @@ private theorem localizedDerivedUnit_isIso {Z X : Scheme.{u}}
     IsIso (localizedModuleDerivedAdjunction R (ProEt.mk j)).unit := by
   let U := ProEt.mk j
   let adj := localizedModuleDerivedAdjunction R U
-  letI := localizedUnit_isIso j R
+  let := localizedUnit_isIso j R
   have hQ (P : CochainComplex (Mod (R.over U)) ℤ) :
       IsIso (adj.unit.app (DerivedCategory.Q.obj P)) := by
     have hP : IsIso
@@ -273,20 +272,20 @@ private theorem extension_total_iso (R : Sheaf J CommRingCat.{u + 1}) (U : C)
       (total R).obj
         (((localizedModuleExtension R U).mapHomologicalComplex (.up ℤ)).obj P, Q)) := by
   classical
-  letI := SheafOfModules.monoidalCategory R
-  letI := SheafOfModules.monoidalCategory (R.over U)
-  letI : MonoidalCategory (SheafOfModules.{u + 1}
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.monoidalCategory (R.over U)
+  let : MonoidalCategory (SheafOfModules.{u + 1}
       (((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R).over U)) :=
     SheafOfModules.monoidalCategory (R.over U)
   let L := localizedModuleExtension R U
   let V := localizedModuleRestriction R U
-  haveI : L.IsLeftAdjoint := (localizedModuleAdjunctionIndependent R U).isLeftAdjoint
+  have : L.IsLeftAdjoint := (localizedModuleAdjunctionIndependent R U).isLeftAdjoint
   let LC := L.mapHomologicalComplex (.up ℤ)
   let VC := V.mapHomologicalComplex (.up ℤ)
   obtain ⟨e, he⟩ := extension_tensor_natural J R U
   let T := (((curriedTensor _).mapBifunctorHomologicalComplex (.up ℤ) (.up ℤ)).obj P).obj
     (VC.obj Q)
-  haveI : L.PreservesTotalComplex T (.up ℤ) := fun _ ↦ inferInstance
+  have : L.PreservesTotalComplex T (.up ℤ) := fun _ ↦ inferInstance
   let t := (HomologicalComplex₂.mapTotalIso L T (.up ℤ)).symm
   let f :
       (((L.mapHomologicalComplex (.up ℤ)).mapHomologicalComplex (.up ℤ)).obj T) ≅

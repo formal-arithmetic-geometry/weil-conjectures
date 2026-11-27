@@ -24,7 +24,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoida
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.style.haveILetI false
 set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
@@ -54,7 +53,7 @@ private theorem core_tensor_normalized
       rightExactTensorModelNormalization F G r μ) :
     letI := F.leftDerivedFunctorMonoidal
     ∀ K L, ((Monoidal.coreMonoidalTransport e.symm).μIso K L).inv = (μ K L).inv := by
-  letI := F.leftDerivedFunctorMonoidal
+  let := F.leftDerivedFunctorMonoidal
   obtain ⟨ν, hν, huniq⟩ := rightExact_tensorComparison_existsUnique F G e r hr
   have hn : rightExactTensorModelNormalization F G r (normalizedTensorIso F G e) := by
     intro P Q _ _ _ _
@@ -83,14 +82,14 @@ private theorem core_braiding
     ∀ K L, ((DerivedCategory.canonicalTensorSymmetry D).hom.app (G.obj K)).app (G.obj L) ≫
         (c.μIso L K).hom =
       (c.μIso K L).hom ≫ G.map (((DerivedCategory.canonicalTensorSymmetry C).hom.app K).app L) := by
-  letI := F.leftDerivedFunctorMonoidal
-  letI := DerivedCategory.braidedCategory' C
-  letI := DerivedCategory.braidedCategory' D
-  letI : F.leftDerivedFunctor.Braided := F.leftDerivedFunctorBraided hF
-  letI : G.Monoidal := Monoidal.transport e.symm
-  letI : NatTrans.IsMonoidal e.symm.hom :=
+  let := F.leftDerivedFunctorMonoidal
+  let := DerivedCategory.braidedCategory' C
+  let := DerivedCategory.braidedCategory' D
+  let : F.leftDerivedFunctor.Braided := F.leftDerivedFunctorBraided hF
+  let : G.Monoidal := Monoidal.transport e.symm
+  let : NatTrans.IsMonoidal e.symm.hom :=
     Monoidal.natTransIsMonoidal_of_transport e.symm
-  letI : G.LaxBraided := LaxBraided.ofNatIso e.symm
+  let : G.LaxBraided := LaxBraided.ofNatIso e.symm
   dsimp only
   intro K L
   exact (LaxBraided.braided (F := G) K L).symm
@@ -142,7 +141,7 @@ theorem etaleNormalizedScalarSymmetry
   let : E.Monoidal := composeAndSheafifyMonoidal Z.smallEtaleTopology
     (ModuleCat.extendRestrictScalarsAdj.{u + 1} φ)
   obtain ⟨e, hr⟩ := ExceptionalCoefficients.scalarDerivedComparison A B φ Z
-  letI := E.leftDerivedFunctorMonoidal
+  let := E.leftDerivedFunctorMonoidal
   let c := Monoidal.coreMonoidalTransport e.symm
   have ht := Functor.core_tensor_normalized E (scalarExtension φ Z) e
     (scalarExtensionRepresentative φ Z) hr (etaleHomTensorComparison Z φ)

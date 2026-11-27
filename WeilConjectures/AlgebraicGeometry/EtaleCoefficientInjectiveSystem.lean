@@ -22,7 +22,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
-set_option linter.unusedVariables false in
 /-- A compatible coefficient system admits a compatible stagewise injective embedding
 (Stacks, Tag 0EXZ). -/
 theorem etale_coefficient_injective_system
@@ -43,10 +42,10 @@ theorem etale_coefficient_injective_system
     ∃ (FI : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})
     (ψ : ∀ {i j : I} (f : i ⟶ j),
       (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (FI i) ⟶ FI j)
-    (hidentityI : ∀ i : I, ψ (𝟙 i) =
+    (_hidentityI : ∀ i : I, ψ (𝟙 i) =
       (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app
         (FI i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (FI i))
-    (hcompositionI : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),
+    (_hcompositionI : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),
       ψ (f ≫ g) =
         (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)
           (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (FI i) ≫

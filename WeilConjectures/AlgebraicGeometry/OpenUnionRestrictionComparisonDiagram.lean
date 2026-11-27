@@ -23,7 +23,6 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-set_option linter.style.haveILetI false in
 -- Inline the localization witnesses as in the dependent statement, avoiding costly conversion.
 -- Specializing the two comparisons over dependent localizations needs this limit.
 set_option synthInstance.maxSize 2048 in
@@ -96,13 +95,13 @@ theorem open_union_restriction_comparison_diagram
   have h := open_union_restriction_comparison_data.{u, w} X W V
   refine h.imp ?_
   intro hU h
-  letI := hU
+  let := hU
   refine h.imp ?_
   intro hT h
-  letI := hT
+  let := hT
   refine h.imp ?_
   intro hI h
-  letI := hI
+  let := hI
   refine h.imp ?_
   intro eW h
   refine h.imp ?_

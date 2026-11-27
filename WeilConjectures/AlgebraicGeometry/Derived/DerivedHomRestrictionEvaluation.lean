@@ -18,7 +18,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictSc
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 section Conjugation
@@ -38,8 +37,7 @@ private theorem conjugation_hom_natural (e : Aw ⟶ Dw) :
       cA.hom ≫ L.map (εA.inv ≫ SW.map e ≫ εD.hom) ≫ cD.inv := by
   apply (cancel_epi δA.hom).mp
   apply (cancel_mono cD.hom).mp
-  simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Functor.map_comp,
-    Category.assoc, Iso.hom_inv_id_assoc, Iso.inv_hom_id]
+  simp only [Functor.map_comp, Category.assoc, Iso.hom_inv_id_assoc, Iso.inv_hom_id]
   rw [hD]
   simp only [← SV.map_comp_assoc, Iso.inv_hom_id, SV.map_id, Category.id_comp]
   rw [SV.map_comp, Category.assoc]
@@ -48,8 +46,7 @@ private theorem conjugation_hom_natural (e : Aw ⟶ Dw) :
     α.hom.app Aw ≫ L.map (SW.map e) at hn
   rw [reassoc_of% hn]
   rw [reassoc_of% hA]
-  simp only [← L.map_comp_assoc, Iso.hom_inv_id, L.map_id, Category.id_comp,
-    Category.comp_id, Iso.hom_inv_id_assoc]
+  simp only [← L.map_comp_assoc, Category.comp_id, Iso.hom_inv_id_assoc]
 end Conjugation
 
 private theorem derived_cube
@@ -98,9 +95,8 @@ private theorem derived_cube
   have h₂ := Functor.mapDerivedCategorySquareIso_hom_app_comp c q a b b'
     (fun y ↦ by simpa [a] using h y) x
   simp only [Functor.mapDerivedCategoryTriangleIso, Functor.mapDerivedCategoryNatIso_refl,
-    Iso.trans_hom, Iso.symm_hom, Iso.refl_hom, NatTrans.comp_app,
-    NatTrans.id_app, Category.comp_id, CategoryTheory.Functor.map_comp,
-    Category.assoc, CategoryTheory.Functor.map_id, Category.id_comp] at h₁ h₂
+    Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, CategoryTheory.Functor.map_comp,
+    Category.assoc, Category.id_comp] at h₁ h₂
   rw [← cancel_epi ((Functor.mapDerivedCategoryCompIso r K).inv.app
     (U.mapDerivedCategory.obj x))]
   rw [← cancel_mono (Z.mapDerivedCategory.map
@@ -109,8 +105,7 @@ private theorem derived_cube
     NatTrans.comp_app, CategoryTheory.Functor.map_comp, Category.assoc]
   simp only [Iso.inv_hom_id_app_assoc]
   rw [← reassoc_of% h₁, ← reassoc_of% h₂]
-  simp only [← Z.mapDerivedCategory.map_comp_assoc, Iso.inv_hom_id_app,
-    CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  simp only [← Z.mapDerivedCategory.map_comp_assoc]
   simp only [Iso.inv_hom_id_app_assoc]
 
 namespace AlgebraicGeometry.Scheme
@@ -132,7 +127,7 @@ private theorem comparisonSliceCoefficients_eq (V : X.Etale) (q : R →+* S)
     NatTrans.id_app, CategoryTheory.Functor.map_id, Category.id_comp,
     Adjunction.homEquiv_counit]
   dsimp only [Functor.comp_obj, Functor.comp_map]
-  simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp]
   rfl
 
 private theorem comparison_coefficients_cube (V : X.Etale) (q : R →+* S)
@@ -394,14 +389,13 @@ theorem derivedHomEvaluation_restrictScalars
   rw [h]
   simp only [j, NatTrans.comp_app, ConcreteCategory.comp_apply,
     derivedRestrictionHomPresheaf, derivedLocalHomPresheafMap, TypeCat.ofHom_apply,
-    Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
-    Category.id_comp, Iso.hom_inv_id_app]
+    Category.assoc]
   have hm : (derivedSliceRestriction (ProEt.topology X) R U).map
         ((comparisonRestrictScalarsIso X R q).inv.app D) ≫
       (derivedSliceRestriction (ProEt.topology X) R U).map
         ((comparisonRestrictScalarsIso X R q).hom.app D) = 𝟙 _ := by
     rw [← Functor.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id]
-  simp only [reassoc_of% hm, Category.id_comp, Iso.hom_inv_id_app, Category.comp_id]
+  simp only [reassoc_of% hm, Iso.hom_inv_id_app]
   erw [Category.comp_id]
 
 end AlgebraicGeometry.Scheme

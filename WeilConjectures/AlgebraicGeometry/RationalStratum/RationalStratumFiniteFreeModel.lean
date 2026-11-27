@@ -211,12 +211,8 @@ import all WeilConjectures.CategoryTheory.ConstantScalarTowerComparison
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option linter.all false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false
--- Repeated universe-polymorphic sheafification inference makes this linter expensive.
-set_option linter.unusedSectionVars false
-set_option linter.unusedVariables false
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
@@ -417,7 +413,7 @@ theorem scalarModels (S : Scheme.{u}) :
         (hN' : Module.FinitePresentation (A l E) N') (f : N ⟶ N'),
         directMap l E S f ≫ (e N' hN').hom =
           (e N hN).hom ≫ rationalMap l E S ((ModuleCat.extendScalars (inclusion l E)).map f)) ∧
-      (∀ (N : ModuleCat.{u + 1} (A l E)) (hN : Module.FinitePresentation (A l E) N)
+      (∀ (N : ModuleCat.{u + 1} (A l E)) (_hN : Module.FinitePresentation (A l E) N)
         (U : S.ProEt),
         Nonempty ((rationalize l E S (integralModel l E S N)).over U ≅
           (rationalModel l E S (vectorSpace l E N)).over U)) := by

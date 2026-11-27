@@ -202,8 +202,7 @@ private theorem isoTransportComplexCounitEq {X : Scheme.{u}}
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [hf : IsIso f]
   {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
-include hf in
-set_option linter.unusedSectionVars false in
+omit hf in
 /-- The coefficient map is invertible for a scheme isomorphism. -/
 @[instance] theorem pbcIsoCoefficientMap_isIso : IsIso (completedCoefficientMap f d) := by
   rw [completedCoefficientMap_eq_integralRingIso]
@@ -305,6 +304,7 @@ attribute [local irreducible] proEtaleRingModulePullback completedModulePullback
 abbrev pbcIsoAmbientPullback : PbcCompletedDerived Y d ⥤ PbcCompletedDerived X d :=
   (pbcIsoModulePullback f d).mapDerivedCategory
 
+omit hf in
 /-- The two recorded ordinary inverse images have the same tensor object and map formulas.
 -/
 theorem pbcIsoModulePullback_eq_completed :
@@ -341,6 +341,7 @@ private theorem isoExactDerivedComparison
   simp_rw [hid, Category.comp_id]
   exact exactDerivedCounitComparison F L ε
 
+omit hf in
 /-- Exact descent is the unique ordinary derived inverse image with its universal counit.
 -/
 theorem pbcIsoOrdinaryDerivedComparison_exists :
@@ -704,6 +705,7 @@ private theorem scalarRightInverse
     ext N U x
     exact eq_of_heq (hr' N U x)
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 /-- Exact transport's right adjoints commute with restriction of coefficients.
 The section equation fixes the comparison, not just its isomorphism class. -/
 theorem pbcIsoScalarRightComparison_exists (h : E ≤ F) :
@@ -826,6 +828,7 @@ private theorem isoTransportAmbientScalarComparison
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 theorem pbcIsoAmbientScalarComparison_exists (h : E ≤ F) :
     ∃! c : pbcAmbientScalarExtension l Ω T h ⋙
         pbcIsoAmbientPullback e.asIso.hom (pbcStageDatum.{u} l Ω F) ≅
@@ -865,6 +868,7 @@ variable [IsNoetherian T] (hdim : ∃ m : ℕ, topologicalKrullDim T ≤ m)
 section
 attribute [local semireducible] pbcIsoIntegralPullback
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 /-- Fullness restricts the normalized ambient comparison uniquely. -/
 theorem pbcIsoIntegralScalarComparison_exists (h : E ≤ F) :
     ∃! c : pbcIntegralScalarExtension l Ω T hdim hl h ⋙
@@ -901,7 +905,7 @@ def pbcIsoIntegralScalarComparison (h : E ≤ F) :
         pbcIntegralScalarExtension l Ω T hdim hl h :=
   (pbcIsoIntegralScalarComparison_exists l Ω e hdim hl h).exists.choose
 
-set_option linter.unusedSectionVars false in
+omit [IsAlgClosure ℚ_[l] Ω] [IsNoetherian T] in
 /-- Integral localization commutes with the explicitly linear coefficient transport. -/
 theorem pbcIsoRationalization (E : Padic.FiniteCoefficientFields l Ω) :
     pbcRationalization T (pbcStageDatum.{u} l Ω E) (pbcStageUniformizer.{u} l Ω E) ⋙

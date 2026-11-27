@@ -31,8 +31,9 @@ variable [∀ Y : Scheme.{u},
 
 
 -- Reuse the proved unit-germ argument from OpenOrdinaryTensorPureGermCoordinatesCanonical.
+omit [∀ Y : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] in
 open TopologicalSpace Opposite in
-set_option linter.unusedSectionVars false in
 private theorem tensor_unit_stalk {X Y : Scheme.{u}} (k : X ⟶ Y) (x : X)
     (M : Y.Modules) (m : M.presheaf.stalk (k x)) :
     (Classical.choose (Scheme.Modules.exists_tensorPullback_stalk_iso k x)).inv.app M
@@ -74,8 +75,9 @@ private theorem tensor_unit_stalk {X Y : Scheme.{u}} (k : X ⟶ Y) (x : X)
     (((Scheme.Modules.tensorPullback k).obj M).presheaf.stalkPushforward
       AddCommGrpCat.{u} k.base x) hm.symm)
 
+omit [∀ Y : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] in
 open TopologicalSpace Opposite in
-set_option linter.unusedSectionVars false in
 private theorem tensor_unit_stalk_cast {X Y : Scheme.{u}} (k : X ⟶ Y) (x : X)
     (M : Y.Modules) (a : Y.presheaf.stalk (k x) →+* X.presheaf.stalk x)
     (ha : a = (k.stalkMap x).hom) (m : M.presheaf.stalk (k x)) :

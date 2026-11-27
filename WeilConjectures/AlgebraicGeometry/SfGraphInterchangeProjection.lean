@@ -26,7 +26,6 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 set_option backward.defeqAttrib.useBackward true
-set_option linter.unusedSimpArgs false
 
 attribute [local implicit_reducible] CategoryTheory.catToReflQuiver
 
@@ -119,7 +118,7 @@ private theorem interchange_word_app
     Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
     Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
-    Category.id_comp, Category.comp_id, Category.assoc]
+    Category.id_comp, Category.comp_id]
   exact congrArg (Q.map (α.hom.app (J.obj N)) ≫ ·) hn
 
 private theorem whiskered_interchange_app

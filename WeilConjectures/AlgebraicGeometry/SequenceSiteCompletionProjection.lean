@@ -54,7 +54,6 @@ ordinary module adjunction, and its simultaneous K-flat derived comparison.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.all false
 attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan
 attribute [local instance 11000] CategoryTheory.hasSheafCompose_of_preservesLimitsOfSize
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
