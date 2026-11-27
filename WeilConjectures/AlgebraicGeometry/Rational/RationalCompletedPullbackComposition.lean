@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Rational.RationalRealizationPullbackComparison
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcActualRingedExchange
+import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationLift
 
 /-! # Completed composition and descent to all raw rational fraction arrows.
 
@@ -38,6 +39,21 @@ variable {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
   [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]
   [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))]
   [Fact (∀ z : Z, IsUnit (l : Z.presheaf.stalk z))]
+
+omit [IsNoetherian Z] [Fact (∃ n : ℕ, topologicalKrullDim Z ≤ n)]
+  [Fact (∀ z : Z, IsUnit (l : Z.presheaf.stalk z))] in
+/-- The raw pullback of a comparison sends a localized integral morphism to the localization
+of its completed pullback. -/
+theorem RationalRealizationPullbackComparison.rawPull_map_rationalization {g : X ⟶ Y}
+    {sX : RationalModuleRealization l E X} {sY : RationalModuleRealization l E Y}
+    (a : RationalRealizationPullbackComparison l E g sX sY)
+    {K L : PbcBoundedConstructibleComplete Y (pbcIntegralDatum l E)} (f : K ⟶ L) :
+    a.rawPull.map ((pbcRationalization Y (pbcIntegralDatum l E) (pbcUniformizer l E)).map f) =
+      eqToHom (a.raw_objects K) ≫
+        (pbcRationalization X (pbcIntegralDatum l E) (pbcUniformizer l E)).map
+          ((a.integral.completedFunctor l E).map f) ≫ eqToHom (a.raw_objects L).symm := by
+  have h := a.raw_fractions K L f 0
+  simpa only [rationalPullFraction, pow_zero, one_smul] using h
 
 omit [Fact l.Prime] in
 /-- A comparison of composite targets obtained by inverting units is natural. -/
@@ -198,6 +214,30 @@ theorem rationalCompletedPullbackComposition (g : Y ⟶ X) (h : Z ⟶ Y)
     NatIso.ofComponents (fun K ↦ ObjectProperty.isoMk _ (φ K))
       (fun f ↦ ObjectProperty.hom_ext _ (hnat f))
   refine ⟨integralComp, hφ, ?_⟩
+  let c (K : PbcRationalCategory X d (pbcUniformizer l E)) :
+      ah.rawPull.obj (ag.rawPull.obj K) ≅ ac.rawPull.obj K :=
+    eqToIso (congrArg ah.rawPull.obj (ag.raw_objects K.obj)) ≪≫
+      eqToIso (ah.raw_objects ((ag.integral.completedFunctor l E).obj K.obj)) ≪≫
+      (pbcRationalization Z d (pbcUniformizer l E)).mapIso (integralComp.app K.obj) ≪≫
+        eqToIso (ac.raw_objects K.obj).symm
+  have hc {K L : PbcRationalCategory X d (pbcUniformizer l E)} (f : K ⟶ L) :
+      (ag.rawPull ⋙ ah.rawPull).map f ≫ (c L).hom = (c K).hom ≫ ac.rawPull.map f := by
+    refine ScalarLocalization.naturality_of_localization (ag.rawPull ⋙ ah.rawPull) ac.rawPull
+      (fun K ↦ (c K).hom) (fun K L f ↦ ?_) f
+    change ah.rawPull.map (ag.rawPull.map ((pbcRationalization X d (pbcUniformizer l E)).map f)) ≫
+      _ = _ ≫ ac.rawPull.map ((pbcRationalization X d (pbcUniformizer l E)).map f)
+    rw [RationalRealizationPullbackComparison.rawPull_map_rationalization,
+      RationalRealizationPullbackComparison.rawPull_map_rationalization,
+      Functor.map_comp, Functor.map_comp,
+      RationalRealizationPullbackComparison.rawPull_map_rationalization]
+    simp only [c, Iso.trans_hom, eqToIso.hom, Functor.mapIso_hom, eqToHom_map, Category.assoc,
+      eqToHom_trans_assoc]
+    simp only [eqToHom_refl, Category.id_comp]
+    have hn := congrArg (pbcRationalization Z d (pbcUniformizer l E)).map
+      (integralComp.hom.naturality f)
+    simp only [Functor.comp_map, Functor.map_comp] at hn
+    erw [reassoc_of% hn]
+    rfl
   sorry
 
 end AlgebraicGeometry.Scheme
