@@ -80,9 +80,6 @@ noncomputable local instance : MonoidalCategory (HomotopyCategory 𝒜 (.up ℤ)
 
 variable [HasDerivedCategory.{u} 𝒜] (L : CochainComplex 𝒜 ℤ)
 
-set_option maxHeartbeats 800000 in
--- Matching the identities of `(CochainComplex 𝒜 ℤ)ᵒᵖ` in the naturality square needs
--- unification up to the universe presentation `max u u u` of `homComplexFunctor`.
 /-- `R𝓗om(Q L, -) ∘ Q ≅ Q ∘ 𝓗om^•(L, -) ∘ I`, where `I` is the functorial K-injective
 resolution used to define `derivedInternalHom`. -/
 noncomputable def derivedInternalHomCompQIso :
@@ -101,10 +98,12 @@ noncomputable def derivedInternalHomCompQIso :
     simp only [Functor.comp_map, Functor.prod_map, Functor.op_map, Functor.id_map,
       Functor.uncurry_obj_map, Functor.curry_obj_obj_map, unop_id, Functor.map_id, op_id,
       Iso.app_hom] at h ⊢
-    rw [show (homComplexFunctor.{u, u, u, u} (C := C) (J := J) (R := R)).map (𝟙 (op L)) = 𝟙 _
-      from Functor.map_id _ _, NatTrans.id_app] at h
     refine h.trans ?_
     congr 2
+    rw [show (homComplexFunctor.{u, u, u, u} (C := C) (J := J) (R := R)).map (𝟙 (op L)) = 𝟙 _
+      from Functor.map_id _ _, NatTrans.id_app]
+    erw [Category.id_comp]
+    rfl
 
 variable [(HomotopyCategory.quasiIso 𝒜
   (ComplexShape.up ℤ)).localizerMorphismKFlat.IsLeftDerivabilityStructure]
