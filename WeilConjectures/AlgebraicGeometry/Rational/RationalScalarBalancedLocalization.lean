@@ -140,6 +140,7 @@ import all WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientPul
 import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientGeneralPullbackIso
 import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarStages
 import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationLift
+import WeilConjectures.AlgebraicGeometry.Pbc.PbcDerivedExtendIdComplex
 
 /-! # Balanced localization of finite coefficient extensions
 
@@ -747,7 +748,51 @@ theorem rationalBalancedIdentity :
         (rationalBalancedTheta l E E (AlgHom.id ℚ_[l] E) X sE sE).hom.app K ≫
             d.hom.app (sE.J.obj K) =
           sE.J.map ((pbcRationalScalarUnit l E X Fact.out Fact.out).hom.app K)) := by
-  sorry
+  have hb : rationalBalancedCoefficient l E E (AlgHom.id ℚ_[l] E) X = 𝟙 _ := by
+    ext U b
+    rfl
+  obtain ⟨o, e, he, ho, hd⟩ := pbcDerivedExtendIdIso_hom_app_Q _ hb
+  refine ⟨hb, o, pbcDerivedExtendIdIso _ e, ho, hd, fun K ↦ ?_⟩
+  have hχ : sE.integralIso.hom ≫ sE.inclusion =
+      (sE.integralIso.hom ≫ sE.inclusion) ≫
+        rationalBalancedCoefficient l E E (AlgHom.id ℚ_[l] E) X := by
+    rw [hb, Category.comp_id]
+  have hc := pbcDerivedExtendIdIso_congr _ (pbcScalarCoefficientMap_id l E X) _
+    (pbcScalarRestrictId_hom_app_val l X)
+  have hu : pbcEmbeddingAmbientUnit l E X = pbcDerivedExtendIdIso _
+      (eqToIso (congrArg (fun φ ↦ pbcRestrict φ) (pbcScalarCoefficientMap_id l E X)) ≪≫
+        pbcScalarRestrictId l E X) := by
+    rw [pbcEmbeddingAmbientUnit_eq, hc.2]
+  have hcore (A : PbcCompletedDerived X (pbcIntegralDatum l E)) :
+      (rationalBalancedS l E E (AlgHom.id ℚ_[l] E) X sE sE A).hom ≫
+        (rationalBalancedT l E E (AlgHom.id ℚ_[l] E) X sE A).inv ≫
+        (pbcDerivedExtendIdIso _ e).hom.app
+          ((pbcDerivedExtend (sE.integralIso.hom ≫ sE.inclusion)).obj A) =
+      (pbcDerivedExtend (sE.integralIso.hom ≫ sE.inclusion)).map
+        ((pbcEmbeddingAmbientUnit l E X).hom.app A) := by
+    have hT := pbcReductionNormalization_congr _ _ _ _ hχ.symm rfl hχ A
+    rw [pbcReductionNormalization_id_right _ _ _ e he A] at hT
+    have hT' : (rationalBalancedT l E E (AlgHom.id ℚ_[l] E) X sE A).inv ≫
+        (pbcDerivedExtendIdIso _ e).hom.app
+          ((pbcDerivedExtend (sE.integralIso.hom ≫ sE.inclusion)).obj A) =
+        eqToHom (congrArg (fun c ↦ (pbcDerivedExtend c).obj A) hχ.symm) := by
+      rw [Iso.inv_comp_eq]
+      erw [hT]
+      simp
+    have hS := pbcReductionNormalization_congr _ _ _ _
+      (by rw [pbcScalarCoefficientMap_id, Category.id_comp])
+      (rationalBalancedCoefficient_square l E E (AlgHom.id ℚ_[l] E) X sE sE) hχ A
+    rw [pbcReductionNormalization_id_left _ _ _ _ hc.1 A] at hS
+    rw [hT']
+    dsimp only [rationalBalancedS]
+    rw [hS, hu]
+    simp
+  rw [pbcRationalScalarUnit_hom_app, RationalModuleRealization.map_rationalization]
+  have hn := (pbcDerivedExtendIdIso _ e).hom.naturality (eqToHom (sE.objects K.obj).symm)
+  simp only [rationalBalancedTheta, NatIso.ofComponents_hom_app, rationalBalancedComponent,
+    Iso.trans_hom, eqToIso.hom, Iso.symm_hom, Functor.mapIso_hom, eqToIso.inv, Category.assoc]
+  erw [hn, reassoc_of% (hcore K.obj.obj)]
+  rfl
 
 section GeometricCoefficients
 variable {Y Z : Scheme.{u}} (g : Z ⟶ Y)
