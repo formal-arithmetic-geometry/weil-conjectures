@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFi
 public import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdicCondensedIntegralModel
 public import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdicCondensedRawIntegralFormula
 public import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdicCondensedCoefficientSquare
+public import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdicRawCompletionComparison
 
 /-! # The constructed finite condensed integral tensor model
 
@@ -80,18 +81,13 @@ the normalized coefficient square. -/
         pbcDerivedExtend ((C.coefficient E).integralMap l X) ⋙ R := by
   letI := C.commutative
   let I := (sfIntegralConstructible l (Coefficient.{u} l (PadicAlgCl l) E) X).ι
-  let r := (A.realization E).integralIso.hom ≫ (A.realization E).inclusion
+  let r := realizationCoefficientMap l X A E
   let s := r ≫ A.closure.leg E
   let t := ProEtale.CondensedRing.sectionRingMap X (condensedNativeMap l X)
   letI := sectionRingMap_isIso X (condensedNativeMap l X)
   let m := tensorThroughCoefficientSquare X (purCoefficientIso l
       (Coefficient.{u} l (PadicAlgCl l) E) X) (asIso t) s
-    ((C.coefficient E).integralMap l X)
-    (by
-      dsimp only [asIso_hom]
-      dsimp only [s, r]
-      simp only [Category.assoc]
-      exact finiteCondensedIntegralCoefficientSquare l X A E (C.coefficient E))
+    ((C.coefficient E).integralMap l X) (finiteOrdinaryCoefficientSquare l X A C E)
   let c : pbcDerivedExtend r ⋙ pbcDerivedExtend (A.closure.leg E) ≅
       pbcDerivedExtend s :=
     Adjunction.leftAdjointCompIso (pbcDerivedScalarAdjunction r)
