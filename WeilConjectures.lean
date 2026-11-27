@@ -515,6 +515,7 @@ public import WeilConjectures.Algebra.Homology.FreeResolutionSesSplit
 public import WeilConjectures.Algebra.Homology.FreeRestrictionTorBound
 public import WeilConjectures.Algebra.Homology.FunctorialBoundedInjectiveResolution
 public import WeilConjectures.Algebra.Homology.FunctorialObjectResolution
+public import WeilConjectures.Algebra.Homology.GeometricSystemOrdinaryData.GeometricSystemInverseImage
 public import WeilConjectures.Algebra.Homology.GeometricSystemOrdinaryData.SystemGeometricOrdinaryComparison
 public import WeilConjectures.Algebra.Homology.GradedScalarExtensionCoherence
 public import WeilConjectures.Algebra.Homology.HomComplex
