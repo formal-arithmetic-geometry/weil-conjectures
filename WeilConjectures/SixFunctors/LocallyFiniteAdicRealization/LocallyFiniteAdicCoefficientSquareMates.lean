@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdicCondensedIntegralModel
 import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectTransportComplete
+import WeilConjectures.AlgebraicGeometry.Pbc.PbcDerivedScalarComplexUnit
 
 /-! # Mates of coefficient tensor squares
 
@@ -22,11 +23,16 @@ of the restriction square, and the transported scalar tensor squares compose as 
   square with scalar-extension compositors gives the tensor comparison of the pasted square.
 * `integralTensorSquare_of_tensorThroughCoefficientSquare`: the resulting tensor square for
   isomorphisms given by transported tensor comparisons.
+* `tensorThroughCoefficientSquare_inv_app_Q_of_tensorSection`: on a complex, the inverse tensor
+  comparison through a coefficient square is the ordinary comparison fixed on tensor generators,
+  read through the scalar-extension counits.
 
 ## Implementation details
 
 Every comparison is identified with the mate of a comparison of derived restrictions. Pasting
 of mates reduces the claim to the associativity of the restriction compositors.
+On complexes, the mate is computed by the derived units, which the ordinary units compute on
+every complex (`pbcDerivedScalarAdjunction_unit_app_Q`).
 -/
 
 @[expose] public noncomputable section
@@ -376,5 +382,134 @@ theorem integralTensorSquare_of_tensorThroughCoefficientSquare
     comp_obj, map_comp, eqToIso.hom] using
     tensorThroughCoefficientSquare_paste_heq pE pL t rE rL cc legE legL hcoc kh hcs k cE cL hk hθ
       hmE hmL τE hτE τL hτL (IE.obj KE) (IL.obj KL) χ c hc
+
+/-- On a complex, the inverse tensor comparison through a coefficient square, followed by the
+scalar-extension counit, is the counit of the other extension followed by an ordinary comparison
+whose transpose is the ordinary restriction square. -/
+@[reassoc]
+theorem tensorThroughCoefficientSquare_inv_app_Q
+    {R P V T : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
+    (d : R ≅ P) (q : V ≅ T) (s : R ⟶ V) (c : P ⟶ T) (h : d.hom ≫ c = s ≫ q.hom)
+    (o : pbcRestrict d.hom ⋙ pbcExtend s ⟶ pbcExtend c ⋙ pbcRestrict q.hom)
+    (ho : ∀ M, (pbcScalarAdjunction s).unit.app ((pbcRestrict d.hom).obj M) ≫
+        (pbcRestrict s).map (o.app M) =
+      (pbcRestrict d.hom).map ((pbcScalarAdjunction c).unit.app M) ≫
+        (pbcRestrictComp d.hom c (d.hom ≫ c) rfl).hom.app ((pbcExtend c).obj M) ≫
+        (pbcRestrictComp s q.hom (d.hom ≫ c) h.symm).inv.app ((pbcExtend c).obj M))
+    (K : CochainComplex (pbcModules X P) ℤ) :
+    (tensorThroughCoefficientSquare X d q s c h).inv.app (DerivedCategory.Q.obj K) ≫
+        (pbcDerivedRestrict q.hom).map (pbcComplexCounit c K) ≫
+        (pbcRestrict q.hom).mapDerivedCategoryFactors.hom.app
+          (((pbcExtend c).mapHomologicalComplex (.up ℤ)).obj K) =
+      (pbcDerivedExtend s).map ((pbcRestrict d.hom).mapDerivedCategoryFactors.hom.app K) ≫
+        pbcComplexCounit s (((pbcRestrict d.hom).mapHomologicalComplex (.up ℤ)).obj K) ≫
+        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex o (.up ℤ)).app K) := by
+  let N := ((pbcExtend c).mapHomologicalComplex (.up ℤ)).obj K
+  let K' := ((pbcRestrict d.hom).mapHomologicalComplex (.up ℤ)).obj K
+  apply ((pbcDerivedScalarAdjunction s).homEquiv _ _).injective
+  apply (cancel_mono ((pbcRestrict s).mapDerivedCategoryFactors.hom.app
+    (((pbcRestrict q.hom).mapHomologicalComplex (.up ℤ)).obj N))).1
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp, Category.assoc]
+  -- the left side, through the mate of the tensor comparison
+  have hm := unit_mateEquiv (pbcDerivedScalarAdjunction c)
+    (pbcDerivedScalarAdjunction s) (tensorThroughCoefficientSquare X d q s c h).inv
+    (DerivedCategory.Q.obj K)
+  rw [mateEquiv_tensorThroughCoefficientSquare_inv] at hm
+  rw [← reassoc_of% hm]
+  have hρ := (derivedRestrictionSquare d.hom c q.hom s h).hom.naturality (pbcComplexCounit c K)
+  dsimp only [Functor.comp_map, Functor.comp_obj] at hρ
+  erw [← reassoc_of% hρ]
+  have hR : (derivedRestrictionSquare d.hom c q.hom s h).hom.app (DerivedCategory.Q.obj N) ≫
+      (pbcDerivedRestrict s).map ((pbcRestrict q.hom).mapDerivedCategoryFactors.hom.app N) ≫
+      (pbcRestrict s).mapDerivedCategoryFactors.hom.app
+        (((pbcRestrict q.hom).mapHomologicalComplex (.up ℤ)).obj N) =
+      (pbcDerivedRestrict d.hom).map ((pbcRestrict c).mapDerivedCategoryFactors.hom.app N) ≫
+        (pbcRestrict d.hom).mapDerivedCategoryFactors.hom.app
+          (((pbcRestrict c).mapHomologicalComplex (.up ℤ)).obj N) ≫
+        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
+          ((pbcRestrictComp d.hom c (d.hom ≫ c) rfl).hom ≫
+            (pbcRestrictComp s q.hom (d.hom ≫ c) h.symm).inv) (.up ℤ)).app N) := by
+    have h1 := pbcDerivedRestrictComp_hom_app_Q d.hom c (d.hom ≫ c) rfl N
+    have h2 := pbcDerivedRestrictComp_hom_app_Q s q.hom (d.hom ≫ c) h.symm N
+    have h2' : (pbcDerivedRestrictComp s q.hom (d.hom ≫ c) h.symm).inv.app
+        (DerivedCategory.Q.obj N) ≫
+        (pbcDerivedRestrict s).map ((pbcRestrict q.hom).mapDerivedCategoryFactors.hom.app N) ≫
+        (pbcRestrict s).mapDerivedCategoryFactors.hom.app
+          (((pbcRestrict q.hom).mapHomologicalComplex (.up ℤ)).obj N) =
+        (pbcRestrict (d.hom ≫ c)).mapDerivedCategoryFactors.hom.app N ≫
+          DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
+            (pbcRestrictComp s q.hom (d.hom ≫ c) h.symm).inv (.up ℤ)).app N) := by
+      rw [← cancel_epi ((pbcDerivedRestrictComp s q.hom (d.hom ≫ c) h.symm).hom.app
+        (DerivedCategory.Q.obj N)), Iso.hom_inv_id_app_assoc, reassoc_of% h2,
+        ← DerivedCategory.Q.map_comp, ← NatTrans.comp_app, ← NatTrans.mapHomologicalComplex_comp,
+        Iso.hom_inv_id, NatTrans.mapHomologicalComplex_id]
+      erw [DerivedCategory.Q.map_id, Category.comp_id]
+    simp only [derivedRestrictionSquare, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+      Category.assoc]
+    rw [h2', reassoc_of% h1, NatTrans.mapHomologicalComplex_comp, NatTrans.comp_app,
+      DerivedCategory.Q.map_comp]
+  erw [hR]
+  have hc := congrArg (pbcDerivedRestrict d.hom).map (pbcDerivedScalarAdjunction_unit_app_Q c K)
+  simp only [Functor.map_comp] at hc
+  erw [reassoc_of% hc]
+  have hd := (pbcRestrict d.hom).mapDerivedCategoryFactors.hom.naturality
+    ((NatTrans.mapHomologicalComplex (pbcScalarAdjunction c).unit (.up ℤ)).app K)
+  erw [reassoc_of% hd]
+  have hu := (pbcDerivedScalarAdjunction s).unit.naturality
+    ((pbcRestrict d.hom).mapDerivedCategoryFactors.hom.app K)
+  dsimp only [Functor.id_map, Functor.comp_map, Functor.id_obj, Functor.comp_obj] at hu
+  erw [← reassoc_of% hu]
+  have hf := (pbcRestrict s).mapDerivedCategoryFactors.hom.naturality
+    ((NatTrans.mapHomologicalComplex o (.up ℤ)).app K)
+  erw [hf]
+  erw [reassoc_of% (pbcDerivedScalarAdjunction_unit_app_Q s K')]
+  dsimp only [Functor.comp_map]
+  erw [← DerivedCategory.Q.map_comp, ← DerivedCategory.Q.map_comp]
+  congr 2
+  apply HomologicalComplex.hom_ext
+  intro n
+  simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
+    NatTrans.mapHomologicalComplex_app_f, NatTrans.comp_app]
+  exact (ho (K.X n)).symm
+
+/-- The inverse tensor comparison through a coefficient square on a complex, for an ordinary
+comparison fixed on the unit tensor generators. -/
+@[reassoc]
+theorem tensorThroughCoefficientSquare_inv_app_Q_of_tensorSection
+    {R P V T : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
+    (d : R ≅ P) (q : V ≅ T) (s : R ⟶ V) (c : P ⟶ T) (h : d.hom ≫ c = s ≫ q.hom)
+    (o : pbcExtend c ⋙ pbcRestrict q.hom ≅ pbcRestrict d.hom ⋙ pbcExtend s)
+    (ho : ∀ (M : pbcModules X P) (U : X.ProEtᵒᵖ) (x : M.val.obj U),
+      (o.hom.app M).val.app U (pbcTensorSection c M U 1 x) =
+        pbcTensorSection s ((pbcRestrict d.hom).obj M) U 1 x)
+    (K : CochainComplex (pbcModules X P) ℤ) :
+    (tensorThroughCoefficientSquare X d q s c h).inv.app (DerivedCategory.Q.obj K) ≫
+        (pbcDerivedRestrict q.hom).map (pbcComplexCounit c K) ≫
+        (pbcRestrict q.hom).mapDerivedCategoryFactors.hom.app
+          (((pbcExtend c).mapHomologicalComplex (.up ℤ)).obj K) =
+      (pbcDerivedExtend s).map ((pbcRestrict d.hom).mapDerivedCategoryFactors.hom.app K) ≫
+        pbcComplexCounit s (((pbcRestrict d.hom).mapHomologicalComplex (.up ℤ)).obj K) ≫
+        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex o.inv (.up ℤ)).app K) := by
+  refine tensorThroughCoefficientSquare_inv_app_Q d q s c h o.inv (fun M ↦ ?_) K
+  refine (cancel_mono ((pbcRestrict s).map (o.hom.app M))).1 ?_
+  rw [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  ext U x
+  have hinv (N : pbcModules X T) (y : N.val.obj U) :
+      ((pbcRestrictComp s q.hom (d.hom ≫ c) h.symm).inv.app N).val.app U y = y := by
+    have h1 := (pbcRestrictComp_exists s q.hom (d.hom ≫ c) h.symm).exists.choose_spec N U
+      (((pbcRestrictComp s q.hom (d.hom ≫ c) h.symm).inv.app N).val.app U y)
+    exact h1.symm.trans (congrArg (fun k ↦ k.val.app U y)
+      ((pbcRestrictComp s q.hom (d.hom ≫ c) h.symm).inv_hom_id_app N))
+  change ((pbcScalarAdjunction s).unit.app ((pbcRestrict d.hom).obj M)).val.app U x =
+    (o.hom.app M).val.app U (((pbcRestrictComp s q.hom (d.hom ≫ c) h.symm).inv.app _).val.app U
+      (((pbcRestrictComp d.hom c (d.hom ≫ c) rfl).hom.app _).val.app U
+        (((pbcScalarAdjunction c).unit.app M).val.app U x)))
+  rw [hinv]
+  refine ((pbcScalarAdjunction_exists s).exists.choose_spec _ U x).trans ?_
+  refine (ho M U x).symm.trans ?_
+  congr 1
+  exact (((pbcRestrictComp_exists d.hom c _ rfl).exists.choose_spec _ U _).trans
+    ((pbcScalarAdjunction_exists c).exists.choose_spec M U x)).symm
 
 end AlgebraicGeometry.Scheme
