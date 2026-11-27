@@ -39,6 +39,25 @@ variable {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
   [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))]
   [Fact (∀ z : Z, IsUnit (l : Z.presheaf.stalk z))]
 
+omit [Fact l.Prime] in
+/-- A comparison of composite targets obtained by inverting units is natural. -/
+private theorem rationalCompletedComp_naturality {C D T : Type*} [Category C] [Category D]
+    [Category T] {Dg Sg : C ⥤ D} {Dh Sh : D ⥤ T} {Dc Sc : C ⥤ T}
+    (ug : Dg ⟶ Sg) (uh : Dh ⟶ Sh) (uc : Dc ⟶ Sc) (c : Dg ⋙ Dh ⟶ Dc) {K L : C} (f : K ⟶ L)
+    {φK : Sh.obj (Sg.obj K) ⟶ Sc.obj K} {φL : Sh.obj (Sg.obj L) ⟶ Sc.obj L}
+    (hK : Dh.map (ug.app K) ≫ uh.app (Sg.obj K) ≫ φK = c.app K ≫ uc.app K)
+    (hL : Dh.map (ug.app L) ≫ uh.app (Sg.obj L) ≫ φL = c.app L ≫ uc.app L)
+    [IsIso (Dh.map (ug.app K) ≫ uh.app (Sg.obj K))] :
+    Sh.map (Sg.map f) ≫ φL = φK ≫ Sc.map f := by
+  rw [← cancel_epi (Dh.map (ug.app K) ≫ uh.app (Sg.obj K))]
+  have nh := uh.naturality (Sg.map f)
+  have ng := ug.naturality f
+  have nc := c.naturality f
+  have nu := uc.naturality f
+  simp only [Functor.comp_map] at nc
+  rw [Category.assoc, ← reassoc_of% nh, ← Functor.map_comp_assoc, ← ng,
+    Functor.map_comp_assoc, hL, Category.assoc, reassoc_of% hK, ← nu, ← reassoc_of% nc]
+
 /-- Completed composition and descent to all raw rational fraction arrows. -/
 theorem rationalCompletedPullbackComposition (g : Y ⟶ X) (h : Z ⟶ Y)
     (sX : RationalModuleRealization l E X) (sY : RationalModuleRealization l E Y)
@@ -142,6 +161,43 @@ theorem rationalCompletedPullbackComposition (g : Y ⟶ X) (h : Z ⟶ Y)
       (whiskerRight rawComp.hom sZ.J ≫ ac.alpha.hom =
       whiskerLeft ag.rawPull ah.alpha.hom ≫
         whiskerRight ag.alpha.hom (rationalPullDerived l E h ah.rationalCoefficient) ≫
-        whiskerLeft sX.J ambientComp.hom) := by sorry
+        whiskerLeft sX.J ambientComp.hom) := by
+  let d := pbcIntegralDatum l E
+  let φ (K : PbcBoundedConstructibleComplete X d) :
+      ((ag.integral.completedFunctor l E ⋙ ah.integral.completedFunctor l E).obj K).obj ≅
+        ((ac.integral.completedFunctor l E).obj K).obj :=
+    have := ah.integral.unit_isIso ((ag.integral.completedFunctor l E).obj K)
+    have := ag.integral.unit_isIso K
+    haveI := ac.integral.unit_isIso K
+    (asIso ((pbcActualStrictCompletedPullUnit d h).app
+        ((ag.integral.completedFunctor l E).obj K).obj)).symm ≪≫
+      ((pbcActualDerivedPull h d).mapIso
+        (asIso ((pbcActualStrictCompletedPullUnit d g).app K.obj))).symm ≪≫
+      ((pbcActualDerivedPullCompIso h g d).app K.obj).symm ≪≫
+      asIso ((pbcActualStrictCompletedPullUnit d (h ≫ g)).app K.obj)
+  have hφ (K : PbcBoundedConstructibleComplete X d) :
+      (pbcActualDerivedPull h d).map ((pbcActualStrictCompletedPullUnit d g).app K.obj) ≫
+        (pbcActualStrictCompletedPullUnit d h).app
+          ((ag.integral.completedFunctor l E).obj K).obj ≫ (φ K).hom =
+      (pbcActualDerivedPullCompIso h g d).inv.app K.obj ≫
+        (pbcActualStrictCompletedPullUnit d (h ≫ g)).app K.obj := by
+    simp [φ]
+  have hnat {K L : PbcBoundedConstructibleComplete X d} (f : K ⟶ L) :
+      ((ag.integral.completedFunctor l E ⋙ ah.integral.completedFunctor l E).map f).hom ≫
+          (φ L).hom = (φ K).hom ≫ ((ac.integral.completedFunctor l E).map f).hom := by
+    have : IsIso ((pbcActualStrictCompletedPullUnit d h).app
+        ((pbcActualStrictCompletedPull d g).obj K.obj)) :=
+      ah.integral.unit_isIso ((ag.integral.completedFunctor l E).obj K)
+    have : IsIso ((pbcActualStrictCompletedPullUnit d g).app K.obj) :=
+      ag.integral.unit_isIso K
+    exact rationalCompletedComp_naturality (pbcActualStrictCompletedPullUnit d g)
+      (pbcActualStrictCompletedPullUnit d h) (pbcActualStrictCompletedPullUnit d (h ≫ g))
+      (pbcActualDerivedPullCompIso h g d).inv f.hom (hφ K) (hφ L)
+  let integralComp : ag.integral.completedFunctor l E ⋙ ah.integral.completedFunctor l E ≅
+      ac.integral.completedFunctor l E :=
+    NatIso.ofComponents (fun K ↦ ObjectProperty.isoMk _ (φ K))
+      (fun f ↦ ObjectProperty.hom_ext _ (hnat f))
+  refine ⟨integralComp, hφ, ?_⟩
+  sorry
 
 end AlgebraicGeometry.Scheme
