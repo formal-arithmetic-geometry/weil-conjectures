@@ -167,7 +167,6 @@ private theorem complete_local_baseChange_closedFiber_equiv
   exact ⟨(Ideal.quotientEquivAlgOfEq A hker.symm).trans
     (Ideal.quotientKerAlgEquivOfSurjective hsurj)⟩
 
-set_option linter.unusedVariables false in
 /-- Base change of a complete local algebra along a surjective local map remains
 complete local, and preserves an identified closed fibre compatibly with the new base. -/
 theorem complete_local_baseChange_closedFiber
@@ -183,7 +182,7 @@ theorem complete_local_baseChange_closedFiber
       e (Ideal.Quotient.mk ((IsLocalRing.maximalIdeal R).map (algebraMap R T))
         (algebraMap R T r)) = algebraMap A E (algebraMap R A r)) :
     letI : Algebra A (T ⊗[R] A) := Algebra.TensorProduct.rightAlgebra
-    ∃ hlocal : IsLocalRing (T ⊗[R] A),
+    ∃ _hlocal : IsLocalRing (T ⊗[R] A),
       IsNoetherianRing (T ⊗[R] A) ∧
       IsAdicComplete (IsLocalRing.maximalIdeal (T ⊗[R] A)) (T ⊗[R] A) ∧
       IsLocalHom (algebraMap A (T ⊗[R] A)) ∧

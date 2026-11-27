@@ -34,9 +34,6 @@ induces a forward functor on the Verdier rationalization at powers of `l`.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option linter.style.longLine false
-set_option linter.unusedSectionVars false
-set_option linter.unusedVariables false
 universe u
 open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
@@ -95,6 +92,8 @@ def boundedExtensionCompatibility :
 
 attribute [local instance] modulesLinear
 
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- Extension of scalars sends multiplication by `a ∈ O_E` to multiplication by `a ∈ E`. -/
 theorem extension_scalar (a : integers l E)
     (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (integralRing l E T)) :
@@ -169,6 +168,8 @@ private lemma map_scalar_identity_of_iso
   rw [e.hom.naturality, h]
   simp only [Linear.comp_smul, Linear.smul_comp, Category.id_comp, Category.comp_id]
 
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- `boundedExtension` sends multiplication by `a ∈ O_E` to multiplication by `a ∈ E`. -/
 theorem boundedExtension_scalar (a : integers l E) (K : Integral l E T) :
     (boundedExtension l E T).map (a • 𝟙 K) =

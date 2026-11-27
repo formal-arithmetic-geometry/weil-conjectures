@@ -219,7 +219,6 @@ private theorem tensor_counit_app (T : Scheme.{u})
   dsimp only [id]
   exact tensorPresentation_app_port (coefficientMap (integralReductionMap ℓ E) T) P
 
-set_option linter.unusedVariables false in
 -- Preserve the original public statement, including its auxiliary SX let.
 -- The counit calculation compares several composed concrete module functors.
 /-- The scalar pull square, followed by the tensor-presentation counit on X,
@@ -231,7 +230,7 @@ theorem integralResidue_scalarCounit_model {X Y : Scheme.{u}} (f : X ⟶ Y)
     let B := residueExchangeOrdinaryCoefficient ℓ E Y
     let B' := residueExchangeOrdinaryCoefficient ℓ E X
     let A := Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)
-    let SX := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    let _SX := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (coefficientMap (integralReductionMap ℓ E) X)
     letI := residueOrdinaryUpperStarMonoidal A f
     let e : F.obj B ≅ B' :=

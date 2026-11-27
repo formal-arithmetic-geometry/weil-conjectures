@@ -30,7 +30,6 @@ universe u v
 
 namespace HenselianLocalRing
 
-set_option linter.style.haveILetI false in
 /-- A module-finite algebra over a henselian local ring is a finite product of henselian
 local algebras, with local structure maps and finite residue-field extensions. -/
 theorem finite_over_henselian_exists_algEquiv_pi
@@ -58,23 +57,23 @@ theorem finite_over_henselian_exists_algEquiv_pi
         (Algebra.ofId R S) hp.symm) →
     ∃ τ : S →ₐ[R] R, p = (IsLocalRing.maximalIdeal R).comap τ.toRingHom := by
     intro S _ _ hEt p _ hp hres
-    haveI := hEt
+    have := hEt
     let T := ULift.{v} R
     let E : T ≃ₐ[R] R := ULift.algEquiv
-    letI : SMul R T := (inferInstance : Algebra R T).toSMul
-    letI : HenselianLocalRing T := HenselianLocalRing.of_ringEquiv E.symm.toRingEquiv
-    letI : Algebra T S := ((algebraMap R S).comp E.toRingHom).toAlgebra
-    letI : SMul T S := (inferInstance : Algebra T S).toSMul
-    haveI : IsLocalHom E.toRingHom := IsLocalHom.of_surjective _ E.surjective
-    haveI : IsLocalHom E.symm.toRingHom := IsLocalHom.of_surjective _ E.symm.surjective
-    haveI : IsScalarTower R T S :=
+    let : SMul R T := (inferInstance : Algebra R T).toSMul
+    have : HenselianLocalRing T := HenselianLocalRing.of_ringEquiv E.symm.toRingEquiv
+    let : Algebra T S := ((algebraMap R S).comp E.toRingHom).toAlgebra
+    let : SMul T S := (inferInstance : Algebra T S).toSMul
+    have : IsLocalHom E.toRingHom := IsLocalHom.of_surjective _ E.surjective
+    have : IsLocalHom E.symm.toRingHom := IsLocalHom.of_surjective _ E.symm.surjective
+    have : IsScalarTower R T S :=
       IsScalarTower.of_algebraMap_eq (R := R) (S := T) (A := S) fun _ ↦ rfl
-    haveI : Algebra.Etale R T := Algebra.Etale.of_equiv E.symm
-    haveI : Algebra.Etale T S := Algebra.Etale.of_restrictScalars R T S
+    have : Algebra.Etale R T := Algebra.Etale.of_equiv E.symm
+    have : Algebra.Etale T S := Algebra.Etale.of_restrictScalars R T S
     have hpT : p.comap (algebraMap T S) = IsLocalRing.maximalIdeal T := by
       change (p.comap (algebraMap R S)).comap E.toRingHom = _
       rw [hp, IsLocalRing.maximalIdeal_comap]
-    haveI : AlgebraicGeometry.Etale
+    have : AlgebraicGeometry.Etale
         (AlgebraicGeometry.Scheme.Spec.map (CommRingCat.ofHom (algebraMap T S)).op) :=
       (AlgebraicGeometry.HasRingHomProperty.Spec_iff (P := @AlgebraicGeometry.Etale)).mpr
         (RingHom.etale_algebraMap.mpr inferInstance)
@@ -121,24 +120,24 @@ theorem finite_over_henselian_exists_algEquiv_pi
     exact (SetLike.ext_iff.mp (IsLocalRing.maximalIdeal_comap E.toRingHom) (τ x)).symm
   obtain ⟨r, A, rings, algebras, locals, ⟨e⟩⟩ :=
     finite_algebra_is_product_local_rings hR (B := B)
-  letI := rings
-  letI := algebras
-  letI := locals
-  haveI : Module.Finite R (∀ i, A i) := Module.Finite.equiv e.toLinearEquiv
+  let := rings
+  let := algebras
+  have := locals
+  have : Module.Finite R (∀ i, A i) := Module.Finite.equiv e.toLinearEquiv
   have hFinite (i : Fin r) : Module.Finite R (A i) := Module.Finite.of_pi A i
   have henselian (i : Fin r) : HenselianLocalRing (A i) := by
-    haveI := hFinite i
+    have := hFinite i
     exact finite_local_henselian R (A i)
   have localMaps (i : Fin r) : IsLocalHom (algebraMap R (A i)) := by
-    haveI := hFinite i
+    have := hFinite i
     apply ((IsLocalRing.local_hom_TFAE (algebraMap R (A i))).out 5 1).mp
     exact IsLocalRing.eq_maximalIdeal
       (Ideal.isMaximal_under_of_isIntegral_of_isMaximal (IsLocalRing.maximalIdeal (A i)))
-  letI := henselian
-  letI := localMaps
+  have := henselian
+  have := localMaps
   refine ⟨r, A, rings, algebras, henselian, localMaps, ⟨e⟩, hFinite, ?_⟩
   intro i
-  haveI := hFinite i
+  have := hFinite i
   infer_instance
 
 end HenselianLocalRing

@@ -30,8 +30,6 @@ represented at a finite stage.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedVariables false
-set_option linter.unusedSectionVars false
 set_option Elab.async false
 set_option backward.defeqAttrib.useBackward true
 set_option synthInstance.maxSize 4096
@@ -133,8 +131,8 @@ theorem isomorphismFieldTransportCommonStage
     (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [IsNoetherian X] [IsNoetherian Y]
-    (hDimX : ∃ n : ℕ, topologicalKrullDim X ≤ n)
-    (hDimY : ∃ n : ℕ, topologicalKrullDim Y ≤ n)
+    (_hDimX : ∃ n : ℕ, topologicalKrullDim X ≤ n)
+    (_hDimY : ∃ n : ℕ, topologicalKrullDim Y ≤ n)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
     (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))

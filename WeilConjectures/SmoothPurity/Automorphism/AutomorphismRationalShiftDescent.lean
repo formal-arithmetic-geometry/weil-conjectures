@@ -18,7 +18,6 @@ This module proves the rational localization step before common-stage descent.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedVariables false
 set_option Elab.async false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency true
@@ -248,14 +247,14 @@ theorem automorphismRationalShiftDescent
         automorphismStageRationalShiftNormalization l E f cf ∧
         automorphismStageRationalShiftNormalization l E eX.asIso.hom cX ∧
         automorphismStageRationalShiftNormalization l E eY.asIso.hom cY ∧
-        (fun [sf : (rationalDerivedPullback l E f).CommShift ℤ]
-          [sX : (rationalDerivedPullback l E eX.asIso.hom).CommShift ℤ]
-          [sY : (rationalDerivedPullback l E eY.asIso.hom).CommShift ℤ] ↦
+        (fun [_sf : (rationalDerivedPullback l E f).CommShift ℤ]
+          [_sX : (rationalDerivedPullback l E eX.asIso.hom).CommShift ℤ]
+          [_sY : (rationalDerivedPullback l E eY.asIso.hom).CommShift ℤ] ↦
           (rationalDerivedPullback l E f).IsTriangulated ∧
             (rationalDerivedPullback l E eX.asIso.hom).IsTriangulated ∧
             (rationalDerivedPullback l E eY.asIso.hom).IsTriangulated ∧
             NatTrans.CommShift (automorphismStageRationalSquare l E C f eX eY h).hom ℤ)
-          (sf := cf) (sX := cX) (sY := cY) := by
+          (_sf := cf) (_sX := cX) (_sY := cY) := by
   classical
   obtain ⟨sf, sx, sy, nf, nx, ny, he⟩ :=
     (automorphismConstructibleStage_integral_shifts l E C f eX eY h).2

@@ -32,7 +32,6 @@ gives exactly the `CoefficientGammaProjection` equation.
 set_option autoImplicit false
 set_option Elab.async false
 set_option backward.defeqAttrib.useBackward true
-set_option linter.style.multiGoal false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 universe t u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
@@ -55,7 +54,7 @@ theorem coefficientDerivedSystemGammaProjectionTransport
     S.reduction_normalized P
   let f := S.fiberHom (S.reduction.obj P) N hP hN n
   rw [CoefficientDerivedSystemCalculus.gamma]
-  rw [D.globalEvaluation_model]
+  rw [D.globalEvaluation_model (hM := hP)]
   dsimp only [Iso.trans_hom, Functor.mapIso_hom, NatTrans.comp_app]
   simp only [Category.assoc]
   simp only [coefficientSequenceGlobalHom]

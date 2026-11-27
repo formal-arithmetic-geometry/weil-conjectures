@@ -235,7 +235,6 @@ import WeilConjectures.CategoryTheory.Constant.ConstantSpecifiedBasis
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
@@ -363,20 +362,20 @@ instance imageCommShift (R : Coefficients.{u})
 theorem comparison_commShift {R S : Coefficients.{u}} (a : Change R S)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     (comparison a c).CommShift ℤ := by
-  letI : (pbcDerivedRestrict (a.map X)).CommShift ℤ :=
+  let : (pbcDerivedRestrict (a.map X)).CommShift ℤ :=
     Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt (pbcRestrict (a.map X))
-  letI : (pbcDerivedRestrict (a.map Y)).CommShift ℤ :=
+  let : (pbcDerivedRestrict (a.map Y)).CommShift ℤ :=
     Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt (pbcRestrict (a.map Y))
-  letI : NatTrans.CommShift (pbcExtensionCounit (a.map X)) ℤ :=
+  let : NatTrans.CommShift (pbcExtensionCounit (a.map X)) ℤ :=
     (scalarCommShift_existsUnique (a.map X)).exists.choose_spec
-  letI : NatTrans.CommShift (pbcExtensionCounit (a.map Y)) ℤ :=
+  let : NatTrans.CommShift (pbcExtensionCounit (a.map Y)) ℤ :=
     (scalarCommShift_existsUnique (a.map Y)).exists.choose_spec
   have hAdjX := restrictionScalarAdjunction_shift (a.map X)
   have hAdjY := restrictionScalarAdjunction_shift (a.map Y)
-  letI : (pbcDerivedScalarAdjunction (a.map X)).CommShift ℤ := hAdjX
-  letI : (pbcDerivedScalarAdjunction (a.map Y)).CommShift ℤ := hAdjY
-  letI : (image R c).CommShift ℤ := imageCommShift R c
-  letI : (image S c).CommShift ℤ := imageCommShift S c
+  let : (pbcDerivedScalarAdjunction (a.map X)).CommShift ℤ := hAdjX
+  let : (pbcDerivedScalarAdjunction (a.map Y)).CommShift ℤ := hAdjY
+  let : (image R c).CommShift ℤ := imageCommShift R c
+  let : (image S c).CommShift ℤ := imageCommShift S c
   have hres : NatTrans.CommShift (restriction a c).hom ℤ :=
     restriction_commShift a c
   unfold comparison
@@ -554,12 +553,12 @@ private theorem identity_inverseMate_isIso
     (eL : L₁ ≅ 𝟭 C) (eR : R₂ ≅ 𝟭 D)
     (t : R₁ ⋙ G ≅ G ⋙ R₂) :
     IsIso (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ t.hom))) := by
-  letI : L₁.Full := Functor.Full.of_iso eL.symm
-  letI : L₁.Faithful := Functor.Faithful.of_iso eL.symm
-  letI : R₂.Full := Functor.Full.of_iso eR.symm
-  letI : R₂.Faithful := Functor.Faithful.of_iso eR.symm
-  haveI : IsIso a.unit := a.unit_isIso_of_L_fully_faithful
-  haveI : IsIso b.counit := b.counit_isIso_of_R_fully_faithful
+  let : L₁.Full := Functor.Full.of_iso eL.symm
+  let : L₁.Faithful := Functor.Faithful.of_iso eL.symm
+  let : R₂.Full := Functor.Full.of_iso eR.symm
+  let : R₂.Faithful := Functor.Faithful.of_iso eR.symm
+  have : IsIso a.unit := a.unit_isIso_of_L_fully_faithful
+  have : IsIso b.counit := b.counit_isIso_of_R_fully_faithful
   rw [mateEquiv_symm_apply]
   infer_instance
 
@@ -590,7 +589,7 @@ theorem comparison_identity {R : Coefficients.{u}} (a : Change R R)
   rw [tensorComposition_identity_left_of_eq (R.ring X) (a.map X) (h X),
     tensorComposition_identity_left_of_eq (R.ring Y) (a.map Y) (h Y)] at hcomp
   let T := pbcDerivedExtend (a.map Y)
-  letI : T.Faithful := Functor.Faithful.of_iso (v Y).symm
+  let : T.Faithful := Functor.Faithful.of_iso (v Y).symm
   apply T.map_injective
   apply (cancel_mono ((comparison a c).app M)).mp
   have hn := (comparison a c).naturality ((v X).hom.app M)
@@ -1145,9 +1144,9 @@ theorem integralCoefficientComparison
           (coefficientPrimeUnit l D hl) c ⟨M, hM.1⟩).obj) := by
   have hF := finiteTorIntegralCompletedScalarExtension D.p l hl E F i X M hM
   let hunit := coefficientPrimeUnit l D hl
-  letI : HasCountableProducts (DerivedCategory (scalarReductionSource l E Y)) :=
+  let : HasCountableProducts (DerivedCategory (scalarReductionSource l E Y)) :=
     integralOperationsDerivedCountableProducts l E Y
-  letI : HasCountableProducts (DerivedCategory (scalarReductionSource l F Y)) :=
+  let : HasCountableProducts (DerivedCategory (scalarReductionSource l F Y)) :=
     integralOperationsDerivedCountableProducts l F Y
   have hlimE := integralProperOpen_isDerivedLimit l E D hunit f c M hM
   have hlimF := integralProperOpen_isDerivedLimit l F D hunit f c _ hF

@@ -249,12 +249,11 @@ private noncomputable def complexCounit
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-set_option linter.unusedVariables false in
 /-- The remaining comparison step upgrades unmarked lifting data to the prescribed marking.
 -/
 theorem exists_marking_compatible_finiteFree_lift
     {R : Type u} [CommRing R] (I : Ideal R)
-    (hnil : ∃ N : ℕ, 1 ≤ N ∧ I ^ N = 0)
+    (_hnil : ∃ N : ℕ, 1 ≤ N ∧ I ^ N = 0)
     (hunits : ∀ x : I, IsUnit (1 + (x : R)))
     [HasDerivedCategory.{w} (ModuleCat.{max u v} R)]
     [HasDerivedCategory.{w'} (ModuleCat.{max u v} (R ⧸ I))]
@@ -266,14 +265,14 @@ theorem exists_marking_compatible_finiteFree_lift
         (ModuleCat.extendRestrictScalarsAdj (Ideal.Quotient.mk I)).left_adjoint_additive
         (.up ℤ) ⋙ DerivedCategory.Qh)
     [L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso (ModuleCat.{max u v} R) (.up ℤ))]
-    (K : DerivedCategory (ModuleCat.{max u v} R)) (hK : IsPseudoCoherent K)
+    (K : DerivedCategory (ModuleCat.{max u v} R)) (_hK : IsPseudoCoherent K)
     (F : CochainComplex (ModuleCat.{max u v} (R ⧸ I)) ℤ)
     (b : ℤ) (hFbound : F.IsStrictlyLE b)
     (hFterms : ∀ i : ℤ, Module.Free (R ⧸ I) (F.X i) ∧ Module.Finite (R ⧸ I) (F.X i))
     (α : L.obj K ≅ Q.obj F)
     (hdata : ∃ (P : CochainComplex (ModuleCat.{max u v} R) ℤ)
-      (β : Q.obj P ≅ K)
-      (θ : ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex
+      (_β : Q.obj P ≅ K)
+      (_θ : ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex
         (.up ℤ)).obj P ≅ F),
       P.IsStrictlyLE b ∧
       (∀ i : ℤ, Module.Free R (P.X i) ∧ Module.Finite R (P.X i))) :

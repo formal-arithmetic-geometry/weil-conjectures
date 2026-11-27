@@ -99,12 +99,11 @@ private theorem resolve (N : coefficientSequenceDerived l E W) :
   exact ⟨A, hp, ⟨asIso (DerivedCategory.Q.map p) ≪≫
     DerivedCategory.Q.objObjPreimageIso N⟩⟩
 
-set_option linter.unusedVariables false in
 /-- Equality of the normalized tensor square on K-flat representatives transports to
 all objects of the unbounded derived coefficient category. -/
 theorem coefficientNormalizedTensorHorizontalTransport
     (R : CoefficientDerivedSystemReduction l E W)
-    (hE : CoefficientEvaluationTensorNormalization l E W R)
+    (_hE : CoefficientEvaluationTensorNormalization l E W R)
     (Q : CoefficientFiniteQuotientCalculus l E W R.toCoefficientDerivedSystemTensors)
     (hrep : ∀ (P V : CochainComplex (coefficientSequenceModules l E W) ℤ),
       CochainComplex.IsKFlatIndependentCoefficients

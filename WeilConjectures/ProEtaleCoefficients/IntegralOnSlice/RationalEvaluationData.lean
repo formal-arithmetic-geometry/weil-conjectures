@@ -54,7 +54,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (X : AlgebraicGeometry.Scheme.{t}) (U : Option X.ProEt)
 
-set_option linter.unusedVariables false in
 /-- The coefficient sheaf in degree zero, the duality unit of the ringed slice site. -/
 def coefficient : D l E X U := ringedSiteDualityUnit (topology X U) (ring l E X U)
 

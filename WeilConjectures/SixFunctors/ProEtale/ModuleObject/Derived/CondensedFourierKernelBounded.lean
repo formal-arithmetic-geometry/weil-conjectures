@@ -27,8 +27,6 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor MonoidalCategory
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
--- The recorded statement binds `hp` and `hk`, which the proof does not use.
-set_option linter.unusedVariables false in
 /-- Every displayed condensed Fourier kernel placed in degree zero is bounded
 constructible, including the noninvertible-cardinality branch of its definition. -/
 theorem condensedFourierKernel_boundedConstructible
@@ -40,8 +38,8 @@ theorem condensedFourierKernel_boundedConstructible
       (∃ E : PadicAlgCl.FiniteIntermediateField l,
         Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj.{u} E))) ∨
       Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj.{u} l))))
-    (hp : IsUnit (p : MonObj.Γ Λ))
-    (k : Type u) [Field k] (hk : Finite k ∨ IsAlgClosed k)
+    (_hp : IsUnit (p : MonObj.Γ Λ))
+    (k : Type u) [Field k] (_hk : Finite k ∨ IsAlgClosed k)
     (k₀ : Type u) [Field k₀] [Fintype k₀]
     {S V W : Scheme.{u}} [S.Over (Spec (.of k))]
     [V.Over (Spec (.of k))] [W.Over (Spec (.of k))]

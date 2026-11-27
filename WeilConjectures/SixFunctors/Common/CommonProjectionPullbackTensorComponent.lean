@@ -32,7 +32,6 @@ set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 4096
 set_option genInjectivity false
 set_option genSizeOfSpec false
-set_option linter.style.haveILetI false
 
 universe u v w v' w'
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme

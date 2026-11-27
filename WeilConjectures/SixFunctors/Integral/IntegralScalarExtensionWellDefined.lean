@@ -328,6 +328,7 @@ noncomputable def integralScalarRho (n : ℕ) :
 
 attribute [local irreducible] integralScalarRho
 
+-- Kept as `def`: its type is inferred and other files mark it `[local irreducible]`.
 set_option linter.defProp false in
 /-- The recorded change-of-rings witness, fixing the ordinary functor on objects and maps. -/
 noncomputable def integralScalarReductionWitness (n : ℕ) :=

@@ -123,7 +123,6 @@ private theorem comparison_exists {E L : Padic.FiniteCoefficientFields l Ω} (h 
     ((suppliedFamily l Ω T stage).identity L).symm
     ((suppliedFamily l Ω T stage).identity E).symm e
 
-set_option linter.unusedVariables false in
 /-- Given integral comparisons `b h : I E ⋙ C h ≅ U h ⋙ I L` satisfying the cocycle and unit
 laws, there are a rational family `J` and comparisons `j h : scalar h ⋙ J L ≅ J E ⋙ T h` which
 are shift-compatible and exact, are given on integral objects by the localization of `(b h).inv`
@@ -131,17 +130,17 @@ followed by the inverse integral comparison, and satisfy the three-field associa
 identity value and the two unit laws. -/
 theorem rawLocalizationScalarDescent
     (_D : FiniteFieldDatum.{d}) (_hl : l ≠ _D.p)
-    (hI : ∀ E : Padic.FiniteCoefficientFields l Ω, (I l Ω T stage E).IsTriangulated)
+    (_hI : ∀ E : Padic.FiniteCoefficientFields l Ω, (I l Ω T stage E).IsTriangulated)
     (ordinary : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
       FdOrdinaryScalarTransport l Ω T h)
     (b : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
       I l Ω T stage E ⋙ C l Ω T h ≅ U l Ω T h ⋙ I l Ω T stage L)
     (hshift : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
       NatTrans.CommShift (b h).hom ℤ ∧ NatTrans.CommShift (b h).inv ℤ)
-    (hexact : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
+    (_hexact : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
       (I l Ω T stage E ⋙ C l Ω T h).IsTriangulated ∧
         (U l Ω T h ⋙ I l Ω T stage L).IsTriangulated)
-    (hlift : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)
+    (_hlift : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)
       (V : (integralOperationsGoodComplex l (pbcFiniteField.{u} l Ω E) T).FullSubcategory)
       (hV : sfIntegralConstructible l (pbcFiniteField.{u} l Ω E) T
         (DerivedCategory.Q.obj V.obj)),
@@ -217,7 +216,7 @@ theorem rawLocalizationScalarDescent
           ((unit l Ω T L).hom.app
             ((scalar l Ω T h).obj K)) ≫ (j h).hom.app K) := by
   classical
-  clear hI ordinary hexact hlift
+  clear _hI ordinary _hexact _hlift
   let family := suppliedFamily l Ω T stage
   have hbase {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) :=
     rawLocalizedComparisonExists l Ω T stage h (b h)

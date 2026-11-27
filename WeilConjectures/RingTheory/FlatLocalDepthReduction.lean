@@ -323,8 +323,6 @@ private theorem exists_source_regular_flat_quotients
 
 
 
--- Preserve the existing existential proof-binder name in the public signature.
-set_option linter.unusedVariables false in
 /-- A positive source-plus-fibre depth sum admits compatible proper quotients for
 which both target depth and the source-plus-fibre depth sum decrease by one. -/
 theorem exists_depth_reducing_flat_local_quotients {R : Type u} {S : Type v}
@@ -342,7 +340,7 @@ theorem exists_depth_reducing_flat_local_quotients {R : Type u} {S : Type v}
         IsLocalRing.of_surjective' (Ideal.Quotient.mk J) Ideal.Quotient.mk_surjective
       letI : IsLocalRing (S ⧸ K) :=
         IsLocalRing.of_surjective' (Ideal.Quotient.mk K) Ideal.Quotient.mk_surjective
-      ∃ (ψ : (R ⧸ J) →+* (S ⧸ K)) (hψ : IsLocalHom ψ),
+      ∃ (ψ : (R ⧸ J) →+* (S ⧸ K)) (_hψ : IsLocalHom ψ),
         ψ.Flat ∧
         ∃ hF : IsLocalRing ((S ⧸ K) ⧸ (maximalIdeal (R ⧸ J)).map ψ),
           letI := hF

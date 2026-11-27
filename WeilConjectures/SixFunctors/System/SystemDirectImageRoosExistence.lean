@@ -37,7 +37,6 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-set_option linter.unusedVariables false in
 /-- The actual derived system direct image admits a finite-image Roos object. -/
 theorem systemDirectImage_roosExistence
     {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -49,7 +48,7 @@ theorem systemDirectImage_roosExistence
       (S.reduction.obj K)
     ∃ hprod : HasProduct (sfDirectImageTerm l E f K),
       ∃ L : @SfIntegralDirectImage l _ E _ _ _ X Y f K hprod,
-      ∃ e : ((coefficientSequenceLimit l E Y).obj N ≅ L.obj), True := by
+      ∃ _e : ((coefficientSequenceLimit l E Y).obj N ≅ L.obj), True := by
   let A := scalarReductionSource l E Y
   let : IsGrothendieckAbelian.{u + 1} A :=
     (grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{u + 1, u, u}

@@ -31,7 +31,6 @@ variable {G : Type u} [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
 variable {B : Type z} [Group B] [TopologicalSpace B] [IsTopologicalGroup B]
 
 section Exactness
-set_option linter.style.haveILetI false
 variable {B₀ : Type} [Group B₀] [TopologicalSpace B₀] [IsTopologicalGroup B₀]
 variable [Finite A] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
 variable [CompactSpace B₀] [T2Space B₀] [TotallyDisconnectedSpace B₀]

@@ -51,13 +51,12 @@ theorem exists_popescu_smooth_lift_modulo_eight
         ∀ (a : A) (d : D),
           φ (Ideal.Quotient.mk _ a) = Ideal.Quotient.mk _ d →
           Ideal.Quotient.mk (Ideal.span {(algebraMap R Λ π) ^ 4}) (α a) =
-          Ideal.Quotient.mk (Ideal.span {(algebraMap R Λ π) ^ 4}) (δ d) :=
-  set_option linter.style.haveILetI false in by
+          Ideal.Quotient.mk (Ideal.span {(algebraMap R Λ π) ^ 4}) (δ d) := by
   obtain ⟨D, _instD, _algD, _fpD, δ, hsmooth, hφ⟩ :=
     exists_popescu_smooth_lift_data R Λ A α π hπ hπΛ hmod
-  letI : CommRing D := _instD
-  letI : Algebra R D := _algD
-  letI : Algebra.FinitePresentation R D := _fpD
+  let : CommRing D := _instD
+  let : Algebra R D := _algD
+  have : Algebra.FinitePresentation R D := _fpD
   have hz : PrimeSpectrum.zeroLocus (Algebra.singularIdeal R D : Set D) = ∅ := by
     rw [(Algebra.singularIdeal_zeroLocus R D).1]
     ext q

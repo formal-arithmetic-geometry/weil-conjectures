@@ -26,7 +26,6 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types true
 set_option genSizeOf false
 set_option genInjectivity false
-set_option linter.all false
 attribute [local irreducible] HasDerivedCategory.standard
 
 universe u
@@ -120,7 +119,7 @@ theorem rationalTensorTransition_hom_app {E L : Index l (PadicAlgCl l)} (h : E �
 
 instance rationalTensorTransition_shift {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
     NatTrans.CommShift (rationalTensorTransition l X C h).hom ℤ := by
-  haveI := (integralTensorComparison_coherent l X C).1 h
+  have := (integralTensorComparison_coherent l X C).1 h
   let Q := stageLocalization l X E
   have he : Functor.whiskerLeft Q (rationalTensorTransition l X C h).hom =
       (rationalTensorIntegral l X C E).hom ≫ integralTensorComparison l X C h ≫
@@ -133,7 +132,7 @@ instance rationalTensorTransition_shift {E L : Index l (PadicAlgCl l)} (h : E �
       Functor.whiskerLeft_app, Functor.whiskerRight_app, Iso.symm_inv,
       Functor.associator_hom_app, Functor.associator_inv_app,
       Category.id_comp, Category.comp_id, Category.assoc]
-  haveI : NatTrans.CommShift (Functor.whiskerLeft Q
+  have : NatTrans.CommShift (Functor.whiskerLeft Q
       (rationalTensorTransition l X C h).hom) ℤ := by
     rw [he]
     infer_instance
@@ -167,7 +166,7 @@ theorem rationalTensorTransition_tower {E L M : Index l (PadicAlgCl l)}
       apply (cancel_mono (q''.hom.app K)).mp
       simp only [Category.assoc, Iso.hom_inv_id_app_assoc,
         ← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
-        Category.id_comp, Iso.inv_hom_id_app, Category.comp_id]
+        Category.id_comp, Iso.inv_hom_id_app]
       dsimp only [S, q, q', q'', T, Q, Q']
       simpa only [Functor.comp_obj, Category.assoc, Category.comp_id] using
         (rationalIntegralTransition_tower l X h k K).symm
@@ -184,8 +183,8 @@ theorem rationalTensorTransition_tower {E L M : Index l (PadicAlgCl l)}
     simp only [Functor.comp_obj, Functor.comp_map] at hn
     simp only [reassoc_of% hn]
     simp only [rationalTensorTransition_hom_app l X C k]
-    simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Functor.comp_map, Functor.comp_obj]
-    simp only [← Functor.map_comp_assoc, ← Functor.map_comp]
+    simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Functor.comp_obj]
+    simp only [← Functor.map_comp]
     dsimp only [S, q, q', q'', T, Q, Q'] at hq
     simp only [hq, Functor.map_comp]
     have hf := (rationalTensorIntegral l X C M).inv.naturality
@@ -219,7 +218,7 @@ private theorem equivalence_counit_conjugate
     e.functor.map (e.inverse.map f) =
       e.counitIso.hom.app P ≫ f ≫ e.counitIso.inv.app Q := by
   apply (cancel_mono (e.counitIso.hom.app Q)).mp
-  simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+  simp only [Category.assoc, Iso.inv_hom_id_app]
   simpa only [Functor.comp_map, Functor.comp_obj, Functor.id_map, Functor.id_obj,
     Category.comp_id] using e.counitIso.hom.naturality f
 

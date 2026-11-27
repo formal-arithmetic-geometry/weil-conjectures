@@ -67,11 +67,6 @@ does not repeatedly type-check the full square.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.unusedSectionVars false
-set_option linter.unusedVariables false
-set_option linter.all false
-set_option linter.unusedSimpArgs false
-set_option linter.unusedTactic false
 set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
@@ -207,13 +202,13 @@ theorem pullbackTensorDerivedEvaluation_existsUnique {X Y : Scheme.{u}}
   unfold pullbackTensorDerivedEvaluationNormalization
   let D : normalizedDVRModules l E Y n ⥤ normalizedDVRModules l E X n :=
     sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f
-  letI : D.Additive :=
+  have : D.Additive :=
     sfIntrinsicPullback_additive (finiteCoefficientRing l E (n + 1)) f
-  letI : PreservesFiniteLimits D :=
+  have : PreservesFiniteLimits D :=
     sfIntrinsicPullback_preservesFiniteLimits (finiteCoefficientRing l E (n + 1)) f
-  letI : PreservesFiniteColimits D :=
+  have : PreservesFiniteColimits D :=
     sfIntrinsicPullback_preservesFiniteColimits (finiteCoefficientRing l E (n + 1)) f
-  letI := integralOperationsLevelPullback_additive l E f n
+  have := integralOperationsLevelPullback_additive l E f n
   exact derivedCompositeIso_existsUnique (pullbackTensorSequenceInverse l E f)
     (coefficientSequenceEvaluation l E X n) (coefficientSequenceEvaluation l E Y n) D
     (integralOperationsLevelPullback l E f n)
@@ -315,9 +310,9 @@ theorem pullbackTensorSystemComparison_associativity {X Y : Scheme.{u}}
         ((pullbackTensorSequenceDerived l E f).obj M)
         ((pullbackTensorSequenceDerived l E f).obj N)
         ((pullbackTensorSequenceDerived l E f).obj P)).hom := by
-  letI : MonoidalCategory (coefficientSequenceDerived l E Y) :=
+  let : MonoidalCategory (coefficientSequenceDerived l E Y) :=
     (pullbackTensorCalculus l E Y).systemClosed.monoidal
-  letI : MonoidalCategory (coefficientSequenceDerived l E X) :=
+  let : MonoidalCategory (coefficientSequenceDerived l E X) :=
     (pullbackTensorCalculus l E X).systemClosed.monoidal
   let F := pullbackTensorSequenceDerived l E f
   let μ := pullbackTensorSystemComparison l E f
