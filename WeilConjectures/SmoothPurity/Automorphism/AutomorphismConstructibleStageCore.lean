@@ -96,7 +96,6 @@ automorphism-twisted constructible categories, with their comparison maps.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedVariables false
 set_option Elab.async false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
@@ -694,14 +693,14 @@ theorem automorphismConstructibleStage_integral_shifts
       automorphismStageIntegralShiftNormalization l E f cf ∧
       automorphismStageIntegralShiftNormalization l E eX.asIso.hom cX ∧
       automorphismStageIntegralShiftNormalization l E eY.asIso.hom cY ∧
-      (fun [sf : (constructibleIntegralPullback l E f).CommShift ℤ]
-        [sX : (constructibleIntegralPullback l E eX.asIso.hom).CommShift ℤ]
-        [sY : (constructibleIntegralPullback l E eY.asIso.hom).CommShift ℤ] ↦
+      (fun [_sf : (constructibleIntegralPullback l E f).CommShift ℤ]
+        [_sX : (constructibleIntegralPullback l E eX.asIso.hom).CommShift ℤ]
+        [_sY : (constructibleIntegralPullback l E eY.asIso.hom).CommShift ℤ] ↦
         (constructibleIntegralPullback l E f).IsTriangulated ∧
           (constructibleIntegralPullback l E eX.asIso.hom).IsTriangulated ∧
           (constructibleIntegralPullback l E eY.asIso.hom).IsTriangulated ∧
           NatTrans.CommShift (automorphismStageIntegralSquare l E C f eX eY h).hom ℤ)
-        (sf := cf) (sX := cX) (sY := cY) := by
+        (_sf := cf) (_sX := cX) (_sY := cY) := by
   constructor
   · exact automorphismConstructibleStage_integral_shift_data l E
   · let b := automorphismStageIntegralSquare l E C f eX eY h

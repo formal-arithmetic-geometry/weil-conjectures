@@ -77,7 +77,6 @@ to normalized balanced generators. No complex or derived-category assertion is u
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option linter.unusedSectionVars false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory AlgebraicGeometry
 open scoped CategoryTheory.Obj ChangeOfRings
@@ -100,6 +99,9 @@ variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ Z : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules R Z)]
   [∀ Z : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules S Z)]
 
+omit [∀ Z : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a Z))]
+  [∀ Z : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules R Z)]
+  [∀ Z : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules S Z)] in
 private theorem scalar_tensor_ext (Z : Scheme.{u})
     (M N : ModuleRingedComparison.internalModules R Z)
     (W : ModuleRingedComparison.modules S Z)
@@ -134,6 +136,9 @@ private theorem scalar_tensor_ext (Z : Scheme.{u})
     | add x y hx hy => simp only [TensorProduct.tmul_add, map_add, hx, hy]
     | tmul x y => exact h V s x y
 
+omit [∀ Z : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a Z))]
+  [∀ Z : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules R Z)]
+  [∀ Z : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules S Z)] in
 private theorem internal_delta_unit (Z : Scheme.{u})
     (M N : ModuleRingedComparison.internalModules R Z)
     (V : Z.ProEtᵒᵖ) (x : M.X.obj.obj V) (y : N.X.obj.obj V) :
@@ -177,6 +182,7 @@ private theorem coefficient_pure_eq (Z : Scheme.{u})
       (coefficientSectionScalarMap a Z) M)
   exact ConcreteCategory.congr_hom (NatTrans.congr_app hs V) _
 
+omit [∀ Z : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a Z))] in
 private theorem coefficient_pure_natural (Z : Scheme.{u})
     (b : SheafOfModules.ScalarDerivedPair.{u + 1, u, u + 1, u + 1}
       (C := Z.ProEt) (J := Scheme.ProEt.topology Z) (coefficientSectionScalarMap a Z))

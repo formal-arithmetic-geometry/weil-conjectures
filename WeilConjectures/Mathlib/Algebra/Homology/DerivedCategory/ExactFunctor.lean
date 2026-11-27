@@ -368,7 +368,6 @@ lemma mapDerivedCategoryHomologyFunctorIso_hom_app_shiftIso (F : C ⥤ D) [F.Add
       simpa [τ₁, τ₂] using F.mapDerivedCategoryHomologyFunctorIso_hom_app_shiftIso_Q n a a' h K)
   simpa [τ₁, τ₂] using congr_app this X
 
-set_option linter.flexible false in
 open DerivedCategory in
 /-- The isomorphisms `H^n(-) ⋙ F ≅ F.mapDerivedCategory ⋙ H^n(-)` are compatible with the
 identifications `H^n(A[-n]) ≅ A`. -/
@@ -384,7 +383,11 @@ lemma mapDerivedCategoryHomologyFunctorIso_hom_app_singleFunctor (F : C ⥤ D) [
   have hs : (F.mapDerivedCategorySingleFunctor n).hom.app A =
       F.mapDerivedCategoryFactors.hom.app ((HomologicalComplex.single C (.up ℤ) n).obj A) ≫
         Q.map ((HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) n).hom.app A) := by
-    simp [mapDerivedCategorySingleFunctor, singleFunctorIsoCompQ]
+    simp only [comp_obj, mapDerivedCategorySingleFunctor, singleFunctorIsoCompQ,
+      isoWhiskerRight_refl, isoWhiskerLeft_refl, Iso.refl_symm, Iso.refl_trans, Iso.trans_hom,
+      isoWhiskerLeft_hom, Iso.symm_hom, isoWhiskerRight_hom, Iso.refl_hom, NatTrans.comp_app,
+      associator_hom_app, whiskerLeft_app, associator_inv_app, Q_obj_single_obj,
+      whiskerRight_app, NatTrans.id_app, Category.comp_id, Category.id_comp]
     erw [Category.id_comp]
   have hSC : (singleFunctorCompHomologyFunctorIso C n).hom.app A =
       (homologyFunctorFactors C n).hom.app ((HomologicalComplex.single C (.up ℤ) n).obj A) ≫
@@ -404,7 +407,6 @@ lemma mapDerivedCategoryHomologyFunctorIso_hom_app_singleFunctor (F : C ⥤ D) [
   simp only [Category.assoc]
   erw [reassoc_of% hφ, reassoc_of% hF', Iso.inv_hom_id_app_assoc, ← hc, Iso.inv_hom_id_app_assoc]
 
-set_option linter.flexible false in
 open DerivedCategory in
 /-- The isomorphisms `F.mapDerivedCategorySingleFunctor` are compatible with the shifts. -/
 lemma mapDerivedCategorySingleFunctor_hom_app_shiftIso (F : C ⥤ D) [F.Additive]
@@ -417,11 +419,18 @@ lemma mapDerivedCategorySingleFunctor_hom_app_shiftIso (F : C ⥤ D) [F.Additive
         ((singleFunctors D).shiftIso n a a' h).hom.app (F.obj A) := by
   have hσC := congr_app ((singleFunctorsPostcompQIso C).hom.comm n a a' h) A
   have hσD := congr_app ((singleFunctorsPostcompQIso D).hom.comm n a a' h) (F.obj A)
-  simp [singleFunctorsPostcompQIso_hom_hom] at hσC hσD
+  simp only [comp_obj, SingleFunctors.postcomp_functor, Q_obj_single_obj,
+    singleFunctorsPostcompQIso_hom_hom, Category.comp_id, whiskerRight_id', Category.id_comp,
+    SingleFunctors.postcomp_shiftIso_hom_app, CochainComplex.shiftFunctor_obj_X',
+    NatIso.ofComponents_hom_app] at hσC hσD
   have hs (b : ℤ) : (F.mapDerivedCategorySingleFunctor b).hom.app A =
       F.mapDerivedCategoryFactors.hom.app ((HomologicalComplex.single C (.up ℤ) b).obj A) ≫
         Q.map ((HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) b).hom.app A) := by
-    simp [mapDerivedCategorySingleFunctor, singleFunctorIsoCompQ]
+    simp only [comp_obj, mapDerivedCategorySingleFunctor, singleFunctorIsoCompQ,
+      isoWhiskerRight_refl, isoWhiskerLeft_refl, Iso.refl_symm, Iso.refl_trans, Iso.trans_hom,
+      isoWhiskerLeft_hom, Iso.symm_hom, isoWhiskerRight_hom, Iso.refl_hom, NatTrans.comp_app,
+      associator_hom_app, whiskerLeft_app, associator_inv_app, Q_obj_single_obj,
+      whiskerRight_app, NatTrans.id_app, Category.comp_id, Category.id_comp]
     erw [Category.id_comp]
   have hK := F.mapHomologicalComplex_map_singleFunctors_shiftIso_hom_app n a a' h A
   have hφ := NatTrans.shift_app_comm F.mapDerivedCategoryFactors.hom n
@@ -904,19 +913,20 @@ lemma ι_map_mapDerivedCategoryPlus_commShiftIso_hom_app (n : ℤ) (X : DerivedC
   erw [Functor.map_id, Category.comp_id, Category.id_comp] at hc
   exact hc
 
-set_option linter.flexible false in
 /-- The image under the inclusion `D⁺ ⥤ D` of `F.mapDerivedCategoryPlusSingleFunctor` is
 `F.mapDerivedCategorySingleFunctor`. -/
 lemma ι_map_mapDerivedCategoryPlusSingleFunctor_hom_app (n : ℤ) (A : C) :
     DerivedCategory.Plus.ι.map ((F.mapDerivedCategoryPlusSingleFunctor n).hom.app A) =
       (F.mapDerivedCategorySingleFunctor n).hom.app A := by
-  simp [mapDerivedCategoryPlusSingleFunctor, DerivedCategory.Plus.singleFunctorιIso,
-    mapDerivedCategoryPlusCompatibility]
+  simp only [comp_obj, ObjectProperty.ι_obj, mapDerivedCategoryPlusSingleFunctor,
+    mapDerivedCategoryPlusCompatibility, isoWhiskerLeft_refl,
+    DerivedCategory.Plus.singleFunctorιIso, isoWhiskerRight_refl, Iso.refl_symm, Iso.refl_trans,
+    fullyFaithfulCancelRight_hom_app, Iso.trans_hom, Iso.symm_hom, isoWhiskerLeft_hom,
+    Iso.refl_hom, NatTrans.comp_app, associator_hom_app, associator_inv_app, whiskerLeft_app,
+    NatTrans.id_app, Category.comp_id, Category.id_comp, ObjectProperty.ι_map]
   erw [Category.id_comp, Category.comp_id]
   exact DerivedCategory.Plus.ι.map_preimage _
 
-set_option linter.flexible false in
-set_option linter.flexible false in
 /-- The isomorphisms `H^n(-) ⋙ F ≅ F.mapDerivedCategoryPlus ⋙ H^n(-)` are compatible with the
 shift sequence structure of the homology functors: they commute with the isomorphisms
 `H^a(X⟦n⟧) ≅ H^{a'}(X)` for `n + a = a'`. -/
@@ -955,7 +965,11 @@ lemma mapDerivedCategoryPlusHomologyFunctorIso_hom_app_shiftIso (n a a' : ℤ) (
   have he (m : ℤ) (Y : DerivedCategory.Plus C) :
       (F.mapDerivedCategoryPlusHomologyFunctorIso m).hom.app Y =
         (F.mapDerivedCategoryHomologyFunctorIso m).hom.app (DerivedCategory.Plus.ι.obj Y) := by
-    simp [mapDerivedCategoryPlusHomologyFunctorIso, mapDerivedCategoryPlusCompatibility]
+    simp only [comp_obj, mapDerivedCategoryPlusHomologyFunctorIso,
+      mapDerivedCategoryPlusCompatibility, Iso.refl_symm, Iso.trans_hom, isoWhiskerLeft_hom,
+      Iso.symm_hom, isoWhiskerRight_hom, Iso.refl_hom, NatTrans.comp_app, ObjectProperty.ι_obj,
+      associator_hom_app, whiskerLeft_app, associator_inv_app, whiskerRight_app,
+      NatTrans.id_app, Category.comp_id, Category.id_comp]
     erw [Functor.map_id, Category.comp_id, Category.id_comp]
   have hc := NatTrans.shift_app_comm
     (DerivedCategory.TStructure.t.plus.liftCompιIso
@@ -980,8 +994,6 @@ lemma mapDerivedCategoryPlusHomologyFunctorIso_hom_app_shiftIso (n a a' : ℤ) (
   erw [this, reassoc_of% ne, reassoc_of% hc'']
   rfl
 
-set_option linter.flexible false in
-set_option linter.flexible false in
 /-- The isomorphism `H^n(F(A)[-n]) ≅ F(H^n(A[-n]))` given by `F.mapDerivedCategoryPlusSingleFunctor`
 and `F.mapDerivedCategoryPlusHomologyFunctorIso` is compatible with the identifications
 `H^n(A[-n]) ≅ A`. -/
@@ -997,7 +1009,11 @@ lemma mapDerivedCategoryPlusHomologyFunctorIso_hom_app_singleFunctor (n : ℤ) (
       ((DerivedCategory.Plus.singleFunctor C n).obj A) =
       (F.mapDerivedCategoryHomologyFunctorIso n).hom.app
         ((DerivedCategory.singleFunctor C n).obj A) := by
-    simp [mapDerivedCategoryPlusHomologyFunctorIso, mapDerivedCategoryPlusCompatibility]
+    simp only [comp_obj, mapDerivedCategoryPlusHomologyFunctorIso,
+      mapDerivedCategoryPlusCompatibility, Iso.refl_symm, Iso.trans_hom, isoWhiskerLeft_hom,
+      Iso.symm_hom, isoWhiskerRight_hom, Iso.refl_hom, NatTrans.comp_app, ObjectProperty.ι_obj,
+      associator_hom_app, whiskerLeft_app, associator_inv_app, whiskerRight_app,
+      NatTrans.id_app, Category.comp_id, Category.id_comp]
     erw [Functor.map_id, Category.comp_id, Category.id_comp]
     rfl
   rw [he]

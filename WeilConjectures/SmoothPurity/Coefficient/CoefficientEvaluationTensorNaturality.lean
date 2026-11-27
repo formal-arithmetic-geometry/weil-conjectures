@@ -30,7 +30,6 @@ set_option synthInstance.maxSize 2048
 set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
-set_option linter.all false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [-instance] WeilConjectures.integralOperationsSiteSmall
 universe u

@@ -136,7 +136,6 @@ section AbelianVariety
 variable (Λ : Type (u + 1)) [Field Λ] {k : Type u} [Field k] [IsAlgClosed k]
   (E : Over (Spec (.of k))) [GrpObj E] [IsAbelianVariety E]
 
-set_option linter.unusedSectionVars false in
 /-- For an elliptic curve (more generally an abelian variety of positive dimension) over an
 algebraically closed field, the structure morphism carries no admissibility datum, since it does
 not even carry the ambient datum (`not_hasAmbientExceptionalRightAdjoint_of_isAbelianVariety`). -/

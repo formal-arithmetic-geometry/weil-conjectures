@@ -63,7 +63,6 @@ transport, including repeated indices. No idempotent completion is used.
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option linter.unusedSectionVars false
 set_option Elab.async false
 
 universe u v
@@ -85,6 +84,7 @@ variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
   (Y : AlgebraicGeometry.Scheme.{u})
 
+omit [IsAlgClosure (Padic l) Ω] in
 private theorem index_rational_transport
     (E L M : Index l Ω) (h : E ≤ L) (k : L ≤ M)
     (κ : Coefficient.{u} l Ω E →ₐ[Padic l] Coefficient.{u} l Ω M)

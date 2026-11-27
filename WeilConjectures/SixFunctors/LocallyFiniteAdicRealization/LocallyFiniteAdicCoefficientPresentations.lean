@@ -34,7 +34,6 @@ set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false
 set_option genCtorIdx false
-set_option linter.all false
 
 attribute [local irreducible] HasDerivedCategory.standard
 
@@ -81,8 +80,7 @@ private def towerIso :
       sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) ⟶
       integralCoefficientSheafSystem l E X := NatTrans.ofOpSequence (fun _ ↦ 𝟙 _) (by
     intro n
-    simp only [Category.comp_id, Category.id_comp, integralCoefficientSheafSystem,
-      Functor.ofOpSequence_map_homOfLE_succ]
+    simp only [integralCoefficientSheafSystem, Functor.ofOpSequence_map_homOfLE_succ]
     exact tower_step l X E n)
   exact NatIso.ofComponents (fun n ↦ Iso.refl _) (fun f ↦ a.naturality f)
 
@@ -105,7 +103,7 @@ private def completionIso : finiteCoefficientLimit l X E ≅
   unfold completionIso
   erw [Functor.preimageIso_hom, Functor.map_preimage]
   erw [Iso.trans_hom, Category.assoc, HasLimit.isoOfNatIso_hom_π]
-  simp only [towerIso, NatIso.ofComponents_hom_app, Iso.refl_hom, Category.comp_id]
+  simp only [towerIso]
   exact preservesLimitIso_hom_π _ _ _
 
 variable [IsCommMonObj (abRing l X)]
@@ -145,7 +143,6 @@ private def rationalNativeInclusion (i : E →ₐ[ℚ_[l]] PadicAlgCl l) :
     apply Isometry.continuous
     apply AddMonoidHomClass.isometry_of_norm i
     exact spectralNorm_unique_field_norm_ext hf
-
   let val (U : X.ProEtᵒᵖ) (s : C(U.unop.left, ULift.{u + 1, u} E)) :
       C(U.unop.left, PadicAlgCl l) :=
     ⟨fun x ↦ i (s x).down, hi.comp (continuous_uliftDown.comp s.continuous)⟩

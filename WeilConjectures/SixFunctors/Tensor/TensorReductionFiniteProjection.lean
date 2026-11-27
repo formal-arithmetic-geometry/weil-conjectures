@@ -20,7 +20,6 @@ Compute the ordinary reduction/limit transpose at a fixed finite tensor level.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option cleanup.letToHave false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency true

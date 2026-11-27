@@ -22,7 +22,6 @@ derived inverse limit: the derived limit unit is an isomorphism on it.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option linter.style.haveILetI false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 universe t u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
@@ -48,9 +47,9 @@ theorem towerLimit_push_acyclic {X Y : Scheme.{t}} (f : X ⟶ Y)
   let F := (Functor.whiskeringRight ℕᵒᵖ _ _).obj (push f c)
   let FC := F.mapHomologicalComplex (.up ℤ)
   obtain ⟨T, j, hT, hj⟩ := completedTower_exists_isKInjective l E f c I
-  letI : QuasiIso j := hj
+  have : QuasiIso j := hj
   have hlim := towerLimit_push_acyclic_aux l E f c I hI T hT j
-  letI : QuasiIso (((lim : (ℕᵒᵖ ⥤ Mod Y (R l E Y)) ⥤
+  have : QuasiIso (((lim : (ℕᵒᵖ ⥤ Mod Y (R l E Y)) ⥤
       Mod Y (R l E Y)).mapHomologicalComplex (.up ℤ)).map j) := hlim
   have huT : IsIso (target.limit.unit.app T) := target.limit.computes T hT
   have hn := target.limit.unit.naturality j

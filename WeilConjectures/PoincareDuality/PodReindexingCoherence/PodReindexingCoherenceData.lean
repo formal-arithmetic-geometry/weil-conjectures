@@ -47,9 +47,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open AlgebraicGeometry.Scheme
 
 -- Cache the sheaf composition witness without repeatedly reconstructing the small site.
-set_option linter.defProp false in
-@[instance_reducible]
-private def cachedCompose {C : Type*} [Category C] (J : GrothendieckTopology C)
+private theorem cachedCompose {C : Type*} [Category C] (J : GrothendieckTopology C)
     [EssentiallySmall.{u + 1} C] :
     J.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) := by
   exact (equivSmallModel.{u + 1} C).hasSheafCompose J

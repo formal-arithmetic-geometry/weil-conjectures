@@ -119,7 +119,6 @@ always denotes the positive exponent n+1.
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
@@ -256,9 +255,9 @@ private theorem quotient_adjacent (W : Scheme.{u}) (n : ℕ) :
 private theorem restriction_iso_adjacent (W : Scheme.{u}) (n : ℕ) :
     HEq (coefCompactSupportRestrictionIso l E W n.le_succ)
       (Iso.refl (sfCompactSupportFiniteRestriction l E W n).mapDerivedCategory) := by
-  letI := proEtaleCoefficientRestrictScalars_preservesFiniteLimits W
+  have := proEtaleCoefficientRestrictScalars_preservesFiniteLimits W
     (compactSupportLevelQuotient l E (n + 1) n n.le_succ)
-  letI := proEtaleCoefficientRestrictScalars_preservesFiniteColimits W
+  have := proEtaleCoefficientRestrictScalars_preservesFiniteColimits W
     (compactSupportLevelQuotient l E (n + 1) n n.le_succ)
   unfold coefCompactSupportRestrictionIso
   have h := derived_eqToIso (normalizedDVRModuleRes l E W n.le_succ)

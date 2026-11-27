@@ -46,7 +46,6 @@ variable (l : ℕ) [Fact l.Prime]
   (ordinary : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
     FdOrdinaryScalarTransport l Ω T h)
 
-set_option linter.style.haveILetI false in
 /-- On every integral object the comparison is the inverse derived ordinary square followed
 by the normalized ordinary-to-completed comparison. -/
 private theorem lift_formula
@@ -60,9 +59,9 @@ private theorem lift_formula
         (FdIntegralScalarForward.eD l Ω T h (ordinary h)).inv.app K.obj ≫
         (integralDetailedTransport T l _).map
           ((sfIntegralOrdinaryComparison l _ _ (pbcFiniteFieldInclusion l Ω h) T).hom.app K) := by
-  letI := fdCoefficientTransportAdditive l (pbcFiniteField.{u} l Ω E) T
-  letI := fdCoefficientTransportAdditive l (pbcFiniteField.{u} l Ω L) T
-  letI := pbcExtend_additive (pbcCompletedScalarMap l Ω T h)
+  have := fdCoefficientTransportAdditive l (pbcFiniteField.{u} l Ω E) T
+  have := fdCoefficientTransportAdditive l (pbcFiniteField.{u} l Ω L) T
+  have := pbcExtend_additive (pbcCompletedScalarMap l Ω T h)
   exact FdIntegralScalarForward.lift_generic DerivedCategory.Q DerivedCategory.Q
     DerivedCategory.Q DerivedCategory.Q (sfIntegralConstructible l _ T)
     (sfIntegralConstructible l _ T) _ _ (I l Ω T stage E) (I l Ω T stage L)

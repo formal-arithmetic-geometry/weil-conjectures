@@ -52,6 +52,22 @@ def padicAlgClKunnethIsIso (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N f₂ f�
       Y)).leftDerivedFunctor.obj ((Mod.extendScalars (coefficientMap
         (padicIntegersRingObjToContinuousMapRingObj ℓ E) Y)).leftDerivedFunctor.obj B₀)))
 
+/-- The named Künneth condition is the original invertibility condition. -/
+theorem padicAlgClKunnethIsIso_eq (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N f₂ f₂')
+    (A₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)))
+    (B₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y))) :
+    padicAlgClKunnethIsIso ℓ E φ₁ φ₂ A₀ B₀ =
+      IsIso (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂
+        ((Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
+          X)).leftDerivedFunctor.obj ((Mod.extendScalars (coefficientMap
+            (padicIntegersRingObjToContinuousMapRingObj ℓ E) X)).leftDerivedFunctor.obj A₀))
+        ((Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
+          Y)).leftDerivedFunctor.obj ((Mod.extendScalars (coefficientMap
+            (padicIntegersRingObjToContinuousMapRingObj ℓ E) Y)).leftDerivedFunctor.obj B₀))) :=
+  rfl
+
 /-- **The Künneth map and the coefficients `𝒪_E ⟶ E ⟶ ℚ̄_ℓ`**: under the hypotheses of
 `NearbyCyclesModel.nonempty_arrowIso_map_map_kunnethMap_padicAlgCl`,
 `ℚ̄_ℓ ⊗ᴸ_E E ⊗ᴸ_{𝒪_E} Π_{A₀,B₀}` is invertible if and only if `Π_{A,B}` is. -/
@@ -89,6 +105,24 @@ def restrictedPadicAlgClKunnethIsIso (φ₁ : P.Hom M f₁ f₁')
       ((Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
         Y)).leftDerivedFunctor.obj ((Mod.extendScalars (coefficientMap
           (padicIntegersRingObjToContinuousMapRingObj ℓ E) Y)).leftDerivedFunctor.obj B₀))))
+
+/-- The named restricted Künneth condition is the original invertibility condition. -/
+theorem restrictedPadicAlgClKunnethIsIso_eq (φ₁ : P.Hom M f₁ f₁')
+    (φ₂ : P.Hom N f₂ f₂') {W : Scheme.{u}} (h : W ⟶ Z')
+    (A₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)))
+    (B₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y))) :
+    restrictedPadicAlgClKunnethIsIso ℓ E φ₁ φ₂ h A₀ B₀ =
+      IsIso (L((h)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map
+        (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂
+          ((Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
+            X)).leftDerivedFunctor.obj ((Mod.extendScalars (coefficientMap
+              (padicIntegersRingObjToContinuousMapRingObj ℓ E) X)).leftDerivedFunctor.obj A₀))
+          ((Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
+            Y)).leftDerivedFunctor.obj ((Mod.extendScalars (coefficientMap
+              (padicIntegersRingObjToContinuousMapRingObj ℓ E) Y)).leftDerivedFunctor.obj B₀)))) :=
+  rfl
 
 /-- **The restricted Künneth map and the coefficients `𝒪_E ⟶ E ⟶ ℚ̄_ℓ`**: under the hypotheses of
 `NearbyCyclesModel.nonempty_arrowIso_map_map_kunnethMap_padicAlgCl`, for every `h : W ⟶ Z'`,

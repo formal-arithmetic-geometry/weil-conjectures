@@ -67,7 +67,6 @@ split off for compile time.
 
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.unusedSectionVars false
 
 universe u
 
@@ -174,6 +173,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
   (p : X ⟶ Y) [IsProper p.left]
 
 include k in
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- Proper pushforward commutes with inverting ell on every bounded-below integral complex. -/
 theorem isIso_rationalizationPushHom_boundedBelow
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
@@ -188,6 +189,8 @@ theorem isIso_rationalizationPushHom_boundedBelow
 
 include k in
 include k in
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- Proper pushforward commutes with extension to finite-subextension-valued condensed Qlbar. -/
 theorem isIso_algClCoefficientPushHom_boundedBelow
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
@@ -199,6 +202,8 @@ theorem isIso_algClCoefficientPushHom_boundedBelow
   let : K.IsGE N := hN
   exact isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_app_of_isGE ℓ p.left E K N
 
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- Proper pushforward preserves bounded constructible complexes with rational coefficients. -/
 theorem properPushforward_boundedConstructible_rational
     (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}))

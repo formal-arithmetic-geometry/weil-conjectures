@@ -26,7 +26,6 @@ local instance instEssentiallySmallProfinite_integralResidueTensorPullCounitMode
     : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 /-- The tensor-pull presentation followed by its ordinary model comparison is
 its defining tensor-presentation counit, with the ordinary coefficient identified.
@@ -38,7 +37,7 @@ theorem integralResidue_tensorPullCounit_model {X Y : Scheme.{u}} (f : X ⟶ Y)
     let B := residueExchangeOrdinaryCoefficient ℓ E Y
     let B' := residueExchangeOrdinaryCoefficient ℓ E X
     let A := Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)
-    let SX := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    let _SX := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (coefficientMap (integralReductionMap ℓ E) X)
     letI := residueOrdinaryUpperStarMonoidal A f
     let e : F.obj B ≅ B' :=

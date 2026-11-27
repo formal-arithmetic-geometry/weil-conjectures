@@ -32,7 +32,6 @@ tensor shift. No flatness of the coefficient map is assumed.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 open scoped CategoryTheory.Functor
@@ -54,13 +53,13 @@ theorem finiteScalar_exists
     [LocallyOfFiniteType (T ↘ Spec (.of D.k))] [QuasiCompact (T ↘ Spec (.of D.k))] :
     Nonempty (Scalar l E L n m a T) := by
   classical
-  haveI : (finiteTorConstructible l E (n + 1) (Nat.succ_pos n) T).IsStableUnderShift ℤ :=
+  have : (finiteTorConstructible l E (n + 1) (Nat.succ_pos n) T).IsStableUnderShift ℤ :=
     inferInstance
-  haveI : (finiteTorConstructible l L (m + 1) (Nat.succ_pos m) T).IsStableUnderShift ℤ :=
+  have : (finiteTorConstructible l L (m + 1) (Nat.succ_pos m) T).IsStableUnderShift ℤ :=
     inferInstance
   let scalarShift : (pbcDerivedExtend (proEtaleConstantRingMap (T := T) a)).CommShift ℤ :=
     WeilConjectures.PurCompactSupport.scalarCommShift _
-  letI : (pbcDerivedExtend (proEtaleConstantRingMap (T := T) a)).CommShift ℤ := scalarShift
+  let : (pbcDerivedExtend (proEtaleConstantRingMap (T := T) a)).CommShift ℤ := scalarShift
   let hpres : ∀ K : finiteTorConstructibleCategory l E (n + 1) (Nat.succ_pos n) T,
       finiteTorConstructible l L (m + 1) (Nat.succ_pos m) T
         ((pbcDerivedExtend (proEtaleConstantRingMap (T := T) a)).obj K.obj) :=

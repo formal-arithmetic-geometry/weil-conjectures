@@ -37,7 +37,6 @@ and uniqueness of the whole strict tower comparison.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.all false
 
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
@@ -299,8 +298,7 @@ private theorem finitePullComparison_unit {X Y : Scheme.{t}}
     (((integralOperationsPullbackAdjunction l E f n).unit.app
       ((unrestrictedIntegralReductionFunctor l E Y n).obj M)).val.app (op V))
         (((reductionAdj l E Y n).unit.app M).val.app (op V) x)) at hh
-  simp only [reductionAdj_unit, finiteGenerator, integralOperationsPullbackGenerator,
-    integralOperationsPullbackAdjunction] at hh
+  simp only [reductionAdj_unit, integralOperationsPullbackAdjunction] at hh
   with_unfolding_all exact hh
 
 universe r₀
@@ -362,7 +360,7 @@ private theorem pullReduction_hom_ext {X Y : Scheme.{t}} (f : X ⟶ Y)
       b.val.app (op ((proEtaleBaseChange f).obj V))
         (unrestrictedIntegralTensorSection l E X m ((pull l E f).obj M)
           (op ((proEtaleBaseChange f).obj V)) 1 (pullGenerator l E f M V x))) : a = b := by
-  haveI : Presheaf.IsLocallySurjective (ProEt.topology X)
+  have : Presheaf.IsLocallySurjective (ProEt.topology X)
       (integralCompletedProjection l E X m).hom := by
     with_unfolding_all exact completedProjection_locallySurjective l E X m
   apply adjointReduction_hom_ext (proEtaleBaseChange f)

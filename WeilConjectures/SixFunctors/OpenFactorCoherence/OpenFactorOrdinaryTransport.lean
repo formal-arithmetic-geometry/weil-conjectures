@@ -244,12 +244,11 @@ private def restrictionToSlice (o : IntegralOpenReduction.Operations l E j) :
   exact Functor.isoWhiskerLeft _ eo ≪≫
     Functor.isoWhiskerRight e T ≪≫ ecomp ≪≫ econgr.symm
 
-set_option linter.unusedVariables false in
 /-- The normalized slice operations and the published ordinary open operations agree. -/
 theorem openFactorOrdinaryTransport
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (o : IntegralOpenReduction.Operations l E j) :
-    ∃ e : IntegralOpenReduction.extension l E j o ≅ openExtension (completed l E) j,
+    ∃ _e : IntegralOpenReduction.extension l E j o ≅ openExtension (completed l E) j,
       Nonempty (IntegralOpenReduction.restriction l E j o ≅
         proEtaleRingModulePullback j ((completed l E).ring X)
           ((completed l E).ring U) ((completed l E).pull j)) := by

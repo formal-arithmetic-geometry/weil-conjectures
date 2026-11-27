@@ -31,7 +31,6 @@ or preservation of K-injectives by scalar restriction is used.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.FrobeniusExchange
@@ -103,8 +102,8 @@ theorem systemDirectScalar_finiteEvaluation
           ((systemDirectFiniteEvaluation l E f n).hom.app N) ≫
     (finiteDirectScalar (integralScalarQuotientMap l E L ι n) f).app
           ((coefficientSequenceDerivedEvaluation l E X n).obj N) := by
-  letI := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
-  letI := Padic.finite_coefficientExtensionRing l L (n + 1) (Nat.succ_pos n)
+  have := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
+  have := Padic.finite_coefficientExtensionRing l L (n + 1) (Nat.succ_pos n)
   let adjE := systemAdjunction l E f
   let adjL := systemAdjunction l L f
   let levelE := (sfIntrinsicConstantModuleAdjunction f

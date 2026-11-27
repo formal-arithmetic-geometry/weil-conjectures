@@ -74,8 +74,6 @@ structure PodReindexingTensorSubstitutionCoreData
   substitutionLaw : CompletedOperations.SubstitutionLaw.{u, u, 0, 0, 0} l E C
   structuralLaw : CompletedOperations.StructuralLaw.{u, u, 0, 0} l E C
 
--- Preserve the published names of the unused tensor law and existential witness.
-set_option linter.unusedVariables false in
 /-- Every lawful normalized completion and tensor reindexing admits core substitution data
 `PodReindexingTensorSubstitutionCoreData`. -/
 theorem podReindexingTensorSubstitutionCore
@@ -84,8 +82,8 @@ theorem podReindexingTensorSubstitutionCore
     [∀ y : Y, Invertible (l : Y.residueField y)]
     (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.Laws l E g D)
     (T : PodCompletedTensorReindex l E g D)
-    (hT : PodCompletedTensorReindex.Laws l E g D T) :
-    ∃ core : PodReindexingTensorSubstitutionCoreData l E g D,
+    (_hT : PodCompletedTensorReindex.Laws l E g D T) :
+    ∃ _core : PodReindexingTensorSubstitutionCoreData l E g D,
       True := by
   classical
   rcases hD with ⟨hunits, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, hnormal⟩

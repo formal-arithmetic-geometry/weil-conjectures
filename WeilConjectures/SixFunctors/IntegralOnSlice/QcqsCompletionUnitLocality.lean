@@ -45,7 +45,6 @@ universe t u w
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.IntegralOnSlice
 
-set_option linter.unusedVariables false in
 /-- Canonical-unit completeness, ordinary restriction, and finite open--closed detection. -/
 theorem qcqsCompletionUnitLocality
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -130,7 +129,7 @@ theorem qcqsCompletionUnitLocality
         IsClosedImmersion (rightEdge v) ∧
         Set.range (leftEdge v).base ∪ Set.range (rightEdge v).base = Set.univ ∧
         Disjoint (Set.range (leftEdge v).base) (Set.range (rightEdge v).base)) →
-      ∀ (I : ∀ v : Fin d, Type w) (W : ∀ v : Fin d, I v → (V v).ProEt),
+      ∀ (I : ∀ _v : Fin d, Type w) (W : ∀ v : Fin d, I v → (V v).ProEt),
       (∀ (v : Fin d) (a : I v), leaf v → Nonempty (V v) → CompactSpace (W v a).left) →
       (∀ (v : Fin d) (a : I v), leaf v → Nonempty (V v) →
         QuasiSeparatedSpace (W v a).left) →

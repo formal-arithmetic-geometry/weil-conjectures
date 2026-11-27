@@ -29,8 +29,6 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option genInjectivity false
 set_option genSizeOfSpec false
-set_option linter.all false
-set_option linter.unusedVariables false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite TensorProduct
 open AlgebraicGeometry AlgebraicGeometry.Scheme

@@ -46,8 +46,7 @@ theorem existsUnique_algHom_of_henselianLocalRing_etale
     letI : Algebra S B := φ.toAlgebra
     ∃! σ : B →ₐ[S] S,
       (IsLocalRing.maximalIdeal S).comap σ.toRingHom = q' := by
-  set_option linter.style.haveILetI false in
-    letI : Algebra S B := φ.toAlgebra
+  let : Algebra S B := φ.toAlgebra
   obtain ⟨σ, hσ⟩ := exists_algHom_of_henselianLocalRing_etale φ q' hq hres
   refine ⟨σ, hσ, ?_⟩
   intro τ hτ

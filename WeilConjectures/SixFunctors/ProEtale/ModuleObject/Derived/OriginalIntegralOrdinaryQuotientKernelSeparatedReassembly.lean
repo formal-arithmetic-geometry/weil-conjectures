@@ -38,8 +38,6 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 open AlgebraicGeometry Scheme
 
--- Preserve the descriptive hypothesis names inside the supplied finite-presentation criterion.
-set_option linter.unusedVariables false in
 /-- Reassembly of finite-presentation separatedness over a constructible module. -/
 theorem originalIntegralOrdinaryQuotientKernel_separated_of_finitePresentation
     (ell : ℕ) [Fact ell.Prime]
@@ -56,12 +54,12 @@ theorem originalIntegralOrdinaryQuotientKernel_separated_of_finitePresentation
     (hsep : ∀ {Y : Scheme.{u}}
       (N : Mod (Sheaf (ProEt.topology Y) Ab.{u + 1})
         (condensedRingObj (Profinite.padicIntegersRingObj ell E) Y))
-      (hN : Mod.IsFinitelyPresented
+      (_hN : Mod.IsFinitelyPresented
         (condensedRingObj (Profinite.padicIntegersRingObj ell E) Y) N)
       {V : Mod (Sheaf (ProEt.topology Y) Ab.{u + 1})
         (condensedRingObj (Profinite.padicIntegersRingObj ell E) Y)}
       (u : V ⟶ N)
-      (hu : ∀ n : ℕ, u ≫ cokernel.π (ell ^ (n + 1) • 𝟙 N) = 0),
+      (_hu : ∀ n : ℕ, u ≫ cokernel.π (ell ^ (n + 1) • 𝟙 N) = 0),
       u = 0)
     (hg : ∀ n : ℕ, g ≫ cokernel.π (ell ^ (n + 1) • 𝟙 M) = 0) :
     g = 0 := by

@@ -43,7 +43,6 @@ set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false
 set_option genCtorIdx false
-set_option linter.style.haveILetI false
 attribute [local irreducible] HasDerivedCategory.standard
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme Opposite
@@ -55,11 +54,11 @@ open ConstructibleExceptionalCoefficients
 variable (l : ℕ) [Fact l.Prime]
 
 private theorem native_commutative (T : Scheme.{u}) : IsCommMonObj (abRing l T) := by
-  haveI : IsCommMonObj (ProEtale.adicConstantSheaf l T) :=
+  have : IsCommMonObj (ProEtale.adicConstantSheaf l T) :=
     ProEtale.adicConstantSheaf.isCommMonObj T
   let _ : (forget₂ (WeilCoefficients.{u} l) Ab.{u + 1}).LaxBraided :=
     ModuleCat.laxBraidedForget₂Ab _
-  letI : (ProEtale.weilCoefficientsForgetAb l T).LaxBraided :=
+  let _ : (ProEtale.weilCoefficientsForgetAb l T).LaxBraided :=
     CategoryTheory.sheafComposeLaxBraided _ _
   exact Functor.isCommMonObj_obj (F := ProEtale.weilCoefficientsForgetAb l T)
 
