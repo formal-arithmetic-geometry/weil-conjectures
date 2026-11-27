@@ -216,14 +216,18 @@ theorem podReindexingDerivedComparisonsCore
     ∃ R : PodReindexingDerivedData l E g,
       R.CoreLaws l E g SY SX S β CY CX := by
   obtain ⟨Q₀⟩ := podReindexingDerivedCoreData_exists l E g SY SX S hS β hβ htransition CY CX
+  let Q₁ : PodReindexingDerivedCoreData l E g :=
+    { Q₀ with
+      restriction := podReindexingDerivedRestriction l E g
+      evaluation := podReindexingDerivedEvaluation l E g }
   obtain ⟨finite, hFinite⟩ := podReindexingDerivedCoreData_finiteModel
-    l E g SY SX S hS β hβ htransition CY CX Q₀
+    l E g SY SX S hS β hβ htransition CY CX Q₁
   obtain ⟨L, hLimit⟩ := podReindexingDerivedCoreData_limitModel
-    l E g SY SX S hS β CY CX { Q₀ with finite := finite }
+    l E g SY SX S hS β CY CX { Q₁ with finite := finite }
   obtain ⟨α, hUnit⟩ := podReindexingDerivedCoreData_unit
-    l E g SY SX S hS β hβ htransition CY CX { Q₀ with finite := finite, limit := L }
+    l E g SY SX S hS β hβ htransition CY CX { Q₁ with finite := finite, limit := L }
   let Q : PodReindexingDerivedCoreData l E g :=
-    { Q₀ with finite := finite, limit := L, reduction := α }
+    { Q₁ with finite := finite, limit := L, reduction := α }
   let R : PodReindexingDerivedData l E g :=
     { reduction := Q.reduction
       limit := Q.limit
@@ -233,14 +237,17 @@ theorem podReindexingDerivedComparisonsCore
       sourceRoos := Q.sourceRoos
       targetRoos := Q.targetRoos
       pullback := Q.pullback }
-  have hReduction := podReindexingDerivedCoreData_reductionEvaluation
-    l E g SY SX S hS β hβ htransition CY CX Q
-  have hProjection := podReindexingDerivedCoreData_limitProjection
-    l E g SY SX S hS β hβ htransition CY CX Q
   have hFinite' : PodCompletionReindex.FiniteModel l E g
       (Q.assemble l E g SY SX S β CY CX) := hFinite
   have hLimit' : PodCompletionReindex.LimitModel l E g
       (Q.assemble l E g SY SX S β CY CX) := hLimit
+  have hUnit' : PodCompletionReindex.Unit l E g
+      (Q.assemble l E g SY SX S β CY CX) := hUnit
+  have hProjection := podReindexingDerivedCoreData_limitProjection
+    l E g SY SX S hS β hβ htransition CY CX Q (fun _ ↦ rfl) (fun _ ↦ rfl) hLimit'
+  have hReduction := podReindexingDerivedCoreData_reductionEvaluation
+    l E g SY SX S hS β hβ htransition CY CX Q (fun _ ↦ rfl) (fun _ ↦ rfl) hFinite' hLimit'
+    hUnit'
   refine ⟨R, ?_⟩
   change PodCompletionReindex.ReductionEvaluation l E g (R.assemble l E g SY SX S β CY CX) ∧
     PodCompletionReindex.LimitProjection l E g (R.assemble l E g SY SX S β CY CX) ∧
