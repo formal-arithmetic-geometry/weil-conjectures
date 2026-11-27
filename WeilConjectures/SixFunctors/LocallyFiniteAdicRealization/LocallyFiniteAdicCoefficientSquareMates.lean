@@ -20,6 +20,8 @@ of the restriction square, and the transported scalar tensor squares compose as 
   coefficient square is the corresponding restriction square.
 * `tensorThroughCoefficientSquare_paste`: pasting a tensor comparison through a coefficient
   square with scalar-extension compositors gives the tensor comparison of the pasted square.
+* `integralTensorSquare_of_tensorThroughCoefficientSquare`: the resulting tensor square for
+  isomorphisms given by transported tensor comparisons.
 
 ## Implementation details
 
