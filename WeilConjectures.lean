@@ -1135,6 +1135,7 @@ public import WeilConjectures.Algebra.Homology.System.SystemSelectedDerivedEvalu
 public import WeilConjectures.Algebra.Homology.System.SystemSelectedDerivedExtension
 public import WeilConjectures.Algebra.Homology.System.SystemSelectedDerivedTransition
 public import WeilConjectures.Algebra.Homology.System.SystemSelectedNormalization
+public import WeilConjectures.Algebra.Homology.System.SystemSequenceKFlatCriterion
 public import WeilConjectures.Algebra.Homology.System.SystemSingleDerivedEvaluation
 public import WeilConjectures.Algebra.Homology.System.SystemSingleDerivedExtension
 public import WeilConjectures.Algebra.Homology.System.SystemSingletonGeometricPullback

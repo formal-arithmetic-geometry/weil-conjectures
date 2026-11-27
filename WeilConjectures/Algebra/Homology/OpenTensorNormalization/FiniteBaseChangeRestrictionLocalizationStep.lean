@@ -442,7 +442,7 @@ theorem finite_base_change_restriction_localization_step
     (P : CochainComplex (FiniteModules A X) ℤ)
     (hP : resolving (finiteInput A gU j' j g sq).R
       ((finiteComplexRealization e.realizeX).obj P))
-    (hOrd : ∀ n : ℤ,
+    (_hOrd : ∀ n : ℤ,
       e.pullU_pin.ordinary.hom.app
           ((ProEtale.upperStar (ModuleCat.{u + 1} A) j).obj (P.X n)) ≫
         o.gUPull.ordinary.map (e.open_pin.star.hom.app (P.X n)) ≫
@@ -469,6 +469,35 @@ theorem finite_base_change_restriction_localization_step
             (ProEtale.upperStarCompIso (ModuleCat.{u + 1} A) sq.toCommSq.w)).hom.app M) ≫
         e.openPull'.hom.app ((finitePull A g).obj M) ≫
         o.opens.jStar'.map (e.pull.hom.app M)) ≫
-      o.opens.jStar'.map B := by sorry
+      o.opens.jStar'.map B := by
+  intro r M B
+  have hO := e.open_pin.models.2 P
+  have hO' := e.open'_pin.models.2
+    (((ProEtale.upperStar (ModuleCat.{u + 1} A) g).mapHomologicalComplex (.up ℤ)).obj P)
+  have hG := e.pull_pin.model P
+  have hU := e.pullU_pin.model
+    (((ProEtale.upperStar (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)).obj P)
+  have hTheta := o.theta_model ((finiteComplexRealization e.realizeX).obj P) hP
+  have := (restriction_exact .ordinary j (finiteInput A gU j' j g sq).R).1
+  have := (restriction_exact .ordinary j (finiteInput A gU j' j g sq).R).2.1
+  have := (restriction_exact .ordinary j (finiteInput A gU j' j g sq).R).2.2
+  have := (restriction_exact .ordinary j' (finiteInput A gU j' j g sq).S).1
+  have := (restriction_exact .ordinary j' (finiteInput A gU j' j g sq).S).2.1
+  have := (restriction_exact .ordinary j' (finiteInput A gU j' j g sq).S).2.2
+  exact localization_of_models
+    (ProEtale.upperStar (ModuleCat.{u + 1} A) j) (ProEtale.upperStar (ModuleCat.{u + 1} A) gU)
+    (ProEtale.upperStar (ModuleCat.{u + 1} A) g) (ProEtale.upperStar (ModuleCat.{u + 1} A) j')
+    e.realizeX.equivalence.functor e.realizeU.equivalence.functor
+    e.realizeX'.equivalence.functor e.realizeU'.equivalence.functor
+    (restrict .ordinary j (finiteInput A gU j' j g sq).R)
+    (restrict .ordinary j' (finiteInput A gU j' j g sq).S)
+    o.gPull.derived o.gUPull.derived o.gPull.ordinary o.gUPull.ordinary
+    (complexComparison o.gPull.ordinary o.gPull.derived o.gPull.epsilon)
+    (complexComparison o.gUPull.ordinary o.gUPull.derived o.gUPull.epsilon)
+    e.pull e.pullU r e.openPull' o.theta
+    (ProEtale.upperStarCompIso (ModuleCat.{u + 1} A) sq.toCommSq.w) P
+    e.pull_pin.ordinary e.pullU_pin.ordinary e.open_pin.star e.open'_pin.star
+    o.ordinaryTheta (finite_base_change_restriction_ordinary_pin_mate A gU j' j g sq o e)
+    hTheta hO hU hG hO'
 
 end SheafOfModules.OpenTensorNormalization
