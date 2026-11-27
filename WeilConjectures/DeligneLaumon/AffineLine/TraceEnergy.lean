@@ -743,8 +743,6 @@ theorem l2Weight_eq_of_isPunctuallyPureOfWeight (ι : PadicAlgCl l →+* ℂ) {V
   simp only [zero_add] at this
   rwa [EReal.sub_add_cancel] at this
 
--- the hypothesis `0 < C` is not needed for the bound
-set_option linter.unusedVariables false in
 /-- Let `N ≠ 0` be lisse on a smooth geometrically connected affine curve `V₀` of finite type
 over `k₀` and punctually `ι`-pure of weight `v`. If the trace energies satisfy
 `S_n(V₀, N) ≤ C q^{nB}` for every `n ≥ 1`, with `0 < C` independent of `n`, then `v ≤ B - 1`.
@@ -758,7 +756,7 @@ theorem le_sub_one_of_traceEnergy_le (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{
     [SmoothOfRelativeDimension 1 (V ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (V ↘ Spec (CommRingCat.of k₀))]
     (N : WeilSheaf k₀ l V) (hN : ¬ Limits.IsZero N) (hlisse : N.IsLisse) {v : ℝ}
-    (hpure : N.IsPunctuallyPureOfWeight ι v) {C B : ℝ} (hC : 0 < C)
+    (hpure : N.IsPunctuallyPureOfWeight ι v) {C B : ℝ} (_hC : 0 < C)
     (hS : ∀ n : ℕ, 1 ≤ n → N.traceEnergy ι n ≤ C * (Nat.card k₀ : ℝ) ^ ((n : ℝ) * B)) :
     v ≤ B - 1 := by
   have h := (l2Weight_eq_of_isPunctuallyPureOfWeight ι N hN hlisse hpure).symm.trans_le

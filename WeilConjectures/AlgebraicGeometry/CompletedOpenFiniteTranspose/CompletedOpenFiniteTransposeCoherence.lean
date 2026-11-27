@@ -420,7 +420,7 @@ private theorem towerCube
   funext n
   exact hc (N.obj n)
 
--- Inferred proposition keeps the normalized termwise interfaces shared.
+-- A `theorem` needs an explicit type; this proposition is inferred from the `towerCube` term.
 set_option linter.defProp false in
 private def restrictionTowerCube_nat
     (r s : StrictTowerRingedSquare sq)

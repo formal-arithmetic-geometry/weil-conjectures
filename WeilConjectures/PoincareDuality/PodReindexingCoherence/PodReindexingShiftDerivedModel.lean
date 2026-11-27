@@ -93,7 +93,6 @@ private theorem paste_shift_squares {C D : Type*} [Category C] [Category D]
     dD.inv.app (F.obj A) ≫ z⟦b-a⟧' at hn
   rw [hn, reassoc_of% hF]
 
-set_option linter.unusedVariables false in
 /-- The signed shift equation on K-injective localized representatives:
 `derivedShiftEquation` holds for the localizations of `P` and of a K-injective `I`. -/
 theorem derived_shift_model {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
@@ -103,7 +102,7 @@ theorem derived_shift_model {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (SX : Closed l E X s) (SY : Closed l E Y s)
     (TX : Models l E X s SX) (TY : Models l E Y s SY)
     (c : Comparison l E g s SX SY TX TY) :
-    ∀ (P I : K l E Y s) (hI : I.IsKInjective) (a b : ℤ),
+    ∀ (P I : K l E Y s) (_hI : I.IsKInjective) (a b : ℤ),
       derivedShiftEquation l E g s SX SY TX TY c
         ((podReindexingQ l E Y s).obj P)
         ((podReindexingQ l E Y s).obj I) a b := by

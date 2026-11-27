@@ -638,9 +638,7 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 set_option backward.defeqAttrib.useBackward true
 
-set_option linter.defProp false in
-@[instance_reducible]
-private def cachedCompose {C : Type*} [Category C] (J : GrothendieckTopology C)
+private theorem cachedCompose {C : Type*} [Category C] (J : GrothendieckTopology C)
     [EssentiallySmall.{u + 1} C] :
     J.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) := by
   exact (equivSmallModel.{u + 1} C).hasSheafCompose J

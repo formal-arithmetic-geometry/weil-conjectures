@@ -103,7 +103,6 @@ private theorem finiteConstants_for_finset
       · exact hCx F f (fun c h ↦ hc c (Finset.mem_union_left _ h)) ht
       · exact hCS F f (fun c h ↦ hc c (Finset.mem_union_right _ h)) ht y hy
 
-set_option linter.unusedVariables false in
 /-- A polynomial over a finitely generated rational function field acquires p-th-power
 coefficients after extending the constants and rooting an algebraically independent tuple:
 there are finite purely inseparable extensions `l / k` and `L / K` and an algebraically
@@ -115,13 +114,13 @@ theorem exists_coefficientRoot_extension
     (hs : AlgebraicIndependent k ((↑) : s → K))
     (p : ℕ) [Fact p.Prime] [CharP k p]
     (P : (IntermediateField.adjoin k (s : Set K))[X]) :
-    ∃ (l : Type w) (hl : Field l) (akl : Algebra k l)
-      (L : Type w) (hL : Field L) (aKL : Algebra K L) (alL : Algebra l L)
-      (akL : Algebra k L) (htl : IsScalarTower k l L) (htK : IsScalarTower k K L),
+    ∃ (l : Type w) (_hl : Field l) (_akl : Algebra k l)
+      (L : Type w) (_hL : Field L) (_aKL : Algebra K L) (_alL : Algebra l L)
+      (_akL : Algebra k L) (_htl : IsScalarTower k l L) (_htK : IsScalarTower k K L),
       Module.Finite k l ∧ IsPurelyInseparable k l ∧
       Module.Finite K L ∧ IsPurelyInseparable K L ∧
       ∃ t : Finset L, AlgebraicIndependent l ((↑) : t → L) ∧
-        ∃ (a : Algebra (IntermediateField.adjoin k (s : Set K))
+        ∃ (_a : Algebra (IntermediateField.adjoin k (s : Set K))
             (IntermediateField.adjoin l (t : Set L))),
           IsScalarTower (IntermediateField.adjoin k (s : Set K))
             (IntermediateField.adjoin l (t : Set L)) L ∧
