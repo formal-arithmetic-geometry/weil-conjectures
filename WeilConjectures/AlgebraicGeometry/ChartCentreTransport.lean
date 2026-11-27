@@ -145,6 +145,63 @@ private theorem restrictionDifference {U Y : Scheme.{u}} (h : U ⟶ Y) [IsSepara
     representative_restrict δ 1 (inf_le_right : T₀ ≤ O.ι ⁻¹ᵁ W) bU V hV₀,
     representative_restrict δ 1 (inf_le_left : T₀ ≤ T) s V hV₀, hres]
 
+open Scheme.Modules ConormalGradedAlgebra in
+/-- The normal/tangent identification restricts to an open neighbourhood of the diagonal. -/
+private theorem restrictionNormalTangent {U Y : Scheme.{u}} (h : U ⟶ Y) [Smooth h]
+    [IsSeparated h] (O : (pullback h h).Opens) (δ : U ⟶ O.toScheme) [IsClosedImmersion δ]
+    (hδ : δ ≫ O.ι = 𝟙 U ≫ pullback.diagonal h)
+    (ω : h.relativeDifferentials ≅ piece (pullback.diagonal h) 1)
+    (tU : PurityNormalBundle.normalCone (pullback.diagonal h) ≅
+      RelativeTangentBundle.scheme h)
+    (htU : IsNormalTangentIdentification h (pullback.diagonal h) ω tU)
+    (cR : (tensorPullback (𝟙 U)).obj
+        (presentation (pullback.diagonal h)).algebra.toModule ≅
+      (presentation δ).algebra.toModule)
+    (hcR : IsBaseChangeMap δ (pullback.diagonal h) O.ι (𝟙 U) hδ (presentation δ)
+      (presentation (pullback.diagonal h)) cR.hom)
+    (r : PurityNormalBundle.normalCone δ ≅
+      PurityNormalBundle.normalCone (pullback.diagonal h))
+    (hr : IsSpecMap (𝟙 U) (presentation δ).algebra
+      (presentation (pullback.diagonal h)).algebra
+      (PurityNormalBundle.projection δ) (PurityNormalBundle.projection (pullback.diagonal h))
+      (normalAlgebraIso δ) (normalAlgebraIso (pullback.diagonal h)) r.hom
+      (pullbackSection (𝟙 U) _ _ cR.hom))
+    (hzero : PurityNormalBundle.zeroSection δ ≫ r.hom =
+      PurityNormalBundle.zeroSection (pullback.diagonal h))
+    (ε : piece (pullback.diagonal h) 1 ≅ piece δ 1)
+    (hε : ∀ (V : U.Opens) (x : (piece (pullback.diagonal h) 1).val.obj (op V)),
+      ε.hom.app V x = pullbackSection (𝟙 U) _ _ (Classical.choose ((Classical.choose_spec
+        (closedImmersion_conormal_functorial δ (pullback.diagonal h) O.ι (𝟙 U) hδ).2).2))
+          V x) :
+    IsNormalTangentIdentification h δ (ω ≪≫ ε) (r ≪≫ tU) := by
+  obtain ⟨hproj, hz, βU, hβU, hspec⟩ := htU
+  have hρ := hcR.choose_spec.choose_spec.1
+  have hsec := hcR.choose_spec.choose_spec.2.1
+  have hgr := hcR.choose_spec.choose_spec.2.2.1
+  have hone := hcR.choose_spec.choose_spec.2.2.2.2.2
+  obtain ⟨θ, hθ⟩ := identityAlgebraIso _ _ cR hcR.choose hρ hsec
+  refine ⟨?_, ?_, βU ≪≫ θ, ?_, ?_⟩
+  · rw [Iso.trans_hom, Category.assoc, hproj]
+    simpa using hr.1
+  · rw [Iso.trans_hom, ← Category.assoc, hzero, hz]
+  · intro V a
+    change θ.hom.right.hom.app (op V) (βU.hom.right.hom.app (op V) _) = _
+    erw [hβU, hθ, gradedSection (𝟙 U) _ _ cR.hom _ (hgr 1), hone]
+    change _ = ((presentation δ).inclusion 1).val.app (op V) (ε.hom.app V (ω.hom.app V a))
+    erw [hε]
+    rfl
+  · obtain ⟨hw, hs⟩ := hspec
+    obtain ⟨hwr, hsr⟩ := hr
+    refine ⟨by simpa [hw] using hwr, ?_⟩
+    intro V a
+    have h1 := hs V a
+    have h2 := hsr V (βU.hom.right.hom.app (op V) a)
+    change (normalAlgebraIso δ).hom.right.hom.app _
+      (θ.hom.right.hom.app (op V) (βU.hom.right.hom.app (op V) a)) = _
+    rw [hθ]
+    erw [h2, h1]
+    exact ConcreteCategory.congr_hom (Scheme.Hom.appLE_comp_appLE r.hom tU.hom _ _ _ _ _) _
+
 private theorem restrictionIdentification {U A Y : Scheme.{u}} {d : ℕ} {p : A ⟶ Y}
     {e : U ⟶ A} [IsSeparated p] [IsSeparated (e ≫ p)] [Smooth p] [Smooth (e ≫ p)]
     (C : Comparison d p e) :
@@ -152,7 +209,19 @@ private theorem restrictionIdentification {U A Y : Scheme.{u}} {d : ℕ} {p : A 
       IsDifferenceIdentification (e ≫ p) C.δ (C.O.ι ≫ pullback.fst (e ≫ p) (e ≫ p))
         (C.O.ι ≫ pullback.snd (e ≫ p) (e ≫ p)) ωV ∧
       IsNormalTangentIdentification (e ≫ p) C.δ ωV (C.r ≪≫ C.tU) := by
-  sorry
+  have hrcart : IsPullback C.δ (𝟙 U) C.O.ι (pullback.diagonal (e ≫ p)) := by
+    apply IsOpenImmersion.isPullback
+    · exact C.restriction_square.symm
+    · rw [Scheme.Opens.opensRange_ι]
+      change (pullback.diagonal (e ≫ p)) ⁻¹ᵁ C.O = (𝟙 U : U ⟶ U).opensRange
+      rw [← C.diagonal_factorization, Scheme.Hom.comp_preimage]
+      ext x
+      simp
+  obtain ⟨ε, hε⟩ := restrictionPiece C.O _ C.δ C.restriction_square hrcart.isLimit
+  exact ⟨C.ωU ≪≫ ε, restrictionDifference (e ≫ p) C.O C.δ C.restriction_square C.ωU
+    C.difference_U ε hε, restrictionNormalTangent (e ≫ p) C.O C.δ C.restriction_square C.ωU
+    C.tU C.tangent_U C.restriction C.graded_restriction C.r C.restriction_spec
+    C.restriction_zero ε hε⟩
 
 /-- The canonical centred-neighbourhood transport, including its graded and tangent maps.
 (Stacks, Tags 02GE, 0473, 0635 and 08S2). -/

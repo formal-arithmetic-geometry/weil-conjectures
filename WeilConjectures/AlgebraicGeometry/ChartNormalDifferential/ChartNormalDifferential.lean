@@ -861,10 +861,7 @@ private theorem specMap_cartesian {Z Z' N N' : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-private theorem identitySpecMap {S N N' : Scheme.{u}}
-    (B B' : S.CommAlgebraSheaf) (π : N ⟶ S) (π' : N' ⟶ S)
-    [IsAffineHom π] [IsAffineHom π']
-    (α : B ≅ structureAlgebra π) (α' : B' ≅ structureAlgebra π')
+private theorem identityAlgebraIso {S : Scheme.{u}} (B B' : S.CommAlgebraSheaf)
     (c : (tensorPullback (𝟙 S)).obj B'.toModule ≅ B.toModule)
     (ρ : B'.right ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} (𝟙 S : S ⟶ S).base).obj
       B.right)
@@ -872,8 +869,8 @@ private theorem identitySpecMap {S N N' : Scheme.{u}}
       (TopCat.Sheaf.pushforward CommRingCat.{u} (𝟙 S : S ⟶ S).base).obj S.sheaf) ≫
       (TopCat.Sheaf.pushforward CommRingCat.{u} (𝟙 S : S ⟶ S).base).map B.hom)
     (hc : ∀ V a, pullbackSection (𝟙 S) _ _ c.hom V a = ρ.hom.app (op V) a) :
-    ∃ r : N ≅ N', IsSpecMap (𝟙 S) B B' π π' α α' r.hom
-      (pullbackSection (𝟙 S) _ _ c.hom) := by
+    ∃ θ : B' ≅ B, ∀ (V : S.Opens) (a : B'.right.obj.obj (op V)),
+      θ.hom.right.hom.app (op V) a = pullbackSection (𝟙 S) _ _ c.hom V a := by
   let θ : B' ⟶ B := Under.homMk ρ (by
     apply CategoryTheory.Sheaf.hom_ext
     apply NatTrans.ext
@@ -896,10 +893,28 @@ private theorem identitySpecMap {S N N' : Scheme.{u}}
     rw [he]
     infer_instance
   have : IsIso θ := algebra_isIso_of_module θ
-  obtain ⟨r, hr⟩ := specIso_exists π π' α α' (asIso θ)
+  exact ⟨asIso θ, fun V a ↦ (hc V a).symm⟩
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem identitySpecMap {S N N' : Scheme.{u}}
+    (B B' : S.CommAlgebraSheaf) (π : N ⟶ S) (π' : N' ⟶ S)
+    [IsAffineHom π] [IsAffineHom π']
+    (α : B ≅ structureAlgebra π) (α' : B' ≅ structureAlgebra π')
+    (c : (tensorPullback (𝟙 S)).obj B'.toModule ≅ B.toModule)
+    (ρ : B'.right ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} (𝟙 S : S ⟶ S).base).obj
+      B.right)
+    (hρ : B'.hom ≫ ρ = (⟨(𝟙 S : S ⟶ S).c⟩ : S.sheaf ⟶
+      (TopCat.Sheaf.pushforward CommRingCat.{u} (𝟙 S : S ⟶ S).base).obj S.sheaf) ≫
+      (TopCat.Sheaf.pushforward CommRingCat.{u} (𝟙 S : S ⟶ S).base).map B.hom)
+    (hc : ∀ V a, pullbackSection (𝟙 S) _ _ c.hom V a = ρ.hom.app (op V) a) :
+    ∃ r : N ≅ N', IsSpecMap (𝟙 S) B B' π π' α α' r.hom
+      (pullbackSection (𝟙 S) _ _ c.hom) := by
+  obtain ⟨θ, hθ⟩ := identityAlgebraIso B B' c ρ hρ hc
+  obtain ⟨r, hr⟩ := specIso_exists π π' α α' θ
   refine ⟨r, hr.1, ?_⟩
   intro V a
-  rw [hc V a]
+  rw [← hθ V a]
   exact hr.2 V a
 
 set_option backward.isDefEq.respectTransparency false in
