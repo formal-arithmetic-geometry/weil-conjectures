@@ -39,8 +39,7 @@ is regular. -/
 theorem isRegularLocalRing_iff (A : Type u) [CommRing A] [IsNoetherianRing A]
     [IsLocalRing A] :
     IsRegularLocalRing A ↔ IsRegularLocalRing (AdicCompletion (IsLocalRing.maximalIdeal A) A) := by
-  set_option linter.style.haveILetI false in
-    letI : IsNoetherianRing (AdicCompletion (IsLocalRing.maximalIdeal A) A) :=
+  have : IsNoetherianRing (AdicCompletion (IsLocalRing.maximalIdeal A) A) :=
     AdicCompletion.isNoetherianRing _
   rw [_root_.isRegularLocalRing_iff, _root_.isRegularLocalRing_iff]
   rw [AdicCompletion.spanFinrank_maximalIdeal_eq]

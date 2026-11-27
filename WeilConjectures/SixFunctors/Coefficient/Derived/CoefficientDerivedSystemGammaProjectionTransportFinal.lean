@@ -31,7 +31,6 @@ evaluation is natural in the first variable.
 set_option autoImplicit false
 set_option Elab.async false
 set_option backward.defeqAttrib.useBackward true
-set_option linter.unusedVariables false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 universe t u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
@@ -47,7 +46,7 @@ identities in the enriched sequence projection formula.
 theorem coefficientDerivedSystemGammaProjectionTransport_final
     (S : CoefficientDerivedSystemCalculus l E W)
     (D : CoefficientDerivedSystemResolutionCoherence l E W S)
-    (H : CoefficientDerivedSystemProjectionModels l E W S D)
+    (_H : CoefficientDerivedSystemProjectionModels l E W S D)
     (P : DerivedCategory (scalarReductionSource l E W))
     (N : coefficientSequenceDerived l E W)
     (hN : IsNormalizedCoefficientSequence l E W N) (n : ℕ) :

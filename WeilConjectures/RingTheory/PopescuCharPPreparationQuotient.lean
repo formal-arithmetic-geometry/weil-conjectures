@@ -36,14 +36,13 @@ universe u v w
 open scoped TensorProduct
 namespace Algebra
 
-set_option linter.unusedVariables false in
 /-- Descend the auxiliary thickening factorization to the eighth-power quotient and derive
 the dimension and minimal-prime alternative. -/
 theorem popescu_char_p_preparation_quotient
     {k : Type u} {A : Type v} {Λ : Type w}
     [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]
     [FinitePresentation k A] [IsNoetherianRing Λ]
-    (p : ℕ) [CharP k p] (hp : 0 < p)
+    (p : ℕ) [CharP k p] (_hp : 0 < p)
     (α : A →ₐ[k] Λ) (q : PrimeSpectrum Λ)
     (m : ℕ) [Algebra (MvPolynomial (Fin m) k) Λ]
       [IsScalarTower k (MvPolynomial (Fin m) k) Λ]
@@ -53,7 +52,7 @@ theorem popescu_char_p_preparation_quotient
       [FinitePresentation (MvPolynomial (Fin m) k) C]
     (β : A →ₐ[k] C) (γ : C →ₐ[MvPolynomial (Fin m) k] Λ)
     (r : ℕ) (π : Fin r → MvPolynomial (Fin m) k)
-    (hbase : (γ.restrictScalars k).comp β = α ∧ popescuIdeal α ≤ popescuIdeal γ)
+    (_hbase : (γ.restrictScalars k).comp β = α ∧ popescuIdeal α ≤ popescuIdeal γ)
     (hparam : 1 ≤ r ∧
       (∀ i, algebraMap (MvPolynomial (Fin m) k) Λ (π i) ∈ q.asIdeal) ∧
       (∀ (i : Fin r)

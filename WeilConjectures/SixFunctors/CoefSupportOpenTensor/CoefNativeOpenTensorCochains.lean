@@ -64,12 +64,11 @@ abbrev FiniteOpenCochains {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     (n : ℕ) :=
   WeilConjectures.CoefSupportOpenTensor.NativeOpenTensorPrimitives.FiniteOpenCochainsData l E j n
 
-set_option linter.unusedVariables false in
 /-- Native restriction and projection data before derived localization.
 Ordinary open tensor data exist on the sequence site and for every finite coefficient ring. -/
 theorem nativeOpenTensor_cochains_exists {X Z : Scheme.{u}} (j : X ⟶ Z)
     [IsOpenImmersion j] :
-    ∃ (D : SystemOpenCochains l E j) (Dn : ∀ n : ℕ, FiniteOpenCochains l E j n), True := by
+    ∃ (_D : SystemOpenCochains l E j) (_Dn : ∀ n : ℕ, FiniteOpenCochains l E j n), True := by
   obtain ⟨D, hD⟩ := nativeOpenTensor_system_exists l E j
   have hDn (n : ℕ) : ∃ Dn : FiniteOpenCochains l E j n, True :=
     nativeOpenTensor_finite_exists l E j n

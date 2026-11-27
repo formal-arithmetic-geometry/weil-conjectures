@@ -61,7 +61,6 @@ private theorem prefix_span_update
   · have hki : k ≠ i := by intro h; subst k; omega
     exact ⟨k, hk, by simpa only [Function.update_of_ne hki] using hy⟩
 
-set_option linter.unusedVariables false in
 /-- Rescale fixed polynomial parameters in `Λ` while retaining an Artinian coefficient
 solution. -/
 theorem exists_popescu_coefficient_induction
@@ -70,7 +69,7 @@ theorem exists_popescu_coefficient_induction
     [FinitePresentation k A] [IsNoetherianRing Λ]
     (p : ℕ) [CharP k p] (hp : 0 < p)
     (α : A →ₐ[k] Λ) (q : PrimeSpectrum Λ)
-    (hreg : IsGeometricallyRegular k Λ)
+    (_hreg : IsGeometricallyRegular k Λ)
     (N : ℕ) (hN : 0 < N)
     (hpower : IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal) ^ N ≤
       (Ideal.map α.toRingHom (singularIdeal k A)).map
@@ -85,10 +84,10 @@ theorem exists_popescu_coefficient_induction
     (hψ₀ : ψ₀.comp (algebraMap (MvPolynomial (Fin m₀) k)
         (Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom))) =
       (algebraMap Λ (Localization.AtPrime q.asIdeal)).comp φ₀.toRingHom)
-    (hideal₀ : q.asIdeal.map (algebraMap Λ (Localization.AtPrime q.asIdeal)) =
+    (_hideal₀ : q.asIdeal.map (algebraMap Λ (Localization.AtPrime q.asIdeal)) =
       (q.asIdeal.comap φ₀.toRingHom).map
         ((algebraMap Λ (Localization.AtPrime q.asIdeal)).comp φ₀.toRingHom))
-    (hflat₀ : ψ₀.Flat)
+    (_hflat₀ : ψ₀.Flat)
     (D₀ : Type (max u w)) [CommRing D₀] [IsLocalRing D₀] [IsArtinianRing D₀]
     [Algebra (Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom) ⧸
       ((q.asIdeal.comap φ₀.toRingHom).map (algebraMap (MvPolynomial (Fin m₀) k)
@@ -126,7 +125,7 @@ theorem exists_popescu_coefficient_induction
         Set.range g₀)
     (uP : Fin d → MvPolynomial (Fin m₀) k)
     (huP : ∀ i, uP i ∈ q.asIdeal.comap φ₀.toRingHom)
-    (hspan : Ideal.span (Set.range (fun i ↦
+    (_hspan : Ideal.span (Set.range (fun i ↦
       algebraMap (MvPolynomial (Fin m₀) k)
         (Localization.AtPrime (q.asIdeal.comap φ₀.toRingHom)) (uP i))) =
       (q.asIdeal.comap φ₀.toRingHom).map

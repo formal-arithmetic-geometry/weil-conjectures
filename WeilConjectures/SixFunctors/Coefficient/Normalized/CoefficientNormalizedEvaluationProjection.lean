@@ -30,7 +30,6 @@ coefficient quotients is assumed.
 @[expose] public section
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.style.haveILetI false
 set_option backward.defeqAttrib.useBackward true
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 universe t u a b v w
@@ -46,7 +45,7 @@ private theorem coefficientSequence_isIso_iff_evaluations
       IsIso ((coefficientSequenceDerivedEvaluation l E W n).map f) := by
   constructor
   · intro hf n
-    haveI : IsIso f := hf
+    have : IsIso f := hf
     infer_instance
   · intro hf
     obtain ⟨D⟩ := SemilinearSections.semilinearDerivedSections.{t + 1, t, u}

@@ -37,7 +37,6 @@ open scoped TensorProduct
 
 namespace Module
 
-set_option linter.style.haveILetI false in
 /-- Flatness of the limit closed fibre descends to a tail of the model tower. -/
 theorem NoetherianLocalModelTower.eventually_fiberFlat
     {R : Type u} {S : Type v} {S' : Type w} {M : Type t}
@@ -60,13 +59,13 @@ theorem NoetherianLocalModelTower.eventually_fiberFlat
         (IsLocalRing.maximalIdeal (X.R₀ j)))
       ((X.S₀ j ⧸ Ideal.map (algebraMap (X.R₀ j) (X.S₀ j))
         (IsLocalRing.maximalIdeal (X.R₀ j))) ⊗[X.S₀ j] X.N₀ j) := by
-  letI := X.preorder
-  letI := X.commR
-  letI := X.commS
-  letI := X.localR
-  letI := X.algRS
-  letI := X.addN
-  letI := X.moduleS
+  let := X.preorder
+  let := X.commR
+  let := X.commS
+  have := X.localR
+  let := X.algRS
+  let := X.addN
+  let := X.moduleS
   obtain ⟨i, hi⟩ := X.exists_fiberFlat_stage h_fibre
   refine ⟨i, fun j hij ↦ X.fiberFlat_of_le i j hij hi⟩
 
