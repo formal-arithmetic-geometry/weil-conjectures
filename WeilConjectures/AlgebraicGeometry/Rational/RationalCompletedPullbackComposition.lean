@@ -7,10 +7,24 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Rational.RationalRealizationPullbackComparison
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcActualRingedExchange
+import WeilConjectures.AlgebraicGeometry.Pbc.PbcActualModulePullCompUnit
 import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationLift
 import WeilConjectures.AlgebraicGeometry.Rational.RationalModuleRealizationMap
+public import WeilConjectures.AlgebraicGeometry.Rational.RationalPullComputation
 
 /-! # Completed composition and descent to all raw rational fraction arrows.
+
+The ordinary rational comparisons of composable pullbacks compose
+(`rationalOrdinaryComparison_comp`): on K-flat complexes with flat terms every derived functor
+is computed termwise, and the termwise maps agree on unit generators
+(`rationalModuleComparison_comp`). Inverting the completed-pullback units then gives the
+composition of the realization comparisons and of the raw rational pullbacks.
+
+## Implementation details
+
+The module hypotheses restrict generators along `MorphismProperty.Over.pullbackComp` through
+`PresheafOfModules.restrictₛₗ`: the semilinear view exposes the target carrier without unfolding
+chart rings, which keeps elaborating these statements cheap.
 
 ## References
 
@@ -103,6 +117,249 @@ private theorem rationalCompletedComp_naturality {C D T : Type*} [Category C] [C
   rw [Category.assoc, ← reassoc_of% nh, ← Functor.map_comp_assoc, ← ng,
     Functor.map_comp_assoc, hL, Category.assoc, reassoc_of% hK, ← nu, ← reassoc_of% nc]
 
+omit [Fact l.Prime] in
+private theorem rationalOrdinary_app_eq_of_iso {C D : Type*} [Category C] [Category D]
+    {F G : C ⥤ D} (α : F ⟶ G) {A B : C} (i : A ≅ B) :
+    α.app B = F.map i.inv ≫ α.app A ≫ G.map i.hom := by
+  simp
+
+/-- The balanced flattenings of composable pullbacks compose: on every integral module, the
+flattening of the composite agrees with the pasting of the two flattenings, the ordinary
+pullback compositor and the rational module compositor. -/
+theorem rationalModuleComparison_comp (g : Y ⟶ X) (h : Z ⟶ Y)
+    (sX : RationalModuleRealization l E X) (sY : RationalModuleRealization l E Y)
+    (sZ : RationalModuleRealization l E Z)
+    (ag : RationalRealizationPullbackComparison l E g sY sX)
+    (ah : RationalRealizationPullbackComparison l E h sZ sY)
+    (ac : RationalRealizationPullbackComparison l E (h ≫ g) sZ sX)
+    (moduleComp : rationalPullModule l E g ag.rationalCoefficient ⋙
+      rationalPullModule l E h ah.rationalCoefficient ≅
+        rationalPullModule l E (h ≫ g) ac.rationalCoefficient)
+    (hmodule : ∀ (M : pbcModules X (rationalCoefficientSheaf l X E)) (V : X.ProEt)
+      (m : M.val.obj (op V)),
+      (moduleComp.hom.app M).val.app
+          (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V)))
+        (rationalCoherenceUnit l E h ah.rationalCoefficient
+          ((rationalPullModule l E g ag.rationalCoefficient).obj M)
+          ((proEtaleBaseChange g).obj V)
+          (rationalCoherenceUnit l E g ag.rationalCoefficient M V m)) =
+        ((rationalPullModule l E (h ≫ g) ac.rationalCoefficient).obj M).val.restrictₛₗ
+          ((MorphismProperty.Over.pullbackComp h g).inv.app V).op
+          (rationalCoherenceUnit l E (h ≫ g) ac.rationalCoefficient M V m))
+    (M : pbcModules X (pbcAdicCompletion X (pbcIntegralDatum l E))) :
+    (pbcExtend (rationalPullScalar l E sZ)).map
+        ((pbcActualModulePullCompIso h g (pbcIntegralDatum l E)).inv.app M) ≫
+      ac.moduleComparison.hom.app M =
+    ah.moduleComparison.hom.app ((pbcActualModulePull g (pbcIntegralDatum l E)).obj M) ≫
+      (rationalPullModule l E h ah.rationalCoefficient).map
+        (ag.moduleComparison.hom.app M) ≫
+      moduleComp.hom.app ((pbcExtend (rationalPullScalar l E sX)).obj M) := by
+  have hcu {S T : Scheme.{u}} (f : S ⟶ T)
+      (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj
+        (rationalCoefficientSheaf l T E) ⟶ rationalCoefficientSheaf l S E)
+      (N : pbcModules T (rationalCoefficientSheaf l T E)) (V : T.ProEt)
+      (n : N.val.obj (op V)) :
+      pbcTensorSection c
+        ((proEtaleRingModulePullback f (rationalCoefficientSheaf l T E)
+          ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj
+            (rationalCoefficientSheaf l T E)) (Iso.refl _)).obj N)
+        (op ((proEtaleBaseChange f).obj V)) 1
+        (proEtaleRingModuleUnitSection f (rationalCoefficientSheaf l T E)
+          ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj
+            (rationalCoefficientSheaf l T E)) (Iso.refl _) N V n) =
+        rationalCoherenceUnit l E f c N V n := by
+    unfold rationalCoherenceUnit
+    rfl
+  let d := pbcIntegralDatum l E
+  apply ((((pbcActualModuleAdjunction g d).comp (pbcActualModuleAdjunction h d)).comp
+    (pbcScalarAdjunction (rationalPullScalar l E sZ))).homEquiv _ _).injective
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro V
+  obtain ⟨V⟩ := V
+  ext m
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+  have hau {S T : Scheme.{u}} (f : S ⟶ T) (N : pbcModules T (pbcAdicCompletion T d))
+      (U : T.ProEt) (y : N.val.obj (op U)) :
+      ((pbcActualModuleAdjunction f d).unit.app N).val.app (op U) y =
+        pbcActualModuleUnitSection f d N U y :=
+    (pbcActualModuleAdjunction_exists f d).exists.choose_spec N U y
+  have hu : (((((pbcActualModuleAdjunction g d).comp (pbcActualModuleAdjunction h d)).comp
+      (pbcScalarAdjunction (rationalPullScalar l E sZ))).unit.app M).val.app (op V) m) =
+      pbcTensorSection (rationalPullScalar l E sZ)
+        ((pbcActualModulePull h d).obj ((pbcActualModulePull g d).obj M))
+        (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V))) 1
+        (pbcActualModuleUnitSection h d ((pbcActualModulePull g d).obj M)
+          ((proEtaleBaseChange g).obj V) (pbcActualModuleUnitSection g d M V m)) := by
+    simp only [Adjunction.comp_unit_app]
+    change ((pbcScalarAdjunction (rationalPullScalar l E sZ)).unit.app
+        ((pbcActualModulePull h d).obj ((pbcActualModulePull g d).obj M))).val.app
+        (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V)))
+      (((pbcActualModuleAdjunction h d).unit.app ((pbcActualModulePull g d).obj M)).val.app
+        (op ((proEtaleBaseChange g).obj V))
+        (((pbcActualModuleAdjunction g d).unit.app M).val.app (op V) m)) = _
+    simp only [hau, WeilConjectures.FdIntegralScalarForward.pbcScalarAdjunction_unit]
+  change ((pbcExtend (rationalPullScalar l E sZ)).map
+        ((pbcActualModulePullCompIso h g d).inv.app M) ≫
+      ac.moduleComparison.hom.app M).val.app
+        (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V)))
+        (((((pbcActualModuleAdjunction g d).comp (pbcActualModuleAdjunction h d)).comp
+        (pbcScalarAdjunction (rationalPullScalar l E sZ))).unit.app M).val.app (op V) m) =
+    (ah.moduleComparison.hom.app ((pbcActualModulePull g (pbcIntegralDatum l E)).obj M) ≫
+      (rationalPullModule l E h ah.rationalCoefficient).map
+        (ag.moduleComparison.hom.app M) ≫
+      moduleComp.hom.app ((pbcExtend (rationalPullScalar l E sX)).obj M)).val.app
+        (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V)))
+        (((((pbcActualModuleAdjunction g d).comp (pbcActualModuleAdjunction h d)).comp
+        (pbcScalarAdjunction (rationalPullScalar l E sZ))).unit.app M).val.app (op V) m)
+  rw [hu]
+  simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app, ConcreteCategory.comp_apply]
+  erw [WeilConjectures.FdIntegralScalarForward.pbcTensor_map]
+  erw [pbcActualModulePullCompIso_inv_app_unit]
+  erw [← pbcTensorSection_restrict]
+  erw [PresheafOfModules.naturality_apply]
+  erw [ac.module_unit]
+  rw [hcu (h ≫ g) ac.rationalCoefficient ((pbcExtend (rationalPullScalar l E sX)).obj M) V
+    (pbcTensorSection (rationalPullScalar l E sX) M (op V) 1 m)]
+  erw [ah.module_unit ((pbcActualModulePull g d).obj M) ((proEtaleBaseChange g).obj V)
+    (pbcActualModuleUnitSection g d M V m)]
+  rw [hcu h ah.rationalCoefficient
+    ((pbcExtend (rationalPullScalar l E sY)).obj ((pbcActualModulePull g d).obj M))
+    ((proEtaleBaseChange g).obj V)
+    (pbcTensorSection (rationalPullScalar l E sY) ((pbcActualModulePull g d).obj M)
+      (op ((proEtaleBaseChange g).obj V)) 1 (pbcActualModuleUnitSection g d M V m))]
+  erw [rationalPullModule_map_unit]
+  erw [ag.module_unit M V m]
+  rw [hcu g ag.rationalCoefficient ((pbcExtend (rationalPullScalar l E sX)).obj M) V
+    (pbcTensorSection (rationalPullScalar l E sX) M (op V) 1 m)]
+  exact (hmodule ((pbcExtend (rationalPullScalar l E sX)).obj M) V
+    (pbcTensorSection (rationalPullScalar l E sX) M (op V) 1 m)).symm
+
+/-- The composition coherence of the ordinary rational comparisons on a K-flat complex with
+flat terms, where every derived functor is computed termwise. -/
+private theorem rationalOrdinaryComparison_comp_Q (g : Y ⟶ X) (h : Z ⟶ Y)
+    (sX : RationalModuleRealization l E X) (sY : RationalModuleRealization l E Y)
+    (sZ : RationalModuleRealization l E Z)
+    (ag : RationalRealizationPullbackComparison l E g sY sX)
+    (ah : RationalRealizationPullbackComparison l E h sZ sY)
+    (ac : RationalRealizationPullbackComparison l E (h ≫ g) sZ sX)
+    (moduleComp : rationalPullModule l E g ag.rationalCoefficient ⋙
+      rationalPullModule l E h ah.rationalCoefficient ≅
+        rationalPullModule l E (h ≫ g) ac.rationalCoefficient)
+    (hmodule : ∀ (M : pbcModules X (rationalCoefficientSheaf l X E)) (V : X.ProEt)
+      (m : M.val.obj (op V)),
+      (moduleComp.hom.app M).val.app
+          (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V)))
+        (rationalCoherenceUnit l E h ah.rationalCoefficient
+          ((rationalPullModule l E g ag.rationalCoefficient).obj M)
+          ((proEtaleBaseChange g).obj V)
+          (rationalCoherenceUnit l E g ag.rationalCoefficient M V m)) =
+        ((rationalPullModule l E (h ≫ g) ac.rationalCoefficient).obj M).val.restrictₛₗ
+          ((MorphismProperty.Over.pullbackComp h g).inv.app V).op
+          (rationalCoherenceUnit l E (h ≫ g) ac.rationalCoefficient M V m))
+    (ambientComp : rationalPullDerived l E g ag.rationalCoefficient ⋙
+      rationalPullDerived l E h ah.rationalCoefficient ≅
+        rationalPullDerived l E (h ≫ g) ac.rationalCoefficient)
+    (hderived : ∀ P : CochainComplex (pbcModules X (rationalCoefficientSheaf l X E)) ℤ,
+      ambientComp.hom.app (DerivedCategory.Q.obj P) ≫
+          rationalPullComplexCounit l E (h ≫ g) ac.rationalCoefficient P =
+        (rationalPullDerived l E h ah.rationalCoefficient).map
+            (rationalPullComplexCounit l E g ag.rationalCoefficient P) ≫
+          rationalPullComplexCounit l E h ah.rationalCoefficient
+            (((rationalPullModule l E g ag.rationalCoefficient).mapHomologicalComplex
+              (.up ℤ)).obj P) ≫
+          DerivedCategory.Q.map
+            ((NatIso.mapHomologicalComplex moduleComp (.up ℤ)).hom.app P))
+    (P : CochainComplex (pbcModules X (pbcAdicCompletion X (pbcIntegralDatum l E))) ℤ)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
+      (R := pbcAdicCompletion X (pbcIntegralDatum l E)) P)
+    (hf' : ∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
+      (R := pbcAdicCompletion X (pbcIntegralDatum l E)) (P.X n)) :
+    (pbcDerivedExtend (rationalPullScalar l E sZ)).map
+        ((pbcActualDerivedPullCompIso h g (pbcIntegralDatum l E)).inv.app
+          (DerivedCategory.Q.obj P)) ≫
+      ac.ordinaryComparison.hom.app (DerivedCategory.Q.obj P) =
+    ah.ordinaryComparison.hom.app
+        ((pbcActualDerivedPull g (pbcIntegralDatum l E)).obj (DerivedCategory.Q.obj P)) ≫
+      (rationalPullDerived l E h ah.rationalCoefficient).map
+        (ag.ordinaryComparison.hom.app (DerivedCategory.Q.obj P)) ≫
+      ambientComp.hom.app
+        ((pbcDerivedExtend (rationalPullScalar l E sX)).obj (DerivedCategory.Q.obj P)) := by
+  have : IsIso (pbcComplexCounit (rationalPullScalar l E sX) P) :=
+    pbcComplexCounit_isIso _ P hP
+  have := rationalPullComplexCounit_isIso l E (h ≫ g) ac.rationalCoefficient
+    ac.rational_normalization
+    (((pbcExtend (rationalPullScalar l E sX)).mapHomologicalComplex (.up ℤ)).obj P)
+  rw [← cancel_mono ((rationalPullDerived l E (h ≫ g) ac.rationalCoefficient).map
+      (pbcComplexCounit (rationalPullScalar l E sX) P) ≫
+    rationalPullComplexCounit l E (h ≫ g) ac.rationalCoefficient
+      (((pbcExtend (rationalPullScalar l E sX)).mapHomologicalComplex (.up ℤ)).obj P))]
+  have hΓ : (pbcActualDerivedPullCompIso h g (pbcIntegralDatum l E)).inv.app
+        (DerivedCategory.Q.obj P) ≫
+      pbcActualPullComplexCounit (h ≫ g) (pbcIntegralDatum l E) P =
+    (pbcActualDerivedPull h (pbcIntegralDatum l E)).map
+        (pbcActualPullComplexCounit g (pbcIntegralDatum l E) P) ≫
+      pbcActualPullComplexCounit h (pbcIntegralDatum l E)
+        (((pbcActualModulePull g (pbcIntegralDatum l E)).mapHomologicalComplex (.up ℤ)).obj P) ≫
+      DerivedCategory.Q.map
+        ((pbcActualModulePullCompComplexIso h g (pbcIntegralDatum l E)).inv.app P) := by
+    have hspec : (pbcActualDerivedPullCompIso h g (pbcIntegralDatum l E)).hom.app
+          (DerivedCategory.Q.obj P) ≫
+        (pbcActualDerivedPull h (pbcIntegralDatum l E)).map
+          (pbcActualPullComplexCounit g (pbcIntegralDatum l E) P) ≫
+        pbcActualPullComplexCounit h (pbcIntegralDatum l E)
+          (((pbcActualModulePull g (pbcIntegralDatum l E)).mapHomologicalComplex (.up ℤ)).obj P) =
+      pbcActualPullComplexCounit (h ≫ g) (pbcIntegralDatum l E) P ≫
+        DerivedCategory.Q.map
+          ((pbcActualModulePullCompComplexIso h g (pbcIntegralDatum l E)).hom.app P) :=
+      (pbcActualDerivedPullCompIso_exists h g (pbcIntegralDatum l E)).exists.choose_spec P hP hf'
+    rw [← cancel_epi ((pbcActualDerivedPullCompIso h g (pbcIntegralDatum l E)).hom.app
+        (DerivedCategory.Q.obj P)),
+      Iso.hom_inv_id_app_assoc, reassoc_of% hspec, ← CategoryTheory.Functor.map_comp,
+      Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.comp_id]
+  -- The composite comparison, computed on complexes.
+  rw [Category.assoc, ac.derived_normalization P, ← Functor.map_comp_assoc, hΓ]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% (pbcComplexCounit_naturality (rationalPullScalar l E sZ)
+    ((pbcActualModulePullCompComplexIso h g (pbcIntegralDatum l E)).inv.app P))]
+  -- The pasted comparison, computed on complexes.
+  have hamb := ambientComp.hom.naturality (pbcComplexCounit (rationalPullScalar l E sX) P)
+  simp only [Functor.comp_map] at hamb
+  have hg : (rationalPullDerived l E h ah.rationalCoefficient).map
+        (ag.ordinaryComparison.hom.app (DerivedCategory.Q.obj P)) ≫
+      (rationalPullDerived l E h ah.rationalCoefficient).map
+        ((rationalPullDerived l E g ag.rationalCoefficient).map
+          (pbcComplexCounit (rationalPullScalar l E sX) P)) ≫
+      (rationalPullDerived l E h ah.rationalCoefficient).map
+        (rationalPullComplexCounit l E g ag.rationalCoefficient
+          (((pbcExtend (rationalPullScalar l E sX)).mapHomologicalComplex (.up ℤ)).obj P)) =
+    (rationalPullDerived l E h ah.rationalCoefficient).map
+        ((pbcDerivedExtend (rationalPullScalar l E sY)).map
+          (pbcActualPullComplexCounit g (pbcIntegralDatum l E) P)) ≫
+      (rationalPullDerived l E h ah.rationalCoefficient).map
+        (pbcComplexCounit (rationalPullScalar l E sY)
+          (((pbcActualModulePull g (pbcIntegralDatum l E)).mapHomologicalComplex (.up ℤ)).obj P)) ≫
+      (rationalPullDerived l E h ah.rationalCoefficient).map (DerivedCategory.Q.map
+        ((NatIso.mapHomologicalComplex ag.moduleComparison (.up ℤ)).hom.app P)) := by
+    simp only [← CategoryTheory.Functor.map_comp]
+    rw [ag.derived_normalization P]
+  rw [← reassoc_of% hamb, hderived, reassoc_of% hg]
+  have hoc := ah.ordinaryComparison.hom.naturality
+    (pbcActualPullComplexCounit g (pbcIntegralDatum l E) P)
+  simp only [Functor.comp_map] at hoc
+  rw [← reassoc_of% hoc]
+  erw [reassoc_of% (rationalPullComplexCounit_naturality l E h
+    ah.rationalCoefficient ((NatIso.mapHomologicalComplex ag.moduleComparison (.up ℤ)).hom.app P))]
+  erw [reassoc_of% (ah.derived_normalization
+      (((pbcActualModulePull g (pbcIntegralDatum l E)).mapHomologicalComplex (.up ℤ)).obj P))]
+  -- The two termwise maps agree by the module coherence.
+  have hB := rationalModuleComparison_comp l E g h sX sY sZ ag ah ac moduleComp hmodule
+  congr 3
+  simp only [← CategoryTheory.Functor.map_comp]
+  congr 1
+  ext n : 1
+  simpa [pbcActualModulePullCompComplexIso] using hB (P.X n)
+
 /-- The ordinary rational comparisons of composable pullbacks compose: on every integral object,
 the comparison of the composite agrees with the pasting of the two comparisons, the derived
 pullback compositor and the rational ambient compositor. -/
@@ -112,81 +369,33 @@ theorem rationalOrdinaryComparison_comp (g : Y ⟶ X) (h : Z ⟶ Y)
     (ag : RationalRealizationPullbackComparison l E g sY sX)
     (ah : RationalRealizationPullbackComparison l E h sZ sY)
     (ac : RationalRealizationPullbackComparison l E (h ≫ g) sZ sX)
-    (hcoefficient : (ac.rationalCoefficient =
-  (proEtaleRingInverseImageComp h g).hom.app (rationalCoefficientSheaf l X E) ≫
-    (proEtaleSheafInverseImage h CommRingCat.{u + 1}).map ag.rationalCoefficient ≫
-    ah.rationalCoefficient))
     (moduleComp : rationalPullModule l E g ag.rationalCoefficient ⋙
-    rationalPullModule l E h ah.rationalCoefficient ≅
-  rationalPullModule l E (h ≫ g) ac.rationalCoefficient)
-    (hmodule :
-      let unitSection {S T : Scheme.{u}} (g : S ⟶ T)
-          (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
-            (rationalCoefficientSheaf l T E) ⟶ rationalCoefficientSheaf l S E)
-          (M : pbcModules T (rationalCoefficientSheaf l T E))
-          (V : T.ProEt) (m : M.val.obj (op V)) :
-          ((rationalPullModule l E g c).obj M).val.obj
-            (op ((proEtaleBaseChange g).obj V)) :=
-        pbcTensorSection c
-          ((proEtaleRingModulePullback g (rationalCoefficientSheaf l T E)
-            ((proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
-              (rationalCoefficientSheaf l T E)) (Iso.refl _)).obj M)
-          (op ((proEtaleBaseChange g).obj V)) 1
-          (proEtaleRingModuleUnitSection g (rationalCoefficientSheaf l T E)
-            ((proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
-              (rationalCoefficientSheaf l T E)) (Iso.refl _) M V m)
-      let scalarSection {S T : Scheme.{u}} (g : S ⟶ T)
-          (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
-            (rationalCoefficientSheaf l T E) ⟶ rationalCoefficientSheaf l S E)
-          (V : T.ProEt) (e : (rationalCoefficientSheaf l T E).obj.obj (op V)) :
-          (rationalCoefficientSheaf l S E).obj.obj (op ((proEtaleBaseChange g).obj V)) :=
-        c.hom.app (op ((proEtaleBaseChange g).obj V))
-          (((proEtaleSheafAdjunction g CommRingCat.{u + 1}).unit.app
-            (rationalCoefficientSheaf l T E)).hom.app (op V) e)
-      let scalarMul (T : Scheme.{u})
-          (M : pbcModules T (rationalCoefficientSheaf l T E)) (V : T.ProEtᵒᵖ)
-          (e : (rationalCoefficientSheaf l T E).obj.obj V) (m : M.val.obj V) : M.val.obj V :=
-        e • m
-      (∀ (M : pbcModules X (rationalCoefficientSheaf l X E)) (V : X.ProEt)
-        (m : M.val.obj (op V))
-        (e' : (rationalCoefficientSheaf l Y E).obj.obj (op ((proEtaleBaseChange g).obj V)))
-        (e'' : (rationalCoefficientSheaf l Z E).obj.obj
-          (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V)))),
+      rationalPullModule l E h ah.rationalCoefficient ≅
+        rationalPullModule l E (h ≫ g) ac.rationalCoefficient)
+    (hmodule : ∀ (M : pbcModules X (rationalCoefficientSheaf l X E)) (V : X.ProEt)
+      (m : M.val.obj (op V)),
       (moduleComp.hom.app M).val.app
           (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V)))
-        (scalarMul Z
-          ((rationalPullModule l E h ah.rationalCoefficient).obj
-            ((rationalPullModule l E g ag.rationalCoefficient).obj M))
-          (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V))) e''
-          (unitSection h ah.rationalCoefficient
-            ((rationalPullModule l E g ag.rationalCoefficient).obj M)
-            ((proEtaleBaseChange g).obj V)
-            (scalarMul Y
-              ((rationalPullModule l E g ag.rationalCoefficient).obj M)
-              (op ((proEtaleBaseChange g).obj V)) e'
-              (unitSection g ag.rationalCoefficient M V m)))) =
-        scalarMul Z
-          ((rationalPullModule l E (h ≫ g) ac.rationalCoefficient).obj M)
-          (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V)))
-          (e'' * scalarSection h ah.rationalCoefficient
-            ((proEtaleBaseChange g).obj V) e')
-          -- The semilinear view exposes the target carrier without unfolding chart rings.
-          (((rationalPullModule l E (h ≫ g) ac.rationalCoefficient).obj M).val.restrictₛₗ
-            ((MorphismProperty.Over.pullbackComp h g).inv.app V).op
-              (unitSection (h ≫ g) ac.rationalCoefficient M V m))))
+        (rationalCoherenceUnit l E h ah.rationalCoefficient
+          ((rationalPullModule l E g ag.rationalCoefficient).obj M)
+          ((proEtaleBaseChange g).obj V)
+          (rationalCoherenceUnit l E g ag.rationalCoefficient M V m)) =
+        ((rationalPullModule l E (h ≫ g) ac.rationalCoefficient).obj M).val.restrictₛₗ
+          ((MorphismProperty.Over.pullbackComp h g).inv.app V).op
+          (rationalCoherenceUnit l E (h ≫ g) ac.rationalCoefficient M V m))
     (ambientComp : rationalPullDerived l E g ag.rationalCoefficient ⋙
-    rationalPullDerived l E h ah.rationalCoefficient ≅
-  rationalPullDerived l E (h ≫ g) ac.rationalCoefficient)
-    (hderived : (∀ P : CochainComplex (pbcModules X (rationalCoefficientSheaf l X E)) ℤ,
-  ambientComp.hom.app (DerivedCategory.Q.obj P) ≫
-      rationalPullComplexCounit l E (h ≫ g) ac.rationalCoefficient P =
-    (rationalPullDerived l E h ah.rationalCoefficient).map
-        (rationalPullComplexCounit l E g ag.rationalCoefficient P) ≫
-      rationalPullComplexCounit l E h ah.rationalCoefficient
-        (((rationalPullModule l E g ag.rationalCoefficient).mapHomologicalComplex
-          (.up ℤ)).obj P) ≫
-      DerivedCategory.Q.map
-        ((NatIso.mapHomologicalComplex moduleComp (.up ℤ)).hom.app P)))
+      rationalPullDerived l E h ah.rationalCoefficient ≅
+        rationalPullDerived l E (h ≫ g) ac.rationalCoefficient)
+    (hderived : ∀ P : CochainComplex (pbcModules X (rationalCoefficientSheaf l X E)) ℤ,
+      ambientComp.hom.app (DerivedCategory.Q.obj P) ≫
+          rationalPullComplexCounit l E (h ≫ g) ac.rationalCoefficient P =
+        (rationalPullDerived l E h ah.rationalCoefficient).map
+            (rationalPullComplexCounit l E g ag.rationalCoefficient P) ≫
+          rationalPullComplexCounit l E h ah.rationalCoefficient
+            (((rationalPullModule l E g ag.rationalCoefficient).mapHomologicalComplex
+              (.up ℤ)).obj P) ≫
+          DerivedCategory.Q.map
+            ((NatIso.mapHomologicalComplex moduleComp (.up ℤ)).hom.app P))
     (K : PbcBoundedConstructibleComplete X (pbcIntegralDatum l E)) :
     (pbcDerivedExtend (rationalPullScalar l E sZ)).map
         ((pbcActualDerivedPullCompIso h g (pbcIntegralDatum l E)).inv.app K.obj) ≫
@@ -195,7 +404,33 @@ theorem rationalOrdinaryComparison_comp (g : Y ⟶ X) (h : Z ⟶ Y)
       (rationalPullDerived l E h ah.rationalCoefficient).map
         (ag.ordinaryComparison.hom.app K.obj) ≫
       ambientComp.hom.app ((pbcDerivedExtend (rationalPullScalar l E sX)).obj K.obj) := by
-  sorry
+  let d := pbcIntegralDatum l E
+  let α : (pbcActualDerivedPull g d ⋙ pbcActualDerivedPull h d) ⋙
+      pbcDerivedExtend (rationalPullScalar l E sZ) ⟶
+        pbcDerivedExtend (rationalPullScalar l E sX) ⋙
+          rationalPullDerived l E (h ≫ g) ac.rationalCoefficient :=
+    whiskerRight (pbcActualDerivedPullCompIso h g d).inv _ ≫ ac.ordinaryComparison.hom
+  let β : (pbcActualDerivedPull g d ⋙ pbcActualDerivedPull h d) ⋙
+      pbcDerivedExtend (rationalPullScalar l E sZ) ⟶
+        pbcDerivedExtend (rationalPullScalar l E sX) ⋙
+          rationalPullDerived l E (h ≫ g) ac.rationalCoefficient :=
+    whiskerLeft (pbcActualDerivedPull g d) ah.ordinaryComparison.hom ≫
+      whiskerRight ag.ordinaryComparison.hom (rationalPullDerived l E h ah.rationalCoefficient) ≫
+      whiskerLeft (pbcDerivedExtend (rationalPullScalar l E sX)) ambientComp.hom
+  change α.app K.obj = β.app K.obj
+  obtain ⟨P, s, hP, hf, hs, -⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients
+      (DerivedCategory.Q.objPreimage K.obj)
+  have hf' (n : ℤ) : SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
+      (R := pbcAdicCompletion X d) (P.X n) :=
+    (exactFunctor _ _).prop_of_iso
+      (SheafOfModules.siteSheafTensorRightIso (pbcAdicCompletion X d) (P.X n)).symm (hf n)
+  have : IsIso (DerivedCategory.Q.map s) := (DerivedCategory.isIso_Q_map_iff_quasiIso _ s).2 hs
+  let i := asIso (DerivedCategory.Q.map s) ≪≫ DerivedCategory.Q.objObjPreimageIso K.obj
+  rw [rationalOrdinary_app_eq_of_iso α i, rationalOrdinary_app_eq_of_iso β i]
+  congr 2
+  exact rationalOrdinaryComparison_comp_Q l E g h sX sY sZ ag ah ac moduleComp hmodule
+    ambientComp hderived P hP hf'
 
 /-- Inverting the completed-pullback units turns the ordinary composition coherence into the
 composition coherence of the realization comparisons. -/
@@ -279,10 +514,6 @@ theorem rationalCompletedPullbackComposition (g : Y ⟶ X) (h : Z ⟶ Y)
     (ag : RationalRealizationPullbackComparison l E g sY sX)
     (ah : RationalRealizationPullbackComparison l E h sZ sY)
     (ac : RationalRealizationPullbackComparison l E (h ≫ g) sZ sX)
-    (hcoefficient : (ac.rationalCoefficient =
-  (proEtaleRingInverseImageComp h g).hom.app (rationalCoefficientSheaf l X E) ≫
-    (proEtaleSheafInverseImage h CommRingCat.{u + 1}).map ag.rationalCoefficient ≫
-    ah.rationalCoefficient))
     (moduleComp : rationalPullModule l E g ag.rationalCoefficient ⋙
     rationalPullModule l E h ah.rationalCoefficient ≅
   rationalPullModule l E (h ≫ g) ac.rationalCoefficient)
@@ -337,7 +568,6 @@ theorem rationalCompletedPullbackComposition (g : Y ⟶ X) (h : Z ⟶ Y)
           (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V)))
           (e'' * scalarSection h ah.rationalCoefficient
             ((proEtaleBaseChange g).obj V) e')
-          -- The semilinear view exposes the target carrier without unfolding chart rings.
           (((rationalPullModule l E (h ≫ g) ac.rationalCoefficient).obj M).val.restrictₛₗ
             ((MorphismProperty.Over.pullbackComp h g).inv.app V).op
               (unitSection (h ≫ g) ac.rationalCoefficient M V m))))
@@ -454,8 +684,23 @@ theorem rationalCompletedPullbackComposition (g : Y ⟶ X) (h : Z ⟶ Y)
   dsimp only [RationalPullIntegral.completedFunctor, pbcConditionalIntegral,
     ObjectProperty.lift_obj_obj, Functor.comp_obj, ObjectProperty.ι_obj]
   simp only [eqToHom_refl, Category.id_comp]
+  have hunit (M : pbcModules X (rationalCoefficientSheaf l X E)) (V : X.ProEt)
+      (m : M.val.obj (op V)) :
+      (moduleComp.hom.app M).val.app
+          (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V)))
+        (rationalCoherenceUnit l E h ah.rationalCoefficient
+          ((rationalPullModule l E g ag.rationalCoefficient).obj M)
+          ((proEtaleBaseChange g).obj V)
+          (rationalCoherenceUnit l E g ag.rationalCoefficient M V m)) =
+        ((rationalPullModule l E (h ≫ g) ac.rationalCoefficient).obj M).val.restrictₛₗ
+          ((MorphismProperty.Over.pullbackComp h g).inv.app V).op
+          (rationalCoherenceUnit l E (h ≫ g) ac.rationalCoefficient M V m) := by
+    have hm := hmodule M V m 1 1
+    simp only [one_smul, map_one, one_mul] at hm
+    unfold rationalCoherenceUnit
+    exact hm
   have hmid := rationalCompletedComp_alpha_core l E g h sX sY sZ ag ah ac ambientComp
-    (rationalOrdinaryComparison_comp l E g h sX sY sZ ag ah ac hcoefficient moduleComp hmodule
+    (rationalOrdinaryComparison_comp l E g h sX sY sZ ag ah ac moduleComp hunit
       ambientComp hderived K.obj) (integralComp.app K.obj).hom.hom (hφ K.obj)
   congr 1
   simp only [← Category.assoc]
