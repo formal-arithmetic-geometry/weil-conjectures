@@ -56,7 +56,6 @@ the ambient one.
 
 universe u
 
-set_option linter.unusedSectionVars false
 
 open CategoryTheory Limits MonoidalCategory MonoidalClosed
 
@@ -603,6 +602,9 @@ noncomputable def boundedConstructibleTateTwistZeroUpperStarIso (f : Y.left ⟶ 
         (boundedConstructibleTateTwist ℓ X 0 n) ≅ boundedConstructibleTateTwist ℓ Y 0 n :=
   ObjectProperty.isoMk _ (tateTwistZeroShiftUpperStarIso ℓ f n)
 
+omit [Fact (ringChar kX).Prime] [Fact (ringChar kX').Prime] [Fact (ringChar kY).Prime]
+  [Fact (ringChar kY').Prime] [IsSeparated X.hom] [IsSeparated X'.hom] [IsSeparated Y.hom]
+  [IsSeparated Y'.hom] in
 /-- **The pullback exchange and the specialization maps of `ℚ̄_ℓ(0)[n]`** on bounded
 constructible complexes
 (`NearbyCyclesModel.Hom.pullbackExchange_ambientZeroTwistSpecializationMap`),

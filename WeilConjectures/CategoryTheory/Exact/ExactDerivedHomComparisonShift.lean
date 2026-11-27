@@ -19,7 +19,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDeri
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.defeqAttrib.useBackward true
-set_option linter.style.haveILetI false
 universe u v w c d
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open CategoryTheory.Pretriangulated CategoryTheory.Pretriangulated.Opposite
@@ -193,7 +192,7 @@ private theorem comparison_flip (K : DerivedCategory C) :
   let R := Λ.resolutionFunctor.obj K₀
   have hR := Λ.kFlat_resolutionFunctor_obj ObjectProperty.flat.essImage_ι_le K₀
   have hFR := F.kFlatMap_quotient_obj_resolutionFunctor_obj Λ K₀
-  haveI := comparison_flip_Qh F ((HomotopyCategory.quotient C (.up ℤ)).obj R)
+  have := comparison_flip_Qh F ((HomotopyCategory.quotient C (.up ℤ)).obj R)
     ((HomotopyCategory.kFlat_quotient_obj_iff _).2 hR) hFR
   let e : K ≅ DerivedCategory.Qh.obj ((HomotopyCategory.quotient C (.up ℤ)).obj R) :=
     (DerivedCategory.Q.objObjPreimageIso K).symm ≪≫
@@ -206,7 +205,7 @@ private theorem exactDerived_δ (K M : DerivedCategory C) :
     OplaxMonoidal.δ F.mapDerivedCategory K M =
       (F.mapDerivedCategoryTensorComparison.app K).app M := by
   unfold exactClosedDerivedMonoidal
-  letI := F.residueDerivedMonoidal
+  let := F.residueDerivedMonoidal
   rw [Monoidal.transport_δ]
   rfl
 
@@ -223,8 +222,8 @@ private theorem tensor_interchange (K X : DerivedCategory C) (n : ℤ) :
         ((F.mapDerivedCategory.commShiftIso n).inv.app K ▷ F.mapDerivedCategory.obj X) ≫
         LaxMonoidal.μ F.mapDerivedCategory (K⟦n⟧) X := by
   let G := F.mapDerivedCategory
-  letI := exactClosedDerivedMonoidal F
-  haveI := comparison_flip F X
+  let := exactClosedDerivedMonoidal F
+  have := comparison_flip F X
   have hL := NatTrans.shift_app_comm (F.mapDerivedCategoryTensorComparisonApp K) n X
   have hR := NatTrans.shift_app_comm (comparisonFlip F X) n K
   simp only [Functor.commShiftIso_comp_hom_app] at hL hR
@@ -276,7 +275,7 @@ private theorem sourceShift_comparison_reindex (K M : DerivedCategory C)
             (eqToIso (congrArg (shiftFunctor (DerivedCategory D)) hp))).hom.app
               (F.mapDerivedCategory.obj M)) := by
   subst q
-  letI := exactClosedDerivedMonoidal F
+  let := exactClosedDerivedMonoidal F
   simpa [closedComparison] using
     sourceShift_comparison F.mapDerivedCategory K M p
       (fun X ↦ tensor_interchange F K X p)
@@ -291,7 +290,7 @@ private theorem oppositeSourceShift_comparison (K M : DerivedCategory C) (n : �
           (F.mapDerivedCategory.obj M) ≫
         (siteHomOppositeSourceShift (F.mapDerivedCategory.obj K) n).hom.app
           (F.mapDerivedCategory.obj M) := by
-  letI := exactClosedDerivedMonoidal F
+  let := exactClosedDerivedMonoidal F
   simpa only [siteHomOppositeSourceShift] using
     sourceShift_comparison_reindex F K M (-n) n (neg_neg n)
 
@@ -329,9 +328,9 @@ theorem exactDerivedHomComparison_shift
       (∀ K, β.app (op K) = closedComparison F.mapDerivedCategory K M) →
         NatTrans.CommShift β ℤ := by
   -- Use the canonical tensor comparison and its mates, then the common signed scalar.
-  letI := sC
-  letI := sD
-  letI := exactClosedDerivedMonoidal F
+  let := sC
+  let := sD
+  let := exactClosedDerivedMonoidal F
   intro β hβ
   constructor
   intro n

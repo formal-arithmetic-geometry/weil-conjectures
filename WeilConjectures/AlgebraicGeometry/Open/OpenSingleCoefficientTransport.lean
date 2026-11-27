@@ -28,8 +28,6 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry
 
-set_option linter.flexible false in
--- The degree-zero single-object identifications are normalized before changing the goal.
 private theorem single_iso_naturality
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     {F G : C ⥤ D} [F.Additive] [G.Additive] (e : F ≅ G) (M : C) :
@@ -43,8 +41,10 @@ private theorem single_iso_naturality
   · subst i
     simp only [HomologicalComplex.comp_f,
       HomologicalComplex.singleMapHomologicalComplex_hom_app_self]
-    simp [HomologicalComplex.singleObjXSelf, HomologicalComplex.singleObjXIsoOfEq,
-      HomologicalComplex.single_map_f_self]
+    simp only [Functor.mapHomologicalComplex_obj_X, Functor.comp_obj,
+      NatTrans.mapHomologicalComplex_app_f, HomologicalComplex.singleObjXSelf,
+      HomologicalComplex.singleObjXIsoOfEq, HomologicalComplex.single_map_f_self, eqToIso.hom,
+      eqToIso.inv, eqToHom_map, eqToHom_trans, eqToHom_trans_assoc]
     change e.hom.app M ≫ 𝟙 _ = 𝟙 _ ≫ e.hom.app M ≫ 𝟙 _
     simp only [Category.id_comp]
   · simp [HomologicalComplex.singleMapHomologicalComplex_hom_app_ne, hi]

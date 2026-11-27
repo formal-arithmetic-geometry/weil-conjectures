@@ -190,7 +190,6 @@ end Scheme.Modules
 
 attribute [local instance_reducible] Scheme.Modules.moduleBaseChange
 
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A chart lift at a supplied stage persists at every later stage. This is
@@ -218,7 +217,7 @@ theorem openCover_map_lift_transport
             (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))
             (Over.homMk (Spec.map (R.map (homOfLE hjk)))
               (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))
-      let B := Scheme.Modules.moduleBaseChange f
+      let _B := Scheme.Modules.moduleBaseChange f
               (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjk)))))
               (T' := Over.mk (c.π.app (op i)))
               (Over.homMk (c.π.app (op k)) (c.w (homOfLE (hij.trans hjk)).op))
@@ -266,7 +265,7 @@ theorem openCover_map_lift_transport
             (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj')))))
             (Over.homMk (Spec.map (R.map (homOfLE hjj')))
               (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))
-      let B := Scheme.Modules.moduleBaseChange f
+      let _B := Scheme.Modules.moduleBaseChange f
               (T := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj')))))
               (T' := Over.mk (c.π.app (op i)))
               (Over.homMk (c.π.app (op j')) (c.w (homOfLE (hij.trans hjj')).op))

@@ -86,28 +86,17 @@ theorem derived_exists_perfect_well_generators
       L, R, adj, sL, hLtri, hc, G, κ, hκ, hGsmall, hGshift, hGsmallness,
       hGfactor, hGE⟩ :=
     exists_small_factorization_class_of_compact_localization (A := A)
-  set_option linter.style.haveILetI false in
-  letI := cB
-  set_option linter.style.haveILetI false in
-  letI := zB
-  set_option linter.style.haveILetI false in
-  letI := sB
-  set_option linter.style.haveILetI false in
-  letI := pB
-  set_option linter.style.haveILetI false in
-  letI := aB
-  set_option linter.style.haveILetI false in
-  letI := tB
-  set_option linter.style.haveILetI false in
-  letI := iB
-  set_option linter.style.haveILetI false in
-  letI := sumsB
-  set_option linter.style.haveILetI false in
-  letI := sL
-  set_option linter.style.haveILetI false in
-  letI := hLtri
-  set_option linter.style.haveILetI false in
-  letI := hc
+  let := cB
+  let := zB
+  let := sB
+  let := pB
+  let := aB
+  let := tB
+  let := iB
+  let := sumsB
+  let := sL
+  let := hLtri
+  let := hc
   refine ⟨G, κ, hκ, hGsmall, hGshift, hGsmallness, hGfactor, ?_⟩
   intro T hTi hTt hTsum hGT
   exact compact_localization_images_generate (C := B) (D := DerivedCategory A)

@@ -50,7 +50,6 @@ section Sections
 
 variable (A : Type u') [Category.{u + 1} A]
 
-set_option linter.flexible false in
 /-- The unit of the Frobenius equivalences, pushed forward along `J`, followed by the
 composition isomorphisms of pushforwards along `Fr_X ≫ J = J ≫ Fr_Y`, agrees with the unit
 followed by the pushforward of the exchange isomorphism of `J_*` with `Fr^* = (Fr⁻¹)_*`. Both are
@@ -92,9 +91,7 @@ lemma lowerStar_map_unit_comp_lowerStarComp {X Y : Scheme.{u}} (J : Y ⟶ X) (a 
       MorphismProperty.Over.pullbackId]
   · simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
       MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp,
-      MorphismProperty.Over.pullbackId]
-    rw [pullback.condition_assoc]
-    simp
+      MorphismProperty.Over.pullbackId, pullback.condition_assoc]
 
 end Sections
 

@@ -26,7 +26,6 @@ localized augmentation and representative isomorphisms cancel.
 @[expose] public section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option linter.style.haveILetI false
 universe t u
 open CategoryTheory CategoryTheory.Limits Opposite SheafOfModules
 namespace WeilConjectures.IntegralHom
@@ -42,10 +41,10 @@ private theorem total_generator_ext
         (AlgebraicGeometry.Scheme.ProEt.topology Y) R P Q i j k hij U x y) =
       (g.f k).val.app U (coefficientTensorGenerator.{u, u + 1, u}
         (AlgebraicGeometry.Scheme.ProEt.topology Y) R P Q i j k hij U x y)) : f = g := by
-  letI := tensorLocalization.{u, u} Y R
-  letI := countableColimits.{u, u} Y R
-  letI := ordinaryTensorZero.{u, u} Y R
-  letI := ordinaryTensorObjZero.{u, u} Y R
+  let := tensorLocalization.{u, u} Y R
+  let := countableColimits.{u, u} Y R
+  let := ordinaryTensorZero.{u, u} Y R
+  let := ordinaryTensorObjZero.{u, u} Y R
   ext k : 1
   apply HomologicalComplex.mapBifunctor.hom_ext
   intro i j hij
@@ -98,13 +97,13 @@ theorem tensorAdjunctionExchange_representative
         tensorAdjunctionExchange R a b (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q) =
       DerivedCategory.Q.map σ ≫ (b.compute Q P hQ hP).hom := by
   classical
-  letI := (grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{u + 1, u, u}
+  let := (grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{u + 1, u, u}
     (AlgebraicGeometry.Scheme.ProEt.topology X) R).1
   let C := homReductionTotal R Q P
   let I := (CochainComplex.kInjectiveResolutionFunctor.{u + 1} (Modules.{u, u} X R)).obj C
   let r : C ⟶ I := (CochainComplex.toKInjectiveResolution.{u + 1} _).app C
-  haveI : I.IsKInjective := CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj _ C
-  haveI : QuasiIso r := (CochainComplex.monoQuasiIso_toKInjectiveResolution_app _ C).2
+  have : I.IsKInjective := CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj _ C
+  have : QuasiIso r := (CochainComplex.monoQuasiIso_toKInjectiveResolution_app _ C).2
   obtain ⟨c, hc, _⟩ := b.cochain_curry Q P I r
   obtain ⟨beta, hbeta, heval⟩ := a.evaluation P I Q hP hQ inferInstance c
   have hchain : beta = σ ≫ r := by

@@ -69,7 +69,6 @@ variable [∀ Y : Scheme.{u},
   (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
   (sq : IsPullback g' f' f g)
 
-set_option linter.unusedVariables false in
 /-- Derived extension of the original stalk identifies naturally with the stalk of
 sheaf derived pullback. The computation on K-flat complexes uses precisely the
 specified tensor-stalk isomorphism and the two universal counits. -/
@@ -91,7 +90,7 @@ theorem exists_stalkDerivedExtensionComparison (z : X') :
       ∃ j : comparisonDerivedStalk X (g' z) ⋙ L ≅
           derivedPullback g' ⋙ comparisonDerivedStalk X' z,
         ∀ (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-          (hP : P.IsKFlatTensor)
+          (_hP : P.IsKFlatTensor)
           (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))),
           ∃ hsP : IsIso (ε.app
               ((HomotopyCategory.quotient _ (.up ℤ)).obj (stalkComplex g' z P))),

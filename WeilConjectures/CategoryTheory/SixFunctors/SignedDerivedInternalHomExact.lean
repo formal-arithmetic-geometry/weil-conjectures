@@ -17,8 +17,6 @@ Source: Stacks Project, sites-cohomology.tex, Tags 0A8X and 08JC.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
-set_option linter.style.haveILetI false
 set_option backward.defeqAttrib.useBackward true
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
@@ -117,7 +115,7 @@ private theorem ordinaryConeComparison_isIso {H : HomData A} (P : Spec H U)
     have hq (q : ℤ) : IsIso ((ordinaryConeComparison P I f).f q) := by
       have he : q - 1 + 1 = q := by omega
       exact he ▸ hh (q - 1)
-    letI := hq
+    let := hq
     exact HomologicalComplex.Hom.isIso_of_components _
   intro t
   let g : (hc U (HomologicalComplex.homotopyCofiber f) I).X (t + 1) ⟶
@@ -203,14 +201,13 @@ private theorem ordinaryConeComparison_boundary {H : HomData A} (P : Spec H U)
         (mappingCone ((dualF U I).map f.op))).f q =
       (mappingCocone.inr ((dualF U I).map f.op)).1.v q (q + 1) rfl := by
     simp [mappingCocone.inr, Cocycle.rightShift_coe, Cochain.rightShift_v,
-      shiftFunctorCompIsoId, CochainComplex.shiftFunctorAdd'_inv_app_f',
-      CochainComplex.shiftFunctorZero_hom_app_f,
+      shiftFunctorCompIsoId,
       CochainComplex.shiftFunctorAdd'_hom_app_f',
       CochainComplex.shiftFunctorZero_inv_app_f]
     rfl
   erw [← Category.assoc, h, ordinaryConeComparison_inr]
   simp only [coneBeta, Cocycle.mk_coe, coneBetaCochain_v,
-    CochainComplex.shiftFunctorObjXIso, eqToIso_refl, Iso.refl_inv, Category.comp_id]
+    CochainComplex.shiftFunctorObjXIso]
   rw [HomologicalComplex.XIsoOfEq_rfl, Iso.refl_inv, Category.comp_id]
 
 private theorem fstX_reindex {E G : CochainComplex A ℤ} (f : E ⟶ G)
@@ -233,28 +230,22 @@ private theorem oppositeConeBoundary_f {E G : CochainComplex A ℤ}
   rw [unop_comp]
   simp only [Pretriangulated.shiftFunctor_op_map _ 1 (-1) (by omega),
     shiftFunctorOpIso, eqToIso_refl, Iso.refl_hom, Iso.refl_inv, NatTrans.id_app,
-    Category.id_comp, Category.comp_id, Quiver.Hom.unop_op]
+    Category.id_comp, Quiver.Hom.unop_op]
   dsimp only [opShiftFunctorEquivalence, shiftFunctorOpIso]
-  simp only [unop_comp, Quiver.Hom.unop_op, Category.comp_id,
+  simp only [unop_comp, Quiver.Hom.unop_op,
     Iso.trans_inv, NatTrans.comp_app, Functor.isoWhiskerLeft_inv,
     Functor.whiskerLeft_app, eqToIso_refl, Iso.refl_inv, NatTrans.id_app,
-    Category.comp_id, NatIso.op_inv, Iso.symm_inv, NatTrans.op_app,
+    NatIso.op_inv, Iso.symm_inv, NatTrans.op_app,
     Quiver.Hom.unop_op, HomologicalComplex.comp_f, CochainComplex.shiftFunctor_map_f',
-    SignedDoubleHomCone.Calculation.triangle_f, shiftFunctorCompIsoId,
-    CochainComplex.shiftFunctorAdd'_hom_app_f', CochainComplex.shiftFunctorZero_inv_app_f]
-  simp only [Category.comp_id, unop_comp, Quiver.Hom.unop_op,
-    Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, HomologicalComplex.comp_f,
-    CochainComplex.shiftFunctor_map_f', SignedDoubleHomCone.Calculation.triangle_f,
-    CochainComplex.shiftFunctorAdd'_inv_app_f', CochainComplex.shiftFunctorZero_hom_app_f,
-    CochainComplex.shiftFunctorZero_inv_app_f]
-  simp only [unop_id, HomologicalComplex.id_f, Category.id_comp, Category.comp_id,
-    Category.assoc, Preadditive.neg_comp,
-    HomologicalComplex.XIsoOfEq_hom_comp_XIsoOfEq_hom,
-    SignedDoubleHomCone.Calculation.fstX_reindex]
+    SignedDoubleHomCone.Calculation.triangle_f, shiftFunctorCompIsoId]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, HomologicalComplex.comp_f,
+    CochainComplex.shiftFunctorAdd'_inv_app_f', CochainComplex.shiftFunctorZero_hom_app_f]
+  simp only [Category.assoc, Preadditive.neg_comp,
+    HomologicalComplex.XIsoOfEq_hom_comp_XIsoOfEq_hom]
   change 𝟙 _ ≫ (-HomologicalComplex.homotopyCofiber.fstX f
     (p + -1) (p + -1 + 1) rfl ≫ 𝟙 _ ≫ 𝟙 _ ≫
       (E.XIsoOfEq (show p + -1 + 1 = p by omega)).hom ≫ 𝟙 _) = _
-  simp only [Category.id_comp, Category.comp_id, Category.assoc, Preadditive.neg_comp,
+  simp only [Category.id_comp, Category.comp_id,
     SignedDoubleHomCone.Calculation.fstX_reindex]
 
 end CategoryTheory.SignedDoubleHomCone.Calculation
@@ -501,11 +492,11 @@ private theorem contravariantComparison_shift
   erw [← hn] at hhm
   simp only [Functor.op_commShiftIso_hom_app Q (op E) n (-n) (by omega),
     shiftFunctorOpIso, eqToIso_refl, Iso.refl_hom, Iso.refl_inv, NatTrans.id_app,
-    unop_id, Functor.map_id, op_id, Category.id_comp, Category.comp_id] at hhm
-  simp only [Functor.op_map, Category.assoc, ← Functor.map_comp_assoc, ← Functor.map_comp,
+    unop_id] at hhm
+  simp only [Category.assoc, ← Functor.map_comp_assoc, ← Functor.map_comp,
     Pretriangulated.shiftFunctor_op_map eX.inv.op n (-n) (by omega),
     shiftFunctorOpIso, eqToIso_refl, Iso.refl_hom, Iso.refl_inv, NatTrans.id_app,
-    Category.id_comp, Category.comp_id, Quiver.Hom.unop_op, ← op_comp] at hhm
+    Category.id_comp, Quiver.Hom.unop_op] at hhm
   erw [Functor.map_id, op_id, Category.id_comp, Category.id_comp, Category.comp_id] at hhm
   simp only [← op_comp] at hhm
   convert hhm using 1 <;> rfl
@@ -566,19 +557,19 @@ private instance undoNegativeShiftCommShift {A : Type*} [Category A] [HasShift A
     ext X
     simp only [undoNegativeShiftIso, Functor.CommShift.isoZero_hom_app,
       Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom, Functor.rightUnitor_hom_app,
-      Functor.leftUnitor_inv_app, Category.id_comp, Category.comp_id]
+      Functor.leftUnitor_inv_app, Category.comp_id]
     change _ = (shiftFunctorZero (PullbackShift (PullbackShift A negInt) negInt) ℤ).hom.app X ≫
       (shiftFunctorZero A ℤ).inv.app X
     rw [pullbackShiftFunctorZero_hom_app (C := PullbackShift A negInt),
       pullbackShiftFunctorZero_hom_app (C := A)]
-    simp only [pullbackShiftIso, negInt, eqToIso_refl, Iso.refl_hom, Iso.refl_inv,
+    simp only [pullbackShiftIso, negInt, eqToIso_refl, Iso.refl_hom,
       NatTrans.id_app, Category.id_comp, Category.comp_id, Iso.hom_inv_id_app]
     rfl
   commShiftIso_add a b := by
     ext X
     simp only [undoNegativeShiftIso, Functor.CommShift.isoAdd_hom_app,
       Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom, Functor.rightUnitor_hom_app,
-      Functor.leftUnitor_inv_app, Category.id_comp, Category.comp_id]
+      Functor.leftUnitor_inv_app, Category.comp_id]
     change _ =
       (shiftFunctorAdd (PullbackShift (PullbackShift A negInt) negInt) a b).hom.app X ≫
         _ ≫ _ ≫ (shiftFunctorAdd A a b).inv.app X
@@ -609,7 +600,7 @@ private instance undoNegativeShiftCommShift {A : Type*} [Category A] [HasShift A
     simp only [Functor.map_id, Category.id_comp]
     rw [(e b).hom.naturality_assoc]
     simp only [Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app,
-      Functor.map_id, Category.id_comp, Iso.hom_inv_id_app_assoc, Category.comp_id]
+      Functor.map_id, Category.id_comp]
     rw [Iso.hom_inv_id_app, Category.comp_id]
 
 private abbrev convertedDual {A B : Type*} [Category A] [Category B]
@@ -680,25 +671,25 @@ attribute [local instance] triangulatedOrdinaryCommShift
 private theorem triangulatedOrdinaryCommShift_one (I E : Complex.{c, v, r} J R) :
     ((triangulatedOrdinaryDual.{c, v, r} J R I).commShiftIso (1 : ℤ)).hom.app (op E) =
       -(rawSourceIso.{c, v, r} J R I (-1)).hom.app (op E) := by
-  letI := ordinarySignedCommShift.{c, v, r} J R I
+  let := ordinarySignedCommShift.{c, v, r} J R I
   change ((convertedDualCommShift (A := Complex.{c, v, r} J R)
     (B := Complex.{c, v, r} J R) (ordinaryDual.{c, v, r} J R I)).commShiftIso
     (1 : ℤ)).hom.app (op E) = _
   rw [convertedDualCommShift_one]
   change ((1 : ℤ).negOnePow • rawSourceIso.{c, v, r} J R I (-1)).hom.app (op E) = _
-  simp only [Preadditive.smul_iso_hom, NatTrans.app_units_zsmul,
+  simp only [Preadditive.smul_iso_hom,
     Int.negOnePow_one, Units.neg_smul, one_smul, NatTrans.app_neg]
 
 private theorem triangulatedOrdinaryCommShift_neg_one (I E : Complex.{c, v, r} J R) :
     ((triangulatedOrdinaryDual.{c, v, r} J R I).commShiftIso (-1 : ℤ)).hom.app (op E) =
       (rawSourceIso.{c, v, r} J R I 1).hom.app (op E) := by
-  letI := ordinarySignedCommShift.{c, v, r} J R I
+  let := ordinarySignedCommShift.{c, v, r} J R I
   change ((convertedDualCommShift (A := Complex.{c, v, r} J R)
     (B := Complex.{c, v, r} J R) (ordinaryDual.{c, v, r} J R I)).commShiftIso
     (-1 : ℤ)).hom.app (op E) = _
   rw [convertedDualCommShift_neg_one]
   change ((0 : ℤ).negOnePow • rawSourceIso.{c, v, r} J R I 1).hom.app (op E) = _
-  simp only [Preadditive.smul_iso_hom, NatTrans.app_units_zsmul,
+  simp only [Preadditive.smul_iso_hom,
     Int.negOnePow_zero, one_smul]
 
 private instance ordinaryModuleBinaryBiproducts :
@@ -780,8 +771,8 @@ private theorem internalHomBoundary (I : Complex.{c, v, r} J R)
   simp only [SignedDoubleHomCone.Calculation.coneBeta,
     CochainComplex.HomComplex.Cocycle.mk_coe,
     SignedDoubleHomCone.Calculation.coneBetaCochain_v,
-    CochainComplex.shiftFunctorObjXIso, eqToIso_refl, Iso.refl_inv,
-    Category.comp_id, Linear.units_smul_comp, Linear.comp_units_smul,
+    CochainComplex.shiftFunctorObjXIso,
+    Linear.units_smul_comp, Linear.comp_units_smul,
     Int.negOnePow_neg, neg_one_mul, Int.reduceNeg]
   erw [SignedDoubleHomCone.Calculation.inA_proj (internalHomSpec.{c, v, r} J R) I f
     k (p + -1) p (p + k) (by omega) (by omega)]
@@ -856,8 +847,8 @@ private def dualComparison (I : Complex.{c, v, r} J R) [I.IsKInjective]
     have hn := (ordinaryComparison.{c, v, r, w} J R).naturality
       (Prod.mkHom f (𝟙 I))
     simp only [Functor.comp_map, Functor.prod_map, Functor.op_map, Functor.map_id,
-      ordinaryBifunctor, Functor.uncurry_obj_map, NatTrans.id_app,
-      Category.id_comp, Category.comp_id] at hn
+      ordinaryBifunctor, Functor.uncurry_obj_map,
+      Category.comp_id] at hn
     change DerivedCategory.Q.map ((ordinaryDual.{c, v, r} J R I).map f) ≫
         (ordinaryComparison.{c, v, r, w} J R).app (F, I) =
       (ordinaryComparison.{c, v, r, w} J R).app (E, I) ≫
@@ -888,9 +879,9 @@ private theorem dualComparison_shift (I : Complex.{c, v, r} J R) [I.IsKInjective
             (DerivedCategory.Q.commShiftIso (-n)).inv.app E).op eM.hom) ≫
         ((Prod.sectL _ M ⋙ derivedInternalHomOfUniverses.{c, v, r, w} J R).commShiftIso n).hom.app
           (op X) := by
-  letI := S
-  letI := hS
-  letI : (triangulatedOrdinaryDual.{c, v, r} J R I).CommShift ℤ :=
+  let := S
+  let := hS
+  let : (triangulatedOrdinaryDual.{c, v, r} J R I).CommShift ℤ :=
     triangulatedOrdinaryCommShift.{c, v, r} J R I
   let T := Prod.sectL _ M ⋙ derivedInternalHomOfUniverses.{c, v, r, w} J R
   have hh := contravariantComparison_shift DerivedCategory.Q
@@ -949,8 +940,8 @@ private theorem dualShiftDescent (I : Complex.{c, v, r} J R) [I.IsKInjective]
   let e := dualComparison.{c, v, r, w} J R I M eM
   let : Localization.Lifting Q.op W.op F T := ⟨e.symm⟩
   let S := Functor.commShiftOfLocalization Q.op W.op ℤ F T
-  letI := S
-  letI : NatTrans.CommShift e.inv ℤ :=
+  let := S
+  let : NatTrans.CommShift e.inv ℤ :=
     inferInstanceAs (NatTrans.CommShift (Localization.Lifting.iso Q.op W.op F T).hom ℤ)
   refine ⟨S, ?_⟩
   change NatTrans.CommShift e.hom ℤ
@@ -988,7 +979,7 @@ private theorem dualShift_normalized (I : Complex.{c, v, r} J R) [I.IsKInjective
       -(sourceShift.{c, v, r, w} J R X (-1)).inv.app M) ∧
     (∀ X, (T.commShiftIso (-1 : ℤ)).inv.app (op X) =
       (sourceShift.{c, v, r, w} J R X 1).hom.app M) := by
-  letI := S
+  let := S
   let Q : Complex.{c, v, r} J R ⥤ D.{c, v, r, w} J R := DerivedCategory.Q
   let T := Prod.sectL _ M ⋙ derivedInternalHomOfUniverses.{c, v, r, w} J R
   constructor <;> intro X
@@ -999,7 +990,7 @@ private theorem dualShift_normalized (I : Complex.{c, v, r} J R) [I.IsKInjective
       (derivedInternalHomOfUniverses.{c, v, r, w} J R).map
         (Prod.mkHom (((shiftFunctor _ (-1 : ℤ)).map eX.inv) ≫
           (Q.commShiftIso (-1 : ℤ)).inv.app E).op eM.hom)
-    letI : IsIso A := by
+    let : IsIso A := by
       convert representativeComparison_isIso.{c, v, r, w} J R I M (X⟦(-1 : ℤ)⟧)
         (E⟦(-1 : ℤ)⟧) eM eXS using 1
       rfl
@@ -1020,7 +1011,7 @@ private theorem dualShift_normalized (I : Complex.{c, v, r} J R) [I.IsKInjective
       (derivedInternalHomOfUniverses.{c, v, r, w} J R).map
         (Prod.mkHom (((shiftFunctor _ (1 : ℤ)).map eX.inv) ≫
           (Q.commShiftIso (1 : ℤ)).inv.app E).op eM.hom)
-    letI : IsIso A := by
+    let : IsIso A := by
       convert representativeComparison_isIso.{c, v, r, w} J R I M (X⟦(1 : ℤ)⟧)
         (E⟦(1 : ℤ)⟧) eM eXS using 1
       rfl
@@ -1045,8 +1036,8 @@ private theorem dualExactOfCone (I : Complex.{c, v, r} J R) [I.IsKInjective]
         (oppositeConeTriangle.{c, v, r} J R f))) :
     letI := S
     (Prod.sectL _ M ⋙ derivedInternalHomOfUniverses.{c, v, r, w} J R).IsTriangulated := by
-  letI := S
-  letI := hS
+  let := S
+  let := hS
   let T := Prod.sectL _ M ⋙ derivedInternalHomOfUniverses.{c, v, r, w} J R
   let F := triangulatedOrdinaryDual.{c, v, r} J R I
   let Q : Complex.{c, v, r} J R ⥤ D.{c, v, r, w} J R := DerivedCategory.Q
@@ -1099,15 +1090,15 @@ theorem signedDerivedInternalHom_exact (M : D.{c, v, r, w} J R) :
   let Q : Complex.{c, v, r} J R ⥤ D.{c, v, r, w} J R := DerivedCategory.Q
   let ι : CochainComplex.KInjectives (Modules.{c, v, r} J R) ⥤
       Complex.{c, v, r} J R := CochainComplex.KInjectives.ι
-  letI : Abelian.HasKInjectiveResolutions (Modules.{c, v, r} J R) :=
+  let : Abelian.HasKInjectiveResolutions (Modules.{c, v, r} J R) :=
     hasKInjectiveResolutions.{c, v, r} J R
-  letI : (ι ⋙ Q).EssSurj := kInjectiveQ_essSurj
+  let : (ι ⋙ Q).EssSurj := kInjectiveQ_essSurj
   let Z := (ι ⋙ Q).objPreimage M
   let I : Complex.{c, v, r} J R := Z.obj
-  letI : I.IsKInjective := Z.property
+  let : I.IsKInjective := Z.property
   let eM : DerivedCategory.Q.obj I ≅ M := (ι ⋙ Q).objObjPreimageIso M
   obtain ⟨S, hS⟩ := dualShiftDescent.{c, v, r, w} J R I M eM
-  letI := S
+  let := S
   obtain ⟨h₁, h₂⟩ := dualShift_normalized.{c, v, r, w} J R I M eM S hS
   refine ⟨S, ?_, h₁, h₂⟩
   exact dualExactOfCone.{c, v, r, w} J R I M eM S hS

@@ -29,14 +29,12 @@ namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
 variable {X : Scheme.{u}}
-  [HasDerivedCategory.{u} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
 attribute [local instance] cupRealizationMonoidalCategory cupRealizationSymmetricCategory
   globalPullbackMatesColimits cupRealizationMonoidalPreadditive cupRealizationMonoidalClosed
   cupRealizationHasFunctorialFlatResolution cupRealizationIsGrothendieckAbelian
   cupRealizationDerivedMonoidal cupRealizationQLax
 
-set_option linter.unusedSectionVars false in
 private theorem tensor_hom_ext {M N P : X.Modules} {a b : M ⊗ N ⟶ P}
     (h : ∀ (U : X.Opens) (s : Γ(M, U)) (t : Γ(N, U)),
       a.app U (tmulSection s t) = b.app U (tmulSection s t)) : a = b := by
@@ -49,7 +47,6 @@ private theorem tensor_hom_ext {M N P : X.Modules} {a b : M ⊗ N ⟶ P}
   intro s t
   exact h U.unop s t
 
-set_option linter.unusedSectionVars false in
 private theorem tensor_d (K L : CochainComplex
     (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (p q : ℤ) :
     HomologicalComplex.ιTensorObj K L p q (p + q) rfl ≫
@@ -68,7 +65,6 @@ private theorem tensor_d (K L : CochainComplex
       (show p + (q + 1) = p + q + 1 by omega)]
   simp
 
-set_option linter.unusedSectionVars false in
 private theorem app_zsmul_apply {A B : X.Modules}
     (n : ℤ) (f : A ⟶ B) (V : X.Opens) (z : Γ(A, V)) :
     (n • f).app V z = n • f.app V z := by
@@ -78,16 +74,13 @@ private theorem app_zsmul_apply {A B : X.Modules}
       map_add' := fun _ _ ↦ rfl }
   exact congrArg (fun f : Γ(A, V) →+ Γ(B, V) ↦ f z) (e.map_zsmul n f)
 
-set_option linter.unusedSectionVars false in
 private theorem app_val_apply {A B : X.Modules}
     (f : A ⟶ B) (V : X.Opens) (z : Γ(A, V)) :
     f.app V z = f.val.app (op V) z := rfl
 
-set_option linter.unusedSectionVars false in
 private theorem val_id_apply (A : X.Modules) (V : X.Opens) (z : Γ(A, V)) :
     (𝟙 A : A ⟶ A).val.app (op V) z = z := rfl
 
-set_option linter.unusedSectionVars false in
 private theorem extend_d_inv (K : CochainComplex X.Modules ℕ) (p : ℕ)
     (V : X.Opens) (a : Γ(K.X p, V)) :
     ((K.extend ComplexShape.embeddingUpNat).d (p : ℤ) (p + 1)).app V
@@ -103,7 +96,6 @@ private theorem extend_d_inv (K : CochainComplex X.Modules ℕ) (p : ℕ)
     simp
   exact congrArg (fun f ↦ f.app V a) h
 
-set_option linter.unusedSectionVars false in
 private theorem whiskerRight_val {M M' N :
     SheafOfModules.{u} (moduleRings X.toRingedSpace)} (f : M ⟶ M')
     (V : X.Opens) (s : Γ(M, V)) (t : Γ(N, V)) :
@@ -111,7 +103,6 @@ private theorem whiskerRight_val {M M' N :
       tmulSection (f.val.app (op V) s) t := by
   exact whiskerRight_app_tmulSection (X := X) f s t
 
-set_option linter.unusedSectionVars false in
 private theorem whiskerLeft_val {M N N' :
     SheafOfModules.{u} (moduleRings X.toRingedSpace)} (g : N ⟶ N')
     (V : X.Opens) (s : Γ(M, V)) (t : Γ(N, V)) :

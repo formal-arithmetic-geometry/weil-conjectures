@@ -371,8 +371,6 @@ theorem isConstructible_preimage_comap {R S : Type*} [CommRing R] [CommRing S]
     ← Ideal.map]
   exact isRetrocompact_zeroLocus_compl_of_fg (Ideal.FG.map (IsNoetherian.noetherian I) f)
 
--- the `simp [Θ]` below unfolds the pushout map, which `simp only` does not reproduce
-set_option linter.flexible false in
 /-- **Base change of a closed piece of a fibre** (Stacks `04KV`). Let `B = A ⊗[R] B₀` and let
 `s₀` be a section of `B₀` over `R` with `s₀ c = 0`. If the part `V(c)` of the fibre of
 `Spec B₀ → Spec R` over `p₀ = p ∩ R` is connected, then the part `V(c)` of the fibre of
@@ -466,9 +464,9 @@ theorem isPreconnected_preimage_inter_preimage_zeroLocus_of_isPushout
     · rintro ⟨P, rfl⟩
       refine ⟨?_, ?_⟩
       · ext x
-        simp [Θ]
-        rw [← Algebra.TensorProduct.includeLeft_apply (S := R), hunit,
-          Ideal.algebraMap_residueField_eq_zero]
+        simp only [Θ, AlgHom.toRingHom_eq_coe, comap_asIdeal, Ideal.mem_comap, RingHom.coe_coe,
+          Algebra.pushoutDesc_left, AlgHom.comp_apply, IsScalarTower.coe_toAlgHom']
+        rw [hunit, Ideal.algebraMap_residueField_eq_zero]
       · simp [Θ, J]
   rw [hset]
   exact isPreconnected_range (continuous_comap _)

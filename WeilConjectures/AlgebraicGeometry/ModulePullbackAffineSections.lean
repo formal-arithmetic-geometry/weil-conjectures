@@ -38,8 +38,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
--- The instance lambda uses G through the inferred section-module type.
-set_option linter.unusedVariables.funArgs false in
 /-- The affine sections comparison is a bijective linear map, linear also for the action
 of `B` on the second tensor factor, with its canonical pure-tensor formula and naturality.
 The `B`-action on `G(V) ⊗[A] B` is written by swapping to `B ⊗[A] G(V)`, applying the usual
@@ -49,7 +47,7 @@ theorem exists_tensorPullback_affine_sections
     (hUV : U.1 ≤ f ⁻¹ᵁ V.1) :
     letI : Algebra Γ(Y, V.1) Γ(X, U.1) := (f.appLE V.1 U.1 hUV).hom.toAlgebra
     letI : ∀ G : Y.Modules, Module Γ(Y, V.1) Γ((tensorPullback f).obj G, U.1) :=
-      fun G ↦ Module.compHom _ (f.appLE V.1 U.1 hUV).hom
+      fun _G ↦ Module.compHom _ (f.appLE V.1 U.1 hUV).hom
     ∃ c : ∀ (G : Y.Modules) (_ : G.IsQuasicoherent),
       (Γ(G, V.1) ⊗[Γ(Y, V.1)] Γ(X, U.1)) →ₗ[Γ(Y, V.1)]
         Γ((tensorPullback f).obj G, U.1),

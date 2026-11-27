@@ -74,7 +74,6 @@ private theorem cokernel_map_apply
 set_option backward.isDefEq.respectTransparency false in
 -- The dependent first-page and graded-class witnesses are elaborated together.
 set_option maxRecDepth 1000000 in
-set_option linter.unusedVariables false in
 /-- Functorial hypercohomology pages identify image-filtration classes with stable pages.
 (Stacks, Tags 015J and 0EZM). -/
 theorem exists_etaleComplexFiltrationPageData
@@ -152,20 +151,20 @@ theorem exists_etaleComplexFiltrationPageData
       (E' : SpectralSequence AddCommGrpCat.{u + 1}
       (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1)
       (v : ∀ i : Iᵒᵖ, E.obj i ⟶ E')
-      (compatible : ∀ {i j : Iᵒᵖ} (f : i ⟶ j), E.map f ≫ v j = v i)
+      (_compatible : ∀ {i j : Iᵒᵖ} (f : i ⟶ j), E.map f ≫ v j = v i)
       (firstIso : ∀ (i : I) (r : ℕ) (s : ℤ),
       ((E.obj (op i)).page 1 (le_refl 1)).X ⟨(r : ℤ), s⟩ ≅ AddCommGrpCat.of (Sheaf.H ((F i).X s) r))
       (firstIsoLimit : ∀ (r : ℕ) (s : ℤ),
       (E'.page 1 (le_refl 1)).X ⟨(r : ℤ), s⟩ ≅ AddCommGrpCat.of (Sheaf.H (L.pt.X s) r))
-      (first_transition : ∀ (i j : I) (f : j ⟶ i) (r : ℕ) (s : ℤ),
+      (_first_transition : ∀ (i j : I) (f : j ⟶ i) (r : ℕ) (s : ℤ),
       ((E.map f.op).hom 1 (le_refl 1)).f ⟨(r : ℤ), s⟩ ≫ (firstIso j r s).hom =
         (firstIso i r s).hom ≫ complexTermCohomologyMap (D.map f) (F i) (F j) (φ f) r s)
-      (first_comparison : ∀ (i : I) (r : ℕ) (s : ℤ),
+      (_first_comparison : ∀ (i : I) (r : ℕ) (s : ℤ),
       ((v (op i)).hom 1 (le_refl 1)).f ⟨(r : ℤ), s⟩ ≫ (firstIsoLimit r s).hom =
         (firstIso i r s).hom ≫ complexTermCohomologyMap (c.π.app i) (F i) L.pt
           ((eG i).inv ≫ L.ι.app (op i)) r s)
-      (negative : ∀ (i : Iᵒᵖ) (r s : ℤ), r < 0 → IsZero (((E.obj i).page 1 (le_refl 1)).X ⟨r, s⟩))
-      (negativeLimit : ∀ r s : ℤ, r < 0 → IsZero ((E'.page 1 (le_refl 1)).X ⟨r, s⟩))
+      (_negative : ∀ (i : Iᵒᵖ) (r s : ℤ), r < 0 → IsZero (((E.obj i).page 1 (le_refl 1)).X ⟨r, s⟩))
+      (_negativeLimit : ∀ r s : ℤ, r < 0 → IsZero ((E'.page 1 (le_refl 1)).X ⟨r, s⟩))
       (N : ℤ)
       (one_le : 1 ≤ N)
       (classMap : ∀ (i : I) (x : H.obj (op i)),
@@ -175,11 +174,11 @@ theorem exists_etaleComplexFiltrationPageData
       InEtaleHypercohomologyFiltration (D.obj i) (F i) p q ((eH i).hom x) →
         InEtaleHypercohomologyFiltration (D.obj j) (F j) p q
           ((eH j).hom (H.map f.op x)))
-      (class_transition : ∀ (i j : I) (f : j ⟶ i) (x : H.obj (op i))
+      (_class_transition : ∀ (i j : I) (f : j ⟶ i) (x : H.obj (op i))
       (hx : InEtaleHypercohomologyFiltration (D.obj i) (F i) p q ((eH i).hom x)),
       (((E.map f.op).hom N one_le).f ⟨p - q, q⟩) (classMap i x hx) =
         classMap j (H.map f.op x) (transition_mem i j f x hx))
-      (class_eq_zero_iff : ∀ (i : I) (x : H.obj (op i))
+      (_class_eq_zero_iff : ∀ (i : I) (x : H.obj (op i))
       (hx : InEtaleHypercohomologyFiltration (D.obj i) (F i) p q ((eH i).hom x)),
       classMap i x hx = 0 ↔
         InEtaleHypercohomologyFiltration (D.obj i) (F i) p (q + 1) ((eH i).hom x))

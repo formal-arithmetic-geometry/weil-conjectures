@@ -59,7 +59,6 @@ noncomputable local instance ordinarySummandProjectionSchemePreadditive (Y : Sch
 attribute [local irreducible] homComplexFunctor Scheme.Modules.overEquiv
   Scheme.Modules.overEquivFunctorObjUnitIso HomologicalComplex.singleMapHomologicalComplex
 
-set_option linter.unusedVariables false in
 /-- Transport of one tensor summand followed by one Hom projection (Stacks, Tag 0A8X). -/
 theorem ordinaryEvaluation_transport_summand_projection (X : Scheme.{u}) (U : X.Opens)
     (P : CochainComplex (localEvaluationModules X U) ℤ) :
@@ -80,7 +79,7 @@ theorem ordinaryEvaluation_transport_summand_projection (X : Scheme.{u}) (U : X.
         homComplex (R := U.toScheme.sheaf)
           (T.obj P)
           (T.obj M))
-    (hπ : ∀ (M : CochainComplex (localEvaluationModules X U) ℤ)
+    (_hπ : ∀ (M : CochainComplex (localEvaluationModules X U) ℤ)
           (n r s : ℤ) (h : r + n = s),
         (b M).hom.f n ≫
             (Classical.choose (homComplex_projections_exists.{u, u, u, u} (R := U.toScheme.sheaf)))

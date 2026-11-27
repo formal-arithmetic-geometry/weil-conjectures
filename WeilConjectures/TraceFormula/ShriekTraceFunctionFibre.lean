@@ -171,6 +171,7 @@ lemma WeilBoundedConstructible.trace_stalkFrobenius_one [IsSepClosed k]
     trace (K.stalkFrobenius 1 x hx) = trace ((weilStalk ℓ Φ x hx').obj K).frobenius.hom := by
   rw [K.stalkFrobenius_one x hx hx']
 
+-- Removing the overlapping instance hypotheses would change the statement.
 set_option linter.overlappingInstances false in
 /-- The global operator `F_{c,1}` of degree one is the compactly supported Frobenius. -/
 lemma WeilBoundedConstructible.globalOperator_one (K : WeilBoundedConstructible ℓ Φ)
@@ -306,6 +307,7 @@ lemma trace_weilStalk_frobenius_congr {Ω : Type u} [Field Ω] [IsSepClosed Ω]
   rfl
 
 -- the carriers of the Weil objects are compared up to unfolding
+-- Removing the overlapping instance hypotheses would change the statement.
 set_option linter.overlappingInstances false in
 include hZ in
 /-- **The sheaf–function compatibility at a point from the trace formula on its geometric

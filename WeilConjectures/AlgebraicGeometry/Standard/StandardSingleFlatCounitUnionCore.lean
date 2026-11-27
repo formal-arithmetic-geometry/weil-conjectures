@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.BoundedAboveModelFlatReplacement
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
@@ -43,10 +42,10 @@ theorem standardSingleFlatCounitUnionCore
       Nonempty (((schemeDerivedDirectImage ((U ⊔ V).ι ≫ p)).obj
           ((DerivedCategory.singleFunctor _ 0).obj N) ≅
           DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj K))) := by
-  letI := fun X : Scheme.{u} ↦ HasDerivedCategory.standard
+  let := fun X : Scheme.{u} ↦ HasDerivedCategory.standard
     (SheafOfModules.{u} (moduleRings X.toRingedSpace))
-  letI := HasDerivedCategory.standard A.Modules
-  letI := HasDerivedCategory.standard B.Modules
+  let := HasDerivedCategory.standard A.Modules
+  let := HasDerivedCategory.standard B.Modules
   obtain ⟨K, hbound, hiso⟩ := exists_boundedAbove_union_model p g U V N hN hPU hPV hPUV
   obtain ⟨K', hbound', hflat', hiso'⟩ :=
     exists_flat_model_of_boundedAbove_model

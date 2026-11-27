@@ -184,7 +184,6 @@ private theorem extend_stratification {U V Z : Scheme.{u}} [IsNoetherian V]
     | none => exact h₀
     | some a => exact hS a
 
-set_option linter.unusedVariables false in
 /-- Open extension preserves bounded finite-torsion constructibility and each supplied
 cohomological interval. -/
 theorem open_finite_constructibility_interval
@@ -196,9 +195,9 @@ theorem open_finite_constructibility_interval
     (C : proEtaleDerivedCategory U (Padic.coefficientExtensionRing l E n))
     (_hC : intrinsicFiniteTorsionConstructible l E n hn U C)
     (_hC_support : proEtaleCohomologicalSupport C ⊆ Set.Icc a b) :
-    (fun [hfin : Finite (Padic.coefficientExtensionRing l E n)]
-      [hU : (ProEt.topology U).WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
-      [hV : (ProEt.topology V).WEqualsLocallyBijective AddCommGrpCat.{u + 1}] ↦
+    (fun [_hfin : Finite (Padic.coefficientExtensionRing l E n)]
+      [_hU : (ProEt.topology U).WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
+      [_hV : (ProEt.topology V).WEqualsLocallyBijective AddCommGrpCat.{u + 1}] ↦
       intrinsicFiniteTorsionConstructible l E n hn V
         ((sfIntrinsicExtensionByZero j
           (Padic.coefficientExtensionRing l E n)).mapDerivedCategory.obj
@@ -279,9 +278,9 @@ theorem open_finite_constructibility_interval
                     ((sfIntrinsicExtensionByZero j
                       (Padic.coefficientExtensionRing l E n)).mapDerivedCategory.obj
                     C)))))
-      (hfin := Padic.finite_coefficientExtensionRing l E n hn)
-      (hU := WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} U)
-      (hV := WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} V) := by
+      (_hfin := Padic.finite_coefficientExtensionRing l E n hn)
+      (_hU := WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} U)
+      (_hV := WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} V) := by
   let : (ProEt.topology U).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
     WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} U
   let : (ProEt.topology V).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=

@@ -25,7 +25,6 @@ universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry.Scheme
 
-set_option linter.unusedVariables false in
 /-- The canonical pullback stalk comparison commutes with endomorphisms that change
 represented lifts by the same endomorphism of the geometric point. -/
 theorem exists_etale_pullback_stalk_germ_action
@@ -42,14 +41,14 @@ theorem exists_etale_pullback_stalk_germ_action
         ((Etale.upperStar AddCommGrpCat.{u + 1} f).obj M)))
     (b : (pointSmallEtale t).sheafFiber.obj M ⟶
       (pointSmallEtale t).sheafFiber.obj M)
-    (ha : ∀ (U : X.Etale) (x x' : (pointSmallEtale s).fiber.obj U)
+    (_ha : ∀ (U : X.Etale) (x x' : (pointSmallEtale s).fiber.obj U)
       (_hx : x'.left = τ ≫ x.left)
       (z : ((Etale.upperStar AddCommGrpCat.{u + 1} f).obj M).obj.obj (op U)),
       a ((pointSmallEtale s).toPresheafFiber U x
         ((Etale.upperStar AddCommGrpCat.{u + 1} f).obj M).obj z) =
       (pointSmallEtale s).toPresheafFiber U x'
         ((Etale.upperStar AddCommGrpCat.{u + 1} f).obj M).obj z)
-    (hb : ∀ (U : Y.Etale) (x x' : (pointSmallEtale t).fiber.obj U)
+    (_hb : ∀ (U : Y.Etale) (x x' : (pointSmallEtale t).fiber.obj U)
       (_hx : x'.left = τ ≫ x.left) (z : M.obj.obj (op U)),
       b ((pointSmallEtale t).toPresheafFiber U x M.obj z) =
       (pointSmallEtale t).toPresheafFiber U x' M.obj z),

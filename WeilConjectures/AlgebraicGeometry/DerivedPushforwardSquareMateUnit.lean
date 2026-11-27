@@ -65,7 +65,6 @@ attribute [local irreducible] schemeNormalizedDirectImageCompIso
 private theorem canonical_adjoint_eq {A B : Scheme.{u}} (h : A ⟶ B) :
     canonicalPullbackAdjunction.{u, w} h = schemeHomPullbackAdjunction.{u, w} h := rfl
 
-set_option linter.all false in
 private theorem canonical_conjugate_eq {A B C D : Scheme.{u}}
     (s : A ⟶ B) (t : B ⟶ D) (q : A ⟶ C) (r : C ⟶ D)
     (κ : derivedPullback r ⋙ derivedPullback q ⟶ derivedPullback t ⋙ derivedPullback s) :
@@ -77,8 +76,6 @@ private theorem canonical_conjugate_eq {A B C D : Scheme.{u}}
     (congrArg₂ (fun a b ↦ a.comp b) (canonical_adjoint_eq t) (canonical_adjoint_eq s))
     (congrArg₂ (fun a b ↦ a.comp b) (canonical_adjoint_eq r) (canonical_adjoint_eq q))
 
--- Avoid linting the large chosen adjunction/comparison data again after kernel checking.
-set_option linter.all false in
 -- Matching the canonical composition choices expands derived-functor instance data.
 /-- The sheaf-level unit equation for the square conjugate (Stacks, Tags 08HY and 0D5T). -/
 theorem exists_derivedPushforwardSquareMateUnit

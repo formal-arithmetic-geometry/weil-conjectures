@@ -23,7 +23,6 @@ universe uNatural
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 -- Elaborate the dependent normalized page and CE comparison families together.
 /-- Prescribed normalized CE presentations compute pullback on individual cycle
@@ -31,7 +30,7 @@ representatives. This does not identify any supplied first-page map
 (Stacks, Tags 015J, 015K, 012K and 06XR). -/
 theorem exists_etaleCE_normalized_representative_cohomology
     (I : ∀ (X : Scheme.{uNatural})
-      (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),
+      (_K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),
       HomologicalComplex₂ (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})
         (ComplexShape.up ℤ) (ComplexShape.up ℕ))
     (a : ∀ (X : Scheme.{uNatural})
@@ -66,7 +65,7 @@ theorem exists_etaleCE_normalized_representative_cohomology
         EtaleTermwiseHypercohomology X K)
       (δ : ∀ (X : Scheme.{uNatural})
         (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))
-        (r : ℤ) (hr : 1 ≤ r),
+        (r : ℤ) (_hr : 1 ≤ r),
         FilteredComplexPageDifferential (P X K).sectionsTotal (P X K).L r)
       (j : ∀ (X : Scheme.{uNatural})
         (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))
@@ -93,7 +92,7 @@ theorem exists_etaleCE_normalized_representative_cohomology
       let D' := P Y L
       ∀ (φ : (((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex
       (ComplexShape.up ℕ)).mapHomologicalComplex (ComplexShape.up ℤ)).obj D.I ⟶ D'.I)
-    (hφ : ∀ q : ℤ,
+    (_hφ : ∀ q : ℤ,
       (upperStar AddCommGrpCat.{uNatural + 1} f).map
           ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 (K.obj.X q)).inv ≫
             (D.a.f q).f 0) ≫ (φ.f q).f 0 =
@@ -102,7 +101,7 @@ theorem exists_etaleCE_normalized_representative_cohomology
             (D'.a.f q).f 0)
     (u : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex
       (ComplexShape.up ℤ)).obj D.sheafTotal ⟶ D'.sheafTotal)
-    (hu : ∀ (m : ℕ) (q n : ℤ) (h : (m : ℤ) + q = n),
+    (_hu : ∀ (m : ℕ) (q n : ℤ) (h : (m : ℤ) + q = n),
         (upperStar AddCommGrpCat.{uNatural + 1} f).map
             ((HomologicalComplex.extendXIso
               (((𝟭 (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})).mapHomologicalComplex

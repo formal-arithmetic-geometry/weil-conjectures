@@ -29,7 +29,6 @@ property and the canonical tensor pullback.
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 
@@ -55,14 +54,14 @@ theorem reduction_normalization_exists
       (integralCoefficientCommRingSheaf l E Y n)) :
     Nonempty {m : ReductionPresentation l E Y D hl a n //
       m.target = target} := by
-  letI : HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
+  let : HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
       AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbSheafify.{t, u} Y
-  letI : (AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
+  let : (AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
       AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbLocallyBijective.{t, u} Y
-  letI : EssentiallySmall.{max u (t + 1)} Y.ProEt := essentiallySmallSelf _
-  letI : HasDerivedCategory (Modules.{t, u} Y
+  let : EssentiallySmall.{max u (t + 1)} Y.ProEt := essentiallySmallSelf _
+  let : HasDerivedCategory (Modules.{t, u} Y
       (completedIntegralCommRingSheaf l E Y D hl)) := HasDerivedCategory.standard _
-  letI : HasDerivedCategory (Modules.{t, u} Y
+  let : HasDerivedCategory (Modules.{t, u} Y
       (integralCoefficientCommRingSheaf l E Y n)) := HasDerivedCategory.standard _
   obtain ⟨mu, hmu⟩ := @reduction_normalization_data_exists l _ E _ _ _ Y D hl
     (essentiallySmallSelf _) (integralCoefficientAbSheafify Y)

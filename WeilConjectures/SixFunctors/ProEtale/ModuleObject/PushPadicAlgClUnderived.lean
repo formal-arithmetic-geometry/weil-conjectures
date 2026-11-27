@@ -85,8 +85,7 @@ lemma comp_comapLowerStarIso_inv_app_hom (c : Λ₁ ⟶ Λ₂) [IsMonHom c]
   rw [comapLowerStarIso_inv_app_hom f c N]
   exact Category.comp_id g
 
-set_option linter.unusedSectionVars false in
--- Omitting `[IsCommMonObj Λ₁]` makes the elaboration of the proof time out.
+omit [IsCommMonObj Λ₁] [IsCommMonObj Λ₂] in
 /-- (Push) is compatible with the change of target ring: for `a = b ≫ c`, the composite
 `Λ₁,Y ⊗ f_* M ⟶ Λ₂,Y ⊗ f_* M ⟶ f_*(Λ₂,X ⊗ M)` is
 `Λ₁,Y ⊗ f_* M ⟶ f_*(Λ₁,X ⊗ M) ⟶ f_*(Λ₂,X ⊗ M)`. -/

@@ -97,7 +97,6 @@ private theorem normalization_cartesian_of_isIso
     IsPullback.of_iso_pullback ?_ E rfl hE⟩
   exact ⟨by rw [Category.assoc, pullback.condition, ← Category.assoc, hE]⟩
 
-set_option linter.unusedVariables false in
 /-- The normalization of the DVR root cover is the coefficient-localized normalization. -/
 theorem root_cover_normalization_cartesian
     {L U : Scheme.{u}} (i : U ⟶ L)

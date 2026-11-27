@@ -196,7 +196,7 @@ private noncomputable def unitSection (U : Eᵒᵖ) :
       ((sheafCompose H (forget₂ CommRingCat.{w} RingCat.{w})).obj A))).val.obj U :=
   LinearEquiv.refl _ _
 
-set_option linter.unusedSectionVars false in
+omit [H.WEqualsLocallyBijective AddCommGrpCat] [HasWeakSheafify H AddCommGrpCat] in
 private theorem unitSection_smul_one (U : Eᵒᵖ)
     (x : (𝟙_ (SheafOfModules.{w}
       ((sheafCompose H (forget₂ CommRingCat.{w} RingCat.{w})).obj A))).val.obj U) :
@@ -205,7 +205,7 @@ private theorem unitSection_smul_one (U : Eᵒᵖ)
   rw [smul_eq_mul, mul_one] at h
   exact h.symm.trans ((unitSection A U).apply_symm_apply x)
 
-set_option linter.unusedSectionVars false in
+omit [H.WEqualsLocallyBijective AddCommGrpCat] [HasWeakSheafify H AddCommGrpCat] in
 private theorem unit_hom_ext_one
     (M : SheafOfModules.{w}
       ((sheafCompose H (forget₂ CommRingCat.{w} RingCat.{w})).obj A))
@@ -229,7 +229,7 @@ private noncomputable def pureMap (M N : SheafOfModules.{w}
     (x : M.val.obj U) (y : N.val.obj U) : (M ⊗ N).val.obj U :=
   CochainScalarConstruction.pure A M N U x y
 
-set_option linter.unusedSectionVars false in
+omit [H.WEqualsLocallyBijective AddCommGrpCat] [HasWeakSheafify H AddCommGrpCat] in
 private theorem pureLinearMap_apply (M N : SheafOfModules.{w}
     ((sheafCompose H (forget₂ CommRingCat.{w} RingCat.{w})).obj A)) (U : Eᵒᵖ)
     (x : M.val.obj U) (y : N.val.obj U) :
@@ -244,7 +244,7 @@ private theorem pureMap_eq (M N : SheafOfModules.{w}
           (M.val ⊗ N.val)).app U (x ⊗ₜ[A.obj.obj U] y)) := by
   rfl
 
-set_option linter.unusedSectionVars false in
+omit [H.WEqualsLocallyBijective AddCommGrpCat] [HasWeakSheafify H AddCommGrpCat] in
 private theorem pureMap_restrict (M N : SheafOfModules.{w}
     ((sheafCompose H (forget₂ CommRingCat.{w} RingCat.{w})).obj A))
     {U V : Eᵒᵖ} (f : U ⟶ V) (x : M.val.obj U) (y : N.val.obj U) :
@@ -252,7 +252,7 @@ private theorem pureMap_restrict (M N : SheafOfModules.{w}
       (M ⊗ N).val.map f (pureMap A M N U x y) := by
   exact (CategoryTheory.CochainPullback.moduleTmul_restrict M N f x y).symm
 
-set_option linter.unusedSectionVars false in
+omit [H.WEqualsLocallyBijective AddCommGrpCat] [HasWeakSheafify H AddCommGrpCat] in
 private theorem pureMap_naturality
     {M M' N N' : SheafOfModules.{w}
       ((sheafCompose H (forget₂ CommRingCat.{w} RingCat.{w})).obj A)}
@@ -262,7 +262,7 @@ private theorem pureMap_naturality
       pureMap A M' N' U (f.val.app U x) (g.val.app U y) := by
   exact CategoryTheory.CochainPullback.moduleTmul_map f g U x y
 
-set_option linter.unusedSectionVars false in
+omit [H.WEqualsLocallyBijective AddCommGrpCat] [HasWeakSheafify H AddCommGrpCat] in
 private theorem pureMap_associator (M N T : SheafOfModules.{w}
     ((sheafCompose H (forget₂ CommRingCat.{w} RingCat.{w})).obj A))
     (U : Eᵒᵖ) (x : M.val.obj U) (y : N.val.obj U) (z : T.val.obj U) :
@@ -271,7 +271,7 @@ private theorem pureMap_associator (M N T : SheafOfModules.{w}
         pureMap A M (N ⊗ T) U x (pureMap A N T U y z) := by
   exact CategoryTheory.CochainPullback.moduleTmul_associator M N T U x y z
 
-set_option linter.unusedSectionVars false in
+omit [H.WEqualsLocallyBijective AddCommGrpCat] [HasWeakSheafify H AddCommGrpCat] in
 private theorem pureMap_rightUnitor (M : SheafOfModules.{w}
     ((sheafCompose H (forget₂ CommRingCat.{w} RingCat.{w})).obj A))
     (U : Eᵒᵖ) (x : M.val.obj U)
@@ -281,6 +281,7 @@ private theorem pureMap_rightUnitor (M : SheafOfModules.{w}
       (unitSection A U).symm r • x := by
   exact CochainTensorComparison.UnitConstruction.unitor_pure A M U x r
 
+omit [H.WEqualsLocallyBijective AddCommGrpCat] [HasWeakSheafify H AddCommGrpCat] in
 private theorem pureMap_leftUnitor (M : SheafOfModules.{w}
     ((sheafCompose H (forget₂ CommRingCat.{w} RingCat.{w})).obj A))
     (U : Eᵒᵖ) (r : (𝟙_ (SheafOfModules.{w}
@@ -297,6 +298,7 @@ private theorem pureMap_leftUnitor (M : SheafOfModules.{w}
       CategoryTheory.CochainPullback.moduleTmul_braiding (𝟙_ _) M U r x] at he
   exact he.symm.trans (pureMap_rightUnitor A M U x r)
 
+omit [H.WEqualsLocallyBijective AddCommGrpCat] [HasWeakSheafify H AddCommGrpCat] in
 private theorem pureMap_leftUnitor_one (M : SheafOfModules.{w}
     ((sheafCompose H (forget₂ CommRingCat.{w} RingCat.{w})).obj A))
     (U : Eᵒᵖ) (x : M.val.obj U) :
@@ -304,6 +306,7 @@ private theorem pureMap_leftUnitor_one (M : SheafOfModules.{w}
   exact (pureMap_leftUnitor A M U (unitSection A U 1) x).trans (by
     rw [LinearEquiv.symm_apply_apply, one_smul])
 
+omit [H.WEqualsLocallyBijective AddCommGrpCat] [HasWeakSheafify H AddCommGrpCat] in
 private theorem pureMap_leftUnitor_regular (U : Eᵒᵖ)
     (r : (𝟙_ (SheafOfModules.{w}
       ((sheafCompose H (forget₂ CommRingCat.{w} RingCat.{w})).obj A))).val.obj U) :
@@ -329,7 +332,8 @@ private theorem pureMap_ext
   intro U x y
   simpa only [pureMap_eq, CochainScalarConstruction.pure] using h U x y
 
-set_option linter.unusedSectionVars false in
+omit [EssentiallySmall.{w, vC, uC} E] [H.WEqualsLocallyBijective AddCommGrpCat]
+    [HasWeakSheafify H AddCommGrpCat] in
 private theorem presheaf_tensor_ext₃
     (P Q T Z : PresheafOfModules.{w}
       ((sheafCompose H (forget₂ CommRingCat.{w} RingCat.{w})).obj A).obj)
@@ -467,7 +471,8 @@ private theorem sectionTensorData
     unit_ext := unit_hom_ext_one A
     left_one := pureMap_leftUnitor_one A }
 
-set_option linter.unusedSectionVars false in
+omit [J.WEqualsLocallyBijective AddCommGrpCat] [K.WEqualsLocallyBijective AddCommGrpCat]
+    [HasWeakSheafify J AddCommGrpCat] [HasWeakSheafify K AddCommGrpCat] in
 private theorem unitTo_section (U : Cᵒᵖ)
     (r : (𝟙_ (SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R))).val.obj U) :
@@ -487,6 +492,7 @@ private noncomputable def sectionPushOperations
   mu := μ
   one := fun U ↦ unitSection S (v.op.obj U) 1
 
+omit [K.WEqualsLocallyBijective AddCommGrpCat] [HasWeakSheafify K AddCommGrpCat] in
 private theorem sectionPushData
     (μ : ∀ M N, (pushforward c).obj M ⊗ (pushforward c).obj N ⟶
       (pushforward c).obj (M ⊗ N))
@@ -522,7 +528,8 @@ private theorem sectionPushData
         exact congrArg (unitSection S (v.op.obj U)) (c.hom.app U).hom.map_one
       regular := fun U r ↦ pureMap_leftUnitor_regular S (v.op.obj U) r }
 
-set_option linter.unusedSectionVars false in
+omit [J.HasSheafCompose (forget₂ CommRingCat RingCat)] [K.WEqualsLocallyBijective AddCommGrpCat]
+    [HasWeakSheafify K AddCommGrpCat] in
 private theorem tensorator_exists :
     ∃ μ : ∀ (M N : ringedSiteModules.{w}
         ((sheafCompose K (forget₂ CommRingCat.{w} RingCat.{w})).obj S)),

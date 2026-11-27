@@ -189,7 +189,6 @@ private theorem uniformizer_ne_zero (l : ℕ) [Fact l.Prime] (E : Type u) [Field
   apply hm
   rw [← hgen, h0, Ideal.span_singleton_eq_bot]
 
-set_option linter.unusedVariables false in
 /-- The standard ℓ-adic and finite-extension quotient modules are represented by the
 corresponding two-term finite-free complexes and are finite as sets.
 -/
@@ -202,7 +201,7 @@ theorem standard_quotients_perfect
             ((Ideal.span ({(l : PadicInt l)} : Set (PadicInt l))) ^ n)).toRingHom =
         PadicInt.toZModPow n ∧
       ∃ (P : CochainComplex (ModuleCat (PadicInt l)) ℤ)
-      (hPge : P.IsStrictlyGE (-1)) (hPle : P.IsStrictlyLE 0),
+      (_hPge : P.IsStrictlyGE (-1)) (_hPle : P.IsStrictlyLE 0),
       (∀ i : ℤ, Module.Free (PadicInt l) (P.X i) ∧
         Module.Finite (PadicInt l) (P.X i)) ∧
       DerivedCategory.IsPerfectRingComplex
@@ -233,7 +232,7 @@ theorem standard_quotients_perfect
       [FiniteDimensional (Padic l) E],
       ∃ (P : CochainComplex
           (ModuleCat (Padic.coefficientExtensionIntegers l E)) ℤ)
-        (hPge : P.IsStrictlyGE (-1)) (hPle : P.IsStrictlyLE 0),
+        (_hPge : P.IsStrictlyGE (-1)) (_hPle : P.IsStrictlyLE 0),
         (∀ i : ℤ,
           Module.Free (Padic.coefficientExtensionIntegers l E) (P.X i) ∧
             Module.Finite (Padic.coefficientExtensionIntegers l E) (P.X i)) ∧

@@ -29,14 +29,6 @@ scalar-multiplication unit. All complexes and derived inputs are unbounded.
 -/
 
 @[expose] public noncomputable section
-set_option linter.all false
-set_option linter.mathlibStandardSet false
-set_option linter.unusedSectionVars false
-set_option linter.style.haveILetI false
-set_option linter.unusedSimpArgs false
-set_option linter.unusedVariables false
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 set_option autoImplicit false
 set_option backward.defeqAttrib.useBackward true
 set_option synthInstance.maxSize 2048
@@ -406,14 +398,14 @@ private theorem actualComparisonIso_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
     (tensorComparison Λ Y) (tensorComparison Λ X) (derivedPullComparison Λ f)
     (internalTensorIso Λ f) M N
   simp only [internalTensorIso_hom] at h
-  convert! h using 1 <;> rfl
+  convert! h using 1
 
 private theorem totalPullComparison_eq {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (modules Λ Y) ℤ) :
     totalPullComparison Λ f P Q = (sectionTotalIso Λ f P Q).hom := by
   rw [sectionTotalIso_hom]
   unfold totalPullComparison
-  simp only [eqToHom_refl, Functor.map_id, Category.id_comp, Category.comp_id]
+  simp only
 
 attribute [local irreducible] normalizationDerivedRegularUnit normalizationDerivedSectionUnit
   normalizationDerivedInternalUnit normalizationDerivedInternalMu
@@ -432,7 +424,8 @@ private theorem representative_equation {X Y : Scheme.{u}} (f : X ⟶ Y)
   rw [totalPullComparison_eq] at ht
   dsimp only [DerivedRepresentativeSquare.cochainPath, DerivedRepresentativeSquare.input,
     DerivedRepresentativeSquare.output]
-  convert! ht using 1 <;> first | exact Category.assoc _ _ _ | rfl
+  convert! ht using 1
+  exact Category.assoc _ _ _
 
 private theorem actualComparisonIso_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
     actualComparisonIso Λ f = tensorPullComparison Λ f := by
@@ -478,7 +471,7 @@ private theorem unit_normalization {X Y : Scheme.{u}} (f : X ⟶ Y) :
   dsimp only [tensorUnit] at h' ⊢
   with_unfolding_all simp only [DerivedRepresentativeSquare.actualUnit, cast_eq, Category.assoc,
     ← Functor.map_comp_assoc, Iso.hom_inv_id, CategoryTheory.Functor.map_id, Category.id_comp,
-    Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app, Category.comp_id] at h'
+    Iso.hom_inv_id_app_assoc, Category.comp_id] at h'
   rw [regular_hom_eq] at h'
   have hi : (DerivedRepresentativeSquare.regular Λ X).inv =
       (normalizationDerivedRegularUnit Λ X).inv := by
@@ -543,6 +536,7 @@ private theorem genericInternalWithUnit [PreservesFiniteLimits F]
   ⟨(F.leftDerivedMonoidalWithUnit).toOplaxMonoidal, (fun _ _ ↦ rfl), rfl⟩
 
 end GenericInternal
+omit [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)] in
 include Λ in
 private theorem internal_oplax_compatible {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ o : (internalDerivedPullback Λ f).OplaxMonoidal,
@@ -553,7 +547,7 @@ private theorem internal_oplax_compatible {X Y : Scheme.{u}} (f : X ⟶ Y) :
   dsimp only [internalDerivedPullback, comparisonSource]
   have hd := internalDelta_eq_canonical Λ f
   rw [hd]
-  letI := CondensedRing.monoidal_upperStar Λ f
+  let := CondensedRing.monoidal_upperStar Λ f
   obtain ⟨o, ho, he⟩ := genericInternalWithUnit (CondensedRing.upperStar Λ f)
   refine ⟨o, ho, ?_⟩
   erw [he]
@@ -583,7 +577,7 @@ private theorem transportedTensor_map {C D : Type*} [Category C] [Category D]
     letI := Monoidal.transport e
     ((e.inverse.prod e.inverse) ⋙ Functor.uncurry.obj (curriedTensor C) ⋙ e.functor).map
       (Prod.mkHom f g) = f ⊗ₘ g := by
-  letI := Monoidal.transport e
+  let := Monoidal.transport e
   change e.functor.map (e.inverse.map f ▷ e.inverse.obj B ≫
     e.inverse.obj A' ◁ e.inverse.map g) = e.functor.map (e.inverse.map f ⊗ₘ e.inverse.map g)
   rw [MonoidalCategory.tensorHom_def]
@@ -634,11 +628,11 @@ private theorem square_for_lax {C₁ C₂ D₁ D₂ : Type*}
       Q₂.map (Functor.OplaxMonoidal.δ F a b) := by
   intro a b
   apply (cancel_mono (Functor.OplaxMonoidal.δ Q₂ (F.obj a) (F.obj b))).1
-  simp only [Category.assoc, Functor.Monoidal.μ_δ, Category.comp_id]
+  simp only [Category.assoc, Functor.Monoidal.μ_δ]
   have hh := congrArg (fun k ↦ G.map (Functor.LaxMonoidal.μ Q₁ a b) ≫
     γ.inv.app (a ⊗ b) ≫ k ≫ (γ.inv.app a ⊗ₘ γ.inv.app b)) (h a b)
   simp only [Category.assoc, tensorHom_comp_tensorHom, Iso.hom_inv_id_app,
-    id_tensorHom_id, Category.comp_id, Iso.inv_hom_id_app_assoc,
+    Iso.inv_hom_id_app_assoc,
     Functor.Monoidal.μ_δ_map_assoc] at hh
   dsimp only [Functor.comp_obj] at hh
   change (d.app (Q₁.obj a)).app (Q₁.obj b) ≫ (γ.inv.app a ⊗ₘ γ.inv.app b) ≫ 𝟙 _ = _
@@ -711,9 +705,9 @@ private theorem equivalenceStrongGeneric {C D : Type*} [Category C] [Category D]
         (∀ M N, @Functor.OplaxMonoidal.δ _ _ _ _ _ _ E.functor
           m.toOplaxMonoidal M N = θ.hom.app (M, N)) ∧
         @Functor.OplaxMonoidal.η _ _ _ _ _ _ E.functor m.toOplaxMonoidal = 𝟙 _ := by
-  letI := Monoidal.transport E
+  let := Monoidal.transport E
   intro o hη hδ
-  letI : E.functor.OplaxMonoidal := o
+  let : E.functor.OplaxMonoidal := o
   have hu : Functor.OplaxMonoidal.η E.functor = 𝟙 _ := hη
   have hd (M N) : Functor.OplaxMonoidal.δ E.functor M N =
       θ.hom.app (M, N) := hδ M N
@@ -761,11 +755,11 @@ private theorem transported_unit_simplify {C₁ C₂ D₁ D₂ : Type*}
         γ.inv.app (𝟙_ C₁) ≫ e₂.functor.map η ≫
           inv (@Functor.LaxMonoidal.ε _ _ _ _ _ _ e₂.functor m₂.toLaxMonoidal) =
         γ.inv.app (𝟙_ C₁) ≫ e₂.functor.map η := by
-  letI := Monoidal.transport e₁
-  letI := Monoidal.transport e₂
+  let := Monoidal.transport e₁
+  let := Monoidal.transport e₂
   intro m₁ m₂ F G γ η h₁ h₂
-  letI : e₁.functor.Monoidal := m₁
-  letI : e₂.functor.Monoidal := m₂
+  let : e₁.functor.Monoidal := m₁
+  let : e₂.functor.Monoidal := m₂
   have hε₁ : Functor.LaxMonoidal.ε e₁.functor = 𝟙 _ := by
     have h := Functor.Monoidal.ε_η e₁.functor
     erw [h₁, Category.comp_id] at h
@@ -789,26 +783,26 @@ private theorem pullbackConstraintsGeneric
     let TY := (eY.inverse.prod eY.inverse) ⋙ Functor.uncurry.obj (curriedTensor C₁) ⋙ eY.functor
     let TX := (eX.inverse.prod eX.inverse) ⋙ Functor.uncurry.obj (curriedTensor C₂) ⋙ eX.functor
     ∀ (oY : eY.functor.OplaxMonoidal) (oX : eX.functor.OplaxMonoidal)
-      (hηY : @Functor.OplaxMonoidal.η _ _ _ _ _ _ eY.functor oY = 𝟙 _)
-      (hηX : @Functor.OplaxMonoidal.η _ _ _ _ _ _ eX.functor oX = 𝟙 _)
-      (hδY : ∀ M N, @Functor.OplaxMonoidal.δ _ _ _ _ _ _ eY.functor oY M N =
+      (_hηY : @Functor.OplaxMonoidal.η _ _ _ _ _ _ eY.functor oY = 𝟙 _)
+      (_hηX : @Functor.OplaxMonoidal.η _ _ _ _ _ _ eX.functor oX = 𝟙 _)
+      (_hδY : ∀ M N, @Functor.OplaxMonoidal.δ _ _ _ _ _ _ eY.functor oY M N =
         θY.hom.app (M, N))
-      (hδX : ∀ M N, @Functor.OplaxMonoidal.δ _ _ _ _ _ _ eX.functor oX M N =
+      (_hδX : ∀ M N, @Functor.OplaxMonoidal.δ _ _ _ _ _ _ eX.functor oX M N =
         θX.hom.app (M, N))
       (d : TY ⋙ L ≅ (L.prod L) ⋙ TX)
       (δF : (Functor.postcompose₂.obj F).obj (curriedTensor C₁) ⟶
         (((Functor.whiskeringLeft₂ C₂).obj F).obj F).obj (curriedTensor C₂))
       (ηF : F.obj (𝟙_ C₁) ⟶ 𝟙_ C₂)
       (ηL : L.obj (eY.functor.obj (𝟙_ C₁)) ⟶ eX.functor.obj (𝟙_ C₂))
-      (hi : ∃ o : F.OplaxMonoidal,
+      (_hi : ∃ o : F.OplaxMonoidal,
         (∀ M N, @Functor.OplaxMonoidal.δ _ _ _ _ _ _ F o M N = (δF.app M).app N) ∧
           @Functor.OplaxMonoidal.η _ _ _ _ _ _ F o = ηF)
-      (hsquare : ∀ M N, eX.functor.map ((δF.app M).app N) ≫
+      (_hsquare : ∀ M N, eX.functor.map ((δF.app M).app N) ≫
         θX.hom.app (F.obj M, F.obj N) ≫
         TX.map (Prod.mkHom (γ.hom.app M) (γ.hom.app N)) =
           γ.hom.app (M ⊗ N) ≫ L.map (θY.hom.app (M, N)) ≫
             d.hom.app (eY.functor.obj M, eY.functor.obj N))
-      (hunit : eX.functor.map ηF = γ.hom.app (𝟙_ C₁) ≫ ηL),
+      (_hunit : eX.functor.map ηF = γ.hom.app (𝟙_ C₁) ≫ ηL),
       TensorConstraintCondition L TY TX
         (eY.functor.obj (𝟙_ C₁)) (eX.functor.obj (𝟙_ C₂))
         (@MonoidalCategoryStruct.associator _ _ (Monoidal.transportStruct eY))
@@ -817,18 +811,18 @@ private theorem pullbackConstraintsGeneric
         (@MonoidalCategoryStruct.associator _ _ (Monoidal.transportStruct eX))
         (@MonoidalCategoryStruct.leftUnitor _ _ (Monoidal.transportStruct eX))
         (@MonoidalCategoryStruct.rightUnitor _ _ (Monoidal.transportStruct eX)) d.hom ηL := by
-  letI := Monoidal.transport eY
-  letI := Monoidal.transport eX
+  let := Monoidal.transport eY
+  let := Monoidal.transport eX
   dsimp only
   intro oY oX hηY hηX hδY hδX d δF ηF ηL hi hsquare hunit
   obtain ⟨mX, hδX, hηX⟩ := equivalenceStrongGeneric eX θX oX hηX hδX
   obtain ⟨mY, hδY, hηY⟩ := equivalenceStrongGeneric eY θY oY hηY hδY
-  letI : eX.functor.Monoidal := mX
-  letI : eY.functor.Monoidal := mY
-  letI : eX.functor.OplaxMonoidal := mX.toOplaxMonoidal
-  letI : eY.functor.OplaxMonoidal := mY.toOplaxMonoidal
+  let : eX.functor.Monoidal := mX
+  let : eY.functor.Monoidal := mY
+  let : eX.functor.OplaxMonoidal := mX.toOplaxMonoidal
+  let : eY.functor.OplaxMonoidal := mY.toOplaxMonoidal
   obtain ⟨oF, hδF, hηF⟩ := hi
-  letI : F.OplaxMonoidal := oF
+  let : F.OplaxMonoidal := oF
   let dn := (Functor.isoWhiskerRight (nativeTensorIso eY).symm
       L) ≪≫ d ≪≫
     Functor.isoWhiskerLeft (L.prod L)
@@ -856,7 +850,7 @@ private theorem pullbackConstraintsGeneric
     all_goals rw [transportedTensor_map]
   obtain ⟨oL, hδL, hηL⟩ := squareOplaxData eY.functor eX.functor
     F L γ δ hsq
-  letI : L.OplaxMonoidal := oL
+  let : L.OplaxMonoidal := oL
   have hη : Functor.OplaxMonoidal.η L =
       ηL := by
     erw [hηL, transported_unit_simplify eY
@@ -927,7 +921,7 @@ private theorem equivalenceConstraintsGeneric {C D : Type*} [Category C] [Catego
       (@MonoidalCategoryStruct.rightUnitor _ _ (Monoidal.transportStruct E)) θ.hom (𝟙 _) := by
   let _ : MonoidalCategory D :=
     Monoidal.transport E
-  letI : E.functor.OplaxMonoidal := o
+  let : E.functor.OplaxMonoidal := o
   have hd (M N) : Functor.OplaxMonoidal.δ E.functor M N =
       θ.hom.app (M, N) := hδ M N
   have hu : Functor.OplaxMonoidal.η E.functor = 𝟙 _ := hη

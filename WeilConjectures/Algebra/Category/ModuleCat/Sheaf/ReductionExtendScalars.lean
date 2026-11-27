@@ -78,7 +78,8 @@ noncomputable def adjunction : D.Φ ⊣ res :=
         exact ((Equiv.ofBijective _ (D.bijective_r_app_comp_map _ _)).apply_symm_apply g).symm
       homEquiv_naturality_right f g := by simp }
 
-set_option linter.unusedSectionVars false in
+omit [Abelian.HasFunctorialFlatResolution 𝒜] [HasDerivedCategory 𝒜] [HasDerivedCategory 𝒜']
+  [res.Additive] [PreservesFiniteLimits res] [PreservesFiniteColimits res] in
 @[simp]
 lemma adjunction_unit_app (F : 𝒜) : D.adjunction.unit.app F = D.r.app F := by
   simp [adjunction]

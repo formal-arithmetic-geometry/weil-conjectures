@@ -92,7 +92,6 @@ transfers component-image factorization and a uniform coproduct-support bound fr
 to the derived category.
 -/
 
-set_option linter.style.haveILetI false
 
 @[expose] public section
 
@@ -118,7 +117,7 @@ private theorem bounded_complexes_essentiallySmall
   refine ⟨P, inferInstance, ?_⟩
   intro X hX
   obtain ⟨p, hp⟩ := CochainComplex.exists_epi_diskCopower hX
-  letI := hp
+  let := hp
   let K := kernelSubobject p
   have hk : K.arrow ≫ p = 0 := kernelSubobject_arrow_comp p
   have hlim : IsLimit (KernelFork.ofι K.arrow hk) :=
@@ -179,7 +178,7 @@ private theorem quasiIso_g_iff_acyclic
     QuasiIso S.g ↔ S.X₁.Acyclic := by
   constructor
   · intro hg n
-    letI := hg
+    let := hg
     rw [HomologicalComplex.exactAt_iff_isZero_homology]
     refine (hS.homology_exact₁ (n - 1) n (by simp)).isZero_X₂ ?_ ?_
     · rw [← cancel_epi (HomologicalComplex.homologyMap S.g (n - 1)), comp_zero]
@@ -221,8 +220,8 @@ private theorem bounded_subcomplex_epi
   refine ⟨T, CochainComplex.degreewiseCardinalGenerated_subcomplexClosure G κ V hV, ?_⟩
   have he (n : ℤ) : Epi ((V n).arrow ≫ p.f n) := by
     obtain ⟨e, he, heq⟩ := Subobject.exists_fac (p.f n) (V n)
-    haveI := he
-    haveI : IsIso ((Subobject.«exists» (p.f n)).obj (V n)).arrow := by
+    have := he
+    have : IsIso ((Subobject.«exists» (p.f n)).obj (V n)).arrow := by
       rw [hVp n]
       infer_instance
     rw [← heq]
@@ -236,7 +235,7 @@ private theorem bounded_subcomplex_epi
     simp only [HomologicalComplex.comp_f,
       HomologicalComplex.subobjectEvalUnderlyingIso_hom_comp_arrow_assoc,
       Subobject.ofLE_arrow_assoc]
-  letI := he n
+  let := he n
   exact epi_of_epi_fac ((Category.assoc _ _ _).trans hfac)
 
 /-- The union of two generating families generates a binary biproduct. -/
@@ -247,8 +246,8 @@ private theorem generated_biprod
     isCardinalGenerated G κ (X ⊞ Y) := by
   obtain ⟨I, hI, p, hp⟩ := hX
   obtain ⟨J, hJ, q, hq⟩ := hY
-  letI := hp
-  letI := hq
+  let := hp
+  let := hq
   let a : ∀ k : I ⊕ J, G ⟶ X ⊞ Y :=
     Sum.elim (fun i ↦ Sigma.ι (fun _ : I ↦ G) i ≫ p ≫ biprod.inl)
       (fun j ↦ Sigma.ι (fun _ : J ↦ G) j ≫ q ≫ biprod.inr)
@@ -280,14 +279,14 @@ private theorem bounded_epi_quasiIso_roof
       CochainComplex.degreewiseCardinalGenerated G κ T ∧ QuasiIso (a ≫ p) := by
   obtain ⟨T, hT, ht⟩ := bounded_subcomplex_epi G κ hκ hG hsub p hX
   let t := T.arrow ≫ p
-  letI : Epi t := ht
+  let : Epi t := ht
   let K := kernel p
   have hK : K.Acyclic := (quasiIso_g_iff_acyclic
     (S := ShortComplex.mk (kernel.ι p) p (kernel.condition p))
     { exact := ShortComplex.exact_kernel p }).mp inferInstance
   let i : kernel t ⟶ K := kernel.lift p (kernel.ι t ≫ T.arrow) (by simp [t])
   have hi : i ≫ kernel.ι p = kernel.ι t ≫ T.arrow := by simp [i]
-  haveI : Mono i := mono_of_mono_fac hi
+  have : Mono i := mono_of_mono_fac hi
   have hker : CochainComplex.degreewiseCardinalGenerated G κ (kernel t) :=
     CochainComplex.degreewiseCardinalGenerated_of_mono G κ hκ hG hsub (kernel.ι t) hT
   have hS : CochainComplex.degreewiseCardinalGenerated G κ
@@ -306,7 +305,7 @@ private theorem bounded_epi_quasiIso_roof
   have haq : a ≫ p = q := by
     apply pushout.hom_ext <;> simp [a, q, t, Category.assoc]
   have hzero : pushout.inr (kernel.ι t) k ≫ q = 0 := by simp [q]
-  haveI : Epi q := epi_of_epi_fac (pushout.inl_desc t 0 (by simp))
+  have : Epi q := epi_of_epi_fac (pushout.inl_desc t 0 (by simp))
   have hc : IsColimit (CokernelCofork.ofπ q hzero) := by
     apply CokernelCofork.IsColimit.ofπ' _ _
     intro Z b hb
@@ -320,14 +319,14 @@ private theorem bounded_epi_quasiIso_roof
     apply pushout.hom_ext
     · simpa [q] using hd
     · simp [q, hb]
-  haveI : Epi q := epi_of_isColimit_cofork hc
+  have : Epi q := epi_of_isColimit_cofork hc
   have hse : (ShortComplex.mk (pushout.inr (kernel.ι t) k) q hzero).ShortExact :=
     { exact := ShortComplex.exact_of_g_is_cokernel _ hc
       epi_g := epi_of_isColimit_cofork hc }
   have hq : QuasiIso q := (quasiIso_g_iff_acyclic hse).mpr hVac
   let e : (T : CochainComplex A ℤ) ⊞ (V : CochainComplex A ℤ) ⟶ P :=
     biprod.desc (pushout.inl _ _) (pushout.inr _ _)
-  haveI : Epi e := ⟨fun {Z} b c h ↦ pushout.hom_ext
+  have : Epi e := ⟨fun {Z} b c h ↦ pushout.hom_ext
     (by simpa [e] using biprod.inl ≫= h) (by simpa [e] using biprod.inr ≫= h)⟩
   have hsum : CochainComplex.degreewiseCardinalGenerated G κ
       ((T : CochainComplex A ℤ) ⊞ (V : CochainComplex A ℤ)) := by
@@ -427,13 +426,13 @@ private theorem coproduct_component_images
   have hex : (ShortComplex.mk (Limits.Sigma.map a) (Limits.Sigma.map q) hz).Exact :=
     colim.exact_mapShortComplex hS (coproductIsCoproduct _) (coproductIsCoproduct _)
       (coproductIsCoproduct _) _ _ (fun ⟨i⟩ ↦ by simp [S]) (fun ⟨i⟩ ↦ by simp [S])
-  haveI : Mono (Limits.Sigma.map a) := by
+  have : Mono (Limits.Sigma.map a) := by
     constructor
     intro Z b c hbc
     apply sub_eq_zero.mp
     apply coproduct_projection_zero
     intro i
-    haveI : Mono (a i) := inferInstance
+    have : Mono (a i) := inferInstance
     apply (cancel_mono (a i)).1
     simp only [zero_comp, Preadditive.sub_comp]
     have hi := hbc =≫ Sigma.π Y i
@@ -494,8 +493,8 @@ private theorem alphaSmall_of_subobject_bound
   have hm (T : S) : IsSplitMono (c.ι.app T) :=
     ⟨⟨Sigma.desc (fun i ↦ if h : i ∈ T.1 then
       Sigma.ι (fun j : T.1 ↦ Y j) ⟨i, h⟩ else 0), by ext i; simp [c, F, i.2]⟩⟩
-  haveI (T U : S) (φ : T ⟶ U) : Mono (F.map φ) := by
-    haveI := hm T
+  have (T U : S) (φ : T ⟶ U) : Mono (F.map φ) := by
+    have := hm T
     exact mono_of_mono_fac (c.w φ)
   obtain ⟨T, g, hg⟩ := IsGrothendieckAbelian.IsPresentable.surjectivity hc hX f
   exact ⟨T.1, T.2, g, hg.symm⟩
@@ -514,17 +513,17 @@ private theorem bounded_derived_roof
       DerivedCategory.Q.map q ≫ f = DerivedCategory.Q.map b := by
   let Q := DerivedCategory.Q (C := A)
   obtain ⟨W, s, hs, g, hf⟩ := DerivedCategory.right_fac f
-  haveI : QuasiIso s := (DerivedCategory.isIso_Q_map_iff_quasiIso A s).1 hs
+  have : QuasiIso s := (DerivedCategory.isIso_Q_map_iff_quasiIso A s).1 hs
   obtain ⟨V, t, p, r, ht, hp, he, htp, htr⟩ := epi_quasiIso_replacement s
-  letI := ht
-  letI := hp
-  letI := he
+  let := ht
+  let := hp
+  let := he
   have hpf : Q.map p ≫ f = Q.map (r ≫ g) := by
     apply (cancel_epi (Q.map t)).1
     rw [← Functor.map_comp_assoc, htp, hf, IsIso.hom_inv_id_assoc,
       ← Functor.map_comp, ← Category.assoc, htr, Category.id_comp]
   obtain ⟨T, a, hT, hq⟩ := bounded_epi_quasiIso_roof G κ hκ hG hsub p hX
-  letI := hq
+  let := hq
   refine ⟨T, a ≫ p, a ≫ r ≫ g, hT, hq, ?_⟩
   rw [Functor.map_comp, Category.assoc, hpf]
   simp only [Functor.map_comp, Q]
@@ -546,7 +545,7 @@ private theorem uniform_subobject_bound
     ∃ (α : Cardinal.{v}), α.IsRegular ∧
       ∀ X, P X → HasCardinalLT (Subobject X) α := by
   obtain ⟨P₀, hP₀, hP₀P, hPP₀⟩ := ObjectProperty.EssentiallySmall.exists_small_le P
-  letI := hP₀
+  let := hP₀
   obtain ⟨α, hα, hb⟩ := HasCardinalLT.exists_regular_cardinal_forall
     (fun X : Subtype P₀ ↦ Subobject X.1)
   refine ⟨α, hα, fun X hX ↦ ?_⟩
@@ -603,7 +602,7 @@ private theorem bounded_class_factorization
     PreservesCoproduct.iso Q K ≪≫ Limits.Sigma.mapIso eY
   let f₀ := e.hom ≫ f ≫ eSum.inv
   obtain ⟨T, q, b, hT, hq, he⟩ := bounded_derived_roof G κ hκ hG hsub hX f₀
-  letI := hq
+  let := hq
   let Z (i : I) := image (b ≫ Sigma.π K i)
   let a (i : I) : Z i ⟶ K i := image.ι (b ≫ Sigma.π K i)
   obtain ⟨g, hg⟩ := coproduct_component_images K b
@@ -645,7 +644,7 @@ private theorem bounded_class_alphaSmall
     PreservesCoproduct.iso Q K ≪≫ Limits.Sigma.mapIso eY
   let f₀ := e.hom ≫ f ≫ eSum.inv
   obtain ⟨T, q, b, hT, hq, he⟩ := bounded_derived_roof G κ hκ hG hsub hX f₀
-  letI := hq
+  let := hq
   obtain ⟨J, hJ, g, hg⟩ := hs T hT I K b
   let eJ : Q.obj (∐ fun j : J ↦ K j) ≅ ∐ fun j : J ↦ Y j :=
     PreservesCoproduct.iso Q (fun j : J ↦ K j) ≪≫
@@ -681,7 +680,7 @@ private theorem bounded_family_cardinal
   have hsmall : ∀ i, Small.{v} (F i) := by
     intro i
     rcases i with _ | (n | j) <;> dsimp [F] <;> infer_instance
-  letI := hsmall
+  let := hsmall
   obtain ⟨κ, hκ, hb⟩ := HasCardinalLT.exists_regular_cardinal_forall F
   refine ⟨κ, hκ, ?_, fun n ↦ hb (some (.inl ⟨n⟩)), fun j n ↦ ?_⟩
   · have h : HasCardinalLT (ULift.{max u v} ℕ) κ := hb none
@@ -724,24 +723,24 @@ theorem exists_small_factorization_class_of_compact_localization
   classical
   obtain ⟨B, cB, zB, sB, pB, aB, tB, iB, sumsB, hB, L, R, adj, sL, hL, hc⟩ :=
     grothendieckDerived_compact_localization_model.{v, u, v, v} (A := A)
-  letI := cB
-  letI := zB
-  letI := sB
-  letI := pB
-  letI := aB
-  letI := tB
-  letI := iB
-  letI := sumsB
-  letI := sL
+  let := cB
+  let := zB
+  let := sB
+  let := pB
+  let := aB
+  let := tB
+  let := iB
+  let := sumsB
+  let := sL
   obtain ⟨J, E, hE, hgen⟩ := hB
   let X (j : J) := DerivedCategory.Q.objPreimage (L.obj (E j))
   obtain ⟨κ, hκreg, hκ, hsub, hX⟩ := bounded_family_cardinal X
-  letI : Fact κ.IsRegular := ⟨hκreg⟩
+  let : Fact κ.IsRegular := ⟨hκreg⟩
   let P := CochainComplex.degreewiseCardinalGenerated (separator A) κ
-  haveI : ObjectProperty.EssentiallySmall.{v} P :=
+  have : ObjectProperty.EssentiallySmall.{v} P :=
     bounded_complexes_essentiallySmall (separator A) κ
   obtain ⟨α, hα, hb⟩ := uniform_subobject_bound P
-  letI : Fact α.IsRegular := ⟨hα⟩
+  let : Fact α.IsRegular := ⟨hα⟩
   let S := P.map DerivedCategory.Q
   refine ⟨B, cB, zB, sB, pB, aB, tB, iB, sumsB, J, E, hE, hgen,
     L, R, adj, sL, hL, hc, S, α, inferInstance, inferInstance, ?_, ?_, ?_, ?_⟩

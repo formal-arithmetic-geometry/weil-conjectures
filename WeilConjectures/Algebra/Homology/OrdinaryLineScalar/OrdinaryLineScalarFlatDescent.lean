@@ -226,6 +226,7 @@ private theorem flat_restriction_fullyFaithful :
   exact ⟨ff.ofIso ((Functor.whiskeringLeft _ _ _).mapIso
     (Functor.isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso A)))⟩
 
+-- The `simp only` form of the normalizing `simp` breaks the kernel check of the final identity.
 set_option linter.flexible false in
 /-- Descend a fixed ordinary comparison with exact signed-line tensors. -/
 theorem ordinary_scalar_line_flat_descent

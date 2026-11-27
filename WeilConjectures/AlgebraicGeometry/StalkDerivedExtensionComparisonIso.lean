@@ -47,8 +47,6 @@ variable [∀ Y : Scheme.{u},
   (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
   (sq : IsPullback g' f' f g)
 
--- Keep the existing quantified proof-binder names unchanged.
-set_option linter.unusedVariables false in
 /-- Derived pullback commutes with exact stalks, with its comparison specified before
 applying homology. -/
 theorem exists_stalkDerivedExtensionComparisonIso (z : X') :
@@ -64,12 +62,12 @@ theorem exists_stalkDerivedExtensionComparisonIso (z : X') :
           ((algebraMap (A g' z ⊗[R f g' z] B f' z) (C z)).comp
             (algebraMap (A g' z) (A g' z ⊗[R f g' z] B f' z)))).mapHomotopyCategory
               (.up ℤ) ⋙ DerivedCategory.Qh)
-      (hL : L.IsLeftDerivedFunctor ε
+      (_hL : L.IsLeftDerivedFunctor ε
         (HomotopyCategory.quasiIso (ModuleCat.{u} (A g' z)) (.up ℤ))),
     ∃ j : comparisonDerivedStalk X (g' z) ⋙ L ≅
         derivedPullback g' ⋙ comparisonDerivedStalk X' z,
       ∀ (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-        (hP : P.IsKFlatTensor)
+        (_hP : P.IsKFlatTensor)
         (hcP : IsIso ((counit g').app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj P))),
         L.map ((RingedSpace.moduleStalkFunctor X.toRingedSpace

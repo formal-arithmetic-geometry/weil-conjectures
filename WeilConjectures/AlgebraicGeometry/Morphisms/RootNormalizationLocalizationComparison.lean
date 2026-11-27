@@ -46,7 +46,6 @@ private theorem adjoinRoot_localization_of_map_eq
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-set_option linter.unusedVariables false in
 /-- The geometric root-normalization comparison over an already constructed
 principal-prime localization. The DVR and its uniformizer are fixed data; the generic
 map to U and its pulled-back cover are supplied separately. -/
@@ -95,7 +94,7 @@ theorem root_normalization_localization_comparison
       let pi := algebraMap H B g
       let A0 := AdjoinRoot
         ((Polynomial.X : Polynomial B) ^ Nat.card G - Polynomial.C pi)
-      let N0 := Spec (CommRingCat.of A0)
+      let _N0 := Spec (CommRingCat.of A0)
       let q0 := Spec.map (CommRingCat.ofHom (algebraMap B A0))
       let j0 := Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B)))
       let a0 := pullback.snd (T.π ≫ j0) q0

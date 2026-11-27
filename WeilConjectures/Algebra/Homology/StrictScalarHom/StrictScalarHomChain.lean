@@ -106,7 +106,6 @@ Hom products. All evaluations use the chosen projections and slice identity.
 set_option autoImplicit false
 set_option genSizeOfSpec false
 set_option genInjectivity false
-set_option linter.unusedSectionVars false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -340,9 +339,8 @@ def CoefficientSquare.tensorComparison
     (restriction.{c, v, u} φ').map (Q.extensionIso.app A).hom ≫
     (D'.nu.app (Da.extension.complex.obj A)).inv
 
-set_option linter.unusedSectionVars false
-set_option linter.unusedTactic false
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat] [HasWeakSheafify J AddCommGrpCat] in
 private theorem evaluate_homMap {R : Sheaf J CommRingCat.{max c v u}}
     {P P' N N' : Complex.{c, v, u} R} (a : P' ⟶ P) (b : N ⟶ N')
     (n i k : ℤ) (h : i + n = k) (V : Cᵒᵖ)
@@ -360,6 +358,7 @@ private theorem evaluate_homMap {R : Sheaf J CommRingCat.{max c v u}}
   erw [ModuleCat.comp_apply, ModuleCat.comp_apply] at hh
   exact hh
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat] [HasWeakSheafify J AddCommGrpCat] in
 private theorem evaluate_hom_ext {R : Sheaf J CommRingCat.{max c v u}}
     (P N : Complex.{c, v, u} R) (n : ℤ)
     {H : ringedSiteModules.{max c v u}
@@ -886,6 +885,7 @@ private theorem gradedTheta_evaluate
 
 attribute [local irreducible] gradedTheta
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat] [HasWeakSheafify J AddCommGrpCat] in
 private theorem hom_section_sub_units {R : Sheaf J CommRingCat.{max c v u}}
     (A B H : Mod.{c, v, u} R) (f g : H ⟶ homObj (R := R) A B) (e : ℤˣ)
     (V : Cᵒᵖ) (s : H.val.obj V) (x : A.val.obj V) :
@@ -910,6 +910,7 @@ private theorem hom_section_sub_units {R : Sheaf J CommRingCat.{max c v u}}
     ModuleCat.hom_sub, ModuleCat.hom_zsmul, LinearMap.sub_apply, LinearMap.smul_apply]
   rfl
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat] [HasWeakSheafify J AddCommGrpCat] in
 private theorem evaluate_d {R : Sheaf J CommRingCat.{max c v u}}
     (P N : Complex.{c, v, u} R) (n m i k k' i' : ℤ)
     (hnm : n + 1 = m) (hik : i + m = k) (hik' : i + n = k') (hi'k : i' + n = k)
@@ -983,6 +984,7 @@ private def plainSheafUnit (A : Sheaf J RingCat.{max c v u})
     (presheafRestrictionId.{c, v, u} A.obj).hom.app
       ((PresheafOfModules.sheafification (R := A) (𝟙 A.obj)).obj M).val
 
+omit [J.HasSheafCompose (forget₂ CommRingCat RingCat)] in
 private theorem plainSheafUnit_apply (A : Sheaf J RingCat.{max c v u})
     (M : PresheafOfModules.{max c v u} A.obj) (V : Cᵒᵖ) (x : M.obj V) :
     (plainSheafUnit.{c, v, u} A M).app V x =
@@ -991,6 +993,7 @@ private theorem plainSheafUnit_apply (A : Sheaf J RingCat.{max c v u})
     ((PresheafOfModules.sheafification (R := A) (𝟙 A.obj)).obj M).val V
       (((PresheafOfModules.sheafificationAdjunction (R := A) (𝟙 A.obj)).unit.app M).app V x)
 
+omit [J.HasSheafCompose (forget₂ CommRingCat RingCat)] in
 private theorem forget_plainSheafUnit (A : Sheaf J RingCat.{max c v u})
     (M : PresheafOfModules.{max c v u} A.obj) :
     (PresheafOfModules.toPresheaf A.obj).map (plainSheafUnit.{c, v, u} A M) =
@@ -1011,6 +1014,7 @@ private def restrictedSheafificationHom
     ((PresheafOfModules.restrictScalars (𝟙 A.obj)).map
       ((PresheafOfModules.restrictScalars φ.hom).map (plainSheafUnit.{c, v, u} B M)))
 
+omit [J.HasSheafCompose (forget₂ CommRingCat RingCat)] in
 private theorem restrictedSheafificationHom_isIso
     {A B : Sheaf J RingCat.{max c v u}} (φ : A ⟶ B)
     (M : PresheafOfModules.{max c v u} B.obj) :
@@ -1046,6 +1050,7 @@ private def restrictedSheafificationIso
   have := restrictedSheafificationHom_isIso.{c, v, u} φ M
   exact asIso (restrictedSheafificationHom.{c, v, u} φ M)
 
+omit [J.HasSheafCompose (forget₂ CommRingCat RingCat)] in
 private theorem restrictedSheafificationIso_pure
     {A B : Sheaf J RingCat.{max c v u}} (φ : A ⟶ B)
     (M : PresheafOfModules.{max c v u} B.obj) (V : Cᵒᵖ) (x : M.obj V) :
@@ -1361,6 +1366,7 @@ private def moduleEvaluate {R : Sheaf J CommRingCat.{max c v u}}
       PresheafOfModules.sectionsSMul_app_apply, PresheafOfModules.overSections_coe_apply]
     simp
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat] [HasWeakSheafify J AddCommGrpCat] in
 private theorem evaluate_smul {R : Sheaf J CommRingCat.{max c v u}}
     (P N : Complex.{c, v, u} R) (n i k : ℤ) (h : i + n = k) (V : Cᵒᵖ)
     (s t : R.obj.obj V) (g : ((homComplex (R := R) P N).X n).val.obj V)
@@ -1500,12 +1506,14 @@ private theorem chainTheta_natural
   rw [ha]
   rfl
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat] [HasWeakSheafify J AddCommGrpCat] in
 private theorem homMap_id {R : Sheaf J CommRingCat.{max c v u}}
     (P A : Complex.{c, v, u} R) : homMap.{c, v, u} (R := R) (𝟙 P) (𝟙 A) = 𝟙 (homComplex (R := R) P
       A) := by
   simp only [homMap, op_id, CategoryTheory.Functor.map_id, NatTrans.id_app]
   exact Category.id_comp _
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat] [HasWeakSheafify J AddCommGrpCat] in
 private theorem homMap_comp {R : Sheaf J CommRingCat.{max c v u}}
     {P P' P'' A A' A'' : Complex.{c, v, u} R}
     (a : P' ⟶ P) (a' : P'' ⟶ P') (b : A ⟶ A') (b' : A' ⟶ A'') :

@@ -84,7 +84,6 @@ private theorem lift_open_counit_square (aX : LX ⊣ RX) (aY : LY ⊣ RY)
 
 end
 
-set_option linter.unusedVariables false in
 /-- The sectionwise comparison square respects the two underived open counits,
 after passage to the homotopy category (Stacks, Tags 08FE and 08BV). -/
 theorem schemeMVUnderivedOpenCounit_square
@@ -93,9 +92,9 @@ theorem schemeMVUnderivedOpenCounit_square
       (SheafOfModules.{u} (moduleRings (h ⁻¹ᵁ U).toScheme.toRingedSpace))
       (ComplexShape.up ℤ)) :
     let RX := RingedSpace.moduleDirectImage (h ⁻¹ᵁ U).ι.toLRSHom.toShHom
-    let F := RingedSpace.moduleDirectImage h.toLRSHom.toShHom
+    let _F := RingedSpace.moduleDirectImage h.toLRSHom.toShHom
     let G := RingedSpace.moduleDirectImage (h ∣_ U).toLRSHom.toShHom
-    let LX := schemeOpenRestriction X (h ⁻¹ᵁ U)
+    let _LX := schemeOpenRestriction X (h ⁻¹ᵁ U)
     let LY := schemeOpenRestriction Y U
     (LY.mapHomotopyCategory (ComplexShape.up ℤ)).map
         ((schemeMVHomotopyOpenComposition h U).hom.app K) ≫

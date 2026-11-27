@@ -376,9 +376,7 @@ lemma smoothOrientation_comp_openImmersion {Z : Over (Spec (.of k))} [LocallyOfF
     smoothOrientation_eq_smoothOrientationOfFactor ℓ f d g ι h e hp,
     smoothOrientationOfFactor_comp]
 
--- The smoothness hypothesis is a binder of the instance: an `instance` drops unused
--- instance-implicit section variables, even under `include`. The elaborated signature has it
--- once; the linter also counts the section variable in scope.
+-- false positive: the linter also counts the section variable that the `instance` drops
 set_option linter.overlappingInstances false in
 /-- The orientation of a morphism smooth of pure relative dimension `d` is an isomorphism: both
 the canonical and the non-canonical orientations are (`isIso_smoothOrientationOfSmooth`), and
@@ -437,9 +435,7 @@ theorem smoothPurityMap_eq_homEquiv_smoothTrace :
       (smoothOrientation ℓ f d))).symm.trans
     (((boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _).apply_symm_apply _)).symm
 
--- The smoothness hypothesis is a binder of the instance: an `instance` drops unused
--- instance-implicit section variables, even under `include`. The elaborated signature has it
--- once; the linter also counts the section variable in scope.
+-- false positive: the linter also counts the section variable that the `instance` drops
 set_option linter.overlappingInstances false in
 /-- **Smooth purity** (SGA 4, Exposé XVIII, Théorème 3.2.5): the
 adjoint of the trace, `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y`, is an isomorphism, for `f` smooth of

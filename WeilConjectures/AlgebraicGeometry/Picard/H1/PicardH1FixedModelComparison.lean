@@ -238,7 +238,6 @@ attribute [local irreducible] structureSheafAb structureSheafCohomologyPullback
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option linter.unusedVariables false in
 /-- On an affine with trivial target bundles, construct the joint degree-one map
 out of a supplied minimal source complex and identify its residue map geometrically.
 -/
@@ -274,7 +273,7 @@ theorem picard_h1_fixed_model_comparison
     (m : ℕ) (K : CochainComplex
       (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ)
     (hK : IsStrictlyPerfect W U K)
-    (hnegative : ∀ j : ℤ, j < 0 → IsZero (K.X j))
+    (_hnegative : ∀ j : ℤ, j < 0 → IsZero (K.X j))
     (hrank : ∀ j : ℤ, Nonempty (K.X j ≅ SheafOfModules.free
       (R := (moduleRings W.toRingedSpace).over U)
       (ULift.{v} (Fin (derivedFiberBetti W ((schemeDerivedDirectImage (pullback.snd f k)).obj

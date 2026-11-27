@@ -18,7 +18,6 @@ set_option autoImplicit false
 set_option genSizeOf false
 set_option genInjectivity false
 set_option synthInstance.maxSize 4096
-set_option linter.unusedVariables false
 universe u
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj CategoryTheory.Functor

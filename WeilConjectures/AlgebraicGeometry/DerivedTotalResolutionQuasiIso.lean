@@ -35,7 +35,6 @@ namespace DerivedTotalResolution
 
 variable {R : Type u} [Ring R]
 
-set_option linter.unusedVariables false in
 /-- The total complex of an exact augmented resolution of cochain complexes is
 quasi-isomorphic to the resolved complex (Stacks, Tag 09IZ).
 
@@ -56,7 +55,7 @@ theorem total_resolution_quasiIso
     (h_augmentation_zero : ∀ q : ℤ,
       K.ιTotal (ComplexShape.up ℤ) 0 q q (by simp) ≫ ε.f q = a.f q)
     (h_augmentation : ∀ (p q n : ℤ)
-      (hp : p < 0) (h : ComplexShape.π (ComplexShape.up ℤ)
+      (_hp : p < 0) (h : ComplexShape.π (ComplexShape.up ℤ)
         (ComplexShape.up ℤ) (ComplexShape.up ℤ) (p, q) = n),
       K.ιTotal (ComplexShape.up ℤ) p q n h ≫ ε.f n = 0)
     (h_exact : ∀ (p q : ℤ), p < -1 →

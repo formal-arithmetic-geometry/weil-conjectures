@@ -36,8 +36,6 @@ variable {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
 
 attribute [instance] siteSheafTensorRight_preservesZeroMorphisms
 
--- Keep the existing sheafification parameters in this theorem's public signature.
-set_option linter.unusedSectionVars false in
 /-- The map in the second variable is natural in the first variable. -/
 theorem siteSheafTensorSecondMap_naturality
     {M M' N N' : SheafOfModules.{m}

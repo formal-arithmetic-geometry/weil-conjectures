@@ -44,6 +44,7 @@ set_option backward.isDefEq.respectTransparency.types true
 
 attribute [local irreducible] Ext.homEquiv
 
+-- Irreducible def with inferred type; reducibility attributes cannot be set on a theorem.
 set_option linter.defProp false in
 /-- Compose the supplied scalar squares before ordinary finite realization. -/
 @[irreducible] def UniformizerSquareData.successive_square

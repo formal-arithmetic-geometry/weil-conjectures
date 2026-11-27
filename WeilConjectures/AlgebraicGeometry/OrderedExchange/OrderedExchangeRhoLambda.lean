@@ -89,8 +89,6 @@ the completion units, and the comparison data built from them, are in
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.defeqAttrib.useBackward true
 set_option synthInstance.maxSize 2048
@@ -1100,7 +1098,6 @@ def scalarDiagonal (T : Scheme.{t}) :
     Functor.mapDerivedCategoryNatIso (ordinaryScalarDiagonal d T) ≪≫
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
-set_option linter.flexible false in
 private theorem ordinaryLambda_unit (T : Scheme.{t})
     (N : reductionModules T (d.completedRing T)) :
     (reductionRestrict T (exchangeScalar d T)).map
@@ -1121,7 +1118,10 @@ private theorem ordinaryLambda_unit (T : Scheme.{t})
     exact (ordinaryLambda_existsUnique d T).exists.choose_spec ((Functor.const ℕᵒᵖ).obj N) n.unop
   simp only [Category.assoc]
   erw [hl]
-  simp [constLimAdj, ordinaryScalarDiagonal]
+  simp only [Functor.id_obj, Functor.whiskeringRight_obj_obj, Functor.comp_obj,
+    Functor.const_obj_obj, lim_obj, constLimAdj, Adjunction.mk'_unit, ordinaryScalarDiagonal,
+    Iso.symm_hom, NatIso.ofComponents_inv_app, lim_map, limMap_π, Iso.refl_inv, Category.comp_id,
+    limit.lift_π, NatTrans.id_app]
   rw [← Functor.map_comp, limit.lift_π]
   exact (reductionRestrict T (exchangeScalar d T)).map_id N
 

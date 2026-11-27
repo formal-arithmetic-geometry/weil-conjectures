@@ -20,8 +20,6 @@ public import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionDualLocalIs
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false
--- Universe-polymorphic sheafification instances make the section-variable linter expensive.
-set_option linter.unusedSectionVars false
 
 universe uC vC u m
 
@@ -250,6 +248,7 @@ noncomputable def scalarExtensionTowerIso {R S T : Sheaf J CommRingCat.{u}}
   hom_inv_id := scalarExtensionTower_forward_reverse α β N
   inv_hom_id := scalarExtensionTower_reverse_forward α β N
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}] in
 /-- The tower comparison has the explicitly constructed forward component. -/
 theorem scalarExtensionTowerIso_hom {R S T : Sheaf J CommRingCat.{u}}
     (α : R ⟶ S) (β : S ⟶ T) (N : SheafOfModules.{max u m} ((sheafCompose J

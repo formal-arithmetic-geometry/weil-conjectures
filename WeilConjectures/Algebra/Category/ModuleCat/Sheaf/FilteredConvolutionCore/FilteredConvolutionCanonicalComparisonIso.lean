@@ -117,8 +117,6 @@ theorem tensorHom_f_comp_testMap {P Q : Complex R} (F : DecreasingFiltration P)
     erw [reassoc_of% (ι_tensorHom_f _ _ i j n h)]
     rw [h0, MonoidalPreadditive.zero_tensor, zero_comp]
 
--- The bounds `hQc`, `hQd` on the second filtration are not needed for the proof.
-set_option linter.unusedVariables false in
 /-- Under finite bounds, termwise split projections in the first filtration and flat
 first graded terms identify the canonical comparison with the associated graded
 isomorphism.  The proof is the degreewise finite split calculation and exactness of
@@ -126,7 +124,7 @@ flat tensoring, followed by totalization and the Koszul differential check. -/
 theorem canonical_comparison_isIso
     {P Q : Complex R} (F : DecreasingFiltration P) (G : DecreasingFiltration Q)
     (a b c d : ℤ) (hPa : F.F a = ⊤) (hPb : F.F (b + 1) = ⊥)
-    (hQc : G.F c = ⊤) (hQd : G.F (d + 1) = ⊥)
+    (_hQc : G.F c = ⊤) (_hQd : G.F (d + 1) = ⊥)
     (hSplit : ∀ p n : ℤ,
       IsSplitEpi ((F.complexQuotientπ p (p + 1) (by omega)).f n))
     (hFlat : ∀ p n : ℤ, IsFlatOnSite (R := R) ((F.gradedPiece p).X n))

@@ -126,7 +126,6 @@ private noncomputable def modelIso {R : Type u} [CommRing R]
   HomologicalComplex.Hom.isoOfComponents (modelXIso P N)
     (fun n m h ↦ modelToInternalX_comm P N n m h)
 
-set_option linter.style.haveILetI false in
 /-- A bounded finite-free complex has its signed dual tensor as its algebraic
 endomorphism complex. -/
 theorem modulePerfectDualTensorHom_iso {R : Type u} [CommRing R]
@@ -137,27 +136,27 @@ theorem modulePerfectDualTensorHom_iso {R : Type u} [CommRing R]
       (CochainComplex.moduleHomComplex P
         ((CochainComplex.singleFunctor _ 0).obj (ModuleCat.of R R))) P
       (curriedTensor _) ≅ CochainComplex.moduleHomComplex P P) := by
-  letI : ∀ i : ℤ, Module.Finite R (P.X i) := fun i => (_hfree i).1
-  letI : ∀ i : ℤ, Module.Free R (P.X i) := fun i => (_hfree i).2
-  letI (X₁ X₂ : GradedObject ℤ (ModuleCat.{u} R)) : X₁.HasTensor X₂ := inferInstance
-  letI (X₁ X₂ X₃ : GradedObject ℤ (ModuleCat.{u} R)) :
+  let : ∀ i : ℤ, Module.Finite R (P.X i) := fun i => (_hfree i).1
+  let : ∀ i : ℤ, Module.Free R (P.X i) := fun i => (_hfree i).2
+  let (X₁ X₂ : GradedObject ℤ (ModuleCat.{u} R)) : X₁.HasTensor X₂ := inferInstance
+  let (X₁ X₂ X₃ : GradedObject ℤ (ModuleCat.{u} R)) :
       GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ := inferInstance
-  letI (X₁ X₂ X₃ : GradedObject ℤ (ModuleCat.{u} R)) :
+  let (X₁ X₂ X₃ : GradedObject ℤ (ModuleCat.{u} R)) :
       GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ := inferInstance
-  letI (X₁ X₂ X₃ X₄ : GradedObject ℤ (ModuleCat.{u} R)) :
+  let (X₁ X₂ X₃ X₄ : GradedObject ℤ (ModuleCat.{u} R)) :
       GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ := inferInstance
-  letI : HasColimitsOfSize.{0, 0} (ModuleCat.{u} R) := hasColimitsOfSizeShrink _
-  letI : MonoidalCategory (CochainComplex (ModuleCat.{u} R) ℤ) := inferInstance
-  letI : MonoidalClosed (CochainComplex (ModuleCat.{u} R) ℤ) :=
+  let : HasColimitsOfSize.{0, 0} (ModuleCat.{u} R) := hasColimitsOfSizeShrink.{0, 0, u, u} _
+  let : MonoidalCategory (CochainComplex (ModuleCat.{u} R) ℤ) := inferInstance
+  let : MonoidalClosed (CochainComplex (ModuleCat.{u} R) ℤ) :=
     { closed := fun X =>
         { rightAdj := CochainComplex.internalHom X
           adj := CochainComplex.tensorHomAdjunction X } }
-  letI : ∀ i, HasRightDual (P.X i) :=
+  let : ∀ i, HasRightDual (P.X i) :=
     fun i => (ModuleCat.isDualizable_of_projective (P.X i)).some
-  letI := CochainComplex.exactPairingRightDual P a b
-  letI : ExactPairing P.rightDual P :=
+  let := CochainComplex.exactPairingRightDual P a b
+  let : ExactPairing P.rightDual P :=
     BraidedCategory.exactPairing_swap P P.rightDual
-  letI : IsIso (MonoidalClosed.ihomUnitTensorToIhom P P) :=
+  let : IsIso (MonoidalClosed.ihomUnitTensorToIhom P P) :=
     MonoidalClosed.isIso_ihomUnitTensorToIhom P.rightDual P P
   let e : internalHomObj P
       ((CochainComplex.singleFunctor _ 0).obj (ModuleCat.of R R)) ⊗ P ≅
@@ -166,7 +165,7 @@ theorem modulePerfectDualTensorHom_iso {R : Type u} [CommRing R]
   let U := (CochainComplex.singleFunctor (ModuleCat.{u} R) 0).obj (ModuleCat.of R R)
   let eU := modelIso P U
   let eP := modelIso P P
-  letI : IsIso eU.hom := CategoryTheory.Iso.isIso_hom eU
+  let : IsIso eU.hom := CategoryTheory.Iso.isIso_hom eU
   let t : CochainComplex.mapBifunctor (moduleHomComplex P U) P
       (curriedTensor (ModuleCat.{u} R)) ≅
       CochainComplex.mapBifunctor (internalHomObj P U) P

@@ -35,7 +35,6 @@ Source: Stacks 0FPQ, 0FPT.
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option Elab.async false
-set_option linter.style.haveILetI false
 universe c w
 open CategoryTheory CategoryTheory.MonoidalCategory WeilConjectures
 namespace CategoryTheory.RingedForgetTensorTransposition
@@ -71,9 +70,9 @@ theorem coefficientAssociator_model_native
       q.map (α_ P Q N).hom ≫
         (coh.tensorIso P (B.obj (Q, N)) (Or.inl hP) ≪≫
           whiskerLeftIso (q.obj P) (coh.tensorIso Q N (Or.inr hN))).hom := by
-  letI := SheafOfModules.isMonoidal_W_independentCoefficients R
-  letI := SheafOfModules.monoidalCategory R
-  letI := S.monoidal
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R
+  let := SheafOfModules.monoidalCategory R
+  let := S.monoidal
   obtain ⟨a, ha, hm⟩ := coh.associator_model P Q N hP hQ hN
   have he := coefficientAssociator_eq_native J R P Q N a ha
   rw [he] at hm

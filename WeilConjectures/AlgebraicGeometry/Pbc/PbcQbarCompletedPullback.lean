@@ -40,7 +40,7 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type w) [Field Ω]
   [iY : Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))]
   (f : X ⟶ Y)
 
-set_option linter.unusedSectionVars false in
+omit [IsAlgClosure ℚ_[l] Ω] dY iY in
 /-- Restriction of the actual completed pullback to the integral constructible objects. -/
 theorem pbcQbarIntegralPull_mem (E : Padic.FiniteCoefficientFields l Ω)
     (K : pbcIntegralStage l Ω Y E) :

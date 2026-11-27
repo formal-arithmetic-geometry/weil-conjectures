@@ -36,7 +36,6 @@ universe u v
 
 namespace Algebra
 
-set_option linter.unusedVariables false in
 /-- A regular closed point has a principal neighbourhood with an explicit polynomial
 presentation and an invertible Jacobian minor. -/
 theorem exists_jacobian_unit_presentation_of_regularAtMaximal
@@ -46,7 +45,7 @@ theorem exists_jacobian_unit_presentation_of_regularAtMaximal
     (hreg : IsRegularLocalRing (Localization.AtPrime m)) :
     ∃ (g : S), g ∉ m ∧
       ∃ (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) k)
-        (e : (MvPolynomial (Fin n) k ⧸ Ideal.span (Set.range f)) ≃ₐ[k]
+        (_e : (MvPolynomial (Fin n) k ⧸ Ideal.span (Set.range f)) ≃ₐ[k]
           Localization.Away g) (i : Fin c → Fin n),
         StrictMono i ∧ IsUnit (Ideal.Quotient.mk (Ideal.span (Set.range f))
           (Matrix.det (fun j l : Fin c ↦ MvPolynomial.pderiv (i l) (f j)))) := by

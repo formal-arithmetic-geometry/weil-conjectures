@@ -172,7 +172,6 @@ private theorem tensor_factor_baseChange_embedding
   exact ⟨halpha₁, ⟨f⟩⟩
 
 -- Preserve the existing, internally unused `hQ` binder in the public statement.
-set_option linter.unusedVariables false in
 /-- A closed prime of a normalized tensor factor lifts after finite DVR base change. Let `B ⟶ A`
 be a finite extension of discrete valuation rings, `E` a finite separable extension of `Frac B`,
 `F = (E ⊗_B A)/P` a field factor into which `A` injects, and `S` the normalization of `A` in `F`,
@@ -197,7 +196,7 @@ theorem dvr_normalized_tensor_factor_lift
     Function.Injective alpha →
     let S := integralClosure A F
     Module.Finite A S →
-    ∀ (Q : Ideal S) (hQ : Q.IsPrime),
+    ∀ (Q : Ideal S) (_hQ : Q.IsPrime),
     Q.comap (algebraMap A S) = IsLocalRing.maximalIdeal A →
     ∀ (A₁ : Type u) [CommRing A₁] [IsDomain A₁] [IsDiscreteValuationRing A₁]
       [Algebra A A₁] [Algebra B A₁] [IsScalarTower B A A₁]

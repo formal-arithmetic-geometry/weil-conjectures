@@ -135,9 +135,10 @@ noncomputable abbrev condensedOpenImmersionShriekExchange :=
     (Profinite.padicAlgClRingObj l) (shriekCompactification k₀ f).i
     (comp_over (shriekCompactification k₀ f).i (Spec (CommRingCat.of k₀)))
 
-set_option linter.style.longLine false in
-set_option linter.unusedSectionVars false in
 variable (k₀) in
+omit [Fact (ringChar k₀ ≠ l)] [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] in
 /-- The condensed Weil extension by zero `D(i_!)` along the open immersion of the
 compactification preserves bounded constructible condensed Weil complexes. -/
 theorem condensedWeilObjectProperty_extensionByZero
@@ -151,8 +152,10 @@ theorem condensedWeilObjectProperty_extensionByZero
       ((shriekCompactification k₀ f).Z ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
   have : IsNoetherian ((shriekCompactification k₀ f).Z ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
     ⟨⟩
-  exact ObjectProperty.prop_of_iso (condensedBoundedConstructible k₀ l (shriekCompactification k₀ f).Z)
-    ((IsoAlgebra.derivedExactForgetCommIso (condensedOpenImmersionShriekExchange k₀ l f)).app M).symm
+  exact ObjectProperty.prop_of_iso
+    (condensedBoundedConstructible k₀ l (shriekCompactification k₀ f).Z)
+    ((IsoAlgebra.derivedExactForgetCommIso (condensedOpenImmersionShriekExchange k₀ l f)).app
+      M).symm
     (CondensedRing.boundedConstructible_mapDerivedCategory_openImmersionLowerShriek_obj _
       (condensedOpenImmersionMap k₀ f) _ hM)
 
@@ -237,7 +240,6 @@ noncomputable def condensedWeilEquivUpperShriekObjIso (L : WeilComplex k₀ l Y)
   (condensedWeilEquiv k₀ l X).functor.mapIso ((upperShriekCondensedIso k₀ l f).app L) ≪≫
     (condensedWeilEquiv k₀ l X).counitIso.app _
 
-set_option linter.style.longLine false in
 variable (k₀) in
 /-- **The Frobenius structure of the adic Weil `Rf^!` is the condensed exceptional datum.** For a
 Weil complex `L` on `Y`, the condensed model `E (Rf^! L)` of the underlying complex of `Rf^! L` is
@@ -279,7 +281,8 @@ theorem exists_adicSheafEquivCondensedMod_forget_upperShriek_obj_iso_isWeilEquiv
     (IsoAlgebra.derivedStrIso _).hom.naturality
       (condensedWeilEquivUpperShriekObjIso k₀ l f L).hom.hom
   exact ⟨((IsoAlgebra.derivedExactForgetCommIso
-      (ProEtaleWeilSheaf.condensedFrobeniusComparison k₀ l X)).app ((upperShriek f).obj L).obj).symm ≪≫
+      (ProEtaleWeilSheaf.condensedFrobeniusComparison k₀ l X)).app
+        ((upperShriek f).obj L).obj).symm ≪≫
     (IsoAlgebra.forget _).mapDerivedCategory.mapIso
       ((ObjectProperty.ι _).mapIso (condensedWeilEquivUpperShriekObjIso k₀ l f L)) ≪≫ θc,
     h₀'.comp (h₁.comp hθc)⟩

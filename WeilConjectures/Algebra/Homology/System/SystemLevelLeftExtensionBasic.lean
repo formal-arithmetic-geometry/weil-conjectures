@@ -75,7 +75,6 @@ successive transitions. No normalization, coefficient flatness or bound is impos
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedVariables false
 set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false

@@ -120,8 +120,6 @@ private def squareOfAcyclic
   erw [CategoryTheory.Functor.map_id, Category.comp_id] at h
   exact h
 
--- Preserve the published names of the existential section-normalization witnesses.
-set_option linter.unusedVariables false in
 /-- Scalar restrictions retain the coefficient cones and the normalized push squares. -/
 theorem exists_diagonalTraceScalarComparisons (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}}
@@ -149,7 +147,7 @@ theorem exists_diagonalTraceScalarComparisons (l : ℕ) [Fact l.Prime]
       Nonempty (Coefficients l E X cX rX) ∧
       ∃ Rc : DiagonalRightDerived (diagonalTracePush l f),
       ∃ varyingOrdinary : g.push ⋙ rS.F ≅ rX.F ⋙ diagonalTraceSystemPush l f,
-      ∃ varying_sections : ∀ (M : Systems X (Arings l E X)) (n : ℕ) (U : S.ProEtᵒᵖ)
+      ∃ _varying_sections : ∀ (M : Systems X (Arings l E X)) (n : ℕ) (U : S.ProEtᵒᵖ)
           (x : (((g.push ⋙ rS.F).obj M).obj (op n)).obj.obj U),
         HEq (((varyingOrdinary.hom.app M).app (op n)).hom.app U x) x,
       Nonempty (ExactSquareOfUniverses g.push (diagonalTraceSystemPush l f)
@@ -157,7 +155,7 @@ theorem exists_diagonalTraceScalarComparisons (l : ℕ) [Fact l.Prime]
       ∃ completedOrdinary : diagonalTracePush l f ⋙ diagonalCompletedRestriction l S ≅
         diagonalCompletedRestriction l X ⋙
           lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f,
-      ∃ completed_sections : ∀ (M : DiagonalCompleted l X) (U : S.ProEtᵒᵖ)
+      ∃ _completed_sections : ∀ (M : DiagonalCompleted l X) (U : S.ProEtᵒᵖ)
           (x : ((diagonalTracePush l f ⋙ diagonalCompletedRestriction l S).obj M).obj.obj U),
         HEq ((completedOrdinary.hom.app M).hom.app U x) x,
       Nonempty (ExactSquare (diagonalTracePush l f)

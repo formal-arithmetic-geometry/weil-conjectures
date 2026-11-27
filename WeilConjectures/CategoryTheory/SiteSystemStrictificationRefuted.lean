@@ -80,8 +80,6 @@ private theorem strictification_preserves_pullback
     {X Y Z : StrictificationPoint} (f : X ⟶ Z) (g : Y ⟶ Z) :
     PreservesLimit (cospan f g) (𝟭 StrictificationPoint) := by infer_instance
 
-set_option linter.style.haveILetI false in
-set_option linter.unusedVariables false in
 /-- A strictification of the system of sites with finite coverings indexed by a directed set
 (strict coefficient equalities with a codiscrete labelling) cannot exist, for the system
 indexed by `WithTop ℕ`; the displayed negated proposition is the strictification signature
@@ -93,23 +91,23 @@ theorem site_system_strictification_data_refuted : ¬ (∀
     (C : I → Cat.{0, 0}) (P : ∀ i : I, Precoverage (C i))
     [∀ i, (P i).HasIsos] [∀ i, (P i).IsStableUnderComposition]
     [∀ i, (P i).IsStableUnderBaseChange] [∀ i, (P i).HasPullbacks]
-    (hfinite : ∀ (i : I) (X : C i) (R : Presieve X), R ∈ P i X → Finite R.uncurry)
+    (_hfinite : ∀ (i : I) (X : C i) (R : Presieve X), R ∈ P i X → Finite R.uncurry)
     (U : ∀ (i j : I), i ≤ j → C i ⥤ C j)
-    (hUid : ∀ i : I, U i i le_rfl = 𝟭 (C i))
+    (_hUid : ∀ i : I, U i i le_rfl = 𝟭 (C i))
     (gamma : ∀ (i j k : I) (h : i ≤ j) (h' : j ≤ k),
       U i j h ⋙ U j k h' ≅ U i k (h.trans h'))
-    (hgammaLeft : ∀ (i k : I) (h : i ≤ k),
+    (_hgammaLeft : ∀ (i k : I) (h : i ≤ k),
       HEq (gamma i i k le_rfl h) (Iso.refl (U i k h)))
-    (hgammaRight : ∀ (i k : I) (h : i ≤ k),
+    (_hgammaRight : ∀ (i k : I) (h : i ≤ k),
       HEq (gamma i k k h le_rfl) (Iso.refl (U i k h)))
-    (hgamma : ∀ (i j k l : I) (h : i ≤ j) (h' : j ≤ k) (h'' : k ≤ l) (X : C i),
+    (_hgamma : ∀ (i j k l : I) (h : i ≤ j) (h' : j ≤ k) (h'' : k ≤ l) (X : C i),
       (gamma j k l h' h'').hom.app ((U i j h).obj X) ≫
           (gamma i j l h (h'.trans h'')).hom.app X =
         (U k l h'').map ((gamma i j k h h').hom.app X) ≫
           (gamma i k l (h.trans h') h'').hom.app X)
-    (hcover : ∀ (i j : I) (h : i ≤ j) (X : C i) (R : Presieve X),
+    (_hcover : ∀ (i j : I) (h : i ≤ j) (X : C i) (R : Presieve X),
       R ∈ P i X → R.map (U i j h) ∈ P j ((U i j h).obj X))
-    (hpullback : ∀ (i j : I) (h : i ≤ j) (X Y Z : C i) (R : Presieve X),
+    (_hpullback : ∀ (i j : I) (h : i ≤ j) (X Y Z : C i) (R : Presieve X),
       R ∈ P i X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →
         PreservesLimit (cospan f g) (U i j h))
     [∀ (i j : I) (h : i ≤ j), (U i j h).IsContinuous
@@ -120,8 +118,8 @@ theorem site_system_strictification_data_refuted : ¬ (∀
       (sheafPullback (U i j h) (Type 0) (P i).toGrothendieck (P j).toGrothendieck)]
     (D : Type 0) [Category.{0} D] (v : ∀ i : I, C i ⥤ D)
     (delta : ∀ (i j : I) (h : i ≤ j), U i j h ⋙ v j ≅ v i)
-    (hdeltaId : ∀ i : I, HEq (delta i i le_rfl) (Iso.refl (v i)))
-    (hdelta : ∀ (i j k : I) (h : i ≤ j) (h' : j ≤ k) (X : C i),
+    (_hdeltaId : ∀ i : I, HEq (delta i i le_rfl) (Iso.refl (v i)))
+    (_hdelta : ∀ (i j k : I) (h : i ≤ j) (h' : j ≤ k) (X : C i),
       (v k).map ((gamma i j k h h').hom.app X) ≫
           (delta i k (h.trans h')).hom.app X =
         (delta j k h').hom.app ((U i j h).obj X) ≫ (delta i j h).hom.app X)
@@ -197,26 +195,26 @@ theorem site_system_strictification_data_refuted : ¬ (∀
     exact preservesFiniteColimits_of_natIso (sheafPullbackIso (𝟭 StrictificationPoint)
       (Type 0) (⊤ : Precoverage StrictificationPoint).toGrothendieck
       (⊤ : Precoverage StrictificationPoint).toGrothendieck)
-  letI hIsos : ∀ i, (P i).HasIsos := fun _ ↦
+  let hIsos : ∀ i, (P i).HasIsos := fun _ ↦
     inferInstanceAs (⊤ : Precoverage StrictificationPoint).HasIsos
-  letI hComp : ∀ i, (P i).IsStableUnderComposition := fun _ ↦
+  let hComp : ∀ i, (P i).IsStableUnderComposition := fun _ ↦
     inferInstanceAs (⊤ : Precoverage StrictificationPoint).IsStableUnderComposition
-  letI hBase : ∀ i, (P i).IsStableUnderBaseChange := fun _ ↦
+  let hBase : ∀ i, (P i).IsStableUnderBaseChange := fun _ ↦
     inferInstanceAs (⊤ : Precoverage StrictificationPoint).IsStableUnderBaseChange
-  letI hPull : ∀ i, (P i).HasPullbacks := fun _ ↦
+  let hPull : ∀ i, (P i).HasPullbacks := fun _ ↦
     inferInstanceAs (⊤ : Precoverage StrictificationPoint).HasPullbacks
-  letI hCont : ∀ (i j : I) (h : i ≤ j), (U i j h).IsContinuous
+  let hCont : ∀ (i j : I) (h : i ≤ j), (U i j h).IsContinuous
       (P i).toGrothendieck (P j).toGrothendieck := fun _ _ _ ↦
     inferInstanceAs ((𝟭 StrictificationPoint).IsContinuous
       (⊤ : Precoverage StrictificationPoint).toGrothendieck
       (⊤ : Precoverage StrictificationPoint).toGrothendieck)
-  letI hLim : ∀ (i j : I) (h : i ≤ j), PreservesFiniteLimits
+  let hLim : ∀ (i j : I) (h : i ≤ j), PreservesFiniteLimits
       (sheafPullback (U i j h) (Type 0) (P i).toGrothendieck (P j).toGrothendieck) :=
     fun _ _ _ ↦ inferInstanceAs (PreservesFiniteLimits
       (sheafPullback (𝟭 StrictificationPoint) (Type 0)
         (⊤ : Precoverage StrictificationPoint).toGrothendieck
         (⊤ : Precoverage StrictificationPoint).toGrothendieck))
-  letI hCol : ∀ (i j : I) (h : i ≤ j), PreservesFiniteColimits
+  let hCol : ∀ (i j : I) (h : i ≤ j), PreservesFiniteColimits
       (sheafPullback (U i j h) (Type 0) (P i).toGrothendieck (P j).toGrothendieck) :=
     fun _ _ _ ↦ hcol
   obtain ⟨F, Q, e, he, hQ⟩ := @h I inferInstance inferInstance inferInstance C P
@@ -229,9 +227,9 @@ theorem site_system_strictification_data_refuted : ¬ (∀
     (fun _ _ _ _ _ _ ↦ Subsingleton.elim _ _)
   obtain ⟨hiso, _, hbase, _, hfin, _, _, _, _, hcont, _, _, theta, v', hstrict,
     hretract, _⟩ := hQ
-  letI := hiso
-  letI := hbase
-  letI := he
+  let := hiso
+  let := hbase
+  let := he
   exact site_system_strictification_obstruction I StrictificationPoint ⟨⟨⟩⟩
     F Q hfin e v' hstrict hretract
 

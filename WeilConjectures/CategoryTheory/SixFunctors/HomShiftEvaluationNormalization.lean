@@ -14,7 +14,6 @@ public import Mathlib.CategoryTheory.Triangulated.Opposite.Functor
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 open CategoryTheory CategoryTheory.Pretriangulated MonoidalCategory Opposite
 
 namespace CategoryTheory

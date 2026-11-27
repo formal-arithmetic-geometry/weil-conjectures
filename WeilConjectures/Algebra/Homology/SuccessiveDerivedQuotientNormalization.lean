@@ -174,7 +174,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
 open CategoryTheory.Functor in
-set_option linter.unusedSectionVars false in
+omit [EssentiallySmall.{r} C] in
 private theorem sectionTensor_smul_one {R S : Sheaf J CommRingCat.{r}} {a : R ⟶ S}
     (p : Presentation a) (M : Modules R) (U : Cᵒᵖ) (s : S.obj.obj U)
     (x : M.val.obj U) : sectionTensor p M U s x = s • sectionTensor p M U 1 x := by
@@ -207,7 +207,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
 open CategoryTheory.Functor in
-set_option linter.unusedSectionVars false in
+omit [EssentiallySmall.{r} C] in
 private theorem ordinaryComp_unit
     (p : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), Presentation a)
     (A : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), (p a).ordinary ⊣ restriction a)
@@ -225,6 +225,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
 open CategoryTheory.Functor in
+omit [EssentiallySmall.{r} C] in
 private theorem ordinaryComp_hom
     (p : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), Presentation a)
     (A : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), (p a).ordinary ⊣ restriction a)
@@ -267,6 +268,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
 open CategoryTheory.Functor in
+omit [EssentiallySmall.{r} C] in
 private theorem ordinaryComp_inv
     (p : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), Presentation a)
     (A : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), (p a).ordinary ⊣ restriction a)
@@ -475,6 +477,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 4096 in
 open CategoryTheory.Functor in
+omit [EssentiallySmall.{r} C] in
 private theorem ordinaryComp_homotopy_unit
     (p : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), Presentation a)
     (A : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), (p a).ordinary ⊣ restriction a)

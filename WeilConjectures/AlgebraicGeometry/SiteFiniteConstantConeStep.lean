@@ -345,9 +345,6 @@ end Helpers
 
 attribute [local instance] map_colimits map_additive
 
--- Preserve the original named forall binders, which are used by the proof but
--- do not occur in the theorem's conclusion.
-set_option linter.unusedVariables false in
 /-- Killing top cohomology locally leaves an object with one fewer possible
 cohomological degree and finite locally constant cohomology. The triangle is
 recorded after rotation; no extension tower is part of this assertion. -/
@@ -367,11 +364,11 @@ theorem exists_site_finite_constant_cone_step
             (Functor.sheafAdjunctionCocontinuous (Over.map f) (ModuleCat.{u} B)
               (J.toGrothendieck.over V) (J.toGrothendieck.over U)))⟩
     ∀ (U : C) (K : DerivedCategory (Sheaf (J.toGrothendieck.over U) (ModuleCat.{u} B)))
-      (a b : ℤ) (hab : a < b)
-      (hvan : ∀ q : ℤ, q < a ∨ b < q → IsZero
+      (a b : ℤ) (_hab : a < b)
+      (_hvan : ∀ q : ℤ, q < a ∨ b < q → IsZero
         ((DerivedCategory.homologyFunctor
           (Sheaf (J.toGrothendieck.over U) (ModuleCat.{u} B)) q).obj K))
-      (hloc : ∀ (q : ℤ) (V : C) (g : V ⟶ U),
+      (_hloc : ∀ (q : ℤ) (V : C) (g : V ⟶ U),
         ∃ (I : Type u) (W : I → C) (f : ∀ i : I, W i ⟶ V),
           Presieve.ofArrows W f ∈ J V ∧
           ∀ i : I, ∃ M : ModuleCat.{u} B, Module.Finite B M ∧ Nonempty

@@ -41,7 +41,6 @@ namespace CategoryTheory
 
 
 
-set_option linter.checkUnivs false in
 /-- **A formalism of pullbacks, pushforwards and extensions by zero** indexed by a category `𝒞`
 with a class `𝒪` of morphisms (the open immersions): a category `obj X` for each `X : 𝒞`, a
 pullback pseudofunctor `f ↦ pb f`, a right adjoint `pf f` of each `pb f`, and a left adjoint

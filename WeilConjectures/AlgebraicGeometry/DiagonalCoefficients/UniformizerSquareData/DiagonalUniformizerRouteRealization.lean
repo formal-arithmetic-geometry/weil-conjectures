@@ -50,6 +50,7 @@ local elab "routeField% " i:num d:term:max : term => do
   let e ← Lean.Elab.Term.elabTerm d none
   return Lean.mkProj ``FiniteRouteData i.getNat e
 
+-- A `theorem` would need the inferred statement spelled out in the signature.
 set_option linter.defProp false in
 /-- Both scalar delta squares identify the successive realized class. -/
 @[irreducible] def UniformizerSquareData.quotient_realization

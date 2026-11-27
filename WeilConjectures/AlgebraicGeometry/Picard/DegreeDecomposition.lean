@@ -273,6 +273,7 @@ theorem existsUnique_iso_isMonHom_of_isPicardZeroMul [SmoothOfRelativeDimension 
 variable [IsSepClosed k] [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
   [IsProper (X ↘ Spec (.of k))] [GeometricallyIntegral (X ↘ Spec (.of k))]
 
+omit [IsSepClosed k] [GeometricallyIntegral (X ↘ Spec (.of k))] in
 /-- **`Pic^0` is an open and closed subgroup scheme of the Picard scheme.** Let `X` be a smooth
 projective curve over a separably closed field `k` and let `P` represent `Pic_{X/k}`. Then `P`
 is a commutative group scheme whose group law is the tensor product of invertible modules, and

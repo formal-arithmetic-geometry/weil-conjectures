@@ -134,7 +134,6 @@ set_option cleanup.letToHave false
 attribute [local irreducible] Functor.rightDerivedFunctor
   Functor.rightDerivedFunctorUnit DerivedCategory.Qh RingedSpace.moduleDirectImage
 set_option backward.defeqAttrib.useBackward true
-set_option linter.all false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem global_arrow_transpose
@@ -160,7 +159,7 @@ private theorem global_arrow_transpose
         (κ.hom.app ((schemeDerivedDirectImage f).obj K) ≫
           (derivedPullback g').map ((relativeMVAdj f).counit.app K)) := by
     simp +instances only [schemeDerivedBaseChangeMap, relativeMVAdj, relativeMVComp, κ,
-      Iso.trans_hom, Iso.symm_hom, Iso.app_hom, NatTrans.comp_app,
+      Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
       eqToIso.hom, eqToHom_app, Category.assoc]
     rfl
   dsimp only [relativeMVGlobalArrow, Arrow.mk, Arrow.hom]

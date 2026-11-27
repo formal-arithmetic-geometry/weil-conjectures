@@ -251,11 +251,9 @@ private theorem over_preservesKInjective (X : RingedSpace.{u})
   have : L.Additive := Functor.additive_of_preserves_binary_products L
   exact adj.preservesKInjectiveComplexes
 
--- Keep the existing over-site parameter even though the proof needs no derived over-site.
-set_option linter.unusedSectionVars false in
--- Inline the standard module-derived category to match the comparison map's data.
-set_option linter.style.haveILetI false in
 -- The normalized comparison checks several concrete functor identifications.
+omit [∀ V : (Spec (.of A)).Opens, HasDerivedCategory.{w}
+    (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over V))] in
 /-- The open-sections comparison is normalized on every ordinary complex class
 (Stacks, Tags 08BS and 079V). -/
 theorem exists_openComparison_cohomology_model_iso :
@@ -267,10 +265,10 @@ theorem exists_openComparison_cohomology_model_iso :
           openComparisonAmbientUnit A U K := by
   let C := SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)
   let D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)
-  letI : Abelian C := inferInstance
-  letI : Abelian D := inferInstance
+  let : Abelian C := inferInstance
+  let : Abelian D := inferInstance
   let B := (moduleRings U.toScheme.toRingedSpace).obj.obj (op ⊤)
-  letI := HasDerivedCategory.standard (ModuleCat.{u} B)
+  let := HasDerivedCategory.standard (ModuleCat.{u} B)
   let T := openComparisonRestriction A U
   have hTa : T.Additive := inferInstance
   have hTz : T.PreservesZeroMorphisms :=

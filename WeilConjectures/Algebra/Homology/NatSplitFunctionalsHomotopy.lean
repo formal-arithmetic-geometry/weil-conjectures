@@ -22,7 +22,6 @@ universe u v
 open CategoryTheory
 namespace ChainComplex
 
-set_option linter.unusedVariables false in
 /-- The kernel complement of two split functionals is a deformation retract. -/
 theorem exists_nat_homotopy_equiv_of_split_functionals
     {R : Type u} [CommRing R] (C : ChainComplex (ModuleCat.{max u v} R) ℕ)
@@ -37,7 +36,7 @@ theorem exists_nat_homotopy_equiv_of_split_functionals
       if h : i = j + 1 then h ▸ LinearMap.ker α
       else if h : i = j then h ▸ LinearMap.ker β else ⊤
     ∃ (C' : ChainComplex (ModuleCat.{max u v} R) ℕ)
-      (g : ∀ i, C'.X i ≃ₗ[R] S i) (e : HomotopyEquiv C' C),
+      (_g : ∀ i, C'.X i ≃ₗ[R] S i) (e : HomotopyEquiv C' C),
       ∀ i : ℕ, Function.Injective (e.hom.f i).hom := by
   classical
   let S : ∀ i : ℕ, Submodule R (C.X i) := fun i ↦

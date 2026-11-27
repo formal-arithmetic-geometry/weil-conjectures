@@ -30,7 +30,6 @@ set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry
-set_option linter.unusedVariables false in
 /-- The quasi-coherent direct-image, unit, and tensor data for a proper noetherian morphism. -/
 theorem smoothProper_qcoh_data
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) [IsProper f]
@@ -38,10 +37,10 @@ theorem smoothProper_qcoh_data
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     [∀ U : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u}
       ((moduleRings Y.toRingedSpace).over U))]
-    : ∃ (hRf : ∀ E : schemeDerivedQCohCategory X,
+    : ∃ (_hRf : ∀ E : schemeDerivedQCohCategory X,
         schemeDerivedQCohProperty Y ((schemeDerivedDirectImage f).obj E.obj))
-      (hO : schemeDerivedQCohProperty Y (𝟙_ (schemeDerivedCategory Y)))
-      (hTensor : ∀ (K : schemeDerivedQCohCategory Y) (E : schemeDerivedQCohCategory X),
+      (_hO : schemeDerivedQCohProperty Y (𝟙_ (schemeDerivedCategory Y)))
+      (_hTensor : ∀ (K : schemeDerivedQCohCategory Y) (E : schemeDerivedQCohCategory X),
         schemeDerivedQCohProperty X (((derivedPullback f).obj K.obj) ⊗ E.obj)),
       ∀ (K : schemeDerivedQCohCategory Y) (E : schemeDerivedQCohCategory X),
         schemeDerivedQCohProperty X (((derivedPullback f).obj K.obj) ⊗ E.obj) := by

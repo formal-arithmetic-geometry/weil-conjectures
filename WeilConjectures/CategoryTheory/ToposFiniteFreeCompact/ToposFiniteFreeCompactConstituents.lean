@@ -168,7 +168,6 @@ open scoped ChangeOfRings
 
 namespace CategoryTheory.ToposFiniteFreeCompact
 
-set_option linter.checkUnivs false
 
 /-- A fixed small-site presentation. The coefficient universe contains the site;
 object and morphism universes are independent.
@@ -714,7 +713,7 @@ private theorem matrix_isIso
     simpa only [g, Preadditive.sum_comp, Category.assoc, hf] using hY
   exact ⟨⟨g, hfg, hgf⟩⟩
 
-set_option linter.unusedSectionVars false in
+omit [Module.Finite A B] [Module.Free A B] in
 /-- The restriction/open comparison is the identity on defining section sums.
 Source: Stacks 03DI, 03DJ, 03CZ. -/
 theorem restrictionOpen_isIso {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T) :
@@ -822,7 +821,7 @@ private theorem restrictScalars_reflects
     infer_instance
   exact reflectsIsomorphisms_of_comp _ (SheafOfModules.toSheaf R)
 
-set_option linter.unusedSectionVars false in
+omit [Module.Finite A B] [Module.Free A B] in
 private theorem restriction_reflects (T : ScalarSite.{u, v, r, w} A B) :
     (U T).ReflectsIsomorphisms := by
   have : (res A B T.toSite).ReflectsIsomorphisms := by
@@ -922,7 +921,7 @@ private theorem localized_unit_isIso
   let := h
   exact NatIso.isIso_of_isIso_app _
 
-set_option linter.unusedSectionVars false in
+omit [Module.Finite A B] [Module.Free A B] in
 /-- The localized open units retain the ordinary full-faithfulness normalization.
 Source: Stacks 03DI, 03DJ, 07A6. -/
 theorem open_units_isIso {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T) :

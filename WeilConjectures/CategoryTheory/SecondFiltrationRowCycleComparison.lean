@@ -136,7 +136,6 @@ private theorem row_cycle_lift
       (R.iCycles r ≫ secondFiltrationRowι F I r s) (𝟙 _)
   exact (Subobject.mk_factors_iff m _).mp hm
 
-set_option linter.unusedVariables false in
 /-- Row cycles have canonical lifts to the filtration and graded cycles. Their
 quotient is row homology, normalized by the row homology projection. No page
 *differential* occurs in this statement.
@@ -147,7 +146,7 @@ theorem secondFiltration_row_cycle_comparison
     {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]
     (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F]
     (I : HomologicalComplex₂ A (ComplexShape.up ℤ) (ComplexShape.up ℕ))
-    (hbelow : ∃ b : ℤ, ∀ s : ℤ, s < b → IsZero (I.X s))
+    (_hbelow : ∃ b : ℤ, ∀ s : ℤ, s < b → IsZero (I.X s))
     (L : DecreasingFiltration
       ((((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).total
         (ComplexShape.up ℤ)))

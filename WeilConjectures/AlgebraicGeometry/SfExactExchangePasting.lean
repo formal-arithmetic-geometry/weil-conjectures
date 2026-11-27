@@ -22,7 +22,6 @@ pasting equations. These statements impose no quasi-compactness assumptions.
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 set_option backward.isDefEq.respectTransparency false
 
 universe u
@@ -386,7 +385,7 @@ private lemma exact_adj_comp
   intro K
   simp only [Adjunction.ofNatIsoRight_unit, Adjunction.ofNatIsoLeft_unit,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Iso.symm_hom, Adjunction.comp_unit_app]
+    Adjunction.comp_unit_app]
   let KL := ((L₁ ⋙ L₂).mapHomotopyCategory (.up ℤ)).obj K
   rw [← cancel_mono ((R₂ ⋙ R₁).mapDerivedCategory.map
     ((L₁ ⋙ L₂).mapDerivedCategoryFactorsh.hom.app K) ≫
@@ -519,7 +518,7 @@ private lemma derived_open_comp_conjugate
   have hK := congrArg (fun t ↦ t.app K) hd
   simp only [Adjunction.ofNatIsoRight_unit, Adjunction.ofNatIsoLeft_unit,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Iso.symm_hom, Adjunction.comp_unit_app,
+    Adjunction.comp_unit_app,
     Functor.mapDerivedCategoryNatIso_symm] at hK
   let L₁ := openImmersionLowerShriek B j₁
   let L₂ := openImmersionLowerShriek B j₂
@@ -770,7 +769,7 @@ private theorem exact_identity_mate
         Functor.whiskerLeft_app] at h
       simp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight,
         NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-        Functor.rightUnitor_hom_app, Functor.leftUnitor_inv_app, Category.id_comp]
+        Functor.rightUnitor_hom_app, Functor.leftUnitor_inv_app]
       rw [← cancel_mono (P.map (e.hom.app K))]
       simp only [Category.assoc, ← P.map_comp, Iso.inv_hom_id_app,
         P.map_id, Category.comp_id]
@@ -786,17 +785,16 @@ private theorem exact_identity_mate
     ext K
     have h := congr_app (hm) K
     simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
-      NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-      Functor.rightUnitor_hom_app, Functor.leftUnitor_inv_app, Category.id_comp] at h ⊢
+      NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at h ⊢
     rw [← cancel_mono (r'.hom.app (P.obj K))]
     dsimp only [Functor.comp_obj, Functor.id_obj] at h ⊢
     simp only [Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app,
-      Category.assoc, Category.comp_id] at h
+      Category.comp_id] at h
     simp only [Category.assoc, Iso.inv_hom_id_app]
     exact h.trans (Category.comp_id _).symm
   rw [hnat]
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+    Category.assoc, Iso.inv_hom_id_app]
   exact (Category.comp_id _).symm
 
 /-- Exact exchange for identity direct images respects the canonical identity normalization. -/
@@ -825,14 +823,13 @@ private theorem sfExactIdentityExchange
   rw [← hq]
   apply (cancel_epi ((unboundedFormalism A).sqIso t (𝟙 X') (𝟙 X) t
     (by simp)).hom).1
-  simp only [Iso.symm_hom, ← Category.assoc, Iso.hom_inv_id, Category.id_comp]
+  simp only [← Category.assoc, Iso.hom_inv_id, Category.id_comp]
   rw [ExchangeFormalism.sqIso_id_vert_hom]
   ext M
-  simp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, NatTrans.comp_app,
+  simp only [NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.leftUnitor_hom_app,
     Functor.rightUnitor_inv_app, Category.assoc, Category.id_comp]
-  simp only [unboundedFormalism, exact_pb_id, Category.assoc,
-    Iso.inv_hom_id_app, Category.comp_id]
+  simp only [unboundedFormalism, exact_pb_id, Iso.inv_hom_id_app]
   dsimp only [Functor.id_obj, Functor.comp_obj]
   simp only [Category.comp_id]
 
@@ -858,7 +855,7 @@ private theorem sfExactProperExchange_paste
   have h := congr_app ((unboundedFormalism A).pfBaseChange_paste_vert
     t m b l₁ r₁ l₂ r₂ (l₁ ≫ l₂) (r₁ ≫ r₂)
     sq₁.w sq₂.w rfl rfl (sq₁.vert_comp sq₂).w) K
-  simp only [unbounded_pf_base_change, unbounded_pf_comp,
+  simp only [unbounded_pf_comp,
     TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
@@ -869,8 +866,7 @@ private theorem sfExactProperExchange_paste
     unbounded_pf_base_change A sq₁, unbounded_pf_base_change A sq₂] at h
   dsimp only [unboundedFormalism] at h
   rw [h]
-  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app,
-    Functor.map_id, Category.id_comp]
+  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
 
 /-- Open compositors intertwine inverse exact base change for pasted Cartesian squares. -/
@@ -906,17 +902,16 @@ private theorem sfExactOpenExchange_paste
     TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vComp,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
-    Category.comp_id, Iso.symm_hom, Iso.symm_inv] at h
+    Category.comp_id] at h
   dsimp only [unboundedFormalism] at h
   apply (cancel_mono ((mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso
     (ModuleCat.{u + 1} A) (sq₁.paste_vert sq₂)).hom.app K)).1
-  simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+  simp only [Category.assoc, Iso.inv_hom_id_app]
   rw [h]
   simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app,
-    Category.id_comp, Category.comp_id, ← Functor.map_comp_assoc,
-    Functor.map_id]
+    ← Functor.map_comp_assoc]
   erw [CategoryTheory.Functor.map_id]
-  simp only [Category.id_comp, Category.comp_id, Iso.inv_hom_id_app_assoc]
+  simp only [Category.id_comp, Iso.inv_hom_id_app_assoc]
   exact Category.comp_id _
 
 /-- Exact proper, open, and identity exchanges respect their specified compositors. -/

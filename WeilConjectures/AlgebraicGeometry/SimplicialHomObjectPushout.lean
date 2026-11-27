@@ -118,21 +118,20 @@ private lemma representedFamily_exists {X : Scheme.{u₁}}
   refine ⟨g, fun n s ↦ ?_⟩
   exact congrFun (congrFun (congrArg Subtype.val hg) n) s
 
-set_option linter.unusedVariables false in
 /-- Hom objects turn admissible simplicial pushouts into pullbacks.
 The representing pairs are arbitrary fixed choices; the equations specify their unique
 induced morphisms. -/
 theorem simplicialHomObject_pushout_isPullback {X : Scheme.{u₁}}
     {K : SimplicialObject (FormalCoproduct.{w₁} X.Etale)}
     {A B C D : SSet.{t₁}} [A.Finite] [B.Finite] [C.Finite] [D.Finite]
-    (hAfin : ∀ n : ℕ, Finite (A.obj (op ⦋n⦌)))
-    (hAne : ∀ n : ℕ, Nonempty (A.obj (op ⦋n⦌)))
-    (hBfin : ∀ n : ℕ, Finite (B.obj (op ⦋n⦌)))
-    (hBne : ∀ n : ℕ, Nonempty (B.obj (op ⦋n⦌)))
-    (hCfin : ∀ n : ℕ, Finite (C.obj (op ⦋n⦌)))
-    (hCne : ∀ n : ℕ, Nonempty (C.obj (op ⦋n⦌)))
-    (hDfin : ∀ n : ℕ, Finite (D.obj (op ⦋n⦌)))
-    (hDne : ∀ n : ℕ, Nonempty (D.obj (op ⦋n⦌)))
+    (_hAfin : ∀ n : ℕ, Finite (A.obj (op ⦋n⦌)))
+    (_hAne : ∀ n : ℕ, Nonempty (A.obj (op ⦋n⦌)))
+    (_hBfin : ∀ n : ℕ, Finite (B.obj (op ⦋n⦌)))
+    (_hBne : ∀ n : ℕ, Nonempty (B.obj (op ⦋n⦌)))
+    (_hCfin : ∀ n : ℕ, Finite (C.obj (op ⦋n⦌)))
+    (_hCne : ∀ n : ℕ, Nonempty (C.obj (op ⦋n⦌)))
+    (_hDfin : ∀ n : ℕ, Finite (D.obj (op ⦋n⦌)))
+    (_hDne : ∀ n : ℕ, Nonempty (D.obj (op ⦋n⦌)))
     (p : A ⟶ B) (q : A ⟶ C) (i : B ⟶ D) (j : C ⟶ D)
     (hpush : CategoryTheory.IsPushout p q i j)
     {HA : FormalCoproduct.{w₁} X.Etale}
@@ -190,19 +189,18 @@ theorem simplicialHomObject_pushout_isPullback {X : Scheme.{u₁}}
       rw [Category.assoc, hj, hl]
       exact hfC n s
 
-set_option linter.unusedVariables false in
 /-- If the common simplicial set is empty, the Hom object of the pushout is a product.
 The equations specify the unique induced morphisms of the fixed representing pairs. -/
 theorem simplicialHomObject_pushout_empty_isProduct {X : Scheme.{u₁}}
     {K : SimplicialObject (FormalCoproduct.{w₁} X.Etale)}
     {A B C D : SSet.{t₁}} [B.Finite] [C.Finite] [D.Finite]
     (hAempty : ∀ n : ℕ, IsEmpty (A.obj (op ⦋n⦌)))
-    (hBfin : ∀ n : ℕ, Finite (B.obj (op ⦋n⦌)))
-    (hBne : ∀ n : ℕ, Nonempty (B.obj (op ⦋n⦌)))
-    (hCfin : ∀ n : ℕ, Finite (C.obj (op ⦋n⦌)))
-    (hCne : ∀ n : ℕ, Nonempty (C.obj (op ⦋n⦌)))
-    (hDfin : ∀ n : ℕ, Finite (D.obj (op ⦋n⦌)))
-    (hDne : ∀ n : ℕ, Nonempty (D.obj (op ⦋n⦌)))
+    (_hBfin : ∀ n : ℕ, Finite (B.obj (op ⦋n⦌)))
+    (_hBne : ∀ n : ℕ, Nonempty (B.obj (op ⦋n⦌)))
+    (_hCfin : ∀ n : ℕ, Finite (C.obj (op ⦋n⦌)))
+    (_hCne : ∀ n : ℕ, Nonempty (C.obj (op ⦋n⦌)))
+    (_hDfin : ∀ n : ℕ, Finite (D.obj (op ⦋n⦌)))
+    (_hDne : ∀ n : ℕ, Nonempty (D.obj (op ⦋n⦌)))
     (p : A ⟶ B) (q : A ⟶ C) (i : B ⟶ D) (j : C ⟶ D)
     (hpush : CategoryTheory.IsPushout p q i j)
     {HB HC HD : FormalCoproduct.{w₁} X.Etale}

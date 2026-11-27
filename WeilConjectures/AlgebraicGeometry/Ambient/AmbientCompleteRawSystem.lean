@@ -80,7 +80,7 @@ variable {E F G : Padic.FiniteCoefficientFields l Ω}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-omit [IsNoetherian W] hDim hInv in
+omit [IsNoetherian W] hDim hInv [IsAlgClosure ℚ_[l] Ω] in
 /-- The recorded ambient tensor is the scalar tensor along the transported field inclusion. -/
 private theorem pbcAmbientScalarExtension_eq (h : E ≤ F) :
     pbcAmbientScalarExtension l Ω W h =
@@ -119,7 +119,7 @@ section Construction
 attribute [local semireducible] pbcAmbientCompleteIntegralTransition
 attribute [local irreducible] AlgebraicGeometry.Scheme.pbcRationalCoefficientEquiv
 
-omit [IsNoetherian W] hDim hInv in
+omit [IsAlgClosure ℚ_[l] Ω] [IsNoetherian W] hDim hInv in
 /-- The ambient tensor is additive, as a left adjoint. -/
 private theorem pbcAmbientScalarExtension_additive (h : E ≤ F) :
     (pbcAmbientScalarExtension l Ω W h).Additive := by
@@ -130,7 +130,7 @@ private theorem pbcAmbientScalarExtension_additive (h : E ≤ F) :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-omit [IsNoetherian W] hDim hInv in
+omit [IsNoetherian W] hDim hInv [IsAlgClosure ℚ_[l] Ω] in
 /-- The ambient tensor is semilinear along the inclusion of integer rings. -/
 private theorem pbcAmbientScalarExtension_smul (h : E ≤ F)
     {K L : PbcCompletedDerived W (pbcStageDatum.{u} l Ω E)}

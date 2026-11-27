@@ -38,16 +38,15 @@ universe u v w
 
 namespace ModuleCat
 
-set_option linter.unusedVariables false in
 /-- Successor step in Auslander's well-ordered union argument: assuming the length-`n`
 statement `hIH`, if every subquotient `F e / sup_{i < e} F i` of a well-ordered exhaustive
 filtration of `M` has a projective resolution of length `n + 1`, then so does `M`. -/
 theorem hasProjectiveResolutionLE_of_wellOrderedUnion_succ
     {R : Type u} [CommRing R] (n : ℕ)
     (hIH : ∀ (M : ModuleCat.{v} R) {E : Type w} [LinearOrder E]
-      [IsWellOrder E (· < ·)] (F : E → Submodule R M) (hF : Monotone F)
-      (hcover : ∀ x : M, ∃ e : E, x ∈ F e)
-      (hquot : ∀ e : E, HasProjectiveResolutionLE
+      [IsWellOrder E (· < ·)] (F : E → Submodule R M) (_hF : Monotone F)
+      (_hcover : ∀ x : M, ∃ e : E, x ∈ F e)
+      (_hquot : ∀ e : E, HasProjectiveResolutionLE
         (ModuleCat.of R ((F e) ⧸
           ((⨆ e' : {i : E // i < e}, F e'.val).comap (F e).subtype))) n),
       HasProjectiveResolutionLE M n)

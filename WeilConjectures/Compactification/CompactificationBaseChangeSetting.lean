@@ -27,15 +27,14 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Compactification
 
-set_option linter.unusedVariables false in
 /-- Base change of a quasi-compact compactification along a cartesian square of separated
 finite-type schemes over the field remains in that setting. The induced open arrow is
 unique, both component squares are cartesian, and the new proper arrow and open immersion
 form the existing base-changed compactification. All three new arrows are over `k`:
 `overBaseChangeFst`, `overI` and `overG` are morphisms of `Over (Spec (.of k))`. -/
 theorem baseChange_compactification_in_setting
-    (ℓ p₀ : ℕ) (hℓ : ℓ.Prime) (k : Type u) [Field k] [CharP k p₀]
-    (hp₀ : 0 < p₀) (hp₀ℓ : p₀ ≠ ℓ)
+    (ℓ p₀ : ℕ) (_hℓ : ℓ.Prime) (k : Type u) [Field k] [CharP k p₀]
+    (_hp₀ : 0 < p₀) (_hp₀ℓ : p₀ ≠ ℓ)
     {X X' Y Y' : Over (Spec (.of k))}
     [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
     [IsSeparated X'.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]

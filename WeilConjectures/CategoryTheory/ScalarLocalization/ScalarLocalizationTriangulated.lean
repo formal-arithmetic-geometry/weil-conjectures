@@ -76,7 +76,6 @@ private noncomputable def rationalComparison
       rw [hf, hh]
       exact (Preadditive.add_comp _ _ _ _ _ _).symm
 
-set_option linter.unusedVariables false in
 /-- Scalar localization with its induced shift and image triangles is triangulated, and
 localization is exact. Source: Stacks Project, Tags 05R2 and 05R6. -/
 theorem exists_triangulated_scalarLocalization
@@ -85,29 +84,29 @@ theorem exists_triangulated_scalarLocalization
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C]
     [(shiftFunctor C (1 : ℤ)).Linear R] (p : R) :
     ∃ z : HasZeroObject (ScalarLocalization R C p),
-      (fun [zeroInst : HasZeroObject (ScalarLocalization R C p)] ↦
+      (fun [_zeroInst : HasZeroObject (ScalarLocalization R C p)] ↦
         ∃ s : HasShift (ScalarLocalization R C p) ℤ,
-          (fun [shiftInst : HasShift (ScalarLocalization R C p) ℤ] ↦
+          (fun [_shiftInst : HasShift (ScalarLocalization R C p) ℤ] ↦
             shiftFunctor (ScalarLocalization R C p) (1 : ℤ) =
                 map R C p (shiftFunctor C (1 : ℤ)) ∧
             ∃ a : ∀ n : ℤ, (shiftFunctor (ScalarLocalization R C p) n).Additive,
-              (fun [addInst : ∀ n : ℤ,
+              (fun [_addInst : ∀ n : ℤ,
                   (shiftFunctor (ScalarLocalization R C p) n).Additive] ↦
                 ∃ q : (localization R C p).CommShift ℤ,
-                  (fun [commInst : (localization R C p).CommShift ℤ] ↦
+                  (fun [_commInst : (localization R C p).CommShift ℤ] ↦
                     (∀ X : C,
                       HEq (((localization R C p).commShiftIso (1 : ℤ)).hom.app X)
                         (𝟙 ((localization R C p).obj ((shiftFunctor C (1 : ℤ)).obj X)))) ∧
                     ∃ t : Pretriangulated (ScalarLocalization R C p),
-                      (fun [triInst : Pretriangulated (ScalarLocalization R C p)] ↦
+                      (fun [_triInst : Pretriangulated (ScalarLocalization R C p)] ↦
                         IsTriangulated (ScalarLocalization R C p) ∧
                         (localization R C p).IsTriangulated ∧
                         ∀ T : Triangle (ScalarLocalization R C p),
                           T ∈ distTriang (ScalarLocalization R C p) ↔
                             ∃ T' : Triangle C, T' ∈ distTriang C ∧
                               Nonempty (T ≅ (localization R C p).mapTriangle.obj T'))
-                        (triInst := t)) (commInst := q)) (addInst := a)) (shiftInst := s))
-        (zeroInst := z) := by
+                        (_triInst := t)) (_commInst := q)) (_addInst := a)) (_shiftInst := s))
+        (_zeroInst := z) := by
   classical
   have : ∀ n : ℤ, (shiftFunctor C n).Linear R := all_shift_linear R C
   let M := Submonoid.powers p

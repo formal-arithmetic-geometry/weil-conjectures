@@ -110,7 +110,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure
 noncomputable section
 set_option autoImplicit false
 set_option backward.defeqAttrib.useBackward false
-set_option linter.unusedSectionVars false
 set_option genCtorIdx false
 set_option genSizeOf false
 set_option genInjectivity false
@@ -815,6 +814,7 @@ private theorem restrictionMate_isIso :
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 include hβ in
+omit [Ua.ReflectsIsomorphisms] in
 private theorem transition_bridge [Ub.Faithful]
     (M₀ : A₀) (M₁ : A₁) (N₀ : B₀) (N₁ : B₁)
     (a₀ : N₀ ⟶ F₀.obj M₀) (a₁ : N₁ ⟶ F₁.obj M₁)
@@ -1273,6 +1273,9 @@ private def freeAdjunction : free R ⊣ underlyingRaw R :=
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+omit [HasWeakSheafify J₀ CommRingCat] [HasWeakSheafify J₀ (Type w)]
+  [J₀.HasSheafCompose (CategoryTheory.forget CommRingCat)]
+  [J₀.HasSheafCompose (CategoryTheory.forget AddCommGrpCat)] in
 private theorem free_isFlat (E : Sheaf J₀ (Type w)) :
     IsFlatOnSite (J := J₀) (R := R) ((free R).obj E) := by
   let := isMonoidal_W_independentCoefficients R
@@ -1346,6 +1349,12 @@ private def freeImageIso : free R ⋙ F₀ ≅ L₀ ⋙ free R' :=
 include L₀ V₀ adj₀ G₀ a₀ e₀ in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+omit [HasWeakSheafify J₀ CommRingCat] [HasWeakSheafify J₀ (Type w)]
+  [J₀.HasSheafCompose (CategoryTheory.forget CommRingCat)]
+  [J₀.HasSheafCompose (CategoryTheory.forget AddCommGrpCat)]
+  [HasWeakSheafify K₀ CommRingCat] [HasWeakSheafify K₀ (Type w)]
+  [K₀.HasSheafCompose (CategoryTheory.forget CommRingCat)]
+  [K₀.HasSheafCompose (CategoryTheory.forget AddCommGrpCat)] in
 private theorem exists_adapted_resolution
     (K : CochainComplex (SheafOfModules.{w} (ring R)) ℤ) :
     ∃ (P : CochainComplex (SheafOfModules.{w} (ring R)) ℤ) (q : P ⟶ K),
@@ -1498,6 +1507,7 @@ private def transitionSets
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
+omit [HasWeakSheafify J (Type w)] [J.HasSheafCompose (CategoryTheory.forget CommRingCat)] in
 private theorem transitionSets_id
     (P : CoefficientEvaluationDerivedPackage (J := J) (O := O) (ell := ell))
     (n : ℕ) (M : CoefficientSystem (J := J) O ell) :
@@ -1508,6 +1518,7 @@ private theorem transitionSets_id
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
+omit [HasWeakSheafify J (Type w)] [J.HasSheafCompose (CategoryTheory.forget CommRingCat)] in
 private theorem transitionSets_comp
     (P : CoefficientEvaluationDerivedPackage (J := J) (O := O) (ell := ell))
     {l m n : ℕ} (h₁ : m ≤ l) (h₂ : n ≤ m)

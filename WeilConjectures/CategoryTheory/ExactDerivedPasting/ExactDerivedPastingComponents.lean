@@ -22,7 +22,6 @@ use finite expression trees without unfolding sheaf inverse-image constructions.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option linter.unusedSimpArgs false
 universe u t v w
 open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry.ProEtale.StrictTower
@@ -332,7 +331,7 @@ private theorem termwiseToComp_app_app
       Functor.whiskeringRightObjCompIso f g).hom.app M).app n) =
         e.hom.app (M.obj n) := by
   simp only [Iso.trans_hom, Functor.mapIso_hom, Functor.whiskeringRightObjCompIso,
-    Functor.whiskeringRight, Functor.comp_obj, Iso.refl_hom, Iso.refl_inv,
+    Functor.whiskeringRight, Functor.comp_obj, Iso.refl_hom,
     NatTrans.comp_app, NatTrans.id_app, Category.comp_id]
 
 private theorem termwiseComp_app_app
@@ -340,8 +339,7 @@ private theorem termwiseComp_app_app
     (M : ℕᵒᵖ ⥤ A) (n : ℕᵒᵖ) :
     ((termwiseCompHom f g h τ).app M).app n = τ.app (M.obj n) := by
   simp only [termwiseCompHom, Functor.whiskeringRightObjCompIso,
-    Functor.whiskeringRight, Functor.comp_obj, Iso.refl_hom, Iso.refl_inv,
-    NatTrans.comp_app, NatTrans.id_app, Category.id_comp]
+    Functor.whiskeringRight, Functor.comp_obj, Iso.refl_inv, Category.id_comp]
 
 private theorem termwiseSquare_app_app
     (f : A ⥤ D) (g : D ⥤ F) (h : A ⥤ E) (k : E ⥤ F)
@@ -496,7 +494,6 @@ variable (B : Type (u + 1)) [CommRing B]
 section PastingProofs
 
 open CategoryTheory.ExactDerivedPasting
-set_option linter.unusedSimpArgs false
 attribute [local irreducible] Functor.leftAdjoint modulePullback
 attribute [local irreducible] singleAlpha alpha beta gComp jComp squareG
 attribute [local irreducible] moduleGComp moduleSquareG openBetaModule openBetaModuleJComp
@@ -565,9 +562,8 @@ private theorem pastingGComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
       (P := pastingG B (f ≫ g)) (R := .comp (pastingG B g) (pastingG B f))
       (towerGComp B f g).hom = (gComp B f g).hom := by
   simp only [Word.cell, Word.comparison, Word.ordinary, Word.derived, ExactFunctor.of_fst, gComp,
-    Iso.refl_inv, Iso.refl_hom, Iso.trans_hom, Iso.trans_inv,
+    Iso.refl_inv, Iso.refl_hom, Iso.trans_hom,
     Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
-    Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,
     Functor.whiskerRight_id', Functor.whiskerLeft_id', Category.comp_id, Category.id_comp]
   simp only [Functor.mapDerivedCategoryNatIso, Localization.liftNatIso_hom,
     Functor.isoWhiskerRight_hom]

@@ -28,12 +28,11 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-set_option linter.unusedVariables false in
 /-- Fibre descent and universal structure pushforward give a generator on the marked fibre
 (Stacks, Tag 0BF2). -/
 theorem picard_h1_base_descent_fibre_generator {X S : Scheme.{v}} (f : X ⟶ S)
     [Flat f] [IsProper f] [LocallyOfFinitePresentation f]
-    (hO : ∀ {T : Scheme.{v}} (g : T ⟶ S),
+    (_hO : ∀ {T : Scheme.{v}} (g : T ⟶ S),
       IsIso ((Classical.choose
         (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app
           (SheafOfModules.unit T.ringCatSheaf)))

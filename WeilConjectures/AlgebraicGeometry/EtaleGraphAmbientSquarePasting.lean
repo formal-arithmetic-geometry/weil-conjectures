@@ -17,7 +17,6 @@ import all WeilConjectures.AlgebraicGeometry.DerivedCompactSupportCompositionCoh
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 universe u
 open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Functor
@@ -255,7 +254,7 @@ private theorem grid_core
       I.map (cr.hom.app S) ≫
         (I.map (cr'.inv.app S) ≫ cg.hom.app _ ≫ G.map (cQ.hom.app S) ≫ cp'.hom.app _)
       at ht
-    simp only [Category.assoc, ← I.map_comp_assoc, Iso.hom_inv_id_app,
+    simp only [← I.map_comp_assoc, Iso.hom_inv_id_app,
       I.map_id, Category.id_comp] at ht
     simpa only [I.map_comp, Category.assoc] using ht
   change cs.hom.app _ ≫ P.map (o.inv.app _) ≫ P.map (ch.hom.app M) ≫

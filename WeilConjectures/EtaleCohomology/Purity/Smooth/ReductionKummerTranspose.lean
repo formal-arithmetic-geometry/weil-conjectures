@@ -72,7 +72,6 @@ theorem Adjunction.derivedAdjunctionMapDerivedCategory_unit_app_fac (adj : f ⊣
   rw [reassoc_of% h₃, Iso.inv_hom_id_app]
   exact Category.comp_id _
 
-set_option linter.flexible false in
 /-- The unit of `L(f) ⊣ g.mapDerivedCategory` on a flat object `P` placed in degree zero,
 followed by `L(f)(P[0]) ≅ (f P)[0]` (`Functor.leftDerivedFunctorSingleFunctorIsoOfFlat`), is
 the unit `P ⟶ g (f P)` of `adj` placed in degree zero. -/
@@ -118,7 +117,13 @@ theorem Adjunction.derivedAdjunctionMapDerivedCategory_unit_app_singleFunctor (a
       g.mapDerivedCategoryFactorsh_hom_app]
     simp [← Functor.map_comp]
   erw [hinv]
-  simp [Functor.mapHomotopyCategoryFactors, Functor.mapDerivedCategorySingleFunctor]
+  simp only [Functor.id_obj, Functor.comp_obj, HomotopyCategory.quotient_obj_singleFunctors_obj,
+    Functor.mapHomotopyCategory_obj, Functor.mapHomotopyCategoryFactors, Quotient.lift.isLift_hom,
+    DerivedCategory.Q_obj_single_obj, assoc, Functor.mapDerivedCategorySingleFunctor,
+    Iso.trans_inv, Iso.symm_inv, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_inv,
+    Functor.isoWhiskerLeft_inv, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.associator_inv_app, Functor.whiskerRight_app, Functor.associator_hom_app, id_comp,
+    NatTrans.naturality_assoc, Functor.comp_map, NatIso.cancel_natIso_hom_left]
   have hc : (adj.mapHomologicalComplex (ComplexShape.up ℤ)).unit.app
         ((HomologicalComplex.single C (ComplexShape.up ℤ) 0).obj P) ≫
       (g.mapHomologicalComplex (ComplexShape.up ℤ)).map

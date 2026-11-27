@@ -325,17 +325,16 @@ private noncomputable def quotientPageMap
   f := (quotientPageSquares t r).k
   comm' i j _ := quotientPageSquares_comm (quotientPageSquares t r) DU DV i j
 
-set_option linter.unusedVariables false in
 /-- The quotient page maps exist, obey the category laws, and are determined uniquely.
 This statement constructs no successor-page comparison.
 Source: Stacks Project, Tag 012K, Lemmas 12.24.2 and 12.24.4. -/
 theorem filteredQuotient_page_maps
     (D : ∀ (U : ObjectProperty.FullSubcategory
       (fun W : WeilFilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (r : ℤ)
-      (hr : 1 ≤ r),
+      (_hr : 1 ≤ r),
       FilteredComplexPageDifferential U.obj.obj U.obj.filtration r) :
     ∃! m : ∀ {U V : ObjectProperty.FullSubcategory
-      (fun W : WeilFilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)} (t : U ⟶ V)
+      (fun W : WeilFilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)} (_t : U ⟶ V)
         (r : ℤ) (hr : 1 ≤ r), (D U r hr).page ⟶ (D V r hr).page,
       (∀ U r hr, m (𝟙 U) r hr = 𝟙 _) ∧
       (∀ U V W (t : U ⟶ V) (t' : V ⟶ W) r hr,

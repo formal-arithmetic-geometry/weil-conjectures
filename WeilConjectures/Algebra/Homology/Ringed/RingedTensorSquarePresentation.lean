@@ -26,7 +26,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace SheafOfModules
 
-set_option linter.checkUnivs false in
 /-- A small ringed site and a model of its derived tensor on flat K-flat representatives. -/
 structure RingedTensorCorner where
   site : Type u
