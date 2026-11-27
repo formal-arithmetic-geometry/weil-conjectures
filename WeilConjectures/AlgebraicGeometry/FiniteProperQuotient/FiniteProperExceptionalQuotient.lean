@@ -25,6 +25,9 @@ import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 import WeilConjectures.SixFunctors.Etale.Derived.SepClosedCohomology
 import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
+import WeilConjectures.AlgebraicGeometry.OrdinaryExceptionalScalarCoefficientPullback
+import WeilConjectures.AlgebraicGeometry.Etale.Scalar.EtaleScalarMateRestrictionTranspose
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquareCube
 import WeilConjectures.CategoryTheory.RightKanExtensionCoherentShift
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AdjunctionShift
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
@@ -178,26 +181,6 @@ theorem ctf_obj_of_adjunction {Z Y : Scheme.{u}} (p : Z ⟶ Y) (n : ℕ)
   exact (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (Ring l E n)) Z).prop_of_iso
     (e.app L).symm h
 
-/-- The scalar mates along successive quotients compose to the scalar mate along the composite
-quotient, through the tensor reassociations `reassoc`. -/
-theorem scalarMate_quotient_trans {Z Y : Scheme.{u}} (p : Z ⟶ Y) {m n t : ℕ} (h : n ≤ m)
-    (ht : t ≤ n) (K : DerivedCategoryModule (Ring l E m) Z) :
-    (Q l E Y ht).map ((scalarMate (quotient l E h) p).app K) ≫
-        (scalarMate (quotient l E ht) p).app ((Q l E Z h).obj K) ≫
-        (F l E p t).map ((reassoc l E Z h ht).hom.app K) =
-      (reassoc l E Y h ht).hom.app ((F l E p m).obj K) ≫
-        (scalarMate (quotient l E (ht.trans h)) p).app K := by
-  sorry
-
-/-- The scalar mate along the identity quotient is the identity, through the identity
-comparisons `selfReduction`. -/
-theorem scalarMate_quotient_refl {Z Y : Scheme.{u}} (p : Z ⟶ Y) (n : ℕ)
-    (K : DerivedCategoryModule (Ring l E n) Z) :
-    (scalarMate (quotient l E (le_refl n)) p).app K ≫
-        (F l E p n).map ((selfReduction l E Z n).hom.app K) =
-      (selfReduction l E Y n).hom.app ((F l E p n).obj K) := by
-  sorry
-
 section MatePasting
 
 variable {Cm Cn Ct Dm Dn Dt : Type*} [Category Cm] [Category Cn] [Category Ct]
@@ -254,7 +237,160 @@ private theorem mateEquiv_inv_refl {F : Cm ⥤ Dm} {G : Dm ⥤ Cm} (a : F ⊣ G)
   rw [← hq]
   simp
 
+
+private theorem mate_refl_of_transpose {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {QC : C ⥤ C} {QD : D ⥤ D} {resC : C ⥤ C}
+    {resD : D ⥤ D} (aC : QC ⊣ resC) (aD : QD ⊣ resD) (α : F ⋙ QD ⟶ QC ⋙ F)
+    (δ : resC ⋙ F ≅ F ⋙ resD) (hδ : mateEquiv aC aD (.mk _ _ _ _ α) = δ.hom)
+    (sC : QC ≅ 𝟭 C) (sD : QD ≅ 𝟭 D) (ρC : resC ≅ 𝟭 C) (ρD : resD ≅ 𝟭 D)
+    (hsC : ∀ K, aC.unit.app K ≫ ρC.hom.app (QC.obj K) = sC.inv.app K)
+    (hsD : ∀ K, aD.unit.app K ≫ ρD.hom.app (QD.obj K) = sD.inv.app K)
+    (h : ∀ K, δ.inv.app K ≫ F.map (ρC.hom.app K) = ρD.hom.app (F.obj K)) (K : C) :
+    α.app K ≫ F.map (sC.hom.app K) = sD.hom.app (F.obj K) := by
+  have hC (K : C) : aC.unit.app K ≫ resC.map (sC.hom.app K) = ρC.inv.app K := by
+    have u' : aC.unit.app K = sC.inv.app K ≫ ρC.inv.app (QC.obj K) := by
+      rw [← hsC]; simp
+    rw [u', Category.assoc]
+    have := ρC.inv.naturality (sC.hom.app K)
+    dsimp only [Functor.id_map, Functor.id_obj] at this
+    rw [← this, ← Category.assoc]
+    simp
+  have hD (K : D) : aD.unit.app K ≫ resD.map (sD.hom.app K) = ρD.inv.app K := by
+    have u' : aD.unit.app K = sD.inv.app K ≫ ρD.inv.app (QD.obj K) := by
+      rw [← hsD]; simp
+    rw [u', Category.assoc]
+    have := ρD.inv.naturality (sD.hom.app K)
+    dsimp only [Functor.id_map, Functor.id_obj] at this
+    rw [← this, ← Category.assoc]
+    simp
+  apply (aD.homEquiv _ _).injective
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, hD, Functor.map_comp]
+  have u := unit_mateEquiv aC aD (.mk _ _ _ _ α) K
+  rw [hδ] at u
+  dsimp only [TwoSquare.mk, Functor.comp_obj] at u
+  rw [← reassoc_of% u]
+  have n := δ.hom.naturality (sC.hom.app K)
+  dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj] at n
+  rw [← n, ← F.map_comp_assoc, hC, ← cancel_mono (ρD.hom.app (F.obj K)), ← h K]
+  simp [← F.map_comp]
+  rw [h K, Iso.inv_hom_id_app]
+  rfl
+
+private theorem whiskered_square_unitors {C D : Type*} [Category C] [Category D] {U u : C ⥤ D}
+    {resC : C ⥤ C} {resD : D ⥤ D}
+    (ldu : U ≅ u) (sq : resC ⋙ u ≅ u ⋙ resD) (ρC : resC ≅ 𝟭 C) (ρD : resD ≅ 𝟭 D)
+    (h : ∀ M, sq.hom.app M ≫ ρD.hom.app (u.obj M) = u.map (ρC.hom.app M)) (M : C) :
+    (Functor.isoWhiskerLeft resC ldu ≪≫ sq ≪≫ Functor.isoWhiskerRight ldu.symm resD).hom.app M ≫
+        ρD.hom.app (U.obj M) = U.map (ρC.hom.app M) := by
+  have n := ρD.hom.naturality (ldu.inv.app M)
+  dsimp only [Functor.id_map, Functor.id_obj] at n
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+    Iso.symm_hom, Category.assoc, Functor.comp_obj]
+  rw [n, reassoc_of% (h M)]
+  have n' := ldu.hom.naturality (ρC.hom.app M)
+  dsimp only [Functor.id_obj] at n'
+  rw [← reassoc_of% n', Iso.hom_inv_id_app, Category.comp_id]
+
+private theorem mate_refl_of_square {C D : Type*} [Category C] [Category D] {U : C ⥤ D}
+    {F : D ⥤ C} (adj : U ⊣ F) {resC : C ⥤ C}
+    {resD : D ⥤ D} (σ : resC ⋙ U ⟶ U ⋙ resD) (ρC : resC ≅ 𝟭 C) (ρD : resD ≅ 𝟭 D)
+    (h : ∀ M, σ.app M ≫ ρD.hom.app (U.obj M) = U.map (ρC.hom.app M)) (K : D) :
+    (mateEquiv adj adj (.mk _ _ _ _ σ)).app K ≫ F.map (ρD.hom.app K) =
+      ρC.hom.app (F.obj K) := by
+  apply (adj.homEquiv _ _).symm.injective
+  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  have c := mateEquiv_counit adj adj (.mk _ _ _ _ σ) K
+  dsimp only [TwoSquare.mk, Functor.comp_obj] at c
+  rw [adj.counit_naturality, reassoc_of% c]
+  have n := ρD.hom.naturality (adj.counit.app K)
+  dsimp only [Functor.id_map, Functor.id_obj] at n
+  rw [n, ← Category.assoc]
+  exact congrArg (· ≫ adj.counit.app K) (h (F.obj K))
+
 end MatePasting
+
+section ScalarMateCoherence
+
+/-- Direct image commutes with the identity restriction comparisons. -/
+theorem lowerStar_restrictionSelf {Z Y : Scheme.{u}} (p : Z ⟶ Y) (n : ℕ)
+    (M : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} (Ring l E n))) :
+    ((p)_*[ModuleCat.{u + 1} (Ring l E n)]).map ((restrictionSelf l E Z n).hom.app M) =
+      (restrictionSelf l E Y n).hom.app (((p)_*[ModuleCat.{u + 1} (Ring l E n)]).obj M) := by
+  ext U x
+  rfl
+
+/-- The inverse image comparison with restriction of scalars along the identity quotient is
+compatible with the identity restriction comparisons. -/
+theorem upperStarRestrictScalarsIsoSheaf_restrictionSelf {Z Y : Scheme.{u}} (p : Z ⟶ Y)
+    (n : ℕ) (X : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (Ring l E n))) :
+    (upperStarRestrictScalarsIsoSheaf (quotient l E (le_refl n)) p).hom.app X ≫
+        (restrictionSelf l E Z n).hom.app (((p)^*[ModuleCat.{u + 1} (Ring l E n)]).obj X) =
+      ((p)^*[ModuleCat.{u + 1} (Ring l E n)]).map ((restrictionSelf l E Y n).hom.app X) := by
+  let adj := upperStarLowerStarAdjunction (ModuleCat.{u + 1} (Ring l E n)) p
+  apply (adj.homEquiv _ _).injective
+  rw [adj.homEquiv_unit, adj.homEquiv_unit, Functor.map_comp,
+    reassoc_of% (upperStarRestrictScalarsIsoSheaf_hom_app_transpose _ p X),
+    lowerStar_restrictionSelf]
+  have := (restrictionSelf l E Y n).hom.naturality (adj.unit.app X)
+  refine this.trans ?_
+  simp
+
+private theorem unit_selfReduction (T : Scheme.{u}) (n : ℕ)
+    (K : DerivedCategoryModule (Ring l E n) T) :
+    (Adjunction.ofIsRightAdjoint
+        (Sheaf.derivedRestrictScalars T.smallEtaleTopology (quotient l E (le_refl n))) :
+        Q l E T (le_refl n) ⊣ _).unit.app K ≫
+      (Functor.mapDerivedCategoryNatIso (restrictionSelf l E T n) ≪≫
+        Functor.mapDerivedCategoryIdIso _).hom.app ((Q l E T (le_refl n)).obj K) =
+      (selfReduction l E T n).inv.app K := by
+  exact (unit_conjugateEquiv_symm (Adjunction.ofIsRightAdjoint
+    (Sheaf.derivedRestrictScalars T.smallEtaleTopology (quotient l E (le_refl n)))) Adjunction.id
+    (Functor.mapDerivedCategoryNatIso (restrictionSelf l E T n) ≪≫
+      Functor.mapDerivedCategoryIdIso _).hom K).trans (Category.id_comp _)
+
+/-- The scalar mates along successive quotients compose to the scalar mate along the composite
+quotient, through the tensor reassociations `reassoc`. -/
+theorem scalarMate_quotient_trans {Z Y : Scheme.{u}} (p : Z ⟶ Y) {m n t : ℕ} (h : n ≤ m)
+    (ht : t ≤ n) (K : DerivedCategoryModule (Ring l E m) Z) :
+    (Q l E Y ht).map ((scalarMate (quotient l E h) p).app K) ≫
+        (scalarMate (quotient l E ht) p).app ((Q l E Z h).obj K) ≫
+        (F l E p t).map ((reassoc l E Z h ht).hom.app K) =
+      (reassoc l E Y h ht).hom.app ((F l E p m).obj K) ≫
+        (scalarMate (quotient l E (ht.trans h)) p).app K := by
+  sorry
+
+/-- The scalar mate along the identity quotient is the identity, through the identity
+comparisons `selfReduction`. -/
+theorem scalarMate_quotient_refl {Z Y : Scheme.{u}} (p : Z ⟶ Y) (n : ℕ)
+    (K : DerivedCategoryModule (Ring l E n) Z) :
+    (scalarMate (quotient l E (le_refl n)) p).app K ≫
+        (F l E p n).map ((selfReduction l E Z n).hom.app K) =
+      (selfReduction l E Y n).hom.app ((F l E p n).obj K) := by
+  obtain ⟨δ, hδinv, hδ⟩ := scalarMate_restrictionTranspose (quotient l E (le_refl n)) p
+  refine mate_refl_of_transpose (F l E p n)
+    (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars Z.smallEtaleTopology
+      (quotient l E (le_refl n))) : Q l E Z (le_refl n) ⊣ _)
+    (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars Y.smallEtaleTopology
+      (quotient l E (le_refl n))) : Q l E Y (le_refl n) ⊣ _)
+    (scalarMate (quotient l E (le_refl n)) p) δ hδ
+    (selfReduction l E Z n) (selfReduction l E Y n)
+    (Functor.mapDerivedCategoryNatIso (restrictionSelf l E Z n) ≪≫
+      Functor.mapDerivedCategoryIdIso _)
+    (Functor.mapDerivedCategoryNatIso (restrictionSelf l E Y n) ≪≫
+      Functor.mapDerivedCategoryIdIso _)
+    (unit_selfReduction l E Z n) (unit_selfReduction l E Y n) ?_ K
+  intro K
+  rw [hδinv]
+  refine mate_refl_of_square (derivedUpperStarLowerStarAdjunction _ p)
+    (scalarRestrictionPullbackIso (quotient l E (le_refl n)) p).hom _ _ ?_ K
+  intro M
+  exact whiskered_square_unitors (leftDerivedUpperStarIsoMapDerivedCategory _ p) _ _ _
+    (Functor.mapDerivedCategorySquareIso_unitors _ _ _
+      (upperStarRestrictScalarsIsoSheaf_restrictionSelf l E p n)) M
+
+end ScalarMateCoherence
+
 
 variable {Z Y : Scheme.{u}} (p : Z ⟶ Y)
   (G : ∀ n : ℕ, DerivedCategoryModule (Ring l E n) Y ⥤

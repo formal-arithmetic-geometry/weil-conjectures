@@ -80,6 +80,9 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceOrdinaryLimi
 import WeilConjectures.AlgebraicGeometry.ProEtale.Tate.ProEtaleTateTwists
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 import Mathlib.CategoryTheory.Localization.Predicate
+import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalRlimPullbackFormal
+import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalRlimVaryingScalarMate
+import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceVaryingScalarSquare
 
 /-! # Derived-limit pullback comparison with normalized endpoints
 -/
