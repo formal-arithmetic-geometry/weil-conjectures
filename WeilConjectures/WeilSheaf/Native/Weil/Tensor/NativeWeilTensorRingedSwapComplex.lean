@@ -18,7 +18,6 @@ public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRinge
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option Elab.async false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite WeilConjectures
 -- Keep the large sheaf monoidal constructions behind their public APIs.
@@ -58,9 +57,9 @@ theorem nativeRingedSwapComplex_square
     let Ec := b.native.functor.mapHomologicalComplex (.up ℤ)
     Ec.map (nativeRingedSwapComplex b T adj A P Q).hom ≫ (A.chain P Q).hom =
       (A.chain Q P).hom ≫ (CochainComplex.Monoidal.braiding (Ec.obj P) (Ec.obj Q)).hom := by
-  letI := SheafOfModules.isMonoidal_W_independentCoefficients b.R
-  letI := SheafOfModules.monoidalCategory b.R
-  letI := SheafOfModules.symmetricCategory b.R
+  have := SheafOfModules.isMonoidal_W_independentCoefficients b.R
+  let := SheafOfModules.monoidalCategory b.R
+  let := SheafOfModules.symmetricCategory b.R
   simp only [nativeRingedSwapComplex, Functor.preimageIso_hom, Functor.map_preimage,
     Iso.trans_hom, Iso.symm_hom, Category.assoc, Iso.inv_hom_id, Category.comp_id]
 

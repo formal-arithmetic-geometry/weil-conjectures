@@ -47,7 +47,7 @@ variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
     E₀.functor.op.prod E₀.functor ⋙
       Functor.uncurry.obj (SheafOfModules.homFunctor (R := R)))
 
-set_option linter.unusedSectionVars false in
+omit [E₀.functor.Additive] in
 private theorem normalized_uncurry
     (U : OrdinaryRingedTensorUnderivedData l Y J R E₀ H)
     (P Q I : ProEtale.AdicSheaf l Y) (f : ((ordinaryTensorBifunctor l Y).obj P).obj Q ⟶ I) :
@@ -85,7 +85,6 @@ private theorem ordinary_hom_naturality
       (E₀.functor.obj I), Category.comp_id] at nh
   exact nh
 
-set_option linter.unusedSectionVars false in
 private theorem parameter_adjunct_map
     (P Q P' Q' : ProEtale.AdicSheaf l Y) (p : P ⟶ P') (q : Q ⟶ Q') :
     (Mod.ihomAdjunction P).homEquiv Q _
@@ -114,7 +113,7 @@ private theorem parameter_adjunct_map
     congrArg (fun z ↦ z ≫ ((ordinaryIhomBifunctor l Y).map p.op).app
       (((ordinaryTensorBifunctor l Y).obj P').obj Q')) ht
 
-set_option linter.unusedSectionVars false in
+omit [E₀.functor.Additive] in
 private theorem inverse_naturality
     (U : OrdinaryRingedTensorUnderivedData l Y J R E₀ H)
     (P Q P' Q' : ProEtale.AdicSheaf l Y) (p : P ⟶ P') (q : Q ⟶ Q') :

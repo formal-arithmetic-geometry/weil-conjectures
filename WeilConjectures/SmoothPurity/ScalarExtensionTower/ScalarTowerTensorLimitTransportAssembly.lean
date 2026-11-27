@@ -40,7 +40,6 @@ attribute [local irreducible]
   integralComparisonDerivedSequenceScalar integralComparisonDerivedSequencePullback
   pullbackReduction scalarReduction tensorReduction
 
-set_option linter.unusedVariables false in
 /-- Assemble strict representative witnesses into the completed limit square.
 The hypothesis has only strict cochain data; in particular it contains no asserted equality
 between the two completed composites in the conclusion. -/
@@ -58,7 +57,7 @@ theorem scalarTowerTensorLimitSquare_of_strictWitnesses (W : Scheme.{u})
     (α : SE.systemClosed.tensor ⋙ integralComparisonDerivedSequenceScalar.{u, u} l E L ι W ≅
       (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W).prod
         (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W) ⋙ SL.systemClosed.tensor)
-    (hstrict : ∀ (P Q : Complex l E W) (hP : Good l E W P) (hQ : Good l E W Q),
+    (hstrict : ∀ (P Q : Complex l E W) (_hP : Good l E W P) (_hQ : Good l E W Q),
       ∃ w : StrictTensorWitness l E L ι W SE SL α, w.P = P ∧ w.Q = Q) :
     (scalarTensorCompleted l E L ι W M.obj N.obj M.property.1 N.property.1 hT).hom ≫
         TL.realization.hom.app
