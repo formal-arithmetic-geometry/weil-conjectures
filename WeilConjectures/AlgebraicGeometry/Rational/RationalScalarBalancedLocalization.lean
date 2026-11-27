@@ -138,6 +138,8 @@ import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
 import all WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientCompletionSupplement
 import all WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientPullbackIso
 import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientGeneralPullbackIso
+import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarStages
+import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationLift
 
 /-! # Balanced localization of finite coefficient extensions
 
@@ -519,6 +521,62 @@ def rationalBalancedComponent
     (pbcDerivedExtend (rationalBalancedCoefficient l E F i X)).mapIso
       (eqToIso (sE.objects K.obj)).symm
 
+
+/-- A natural family on a raw scalar localization is natural as soon as it is natural on the
+localizations of integral morphisms. -/
+private theorem rationalBalanced_naturality_of_integral
+    {R : Type*} [CommRing R] {C : Type*} [Category C] [Preadditive C] [Linear R C] {p : R}
+    {D : Type*} [Category D] (B B' : ScalarLocalization R C p ⥤ D)
+    (c : ∀ K, B.obj K ⟶ B'.obj K)
+    (h : ∀ (K L : ScalarLocalization R C p) (g : K.obj ⟶ L.obj),
+      B.map ((ScalarLocalization.localization R C p).map g : K ⟶ L) ≫ c L =
+        c K ≫ B'.map ((ScalarLocalization.localization R C p).map g : K ⟶ L))
+    {K L : ScalarLocalization R C p} (f : K ⟶ L) :
+    B.map f ≫ c L = c K ≫ B'.map f := by
+  obtain ⟨n, g, hg⟩ := ScalarLocalization.exists_pow_smul_eq_map f
+  have hs : ((ScalarLocalization.localization R C p).map (p ^ n • 𝟙 K.obj) : K ⟶ K) ≫ f =
+      (ScalarLocalization.localization R C p).map g := by
+    rw [Functor.map_smul, CategoryTheory.Functor.map_id]
+    erw [Linear.smul_comp, Category.id_comp]
+    exact hg
+  have := ScalarLocalization.isIso_map_pow_smul_id (R := R) (C := C) (p := p) n K.obj
+  have h1 := h K L g
+  have h2 := h K K (p ^ n • 𝟙 K.obj)
+  apply (cancel_epi (B.map
+    ((ScalarLocalization.localization R C p).map (p ^ n • 𝟙 K.obj) : K ⟶ K))).1
+  rw [← B.map_comp_assoc, hs, h1, ← hs, B'.map_comp, reassoc_of% h2]
+
+/-- A realization sends the localization of an integral morphism to the derived scalar
+extension of the morphism. -/
+theorem RationalModuleRealization.map_rationalization {E : Type u} [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (s : RationalModuleRealization l E X)
+    {K L : PbcBoundedConstructibleComplete X (pbcIntegralDatum l E)} (f : K ⟶ L) :
+    s.J.map ((pbcRationalization X (pbcIntegralDatum l E) (pbcUniformizer l E)).map f) =
+      eqToHom (s.objects K) ≫
+        (pbcDerivedExtend (s.integralIso.hom ≫ s.inclusion)).map f.hom ≫
+          eqToHom (s.objects L).symm := by
+  have h := s.fractions K L f 0
+  simp only [pow_zero, inv_one, map_one, one_smul] at h
+  exact h
+/-- The s and t composition comparisons are natural on the entire derived category. -/
+theorem rationalBalancedDerivedNaturality {W : Scheme.{u}}
+    {R S B : Sheaf (ProEt.topology W) CommRingCat.{u + 1}}
+    (a : R ⟶ S) (b : S ⟶ B) (c : R ⟶ B) (h : a ≫ b = c)
+    {K L : DerivedCategory (pbcModules W R)} (f : K ⟶ L) :
+    (pbcDerivedExtend b).map ((pbcDerivedExtend a).map f) ≫
+        (pbcReductionNormalization a b c h L).hom =
+      (pbcReductionNormalization a b c h K).hom ≫ (pbcDerivedExtend c).map f := by
+  let e := Adjunction.leftAdjointCompIso (pbcDerivedScalarAdjunction a)
+    (pbcDerivedScalarAdjunction b) (pbcDerivedScalarAdjunction c)
+    (pbcDerivedRestrictComp a b c h)
+  have he (M : DerivedCategory (pbcModules W R)) :
+      (pbcReductionNormalization a b c h M).hom = e.hom.app M := by
+    dsimp [pbcReductionNormalization, pbcReductionNormalizationHom,
+      pbcReductionTransition, e]
+    simp only [Adjunction.leftAdjointCompIso_hom_app,
+      Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  rw [he, he]
+  exact e.hom.naturality f
 /-- The specified components are natural for every raw fraction morphism. -/
 theorem rationalBalancedComponent_naturality
     {K L : PbcRationalDerivedCategory l E X Fact.out Fact.out} (f : K ⟶ L) :
@@ -526,7 +584,41 @@ theorem rationalBalancedComponent_naturality
         (rationalBalancedComponent l E F i X sE sF L).hom =
       (rationalBalancedComponent l E F i X sE sF K).hom ≫
         (sE.J ⋙ pbcDerivedExtend (rationalBalancedCoefficient l E F i X)).map f := by
-  sorry
+  refine rationalBalanced_naturality_of_integral
+    (pbcRationalScalarExtension l E F i X Fact.out Fact.out ⋙ sF.J)
+    (sE.J ⋙ pbcDerivedExtend (rationalBalancedCoefficient l E F i X))
+    (fun K ↦ (rationalBalancedComponent l E F i X sE sF K).hom) (fun K L g ↦ ?_) f
+  simp only [Functor.comp_map]
+  erw [pbcRationalScalarExtension_map_rationalization]
+  rw [RationalModuleRealization.map_rationalization, RationalModuleRealization.map_rationalization]
+  simp only [rationalBalancedComponent, Iso.trans_hom, eqToIso.hom, Iso.symm_hom,
+    Functor.mapIso_hom, eqToIso.inv, Category.assoc, eqToHom_trans_assoc, eqToHom_refl,
+    Category.id_comp, Functor.map_comp]
+  rw [← Functor.map_comp_assoc, eqToHom_trans, eqToHom_refl, CategoryTheory.Functor.map_id,
+    Category.id_comp]
+  congr 1
+  have hS := rationalBalancedDerivedNaturality (pbcScalarCoefficientMap l E F i X)
+    (sF.integralIso.hom ≫ sF.inclusion)
+    ((sE.integralIso.hom ≫ sE.inclusion) ≫ rationalBalancedCoefficient l E F i X)
+    (rationalBalancedCoefficient_square l E F i X sE sF) g.hom
+  have hT := rationalBalancedDerivedNaturality (sE.integralIso.hom ≫ sE.inclusion)
+    (rationalBalancedCoefficient l E F i X)
+    ((sE.integralIso.hom ≫ sE.inclusion) ≫ rationalBalancedCoefficient l E F i X) rfl g.hom
+  change _ ≫ (rationalBalancedS l E F i X sE sF L.obj.obj).hom =
+    (rationalBalancedS l E F i X sE sF K.obj.obj).hom ≫ _ at hS
+  change _ ≫ (rationalBalancedT l E F i X sE L.obj.obj).hom =
+    (rationalBalancedT l E F i X sE K.obj.obj).hom ≫ _ at hT
+  erw [reassoc_of% hS]
+  congr 1
+  have hT' : (rationalBalancedT l E F i X sE K.obj.obj).inv ≫
+      (pbcDerivedExtend (rationalBalancedCoefficient l E F i X)).map
+        ((pbcDerivedExtend (sE.integralIso.hom ≫ sE.inclusion)).map g.hom) =
+      (pbcDerivedExtend ((sE.integralIso.hom ≫ sE.inclusion) ≫
+        rationalBalancedCoefficient l E F i X)).map g.hom ≫
+        (rationalBalancedT l E F i X sE L.obj.obj).inv := by
+    rw [Iso.inv_comp_eq, ← Category.assoc, ← hT, Category.assoc, Iso.hom_inv_id,
+      Category.comp_id]
+  rw [reassoc_of% hT']
 
 /-- The natural isomorphism on raw rationalizations, with its actual inverse components. -/
 def rationalBalancedTheta :
@@ -605,26 +697,6 @@ variable [IsNoetherian Y] [IsNoetherian Z]
   [Fact (∀ z : Z, IsUnit (l : Z.presheaf.stalk z))]
 
 end GeometricCoefficients
-
-/-- The s and t composition comparisons are natural on the entire derived category. -/
-theorem rationalBalancedDerivedNaturality {W : Scheme.{u}}
-    {R S B : Sheaf (ProEt.topology W) CommRingCat.{u + 1}}
-    (a : R ⟶ S) (b : S ⟶ B) (c : R ⟶ B) (h : a ≫ b = c)
-    {K L : DerivedCategory (pbcModules W R)} (f : K ⟶ L) :
-    (pbcDerivedExtend b).map ((pbcDerivedExtend a).map f) ≫
-        (pbcReductionNormalization a b c h L).hom =
-      (pbcReductionNormalization a b c h K).hom ≫ (pbcDerivedExtend c).map f := by
-  let e := Adjunction.leftAdjointCompIso (pbcDerivedScalarAdjunction a)
-    (pbcDerivedScalarAdjunction b) (pbcDerivedScalarAdjunction c)
-    (pbcDerivedRestrictComp a b c h)
-  have he (M : DerivedCategory (pbcModules W R)) :
-      (pbcReductionNormalization a b c h M).hom = e.hom.app M := by
-    dsimp [pbcReductionNormalization, pbcReductionNormalizationHom,
-      pbcReductionTransition, e]
-    simp only [Adjunction.leftAdjointCompIso_hom_app,
-      Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
-  rw [he, he]
-  exact e.hom.naturality f
 
 section
 attribute [local irreducible] pbcRationalScalarExtension pbcScalarCoefficientMap
