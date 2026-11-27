@@ -7,7 +7,12 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Completed.Open.CompletedOpenExchangeTransport
 public import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulQuotientComparison
-import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedPullbackReflection
+import all WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedPullbackReflection
+import WeilConjectures.AlgebraicGeometry.Completed.Open.CompletedOpenRestrictionPullback
+import WeilConjectures.AlgebraicGeometry.ProperBaseChange.ProductPreservingDerivedLimitMate
+import WeilConjectures.AlgebraicGeometry.Ringed.RingedOpenStrictReduction
+public import WeilConjectures.AlgebraicGeometry.Ringed.RingedOpenScalarLimitCoherence
+import WeilConjectures.AlgebraicGeometry.ProEtale.Ringed.ProEtaleRingedOpenExtensionProductsOfUniverses
 import WeilConjectures.AlgebraicGeometry.Completed.Pullback.CompletedPullbackReduction
 
 /-!
@@ -31,6 +36,10 @@ zero along a quasi-compact open immersion on complete objects.
 - `AlgebraicGeometry.Scheme.completedExtensionZeroComparison`: it is an isomorphism, and
   extension by zero preserves completeness.
 - `AlgebraicGeometry.Scheme.completedOpenExchangeComparison`: the same on `d.completedPull`.
+- `AlgebraicGeometry.Scheme.cbcDerivedOpenRestriction_towerComplete`: restriction to an open
+  preserves quotient-tower completeness.
+- `AlgebraicGeometry.Scheme.cbcDerivedOpenShriek_towerComplete`: so does extension by zero
+  along a quasi-compact open immersion.
 
 ## Implementation details
 
@@ -39,6 +48,20 @@ The ordinary-to-completed comparison is a reflection onto quotient-tower complet
 to reflections, because its right adjoint, restriction to the open, preserves completeness.
 Hence the completed base-change map is the comparison of two reflections of the same object,
 so it exists, is unique and is invertible.
+
+Restriction and extension by zero preserve completeness by
+`AdicCoefficientDatum.towerComplete_map`: an exact functor that preserves countable products
+commutes with `R lim` (`productPreservingDerivedLimitMate_isIso`), so if it also commutes with
+the reduction tower, it carries `K ≅ R lim (K_•)` to an object of the form `R lim (L_•)`.
+For restriction, the reduction tower is handled through `cbcPullToRestriction` and
+`AdicCoefficientDatum.reductionTowerPullbackIso`; for extension by zero, through
+`cbcRingedOpenStrictReduction`. Countable products are preserved by restriction as a right
+adjoint, and by extension by zero when the open immersion is quasi-compact.
+
+`cbcDerivedOpenRestrictionAdjunction` has restriction to the open as right adjoint, whereas
+`cbcDerivedOpenAdjunction` (downstream) has `d.pull j`; the two right adjoints differ by
+`cbcPullToRestriction`. Restriction is used here because its preservation of products is that
+of a right adjoint of the module categories.
 
 ## References
 
@@ -176,11 +199,104 @@ def cbcDerivedOpenRestrictionAdjunction {U T : Scheme.{t}} (j : U ⟶ T)
     DerivedCategory.Q (HomologicalComplex.quasiIso _ (.up ℤ))
     (cbcDerivedOpenShriek d j hj) (cbcDerivedOpenRestriction d j hj)
 
+/-- Quotient-tower completeness is invariant under isomorphism. -/
+theorem AdicCoefficientDatum.towerComplete_of_iso {T : Scheme.{t}} {K L : d.derived T}
+    (e : K ≅ L) (hL : d.TowerComplete T L) : d.TowerComplete T K := by
+  have : IsIso (d.completionUnit T L) := hL
+  have h : IsIso (e.hom ≫ d.completionUnit T L) := inferInstance
+  rw [d.completionUnit_naturality T e.hom] at h
+  exact IsIso.of_isIso_comp_right (d.completionUnit T K)
+    ((completedRlim T (d.completedRing T)).map ((completedReductionTower T d).map e.hom))
+
+/-- An exact functor which preserves countable products and commutes with the reduction
+tower preserves quotient-tower completeness. -/
+theorem AdicCoefficientDatum.towerComplete_map {S T : Scheme.{t}}
+    (F : pbcModules S (pbcAdicCompletion S d) ⥤ pbcModules T (pbcAdicCompletion T d))
+    [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (hF : ∀ N : ℕ → pbcModules S (pbcAdicCompletion S d), IsIso (piComparison F N))
+    (K : d.derived S)
+    (e : (completedReductionTower T d).obj (F.mapDerivedCategory.obj K) ≅
+      (cbcTowerDerived F).obj ((completedReductionTower S d).obj K))
+    (hK : d.TowerComplete S K) : d.TowerComplete T (F.mapDerivedCategory.obj K) := by
+  have : PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ _ _).obj F) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  have : PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ _ _).obj F) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  have : IsIso (d.completionUnit S K) := hK
+  have hm := productPreservingDerivedLimitMate_isIso F hF
+  refine d.towerComplete_of_iso (F.mapDerivedCategory.mapIso (asIso (d.completionUnit S K)) ≪≫
+    (@asIso _ _ _ _ _ hm).app ((completedReductionTower S d).obj K) ≪≫
+      (completedRlim T (d.completedRing T)).mapIso e.symm) ?_
+  exact (quotient_reflection d T).1 _
+
 /-- Restriction to an open preserves quotient-tower completeness. -/
 theorem cbcDerivedOpenRestriction_towerComplete {U T : Scheme.{t}} (j : U ⟶ T)
     (hj : IsOpenImmersion j) (L : d.derived T) (hL : d.TowerComplete T L) :
     d.TowerComplete U ((cbcDerivedOpenRestriction d j hj).obj L) := by
-  sorry
+  have : (cbcOpenRestriction d j hj).Additive := Functor.additive_of_preserves_binary_products _
+  have := cbcOpenRestriction_preservesFiniteLimits d j hj
+  have := cbcOpenRestriction_preservesFiniteColimits d j hj
+  let W := Functor.whiskeringRight ℕᵒᵖ (proEtaleRingModules T (d.completedRing T))
+    (proEtaleRingModules U (d.completedRing U))
+  have : PreservesFiniteLimits (W.obj (cbcOpenRestriction d j hj)) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  have : PreservesFiniteColimits (W.obj (cbcOpenRestriction d j hj)) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  have : PreservesLimitsOfSize (cbcOpenRestriction d j hj) :=
+    (cbcOpenAdjunction d j hj).rightAdjoint_preservesLimits
+  let e : proEtaleRingModulePullback j (d.completedRing T) (d.completedRing U)
+      (d.integralRingIso j) ≅ cbcOpenRestriction d j hj :=
+    @asIso _ _ _ _ (cbcPullToRestriction d j) (cbcPullToRestriction_isIso d j)
+  refine d.towerComplete_map (cbcOpenRestriction d j hj) (fun _ ↦ inferInstance) L ?_ hL
+  exact (completedReductionTower U d).mapIso
+      ((Functor.mapDerivedCategoryNatIso e).symm.app L) ≪≫
+    (d.reductionTowerPullbackIso j).symm.app L ≪≫
+      (Functor.mapDerivedCategoryNatIso ((Functor.whiskeringRight ℕᵒᵖ _ _).mapIso e)).app _
+
+/-- Extension by zero along a quasi-compact open immersion commutes with countable
+products. -/
+theorem cbcOpenShriek_piComparison_isIso {U T : Scheme.{t}} (j : U ⟶ T)
+    (hj : IsOpenImmersion j) [QuasiCompact j] (N : ℕ → pbcModules U (pbcAdicCompletion U d)) :
+    IsIso (piComparison (cbcOpenShriek d j hj) N) := by
+  let W := cbcOpenObject j hj
+  let G := cbcModuleToSlice d T W
+  let H := SheafOfModules.localizedSystemExtension.{t + 1, t, t + 1}
+    (completedReductionCoefficient T d) W
+  have : IsOpenImmersion W.hom := hj
+  have : QuasiCompact W.hom := ‹QuasiCompact j›
+  have : (cbcSliceFunctor T W).IsContinuous ((ProEt.topology T).over W) (ProEt.topology U) :=
+    cbcSliceFunctor_continuous T W
+  have : PreservesLimitsOfShape (Discrete ℕ) G := by
+    let P := SheafOfModules.forget.{t + 1}
+        ((reductionModuleRing T (completedReductionCoefficient T d)).over W) ⋙
+      PresheafOfModules.toPresheaf.{t + 1} _
+    have : ReflectsLimitsOfShape (Discrete ℕ) P := reflectsLimitsOfShape_of_reflectsIsomorphisms
+    have : PreservesLimitsOfShape (Discrete ℕ) (G ⋙ P) := by
+      change PreservesLimitsOfShape (Discrete ℕ)
+        ((SheafOfModules.forget.{t + 1}
+            (reductionModuleRing U (completedReductionCoefficient U d)) ⋙
+          PresheafOfModules.toPresheaf.{t + 1} _) ⋙
+            (Functor.whiskeringLeft _ _ AddCommGrpCat.{t + 1}).obj (cbcSliceFunctor T W).op)
+      infer_instance
+    exact preservesLimitsOfShape_of_reflects_of_preserves G P
+  have : PreservesLimit (Discrete.functor (G.obj ∘ N)) H :=
+    have := proEtaleRingedExtensionByZero_products_of_universes.{t, t + 1} W
+      (completedReductionCoefficient T d) (G.obj ∘ N)
+    PreservesProduct.of_iso_comparison H _
+  have : PreservesLimit (Discrete.functor N ⋙ G) H :=
+    preservesLimit_of_iso_diagram H (Discrete.compNatIsoDiscrete N G).symm
+  change IsIso (piComparison (G ⋙ H) N)
+  infer_instance
+
+/-- Extension by zero along a quasi-compact open immersion preserves quotient-tower
+completeness. -/
+theorem cbcDerivedOpenShriek_towerComplete {U T : Scheme.{t}} (j : U ⟶ T)
+    (hj : IsOpenImmersion j) [QuasiCompact j] (K : d.derived U) (hK : d.TowerComplete U K) :
+    d.TowerComplete T ((cbcDerivedOpenShriek d j hj).obj K) := by
+  have : IsOpenImmersion (cbcOpenObject j hj).hom := hj
+  obtain ⟨ρ, -, -⟩ := cbcRingedOpenStrictReduction (cbcOpenObject j hj) d
+  exact d.towerComplete_map (cbcOpenShriek d j hj) (cbcOpenShriek_piComparison_isIso d j hj) K
+    (ρ.app K) hK
 
 /-- Extension by zero along a quasi-compact open immersion preserves intrinsic
 completeness. -/
@@ -188,8 +304,9 @@ theorem cbcDerivedOpenShriek_completeProperty {U T : Scheme.{t}} (j : U ⟶ T)
     (hj : IsOpenImmersion j) [QuasiCompact j]
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)
     (K : d.derived U) (hK : cbcCompleteProperty d U r a ha K) :
-    cbcCompleteProperty d T r a ha ((cbcDerivedOpenShriek d j hj).obj K) := by
-  sorry
+    cbcCompleteProperty d T r a ha ((cbcDerivedOpenShriek d j hj).obj K) :=
+  cbcCompleteProperty_of_towerComplete d T r a ha _ (cbcDerivedOpenShriek_towerComplete d j hj K
+    (cbcTowerComplete_of_completeProperty d U r a ha K hK))
 
 /-- Extension by zero carries a reflection onto quotient-tower complete objects to such a
 reflection. -/
@@ -331,8 +448,10 @@ theorem cbcCompletedExchange_exists [QuasiCompact j]
     ext K
     exact (hb K _ (ht K)).1 ((hβ' K).trans (hβ K).symm)
 
-/-- The canonical completed base-change map, natural on the full complete subcategory.
-It is fixed by the ordinary adjoint mate and the strict quotient completion units. -/
+/-- The completed base-change map of extension by zero, natural on complete objects.
+It is the unique map comparing two reflections of the same object onto quotient-tower
+complete objects: the completion comparison of `g`, and the ordinary exchange followed by
+extension by zero of the completion comparison of `gU`. -/
 def cbcCompletedExchange [QuasiCompact j]
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :=
   (cbcCompletedExchange_exists d sq r a ha).exists.choose
@@ -370,9 +489,8 @@ theorem completedExtensionZeroComparison [QuasiCompact j]
       (fun L hL ↦ ordinaryExchange_comparison_bijective d sq K.obj L hL) (hspec K)
   exact NatIso.isIso_of_isIso_app _
 
-/-- Canonical completed open exchange on the same presentation as proper exchange.
-It is Rlim of the finite exchange followed by the extension/Rlim comparison,
-transported through the strict tower counits. -/
+/-- The completed base-change map of extension by zero on the `d.completedPull` presentation.
+It is `cbcCompletedExchange`, transported along `cbcDatumCompletedTransport`. -/
 def cbcDatumCompletedExchange [QuasiCompact j]
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :
     (cbcCompleteProperty d U r a ha).ι ⋙
@@ -386,7 +504,6 @@ def cbcDatumCompletedExchange [QuasiCompact j]
       whiskerLeft (cbcCompleteProperty d U r a ha).ι
         (whiskerRight (cbcDatumCompletedTransport d gU).hom
           (cbcDerivedOpenShriek d j' sq.isOpenImmersion'))
-
 
 /-- Quasi-compact open extension preserves intrinsic completeness, and its canonical
 completed exchange is invertible and natural, with both sides intrinsically complete. -/
