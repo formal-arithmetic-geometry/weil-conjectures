@@ -82,16 +82,11 @@ private theorem whisker_factor
 namespace WeilConjectures.LocallyFiniteAdicRealization
 open AlgebraicallyClosedCoefficients (Index Coefficient)
 open AdicFiniteRealization
--- The generated auxiliary definitions of the stage category instance must be reducible.
-set_option linter.auxLemma false in
 set_option allowUnsafeReducibility true in
 attribute [local reducible] closureRing ProEtale.constructibleExtendScalars
   ProEtale.constructibleToPadicAlgCl finiteCondensedClosureFunctor
   GeneralAlgebraicallyClosedCoefficients.Stage
   GeneralAlgebraicallyClosedCoefficients.stageCategory
-  GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_1
-  GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_3
-  GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_5
 attribute [local instance 5000] GeneralAlgebraicallyClosedCoefficients.stageCategory
 
 variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
