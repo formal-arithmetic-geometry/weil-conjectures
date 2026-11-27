@@ -1,0 +1,103 @@
+--- round11/type_checker.cpp
++++ round12/type_checker.cpp
+@@ -154,6 +154,13 @@
+ static thread_local comparison * current = nullptr;
+ static thread_local char const * ide_delta_caller = "whnf";
+ static thread_local char const * ide_delta_side = "unknown";
++static thread_local unsigned ide_infer_depth = 0;
++static thread_local unsigned ide_proof_type_depth = 0;
++struct ide_depth_scope {
++    unsigned & depth;
++    explicit ide_depth_scope(unsigned & d): depth(d) { ++depth; }
++    ~ide_depth_scope() { --depth; }
++};
+ struct ide_caller_scope {
+     char const * previous;
+     explicit ide_caller_scope(char const * value): previous(ide_delta_caller) { ide_delta_caller = value; }
+@@ -701,15 +708,32 @@
+         }
+     }
+ };
++static FILE * ide_focus_stream() {
++    static FILE * stream = [] {
++        char const * path = std::getenv("LEAN_DEFEQ_IDE2_EVENTS");
++        return path ? std::fopen(path, "w") : static_cast<FILE *>(nullptr);
++    }();
++    return stream;
++}
+ static void ide_delta_event(expr const & before, expr const & after, constant_info const & info) {
+-    if (!current || !mprwe_stream() || mprwe_global_events >= mprwe_limit()) return;
++    if (!current) return;
+     std::string name = info.get_name().to_string();
+     if (name.find("DerivedCategory") == std::string::npos &&
+         name.find("DerivedMonoidal") == std::string::npos &&
+         name.find("MonoidalCategoryHomotopyCategoryIntUp") == std::string::npos &&
+         name.find("HomotopyCategory.MonoidalCategory.instMonoidalCategory") == std::string::npos &&
+         name.find("MonoidalCategoryStruct") == std::string::npos &&
++        name.find("ide2") == std::string::npos &&
+         name.find("ideHint") == std::string::npos) return;
++    if (FILE * focus = ide_focus_stream()) {
++        std::fprintf(focus, "{\"event\":\"provider_delta\",\"root\":%llu,\"call\":%llu,\"parent\":%llu,\"operation\":\"%s\",\"side\":\"%s\",\"head\":\"%s\",\"hint_height\":%u,\"before_hash\":%u,\"after_hash\":%u}\n",
++            static_cast<unsigned long long>(root_id()), static_cast<unsigned long long>(current->id),
++            static_cast<unsigned long long>(current->parent ? current->parent->id : 0),
++            ide_delta_caller, ide_delta_side, name.c_str(),
++            info.get_hints().is_regular() ? info.get_hints().get_height() : 0,
++            hash(before), hash(after));
++    }
++    if (!mprwe_stream() || mprwe_global_events >= mprwe_limit()) return;
+     if (mprwe_root_filter() && root_id() != mprwe_root_filter()) return;
+     std::lock_guard<std::mutex> lock(mprwe_mutex);
+     ++mprwe_global_events;
+@@ -722,6 +746,16 @@
+         info.get_hints().is_regular() ? "regular" : info.get_hints().is_abbrev() ? "abbrev" : "opaque",
+         info.get_hints().is_regular() ? info.get_hints().get_height() : 0,
+         current->category, current->path.c_str());
++    if (root_id() == 557 && current->id == 68 &&
++        name.find("instMonoidalCategoryHomotopyCategoryIntUp") != std::string::npos) {
++        for (comparison * p = current; p; p = p->parent) {
++            std::fprintf(mprwe_stream(), "{\"event\":\"ide_context\",\"call\":%llu,\"parent\":%llu,\"left\":\"%s\",\"right\":\"%s\",\"path\":\"%s\",\"child_kind\":\"%s\",\"infer_depth\":%u,\"proof_type_depth\":%u}\n",
++                static_cast<unsigned long long>(p->id),
++                static_cast<unsigned long long>(p->parent ? p->parent->id : 0),
++                head(p->left).c_str(), head(p->right).c_str(), p->path.c_str(),
++                p->child_kind.c_str(), ide_infer_depth, ide_proof_type_depth);
++        }
++    }
+ }
+ static void mprwe_reduction(char const * phase, comparison * owner, expr const & before_l,
+                             expr const & after_l, expr const & before_r, expr const & after_r) {
+@@ -1120,6 +1154,7 @@
+ /** \brief Return type of expression \c e, if \c infer_only is false, then it also check whether \c e is type correct or not.
+     \pre closed(e) */
+ expr type_checker::infer_type_core(expr const & e, bool infer_only) {
++    anatomy::ide_depth_scope ide_infer(anatomy::ide_infer_depth);
+     if (has_loose_bvars(e))
+         throw kernel_exception(env(), "type checker does not support loose bound variables, replace them with free variables before invoking it");
+ 
+@@ -1793,6 +1828,7 @@
+     auto anatomy_start = anatomy::clock::now();
+     anatomy::prop_frame anatomy_prop(t_type, s_type, t, s);
+     anatomy::path_scope path("proposition_type", 2, anatomy::Proof);
++    anatomy::ide_depth_scope ide_proof_type(anatomy::ide_proof_type_depth);
+     bool result = is_def_eq(t_type, s_type);
+     if (anatomy::current)
+         anatomy::data.proof_prop_ns += std::chrono::duration_cast<anatomy::ns>(anatomy::clock::now() - anatomy_start).count();
+@@ -1877,6 +1913,19 @@
+     };
+     auto d_t = is_delta(t_n);
+     auto d_s = is_delta(s_n);
++    if (anatomy::current && anatomy::root_id() == 557 && anatomy::current->id == 68 && anatomy::mprwe_stream()) {
++        int rank = d_t && d_s ? compare(d_t->get_hints(), d_s->get_hints()) : 0;
++        char const * choice = !d_t && !d_s ? "none" : d_t && !d_s ? "checked" :
++            !d_t && d_s ? "stored" : rank < 0 ? "checked" : rank > 0 ? "stored" : "both-checked-first";
++        char const * reason = !d_t && !d_s ? "no-delta-candidates" : d_t && !d_s ? "checked-only" :
++            !d_t && d_s ? "stored-only" : rank < 0 ? "hint-rank-checked" :
++            rank > 0 ? "hint-rank-stored" : "equal-hints";
++        std::fprintf(anatomy::mprwe_stream(), "{\"event\":\"ide_decision\",\"call\":68,\"left\":\"%s\",\"right\":\"%s\",\"left_delta\":%s,\"right_delta\":%s,\"left_hint\":%u,\"right_hint\":%u,\"rank\":%d,\"choice\":\"%s\",\"reason\":\"%s\",\"infer_depth\":%u,\"proof_type_depth\":%u}\n",
++            anatomy::head(t_n).c_str(), anatomy::head(s_n).c_str(), d_t ? "true" : "false", d_s ? "true" : "false",
++            d_t && d_t->get_hints().is_regular() ? d_t->get_hints().get_height() : 0,
++            d_s && d_s->get_hints().is_regular() ? d_s->get_hints().get_height() : 0,
++            rank, choice, reason, anatomy::ide_infer_depth, anatomy::ide_proof_type_depth);
++    }
+     if (!d_t && !d_s) {
+         return reduction_status::DefUnknown;
+     } else if (d_t && !d_s) {
