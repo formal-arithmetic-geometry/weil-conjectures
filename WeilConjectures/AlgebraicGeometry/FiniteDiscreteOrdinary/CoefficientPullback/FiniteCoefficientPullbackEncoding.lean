@@ -341,7 +341,7 @@ private lemma fixed_compositor {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     CategoryTheory.Functor.map_id]
   erw [Category.comp_id]
 
--- Retain the original finite-discrete interface, although the normalized encoding suffices.
+-- Keep the section instances as hypotheses of this public statement.
 set_option linter.unusedSectionVars false in
 /-- Normalized encoding commutes with inverse images and their published compositors. -/
 theorem finiteCoefficientPullbackEncoding

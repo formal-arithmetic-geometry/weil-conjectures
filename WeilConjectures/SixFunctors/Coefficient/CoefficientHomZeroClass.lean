@@ -226,7 +226,6 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false
-set_option linter.unusedSectionVars false
 universe u c v a b w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace WeilConjectures
@@ -680,12 +679,18 @@ noncomputable def coefficientHomZeroEvaluation
   ((SheafOfModules.homObjSectionsEquiv (R := A) (L.X p) N)
     (h.unitHomEquiv s)).val.app U y
 
+omit [HasDerivedCategory.{w} (SheafOfModules.{max c v u}
+    ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A))] in
 private theorem zeroGrothendieck : IsGrothendieckAbelian.{max c v u}
     (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) :=
   (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{c, v, u}
     J A).1
 
+omit [HasSheafify J AddCommGrpCat.{max c v u}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}]
+  [HasDerivedCategory.{w} (SheafOfModules.{max c v u}
+    ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A))] in
 private lemma zeroGlobalComplexIso_f
     (L N : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ) :
@@ -696,6 +701,10 @@ private lemma zeroGlobalComplexIso_f
 attribute [local irreducible] CategoryTheory.globalComplexIso
 
 set_option backward.isDefEq.respectTransparency false in
+omit [HasSheafify J AddCommGrpCat.{max c v u}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}]
+  [HasDerivedCategory.{w} (SheafOfModules.{max c v u}
+    ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A))] in
 private lemma zeroGlobalEvalApi
     (L N : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)
@@ -722,6 +731,8 @@ private lemma zeroGlobalEvalApi
     (op L, (coefficientHomResolution.{u, c, v} J A).obj M)
 
 set_option backward.isDefEq.respectTransparency false in
+omit [HasDerivedCategory.{w} (SheafOfModules.{max c v u}
+    ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A))] in
 private lemma zeroGlobalComplexIso_v
     (L M : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)
@@ -743,6 +754,8 @@ private lemma zeroGlobalComplexIso_v
     (CochainComplex.HomComplex.leftHomologyData L
       ((coefficientHomResolution.{u, c, v} J A).obj M) 0).cyclesIso
 
+omit [HasDerivedCategory.{w} (SheafOfModules.{max c v u}
+    ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A))] in
 private lemma zeroCycleCocycle_val
     (L M : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)
@@ -759,6 +772,8 @@ private lemma zeroCycleCocycle_val
 
 attribute [local irreducible] zeroCycleCocycle
 
+omit [HasDerivedCategory.{w} (SheafOfModules.{max c v u}
+    ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A))] in
 private lemma zeroCycleCocycle_homOf
     (L M : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)
@@ -773,6 +788,10 @@ private lemma zeroCycleCocycle_homOf
   rw [zeroCycleCocycle_val]
   exact (zeroGlobalComplexIso_v.{u, c, v} J A L M z p U y).trans (hz p U y)
 
+omit [HasSheafify J AddCommGrpCat.{max c v u}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}]
+  [HasDerivedCategory.{w} (SheafOfModules.{max c v u}
+    ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A))] in
 private lemma zeroGlobalComplexIso_naturality
     {X Y : (CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)ᵒᵖ ×
@@ -800,6 +819,10 @@ set_option backward.isDefEq.respectTransparency false in
     (CategoryTheory.globalComplexIso.{c, v, u} A)
     (fun {_X _Y} f ↦ zeroGlobalComplexIso_naturality.{u, c, v} J A f)
 
+omit [HasSheafify J AddCommGrpCat.{max c v u}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}]
+  [HasDerivedCategory.{w} (SheafOfModules.{max c v u}
+    ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A))] in
 private lemma zeroGlobalHomologyNatIso_hom_app (X :
     (CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)ᵒᵖ ×
@@ -814,6 +837,8 @@ private lemma zeroGlobalHomologyNatIso_hom_app (X :
 
 attribute [local irreducible] zeroGlobalHomologyNatIso
 
+omit [HasDerivedCategory.{w} (SheafOfModules.{max c v u}
+    ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A))] in
 private lemma zeroGlobalHomologyNatIso_π
     (L M : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)
@@ -958,6 +983,8 @@ attribute [local irreducible] zeroSectionsHomologyComparisonNatTrans
     (HomologicalComplex.homologyFunctor AddCommGrpCat.{max c v u} (.up ℤ) 0)
     (zeroGlobalHomologyNatIso.{u, c, v} J A)
 
+omit [HasDerivedCategory.{w} (SheafOfModules.{max c v u}
+    ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A))] in
 private lemma zeroOrdinaryBifunctorIso_apply (I : K ⥤ K) (X : Kᵒᵖ × K)
     (x : (zeroOrdinaryBifunctor.{u, c, v} J A I).obj X) :
     (zeroOrdinaryBifunctorIso.{u, c, v} J A I).hom.app X x =
@@ -1075,6 +1102,8 @@ private theorem zeroHomSectionsComparison_isIso (I : K ⥤ K)
     (zeroHomSectionsComparisonNatTrans.{u, c, v, w} J A I) _ _
     f hleft hright hγP
 
+omit [HasDerivedCategory.{w} (SheafOfModules.{max c v u}
+    ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A))] in
 private lemma zeroCycleCocycle_evaluation (L M : K)
     (z : (coefficientHomSectionComplex.{u, c, v} J A L M).cycles 0)
     (p : ℤ) (U : Cᵒᵖ) (y : (L.X p).val.obj U) :

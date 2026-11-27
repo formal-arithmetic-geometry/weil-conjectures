@@ -17,7 +17,6 @@ public import WeilConjectures.SixFunctors.AdicFiniteRealization.LocallyFiniteAdi
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.all false
 set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false

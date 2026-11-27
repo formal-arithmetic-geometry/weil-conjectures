@@ -50,7 +50,6 @@ set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genCtorIdx false
 set_option synthInstance.maxSize 2048
-set_option linter.unusedVariables false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
@@ -365,7 +364,7 @@ theorem exceptionalIntegralScalarMates_data
     (left : ∀ s : RingStage.{u} l, LeftRealization.{u} l Ω c s (operation s))
     (transport : Transported l Ω D hl c operation left) :
     ∃ d : Mates l Ω c operation left,
-      ∃ red : ∀ (E : FieldStage.{u} l) (n : ℕ),
+      ∃ _red : ∀ (E : FieldStage.{u} l) (n : ℕ),
         ReductionMates l Ω D hl c operation left transport d E n, True := by
   obtain ⟨d⟩ := exceptionalIntegralScalarMates_data_mates l Ω D hl c operation left transport
   obtain ⟨red⟩ := exceptionalIntegralScalarMates_data_reduction

@@ -14,7 +14,6 @@ import Mathlib.RingTheory.Finiteness.Cardinality
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 8192
-set_option linter.style.haveILetI false
 
 universe u
 
@@ -99,9 +98,9 @@ theorem integralFinitePointResolution_algebraic
   classical
   dsimp only
   let R := PadicAlgCl.integers ell E.1
-  letI : Module R A := Module.compHom A φ
+  let : Module R A := Module.compHom A φ
   let φ' : R →+* ULift.{u + 1} A := ULift.ringEquiv.symm.toRingHom.comp φ
-  letI : Module R (ULift.{u + 1} A) := Module.compHom (ULift.{u + 1} A) φ'
+  let : Module R (ULift.{u + 1} A) := Module.compHom (ULift.{u + 1} A) φ'
   obtain ⟨n, hn⟩ := hA
   let t : R := (ell ^ n : ℕ)
   have ht : t ≠ 0 := by

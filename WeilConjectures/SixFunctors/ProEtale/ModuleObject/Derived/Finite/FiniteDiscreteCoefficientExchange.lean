@@ -55,7 +55,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
   [f.IsOver (Spec (.of k))] [g.IsOver (Spec (.of k))]
   [f'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
 
-set_option linter.unusedVariables false in
 /-- Finite discrete realization on constructible sheaves and on the three exchange steps. -/
 theorem finiteDiscreteExchange_coefficientRealization [DiscreteTopology B] [Finite B]
     (hB : (ℓ : B) = 0) (sq : CommSq g' f' f g)

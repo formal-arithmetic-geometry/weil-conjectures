@@ -15,7 +15,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory CategoryTheory.MonObj
 open scoped CategoryTheory.Obj

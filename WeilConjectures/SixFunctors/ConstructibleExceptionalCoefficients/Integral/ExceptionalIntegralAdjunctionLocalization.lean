@@ -288,7 +288,6 @@ private theorem exists_normalized_raw_core
     counitShift := P.counitShift }
   exact ⟨R, P.counit, P.comparisonShift⟩
 
-set_option linter.unusedVariables false in
 /-- The localized adjunction admits the identity normalized coefficient comparison.
 The adjunction's counit and left shift comparison are normalized explicitly; an arbitrary
 adjunction structure on the raw functors does not satisfy this assertion. -/

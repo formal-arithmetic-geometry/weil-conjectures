@@ -22,7 +22,6 @@ import Mathlib.RingTheory.Finiteness.Cardinality
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
   AlgebraicGeometry.Scheme
@@ -43,8 +42,8 @@ theorem point_finiteSections_finite_of_constructible (k B : Type u) [Field k] [I
   let G := e.inverse.obj F'
   have hG : IsConstructibleSheaf G.obj :=
     (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf G.obj).mp G.property
-  letI := hG
-  letI : Module.Finite A ((Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} A)).obj G.obj) :=
+  let := hG
+  let : Module.Finite A ((Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} A)).obj G.obj) :=
     Etale.finite_Γ_of_isConstructibleSheaf G.obj
   have hfin : Finite ((Sheaf.Γ T.smallEtaleTopology
       (ModuleCat.{u + 1} A)).obj G.obj) := Module.finite_of_finite A
@@ -52,23 +51,23 @@ theorem point_finiteSections_finite_of_constructible (k B : Type u) [Field k] [I
     (op (Etale.mk (𝟙 T)))
   let eΓ := (Sheaf.ΓNatIsoSheafSections T.smallEtaleTopology (ModuleCat.{u + 1} A)
     (isTerminalEtalePoint)).app G.obj
-  letI := hfin
+  let := hfin
   have hGsec : Finite (ev.obj G.obj) :=
     Finite.of_equiv _ eΓ.toLinearEquiv.toEquiv
-  letI := hGsec
+  let := hGsec
   let η := (T.proEtaleSiteComparisonModules A).unit.app G.obj
-  letI : IsIso η := (siteComparison_finiteLevel T A).2.2.1 G.obj
+  let : IsIso η := (siteComparison_finiteLevel T A).2.2.1 G.obj
   let eη := ev.mapIso (asIso η)
   have hLsec : Finite (((comparisonUpperStar (ModuleCat.{u + 1} A) T).obj G.obj).obj.obj
       (op (ProEt.mk (𝟙 T)))) :=
     @Finite.of_equiv _ _ hGsec eη.toLinearEquiv.toEquiv
-  letI := hLsec
+  let := hLsec
   let ea := ((sheafSections (ProEt.topology T) AddCommGrpCat.{u + 1}).obj
     (op (ProEt.mk (𝟙 T)))).mapIso (α.app G)
   have heF : Finite ((e.functor.obj G).obj.val.obj (op (ProEt.mk (𝟙 T)))) :=
     @Finite.of_surjective _ _ hLsec ea.hom
       (ConcreteCategory.bijective_of_isIso ea.hom).2
-  letI := heF
+  let := heF
   let ec := (pointFiniteSections k B).mapIso
     ((ObjectProperty.ι (IsConstructibleProEtaleModuleSheaf T B)).mapIso (e.counitIso.app F'))
   exact @Finite.of_equiv _ _ heF ec.toLinearEquiv.toEquiv
@@ -91,20 +90,20 @@ theorem point_sections_finiteness_finiteTorsion (D : FiniteFieldDatum.{u})
             (((pointFiniteSections D.k (Padic.coefficientExtensionRing l E n)).mapHomologicalComplex
               (.up ℤ)).obj C))) := by
   classical
-  letI : IsAlgClosed D.k := IsAlgClosure.isAlgClosed D.k₀
+  let : IsAlgClosed D.k := IsAlgClosure.isAlgClosed D.k₀
   intro C hC
   let B := Padic.coefficientExtensionRing l E n
-  letI : Finite B := Padic.finite_coefficientExtensionRing l E n hn
+  let : Finite B := Padic.finite_coefficientExtensionRing l E n hn
   let A := (constantSheaf (ProEt.topology (Spec (.of D.k))) CommRingCat.{u + 1}).obj
     (CommRingCat.of (ULift.{u + 1, u} B))
-  letI : PreservesFiniteLimits (pointModuleSections D.k A) :=
+  let : PreservesFiniteLimits (pointModuleSections D.k A) :=
     ((@point_proEtale_sections_exact.{u, u + 1, u + 1} D.k).2 A).1
-  letI : PreservesFiniteColimits (pointModuleSections D.k A) :=
+  let : PreservesFiniteColimits (pointModuleSections D.k A) :=
     ((@point_proEtale_sections_exact.{u, u + 1, u + 1} D.k).2 A).2.1
   let F := pointFiniteSections D.k B
-  letI : PreservesFiniteLimits F := inferInstanceAs (PreservesFiniteLimits
+  let : PreservesFiniteLimits F := inferInstanceAs (PreservesFiniteLimits
     (pointModuleSections D.k A ⋙ ModuleCat.restrictScalars (pointConstantSectionMap D.k B)))
-  letI : PreservesFiniteColimits F := inferInstanceAs (PreservesFiniteColimits
+  let : PreservesFiniteColimits F := inferInstanceAs (PreservesFiniteColimits
     (pointModuleSections D.k A ⋙ ModuleCat.restrictScalars (pointConstantSectionMap D.k B)))
   let iso (i : ℤ) :
       (DerivedCategory.homologyFunctor _ i).obj
@@ -121,7 +120,7 @@ theorem point_sections_finiteness_finiteTorsion (D : FiniteFieldDatum.{u})
       exact hi (hC.1.mem_toFinset.mpr h)
     exact IsZero.of_iso (F.map_isZero hzero) (iso i)
   · intro i
-    haveI := point_finiteSections_finite_of_constructible D.k B _ (hC.2 i)
+    have := point_finiteSections_finite_of_constructible D.k B _ (hC.2 i)
     exact Finite.of_equiv _ (iso i).toLinearEquiv.symm.toEquiv
 
 end WeilConjectures

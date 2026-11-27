@@ -118,7 +118,6 @@ namespace AlgebraicGeometry.Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
 
-set_option linter.flexible false in
 /-- The unit of `constantSheaf ⊣ Γ(⊤, -)` on modules, made abelian, is the unit on abelian
 groups, under `forget₂ ∘ constantSheaf ≅ constantSheaf ∘ forget₂`. -/
 lemma forget₂_map_constantSheafAdj_unit_app (N : ModuleCat.{u + 1} Λ) :
@@ -128,7 +127,17 @@ lemma forget₂_map_constantSheafAdj_unit_app (N : ModuleCat.{u + 1} Λ) :
       ((constantSheafSheafComposeForget₂Iso Λ).hom.app N).hom.app (op (⊤_ X.Etale)) =
     (constantSheafAdj X.smallEtaleTopology AddCommGrpCat.{u + 1} terminalIsTerminal).unit.app
       ((forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}).obj N) := by
-  simp [constantSheafAdj, constantPresheafAdj, constantSheafSheafComposeForget₂Iso]
+  simp only [Functor.id_obj, ModuleCat.forget₂_obj, Functor.comp_obj, Functor.flip_obj_obj,
+    ObjectProperty.ι_obj, constantSheafAdj, constantPresheafAdj, evaluation_obj_obj, op_unop,
+    Adjunction.comp_unit_app, Functor.const_obj_obj, Functor.constCompEvaluationObj_hom_app,
+    sheafificationAdjunction_unit_app, evaluation_obj_map, Category.id_comp,
+    ModuleCat.forget₂_map, constantSheafSheafComposeForget₂Iso, Functor.whiskeringRight_obj_obj,
+    Iso.trans_hom, Functor.isoWhiskerLeft_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom,
+    NatTrans.comp_app, Functor.associator_hom_app, Functor.whiskerLeft_app,
+    Functor.associator_inv_app, Functor.whiskerRight_app, NatIso.ofComponents_hom_app,
+    Iso.refl_hom, CategoryTheory.Functor.map_id, Category.comp_id,
+    ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.id_hom,
+    NatTrans.id_app]
   have : X.smallEtaleTopology.PreservesSheafification
       (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) :=
     Sheaf.preservesSheafification_of_adjunction _ (ModuleCat.forget₂CoinduceAdj Λ)

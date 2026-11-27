@@ -89,10 +89,6 @@ import Mathlib.CategoryTheory.Adjunction.Restrict
 set_option autoImplicit false
 set_option Elab.async false
 set_option cleanup.letToHave false
--- Avoid repeated expansion of the large private categorical helper signatures.
-set_option linter.unusedTactic false
-set_option linter.unusedVariables false
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048

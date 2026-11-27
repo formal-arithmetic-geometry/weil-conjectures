@@ -24,7 +24,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCocycle
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.all false
 set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false
@@ -151,6 +150,8 @@ private theorem modTranspose
   rfl
 
 attribute [local implicit_reducible] HomotopyCategory in
+omit [SymmetricCategory C] [Abelian.HasFunctorialFlatResolution C]
+  [IsCommMonObj R] [IsCommMonObj S] [IsCommMonObj T] in
 private theorem restrictionHomotopyFactors
     (w : φ ≫ ψ = χ) (K : HomotopyCategory (Mod C T) (.up ℤ)) :
     (comap φ).mapDerivedCategoryFactorsh.inv.app
@@ -175,9 +176,9 @@ private theorem restrictionHomotopyFactors
       (DerivedCategory.Qh.obj K))).mp
     rw [Iso.inv_hom_id_app_assoc]
     exact hc.symm
-  haveI : IsIso ((comap χ).mapDerivedCategoryFactorsh.hom.app K) := inferInstance
+  have : IsIso ((comap χ).mapDerivedCategoryFactorsh.hom.app K) := inferInstance
   apply (cancel_mono ((comap χ).mapDerivedCategoryFactorsh.hom.app K)).mp
-  simp only [mapDerivedCategoryComapCompIso, Iso.trans_hom, Iso.symm_hom,
+  simp only [mapDerivedCategoryComapCompIso, Iso.trans_hom,
     NatTrans.comp_app, Category.assoc]
   rw [Functor.mapDerivedCategoryNatIso_fach]
   rw [← Category.assoc _ _ (DerivedCategory.Qh.map _), hi]
@@ -190,6 +191,7 @@ private theorem restrictionHomotopyFactors
     (comap χ).mapDerivedCategoryFactorsh.inv_hom_id_app K,
     Functor.map_id, Category.id_comp, Iso.inv_hom_id_app_assoc, Category.comp_id]
   congr 1
+omit [MonoidalPreadditive C] [Abelian.HasFunctorialFlatResolution C] [IsCommMonObj T] in
 private theorem ordinaryComp_unit (w : φ ≫ ψ = χ) (M : Mod C R) :
     ((extendRestrictAdjunction φ).comp (extendRestrictAdjunction ψ)).homEquiv _ _
         (((extendScalarsComp φ ψ).symm ≪≫ extendScalarsIsoOfEq w).hom.app M) ≫
@@ -212,6 +214,7 @@ private theorem ordinaryComp_unit (w : φ ≫ ψ = χ) (M : Mod C R) :
   erw [reassoc_of% h₁']
   simpa only [Adjunction.homEquiv_unit, Category.assoc] using h₂
 attribute [local implicit_reducible] HomotopyCategory in
+omit [Abelian.HasFunctorialFlatResolution C] [IsCommMonObj T] in
 private theorem homotopyComp_unit (w : φ ≫ ψ = χ)
     (P : HomotopyCategory (Mod C R) (.up ℤ)) :
     (((extendRestrictAdjunction φ).mapHomotopyCategory (.up ℤ)).comp
@@ -243,7 +246,6 @@ private theorem homotopyComp_unit (w : φ ≫ ψ = χ)
     (HomotopyCategory.quotient (Mod C R) (.up ℤ)).map _
   rw [← Functor.map_comp, ← Functor.map_comp]
   congr 1
-  try dsimp only [Functor.mapHomologicalComplex]
   ext i
   have hh := ordinaryComp_unit φ ψ χ w (K.X i)
   rw [Adjunction.comp_homEquiv] at hh
@@ -281,9 +283,9 @@ private theorem exactModComp_eq
         (derivedExtendMapDerivedCategoryAdjunction ψ)
         (derivedExtendMapDerivedCategoryAdjunction χ)
         (mapDerivedCategoryComapCompIso φ ψ χ w) := by
-  letI : PreservesFiniteLimits (extendScalars (φ ≫ ψ)) :=
+  have : PreservesFiniteLimits (extendScalars (φ ≫ ψ)) :=
     preservesFiniteLimits_of_natIso (extendScalarsIsoOfEq w).symm
-  letI : PreservesFiniteLimits (extendScalars φ ⋙ extendScalars ψ) := inferInstance
+  have : PreservesFiniteLimits (extendScalars φ ⋙ extendScalars ψ) := inferInstance
   let ν := (extendScalarsComp φ ψ).symm ≪≫ extendScalarsIsoOfEq w
   let r := (comapComp φ ψ).symm ≪≫ comapCongr w
   apply Iso.ext
@@ -407,7 +409,7 @@ private theorem exactSquare_composition
     (Iso.refl (W ⋙ R₂'))
     (isoWhiskerLeft W r') r' (Iso.refl (W ⋙ R₃'))
     (by intro N; simp) M
-  simp only [compNatIso_refl, Iso.symm_hom] at h₂ h₃
+  simp only [compNatIso_refl] at h₂ h₃
   have h₂' : (mapDerivedCategoryCompNatIso δ).hom.app M =
       (mapDerivedCategoryCompIso V R₁').inv.app (R₂.mapDerivedCategory.obj M) ≫
         R₁'.mapDerivedCategory.map ((mapDerivedCategoryCompNatIso k₂).hom.app M) ≫
@@ -423,7 +425,7 @@ private theorem exactSquare_composition
     apply (cancel_epi (R₁'.mapDerivedCategory.map
       ((mapDerivedCategoryCompIso W R₂').hom.app M))).mp
     rw [← Category.assoc, h₃]
-    simp only [Category.assoc, Iso.hom_inv_id_app, Category.comp_id,
+    simp only [Category.assoc, Iso.hom_inv_id_app,
       ← R₁'.mapDerivedCategory.map_comp_assoc, R₁'.mapDerivedCategory.map_id,
       Category.id_comp]
     exact Category.comp_id _
@@ -537,8 +539,7 @@ private theorem scalarComparison_inv_eq
   apply (a₀.homEquiv _ _).injective
   dsimp only [Functor.comp_obj] at *
   rw [Equiv.apply_symm_apply, Adjunction.homEquiv_unit, ← hs M]
-  simp only [Category.assoc, ← R₀.map_comp, Iso.hom_inv_id_app,
-    Functor.map_id, Category.comp_id]
+  simp only [Category.assoc, ← R₀.map_comp, Iso.hom_inv_id_app]
   erw [R₀.map_id, Category.comp_id]
 
 private theorem scalarComparison_isMate
@@ -637,15 +638,15 @@ private theorem scalarComparison_composition
     dsimp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp,
       NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
       Functor.associator_hom_app, Functor.associator_inv_app]
-    simp only [Category.id_comp, Category.comp_id, Category.assoc]
+    simp only [Category.id_comp, Category.comp_id]
     apply (cancel_mono (r'.hom.app (W.obj N))).mp
-    simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+    simp only [Category.assoc, Iso.inv_hom_id_app]
     rw [← hk N, ← U.map_comp_assoc, Iso.inv_hom_id_app, U.map_id, Category.id_comp]
     change k₃.hom.app N = k₃.hom.app N ≫ 𝟙 _
     exact (Category.comp_id _).symm
   have hm := inverseMate_composition a₁ a₂ a₃ b₁ b₂ b₃ U V W
     s₁ s₂ s₃ k₁ k₂ k₃ d j r r' hs₁ hs₂ hs₃ hd hj hk'
-  have hc := congrArg (fun t ↦ t.natTrans.app M) hm
+  have hc := congrArg (fun t ↦ NatTrans.app t M) hm
   dsimp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vComp,
     NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.associator_hom_app, Functor.associator_inv_app] at hc
@@ -728,6 +729,8 @@ private def finiteSectionRestrictionIso
     (ProEtale.CondensedRing.sectionModuleComapIso X
       (ProEtale.padicSubfieldRingObjMap X l h))
 
+omit [AlgebraicGeometry.IsNoetherian X] [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]
+  [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))] in
 private theorem finiteSection_isMate
     {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
     mateEquiv
@@ -761,6 +764,8 @@ private def closureSectionRestrictionIso (E : Index l (PadicAlgCl l)) :
   exact Functor.mapDerivedCategorySquareIso
     (ProEtale.CondensedRing.sectionModuleComapIso X
       (ProEtale.padicSubfieldRingObjToPadicAlgCl X l E))
+omit [AlgebraicGeometry.IsNoetherian X] [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]
+  [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))] in
 private theorem closureSection_isMate (E : Index l (PadicAlgCl l)) :
     mateEquiv
       (closureSectionAdjunction l X E)
@@ -783,6 +788,8 @@ private theorem closureSection_isMate (E : Index l (PadicAlgCl l)) :
     (InternalAbelianSheafModule.sectionModuleEquivalence (ProEt.topology X)
       (ProEtale.padicAlgClRingObj X l)).functor.mapDerivedCategory _
 
+omit [AlgebraicGeometry.IsNoetherian X] [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]
+  [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))] in
 private theorem finiteClosureSectionScalarComparison_comp
     {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
     (M : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
@@ -806,9 +813,9 @@ private theorem finiteClosureSectionScalarComparison_comp
       (pbcDerivedExtend (ProEtale.CondensedRing.sectionRingMap X
         (ProEtale.padicSubfieldRingObjToPadicAlgCl X l L))).map
         ((finiteSectionScalarComparison l X h).inv.app M) := by
-  letI hE := ProEtale.isCommMonObj_condensedRingObj (Profinite.continuousMapRingObj E) X
-  letI hL := ProEtale.isCommMonObj_condensedRingObj (Profinite.continuousMapRingObj L) X
-  letI hC := ProEtale.isCommMonObj_condensedRingObj (Profinite.padicAlgClRingObj l) X
+  have hE := ProEtale.isCommMonObj_condensedRingObj (Profinite.continuousMapRingObj E) X
+  have hL := ProEtale.isCommMonObj_condensedRingObj (Profinite.continuousMapRingObj L) X
+  have hC := ProEtale.isCommMonObj_condensedRingObj (Profinite.padicAlgClRingObj l) X
   let φ := ProEtale.padicSubfieldRingObjMap X l h
   let ψ := ProEtale.padicSubfieldRingObjToPadicAlgCl X l L
   let χ := ProEtale.padicSubfieldRingObjToPadicAlgCl X l E
@@ -839,13 +846,13 @@ private theorem finiteClosureSectionScalarComparison_comp
     (closureSectionRestrictionIso l X E) (ProEtale.derivedExtendScalarsCompIso X l h)
     j r r' (finiteSection_isMate l X h) (closureSection_isMate l X L)
     (closureSection_isMate l X E) ?_ ?_ ?_ M
-  · letI hφ : PreservesFiniteLimits (Mod.extendScalars φ) :=
+  · have hφ : PreservesFiniteLimits (Mod.extendScalars φ) :=
       ProEtale.CondensedRing.preservesFiniteLimits_extendScalars_padicSubfieldRingObjMap
         (X := X) (ℓ := l) h
-    letI hψ : PreservesFiniteLimits (Mod.extendScalars ψ) :=
+    have hψ : PreservesFiniteLimits (Mod.extendScalars ψ) :=
       ProEtale.CondensedRing.preservesFiniteLimits_extendScalars_padicSubfieldRingObjToPadicAlgCl
         (X := X) (ℓ := l) L
-    letI hχ : PreservesFiniteLimits (Mod.extendScalars χ) :=
+    have hχ : PreservesFiniteLimits (Mod.extendScalars χ) :=
       ProEtale.CondensedRing.preservesFiniteLimits_extendScalars_padicSubfieldRingObjToPadicAlgCl
         (X := X) (ℓ := l) E
     have hd : ProEtale.derivedExtendScalarsCompIso X l h =
@@ -854,7 +861,7 @@ private theorem finiteClosureSectionScalarComparison_comp
       exact @Mod.exactModComp_eq (Sheaf (ProEt.topology X) Ab.{u + 1})
         _ _ _ _ _ _ _ _ _ _ _ _ _ _ hE hL hC φ _ ψ _ χ _ hφ hψ hχ w
         (@Mod.homotopyComp_unit (Sheaf (ProEt.topology X) Ab.{u + 1})
-          _ _ _ _ _ _ _ _ _ _ _ _ _ _ hE hL hC φ _ ψ _ χ _ w)
+          _ _ _ _ _ _ _ _ _ _ _ _ _ hE hL φ _ ψ _ χ _ w)
     rw [hd]
     simp only [Adjunction.leftAdjointCompIso_hom, Adjunction.leftAdjointCompNatTrans,
       Equiv.apply_symm_apply]
@@ -999,11 +1006,9 @@ private theorem coefficientRectangle
     Functor.isoWhiskerRight_inv, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Iso.symm_inv, Functor.associator_hom_app, Category.comp_id] at h₁ h₂
   rw [h₁, coefficientExtensionSquare_factor]
-  simp only [Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app, Functor.map_comp,
-    Category.assoc]
+  simp only [Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app, Functor.map_comp]
   rw [← Category.assoc, h₂]
-  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app,
-    Functor.map_id, Category.id_comp]
+  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
   erw [(pbcDerivedExtend legL).map_id, Category.id_comp]
 
 private theorem coefficientSection_paste
@@ -1049,10 +1054,9 @@ private theorem coefficientEncoding_transport
   rw [← Category.assoc, h]
   simp only [Category.assoc]
   erw [t.inv.naturality_assoc]
-  simp only [Functor.comp_map, Category.assoc, ← legD.map_comp_assoc,
-    ← κ.map_comp_assoc, Iso.inv_hom_id, Functor.map_id, Category.id_comp]
+  simp only [Functor.comp_map, ← legD.map_comp_assoc,
+    ← κ.map_comp_assoc, Iso.inv_hom_id]
   all_goals erw [κ.map_id I, Category.id_comp]
-  all_goals simp only [Category.assoc]
 
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.LocallyFiniteAdicRealization
@@ -1063,9 +1067,6 @@ attribute [local reducible] closureRing ProEtale.constructibleExtendScalars
   ProEtale.constructibleToPadicAlgCl finiteCondensedClosureFunctor
   GeneralAlgebraicallyClosedCoefficients.Stage
   GeneralAlgebraicallyClosedCoefficients.stageCategory
-  GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_1
-  GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_3
-  GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_5
 
 variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X]
   [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]

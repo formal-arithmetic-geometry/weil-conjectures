@@ -291,9 +291,6 @@ include ℓ k
 variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
 
--- An instance keeps only the section variables its statement and proof mention, so its
--- hypotheses are restated as binders; they repeat section variables.
-set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of
 `ℚ̄_ℓ`-sheaves are stable under the derived hom
 `RHom(-, -)`, the internal hom of `D(Mod_{ℚ̄_ℓ,X})` (SGA 4½ [Th. finitude],
@@ -306,7 +303,6 @@ theorem isMonoidalClosed_boundedConstructible :
     (tensorHypotheses_padicAlgClRingObj ℓ).lisseHypotheses X
     (fun _ _ _ _ _ _ _ _ j _ A hA ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ j ⟨A, hA⟩)
     hK hL⟩
-set_option linter.overlappingInstances false in
 attribute [instance] isMonoidalClosed_boundedConstructible
 
 /-- The derived hom `RHom(-, -) : Dᵇc(X)⟦ℚ̲̄_ℓ⟧ᵒᵖ ⥤ Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` on bounded
@@ -359,9 +355,6 @@ variable (E : PadicAlgCl.FiniteIntermediateField ℓ)
 variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
 
--- An instance keeps only the section variables its statement and proof mention, so its
--- hypotheses are restated as binders; they repeat section variables.
-set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `E`-sheaves are stable under the derived hom
 `RHom(-, -)`, the internal hom of `D(Mod_{E_X})` (SGA 4½ [Th. finitude], 1.6;
 Bhatt–Scholze, Section 6.8). It is false for a general condensed ring: for `Λ = ℤ/4` on a geometric
@@ -373,7 +366,6 @@ theorem isMonoidalClosed_boundedConstructible :
     (tensorHypotheses_continuousMapRingObj ℓ E).lisseHypotheses X
     (fun _ _ _ _ _ _ _ _ j _ A hA ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ E j ⟨A, hA⟩)
     hK hL⟩
-set_option linter.overlappingInstances false in
 attribute [instance] isMonoidalClosed_boundedConstructible
 
 /-- The derived hom `RHom(-, -) : Dᵇc(X)⟦E̲⟧ᵒᵖ ⥤ Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(X)⟦E̲⟧` on bounded
@@ -430,9 +422,6 @@ variable (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
 variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom]
 
--- An instance keeps only the section variables its statement and proof mention, so its
--- hypotheses are restated as binders; they repeat section variables.
-set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `𝒪_E`-sheaves are stable under the derived hom
 `RHom(-, -)`, the internal hom of `D(Mod_{𝒪_{E,X}})` (SGA 4½ [Th. finitude],
 1.6; Bhatt–Scholze, Section 6.8). It is false for a general condensed ring: for `Λ = ℤ/4` on a
@@ -443,7 +432,6 @@ theorem isMonoidalClosed_boundedConstructible :
   ⟨fun _ _ hK hL ↦ boundedConstructible_ihom_of_over (lisseHypotheses ℓ E) X
     (fun _ _ _ _ _ _ _ _ j _ A hA ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ E j ⟨A, hA⟩)
     hK hL⟩
-set_option linter.overlappingInstances false in
 attribute [instance] isMonoidalClosed_boundedConstructible
 
 /-- The derived hom `RHom(-, -) : Dᵇc(X)⟦𝒪̲_E⟧ᵒᵖ ⥤ Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(X)⟦𝒪̲_E⟧` on bounded

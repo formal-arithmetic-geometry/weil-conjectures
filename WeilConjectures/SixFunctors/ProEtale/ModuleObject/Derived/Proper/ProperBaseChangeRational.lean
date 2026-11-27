@@ -94,7 +94,6 @@ and this module (projection formula) imports both publicly.
 
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.unusedSectionVars false
 
 universe u
 

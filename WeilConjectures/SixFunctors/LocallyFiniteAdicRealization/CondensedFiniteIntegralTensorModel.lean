@@ -42,7 +42,6 @@ set_option backward.isDefEq.respectTransparency.types true
 set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false
-set_option linter.all false
 
 attribute [local irreducible] HasDerivedCategory.standard
 
@@ -67,13 +66,14 @@ variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsCommMonObj (abRing l X)]
   (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (i : F →ₐ[ℚ_[l]] PadicAlgCl l) (C : CoefficientPresentation l X F i)
 
+omit [IsCommMonObj (abRing l X)] in
 private theorem rational_integral_projection (s : RationalModuleRealization l F X) (n : ℕ) :
     s.integralIso.hom ≫ continuousCoefficientReduction l F X n =
       pbcAdicProjection X (pbcIntegralDatum l F) n ≫ (s.finiteIso n).hom := by
   apply (cancel_epi (RationalModuleRealization.integralIso s).inv).mp
   simp only [← Category.assoc, Iso.inv_hom_id, Category.id_comp]
-  letI : TopologicalSpace (AlgebraicGeometry.Scheme.finiteCoefficientRing l F n) := ⊥
-  letI : DiscreteTopology (AlgebraicGeometry.Scheme.finiteCoefficientRing l F n) := ⟨rfl⟩
+  let _ : TopologicalSpace (AlgebraicGeometry.Scheme.finiteCoefficientRing l F n) := ⊥
+  have : DiscreteTopology (AlgebraicGeometry.Scheme.finiteCoefficientRing l F n) := ⟨rfl⟩
   apply Sheaf.hom_ext
   ext U a
   apply ContinuousMap.ext
@@ -149,7 +149,7 @@ private theorem rational_integral_square (s : RationalModuleRealization l F X) :
       (s.integralIso.hom ≫ s.inclusion) ≫ C.rationalInclusion := by
   rw [← rational_integral_comparison l X F i C s]
   simp only [CoefficientPresentation.integralMap, Category.assoc, Iso.hom_inv_id_assoc]
-  letI := coefficientExtensionNormedField l F
+  let _ := coefficientExtensionNormedField l F
   have heq : C.integralInclusion = s.inclusion := by
     apply Sheaf.hom_ext
     ext U a
@@ -255,7 +255,7 @@ private def section_tensor
       Functor.mapDerivedCategoryNatIso (ProEtale.CondensedRing.sectionModuleComapIso X a) ≪≫
       (Functor.mapDerivedCategoryCompIso ES.functor (pbcRestrict φ)).symm
   let α := ((mateEquiv adj (pbcDerivedScalarAdjunction φ)).symm
-    (TwoSquare.mk _ _ _ _ β.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ β.hom))
   letI : IsIso α := isIso_inverseMate_of_equivalences adj
     (pbcDerivedScalarAdjunction φ) β
   exact (asIso α).symm
@@ -421,7 +421,7 @@ theorem condensedFinite_integralTensor_model
             ((ProEtale.derivedExtendScalarsToPadicAlgCl X l E).obj K.obj))) := by
   classical
   obtain ⟨p, hp, hprime⟩ := Nat.exists_infinite_primes (l + 1)
-  letI : Fact p.Prime := ⟨hprime⟩
+  have : Fact p.Prime := ⟨hprime⟩
   let D : FiniteFieldDatum.{u} :=
     { p := p, a := 1, q := p, prime := hprime, exponent_pos := le_refl 1,
       cardinality_eq := (pow_one p).symm, k₀ := ULift.{u} (ZMod p),

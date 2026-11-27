@@ -68,7 +68,6 @@ private theorem emptyDerived_isIso
 attribute [local irreducible] ordinaryPull ordinaryDerivedPull ordinaryComplexCounit
   ordinaryCoefficientMap tower completion completionComparison completionUnit
 
-set_option linter.unusedVariables false in
 /-- Detection of the specified completion unit along a finite open--closed tree. -/
 theorem qcqsCompletionUnitTree
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -93,7 +92,7 @@ theorem qcqsCompletionUnitTree
         IsClosedImmersion (rightEdge v) ∧
         Set.range (leftEdge v).base ∪ Set.range (rightEdge v).base = Set.univ ∧
         Disjoint (Set.range (leftEdge v).base) (Set.range (rightEdge v).base)) →
-      ∀ (I : ∀ v : Fin d, Type w) (W : ∀ v : Fin d, I v → (V v).ProEt),
+      ∀ (I : ∀ _v : Fin d, Type w) (W : ∀ v : Fin d, I v → (V v).ProEt),
       (∀ (v : Fin d) (a : I v), leaf v → Nonempty (V v) → CompactSpace (W v a).left) →
       (∀ (v : Fin d) (a : I v), leaf v → Nonempty (V v) →
         QuasiSeparatedSpace (W v a).left) →

@@ -23,7 +23,6 @@ import all WeilConjectures.Algebra.Homology.ProperBaseChange.OpenImmersionTensor
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option linter.style.haveILetI false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 universe u
@@ -124,16 +123,16 @@ theorem ordinaryFiniteQuotientOpenSupport {X Y : Scheme.{u}}
   obtain ⟨q, ⟨hq⟩⟩ := proEtaleOpen_slicePresentation j (S.ring Y) (S.ring X) (S.pull j)
   let Ls := SheafOfModules.localizedModuleExtension.{u} (S.ring Y) (ProEt.mk j)
   let ads := SheafOfModules.localizedModuleAdjunctionIndependent (S.ring Y) (ProEt.mk j)
-  letI := SheafOfModules.localizedUnit_isIso j (S.ring Y)
-  letI : Ls.Full := ads.fullyFaithfulLOfIsIsoUnit.full
-  letI : Ls.Faithful := ads.fullyFaithfulLOfIsIsoUnit.faithful
-  letI : q.functor.Full := q.fullyFaithfulFunctor.full
-  letI : q.functor.Faithful := q.fullyFaithfulFunctor.faithful
-  letI hfull : (q.functor ⋙ Ls).Full := Functor.Full.comp q.functor Ls
-  letI hfaithful : (q.functor ⋙ Ls).Faithful := Functor.Faithful.comp q.functor Ls
+  have := SheafOfModules.localizedUnit_isIso j (S.ring Y)
+  have : Ls.Full := ads.fullyFaithfulLOfIsIsoUnit.full
+  have : Ls.Faithful := ads.fullyFaithfulLOfIsIsoUnit.faithful
+  have : q.functor.Full := q.fullyFaithfulFunctor.full
+  have : q.functor.Faithful := q.fullyFaithfulFunctor.faithful
+  have hfull : (q.functor ⋙ Ls).Full := Functor.Full.comp q.functor Ls
+  have hfaithful : (q.functor ⋙ Ls).Faithful := Functor.Faithful.comp q.functor Ls
   let el : L ≅ q.functor ⋙ Ls := ((adj.ofNatIsoRight ep).leftAdjointUniq az) ≪≫ hq
-  letI : L.Full := @Functor.Full.of_iso _ _ _ _ _ _ hfull el.symm
-  letI : L.Faithful := @Functor.Faithful.of_iso _ _ _ _ _ _ hfaithful el.symm
+  have : L.Full := @Functor.Full.of_iso _ _ _ _ _ _ hfull el.symm
+  have : L.Faithful := @Functor.Faithful.of_iso _ _ _ _ _ _ hfaithful el.symm
   exact adj.isIso_counit_app_of_iso (e.app M)
 
 end WeilConjectures.IntegralSystemRealization

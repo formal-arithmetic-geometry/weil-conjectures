@@ -500,6 +500,7 @@ abbrev D := DerivedCategory (Mod l E X U)
 /-- The precise cochain representatives. -/
 abbrev Cx := CochainComplex (Mod l E X U) ℤ
 
+-- Untyped witness `def` (no type ascription); downstream files unfold it and mark it irreducible.
 set_option linter.defProp false in
 /-- The universal scalar-extension witness along the specified projection. -/
 def reductionWitness (n : ℕ) :=

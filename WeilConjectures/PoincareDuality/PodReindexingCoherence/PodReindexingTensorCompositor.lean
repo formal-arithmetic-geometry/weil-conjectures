@@ -56,11 +56,9 @@ private local instance (priority := 1000002) coefficientWeakSheafify (W : Scheme
     HasWeakSheafify (ProEt.topology W) CommRingCat.{u + 1} :=
   HasSheafify.isRightAdjoint
 
-set_option linter.defProp false in
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 attribute [-instance] GrothendieckTopology.hasSheafify_proEtTopology in
-@[instance_reducible]
-private def cachedCompose (W : Scheme.{u}) :
+private theorem cachedCompose (W : Scheme.{u}) :
     (ProEt.topology W).HasSheafCompose
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) :=
   hasSheafCompose_of_preservesLimitsOfSize (F :=

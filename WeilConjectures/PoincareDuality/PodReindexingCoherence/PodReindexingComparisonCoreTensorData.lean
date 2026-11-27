@@ -151,10 +151,7 @@ private theorem exists_sectionwise_cochain_tensor_comparison
     (curriedTensor (SheafOfModules.scalarModules J R)) p q (p + q) rfl).val.app V)
     (hgen _ _ V x y))
 
--- Reuse the small-site composition witness instead of expanding its construction.
-set_option linter.defProp false in
-@[instance_reducible]
-private def cachedCompose {C : Type*} [Category C] (J : GrothendieckTopology C)
+private theorem cachedCompose {C : Type*} [Category C] (J : GrothendieckTopology C)
     [EssentiallySmall.{u + 1} C] :
     J.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) :=
   (equivSmallModel.{u + 1} C).hasSheafCompose J

@@ -32,7 +32,6 @@ set_option backward.isDefEq.respectTransparency.types true
 set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false
-set_option linter.all false
 attribute [local irreducible] HasDerivedCategory.standard
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
@@ -97,10 +96,10 @@ theorem condensedStageComparison_exists
           d.hom.app ((sfRationalConstructibleLocalization l
             (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X).obj K) =
               (e E).hom.app K := by
-    letI : ∀ n : ℤ, (shiftFunctor (sfIntegralConstructibleCategory l
+    have : ∀ n : ℤ, (shiftFunctor (sfIntegralConstructibleCategory l
         (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X) n).Additive :=
       fun n ↦ inferInstance
-    letI : ∀ n : ℤ, (shiftFunctor (sfIntegralConstructibleCategory l
+    have : ∀ n : ℤ, (shiftFunctor (sfIntegralConstructibleCategory l
         (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X) n).Linear
           (Padic.coefficientExtensionIntegers l
             (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E)) :=

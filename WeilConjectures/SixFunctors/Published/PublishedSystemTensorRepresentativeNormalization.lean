@@ -453,7 +453,6 @@ private theorem tensor_comparison_eq_of_flat_rectangles {X Y : Scheme.{u}}
     Category.assoc] using
     hrect P.obj Q.obj P.property.1 Q.property.1 P.property.2 Q.property.2
 
-set_option linter.unusedVariables false in
 /-- The flat representative rectangle determines the transported comparison by
 K-flat tensor descent. The conclusion is an equality of tensor comparison isomorphisms,
 which is then used to extend the flat representative equation to all independent
@@ -471,10 +470,10 @@ theorem publishedSystemTransportedTensor_eq_of_flat_normalized {X Y : Scheme.{u}
         (pullbackTensorSequenceSmall Y)
         (coefficientSequenceTopology (ProEt.topology Y))
         (coefficientSequenceCommRingSheaf l E Y) Q)
-      (flatP : SemilinearSections.flatTerms.{u + 1, u, u + 1}
+      (_flatP : SemilinearSections.flatTerms.{u + 1, u, u + 1}
         (coefficientSequenceTopology (ProEt.topology Y))
         (coefficientSequenceCommRingSheaf l E Y) P)
-      (flatQ : SemilinearSections.flatTerms.{u + 1, u, u + 1}
+      (_flatQ : SemilinearSections.flatTerms.{u + 1, u, u + 1}
         (coefficientSequenceTopology (ProEt.topology Y))
         (coefficientSequenceCommRingSheaf l E Y) Q),
       (pullbackTensorSequenceDerived l E f).map

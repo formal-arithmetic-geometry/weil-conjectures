@@ -309,7 +309,7 @@ instance (Z : Over B) [Surjective p.left] : Surjective (prZ p Z).left := by
   rw [prZ_left]
   infer_instance
 
--- `hpb` is kept as an argument so that `descLeft` and its API take it uniformly
+-- Keep the included hypothesis `hpb` in this public statement.
 set_option linter.unusedSectionVars false in
 include hpb hq in
 lemma exists_fst_comp_eq [Surjective p.left] (Z : Over B) (s : F.obj.obj (op Z.left)) :

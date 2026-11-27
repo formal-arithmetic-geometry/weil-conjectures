@@ -23,7 +23,6 @@ isomorphism gives the global laws.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 
 open CategoryTheory
 namespace WeilConjectures.CoefQbarVerdier.ShiftDescent

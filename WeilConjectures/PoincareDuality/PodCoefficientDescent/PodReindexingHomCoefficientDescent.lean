@@ -116,7 +116,6 @@ equality transport only, so that the prescribed representative maps are preserve
 @[expose] public noncomputable section
 set_option linter.privateModule false
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option synthInstance.maxSize 4096
 set_option Elab.async false
 set_option backward.isDefEq.respectTransparency true
@@ -444,6 +443,8 @@ def IsIntegralNormalized
       (integralDerivedInternalHom l E X).map (Prod.mkHom (𝟙 _)
         ((podOrdinaryToCompleted l E g A).app P.obj.2.obj))
 
+omit [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)] in
 private theorem completionUnit_isIso
     (A : PodCompletionReindex l E g) (hA : PodCompletionReindex.Laws l E g A)
     (K : sfIntegralConstructibleCategory l E Y) :
@@ -888,6 +889,7 @@ attribute [local irreducible]
   commonStagePullbackComparison commonStageHomComparison commonStageTensorComparison
   operationStageTransitionIso
 
+omit [IsIso g] in
 private theorem commonPullback_eq : commonPullback l Ω g = commonStageDerivedPullback l Ω g :=
   copyObj_eq _ _
     ((podCommonStageObjectNormalizations l Ω).1 g)
@@ -1007,6 +1009,7 @@ private theorem stageT_map (W : Scheme.{u}) {L M : Index l Ω} (k : L ≤ M)
   rw [← Category.assoc, ← (operationStageTransitionIso l Ω W L M k).hom.naturality f,
     Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
 
+omit [IsIso g] in
 /-- The pullback comparison at a larger stage, through the scalar pullback comparison. -/
 private theorem pullbackComparison_hom_eq
     (K : generalAlgebraicallyClosedConstructibleCategory l Ω Y)
@@ -1031,6 +1034,7 @@ private theorem step_algebra {C D : Type*} [Category* C] [Category* D] (R : D �
   rw [← hc]
   simp
 
+omit [IsIso g] in
 /-- The pullback comparisons are compatible with one further transition. -/
 private theorem pullback_step (K : generalAlgebraicallyClosedConstructibleCategory l Ω Y)
     {L M : Index l Ω} (h : K.stage ≤ L) (k : L ≤ M) :
@@ -1085,6 +1089,8 @@ private theorem transportNatIso {C D : Type*} [Category* C] [Category* D]
 
 section CommonCompositorProof
 
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- The recorded scheme compositor in literal common-stage coordinates. -/
 theorem common_compositor_existsUnique {Z : Scheme.{u}} (h : Z ⟶ X) [IsIso h]
     [∀ z : Z, Invertible (l : Z.residueField z)] :

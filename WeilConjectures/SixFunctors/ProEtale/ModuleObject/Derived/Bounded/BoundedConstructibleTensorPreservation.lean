@@ -34,9 +34,6 @@ The tensor unit and the two finite truncation inductions for tensor closure.
 
 @[expose] public section
 
-set_option linter.style.haveILetI false
-set_option linter.unusedSectionVars false
-
 universe u
 
 open scoped CategoryTheory.Obj
@@ -51,6 +48,8 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
 variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom]
 
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- The coefficient object is bounded constructible and is the tensor unit. This is the unit
 clause needed to form the monoidal bounded-constructible subcategory. -/
 theorem boundedConstructible_tensor_unit :
@@ -64,8 +63,8 @@ theorem boundedConstructible_tensor_unit :
   have eb : DerivedCategory.TStructure.t.bounded U := by
     refine ⟨⟨0, DerivedCategory.TStructure.t.isGE_of_iso eUnit 0⟩, ?_⟩
     exact ⟨0, DerivedCategory.TStructure.t.isLE_of_iso eUnit 0⟩
-  letI : U.IsGE 0 := DerivedCategory.TStructure.t.isGE_of_iso eUnit 0
-  letI : U.IsLE 0 := DerivedCategory.TStructure.t.isLE_of_iso eUnit 0
+  have : U.IsGE 0 := DerivedCategory.TStructure.t.isGE_of_iso eUnit 0
+  have : U.IsLE 0 := DerivedCategory.TStructure.t.isLE_of_iso eUnit 0
   refine ⟨eb, fun n ↦ ?_⟩
   by_cases hn : n = 0
   · subst n
@@ -96,6 +95,7 @@ theorem boundedConstructible_tensor_unit :
       have hz := DerivedCategory.isZero_of_isLE U 0 n hpos
       exact constructible_of_isZero (condensedRingObj Λ X.left) hz
 
+omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
 /-- The derived tensor of two bounded constructible module-object complexes is bounded
 constructible, for any coefficient ring whose bounded constructible category is triangulated
 and satisfies the degree-zero tensor calculation `hsingle`
@@ -126,6 +126,7 @@ private theorem boundedConstructible_tensor_closure_of
 
 variable {X}
 
+omit [IsSeparated X.hom] in
 private theorem isNoetherian_left : IsNoetherian X.left :=
   have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
   have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
