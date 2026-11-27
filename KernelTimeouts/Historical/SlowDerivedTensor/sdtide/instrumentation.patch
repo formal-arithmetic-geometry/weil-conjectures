@@ -1,0 +1,188 @@
+--- READY4.2/type_checker.cpp
++++ IDE/type_checker.cpp
+@@ -35,6 +35,8 @@
+ #include "kernel/for_each_fn.h"
+ #include "kernel/quot.h"
+ #include "kernel/inductive.h"
++#include "library/formatter.h"
++#include <sstream>
+ 
+ namespace lean {
+ namespace anatomy {
+@@ -63,6 +65,16 @@
+     if (is_proj(f)) return proj_sname(f).to_string() + ".proj";
+     return std::to_string(static_cast<unsigned>(e.kind()));
+ }
++static std::string ide_expr_text(expr const & e) {
++    std::ostringstream out;
++    try { out << e; } catch (...) { return "<unavailable>"; }
++    std::string s = out.str();
++    for (char & c : s) {
++        if (c == '"' || c == '\\' || c == '\n' || c == '\r') c = ' ';
++    }
++    if (s.size() > 4096) s.resize(4096);
++    return s;
++}
+ static std::string proposition_head(expr e) {
+     while (is_pi(e)) e = binding_body(e);
+     return head(e);
+@@ -140,6 +152,18 @@
+ };
+ struct comparison;
+ static thread_local comparison * current = nullptr;
++static thread_local char const * ide_delta_caller = "whnf";
++static thread_local char const * ide_delta_side = "unknown";
++struct ide_caller_scope {
++    char const * previous;
++    explicit ide_caller_scope(char const * value): previous(ide_delta_caller) { ide_delta_caller = value; }
++    ~ide_caller_scope() { ide_delta_caller = previous; }
++};
++struct ide_side_scope {
++    char const * previous;
++    explicit ide_side_scope(char const * value): previous(ide_delta_side) { ide_delta_side = value; }
++    ~ide_side_scope() { ide_delta_side = previous; }
++};
+ static thread_local comparison * next_owner = nullptr;
+ static thread_local std::string next_path;
+ static thread_local std::string next_kind = "fallback";
+@@ -677,6 +701,28 @@
+         }
+     }
+ };
++static void ide_delta_event(expr const & before, expr const & after, constant_info const & info) {
++    if (!current || !mprwe_stream() || mprwe_global_events >= mprwe_limit()) return;
++    std::string name = info.get_name().to_string();
++    if (name.find("DerivedCategory") == std::string::npos &&
++        name.find("DerivedMonoidal") == std::string::npos &&
++        name.find("MonoidalCategoryHomotopyCategoryIntUp") == std::string::npos &&
++        name.find("HomotopyCategory.MonoidalCategory.instMonoidalCategory") == std::string::npos &&
++        name.find("MonoidalCategoryStruct") == std::string::npos &&
++        name.find("ideHint") == std::string::npos) return;
++    if (mprwe_root_filter() && root_id() != mprwe_root_filter()) return;
++    std::lock_guard<std::mutex> lock(mprwe_mutex);
++    ++mprwe_global_events;
++    std::fprintf(mprwe_stream(), "{\"event\":\"ide_delta\",\"seq\":%llu,\"root\":%llu,\"call\":%llu,\"parent\":%llu,\"depth\":%u,\"operation\":\"%s\",\"side\":\"%s\",\"head\":\"%s\",\"before_hash\":%u,\"after_hash\":%u,\"before_expr\":\"%s\",\"after_expr\":\"%s\",\"hint\":\"%s\",\"hint_height\":%u,\"transparency\":\"kernel\",\"projection_mode\":\"caller-dependent\",\"universe_levels\":\"see-expr\",\"expression_type\":\"not-sampled\",\"comparison_context\":\"unknown\",\"category\":%u,\"path\":\"%s\"}\n",
++        static_cast<unsigned long long>(mprwe_global_events), static_cast<unsigned long long>(root_id()),
++        static_cast<unsigned long long>(current->id),
++        static_cast<unsigned long long>(current->parent ? current->parent->id : 0), current->depth,
++        ide_delta_caller, ide_delta_side,
++        name.c_str(), hash(before), hash(after), ide_expr_text(before).c_str(), ide_expr_text(after).c_str(),
++        info.get_hints().is_regular() ? "regular" : info.get_hints().is_abbrev() ? "abbrev" : "opaque",
++        info.get_hints().is_regular() ? info.get_hints().get_height() : 0,
++        current->category, current->path.c_str());
++}
+ static void mprwe_reduction(char const * phase, comparison * owner, expr const & before_l,
+                             expr const & after_l, expr const & before_r, expr const & after_r) {
+     if (!owner) return;
+@@ -1365,12 +1411,18 @@
+         if (auto f  = unfold_definition_core(f0)) {
+             buffer<expr> args;
+             get_app_rev_args(e, args);
+-            return some_expr(mk_rev_app(*f, args));
++            expr result = mk_rev_app(*f, args);
++            if (auto info = is_delta(f0)) anatomy::ide_delta_event(e, result, *info);
++            return some_expr(result);
+         } else {
+             return none_expr();
+         }
+     } else {
+-        return unfold_definition_core(e);
++        auto result = unfold_definition_core(e);
++        if (result) {
++            if (auto info = is_delta(e)) anatomy::ide_delta_event(e, *result, *info);
++        }
++        return result;
+     }
+ }
+ 
+@@ -1508,6 +1560,7 @@
+ /** \brief Put expression \c t in weak head normal form */
+ expr type_checker::whnf(expr const & e) {
+     anatomy::reduction anatomy_reduction;
++    anatomy::ide_caller_scope ide_caller("whnf");
+     // Do not cache easy cases
+     switch (e.kind()) {
+     case expr_kind::BVar:  case expr_kind::Sort: case expr_kind::MVar: case expr_kind::Pi:
+@@ -1813,6 +1866,15 @@
+ 
+      \remark t_n, s_n and cs are updated. */
+ auto type_checker::lazy_delta_reduction_step(expr & t_n, expr & s_n) -> reduction_status {
++    anatomy::ide_caller_scope ide_caller("lazy_delta");
++    auto unfold_left = [&] {
++        anatomy::ide_side_scope side("checked");
++        t_n = whnf_core(*unfold_definition(t_n), false, true);
++    };
++    auto unfold_right = [&] {
++        anatomy::ide_side_scope side("stored");
++        s_n = whnf_core(*unfold_definition(s_n), false, true);
++    };
+     auto d_t = is_delta(t_n);
+     auto d_s = is_delta(s_n);
+     if (!d_t && !d_s) {
+@@ -1829,21 +1891,21 @@
+         if (auto s_n_new = try_unfold_proj_app(s_n)) {
+             s_n = *s_n_new;
+         } else {
+-            t_n = whnf_core(*unfold_definition(t_n), false, true);
++            unfold_left();
+         }
+     } else if (!d_t && d_s) {
+         /* If `t_n` is a projection application, we try to unfold it instead. See comment above. */
+         if (auto t_n_new = try_unfold_proj_app(t_n)) {
+             t_n = *t_n_new;
+         } else {
+-            s_n = whnf_core(*unfold_definition(s_n), false, true);
++            unfold_right();
+         }
+     } else {
+         int c = compare(d_t->get_hints(), d_s->get_hints());
+         if (c < 0) {
+-            t_n = whnf_core(*unfold_definition(t_n), false, true);
++            unfold_left();
+         } else if (c > 0) {
+-            s_n = whnf_core(*unfold_definition(s_n), false, true);
++            unfold_right();
+         } else {
+             if (is_app(t_n) && is_app(s_n) && is_eqp(*d_t, *d_s) && d_t->get_hints().is_regular()) {
+                 // Optimization:
+@@ -1860,8 +1922,8 @@
+                     }
+                 }
+             }
+-            t_n = whnf_core(*unfold_definition(t_n), false, true);
+-            s_n = whnf_core(*unfold_definition(s_n), false, true);
++            unfold_left();
++            unfold_right();
+         }
+     }
+     switch (quick_is_def_eq(t_n, s_n)) {
+@@ -1941,6 +2003,7 @@
+ The approach used here is more complicated, but it is also more powerful.
+ */
+ bool type_checker::lazy_delta_proj_reduction(expr & t_n, expr & s_n, name const & sname, nat const & idx) {
++    anatomy::ide_caller_scope ide_caller("projection_delta");
+     while (true) {
+         switch (lazy_delta_reduction_step(t_n, s_n)) {
+         case reduction_status::Continue:   break;
+@@ -2017,8 +2080,8 @@
+       and first try `a =?= b` before reducing `a.i` and `b.i`. Recall that `whnf_core` with `cheap_proj = true` still
+       reduces terms such as `{ fst := 10, snd := 20 }.1` to `10`.
+     */
+-    expr t_n = whnf_core(t, false, true);
+-    expr s_n = whnf_core(s, false, true);
++    expr t_n = [&] { anatomy::ide_side_scope side("checked"); return whnf_core(t, false, true); }();
++    expr s_n = [&] { anatomy::ide_side_scope side("stored"); return whnf_core(s, false, true); }();
+     anatomy::mprwe_reduction("initial_whnf", anatomy::current, t, t_n, s, s_n);
+ 
+     if (!is_eqp(t_n, t) || !is_eqp(s_n, s)) {
+@@ -2048,8 +2111,8 @@
+     }
+ 
+     // Invoke `whnf_core` again, but now using `whnf` to reduce projections.
+-    expr t_n_n = whnf_core(t_n);
+-    expr s_n_n = whnf_core(s_n);
++    expr t_n_n = [&] { anatomy::ide_side_scope side("checked"); return whnf_core(t_n); }();
++    expr s_n_n = [&] { anatomy::ide_side_scope side("stored"); return whnf_core(s_n); }();
+     anatomy::mprwe_reduction("projection_whnf", anatomy::current, t_n, t_n_n, s_n, s_n_n);
+     if (!is_eqp(t_n_n, t_n) || !is_eqp(s_n_n, s_n)) {
+         anatomy::path_scope path("whnf", 0, anatomy::Reduced);
