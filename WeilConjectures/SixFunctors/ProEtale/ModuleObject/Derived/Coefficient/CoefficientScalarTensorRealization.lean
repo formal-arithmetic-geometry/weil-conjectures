@@ -64,7 +64,6 @@ the derived direct-image mate. All categories are ordinary unbounded derived cat
 
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.style.haveILetI false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -91,7 +90,7 @@ private theorem scalarRightLax_eq (Z : Scheme.{u}) :
     letI := internalScalarMonoidal a Z
     (Mod.extendRestrictAdjunction (coefficientMap a Z)).rightAdjointLaxMonoidal =
       Mod.restrictionLaxMonoidal (coefficientMap a Z) := by
-  letI := internalScalarMonoidal a Z
+  let := internalScalarMonoidal a Z
   let φ := coefficientMap a Z
   let adj := Mod.extendRestrictAdjunction φ
   have hδ (M N : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
@@ -145,8 +144,8 @@ private theorem comapPush_monoidal {X Y : Scheme.{u}} (f : X ⟶ Y) :
     letI := Mod.restrictionLaxMonoidal (coefficientMap a X)
     letI := Mod.restrictionLaxMonoidal (coefficientMap a Y)
     NatTrans.IsMonoidal (comapLowerStarIso a f).hom := by
-  letI := Mod.restrictionLaxMonoidal (coefficientMap a X)
-  letI := Mod.restrictionLaxMonoidal (coefficientMap a Y)
+  let := Mod.restrictionLaxMonoidal (coefficientMap a X)
+  let := Mod.restrictionLaxMonoidal (coefficientMap a Y)
   apply monoidalIso_of_tensor
   intro M N
   apply ModuleRingedComparison.internalPureTensor_hom_ext R Y
@@ -217,26 +216,26 @@ private theorem scalarPull_monoidal {X Y : Scheme.{u}} (f : X ⟶ Y) :
     letI := monoidal_upperStar R f
     letI := monoidal_upperStar S f
     NatTrans.IsMonoidal (pullIso a f).symm.hom := by
-  letI := internalScalarMonoidal a X
-  letI := internalScalarMonoidal a Y
-  letI := monoidal_upperStar R f
-  letI := monoidal_upperStar S f
-  letI : (upperStar R f).OplaxMonoidal := (monoidal_upperStar R f).toOplaxMonoidal
-  letI : (upperStar S f).OplaxMonoidal := (monoidal_upperStar S f).toOplaxMonoidal
-  letI := Mod.restrictionLaxMonoidal (coefficientMap a X)
-  letI := Mod.restrictionLaxMonoidal (coefficientMap a Y)
-  haveI hx : (Mod.extendRestrictAdjunction (coefficientMap a X)).IsMonoidal := by
+  let := internalScalarMonoidal a X
+  let := internalScalarMonoidal a Y
+  let := monoidal_upperStar R f
+  let := monoidal_upperStar S f
+  let : (upperStar R f).OplaxMonoidal := (monoidal_upperStar R f).toOplaxMonoidal
+  let : (upperStar S f).OplaxMonoidal := (monoidal_upperStar S f).toOplaxMonoidal
+  let := Mod.restrictionLaxMonoidal (coefficientMap a X)
+  let := Mod.restrictionLaxMonoidal (coefficientMap a Y)
+  have hx : (Mod.extendRestrictAdjunction (coefficientMap a X)).IsMonoidal := by
     exact adjMonoidal_of_rightLax _ (scalarRightLax_eq a X).symm
-  haveI hy : (Mod.extendRestrictAdjunction (coefficientMap a Y)).IsMonoidal := by
+  have hy : (Mod.extendRestrictAdjunction (coefficientMap a Y)).IsMonoidal := by
     exact adjMonoidal_of_rightLax _ (scalarRightLax_eq a Y).symm
-  haveI hr : (upperStarLowerStarAdjunction R f).IsMonoidal := by
+  have hr : (upperStarLowerStarAdjunction R f).IsMonoidal := by
     exact adjMonoidal_of_leftOplax _
       (ModuleRingedComparison.internalPullOplax_eq_canonical R f)
-  haveI hs : (upperStarLowerStarAdjunction S f).IsMonoidal := by
+  have hs : (upperStarLowerStarAdjunction S f).IsMonoidal := by
     exact adjMonoidal_of_leftOplax _
       (ModuleRingedComparison.internalPullOplax_eq_canonical S f)
-  haveI hc := comapPush_monoidal a f
-  haveI hp : NatTrans.IsMonoidal (pullIso a f).hom := by
+  have hc := comapPush_monoidal a f
+  have hp : NatTrans.IsMonoidal (pullIso a f).hom := by
     exact isMonoidal_conjugateEquiv_symm
       ((Mod.extendRestrictAdjunction (coefficientMap a Y)).comp
         (upperStarLowerStarAdjunction S f))

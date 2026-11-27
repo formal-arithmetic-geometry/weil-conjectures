@@ -26,7 +26,6 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option genSizeOf false
 set_option genInjectivity false
-set_option linter.all false
 attribute [local irreducible] HasDerivedCategory.standard
 
 universe u v

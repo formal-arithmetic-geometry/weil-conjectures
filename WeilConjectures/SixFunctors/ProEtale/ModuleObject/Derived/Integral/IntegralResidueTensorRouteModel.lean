@@ -36,7 +36,6 @@ attribute [local semireducible] residueExchangeTensorModelTarget
 local instance instEssentiallySmallProfinite_integralResidueTensorRouteModel
     : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
-set_option linter.style.haveILetI false in
 set_option cleanup.letToHave false in
 /-- Compute the tensor-route against the ordinary homotopy tensor model. -/
 theorem integralResidue_tensorRoute_model {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -55,9 +54,9 @@ theorem integralResidue_tensorRoute_model {X Y : Scheme.{u}} (f : X ⟶ Y)
   let F := (f)^*⟦integralCoeff ℓ E⟧
   let G := residueExchangeUpperStar (integralCoeff ℓ E) f
   let γ := residueExchangeUpperStarCounit (integralCoeff ℓ E) f
-  letI hfp : F.PreservesFlat := hFlat
-  letI hm : F.Monoidal := residueExchangeOrdinaryPullMonoidal ℓ E f
-  letI hdm : G.Monoidal := residueExchangePullMonoidal ℓ E f
+  have hfp : F.PreservesFlat := hFlat
+  let hm : F.Monoidal := residueExchangeOrdinaryPullMonoidal ℓ E f
+  let hdm : G.Monoidal := residueExchangePullMonoidal ℓ E f
     (residueExchangeOrdinaryPullMonoidal ℓ E f) hFlat
   have hG := residueOrdinaryUpperStar_braiding (integralCoeff ℓ E) f
   dsimp only

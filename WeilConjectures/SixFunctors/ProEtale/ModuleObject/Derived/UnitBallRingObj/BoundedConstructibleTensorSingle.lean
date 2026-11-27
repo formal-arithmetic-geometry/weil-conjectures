@@ -178,8 +178,6 @@ The remaining local tensor calculation on constructible sheaves in degree zero.
 
 @[expose] public section
 
-set_option linter.style.haveILetI false
-set_option linter.unusedSectionVars false
 
 universe u
 

@@ -42,7 +42,6 @@ set_option backward.isDefEq.respectTransparency.types true
 set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false
-set_option linter.all false
 
 attribute [local irreducible] HasDerivedCategory.standard
 
@@ -88,8 +87,7 @@ private instance constAssocShift {i j k : I} (h : i ≤ j) (h' : j ≤ k) :
       erw [StageSystem.constEval_map_mkHom]
       change ((𝟭 D).commShiftIso n).hom.app A.obj ≫ (shiftFunctor D n).map u ≫
         ((𝟭 D).commShiftIso n).inv.app B.obj = _
-      simp only [Functor.commShiftIso_id_hom_app, Functor.commShiftIso_id_inv_app,
-        Category.id_comp, Category.comp_id]
+      simp only [Functor.commShiftIso_id_hom_app, Functor.commShiftIso_id_inv_app]
       erw [Category.id_comp, Category.comp_id]
       rfl)
   commShiftIso_zero := by
@@ -121,13 +119,13 @@ private theorem coconeShift (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     (C : CoefficientSystem l X) (A : FiniteCocone l X C) :
     letI : ∀ E, (A.Φ E).CommShift ℤ := A.shift
     ∃ s : (StageSystem.descFunctor A.Φ A.ι A.coherence).CommShift ℤ,
-      (fun [hs : (StageSystem.descFunctor A.Φ A.ι A.coherence).CommShift ℤ] ↦
+      (fun [_hs : (StageSystem.descFunctor A.Φ A.ι A.coherence).CommShift ℤ] ↦
         ∀ E : Index l (PadicAlgCl l),
           NatTrans.CommShift
-            (StageSystem.ιCompDescFunctorIso A.Φ A.ι A.coherence E).hom ℤ) (hs := s) := by
-  letI : ∀ E, (A.Φ E).CommShift ℤ := A.shift
-  letI : ∀ {E L} (h : E ≤ L), NatTrans.CommShift (A.ι h).hom ℤ := A.transitionShift
-  letI : ∀ E, ((StageSystem.Morphism.ofCocone A.Φ A.ι A.coherence).Φ E).CommShift ℤ := A.shift
+            (StageSystem.ιCompDescFunctorIso A.Φ A.ι A.coherence E).hom ℤ) (_hs := s) := by
+  let : ∀ E, (A.Φ E).CommShift ℤ := A.shift
+  have : ∀ {E L} (h : E ≤ L), NatTrans.CommShift (A.ι h).hom ℤ := A.transitionShift
+  let : ∀ E, ((StageSystem.Morphism.ofCocone A.Φ A.ι A.coherence).Φ E).CommShift ℤ := A.shift
   have hβ : ∀ {E L : Index l (PadicAlgCl l)} (h : E ≤ L),
       NatTrans.CommShift ((StageSystem.Morphism.ofCocone A.Φ A.ι A.coherence).β h).hom ℤ := by
     intro E L h
@@ -135,16 +133,16 @@ private theorem coconeShift (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
         ((Functor.rightUnitor (A.Φ E)).hom ≫ (A.ι h).inv) ℤ := inferInstance
     convert hi using 1 <;> first
     | rfl
-    | apply heq_of_eq; ext K; simp <;> rfl
-  letI : ∀ {i j : Index l (PadicAlgCl l)} (h : i ≤ j),
+    | apply heq_of_eq; ext K; simp
+  have : ∀ {i j : Index l (PadicAlgCl l)} (h : i ≤ j),
       NatTrans.CommShift
         ((StageSystem.const (Index l (PadicAlgCl l))
           (DerivedCategory (ProEtale.AdicSheaf l X))).transIso h).hom ℤ :=
     fun {_ _} h ↦ StageSystem.transIso_commShift h
-  letI := WeilConjectures.pairCommShift (StageSystem.Morphism.ofCocone A.Φ A.ι A.coherence) hβ
-  letI : (StageSystem.constEval (I := Index l (PadicAlgCl l))
+  let := WeilConjectures.pairCommShift (StageSystem.Morphism.ofCocone A.Φ A.ι A.coherence) hβ
+  let : (StageSystem.constEval (I := Index l (PadicAlgCl l))
       (D := DerivedCategory (ProEtale.AdicSheaf l X))).CommShift ℤ := constantEvalShift
-  letI : (StageSystem.descFunctor A.Φ A.ι A.coherence).CommShift ℤ :=
+  let : (StageSystem.descFunctor A.Φ A.ι A.coherence).CommShift ℤ :=
     Functor.CommShift.comp
       (StageSystem.Morphism.ofCocone A.Φ A.ι A.coherence).functor StageSystem.constEval
   refine ⟨inferInstance, ?_⟩
@@ -177,8 +175,8 @@ private theorem coconeShift (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
       StageSystem.constEval.map ((StageSystem.Morphism.ofCocone A.Φ A.ι A.coherence).functor.map
         (((GeneralAlgebraicallyClosedCoefficients.inclusion E).commShiftIso n).inv.app K)) ≫
         ((A.Φ E).commShiftIso n).hom.app K ≫ 𝟙 _ ≫ 𝟙 _ = _
-  simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app, Functor.map_id,
-    Category.id_comp, Category.comp_id]
+  simp only [← Functor.map_comp_assoc,
+    Category.comp_id]
   erw [← CategoryTheory.Functor.map_comp, Iso.hom_inv_id_app,
     CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
     Category.id_comp, Category.comp_id]
@@ -192,16 +190,16 @@ theorem normalizedFunctor_exists
     [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))] :
     Nonempty (NormalizedFunctor l X) := by
   obtain ⟨C⟩ := coefficientSystem_exists l X
-  letI := C.commutative
-  letI := C.sectionsAdditive
-  letI := C.sectionsLimits
-  letI := C.sectionsColimits
+  have := C.commutative
+  have := C.sectionsAdditive
+  have := C.sectionsLimits
+  have := C.sectionsColimits
   obtain ⟨A⟩ := finiteCocone_exists l X C
-  letI : ∀ E, (A.Φ E).Additive := A.additive
-  letI : ∀ E, (A.Φ E).CommShift ℤ := A.shift
-  letI : ∀ {E L} (h : E ≤ L), NatTrans.CommShift (A.ι h).hom ℤ := A.transitionShift
+  have : ∀ E, (A.Φ E).Additive := A.additive
+  let : ∀ E, (A.Φ E).CommShift ℤ := A.shift
+  have : ∀ {E L} (h : E ≤ L), NatTrans.CommShift (A.ι h).hom ℤ := A.transitionShift
   let J := StageSystem.descFunctor A.Φ A.ι A.coherence
-  haveI : J.Additive := by
+  have : J.Additive := by
     constructor
     intro K L f g
     obtain ⟨M, _, hK, hL, hK', hL', u, v, rfl, rfl⟩ :=
@@ -211,16 +209,16 @@ theorem normalizedFunctor_exists
       Preadditive.comp_add, Preadditive.add_comp]
     rfl
   obtain ⟨s, hs⟩ := coconeShift l X C A
-  letI : J.CommShift ℤ := s
-  haveI (E : Index l (PadicAlgCl l)) :
+  let : J.CommShift ℤ := s
+  have (E : Index l (PadicAlgCl l)) :
       NatTrans.CommShift (StageSystem.ιCompDescFunctorIso A.Φ A.ι A.coherence E).hom ℤ := hs E
   have ht : J.IsTriangulated := by
     constructor
     intro T hT
     obtain ⟨E, V, hV, ⟨e⟩⟩ :=
       (GeneralAlgebraicallyClosedCoefficients.distinguished_iff T).mp hT
-    haveI : (A.Φ E).IsTriangulated := A.triangulated E
-    haveI : (GeneralAlgebraicallyClosedCoefficients.inclusion E ⋙ J).IsTriangulated :=
+    have : (A.Φ E).IsTriangulated := A.triangulated E
+    have : (GeneralAlgebraicallyClosedCoefficients.inclusion E ⋙ J).IsTriangulated :=
       Functor.isTriangulated_of_iso
         (StageSystem.ιCompDescFunctorIso A.Φ A.ι A.coherence E).symm
     exact Pretriangulated.isomorphic_distinguished _

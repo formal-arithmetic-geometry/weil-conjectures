@@ -316,8 +316,9 @@ local notation "ambientMate" =>
         (show CommSq g'.left p'.left p.left g.left from
           (Over.forget _).map_commSq sq)).hom))
 
-set_option linter.unusedSectionVars false
-
+omit ℓ hℓPrime hCharPrime hCharNe hXFiniteType hXQuasiCompact hXSeparated hYFiniteType
+  hYQuasiCompact hYSeparated hXPrimeFiniteType hXPrimeQuasiCompact hXPrimeSeparated
+  hYPrimeFiniteType hYPrimeQuasiCompact hYPrimeSeparated in
 private theorem exchange_triangle
     [NatTrans.CommShift (moduleObjectDerivedExchange Λ
       (show CommSq g'.left p'.left p.left g.left from
@@ -339,6 +340,8 @@ private theorem exchange_triangle
           (Over.forget _).map_commSq sq)).app T.obj₃ :=
   triangle_morphism_of_shift _ _ _ T
 
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- The ambient exchange has the prescribed counit normalization, both ambient functors
 are exact with their fixed canonical shifts, and the exchange commutes with every integer
 shift. No cartesian hypothesis is imposed. -/
@@ -388,7 +391,7 @@ theorem moduleObjectDerivedExchange_exact_normalization :
   have := hG _ _ p'.left
   have hB := exchange_shift Λ (show CommSq g'.left p'.left p.left g.left from
     (Over.forget _).map_commSq sq)
-  refine ⟨?_, inferInstance, inferInstance, hB, fun T _ ↦ exchange_triangle Λ ℓ sq T⟩
+  refine ⟨?_, inferInstance, inferInstance, hB, fun T _ ↦ exchange_triangle Λ sq T⟩
   generalize hE : moduleObjectDerivedExchange Λ
     (show CommSq g'.left p'.left p.left g.left from
       (Over.forget _).map_commSq sq) = B
@@ -435,8 +438,8 @@ private theorem conditional_pullback_obj_val (f : X ⟶ Y)
     ((boundedConstructibleUpperStar Λ ℓ f).obj J).obj =
       (moduleObjectDerivedPullback Λ f.left).obj J.obj := rfl
 
-omit hXPrimeFiniteType hXPrimeQuasiCompact hXPrimeSeparated
-  hYPrimeFiniteType hYPrimeQuasiCompact hYPrimeSeparated in
+omit [IsCommMonObj Λ] ℓ hℓPrime hCharPrime hCharNe hXPrimeFiniteType hXPrimeQuasiCompact
+  hXPrimeSeparated hYPrimeFiniteType hYPrimeQuasiCompact hYPrimeSeparated in
 private theorem conditional_pushforward_obj_val
     (H : PreservesBoundedConstructiblePushforwards Λ k) (f : X ⟶ Y)
     (J : BoundedConstructible (condensedRingObj Λ X.left)) :
@@ -541,7 +544,7 @@ private theorem baseChange_of_counit_equations
   have hR := congrArg₂ (fun u v ↦ u ≫ v)
     (hθ ((boundedConstructibleLowerStarOfPreserves Λ H p).obj K)) hmap
   have h := hL.symm.trans (hb.trans hR)
-  simp only [conditional_pullback_obj_val, conditional_pushforward_obj_val Λ ℓ H p] at h
+  simp only [conditional_pullback_obj_val, conditional_pushforward_obj_val Λ H p] at h
   have hEq := h.trans (hnorm K.obj).symm
   let v :
       (moduleObjectDerivedPullback Λ g.left).obj
@@ -550,7 +553,7 @@ private theorem baseChange_of_counit_equations
         ((moduleObjectDerivedPullback Λ g'.left).obj K.obj) :=
     (B.app K).hom
   dsimp only [CategoryTheory.Functor.comp_obj, CategoryTheory.Functor.id_obj] at hEq
-  simp only [conditional_pullback_obj_val, conditional_pushforward_obj_val Λ ℓ H p] at hEq
+  simp only [conditional_pullback_obj_val, conditional_pushforward_obj_val Λ H p] at hEq
   change v = _
   apply ((derivedUpperStarLowerStarAdjunction Λ p'.left).homEquiv
     ((moduleObjectDerivedPullback Λ g.left).obj

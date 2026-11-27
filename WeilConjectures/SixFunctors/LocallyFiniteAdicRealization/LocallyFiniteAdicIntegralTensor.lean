@@ -27,7 +27,6 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option genSizeOf false
 set_option genInjectivity false
-set_option linter.all false
 attribute [local irreducible] HasDerivedCategory.standard
 
 universe u
@@ -86,7 +85,7 @@ theorem derivedTensor_triangulated
 
 instance integralTensor_triangulated (E : Index l (PadicAlgCl l)) :
     (integralTensor l X C E).IsTriangulated := by
-  letI := derivedTensor_triangulated X ((C.coefficient E).integralMap l X)
+  have := derivedTensor_triangulated X ((C.coefficient E).integralMap l X)
   unfold integralTensor
   infer_instance
 
@@ -104,6 +103,8 @@ def integralTensorBalancing {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
     (pbcDerivedScalarAdjunction _) (pbcDerivedScalarAdjunction _)
     (pbcDerivedRestrictComp _ _ _ (C.coefficient_scalar E L h))
 
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- The natural balancing comparison has exactly the prescribed component. -/
 theorem integralTensorBalancing_app {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
     (K : DerivedCategory (scalarReductionSource l (Coefficient.{u} l (PadicAlgCl l) E) X)) :
@@ -118,7 +119,7 @@ theorem integralTensorBalancing_app {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
   dsimp [integralTensorBalancing, pbcReductionNormalization, pbcReductionNormalizationHom,
     pbcReductionTransition]
   simp only [Adjunction.leftAdjointCompIso_hom_app, Adjunction.homEquiv_counit,
-    Functor.map_comp, Category.assoc, asIso_hom]
+    Functor.map_comp, Category.assoc]
 
 /-- The explicit integral comparison: inverse balancing followed by completion. -/
 def integralTensorComparison {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
@@ -132,6 +133,8 @@ def integralTensorComparison {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
         (coefficientInclusion l (PadicAlgCl l) E L h))
       (pbcDerivedExtend ((C.coefficient L).integralMap l X)))
 
+-- Keep the section instances as hypotheses of this public statement.
+set_option linter.unusedSectionVars false in
 /-- Component formula for the integral comparison. -/
 theorem integralTensorComparison_app {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
     (K : sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X) :
@@ -145,10 +148,10 @@ theorem integralTensorComparison_app {E L : Index l (PadicAlgCl l)} (h : E ≤ L
 
 instance integralTensorComparison_isIso {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
     IsIso (integralTensorComparison l X C h) := by
-  haveI (K : sfIntegralConstructibleCategory l
+  have (K : sfIntegralConstructibleCategory l
       (Coefficient.{u} l (PadicAlgCl l) E) X) :
       IsIso ((integralTensorComparison l X C h).app K) := by
-    haveI hχ : IsIso
+    have hχ : IsIso
         ((completedScalarComparison l (Coefficient.{u} l (PadicAlgCl l) E)
           (Coefficient.{u} l (PadicAlgCl l) L)
           (coefficientInclusion l (PadicAlgCl l) E L h) X).app K.obj) :=
