@@ -9796,6 +9796,7 @@ public import WeilConjectures.AlgebraicGeometry.Pbc.PbcActualScalarPullbackSuppl
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcActualStrictPullback
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcAutomorphismLocalComplex
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcAutomorphismLocalReduction
+public import WeilConjectures.AlgebraicGeometry.Pbc.PbcAutomorphismLocalReductionComparison
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcAutomorphismTransport
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcCoefficientTwists
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcCohomologySheaves
