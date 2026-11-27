@@ -37,43 +37,6 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
 
-section Composition
-variable {R' S' T' : Sheaf J CommRingCat.{w}} {φ : R' ⟶ S'} {ψ : S' ⟶ T'} {γ : R' ⟶ T'}
-  (hγ : γ = φ ≫ ψ) (A₁ : SystemScalarModel φ) (A₂ : SystemScalarModel ψ)
-  (A₃ : SystemScalarModel γ)
-
-/-- The derived scalar associator transposes along the composite scalar adjunction to the
-transpose along the composite scalar model, followed by the restriction compositor. -/
-theorem systemScalarModelDerivedComposition_homEquiv_hom (P Z) (f : A₃.model.T.obj P ⟶ Z) :
-    A₁.adjunction.homEquiv P _ (A₂.adjunction.homEquiv _ Z
-        ((systemScalarModelDerivedComposition hγ A₁ A₂ A₃).hom.app P ≫ f)) =
-      A₃.adjunction.homEquiv P Z f ≫
-        (Functor.exactDerivedRestrictionComposition _ _ _
-          (systemScalarRestrictionComposition φ ψ γ hγ)).inv.app Z := by
-  have h := leftAdjointUniq_homEquiv_comp
-    ((A₁.adjunction.comp A₂.adjunction).ofNatIsoRight
-      (Functor.exactDerivedRestrictionComposition _ _ _
-        (systemScalarRestrictionComposition φ ψ γ hγ))) A₃.adjunction P Z f
-  rw [Adjunction.homEquiv_ofNatIsoRight_apply, Adjunction.comp_homEquiv] at h
-  rw [← h, Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
-  rfl
-
-/-- The inverse derived scalar associator transposes along the composite scalar model to the
-transpose along the composite scalar adjunction, followed by the restriction compositor. -/
-theorem systemScalarModelDerivedComposition_homEquiv_inv (P Z)
-    (g : (A₁.model.T ⋙ A₂.model.T).obj P ⟶ Z) :
-    A₃.adjunction.homEquiv P Z
-        ((systemScalarModelDerivedComposition hγ A₁ A₂ A₃).inv.app P ≫ g) =
-      A₁.adjunction.homEquiv P _ (A₂.adjunction.homEquiv _ Z g) ≫
-        (Functor.exactDerivedRestrictionComposition _ _ _
-          (systemScalarRestrictionComposition φ ψ γ hγ)).hom.app Z := by
-  rw [systemScalarModelDerivedComposition, Adjunction.leftAdjointUniq_inv_app,
-    leftAdjointUniq_homEquiv_comp, Adjunction.homEquiv_ofNatIsoRight_apply,
-    Adjunction.comp_homEquiv]
-  rfl
-
-end Composition
-
 variable (S : SystemScalarAssignment (J := J)) (T : SystemTensorCoherence S)
   {B D : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}} (a : B ⟶ D)
   (A : SystemScalarModel (singletonSequenceRingMap a))
@@ -148,7 +111,6 @@ private theorem singletonRestriction_transition {n m : ℕ} (h : n ≤ m)
   · ext M
     rfl
 
-
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The normalized singleton coefficient comparisons commute with the canonical
@@ -160,9 +122,11 @@ theorem singletonScalarDerivedIso_lower (n m : ℕ) (h : n ≤ m)
         (singletonScalarDerivedIso S T a A n).hom.app ((systemDerivedTensor S B h).obj P) ≫
           (singletonSequenceDerived S T D n).map ((singletonScalarSquare S a n m h).hom.app P) ≫
           singletonLowerMap S T D h ((S (a.app (op m))).model.T.obj P) := by
-  let adjB (k : ℕ) := ((singletonSequenceDerivedAdjunction S T B k).comp A.adjunction).ofNatIsoRight
-    (singletonDerivedRestrictionEvaluation a k)
-  let cd (k : ℕ) := (S (a.app (op k))).adjunction.comp (singletonSequenceDerivedAdjunction S T D k)
+  let adjB (k : ℕ) :=
+    ((singletonSequenceDerivedAdjunction S T B k).comp A.adjunction).ofNatIsoRight
+      (singletonDerivedRestrictionEvaluation a k)
+  let cd (k : ℕ) :=
+    (S (a.app (op k))).adjunction.comp (singletonSequenceDerivedAdjunction S T D k)
   let X := (systemDerivedTensor S B h).obj P
   let Y := (S (a.app (op m))).model.T.obj P
   let N := (singletonSequenceDerived S T D m).obj Y

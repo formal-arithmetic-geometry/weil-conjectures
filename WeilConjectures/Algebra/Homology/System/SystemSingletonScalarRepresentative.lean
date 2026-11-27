@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Algebra.Homology.System.SystemSingletonSequenceTranspose
 public import WeilConjectures.CategoryTheory.Normalized.NormalizedAdjunctionComposition
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquareIsoFactors
 
 /-! # Normalized representative of singleton coefficient change
 
@@ -34,28 +35,6 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [EssentiallySmall.{w} C]
   [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
-
-private theorem squareIso_hom_app_factors {A₁ A₂ A₃ A₄ : Type*} [Category A₁] [Category A₂]
-    [Category A₃] [Category A₄] [Abelian A₁] [Abelian A₂] [Abelian A₃] [Abelian A₄]
-    [HasDerivedCategory A₁] [HasDerivedCategory A₂] [HasDerivedCategory A₃]
-    [HasDerivedCategory A₄]
-    {F₁ : A₁ ⥤ A₂} {F₂ : A₂ ⥤ A₄} {F₃ : A₁ ⥤ A₃} {F₄ : A₃ ⥤ A₄}
-    [F₁.Additive] [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
-    [F₂.Additive] [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
-    [F₃.Additive] [PreservesFiniteLimits F₃] [PreservesFiniteColimits F₃]
-    [F₄.Additive] [PreservesFiniteLimits F₄] [PreservesFiniteColimits F₄]
-    (σ : F₁ ⋙ F₂ ≅ F₃ ⋙ F₄) (P : CochainComplex A₁ ℤ) :
-    (Functor.mapDerivedCategorySquareIso σ).hom.app (DerivedCategory.Q.obj P) ≫
-        F₄.mapDerivedCategory.map (F₃.mapDerivedCategoryFactors.hom.app P) ≫
-        F₄.mapDerivedCategoryFactors.hom.app ((F₃.mapHomologicalComplex (.up ℤ)).obj P) =
-      F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactors.hom.app P) ≫
-        F₂.mapDerivedCategoryFactors.hom.app ((F₁.mapHomologicalComplex (.up ℤ)).obj P) ≫
-        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex σ.hom (.up ℤ)).app P) := by
-  simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, Category.assoc]
-  rw [Functor.mapDerivedCategoryCompIso_hom_app_factors, Functor.mapDerivedCategoryNatIso_fac,
-    ← Functor.mapDerivedCategoryCompIso_hom_app_factors F₁ F₂ P]
-  simp
 
 variable (S : SystemScalarAssignment (J := J)) (T : SystemTensorCoherence S)
   {B D : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}} (a : B ⟶ D)
@@ -116,7 +95,7 @@ theorem singletonScalarDerivedIso_rep (n : ℕ)
         (Rl.mapDerivedCategoryFactors.inv.app (eD.mapHomologicalComplex (.up ℤ) |>.obj K) ≫
           Rl.mapDerivedCategory.map (eD.mapDerivedCategoryFactors.inv.app K)) := by
     intro K
-    have hs := squareIso_hom_app_factors η₀ K
+    have hs := Functor.mapDerivedCategorySquareIso_hom_app_factors _ _ _ _ η₀ K
     rw [← cancel_mono (Rl.mapDerivedCategory.map (eD.mapDerivedCategoryFactors.hom.app K) ≫
       Rl.mapDerivedCategoryFactors.hom.app (eD.mapHomologicalComplex (.up ℤ) |>.obj K))]
     simp only [Category.assoc]
@@ -156,9 +135,11 @@ theorem singletonScalarDerivedIso_rep (n : ℕ)
     ((singletonSequenceDerivedAdjunction S T B n).comp A.adjunction)
     (Sa.adjunction.comp (singletonSequenceDerivedAdjunction S T D n))
     (singletonScalarSourceComparison S T a A n) (singletonScalarTargetComparison S T a n)
-    (fun K ↦ eB.mapDerivedCategoryFactors.inv.app (Rs.mapHomologicalComplex (.up ℤ) |>.obj K) ≫
+    (fun K ↦ eB.mapDerivedCategoryFactors.inv.app
+        (Rs.mapHomologicalComplex (.up ℤ) |>.obj K) ≫
       eB.mapDerivedCategory.map (Rs.mapDerivedCategoryFactors.inv.app K))
-    (fun K ↦ Rl.mapDerivedCategoryFactors.inv.app (eD.mapHomologicalComplex (.up ℤ) |>.obj K) ≫
+    (fun K ↦ Rl.mapDerivedCategoryFactors.inv.app
+        (eD.mapHomologicalComplex (.up ℤ) |>.obj K) ≫
       Rl.mapDerivedCategory.map (eD.mapDerivedCategoryFactors.inv.app K))
     (fun P K f ↦ by
       rw [singletonScalarSourceComparison, Category.assoc]; exact hF P K f)

@@ -120,6 +120,7 @@ theorem singletonLowerMap_homEquiv {n m : ℕ} (h : n ≤ m)
   simp only [Category.assoc]
   erw [Iso.hom_inv_id_app_assoc]
   rfl
+
 open Functor.DerivedPresentation in
 attribute [local instance] comp_preservesFiniteLimits
   comp_preservesFiniteColimits in
