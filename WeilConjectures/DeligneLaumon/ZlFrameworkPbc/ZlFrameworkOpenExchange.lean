@@ -11,15 +11,34 @@ public import WeilConjectures.PoincareDuality.Integral.IntegralPullbackCompariso
 public import WeilConjectures.FourierTransform.FdPullbackComparison
 public import WeilConjectures.AlgebraicGeometry.Complete.CompleteProetaleStrictTowerRealization
 import WeilConjectures.DeligneLaumon.ZlFrameworkPbc.ZlFrameworkQuotientAugmentation
+import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 import WeilConjectures.AlgebraicGeometry.Integral.IntegralRingedOpenPullSupport
 import WeilConjectures.AlgebraicGeometry.Projection.ProjectionCompactification
 import WeilConjectures.Algebra.Homology.OpenDerivedMatePresentation
+import WeilConjectures.CategoryTheory.SignedCoconeShift.SignedMappingCoconeShift
 
 /-! # Framework open exchange in its own coefficient presentation
 
 This file constructs the quotient-unit comparison from the ordinary pullback with the framework
 completed coefficient sheaf into the Roos realization of the integral pullback, and the
 resulting open pullback realization on completed constructible complexes.
+
+## Main statements
+
+- `frameworkPullChain_naturality`: the quotient-unit comparison is natural in the complex.
+- `frameworkPullChain_quasiIso`: on good representatives of constructible complexes it is a
+  quasi-isomorphism.
+- `frameworkOpenPullRealization_existsUnique`: the resulting natural isomorphism on completed
+  constructible complexes exists and is unique.
+
+## Implementation details
+
+The quotient coordinates of a chain map out of the framework pullback are compared through the
+pullback/direct-image adjunction, which reduces naturality to the naturality of the finite
+pullback and reduction units. The comparisons on good representatives form a natural
+transformation, which descends along the localization of good complexes to a transformation
+of derived functors; it is invertible on constructible objects since every object is isomorphic
+to the image of a good representative. Uniqueness follows from the same essential surjectivity.
 
 ## References
 
@@ -85,32 +104,91 @@ private theorem coconeDegree_ext
       rw [Preadditive.comp_add, Preadditive.comp_add, reassoc_of% hf, reassoc_of% hs]
     _ = g.f i := by rw [hi, Category.comp_id]
 
+private theorem roosMap_fst
+    {A : Type*} [Category* A] [Abelian A] [HasCountableProducts A]
+    {V W : ℕᵒᵖ ⥤ CochainComplex A ℤ} (α : V ⟶ W) (i : ℤ) :
+    (integralOperationsRoosFunctor.map α).f i ≫
+        (CochainComplex.mappingCocone.fst (scalarRoosBoundary W)).f i =
+      (CochainComplex.mappingCocone.fst (scalarRoosBoundary V)).f i ≫
+        (Limits.Pi.map (fun n : ℕ ↦ α.app (op n))).f i := by
+  apply SignedCoconeShift.cocone_ext_from (scalarRoosBoundary V) i
+  · change (CochainComplex.mappingCocone.inl _).v i i _ ≫
+      (SignedCoconeShift.coconeMap _ _ _).f i ≫ _ = _
+    rw [SignedCoconeShift.coconeMap_inl_assoc]
+    simp
+  · change (CochainComplex.mappingCocone.inr _).1.v (i - 1) i _ ≫
+      (SignedCoconeShift.coconeMap _ _ _).f i ≫ _ = _
+    rw [SignedCoconeShift.coconeMap_inr_assoc]
+    simp
+
+private theorem roosMap_snd
+    {A : Type*} [Category* A] [Abelian A] [HasCountableProducts A]
+    {V W : ℕᵒᵖ ⥤ CochainComplex A ℤ} (α : V ⟶ W) (i : ℤ) :
+    (integralOperationsRoosFunctor.map α).f i ≫
+        (CochainComplex.mappingCocone.snd (scalarRoosBoundary W)).v i (i - 1) (by omega) =
+      (CochainComplex.mappingCocone.snd (scalarRoosBoundary V)).v i (i - 1) (by omega) ≫
+        (Limits.Pi.map (fun n : ℕ ↦ α.app (op n))).f (i - 1) := by
+  apply SignedCoconeShift.cocone_ext_from (scalarRoosBoundary V) i
+  · change (CochainComplex.mappingCocone.inl _).v i i _ ≫
+      (SignedCoconeShift.coconeMap _ _ _).f i ≫ _ = _
+    rw [SignedCoconeShift.coconeMap_inl_assoc]
+    simp
+  · change (CochainComplex.mappingCocone.inr _).1.v (i - 1) i _ ≫
+      (SignedCoconeShift.coconeMap _ _ _).f i ≫ _ = _
+    rw [SignedCoconeShift.coconeMap_inr_assoc]
+    simp
+
+/-- Two chain maps from a framework pullback into the Roos realization of an integral pullback
+agree once their quotient coordinates agree on inverse-image generators and their shifted
+coordinates agree. -/
+private theorem frameworkPull_hom_ext {U T : Scheme.{u}} (h : U ⟶ T)
+    {P P' : CochainComplex (integralTowerModules l E T) ℤ}
+    (ξ η : ((frameworkModulePull l E h).mapHomologicalComplex (.up ℤ)).obj P ⟶
+      (integralOperationsPullbackComplexFunctor l E h).obj P')
+    (h₁ : ∀ (n : ℕ) (i : ℤ),
+      (proEtaleRingModuleAdjunction h ((completed l E).ring T) ((completed l E).ring U)
+        ((completed l E).pull h)).homEquiv _ _ ((ξ ≫ CochainComplex.mappingCocone.fst
+          (scalarRoosBoundary ((integralOperationsPullbackTowerFunctor l E h).obj P')) ≫
+        Pi.π (fun n ↦
+          ((integralOperationsPullbackTowerFunctor l E h).obj P').obj (op n)) n).f i) =
+      (proEtaleRingModuleAdjunction h ((completed l E).ring T) ((completed l E).ring U)
+        ((completed l E).pull h)).homEquiv _ _ ((η ≫ CochainComplex.mappingCocone.fst
+          (scalarRoosBoundary ((integralOperationsPullbackTowerFunctor l E h).obj P')) ≫
+        Pi.π (fun n ↦
+          ((integralOperationsPullbackTowerFunctor l E h).obj P').obj (op n)) n).f i))
+    (h₂ : ∀ i : ℤ, ξ.f i ≫ (CochainComplex.mappingCocone.snd
+      (scalarRoosBoundary ((integralOperationsPullbackTowerFunctor l E h).obj P'))).v
+        i (i - 1) (by omega) =
+      η.f i ≫ (CochainComplex.mappingCocone.snd
+        (scalarRoosBoundary ((integralOperationsPullbackTowerFunctor l E h).obj P'))).v
+          i (i - 1) (by omega)) : ξ = η := by
+  have hf : ξ ≫ CochainComplex.mappingCocone.fst
+      (scalarRoosBoundary ((integralOperationsPullbackTowerFunctor l E h).obj P')) =
+      η ≫ CochainComplex.mappingCocone.fst
+        (scalarRoosBoundary ((integralOperationsPullbackTowerFunctor l E h).obj P')) := by
+    apply Pi.hom_ext
+    intro n
+    ext i : 1
+    exact ((proEtaleRingModuleAdjunction h ((completed l E).ring T)
+      ((completed l E).ring U) ((completed l E).pull h)).homEquiv (P.X i) _).injective (h₁ n i)
+  ext i : 1
+  exact coconeDegree_ext _ ξ η i (congrArg (fun z ↦ z.f i) hf) (h₂ i)
+
 private theorem frameworkPullChain_ext {U T : Scheme.{u}} (h : U ⟶ T)
     (P : CochainComplex (integralTowerModules l E T) ℤ)
     (ξ η : ((frameworkModulePull l E h).mapHomologicalComplex (.up ℤ)).obj P ⟶
       (integralOperationsPullbackComplexFunctor l E h).obj P)
     (hξ : FrameworkPullChainSpec l E h P ξ)
-    (hη : FrameworkPullChainSpec l E h P η) : ξ = η := by
-  have hf : ξ ≫ CochainComplex.mappingCocone.fst
-      (scalarRoosBoundary ((integralOperationsPullbackTowerFunctor l E h).obj P)) =
-      η ≫ CochainComplex.mappingCocone.fst
-        (scalarRoosBoundary ((integralOperationsPullbackTowerFunctor l E h).obj P)) := by
-    apply Pi.hom_ext
-    intro n
-    ext i : 1
-    apply ((proEtaleRingModuleAdjunction h ((completed l E).ring T)
-      ((completed l E).ring U) ((completed l E).pull h)).homEquiv (P.X i) _).injective
-    apply SheafOfModules.hom_ext
-    apply PresheafOfModules.hom_ext
-    intro V
-    apply ModuleCat.hom_ext
-    apply LinearMap.ext
-    intro x
-    exact (hξ.1 n i V.unop x).trans (hη.1 n i V.unop x).symm
-  ext i : 1
-  have hfi := congrArg (fun z ↦ z.f i) hf
-  have hs := (hξ.2 i (i - 1) (by omega)).trans (hη.2 i (i - 1) (by omega)).symm
-  exact coconeDegree_ext _ ξ η i hfi hs
+    (hη : FrameworkPullChainSpec l E h P η) : ξ = η :=
+  frameworkPull_hom_ext l E h ξ η (fun n i ↦ by
+      apply SheafOfModules.hom_ext
+      apply PresheafOfModules.hom_ext
+      intro V
+      apply ModuleCat.hom_ext
+      apply LinearMap.ext
+      intro x
+      exact (hξ.1 n i V.unop x).trans (hη.1 n i V.unop x).symm)
+    (fun i ↦ (hξ.2 i (i - 1) (by omega)).trans (hη.2 i (i - 1) (by omega)).symm)
 
 /-- There is a unique chain map from the framework pullback of `P` to the Roos realization of
 the integral pullback satisfying the quotient-unit normalization `FrameworkPullChainSpec`. -/
@@ -153,6 +231,245 @@ def frameworkPullChain {U T : Scheme.{u}} (h : U ⟶ T)
     (P : CochainComplex (integralTowerModules l E T) ℤ) :=
   (frameworkPullChain_existsUnique l E h P).exists.choose
 
+/-- The chosen chain map `frameworkPullChain` satisfies the quotient-unit normalization. -/
+theorem frameworkPullChain_spec {U T : Scheme.{u}} (h : U ⟶ T)
+    (P : CochainComplex (integralTowerModules l E T) ℤ) :
+    FrameworkPullChainSpec l E h P (frameworkPullChain l E h P) :=
+  (frameworkPullChain_existsUnique l E h P).exists.choose_spec
+
+private theorem frameworkHomEquiv_apply {U T : Scheme.{u}} (h : U ⟶ T)
+    {M : integralTowerModules l E T} {N : integralTowerModules l E U}
+    (k : (frameworkModulePull l E h).obj M ⟶ N) (V : T.ProEt) (x : M.val.obj (op V)) :
+    ((proEtaleRingModuleAdjunction h ((completed l E).ring T) ((completed l E).ring U)
+      ((completed l E).pull h)).homEquiv _ _ k).val.app (op V) x =
+      k.val.app (op ((proEtaleBaseChange h).obj V))
+        (((proEtaleRingModuleAdjunction h ((completed l E).ring T)
+          ((completed l E).ring U) ((completed l E).pull h)).unit.app M).val.app (op V) x) := by
+  rw [Adjunction.homEquiv_unit]
+  rfl
+
+private theorem frameworkPullLevel_naturality {U T : Scheme.{u}} (h : U ⟶ T)
+    {P P' : CochainComplex (integralTowerModules l E T) ℤ} (φ : P ⟶ P') (n : ℕ) (i : ℤ)
+    (ψ : ((frameworkModulePull l E h).mapHomologicalComplex (.up ℤ)).obj P ⟶
+      ((integralOperationsPullbackTowerFunctor l E h).obj P).obj (op n))
+    (ψ' : ((frameworkModulePull l E h).mapHomologicalComplex (.up ℤ)).obj P' ⟶
+      ((integralOperationsPullbackTowerFunctor l E h).obj P').obj (op n))
+    (hψ : ∀ (V : T.ProEt) (x : (P.X i).val.obj (op V)),
+      (ψ.f i).val.app (op ((proEtaleBaseChange h).obj V))
+        (((proEtaleRingModuleAdjunction h ((completed l E).ring T)
+          ((completed l E).ring U) ((completed l E).pull h)).unit.app (P.X i)).val.app
+            (op V) x) =
+      integralOperationsPullbackGenerator l E h n
+        (((unrestrictedIntegralFiniteComplex l E T n).obj P).X i) V
+        (unrestrictedIntegralTensorSection l E T n (P.X i) (op V) 1 x))
+    (hψ' : ∀ (V : T.ProEt) (x : (P'.X i).val.obj (op V)),
+      (ψ'.f i).val.app (op ((proEtaleBaseChange h).obj V))
+        (((proEtaleRingModuleAdjunction h ((completed l E).ring T)
+          ((completed l E).ring U) ((completed l E).pull h)).unit.app (P'.X i)).val.app
+            (op V) x) =
+      integralOperationsPullbackGenerator l E h n
+        (((unrestrictedIntegralFiniteComplex l E T n).obj P').X i) V
+        (unrestrictedIntegralTensorSection l E T n (P'.X i) (op V) 1 x)) :
+    let adj := proEtaleRingModuleAdjunction h ((completed l E).ring T)
+      ((completed l E).ring U) ((completed l E).pull h)
+    φ.f i ≫ adj.homEquiv _ _ (ψ'.f i) = adj.homEquiv _ _ (ψ.f i) ≫
+      (SheafOfModules.pushforward _).map
+        ((((integralOperationsPullbackTowerFunctor l E h).map φ).app (op n)).f i) := by
+  intro adj
+  let adjn := coefficientProEtaleModuleAdjunction.{u, u} h
+    (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))
+  let red := (scalarReductionExtension_adjunction l E T n).choose
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro V
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro x
+  change (adj.homEquiv _ _ (ψ'.f i)).val.app V ((φ.f i).val.app V x) =
+    ((((integralOperationsPullbackTowerFunctor l E h).map φ).app (op n)).f i).val.app
+      (op ((proEtaleBaseChange h).obj V.unop)) ((adj.homEquiv _ _ (ψ.f i)).val.app V x)
+  rw [frameworkHomEquiv_apply, frameworkHomEquiv_apply]
+  have hred : (((unrestrictedIntegralFiniteComplex l E T n).map φ).f i).val.app V
+      (unrestrictedIntegralTensorSection l E T n (P.X i) V 1 x) =
+      unrestrictedIntegralTensorSection l E T n (P'.X i) V 1 ((φ.f i).val.app V x) := by
+    have h₁ : unrestrictedIntegralTensorSection l E T n (P.X i) V 1 x =
+        (red.unit.app (P.X i)).val.app V x :=
+      (unrestrictedTowerUnit_condition l E T P n i V x).symm
+    have h₂ : unrestrictedIntegralTensorSection l E T n (P'.X i) V 1
+        ((φ.f i).val.app V x) =
+        (red.unit.app (P'.X i)).val.app V ((φ.f i).val.app V x) :=
+      (unrestrictedTowerUnit_condition l E T P' n i V ((φ.f i).val.app V x)).symm
+    rw [h₁, h₂]
+    exact (congrArg (fun k ↦ k.val.app V x) (red.unit.naturality (φ.f i))).symm
+  have hg (y : (((unrestrictedIntegralFiniteComplex l E T n).obj P).X i).val.obj V) :
+      ((((integralOperationsPullbackTowerFunctor l E h).map φ).app (op n)).f i).val.app
+          (op ((proEtaleBaseChange h).obj V.unop))
+        (integralOperationsPullbackGenerator l E h n
+          (((unrestrictedIntegralFiniteComplex l E T n).obj P).X i) V.unop y) =
+      integralOperationsPullbackGenerator l E h n
+        (((unrestrictedIntegralFiniteComplex l E T n).obj P').X i) V.unop
+        ((((unrestrictedIntegralFiniteComplex l E T n).map φ).f i).val.app V y) :=
+    (congrArg (fun k ↦ k.val.app V y)
+      (adjn.unit.naturality (((unrestrictedIntegralFiniteComplex l E T n).map φ).f i))).symm
+  refine (hψ' V.unop _).trans (Eq.trans ?_ (congrArg
+    (((((integralOperationsPullbackTowerFunctor l E h).map φ).app (op n)).f i).val.app
+      (op ((proEtaleBaseChange h).obj V.unop))) (hψ V.unop x)).symm)
+  exact (congrArg _ hred.symm).trans (hg _).symm
+
+private theorem frameworkHomEquiv_naturality_left {U T : Scheme.{u}} (h : U ⟶ T)
+    {P P' : CochainComplex (integralTowerModules l E T) ℤ} (φ : P ⟶ P')
+    {K : CochainComplex (integralTowerModules l E U) ℤ} (i : ℤ)
+    (ψ : ((frameworkModulePull l E h).mapHomologicalComplex (.up ℤ)).obj P' ⟶ K) :
+    (proEtaleRingModuleAdjunction h ((completed l E).ring T) ((completed l E).ring U)
+      ((completed l E).pull h)).homEquiv _ _
+        ((((frameworkModulePull l E h).mapHomologicalComplex (.up ℤ)).map φ ≫ ψ).f i) =
+      φ.f i ≫ (proEtaleRingModuleAdjunction h ((completed l E).ring T)
+        ((completed l E).ring U) ((completed l E).pull h)).homEquiv _ _ (ψ.f i) := by
+  rw [HomologicalComplex.comp_f]
+  exact Adjunction.homEquiv_naturality_left _ _ _
+
+private theorem frameworkHomEquiv_naturality_right {U T : Scheme.{u}} (h : U ⟶ T)
+    {P : CochainComplex (integralTowerModules l E T) ℤ}
+    {K K' : CochainComplex (integralTowerModules l E U) ℤ} (i : ℤ)
+    (ψ : ((frameworkModulePull l E h).mapHomologicalComplex (.up ℤ)).obj P ⟶ K) (k : K ⟶ K') :
+    (proEtaleRingModuleAdjunction h ((completed l E).ring T) ((completed l E).ring U)
+      ((completed l E).pull h)).homEquiv _ _ ((ψ ≫ k).f i) =
+      (proEtaleRingModuleAdjunction h ((completed l E).ring T) ((completed l E).ring U)
+        ((completed l E).pull h)).homEquiv _ _ (ψ.f i) ≫
+        (SheafOfModules.pushforward _).map (k.f i) := by
+  rw [HomologicalComplex.comp_f]
+  exact Adjunction.homEquiv_naturality_right _ _ _
+
+private theorem roosMap_fst_π
+    {A : Type*} [Category* A] [Abelian A] [HasCountableProducts A]
+    {V W : ℕᵒᵖ ⥤ CochainComplex A ℤ} (α : V ⟶ W) (n : ℕ) :
+    integralOperationsRoosFunctor.map α ≫
+        CochainComplex.mappingCocone.fst (scalarRoosBoundary W) ≫
+          Pi.π (fun m ↦ W.obj (op m)) n =
+      CochainComplex.mappingCocone.fst (scalarRoosBoundary V) ≫
+        Pi.π (fun m ↦ V.obj (op m)) n ≫ α.app (op n) := by
+  ext j : 1
+  have h₁ := roosMap_fst α j
+  have h₂ := congrArg (fun f ↦ f.f j) (Limits.Pi.map_π (fun m : ℕ ↦ α.app (op m)) n)
+  simp only [HomologicalComplex.comp_f] at h₁ h₂ ⊢
+  rw [reassoc_of% h₁, h₂]
+
+private theorem frameworkPullTower_fst {U T : Scheme.{u}} (h : U ⟶ T)
+    {P P' : CochainComplex (integralTowerModules l E T) ℤ} (φ : P ⟶ P') (n : ℕ) :
+    (integralOperationsPullbackComplexFunctor l E h).map φ ≫
+      CochainComplex.mappingCocone.fst
+        (scalarRoosBoundary ((integralOperationsPullbackTowerFunctor l E h).obj P')) ≫
+        Pi.π (fun m ↦ ((integralOperationsPullbackTowerFunctor l E h).obj P').obj (op m)) n =
+      CochainComplex.mappingCocone.fst
+        (scalarRoosBoundary ((integralOperationsPullbackTowerFunctor l E h).obj P)) ≫
+        Pi.π (fun m ↦ ((integralOperationsPullbackTowerFunctor l E h).obj P).obj (op m)) n ≫
+            ((integralOperationsPullbackTowerFunctor l E h).map φ).app (op n) :=
+  roosMap_fst_π _ n
+
+private theorem frameworkPullTower_snd {U T : Scheme.{u}} (h : U ⟶ T)
+    {P P' : CochainComplex (integralTowerModules l E T) ℤ} (φ : P ⟶ P') (i : ℤ) :
+    ((integralOperationsPullbackComplexFunctor l E h).map φ).f i ≫
+      (CochainComplex.mappingCocone.snd (scalarRoosBoundary
+          ((integralOperationsPullbackTowerFunctor l E h).obj P'))).v i (i - 1) (by omega) =
+      (CochainComplex.mappingCocone.snd (scalarRoosBoundary
+          ((integralOperationsPullbackTowerFunctor l E h).obj P))).v i (i - 1) (by omega) ≫
+        (Limits.Pi.map (fun n : ℕ ↦
+          ((integralOperationsPullbackTowerFunctor l E h).map φ).app (op n))).f (i - 1) :=
+  roosMap_snd _ i
+
+private theorem frameworkPullChain_naturality_left {U T : Scheme.{u}} (h : U ⟶ T)
+    {P P' : CochainComplex (integralTowerModules l E T) ℤ} (φ : P ⟶ P') (n : ℕ) (i : ℤ) :
+    (proEtaleRingModuleAdjunction h ((completed l E).ring T) ((completed l E).ring U)
+      ((completed l E).pull h)).homEquiv _ _ (((((frameworkModulePull l E h).mapHomologicalComplex
+          (.up ℤ)).map φ ≫
+        frameworkPullChain l E h P') ≫ CochainComplex.mappingCocone.fst
+          (scalarRoosBoundary ((integralOperationsPullbackTowerFunctor l E h).obj P')) ≫
+        Pi.π (fun m ↦ ((integralOperationsPullbackTowerFunctor l E h).obj P').obj (op m)) n).f i) =
+      φ.f i ≫ (proEtaleRingModuleAdjunction h ((completed l E).ring T) ((completed l E).ring U)
+      ((completed l E).pull h)).homEquiv _ _ ((frameworkPullChain l E h P' ≫
+        CochainComplex.mappingCocone.fst (scalarRoosBoundary
+            ((integralOperationsPullbackTowerFunctor l E h).obj P')) ≫
+        Pi.π (fun m ↦ ((integralOperationsPullbackTowerFunctor l E h).obj P').obj (op m)) n).f i)
+            := by
+  rw [Category.assoc]
+  exact frameworkHomEquiv_naturality_left l E h φ i _
+
+private theorem frameworkPullChain_naturality_right {U T : Scheme.{u}} (h : U ⟶ T)
+    {P P' : CochainComplex (integralTowerModules l E T) ℤ} (φ : P ⟶ P') (n : ℕ) (i : ℤ) :
+    (proEtaleRingModuleAdjunction h ((completed l E).ring T) ((completed l E).ring U)
+      ((completed l E).pull h)).homEquiv _ _ (((frameworkPullChain l E h P ≫
+        (integralOperationsPullbackComplexFunctor l E h).map φ) ≫
+        CochainComplex.mappingCocone.fst (scalarRoosBoundary
+            ((integralOperationsPullbackTowerFunctor l E h).obj P')) ≫
+        Pi.π (fun m ↦ ((integralOperationsPullbackTowerFunctor l E h).obj P').obj (op m)) n).f i) =
+      (proEtaleRingModuleAdjunction h ((completed l E).ring T) ((completed l E).ring U)
+      ((completed l E).pull h)).homEquiv _ _ ((frameworkPullChain l E h P ≫
+        CochainComplex.mappingCocone.fst (scalarRoosBoundary
+            ((integralOperationsPullbackTowerFunctor l E h).obj P)) ≫
+        Pi.π (fun m ↦ ((integralOperationsPullbackTowerFunctor l E h).obj P).obj (op m)) n).f i) ≫
+        (SheafOfModules.pushforward _).map
+          ((((integralOperationsPullbackTowerFunctor l E h).map φ).app (op n)).f i) := by
+  have e : (frameworkPullChain l E h P ≫
+      (integralOperationsPullbackComplexFunctor l E h).map φ) ≫
+      CochainComplex.mappingCocone.fst
+        (scalarRoosBoundary ((integralOperationsPullbackTowerFunctor l E h).obj P')) ≫
+        Pi.π (fun m ↦ ((integralOperationsPullbackTowerFunctor l E h).obj P').obj (op m)) n =
+      (frameworkPullChain l E h P ≫
+        CochainComplex.mappingCocone.fst (scalarRoosBoundary
+            ((integralOperationsPullbackTowerFunctor l E h).obj P)) ≫
+        Pi.π (fun m ↦ ((integralOperationsPullbackTowerFunctor l E h).obj P).obj (op m)) n) ≫
+            ((integralOperationsPullbackTowerFunctor l E h).map φ).app (op n) := by
+    rw [Category.assoc, frameworkPullTower_fst]
+    simp only [Category.assoc]
+  rw [e]
+  exact frameworkHomEquiv_naturality_right l E h i _ _
+
+private theorem frameworkPullChain_naturality_snd_left {U T : Scheme.{u}} (h : U ⟶ T)
+    {P P' : CochainComplex (integralTowerModules l E T) ℤ} (φ : P ⟶ P') (i : ℤ) :
+    (((frameworkModulePull l E h).mapHomologicalComplex (.up ℤ)).map φ ≫
+        frameworkPullChain l E h P').f i ≫
+      (CochainComplex.mappingCocone.snd (scalarRoosBoundary
+          ((integralOperationsPullbackTowerFunctor l E h).obj P'))).v i (i - 1) (by omega) =
+      0 := by
+  rw [HomologicalComplex.comp_f, Category.assoc,
+    (frameworkPullChain_spec l E h P').2 i (i - 1) (by omega), comp_zero]
+
+private theorem frameworkPullChain_naturality_snd_right {U T : Scheme.{u}} (h : U ⟶ T)
+    {P P' : CochainComplex (integralTowerModules l E T) ℤ} (φ : P ⟶ P') (i : ℤ) :
+    (frameworkPullChain l E h P ≫ (integralOperationsPullbackComplexFunctor l E h).map φ).f i ≫
+      (CochainComplex.mappingCocone.snd (scalarRoosBoundary
+          ((integralOperationsPullbackTowerFunctor l E h).obj P'))).v i (i - 1) (by omega) =
+      0 := by
+  rw [HomologicalComplex.comp_f, Category.assoc, frameworkPullTower_snd,
+    reassoc_of% ((frameworkPullChain_spec l E h P).2 i (i - 1) (by omega)), zero_comp]
+
+/-- The quotient-unit comparison `frameworkPullChain` is natural in the complex. -/
+theorem frameworkPullChain_naturality {U T : Scheme.{u}} (h : U ⟶ T)
+    {P P' : CochainComplex (integralTowerModules l E T) ℤ} (φ : P ⟶ P') :
+    ((frameworkModulePull l E h).mapHomologicalComplex (.up ℤ)).map φ ≫
+        frameworkPullChain l E h P' =
+      frameworkPullChain l E h P ≫ (integralOperationsPullbackComplexFunctor l E h).map φ :=
+  frameworkPull_hom_ext l E h _ _
+    (fun n i ↦ (frameworkPullChain_naturality_left l E h φ n i).trans
+      ((frameworkPullLevel_naturality l E h φ n i _ _
+        ((frameworkPullChain_spec l E h P).1 n i)
+        ((frameworkPullChain_spec l E h P').1 n i)).trans
+      (frameworkPullChain_naturality_right l E h φ n i).symm))
+    (fun i ↦ (frameworkPullChain_naturality_snd_left l E h φ i).trans
+      (frameworkPullChain_naturality_snd_right l E h φ i).symm)
+
+/-- On a flat-term K-flat representative of a constructible complex, the quotient-unit
+comparison `frameworkPullChain` along a quasi-compact open immersion is a quasi-isomorphism. -/
+theorem frameworkPullChain_quasiIso {U T : Scheme.{u}} (h : U ⟶ T)
+    [IsOpenImmersion h] [QuasiCompact h]
+    [∀ x : U, Invertible (l : U.residueField x)]
+    [∀ x : T, Invertible (l : T.residueField x)]
+    (P : CochainComplex (integralTowerModules l E T) ℤ)
+    (hP : integralOperationsGoodComplex l E T P)
+    (hc : sfIntegralConstructible l E T (DerivedCategory.Q.obj P)) :
+    QuasiIso (frameworkPullChain l E h P) := by
+  sorry
+
 /-- Open inverse image preserves the completed constructible realization, with the
 quotient-unit normalization: there is a unique natural isomorphism between the two pullbacks of
 completed constructible complexes along `h` compatible with `frameworkPullChain` on good
@@ -169,7 +486,78 @@ theorem frameworkOpenPullRealization_existsUnique {U T : Scheme.{u}} (h : U ⟶ 
           (integralDerivedPullbackComparison l E h).hom.app P =
         (frameworkModulePull l E h).mapDerivedCategoryFactors.hom.app P.obj ≫
           DerivedCategory.Q.map (frameworkPullChain l E h P.obj) := by
-  sorry
+  let L := integralOperationsGoodLocalization l E T
+  let W := (HomologicalComplex.quasiIso (integralTowerModules l E T) (.up ℤ)).inverseImage
+    (integralOperationsGoodComplex l E T).ι
+  have : L.IsLocalization W := integralOperationsGoodLocalization_isLocalization l E T
+  have : L.EssSurj := Localization.essSurj L W
+  let F : DerivedCategory (integralTowerModules l E T) ⥤
+      DerivedCategory (integralTowerModules l E U) := pull (completed l E) h
+  let G := integralDerivedPullback l E h
+  let c := integralDerivedPullbackComparison l E h
+  let m := (frameworkModulePull l E h).mapDerivedCategoryFactors
+  let τ₀ : L ⋙ F ⟶ L ⋙ G :=
+    { app := fun P ↦ m.hom.app P.obj ≫
+        DerivedCategory.Q.map (frameworkPullChain l E h P.obj) ≫ c.inv.app P
+      naturality := by
+        intro P P' f
+        have hm := m.hom.naturality f.hom
+        have hc := c.inv.naturality f
+        have hξ := congrArg DerivedCategory.Q.map (frameworkPullChain_naturality l E h f.hom)
+        simp only [Functor.map_comp] at hξ
+        simp only [Category.assoc]
+        erw [reassoc_of% hm]
+        exact congrArg (m.hom.app P.obj ≫ ·) (((reassoc_of% hξ) (c.inv.app P')).trans
+          (congrArg (DerivedCategory.Q.map (frameworkPullChain l E h P.obj) ≫ ·) hc)) }
+  let τ := Localization.liftNatTrans L W (L ⋙ F) (L ⋙ G) F G τ₀
+  have hτ (P : (integralOperationsGoodComplex l E T).FullSubcategory) :
+      τ.app (L.obj P) = τ₀.app P := by
+    simp [τ, Localization.liftNatTrans_app]
+  have hiso (K : (sfIntegralConstructible l E T).FullSubcategory) : IsIso (τ.app K.obj) := by
+    let e := L.objObjPreimageIso K.obj
+    have hP := (sfIntegralConstructible l E T).prop_of_iso e.symm K.property
+    have hq := frameworkPullChain_quasiIso l E h (L.objPreimage K.obj).obj
+      (L.objPreimage K.obj).property hP
+    have : IsIso (τ.app (L.obj (L.objPreimage K.obj))) := by
+      rw [hτ]
+      dsimp [τ₀]
+      infer_instance
+    have hn := τ.naturality e.hom
+    have : IsIso (F.map e.hom ≫ τ.app K.obj) := by
+      rw [hn]
+      infer_instance
+    exact IsIso.of_isIso_comp_left (F.map e.hom) (τ.app K.obj)
+  let α : (sfIntegralConstructible l E T).ι ⋙ F ⟶
+      constructibleIntegralPullback l E h ⋙ (sfIntegralConstructible l E U).ι :=
+    Functor.whiskerLeft (sfIntegralConstructible l E T).ι τ
+  have : IsIso α := by
+    have (K : (sfIntegralConstructible l E T).FullSubcategory) : IsIso (α.app K) := hiso K
+    exact NatIso.isIso_of_isIso_app α
+  refine ⟨asIso α, fun P hP ↦ ?_, fun a ha ↦ ?_⟩
+  · change τ.app (L.obj P) ≫ _ = _
+    rw [hτ]
+    simp only [Functor.comp_obj, Category.assoc, Iso.inv_hom_id_app,
+      NatIso.cancel_natIso_hom_left, m, c, τ₀]
+    exact Category.comp_id _
+  · apply Iso.ext
+    ext K
+    let e := L.objObjPreimageIso K.obj
+    let P := L.objPreimage K.obj
+    have hP := (sfIntegralConstructible l E T).prop_of_iso e.symm K.property
+    let e' : (⟨L.obj P, hP⟩ : (sfIntegralConstructible l E T).FullSubcategory) ≅ K :=
+      (sfIntegralConstructible l E T).fullyFaithfulι.preimageIso e
+    have h₀ : a.hom.app ⟨L.obj P, hP⟩ = α.app ⟨L.obj P, hP⟩ := by
+      rw [← cancel_mono (c.hom.app P)]
+      refine (ha P hP).trans ?_
+      change _ = τ.app (L.obj P) ≫ _
+      rw [hτ]
+      simp only [Functor.comp_obj, Category.assoc, Iso.inv_hom_id_app,
+        NatIso.cancel_natIso_hom_left, m, c, τ₀]
+      exact (Category.comp_id _).symm
+    have hna := a.hom.naturality e'.hom
+    have hnα := α.naturality e'.hom
+    rw [← cancel_epi (((sfIntegralConstructible l E T).ι ⋙ F).map e'.hom), hna, h₀]
+    exact hnα.symm
 
 /-- The framework pullback realization fixed by quotient and shifted Roos coordinates. -/
 def frameworkOpenPullRealization {U T : Scheme.{u}} (h : U ⟶ T)
