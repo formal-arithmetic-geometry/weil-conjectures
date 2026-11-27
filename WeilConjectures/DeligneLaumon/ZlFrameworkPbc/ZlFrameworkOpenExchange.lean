@@ -16,6 +16,13 @@ import WeilConjectures.AlgebraicGeometry.Integral.IntegralRingedOpenPullSupport
 import WeilConjectures.AlgebraicGeometry.Projection.ProjectionCompactification
 import WeilConjectures.Algebra.Homology.OpenDerivedMatePresentation
 import WeilConjectures.CategoryTheory.SignedCoconeShift.SignedMappingCoconeShift
+import WeilConjectures.SixFunctors.IntegralSystemRealization.Ringed.IntegralRingedPullCompletion
+import WeilConjectures.SixFunctors.OpenRestrictionCompleteness.OpenRestrictionCompleteness
+import WeilConjectures.SixFunctors.OpenFactorCoherence.OpenFactorOrdinaryTransport
+import WeilConjectures.SixFunctors.IntegralOpenReduction.NormalizedOpenSections
+import WeilConjectures.SixFunctors.OpenSemilinearTensor.OpenCoefficientOperationsExistence
+import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
+import all WeilConjectures.SmoothPurity.IntegralAmbient.IntegralAmbientOperationModels
 
 /-! # Framework open exchange in its own coefficient presentation
 
@@ -35,10 +42,13 @@ resulting open pullback realization on completed constructible complexes.
 
 The quotient coordinates of a chain map out of the framework pullback are compared through the
 pullback/direct-image adjunction, which reduces naturality to the naturality of the finite
-pullback and reduction units. The comparisons on good representatives form a natural
-transformation, which descends along the localization of good complexes to a transformation
-of derived functors; it is invertible on constructible objects since every object is isomorphic
-to the image of a good representative. Uniqueness follows from the same essential surjectivity.
+pullback and reduction units. On a good representative the comparison is the quotient completion
+unit of the pulled-back complex followed by an isomorphism of Roos complexes, so it is a
+quasi-isomorphism because open restriction preserves completeness. The comparisons on good
+representatives form a natural transformation, which descends along the localization of good
+complexes to a transformation of derived functors; it is invertible on constructible objects
+since every object is isomorphic to the image of a good representative. Uniqueness follows from
+the same essential surjectivity.
 
 ## References
 
@@ -103,40 +113,6 @@ private theorem coconeDegree_ext
     _ = g.f i ≫ _ := by
       rw [Preadditive.comp_add, Preadditive.comp_add, reassoc_of% hf, reassoc_of% hs]
     _ = g.f i := by rw [hi, Category.comp_id]
-
-private theorem roosMap_fst
-    {A : Type*} [Category* A] [Abelian A] [HasCountableProducts A]
-    {V W : ℕᵒᵖ ⥤ CochainComplex A ℤ} (α : V ⟶ W) (i : ℤ) :
-    (integralOperationsRoosFunctor.map α).f i ≫
-        (CochainComplex.mappingCocone.fst (scalarRoosBoundary W)).f i =
-      (CochainComplex.mappingCocone.fst (scalarRoosBoundary V)).f i ≫
-        (Limits.Pi.map (fun n : ℕ ↦ α.app (op n))).f i := by
-  apply SignedCoconeShift.cocone_ext_from (scalarRoosBoundary V) i
-  · change (CochainComplex.mappingCocone.inl _).v i i _ ≫
-      (SignedCoconeShift.coconeMap _ _ _).f i ≫ _ = _
-    rw [SignedCoconeShift.coconeMap_inl_assoc]
-    simp
-  · change (CochainComplex.mappingCocone.inr _).1.v (i - 1) i _ ≫
-      (SignedCoconeShift.coconeMap _ _ _).f i ≫ _ = _
-    rw [SignedCoconeShift.coconeMap_inr_assoc]
-    simp
-
-private theorem roosMap_snd
-    {A : Type*} [Category* A] [Abelian A] [HasCountableProducts A]
-    {V W : ℕᵒᵖ ⥤ CochainComplex A ℤ} (α : V ⟶ W) (i : ℤ) :
-    (integralOperationsRoosFunctor.map α).f i ≫
-        (CochainComplex.mappingCocone.snd (scalarRoosBoundary W)).v i (i - 1) (by omega) =
-      (CochainComplex.mappingCocone.snd (scalarRoosBoundary V)).v i (i - 1) (by omega) ≫
-        (Limits.Pi.map (fun n : ℕ ↦ α.app (op n))).f (i - 1) := by
-  apply SignedCoconeShift.cocone_ext_from (scalarRoosBoundary V) i
-  · change (CochainComplex.mappingCocone.inl _).v i i _ ≫
-      (SignedCoconeShift.coconeMap _ _ _).f i ≫ _ = _
-    rw [SignedCoconeShift.coconeMap_inl_assoc]
-    simp
-  · change (CochainComplex.mappingCocone.inr _).1.v (i - 1) i _ ≫
-      (SignedCoconeShift.coconeMap _ _ _).f i ≫ _ = _
-    rw [SignedCoconeShift.coconeMap_inr_assoc]
-    simp
 
 /-- Two chain maps from a framework pullback into the Roos realization of an integral pullback
 agree once their quotient coordinates agree on inverse-image generators and their shifted
@@ -349,7 +325,7 @@ private theorem roosMap_fst_π
       CochainComplex.mappingCocone.fst (scalarRoosBoundary V) ≫
         Pi.π (fun m ↦ V.obj (op m)) n ≫ α.app (op n) := by
   ext j : 1
-  have h₁ := roosMap_fst α j
+  have h₁ := integralOperationsRoosFunctor_map_fst α j
   have h₂ := congrArg (fun f ↦ f.f j) (Limits.Pi.map_π (fun m : ℕ ↦ α.app (op m)) n)
   simp only [HomologicalComplex.comp_f] at h₁ h₂ ⊢
   rw [reassoc_of% h₁, h₂]
@@ -375,7 +351,7 @@ private theorem frameworkPullTower_snd {U T : Scheme.{u}} (h : U ⟶ T)
           ((integralOperationsPullbackTowerFunctor l E h).obj P))).v i (i - 1) (by omega) ≫
         (Limits.Pi.map (fun n : ℕ ↦
           ((integralOperationsPullbackTowerFunctor l E h).map φ).app (op n))).f (i - 1) :=
-  roosMap_snd _ i
+  integralOperationsRoosFunctor_map_snd _ i
 
 private theorem frameworkPullChain_naturality_left {U T : Scheme.{u}} (h : U ⟶ T)
     {P P' : CochainComplex (integralTowerModules l E T) ℤ} (φ : P ⟶ P') (n : ℕ) (i : ℤ) :
@@ -458,17 +434,107 @@ theorem frameworkPullChain_naturality {U T : Scheme.{u}} (h : U ⟶ T)
     (fun i ↦ (frameworkPullChain_naturality_snd_left l E h φ i).trans
       (frameworkPullChain_naturality_snd_right l E h φ i).symm)
 
+/-- Ordinary pullback along `h`, on complexes. -/
+private abbrev frameworkPullComplex {U T : Scheme.{u}} (h : U ⟶ T)
+    (P : CochainComplex (integralTowerModules l E T) ℤ) :
+    CochainComplex (integralTowerModules l E U) ℤ :=
+  ((frameworkModulePull l E h).mapHomologicalComplex (.up ℤ)).obj P
+
+/-- The quotient-unit comparison is the quotient completion unit of the pulled-back complex,
+followed by the strict tower comparison of a pullback realization. -/
+private theorem frameworkPullChain_eq_roosUnit {U T : Scheme.{u}} (h : U ⟶ T)
+    (p : OpenFactorCoherence.Pull l E h) (P : CochainComplex (integralTowerModules l E T) ℤ) :
+    frameworkPullChain l E h P =
+      IntegralOnSlice.roosUnit l E U none (frameworkPullComplex l E h P) ≫
+        integralOperationsRoosFunctor.map (p.tower.hom.app P) := by
+  let Q := frameworkPullComplex l E h P
+  let C := (integralOperationsPullbackTowerFunctor l E h).obj P
+  have hu : IntegralOnSlice.roosUnit l E U none Q ≫
+      CochainComplex.mappingCocone.fst
+        (scalarRoosBoundary ((IntegralOnSlice.tower l E U none).obj Q)) =
+      IntegralOnSlice.productAugmentation l E U none Q :=
+    IntegralAmbient.roosUnit_fst l E U Q
+  have hfst (n : ℕ) : (IntegralOnSlice.roosUnit l E U none Q ≫
+      integralOperationsRoosFunctor.map (p.tower.hom.app P)) ≫
+      CochainComplex.mappingCocone.fst (scalarRoosBoundary C) ≫
+        Pi.π (fun m ↦ C.obj (op m)) n =
+      ((IntegralOnSlice.augmentation l E U none).app Q).app (op n) ≫
+        (p.tower.hom.app P).app (op n) := by
+    rw [Category.assoc, roosMap_fst_π]
+    erw [reassoc_of% hu]
+    rw [IntegralOnSlice.productAugmentation, Pi.lift_comp_π_assoc]
+  refine (frameworkPullChain_existsUnique l E h P).unique (frameworkPullChain_spec l E h P)
+    ⟨fun n i V x ↦ ?_, fun i j hij ↦ ?_⟩
+  · rw [hfst n]
+    have ha := (IntegralOnSlice.augmentation_existsUnique l E U none).exists.choose_spec Q n i
+      (op ((proEtaleBaseChange h).obj V))
+      (((proEtaleRingModuleAdjunction h ((completed l E).ring T) ((completed l E).ring U)
+        ((completed l E).pull h)).unit.app (P.X i)).val.app (op V) x)
+    exact (congrArg (fun y ↦ (((p.tower.hom.app P).app (op n)).f i).val.app _ y) ha).trans
+      (p.generators P n i V x)
+  · obtain rfl : j = i - 1 := by omega
+    rw [HomologicalComplex.comp_f, Category.assoc, integralOperationsRoosFunctor_map_snd,
+      ← Category.assoc]
+    erw [IntegralAmbient.roosUnit_snd l E U Q i (i - 1) (by omega)]
+    exact zero_comp
+
+private theorem exists_finiteFieldDatum_ne (l : ℕ) : ∃ D : FiniteFieldDatum.{0}, l ≠ D.p := by
+  obtain ⟨p, hp, hprime⟩ := Nat.exists_infinite_primes (l + 1)
+  let : Fact p.Prime := ⟨hprime⟩
+  let D : FiniteFieldDatum.{0} :=
+    { p := p, a := 1, q := p, prime := hprime, exponent_pos := le_rfl
+      cardinality_eq := by simp
+      k₀ := ZMod p
+      card_base := by simp [Nat.card_eq_fintype_card]
+      k := AlgebraicClosure (ZMod p) }
+  exact ⟨D, by change l ≠ p; omega⟩
+
 /-- On a flat-term K-flat representative of a constructible complex, the quotient-unit
-comparison `frameworkPullChain` along a quasi-compact open immersion is a quasi-isomorphism. -/
+comparison `frameworkPullChain` along an open immersion is a quasi-isomorphism. -/
 theorem frameworkPullChain_quasiIso {U T : Scheme.{u}} (h : U ⟶ T)
-    [IsOpenImmersion h] [QuasiCompact h]
+    [IsOpenImmersion h]
     [∀ x : U, Invertible (l : U.residueField x)]
     [∀ x : T, Invertible (l : T.residueField x)]
     (P : CochainComplex (integralTowerModules l E T) ℤ)
     (hP : integralOperationsGoodComplex l E T P)
     (hc : sfIntegralConstructible l E T (DerivedCategory.Q.obj P)) :
     QuasiIso (frameworkPullChain l E h P) := by
-  sorry
+  classical
+  obtain ⟨p⟩ := IntegralSystemRealization.integralRingedPullCompletion l E h
+  let Q := frameworkPullComplex l E h P
+  obtain ⟨D, hl⟩ := exists_finiteFieldDatum_ne l
+  have hcomplete : IsDerivedCompleteUnrestricted l E T (DerivedCategory.Q.obj P) :=
+    ⟨D, hl, (sfDerivedComplete_iff_legacy l E T D hl _).mp hc.1⟩
+  obtain ⟨sections, -⟩ := IntegralOpenReduction.normalizedOpenSections l E h
+  obtain ⟨o, -, -⟩ := OpenSemilinearTensor.openCoefficientOperationsExistence l E h sections
+  have hη := (OpenRestrictionCompleteness.openRestrictionComplete l E h o _ hcomplete).2
+  obtain ⟨-, ⟨eP₀⟩⟩ := OpenFactorCoherence.openFactorOrdinaryTransport l E h o
+  let F := frameworkModulePull l E h
+  let := proEtaleRingModulePullback_additive h
+    ((completed l E).ring T) ((completed l E).ring U) ((completed l E).pull h)
+  let := proEtaleRingModulePullback_preservesFiniteLimits h
+    ((completed l E).ring T) ((completed l E).ring U) ((completed l E).pull h)
+  let := proEtaleRingModulePullback_preservesFiniteColimits h
+    ((completed l E).ring T) ((completed l E).ring U) ((completed l E).pull h)
+  let eP : IntegralOpenReduction.star l E h o ≅ F.mapDerivedCategory :=
+    @Functor.mapDerivedCategoryNatIso _ _ _ _ _ _ _ _ _ _
+      (Functor.additive_of_iso eP₀.symm) inferInstance
+      (preservesFiniteLimits_of_natIso eP₀.symm)
+      (preservesFiniteColimits_of_natIso eP₀.symm) inferInstance inferInstance eP₀
+  have h₁ : IsIso ((IntegralOnSlice.completionUnit l E U none).app
+      (F.mapDerivedCategory.obj (DerivedCategory.Q.obj P))) :=
+    (NatTrans.isIso_app_iff_of_iso _ (eP.app _)).mp hη
+  have h₂ : IsIso ((IntegralOnSlice.completionUnit l E U none).app (DerivedCategory.Q.obj Q)) :=
+    (NatTrans.isIso_app_iff_of_iso _ (F.mapDerivedCategoryFactors.app P)).mp h₁
+  have hspec :=
+    Classical.choose_spec (IntegralOnSlice.completionUnit_existsUnique l E U none).exists
+    ⟨Q, p.good P hP⟩
+  have h₃ : IsIso (DerivedCategory.Q.map (IntegralOnSlice.roosUnit l E U none Q)) := by
+    rw [← hspec]
+    exact IsIso.comp_isIso' h₂ inferInstance
+  rw [← DerivedCategory.isIso_Q_map_iff_quasiIso, frameworkPullChain_eq_roosUnit l E h p P,
+    Functor.map_comp]
+  infer_instance
 
 /-- Open inverse image preserves the completed constructible realization, with the
 quotient-unit normalization: there is a unique natural isomorphism between the two pullbacks of
