@@ -22,6 +22,13 @@ import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 /-!
 # Centred diagonal neighbourhood and its differential under an étale source map
 
+## Implementation details
+
+The graded, normal and tangent comparisons come from the chart comparison of
+`ChartNormalDifferential`. Its difference and normal/tangent identifications live on the
+full diagonal; they are moved to the open neighbourhood `O` along the canonical degree-one
+conormal comparison of the open immersion `O.ι`, which is invertible because `O.ι` is flat.
+
 ## References
 
 * Stacks Project, Tags 02GE, 0473, 0635 and 08S2
@@ -346,7 +353,8 @@ theorem chart_centre_transport (k : Type u) [Field k]
     (pullback_lift_diagonal_isPullback uV g).flip
   have hb : IsPullback b (pullback.snd _ _) (pullback.snd _ _) uV :=
     isPullback_pullback_map (uV ≫ g) (uV ≫ g) g uV rfl
-  have hba : pullback.map (uV ≫ g) (uV ≫ g) g g uV uV (𝟙 Y) (by simp) (by simp) = b ≫ a := by
+  have hba :
+      pullback.map (uV ≫ g) (uV ≫ g) g g uV uV (𝟙 Y) (by simp) (by simp) = b ≫ a := by
     ext <;> simp [a, b]
   have hq : C.q = C.O.ι ≫ b ≫ a := by rw [C.q_eq, hba]
   have hcomp : C.δ ≫ C.O.ι ≫ b ≫ a = uV ≫ pullback.diagonal g := by
