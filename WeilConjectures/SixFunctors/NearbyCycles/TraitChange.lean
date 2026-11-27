@@ -258,9 +258,9 @@ variable {ℓ : ℕ} [Fact ℓ.Prime]
   {X X' Y Y' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {f : X ⟶ Y} {f' : X' ⟶ Y'}
 
+-- `IsSepClosed κ₁` is unused but kept for the uniformity of the statement (see below)
 set_option linter.unusedSectionVars false in
-set_option linter.unusedVariables false in
--- the special fibre of `N` over `κ₁` (`hNi`) does not enter the base change morphism; it is
+-- the special fibre of `N` over `κ₁` (`_hNi`) does not enter the base change morphism; it is
 -- kept, with `κ₁` separably closed, for the uniformity of the statement with
 -- `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait`
 /-- **Invariance of nearby cycles under change of strictly henselian trait, torsion
@@ -286,7 +286,7 @@ theorem isIso_map_exchangeRight_app_of_isPullback_trait_residueField [IsLocalHom
     (φ : M.Hom N f f') (q₁ : N.total ⟶ Spec (.of R₁)) [LocallyOfFiniteType q₁]
     [QuasiCompact q₁] [IsSeparated q₁] (g₁ : N.generic ⟶ Spec (.of Ω₁))
     (hNj : IsPullback N.j g₁ q₁ (Spec.map (CommRingCat.ofHom a₁))) (p₁ : Y' ⟶ Spec (.of κ₁))
-    (hNi : IsPullback N.i p₁ q₁ (Spec.map (CommRingCat.ofHom b₁)))
+    (_hNi : IsPullback N.i p₁ q₁ (Spec.map (CommRingCat.ofHom b₁)))
     (q₂ : M.total ⟶ Spec (.of R₂)) (g₂ : M.generic ⟶ Spec (.of Ω₂))
     (hMj : IsPullback M.j g₂ q₂ (Spec.map (CommRingCat.ofHom a₂))) (p₂ : X' ⟶ Spec (.of κ₂))
     (hMi : IsPullback M.i p₂ q₂ (Spec.map (CommRingCat.ofHom b₂)))

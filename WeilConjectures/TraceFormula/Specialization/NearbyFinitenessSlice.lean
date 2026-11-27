@@ -209,8 +209,6 @@ theorem nonempty_retract_upperStar_nearbyCycles_affineSpaceSlice (n : ℕ) (i : 
     (Profinite.padicAlgClRingObj ℓ)).app B), IsSplitMono.id _⟩⟩
 
 omit [Fact (ringChar k').Prime] in
-set_option linter.unusedVariables false in
--- the hypotheses of the core case of the induction are not needed by the proof, see below
 /-- **Deligne's criterion on the coordinate slices, core case** (SGA 4½, [Th. finitude], proof of
 Thm. 3.2): suppose that for every coordinate `i` and every bounded constructible complex `B` on
 `𝔸ⁿ⁺¹_S`, the restriction `Lhᵢ,ₛ^* Ψ B` of the nearby cycles to the geometric generic fibre of the
@@ -226,7 +224,7 @@ the case of finite coefficients), the hypotheses on the slices and on `D`, `W` a
 `v_! L` is bounded constructible. They are kept so that the statement is the step of Deligne's
 induction in `NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_generic`. -/
 theorem boundedConstructible_nearbyCycles_affineSpace_lisse_of_slices (n : ℕ)
-    (h : ∀ (i : Fin (n + 1))
+    (_h : ∀ (i : Fin (n + 1))
       (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' (n + 1)).total)
         Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
           (affineSpaceModel k' (n + 1)).total))),
@@ -236,13 +234,13 @@ theorem boundedConstructible_nearbyCycles_affineSpace_lisse_of_slices (n : ℕ)
           (((affineSpaceModel k' (n + 1)).geometric.nearbyCycles
             (Profinite.padicAlgClRingObj ℓ)).obj B)))
     (D : Scheme.{u}) (c : D ⟶ (affineSpaceModel k' (n + 1)).total) [IsClosedImmersion c]
-    (hc : ¬ Disjoint (Set.range c.base) (Set.range (affineSpaceModel k' (n + 1)).i.base))
+    (_hc : ¬ Disjoint (Set.range c.base) (Set.range (affineSpaceModel k' (n + 1)).i.base))
     (W : D.Opens)
-    (hqf : ¬ ∃ (D' : Scheme.{u}) (ι : D' ⟶ D), IsClosedImmersion ι ∧
+    (_hqf : ¬ ∃ (D' : Scheme.{u}) (ι : D' ⟶ D), IsClosedImmersion ι ∧
       (W : Set D) ⊆ Set.range ι.base ∧
       LocallyQuasiFinite (ι ≫ c ≫ (𝔸(ULift.{u} (Fin (n + 1)); trait k') ↘ trait k')))
-    (hW : (W : Set D) ⊆ c ⁻¹ᵁ affineSpaceGenericOpen k' (n + 1)) (E : Scheme.{u})
-    (c' : E ⟶ W) [IsClosedImmersion c'] (hc' : Surjective c')
+    (_hW : (W : Set D) ⊆ c ⁻¹ᵁ affineSpaceGenericOpen k' (n + 1)) (E : Scheme.{u})
+    (c' : E ⟶ W) [IsClosedImmersion c'] (_hc' : Surjective c')
     (L : Mod (Sheaf (Scheme.ProEt.topology E) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) E))
     (hL : IsLocallyFinitelyPresented (condensedRingObj (Profinite.padicAlgClRingObj ℓ) E) L) :

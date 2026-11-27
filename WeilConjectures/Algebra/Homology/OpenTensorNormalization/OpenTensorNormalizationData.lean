@@ -50,7 +50,6 @@ set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option backward.isDefEq.respectTransparency true
 set_option synthInstance.maxSize 4096
-set_option linter.checkUnivs false
 
 universe u v h w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite

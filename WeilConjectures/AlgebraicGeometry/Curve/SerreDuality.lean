@@ -209,14 +209,15 @@ noncomputable abbrev functionFieldCoordinates [IsIntegral X] (t : X.functionFiel
     ULift.{u} (Fin 2) → Γ(Spec X.functionField, ⊤) :=
   fun i ↦ (Scheme.ΓSpecIso X.functionField).inv (![1, t] i.down)
 
-set_option linter.unusedSectionVars false in
+omit [IsProper (X ↘ Spec (.of k))] in
 /-- **Rational functions define morphisms to `ℙ¹`.** Let `X` be a proper smooth integral curve
 over `k` and `t ∈ k(X)` transcendental over `k`. Then there is a morphism `π_t : X ⟶ ℙ¹_k` over
 `k` with `π_t^* (x₁ / x₀) = t`: at the generic point it is the point `[1 : t]` of `ℙ¹(k(X))`.
 The local rings of `X` are discrete valuation rings or fields (`valuationRing_stalk`), so by the
 valuative criterion for the proper `ℙ¹_k` this point extends over every point of `X`
 (`exists_hom_of_valuationRing_stalk`). -/
-theorem exists_hom_projectiveLine_of_functionField [IsIntegral X] (t : X.functionField)
+theorem exists_hom_projectiveLine_of_functionField [IsProper (X ↘ Spec (.of k))] [IsIntegral X]
+    (t : X.functionField)
     (_ht : letI := (functionFieldRingHom k X).toAlgebra; Transcendental k t) :
     ∃ π : X ⟶ ProjectiveLine (Spec (.of k)), π.IsOver (Spec (.of k)) ∧
       ∀ hs, X.fromSpecFunctionField ≫ π = ProjectiveSpace.homOfSections
@@ -769,14 +770,15 @@ theorem _root_.MvPolynomial.isMaximal_span_X_of_unique {K : Type*} [Field K] {σ
   rw [h]
   infer_instance
 
-set_option linter.unusedSectionVars false in
+omit [IsProper (X ↘ Spec (.of k))] [IsAlgClosed k] in
 /-- **Degree of pullbacks of divisors.** Let `π : X ⟶ Y` be a finite flat morphism of proper
 smooth integral curves over an algebraically closed field `k`, of degree `d`, so that `π_* 𝒪_X`
 is locally free of rank `d`. Let `y` be a closed point of `Y` with uniformizer `t`, a section on
 an open `V ∋ y` whose germ generates the maximal ideal of `𝒪_{Y,y}`. Then the pullback divisor
 `π^*[y] = ∑_{π(x) = y} v_x(π^* t) [x]` has degree `d`. By linearity `deg π^* D = d · deg D` for
 every divisor `D` on `Y`. -/
-theorem finsum_ord_eq_finrank [IsIntegral X] [IsLocallyNoetherian X] {Y : Scheme.{u}}
+theorem finsum_ord_eq_finrank [IsProper (X ↘ Spec (.of k))] [IsAlgClosed k] [IsIntegral X]
+    [IsLocallyNoetherian X] {Y : Scheme.{u}}
     [Y.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (Y ↘ Spec (.of k))]
     [IsProper (Y ↘ Spec (.of k))] [IsIntegral Y] (π : X ⟶ Y) [π.IsOver (Spec (.of k))]
     [IsFinite π] [Flat π] {y : Y} (hy : IsClosed {y}) {V : Y.Opens} (hyV : y ∈ V)

@@ -17,8 +17,6 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselization
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
 import WeilConjectures.Mathlib.RingTheory.Henselian
-set_option linter.style.haveILetI false
-set_option linter.unnecessarySimpa false
 
 /-!
 # Noetherianity of the strict henselization of a regular ring
@@ -43,17 +41,17 @@ theorem strictHenselizationRing_noetherian_of_regular
   let e : (R ⧸ Ideal.span ({0} : Set R)) ≃+* R := by
     rw [Ideal.span_singleton_zero]
     exact RingEquiv.quotientBot R
-  letI : IsRegularRing (R ⧸ Ideal.span ({0} : Set R)) :=
+  let : IsRegularRing (R ⧸ Ideal.span ({0} : Set R)) :=
     IsRegularRing.of_ringEquiv e.symm
   obtain ⟨hlocal, _⟩ := (show ∃ (_ : IsLocalRing (Scheme.strictHenselization barY)),
       IsStrictlyHenselianLocalRing (Scheme.strictHenselization barY) from
       ⟨inferInstance, ⟨inferInstance⟩⟩)
-  letI : IsLocalRing (strictHenselization barY) := hlocal
+  let : IsLocalRing (strictHenselization barY) := hlocal
   have h := strictHenselizationRing_regular_divisor_quotient R 0 barY b hb (by
     intro hz
-    have hz' : (0 : strictHenselization barY) = 1 := by simpa using hz
+    have hz' : (0 : strictHenselization barY) = 1 := by simp at hz
     exact zero_ne_one hz')
-  letI : IsRegularRing
+  let : IsRegularRing
       (strictHenselization barY ⧸ Ideal.span {b.hom 0}) := h.1
   have hn : IsNoetherianRing
       (strictHenselization barY ⧸ Ideal.span {b.hom 0}) := inferInstance

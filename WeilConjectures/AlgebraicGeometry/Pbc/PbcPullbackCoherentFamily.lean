@@ -80,6 +80,7 @@ private theorem pullScalarCoefficientsInverse
     ((pbcScalarCompletedPullIso l E G (j.comp i) g).app K)
     (pbcScalarCompletedPull_coefficients l E F i g G j K)
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem ambientPullComparison_exists {T S : Scheme.{u}} [IsNoetherian T] [IsNoetherian S]
@@ -105,6 +106,7 @@ private def ambientPullComparison {T S : Scheme.{u}} [IsNoetherian T] [IsNoether
         pbcActualCompletedPull f (pbcStageDatum.{u} l Ω F) :=
   (ambientPullComparison_exists l Ω f h).choose
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 private theorem ambientPullComparison_heq {V W : Scheme.{u}}
     [IsNoetherian V] [IsNoetherian W] (f : W ⟶ V)
     {E F : Padic.FiniteCoefficientFields l Ω} (h : E ≤ F)
@@ -165,6 +167,7 @@ private abbrev ambientPullFamily {V W : Scheme.{u}} [IsNoetherian V] [IsNoetheri
         (pbcFiniteFieldInclusion l Ω h) f (pbcFiniteField.{u} l Ω G)
         (pbcFiniteFieldInclusion l Ω k) M) K
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem ambientPullComparison_inv_heq {V W : Scheme.{u}}
@@ -420,7 +423,7 @@ private abbrev integralPullShift {Y X : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-omit dX iX dY iY in
+omit dX iX dY iY [IsAlgClosure ℚ_[l] Ω] in
 private theorem ambientPullComparisonShift (f : X ⟶ Y)
     {E F : Padic.FiniteCoefficientFields l Ω} (h : E ≤ F) :
     NatTrans.CommShift (ambientPullComparison l Ω f h).hom ℤ := by

@@ -42,7 +42,6 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
   cyclicLine cyclicLineMap derivedScalars
   diagonalSingleLimitComparison diagonalShiftedSingleLimitComparison
 
-set_option linter.unusedVariables false in
 /-- A quotient-unit-preserving comparison has the supported-source and root squares.
 This assertion assumes the comparison, and constructs no quotient functor comparison. -/
 theorem diagonalCyclicQuotient_normalizedEndpoints
@@ -87,8 +86,8 @@ theorem diagonalCyclicQuotient_normalizedEndpoints
         (diagonalCompletedSource l Y) ≅ limit (D.ordinary.E.obj (diagonalIntegralSource Y)))
     (t0 : (diagonalCompletedRestriction l (diagonalSurface Y)).obj
         (Scheme.purTwistZlModule (diagonalSurface Y) l) ≅ limit H)
-    (hs0 : DiagonalTrace.SupportedSourceConeNormalization l Y D.ordinary s0)
-    (ht0 : HEq ((diagonalForget l (diagonalSurface Y)).map t0.hom)
+    (_hs0 : DiagonalTrace.SupportedSourceConeNormalization l Y D.ordinary s0)
+    (_ht0 : HEq ((diagonalForget l (diagonalSurface Y)).map t0.hom)
       (diagonalRootLimitComparison l (diagonalSurface Y) H roots).inv)
     (n : ℕ) (p : CyclicCartierFrame l Y n)
     (s : (D.ordinary.E.obj (diagonalIntegralSource Y)).obj (op n) ≅
@@ -99,8 +98,8 @@ theorem diagonalCyclicQuotient_normalizedEndpoints
     (t : H.obj (op n) ≅ (diagonalFiniteToPadic l n (diagonalSurface Y)).obj
       (geoCartierLine (diagonalResidue.{u} l n) (l ^ (n + 1))
         (cartierResidue_cast l (n + 1)) (diagonalSurface Y)))
-    (hs : DiagonalSourceNormalization l Y D.ordinary n s)
-    (ht : DiagonalTrace.FiniteRootNormalization l Y hY H roots n t),
+    (_hs : DiagonalSourceNormalization l Y D.ordinary n s)
+    (_ht : DiagonalTrace.FiniteRootNormalization l Y hY H roots n t),
     let F : DerivedCategory.{u + 1} (DiagonalCompleted l (diagonalSurface Y)) ⥤
         DerivedCategory.{u + 1} (DiagonalMod l (diagonalSurface Y)) :=
       cyclicDiscreteRestriction l (diagonalSurface Y)

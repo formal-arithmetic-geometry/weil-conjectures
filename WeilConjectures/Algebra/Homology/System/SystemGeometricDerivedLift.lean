@@ -23,8 +23,6 @@ set_option Elab.async false
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedVariables false
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 universe uC vC uD vD w

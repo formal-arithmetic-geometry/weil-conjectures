@@ -651,8 +651,8 @@ private theorem native_pullback_square (A : Type u) [CommRing A] [Finite A]
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
+-- `letI` is needed: with `let` the kernel check hits a deterministic timeout.
 set_option linter.style.haveILetI false in
--- Inlining the finite instance keeps the concrete realization conversions small.
 -- Explicit comparison congruences are checked within this declaration.
 /-- The fixed scalar pullback comparisons identify the two pullback-square words. -/
 theorem strictFinitePullbackSquareCoherence (b : Base l E)

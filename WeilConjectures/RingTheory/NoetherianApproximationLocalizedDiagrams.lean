@@ -50,8 +50,6 @@ open scoped TensorProduct
 
 namespace Algebra
 
--- Preserve the named nondependent forall binder in the existing signature.
-set_option linter.unusedVariables false in
 /-- Localization of a supplied Noetherian approximation at the primes contracted from `q`
 produces the local diagrams used in the stage-flatness criterion: localized colimits identified
 with `R_p` and `M_q`, Noetherian local stages with finite localized modules, and localized
@@ -72,7 +70,7 @@ theorem exists_localized_noetherian_approximation
       (D : Λ ⥤ AddCommGrpCat.{max u v w})
       (ν : D ⟶ (Functor.const Λ).obj (AddCommGrpCat.of M'))
     [∀ i : Λ, Module (B.obj i) (D.obj i)]
-    (hmodel :
+    (_hmodel :
       -- (1) the three colimits, compatible with `R' → S'` and the module actions
       Nonempty (IsColimit (Cocone.mk (CommRingCat.of R') π)) ∧
       Nonempty (IsColimit (Cocone.mk (CommRingCat.of S') κ)) ∧

@@ -27,10 +27,6 @@ ordinary and derived calculations can be completed independently.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option linter.unusedSimpArgs false
-set_option linter.style.emptyLine false
-set_option linter.style.cdot false
-set_option linter.style.longLine false
 universe t u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open WeilConjectures.SemilinearSections
@@ -116,13 +112,11 @@ private theorem site_pasting
       rw [pasting_transport (P := @WeaklyEtale) (Q := ⊤) (j ≫ h) k
         (j ≫ h ≫ k) (Category.assoc j h k).symm U] at hp
       simpa only [base, baseComp, Category.assoc] using hp
-
   | none =>
       rcases U with ⟨n, U⟩
       apply Prod.hom_ext
       · rfl
-      ·
-        change (MorphismProperty.Over.pullbackComp (P := @WeaklyEtale)
+      · change (MorphismProperty.Over.pullbackComp (P := @WeaklyEtale)
           (Q := ⊤) j (h ≫ k)).hom.app U ≫
             (Scheme.proEtaleBaseChange j).map
               ((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale)
@@ -166,7 +160,7 @@ private theorem directImage_coherence
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
     Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.comp_obj, Functor.id_obj,
+    Functor.comp_obj,
     Functor.associator_inv_app, Category.id_comp,
     SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply]
   erw [directImage_map_apply ell E k s ((pushComp ell E j h s).symm.hom.app N) U]
@@ -217,13 +211,10 @@ private theorem ordinary_coherence
   rw [ht] at hh
   have hi := NatTrans.congr_app (congrArg Iso.hom hh) M
   convert hi.symm using 1 <;>
-    simp only [comp, Iso.symm_hom, Iso.trans_hom, Iso.trans_inv, NatTrans.comp_app,
-      Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
+    simp only [comp, Iso.symm_hom, Iso.trans_hom, NatTrans.comp_app,
       Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
       Functor.whiskerLeft_app, Functor.whiskerRight_app,
-      Functor.comp_obj, Functor.id_obj,
-      Functor.associator_inv_app, Functor.associator_hom_app, Iso.symm_inv,
-      Category.id_comp, Category.comp_id, Category.assoc, eqToIso.inv, eqToIso.hom, eqToHom_app]
+      Functor.comp_obj, Functor.associator_inv_app, Category.id_comp, eqToIso.hom, eqToHom_app]
 
 private theorem site_rightUnit
     {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) (U : Site Y s) :
@@ -234,7 +225,7 @@ private theorem site_rightUnit
     (MorphismProperty.Over.pullbackComp_id_right (P := @WeaklyEtale) (Q := ⊤) f)) V
   simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
     Functor.whiskerRight_app, Iso.symm_hom, Functor.leftUnitor_inv_app,
-    MorphismProperty.Over.pullbackCongr_refl, Iso.refl_hom, NatTrans.id_app,
+    MorphismProperty.Over.pullbackCongr_refl, Iso.refl_hom,
     Category.id_comp] at hp
   have hq (V : Y.ProEt) :=
     (pasting_transport (P := @WeaklyEtale) (Q := ⊤) f (𝟙 Y) f
@@ -256,7 +247,7 @@ private theorem site_leftUnit
     (MorphismProperty.Over.pullbackComp_id_left (P := @WeaklyEtale) (Q := ⊤) f)) V
   simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
     Functor.whiskerLeft_app, Iso.symm_hom, Functor.rightUnitor_inv_app,
-    MorphismProperty.Over.pullbackCongr_refl, Iso.refl_hom, NatTrans.id_app,
+    MorphismProperty.Over.pullbackCongr_refl, Iso.refl_hom,
     Category.id_comp] at hp
   have hq (V : Y.ProEt) :=
     (pasting_transport (P := @WeaklyEtale) (Q := ⊤) (𝟙 X) f f
@@ -287,7 +278,7 @@ private theorem directImage_rightUnit
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
     Functor.rightUnitor_hom_app, SheafOfModules.comp_val,
-    PresheafOfModules.comp_app, ModuleCat.comp_apply, Category.comp_id]
+    PresheafOfModules.comp_app, ModuleCat.comp_apply]
   erw [directImage_transport ell E (Category.comp_id f) s N U]
   erw [directComp_hom_apply ell E f (𝟙 Y) s N U]
   erw [(pushId_existsUnique ell E Y s).exists.choose_spec
@@ -314,7 +305,7 @@ private theorem directImage_leftUnit
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
     Functor.leftUnitor_hom_app, SheafOfModules.comp_val,
-    PresheafOfModules.comp_app, ModuleCat.comp_apply, Category.comp_id]
+    PresheafOfModules.comp_app, ModuleCat.comp_apply]
   erw [directImage_transport ell E (Category.id_comp f) s N U]
   erw [directComp_hom_apply ell E (𝟙 X) f s N U]
   erw [directImage_map_apply ell E f s ((pushId ell E X s).hom.app N) U]

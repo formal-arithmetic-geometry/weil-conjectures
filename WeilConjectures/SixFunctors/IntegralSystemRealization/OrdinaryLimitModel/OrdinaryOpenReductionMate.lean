@@ -26,7 +26,6 @@ set_option autoImplicit false
 set_option genSizeOfSpec false
 set_option genInjectivity false
 set_option synthInstance.maxSize 4096
-set_option linter.style.haveILetI false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 universe u
@@ -72,16 +71,16 @@ private theorem integralOpenUnit_isIso {X Y : Scheme.{u}} (j : X ⟶ Y)
   obtain ⟨e, ⟨h⟩⟩ := proEtaleOpen_slicePresentation j (R.ring Y) (R.ring X) (R.pull j)
   let L := SheafOfModules.localizedModuleExtension.{u} (R.ring Y) (ProEt.mk j)
   let adj := SheafOfModules.localizedModuleAdjunctionIndependent (R.ring Y) (ProEt.mk j)
-  letI := SheafOfModules.localizedUnit_isIso j (R.ring Y)
-  letI : L.Full := adj.fullyFaithfulLOfIsIsoUnit.full
-  letI : L.Faithful := adj.fullyFaithfulLOfIsIsoUnit.faithful
-  letI : e.functor.Full := e.fullyFaithfulFunctor.full
-  letI : e.functor.Faithful := e.fullyFaithfulFunctor.faithful
-  letI hfull : (e.functor ⋙ L).Full := Functor.Full.comp e.functor L
-  letI hfaithful : (e.functor ⋙ L).Faithful := Functor.Faithful.comp e.functor L
-  letI : (PurCompactSupport.openExtension R j).Full :=
+  have := SheafOfModules.localizedUnit_isIso j (R.ring Y)
+  have : L.Full := adj.fullyFaithfulLOfIsIsoUnit.full
+  have : L.Faithful := adj.fullyFaithfulLOfIsIsoUnit.faithful
+  have : e.functor.Full := e.fullyFaithfulFunctor.full
+  have : e.functor.Faithful := e.fullyFaithfulFunctor.faithful
+  have hfull : (e.functor ⋙ L).Full := Functor.Full.comp e.functor L
+  have hfaithful : (e.functor ⋙ L).Faithful := Functor.Faithful.comp e.functor L
+  have : (PurCompactSupport.openExtension R j).Full :=
     @Functor.Full.of_iso _ _ _ _ _ _ hfull h.symm
-  letI : (PurCompactSupport.openExtension R j).Faithful :=
+  have : (PurCompactSupport.openExtension R j).Faithful :=
     @Functor.Faithful.of_iso _ _ _ _ _ _ hfaithful h.symm
   let hu : IsIso (PurCompactSupport.openAdjunction R j).unit :=
     (PurCompactSupport.openAdjunction R j).unit_isIso_of_L_fully_faithful
@@ -98,14 +97,14 @@ private theorem sequence_isIso_of_evaluation (W : Scheme.{u})
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
         (coefficientSequenceCommRingSheaf l E W)) ⋙
       sheafToPresheaf _ AddCommGrpCat.{u + 1}
-  letI : ∀ V, IsIso ((T.map f).app V) := by
+  have : ∀ V, IsIso ((T.map f).app V) := by
     intro Z
     let n := Z.unop.1
     let V := Z.unop.2
     exact ((SheafOfModules.toSheaf _ ⋙ sheafToPresheaf _ AddCommGrpCat ⋙
       (CategoryTheory.evaluation _ _).obj (op V)).mapIso
         (@asIso _ _ _ _ ((coefficientSequenceEvaluation l E W n).map f) (hf n))).isIso_hom
-  letI : IsIso (T.map f) := NatIso.isIso_of_isIso_app _
+  have : IsIso (T.map f) := NatIso.isIso_of_isIso_app _
   exact isIso_of_reflects_iso f T
 
 /-- The ordinary scalar/open mate is invertible before localization. -/
@@ -116,7 +115,7 @@ theorem ordinaryOpenReduction_isIso (a : OrdinaryLimitModel l E)
   let J := PurCompactSupport.openExtension (PurCompactSupport.completed l E) j
   let R := pullbackTensorOrdinaryReduction l E Y
   let N := R.obj (J.obj M)
-  letI hc : IsIso (o.adjunction.counit.app N) := by
+  have hc : IsIso (o.adjunction.counit.app N) := by
     apply sequence_isIso_of_evaluation l E Y
     intro n
     obtain ⟨L, adj, e, he⟩ := ordinaryOpenFiniteEvaluation l E j o n

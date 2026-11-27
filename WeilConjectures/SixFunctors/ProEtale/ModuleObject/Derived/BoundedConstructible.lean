@@ -173,6 +173,7 @@ variable {X Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y)
 
+-- Keep the section instances as hypotheses of this public statement.
 set_option linter.unusedSectionVars false in
 /-- The derived pullback `Lf^*` on module objects over `Λ` preserves bounded constructible
 complexes (SGA 4 XVII, 5.1.16; Bhatt–Scholze, Section 6.8). -/
@@ -328,7 +329,6 @@ variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.h
 omit [Fact (ringChar k).Prime] [IsSeparated X.hom] in
 -- the statement keeps the hypothesis `ℓ ≠ char k` of the setting, unused by the proof
 set_option linter.unusedSectionVars false in
-set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `ℚ̄_ℓ`-sheaves form a monoidal subcategory of
 `D(Mod_{ℚ̄_ℓ,X})` for the derived tensor product: they contain the unit
 `ℚ̄_ℓ,X` and are stable under `- ⊗ᴸ -` (SGA 4½ [Th. finitude], 1.6; Bhatt–Scholze, Section 6.8). It
@@ -343,7 +343,6 @@ theorem isMonoidal_boundedConstructible :
     prop_tensor _ _ hK hL :=
       boundedConstructible_tensorObj
         (tensorHypotheses_padicAlgClRingObj ℓ).lisseTensorHypotheses hK hL }
-set_option linter.overlappingInstances false in
 attribute [instance] isMonoidal_boundedConstructible
 
 /-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` on bounded
@@ -387,7 +386,6 @@ variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.h
 omit [Fact (ringChar k).Prime] [IsSeparated X.hom] in
 -- the statement keeps the hypothesis `ℓ ≠ char k` of the setting, unused by the proof
 set_option linter.unusedSectionVars false in
-set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `E`-sheaves form a monoidal subcategory of
 `D(Mod_{E_X})` for the derived tensor product: they contain the unit `E_X` and are
 stable under `- ⊗ᴸ -` (SGA 4½ [Th. finitude], 1.6; Bhatt–Scholze, Section 6.8). It is false for a
@@ -403,7 +401,6 @@ theorem isMonoidal_boundedConstructible :
     prop_tensor _ _ hK hL :=
       boundedConstructible_tensorObj
         (tensorHypotheses_continuousMapRingObj ℓ E).lisseTensorHypotheses hK hL }
-set_option linter.overlappingInstances false in
 attribute [instance] isMonoidal_boundedConstructible
 
 /-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(X)⟦E̲⟧` on bounded
@@ -450,7 +447,6 @@ variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.h
 omit [Fact (ringChar k).Prime] [IsSeparated X.hom] in
 -- the statement keeps the hypothesis `ℓ ≠ char k` of the setting, unused by the proof
 set_option linter.unusedSectionVars false in
-set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `𝒪_E`-sheaves form a monoidal subcategory of
 `D(Mod_{𝒪_{E,X}})` for the derived tensor product: they contain the unit
 `𝒪_{E,X}` and are stable under `- ⊗ᴸ -` (SGA 4½ [Th. finitude], 1.6; Bhatt–Scholze, Section 6.8). It
@@ -465,7 +461,6 @@ theorem isMonoidal_boundedConstructible :
   { prop_unit := boundedConstructible_tensorUnit _ X.left
     prop_tensor _ _ hK hL :=
       boundedConstructible_tensorObj (lisseHypotheses ℓ E).toLisseTensorHypotheses hK hL }
-set_option linter.overlappingInstances false in
 attribute [instance] isMonoidal_boundedConstructible
 
 /-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(X)⟦𝒪̲_E⟧` on bounded

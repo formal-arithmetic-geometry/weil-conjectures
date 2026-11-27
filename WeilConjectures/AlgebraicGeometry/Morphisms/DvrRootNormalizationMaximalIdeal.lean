@@ -30,7 +30,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-set_option linter.unusedVariables false in
 /-- Adjoining a group-order root of a DVR uniformizer kills the ramification of a torsor. -/
 theorem dvr_root_normalization_maximalIdeal
     (B : CommRingCat.{u}) [IsDomain B] [IsDiscreteValuationRing B]
@@ -39,7 +38,7 @@ theorem dvr_root_normalization_maximalIdeal
     (T : GaloisCover G (Spec (CommRingCat.of (FractionRing B))))
     (hn : IsUnit (Nat.card G : B)) :
     let A := AdjoinRoot ((Polynomial.X : Polynomial B) ^ Nat.card G - Polynomial.C pi)
-    let N := Spec (CommRingCat.of A)
+    let _N := Spec (CommRingCat.of A)
     let q := Spec.map (CommRingCat.ofHom (algebraMap B A))
     let j := Spec.map (CommRingCat.ofHom (algebraMap B (FractionRing B)))
     let a := pullback.snd (T.π ≫ j) q

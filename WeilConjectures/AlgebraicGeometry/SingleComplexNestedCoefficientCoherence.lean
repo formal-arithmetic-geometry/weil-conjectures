@@ -27,7 +27,6 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option linter.unusedVariables false in
 /-- The coefficient map obtained by restricting twice agrees with the once-restricted
 map in the canonical smaller-open and pullback-pasting coordinates. -/
 theorem singleComplex_nested_coefficient_coherence
@@ -52,7 +51,7 @@ theorem singleComplex_nested_coefficient_coherence
     let t := pullback.snd q A.ι
     let r := pullback.fst q A.ι
     let KW := (derivedPullback W.ι).obj K
-    let KW' := (derivedPullback p).obj K'
+    let _KW' := (derivedPullback p).obj K'
     let phiW := (c q W.ι).hom.app K ≫
       eqToHom (congrArg (fun k ↦ (derivedPullback k).obj K)
         (pullback.condition (f := g') (g := W.ι)).symm) ≫

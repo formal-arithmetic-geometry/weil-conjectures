@@ -248,6 +248,7 @@ def internalDerivedPushforward {X Y : Scheme.{u}} (f : X ⟶ Y) :
     DerivedCategory (internalModules Λ X) ⥤ DerivedCategory (internalModules Λ Y) :=
   comparisonSource (CondensedRing.rightDerivedLowerStarIso Λ f)
 
+-- `omit` would drop this argument from the definitions built on this lemma.
 set_option linter.unusedSectionVars false in
 /-- The fixed section equivalence functor is additive. -/
 theorem sectionFunctorAdditive (X : Scheme.{u}) :
@@ -347,6 +348,7 @@ def cochainTotalFunctor
   map_id K := (Functor.uncurry.obj T.map₂CochainComplex).map_id K
   map_comp f g := (Functor.uncurry.obj T.map₂CochainComplex).map_comp f g
 
+-- The explicit binder repeats the section `HasDerivedCategory` variable; `omit` does not drop it.
 set_option linter.overlappingInstances false in
 /-- The native signed total tensor of internal cochain complexes. -/
 def internalTotalTensor [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
@@ -375,7 +377,6 @@ Naturality is the naturality axiom of the actual localization tensorator. -/
         Functor.LaxMonoidal.μ_natural DerivedCategory.Q f.1 f.2
   }
 
-set_option linter.unusedSectionVars false in
 /-- The cached map has exactly the existing native localization components. -/
 theorem internalLocalizationTensorMap_app (X : Scheme.{u})
     (P Q : CochainComplex (internalModules Λ X) ℤ) :
@@ -433,6 +434,7 @@ def tensorComparison (X : Scheme.{u}) :
       ((derivedEquivalence Λ X).functor.prod (derivedEquivalence Λ X).functor) ⋙ tensor Λ X :=
   (tensorComparison_existsUnique Λ X).exists.choose
 
+-- The explicit binder repeats the section `HasDerivedCategory` variable; `omit` does not drop it.
 set_option linter.overlappingInstances false in
 /-- The sectionwise tensor of cochain complexes is the signed direct-sum total. -/
 def totalTensor [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
@@ -441,6 +443,7 @@ def totalTensor [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
       CochainComplex (modules Λ X) ℤ :=
   cochainTotalFunctor (curriedTensor (modules Λ X))
 
+-- `omit` would drop this argument from `sectionOrdinaryTensorMap`, which uses this lemma.
 set_option linter.unusedSectionVars false in
 /-- Naturality of the fixed ordinary tensor comparison. -/
 theorem sectionOrdinaryTensorNaturality (X : Scheme.{u})

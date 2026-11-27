@@ -48,8 +48,6 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
 
 open scoped ChangeOfRings
 
-set_option linter.unusedTactic false
-set_option linter.unusedSectionVars false
 
 attribute [local semireducible] changeOfRingsOfUniverses changeOfRingsHomOfUniverses
   scalarExtensionSection evaluate
@@ -176,6 +174,7 @@ private def scalarRawIso
       ((pullRing (J₀ := J₀) F).map φ₀) _ f 1 x).trans
       (changeOfRingsMap_tmulOfUniverses φ₀ M (F.op.map f) 1 x).symm)
 
+omit [F.IsCocontinuous J₀ K₀] in
 private theorem scalarRawIso_pure
     (M : SheafOfModules.{r} ((sheafCompose K₀ (forget₂ CommRingCat RingCat)).obj R₀))
     (X : C₀ᵒᵖ) (s : S₀.obj.obj (F.op.obj X)) (x : M.val.obj (F.op.obj X)) :
@@ -199,6 +198,7 @@ private def scalarBackHom
   T.map (scalarRawIso (J₀ := J₀) F φ₀ M).hom ≫
     restrictionSheafify (J₀ := J₀) F A (changeOfRingsPresheafOfUniverses φ₀ M)
 
+omit [F.IsCocontinuous J₀ K₀] in
 private theorem scalarBackHom_eq
     (M : SheafOfModules.{r} ((sheafCompose K₀ (forget₂ CommRingCat RingCat)).obj R₀)) :
     scalarBackHom (J₀ := J₀) F φ₀ M =
@@ -212,6 +212,7 @@ private theorem scalarBackHom_eq
 
 attribute [local irreducible] scalarBackHom
 
+omit [F.IsCocontinuous J₀ K₀] in
 private theorem scalarBackHom_pure
     (M : SheafOfModules.{r} ((sheafCompose K₀ (forget₂ CommRingCat RingCat)).obj R₀))
     (X : C₀ᵒᵖ) (s : S₀.obj.obj (F.op.obj X)) (x : M.val.obj (F.op.obj X)) :
@@ -246,6 +247,7 @@ private theorem scalarBackHom_pure
       (scalarExtensionSection ((pullRing (J₀ := J₀) F).map φ₀) _ X s x)) = _
   exact hn''.symm.trans hu'
 
+omit [F.IsCocontinuous J₀ K₀] in
 private theorem scalarBackHom_natural
     {M N : SheafOfModules.{r} ((sheafCompose K₀ (forget₂ CommRingCat RingCat)).obj R₀)}
     (g : M ⟶ N) :

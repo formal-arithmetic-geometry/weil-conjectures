@@ -39,7 +39,6 @@ local instance openExtensionProjectionStandardDerived (X : Scheme.{u}) (U : X.Op
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
   HasDerivedCategory.standard _
 
-set_option linter.style.haveILetI false in
 /-- Exact extension by zero satisfies the tensor projection formula for any
 strong monoidal structure on the specified derived restriction functor.
 (Stacks, Tags 08BS, 01AK, 06YB and 06YH) -/
@@ -64,7 +63,7 @@ theorem exists_openExtension_projectionFormula (X : Scheme.{u})
   dsimp
   intro m
   have h := exists_openExtension_derivedAdjunction X U
-  letI := m
+  let := m
   obtain ⟨J, ⟨adj⟩⟩ := h
   refine ⟨J, adj, ?_⟩
   exact openExtension_projection_formula_of_adjunction X U m J adj

@@ -358,6 +358,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 attribute [local semireducible] homComplexFunctor
 set_option backward.isDefEq.respectTransparency.types false in
 -- Cache the inferred proof type without elaborating the concrete interface twice.
+-- `theorem` needs an explicit type; the inferred proof type is deliberately left implicit.
 set_option linter.defProp false in
 private def sheafHomRestrictionComparison :=
   let V := nativeRestriction.{c, v, u} J A U

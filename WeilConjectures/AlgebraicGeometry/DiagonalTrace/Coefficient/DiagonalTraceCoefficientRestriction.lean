@@ -76,13 +76,11 @@ private def rootCone (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
       ((diagonalCompletedRestriction l T).obj (Scheme.purTwistZlModule T l))) ⟶
       roots l T := (limit.cone (roots l T)).π
 
--- The finite constructions do not use the derived Chern normalization.
-set_option linter.unusedVariables false in
 /-- The exact finite-coefficient restriction and its two normalized cones at one site. -/
 theorem exists_diagonalTraceCoefficientRestriction (l : ℕ) [Fact l.Prime]
     (T : Scheme.{u}) [DiagonalTraceLocalizations l T]
     (c : Chern l (ULift.{u} (Padic l)) T)
-    (hc : c.Normalized l (ULift.{u} (Padic l))) :
+    (_hc : c.Normalized l (ULift.{u} (Padic l))) :
     ∃ r : Restriction l (ULift.{u} (Padic l)) T,
       Nonempty (Coefficients l (ULift.{u} (Padic l)) T c r) := by
   obtain ⟨r⟩ := exists_diagonalTraceResidueRestriction l T

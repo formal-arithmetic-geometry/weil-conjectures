@@ -92,8 +92,6 @@ comparison to the normalization of the tensor models.
 @[expose] public section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option linter.unusedSectionVars false
-set_option linter.style.haveILetI false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 universe t u
@@ -112,6 +110,8 @@ variable (Y : AlgebraicGeometry.Scheme.{t})
   [(AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
     AddCommGrpCat.{max u (t + 1)}]
 
+-- omitting `EssentiallySmall` here would make the downstream theorems using this one warn
+set_option linter.unusedSectionVars false in
 private theorem total_generator_ext (P Q I : CochainComplex (Modules.{t, u} Y R) ℤ)
     {f g : (coefficientTotalTensor.{u, t + 1, t}
       (AlgebraicGeometry.Scheme.ProEt.topology Y) R).obj (P, Q) ⟶ I}
@@ -121,9 +121,9 @@ private theorem total_generator_ext (P Q I : CochainComplex (Modules.{t, u} Y R)
         (AlgebraicGeometry.Scheme.ProEt.topology Y) R P Q i j k hij U x y) =
       (g.f k).val.app U (coefficientTensorGenerator.{u, t + 1, t}
         (AlgebraicGeometry.Scheme.ProEt.topology Y) R P Q i j k hij U x y)) : f = g := by
-  letI := countableColimits.{t, u} Y R
-  letI := ordinaryTensorZero.{t, u} Y R
-  letI := ordinaryTensorObjZero.{t, u} Y R
+  let := countableColimits.{t, u} Y R
+  let := ordinaryTensorZero.{t, u} Y R
+  let := ordinaryTensorObjZero.{t, u} Y R
   ext k : 1
   apply HomologicalComplex.mapBifunctor.hom_ext
   intro i j hij
@@ -145,6 +145,8 @@ attribute [local irreducible] totalTensor totalPair pair projection evaluate hom
 
 open CategoryTheory.RingedDerivedNative
 
+-- omitting `EssentiallySmall` here would make the downstream theorems using this one warn
+set_option linter.unusedSectionVars false in
 -- Compare the two Hom-complex models without unfolding the derived internal Hom.
 /-- A chain map `φ : P ⟶ Hom(L, I)` between flat complexes uncurries to a chain map
 `a : P ⊗ L ⟶ I` given on generators by unsigned evaluation, `x ⊗ y ↦ φ(x)(y)`, and after
@@ -174,14 +176,14 @@ theorem representative_uncurry_evaluation
           (DerivedCategory.Q.obj I)).symm
             (DerivedCategory.Q.map φ ≫ homModelMap.{t, u} Y R L I) =
         DerivedCategory.Q.map a := by
-  letI := derivedCategory.{t, u} Y R
+  let := derivedCategory.{t, u} Y R
   refine ⟨(chainEquiv.{t + 1, t, u}
     (AlgebraicGeometry.Scheme.ProEt.topology Y) R P L I).symm φ, ?_, ?_⟩
   · intro p q k h h' U x y
     exact chainEquiv_symm_pure.{t + 1, t, u}
       (AlgebraicGeometry.Scheme.ProEt.topology Y) R P L I _ p q k h h' U x y
   · let J := AlgebraicGeometry.Scheme.ProEt.topology Y
-    letI := baseGrothendieck.{t + 1, t, u} J R
+    let := baseGrothendieck.{t + 1, t, u} J R
     let r : I ⟶ (coefficientHomResolution.{u, t + 1, t} J R).obj I :=
       (CochainComplex.toKInjectiveResolution.{max u (t + 1)} (Modules.{t, u} Y R)).app I
     let φ' : P ⟶ homComplex (R := R) L

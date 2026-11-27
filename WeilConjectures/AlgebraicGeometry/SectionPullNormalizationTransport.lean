@@ -19,7 +19,6 @@ import all WeilConjectures.CategoryTheory.InternalSectionScalarAdjunction
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 universe u
@@ -50,6 +49,8 @@ private theorem sectionEquivalence_map_apply
     ((ModuleRingedComparison.equivalence A T).functor.map g).val.app W x =
       g.hom.hom.app W x := rfl
 
+omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ T)]
+  [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ' T)] in
 private theorem restriction_map_apply (φ : Λ ⟶ Λ') [IsMonHom φ] (T : Scheme.{u})
     {M N : ModuleRingedComparison.modules Λ' T} (g : M ⟶ N) (W : T.ProEtᵒᵖ)
     (x : M.val.obj W) :
@@ -66,11 +67,15 @@ private theorem pushforward_map_apply
     ((ModuleRingedComparison.pushforward A h).map g).val.app W x =
       g.val.app ((InternalModuleOperations.siteMap h).op.obj W) x := rfl
 
+omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ T)]
+  [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ' T)] in
 private theorem scalarRestrictionIso_hom_apply (φ : Λ ⟶ Λ') [IsMonHom φ]
     (T : Scheme.{u}) (M : Modules Λ' T) (W : T.ProEtᵒᵖ) (x : M.X.obj.obj W) :
     ((CategoryTheory.InternalAbelianSheafModule.scalarRestrictionIso
       (Scheme.ProEt.topology T) (coefficientMap φ T)).hom.app M).val.app W x = x := rfl
 
+omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ T)]
+  [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ' T)] in
 private theorem scalarRestrictionIso_inv_apply (φ : Λ ⟶ Λ') [IsMonHom φ]
     (T : Scheme.{u}) (M : Modules Λ' T) (W : T.ProEtᵒᵖ) (x : M.X.obj.obj W) :
     ((CategoryTheory.InternalAbelianSheafModule.scalarRestrictionIso
@@ -88,6 +93,9 @@ private theorem lowerComparison_inv_apply
   rw [InternalModuleOperations.lowerComparison_apply] at he
   exact he
 
+omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ T)]
+  [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ' T)]
+  [IsCommMonObj Λ] [IsCommMonObj Λ'] in
 private theorem comapLowerStarIso_apply (φ : Λ ⟶ Λ') [IsMonHom φ]
     {U V : Scheme.{u}} (h : U ⟶ V) (M : Modules Λ' U) (W : V.ProEtᵒᵖ)
     (x : M.X.obj.obj ((InternalModuleOperations.siteMap h).op.obj W)) :
@@ -133,6 +141,8 @@ private def sectionRestrictionPush (φ : Λ ⟶ Λ') [IsMonHom φ]
 
 -- The essential-image component calculation compares several nested section functors.
 -- Its definitional equality checks exceed the default heartbeat count.
+omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ T)]
+  [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ' T)] in
 private theorem sectionRestrictionPush_apply (φ : Λ ⟶ Λ') [IsMonHom φ]
     {U V : Scheme.{u}} (h : U ⟶ V)
     (N : ModuleRingedComparison.modules Λ' U) (W : V.ProEtᵒᵖ)

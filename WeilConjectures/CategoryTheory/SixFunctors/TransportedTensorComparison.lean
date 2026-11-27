@@ -27,7 +27,6 @@ def transportedTensorComparison {C D : Type*} [Category C] [Category D]
     E.functor.obj XY.2)) (fun f ↦ by
       exact E.counitIso.hom.naturality (E.functor.map f.1 ⊗ₘ E.functor.map f.2))
 
-set_option linter.style.haveILetI false in
 /-- The transported counit comparison respects associativity. -/
 theorem transportedTensorComparison_associativity
     {C D : Type*} [Category C] [Category D] [MonoidalCategory D] (E : C ≌ D)
@@ -38,8 +37,8 @@ theorem transportedTensorComparison_associativity
         (α_ (E.functor.obj X) (E.functor.obj Y) (E.functor.obj Z)).hom =
       E.functor.map (α_ X Y Z).hom ≫ μ.hom.app (X, Y ⊗ Z) ≫
         (E.functor.obj X ◁ μ.hom.app (Y, Z)) := by
-  letI := Monoidal.transport E.symm
-  letI : E.functor.Monoidal :=
+  let := Monoidal.transport E.symm
+  let : E.functor.Monoidal :=
     inferInstanceAs (Monoidal.equivalenceTransported E.symm).inverse.Monoidal
   exact Functor.OplaxMonoidal.associativity E.functor X Y Z
 

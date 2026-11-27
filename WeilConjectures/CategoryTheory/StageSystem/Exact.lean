@@ -102,7 +102,6 @@ noncomputable def descFunctorCommShiftIso (a : ℤ) :
       simp only [Category.assoc]
       exact key)
 
-set_option linter.unusedSectionVars false in
 lemma descFunctorCommShiftIso_hom_app (a : ℤ) (X : S.PairCategory) :
     (descFunctorCommShiftIso Φ ι coh a).hom.app X = ((Φ X.stage).commShiftIso a).hom.app X.obj :=
   rfl
@@ -123,7 +122,6 @@ noncomputable instance descFunctor_commShift : (descFunctor Φ ι coh).CommShift
       Functor.CommShift.isoAdd_hom_app]
     rfl
 
-set_option linter.unusedSectionVars false in
 lemma descFunctor_commShiftIso_hom_app (a : ℤ) (X : S.PairCategory) :
     ((descFunctor Φ ι coh).commShiftIso a).hom.app X =
       ((Φ X.stage).commShiftIso a).hom.app X.obj :=

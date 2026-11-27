@@ -54,7 +54,6 @@ noncomputable def ProEtale.localizationRestrictionComp (g₁₂ : T ⟶ R) (hg :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-set_option linter.flexible false in
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- The composition isomorphism of restrictions is conjugate to that of pushforwards. -/
 lemma ProEtale.conjugateEquiv_localizationRestrictionComp_inv (h₁₂ : WeaklyEtale (g₁ ≫ g₂)) :
@@ -66,12 +65,20 @@ lemma ProEtale.conjugateEquiv_localizationRestrictionComp_inv (h₁₂ : WeaklyE
   ext G : 2
   apply Sheaf.hom_ext
   refine NatTrans.ext (funext fun U ↦ ?_)
-  simp [conjugateEquiv_apply_app, ProEtale.localizationRestrictionLowerStarAdjunction,
-    ProEtale.localizationRestrictionComp, ProEtale.lowerStarComp,
-    MorphismProperty.Over.mapPullbackAdj,
+  simp only [lowerStar, Functor.sheafPushforwardContinuous_obj_obj_obj, Functor.comp_obj,
+    localizationRestriction, localizationRestrictionLowerStarAdjunction,
+    MorphismProperty.Over.mapPullbackAdj, Functor.id_obj, MorphismProperty.Over.map_obj_left,
+    Functor.const_obj_obj, MorphismProperty.Over.map_obj_hom, localizationRestrictionComp,
     Functor.sheafPushforwardContinuousComp', Functor.sheafPushforwardContinuousComp,
-    Functor.sheafPushforwardContinuousIso, ProEtale.localizationRestriction,
-    ProEtale.lowerStar, ← Functor.map_comp]
+    Functor.sheafPushforwardContinuousIso, Iso.symm_inv, Iso.symm_hom, Iso.refl_trans,
+    Iso.symm_mk, conjugateEquiv_apply_app, Adjunction.comp_unit_app, Functor.comp_map,
+    ← Functor.map_comp, Category.assoc, ObjectProperty.FullSubcategory.comp_hom,
+    NatTrans.comp_app, Adjunction.sheafPushforwardContinuous_unit_app_hom_app,
+    Functor.sheafPushforwardContinuous_obj_obj_map, Quiver.Hom.unop_op,
+    Functor.sheafPushforwardContinuous_map_hom_app, MorphismProperty.Over.pullback_obj_left,
+    MorphismProperty.Over.pullback_obj_hom, Functor.sheafPushforwardContinuousNatTrans_app_hom,
+    ObjectProperty.ι_obj, Functor.whiskerRight_app, Functor.op_obj, NatTrans.op_app,
+    Adjunction.sheafPushforwardContinuous_counit_app_hom_app, lowerStarComp]
   congr 1
   apply Quiver.Hom.unop_inj
   ext
@@ -272,8 +279,6 @@ theorem ProEtale.exists_hom_of_localizationRestriction [Surjective e] [QuasiComp
   rw [htop (𝟙 _ ≫ toTop _), htop (g₀ ≫ π ())]
 
 
--- the `simp` call computes the composite restrictions on sections
-set_option linter.flexible false in
 include he in
 /-- **Gluing morphisms of pro-étale sheaves along a single pro-étale cover**: morphisms
 `e^* F ⟶ e^* G` whose pullbacks along any two `a b : W' ⟶ W` with `a ≫ e = b ≫ e` agree
@@ -308,9 +313,13 @@ theorem ProEtale.exists_hom_of_upperStar [Surjective e] [QuasiCompact e]
       ProEtale.upperStarComp'_conj A tk e hb he T.hom hk' T.prop] at E'
     let U₀ : T.left.ProEt := MorphismProperty.Over.mk ⊤ (𝟙 T.left) inferInstance
     have E'' := congrArg (fun f ↦ f.hom.app (op U₀)) E'
-    simp [ProEtale.localizationRestrictionComp, Functor.sheafPushforwardContinuousComp',
-      Functor.sheafPushforwardContinuousComp, Functor.sheafPushforwardContinuousIso,
-      ProEtale.localizationRestriction] at E''
+    simp only [Functor.id_obj, Functor.const_obj_obj, localizationRestriction, Functor.comp_obj,
+      localizationRestrictionComp, Functor.sheafPushforwardContinuousComp',
+      Functor.sheafPushforwardContinuousComp, Functor.sheafPushforwardContinuousIso, Iso.symm_inv,
+      Iso.symm_hom, Iso.refl_trans, Iso.symm_mk, Functor.map_comp, Category.assoc,
+      ObjectProperty.FullSubcategory.comp_hom, Functor.sheafPushforwardContinuousNatTrans_app_hom,
+      ObjectProperty.ι_obj, NatTrans.comp_app, Functor.whiskerRight_app, Functor.op_obj,
+      NatTrans.op_app, Functor.sheafPushforwardContinuous_map_hom_app] at E''
     let ε : T ≅ (MorphismProperty.Over.map ⊤ T.prop).obj U₀ :=
       MorphismProperty.Over.isoMk (Iso.refl _) (Category.id_comp _)
     have side : ∀ (t : T.left ⟶ W) (h : t ≫ e = T.hom) (h' : T.hom = t ≫ e)

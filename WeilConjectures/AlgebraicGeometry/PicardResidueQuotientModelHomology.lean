@@ -15,8 +15,6 @@ set_option autoImplicit false
 universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
--- The original interface includes E, which is irrelevant to this algebraic comparison.
-set_option linter.unusedVariables false in
 /-- The explicit residue cycle quotient is additively the degree-one homology
 of the scalar extension of sections (Stacks, Tag 010V). -/
 theorem picard_residue_quotient_model_homology
@@ -24,7 +22,7 @@ theorem picard_residue_quotient_model_homology
       (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
     [∀ (Y : Scheme.{v}) (U : Y.Opens), HasDerivedCategory.{v + 1}
       (SheafOfModules.{v} ((moduleRings Y.toRingedSpace).over U))]
-    (W : Scheme.{v}) (E : schemeDerivedCategory W) (w : W)
+    (W : Scheme.{v}) (_E : schemeDerivedCategory W) (w : W)
     (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U)
     (p : Ideal Γ(W, U)) [p.IsPrime]
     (hp : p = RingHom.ker (W.evaluation U w hwU).hom)

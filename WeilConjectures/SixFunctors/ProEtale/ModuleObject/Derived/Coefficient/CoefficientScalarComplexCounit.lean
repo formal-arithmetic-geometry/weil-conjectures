@@ -24,7 +24,6 @@ functor counit at the homotopy quotient of that complex.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option linter.unusedSectionVars false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory AlgebraicGeometry
 open scoped CategoryTheory.Obj ChangeOfRings
@@ -47,6 +46,8 @@ attribute [local irreducible] DerivedCategory.monoidalClosed CategoryTheory.Mod.
   ModuleRingedComparison.totalComparison ModuleRingedComparison.ordinaryTensorComparison
   Localization.Monoidal.tensorBifunctor
 
+-- Keep the section instances as hypotheses of the public alias of this statement.
+set_option linter.unusedSectionVars false in
 /-- The fixed scalar complex comparison is the derived counit. -/
 private theorem coefficientScalarTensor_complexCounit_private (Z : Scheme.{u})
     (K : CochainComplex (ModuleRingedComparison.internalModules R Z) ℤ) :

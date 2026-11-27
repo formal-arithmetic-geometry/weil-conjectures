@@ -30,7 +30,6 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 2048
-set_option linter.style.haveILetI false
 attribute [local irreducible] HasDerivedCategory.standard
 
 universe u
@@ -59,8 +58,8 @@ theorem native_proper_scalar_mate_bounded_below
   let F := pbcRestrict (a.map V)
   have hF : F.ReflectsIsomorphisms :=
     (proEtaleRingRestrictScalars_properties (a.map V)).2.2
-  haveI : F.ReflectsIsomorphisms := hF
-  haveI : F.mapDerivedCategory.ReflectsIsomorphisms := by
+  have : F.ReflectsIsomorphisms := hF
+  have : F.mapDerivedCategory.ReflectsIsomorphisms := by
     refine ⟨fun {X Y} f hf => ?_⟩
     rw [DerivedCategory.isIso_iff]
     intro q
@@ -69,7 +68,7 @@ theorem native_proper_scalar_mate_bounded_below
         (by rw [Functor.comp_map]; infer_instance)
       exact this
     exact isIso_of_reflects_iso _ F
-  haveI : IsIso (F.mapDerivedCategory.map
+  have : IsIso (F.mapDerivedCategory.map
       ((PurCompactSupport.properComparison a g).app M)) := hrestricted
   exact isIso_of_reflects_iso _ F.mapDerivedCategory
 

@@ -27,13 +27,12 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-set_option linter.unusedVariables false in
 -- Elaborate the dependent raw-resolution and presentation families together.
 /-- Construct coherent first-page comparisons while retaining the supplied bicomplexes.
 (Stacks, Tags 015J, 015K and 012K) -/
 theorem exists_etaleCE_coherent_prescribed_resolutions
     (I : ∀ (X : Scheme.{u})
-      (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})),
+      (_K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})),
       HomologicalComplex₂ (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
         (ComplexShape.up ℤ) (ComplexShape.up ℕ))
     (a : ∀ (X : Scheme.{u})
@@ -68,7 +67,7 @@ theorem exists_etaleCE_coherent_prescribed_resolutions
       (M : ∀ {X Y : Scheme.{u}} (f : Y ⟶ X)
         (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
         (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}))
-        (v : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
+        (_v : ((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
           (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj),
         (D X K).sequence ⟶ (D Y L).sequence)
       (e : ∀ (X : Scheme.{u})

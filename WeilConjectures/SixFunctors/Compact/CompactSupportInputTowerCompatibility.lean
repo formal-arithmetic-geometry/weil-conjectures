@@ -39,7 +39,6 @@ hypothesis is used.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme Opposite
 open AlgebraicGeometry.ProEtale.IntegralPresentation
@@ -347,9 +346,9 @@ private theorem completedComp_change (W : Scheme.{u})
           (eqToIso (compactSupportModuleRes_eq l E W n.le_succ)))
         (scalarReductionDerivedRestriction l E W (n + 1)) ≪≫
       compactSupportRestrictionComp l E W (n + 1) n n.le_succ := by
-  letI := proEtaleCoefficientRestrictScalars_preservesFiniteLimits W
+  have := proEtaleCoefficientRestrictScalars_preservesFiniteLimits W
     (compactSupportLevelQuotient l E (n + 1) n n.le_succ)
-  letI := proEtaleCoefficientRestrictScalars_preservesFiniteColimits W
+  have := proEtaleCoefficientRestrictScalars_preservesFiniteColimits W
     (compactSupportLevelQuotient l E (n + 1) n n.le_succ)
   let h := compactSupportModuleRes_eq l E W n.le_succ
   let h₀ := coefficientRestrictionComp l E W n.le_succ
@@ -384,9 +383,9 @@ private theorem inputAdjacent (W : Scheme.{u})
       (sfDerivedReductionTransition l E W n).app K := by
   obtain ⟨D, hl⟩ := existsTestDatum l
   rw [sectionTransitionAdjoint l E W D hl n]
-  letI := proEtaleCoefficientRestrictScalars_preservesFiniteLimits W
+  have := proEtaleCoefficientRestrictScalars_preservesFiniteLimits W
     (compactSupportLevelQuotient l E (n + 1) n n.le_succ)
-  letI := proEtaleCoefficientRestrictScalars_preservesFiniteColimits W
+  have := proEtaleCoefficientRestrictScalars_preservesFiniteColimits W
     (compactSupportLevelQuotient l E (n + 1) n n.le_succ)
   exact (restrictedMate_change
     (derivedScalarExtensionRestrictionAdjunction l E W (n + 1)).choose

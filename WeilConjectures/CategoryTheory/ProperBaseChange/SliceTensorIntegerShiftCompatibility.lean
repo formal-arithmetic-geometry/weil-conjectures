@@ -36,11 +36,6 @@ import all WeilConjectures.Algebra.Homology.KFlatFixedTensor.KFlatFixedTensorTri
 
 @[expose] public noncomputable section
 
-set_option linter.unusedVariables false
-set_option linter.unusedSectionVars false
-set_option linter.unusedSimpArgs false
-set_option linter.unusedTactic false
-set_option linter.checkUnivs false
 set_option Elab.async true
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -65,6 +60,7 @@ structure TensorIntegerShiftComparisons
   /-- Extract the shift in the second argument, naturally in both inputs. -/
   second : ∀ n : ℤ, (𝟭 D).prod (shiftFunctor D n) ⋙ B ≅ B ⋙ shiftFunctor D n
 
+-- Transparent `def`: an opaque `theorem` leaves the coefficient universe unresolved.
 set_option linter.defProp false in
 @[instance_reducible]
 private def cachedCompose {C : Type c} [Category.{v} C] [EssentiallySmall.{a} C]

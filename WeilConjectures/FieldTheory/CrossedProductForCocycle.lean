@@ -109,7 +109,6 @@ private theorem scalar_mul_conjugation {ι : Type*} [Fintype ι] [DecidableEq ι
   simpa only [Units.val_mul, mul_inv_rev, mul_assoc] using
     scalar_conjugation t (B.val * M * (B⁻¹).val)
 
-set_option linter.unusedVariables false in
 /-- For a continuous homogeneous two-cocycle `z` of the absolute Galois group with values in the
 units of the separable closure `Kˢ`, there are a central simple algebra `A`, a splitting
 `e : Kˢ ⊗[K] A ≃ Mat_n(Kˢ)` with `n ≠ 0` and a locally constant `b : Gal(Kˢ/K) → GLₙ(Kˢ)` such
@@ -117,7 +116,7 @@ that `g(e(1 ⊗ a)) = b(g)⁻¹ e(1 ⊗ a) b(g)` and `b(g) g(b(h)) = c(g, h) b(g
 cocycle value of `z`. -/
 theorem exists_crossedProduct_data_for_cocycle (K : Type u) [Field K]
     (z : ContinuousCohomology.cocycles (galoisUnitsTopRep K) 2) :
-    ∃ (A : CSA.{u, u} K) (n : ℕ) (hn : n ≠ 0)
+    ∃ (A : CSA.{u, u} K) (n : ℕ) (_hn : n ≠ 0)
       (e : (SeparableClosure K ⊗[K] A) ≃ₐ[SeparableClosure K]
         Matrix (Fin n) (Fin n) (SeparableClosure K))
       (b : (SeparableClosure K ≃ₐ[K] SeparableClosure K) →

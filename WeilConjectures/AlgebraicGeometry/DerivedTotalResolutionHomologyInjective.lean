@@ -168,8 +168,6 @@ private theorem homology_exact_of_cycles_exact
     (M.toCycles (n - 1) n).hom ((g.f (n - 1)).hom t) at e
   rw [e, ht]
 
--- Preserve the inherited, unused negative-column augmentation hypothesis and its binder hp.
-set_option linter.unusedVariables false in
 /-- The total augmentation is injective on homology in every degree (Stacks, Tag 09IZ). -/
 theorem total_resolution_homology_injective
     (M : CochainComplex (ModuleCat R) ℤ)
@@ -185,7 +183,7 @@ theorem total_resolution_homology_injective
     (h_positive : ∀ p : ℤ, 0 < p → IsZero (K.X p))
     (h_augmentation_zero : ∀ q : ℤ,
       K.ιTotal (ComplexShape.up ℤ) 0 q q (by simp) ≫ ε.f q = a.f q)
-    (h_augmentation : ∀ (p q n : ℤ) (hp : p < 0)
+    (_h_augmentation : ∀ (p q n : ℤ) (_hp : p < 0)
       (h : ComplexShape.π (ComplexShape.up ℤ)
         (ComplexShape.up ℤ) (ComplexShape.up ℤ) (p, q) = n),
       K.ιTotal (ComplexShape.up ℤ) p q n h ≫ ε.f n = 0)

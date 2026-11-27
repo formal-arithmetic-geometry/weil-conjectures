@@ -23,7 +23,6 @@ and a common Tor interval are then transported through strict evaluation and der
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.ConstructibleExceptionalCoefficients
@@ -43,11 +42,11 @@ theorem integral_support_preservation (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.
           K.obj) := by
   intro K
   let hu : IsUnit (l : D.k) := PurCompactSupport.coefficientPrimeUnit l D _hl
-  letI : ∀ x : X, Invertible (l : X.residueField x) :=
+  let : ∀ x : X, Invertible (l : X.residueField x) :=
     fun x ↦ (map_natCast ((X ↘ Spec (.of D.k)).residueFieldAlgebraMap x) l) ▸
       ((PurCompactSupport.coefficientPrimeUnit l D _hl).map
         ((X ↘ Spec (.of D.k)).residueFieldAlgebraMap x)).invertible
-  letI : ∀ y : Y, Invertible (l : Y.residueField y) :=
+  let : ∀ y : Y, Invertible (l : Y.residueField y) :=
     fun y ↦ (map_natCast ((Y ↘ Spec (.of D.k)).residueFieldAlgebraMap y) l) ▸
       ((PurCompactSupport.coefficientPrimeUnit l D _hl).map
         ((Y ↘ Spec (.of D.k)).residueFieldAlgebraMap y)).invertible

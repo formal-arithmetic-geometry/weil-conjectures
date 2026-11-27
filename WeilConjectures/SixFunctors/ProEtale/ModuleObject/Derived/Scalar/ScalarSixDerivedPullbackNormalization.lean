@@ -25,7 +25,6 @@ public import WeilConjectures.SixFunctors.ScalarSixDerivedPullbackNormalization
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.defeqAttrib.useBackward true
-set_option linter.unusedSimpArgs false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 4096
@@ -125,7 +124,7 @@ private theorem scalarSixHorizontalMateTower
     exact hd
   have hN := congrArg (fun q ↦ q.app N) h
   simp only [TwoSquare.hComp, TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
-    TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.comp_id] at hN
   have hh := congrArg (fun z ↦ L₂.map (tY.hom.app N) ≫ z) hN

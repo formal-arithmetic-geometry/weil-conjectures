@@ -27,7 +27,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Compactification
 
-set_option linter.unusedVariables false in
 /-- The category of compactifications of a separated finite-type morphism `f` over a qcqs base
 is nonempty with quasi-compact open immersions, has dense common refinements, equalizing
 refinements and finite-family refinements, is cofiltered, and these statements are compatible
@@ -52,7 +51,7 @@ theorem compactificationCategory_properties {X S : Scheme.{u}} (f : X ⟶ S)
       (∀ (c d : Compactification f) (r : c ⟶ d),
         IsProper (r.baseChange t).hom) ∧
       (∀ (c d : Compactification f) (e : Compactification f)
-          (r : e ⟶ c) (s : e ⟶ d),
+          (_r : e ⟶ c) (_s : e ⟶ d),
         Nonempty ((baseChangeFunctor t).obj e ⟶ (baseChangeFunctor t).obj c) ∧
         Nonempty ((baseChangeFunctor t).obj e ⟶ (baseChangeFunctor t).obj d)) ∧
       (∀ (c d e : Compactification f) (r s : c ⟶ d) (h : e ⟶ c),

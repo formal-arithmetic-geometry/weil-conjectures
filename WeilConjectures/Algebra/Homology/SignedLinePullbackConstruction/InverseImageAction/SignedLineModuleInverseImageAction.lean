@@ -17,7 +17,6 @@ public import Mathlib.Algebra.Category.Grp.FilteredColimits
 @[expose] public section
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.unusedSectionVars false
 universe u v w
 open CategoryTheory CategoryTheory.Limits
 open CategoryTheory.Functor.sheafPullbackConstruction

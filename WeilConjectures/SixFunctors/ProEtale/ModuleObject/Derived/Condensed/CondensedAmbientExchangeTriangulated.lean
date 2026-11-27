@@ -25,7 +25,6 @@ Compatible shifts on its right adjoints make its isomorphism locus triangulated.
 set_option autoImplicit false
 set_option Elab.async false
 set_option synthInstance.maxSize 2048
-set_option linter.style.haveILetI false
 
 universe u
 

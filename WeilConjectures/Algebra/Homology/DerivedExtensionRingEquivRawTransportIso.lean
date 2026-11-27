@@ -162,7 +162,6 @@ private theorem derived_equivalence
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option linter.unusedVariables false in
 /-- Existence of the transported derived-functor isomorphism, before its counit equation. -/
 theorem exists_raw_transport_iso
     {R₀ B₀ R B : Type u}
@@ -181,13 +180,13 @@ theorem exists_raw_transport_iso
     (h₀ : L₀.IsLeftDerivedFunctor ε₀ (HomotopyCategory.quasiIso _ (.up ℤ)))
     (h : L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso _ (.up ℤ)))
     (eR : R₀ ≃+* R) (eB : B₀ ≃+* B)
-    (hRB : eB.toRingHom.comp (algebraMap R₀ B₀) =
+    (_hRB : eB.toRingHom.comp (algebraMap R₀ B₀) =
       (algebraMap R B).comp eR.toRingHom) :
     ∀ (E : DerivedCategory (ModuleCat.{u} B) ⥤ DerivedCategory (ModuleCat.{u} B₀))
-      (q : (HomotopyCategory.quotient (ModuleCat.{u} B) (.up ℤ) ⋙ DerivedCategory.Qh) ⋙ E ≅
+      (_q : (HomotopyCategory.quotient (ModuleCat.{u} B) (.up ℤ) ⋙ DerivedCategory.Qh) ⋙ E ≅
         (restrictScalars.{u} eB.toRingHom).mapHomologicalComplex (.up ℤ) ⋙
           (HomotopyCategory.quotient (ModuleCat.{u} B₀) (.up ℤ) ⋙ DerivedCategory.Qh))
-      (t : (restrictScalars.{u} eR.toRingHom).mapHomologicalComplex (.up ℤ) ⋙
+      (_t : (restrictScalars.{u} eR.toRingHom).mapHomologicalComplex (.up ℤ) ⋙
         (extendScalars (algebraMap R₀ B₀)).mapHomologicalComplex (.up ℤ) ≅
         (extendScalars (algebraMap R B)).mapHomologicalComplex (.up ℤ) ⋙
           (restrictScalars.{u} eB.toRingHom).mapHomologicalComplex (.up ℤ)),

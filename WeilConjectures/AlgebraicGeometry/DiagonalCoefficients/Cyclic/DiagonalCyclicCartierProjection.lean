@@ -27,7 +27,6 @@ set_option autoImplicit false
 set_option genSizeOf false
 set_option genInjectivity false
 set_option synthInstance.maxSize 4096
-set_option linter.unusedVariables false
 universe u
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj CategoryTheory.Functor
@@ -119,8 +118,8 @@ theorem diagonalCompleted_cyclicCartier
     [DiagonalTraceLocalizations l (ProjectiveLine Y)]
     [DiagonalTraceLocalizations l (diagonalSurface Y)]
     (D : DiagonalDerivedReduction l (diagonalScalarExtension l (diagonalSurface Y)))
-    (hcompletion : DiagonalCompletionSpec l (diagonalSurface Y) D)
-    (hsystem : DiagonalCycleSystemSpec l Y hY D)
+    (_hcompletion : DiagonalCompletionSpec l (diagonalSurface Y) D)
+    (_hsystem : DiagonalCycleSystemSpec l Y hY D)
     (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)
     (hδ : DiagonalTrace.IsDiagonalLimit l Y hY D δ)
     (family : Family l Y) (reference : Reference l Y δ family) (n : ℕ) :

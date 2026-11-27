@@ -124,7 +124,6 @@ theorem epi_homologyFunctor_rightDerivedFunctorPlus_map
     ((v.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE
       C (n + 1) (q := j) (by lia)).eq_of_tgt _ _)
 
-set_option linter.style.haveILetI false in
 theorem isIso_homologyFunctor_rightDerivedFunctorPlus_map
     {A : Type u₁} [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A]
     {B : Type u₂} [Category.{v₂} B] [Abelian B] [IsGrothendieckAbelian.{v₂} B]
@@ -138,8 +137,8 @@ theorem isIso_homologyFunctor_rightDerivedFunctorPlus_map
   intro j hj
   have hm := mono_homologyFunctor_rightDerivedFunctorPlus_map v n c hiso hmono j hj
   have he := epi_homologyFunctor_rightDerivedFunctorPlus_map v n c hiso hmono j hj
-  haveI := hm
-  haveI := he
+  have := hm
+  have := he
   exact isIso_of_mono_of_epi _
 
 /-- The canonical truncation `τ≤n K → K` induces an isomorphism on degree-`n` cohomology

@@ -81,7 +81,6 @@ private lemma normalized_roof_of_comparison
   rw [hvinv, ← Category.assoc, ← Category.assoc, hu]
   simp only [Category.assoc]
 
-set_option linter.all false in
 /-- A normalized coefficient roof localizes to the corresponding direct-image
 square mate. -/
 theorem relativeMV_normalized_coefficient_roof

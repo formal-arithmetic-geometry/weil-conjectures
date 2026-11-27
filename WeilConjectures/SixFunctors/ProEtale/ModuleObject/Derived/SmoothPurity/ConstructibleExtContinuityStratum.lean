@@ -685,7 +685,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 attribute [local instance] constructibleExtContinuityStratumHasZeroMorphisms
 attribute [local instance 2000] moduleColimits complexColimits
 
-set_option linter.unusedVariables false in
 -- The preserved statement includes admissibility; the proof works for every coefficient ring.
 /-- The canonical map from the filtered colimit of Hom(a!L,K_t[q]) to Hom(a!L,K[q])
 is invertible, equivalently bijective, for every integer q and every diagram with one
@@ -697,7 +696,7 @@ theorem constructibleExtContinuityStratum
     [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]
     [IsOpenImmersion uS] [QuasiCompact uS]
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
-    (hΛ : IsAdmissibleCoefficient Λ)
+    (_hΛ : IsAdmissibleCoefficient Λ)
     (L : supportModules Λ S) (hL : ProEtale.IsLisseCoefficientModule Λ L)
     {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]
     (K : I ⥤ CochainComplex (supportModules Λ X) ℤ)

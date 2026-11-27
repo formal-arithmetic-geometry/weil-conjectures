@@ -573,7 +573,6 @@ private theorem closed_preserves
 
 set_option backward.isDefEq.respectTransparency.types false
 
-set_option linter.unusedVariables false in
 -- Composite adjunctions and full-subcategory comparisons require explicit elaboration.
 /-- Local factorization of `f^!` on affine charts, together with bounded constructibility.
 Here `Ff`, `Fp`, `Fi` are right adjoints of `localizingLowerShriek` for `f`, the projection `p`
@@ -604,14 +603,14 @@ theorem restrictionLocal
       (localizingClosureProEtale Λ X).FullSubcategory)
     (_adjf : CondensedRing.localizingLowerShriek Λ cf.obj.obj hf ⊣ Ff) :
     (∀ {V U : Scheme.{u}} (v : V ⟶ Y) (u : U ⟶ X)
-        (hV : IsAffine V) (hU : IsAffine U)
-        (hv : IsOpenImmersion v) (hu : IsOpenImmersion u)
+        (_hV : IsAffine V) (_hU : IsAffine U)
+        (_hv : IsOpenImmersion v) (_hu : IsOpenImmersion u)
         (d : ℕ)
         (i : U ⟶ AffineSpace (ULift.{u} (Fin d)) V)
-        (hi : IsClosedImmersion i)
+        (_hi : IsClosedImmersion i)
         (q : U ⟶ V)
-        (hqi : i ≫ (AffineSpace.over (ULift.{u} (Fin d)) V).hom = q)
-        (hq : q ≫ v = u ≫ f)
+        (_hqi : i ≫ (AffineSpace.over (ULift.{u} (Fin d)) V).hom = q)
+        (_hq : q ≫ v = u ≫ f)
         (cp : Compactification.BoundaryCompactification
           ((AffineSpace.over (ULift.{u} (Fin d)) V).hom))
         (hp : ∀ K : DerivedCategory
@@ -623,7 +622,7 @@ theorem restrictionLocal
               ((CondensedRing.rightDerivedLowerShriekOfCompactification Λ cp.obj.obj).obj K))
         (Fp : (localizingClosureProEtale Λ V).FullSubcategory ⥤
           (localizingClosureProEtale Λ (AffineSpace (ULift.{u} (Fin d)) V)).FullSubcategory)
-        (adjp : CondensedRing.localizingLowerShriek Λ cp.obj.obj hp ⊣ Fp)
+        (_adjp : CondensedRing.localizingLowerShriek Λ cp.obj.obj hp ⊣ Fp)
         (ci : Compactification.BoundaryCompactification i)
         (hi' : ∀ K : DerivedCategory
             (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
@@ -634,7 +633,7 @@ theorem restrictionLocal
         (Fi : (localizingClosureProEtale Λ (AffineSpace
             (ULift.{u} (Fin d)) V)).FullSubcategory ⥤
           (localizingClosureProEtale Λ U).FullSubcategory)
-        (adji : CondensedRing.localizingLowerShriek Λ ci.obj.obj hi' ⊣ Fi),
+        (_adji : CondensedRing.localizingLowerShriek Λ ci.obj.obj hi' ⊣ Fi),
         ∃ (huStar : ∀ K : (localizingClosureProEtale Λ X).FullSubcategory,
             localizingClosureProEtale Λ U
               (((localizingClosureProEtale Λ X).ι ⋙
@@ -668,7 +667,7 @@ theorem restrictionLocal
         (∀ a, ∃ (V : Scheme.{u}) (v : V ⟶ Y),
           IsAffine V ∧ IsOpenImmersion v ∧
           ∃ (d : ℕ) (i : U a ⟶ AffineSpace (ULift.{u} (Fin d)) V)
-            (hi : IsClosedImmersion i) (q : U a ⟶ V),
+            (_hi : IsClosedImmersion i) (q : U a ⟶ V),
             i ≫ (AffineSpace.over (ULift.{u} (Fin d)) V).hom = q ∧ q ≫ v = u a ≫ f) := by
   set_option backward.isDefEq.respectTransparency.types true in
   set_option backward.isDefEq.respectTransparency true in

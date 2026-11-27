@@ -61,7 +61,6 @@ private theorem triangulated_inverse (C : Type u) [Category.{v} C] [Abelian C]
   have : E.IsTriangulated := Equivalence.IsTriangulated.mk' E inferInstance
   exact ⟨inferInstance, inferInstance, inferInstance, inferInstance⟩
 
-set_option linter.unusedVariables false in
 /-- K-injective localization is a triangulated equivalence, and every quasi-inverse gives
 an exact replacement functor, also on opposite categories. -/
 theorem replacement_triangulated (C : Type u) [Category.{v} C] [Abelian C]
@@ -74,11 +73,11 @@ theorem replacement_triangulated (C : Type u) [Category.{v} C] [Abelian C]
     (Qh (C := C)).IsEquivalence ∧
     (Qh (C := C)).IsTriangulated ∧
     ∀ (G : DerivedCategory C ⥤ KInjectives C)
-      (η : 𝟭 (KInjectives C) ≅ Qh ⋙ G) (ε : G ⋙ Qh ≅ 𝟭 (DerivedCategory C)),
+      (_η : 𝟭 (KInjectives C) ≅ Qh ⋙ G) (_ε : G ⋙ Qh ≅ 𝟭 (DerivedCategory C)),
       ∃ S : G.CommShift ℤ,
-        (fun [s : G.CommShift ℤ] ↦
+        (fun [_s : G.CommShift ℤ] ↦
           G.IsTriangulated ∧ (G ⋙ ι).IsTriangulated ∧ (G ⋙ ι).op.IsTriangulated)
-          (s := S) := by
+          (_s := S) := by
   have horth : (subcategoryAcyclic C).rightOrthogonal.IsTriangulated := inferInstance
   have hcat : CategoryTheory.IsTriangulated (KInjectives C) := inferInstance
   have hι : (ι (C := C)).IsTriangulated :=

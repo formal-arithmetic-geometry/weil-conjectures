@@ -34,7 +34,6 @@ set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false
 set_option genCtorIdx false
-set_option linter.all false
 
 attribute [local irreducible] HasDerivedCategory.standard
 
@@ -136,8 +135,8 @@ private theorem nativeIntegralIso_hom
   simp only [nativeIntegralIso, Iso.trans_hom, NatTrans.comp_app,
     Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.symm_hom,
     Functor.associator_hom_app, Functor.associator_inv_app,
-    Functor.rightUnitor_hom_app, Functor.comp_obj, Functor.id_obj, Category.assoc,
-    Category.id_comp, Category.comp_id]
+    Functor.rightUnitor_hom_app, Functor.comp_obj, Functor.id_obj,
+    Category.id_comp]
 
 private theorem nativeIntegralIso_inv
     {A B D N : Type*} [Category A] [Category B] [Category D] [Category N]
@@ -147,7 +146,7 @@ private theorem nativeIntegralIso_inv
   simp only [nativeIntegralIso, Iso.trans_inv, NatTrans.comp_app,
     Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app, Iso.symm_inv,
     Functor.associator_hom_app, Functor.associator_inv_app,
-    Functor.rightUnitor_inv_app, Functor.comp_obj, Category.id_comp, Category.comp_id]
+    Functor.rightUnitor_inv_app, Functor.comp_obj, Category.comp_id]
 
 private def nativeTransitionIso
     {A B D N : Type*} [Category A] [Category B] [Category D] [Category N]
@@ -191,12 +190,12 @@ theorem finiteCocone_exists
     letI := C.sectionsLimits
     letI := C.sectionsColimits
     Nonempty (FiniteCocone l X C) := by
-  letI := C.commutative
-  letI := C.sectionsAdditive
-  letI := C.sectionsLimits
-  letI := C.sectionsColimits
-  letI := ProEtale.nativeScalarForgetting_isEquivalence l X
-  haveI : (sections l X).IsEquivalence := by
+  have := C.commutative
+  have := C.sectionsAdditive
+  have := C.sectionsLimits
+  have := C.sectionsColimits
+  have := ProEtale.nativeScalarForgetting_isEquivalence l X
+  have : (sections l X).IsEquivalence := by
     unfold sections
     infer_instance
   let e : DerivedCategory.{u + 1} (ProEtale.AdicSheaf l X) ≌
@@ -204,32 +203,32 @@ theorem finiteCocone_exists
     (Functor.mapDerivedCategory.{u + 1, u + 2} (sections l X)).asEquivalence
   let a : (Functor.mapDerivedCategory.{u + 1, u + 2} (sections l X)) ≅ e.functor :=
     eqToIso (by rfl)
-  letI : e.functor.CommShift ℤ := Functor.CommShift.ofIso a ℤ
-  haveI : NatTrans.CommShift a.hom ℤ := Functor.CommShift.ofIso_compatibility a ℤ
-  haveI : e.functor.IsTriangulated := Functor.isTriangulated_of_iso a
-  haveI : e.functor.Additive := Functor.additive_of_iso a
-  haveI : e.inverse.Additive := Equivalence.inverse_additive e
-  letI : e.inverse.CommShift ℤ := e.commShiftInverse ℤ
-  letI : e.CommShift ℤ := e.commShift_of_functor ℤ
-  haveI : e.inverse.IsTriangulated :=
+  let : e.functor.CommShift ℤ := Functor.CommShift.ofIso a ℤ
+  have : NatTrans.CommShift a.hom ℤ := Functor.CommShift.ofIso_compatibility a ℤ
+  have : e.functor.IsTriangulated := Functor.isTriangulated_of_iso a
+  have : e.functor.Additive := Functor.additive_of_iso a
+  have : e.inverse.Additive := Equivalence.inverse_additive e
+  let : e.inverse.CommShift ℤ := e.commShiftInverse ℤ
+  let : e.CommShift ℤ := e.commShift_of_functor ℤ
+  have : e.inverse.IsTriangulated :=
     (Functor.isTriangulated_iff_comp_right e.counitIso).2 inferInstance
-  haveI tensorAdditive (E : Index l (PadicAlgCl l)) :
+  have tensorAdditive (E : Index l (PadicAlgCl l)) :
       (rationalTensor l X C E).Additive := rationalTensor_additive l X C E
-  letI tensorShift (E : Index l (PadicAlgCl l)) :
+  let tensorShift (E : Index l (PadicAlgCl l)) :
       (rationalTensor l X C E).CommShift ℤ := rationalTensor_shift l X C E
-  haveI tensorTriangulated (E : Index l (PadicAlgCl l)) :
+  have tensorTriangulated (E : Index l (PadicAlgCl l)) :
       (rationalTensor l X C E).IsTriangulated := rationalTensor_triangulated l X C E
-  letI stageTransitionShift {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
+  let stageTransitionShift {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
       ((GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) X).T h).CommShift
         ℤ := GeneralAlgebraicallyClosedCoefficients.stageTransitionCommShift
       l (PadicAlgCl l) X E L h
-  haveI tensorTransitionShift {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
+  have tensorTransitionShift {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
       NatTrans.CommShift (rationalTensorTransition l X C h).hom ℤ :=
     rationalTensorTransition_shift l X C h
   let A : FiniteCoconeData l X C := {
     Φ := fun E ↦ rationalTensor l X C E ⋙ e.inverse
     additive := fun E ↦ by
-      haveI := rationalTensor_additive l X C E
+      have := rationalTensor_additive l X C E
       constructor
       intro P Q f g
       simp only [Functor.comp_map, Functor.map_add]

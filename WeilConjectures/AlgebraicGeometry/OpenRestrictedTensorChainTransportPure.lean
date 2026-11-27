@@ -29,7 +29,6 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 
-set_option linter.unusedVariables false in
 /-- The open tensor restriction square carries a pure tensor to the same restricted germ. -/
 theorem openRestricted_tensor_chain_transport_pure
     {X X' S S' : Scheme.{u}}
@@ -61,10 +60,10 @@ theorem openRestricted_tensor_chain_transport_pure
     let R0 := R (U.ι ≫ f) (pullback.snd g' U.ι) z0
     let A0 := A (pullback.snd g' U.ι) z0
     let B0 := B (pullback.fst g' U.ι ≫ f') z0
-    let D0 := C z0
+    let _D0 := C z0
     let Q := stalkComplex g' z P
-    let Q0 := stalkComplex (pullback.snd g' U.ι) z0 P0
-    let V0 := tensorComplex (U.ι ≫ f) (pullback.fst g' U.ι ≫ f')
+    let _Q0 := stalkComplex (pullback.snd g' U.ι) z0 P0
+    let _V0 := tensorComplex (U.ι ≫ f) (pullback.fst g' U.ι ≫ f')
       g (pullback.snd g' U.ι) sq0 z0 P0
     let hp : g' z = U.ι (pullback.snd g' U.ι z0) :=
       congrArg (fun h : pullback g' U.ι ⟶ X => h z0) pullback.condition

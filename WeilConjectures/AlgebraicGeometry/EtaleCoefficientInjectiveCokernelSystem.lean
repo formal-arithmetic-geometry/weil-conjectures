@@ -24,7 +24,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
-set_option linter.unusedVariables false in
 /-- A compatible coefficient system embeds in a stagewise injective system, with
 compatible cokernels (Stacks, Tags 0EXZ and 04JC). -/
 theorem etale_coefficient_injective_cokernel_system
@@ -45,10 +44,10 @@ theorem etale_coefficient_injective_cokernel_system
     ∃ (FR : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})
     (φR : ∀ {i j : I} (f : i ⟶ j),
       (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (FR i) ⟶ FR j)
-    (hidentityR : ∀ i : I, φR (𝟙 i) =
+    (_hidentityR : ∀ i : I, φR (𝟙 i) =
       (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app
         (FR i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (FR i))
-    (hcompositionR : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),
+    (_hcompositionR : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),
       φR (f ≫ g) =
         (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)
           (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (FR i) ≫
@@ -56,17 +55,17 @@ theorem etale_coefficient_injective_cokernel_system
     (FI : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})
     (ψ : ∀ {i j : I} (f : i ⟶ j),
       (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (FI i) ⟶ FI j)
-    (hidentityI : ∀ i : I, ψ (𝟙 i) =
+    (_hidentityI : ∀ i : I, ψ (𝟙 i) =
       (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app
         (FI i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (FI i))
-    (hcompositionI : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),
+    (_hcompositionI : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),
       ψ (f ≫ g) =
         (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)
           (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (FI i) ≫
         (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (ψ f) ≫ ψ g)
     (ai : ∀ i : I, F i ⟶ FI i) (bi : ∀ i : I, FI i ⟶ FR i)
     (wi : ∀ i : I, ai i ≫ bi i = 0)
-    (hi : ∀ i : I, (ShortComplex.mk (ai i) (bi i) (wi i)).ShortExact),
+    (_hi : ∀ i : I, (ShortComplex.mk (ai i) (bi i) (wi i)).ShortExact),
       (∀ i : I, Injective (FI i)) ∧
       (∀ (i j : I) (f : i ⟶ j),
         φ f ≫ ai j = (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).map (ai i) ≫ ψ f) ∧

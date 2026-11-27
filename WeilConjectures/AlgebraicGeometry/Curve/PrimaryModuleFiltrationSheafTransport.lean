@@ -33,7 +33,6 @@ open CategoryTheory CategoryTheory.Limits ZeroObject Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-set_option linter.unusedVariables false
 
 /-- A supplied invariant primary subgroup chain transports to a filtration of étale sheaves.
 The chain is given as data rather than constructed as a Sylow chain. -/
@@ -47,12 +46,12 @@ theorem exists_sheaf_filtration_of_invariant_primary_chain
       ((pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).sheafFiber
         (A := AddCommGrpCat.{u + 1})).obj M)
     (haction : ∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)
-      (hτ : (algebraMap Ks Ω).comp g.toRingHom =
+      (_hτ : (algebraMap Ks Ω).comp g.toRingHom =
         τ.toRingHom.comp (algebraMap Ks Ω))
       (X : (Spec (.of K)).Etale)
       (x x' : (pointSmallEtale
         (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).fiber.obj X)
-      (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left)
+      (_hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left)
       (z : M.obj.obj (op X)),
       i.hom (R.obj.ρ g (i.inv ((pointSmallEtale
         (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).toPresheafFiber X x M.obj z))) =

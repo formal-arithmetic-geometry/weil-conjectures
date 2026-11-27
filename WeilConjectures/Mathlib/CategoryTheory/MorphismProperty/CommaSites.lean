@@ -34,7 +34,6 @@ for the topologies restricted from `J.over X` and `J'.over X` along the forgetfu
 
 @[expose] public section
 
-set_option linter.style.show false
 
 universe w v u
 
@@ -72,7 +71,7 @@ lemma compatiblePreserving_map : CompatiblePreserving.{w} K (MorphismProperty.Ov
     let g₂' : W' ⟶ Y₂ := MorphismProperty.Over.homMk f₂.left hw
     have hcomm : g₁' ≫ g₁ = g₂' ≫ g₂ := by
       apply MorphismProperty.Over.Hom.ext
-      show f₁.left ≫ g₁.left = f₂.left ≫ g₂.left
+      change f₁.left ≫ g₁.left = f₂.left ≫ g₂.left
       exact hleft
     have hT' : 𝟙 T'.left ≫ (f₁.left ≫ Y₁.hom) ≫ f = T'.hom := by
       simp only [Category.id_comp, Category.assoc]
@@ -81,11 +80,11 @@ lemma compatiblePreserving_map : CompatiblePreserving.{w} K (MorphismProperty.Ov
       MorphismProperty.Over.homMk (𝟙 T'.left) hT'
     have hf₁ : f₁ = e ≫ (MorphismProperty.Over.map ⊤ h).map g₁' := by
       apply MorphismProperty.Over.Hom.ext
-      show f₁.left = 𝟙 T'.left ≫ f₁.left
+      change f₁.left = 𝟙 T'.left ≫ f₁.left
       exact (Category.id_comp _).symm
     have hf₂ : f₂ = e ≫ (MorphismProperty.Over.map ⊤ h).map g₂' := by
       apply MorphismProperty.Over.Hom.ext
-      show f₂.left = 𝟙 T'.left ≫ f₂.left
+      change f₂.left = 𝟙 T'.left ≫ f₂.left
       exact (Category.id_comp _).symm
     have key := hx g₁' g₂' hg₁ hg₂ hcomm
     rw [hf₁, hf₂, op_comp, op_comp, Functor.map_comp_apply, Functor.map_comp_apply]

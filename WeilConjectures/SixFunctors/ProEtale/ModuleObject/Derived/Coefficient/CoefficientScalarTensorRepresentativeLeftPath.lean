@@ -24,7 +24,6 @@ scalar equations and the assumed derived tensor square.
 set_option autoImplicit false
 set_option cleanup.letToHave false
 set_option synthInstance.maxSize 2048
-set_option linter.unusedSectionVars false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory AlgebraicGeometry
 open scoped CategoryTheory.Obj ChangeOfRings

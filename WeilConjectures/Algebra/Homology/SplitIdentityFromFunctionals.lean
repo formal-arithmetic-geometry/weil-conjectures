@@ -86,7 +86,6 @@ private theorem submoduleSumEquiv_apply {R M : Type*} [CommRing R]
   change (x : M) + 0 + (0 + (t : M)) = (x : M) + (t : M)
   simp
 
-set_option linter.unusedVariables false in
 /-- Assemble the complement and identity complex once the neighboring maps respect the split. -/
 theorem exists_splitting_of_split_functionals
     {R : Type u} [CommRing R] (C : ChainComplex (ModuleCat.{max u v} R) ℤ)
@@ -101,7 +100,7 @@ theorem exists_splitting_of_split_functionals
       if h : j = i then h ▸ LinearMap.ker α
       else if h : j = i - 1 then h ▸ LinearMap.ker β else ⊤
     ∃ (C' T : ChainComplex (ModuleCat.{max u v} R) ℤ)
-      (g : ∀ j, C'.X j ≃ₗ[R] S j),
+      (_g : ∀ j, C'.X j ≃ₗ[R] S j),
       (∀ j : ℤ, j ≠ i → j ≠ i - 1 → Subsingleton (T.X j)) ∧
       ∃ (e : T.X i ≃ₗ[R] R) (f : T.X (i - 1) ≃ₗ[R] R),
         (∀ t : T.X i, f ((T.d i (i - 1)).hom t) = e t) ∧

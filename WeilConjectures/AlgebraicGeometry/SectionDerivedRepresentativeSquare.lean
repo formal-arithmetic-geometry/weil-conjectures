@@ -37,7 +37,6 @@ square.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.all false
 set_option backward.defeqAttrib.useBackward true
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
@@ -635,7 +634,7 @@ private theorem tensorator_Q_strict {C : Type*} [Category.{u + 1} C] [Abelian C]
         ((HomotopyCategory.quotient _ _).obj Q) := by
   rw [tensorator_Q_generic]
   change (𝟙 _ ⊗ₘ 𝟙 _) ≫ _ ≫ 𝟙 _ = _
-  simp only [id_tensorHom_id, Category.id_comp, Category.comp_id]
+  simp only [id_tensorHom_id, Category.id_comp]
   erw [Category.comp_id]
 
 private theorem cochain_tensor_comparison
@@ -681,6 +680,7 @@ private theorem ordinaryMonoidal_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
   unfold internalPullMonoidal
   exact totalInternalOplax_eq Λ f
 
+omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)] in
 private theorem delta_model {X Y : Scheme.{u}} (f : X ⟶ Y) :
     internalDelta Λ f =
       (letI := CondensedRing.monoidal_upperStar Λ f
@@ -696,7 +696,7 @@ private theorem internal_pair {X Y : Scheme.{u}} (f : X ⟶ Y)
       ResolutionConjugation.cInternal Λ f A B =
     ResolutionConjugation.aInternal Λ f A B ≫
       DerivedCategory.Q.map (actualInternalTotalIso Λ f A B).hom := by
-  letI := CondensedRing.monoidal_upperStar Λ f
+  let := CondensedRing.monoidal_upperStar Λ f
   rw [delta_model, actualInternalTotalIso_hom, totalInternalOplax_eq]
   with_unfolding_all
     simpa only [ResolutionConjugation.cInternal, ResolutionConjugation.aInternal,
@@ -942,7 +942,7 @@ private theorem unit_equation {X Y : Scheme.{u}} (f : X ⟶ Y) :
     unfold ResolutionConjugation.UnitEquation ResolutionConjugation.eta internalPullUnitArrow
       internalLocalizationFunctor internalCochainUnit at h
     simp only [cast_eq] at h
-    simp only [Functor.mapHomotopyCategoryFactors_hom_app, Category.id_comp] at hu
+    simp only [Functor.mapHomotopyCategoryFactors_hom_app] at hu
     erw [Category.id_comp] at hu
     erw [← hu] at h
     rw [e_eq_regular Λ X, e_eq_regular Λ Y] at h
@@ -1038,8 +1038,8 @@ attribute [local semireducible] tensor
 private theorem constraint_hypotheses {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ResolvingOplaxConstraints.SectionHypotheses Λ f
       (actualComparison Λ f) (actualUnit Λ f) := by
-  letI := ResolvingOplaxConstraints.derivedMonoidal Λ X
-  letI := ResolvingOplaxConstraints.derivedMonoidal Λ Y
+  let := ResolvingOplaxConstraints.derivedMonoidal Λ X
+  let := ResolvingOplaxConstraints.derivedMonoidal Λ Y
   refine ⟨?_, unit_equation Λ f⟩
   intro P Q
   have hp := pair_equation Λ f P Q
@@ -1063,6 +1063,7 @@ variable {A : Type a} {B : Type b} {C : Type c} {D : Type d}
   (μ : ∀ M N : C, L.obj (M ⊗ N) ⟶ L.obj M ⊗ L.obj N)
   (v : L.obj (q.obj (𝟙_ A)) ⟶ r.obj (𝟙_ B)) (P0 : ObjectProperty A)
 
+omit [MonoidalCategory A] [MonoidalCategory C] in
 private theorem GTripleOutput_model (P Q H : A) :
     ConstraintData.tripleOutput F L q r t ε P Q H =
       (ε.app P ⊗ₘ (ε.app Q ⊗ₘ ε.app H)) ≫
@@ -1126,8 +1127,8 @@ private theorem constraints_from_hypotheses {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hs : ResolvingOplaxConstraints.SectionHypotheses Λ f
       (actualComparison Λ f) (actualUnit Λ f)) :
     AssociatorNormalization Λ f ∧ UnitorNormalization Λ f := by
-  letI := ResolvingOplaxConstraints.derivedMonoidal Λ X
-  letI := ResolvingOplaxConstraints.derivedMonoidal Λ Y
+  let := ResolvingOplaxConstraints.derivedMonoidal Λ X
+  let := ResolvingOplaxConstraints.derivedMonoidal Λ Y
   have h := ResolvingOplaxConstraints.section_resolving_oplax_constraint_diagrams Λ f
     (actualComparison Λ f) (actualUnit Λ f) hs
   have hh := generic_constraint_normalization

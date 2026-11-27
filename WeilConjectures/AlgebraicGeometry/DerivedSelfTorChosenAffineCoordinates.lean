@@ -65,7 +65,6 @@ private theorem quotient_section_coordinates
         exact q.map_mul _ _ }
   exact ⟨LinearEquiv.ofBijective l hq, fun _ ↦ rfl⟩
 
-set_option linter.unusedVariables false in
 /-- Intrinsic self-Tor has affine resolution coordinates compatible with one augmented
 lift of the canonical quotient restriction on each basic inclusion.
 This theorem only constructs one compatible augmented lift on each basic inclusion;
@@ -101,7 +100,7 @@ theorem exists_derived_selfTor_chosen_affine_coordinates
           let TC := (tensorRight (ModuleCat.of C (C ⧸ J))).mapHomologicalComplex
             (.down ℕ)
           let ψ := Ideal.quotientMap J φ
-            (fun x hx ↦ i.ker.ideal_le_comap_ideal h hx)
+            (fun _ hx ↦ i.ker.ideal_le_comap_ideal h hx)
           ∃ (a : P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex
               (.down ℕ)).obj R.complex)
             (k : TA.obj P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex

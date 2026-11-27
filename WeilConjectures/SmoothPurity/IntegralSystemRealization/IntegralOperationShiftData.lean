@@ -80,9 +80,8 @@ private theorem tensorShifts_ext (s t : TensorShifts l E)
   cases hir
   rfl
 
-set_option linter.unusedVariables false in
 /-- The representative formulas uniquely determine the four tensor comparisons. -/
-theorem tensorShifts_existsUnique : ∃! s : TensorShifts l E, True := by
+theorem tensorShifts_existsUnique : ∃! _s : TensorShifts l E, True := by
   classical
   let sl := fun W r ↦ (systemTensorLeftShift_existsUnique l E W r).exists.choose
   let sr := fun W r ↦ (systemTensorRightShift_existsUnique l E W r).exists.choose

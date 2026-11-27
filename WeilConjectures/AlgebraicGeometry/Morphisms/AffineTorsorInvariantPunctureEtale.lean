@@ -54,7 +54,6 @@ private theorem puncture_etale_iff (R : CommRingCat.{u})
       (HasRingHomProperty.Spec_iff (P := @Etale)).mpr (RingHom.etale_algebraMap.mpr h)
     infer_instance
 
-set_option linter.unusedVariables false in
 /-- A subgroup quotient of a finite etale torsor is etale on the fixed principal open. -/
 theorem affine_torsor_invariant_puncture_etale
     (H : CommRingCat.{u}) (h : H)
@@ -62,13 +61,13 @@ theorem affine_torsor_invariant_puncture_etale
     [Module.Finite H C] [Module.FaithfullyFlat H C]
     (G : Type u) [Group G] [Finite G]
     (ρ : G → C →ₐ[H] C)
-    (hρone : ρ 1 = AlgHom.id H C)
-    (hρmul : ∀ a b, ρ (a * b) = (ρ a).comp (ρ b))
-    (hne : algebraMap H C h ≠ 0)
+    (_hρone : ρ 1 = AlgHom.id H C)
+    (_hρmul : ∀ a b, ρ (a * b) = (ρ a).comp (ρ b))
+    (_hne : algebraMap H C h ≠ 0)
     (hEt : Etale (Scheme.Opens.ι (X := Spec (CommRingCat.of C))
       (PrimeSpectrum.basicOpen (algebraMap H C h)) ≫
       Spec.map (CommRingCat.ofHom (algebraMap H C))))
-    (hrot : ∀ (Ω : Type u) [Field Ω] (a b : C →+* Ω),
+    (_hrot : ∀ (Ω : Type u) [Field Ω] (a b : C →+* Ω),
       a.comp (algebraMap H C) = b.comp (algebraMap H C) →
       a (algebraMap H C h) ≠ 0 →
       ∃! ζ : G, a.comp (ρ ζ).toRingHom = b)

@@ -22,8 +22,6 @@ The canonical constructions used by scalar exchange and its pullback cube.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 universe u
 open CategoryTheory CategoryTheory.Limits
 open AlgebraicGeometry AlgebraicGeometry.Scheme

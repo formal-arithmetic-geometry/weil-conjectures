@@ -24,7 +24,6 @@ have been established. No K-flatness or termwise flatness is needed in this step
 set_option autoImplicit false
 set_option cleanup.letToHave false
 set_option synthInstance.maxSize 2048
-set_option linter.unusedSectionVars false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory AlgebraicGeometry
 open scoped CategoryTheory.Obj ChangeOfRings

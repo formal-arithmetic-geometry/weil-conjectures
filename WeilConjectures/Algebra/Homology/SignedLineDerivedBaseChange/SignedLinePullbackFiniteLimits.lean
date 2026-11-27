@@ -32,7 +32,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 4096
@@ -65,9 +64,6 @@ variable {C D : Type u} [Category.{v} C] [Category.{v} D]
   {U : C ⥤ D} [U.IsContinuous J K]
   [J.HasSheafCompose (forget₂ CommRingCat.{max u v w} RingCat.{max u v w})]
   [K.HasSheafCompose (forget₂ CommRingCat.{max u v w} RingCat.{max u v w})]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{max u v w}]
-  [K.WEqualsLocallyBijective AddCommGrpCat.{max u v w}]
-  [HasWeakSheafify J AddCommGrpCat.{max u v w}]
   [HasWeakSheafify K AddCommGrpCat.{max u v w}]
   {R : Sheaf J CommRingCat.{max u v w}}
   {S : Sheaf K CommRingCat.{max u v w}}

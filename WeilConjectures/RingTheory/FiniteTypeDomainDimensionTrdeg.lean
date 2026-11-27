@@ -30,7 +30,6 @@ ideal has the same dimension.
 
 @[expose] public section
 
-set_option linter.style.haveILetI false
 
 universe u v
 
@@ -52,9 +51,9 @@ theorem finiteType_domain_ringKrullDim_eq_trdeg
     have h := Algebra.trdeg_eq_of_ringKrullDim_eq k S (hB := by simpa using hd)
     exact h
   have hfrac : Algebra.trdeg k (FractionRing S) = Algebra.trdeg k S := by
-    letI : SMul k (FractionRing S) :=
+    let : SMul k (FractionRing S) :=
       ⟨fun x z ↦ algebraMap S (FractionRing S) (algebraMap k S x) * z⟩
-    letI : Algebra k (FractionRing S) :=
+    let : Algebra k (FractionRing S) :=
       { algebraMap := (algebraMap S (FractionRing S)).comp (algebraMap k S)
         commutes' := by
           intro x z
@@ -62,7 +61,7 @@ theorem finiteType_domain_ringKrullDim_eq_trdeg
             z * algebraMap S (FractionRing S) (algebraMap k S x)
           exact mul_comm _ _
         smul_def' := by intro x z; rfl }
-    letI : IsScalarTower k S (FractionRing S) :=
+    have : IsScalarTower k S (FractionRing S) :=
       ⟨by
         intro x y z
         simp only [Algebra.smul_def]
@@ -74,7 +73,7 @@ theorem finiteType_domain_ringKrullDim_eq_trdeg
         rw [show algebraMap k (FractionRing S) x =
           algebraMap S (FractionRing S) (algebraMap k S x) from rfl]
         simp [mul_assoc]⟩
-    letI : Algebra.IsAlgebraic S (FractionRing S) :=
+    have : Algebra.IsAlgebraic S (FractionRing S) :=
       IsLocalization.isAlgebraic (FractionRing S) (nonZeroDivisors S)
     have hz : Algebra.trdeg S (FractionRing S) = 0 :=
       trdeg_eq_zero_iff.mpr inferInstance

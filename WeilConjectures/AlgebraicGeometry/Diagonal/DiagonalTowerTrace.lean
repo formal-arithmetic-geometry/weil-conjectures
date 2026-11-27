@@ -32,11 +32,10 @@ namespace AlgebraicGeometry.ProEtale
 
 open DiagonalTrace
 
-set_option linter.unusedVariables false in
 /-- The strict unit/section splitting defines the completed projective-line trace;
 its finite reductions are the torsion traces and the two diagonal integrals are one. -/
 theorem diagonalTower_trace (l : ℕ) [Fact l.Prime]
-    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)
+    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (_hpl : p ≠ l)
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))]
     [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
     [IsSeparated (Y ↘ Spec (.of k))]
@@ -46,8 +45,8 @@ theorem diagonalTower_trace (l : ℕ) [Fact l.Prime]
     [DiagonalTraceLocalizations l (ProjectiveLine Y)]
     [DiagonalTraceLocalizations l (diagonalSurface Y)]
     (D : DiagonalDerivedReduction l (diagonalScalarExtension l (diagonalSurface Y)))
-    (hcompletion : DiagonalCompletionSpec l (diagonalSurface Y) D)
-    (hsystem : DiagonalCycleSystemSpec l Y hY D)
+    (_hcompletion : DiagonalCompletionSpec l (diagonalSurface Y) D)
+    (_hsystem : DiagonalCycleSystemSpec l Y hY D)
     (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)
     (hδ : IsDiagonalLimit l Y hY D δ) :
     ∃ (tq : Result l (ULift.{u} (Padic l)) (ProjectiveLine Y ↘ Y))

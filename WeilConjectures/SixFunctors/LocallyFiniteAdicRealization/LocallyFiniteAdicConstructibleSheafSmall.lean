@@ -32,7 +32,6 @@ set_option backward.isDefEq.respectTransparency.types true
 set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false
-set_option linter.all false
 set_option synthInstance.maxSize 2048
 attribute [local instance] CategoryTheory.Sheaf.monoidalCategory
   CategoryTheory.Sheaf.braidedCategory

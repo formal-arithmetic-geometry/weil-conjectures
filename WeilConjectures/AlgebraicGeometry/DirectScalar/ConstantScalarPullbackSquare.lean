@@ -27,9 +27,6 @@ is needed, so no open-immersion hypothesis enters.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
--- Avoid replaying expensive sectionwise transport tactics for linting.
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale.DirectScalar

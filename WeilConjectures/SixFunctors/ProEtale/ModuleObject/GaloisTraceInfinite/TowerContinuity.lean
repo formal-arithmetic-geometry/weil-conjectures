@@ -31,9 +31,6 @@ open CategoryTheory Category Limits
 
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
--- several lemmas do not need all the instances of the section variables
-set_option linter.unusedSectionVars false
-
 namespace AlgebraicGeometry.ProEtale.GaloisTower
 
 open Scheme CondensedRing
@@ -49,6 +46,7 @@ instance : (infFunctor Λ ginf).Additive := by
   unfold infFunctor
   infer_instance
 
+omit [WeaklyEtale ginf] in
 lemma transport_naturality {M M' : CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
     (condensedRingObj Λ X)} (φ : M ⟶ M') {j j' : T.J} (h : j ≤ j') :
     T.transport Λ M h ≫ (T.levelFunctor Λ j').map φ =
@@ -90,6 +88,7 @@ noncomputable def complexCocone : Cocone (T.complexDiagram Λ K) where
       naturality _ _ f := HomologicalComplex.hom_ext _ _ fun n ↦
         (T.transport_comp_infTransport Λ (K.X n) (leOfHom f)).trans (comp_id _).symm }
 
+omit [WeaklyEtale ginf] in
 lemma complexDiagram_map_f {j j' : T.J} (f : j ⟶ j') (n : ℤ) :
     ((T.complexDiagram Λ K).map f).f n = T.transport Λ (K.X n) (leOfHom f) := rfl
 

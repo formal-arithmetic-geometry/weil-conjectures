@@ -38,10 +38,6 @@ comparison. All categories are ordinary uncompleted module derived categories.
 set_option linter.privateModule false
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option linter.unusedVariables false
--- Replaying categorical transport tactics for linting duplicates elaboration work.
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 
 universe u
 

@@ -13,9 +13,6 @@ set_option linter.privateModule false
 /-! # Tensor compatibility of a square of exact derived functors -/
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
-set_option linter.unusedSimpArgs false
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency false
 universe u a b c d
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
@@ -41,7 +38,7 @@ include hd in
 /-- The invertible tensor comparison determines the monoidal structure, including its unit.
 -/
 private theorem monoidal_eq_of_delta : m = n := by
-  letI := m
+  let := m
   have hu : @η _ _ _ _ _ _ F m.toOplaxMonoidal =
       @η _ _ _ _ _ _ F n.toOplaxMonoidal := by
     apply Functor.eq_of_leftUnitality (δ F (𝟙_ E) (𝟙_ E))
@@ -100,7 +97,7 @@ private theorem exactDerivedMonoidal_eq_of_delta (m : F₁.mapDerivedCategory.Mo
             F₁.leftDerivedFunctorIsoMapDerivedCategory.hom.app M)) :
     m = exactClosedDerivedMonoidal F₁ := by
   unfold exactClosedDerivedMonoidal
-  letI := F₁.residueDerivedMonoidal
+  let := F₁.residueDerivedMonoidal
   apply monoidal_eq_of_delta
   intro K M
   rw [hd, Functor.Monoidal.transport_δ]

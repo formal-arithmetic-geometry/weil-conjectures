@@ -340,7 +340,6 @@ private theorem substitution_naturality {Z X Y : Scheme.{u}} {h : Z ⟶ X} {f : 
     Category.assoc, ← L.map_comp, ← R.map_comp_assoc, hφ, R.map_comp_assoc, he,
     ← Category.assoc, L.map_comp, Category.assoc]
 
-set_option linter.unusedVariables false in
 /-- Quotient normalization and recursive substitution: the ordinary quotient towers of the
 prescribed representatives give coherent reduction presentations, and recursive substitution
 along finite expressions is invertible and natural. -/
@@ -354,7 +353,7 @@ theorem completedComparisonQuotientNormalization
     (φ : ∀ i : Fin 3, DerivedCategory.Q.obj (P i).obj ≅ (M i).obj)
     :
     ∃ (good : GoodExpressions l E h f P)
-      (invertible : ∀ {W : Scheme.{u}} (A : StrictQuotient.Expression h f 3 W),
+      (_invertible : ∀ {W : Scheme.{u}} (A : StrictQuotient.Expression h f 3 W),
         IsIso (substitution l E P (fun i ↦ (M i).obj) φ good A)),
     (∀ {W : Scheme.{u}} (A : StrictQuotient.Expression h f 3 W),
       (∀ n : ℕ, StrictQuotient.Good l E

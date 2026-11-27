@@ -299,11 +299,10 @@ private theorem doubleQuotEquiv_mk_mk
   subst U
   rfl
 
-set_option linter.unusedVariables false in
 /-- Construct the first quotient and transport the remaining-list hypotheses, without
 using the induction assertion or concluding that this first quotient is resolved. -/
 theorem popescuEighthPowerLifting_quotientData
-    (n : ℕ) (hn : 1 ≤ n)
+    (n : ℕ) (_hn : 1 ≤ n)
     (R : Type u) (A : Type v) (Λ : Type w)
     [CommRing R] [CommRing A] [CommRing Λ]
     [Algebra R A] [Algebra R Λ] [IsNoetherianRing R] [FinitePresentation R A]

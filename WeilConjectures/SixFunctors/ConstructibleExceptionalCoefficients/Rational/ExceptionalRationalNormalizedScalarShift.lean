@@ -29,7 +29,6 @@ invertible shift comparison can be cancelled. `commonStageTransition_eq` and
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 attribute [local irreducible] HasDerivedCategory.standard Padic
   WeilConjectures.sfIntegralConstructible WeilConjectures.sfRationalTriangulationDatum
   CategoryTheory.ScalarLocalization.category
@@ -82,10 +81,10 @@ private theorem normalized_q_shift
     ext K
     apply (cancel_mono (rG.hom.app (SX.obj K) ≫ J.map (x.hom.app K))).mp
     simpa [e, Category.assoc, ← Functor.map_comp] using hn K
-  haveI : e.CommShift ℤ := by
+  have : e.CommShift ℤ := by
     dsimp only [e]
     infer_instance
-  haveI : (Functor.whiskerRight q.hom JY).CommShift ℤ := by
+  have : (Functor.whiskerRight q.hom JY).CommShift ℤ := by
     rw [he]
     infer_instance
   exact NatTrans.CommShift.of_whiskerRight q.hom JY
@@ -171,23 +170,23 @@ private theorem integral_normalized_comparison_shift
   let q := Scalar.counitQ l Ω SX SY
     (A.comparison c (s := .integral E) (t := .integral L) a ha)
   have hn := A.comparison_normalized c (s := .integral E) (t := .integral L) a ha
-  letI : SX.functor.CommShift ℤ := canonicalIntegralScalarShift l Ω SX
-  letI : SY.functor.CommShift ℤ := canonicalIntegralScalarShift l Ω SY
-  letI := canonicalIntegralScalarShift_compatibility l Ω SX
-  letI := canonicalIntegralScalarShift_compatibility l Ω SY
-  letI := constructionInclusionShift l Ω X (.integral E)
-  letI := constructionInclusionShift l Ω Y (.integral E)
-  letI := constructionInclusionShift l Ω X (.integral L)
-  letI := constructionInclusionShift l Ω Y (.integral L)
-  letI : (RingStage.inclusion l Ω Y (.integral L)).Faithful :=
+  let : SX.functor.CommShift ℤ := canonicalIntegralScalarShift l Ω SX
+  let : SY.functor.CommShift ℤ := canonicalIntegralScalarShift l Ω SY
+  let := canonicalIntegralScalarShift_compatibility l Ω SX
+  let := canonicalIntegralScalarShift_compatibility l Ω SY
+  let := constructionInclusionShift l Ω X (.integral E)
+  let := constructionInclusionShift l Ω Y (.integral E)
+  let := constructionInclusionShift l Ω X (.integral L)
+  let := constructionInclusionShift l Ω Y (.integral L)
+  have : (RingStage.inclusion l Ω Y (.integral L)).Faithful :=
     (finiteTorConstructibleIntegral l L.carrier Y).fullyFaithfulι.faithful
-  letI : (A.operation c (.integral E)).F.CommShift ℤ :=
+  let : (A.operation c (.integral E)).F.CommShift ℤ :=
     (A.operation c (.integral E)).leftShift
-  letI : (A.operation c (.integral L)).F.CommShift ℤ :=
+  let : (A.operation c (.integral L)).F.CommShift ℤ :=
     (A.operation c (.integral L)).leftShift
-  letI := A.leftShift c (.integral E)
-  letI := A.leftShift c (.integral L)
-  letI := PurCompactSupport.comparison_commShift a c
+  let := A.leftShift c (.integral E)
+  let := A.leftShift c (.integral L)
+  let := PurCompactSupport.comparison_commShift a c
   exact normalized_q_shift
     (RingStage.inclusion l Ω X (.integral E))
     (RingStage.inclusion l Ω Y (.integral E))
@@ -248,33 +247,33 @@ theorem rational_common_normalized_scalar_shift
   let GI := (A.operation c (.integral L)).F
   let FR := (P.operation c E).F
   let GR := (P.operation c L).F
-  letI : HasShift (C.{u, v} l Ω X (.integral E)) ℤ := shift l Ω X (.integral E)
-  letI : HasShift (C.{u, v} l Ω Y (.integral E)) ℤ := shift l Ω Y (.integral E)
-  letI : HasShift (C.{u, v} l Ω X (.integral L)) ℤ := shift l Ω X (.integral L)
-  letI : HasShift (C.{u, v} l Ω Y (.integral L)) ℤ := shift l Ω Y (.integral L)
-  letI : FI.CommShift ℤ := (A.operation c (.integral E)).leftShift
-  letI : GI.CommShift ℤ := (A.operation c (.integral L)).leftShift
-  letI : SX.functor.CommShift ℤ := canonicalIntegralScalarShift l Ω SX
-  letI : SY.functor.CommShift ℤ := canonicalIntegralScalarShift l Ω SY
-  letI : QX.CommShift ℤ := integralRationalizationShift l Ω E X
-  letI : QY.CommShift ℤ := integralRationalizationShift l Ω E Y
-  letI : PX.CommShift ℤ := integralRationalizationShift l Ω L X
-  letI : PY.CommShift ℤ := integralRationalizationShift l Ω L Y
-  letI : FR.CommShift ℤ := s i
-  letI : GR.CommShift ℤ := s j
-  letI : TX.CommShift ℤ :=
+  let : HasShift (C.{u, v} l Ω X (.integral E)) ℤ := shift l Ω X (.integral E)
+  let : HasShift (C.{u, v} l Ω Y (.integral E)) ℤ := shift l Ω Y (.integral E)
+  let : HasShift (C.{u, v} l Ω X (.integral L)) ℤ := shift l Ω X (.integral L)
+  let : HasShift (C.{u, v} l Ω Y (.integral L)) ℤ := shift l Ω Y (.integral L)
+  let : FI.CommShift ℤ := (A.operation c (.integral E)).leftShift
+  let : GI.CommShift ℤ := (A.operation c (.integral L)).leftShift
+  let : SX.functor.CommShift ℤ := canonicalIntegralScalarShift l Ω SX
+  let : SY.functor.CommShift ℤ := canonicalIntegralScalarShift l Ω SY
+  let : QX.CommShift ℤ := integralRationalizationShift l Ω E X
+  let : QY.CommShift ℤ := integralRationalizationShift l Ω E Y
+  let : PX.CommShift ℤ := integralRationalizationShift l Ω L X
+  let : PY.CommShift ℤ := integralRationalizationShift l Ω L Y
+  let : FR.CommShift ℤ := s i
+  let : GR.CommShift ℤ := s j
+  let : TX.CommShift ℤ :=
     GeneralAlgebraicallyClosedCoefficients.transitionCommShift l Ω X i j h
-  letI : TY.CommShift ℤ :=
+  let : TY.CommShift ℤ :=
     GeneralAlgebraicallyClosedCoefficients.transitionCommShift l Ω Y i j h
-  haveI : α.hom.CommShift ℤ := integral_normalized_comparison_shift l Ω D hl A c E L inc
-  haveI : qE.hom.CommShift ℤ := hs i
-  haveI : qL.hom.CommShift ℤ := hs j
+  have : α.hom.CommShift ℤ := integral_normalized_comparison_shift l Ω D hl A c E L inc
+  have : qE.hom.CommShift ℤ := hs i
+  have : qL.hom.CommShift ℤ := hs j
   obtain ⟨cX, hcX, hcXs⟩ := canonical_scalar_localization_shift l Ω i j h X SX
     (A.integralScalar_eq E L inc true) (A.integralScalar_normalized E L inc true)
   obtain ⟨cY, hcY, hcYs⟩ := canonical_scalar_localization_shift l Ω i j h Y SY
     (A.integralScalar_eq E L inc false) (A.integralScalar_normalized E L inc false)
-  letI := hcXs
-  letI := hcYs
+  let := hcXs
+  let := hcYs
   let q₀ : QX ⋙ (FR ⋙ TY) ≅ QX ⋙ (TX ⋙ GR) :=
     (Functor.associator _ _ _).symm ≪≫ isoWhiskerRight qE.symm TY ≪≫
       Functor.associator _ _ _ ≪≫ isoWhiskerLeft FI cY ≪≫
@@ -300,18 +299,18 @@ theorem rational_common_normalized_scalar_shift
       ((P.action c L).1 (SX.functor.obj K)).symm
       (P.identity c E K) (P.identity c L (SX.functor.obj K))
       (hcX K) (hcY (FI.obj K)) (P.scalar_normalized c E L inc K)
-  haveI : q₀.hom.CommShift ℤ := by
+  have : q₀.hom.CommShift ℤ := by
     dsimp only [q₀, Iso.trans_hom, Iso.symm_hom, isoWhiskerLeft_hom,
       isoWhiskerRight_hom]
     infer_instance
-  haveI : (Functor.whiskerLeft QX β.hom).CommShift ℤ := by
+  have : (Functor.whiskerLeft QX β.hom).CommShift ℤ := by
     rw [he]
     infer_instance
-  letI : ∀ x : X, Invertible (l : X.residueField x) :=
+  let : ∀ x : X, Invertible (l : X.residueField x) :=
     sfCompactSupportScalarResidueUnit l D.k
       (PurCompactSupport.coefficientPrimeUnit l D hl) X
   let WX := (MorphismProperty.isomorphisms _).inverseImage QX
-  haveI : QX.IsLocalization WX := rationalization_isLocalization l Ω E X
+  have : QX.IsLocalization WX := rationalization_isLocalization l Ω E X
     (integral_residue_tor D l hl E.carrier X).2
   have hβ : β.hom.CommShift ℤ := shift_of_whisker QX WX β.hom
   have hx := commonStageTransition_eq l Ω X h

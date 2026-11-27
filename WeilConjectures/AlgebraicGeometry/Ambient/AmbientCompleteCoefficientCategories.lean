@@ -864,6 +864,7 @@ private theorem pbcCompleteRaw_factor (h : E ≤ F) (hne : E ≠ F) :
   exact (congrArg (pbcAmbientCompleteLocalization l Ω W E ⋙ ·) he).trans
     (pbcAmbientCompleteRaw_exists l Ω W h).exists.choose_spec
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 private theorem pbcConstructibleRaw_factor (h : E ≤ F) (hne : E ≠ F) :
     pbcStageLocalization l Ω W E ⋙ pbcScalarExtension l Ω W hDim.out hInv.out h =
       pbcIntegralScalarExtension l Ω W hDim.out hInv.out h ⋙

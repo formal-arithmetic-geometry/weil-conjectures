@@ -54,14 +54,13 @@ private theorem domain_stalk_of_flat {Y Z : Scheme.{u}}
     ‹Module.FaithfullyFlat (Z.presheaf.stalk (g y)) (Y.presheaf.stalk y)›
   exact hf.injective.isDomain (g.stalkMap y).hom
 
-set_option linter.unusedVariables false in
 /-- The normalization stalk in the punctured DVR situation is a domain.
 -/
 theorem punctured_dvr_normalization_stalk_isDomain
     {X : Scheme.{u}} [IsLocallyNoetherian X] (U : X.Opens)
     {P : Scheme.{u}} (p : P ⟶ U.toScheme) [IsFinite p] (hetale : Etale p)
     (x : (p ≫ U.ι).normalization)
-    (hs : (p ≫ U.ι).fromNormalization x ∉ U)
+    (_hs : (p ≫ U.ι).fromNormalization x ∉ U)
     [IsDomain (X.presheaf.stalk ((p ≫ U.ι).fromNormalization x))]
     [IsDiscreteValuationRing (X.presheaf.stalk ((p ≫ U.ι).fromNormalization x))] :
     IsDomain ((p ≫ U.ι).normalization.presheaf.stalk x) := by

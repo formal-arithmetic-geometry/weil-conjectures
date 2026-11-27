@@ -81,8 +81,6 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true
 set_option synthInstance.maxSize 4096
-set_option linter.unusedSectionVars false
-set_option linter.all false
 
 open CategoryTheory CategoryTheory.Limits Opposite
 open CategoryTheory.RoosAdjunctionUnit
@@ -172,7 +170,8 @@ private theorem preservesProducts (F : A ⥤ B)
     exact preservesLimit_of_iso_diagram F Discrete.natIsoFunctor.symm
 
 omit [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)]
-  [HasDerivedCategory.{w'} B] [HasDerivedCategory.{w'} (ℕᵒᵖ ⥤ B)] in
+  [HasDerivedCategory.{w'} B] [HasDerivedCategory.{w'} (ℕᵒᵖ ⥤ B)]
+  [HasLimitsOfShape ℕᵒᵖ A] [HasLimitsOfShape ℕᵒᵖ B] in
 private theorem signedComparison (F : A ⥤ B) [F.Additive]
     (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (p : ℤ) :
     (roosAdditiveComparison F X).f (p + 1) ≫
@@ -514,6 +513,12 @@ private theorem square_factors (e : F ⋙ G ≅ H ⋙ K) (P : CochainComplex A0 
   simp only [Iso.inv_hom_id_app_assoc]
   rw [Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc]
 
+omit [HasCountableProducts A0] [HasCountableProducts A1]
+  [HasCountableProducts A2] [HasCountableProducts A3]
+  [HasLimitsOfShape ℕᵒᵖ A0] [HasLimitsOfShape ℕᵒᵖ A1]
+  [HasLimitsOfShape ℕᵒᵖ A2] [HasLimitsOfShape ℕᵒᵖ A3]
+  [HasDerivedCategory.{w0} A0] [HasDerivedCategory.{w1} A1]
+  [HasDerivedCategory.{w2} A2] [HasDerivedCategory.{w3} A3] in
 private theorem tower_square_factors (e : F ⋙ G ≅ H ⋙ K)
     (X : CochainComplex (ℕᵒᵖ ⥤ A0) ℤ) :
     (towerSquare F G H K e).hom.app (DerivedCategory.Q.obj X) ≫
@@ -651,6 +656,16 @@ private theorem normalized_square
   erw [(Functor.mapDerivedCategorySquareIso e).hom.naturality_assoc]
   rfl
 
+omit [HasCountableProducts A0] [HasCountableProducts A1]
+  [HasCountableProducts A2] [HasCountableProducts A3]
+  [HasLimitsOfShape ℕᵒᵖ A0] [HasLimitsOfShape ℕᵒᵖ A1] [HasLimitsOfShape ℕᵒᵖ A2]
+  [HasDerivedCategory.{w0} A0] [HasDerivedCategory.{w1} A1] [HasDerivedCategory.{w2} A2]
+  [HasDerivedCategory.{w0} (ℕᵒᵖ ⥤ A0)] [HasDerivedCategory.{w1} (ℕᵒᵖ ⥤ A1)]
+  [HasDerivedCategory.{w2} (ℕᵒᵖ ⥤ A2)]
+  [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+  [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+  [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+  [PreservesFiniteLimits K] [PreservesFiniteColimits K] in
 private theorem augmentation_square (e : F ⋙ G ≅ H ⋙ K)
     (X : CochainComplex (ℕᵒᵖ ⥤ A0) ℤ) (P : CochainComplex A0 ℤ)
     (gamma : (Functor.const ℕᵒᵖ).obj P ⟶ X.asFunctor) :

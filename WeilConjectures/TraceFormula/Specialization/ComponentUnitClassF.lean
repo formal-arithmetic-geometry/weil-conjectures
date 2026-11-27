@@ -295,6 +295,7 @@ theorem specializationUnit_comp_inv_map_comp_exchange_eq
     rw [← reassoc_of% (lowerStarUnit_comp ℓ r ι')]
     simp [boundedConstructibleLowerStarCompOfEq]
 
+-- the section variables implied by the `IsProper` hypotheses are part of the statement
 set_option linter.overlappingInstances false in
 /-- **Fact (III) for a morphism of models over a clopen component**: with the data of
 `specializationUnit_comp_inv_map_comp_exchange_eq`, if `B'`, `F'` and `r` are proper, the map

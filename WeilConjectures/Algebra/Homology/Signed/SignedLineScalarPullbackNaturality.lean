@@ -55,8 +55,9 @@ attribute [local reducible] sheafCompose ModuleCat.restrictScalars
   PresheafOfModules.restrictScalars PresheafOfModules.restrictScalarsObj Over.forget
   ringedSitePullbackSection
 
-set_option linter.unusedSectionVars false
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat] [K.WEqualsLocallyBijective AddCommGrpCat]
+    [HasWeakSheafify J AddCommGrpCat] [HasWeakSheafify K AddCommGrpCat] in
 private theorem pullback_section_map
     {R : Sheaf J CommRingCat.{max u v w}} {R' : Sheaf K CommRingCat.{max u v w}}
     (a : (sheafCompose J (forget₂ CommRingCat RingCat)).obj R ⟶
@@ -75,6 +76,8 @@ private theorem pullback_section_map
   exact (congrArg (fun g ↦ g.val.app (op V) x)
     ((pullbackPushforwardAdjunction a).unit.naturality f)).symm
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat] [K.WEqualsLocallyBijective AddCommGrpCat]
+    [HasWeakSheafify J AddCommGrpCat] [HasWeakSheafify K AddCommGrpCat] in
 private theorem pullback_section_restrict
     {R : Sheaf J CommRingCat.{max u v w}} {R' : Sheaf K CommRingCat.{max u v w}}
     (a : (sheafCompose J (forget₂ CommRingCat RingCat)).obj R ⟶
@@ -93,6 +96,8 @@ private theorem pullback_section_restrict
   exact (PresheafOfModules.naturality_apply
     ((pullbackPushforwardAdjunction a).unit.app M).val f.op x).symm
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat] [K.WEqualsLocallyBijective AddCommGrpCat]
+    [HasWeakSheafify J AddCommGrpCat] [HasWeakSheafify K AddCommGrpCat] in
 private theorem pullback_section_smul
     {R : Sheaf J CommRingCat.{max u v w}} {R' : Sheaf K CommRingCat.{max u v w}}
     (a : (sheafCompose J (forget₂ CommRingCat RingCat)).obj R ⟶
@@ -109,6 +114,8 @@ private theorem pullback_section_smul
   let := module_pushforward_isRightAdjoint_of_universes a
   exact (((pullbackPushforwardAdjunction a).unit.app M).val.app (op V)).hom.map_smul r x
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat] [K.WEqualsLocallyBijective AddCommGrpCat]
+    [HasWeakSheafify J AddCommGrpCat] [HasWeakSheafify K AddCommGrpCat] in
 private theorem pullback_basis
     [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]
     (hcover : CoverPreserving J K U)

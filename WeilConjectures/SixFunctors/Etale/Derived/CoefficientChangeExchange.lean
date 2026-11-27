@@ -421,8 +421,7 @@ lemma isCompactPullbackCompatible_compactlySupportedGlobalSectionsRestrictScalar
     (derivedRestrictScalarsCompRightDerivedGlobalSectionsIso_hom_app_globalSectionsTransport ρ h)
     (derivedRestrictScalarsCompRightDerivedLowerShriekIso_baseChangeMap ρ aX sq) K'
 
--- The proof uses neither the surjectivity of `ρ` nor the finiteness of `Λ'`.
-set_option linter.unusedVariables false in
+-- Keep the section instances as hypotheses of this public statement.
 set_option linter.unusedSectionVars false in
 /-- Compact cohomology commutes with finite-level coefficient reduction: for a surjection
 `ρ : Λ →+* Λ'` of finite rings whose exponent is invertible on the separably closed field `k` and a
@@ -432,7 +431,7 @@ separated finite-type `a_X : X ⟶ Spec k`, the canonical coefficient comparison
 every `K ∈ Dᵇctf(X, Λ)`. -/
 theorem isCoefficientChange_compactlySupportedGlobalSectionsRestrictScalarsIso [IsSeparated aX]
     [LocallyOfFiniteType aX] [QuasiCompact aX] [HasInvertibleExponent Λ (Spec (.of k))]
-    (hρ : Function.Surjective ρ) :
+    (_hρ : Function.Surjective ρ) :
     IsCoefficientChange ρ (compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX)
       (compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ') aX)
       (compactlySupportedGlobalSectionsRestrictScalarsIso ρ aX) := by

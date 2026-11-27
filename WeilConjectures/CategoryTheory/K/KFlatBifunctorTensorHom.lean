@@ -21,7 +21,6 @@ unbounded tensor--Hom adjunction.
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
@@ -61,31 +60,42 @@ private noncomputable abbrev curry {P K Y : C} :
 private noncomputable abbrev uncurry {P K Y : C} :=
   (curry adj (P := P) (K := K) (Y := Y)).symm
 
+omit [HasCountableProducts C] [HasCountableCoproducts C] [T.Additive] [H.Additive]
+    [∀ (A : Cᵒᵖ), (H.obj A).Additive] in
 private lemma curry_smul {P K Y : C} (r : ℤˣ) (f : (T.obj P).obj K ⟶ Y) :
     curry adj (r • f) = r • curry adj f :=
   by
   simpa only [Units.smul_def] using map_zsmul (curry adj) (r : ℤ) f
 
+omit [HasCountableProducts C] [HasCountableCoproducts C] [T.Additive] [H.Additive]
+    [∀ (A : Cᵒᵖ), (H.obj A).Additive] in
 private lemma uncurry_smul {P K Y : C} (r : ℤˣ)
     (f : K ⟶ (H.obj (op P)).obj Y) :
     uncurry adj (r • f) = r • uncurry adj f :=
   by
   simpa only [Units.smul_def] using map_zsmul (uncurry adj) (r : ℤ) f
 
+omit [HasCountableProducts C] [HasCountableCoproducts C] [T.Additive] [H.Additive]
+    [∀ (A : Cᵒᵖ), (H.obj A).Additive] in
 private lemma curry_one {P P' K Y : C} (f : P' ⟶ P)
     (g : (T.obj P).obj K ⟶ Y) :
     curry adj ((T.map f).app K ≫ g) = curry adj g ≫ (H.map f.op).app Y :=
   adj.homEquiv_naturality_one f g
 
+omit [HasCountableProducts C] [HasCountableCoproducts C] [T.Additive] [H.Additive]
+    [∀ (A : Cᵒᵖ), (H.obj A).Additive] in
 private lemma curry_two {P K K' Y : C} (f : K' ⟶ K)
     (g : (T.obj P).obj K ⟶ Y) :
     curry adj ((T.obj P).map f ≫ g) = f ≫ curry adj g :=
   adj.homEquiv_naturality_two f g
 
+omit [HasCountableProducts C] [HasCountableCoproducts C] [T.Additive] [H.Additive]
+    [∀ (A : Cᵒᵖ), (H.obj A).Additive] in
 private lemma curry_three {P K Y Y' : C} (g : (T.obj P).obj K ⟶ Y) (f : Y ⟶ Y') :
     curry adj (g ≫ f) = curry adj g ≫ (H.obj (op P)).map f :=
   adj.homEquiv_naturality_three f g
 
+omit [HasCountableProducts C] in
 private lemma total_d (T : C ⥤ C ⥤ C)
     [T.Additive] [∀ A, (T.obj A).Additive] (P K : CochainComplex C ℤ) (p q r r' : ℤ)
     (h : p + q = r) (h' : r + 1 = r') :
@@ -102,6 +112,7 @@ private lemma total_d (T : C ⥤ C ⥤ C)
       (show p + (q + 1) = r' by omega)]
   simp
 
+omit [HasCountableProducts C] in
 private lemma total_d_assoc (T : C ⥤ C ⥤ C)
     [T.Additive] [∀ A, (T.obj A).Additive] (P K : CochainComplex C ℤ) (p q r r' : ℤ)
     (h : p + q = r) (h' : r + 1 = r') {Z : C} (f : (total T P K).X r' ⟶ Z) :
@@ -318,6 +329,7 @@ private theorem internalHomEquiv_naturality
   rw [curry_three adj]
   simp only [assoc, curry_one adj, curry_two adj]
 
+omit [HasCountableProducts C] in
 private theorem total_map_zero (P : CochainComplex C ℤ) :
     (T.map₂CochainComplex.obj P).PreservesZeroMorphisms := by
   constructor
@@ -329,6 +341,7 @@ private theorem total_map_zero (P : CochainComplex C ℤ) :
   rw [ι_mapBifunctorMap]
   simp only [Functor.map_zero, comp_zero, zero_comp, HomologicalComplex.zero_f]
 
+omit [HasCountableProducts C] in
 private theorem total_map_id (P K : CochainComplex C ℤ) :
     mapBifunctorMap (𝟙 P) (𝟙 K) T (.up ℤ) = 𝟙 (total T P K) := by
   have h := (T.map₂CochainComplex.obj P).map_id K
@@ -376,6 +389,7 @@ private noncomputable def qHomEquiv [HasDerivedCategory.{v} C]
     (Iso.homCongr ((DerivedCategory.quotientCompQhIso C).app K)
       ((DerivedCategory.quotientCompQhIso C).app Y))
 
+omit [HasCountableProducts C] [HasCountableCoproducts C] in
 private theorem qHomEquiv_map [HasDerivedCategory.{v} C]
     (K Y : CochainComplex C ℤ) [Y.IsKInjective] (f : K ⟶ Y) :
     qHomEquiv K Y ((HomotopyCategory.quotient C (.up ℤ)).map f) =

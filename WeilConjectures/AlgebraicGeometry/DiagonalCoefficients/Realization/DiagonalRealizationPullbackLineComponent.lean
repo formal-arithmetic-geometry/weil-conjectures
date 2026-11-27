@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Realization
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj CategoryTheory.Functor

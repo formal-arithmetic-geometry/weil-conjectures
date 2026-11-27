@@ -21,7 +21,6 @@ Source: Stacks Project, Tags 06YY, 07A4 and 08JC.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
@@ -116,7 +115,7 @@ private theorem derived_counit_commShift (adj : E ⊣ U) :
     letI := b.leftAdjointCommShift ℤ
     NatTrans.CommShift E.leftDerivedFunctorCounit ℤ := by
   let b := adj.derivedAdjunction.ofNatIsoRight U.rightDerivedFunctorIsoMapDerivedCategory
-  letI := b.leftAdjointCommShift ℤ
+  let := b.leftAdjointCommShift ℤ
   have := b.commShift_of_rightAdjoint ℤ
   let H := E.mapHomotopyCategory (.up ℤ)
   let V := U.mapHomotopyCategory (.up ℤ)
@@ -605,8 +604,8 @@ private theorem rightExactTensorComparison_shiftCancellation_aux
           (K ⊗ L)) := by
   let b := adj.derivedAdjunction.ofNatIsoRight U.rightDerivedFunctorIsoMapDerivedCategory
   let e := ad.leftAdjointUniq b
-  letI := ad.leftAdjointCommShift ℤ
-  letI := b.leftAdjointCommShift ℤ
+  let := ad.leftAdjointCommShift ℤ
+  let := b.leftAdjointCommShift ℤ
   have := ad.commShift_of_rightAdjoint ℤ
   have := b.commShift_of_rightAdjoint ℤ
   have := derived_counit_commShift E U adj
@@ -675,7 +674,7 @@ theorem rightExactTensorComparison_shiftCancellation
         ((((curriedTensor (DerivedCategory C)).obj K).commShiftIso n).hom.app L)⟦-n⟧' ≫
         (shiftFunctorCompIsoId (DerivedCategory C) n (-n) (add_neg_cancel n)).hom.app
           (((curriedTensor (DerivedCategory C)).obj K).obj L)) := by
-  letI := ad.leftAdjointCommShift ℤ
+  let := ad.leftAdjointCommShift ℤ
   simpa only [curriedTensor_map_app, curriedTensor_obj_map, curriedTensor_obj_obj,
     Category.assoc] using
     rightExactTensorComparison_shiftCancellation_aux E U adj G ad r hr μ hμ K L n

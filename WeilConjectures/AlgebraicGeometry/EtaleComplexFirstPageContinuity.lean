@@ -30,7 +30,6 @@ local macro_rules
   | `(tactic| lia) => `(tactic| first | exact le_refl _ | omega)
 
 -- The dependent first-page and graded-class witnesses are elaborated together.
-set_option linter.unusedVariables false in
 /-- Sheaf continuity gives the canonical isomorphism on each first-page term.
 (Stacks, Tags 0EZM and 09YQ). -/
 theorem etale_complex_first_page_continuity
@@ -57,7 +56,7 @@ theorem etale_complex_first_page_continuity
           (ComplexShape.up ℤ)).hom.app (F i) ≫
         ((upperStar AddCommGrpCat.{u + 1} (D.map g)).mapHomologicalComplex
           (ComplexShape.up ℤ)).map (φ f) ≫ φ g)
-    (a : ℤ) (hbelow : ∀ (i : I) (n : ℤ), n < a → IsZero ((F i).X n))
+    (a : ℤ) (_hbelow : ∀ (i : I) (n : ℤ), n < a → IsZero ((F i).X n))
     (G : Iᵒᵖ ⥤ CochainComplex (Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)
     (eG : ∀ i : I, G.obj (op i) ≅
       ((upperStar AddCommGrpCat.{u + 1} (c.π.app i)).mapHomologicalComplex
@@ -77,7 +76,7 @@ theorem etale_complex_first_page_continuity
         (DerivedCategory.Q.obj
           (((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex
             (ComplexShape.up ℤ)).obj K)))
-    (hP : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (_hP : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y)
       (K : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ),
       P f K = (DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} p).map
         ((rightDerivedGlobalSections AddCommGrpCat.{u + 1} Y).map
@@ -99,12 +98,12 @@ theorem etale_complex_first_page_continuity
     (H : Iᵒᵖ ⥤ AddCommGrpCat.{u + 1})
     (eH : ∀ i : I, H.obj (op i) ≅
       (cohomology AddCommGrpCat.{u + 1} (D.obj i) p).obj (DerivedCategory.Q.obj (F i)))
-    (hH : ∀ (i j : I) (f : j ⟶ i), H.map f.op =
+    (_hH : ∀ (i j : I) (f : j ⟶ i), H.map f.op =
       (eH i).hom ≫ P (D.map f) (F i) ≫
         (cohomology AddCommGrpCat.{u + 1} (D.obj j) p).map
           (DerivedCategory.Q.map (φ f)) ≫ (eH j).inv)
     (L : Cocone G) (hL : IsColimit L)
-    (q : ℤ)
+    (_q : ℤ)
 (E : Iᵒᵖ ⥤ SpectralSequence AddCommGrpCat.{u + 1}
       (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1)
       (E' : SpectralSequence AddCommGrpCat.{u + 1}

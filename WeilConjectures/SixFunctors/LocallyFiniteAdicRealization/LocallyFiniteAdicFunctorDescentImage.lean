@@ -36,7 +36,6 @@ set_option backward.isDefEq.respectTransparency.types true
 set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false
-set_option linter.all false
 
 attribute [local irreducible] HasDerivedCategory.standard
 
@@ -57,13 +56,13 @@ theorem normalizedFunctor_descent_image
     [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))] (D : NormalizedFunctor l X) :
     ∀ K, ProEtale.DerivedCategory.boundedAdicConstructible l X K ↔
       ∃ A, Nonempty (D.J.obj A ≅ K) := by
-  letI := D.commutative
-  letI := D.sectionsAdditive
-  letI := D.sectionsLimits
-  letI := D.sectionsColimits
-  letI : (ProEtale.AdicSheaf.forgetAb l X).IsEquivalence :=
+  have := D.commutative
+  have := D.sectionsAdditive
+  have := D.sectionsLimits
+  have := D.sectionsColimits
+  have : (ProEtale.AdicSheaf.forgetAb l X).IsEquivalence :=
     ProEtale.nativeScalarForgetting_isEquivalence l X
-  haveI : (sections l X).IsEquivalence := by
+  have : (sections l X).IsEquivalence := by
     unfold sections
     infer_instance
   let S := (sections l X).mapDerivedCategory

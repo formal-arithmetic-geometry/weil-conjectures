@@ -164,6 +164,7 @@ private theorem levelComparison_hom (W : Scheme.{u})
   ext U b
   exact (pbcLevelConstantComparison_exists W d n).exists.choose_spec U b
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The ambient scalar extension agrees with the embedding tensor along `E ≤ M`. -/

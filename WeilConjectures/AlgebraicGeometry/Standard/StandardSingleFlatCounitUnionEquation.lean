@@ -47,8 +47,6 @@ private theorem unionEquation_factor
   simpa only [a, Iso.trans_hom, Iso.symm_hom, asIso_hom, Category.assoc] using
     (Iso.hom_inv_id_assoc a m).symm
 
-set_option linter.unusedVariables false in
--- Preserve the original names of the nondependent forall proof binders.
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 /-- Naturality of the Mayer--Vietoris cone supplies the remaining pullback and counit data:
 for any bounded-above flat complex `K` with an identification `e` of the derived direct image
@@ -66,8 +64,8 @@ theorem standardSingleFlatCounitUnionEquation
     letI := HasDerivedCategory.standard A.Modules
     letI := HasDerivedCategory.standard B.Modules
     ∀ (K : CochainComplex (SheafOfModules.{u} (moduleRings B.toRingedSpace)) ℤ)
-    (hbounded : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (K.X i))
-    (hflat : ∀ i : ℤ, SheafOfModules.IsFlat (K.X i))
+    (_hbounded : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (K.X i))
+    (_hflat : ∀ i : ℤ, SheafOfModules.IsFlat (K.X i))
     (e : (schemeDerivedDirectImage ((U ⊔ V).ι ≫ p)).obj
           ((DerivedCategory.singleFunctor _ 0).obj N) ≅
           DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj K)),

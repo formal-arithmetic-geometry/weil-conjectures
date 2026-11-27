@@ -142,7 +142,6 @@ private theorem closureSquare_mate
     R hR hunit K
   exact hpush
 
-set_option linter.unusedVariables false in
 /-- A single rational root line extends to the prescribed closure line, and
 its shifted scalar/direct-image mate is invertible for a qcqs morphism. -/
 theorem diagonalClosure_lineComparison
@@ -156,7 +155,7 @@ theorem diagonalClosure_lineComparison
       (CondensedRing.lowerStar (Profinite.continuousMapRingObj.{u} E.1) f).rightDerivedFunctor)
     (hunit : IsCanonicalRightDerived
       (CondensedRing.lowerStar (Profinite.continuousMapRingObj.{u} E.1) f) R hR) :
-    ∃ line : Endpoint (Profinite.padicSubfieldRingObjToPadicAlgCl l E)
+    ∃ _line : Endpoint (Profinite.padicSubfieldRingObjToPadicAlgCl l E)
         (spRationalTwist X l E) (spQbarTwist X l) (closureLineMap l E X),
       ∃ square : RestrictionSquare (Profinite.padicSubfieldRingObjToPadicAlgCl l E) f R
           (scalarRightDerived (Profinite.padicAlgClRingObj.{u} l) f),

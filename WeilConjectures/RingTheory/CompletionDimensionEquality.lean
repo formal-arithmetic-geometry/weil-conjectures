@@ -33,14 +33,10 @@ theorem completion_dimension_eq (A : Type u) [CommRing A] [IsNoetherianRing A]
     [IsLocalRing A] :
     ringKrullDim (AdicCompletion (IsLocalRing.maximalIdeal A) A) = ringKrullDim A := by
   let B := AdicCompletion (IsLocalRing.maximalIdeal A) A
-  set_option linter.style.haveILetI false in
-  letI : IsNoetherianRing B := AdicCompletion.isNoetherianRing _
-  set_option linter.style.haveILetI false in
-  letI : IsLocalRing B := inferInstance
-  set_option linter.style.haveILetI false in
-  letI : IsLocalHom (algebraMap A B) := inferInstance
-  set_option linter.style.haveILetI false in
-  letI : (IsLocalRing.maximalIdeal B).LiesOver (IsLocalRing.maximalIdeal A) :=
+  have : IsNoetherianRing B := AdicCompletion.isNoetherianRing _
+  have : IsLocalRing B := inferInstance
+  have : IsLocalHom (algebraMap A B) := inferInstance
+  have : (IsLocalRing.maximalIdeal B).LiesOver (IsLocalRing.maximalIdeal A) :=
     ⟨(IsLocalRing.maximalIdeal_comap (algebraMap A B)).symm⟩
   have h := Ideal.height_eq_height_add_of_liesOver_of_hasGoingDown
     (IsLocalRing.maximalIdeal A) (IsLocalRing.maximalIdeal B)

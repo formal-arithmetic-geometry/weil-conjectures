@@ -25,7 +25,6 @@ import Mathlib.RingTheory.Noetherian.Basic
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
   AlgebraicGeometry.Scheme
@@ -58,11 +57,11 @@ theorem point_sections_finiteness_integral (D : FiniteFieldDatum.{u})
   let M := DerivedCategory.Q.obj
     (((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).obj C)
   have hdvr := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
-  letI : IsDiscreteValuationRing O := hdvr.2.2.2.2.2.2.2.1
-  letI : IsNoetherianRing R := isNoetherianRing_of_ringEquiv O ULift.ringEquiv.symm
+  let : IsDiscreteValuationRing O := hdvr.2.2.2.2.2.2.2.1
+  let : IsNoetherianRing R := isNoetherianRing_of_ringEquiv O ULift.ringEquiv.symm
   have hO : Function.Bijective (AdicCompletion.of J O) :=
     ((Padic.finite_module_adic_complete_and_hom.{u, u, u} l E).1 O).2.1
-  letI : IsAdicComplete J O := AdicCompletion.of_bijective_iff.mp hO
+  let : IsAdicComplete J O := AdicCompletion.of_bijective_iff.mp hO
   have hR : IsAdicComplete I R := by
     have ht := (IsAdicComplete.congr_ringEquiv J
       (ULift.ringEquiv.symm : O ≃+* R)).mpr (inferInstance : IsAdicComplete J O)
@@ -76,13 +75,13 @@ theorem point_sections_finiteness_integral (D : FiniteFieldDatum.{u})
       Module.Finite R ((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} R) i).obj M) := by
     intro i
     let N := (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} R) i).obj M
-    letI : Finite (N ⧸ (I • ⊤ : Submodule R N)) := hcoh i
+    let : Finite (N ⧸ (I • ⊤ : Submodule R N)) := hcoh i
     exact (ModuleCat.finite_and_completion_bijective_of_isDerivedComplete I hcomplete
       N (DerivedCategory.isDerivedComplete_homology I M hc i)
       (inferInstance : Module.Finite (R ⧸ I) (N ⧸ (I • ⊤ : Submodule R N)))).1
   refine ⟨⟨hs, hfg, hc⟩, ?_⟩
   have hf : (pointIntegralToField l E).Flat := by
-    letI := (Padic.coefficientExtension_localization_uniformizer.{u, u} l E).1
+    let := (Padic.coefficientExtension_localization_uniformizer.{u, u} l E).1
     have ho : (O.subtype : O →+* E).Flat :=
       RingHom.flat_algebraMap_iff.mpr
         (IsLocalization.flat E (Submonoid.powers (Padic.coefficientExtensionUniformizer l E)))

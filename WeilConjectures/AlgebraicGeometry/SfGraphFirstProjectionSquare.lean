@@ -465,22 +465,15 @@ private noncomputable def word_projection_map
           (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) (t.a ≫ t.e) t.p f
             ((Category.assoc _ _ _).trans t.fac).symm).inv.app K))
 
-set_option linter.unusedTactic false in
-set_option linter.unreachableTactic false in
 private theorem word_projection_components
     (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (t : EtaleGraphPresentation f)
     (M : DerivedCategoryModule A X) (K : DerivedCategoryModule A Y) :
     sfGraphWordProjection A t M K = word_projection_map A t M K := by
   simp only [word_projection_map, word_projection_raw, sfGraphWordProjection]
-  first
-  | (unfold sfGraphProjectionWord
-     simp only [Functor.map_comp, EtaleGraphPresentation.functor,
-       Functor.comp_map, Functor.comp_obj, Category.assoc])
-  | simp only [Functor.associator_hom_app, Functor.isoWhiskerLeft_hom,
-      Functor.whiskerLeft_app, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-      Functor.map_comp, EtaleGraphPresentation.functor, Functor.comp_map,
-      Functor.comp_obj, Category.id_comp, Category.assoc]
+  unfold sfGraphProjectionWord
+  simp only [Functor.map_comp, EtaleGraphPresentation.functor,
+    Functor.comp_map, Functor.comp_obj, Category.assoc]
 
 -- The proper/open projection before applying the coefficient compositor.
 private noncomputable def compact_projection_raw

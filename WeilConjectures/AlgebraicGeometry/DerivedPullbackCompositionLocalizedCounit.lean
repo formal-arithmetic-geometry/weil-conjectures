@@ -126,8 +126,6 @@ private theorem pushforward_comparison_inv
 variable [∀ S : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
 
-set_option linter.style.haveILetI false in
--- Inlining these instance proofs avoids costly let-bound instance comparisons.
 -- The composite pushforward objects require dependent sheaf type comparisons.
 /-- The left-derived lift equation followed by the localized underived composite
 counit equals the pasted underived expression (Stacks, Tags 0096, 079W and 0D5S). -/
@@ -152,12 +150,12 @@ theorem derivedPullbackComposition_localized_counit
   set_option backward.isDefEq.respectTransparency false in
   set_option backward.isDefEq.respectTransparency.types false in
   classical
-  letI : Limits.HasBinaryBiproducts X.Modules := inferInstance
-  letI : Limits.HasBinaryBiproducts Y.Modules := inferInstance
-  letI : Limits.HasBinaryBiproducts Z.Modules := inferInstance
-  letI := (Classical.choose exists_derivedPullbackComposition.{u, w}) f
-  letI := (Classical.choose exists_derivedPullbackComposition.{u, w}) g
-  letI := (Classical.choose exists_derivedPullbackComposition.{u, w}) (f ≫ g)
+  let : Limits.HasBinaryBiproducts X.Modules := inferInstance
+  let : Limits.HasBinaryBiproducts Y.Modules := inferInstance
+  let : Limits.HasBinaryBiproducts Z.Modules := inferInstance
+  let := (Classical.choose exists_derivedPullbackComposition.{u, w}) f
+  let := (Classical.choose exists_derivedPullbackComposition.{u, w}) g
+  let := (Classical.choose exists_derivedPullbackComposition.{u, w}) (f ≫ g)
   let ε {A B : Scheme.{u}} (s : A ⟶ B) :=
     (Classical.choose (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) s
   let a {A B : Scheme.{u}} (s : A ⟶ B) :=
@@ -174,7 +172,7 @@ theorem derivedPullbackComposition_localized_counit
     (Scheme.Modules.pushforwardComp f g) K
   simp only [pushforward_comparison_inv, CategoryTheory.Functor.map_id,
     Category.id_comp] at hC
-  letI := (Classical.choose (Classical.choose_spec
+  let := (Classical.choose (Classical.choose_spec
     (Classical.choose_spec exists_derivedPullbackComposition.{u, w}))) (f ≫ g)
   have hc := (Classical.choose_spec (Classical.choose_spec (Classical.choose_spec
     (Classical.choose_spec exists_derivedPullbackComposition.{u, w})))).1 f g

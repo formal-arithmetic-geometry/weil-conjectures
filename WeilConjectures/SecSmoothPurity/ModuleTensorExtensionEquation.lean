@@ -28,7 +28,6 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace CategoryTheory.CochainPullback
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.checkUnivs false
 
 variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
   {D : Type uD} [Category.{vD} D] [EssentiallySmall.{w} D]

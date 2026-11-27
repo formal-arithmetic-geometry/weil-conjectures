@@ -45,8 +45,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace Rep
 
-set_option linter.style.haveILetI false
-set_option linter.unusedSectionVars false
 
 section Construction
 
@@ -56,14 +54,16 @@ variable {G : Type u} [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
   [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
   {A : Type v} [Ring A] [Finite A]
 
+-- Omitting them would drop them from the signature of `ccD`, which uses this lemma.
+set_option linter.unusedSectionVars false in
 private theorem action_continuous
     (M : DiscreteContinuousRep.{v, u, max u w} A G) (n : ℕ)
     (c : @ContinuousMap (Fin n → G) M.obj.V _ ⊥) :
     @Continuous _ M.obj.V _ ⊥ (fun g : Fin (n + 1) → G ↦
       M.obj.ρ (g 0) (c (fun i ↦ g i.succ))) := by
-  letI : TopologicalSpace M.obj.V := ⊥
-  letI : DiscreteTopology M.obj.V := ⟨rfl⟩
-  letI : MulAction G M.obj.V :=
+  let : TopologicalSpace M.obj.V := ⊥
+  have : DiscreteTopology M.obj.V := ⟨rfl⟩
+  let : MulAction G M.obj.V :=
     { smul := fun a x ↦ M.obj.ρ a x
       one_smul := by intro x; change M.obj.ρ 1 x = x; rw [map_one]; rfl
       mul_smul := by
@@ -71,7 +71,7 @@ private theorem action_continuous
         change M.obj.ρ (a * b) x = M.obj.ρ a (M.obj.ρ b x)
         rw [map_mul]
         rfl }
-  haveI : ContinuousSMul G M.obj.V :=
+  have : ContinuousSMul G M.obj.V :=
     continuousSMul_iff_stabilizer_isOpen.mpr M.property
   exact continuous_smul.comp ((continuous_apply 0).prodMk
     (c.continuous.comp (continuous_pi fun i ↦ continuous_apply i.succ)))
@@ -221,34 +221,34 @@ theorem continuousCochains_deltaFunctor
   classical
   dsimp only
   let h := Classical.choose (discreteModules_abelian.{u, v, max u w} G A)
-  letI := h
-  letI : Preadditive (DiscreteContinuousRep.{v, u, max u w} A G) := h.toPreadditive
-  letI : Preadditive (ModuleCat.{max u w} A) :=
+  let := h
+  let : Preadditive (DiscreteContinuousRep.{v, u, max u w} A G) := h.toPreadditive
+  let : Preadditive (ModuleCat.{max u w} A) :=
     (inferInstance : Abelian (ModuleCat.{max u w} A)).toPreadditive
-  letI := (Classical.choose_spec
+  let := (Classical.choose_spec
     (discreteModules_abelian.{u, v, max u w} G A)).choose_spec.1
-  letI : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G, TopologicalSpace M.obj.V :=
+  let : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G, TopologicalSpace M.obj.V :=
     fun _ ↦ ⊥
-  letI : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G, DiscreteTopology M.obj.V :=
+  have : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G, DiscreteTopology M.obj.V :=
     fun _ ↦ ⟨rfl⟩
-  letI : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G,
+  have : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G,
       ContinuousConstSMul A M.obj.V :=
     fun _ ↦ ⟨fun _ ↦ continuous_of_discreteTopology⟩
   let F := ccFunctor (G := G) (A := A)
   let U := ObjectProperty.ι (fun X : Rep.{max u w} A G ↦
     ∀ m : X.V, IsOpen {g : G | X.ρ g m = m}) ⋙
     forget₂ (Rep.{max u w} A G) (ModuleCat.{max u w} A)
-  haveI : PreservesFiniteLimits U := (Classical.choose_spec
+  have : PreservesFiniteLimits U := (Classical.choose_spec
     (discreteModules_abelian.{u, v, max u w} G A)).choose_spec.2.1
-  haveI : U.Additive := Functor.additive_of_preserves_binary_products U
-  haveI : F.Additive := by
+  have : U.Additive := Functor.additive_of_preserves_binary_products U
+  have : F.Additive := by
     constructor
     intro M N f g
     apply HomologicalComplex.hom_ext
     intro n
     ext c t
     exact congrArg (fun k ↦ k.hom (c t)) (Functor.map_add U (f := f) (g := g))
-  letI : HasZeroMorphisms (DiscreteContinuousRep.{v, u, max u w} A G) :=
+  let : HasZeroMorphisms (DiscreteContinuousRep.{v, u, max u w} A G) :=
     Preadditive.preadditiveHasZeroMorphisms
   have hshort := continuousCochains_shortExact.{u, v, max u w} G A
   have hz : ObjectProperty.instHasZeroMorphismsFullSubcategory
@@ -288,7 +288,7 @@ theorem continuousCochains_deltaFunctor
       delta := fun S hS n ↦ (hse S hS).δ n (n + 1) rfl
       mono_zero := by
         intro S hS
-        haveI : Mono ((F.map S.f).f 0) := (hs S hS 0).mono_f
+        have : Mono ((F.map S.f).f 0) := (hs S hS 0).mono_f
         exact HomologicalComplex.mono_homologyMap_of_mono_of_not_rel
           (F.map S.f) 0 (by
             intro i hi

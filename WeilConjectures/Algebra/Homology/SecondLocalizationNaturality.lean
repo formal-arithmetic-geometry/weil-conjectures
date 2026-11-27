@@ -37,7 +37,7 @@ variable (R A B Bp D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
   [HasDerivedCategory.{w} (ModuleCat.{u} Bp)]
 
--- Preserve the existing scalar-tower parameters even though the proof needs fewer.
+-- Keep the section instances as hypotheses of this public statement.
 set_option linter.unusedSectionVars false in
 include tRB tAD tBD tApD tBpD tBBpD in
 /-- Naturality of the characterized coefficient map on arbitrary models, for an arbitrary flat

@@ -23,7 +23,6 @@ product coordinate of the strict Roos augmentation.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option cleanup.letToHave false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency true
