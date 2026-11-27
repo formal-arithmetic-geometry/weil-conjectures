@@ -103,8 +103,6 @@ private theorem tensor_model_normalized_map
     simpa only [φ, Equiv.symm_apply_apply, tensor_model_adj] using hu.symm
   simpa only [hψa] using he
 
--- Keep the supplied names of the quantified K-flat hypotheses, which occur only in the proof.
-set_option linter.unusedVariables false in
 /-- A normalized one-K-flat ordinary tensor model is natural on K-flat inputs `Q` and
 `Q'`. -/
 theorem native_ordinary_tensor_model_naturality_kflat
@@ -125,8 +123,8 @@ theorem native_ordinary_tensor_model_naturality_kflat
     ∀ (P Q P' Q' : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)
       (hP : NativeOrdinaryKFlat l Y P)
       (hP' : NativeOrdinaryKFlat l Y P')
-      (hQ : NativeOrdinaryKFlat l Y Q)
-      (hQ' : NativeOrdinaryKFlat l Y Q')
+      (_hQ : NativeOrdinaryKFlat l Y Q)
+      (_hQ' : NativeOrdinaryKFlat l Y Q')
       (f : P ⟶ P') (g : Q ⟶ Q'),
       S.tensor.map
           (X := (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P))

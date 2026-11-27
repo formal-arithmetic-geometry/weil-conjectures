@@ -197,7 +197,6 @@ lemma comp_rationalPoint_apply {U : Scheme.{u}} (s : U ⟶ Spec (.of k)) (x : Ra
   congr 1
   exact Subsingleton.elim _ _
 
-set_option linter.overlappingInstances false in
 /-- **The fixed scheme of a Frobenius**: for the model Frobenius `Φ` of `X = X₀ ×_{k₀} k` and
 `m ≥ 1`, the fixed scheme `Fix(Φ_m)`, the equalizer of `𝟙` and `Φ_m`, is the disjoint union
 `∐ Spec k` of copies of the base point, one for each rational point fixed by `Φ_m` (these correspond

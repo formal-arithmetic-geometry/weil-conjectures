@@ -109,7 +109,6 @@ lemma IsModelFrobenius.isClosedImmersion_hom_of_isIso {X : Over (Spec (.of k))}
       (show IsIso f₀ from inferInstance)
   infer_instance
 
-set_option linter.overlappingInstances false in
 /-- **The trace formula on a tower of projective lines**: for every model Frobenius `Φ_Y` of
 `Y = P_d ×_{k₀} k`, where `P_d = ℙ¹_{k₀} ×_{k₀} ⋯ ×_{k₀} ℙ¹_{k₀}` is the tower of projective
 lines, the trace formula in degree one holds. -/
@@ -145,7 +144,6 @@ theorem traceFormulaHolds_of_isModelFrobenius_projectiveLineTower (d : ℕ) :
     have := smoothOfRelativeDimension_pullback_hom f y
     exact traceFormulaHolds_of_smoothOfRelativeDimension_one hZ
 
-set_option linter.overlappingInstances false in
 /-- **The trace formula on an affine model**: for the model Frobenius `Φ` of an affine model `X₀`
 of finite type over `k₀`, the trace formula in degree one holds. -/
 theorem traceFormulaHolds_of_isAffine {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom]

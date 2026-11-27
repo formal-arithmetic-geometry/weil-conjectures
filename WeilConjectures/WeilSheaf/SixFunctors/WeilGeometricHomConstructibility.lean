@@ -79,7 +79,6 @@ abbrev nativeGeometricForget (k₀ : Type u) [Field k₀] [Finite k₀]
       Mod.comap (ProEtale.nativeModuleCoefficientIso ℓ
         (X₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber).hom).mapDerivedCategory
 
-set_option linter.style.haveILetI false in
 /-- **Geometric constructibility and internal Hom.** For a separated `k₀`-scheme of finite type
 `X₀`: a native Weil complex is bounded constructible iff its underlying complex on the geometric
 fibre is; its cohomology vanishes outside `[a, b]` iff that of the underlying complex does; and
@@ -115,21 +114,21 @@ theorem weil_geometric_hom_constructibility
           ((nativeGeometricForget k₀ ℓ X₀).obj L.obj))) := by
   let X := (X₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber
   let aX := (X₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
-  letI : X.Over (Spec (CommRingCat.of (AlgebraicClosure k₀))) := ⟨aX⟩
-  letI : LocallyOfFiniteType aX := inferInstance
-  letI : QuasiCompact aX := inferInstance
-  letI : IsSeparated aX :=
+  let : X.Over (Spec (CommRingCat.of (AlgebraicClosure k₀))) := ⟨aX⟩
+  have : LocallyOfFiniteType aX := inferInstance
+  have : QuasiCompact aX := inferInstance
+  have : IsSeparated aX :=
     inferInstanceAs (IsSeparated (pullback.snd _ _))
-  letI : IsNoetherian X :=
+  have : IsNoetherian X :=
     { toIsLocallyNoetherian := LocallyOfFiniteType.isLocallyNoetherian aX
       toCompactSpace := QuasiCompact.compactSpace_of_compactSpace aX }
-  letI : IsSeparated (X ↘ Spec (CommRingCat.of (AlgebraicClosure k₀))) := by
+  have : IsSeparated (X ↘ Spec (CommRingCat.of (AlgebraicClosure k₀))) := by
     change IsSeparated aX
     infer_instance
-  letI : LocallyOfFiniteType (X ↘ Spec (CommRingCat.of (AlgebraicClosure k₀))) := by
+  have : LocallyOfFiniteType (X ↘ Spec (CommRingCat.of (AlgebraicClosure k₀))) := by
     change LocallyOfFiniteType aX
     infer_instance
-  letI : QuasiCompact (X ↘ Spec (CommRingCat.of (AlgebraicClosure k₀))) := by
+  have : QuasiCompact (X ↘ Spec (CommRingCat.of (AlgebraicClosure k₀))) := by
     change QuasiCompact aX
     infer_instance
   let Λ := Profinite.padicAlgClRingObj.{u} ℓ
@@ -140,11 +139,11 @@ theorem weil_geometric_hom_constructibility
     ProEtale.nativeModuleConstructibilityComparison k₀ (AlgebraicClosure k₀) ℓ
       (Ne.symm (Fact.out : ringChar k₀ ≠ ℓ)) X
   rw [hE] at hCons
-  letI : (F ⋙ (ProEtale.nativeOrdinaryPresentation ℓ X).functor).Faithful := by
+  have : (F ⋙ (ProEtale.nativeOrdinaryPresentation ℓ X).functor).Faithful := by
     change (ProEtale.nativeToOrdinaryModules ℓ X).Faithful
     rw [← hE]
     infer_instance
-  letI : F.Faithful := Functor.Faithful.of_comp F
+  have : F.Faithful := Functor.Faithful.of_comp F
     (ProEtale.nativeOrdinaryPresentation ℓ X).functor
   let H := U ⋙ F
   let e := (U.mapDerivedCategoryCompIso F).symm
@@ -201,10 +200,10 @@ theorem weil_geometric_hom_constructibility
   · have : Fact (ringChar (AlgebraicClosure k₀)).Prime :=
       ⟨by rw [← Algebra.ringChar_eq k₀ (AlgebraicClosure k₀)]
           exact CharP.prime_ringChar k₀⟩
-    letI : Fact (ringChar (AlgebraicClosure k₀) ≠ ℓ) :=
+    have : Fact (ringChar (AlgebraicClosure k₀) ≠ ℓ) :=
       ⟨by rw [← Algebra.ringChar_eq k₀ (AlgebraicClosure k₀)]
           exact Fact.out⟩
-    letI : CharP (AlgebraicClosure k₀) (ringChar (AlgebraicClosure k₀)) :=
+    have : CharP (AlgebraicClosure k₀) (ringChar (AlgebraicClosure k₀)) :=
       ringChar.charP _
     have hHeart := ProEtale.coefficientHeart ℓ (Profinite.padicAlgClCondensedRing ℓ)
       (Or.inr rfl) (AlgebraicClosure k₀) (ringChar (AlgebraicClosure k₀))
@@ -218,10 +217,10 @@ theorem weil_geometric_hom_constructibility
         exact hM
       exact hm.2
     let Y : Over (Spec (CommRingCat.of (AlgebraicClosure k₀))) := Over.mk aX
-    letI : LocallyOfFiniteType Y.hom := by change LocallyOfFiniteType aX; infer_instance
-    letI : QuasiCompact Y.hom := by change QuasiCompact aX; infer_instance
-    letI : IsSeparated Y.hom := by change IsSeparated aX; infer_instance
-    letI : (ProEtale.boundedConstructible (ProEtale.condensedRingObj Λ X)).IsMonoidalClosed :=
+    have : LocallyOfFiniteType Y.hom := by change LocallyOfFiniteType aX; infer_instance
+    have : QuasiCompact Y.hom := by change QuasiCompact aX; infer_instance
+    have : IsSeparated Y.hom := by change IsSeparated aX; infer_instance
+    have : (ProEtale.boundedConstructible (ProEtale.condensedRingObj Λ X)).IsMonoidalClosed :=
       ProEtale.CondensedRing.isMonoidalClosed_boundedConstructible ℓ Y
     intro K L
     have hK := (hCriterion K.obj).mp K.property
