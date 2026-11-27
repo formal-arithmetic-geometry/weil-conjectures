@@ -45,6 +45,7 @@ noncomputable abbrev rationalConstructibleCategory :=
     (boundedConstructibleDerivedCompleteIntegralCategory D l hl E Y)
     (Padic.coefficientExtensionUniformizer l E)
 
+-- Has no explicit type, and downstream files mark it `[local irreducible]`, so it stays a `def`.
 set_option linter.defProp false in
 /-- The recorded raw scalar-localization theorem supplies precisely the induced shift
 and image triangles, with exact localization and no new objects. -/

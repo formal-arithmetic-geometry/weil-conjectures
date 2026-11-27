@@ -29,7 +29,6 @@ chain comparison by `tensorIso_naturality`, and combining the maps by tensor fun
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option Elab.async false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
@@ -94,10 +93,10 @@ theorem nativeRingedAssociatorModel_right_square
       (E.functor.obj (q.obj P) ◁ μ.hom.app (q.obj Q, q.obj N)) ≫
       (τ.hom.app P ⊗ₘ (τ.hom.app Q ⊗ₘ τ.hom.app N)) = eR ≫ rA.hom) := by
   classical
-  letI := SheafOfModules.isMonoidal_W_independentCoefficients b.R
-  letI := SheafOfModules.monoidalCategory b.R
-  letI := SB.monoidal
-  letI := nativeWeilRingedMonoidal b SB
+  let := SheafOfModules.isMonoidal_W_independentCoefficients b.R
+  let := SheafOfModules.monoidalCategory b.R
+  let := SB.monoidal
+  let := nativeWeilRingedMonoidal b SB
   let E := nativeWeilRingedDerivedEquivalence b
   let Ec := b.native.functor.mapHomologicalComplex (.up ℤ)
   let τ := b.native.functor.mapDerivedCategoryFactors

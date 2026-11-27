@@ -137,7 +137,6 @@ private theorem binaryMate_pre (P Q Q' I : RingedTensorModules.{u, u, u} J R)
     binaryMate R P Q' I (a ≫ f) = (a ⊗ₘ 𝟙 P) ≫ binaryMate R P Q I f := by
   simp only [binaryMate_eq, ← Category.assoc, tensorHom_comp_tensorHom, Category.id_comp]
 
-set_option linter.unusedSectionVars false in
 private theorem binaryMate_post (P Q I I' : RingedTensorModules.{u, u, u} J R)
     (f : Q ⟶ SheafOfModules.homObj (R := R) P I) (a : I ⟶ I') :
     binaryMate R P Q I' (f ≫ SheafOfModules.homObjMap (R := R) (𝟙 P) a) =
@@ -147,7 +146,6 @@ private theorem binaryMate_post (P Q I I' : RingedTensorModules.{u, u, u} J R)
   congr 1
   exact (SheafOfModules.tensorHomAdjunction R P).homEquiv_naturality_right_symm f a
 
-set_option linter.unusedSectionVars false in
 private theorem binaryMate_change (P P' Q I : RingedTensorModules.{u, u, u} J R)
     (a : P' ⟶ P) (f : Q ⟶ SheafOfModules.homObj (R := R) P I) :
     binaryMate R P' Q I (f ≫ SheafOfModules.homObjMap (R := R) a (𝟙 I)) =

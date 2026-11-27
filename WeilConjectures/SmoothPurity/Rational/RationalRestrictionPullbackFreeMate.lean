@@ -33,7 +33,6 @@ recorded inverse comparison. No geometric right adjoints are assumed.
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory AlgebraicGeometry
 namespace WeilConjectures
@@ -92,7 +91,7 @@ theorem rationalRestrictionPullback_freeMate
   let bX₀ := rationalScalarExtension_leftAdjunction l E F ι X
   let bY₀ := rationalScalarExtension_leftAdjunction l E F ι Y
   have hc := rationalRestrictionPullback_freeMate_canonical l E F ι f M
-  letI := hc
+  let := hc
   exact inverseMate_component_transport bY bX bY₀ bX₀
     (TwoSquare.mk _ _ _ _ (rationalPullbackScalarComparison l E F ι f).inv)
     (TY.obj M)
