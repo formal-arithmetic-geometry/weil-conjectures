@@ -10,6 +10,7 @@ public import WeilConjectures.SmoothPurity.FrobeniusExchange.SystemScalarFiniteE
 import WeilConjectures.SixFunctors.FrobeniusExchange.SystemScalarPullbackGeneralMate
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquareIsoSymm
 import all WeilConjectures.SixFunctors.FrobeniusExchange.SystemOpenScalarPullbackMate
+import all WeilConjectures.SmoothPurity.FrobeniusExchange.FiniteOpenScalarMate
 
 /-! # Inverse-mate reduction for open scalar evaluation
 
@@ -666,6 +667,7 @@ theorem systemOpenScalarInv_finiteEvaluation_core
         a.app ((coefficientSequenceDerivedEvaluation l E X n).obj N) := by
   have := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
   have := Padic.finite_coefficientExtensionRing l L (n + 1) (Nat.succ_pos n)
-  exact systemOpenScalarInv_finiteEvaluation_of_cube l E L ι j n N (by sorry)
+  exact systemOpenScalarInv_finiteEvaluation_of_cube l E L ι j n N
+    (systemOpenScalar_rightCube l E L ι j n)
 
 end WeilConjectures.FrobeniusExchange
