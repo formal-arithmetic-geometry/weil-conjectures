@@ -38,6 +38,13 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 Indices `n : ℕ` denote the positive exponents `n + 1`. All categories are ordinary
 unbounded small-etale derived categories. Only their ctf object predicates are restricted.
 
+## Implementation details
+
+The coherence of the scalar mates `scalarMate` with composite and identity quotients is
+transposed, along restriction of scalars and then along the derived inverse image, to the
+underived compatibility of `upperStarRestrictScalarsIsoSheaf` with restriction of scalars.
+The formal mate pastings are proved for arbitrary categories and then instantiated.
+
 ## References
 
 * Zheng, Propositions 2.29(2) and 3.16(2)
@@ -527,16 +534,17 @@ private theorem unit_selfReduction (T : Scheme.{u}) (n : ℕ)
     (Functor.mapDerivedCategoryNatIso (restrictionSelf l E T n) ≪≫
       Functor.mapDerivedCategoryIdIso _).hom K).trans (Category.id_comp _)
 
-/-- The identity `quotient (ht.trans h) = (quotient ht).comp (quotient h)`. -/
+/-- The quotient map along a composite is the composite of the quotient maps. -/
 theorem quotient_trans {m n t : ℕ} (h : n ≤ m) (ht : t ≤ n) :
     quotient l E (ht.trans h) = (quotient l E ht).comp (quotient l E h) :=
   RingHom.ext fun x ↦ Quotient.inductionOn x fun _ ↦ rfl
 
 /-- Restriction of scalars along successive quotients, on sheaves. -/
-noncomputable abbrev restrictionComp (T : Scheme.{u}) {m n t : ℕ} (h : n ≤ m) (ht : t ≤ n) :=
+abbrev restrictionComp (T : Scheme.{u}) {m n t : ℕ} (h : n ≤ m) (ht : t ≤ n) :=
   Sheaf.restrictScalarsCompIso T.smallEtaleTopology (quotient l E h) (quotient l E ht)
     (quotient l E (ht.trans h)) (quotient_trans l E h ht)
 
+/-- Direct image commutes with the composition comparisons of restriction of scalars. -/
 theorem lowerStar_restrictionComp {Z Y : Scheme.{u}} (p : Z ⟶ Y) {m n t : ℕ} (h : n ≤ m)
     (ht : t ≤ n) (M : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} (Ring l E t))) :
     ((p)_*[ModuleCat.{u + 1} (Ring l E m)]).map ((restrictionComp l E Z h ht).inv.app M) =
@@ -545,7 +553,7 @@ theorem lowerStar_restrictionComp {Z Y : Scheme.{u}} (p : Z ⟶ Y) {m n t : ℕ}
   rfl
 
 /-- Restriction of scalars commutes with direct image, as the identity. -/
-private noncomputable def lowerStarRestriction {Z Y : Scheme.{u}} (p : Z ⟶ Y) {m n : ℕ}
+private def lowerStarRestriction {Z Y : Scheme.{u}} (p : Z ⟶ Y) {m n : ℕ}
     (h : n ≤ m) :
     Sheaf.restrictScalars Z.smallEtaleTopology (quotient l E h) ⋙
         (p)_*[ModuleCat.{u + 1} (Ring l E m)] ≅
@@ -557,6 +565,8 @@ private theorem lowerStarRestriction_inv_app {Z Y : Scheme.{u}} (p : Z ⟶ Y) {m
     (M : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} (Ring l E n))) :
     (lowerStarRestriction l E p h).inv.app M = 𝟙 _ := rfl
 
+/-- The inverse image comparisons with restriction of scalars along successive quotients compose
+to the comparison along the composite quotient. -/
 theorem upperStarRestrictScalarsIsoSheaf_restrictionComp {Z Y : Scheme.{u}} (p : Z ⟶ Y)
     {m n t : ℕ} (h : n ≤ m) (ht : t ≤ n)
     (X : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (Ring l E t))) :
