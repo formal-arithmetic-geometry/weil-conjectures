@@ -28,6 +28,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
 import WeilConjectures.AlgebraicGeometry.OrdinaryExceptionalScalarCoefficientPullback
 import WeilConjectures.AlgebraicGeometry.Etale.Scalar.EtaleScalarMateRestrictionTranspose
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquareCube
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryPresentation
 import WeilConjectures.CategoryTheory.RightKanExtensionCoherentShift
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AdjunctionShift
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
@@ -308,6 +309,183 @@ private theorem mate_refl_of_square {C D : Type*} [Category C] [Category D] {U :
   rw [n, ← Category.assoc]
   exact congrArg (· ≫ adj.counit.app K) (h (F.obj K))
 
+private theorem mate_trans_of_transpose {Fm : Cm ⥤ Dm} {Fn : Cn ⥤ Dn} {Ft : Ct ⥤ Dt}
+    {QZh : Cm ⥤ Cn} {QZht : Cn ⥤ Ct} {QZc : Cm ⥤ Ct}
+    {QYh : Dm ⥤ Dn} {QYht : Dn ⥤ Dt} {QYc : Dm ⥤ Dt}
+    {resZh : Cn ⥤ Cm} {resZht : Ct ⥤ Cn} {resZc : Ct ⥤ Cm}
+    {resYh : Dn ⥤ Dm} {resYht : Dt ⥤ Dn} {resYc : Dt ⥤ Dm}
+    (aZh : QZh ⊣ resZh) (aZht : QZht ⊣ resZht) (aZc : QZc ⊣ resZc)
+    (aYh : QYh ⊣ resYh) (aYht : QYht ⊣ resYht) (aYc : QYc ⊣ resYc)
+    (αh : Fm ⋙ QYh ⟶ QZh ⋙ Fn) (αht : Fn ⋙ QYht ⟶ QZht ⋙ Ft) (αc : Fm ⋙ QYc ⟶ QZc ⋙ Ft)
+    (δh : resZh ⋙ Fm ≅ Fn ⋙ resYh) (δht : resZht ⋙ Fn ≅ Ft ⋙ resYht)
+    (δc : resZc ⋙ Fm ≅ Ft ⋙ resYc)
+    (hh : mateEquiv aZh aYh (.mk _ _ _ _ αh) = δh.hom)
+    (hht : mateEquiv aZht aYht (.mk _ _ _ _ αht) = δht.hom)
+    (hc : mateEquiv aZc aYc (.mk _ _ _ _ αc) = δc.hom)
+    (κZ : resZht ⋙ resZh ≅ resZc) (κY : resYht ⋙ resYh ≅ resYc)
+    (dh : Fn ⋙ resYh ⟶ resZh ⋙ Fm) (dht : Ft ⋙ resYht ⟶ resZht ⋙ Fn)
+    (dc : Ft ⋙ resYc ⟶ resZc ⋙ Fm) (ih : δh.inv = dh) (iht : δht.inv = dht) (ic : δc.inv = dc)
+    (hyp' : ∀ W, dc.app W ≫ Fm.map (κZ.inv.app W) =
+      κY.inv.app (Ft.obj W) ≫ resYh.map (dht.app W) ≫ dh.app (resZht.obj W))
+    (K : Cm) :
+    QYht.map (αh.app K) ≫ αht.app (QZh.obj K) ≫
+        Ft.map ((Adjunction.leftAdjointCompIso aZh aZht aZc κZ).hom.app K) =
+      (Adjunction.leftAdjointCompIso aYh aYht aYc κY).hom.app (Fm.obj K) ≫ αc.app K := by
+  set rZ := Adjunction.leftAdjointCompIso aZh aZht aZc κZ
+  set rY := Adjunction.leftAdjointCompIso aYh aYht aYc κY
+  have hyp : ∀ W, Fm.map (κZ.inv.app W) ≫ δh.hom.app (resZht.obj W) ≫
+      resYh.map (δht.hom.app W) ≫ κY.hom.app (Ft.obj W) = δc.hom.app W := fun W ↦ by
+    subst ih iht ic
+    rw [← cancel_epi (δc.inv.app W), reassoc_of% (hyp' W)]
+    simp [← Functor.map_comp_assoc]
+  -- unit relations of the reassociations
+  have uZ : ∀ X, aZh.unit.app X ≫ resZh.map (aZht.unit.app (QZh.obj X)) ≫
+      resZh.map (resZht.map (rZ.hom.app X)) = aZc.unit.app X ≫ κZ.inv.app (QZc.obj X) := by
+    intro X
+    have u := unit_conjugateEquiv (aZh.comp aZht) aZc rZ.inv X
+    rw [Adjunction.conjugateEquiv_leftAdjointCompIso_inv] at u
+    rw [Adjunction.comp_unit_app] at u
+    rw [← cancel_mono (κZ.hom.app (QZc.obj X))]
+    simp only [Category.assoc, Iso.inv_hom_id_app]
+    have n := κZ.hom.naturality (rZ.hom.app X)
+    dsimp only [Functor.comp_map, Functor.comp_obj] at n u
+    rw [n, ← Category.assoc, ← Category.assoc, u]
+    simp [← Functor.map_comp]
+  have uY : ∀ X, aYh.unit.app X ≫ resYh.map (aYht.unit.app (QYh.obj X)) ≫
+      resYh.map (resYht.map (rY.hom.app X)) = aYc.unit.app X ≫ κY.inv.app (QYc.obj X) := by
+    intro X
+    have u := unit_conjugateEquiv (aYh.comp aYht) aYc rY.inv X
+    rw [Adjunction.conjugateEquiv_leftAdjointCompIso_inv] at u
+    rw [Adjunction.comp_unit_app] at u
+    rw [← cancel_mono (κY.hom.app (QYc.obj X))]
+    simp only [Category.assoc, Iso.inv_hom_id_app]
+    have n := κY.hom.naturality (rY.hom.app X)
+    dsimp only [Functor.comp_map, Functor.comp_obj] at n u
+    rw [n, ← Category.assoc, ← Category.assoc, u]
+    simp [← Functor.map_comp]
+  have mh := fun X ↦ unit_mateEquiv aZh aYh (.mk _ _ _ _ αh) X
+  have mht := fun X ↦ unit_mateEquiv aZht aYht (.mk _ _ _ _ αht) X
+  have mc := fun X ↦ unit_mateEquiv aZc aYc (.mk _ _ _ _ αc) X
+  rw [hh] at mh
+  rw [hht] at mht
+  rw [hc] at mc
+  dsimp only [TwoSquare.mk, Functor.comp_obj, Functor.id_obj] at mh mht mc
+  apply ((aYh.comp aYht).homEquiv _ _).injective
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, Adjunction.comp_unit_app]
+  simp only [Functor.comp_map, Functor.map_comp, Category.assoc]
+  -- right hand side
+  rw [reassoc_of% (uY (Fm.obj K))]
+  have nκ := κY.inv.naturality (αc.app K)
+  dsimp only [Functor.comp_map, Functor.comp_obj] at nκ
+  rw [← nκ, ← reassoc_of% (mc K)]
+  -- left hand side
+  have n1 := aYht.unit.naturality (αh.app K)
+  dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj, Functor.id_map] at n1
+  rw [← resYh.map_comp_assoc, ← n1, resYh.map_comp_assoc, ← reassoc_of% (mh K)]
+  rw [← resYh.map_comp_assoc, ← mht (QZh.obj K), resYh.map_comp, Category.assoc]
+  have n2 := δh.hom.naturality (aZht.unit.app (QZh.obj K))
+  have n3 := δht.hom.naturality (rZ.hom.app K)
+  have n4 := δh.hom.naturality (resZht.map (rZ.hom.app K))
+  dsimp only [Functor.comp_map, Functor.comp_obj] at n2 n3 n4
+  rw [← reassoc_of% n2, ← resYh.map_comp, ← n3, resYh.map_comp,
+    ← reassoc_of% n4, ← Fm.map_comp_assoc, ← Fm.map_comp_assoc, Category.assoc, uZ,
+    Fm.map_comp_assoc]
+  congr 1
+  rw [← hyp]
+  simp
+
+variable {Ym Yn Yt Zm Zn Zt : Type*} [Category Ym] [Category Yn] [Category Yt]
+  [Category Zm] [Category Zn] [Category Zt]
+
+private theorem whiskered_square_trans
+    {resYh : Yn ⥤ Ym} {resYht : Yt ⥤ Yn} {resYc : Yt ⥤ Ym}
+    {resZh : Zn ⥤ Zm} {resZht : Zt ⥤ Zn} {resZc : Zt ⥤ Zm}
+    {Um um : Ym ⥤ Zm} {Un un : Yn ⥤ Zn} {Ut ut : Yt ⥤ Zt}
+    (lm : Um ≅ um) (ln : Un ≅ un) (lt : Ut ≅ ut)
+    (sh : resYh ⋙ um ≅ un ⋙ resZh) (sht : resYht ⋙ un ≅ ut ⋙ resZht)
+    (sc : resYc ⋙ um ≅ ut ⋙ resZc)
+    (κY : resYht ⋙ resYh ≅ resYc) (κZ : resZht ⋙ resZh ≅ resZc)
+    (hyp : ∀ M, sc.hom.app M ≫ κZ.inv.app (ut.obj M) =
+      um.map (κY.inv.app M) ≫ sh.hom.app (resYht.obj M) ≫ resZh.map (sht.hom.app M))
+    (M : Yt) :
+    (Functor.isoWhiskerLeft resYc lm ≪≫ sc ≪≫ Functor.isoWhiskerRight lt.symm resZc).hom.app M ≫
+        κZ.inv.app (Ut.obj M) =
+      Um.map (κY.inv.app M) ≫
+        (Functor.isoWhiskerLeft resYh lm ≪≫ sh ≪≫
+          Functor.isoWhiskerRight ln.symm resZh).hom.app (resYht.obj M) ≫
+        resZh.map ((Functor.isoWhiskerLeft resYht ln ≪≫ sht ≪≫
+          Functor.isoWhiskerRight lt.symm resZht).hom.app M) := by
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+    Iso.symm_hom, Category.assoc, Functor.comp_obj, Functor.map_comp]
+  have n1 := κZ.inv.naturality (lt.inv.app M)
+  have n2 := lm.hom.naturality (κY.inv.app M)
+  dsimp only [Functor.comp_map, Functor.comp_obj] at n1 n2
+  rw [n1, reassoc_of% (hyp M), reassoc_of% n2]
+  simp [← Functor.map_comp]
+
+private theorem mate_trans_of_square
+    {resYh : Yn ⥤ Ym} {resYht : Yt ⥤ Yn} {resYc : Yt ⥤ Ym}
+    {resZh : Zn ⥤ Zm} {resZht : Zt ⥤ Zn} {resZc : Zt ⥤ Zm}
+    {Um : Ym ⥤ Zm} {Un : Yn ⥤ Zn} {Ut : Yt ⥤ Zt} {Fm : Zm ⥤ Ym} {Fn : Zn ⥤ Yn} {Ft : Zt ⥤ Yt}
+    (am : Um ⊣ Fm) (an : Un ⊣ Fn) (at' : Ut ⊣ Ft)
+    (σh : resYh ⋙ Um ⟶ Un ⋙ resZh) (σht : resYht ⋙ Un ⟶ Ut ⋙ resZht)
+    (σc : resYc ⋙ Um ⟶ Ut ⋙ resZc)
+    (κY : resYht ⋙ resYh ≅ resYc) (κZ : resZht ⋙ resZh ≅ resZc)
+    (hyp : ∀ M, σc.app M ≫ κZ.inv.app (Ut.obj M) =
+      Um.map (κY.inv.app M) ≫ σh.app (resYht.obj M) ≫ resZh.map (σht.app M))
+    (W : Zt) :
+    (mateEquiv at' am (.mk _ _ _ _ σc)).app W ≫ Fm.map (κZ.inv.app W) =
+      κY.inv.app (Ft.obj W) ≫ resYh.map ((mateEquiv at' an (.mk _ _ _ _ σht)).app W) ≫
+        (mateEquiv an am (.mk _ _ _ _ σh)).app (resZht.obj W) := by
+  apply (am.homEquiv _ _).symm.injective
+  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  dsimp only [Functor.comp_obj]
+  have cc := mateEquiv_counit at' am (.mk _ _ _ _ σc) W
+  have ch := mateEquiv_counit an am (.mk _ _ _ _ σh) (resZht.obj W)
+  have cht := mateEquiv_counit at' an (.mk _ _ _ _ σht) W
+  dsimp only [Functor.comp_obj] at cc ch cht
+  rw [am.counit_naturality, reassoc_of% cc, ch]
+  dsimp only [TwoSquare.mk]
+  have n1 := κZ.inv.naturality (at'.counit.app W)
+  have n2 := σh.naturality ((mateEquiv at' an (.mk _ _ _ _ σht)).app W)
+  dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj] at n1 n2
+  rw [n1, reassoc_of% (hyp (Ft.obj W)), reassoc_of% n2, ← resZh.map_comp (Un.map _), cht]
+  rw [resZh.map_comp]
+
+private theorem upperStar_restriction_trans
+    {resYh : Yn ⥤ Ym} {resYht : Yt ⥤ Yn} {resYc : Yt ⥤ Ym}
+    {resZh : Zn ⥤ Zm} {resZht : Zt ⥤ Zn} {resZc : Zt ⥤ Zm}
+    {Pm : Ym ⥤ Zm} {Pn : Yn ⥤ Zn} {Pt : Yt ⥤ Zt} {Sm : Zm ⥤ Ym} {Sn : Zn ⥤ Yn} {St : Zt ⥤ Yt}
+    (am : Pm ⊣ Sm) (an : Pn ⊣ Sn) (at' : Pt ⊣ St)
+    (cH : resZh ⋙ Sm ≅ Sn ⋙ resYh) (cHT : resZht ⋙ Sn ≅ St ⋙ resYht)
+    (cC : resZc ⋙ Sm ≅ St ⋙ resYc)
+    (uh : resYh ⋙ Pm ≅ Pn ⋙ resZh) (uht : resYht ⋙ Pn ≅ Pt ⋙ resZht)
+    (uc : resYc ⋙ Pm ≅ Pt ⋙ resZc)
+    (th' : ∀ X, am.unit.app (resYh.obj X) ≫ Sm.map (uh.hom.app X) =
+      resYh.map (an.unit.app X) ≫ cH.inv.app (Pn.obj X))
+    (tht' : ∀ X, an.unit.app (resYht.obj X) ≫ Sn.map (uht.hom.app X) =
+      resYht.map (at'.unit.app X) ≫ cHT.inv.app (Pt.obj X))
+    (tc : ∀ X, am.unit.app (resYc.obj X) ≫ Sm.map (uc.hom.app X) =
+      resYc.map (at'.unit.app X) ≫ cC.inv.app (Pt.obj X))
+    (ρY : resYht ⋙ resYh ≅ resYc) (ρZ : resZht ⋙ resZh ≅ resZc)
+    (hρ : ∀ M, cC.inv.app M ≫ Sm.map (ρZ.inv.app M) = ρY.inv.app (St.obj M) ≫
+      resYh.map (cHT.inv.app M) ≫ cH.inv.app (resZht.obj M)) (X : Yt) :
+    uc.hom.app X ≫ ρZ.inv.app (Pt.obj X) =
+      Pm.map (ρY.inv.app X) ≫ uh.hom.app (resYht.obj X) ≫ resZh.map (uht.hom.app X) := by
+  apply (am.homEquiv _ _).injective
+  rw [am.homEquiv_unit, am.homEquiv_unit]
+  simp only [Functor.map_comp]
+  rw [reassoc_of% (tc X), hρ]
+  have n1 := ρY.inv.naturality (at'.unit.app X)
+  have n2 := am.unit.naturality (ρY.inv.app X)
+  have n3 := cH.inv.naturality (uht.hom.app X)
+  dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_map, Functor.id_obj] at n1 n2 n3
+  rw [reassoc_of% n1, ← reassoc_of% n2, reassoc_of% (th' (resYht.obj X)), ← n3,
+    ← resYh.map_comp_assoc, ← tht']
+  simp
+
+
 end MatePasting
 
 section ScalarMateCoherence
@@ -349,6 +527,59 @@ private theorem unit_selfReduction (T : Scheme.{u}) (n : ℕ)
     (Functor.mapDerivedCategoryNatIso (restrictionSelf l E T n) ≪≫
       Functor.mapDerivedCategoryIdIso _).hom K).trans (Category.id_comp _)
 
+/-- The identity `quotient (ht.trans h) = (quotient ht).comp (quotient h)`. -/
+theorem quotient_trans {m n t : ℕ} (h : n ≤ m) (ht : t ≤ n) :
+    quotient l E (ht.trans h) = (quotient l E ht).comp (quotient l E h) :=
+  RingHom.ext fun x ↦ Quotient.inductionOn x fun _ ↦ rfl
+
+/-- Restriction of scalars along successive quotients, on sheaves. -/
+noncomputable abbrev restrictionComp (T : Scheme.{u}) {m n t : ℕ} (h : n ≤ m) (ht : t ≤ n) :=
+  Sheaf.restrictScalarsCompIso T.smallEtaleTopology (quotient l E h) (quotient l E ht)
+    (quotient l E (ht.trans h)) (quotient_trans l E h ht)
+
+theorem lowerStar_restrictionComp {Z Y : Scheme.{u}} (p : Z ⟶ Y) {m n t : ℕ} (h : n ≤ m)
+    (ht : t ≤ n) (M : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} (Ring l E t))) :
+    ((p)_*[ModuleCat.{u + 1} (Ring l E m)]).map ((restrictionComp l E Z h ht).inv.app M) =
+      (restrictionComp l E Y h ht).inv.app (((p)_*[ModuleCat.{u + 1} (Ring l E t)]).obj M) := by
+  ext U x
+  rfl
+
+/-- Restriction of scalars commutes with direct image, as the identity. -/
+private noncomputable def lowerStarRestriction {Z Y : Scheme.{u}} (p : Z ⟶ Y) {m n : ℕ}
+    (h : n ≤ m) :
+    Sheaf.restrictScalars Z.smallEtaleTopology (quotient l E h) ⋙
+        (p)_*[ModuleCat.{u + 1} (Ring l E m)] ≅
+      (p)_*[ModuleCat.{u + 1} (Ring l E n)] ⋙
+        Sheaf.restrictScalars Y.smallEtaleTopology (quotient l E h) :=
+  NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ by ext U x; rfl)
+
+private theorem lowerStarRestriction_inv_app {Z Y : Scheme.{u}} (p : Z ⟶ Y) {m n : ℕ} (h : n ≤ m)
+    (M : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} (Ring l E n))) :
+    (lowerStarRestriction l E p h).inv.app M = 𝟙 _ := rfl
+
+theorem upperStarRestrictScalarsIsoSheaf_restrictionComp {Z Y : Scheme.{u}} (p : Z ⟶ Y)
+    {m n t : ℕ} (h : n ≤ m) (ht : t ≤ n)
+    (X : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (Ring l E t))) :
+    (upperStarRestrictScalarsIsoSheaf (quotient l E (ht.trans h)) p).hom.app X ≫
+        (restrictionComp l E Z h ht).inv.app (((p)^*[ModuleCat.{u + 1} (Ring l E t)]).obj X) =
+      ((p)^*[ModuleCat.{u + 1} (Ring l E m)]).map ((restrictionComp l E Y h ht).inv.app X) ≫
+        (upperStarRestrictScalarsIsoSheaf (quotient l E h) p).hom.app
+          ((Sheaf.restrictScalars Y.smallEtaleTopology (quotient l E ht)).obj X) ≫
+        (Sheaf.restrictScalars Z.smallEtaleTopology (quotient l E h)).map
+          ((upperStarRestrictScalarsIsoSheaf (quotient l E ht) p).hom.app X) := by
+  refine upperStar_restriction_trans (upperStarLowerStarAdjunction _ p)
+    (upperStarLowerStarAdjunction _ p) (upperStarLowerStarAdjunction _ p)
+    (lowerStarRestriction l E p h) (lowerStarRestriction l E p ht)
+    (lowerStarRestriction l E p (ht.trans h)) _ _ _ (fun X ↦ ?_) (fun X ↦ ?_) (fun X ↦ ?_)
+    _ _ (fun M ↦ ?_) X
+  · exact (upperStarRestrictScalarsIsoSheaf_hom_app_transpose _ p X).trans (Category.comp_id _).symm
+  · exact (upperStarRestrictScalarsIsoSheaf_hom_app_transpose _ p X).trans (Category.comp_id _).symm
+  · exact (upperStarRestrictScalarsIsoSheaf_hom_app_transpose _ p X).trans (Category.comp_id _).symm
+  · exact ((Category.id_comp _).trans (lowerStar_restrictionComp l E p h ht M)).trans
+      (by
+        rw [lowerStarRestriction_inv_app, lowerStarRestriction_inv_app]
+        erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id])
+
 /-- The scalar mates along successive quotients compose to the scalar mate along the composite
 quotient, through the tensor reassociations `reassoc`. -/
 theorem scalarMate_quotient_trans {Z Y : Scheme.{u}} (p : Z ⟶ Y) {m n t : ℕ} (h : n ≤ m)
@@ -358,7 +589,41 @@ theorem scalarMate_quotient_trans {Z Y : Scheme.{u}} (p : Z ⟶ Y) {m n t : ℕ}
         (F l E p t).map ((reassoc l E Z h ht).hom.app K) =
       (reassoc l E Y h ht).hom.app ((F l E p m).obj K) ≫
         (scalarMate (quotient l E (ht.trans h)) p).app K := by
-  sorry
+  obtain ⟨δh, hδh, mh⟩ := scalarMate_restrictionTranspose (quotient l E h) p
+  obtain ⟨δht, hδht, mht⟩ := scalarMate_restrictionTranspose (quotient l E ht) p
+  obtain ⟨δc, hδc, mc⟩ := scalarMate_restrictionTranspose (quotient l E (ht.trans h)) p
+  refine mate_trans_of_transpose
+    (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars Z.smallEtaleTopology
+      (quotient l E h)) : Q l E Z h ⊣ _)
+    (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars Z.smallEtaleTopology
+      (quotient l E ht)) : Q l E Z ht ⊣ _)
+    (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars Z.smallEtaleTopology
+      (quotient l E (ht.trans h))) : Q l E Z (ht.trans h) ⊣ _)
+    (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars Y.smallEtaleTopology
+      (quotient l E h)) : Q l E Y h ⊣ _)
+    (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars Y.smallEtaleTopology
+      (quotient l E ht)) : Q l E Y ht ⊣ _)
+    (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars Y.smallEtaleTopology
+      (quotient l E (ht.trans h))) : Q l E Y (ht.trans h) ⊣ _)
+    _ _ _ δh δht δc mh mht mc
+    (Sheaf.derivedRestrictScalarsCompIso Z.smallEtaleTopology (quotient_trans l E h ht))
+    (Sheaf.derivedRestrictScalarsCompIso Y.smallEtaleTopology (quotient_trans l E h ht))
+    _ _ _ hδh hδht hδc
+    (fun W ↦ ?_) K
+  have hE := upperStarRestrictScalarsIsoSheaf_restrictionComp l E p h ht
+  have hD := Functor.mapDerivedCategorySquareIso_compIso
+    (upperStarRestrictScalarsIsoSheaf (quotient l E h) p)
+    (upperStarRestrictScalarsIsoSheaf (quotient l E ht) p)
+    (upperStarRestrictScalarsIsoSheaf (quotient l E (ht.trans h)) p)
+    (restrictionComp l E Y h ht) (restrictionComp l E Z h ht) hE
+  have hC := whiskered_square_trans (leftDerivedUpperStarIsoMapDerivedCategory _ p)
+    (leftDerivedUpperStarIsoMapDerivedCategory _ p)
+    (leftDerivedUpperStarIsoMapDerivedCategory _ p) _ _ _ _ _ hD
+  exact mate_trans_of_square (derivedUpperStarLowerStarAdjunction _ p)
+    (derivedUpperStarLowerStarAdjunction _ p) (derivedUpperStarLowerStarAdjunction _ p)
+    (scalarRestrictionPullbackIso (quotient l E h) p).hom
+    (scalarRestrictionPullbackIso (quotient l E ht) p).hom
+    (scalarRestrictionPullbackIso (quotient l E (ht.trans h)) p).hom _ _ hC W
 
 /-- The scalar mate along the identity quotient is the identity, through the identity
 comparisons `selfReduction`. -/
