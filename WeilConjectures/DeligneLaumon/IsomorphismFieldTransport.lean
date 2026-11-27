@@ -29,8 +29,6 @@ rather than selecting arbitrary inverse equivalences.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedVariables false
-set_option linter.unusedSectionVars false
 set_option Elab.async false
 set_option backward.defeqAttrib.useBackward true
 set_option synthInstance.maxSize 4096

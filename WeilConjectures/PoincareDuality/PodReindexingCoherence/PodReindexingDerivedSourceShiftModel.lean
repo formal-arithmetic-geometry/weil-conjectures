@@ -38,8 +38,6 @@ attribute [local irreducible] sourceModelInput sourceModelOutput podReindexingHo
   derivedInternalHomOfUniverses homComplexFunctor CategoryTheory.RingedHomUniverses.sourceShift
   complexShift
 
--- The two normalized derived composites have dependent localization endpoints.
-set_option linter.unusedVariables false in
 /-- The normalized source-shift square for the comparison `c`, on the localization of a source
 complex `P` and a K-injective target complex `I`. -/
 theorem derived_source_shift_model
@@ -50,7 +48,7 @@ theorem derived_source_shift_model
     (SX : Closed l E X s) (SY : Closed l E Y s)
     (TX : Models l E X s SX) (TY : Models l E Y s SY)
     (c : Comparison l E g s SX SY TX TY) :
-    ∀ (P I : K l E Y s) (hI : I.IsKInjective) (a : ℤ),
+    ∀ (P I : K l E Y s) (_hI : I.IsKInjective) (a : ℤ),
       c.derived.hom.app
           (op (((podReindexingQ l E Y s).obj P)⟦a⟧),
             (podReindexingQ l E Y s).obj I) ≫

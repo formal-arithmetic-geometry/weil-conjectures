@@ -50,7 +50,6 @@ of `P`-schemes over `V`.
 
 @[expose] public section
 
-set_option linter.style.show false
 
 universe w u
 
@@ -148,15 +147,15 @@ lemma isCocontinuous_overMap (hQP : Q ≤ P) :
     -- Compare the image of `ψ` under the localization functor with `φ` via the identity
     -- on `Y.left`.
     have hY : 𝟙 Y.left ≫ Y.hom = (φ.left ≫ W.hom) ≫ f := by
-      simp only [Category.id_comp, Category.assoc]
+      simp only [Category.id_comp]
       exact (MorphismProperty.Over.w φ).symm
     let e : (MorphismProperty.Over.map ⊤ h).obj W' ⟶ Y :=
       MorphismProperty.Over.homMk (𝟙 Y.left) hY
     have hge : (MorphismProperty.Over.map ⊤ h).map ψ = e ≫ φ := by
       apply MorphismProperty.Over.Hom.ext
-      show φ.left = 𝟙 Y.left ≫ φ.left
+      change φ.left = 𝟙 Y.left ≫ φ.left
       exact (Category.id_comp _).symm
-    show S.arrows ((MorphismProperty.Over.map ⊤ h).map ψ)
+    change S.arrows ((MorphismProperty.Over.map ⊤ h).map ψ)
     rw [hge]
     exact S.downward_closed hSφ e
 

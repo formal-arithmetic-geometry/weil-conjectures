@@ -72,10 +72,8 @@ theorem exists_popescu_reduction_factor
     exists_standardSmooth_reduction_factorization_core R Λ I hΛ A φ
   let J : Ideal C := I.map (algebraMap R C)
   let Q : Type (max u v w) := C ⧸ J
-  set_option linter.style.haveILetI false in
-  letI : CommRing Q := inferInstance
-  set_option linter.style.haveILetI false in
-  letI : Algebra R Q := Ideal.Quotient.algebra R
+  let : CommRing Q := inferInstance
+  let : Algebra R Q := Ideal.Quotient.algebra R
   have hJ : ∀ r : R, r ∈ I → algebraMap R Q r = 0 := by
     intro r hr
     apply (Ideal.Quotient.eq_zero_iff_mem).2

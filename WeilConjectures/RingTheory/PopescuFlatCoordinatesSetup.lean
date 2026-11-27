@@ -30,7 +30,6 @@ homology of its residue field is finite.
 set_option autoImplicit false
 universe u v
 namespace Algebra
-set_option linter.unusedVariables false in
 /-- The localized prime-power quotient has the Artinian-local and cotangent-finiteness
 properties needed to apply the Popescu directed-subalgebra theorem. -/
 theorem popescu_flat_coordinates_setup
@@ -38,9 +37,9 @@ theorem popescu_flat_coordinates_setup
     [IsNoetherianRing Λ] (p : ℕ) [CharP k p] (hp : 0 < p)
     (hreg : IsGeometricallyRegular k Λ) (q : Ideal Λ) [q.IsPrime]
     (n : ℕ) (hn : 1 ≤ n) :
-    ∃ hArt : IsArtinianRing (Localization.AtPrime q ⧸
+    ∃ _hArt : IsArtinianRing (Localization.AtPrime q ⧸
         (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n),
-      ∃ hLoc : IsLocalRing (Localization.AtPrime q ⧸
+      ∃ _hLoc : IsLocalRing (Localization.AtPrime q ⧸
         (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n),
       IsLocalRing.maximalIdeal (Localization.AtPrime q ⧸
         (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n) =

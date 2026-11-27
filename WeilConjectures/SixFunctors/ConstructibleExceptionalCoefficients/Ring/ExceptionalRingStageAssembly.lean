@@ -43,7 +43,6 @@ attribute [local irreducible] AlgebraicGeometry.Scheme.reductionDerivedChange
   AlgebraicGeometry.Scheme.completedAdicChange AlgebraicGeometry.Scheme.reductionChange
   CategoryTheory.Functor.leftAdjoint CategoryTheory.Functor.mapDerivedCategory
   CategoryTheory.Functor.rightDerivedFunctor CategoryTheory.presheafToSheaf
-set_option linter.style.haveILetI false
 set_option synthInstance.maxSize 4096
 set_option genInjectivity false
 set_option genSizeOf false
@@ -84,10 +83,10 @@ private theorem compExact {A B C : Type*} [Category* A] [Category* B] [Category*
     letI := sG
     letI := compShift F G sF sG
     (F ⋙ G).IsTriangulated := by
-  letI := sF
-  letI := sG
-  letI := hF
-  letI := hG
+  let := sF
+  let := sG
+  let := hF
+  let := hG
   infer_instance
 
 private theorem finiteOperation (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
@@ -113,25 +112,25 @@ private theorem finiteOperation (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p
   | succ m =>
     let n : ℕ+ := ⟨m + 1, Nat.succ_pos m⟩
     change ∃ A : Operation.{u, v} l Ω X Y (.finite E n), _
-    letI : (finiteTorConstructible l E.carrier n n.pos X).IsTriangulated :=
+    have : (finiteTorConstructible l E.carrier n n.pos X).IsTriangulated :=
       finiteTriangulated l E n X
-    letI : (finiteTorConstructible l E.carrier n n.pos Y).IsTriangulated :=
+    have : (finiteTorConstructible l E.carrier n n.pos Y).IsTriangulated :=
       finiteTriangulated l E n Y
-    letI := constructionInclusionShift.{u, v} l Ω X (.finite E n)
-    letI := constructionInclusionShift.{u, v} l Ω Y (.finite E n)
-    letI : (RingStage.inclusion.{u, v} l Ω X (.finite E n)).Full :=
+    let := constructionInclusionShift.{u, v} l Ω X (.finite E n)
+    let := constructionInclusionShift.{u, v} l Ω Y (.finite E n)
+    have : (RingStage.inclusion.{u, v} l Ω X (.finite E n)).Full :=
       (ringFullyFaithful.{u, v} l Ω X (.finite E n)).full
-    letI : (RingStage.inclusion.{u, v} l Ω X (.finite E n)).Faithful :=
+    have : (RingStage.inclusion.{u, v} l Ω X (.finite E n)).Faithful :=
       (ringFullyFaithful.{u, v} l Ω X (.finite E n)).faithful
-    letI : (RingStage.inclusion.{u, v} l Ω X (.finite E n)).IsTriangulated :=
+    have : (RingStage.inclusion.{u, v} l Ω X (.finite E n)).IsTriangulated :=
       ⟨fun _ hT ↦ hT⟩
-    letI : (RingStage.inclusion.{u, v} l Ω Y (.finite E n)).Full :=
+    have : (RingStage.inclusion.{u, v} l Ω Y (.finite E n)).Full :=
       (ringFullyFaithful.{u, v} l Ω Y (.finite E n)).full
-    letI : (RingStage.inclusion.{u, v} l Ω Y (.finite E n)).Faithful :=
+    have : (RingStage.inclusion.{u, v} l Ω Y (.finite E n)).Faithful :=
       (ringFullyFaithful.{u, v} l Ω Y (.finite E n)).faithful
-    letI : (RingStage.inclusion.{u, v} l Ω Y (.finite E n)).IsTriangulated :=
+    have : (RingStage.inclusion.{u, v} l Ω Y (.finite E n)).IsTriangulated :=
       ⟨fun _ hT ↦ hT⟩
-    letI := PurCompactSupport.imageCommShift
+    let := PurCompactSupport.imageCommShift
       (PurCompactSupport.finite l E.carrier n n.pos) c
     obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le (c.g ≫ (Y ↘ Spec (.of D.k)))
     obtain ⟨_, _, h⟩ := exists_sfFiniteExceptionalOperations D l hl f c d hd
@@ -139,7 +138,7 @@ private theorem finiteOperation (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p
     let F : C.{u, v} l Ω X (.finite E n) ⥤ C.{u, v} l Ω Y (.finite E n) := F₀
     let G : C.{u, v} l Ω Y (.finite E n) ⥤ C.{u, v} l Ω X (.finite E n) := G₀
     let adj : F ⊣ G := adj₀
-    letI : F.Additive := hFadd
+    have : F.Additive := hFadd
     let r : F ⋙ RingStage.inclusion.{u, v} l Ω Y (.finite E n) ≅
         RingStage.inclusion.{u, v} l Ω X (.finite E n) ⋙
           PurCompactSupport.image (PurCompactSupport.finite l E.carrier n n.pos) c :=
@@ -150,12 +149,12 @@ private theorem finiteOperation (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p
             proEtaleRingModules_hasDerivedCategory, sfAmbientCompactSupportCandidate,
             sfIntrinsicCompactSupport] at e ⊢
           exact e)
-    letI : (RingStage.inclusion.{u, v} l Ω X (.finite E n) ⋙
+    let : (RingStage.inclusion.{u, v} l Ω X (.finite E n) ⋙
         PurCompactSupport.image (PurCompactSupport.finite l E.carrier n n.pos) c).CommShift ℤ := by
       exact compShift _ _ (constructionInclusionShift.{u, v} l Ω X (.finite E n))
         (PurCompactSupport.imageCommShift (PurCompactSupport.finite l E.carrier n n.pos) c)
-    letI : F.CommShift ℤ := Functor.CommShift.ofComp r ℤ
-    letI : r.hom.CommShift ℤ := Functor.CommShift.ofComp_compatibility r ℤ
+    let : F.CommShift ℤ := Functor.CommShift.ofComp r ℤ
+    let : r.hom.CommShift ℤ := Functor.CommShift.ofComp_compatibility r ℤ
     have ht : (RingStage.inclusion.{u, v} l Ω X (.finite E n) ⋙
         PurCompactSupport.image (PurCompactSupport.finite l E.carrier n n.pos) c).IsTriangulated :=
       by
@@ -166,10 +165,10 @@ private theorem finiteOperation (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p
         exact compExact _ _ (constructionInclusionShift.{u, v} l Ω X (.finite E n))
           (PurCompactSupport.imageCommShift (PurCompactSupport.finite l E.carrier n n.pos) c)
           inferInstance hj
-    letI : F.IsTriangulated := (Functor.isTriangulated_iff_comp_right r).mpr ht
-    letI := adj.rightAdjointCommShift ℤ
-    letI := adj.commShift_of_leftAdjoint ℤ
-    letI := adj.right_adjoint_additive
+    have : F.IsTriangulated := (Functor.isTriangulated_iff_comp_right r).mpr ht
+    let := adj.rightAdjointCommShift ℤ
+    let := adj.commShift_of_leftAdjoint ℤ
+    have := adj.right_adjoint_additive
     refine ⟨{
       F := F
       G := G
@@ -178,7 +177,7 @@ private theorem finiteOperation (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p
       rightExact := adj.isTriangulated_rightAdjoint
       unitShift := inferInstance
       counitShift := inferInstance }, r, ?_, inferInstance⟩
-    letI := c.hasCompactification
+    let := c.hasCompactification
     let Λ := ULift.{max u v + 1} (Padic.coefficientExtensionRing l E.carrier n)
     let rc :
         (Etale.rightDerivedLowerShriekOfCompactification (ModuleCat Λ) c).rightAdjoint ≅
@@ -251,29 +250,29 @@ private theorem integralOperation (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D
          letI := constructionInclusionShift.{u, v} l Ω Y (.integral E)
          r.hom.CommShift ℤ) := by
   classical
-  haveI := integralTriangulated l E X
-  haveI := integralTriangulated l E Y
-  letI := constructionInclusionShift.{u, v} l Ω X (.integral E)
-  letI := constructionInclusionShift.{u, v} l Ω Y (.integral E)
-  letI : (RingStage.inclusion.{u, v} l Ω X (.integral E)).Full :=
+  have := integralTriangulated l E X
+  have := integralTriangulated l E Y
+  let := constructionInclusionShift.{u, v} l Ω X (.integral E)
+  let := constructionInclusionShift.{u, v} l Ω Y (.integral E)
+  have : (RingStage.inclusion.{u, v} l Ω X (.integral E)).Full :=
     (ringFullyFaithful.{u, v} l Ω X (.integral E)).full
-  letI : (RingStage.inclusion.{u, v} l Ω X (.integral E)).Faithful :=
+  have : (RingStage.inclusion.{u, v} l Ω X (.integral E)).Faithful :=
     (ringFullyFaithful.{u, v} l Ω X (.integral E)).faithful
-  letI : (RingStage.inclusion.{u, v} l Ω X (.integral E)).IsTriangulated :=
+  have : (RingStage.inclusion.{u, v} l Ω X (.integral E)).IsTriangulated :=
     ⟨fun _ hT ↦ hT⟩
-  letI : (RingStage.inclusion.{u, v} l Ω Y (.integral E)).Full :=
+  have : (RingStage.inclusion.{u, v} l Ω Y (.integral E)).Full :=
     (ringFullyFaithful.{u, v} l Ω Y (.integral E)).full
-  letI : (RingStage.inclusion.{u, v} l Ω Y (.integral E)).Faithful :=
+  have : (RingStage.inclusion.{u, v} l Ω Y (.integral E)).Faithful :=
     (ringFullyFaithful.{u, v} l Ω Y (.integral E)).faithful
-  letI : (RingStage.inclusion.{u, v} l Ω Y (.integral E)).IsTriangulated :=
+  have : (RingStage.inclusion.{u, v} l Ω Y (.integral E)).IsTriangulated :=
     ⟨fun _ hT ↦ hT⟩
-  letI := PurCompactSupport.imageCommShift (PurCompactSupport.completed l E.carrier) c
+  let := PurCompactSupport.imageCommShift (PurCompactSupport.completed l E.carrier) c
   obtain ⟨hpres, hadj⟩ := exists_integral_support_adjoint l D hl f c E
   let F : C.{u, v} l Ω X (.integral E) ⥤ C.{u, v} l Ω Y (.integral E) :=
     (finiteTorConstructibleIntegral l E.carrier Y).lift
     (RingStage.inclusion.{u, v} l Ω X (.integral E) ⋙
       PurCompactSupport.image (PurCompactSupport.completed l E.carrier) c) hpres
-  letI : F.IsLeftAdjoint := hadj
+  have : F.IsLeftAdjoint := hadj
   let G := F.rightAdjoint
   let adj : F ⊣ G := Adjunction.ofIsLeftAdjoint F
   let r : F ⋙ RingStage.inclusion.{u, v} l Ω Y (.integral E) ≅
@@ -282,12 +281,12 @@ private theorem integralOperation (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D
     (finiteTorConstructibleIntegral l E.carrier Y).liftCompιIso
     (RingStage.inclusion.{u, v} l Ω X (.integral E) ⋙
       PurCompactSupport.image (PurCompactSupport.completed l E.carrier) c) hpres
-  letI : (RingStage.inclusion.{u, v} l Ω X (.integral E) ⋙
+  let : (RingStage.inclusion.{u, v} l Ω X (.integral E) ⋙
       PurCompactSupport.image (PurCompactSupport.completed l E.carrier) c).CommShift ℤ := by
     exact compShift _ _ (constructionInclusionShift.{u, v} l Ω X (.integral E))
       (PurCompactSupport.imageCommShift (PurCompactSupport.completed l E.carrier) c)
-  letI : F.CommShift ℤ := Functor.CommShift.ofComp r ℤ
-  letI : r.hom.CommShift ℤ := Functor.CommShift.ofComp_compatibility r ℤ
+  let : F.CommShift ℤ := Functor.CommShift.ofComp r ℤ
+  let : r.hom.CommShift ℤ := Functor.CommShift.ofComp_compatibility r ℤ
   have ht : (RingStage.inclusion.{u, v} l Ω X (.integral E) ⋙
       PurCompactSupport.image (PurCompactSupport.completed l E.carrier) c).IsTriangulated := by
     have hj :
@@ -297,10 +296,10 @@ private theorem integralOperation (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D
     exact compExact _ _ (constructionInclusionShift.{u, v} l Ω X (.integral E))
       (PurCompactSupport.imageCommShift (PurCompactSupport.completed l E.carrier) c)
       inferInstance hj
-  letI : F.IsTriangulated := (Functor.isTriangulated_iff_comp_right r).mpr ht
-  letI := adj.rightAdjointCommShift ℤ
-  letI := adj.commShift_of_leftAdjoint ℤ
-  letI := adj.right_adjoint_additive
+  have : F.IsTriangulated := (Functor.isTriangulated_iff_comp_right r).mpr ht
+  let := adj.rightAdjointCommShift ℤ
+  let := adj.commShift_of_leftAdjoint ℤ
+  have := adj.right_adjoint_additive
   let eambient :
       (F ⋙ PurCompactSupport.finiteTorIntegralInclusion l E.carrier Y) ⋙
         (sfIntegralConstructible l E.carrier Y).ι ≅

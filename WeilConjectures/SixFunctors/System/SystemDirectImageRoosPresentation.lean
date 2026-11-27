@@ -22,7 +22,6 @@ import WeilConjectures.SixFunctors.System.SystemDirectImageRoosEvaluation
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace WeilConjectures
@@ -51,7 +50,7 @@ theorem systemDirectImage_roosPresentation
               e.hom ≫ L.projection ≫ Pi.π (sfDirectImageTerm l E f K) n := by
   dsimp
   obtain ⟨hprod, L, e, _⟩ := systemDirectImage_roosExistence l E f S K
-  letI := hprod
+  have := hprod
   obtain ⟨a, ha⟩ := systemDirectImage_roosEvaluation l E f S K L e
   exact ⟨hprod, L, e, a, ha⟩
 

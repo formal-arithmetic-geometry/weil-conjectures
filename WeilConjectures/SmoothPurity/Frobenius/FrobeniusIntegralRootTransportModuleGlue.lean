@@ -28,7 +28,6 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 2048
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open AlgebraicGeometry.Scheme
@@ -91,8 +90,8 @@ theorem frobeniusIntegralRootTransport_moduleGlue
   have hmap : IsIso ((SheafOfModules.toSheaf _).map f) := by
     have h := proEtaleIsoInverseImage_equivalence.{u, u + 2, 0, 0}
       g AddCommGrpCat.{u + 1}
-    letI : (proEtaleSheafInverseImage g AddCommGrpCat.{u + 1}).IsEquivalence := h.1
-    letI : (proEtaleSheafDirectImage g AddCommGrpCat.{u + 1}).IsEquivalence :=
+    have : (proEtaleSheafInverseImage g AddCommGrpCat.{u + 1}).IsEquivalence := h.1
+    have : (proEtaleSheafDirectImage g AddCommGrpCat.{u + 1}).IsEquivalence :=
       (proEtaleSheafAdjunction g AddCommGrpCat.{u + 1}).isEquivalence_right_of_isEquivalence_left
     have hc : IsIso ((SheafOfModules.toSheaf _).map (adj.unit.app
         (purTwistIntegralModule Y l E)) ≫

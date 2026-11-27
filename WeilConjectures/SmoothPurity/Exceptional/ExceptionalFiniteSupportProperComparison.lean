@@ -28,11 +28,10 @@ variable (c : Compactification g)
   (S : StrictEtaleCompactSupport (integralExceptionalIntegers l E)
     (integralExceptionalUniformizer l E) c)
 
-set_option linter.unusedVariables false in
 /-- The proper derived comparison is also available with the strict coefficient
 presentation used by the compact-support level. -/
 theorem integralExceptionalEtaleProperDerivedRight_exists (n : ℕ) :
-    ∃ e : (S.properDerived.level n).direct ⋙
+    ∃ _e : (S.properDerived.level n).direct ⋙
       (integralExceptionalEtaleRealization l E Y n).mapDerivedCategory ≅
       (integralExceptionalEtaleRealization l E c.Z n).mapDerivedCategory ⋙
         (Etale.lowerStar

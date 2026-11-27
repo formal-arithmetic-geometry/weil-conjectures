@@ -84,17 +84,15 @@ private theorem tensorGenerator_smul
   delta coefficientTotalTensor coefficientTensorGenerator
   simp only [← TensorProduct.smul_tmul', map_smul]
 
--- Retain the named witnesses in the original public signature.
-set_option linter.unusedVariables false in
 /-- A line has a K-flat single complex, its tensor with a good complex is good,
 and scalar extension commutes with that total tensor with the specified generators. -/
 theorem integralLineTensorComparison_representative
     (T : Mod l E X none) [T.IsFiniteLocallyFreeOfRank 1]
     (P : (Good l E X none).FullSubcategory) :
-      ∃ (hT : CochainComplex.IsKFlatIndependentCoefficients
+      ∃ (_hT : CochainComplex.IsKFlatIndependentCoefficients
           (J := topology X none) (R := ring l E X none)
           ((integralLineSingle l E X).obj T))
-        (hS : Good l E X none (integralLineComplex l E X P.obj T)),
+        (_hS : Good l E X none (integralLineComplex l E X P.obj T)),
         ∀ n : ℕ, ∃ β :
             (integralLineFiniteComplex l E X n).obj (integralLineComplex l E X P.obj T) ≅
               integralLineFiniteTensor l E X P.obj T n,

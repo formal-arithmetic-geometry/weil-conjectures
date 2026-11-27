@@ -195,8 +195,28 @@ theorem mem_range_traitTensorCompositum_of_isSeparable {p : ℕ}
         (adjoin_simple_le_iff.2 (mem_traitGenericSepCompositum_of_pow_eq hd hρ) hγρ))
   exact ⟨⟨γ, hmem⟩, rfl⟩
 
-set_option synthInstance.maxHeartbeats 400000 in
--- the instances `Module L L₁` for the concrete composita are found slowly
+/-- The degree of a finite Galois subextension of the concrete compositum. -/
+noncomputable def concreteCompositumFinrank
+    (L₁ : FiniteGaloisIntermediateField
+      (traitTensorCompositum (PowerSeries K) (traitGenericField k') (traitGenericField K))
+      (traitTensorCompositumSep (PowerSeries K) (traitGenericField k')
+        (traitGenericField K))) : ℕ :=
+  @Module.finrank (traitTensorCompositum (PowerSeries K)
+      (traitGenericField k') (traitGenericField K)) L₁ inferInstance inferInstance
+    (@Algebra.toModule _ _ _ _ (L₁.toIntermediateField.algebra'))
+
+omit [IsAlgClosed K] in
+/-- The concrete degree uses the algebra structure of the intermediate field. -/
+theorem concreteCompositumFinrank_eq
+    (L₁ : FiniteGaloisIntermediateField
+      (traitTensorCompositum (PowerSeries K) (traitGenericField k') (traitGenericField K))
+      (traitTensorCompositumSep (PowerSeries K) (traitGenericField k')
+        (traitGenericField K))) :
+    concreteCompositumFinrank L₁ =
+      @Module.finrank (traitTensorCompositum (PowerSeries K)
+        (traitGenericField k') (traitGenericField K)) L₁ inferInstance inferInstance
+        (@Algebra.toModule _ _ _ _ (L₁.toIntermediateField.algebra')) := rfl
+
 /-- **Finite Galois subextensions of `L^sep / L` have `p`-power degree**, for a prime `p` such
 that every natural number vanishing in `k'` is divisible by `p`. -/
 theorem exists_finrank_traitTensorCompositum_eq_pow {p : ℕ} (hp : p.Prime)
@@ -204,8 +224,7 @@ theorem exists_finrank_traitTensorCompositum_eq_pow {p : ℕ} (hp : p.Prime)
     (L₁ : FiniteGaloisIntermediateField
       (traitTensorCompositum (PowerSeries K) (traitGenericField k') (traitGenericField K))
       (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))) :
-    ∃ n : ℕ, finrank (traitTensorCompositum (PowerSeries K) (traitGenericField k')
-      (traitGenericField K)) L₁ = p ^ n := by
+    ∃ n : ℕ, concreteCompositumFinrank L₁ = p ^ n := by
   have := Fact.mk hp
   let := traitTensorCompositumFractionRingAlgebra (k' := k') (K := K)
   have : IsScalarTower (FractionRing (PowerSeries K))
@@ -224,6 +243,7 @@ theorem isUnit_finrank_traitTensorCompositum {p : ℕ} (hp : p.Prime)
       (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))) :
     IsUnit ((finrank (traitTensorCompositum (PowerSeries K) (traitGenericField k')
       (traitGenericField K)) L₁ : ℕ) : T₀) := by
+  change IsUnit ((concreteCompositumFinrank L₁ : ℕ) : T₀)
   obtain ⟨n, hn⟩ := exists_finrank_traitTensorCompositum_eq_pow hp hpk L₁
   rw [hn, Nat.cast_pow]
   exact hpT.pow n

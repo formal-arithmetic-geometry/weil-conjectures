@@ -74,9 +74,8 @@ theorem integralResidue_scalarRoute_model {X Y : Scheme.{u}} (f : X ⟶ Y)
           ((residueExchangeUpperStar (integralCoeff ℓ E) f).obj M) ≫
         residueExchangeTensorModelTarget ℓ E f P =
       residueExchangeTensorModelMap ℓ E f P := by
-  set_option linter.style.haveILetI false in
   classical
-  letI := residueExchangePullMonoidal ℓ E f
+  let := residueExchangePullMonoidal ℓ E f
     (residueExchangeOrdinaryPullMonoidal ℓ E f) hFlat
   let M := DerivedCategory.Qh.obj P
   let F := residueExchangeUpperStar (integralCoeff ℓ E) f

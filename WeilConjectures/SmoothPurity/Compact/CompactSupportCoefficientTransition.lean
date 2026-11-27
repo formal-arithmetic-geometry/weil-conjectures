@@ -25,7 +25,6 @@ transitions.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 universe u
@@ -328,14 +327,14 @@ private theorem compactSupportCoefficientTransition_fac (W : Scheme.{u}) {m n : 
     (coefficientSequenceEvaluation.{u, u} l E W m).mapDerivedCategoryFactors.hom.app K ≫
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
         (compactSupportOrdinaryCoefficientTransition l E W h) (.up ℤ)).app K) := by
-  letI := proEtaleCoefficientRestrictScalars_preservesFiniteLimits W
+  let := proEtaleCoefficientRestrictScalars_preservesFiniteLimits W
     (compactSupportLevelQuotient l E m n h)
-  letI := proEtaleCoefficientRestrictScalars_preservesFiniteColimits W
+  let := proEtaleCoefficientRestrictScalars_preservesFiniteColimits W
     (compactSupportLevelQuotient l E m n h)
-  letI : PreservesFiniteLimits (coefficientSequenceEvaluation.{u, u} l E W n ⋙
+  let : PreservesFiniteLimits (coefficientSequenceEvaluation.{u, u} l E W n ⋙
       proEtaleCoefficientRestrictScalars W (compactSupportLevelQuotient l E m n h)) :=
     comp_preservesFiniteLimits _ _
-  letI : PreservesFiniteColimits (coefficientSequenceEvaluation.{u, u} l E W n ⋙
+  let : PreservesFiniteColimits (coefficientSequenceEvaluation.{u, u} l E W n ⋙
       proEtaleCoefficientRestrictScalars W (compactSupportLevelQuotient l E m n h)) :=
     comp_preservesFiniteColimits _ _
   dsimp only [compactSupportCoefficientTransition, NatTrans.comp_app]
@@ -440,9 +439,9 @@ theorem compactSupportCoefficientTransition_restricted (W : Scheme.{u}) {m n : �
         ((compactSupportCoefficientTransition l E W h).app M) ≫
       (compactSupportRestrictionComp l E W m n h).hom.app
         ((coefficientSequenceDerivedEvaluation l E W n).obj M) := by
-  letI := proEtaleCoefficientRestrictScalars_preservesFiniteLimits W
+  let := proEtaleCoefficientRestrictScalars_preservesFiniteLimits W
     (compactSupportLevelQuotient l E m n h)
-  letI := proEtaleCoefficientRestrictScalars_preservesFiniteColimits W
+  let := proEtaleCoefficientRestrictScalars_preservesFiniteColimits W
     (compactSupportLevelQuotient l E m n h)
   exact localizeRestrictionTransition
     (coefficientSequenceRestriction l E W)

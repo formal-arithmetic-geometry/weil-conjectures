@@ -24,7 +24,6 @@ intrinsic scalar shifts.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 open CategoryTheory
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -91,11 +90,11 @@ private theorem restriction_iso
     simp only [e, Functor.whiskerRight_app, Functor.fullyFaithfulCancelRight_hom_app,
       Functor.map_preimage]
   refine ⟨e, ?_, ?_⟩
-  · haveI : t.hom.CommShift ℤ := by
+  · have : t.hom.CommShift ℤ := by
       dsimp only [t, Iso.trans_hom, Iso.symm_hom,
         Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom]
       infer_instance
-    haveI : (Functor.whiskerRight e.hom JY).CommShift ℤ := by rw [ht]; infer_instance
+    have : (Functor.whiskerRight e.hom JY).CommShift ℤ := by rw [ht]; infer_instance
     exact NatTrans.CommShift.of_whiskerRight e.hom JY
   · intro K
     have h := congr_app ht K
@@ -197,8 +196,8 @@ theorem finiteTorIntegralShift_compatibility
     NatTrans.CommShift (show PurCompactSupport.finiteTorIntegralInclusion l E.carrier T ⋙
       (sfIntegralConstructible l E.carrier T).ι ≅
         RingStage.inclusion.{u, v} l Ω T (.integral E) from Iso.refl _).hom ℤ := by
-  letI : HasShift (C.{u, v} l Ω T (.integral E)) ℤ := shift l Ω T (.integral E)
-  letI := constructionInclusionShift l Ω T (.integral E)
+  let : HasShift (C.{u, v} l Ω T (.integral E)) ℤ := shift l Ω T (.integral E)
+  let := constructionInclusionShift l Ω T (.integral E)
   have hc := Functor.CommShift.ofComp_compatibility
     (show PurCompactSupport.finiteTorIntegralInclusion l E.carrier T ⋙
       (sfIntegralConstructible l E.carrier T).ι ≅
@@ -238,13 +237,13 @@ theorem canonicalIntegralScalarShift_compatibility
     letI := constructionInclusionShift l Ω T (.integral L)
     letI := canonicalIntegralScalarShift l Ω S
     S.realization.hom.CommShift ℤ := by
-  letI : (RingStage.inclusion.{u, v} l Ω T (.integral L)).Full :=
+  have : (RingStage.inclusion.{u, v} l Ω T (.integral L)).Full :=
     (finiteTorConstructibleIntegral l L.carrier T).fullyFaithfulι.full
-  letI : (RingStage.inclusion.{u, v} l Ω T (.integral L)).Faithful :=
+  have : (RingStage.inclusion.{u, v} l Ω T (.integral L)).Faithful :=
     (finiteTorConstructibleIntegral l L.carrier T).fullyFaithfulι.faithful
-  letI := constructionInclusionShift l Ω T (.integral E)
-  letI := constructionInclusionShift l Ω T (.integral L)
-  letI : (AlgebraicGeometry.Scheme.pbcDerivedExtend
+  let := constructionInclusionShift l Ω T (.integral E)
+  let := constructionInclusionShift l Ω T (.integral L)
+  let : (AlgebraicGeometry.Scheme.pbcDerivedExtend
       ((PurCompactSupport.completedChange l E.carrier L.carrier i).map T)).CommShift ℤ :=
     PurCompactSupport.scalarCommShift _
   have hc := Functor.CommShift.ofComp_compatibility S.realization ℤ
@@ -298,27 +297,27 @@ theorem canonical_integral_scalar_square
   let O := integralOrdinaryDerivedScalar l E.carrier L.carrier i T
   let B := AlgebraicGeometry.Scheme.pbcDerivedExtend
     ((PurCompactSupport.completedChange l E.carrier L.carrier i).map T)
-  letI sE : HasShift (C.{u, v} l Ω T (.integral E)) ℤ := shift l Ω T (.integral E)
-  letI sL : HasShift (C.{u, v} l Ω T (.integral L)) ℤ := shift l Ω T (.integral L)
-  letI siE : HasShift (sfIntegralConstructibleCategory l E.carrier T) ℤ :=
+  let sE : HasShift (C.{u, v} l Ω T (.integral E)) ℤ := shift l Ω T (.integral E)
+  let sL : HasShift (C.{u, v} l Ω T (.integral L)) ℤ := shift l Ω T (.integral L)
+  let siE : HasShift (sfIntegralConstructibleCategory l E.carrier T) ℤ :=
     ObjectProperty.hasShift (sfIntegralConstructible l E.carrier T) (A := ℤ)
-  letI siL : HasShift (sfIntegralConstructibleCategory l L.carrier T) ℤ :=
+  let siL : HasShift (sfIntegralConstructibleCategory l L.carrier T) ℤ :=
     ObjectProperty.hasShift (sfIntegralConstructible l L.carrier T) (A := ℤ)
-  letI iyShift : IY.CommShift ℤ :=
+  let iyShift : IY.CommShift ℤ :=
     ObjectProperty.commShiftι (sfIntegralConstructible l E.carrier T) (A := ℤ)
-  letI jyShift : JY.CommShift ℤ :=
+  let jyShift : JY.CommShift ℤ :=
     ObjectProperty.commShiftι (sfIntegralConstructible l L.carrier T) (A := ℤ)
-  letI ixShift : IX.CommShift ℤ := constructionInclusionShift l Ω T (.integral E)
-  letI jxShift : JX.CommShift ℤ := constructionInclusionShift l Ω T (.integral L)
-  letI ieShift : IE.CommShift ℤ := finiteTorIntegralShift l Ω E T
-  letI ilShift : IL.CommShift ℤ := finiteTorIntegralShift l Ω L T
-  letI sShift : S.functor.CommShift ℤ := canonicalIntegralScalarShift l Ω S
-  letI siShift : SI.CommShift ℤ :=
+  let ixShift : IX.CommShift ℤ := constructionInclusionShift l Ω T (.integral E)
+  let jxShift : JX.CommShift ℤ := constructionInclusionShift l Ω T (.integral L)
+  let ieShift : IE.CommShift ℤ := finiteTorIntegralShift l Ω E T
+  let ilShift : IL.CommShift ℤ := finiteTorIntegralShift l Ω L T
+  let sShift : S.functor.CommShift ℤ := canonicalIntegralScalarShift l Ω S
+  let siShift : SI.CommShift ℤ :=
     GeneralAlgebraicallyClosedCoefficients.integralTransitionCommShift l Ω T a b h
-  letI bShift : B.CommShift ℤ := PurCompactSupport.scalarCommShift
+  let bShift : B.CommShift ℤ := PurCompactSupport.scalarCommShift
     ((PurCompactSupport.completedChange l E.carrier L.carrier i).map T)
   let θ : S.functor ⋙ JX ≅ IX ⋙ B := S.realization
-  letI := canonicalIntegralScalarShift_compatibility l Ω S
+  let := canonicalIntegralScalarShift_compatibility l Ω S
   let ordinaryData := ordinary_completed_scalar_shift l E.carrier L.carrier i T
   let e₀ := ordinaryData.choose
   have hχ := ordinaryData.choose_spec.1
@@ -326,11 +325,11 @@ theorem canonical_integral_scalar_square
   let eO := e₀
   let χ : IY ⋙ O ≅ SI ⋙ JY :=
     sfIntegralOrdinaryComparison l E.carrier L.carrier i T
-  letI chiShift : χ.hom.CommShift ℤ := ordinaryComparison_shift l Ω T a b h
+  let chiShift : χ.hom.CommShift ℤ := ordinaryComparison_shift l Ω T a b h
   let rF : IE ⋙ IY ≅ IX := Iso.refl _
   let rG : IL ⋙ JY ≅ JX := Iso.refl _
-  letI := finiteTorIntegralShift_compatibility l Ω E T
-  letI := finiteTorIntegralShift_compatibility l Ω L T
+  let := finiteTorIntegralShift_compatibility l Ω E T
+  let := finiteTorIntegralShift_compatibility l Ω L T
   have restrictionData := restriction_iso IX IY JX JY IE IL S.functor SI O B
     (C₁ := C.{u, v} l Ω T (.integral E))
     (C₂ := sfIntegralConstructibleCategory l E.carrier T)

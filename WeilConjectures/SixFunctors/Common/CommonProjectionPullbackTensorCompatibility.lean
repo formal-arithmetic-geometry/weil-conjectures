@@ -34,7 +34,6 @@ set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 4096
 set_option genInjectivity false
 set_option genSizeOfSpec false
-set_option linter.style.haveILetI false
 
 universe u v w v' w'
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
@@ -107,9 +106,9 @@ theorem commonProjectionPullbackTensorCompatibility
       (T := (H.coefficientStages E).rationalTensor) (T' := H.commonStageTensor)
       (H.commonStageComparison E) (commonProjectionTensorComparison H E)
       ((H.coefficientStages E).rationalExchange Q) (H.commonStageExchange Q) := by
-  letI : ∀ x : Q.Z.obj.left, Invertible (C.l : Q.Z.obj.left.residueField x) :=
+  let : ∀ x : Q.Z.obj.left, Invertible (C.l : Q.Z.obj.left.residueField x) :=
     fun x ↦ (sixFunctorSpace_coefficient_invertible C Q.Z x).some
-  letI : ∀ x : Q.Y.obj.left, Invertible (C.l : Q.Y.obj.left.residueField x) :=
+  let : ∀ x : Q.Y.obj.left, Invertible (C.l : Q.Y.obj.left.residueField x) :=
     fun x ↦ (sixFunctorSpace_coefficient_invertible C Q.Y x).some
   refine projectionTensorComparisonCompatible_of_representative_formula H E Q ?_
   intro M N L h

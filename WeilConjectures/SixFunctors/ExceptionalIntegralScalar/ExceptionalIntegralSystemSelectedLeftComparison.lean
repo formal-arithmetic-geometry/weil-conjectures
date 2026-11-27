@@ -23,7 +23,6 @@ set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genCtorIdx false
 set_option synthInstance.maxSize 2048
-set_option linter.unusedVariables false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor AlgebraicGeometry
 open AlgebraicGeometry.Scheme Opposite SheafOfModules

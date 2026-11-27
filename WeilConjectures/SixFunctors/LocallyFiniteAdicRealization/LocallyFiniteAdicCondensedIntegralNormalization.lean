@@ -30,7 +30,6 @@ K-flat representative.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option cleanup.letToHave false
-set_option linter.all false
 set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false
@@ -95,7 +94,7 @@ private theorem rebracketed_hom_app
       e.hom.app K := by
   simp only [Iso.trans_hom, Iso.symm_hom, Iso.trans_inv, NatTrans.comp_app,
     Functor.associator_inv_app, Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app,
-    Category.id_comp, Category.comp_id]
+    Category.comp_id]
   exact Category.id_comp _
 
 private theorem faithfulSquare
@@ -131,10 +130,10 @@ private theorem transportIntegralSquare
   have hn := n.hom.naturality g
   dsimp only [Functor.comp_map] at hn
   rw [← Category.assoc, hn]
-  simp only [Functor.comp_map, Category.assoc]
+  simp only [Category.assoc]
   rw [← R.map_comp, hg']
   simp only [R.map_comp, Category.assoc, Iso.inv_hom_id_app,
-    R.map_id, Category.comp_id]
+    Category.comp_id]
 
 private theorem tensorSquaresConjugate
     {C : Type*} [Category C] {X Y U V M N N' : C}
@@ -305,7 +304,7 @@ private theorem nativeTensorTransition
             (AlgebraicallyClosedCoefficients.coefficientInclusion l (PadicAlgCl l) E L h)).app
               K.obj)
       integralTensorSquare (S.map f) ((q E).app K) ((q L).app B) (R.map t) := by
-  letI := D.commutative
+  have := D.commutative
   let C : CoefficientSystem l X :=
     { commutative := D.commutative
       sectionsAdditive := D.sectionsAdditive
@@ -334,10 +333,10 @@ private theorem normalizationIntegralComparison_transition
             (finiteCondensedClosureTransition l X A h).hom.app
             ((sfRationalConstructibleLocalization l
               (Coefficient.{u} l (PadicAlgCl l) E) X).obj K) := by
-  letI := D.commutative
-  letI := D.sectionsAdditive
-  letI := D.sectionsLimits
-  letI := D.sectionsColimits
+  have := D.commutative
+  have := D.sectionsAdditive
+  have := D.sectionsLimits
+  have := D.sectionsColimits
   let C : CoefficientSystem l X :=
     { commutative := D.commutative
       sectionsAdditive := D.sectionsAdditive
@@ -348,7 +347,7 @@ private theorem normalizationIntegralComparison_transition
   let R := pbcDerivedRestrict
     (ProEtale.CondensedRing.sectionRingMap X (condensedNativeMap l X))
   let S := integralSections l X
-  letI := integralSections_isEquivalence l X
+  have := integralSections_isEquivalence l X
   let n := nativeCondensedSectionComparison l X
   let q (E : Index l (PadicAlgCl l)) := finiteCondensedIntegralTensorModel l X A C E
   dsimp only [C] at q

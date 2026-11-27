@@ -1135,7 +1135,6 @@ def integralExceptionalCompactification : Compactification f :=
   letI := hasCompactification_of_finiteType_over_field D.k X Y f
   HasCompactification.compactification f
 
-set_option linter.unusedSectionVars false in
 include D hl in
 /-- The Brown construction and normalized evaluation argument depend only on the
 complete regular ring and its finite prime-power-torsion quotients. -/

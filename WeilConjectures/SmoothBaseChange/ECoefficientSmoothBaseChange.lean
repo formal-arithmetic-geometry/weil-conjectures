@@ -83,7 +83,6 @@ def sbcRationalExchange : sbcRationalLeft l E (f := f) (g := g) ⟶
   ScalarLocalization.betweenNat (PbcIntegralRing l E)
     (pbcUniformizer l E) (sbcExchange l E sq)
 
-set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 

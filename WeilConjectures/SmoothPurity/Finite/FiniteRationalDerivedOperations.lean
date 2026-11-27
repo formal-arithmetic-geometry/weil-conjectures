@@ -120,10 +120,6 @@ set_option linter.privateModule false
 @[expose] public noncomputable section
 set_option Elab.async false
 set_option autoImplicit false
--- The generated common-stage types make the section-variable linter expensive.
--- Every retained section parameter is present in the operation's public type.
-set_option linter.unusedSectionVars false
-set_option linter.unusedVariables false
 set_option backward.defeqAttrib.useBackward true
 set_option genSizeOfSpec false
 set_option genInjectivity false

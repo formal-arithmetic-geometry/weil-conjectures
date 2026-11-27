@@ -206,17 +206,16 @@ private theorem constantLinear_ext
       cases heq
       rfl
 
-set_option linter.unusedVariables false in
 /-- The standard constant-section linear structure, uniquely fixed sectionwise. -/
 theorem constantLinear_existsUnique (Y : Scheme.{u}) (A : Type u) [CommRing A] :
     ∃! s : Linear A (reductionModules Y (constantRing Y A)),
-      (fun [lin : Linear A (reductionModules Y (constantRing Y A))] ↦
+      (fun [_lin : Linear A (reductionModules Y (constantRing Y A))] ↦
         ∀ (M N : reductionModules Y (constantRing Y A)) (f : M ⟶ N)
           (a : A) (V : Y.ProEtᵒᵖ) (x : M.val.obj V),
           ((a • f).val.app V) x =
             ((toSheafify (ProEt.topology Y)
               ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1} A)))).app V)
-                (ULift.up a) • f.val.app V x) (lin := s) := by
+                (ULift.up a) • f.val.app V x) (_lin := s) := by
   let s := constantModuleLinear Y A
   have hs : (fun [lin : Linear A (reductionModules Y (constantRing Y A))] ↦
       ∀ (M N : reductionModules Y (constantRing Y A)) (f : M ⟶ N)
@@ -255,9 +254,8 @@ instance rationalLinear : Linear E (sfRationalConstructibleCategory l E Y) :=
       (sfRationalConstructibleCategory l E Y)).comp
         (sfRationalCoefficientEquiv l E).symm.toRingHom)
 
-set_option linter.defProp false in
 /-- An algebraic closure of the small field Q_l has a model in every scheme universe. -/
-@[instance_reducible] def closureSmall (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
+theorem closureSmall (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
     [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] : Small.{u} Ω :=
   small_map (IsAlgClosure.equiv (Padic l) Ω (AlgebraicClosure (Padic l))).toEquiv
 
@@ -398,14 +396,13 @@ def stageSmul (A B : GeneralAlgebraicallyClosedCoefficients.Pair l Ω Y)
   letI := stageHomModule l Y Ω A B L
   a • f
 
-set_option linter.unusedVariables false in
 /-- E-linearity in the common-stage category is the scalar action on a common finite
 representative. Every scalar of Ω occurs in such a finite stage. The equality displayed
 here uniquely fixes the entire linear structure; it is not an arbitrary action. -/
 theorem pairLinear_existsUnique :
     ∃! s : Linear (Closure.{u} l Ω)
         (GeneralAlgebraicallyClosedCoefficients.Pair l Ω Y),
-      (fun [lin : Linear (Closure.{u} l Ω)
+      (fun [_lin : Linear (Closure.{u} l Ω)
           (GeneralAlgebraicallyClosedCoefficients.Pair l Ω Y)] ↦
         ∀ (A B : GeneralAlgebraicallyClosedCoefficients.Pair l Ω Y)
           (L : Index l Ω) (hA : A.stage ≤ L) (hB : B.stage ≤ L)
@@ -415,7 +412,7 @@ theorem pairLinear_existsUnique :
               GeneralAlgebraicallyClosedCoefficients.ofHom A B L hA hB f =
             GeneralAlgebraicallyClosedCoefficients.ofHom A B L hA hB
               (stageSmul l Y Ω A B ⟨L, hA, hB⟩ a f))
-        (lin := s) := by
+        (_lin := s) := by
   classical
   let S := GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y
   have hS : StageSystem.QbarScalarCompatible l Ω S := intrinsicQbarScalarCompatible l Ω Y

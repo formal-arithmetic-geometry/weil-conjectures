@@ -40,7 +40,6 @@ set_option backward.isDefEq.respectTransparency.types true
 set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false
-set_option linter.all false
 
 attribute [local irreducible] HasDerivedCategory.standard
 
@@ -85,12 +84,12 @@ theorem nativeIntegralTensor_constructible
   let A := Coefficient.{u} l (PadicAlgCl l) E
   let R := SheafOfModules.restrictScalars.{u + 1}
     (integralDetailedCoefficientComparison X l A).hom
-  haveI : PreservesFiniteLimits R :=
+  have : PreservesFiniteLimits R :=
     (integralDetailedCoefficientRestriction_exact X l A).1
-  haveI : PreservesFiniteColimits R :=
+  have : PreservesFiniteColimits R :=
     (integralDetailedCoefficientRestriction_exact X l A).2
-  haveI : R.Additive := Functor.additive_of_preserves_binary_products _
-  haveI : R.Faithful := by
+  have : R.Additive := Functor.additive_of_preserves_binary_products _
+  have : R.Faithful := by
     constructor
     intro F G f g h
     ext U x
@@ -110,16 +109,16 @@ theorem nativeIntegralTensor_constructible
     apply R.bounded_of_bounded_mapDerivedCategory_obj
     exact ⟨⟨a, ha⟩, ⟨b, hb⟩⟩
   let T := pbcExtend (C.integralMap l X)
-  haveI : PreservesFiniteLimits T :=
+  have : PreservesFiniteLimits T :=
     nativeIntegralCoefficient_flat l X A (embedding l E) C
-  haveI : PreservesColimitsOfSize.{0, 0} T :=
+  have : PreservesColimitsOfSize.{0, 0} T :=
     (pbcScalarAdjunction (C.integralMap l X)).leftAdjoint_preservesColimits
-  haveI : PreservesFiniteColimits T := inferInstance
-  haveI : (pbcDerivedExtend (C.integralMap l X)).IsLeftDerivedFunctor
+  have : PreservesFiniteColimits T := inferInstance
+  have : (pbcDerivedExtend (C.integralMap l X)).IsLeftDerivedFunctor
       (pbcExtensionCounit (C.integralMap l X))
       (HomotopyCategory.quasiIso _ (.up ℤ)) :=
     pbcDerivedExtension_universal (C.integralMap l X)
-  haveI : T.mapDerivedCategory.IsLeftDerivedFunctor T.mapDerivedCategoryFactorsh.hom
+  have : T.mapDerivedCategory.IsLeftDerivedFunctor T.mapDerivedCategoryFactorsh.hom
       (HomotopyCategory.quasiIso _ (.up ℤ)) :=
     Functor.isLeftDerivedFunctor_of_inverts _ _ T.mapDerivedCategoryFactorsh
   let d : pbcDerivedExtend (C.integralMap l X) ≅ T.mapDerivedCategory :=
@@ -127,9 +126,9 @@ theorem nativeIntegralTensor_constructible
       T.mapDerivedCategoryFactorsh.hom
       (HomotopyCategory.quasiIso _ (.up ℤ)) (Iso.refl _)
   let q := e ≪≫ d.app K.obj
-  haveI : (ProEtale.AdicSheaf.forgetAb l X).IsEquivalence :=
+  have : (ProEtale.AdicSheaf.forgetAb l X).IsEquivalence :=
     ProEtale.nativeScalarForgetting_isEquivalence l X
-  haveI : (sections l X).IsEquivalence := by
+  have : (sections l X).IsEquivalence := by
     unfold sections
     infer_instance
   refine ⟨(sections l X).bounded_of_bounded_mapDerivedCategory_obj
