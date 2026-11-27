@@ -22,7 +22,6 @@ import WeilConjectures.CategoryTheory.SixFunctors.TransportedTensorComparison
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option Elab.async false
-set_option linter.style.haveILetI false
 
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite WeilConjectures
@@ -132,14 +131,14 @@ theorem nativeRingedTensorModel_forget_binary
         ε.hom.app (nativeTensorComplex T P Q) ≫ qA.map (c P Q).hom ≫
           inv (Functor.LaxMonoidal.μ qA (V.obj P) (V.obj Q)) := by
   classical
-  letI := nativeWeilRingedMonoidal b SB
+  let := nativeWeilRingedMonoidal b SB
   let U := Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)
   let V := U.mapHomologicalComplex (.up ℤ)
   let F := nativeForget k₀ l X
   let q := DerivedCategory.Q (C := ProEtaleWeilSheaf k₀ l X)
   let qA := DerivedCategory.Q (C := ProEtale.AdicSheaf l
     (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-  letI : Functor.LaxMonoidal qA := inferInstance
+  let : Functor.LaxMonoidal qA := inferInstance
   let ε := U.mapDerivedCategoryFactors
   let c (P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) :
       V.obj (nativeTensorComplex T P Q) ≅ V.obj P ⊗ V.obj Q :=

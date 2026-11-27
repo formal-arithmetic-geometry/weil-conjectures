@@ -48,7 +48,6 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace TopCat
 
-set_option linter.unusedVariables false in
 /-- Lower-dimensional vanishing kills the integer extension-by-zero generators
 on an irreducible Noetherian space.
 on an irreducible Noetherian space. -/
@@ -57,10 +56,10 @@ theorem irreducible_integer_extension_vanishing
     (d : ℕ) (hdim : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
     (hlower : ∀ (e : ℕ), e < d →
       ∀ (Y : Type u) [TopologicalSpace Y] [NoetherianSpace Y]
-        (hdimY : topologicalKrullDim Y ≤ (e : WithBot ℕ∞))
+        (_hdimY : topologicalKrullDim Y ≤ (e : WithBot ℕ∞))
         (G : CategoryTheory.Sheaf (Opens.grothendieckTopology Y) AddCommGrpCat.{u})
         (r : ℕ), e < r → IsZero (CategoryTheory.Sheaf.H' G r (⊤ : Opens Y)))
-    (p : ℕ) (hp : d < p) (U : Opens X) (hU : IsCompact (U : Set X)) :
+    (p : ℕ) (hp : d < p) (U : Opens X) (_hU : IsCompact (U : Set X)) :
     IsZero (CategoryTheory.Sheaf.H'
       ((TopCat.Sheaf.abelianOpenExtensionByZero U).obj
         ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj U))

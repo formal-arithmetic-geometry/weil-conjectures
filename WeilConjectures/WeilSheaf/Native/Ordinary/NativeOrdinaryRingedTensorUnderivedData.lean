@@ -37,7 +37,6 @@ abbrev NativeOrdinaryRingedTensorUnderivedData :=
   OrdinaryRingedTensorUnderivedData l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
     b.K b.Q b.ordinary b.ordinaryHom
 
-set_option linter.unusedSectionVars false in
 /-- The underived comparison fixed by the ordinary and ringed tensor-Hom adjunctions, with
 its evaluation normalization; this normalization determines the comparison uniquely. -/
 theorem native_ordinary_ringed_tensor_underived_data :
