@@ -268,6 +268,8 @@ attribute [local irreducible] coefficientTotalTensor SheafOfModules.monoidalCate
   completedIntegralCoefficientSheafUnrestricted unrestrictedIntegralReductionExistence
   SheafOfModules.changeOfRings PresheafOfModules.sheafification
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 private theorem tensorLevel_hom_ext (W : Scheme.{t})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) (k : ℤ)
     (H : integralTowerModules l E W)
@@ -300,6 +302,8 @@ private theorem tensorLevel_hom_ext (W : Scheme.{t})
   intro p q hpq V s x y
   convert h p q hpq V s x y using 1 <;> rfl
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 /-- The normalized balanced-tensor isomorphism of whole strict tensor towers. -/
 theorem tensorTowerModel (W : Scheme.{t}) :
     ∃! d : tensorTower l E W ≅ integralOperationsTensorTowerFunctor l E W,
@@ -330,16 +334,22 @@ theorem tensorTowerModel (W : Scheme.{t}) :
   exact (hd' Z.1 Z.2 n.unop p q V s x y).trans
     (hd Z.1 Z.2 n.unop p q V s x y).symm
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 /-- The uniquely normalized strict pullback comparison. -/
 def pullTowerIso {X Y : Scheme.{t}} (f : X ⟶ Y) :
     pullTower l E f ≅ integralOperationsPullbackTowerFunctor l E f :=
   (pullTowerModel l E f).exists.choose
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 /-- The uniquely normalized strict tensor comparison. -/
 def tensorTowerIso (W : Scheme.{t}) :
     tensorTower l E W ≅ integralOperationsTensorTowerFunctor l E W :=
   (tensorTowerModel l E W).exists.choose
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 /-- The operation augmentation, with finite components given by scalar insertion.
 The preceding normalization gives (r tensor x) ↦ pi_n(r) tensor (x tensor 1). -/
 def pullOperationUnit {X Y : Scheme.{t}} (f : X ⟶ Y)
@@ -349,6 +359,8 @@ def pullOperationUnit {X Y : Scheme.{t}} (f : X ⟶ Y)
   IntegralOnSlice.roosUnit l E X none ((pullComplex l E f).obj P) ≫
     integralOperationsRoosFunctor.map ((pullTowerIso l E f).hom.app P)
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 /-- The tensor operation augmentation, with finite components
 x tensor y ↦ (x tensor 1) tensor (y tensor 1). -/
 def tensorOperationUnit (W : Scheme.{t})
@@ -363,6 +375,8 @@ attribute [local irreducible] coefficientMap push pull pullTowerIso tensorTowerI
   IntegralOnSlice.duality IntegralOnSlice.completion IntegralOnSlice.completionComparison
   IntegralOnSlice.completionUnit IntegralOnSlice.roosUnit
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 open CochainComplex CochainComplex.HomComplex in
 private theorem roosMap_coordinates
     {A : Type*} [Category* A] [Abelian A] [HasCountableProducts A]
@@ -430,6 +444,8 @@ private theorem roosMap_coordinates
         p (p + -1) rfl (p + -1) (by omega)]
     exact hc₂ p
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 private theorem roosUnit_fst (W : Scheme.{t})
     (P : IntegralOnSlice.Cx l E W none) :
     IntegralOnSlice.roosUnit l E W none P ≫ CochainComplex.mappingCocone.fst
@@ -440,6 +456,8 @@ private theorem roosUnit_fst (W : Scheme.{t})
   unfold IntegralOnSlice.roosUnit integralOperationsRoos
   exact CochainComplex.mappingCocone.lift_fst _ _ _ _
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 private theorem roosUnit_snd (W : Scheme.{t})
     (P : IntegralOnSlice.Cx l E W none)
     (p q : ℤ) (h : p + -1 = q) :
@@ -451,6 +469,8 @@ private theorem roosUnit_snd (W : Scheme.{t})
   unfold IntegralOnSlice.roosUnit integralOperationsRoos
   exact CochainComplex.mappingCocone.lift_f_snd_v _ _ _ _ p q h
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 private theorem roosMap_zero_snd
     {A : Type*} [Category* A] [Abelian A] [HasCountableProducts A]
     {C C' : ℕᵒᵖ ⥤ CochainComplex A ℤ} (a : C ⟶ C')
@@ -465,6 +485,8 @@ private theorem roosMap_zero_snd
   rw [HomologicalComplex.comp_f, Category.assoc, (roosMap_coordinates a).2 p q h,
     ← Category.assoc, hc, zero_comp]
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 private theorem roosUnit_map_snd (W : Scheme.{t})
     (P : IntegralOnSlice.Cx l E W none)
     {C : ℕᵒᵖ ⥤ IntegralOnSlice.Cx l E W none}
@@ -477,6 +499,8 @@ private theorem roosUnit_map_snd (W : Scheme.{t})
   exact roosMap_zero_snd a (IntegralOnSlice.roosUnit l E W none P) p q h
     (roosUnit_snd l E W P p q h)
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 private theorem ambientRoosUnit_coordinates (W : Scheme.{t})
     (P : CochainComplex (integralTowerModules l E W) ℤ)
     {C : ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l E W) ℤ}
@@ -496,6 +520,8 @@ private theorem ambientRoosUnit_coordinates (W : Scheme.{t})
   · rw [Category.assoc, (roosMap_coordinates a).1, ← Category.assoc, roosUnit_fst]
   · exact roosUnit_map_snd l E W P a
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 /-- The pullback tower comparison carries the quotient augmentation to the operation
 augmentation, including its zero shifted-product coordinate. -/
 theorem pullOperationUnit_coordinates {X Y : Scheme.{t}} (f : X ⟶ Y)
@@ -518,6 +544,8 @@ theorem pullOperationUnit_coordinates {X Y : Scheme.{t}} (f : X ⟶ Y)
     ambientRoosUnit_coordinates l E X ((pullComplex l E f).obj P)
       ((pullTowerIso l E f).hom.app P)
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 /-- The analogous tensor augmentation equation retains the zero shifted-product part. -/
 theorem tensorOperationUnit_coordinates (W : Scheme.{t})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
@@ -543,6 +571,8 @@ theorem tensorOperationUnit_coordinates (W : Scheme.{t})
         (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q))
       ((tensorTowerIso l E W).hom.app (P, Q))
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 /-- Ordinary pullback carries flat-term K-flat representatives to such representatives. -/
 theorem pull_good {X Y : Scheme.{t}} (f : X ⟶ Y)
     (P : CochainComplex (integralTowerModules l E Y) ℤ)
@@ -596,6 +626,8 @@ theorem pull_good {X Y : Scheme.{t}} (f : X ⟶ Y)
 
 attribute [local semireducible] coefficientTotalTensor
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 /-- The direct-sum total tensor of two good representatives is good. -/
 theorem tensor_good (W : Scheme.{t})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ)
