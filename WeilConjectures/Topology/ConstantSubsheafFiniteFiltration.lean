@@ -142,7 +142,6 @@ private theorem constantSubsheaf_filtration_of_stalk_bound
       simpa only [F', Fin.snoc_castSucc] using hzero
     · exact ⟨by simpa [F'] using Iso.refl K⟩
 
-set_option linter.unusedVariables false in
 /-- A finitely generated subsheaf of the constant integer sheaf admits a finite filtration
 whose successive quotients are quotients of extensions by zero `j_! ℤ_U` of constant integer
 sheaves on quasi-compact opens by extensions by zero `j'_! ℤ_V` of smaller opens. -/
@@ -163,12 +162,12 @@ theorem constantSubsheaf_finite_filtration
           AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) ⟶ K, Epi g) :
     ∃ (m : ℕ) (F : Fin (m + 1) → Sheaf AddCommGrpCat X)
       (f : ∀ i : Fin m, F i.castSucc ⟶ F i.succ)
-      (hf : ∀ i : Fin m, Mono (f i))
+      (_hf : ∀ i : Fin m, Mono (f i))
       (Q : Fin m → Sheaf AddCommGrpCat X)
-      (S : ∀ i : Fin m, ShortComplex (Sheaf AddCommGrpCat X))
-      (hS : ∀ i : Fin m, (S i).ShortExact)
-      (hQ : ∀ i : Fin m, Nonempty (Q i ≅ cokernel (f i)))
-      (hquot : ∀ i : Fin m, ∃ (U V : Opens X),
+      (S : ∀ _i : Fin m, ShortComplex (Sheaf AddCommGrpCat X))
+      (_hS : ∀ i : Fin m, (S i).ShortExact)
+      (_hQ : ∀ i : Fin m, Nonempty (Q i ≅ cokernel (f i)))
+      (_hquot : ∀ i : Fin m, ∃ (U V : Opens X),
         IsCompact (U : Set X) ∧ IsCompact (V : Set X) ∧ V ≤ U ∧
         Nonempty ((S i).X₁ ≅ (abelianOpenExtensionByZero V).obj
           ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj V))

@@ -32,8 +32,6 @@ associator clauses of `stageSystem_existsUnique` are substituted.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option linter.privateModule false
-set_option linter.unusedSectionVars false
-set_option linter.unusedVariables false
 set_option Elab.async false
 set_option genInjectivity false
 set_option genSizeOfSpec false
@@ -118,6 +116,7 @@ variable (l : ℕ) [Fact l.Prime]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
+omit [∀ w : W, Invertible (l : W.residueField w)] in
 private theorem scalarAssociator_self
     (M : Type u) [Field M] [Algebra ℚ_[l] M] [FiniteDimensional ℚ_[l] M]
     (j : L →ₐ[ℚ_[l]] M) :
@@ -245,6 +244,7 @@ private theorem stageTensor_tower {E L M : Index l Ω} (h : E ≤ L) (k : L ≤ 
     (coefficientInclusion l Ω E M (h.trans k))
     ((AlgebraicallyClosedCoefficients.coefficientInclusion_laws l Ω).2 E L M h k)
 
+omit [∀ w : W, Invertible (l : W.residueField w)] in
 private theorem stageAssociator_heq {E L M : Index l Ω} (h : E ≤ L) (k : L ≤ M) :
     HEq ((stageSystem l Ω W).assoc h k) (stageTensorAssociator l Ω W h k) := by
   exact ((stageSystem_existsUnique l Ω W).exists.choose_spec.2 E L M h k).trans

@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Rational.RationalPullbackCompositionCoherence
+public import WeilConjectures.AlgebraicGeometry.Rational.RationalRealizationPullbackComparison
 public import WeilConjectures.AlgebraicGeometry.Rational.RationalPullModuleKFlat
 import all WeilConjectures.AlgebraicGeometry.Rational.RationalRealizationPullbackComparison
 import all WeilConjectures.AlgebraicGeometry.Rational.RationalOrdinaryPullbackComposition
@@ -96,6 +96,41 @@ end ScalarCounit
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+
+/-- The tensor-unit section of ordinary rational pullback on a pulled-back chart. -/
+def rationalCoherenceUnit {S T : Scheme.{u}} (g : S ⟶ T)
+    (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
+      (rationalCoefficientSheaf l T E) ⟶ rationalCoefficientSheaf l S E)
+    (M : pbcModules T (rationalCoefficientSheaf l T E))
+    (V : T.ProEt) (m : M.val.obj (op V)) :
+    ((rationalPullModule l E g c).obj M).val.obj
+      (op ((proEtaleBaseChange g).obj V)) :=
+  pbcTensorSection c
+    ((proEtaleRingModulePullback g (rationalCoefficientSheaf l T E)
+      ((proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
+        (rationalCoefficientSheaf l T E)) (Iso.refl _)).obj M)
+    (op ((proEtaleBaseChange g).obj V)) 1
+    (proEtaleRingModuleUnitSection g (rationalCoefficientSheaf l T E)
+      ((proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
+        (rationalCoefficientSheaf l T E)) (Iso.refl _) M V m)
+
+/-- Pull a rational coefficient section through the ring adjunction unit and structure map. -/
+def rationalCoherenceScalar {S T : Scheme.{u}} (g : S ⟶ T)
+    (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
+      (rationalCoefficientSheaf l T E) ⟶ rationalCoefficientSheaf l S E)
+    (V : T.ProEt) (e : (rationalCoefficientSheaf l T E).obj.obj (op V)) :
+    (rationalCoefficientSheaf l S E).obj.obj (op ((proEtaleBaseChange g).obj V)) :=
+  c.hom.app (op ((proEtaleBaseChange g).obj V))
+    (((proEtaleSheafAdjunction g CommRingCat.{u + 1}).unit.app
+      (rationalCoefficientSheaf l T E)).hom.app (op V) e)
+
+/-- Scalar multiplication on the rational module at a chart, with explicit section types. -/
+def rationalCoherenceSmul (T : Scheme.{u})
+    (M : pbcModules T (rationalCoefficientSheaf l T E)) (V : T.ProEtᵒᵖ)
+    (e : (rationalCoefficientSheaf l T E).obj.obj V) (m : M.val.obj V) : M.val.obj V :=
+  e • m
+
+attribute [irreducible] rationalCoherenceUnit rationalCoherenceScalar rationalCoherenceSmul
 
 section PullCounit
 

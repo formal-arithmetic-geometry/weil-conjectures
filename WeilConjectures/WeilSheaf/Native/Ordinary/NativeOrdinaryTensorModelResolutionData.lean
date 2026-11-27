@@ -27,7 +27,6 @@ by the naturality theorem.
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.unusedVariables false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
@@ -38,7 +37,7 @@ theorem native_ordinary_tensor_model_resolution_data
     (H : (DerivedCategory (ProEtale.AdicSheaf l Y))ᵒᵖ ×
       DerivedCategory (ProEtale.AdicSheaf l Y) ⥤
       DerivedCategory (ProEtale.AdicSheaf l Y))
-    (R : NativeHomRepresentatives (ordinaryIhomBifunctor l Y) H)
+    (_R : NativeHomRepresentatives (ordinaryIhomBifunctor l Y) H)
     (S : CoefficientClosedStructure H)
     (model : ∀ (P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)
       (_ : NativeOrdinaryKFlat l Y P),
@@ -47,8 +46,8 @@ theorem native_ordinary_tensor_model_resolution_data
     (hkflat : ∀ (P Q P' Q' : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)
       (hP : NativeOrdinaryKFlat l Y P)
       (hP' : NativeOrdinaryKFlat l Y P')
-      (hQ : NativeOrdinaryKFlat l Y Q)
-      (hQ' : NativeOrdinaryKFlat l Y Q')
+      (_hQ : NativeOrdinaryKFlat l Y Q)
+      (_hQ' : NativeOrdinaryKFlat l Y Q')
       (f : P ⟶ P') (g : Q ⟶ Q'),
       S.tensor.map
           (X := (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P))
@@ -64,12 +63,12 @@ theorem native_ordinary_tensor_model_resolution_data
         DerivedCategory.Q.obj (ordinaryTensorTotal l Y P Q),
       (∀ (P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)
         (hP : NativeOrdinaryKFlat l Y P)
-        (hQ : NativeOrdinaryKFlat l Y Q),
+        (_hQ : NativeOrdinaryKFlat l Y Q),
         extendedModel P Q hP = model P Q hP) ∧
       (∀ (P Q K : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)
         (hP : NativeOrdinaryKFlat l Y P)
-        (hK : NativeOrdinaryKFlat l Y K)
-        (q : K ⟶ Q) (hq : QuasiIso q),
+        (_hK : NativeOrdinaryKFlat l Y K)
+        (q : K ⟶ Q) (_hq : QuasiIso q),
         S.tensor.map
             (X := (DerivedCategory.Q.obj K, DerivedCategory.Q.obj P))
             (Y := (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P))
@@ -80,8 +79,8 @@ theorem native_ordinary_tensor_model_resolution_data
               (ordinaryTensorBifunctor l Y) (.up ℤ))) ∧
       (∀ (Q Q' : CochainComplex (ProEtale.AdicSheaf l Y) ℤ) (g : Q ⟶ Q'),
         ∃ (K K' : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)
-          (hK : NativeOrdinaryKFlat l Y K)
-          (hK' : NativeOrdinaryKFlat l Y K')
+          (_hK : NativeOrdinaryKFlat l Y K)
+          (_hK' : NativeOrdinaryKFlat l Y K')
           (q : K ⟶ Q) (q' : K' ⟶ Q') (u : K ⟶ K'),
           QuasiIso q ∧ QuasiIso q' ∧ Nonempty (Homotopy (u ≫ q') (q ≫ g))) := by
   classical

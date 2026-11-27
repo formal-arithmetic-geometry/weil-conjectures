@@ -49,7 +49,6 @@ attribute [local instance] boundedConstructibleBraiding hasRightDualPoint
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Finite k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
 
-set_option linter.overlappingInstances false in
 /-- **The relative projective line**: the sheaf–function compatibility holds along `ℙ¹_B ⟶ B` for
 the automorphisms `ℙ¹(e_B)` and `e_B`. -/
 theorem shriekTraceFunctionAt_overProjectiveLineProj (B : Over (Spec (.of k)))
