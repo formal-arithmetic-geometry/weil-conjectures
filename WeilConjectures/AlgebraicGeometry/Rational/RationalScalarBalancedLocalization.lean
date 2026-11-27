@@ -718,7 +718,7 @@ theorem rationalBalancedIdentity :
   have hb : rationalBalancedCoefficient l E E (AlgHom.id ℚ_[l] E) X = 𝟙 _ := by
     ext U b
     rfl
-  obtain ⟨o, e, he, ho, hd⟩ := pbcDerivedExtendIdIso_hom_app_Q _ hb
+  obtain ⟨o, e, he, ho, hd⟩ := exists_pbcDerivedExtendIdIso_hom_app_Q _ hb
   refine ⟨hb, o, pbcDerivedExtendIdIso _ e, ho, hd, fun K ↦ ?_⟩
   have hχ : sE.integralIso.hom ≫ sE.inclusion =
       (sE.integralIso.hom ≫ sE.inclusion) ≫

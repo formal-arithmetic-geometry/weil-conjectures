@@ -40,10 +40,10 @@ private theorem conjugateIso_symm_eq_leftAdjointUniq {C : Type*} [Category C] {F
   simp [Adjunction.leftAdjointUniq, conjugateEquiv_symm_apply_app, Adjunction.ofNatIsoRight,
     conjugateIsoEquiv]
 
-/-- Derived scalar extension along a ring endomorphism equal to the identity: the ordinary
-multiplication unitor, the identity restriction, and the computation of the conjugate derived
-unitor on every cochain complex through the universal counit. -/
-theorem pbcDerivedExtendIdIso_hom_app_Q (ψ : R ⟶ R) (hψ : ψ = 𝟙 R) :
+/-- For `ψ = 𝟙 R` there are identity unitors for extension and restriction such that
+`pbcDerivedExtendIdIso` is computed on `Q.obj P` by the complex counit followed by the
+multiplication unitor. -/
+theorem exists_pbcDerivedExtendIdIso_hom_app_Q (ψ : R ⟶ R) (hψ : ψ = 𝟙 R) :
     ∃ (o : pbcExtend ψ ≅ 𝟭 _) (e : pbcRestrict ψ ≅ 𝟭 _),
       (∀ (M : pbcModules X R) (U : X.ProEtᵒᵖ) (x : M.val.obj U),
         (e.hom.app M).val.app U x = x) ∧
