@@ -35,7 +35,6 @@ namespace AlgebraicGeometry.ProEtale
 
 variable (l : ℕ) [Fact l.Prime]
 
-set_option linter.style.longLine false in
 /-- **The derived direct image of condensed module objects commutes with bounded below
 coproducts**, transported from `preservesColimit_discrete_rightDerivedFunctor_adicLowerStar`. -/
 theorem preservesColimit_discrete_rightDerivedFunctor_condensedLowerStar {Y X : Scheme.{u}}
@@ -48,7 +47,8 @@ theorem preservesColimit_discrete_rightDerivedFunctor_condensedLowerStar {Y X : 
   let EY := adicSheafDerivedEquivCondensedMod l Y
   let EX := adicSheafDerivedEquivCondensedMod l X
   have φ : (adicLowerStar l f).rightDerivedFunctor ⋙ EX.functor ≅
-      EY.functor ⋙ (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) f).rightDerivedFunctor :=
+      EY.functor ⋙
+        (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) f).rightDerivedFunctor :=
     Functor.rightDerivedFunctorCompMapDerivedCategoryIsoOfEquivalence
       (adicSheafEquivCondensedMod l Y) (adicSheafEquivCondensedMod l X)
       (adicLowerStarCompCondensedModIso l f)

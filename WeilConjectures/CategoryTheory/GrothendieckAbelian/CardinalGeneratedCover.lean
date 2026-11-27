@@ -124,14 +124,13 @@ private lemma exists_isCardinalGenerated_subobject_imageSubobject (hG : IsSepara
   rw [exists_obj_imageSubobject, Category.assoc, pullback.condition, ← Category.assoc,
     imageSubobject_comp_of_epi]
 
-set_option linter.unusedVariables false in
 /-- **The cover lemma.** Every `κ`-generated subobject of the target of an epimorphism is the
 image of a `κ`-generated subobject of the source.
 
 The hypothesis `hκ` is part of the standing hypotheses of this development; it is not needed
 here, since the regularity of `κ` already provides `Cardinal.aleph0 ≤ κ`. -/
 lemma exists_isCardinalGenerated_subobject_of_epi [Fact κ.IsRegular]
-    (hκ : Cardinal.aleph0 < κ) (hG : IsSeparator G)
+    (_hκ : Cardinal.aleph0 < κ) (hG : IsSeparator G)
     (hsub : ∀ n : ℕ, HasCardinalLT (Subobject (∐ (fun (_ : Fin n) ↦ G))) κ)
     {X Y : C} (p : X ⟶ Y) [Epi p] (V : Subobject Y)
     (hV : isCardinalGenerated G κ (V : C)) :

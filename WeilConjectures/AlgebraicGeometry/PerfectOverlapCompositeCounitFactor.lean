@@ -42,7 +42,6 @@ variable [∀ Z : Scheme.{u},
 variable [∀ (Z : Scheme.{u}) (U : Z.Opens),
   HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]
 
-set_option linter.unusedVariables false in
 /-- Factoring the constructed stage map through the prescribed natural comparison
 (Stacks, Tag 08DW). -/
 theorem perfectOverlapCompositeCounitFactor
@@ -67,7 +66,7 @@ theorem perfectOverlapCompositeCounitFactor
   let eY := ((isPullback_morphismRestrict g W).paste_vert hg).isoPullback
   let eK := ((isPullback_morphismRestrict f W).paste_vert hf).isoPullback
   ∀ hmap : eY.inv ≫ r = m ≫ eK.inv,
-  let data := transportDataOfComposite f gk g hgf U V A B E φU φV
+  let _data := transportDataOfComposite f gk g hgf U V A B E φU φV
   let F : Bool → schemeDerivedCategory (f ⁻¹ᵁ U ⊓ f ⁻¹ᵁ V).toScheme := fun a ↦
     if a then
       (schemeOpenOverlapRestriction K
@@ -77,9 +76,9 @@ theorem perfectOverlapCompositeCounitFactor
       (schemeOpenOverlapRestriction K
         (homOfLE (inf_le_left : f ⁻¹ᵁ U ⊓ f ⁻¹ᵁ V ≤ f ⁻¹ᵁ U))).mapDerivedCategory.obj
         ((derivedPullback (f ∣_ U)).obj A)
-  let apex := perfectOverlapApexEquivalence g pX pY b hg U V
+  let _apex := perfectOverlapApexEquivalence g pX pY b hg U V
   let η := perfectOverlapNaturalComparisonOfSquare g f pX pK pY b q hg hf U V r m hmap
-  let σ : ∀ a : Bool,
+  let _σ : ∀ a : Bool,
       (perfectOverlapStageEquivalence f pK pY q hf U V).functor.obj (F a) ≅
         (derivedPullback (pullback.fst s q)).obj
           (if a then (derivedPullback (Y.homOfLE (inf_le_right : W ≤ V))).obj B

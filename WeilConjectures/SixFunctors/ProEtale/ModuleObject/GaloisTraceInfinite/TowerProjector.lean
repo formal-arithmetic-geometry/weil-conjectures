@@ -35,9 +35,6 @@ a projector `π_N : M_∞ ⟶ M_∞` (`AlgebraicGeometry.ProEtale.GaloisTower.pr
 
 @[expose] public section
 
--- several lemmas do not need all the instances of the section variables
-set_option linter.unusedSectionVars false
-
 universe u
 
 open CategoryTheory Category Limits Preadditive
@@ -55,6 +52,7 @@ variable {X Yinf : Scheme.{u}} {ginf : Yinf ⟶ X} [WeaklyEtale ginf] (T : Galoi
     (N : CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)),
       IsIso (Fintype.card (T.Γ j) • 𝟙 N))
 
+omit [WeaklyEtale ginf] in
 /-- An element of the Galois group acting trivially on a finite level acts trivially on the
 level functor. -/
 lemma levelAction_app_eq_id (j : T.J) (a : T.Γ j) (ha : T.ρ j a = 𝟙 _) :
@@ -69,6 +67,7 @@ lemma levelAction_app_eq_id (j : T.J) (a : T.Γ j) (ha : T.ρ j a = 𝟙 _) :
   rfl
 
 include hd in
+omit [WeaklyEtale ginf] [IsCommMonObj Λ] in
 /-- The order of `Γ_j` is invertible on module objects. -/
 lemma isIso_natCard_nsmul (j : T.J)
     (N : CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
@@ -83,12 +82,14 @@ noncomputable def levelAvg (j : T.J) (H : Subgroup (T.Γ j)) :
   have := T.isIso_natCard_nsmul Λ hd j ((T.levelFunctor Λ j).obj M)
   subgroupAvg (fun a ↦ (T.levelAction Λ j a).app M) H
 
+omit [WeaklyEtale ginf] in
 /-- Unfolding the level average. -/
 lemma levelAvg_eq (j : T.J) (H : Subgroup (T.Γ j))
     [IsIso (Nat.card (T.Γ j) • 𝟙 ((T.levelFunctor Λ j).obj M))] :
     T.levelAvg Λ M hd j H = subgroupAvg (fun a ↦ (T.levelAction Λ j a).app M) H :=
   rfl
 
+omit [WeaklyEtale ginf] in
 /-- **Compatibility of averages with the transition maps**: if the restriction maps `H'` onto
 `H` (in the sense of the lifts of the Galois actions along `t`), then the averages commute with
 the transport `M_j ⟶ M_{j'}`. -/
@@ -119,6 +120,7 @@ lemma transport_comp_levelAvg {j j' : T.J} (hle : j ≤ j') (H : Subgroup (T.Γ 
           (T.levelAction_app_comp_levelAction_app Λ M j) ha]
   rw [← e₁, ← assoc, e₂]
 
+omit [WeaklyEtale ginf] in
 /-- The averages commute with the maps `g_{j*} g_j^* φ`. -/
 lemma levelAvg_naturality {M M' : CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
     (condensedRingObj Λ X)} (φ : M ⟶ M') (j : T.J) (H : Subgroup (T.Γ j)) :

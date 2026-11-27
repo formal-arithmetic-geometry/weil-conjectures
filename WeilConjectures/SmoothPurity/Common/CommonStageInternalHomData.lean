@@ -23,8 +23,6 @@ isomorphisms between these.
 set_option autoImplicit false
 set_option Elab.async false
 set_option linter.privateModule false
-set_option linter.unusedSectionVars false
-set_option linter.unusedVariables false
 set_option backward.defeqAttrib.useBackward true
 set_option genSizeOfSpec false
 set_option genInjectivity false

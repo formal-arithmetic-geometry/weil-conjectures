@@ -24,8 +24,6 @@ formulas and the K-flat normalization; no representative is chosen arbitrarily.
 set_option autoImplicit false
 set_option maxErrors 4
 -- Avoid re-synthesizing the site-universe instances in the section-variable linter.
-set_option linter.unusedSectionVars false
-set_option linter.unusedTactic false
 set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false

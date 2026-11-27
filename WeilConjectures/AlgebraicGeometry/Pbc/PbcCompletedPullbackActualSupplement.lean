@@ -462,12 +462,11 @@ def pbcActualDerivedAdjunction :
       (HomotopyCategory.quasiIso (pbcModules X (pbcAdicCompletion X d)) (.up ℤ))
       (pbcActualPullCounit g d) (pbcActualPushUnit g d)
 
-set_option linter.unusedVariables false in
 /-- The ordinary comparison on resolving complexes uniquely fixes the derived shift. -/
 theorem pbcActualPullShift_exists :
     ∃! q : (pbcActualDerivedPull g d).CommShift ℤ,
-      (fun [qInst : (pbcActualDerivedPull g d).CommShift ℤ] ↦
-        NatTrans.CommShift (pbcActualPullCounit g d) ℤ) (qInst := q) := by
+      (fun [_qInst : (pbcActualDerivedPull g d).CommShift ℤ] ↦
+        NatTrans.CommShift (pbcActualPullCounit g d) ℤ) (_qInst := q) := by
   have hkan := Functor.IsLeftDerivedFunctor.isRightKanExtension
     (pbcActualDerivedPull g d) (pbcActualPullCounit g d)
     (HomotopyCategory.quasiIso (pbcModules Y (pbcAdicCompletion Y d)) (.up ℤ))
@@ -480,17 +479,16 @@ theorem pbcActualPullShift_exists :
 instance pbcActualPullShift : (pbcActualDerivedPull g d).CommShift ℤ :=
   (pbcActualPullShift_exists g d).exists.choose
 
-set_option linter.unusedVariables false in
 /-- The ordinary comparison on resolving complexes uniquely fixes the derived shift. -/
 theorem pbcActualPushShift_exists :
     ∃! q : (pbcActualDerivedPush g d).CommShift ℤ,
-      (fun [qInst : (pbcActualDerivedPush g d).CommShift ℤ] ↦
-        NatTrans.CommShift (pbcActualPushUnit g d) ℤ) (qInst := q) := by
+      (fun [_qInst : (pbcActualDerivedPush g d).CommShift ℤ] ↦
+        NatTrans.CommShift (pbcActualPushUnit g d) ℤ) (_qInst := q) := by
   let F := pbcActualModulePush g d
   let q : (pbcActualDerivedPush g d).CommShift ℤ :=
     inferInstanceAs (F.rightDerivedFunctor.CommShift ℤ)
-  have hq : (fun [qInst : (pbcActualDerivedPush g d).CommShift ℤ] ↦
-      NatTrans.CommShift (pbcActualPushUnit g d) ℤ) (qInst := q) :=
+  have hq : (fun [_qInst : (pbcActualDerivedPush g d).CommShift ℤ] ↦
+      NatTrans.CommShift (pbcActualPushUnit g d) ℤ) (_qInst := q) :=
     actualRightDerivedUnitShift F
   refine ⟨q, hq, ?_⟩
   intro q' hq'
@@ -911,12 +909,11 @@ private theorem actualCompletion_quotient (S : Scheme.{u}) :
   refine ⟨c, fun M ↦ (hc M).trans ?_⟩
   rfl
 
-set_option linter.unusedVariables false in
 /-- Completion has the unique shift comparison commuting with its actual unit. -/
 theorem pbcActualCompletionShift_exists :
     ∃! q : (pbcActualCompletion d T).CommShift ℤ,
-      (fun [qInst : (pbcActualCompletion d T).CommShift ℤ] ↦
-        NatTrans.CommShift (pbcActualCompletionUnit d T) ℤ) (qInst := q) := by
+      (fun [_qInst : (pbcActualCompletion d T).CommShift ℤ] ↦
+        NatTrans.CommShift (pbcActualCompletionUnit d T) ℤ) (_qInst := q) := by
   let P : ObjectProperty (PbcCompletedDerived T d) := PbcIsIntrinsicallyComplete T d
   have : P.IsClosedUnderIsomorphisms := ⟨fun e h ↦ (actualComplete_iso T d e).mp h⟩
   have : P.IsStableUnderShift ℤ := ⟨fun n ↦ ⟨fun M hM ↦ actualComplete_shift T d M hM n⟩⟩

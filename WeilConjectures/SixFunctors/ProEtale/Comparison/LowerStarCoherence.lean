@@ -37,8 +37,6 @@ open Scheme
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
--- the first `simp` unfolds the sections of the sheaves
-set_option linter.flexible false in
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- The isomorphism `(𝟙 X)_* ν_* ≅ ν_* (𝟙 X)_*` is induced by the identity isomorphisms of the
 direct images. -/
@@ -48,20 +46,31 @@ lemma lowerStarCompComparisonLowerStarIso_inv_app_id (X : Scheme.{u})
       (Etale.lowerStarId A X).hom.app ((comparisonLowerStar A X).obj G) ≫
         (comparisonLowerStar A X).map ((ProEtale.lowerStarId A X).inv.app G) := by
   ext V : 3
-  simp [lowerStarCompComparisonLowerStarIso, Etale.lowerStarId, ProEtale.lowerStarId,
-    GrothendieckTopology.lowerStarId, comparisonLowerStar]
+  simp only [comparisonLowerStar, Functor.comp_obj, Functor.sheafPushforwardContinuous_obj_obj_obj,
+    lowerStarCompComparisonLowerStarIso, Iso.trans_inv, Iso.symm_inv,
+    Functor.sheafPushforwardContinuousIso_inv, Category.assoc, NatTrans.comp_app,
+    ObjectProperty.FullSubcategory.comp_hom, Functor.sheafPushforwardContinuousNatTrans_app_hom,
+    ObjectProperty.ι_obj, Functor.sheafPushforwardContinuousComp_hom_app_hom_app,
+    Functor.whiskerRight_app, Functor.op_obj, NatTrans.op_app,
+    Functor.sheafPushforwardContinuousComp_inv_app_hom_app, Category.comp_id, Functor.id_obj,
+    Etale.lowerStarId, GrothendieckTopology.lowerStarId, lowerStarId,
+    Functor.sheafPushforwardContinuous_map_hom,
+    Functor.sheafPushforwardContinuousId'_hom_app_hom_app,
+    Functor.sheafPushforwardContinuous_obj_obj_map, Quiver.Hom.unop_op, Functor.whiskerLeft_app,
+    Functor.sheafPushforwardContinuousId'_inv_app_hom_app]
   simp only [← Functor.map_comp, ← op_comp]
   erw [Category.id_comp]
   refine congrArg (fun x => G.obj.map (Quiver.Hom.op x)) ?_
   apply MorphismProperty.Over.Hom.ext
-  simp [toProEtCompOverPullbackIso, toProEt]
+  simp only [toProEt, Functor.comp_obj, MorphismProperty.Over.pullback_obj_left,
+    MorphismProperty.Over.changeProp_obj_left, MorphismProperty.Over.changeProp_obj_hom,
+    toProEtCompOverPullbackIso, NatIso.ofComponents_hom_app, Iso.refl_hom,
+    MorphismProperty.Comma.id_hom, Comma.id_left]
   symm
   change pullback.fst (unop V).hom (𝟙 X) ≫
     ((MorphismProperty.Over.pullbackId @Etale ⊤ X).inv.app (unop V)).left = 𝟙 _
   apply pullback.hom_ext <;> simp [pullback.condition]
 
--- the first `simp` unfolds the sections of the sheaves
-set_option linter.flexible false in
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- The isomorphisms `f_* ν_* ≅ ν_* f_*` are compatible with the composition isomorphisms of the
 direct images. -/
@@ -73,12 +82,26 @@ lemma lowerStarCompComparisonLowerStarIso_inv_app_comp {R S T : Scheme.{u}} (h�
       (lowerStarCompComparisonLowerStarIso (h₁ ≫ h₂) A).inv.app G ≫
         (comparisonLowerStar A R).map ((ProEtale.lowerStarComp A h₁ h₂).inv.app G) := by
   ext V : 3
-  simp [lowerStarCompComparisonLowerStarIso, Etale.lowerStarComp, ProEtale.lowerStarComp,
-    comparisonLowerStar, Etale.lowerStar, ProEtale.lowerStar]
+  simp only [Etale.lowerStar, comparisonLowerStar, Functor.sheafPushforwardContinuous_obj_obj_obj,
+    lowerStar, Functor.comp_obj, Etale.lowerStarComp, lowerStarCompComparisonLowerStarIso,
+    Iso.trans_inv, Iso.symm_inv, Functor.sheafPushforwardContinuousIso_inv, Category.assoc,
+    NatTrans.comp_app, Functor.map_comp, ObjectProperty.FullSubcategory.comp_hom,
+    Functor.sheafPushforwardContinuous_map_hom,
+    Functor.sheafPushforwardContinuousNatTrans_app_hom, ObjectProperty.ι_obj,
+    Functor.sheafPushforwardContinuousComp'_inv_app_hom_app, Iso.symm_hom,
+    Functor.sheafPushforwardContinuous_obj_obj_map, Quiver.Hom.unop_op, Functor.whiskerLeft_app,
+    Functor.op_obj, Functor.sheafPushforwardContinuousComp_hom_app_hom_app,
+    Functor.whiskerRight_app, NatTrans.op_app,
+    Functor.sheafPushforwardContinuousComp_inv_app_hom_app, Category.comp_id, Category.id_comp,
+    lowerStarComp]
   simp only [← Functor.map_comp, ← op_comp]
   congr 2
   apply MorphismProperty.Over.Hom.ext
-  simp [toProEtCompOverPullbackIso, toProEt]
+  simp only [toProEt, MorphismProperty.Over.pullback_obj_left,
+    MorphismProperty.Over.changeProp_obj_left, MorphismProperty.Over.changeProp_obj_hom,
+    MorphismProperty.Over.pullback_obj_hom, toProEtCompOverPullbackIso, Functor.comp_obj,
+    NatIso.ofComponents_hom_app, Iso.refl_hom, CategoryTheory.Functor.map_id, Category.comp_id,
+    Category.id_comp, MorphismProperty.Over.pullbackComp_inv_app_left, pullback.map_id]
   dsimp [MorphismProperty.Over.changeProp]
   change ((MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤) h₁ h₂).inv.app
     (unop V)).left = _

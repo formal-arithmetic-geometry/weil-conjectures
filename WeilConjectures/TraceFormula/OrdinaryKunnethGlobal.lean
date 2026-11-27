@@ -55,7 +55,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)] {X : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
-set_option linter.flexible false in
 /-- The counits of the restricted adjunction `Lf^* ⊣ Rf_*` on `Dᵇc` are those of the ambient
 adjunction. -/
 lemma counit_app_hom_boundedConstructibleUpperStarLowerStarAdjunction {Y : Over (Spec (.of k))}
@@ -70,8 +69,10 @@ lemma counit_app_hom_boundedConstructibleUpperStarLowerStarAdjunction {Y : Over 
     (boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ f).symm
     (boundedConstructibleLowerStarCompatibility ℓ f).symm L
   refine h.trans ?_
-  simp [boundedConstructibleUpperStarCompatibility, boundedConstructibleLowerStarCompatibility,
-    ObjectProperty.liftCompιIso]
+  simp only [Functor.comp_obj, ObjectProperty.ι_obj, boundedConstructibleUpperStar_obj_obj,
+    Functor.id_obj, boundedConstructibleUpperStarCompatibility, ObjectProperty.liftCompιIso,
+    Iso.symm_inv, Iso.refl_hom, NatTrans.id_app, ObjectProperty.lift_obj_obj,
+    boundedConstructibleLowerStarCompatibility, Category.id_comp]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
 
 variable {P P' Y : Over (Spec (.of k))}

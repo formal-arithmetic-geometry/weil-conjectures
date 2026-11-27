@@ -44,8 +44,7 @@ theorem exists_degree_p_intermediate (K : Type u) (L : Type v) [Field K] [Field 
       Module.finrank K M < Module.finrank K L ∧
       IntermediateField.adjoin M ({z} : Set L) = ⊤ ∧
       (∃ f : M, z ^ p = (f : L)) ∧ Module.finrank M L = p := by
-  set_option linter.style.haveILetI false in
-  letI : Fact (Nat.Prime p) :=
+  have : Fact (Nat.Prime p) :=
     ⟨(CharP.char_is_prime_or_zero K p).resolve_right hp.ne'⟩
   obtain ⟨n, α, _, _, _, _, hfinal⟩ := exists_pth_root_tower K L p
   have hne : (⊥ : IntermediateField K L) ≠ ⊤ := by

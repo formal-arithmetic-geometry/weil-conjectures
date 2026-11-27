@@ -75,6 +75,7 @@ noncomputable instance integralReductionSourceHasDerivedCategory :
     HasDerivedCategory (completedIntegralModuleSheaves l E Y D hl) :=
   HasDerivedCategory.standard _
 
+-- Kept as `def`: downstream files mark it `[local irreducible]`, not allowed on theorems.
 set_option linter.defProp false in
 /-- The recorded derived-change-of-rings theorem applied to the actual limit projection.
 It includes the fixed sectionwise tensor action, its derived universal property,
@@ -108,6 +109,7 @@ theorem integralReductionChangeOfRingsAdditive :
 
 attribute [local instance] integralReductionChangeOfRingsAdditive
 
+-- Kept as `def`: downstream files mark it `[local irreducible]`, not allowed on theorems.
 set_option linter.defProp false in
 /-- The full derived pair supplied by the general change-of-rings theorem.
 Its universal property, exactness and K-flat computation fix the construction. -/

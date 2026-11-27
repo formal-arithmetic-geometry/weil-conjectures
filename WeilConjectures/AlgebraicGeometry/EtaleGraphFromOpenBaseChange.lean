@@ -18,7 +18,6 @@ import all WeilConjectures.AlgebraicGeometry.SfExactExchangePasting
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 
 universe u
 
@@ -87,7 +86,7 @@ private def ExchangeIso.symm
     have h := congr_app e.comm K
     simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] at h ⊢
     apply (cancel_mono (e.bot.hom.app (P.obj K))).1
-    simp only [Iso.symm_hom, Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+    simp only [Iso.symm_hom, Category.assoc, Iso.inv_hom_id_app]
     rw [← h, ← Category.assoc, ← Q.map_comp, Iso.inv_hom_id_app, Q.map_id]
     erw [Category.id_comp, Category.comp_id]
 
@@ -138,7 +137,7 @@ private def ExchangeIso.associator
   bot := Functor.associator _ _ _
   comm := by
     ext K
-    simp [ExchangeWord.comp, TwoSquare.hComp, Functor.map_comp, Category.assoc]
+    simp [ExchangeWord.comp, TwoSquare.hComp, Category.assoc]
 
 private def ExchangeIso.leftUnitor
     {C C' D D' : Type*} [Category C] [Category C'] [Category D] [Category D']
@@ -348,21 +347,20 @@ private def openId
     have hk := congr_app hh K
     simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.rightUnitor_hom_app, Functor.leftUnitor_inv_app,
-      Category.id_comp, Category.comp_id] at hk
+      Category.comp_id] at hk
     simp only [openWord, ExchangeWord.id, NatTrans.comp_app,
       Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app,
-      Category.id_comp, Category.comp_id, Functor.map_id]
+      Category.comp_id]
     apply (cancel_epi ((mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso
       (ModuleCat.{u + 1} A) (IsPullback.id_vert v)).hom.app K)).1
-    simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+    simp only [Iso.hom_inv_id_app_assoc]
     rw [← hk]
-    simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app,
-      Functor.map_id, Category.id_comp, Category.comp_id]
+    simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
     change (mapDerivedCategoryOpenImmersionLowerShriekId
         (ModuleCat.{u + 1} A) X').hom.app (D((v)^*[ModuleCat.{u + 1} A]).obj K) ≫
       𝟙 _ ≫ D((v)^*[ModuleCat.{u + 1} A]).map (𝟙 K) ≫ 𝟙 _ = _
-    simp only [Functor.map_id, Category.id_comp, Category.comp_id]
+    simp only [Category.id_comp, Category.comp_id]
     exact (congrArg (fun q ↦ (mapDerivedCategoryOpenImmersionLowerShriekId
         (ModuleCat.{u + 1} A) X').hom.app (D((v)^*[ModuleCat.{u + 1} A]).obj K) ≫ q)
       ((D((v)^*[ModuleCat.{u + 1} A])).map_id K)).trans (Category.comp_id _)
@@ -419,7 +417,7 @@ private theorem pullbackMap_fst
       (by simp)) ?_ ?_ ?_
   · intro s
     apply pullback.hom_ext
-    · simp only [Category.assoc, pullback.lift_fst, hm, pullback.lift_fst_assoc]
+    · simp only [Category.assoc, hm, pullback.lift_fst_assoc]
       exact s.condition.symm
     · simp [m]
   · intro s
@@ -430,7 +428,7 @@ private theorem pullbackMap_fst
     · apply hg.hom_ext
       · have h := congrArg (fun z ↦ z ≫ pullback.snd f g) hl₁
         simpa [m, Category.assoc] using h
-      · simp only [Category.assoc, hg.lift_snd]
+      · simp only [Category.assoc]
         rw [← pullback.condition, ← Category.assoc, hl₂]
         simp only [pullback.lift_fst_assoc]
 
@@ -465,7 +463,7 @@ private theorem pullbackMap_snd
     · apply hf.hom_ext
       · have h := congrArg (fun z ↦ z ≫ pullback.fst f g) hl₁
         simpa [m, Category.assoc] using h
-      · simp only [Category.assoc, hf.lift_snd]
+      · simp only [Category.assoc]
         rw [pullback.condition, ← Category.assoc, hl₂]
         simp only [pullback.lift_snd_assoc]
     · simpa using hl₂
@@ -540,12 +538,12 @@ theorem etaleGraphFromOpen_baseChange
   have hs₂q : s₂ ≫ pullback.snd _ _ = t.a := by simp [s₂, locallyClosedGraphS₂]
   have hs₁q' : s₁' ≫ pullback.snd _ _ = 𝟙 X' := by simp [s₁', locallyClosedGraphS₁]
   have hs₂q' : s₂' ≫ pullback.snd _ _ = t'.a := by simp [s₂', locallyClosedGraphS₂]
-  have hs₁₂u : s₁₂ ≫ pullback.fst _ _ = s₁ := by simp [s₁₂, s₁, s₂, locallyClosedGraphS₁₂]
+  have hs₁₂u : s₁₂ ≫ pullback.fst _ _ = s₁ := by simp [s₁₂, s₁, locallyClosedGraphS₁₂]
   have hs₁₂u' : s₁₂' ≫ pullback.fst _ _ = s₁' := by
-    simp [s₁₂', s₁', s₂', locallyClosedGraphS₁₂]
-  have hs₁₂v : s₁₂ ≫ pullback.snd _ _ = s₂ := by simp [s₁₂, s₁, s₂, locallyClosedGraphS₁₂]
+    simp [s₁₂', s₁', locallyClosedGraphS₁₂]
+  have hs₁₂v : s₁₂ ≫ pullback.snd _ _ = s₂ := by simp [s₁₂, s₂, locallyClosedGraphS₁₂]
   have hs₁₂v' : s₁₂' ≫ pullback.snd _ _ = s₂' := by
-    simp [s₁₂', s₁', s₂', locallyClosedGraphS₁₂]
+    simp [s₁₂', s₂', locallyClosedGraphS₁₂]
   have hV : v ≫ locallyClosedGraphV t.a t.e t.p c.i c.g h =
       locallyClosedGraphV t'.a t'.e t'.p c'.i c'.g h' ≫ mT := by
     apply pullback.hom_ext
@@ -665,23 +663,22 @@ theorem etaleGraphFromOpen_baseChange
       Rid, Jj, Rc, Ra, Je, Rp, Rs₁, Rs₂, Rs₁₂, Jb₁, Jb₂, Ju₁, Ju₂, Rh, Rq₁, Rq₂, Rp₁, Rp₂,
       ExchangeWord.comp, properWord, openWord, EtaleGraphPresentation.ofCompactification,
       pT, pT', s₁, s₂, s₁₂, s₁', s₂', s₁₂',
-      sideSquare₁, sideSquare₂, sideSquare₁', sideSquare₂',
       etaleGraphOpenNormalization, etaleGraphComparisonFromOpen, locallyClosedGraphIso,
       locallyClosedGraphSide₁, locallyClosedGraphSide₂, locallyClosedGraphMiddle,
       rightDerivedLowerStarCompOpenImmersionLowerShriekIso,
       Functor.isoWhiskerLeft_refl, Functor.isoWhiskerRight_refl,
       Iso.refl_trans, Iso.trans_refl, Iso.trans_hom, Iso.trans_inv,
-      Iso.refl_hom, Iso.refl_inv, NatTrans.id_app, openCongr_inv,
+      openCongr_inv,
       Iso.symm_hom, Iso.symm_inv,
       Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
       Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,
       NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
       Functor.associator_hom_app, Functor.associator_inv_app,
       Functor.leftUnitor_hom_app, Functor.leftUnitor_inv_app,
-      Functor.map_comp, Functor.map_id, Category.id_comp, Category.comp_id, Category.assoc]
+      Functor.map_comp, Category.id_comp, Category.comp_id, Category.assoc]
     dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj]
-    simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app, Iso.hom_inv_id_app_assoc,
-      Functor.map_id, Category.id_comp, Category.comp_id, Category.assoc]
+    simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app_assoc,
+      Category.id_comp]
   have hbot : comparison.bot =
       etaleGraphOpenNormalization A c' ≪≫ etaleGraphComparisonFromOpen A c' t' := by
     apply Iso.ext
@@ -694,23 +691,22 @@ theorem etaleGraphFromOpen_baseChange
       Rid, Jj, Rc, Ra, Je, Rp, Rs₁, Rs₂, Rs₁₂, Jb₁, Jb₂, Ju₁, Ju₂, Rh, Rq₁, Rq₂, Rp₁, Rp₂,
       ExchangeWord.comp, properWord, openWord, EtaleGraphPresentation.ofCompactification,
       pT, pT', s₁, s₂, s₁₂, s₁', s₂', s₁₂',
-      sideSquare₁, sideSquare₂, sideSquare₁', sideSquare₂',
       etaleGraphOpenNormalization, etaleGraphComparisonFromOpen, locallyClosedGraphIso,
       locallyClosedGraphSide₁, locallyClosedGraphSide₂, locallyClosedGraphMiddle,
       rightDerivedLowerStarCompOpenImmersionLowerShriekIso,
       Functor.isoWhiskerLeft_refl, Functor.isoWhiskerRight_refl,
       Iso.refl_trans, Iso.trans_refl, Iso.trans_hom, Iso.trans_inv,
-      Iso.refl_hom, Iso.refl_inv, NatTrans.id_app, openCongr_inv,
+      openCongr_inv,
       Iso.symm_hom, Iso.symm_inv,
       Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
       Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,
       NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
       Functor.associator_hom_app, Functor.associator_inv_app,
       Functor.leftUnitor_hom_app, Functor.leftUnitor_inv_app,
-      Functor.map_comp, Functor.map_id, Category.id_comp, Category.comp_id, Category.assoc]
+      Functor.map_comp, Category.id_comp, Category.comp_id, Category.assoc]
     dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj]
-    simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app, Iso.hom_inv_id_app_assoc,
-      Functor.map_id, Category.id_comp, Category.comp_id, Category.assoc]
+    simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app_assoc,
+      Category.id_comp]
   rw [htop, hbot] at hc
   simpa only [Rid, Jj, Rc, Ra, Je, Rp, ExchangeWord.comp, properWord, openWord,
     TwoSquare.hComp, TwoSquare.mk,

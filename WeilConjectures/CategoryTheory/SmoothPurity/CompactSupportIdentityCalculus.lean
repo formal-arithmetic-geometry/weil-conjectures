@@ -33,7 +33,6 @@ set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option linter.privateModule false
-set_option linter.unusedSimpArgs false
 set_option genSizeOf false
 set_option genInjectivity false
 universe u

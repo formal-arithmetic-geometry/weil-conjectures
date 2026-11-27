@@ -252,7 +252,6 @@ noncomputable abbrev integralTransition (E L : Index l Ω) (h : E ≤ L) :=
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option linter.unusedVariables false in
 /-- The integral scalar extension has a unique shift comparison whose image in the ambient
 derived category is the ordinary derived tensor shift conjugated by the quotient-completion
 comparison `sfIntegralOrdinaryComparison`. -/
@@ -263,7 +262,7 @@ theorem integralScalarCommShift_existsUnique
     (ι : E →ₐ[Padic l] L) (Y : AlgebraicGeometry.Scheme.{u}) :
     ∃! c : (sfConstructibleIntegralScalarExtension 0 l
         (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι Y).CommShift ℤ,
-      (fun [commInst : (sfConstructibleIntegralScalarExtension 0 l
+      (fun [_commInst : (sfConstructibleIntegralScalarExtension 0 l
           (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι Y).CommShift ℤ] ↦
         ∀ (n : ℤ) (K : sfIntegralConstructibleCategory l E Y),
           HEq
@@ -279,7 +278,7 @@ theorem integralScalarCommShift_existsUnique
                 n).hom.app K ≫
               (shiftFunctor (DerivedCategory (scalarReductionSource.{u, u} l L Y)) n).map
                 ((sfIntegralOrdinaryComparison l E L ι Y).hom.app K)))
-        (commInst := c) := by
+        (_commInst := c) := by
   exact normalized_shift_existsUnique
     (sfConstructibleIntegralScalarExtension 0 l
       (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι Y)
@@ -314,7 +313,7 @@ variable (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
   (Y : AlgebraicGeometry.Scheme.{u})
 
-set_option linter.unusedSectionVars false in
+omit [IsAlgClosure (Padic l) Ω] in
 /-- The datum-free transition agrees with the transition for any finite-field datum `D`
 with `l ≠ D.p`. -/
 theorem specialization_transition (E L : AlgebraicallyClosedCoefficients.Index l Ω)
@@ -375,17 +374,16 @@ private theorem normalized_transitionShift_existsUnique
 
 end
 
-set_option linter.unusedVariables false in
 /-- The rational transition has a unique shift comparison whose shift-one component is the
 localization of the normalized integral shift. -/
 theorem transitionCommShift_existsUnique (E L : Index l Ω) (h : E ≤ L) :
     ∃! c : (transition l Ω Y E L h).CommShift ℤ,
-      (fun [commInst : (transition l Ω Y E L h).CommShift ℤ] ↦
+      (fun [_commInst : (transition l Ω Y E L h).CommShift ℤ] ↦
         ∀ K : Stage l Ω Y E,
           HEq (((transition l Ω Y E L h).commShiftIso (1 : ℤ)).hom.app K)
             ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω L) Y).map
               (((integralTransition l Ω Y E L h).commShiftIso (1 : ℤ)).hom.app K.obj)))
-        (commInst := c) := by
+        (_commInst := c) := by
   obtain ⟨p, hpl, hp⟩ := Nat.exists_infinite_primes (l + 1)
   let D := auxiliaryFiniteDatum p hp
   have hlp : l ≠ D.p := by
@@ -476,8 +474,8 @@ theorem transitionExact (E L : Index l Ω) (h : E ≤ L) :
 
 end
 
-set_option linter.unusedSectionVars false in
 
+omit [IsAlgClosure (Padic l) Ω] in
 /-- The transition is an additive functor. -/
 @[instance]
 theorem transitionAdditive (E L : Index l Ω) (h : E ≤ L) :

@@ -34,7 +34,6 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-set_option linter.unusedVariables false in
 /-- The algebraic localization square before ordinary pullback target coordinates. -/
 theorem exists_affineLocalizedTensorStalkSquare
     (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']
@@ -56,7 +55,7 @@ theorem exists_affineLocalizedTensorStalkSquare
       (@id (ModuleCat.{u} A ⥤
         SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
           (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M)
-    let T := ((Scheme.Modules.tensorPullback
+    let _T := ((Scheme.Modules.tensorPullback
       (Spec.map (CommRingCat.ofHom φg'))).mapHomologicalComplex (.up ℤ)).obj P
     let C := ((ModuleCat.extendScalars φg').mapHomologicalComplex (.up ℤ)).obj M
     let U := affineBaseChangeTildeModule R A R' A' M m i

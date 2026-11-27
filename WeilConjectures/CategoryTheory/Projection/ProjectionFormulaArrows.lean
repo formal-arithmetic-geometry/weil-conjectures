@@ -79,7 +79,7 @@ private lemma tensorAdjunctionMate_naturality
   congr 1
   simp only [tensorHom_comp_tensorHom, Category.id_comp, Category.comp_id]
 
-set_option linter.unusedSectionVars false in
+omit [HasCoproducts A] [HasCoproducts B] in
 set_option backward.isDefEq.respectTransparency false in
 /-- For finite free coefficients the ordinary mate is the finite-product comparison. -/
 theorem tensorAdjunctionMate_free_isIso
@@ -162,6 +162,7 @@ noncomputable def tensorAdjunctionRetractInverse
   V.map (𝟙 M ⊗ₘ L.map i) ≫ tensorAdjunctionFreeInverse L V adj e he j hj M N ≫
     (𝟙 (V.obj M) ⊗ₘ p)
 
+omit [HasCoproducts A] [HasCoproducts B] in
 set_option backward.isDefEq.respectTransparency false in
 private lemma tensorAdjunctionRetractInverse_identities
     (he : ∀ {X X' Y Y' : A} (f : X ⟶ X') (g : Y ⟶ Y'),
@@ -378,7 +379,7 @@ noncomputable def tensorAdjunctionTotalInverse
 
 attribute [local irreducible] tensorAdjunctionTotalInverse
 
-set_option linter.unusedSectionVars false in
+omit [MonoidalPreadditive A] [HasCoproducts A] in
 /-- The target tensor total is K-injective for the specified bounded split-free package. -/
 theorem tensorAdjunctionTotal_target_isKInjective
     (j : L.obj (𝟙_ A) ≅ 𝟙_ B)

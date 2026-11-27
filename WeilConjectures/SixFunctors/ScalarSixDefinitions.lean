@@ -31,7 +31,6 @@ transported through the fixed internal/sectionwise module equivalence.
 @[expose] public noncomputable section
 
 set_option backward.defeqAttrib.useBackward true
-set_option linter.unusedVariables false
 set_option autoImplicit false
 set_option genInjectivity false
 set_option genSizeOf false
@@ -472,7 +471,7 @@ abbrev ScalarSixImmersionIdentifiers (G : ScalarSixGeometry.{u}) (k : Type u) [F
 /-- An unchanged comparison equation, named to keep structure projections compact. -/
 def ScalarSixImmersionNormalization (E : LocallyClosedExtensionData.{u}) (D : E.DerivedCoherence)
     (G : ScalarSixGeometry.{u}) (C : ScalarSixPullbackData.{u})
-    (k : Type u) [Field k] (O : ScalarSixOpenComparison E G k)
+    (k : Type u) [Field k] (_O : ScalarSixOpenComparison E G k)
     (beta : ScalarSixImmersionComparisons E G k) : Prop :=
   ∀ {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') {S X : Over (Spec (.of k))}
       [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom]
@@ -486,8 +485,8 @@ def ScalarSixImmersionNormalization (E : LocallyClosedExtensionData.{u}) (D : E.
 
 /-- An unchanged comparison equation, named to keep structure projections compact. -/
 def ScalarSixImmersionComposition (E : LocallyClosedExtensionData.{u}) (D : E.DerivedCoherence)
-    (G : ScalarSixGeometry.{u}) (C : ScalarSixPullbackData.{u})
-    (k : Type u) [Field k] (O : ScalarSixOpenComparison E G k)
+    (G : ScalarSixGeometry.{u}) (_C : ScalarSixPullbackData.{u})
+    (k : Type u) [Field k] (_O : ScalarSixOpenComparison E G k)
     (beta : ScalarSixImmersionComparisons E G k)
     (compositionIdentifier : ScalarSixImmersionIdentifiers G k) : Prop :=
   ∀ {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') {T S X : Over (Spec (.of k))}
@@ -507,8 +506,8 @@ def ScalarSixImmersionComposition (E : LocallyClosedExtensionData.{u}) (D : E.De
               ((scalarSixChange a T.left).obj M)
 
 /-- An unchanged comparison equation, named to keep structure projections compact. -/
-def ScalarSixImmersionOpenValue (E : LocallyClosedExtensionData.{u}) (D : E.DerivedCoherence)
-    (G : ScalarSixGeometry.{u}) (C : ScalarSixPullbackData.{u})
+def ScalarSixImmersionOpenValue (E : LocallyClosedExtensionData.{u}) (_D : E.DerivedCoherence)
+    (G : ScalarSixGeometry.{u}) (_C : ScalarSixPullbackData.{u})
     (k : Type u) [Field k] (O : ScalarSixOpenComparison E G k)
     (beta : ScalarSixImmersionComparisons E G k) : Prop :=
   ∀ {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') {S X : Over (Spec (.of k))}

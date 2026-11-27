@@ -31,7 +31,6 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry
 open Scheme Etale
 
-set_option linter.unusedVariables false in
 /-- Component theorem: the source strict-local cube stalk comparison is invertible. -/
 theorem Etale.isIso_strictHenselization_exchangeCube_source_stalkComparison
     {S T X X' : Scheme.{u}} {g : T ⟶ S} {f : X ⟶ S}
@@ -79,11 +78,11 @@ theorem Etale.isIso_strictHenselization_exchangeCube_source_stalkComparison
       (((p₀)^*[AddCommGrpCat.{u + 1}]).obj G)
     let M₁ := (R+((f)_*[AddCommGrpCat.{u + 1}]) ⋙
       D+((g)^*[AddCommGrpCat.{u + 1}])).obj K
-    let M₂ := (D+((g')^*[AddCommGrpCat.{u + 1}]) ⋙
+    let _M₂ := (D+((g')^*[AddCommGrpCat.{u + 1}]) ⋙
       R+((f')_*[AddCommGrpCat.{u + 1}])).obj K
     let N₁ := (R+((f₀)_*[AddCommGrpCat.{u + 1}]) ⋙
       D+((g₀)^*[AddCommGrpCat.{u + 1}])).obj K₀
-    let N₂ := (D+((p₁)^*[AddCommGrpCat.{u + 1}]) ⋙
+    let _N₂ := (D+((p₁)^*[AddCommGrpCat.{u + 1}]) ⋙
       R+((f₁)_*[AddCommGrpCat.{u + 1}])).obj K₀
     IsIso (derivedStalkComparison jB t τ ht M₁ N₁
       (exchangeCubeSourceComparison sq₀.toCommSq h G) (q : ℤ)) := by

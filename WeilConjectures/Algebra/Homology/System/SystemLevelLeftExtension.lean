@@ -40,8 +40,6 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
   [EssentiallySmall.{w} C]
 
--- Unused-variable linting needlessly normalizes the entire extension schema here.
-set_option linter.unusedVariables false in
 /-- Derived left extensions of arbitrary strict semilinear ring-sheaf systems.
 The nonnegative index n denotes the positive index n+1. All structure fields
 are conclusions: no flatness of the coefficient maps, normalization, or boundedness

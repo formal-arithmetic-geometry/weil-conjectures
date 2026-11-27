@@ -20,8 +20,6 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 4096
 set_option maxRecDepth 4096
-set_option linter.style.haveILetI false
-set_option linter.unusedSimpArgs false
 universe u
 open CategoryTheory CategoryTheory.Limits
 open AlgebraicGeometry AlgebraicGeometry.Scheme
@@ -51,7 +49,7 @@ private theorem transportRestriction_open
     dsimp only [o, scalarSixTransportOpen, Iso.trans_hom, Iso.symm_hom,
       NatTrans.comp_app, Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
       Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.rightUnitor_hom_app]
-    simp only [Category.comp_id, Functor.map_comp]
+    simp only [Functor.map_comp]
     erw [e'.functor.map_id, Category.comp_id]
     have ht : e'.functor.map (e'.unitIso.inv.app (J.obj M)) =
         e'.counitIso.hom.app (e'.functor.obj (J.obj M)) := by
@@ -75,7 +73,7 @@ private theorem transportRestriction_open
   simp only [scalarSixTransportRestriction, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.rightUnitor_inv_app,
-    Functor.rightUnitor_hom_app, Category.id_comp, Category.comp_id,
+    Functor.rightUnitor_hom_app, Category.id_comp,
     Functor.map_comp, Category.assoc]
   erw [e.inverse.map_id, Category.id_comp]
   rw [← e.inverse.map_comp_assoc, ← e.inverse.map_comp_assoc]
@@ -144,7 +142,7 @@ private theorem localizedRestrictionSquare
         (Functor.mapDerivedCategoryIdIso A).hom.app L ≫
           (localizedRho J R r).inv.app L := by
     simp only [localizedRho, Functor.mapDerivedCategoryCompNatIso,
-      Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv, NatTrans.comp_app,
+      Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, NatTrans.comp_app,
       Functor.mapDerivedCategoryNatIso_symm, Iso.hom_inv_id_app_assoc]
   have hj (L : DerivedCategory C) :
       (Functor.mapDerivedCategoryNatIso rho.symm ≪≫
@@ -152,7 +150,7 @@ private theorem localizedRestrictionSquare
         (Functor.mapDerivedCategoryIdIso C).hom.app L ≫
           (localizedRho F Q rho).inv.app L := by
     simp only [localizedRho, Functor.mapDerivedCategoryCompNatIso,
-      Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv, NatTrans.comp_app,
+      Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, NatTrans.comp_app,
       Functor.mapDerivedCategoryNatIso_symm, Iso.hom_inv_id_app_assoc]
   rw [hi, hj, e.mapDerivedCategory.map_comp, Category.assoc,
     ← Category.assoc ((Functor.mapDerivedCategorySquareIso z).hom.app M), hz] at h
@@ -201,17 +199,17 @@ private theorem openRestriction
       (scalarSixPull Λ j.left).map ((scalarSixOpenIso E G O Λ j).hom.app M) ≫
         (localizedRho (openImmersionLowerShriek Λ.X j.left) (upperStar Λ.X j.left)
           (openRho Λ j.left)).hom.app M := by
-  letI : IsCommMonObj Λ.X := Λ.comm
+  let : IsCommMonObj Λ.X := Λ.comm
   let b := scalarSixImmersion G Λ j
-  letI := E.additive b
-  letI := E.finiteLimits b
-  letI := E.finiteColimits b
+  let := E.additive b
+  let := E.finiteLimits b
+  let := E.finiteColimits b
   let e := ModuleRingedComparison.equivalence Λ.X S.left
   let e' := ModuleRingedComparison.equivalence Λ.X X.left
-  letI : e.functor.Additive := scalarSixEquivalenceAdditive Λ S.left
-  letI : e.inverse.Additive := scalarSixEquivalenceInverseAdditive Λ S.left
-  letI : e'.functor.Additive := scalarSixEquivalenceAdditive Λ X.left
-  letI : e'.inverse.Additive := scalarSixEquivalenceInverseAdditive Λ X.left
+  let : e.functor.Additive := scalarSixEquivalenceAdditive Λ S.left
+  let : e.inverse.Additive := scalarSixEquivalenceInverseAdditive Λ S.left
+  let : e'.functor.Additive := scalarSixEquivalenceAdditive Λ X.left
+  let : e'.inverse.Additive := scalarSixEquivalenceInverseAdditive Λ X.left
   let J := openImmersionLowerShriek Λ.X j.left
   let R := upperStar Λ.X j.left
   let adj := openImmersionLowerShriekUpperStarAdjunction Λ.X j.left

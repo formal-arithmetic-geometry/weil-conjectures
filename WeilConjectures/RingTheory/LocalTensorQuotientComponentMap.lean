@@ -38,13 +38,11 @@ universe u v
 open scoped TensorProduct
 namespace AdicCompletion
 
--- The ideal-membership argument also works for n = 0; keep the given signature.
-set_option linter.unusedVariables false in
 /-- The quotient tensor product embeds into the product of its local factors. -/
 theorem tensor_quotient_component_map
     (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime]
-    (n : ℕ) (hn : 0 < n) :
+    (n : ℕ) (_hn : 0 < n) :
     let A := Localization.AtPrime p
     let m := IsLocalRing.maximalIdeal A
     ∃ φ : ((Localization.AtPrime p ⧸ (m ^ n)) ⊗[R] S) →ₗ[R]

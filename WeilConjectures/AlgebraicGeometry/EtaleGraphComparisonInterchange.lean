@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleGraphShrinkSidePasting
 @[expose] public noncomputable section
 
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 set_option backward.isDefEq.respectTransparency false
 
 universe u
@@ -54,8 +53,8 @@ private theorem cancel_product_boundaries
     Functor.map_comp, Category.assoc]
   rw [← b₂.inv.naturality_assoc (a₂.hom.app M),
     ← b₁.hom.naturality_assoc (a₂.hom.app M)]
-  simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app, Functor.map_id,
-    Category.id_comp, Category.comp_id, Iso.inv_hom_id_app_assoc]
+  simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app,
+    Category.comp_id, Iso.inv_hom_id_app_assoc]
 
 private theorem shrink_cancel
     {C : Type*} [Category C] {B O₁ O₂ N₁ N₂ F₁ F₂ : C}

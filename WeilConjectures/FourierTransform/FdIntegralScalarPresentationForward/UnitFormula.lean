@@ -46,7 +46,7 @@ variable (l : ℕ) [Fact l.Prime]
   (ordinary : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
     FdOrdinaryScalarTransport l Ω T h)
 
-set_option linter.unusedSectionVars false in
+omit dT iT in
 /-- The normalized derived ordinary square is compatible with the units. -/
 private theorem eD_unit (E : Padic.FiniteCoefficientFields l Ω)
     (o : FdOrdinaryScalarTransport l Ω T (le_refl E))

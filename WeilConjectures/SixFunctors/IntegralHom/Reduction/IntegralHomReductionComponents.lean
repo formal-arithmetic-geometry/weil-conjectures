@@ -32,7 +32,6 @@ braiding followed by the native counit.
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
-set_option linter.style.haveILetI false
 
 universe d t u
 
@@ -51,10 +50,10 @@ theorem reduction_target_exists
     Nonempty (TensorPresentation.{t, u} Y
       (integralCoefficientCommRingSheaf l E Y n)) := by
   classical
-  letI : EssentiallySmall.{t + 1} Y.ProEt := essentiallySmallSelf.{0, t, t + 1} _
-  letI : HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
+  let : EssentiallySmall.{t + 1} Y.ProEt := essentiallySmallSelf.{0, t, t + 1} _
+  let : HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
       AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbSheafify.{t, u} Y
-  letI : (AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
+  let : (AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
       AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbLocallyBijective.{t, u} Y
   obtain ⟨S, T, β, ⟨hcoh⟩⟩ :=
     CategoryTheory.ringedDerived_closed_symmetric_monoidal.{t + 1, t, u,

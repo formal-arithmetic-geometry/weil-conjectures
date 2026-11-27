@@ -22,7 +22,6 @@ shift.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 attribute [local irreducible] HasDerivedCategory.standard Padic
   WeilConjectures.sfIntegralConstructible WeilConjectures.sfRationalTriangulationDatum
   CategoryTheory.ScalarLocalization.category
@@ -116,23 +115,23 @@ theorem canonical_scalar_localization_shift
   let QL := sfRationalConstructibleLocalization l L.carrier T
   let SI := GeneralAlgebraicallyClosedCoefficients.integralTransition l Ω T a b h
   let R := rationalScalar.{u, v} l Ω E L i T
-  letI : HasShift (C.{u, v} l Ω T (.integral E)) ℤ := shift l Ω T (.integral E)
-  letI : HasShift (C.{u, v} l Ω T (.integral L)) ℤ := shift l Ω T (.integral L)
-  letI : IE.CommShift ℤ := finiteTorIntegralShift l Ω E T
-  letI : IL.CommShift ℤ := finiteTorIntegralShift l Ω L T
-  letI : S.functor.CommShift ℤ := canonicalIntegralScalarShift l Ω S
-  letI : (rationalization.{u, v} l Ω E T).CommShift ℤ :=
+  let : HasShift (C.{u, v} l Ω T (.integral E)) ℤ := shift l Ω T (.integral E)
+  let : HasShift (C.{u, v} l Ω T (.integral L)) ℤ := shift l Ω T (.integral L)
+  let : IE.CommShift ℤ := finiteTorIntegralShift l Ω E T
+  let : IL.CommShift ℤ := finiteTorIntegralShift l Ω L T
+  let : S.functor.CommShift ℤ := canonicalIntegralScalarShift l Ω S
+  let : (rationalization.{u, v} l Ω E T).CommShift ℤ :=
     integralRationalizationShift.{u, v} l Ω E T
-  letI : (rationalization.{u, v} l Ω L T).CommShift ℤ :=
+  let : (rationalization.{u, v} l Ω L T).CommShift ℤ :=
     integralRationalizationShift.{u, v} l Ω L T
-  letI : SI.CommShift ℤ :=
+  let : SI.CommShift ℤ :=
     GeneralAlgebraicallyClosedCoefficients.integralTransitionCommShift l Ω T a b h
-  letI : R.CommShift ℤ :=
+  let : R.CommShift ℤ :=
     GeneralAlgebraicallyClosedCoefficients.transitionCommShift l Ω T a b h
   obtain ⟨eI, heI, hsI⟩ := canonical_integral_scalar_square l Ω a b h T S hS nS
   obtain ⟨eR, heR, hsR⟩ := canonical_stage_scalar_shift l Ω T a b h
-  haveI : eI.hom.CommShift ℤ := hsI
-  haveI : eR.hom.CommShift ℤ := hsR
+  have : eI.hom.CommShift ℤ := hsI
+  have : eR.hom.CommShift ℤ := hsR
   let e : rationalization.{u, v} l Ω E T ⋙ R ≅
       S.functor ⋙ rationalization.{u, v} l Ω L T :=
     Functor.associator IE QE R ≪≫ Functor.isoWhiskerLeft IE eR ≪≫

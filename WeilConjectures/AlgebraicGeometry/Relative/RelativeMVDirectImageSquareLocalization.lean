@@ -58,7 +58,6 @@ private theorem normalized_unit {A B C : Scheme.{u}} (s : A ⟶ B) (t : B ⟶ C)
 
 attribute [local irreducible] schemeNormalizedDirectImageCompIso
 
-set_option linter.all false in
 private theorem general_square_unit
     {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
@@ -95,7 +94,6 @@ private theorem general_square_unit
     ((schemeNormalizedDirectImageCompIso f' g).app (DerivedCategory.Qh.obj J)).symm
     _ _ _ _ _ _ _ hc₁ hc₂ hd' he
 
-set_option linter.all false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private lemma localization_unit_eq {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -116,7 +114,6 @@ private lemma localization_unit_eq {X Y : Scheme.{u}} (f : X ⟶ Y)
     (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctor.map_id]
   simp only [Category.id_comp, Category.comp_id]
 
-set_option linter.all false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Localization of an ordinary direct-image square gives the square mate of

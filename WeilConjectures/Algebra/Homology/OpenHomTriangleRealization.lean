@@ -214,8 +214,6 @@ private theorem assemble_open_triangle
     rw [sub_eq_add_neg]
     rfl
 
--- The original existential binder eN is used only through its asserted existence.
-set_option linter.unusedVariables false in
 /-- The open-cover triangle, together with its additive Hom identifications.
 The equality hR records that R is exactly the underlying ring sheaf of X; keeping R
 as an explicit parameter avoids repeatedly unfolding that large expression.
@@ -254,7 +252,7 @@ theorem open_hom_triangle_realization (X : AlgebraicGeometry.RingedSpace.{u})
       Triangle.mk a b δ ∈ distTriang _ ∧
       ∃ (eB : (B ⟶ F) ≃+ ((RU.obj E ⟶ RU.obj F) × (RV.obj E ⟶ RV.obj F)))
         (eA : (A ⟶ F) ≃+ (RW.obj E ⟶ RW.obj F))
-        (eN : (A⟦(1 : ℤ)⟧ ⟶ F) ≃+ (RW.obj E ⟶ (RW.obj F)⟦(-1 : ℤ)⟧)),
+        (_eN : (A⟦(1 : ℤ)⟧ ⟶ F) ≃+ (RW.obj E ⟶ (RW.obj F)⟦(-1 : ℤ)⟧)),
         (∀ f : E ⟶ F, eB (b ≫ f) = (RU.map f, RV.map f)) ∧
         (∀ g : B ⟶ F, eA (a ≫ g) =
           openHomRestriction R (homOfLE inf_le_left) (eB g).1 -

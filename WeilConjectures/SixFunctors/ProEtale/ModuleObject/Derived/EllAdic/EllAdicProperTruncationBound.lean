@@ -35,6 +35,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 include ℓ k hΛ
 
+-- Keep the section instances as hypotheses of this public statement.
 set_option linter.unusedSectionVars false in
 /-- The direct image of a sufficiently low lower tail has no cohomology in
 degree `q` or above, uniformly on the bounded constructible localizing hull. -/

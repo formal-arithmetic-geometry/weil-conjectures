@@ -68,7 +68,6 @@ attribute [-instance] CategoryTheory.RingedSiteBoundedDual.modulesHasZeroObject
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-set_option linter.unusedSectionVars false
 universe c v r w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace PresheafOfModules
@@ -274,6 +273,8 @@ private local instance spSymmetric : SymmetricCategory 𝓜 :=
 private local instance spMonoidalPreadditive : MonoidalPreadditive 𝓜 :=
   SheafOfModules.cochainModulesPreadditive R
 
+omit [HasSheafify J AddCommGrpCat.{max c v r}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}] in
 private theorem hom_flip_additive
     (B : 𝓜) :
     ((SheafOfModules.homFunctor.{max c v r, v, c, max c v r} R).flip.obj B).Additive where
@@ -321,6 +322,8 @@ private noncomputable def homPowerUnitIso (N : ℕ) :
     biproduct.mapIso (C := 𝓜) (fun _ ↦ homUnitIso.{c, v, r} J R O) ≪≫
     biproduct.isoProduct (C := 𝓜) _
 
+omit [HasSheafify J AddCommGrpCat.{max c v r}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}] in
 private theorem dualTerm_isIso
     (E : CochainComplex 𝓜 ℤ)
     (hE : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (E.X n)) (n : ℤ) :

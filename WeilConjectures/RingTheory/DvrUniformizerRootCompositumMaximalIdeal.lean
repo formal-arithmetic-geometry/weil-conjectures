@@ -167,10 +167,8 @@ theorem dvr_uniformizer_root_compositum_map_maximalIdeal
     (IsLocalRing.maximalIdeal A).map (algebraMap A T) = IsLocalRing.maximalIdeal T := by
   have h := dvr_uniformizer_root_compositum_formallyUnramifiedData B pi hpi A U e he theta hroot
     hindexU hsep E F iE hcomm hgen T j hj hjB hjE
-  set_option linter.style.haveILetI false in
-    haveI : Algebra.EssFiniteType A T := h.1
-  set_option linter.style.haveILetI false in
-    haveI : Algebra.FormallyUnramified A T := h.2
+  have : Algebra.EssFiniteType A T := h.1
+  have : Algebra.FormallyUnramified A T := h.2
   exact Algebra.FormallyUnramified.map_maximalIdeal
 
 

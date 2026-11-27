@@ -28,7 +28,6 @@ attribute [local irreducible] RingedSpace.moduleCohomology
   boundaryCoefficientCohomologyIso canonicalTensorBoundaryComparisons
 noncomputable section
 
-set_option linter.unusedVariables false in
 /-- The homogeneous quotient actions commute with the coefficient projections.
 This statement concerns only actions: it has no connecting map or resolution presentation. -/
 theorem tensorGradedAction_projection {X Z : Scheme.{u}} (j : Z ⟶ X)
@@ -56,7 +55,7 @@ theorem tensorGradedAction_projection {X Z : Scheme.{u}} (j : Z ⟶ X)
     (haction : ∀ g : T.C.right.obj.obj (op ⊤), ρ g =
       ((RingedSpace.moduleCohomology X.toRingedSpace 1).map (μ g).asHom).hom) :
     let F : Z.Modules := (tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow n)
-    let N : Z.Modules := ((tensorPullback j).obj L).tensorPow n
+    let _N : Z.Modules := ((tensorPullback j).obj L).tensorPow n
     let H := RingedSpace.moduleCohomology Z.toRingedSpace 1
     (∀ z : (RingedSpace.moduleCohomology X.toRingedSpace 1).obj T.I,
       tensorGradedCoefficientProjection T D (e + 1)

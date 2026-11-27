@@ -408,8 +408,6 @@ private theorem fixed_open_exact_adjunction
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-set_option linter.style.haveILetI false in
--- Inline the local instances to keep the derived comparison expressions small.
 -- Explicit comparison congruences are checked within this declaration.
 private theorem strict_finite_open_unit (b : Base l E)
     {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j] (n : ℕ)
@@ -425,10 +423,10 @@ private theorem strict_finite_open_unit (b : Base l E)
       (comparisonFinitePull l E b j n).hom.app
         ((openImmersionLowerShriek
           (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j).mapDerivedCategory.obj N) := by
-  letI := b.finite n
-  letI := sfIntrinsicExtensionByZero_additive j (R l E n)
-  letI := sfIntrinsicExtensionByZero_preservesFiniteLimits j (R l E n)
-  letI := sfIntrinsicExtensionByZero_preservesFiniteColimits j (R l E n)
+  let := b.finite n
+  let := sfIntrinsicExtensionByZero_additive j (R l E n)
+  let := sfIntrinsicExtensionByZero_preservesFiniteLimits j (R l E n)
+  let := sfIntrinsicExtensionByZero_preservesFiniteColimits j (R l E n)
   have ht := exact_unit_square
     (openImmersionLowerShriekUpperStarAdjunction
       (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j)

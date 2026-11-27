@@ -415,8 +415,11 @@ private theorem properHypotheses_rational
     have := hi
     exact ⟨c, ⟨hc⟩, ⟨(Cofan.isColimitMapCoconeEquiv _ K c).2 hc'.ofPointIso⟩⟩
 
-set_option linter.unusedSectionVars false in
 include k in
+omit [Fact (ringChar k).Prime] [X.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))]
+  [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+  [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))]
+  [p.IsOver (Spec (.of k))] in
 private theorem geometricFibreBound : ∃ d : ℕ, ∀ y : Y, topologicalKrullDim
     (pullback p (Spec.map (CommRingCat.ofHom
       (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫

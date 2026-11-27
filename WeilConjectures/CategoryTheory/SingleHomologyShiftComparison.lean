@@ -16,9 +16,9 @@ These comparisons isolate the source and unit transport calculations used by
 @[expose] public section
 open CategoryTheory CategoryTheory.Limits
 variable {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
+omit [HasDerivedCategory C] in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option linter.unusedSectionVars false in
 private theorem cochain_comparison (Y : C) (n : ℤ) :
     (HomologicalComplex.homologyFunctor C (.up ℤ) 0).shiftMap
       (((CochainComplex.singleFunctors C).shiftIso (-n) n 0 (by simp)).inv.app Y)

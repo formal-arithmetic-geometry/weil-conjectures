@@ -30,8 +30,6 @@ This is the geometric-data part of ordinary ringed pullback localization.
 @[expose] public section
 set_option autoImplicit false
 set_option relaxedAutoImplicit false
-set_option linter.unusedSimpArgs false
-set_option linter.style.haveILetI false
 universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite CategoryTheory.MonoidalCategory
@@ -297,10 +295,10 @@ theorem geometric_ringed_pullback_slice_data
   let adjPost := Over.postAdjunctionLeft (X := A) f.adj
   let adj := y.fibreEquivalence.toAdjunction.comp
     (adjPost.comp x.fibreEquivalence.symm.toAdjunction)
-  letI : PreservesFiniteLimits f.inverse := f.leftExact
-  letI : PreservesFiniteLimits (Over.post (X := A) f.inverse) := inferInstance
-  letI : PreservesFiniteLimits y.fibreEquivalence.functor := inferInstance
-  letI : PreservesFiniteLimits x.fibreEquivalence.inverse := inferInstance
+  let : PreservesFiniteLimits f.inverse := f.leftExact
+  let : PreservesFiniteLimits (Over.post (X := A) f.inverse) := inferInstance
+  let : PreservesFiniteLimits y.fibreEquivalence.functor := inferInstance
+  let : PreservesFiniteLimits x.fibreEquivalence.inverse := inferInstance
   have hF : PreservesFiniteLimits F := by
     dsimp only [F]
     infer_instance
@@ -312,8 +310,7 @@ theorem geometric_ringed_pullback_slice_data
   refine ⟨fA, slice, a, rfl, ?_⟩
   change d.ringMap = a.hom.app _ ≫
     (elementSheafPullback (f.inverse.obj A)).map f.ringMap
-  simp only [a, Iso.trans_hom, Functor.isoWhiskerLeft_hom, Iso.refl_hom,
-    Functor.map_id, Category.id_comp]
+  simp only [a, Iso.trans_hom, Functor.isoWhiskerLeft_hom]
   rfl
 
 end CategoryTheory

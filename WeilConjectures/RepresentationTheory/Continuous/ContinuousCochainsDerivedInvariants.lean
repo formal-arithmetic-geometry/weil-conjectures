@@ -89,8 +89,6 @@ private theorem universalDeltaFunctor_iso
   · exact congrArg (fun f : CohomologicalDeltaFunctor.Hom T T ↦ f.app q) hαβ
   · exact congrArg (fun f : CohomologicalDeltaFunctor.Hom R R ↦ f.app q) hβα
 
-set_option linter.style.haveILetI false in
-set_option linter.unusedVariables false in
 /-- Continuous inhomogeneous cochains compute the right derived functors of invariants.
 The existential complex is specified by linear equivalences of its terms with continuous
 maps from `G^n` to the discrete module, its maps on coefficients, and its inhomogeneous
@@ -119,7 +117,7 @@ theorem continuousCochains_derived_invariants
       ⨅ g : G, LinearMap.ker (M.obj.ρ g - LinearMap.id)
     ∃ V : DiscreteContinuousRep.{v, u, max u w} A G ⥤ ModuleCat.{max u w} A,
       ∃ a : V.Additive,
-        letI instAdditive : V.Additive := a
+        letI _instAdditive : V.Additive := a
         ∃ t : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G,
             V.obj M ≃ₗ[A] S M,
           (∀ (M N : DiscreteContinuousRep.{v, u, max u w} A G) (f : M ⟶ N)
@@ -144,25 +142,25 @@ theorem continuousCochains_derived_invariants
   classical
   dsimp only
   let h := Classical.choose (discreteModules_abelian.{u, v, max u w} G A)
-  letI := h
-  letI : Preadditive (DiscreteContinuousRep.{v, u, max u w} A G) := h.toPreadditive
-  letI : Preadditive (ModuleCat.{max u w} A) :=
+  let := h
+  let : Preadditive (DiscreteContinuousRep.{v, u, max u w} A G) := h.toPreadditive
+  let : Preadditive (ModuleCat.{max u w} A) :=
     (inferInstance : Abelian (ModuleCat.{max u w} A)).toPreadditive
-  letI := (Classical.choose_spec
+  let := (Classical.choose_spec
     (discreteModules_abelian.{u, v, max u w} G A)).choose_spec.1
-  letI : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G, TopologicalSpace M.obj.V :=
+  let : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G, TopologicalSpace M.obj.V :=
     fun _ ↦ ⊥
-  letI : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G, DiscreteTopology M.obj.V :=
+  have : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G, DiscreteTopology M.obj.V :=
     fun _ ↦ ⟨rfl⟩
-  letI : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G,
+  have : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G,
       ContinuousConstSMul A M.obj.V :=
     fun _ ↦ ⟨fun _ ↦ continuous_of_discreteTopology⟩
   obtain ⟨F, e, hmap, hd, T, hTF⟩ :=
     continuousCochains_deltaFunctor.{u, v, w} G A
   obtain ⟨V, a, t, ht, hlim, ⟨hzero⟩⟩ :=
     continuousCochains_invariants_zero.{u, v, w} G A F e hmap hd
-  letI : V.Additive := a
-  letI : PreservesFiniteLimits V := hlim
+  have : V.Additive := a
+  have : PreservesFiniteLimits V := hlim
   obtain ⟨R, hRF, hR, ⟨hRzero⟩⟩ := V.exists_universal_rightDerived_deltaFunctor
   have hTuniv : T.IsUniversal := by
     apply effaceable_deltaFunctor_isUniversal

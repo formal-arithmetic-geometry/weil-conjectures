@@ -23,7 +23,6 @@ Tensor powers and dual evaluation under ordinary scalar extension.
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 
 universe uC vC u m
 

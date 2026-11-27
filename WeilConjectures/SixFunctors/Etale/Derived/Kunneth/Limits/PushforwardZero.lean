@@ -44,7 +44,6 @@ noncomputable def singleHomologyZeroIso (F : C ⥤ D) [F.Additive] (X : C) :
       ((HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) 0).app X) 0 ≪≫
     HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 (F.obj X)
 
-set_option linter.flexible false in
 /-- `H⁰` of the map of single complexes induced by a natural transformation `τ` is `τ`. -/
 lemma homologyMap_mapHomologicalComplex_single_singleHomologyZeroIso (G G' : C ⥤ D)
     [G.Additive] [G'.Additive] (τ : G ⟶ G') (X : C) :
@@ -59,9 +58,12 @@ lemma homologyMap_mapHomologicalComplex_single_singleHomologyZeroIso (G G' : C �
     ext i
     by_cases hi : i = 0
     · subst hi
-      simp [e, e', HomologicalComplex.singleMapHomologicalComplex,
-        HomologicalComplex.single_map_f_self, HomologicalComplex.singleObjXSelf,
-        HomologicalComplex.singleObjXIsoOfEq]
+      simp only [Functor.mapHomologicalComplex_obj_X, Functor.comp_obj,
+        HomologicalComplex.singleMapHomologicalComplex, NatIso.ofComponents.app,
+        HomologicalComplex.comp_f, NatTrans.mapHomologicalComplex_app_f, ↓reduceDIte, eqToHom_refl,
+        Category.comp_id, HomologicalComplex.single_map_f_self, HomologicalComplex.singleObjXSelf,
+        HomologicalComplex.singleObjXIsoOfEq, eqToIso_refl, Iso.refl_hom, Iso.refl_inv,
+        Category.id_comp, e', e]
       erw [Category.comp_id]
       rfl
     · exact (G.map_isZero (HomologicalComplex.isZero_single_obj_X _ _ _ _ hi)).eq_of_src _ _

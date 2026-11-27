@@ -113,19 +113,18 @@ variable (l : ℕ) [Fact l.Prime] (Qbar : Type w)
     [hDim : Fact (∃ n : ℕ, topologicalKrullDim T ≤ (n : WithBot ℕ∞))]
     [hInv : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
 
-set_option linter.unusedVariables false in
 /-- The raw rational stage has the unique pretriangulation whose triangles are
 isomorphic to localized integral triangles, for the already recorded normalized
 shift. -/
 theorem qbarStagePretriangulated_exists (E : Padic.FiniteCoefficientFields l Qbar) :
     ∃! p : Pretriangulated (pbcStageCategory l Qbar T E),
-      (fun [pInst : Pretriangulated (pbcStageCategory l Qbar T E)] ↦
+      (fun [_pInst : Pretriangulated (pbcStageCategory l Qbar T E)] ↦
         ∀ D : Triangle (pbcStageCategory l Qbar T E),
           D ∈ distTriang (pbcStageCategory l Qbar T E) ↔
             ∃ D' : Triangle (pbcIntegralStage l Qbar T E),
               D' ∈ distTriang (pbcIntegralStage l Qbar T E) ∧
                 Nonempty (D ≅ (pbcStageLocalization l Qbar T E).mapTriangle.obj D'))
-        (pInst := p) := by
+        (_pInst := p) := by
   classical
   let C := pbcIntegralStage l Qbar T E
   let R := PbcIntegralRing l (pbcFiniteField.{u} l Qbar E)

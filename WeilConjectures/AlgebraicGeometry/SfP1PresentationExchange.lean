@@ -573,6 +573,7 @@ private theorem supported_naturality
   exact raw_naturality A f
 
 -- Fix the functors before specializing the derived complexes.
+-- `def` with an inferred type: a `theorem` would need this long pasting statement spelled out.
 set_option linter.defProp false in
 @[irreducible] private def categorical_presentation
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -603,6 +604,7 @@ set_option linter.defProp false in
     (properExchange A (projectionSquare f i hi true)).symm
     (second_normalized A f i hi)
 
+-- `def` with an inferred type: a `theorem` would need this long pasting statement spelled out.
 set_option linter.defProp false in
 @[irreducible] private def raw_geometry
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -621,6 +623,7 @@ set_option linter.defProp false in
     ((ordinaryFinitePullback A i.hom).map
       ((properExchange A (projectiveProjectionSquare S true)).inv.app B))
 
+-- `def` with an inferred type: a `theorem` would need this long pasting statement spelled out.
 set_option linter.defProp false in
 @[irreducible] private def raw_presentation
     (A : Type (u + 1)) [CommRing A] [Finite A]

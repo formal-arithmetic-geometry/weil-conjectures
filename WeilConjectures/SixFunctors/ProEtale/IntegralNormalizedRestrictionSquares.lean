@@ -22,7 +22,6 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 4096
 -- These instances must remain reducible in dependent coefficient-ring expressions.
-set_option linter.style.haveILetI false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 universe u vSite uSite uRing uModule
 open CategoryTheory CategoryTheory.Limits Opposite
@@ -393,7 +392,7 @@ private theorem integral_projection_back_private (n : ℕ)
     e.hom ≫ (sheafCompose (Scheme.ProEt.topology X)
       (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
         (limit.π (integralCoefficientSheafSystem l E X) (op n)) := by
-  letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   let := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.le_add_left 1 n)
   let := DerivedNakayama.quotientDiscrete l E (n + 1)
   apply point_hom_ext X

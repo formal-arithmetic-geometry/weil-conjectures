@@ -40,8 +40,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 -- Derived restriction and composition expand large localization and scalar-restriction terms.
--- Coherence is redundant because proper-support hypotheses already include closedness.
-set_option linter.unusedVariables false in
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -57,7 +55,7 @@ theorem directImage_qc_support_reduction
     (hbounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n →
       IsZero ((DerivedCategory.homologyFunctor
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj E))
-    (hcoherent : ∀ n : ℤ,
+    (_hcoherent : ∀ n : ℤ,
       RingedSpace.IsCoherent X.toRingedSpace
         ((DerivedCategory.homologyFunctor
           (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj E))

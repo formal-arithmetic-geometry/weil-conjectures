@@ -44,8 +44,6 @@ attribute [local irreducible] AlgebraicGeometry.Scheme.reductionDerivedChange
   AlgebraicGeometry.Scheme.completedAdicChange AlgebraicGeometry.Scheme.reductionChange
   CategoryTheory.Functor.leftAdjoint CategoryTheory.Functor.mapDerivedCategory
   CategoryTheory.Functor.rightDerivedFunctor CategoryTheory.presheafToSheaf
-set_option linter.style.haveILetI false
-set_option linter.unusedVariables false
 set_option genInjectivity false
 set_option genSizeOf false
 set_option genSizeOfSpec false
@@ -94,7 +92,6 @@ private theorem commShift_of_whiskerRight
     NatTrans.comp_app, whiskerLeft_app, Functor.map_comp, Category.assoc,
     ← Functor.commShiftIso_hom_naturality] using ht
 
-set_option linter.flexible false in
 private theorem scalarComparison
     (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} (f : X ⟶ Y)
@@ -117,14 +114,14 @@ private theorem scalarComparison
   classical
   let IX := RingStage.inclusion.{u, v} l Ω X s
   let IY := RingStage.inclusion.{u, v} l Ω Y t
-  letI := hA
-  letI := hB
-  letI := hSX
-  letI := hSY
-  letI := PurCompactSupport.comparison_commShift a c
+  let := hA
+  let := hB
+  let := hSX
+  let := hSY
+  let := PurCompactSupport.comparison_commShift a c
   obtain ⟨hcomp, hmate⟩ :=
     ring_canonical_scalar_invertibility.{u, v} l Ω D hl f c a ha A B rA rB SX SY
-  letI := hcomp
+  let := hcomp
   let e : (A.F ⋙ SY.functor) ⋙ IY ≅ (SX.functor ⋙ B.F) ⋙ IY :=
     Functor.associator _ _ _ ≪≫ isoWhiskerLeft A.F SY.realization ≪≫
       (Functor.associator _ _ _).symm ≪≫ isoWhiskerRight rA (pbcDerivedExtend (a.map Y)) ≪≫
@@ -151,7 +148,11 @@ private theorem scalarComparison
               ((pbcDerivedExtend (a.map X)).obj (IX.obj K))) =
         (pbcDerivedExtend (a.map Y)).map (rA.hom.app K) ≫
           (PurCompactSupport.comparison a c).app (IX.obj K) by
-      simp [e, Category.assoc, ← Functor.map_comp]
+      simp only [comp_obj, Iso.trans_hom, isoWhiskerLeft_hom, Iso.symm_hom, isoWhiskerRight_hom,
+        asIso_hom, NatTrans.comp_app, associator_hom_app, whiskerLeft_app, associator_inv_app,
+        whiskerRight_app, Category.comp_id, Category.id_comp, Category.assoc,
+        Iso.inv_hom_id_app_assoc, ← map_comp, Iso.inv_hom_id_app, map_id,
+        NatIso.cancel_natIso_hom_left, e]
       exact hunit
     erw [Category.comp_id]
   have heShift : e.hom.CommShift ℤ := by
@@ -159,14 +160,14 @@ private theorem scalarComparison
       isoWhiskerRight_hom, asIso_hom]
     infer_instance
   have hqShift : q.hom.CommShift ℤ := by
-    letI : IY.Faithful := (ringFullyFaithful.{u, v} l Ω Y t).faithful
-    haveI : (whiskerRight q.hom IY).CommShift ℤ := by rw [hq]; exact heShift
+    have : IY.Faithful := (ringFullyFaithful.{u, v} l Ω Y t).faithful
+    have : (whiskerRight q.hom IY).CommShift ℤ := by rw [hq]; exact heShift
     exact commShift_of_whiskerRight (I := IY) q.hom
   let beta := (mateEquiv A.adjunction B.adjunction q.inv)
-  letI : IsIso beta := hmate q hnorm
-  letI := hqShift
-  letI : A.adjunction.CommShift ℤ := ⟨A.unitShift, A.counitShift⟩
-  letI : B.adjunction.CommShift ℤ := ⟨B.unitShift, B.counitShift⟩
+  have : IsIso beta := hmate q hnorm
+  let := hqShift
+  let : A.adjunction.CommShift ℤ := ⟨A.unitShift, A.counitShift⟩
+  let : B.adjunction.CommShift ℤ := ⟨B.unitShift, B.counitShift⟩
   have hbShift : beta.CommShift ℤ := by
     change NatTrans.CommShift
       ((A.G ⋙ SX.functor).rightUnitor.inv ≫
@@ -243,7 +244,7 @@ theorem exists_ring_scalar_mates (D : FiniteFieldDatum.{max u v}) (_hl : l ≠ D
     [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
     [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]
     [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
-    (operation : ∀ (c : Compactification f) (s : RingStage.{max u v} l),
+    (operation : ∀ (_c : Compactification f) (s : RingStage.{max u v} l),
       Operation.{u, v} l Ω X Y (s.stage l))
     (left : ∀ (c : Compactification f) (s : RingStage.{max u v} l),
       LeftRealization.{u, v} l Ω c s (operation c s))
@@ -267,7 +268,7 @@ theorem exists_ring_scalar_mates (D : FiniteFieldDatum.{max u v}) (_hl : l ≠ D
       (left c s).hom.CommShift ℤ) :
     ∃ scalar : ∀ {s t : RingStage.{max u v} l}
       (a : PurCompactSupport.Change (s.coefficients l) (t.coefficients l))
-      (ha : Allowed l a) (side : Bool),
+      (_ha : Allowed l a) (side : Bool),
     Scalar.{u, v} l Ω a (endpoint X Y side),
     ∃ finiteScalar_eq : ∀ {s : RingStage.{max u v} l} (E : FieldStage.{max u v} l) (n : ℕ+)
       (a : PurCompactSupport.Change (s.coefficients l)
@@ -298,7 +299,7 @@ theorem exists_ring_scalar_mates (D : FiniteFieldDatum.{max u v}) (_hl : l ≠ D
         (PurCompactSupport.completedChange l E.carrier L.carrier i)
         (Allowed.integral E L i) side).realization.inv.app K)
       ((completedScalarComparison l E.carrier L.carrier i (endpoint X Y side)).app K.obj)) ∧
-    ∃ identityData : ∀ {s : RingStage.{max u v} l}
+    ∃ _identityData : ∀ {s : RingStage.{max u v} l}
       (a : PurCompactSupport.Change (s.coefficients l) (s.coefficients l))
       (h : ∀ T : Scheme.{max u v}, a.map T = 𝟙 _) (ha : Allowed l a) (side : Bool),
     ScalarIdentity.{u, v} l Ω h (endpoint X Y side) (scalar a ha side),

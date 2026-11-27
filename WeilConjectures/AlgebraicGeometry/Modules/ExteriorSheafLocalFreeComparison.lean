@@ -203,8 +203,6 @@ private theorem local_unit_isIso (X : Scheme.{u})
   have : IsIso q := isIso_of_reflects_iso q (SheafOfModules.toSheaf _)
   exact inferInstanceAs (IsIso ((SheafOfModules.forget _).map q))
 
--- Keep the original containment binder, which is not needed in the conclusion itself.
-set_option linter.unusedVariables false in
 /-- On a finite-free open, exterior sheafification preserves sectionwise exterior powers
 and gives the free sheaf indexed by increasing subsets. -/
 theorem exteriorSheaf_local_free_comparison (X : Scheme.{u}) (M : X.Modules)
@@ -212,7 +210,7 @@ theorem exteriorSheaf_local_free_comparison (X : Scheme.{u}) (M : X.Modules)
     (e : M.over U ≅ SheafOfModules.free (ULift.{u} (Fin r))) :
     Nonempty ((exteriorPower M n).over U ≅
       SheafOfModules.free (ULift.{u} (Set.powersetCard (Fin r) n))) ∧
-    ∀ (V : X.Opens) (g : V ⟶ U),
+    ∀ (V : X.Opens) (_g : V ⟶ U),
       Function.Bijective
         (((PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).unit.app
           (_root_.PresheafOfModules.exteriorPower (R := _) M.val n)).app (op V)) := by

@@ -301,7 +301,6 @@ import all WeilConjectures.AlgebraicGeometry.EtaleGraphFromOpenBaseChange
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 universe u
 open CategoryTheory Limits
 open scoped CategoryTheory.Functor
@@ -319,7 +318,7 @@ private theorem graph_eq_normalized
       etaleGraphComparisonFromOpen Λ c (EtaleGraphPresentation.ofCompactification d) ≪≫
         etaleGraphOpenNormalization Λ d := by
   simp only [openRestrictionGraphIso, etaleGraphOpenNormalization,
-    ← sfComparison_eq_graphComparison, Iso.trans_assoc]
+    ← sfComparison_eq_graphComparison]
   rfl
 
 private theorem cartesian_exchange_transport
@@ -344,11 +343,11 @@ private theorem cartesian_exchange_transport
     Iso.trans_inv, Iso.symm_inv, Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
-    Functor.map_comp, Category.assoc, Category.id_comp, Category.comp_id]
+    Functor.map_comp, Category.assoc, Category.id_comp]
   rw [← h]
   dsimp only [rightDerivedLowerShriekOfCompactification, Functor.comp_map, Functor.comp_obj]
-  simp only [Functor.map_comp, Category.assoc]
-  simp only [← Functor.map_comp_assoc, ← Functor.map_comp, Iso.inv_hom_id_app,
+  simp only [Category.assoc]
+  simp only [← Functor.map_comp, Iso.inv_hom_id_app,
     CategoryTheory.Functor.map_id, Category.comp_id]
   rfl
 

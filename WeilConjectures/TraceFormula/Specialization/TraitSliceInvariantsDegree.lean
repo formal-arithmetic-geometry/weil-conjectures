@@ -62,7 +62,7 @@ lemma not_dvd_finrank_traitTensorCompositum {ℓ : ℕ} (hℓ : ringChar k' ≠ 
     ProEtale.CondensedRing.exists_prime_ne_dvd_of_natCast_eq_zero k' hℓ
   intro hdvd
   obtain ⟨n, hn⟩ := exists_finrank_traitTensorCompositum_eq_pow (K := K) hp hpk L₁
-  rw [hn] at hdvd
+  rw [← concreteCompositumFinrank_eq L₁, hn] at hdvd
   exact hpℓ ((Nat.prime_dvd_prime_iff_eq hℓ' hp).1 (hℓ'.dvd_of_dvd_pow hdvd)).symm
 
 end AlgebraicGeometry

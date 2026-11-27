@@ -231,7 +231,6 @@ operation data.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.all false
 
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
@@ -264,13 +263,13 @@ def tensorTower (W : Scheme.{t}) :
   coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
     (completedIntegralCommRingSheafUnrestricted l E W) ⋙ IntegralOnSlice.tower l E W none
 
-set_option maxHeartbeats 60000
-
 attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
 attribute [local irreducible] coefficientTotalTensor SheafOfModules.monoidalCategory
   completedIntegralCoefficientSheafUnrestricted unrestrictedIntegralReductionExistence
   SheafOfModules.changeOfRings PresheafOfModules.sheafification
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 private theorem tensorLevel_hom_ext (W : Scheme.{t})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) (k : ℤ)
     (H : integralTowerModules l E W)
@@ -296,13 +295,15 @@ private theorem tensorLevel_hom_ext (W : Scheme.{t})
           (IntegralOnSlice.projection l E W none n) M f ≫
           eqToHom (hF N).symm :=
     IntegralOnSlice.unrestrictedReduction_map l E W none n f
-  letI := extension_preserves_small_colimits.{t + 1, t, u}
+  have := extension_preserves_small_colimits.{t + 1, t, u}
     (IntegralOnSlice.projection l E W none n) F hF hmF
   apply total_extension_hom_ext.{t + 1, t, u}
     (IntegralOnSlice.projection l E W none n) F hF hmF P Q k H
   intro p q hpq V s x y
   convert h p q hpq V s x y using 1 <;> rfl
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 /-- The normalized balanced-tensor isomorphism of whole strict tensor towers. -/
 theorem tensorTowerModel (W : Scheme.{t}) :
     ∃! d : tensorTower l E W ≅ integralOperationsTensorTowerFunctor l E W,
@@ -333,16 +334,22 @@ theorem tensorTowerModel (W : Scheme.{t}) :
   exact (hd' Z.1 Z.2 n.unop p q V s x y).trans
     (hd Z.1 Z.2 n.unop p q V s x y).symm
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 /-- The uniquely normalized strict pullback comparison. -/
 def pullTowerIso {X Y : Scheme.{t}} (f : X ⟶ Y) :
     pullTower l E f ≅ integralOperationsPullbackTowerFunctor l E f :=
   (pullTowerModel l E f).exists.choose
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 /-- The uniquely normalized strict tensor comparison. -/
 def tensorTowerIso (W : Scheme.{t}) :
     tensorTower l E W ≅ integralOperationsTensorTowerFunctor l E W :=
   (tensorTowerModel l E W).exists.choose
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 /-- The operation augmentation, with finite components given by scalar insertion.
 The preceding normalization gives (r tensor x) ↦ pi_n(r) tensor (x tensor 1). -/
 def pullOperationUnit {X Y : Scheme.{t}} (f : X ⟶ Y)
@@ -352,6 +359,8 @@ def pullOperationUnit {X Y : Scheme.{t}} (f : X ⟶ Y)
   IntegralOnSlice.roosUnit l E X none ((pullComplex l E f).obj P) ≫
     integralOperationsRoosFunctor.map ((pullTowerIso l E f).hom.app P)
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 /-- The tensor operation augmentation, with finite components
 x tensor y ↦ (x tensor 1) tensor (y tensor 1). -/
 def tensorOperationUnit (W : Scheme.{t})
@@ -366,6 +375,8 @@ attribute [local irreducible] coefficientMap push pull pullTowerIso tensorTowerI
   IntegralOnSlice.duality IntegralOnSlice.completion IntegralOnSlice.completionComparison
   IntegralOnSlice.completionUnit IntegralOnSlice.roosUnit
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 open CochainComplex CochainComplex.HomComplex in
 private theorem roosMap_coordinates
     {A : Type*} [Category* A] [Abelian A] [HasCountableProducts A]
@@ -406,9 +417,14 @@ private theorem roosMap_coordinates
     intro p
     change ((CategoryTheory.shiftFunctor _ (-1 : ℤ)).map c).f p ≫ (mappingCocone.fst ψ).f p =
       (mappingCocone.fst φ).f p ≫ b.f p
-    simp [mappingCocone.fst,
+    simp only [Int.reduceNeg, shiftFunctor_obj_X', shiftFunctor_map_f', mappingCocone.fst,
+      HomologicalComplex.neg_f_apply, Cocycle.homOf_f, Cocycle.leftShift_coe,
       Cochain.leftShift_v (mappingCone.fst ψ).1 (-1) 0 (by omega) p p
         (add_zero p) (p + -1) (by omega),
+      shiftFunctor_obj_X, mul_zero, Int.reduceSub, mul_neg, neg_mul, one_mul, neg_neg, ne_eq,
+      OfNat.ofNat_ne_zero, not_false_eq_true, EuclideanDomain.div_self, zero_add,
+      Int.negOnePow_one, shiftFunctorObjXIso, HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom,
+      Category.id_comp, Units.neg_smul, one_smul,
       Cochain.leftShift_v (mappingCone.fst φ).1 (-1) 0 (by omega) p p
         (add_zero p) (p + -1) (by omega)]
     exact hc₁ p
@@ -417,14 +433,19 @@ private theorem roosMap_coordinates
     change ((CategoryTheory.shiftFunctor _ (-1 : ℤ)).map c).f p ≫
       (mappingCocone.snd ψ).v p (p + -1) h =
         (mappingCocone.snd φ).v p (p + -1) h ≫ b.f (p + -1)
-    simp [mappingCocone.snd,
+    simp only [Int.reduceNeg, shiftFunctor_obj_X', shiftFunctor_map_f', mappingCocone.snd,
       Cochain.leftShift_v (mappingCone.snd ψ) (-1) (-1) (by omega)
         p (p + -1) rfl (p + -1) (by omega),
+      shiftFunctor_obj_X, mul_neg, mul_one, neg_neg, Int.reduceSub, neg_mul, one_mul, ne_eq,
+      OfNat.ofNat_ne_zero, not_false_eq_true, EuclideanDomain.div_self, Int.reduceAdd,
+      Int.negOnePow_even 2 ⟨1, rfl⟩, shiftFunctorObjXIso, HomologicalComplex.XIsoOfEq_rfl,
+      Iso.refl_hom, Category.id_comp, one_smul,
       Cochain.leftShift_v (mappingCone.snd φ) (-1) (-1) (by omega)
-        p (p + -1) rfl (p + -1) (by omega),
-      Int.negOnePow_even 2 ⟨1, rfl⟩]
+        p (p + -1) rfl (p + -1) (by omega)]
     exact hc₂ p
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 private theorem roosUnit_fst (W : Scheme.{t})
     (P : IntegralOnSlice.Cx l E W none) :
     IntegralOnSlice.roosUnit l E W none P ≫ CochainComplex.mappingCocone.fst
@@ -435,6 +456,8 @@ private theorem roosUnit_fst (W : Scheme.{t})
   unfold IntegralOnSlice.roosUnit integralOperationsRoos
   exact CochainComplex.mappingCocone.lift_fst _ _ _ _
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 private theorem roosUnit_snd (W : Scheme.{t})
     (P : IntegralOnSlice.Cx l E W none)
     (p q : ℤ) (h : p + -1 = q) :
@@ -446,6 +469,8 @@ private theorem roosUnit_snd (W : Scheme.{t})
   unfold IntegralOnSlice.roosUnit integralOperationsRoos
   exact CochainComplex.mappingCocone.lift_f_snd_v _ _ _ _ p q h
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 private theorem roosMap_zero_snd
     {A : Type*} [Category* A] [Abelian A] [HasCountableProducts A]
     {C C' : ℕᵒᵖ ⥤ CochainComplex A ℤ} (a : C ⟶ C')
@@ -460,6 +485,8 @@ private theorem roosMap_zero_snd
   rw [HomologicalComplex.comp_f, Category.assoc, (roosMap_coordinates a).2 p q h,
     ← Category.assoc, hc, zero_comp]
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 private theorem roosUnit_map_snd (W : Scheme.{t})
     (P : IntegralOnSlice.Cx l E W none)
     {C : ℕᵒᵖ ⥤ IntegralOnSlice.Cx l E W none}
@@ -472,6 +499,8 @@ private theorem roosUnit_map_snd (W : Scheme.{t})
   exact roosMap_zero_snd a (IntegralOnSlice.roosUnit l E W none P) p q h
     (roosUnit_snd l E W P p q h)
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 private theorem ambientRoosUnit_coordinates (W : Scheme.{t})
     (P : CochainComplex (integralTowerModules l E W) ℤ)
     {C : ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l E W) ℤ}
@@ -491,6 +520,8 @@ private theorem ambientRoosUnit_coordinates (W : Scheme.{t})
   · rw [Category.assoc, (roosMap_coordinates a).1, ← Category.assoc, roosUnit_fst]
   · exact roosUnit_map_snd l E W P a
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 /-- The pullback tower comparison carries the quotient augmentation to the operation
 augmentation, including its zero shifted-product coordinate. -/
 theorem pullOperationUnit_coordinates {X Y : Scheme.{t}} (f : X ⟶ Y)
@@ -513,6 +544,8 @@ theorem pullOperationUnit_coordinates {X Y : Scheme.{t}} (f : X ⟶ Y)
     ambientRoosUnit_coordinates l E X ((pullComplex l E f).obj P)
       ((pullTowerIso l E f).hom.app P)
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 /-- The analogous tensor augmentation equation retains the zero shifted-product part. -/
 theorem tensorOperationUnit_coordinates (W : Scheme.{t})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
@@ -538,38 +571,40 @@ theorem tensorOperationUnit_coordinates (W : Scheme.{t})
         (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q))
       ((tensorTowerIso l E W).hom.app (P, Q))
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 /-- Ordinary pullback carries flat-term K-flat representatives to such representatives. -/
 theorem pull_good {X Y : Scheme.{t}} (f : X ⟶ Y)
     (P : CochainComplex (integralTowerModules l E Y) ℤ)
     (hP : integralOperationsGoodComplex l E Y P) :
     IntegralOnSlice.Good l E X none ((pullComplex l E f).obj P) := by
-  letI : EssentiallySmall.{max u (t + 1)} Y.ProEt := essentiallySmallSelf _
-  letI : EssentiallySmall.{max u (t + 1)} X.ProEt := essentiallySmallSelf _
-  letI : HasSheafify (ProEt.topology Y) (Type (max u (t + 1))) :=
+  have : EssentiallySmall.{max u (t + 1)} Y.ProEt := essentiallySmallSelf _
+  have : EssentiallySmall.{max u (t + 1)} X.ProEt := essentiallySmallSelf _
+  have : HasSheafify (ProEt.topology Y) (Type (max u (t + 1))) :=
     hasSheafifyEssentiallySmallSite _ _
-  letI : HasSheafify (ProEt.topology X) (Type (max u (t + 1))) :=
+  have : HasSheafify (ProEt.topology X) (Type (max u (t + 1))) :=
     hasSheafifyEssentiallySmallSite _ _
   let G := Scheme.proEtaleBaseChange f
   let L := G.sheafPullback (Type (max u (t + 1))) (ProEt.topology Y) (ProEt.topology X)
   let a := G.sheafAdjunctionContinuous (Type (max u (t + 1)))
     (ProEt.topology Y) (ProEt.topology X)
-  letI : ReflectsLimits (forget (Type (max u (t + 1)))) :=
+  have : ReflectsLimits (forget (Type (max u (t + 1)))) :=
     reflectsLimits_of_reflectsIsomorphisms
-  letI : RepresentablyFlat G := flat_of_preservesFiniteLimits G
-  letI : PreservesFiniteLimits (G.op.lan : (Y.ProEtᵒᵖ ⥤ Type (max u (t + 1))) ⥤
+  have : RepresentablyFlat G := flat_of_preservesFiniteLimits G
+  have : PreservesFiniteLimits (G.op.lan : (Y.ProEtᵒᵖ ⥤ Type (max u (t + 1))) ⥤
       X.ProEtᵒᵖ ⥤ Type (max u (t + 1))) :=
     by
-      letI : AB5OfSize.{t, t + 1} (Type (max u (t + 1))) :=
+      have : AB5OfSize.{t, t + 1} (Type (max u (t + 1))) :=
         AB5OfSize_shrink.{t, t + 1, max u (t + 1), max u (t + 1)} _
       exact preservesFiniteLimits_op_lan_of_flat G
-  letI : PreservesFiniteLimits L :=
+  have : PreservesFiniteLimits L :=
     Functor.sheafPullbackConstruction.preservesFiniteLimits G
       (Type (max u (t + 1))) (ProEt.topology Y) (ProEt.topology X)
   obtain ⟨RI, I, c, T, hT, hobj, hmap, ⟨am⟩⟩ :=
     SheafOfModules.RingedPresentationOnSites.continuous_ringed_pullback_presentation
       G L a (completedIntegralCommRingSheafUnrestricted l E X)
       (completedIntegralCommRingSheafUnrestricted l E Y) (coefficientMap l E f)
-  letI := hT
+  let := hT
   have am' : T ⊣ push l E f := by
     unfold push
     let q := ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat RingCat)).map
@@ -591,6 +626,8 @@ theorem pull_good {X Y : Scheme.{t}} (f : X ⟶ Y)
 
 attribute [local semireducible] coefficientTotalTensor
 
+set_option maxHeartbeats 60000 in
+-- a cap below the default, so that a slowdown in these tower comparisons is caught early
 /-- The direct-sum total tensor of two good representatives is good. -/
 theorem tensor_good (W : Scheme.{t})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ)
@@ -609,8 +646,6 @@ attribute [local irreducible] IntegralOnSlice.tower Functor.mapHomologicalComple
 
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
-
-set_option maxHeartbeats 200000
 
 set_option genSizeOfSpec false in
 set_option genInjectivity false in
@@ -895,7 +930,7 @@ theorem rawAmbientDerivedData {X Y : Scheme.{t}} (f : X ⟶ Y) :
   let e : T ≅ pull l E f := am'.leftAdjointUniq (adjunction l E f)
   obtain ⟨F, ε, hkan, hε⟩ :=
     SheafOfModules.ringedPullbackCochainPresentation L _ a I c T hobj hmap
-  letI := (fun {A B : Type _} [Category.{_} A] [d : Category.{_} B] (_ : A ⥤ B) ↦ d) F
+  let := (fun {A B : Type _} [Category.{_} A] [d : Category.{_} B] (_ : A ⥤ B) ↦ d) F
   let ec := NatIso.mapHomologicalComplex e (.up ℤ)
   let d := Functor.isoWhiskerRight ec
     (DerivedCategory.Q (C := integralTowerModules l E X))
@@ -905,7 +940,7 @@ theorem rawAmbientDerivedData {X Y : Scheme.{t}} (f : X ⟶ Y) :
     have hp : integralOperationsGoodComplex l E Y P.obj := by
       with_unfolding_all exact P.property
     unfold integralOperationsGoodComplex at hp
-    letI := hε P.obj hp.1 hp.2
+    have := hε P.obj hp.1 hp.2
     change IsIso (ε.app P.obj ≫ d.hom.app P.obj)
     infer_instance
   with_unfolding_all refine ⟨F, εc, ⟨?_⟩, ?_⟩
@@ -1369,7 +1404,7 @@ private theorem descendCompletion_existsUnique
     (e : L ⋙ F ≅ H ⋙ Q) (c : Q ⋙ C ≅ V) (b : H ⋙ V ≅ T) (g : L ⋙ G ≅ T)
     (u : ∀ P : A, Q.obj P ⟶ V.obj P)
     (hu : ∀ P : A, η.app (Q.obj P) ≫ c.hom.app P = u P) :
-    ∃! p : DescendedCompletion L C η e c b g u, True := by
+    ∃! _p : DescendedCompletion L C η e c b g u, True := by
   let α := descendComparison L hL C e c b g
   let hn := descentComparison_properties L hL C η e c b g u hu
   refine ⟨⟨α, hn.1, hn.2⟩, trivial, ?_⟩
@@ -1554,8 +1589,6 @@ private theorem globalPullRoosComparison_app {X Y : Scheme.{t}} (f : X ⟶ Y)
     (modelPullComplex l E f) (fun P ↦ modelPullGood l E f P.obj P.property)
     (modelQuotientTower l E X) (modelRecordedPullTower l E f)
     (modelRoos l E X) (modelQ l E X) (modelPullTowerIso l E f) P
-
-set_option maxHeartbeats 200000
 
 /-- Completion of ordinary ambient pullback and tensor is precisely the recorded
 finite-quotient integral pullback and completed tensor, naturally on all derived objects.

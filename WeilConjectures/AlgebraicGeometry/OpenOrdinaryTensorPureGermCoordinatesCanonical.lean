@@ -24,7 +24,6 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
-set_option linter.unusedVariables false
 universe u w
 open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct ChangeOfRings
@@ -173,8 +172,8 @@ theorem openOrdinaryTensor_pure_germ_coordinates_canonical
     letI := (tensorMap f f' g g' sq z.val).toAlgebra
     let K₀ := stalkComplex j z Q₀
     let K := stalkComplex g' z.val P
-    let T₀ := tensorComplex (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z Q₀
-    let T := tensorComplex f f' g g' sq z.val P
+    let _T₀ := tensorComplex (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z Q₀
+    let _T := tensorComplex f f' g g' sq z.val P
     let F₀ := forget₂ (ModuleCat.{u} C₀) AddCommGrpCat.{u}
     let F := forget₂ (ModuleCat.{u} C₁) AddCommGrpCat.{u}
     let L₀ := RingedSpace.moduleStalkFunctor (f' ⁻¹ᵁ V').toScheme.toRingedSpace z
@@ -255,8 +254,8 @@ theorem openOrdinaryTensor_pure_germ_coordinates_linear_extension
     letI := (tensorMap f f' g g' sq z.val).toAlgebra
     let K₀ := stalkComplex j z Q₀
     let K := stalkComplex g' z.val P
-    let T₀ := tensorComplex (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z Q₀
-    let T := tensorComplex f f' g g' sq z.val P
+    let _T₀ := tensorComplex (f ∣_ V) (f' ∣_ V') (g.resLE V V' hV') j sq₀ z Q₀
+    let _T := tensorComplex f f' g g' sq z.val P
     let F₀ := forget₂ (ModuleCat.{u} C₀) AddCommGrpCat.{u}
     let F := forget₂ (ModuleCat.{u} C₁) AddCommGrpCat.{u}
     let L₀ := RingedSpace.moduleStalkFunctor (f' ⁻¹ᵁ V').toScheme.toRingedSpace z

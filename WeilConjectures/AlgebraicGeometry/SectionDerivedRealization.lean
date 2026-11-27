@@ -27,8 +27,6 @@ import all WeilConjectures.CategoryTheory.InternalSectionTensorComparison
 
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.all false
-set_option linter.mathlibStandardSet false
 set_option backward.defeqAttrib.useBackward true
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
@@ -50,7 +48,7 @@ attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmet
 
 attribute [local instance] sectionFunctorAdditive
 
-set_option linter.unusedSectionVars false in
+omit [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)] in
 /-- Exact sequential colimits transfer through the fixed section equivalence. -/
 @[instance] theorem section_hasExactSequentialColimits (X : Scheme.{u}) :
     HasExactColimitsOfShape ℤ (modules Λ X) := by
@@ -69,7 +67,7 @@ set_option allowUnsafeReducibility true in
 attribute [local irreducible] HomologicalComplex.mapBifunctor
   Functor.mapBifunctorHomologicalComplex
 
-set_option linter.unusedSectionVars false in
+omit [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)] in
 private theorem section_kflat_iff (X : Scheme.{u})
     (P : CochainComplex (internalModules Λ X) ℤ) :
     (∀ Z : CochainComplex (internalModules Λ X) ℤ, Z.Acyclic →
@@ -79,7 +77,7 @@ private theorem section_kflat_iff (X : Scheme.{u})
   exact InternalAbelianSheafModule.comparison_kflat
     (Scheme.ProEt.topology X) (condensedRingObj Λ X) P
 
-set_option linter.unusedSectionVars false in
+omit [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)] in
 private theorem internal_kflat_image (X : Scheme.{u})
     (P : CochainComplex (internalModules Λ X) ℤ)
     (hP : (HomotopyCategory.quasiIso (internalModules Λ X) (.up ℤ)).kFlat
@@ -93,7 +91,7 @@ private theorem internal_kflat_image (X : Scheme.{u})
     ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic Z).2 hZ)).2
   exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).1 h
 
-set_option linter.unusedSectionVars false in
+omit [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)] in
 private theorem independent_kflat_of_iso (X : Scheme.{u})
     {P Q : CochainComplex (modules Λ X) ℤ} (e : P ≅ Q)
     (hP : P.IsKFlatIndependentCoefficients) : Q.IsKFlatIndependentCoefficients := by
@@ -119,7 +117,6 @@ private theorem flat_resolving_aux
     F.kFlat_mapHomologicalComplex_obj_resolutionFunctor_obj L.reduced
       ObjectProperty.flat.essImage_ι_le P⟩
 
-set_option linter.unusedSectionVars false in
 private theorem pullback_resolving_complexes {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (modules Λ Y) ℤ) :
     ∃ (R : CochainComplex (modules Λ Y) ℤ) (r : R ⟶ P),
@@ -299,6 +296,7 @@ private theorem localization_mu_iso
     DerivedCategory.Qh.map _) ≫ _)
   infer_instance
 
+omit [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)] in
 private theorem internal_mu_iso (X : Scheme.{u})
     (P Q : CochainComplex (internalModules Λ X) ℤ)
     (h : CochainComplex.IsKFlatIndependentCoefficients
@@ -385,7 +383,7 @@ private theorem transport_tensor_representative
       (Functor.isoWhiskerLeft (Qi.prod Qi) c.symm).hom ≫
       Functor.whiskerRight m F ≫ l.hom
   let W := (Functor.whiskeringLeft _ _ D').obj (e.functor.prod e.functor)
-  letI : W.IsEquivalence := (Equivalence.congrLeft (E := D') (e.prod e)).isEquivalence_inverse
+  let : W.IsEquivalence := (Equivalence.congrLeft (E := D') (e.prod e)).isEquivalence_inverse
   let q := W.preimage w
   have hq : Functor.whiskerLeft (e.functor.prod e.functor) q = w := by
     exact W.map_preimage w
@@ -484,7 +482,7 @@ private theorem natTrans_eq_on_equivalence
     (e : C ≌ D) {F G : D ⥤ E} (α β : F ⟶ G)
     (h : ∀ X : C, α.app (e.functor.obj X) = β.app (e.functor.obj X)) : α = β := by
   let W := (Functor.whiskeringLeft _ _ E).obj e.functor
-  letI : W.IsEquivalence := (Equivalence.congrLeft (E := E) e).isEquivalence_inverse
+  let : W.IsEquivalence := (Equivalence.congrLeft (E := E) e).isEquivalence_inverse
   apply W.map_injective
   apply NatTrans.ext
   exact funext h
@@ -534,7 +532,6 @@ def derivedPushComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Functor.isoWhiskerRight (equivalence Λ X).functor.rightDerivedFunctorIsoMapDerivedCategory
       (derivedPushforward Λ f)
 
-set_option linter.unusedSectionVars false in
 /-- The canonical derived adjunction of the ordinary ringed module adjunction.
 Its left adjoint is expressed by exact localization using the canonical comparison. -/
 def derivedAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -684,9 +681,7 @@ private theorem tensorComparisonDescentAll
         T'.map (Prod.mkHom (eps.app X) (eps.app Y)) ≫ a'.app (F.obj X, F.obj Y) :=
     by
       simp only [l, rr, NatTrans.comp_app, Functor.whiskerLeft_app,
-        Functor.whiskerRight_app, Functor.isoWhiskerRight_hom,
-        NatIso.prod, NatTrans.prod, NatIso.ofComponents_hom_app,
-        asIso_hom, Functor.prod_obj]
+        Functor.whiskerRight_app, NatTrans.prod, Functor.prod_obj]
   have hs (X Y : K) (hX : P X) (hY : P Y) : l.app (X, Y) = (rr d).app (X, Y) := by
     have := ha X Y hX
     have := ha' (F.obj X) (F.obj Y) (hF X hX)

@@ -106,7 +106,6 @@ private theorem refine_residue_model
       (ULift.{v} (Fin (derivedFiberBetti W E j w)))
       (SheafOfModules.overMapUnitIso (homOfLE hU'U)).symm).symm
 
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Choose a common affine neighbourhood with trivial target bundles and a minimal
@@ -120,7 +119,7 @@ theorem picard_h1_common_minimal_model
     (Xi : Fin n → Scheme.{v}) (fi : ∀ i, Xi i ⟶ S)
     [Flat f] [IsProper f] [LocallyOfFinitePresentation f]
     [∀ i, Flat (fi i)] [∀ i, IsProper (fi i)] [∀ i, LocallyOfFinitePresentation (fi i)]
-    (ui : ∀ i, Xi i ⟶ X) (hui : ∀ i, ui i ≫ f = fi i)
+    (ui : ∀ i, Xi i ⟶ X) (_hui : ∀ i, ui i ≫ f = fi i)
     (hO : ∀ {T : Scheme.{v}} (g : T ⟶ S),
       IsIso ((Classical.choose
         (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app

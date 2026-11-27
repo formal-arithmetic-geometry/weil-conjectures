@@ -41,17 +41,16 @@ universe u
 
 namespace Polynomial
 
-set_option linter.unusedVariables false in
 /-- A finite purely inseparable base change of a nonzero polynomial formal fibre above
 zero is a finite product of linear-residue formal fibres over complete local domains.
 This is a ring presentation, with no regularity assertion. -/
 theorem formalFiber_finiteExtension_reduction
     (A : Type u) [CommRing A] [IsDomain A] [IsNoetherianRing A] [IsLocalRing A]
     [IsAdicComplete (IsLocalRing.maximalIdeal A) A]
-    (p : ℕ) (hp : p.Prime) [CharP (Localization.AtPrime (⊥ : Ideal A)) p]
+    (p : ℕ) (_hp : p.Prime) [CharP (Localization.AtPrime (⊥ : Ideal A)) p]
     (q : Ideal (Polynomial A)) [q.IsMaximal]
     (hq : q.comap (Polynomial.C : A →+* Polynomial A) = IsLocalRing.maximalIdeal A)
-    (r : Ideal (Polynomial A)) [r.IsPrime] (hrq : r ≤ q) (hr : r ≠ ⊥)
+    (r : Ideal (Polynomial A)) [r.IsPrime] (_hrq : r ≤ q) (hr : r ≠ ⊥)
     (hrA : r.comap (Polynomial.C : A →+* Polynomial A) = ⊥)
     (L : Type u) [Field L] [Algebra r.ResidueField L]
     [Module.Finite r.ResidueField L] [IsPurelyInseparable r.ResidueField L] :
@@ -64,7 +63,7 @@ theorem formalFiber_finiteExtension_reduction
         letI := domains
         letI := noeth
         letI := locals
-        ∃ (complete : ∀ i, IsAdicComplete (IsLocalRing.maximalIdeal (B i)) (B i))
+        ∃ (_complete : ∀ i, IsAdicComplete (IsLocalRing.maximalIdeal (B i)) (B i))
           (q' : ∀ i, Ideal (Polynomial (B i))) (qmax : ∀ i, (q' i).IsMaximal)
           (s : ∀ i, Ideal (Polynomial (B i))) (sprime : ∀ i, (s i).IsPrime),
           letI := qmax

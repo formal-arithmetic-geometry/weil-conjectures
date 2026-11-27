@@ -468,7 +468,6 @@ private theorem integral_bound (ℓ : ℕ) [Fact ℓ.Prime]
     rw [← NNReal.coe_le_coe, NNReal.coe_one, coe_nnnorm]
   exact unitBall_bound ℓ E (PadicAlgCl.integers ℓ E).toSubring hO p
 
-set_option linter.unusedVariables false in
 /-- Proper direct image has a uniform upper bound on the Serre coproduct closure of
 constructible modules, for the coefficient ring `E` of a finite extension `E` of `ℚ_ℓ`
 and a Noetherian base scheme (the other ℓ-adic coefficient rings follow below). -/
@@ -476,14 +475,13 @@ theorem properLowerStar_uniformBound_continuousMapRingObj
     (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
     {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]
-    {Z Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [IsNoetherian Y]
+    {Z Y : Scheme.{u}} (_aY : Y ⟶ Spec (.of k)) [IsNoetherian Y]
     (p : Z ⟶ Y) [IsProper p] :
     ∃ d : ℤ, ∀ M, constructibleCoproductClosure (Profinite.continuousMapRingObj.{u} E) Z M →
       (R((p)_*⟦Profinite.continuousMapRingObj.{u} E⟧).obj
         ((DerivedCategory.singleFunctor _ 0).obj M)).IsLE d :=
   continuous_bound ℓ E p
 
-set_option linter.unusedVariables false in
 /-- The uniform proper heart bound of `properLowerStar_uniformBound_continuousMapRingObj`, for the
 coefficient ring `𝒪_E` of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`. -/
 theorem properLowerStar_uniformBound_padicIntegersRingObj
@@ -491,20 +489,19 @@ theorem properLowerStar_uniformBound_padicIntegersRingObj
     (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
     [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
     {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]
-    {Z Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [IsNoetherian Y]
+    {Z Y : Scheme.{u}} (_aY : Y ⟶ Spec (.of k)) [IsNoetherian Y]
     (p : Z ⟶ Y) [IsProper p] :
     ∃ d : ℤ, ∀ M, constructibleCoproductClosure (Profinite.padicIntegersRingObj.{u} ℓ E) Z M →
       (R((p)_*⟦Profinite.padicIntegersRingObj.{u} ℓ E⟧).obj
         ((DerivedCategory.singleFunctor _ 0).obj M)).IsLE d :=
   integral_bound ℓ E p
 
-set_option linter.unusedVariables false in
 /-- The uniform proper heart bound of `properLowerStar_uniformBound_continuousMapRingObj`, for the
 coefficient ring `ℚ̄_ℓ`. -/
 theorem properLowerStar_uniformBound_padicAlgClRingObj
     (ℓ : ℕ) [Fact ℓ.Prime]
     {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]
-    {Z Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [IsNoetherian Y]
+    {Z Y : Scheme.{u}} (_aY : Y ⟶ Spec (.of k)) [IsNoetherian Y]
     (p : Z ⟶ Y) [IsProper p] :
     ∃ d : ℤ, ∀ M, constructibleCoproductClosure (Profinite.padicAlgClRingObj.{u} ℓ) Z M →
       (R((p)_*⟦Profinite.padicAlgClRingObj.{u} ℓ⟧).obj

@@ -253,17 +253,16 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   (Y : AlgebraicGeometry.Scheme.{u})
 
-set_option linter.unusedVariables false in
 /-- The coefficient action is the unique linear structure whose scalar maps are
 multiplication by the actual constant sections of the completed coefficient sheaf. -/
 theorem integralCoefficientLinear_existsUnique :
     ∃! s : Linear (Padic.coefficientExtensionIntegers l E)
         (DerivedCategory (integralTowerModules l E Y)),
-      (fun [linearInst : Linear (Padic.coefficientExtensionIntegers l E)
+      (fun [_linearInst : Linear (Padic.coefficientExtensionIntegers l E)
           (DerivedCategory (integralTowerModules l E Y))] ↦
         ∀ (a : Padic.coefficientExtensionIntegers l E)
           (K K' : DerivedCategory (integralTowerModules l E Y)) (f : K ⟶ K'),
-          a • f = (integralScalarDerivedAction l E Y a).app K ≫ f) (linearInst := s) := by
+          a • f = (integralScalarDerivedAction l E Y a).app K ≫ f) (_linearInst := s) := by
   let s := coefficientDerivedLinear l E Y
   have hs : (fun [_linearInst : Linear (Padic.coefficientExtensionIntegers l E)
       (DerivedCategory (integralTowerModules l E Y))] ↦

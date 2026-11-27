@@ -134,7 +134,6 @@ import all WeilConjectures.Algebra.Homology.Signed.SignedLineScalarTensorTower
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.unusedSectionVars false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -198,12 +197,16 @@ private theorem evaluation_on_representative
   rw [← vn, hε]
   simp only [Functor.map_comp, Category.assoc]
 
+omit [∀ R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)},
+    HasDerivedCategory.{w} (Modules.{t, a} X R)] in
 private theorem pure_eq_evaluation
     (A : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)})
     (M N : Modules.{t, a} X A) (U : X.ProEtᵒᵖ) (x : M.val.obj U) (y : N.val.obj U) :
     LineUnbounded.pureTensor.{t, a} X A M N U x y =
       LineEvaluation.pureTensor.{t + 1, t, a} A M N U x y := rfl
 
+omit [∀ R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)},
+    HasDerivedCategory.{w} (Modules.{t, a} X R)] in
 private theorem cancellation_eq_evaluation
     (A : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)})
     (P Q : Modules.{t, a} X A) (e : P ⊗ Q ≅ 𝟙_ (Modules.{t, a} X A)) :
@@ -219,6 +222,8 @@ private local instance
     SMul ((𝟙_ (Modules.{t, a} X A)).val.obj U) (M.val.obj U) :=
   inferInstanceAs (SMul (A.obj.obj U) (M.val.obj U))
 
+omit [∀ R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)},
+    HasDerivedCategory.{w} (Modules.{t, a} X R)] in
 private theorem cancellation_pure
     (A : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)})
     (P Q M : Modules.{t, a} X A) (e : P ⊗ Q ≅ 𝟙_ (Modules.{t, a} X A))
@@ -239,6 +244,8 @@ private theorem cancellation_pure
   rw [hm]
   exact LineEvaluation.pure_right_unitor.{t + 1, t, a} A M U x _
 
+omit [∀ R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)},
+    HasDerivedCategory.{w} (Modules.{t, a} X R)] in
 private theorem cancellation_inv_pure
     (A : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)})
     (P Q M : Modules.{t, a} X A) (e : P ⊗ Q ≅ 𝟙_ (Modules.{t, a} X A))

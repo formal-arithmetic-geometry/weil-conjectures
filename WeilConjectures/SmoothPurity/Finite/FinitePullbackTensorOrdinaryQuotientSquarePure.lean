@@ -317,13 +317,12 @@ private theorem ordinary_quotient_square_calculus {X Y : Scheme.{u}} (f : X ⟶ 
     (hay p q i hpq U x y)
 
 -- The public interface retains invertibility; the ordinary unit calculation does not need it.
-set_option linter.unusedVariables false in
 /-- Equality of the two comparison composites in one cochain degree.
 This is the component calculation used to prove the chain-map equality; it is the
 ordinary pure-tensor generator calculation after applying the stated normalizations. -/
 theorem finitePullbackTensor_ordinary_quotient_square_pure {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [hX : ∀ x : X, Invertible (l : X.residueField x)]
-    [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
+    [_hX : ∀ x : X, Invertible (l : X.residueField x)]
+    [_hY : ∀ y : Y, Invertible (l : Y.residueField y)]
     {m n : ℕ} (h : n ≤ m)
     (c : sfIntrinsicPullback (finiteCoefficientRing l E (m + 1)) f ⋙
         coefficientFiniteQuotientExtension l E X h ≅
@@ -394,7 +393,7 @@ theorem finitePullbackTensor_ordinary_quotient_square_pure {X Y : Scheme.{u}} (f
         (adjF.homEquiv _ _
           (adjX.homEquiv _ _
             ((cc.hom.app (TYm.obj (P, Q)) ≫ Fn.map ay.hom ≫ kn.hom).f i))) := by
-  clear hX hY
+  clear _hX _hY
   exact ordinary_quotient_square_calculus l E f h c hc cc hcc P Q i
     (pullbackTensorCalculus l E X).toCoefficientDerivedSystemTensors
     (pullbackTensorCalculus l E X).quotientCalculus

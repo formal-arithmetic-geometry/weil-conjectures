@@ -45,7 +45,6 @@ theorem standardSingleBaseChange_topRestriction_iso_pullback_unit
   have : (derivedPullback s.hom).Full := Functor.Full.of_comp_faithful_iso b
   infer_instance
 
-set_option linter.unusedVariables false in
 /-- Canonical source restriction comparison for the top open. -/
 noncomputable def standardSingleBaseChange_topRestriction_sourceIso
     {Y B : Scheme.{u}} (p : Y ⟶ B) (M : Y.Modules) :
@@ -76,7 +75,6 @@ noncomputable def standardSingleBaseChange_topRestriction_sourceIso
     (relativeMVImageComp j p).app ((derivedPullback j).obj K) ≪≫
     (schemeDerivedDirectImage (j ≫ p)).mapIso a
 
-set_option linter.unusedVariables false in
 /-- Compatibility equation for the canonical source restriction comparison: for
 `e = standardSingleBaseChange_topRestriction_sourceIso p M` there is an isomorphism `t` of
 targets with `standardSingleBaseChangeMap p M g = Lg*(e) ≫ (comparison for j ≫ p) ≫ t`. -/

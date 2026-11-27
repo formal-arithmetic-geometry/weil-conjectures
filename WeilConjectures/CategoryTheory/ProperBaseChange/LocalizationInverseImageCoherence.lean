@@ -299,7 +299,6 @@ private def inverseImageUniverses
 
 namespace LocalizationSequence
 
-set_option linter.unusedSectionVars false
 
 open Opposite
 
@@ -353,6 +352,7 @@ private abbrev localizationInv
     ringedSectionLocalizationCarrierOfUniverses O s X :=
   IsLocalization.Away.invSelf (R := O.obj.obj X) (sectionValue O s X)
 
+omit [EssentiallySmall.{u} C] in
 private theorem localization_map_inv
     (s : (O.obj ⋙ forget CommRingCat).sections) {X Y : Cᵒᵖ} (g : X ⟶ Y) :
     ringedSectionLocalizationMapOfUniverses O s g
@@ -384,6 +384,7 @@ private def fractionMap
         change ringedSectionLocalizationMapOfUniverses O s g _ = _
         rw [map_pow, localization_map_inv]))
 
+omit [EssentiallySmall.{u} C] in
 private theorem fractionMap_apply
     (s : (O.obj ⋙ forget CommRingCat).sections) (n : ℕ)
     (X : Cᵒᵖ) (a : O.obj.obj X) :
@@ -393,12 +394,15 @@ private theorem fractionMap_apply
   change a • localizationInv O s X ^ n = _
   exact Algebra.smul_def a _
 
+omit [EssentiallySmall.{u} C] [HasSheafify J AddCommGrpCat.{u}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasSheafify J CommRingCat.{u}] in
 private theorem scalar_apply
     (s : (O.obj ⋙ forget CommRingCat).sections) (X : Cᵒᵖ) (a : O.obj.obj X) :
     (regularScalar O s).asHom.val.app X a = a * sectionValue O s X := by
   change a • sectionValue O s X = _
   rfl
 
+omit [EssentiallySmall.{u} C] in
 private theorem fractionMap_step
     (s : (O.obj ⋙ forget CommRingCat).sections) (n : ℕ) :
     (regularScalar O s).asHom.val ≫ fractionMap O s (n + 1) = fractionMap O s n := by
@@ -478,6 +482,7 @@ private def localizationSheafMap
       (PresheafOfModules.sheafificationAdjunction
         (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O).obj)).unit.app _)
 
+omit [EssentiallySmall.{u} C] in
 private theorem localizationSheafMap_step
     (s : (O.obj ⋙ forget CommRingCat).sections) (n : ℕ) :
     (regularScalar O s).asHom ≫ localizationSheafMap O s (n + 1) =
@@ -528,6 +533,7 @@ private def localizationSheafCoconeIsColimit
     rw [Adjunction.homEquiv_unit, ← Category.assoc]
     exact congrArg (fun f ↦ U.map f) (hm n)
 
+omit [EssentiallySmall.{u} C] in
 private theorem localizationSheafMap_zero
     (s : (O.obj ⋙ forget CommRingCat).sections) :
     localizationSheafMap O s 0 = ringedSectionLocalizationUnitOfUniverses O s := by
@@ -654,7 +660,6 @@ private theorem inverseImage_scalar
 namespace LocalizationSequence
 
 open MonoidalCategory
-set_option linter.unusedSectionVars false
 
 variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
 variable {J : GrothendieckTopology C}
@@ -761,7 +766,6 @@ end LocalizationSequence
 
 namespace LocalizationSequence
 
-set_option linter.unusedSectionVars false
 variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
 variable {J : GrothendieckTopology C}
 variable [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
@@ -928,7 +932,6 @@ end LocalizationSequence
 
 namespace LocalizationSequence
 
-set_option linter.unusedSectionVars false
 variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
 variable [EssentiallySmall.{u} C] [EssentiallySmall.{u} D]
 variable {J : GrothendieckTopology C} {K : GrothendieckTopology D}
@@ -1011,7 +1014,6 @@ end LocalizationSequence
 
 namespace LocalizationRings
 
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency.types false
 
 open MonoidalCategory CartesianMonoidalCategory
@@ -1047,6 +1049,8 @@ private def transportSets : sets S ⟶ sets A :=
   a.ringUnderlying.inv ≫ L.map ((sheafCompose J (forget CommRingCat.{u})).map f) ≫
     b.ringUnderlying.hom
 
+omit [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
+  [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] [PreservesFiniteLimits L] in
 private theorem transportSets_apply (T : Sheaf J (Type u)) (r : T ⟶ sets R)
     (W : Dᵒᵖ) (x : (L.obj T).obj.obj W) :
     (transportSets a b f).hom.app W
@@ -1063,6 +1067,8 @@ private theorem transportSets_apply (T : Sheaf J (Type u)) (r : T ⟶ sets R)
         ((L.map r ≫ L.map ((sheafCompose J (forget CommRingCat.{u})).map f)).hom.app W x) at hh
   simpa only [Functor.map_comp] using hh
 
+omit [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
+  [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
 private theorem transportSets_add (W : Dᵒᵖ) (x y : S.obj.obj W) :
     @id (A.obj.obj W) ((transportSets a b f).hom.app W (x + y)) =
       @id (A.obj.obj W) ((transportSets a b f).hom.app W x) +
@@ -1095,6 +1101,8 @@ private theorem transportSets_add (W : Dᵒᵖ) (x y : S.obj.obj W) :
   rw [hb, ← transportSets_apply a b f, ← transportSets_apply a b f,
     h₁, h₂, hi, hi]
 
+omit [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
+  [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
 private theorem transportSets_mul (W : Dᵒᵖ) (x y : S.obj.obj W) :
     @id (A.obj.obj W) ((transportSets a b f).hom.app W (x * y)) =
       @id (A.obj.obj W) ((transportSets a b f).hom.app W x) *
@@ -1127,6 +1135,8 @@ private theorem transportSets_mul (W : Dᵒᵖ) (x y : S.obj.obj W) :
   rw [hb, ← transportSets_apply a b f, ← transportSets_apply a b f,
     h₁, h₂, hi, hi]
 
+omit [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
+  [K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] [PreservesFiniteLimits L] in
 private theorem transportSets_one (W : Dᵒᵖ) :
     (transportSets a b f).hom.app W (1 : S.obj.obj W) = (1 : A.obj.obj W) := by
   let r : sets R ⟶ sets R :=
@@ -1158,7 +1168,6 @@ end LocalizationRings
 
 namespace LocalizationRings
 
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency.types false
 
 variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
@@ -1226,7 +1235,6 @@ end LocalizationRings
 
 namespace LocalizationRings
 
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency.types false
 
 variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
@@ -1292,7 +1300,6 @@ end LocalizationRings
 
 namespace LocalizationRings
 
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency.types false
 
 variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
@@ -1323,6 +1330,7 @@ private def sectionMap {E : Type uF} [Category.{vF} E] {H : GrothendieckTopology
 
 include hs in
 include hs in
+omit [PreservesFiniteLimits L] in
 private theorem scalar_image :
     L.map (scalar R t) ≫ a.ringUnderlying.hom = a.ringUnderlying.hom ≫ scalar S s := by
   apply Sheaf.hom_ext

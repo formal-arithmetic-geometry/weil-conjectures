@@ -202,7 +202,6 @@ lemma iCycles_cyclesMap_apply {A : Type v} [Ring A] {ι : Type*} {c : ComplexSha
   rw [← LinearMap.comp_apply, ← ModuleCat.hom_comp, HomologicalComplex.cyclesMap_i]
   rfl
 
-set_option linter.unusedVariables false in
 /-- Degree-zero continuous cochain homology is the left exact invariant functor. -/
 theorem continuousCochains_invariants_zero
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
@@ -239,7 +238,7 @@ theorem continuousCochains_invariants_zero
                 (-1 : ℤ) ^ (k.val + 1) • e M n x (Fin.contractNth k (· * ·) g)) →
     ∃ V : DiscreteContinuousRep.{v, u, max u w} A G ⥤ ModuleCat.{max u w} A,
       ∃ a : V.Additive,
-        letI instAdditive : V.Additive := a
+        letI _instAdditive : V.Additive := a
         ∃ t : ∀ M : DiscreteContinuousRep.{v, u, max u w} A G,
             V.obj M ≃ₗ[A] S M,
           (∀ (M N : DiscreteContinuousRep.{v, u, max u w} A G) (f : M ⟶ N)

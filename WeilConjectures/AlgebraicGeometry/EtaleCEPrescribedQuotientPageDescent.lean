@@ -31,14 +31,13 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-set_option linter.unusedVariables false in
 -- Elaborate the dependent CE totals and representative equations together.
 /-- Retain prescribed CE bicomplexes in quotient-page presentations and descend supplied
 filtered augmented comparisons. No bicomplex comparison or total lift is constructed.
 (Stacks, Tags 015J, 015K and 012K) -/
 theorem exists_etaleCE_prescribed_quotient_page_descent
     (I : ∀ (X : Scheme.{uNatural})
-      (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),
+      (_K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),
       HomologicalComplex₂ (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})
         (ComplexShape.up ℤ) (ComplexShape.up ℕ))
     (a : ∀ (X : Scheme.{uNatural})
@@ -86,7 +85,7 @@ theorem exists_etaleCE_prescribed_quotient_page_descent
       let D' := P Y L
       ∀ (φ : (((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex
       (ComplexShape.up ℕ)).mapHomologicalComplex (ComplexShape.up ℤ)).obj D.I ⟶ D'.I)
-    (hφ : ∀ q : ℤ,
+    (_hφ : ∀ q : ℤ,
       (upperStar AddCommGrpCat.{uNatural + 1} f).map
           ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℕ) 0 (K.obj.X q)).inv ≫
             (D.a.f q).f 0) ≫ (φ.f q).f 0 =
@@ -95,7 +94,7 @@ theorem exists_etaleCE_prescribed_quotient_page_descent
             (D'.a.f q).f 0)
     (u : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex
       (ComplexShape.up ℤ)).obj D.sheafTotal ⟶ D'.sheafTotal)
-    (hu : ∀ (m : ℕ) (q n : ℤ) (h : (m : ℤ) + q = n),
+    (_hu : ∀ (m : ℕ) (q n : ℤ) (h : (m : ℤ) + q = n),
         (upperStar AddCommGrpCat.{uNatural + 1} f).map
             ((HomologicalComplex.extendXIso
               (((𝟭 (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})).mapHomologicalComplex

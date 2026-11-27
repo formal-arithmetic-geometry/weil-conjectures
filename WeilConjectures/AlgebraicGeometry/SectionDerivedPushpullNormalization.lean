@@ -33,8 +33,6 @@ set_option synthInstance.maxSize 2048
 set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-set_option linter.all false
-set_option linter.unusedVariables false
 
 universe u
 
@@ -215,6 +213,7 @@ private def rightSquareIso (e : F ⋙ G ≅ H ⋙ K) :
     Functor.rightDerivedFunctorCompIso H K ≪≫
     Functor.isoWhiskerRight H.rightDerivedFunctorIsoMapDerivedCategory K.rightDerivedFunctor
 
+omit [Abelian.HasKInjectiveResolutions B] in
 private theorem rightSquareFactorsh (e : F ⋙ G ≅ H ⋙ K)
     (P : HomotopyCategory A (.up ℤ)) :
     G.mapDerivedCategory.map (F.rightDerivedFunctorUnit.app P) ≫
@@ -240,7 +239,7 @@ private theorem rightSquareFactorsh (e : F ⋙ G ≅ H ⋙ K)
     simp only [Functor.rightDerivedFunctorCompMapDerivedCategoryUnit, NatTrans.comp_app,
       Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
       Functor.associator_inv_app, hi F G, CategoryTheory.Functor.map_id, Category.id_comp,
-      Category.comp_id, Category.assoc]
+      Category.comp_id]
     erw [Category.id_comp, Iso.hom_inv_id_app_assoc]
   rw [hstart]
   simp only [rightSquareIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
@@ -252,7 +251,7 @@ private theorem rightSquareFactorsh (e : F ⋙ G ≅ H ⋙ K)
   rw [Functor.rightDerivedNatTrans_app_assoc]
   simp only [NatTrans.id_app, Category.id_comp]
   rw [Functor.rightDerivedNatTrans_app_assoc]
-  simp only [Functor.whiskerRight_app, Category.assoc]
+  simp only [Functor.whiskerRight_app]
   rw [Functor.rightDerivedNatTrans_app_assoc]
   simp only [NatTrans.id_app, Category.id_comp]
   simp only [Functor.rightDerivedFunctorCompUnit, NatTrans.comp_app,
@@ -267,6 +266,7 @@ private theorem rightSquareFactorsh (e : F ⋙ G ≅ H ⋙ K)
     rw [← Category.assoc, h₄, Iso.inv_hom_id_app]
   erw [hc, K.rightDerivedFunctor.map_id, Category.comp_id]
 
+omit [Abelian.HasKInjectiveResolutions B] in
 private theorem rightSquareStart (P : HomotopyCategory A (.up ℤ)) :
     G.mapDerivedCategoryFactorsh.hom.app ((F.mapHomotopyCategory (.up ℤ)).obj P) ≫
       (Functor.rightDerivedFunctorCompMapDerivedCategoryUnit F G).app P =
@@ -279,9 +279,10 @@ private theorem rightSquareStart (P : HomotopyCategory A (.up ℤ)) :
   simp only [Functor.rightDerivedFunctorCompMapDerivedCategoryUnit, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
     Functor.associator_inv_app, hi, CategoryTheory.Functor.map_id, Category.id_comp,
-    Category.comp_id, Category.assoc]
+    Category.comp_id]
   erw [Category.id_comp, Iso.hom_inv_id_app_assoc]
 
+omit [Abelian.HasKInjectiveResolutions B] in
 private theorem rightSquareFactors (e : F ⋙ G ≅ H ⋙ K)
     (P : CochainComplex A ℤ) :
     G.mapDerivedCategory.map (F.rightDerivedFunctorUnit.app
@@ -331,6 +332,8 @@ variable {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* 
   [PreservesFiniteLimits H] [PreservesFiniteColimits H]
   [H.PreservesKInjectiveComplexes]
 
+omit [Abelian.HasKInjectiveResolutions A] [Abelian.HasKInjectiveResolutions B]
+  [Abelian.HasKInjectiveResolutions C] [H.PreservesKInjectiveComplexes] in
 private theorem squareSymm (e : L ⋙ H ≅ G ⋙ L') :
     Functor.mapDerivedCategorySquareIso e.symm =
       (Functor.mapDerivedCategorySquareIso e).symm := by
@@ -338,6 +341,7 @@ private theorem squareSymm (e : L ⋙ H ≅ G ⋙ L') :
   simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.trans_inv,
     Iso.symm_hom, Iso.symm_inv, Functor.mapDerivedCategoryNatIso_symm, Category.assoc]
 
+omit [Abelian.HasKInjectiveResolutions B] in
 private theorem rightSquareMate (a : L ⊣ R) (b : L' ⊣ R')
     (e : L ⋙ H ≅ G ⋙ L') (r : R ⋙ G ≅ H ⋙ R')
     (hm : (mateEquiv a b e.inv) = r.hom) :
@@ -397,8 +401,7 @@ private theorem transportSquare_comp
     rw [← W.map_comp, Iso.inv_hom_id_app, W.map_id]
   rw [reassoc_of% hK]
   rw [reassoc_of% hn]
-  simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app,
-    CategoryTheory.Functor.map_id, Category.id_comp]
+  simp only [← Functor.map_comp]
   have hF : V.map (cF.inv.app M) ≫ V.map (cF.hom.app M) ≫ p.hom.app M =
       p.hom.app M := by
     rw [← V.map_comp_assoc, Iso.inv_hom_id_app, V.map_id, Category.id_comp]
@@ -472,9 +475,8 @@ private theorem mate_transport_left
   have hid : conjugateEquiv (a.ofNatIsoLeft c.symm) a c.inv = 𝟙 R := by
     ext N
     simp only [conjugateEquiv_apply_app, Adjunction.ofNatIsoLeft_counit,
-      Adjunction.ofNatIsoLeft_unit, Iso.symm_inv, NatTrans.comp_app,
-      Functor.whiskerLeft_app, Category.assoc, ← R.map_comp,
-      Iso.inv_hom_id_app, Category.comp_id]
+      Iso.symm_inv, NatTrans.comp_app,
+      Functor.whiskerLeft_app, ← R.map_comp]
     simp
   rw [he, hid] at ht
   simpa [TwoSquare.whiskerTop] using ht
@@ -490,6 +492,8 @@ def normalizationInternalAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     internalDerivedPullback Λ f ⊣ internalDerivedPushforward Λ f :=
   CondensedRing.derivedUpperStarLowerStarAdjunction Λ f
 
+omit [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
+  [IsCommMonObj Λ] in
 private theorem internalPushComp_underlying {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (M : internalModules Λ X) :
     ((CondensedRing.lowerStarComp Λ f g).hom.app M).hom =
@@ -506,6 +510,7 @@ private theorem internalPushComp_underlying {X Y Z : Scheme.{u}}
   erw [Category.id_comp, Category.id_comp, Category.id_comp, Category.id_comp,
     Category.comp_id]
 
+omit [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)] in
 private theorem pushComparison_underlying {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : internalModules Λ X) :
     (SheafOfModules.toSheaf _).map ((pushComparison Λ f).hom.app M) =
@@ -513,15 +518,18 @@ private theorem pushComparison_underlying {X Y : Scheme.{u}} (f : X ⟶ Y)
   ext V m
   exact (InternalModuleOperations.lowerComparison_existsUnique Λ f).exists.choose_spec M V m
 
+omit [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)] in
 private theorem sectionMap_underlying {T : Scheme.{u}} {M N : internalModules Λ T}
     (q : M ⟶ N) :
     (SheafOfModules.toSheaf _).map ((equivalence Λ T).functor.map q) = q.hom := rfl
 
+omit [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)] in
 private theorem pushforward_underlying {X Y : Scheme.{u}} (f : X ⟶ Y)
     {M N : modules Λ X} (q : M ⟶ N) :
     (SheafOfModules.toSheaf _).map ((pushforward Λ f).map q) =
       (ProEtale.lowerStar Ab.{u + 1} f).map ((SheafOfModules.toSheaf _).map q) := rfl
 
+omit [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)] in
 private theorem pushComp_underlying {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (M : modules Λ X) :
     (SheafOfModules.toSheaf _).map ((pushforwardComposition Λ f g).hom.app M) =
@@ -530,9 +538,11 @@ private theorem pushComp_underlying {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y �
   ext V m
   exact (InternalModuleOperations.lowerComp_existsUnique Λ f g).exists.choose_spec M V m
 
+omit [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)] in
 private theorem sectionObject_underlying {T : Scheme.{u}} (M : internalModules Λ T) :
     (SheafOfModules.toSheaf _).obj ((equivalence Λ T).functor.obj M) = M.X := rfl
 
+omit [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)] in
 private theorem sectionPushComp_underlying {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (M : internalModules Λ X) :
     (SheafOfModules.toSheaf _).map
@@ -541,6 +551,7 @@ private theorem sectionPushComp_underlying {X Y Z : Scheme.{u}}
   have h := pushComp_underlying Λ f g ((equivalence Λ X).functor.obj M)
   simpa only [sectionObject_underlying] using h
 
+omit [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)] in
 private theorem ordinaryPushComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (M : internalModules Λ X) :
     (pushComparison Λ g).hom.app ((CondensedRing.lowerStar Λ f).obj M) ≫
@@ -550,13 +561,12 @@ private theorem ordinaryPushComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z
       (pushComparison Λ (f ≫ g)).hom.app M := by
   apply (SheafOfModules.toSheaf _).map_injective
   simp only [CategoryTheory.Functor.map_comp, pushComparison_underlying,
-    sectionMap_underlying, pushforward_underlying, sectionPushComp_underlying,
-    CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id,
+    sectionMap_underlying, pushforward_underlying,
     internalPushComp_underlying]
   have h := sectionPushComp_underlying Λ f g M
-  convert h using 1 <;>
-    first | rfl | simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  convert h using 1 <;> rfl
 
+omit [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)] in
 private theorem ordinaryPullComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (M : internalModules Λ Z) :
     (equivalence Λ X).functor.map ((CondensedRing.upperStarComp Λ f g).hom.app M) ≫
@@ -600,7 +610,7 @@ private theorem ordinaryPullComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
   simp only [Iso.symm_hom] at h
   rw [h]
-  simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+  simp only [Category.assoc, Iso.inv_hom_id_app]
   erw [Category.comp_id]
 
 private theorem comparison_conjugate_comp
@@ -645,7 +655,7 @@ private theorem comparison_conjugate_comp
     simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
     rw [hd X]
     simp only [Category.assoc, ← Kb.map_comp, Iso.hom_inv_id_app,
-      CategoryTheory.Functor.map_id, Category.id_comp, Iso.hom_inv_id_app, Category.comp_id]
+      Iso.hom_inv_id_app]
     erw [Kb.map_id, Category.id_comp, Iso.hom_inv_id_app, Category.comp_id]
   have hl := conjugateEquiv_mateEquiv_vcomp (a.comp b) c cb d.hom r.inv
   have ht := mateEquiv_conjugateEquiv_vcomp (a.comp b) (ab.comp bb) cb α db.hom

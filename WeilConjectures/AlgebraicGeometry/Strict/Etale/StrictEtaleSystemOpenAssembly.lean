@@ -350,7 +350,7 @@ structure StrictEtaleSystemOpenAssembly where
 
 attribute [instance] StrictEtaleSystemOpenAssembly.additive
 
-set_option linter.unusedSectionVars false in
+omit [IsOpenImmersion j] in
 /-- The system-level assembly exists for every levelwise package. -/
 theorem strictEtaleSystemOpenAssembly_exists :
     Nonempty (StrictEtaleSystemOpenAssembly O t j I PX PZ L) := by

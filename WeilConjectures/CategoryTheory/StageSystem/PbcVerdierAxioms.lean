@@ -103,7 +103,10 @@ variable {I : Type w} [Preorder I] [IsDirectedOrder I] [Nonempty I]
     [stageTriangulated : ∀ i, IsTriangulated (C i)]
     [transitionExact : ∀ {i j : I} (h : i ≤ j), (S.T h).IsTriangulated]
 
-set_option linter.unusedSectionVars false in
+omit [Nonempty I] [∀ i, HasShift (C i) ℤ] [∀ {i j : I} (h : i ≤ j), (S.T h).CommShift ℤ]
+  [∀ {i j k : I} (h : i ≤ j) (h' : j ≤ k), NatTrans.CommShift (S.assoc h h').hom ℤ]
+  [∀ i, HasZeroObject (C i)] [∀ i, ∀ n : ℤ, (shiftFunctor (C i) n).Additive]
+  [∀ i, Pretriangulated (C i)] stageTriangulated transitionExact in
 /-- Finite-stage inclusions preserve the already recorded common-stage addition. -/
 @[instance] theorem qbarStageInclusionAdditive (i : I) : (S.ι i).Additive := by
   constructor
@@ -113,7 +116,9 @@ set_option linter.unusedSectionVars false in
   rw [Functor.map_add]
   exact ((pairPreadditive_exists S).exists.choose_spec _ _ _ _ _ _ _).1
 
-set_option linter.unusedSectionVars false in
+omit [Nonempty I] [∀ i, Preadditive (C i)] [∀ {i j : I} (h : i ≤ j), (S.T h).Additive]
+  [∀ i, HasZeroObject (C i)] [∀ i, ∀ n : ℤ, (shiftFunctor (C i) n).Additive]
+  [∀ i, Pretriangulated (C i)] stageTriangulated transitionExact in
 /-- The actual transition identification commutes with the induced pair shift. -/
 @[instance] theorem qbarTransIsoCommShift {i j : I} (h : i ≤ j) :
     NatTrans.CommShift (S.transIso h).hom ℤ := by

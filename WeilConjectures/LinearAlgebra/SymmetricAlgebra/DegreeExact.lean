@@ -30,13 +30,12 @@ namespace SymmetricAlgebra
 
 open scoped TensorProduct
 
-set_option linter.unusedVariables false in
 /-- The symmetric-algebra map induced by `p` sends the degree-`n` submodule into the degree-`n`
 submodule. -/
 theorem degree_map_exists (R : Type u) (M₁ M : Type v) [CommRing R]
     [AddCommGroup M₁] [Module R M₁] [AddCommGroup M] [Module R M]
     (p : M₁ →ₗ[R] M) (n : ℕ) :
-    ∃ h : ∀ x : ((TensorAlgebra.ι R : M₁ →ₗ[R] TensorAlgebra R M₁).range ^ n).map
+    ∃ _h : ∀ x : ((TensorAlgebra.ι R : M₁ →ₗ[R] TensorAlgebra R M₁).range ^ n).map
           (algHom R M₁).toLinearMap,
       (lift ((ι R M).comp p)).toLinearMap x ∈
         ((TensorAlgebra.ι R : M →ₗ[R] TensorAlgebra R M).range ^ n).map

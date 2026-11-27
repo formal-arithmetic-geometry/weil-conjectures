@@ -79,9 +79,6 @@ set_option linter.privateModule false
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
--- Replaying the categorical transport tactics for unused-tactic linting is expensive.
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 
 universe u
 

@@ -12,7 +12,6 @@ import all WeilConjectures.CategoryTheory.ExactMonoidalEquivalenceDerived
 /-! # Exact closed functors preserve unbounded derived internal Hom -/
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 set_option backward.isDefEq.respectTransparency false
 universe u c d
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
@@ -119,8 +118,8 @@ attribute [local instance] exactClosedDerivedMonoidal
 private theorem derivedFactorsh_monoidal :
     NatTrans.IsMonoidal F.mapDerivedCategoryFactorsh.hom := by
   unfold exactClosedDerivedMonoidal
-  letI := F.residueDerivedMonoidal
-  letI := Functor.Monoidal.transport F.leftDerivedFunctorIsoMapDerivedCategory
+  let := F.residueDerivedMonoidal
+  let := Functor.Monoidal.transport F.leftDerivedFunctorIsoMapDerivedCategory
   have hc : NatTrans.IsMonoidal F.leftDerivedFunctorCounit := by
     have := DerivedCategory.isIso_ε_Qh D
     apply ExactMonoidalEquivalenceDerived.square_monoidal DerivedCategory.Qh DerivedCategory.Qh

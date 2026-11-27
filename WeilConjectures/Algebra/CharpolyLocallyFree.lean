@@ -222,14 +222,13 @@ private theorem charpoly_standardCover_comparison
     simpa only [Polynomial.coeff_map, RingHom.algebraMap_toAlgebra] using h
 
 
-set_option linter.unusedVariables false in
 /-- Existence and uniqueness of the characteristic polynomial on a finite locally free module. -/
 theorem charpoly_locallyFree_exists_unique
     {A : Type u} {M : Type v} [CommRing A] [AddCommGroup M] [Module A M]
     {n r : ℕ} (f : Fin r → A)
     (hgen : Ideal.span (Set.range f) = ⊤)
     (hfree : ∀ i : Fin r,
-      ∃ e : Module.Basis (Fin n) (Localization.Away (f i))
+      ∃ _e : Module.Basis (Fin n) (Localization.Away (f i))
         (LocalizedModule.Away (f i) M), True)
     (φ : M →ₗ[A] M) :
     let P : Polynomial A → Prop := fun χ ↦

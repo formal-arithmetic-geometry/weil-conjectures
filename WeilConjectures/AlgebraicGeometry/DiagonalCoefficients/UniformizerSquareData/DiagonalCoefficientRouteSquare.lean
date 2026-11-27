@@ -45,6 +45,7 @@ set_option backward.isDefEq.respectTransparency.types true
 attribute [local irreducible] Ext.homEquiv Ext.comp Ext.mk₀ Ext.mapExactFunctor
 attribute [local semireducible] CyclicCartierFrame.reduce
 
+-- Irreducible def with inferred type; reducibility attributes cannot be set on a theorem.
 set_option linter.defProp false in
 /-- The fully proved endpoint criterion specialized to the supplied coefficient
 routes. Its four arguments are the independent source comparison, target

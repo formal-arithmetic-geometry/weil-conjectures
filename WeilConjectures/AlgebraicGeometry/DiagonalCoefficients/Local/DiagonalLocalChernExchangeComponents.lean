@@ -190,7 +190,6 @@ private theorem localChern_base_lift_factorization (l : ℕ) [Fact l.Prime]
   obtain ⟨γ, v, hbase⟩ := diagonalLocalChern_base_factorization l f hunit p eX cF M w hw
   exact ⟨w, γ, v, hw, hbase⟩
 
-set_option linter.unusedVariables false in
 /-- The pulled local Chern adjunct differs from the new model adjunct by a map
 factoring through the shifted integral Tate line on the new base. -/
 theorem diagonalLocalChern_exchange_components (l : ℕ) [Fact l.Prime]
@@ -207,12 +206,12 @@ theorem diagonalLocalChern_exchange_components (l : ℕ) [Fact l.Prime]
     (D : DiagonalRightDerived
       (CondensedRing.lowerStar (Profinite.continuousMapRingObj.{u} ℤ_[l]) f))
     (canonical : D.R = derivedLower (Profinite.continuousMapRingObj.{u} ℤ_[l]) f)
-    (hcanonical : IsCanonicalRightDerived
+    (_hcanonical : IsCanonicalRightDerived
       (CondensedRing.lowerStar (Profinite.continuousMapRingObj.{u} ℤ_[l]) f) D canonical)
     (D' : DiagonalRightDerived
       (CondensedRing.lowerStar (Profinite.continuousMapRingObj.{u} ℤ_[l]) f'))
     (canonical' : D'.R = derivedLower (Profinite.continuousMapRingObj.{u} ℤ_[l]) f')
-    (hcanonical' : IsCanonicalRightDerived
+    (_hcanonical' : IsCanonicalRightDerived
       (CondensedRing.lowerStar (Profinite.continuousMapRingObj.{u} ℤ_[l]) f') D' canonical')
     (cF : UnitPullEndpoint (Profinite.continuousMapRingObj.{u} ℤ_[l]) f)
     (cF' : UnitPullEndpoint (Profinite.continuousMapRingObj.{u} ℤ_[l]) f')

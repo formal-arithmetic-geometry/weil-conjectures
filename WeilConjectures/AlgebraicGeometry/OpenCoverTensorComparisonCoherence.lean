@@ -82,7 +82,6 @@ private theorem assemble_refinement_comparisons
 attribute [local irreducible] tensorPullback tensorPullbackCompositionIso
   openCoverTensorPullbackComparison moduleRecoveryComparisonIso pullbackComp pullbackCongr
 
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The restriction/composition comparison is compatible with a chart refinement.
@@ -104,14 +103,14 @@ theorem openCover_tensor_comparison_coherence
     let Ul : Z.OpenCover.{u} := U.pullback₁ v
     let Vk : W.OpenCover.{u} := Uk.pullback₁ pk
     let Vl : W.OpenCover.{u} := Ul.pullback₁ pl
-    let D := pullback d
+    let _D := pullback d
     let Pk := pullback (Uk.pullbackHom pk a)
     let Pl := pullback (Ul.pullbackHom pl a)
     let Zf := pullback z
     let Rk := pullback (Vk.f a)
     let Rl := pullback (Vl.f a)
     let Lk := tensorPullback q ⋙ pullback (Uk.f a)
-    let Ll := tensorPullback v ⋙ pullback (Ul.f a)
+    let _Ll := tensorPullback v ⋙ pullback (Ul.f a)
     let comparisons := openCoverRefinementComparisons q v h pk pl wk wl U a d hd z hz hz0
     let alpha := comparisons.1
     let beta := comparisons.2.1

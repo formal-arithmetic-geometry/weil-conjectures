@@ -54,8 +54,6 @@ private instance (priority := 20000) fixedAbBijective (Z : Scheme.{u}) :
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
--- The shorter proof retains every hypothesis of the assigned statement.
-set_option linter.unusedVariables false in
 /-- Compatibility of fixed signed tensor shifts with a normalized reindexing: the reduction and
 limit comparisons of `D` commute with integer shifts, and the source and target Roos models
 satisfy the limit signed-shift identities.
@@ -68,10 +66,10 @@ theorem podReindexingTensorSignedShiftCompatibility
     [∀ y : Y, Invertible (l : Y.residueField y)]
     (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.Laws l E g D)
     (T : PodCompletedTensorReindex l E g D)
-    (hT : PodCompletedTensorReindex.Laws l E g D T)
+    (_hT : PodCompletedTensorReindex.Laws l E g D T)
     (SY : PodTensorSignedShift l E Y) (SX : PodTensorSignedShift l E X)
-    (hSYg : SY.Generators l E) (hSXg : SX.Generators l E)
-    (hSYm : SY.Model l E D.shiftSource) (hSXm : SX.Model l E D.shiftTarget) :
+    (_hSYg : SY.Generators l E) (_hSXg : SX.Generators l E)
+    (_hSYm : SY.Model l E D.shiftSource) (_hSXm : SX.Model l E D.shiftTarget) :
     NatTrans.CommShift D.reduction.hom ℤ ∧
       NatTrans.CommShift D.limit.hom ℤ ∧
       PodLimitSignedShift l E Y D.sourceRoos D.shiftSource ∧

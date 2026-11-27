@@ -50,8 +50,6 @@ private theorem assemble_open_counit_square
   simp only [Category.assoc, ← HU.map_comp, hc']
 
 -- The localized tensor and exact restriction factors need extra elaboration heartbeats.
-set_option linter.unusedVariables false in
--- Preserve the existing named K-flatness binder, unused in the dependent conclusion.
 /-- Compatibility of the two comparison arrows on a literal restriction, using
 only the constructed derived-stalk isomorphism and representing isomorphism.
 (Stacks, Tags 0DJ8, 0DJ9 and 0D5U) -/
@@ -69,7 +67,7 @@ theorem exists_open_restricted_canonical_square
       AddCommGrpCat.{u}
     let HU := comparisonStalkCohomology (pullback g' U.ι) z i ⋙ FU
     ∀ (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-        (hP : P.IsKFlatTensor)
+        (_hP : P.IsKFlatTensor)
         (hcP : IsIso ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
       ,
       let Q : CochainComplex

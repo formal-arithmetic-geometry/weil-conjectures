@@ -23,7 +23,6 @@ public import Mathlib.CategoryTheory.Sites.Equivalence
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option Elab.async false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -46,6 +45,8 @@ variable {C D : Type u} [Category.{v} C] [Category.{v} D]
   {R : Sheaf J CommRingCat.{max u v w}}
   {S : Sheaf K CommRingCat.{max u v w}}
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat] [K.WEqualsLocallyBijective AddCommGrpCat]
+    [HasWeakSheafify J AddCommGrpCat] [HasWeakSheafify K AddCommGrpCat] in
 /-- Unit-preserving presentations make the existing pullback an algebraic inverse image. -/
 theorem algebraic_pullback_of_presentations
     (a : (sheafCompose J (forget₂ CommRingCat RingCat)).obj R ⟶

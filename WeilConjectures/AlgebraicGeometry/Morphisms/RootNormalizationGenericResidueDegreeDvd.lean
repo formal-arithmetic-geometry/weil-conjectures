@@ -32,7 +32,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-set_option linter.unusedVariables false in
 /-- The normalization residue degree at the root divisor divides the torsor group order. -/
 theorem root_normalization_generic_stalk_residue_degree_dvd
     {L U : Scheme.{u}} (i : U ⟶ L)

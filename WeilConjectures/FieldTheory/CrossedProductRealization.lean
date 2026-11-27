@@ -28,14 +28,12 @@ namespace Field
 
 open scoped TensorProduct
 
-set_option linter.unusedVariables false
-
 /-- For every class `x`, there is a central simple algebra `A` with a splitting over the
 separable closure and locally constant matrix lifts of its Galois descent datum whose scalar
 defect is a homogeneous cocycle representing `x`. -/
 theorem exists_crossedProduct_realization_data (K : Type u) [Field K]
     (x : GaloisUnitsH2 K) :
-    ∃ (A : CSA.{u, u} K) (n : ℕ) (hn : n ≠ 0)
+    ∃ (A : CSA.{u, u} K) (n : ℕ) (_hn : n ≠ 0)
       (e : (SeparableClosure K ⊗[K] A) ≃ₐ[SeparableClosure K]
         Matrix (Fin n) (Fin n) (SeparableClosure K))
       (b : (SeparableClosure K ≃ₐ[K] SeparableClosure K) →

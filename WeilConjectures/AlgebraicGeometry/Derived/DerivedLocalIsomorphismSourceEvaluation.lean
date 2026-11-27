@@ -38,7 +38,6 @@ on affine weakly contractible pro-etale objects, with no local-existence hypothe
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 set_option backward.isDefEq.respectTransparency.types false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
@@ -153,8 +152,7 @@ private theorem conjugation_natural (e : Aw ≅ Dw) :
     α.hom.app Aw ≫ L.map (SW.map e.hom) at hn
   rw [reassoc_of% hn]
   rw [reassoc_of% hA]
-  simp only [← L.map_comp_assoc, Iso.hom_inv_id, L.map_id, Category.id_comp,
-    Category.comp_id, Iso.hom_inv_id_assoc]
+  simp only [← L.map_comp_assoc, Category.comp_id, Iso.hom_inv_id_assoc]
 end Conjugation
 
 end CategoryTheory.Functor
@@ -315,20 +313,19 @@ theorem etaleSliceRestriction_comp_aux {V W : X.Etale} (f : V ⟶ W)
   simp only [Functor.map_comp, Category.assoc] at hf
   rw [hf]
   simp only [etaleSliceRestrictionIso, etaleSliceMapIso, Iso.trans_hom,
-    Iso.symm_hom, Iso.app_inv, Functor.isoWhiskerLeft_hom,
+    Iso.symm_hom, Functor.isoWhiskerLeft_hom,
     NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.map_comp, Category.assoc, Iso.inv_hom_id_app_assoc]
   dsimp only [Functor.comp_obj]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc,
-    ← Functor.map_comp, Iso.inv_hom_id_app, Functor.map_id, Category.comp_id]
+  simp only [Iso.inv_hom_id_app_assoc,
+    ← Functor.map_comp, Iso.inv_hom_id_app, Category.comp_id]
   apply Sheaf.hom_ext
   apply NatTrans.ext
   funext T
   dsimp only [Functor.comp_obj, NatTrans.comp_app,
     ObjectProperty.FullSubcategory.comp_hom, NatIso.ofComponents_hom_app,
     ObjectProperty.isoMk_hom, ObjectProperty.homMk_hom, Iso.refl_hom]
-  simp only [ObjectProperty.isoMk_hom, NatIso.ofComponents_hom_app, Iso.refl_hom,
-    Category.id_comp, Category.comp_id]
+  simp only [ObjectProperty.isoMk_hom]
   dsimp only [ObjectProperty.homMk_hom, NatIso.ofComponents_hom_app, Iso.refl_hom,
     etaleLocalizationCompIso]
   simp only [Category.id_comp]
@@ -384,10 +381,9 @@ theorem etaleDerivedSliceRestriction_comp {V W : X.Etale} (f : V ⟶ W)
     (etaleSliceRestriction_comp X B f) F
   simp only [etaleDerivedSliceRestrictionIso, etaleDerivedSliceMapIso,
     localIsomorphismRestrictionComp, derivedSliceMapIso,
-    etaleDerivedSliceEquivalence_functor,
     Functor.mapDerivedCategoryTriangleIso, Functor.mapDerivedCategorySquareIso,
     Functor.mapDerivedCategoryNatIso_symm, Iso.trans_hom, Iso.trans_inv,
-    Iso.symm_hom, Iso.symm_inv, NatTrans.comp_app] at h ⊢
+    Iso.symm_hom, NatTrans.comp_app] at h ⊢
   convert! h using 1
 
 noncomputable def etaleSliceToSourceIso

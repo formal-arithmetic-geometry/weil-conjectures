@@ -81,7 +81,6 @@ private theorem prime_ring_localization_witness
   rw [toAlgebra_algebraMap]
   infer_instance
 
-set_option linter.unusedVariables false in
 /-- Construct the localized ring and module cocones, without finiteness or tensor hypotheses. -/
 theorem exists_localized_approximation_cocones
     (R : Type u) (S : Type v) (M : Type w)
@@ -99,7 +98,7 @@ theorem exists_localized_approximation_cocones
       (D : Λ ⥤ AddCommGrpCat.{max u v w})
       (ν : D ⟶ (Functor.const Λ).obj (AddCommGrpCat.of M'))
     [∀ i : Λ, Module (B.obj i) (D.obj i)]
-    (hmodel :
+    (_hmodel :
       -- (1) the three colimits, compatible with `R' → S'` and the module actions
       Nonempty (IsColimit (Cocone.mk (CommRingCat.of R') π)) ∧
       Nonempty (IsColimit (Cocone.mk (CommRingCat.of S') κ)) ∧

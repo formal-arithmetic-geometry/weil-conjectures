@@ -53,10 +53,6 @@ local instance sourceComparisonPullbackAdditive {X Y : Scheme.{u}} (f : X ⟶ Y)
     (Scheme.Modules.tensorPullback f).Additive :=
   SingleComplexBaseChange.tensorPullbackAdditive.{u, w} f
 
-variable [∀ Y : Scheme.{u},
-  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
-set_option linter.unusedSectionVars false in
-set_option linter.overlappingInstances false in
 /-- The counit-normalized comparison between the derived tensor source and the derived pullback
 of the derived direct image, compatible with the scheme-level derived base-change map. -/
 theorem exists_affineTildeTensorSourceComparison

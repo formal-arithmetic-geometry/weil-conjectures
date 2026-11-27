@@ -88,7 +88,6 @@ private theorem lift_sectionwise
   ext U x
   exact hg U x n
 
-set_option linter.unusedVariables false in
 /-- Gluing of compatible lifts through the ordinary quotient tower. The hypothesis supplies
 agreement of all later integral maps with `a_n` modulo `ell^(n+1)`. -/
 theorem originalIntegralOrdinaryQuotient_compatibleLimit
@@ -102,7 +101,7 @@ theorem originalIntegralOrdinaryQuotient_compatibleLimit
       (condensedRingObj (Profinite.padicIntegersRingObj ell E) X) M)
     {W : Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ell E) X)}
-    (a : ∀ n : ℕ, W ⟶ M)
+    (a : ∀ _n : ℕ, W ⟶ M)
     (ha : ∀ n m : ℕ, n ≤ m →
       a m ≫ cokernel.π (ell ^ (n + 1) • 𝟙 M) =
         a n ≫ cokernel.π (ell ^ (n + 1) • 𝟙 M)) :

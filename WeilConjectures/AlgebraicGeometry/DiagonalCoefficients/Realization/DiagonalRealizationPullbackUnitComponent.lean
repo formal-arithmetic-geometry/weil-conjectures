@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleF
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj CategoryTheory.Functor
@@ -286,8 +285,6 @@ private theorem canonical_derived_unit
       (Profinite.continuousMapRingObj.{u} ℤ_[l]) f)
     (ordinary_unit_component l f eX eS unit d)
 
-set_option linter.unusedVariables false in
--- The fixed public signature retains invertibility and line endpoint parameters.
 /-- The canonical derived comparison has the prescribed completed-unit component. -/
 theorem diagonalRealization_pullback_unit_component
     (l : ℕ) [Fact l.Prime]
@@ -295,11 +292,11 @@ theorem diagonalRealization_pullback_unit_component
     (coeff : (Scheme.proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj
       (Scheme.purTwistZlCompletion S l) ≅ Scheme.purTwistZlCompletion X l)
     (hc : coeff.hom = diagonalCompletedCoefficientMap l f)
-    (hX : IsUnit (l : Γ(X, ⊤))) (hS : IsUnit (l : Γ(S, ⊤)))
+    (_hX : IsUnit (l : Γ(X, ⊤))) (_hS : IsUnit (l : Γ(S, ⊤)))
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
     (eX : CompletedRealization l X) (eS : CompletedRealization l S)
     (unit : UnitPullEndpoint (Profinite.continuousMapRingObj.{u} ℤ_[l]) f)
-    (line : PullEndpoint (Profinite.continuousMapRingObj.{u} ℤ_[l]) f
+    (_line : PullEndpoint (Profinite.continuousMapRingObj.{u} ℤ_[l]) f
       (zlLine l S) (zlLine l X)
       (((upperStarLowerStarAdjunction Ab.{u + 1} f).homEquiv _ _).symm
         ((Scheme.proEtaleSheafAdjunction f Ab.{u + 1}).homEquiv _ _
@@ -319,7 +316,6 @@ theorem diagonalRealization_pullback_unit_component
   have hmap : IsIso (diagonalCompletedCoefficientMap l f) := by
     rw [← hc]
     infer_instance
-  letI := hmap
   have hcoeff : coeff = diagonalPullbackCoefficientIso l f := Iso.ext hc
   subst coeff
   rw [diagonalRealization_pullback_canonical_comparison_normalized]

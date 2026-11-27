@@ -28,7 +28,6 @@ existence of some compatible isomorphism.
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.unusedSimpArgs false
 set_option backward.isDefEq.respectTransparency false
 
 universe u
@@ -175,11 +174,10 @@ private theorem diagramCompIso_raw
     Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
     Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.associator_hom_app, Functor.associator_inv_app,
-    Functor.map_comp, CategoryTheory.Functor.map_id, Category.assoc,
+    Functor.associator_hom_app, Functor.associator_inv_app, Category.assoc,
     Category.id_comp, Category.comp_id]
   erw [(etaleGraphOpenNormalization A d.compactification).hom.naturality]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
 
 private noncomputable def graphUnshrunk
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -419,13 +417,12 @@ private theorem compare_diagram_compositors
   apply (cancel_mono (y₂.inv.app _)).1
   simp only [Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
   apply (cancel_mono (G₂.map (x₂.hom.app M))).1
-  simp only [Category.assoc, Category.id_comp, Category.comp_id,
-    ← Functor.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id]
+  simp only [Category.assoc]
   rw [← t.hom.naturality]
   apply (cancel_mono (I₂.hom.app M)).1
-  simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+  simp only [Category.assoc]
   rw [← h]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Iso.hom_inv_id_app_assoc]
+  simp only [Iso.inv_hom_id_app_assoc, Iso.hom_inv_id_app_assoc]
   simp [← Functor.map_comp, ← Category.assoc]
 
 attribute [local irreducible] graphDiagram graphUnshrunk
@@ -493,16 +490,16 @@ private theorem transported_compositor_baseChange
       eg₁.app (F.obj M) ≫ y'.inv.app (V.obj (F.obj M)) := by
     apply (cancel_epi (W.map (y.hom.app (F.obj M)))).1
     simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
-      Category.id_comp, Category.assoc]
+      Category.id_comp]
     rw [reassoc_of% hy]
-    simp only [W.map_id, Category.id_comp, Iso.hom_inv_id_app, Category.comp_id]
+    simp only [Iso.hom_inv_id_app, Category.comp_id]
   have hxi : V.map (x.inv.app M) ≫ ef.app M =
       ef₁.app M ≫ x'.inv.app (U.obj M) := by
     apply (cancel_epi (V.map (x.hom.app M))).1
     simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
-      Category.id_comp, Category.assoc]
+      Category.id_comp]
     rw [reassoc_of% hx]
-    simp only [V.map_id, Category.id_comp, Iso.hom_inv_id_app, Category.comp_id]
+    simp only [Iso.hom_inv_id_app, Category.comp_id]
   simp only [Functor.map_comp, Category.assoc]
   rw [reassoc_of% hyi]
   rw [← y'.inv.naturality]
@@ -518,11 +515,10 @@ private theorem transported_compositor_baseChange
     CategoryTheory.Functor.map_id, Category.comp_id]
   apply (cancel_mono (I'.hom.app (U.obj M))).1
   simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Category.id_comp,
-    ← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id]
+  simp only [← Functor.map_comp_assoc]
   rw [← hI]
   simp only [← W.map_comp_assoc, Category.assoc, Iso.inv_hom_id_app,
-    Category.comp_id, G₁'.map_id, Category.id_comp]
+    Category.comp_id]
   exact hz M
 
 private theorem diagramCompIso_independent
@@ -751,12 +747,12 @@ private theorem compactificationExactExchange_transport
     Iso.trans_inv, Iso.symm_inv, Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
-    Functor.map_comp, Category.assoc, Category.id_comp, Category.comp_id]
+    Functor.map_comp, Category.assoc, Category.id_comp]
   rw [← h]
   dsimp only [rightDerivedLowerShriekOfCompactification, Functor.comp_map,
     Compactification.ofIsPullback, Functor.comp_obj]
-  simp only [Functor.map_comp, Category.assoc]
-  simp only [← Functor.map_comp_assoc, ← Functor.map_comp, Iso.inv_hom_id_app,
+  simp only [Category.assoc]
+  simp only [← Functor.map_comp, Iso.inv_hom_id_app,
     CategoryTheory.Functor.map_id, Category.comp_id]
   rfl
 
@@ -800,19 +796,19 @@ private theorem graphOpenNormalization_exchange
     etaleGraphPresentationExchange, Iso.trans_hom, NatTrans.comp_app,
     Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
-    Functor.leftUnitor_hom_app, Functor.map_comp, CategoryTheory.Functor.map_id,
+    Functor.leftUnitor_hom_app, Functor.map_comp,
     Category.assoc, Category.id_comp, Category.comp_id]
   dsimp only [Functor.comp_map, Functor.id_obj] at hn ho
   dsimp only [EtaleGraphPresentation.ofCompactification, EtaleGraphPresentation.functor,
     compactificationPresentationBaseChange, Functor.comp_map, Functor.comp_obj]
   erw [D((b)^*[ModuleCat.{u + 1} A]).map_id]
-  simp only [Category.id_comp, Category.comp_id, Category.assoc]
+  simp only [Category.id_comp]
   erw [reassoc_of% hn]
   have hmo := congrArg (R((cf'.g)_*[ModuleCat.{u + 1} A]).map) ho
   simp only [Functor.map_comp] at hmo
   erw [hmo]
   erw [hid]
-  simp only [Functor.map_comp, Category.assoc]
+  simp only [Functor.map_comp]
   dsimp only [EtaleGraphPresentation.functor, Functor.comp_obj]
   erw [Category.comp_id]
 
@@ -862,7 +858,7 @@ private theorem diagramRawInterchange_baseChange
   have hc := congr_app (graphInterchangeCube A D) (D((d.e)_!open[B]).obj K)
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
-    Category.id_comp, Category.comp_id, Category.assoc] at hc
+    Category.id_comp, Category.comp_id] at hc
   have nq₁ := (exactDerivedBaseChangeMap B D.qSquare.toCommSq).naturality
     (R((d.p)_*[B]).map
       ((mapDerivedCategoryOpenImmersionLowerShriekComp B d.e d.k).inv.app K))
@@ -893,10 +889,9 @@ private theorem diagramRawInterchange_baseChange
     EtaleGraphInterchangeDiagram.compactification, rightDerivedLowerShriekOfCompactification,
     Functor.comp_obj, Functor.comp_map]
   simp only [Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom,
-    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,
-    NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Functor.associator_hom_app, Functor.associator_inv_app, Functor.map_comp,
-    CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id, Category.assoc]
+    Functor.isoWhiskerLeft_hom, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app,
+    Functor.map_comp, Category.id_comp, Category.comp_id, Category.assoc]
   dsimp only [Functor.comp_obj, Functor.comp_map]
   rw [reassoc_of% hp]
   rw [← nc]
@@ -909,7 +904,7 @@ private theorem diagramRawInterchange_baseChange
   have hno := congrArg (fun z ↦ R((D.diagram.q)_*[B]).map
     (R((D.diagram.p)_*[B]).map z)) no
   have hng := congrArg (R((D.diagram.q)_*[B]).map) ng
-  simp only [ξ, Functor.map_comp, Functor.comp_map, Category.assoc] at hnp hho hhc hno hng
+  simp only [ξ, Functor.map_comp, Category.assoc] at hnp hho hhc hno hng
   exact paste_word _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
     hnp hho hhc hno.symm hng
 
@@ -1041,7 +1036,7 @@ private theorem diagram_chosenExact_comp
   simp only [diagramCompIso_raw, Iso.trans_hom, Iso.symm_hom,
     Functor.isoWhiskerRight_hom, NatTrans.comp_app, Functor.whiskerRight_app,
     Functor.map_comp, Category.assoc] at hi ⊢
-  simp only [Iso.refl_inv, NatTrans.id_app, CategoryTheory.Functor.map_id,
+  simp only [Iso.refl_inv, NatTrans.id_app,
     Category.comp_id, Category.assoc, Iso.symm_inv, κ, Functor.map_comp] at ht
   exact ht
 
@@ -1131,8 +1126,7 @@ private theorem change_pullback_compositor
   have hw := w.inv.naturality (I.hom.app M)
   dsimp only [Functor.comp_obj] at hw
   rw [reassoc_of% hw] at hh
-  simp only [← G'.map_comp_assoc, Iso.hom_inv_id_app, G'.map_id,
-    Category.id_comp, Iso.hom_inv_id_app_assoc] at hh
+  simp only [← G'.map_comp_assoc, Iso.hom_inv_id_app_assoc] at hh
   have hn := I'.hom.naturality (u.hom.app M)
   dsimp only [Functor.comp_map] at hn
   rw [hn] at hh

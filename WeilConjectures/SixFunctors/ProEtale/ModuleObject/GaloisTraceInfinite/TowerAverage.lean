@@ -34,9 +34,6 @@ by the projector: the projector is the projector onto the invariants.
 
 @[expose] public section
 
--- several lemmas do not need all the instances of the section variables
-set_option linter.unusedSectionVars false
-
 universe u
 
 open CategoryTheory Category Limits
@@ -58,6 +55,7 @@ section Module
 
 variable (M : CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
 
+omit [WeaklyEtale ginf] in
 /-- `|Γ_j|` times the normalized trace at the level `j` is the trace. -/
 lemma card_nsmul_normTrace (j : T.J) :
     Fintype.card (T.Γ j) • T.normTrace Λ M hd j = (T.levelTrace Λ j).app M := by
@@ -114,6 +112,7 @@ variable (K : CochainComplex
 lemma complexTrace_f (n : ℤ) :
     (T.complexTrace Λ hd K hc).f n = T.trace Λ (K.X n) hd (hc n) := rfl
 
+omit [WeaklyEtale ginf] in
 /-- The degree `n` component of the unit of `g_∞^* ⊣ g_{∞*}` on complexes. -/
 lemma mapHomologicalComplex_unit_app_f_eq_infUnit (n : ℤ) :
     (((CondensedRing.upperStarLowerStarAdjunction Λ ginf).mapHomologicalComplex _).unit.app K).f n =
@@ -121,6 +120,7 @@ lemma mapHomologicalComplex_unit_app_f_eq_infUnit (n : ℤ) :
   rw [Adjunction.mapHomologicalComplex_unit_app_f]
   rfl
 
+omit [WeaklyEtale ginf] in
 /-- The degree `n` component of the unit transport on complexes. -/
 lemma mapHomologicalComplex_unitTransport_app_f (σ : Yinf ⟶ Yinf) (hσ : σ ≫ ginf = ginf)
     (n : ℤ) :

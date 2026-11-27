@@ -78,7 +78,6 @@ for compile time.
 
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.unusedSectionVars false
 
 universe u
 
@@ -124,6 +123,7 @@ attribute [local irreducible] boundedConstructibleUpperStar
   boundedConstructibleUpperStarCompatibility boundedConstructiblePullbackSquareComparison
   Functor.squareTransport Adjunction.restrictFullyFaithful
 
+omit [IsProper p.left] in
 private theorem baseChange_restriction_eq
     (H : PreservesBoundedConstructiblePushforwards (Profinite.padicAlgClRingObj ℓ) k)
     (sq : CommSq g' p' p g) :
@@ -132,6 +132,7 @@ private theorem baseChange_restriction_eq
   rw [boundedConstructibleBaseChange_def]
   with_unfolding_all rfl
 
+omit [IsProper p.left] in
 private theorem baseChange_restriction_eq_subfield
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (H : PreservesBoundedConstructiblePushforwards (Profinite.continuousMapRingObj E) k)
