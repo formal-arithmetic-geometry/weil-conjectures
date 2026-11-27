@@ -193,8 +193,6 @@ attribute [local irreducible] DerivedCategory DerivedCategory.Q
   CochainComplex.IsKFlatIndependentCoefficients homComplex homComplexFunctor
   derivedInternalHomOfUniverses SheafOfModules.monoidalCategory
 
-set_option maxHeartbeats 800000 in
--- The independent-universe representative square has large dependent module types.
 /-- Change the tensor model by the same adjoint comparison, retaining ordinary uncurrying. -/
 def tensorModels {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v r}]
@@ -229,9 +227,8 @@ def tensorModels {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
           (DerivedCategory.Q.map φ ≫
             (coefficientHomResolutionIso.{r, c, v, w} J R L.obj N).inv) := by
       apply (S.transpose _ _ _).injective
-      rw [CoefficientClosedStructure.comparison_transpose, Equiv.apply_symm_apply,
-        Equiv.apply_symm_apply]
-    rw [ht]
+      simp only [CoefficientClosedStructure.comparison_transpose, Equiv.apply_symm_apply]
+    conv_lhs => rw [ht]
     exact he
 
 /-- Fixed normalized closed structures, with the old representative models transported

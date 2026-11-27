@@ -96,21 +96,21 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
   [QuasiCompact f]
 
-set_option linter.style.longLine false in
-instance : CompactSpace ((shriekCompactification k₀ f).Z ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
+instance :
+    CompactSpace ((shriekCompactification k₀ f).Z ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
   QuasiCompact.compactSpace_of_compactSpace
     ((shriekCompactification k₀ f).Z ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
 
-set_option linter.style.longLine false in
-instance : IsNoetherian ((shriekCompactification k₀ f).Z ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
+instance :
+    IsNoetherian ((shriekCompactification k₀ f).Z ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
   ⟨⟩
 
-set_option linter.style.longLine false in
 variable (k₀) in
 /-- The lift of the condensed Frobenius `(Fr_S⁻¹)_*` to bounded constructible condensed
 complexes. -/
 noncomputable abbrev condensedFrobeniusLift (S : Scheme.{u}) [S.Over (Spec (CommRingCat.of k₀))]
-    [IsSeparated (S ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (S ↘ Spec (CommRingCat.of k₀))]
+    [IsSeparated (S ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (S ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (S ↘ Spec (CommRingCat.of k₀))] :=
   ObjectProperty.liftFullSubcategory (condensedBoundedConstructible k₀ l S)
     (condensedBoundedConstructible k₀ l S) (condensedFrobenius k₀ l S).mapDerivedCategory
@@ -157,9 +157,9 @@ noncomputable def condensedOpenImmersionGeometricExchange :
       ((IsoAlgebra.derivedExactCommIso (condensedOpenImmersionShriekExchange k₀ l f)).hom.naturality
         φ.hom))
 
-set_option linter.style.longLine false in
 variable (k₀) in
-/-- The adjunction `f̄_! ⊣ f̄^!` for `f̄_! = Rḡ_* ∘ D(ī_!)` and `f̄^! = ī^* ∘ ḡ^!`, condensed model. -/
+/-- The adjunction `f̄_! ⊣ f̄^!` for `f̄_! = Rḡ_* ∘ D(ī_!)` and `f̄^! = ī^* ∘ ḡ^!`, condensed
+model. -/
 noncomputable abbrev condensedCompactifiedAdjunction :=
   (condensedOpenImmersionGeometricAdjunction k₀ l f).comp (condensedProperAdjunction k₀ l f)
 
@@ -177,13 +177,13 @@ noncomputable def condensedCompactifiedExchange :=
     Functor.isoWhiskerRight (condensedOpenImmersionGeometricExchange k₀ l f) _ ≪≫
     Functor.associator _ _ _
 
-set_option linter.style.longLine false in
 lemma condensedCompactifiedExchange_hom_app (K) :
     (condensedCompactifiedExchange k₀ l f).hom.app K =
       (IsoAlgebra.liftedDerivedCommIso (condensedProperExchange k₀ l f) _ _
         (boundedConstructible_lowerStar_frobenius_mapDerivedCategory_obj_iff l
           (shriekCompactification k₀ f).Z)
-        (fun K hK ↦ (boundedConstructible_lowerStar_frobenius_mapDerivedCategory_obj_iff l Y K).2 hK)
+        (fun K hK ↦
+          (boundedConstructible_lowerStar_frobenius_mapDerivedCategory_obj_iff l Y K).2 hK)
         (condensedProperPreserves k₀ l f)).hom.app
         ((ObjectProperty.liftFullSubcategory _ _
           (CondensedRing.openImmersionLowerShriek (Profinite.padicAlgClRingObj l)
@@ -198,6 +198,7 @@ lemma condensedCompactifiedExchange_hom_app (K) :
         ((condensedOpenImmersionGeometricExchange k₀ l f).hom.app K) := by
   simp [condensedCompactifiedExchange]
 
+-- Keep the section instances as hypotheses of this public statement.
 set_option linter.unusedSectionVars false in
 /-- The exchange of `D(ī_!)` is the left mate of the exchange of `ī^*`, at the level of
 isomorphisms. -/
@@ -292,7 +293,6 @@ lemma isWeilEquivariant_condensedForgetObjIso_hom (L : WeilComplex k₀ l X) :
 
 variable {f} [HasUpperShriek k₀ l f]
 
-set_option linter.style.longLine false in
 /-- **The Weil orientation from the trace square, condensed model**: let
 `o : f̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` be an orientation on `X̄` in the condensed model
 (`f̄^! = ī^* ∘ ḡ^!` for the compactification, `ℚ̄_ℓ(d)[2d]` the condensed model of the Tate twist),
@@ -309,8 +309,9 @@ theorem exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_condens
     (htrace : IsWeilEquivariant (condensedFrobeniusLift k₀ l Y)
       (Adjunction.leftWeilDatum (condensedCompactifiedExchange k₀ l f)
         (ObjectProperty.homMk
-          (X := (condensedFrobeniusLift k₀ l X).obj (condensedForgetAdic k₀ l (((tateTwist k₀ l X d).obj
-            (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧)))
+          (X := (condensedFrobeniusLift k₀ l X).obj
+            (condensedForgetAdic k₀ l (((tateTwist k₀ l X d).obj
+              (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧)))
           (Y := condensedForgetAdic k₀ l (((tateTwist k₀ l X d).obj
             (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l X)))⟦(2 * d : ℤ)⟧))
           (transportWeilDatum

@@ -161,8 +161,6 @@ private theorem extension_integer_section (X : TopCat.{u})
   rw [hid, K.obj.map_id]
   rfl
 
--- The existing statement names an existential witness whose predicate is True.
-set_option linter.unusedVariables false in
 /-- Construct a finite signed partition and positive component maps, without yet
 constructing a morphism between the coproducts. -/
 theorem positive_refinement_data
@@ -173,7 +171,7 @@ theorem positive_refinement_data
     (g : (∐ fun i => (abelianOpenExtensionByZero (U i)).obj
       ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (U i)))
         AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) ⟶ K) :
-    ∃ d : PositiveRefinementData X K C ι isoC m U g, True := by
+    ∃ _d : PositiveRefinementData X K C ι isoC m U g, True := by
   classical
   let η := toSheafify (Opens.grothendieckTopology X)
     ((Functor.const (Opens X)ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u} ℤ)))

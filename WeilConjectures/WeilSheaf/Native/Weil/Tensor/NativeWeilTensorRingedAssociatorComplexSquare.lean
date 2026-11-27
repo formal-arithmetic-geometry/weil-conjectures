@@ -21,7 +21,6 @@ Transport the explicit chain models through localization.
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option Elab.async false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
@@ -40,7 +39,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   (adj : T ⊣₂ ihomBifunctor k₀ l X)
   (A : NativeWeilRingedTensorComplexes b T adj)
 
-set_option linter.style.haveILetI false in
 -- The ringed cochain monoidal structure needs a deep search for its graded tensor instances.
 /-- The explicit preimage associator satisfies its defining ringed model square. -/
 theorem nativeRingedAssociatorComplex_square
@@ -52,8 +50,8 @@ theorem nativeRingedAssociatorComplex_square
         (nativeRingedTripleRight b T adj A P Q N).hom =
       (nativeRingedTripleLeft b T adj A P Q N).hom ≫
         (α_ (Ec.obj P) (Ec.obj Q) (Ec.obj N)).hom := by
-  letI := SheafOfModules.isMonoidal_W_independentCoefficients b.R
-  letI := SheafOfModules.monoidalCategory b.R
+  have := SheafOfModules.isMonoidal_W_independentCoefficients b.R
+  let := SheafOfModules.monoidalCategory b.R
   dsimp only [nativeRingedAssociatorComplex]
   exact preimageAssociator_square (b.native.functor.mapHomologicalComplex (.up ℤ))
     (X := (b.native.functor.mapHomologicalComplex (.up ℤ)).obj P)

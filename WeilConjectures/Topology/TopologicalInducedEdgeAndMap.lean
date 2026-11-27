@@ -42,7 +42,6 @@ private noncomputable def sectionEquiv
       yonedaEquiv)
 
 -- The existing existential binder `edge` is intentionally unconstrained in the conclusion.
-set_option linter.unusedVariables false in
 /-- A continuous map induces a natural map from direct-image cohomology to source cohomology,
 and a terminal free abelian sheaf map with the inverse-image generator rule. -/
 theorem exists_topological_induced_edge_and_map
@@ -53,7 +52,7 @@ theorem exists_topological_induced_edge_and_map
       (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤))
     (hZ : ∀ n, HZ n = Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology Z) n ⋙
       (evaluation (Opens Z)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)) :
-    ∃ edge : ∀ p : ℕ, TopCat.Sheaf.pushforwardAb f ⋙ HX p ⟶ HZ p,
+    ∃ _edge : ∀ p : ℕ, TopCat.Sheaf.pushforwardAb f ⋙ HX p ⟶ HZ p,
       ∃ a : (presheafToSheaf (Opens.grothendieckTopology X)
         AddCommGrpCat.{u}).obj
         (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free) ⟶
