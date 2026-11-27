@@ -50,7 +50,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 
 /-- Restriction of scalars from a finite coefficient level is full. -/
-theorem scalarReductionRestriction_full (W : Scheme.{t}) (n : ℕ) :
+private theorem scalarReductionRestriction_full (W : Scheme.{t}) (n : ℕ) :
     (scalarReductionRestriction l E W n).Full where
   map_surjective {M N} f := by
     let q := (sheafCompose (ProEt.topology W)
@@ -65,7 +65,7 @@ theorem scalarReductionRestriction_full (W : Scheme.{t}) (n : ℕ) :
     exact e.apply_symm_apply f.val
 
 /-- Restriction of scalars from a finite coefficient level is faithful. -/
-theorem scalarReductionRestriction_faithful (W : Scheme.{t}) (n : ℕ) :
+private theorem scalarReductionRestriction_faithful (W : Scheme.{t}) (n : ℕ) :
     (scalarReductionRestriction l E W n).Faithful where
   map_injective {M N} f f' h := by
     ext U x
