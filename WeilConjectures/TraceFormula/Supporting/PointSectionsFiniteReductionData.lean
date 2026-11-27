@@ -68,8 +68,6 @@ coefficients.
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-set_option linter.style.haveILetI false
-set_option linter.unusedVariables false
 universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
@@ -106,7 +104,7 @@ noncomputable instance pointFiniteReductionSectionsLimits (k : Type u) [Field k]
   let A := (constantSheaf.{u, u + 1, u + 1, u + 2} (Scheme.ProEt.topology (Spec (.of k)))
     CommRingCat.{u + 1}).obj
     (CommRingCat.of (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)))
-  letI : PreservesFiniteLimits (pointModuleSections k A) :=
+  have : PreservesFiniteLimits (pointModuleSections k A) :=
     ((@point_proEtale_sections_exact.{u, u + 1, u + 1} k).2 A).1
   exact inferInstanceAs (PreservesFiniteLimits
     (pointModuleSections k _ ⋙ ModuleCat.restrictScalars.{u + 1, u + 1, u + 1}
@@ -120,9 +118,9 @@ noncomputable instance pointFiniteReductionSectionsColimits (k : Type u) [Field 
   let A := (constantSheaf.{u, u + 1, u + 1, u + 2} (Scheme.ProEt.topology (Spec (.of k)))
     CommRingCat.{u + 1}).obj
     (CommRingCat.of (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)))
-  letI : PreservesFiniteColimits (pointModuleSections k A) :=
+  have : PreservesFiniteColimits (pointModuleSections k A) :=
     ((@point_proEtale_sections_exact.{u, u + 1, u + 1} k).2 A).2.1
-  letI : PreservesFiniteColimits
+  have : PreservesFiniteColimits
       (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1}
         (pointConstantSectionMap k (Padic.coefficientExtensionRing l E n))) := by
     infer_instance

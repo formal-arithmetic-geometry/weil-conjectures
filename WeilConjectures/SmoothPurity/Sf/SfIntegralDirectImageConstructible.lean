@@ -292,7 +292,6 @@ private theorem finite_image_support
       obtain ⟨h₁, h₂⟩ := hs hz
       exact (by omega)) i (Or.inl (by omega)))
 
-set_option linter.unusedVariables false in
 /-- Preservation of constructibility, every canonical reduction comparison, and uniform
 cohomological bounds, including the dimension and empty-source cases. -/
 theorem sfIntegralDirectImage_constructible
@@ -307,7 +306,7 @@ theorem sfIntegralDirectImage_constructible
     (_hK : sfIntegralConstructible l E X K) :
     (∃ hprod : HasProduct (sfDirectImageTerm l E f K),
       @Nonempty (@SfIntegralDirectImage l _ E _ _ _ X Y f K hprod)) ∧
-    (∀ [hprod : HasProduct (sfDirectImageTerm l E f K)]
+    (∀ [_hprod : HasProduct (sfDirectImageTerm l E f K)]
       (L : SfIntegralDirectImage l E f K),
       sfIntegralConstructible l E Y L.obj ∧ IsSfDerivedComplete l E Y L.obj ∧
         (∀ n : ℕ, IsIso (sfDirectImageReductionComparison l E f L n)) ∧

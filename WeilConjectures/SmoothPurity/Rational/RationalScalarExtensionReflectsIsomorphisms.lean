@@ -17,7 +17,6 @@ raw rational constructible categories.
 -/
 @[expose] public section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory AlgebraicGeometry
 namespace WeilConjectures
@@ -30,12 +29,12 @@ private theorem reflects_of_split_counit
     T.ReflectsIsomorphisms := by
   classical
   choose s hs using hobj
-  letI : ∀ X, IsSplitEpi (b.counit.app X) := fun X ↦
+  have : ∀ X, IsSplitEpi (b.counit.app X) := fun X ↦
     IsSplitEpi.mk' { section_ := s X, id := hs X }
-  letI : T.Faithful := b.faithful_R_of_epi_counit_app
+  have : T.Faithful := b.faithful_R_of_epi_counit_app
   constructor
   intro X Y f hf
-  letI := hf
+  have := hf
   let g : Y ⟶ X := s Y ≫ U.map (inv (T.map f)) ≫ b.counit.app X
   have hgf : g ≫ f = 𝟙 Y := by
     have hc : b.counit.app X ≫ f = U.map (T.map f) ≫ b.counit.app Y := by
@@ -50,8 +49,8 @@ private theorem reflects_of_split_counit
         rw [← U.map_comp, IsIso.inv_hom_id, U.map_id]
         simp
       _ = 𝟙 Y := hs Y
-  letI : Mono f := T.mono_of_mono_map (by infer_instance)
-  letI : IsSplitEpi f := IsSplitEpi.mk' { section_ := g, id := hgf }
+  have : Mono f := T.mono_of_mono_map (by infer_instance)
+  have : IsSplitEpi f := IsSplitEpi.mk' { section_ := g, id := hgf }
   exact isIso_of_mono_of_isSplitEpi f
 
 noncomputable instance rationalScalarExtension_rightAdjoint_instance

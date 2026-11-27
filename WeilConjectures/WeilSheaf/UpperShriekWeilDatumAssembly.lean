@@ -50,7 +50,6 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   {f : X ⟶ Y} [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
   [QuasiCompact f] [HasUpperShriek k₀ l f]
 
-set_option linter.style.whitespace false in
 /-- **The Weil orientation from an equivariant geometric orientation.** Let `ḡ^!` be a right
 adjoint of `Rḡ_*` for the compactification `ḡ` of `f̄` (`adjR'`), and let `o` be an isomorphism
 `ī^* (ḡ^! ℚ̄_ℓ) ≅ ℚ̄_ℓ(d)[2d]` of complexes on `X̄` which is Frobenius equivariant for the
@@ -60,8 +59,8 @@ statement of `exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso`. -/
 theorem exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_isWeilEquivariant
     (d : ℕ) (hR : PreservesBoundedConstructibleAdicLowerStar k₀ l f)
     {R' : (DerivedCategory.boundedConstructibleAdic l
-        (Over.mk (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).left
-          ).FullSubcategory ⥤
+        (Over.mk (Y ↘ Spec
+          (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).left).FullSubcategory ⥤
       (DerivedCategory.boundedConstructibleAdic l
         (geometricFiberHomCompactification (k₀ := k₀) f).overObj.left).FullSubcategory}
     (adjR' : (DerivedCategory.boundedConstructibleAdic l
@@ -97,8 +96,6 @@ theorem exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_isWeilE
     (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y))
   exact ⟨θ ≪≫ o, (hθ.comp ho).symm⟩
 
-set_option linter.style.longLine false in
-set_option linter.style.whitespace false in
 /-- **The Weil orientation from the trace square**: let `o : f̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` be an
 orientation on `X̄` (`f̄^! = ī^* ∘ ḡ^!` for the compactification), whose trace
 `f̄_! ℚ̄_ℓ(d)[2d] ⟶ ℚ̄_ℓ` is Frobenius equivariant for the composite exchange of `f̄_!` and the
@@ -108,8 +105,8 @@ that of `ℚ̄_ℓ(d)[2d]` compatibly with the Frobenius structures: the stateme
 theorem exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_trace
     (d : ℕ) (hR : PreservesBoundedConstructibleAdicLowerStar k₀ l f)
     {R' : (DerivedCategory.boundedConstructibleAdic l
-        (Over.mk (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).left
-          ).FullSubcategory ⥤
+        (Over.mk (Y ↘ Spec
+          (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure).left).FullSubcategory ⥤
       (DerivedCategory.boundedConstructibleAdic l
         (geometricFiberHomCompactification (k₀ := k₀) f).overObj.left).FullSubcategory}
     (adjR' : (DerivedCategory.boundedConstructibleAdic l
@@ -121,8 +118,9 @@ theorem exists_forget_upperShriek_adicConstant_iso_comm_derivedStrIso_of_trace
         hR ⊣ R')
     (o : (R' ⋙ ObjectProperty.liftFullSubcategory _ _
         (adicUpperStar l (compactificationOpenImmersion k₀ f)).mapDerivedCategory
-        (fun _ hK ↦ ProEtale.DerivedCategory.boundedConstructibleAdic.mapDerivedCategory_adicUpperStar
-          (compactificationOpenImmersion k₀ f) hK)).obj
+        (fun _ hK ↦
+          ProEtale.DerivedCategory.boundedConstructibleAdic.mapDerivedCategory_adicUpperStar
+            (compactificationOpenImmersion k₀ f) hK)).obj
         ⟨forget.obj (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y)),
           (WeilComplex.objectProperty_iff _).1
             (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l Y)).property⟩ ≅
