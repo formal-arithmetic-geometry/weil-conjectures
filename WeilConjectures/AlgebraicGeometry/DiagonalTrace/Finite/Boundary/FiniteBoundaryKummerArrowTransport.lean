@@ -77,15 +77,35 @@ private theorem finiteBoundary_paste {D : Type*} [Category D] [HasShift D ℤ]
   rw [← reassoc_of% hN, ← Functor.map_comp_assoc (shiftFunctor D (2 : ℤ)) h hi, hhi,
     CategoryTheory.Functor.map_id, Category.id_comp]
 
+/-- The derived arrow of an `Ext` class pre- and postcomposed with ordinary maps after an exact
+functor. -/
+private theorem ext_mk₀_comp_mapExactFunctor_comp_hom {C D : Type*} [Category C] [Category D]
+    [Abelian C] [Abelian D] [HasDerivedCategory C] [HasDerivedCategory D] [HasExt C] [HasExt D]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    {X Y : C} {X' Y' : D} (a : X' ⟶ F.obj X) (x : Ext X Y 2) (b : F.obj Y ⟶ Y') :
+    ((Ext.mk₀ a).comp ((x.mapExactFunctor F).comp (Ext.mk₀ b) (add_zero 2))
+        (zero_add 2)).hom =
+      (DerivedCategory.singleFunctor D 0).map a ≫ mapSingleArrow F (2 : ℤ) x.hom ≫
+        ((DerivedCategory.singleFunctor D 0).map b)⟦(2 : ℤ)⟧' := by
+  rw [Ext.comp_hom, Ext.comp_hom, Ext.mk₀_hom, Ext.mk₀_hom, ShiftedHom.mk₀_comp,
+    ShiftedHom.comp_mk₀, ← FiniteExactArrow.mapSingleArrow_ext]
+  rfl
+
+/-- `Ext` groups of abelian sheaves, stated with the abelian structure `diagonalAbSheafAbelian`. -/
+private theorem diagonalAbHasExt (T : Scheme.{u}) : HasExt.{u + 1} (DiagonalAb T) :=
+  inferInstance
+
+attribute [local instance 100000] diagonalAbHasExt
+
 section Assembly
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [local instance 100000] integralAbDerived
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-/-- The finite boundary square as an equality of `Ext` classes, checked in the standard model
-of the derived category of abelian sheaves where the finite Chern normalization is stated. -/
-private theorem finiteBoundary_transport_assembly_ext
+/-- The finite boundary square in the standard model of the derived category of abelian sheaves,
+where the finite Chern normalization is stated. -/
+private theorem finiteBoundary_transport_square
     (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) [DiagonalTraceLocalizations l T]
     (c : Chern l (ULift.{u} (Padic l)) T)
     (r : Restriction l (ULift.{u} (Padic l)) T)
@@ -93,11 +113,7 @@ private theorem finiteBoundary_transport_assembly_ext
     (A : Type (u + 1)) [CommRing A] (n : ℕ)
     (hA : ((l ^ (n + 1) : ℕ) : A) = 0)
     (hN : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤)))
-    [HasExt.{w} (Systems T (Arings l (ULift.{u} (Padic l)) T))]
     (hc : FiniteChernNormalization l (ULift.{u} (Padic l)) c) (P : T.Pic)
-    (x : Ext (coefficient T (Arings l (ULift.{u} (Padic l)) T))
-      (lineModule l (ULift.{u} (Padic l)) c) 2)
-    (hx : x.hom = firstChern l (ULift.{u} (Padic l)) c P)
     (hs : finiteQuotient l (ULift.{u} (Padic l)) T n ≫
         (finiteBoundaryRestrictionUnderlying l T r n).inv.app
           (coefficient T (Arings l (ULift.{u} (Padic l)) T)) =
@@ -111,16 +127,19 @@ private theorem finiteBoundary_transport_assembly_ext
         k.lineForget.hom.app (op n) ≫
         cartierProRootMap A (l ^ (n + 1)) hA T (pow_pos (Fact.out : l.Prime).pos _) hN =
       cartierProRootMap A (l ^ (n + 1)) hA T (pow_pos (Fact.out : l.Prime).pos _) hN) :
-    (Ext.mk₀ (diagonalCoefficientIntegerMap T (Scheme.purTwistFiniteRing T l n) ≫
-        k.coefficientForget.inv.app (op n))).comp
-      ((x.mapExactFunctor
-          (r.F ⋙ (evaluation ℕᵒᵖ (DiagonalMod l T)).obj (op n) ⋙ diagonalForget l T)).comp
-        (Ext.mk₀ (k.lineForget.hom.app (op n) ≫
-          cartierProRootMap A (l ^ (n + 1)) hA T (pow_pos (Fact.out : l.Prime).pos _) hN))
-        (add_zero 2)) (zero_add 2) =
-      evaluatedIntegralKummerClass l T A n hA c.kummer hN P := by
+    (DerivedCategory.singleFunctor (DiagonalAb T) 0).map
+        (diagonalCoefficientIntegerMap T (Scheme.purTwistFiniteRing T l n) ≫
+          k.coefficientForget.inv.app (op n)) ≫
+      mapSingleArrow (C := Systems T (Arings l (ULift.{u} (Padic l)) T)) (D := DiagonalAb T)
+        (r.F ⋙ (evaluation ℕᵒᵖ (DiagonalMod l T)).obj (op n) ⋙ diagonalForget l T) (2 : ℤ)
+        (firstChern l (ULift.{u} (Padic l)) c P) ≫
+      ((DerivedCategory.singleFunctor (DiagonalAb T) 0).map (k.lineForget.hom.app (op n) ≫
+        cartierProRootMap A (l ^ (n + 1)) hA T (pow_pos (Fact.out : l.Prime).pos _) hN))⟦(2 : ℤ)⟧' =
+      evaluatedTowerBoundary l T n c.kummer P ≫
+        ((DerivedCategory.singleFunctor (DiagonalAb T) 0).map
+          (cartierProRootMap A (l ^ (n + 1)) hA T
+            (pow_pos (Fact.out : l.Prime).pos _) hN))⟦(2 : ℤ)⟧' := by
   let S := DerivedCategory.singleFunctor (DiagonalAb T) 0
-  let e := finiteBoundaryRestrictionUnderlying l T r n
   have hb : finiteBoundaryEquality
       (S.map (finiteQuotient l (ULift.{u} (Padic l)) T n))
       ((S.map (finiteRootMap l (ULift.{u} (Padic l)) T n))⟦(2 : ℤ)⟧')
@@ -132,21 +151,63 @@ private theorem finiteBoundary_transport_assembly_ext
   obtain rfl := eq_of_heq hβ
   simp only [evaluatedChern, mapSingleArrow_postcompose] at hb
   erw [mapSingleArrow_composite] at hb
-  apply Ext.ext
-  rw [Ext.comp_hom, Ext.comp_hom, Ext.mk₀_hom, Ext.mk₀_hom, ShiftedHom.mk₀_comp,
-    ShiftedHom.comp_mk₀, ← FiniteExactArrow.mapSingleArrow_ext, hx,
-    evaluatedIntegralKummerClass_hom]
-  simp only [Nat.cast_ofNat]
   exact finiteBoundary_paste _ _ _ _ _ _ _
     (S.map ((finiteForget l (ULift.{u} (Padic l)) T n).mapIso
       (lineEvaluation l (ULift.{u} (Padic l)) c n)).inv) _ _ _ _ _
     ((S.map_comp _ _).symm.trans (congrArg S.map hs))
-    (mapSingleArrow_natIso _ _ e.symm (2 : ℤ) (firstChern l (ULift.{u} (Padic l)) c P)) hb
+    (mapSingleArrow_natIso _ _ (finiteBoundaryRestrictionUnderlying l T r n).symm (2 : ℤ)
+      (firstChern l (ULift.{u} (Padic l)) c P)) hb
     (by rw [← S.map_comp]; simp) (by
       refine Eq.trans ?_ (congrArg S.map ht)
       simp only [Functor.map_comp]
       rfl)
     (S.map_comp _ _).symm
+
+/-- The finite boundary square as an equality of `Ext` classes, checked in the standard model
+of the derived category of abelian sheaves. -/
+private theorem finiteBoundary_transport_assembly_ext
+    (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) [DiagonalTraceLocalizations l T]
+    (c : Chern l (ULift.{u} (Padic l)) T)
+    (r : Restriction l (ULift.{u} (Padic l)) T)
+    (k : Coefficients l (ULift.{u} (Padic l)) T c r)
+    (A : Type (u + 1)) [CommRing A] (n : ℕ)
+    (hA : ((l ^ (n + 1) : ℕ) : A) = 0)
+    (hN : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤)))
+    [HasExt.{w} (Systems T (Arings l (ULift.{u} (Padic l)) T))]
+    (P : T.Pic)
+    (x : Ext (coefficient T (Arings l (ULift.{u} (Padic l)) T))
+      (lineModule l (ULift.{u} (Padic l)) c) 2)
+    (hx : x.hom = firstChern l (ULift.{u} (Padic l)) c P)
+    (h : (DerivedCategory.singleFunctor (DiagonalAb T) 0).map
+        (diagonalCoefficientIntegerMap T (Scheme.purTwistFiniteRing T l n) ≫
+          k.coefficientForget.inv.app (op n)) ≫
+      mapSingleArrow (C := Systems T (Arings l (ULift.{u} (Padic l)) T)) (D := DiagonalAb T)
+        (r.F ⋙ (evaluation ℕᵒᵖ (DiagonalMod l T)).obj (op n) ⋙ diagonalForget l T) (2 : ℤ)
+        (firstChern l (ULift.{u} (Padic l)) c P) ≫
+      ((DerivedCategory.singleFunctor (DiagonalAb T) 0).map (k.lineForget.hom.app (op n) ≫
+        cartierProRootMap A (l ^ (n + 1)) hA T (pow_pos (Fact.out : l.Prime).pos _) hN))⟦(2 : ℤ)⟧' =
+      evaluatedTowerBoundary l T n c.kummer P ≫
+        ((DerivedCategory.singleFunctor (DiagonalAb T) 0).map
+          (cartierProRootMap A (l ^ (n + 1)) hA T
+            (pow_pos (Fact.out : l.Prime).pos _) hN))⟦(2 : ℤ)⟧') :
+    (Ext.mk₀ (diagonalCoefficientIntegerMap T (Scheme.purTwistFiniteRing T l n) ≫
+        k.coefficientForget.inv.app (op n))).comp
+      ((x.mapExactFunctor
+          (r.F ⋙ (evaluation ℕᵒᵖ (DiagonalMod l T)).obj (op n) ⋙ diagonalForget l T)).comp
+        (Ext.mk₀ (k.lineForget.hom.app (op n) ≫
+          cartierProRootMap A (l ^ (n + 1)) hA T (pow_pos (Fact.out : l.Prime).pos _) hN))
+        (add_zero 2)) (zero_add 2) =
+      evaluatedIntegralKummerClass l T A n hA c.kummer hN P := by
+  apply Ext.ext
+  refine (ext_mk₀_comp_mapExactFunctor_comp_hom (C := Systems T (Arings l (ULift.{u} (Padic l)) T))
+    (D := DiagonalAb T)
+    (r.F ⋙ (evaluation ℕᵒᵖ (DiagonalMod l T)).obj (op n) ⋙ diagonalForget l T)
+    (diagonalCoefficientIntegerMap T (Scheme.purTwistFiniteRing T l n) ≫
+      k.coefficientForget.inv.app (op n)) x
+    (k.lineForget.hom.app (op n) ≫
+      cartierProRootMap A (l ^ (n + 1)) hA T (pow_pos (Fact.out : l.Prime).pos _) hN)).trans ?_
+  rw [hx, evaluatedIntegralKummerClass_hom]
+  exact h
 
 end Assembly
 
@@ -170,16 +231,23 @@ theorem finiteBoundary_transport_assembly
   let S := DerivedCategory.singleFunctor (DiagonalAb T) 0
   let x := Ext.homEquiv.symm (firstChern l (ULift.{u} (Padic l)) c P)
   have hx : x.hom = firstChern l (ULift.{u} (Padic l)) c P := Ext.homEquiv.apply_symm_apply _
-  rw [← finiteBoundary_transport_assembly_ext l T c r k A n hA hN hc P x hx
+  refine Eq.trans ?_ (congrArg Ext.hom (finiteBoundary_transport_assembly_ext l T c r k A n hA hN
+    P x hx (finiteBoundary_transport_square l T c r k A n hA hN hc P
       (S.map_injective (by rw [S.map_comp]; exact hs))
       (S.map_injective (by
         refine Eq.trans ?_ ht
         simp only [Functor.map_comp]
-        rfl)),
-    finiteConeChernClass]
+        rfl)))))
+  rw [finiteConeChernClass]
   change Ext.homEquiv (Ext.homEquiv.symm _) = _
-  rw [Equiv.apply_symm_apply, Ext.comp_hom, Ext.comp_hom, Ext.mk₀_hom, Ext.mk₀_hom,
-    ShiftedHom.mk₀_comp, ShiftedHom.comp_mk₀, ← FiniteExactArrow.mapSingleArrow_ext, hx]
-  simp only [Nat.cast_ofNat]
+  rw [Equiv.apply_symm_apply]
+  refine Eq.trans ?_ (ext_mk₀_comp_mapExactFunctor_comp_hom
+    (C := Systems T (Arings l (ULift.{u} (Padic l)) T)) (D := DiagonalAb T)
+    (r.F ⋙ (evaluation ℕᵒᵖ (DiagonalMod l T)).obj (op n) ⋙ diagonalForget l T)
+    (diagonalCoefficientIntegerMap T (Scheme.purTwistFiniteRing T l n) ≫
+      k.coefficientForget.inv.app (op n)) x
+    (k.lineForget.hom.app (op n) ≫
+      cartierProRootMap A (l ^ (n + 1)) hA T (pow_pos (Fact.out : l.Prime).pos _) hN)).symm
+  rw [hx]
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace
