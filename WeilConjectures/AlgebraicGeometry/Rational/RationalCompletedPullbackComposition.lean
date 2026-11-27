@@ -87,7 +87,8 @@ omit [Fact l.Prime] in
 /-- A comparison of composite targets obtained by inverting units is natural. -/
 private theorem rationalCompletedComp_naturality {C D T : Type*} [Category C] [Category D]
     [Category T] {Dg Sg : C ⥤ D} {Dh Sh : D ⥤ T} {Dc Sc : C ⥤ T}
-    (ug : Dg ⟶ Sg) (uh : Dh ⟶ Sh) (uc : Dc ⟶ Sc) (c : Dg ⋙ Dh ⟶ Dc) {K L : C} (f : K ⟶ L)
+    (ug : Dg ⟶ Sg) (uh : Dh ⟶ Sh) (uc : Dc ⟶ Sc) (c : Dg ⋙ Dh ⟶ Dc) {K L : C}
+    (f : K ⟶ L)
     {φK : Sh.obj (Sg.obj K) ⟶ Sc.obj K} {φL : Sh.obj (Sg.obj L) ⟶ Sc.obj L}
     (hK : Dh.map (ug.app K) ≫ uh.app (Sg.obj K) ≫ φK = c.app K ≫ uc.app K)
     (hL : Dh.map (ug.app L) ≫ uh.app (Sg.obj L) ≫ φL = c.app L ≫ uc.app L)
@@ -251,7 +252,8 @@ private theorem rationalCompletedComp_alpha_core (g : Y ⟶ X) (h : Z ⟶ Y)
     ag.integral.unit_isIso K
   have : IsIso ((pbcActualStrictCompletedPullUnit (pbcIntegralDatum l E) (h ≫ g)).app K.obj) :=
     ac.integral.unit_isIso K
-  have hφ' : φ = CategoryTheory.inv ((pbcActualStrictCompletedPullUnit (pbcIntegralDatum l E) h).app
+  have hφ' : φ =
+      CategoryTheory.inv ((pbcActualStrictCompletedPullUnit (pbcIntegralDatum l E) h).app
         ((pbcActualStrictCompletedPull (pbcIntegralDatum l E) g).obj K.obj)) ≫
       CategoryTheory.inv ((pbcActualDerivedPull h (pbcIntegralDatum l E)).map
         ((pbcActualStrictCompletedPullUnit (pbcIntegralDatum l E) g).app K.obj)) ≫
