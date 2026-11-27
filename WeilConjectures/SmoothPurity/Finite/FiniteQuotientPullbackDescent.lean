@@ -25,12 +25,9 @@ condition is imposed on the given representatives.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option linter.privateModule false
-set_option linter.unusedSimpArgs false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 2048
-set_option linter.unusedVariables false
-set_option linter.unusedSectionVars false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [-instance] WeilConjectures.integralOperationsSiteSmall
 universe u
@@ -112,8 +109,7 @@ private theorem quotientComplexCounit_app (W : Scheme.{u}) {m n : ℕ} (h : n �
     (quotientComplexCounit l E W h).app P =
       (coefficientFiniteQuotientModel l E W h P hP).hom := by
   rw [quotientComplexCounit, CategoryTheory.cochainCounit_app_eq]
-  simp only [coefficientFiniteQuotientModel, Iso.trans_hom,
-    CategoryTheory.Functor.mapIso_hom, Iso.symm_hom, Iso.app_inv, asIso_hom]
+  simp only [coefficientFiniteQuotientModel]
   change _ = (coefficientFiniteQuotientDerived l E W h).map (𝟙 _) ≫ _ ≫ 𝟙 _
   simp only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id, asIso_hom]
 

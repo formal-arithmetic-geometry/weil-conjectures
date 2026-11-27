@@ -61,7 +61,6 @@ level `n` always means exponent `n + 1`.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.checkUnivs false
 set_option backward.isDefEq.respectTransparency false
 universe t u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
