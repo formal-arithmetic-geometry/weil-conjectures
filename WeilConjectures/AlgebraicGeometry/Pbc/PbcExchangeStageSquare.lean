@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcDescentInterfaces
 import all WeilConjectures.AlgebraicGeometry.Finite.FiniteStagePairCategory
 import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarTensor
+import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarCompletedExchange
 
 /-! # Scalar square for the prescribed finite-stage exchange
 -/
@@ -260,7 +261,7 @@ theorem pbcScalarCompletedExchange (K : PbcCompletedDerived X (pbcIntegralDatum 
         ((pbcScalarDirectImageIso l E F i f).hom.app K) ≫
       (pbcActualCompletedExchange (pbcIntegralDatum l F) sq).app
         ((pbcEmbeddingAmbientTensor l E F i X).obj K) := by
-  sorry
+  exact pbcActualCompletedExchange_scalarExtension l E F i sq K
 
 
 /-- The scalar exchange equation conjugated by `eqToHom`s, with the middle exchange
