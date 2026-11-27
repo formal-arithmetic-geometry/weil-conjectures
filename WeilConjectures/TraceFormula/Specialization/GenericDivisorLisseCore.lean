@@ -87,7 +87,6 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_of_isEmpty
   exact (boundedConstructible _).ι.map_isZero
     ((boundedConstructibleOpenImmersionLowerShriek _ ℓ _).map_isZero hN)
 
-set_option linter.unusedVariables false in
 -- The lisse generator data are part of the interface of the reduction.
 /-- **The codimension-one core**: the hypotheses of
 `exists_isZero_upperStar_nearbyCycles_lowerShriek_lisseGenerator_of_mem_closure`, with the closure
@@ -101,13 +100,13 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_of_subset_range
     [IsSeparated Z₀.hom] (g : Z₀ ⟶ overRestrict X I.support.compl) [IsClosedImmersion g.left]
     {U₀ : Over (Spec (.of k))} [LocallyOfFiniteType U₀.hom] [QuasiCompact U₀.hom]
     [IsSeparated U₀.hom] [IsAffine U₀.left] (j' : U₀ ⟶ Z₀) [IsOpenImmersion j'.left]
-    (M : Dᵇc(U₀.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (hM : IsDualizable M)
+    (M : Dᵇc(U₀.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (_hM : IsDualizable M)
     (N : Dᵇc((overRestrict X I.support.compl).left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (e : N ≅ (boundedConstructibleLowerShriek ℓ g).obj
+    (_e : N ≅ (boundedConstructibleLowerShriek ℓ g).obj
       ((boundedConstructibleLowerShriek ℓ j').obj M))
     (ζ : (centre X I).left) (hζ : closure {ζ} ∈ irreducibleComponents (centre X I).left)
-    (V : X.left.Opens) (hζV : I.subschemeι ζ ∈ V)
-    (hV : (V : Set X.left) ∩ (I.support.compl : Set X.left) ⊆
+    (V : X.left.Opens) (_hζV : I.subschemeι ζ ∈ V)
+    (_hV : (V : Set X.left) ∩ (I.support.compl : Set X.left) ⊆
       Set.range (j' ≫ g ≫ overRestrictι X I.support.compl).left.base) :
     ∃ U : (centre X I).left.Opens, ζ ∈ U ∧
       IsZero ((L((((constantSpecialFibreProj k' (centre X I)) ⁻¹ᵁ U).ι)^*⟦

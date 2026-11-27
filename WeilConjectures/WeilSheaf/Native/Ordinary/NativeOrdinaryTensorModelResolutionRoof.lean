@@ -23,7 +23,6 @@ open CategoryTheory CategoryTheory.Limits Opposite WeilConjectures
 open scoped ZeroObject
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
-set_option linter.unusedVariables false in
 /--
 Every map of second complexes admits a common K-flat roof whose two
 augmentations are quasi-isomorphisms and whose comparison commutes up to a
@@ -33,8 +32,8 @@ theorem native_ordinary_tensor_model_resolution_roof
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) :
     ∀ (Q Q' : CochainComplex (ProEtale.AdicSheaf l Y) ℤ) (g : Q ⟶ Q'),
       ∃ (K K' : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)
-        (hK : NativeOrdinaryKFlat l Y K)
-        (hK' : NativeOrdinaryKFlat l Y K')
+        (_hK : NativeOrdinaryKFlat l Y K)
+        (_hK' : NativeOrdinaryKFlat l Y K')
         (q : K ⟶ Q) (q' : K' ⟶ Q') (u : K ⟶ K'),
         QuasiIso q ∧ QuasiIso q' ∧ Nonempty (Homotopy (u ≫ q') (q ≫ g)) := by
   -- Keep the existing flat resolution functorial: its natural augmentation already
