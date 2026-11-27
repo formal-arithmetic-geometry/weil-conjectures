@@ -55,13 +55,14 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 namespace PodReindexingLimitProjection
 
 /-- The projection of the strict Roos complex of a tower to its `n`th term. -/
-def roosProjection {W : Scheme.{t}}
+private def roosProjection {W : Scheme.{t}}
     (T : ℕᵒᵖ ⥤ CochainComplex (scalarReductionSource l E W) ℤ) (n : ℕ) :
     DerivedCategory.Q.obj (integralOperationsRoos T) ⟶ DerivedCategory.Q.obj (T.obj (op n)) :=
   DerivedCategory.Q.map (CochainComplex.mappingCocone.fst (podRoosBoundary T) ≫
     Pi.π (fun m ↦ T.obj (op m)) n)
 
-theorem roosProjection_natural {W : Scheme.{t}}
+/-- Strict Roos projections are natural in the tower. -/
+private theorem roosProjection_natural {W : Scheme.{t}}
     {A B : ℕᵒᵖ ⥤ CochainComplex (scalarReductionSource l E W) ℤ} (a : A ⟶ B) (n : ℕ) :
     DerivedCategory.Q.map (integralOperationsRoosFunctor.map a) ≫ roosProjection l E B n =
       roosProjection l E A n ≫ DerivedCategory.Q.map (a.app (op n)) := by
@@ -72,7 +73,8 @@ theorem roosProjection_natural {W : Scheme.{t}}
     Pi.map_π]
   exact (Category.assoc _ _ _).symm
 
-theorem normalized_roosProjection (W : Scheme.{t}) (ρ : IntegralComparisonRoosModel l E W)
+/-- A normalized Roos model computes the total-limit projections. -/
+private theorem normalized_roosProjection (W : Scheme.{t}) (ρ : IntegralComparisonRoosModel l E W)
     (C : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) (n : ℕ) :
     ρ.comparison.hom.app C ≫ roosProjection l E C.asFunctor n =
       (coefficientConstantTowerProjection l E W n).app (DerivedCategory.Q.obj C) ≫
@@ -106,7 +108,8 @@ theorem normalized_roosProjection (W : Scheme.{t}) (ρ : IntegralComparisonRoosM
   rw [Category.assoc, ← hv]
   exact (reassoc_of% hp) _
 
-theorem projection_formula (W : Scheme.{t}) (ρ : IntegralComparisonRoosModel l E W)
+/-- The total-limit projection of a complex of strict systems through the Roos model. -/
+private theorem projection_formula (W : Scheme.{t}) (ρ : IntegralComparisonRoosModel l E W)
     (C : CochainComplex (coefficientSequenceModules l E W) ℤ) (n : ℕ) :
     (coefficientSequenceProjection l E W n).app (DerivedCategory.Q.obj C) ≫
         (coefficientFiniteDerivedRestriction l E W n).map
@@ -136,7 +139,8 @@ theorem projection_formula (W : Scheme.{t}) (ρ : IntegralComparisonRoosModel l 
     Category.id_comp]
   rfl
 
-theorem roos_reindex_projection (S : PodReindexingStrictData l E g) (hS : S.RoosFst l E g)
+/-- Reindexing of Roos projections through the strict Roos comparison. -/
+private theorem roos_reindex_projection (S : PodReindexingStrictData l E g) (hS : S.RoosFst l E g)
     (T : ℕᵒᵖ ⥤ CochainComplex (scalarReductionSource l E Y) ℤ) (n : ℕ) :
     (podOrdinaryReindex l E g).map (roosProjection l E T n) ≫
         (isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.hom.app (T.obj (op n)) =
@@ -155,7 +159,9 @@ theorem roos_reindex_projection (S : PodReindexingStrictData l E g) (hS : S.Roos
   congr 1
   simp [podReindexProduct]
 
-theorem strict_restricted (S : PodReindexingStrictData l E g)
+/-- The restricted-tower comparison at level `n` through the strict restriction and evaluation
+comparisons. -/
+private theorem strict_restricted (S : PodReindexingStrictData l E g)
     (hS : S.RestrictedGenerators l E g)
     (C : CochainComplex (coefficientSequenceModules l E Y) ℤ) (n : ℕ) :
     (isoReductionIntegralComplex l E g).map ((NatTrans.mapHomologicalComplex
