@@ -104,8 +104,45 @@ private theorem supported_unit_isIso_iff
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
-set_option maxHeartbeats 600000 in
--- The statement repeats transported derived restriction and full-subcategory lifts.
+/-- The derived restriction functor used by the right-adjoint criterion. -/
+noncomputable def rightAdjointOpenRestriction
+    (X : Scheme.{u}) (U : X.Opens)
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] :
+    schemeDerivedCategory X ⥤ schemeDerivedCategory U.toScheme :=
+  @Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u}
+    (moduleRings X.toRingedSpace) U ⋙
+    Equivalence.functor
+      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+      (Scheme.Modules.overEquiv U))
+    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u}
+      (moduleRings X.toRingedSpace) U ⋙
+      Equivalence.functor
+        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+        (Scheme.Modules.overEquiv U))) inferInstance inferInstance
+
+/-- The named restriction is the canonical derived functor. -/
+theorem rightAdjointOpenRestriction_eq
+    (X : Scheme.{u}) (U : X.Opens)
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    [HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] :
+    rightAdjointOpenRestriction X U =
+      (@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u}
+      (moduleRings X.toRingedSpace) U ⋙
+      Equivalence.functor
+        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+        (Scheme.Modules.overEquiv U))
+      (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u}
+        (moduleRings X.toRingedSpace) U ⋙
+        Equivalence.functor
+          (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+          (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+          (Scheme.Modules.overEquiv U))) inferInstance inferInstance) := rfl
+
 /-- Restriction of the right adjoint is compatible with the open square precisely when
 it preserves complexes supported on the closed complements. -/
 theorem rightAdjoint_open_support_criterion
@@ -126,204 +163,50 @@ theorem rightAdjoint_open_support_criterion
     (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X)
     (adj : (schemeDerivedQCohProperty Y).lift
       ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) hpush ⊣ a)
-    (adjOpen : (@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u}
-      (moduleRings Y.toRingedSpace) V ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
-        (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv V))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
-      Y.toRingedSpace) V ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
-        (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv V))) inferInstance inferInstance) ⊣ schemeDerivedDirectImage
+    (adjOpen : (rightAdjointOpenRestriction Y V) ⊣ schemeDerivedDirectImage
           V.ι)
     (hopen : ∀ K : schemeDerivedQCohCategory Y,
       schemeDerivedQCohProperty Y
-        ((schemeDerivedDirectImage V.ι).obj ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _
-          (SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) V ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
-        (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv V))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
-      Y.toRingedSpace) V ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
-        (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv V))) inferInstance inferInstance).obj K.obj))) :
+        ((schemeDerivedDirectImage V.ι).obj ((rightAdjointOpenRestriction Y V).obj K.obj))) :
     ((∀ K : schemeDerivedQCohCategory Y,
-      (∃ n : ℤ, K.obj.IsGE n) → IsIso ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _
-        (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
-        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv U))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
-      X.toRingedSpace) U ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
-        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv U))) inferInstance inferInstance).map
+      (∃ n : ℤ, K.obj.IsGE n) → IsIso ((rightAdjointOpenRestriction X U).map
           ((schemeDerivedQCohProperty X).ι.map
             (a.map (ObjectProperty.homMk
               (X := K)
               (Y := ⟨(schemeDerivedDirectImage V.ι).obj
-                ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u}
-                  (moduleRings Y.toRingedSpace) V ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
-        (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv V))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
-      Y.toRingedSpace) V ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
-        (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv V))) inferInstance inferInstance).obj K.obj), hopen K⟩)
+                ((rightAdjointOpenRestriction Y V).obj K.obj), hopen K⟩)
               (adjOpen.unit.app K.obj)))))) ↔
       (∀ Q : schemeDerivedQCohCategory Y,
       (∃ n : ℤ, Q.obj.IsGE n) →
-      IsZero ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u}
-        (moduleRings Y.toRingedSpace) V ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
-        (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv V))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
-      Y.toRingedSpace) V ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
-        (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv V))) inferInstance inferInstance).obj Q.obj) →
-      IsZero ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u}
-        (moduleRings X.toRingedSpace) U ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
-        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv U))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
-      X.toRingedSpace) U ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
-        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv U))) inferInstance inferInstance).obj (a.obj Q).obj))) ∧
+      IsZero ((rightAdjointOpenRestriction Y V).obj Q.obj) →
+      IsZero ((rightAdjointOpenRestriction X U).obj (a.obj Q).obj))) ∧
     ((∀ K : schemeDerivedQCohCategory Y,
-      IsIso ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u}
-        (moduleRings X.toRingedSpace) U ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
-        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv U))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
-      X.toRingedSpace) U ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
-        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv U))) inferInstance inferInstance).map
+      IsIso ((rightAdjointOpenRestriction X U).map
           ((schemeDerivedQCohProperty X).ι.map
             (a.map (ObjectProperty.homMk
               (X := K)
               (Y := ⟨(schemeDerivedDirectImage V.ι).obj
-                ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u}
-                  (moduleRings Y.toRingedSpace) V ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
-        (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv V))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
-      Y.toRingedSpace) V ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
-        (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv V))) inferInstance inferInstance).obj K.obj), hopen K⟩)
+                ((rightAdjointOpenRestriction Y V).obj K.obj), hopen K⟩)
               (adjOpen.unit.app K.obj)))))) ↔
       (∀ Q : schemeDerivedQCohCategory Y,
-      IsZero ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u}
-        (moduleRings Y.toRingedSpace) V ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
-        (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv V))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
-      Y.toRingedSpace) V ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
-        (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv V))) inferInstance inferInstance).obj Q.obj) →
-      IsZero ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u}
-        (moduleRings X.toRingedSpace) U ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
-        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv U))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
-      X.toRingedSpace) U ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
-        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv U))) inferInstance inferInstance).obj (a.obj Q).obj))) ∧
+      IsZero ((rightAdjointOpenRestriction Y V).obj Q.obj) →
+      IsZero ((rightAdjointOpenRestriction X U).obj (a.obj Q).obj))) ∧
     ((∀ I : Type u, PreservesColimitsOfShape (Discrete I) a) →
       ((∀ K : schemeDerivedQCohCategory Y,
-      (∃ n : ℤ, K.obj.IsGE n) → IsIso ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _
-        (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
-        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv U))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
-      X.toRingedSpace) U ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
-        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv U))) inferInstance inferInstance).map
+      (∃ n : ℤ, K.obj.IsGE n) → IsIso ((rightAdjointOpenRestriction X U).map
           ((schemeDerivedQCohProperty X).ι.map
             (a.map (ObjectProperty.homMk
               (X := K)
               (Y := ⟨(schemeDerivedDirectImage V.ι).obj
-                ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u}
-                  (moduleRings Y.toRingedSpace) V ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
-        (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv V))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
-      Y.toRingedSpace) V ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
-        (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv V))) inferInstance inferInstance).obj K.obj), hopen K⟩)
+                ((rightAdjointOpenRestriction Y V).obj K.obj), hopen K⟩)
               (adjOpen.unit.app K.obj)))))) ↔
         (∀ K : schemeDerivedQCohCategory Y,
-      IsIso ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u}
-        (moduleRings X.toRingedSpace) U ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
-        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv U))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
-      X.toRingedSpace) U ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
-        (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv U))) inferInstance inferInstance).map
+      IsIso ((rightAdjointOpenRestriction X U).map
           ((schemeDerivedQCohProperty X).ι.map
             (a.map (ObjectProperty.homMk
               (X := K)
               (Y := ⟨(schemeDerivedDirectImage V.ι).obj
-                ((@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u}
-                  (moduleRings Y.toRingedSpace) V ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
-        (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv V))
-    (Functor.additive_of_preserves_binary_products (SheafOfModules.overFunctor.{u} (moduleRings
-      Y.toRingedSpace) V ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V))
-        (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv V))) inferInstance inferInstance).obj K.obj), hopen K⟩)
+                ((rightAdjointOpenRestriction Y V).obj K.obj), hopen K⟩)
               (adjOpen.unit.app K.obj)))))))) := by
   have htest := rightAdjoint_open_unit_cone_test f V hV U hU hpush a adj adjOpen hopen
   have hsupported := supported_unit_isIso_iff f V U hpush a adj adjOpen hopen
