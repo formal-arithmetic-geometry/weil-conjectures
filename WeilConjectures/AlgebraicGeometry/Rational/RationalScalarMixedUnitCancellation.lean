@@ -56,6 +56,13 @@ rationalBalancedCoefficient. The completed comparison is rationalScalarStrictBet
 The pullback alpha is the supplied, generator-normalized dependency record's alpha.
 The ordinary zeta is normalized on tensor generators and derived computation counits.
 
+## Implementation details
+
+The geometric and coefficient coherences of zeta are checked on K-flat representatives. There
+rational pullback and scalar extension are computed termwise, so `ambient_normalization`
+reduces both equations to equations of ordinary module maps, which are checked on unit
+generators. Every derived object is the localization of a K-flat complex.
+
 ## References
 
 * Bhatt--Scholze, Remark 6.8.15, pp. 61--62
