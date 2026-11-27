@@ -646,6 +646,55 @@ theorem rationalBalancedCoefficient_comp :
   ext U b
   rfl
 
+/-- The tower equation on derived objects, before transport along the realization formulas. -/
+private theorem rationalBalancedTower_derived
+    (A : PbcCompletedDerived X (pbcIntegralDatum l E)) :
+    (pbcDerivedExtend (sG.integralIso.hom ≫ sG.inclusion)).map
+        (pbcReductionNormalization (pbcScalarCoefficientMap l E F i X)
+          (pbcScalarCoefficientMap l F G j X) (pbcScalarCoefficientMap l E G (j.comp i) X)
+          (pbcScalarCoefficientMap_comp l E F G i j X) A).hom ≫
+        (rationalBalancedS l E G (j.comp i) X sE sG A).hom ≫
+        (rationalBalancedT l E G (j.comp i) X sE A).inv =
+      (rationalBalancedS l F G j X sF sG
+          ((pbcDerivedExtend (pbcScalarCoefficientMap l E F i X)).obj A)).hom ≫
+        (rationalBalancedT l F G j X sF
+          ((pbcDerivedExtend (pbcScalarCoefficientMap l E F i X)).obj A)).inv ≫
+        (pbcDerivedExtend (rationalBalancedCoefficient l F G j X)).map
+          (rationalBalancedS l E F i X sE sF A).hom ≫
+        (pbcDerivedExtend (rationalBalancedCoefficient l F G j X)).map
+          (rationalBalancedT l E F i X sE A).inv ≫
+        (pbcReductionNormalization (rationalBalancedCoefficient l E F i X)
+          (rationalBalancedCoefficient l F G j X)
+          (rationalBalancedCoefficient l E G (j.comp i) X)
+          (rationalBalancedCoefficient_comp l E F i X G j)
+          ((pbcDerivedExtend (sE.integralIso.hom ≫ sE.inclusion)).obj A)).hom := by
+  have hω : ((sE.integralIso.hom ≫ sE.inclusion) ≫ rationalBalancedCoefficient l E F i X) ≫
+      rationalBalancedCoefficient l F G j X =
+        (sE.integralIso.hom ≫ sE.inclusion) ≫ rationalBalancedCoefficient l E G (j.comp i) X := by
+    rw [Category.assoc, rationalBalancedCoefficient_comp]
+  have hn : pbcScalarCoefficientMap l E F i X ≫
+      (sF.integralIso.hom ≫ sF.inclusion) ≫ rationalBalancedCoefficient l F G j X =
+        (sE.integralIso.hom ≫ sE.inclusion) ≫ rationalBalancedCoefficient l E G (j.comp i) X := by
+    rw [← Category.assoc, rationalBalancedCoefficient_square, hω]
+  have h₁ := pbcReductionNormalization_assoc (sE.integralIso.hom ≫ sE.inclusion)
+    (rationalBalancedCoefficient l E F i X) (rationalBalancedCoefficient l F G j X) _ _ _ rfl
+    (rationalBalancedCoefficient_comp l E F i X G j) hω rfl A
+  have h₂ := pbcReductionNormalization_assoc (pbcScalarCoefficientMap l E F i X)
+    (sF.integralIso.hom ≫ sF.inclusion) (rationalBalancedCoefficient l F G j X) _ _ _
+    (rationalBalancedCoefficient_square l E F i X sE sF) rfl hω hn A
+  have h₃ := pbcReductionNormalization_assoc (pbcScalarCoefficientMap l E F i X)
+    (pbcScalarCoefficientMap l F G j X) (sG.integralIso.hom ≫ sG.inclusion) _ _ _
+    (pbcScalarCoefficientMap_comp l E F G i j X)
+    (rationalBalancedCoefficient_square l F G j X sF sG)
+    (rationalBalancedCoefficient_square l E G (j.comp i) X sE sG) hn A
+  dsimp only [rationalBalancedS, rationalBalancedT]
+  rw [← cancel_mono (pbcReductionNormalization (sE.integralIso.hom ≫ sE.inclusion)
+    (rationalBalancedCoefficient l E G (j.comp i) X)
+    ((sE.integralIso.hom ≫ sE.inclusion) ≫ rationalBalancedCoefficient l E G (j.comp i) X)
+    rfl A).hom]
+  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  rw [← h₁, Iso.inv_hom_id_map_assoc, h₂, Iso.inv_hom_id_assoc, h₃]
+
 /-- Successive theta comparisons agree with the specified direct raw associator.
 This is an equation on the raw categories, so includes every fractional arrow. -/
 theorem rationalBalancedTower
@@ -660,7 +709,20 @@ theorem rationalBalancedTower
           (rationalBalancedCoefficient l F G j X)
           (rationalBalancedCoefficient l E G (j.comp i) X)
           (rationalBalancedCoefficient_comp l E F i X G j) (sE.J.obj K)).hom := by
-  sorry
+  rw [pbcRationalScalarComp_hom_app, RationalModuleRealization.map_rationalization]
+  simp only [rationalBalancedTheta, NatIso.ofComponents_hom_app, rationalBalancedComponent,
+    Iso.trans_hom, eqToIso.hom, Iso.symm_hom, Functor.mapIso_hom, eqToIso.inv,
+    Category.assoc, eqToHom_trans_assoc, eqToHom_refl, Category.id_comp, Functor.map_comp]
+  rw [← Functor.map_comp_assoc, eqToHom_trans, eqToHom_refl, CategoryTheory.Functor.map_id,
+    Category.id_comp, rationalBalancedDerivedNaturality]
+  change _ ≫ (pbcDerivedExtend (sG.integralIso.hom ≫ sG.inclusion)).map
+    ((pbcAmbientScalarComp l E F G i j X).hom.app K.obj.obj) ≫ _ = _
+  rw [pbcAmbientScalarComp_hom_app]
+  congr 1
+  simp only [← Category.assoc]
+  congr 1
+  simp only [Category.assoc]
+  exact rationalBalancedTower_derived l E F i X sE sF G j sG K.obj.obj
 
 variable (H : Type u) [Field H] [Algebra ℚ_[l] H] [FiniteDimensional ℚ_[l] H]
   (k : G →ₐ[ℚ_[l]] H)
