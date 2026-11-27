@@ -52,7 +52,8 @@ namespace WeilConjectures.AdicFiniteRealization
 open AlgebraicGeometry AlgebraicGeometry.Scheme AlgebraicallyClosedCoefficients
 
 /-- The completed scalar map of finite coefficient stages, between the completed coefficients
-of the coefficient fields of the fixed closure. -/
+of the coefficient fields of the fixed closure. This is `pbcCompletedScalarMap`, retyped with the
+coefficient fields `Coefficient E` and `Coefficient L`. -/
 def coefficientCompletedScalarMap (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     {E L : Index l (PadicAlgCl l)} (h : E ≤ L) :
     pbcAdicCompletion X (pbcIntegralDatum l (Coefficient.{u} l (PadicAlgCl l) E)) ⟶
@@ -211,7 +212,8 @@ variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X]
   [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)] [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]
 
 /-- The continuous integral realization map, with source the completed coefficients of the
-coefficient field of the fixed closure. -/
+coefficient field of the fixed closure. This is the composite of `integralIso` and `inclusion` of
+the realization, retyped with the coefficient field `Coefficient E`. -/
 def realizationCoefficientMap (A : FiniteCondensedData l X) (E : Index l (PadicAlgCl l)) :
     pbcAdicCompletion X (pbcIntegralDatum l (Coefficient.{u} l (PadicAlgCl l) E)) ⟶
       rationalCoefficientSheaf l X (pbcFiniteField.{u} l (PadicAlgCl l) E) :=

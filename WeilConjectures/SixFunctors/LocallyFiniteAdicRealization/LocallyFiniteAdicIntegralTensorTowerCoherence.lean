@@ -22,9 +22,7 @@ in a module importing this one). By `completedScalarCanonicalAssociatorFormula`,
 associator `sfIntegralScalarComp` is the ordinary derived associator `tensorComposition`
 conjugated by the three completion comparisons. Naturality of the balancing isomorphism cancels
 the comparisons, and what remains is associativity of balanced derived extension,
-`pbcReductionNormalization_assoc`. The completion comparisons are typed through two different
-names for ordinary derived extension, so the cancellations are isolated in small lemmas to keep
-the definitional unfoldings cheap.
+`pbcReductionNormalization_assoc`.
 
 ## References
 
