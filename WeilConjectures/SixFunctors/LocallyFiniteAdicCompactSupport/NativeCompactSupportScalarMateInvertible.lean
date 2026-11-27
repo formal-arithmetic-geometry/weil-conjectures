@@ -101,6 +101,7 @@ include D hl
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+-- Keep the section instances as hypotheses of this public statement.
 set_option linter.unusedSectionVars false in
 /-- Invertibility of the single completed-to-native compact-support scalar mate. -/
 theorem native_compact_support_scalar_mate_invertible [G : NativeGeometry.{u} l]

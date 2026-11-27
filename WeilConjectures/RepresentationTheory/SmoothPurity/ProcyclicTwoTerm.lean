@@ -41,8 +41,6 @@ section
 
 open ZeroObject
 
-set_option linter.style.haveILetI false
-
 open scoped BigOperators
 open Topology
 
@@ -166,7 +164,7 @@ private local instance ttAdditive
     [Abelian (DiscreteContinuousRep.{u, 0, w} A G)]
     [PreservesFiniteLimits (ttForget.{u, w} (A := A) (G := G))] (τ : G) :
     (ttFunctor (A := A) τ).Additive := by
-  haveI : (ttForget.{u, w} (A := A) (G := G)).Additive :=
+  have : (ttForget.{u, w} (A := A) (G := G)).Additive :=
     Functor.additive_of_preserves_binary_products _
   constructor
   intro M N f g

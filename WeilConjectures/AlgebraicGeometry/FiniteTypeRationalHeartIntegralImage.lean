@@ -37,7 +37,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 include k
 
--- Retain all geometric hypotheses of the assigned interface.
+-- Keep the section instances as hypotheses of this public statement.
 set_option linter.unusedSectionVars false in
 /-- A rational constructible sheaf has an ordinary integral model whose direct image
 localizes to the rational direct image. No cohomological upper bound is asserted.

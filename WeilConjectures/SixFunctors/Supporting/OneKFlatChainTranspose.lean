@@ -338,7 +338,6 @@ structure OneKFlatChainTransposeData where
 section
 
 set_option maxRecDepth 1024
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
@@ -618,6 +617,8 @@ private theorem hom_comparison_isIso : OneKFlatChainHomComparisonIsIso.{c, v, u,
     (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2 h
   infer_instance
 
+omit [HasDerivedCategory.{w} (SheafOfModules.{max c v u}
+    ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj R))] in
 private theorem augmentation_eq (E : Complex.{c, v, u} J R) :
     (WeilConjectures.coefficientHomAugmentation.{u, c, v} J R).app E =
       CategoryTheory.coefficientHomAugmentation.{c, v, u} J R E := by

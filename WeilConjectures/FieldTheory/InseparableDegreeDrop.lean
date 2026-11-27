@@ -145,8 +145,6 @@ private theorem insep_lt_of_new_separable_element
   have hbound := compositum_finrank_le A K S L hcompS
   exact hbound.2.trans_lt (IntermediateField.finrank_lt_of_gt hstrict)
 
--- The existing existential instance binders are used implicitly; keep its signature unchanged.
-set_option linter.unusedVariables false in
 /-- One coefficient-root construction strictly decreases the inseparable degree: if `s` is a
 finite transcendence basis of the finitely generated extension `K/k` and `K/k(s)` is not
 separable, there are finite purely inseparable extensions `l/k` and `L/K`, with `L/l` finitely
@@ -158,9 +156,9 @@ theorem exists_inseparableDegree_drop
     (hs : IsTranscendenceBasis k ((↑) : s → K))
     [Module.Finite (IntermediateField.adjoin k (s : Set K)) K]
     (hne : Field.finInsepDegree (IntermediateField.adjoin k (s : Set K)) K ≠ 1) :
-    ∃ (l : Type w) (hl : Field l) (akl : Algebra k l)
-      (L : Type w) (hL : Field L) (aKL : Algebra K L) (alL : Algebra l L)
-      (akL : Algebra k L) (htl : IsScalarTower k l L) (htK : IsScalarTower k K L),
+    ∃ (l : Type w) (_hl : Field l) (_akl : Algebra k l)
+      (L : Type w) (_hL : Field L) (_aKL : Algebra K L) (_alL : Algebra l L)
+      (_akL : Algebra k L) (_htl : IsScalarTower k l L) (_htK : IsScalarTower k K L),
       Module.Finite k l ∧ IsPurelyInseparable k l ∧
       Module.Finite K L ∧ IsPurelyInseparable K L ∧
       (⊤ : IntermediateField l L).FG ∧

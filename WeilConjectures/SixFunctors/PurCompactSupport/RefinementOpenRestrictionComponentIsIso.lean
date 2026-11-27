@@ -17,7 +17,6 @@ import WeilConjectures.SixFunctors.PurCompactSupport.RefinementProperCounitIsIso
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 
@@ -37,8 +36,8 @@ theorem refinementRestriction_component_isIso
     (M : DerivedCategory (pbcModules X (R.ring X))) :
     IsIso (refinementRestriction R r hi M) := by
   rw [refinementRestriction_factorization R r hi M]
-  letI : IsIso (refinementPull R r hi).hom := (refinementPull R r hi).isIso_hom
-  letI : IsIso ((pull R c.i).map ((proEtaleRingDerivedAdjunction r.hom
+  have : IsIso (refinementPull R r hi).hom := (refinementPull R r hi).isIso_hom
+  have : IsIso ((pull R c.i).map ((proEtaleRingDerivedAdjunction r.hom
       (R.ring d.Z) (R.ring c.Z) (R.pull r.hom)).counit.app
       ((openExtension R c.i).mapDerivedCategory.obj M))) :=
     refinementProperCounit_isIso R r M

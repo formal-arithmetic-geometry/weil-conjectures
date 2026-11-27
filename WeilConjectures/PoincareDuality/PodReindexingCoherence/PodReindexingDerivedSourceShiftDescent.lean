@@ -79,7 +79,6 @@ private def comparisonAt {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     rw [hid] at h
     exact h)
 
-set_option linter.unusedVariables false in
 open SheafOfModules in
 /-- Localization descent for the normalized source-shift square: if the square holds on
 localized representatives with K-injective target (`hmodel`), it holds for all objects. -/
@@ -91,7 +90,7 @@ theorem derived_source_shift_descent
     (SX : Closed l E X s) (SY : Closed l E Y s)
     (TX : Models l E X s SX) (TY : Models l E Y s SY)
     (c : Comparison l E g s SX SY TX TY)
-    (hmodel : ∀ (P I : K l E Y s) (hI : I.IsKInjective) (a : ℤ),
+    (hmodel : ∀ (P I : K l E Y s) (_hI : I.IsKInjective) (a : ℤ),
       c.derived.hom.app
           (op (((podReindexingQ l E Y s).obj P)⟦a⟧),
             (podReindexingQ l E Y s).obj I) ≫

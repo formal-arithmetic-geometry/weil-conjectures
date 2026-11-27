@@ -25,7 +25,6 @@ integers.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types true
 universe u v
@@ -107,11 +106,11 @@ theorem canonical_stage_scalar_shift :
       (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω a b h)
   let QE := sfRationalConstructibleLocalization l E T
   let QL := sfRationalConstructibleLocalization l L T
-  letI : QE.CommShift ℤ := sfRationalLocalizationCommShift l E T
-  letI : QL.CommShift ℤ := sfRationalLocalizationCommShift l L T
-  letI : S.CommShift ℤ :=
+  let : QE.CommShift ℤ := sfRationalLocalizationCommShift l E T
+  let : QL.CommShift ℤ := sfRationalLocalizationCommShift l L T
+  let : S.CommShift ℤ :=
     GeneralAlgebraicallyClosedCoefficients.integralTransitionCommShift l Ω T a b h
-  letI : R.CommShift ℤ :=
+  let : R.CommShift ℤ :=
     GeneralAlgebraicallyClosedCoefficients.transitionCommShift l Ω T a b h
   have hf : QE ⋙ R = S ⋙ QL := by
     apply Functor.hext

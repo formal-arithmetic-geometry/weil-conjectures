@@ -30,18 +30,16 @@ ring are Noetherian.
 universe u
 namespace Polynomial
 
--- The signature also carries hypotheses used by the geometric-regularity component.
-set_option linter.unusedVariables false in
 /-- The formal fibre of `A[X]_q` at a prime, over a complete local Noetherian domain `A`, is
 Noetherian. -/
 theorem formalFiber_isNoetherian (A : Type u) [CommRing A] [IsDomain A]
     [IsNoetherianRing A] [IsLocalRing A]
     [IsAdicComplete (IsLocalRing.maximalIdeal A) A]
-    (p : ℕ) (hp : p.Prime) [CharP (Localization.AtPrime (⊥ : Ideal A)) p]
+    (p : ℕ) (_hp : p.Prime) [CharP (Localization.AtPrime (⊥ : Ideal A)) p]
     (q : Ideal (Polynomial A)) [q.IsMaximal]
-    (hq : q.comap (Polynomial.C : A →+* Polynomial A) = IsLocalRing.maximalIdeal A)
-    (r : Ideal (Polynomial A)) [r.IsPrime] (hrq : r ≤ q) (hr : r ≠ ⊥)
-    (hrA : r.comap (Polynomial.C : A →+* Polynomial A) = ⊥) :
+    (_hq : q.comap (Polynomial.C : A →+* Polynomial A) = IsLocalRing.maximalIdeal A)
+    (r : Ideal (Polynomial A)) [r.IsPrime] (_hrq : r ≤ q) (_hr : r ≠ ⊥)
+    (_hrA : r.comap (Polynomial.C : A →+* Polynomial A) = ⊥) :
     let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q))
       (Localization.AtPrime q)
     IsNoetherianRing (r.Fiber C) := by

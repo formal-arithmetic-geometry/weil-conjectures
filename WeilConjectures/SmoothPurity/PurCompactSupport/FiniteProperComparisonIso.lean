@@ -21,7 +21,6 @@ open factorization.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.PurCompactSupport

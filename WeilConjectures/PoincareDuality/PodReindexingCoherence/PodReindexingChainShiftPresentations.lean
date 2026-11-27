@@ -88,7 +88,6 @@ private theorem chainShift_exists (W : Scheme.{u})
     (p-a+a) p ((p-a+r)+b) (p+(r+(b-a))) (by omega) (by omega) (by omega)
     (by omega) rfl
 
-set_option linter.unusedVariables false in
 /-- Signed Hom-complex shift presentations exist on each of the two sites. -/
 theorem chain_shift_presentations
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
@@ -97,8 +96,8 @@ theorem chain_shift_presentations
     [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt]
     (s : Option ℕ) (SX : Closed l E X s) (SY : Closed l E Y s)
     (TX : Models l E X s SX) (TY : Models l E Y s SY)
-    (c : Comparison l E g s SX SY TX TY) :
-    ∃ (sX : ChainShift l E X s) (sY : ChainShift l E Y s),
+    (_c : Comparison l E g s SX SY TX TY) :
+    ∃ (_sX : ChainShift l E X s) (_sY : ChainShift l E Y s),
       True := by
   obtain ⟨sX⟩ := chainShift_exists l E X s
   obtain ⟨sY⟩ := chainShift_exists l E Y s

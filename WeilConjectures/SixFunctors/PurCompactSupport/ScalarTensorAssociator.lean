@@ -279,7 +279,6 @@ private theorem scalarOrdinaryTensor_composition {X : Scheme.{u}}
     erw [hm]
     rw [ordinaryComposition_pure, ordinaryComposition_pure, ordinaryComposition_pure, hμ]
 
-set_option linter.style.haveILetI false in
 private theorem scalarTensorTotal_summand {X : Scheme.{u}}
     {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (φ : R ⟶ S)
     (P Q : CochainComplex (pbcModules X R) ℤ) (a b n : ℤ) (h : a + b = n) :
@@ -290,10 +289,10 @@ private theorem scalarTensorTotal_summand {X : Scheme.{u}}
       (scalarOrdinaryTensor φ (P.X a) (Q.X b)).inv ≫
         (pbcExtend φ).map
           (CochainComplex.ιMapBifunctor P Q (proEtaleOrdinaryTensor X R) a b n h) := by
-  letI := SheafOfModules.monoidalCategory R
-  letI := SheafOfModules.monoidalCategory S
-  letI := proEtaleTensorPreadditive X R
-  letI := proEtaleTensorPreadditive X S
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.monoidalCategory S
+  let := proEtaleTensorPreadditive X R
+  let := proEtaleTensorPreadditive X S
   simp only [scalarTensorTotal, tensorPullbackTotal, tensorPullbackTotalComponent,
     HomologicalComplex.ι_mapBifunctorDesc]
 

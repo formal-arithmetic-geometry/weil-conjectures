@@ -47,10 +47,8 @@ theorem quotient_complete_local
       IsLocalRing.maximalIdeal (R ⧸ I) =
         (IsLocalRing.maximalIdeal R).map (Ideal.Quotient.mk I) ∧
       IsAdicComplete (IsLocalRing.maximalIdeal (R ⧸ I)) (R ⧸ I) := by
-  set_option linter.style.haveILetI false in
-    letI : Nontrivial (R ⧸ I) := Ideal.Quotient.nontrivial_iff.mpr hI
-  set_option linter.style.haveILetI false in
-    letI : IsLocalRing (R ⧸ I) :=
+  have : Nontrivial (R ⧸ I) := Ideal.Quotient.nontrivial_iff.mpr hI
+  have : IsLocalRing (R ⧸ I) :=
     IsLocalRing.of_surjective' (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective
   have hnoeth : IsNoetherianRing (R ⧸ I) :=
     isNoetherianRing_of_surjective R (R ⧸ I) (Ideal.Quotient.mk I)

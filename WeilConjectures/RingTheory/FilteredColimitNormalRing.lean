@@ -54,9 +54,7 @@ theorem isNormal_of_filtered_colimit
     ∀ (p : Ideal ((colimit F : CommRingCat.{u}) : Type u)) [p.IsPrime],
       IsDomain (Localization.AtPrime p) ∧
         IsIntegrallyClosed (Localization.AtPrime p) := by
-  set_option linter.style.haveILetI false in
   intro p hp
-  letI := hp
   exact ⟨filtered_colimit_localization_isDomain F (fun i q hq => (hF i q).1) p,
     filtered_colimit_localization_isIntegrallyClosed F hF p⟩
 

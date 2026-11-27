@@ -30,11 +30,6 @@ ring unit.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.unusedSectionVars false
-set_option linter.unusedVariables false
-set_option linter.all false
-set_option linter.unusedSimpArgs false
-set_option linter.unusedTactic false
 set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
@@ -168,9 +163,9 @@ theorem completedPullbackTensor_unit_of_associativity
             ((pullbackTensorSequenceDerived l E f).obj M)).hom =
         (pullbackTensorSequenceDerived l E f).map
           ((pullbackTensorCalculus l E Y).systemClosed.monoidal.rightUnitor M).hom) := by
-  letI : MonoidalCategory (coefficientSequenceDerived l E Y) :=
+  let : MonoidalCategory (coefficientSequenceDerived l E Y) :=
     (pullbackTensorCalculus l E Y).systemClosed.monoidal
-  letI : MonoidalCategory (coefficientSequenceDerived l E X) :=
+  let : MonoidalCategory (coefficientSequenceDerived l E X) :=
     (pullbackTensorCalculus l E X).systemClosed.monoidal
   let F := pullbackTensorSequenceDerived l E f
   let μ := pullbackTensorSystemComparison l E f
