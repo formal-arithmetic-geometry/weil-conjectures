@@ -40,8 +40,6 @@ set_option genCtorIdx false
 attribute [local irreducible] CategoryTheory.Functor.mapIso
   CategoryTheory.Iso.trans CategoryTheory.Iso.prod
 set_option synthInstance.maxSize 2048
-set_option linter.unusedSectionVars false
-set_option linter.unusedVariables false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoidalCategory
@@ -216,13 +214,13 @@ def integralScalarShift (T : Scheme.{u}) (n : ℤ) :=
 /-- The rational scalar shift is uniquely determined by its integral degree-one components. -/
 theorem scalarShift_existsUnique (T : Scheme.{u}) :
     ∃! c : (sfRationalScalarExtension l E T 0 (Fact.out : l.Prime).ne_zero L a).CommShift ℤ,
-      (fun [h : (sfRationalScalarExtension l E T 0
+      (fun [_h : (sfRationalScalarExtension l E T 0
           (Fact.out : l.Prime).ne_zero L a).CommShift ℤ] ↦
         ∀ K : sfRationalConstructibleCategory l E T,
           HEq (((sfRationalScalarExtension l E T 0
             (Fact.out : l.Prime).ne_zero L a).commShiftIso (1 : ℤ)).hom.app K)
             ((sfRationalConstructibleLocalization l L T).map
-              ((integralScalarShift l E L a T (1 : ℤ)).hom.app K.obj))) (h := c) := by
+              ((integralScalarShift l E L a T (1 : ℤ)).hom.app K.obj))) (_h := c) := by
   unfold sfRationalScalarExtension
   let F := sfConstructibleIntegralScalarExtension 0 l
     (Fact.out : l.Prime).ne_zero E L a T
@@ -381,6 +379,7 @@ def commonSource {X Y : Scheme.{u}} (f : X ⟶ Y)
     (commonShiftedLine l Ω X d)).prod' (commonStageDerivedPullback l Ω f) ⋙
       commonStageDerivedTensor l Ω X
 
+-- Keep the section instances as hypotheses of this public statement.
 set_option linter.unusedSectionVars false in
 /-- The least coefficient stage is contained in every finite stage. -/
 theorem base_le (L : Index l Ω) : Padic.finiteCoefficientBase l Ω ≤ L := by
@@ -844,8 +843,8 @@ private theorem tensor_comparison_from_augmentation
     (d : ((G.ι ⋙ q).prod (G.ι ⋙ q)) ⋙ B ≅ (G.ι.prod G.ι) ⋙ K ⋙ q)
     (α : F ⟶ K) (P : ObjectProperty D)
     (hP : ∀ {X Y : D}, (X ≅ Y) → P X → P Y)
-    (hi : ∀ (X Y : C) (hX : G X) (hY : G Y)
-      (pX : P (q.obj X)) (pY : P (q.obj Y)), IsIso (q.map (α.app (X, Y))))
+    (hi : ∀ (X Y : C) (_hX : G X) (_hY : G Y)
+      (_pX : P (q.obj X)) (_pY : P (q.obj Y)), IsIso (q.map (α.app (X, Y))))
     (M N : D) (pM : P M) (pN : P N) :
     ∃! e : B.obj (M, N) ≅ A.obj (M, N),
       ∀ (X Y : C) (hX : G X) (hY : G Y)

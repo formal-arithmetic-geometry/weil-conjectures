@@ -76,8 +76,6 @@ private theorem mapCompletion_eval
   simp only [RingHom.comp_apply, AlgHom.toRingHom_eq_coe, AlgHom.coe_toRingHom,
     hx, Ideal.quotientMap_mk]
 
--- The unchanged statement contains an unused auxiliary ideal `J`.
-set_option linter.unusedVariables false in
 /-- For a finite algebra `S` over a Noetherian ring `R` and a prime `p`, there are finitely
 many primes `q` over `p`, and `R_p^∧ ⊗[R] S` is isomorphic to the product of the completions
 of the `S_q`, compatibly with the maps `g q` induced by the local maps `R_p → S_q`. -/
@@ -89,7 +87,7 @@ theorem completion_finite_extension_decomposition
     let C := AdicCompletion m A
     let B := A ⊗[R] S
     letI := Algebra.TensorProduct.rightAlgebra (R := R) (A := A) (B := S)
-    let J := p.map (algebraMap R B)
+    let _J := p.map (algebraMap R B)
     let Q := p.primesOver S
     let D := fun q : Q ↦
       AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q.1))

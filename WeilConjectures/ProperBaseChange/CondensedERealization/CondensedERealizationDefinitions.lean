@@ -222,8 +222,6 @@ representative is transported back through these equivalences.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.mathlibStandardSet false
-set_option linter.style.setOption false
 set_option synthInstance.maxSize 4096
 set_option genSizeOf false
 set_option genInjectivity false

@@ -38,8 +38,6 @@ state the corresponding naturality and scalar-extension compatibility.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option linter.style.haveILetI false
-set_option linter.defProp false
 
 universe u
 

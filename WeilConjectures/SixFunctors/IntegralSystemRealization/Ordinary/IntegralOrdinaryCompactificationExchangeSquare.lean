@@ -330,6 +330,7 @@ set_option linter.defProp false in
     (properPullCoeff l E o a z cf'.g cf.g y.left wp)
     ((ringedOpen l E cf.i).obj L) qJ
 
+-- Kept as `def`: its type is inferred from the application, as for the one above.
 set_option linter.defProp false in
 @[irreducible] private def compactificationRaw
     (o : Operations l E) (a : AmbientModels l E o)

@@ -43,7 +43,6 @@ universe u v w
 
 namespace Algebra
 
-set_option linter.unusedVariables false in
 /-- A derivation of `k` into an ideal annihilated by the residue kernel extends to `K`
 up to an error contained in the `k`-span of finitely many elements of the ideal.
 No coefficient subfield or generated subring is involved in this assertion. -/
@@ -51,13 +50,13 @@ theorem exists_finite_rank_defect_derivation
     (k : Type u) [Field k] (K : Type w) [Field K] [Algebra k K]
     (Λ : Type v) [CommRing Λ] [Algebra k Λ]
     (r : Λ →+* K) (hcomm : r.comp (algebraMap k Λ) = algebraMap k K)
-    (I : Ideal Λ) (hI : I ≤ RingHom.ker r) (hkill : RingHom.ker r * I = ⊥)
+    (I : Ideal Λ) (_hI : I ≤ RingHom.ker r) (hkill : RingHom.ker r * I = ⊥)
     (σ0 : K →+* Λ) (hσ0 : r.comp σ0 = RingHom.id K)
     (theta : k →+ Λ) (htheta : ∀ a : k, theta a ∈ I)
     (htheta_one : theta 1 = 0)
     (htheta_mul : ∀ a b : k,
       theta (a * b) = algebraMap k Λ a * theta b + algebraMap k Λ b * theta a)
-    (p : ℕ) [CharP k p] (hp : 0 < p)
+    (p : ℕ) [CharP k p] (_hp : 0 < p)
     (hH : Module.Finite K (H1Cotangent k K)) :
     ∃ (D : K →+ Λ) (f : Finset Λ),
       D 1 = 0 ∧

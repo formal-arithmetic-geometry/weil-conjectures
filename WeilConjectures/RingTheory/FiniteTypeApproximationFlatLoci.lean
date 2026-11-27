@@ -48,7 +48,6 @@ open scoped TensorProduct
 
 namespace Algebra
 
-set_option linter.style.haveILetI false in
 private theorem localized_restrict_eq {R S M : Type*} [CommRing R] [CommRing S]
     [AddCommGroup M] [Module S M] (f : R →+* S) (T : Submonoid S) :
     letI := f.toAlgebra
@@ -56,9 +55,9 @@ private theorem localized_restrict_eq {R S M : Type*} [CommRing R] [CommRing S]
     letI : IsScalarTower R S M := IsScalarTower.of_compHom _ _ _
     (inferInstance : Module R (LocalizedModule T M)) =
       Module.compHom (LocalizedModule T M) f := by
-  letI := f.toAlgebra
-  letI : Module R M := Module.compHom M f
-  letI : IsScalarTower R S M := IsScalarTower.of_compHom _ _ _
+  let := f.toAlgebra
+  let : Module R M := Module.compHom M f
+  have : IsScalarTower R S M := IsScalarTower.of_compHom _ _ _
   apply Module.ext'
   intro r x
   induction x using LocalizedModule.induction_on with

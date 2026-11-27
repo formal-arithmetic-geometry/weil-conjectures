@@ -153,8 +153,7 @@ theorem isPseudoCoherent_inverse_ring_reconstruction
     have hi : IsIso ((M n).map β.hom ≫ f) := by
       rw [← hfinal n]
       infer_instance
-    set_option linter.style.haveILetI false in
-      letI : IsIso ((M n).map β.hom ≫ f) := hi
+    have : IsIso ((M n).map β.hom ≫ f) := hi
     exact IsIso.of_isIso_comp_left ((M n).map β.hom) f
   exact ⟨hpcE, hIso, ⟨Pₙ, b, βₙ, uₙ, θₙ, P, β, p, θ, η, γ,
     ⟨hboundₙ, hfreeₙ, hsurjₙ, hθₙ, huₙ, hPbound, hPfree, hproj, hlimP,

@@ -27,8 +27,6 @@ and their shift comparisons. The rational scalar comparisons commute with the fi
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedVariables false
-set_option linter.unusedSectionVars false
 set_option Elab.async false
 set_option backward.defeqAttrib.useBackward true
 set_option synthInstance.maxSize 4096
@@ -283,6 +281,7 @@ variable (l : ℕ) [Fact l.Prime]
   (S : ∀ E : Index l Ω,
     IsomorphismFieldTransportStage l (Coefficient.{u} l Ω E) g hX hY)
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 private theorem lambda_inverse_formula (E : Index l Ω)
     (K : sfIntegralConstructibleCategory l (Coefficient.{u} l Ω E) Y) :
     HEq ((S E).lambda.symm.hom.app K)
@@ -295,12 +294,12 @@ private theorem lambda_inverse_formula (E : Index l Ω)
     heq_of_eq hi
 
 private theorem normalized_scalar_shift (E L : Index l Ω) (h : E ≤ L) :
-    (fun [rE : (rationalDerivedPullback l (Coefficient.{u} l Ω E) g).CommShift ℤ]
-      [rL : (rationalDerivedPullback l (Coefficient.{u} l Ω L) g).CommShift ℤ] ↦
+    (fun [_rE : (rationalDerivedPullback l (Coefficient.{u} l Ω E) g).CommShift ℤ]
+      [_rL : (rationalDerivedPullback l (Coefficient.{u} l Ω L) g).CommShift ℤ] ↦
       letI := GeneralAlgebraicallyClosedCoefficients.stageTransitionCommShift l Ω X E L h
       letI := GeneralAlgebraicallyClosedCoefficients.stageTransitionCommShift l Ω Y E L h
       NatTrans.CommShift (commonStagePullbackTransition l Ω g h).hom ℤ)
-      (rE := (S E).rationalShift) (rL := (S L).rationalShift) := by
+      (_rE := (S E).rationalShift) (_rL := (S L).rationalShift) := by
   let : (constructibleIntegralPullback l (Coefficient.{u} l Ω E) g).CommShift ℤ :=
     (S E).integralShift
   let : (constructibleIntegralPullback l (Coefficient.{u} l Ω L) g).CommShift ℤ :=

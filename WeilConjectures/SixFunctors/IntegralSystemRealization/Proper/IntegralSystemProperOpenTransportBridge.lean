@@ -157,11 +157,10 @@ attribute [local irreducible] modelPull modelPush modelShriek modelAdj
   Direct.adj CanonicalBridge.push properOpenTransportMate
 end
 
-set_option linter.unusedVariables false in
 /-- The transported mate satisfies the bridge component equation. -/
 theorem properOpenTransportMate_bridge
     (o : Operations l E) (c : Compositors l E o)
-    (a : OpenComparisons l E o c) (b : CanonicalBridge l E o)
+    (_a : OpenComparisons l E o c) (b : CanonicalBridge l E o)
     {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W)
     (p : V ⟶ Z) (i : W ⟶ Z) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]

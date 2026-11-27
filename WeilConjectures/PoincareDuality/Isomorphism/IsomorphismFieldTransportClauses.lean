@@ -36,8 +36,6 @@ arbitrary inverse equivalences.
 set_option autoImplicit false
 set_option backward.defeqAttrib.useBackward true
 set_option Elab.async false
-set_option linter.unusedSectionVars false
-set_option linter.unusedVariables false
 set_option synthInstance.maxSize 4096
 set_option genInjectivity false
 set_option genSizeOfSpec false

@@ -56,7 +56,6 @@ private theorem cancel_comparison
   exact ⟨(TensorProduct.AlgebraTensorModule.cancelBaseChange Q R S S L).symm.trans
     (e.trans (TensorProduct.AlgebraTensorModule.cancelBaseChange B R S S M))⟩
 
-set_option linter.unusedVariables false in
 /-- An equivalence between two finitely presented module base changes descends
 along a compatible family of coefficient maps. No algebra model or flatness
 hypothesis is needed. -/
@@ -97,7 +96,7 @@ theorem exists_eventually_compatible_module_equiv
             (F.map_comp (homOfLE (hik.trans hkj)) (homOfLE hjl)) s).symm }
       (Algebra.TensorProduct.map t (AlgHom.id (F.obj i) B)).toRingHom.comp
         (q j hkj) = q l hkl) :
-    ∃ (j₀ : I) (hkj₀ : k ≤ j₀), ∀ (j : I) (h₀ : k ≤ j₀) (h₁ : j₀ ≤ j),
+    ∃ (j₀ : I) (_hkj₀ : k ≤ j₀), ∀ (j : I) (h₀ : k ≤ j₀) (h₁ : j₀ ≤ j),
       letI := (F.map (homOfLE (hik.trans (h₀.trans h₁)))).hom.toAlgebra
       let E := (F.obj j : Type v) ⊗[F.obj i] B
       letI : Algebra Q E := (q j (h₀.trans h₁)).toAlgebra

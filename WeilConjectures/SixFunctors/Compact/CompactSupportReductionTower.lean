@@ -51,7 +51,6 @@ The derived tower action is induced levelwise, not a scalar action chosen after 
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 attribute [local irreducible] HasDerivedCategory.standard
 attribute [-instance] WeilConjectures.SemilinearSections.abelianSheafify
   WeilConjectures.SemilinearSections.locallyBijective
@@ -353,7 +352,7 @@ private theorem compactSupportLimitLinear (W : Scheme.{u}) :
     letI := compactSupportScalarLinear l E W
     (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W).Linear
       (Padic.coefficientExtensionIntegers l E) := by
-  letI := compactSupportScalarLinear l E W
+  let := compactSupportScalarLinear l E W
   constructor
   intro M N f a
   apply limit.hom_ext
@@ -425,8 +424,8 @@ private theorem compactSupportSystemPushLinear {X Y : Scheme.{u}} (f : X ⟶ Y) 
       _ _ _ _ _ _
       (ProEtale.VaryingRing.push (compactSupportSystemLevel l E)
         (compactSupportSystemQuotient l E) f) := by
-  letI := compactSupportSequenceLinear l E X
-  letI := compactSupportSequenceLinear l E Y
+  let := compactSupportSequenceLinear l E X
+  let := compactSupportSequenceLinear l E Y
   rw [Functor.linear_iff]
   intro M a
   apply SheafOfModules.hom_ext
@@ -479,8 +478,6 @@ private theorem compactSupportCompletedSquare
 -- Derived functors are used through their comparison lemmas, without unfolding resolutions.
 attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor
 
--- Preserve the original instance-binder names in the unchanged theorem signature.
-set_option linter.unusedVariables false in
 /-- There is a coherent exact integral-linear compact-support reduction tower functor.
 Its natural evaluation comparisons identify every transition with the canonical
 quotient/direct-image comparison, including adjacent and equal levels. -/
@@ -494,13 +491,14 @@ theorem exists_compactSupportReductionTower
     (_hl : IsUnit (l : K₀)) (c : Compactification f) :
     ∃ (sX : Linear (Padic.coefficientExtensionIntegers l E) (scalarReductionSource l E X))
       (sY : Linear (Padic.coefficientExtensionIntegers l E) (scalarReductionSource l E Y)),
-      (fun [linearX : Linear (Padic.coefficientExtensionIntegers l E) (scalarReductionSource l E X)]
-        [linearY : Linear (Padic.coefficientExtensionIntegers l E) (scalarReductionSource l E Y)] ↦
+      (fun
+        [_linearX : Linear (Padic.coefficientExtensionIntegers l E) (scalarReductionSource l E X)]
+        [_linearY : Linear (Padic.coefficientExtensionIntegers l E) (scalarReductionSource l E Y)] ↦
         IsCompactSupportScalarAction l E X ∧ IsCompactSupportScalarAction l E Y ∧
         ∃ T : DerivedCategory (scalarReductionSource l E X) ⥤
             DerivedCategory (pbcTowers Y (completedIntegralCommRingSheafUnrestricted l E Y)),
           CompactSupportReductionTowerFunctorSpec l E c T)
-        (linearX := sX) (linearY := sY) := by
+        (_linearX := sX) (_linearY := sY) := by
   classical
   let sX := compactSupportScalarLinear l E X
   let sY := compactSupportScalarLinear l E Y
@@ -519,39 +517,39 @@ theorem exists_compactSupportReductionTower
   let T : DerivedCategory (scalarReductionSource l E X) ⥤
       DerivedCategory (pbcTowers Y (completedIntegralCommRingSheafUnrestricted l E Y)) :=
     S.reduction ⋙ J ⋙ G ⋙ U
-  letI : (coefficientSequenceLimit.{u, u} l E X).CommShift ℤ := by
+  let : (coefficientSequenceLimit.{u, u} l E X).CommShift ℤ := by
     unfold coefficientSequenceLimit coefficientConstantTowerLimit
       coefficientSequenceDerivedRestriction
     infer_instance
-  letI : (coefficientSequenceLimit.{u, u} l E X).IsTriangulated := by
+  have : (coefficientSequenceLimit.{u, u} l E X).IsTriangulated := by
     unfold coefficientSequenceLimit coefficientConstantTowerLimit
       coefficientSequenceDerivedRestriction
     infer_instance
-  letI : S.reduction.CommShift ℤ := S.adjunction.leftAdjointCommShift ℤ
-  letI : S.adjunction.CommShift ℤ := S.adjunction.commShift_of_rightAdjoint ℤ
-  letI : S.reduction.IsTriangulated := S.adjunction.isTriangulated_leftAdjoint
-  letI : U.CommShift ℤ := by dsimp [U, coefficientSequenceDerivedRestriction]; infer_instance
-  letI : U.IsTriangulated := by dsimp [U, coefficientSequenceDerivedRestriction]; infer_instance
-  letI : J.CommShift ℤ := by dsimp only [J]; infer_instance
-  letI : G.CommShift ℤ := by dsimp only [G]; infer_instance
-  letI : J.IsTriangulated := by dsimp only [J]; infer_instance
-  letI : G.IsTriangulated := by dsimp only [G]; infer_instance
-  letI : T.CommShift ℤ := by dsimp only [T]; infer_instance
+  let : S.reduction.CommShift ℤ := S.adjunction.leftAdjointCommShift ℤ
+  let : S.adjunction.CommShift ℤ := S.adjunction.commShift_of_rightAdjoint ℤ
+  have : S.reduction.IsTriangulated := S.adjunction.isTriangulated_leftAdjoint
+  let : U.CommShift ℤ := by dsimp [U, coefficientSequenceDerivedRestriction]; infer_instance
+  have : U.IsTriangulated := by dsimp [U, coefficientSequenceDerivedRestriction]; infer_instance
+  let : J.CommShift ℤ := by dsimp only [J]; infer_instance
+  let : G.CommShift ℤ := by dsimp only [G]; infer_instance
+  have : J.IsTriangulated := by dsimp only [J]; infer_instance
+  have : G.IsTriangulated := by dsimp only [G]; infer_instance
+  let : T.CommShift ℤ := by dsimp only [T]; infer_instance
   have : T.IsTriangulated := by dsimp only [T]; infer_instance
   refine ⟨T, ?_, inferInstance, this, ?_⟩
-  · letI := compactSupportSequenceLinear l E X
-    letI := compactSupportSequenceLinear l E c.Z
-    letI := compactSupportSequenceLinear l E Y
+  · let := compactSupportSequenceLinear l E X
+    let := compactSupportSequenceLinear l E c.Z
+    let := compactSupportSequenceLinear l E Y
     have := compactSupportSequenceRestrictionLinear l E X
     have := compactSupportSequenceRestrictionLinear l E Y
     have := compactSupportLimitLinear l E X
     have := compactSupportSystemPushLinear l E c.i
     have := compactSupportSystemPushLinear l E c.g
-    letI : Linear (Padic.coefficientExtensionIntegers l E)
+    let : Linear (Padic.coefficientExtensionIntegers l E)
         (ProEtale.VaryingRing.Modules A q X) := compactSupportSequenceLinear l E X
-    letI : Linear (Padic.coefficientExtensionIntegers l E)
+    let : Linear (Padic.coefficientExtensionIntegers l E)
         (ProEtale.VaryingRing.Modules A q c.Z) := compactSupportSequenceLinear l E c.Z
-    letI : Linear (Padic.coefficientExtensionIntegers l E)
+    let : Linear (Padic.coefficientExtensionIntegers l E)
         (ProEtale.VaryingRing.Modules A q Y) := compactSupportSequenceLinear l E Y
     have : (ProEtale.VaryingRing.pull A q c.i).Linear
         (Padic.coefficientExtensionIntegers l E) :=

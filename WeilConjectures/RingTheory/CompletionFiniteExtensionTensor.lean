@@ -34,8 +34,6 @@ universe u v
 open scoped TensorProduct
 namespace AdicCompletion
 
--- The inherited statement binds an unused D; keep its signature unchanged.
-set_option linter.unusedVariables false in
 /-- For a finite algebra `S` over a Noetherian ring `R` and a prime `p`, there is an
 `S`-algebra equivalence between `R_p^∧ ⊗[R] S` and the `p`-adic completion of
 `R_p ⊗[R] S`. -/
@@ -49,7 +47,7 @@ theorem completion_finite_extension_tensor
     letI := Algebra.TensorProduct.rightAlgebra (R := R) (A := A) (B := S)
     let J := p.map (algebraMap R B)
     let Q := p.primesOver S
-    let D := fun q : Q ↦
+    let _D := fun q : Q ↦
       AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q.1))
         (Localization.AtPrime q.1)
     letI := Algebra.TensorProduct.rightAlgebra (R := R) (A := C) (B := S)
