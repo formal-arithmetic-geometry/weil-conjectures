@@ -27,7 +27,6 @@ applied to the chain square, combined with functoriality.
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option Elab.async false
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
@@ -73,8 +72,8 @@ theorem nativeRingedAssociatorComplex_localization_square
         (τ.hom.app (nativeTensorComplex T P qn) ≫ qB.map r.hom) =
       (τ.hom.app (nativeTensorComplex T pq N) ≫ qB.map l.hom) ≫
         qB.map (α_ (Ec.obj P) (Ec.obj Q) (Ec.obj N)).hom := by
-  letI := SheafOfModules.isMonoidal_W_independentCoefficients b.R
-  letI := SheafOfModules.monoidalCategory b.R
+  have := SheafOfModules.isMonoidal_W_independentCoefficients b.R
+  let := SheafOfModules.monoidalCategory b.R
   let E := nativeWeilRingedDerivedEquivalence b
   let Ec := b.native.functor.mapHomologicalComplex (.up ℤ)
   let τ := b.native.functor.mapDerivedCategoryFactors

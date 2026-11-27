@@ -433,7 +433,6 @@ private theorem commShift_ext
   exact h n
 
 set_option backward.isDefEq.respectTransparency.types false in
-set_option linter.unusedVariables false in
 /-- The actual composite finite functor has its ordinary composite shift comparison. -/
 instance sfFrameworkCompositeFiniteShift
     (F : SfFrameworkFamily l Ω T S) (G : SfFrameworkFamily l Ω S V)

@@ -82,6 +82,7 @@ lemma liftPoint_ofGraphFixedLocus [IsAlgClosed k] (hΦ : IsModelFrobenius Φ f�
 
 end Correspondence
 
+-- The section instances overlap `[IsProper X.hom]`; keep this public statement unchanged.
 set_option linter.overlappingInstances false in
 /-- **The trace formula on a proper scheme in degree `m`**: for a proper `X` with the model
 Frobenius `Φ` and `m ≥ 1`, the trace formula in degree one holds for `Φ_m`. -/
@@ -110,6 +111,7 @@ theorem traceFormulaHolds_frobeniusIterate_of_isProper [IsAlgClosed k] [IsProper
   rintro ⟨z, rfl⟩
   rw [Set.mem_singleton_iff, Subsingleton.elim (α := Spec (.of k)) z default]
 
+-- The section instances overlap `[IsProper X.hom]`; keep this public statement unchanged.
 set_option linter.overlappingInstances false in
 /-- **The trace formula on a proper scheme**: for a proper `X` with the model Frobenius `Φ` of a
 model over a finite field, the trace formula in degree one holds. -/

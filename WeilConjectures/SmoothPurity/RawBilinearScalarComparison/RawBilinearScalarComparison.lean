@@ -24,7 +24,6 @@ equalities, and naturality is proved by tensor-product induction in each arrow.
 set_option autoImplicit false
 set_option Elab.async false
 set_option linter.privateModule false
-set_option linter.unusedSectionVars false
 set_option genSizeOfSpec false
 set_option genInjectivity false
 set_option genSizeOf false
