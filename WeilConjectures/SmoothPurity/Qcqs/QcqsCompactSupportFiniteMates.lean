@@ -356,6 +356,7 @@ include K₀ hl Xbase Ybase Xft Xqc Yft Yqc fbase fs fft fqc
 
 attribute [-instance] CompletedCoefficientPushforward.modAbelian
   CompletedCoefficientPushforward.hasDerived in
+-- Keep the section instances as hypotheses of this public statement.
 set_option linter.unusedSectionVars false in
 /-- Every positive finite scalar-adjunction mate for the completed proper/open image is
 invertible. -/

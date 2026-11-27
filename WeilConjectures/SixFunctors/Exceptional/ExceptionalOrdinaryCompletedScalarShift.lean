@@ -28,7 +28,6 @@ the universal counit, proves the shift square.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 open CategoryTheory
@@ -104,7 +103,7 @@ theorem ordinary_completed_scalar_shift :
       e.hom ≫ completedScalarComparison.{u, u} l E L i T = scalarCompletion l E L i T ∧
       e.hom.CommShift ℤ := by
   let φ := completedCoefficientMap.{u, u} l E L i T
-  letI : (completedDerivedScalarExtension.{u, u} l E L i T).CommShift ℤ :=
+  let : (completedDerivedScalarExtension.{u, u} l E L i T).CommShift ℤ :=
     PurCompactSupport.scalarCommShift φ
   obtain ⟨t, e, _ht, he, hχ⟩ := integralScalarOrdinaryModelComparison l E L i T
   let F := integralOrdinaryScalar l E L i T
@@ -114,16 +113,16 @@ theorem ordinary_completed_scalar_shift :
         DerivedCategory.Qh := AlgebraicGeometry.Scheme.pbcExtensionCounit φ
   let tH := Functor.whiskerRight
     (NatTrans.mapHomotopyCategory t.hom (.up ℤ)) DerivedCategory.Qh
-  haveI := AlgebraicGeometry.Scheme.pbcDerivedExtension_universal φ
+  have := AlgebraicGeometry.Scheme.pbcDerivedExtension_universal φ
   have hkan := Functor.IsLeftDerivedFunctor.isRightKanExtension
     (AlgebraicGeometry.Scheme.pbcDerivedExtend φ)
     (AlgebraicGeometry.Scheme.pbcExtensionCounit φ)
     (HomotopyCategory.quasiIso (AlgebraicGeometry.Scheme.pbcModules T
       (completedIntegralCommRingSheafUnrestricted l E T)) (.up ℤ))
-  haveI : (completedDerivedScalarExtension.{u, u} l E L i T).IsRightKanExtension η := hkan
-  haveI : η.CommShift ℤ :=
+  have : (completedDerivedScalarExtension.{u, u} l E L i T).IsRightKanExtension η := hkan
+  have : η.CommShift ℤ :=
     (PurCompactSupport.scalarCommShift_existsUnique φ).exists.choose_spec
-  haveI : tH.CommShift ℤ := by dsimp only [tH]; infer_instance
+  have : tH.CommShift ℤ := by dsimp only [tH]; infer_instance
   have h : Functor.whiskerLeft DerivedCategory.Qh e.hom ≫ η = ε ≫ tH := by
     ext K
     obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective K

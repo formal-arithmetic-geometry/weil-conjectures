@@ -147,12 +147,10 @@ namespace WeilConjectures.CoefSupportOpenTensor
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
--- The original existential statement names a witness unused by True.
-set_option linter.unusedVariables false in
 /-- The localized sequence sites admit the ordinary native open tensor datum. -/
 theorem nativeOpenTensor_system_exists {X Z : Scheme.{u}} (j : X ⟶ Z)
     [IsOpenImmersion j] :
-    ∃ D : NativeOpenTensorPrimitives.SystemOpenCochainsData l E j, True := by
+    ∃ _D : NativeOpenTensorPrimitives.SystemOpenCochainsData l E j, True := by
   classical
   let J := coefficientSequenceTopology (ProEt.topology Z)
   let K := coefficientSequenceTopology (ProEt.topology X)

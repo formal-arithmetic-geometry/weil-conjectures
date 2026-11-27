@@ -55,7 +55,6 @@ private lemma unit_app_upperStarConstantSheafIso {S T : Scheme.{u}} (f : S ⟶ T
   erw [← (lowerStarCompSheafSectionsTerminalIso A f).hom.naturality]
   rfl
 
-set_option linter.flexible false in
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
 /-- The identifications of global sections of pushforwards are compatible with composition. -/
 private lemma lowerStarComp_hom_app_sheafSections (F : Sheaf X.smallEtaleTopology A) :
@@ -64,8 +63,15 @@ private lemma lowerStarComp_hom_app_sheafSections (F : Sheaf X.smallEtaleTopolog
       (lowerStarCompSheafSectionsTerminalIso A (g ≫ h)).hom.app F =
     (lowerStarCompSheafSectionsTerminalIso A h).hom.app ((g)_*[A].obj F) ≫
       (lowerStarCompSheafSectionsTerminalIso A g).hom.app F := by
-  simp [lowerStarCompSheafSectionsTerminalIso, lowerStarComp,
-    Functor.sheafPushforwardContinuousComp']
+  simp only [Functor.comp_obj, Functor.flip_obj_obj, ObjectProperty.ι_obj, lowerStarComp,
+    Functor.sheafPushforwardContinuousComp', Iso.trans_hom,
+    Functor.sheafPushforwardContinuousIso_hom, Iso.symm_inv, NatTrans.comp_app,
+    Functor.flip_obj_map, ObjectProperty.ι_map, ObjectProperty.FullSubcategory.comp_hom,
+    Functor.sheafPushforwardContinuousNatTrans_app_hom,
+    Functor.sheafPushforwardContinuousComp_hom_app_hom_app, Functor.whiskerRight_app,
+    Functor.op_obj, NatTrans.op_app, lowerStarCompSheafSectionsTerminalIso,
+    Functor.mapIso_symm, NatIso.ofComponents_hom_app, Iso.symm_hom, Functor.mapIso_inv,
+    Iso.op_inv, Category.assoc]
   erw [Category.id_comp, ← F.obj.map_comp, ← F.obj.map_comp]
   exact congrArg F.obj.map (Quiver.Hom.unop_inj ((terminalIsTerminal.ofIso
     ((Hom.Etale g).mapIso (PreservesTerminal.iso (Hom.Etale h)) ≪≫

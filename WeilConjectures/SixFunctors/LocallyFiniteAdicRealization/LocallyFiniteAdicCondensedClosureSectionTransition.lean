@@ -17,7 +17,6 @@ import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdi
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.all false
 set_option genSizeOf false
 set_option genSizeOfSpec false
 set_option genInjectivity false
@@ -78,7 +77,7 @@ private theorem whisker_factor
   ext K
   simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
     Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.comp_obj, Functor.comp_map, Category.assoc]
+    Functor.comp_obj, Category.assoc]
 
 namespace WeilConjectures.LocallyFiniteAdicRealization
 open AlgebraicallyClosedCoefficients (Index Coefficient)
@@ -88,12 +87,29 @@ attribute [local reducible] closureRing ProEtale.constructibleExtendScalars
   ProEtale.constructibleToPadicAlgCl finiteCondensedClosureFunctor
   GeneralAlgebraicallyClosedCoefficients.Stage
   GeneralAlgebraicallyClosedCoefficients.stageCategory
-  GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_1
-  GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_3
-  GeneralAlgebraicallyClosedCoefficients.stageCategory._aux_5
 attribute [local instance 5000] GeneralAlgebraicallyClosedCoefficients.stageCategory
 
-variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X]
+variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
+
+private theorem internalClosureComp_map {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
+    (M : ProEtale.PadicSubfieldConstructible X l E) :
+    (ProEtale.boundedConstructible (ProEtale.padicAlgClRingObj X l)).ι.map
+        ((ProEtale.constructibleToPadicAlgClCompIso X l h).inv.app M) =
+      (ProEtale.derivedExtendScalarsCompIso X l h).inv.app M.obj := by
+  unfold ProEtale.constructibleToPadicAlgClCompIso
+  dsimp only [ProEtale.constructibleExtendScalars, ProEtale.constructibleToPadicAlgCl]
+  rw [Functor.fullyFaithfulCancelRight_inv_app, Functor.map_preimage]
+  simp only [Iso.trans_inv, Iso.refl_inv,
+    Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app, Category.comp_id,
+    ObjectProperty.ι_obj]
+
+private theorem internalClosureComp_hom {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
+    (M : ProEtale.PadicSubfieldConstructible X l E) :
+    ((ProEtale.constructibleToPadicAlgClCompIso X l h).inv.app M).hom =
+      (ProEtale.derivedExtendScalarsCompIso X l h).inv.app M.obj :=
+  internalClosureComp_map l X h M
+
+variable [IsNoetherian X]
   [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]
   [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]
 
@@ -131,26 +147,7 @@ private theorem finiteScalarEncoding_map (A : FiniteCondensedData l X)
   simp only [Functor.fullyFaithfulCancelRight_hom_app, Functor.map_preimage]
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
-    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.comp_obj,
-    Functor.comp_map, Category.assoc]
-
-private theorem internalClosureComp_map {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
-    (M : ProEtale.PadicSubfieldConstructible X l E) :
-    (ProEtale.boundedConstructible (ProEtale.padicAlgClRingObj X l)).ι.map
-        ((ProEtale.constructibleToPadicAlgClCompIso X l h).inv.app M) =
-      (ProEtale.derivedExtendScalarsCompIso X l h).inv.app M.obj := by
-  unfold ProEtale.constructibleToPadicAlgClCompIso
-  dsimp only [ProEtale.constructibleExtendScalars, ProEtale.constructibleToPadicAlgCl]
-  rw [Functor.fullyFaithfulCancelRight_inv_app, Functor.map_preimage]
-  simp only [Iso.trans_inv, Iso.refl_inv, NatTrans.comp_app,
-    Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app, Category.comp_id,
-    ObjectProperty.ι_obj]
-
-private theorem internalClosureComp_hom {E L : Index l (PadicAlgCl l)} (h : E ≤ L)
-    (M : ProEtale.PadicSubfieldConstructible X l E) :
-    ((ProEtale.constructibleToPadicAlgClCompIso X l h).inv.app M).hom =
-      (ProEtale.derivedExtendScalarsCompIso X l h).inv.app M.obj :=
-  internalClosureComp_map l X h M
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.comp_obj]
 
 /-- Section reconstruction carries the condensed closure transition to the inverse
 of the ordinary closure comparison, before restriction to integral objects.

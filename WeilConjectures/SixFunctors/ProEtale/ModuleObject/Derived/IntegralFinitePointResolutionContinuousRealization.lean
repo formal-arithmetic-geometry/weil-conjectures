@@ -236,7 +236,6 @@ private lemma resolution_conjugate_zero
     d.symm (G (e (e.symm (F (e b))))) = 0 :=
   (resolution_conjugate_exact e d F G h _).2 ⟨b, rfl⟩
 
-set_option linter.unusedVariables false in
 -- The supplied section family subsumes the retained scalar-continuity hypothesis.
 /-- Realize a sectionwise exact lifted resolution as a short exact point-module complex.
 -/
@@ -246,7 +245,7 @@ theorem integralFinitePointResolution_continuous_realization
     (a : (⟨Profinite.padicIntegersRingObj ell E.1⟩ : ScalarSixRing.{u}) ⟶
       ⟨cartesianFinitePointRing A⟩)
     (φ : PadicAlgCl.integers ell E.1 →+* A)
-    (hφ : @Continuous _ _ inferInstance ⊥ φ)
+    (_hφ : @Continuous _ _ inferInstance ⊥ φ)
     (hsection : ∀ (P : Profinite.{u})
       (s : ULift.{u + 1} C(P, PadicAlgCl.integers ell E.1)) (x : P),
       ((a.hom.hom.hom.app (op P)) s).down x = φ (s.down x)) :

@@ -51,8 +51,6 @@ open scoped TensorProduct
 
 namespace Algebra
 
--- Preserve the named, nondependent forall binders of the existing signature.
-set_option linter.unusedVariables false in
 /-- If `M` is flat over `R` at a prime `q` of `S`, where `R → S` and `M` are the colimits of a
 supplied finite-type integer approximation, then some stage module is flat over its stage base
 at the contraction of `q`. No model or open locus is constructed.
@@ -73,7 +71,7 @@ theorem exists_flat_integer_approximation_stage_at_prime
       (D : Λ ⥤ AddCommGrpCat.{max u v w})
       (ν : D ⟶ (Functor.const Λ).obj (AddCommGrpCat.of M'))
     [∀ i : Λ, Module (B.obj i) (D.obj i)]
-    (hmodel :
+    (_hmodel :
       -- (1) the three colimits, compatible with `R' → S'` and the module actions
       Nonempty (IsColimit (Cocone.mk (CommRingCat.of R') π)) ∧
       Nonempty (IsColimit (Cocone.mk (CommRingCat.of S') κ)) ∧
@@ -103,7 +101,7 @@ theorem exists_flat_integer_approximation_stage_at_prime
           ∀ (y : B.obj j) (x : D.obj i),
             e (y ⊗ₜ[B.obj i] x) = y • (D.map (homOfLE h)).hom x))
     (q : PrimeSpectrum S)
-    (hq : Module.Flat R (LocalizedModule q.asIdeal.primeCompl M)),
+    (_hq : Module.Flat R (LocalizedModule q.asIdeal.primeCompl M)),
     ∃ i : Λ,
       letI : Algebra (A.obj i) (B.obj i) := (η.app i).hom.toAlgebra
       letI : Module (A.obj i) (D.obj i) := Module.compHom (D.obj i) (η.app i).hom

@@ -344,11 +344,10 @@ private theorem level_exists (o : Operations l E j) (n : ℕ) :
   rw [scalarUnit_naturality, extensionSection_map, he, he, finiteExtensionSection_map,
     scalarUnit_naturality]
 
-set_option linter.unusedVariables false in
 /-- There is a unique family of finite scalar comparisons preserving every scalar-unit
 extension summand. This asserts no compatibility between different coefficient levels. -/
 theorem existsUnique_openFiniteScalarComparison (o : Operations l E j) :
-    ∃! tc : IntegralOpenReduction.TensorComparison l E j o, True := by
+    ∃! _tc : IntegralOpenReduction.TensorComparison l E j o, True := by
   choose e he using level_exists l E j o
   refine ⟨⟨e, he⟩, trivial, ?_⟩
   intro c _

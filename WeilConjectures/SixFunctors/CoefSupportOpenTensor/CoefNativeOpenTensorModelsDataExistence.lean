@@ -106,8 +106,6 @@ end Assembly
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
--- Keep the recorded existential binder names, whose witnesses do not occur in True.
-set_option linter.unusedVariables false in
 /-- The localized-site and finite coefficient constructions provide native system and
 finite open tensor representative data. The construction uses the normalized open
 adjunction, its restriction/tensor comparison, and total K-flat representatives. -/
@@ -115,9 +113,9 @@ theorem nativeOpenTensorModels_data_exists {X Z : Scheme.{u}} (j : X ⟶ Z)
     [IsOpenImmersion j]
     (SX : CoefficientDerivedSystemCalculus.{u, u} l E X)
     (SZ : CoefficientDerivedSystemCalculus.{u, u} l E Z) :
-    ∃ (O : SystemOpenModel l E j SX.toCoefficientDerivedSystemTensors
+    ∃ (_O : SystemOpenModel l E j SX.toCoefficientDerivedSystemTensors
         SZ.toCoefficientDerivedSystemTensors)
-      (On : ∀ n : ℕ, FiniteOpenModel l E j SX.toCoefficientDerivedSystemTensors
+      (_On : ∀ n : ℕ, FiniteOpenModel l E j SX.toCoefficientDerivedSystemTensors
         SZ.toCoefficientDerivedSystemTensors n), True := by
   obtain ⟨D, Dn, _⟩ := nativeOpenTensor_cochains_exists l E j
   obtain ⟨O⟩ : Nonempty (SystemOpenModel l E j SX.toCoefficientDerivedSystemTensors

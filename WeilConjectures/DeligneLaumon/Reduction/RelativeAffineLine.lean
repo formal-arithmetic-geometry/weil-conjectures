@@ -258,8 +258,6 @@ theorem exists_fiber_charpolyRev_higherLowerShriek (hfib : ∀ y, IsAffine (h.fi
   rw [FrobeniusModule.localPolynomial, FrobeniusModule.localPolynomial] at hE
   exact hZ.symm.trans hE
 
--- the lissity of `F` is not needed: the curve estimate holds for every punctually pure sheaf
-set_option linter.unusedVariables false in
 /-- **Punctual upper bound in a relative affine curve.** Let `h : U ⟶ Y` be a smooth separated
 morphism of relative dimension one with affine fibres, and let `F` be a lisse Weil sheaf on `U`,
 punctually `ι`-pure of weight `w`. Then `Rⁱh₀!F` has weights at most `w + i`: by compactly
@@ -268,7 +266,7 @@ supported base change its stalk at a closed point `y` is `H_c^i(U_ȳ, F)`, the r
 (`AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.upperStar`), and the curve estimate
 applies to each geometric component of the affine fibre. -/
 theorem hasWeightsAtMost_higherLowerShriek_of_isAffine_fiber
-    (hfib : ∀ y, IsAffine (h.fiber y)) (F : WeilSheaf k₀ l U) (hF : F.IsLisse) {w : ℝ}
+    (hfib : ∀ y, IsAffine (h.fiber y)) (F : WeilSheaf k₀ l U) (_hF : F.IsLisse) {w : ℝ}
     (hw : F.IsPunctuallyPureOfWeight ι w) (i : ℕ) :
     haveI := SmoothOfRelativeDimension.smooth 1 h
     ((WeilSheaf.higherLowerShriek k₀ l h i).obj F).HasWeightsAtMost ι (w + i) := by
@@ -426,8 +424,6 @@ theorem isMixedOfWeightsAtMost_higherLowerShriek_of_isAffine_fiber
 
 end RelativeCurve
 
--- the surjectivity of `h` is not needed: an empty fibre contributes nothing
-set_option linter.unusedVariables false in
 /-- Let `Y` be a separated `k₀`-scheme of finite type, let `U` be an open subscheme of the relative
 affine line `𝔸¹_Y` whose projection `h` to `Y` is surjective, and let `F` be a lisse Weil sheaf on
 `U`, punctually `ι`-pure of weight `w`. Then `Rʳh₀!F` is mixed of weights at most `w + r`:
@@ -445,7 +441,7 @@ theorem isMixedOfWeightsAtMost_higherLowerShriek_of_affineLine {U Y : Scheme.{u}
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] (u : U ⟶ 𝔸(PUnit.{u + 1}; Y))
     [IsOpenImmersion u] [QuasiCompact u] [u.IsOver (Spec (CommRingCat.of k₀))]
-    (hu : Surjective (u ≫ 𝔸(PUnit.{u + 1}; Y) ↘ Y)) (F : WeilSheaf k₀ l U) (hF : F.IsLisse)
+    (_hu : Surjective (u ≫ 𝔸(PUnit.{u + 1}; Y) ↘ Y)) (F : WeilSheaf k₀ l U) (hF : F.IsLisse)
     (w : ℝ) (hpure : F.IsPunctuallyPureOfWeight ι w) (r : ℕ) :
     ((WeilSheaf.higherLowerShriek k₀ l (u ≫ 𝔸(PUnit.{u + 1}; Y) ↘ Y) r).obj
       F).IsMixedOfWeightsAtMost ι (w + r) := by

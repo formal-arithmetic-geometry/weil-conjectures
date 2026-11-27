@@ -333,7 +333,7 @@ private theorem GE_restriction (E : DE R X) :
   simp only [Iso.refl_hom, NatTrans.id_app]
   erw [Category.id_comp]
 
--- An `omit` would drop `[IsNoetherian X]` and `[QuasiCompact a/b/i]` from this public statement.
+-- Keep the section instances as hypotheses of this public statement.
 set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
@@ -560,7 +560,7 @@ private theorem word_equation (E : DE R X) :
     erw [(PP R s).map_id, (JP R i).map_id, (PP R q).map_id]
   simp only [Category.id_comp]
 
--- An `omit` would drop `[QuasiCompact a/b/i]` from this public statement.
+-- Keep the section instances as hypotheses of this public statement.
 set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
@@ -602,8 +602,7 @@ theorem paste (E : DE R X) :
   have hap : IsIso (AP R a b p q i s sq E) := by rw [hinv hd]; infer_instance
   exact ⟨hw, ht, hap, hd, hf, hg, hgf, hinv⟩
 
--- An `omit` would drop `[IsNoetherian X/Z]`, `[QuasiCompact a/b/i]` and `[IsProper q]`
--- from this public statement.
+-- Keep the section instances as hypotheses of this public statement.
 set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
@@ -650,8 +649,7 @@ theorem word_naturality {E F : DE R X} (h : E ⟶ F) :
       (comp_square ((kE R p q).hom.naturality ((JE R b).map ((JE R a).map h)))
         (map_square (PE R (p ≫ q)) ((mE R a b).hom.naturality h)))
 
--- An `omit` would drop `[Finite R]` and twelve `IsNoetherian`/`QuasiCompact`/`IsProper` instances
--- from this public statement.
+-- Keep the section instances as hypotheses of this public statement.
 set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
@@ -678,8 +676,6 @@ theorem comparison_naturality {E F : DE R X} (h : E ⟶ F) :
   exact comp_square (B_naturality R i q ((PE R s).map ((JE R a).map h)))
     (map_square (PP R q) (map_square (JP R i) (B_naturality R a s h)))
 
--- An `omit` would drop `[QuasiCompact a/b/i]` from this public statement.
-set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Naturality of the actual tower paste, rather than merely of its transported value. -/

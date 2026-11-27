@@ -499,15 +499,13 @@ private theorem cartesianComparisons_compatible
     ((baseChange Λ c.obj sq ho).app K.obj)
     ((baseChange Λ d.obj sq hd).app K.obj) hφ hφ' h₁ h₂
 
--- Keep the published preservation and identity hypotheses with their original names.
-set_option linter.unusedVariables false in
 /-- Cartesian base change with the total-derived open adjunction normalization. -/
 theorem cartesianCompactSupport
     (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-    (h : Preservation (Profinite.padicIntegersRingObj ℓ E.val) k) (φ : Comparisons
+    (_h : Preservation (Profinite.padicIntegersRingObj ℓ E.val) k) (φ : Comparisons
       (Profinite.padicIntegersRingObj ℓ E.val) k)
-    (hi : ∀ {X Y : Spaces k} (f : X ⟶ Y) (c : Compactifications k f),
+    (_hi : ∀ {X Y : Spaces k} (f : X ⟶ Y) (c : Compactifications k f),
     φ f c c = Iso.refl _)
     (hc : ∀ {X Y : Spaces k} (f : X ⟶ Y) (c d e : Compactifications k f),
     φ f c d ≪≫ φ f d e = φ f c e)

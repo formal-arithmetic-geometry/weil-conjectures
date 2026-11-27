@@ -22,7 +22,6 @@ set_option autoImplicit false
 set_option Elab.async false
 set_option backward.defeqAttrib.useBackward true
 set_option synthInstance.maxSize 128
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
@@ -95,6 +94,7 @@ noncomputable def coefficientFiniteQuotient {m n : ℕ} (h : n ≤ m) :
       naturality := fun {_ _} f ↦ (forget₂ CommRingCat RingCat).map_injective
         ((normalizedDVRQuotient l E W h).hom.naturality f) }
 
+-- Kept as a `def`: downstream files mark it `attribute [local irreducible]`.
 set_option linter.defProp false in
 /-- The recorded universal change-of-rings witness, now for B_m → B_n. -/
 noncomputable def coefficientFiniteQuotientExistence {m n : ℕ} (h : n ≤ m) :
@@ -146,6 +146,7 @@ noncomputable instance coefficientFiniteQuotientExtensionAdditive {m n : ℕ} (h
     (coefficientFiniteQuotientExtension l E W h).Additive :=
   (coefficientFiniteQuotientExistence l E W h).choose_spec.choose_spec.choose_spec.choose
 
+-- Kept as a `def`: downstream files mark it `attribute [local irreducible]`.
 set_option linter.defProp false in
 /-- The universal derived pair for the actual finite quotient. -/
 noncomputable def coefficientFiniteQuotientDerivedExistence {m n : ℕ} (h : n ≤ m) :

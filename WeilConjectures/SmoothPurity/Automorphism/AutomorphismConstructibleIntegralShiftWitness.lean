@@ -309,8 +309,6 @@ private theorem composition_shift
     infer_instance
   exact NatTrans.CommShift.of_whiskerRight c.hom (sfIntegralConstructible l E Z).ι
 
--- The unchanged statement names instance binders that occur only through typeclass inference.
-set_option linter.unusedVariables false in
 /-- The normalized integral shift data, together with compatibility of the prescribed
 composition square with shifts. -/
 theorem automorphismConstructibleStage_integral_shift_witness
@@ -357,14 +355,14 @@ theorem automorphismConstructibleStage_integral_shift_witness
             HEq (((constructibleIntegralPullback l E eY.asIso.hom).commShiftIso
               (self := cY) r).hom.app K).hom
               (((integralDerivedPullback l E eY.asIso.hom).commShiftIso r).hom.app K.obj)) ∧
-      (fun [sf : (constructibleIntegralPullback l E f).CommShift ℤ]
-        [sX : (constructibleIntegralPullback l E eX.asIso.hom).CommShift ℤ]
-        [sY : (constructibleIntegralPullback l E eY.asIso.hom).CommShift ℤ] ↦
+      (fun [_sf : (constructibleIntegralPullback l E f).CommShift ℤ]
+        [_sX : (constructibleIntegralPullback l E eX.asIso.hom).CommShift ℤ]
+        [_sY : (constructibleIntegralPullback l E eY.asIso.hom).CommShift ℤ] ↦
         (constructibleIntegralPullback l E f).IsTriangulated ∧
           (constructibleIntegralPullback l E eX.asIso.hom).IsTriangulated ∧
           (constructibleIntegralPullback l E eY.asIso.hom).IsTriangulated ∧
           NatTrans.CommShift b.hom ℤ)
-        (sf := cf) (sX := cX) (sY := cY) := by
+        (_sf := cf) (_sX := cX) (_sY := cY) := by
   classical
   choose a d ha hd using automorphismConstructibleStage_integral_shift_data l E
   let a' {Z W : Scheme.{u}} (g : Z ⟶ W) := a Z W g

@@ -39,7 +39,8 @@ universe w v u
 open CategoryTheory Limits
 
 namespace AlgebraicGeometry
-
+-- The `max` universe comes from `ExchangeFormalism`; avoiding it would change the definition.
+-- The universe of `ExchangeFormalism` over `Scheme.{u}` is inherently `max u v (w + 1)`.
 set_option linter.checkUnivs false in
 /-- **A formalism for compactly supported direct images**: the exchange formalism
 (`CategoryTheory.ExchangeFormalism`) indexed by all schemes, with the open immersions as the

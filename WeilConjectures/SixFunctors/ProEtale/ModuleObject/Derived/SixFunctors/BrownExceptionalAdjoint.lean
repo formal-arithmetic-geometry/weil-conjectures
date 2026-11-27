@@ -38,7 +38,6 @@ map and the K-injective-normalized direct-image compositor.
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option linter.unusedVariables false
 
 universe u
 

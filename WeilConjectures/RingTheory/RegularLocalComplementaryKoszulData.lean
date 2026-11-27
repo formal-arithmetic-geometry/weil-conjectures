@@ -41,7 +41,6 @@ above `r`, its homology is `A/I` in degree zero, and after tensoring with `A/J` 
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.style.haveILetI false
 
 universe u
 
@@ -294,9 +293,9 @@ theorem regularLocal_complementary_koszul_data
     exact ⟨inferInstance, inferInstance⟩
   · intro n hn
     let b := (Finsupp.basisSingleOne : Module.Basis (Fin r) A (Fin r →₀ A))
-    letI : LinearOrder (Fin r) := inferInstance
+    let : LinearOrder (Fin r) := inferInstance
     let B := b.exteriorPower n
-    letI : IsEmpty (Set.powersetCard (Fin r) n) := ⟨fun S ↦ by
+    have : IsEmpty (Set.powersetCard (Fin r) n) := ⟨fun S ↦ by
       have hc : (S : Finset (Fin r)).card ≤ r := by
         calc
           (S : Finset (Fin r)).card ≤ Fintype.card (Fin r) :=
@@ -304,7 +303,7 @@ theorem regularLocal_complementary_koszul_data
           _ = r := Fintype.card_fin r
       have hs : (S : Finset (Fin r)).card = n := S.prop
       omega⟩
-    letI : Subsingleton (⋀[A]^n (Fin r →₀ A)) := ⟨fun x y ↦
+    have : Subsingleton (⋀[A]^n (Fin r →₀ A)) := ⟨fun x y ↦
       B.repr.injective (Subsingleton.elim _ _)⟩
     change IsZero (ModuleCat.of A (⋀[A]^n (Fin r →₀ A)))
     exact ModuleCat.isZero_of_subsingleton _

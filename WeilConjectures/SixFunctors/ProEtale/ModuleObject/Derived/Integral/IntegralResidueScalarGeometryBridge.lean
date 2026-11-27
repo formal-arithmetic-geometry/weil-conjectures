@@ -39,13 +39,12 @@ attribute [local irreducible] Functor.leftDerivedFunctor Functor.mapDerivedCateg
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
-set_option linter.unusedVariables false in
 /-- The residue tensor square on a K-flat complex whose pullback is K-flat. -/
 theorem integralResidue_tensorGeometry_component {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hFlat : (f)^*⟦integralCoeff ℓ E⟧.PreservesFlat)
     (P : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj (integralCoeff ℓ E) Y)) (.up ℤ))
-    (hP : (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat P)
+    (_hP : (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat P)
     (hFP : ((f)^*⟦integralCoeff ℓ E⟧).kFlatMap P) :
     letI := residueExchangePullMonoidal ℓ E f
       (residueExchangeOrdinaryPullMonoidal ℓ E f) hFlat

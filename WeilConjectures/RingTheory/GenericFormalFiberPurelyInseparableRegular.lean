@@ -27,7 +27,6 @@ power-series model is regular.
 
 universe u
 
-set_option linter.style.haveILetI false in
 /-- Every finite purely inseparable base change of the generic formal fibre is regular. -/
 theorem isRegular_genericFormalFiber_after_finite_purelyInseparable
     (A : Type u) [CommRing A] [IsDomain A] [IsRegularLocalRing A]
@@ -49,16 +48,16 @@ theorem isRegular_genericFormalFiber_after_finite_purelyInseparable
         (TensorProduct ((⊥ : Ideal A).ResidueField) k' ((⊥ : Ideal A).Fiber C)) := by
   dsimp
   intro k' instField instAlg instFinite instPI
-  letI := instField
-  letI := instAlg
-  letI := instFinite
-  letI := instPI
+  let := instField
+  let := instAlg
+  have := instFinite
+  have := instPI
   rcases hmodel with h | h
   · rcases h with ⟨k, hk, d, e⟩
-    letI := hk
+    let := hk
     exact isRegular_genericFormalFiber_fieldModel A k d e P k'
   · rcases h with ⟨Λ, hΛ, d, p, hc, e⟩
-    letI := hΛ
+    let := hΛ
     exact isRegular_genericFormalFiber_cohenModel A Λ d p hc e P k' 
 
 end
