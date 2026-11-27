@@ -141,6 +141,7 @@ import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientGeneral
 import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarStages
 import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationLift
 import WeilConjectures.AlgebraicGeometry.Pbc.PbcDerivedExtendIdComplex
+import WeilConjectures.AlgebraicGeometry.Rational.RationalModuleRealizationMap
 
 /-! # Balanced localization of finite coefficient extensions
 
@@ -522,19 +523,6 @@ def rationalBalancedComponent
     (pbcDerivedExtend (rationalBalancedCoefficient l E F i X)).mapIso
       (eqToIso (sE.objects K.obj)).symm
 
-
-/-- A realization sends the localization of an integral morphism to the derived scalar
-extension of the morphism. -/
-theorem RationalModuleRealization.map_rationalization {E : Type u} [Field E]
-    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (s : RationalModuleRealization l E X)
-    {K L : PbcBoundedConstructibleComplete X (pbcIntegralDatum l E)} (f : K ⟶ L) :
-    s.J.map ((pbcRationalization X (pbcIntegralDatum l E) (pbcUniformizer l E)).map f) =
-      eqToHom (s.objects K) ≫
-        (pbcDerivedExtend (s.integralIso.hom ≫ s.inclusion)).map f.hom ≫
-          eqToHom (s.objects L).symm := by
-  have h := s.fractions K L f 0
-  simp only [pow_zero, inv_one, map_one, one_smul] at h
-  exact h
 /-- The s and t composition comparisons are natural on the entire derived category. -/
 theorem rationalBalancedDerivedNaturality {W : Scheme.{u}}
     {R S B : Sheaf (ProEt.topology W) CommRingCat.{u + 1}}
@@ -554,6 +542,7 @@ theorem rationalBalancedDerivedNaturality {W : Scheme.{u}}
       Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
   rw [he, he]
   exact e.hom.naturality f
+
 /-- The specified components are natural for every raw fraction morphism. -/
 theorem rationalBalancedComponent_naturality
     {K L : PbcRationalDerivedCategory l E X Fact.out Fact.out} (f : K ⟶ L) :

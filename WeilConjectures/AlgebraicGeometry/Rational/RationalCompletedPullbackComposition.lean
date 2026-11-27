@@ -238,6 +238,8 @@ theorem rationalCompletedPullbackComposition (g : Y ⟶ X) (h : Z ⟶ Y)
     simp only [Functor.comp_map, Functor.map_comp] at hn
     erw [reassoc_of% hn]
     rfl
+  refine ⟨NatIso.ofComponents c hc, fun K ↦ rfl, ?_⟩
+  ext K
   sorry
 
 end AlgebraicGeometry.Scheme
