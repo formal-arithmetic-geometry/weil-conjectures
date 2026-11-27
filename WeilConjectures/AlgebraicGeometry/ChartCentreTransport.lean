@@ -16,6 +16,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 import all WeilConjectures.AlgebraicGeometry.ChartNormalDifferential.ChartNormalDifferential
+import all WeilConjectures.AlgebraicGeometry.ConormalGradedAlgebra.ConormalAlgebraFlatBaseChange
+import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 
 /-!
 # Centred diagonal neighbourhood and its differential under an étale source map
@@ -43,6 +45,105 @@ attribute [local irreducible] Scheme.Modules.tensorPullback
 namespace AlgebraicGeometry
 
 attribute [local instance] ChartNormalDifferential.Comparison.closed
+
+open Scheme.Modules ConormalGradedAlgebra in
+/-- The canonical degree-one conormal comparison along an open neighbourhood. -/
+private theorem restrictionPiece {U P : Scheme.{u}} (O : P.Opens) (Δ : U ⟶ P)
+    (δ : U ⟶ O.toScheme) [IsClosedImmersion Δ] [IsClosedImmersion δ]
+    (hδ : δ ≫ O.ι = 𝟙 U ≫ Δ) (hcart : IsLimit (PullbackCone.mk δ (𝟙 U) hδ)) :
+    ∃ ε : piece Δ 1 ≅ piece δ 1, ∀ (V : U.Opens) (x : (piece Δ 1).val.obj (op V)),
+      ε.hom.app V x = pullbackSection (𝟙 U) _ _ (Classical.choose ((Classical.choose_spec
+        (closedImmersion_conormal_functorial δ Δ O.ι (𝟙 U) hδ).2).2)) V x := by
+  let D := Classical.choose ((Classical.choose_spec
+    (closedImmersion_conormal_functorial δ Δ O.ι (𝟙 U) hδ).2).2)
+  have hN := normalizedPieceComparison δ Δ O.ι (𝟙 U) hδ hcart
+    (presentation δ) (presentation Δ)
+  have hiso := hN.choose_spec.2.2.1
+  have hone := hN.choose_spec.2.2.2.2
+  have : IsIso D := by
+    have h1 := hiso inferInstance 1
+    rw [hone] at h1
+    exact h1
+  let adj := Classical.choose (exists_tensorPullbackAdjunction (𝟙 U))
+  have : (tensorPullback (𝟙 U)).IsEquivalence :=
+    Functor.isEquivalence_of_iso (Classical.choice (nonempty_tensorPullbackId U)).symm
+  let e := adj.unit.app (piece Δ 1) ≫ (pushforward (𝟙 U)).map D ≫
+    (pushforwardId U).hom.app _
+  have : IsIso e := by infer_instance
+  exact ⟨asIso e, fun V x ↦ rfl⟩
+
+open Scheme.Modules ConormalGradedAlgebra in
+/-- Representatives are compatible with restriction of ideal-power sections. -/
+private theorem representative_restrict {X Z : Scheme.{u}} (i : Z ⟶ X)
+    [IsClosedImmersion i] (n : ℕ) {T T' : X.Opens} (hle : T' ≤ T)
+    (a : (power i n).val.obj (op T)) (V : Z.Opens) (hV : V ≤ i ⁻¹ᵁ T') :
+    (piece i n).presheaf.map (homOfLE (hV.trans (i.preimage_mono hle))).op
+        (representative i n T a) =
+      (piece i n).presheaf.map (homOfLE hV).op
+        (representative i n T' ((power i n).presheaf.map (homOfLE hle).op a)) := by
+  have hn := Hom.app_presheaf_map ((Classical.choose
+    (exists_tensorPullbackAdjunction i)).unit.app (power i n)) (homOfLE hle) a
+  change _ = (piece i n).presheaf.map (homOfLE hV).op
+    (((Classical.choose (exists_tensorPullbackAdjunction i)).unit.app (power i n)).app T'
+      ((power i n).presheaf.map (homOfLE hle).op a))
+  erw [hn]
+  change _ = ((piece i n).presheaf.map (homOfLE (i.preimage_mono hle)).op ≫
+    (piece i n).presheaf.map (homOfLE hV).op) (representative i n T a)
+  rw [← Functor.map_comp]
+  rfl
+
+open Scheme.Modules ConormalGradedAlgebra in
+/-- The difference identification restricts to an open neighbourhood of the diagonal. -/
+private theorem restrictionDifference {U Y : Scheme.{u}} (h : U ⟶ Y) [IsSeparated h]
+    (O : (pullback h h).Opens) (δ : U ⟶ O.toScheme) [IsClosedImmersion δ]
+    (hδ : δ ≫ O.ι = 𝟙 U ≫ pullback.diagonal h)
+    (ω : h.relativeDifferentials ≅ piece (pullback.diagonal h) 1)
+    (hω : IsDifferenceIdentification h (pullback.diagonal h)
+      (pullback.fst h h) (pullback.snd h h) ω)
+    (ε : piece (pullback.diagonal h) 1 ≅ piece δ 1)
+    (hε : ∀ (V : U.Opens) (x : (piece (pullback.diagonal h) 1).val.obj (op V)),
+      ε.hom.app V x = pullbackSection (𝟙 U) _ _ (Classical.choose ((Classical.choose_spec
+        (closedImmersion_conormal_functorial δ (pullback.diagonal h) O.ι (𝟙 U) hδ).2).2))
+          V x) :
+    IsDifferenceIdentification h δ (O.ι ≫ pullback.fst h h) (O.ι ≫ pullback.snd h h)
+      (ω ≪≫ ε) := by
+  intro V T h₁ h₂ hV a s hs
+  let Δ := pullback.diagonal h
+  let W := (pullback.fst h h) ⁻¹ᵁ V ⊓ (pullback.snd h h) ⁻¹ᵁ V
+  have hU : V ≤ Δ ⁻¹ᵁ W := by
+    simp only [W, Δ, Scheme.Hom.preimage_inf, ← Scheme.Hom.comp_preimage,
+      pullback.diagonal_fst, pullback.diagonal_snd, Scheme.Hom.id_preimage, inf_idem, le_refl]
+  obtain ⟨sU, hsU⟩ := differenceRepresentative h V a
+  have hd := hω V W inf_le_left inf_le_right hU a sU hsU
+  have hδW : V ≤ δ ⁻¹ᵁ (O.ι ⁻¹ᵁ W) := by
+    rw [← Scheme.Hom.comp_preimage, hδ, Category.id_comp]
+    exact hU
+  obtain ⟨bU, hbU, hcU⟩ := conormalRepresentativeLocal δ Δ O.ι (𝟙 U) hδ _ rfl W sU V
+    hδW hU
+  let T₀ := T ⊓ O.ι ⁻¹ᵁ W
+  have hV₀ : V ≤ δ ⁻¹ᵁ T₀ := by
+    simp only [T₀, Scheme.Hom.preimage_inf]
+    exact le_inf hV hδW
+  have hres : (power δ 1).presheaf.map (homOfLE (inf_le_right : T₀ ≤ O.ι ⁻¹ᵁ W)).op bU =
+      (power δ 1).presheaf.map (homOfLE (inf_le_left : T₀ ≤ T)).op s := by
+    apply δ.ker.injective_toModulesι_app T₀
+    change (powerInclusion δ 1).app T₀ _ = (powerInclusion δ 1).app T₀ _
+    rw [Hom.app_presheaf_map, Hom.app_presheaf_map]
+    change O.toScheme.presheaf.map _ ((powerInclusion δ 1).app _ bU) =
+      O.toScheme.presheaf.map _ ((powerInclusion δ 1).val.app _ s)
+    rw [hbU, hs, hsU, map_sub, map_sub, map_sub]
+    congr 1
+    · rw [← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply,
+        ← ConcreteCategory.comp_apply, Scheme.Hom.app_eq_appLE, Scheme.Hom.appLE_comp_appLE_assoc,
+        Scheme.Hom.appLE_map, Scheme.Hom.appLE_map]
+    · rw [← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply,
+        ← ConcreteCategory.comp_apply, Scheme.Hom.app_eq_appLE, Scheme.Hom.appLE_comp_appLE_assoc,
+        Scheme.Hom.appLE_map, Scheme.Hom.appLE_map]
+  have hL : (ω ≪≫ ε).hom.app V (h.relativeDifferentialsDerivation.d a) =
+      ε.hom.app V (ω.hom.app V (h.relativeDifferentialsDerivation.d a)) := rfl
+  erw [hL, hd, Hom.app_presheaf_map, hε, hcU,
+    representative_restrict δ 1 (inf_le_right : T₀ ≤ O.ι ⁻¹ᵁ W) bU V hV₀,
+    representative_restrict δ 1 (inf_le_left : T₀ ≤ T) s V hV₀, hres]
 
 private theorem restrictionIdentification {U A Y : Scheme.{u}} {d : ℕ} {p : A ⟶ Y}
     {e : U ⟶ A} [IsSeparated p] [IsSeparated (e ≫ p)] [Smooth p] [Smooth (e ≫ p)]
