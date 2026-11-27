@@ -523,30 +523,6 @@ def rationalBalancedComponent
       (eqToIso (sE.objects K.obj)).symm
 
 
-/-- A natural family on a raw scalar localization is natural as soon as it is natural on the
-localizations of integral morphisms. -/
-private theorem rationalBalanced_naturality_of_integral
-    {R : Type*} [CommRing R] {C : Type*} [Category C] [Preadditive C] [Linear R C] {p : R}
-    {D : Type*} [Category D] (B B' : ScalarLocalization R C p ⥤ D)
-    (c : ∀ K, B.obj K ⟶ B'.obj K)
-    (h : ∀ (K L : ScalarLocalization R C p) (g : K.obj ⟶ L.obj),
-      B.map ((ScalarLocalization.localization R C p).map g : K ⟶ L) ≫ c L =
-        c K ≫ B'.map ((ScalarLocalization.localization R C p).map g : K ⟶ L))
-    {K L : ScalarLocalization R C p} (f : K ⟶ L) :
-    B.map f ≫ c L = c K ≫ B'.map f := by
-  obtain ⟨n, g, hg⟩ := ScalarLocalization.exists_pow_smul_eq_map f
-  have hs : ((ScalarLocalization.localization R C p).map (p ^ n • 𝟙 K.obj) : K ⟶ K) ≫ f =
-      (ScalarLocalization.localization R C p).map g := by
-    rw [Functor.map_smul, CategoryTheory.Functor.map_id]
-    erw [Linear.smul_comp, Category.id_comp]
-    exact hg
-  have := ScalarLocalization.isIso_map_pow_smul_id (R := R) (C := C) (p := p) n K.obj
-  have h1 := h K L g
-  have h2 := h K K (p ^ n • 𝟙 K.obj)
-  apply (cancel_epi (B.map
-    ((ScalarLocalization.localization R C p).map (p ^ n • 𝟙 K.obj) : K ⟶ K))).1
-  rw [← B.map_comp_assoc, hs, h1, ← hs, B'.map_comp, reassoc_of% h2]
-
 /-- A realization sends the localization of an integral morphism to the derived scalar
 extension of the morphism. -/
 theorem RationalModuleRealization.map_rationalization {E : Type u} [Field E]
@@ -585,7 +561,7 @@ theorem rationalBalancedComponent_naturality
         (rationalBalancedComponent l E F i X sE sF L).hom =
       (rationalBalancedComponent l E F i X sE sF K).hom ≫
         (sE.J ⋙ pbcDerivedExtend (rationalBalancedCoefficient l E F i X)).map f := by
-  refine rationalBalanced_naturality_of_integral
+  refine ScalarLocalization.naturality_of_localization
     (pbcRationalScalarExtension l E F i X Fact.out Fact.out ⋙ sF.J)
     (sE.J ⋙ pbcDerivedExtend (rationalBalancedCoefficient l E F i X))
     (fun K ↦ (rationalBalancedComponent l E F i X sE sF K).hom) (fun K L g ↦ ?_) f
@@ -671,11 +647,13 @@ private theorem rationalBalancedTower_derived
           ((pbcDerivedExtend (sE.integralIso.hom ≫ sE.inclusion)).obj A)).hom := by
   have hω : ((sE.integralIso.hom ≫ sE.inclusion) ≫ rationalBalancedCoefficient l E F i X) ≫
       rationalBalancedCoefficient l F G j X =
-        (sE.integralIso.hom ≫ sE.inclusion) ≫ rationalBalancedCoefficient l E G (j.comp i) X := by
+        (sE.integralIso.hom ≫ sE.inclusion) ≫
+          rationalBalancedCoefficient l E G (j.comp i) X := by
     rw [Category.assoc, rationalBalancedCoefficient_comp]
   have hn : pbcScalarCoefficientMap l E F i X ≫
       (sF.integralIso.hom ≫ sF.inclusion) ≫ rationalBalancedCoefficient l F G j X =
-        (sE.integralIso.hom ≫ sE.inclusion) ≫ rationalBalancedCoefficient l E G (j.comp i) X := by
+        (sE.integralIso.hom ≫ sE.inclusion) ≫
+          rationalBalancedCoefficient l E G (j.comp i) X := by
     rw [← Category.assoc, rationalBalancedCoefficient_square, hω]
   have h₁ := pbcReductionNormalization_assoc (sE.integralIso.hom ≫ sE.inclusion)
     (rationalBalancedCoefficient l E F i X) (rationalBalancedCoefficient l F G j X) _ _ _ rfl

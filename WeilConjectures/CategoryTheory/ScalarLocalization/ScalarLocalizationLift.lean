@@ -20,6 +20,8 @@ natural isomorphism between such restrictions extends uniquely.
 * `ScalarLocalization.exists_pow_smul_eq_map`: every fraction is integral after scaling.
 * `ScalarLocalization.liftNatIso`: extension of isomorphisms of restrictions.
 * `ScalarLocalization.functor_ext`: functors agreeing after localization are equal.
+* `ScalarLocalization.naturality_of_localization`: naturality may be checked on integral
+  morphisms.
 -/
 
 @[expose] public section
@@ -107,6 +109,27 @@ theorem liftNatIso_hom_app (B B' : ScalarLocalization R C p ⥤ D)
     (c : localization R C p ⋙ B ≅ localization R C p ⋙ B') (K : ScalarLocalization R C p) :
     (liftNatIso B B' c).hom.app K = c.hom.app K.obj :=
   rfl
+
+/-- A family of morphisms between two functors out of a raw scalar localization is natural as
+soon as it is natural with respect to localizations of integral morphisms. -/
+theorem naturality_of_localization (B B' : ScalarLocalization R C p ⥤ D)
+    (c : ∀ K, B.obj K ⟶ B'.obj K)
+    (h : ∀ (K L : ScalarLocalization R C p) (g : K.obj ⟶ L.obj),
+      B.map ((localization R C p).map g : K ⟶ L) ≫ c L =
+        c K ≫ B'.map ((localization R C p).map g : K ⟶ L))
+    {K L : ScalarLocalization R C p} (f : K ⟶ L) :
+    B.map f ≫ c L = c K ≫ B'.map f := by
+  obtain ⟨n, g, hg⟩ := exists_pow_smul_eq_map f
+  have hs : ((localization R C p).map (p ^ n • 𝟙 K.obj) : K ⟶ K) ≫ f =
+      (localization R C p).map g := by
+    rw [Functor.map_smul, CategoryTheory.Functor.map_id]
+    erw [Linear.smul_comp, Category.id_comp]
+    exact hg
+  have := isIso_map_pow_smul_id (R := R) (C := C) (p := p) n K.obj
+  have h1 := h K L g
+  have h2 := h K K (p ^ n • 𝟙 K.obj)
+  apply (cancel_epi (B.map ((localization R C p).map (p ^ n • 𝟙 K.obj) : K ⟶ K))).1
+  rw [← B.map_comp_assoc, hs, h1, ← hs, B'.map_comp, reassoc_of% h2]
 
 /-- Functors out of a raw scalar localization are determined by their restrictions along the
 localization functor; no additivity is required. -/
