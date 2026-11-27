@@ -1106,6 +1106,7 @@ public import WeilConjectures.Algebra.Homology.SubterminalLocal.SubterminalModul
 public import WeilConjectures.Algebra.Homology.SuccessiveDerivedQuotientData
 public import WeilConjectures.Algebra.Homology.SuccessiveDerivedQuotientNormalization
 public import WeilConjectures.Algebra.Homology.SurjectiveModuleComplexTowerLimit
+public import WeilConjectures.Algebra.Homology.System.DerivedExtensionEvaluationPasting
 public import WeilConjectures.Algebra.Homology.System.SystemCoproducts
 public import WeilConjectures.Algebra.Homology.System.SystemDerivedEvaluation
 public import WeilConjectures.Algebra.Homology.System.SystemDerivedSubsequence
