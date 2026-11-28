@@ -83,7 +83,7 @@ noncomputable def derivedHomMapDerivedCategoryIsoOfExactPairing [(ν^*(X)[A]).Pr
 
 end General
 
-variable {Λ : Type (u + 1)} [CommRing Λ] [IsNoetherianRing Λ] {X : Scheme.{u}}
+variable {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}}
 
 /-- For an exact pairing of `D` and `P` in `D(X_ét, Λ)` and `N` with `D ⊗ᴸ N` bounded below,
 `RHom(ν^*P, ν^*N)` is bounded below of étale origin: it is isomorphic to `ν^*(D ⊗ᴸ N)`

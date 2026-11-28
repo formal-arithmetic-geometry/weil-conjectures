@@ -64,7 +64,7 @@ open Scheme
 section General
 
 variable {R S : Type (u + 1)} [CommRing R] [CommRing S] [Algebra R S] [Module.Finite R S]
-  [Module.Free R S] [Nontrivial R] [IsNoetherianRing R] [IsNoetherianRing S] {X Y : Scheme.{u}}
+  [Module.Free R S] [Nontrivial R] {X Y : Scheme.{u}}
 
 /-- Extension of scalars along a finite free algebra `S` over a Noetherian ring `R` carries the
 projection formula for `Rf_!` over `R` to the one over `S`: this is

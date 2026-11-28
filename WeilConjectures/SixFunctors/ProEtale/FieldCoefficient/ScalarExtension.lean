@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.Sites.SheafComposeMonoidalPresheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormula
 
 /-!
 # Extension of scalars from a finite extension `E` of `ℚ_ℓ` to `ℚ̄_ℓ`

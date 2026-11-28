@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientTransition
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtension
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormula
 import WeilConjectures.AlgebraicGeometry.BoundedConstructibleTower
 import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientStrictSquare
 import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientTransitionUnit

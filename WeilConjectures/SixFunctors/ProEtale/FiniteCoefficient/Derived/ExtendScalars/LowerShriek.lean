@@ -58,7 +58,7 @@ variable (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S]
 
 section LowerShriek
 
-variable [IsNoetherianRing R] {X Y : Scheme.{u}}
+variable {X Y : Scheme.{u}}
 
 section OfCompactification
 

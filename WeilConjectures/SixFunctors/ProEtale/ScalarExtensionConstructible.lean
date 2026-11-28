@@ -11,6 +11,7 @@ public import WeilConjectures.ConstructibleSheaf.Pullback
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ExtendScalars
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtension
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormula
 
 /-!
 # Extension of scalars of flat constructible étale sheaves

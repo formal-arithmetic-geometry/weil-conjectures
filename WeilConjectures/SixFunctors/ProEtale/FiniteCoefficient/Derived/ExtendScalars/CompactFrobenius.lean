@@ -42,7 +42,7 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme
 
-variable (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S] [IsNoetherianRing R]
+variable (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S]
   {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) {g : X ⟶ X} {h : Y ⟶ Y}
   {gZ : c.Z ⟶ c.Z} {K : DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R))}
 

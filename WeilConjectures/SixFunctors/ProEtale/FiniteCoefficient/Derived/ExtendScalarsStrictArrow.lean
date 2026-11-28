@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Sites.Point.IsMonoidalW
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars
 public import WeilConjectures.CategoryTheory.DerivedCategory.StrictSquareArrowUniversal
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormula
 
 /-!
 # Universal localized arrows to derived restriction of pro-étale scalars

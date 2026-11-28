@@ -12,7 +12,10 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Reduction
 public import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeLowerStarDualizable
+public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsHom
 public import WeilConjectures.SixFunctors.Etale.Derived.ScalarExtension
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.LowerStarDualizable
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.OpenImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekBaseChange
@@ -986,7 +989,8 @@ theorem reductionCompatibility {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ) (n : 
     exists_isDerivedBaseChange_rightDerivedLowerShriek_of_isIso _ f K Kn η hη
       (isIso_rightDerivedLowerStarExtendScalarsMap_app_quotient_span_pow hϖ n _)
   projectionMap := sorry
-  derivedHom := sorry
+  derivedHom K L Kn Ln η η' hη hη' :=
+    exists_isDerivedBaseChange_derivedHom_quotient_span_pow _ hϖ n hη hη'
   rightDerivedUpperShriek := sorry
   upperShriekCounit := sorry
   upperShriekUnit := sorry
@@ -1068,6 +1072,49 @@ theorem exists_isDerivedBaseChange_leftDerivedUpperStar {X Y : Scheme.{u}} (f : 
   exact ⟨_, (coefficientUnit _ φ (Sheaf.scalarDerivedAdjunction (Scheme.ProEt.topology X) φ) _)
     |>.comp_map_iso (σ.symm.app L ≪≫ (L((f)^*[ModuleCat.{u + 1} Λ'])).mapIso e)⟩
 
+/-- The derived direct image of pro-étale sheaves commutes with derived base change along
+`R → S` at `K` as soon as the base change map `(Rf_* K) ⊗ᴸ_R S ⟶ Rf_* (K ⊗ᴸ_R S)` is an
+isomorphism: if `K'` is a derived base change of `K`, then `Rf_* K'` is a derived base change of
+`Rf_* K`. -/
+theorem exists_isDerivedBaseChange_rightDerivedLowerStar_of_isIso (R S : Type (u + 1))
+    [CommRing R] [CommRing S] [Algebra R S] {X Y : Scheme.{u}} (f : X ⟶ Y) (K : 𝐃(X, R))
+    (K' : 𝐃(X, S))
+    (η : K ⟶ (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) (algebraMap R S)).obj K')
+    (hη : Sheaf.IsDerivedBaseChange η)
+    (h : IsIso ((rightDerivedLowerStarExtendScalarsMap R S f).app K)) :
+    ∃ θ : R((f)_*[ModuleCat.{u + 1} R]).obj K ⟶
+      (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology Y) (algebraMap R S)).obj
+        (R((f)_*[ModuleCat.{u + 1} S]).obj K'),
+      Sheaf.IsDerivedBaseChange θ := by
+  obtain ⟨e⟩ := coefficientIso _ _ (leftDerivedSheafExtendScalarsAdjunction R S X) hη
+  exact ⟨_, (coefficientUnit _ _ (leftDerivedSheafExtendScalarsAdjunction R S Y) _)
+    |>.comp_map_iso (asIso ((rightDerivedLowerStarExtendScalarsMap R S f).app K) ≪≫
+      (R((f)_*[ModuleCat.{u + 1} S])).mapIso e)⟩
+
+/-- The compact-support direct image of pro-étale sheaves along a compactification `c` commutes
+with derived base change along `R → S` as soon as the base change maps
+`(Rg_* M) ⊗ᴸ_R S ⟶ Rg_* (M ⊗ᴸ_R S)` along the proper part `g` of `c` are isomorphisms: if `K'`
+is a derived base change of `K`, then `Rf_!(c) K'` is a derived base change of `Rf_!(c) K`. -/
+theorem exists_isDerivedBaseChange_rightDerivedLowerShriekOfCompactification_of_isIso
+    (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S] {X Y : Scheme.{u}}
+    {f : X ⟶ Y} (c : Compactification f) (K : 𝐃(X, R)) (K' : 𝐃(X, S))
+    (η : K ⟶ (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) (algebraMap R S)).obj K')
+    (hη : Sheaf.IsDerivedBaseChange η)
+    (h : ∀ M, IsIso ((rightDerivedLowerStarExtendScalarsMap R S c.g).app M)) :
+    ∃ θ : (Rf_!(c)[ModuleCat.{u + 1} R]).obj K ⟶
+      (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology Y) (algebraMap R S)).obj
+        ((Rf_!(c)[ModuleCat.{u + 1} S]).obj K'),
+      Sheaf.IsDerivedBaseChange θ := by
+  have := c.isOpenImmersion
+  obtain ⟨e⟩ := coefficientIso _ _ (leftDerivedSheafExtendScalarsAdjunction R S X) hη
+  have := h ((D((c.i)_!open[ModuleCat.{u + 1} R])).obj K)
+  exact ⟨_, (coefficientUnit _ _ (leftDerivedSheafExtendScalarsAdjunction R S Y) _)
+    |>.comp_map_iso (asIso ((rightDerivedLowerStarExtendScalarsMap R S c.g).app
+        ((D((c.i)_!open[ModuleCat.{u + 1} R])).obj K)) ≪≫
+      (R((c.g)_*[ModuleCat.{u + 1} S])).mapIso
+        ((openImmersionLowerShriekExtendScalarsIso R S c.i).app K ≪≫
+          (D((c.i)_!open[ModuleCat.{u + 1} S])).mapIso e))⟩
+
 section Tensor
 
 attribute [local instance high] SymmetricCategory.toBraidedCategory
@@ -1104,11 +1151,15 @@ theorem reductionCompatibility {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ) (n : 
   exists_isDerivedBaseChange X := Sheaf.exists_isDerivedBaseChange _ _
   leftDerivedUpperStar f L Ln η hη :=
     exists_isDerivedBaseChange_leftDerivedUpperStar _ f L Ln η hη
-  rightDerivedLowerShriekOfCompactification := sorry
+  rightDerivedLowerShriekOfCompactification c K Kn η hη :=
+    exists_isDerivedBaseChange_rightDerivedLowerShriekOfCompactification_of_isIso _ _ c K Kn η hη
+      (isIso_rightDerivedLowerStarExtendScalarsMap_app_quotient_span_pow hϖ n _)
   exchange := sorry
   derivedTensor K L Kn Ln η η' hη hη' :=
     exists_isDerivedBaseChange_derivedTensor _ K L Kn Ln η η' hη hη'
-  rightDerivedLowerStar := sorry
+  rightDerivedLowerStar f K Kn η hη :=
+    exists_isDerivedBaseChange_rightDerivedLowerStar_of_isIso _ _ f K Kn η hη
+      (isIso_rightDerivedLowerStarExtendScalarsMap_app_quotient_span_pow hϖ n f K)
   derivedHom := sorry
   rightDerivedUpperShriek := sorry
 

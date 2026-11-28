@@ -111,7 +111,7 @@ end
 
 section Pullback
 
-variable (R S) [IsNoetherianRing R] {Y Z : Scheme.{u}} (g : Z ⟶ Y)
+variable (R S) {Y Z : Scheme.{u}} (g : Z ⟶ Y)
 
 /-- The isomorphism `g^*(S ⊗_R -) ≅ S ⊗_R g^* -` of
 `AlgebraicGeometry.ProEtale.sheafExtendScalarsCompUpperStarIso`, on homotopy categories. -/
@@ -168,7 +168,6 @@ noncomputable def leftDerivedUpperStarSheafExtendScalarsCounit :
     Functor.whiskerLeft ((g)^*[ModuleCat.{u + 1} R].mapHomotopyCategory (.up ℤ))
       (sheafExtendScalars (algebraMap R S) Z).leftDerivedFunctorCounit
 
-omit [IsNoetherianRing R] in
 /-- On a complex whose pullback by `g` is K-flat, the counit of `L(S ⊗_R -)` at the pullback is an
 isomorphism. -/
 lemma isIso_leftDerivedFunctorCounit_app_mapHomotopyCategory_obj

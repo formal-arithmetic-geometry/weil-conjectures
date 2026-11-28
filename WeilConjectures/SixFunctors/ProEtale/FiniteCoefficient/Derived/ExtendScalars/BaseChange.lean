@@ -50,7 +50,7 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme
 
-variable (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S] [IsNoetherianRing R]
+variable (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S]
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
 

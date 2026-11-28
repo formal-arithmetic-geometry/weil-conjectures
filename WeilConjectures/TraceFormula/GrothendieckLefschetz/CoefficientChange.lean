@@ -40,7 +40,7 @@ open Scheme
 
 attribute [local instance] DerivedCategory.braidedCategory'
 
-variable {R : Type (u + 1)} [CommRing R] [IsNoetherianRing R] {k : Type u} [Field k]
+variable {R : Type (u + 1)} [CommRing R] {k : Type u} [Field k]
   {X : Scheme.{u}} {aX : X ⟶ Spec (.of k)} {g : X ≅ X} (c : Compactification aX)
   {gZ : c.Z ⟶ c.Z} (hi : IsPullback g.hom c.i c.i gZ) (hg : CommSq gZ c.g c.g (𝟙 _))
   (S : Type (u + 1)) [CommRing S] [Algebra R S] [Finite R] [Finite S]
