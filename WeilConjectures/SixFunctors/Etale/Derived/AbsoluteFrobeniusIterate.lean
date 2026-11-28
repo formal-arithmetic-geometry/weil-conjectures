@@ -277,6 +277,17 @@ lemma leftDerivedUpperStarComp_id_left_inv_app {S T : Scheme.{u}} (y : S ⟶ T)
   rw [← cancel_epi ((leftDerivedUpperStarComp A (𝟙 S) y y (Category.id_comp y).symm).hom.app K),
     Iso.hom_inv_id_app, leftDerivedUpperStarComp_id_left_hom_app]
 
+/-- The inverse of the composition isomorphism `L(𝟙 ≫ w)^* ≅ Lw^* ⋙ L(𝟙)^*`, for a morphism `z`
+equal to `𝟙 ≫ w`, is the identity isomorphism `L(𝟙)^* ≅ 𝟭` up to the cast. -/
+lemma leftDerivedUpperStarComp_id_left_inv_app_of_eq {S T : Scheme.{u}} {w z : S ⟶ T}
+    (hz : z = 𝟙 S ≫ w) (K : DerivedCategory (Sheaf T.smallEtaleTopology A)) :
+    (leftDerivedUpperStarComp A (𝟙 S) w z hz).inv.app K =
+      (leftDerivedUpperStarId A S).hom.app (L((w)^*[A]).obj K) ≫
+        eqToHom (by rw [hz, Category.id_comp]; rfl) := by
+  obtain rfl : z = w := hz.trans (Category.id_comp w)
+  rw [eqToHom_refl, Category.comp_id]
+  exact leftDerivedUpperStarComp_id_left_inv_app _ _ K
+
 /-- The inverse of the composition isomorphism `L(y ≫ 𝟙)^* ≅ L(𝟙)^* ⋙ Ly^*` is `Ly^*` applied to
 the identity isomorphism `L(𝟙)^* ≅ 𝟭`. -/
 lemma leftDerivedUpperStarComp_id_right_inv_app {S T : Scheme.{u}} (y : S ⟶ T)
