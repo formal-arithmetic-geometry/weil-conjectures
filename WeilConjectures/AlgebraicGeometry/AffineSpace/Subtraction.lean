@@ -162,6 +162,19 @@ set_option hygiene false in
 local notation "r₁₃" =>
   Limits.pullback.tripleProj₁₃ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)
 
+omit [Fintype n] in
+/-- The projection `r₁₃ : (x, ξ, y) ↦ (x, y)` of the triple product is the trivial bundle with
+fibre coordinate `ξ`: the square `r₁₃, ξ` over `S` is cartesian. -/
+theorem isPullback_tripleProj₁₃ :
+    IsPullback (r₁₃) (r₁₂ ≫ pr₂) (pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) ↘ S) (𝔸(n; S) ↘ S) := by
+  have hm : 𝟙 _ ≫ (pullback (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) ↘ S) = pr₁ ≫ 𝔸(n; S) ↘ S := by
+    rw [Category.id_comp]
+    exact pullback.condition.symm
+  have h := (pullback.isPullback_tripleShear_tripleProj₁₃ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)
+    (𝔸(n; S) ↘ S) hm).flip.paste_vert (IsPullback.of_hasPullback _ _).flip
+  rw [pullback.tripleShear_fst, Category.id_comp] at h
+  exact h
+
 /-- The shear `(x, ξ, y) ↦ (ξ, x - y)` pulls the standard pairing back to
 `⟨ξ, x - y⟩ = ⟨x, ξ⟩ - ⟨ξ, y⟩`. -/
 lemma tripleShear_sub_appTop_stdPairing :
@@ -191,6 +204,30 @@ lemma tripleShear_add_appTop_stdPairing :
     appTop_appTop_eq_of_comp_eq (pullback.tripleProj₁₃_snd _ _ _),
     appTop_appTop_eq_of_comp_eq (pullback.condition (f := pr₂) (g := pr₁)).symm]
   ring
+
+/-- The phase `⟨x, ξ⟩ - ⟨ξ, y⟩` on the triple product is `∑ᵢ (xᵢ - yᵢ) ξᵢ`, written through
+`r₁₃` and the fibre coordinate `ξ`. -/
+lemma appTop_stdPairing_sub_appTop_stdPairing :
+    (r₁₂).appTop (stdPairing n S) - (r₂₃).appTop (stdPairing n S) =
+      ∑ i, (r₁₃).appTop ((sub n S).appTop (coord S i)) * (r₁₂ ≫ pr₂).appTop (coord S i) := by
+  rw [← tripleShear_sub_appTop_stdPairing]
+  simp only [stdPairing, map_sum, map_mul]
+  refine Finset.sum_congr rfl fun i _ ↦ ?_
+  rw [appTop_appTop_eq_of_comp_eq (pullback.tripleShear_fst _ _ _ _),
+    appTop_appTop_eq_of_comp_eq (pullback.tripleShear_snd _ _ _ _), mul_comm,
+    Scheme.Hom.comp_appTop, CommRingCat.comp_apply]
+
+/-- The phase `⟨x, ξ⟩ + ⟨ξ, y⟩` on the triple product is `∑ᵢ (xᵢ + yᵢ) ξᵢ`, written through
+`r₁₃` and the fibre coordinate `ξ`. -/
+lemma appTop_stdPairing_add_appTop_stdPairing :
+    (r₁₂).appTop (stdPairing n S) + (r₂₃).appTop (stdPairing n S) =
+      ∑ i, (r₁₃).appTop ((add n S).appTop (coord S i)) * (r₁₂ ≫ pr₂).appTop (coord S i) := by
+  rw [← tripleShear_add_appTop_stdPairing]
+  simp only [stdPairing, map_sum, map_mul]
+  refine Finset.sum_congr rfl fun i _ ↦ ?_
+  rw [appTop_appTop_eq_of_comp_eq (pullback.tripleShear_fst _ _ _ _),
+    appTop_appTop_eq_of_comp_eq (pullback.tripleShear_snd _ _ _ _), mul_comm,
+    Scheme.Hom.comp_appTop, CommRingCat.comp_apply]
 
 end Triple
 

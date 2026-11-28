@@ -105,56 +105,6 @@ lemma nonempty_iso_rightDerivedLowerShriek_pullbackSnd_unit [Finite Λ] {X S : S
     ((asIso (rightDerivedLowerShriekBaseChangeMap Λ (IsPullback.of_hasPullback f h))).app _).symm ≪≫
     e.app _⟩
 
-variable [HasTateTwist Λ]
-
-/-- `F(T(M)[a]) ≅ T'(F M)[a]` for `F` commuting with shifts and `F ⋙ T' ≅ T ⋙ F`. -/
-private lemma nonempty_iso_obj_comp_shiftFunctor {C D : Type*} [Category C] [Category D]
-    [HasShift C ℤ] [HasShift D ℤ] (F : C ⥤ D) [F.CommShift ℤ] (TX TX' : C ⥤ C) (TY : D ⥤ D)
-    (pf : F ⋙ TY ≅ TX' ⋙ F) (e : TX' ≅ TX) (a : ℤ) (M : C) :
-    Nonempty (F.obj ((TX ⋙ shiftFunctor C a).obj M) ≅ (TY ⋙ shiftFunctor D a).obj (F.obj M)) :=
-  ⟨(F.commShiftIso a).app _ ≪≫
-    (shiftFunctor D a).mapIso (F.mapIso (e.symm.app M) ≪≫ (pf.app M).symm)⟩
-
-/-- The projection formula for a Tate twist: `Rf_!(-) (m) ≅ Rf_!(- ⊗ᴸ Lf^* Λ_Y(m))`. -/
-private lemma nonempty_iso_rightDerivedLowerShriek_comp_tateTwist [Finite Λ] {X Y : Scheme.{u}}
-    (f : X ⟶ Y) [HasCompactification f] (m : ℤ) :
-    Nonempty (R(f)_![ModuleCat.{u + 1} Λ] ⋙ tateTwist Λ Y m ≅
-      derivedTensorRight _ X ((L((f)^*[ModuleCat.{u + 1} Λ])).obj (tateObject Λ Y m)) ⋙
-        R(f)_![ModuleCat.{u + 1} Λ]) :=
-  nonempty_iso_rightDerivedLowerShriek_comp_derivedTensorRight _ f
-    (tateObject Λ Y m) (fun K ↦ hasProjectionFormula_of_finite Λ _ K _)
-
-/-- Tensoring with `Lf^* Λ_Y(m)` is the Tate twist `(m)` on `X`. -/
-private lemma nonempty_iso_derivedTensorRight_leftDerivedUpperStar_tateObject
-    {X Y : Scheme.{u}} [HasInvertibleExponent Λ X]
-    [HasInvertibleExponent Λ Y] (f : X ⟶ Y) (m : ℤ) :
-    Nonempty (derivedTensorRight _ X ((L((f)^*[ModuleCat.{u + 1} Λ])).obj (tateObject Λ Y m)) ≅
-      tateTwist Λ X m) :=
-  ⟨(derivedTensor _ X).flip.mapIso (leftDerivedUpperStarTateObjectIso f m)⟩
-
-/-- `Rf_!(M(m)[2m]) ≅ (Rf_! M)(m)[2m]`, with the twist-and-shift written as a composite. -/
-private lemma nonempty_iso_rightDerivedLowerShriek_tateTwist_comp_shiftFunctor [Finite Λ]
-    {X Y : Scheme.{u}} [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
-    (f : X ⟶ Y) [HasCompactification f] (m : ℤ)
-    (M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Nonempty ((R(f)_![ModuleCat.{u + 1} Λ]).obj
-        ((tateTwist Λ X m ⋙ shiftFunctor _ (2 * m)).obj M) ≅
-      (tateTwist Λ Y m ⋙ shiftFunctor _ (2 * m)).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj M)) := by
-  obtain ⟨pf⟩ := nonempty_iso_rightDerivedLowerShriek_comp_tateTwist Λ f m
-  obtain ⟨e⟩ := nonempty_iso_derivedTensorRight_leftDerivedUpperStar_tateObject Λ f m
-  exact nonempty_iso_obj_comp_shiftFunctor (R(f)_![ModuleCat.{u + 1} Λ]) (tateTwist Λ X m) _
-    (tateTwist Λ Y m) pf e (2 * m) M
-
-/-- Compactly supported direct image commutes with twist-and-shift,
-`Rf_!(M(m)[2m]) ≅ (Rf_! M)(m)[2m]`. -/
-lemma nonempty_iso_rightDerivedLowerShriek_twistShift [Finite Λ] {X Y : Scheme.{u}}
-    [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f]
-    (m : ℤ)
-    (M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Nonempty ((R(f)_![ModuleCat.{u + 1} Λ]).obj ((twistShift Λ X m).obj M) ≅
-      (twistShift Λ Y m).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj M)) :=
-  nonempty_iso_rightDerivedLowerShriek_tateTwist_comp_shiftFunctor Λ f m M
-
 end General
 
 section Twist
