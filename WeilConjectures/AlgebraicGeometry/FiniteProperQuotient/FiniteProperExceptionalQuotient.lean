@@ -32,6 +32,13 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryPresenta
 import WeilConjectures.CategoryTheory.RightKanExtensionCoherentShift
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AdjunctionShift
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
+import WeilConjectures.AlgebraicGeometry.Etale.Quotient.EtaleQuotientTensorProjectionProperMate
+import WeilConjectures.AlgebraicGeometry.Etale.Scalar.EtaleScalarConstantCoefficientIso
+import WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMapRightAdjointUniq
+import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsLowerStar
+import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaCoherence
+import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMapsCoherence
+import all WeilConjectures.SixFunctors.Etale.Derived.Stability.Reduction
 
 /-! # Finite proper exceptional inverse image and quotient coefficients
 
@@ -667,6 +674,243 @@ theorem scalarMate_quotient_refl {Z Y : Scheme.{u}} (p : Z ⟶ Y) (n : ℕ)
 
 end ScalarMateCoherence
 
+section ExceptionalScalarMate
+
+variable {C₁ D₁ C₂ D₂ : Type*} [Category C₁] [Category D₁] [Category C₂] [Category D₂]
+  {F₁ : C₁ ⥤ D₁} {R₁ : D₁ ⥤ C₁} {F₂ : C₂ ⥤ D₂} {R₂ : D₂ ⥤ C₂}
+  {S : C₁ ⥤ C₂} {S' : D₁ ⥤ D₂} {U : C₂ ⥤ C₁} {U' : D₂ ⥤ D₁} {T : C₁ ⥤ C₁} {T' : D₁ ⥤ D₁}
+
+/-- The restriction along `U` of the mate of `q⁻¹`, followed by the mate of a comparison
+`δ : U ⋙ F₁ ⟶ F₂ ⋙ U'`, is, through identifications `S ⋙ U ≅ T` and `S' ⋙ U' ≅ T'`, the
+transpose of the composite `F₁ T R₁ J ⟶ T' F₁ R₁ J ⟶ T' J`. -/
+private theorem map_mateEquiv_inv_comp_mateEquiv_app (adj₁ : F₁ ⊣ R₁) (adj₂ : F₂ ⊣ R₂)
+    (q : F₁ ⋙ S' ≅ S ⋙ F₂) (δ : U ⋙ F₁ ⟶ F₂ ⋙ U') (e : S ⋙ U ≅ T) (e' : S' ⋙ U' ≅ T')
+    (J : D₁) :
+    U.map ((mateEquiv adj₁ adj₂ (.mk _ _ _ _ q.inv)).app J) ≫
+        (mateEquiv adj₂ adj₁ (.mk _ _ _ _ δ)).app (S'.obj J) =
+      e.hom.app (R₁.obj J) ≫ adj₁.homEquiv _ _ (F₁.map (e.inv.app (R₁.obj J)) ≫
+        δ.app (S.obj (R₁.obj J)) ≫ U'.map (q.inv.app (R₁.obj J)) ≫
+        e'.hom.app (F₁.obj (R₁.obj J)) ≫ T'.map (adj₁.counit.app J)) ≫
+        R₁.map (e'.inv.app J) := by
+  rw [← adj₁.homEquiv_naturality_right, ← adj₁.homEquiv_naturality_left]
+  apply (adj₁.homEquiv _ _).symm.injective
+  erw [Equiv.symm_apply_apply]
+  rw [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  have c1 := mateEquiv_counit adj₂ adj₁ (.mk _ _ _ _ δ) (S'.obj J)
+  have c2 := mateEquiv_counit adj₁ adj₂ (.mk _ _ _ _ q.inv) J
+  dsimp only [TwoSquare.mk, Functor.comp_obj] at c1 c2
+  rw [c1]
+  have hn := δ.naturality ((mateEquiv adj₁ adj₂ (.mk _ _ _ _ q.inv)).app J)
+  dsimp only [Functor.comp_map, Functor.comp_obj] at hn
+  rw [reassoc_of% hn, ← U'.map_comp, c2]
+  have he := e'.hom.naturality (adj₁.counit.app J)
+  dsimp only [Functor.comp_map, Functor.comp_obj] at he
+  simp only [← F₁.map_comp_assoc, Iso.hom_inv_id_app, Functor.comp_obj, F₁.map_id,
+    Category.id_comp, Category.assoc, U'.map_comp]
+  rw [← reassoc_of% he]
+  erw [Iso.hom_inv_id_app, Category.comp_id]
+
+/-- Let `U` reflect isomorphisms and let `δ` be the transpose of the comparison `q` along
+`S ⊣ U` and `S' ⊣ U'`. Then the mate of `q⁻¹` is invertible at `J` as soon as the
+transpose of `P⁻¹` followed by `T'` of the counit is, where `P` identifies, up to the
+isomorphism `g`, the restriction of `q` through `S ⋙ U ≅ T` and `S' ⋙ U' ≅ T'`. -/
+private theorem isIso_mateEquiv_inv_app_of_restrict (adj₁ : F₁ ⊣ R₁) (adj₂ : F₂ ⊣ R₂)
+    (aS : S ⊣ U) (aS' : S' ⊣ U') [U.ReflectsIsomorphisms] (q : F₁ ⋙ S' ≅ S ⋙ F₂)
+    (δ : U ⋙ F₁ ≅ F₂ ⋙ U') {α : F₁ ⋙ S' ⟶ S ⋙ F₂} (hqα : q.hom = α)
+    (hδ : mateEquiv aS aS' (.mk _ _ _ _ α) = δ.hom) {β : F₂ ⋙ U' ⟶ U ⋙ F₁}
+    (hδβ : δ.inv = β) (e : S ⋙ U ≅ T) (e' : S' ⋙ U' ≅ T') (J : D₁) {M : C₁}
+    (P : T'.obj (F₁.obj (R₁.obj J)) ⟶ F₁.obj M) [hPi : IsIso P] (g : M ≅ T.obj (R₁.obj J))
+    (hP : U'.map (α.app (R₁.obj J)) ≫ β.app (S.obj (R₁.obj J)) =
+      e'.hom.app (F₁.obj (R₁.obj J)) ≫ P ≫ F₁.map (g.hom ≫ e.inv.app (R₁.obj J)))
+    (h : IsIso (adj₁.homEquiv _ _ (inv P ≫ T'.map (adj₁.counit.app J)))) :
+    IsIso ((mateEquiv adj₁ adj₂ (.mk _ _ _ _ q.inv)).app J) := by
+  rw [← hqα] at hδ hP
+  rw [← hδβ] at hP
+  have hm : IsIso (mateEquiv adj₂ adj₁ (.mk _ _ _ _ δ.hom)) := by
+    rw [← hδ]
+    erw [iterated_mateEquiv_conjugateEquiv]
+    infer_instance
+  have hk : F₁.map (e.inv.app (R₁.obj J)) ≫ δ.hom.app (S.obj (R₁.obj J)) ≫
+      U'.map (q.inv.app (R₁.obj J)) ≫ e'.hom.app (F₁.obj (R₁.obj J)) =
+      F₁.map g.inv ≫ inv P := by
+    rw [← cancel_mono P]
+    simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+    rw [← cancel_mono (F₁.map (g.hom ≫ e.inv.app (R₁.obj J)))]
+    rw [← cancel_epi (F₁.map (e.hom.app (R₁.obj J)))]
+    simp only [Category.assoc, ← hP]
+    simp [← F₁.map_comp_assoc, ← U'.map_comp_assoc]
+  have hU := map_mateEquiv_inv_comp_mateEquiv_app adj₁ adj₂ q δ.hom e e' J
+  rw [reassoc_of% hk, adj₁.homEquiv_naturality_left] at hU
+  have : IsIso (U.map ((mateEquiv adj₁ adj₂ (.mk _ _ _ _ q.inv)).app J) ≫
+      (mateEquiv adj₂ adj₁ (.mk _ _ _ _ δ.hom)).app (S'.obj J)) := by
+    rw [hU]
+    infer_instance
+  have : IsIso (U.map ((mateEquiv adj₁ adj₂ (.mk _ _ _ _ q.inv)).app J)) :=
+    IsIso.of_isIso_comp_right _ ((mateEquiv adj₂ adj₁ (.mk _ _ _ _ δ.hom)).app (S'.obj J))
+  exact isIso_of_reflects_iso _ U
+
+end ExceptionalScalarMate
+
+section ProjectionTensorMap
+
+open MonoidalCategory
+
+variable {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
+  {F : D ⥤ C} {L L' : C ⥤ D} {R : D ⥤ C}
+
+/-- The tensor map of an adjunction is unchanged when its left adjoint is replaced by an
+isomorphic one whose projection map corresponds. -/
+private theorem projectionTensorMap_ofNatIsoLeft (adj : L ⊣ R) (i : L ≅ L')
+    (π : ∀ (M : C) (N : D), L.obj M ⊗ N ⟶ L.obj (M ⊗ F.obj N)) [hπi : ∀ M N, IsIso (π M N)]
+    (π' : ∀ (M : C) (N : D), L'.obj M ⊗ N ⟶ L'.obj (M ⊗ F.obj N))
+    [hπi' : ∀ M N, IsIso (π' M N)]
+    (h : ∀ M N, π M N ≫ i.hom.app (M ⊗ F.obj N) = i.hom.app M ▷ N ≫ π' M N) (M N : D) :
+    (adj.ofNatIsoLeft i).projectionTensorMap π' M N = adj.projectionTensorMap π M N := by
+  rw [Adjunction.projectionTensorMap, Adjunction.homEquiv_ofNatIsoLeft_apply,
+    Adjunction.projectionTensorMap]
+  congr 1
+  have h' : i.hom.app (R.obj M ⊗ F.obj N) ≫ inv (π' (R.obj M) N) =
+      inv (π (R.obj M) N) ≫ i.hom.app (R.obj M) ▷ N := by
+    rw [IsIso.eq_inv_comp, reassoc_of% (h (R.obj M) N), IsIso.hom_inv_id, Category.comp_id]
+  rw [reassoc_of% h', Adjunction.ofNatIsoLeft_counit, NatTrans.comp_app,
+    Functor.whiskerLeft_app, comp_whiskerRight, ← comp_whiskerRight_assoc, Iso.hom_inv_id_app,
+    id_whiskerRight, Category.id_comp]
+
+/-- The tensor map of `L ⊣ R` is invertible if that of another right adjoint of `L` is. -/
+private theorem isIso_projectionTensorMap_of_adjunction {R' : D ⥤ C} (adj : L ⊣ R)
+    (adj' : L ⊣ R') (π : ∀ (M : C) (N : D), L.obj M ⊗ N ⟶ L.obj (M ⊗ F.obj N))
+    [hπi : ∀ M N, IsIso (π M N)]
+    (hπ : ∀ {M M' : C} (φ : M ⟶ M') (N : D), L.map φ ▷ N ≫ π M' N = π M N ≫ L.map (φ ▷ F.obj N))
+    (M N : D) (h : IsIso (adj'.projectionTensorMap π M N)) :
+    IsIso (adj.projectionTensorMap π M N) :=
+  (Adjunction.isIso_projectionTensorMap_iff_of_adjunction π adj adj' hπ M N).2 h
+
+end ProjectionTensorMap
+
+section DirectImageTensorMap
+
+open MonoidalCategory
+
+variable {A : Type*} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] [Etale.UpperStarPreservesFlat A]
+  {FC : A → A → Type (u + 1)} {CC : A → Type (u + 1)}
+  [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+  [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+
+/-- Let `i : Rf_! ≅ Rf_*` be compatible with the projection maps. For a right adjoint `G` of
+`Rf_*`, the transpose of the inverse of the projection map of `Rf_*` followed by the counit,
+`G M ⊗ᴸ Lf^* N ⟶ G (M ⊗ᴸ N)`, is invertible as soon as the tensor map of a right adjoint of
+`Rf_!` is. -/
+private theorem isIso_homEquiv_inv_rightDerivedLowerStarProjectionMap {X Y : Scheme.{u}}
+    (f : X ⟶ Y) [HasCompactification f] [IsIso (projectionMap A f)]
+    [hP : ∀ (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+      (N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)),
+      IsIso (((rightDerivedLowerStarProjectionMap A f).app M).app N)]
+    (i : R(f)_![A] ≅ R((f)_*[A]))
+    (hi : ∀ (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+      (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)),
+      ((projectionMap A f).app K).app L ≫
+        i.hom.app (((-⊗ᴸ-(X)[A]).obj K).obj (L((f)^*[A]).obj L)) =
+      ((-⊗ᴸ-(Y)[A]).map (i.hom.app K)).app L ≫
+        ((rightDerivedLowerStarProjectionMap A f).app K).app L)
+    {G G' : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A) ⥤
+      _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (adj : R((f)_*[A]) ⊣ G) (adj' : R(f)_![A] ⊣ G')
+    (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A))
+    [IsIso (lowerShriekRightAdjointTensorMap adj' M N)] :
+    IsIso (adj.homEquiv _ _
+      (@inv _ _ _ _ (((rightDerivedLowerStarProjectionMap A f).app (G.obj M)).app N) (hP _ _) ≫
+        ((-⊗ᴸ-(Y)[A]).map (adj.counit.app M)).app N)) := by
+  have hπ₁ (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+      (N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+      IsIso (((projectionMap A f).app M).app N) := by
+    have := NatIso.isIso_app_of_isIso (projectionMap A f) M
+    exact NatIso.isIso_app_of_isIso _ N
+  have hπ {M M' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (φ : M ⟶ M')
+      (N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+      (R((f)_*[A])).map φ ▷ N ≫ ((rightDerivedLowerStarProjectionMap A f).app M').app N =
+        ((rightDerivedLowerStarProjectionMap A f).app M).app N ≫
+          (R((f)_*[A])).map (φ ▷ (L((f)^*[A])).obj N) :=
+    NatTrans.congr_app ((rightDerivedLowerStarProjectionMap A f).naturality φ) N
+  have h := projectionTensorMap_ofNatIsoLeft adj' i
+    (fun K L ↦ ((projectionMap A f).app K).app L) (hπi := hπ₁)
+    (fun K L ↦ ((rightDerivedLowerStarProjectionMap A f).app K).app L) (hπi' := hP) hi M N
+  exact isIso_projectionTensorMap_of_adjunction adj (adj'.ofNatIsoLeft i)
+    (fun K L ↦ ((rightDerivedLowerStarProjectionMap A f).app K).app L) (hπi := hP) hπ
+    M N (by rwa [h])
+
+end DirectImageTensorMap
+
+/-- For a surjective ring map `φ : A →+* B`, the `A`-module `A ⧸ ker φ` is isomorphic to `B`
+with scalars restricted along `φ`. -/
+private def quotientKerModuleIso {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
+    (hs : Function.Surjective φ) :
+    ModuleCat.of A (A ⧸ RingHom.ker φ) ≅ (ModuleCat.restrictScalars φ).obj (ModuleCat.of B B) :=
+  LinearEquiv.toModuleIso (X₂ := ((ModuleCat.restrictScalars φ).obj (ModuleCat.of B B)))
+    (m₂ := ((ModuleCat.restrictScalars φ).obj (ModuleCat.of B B)).isModule)
+    { (RingHom.quotientKerEquivOfSurjective hs).toAddEquiv with
+      map_smul' := fun a x ↦ by
+        obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
+        exact (map_mul (RingHom.quotientKerEquivOfSurjective hs) (Ideal.Quotient.mk _ a)
+          (Ideal.Quotient.mk _ x)).trans
+          (congrArg (· * _) (RingHom.quotientKerEquivOfSurjective_apply_mk hs a)) }
+
+/-- Let `φ : A →+* B` be a surjective map of finite coefficient rings whose exponent is
+invertible on a field `k`, and `p` a proper morphism of separated finite type `k`-schemes.
+For right adjoints of `Rp_*`, the mate of the inverse of the scalar mate of `p` is invertible
+on constructible complexes of finite Tor amplitude. -/
+private theorem isIso_mateEquiv_inv_scalarMate_app {A B : Type (u + 1)} [CommRing A]
+    [CommRing B] [Finite A] (φ : A →+* B) (hφ : Function.Surjective φ) (k : Type u) [Field k]
+    [HasInvertibleExponent A (Spec (.of k))] {Z Y : Scheme.{u}} (p : Z ⟶ Y)
+    [Z.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+    [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+    [IsSeparated (Z ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]
+    [p.IsOver (Spec (.of k))] [IsProper p]
+    {GA : DerivedCategoryModule A Y ⥤ DerivedCategoryModule A Z}
+    {GB : DerivedCategoryModule B Y ⥤ DerivedCategoryModule B Z}
+    (adjA : R(lowerStar (ModuleCat.{u + 1} A) p) ⊣ GA)
+    (adjB : R(lowerStar (ModuleCat.{u + 1} B) p) ⊣ GB)
+    (q : R(lowerStar (ModuleCat.{u + 1} A) p) ⋙ scalarExtension φ Y ≅
+      scalarExtension φ Z ⋙ R(lowerStar (ModuleCat.{u + 1} B) p))
+    (hq : q.hom = scalarMate φ p) (L : DerivedCategoryModule A Y)
+    (hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) Y L) :
+    IsIso ((mateEquiv adjA adjB (.mk _ _ _ _ q.inv)).app L) := by
+  obtain ⟨δ, hδinv, hδ⟩ := scalarMate_restrictionTranspose φ p
+  have hT := isIso_rightDerivedUpperShriekTensorMap_reductionModIdeal A (RingHom.ker φ)
+    (Z ↘ Spec (.of k)) (Y ↘ Spec (.of k)) p (comp_over p _) hL
+  have hT' := isIso_lowerShriekRightAdjointTensorMap_of_iso_right
+    (rightDerivedUpperShriekAdjunction A p) (M := L)
+    (etaleScalarConstantCoefficientIso φ Y ≪≫
+      (Functor.mapDerivedCategorySingleFunctor
+        (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)) 0).app _ ≪≫
+      (DerivedCategory.singleFunctor _ 0).mapIso
+        ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)).mapIso
+          (quotientKerModuleIso φ hφ).symm)).symm
+  have hP (M N) : IsIso (((rightDerivedLowerStarProjectionMap
+      (ModuleCat.{u + 1} A) p).app M).app N) := by
+    have := isIso_rightDerivedLowerStarProjectionMap_of_finite A p
+    have := NatIso.isIso_app_of_isIso (rightDerivedLowerStarProjectionMap
+      (ModuleCat.{u + 1} A) p) M
+    exact NatIso.isIso_app_of_isIso _ N
+  have hG := isIso_homEquiv_inv_rightDerivedLowerStarProjectionMap p (hP := hP)
+    (rightDerivedLowerShriekIsoRightDerivedLowerStar _ p)
+    (fun K L ↦ projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar _ p K L)
+    adjA (rightDerivedUpperShriekAdjunction A p) L (scalarCoefficient φ Y)
+  exact isIso_mateEquiv_inv_app_of_restrict adjA adjB
+    (Adjunction.ofIsRightAdjoint
+      (Sheaf.derivedRestrictScalars Z.smallEtaleTopology φ) : scalarExtension φ Z ⊣ _)
+    (Adjunction.ofIsRightAdjoint
+      (Sheaf.derivedRestrictScalars Y.smallEtaleTopology φ) : scalarExtension φ Y ⊣ _)
+    q δ hq hδ hδinv (scalarTensorIso φ Z) (scalarTensorIso φ Y) L
+    (((rightDerivedLowerStarProjectionMap _ p).app (GA.obj L)).app (scalarCoefficient φ Y))
+    (hPi := hP _ _)
+    (((derivedTensor _ Z).obj (GA.obj L)).mapIso (scalarCoefficientPullbackIso φ p))
+    (scalarMate_restrict_eq_projection_unbounded φ p _) hG
+
 
 variable {Z Y : Scheme.{u}} (p : Z ⟶ Y)
   (G : ∀ n : ℕ, DerivedCategoryModule (Ring l E n) Y ⥤
@@ -693,7 +937,11 @@ theorem isIso_b_app_of_ctf {m n : ℕ} (h : n ≤ m)
     [p.IsOver (Spec (.of k))] [IsProper p]
     (L : DerivedCategoryModule (Ring l E m) Y) (hL : Ctf l E Y m L) :
     IsIso ((b l E p G adj h q).app L) := by
-  sorry
+  let : Invertible (p₀ : Ring l E m) := (isUnit_natCast_of_ne l E m p₀ hl).invertible
+  have : HasInvertibleExponent (Ring l E m) (Spec (.of k)) :=
+    HasInvertibleExponent.spec_of_charP _ p₀
+  exact isIso_mateEquiv_inv_scalarMate_app (quotient l E h) (Ideal.Quotient.factor_surjective _) k
+    p (adj m) (adj n) q hq L hL
 
 include G adj in
 /-- Ordinary proper exceptional inverse images preserve ctf and have coherent quotient mates.
