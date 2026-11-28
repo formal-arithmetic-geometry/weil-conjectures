@@ -26318,6 +26318,8 @@ public import WeilConjectures.WeilSheaf.FourierBaseLinear
 public import WeilConjectures.WeilSheaf.FourierFirstFormula
 public import WeilConjectures.WeilSheaf.FourierInversion
 public import WeilConjectures.WeilSheaf.FourierInversion.AffinePlaneAdd
+public import WeilConjectures.WeilSheaf.FourierInversion.AffineSpaceComposite
+public import WeilConjectures.WeilSheaf.FourierInversion.AffineSpaceDelta
 public import WeilConjectures.WeilSheaf.FourierInversion.ArtinSchreier
 public import WeilConjectures.WeilSheaf.FourierInversion.Composite
 public import WeilConjectures.WeilSheaf.FourierInversion.ConvolutionKernel
