@@ -368,9 +368,7 @@ theorem correspondenceOperator_iterateHom_geometricFiberFrobenius
   exact correspondenceOperator_comp_eq_globalOperator Λ _ hp f.isOfCharacteristic_geometricFiber hK
     _ _ _ (iterateHom_geometricFiberFrobenius_eq f m)
     (by rw [endIterate_hom_eq_pow_hom, ← specGeometricFrobenius_pow_inv_eq_iterateFrobenius hp hK,
-      Iso.inv_hom_id])
-    (by rw [endIterate_hom_eq_pow_hom, ← specGeometricFrobenius_pow_inv_eq_iterateFrobenius hp hK,
-      Iso.hom_inv_id]) v
+      Iso.inv_hom_id]) v
 
 omit [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f]
   [HasCompactification f.geometricFiberToAlgebraicClosure] [Finite Λ]

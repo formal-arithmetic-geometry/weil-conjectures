@@ -11,7 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.FrobeniusCorrespondenceO
 public import WeilConjectures.TraceFormula.CompactPullback
 import WeilConjectures.AlgebraicGeometry.ForgetSupportsComposition
 import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
-import WeilConjectures.TraceFormula.GrothendieckLefschetz.FrobeniusPullbackComp
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangeIsoMate
 
 /-!
 # Pullbacks on compactly supported cohomology along proper morphisms over the base
@@ -110,6 +110,19 @@ lemma pullbackOfComp_comp_aux {DX DY DZ S : Type*} [Category DX] [Category DY] [
     Functor.associator_hom_app, Functor.whiskerLeft_app, Category.id_comp, Iso.trans_hom,
     Iso.symm_hom, Category.assoc] using h
 
+/-- The components of a pullback of the shape of
+`AlgebraicGeometry.Etale.lowerShriekPullbackOfComp`, for an abstract family of functors. -/
+lemma pullbackOfComp_app {DX DY S : Type*} [Category DX] [Category DY] [Category S]
+    {Lu : DY ⥤ DX} {Ru Su : DX ⥤ DY} {A : DY ⥤ S} {A' V : DX ⥤ S} (P : A ⟶ Lu ⋙ A')
+    (adj : Lu ⊣ Ru) (ι : Su ≅ Ru) (c : V ≅ Su ⋙ A) (e : V ≅ A')
+    (hP : P = (Functor.leftUnitor _).inv ≫ Functor.whiskerRight adj.unit A ≫
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft Lu (Functor.whiskerRight ι.inv A ≫ c.inv ≫ e.hom)) (K : DY) :
+    P.app K = A.map (adj.unit.app K) ≫ A.map (ι.inv.app (Lu.obj K)) ≫ c.inv.app (Lu.obj K) ≫
+      e.hom.app (Lu.obj K) := by
+  subst hP
+  simp
+
 section Pullback
 
 variable {X Y : Scheme.{u}} {a : X ⟶ s} {a' : Y ⟶ s} [QuasiCompact a] [HasCompactification a]
@@ -139,37 +152,6 @@ is `AlgebraicGeometry.Etale.lowerShriekPullback`. -/
 lemma lowerShriekPullbackOfComp_eq_lowerShriekPullback (u : X ⟶ X) [IsProper u] (h : u ≫ a = a) :
     lowerShriekPullbackOfComp Λ u h = lowerShriekPullback Λ u h :=
   rfl
-
-omit [Finite Λ] in
-/-- For a proper `u`, the identification `Ru_! ≅ Ru_*` is the forget-supports map of the chosen
-compactification of `u`. -/
-lemma rightDerivedLowerShriekIsoRightDerivedLowerStar_hom_eq_compactificationForgetSupports
-    (u : X ⟶ Y) [IsProper u] :
-    (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) u).hom =
-      compactificationForgetSupports (ModuleCat.{u + 1} Λ)
-        (HasCompactification.compactification u) := by
-  rw [rightDerivedLowerShriekIsoRightDerivedLowerStar_hom,
-    rightDerivedLowerShriekToLowerStarComp_comp_eq]
-  rfl
-
-/-- The identifications `Rf_! ≅ Rf_*` of proper morphisms are compatible with the composition
-isomorphisms of the lower shriek and of the lower star. -/
-lemma rightDerivedLowerShriekCompIso_hom_app_comp_isoRightDerivedLowerStar {Z : Scheme.{u}}
-    (u₁ : X ⟶ Y) (u₂ : Y ⟶ Z) [IsProper u₁] [IsProper u₂] [IsProper (u₁ ≫ u₂)]
-    (P : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (rightDerivedLowerShriekCompIso Λ u₁ u₂).hom.app P ≫
-        (rightDerivedLowerShriekIsoRightDerivedLowerStar _ u₂).hom.app
-          ((R(u₁)_![ModuleCat.{u + 1} Λ]).obj P) ≫
-        (R((u₂)_*[ModuleCat.{u + 1} Λ])).map
-          ((rightDerivedLowerShriekIsoRightDerivedLowerStar _ u₁).hom.app P) =
-      (rightDerivedLowerShriekIsoRightDerivedLowerStar _ (u₁ ≫ u₂)).hom.app P ≫
-        (rightDerivedLowerStarCompIsoOfComp _ u₁ u₂ (u₁ ≫ u₂) rfl).inv.app P := by
-  rw [rightDerivedLowerShriekIsoRightDerivedLowerStar_hom_eq_compactificationForgetSupports,
-    rightDerivedLowerShriekIsoRightDerivedLowerStar_hom_eq_compactificationForgetSupports,
-    rightDerivedLowerShriekIsoRightDerivedLowerStar_hom_eq_compactificationForgetSupports,
-    ← cancel_mono ((rightDerivedLowerStarCompIsoOfComp _ u₁ u₂ (u₁ ≫ u₂) rfl).hom.app P)]
-  simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
-  rw [← rightDerivedLowerShriekCompIso_inv_app_comp_forgetSupports, Iso.hom_inv_id_app_assoc]
 
 /-- **Transitivity of the pullbacks**: for proper `u₁ : X ⟶ Y`, `u₂ : Y ⟶ Z` over `s`, the pullback
 along `u₁₂ = u₁ ≫ u₂` is the pullback along `u₂` followed by the pullback along `u₁` and the
@@ -223,57 +205,159 @@ theorem lowerShriekPullbackOfComp_comp_app {Z : Scheme.{u}} {a'' : Z ⟶ s} [Qua
 
 end Pullback
 
+/-- For an adjunction `L ⊣ R` of endofunctors and a natural transformation `T : Γ ⟶ L ⋙ Γ`,
+the composite `R ⋙ Γ ⟶ R ⋙ L ⋙ Γ ⟶ Γ` of `T` and the counit. -/
+noncomputable def transportCounit {C E : Type*} [Category C] [Category E] {L R : C ⥤ C}
+    (adj : L ⊣ R) (Γ : C ⥤ E) (T : Γ ⟶ L ⋙ Γ) : R ⋙ Γ ⟶ Γ :=
+  Functor.whiskerLeft R T ≫ (Functor.associator R L Γ).inv ≫
+    Functor.whiskerRight adj.counit Γ ≫ (Functor.leftUnitor Γ).hom
+
+lemma transportCounit_app {C E : Type*} [Category C] [Category E] {L R : C ⥤ C}
+    (adj : L ⊣ R) (Γ : C ⥤ E) (T : Γ ⟶ L ⋙ Γ) (B : C) :
+    (transportCounit adj Γ T).app B = T.app (R.obj B) ≫ Γ.map (adj.counit.app B) := by
+  simp [transportCounit]
+
+/-- The transport along an endofunctor with a unit: for `L ⊣ R` and `T : Γ ⟶ L ⋙ Γ`,
+`Γ(η_A ≫ R e) ≫ T_{RB} ≫ Γ(ε_B) = T_A ≫ Γ(e)`. -/
+lemma map_unit_comp_transportCounit_app {C E : Type*} [Category C] [Category E] {L R : C ⥤ C}
+    (adj : L ⊣ R) (Γ : C ⥤ E) (T : Γ ⟶ L ⋙ Γ) {A B : C} (e : L.obj A ⟶ B) :
+    Γ.map (adj.unit.app A ≫ R.map e) ≫ (transportCounit adj Γ T).app B = T.app A ≫ Γ.map e := by
+  rw [transportCounit_app, T.naturality_assoc]
+  congr 1
+  rw [Functor.comp_map, ← Γ.map_comp]
+  congr 1
+  simp
+
+/-- The abstract form of
+`AlgebraicGeometry.Etale.compactPullback_app_eq_map_lowerShriekPullbackOfComp`: if the adjunct of
+`Ex : Ra ⋙ Lh ⟶ Lg ⋙ Ra` under `Lh ⊣ Rp` is `pb` followed by `c : Rah ⟶ Ra ⋙ Rs` and
+`ι : Rs ⟶ Rp`, then the transport `T` followed by `Γ(Ex)` is `Γ(pb)` followed by
+`Γ(c ≫ ι)`, `T` and `Γ` of the counit. -/
+lemma whiskerLeft_comp_whiskerRight_eq_whiskerRight_comp_whiskerLeft {DX Ds E : Type*}
+    [Category DX]
+    [Category Ds] [Category E] {Ra Rah : DX ⥤ Ds} {Lg : DX ⥤ DX} {Lh Rs Rp : Ds ⥤ Ds}
+    (adj : Lh ⊣ Rp) (Γ : Ds ⥤ E) (T : Γ ⟶ Lh ⋙ Γ) (c : Rah ⟶ Ra ⋙ Rs) (ι : Rs ⟶ Rp)
+    (Ex : Ra ⋙ Lh ⟶ Lg ⋙ Ra) (pb : Ra ⟶ Lg ⋙ Rah)
+    (hF : ∀ K, adj.unit.app (Ra.obj K) ≫ Rp.map (Ex.app K) =
+      pb.app K ≫ c.app (Lg.obj K) ≫ ι.app (Ra.obj (Lg.obj K))) :
+    Functor.whiskerLeft Ra T ≫ (Functor.associator _ _ _).inv ≫ Functor.whiskerRight Ex Γ ≫
+        (Functor.associator _ _ _).hom =
+      Functor.whiskerRight pb Γ ≫ (Functor.associator _ _ _).hom ≫
+        Functor.whiskerLeft Lg (Functor.whiskerRight (c ≫ Functor.whiskerLeft Ra ι) Γ ≫
+          (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft Ra (transportCounit adj Γ T)) := by
+  ext K
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.associator_inv_app,
+    Functor.whiskerRight_app, Functor.associator_hom_app, Category.id_comp, Category.comp_id,
+    ← Γ.map_comp_assoc, Category.assoc]
+  rw [← hF]
+  exact (map_unit_comp_transportCounit_app _ _ _ _).symm
+
+/-- The abstract form of
+`AlgebraicGeometry.Etale.correspondenceOperator_comp_eq_globalOperator`. -/
+lemma map_app_comp_map_eq_app_comp_map {DX Ds E : Type*} [Category DX] [Category Ds]
+    [Category E] {Ra Rah : DX ⥤ Ds} {Lg LF LΦ : DX ⥤ DX} (Γ : Ds ⥤ E) (pbg : Ra ⟶ Lg ⋙ Rah)
+    (pbF : Rah ⟶ LF ⋙ Ra) (pbΦ : Ra ⟶ LΦ ⋙ Ra) (τ : LF ⟶ 𝟭 DX) (e : LΦ ≅ Lg ⋙ LF)
+    (Q : Rah ⋙ Γ ⟶ Ra ⋙ Γ) (CP : Ra ⋙ Γ ⟶ Lg ⋙ Ra ⋙ Γ)
+    (hΦ : ∀ K, pbΦ.app K = pbg.app K ≫ pbF.app (Lg.obj K) ≫ Ra.map (e.inv.app K))
+    (hQ : Q = Functor.whiskerRight (pbF ≫ Functor.whiskerRight τ Ra ≫ (Functor.leftUnitor Ra).hom) Γ)
+    (hCP : CP = Functor.whiskerRight pbg Γ ≫ (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft Lg Q) {K : DX} (v : Lg.obj K ⟶ K) :
+    Γ.map (pbΦ.app K ≫ Ra.map (e.hom.app K ≫ τ.app (Lg.obj K) ≫ v)) =
+      CP.app K ≫ (Ra ⋙ Γ).map v := by
+  subst hQ hCP
+  simp [hΦ]
+
 section Base
 
 variable {X : Scheme.{u}} (a : X ⟶ s) [QuasiCompact a] [HasCompactification a]
 
-/-- For a proper `w : s ⟶ s`, the identification `RΓ(s, R(a ≫ w)_! -) ≅ RΓ(s, Ra_! -)` given by
-the composition isomorphism `R(a ≫ w)_! ≅ Ra_! ⋙ Rw_!` and the isomorphism
-`RΓ(s, Rw_! -) ≅ RΓ(s, -)` of the proper `w`
-(`AlgebraicGeometry.Etale.compactlySupportedGlobalSectionsIsoOfIsProper`). -/
-noncomputable def compactlySupportedGlobalSectionsCompIso (w : s ⟶ s) [IsProper w]
+/-- For an automorphism `w` of `s`, the map `RΓ(s, R(a ≫ w)_! -) ⟶ RΓ(s, Ra_! -)`:
+```
+RΓ(s, R(a ≫ w)_! M) ≅ RΓ(s, Rw_! Ra_! M) ≅ RΓ(s, Rw_* Ra_! M) ≅ RΓ(s, Lw^* Rw_* Ra_! M)
+  ⟶ RΓ(s, Ra_! M)
+```
+the composition isomorphism of the lower shriek, the identification `Rw_! ≅ Rw_*`, the transport
+of derived global sections along `w` (`AlgebraicGeometry.Etale.globalSectionsTransport`) and the
+counit of `Lw^* ⊣ Rw_*`. -/
+noncomputable def compactlySupportedGlobalSectionsTransport (w : s ⟶ s) [IsIso w]
     [HasCompactification (a ≫ w)] [QuasiCompact (a ≫ w)] :
-    compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) (a ≫ w) ≅
+    compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) (a ≫ w) ⟶
       compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) a :=
-  Functor.isoWhiskerRight (rightDerivedLowerShriekCompIso Λ a w) _ ≪≫
-    Functor.isoWhiskerLeft R(a)_![ModuleCat.{u + 1} Λ]
-      (compactlySupportedGlobalSectionsIsoOfIsProper (ModuleCat.{u + 1} Λ) w)
+  Functor.whiskerRight ((rightDerivedLowerShriekCompIso Λ a w).hom ≫
+      Functor.whiskerLeft R(a)_![ModuleCat.{u + 1} Λ]
+        (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) w).hom)
+      (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) s) ≫
+    (Functor.associator _ _ _).hom ≫
+    Functor.whiskerLeft R(a)_![ModuleCat.{u + 1} Λ]
+      (transportCounit (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) w)
+        (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) s) (globalSectionsTransport Λ w).hom)
 
 /-- **The pullback along an automorphism over an automorphism of the base is the compact-support
 base change**: for a cartesian square `g ≫ a = a ≫ h` of automorphisms `g` of `X` and `h` of
-`s`, the pullback along `g`, a morphism over `s` from `a ≫ h` to `a`, followed by the
-identification `RΓ(s, R(a ≫ h)_! -) ≅ RΓ(s, Ra_! -)`, is the compact-support base change
-`AlgebraicGeometry.Etale.compactPullback`. -/
-theorem compactPullback_app_eq_map_lowerShriekPullbackOfComp {g : X ⟶ X} {h : s ⟶ s} [IsIso g]
-    [IsIso h] (sq : IsPullback g a a h) [HasCompactification (a ≫ h)] [QuasiCompact (a ≫ h)]
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (compactPullback Λ sq).app K =
-      (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) s).map
-          ((lowerShriekPullbackOfComp Λ g sq.w).app K) ≫
-        (compactlySupportedGlobalSectionsCompIso Λ a h).hom.app
-          (L((g)^*[ModuleCat.{u + 1} Λ]).obj K) := by
-  sorry
+`s`, the pullback along `g`, a morphism over `s` from `a ≫ h` to `a`, followed by the map
+`RΓ(s, R(a ≫ h)_! -) ⟶ RΓ(s, Ra_! -)`
+(`AlgebraicGeometry.Etale.compactlySupportedGlobalSectionsTransport`), is the compact-support
+base change `AlgebraicGeometry.Etale.compactPullback`. -/
+theorem compactPullback_eq_whiskerRight_lowerShriekPullbackOfComp {g : X ⟶ X} {h : s ⟶ s}
+    [IsIso g] [IsIso h] (sq : IsPullback g a a h) [HasCompactification (a ≫ h)]
+    [QuasiCompact (a ≫ h)] :
+    compactPullback Λ sq =
+      Functor.whiskerRight (lowerShriekPullbackOfComp Λ g sq.w)
+          (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) s) ≫
+        (Functor.associator _ _ _).hom ≫
+        Functor.whiskerLeft L((g)^*[ModuleCat.{u + 1} Λ])
+          (compactlySupportedGlobalSectionsTransport Λ a h) := by
+  have : HasCompactification (g ≫ a) := HasCompactification.of_eq sq.w.symm
+  have : QuasiCompact (g ≫ a) := by rw [sq.w]; infer_instance
+  have hpb (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+      (lowerShriekPullbackOfComp Λ g sq.w).app K =
+      (R(a)_![ModuleCat.{u + 1} Λ]).map
+          ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app K) ≫
+        (R(a)_![ModuleCat.{u + 1} Λ]).map
+          ((rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) g).inv.app
+            ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K)) ≫
+        (rightDerivedLowerShriekCompIso Λ g a).inv.app ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K) ≫
+        (rightDerivedLowerShriekCongrIso Λ sq.w).hom.app
+          ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K) :=
+    pullbackOfComp_app (lowerShriekPullbackOfComp Λ g sq.w)
+      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g)
+      (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) g)
+      (rightDerivedLowerShriekCompIso Λ g a) (rightDerivedLowerShriekCongrIso Λ sq.w) rfl K
+  have hF (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) h).unit.app
+          ((R(a)_![ModuleCat.{u + 1} Λ]).obj K) ≫
+        (R((h)_*[ModuleCat.{u + 1} Λ])).map ((rightDerivedLowerShriekBaseChangeMap Λ sq).app K) =
+      (lowerShriekPullbackOfComp Λ g sq.w).app K ≫
+        (rightDerivedLowerShriekCompIso Λ a h).hom.app ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K) ≫
+        (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) h).hom.app
+          ((R(a)_![ModuleCat.{u + 1} Λ]).obj ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K)) := by
+    rw [hpb K, unit_app_comp_map_rightDerivedLowerShriekBaseChangeMap_app Λ sq K]
+    simp only [Category.assoc]
+  exact whiskerLeft_comp_whiskerRight_eq_whiskerRight_comp_whiskerLeft
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) h)
+    (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) s) (globalSectionsTransport Λ h).hom
+    (rightDerivedLowerShriekCompIso Λ a h).hom
+    (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) h).hom
+    (rightDerivedLowerShriekBaseChangeMap Λ sq) (lowerShriekPullbackOfComp Λ g sq.w) hF
 
 /-- **The absolute Frobenius acts trivially on compactly supported cohomology**: let `X` and `s`
 be schemes of characteristic `p` with absolute `p ^ n`-power Frobenius `F_X` and `F_s`, and let
 `w` be an inverse of `F_s`, so that `F_X` is a morphism over `s` from `a` to `a ≫ w`. The
-pullback along `F_X`, preceded by the identification `RΓ(s, Ra_! -) ≅ RΓ(s, R(a ≫ w)_! -)` and
-followed by the trivialization `L(F_X)^* ≅ L(𝟙 X)^* ≅ 𝟭`
-(`AlgebraicGeometry.Etale.leftDerivedUpperStarIterateFrobeniusIso`), is the identity of
-`RΓ(s, Ra_! M)`. -/
-theorem map_lowerShriekPullbackOfComp_comp_iterateFrobenius {p : ℕ} (hp : p.Prime)
-    (hX : (p : Γ(X, ⊤)) = 0) (hs : (p : Γ(s, ⊤)) = 0) (n : ℕ) {w : s ⟶ s} [IsProper w]
-    [IsProper (X.iterateFrobenius hp hX n)] [HasCompactification (a ≫ w)]
+map `RΓ(s, R(a ≫ w)_! -) ⟶ RΓ(s, Ra_! -)`
+(`AlgebraicGeometry.Etale.compactlySupportedGlobalSectionsTransport`) is the pullback along
+`F_X` followed by the trivialization `L(F_X)^* ≅ L(𝟙 X)^* ≅ 𝟭`
+(`AlgebraicGeometry.Etale.leftDerivedUpperStarIterateFrobeniusIso`). -/
+theorem compactlySupportedGlobalSectionsTransport_eq_whiskerRight_lowerShriekPullbackOfComp
+    {p : ℕ} (hp : p.Prime) (hX : (p : Γ(X, ⊤)) = 0) (hs : (p : Γ(s, ⊤)) = 0) (n : ℕ)
+    {w : s ⟶ s} [IsIso w] [IsProper (X.iterateFrobenius hp hX n)] [HasCompactification (a ≫ w)]
     [QuasiCompact (a ≫ w)] (hw : s.iterateFrobenius hp hs n ≫ w = 𝟙 s)
-    (hw' : w ≫ s.iterateFrobenius hp hs n = 𝟙 s)
-    (h : X.iterateFrobenius hp hX n ≫ a ≫ w = a)
-    (M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (compactlySupportedGlobalSectionsCompIso Λ a w).inv.app M ≫
-        (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) s).map
-          ((lowerShriekPullbackOfComp Λ (X.iterateFrobenius hp hX n) h).app M ≫
-            (R(a)_![ModuleCat.{u + 1} Λ]).map
-              ((leftDerivedUpperStarIterateFrobeniusIso (ModuleCat.{u + 1} Λ) hp hX n ≪≫
-                leftDerivedUpperStarId _ X).hom.app M)) = 𝟙 _ := by
+    (h : X.iterateFrobenius hp hX n ≫ a ≫ w = a) :
+    compactlySupportedGlobalSectionsTransport Λ a w =
+      Functor.whiskerRight (lowerShriekPullbackOfComp Λ (X.iterateFrobenius hp hX n) h ≫
+          Functor.whiskerRight (leftDerivedUpperStarIterateFrobeniusIso (ModuleCat.{u + 1} Λ) hp
+            hX n ≪≫ leftDerivedUpperStarId _ X).hom R(a)_![ModuleCat.{u + 1} Λ] ≫
+          (Functor.leftUnitor _).hom)
+        (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) s) := by
   sorry
 
 /-- **The operator of a Frobenius correspondence is the global operator**: let `Φ = F_X ≫ g` be
@@ -287,7 +371,7 @@ theorem correspondenceOperator_comp_eq_globalOperator {p : ℕ} (hp : p.Prime)
     [IsProper Φ] [IsProper (X.iterateFrobenius hp hX n)] [IsIso g] [IsIso σ]
     [HasCompactification (a ≫ σ)] [QuasiCompact (a ≫ σ)] (sq : IsPullback g a a σ)
     (hΦ : Φ ≫ a = a) (hFg : Φ = X.iterateFrobenius hp hX n ≫ g)
-    (hσ : s.iterateFrobenius hp hs n ≫ σ = 𝟙 s) (hσ' : σ ≫ s.iterateFrobenius hp hs n = 𝟙 s)
+    (hσ : s.iterateFrobenius hp hs n ≫ σ = 𝟙 s)
     {K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (v : L((g)^*[ModuleCat.{u + 1} Λ]).obj K ⟶ K) :
     correspondenceOperator Λ Φ hΦ ((leftDerivedUpperStarComp _ _ _ _ hFg).hom.app K ≫
@@ -297,19 +381,24 @@ theorem correspondenceOperator_comp_eq_globalOperator {p : ℕ} (hp : p.Prime)
   have h₁ : X.iterateFrobenius hp hX n ≫ a ≫ σ = a := by
     rw [← Category.assoc, ← comp_iterateFrobenius hp a hs hX, Category.assoc, hσ,
       Category.comp_id]
-  have hF := map_lowerShriekPullbackOfComp_comp_iterateFrobenius Λ a hp hX hs n hσ hσ' h₁
-    (L((g)^*[ModuleCat.{u + 1} Λ]).obj K)
-  have hF' := (Iso.inv_comp_eq ((compactlySupportedGlobalSectionsCompIso Λ a σ).app
-      (L((g)^*[ModuleCat.{u + 1} Λ]).obj K))).1 hF
-  rw [Category.comp_id, Functor.map_comp] at hF'
-  rw [correspondenceOperator, globalOperator, ← lowerShriekPullbackOfComp_eq_lowerShriekPullback,
-    lowerShriekPullbackOfComp_comp_app Λ _ _ _ hFg h₁ sq.w,
-    compactPullback_app_eq_map_lowerShriekPullbackOfComp Λ a sq K]
-  simp only [Category.assoc]
-  rw [← Functor.map_comp, Iso.inv_hom_id_app_assoc]
-  simp only [Functor.map_comp]
-  rw [reassoc_of% hF']
-  rfl
+  have hΦ' (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+      (lowerShriekPullback Λ Φ hΦ).app K =
+        (lowerShriekPullbackOfComp Λ g sq.w).app K ≫
+          (lowerShriekPullbackOfComp Λ (X.iterateFrobenius hp hX n) h₁).app
+            (L((g)^*[ModuleCat.{u + 1} Λ]).obj K) ≫
+          (R(a)_![ModuleCat.{u + 1} Λ]).map
+            ((leftDerivedUpperStarComp _ _ _ _ hFg).inv.app K) := by
+    rw [← lowerShriekPullbackOfComp_eq_lowerShriekPullback]
+    exact lowerShriekPullbackOfComp_comp_app Λ _ _ _ hFg h₁ sq.w hΦ K
+  exact map_app_comp_map_eq_app_comp_map (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) s)
+    (lowerShriekPullbackOfComp Λ g sq.w)
+    (lowerShriekPullbackOfComp Λ (X.iterateFrobenius hp hX n) h₁) (lowerShriekPullback Λ Φ hΦ)
+    (leftDerivedUpperStarIterateFrobeniusIso _ hp hX n ≪≫ leftDerivedUpperStarId _ X).hom
+    (leftDerivedUpperStarComp _ _ _ _ hFg)
+    (compactlySupportedGlobalSectionsTransport Λ a σ) (compactPullback Λ sq) hΦ'
+    (compactlySupportedGlobalSectionsTransport_eq_whiskerRight_lowerShriekPullbackOfComp Λ a hp
+      hX hs n hσ h₁)
+    (compactPullback_eq_whiskerRight_lowerShriekPullbackOfComp Λ a sq) v
 
 end Base
 
