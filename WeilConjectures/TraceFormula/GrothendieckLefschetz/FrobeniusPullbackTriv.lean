@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.TmpLowerShriekIterateFrobenius
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIterateFrobenius
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
 
 /-!

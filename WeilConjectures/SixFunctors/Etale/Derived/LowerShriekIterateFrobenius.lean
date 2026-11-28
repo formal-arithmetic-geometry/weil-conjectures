@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.AbsoluteFrobenius
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompIsoUnit
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIterateFrobeniusFormalism
 
 /-!
 # The absolute Frobenius and the compactly supported direct image
@@ -49,7 +50,8 @@ right adjoint to the trivialization `L(F_Y)^* ≅ 𝟭`. -/
 noncomputable def rightDerivedLowerStarIterateFrobeniusIso {Y : Scheme.{u}}
     (hY : (p : Γ(Y, ⊤)) = 0) :
     R((Y.iterateFrobenius hp hY n)_*[ModuleCat.{u + 1} Λ]) ≅ 𝟭 _ :=
-  (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (Y.iterateFrobenius hp hY n)).rightAdjointUniq
+  (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+      (Y.iterateFrobenius hp hY n)).rightAdjointUniq
     (Adjunction.id.ofNatIsoLeft (leftDerivedUpperStarIterateFrobeniusTriv Λ hp n hY).symm)
 
 /-- The trivialization `R(F_Y)_! ≅ R(F_Y)_* ≅ 𝟭` of the compactly supported direct image along a
@@ -84,6 +86,9 @@ theorem rightDerivedLowerShriekCompIso_iterateFrobenius {X Y : Scheme.{u}}
         (rightDerivedLowerShriekCompIso Λ f (Y.iterateFrobenius hp hY n)).hom.app K ≫
         (rightDerivedLowerShriekIterateFrobeniusIso Λ hp n hY).hom.app
           ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) := by
-  sorry
+  exact rightDerivedLowerShriekCompIso_iterateFrobenius_of_eq Λ hp n hX hY f _
+    (by rw [rightDerivedLowerShriekIterateFrobeniusIso, rightDerivedLowerStarIterateFrobeniusIso])
+    _ (by rw [rightDerivedLowerShriekIterateFrobeniusIso, rightDerivedLowerStarIterateFrobeniusIso])
+    K
 
 end AlgebraicGeometry.Etale

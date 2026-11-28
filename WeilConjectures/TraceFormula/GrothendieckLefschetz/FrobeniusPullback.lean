@@ -335,12 +335,13 @@ lemma eq_whiskerRight_of_transport {DX Ds E : Type*} [Category DX] [Category Ds]
   subst hQ
   ext M
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Functor.associator_hom_app, Functor.leftUnitor_hom_app, Category.id_comp, Category.comp_id,
+    Functor.associator_hom_app, Functor.leftUnitor_hom_app, Category.id_comp,
     transportCounit_app, hT', ← Γ.map_comp, Category.assoc]
   erw [Category.comp_id]
   exact congrArg Γ.map (hμ M)
 
-/-- The final step of the computation of `AlgebraicGeometry.Etale.compactlySupportedGlobalSectionsTransport`
+/-- The final step of the computation of
+`AlgebraicGeometry.Etale.compactlySupportedGlobalSectionsTransport`
 for an inverse of the absolute Frobenius of the base, in a category. -/
 lemma comp_eq_of_frobenius {C : Type*} [Category C] {O₁ O₂ O₃ O₄ O₅ O₆ O₇ O₈ O₉ O₁₀ : C}
     (cw : O₁ ⟶ O₂) (r : O₂ ⟶ O₃) (pbτ : O₁ ⟶ O₃) (ρX : O₄ ≅ O₁) (cFb : O₅ ≅ O₄) (ch : O₅ ≅ O₃)
@@ -468,7 +469,8 @@ theorem compactlySupportedGlobalSectionsTransport_eq_lowerShriekPullbackOfComp
     (comp_iterateFrobenius hp (a ≫ w) hs hX n).symm
   have h₁₂ : (a ≫ w) ≫ s.iterateFrobenius hp hs n = a := by
     rw [Category.assoc, hw', Category.comp_id]
-  have : HasCompactification (X.iterateFrobenius hp hX n ≫ a ≫ w) := HasCompactification.of_eq h.symm
+  have : HasCompactification (X.iterateFrobenius hp hX n ≫ a ≫ w) :=
+    HasCompactification.of_eq h.symm
   have : QuasiCompact (X.iterateFrobenius hp hX n ≫ a ≫ w) := by rw [h]; infer_instance
   have : HasCompactification ((a ≫ w) ≫ s.iterateFrobenius hp hs n) :=
     HasCompactification.of_eq h₁₂.symm
@@ -486,7 +488,8 @@ theorem compactlySupportedGlobalSectionsTransport_eq_lowerShriekPullbackOfComp
       leftDerivedUpperStarId _ X).hom (fun M ↦ ?_) _ rfl
   have : HasCompactification (w ≫ s.iterateFrobenius hp hs n) := HasCompactification.of_eq hw'.symm
   have : QuasiCompact (w ≫ s.iterateFrobenius hp hs n) := by rw [hw']; infer_instance
-  have hA := pullbackOfComp_app_comp_map_eq (lowerShriekPullbackOfComp Λ (X.iterateFrobenius hp hX n) h)
+  have hA := pullbackOfComp_app_comp_map_eq
+    (lowerShriekPullbackOfComp Λ (X.iterateFrobenius hp hX n) h)
     (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (X.iterateFrobenius hp hX n))
     (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) _)
     (rightDerivedLowerShriekCompIso Λ (X.iterateFrobenius hp hX n) (a ≫ w))

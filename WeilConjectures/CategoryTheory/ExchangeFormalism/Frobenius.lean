@@ -166,4 +166,58 @@ lemma pfComp'_inv_of_triv_app (p : X ⟶ Y) (d : X ⟶ Y) (w₁ : tX ≫ p = d) 
 
 end Triv
 
+section ForgetSupports
+
+variable {X Y Z : 𝒞}
+
+/-- The composition isomorphism of the pushforwards along `f ≫ g = h` is the one along
+`f ≫ g = f ≫ g`, up to `(f ≫ g)_* = h_*`. -/
+lemma pfComp'_inv_eq (f : X ⟶ Y) (g : Y ⟶ Z) (h : X ⟶ Z) (w : f ≫ g = h) :
+    (F.pfComp' f g h w).inv =
+      (F.pfComp' f g (f ≫ g) rfl).inv ≫ eqToHom (by rw [w]) := by
+  subst w
+  simp
+
+/-- The comparison `j_! ⟶ j_*` from the extension by zero to the pushforward along `j` whose
+unit `𝟭 ⟶ j^* j_!` is an isomorphism: the unit of `j^* ⊣ j_*` followed by `j_*` applied to the
+inverse of the unit of `j_! ⊣ j^*`. -/
+noncomputable def shToPf (j : X ⟶ Y) [Fact (𝒪 j)] [IsIso (F.shAdj j).unit] : F.sh j ⟶ F.pf j :=
+  Functor.whiskerLeft (F.sh j) (F.adj j).unit ≫ (Functor.associator _ _ _).inv ≫
+    Functor.whiskerRight (inv (F.shAdj j).unit) (F.pf j)
+
+/-- The comparison `(𝟙 X)_! ⟶ (𝟙 X)_*` is the composite of the identity isomorphisms
+`(𝟙 X)_! ≅ 𝟭 ≅ (𝟙 X)_*`. -/
+lemma shToPf_id (X : 𝒞) [Fact (𝒪 (𝟙 X))] [IsIso (F.shAdj (𝟙 X)).unit] :
+    F.shToPf (𝟙 X) = (F.shId X).hom ≫ (F.pfId X).inv := by
+  have h₂ : conjugateEquiv Adjunction.id (F.shAdj (𝟙 X)) (F.shId X).hom = (F.pbId X).inv := by
+    simp [shId, conjugateIsoEquiv]
+  ext K
+  have hu := unit_conjugateEquiv Adjunction.id (F.shAdj (𝟙 X)) (F.shId X).hom K
+  have hp := unit_conjugateEquiv Adjunction.id (F.adj (𝟙 X)) (F.pbId X).hom K
+  rw [h₂] at hu
+  rw [← pfId_inv] at hp
+  simp only [Adjunction.id_unit, NatTrans.id_app, Functor.id_obj, Category.id_comp] at hu hp
+  have hinv : inv ((F.shAdj (𝟙 X)).unit.app K) =
+      (F.pb (𝟙 X)).map ((F.shId X).hom.app K) ≫ (F.pbId X).hom.app K := by
+    rw [IsIso.inv_eq_of_hom_inv_id]
+    rw [← Category.assoc, ← hu, Iso.inv_hom_id_app]
+  have hn := (F.adj (𝟙 X)).unit.naturality ((F.shId X).hom.app K)
+  simp only [Functor.id_obj, Functor.id_map, Functor.comp_obj, Functor.comp_map] at hn
+  simp only [shToPf, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.associator_inv_app,
+    Functor.whiskerRight_app, NatIso.isIso_inv_app, Category.id_comp, hinv]
+  rw [Functor.map_comp, ← Category.assoc, ← hn, hp, Category.assoc]
+
+/-- The comparison `(𝟙 X)_! ⟶ (𝟙 X)_*` followed by `g_*` and `(𝟙 X)_* ⋙ g_* ≅ g_*` is the identity
+isomorphism `(𝟙 X)_! ≅ 𝟭` followed by `g_*`. -/
+lemma whiskerRight_shToPf_id_comp_pfComp'_inv (g : X ⟶ Y) [Fact (𝒪 (𝟙 X))]
+    [IsIso (F.shAdj (𝟙 X)).unit] :
+    Functor.whiskerRight (F.shToPf (𝟙 X)) (F.pf g) ≫
+        (F.pfComp' (𝟙 X) g g (Category.id_comp g)).inv =
+      Functor.whiskerRight (F.shId X).hom (F.pf g) ≫ (Functor.leftUnitor _).hom := by
+  rw [shToPf_id]
+  ext M
+  simp [pfComp'_id_left_inv_app, ← Functor.map_comp]
+
+end ForgetSupports
+
 end CategoryTheory.ExchangeFormalism

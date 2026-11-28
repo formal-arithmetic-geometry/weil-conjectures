@@ -15097,6 +15097,7 @@ public import WeilConjectures.CategoryTheory.ExchangeFormalism.Coherence
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.Composition
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.CompositionCoherence
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.Cube
+public import WeilConjectures.CategoryTheory.ExchangeFormalism.Frobenius
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.Identity
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.Pasting
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.ProjectionComposition
@@ -21280,6 +21281,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekFormalism
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekFormalismComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependence
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIterateFrobenius
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIterateFrobeniusFormalism
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLowerStarExchange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLowerStarWeil
@@ -22205,6 +22208,7 @@ public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Basic
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Canonical
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Compactification
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Composition
+public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Frobenius
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.ModuleTraceAdjustment
 public import WeilConjectures.SixFunctors.NativeExtensionDescentProof.NativeOpenTensorDerivedRepresentative
@@ -25472,6 +25476,7 @@ public import WeilConjectures.TraceFormula.GraphPieces
 public import WeilConjectures.TraceFormula.GrothendieckLefschetz.CoefficientChange
 public import WeilConjectures.TraceFormula.GrothendieckLefschetz.Finite
 public import WeilConjectures.TraceFormula.GrothendieckLefschetz.FrobeniusPullback
+public import WeilConjectures.TraceFormula.GrothendieckLefschetz.FrobeniusPullbackTriv
 public import WeilConjectures.TraceFormula.GrothendieckLefschetz.Integral
 public import WeilConjectures.TraceFormula.GrothendieckLefschetz.PointCount
 public import WeilConjectures.TraceFormula.GrothendieckLefschetz.Rational
