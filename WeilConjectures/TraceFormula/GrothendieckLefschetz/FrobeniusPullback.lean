@@ -9,6 +9,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.AbsoluteFrobenius
 public import WeilConjectures.SixFunctors.Etale.Derived.AdicFrobenius
 public import WeilConjectures.SixFunctors.Etale.Derived.FrobeniusCorrespondenceOperator
 public import WeilConjectures.TraceFormula.CompactPullback
+import WeilConjectures.AlgebraicGeometry.ForgetSupportsComposition
+import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
+import WeilConjectures.TraceFormula.GrothendieckLefschetz.FrobeniusPullbackComp
 
 /-!
 # Pullbacks on compactly supported cohomology along proper morphisms over the base
@@ -67,6 +70,46 @@ open Scheme
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {s : Scheme.{u}}
 
+/-- The composition law of pullbacks of the shape of
+`AlgebraicGeometry.Etale.lowerShriekPullbackOfComp`, for an abstract family of functors: if each
+of `Ph`, `Pg`, `Pgh` is built from the unit of an adjunction `L ⊣ R`, an isomorphism `S ≅ R` and
+isomorphisms `V ≅ S ⋙ A`, `V ≅ A'`, then the pullback `Pgh` along the composite is `Ph` followed
+by `Pg` and the composition isomorphism `uc`. -/
+lemma pullbackOfComp_comp_aux {DX DY DZ S : Type*} [Category DX] [Category DY] [Category DZ]
+    [Category S] {Lh : DX ⥤ DY} {Lg : DY ⥤ DZ} {Lgh : DX ⥤ DZ} {Rh : DY ⥤ DX} {Rg : DZ ⥤ DY}
+    {Rgh : DZ ⥤ DX} {Sh : DY ⥤ DX} {Sg : DZ ⥤ DY} {Sgh : DZ ⥤ DX} {AX : DX ⥤ S} {AY : DY ⥤ S}
+    {AZ : DZ ⥤ S} {Vh : DY ⥤ S} {Vg : DZ ⥤ S} {Vgh : DZ ⥤ S} (adjh : Lh ⊣ Rh) (adjg : Lg ⊣ Rg)
+    (adjgh : Lgh ⊣ Rgh) (ih : Sh ≅ Rh) (ig : Sg ≅ Rg) (igh : Sgh ≅ Rgh) (uc : Lgh ≅ Lh ⋙ Lg)
+    (lc : Rg ⋙ Rh ≅ Rgh) (sc : Sgh ≅ Sg ⋙ Sh) (ch : Vh ≅ Sh ⋙ AX) (eh : Vh ≅ AY)
+    (cg : Vg ≅ Sg ⋙ AY) (eg : Vg ≅ AZ) (cgh : Vgh ≅ Sgh ⋙ AX) (egh : Vgh ≅ AZ)
+    (Ph : AX ⟶ Lh ⋙ AY) (Pg : AY ⟶ Lg ⋙ AZ) (Pgh : AX ⟶ Lgh ⋙ AZ)
+    (hPh : Ph = (Functor.leftUnitor _).inv ≫ Functor.whiskerRight adjh.unit _ ≫
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft _ (Functor.whiskerRight ih.inv _ ≫ ch.inv ≫ eh.hom))
+    (hPg : Pg = (Functor.leftUnitor _).inv ≫ Functor.whiskerRight adjg.unit _ ≫
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft _ (Functor.whiskerRight ig.inv _ ≫ cg.inv ≫ eg.hom))
+    (hPgh : Pgh = (Functor.leftUnitor _).inv ≫ Functor.whiskerRight adjgh.unit _ ≫
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft _ (Functor.whiskerRight igh.inv _ ≫ cgh.inv ≫ egh.hom))
+    (hU : ∀ K, adjgh.unit.app K ≫ lc.inv.app (Lgh.obj K) =
+      adjh.unit.app K ≫ Rh.map (adjg.unit.app (Lh.obj K)) ≫ Rh.map (Rg.map (uc.inv.app K)))
+    (hL : ∀ P, sc.hom.app P ≫ ih.hom.app (Sg.obj P) ≫ Rh.map (ig.hom.app P) =
+      igh.hom.app P ≫ lc.inv.app P)
+    (hA : ∀ P, egh.inv.app P ≫ cgh.hom.app P ≫ AX.map (sc.hom.app P) =
+      eg.inv.app P ≫ cg.hom.app P ≫ eh.inv.app (Sg.obj P) ≫ ch.hom.app (Sg.obj P))
+    (K : DX) :
+    Pgh.app K = Ph.app K ≫ Pg.app (Lh.obj K) ≫ AZ.map (uc.inv.app K) := by
+  subst hPh hPg hPgh
+  have hA' (P : DZ) : (cgh.symm ≪≫ egh).inv.app P ≫ AX.map (sc.hom.app P) =
+      (cg.symm ≪≫ eg).inv.app P ≫ (ch.symm ≪≫ eh).inv.app (Sg.obj P) := by
+    simpa only [Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app, Category.assoc] using hA P
+  have h := ProEtale.CondensedRing.compactPullback_comp_aux adjh adjg adjgh ih ig igh uc lc sc
+    (ch.symm ≪≫ eh) (cg.symm ≪≫ eg) (cgh.symm ≪≫ egh) hU hL hA' K
+  simpa only [NatTrans.comp_app, Functor.leftUnitor_inv_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.whiskerLeft_app, Category.id_comp, Iso.trans_hom,
+    Iso.symm_hom, Category.assoc] using h
+
 section Pullback
 
 variable {X Y : Scheme.{u}} {a : X ⟶ s} {a' : Y ⟶ s} [QuasiCompact a] [HasCompactification a]
@@ -97,6 +140,37 @@ lemma lowerShriekPullbackOfComp_eq_lowerShriekPullback (u : X ⟶ X) [IsProper u
     lowerShriekPullbackOfComp Λ u h = lowerShriekPullback Λ u h :=
   rfl
 
+omit [Finite Λ] in
+/-- For a proper `u`, the identification `Ru_! ≅ Ru_*` is the forget-supports map of the chosen
+compactification of `u`. -/
+lemma rightDerivedLowerShriekIsoRightDerivedLowerStar_hom_eq_compactificationForgetSupports
+    (u : X ⟶ Y) [IsProper u] :
+    (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) u).hom =
+      compactificationForgetSupports (ModuleCat.{u + 1} Λ)
+        (HasCompactification.compactification u) := by
+  rw [rightDerivedLowerShriekIsoRightDerivedLowerStar_hom,
+    rightDerivedLowerShriekToLowerStarComp_comp_eq]
+  rfl
+
+/-- The identifications `Rf_! ≅ Rf_*` of proper morphisms are compatible with the composition
+isomorphisms of the lower shriek and of the lower star. -/
+lemma rightDerivedLowerShriekCompIso_hom_app_comp_isoRightDerivedLowerStar {Z : Scheme.{u}}
+    (u₁ : X ⟶ Y) (u₂ : Y ⟶ Z) [IsProper u₁] [IsProper u₂] [IsProper (u₁ ≫ u₂)]
+    (P : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (rightDerivedLowerShriekCompIso Λ u₁ u₂).hom.app P ≫
+        (rightDerivedLowerShriekIsoRightDerivedLowerStar _ u₂).hom.app
+          ((R(u₁)_![ModuleCat.{u + 1} Λ]).obj P) ≫
+        (R((u₂)_*[ModuleCat.{u + 1} Λ])).map
+          ((rightDerivedLowerShriekIsoRightDerivedLowerStar _ u₁).hom.app P) =
+      (rightDerivedLowerShriekIsoRightDerivedLowerStar _ (u₁ ≫ u₂)).hom.app P ≫
+        (rightDerivedLowerStarCompIsoOfComp _ u₁ u₂ (u₁ ≫ u₂) rfl).inv.app P := by
+  rw [rightDerivedLowerShriekIsoRightDerivedLowerStar_hom_eq_compactificationForgetSupports,
+    rightDerivedLowerShriekIsoRightDerivedLowerStar_hom_eq_compactificationForgetSupports,
+    rightDerivedLowerShriekIsoRightDerivedLowerStar_hom_eq_compactificationForgetSupports,
+    ← cancel_mono ((rightDerivedLowerStarCompIsoOfComp _ u₁ u₂ (u₁ ≫ u₂) rfl).hom.app P)]
+  simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+  rw [← rightDerivedLowerShriekCompIso_inv_app_comp_forgetSupports, Iso.hom_inv_id_app_assoc]
+
 /-- **Transitivity of the pullbacks**: for proper `u₁ : X ⟶ Y`, `u₂ : Y ⟶ Z` over `s`, the pullback
 along `u₁₂ = u₁ ≫ u₂` is the pullback along `u₂` followed by the pullback along `u₁` and the
 composition isomorphism `Lu₂^* ⋙ Lu₁^* ≅ Lu₁₂^*`. -/
@@ -110,7 +184,42 @@ theorem lowerShriekPullbackOfComp_comp_app {Z : Scheme.{u}} {a'' : Z ⟶ s} [Qua
         (lowerShriekPullbackOfComp Λ u₁ h₁).app (L((u₂)^*[ModuleCat.{u + 1} Λ]).obj K) ≫
           (R(a)_![ModuleCat.{u + 1} Λ]).map
             ((leftDerivedUpperStarComp _ u₁ u₂ u₁₂ hu).inv.app K) := by
-  sorry
+  subst hu
+  have : HasCompactification (u₁ ≫ a') := h₁ ▸ inferInstance
+  have : QuasiCompact (u₁ ≫ a') := h₁ ▸ inferInstance
+  have : HasCompactification (u₂ ≫ a'') := h₂ ▸ inferInstance
+  have : QuasiCompact (u₂ ≫ a'') := h₂ ▸ inferInstance
+  have : HasCompactification ((u₁ ≫ u₂) ≫ a'') := h₁₂ ▸ inferInstance
+  have : QuasiCompact ((u₁ ≫ u₂) ≫ a'') := h₁₂ ▸ inferInstance
+  refine pullbackOfComp_comp_aux (Lh := L((u₂)^*[ModuleCat.{u + 1} Λ]))
+    (Lg := L((u₁)^*[ModuleCat.{u + 1} Λ])) (Lgh := L((u₁ ≫ u₂)^*[ModuleCat.{u + 1} Λ]))
+    (AX := R(a'')_![ModuleCat.{u + 1} Λ]) (AY := R(a')_![ModuleCat.{u + 1} Λ])
+    (AZ := R(a)_![ModuleCat.{u + 1} Λ])
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) u₂)
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) u₁)
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (u₁ ≫ u₂))
+    (rightDerivedLowerShriekIsoRightDerivedLowerStar _ u₂)
+    (rightDerivedLowerShriekIsoRightDerivedLowerStar _ u₁)
+    (rightDerivedLowerShriekIsoRightDerivedLowerStar _ (u₁ ≫ u₂))
+    (leftDerivedUpperStarComp _ u₁ u₂ (u₁ ≫ u₂) rfl)
+    (rightDerivedLowerStarCompIsoOfComp _ u₁ u₂ (u₁ ≫ u₂) rfl)
+    (rightDerivedLowerShriekCompIso Λ u₁ u₂)
+    (rightDerivedLowerShriekCompIso Λ u₂ a'') (rightDerivedLowerShriekCongrIso Λ h₂)
+    (rightDerivedLowerShriekCompIso Λ u₁ a') (rightDerivedLowerShriekCongrIso Λ h₁)
+    (rightDerivedLowerShriekCompIso Λ (u₁ ≫ u₂) a'') (rightDerivedLowerShriekCongrIso Λ h₁₂)
+    (lowerShriekPullbackOfComp Λ u₂ h₂) (lowerShriekPullbackOfComp Λ u₁ h₁)
+    (lowerShriekPullbackOfComp Λ (u₁ ≫ u₂) h₁₂) rfl rfl rfl ?hU ?hL ?hA K
+  case hU =>
+    intro K
+    have hU := unit_conjugateEquiv
+      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (u₁ ≫ u₂))
+      ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) u₂).comp
+        (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) u₁))
+      (leftDerivedUpperStarComp _ u₁ u₂ (u₁ ≫ u₂) rfl).inv K
+    rw [Adjunction.comp_unit_app, Category.assoc] at hU
+    exact hU
+  case hL => exact rightDerivedLowerShriekCompIso_hom_app_comp_isoRightDerivedLowerStar Λ u₁ u₂
+  case hA => exact rightDerivedLowerShriekCompIso_congr_assoc_app Λ u₁ u₂ h₁ h₂ h₁₂
 
 end Pullback
 

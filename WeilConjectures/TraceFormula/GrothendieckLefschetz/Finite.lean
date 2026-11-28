@@ -45,7 +45,7 @@ tr_Λ(F_{c,m} ∣ RΓ_c(X, K)) = ∑_{x̄} tr_Λ(F_{x̄,m} ∣ K_x̄).
   Frobenius correspondences (stated with `sorry`).
 - `AlgebraicGeometry.Etale.correspondenceOperator_iterateHom_geometricFiberFrobenius`,
   `AlgebraicGeometry.Etale.frobeniusStalkMap_iterateHom_geometricFiberFrobenius`: the operators
-  of `κ_{m,K} ≫ v` are the Frobenius operators of `v` (the first one stated with `sorry`).
+  of `κ_{m,K} ≫ v` are the Frobenius operators of `v`.
 - `AlgebraicGeometry.Etale.geometricFixedPointEquiv`: the points fixed by `(g_X^m, σ^m)` are the
   points fixed by `Φ_X^m`.
 - `AlgebraicGeometry.Etale.finite_geometricFixedPoint`: `X₀(𝔽_{q^m})` is finite for `m ≥ 1`.
@@ -65,6 +65,13 @@ the Frobenius correspondences the iterates `ProEtale.iterateHom`; they agree
 (`AlgebraicGeometry.Etale.endIterate_eq_iterateHom`,
 `AlgebraicGeometry.Etale.eqToHom_comp_iterateWeilDatum`). The lemma `endIterate_eq_iterateHom` is
 `endIterate_eq_pow` with the right-hand side folded back into `iterateHom`, for rewriting.
+
+The operator of `κ_{m,K} ≫ v` is compared with the global Frobenius operator of `v` through the
+factorization `Φ_X^m = F_X ≫ g_X^m` by the absolute `q ^ m`-power Frobenius `F_X`
+(`AlgebraicGeometry.Etale.iterateHom_geometricFiberFrobenius_eq`), under which `κ_m` is the
+trivialization of `L(F_X)^*`
+(`AlgebraicGeometry.Etale.leftDerivedUpperStarGeometricFiberFrobeniusIterateIso_hom_app_eq`), and
+`AlgebraicGeometry.Etale.correspondenceOperator_comp_eq_globalOperator`.
 -/
 
 @[expose] public section

@@ -25453,6 +25453,7 @@ public import WeilConjectures.TraceFormula.GraphPieces
 public import WeilConjectures.TraceFormula.GrothendieckLefschetz.CoefficientChange
 public import WeilConjectures.TraceFormula.GrothendieckLefschetz.Finite
 public import WeilConjectures.TraceFormula.GrothendieckLefschetz.FrobeniusPullback
+public import WeilConjectures.TraceFormula.GrothendieckLefschetz.FrobeniusPullbackComp
 public import WeilConjectures.TraceFormula.GrothendieckLefschetz.Integral
 public import WeilConjectures.TraceFormula.GrothendieckLefschetz.PointCount
 public import WeilConjectures.TraceFormula.GrothendieckLefschetz.Rational
