@@ -42,7 +42,6 @@ variable {C₁ C₂ C₃ : Type*} [Category* C₁] [Category* C₂] [Category* C
   [P₃.IsStableUnderShift ℤ] {F₁₂ : C₁ ⥤ C₂} {F₂₃ : C₂ ⥤ C₃} {F₁₃ : C₁ ⥤ C₃}
   [F₁₂.CommShift ℤ] [F₂₃.CommShift ℤ] [F₁₃.CommShift ℤ]
 
-set_option linter.flexible false in
 /-- A natural transformation between functors of full subcategories induced by functors
 commuting with the shifts, which is given componentwise by a natural transformation commuting
 with the shifts, commutes with the shifts. -/
@@ -59,7 +58,11 @@ lemma natTransCommShift_liftFullSubcategory (h₁₂ : ∀ X, P₁ X → P₂ (F
       (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft P₁.ι γ ≫
       (P₁.liftFullSubcategoryCompιIso P₃ F₁₃ h₁₃).inv := by
     ext K
-    simp [liftFullSubcategoryCompιIso, hα]
+    simp only [Functor.comp_obj, ι_obj, Functor.whiskerRight_app, ι_map, hα,
+      liftFullSubcategoryCompιIso, Iso.refl_hom, Functor.whiskerLeft_id',
+      Functor.whiskerRight_id', Iso.refl_inv, Category.id_comp, NatTrans.comp_app,
+      Functor.associator_hom_app, Functor.associator_inv_app, Functor.whiskerLeft_app,
+      NatTrans.id_app]
     erw [Category.id_comp, Category.id_comp, Category.comp_id]
   have : NatTrans.CommShift (Functor.whiskerRight α P₃.ι) ℤ := by
     rw [e]

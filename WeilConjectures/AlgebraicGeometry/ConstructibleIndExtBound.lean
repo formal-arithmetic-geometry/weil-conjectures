@@ -11,7 +11,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartStratificationDefs
 import WeilConjectures.AlgebraicGeometry.ConstructibleIndExtBoundOfContinuity
-import WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleExtContinuity
 public import WeilConjectures.AlgebraicGeometry.ConstructibleExtContinuityAlgCl
 public import WeilConjectures.AlgebraicGeometry.ConstructibleExtContinuityFinite
 
@@ -54,28 +53,18 @@ theorem constructibleInd_extBound_noetherian
     (r : ℕ) (hr : d < r) :
     Subsingleton (@Abelian.Ext _ _ _ (HasExt.standard _) C B r) := by
   apply constructibleInd_extBound_of_continuity (coefficientHeartRingObj R) X C hC
-    ?_ d hbound B hB r hr
-  intro M hM I _ _ F c hc n f
-  let G := DerivedCategory.singleFunctor _ 0 ⋙ shiftFunctor _ n ⋙
-    preadditiveCoyoneda.obj (Opposite.op ((DerivedCategory.singleFunctor _ 0).obj M))
-  have : IsIso (colimit.post F G) :=
-    constructible_sheaf_ext_continuity ℓ E R hR X M hM
-      F (colimit.cocone F) (colimit.isColimit F) n
-  have : PreservesColimit F G := preservesColimit_of_isIso_post G F
-  obtain ⟨i, g, hg⟩ := Concrete.isColimit_exists_rep (F ⋙ G)
-    (isColimitOfPreserves G hc) f
-  exact ⟨i, g, hg.symm⟩
+    (constantModelExtContinuity_of_isLocallyNoetherian ℓ E R hR X) d hbound B hB r hr
 
 /-- A specified bound against constructible sheaves also bounds Ext into an
-ind-constructible sheaf. The coefficient equality includes the multiplication,
-via bundled monoid objects. -/
+ind-constructible sheaf on a locally Noetherian quasi-compact scheme. The coefficient
+equality includes the multiplication, via bundled monoid objects. -/
 theorem constructibleInd_extBound
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
     (_hΛ : Mon.mk Λ = Mon.mk (Profinite.continuousMapRingObj E) ∨
       Mon.mk Λ = Mon.mk (Profinite.padicAlgClRingObj ℓ))
-    (X : Scheme.{u})
+    (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
     (C : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     (_hC : IsConstantModelConstructible Λ X C)
     (d : ℕ)
@@ -88,14 +77,13 @@ theorem constructibleInd_extBound
     (r : ℕ) (hr : d < r) :
     Subsingleton (@Abelian.Ext _ _ _ (HasExt.standard _) C B r) := by
   rcases _hΛ with hΛ | hΛ
-  · have hΛ' : Λ = Profinite.continuousMapRingObj E := congrArg Mon.X hΛ
-    subst Λ
+  · obtain ⟨rfl, h⟩ := Mon.mk.inj hΛ
+    cases eq_of_heq h
     exact constructibleInd_extBound_of_continuity _ X C _hC
       (continuousMap_ext_continuity ℓ E X) d hbound B hB r hr
-  · have hΛ' : Λ = Profinite.padicAlgClRingObj ℓ := congrArg Mon.X hΛ
-    subst Λ
+  · obtain ⟨rfl, h⟩ := Mon.mk.inj hΛ
+    cases eq_of_heq h
     exact constructibleInd_extBound_of_continuity _ X C _hC
-      (padicAlgCl_ext_continuity ℓ X (fun F ↦ continuousMap_ext_continuity ℓ F X))
-      d hbound B hB r hr
+      (padicAlgCl_ext_continuity ℓ X) d hbound B hB r hr
 
 end AlgebraicGeometry.ProEtale

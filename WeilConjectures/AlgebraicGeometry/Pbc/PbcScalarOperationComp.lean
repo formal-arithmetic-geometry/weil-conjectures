@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Adjunction.MateHCompUnit
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarOperationIdentity
 import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarAmbientOperations
 import all WeilConjectures.AlgebraicGeometry.Pbc.PbcActualScalarPullbackSupplement
@@ -509,42 +510,6 @@ theorem pbcScalarOrdinaryPull_coefficients
     (pbcScalarCoefficientStructureSquare l F G j g)
     (pbcScalarCoefficientStructureSquare l E G (j.comp i) g) K
 
-private theorem scalarMate_coefficients
-    {C D E C' D' E' : Type*}
-    [Category C] [Category D] [Category E]
-    [Category C'] [Category D'] [Category E']
-    {L₁ : C ⥤ C'} {R₁ : C' ⥤ C} (a₁ : L₁ ⊣ R₁)
-    {L₂ : D ⥤ D'} {R₂ : D' ⥤ D} (a₂ : L₂ ⊣ R₂)
-    {L₃ : E ⥤ E'} {R₃ : E' ⥤ E} (a₃ : L₃ ⊣ R₃)
-    {F : C ⥤ D} {F' : C' ⥤ D'} {G : D ⥤ E} {G' : D' ⥤ E'}
-    {H : C ⥤ E} {H' : C' ⥤ E'}
-    (α : TwoSquare F L₁ L₂ F') (β : TwoSquare G L₂ L₃ G')
-    (γ : TwoSquare H L₁ L₃ H') (u : F ⋙ G ≅ H) (v : F' ⋙ G' ≅ H')
-    (ho : ∀ T : C, β.app (F.obj T) ≫ G'.map (α.app T) ≫
-      v.hom.app (L₁.obj T) = L₃.map (u.hom.app T) ≫ γ.app T) (K : C') :
-    G.map ((mateEquiv a₁ a₂ α).app K) ≫
-        (mateEquiv a₂ a₃ β).app (F'.obj K) ≫ R₃.map (v.hom.app K) =
-      u.hom.app (R₁.obj K) ≫ (mateEquiv a₁ a₃ γ).app K := by
-  have hs : ((TwoSquare.hComp α β).whiskerTop u.inv).whiskerBottom v.hom = γ := by
-    ext T
-    have ht := congrArg (fun z ↦ L₃.map (u.inv.app T) ≫ z) (ho T)
-    simp only [← L₃.map_comp_assoc, Iso.inv_hom_id_app, L₃.map_id,
-      Category.id_comp] at ht
-    simpa only [TwoSquare.hComp, TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
-      NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-      Functor.associator_hom_app, Functor.associator_inv_app,
-      Category.id_comp, Category.comp_id, Category.assoc] using ht
-  have hm := mateEquiv_whiskerTop_whiskerBottom a₁ a₃ (TwoSquare.hComp α β)
-    u.inv v.hom
-  rw [hs, mateEquiv_vcomp a₁ a₂ a₃] at hm
-  have hc := congrArg (fun z ↦ z.app K) hm
-  apply (cancel_epi (u.inv.app (R₁.obj K))).mp
-  change _ = u.inv.app _ ≫ u.hom.app _ ≫ _
-  simpa only [TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.vComp,
-    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.associator_hom_app, Functor.associator_inv_app,
-    Category.id_comp, Category.comp_id, Category.assoc, Iso.inv_hom_id_app_assoc] using hc.symm
-
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Direct-image comparison respects successive finite coefficient extensions. -/
@@ -559,7 +524,7 @@ theorem pbcScalarDirectImage_coefficients
     (pbcAmbientScalarComp l E F G i j Y).hom.app
         ((pbcActualDerivedPush g (pbcIntegralDatum l E)).obj K) ≫
       (pbcScalarDirectImageIso l E G (j.comp i) g).hom.app K := by
-  have hm := scalarMate_coefficients
+  have hm := mateEquiv_app_comp_of_hComp
     (pbcActualDerivedAdjunction g (pbcIntegralDatum l E))
     (pbcActualDerivedAdjunction g (pbcIntegralDatum l F))
     (pbcActualDerivedAdjunction g (pbcIntegralDatum l G))

@@ -8,6 +8,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.AdicCompletion.DerivedCompletionSupplement
 public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
 public import Mathlib.AlgebraicGeometry.Noetherian
+import WeilConjectures.AlgebraicGeometry.Integral.Finite.IntegralFiniteLevels
+import WeilConjectures.AlgebraicGeometry.IntegralModelsStacks
+import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-!
 # Constructibility of all reductions from the first
@@ -57,6 +60,32 @@ theorem integralCriterionReductions (l : ℕ) [Fact l.Prime]
         ∀ (n : ℕ) (q : ℤ), q < r ∨ s < q →
           IsZero ((DerivedCategory.homologyFunctor _ q).obj
             ((AdicCompletion.derivedReduction l E X n).obj K))) := by
-  sorry
+  have hfirst : constantModelBoundedConstructible (DerivedNakayama.quotientRing l E 1) X
+        ((AdicCompletion.derivedReduction l E X 0).obj K) →
+      (∀ n : ℕ, constantModelBoundedConstructible
+        (DerivedNakayama.quotientRing l E (n + 1)) X
+        ((AdicCompletion.derivedReduction l E X n).obj K)) ∧
+      ∃ r s : ℤ, r ≤ s ∧
+        ∀ (n : ℕ) (q : ℤ), q < r ∨ s < q →
+          IsZero ((DerivedCategory.homologyFunctor _ q).obj
+            ((AdicCompletion.derivedReduction l E X n).obj K)) := by
+    intro h₁
+    obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := h₁.1
+    have hbound (q : ℤ) (hq : q < a ∨ max a b < q) : IsZero
+        ((DerivedCategory.homologyFunctor _ q).obj
+          ((AdicCompletion.derivedReduction l E X 0).obj K)) := by
+      rcases hq with hq | hq
+      · exact (DerivedCategory.isGE_iff _ a).1 ha q hq
+      · exact (DerivedCategory.isLE_iff _ b).1 hb q (lt_of_le_of_lt (le_max_right a b) hq)
+    obtain ⟨hn, -, -⟩ := integral_finite_levels l E X K hK h₁ a (max a b) (le_max_left a b)
+      hbound
+    refine ⟨fun n ↦ (hn n).1, a, max a b, le_max_left a b, fun n q hq ↦ ?_⟩
+    obtain ⟨hge, hle⟩ := DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn (hn n).2
+    rcases hq with hq | hq
+    · exact (DerivedCategory.isGE_iff _ a).1 hge q hq
+    · exact (DerivedCategory.isLE_iff _ (max a b)).1 hle q hq
+  exact ⟨⟨hfirst, fun h ↦ h.1 0⟩,
+    fun h ↦ hfirst (IntegralModelsStacks.internal_integral_criterion_forward l E X K h).2.1,
+    fun h ↦ IntegralModelsStacks.internal_integral_criterion_reverse l E X K hK (h.1 0)⟩
 
 end AlgebraicGeometry.ProEtale

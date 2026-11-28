@@ -47,13 +47,12 @@ structure NormalizedPresentationData
   divisor : ∀ x : X, x ∈ iSup A →
     ∃ i, x ∈ A i ∧ ∀ j, x ∈ A j → c i ∣ c j
 
-set_option linter.unusedVariables false in
 /-- Existence of the finite normalized presentation data. -/
 theorem constantSubsheaf_normalized_core
     (X : TopCat.{u}) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C) [Mono ι]
     (isoC : C ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj
       (AddCommGrpCat.of (ULift.{u} ℤ)))
-    (hqc : ∀ U V : Opens X, IsCompact (U : Set X) → IsCompact (V : Set X) →
+    (_hqc : ∀ U V : Opens X, IsCompact (U : Set X) → IsCompact (V : Set X) →
       IsCompact ((U ⊓ V : Opens X) : Set X))
     (hgen : ∃ (n : ℕ) (U : Fin n → Opens X)
       (_ : ∀ i, IsCompact ((U i : Opens X) : Set X)),
@@ -62,11 +61,11 @@ theorem constantSubsheaf_normalized_core
           AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) ⟶ K, Epi g)
     (e : ∀ x : X, TopCat.Presheaf.stalk C.obj x ≅ AddCommGrpCat.of (ULift.{u} ℤ))
     (b : ℕ)
-    (hb : ∀ x : X, ∃ a : ℕ, a ≤ b + 1 ∧
+    (_hb : ∀ x : X, ∃ a : ℕ, a ≤ b + 1 ∧
       Set.range (fun t : ToType (TopCat.Presheaf.stalk K.obj x) ↦
         (e x).hom ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map ι.hom t)) =
       Set.range (fun z : ULift.{u} ℤ ↦ (a : ℤ) • z)) :
-    ∃ d : NormalizedPresentationData X K C ι isoC b, True := by
+    ∃ _d : NormalizedPresentationData X K C ι isoC b, True := by
   obtain ⟨n, A, hA, g, hg⟩ := hgen
   refine ⟨⟨n, A, hA, (fun _ => 1), ?_, g, hg, ?_⟩, True.intro⟩
   · intro i
@@ -96,7 +95,6 @@ private theorem normalized_positive_bound (p a B : ℕ) (hp : 0 < p) (ha : a ≤
     ⟨w.down, by simpa using (congrArg ULift.down hw).symm⟩
   exact (Nat.le_of_dvd (Nat.pos_of_ne_zero ha0) hdiv).trans ha
 
-set_option linter.unusedVariables false in
 /-- Completion of normalized presentation data to the normalized presentation, with the
 canonical generating sections and their constant values. -/
 theorem constantSubsheaf_normalized_completion
@@ -116,7 +114,7 @@ theorem constantSubsheaf_normalized_completion
       Set.range (fun t : ToType (TopCat.Presheaf.stalk K.obj x) ↦
         (e x).hom ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map ι.hom t)) =
       Set.range (fun z : ULift.{u} ℤ ↦ (a : ℤ) • z)) 
-    (d : NormalizedPresentationData X K C ι isoC b):
+    (_d : NormalizedPresentationData X K C ι isoC b):
     ∃ (n : ℕ) (A : Fin n → Opens X) (_ : ∀ i, IsCompact (A i : Set X))
       (c : Fin n → ℕ), (∀ i, 0 < c i ∧ c i ≤ b + 1) ∧
       ∃ (g : (∐ fun i => (abelianOpenExtensionByZero (A i)).obj

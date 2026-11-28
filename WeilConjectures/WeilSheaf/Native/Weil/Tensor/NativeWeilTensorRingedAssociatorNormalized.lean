@@ -24,7 +24,6 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option Elab.async false
 set_option cleanup.letToHave false
-set_option linter.style.haveILetI false
 
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite WeilConjectures
@@ -165,12 +164,12 @@ theorem nativeRingedAssociatorRepresentatives_normalized
           (t.hom.app (q.obj P, q.obj Q) ▷ F.obj (q.obj N)) ≫
           (α_ (F.obj (q.obj P)) (F.obj (q.obj Q)) (F.obj (q.obj N))).hom := by
   classical
-  letI mC : MonoidalCategory (CochainComplex (ProEtale.AdicSheaf l
+  let mC : MonoidalCategory (CochainComplex (ProEtale.AdicSheaf l
     (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) :=
     Mod.monoidalCategoryCochainComplex
-  letI := mC.toMonoidalCategoryStruct
+  let := mC.toMonoidalCategoryStruct
   intro ordinaryModel hcanonical t hforget P Q N hP hQ hN
-  letI := nativeWeilRingedMonoidal b SB
+  let := nativeWeilRingedMonoidal b SB
   obtain ⟨κ, hκ, hmodel⟩ := hcanonical
   let U := Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)
   let V := U.mapHomologicalComplex (.up ℤ)
@@ -178,7 +177,7 @@ theorem nativeRingedAssociatorRepresentatives_normalized
   let q := DerivedCategory.Q (C := ProEtaleWeilSheaf k₀ l X)
   let qA := DerivedCategory.Q (C := ProEtale.AdicSheaf l
     (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-  letI : Functor.LaxMonoidal qA := inferInstance
+  let : Functor.LaxMonoidal qA := inferInstance
   let ε := U.mapDerivedCategoryFactors
   let c (P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) :
       V.obj (nativeTensorComplex T P Q) ≅ V.obj P ⊗ V.obj Q :=
