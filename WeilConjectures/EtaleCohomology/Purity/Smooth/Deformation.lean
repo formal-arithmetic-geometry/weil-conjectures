@@ -463,7 +463,7 @@ theorem existsUnique_familyObject_iso [QuasiCompact D.proj]
   rw [← cancel_mono (ε.hom.app _)]
   exact hκ.trans ((key κ₀ ψ).trans hψ).symm
 
-omit [HasTateTwist.IsNormalized Λ] in
+omit [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ] in
 /-- *Base change.* The normalized comparison commutes with arbitrary base change
 `u : B' ⟶ B`, in particular with étale localization on `B`. Let `κ : F ≅ La^* 𝒞(g, s)` restrict
 to `θ` at `t = 1`, and let `v₁ : 𝔸¹_{B'} ⟶ 𝔸¹_B` be the base change of `u`. Then

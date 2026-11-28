@@ -415,8 +415,7 @@ private theorem finiteComparison_eq (n : ℕ)
         podFiniteHomComparison l E g n M N := by
   rfl
 
--- Keep the section instances as hypotheses of this public statement.
-set_option linter.unusedSectionVars false in
+omit [IsIso g] in
 /-- Naturality of the finite comparison in both inputs: the naturality clause of
 `podFiniteHomComparison_laws`. -/
 theorem podFiniteHomComparison_naturality (n : ℕ)

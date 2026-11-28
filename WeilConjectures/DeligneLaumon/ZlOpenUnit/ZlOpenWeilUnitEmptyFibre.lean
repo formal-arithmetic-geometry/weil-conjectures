@@ -437,8 +437,7 @@ def rationalAlphaComponent (E : Type u) [Field E] [Algebra ℚ_[l] E]
       (zlFrobenius_naturality D j₀)) ≪≫
     localPullbackComposition l E (zlFiberMap D j₀) (D.geometricFrobenius X₀).asIso.hom K
 
--- Keep the section instances as hypotheses of this public statement.
-set_option linter.unusedSectionVars false in
+omit [IsOpenImmersion j₀.left] in
 /-- Naturality of the specified comparison alpha. -/
 theorem rationalAlpha_natural (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E]

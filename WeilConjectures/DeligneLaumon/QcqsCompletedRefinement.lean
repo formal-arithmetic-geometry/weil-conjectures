@@ -107,6 +107,7 @@ variable (l : ℕ) [Fact l.Prime]
   [f.IsOver (Spec (.of K₀))]
   [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
 
+omit [IsSeparated f] [LocallyOfFiniteType f] in
 include hl in
 /-- A refinement `r` of compactifications of `f` gives an isomorphism between the completed
 compactly supported direct images of `K` along the two compactifications, normalized by the

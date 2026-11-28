@@ -651,8 +651,6 @@ private theorem native_pullback_square (A : Type u) [CommRing A] [Finite A]
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
--- `letI` is needed: with `let` the kernel check hits a deterministic timeout.
-set_option linter.style.haveILetI false in
 -- Explicit comparison congruences are checked within this declaration.
 /-- The fixed scalar pullback comparisons identify the two pullback-square words. -/
 theorem strictFinitePullbackSquareCoherence (b : Base l E)
@@ -679,8 +677,7 @@ theorem strictFinitePullbackSquareCoherence (b : Base l E)
       (comparisonFinitePull l E b h n).inv.app
         ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n)))
           f).leftDerivedFunctor.obj M) := by
-  letI := b.finite n
-  have H := native_pullback_square (R l E n) sq M
+  have H := @native_pullback_square (R l E n) _ (b.finite n) _ _ _ _ _ _ _ _ sq M
   run_tac Lean.Elab.Tactic.withMainContext do
     let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
     exactByConversion h

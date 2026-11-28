@@ -49,6 +49,7 @@ attribute [local irreducible] HasDerivedCategory.standard
   pbcScalarCommShift pbcRationalHasShift
   ScalarLocalization.composition ScalarLocalization.category
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 private theorem stageFactors (E : Padic.FiniteCoefficientFields l Ω) :
     sfRationalConstructibleLocalization l (pbcFiniteField.{u} l Ω E) T ⋙
         suppliedJ l Ω T stage E =

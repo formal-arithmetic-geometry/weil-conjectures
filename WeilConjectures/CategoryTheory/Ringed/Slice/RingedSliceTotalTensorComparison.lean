@@ -313,32 +313,6 @@ private theorem slice_pushforward_colimits
     ⟨fun {_} _ ↦ reflectsColimitsOfShape_of_reflectsIsomorphisms⟩
   exact preservesColimits_of_reflects_of_preserves (SheafOfModules.pushforward.{z} φ) T
 
--- Infer the native specialization once, before its representative equation is used.
--- The statement is inferred from the tactic block; a `theorem` would need it written out.
-set_option linter.defProp false in
-private def nativeTensorRestrictionComparison := by
-  let := nativeModules.{c, v, u} J A
-  let : MonoidalCategory (SheafOfModules.{max c v u} (((sheafCompose J
-    (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A).over U)) :=
-      nativeModules.{max c v, v, u} (J.over U) (A.over U)
-  let V : ModuleSheaf.{c, v, u} J A ⥤
-      ModuleSheaf.{max c v, v, u} (J.over U) (A.over U) :=
-    SheafOfModules.localizedSystemRestriction.{c, v, u} A U
-  let : V.Additive := (ringedOverFunctor_exactGeneral.{c, v, max c v u, max c v u}
-    ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A) U).1
-  have : PreservesColimitsOfSize.{max c v u, max c v u} V :=
-    slice_pushforward_colimits (𝟙 _)
-  have : PreservesColimitsOfSize.{0, 0} V := preservesSmallestColimits_of_preservesColimits V
-  let : MonoidalPreadditive (ModuleSheaf.{c, v, u} J A) :=
-    SheafOfModules.cochainModulesPreadditive A
-  let : MonoidalPreadditive (ModuleSheaf.{max c v, v, u} (J.over U) (A.over U)) :=
-    SheafOfModules.cochainModulesPreadditive (A.over U)
-  exact (tensorTotalRestriction V
-      (tensorOverIso.{c, v, u} J A U)
-      (by
-        intro M M' N N' f g
-        exact tensorOverIso_naturality.{c, v, u} J A U f g))
-
 private theorem nativeTensorGenerator_eq
     (P Q : CochainComplex (ModuleSheaf.{c, v, u} J A) ℤ)
     (p q n : ℤ) (h : p + q = n) (X : Cᵒᵖ)
@@ -361,7 +335,30 @@ private theorem tensorComplexOverComparison (U : C) :
         coefficientTensorGenerator.{u, max c v, v} (J.over U) (A.over U)
           ((ringedSliceComplexRestriction.{c, v, u} J A U).obj P)
           ((ringedSliceComplexRestriction.{c, v, u} J A U).obj Q) p q k h (op X) x y := by
-  obtain ⟨γ, hγ⟩ := nativeTensorRestrictionComparison.{c, v, u} J A U
+  -- Infer the native specialization once, before its representative equation is used.
+  have hnative := by
+    let := nativeModules.{c, v, u} J A
+    let : MonoidalCategory (SheafOfModules.{max c v u} (((sheafCompose J
+      (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A).over U)) :=
+        nativeModules.{max c v, v, u} (J.over U) (A.over U)
+    let V : ModuleSheaf.{c, v, u} J A ⥤
+        ModuleSheaf.{max c v, v, u} (J.over U) (A.over U) :=
+      SheafOfModules.localizedSystemRestriction.{c, v, u} A U
+    let : V.Additive := (ringedOverFunctor_exactGeneral.{c, v, max c v u, max c v u}
+      ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A) U).1
+    have : PreservesColimitsOfSize.{max c v u, max c v u} V :=
+      slice_pushforward_colimits (𝟙 _)
+    have : PreservesColimitsOfSize.{0, 0} V := preservesSmallestColimits_of_preservesColimits V
+    let : MonoidalPreadditive (ModuleSheaf.{c, v, u} J A) :=
+      SheafOfModules.cochainModulesPreadditive A
+    let : MonoidalPreadditive (ModuleSheaf.{max c v, v, u} (J.over U) (A.over U)) :=
+      SheafOfModules.cochainModulesPreadditive (A.over U)
+    exact (tensorTotalRestriction V
+        (tensorOverIso.{c, v, u} J A U)
+        (by
+          intro M M' N N' f g
+          exact tensorOverIso_naturality.{c, v, u} J A U f g))
+  obtain ⟨γ, hγ⟩ := hnative
   refine ⟨γ, ?_⟩
   intro P Q p q n h X x y
   have hi := hγ P Q p q n h

@@ -82,7 +82,9 @@ private abbrev localizationInvAux
     ringedSectionLocalizationCarrierOfUniverses O s X :=
   IsLocalization.Away.invSelf (R := O.obj.obj X) (sectionValueAux O s X)
 
-omit [EssentiallySmall.{u, vC, uC} C] in
+omit [EssentiallySmall.{u, vC, uC} C] [HasSheafify J AddCommGrpCat.{u}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasSheafify J CommRingCat.{u}]
+  [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
 private theorem localization_map_invAux
     (s : (O.obj ⋙ forget CommRingCat).sections) {X Y : Cᵒᵖ} (g : X ⟶ Y) :
     ringedSectionLocalizationMapOfUniverses O s g
@@ -114,7 +116,8 @@ private def fractionMapAux
         change ringedSectionLocalizationMapOfUniverses O s g _ = _
         rw [map_pow, localization_map_invAux]))
 
-omit [EssentiallySmall.{u, vC, uC} C] in
+omit [EssentiallySmall.{u, vC, uC} C] [HasSheafify J AddCommGrpCat.{u}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasSheafify J CommRingCat.{u}] in
 private theorem fractionMap_applyAux
     (s : (O.obj ⋙ forget CommRingCat).sections) (n : ℕ)
     (X : Cᵒᵖ) (a : O.obj.obj X) :
@@ -132,7 +135,8 @@ private theorem scalar_applyAux
   change a • sectionValueAux O s X = _
   rfl
 
-omit [EssentiallySmall.{u, vC, uC} C] in
+omit [EssentiallySmall.{u, vC, uC} C] [HasSheafify J AddCommGrpCat.{u}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasSheafify J CommRingCat.{u}] in
 private theorem fractionMap_stepAux
     (s : (O.obj ⋙ forget CommRingCat).sections) (n : ℕ) :
     (regularScalarAux O s).asHom.val ≫ fractionMapAux O s (n + 1) = fractionMapAux O s n := by
@@ -212,7 +216,7 @@ private def localizationSheafMapAux
       (PresheafOfModules.sheafificationAdjunction
         (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O).obj)).unit.app _)
 
-omit [EssentiallySmall.{u, vC, uC} C] in
+omit [EssentiallySmall.{u, vC, uC} C] [HasSheafify J CommRingCat.{u}] in
 private theorem localizationSheafMap_stepAux
     (s : (O.obj ⋙ forget CommRingCat).sections) (n : ℕ) :
     (regularScalarAux O s).asHom ≫ localizationSheafMapAux O s (n + 1) =
@@ -263,14 +267,14 @@ private def localizationSheafCoconeIsColimitAux
     rw [Adjunction.homEquiv_unit, ← Category.assoc]
     exact congrArg (fun f ↦ U.map f) (hm n)
 
-omit [EssentiallySmall.{u, vC, uC} C] in
+omit [EssentiallySmall.{u, vC, uC} C] [HasSheafify J CommRingCat.{u}] in
 private theorem localizationSheafMap_zeroAux
     (s : (O.obj ⋙ forget CommRingCat).sections) :
     localizationSheafMapAux O s 0 = ringedSectionLocalizationUnitOfUniverses O s := by
   unfold localizationSheafMapAux ringedSectionLocalizationUnitOfUniverses
   congr 2
 
-omit [EssentiallySmall.{u, vC, uC} C] in
+omit [EssentiallySmall.{u, vC, uC} C] [HasSheafify J CommRingCat.{u}] in
 /-- The localization of the regular module is its multiplication colimit, with
 zeroth leg the localization unit.
 Source: Stacks Project, Algebra, Tag 00CM, and Modules on Sites, Tag 03CY. -/

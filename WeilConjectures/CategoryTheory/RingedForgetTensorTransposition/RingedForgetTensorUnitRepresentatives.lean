@@ -72,6 +72,8 @@ def ringedForgetTensorUnitIso :
       ((HomologicalComplex.single _ (.up ℤ) (0 : ℤ)).mapIso u.coherence.unit) ≪≫
     cA.unitIso.symm
 
+omit [∀ I : Type (max c v r), PreservesLimitsOfShape (Discrete I) U]
+  [U.PreservesKInjectiveComplexes] in
 /-- Both unit squares on a flat-term K-flat representative for the explicitly
 constructed degree-zero unit comparison. No assertion is made on other objects,
 or about associators or symmetry.

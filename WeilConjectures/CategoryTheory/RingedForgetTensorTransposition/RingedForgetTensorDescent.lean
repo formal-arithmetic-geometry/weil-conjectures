@@ -323,6 +323,8 @@ private theorem representative_unique
     (hμ X.1.obj X.2.obj hX.1 hY.1 hUX hUY hX.2 hY.2).trans
       (hν X.1.obj X.2.obj hX.1 hY.1 hUX hUY hX.2 hY.2).symm
 
+omit [∀ I : Type (max c v r), PreservesLimitsOfShape (Discrete I) U]
+  [U.PreservesKInjectiveComplexes] in
 /-- The summandwise underived comparison extends uniquely and coherently to derived tensors.
 This assertion concerns tensors only; it has no internal-Hom comparison or transpose law.
 

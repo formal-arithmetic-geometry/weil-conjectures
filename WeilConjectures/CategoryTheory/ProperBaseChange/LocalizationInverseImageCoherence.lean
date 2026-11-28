@@ -352,7 +352,9 @@ private abbrev localizationInv
     ringedSectionLocalizationCarrierOfUniverses O s X :=
   IsLocalization.Away.invSelf (R := O.obj.obj X) (sectionValue O s X)
 
-omit [EssentiallySmall.{u} C] in
+omit [EssentiallySmall.{u} C] [HasSheafify J AddCommGrpCat.{u}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasSheafify J CommRingCat.{u}]
+  [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
 private theorem localization_map_inv
     (s : (O.obj ⋙ forget CommRingCat).sections) {X Y : Cᵒᵖ} (g : X ⟶ Y) :
     ringedSectionLocalizationMapOfUniverses O s g
@@ -384,7 +386,8 @@ private def fractionMap
         change ringedSectionLocalizationMapOfUniverses O s g _ = _
         rw [map_pow, localization_map_inv]))
 
-omit [EssentiallySmall.{u} C] in
+omit [EssentiallySmall.{u} C] [HasSheafify J AddCommGrpCat.{u}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasSheafify J CommRingCat.{u}] in
 private theorem fractionMap_apply
     (s : (O.obj ⋙ forget CommRingCat).sections) (n : ℕ)
     (X : Cᵒᵖ) (a : O.obj.obj X) :
@@ -402,7 +405,8 @@ private theorem scalar_apply
   change a • sectionValue O s X = _
   rfl
 
-omit [EssentiallySmall.{u} C] in
+omit [EssentiallySmall.{u} C] [HasSheafify J AddCommGrpCat.{u}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasSheafify J CommRingCat.{u}] in
 private theorem fractionMap_step
     (s : (O.obj ⋙ forget CommRingCat).sections) (n : ℕ) :
     (regularScalar O s).asHom.val ≫ fractionMap O s (n + 1) = fractionMap O s n := by
@@ -482,7 +486,7 @@ private def localizationSheafMap
       (PresheafOfModules.sheafificationAdjunction
         (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O).obj)).unit.app _)
 
-omit [EssentiallySmall.{u} C] in
+omit [EssentiallySmall.{u} C] [HasSheafify J CommRingCat.{u}] in
 private theorem localizationSheafMap_step
     (s : (O.obj ⋙ forget CommRingCat).sections) (n : ℕ) :
     (regularScalar O s).asHom ≫ localizationSheafMap O s (n + 1) =
@@ -533,7 +537,7 @@ private def localizationSheafCoconeIsColimit
     rw [Adjunction.homEquiv_unit, ← Category.assoc]
     exact congrArg (fun f ↦ U.map f) (hm n)
 
-omit [EssentiallySmall.{u} C] in
+omit [EssentiallySmall.{u} C] [HasSheafify J CommRingCat.{u}] in
 private theorem localizationSheafMap_zero
     (s : (O.obj ⋙ forget CommRingCat).sections) :
     localizationSheafMap O s 0 = ringedSectionLocalizationUnitOfUniverses O s := by
@@ -1176,6 +1180,7 @@ variable [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
 variable (R : Sheaf J CommRingCat.{u})
 variable (t : (R.obj ⋙ forget CommRingCat.{u}).sections)
 
+omit [EssentiallySmall.{u} C] [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
 private theorem hom_ext {A : Sheaf J CommRingCat.{u}}
     (f g : ringedLocalizationRingOfUniverses R t ⟶ A)
     (h : ringedLocalizationRingUnitOfUniverses R t ≫ f =
@@ -1218,6 +1223,7 @@ private def lift {A : Sheaf J CommRingCat.{u}} (c : R ⟶ A)
         exact congrArg (fun k ↦ k r) (c.hom.naturality g) }
   exact ((sheafificationAdjunction J CommRingCat.{u}).homEquiv _ _).symm f
 
+omit [EssentiallySmall.{u} C] [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
 private theorem lift_unit {A : Sheaf J CommRingCat.{u}} (c : R ⟶ A)
     (hu : ∀ U, IsUnit (c.hom.app U (t.val U))) :
     ringedLocalizationRingUnitOfUniverses R t ≫ lift R t c hu = c := by

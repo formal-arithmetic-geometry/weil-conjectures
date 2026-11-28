@@ -118,6 +118,7 @@ private theorem ordinary_second_section (Y : Scheme.{u})
   rw [Iso.hom_inv_id, hn]
   exact Iso.inv_hom_id_app _ _
 
+omit [IsCommMonObj Λ] in
 private theorem diagonal_single_unit (Y : Scheme.{u}) :
     (CondensedRing.lowerStar Λ (diagonalImmersion Y)).singleRightDerivedUnit.app
         (Mod.regular (condensedRingObj Λ (ProjectiveLine Y))) =

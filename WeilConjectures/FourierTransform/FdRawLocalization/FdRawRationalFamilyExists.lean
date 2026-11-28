@@ -88,6 +88,7 @@ private def familyPresentation : RationalFamily l Ω T stage := by
 
 attribute [local irreducible] familyPresentation
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 /-- The supplied stage functors and their shifts admit the named stage presentation: there is a
 `RationalFamily` for `stage`. -/
 theorem rawRationalFamilyExists : Nonempty (RationalFamily l Ω T stage) :=

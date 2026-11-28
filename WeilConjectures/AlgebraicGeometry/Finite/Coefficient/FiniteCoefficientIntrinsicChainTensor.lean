@@ -243,6 +243,7 @@ private theorem nu_tensor_hom_ext
   ext U x
   exact congrArg (fun z ↦ z.hom.app U x) ha
 
+omit [Finite A] in
 private theorem nu_preservesColimits :
     PreservesColimitsOfSize.{0, 0} (finiteCoefficientIntrinsicComparison X A) := by
   have := (ProEtale.finiteCoefficientIntrinsicRealization_exact X
@@ -306,6 +307,7 @@ def FiniteCoefficientChainTensorNormalization :=
   FiniteCoefficientTotalComparison.Normalization (finiteCoefficientIntrinsicComparison X A)
     (FiniteCoefficientTensorNormalization X A)
 
+omit [Finite A] in
 /-- The termwise finite intrinsic comparison has a unique normalized total tensor isomorphism. -/
 theorem finiteCoefficientIntrinsicChainTensor_existsUnique
     (P Q : CochainComplex (Sheaf X.smallEtaleTopology

@@ -72,8 +72,6 @@ namespace CategoryTheory
 
 end CategoryTheory
 
--- Keeps the deprecated `TwoSquare.natTrans` so that the statement is unchanged.
-set_option linter.deprecated false in
 private theorem mate_rectangle
     {A₀ A₁ A₂ A₃ B₀ B₁ B₂ B₃ : Type*}
     [Category* A₀] [Category* A₁] [Category* A₂] [Category* A₃]
@@ -89,12 +87,12 @@ private theorem mate_rectangle
     (coh : ∀ M, gb.map (lc.app M) ≫ lg.app (c.obj M) ≫ T₃.map (sa.app M) =
       sb.app (T₀.obj M) ≫ ab.map (lf.app M) ≫ la.app (f.obj M))
     (J : A₁) :
-    cb.map ((mateEquiv af bf (TwoSquare.mk _ _ _ _ lf)).natTrans.app J) ≫
-        (mateEquiv bf bg (TwoSquare.mk _ _ _ _ sb)).natTrans.app (T₁.obj J) ≫
+    cb.map ((mateEquiv af bf (TwoSquare.mk _ _ _ _ lf)).app J) ≫
+        (mateEquiv bf bg (TwoSquare.mk _ _ _ _ sb)).app (T₁.obj J) ≫
         rgb.map (la.app J) =
       lc.app (rf.obj J) ≫
-        T₂.map ((mateEquiv af ag (TwoSquare.mk _ _ _ _ sa)).natTrans.app J) ≫
-        (mateEquiv ag bg (TwoSquare.mk _ _ _ _ lg)).natTrans.app (a.obj J) := by
+        T₂.map ((mateEquiv af ag (TwoSquare.mk _ _ _ _ sa)).app J) ≫
+        (mateEquiv ag bg (TwoSquare.mk _ _ _ _ lg)).app (a.obj J) := by
   let r := (mateEquiv af bf (TwoSquare.mk _ _ _ _ lf))
   let t := (mateEquiv ag bg (TwoSquare.mk _ _ _ _ lg))
   let e := (mateEquiv af ag (TwoSquare.mk _ _ _ _ sa))
@@ -134,8 +132,6 @@ private theorem mate_rectangle
   rw [reassoc_of% coh]
   rfl
 
--- Keeps the deprecated `TwoSquare.natTrans` so that the statement is unchanged.
-set_option linter.deprecated false in
 private theorem mate_rectangle_of_eq
     {A₀ A₁ A₂ A₃ B₀ B₁ B₂ B₃ : Type*}
     [Category* A₀] [Category* A₁] [Category* A₂] [Category* A₃]
@@ -152,10 +148,10 @@ private theorem mate_rectangle_of_eq
       sb.app (T₀.obj M) ≫ ab.map (lf.app M) ≫ la.app (f.obj M))
     (r : rf ⋙ T₀ ⟶ T₁ ⋙ rfb) (t : rg ⋙ T₂ ⟶ T₃ ⋙ rgb)
     (e : rf ⋙ c ⟶ a ⋙ rg) (eb : rfb ⋙ cb ⟶ ab ⋙ rgb)
-    (hr : r = (mateEquiv af bf (TwoSquare.mk _ _ _ _ lf)).natTrans)
-    (ht : t = (mateEquiv ag bg (TwoSquare.mk _ _ _ _ lg)).natTrans)
-    (he : e = (mateEquiv af ag (TwoSquare.mk _ _ _ _ sa)).natTrans)
-    (heb : eb = (mateEquiv bf bg (TwoSquare.mk _ _ _ _ sb)).natTrans)
+    (hr : r = (mateEquiv af bf (TwoSquare.mk _ _ _ _ lf)))
+    (ht : t = (mateEquiv ag bg (TwoSquare.mk _ _ _ _ lg)))
+    (he : e = (mateEquiv af ag (TwoSquare.mk _ _ _ _ sa)))
+    (heb : eb = (mateEquiv bf bg (TwoSquare.mk _ _ _ _ sb)))
     (J : A₁) :
     mateRouteLeft cb r eb la J = mateRouteRight T₂ lc e t J := by
   subst r
@@ -164,8 +160,6 @@ private theorem mate_rectangle_of_eq
   subst eb
   exact mate_rectangle af ag bf bg lf lg la lc sa sb coh J
 
--- Keeps the deprecated `TwoSquare.natTrans` so that the statement is unchanged.
-set_option linter.deprecated false in
 private theorem mate_transport
     {A₀ A₁ A₂ A₃ B₀ B₁ B₂ B₃ : Type*}
     [Category* A₀] [Category* A₁] [Category* A₂] [Category* A₃]
@@ -177,17 +171,17 @@ private theorem mate_transport
     {E₀ : A₀ ⥤ B₀} {E₁ : A₁ ⥤ B₁} {E₂ : A₂ ⥤ B₂} {E₃ : A₃ ⥤ B₃}
     (jf : f ⋙ E₁ ≅ E₀ ⋙ fb) (jg : g ⋙ E₃ ≅ E₂ ⋙ gb)
     (uf : rf ⋙ E₀ ≅ E₁ ⋙ rfb) (ug : rg ⋙ E₂ ≅ E₃ ⋙ rgb)
-    (hf : (mateEquiv af bf (TwoSquare.mk _ _ _ _ jf.inv)).natTrans = uf.hom)
-    (hg : (mateEquiv ag bg (TwoSquare.mk _ _ _ _ jg.inv)).natTrans = ug.hom)
+    (hf : (mateEquiv af bf (TwoSquare.mk _ _ _ _ jf.inv)) = uf.hom)
+    (hg : (mateEquiv ag bg (TwoSquare.mk _ _ _ _ jg.inv)) = ug.hom)
     (p : c ⋙ E₂ ≅ E₀ ⋙ cb) (q : a ⋙ E₃ ≅ E₁ ⋙ ab)
     (sa : c ⋙ g ⟶ f ⋙ a) (sb : cb ⋙ gb ⟶ fb ⋙ ab)
     (coh : ∀ M, E₃.map (sa.app M) ≫ q.hom.app (f.obj M) ≫
       ab.map (jf.hom.app M) = jg.hom.app (c.obj M) ≫
         gb.map (p.hom.app M) ≫ sb.app (E₀.obj M)) (J : A₁) :
-    E₂.map ((mateEquiv af ag (TwoSquare.mk _ _ _ _ sa)).natTrans.app J) ≫
+    E₂.map ((mateEquiv af ag (TwoSquare.mk _ _ _ _ sa)).app J) ≫
         ug.hom.app (a.obj J) ≫ rgb.map (q.hom.app J) =
       p.hom.app (rf.obj J) ≫ cb.map (uf.hom.app J) ≫
-        (mateEquiv bf bg (TwoSquare.mk _ _ _ _ sb)).natTrans.app (E₁.obj J) := by
+        (mateEquiv bf bg (TwoSquare.mk _ _ _ _ sb)).app (E₁.obj J) := by
   have hc (M : A₀) :
       gb.map (p.inv.app M) ≫ jg.inv.app (c.obj M) ≫ E₃.map (sa.app M) =
         sb.app (E₀.obj M) ≫ ab.map (jf.inv.app M) ≫ q.inv.app (f.obj M) := by
@@ -245,8 +239,6 @@ private theorem compositionCoherence_eq
   subst k
   simpa only [eqToIso_refl, Iso.refl_trans] using hy
 
--- Keeps the deprecated `TwoSquare.natTrans` so that the statement is unchanged.
-set_option linter.deprecated false in
 private theorem mate_transport_of_eq
     {A₀ A₁ A₂ A₃ B₀ B₁ B₂ B₃ : Type*}
     [Category* A₀] [Category* A₁] [Category* A₂] [Category* A₃]
@@ -258,14 +250,14 @@ private theorem mate_transport_of_eq
     {E₀ : A₀ ⥤ B₀} {E₁ : A₁ ⥤ B₁} {E₂ : A₂ ⥤ B₂} {E₃ : A₃ ⥤ B₃}
     (jf : f ⋙ E₁ ≅ E₀ ⋙ fb) (jg : g ⋙ E₃ ≅ E₂ ⋙ gb)
     (uf : rf ⋙ E₀ ≅ E₁ ⋙ rfb) (ug : rg ⋙ E₂ ≅ E₃ ⋙ rgb)
-    (hf : (mateEquiv af bf (TwoSquare.mk _ _ _ _ jf.inv)).natTrans = uf.hom)
-    (hg : (mateEquiv ag bg (TwoSquare.mk _ _ _ _ jg.inv)).natTrans = ug.hom)
+    (hf : (mateEquiv af bf (TwoSquare.mk _ _ _ _ jf.inv)) = uf.hom)
+    (hg : (mateEquiv ag bg (TwoSquare.mk _ _ _ _ jg.inv)) = ug.hom)
     (p : c ⋙ E₂ ≅ E₀ ⋙ cb) (q : a ⋙ E₃ ≅ E₁ ⋙ ab)
     (sa : c ⋙ g ⟶ f ⋙ a) (sb : cb ⋙ gb ⟶ fb ⋙ ab)
     (coh : ∀ M, squareCoherence jf q p jg sa sb M)
     (e : rf ⋙ c ⟶ a ⋙ rg) (eb : rfb ⋙ cb ⟶ ab ⋙ rgb)
-    (he : e = (mateEquiv af ag (TwoSquare.mk _ _ _ _ sa)).natTrans)
-    (heb : eb = (mateEquiv bf bg (TwoSquare.mk _ _ _ _ sb)).natTrans)
+    (he : e = (mateEquiv af ag (TwoSquare.mk _ _ _ _ sa)))
+    (heb : eb = (mateEquiv bf bg (TwoSquare.mk _ _ _ _ sb)))
     (J : A₁) :
     mateRouteLeft E₂ e ug.hom q.hom J =
       mateRouteRight cb p.hom uf.hom eb J := by
@@ -516,8 +508,6 @@ private theorem iso_square_transport_to
   subst tt
   exact iso_square_transport jf ja jc jg jh x xb y yb hx hy M
 
--- Keeps the deprecated `TwoSquare.natTrans` so that the statement is unchanged.
-set_option linter.deprecated false in
 private theorem ambient_mate
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R]
@@ -525,24 +515,20 @@ private theorem ambient_mate
     {f : X ⟶ Y} {f' : X' ⟶ C} (sq : ChosenCartesianSquare a f' f c) :
     scalarAmbientExchange R sq =
       (mateEquiv (adj R f) (adj R f')
-        (TwoSquare.mk _ _ _ _ (scalarPullbackSquare R sq).hom)).natTrans := by
+        (TwoSquare.mk _ _ _ _ (scalarPullbackSquare R sq).hom)) := by
   unfold scalarAmbientExchange
   rfl
 
--- Keeps the deprecated `TwoSquare.natTrans` so that the statement is unchanged.
-set_option linter.deprecated false in
 omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ T)]
     [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ' T)] in
 private theorem scalar_rho_mate (φ : Λ ⟶ Λ') [IsMonHom φ]
     {U V : Scheme.{u}} (h : U ⟶ V)
     (b : D φ V ⋙ L Λ' h ≅ L Λ h ⋙ D φ U) :
     rho φ h b = (mateEquiv (adj Λ h) (adj Λ' h)
-      (TwoSquare.mk _ _ _ _ b.hom)).natTrans := by
+      (TwoSquare.mk _ _ _ _ b.hom)) := by
   unfold rho
   rfl
 
--- Keeps the deprecated `TwoSquare.natTrans` so that the statement is unchanged.
-set_option linter.deprecated false in
 private theorem section_exchange_mate
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R]
@@ -557,19 +543,17 @@ private theorem section_exchange_mate
             eqToIso (congrArg
               (fun k : X' ⟶ Y ↦ ModuleRingedComparison.derivedPullback R k)
               sq.toCommSq.w.symm) ≪≫
-            ModuleRingedComparison.derivedPullbackComposition R a f).hom)).natTrans := by
+            ModuleRingedComparison.derivedPullbackComposition R a f).hom)) := by
   unfold sectionRectangleExchange
   rfl
 
--- Keeps the deprecated `TwoSquare.natTrans` so that the statement is unchanged.
-set_option linter.deprecated false in
 private theorem scalar_derived_mate
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R]
     [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules R T)]
     {U V : Scheme.{u}} (h : U ⟶ V) :
     (mateEquiv (adj R h) (ModuleRingedComparison.derivedAdjunction R h)
-      (TwoSquare.mk _ _ _ _ (scalarSectionPullComparison R h).inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ (scalarSectionPullComparison R h).inv)) =
         (scalarSectionPushComparison R h).hom := by
   unfold scalarSectionPushComparison
   rfl

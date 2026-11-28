@@ -102,7 +102,8 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
   [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasSheafify J CommRingCat.{u}]
   [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
-omit [EssentiallySmall C] in
+omit [EssentiallySmall C] [HasSheafify J AddCommGrpCat.{u}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{u}] in
 private theorem restrict_scalar_identity
     (A : Type v) [CommRing A] (R : Sheaf J CommRingCat.{u})
     (a : A →+* RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)) (t : A)
