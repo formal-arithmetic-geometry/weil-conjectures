@@ -150,21 +150,6 @@ structure Assertion {U' U X' X : Scheme.{u}} {a : U' ⟶ U} {j' : U' ⟶ X'}
       completedSquare.hom.app ((J l E j).obj K) ≫
         (integralDerivedPullback.{u, u} l E a).map (openData.restrictionIso.hom.app K)
 
-private theorem gamma_unit_formal {U X : Scheme.{u}} {j : U ⟶ X}
-    [IsOpenImmersion j] (o : Open l E j) (tU : Tensor l E U) (tX : Tensor l E X)
-    (K : D l E U) (P : D l E X) :
-    (tX.chi l E).app ((J l E j).obj K, P) ≫ gamma l E o tU tX K P =
-      (openProjectionIso (completed l E) j tU.ordinary tX.ordinary K P).hom ≫
-        (J l E j).map ((tU.chi l E).app (K, (star l E j).obj P)) := by
-  simp only [Tensor.chi, gamma, NatTrans.comp_app, Functor.whiskerLeft_app,
-    Category.assoc, Iso.hom_inv_id_app_assoc]
-  rw [← (eta l E X).naturality_assoc]
-  simpa only [Functor.id_map, Functor.comp_obj, Functor.map_comp, Category.assoc] using
-    congrArg (fun f ↦
-      (openProjectionIso (completed l E) j tU.ordinary tX.ordinary K P).hom ≫ f ≫
-        (J l E j).map (tU.comparison.hom.app (K, (star l E j).obj P)))
-      (o.unit_commutes (tU.ordinary.tensor.obj (K, (star l E j).obj P)))
-
 private theorem gamma_isIso_formal {U X : Scheme.{u}} {j : U ⟶ X}
     [IsOpenImmersion j] (o : Open l E j) (tU : Tensor l E U) (tX : Tensor l E X)
     (K : D l E U) (P : D l E X) : IsIso (gamma l E o tU tX K P) := by
@@ -271,7 +256,7 @@ theorem openFactorCoherence (F : FiniteFieldDatum.{u}) (_hl : l ≠ F.p)
     ambientExchange := b
     tensor_complete := tx
     tensor_completeU := tu
-    gamma_unit := fun K P _ _ ↦ gamma_unit_formal l E od q.tensorU q.tensorX K P
+    gamma_unit := fun K P _ _ ↦ chi_comp_gamma l E od q.tensorU q.tensorX K P
     gamma_iso := fun K P _ _ ↦ gamma_isIso_formal l E od q.tensorU q.tensorX K P
     tensorRestriction := tr
     restriction_unit := htr

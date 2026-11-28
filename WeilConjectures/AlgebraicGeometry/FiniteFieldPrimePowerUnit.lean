@@ -37,4 +37,11 @@ theorem finiteFieldPrimePower_isUnit (D : WeilConjectures.FiniteFieldDatum.{u})
   let f := (Scheme.ΓSpecIso (CommRingCat.of D.k)).inv ≫ a.appTop
   simpa only [map_natCast, Nat.cast_pow] using (hl.map f.hom).pow n
 
+/-- A prime different from the characteristic is a unit in every residue field of a k-scheme. -/
+theorem finiteFieldPrime_isUnit_residueField (D : WeilConjectures.FiniteFieldDatum.{u})
+    (ell : ℕ) [Fact ell.Prime] (hEll : ell ≠ D.p) {T : Scheme.{u}}
+    (a : T ⟶ Spec (.of D.k)) (t : T) : IsUnit (ell : T.residueField t) := by
+  simpa only [pow_one, map_natCast] using (finiteFieldPrimePower_isUnit D ell hEll 1 a).map
+    (T.presheaf.germ (⊤ : T.Opens) t (by trivial) ≫ T.residue t).hom
+
 end AlgebraicGeometry.ProEtale
