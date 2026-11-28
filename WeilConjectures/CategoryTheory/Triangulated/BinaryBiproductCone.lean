@@ -17,6 +17,9 @@ biproduct inclusions. This is used to construct homotopy pushouts of quasi-isomo
 ## Main statements
 
 - `CategoryTheory.Pretriangulated.exists_iso_of_distTriang_biprod_lift`
+- `CategoryTheory.Pretriangulated.nonempty_iso_obj₁_of_isIso_inl_comp`: dually, the fibre of a
+  morphism out of a binary biproduct which is an isomorphism on the first summand is the second
+  summand.
 -/
 
 @[expose] public section
@@ -61,5 +64,36 @@ theorem exists_iso_of_distTriang_biprod_lift {X Y Y' Z : C} (f : X ⟶ Y) (g : X
     simp only [Functor.mapIso_hom, Triangle.π₃_map]
     rw [← this, assoc, assoc, h₂]
     simp [E]
+
+/-- Let `T = (X, Y, Z)` be a distinguished triangle and `D : M ⊞ N ≅ Y` an isomorphism such that
+`M ⟶ M ⊞ N ⟶ Y ⟶ Z` is an isomorphism. Then `X ≅ N`. -/
+lemma nonempty_iso_obj₁_of_isIso_inl_comp {T : Triangle C} (hT : T ∈ distTriang C) {M N : C}
+    (D : M ⊞ N ⟶ T.obj₂) [IsIso D] (h : IsIso (biprod.inl ≫ D ≫ T.mor₂)) :
+    Nonempty (N ≅ T.obj₁) := by
+  set φ := biprod.inl ≫ D ≫ T.mor₂
+  set ψ : N ⟶ M := biprod.inr ≫ D ≫ T.mor₂ ≫ inv φ
+  -- the shear automorphism `M ⊞ N ≅ N ⊞ M`, making the composite to `Z` vanish on `N`
+  let f : N ⊞ M ⟶ M ⊞ N := biprod.desc (biprod.inr - ψ ≫ biprod.inl) biprod.inl
+  let g : M ⊞ N ⟶ N ⊞ M := biprod.desc biprod.inr (biprod.inl + ψ ≫ biprod.inr)
+  have : IsIso f := ⟨g, by ext <;> simp [f, g], by ext <;> simp [f, g]⟩
+  have hσ : ((biprod.inr - ψ ≫ biprod.inl) ≫ D) ≫ T.mor₂ = 0 := by
+    have : biprod.inl ≫ D ≫ T.mor₂ = φ := rfl
+    simp only [Preadditive.sub_comp, Category.assoc, this, ψ, IsIso.inv_hom_id,
+      Category.comp_id, sub_self]
+  obtain ⟨a, ha⟩ := Triangle.coyoneda_exact₂ T hT _ hσ
+  let τ : binaryBiproductTriangle N M ⟶ T :=
+    { hom₁ := a
+      hom₂ := f ≫ D
+      hom₃ := φ
+      comm₁ := by simp [f, ← ha]
+      comm₂ := by
+        refine biprod.hom_ext' _ _ ?_ ?_
+        · simpa [f, Category.assoc] using hσ.symm
+        · simp [f, φ]
+      comm₃ := by simp [φ, comp_distTriang_mor_zero₂₃ _ hT] }
+  have : IsIso τ.hom₁ := isIso₁_of_isIso₂₃ τ (binaryBiproductTriangle_distinguished N M) hT
+    (by dsimp [τ]; infer_instance) (by dsimp [τ]; infer_instance)
+  exact ⟨asIso τ.hom₁⟩
+
 
 end CategoryTheory.Pretriangulated
