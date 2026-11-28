@@ -140,7 +140,8 @@ lemma rightDerivedLowerShriekBaseChangeMap_app_eq_of_isIso_top [IsIso g]
             ((R(a)_![ModuleCat.{u + 1} Λ]).obj N) ≫
           (R(a)_![ModuleCat.{u + 1} Λ]).map
             ((leftDerivedUpperStarId (ModuleCat.{u + 1} Λ) X).inv.app N) := by
-    rw [← leftDerivedUpperStarId_inv_app_comp_rightDerivedLowerShriekBaseChangeMap_app Λ sqg N, Iso.hom_inv_id_app_assoc]
+    rw [← leftDerivedUpperStarId_inv_app_comp_rightDerivedLowerShriekBaseChangeMap_app Λ sqg N,
+      Iso.hom_inv_id_app_assoc]
   have h₃ : (rightDerivedLowerShriekBaseChangeMap Λ sqf).app K =
       (L((𝟙 X)^*[ModuleCat.{u + 1} Λ])).map
           ((rightDerivedLowerShriekIdIso (ModuleCat.{u + 1} Λ) X).hom.app K) ≫
@@ -167,8 +168,10 @@ lemma rightDerivedLowerShriekBaseChangeMap_app_eq_of_isIso_top [IsIso g]
       rw [← h₂, Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app]
       erw [CategoryTheory.Functor.map_id]
       exact (Category.comp_id _).symm
-    rw [h₂', rightDerivedLowerShriekCongrIso_inv, rightDerivedLowerShriekCongrIso_hom_app_trans_assoc,
-      rightDerivedLowerShriekCongrIso_hom_app_trans_assoc, rightDerivedLowerShriekCongrIso_hom_app_self]
+    rw [h₂', rightDerivedLowerShriekCongrIso_inv,
+      rightDerivedLowerShriekCongrIso_hom_app_trans_assoc,
+      rightDerivedLowerShriekCongrIso_hom_app_trans_assoc,
+      rightDerivedLowerShriekCongrIso_hom_app_self]
     exact Category.id_comp _
   have hJ : (rightDerivedLowerShriekIdIso (ModuleCat.{u + 1} Λ) X).inv.app K ≫
       (leftDerivedUpperStarId (ModuleCat.{u + 1} Λ) X).inv.app
@@ -185,7 +188,8 @@ lemma rightDerivedLowerShriekBaseChangeMap_app_eq_of_isIso_top [IsIso g]
       (L((𝟙 s)^*[ModuleCat.{u + 1} Λ])).map ((rightDerivedLowerShriekCongrIso Λ
           ((Category.comp_id a).trans (Category.id_comp a).symm)).hom.app K) ≫
         (rightDerivedLowerShriekBaseChangeMap Λ sqgf).app K ≫
-        (rightDerivedLowerShriekCongrIso Λ sq.w).hom.app ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K) := by
+        (rightDerivedLowerShriekCongrIso Λ sq.w).hom.app
+          ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K) := by
     rw [← reassoc_of% hc, rightDerivedLowerShriekCongrIso_hom_app_trans,
       rightDerivedLowerShriekCongrIso_hom_app_self]
     exact (Category.comp_id _).symm
@@ -194,7 +198,8 @@ lemma rightDerivedLowerShriekBaseChangeMap_app_eq_of_isIso_top [IsIso g]
           ((unboundedEtaleLowerShriekCompIso Λ (𝟙 X) a).inv.app K) ≫
         (rightDerivedLowerShriekBaseChangeMap Λ sqg).app ((R(𝟙 X)_![ModuleCat.{u + 1} Λ]).obj K) ≫
         (R(a)_![ModuleCat.{u + 1} Λ]).map ((rightDerivedLowerShriekBaseChangeMap Λ sqf).app K) ≫
-        (unboundedEtaleLowerShriekCompIso Λ g a).hom.app ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K) := by
+        (unboundedEtaleLowerShriekCompIso Λ g a).hom.app
+          ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K) := by
     rw [← hP, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
     erw [CategoryTheory.Functor.map_id]
     exact (Category.id_comp _).symm
@@ -256,7 +261,8 @@ theorem unit_app_comp_map_rightDerivedLowerShriekBaseChangeMap_app [IsIso g] [Is
         (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) h).hom.app
           ((L((h)^*[ModuleCat.{u + 1} Λ])).obj N) =
       (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) h).unit.app N := by
-    rw [rightDerivedLowerShriekBaseChangeMap_app_comp_eq_unit_app Λ h sqg N, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+    rw [rightDerivedLowerShriekBaseChangeMap_app_comp_eq_unit_app Λ h sqg N,
+      ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
     erw [CategoryTheory.Functor.map_id, Category.id_comp]
     exact Iso.inv_hom_id_app_assoc _ _ _
   have hK : (rightDerivedLowerShriekIdIso (ModuleCat.{u + 1} Λ) s).inv.app
@@ -268,14 +274,14 @@ theorem unit_app_comp_map_rightDerivedLowerShriekBaseChangeMap_app [IsIso g] [Is
     rw [← cancel_mono ((rightDerivedLowerShriekCongrIso Λ (Category.comp_id a)).hom.app K),
       Iso.inv_hom_id_app, ← h₂, Category.assoc, Iso.hom_inv_id_app_assoc]
     exact Iso.inv_hom_id_app _ _
-  have hι := (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) h).hom.naturality
-    ((rightDerivedLowerShriekBaseChangeMap Λ sq).app K)
-  have hP' : (rightDerivedLowerShriekBaseChangeMap Λ sqg).app ((R(a)_![ModuleCat.{u + 1} Λ]).obj K) ≫
+  have hP' : (rightDerivedLowerShriekBaseChangeMap Λ sqg).app
+        ((R(a)_![ModuleCat.{u + 1} Λ]).obj K) ≫
       (R(h)_![ModuleCat.{u + 1} Λ]).map ((rightDerivedLowerShriekBaseChangeMap Λ sq).app K) =
       (L((𝟙 s)^*[ModuleCat.{u + 1} Λ])).map
           ((unboundedEtaleLowerShriekCompIso Λ a (𝟙 s)).hom.app K) ≫
         (rightDerivedLowerShriekBaseChangeMap Λ sqgf).app K ≫
-        (unboundedEtaleLowerShriekCompIso Λ a' h).inv.app ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K) := by
+        (unboundedEtaleLowerShriekCompIso Λ a' h).inv.app
+          ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K) := by
     rw [reassoc_of% hP, Iso.hom_inv_id_app]
     erw [Category.comp_id]
   have hc' : (unboundedEtaleLowerShriekCompIso Λ a' h).inv =
@@ -287,7 +293,8 @@ theorem unit_app_comp_map_rightDerivedLowerShriekBaseChangeMap_app [IsIso g] [Is
     (P := (L((h)^*[ModuleCat.{u + 1} Λ])).obj ((R(a)_![ModuleCat.{u + 1} Λ]).obj K))
     (Q := (R(a')_![ModuleCat.{u + 1} Λ]).obj ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K))
     ((rightDerivedLowerShriekBaseChangeMap Λ sq).app K)
-    ((leftDerivedUpperStarId (ModuleCat.{u + 1} Λ) s).inv.app ((R(a)_![ModuleCat.{u + 1} Λ]).obj K) ≫
+    ((leftDerivedUpperStarId (ModuleCat.{u + 1} Λ) s).inv.app
+        ((R(a)_![ModuleCat.{u + 1} Λ]).obj K) ≫
       (L((𝟙 s)^*[ModuleCat.{u + 1} Λ])).map
         ((rightDerivedLowerShriekIdIso (ModuleCat.{u + 1} Λ) s).inv.app
           ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)) ≫

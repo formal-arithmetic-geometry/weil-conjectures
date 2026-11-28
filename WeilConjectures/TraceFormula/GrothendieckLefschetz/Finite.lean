@@ -266,18 +266,6 @@ lemma iterateHom_geometricFiberFrobenius_eq (m : ℕ) :
   rw [Hom.iterateFrobenius_geometricFiber_mul_eq, endIterate_hom_eq_pow_hom, Category.assoc,
     Iso.inv_hom_id, Category.comp_id, ProEtale.iterateHom]
 
-/-- The inverse of the composition isomorphism `L(𝟙 ≫ w)^* ≅ Lw^* ⋙ L(𝟙)^*`, for a morphism `z`
-equal to `𝟙 ≫ w`, is the identity isomorphism `L(𝟙)^* ≅ 𝟭` up to the cast. -/
-lemma leftDerivedUpperStarComp_id_left_inv_app_of_eq {A : Type (u + 1)} [CommRing A]
-    {S T : Scheme.{u}} {w z : S ⟶ T} (hz : z = 𝟙 S ≫ w)
-    (K : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))) :
-    (leftDerivedUpperStarComp _ (𝟙 S) w z hz).inv.app K =
-      (leftDerivedUpperStarId _ S).hom.app (L((w)^*[ModuleCat.{u + 1} A]).obj K) ≫
-        eqToHom (by rw [hz, Category.id_comp]; rfl) := by
-  obtain rfl : z = w := hz.trans (Category.id_comp w)
-  rw [eqToHom_refl, Category.comp_id]
-  exact leftDerivedUpperStarComp_id_left_inv_app _ _ K
-
 /-- The isomorphism `κ_m : L(Φ_X^m)^* ≅ L(g_X^m)^*` is the composition isomorphism for
 `Φ_X^m = F_X ≫ g_X^m` followed by the trivialization `L(F_X)^* ≅ L(𝟙)^* ≅ 𝟭` of the pullback
 along the absolute `q ^ m`-power Frobenius `F_X`. -/

@@ -28,32 +28,36 @@ operators of Frobenius correspondences. The pullbacks are transitive
 (`AlgebraicGeometry.Etale.lowerShriekPullbackOfComp_comp_app`).
 
 For an endomorphism `u` of `X` over an automorphism `w` of the base (`u ≫ a = a ≫ w`), `u` is a
-morphism over `s` from `a ≫ w` to `a`, and the derived global sections of `R(a ≫ w)_!` and of
-`Ra_!` are identified by the composition isomorphism and the Leray isomorphism of the proper
-`w` (`AlgebraicGeometry.Etale.compactlySupportedGlobalSectionsCompIso`). Two instances of this
+morphism over `s` from `a ≫ w` to `a`, and the derived global sections of `R(a ≫ w)_!` are
+mapped to those of `Ra_!` by the composition isomorphism, `Rw_! ≅ Rw_*`, the transport of
+derived global sections along `w` and the counit of `Lw^* ⊣ Rw_*`
+(`AlgebraicGeometry.Etale.compactlySupportedGlobalSectionsTransport`). Two instances of this
 construction are compared with other descriptions:
 
 * for an automorphism `g` of `X` over an automorphism `h` of `s` (a cartesian square), the
   pullback along `g` is the compact-support base change
   `AlgebraicGeometry.Etale.compactPullback`
-  (`AlgebraicGeometry.Etale.compactPullback_app_eq_map_lowerShriekPullbackOfComp`);
-* the pullback along the absolute Frobenius `F_X` of a scheme of characteristic `p`, followed by
-  the trivialization `L(F_X)^* ≅ 𝟭`, is the identity
-  (`AlgebraicGeometry.Etale.map_lowerShriekPullbackOfComp_comp_iterateFrobenius`).
+  (`AlgebraicGeometry.Etale.compactPullback_eq_whiskerRight_lowerShriekPullbackOfComp`);
+* for an inverse `w` of the absolute Frobenius `F_s`, the map is the pullback along the absolute
+  Frobenius `F_X`, followed by the trivialization `L(F_X)^* ≅ 𝟭`
+  (`compactlySupportedGlobalSectionsTransport_eq_lowerShriekPullbackOfComp`).
 
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.lowerShriekPullbackOfComp`: the pullback `u^♯ : Ra'_! ⟶ Lu^* ⋙ Ra_!`.
-- `AlgebraicGeometry.Etale.compactlySupportedGlobalSectionsCompIso`: the identification
-  `RΓ(s, R(a ≫ w)_! -) ≅ RΓ(s, Ra_! -)` for a proper `w : s ⟶ s`.
+- `AlgebraicGeometry.Etale.compactlySupportedGlobalSectionsTransport`: the map
+  `RΓ(s, R(a ≫ w)_! -) ⟶ RΓ(s, Ra_! -)` for an automorphism `w` of `s`.
 
 ## Main results
 
 - `AlgebraicGeometry.Etale.lowerShriekPullbackOfComp_comp_app`: transitivity of the pullbacks.
-- `AlgebraicGeometry.Etale.compactPullback_app_eq_map_lowerShriekPullbackOfComp`: the pullback
-  along an automorphism over an automorphism of the base is the compact-support base change.
-- `AlgebraicGeometry.Etale.map_lowerShriekPullbackOfComp_comp_iterateFrobenius`: the absolute
-  Frobenius acts trivially on compactly supported cohomology.
+- `AlgebraicGeometry.Etale.compactPullback_eq_whiskerRight_lowerShriekPullbackOfComp`: the
+  pullback along an automorphism over an automorphism of the base is the compact-support base
+  change.
+- `AlgebraicGeometry.Etale.compactlySupportedGlobalSectionsTransport_eq_lowerShriekPullbackOfComp`:
+  the absolute Frobenius acts trivially on compactly supported cohomology.
+- `AlgebraicGeometry.Etale.correspondenceOperator_comp_eq_globalOperator`: the operator of the
+  Frobenius correspondence along `F_X ≫ g` is the global operator of `g`.
 -/
 
 @[expose] public section
@@ -229,10 +233,10 @@ lemma map_unit_comp_transportCounit_app {C E : Type*} [Category C] [Category E] 
   simp
 
 /-- The abstract form of
-`AlgebraicGeometry.Etale.compactPullback_app_eq_map_lowerShriekPullbackOfComp`: if the adjunct of
-`Ex : Ra ⋙ Lh ⟶ Lg ⋙ Ra` under `Lh ⊣ Rp` is `pb` followed by `c : Rah ⟶ Ra ⋙ Rs` and
-`ι : Rs ⟶ Rp`, then the transport `T` followed by `Γ(Ex)` is `Γ(pb)` followed by
-`Γ(c ≫ ι)`, `T` and `Γ` of the counit. -/
+`AlgebraicGeometry.Etale.compactPullback_eq_whiskerRight_lowerShriekPullbackOfComp`: if the
+adjunct of `Ex : Ra ⋙ Lh ⟶ Lg ⋙ Ra` under `Lh ⊣ Rp` is `pb` followed by `c : Rah ⟶ Ra ⋙ Rs`
+and `ι : Rs ⟶ Rp`, then the transport `T` followed by `Γ(Ex)` is `Γ(pb)` followed by `Γ(c ≫ ι)`,
+`T` and `Γ` of the counit. -/
 lemma whiskerLeft_comp_whiskerRight_eq_whiskerRight_comp_whiskerLeft {DX Ds E : Type*}
     [Category DX]
     [Category Ds] [Category E] {Ra Rah : DX ⥤ Ds} {Lg : DX ⥤ DX} {Lh Rs Rp : Ds ⥤ Ds}
@@ -248,7 +252,7 @@ lemma whiskerLeft_comp_whiskerRight_eq_whiskerRight_comp_whiskerLeft {DX Ds E : 
   ext K
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.associator_inv_app,
     Functor.whiskerRight_app, Functor.associator_hom_app, Category.id_comp, Category.comp_id,
-    ← Γ.map_comp_assoc, Category.assoc]
+    ← Γ.map_comp_assoc]
   rw [← hF]
   exact (map_unit_comp_transportCounit_app _ _ _ _).symm
 
@@ -259,7 +263,8 @@ lemma map_app_comp_map_eq_app_comp_map {DX Ds E : Type*} [Category DX] [Category
     (pbF : Rah ⟶ LF ⋙ Ra) (pbΦ : Ra ⟶ LΦ ⋙ Ra) (τ : LF ⟶ 𝟭 DX) (e : LΦ ≅ Lg ⋙ LF)
     (Q : Rah ⋙ Γ ⟶ Ra ⋙ Γ) (CP : Ra ⋙ Γ ⟶ Lg ⋙ Ra ⋙ Γ)
     (hΦ : ∀ K, pbΦ.app K = pbg.app K ≫ pbF.app (Lg.obj K) ≫ Ra.map (e.inv.app K))
-    (hQ : Q = Functor.whiskerRight (pbF ≫ Functor.whiskerRight τ Ra ≫ (Functor.leftUnitor Ra).hom) Γ)
+    (hQ : Q =
+      Functor.whiskerRight (pbF ≫ Functor.whiskerRight τ Ra ≫ (Functor.leftUnitor Ra).hom) Γ)
     (hCP : CP = Functor.whiskerRight pbg Γ ≫ (Functor.associator _ _ _).hom ≫
       Functor.whiskerLeft Lg Q) {K : DX} (v : Lg.obj K ⟶ K) :
     Γ.map (pbΦ.app K ≫ Ra.map (e.hom.app K ≫ τ.app (Lg.obj K) ≫ v)) =
@@ -347,7 +352,7 @@ map `RΓ(s, R(a ≫ w)_! -) ⟶ RΓ(s, Ra_! -)`
 (`AlgebraicGeometry.Etale.compactlySupportedGlobalSectionsTransport`) is the pullback along
 `F_X` followed by the trivialization `L(F_X)^* ≅ L(𝟙 X)^* ≅ 𝟭`
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarIterateFrobeniusIso`). -/
-theorem compactlySupportedGlobalSectionsTransport_eq_whiskerRight_lowerShriekPullbackOfComp
+theorem compactlySupportedGlobalSectionsTransport_eq_lowerShriekPullbackOfComp
     {p : ℕ} (hp : p.Prime) (hX : (p : Γ(X, ⊤)) = 0) (hs : (p : Γ(s, ⊤)) = 0) (n : ℕ)
     {w : s ⟶ s} [IsIso w] [IsProper (X.iterateFrobenius hp hX n)] [HasCompactification (a ≫ w)]
     [QuasiCompact (a ≫ w)] (hw : s.iterateFrobenius hp hs n ≫ w = 𝟙 s)
@@ -396,7 +401,7 @@ theorem correspondenceOperator_comp_eq_globalOperator {p : ℕ} (hp : p.Prime)
     (leftDerivedUpperStarIterateFrobeniusIso _ hp hX n ≪≫ leftDerivedUpperStarId _ X).hom
     (leftDerivedUpperStarComp _ _ _ _ hFg)
     (compactlySupportedGlobalSectionsTransport Λ a σ) (compactPullback Λ sq) hΦ'
-    (compactlySupportedGlobalSectionsTransport_eq_whiskerRight_lowerShriekPullbackOfComp Λ a hp
+    (compactlySupportedGlobalSectionsTransport_eq_lowerShriekPullbackOfComp Λ a hp
       hX hs n hσ h₁)
     (compactPullback_eq_whiskerRight_lowerShriekPullbackOfComp Λ a sq) v
 

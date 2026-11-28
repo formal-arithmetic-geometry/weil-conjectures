@@ -21260,10 +21260,14 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LocalizingConstructible
 public import WeilConjectures.SixFunctors.Etale.Derived.LocallyConstantInvertible
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangeIdentity
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangeIsoMate
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangePaste
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangeShift
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompIsoAssoc
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompIsoExchangeCompatible
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompIsoUnit
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompactificationExact
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.CompositionLaw
@@ -25468,7 +25472,6 @@ public import WeilConjectures.TraceFormula.GraphPieces
 public import WeilConjectures.TraceFormula.GrothendieckLefschetz.CoefficientChange
 public import WeilConjectures.TraceFormula.GrothendieckLefschetz.Finite
 public import WeilConjectures.TraceFormula.GrothendieckLefschetz.FrobeniusPullback
-public import WeilConjectures.TraceFormula.GrothendieckLefschetz.FrobeniusPullbackComp
 public import WeilConjectures.TraceFormula.GrothendieckLefschetz.Integral
 public import WeilConjectures.TraceFormula.GrothendieckLefschetz.PointCount
 public import WeilConjectures.TraceFormula.GrothendieckLefschetz.Rational
