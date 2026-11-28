@@ -55,6 +55,7 @@ theorem exists_stratified_lisse_integral_lattice_of_normal
           LocallyFree (condensedRingObj A T) M ∧
           ∃ ι : M ⟶ (Mod.comap aT).obj LT,
             Mono ι ∧ IsIso (((Mod.extendRestrictAdjunction aT).homEquiv M LT).symm ι) := by
-  sorry
+  have : IsNoetherian X := ⟨⟩
+  exact exists_stratified_lisse_integral_lattice_of_isNoetherian l E X
 
 end AlgebraicGeometry.ProEtale.CondensedRing
