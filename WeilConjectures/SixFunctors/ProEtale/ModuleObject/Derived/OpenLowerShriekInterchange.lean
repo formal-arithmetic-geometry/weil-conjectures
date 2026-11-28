@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekBaseChange
+public import
+  WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStarOfIsProper
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-!
 
@@ -72,6 +75,16 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 
 include ℓ k
+
+/-- The proper-only and bounded adjunctions have the same underlying maps. -/
+lemma boundedConstructibleUpperStarLowerStarAdjunctionOfIsProper_eq
+    {A B : Over (Spec (.of k))} [LocallyOfFiniteType A.hom] [QuasiCompact A.hom]
+    [IsSeparated A.hom] [LocallyOfFiniteType B.hom] [QuasiCompact B.hom]
+    [IsSeparated B.hom] (f : A ⟶ B) [IsProper f.left] :
+    boundedConstructibleUpperStarLowerStarAdjunctionOfIsProper ℓ f =
+      boundedConstructibleUpperStarLowerStarAdjunction ℓ f := by
+  apply Adjunction.ext
+  rfl
 
 /-! ### The exchange morphism is an isomorphism -/
 
@@ -146,9 +159,52 @@ theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_of_
               ((boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
                   i').obj K)))
       exact ⟨⟨hT.to_ _, hS.eq_of_src _ _, hT.eq_of_src _ _⟩⟩
-  exact NatIso.isIso_of_isIso_app _
+  exact (NatTrans.isIso_iff_isIso_app _).2 hK
 
 end Interchange
+
+section ProperOnly
+
+variable {X Z X' Z' : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
+  [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
+  [LocallyOfFiniteType Z'.hom] [QuasiCompact Z'.hom] [IsSeparated Z'.hom]
+  {p : X' ⟶ X} {i' : X' ⟶ Z'} {j : X ⟶ Z} {p' : Z' ⟶ Z}
+  [IsOpenImmersion j.left] [IsOpenImmersion i'.left]
+  [IsProper p.left] [IsProper p'.left]
+
+include ℓ k
+
+/-- The exchange morphism for proper direct images, formed with the proper-only adjunctions. -/
+noncomputable def boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange'
+    (sq : IsPullback p i' j p') :
+    boundedConstructibleLowerStarOfIsProper ℓ p ⋙
+        boundedConstructibleOpenImmersionLowerShriek
+          (Profinite.padicAlgClRingObj ℓ) ℓ j ⟶
+      boundedConstructibleOpenImmersionLowerShriek
+          (Profinite.padicAlgClRingObj ℓ) ℓ i' ⋙
+        boundedConstructibleLowerStarOfIsProper ℓ p' :=
+  Adjunction.exchangeRight
+    (boundedConstructibleUpperStarLowerStarAdjunctionOfIsProper ℓ p)
+    (boundedConstructibleUpperStarLowerStarAdjunctionOfIsProper ℓ p')
+    (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso'
+      (Profinite.padicAlgClRingObj ℓ) ℓ sq)
+
+/-- Proper direct image commutes with extension by zero in a cartesian square. -/
+theorem isIso_boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange'
+    (sq : IsPullback p i' j p') :
+    IsIso (boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ sq) := by
+  change IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' ℓ sq)
+  simpa only [boundedConstructibleLowerStarOfIsProper_eq,
+    boundedConstructibleUpperStarLowerStarAdjunctionOfIsProper_eq ℓ p,
+    boundedConstructibleUpperStarLowerStarAdjunctionOfIsProper_eq ℓ p'] using
+    (isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_of_isIso ℓ sq
+      (isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl ℓ sq.flip)
+      (isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl ℓ
+        (isPullback_overPullbackFst_overPullbackSnd p' (overClosedComplement j))))
+
+end ProperOnly
 
 section Coefficients
 

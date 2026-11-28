@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.Compactification.OverRefinementEqualizer
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeFormalism
+public import
+  WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeFormalism
 
 /-!
 
@@ -97,6 +98,81 @@ theorem boundedConstructibleLowerShriekRefinementIso'_trans_eq {i : X ⟶ Z} {i�
 
 end Transitivity
 
+section ProperOnlyTransitivity
+
+variable {X Z Z₁ Z₂ Y : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
+  [LocallyOfFiniteType Z₁.hom] [QuasiCompact Z₁.hom] [IsSeparated Z₁.hom]
+  [LocallyOfFiniteType Z₂.hom] [QuasiCompact Z₂.hom] [IsSeparated Z₂.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+
+lemma boundedConstructibleLowerShriekRefinementIsoOfIsProper_hom_eq
+    {i : X ⟶ Z} {i₁ : X ⟶ Z₁} [IsOpenImmersion i.left] [IsOpenImmersion i₁.left]
+    {h : Z ⟶ Z₁} (sq : IsPullback (𝟙 X) i i₁ h)
+    {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} (wp : h ≫ p₁ = p)
+    [IsProper p₁.left] [IsProper p.left] [IsProper h.left]
+    [IsIso (boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ sq)] :
+    let _ : IsIso ((𝔽).baseChange (𝟙 (SepFinType.mk X)) (SepFinType.homMk i)
+        (SepFinType.homMk i₁) (SepFinType.homMk h)
+        (SepFinType.homMk_comp_homMk (a := 𝟙 X) sq.w)) :=
+      isIso_baseChange_boundedConstructibleExchangeFormalism_id ℓ sq
+    (boundedConstructibleLowerShriekRefinementIsoOfIsProper ℓ sq wp).hom =
+      (𝔽).refinementComparison (SepFinType.homMk i) (SepFinType.homMk p)
+        (SepFinType.homMk i₁) (SepFinType.homMk p₁) (SepFinType.homMk h)
+        (SepFinType.homMk_comp_homMk (a := 𝟙 X) sq.w) (ObjectProperty.hom_ext _ wp) := by
+  subst wp
+  have : IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' ℓ sq) := by
+    change IsIso (boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ sq)
+    infer_instance
+  simp only [boundedConstructibleLowerStarOfIsProper_eq] at *
+  rw [boundedConstructibleLowerShriekRefinementIsoOfIsProper_eq]
+  exact boundedConstructibleLowerShriekRefinementIso'_hom_eq ℓ sq rfl
+
+theorem boundedConstructibleLowerShriekRefinementIsoOfIsProper_trans_eq
+    {i : X ⟶ Z} {i₁ : X ⟶ Z₁} {i₂ : X ⟶ Z₂}
+    [IsOpenImmersion i.left] [IsOpenImmersion i₁.left] [IsOpenImmersion i₂.left]
+    {h : Z ⟶ Z₁} {h₁ : Z₁ ⟶ Z₂} {h₂ : Z ⟶ Z₂}
+    (sq : IsPullback (𝟙 X) i i₁ h) (sq₁ : IsPullback (𝟙 X) i₁ i₂ h₁)
+    (sq₂ : IsPullback (𝟙 X) i i₂ h₂) (hh : h ≫ h₁ = h₂)
+    {p : Z ⟶ Y} {p₁ : Z₁ ⟶ Y} {p₂ : Z₂ ⟶ Y}
+    (wp : h ≫ p₁ = p) (wp₁ : h₁ ≫ p₂ = p₁) (wp₂ : h₂ ≫ p₂ = p)
+    [IsProper p.left] [IsProper p₁.left] [IsProper p₂.left]
+    [IsProper h.left] [IsProper h₁.left] [IsProper h₂.left]
+    [IsIso (boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ sq)]
+    [IsIso (boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ sq₁)]
+    [IsIso (boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ sq₂)] :
+    boundedConstructibleLowerShriekRefinementIsoOfIsProper ℓ sq₁ wp₁ ≪≫
+        boundedConstructibleLowerShriekRefinementIsoOfIsProper ℓ sq wp =
+      boundedConstructibleLowerShriekRefinementIsoOfIsProper ℓ sq₂ wp₂ := by
+  have := isIso_baseChange_boundedConstructibleExchangeFormalism_id ℓ sq
+  have := isIso_baseChange_boundedConstructibleExchangeFormalism_id ℓ sq₁
+  have := isIso_baseChange_boundedConstructibleExchangeFormalism_id ℓ sq₂
+  ext1
+  rw [Iso.trans_hom,
+    boundedConstructibleLowerShriekRefinementIsoOfIsProper_hom_eq,
+    boundedConstructibleLowerShriekRefinementIsoOfIsProper_hom_eq,
+    boundedConstructibleLowerShriekRefinementIsoOfIsProper_hom_eq]
+  exact ((𝔽).refinementComparison_comp (r := SepFinType.homMk h)
+    (s := SepFinType.homMk h₁) (rs := SepFinType.homMk h₂) _ _ _ _ _ _
+    (ObjectProperty.hom_ext _ hh) _ _ _ _ _ _).symm
+
+lemma boundedConstructibleLowerShriekRefinementIsoOfIsProper_congr
+    {i : X ⟶ Z} {i₁ : X ⟶ Z₁} [IsOpenImmersion i.left] [IsOpenImmersion i₁.left]
+    {h h' : Z ⟶ Z₁} (sq : IsPullback (𝟙 X) i i₁ h)
+    (sq' : IsPullback (𝟙 X) i i₁ h') {p : Z ⟶ Y} {p₁ : Z₁ ⟶ Y}
+    (wp : h ≫ p₁ = p) (wp' : h' ≫ p₁ = p)
+    [IsProper p.left] [IsProper p₁.left] [IsProper h.left] [IsProper h'.left]
+    [IsIso (boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ sq)]
+    [IsIso (boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ sq')]
+    (hh : h = h') :
+    boundedConstructibleLowerShriekRefinementIsoOfIsProper ℓ sq wp =
+      boundedConstructibleLowerShriekRefinementIsoOfIsProper ℓ sq' wp' := by
+  subst hh
+  rfl
+
+end ProperOnlyTransitivity
+
 section Compactification
 
 variable {X Y : Over (Spec (.of k))}
@@ -110,9 +186,10 @@ noncomputable def boundedConstructibleLowerShriekOverRefinementIso {c c₁ : Com
     boundedConstructibleLowerShriekOfCompactification ℓ c₁ ≅
       boundedConstructibleLowerShriekOfCompactification ℓ c :=
   haveI := r.isProper
-  haveI := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
-    r.isPullback
-  boundedConstructibleLowerShriekRefinementIso' ℓ r.isPullback r.hom_overG
+  let _ : IsIso (boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ
+      r.isPullback) :=
+    isIso_boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ r.isPullback
+  boundedConstructibleLowerShriekRefinementIsoOfIsProper ℓ r.isPullback r.hom_overG
 
 /-- The comparison along a composite of refinements is the composite of the comparisons. -/
 lemma boundedConstructibleLowerShriekOverRefinementIso_trans
@@ -124,13 +201,13 @@ lemma boundedConstructibleLowerShriekOverRefinementIso_trans
   have := r.isProper
   have := s.isProper
   have := (r.trans s).isProper
-  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
+  have := isIso_boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ
     r.isPullback
-  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
+  have := isIso_boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ
     s.isPullback
-  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
+  have := isIso_boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ
     (r.trans s).isPullback
-  exact boundedConstructibleLowerShriekRefinementIso'_trans_eq ℓ r.isPullback s.isPullback
+  exact boundedConstructibleLowerShriekRefinementIsoOfIsProper_trans_eq ℓ r.isPullback s.isPullback
     (r.trans s).isPullback rfl r.hom_overG s.hom_overG (r.trans s).hom_overG
 
 /-- **Independence of the refinement**: the comparisons along two refinements `r r' : c → c₁`
@@ -147,11 +224,13 @@ theorem boundedConstructibleLowerShriekOverRefinementIso_eq {c c₁ : Compactifi
       boundedConstructibleLowerShriekOverRefinementIso ℓ (t.trans r') := by
     have := (t.trans r).isProper
     have := (t.trans r').isProper
-    have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
+    have := isIso_boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ
       (t.trans r).isPullback
-    have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
+    have := isIso_boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ
       (t.trans r').isPullback
-    exact boundedConstructibleLowerShriekRefinementIso'_congr ℓ _ _ _ _
+    exact boundedConstructibleLowerShriekRefinementIsoOfIsProper_congr ℓ
+      (t.trans r).isPullback (t.trans r').isPullback
+      (t.trans r).hom_overG (t.trans r').hom_overG
       (r.eqLocusRefinement_hom_comp r')
   ext1
   rw [← cancel_mono (boundedConstructibleLowerShriekOverRefinementIso ℓ t).hom]

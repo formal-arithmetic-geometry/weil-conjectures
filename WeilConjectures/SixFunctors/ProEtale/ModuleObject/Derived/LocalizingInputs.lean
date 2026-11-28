@@ -285,8 +285,13 @@ theorem isIso_baseChangeMap_of_localizing_continuousMapRingObj {p : X ⟶ Y} {g 
   exact isIso_baseChangeMap_of_localizingBoundedConstructible 𝐄
     ((Over.forget _).map_commSq sq.toCommSq) h₁ h₂
     (fun K hK ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ g'.left K hK)
-    (fun K hK ↦ (properDirectImage_baseChange_projectionFormula_continuousMapRingObj ℓ E p).2.1
-      sq K hK) hK
+    (fun K hK ↦ by
+      have : IsNoetherian ((Over.forget (Spec (.of k))).obj Y) := isNoetherian_left Y
+      have : IsNoetherian ((Over.forget (Spec (.of k))).obj Y') := isNoetherian_left Y'
+      have : IsProper ((Over.forget (Spec (.of k))).map p) := ‹IsProper p.left›
+      exact isIso_baseChangeMap_app_padicSubfield_of_isProper ℓ
+        (Y := (Over.forget _).obj Y) (Y' := (Over.forget _).obj Y') Y.hom Y'.hom
+        ((Over.forget _).map_commSq sq.toCommSq) (sq.map (Over.forget _)) E K hK) hK
 
 /-- Direct image along an open immersion, for `Λ = E̲`: for a quasi-compact open immersion
 `j : U ⟶ X`, `Rj_*` maps `Dbc(U, Λ)` into `Dbc(X, Λ)`. -/

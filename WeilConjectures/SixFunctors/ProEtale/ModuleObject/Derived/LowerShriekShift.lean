@@ -201,6 +201,16 @@ instance commShift_boundedConstructibleLowerShriekRefinementIso'_hom
     Iso.symm_hom, asIso_hom, eqToIso.hom]
   infer_instance
 
+instance commShift_boundedConstructibleLowerShriekRefinementIsoOfIsProper_hom
+    (sq : IsPullback (𝟙 X) i i₁ h) {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} (wp : h ≫ p₁ = p)
+    [IsProper p₁.left] [IsProper p.left] [IsProper h.left] :
+    NatTrans.CommShift (boundedConstructibleLowerShriekRefinementIsoOfIsProper ℓ sq wp).hom ℤ := by
+  let _ : IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' ℓ sq) := by
+    change IsIso (boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ sq)
+    exact isIso_boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ sq
+  rw [boundedConstructibleLowerShriekRefinementIsoOfIsProper_eq]
+  infer_instance
+
 end Refinement
 
 section Independence
