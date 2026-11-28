@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.OpenProjectionRoos.OpenProjectionRoosCompletionData
 public import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingRoosComparison
+import WeilConjectures.SixFunctors.Scalar.ScalarRoosComparison
+import WeilConjectures.PoincareDuality.StrictTensorAugmentation.StrictTensorAugmentation
 
 /-! # Roos comparisons of functors preserving countable products
 
@@ -173,5 +175,55 @@ def RoosComparison.ofPreservesProducts : RoosComparison F where
       simp [b]
 
 end Products
+
+section Augmentations
+
+variable (F : A ⥤ B) [F.Additive] (r : RoosComparison F)
+
+/-- A square of strict augmentations is carried by a Roos comparison: if `u` and `v` are
+augmentations of strict Roos cocones with first coordinates `a` and `b` and zero shifted
+coordinates, and `c` intertwines `b` with the image of `a` along the tower map `γ`, then the
+two induced maps into the Roos cocone of the image tower agree. -/
+theorem RoosComparison.augmentation_square
+    (T : ℕᵒᵖ ⥤ CochainComplex A ℤ) (T' : ℕᵒᵖ ⥤ CochainComplex B ℤ)
+    (γ : T' ⟶ (onTowers F).obj T) {M : CochainComplex B ℤ} {N : CochainComplex A ℤ}
+    (c : M ⟶ (F.mapHomologicalComplex (.up ℤ)).obj N)
+    (u : N ⟶ integralOperationsRoos T) (v : M ⟶ integralOperationsRoos T')
+    (a : (Functor.const ℕᵒᵖ).obj N ⟶ T) (b : (Functor.const ℕᵒᵖ).obj M ⟶ T')
+    (hu₁ : ∀ n : ℕ, u ≫ mappingCocone.fst (boundary T) ≫ Pi.π (fun k ↦ T.obj (op k)) n =
+      a.app (op n))
+    (hu₂ : ∀ (i k : ℤ) (h : i + -1 = k), u.f i ≫ (mappingCocone.snd (boundary T)).v i k h = 0)
+    (hv₁ : ∀ n : ℕ, v ≫ mappingCocone.fst (boundary T') ≫ Pi.π (fun k ↦ T'.obj (op k)) n =
+      b.app (op n))
+    (hv₂ : ∀ (i k : ℤ) (h : i + -1 = k), v.f i ≫ (mappingCocone.snd (boundary T')).v i k h = 0)
+    (hsq : ∀ n : ℕ, b.app (op n) ≫ γ.app (op n) =
+      c ≫ (F.mapHomologicalComplex (.up ℤ)).map (a.app (op n))) :
+    c ≫ (F.mapHomologicalComplex (.up ℤ)).map u ≫ r.iso.hom.app T =
+      v ≫ integralOperationsRoosMap γ := by
+  let G := F.mapHomologicalComplex (.up ℤ)
+  apply StrictTensorAugmentation.mappingCocone_hom_ext
+  · apply Pi.hom_ext
+    intro n
+    have e1 : r.iso.hom.app T ≫ mappingCocone.fst (boundary ((onTowers F).obj T)) ≫
+        Pi.π (fun k ↦ ((onTowers F).obj T).obj (op k)) n =
+        G.map (mappingCocone.fst (boundary T) ≫ Pi.π (fun k ↦ T.obj (op k)) n) := by
+      rw [← Category.assoc, r.first, Category.assoc, r.projections, Functor.map_comp]
+    have e3 : integralOperationsRoosMap γ ≫
+        mappingCocone.fst (boundary ((onTowers F).obj T)) =
+        mappingCocone.fst (boundary T') ≫ Limits.Pi.map (fun k : ℕ ↦ γ.app (op k)) := by
+      apply HomologicalComplex.hom_ext
+      intro i
+      exact integralOperationsRoosFunctor_map_fst γ i
+    simp only [Category.assoc]
+    rw [e1, ← G.map_comp, hu₁, ← hsq, reassoc_of% e3, Pi.map_π, reassoc_of% (hv₁ n)]
+  · intro i
+    simp only [HomologicalComplex.comp_f, Category.assoc]
+    rw [r.shifted T i (i - 1) (by omega)]
+    erw [integralOperationsRoosFunctor_map_snd γ i]
+    rw [← Category.assoc (v.f i), hv₂ i (i - 1) (by omega), zero_comp]
+    change c.f i ≫ F.map (u.f i) ≫ F.map _ ≫ _ = 0
+    rw [← F.map_comp_assoc, hu₂ i (i - 1) (by omega), F.map_zero, zero_comp, comp_zero]
+
+end Augmentations
 
 end WeilConjectures.OpenProjectionRoos
