@@ -10,6 +10,9 @@ public import WeilConjectures.SmoothPurity.Supporting.Coefficient.IntrinsicCoeff
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcCohomologySheaves
 import all WeilConjectures.Algebra.Homology.LineEvaluation.LineEvaluationInversePair
 import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
+import all WeilConjectures.SmoothPurity.Integral.Twist.IntegralTwistDerivedScalar
+import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectCharacterization
+import WeilConjectures.AlgebraicGeometry.Pbc.PbcUniformCompleteTriangulated
 
 /-! # The recorded Tate twists in the PBC finite-stage coordinates
 
@@ -178,7 +181,37 @@ theorem pbcTateAmbient_mem [IsNoetherian X]
     (m : ℤ) (K : PbcBoundedConstructibleComplete X (pbcIntegralDatum l E)) :
     PbcIsBoundedConstructibleComplete X (pbcIntegralDatum l E)
       ((pbcTateAmbient l X E m).obj K.obj) := by
-  sorry
+  have hl : IsUnit (l : Γ(X, ⊤)) := by
+    apply X.toRingedSpace.isUnit_of_isUnit_germ
+    intro t _
+    simpa using hInv.out t
+  let : ∀ x : X, Invertible (l : X.residueField x) := fun x ↦
+    (show IsUnit (l : X.residueField x) from
+      map_natCast (X.residue x).hom l ▸ (hInv.out x).map (X.residue x).hom).invertible
+  let P : ObjectProperty (PbcCompletedDerived X (pbcIntegralDatum l E)) :=
+    PbcIsBoundedConstructibleComplete X (pbcIntegralDatum l E)
+  let : P.IsClosedUnderIsomorphisms :=
+    (pbcIntegralUniformComplete_isTriangulated l E X hDim.out hInv.out).1
+  let e := purCoefficientIso l E X
+  have hT : integralDetailedTransport X l E = pbcDerivedRestrict e.hom := by
+    have heR : (adicLisseForget X).mapIso e = integralDetailedCoefficientComparison X l E :=
+      (purCoefficientIso_existsUnique l E X).exists.choose_spec
+    have := (integralDetailedCoefficientRestriction_exact X l E).1
+    have := (integralDetailedCoefficientRestriction_exact X l E).2
+    dsimp only [integralDetailedTransport, pbcDerivedRestrict, pbcRestrict]
+    simp only [← congrArg Iso.hom heR]
+    rfl
+  let K' := (purOrdinaryCoefficientModel l E X).mapDerivedCategory.obj K.obj
+  have h₁ : WeilConjectures.sfIntegralConstructible l E X K' :=
+    (integralStratifiedPerfectDetailed X l E hDim.out hl K').2
+      (P.prop_of_iso ((purDerivedCoefficientRoundTrip l E X).app K.obj).symm K.property)
+  have h₂ := (integralStratifiedPerfectDetailed X l E hDim.out hl _).1
+    (WeilConjectures.twist_mem l E X m ⟨K', h₁⟩)
+  rw [hT] at h₂
+  let T := integralSheafTwist l E X m
+  exact P.prop_of_iso ((T.mapDerivedCategoryCompIso (pbcRestrict e.hom)).app K' ≪≫
+    ((purOrdinaryCoefficientModel l E X).mapDerivedCategoryCompIso
+      (T ⋙ pbcRestrict e.hom)).app K.obj) h₂
 
 /-- Rational tensor by the actual signed line at the specified finite field. -/
 def pbcTateRational (F : Padic.FiniteCoefficientFields l Ω) (m : ℤ) :
