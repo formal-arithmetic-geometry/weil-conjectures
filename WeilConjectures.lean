@@ -25142,6 +25142,7 @@ public import WeilConjectures.Tactic.ExactByKernel
 public import WeilConjectures.Tactic.ExactModProofIrrel
 public import WeilConjectures.Tactic.ExactModProofs
 public import WeilConjectures.Tactic.FirstOrderApply
+public import WeilConjectures.Tactic.HEqCongr
 public import WeilConjectures.Tactic.MatchTactic
 public import WeilConjectures.Tactic.RflByKernel
 public import WeilConjectures.Tactic.TransportExact

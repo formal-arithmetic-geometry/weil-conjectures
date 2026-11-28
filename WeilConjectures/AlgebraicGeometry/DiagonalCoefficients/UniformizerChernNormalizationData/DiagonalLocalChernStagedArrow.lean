@@ -38,6 +38,12 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 -- Use the same abelian structure on module sheaves as the exact-derived comparison APIs.
 attribute [-instance] AlgebraicGeometry.ProEtale.diagonalModuleSheafAbelian
 
+/-- The completed realization forgets to the same underlying sheaf as forgetting the
+completed coefficient action directly. -/
+def localCompletedForgetIso (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
+    diagonalCompletedRestriction l T ⋙ diagonalForget l T ≅ localCompletedForget l T :=
+  Iso.refl _
+
 namespace UniformizerChernNormalizationData
 
 attribute [local irreducible] quotientLine quotientLineMap derivedScalars
@@ -48,13 +54,6 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]
   [DiagonalTraceLocalizations l Y]
   [DiagonalTraceLocalizations l (ProjectiveLine Y)]
-
-/-- The completed realization forgets to the same underlying sheaf as forgetting the
-completed coefficient action directly. -/
-def _root_.AlgebraicGeometry.ProEtale.DiagonalCoefficients.localCompletedForgetIso
-    (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
-    diagonalCompletedRestriction l T ⋙ diagonalForget l T ≅ localCompletedForget l T :=
-  Iso.refl _
 
 /-- The underlying map of the four unit endpoints of a local uniformizer reduction. -/
 def localUnitEndpoint (s : UniformizerChernNormalizationData l Y) :
