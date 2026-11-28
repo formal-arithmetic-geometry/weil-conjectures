@@ -107,7 +107,8 @@ lemma rightDerivedLowerShriekCompIso_hom_app_comp_isoRightDerivedLowerStar {X Y 
 
 /-- The identifications `Rf_! ≅ Rf_*` of proper morphisms are compatible with the composition
 isomorphisms of the lower shriek and of the lower star, up to congruence along `u₁ ≫ u₂ = v`. -/
-private lemma compIso_hom_app_comp_isoRightDerivedLowerStar {X Y Z : Scheme.{u}} (u₁ : X ⟶ Y)
+lemma rightDerivedLowerShriekCompIso_hom_app_comp_isoRightDerivedLowerStar_of_eq
+    {X Y Z : Scheme.{u}} (u₁ : X ⟶ Y)
     (u₂ : Y ⟶ Z) (v : X ⟶ Z) (h : u₁ ≫ u₂ = v) [IsProper u₁] [IsProper u₂] [IsProper v]
     [IsProper (u₁ ≫ u₂)]
     (P : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -199,7 +200,8 @@ private lemma unboundedEtaleLowerShriekId_inv_app (X : Scheme.{u})
       (rightDerivedLowerStarIdNatIso Λ X).inv.app P ≫
         (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ)
           (𝟙 X)).inv.app P := by
-  have h := compIso_hom_app_comp_isoRightDerivedLowerStar Λ (𝟙 X) (𝟙 X) (𝟙 X)
+  have h := rightDerivedLowerShriekCompIso_hom_app_comp_isoRightDerivedLowerStar_of_eq Λ (𝟙 X)
+    (𝟙 X) (𝟙 X)
     (Category.id_comp _) P
   rw [rightDerivedLowerStarCompIsoOfComp_id_inv_app,
     reassoc_of% congrIso_inv_app_comp_compIso_id_id_hom_app] at h

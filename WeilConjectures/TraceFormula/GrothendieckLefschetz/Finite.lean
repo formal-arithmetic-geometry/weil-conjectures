@@ -352,11 +352,18 @@ theorem correspondenceOperator_iterateHom_geometricFiberFrobenius
       rw [iterateHom_geometricFiberFrobenius_eq, Category.assoc, IsIso.hom_inv_id,
         Category.comp_id]]
     infer_instance
+  have : IsProper ((Spec (.of (AlgebraicClosure k))).iterateFrobenius hp hK
+      (FiniteField.frobeniusExponent k * m)) := by
+    rw [← specGeometricFrobenius_pow_inv_eq_iterateFrobenius hp hK]
+    infer_instance
   rw [reassoc_of% (leftDerivedUpperStarGeometricFiberFrobeniusIterateIso_hom_app_eq f m K)]
   exact correspondenceOperator_comp_eq_globalOperator Λ _ hp f.isOfCharacteristic_geometricFiber hK
     _ _ _ (iterateHom_geometricFiberFrobenius_eq f m)
     (by rw [endIterate_hom_eq_pow_hom, ← specGeometricFrobenius_pow_inv_eq_iterateFrobenius hp hK,
-      Iso.inv_hom_id]) v
+      Iso.inv_hom_id])
+    (fun N ↦ globalSectionsTransport_hom_app_leftDerivedUpperStarComp_inv_app Λ hp hK _ _
+      (by rw [endIterate_hom_eq_pow_hom, ← specGeometricFrobenius_pow_inv_eq_iterateFrobenius hp hK,
+        Iso.hom_inv_id]) N) v
 
 omit [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f]
   [HasCompactification f.geometricFiberToAlgebraicClosure] [Finite Λ]
