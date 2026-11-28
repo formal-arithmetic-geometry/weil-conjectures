@@ -64,11 +64,6 @@ to bounded constructible complexes
 (`ProEtale.CondensedRing.boundedConstructibleEtaleExtensionByZeroAdjunction`), so that the mate
 is the restriction of the ambient one (`CategoryTheory.isIso_mateEquiv_symm_restrictFullyFaithful`).
 
-## Remaining input (left as `sorry`)
-
-* `ProEtale.CondensedRing.isConstructibleModuleObject_weaklyEtaleLowerShriek_obj`: the extension
-  by zero along an étale morphism preserves constructibility.
-
 The invertibility of `e : πV^* ℚ̄_ℓ ⟶ ℚ̄_ℓ` is needed: once the mate is invertible,
 `smoothUnitBaseChange` is invertible if and only if `Rh'^!(e)` is.
 -/

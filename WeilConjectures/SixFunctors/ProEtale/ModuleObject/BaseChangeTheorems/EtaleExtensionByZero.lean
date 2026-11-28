@@ -10,23 +10,21 @@ public import WeilConjectures.CategoryTheory.Adjunction.MateTransposeIsIso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.WeaklyEtaleProjection
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.GenericPoint
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.EtaleConstructible
 
 /-!
 # Étale base change for the extension by zero on bounded constructible complexes
 
 For an étale morphism `f : X ⟶ Y` of separated `k`-schemes of finite type, the derived
-extension by zero `D(f_!)` of `ℚ̲̄_ℓ`-modules preserves bounded constructible complexes, so that the
+extension by zero `D(f_!)` of `ℚ̲̄_ℓ`-modules preserves bounded constructible complexes (since `f_!`
+preserves constructible sheaves,
+`ProEtale.CondensedRing.isConstructibleModuleObject_weaklyEtaleLowerShriek_of_etale`), so that the
 adjunction `D(f_!) ⊣ Lf^*` of the ambient derived categories restricts to bounded constructible
 complexes (`ProEtale.CondensedRing.boundedConstructibleEtaleExtensionByZeroAdjunction`). On the
 ambient derived categories, the extension by zero satisfies base change along any morphism
 (`ProEtale.CondensedRing.isIso_mateEquiv_symm_derivedWeaklyEtaleLowerShriek`): its exchange
 morphism is the iterated mate of the weakly étale base change map
 (`ProEtale.CondensedRing.isIso_baseChangeMap_of_weaklyEtale`).
-
-## Remaining input (left as `sorry`)
-
-* `ProEtale.CondensedRing.isConstructibleModuleObject_weaklyEtaleLowerShriek_obj`: the extension
-  by zero along an étale morphism preserves constructible sheaves of `ℚ̲̄_ℓ`-modules.
 -/
 
 @[expose] public section
@@ -75,6 +73,7 @@ variable {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y) [Etale f.left]
 
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [IsSeparated X.hom] [IsSeparated Y.hom] in
 /-- **Extension by zero along an étale morphism preserves constructibility**: for an étale
 morphism `f : X ⟶ Y` of separated `k`-schemes of finite type and a constructible sheaf `M` of
 `ℚ̲̄_ℓ`-modules on `X`, the extension by zero `f_! M` is constructible. -/
@@ -83,8 +82,11 @@ theorem isConstructibleModuleObject_weaklyEtaleLowerShriek_obj
     (hM : IsConstructibleModuleObject (condensedRingObj 𝐐 X.left) M) :
     IsConstructibleModuleObject (condensedRingObj 𝐐 Y.left)
       ((weaklyEtaleLowerShriek 𝐐 f.left).obj M) :=
-  sorry
+  have := isNoetherian_of_locallyOfFiniteType X.hom
+  have := isNoetherian_of_locallyOfFiniteType Y.hom
+  isConstructibleModuleObject_weaklyEtaleLowerShriek_of_etale 𝐐 f.left hM
 
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [IsSeparated X.hom] [IsSeparated Y.hom] in
 /-- The derived extension by zero along an étale morphism preserves bounded constructible
 complexes. -/
 theorem boundedConstructible_weaklyEtaleLowerShriek_mapDerivedCategory_obj

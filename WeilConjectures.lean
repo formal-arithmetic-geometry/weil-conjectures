@@ -6435,6 +6435,7 @@ public import WeilConjectures.AlgebraicGeometry.FiniteEtaleFiniteTypeClosedFibre
 public import WeilConjectures.AlgebraicGeometry.FiniteEtaleGraphBaseChange
 public import WeilConjectures.AlgebraicGeometry.FiniteEtaleGraphClopen
 public import WeilConjectures.AlgebraicGeometry.FiniteEtaleHenselianGRingStage
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleImageNowhereDense
 public import WeilConjectures.AlgebraicGeometry.FiniteEtaleInfinitesimalSystem
 public import WeilConjectures.AlgebraicGeometry.FiniteEtaleLiftingApproximation
 public import WeilConjectures.AlgebraicGeometry.FiniteEtaleLiftingComplete
@@ -23303,6 +23304,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condense
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedPointDualComparisonScalarLimits
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedPointTrivializationComposition
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedVerdierCoefficientComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ConstructibleOfStratification
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ConstructibleSheafBidualityScalarComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ConstructibleSheafDevissage
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ConstructibleSheafRegularDevissage
@@ -23518,6 +23520,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizi
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocalizingLocallySmall
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocalizingProjection
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocalizingProperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyFinitelyPresentedDenseOpen
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyFreeDualizable
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyFreeTensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
@@ -23902,7 +23905,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeOfFin
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeOfFinitelyPresentedField
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.EtaleConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.WeaklyEtale
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.WeaklyEtaleBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriekPadicAlgCl
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ModPowReduction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullCoherence
