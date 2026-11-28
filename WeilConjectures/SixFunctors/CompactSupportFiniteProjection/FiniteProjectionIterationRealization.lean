@@ -278,7 +278,7 @@ private theorem fixed_component_realization
           (TX.obj k).map (fixedPullRealization S f ⟨N.obj, N.property.1⟩).hom) =
       (RY.unitIso.app ((TY.obj (RY.inverse.obj ((S.finite.support f cf).obj K).obj)).obj
         l)).inv ≫ ((TY.map (fixedSupportRealization S f cf K).hom).app l) ≫
-        fixedComponent (C := C) (E := E) (n := n) (hn := hn) f cf k l := by
+        fixedComponent (C := C) (E := E) (n := n) f cf k l := by
   let := Padic.finite_coefficientExtensionRing C.l E n hn
   let RX := realization (C := C) (E := E) (n := n) (hn := hn) X
   let RY := realization (C := C) (E := E) (n := n) (hn := hn) Y
@@ -293,13 +293,14 @@ private theorem fixed_component_realization
   have h := inverse_conjugation_factored RY
     ((TY.mapIso (fixedSupportRealization S f cf K)).app (RY.inverse.obj N.obj))
     (supportRealization S f cf M) (F.mapIso d)
-    (fixedComponent (C := C) (E := E) (n := n) (hn := hn) f cf
+    (fixedComponent (C := C) (E := E) (n := n) f cf
       (RX.inverse.obj K.obj) (RY.inverse.obj N.obj))
   change RY.inverse.map
     ((intrinsicFiniteTorsionConstructible C.l E n hn Y.obj.left).ι.map
       (component S f cf K N)) ≫ _ = _ at h
   exact h
 
+include hn in
 private theorem fixed_projection_first_coordinates
     {k k' : DerivedCategory (Sheaf (ProEt.topology X.obj.left)
       (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n))))}
@@ -308,13 +309,14 @@ private theorem fixed_projection_first_coordinates
       (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n))))) :
     let F := sfFixedCompactSupport (Padic.coefficientExtensionRing C.l E n) cf
     ((fixedTensor (C := C) (E := E) (n := n) Y).map (F.map a)).app N ≫
-        fixedComponent (C := C) (E := E) (n := n) (hn := hn) f cf k' N =
-      fixedComponent (C := C) (E := E) (n := n) (hn := hn) f cf k N ≫ F.map
+        fixedComponent (C := C) (E := E) (n := n) f cf k' N =
+      fixedComponent (C := C) (E := E) (n := n) f cf k N ≫ F.map
         (((fixedTensor (C := C) (E := E) (n := n) X).map a).app
           ((fixedDerivedPull (C := C) (E := E) (n := n) f).obj N)) := by
   let := Padic.finite_coefficientExtensionRing C.l E n hn
   exact fixed_projection_first (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n)) cf a N
 
+include hn in
 private theorem fixed_projection_second_coordinates
     (k : DerivedCategory (Sheaf (ProEt.topology X.obj.left)
       (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n)))))
@@ -323,8 +325,8 @@ private theorem fixed_projection_second_coordinates
     (a : N ⟶ N') :
     let F := sfFixedCompactSupport (Padic.coefficientExtensionRing C.l E n) cf
     ((fixedTensor (C := C) (E := E) (n := n) Y).obj (F.obj k)).map a ≫
-        fixedComponent (C := C) (E := E) (n := n) (hn := hn) f cf k N' =
-      fixedComponent (C := C) (E := E) (n := n) (hn := hn) f cf k N ≫ F.map
+        fixedComponent (C := C) (E := E) (n := n) f cf k N' =
+      fixedComponent (C := C) (E := E) (n := n) f cf k N ≫ F.map
         (((fixedTensor (C := C) (E := E) (n := n) X).obj k).map
           ((fixedDerivedPull (C := C) (E := E) (n := n) f).map a)) := by
   let := Padic.finite_coefficientExtensionRing C.l E n hn
@@ -352,9 +354,9 @@ theorem iteration_realization :
       (iterationTargetComparison S f g cf cg K L).hom =
     (iterationSourceComparison S f g cf cg K L).hom ≫
       RZ.functor.map
-        (fixedComponent (C := C) (E := E) (n := n) (hn := hn) g cg
+        (fixedComponent (C := C) (E := E) (n := n) g cg
           ((sfFixedCompactSupport (Padic.coefficientExtensionRing C.l E n) cf).obj k) l ≫
-          G.map (fixedComponent (C := C) (E := E) (n := n) (hn := hn) f cf k
+          G.map (fixedComponent (C := C) (E := E) (n := n) f cf k
             (Pg.obj l))) := by
   let := Padic.finite_coefficientExtensionRing C.l E n hn
   let RX := realization (C := C) (E := E) (n := n) (hn := hn) X
@@ -373,8 +375,8 @@ theorem iteration_realization :
   let M := ((partialTensor S X).obj K).obj ((torPull S f).obj ((torPull S g).obj L))
   let rho := component S g cg ((S.finite.support f cf).obj K) L ≫
     (S.finite.support g cg).map (component S f cf K ((torPull S g).obj L))
-  let pf := fixedComponent (C := C) (E := E) (n := n) (hn := hn) f cf k (Pg.obj l)
-  let pg := fixedComponent (C := C) (E := E) (n := n) (hn := hn) g cg (F.obj k) l
+  let pf := fixedComponent (C := C) (E := E) (n := n) f cf k (Pg.obj l)
+  let pg := fixedComponent (C := C) (E := E) (n := n) g cg (F.obj k) l
   have hf := map_three_eq G (fixed_component_realization S f cf K ((torPull S g).obj L))
   have hg := split_map_tail G
     (fixed_component_realization S g cg ((S.finite.support f cf).obj K) L)

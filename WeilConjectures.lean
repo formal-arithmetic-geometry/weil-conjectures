@@ -14716,6 +14716,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.HomologyFunctorCoherence
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.IsoId
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.IsoIdSingleFunctor
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.LeftProjectionMorphism
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryCounit
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryMonoidal
@@ -14766,6 +14767,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableProjectiveUnit
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableProjectiveUnitPerfect
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableShortExact
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableSingle
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableTransfer
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Equivalence
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.EquivalenceTensorIso
@@ -15572,6 +15574,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.DerivedCompAux
 public import WeilConjectures.CategoryTheory.Monoidal.DerivedSymmetric
 public import WeilConjectures.CategoryTheory.Monoidal.Dualizable
 public import WeilConjectures.CategoryTheory.Monoidal.DualizableDetection
+public import WeilConjectures.CategoryTheory.Monoidal.DualizableFree
 public import WeilConjectures.CategoryTheory.Monoidal.EndTensorUnit
 public import WeilConjectures.CategoryTheory.Monoidal.EtaleDerivedTensorSymmetrySupplement
 public import WeilConjectures.CategoryTheory.Monoidal.ExceptionalProjection
@@ -20966,6 +20969,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ClosedUpperShriekCoprodu
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChange
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeExchange
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeLowerStarDualizable
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeLowerStarFiniteType
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeOpenImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeOpenImmersionSheaf
@@ -21023,6 +21027,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Exchange.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange.OpenClosed
 public import WeilConjectures.SixFunctors.Etale.Derived.ExcisionComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsDerived
+public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsHom
 public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsProjectionPullback
@@ -22838,11 +22843,14 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Ext
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.BaseChange
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.CompactFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.Constructible
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.Hom
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.LowerShriekBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.LowerShriekTransitivity
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.LowerStar
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.LowerStarDualizable
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.LowerStarFiniteType
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.LowerStarFree
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.OpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.Projection
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.ProjectionPullback
@@ -24049,6 +24057,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionProjection
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionProjectionComparison
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionProjectionIso
+public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionRestrictScalars
 public import WeilConjectures.SixFunctors.ProEtale.SeparableClosureCover
 public import WeilConjectures.SixFunctors.ProEtale.StrictlyHenselianNeighbourhood
 public import WeilConjectures.SixFunctors.ProEtale.StrictlyHenselianStalk

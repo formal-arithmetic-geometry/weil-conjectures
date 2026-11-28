@@ -277,6 +277,7 @@ def siteHomComparisonLocus (M : Etale.DerivedCategoryModule A X) :
     ObjectProperty (Etale.DerivedCategoryModule A X) :=
   fun K ↦ IsIso (siteComparisonEvaluationHom (ModuleCat.{u + 1} A) X K M)
 
+omit [Finite A] in
 /-- Exactness, signed shift compatibility, the full reversed triangle morphism and thick
 closure for the specified evaluation comparison, for each arbitrary fixed target M. -/
 theorem siteHomComparison_exact_thick (M : Etale.DerivedCategoryModule A X) :
