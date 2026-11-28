@@ -111,8 +111,7 @@ def goodChainComparison :
   NatIso.ofComponents (fun K ↦ m.totalComparison.chain K.1.obj K.2.obj)
     (fun f ↦ m.totalComparison.naturality f.1.hom f.2.hom)
 
-/-- The localized chain-level comparison on pairs of good complexes, computed through the
-representative isomorphisms of both tensor models. -/
+/-- The localized chain-level comparison on pairs of good complexes. -/
 def goodProjectionComparison :
     goodPairsLocalization l E (U := U) (X := X) ⋙ leftInputs l E j o ⋙ q.tensorX.ordinary.tensor ≅
       goodPairsLocalization l E ⋙ rightInputs l E j o ⋙ q.tensorU.ordinary.tensor ⋙

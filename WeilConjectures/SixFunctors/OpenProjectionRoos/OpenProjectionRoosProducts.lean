@@ -100,20 +100,6 @@ section Products
 
 variable (F : A ⥤ B) [F.Additive] [PreservesLimitsOfShape (Discrete ℕ) F]
 
-omit [HasCountableProducts B] in
-/-- Termwise application of a functor preserving countable products preserves them. -/
-theorem mapHomologicalComplex_preservesCountableProducts :
-    PreservesLimitsOfShape (Discrete ℕ) (F.mapHomologicalComplex (.up ℤ)) :=
-  HomologicalComplex.preservesLimitsOfShape_of_eval _ (fun n ↦ by
-    change PreservesLimitsOfShape (Discrete ℕ) (HomologicalComplex.eval _ (.up ℤ) n ⋙ F)
-    infer_instance)
-
-/-- The product comparison of the termwise functor on a tower is invertible. -/
-instance isIso_piComparison_mapHomologicalComplex (T : ℕᵒᵖ ⥤ CochainComplex A ℤ) :
-    IsIso (piComparison (F.mapHomologicalComplex (.up ℤ)) (fun n : ℕ ↦ T.obj (op n))) := by
-  have := mapHomologicalComplex_preservesCountableProducts F
-  infer_instance
-
 omit [PreservesLimitsOfShape (Discrete ℕ) F] in
 /-- The shifted coordinate of the additive Roos map, for an arbitrary target degree. -/
 theorem scalarRoosMap_shifted (T : ℕᵒᵖ ⥤ CochainComplex A ℤ) (i k : ℤ) (h : i + -1 = k) :
