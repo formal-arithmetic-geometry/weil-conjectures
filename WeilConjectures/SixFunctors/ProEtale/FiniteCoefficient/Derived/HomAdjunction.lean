@@ -102,7 +102,7 @@ end General
 
 section Immersion
 
-variable {Λ : Type (u + 1)} [CommRing Λ] [IsNoetherianRing Λ]
+variable {Λ : Type (u + 1)} [CommRing Λ]
 
 /-- For a closed immersion `i : Z ⟶ X`, the counit `Li^* Ri_* K ⟶ K` is an isomorphism, since
 `Ri_*` is fully faithful (`AlgebraicGeometry.ProEtale.full_rightDerivedFunctor_lowerStar`). -/
@@ -125,7 +125,6 @@ noncomputable def rightDerivedLowerStarCompDerivedHomClosedImmersionIso {Z X : S
       (asIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).counit.app K)).op.symm)
       _
 
-omit [IsNoetherianRing Λ] in
 /-- If the ranges of `i : Z ⟶ X` and of the open immersion `j : U ⟶ X` are disjoint, then
 `Lj^* Ri_* K = 0` for every `K : D(Z_proét)`: computing `Ri_* K` by a K-injective complex `I`,
 `Lj^* Ri_* K ≅ j^* i_* I` termwise, and `j^* i_* = 0` on sheaves

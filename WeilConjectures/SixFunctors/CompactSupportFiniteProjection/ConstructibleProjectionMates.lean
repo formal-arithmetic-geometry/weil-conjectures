@@ -537,7 +537,7 @@ def component {X Y : SixFunctorSpace D} (f : X ⟶ Y)
   letI := Padic.finite_coefficientExtensionRing C.l E n hn
   projectionFullConjugate (sourceComparison S f c K L) (targetComparison S f c K L)
     ((realization (C := C) (E := E) (n := n) (hn := hn) Y).functor.map
-      (fixedComponent (C := C) (E := E) (n := n) (hn := hn) f c
+      (fixedComponent (C := C) (E := E) (n := n) f c
         ((realization (C := C) (E := E) (n := n) (hn := hn) X).inverse.obj K.obj)
         ((realization (C := C) (E := E) (n := n) (hn := hn) Y).inverse.obj L.obj)))
 

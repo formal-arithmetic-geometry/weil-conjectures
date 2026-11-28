@@ -35,6 +35,7 @@ open Scheme
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [IsNoetherianRing Λ] {X : Scheme.{u}}
 
+omit [IsNoetherianRing Λ] in
 /-- For `P ≅ ν^* Q` and `P' ≅ ν^* Q'` bounded below of étale origin, with `P ⊗ᴸ P'` bounded
 below, `Rν_* (P ⊗ᴸ P') ≅ Rν_* P ⊗ᴸ Rν_* P'`: both sides are `Q ⊗ᴸ Q'`, using
 `ν^*(Q ⊗ᴸ Q') ≅ P ⊗ᴸ P'`, the boundedness of `Q ⊗ᴸ Q'` (as `ν^*` is exact and faithful) and

@@ -11,6 +11,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjComparison
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionFlat
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionRestrictScalars
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormula
 
 /-!
 # Extension of scalars and the projection map of `Rg_*` on the pro-étale site
@@ -42,45 +44,6 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 
 open Scheme
-
-variable {R S : Type (u + 1)} [CommRing R] [CommRing S] (φ : R →+* S) (X : Scheme.{u})
-
-/-- Restriction of scalars of pro-étale sheaves preserves finite colimits: it is the sheafified
-postcomposition with restriction of scalars, which is left adjoint to coextension of scalars. -/
-instance preservesFiniteColimits_sheafComposeRestrictScalars :
-    PreservesFiniteColimits (sheafCompose (Scheme.ProEt.topology X)
-      (ModuleCat.restrictScalars.{u + 1} φ)) := by
-  have hadj := ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} φ
-  have : PreservesLimitsOfSize.{u, u + 1} (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} φ) :=
-    hadj.rightAdjoint_preservesLimits
-  have : (Scheme.ProEt.topology X).HasSheafCompose
-      (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} φ) :=
-    hasSheafCompose_of_preservesLimitsOfSize _
-  have := (Sheaf.adjunction (Scheme.ProEt.topology X) hadj).isLeftAdjoint
-  exact preservesFiniteColimits_of_natIso
-    (sheafToPresheafCompWhiskeringRightCompPresheafToSheafIso _ _)
-
-/-- Restriction of scalars of pro-étale sheaves reflects isomorphisms, isomorphisms of sheaves
-being detected on sections. -/
-instance reflectsIsomorphisms_sheafComposeRestrictScalars :
-    (sheafCompose (Scheme.ProEt.topology X)
-      (ModuleCat.restrictScalars.{u + 1} φ)).ReflectsIsomorphisms where
-  reflects {F G} f hf := by
-    have : IsIso ((sheafToPresheaf _ _).map ((sheafCompose (Scheme.ProEt.topology X)
-        (ModuleCat.restrictScalars.{u + 1} φ)).map f)) := inferInstance
-    have : IsIso f.hom := by
-      rw [NatTrans.isIso_iff_isIso_app]
-      intro U
-      have : IsIso ((ModuleCat.restrictScalars.{u + 1} φ).map (f.hom.app U)) :=
-        NatIso.isIso_app_of_isIso
-          ((sheafToPresheaf _ _).map ((sheafCompose (Scheme.ProEt.topology X)
-            (ModuleCat.restrictScalars.{u + 1} φ)).map f)) U
-      have : IsIso ((forget (ModuleCat R)).map
-          ((ModuleCat.restrictScalars.{u + 1} φ).map (f.hom.app U))) := inferInstance
-      have : IsIso ((forget (ModuleCat S)).map (f.hom.app U)) := this
-      exact isIso_of_reflects_iso _ (forget (ModuleCat S))
-    have : IsIso ((sheafToPresheaf _ _).map f) := this
-    exact isIso_of_reflects_iso f (sheafToPresheaf _ _)
 
 section Linear
 
@@ -150,19 +113,6 @@ end General
 section ScalarExtension
 
 variable {R S : Type (u + 1)} [CommRing R] [CommRing S] [Algebra R S] (X : Scheme.{u})
-
-/-- Restriction of scalars preserves pro-étale sheaves, being a right adjoint. -/
-instance hasSheafCompose_restrictScalars (φ : R →+* S) :
-    (Scheme.ProEt.topology X).HasSheafCompose (ModuleCat.restrictScalars.{u + 1} φ) :=
-  have : PreservesLimitsOfSize.{u, u + 1} (ModuleCat.restrictScalars.{u + 1} φ) :=
-    (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ).rightAdjoint_preservesLimits
-  hasSheafCompose_of_preservesLimitsOfSize _
-
-/-- Restriction of scalars of pro-étale sheaves preserves limits, being a right adjoint. -/
-instance preservesLimits_sheafComposeRestrictScalars (φ : R →+* S) :
-    PreservesLimits (sheafCompose (Scheme.ProEt.topology X)
-      (ModuleCat.restrictScalars.{u + 1} φ)) :=
-  (sheafExtendScalarsAdjunction φ X).rightAdjoint_preservesLimits
 
 /-- Extension of scalars along a flat algebra is exact on pro-étale sheaves. -/
 instance preservesFiniteLimits_sheafExtendScalars_algebraMap [Module.Flat R S] :
@@ -332,8 +282,6 @@ theorem isIso_mateEquiv_leftDerivedSheafExtendScalarsCompUpperStarIso_app
   rw [Linear.smul_comp, Category.id_comp, Functor.map_smul, CategoryTheory.Functor.map_id,
     Linear.comp_smul]
   simp
-
-variable [IsNoetherianRing R] [IsNoetherianRing S]
 
 omit [Module.Finite R S] [Module.Free R S] [Nontrivial R] in
 /-- The tensor comparisons of `Lg^*` over `R` and over `S` and those of `L(S ⊗_R -)` are

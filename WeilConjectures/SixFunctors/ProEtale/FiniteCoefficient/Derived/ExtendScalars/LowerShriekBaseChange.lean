@@ -42,7 +42,7 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme
 
-variable (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S] [IsNoetherianRing R]
+variable (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S]
 
 section OpenImmersion
 

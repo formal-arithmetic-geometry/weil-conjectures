@@ -199,6 +199,9 @@ private theorem ordinary_chain_associativity_comparison
   intro ν τ ht ha P Q N
   exact ordinary_chain_forward_associativity F ν τ ht ha P Q N
 
+set_option maxHeartbeats 400000 in
+-- The chain comparison unfolds the monoidal structure of sheaves of modules; it needs more than
+-- the default heartbeats since more coefficient-change instances are in scope.
 private theorem ordinary_coherence_of_inverse_associativity
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     {C : Type (u + 1)} [SmallCategory C] (J : GrothendieckTopology C)

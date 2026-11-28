@@ -77,6 +77,7 @@ variable [Finite R] {Y Z : Scheme.{u}} (g : Z ⟶ Y) [QuasiCompact g] [QuasiSepa
   (hd : ∀ (F : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} R)) (q : ℕ), d < q →
     IsZero (((Etale.lowerStar (ModuleCat.{u + 1} R) g).rightDerived q).obj F))
 
+omit [Finite R] in
 include hd in
 /-- **The projection formula at `S_Y` along a morphism of finite cohomological dimension.**
 For a finite ring `R`, a quasi-compact quasi-separated `g` whose étale higher direct images
@@ -115,6 +116,7 @@ theorem isIso_rightDerivedLowerStarProjectionMap_app_app_derivedSingle_of_cohomo
       (_root_.DerivedCategory.quotientCompQhIso _).symm.app
         ((HomologicalComplex.single _ (.up ℤ) 0).obj (sheafRestrictScalarsUnit R S Y)))
 
+omit [Finite R] in
 include hd in
 /-- **Derived scalar extension commutes with `Rg_*` for `g` of finite cohomological dimension.**
 For a finite ring `R`, an `R`-algebra `S`, a quasi-compact quasi-separated `g : Z ⟶ Y` whose

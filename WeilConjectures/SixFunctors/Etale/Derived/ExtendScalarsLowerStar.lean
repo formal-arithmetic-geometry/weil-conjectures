@@ -96,7 +96,7 @@ with the derived pullback
 (`AlgebraicGeometry.Etale.leftDerivedSheafExtendScalarsProjection_transpose_upperStar`), and
 restriction of scalars reflects isomorphisms. -/
 theorem isIso_mateEquiv_leftDerivedUpperStarEtaleSheafExtendScalarsIso_app_of_isIso_mateEquiv
-    [IsNoetherianRing R] (M : DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} R)))
+    (M : DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} R)))
     [IsIso ((mateEquiv (derivedUpperStarLowerStarAdjunction _ g)
       (derivedUpperStarLowerStarAdjunction _ g)
       (leftDerivedTensorRestrictScalarsUnitUpperStarMap R S g)).app M)] :

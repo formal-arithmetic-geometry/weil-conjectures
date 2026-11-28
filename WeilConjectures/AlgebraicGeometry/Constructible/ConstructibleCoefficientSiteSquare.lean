@@ -42,6 +42,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificat
 public import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtension
 public import Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormula
 
 import WeilConjectures.AlgebraicGeometry.ProEtaleFiniteModelLocalConstancy
 import Mathlib.Algebra.Category.ModuleCat.AB

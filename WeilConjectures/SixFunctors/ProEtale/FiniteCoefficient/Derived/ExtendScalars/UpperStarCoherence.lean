@@ -356,7 +356,7 @@ lemma mapHomotopyCategorySheafExtendScalarsCompUpperStarIso_hom_app_comp {T Z Y 
 
 end HomotopyCategory
 
-variable [IsNoetherianRing R] {Y Z : Scheme.{u}} (g : Z ⟶ Y)
+variable {Y Z : Scheme.{u}} (g : Z ⟶ Y)
 
 /-- `leftDerivedUpperStarExtendScalarsIso` is compatible with the identifications
 `L(𝟙 Y)^* ≅ 𝟭`. -/

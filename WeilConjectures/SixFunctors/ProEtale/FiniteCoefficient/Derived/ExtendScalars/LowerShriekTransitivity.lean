@@ -168,7 +168,7 @@ omit [Algebra S T] [Algebra R T] [IsScalarTower R S T] in
 variable (R S) in
 /-- The expanded form of `leftDerivedUpperStarExtendScalarsIso_hom_app_comp_counit`, with the
 composite counits written out. -/
-lemma leftDerivedUpperStarExtendScalarsIso_hom_app_comp_counit_expand [IsNoetherianRing R]
+lemma leftDerivedUpperStarExtendScalarsIso_hom_app_comp_counit_expand
     {Y Z : Scheme.{u}} (g : Z ⟶ Y)
     (K : HomotopyCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} R)) (.up ℤ)) :
     (leftDerivedUpperStarExtendScalarsIso R S g).hom.app (DerivedCategory.Qh.obj K) ≫
@@ -191,7 +191,7 @@ variable (R S T) in
 /-- **Transitivity of the commutation of derived scalar extension with `Lg^*`.** Along
 `τ : Ψ_{S,T} ∘ Ψ_{R,S} ⟶ Ψ_{R,T}`, the commutation `Lg^* Ψ_{R,T} ≅ Ψ_{R,T} Lg^*` is the composite
 of the commutations for `Ψ_{R,S}` and `Ψ_{S,T}`. -/
-lemma leftDerivedUpperStarExtendScalarsIso_hom_trans [IsNoetherianRing R] [IsNoetherianRing S]
+lemma leftDerivedUpperStarExtendScalarsIso_hom_trans
     {Y Z : Scheme.{u}} (g : Z ⟶ Y) :
     Functor.whiskerRight (leftDerivedSheafExtendScalarsCompMap R S T Y)
         L((g)^*[ModuleCat.{u + 1} T]) ≫ (leftDerivedUpperStarExtendScalarsIso R T g).hom =
@@ -240,7 +240,7 @@ variable (R S T) in
 /-- **Transitivity of the base change map of derived scalar extension along `Rg_*`.** Along
 `τ : Ψ_{S,T} ∘ Ψ_{R,S} ⟶ Ψ_{R,T}`, the base change map `Ψ_{R,T} (Rg_* N) ⟶ Rg_* (Ψ_{R,T} N)` is
 the composite of the base change maps for `Ψ_{R,S}` and `Ψ_{S,T}`. -/
-lemma rightDerivedLowerStarExtendScalarsMap_trans [IsNoetherianRing R] [IsNoetherianRing S]
+lemma rightDerivedLowerStarExtendScalarsMap_trans
     {Y Z : Scheme.{u}} (g : Z ⟶ Y)
     (N : DerivedCategory (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} R))) :
     (leftDerivedSheafExtendScalarsCompMap R S T Y).app (R((g)_*[ModuleCat.{u + 1} R]).obj N) ≫
@@ -261,8 +261,8 @@ variable (R S T) in
 /-- **Transitivity of the commutation of derived scalar extension with `j_!`.** Along
 `τ : Ψ_{S,T} ∘ Ψ_{R,S} ⟶ Ψ_{R,T}`, the isomorphism `Ψ_{R,T} (j_! K) ≅ j_! (Ψ_{R,T} K)` is the
 composite of the isomorphisms for `Ψ_{R,S}` and `Ψ_{S,T}`. -/
-lemma openImmersionLowerShriekExtendScalarsIso_hom_app_trans [IsNoetherianRing R]
-    [IsNoetherianRing S] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+lemma openImmersionLowerShriekExtendScalarsIso_hom_app_trans
+    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology U) (ModuleCat.{u + 1} R))) :
     (leftDerivedSheafExtendScalarsCompMap R S T X).app
         (D((j)_!open[ModuleCat.{u + 1} R]).obj K) ≫
@@ -293,8 +293,8 @@ variable (R S T) in
 `f`: along `τ : Ψ_{S,T} ∘ Ψ_{R,S} ⟶ Ψ_{R,T}`, the comparison
 `Ψ_{R,T} (Rf_!(c) M) ⟶ Rf_!(c) (Ψ_{R,T} M)`
 is the composite of the comparisons for `Ψ_{R,S}` and `Ψ_{S,T}`. -/
-lemma rightDerivedLowerShriekOfCompactificationExtendScalarsMap_trans [IsNoetherianRing R]
-    [IsNoetherianRing S] {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+lemma rightDerivedLowerShriekOfCompactificationExtendScalarsMap_trans
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))) :
     (leftDerivedSheafExtendScalarsCompMap R S T Y).app ((Rf_!(c)[ModuleCat.{u + 1} R]).obj M) ≫
         (rightDerivedLowerShriekOfCompactificationExtendScalarsMap R T c).app M =
@@ -314,7 +314,7 @@ lemma rightDerivedLowerShriekOfCompactificationExtendScalarsMap_trans [IsNoether
     openImmersionLowerShriekExtendScalarsIso_hom_app_trans R S T c.i M]
   simp only [Functor.map_comp]
 
-variable [Finite R] [Finite S] {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
 /-- **Transitivity of the comparison for `Rf_!`**. For `R → S → T` and every `M`, the
 comparison `b_{R,T}(M)` is the composite of `b_{R,S}` and `b_{S,T}`, along

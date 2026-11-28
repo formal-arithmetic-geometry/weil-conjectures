@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Ext
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormula
 public import WeilConjectures.CategoryTheory.Adjunction.MateTransport
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.LowerStarDualizable
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.ProjectionPullback
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormulaBounded
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ScalarExtension
@@ -41,34 +42,7 @@ variable (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S]
 
 section LowerStar
 
-variable [IsNoetherianRing R] {Y Z : Scheme.{u}} (g : Z ⟶ Y)
-
-/-- The base change map `Ψ (Rg_* M) ⟶ Rg_* (Ψ M)` of derived scalar extension along the derived
-direct image: the mate of the commutation `Lg^* ∘ Ψ ≅ Ψ ∘ Lg^*`
-(`AlgebraicGeometry.ProEtale.leftDerivedUpperStarExtendScalarsIso`). -/
-noncomputable def rightDerivedLowerStarExtendScalarsMap :
-    R((g)_*[ModuleCat.{u + 1} R]) ⋙ L(sheafExtendScalars (algebraMap R S) Y) ⟶
-      L(sheafExtendScalars (algebraMap R S) Z) ⋙ R((g)_*[ModuleCat.{u + 1} S]) :=
-  mateEquiv (derivedUpperStarLowerStarAdjunction _ g) (derivedUpperStarLowerStarAdjunction _ g)
-    (leftDerivedUpperStarExtendScalarsIso R S g).hom
-
-/-- The base change map `Ψ (Rg_* M) ⟶ Rg_* (Ψ M)` is an isomorphism at `M` as soon as the mate
-`L(- ⊗ S_Y) (Rg_* M) ⟶ Rg_* (L(- ⊗ S_Z) M)` of the comparison
-`Lg^* (K ⊗ᴸ S_Y) ⟶ Lg^* K ⊗ᴸ S_Z` is. -/
-theorem isIso_rightDerivedLowerStarExtendScalarsMap_app_of_isIso_mateEquiv
-    (M : DerivedCategory (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} R)))
-    [IsIso ((mateEquiv (derivedUpperStarLowerStarAdjunction _ g)
-      (derivedUpperStarLowerStarAdjunction _ g)
-      (leftDerivedTensorRestrictScalarsUnitUpperStarMap R S g)).app M)] :
-    IsIso ((rightDerivedLowerStarExtendScalarsMap R S g).app M) :=
-  Adjunction.isIso_mateEquiv_app_of_isIso_mateEquiv_app
-    (derivedUpperStarLowerStarAdjunction _ g) (derivedUpperStarLowerStarAdjunction _ g)
-    (leftDerivedSheafExtendScalarsAdjunction R S Y)
-    (leftDerivedSheafExtendScalarsAdjunction R S Z) (leftDerivedUpperStarExtendScalarsIso R S g)
-    (leftDerivedSheafExtendScalarsProjection R S Y) (leftDerivedSheafExtendScalarsProjection R S Z)
-    (leftDerivedTensorRestrictScalarsUnitUpperStarMap R S g)
-    (fun X ↦ Adjunction.map_comp_mateEquiv_app_comp_map_of_transpose _ _ _ _ _ _ X
-      (leftDerivedSheafExtendScalarsProjection_transpose_upperStar R S g X)) M
+variable {Y Z : Scheme.{u}} (g : Z ⟶ Y)
 
 /-- **The projection formula at `S_Y`.** For a finite ring `R` and a proper `g`, the projection
 map `Rg_*(j_! K) ⊗ᴸ S_Y ⟶ Rg_*(j_! K ⊗ᴸ Lg^* S_Y)` is an isomorphism for `K` bounded

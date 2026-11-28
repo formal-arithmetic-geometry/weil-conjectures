@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 /-!
 # The comparison functor `ν^*` preserves flat sheaves
 
-For a Noetherian (for instance finite) commutative ring `Λ`, the inverse image
+For a commutative ring `Λ`, the inverse image
 `ν^* : Sh(X_ét, Λ) ⥤ Sh(X_proét, Λ)` along the inclusion of the small étale site into the small
 pro-étale site sends flat étale sheaves of `Λ`-modules to flat pro-étale sheaves
 (`AlgebraicGeometry.ProEtale.flat_comparisonUpperStar_obj`).
@@ -44,11 +44,11 @@ lemma coverPreserving_toProEt :
   exact MorphismProperty.Over.coverPreserving_changeProp X etale_le_weaklyEtale
     etaleTopology_le_proetaleTopology
 
-variable {X} {Λ : Type (u + 1)} [CommRing Λ] [IsNoetherianRing Λ]
+variable {X} {Λ : Type (u + 1)} [CommRing Λ]
 
 -- the instances `WEqualsLocallyBijective` and `HasSheafCompose` on the small étale and
 -- pro-étale sites take long to synthesize
-/-- For a Noetherian commutative ring `Λ`, for instance a finite one, the site inverse image
+/-- For a commutative ring `Λ`, the site inverse image
 `ν^* : Sh(X_ét, Λ) ⥤ Sh(X_proét, Λ)` takes flat étale sheaves of `Λ`-modules to flat
 pro-étale sheaves of `Λ`-modules. -/
 theorem flat_comparisonUpperStar_obj {F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
@@ -57,8 +57,8 @@ theorem flat_comparisonUpperStar_obj {F : Sheaf X.smallEtaleTopology (ModuleCat.
   flat_sheafPullback_obj (coverPreserving_toProEt X) hF
 
 -- as for `flat_comparisonUpperStar_obj`
-/-- The comparison pullback `ν^*` preserves flat sheaves of `Λ`-modules, for a Noetherian ring
-`Λ` (`AlgebraicGeometry.ProEtale.flat_comparisonUpperStar_obj`). -/
+/-- The comparison pullback `ν^*` preserves flat sheaves of `Λ`-modules
+(`AlgebraicGeometry.ProEtale.flat_comparisonUpperStar_obj`). -/
 instance preservesFlat_comparisonUpperStar :
     (ν^*(X)[ModuleCat.{u + 1} Λ]).PreservesFlat :=
   ⟨fun hF ↦ flat_comparisonUpperStar_obj hF⟩

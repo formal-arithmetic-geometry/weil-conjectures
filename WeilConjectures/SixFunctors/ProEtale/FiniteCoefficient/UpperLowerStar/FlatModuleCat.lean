@@ -12,7 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 /-!
 # The pro-étale pullback preserves flat sheaves of modules
 
-For a Noetherian commutative ring `Λ` and a morphism of schemes `g : Z ⟶ Y`, the pullback
+For a commutative ring `Λ` and a morphism of schemes `g : Z ⟶ Y`, the pullback
 `g^* : Sh(Y_proét, Λ) ⥤ Sh(Z_proét, Λ)` sends flat sheaves of `Λ`-modules to flat ones. This is
 `CategoryTheory.flat_sheafPullback_obj` for base change along `g`, which is representably flat
 and preserves pro-étale coverings (`AlgebraicGeometry.Scheme.ProEt.coverPreserving_overPullback`).
@@ -22,7 +22,7 @@ This is the pro-étale counterpart of
 ## Main results
 
 - `AlgebraicGeometry.ProEtale.upperStarPreservesFlat_moduleCat`: the instance
-  `AlgebraicGeometry.ProEtale.UpperStarPreservesFlat (ModuleCat Λ)` for Noetherian `Λ`.
+  `AlgebraicGeometry.ProEtale.UpperStarPreservesFlat (ModuleCat Λ)` for every commutative ring `Λ`.
 -/
 
 @[expose] public section
@@ -35,11 +35,11 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme
 
-variable (Λ : Type (u + 1)) [CommRing Λ] [IsNoetherianRing Λ]
+variable (Λ : Type (u + 1)) [CommRing Λ]
 
 -- the instances `WEqualsLocallyBijective` and `HasSheafCompose` on the small pro-étale sites
 -- take long to synthesize
-/-- **The pro-étale pullback preserves flat sheaves of modules.** For a Noetherian commutative
+/-- **The pro-étale pullback preserves flat sheaves of modules.** For a commutative
 ring `Λ` and every morphism of schemes `g`, the pullback `g^*` sends flat pro-étale sheaves of
 `Λ`-modules to flat ones. -/
 instance upperStarPreservesFlat_moduleCat :

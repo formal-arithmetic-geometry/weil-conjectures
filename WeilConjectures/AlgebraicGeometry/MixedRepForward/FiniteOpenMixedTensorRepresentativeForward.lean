@@ -85,6 +85,7 @@ local notation "ShX" => Sheaf (Scheme.ProEt.topology X) (ModuleCat A)
 local notation "ShU" => Sheaf (Scheme.ProEt.topology U) (ModuleCat A)
 local notation "pull" => (j)^*[ModuleCat A]
 
+omit [Finite A] in
 /-- The derived pullback tensor comparison satisfies its forward counit square on arbitrary
 complexes `P` and `Q`. -/
 theorem forward_transport

@@ -37,10 +37,9 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme
 
-variable (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S] [IsNoetherianRing R]
+variable (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S]
   {Y Z : Scheme.{u}} (g : Z ⟶ Y)
 
-omit [IsNoetherianRing R] in
 /-- The mate of `g^*(S ⊗_R -) ≅ S ⊗_R g^*` along extension and restriction of scalars is the
 commutation `g^* (Res M) ≅ Res (g^* M)` of
 `AlgebraicGeometry.ProEtale.upperStarRestrictScalarsIso`. -/
@@ -66,7 +65,6 @@ lemma upperStarRestrictScalarsMap_eq :
   rw [mateEquiv_symm_lowerStarCompSheafComposeCoextendScalarsIso] at h
   exact ((Equiv.eq_symm_apply _).2 hA).trans (h.trans rfl)
 
-omit [IsNoetherianRing R] in
 /-- On the image of an object of the homotopy category, the commutation
 `Lg^* Res ≅ Res Lg^*` is induced, through the counits of the derived pullbacks, by
 `g^* Res ≅ Res g^*`. -/
@@ -94,7 +92,6 @@ lemma leftDerivedUpperStarRestrictScalarsIso_hom_app_Qh_obj
     (g)^*[ModuleCat.{u + 1} S].leftDerivedFunctorIsoMapDerivedCategory_hom_app_Qh
     (upperStarRestrictScalarsIso (algebraMap R S) g) _ rfl K
 
-omit [IsNoetherianRing R] in
 /-- The counit form of `upperStarRestrictScalarsMap_eq` on homotopy categories. -/
 lemma mapHomotopyCategory_upperStarRestrictScalarsIso_counit
     (K : HomotopyCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} S)) (.up ℤ)) :

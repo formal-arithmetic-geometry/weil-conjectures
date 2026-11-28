@@ -238,8 +238,6 @@ lemma sheafExtendScalarsProjectionTranspose_upperStar
 
 section Derived
 
-variable [IsNoetherianRing R]
-
 /-- The comparison `g^*(P ⊗ S_Y) ⟶ g^* P ⊗ S_Z` on homotopy categories. -/
 noncomputable abbrev mapHomotopyCategoryTensorRestrictScalarsUnitUpperStarMap :
     (tensorRight (sheafRestrictScalarsUnit R S Y)).mapHomotopyCategory (.up ℤ) ⋙
@@ -256,7 +254,6 @@ noncomputable abbrev leftDerivedTensorRestrictScalarsUnitUpperStarMap :
       L((g)^*[ModuleCat.{u + 1} R]) ⋙ L(tensorRight (sheafRestrictScalarsUnit R S Z)) :=
   leftDerivedTensorRightUpperStarMap g (upperStarSheafRestrictScalarsUnitMap R S g)
 
-omit [IsNoetherianRing R] in
 /-- `AlgebraicGeometry.ProEtale.sheafExtendScalarsProjectionTranspose_upperStar` on homotopy
 categories. -/
 lemma mapHomotopyCategory_sheafExtendScalarsProjectionTranspose_upperStar

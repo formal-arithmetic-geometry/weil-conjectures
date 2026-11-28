@@ -179,6 +179,7 @@ theorem homologyConcentratedIn_of_mapDerivedCategory_upperStar (i : Z ⟶ X) [Is
 
 variable [IsNoetherianRing Λ]
 
+omit [IsNoetherianRing Λ] in
 /-- **Tor amplitude is detected on the closed and the open part.** Let `i` be a closed immersion
 whose range is the complement of the range of the quasi-compact open immersion `j`. If
 `D(i^*) K` and `D(j^*) K` have Tor amplitude in `[a, b]`, so has `K`. -/
@@ -197,6 +198,7 @@ theorem torAmplitudeIn_of_mapDerivedCategory_upperStar (i : Z ⟶ X) [IsClosedIm
     ((_root_.DerivedCategory.homologyConcentratedIn a b).prop_of_iso
       (mapDerivedCategoryUpperStarTensorSingleIso _ j K M).symm (hj _))
 
+omit [IsNoetherianRing Λ] in
 /-- The direct image `Ri_*` along a closed immersion `i` (whose range is the complement of the range
 of a quasi-compact open immersion `j`) preserves Tor amplitude intervals: `D(i^*) Ri_* P ≅ P` and
 `D(j^*) Ri_* P = 0`, and Tor amplitude is detected after `i^*` and `j^*`
@@ -279,7 +281,7 @@ theorem constructibleFiniteTor_rightDerivedFunctor_lowerStar_of_isClosedImmersio
     N hN hΛ s i j hij hbc hPt
   ⟨h.1, a, b, h.2⟩
 
-omit hN hΛ s [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j] in
+omit hN hΛ s [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j] [Finite Λ] in
 /-- The pullback `Lg^*` along any morphism (in particular `i^*` and `j^*`) preserves bounded
 constructibility together with the Tor amplitude interval `[a, b]`
 (`AlgebraicGeometry.ProEtale.torAmplitudeIn_leftDerivedUpperStar`). -/
@@ -295,7 +297,7 @@ theorem boundedConstructible_and_torAmplitudeIn_leftDerivedFunctor_upperStar_obj
   ⟨boundedConstructible_leftDerivedFunctor_upperStar_obj g hK,
     torAmplitudeIn_leftDerivedUpperStar _ g a b hKt⟩
 
-omit hN hΛ s [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j] in
+omit hN hΛ s [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j] [Finite Λ] in
 /-- The pullback `Lg^*` carries `Dᵇc_ctf(X, Λ)` into `Dᵇc_ctf(Y, Λ)`. -/
 theorem constructibleFiniteTor_leftDerivedFunctor_upperStar_obj {Y : Scheme.{u}} (g : Y ⟶ X)
     {K : _root_.DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))}

@@ -164,16 +164,6 @@ noncomputable def pullback
 
 end CoefficientTensorModel
 
-/-- The unit of derived extension of scalars exhibits a derived base change. -/
-theorem isDerivedBaseChange_leftDerivedSheafExtendScalarsAdjunction_unit
-    (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S] (X : Scheme.{u})
-    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))) :
-    Sheaf.IsDerivedBaseChange (f := algebraMap R S)
-      ((leftDerivedSheafExtendScalarsAdjunction R S X).unit.app K) := fun N ↦ by
-  convert ((leftDerivedSheafExtendScalarsAdjunction R S X).homEquiv K N).bijective using 1
-  ext g
-  exact ((leftDerivedSheafExtendScalarsAdjunction R S X).homEquiv_unit K N g).symm
-
 /-- The open restriction comparison is the mate, along derived extension of scalars, of the
 commutation of scalar extension with extension by zero. -/
 theorem mateEquiv_openImmersionLowerShriekExtendScalarsIso_hom
