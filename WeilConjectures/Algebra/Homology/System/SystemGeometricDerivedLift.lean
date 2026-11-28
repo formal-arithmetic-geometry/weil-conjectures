@@ -14,6 +14,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryN
 import WeilConjectures.Algebra.Homology.System.SystemScalarCoherence
 import all WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
 import Mathlib.CategoryTheory.Adjunction.Mates
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquareChainMap
 
 /-! # Normalized derived lift of the geometric singleton comparison
 
@@ -95,7 +96,7 @@ theorem GeometricSystemOrdinaryData.derivedEvaluation_inv_model
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
           (F := systemEvaluation BY n ⋙ F.levelInverseImage n) (F.evaluation n).inv
             (.up ℤ)).app K) :=
-  mapDerivedCategorySquareIso_inv_model (F₁ := F.functor) (F₂ := systemEvaluation BX n)
+  Functor.mapDerivedCategorySquareIso_inv_app_Q (F₁ := F.functor) (F₂ := systemEvaluation BX n)
     (G₁ := systemEvaluation BY n) (G₂ := F.levelInverseImage n) (F.evaluation n) K
 
 /-- The ordinary singleton comparison is the mate of the inverse evaluation square. -/
@@ -314,7 +315,7 @@ theorem GeometricSystemOrdinaryData.derivedEvaluation_hom_model
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
           (G := systemEvaluation BY n ⋙ F.levelInverseImage n) (F.evaluation n).hom
             (.up ℤ)).app K) :=
-  mapDerivedCategorySquareIso_hom_model (F₁ := F.functor) (F₂ := systemEvaluation BX n)
+  Functor.mapDerivedCategorySquareIso_hom_app_Q (F₁ := F.functor) (F₂ := systemEvaluation BX n)
     (G₁ := systemEvaluation BY n) (G₂ := F.levelInverseImage n) (F.evaluation n) K
 
 /-- The derived singleton comparison is computed by the ordinary singleton comparison. -/
@@ -538,26 +539,6 @@ theorem geometricSystemDerivedLift
         (tensor h).hom.app P =
       ((ordinary n).hom.app P).app j ≫
         (systemSingleBelow SX TX BX n h).hom.app ((F.levelInverseImage n).obj P)))
-    (_h_tensor_generators :
-    (∀ {j n : ℕ} (h : j ≤ n) (P : systemLevel BY n)
-    (Z : Sheaf J (Type w))
-    (b : Z ⟶ (sheafCompose J (CategoryTheory.forget CommRingCat.{w})).obj (BY.obj (op j)))
-    (x : Z ⟶ (geometricSystemUnderlying BY n).obj P)
-    (z : Z ⟶ (geometricSystemUnderlying BY j).obj ((systemTensor SY BY h).obj P)),
-    (∀ U t, z.hom.app U t =
-      systemModelTmul (SY (BY.map (homOfLE h).op)).model P U
-        (b.hom.app U t) (x.hom.app U t)) →
-    ∀ (W : Dᵒᵖ) (t : (u.inverse.obj Z).obj.obj W),
-      ((tensor h).hom.app P).val.app W
-          (((u.inverse.map z) ≫
-            (I j).moduleUnderlying.inv.app ((systemTensor SY BY h).obj P)).hom.app W t) =
-        systemModelTmul (SX (BX.map (homOfLE h).op)).model
-          ((F.levelInverseImage n).obj P) W
-          (((u.inverse.map b) ≫ (I j).ringUnderlying.hom).hom.app W t)
-          (((u.inverse.map x) ≫ (I n).moduleUnderlying.inv.app P).hom.app W t)))
-    (_h_above :
-    (∀ (n j : ℕ) (_h : n < j) (P : systemLevel BY n),
-    ((ordinary n).hom.app P).app j = 0))
     (h_multiplication :
     (∀ (n : ℕ) (P : systemLevel BY n),
     ((ordinary n).hom.app P).app n ≫

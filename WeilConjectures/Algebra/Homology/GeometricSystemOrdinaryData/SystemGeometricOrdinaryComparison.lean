@@ -267,7 +267,8 @@ theorem geometricSystemOrdinaryComparison
     have hf := strictRingSystemInverseImageSingle_app_below I ρ' hρ' SY TY SX TX e' he' h P
     change 𝟙 _ ≫ (I j).modules.map ((systemSingleBelow SY TY BY n h).hom.app P) ≫
         (e' h).hom.app P = _
-    have ha : ((κ n).app P).app j = (systemSingleBelow SX TX BX n h).hom.app ((I n).modules.obj P) ≫
+    have ha : ((κ n).app P).app j =
+        (systemSingleBelow SX TX BX n h).hom.app ((I n).modules.obj P) ≫
         (e' h).inv.app P ≫ (I j).modules.map ((systemSingleBelow SY TY BY n h).inv.app P) := by
       rw [← hf, Iso.hom_inv_id_app_assoc]
     rw [Category.id_comp, ← cancel_mono ((e' h).inv.app P ≫

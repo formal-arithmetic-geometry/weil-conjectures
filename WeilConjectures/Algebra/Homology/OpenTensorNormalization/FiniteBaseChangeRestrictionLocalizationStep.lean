@@ -441,17 +441,7 @@ theorem finite_base_change_restriction_localization_step
     (e : FiniteComparisons A o)
     (P : CochainComplex (FiniteModules A X) ℤ)
     (hP : resolving (finiteInput A gU j' j g sq).R
-      ((finiteComplexRealization e.realizeX).obj P))
-    (_hOrd : ∀ n : ℤ,
-      e.pullU_pin.ordinary.hom.app
-          ((ProEtale.upperStar (ModuleCat.{u + 1} A) j).obj (P.X n)) ≫
-        o.gUPull.ordinary.map (e.open_pin.star.hom.app (P.X n)) ≫
-        o.ordinaryTheta.inv.app (e.realizeX.equivalence.functor.obj (P.X n)) =
-      e.realizeU'.equivalence.functor.map
-          ((ProEtale.upperStarCompIso (ModuleCat.{u + 1} A) sq.toCommSq.w).hom.app (P.X n)) ≫
-        e.open'_pin.star.hom.app ((ProEtale.upperStar (ModuleCat.{u + 1} A) g).obj (P.X n)) ≫
-        (restrict .ordinary j' (finiteInput A gU j' j g sq).S).map
-          (e.pull_pin.ordinary.hom.app (P.X n))) :
+      ((finiteComplexRealization e.realizeX).obj P)) :
     let r := Functor.isoWhiskerRight
       (ProEtale.upperStar (ModuleCat.{u + 1} A) j).leftDerivedFunctorIsoMapDerivedCategory.symm
       e.realizeU.derived ≪≫ e.openPull

@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Derived.DerivedReductionComparisonFormula
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquareChainMap
 
 /-! # Pasting of normalized derived reduction comparisons
 
@@ -47,12 +48,8 @@ theorem mapDerivedCategorySquareIso_hom_app_factors (σ : F₁ ⋙ F₂ ≅ F₃
         F₄.mapDerivedCategoryFactors.hom.app ((F₃.mapHomologicalComplex (.up ℤ)).obj P) =
       F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactors.hom.app P) ≫
         F₂.mapDerivedCategoryFactors.hom.app ((F₁.mapHomologicalComplex (.up ℤ)).obj P) ≫
-        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex σ.hom (.up ℤ)).app P) := by
-  simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, Category.assoc]
-  rw [Functor.mapDerivedCategoryCompIso_hom_app_factors, Functor.mapDerivedCategoryNatIso_fac,
-    ← Functor.mapDerivedCategoryCompIso_hom_app_factors F₁ F₂ P]
-  simp
+        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex σ.hom (.up ℤ)).app P) :=
+  Functor.mapDerivedCategorySquareIso_hom_app_Q σ P
 
 end Square
 

@@ -186,9 +186,9 @@ variable {A A₀ A' A₀' B B' : Type*} [Category A] [Category A₀] [Category A
   [PreservesFiniteLimits G₀] [PreservesFiniteColimits G₀]
   [PreservesFiniteLimits H] [PreservesFiniteColimits H]
 
-/-- Pasting of derived evaluation squares: a derived comparison of left extensions is
-compatible with given evaluations of the two extensions, provided all the squares are
-computed by ordinary squares on a resolving class and the ordinary squares paste. -/
+/-- Pasting of derived evaluation squares: if the derived squares are computed on a
+resolving class by ordinary squares, and the ordinary squares paste, then the derived
+comparison `comp` of left extensions is compatible with the evaluations `β₁` and `β₂`. -/
 theorem derivedEvaluation_pasting
     (L₁D : DerivedCategory A ⥤ DerivedCategory B)
     (L₂D : DerivedCategory A' ⥤ DerivedCategory B')
@@ -247,9 +247,11 @@ theorem derivedEvaluation_pasting
     (P : DerivedCategory A) :
     R₂.mapDerivedCategory.map (comp.hom.app P) ≫ β₂.hom.app (G.mapDerivedCategory.obj P) =
       dE.hom.app (L₁D.obj P) ≫ G₀.mapDerivedCategory.map (β₁.hom.app P) ≫ σ.hom.app P := by
-  let α : L₁D ⋙ H.mapDerivedCategory ⋙ R₂.mapDerivedCategory ⟶ G.mapDerivedCategory ⋙ T₂ :=
+  let α : L₁D ⋙ H.mapDerivedCategory ⋙ R₂.mapDerivedCategory ⟶
+      G.mapDerivedCategory ⋙ T₂ :=
     whiskerRight comp.hom R₂.mapDerivedCategory ≫ whiskerLeft G.mapDerivedCategory β₂.hom
-  let α' : L₁D ⋙ H.mapDerivedCategory ⋙ R₂.mapDerivedCategory ⟶ G.mapDerivedCategory ⋙ T₂ :=
+  let α' : L₁D ⋙ H.mapDerivedCategory ⋙ R₂.mapDerivedCategory ⟶
+      G.mapDerivedCategory ⋙ T₂ :=
     whiskerLeft L₁D dE.hom ≫ whiskerRight β₁.hom G₀.mapDerivedCategory ≫ σ.hom
   have key : α = α' := by
     refine derivedCategory_natTrans_ext_of_resolving α α' q res (fun K hK ↦ ?_)
@@ -334,13 +336,15 @@ theorem derivedEvaluation_pasting_id {R₁ : B ⥤ A} {R₂ : B' ⥤ A'}
     (P : DerivedCategory A) :
     R₂.mapDerivedCategory.map (comp.hom.app P) ≫ β₂.hom.app (G.mapDerivedCategory.obj P) =
       dE.hom.app (L₁D.obj P) ≫ G.mapDerivedCategory.map (β₁.hom.app P) := by
-  have h := derivedEvaluation_pasting (E₁ := 𝟭 A) (E₂ := 𝟭 A') (G₀ := G) L₁D L₂D c₁ c₂
+  have h := derivedEvaluation_pasting (E₁ := 𝟭 A) (E₂ := 𝟭 A') (G₀ := G)
+    L₁D L₂D c₁ c₂
     (𝟭 _) (𝟭 _) (Iso.refl _).hom (Iso.refl _).hom β₁ β₂ b₁ b₂ comp o dE ev (Iso.refl _)
     (Iso.refl _) q q₂ res hq (fun K _ ↦ by dsimp; infer_instance) hcomp
     (fun K hK ↦ by simpa using hβ₁ K hK) (fun K hK ↦ by simpa using hβ₂ K hK)
     (fun K _ ↦ ?_) hdE (fun X ↦ by simpa using hord X) P
   · simpa using h
-  · have e : (NatIso.mapHomologicalComplex (Iso.refl (𝟭 A ⋙ G)) (.up ℤ)).hom.app K = 𝟙 _ := by
+  · have e :
+        (NatIso.mapHomologicalComplex (Iso.refl (𝟭 A ⋙ G)) (.up ℤ)).hom.app K = 𝟙 _ := by
       ext i
       simp
     rw [e]
@@ -348,52 +352,5 @@ theorem derivedEvaluation_pasting_id {R₁ : B ⥤ A} {R₂ : B' ⥤ A'}
     erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, Category.id_comp]
 
 end Pasting
-
-section ExactSquare
-
-variable {A B B' E : Type*} [Category A] [Category B] [Category B'] [Category E] [Abelian A]
-  [Abelian B] [Abelian B'] [Abelian E] [HasDerivedCategory A] [HasDerivedCategory B]
-  [HasDerivedCategory B'] [HasDerivedCategory E]
-  {F₁ : A ⥤ B} {F₂ : B ⥤ E} {G₁ : A ⥤ B'} {G₂ : B' ⥤ E}
-  [F₁.Additive] [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
-  [F₂.Additive] [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
-  [G₁.Additive] [PreservesFiniteLimits G₁] [PreservesFiniteColimits G₁]
-  [G₂.Additive] [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂]
-
-/-- The square isomorphism induced on derived categories is computed by the given
-square on cochain complexes. -/
-theorem mapDerivedCategorySquareIso_hom_model (e : F₁ ⋙ F₂ ≅ G₁ ⋙ G₂)
-    (P : CochainComplex A ℤ) :
-    (Functor.mapDerivedCategorySquareIso e).hom.app (DerivedCategory.Q.obj P) ≫
-      G₂.mapDerivedCategory.map (G₁.mapDerivedCategoryFactors.hom.app P) ≫
-      G₂.mapDerivedCategoryFactors.hom.app ((G₁.mapHomologicalComplex (.up ℤ)).obj P) =
-    F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactors.hom.app P) ≫
-      F₂.mapDerivedCategoryFactors.hom.app ((F₁.mapHomologicalComplex (.up ℤ)).obj P) ≫
-      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app P) := by
-  dsimp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app]
-  rw [Category.assoc, Category.assoc,
-    Functor.mapDerivedCategoryCompIso_hom_app_factors,
-    Functor.mapDerivedCategoryNatIso_fac]
-  rw [← Functor.mapDerivedCategoryCompIso_hom_app_factors F₁ F₂ P]
-  simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
-
-/-- The inverse square isomorphism induced on derived categories is computed by the
-inverse square on cochain complexes. -/
-theorem mapDerivedCategorySquareIso_inv_model (e : F₁ ⋙ F₂ ≅ G₁ ⋙ G₂)
-    (P : CochainComplex A ℤ) :
-    (Functor.mapDerivedCategorySquareIso e).inv.app (DerivedCategory.Q.obj P) ≫
-      F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactors.hom.app P) ≫
-      F₂.mapDerivedCategoryFactors.hom.app ((F₁.mapHomologicalComplex (.up ℤ)).obj P) =
-    G₂.mapDerivedCategory.map (G₁.mapDerivedCategoryFactors.hom.app P) ≫
-      G₂.mapDerivedCategoryFactors.hom.app ((G₁.mapHomologicalComplex (.up ℤ)).obj P) ≫
-      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.inv (.up ℤ)).app P) := by
-  rw [← cancel_epi ((Functor.mapDerivedCategorySquareIso e).hom.app (DerivedCategory.Q.obj P)),
-    Iso.hom_inv_id_app_assoc, reassoc_of% (mapDerivedCategorySquareIso_hom_model e P),
-    ← Functor.map_comp, ← NatTrans.comp_app, ← NatTrans.mapHomologicalComplex_comp,
-    e.hom_inv_id]
-  erw [CategoryTheory.Functor.map_id, Category.comp_id]
-
-end ExactSquare
 
 end SheafOfModules

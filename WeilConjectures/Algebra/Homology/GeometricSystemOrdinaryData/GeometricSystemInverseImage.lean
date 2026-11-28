@@ -186,7 +186,8 @@ omit [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.
   [K.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify K AddCommGrpCat.{w}] in
 include hρ in
 /-- The inverse-image transition along an identity is the identity on sections. -/
-theorem strictRingSystemInverseImageTransition_identity (M : StrictRingSystem BY) (n : ℕ) (U : Dᵒᵖ)
+theorem strictRingSystemInverseImageTransition_identity (M : StrictRingSystem BY) (n : ℕ)
+    (U : Dᵒᵖ)
     (x : ((I n).modules.obj (M.level n)).val.obj U) :
     (strictRingSystemInverseImageTransition I ρ M (Nat.le_refl n)).val.app U x = x := by
   have h1 : (toSheaf _ ⋙ sheafCompose J (CategoryTheory.forget AddCommGrpCat.{w})).map
