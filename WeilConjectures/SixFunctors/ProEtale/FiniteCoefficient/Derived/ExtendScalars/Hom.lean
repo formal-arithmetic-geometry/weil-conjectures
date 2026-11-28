@@ -222,7 +222,7 @@ theorem isIso_ihomComparison_leftDerivedSheafExtendScalars_of_isDualizable
 
 /-- The unit `K ⟶ Res (Ψ K)` of derived extension of scalars of pro-étale sheaves exhibits
 `Ψ K = K ⊗ᴸ_R S` as a derived base change of `K`. -/
-lemma isDerivedBaseChange_leftDerivedSheafExtendScalarsAdjunction_unit_app
+lemma isDerivedBaseChange_leftDerivedSheafExtendScalarsAdjunction_unit
     (K : DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R))) :
     Sheaf.IsDerivedBaseChange (f := algebraMap R S)
       ((leftDerivedSheafExtendScalarsAdjunction R S X).unit.app K) := fun N ↦ by
@@ -239,7 +239,7 @@ lemma nonempty_iso_leftDerivedSheafExtendScalars_of_isDerivedBaseChange
     Nonempty ((L(sheafExtendScalars (algebraMap R S) X)).obj K ≅ K') := by
   let adj := leftDerivedSheafExtendScalarsAdjunction R S X
   have := Sheaf.IsDerivedBaseChange.isIso
-    (isDerivedBaseChange_leftDerivedSheafExtendScalarsAdjunction_unit_app R S X K) hη
+    (isDerivedBaseChange_leftDerivedSheafExtendScalarsAdjunction_unit R S X K) hη
     ((adj.homEquiv K K').symm η)
     ((adj.homEquiv_unit K K' _).symm.trans (Equiv.apply_symm_apply _ η))
   exact ⟨asIso ((adj.homEquiv K K').symm η)⟩
@@ -267,7 +267,7 @@ theorem exists_isDerivedBaseChange_derivedHom_of_isDualizable
   obtain ⟨eK⟩ := nonempty_iso_leftDerivedSheafExtendScalars_of_isDerivedBaseChange R S X hη
   obtain ⟨eL⟩ := nonempty_iso_leftDerivedSheafExtendScalars_of_isDerivedBaseChange R S X hη'
   have := isIso_ihomComparison_leftDerivedSheafExtendScalars_of_isDualizable R S X hS K L
-  exact ⟨_, (isDerivedBaseChange_leftDerivedSheafExtendScalarsAdjunction_unit_app R S X _)
+  exact ⟨_, (isDerivedBaseChange_leftDerivedSheafExtendScalarsAdjunction_unit R S X _)
     |>.comp_map_iso
     (asIso ((ihomComparison L(sheafExtendScalars (algebraMap R S) X) K).app L) ≪≫
       ((derivedHom (ModuleCat.{u + 1} S) X).mapIso eK.symm.op).app _ ≪≫
