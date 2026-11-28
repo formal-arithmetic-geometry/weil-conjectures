@@ -9800,6 +9800,7 @@ public import WeilConjectures.AlgebraicGeometry.Pbc.PbcActualScalarPullbackSuppl
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcActualStrictPullback
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcAutomorphismLocalComplex
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcAutomorphismLocalReduction
+public import WeilConjectures.AlgebraicGeometry.Pbc.PbcAutomorphismLocalReductionComparison
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcAutomorphismTransport
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcCoefficientTwists
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcCohomologySheaves
@@ -9832,6 +9833,7 @@ public import WeilConjectures.AlgebraicGeometry.Pbc.PbcRationalCategory
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarAmbientOperations
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarAmbientShift
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarCoefficientFiniteFree
+public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarCompletedExchange
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarCompletedObjectComplete
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarComposition
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarExtension
@@ -14206,6 +14208,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.MateCompose
 public import WeilConjectures.CategoryTheory.Adjunction.MateCounitIsIso
 public import WeilConjectures.CategoryTheory.Adjunction.MateCube
 public import WeilConjectures.CategoryTheory.Adjunction.MateFixedSquare
+public import WeilConjectures.CategoryTheory.Adjunction.MateHCompUnit
 public import WeilConjectures.CategoryTheory.Adjunction.MateHomBasis
 public import WeilConjectures.CategoryTheory.Adjunction.MateIterated
 public import WeilConjectures.CategoryTheory.Adjunction.MateOfNatIsoLeft
