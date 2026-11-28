@@ -626,6 +626,16 @@ private lemma coefficientIso
     ((ad.homEquiv_unit K K' _).symm.trans ((ad.homEquiv K K').apply_symm_apply η))
   exact ⟨asIso ((ad.homEquiv K K').symm η)⟩
 
+/-- Every object of `D(J, A)` has a derived base change along a ring morphism `φ : A →+* B`: the
+unit of derived extension of scalars. -/
+theorem _root_.CategoryTheory.Sheaf.exists_isDerivedBaseChange
+    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C] (J : GrothendieckTopology C)
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
+    (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} A))) :
+    ∃ (K' : DerivedCategory (Sheaf J (ModuleCat.{u + 1} B)))
+      (η : K ⟶ (Sheaf.derivedRestrictScalars J φ).obj K'), Sheaf.IsDerivedBaseChange η :=
+  ⟨_, _, coefficientUnit J φ (Sheaf.scalarDerivedAdjunction J φ) K⟩
+
 private lemma coefficientArrow
     {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     (J : GrothendieckTopology C)
@@ -880,12 +890,6 @@ local notation "𝐃(" X ", " Λ ")" =>
 
 variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ')
 
-/-- Every object of `D(X_ét, Λ)` has a derived base change along a ring morphism
-`φ : Λ →+* Λ'`. -/
-theorem exists_isDerivedBaseChange (X : Scheme.{u}) (K : 𝐃(X, Λ)) :
-    ∃ (K' : 𝐃(X, Λ')) (η : K ⟶ (derivedRestrictScalars φ X).obj K'), IsDerivedBaseChange η :=
-  ⟨_, _, coefficientUnit _ φ (Sheaf.scalarDerivedAdjunction _ φ) K⟩
-
 /-- The derived pullback commutes with derived base change along a ring morphism
 `φ : Λ →+* Λ'`: if `L'` is a derived base change of `L`, then `Lf^* L'` is a derived base change
 of `Lf^* L`. -/
@@ -970,7 +974,7 @@ end Tensor
 categories. -/
 theorem reductionCompatibility {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ) (n : ℕ) :
     ReductionCompatibility.{u} Λ (Ideal.span {ϖ}) n where
-  exists_isDerivedBaseChange := exists_isDerivedBaseChange _
+  exists_isDerivedBaseChange X := Sheaf.exists_isDerivedBaseChange _ _
   leftDerivedUpperStar f L Ln η hη :=
     exists_isDerivedBaseChange_leftDerivedUpperStar _ f L Ln η hη
   derivedTensor K L Kn Ln η η' hη hη' :=
@@ -1048,13 +1052,6 @@ local notation "𝐃(" X ", " Λ ")" =>
 
 variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ')
 
-/-- Every object of `D(X_proét, Λ)` has a derived base change along a ring morphism
-`φ : Λ →+* Λ'`. -/
-theorem exists_isDerivedBaseChange (X : Scheme.{u}) (K : 𝐃(X, Λ)) :
-    ∃ (K' : 𝐃(X, Λ')) (η : K ⟶ (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) φ).obj K'),
-      Sheaf.IsDerivedBaseChange η :=
-  ⟨_, _, coefficientUnit _ φ (Sheaf.scalarDerivedAdjunction _ φ) K⟩
-
 /-- The derived pullback of pro-étale sheaves commutes with derived base change along a ring
 morphism `φ : Λ →+* Λ'`: if `L'` is a derived base change of `L`, then `Lf^* L'` is a derived
 base change of `Lf^* L`. -/
@@ -1104,7 +1101,7 @@ end Tensor
 categories. -/
 theorem reductionCompatibility {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ) (n : ℕ) :
     ReductionCompatibility.{u} Λ (Ideal.span {ϖ}) n where
-  exists_isDerivedBaseChange := exists_isDerivedBaseChange _
+  exists_isDerivedBaseChange X := Sheaf.exists_isDerivedBaseChange _ _
   leftDerivedUpperStar f L Ln η hη :=
     exists_isDerivedBaseChange_leftDerivedUpperStar _ f L Ln η hη
   rightDerivedLowerShriekOfCompactification := sorry
