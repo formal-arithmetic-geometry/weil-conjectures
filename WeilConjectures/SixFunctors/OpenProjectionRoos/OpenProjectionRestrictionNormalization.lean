@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.OpenProjectionRoos.OpenProjectionRoosCompletionData
 import WeilConjectures.SixFunctors.SfOpenRoos.SfOpenRoosRestrictionUnit
+import WeilConjectures.SixFunctors.OpenProjectionRoos.OpenProjectionRestrictionUnit
 
 /-! # Restriction of the completed projection through the actual open unit
 
@@ -76,6 +77,14 @@ theorem openProjectionRestrictionNormalization
     RestrictionRepresentative l E j o SX SU AX AU st m c q
       restriction moduleUnit extendGood restrictGood
       tensorRestriction := by
-  sorry
+  intro tensorRestriction Q F hQ hF hK hP z hup hlow
+  refine ⟨(onTowers _).mapIso z.gamma ≪≫ (towerUnitIso moduleUnit _).symm, fun n i ↦ ?_, ?_⟩
+  · simp
+  · exact unit_inv_comp_eq (IntegralOpenReduction.shriek l E j o)
+      (IntegralOpenReduction.star l E j o) unit _ _ _ _ _ _ _ _ _ _ _
+      (by simp [tensorRestriction]) (_representative Q F hQ hF hK hP z hup hlow)
+      (roosComparison_derived_unit_inv (IntegralOpenReduction.ordinaryAdjunction l E j o)
+        moduleUnit _moduleUnit_hom unit _unit_hom extension restriction _ _ z.gamma)
+      (derivedQ_map_integralOperationsRoosMap_hom_inv z.gamma)
 
 end WeilConjectures.OpenProjectionRoos

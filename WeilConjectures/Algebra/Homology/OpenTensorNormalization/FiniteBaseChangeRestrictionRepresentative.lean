@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTensorNormalizationData
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
-import WeilConjectures.Algebra.Homology.OpenTensorNormalization.FiniteBaseChangeRestrictionOrdinaryPinMate
 import WeilConjectures.Algebra.Homology.OpenTensorNormalization.FiniteBaseChangeRestrictionLocalizationStep
 
 /-! A resolving-complex specialization of the finite restriction square.
@@ -58,8 +57,6 @@ theorem finite_base_change_restriction_representative
       o.gPull.epsilon P₀) := o.gPull.flat P₀ hP
   have : IsIso B := inferInstance
   apply (cancel_mono (o.opens.jStar'.map B)).1
-  apply finite_base_change_restriction_localization_step A gU j' j g sq o e P hP
-  intro n
-  exact finite_base_change_restriction_ordinary_pin_mate A gU j' j g sq o e (P.X n)
+  exact finite_base_change_restriction_localization_step A gU j' j g sq o e P hP
 
 end SheafOfModules.OpenTensorNormalization

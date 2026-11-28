@@ -96,6 +96,12 @@ import all WeilConjectures.AlgebraicGeometry.Finite.Comparison.FiniteComparisonI
 import WeilConjectures.PoincareDuality.Pod.PodRationalClosedExistence
 import WeilConjectures.PoincareDuality.Pod.PodRationalClosedUniqueness
 import WeilConjectures.PoincareDuality.Pod.PodSystemClosedCompatibility
+import WeilConjectures.PoincareDuality.Pod.PodRationalClosedHomNaturality
+import WeilConjectures.PoincareDuality.Pod.PodCommonClosedHomNaturality
+import WeilConjectures.PoincareDuality.Derived.PodPartialHomNaturality
+import WeilConjectures.PoincareDuality.Pod.PodCommonHomComparisonStage
+import WeilConjectures.PoincareDuality.Pod.PodCommonInverseTransposeStage
+public import WeilConjectures.PoincareDuality.Pod.PodCommonClosedExistence
 
 /-! # Internal Hom and evaluation under coefficient-site isomorphisms
 
@@ -529,13 +535,33 @@ def PodCommonTransposeNormalization
             (commonStageHomPairAtStage l Ω W P F hP)).symm
               (φ ≫ (commonStageHomComparison l Ω W P F hP).hom)))
 
+/-- At every pair of nested finite coefficient stages `F ≤ F'`, the scalar extension from `F`
+to `F'` carries the rational inverse transposition at `F`, conjugated by the stage tensor and
+Hom comparisons, to the conjugated rational inverse transposition at `F'`. -/
+theorem podCommonInverseTranspose_tr
+    (L : generalAlgebraicallyClosedConstructibleCategory l Ω W)
+    (P : (commonStageHomPairs l Ω W).FullSubcategory) (F F' : Index l Ω) (k : F ≤ F')
+    (hL : L.stage ≤ F) (hP : (commonStageHomObject l Ω W P).stage ≤ F)
+    (hT : (commonStageTensorObject l Ω W L P.obj.1.unop).stage ≤ F) (hN : P.obj.2.stage ≤ F)
+    (φ : L.toStage hL ⟶ (commonStageHomObject l Ω W P).toStage hP) :
+    (stageSystem l Ω W).tr k (commonStageInverseTranspose l Ω W
+      (fun F ↦ podRationalClosed l (Coefficient.{u} l Ω F) W) L P F hL hP hT hN φ) =
+      commonStageInverseTranspose l Ω W
+        (fun F ↦ podRationalClosed l (Coefficient.{u} l Ω F) W) L P F' (hL.trans k)
+        (hP.trans k) (hT.trans k) (hN.trans k) ((stageSystem l Ω W).tr k φ) := by
+  exact commonStageInverseTranspose_transition l Ω W _
+    (fun F ↦ (podRationalClosed_existsUnique l (Coefficient.{u} l Ω F) W).exists.choose_spec)
+    L P F F' k hL hP hT hN φ
+
 /-- Common-stage closed maps are determined by rational transposition at every
 larger finite field, and are natural on the actual Hom-colimit category. -/
 theorem podCommonClosed_existsUnique :
     ∃! S : PodPartialClosed (commonStageDerivedTensor l Ω W)
       (commonStageHomPairs l Ω W) (commonStageDerivedInternalHom l Ω W),
       PodCommonTransposeNormalization l Ω W S := by
-  sorry
+  obtain ⟨S, hS⟩ := commonTransposeNormalized_exists l Ω W
+    (fun F ↦ podRationalClosed l (Coefficient.{u} l Ω F) W) (podCommonInverseTranspose_tr l Ω W)
+  exact ⟨S, hS, fun S' hS' ↦ commonTransposeNormalized_unique l Ω W _ S' S hS' hS⟩
 
 /-- The closed data normalized on all common finite-field representatives. -/
 def podCommonClosed := (podCommonClosed_existsUnique l Ω W).exists.choose
@@ -581,7 +607,42 @@ theorem podCommonHomComparison_laws :
     PodPartialHomCompatibility (podCommonClosed l Ω Y) (podCommonClosed l Ω X)
       (commonStageDerivedPullback l Ω g) (podCommonPairs_pullback l Ω g)
         (canonicalCommonStagePullbackTensor l Ω g) := by
-  sorry
+  have hR (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
+      (F : AlgebraicallyClosedCoefficients.Index l Ω) :=
+    podRationalClosed_symm_comp_map l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) W
+      (podRationalClosed l _ W) (podRationalClosed_existsUnique l _ W).exists.choose_spec
+  have hS (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)] :=
+    commonClosed_symm_comp_map l Ω W
+      (fun F ↦ podRationalClosed l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) W)
+      (hR W) (podCommonClosed l Ω W) (podCommonClosed_existsUnique l Ω W).exists.choose_spec
+  have hμ (L L' M M' : generalAlgebraicallyClosedConstructibleCategory l Ω Y)
+      (x : L' ⟶ L) (y : M' ⟶ M) :
+      (commonStageDerivedTensor l Ω X).map (Prod.mkHom ((commonStageDerivedPullback l Ω g).map x)
+          ((commonStageDerivedPullback l Ω g).map y)) ≫
+        (canonicalCommonStagePullbackTensor l Ω g L M).inv =
+      (canonicalCommonStagePullbackTensor l Ω g L' M').inv ≫
+        (commonStageDerivedPullback l Ω g).map
+          ((commonStageDerivedTensor l Ω Y).map (Prod.mkHom x y)) := by
+    obtain ⟨eC, heC⟩ := (derivedPullbackTensorIso l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L.stage) g 0 Ω).2.2.2.2.2.2.2.1
+    rw [← heC, ← heC, Iso.app_inv, Iso.app_inv]
+    exact eC.inv.naturality (Prod.mkHom x y)
+  refine { isIso := ?_, naturality := ?_, evaluation := ?_, transpose := ?_ }
+  · exact commonHomComparison_isIso l Ω g
+      (fun F ↦ podRationalClosed l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) Y)
+      (fun F ↦ podRationalClosed l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) X)
+      (fun F ↦ podRationalPairs_pullback l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) g)
+      (hR X) (fun F ↦ (podRationalHomComparison_laws l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) g).1.isIso)
+      (podCommonClosed l Ω Y) (podCommonClosed l Ω X)
+      (podCommonClosed_existsUnique l Ω Y).exists.choose_spec
+      (podCommonClosed_existsUnique l Ω X).exists.choose_spec (podCommonPairs_pullback l Ω g)
+  · exact podPartialHomComparison_naturality_of _ _ _ _ _ (hS Y) (hS X) hμ
+  · exact partial_evaluation _ _ _ _ _
+  · apply partial_transpose
+    intro L L' M t
+    simpa only [(commonStageDerivedPullback l Ω g).map_id] using hμ L L' M M t (𝟙 M)
 end CommonTransport
 
 section Systems

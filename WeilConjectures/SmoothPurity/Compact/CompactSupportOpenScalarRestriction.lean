@@ -62,7 +62,8 @@ def compactSupportScalarPullback {X Y : Scheme.{u}} (f : X ⟶ Y) (φ : A →+* 
   ((mateEquiv (proEtaleConstantRingAdjunction B f)
     (proEtaleConstantRingAdjunction A f)).symm (compactSupportScalarDirectImage f φ).hom)
 
-private theorem compactSupportScalarPullback_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (φ : A →+* B) :
+/-- The inverse mate of the normalized direct-image coefficient square is invertible. -/
+theorem compactSupportScalarPullback_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (φ : A →+* B) :
     IsIso (compactSupportScalarPullback f φ) := by
   let aY := (constantSheaf (ProEt.topology Y) CommRingCat.{u + 1}).map
     (CommRingCat.ofHom φ.ulift.{u + 1, u + 1})
