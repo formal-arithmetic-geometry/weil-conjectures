@@ -5,10 +5,9 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.SixFunctors.FrobeniusExchange.SystemScalarPullbackGeneralMate
+public import WeilConjectures.SixFunctors.FrobeniusExchange.DerivedSquareMate
 public import WeilConjectures.CategoryTheory.Adjunction.NormalizedExactDerivedUnit
 public import WeilConjectures.SmoothPurity.Compact.CompactSupportOpenScalarRestriction
-import all WeilConjectures.SmoothPurity.Compact.CompactSupportOpenScalarRestriction
 import all WeilConjectures.AlgebraicGeometry.Open.OpenScalarRestrictionUnit
 import all WeilConjectures.SixFunctors.FrobeniusExchange.SystemScalarPullbackGeneralMate
 import all WeilConjectures.SixFunctors.FrobeniusExchange.SystemOpenScalarPullbackMate
@@ -27,6 +26,10 @@ scalar evaluation formula.
 The instances in `MixedCoordinates` restate exactness of the finite-level functors with one
 side read in normalized coefficient modules and the other in constant-ring modules, the form
 in which instance search meets them when localizing the cube.
+
+The commuting cube of right-adjoint comparisons is proved face by face: every face is the
+localization of an ordinary square, and the ordinary cube is the left mate of the
+identity-on-sections direct-image cube.
 
 ## References
 
@@ -60,145 +63,8 @@ private theorem natTrans_eq_id_of_unit (adj : F ⊣ G) {E : Type*} [Category E] 
 
 end CategoryTheory.Adjunction
 
-namespace CategoryTheory.Functor
-
-section DerivedMate
-
-variable {C₁ C₂ D₁ D₂ : Type*} [Category C₁] [Category C₂] [Category D₁] [Category D₂]
-  [Abelian C₁] [Abelian C₂] [Abelian D₁] [Abelian D₂]
-  [HasDerivedCategory C₁] [HasDerivedCategory C₂] [HasDerivedCategory D₁]
-  [HasDerivedCategory D₂]
-  {L₁ : C₁ ⥤ D₁} {R₁ : D₁ ⥤ C₁} {L₂ : C₂ ⥤ D₂} {R₂ : D₂ ⥤ C₂} {G : C₁ ⥤ C₂} {H : D₁ ⥤ D₂}
-  [L₁.Additive] [PreservesFiniteLimits L₁] [PreservesFiniteColimits L₁]
-  [R₁.Additive] [PreservesFiniteLimits R₁] [PreservesFiniteColimits R₁]
-  [L₂.Additive] [PreservesFiniteLimits L₂] [PreservesFiniteColimits L₂]
-  [R₂.Additive] [PreservesFiniteLimits R₂] [PreservesFiniteColimits R₂]
-  [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-  [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]
-
-omit [HasDerivedCategory C₁] [HasDerivedCategory C₂] [HasDerivedCategory D₁]
-  [HasDerivedCategory D₂] [PreservesFiniteLimits L₁] [PreservesFiniteColimits L₁]
-  [PreservesFiniteLimits R₁] [PreservesFiniteColimits R₁] [PreservesFiniteLimits L₂]
-  [PreservesFiniteColimits L₂] [PreservesFiniteLimits R₂] [PreservesFiniteColimits R₂]
-  [PreservesFiniteLimits G] [PreservesFiniteColimits G] [PreservesFiniteLimits H]
-  [PreservesFiniteColimits H] in
-/-- The cochain form of the unit equation of a mate. -/
-private theorem cochain_unit_mateEquiv (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
-    (α : G ⋙ L₂ ⟶ L₁ ⋙ H) (P : CochainComplex C₁ ℤ) :
-    (G.mapHomologicalComplex (.up ℤ)).map
-        ((NatTrans.mapHomologicalComplex adj₁.unit (.up ℤ)).app P) ≫
-      (NatTrans.mapHomologicalComplex (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ α))
-        (.up ℤ)).app ((L₁.mapHomologicalComplex (.up ℤ)).obj P) =
-    (NatTrans.mapHomologicalComplex adj₂.unit (.up ℤ)).app
-        ((G.mapHomologicalComplex (.up ℤ)).obj P) ≫
-      (R₂.mapHomologicalComplex (.up ℤ)).map
-        ((NatTrans.mapHomologicalComplex α (.up ℤ)).app P) := by
-  ext n
-  simp only [HomologicalComplex.comp_f, NatTrans.mapHomologicalComplex_app_f,
-    Functor.mapHomologicalComplex_map_f]
-  exact unit_mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ α) (P.X n)
-
-/-- The mate along localized exact adjunctions of a localized square is the localization
-of the ordinary mate. -/
-theorem isDerivedSquareOf_mateEquiv (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
-    (α : G ⋙ L₂ ⟶ L₁ ⋙ H)
-    {Δα : G.mapDerivedCategory ⋙ L₂.mapDerivedCategory ⟶
-      L₁.mapDerivedCategory ⋙ H.mapDerivedCategory} (hα : IsDerivedSquareOf α Δα) :
-    IsDerivedSquareOf (F₁ := R₁) (F₂ := G) (F₃ := H) (F₄ := R₂)
-      (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ α))
-      (mateEquiv adj₁.mapExactDerivedCategory adj₂.mapExactDerivedCategory
-        (TwoSquare.mk _ _ _ _ Δα)) := by
-  obtain ⟨Δβ, hβ⟩ := exists_isDerivedSquareOf (F₁ := R₁) (F₂ := G) (F₃ := H) (F₄ := R₂)
-    (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ α))
-  suffices e : Δβ = mateEquiv adj₁.mapExactDerivedCategory adj₂.mapExactDerivedCategory
-      (TwoSquare.mk _ _ _ _ Δα) by
-    rw [← e]
-    exact hβ
-  refine (mateEquiv_eq_of_unit _ _ _ _ ?_).symm
-  have key : (Functor.whiskerRight adj₁.mapExactDerivedCategory.unit G.mapDerivedCategory ≫
-      Functor.whiskerLeft L₁.mapDerivedCategory Δβ : G.mapDerivedCategory ⟶
-        L₁.mapDerivedCategory ⋙ H.mapDerivedCategory ⋙ R₂.mapDerivedCategory) =
-      Functor.whiskerLeft G.mapDerivedCategory adj₂.mapExactDerivedCategory.unit ≫
-        Functor.whiskerRight Δα R₂.mapDerivedCategory := by
-    apply Localization.natTrans_ext DerivedCategory.Q
-      (HomologicalComplex.quasiIso C₁ (.up ℤ))
-    intro P
-    simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
-    rw [← cancel_mono (R₂.mapDerivedCategory.map (H.mapDerivedCategory.map
-        (L₁.mapDerivedCategoryFactors.hom.app P)) ≫
-      R₂.mapDerivedCategory.map (H.mapDerivedCategoryFactors.hom.app
-        ((L₁.mapHomologicalComplex (.up ℤ)).obj P)) ≫
-      R₂.mapDerivedCategoryFactors.hom.app ((H.mapHomologicalComplex (.up ℤ)).obj
-        ((L₁.mapHomologicalComplex (.up ℤ)).obj P)))]
-    simp only [Category.assoc]
-    have n1 := Δβ.naturality (L₁.mapDerivedCategoryFactors.hom.app P)
-    have n2 : G.mapDerivedCategory.map (DerivedCategory.Q.map
-        ((NatTrans.mapHomologicalComplex adj₁.unit (.up ℤ)).app P)) ≫
-        G.mapDerivedCategoryFactors.hom.app ((R₁.mapHomologicalComplex (.up ℤ)).obj
-          ((L₁.mapHomologicalComplex (.up ℤ)).obj P)) =
-      G.mapDerivedCategoryFactors.hom.app P ≫ DerivedCategory.Q.map
-        ((G.mapHomologicalComplex (.up ℤ)).map
-          ((NatTrans.mapHomologicalComplex adj₁.unit (.up ℤ)).app P)) :=
-      G.mapDerivedCategoryFactors.hom.naturality _
-    have n3 := adj₂.mapExactDerivedCategory.unit.naturality
-      (G.mapDerivedCategoryFactors.hom.app P)
-    have n4 : R₂.mapDerivedCategory.map (DerivedCategory.Q.map
-        ((NatTrans.mapHomologicalComplex α (.up ℤ)).app P)) ≫
-        R₂.mapDerivedCategoryFactors.hom.app ((H.mapHomologicalComplex (.up ℤ)).obj
-          ((L₁.mapHomologicalComplex (.up ℤ)).obj P)) =
-      R₂.mapDerivedCategoryFactors.hom.app ((L₂.mapHomologicalComplex (.up ℤ)).obj
-          ((G.mapHomologicalComplex (.up ℤ)).obj P)) ≫ DerivedCategory.Q.map
-        ((R₂.mapHomologicalComplex (.up ℤ)).map
-          ((NatTrans.mapHomologicalComplex α (.up ℤ)).app P)) :=
-      R₂.mapDerivedCategoryFactors.hom.naturality _
-    simp only [Functor.comp_map, Functor.id_map] at n1 n3
-    have u1 := adj₁.mapExactDerivedCategory_unit P
-    have u2 := adj₂.mapExactDerivedCategory_unit ((G.mapHomologicalComplex (.up ℤ)).obj P)
-    rw [← reassoc_of% n1, hβ, ← G.mapDerivedCategory.map_comp_assoc,
-      ← G.mapDerivedCategory.map_comp_assoc, Category.assoc, u1, reassoc_of% n2,
-      ← R₂.mapDerivedCategory.map_comp_assoc, ← R₂.mapDerivedCategory.map_comp_assoc,
-      Category.assoc, hα P, R₂.mapDerivedCategory.map_comp,
-      R₂.mapDerivedCategory.map_comp]
-    simp only [Category.assoc]
-    rw [← reassoc_of% n3, n4,
-      reassoc_of% u2, ← DerivedCategory.Q.map_comp, ← DerivedCategory.Q.map_comp,
-      cochain_unit_mateEquiv]
-  intro X
-  simpa using congr_app key X
-
-end DerivedMate
-
-/-- Localized squares of mutually inverse ordinary squares are inverse. -/
-theorem isDerivedSquareOf_comp_eq_id {A B C D : Type*} [Category A] [Category B]
-    [Category C] [Category D] [Abelian A] [Abelian B] [Abelian C] [Abelian D]
-    [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory C] [HasDerivedCategory D]
-    {F₁ : A ⥤ B} {F₂ : B ⥤ D} {F₃ : A ⥤ C} {F₄ : C ⥤ D}
-    [F₁.Additive] [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
-    [F₂.Additive] [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
-    [F₃.Additive] [PreservesFiniteLimits F₃] [PreservesFiniteColimits F₃]
-    [F₄.Additive] [PreservesFiniteLimits F₄] [PreservesFiniteColimits F₄]
-    {σ : F₁ ⋙ F₂ ⟶ F₃ ⋙ F₄} {τ : F₃ ⋙ F₄ ⟶ F₁ ⋙ F₂} (h : σ ≫ τ = 𝟙 _)
-    {Δ : F₁.mapDerivedCategory ⋙ F₂.mapDerivedCategory ⟶
-      F₃.mapDerivedCategory ⋙ F₄.mapDerivedCategory}
-    {Δ' : F₃.mapDerivedCategory ⋙ F₄.mapDerivedCategory ⟶
-      F₁.mapDerivedCategory ⋙ F₂.mapDerivedCategory}
-    (hΔ : IsDerivedSquareOf σ Δ) (hΔ' : IsDerivedSquareOf τ Δ') :
-    Δ ≫ Δ' = 𝟙 _ := by
-  apply Localization.natTrans_ext DerivedCategory.Q (HomologicalComplex.quasiIso A (.up ℤ))
-  intro P
-  have hP : (NatTrans.mapHomologicalComplex σ (.up ℤ)).app P ≫
-      (NatTrans.mapHomologicalComplex τ (.up ℤ)).app P = 𝟙 _ := by
-    ext n
-    simp only [HomologicalComplex.comp_f, NatTrans.mapHomologicalComplex_app_f,
-      HomologicalComplex.id_f]
-    exact congr_app h (P.X n)
-  rw [NatTrans.comp_app, NatTrans.id_app, ← cancel_mono
-    (F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactors.hom.app P) ≫
-      F₂.mapDerivedCategoryFactors.hom.app ((F₁.mapHomologicalComplex (.up ℤ)).obj P)),
-    Category.assoc, hΔ' P, reassoc_of% (hΔ P), ← DerivedCategory.Q.map_comp, hP]
-  erw [DerivedCategory.Q.map_id, Category.comp_id, Category.id_comp]
-
-end CategoryTheory.Functor
+open WeilConjectures (compactSupportDirectModel compactSupportScalarDirectImage
+  compactSupportScalarPullback compactSupportScalarPullback_isIso)
 
 namespace AlgebraicGeometry.Scheme
 
@@ -206,29 +72,12 @@ universe u
 
 variable {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
 
-/-- The identity-on-sections comparison of the two constant-ring direct images. -/
-def constantRingPushforwardModel (A : Type u) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    proEtaleConstantRingPushforward A f ≅ proEtaleConstantModuleDirectImage f A :=
-  WeilConjectures.compactSupportDirectModel f A
-
-/-- The tensor inverse-image mate of the identity-on-sections direct-image coefficient
-comparison, in constant-ring module coordinates. -/
-def constantRingScalarPullback {X Y : Scheme.{u}} (f : X ⟶ Y) (φ : A →+* B) :
-    proEtaleCoefficientRestrictScalars Y φ ⋙ proEtaleConstantRingPullback A f ⟶
-      proEtaleConstantRingPullback B f ⋙ proEtaleCoefficientRestrictScalars X φ :=
-  (mateEquiv (proEtaleConstantRingAdjunction B f) (proEtaleConstantRingAdjunction A f)).symm
-    (TwoSquare.mk _ _ _ _ (Functor.whiskerRight (constantRingPushforwardModel B f).hom
-        (proEtaleCoefficientRestrictScalars Y φ) ≫
-      (proEtaleCoefficientDirectImageComparison f φ).hom ≫
-      Functor.whiskerLeft (proEtaleCoefficientRestrictScalars X φ)
-        (constantRingPushforwardModel A f).inv))
-
 /-- The unit-normalized change of pullback coordinates carries the tensor-pullback unit, read
 in intrinsic direct-image coordinates, to the intrinsic pullback unit. -/
 theorem openSquarePullbackModel_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
     (N : proEtaleRingModules Y (proEtaleConstantRing Y A)) :
     (proEtaleConstantRingAdjunction A f).unit.app N ≫
-        (constantRingPushforwardModel A f).hom.app ((proEtaleConstantRingPullback A f).obj N) ≫
+        (compactSupportDirectModel f A).hom.app ((proEtaleConstantRingPullback A f).obj N) ≫
         (proEtaleConstantModuleDirectImage f A).map ((openSquarePullbackModel A f).hom.app N) =
       (sfIntrinsicConstantModuleAdjunction f A).unit.app N := by
   apply SheafOfModules.hom_ext
@@ -245,23 +94,37 @@ theorem sfIntrinsicPullback_restrictScalars_mate_app {X Y : Scheme.{u}} (f : X �
         (sfIntrinsicConstantModuleAdjunction f A)).symm
         (TwoSquare.mk _ _ _ _ (proEtaleCoefficientDirectImageComparison f φ).hom)).app M =
       (openSquarePullbackModel A f).inv.app ((proEtaleCoefficientRestrictScalars Y φ).obj M) ≫
-        (constantRingScalarPullback f φ).app M ≫
+        (compactSupportScalarPullback f φ).app M ≫
         (proEtaleCoefficientRestrictScalars X φ).map ((openSquarePullbackModel B f).hom.app M) := by
   have h1 := unit_mateEquiv_symm (sfIntrinsicConstantModuleAdjunction f B)
     (sfIntrinsicConstantModuleAdjunction f A)
     (TwoSquare.mk _ _ _ _ (proEtaleCoefficientDirectImageComparison f φ).hom) M
   have hc := unit_mateEquiv_symm (proEtaleConstantRingAdjunction B f)
     (proEtaleConstantRingAdjunction A f)
-    (TwoSquare.mk _ _ _ _ (Functor.whiskerRight (constantRingPushforwardModel B f).hom
+    (TwoSquare.mk _ _ _ _ (Functor.whiskerRight (compactSupportDirectModel f B).hom
         (proEtaleCoefficientRestrictScalars Y φ) ≫
       (proEtaleCoefficientDirectImageComparison f φ).hom ≫
       Functor.whiskerLeft (proEtaleCoefficientRestrictScalars X φ)
-        (constantRingPushforwardModel A f).inv)) M
-  have nd := (constantRingPushforwardModel A f).hom.naturality
-    ((constantRingScalarPullback f φ).app M)
+        (compactSupportDirectModel f A).inv)) M
+  have nd : (proEtaleConstantRingPushforward A f).map ((compactSupportScalarPullback f φ).app M) ≫
+        (compactSupportDirectModel f A).hom.app
+          ((proEtaleCoefficientRestrictScalars X φ).obj
+            ((proEtaleConstantRingPullback B f).obj M)) =
+      (compactSupportDirectModel f A).hom.app
+          ((proEtaleConstantRingPullback A f).obj
+            ((proEtaleCoefficientRestrictScalars Y φ).obj M)) ≫
+        (proEtaleConstantModuleDirectImage f A).map ((compactSupportScalarPullback f φ).app M) :=
+    (compactSupportDirectModel f A).hom.naturality _
   have nc := (proEtaleCoefficientDirectImageComparison f φ).hom.naturality
     ((openSquarePullbackModel B f).hom.app M)
-  unfold constantRingScalarPullback at nd ⊢
+  have e : compactSupportScalarPullback f φ =
+      (mateEquiv (proEtaleConstantRingAdjunction B f) (proEtaleConstantRingAdjunction A f)).symm
+        (TwoSquare.mk _ _ _ _ (Functor.whiskerRight (compactSupportDirectModel f B).hom
+            (proEtaleCoefficientRestrictScalars Y φ) ≫
+          (proEtaleCoefficientDirectImageComparison f φ).hom ≫
+          Functor.whiskerLeft (proEtaleCoefficientRestrictScalars X φ)
+            (compactSupportDirectModel f A).inv)) := rfl
+  rw [e] at nd ⊢
   simp only [Functor.comp_map, Functor.id_obj, NatTrans.comp_app, Functor.whiskerRight_app,
     Functor.whiskerLeft_app, TwoSquare.mk] at h1 hc nd nc ⊢
   apply ((sfIntrinsicConstantModuleAdjunction f A).homEquiv _ _).injective
@@ -273,11 +136,6 @@ theorem sfIntrinsicPullback_restrictScalars_mate_app {X Y : Scheme.{u}} (f : X �
     CategoryTheory.Functor.map_id, Category.id_comp,
     ← reassoc_of% nd, ← reassoc_of% hc, Iso.inv_hom_id_app_assoc]
 
-/-- The tensor inverse-image mate of the direct-image coefficient comparison is invertible. -/
-theorem constantRingScalarPullback_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) (φ : A →+* B) :
-    IsIso (constantRingScalarPullback f φ) :=
-  WeilConjectures.compactSupportScalarPullback_isIso f φ
-
 /-- The intrinsic inverse-image mate of the direct-image coefficient comparison is
 invertible. -/
 theorem sfIntrinsicPullback_restrictScalars_mate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -285,12 +143,12 @@ theorem sfIntrinsicPullback_restrictScalars_mate_isIso {X Y : Scheme.{u}} (f : X
     IsIso ((mateEquiv (sfIntrinsicConstantModuleAdjunction f B)
         (sfIntrinsicConstantModuleAdjunction f A)).symm
         (TwoSquare.mk _ _ _ _ (proEtaleCoefficientDirectImageComparison f φ).hom)) := by
-  have := constantRingScalarPullback_isIso f φ
+  have := compactSupportScalarPullback_isIso f φ
   have h : ((mateEquiv (sfIntrinsicConstantModuleAdjunction f B)
         (sfIntrinsicConstantModuleAdjunction f A)).symm
         (TwoSquare.mk _ _ _ _ (proEtaleCoefficientDirectImageComparison f φ).hom)) =
       Functor.whiskerLeft (proEtaleCoefficientRestrictScalars Y φ)
-          (openSquarePullbackModel A f).inv ≫ constantRingScalarPullback f φ ≫
+          (openSquarePullbackModel A f).inv ≫ compactSupportScalarPullback f φ ≫
         Functor.whiskerRight (openSquarePullbackModel B f).hom
           (proEtaleCoefficientRestrictScalars X φ) := by
     ext M : 2
@@ -321,7 +179,7 @@ theorem sfIntrinsicOpenMate_comp_pullbackMate {X Z : Scheme.{u}} (j : X ⟶ Z)
       (openSquarePullbackModel A j).inv.app ((sfIntrinsicExtensionByZero j A).obj
         ((proEtaleCoefficientRestrictScalars X φ).obj M)) ≫
       (proEtaleConstantRingPullback A j).map ((sfOpenRestriction j φ).hom.app M) ≫
-      (constantRingScalarPullback j φ).app ((sfIntrinsicExtensionByZero j B).obj M) =
+      (compactSupportScalarPullback j φ).app ((sfIntrinsicExtensionByZero j B).obj M) =
       (proEtaleCoefficientRestrictScalars X φ).map ((sfIntrinsicOpenAdjunction B j).unit.app M ≫
         (openSquarePullbackModel B j).inv.app ((sfIntrinsicExtensionByZero j B).obj M)) :=
     ho₀
@@ -472,8 +330,7 @@ end MixedCoordinates
 
 /-- The commuting cube of right-adjoint comparisons for the open scalar evaluation: the
 restriction/pullback square, the restriction-evaluation squares, the pullback evaluations and
-the finite open restriction mate. Every face is the localization of an ordinary square, and
-the ordinary cube is the left mate of the identity-on-sections direct-image cube. -/
+the finite open restriction mate commute. -/
 private theorem systemOpenScalar_rightCube (l : ℕ) [Fact l.Prime]
     (E L : Type u) [Field E] [Field L]
     [Algebra (Padic l) E] [Algebra (Padic l) L]
