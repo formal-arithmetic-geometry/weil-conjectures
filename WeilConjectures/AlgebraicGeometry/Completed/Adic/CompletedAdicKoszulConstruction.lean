@@ -170,10 +170,58 @@ def completedAdicScalar (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
     adicConstantRing T A ⟶ completedAdicCommRing T d :=
   (completedAdicScalar_exists T d).exists.choose
 
--- Untyped proof-valued def: its type is inferred and downstream code unfolds it.
-set_option linter.defProp false in
 /-- The scalar-extension witness with its object and morphism tensor formulas. -/
-def completedAdicScalarExtensionData (T : Scheme.{t}) (d : AdicCoefficientDatum A) :=
+theorem completedAdicScalarExtensionData (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
+    letI := HasDerivedCategory.standard (SheafOfModules.{t + 1}
+      (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
+        (ProEt.topology T) (adicConstantRing T A)))
+    letI := HasDerivedCategory.standard (SheafOfModules.{t + 1}
+      (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
+        (ProEt.topology T) (completedAdicCommRing T d)))
+    ∃ (E : SheafOfModules.{t + 1}
+          (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
+            (ProEt.topology T) (adicConstantRing T A)) ⥤
+        SheafOfModules.{t + 1}
+          (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
+            (ProEt.topology T) (completedAdicCommRing T d)))
+      (h : ∀ M : SheafOfModules.{t + 1}
+          (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
+            (ProEt.topology T) (adicConstantRing T A)),
+        E.obj M = SheafOfModules.changeOfRings (completedAdicScalar T d) M)
+      (_ : ∀ {M N : SheafOfModules.{t + 1}
+          (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
+            (ProEt.topology T) (adicConstantRing T A))} (a : M ⟶ N),
+        E.map a = eqToHom (h M) ≫
+          SheafOfModules.changeOfRingsHom (completedAdicScalar T d) M a ≫ eqToHom (h N).symm)
+      (_ : E.Additive),
+      (∀ {P Q : CochainComplex (SheafOfModules.{t + 1}
+          (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
+            (ProEt.topology T) (adicConstantRing T A))) ℤ} (α : P ⟶ Q),
+        P.IsKFlatIndependentCoefficients → Q.IsKFlatIndependentCoefficients → QuasiIso α →
+          QuasiIso ((E.mapHomologicalComplex (ComplexShape.up ℤ)).map α)) ∧
+      (E.mapHomotopyCategory (ComplexShape.up ℤ) ⋙
+          DerivedCategory.Qh).HasPointwiseLeftDerivedFunctor
+          (HomotopyCategory.quasiIso (SheafOfModules.{t + 1}
+            (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
+              (ProEt.topology T) (adicConstantRing T A))) (ComplexShape.up ℤ)) ∧
+      ∃ (LF : DerivedCategory (SheafOfModules.{t + 1}
+            (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
+              (ProEt.topology T) (adicConstantRing T A))) ⥤
+          DerivedCategory (SheafOfModules.{t + 1}
+            (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
+              (ProEt.topology T) (completedAdicCommRing T d))))
+        (ε : DerivedCategory.Qh ⋙ LF ⟶
+          E.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh),
+        LF.IsLeftDerivedFunctor ε
+            (HomotopyCategory.quasiIso (SheafOfModules.{t + 1}
+              (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
+                (ProEt.topology T) (adicConstantRing T A))) (ComplexShape.up ℤ)) ∧
+          (∃ (_ : LF.CommShift ℤ), LF.IsTriangulated) ∧
+          ∀ P : CochainComplex (SheafOfModules.{t + 1}
+              (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
+                (ProEt.topology T) (adicConstantRing T A))) ℤ,
+            P.IsKFlatIndependentCoefficients →
+            IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) :=
   completedAdicChangeData T (completedAdicScalar T d)
 
 /-- Ordinary scalar extension of constant A-module sheaves to A_T-module sheaves. -/

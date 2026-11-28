@@ -45,16 +45,21 @@ set_option backward.isDefEq.respectTransparency.types true
 attribute [local irreducible] Ext.homEquiv Ext.comp Ext.mk₀ Ext.mapExactFunctor
 attribute [local semireducible] CyclicCartierFrame.reduce
 
--- Irreducible def with inferred type; reducibility attributes cannot be set on a theorem.
-set_option linter.defProp false in
 /-- Apply the successive realization identity to the proved criterion from the preceding step.
 The other independent proof arguments remain available in its inferred type. -/
-@[irreducible] def UniformizerSquareData.realizedSquare
+theorem UniformizerSquareData.realizedSquare
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)
     (A : Type (u + 1)) [CommRing A]
     (hA : ((l ^ (n + 1) : ℕ) : A) = 0)
-    (q : UniformizerSquareData l Y E π n A hA) :=
+    (q : UniformizerSquareData l Y E π n A hA) :
+    (Ext.mk₀ q.sourceMap).comp
+        (Ext.mapExactFunctor q.restriction
+          (finiteRealizedClass (l ^ (n + 1)) hA Y q.eW q.lineW.endpoint.iso
+            q.sourceComparison.iso q.route.final.delta))
+        (zero_add 2) =
+      Ext.comp (CyclicCartierFrame.reduce l Y n q.cyclic q.route.initial.delta)
+        (Ext.mk₀ q.lineMap) (add_zero 2) :=
   UniformizerSquareData.cyclicSquare l Y E π n A hA q
     (UniformizerSquareData.quotient_realization l Y E π n A hA q)
 

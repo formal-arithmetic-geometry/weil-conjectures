@@ -44,15 +44,16 @@ set_option backward.isDefEq.respectTransparency.types true
 
 attribute [local irreducible] Ext.homEquiv
 
--- Irreducible def with inferred type; reducibility attributes cannot be set on a theorem.
-set_option linter.defProp false in
 /-- Compose the supplied scalar squares before ordinary finite realization. -/
-@[irreducible] def UniformizerSquareData.successive_square
+theorem UniformizerSquareData.successive_square
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)
     (A : Type (u + 1)) [CommRing A]
     (hA : ((l ^ (n + 1) : ℕ) : A) = 0)
-    (q : UniformizerSquareData l Y E π n A hA) :=
+    (q : UniformizerSquareData l Y E π n A hA) :
+    (q.route.first.compositeFunctor q.route.second).map q.route.initial.delta ≫
+        q.route.first.compositeTarget q.route.second =
+      (q.route.first.compositeSource q.route.second).hom ≫ q.route.final.delta :=
   ScalarCompatibility.composite_delta q.route.first q.route.second
 
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients

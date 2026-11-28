@@ -45,16 +45,29 @@ set_option backward.isDefEq.respectTransparency.types true
 attribute [local irreducible] Ext.homEquiv Ext.comp Ext.mk₀ Ext.mapExactFunctor
 attribute [local semireducible] CyclicCartierFrame.reduce
 
--- Irreducible def with inferred type; reducibility attributes cannot be set on a theorem.
-set_option linter.defProp false in
 /-- Apply the positive-root calculation to the proved criterion from the preceding step.
 The other independent proof arguments remain available in its inferred type. -/
-@[irreducible] def UniformizerSquareData.targetSquare
+theorem UniformizerSquareData.targetSquare
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)
     (A : Type (u + 1)) [CommRing A]
     (hA : ((l ^ (n + 1) : ℕ) : A) = 0)
-    (q : UniformizerSquareData l Y E π n A hA) :=
+    (q : UniformizerSquareData l Y E π n A hA) :
+    q.cyclicSource.hom ≫
+          Ext.hom (CyclicCartierFrame.reduce l Y n q.cyclic q.route.initial.delta) =
+        q.cyclicFunctor.map q.route.initial.delta ≫ q.cyclicTarget →
+      q.quotientSource.hom ≫
+            Ext.hom
+              (finiteRealizedClass (l ^ (n + 1)) hA Y q.eW q.lineW.endpoint.iso
+                q.sourceComparison.iso q.route.final.delta) =
+          q.quotientFunctor.map q.route.initial.delta ≫ q.quotientTarget →
+        (Ext.mk₀ q.sourceMap).comp
+            (Ext.mapExactFunctor q.restriction
+              (finiteRealizedClass (l ^ (n + 1)) hA Y q.eW q.lineW.endpoint.iso
+                q.sourceComparison.iso q.route.final.delta))
+            (zero_add 2) =
+          Ext.comp (CyclicCartierFrame.reduce l Y n q.cyclic q.route.initial.delta)
+            (Ext.mk₀ q.lineMap) (add_zero 2) :=
   UniformizerSquareData.sourceSquare l Y E π n A hA q
     (diagonalCyclic_uniformizerTarget l Y E π n A hA q)
 

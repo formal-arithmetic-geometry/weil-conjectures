@@ -49,15 +49,22 @@ local elab "routeField% " i:num d:term:max : term => do
   let e ← Lean.Elab.Term.elabTerm d none
   return Lean.mkProj ``FiniteRouteData i.getNat e
 
--- Irreducible def with inferred type; reducibility attributes cannot be set on a theorem.
-set_option linter.defProp false in
 /-- The cyclic realized class is the image of the supplied initial arrow. -/
-@[irreducible] def UniformizerSquareData.cyclic_realization
+theorem UniformizerSquareData.cyclic_realization
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)
     (A : Type (u + 1)) [CommRing A]
     (hA : ((l ^ (n + 1) : ℕ) : A) = 0)
-    (q : UniformizerSquareData l Y E π n A hA) :=
+    (q : UniformizerSquareData l Y E π n A hA) :
+    (q.cyclicEndpoints l Y E π n A hA).supported.hom ≫
+        finiteRealizedArrowMap (L := cyclicLine l n) (l ^ (n + 1))
+          (cartierResidue_cast l (n + 1)) Y q.cyclic.eW q.cyclic.lineEndpoint.iso
+          q.cyclic.sourceComparison.iso
+          (q.cyclic.supported.iso.inv ≫
+            (derivedScalars (cyclicMap l n) (diagonalSurface Y)).map q.route.initial.delta ≫
+              q.cyclic.line.shift (cyclicMap l n)) =
+      (q.cyclicEndpoints l Y E π n A hA).functor.map q.route.initial.delta ≫
+        (q.cyclicEndpoints l Y E π n A hA).lineMap :=
   (routeField% 3 (q.cyclicEndpoints l Y E π n A hA)) q.route.initial.delta
     (q.cyclic.supported.iso.inv ≫
       (derivedScalars (cyclicMap l n) (diagonalSurface Y)).map q.route.initial.delta ≫

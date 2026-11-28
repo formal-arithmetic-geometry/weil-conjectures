@@ -333,10 +333,9 @@ private theorem GE_restriction (E : DE R X) :
   simp only [Iso.refl_hom, NatTrans.id_app]
   erw [Category.id_comp]
 
--- Keep the section instances as hypotheses of this public statement.
-set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
+omit [IsNoetherian X] [QuasiCompact a] [QuasiCompact b] [QuasiCompact i] in
 /-- The etale arrow is the restriction of the normalized unbounded tower compositor. -/
 theorem etale_normalization (E : DE R X) :
     DerivedCategory.Plus.ι.map (AE R a b p q i s sq E) ≫
@@ -560,10 +559,9 @@ private theorem word_equation (E : DE R X) :
     erw [(PP R s).map_id, (JP R i).map_id, (PP R q).map_id]
   simp only [Category.id_comp]
 
--- Keep the section instances as hypotheses of this public statement.
-set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
+omit [QuasiCompact a] [QuasiCompact b] [QuasiCompact i] in
 /-- The finite-site word equation, its compositor paste and the resulting inverse formula. -/
 theorem paste (E : DE R X) :
     (N R Z).map ((PE R q).map (GE R a b p i s sq E)) ≫ Wout R a b p q E =
@@ -602,10 +600,10 @@ theorem paste (E : DE R X) :
   have hap : IsIso (AP R a b p q i s sq E) := by rw [hinv hd]; infer_instance
   exact ⟨hw, ht, hap, hd, hf, hg, hgf, hinv⟩
 
--- Keep the section instances as hypotheses of this public statement.
-set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
+omit [IsNoetherian X] [IsNoetherian Z] [QuasiCompact a]
+    [QuasiCompact b] [QuasiCompact i] [IsProper q] in
 /-- Naturality of both word comparisons and of the etale tower arrow. -/
 theorem word_naturality {E F : DE R X} (h : E ⟶ F) :
     ((N R Z).map ((PE R q).map ((JE R i).map ((PE R s).map ((JE R a).map h)))) ≫
@@ -649,10 +647,11 @@ theorem word_naturality {E F : DE R X} (h : E ⟶ F) :
       (comp_square ((kE R p q).hom.naturality ((JE R b).map ((JE R a).map h)))
         (map_square (PE R (p ≫ q)) ((mE R a b).hom.naturality h)))
 
--- Keep the section instances as hypotheses of this public statement.
-set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
+omit [Finite R] [IsNoetherian X] [IsNoetherian U] [IsNoetherian XB] [IsNoetherian Y]
+    [IsNoetherian YB] [IsNoetherian Z]
+    [QuasiCompact a] [QuasiCompact b] [QuasiCompact i] [IsProper p] [IsProper q] [IsProper s] in
 /-- Naturality of the three named compact-support comparisons and their input paste. -/
 theorem comparison_naturality {E F : DE R X} (h : E ⟶ F) :
     ((N R Y).map ((PE R s).map ((JE R a).map h)) ≫ B R a s F =
@@ -678,6 +677,7 @@ theorem comparison_naturality {E F : DE R X} (h : E ⟶ F) :
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
+omit [QuasiCompact a] [QuasiCompact b] [QuasiCompact i] in
 /-- Naturality of the actual tower paste, rather than merely of its transported value. -/
 theorem paste_naturality {E F : DE R X} (h : E ⟶ F) :
     (PP R q).map ((JP R i).map ((PP R s).map ((JP R a).map ((N R X).map h)))) ≫

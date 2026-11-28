@@ -93,8 +93,6 @@ namespace AlgebraicGeometry.ProEtale.QuotientChange
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
 
--- The body uses the deprecated `TwoSquare.natTrans`; dropping it changes the definition.
-set_option linter.deprecated false in
 /-- The existing ambient exchange with the named internal functor interfaces exposed.
 This changes only its type presentation, retaining the exact unit-square-counit map. -/
 def scalarAmbientExchange (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -103,7 +101,7 @@ def scalarAmbientExchange (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}
     {f : X ⟶ Y} {f' : X' ⟶ C} (sq : ChosenCartesianSquare a f' f c) :
     F R f ⋙ L R c ⟶ L R a ⋙ F R f' :=
   (mateEquiv (adj R f) (adj R f')
-    (TwoSquare.mk _ _ _ _ (scalarPullbackSquare R sq).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (scalarPullbackSquare R sq).hom))
 
 /-- The first route of the normalized rectangle: scalar/direct-image mate, exchange
 at the new coefficients, then the top-edge balancing map under direct image. -/
@@ -135,8 +133,6 @@ variable
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ' T)]
 
--- The statement uses the deprecated `TwoSquare.natTrans`; dropping it changes the statement.
-set_option linter.deprecated false in
 /-- The geometric realization's forward map is the mate of its inverse pullback map. -/
 theorem scalarSectionPushMate_eq
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -144,7 +140,7 @@ theorem scalarSectionPushMate_eq
     [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules R T)]
     {U V : Scheme.{u}} (h : U ⟶ V) :
     (mateEquiv (adj R h) (ModuleRingedComparison.derivedAdjunction R h)
-      (TwoSquare.mk _ _ _ _ (scalarSectionPullComparison R h).inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ (scalarSectionPullComparison R h).inv)) =
         (by
           unfold F CondensedRing.moduleObjectDerivedPushforward
           exact (ModuleRingedComparison.derivedPushComparison R h).hom) := by
@@ -157,8 +153,6 @@ theorem scalarSectionPushMate_eq
     CondensedRing.moduleObjectDerivedPullback CondensedRing.moduleObjectDerivedPushforward
   exact ht
 
--- The body uses the deprecated `TwoSquare.natTrans`; dropping it changes the definition.
-set_option linter.deprecated false in
 /-- The fixed pushforward realization with the named internal interface exposed. -/
 def scalarSectionPushComparison
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -175,11 +169,11 @@ def scalarSectionPushComparison
       unfold F CondensedRing.moduleObjectDerivedPushforward
       exact ModuleRingedComparison.derivedPushComparison R h
     have hm : (mateEquiv (adj R h) (ModuleRingedComparison.derivedAdjunction R h)
-        (TwoSquare.mk _ _ _ _ (scalarSectionPullComparison R h).inv)).natTrans = e.hom := by
+        (TwoSquare.mk _ _ _ _ (scalarSectionPullComparison R h).inv)) = e.hom := by
       exact scalarSectionPushMate_eq R h
     exact
       { hom := (mateEquiv (adj R h) (ModuleRingedComparison.derivedAdjunction R h)
-          (TwoSquare.mk _ _ _ _ (scalarSectionPullComparison R h).inv)).natTrans
+          (TwoSquare.mk _ _ _ _ (scalarSectionPullComparison R h).inv))
         inv := e.inv
         hom_inv_id := (congrArg (fun t ↦ t ≫ e.inv) hm).trans e.hom_inv_id
         inv_hom_id := (congrArg (fun t ↦ e.inv ≫ t) hm).trans e.inv_hom_id }
@@ -214,8 +208,6 @@ def sectionRectangleLambda (φ : Λ ⟶ Λ') [IsMonHom φ]
       ModuleRingedComparison.derivedPullback Λ h ⋙ sU.pair.derived :=
   (sectionRectangleLambda_witness φ h sU sV b p).choose
 
--- The body uses the deprecated `TwoSquare.natTrans`; dropping it changes the definition.
-set_option linter.deprecated false in
 /-- Section rho is the actual mate of the normalized section lambda under the
 independently specified ringed derived geometric adjunctions. -/
 def sectionRectangleRho (φ : Λ ⟶ Λ') [IsMonHom φ]
@@ -227,10 +219,8 @@ def sectionRectangleRho (φ : Λ ⟶ Λ') [IsMonHom φ]
       sU.pair.derived ⋙ ModuleRingedComparison.derivedPushforward Λ' h :=
   (mateEquiv (ModuleRingedComparison.derivedAdjunction Λ h)
     (ModuleRingedComparison.derivedAdjunction Λ' h)
-    (TwoSquare.mk _ _ _ _ (sectionRectangleLambda φ h sU sV b p).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (sectionRectangleLambda φ h sU sV b p).hom))
 
--- The body uses the deprecated `TwoSquare.natTrans`; dropping it changes the definition.
-set_option linter.deprecated false in
 /-- Section exchange is the mate of the section geometric square compositor.
 This is the word in the last conjunct of GeometricAgreement, with g'=a and g=c. -/
 def sectionRectangleExchange
@@ -250,7 +240,7 @@ def sectionRectangleExchange
         eqToIso (congrArg
           (fun k : X' ⟶ Y ↦ ModuleRingedComparison.derivedPullback R k)
           sq.toCommSq.w.symm) ≪≫
-        ModuleRingedComparison.derivedPullbackComposition R a f).hom)).natTrans
+        ModuleRingedComparison.derivedPullbackComposition R a f).hom))
 
 /-- Source comparison: geometric pullback, scalar comparison, then geometric pushforward. -/
 def sectionRectangleSource (φ : Λ ⟶ Λ') [IsMonHom φ]

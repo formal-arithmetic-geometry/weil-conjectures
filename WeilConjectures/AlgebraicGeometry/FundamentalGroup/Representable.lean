@@ -309,10 +309,9 @@ instance (Z : Over B) [Surjective p.left] : Surjective (prZ p Z).left := by
   rw [prZ_left]
   infer_instance
 
--- Keep the included hypothesis `hpb` in this public statement.
-set_option linter.unusedSectionVars false in
-include hpb hq in
-lemma exists_fst_comp_eq [Surjective p.left] (Z : Over B) (s : F.obj.obj (op Z.left)) :
+lemma exists_fst_comp_eq (_hpb : IsPullback q V.hom.left n p.left)
+    (hq : (γC F p r).left ≫ q = pullback.fst (V.hom.left ≫ p.left) p.left ≫ q)
+    [Surjective p.left] (Z : Over B) (s : F.obj.obj (op Z.left)) :
     ∃ m : Z.left.left ⟶ N, ∀ a : ZW p Z ⟶ V.left, a ≫ V.hom = prW p Z →
       r.overElt a = F.obj.map (prZ p Z).op s → pullback.fst Z.hom.left p.left ≫ m = a.left ≫ q := by
   obtain ⟨a, ha₁, ha₂⟩ := r.exists_overElt_eq (prW p Z) (F.obj.map (prZ p Z).op s)

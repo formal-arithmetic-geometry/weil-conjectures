@@ -172,9 +172,11 @@ end ResolvingOplaxConstraints
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-variable [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
-
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
+
+section
+
+variable [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
 
 /-- Read the source functor of the specified comparison without re-inferring its
 large derived-functor instance arguments. This returns the actual source itself. -/
@@ -248,8 +250,7 @@ def internalDerivedPushforward {X Y : Scheme.{u}} (f : X ⟶ Y) :
     DerivedCategory (internalModules Λ X) ⥤ DerivedCategory (internalModules Λ Y) :=
   comparisonSource (CondensedRing.rightDerivedLowerStarIso Λ f)
 
--- `omit` would drop this argument from the definitions built on this lemma.
-set_option linter.unusedSectionVars false in
+omit [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)] in
 /-- The fixed section equivalence functor is additive. -/
 theorem sectionFunctorAdditive (X : Scheme.{u}) :
     (equivalence Λ X).functor.Additive :=
@@ -348,14 +349,18 @@ def cochainTotalFunctor
   map_id K := (Functor.uncurry.obj T.map₂CochainComplex).map_id K
   map_comp f g := (Functor.uncurry.obj T.map₂CochainComplex).map_comp f g
 
--- The explicit binder repeats the section `HasDerivedCategory` variable; `omit` does not drop it.
-set_option linter.overlappingInstances false in
+end
+
 /-- The native signed total tensor of internal cochain complexes. -/
 def internalTotalTensor [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
     (X : Scheme.{u}) :
     CochainComplex (internalModules Λ X) ℤ × CochainComplex (internalModules Λ X) ℤ ⥤
       CochainComplex (internalModules Λ X) ℤ :=
   cochainTotalFunctor (curriedTensor (internalModules Λ X))
+
+section
+
+variable [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
 
 /-- The existing lax localization tensor map, with its two functors fixed.
 Naturality is the naturality axiom of the actual localization tensorator. -/
@@ -434,8 +439,8 @@ def tensorComparison (X : Scheme.{u}) :
       ((derivedEquivalence Λ X).functor.prod (derivedEquivalence Λ X).functor) ⋙ tensor Λ X :=
   (tensorComparison_existsUnique Λ X).exists.choose
 
--- The explicit binder repeats the section `HasDerivedCategory` variable; `omit` does not drop it.
-set_option linter.overlappingInstances false in
+end
+
 /-- The sectionwise tensor of cochain complexes is the signed direct-sum total. -/
 def totalTensor [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
     (X : Scheme.{u}) :
@@ -443,8 +448,6 @@ def totalTensor [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
       CochainComplex (modules Λ X) ℤ :=
   cochainTotalFunctor (curriedTensor (modules Λ X))
 
--- `omit` would drop this argument from `sectionOrdinaryTensorMap`, which uses this lemma.
-set_option linter.unusedSectionVars false in
 /-- Naturality of the fixed ordinary tensor comparison. -/
 theorem sectionOrdinaryTensorNaturality (X : Scheme.{u})
     (M M' N N' : internalModules Λ X) (f : M ⟶ M') (g : N ⟶ N') :
@@ -454,7 +457,8 @@ theorem sectionOrdinaryTensorNaturality (X : Scheme.{u})
   exact ordinaryTensorComparison_natural Λ X M M' N N' f g
 
 /-- The actual ordinary tensor comparison as a curried natural transformation. -/
-@[irreducible] def sectionOrdinaryTensorMap (X : Scheme.{u}) :
+@[irreducible] def sectionOrdinaryTensorMap
+    [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)] (X : Scheme.{u}) :
     (Functor.postcompose₂.obj (equivalence Λ X).functor).obj
         (curriedTensor (internalModules Λ X)) ⟶
       (((Functor.whiskeringLeft₂ _).obj (equivalence Λ X).functor).obj
@@ -467,6 +471,10 @@ theorem sectionOrdinaryTensorNaturality (X : Scheme.{u})
       apply NatTrans.ext
       funext N
       simpa using sectionOrdinaryTensorNaturality Λ X M M' N N f (𝟙 N) }
+
+section
+
+variable [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
 
 /-- Each ordinary comparison component is invertible. -/
 theorem sectionOrdinaryTensorMap_isIso (X : Scheme.{u})
@@ -549,5 +557,7 @@ def localizedTotalComparison (X : Scheme.{u})
   (sectionLocalizationComparison Λ X
       ((internalTotalTensor Λ X).obj (P, Q))).hom ≫
     (DerivedCategory.Q (C := modules Λ X)).map (sectionTotalComparison Λ X P Q)
+
+end
 
 end AlgebraicGeometry.ProEtale.ModuleRingedComparison

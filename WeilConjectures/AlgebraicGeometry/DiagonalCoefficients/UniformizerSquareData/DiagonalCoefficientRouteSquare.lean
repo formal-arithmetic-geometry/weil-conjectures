@@ -45,17 +45,66 @@ set_option backward.isDefEq.respectTransparency.types true
 attribute [local irreducible] Ext.homEquiv Ext.comp Ext.mk₀ Ext.mapExactFunctor
 attribute [local semireducible] CyclicCartierFrame.reduce
 
--- Irreducible def with inferred type; reducibility attributes cannot be set on a theorem.
-set_option linter.defProp false in
 /-- The fully proved endpoint criterion specialized to the supplied coefficient
 routes. Its four arguments are the independent source comparison, target
 comparison, and two realization identities. -/
-@[irreducible] def UniformizerSquareData.endpointSquare
+theorem UniformizerSquareData.endpointSquare
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)
     (A : Type (u + 1)) [CommRing A]
     (hA : ((l ^ (n + 1) : ℕ) : A) = 0)
-    (q : UniformizerSquareData l Y E π n A hA) :=
+    (q : UniformizerSquareData l Y E π n A hA) :
+    (∃! i : q.quotientRight ≅ q.restriction ⋙ q.cyclicRight,
+        q.RestrictionNormalized i ∧
+          (q.comparison i).app
+                ((DerivedCategory.singleFunctor
+                    (Modules (Profinite.continuousMapRingObj ℤ_[l]) (diagonalSurface Y)) 0).obj
+                  (source (Profinite.continuousMapRingObj ℤ_[l]) Y)) ≫
+              q.restriction.mapDerivedCategory.map q.quotientSource.hom ≫
+                (q.restriction.mapDerivedCategorySingleFunctor 0).hom.app
+                  ((diagonalImmersion Y)_*[ModuleCat A].obj
+                    (geoCartierConstant A (ProjectiveLine Y))) =
+            q.cyclicSource.hom ≫
+              (DerivedCategory.singleFunctor (Sheaf (Scheme.ProEt.topology (diagonalSurface Y))
+                  (ModuleCat (diagonalResidue l n))) 0).map q.sourceMap) →
+      (∀ i : q.quotientRight ≅ q.restriction ⋙ q.cyclicRight,
+          q.RestrictionNormalized i →
+            (q.comparison i).app
+                  ((shiftFunctor (DerivedCategory
+                      (Modules (Profinite.continuousMapRingObj ℤ_[l]) (diagonalSurface Y))) 2).obj
+                    ((DerivedCategory.singleFunctor
+                        (Modules (Profinite.continuousMapRingObj ℤ_[l]) (diagonalSurface Y)) 0).obj
+                      (zlLine l (diagonalSurface Y)))) ≫
+                q.restriction.mapDerivedCategory.map q.quotientTarget ≫
+                  (q.restriction.mapDerivedCategory.commShiftIso (2 : ℤ)).hom.app
+                      ((DerivedCategory.singleFunctor
+                          (Sheaf (Scheme.ProEt.topology (diagonalSurface Y)) (ModuleCat A)) 0).obj
+                        (geoCartierLine A (l ^ (n + 1)) hA (diagonalSurface Y))) ≫
+                    (shiftFunctor (DerivedCategory
+                        (Sheaf (Scheme.ProEt.topology (diagonalSurface Y))
+                          (ModuleCat (diagonalResidue l n)))) 2).map
+                      ((q.restriction.mapDerivedCategorySingleFunctor 0).hom.app
+                        (geoCartierLine A (l ^ (n + 1)) hA (diagonalSurface Y))) =
+              q.cyclicTarget ≫
+                (shiftFunctor (DerivedCategory (Sheaf (Scheme.ProEt.topology (diagonalSurface Y))
+                    (ModuleCat (diagonalResidue l n)))) 2).map
+                  ((DerivedCategory.singleFunctor (Sheaf (Scheme.ProEt.topology (diagonalSurface Y))
+                      (ModuleCat (diagonalResidue l n))) 0).map q.lineMap)) →
+        q.cyclicSource.hom ≫
+              Ext.hom (CyclicCartierFrame.reduce l Y n q.cyclic q.route.initial.delta) =
+            q.cyclicFunctor.map q.route.initial.delta ≫ q.cyclicTarget →
+          q.quotientSource.hom ≫
+                Ext.hom
+                  (finiteRealizedClass (l ^ (n + 1)) hA Y q.eW q.lineW.endpoint.iso
+                    q.sourceComparison.iso q.route.final.delta) =
+              q.quotientFunctor.map q.route.initial.delta ≫ q.quotientTarget →
+            (Ext.mk₀ q.sourceMap).comp
+                (Ext.mapExactFunctor q.restriction
+                  (finiteRealizedClass (l ^ (n + 1)) hA Y q.eW q.lineW.endpoint.iso
+                    q.sourceComparison.iso q.route.final.delta))
+                (zero_add 2) =
+              Ext.comp (CyclicCartierFrame.reduce l Y n q.cyclic q.route.initial.delta)
+                (Ext.mk₀ q.lineMap) (add_zero 2) :=
   finiteCoefficient_extSquare_of_endpoints q.restriction
     q.cyclicFunctor q.quotientFunctor
     (fun s : q.quotientRight ≅ q.restriction ⋙ q.cyclicRight ↦ q.comparison s)

@@ -167,8 +167,7 @@ private theorem horizontal_map' {C : Type c} [Category.{v} C]
   dsimp
   rw [CategoryTheory.Functor.map_id, Category.comp_id]
 
--- `omit` would drop this argument from `systemRing`, whose callers pass it explicitly.
-set_option linter.unusedSectionVars false in
+omit [EssentiallySmall.{r, v, c} C] in
 /-- The actual ring presheaf is a sheaf for the vertical sequence topology. -/
 theorem ringPresheaf_isSheaf :
     Presheaf.IsSheaf (coefficientSequenceTopology J) (ringPresheaf.{c, v, r} J B τ) := by
@@ -179,9 +178,26 @@ theorem ringPresheaf_isSheaf :
   rw [← Functor.assoc, uncurry_slice_eq']
   exact ((rings.{c, v, r} J B τ).obj (op n)).property A
 
+end Foundation
+
+section SystemRing
+
+variable {C : Type c} [Category.{v} C]
+
 /-- The ring object B_bullet, with real presheaf data. -/
-def systemRing : Sheaf (coefficientSequenceTopology J) CommRingCat.{r} :=
+def systemRing [EssentiallySmall.{r} C] (J : GrothendieckTopology C)
+    (B : ℕ → Sheaf J CommRingCat.{r}) (τ : ∀ n : ℕ, B (n + 1) ⟶ B n) :
+    Sheaf (coefficientSequenceTopology J) CommRingCat.{r} :=
   ⟨ringPresheaf.{c, v, r} J B τ, ringPresheaf_isSheaf.{c, v, r} J B τ⟩
+
+end SystemRing
+
+section Foundation
+
+variable {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
+  (J : GrothendieckTopology C)
+  (B : ℕ → Sheaf J CommRingCat.{r})
+  (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
 /-- Strict semilinear systems, realized as module sheaves on the sequence site. -/
 abbrev Systems := Mod.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, r} J B τ)
@@ -189,8 +205,7 @@ abbrev Systems := Mod.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, 
 /-- The derived category `D(S(B))` of strict semilinear systems. -/
 abbrev DS := D.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, r} J B τ)
 
--- `omit` would drop universe `r` from the signature; callers pass universes explicitly.
-set_option linter.unusedSectionVars false in
+omit [EssentiallySmall.{r, v, c} C] in
 /-- The slice inclusion is continuous for the actual vertical topology. -/
 theorem evaluation_continuous (n : ℕ) :
     (Prod.sectR n C).IsContinuous J (coefficientSequenceTopology J) := by
@@ -213,10 +228,25 @@ theorem evaluation_continuous (n : ℕ) :
     change (S.functorPushforward (Prod.sectR n C)).functorPullback (Prod.sectR n C) ∈ J U
     exact J.superset_covering (Sieve.le_functorPushforward_pullback _ S) hS
 
+end Foundation
+
+section EvaluationContinuous
+
+variable {C : Type c} [Category.{v} C]
+
 /-- Continuity used by continuous module pushforward along the vertical inclusion. -/
-instance evaluationContinuous (n : ℕ) :
+instance evaluationContinuous [EssentiallySmall.{r} C] (J : GrothendieckTopology C) (n : ℕ) :
     (Prod.sectR n C).IsContinuous J (coefficientSequenceTopology J) :=
   evaluation_continuous J n
+
+end EvaluationContinuous
+
+section Foundation
+
+variable {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
+  (J : GrothendieckTopology C)
+  (B : ℕ → Sheaf J CommRingCat.{r})
+  (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
 /-- Evaluation of B_bullet is B_n, including its restriction maps. -/
 theorem evaluation_ring (n : ℕ) :

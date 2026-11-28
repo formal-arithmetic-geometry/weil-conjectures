@@ -81,65 +81,6 @@ private theorem pastingWithFamily
   exact traceTransportPasting P Q F H R R₀ U V W₀ T b d s e c
     a v l k T₀ z (g B) u uQ uP uF τ (hb B) ha hu
 
--- `def` with an inferred type: a `theorem` would need this long pasting statement spelled out.
-set_option linter.defProp false in
-/-- Fix the geometry before substituting any coefficient objects. -/
-@[irreducible] private def categoricalPasting
-    (A : Type (u + 1)) [CommRing A] [Finite A]
-    {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f]
-    (i : X ≅ ProjectiveLine S) (hi : i.hom ≫ (ProjectiveLine S ↘ S) = f) :=
-  @pastingWithFamily
-    (DerivedCategoryModule A (ProjectiveLine S)) (DerivedCategoryModule A X)
-    (DerivedCategoryModule A S)
-    (DerivedCategoryModule A
-      (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)))
-    (DerivedCategoryModule A (pullback f f))
-    _ _ _ _ _
-    (ordinaryFinitePullback A i.hom)
-    (ordinaryFinitePullback A (ProjectiveLine S ↘ S))
-    (ordinaryFinitePullback A f)
-    (ordinaryFinitePushforward A (ProjectiveLine S ↘ S))
-    (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (pullback.snd f f))
-    (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S true))
-    (ordinaryFinitePullback A (productMap f i hi))
-    (ordinaryFinitePullback A (projectiveLineDiagonalProjection S false))
-    (ordinaryFinitePullback A (pullback.fst f f))
-    (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f)
-    (ordinaryFinitePushforward A f)
-    (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} A) f)
-    (secondProjectionComparison A f i hi)
-    (properExchange A (projectiveProjectionSquare S true))
-    (derivedSquareUpperStarIso (ModuleCat.{u + 1} A)
-      (firstProjectionSquare f i hi).toCommSq)
-    (TraceDiagonalDatum.baseChangeIso (Λ := A) f)
-    (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) i.hom
-      (ProjectiveLine S ↘ S) f hi.symm)
-    (presentationTrace A f i hi) (presentationExchange A f i hi)
-
--- `def` with an inferred type: a `theorem` would need this long pasting statement spelled out.
-set_option linter.defProp false in
-@[irreducible] private def linePasting
-    (A : Type (u + 1)) [CommRing A] [Finite A]
-    (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
-    {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f]
-    (i : X ≅ ProjectiveLine S) (hi : i.hom ≫ (ProjectiveLine S ↘ S) = f)
-    (hS : IsUnit (N : Γ(S, ⊤))) :=
-  @categoricalPasting A inferInstance inferInstance S X f inferInstance i hi
-    ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧)
-    ((ordinaryFiniteLine A N hA X)⟦(2 : ℤ)⟧)
-    ((ordinaryFiniteLine A N hA
-      (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)))⟦(2 : ℤ)⟧)
-    ((CoordinateTrace.pull A (pullback.snd f f)).obj
-      ((ordinaryFiniteLine A N hA X)⟦(2 : ℤ)⟧))
-    (coefficientComparison A N hA t f i hi hS)
-    (ordinaryFiniteShiftedLinePullback A N hA t
-      (projectiveLineDiagonalProjection S false)
-      (finiteP1_unitOnPullback N (ProjectiveLine S ↘ S) hS))
-    (ordinaryFiniteShiftedLinePullback A N hA t i.hom
-      (finiteP1_unitOnPullback N (ProjectiveLine S ↘ S) hS))
-    (SfDiagonalKernel.coordinate A f
-      (CoordinateTrace.shiftedLine A (Scheme.finiteEtaleTateLine S N A hA) 1)
-      (ordinaryFiniteShiftedLinePullback A N hA t f hS).symm)
 private theorem middleComposite_change_functor
     {C D E T : Type*} [Category C] [Category D] [Category E] [Category T]
     {U : C ⥤ D} {H : C ⥤ E} {P : E ⥤ T}
@@ -209,26 +150,6 @@ private theorem coordinateTrace_true_eq
 
 end ProjectionNormalization
 
--- `def` with an inferred type: a `theorem` would need this long pasting statement spelled out.
-set_option linter.defProp false in
-@[irreducible] private def rawPastingResult
-    (A : Type (u + 1)) [CommRing A] [Finite A]
-    (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
-    {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f]
-    (i : X ≅ ProjectiveLine S) (hi : i.hom ≫ (ProjectiveLine S ↘ S) = f)
-    (hS : IsUnit (N : Γ(S, ⊤)))
-    (τ : ordinaryFiniteP1SplittingTarget A N hA S ⟶ ordinaryFiniteUnit A S) :=
-  linePasting A N hA t f i hi hS
-    (J := ordinaryFiniteUnit A S)
-    (J' := derivedTensorUnit (ModuleCat.{u + 1} A) S)
-    (J₀ := ordinaryFiniteUnit A (ProjectiveLine S))
-    (J₁ := derivedTensorUnit (ModuleCat.{u + 1} A) X)
-    (constantUnit A S).hom
-    (ordinaryFiniteUnitPullback A (ProjectiveLine S ↘ S)).hom
-    (constantComparison A i).hom (leftDerivedUpperStarDerivedTensorUnitIso f).hom τ
-    (coordinateLineComparison A N hA t f i hi hS)
-    (unit_transport A f i hi)
-
 private theorem nativeProjectionTransport
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
@@ -252,8 +173,65 @@ private theorem nativeProjectionTransport
         ((ordinaryFiniteLine A N hA X)⟦(2 : ℤ)⟧) ≫
       (ordinaryFinitePullback A f).map (trace A N hA t f i hi hS τ) ≫
       (leftDerivedUpperStarDerivedTensorUnitIso f).hom := by
+  -- Fix the geometry before substituting any coefficient objects.
+  have categoricalPasting :=
+    @pastingWithFamily
+      (DerivedCategoryModule A (ProjectiveLine S)) (DerivedCategoryModule A X)
+      (DerivedCategoryModule A S)
+      (DerivedCategoryModule A
+        (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)))
+      (DerivedCategoryModule A (pullback f f))
+      _ _ _ _ _
+      (ordinaryFinitePullback A i.hom)
+      (ordinaryFinitePullback A (ProjectiveLine S ↘ S))
+      (ordinaryFinitePullback A f)
+      (ordinaryFinitePushforward A (ProjectiveLine S ↘ S))
+      (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (pullback.snd f f))
+      (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S true))
+      (ordinaryFinitePullback A (productMap f i hi))
+      (ordinaryFinitePullback A (projectiveLineDiagonalProjection S false))
+      (ordinaryFinitePullback A (pullback.fst f f))
+      (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f)
+      (ordinaryFinitePushforward A f)
+      (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} A) f)
+      (secondProjectionComparison A f i hi)
+      (properExchange A (projectiveProjectionSquare S true))
+      (derivedSquareUpperStarIso (ModuleCat.{u + 1} A)
+        (firstProjectionSquare f i hi).toCommSq)
+      (TraceDiagonalDatum.baseChangeIso (Λ := A) f)
+      (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) i.hom
+        (ProjectiveLine S ↘ S) f hi.symm)
+      (presentationTrace A f i hi) (presentationExchange A f i hi)
+  have linePasting :=
+    @categoricalPasting
+      ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧)
+      ((ordinaryFiniteLine A N hA X)⟦(2 : ℤ)⟧)
+      ((ordinaryFiniteLine A N hA
+        (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)))⟦(2 : ℤ)⟧)
+      ((CoordinateTrace.pull A (pullback.snd f f)).obj
+        ((ordinaryFiniteLine A N hA X)⟦(2 : ℤ)⟧))
+      (coefficientComparison A N hA t f i hi hS)
+      (ordinaryFiniteShiftedLinePullback A N hA t
+        (projectiveLineDiagonalProjection S false)
+        (finiteP1_unitOnPullback N (ProjectiveLine S ↘ S) hS))
+      (ordinaryFiniteShiftedLinePullback A N hA t i.hom
+        (finiteP1_unitOnPullback N (ProjectiveLine S ↘ S) hS))
+      (SfDiagonalKernel.coordinate A f
+        (CoordinateTrace.shiftedLine A (Scheme.finiteEtaleTateLine S N A hA) 1)
+        (ordinaryFiniteShiftedLinePullback A N hA t f hS).symm)
+  have rawPastingResult :=
+    linePasting
+      (J := ordinaryFiniteUnit A S)
+      (J' := derivedTensorUnit (ModuleCat.{u + 1} A) S)
+      (J₀ := ordinaryFiniteUnit A (ProjectiveLine S))
+      (J₁ := derivedTensorUnit (ModuleCat.{u + 1} A) X)
+      (constantUnit A S).hom
+      (ordinaryFiniteUnitPullback A (ProjectiveLine S ↘ S)).hom
+      (constantComparison A i).hom (leftDerivedUpperStarDerivedTensorUnitIso f).hom τ
+      (coordinateLineComparison A N hA t f i hi hS)
+      (unit_transport A f i hi)
   unfold projectionExchange trace
-  exact rawPastingResult A N hA t f i hi hS τ
+  exact rawPastingResult
 
 private theorem transport_change_source
     {C : Type*} [Category C] {U V W T : C}

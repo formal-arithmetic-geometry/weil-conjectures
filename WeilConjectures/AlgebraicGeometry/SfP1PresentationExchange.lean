@@ -572,66 +572,6 @@ private theorem supported_naturality
   rw [supported_hom, ordinary_hom]
   exact raw_naturality A f
 
--- Fix the functors before specializing the derived complexes.
--- `def` with an inferred type: a `theorem` would need this long pasting statement spelled out.
-set_option linter.defProp false in
-@[irreducible] private def categorical_presentation
-    (A : Type (u + 1)) [CommRing A] [Finite A]
-    {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f]
-    (i : X ≅ ProjectiveLine S) (hi : i.hom ≫ (ProjectiveLine S ↘ S) = f) :=
-  @family_pasting
-    (DerivedCategoryModule A (pullback f f))
-    (DerivedCategoryModule A X) (DerivedCategoryModule A S)
-    (DerivedCategoryModule A X)
-    (DerivedCategoryModule A
-      (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S))) _ _ _ _ _
-    L((f)^*[ModuleCat.{u + 1} A])
-    L((pullback.fst f f)^*[ModuleCat.{u + 1} A])
-    (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f)
-    (ordinaryFinitePushforward A f)
-    (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (pullback.snd f f))
-    (ordinaryFinitePushforward A (pullback.snd f f))
-    (rightDerivedLowerShriekIsoRightDerivedLowerStar
-      (ModuleCat.{u + 1} A) (pullback.snd f f))
-    (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} A) f)
-    (TraceDiagonalDatum.baseChangeIso (Λ := A) f)
-    (properExchange A (IsPullback.of_hasPullback f f))
-    (supported_naturality A f)
-    (ordinaryFinitePullback A (productMap f i hi))
-    (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S true) ⋙
-      ordinaryFinitePullback A i.hom)
-    (secondProjectionComparison A f i hi)
-    (properExchange A (projectionSquare f i hi true)).symm
-    (second_normalized A f i hi)
-
--- `def` with an inferred type: a `theorem` would need this long pasting statement spelled out.
-set_option linter.defProp false in
-@[irreducible] private def raw_geometry
-    (A : Type (u + 1)) [CommRing A] [Finite A]
-    {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f]
-    (i : X ≅ ProjectiveLine S) (hi : i.hom ≫ (ProjectiveLine S ↘ S) = f)
-    (B : DerivedCategoryModule A (ProjectiveLine S)) :=
-  let K : DerivedCategoryModule A X := (ordinaryFinitePullback A i.hom).obj B
-  let σ := (derivedSquareUpperStarIso (ModuleCat.{u + 1} A)
-    (firstProjectionSquare f i hi).toCommSq).inv.app B
-  categorical_presentation A f i hi K
-    ((ordinaryFinitePullback A (projectiveLineDiagonalProjection S false)).obj B)
-    σ (presentationTrace A f i hi B)
-    ((leftDerivedUpperStarComp (ModuleCat.{u + 1} A) i.hom
-      (ProjectiveLine S ↘ S) f hi.symm).hom.app
-        ((ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).obj B))
-    ((ordinaryFinitePullback A i.hom).map
-      ((properExchange A (projectiveProjectionSquare S true)).inv.app B))
-
--- `def` with an inferred type: a `theorem` would need this long pasting statement spelled out.
-set_option linter.defProp false in
-@[irreducible] private def raw_presentation
-    (A : Type (u + 1)) [CommRing A] [Finite A]
-    {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f]
-    (i : X ≅ ProjectiveLine S) (hi : i.hom ≫ (ProjectiveLine S ↘ S) = f)
-    (B : DerivedCategoryModule A (ProjectiveLine S)) :=
-  raw_geometry A f i hi B (ordinary_presentation_exchange A f i hi B)
-
 /-- Exchange along the presentation isomorphism, before inserting any coefficient
 comparison or trace. -/
 theorem presentationExchange
@@ -656,7 +596,44 @@ theorem presentationExchange
       (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) i.hom
         (ProjectiveLine S ↘ S) f hi.symm).hom.app
           ((ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).obj B) := by
-  exact raw_presentation A f i hi B
+  -- Fix the functors before specializing the derived complexes.
+  have categorical_presentation :=
+    @family_pasting
+      (DerivedCategoryModule A (pullback f f))
+      (DerivedCategoryModule A X) (DerivedCategoryModule A S)
+      (DerivedCategoryModule A X)
+      (DerivedCategoryModule A
+        (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S))) _ _ _ _ _
+      L((f)^*[ModuleCat.{u + 1} A])
+      L((pullback.fst f f)^*[ModuleCat.{u + 1} A])
+      (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f)
+      (ordinaryFinitePushforward A f)
+      (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (pullback.snd f f))
+      (ordinaryFinitePushforward A (pullback.snd f f))
+      (rightDerivedLowerShriekIsoRightDerivedLowerStar
+        (ModuleCat.{u + 1} A) (pullback.snd f f))
+      (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} A) f)
+      (TraceDiagonalDatum.baseChangeIso (Λ := A) f)
+      (properExchange A (IsPullback.of_hasPullback f f))
+      (supported_naturality A f)
+      (ordinaryFinitePullback A (productMap f i hi))
+      (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S true) ⋙
+        ordinaryFinitePullback A i.hom)
+      (secondProjectionComparison A f i hi)
+      (properExchange A (projectionSquare f i hi true)).symm
+      (second_normalized A f i hi)
+  let K : DerivedCategoryModule A X := (ordinaryFinitePullback A i.hom).obj B
+  let σ := (derivedSquareUpperStarIso (ModuleCat.{u + 1} A)
+    (firstProjectionSquare f i hi).toCommSq).inv.app B
+  exact categorical_presentation K
+    ((ordinaryFinitePullback A (projectiveLineDiagonalProjection S false)).obj B)
+    σ (presentationTrace A f i hi B)
+    ((leftDerivedUpperStarComp (ModuleCat.{u + 1} A) i.hom
+      (ProjectiveLine S ↘ S) f hi.symm).hom.app
+        ((ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).obj B))
+    ((ordinaryFinitePullback A i.hom).map
+      ((properExchange A (projectiveProjectionSquare S true)).inv.app B))
+    (ordinary_presentation_exchange A f i hi B)
 
 end ExchangeProofHelpers
 

@@ -89,8 +89,7 @@ private theorem pbcAmbientScalarExtension_eq (h : E ≤ F) :
   simp only [pbcAmbientScalarExtension, pbcEmbeddingAmbientTensor,
     pbcStageCoefficientMap_eq l Ω W h]
 
--- Keep the recorded base hypotheses in the public signature.
-set_option linter.unusedSectionVars false in
+omit [IsAlgClosure ℚ_[l] Ω] [IsNoetherian W] hDim hInv in
 /-- Finite coefficient tensor preserves intrinsic completeness without constructible bounds. -/
 theorem pbcAmbientCompleteTensor_preserves (h : E ≤ F)
     (K : WeilConjectures.PbcComplete l (pbcFiniteField.{u} l Ω E) W) :
@@ -154,6 +153,7 @@ private instance pbcAmbientCompleteIntegralTransition_additive (h : E ≤ F) :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+omit [IsAlgClosure ℚ_[l] Ω] [IsNoetherian W] hDim hInv in
 /-- The complete integral tensor is semilinear along the inclusion of integer rings. -/
 private theorem pbcAmbientCompleteIntegralTransition_semilinear (h : E ≤ F) :
     ScalarLocalization.IsSemilinear (pbcIntegerInclusion l Ω h)
@@ -235,6 +235,7 @@ private theorem pbcAmbientCompleteRawTransition_of_ne (h : E ≤ F) (hEF : E ≠
       (pbcAmbientCompleteRaw_exists l Ω W h).exists.choose := by
   simp [pbcAmbientCompleteRawTransition, hEF]
 
+omit hDim hInv in
 /-- The complete integral tensor unit is the restriction of the canonical derived unit. -/
 theorem pbcAmbientCompleteIntegralUnit_exists (E : Padic.FiniteCoefficientFields l Ω) :
     ∃! e : pbcAmbientCompleteIntegralTransition l Ω W (le_refl E) ≅ 𝟭 _,
@@ -294,6 +295,7 @@ theorem pbcAmbientCompleteIntegralComparison_exists (h : E ≤ F) :
 @[irreducible] def pbcAmbientCompleteIntegralComparison (h : E ≤ F) :=
   (pbcAmbientCompleteIntegralComparison_exists l Ω W h).exists.choose
 
+omit hDim hInv in
 /-- Restriction of the specified balanced ambient associator to complete objects. -/
 theorem pbcAmbientCompleteIntegralAssociator_exists (h : E ≤ F) (k : F ≤ G) :
     ∃! a : pbcAmbientCompleteIntegralTransition l Ω W h ⋙

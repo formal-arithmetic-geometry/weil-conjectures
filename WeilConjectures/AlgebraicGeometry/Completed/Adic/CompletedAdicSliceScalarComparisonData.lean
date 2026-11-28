@@ -74,13 +74,76 @@ open AlgebraicGeometry.ProEtale
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
--- Untyped proof-valued def: its type is inferred and downstream code unfolds it.
-set_option linter.defProp false in
 /-- The universal ordinary and derived scalar-extension witness on the slice.
 Its object and map equations determine ordinary tensor extension, while its
 counit determines the derived functor. -/
-def completedAdicSliceChangeData (X : Scheme.{t}) (U : X.ProEt)
-    {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :=
+theorem completedAdicSliceChangeData (X : Scheme.{t}) (U : X.ProEt)
+    {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :
+    letI := HasDerivedCategory.standard (SheafOfModules.{t + 1}
+      ((sheafCompose ((ProEt.topology X).over U)
+        (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj (R.over U)))
+    letI := HasDerivedCategory.standard (SheafOfModules.{t + 1}
+      ((sheafCompose ((ProEt.topology X).over U)
+        (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj (S.over U)))
+    ∃ (E : SheafOfModules.{t + 1}
+          (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
+            ((ProEt.topology X).over U)
+            (((ProEt.topology X).overPullback CommRingCat.{t + 1} U).obj R)) ⥤
+        SheafOfModules.{t + 1}
+          (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
+            ((ProEt.topology X).over U)
+            (((ProEt.topology X).overPullback CommRingCat.{t + 1} U).obj S)))
+      (h : ∀ M : SheafOfModules.{t + 1}
+          (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
+            ((ProEt.topology X).over U)
+            (((ProEt.topology X).overPullback CommRingCat.{t + 1} U).obj R)),
+        E.obj M = SheafOfModules.changeOfRings
+          (((ProEt.topology X).overPullback CommRingCat.{t + 1} U).map f) M)
+      (_ : ∀ {M N : SheafOfModules.{t + 1}
+          (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
+            ((ProEt.topology X).over U)
+            (((ProEt.topology X).overPullback CommRingCat.{t + 1} U).obj R))} (a : M ⟶ N),
+        E.map a = eqToHom (h M) ≫
+          SheafOfModules.changeOfRingsHom
+            (((ProEt.topology X).overPullback CommRingCat.{t + 1} U).map f) M a ≫
+          eqToHom (h N).symm)
+      (_ : E.Additive),
+      (∀ {P Q : CochainComplex (SheafOfModules.{t + 1}
+          (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
+            ((ProEt.topology X).over U)
+            (((ProEt.topology X).overPullback CommRingCat.{t + 1} U).obj R))) ℤ} (α : P ⟶ Q),
+        P.IsKFlatIndependentCoefficients → Q.IsKFlatIndependentCoefficients → QuasiIso α →
+          QuasiIso ((E.mapHomologicalComplex (ComplexShape.up ℤ)).map α)) ∧
+      (E.mapHomotopyCategory (ComplexShape.up ℤ) ⋙
+          DerivedCategory.Qh).HasPointwiseLeftDerivedFunctor
+          (HomotopyCategory.quasiIso (SheafOfModules.{t + 1}
+            (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
+              ((ProEt.topology X).over U)
+              (((ProEt.topology X).overPullback CommRingCat.{t + 1} U).obj R)))
+            (ComplexShape.up ℤ)) ∧
+      ∃ (LF : DerivedCategory (SheafOfModules.{t + 1}
+            (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
+              ((ProEt.topology X).over U)
+              (((ProEt.topology X).overPullback CommRingCat.{t + 1} U).obj R))) ⥤
+          DerivedCategory (SheafOfModules.{t + 1}
+            (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
+              ((ProEt.topology X).over U)
+              (((ProEt.topology X).overPullback CommRingCat.{t + 1} U).obj S))))
+        (ε : DerivedCategory.Qh ⋙ LF ⟶
+          E.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh),
+        LF.IsLeftDerivedFunctor ε
+            (HomotopyCategory.quasiIso (SheafOfModules.{t + 1}
+              (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
+                ((ProEt.topology X).over U)
+                (((ProEt.topology X).overPullback CommRingCat.{t + 1} U).obj R)))
+              (ComplexShape.up ℤ)) ∧
+          (∃ (_ : LF.CommShift ℤ), LF.IsTriangulated) ∧
+          ∀ P : CochainComplex (SheafOfModules.{t + 1}
+              (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
+                ((ProEt.topology X).over U)
+                (((ProEt.topology X).overPullback CommRingCat.{t + 1} U).obj R))) ℤ,
+            P.IsKFlatIndependentCoefficients →
+            IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) :=
   letI : EssentiallySmall.{t + 1} (Over U) := essentiallySmallSelf.{0, t, t + 1} _
   letI := HasDerivedCategory.standard (SheafOfModules.{t + 1}
     ((sheafCompose ((ProEt.topology X).over U)
@@ -107,7 +170,7 @@ def completedAdicSliceDerivedChange (X : Scheme.{t}) (U : X.ProEt)
     {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :=
   (completedAdicSliceChangeData X U f).choose_spec.choose_spec.choose_spec.choose_spec.2.2.choose
 
-attribute [local irreducible] completedAdicChangeData completedAdicSliceChangeData
+attribute [local irreducible] completedAdicChangeData
 
 universe u₀ v₀ r₀ m₀
 

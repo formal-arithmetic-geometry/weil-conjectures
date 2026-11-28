@@ -45,16 +45,51 @@ set_option backward.isDefEq.respectTransparency.types true
 attribute [local irreducible] Ext.homEquiv Ext.comp Ext.mk₀ Ext.mapExactFunctor
 attribute [local semireducible] CyclicCartierFrame.reduce
 
--- Irreducible def with inferred type; reducibility attributes cannot be set on a theorem.
-set_option linter.defProp false in
 /-- Apply the supported-source calculation to the proved criterion from the preceding step.
 The other independent proof arguments remain available in its inferred type. -/
-@[irreducible] def UniformizerSquareData.sourceSquare
+theorem UniformizerSquareData.sourceSquare
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)
     (A : Type (u + 1)) [CommRing A]
     (hA : ((l ^ (n + 1) : ℕ) : A) = 0)
-    (q : UniformizerSquareData l Y E π n A hA) :=
+    (q : UniformizerSquareData l Y E π n A hA) :
+    (∀ i : q.quotientRight ≅ q.restriction ⋙ q.cyclicRight,
+        q.RestrictionNormalized i →
+          (q.comparison i).app
+                ((shiftFunctor (DerivedCategory
+                    (Modules (Profinite.continuousMapRingObj ℤ_[l]) (diagonalSurface Y))) 2).obj
+                  ((DerivedCategory.singleFunctor
+                      (Modules (Profinite.continuousMapRingObj ℤ_[l]) (diagonalSurface Y)) 0).obj
+                    (zlLine l (diagonalSurface Y)))) ≫
+              q.restriction.mapDerivedCategory.map q.quotientTarget ≫
+                (q.restriction.mapDerivedCategory.commShiftIso (2 : ℤ)).hom.app
+                    ((DerivedCategory.singleFunctor
+                        (Sheaf (Scheme.ProEt.topology (diagonalSurface Y)) (ModuleCat A)) 0).obj
+                      (geoCartierLine A (l ^ (n + 1)) hA (diagonalSurface Y))) ≫
+                  (shiftFunctor (DerivedCategory (Sheaf (Scheme.ProEt.topology (diagonalSurface Y))
+                      (ModuleCat (diagonalResidue l n)))) 2).map
+                    ((q.restriction.mapDerivedCategorySingleFunctor 0).hom.app
+                      (geoCartierLine A (l ^ (n + 1)) hA (diagonalSurface Y))) =
+            q.cyclicTarget ≫
+              (shiftFunctor (DerivedCategory (Sheaf (Scheme.ProEt.topology (diagonalSurface Y))
+                  (ModuleCat (diagonalResidue l n)))) 2).map
+                ((DerivedCategory.singleFunctor (Sheaf (Scheme.ProEt.topology (diagonalSurface Y))
+                    (ModuleCat (diagonalResidue l n))) 0).map q.lineMap)) →
+      q.cyclicSource.hom ≫
+            Ext.hom (CyclicCartierFrame.reduce l Y n q.cyclic q.route.initial.delta) =
+          q.cyclicFunctor.map q.route.initial.delta ≫ q.cyclicTarget →
+        q.quotientSource.hom ≫
+              Ext.hom
+                (finiteRealizedClass (l ^ (n + 1)) hA Y q.eW q.lineW.endpoint.iso
+                  q.sourceComparison.iso q.route.final.delta) =
+            q.quotientFunctor.map q.route.initial.delta ≫ q.quotientTarget →
+          (Ext.mk₀ q.sourceMap).comp
+              (Ext.mapExactFunctor q.restriction
+                (finiteRealizedClass (l ^ (n + 1)) hA Y q.eW q.lineW.endpoint.iso
+                  q.sourceComparison.iso q.route.final.delta))
+              (zero_add 2) =
+            Ext.comp (CyclicCartierFrame.reduce l Y n q.cyclic q.route.initial.delta)
+              (Ext.mk₀ q.lineMap) (add_zero 2) :=
   UniformizerSquareData.endpointSquare l Y E π n A hA q
     (diagonalCyclic_uniformizerSource l Y E π n A hA q)
 

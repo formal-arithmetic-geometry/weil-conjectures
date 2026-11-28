@@ -50,15 +50,18 @@ local elab "routeField% " i:num d:term:max : term => do
   let e ← Lean.Elab.Term.elabTerm d none
   return Lean.mkProj ``FiniteRouteData i.getNat e
 
--- A `theorem` would need the inferred statement spelled out in the signature.
-set_option linter.defProp false in
 /-- Both scalar delta squares identify the successive realized class. -/
-@[irreducible] def UniformizerSquareData.quotient_realization
+theorem UniformizerSquareData.quotient_realization
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)
     (A : Type (u + 1)) [CommRing A]
     (hA : ((l ^ (n + 1) : ℕ) : A) = 0)
-    (q : UniformizerSquareData l Y E π n A hA) :=
+    (q : UniformizerSquareData l Y E π n A hA) :
+    (q.quotientEndpoints l Y E π n A hA).supported.hom ≫
+        finiteRealizedArrowMap (l ^ (n + 1)) hA Y q.eW q.lineW.endpoint.iso
+          q.sourceComparison.iso q.route.final.delta =
+      (q.quotientEndpoints l Y E π n A hA).functor.map q.route.initial.delta ≫
+        (q.quotientEndpoints l Y E π n A hA).lineMap :=
   (routeField% 3 (q.quotientEndpoints l Y E π n A hA))
     q.route.initial.delta q.route.final.delta
     (UniformizerSquareData.successive_square l Y E π n A hA q)

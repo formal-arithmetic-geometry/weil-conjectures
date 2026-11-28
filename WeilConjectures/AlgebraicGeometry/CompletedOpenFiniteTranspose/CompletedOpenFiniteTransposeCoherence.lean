@@ -420,9 +420,7 @@ private theorem towerCube
   funext n
   exact hc (N.obj n)
 
--- A `theorem` needs an explicit type; this proposition is inferred from the `towerCube` term.
-set_option linter.defProp false in
-private def restrictionTowerCube_nat
+private theorem restrictionTowerCube_nat
     (r s : StrictTowerRingedSquare sq)
     (aY : r.RY ⟶ s.RY) (aX : r.RX ⟶ s.RX)
     (aY' : r.RY' ⟶ s.RY') (aX' : r.RX' ⟶ s.RX')
@@ -433,7 +431,30 @@ private def restrictionTowerCube_nat
     (hg' : r.cg'.hom ≫ aX' =
       (proEtaleSheafInverseImage g' CommRingCat.{t + 1}).map aX ≫ s.cg'.hom)
     (hf' : r.cf'.hom ≫ aX' =
-      (proEtaleSheafInverseImage f' CommRingCat.{t + 1}).map aY' ≫ s.cf'.hom) :=
+      (proEtaleSheafInverseImage f' CommRingCat.{t + 1}).map aY' ≫ s.cf'.hom) :
+    Functor.whiskerLeft
+        ((Functor.whiskeringRight ℕᵒᵖ _ _).obj (proEtaleRingRestrictScalars aY))
+        (termwiseSquareHom r.exchangeModuleSquare.hom) ≫
+      Functor.whiskerRight
+        (termwiseSquareHom (proEtaleRingRestrictionPullbackInv f r.RY s.RY r.RX s.RX
+          aY aX r.cf s.cf hf))
+        ((Functor.whiskeringRight ℕᵒᵖ _ _).obj
+          (proEtaleRingModulePullback g' r.RX r.RX' r.cg')) ≫
+      Functor.whiskerLeft
+        ((Functor.whiskeringRight ℕᵒᵖ _ _).obj (proEtaleRingModulePullback f s.RY s.RX s.cf))
+        (termwiseSquareHom (proEtaleRingRestrictionPullbackInv g' r.RX s.RX r.RX' s.RX'
+          aX aX' r.cg' s.cg' hg')) =
+    Functor.whiskerRight
+        (termwiseSquareHom (proEtaleRingRestrictionPullbackInv g r.RY s.RY r.RY' s.RY'
+          aY aY' r.cg s.cg hg))
+        ((Functor.whiskeringRight ℕᵒᵖ _ _).obj
+          (proEtaleRingModulePullback f' r.RY' r.RX' r.cf')) ≫
+      Functor.whiskerLeft
+        ((Functor.whiskeringRight ℕᵒᵖ _ _).obj (proEtaleRingModulePullback g s.RY s.RY' s.cg))
+        (termwiseSquareHom (proEtaleRingRestrictionPullbackInv f' r.RY' s.RY' r.RX' s.RX'
+          aY' aX' r.cf' s.cf' hf')) ≫
+      Functor.whiskerRight (termwiseSquareHom s.exchangeModuleSquare.hom)
+        ((Functor.whiskeringRight ℕᵒᵖ _ _).obj (proEtaleRingRestrictScalars aX')) :=
   towerCube
     (C₀ := proEtaleRingModules Y r.RY)
     (C₁ := proEtaleRingModules Y' r.RY')
