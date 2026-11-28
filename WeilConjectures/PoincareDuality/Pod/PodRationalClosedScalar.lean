@@ -345,8 +345,9 @@ private theorem unit_scalar_of_representatives {C D : Type*} [Category* C] [Cate
   rw [← h1, reassoc_of% h2, reassoc_of% h3, h4, ← reassoc_of% h5, reassoc_of% h6, hgL]
 
 -- The statement on good complexes.
-omit [∀ w : W, Invertible (l : W.residueField w)] in
 set_option maxHeartbeats 800000 in
+-- Unifying the normalizations, stated with other instance paths, with the diagram chase.
+omit [∀ w : W, Invertible (l : W.residueField w)] in
 private theorem podCompletedTensorUnit_scalar_onGood
     (P Q : (integralOperationsGoodComplex l E W).FullSubcategory) :
     (integralOrdinaryDerivedScalar l E L ι W).map

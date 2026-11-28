@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.OpenProjectionRoos.OpenProjectionRoosCompletionData
 public import WeilConjectures.CategoryTheory.ExactDerivedAdjunction
 import WeilConjectures.SixFunctors.Scalar.ScalarRoosComparison
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.MappingCocone
 
 /-! # Roos comparisons through the unit of an exact adjunction
 
@@ -64,21 +65,6 @@ section Chain
 variable {A : Type a} {B : Type b} [Category.{c} A] [Category.{d} B]
   [Abelian A] [Abelian B] [HasCountableProducts A] [HasCountableProducts B]
 
-omit [HasCountableProducts A] [HasCountableProducts B] in
-/-- Both coordinates determine a morphism into a mapping cocone. -/
-theorem mappingCocone_hom_ext {K L M : CochainComplex A ℤ} (φ : K ⟶ L)
-    {f g : M ⟶ CochainComplex.mappingCocone φ}
-    (hfst : f ≫ CochainComplex.mappingCocone.fst φ =
-      g ≫ CochainComplex.mappingCocone.fst φ)
-    (hsnd : ∀ i : ℤ, f.f i ≫
-      (CochainComplex.mappingCocone.snd φ).v i (i - 1) (by omega) =
-      g.f i ≫ (CochainComplex.mappingCocone.snd φ).v i (i - 1) (by omega)) : f = g := by
-  apply HomologicalComplex.hom_ext
-  intro i
-  have he := CochainComplex.mappingCocone.id_X φ i (i - 1) (by omega)
-  rw [← Category.comp_id (f.f i), ← Category.comp_id (g.f i), ← he]
-  simp only [Preadditive.comp_add, ← Category.assoc, ← HomologicalComplex.comp_f, hfst, hsnd]
-
 /-- A morphism into a degree of a countable product of complexes is determined by its
 projections. -/
 theorem product_degree_ext (K : ℕ → CochainComplex A ℤ) (p : ℤ) {D : A}
@@ -107,7 +93,7 @@ theorem roosComparison_unit {J : A ⥤ B} {G : B ⥤ A} [J.Additive] [G.Additive
         (G.mapHomologicalComplex (.up ℤ)).map (rJ.iso.hom.app T) ≫
         rG.iso.hom.app ((onTowers J).obj T) =
       integralOperationsRoosMap (towerUnitIso μ T).hom := by
-  apply mappingCocone_hom_ext
+  apply CochainComplex.mappingCocone.hom_ext
   · refine Pi.hom_ext _ _ (fun n ↦ ?_)
     simp only [Category.assoc]
     erw [reassoc_of% integralOperationsRoosMap_fst, Limits.Pi.map_π,

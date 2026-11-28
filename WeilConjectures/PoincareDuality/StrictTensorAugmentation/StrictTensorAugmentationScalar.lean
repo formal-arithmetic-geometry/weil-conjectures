@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.PoincareDuality.StrictTensorAugmentation.StrictTensorAugmentation
 public import WeilConjectures.SmoothPurity.Integral.IntegralOperationsScalarComparisons
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.MappingCocone
 import all WeilConjectures.SixFunctors.Scalar.ScalarRoosComparison
 import all WeilConjectures.SmoothPurity.Scalar.ScalarExtensionComposition
 
@@ -74,7 +75,7 @@ private theorem scalarRoos_ext {A B : Type*} [Category* A] [Category* B] [Abelia
   subst hs
   obtain ⟨hσf, hσs⟩ := scalarRoosCoordinates F C
   obtain ⟨hτf, hτs⟩ := scalarRoosTowerCoordinates t
-  apply mappingCocone_hom_ext
+  apply CochainComplex.mappingCocone.hom_ext
   · apply Pi.hom_ext
     intro n
     apply HomologicalComplex.hom_ext

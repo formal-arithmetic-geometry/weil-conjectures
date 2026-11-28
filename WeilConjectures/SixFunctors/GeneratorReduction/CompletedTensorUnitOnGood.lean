@@ -121,8 +121,8 @@ theorem podCompletedTensorUnit_onGood (X : Scheme.{u})
       S.adjunction.unit.app _ ≫ (coefficientSequenceLimit l E X).map δ ≫ e.hom := by
     rw [← hmodel]
     unfold podCompletedTensorUnit
-    with_unfolding_all exact
-      cancel_iso_aux _ _ ((pullbackTensorIntegralTensorModel l E X).app _) e.hom
+    with_unfolding_all
+      exact cancel_iso_aux _ _ ((pullbackTensorIntegralTensorModel l E X).app _) e.hom
   refine Eq.trans (congrArg (fun z ↦ β ≫ z) hunit) ?_
   have h₁ := GeneratorReduction.unit_reference_transport S.reduction
     (coefficientSequenceLimit l E X) S.adjunction β (𝟙 _) δ χ τ
