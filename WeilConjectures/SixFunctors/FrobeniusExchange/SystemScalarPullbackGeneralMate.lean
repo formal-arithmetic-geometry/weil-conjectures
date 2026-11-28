@@ -125,7 +125,7 @@ theorem exists_isDerivedSquareOf (σ : F₁ ⋙ F₂ ⟶ F₃ ⋙ F₄) :
 /-- The derived square isomorphism is the localization of its ordinary square. -/
 theorem isDerivedSquareOf_mapDerivedCategorySquareIso (σ : F₁ ⋙ F₂ ≅ F₃ ⋙ F₄) :
     IsDerivedSquareOf σ.hom (mapDerivedCategorySquareIso σ).hom :=
-  AlgebraicGeometry.Scheme.mapDerivedCategorySquareIso_hom_app_factors F₁ F₂ F₃ F₄ σ
+  CategoryTheory.Functor.mapDerivedCategorySquareIso_hom_app_factors F₁ F₂ F₃ F₄ σ
 
 end Square
 

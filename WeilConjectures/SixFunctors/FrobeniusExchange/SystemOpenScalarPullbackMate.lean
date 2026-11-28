@@ -369,7 +369,7 @@ private theorem systemScalarPullback_eq_mate {X B : Scheme.{u}} (j : X ⟶ B)
       ((sequenceRestriction l E L ι X).mapDerivedCategoryFactors.app
         (((integralComparisonSequencePullback l L j).mapHomologicalComplex (.up ℤ)).obj K))
       (DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex q (.up ℤ)).app K))
-      (AlgebraicGeometry.Scheme.mapDerivedCategorySquareIso_hom_app_factors
+      (CategoryTheory.Functor.mapDerivedCategorySquareIso_hom_app_factors
         (integralComparisonSequencePullback l L j) (sequenceRestriction l E L ι X)
         (sequenceRestriction l E L ι B) (integralComparisonSequencePullback l E j) q K)
   · intro K
