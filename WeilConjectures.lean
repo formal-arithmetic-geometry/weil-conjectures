@@ -4248,6 +4248,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedDirectImageTruncatedCopro
 public import WeilConjectures.AlgebraicGeometry.DerivedDirectImageUniformAffineTruncation
 public import WeilConjectures.AlgebraicGeometry.DerivedDirectImageUniformTruncationBound
 public import WeilConjectures.AlgebraicGeometry.DerivedEtaleCohomologyLimit
+public import WeilConjectures.AlgebraicGeometry.DerivedEtaleCohomologyLimitElementwise
 public import WeilConjectures.AlgebraicGeometry.DerivedEtaleCohomologyPullbackLaws
 public import WeilConjectures.AlgebraicGeometry.DerivedExactStructures
 public import WeilConjectures.AlgebraicGeometry.DerivedExchangeBoundedComparison
@@ -14849,6 +14850,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AdicTowerSequence
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AdjunctionShift
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.BaseChange
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.BaseChangeMate
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.BaseChangeMateIsIso
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CommIsoComp
@@ -21151,6 +21153,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestriction
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestrictionBasic
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestrictionCoproduct
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestrictionForget
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestrictionStrictlyLocal
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalVerdierDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalVerdierDualityCompact
@@ -21159,6 +21162,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.HigherDirectImageAffine
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom
 public import WeilConjectures.SixFunctors.Etale.Derived.HomShift
 public import WeilConjectures.SixFunctors.Etale.Derived.HomTriangulated
+public import WeilConjectures.SixFunctors.Etale.Derived.HypercohomologyForget
 public import WeilConjectures.SixFunctors.Etale.Derived.Identity
 public import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.IntegralConstructible

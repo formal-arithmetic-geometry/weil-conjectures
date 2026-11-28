@@ -13,7 +13,11 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.InjectiveAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.SectionsFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunctionAcyclic
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSectionsRestrictionBasic
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+import WeilConjectures.AlgebraicGeometry.DerivedEtaleCohomologyLimitElementwise
+import WeilConjectures.SixFunctors.Etale.Derived.HypercohomologyForget
 
 /-!
 # Hypercohomology of pro-étale affines
@@ -84,6 +88,21 @@ noncomputable def hypercohomologyRestrictOver {S Y Z : Scheme.{u}} (pY : Y ⟶ S
     ((Functor.mapDerivedCategoryNatIso (upperStarComp A f pZ pY hf.symm) ≪≫
       (Functor.mapDerivedCategoryCompIso (upperStar A pZ) (upperStar A f)).symm).inv.app K)
 
+/-- The restriction map `Hᵠ(Z_ét, K|_Z) ⟶ Hᵠ(Y_ét, K|_Y)` is induced by the restriction map
+`RΓ(Z, K|_Z) ⟶ RΓ(Y, f^* (K|_Z))` of derived global sections followed by the identification
+`f^* (K|_Z) ≅ K|_Y`. -/
+lemma hypercohomologyRestrictOver_eq {S Y Z : Scheme.{u}} (pY : Y ⟶ S) (pZ : Z ⟶ S)
+    (f : Y ⟶ Z) (hf : f ≫ pZ = pY) (K : DerivedCategory (Sheaf S.smallEtaleTopology A))
+    (q : ℤ) :
+    hypercohomologyRestrictOver A pY pZ f hf K q =
+      (DerivedCategory.homologyFunctor A q).map
+        (globalSectionsRestriction f ((upperStar A pZ).mapDerivedCategory.obj K) ≫
+          (rightDerivedGlobalSections A Y).map
+            ((Functor.mapDerivedCategoryTriangleIso (upperStarComp A f pZ pY hf.symm)).inv.app
+              K)) := by
+  simp only [hypercohomologyRestrictOver, hypercohomologyPullback, cohomology, Functor.comp_map,
+    globalSectionsRestriction, Functor.map_comp, Category.assoc]
+
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
 /-- **Continuity of étale hypercohomology** [Stacks, Tag 0GIT]. Let `(Uᵢ)` be a cofiltered
@@ -118,7 +137,48 @@ theorem hypercohomologyRestrictOver_isColimit_of_isLimit {S : Scheme.{u}}
         ∃ (j : I) (g : j ⟶ i),
           (hypercohomologyRestrictOver _ (D.obj j).hom (D.obj i).hom (D.map g).left
             (Over.w _) K.obj q).hom y = 0) := by
-  sorry
+  let K' : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
+    ⟨(moduleAbelianForget Λ S).mapDerivedCategory.obj K.obj, by
+      obtain ⟨a, ha⟩ := K.property
+      have : K.obj.IsGE a := ha
+      exact ⟨a, (moduleAbelianForget Λ S).isGE_mapDerivedCategory_obj K.obj a⟩⟩
+  obtain ⟨h₁, h₂, h₃⟩ := presentationDerivedMap_isColimit_of_isLimit K' D c hc q
+  -- the restriction maps correspond to those of the underlying complexes of abelian sheaves
+  have hsq {Y Z : Scheme.{u}} (pY : Y ⟶ S) (pZ : Z ⟶ S) (f : Y ⟶ Z) (hf : f ≫ pZ = pY)
+      (y : (cohomology (ModuleCat.{u + 1} Λ) Z q).obj
+        ((upperStar _ pZ).mapDerivedCategory.obj K.obj)) :
+      (cohomologyUpperStarForgetIso Λ pY K q).hom.hom
+          ((hypercohomologyRestrictOver _ pY pZ f hf K.obj q).hom y) =
+        (presentationDerivedMap f pZ pY hf.symm K'.obj q).hom
+          ((cohomologyUpperStarForgetIso Λ pZ K q).hom.hom y) := by
+    have hAb : presentationDerivedMap f pZ pY hf.symm K'.obj q =
+        (DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} q).map
+          (globalSectionsRestriction f ((upperStar _ pZ).mapDerivedCategory.obj K'.obj) ≫
+            (rightDerivedGlobalSections AddCommGrpCat.{u + 1} Y).map
+              ((Functor.mapDerivedCategoryTriangleIso
+                (upperStarComp AddCommGrpCat.{u + 1} f pZ pY hf.symm)).inv.app K'.obj)) := by
+      simp only [presentationDerivedMap, cohomology, Functor.comp_map, globalSectionsRestriction,
+        Functor.map_comp, Category.assoc]
+    rw [hypercohomologyRestrictOver_eq, hAb]
+    exact congrArg (fun φ ↦ φ.hom y)
+      (forget_map_restrictOver_comp_cohomologyUpperStarForgetIso_hom Λ pY pZ f hf K q)
+  have hinj {Y : Scheme.{u}} (pY : Y ⟶ S) {a b : (cohomology (ModuleCat.{u + 1} Λ) Y q).obj
+      ((upperStar _ pY).mapDerivedCategory.obj K.obj)}
+      (h : (cohomologyUpperStarForgetIso Λ pY K q).hom.hom a =
+        (cohomologyUpperStarForgetIso Λ pY K q).hom.hom b) : a = b := by
+    simpa using congrArg (cohomologyUpperStarForgetIso Λ pY K q).inv.hom h
+  refine ⟨fun {i j} g y ↦ hinj _ ?_, fun x ↦ ?_, fun i y hy ↦ ?_⟩
+  · rw [hsq, hsq, hsq, ← h₁ g]
+    rfl
+  · obtain ⟨i, y, hy⟩ := h₂ ((cohomologyUpperStarForgetIso Λ c.pt.hom K q).hom.hom x)
+    refine ⟨i, (cohomologyUpperStarForgetIso Λ (D.obj i).hom K q).inv.hom y, hinj _ ?_⟩
+    rw [hsq]
+    simpa using hy
+  · obtain ⟨j, g, hg⟩ := h₃ i ((cohomologyUpperStarForgetIso Λ (D.obj i).hom K q).hom.hom y)
+      ((hsq c.pt.hom (D.obj i).hom (c.π.app i).left (Over.w _) y).symm.trans
+        (by rw [hy, map_zero]))
+    refine ⟨j, g, hinj _ ?_⟩
+    rw [hsq, hg, map_zero]
 
 end Etale
 
