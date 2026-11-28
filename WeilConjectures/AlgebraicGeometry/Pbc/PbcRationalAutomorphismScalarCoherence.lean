@@ -421,6 +421,7 @@ private theorem right_comparison_section (h : E ≤ F)
     ((pbcIsoScalarRightComparison l Ω e h).hom.app M).val.app U x = x := by
   exact eq_of_heq ((pbcIsoScalarRightComparison_exists l Ω e h).exists.choose_spec M U x)
 
+omit [IsAlgClosure ℚ_[l] Ω] [IsNoetherian T] in
 private theorem ordinary_coherence (h : E ≤ F) (k : F ≤ G)
     (M : pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))) :
     (pbcIsoModulePullback e.asIso.hom (pbcStageDatum.{u} l Ω G)).map
@@ -560,6 +561,7 @@ private theorem extensionAssociator_normalization {X : Scheme.{u}}
           (pbcRestrict ψ) (pbcRestrict φ) (pbcRestrict χ) r K) P
   exact hh
 
+omit [IsAlgClosure ℚ_[l] Ω] [IsNoetherian T] in
 private theorem ambientAssociator_normalization (h : E ≤ F) (k : F ≤ G)
     (P : CochainComplex
       (pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))) ℤ) :

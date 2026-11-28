@@ -207,6 +207,7 @@ theorem pbcScalarExtension_eq_rational (h : E ≤ F) (hEF : E ≠ F) :
     (pbcRationalScalarExtension_exists l Ω T hdim hl h).exists.choose_spec
     (pbcStageLocalization_comp_rationalScalarExtension l Ω T hdim hl h)
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 /-- For distinct stages the scalar/integral comparison is the identity-component
 isomorphism given by the defining functor equality. -/
 theorem pbcScalarIntegralComparison_ne (h : E ≤ F) (hEF : E ≠ F) :

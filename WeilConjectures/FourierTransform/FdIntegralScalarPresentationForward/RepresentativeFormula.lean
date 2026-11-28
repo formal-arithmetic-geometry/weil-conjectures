@@ -81,6 +81,7 @@ private theorem ordinary_unit_chain (E : Padic.FiniteCoefficientFields l Ω)
       (pbcOrdinaryScalarUnit l Ω T E) (oc_inv_tensor l Ω T (le_refl E) o)
       (Ounit_tensor l Ω T E) (Xunit_tensor l Ω T E)) P
 
+omit [IsAlgClosure ℚ_[l] Ω] [IsNoetherian T] in
 /-- The ambient derived unit on representatives. -/
 private theorem ambient_unit_rep (E : Padic.FiniteCoefficientFields l Ω)
     (P : CochainComplex (pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))) ℤ) :

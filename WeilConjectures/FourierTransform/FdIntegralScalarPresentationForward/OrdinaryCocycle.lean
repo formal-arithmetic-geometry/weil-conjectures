@@ -305,6 +305,7 @@ def Xcomp {E L M : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) (k : L ≤ 
     𝒳 h ⋙ 𝒳 k ≅ 𝒳 (h.trans k) :=
   pbcExtendComp _ _ _ (pbcCompletedScalarMap_comp l Ω T h k)
 
+omit [IsAlgClosure ℚ_[l] Ω] [IsNoetherian T] in
 theorem Xcomp_tensor {E L M : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) (k : L ≤ M)
     (N : pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))) (U : T.ProEtᵒᵖ)
     (x : N.val.obj U) :
@@ -378,6 +379,7 @@ theorem comparison_unit (E : Padic.FiniteCoefficientFields l Ω)
   exact (congrArg (fun y ↦ (((𝓉 E).map (Ou.hom.app N)).val.app U) y) (hc N U x)).trans
     ((hOu N U x).trans (hXu _ U x).symm)
 
+omit [IsAlgClosure ℚ_[l] Ω] [IsNoetherian T] in
 theorem Xunit_tensor (E : Padic.FiniteCoefficientFields l Ω)
     (N : pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))) (U : T.ProEtᵒᵖ)
     (x : N.val.obj U) :

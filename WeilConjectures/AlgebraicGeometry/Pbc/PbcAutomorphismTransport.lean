@@ -921,6 +921,7 @@ theorem pbcIsoRationalization (E : Padic.FiniteCoefficientFields l Ω) :
   simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
   exact LinearMap.baseChange_tmul _ _ _
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 /-- The rational comparison is fixed on every original integral object. -/
 theorem pbcIsoRationalScalarComparison_exists (h : E ≤ F) :
     ∃! c : pbcScalarExtension l Ω T hdim hl h ⋙

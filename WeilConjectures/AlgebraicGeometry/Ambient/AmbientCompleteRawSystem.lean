@@ -199,12 +199,14 @@ private def pbcAmbientCompleteRawExtension (h : E ≤ F) :
     (pbcStageUniformizer_isUnit l Ω h) (pbcAmbientCompleteIntegralTransition l Ω W h)
     (pbcAmbientCompleteIntegralTransition_semilinear l Ω W h)
 
+omit [IsNoetherian W] hDim hInv in
 private theorem pbcAmbientCompleteRawExtension_spec (h : E ≤ F) :
     pbcAmbientCompleteLocalization l Ω W E ⋙ pbcAmbientCompleteRawExtension l Ω W h =
       pbcAmbientCompleteIntegralTransition l Ω W h ⋙
         pbcAmbientCompleteLocalization l Ω W F :=
   (ScalarLocalization.extension_spec _ _ _ _ _ _).2.1
 
+omit [IsNoetherian W] hDim hInv in
 private theorem pbcAmbientCompleteRawExtension_additive (h : E ≤ F) :
     (pbcAmbientCompleteRawExtension l Ω W h).Additive :=
   ScalarLocalization.extensionAdditive _ _ _ _ _ _
@@ -235,7 +237,7 @@ private theorem pbcAmbientCompleteRawTransition_of_ne (h : E ≤ F) (hEF : E ≠
       (pbcAmbientCompleteRaw_exists l Ω W h).exists.choose := by
   simp [pbcAmbientCompleteRawTransition, hEF]
 
-omit hDim hInv in
+omit [IsAlgClosure ℚ_[l] Ω] [IsNoetherian W] hDim hInv in
 /-- The complete integral tensor unit is the restriction of the canonical derived unit. -/
 theorem pbcAmbientCompleteIntegralUnit_exists (E : Padic.FiniteCoefficientFields l Ω) :
     ∃! e : pbcAmbientCompleteIntegralTransition l Ω W (le_refl E) ≅ 𝟭 _,
@@ -295,7 +297,7 @@ theorem pbcAmbientCompleteIntegralComparison_exists (h : E ≤ F) :
 @[irreducible] def pbcAmbientCompleteIntegralComparison (h : E ≤ F) :=
   (pbcAmbientCompleteIntegralComparison_exists l Ω W h).exists.choose
 
-omit hDim hInv in
+omit [IsAlgClosure ℚ_[l] Ω] [IsNoetherian W] hDim hInv in
 /-- Restriction of the specified balanced ambient associator to complete objects. -/
 theorem pbcAmbientCompleteIntegralAssociator_exists (h : E ≤ F) (k : F ≤ G) :
     ∃! a : pbcAmbientCompleteIntegralTransition l Ω W h ⋙
@@ -376,6 +378,7 @@ theorem pbcAmbientCompleteRawAssociator_exists (h : E ≤ F) (k : F ≤ G) :
 @[irreducible] def pbcAmbientCompleteRawAssociator (h : E ≤ F) (k : F ≤ G) :=
   (pbcAmbientCompleteRawAssociator_exists l Ω W h k).exists.choose
 
+omit hDim hInv in
 private theorem pbcAmbientCompleteIntegralAssociator_hom (h : E ≤ F) (k : F ≤ G)
     (K : WeilConjectures.PbcComplete l (pbcFiniteField.{u} l Ω E) W) :
     ((pbcAmbientCompleteIntegralAssociator l Ω W h k).hom.app K).hom =
@@ -384,6 +387,7 @@ private theorem pbcAmbientCompleteIntegralAssociator_hom (h : E ≤ F) (k : F �
   exact congrArg (fun η ↦ η.app K)
     (eq_of_heq (pbcAmbientCompleteIntegralAssociator_exists l Ω W h k).exists.choose_spec)
 
+omit hDim hInv in
 private theorem pbcAmbientCompleteIntegralUnit_hom (E : Padic.FiniteCoefficientFields l Ω)
     (K : WeilConjectures.PbcComplete l (pbcFiniteField.{u} l Ω E) W) :
     ((pbcAmbientCompleteIntegralUnit l Ω W E).hom.app K).hom =

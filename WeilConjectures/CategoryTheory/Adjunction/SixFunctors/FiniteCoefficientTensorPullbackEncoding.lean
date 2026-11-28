@@ -331,6 +331,7 @@ private instance internalTensorFour (T : Scheme.{u})
 
 set_option cleanup.letToHave false in
 set_option backward.isDefEq.respectTransparency true in
+omit [DiscreteTopology A] in
 /-- The normalized encoding identifies derived tensors compatibly with geometric pullback.
 This uses no properness, boundedness or constructibility. For an empty scheme or the zero
 coefficient ring the statement holds as well. Stacks Project, Tags 03D3, 08BJ and 08FZ. -/

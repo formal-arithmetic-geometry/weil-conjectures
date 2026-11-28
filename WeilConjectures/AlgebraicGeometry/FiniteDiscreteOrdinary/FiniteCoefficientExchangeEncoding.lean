@@ -119,6 +119,7 @@ private theorem encoding_congr
   subst g
   simp
 
+omit [Finite A] [DiscreteTopology A] in
 /-- Normalized coefficient encoding identifies the actual exchange arrows. -/
 theorem finiteCoefficientExchangeEncoding
     (e : Mon.mk R ≅ Mon.mk (coefficient A))

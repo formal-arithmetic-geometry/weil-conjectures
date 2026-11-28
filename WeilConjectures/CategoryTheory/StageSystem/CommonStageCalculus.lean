@@ -650,6 +650,7 @@ instance pbcScalarCommShift (h : E ≤ F) :
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
+omit [IsAlgClosure ℚ_[l] Ω] [IsNoetherian T] in
 private theorem cscAmbientAssociatorShift (h : E ≤ F) (k : F ≤ G) :
     NatTrans.CommShift (pbcAmbientScalarAssociator l Ω T h k).hom ℤ := by
   have : (pbcDerivedScalarAdjunction (pbcCompletedScalarMap l Ω T h)).CommShift ℤ :=

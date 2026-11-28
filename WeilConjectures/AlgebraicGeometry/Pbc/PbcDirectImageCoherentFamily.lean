@@ -322,6 +322,7 @@ private theorem reductionNormalization_heq {V : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+omit [IsAlgClosure ℚ_[l] Ω] in
 private theorem ambientAssociator_raw (T : Scheme.{u}) [IsNoetherian T]
     {E F G : Padic.FiniteCoefficientFields l Ω} (h : E ≤ F) (k : F ≤ G)
     (K : pbcAmbientStage l Ω T E) :

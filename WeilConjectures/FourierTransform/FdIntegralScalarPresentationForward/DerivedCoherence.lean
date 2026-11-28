@@ -142,6 +142,7 @@ end Abstract
 
 variable [IsNoetherian T]
 
+omit [IsAlgClosure ℚ_[l] Ω] [IsNoetherian T] in
 theorem pbcAmbientScalarAssociator_eq_derivedComp {E L M : Padic.FiniteCoefficientFields l Ω}
     (h : E ≤ L) (k : L ≤ M) :
     pbcAmbientScalarAssociator l Ω T h k =

@@ -56,6 +56,7 @@ private theorem resolving_iso (T : Scheme.{u})
           ((HomologicalComplex.eval _ _ n).mapIso e) ≪≫
         (SheafOfModules.siteSheafTensorRightIso (ring Λ T) (Q.X n)).symm) (hP.2 n)
 
+omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)] in
 private theorem resolving_pullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (modules Λ Y) ℤ)
     (hP : KFlatSectionComparison.sectionResolving Λ Y P) :

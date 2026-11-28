@@ -1395,6 +1395,7 @@ def pbcScalarAssociator (h : E ≤ F) (k : F ≤ G) :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+omit [IsAlgClosure ℚ_[l] Ω] in
 private theorem pbcScalarAssociator_normalization (h : E ≤ F) (k : F ≤ G)
     (K : pbcIntegralStage l Ω T E) :
     (pbcScalarAssociator l Ω T hdim hl h k).hom.app
@@ -1478,6 +1479,7 @@ private theorem pbcScalarIntegralComparison_refl
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+omit [IsAlgClosure ℚ_[l] Ω] in
 private theorem pbcScalarAssociator_leftUnit (h : E ≤ F)
     (hs : pbcScalarExtension l Ω T hdim hl (le_refl E) = 𝟭 _) :
     pbcScalarAssociator l Ω T hdim hl (le_refl E) h =
@@ -1512,6 +1514,7 @@ private theorem pbcScalarAssociator_leftUnit (h : E ≤ F)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+omit [IsAlgClosure ℚ_[l] Ω] in
 private theorem pbcScalarAssociator_rightUnit (h : E ≤ F)
     (hs : pbcScalarExtension l Ω T hdim hl (le_refl F) = 𝟭 _) :
     pbcScalarAssociator l Ω T hdim hl h (le_refl F) =
