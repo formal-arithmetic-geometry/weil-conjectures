@@ -124,8 +124,6 @@ noncomputable def finiteCoefficientIntrinsicRealization :
   sheafToPresheaf _ _ ⋙ finiteCoefficientModulePresheaf T.ProEt (ULift.{u + 1, u} B) ⋙
     PresheafOfModules.sheafification (finiteCoefficientIntrinsicScalarMap T B)
 
--- Keep the section instances as hypotheses of this public statement.
-set_option linter.unusedSectionVars false in
 /-- This is an additive exact equivalence of the two presentations of module sheaves. -/
 theorem finiteCoefficientIntrinsicRealization_exact :
     (finiteCoefficientIntrinsicRealization T B).IsEquivalence ∧

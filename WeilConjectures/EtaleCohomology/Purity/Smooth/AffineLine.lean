@@ -292,8 +292,6 @@ theorem isZero_homology_multiplicativeGroup [IsAlgClosed k] [QuasiCompact aY]
     (isZero_homology_rightDerivedLowerStar_tateTwist_affineLine Λ aY (m + 1) (by omega))
   exact (isZero_homology_constantComplex Λ Y (m - 1) (by omega)).of_iso e
 
--- Keep the section instances as hypotheses of this public statement.
-set_option linter.unusedSectionVars false in
 /-- **Uniqueness for lisse sheaf maps on `𝔸¹_Y`.** Two morphisms between finite locally constant
 sheaves on `𝔸¹_Y` that agree after restriction to the open complement `G = 𝔾_{m,Y}` of the
 zero section agree everywhere. -/
@@ -306,8 +304,6 @@ theorem injective_upperStar_map_of_isFiniteLocallyConstantSheaf
     rw [hj]
     exact AffineSpace.dense_compl_range_zeroSection _ _)
 
--- Keep the section instances as hypotheses of this public statement.
-set_option linter.unusedSectionVars false in
 /-- **Uniqueness for lisse sheaf maps on `𝔾_{m,Y}`.** Two morphisms between finite locally
 constant sheaves on `𝔾_{m,Y}` that agree after restriction along the unit section
 `i₁ : Y ⟶ 𝔾_{m,Y}` agree everywhere. -/
@@ -336,8 +332,6 @@ theorem injective_upperStar_oneSection_map_of_isFiniteLocallyConstantSheaf
   have := congrArg (fun f : Y ⟶ Y ↦ f.base y) hp
   simpa using this
 
--- Keep the section instances as hypotheses of this public statement.
-set_option linter.unusedSectionVars false in
 /-- **Weak `𝔸¹`-invariance.** A comparison between an invertible complex `F` on `𝔸¹_Y` and a
 pullback from `Y` is determined by its restriction to the unit section `t = 1`: two
 isomorphisms `α, β : F ≅ Lp^* C` with `Li₁^* α = Li₁^* β` are equal. -/
@@ -372,8 +366,6 @@ theorem eq_of_leftDerivedUpperStar_oneSection_eq
   exact Iso.ext (by rw [← Category.comp_id α.hom, ← β.inv_hom_id, ← Category.assoc, this,
     Category.id_comp])
 
--- Keep the section instances as hypotheses of this public statement.
-set_option linter.unusedSectionVars false in
 include aY in
 /-- **Gluing along the affine line.** Let `F ∈ D(𝔸¹_Y)`, `C ∈ D(Y)` and `θ : Li₁^* F ≅ C`. Let
 `v : Y' ⟶ Y` be surjective and étale with `Y'` separated of finite type over `k`, and write

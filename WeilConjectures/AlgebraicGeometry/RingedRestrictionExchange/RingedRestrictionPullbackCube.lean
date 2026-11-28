@@ -660,168 +660,6 @@ local macro "cube_apps" : tactic =>
     apply natTrans_app_heq rfl rfl HEq.rfl HEq.rfl HEq.rfl HEq.rfl HEq.rfl
     cube_objects))
 
--- These private proof definitions retain their inferred dependent types. Staging
--- specialization avoids repeatedly reducing the concrete module functor structures.
-set_option linter.defProp false in
-private def stageBase
-    {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
-    {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
-    (r : StrictTowerRingedSquare sq) {j : U ⟶ Y} (C : OpenCube r j) :=
-  abstractCubeSquare_cube_morphisms
-    (U := vertex C.XU C.localRings.RX) (U' := vertex C.XU' C.localRings.RX')
-    (V := vertex U C.localRings.RY) (V' := vertex C.YU' C.localRings.RY')
-    (fun A : RingedVertex.{u} ↦ proEtaleRingModules A.scheme A.ring)
-    (fun {S X : RingedVertex.{u}} (a : RingedMap S X) ↦
-      proEtaleRingModulePullback a.hom X.ring S.ring a.coefficient) (@moduleCompositor)
-    (fun a b c ↦ pull_assoc c b a (immersion_assoc c b a))
-    (ringedMap f r.RY r.RX r.cf) (ringedMap f' r.RY' r.RX' r.cf')
-    (ringedMap g r.RY r.RY' r.cg) (ringedMap g' r.RX r.RX' r.cg')
-
--- The type is inferred; a `theorem` would need the long statement spelled out.
-set_option linter.defProp false in
-private def stageCoherence
-    {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
-    {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
-    (r : StrictTowerRingedSquare sq) {j : U ⟶ Y} (C : OpenCube r j) :=
-  stageBase r C
-    (square_map_eq r)
-    (ringedMap C.jX r.RX C.localRings.RX C.cjX)
-    (ringedMap C.jX' r.RX' C.localRings.RX' C.cjX')
-    (ringedMap j r.RY C.localRings.RY C.cj)
-    (ringedMap C.jY' r.RY' C.localRings.RY' C.cjY')
-    (ringedMap C.fU C.localRings.RY C.localRings.RX C.localRings.cf)
-    (ringedMap C.fU' C.localRings.RY' C.localRings.RX' C.localRings.cf')
-    (ringedMap C.gU C.localRings.RY C.localRings.RY' C.localRings.cg)
-    (ringedMap C.gU' C.localRings.RX C.localRings.RX' C.localRings.cg')
-    (square_map_eq C.sourceFace).symm (square_map_eq C.targetFace).symm
-    (square_map_eq C.baseFace).symm (square_map_eq C.upperFace).symm
-    (square_map_eq C.localRings)
-
--- The type is inferred; a `theorem` would need the long statement spelled out.
-set_option linter.defProp false in
-private def stageFaces
-    {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
-    {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
-    (r : StrictTowerRingedSquare sq) {j : U ⟶ Y} (C : OpenCube r j) :=
-  stageCoherence r C
-    C.baseFace.exchangeModuleSquare.hom C.targetFace.exchangeModuleSquare.hom
-    r.exchangeModuleSquare.hom C.localRings.exchangeModuleSquare.hom
-    C.sourceFace.exchangeModuleSquare.hom C.upperFace.exchangeModuleSquare.hom
-
--- The type is inferred; a `theorem` would need the long statement spelled out.
-set_option linter.defProp false in
-private def stageProof
-    {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
-    {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
-    (r : StrictTowerRingedSquare sq) {j : U ⟶ Y} (C : OpenCube r j) :=
-  stageFaces r C
-    (square_eq C.baseFace (square_map_eq C.baseFace).symm)
-    (square_eq C.targetFace (square_map_eq C.targetFace).symm)
-    (square_eq r (square_map_eq r).symm)
-    (square_eq C.localRings (square_map_eq C.localRings).symm)
-    (square_eq C.sourceFace (square_map_eq C.sourceFace).symm)
-    (square_eq C.upperFace (square_map_eq C.upperFace).symm)
-
--- The type is inferred; a `theorem` would need the long statement spelled out.
-set_option linter.defProp false in
-private def pointwiseBase
-    {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
-    {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
-    (r : StrictTowerRingedSquare sq) {j : U ⟶ Y} (C : OpenCube r j)
-    (M : proEtaleRingModules Y r.RY) :=
-  stageProof r C M (Cat.of (proEtaleRingModules C.XU' C.localRings.RX')) rfl
-
--- The type is inferred; a `theorem` would need the long statement spelled out.
-set_option linter.defProp false in
-private def pointwiseRight
-    {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
-    {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
-    (r : StrictTowerRingedSquare sq) {j : U ⟶ Y} (C : OpenCube r j)
-    (M : proEtaleRingModules Y r.RY) :=
-  pointwiseBase r C M _ _ _ _ _ _
-    ((targetPull C.localRings).map (C.baseFace.exchangeModuleSquare.hom.app M))
-    (C.targetFace.exchangeModuleSquare.hom.app ((basePull r).obj M))
-    ((upperPull C.targetFace).map (r.exchangeModuleSquare.hom.app M))
-    (C.localRings.exchangeModuleSquare.hom.app ((basePull C.sourceFace).obj M))
-    ((upperPull C.localRings).map (C.sourceFace.exchangeModuleSquare.hom.app M))
-    (C.upperFace.exchangeModuleSquare.hom.app ((verticalPull r).obj M))
-
--- The type is inferred; a `theorem` would need the long statement spelled out.
-set_option linter.defProp false in
-private def pointwiseObjects
-    {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
-    {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
-    (r : StrictTowerRingedSquare sq) {j : U ⟶ Y} (C : OpenCube r j)
-    (M : proEtaleRingModules Y r.RY) :=
-  pointwiseRight r C M (by cube_objects) (by cube_objects) (by cube_objects)
-    (by cube_objects) (by cube_objects) (by cube_objects)
-
--- The type is inferred; a `theorem` would need the long statement spelled out.
-set_option linter.defProp false in
-private def pointwiseFace1
-    {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
-    {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
-    (r : StrictTowerRingedSquare sq) {j : U ⟶ Y} (C : OpenCube r j)
-    (M : proEtaleRingModules Y r.RY) :=
-  pointwiseObjects r C M (by
-    apply functor_map_heq rfl rfl HEq.rfl HEq.rfl HEq.rfl
-    · cube_objects
-    · cube_objects
-    · cube_apps)
-
--- The type is inferred; a `theorem` would need the long statement spelled out.
-set_option linter.defProp false in
-private def pointwiseFace2
-    {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
-    {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
-    (r : StrictTowerRingedSquare sq) {j : U ⟶ Y} (C : OpenCube r j)
-    (M : proEtaleRingModules Y r.RY) :=
-  pointwiseFace1 r C M (by cube_apps)
-
--- The type is inferred; a `theorem` would need the long statement spelled out.
-set_option linter.defProp false in
-private def pointwiseFace3
-    {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
-    {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
-    (r : StrictTowerRingedSquare sq) {j : U ⟶ Y} (C : OpenCube r j)
-    (M : proEtaleRingModules Y r.RY) :=
-  pointwiseFace2 r C M (by
-    apply functor_map_heq rfl rfl HEq.rfl HEq.rfl HEq.rfl
-    · cube_objects
-    · cube_objects
-    · cube_apps)
-
--- The type is inferred; a `theorem` would need the long statement spelled out.
-set_option linter.defProp false in
-private def pointwiseFace4
-    {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
-    {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
-    (r : StrictTowerRingedSquare sq) {j : U ⟶ Y} (C : OpenCube r j)
-    (M : proEtaleRingModules Y r.RY) :=
-  pointwiseFace3 r C M (by cube_apps)
-
--- The type is inferred; a `theorem` would need the long statement spelled out.
-set_option linter.defProp false in
-private def pointwiseFace5
-    {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
-    {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
-    (r : StrictTowerRingedSquare sq) {j : U ⟶ Y} (C : OpenCube r j)
-    (M : proEtaleRingModules Y r.RY) :=
-  pointwiseFace4 r C M (by
-    apply functor_map_heq rfl rfl HEq.rfl HEq.rfl HEq.rfl
-    · cube_objects
-    · cube_objects
-    · cube_apps)
-
--- The type is inferred; a `theorem` would need the long statement spelled out.
-set_option linter.defProp false in
-private def pointwiseFace6
-    {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
-    {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
-    (r : StrictTowerRingedSquare sq) {j : U ⟶ Y} (C : OpenCube r j)
-    (M : proEtaleRingModules Y r.RY) :=
-  pointwiseFace5 r C M (by cube_apps)
-
 /-- The six canonical module inverse-image squares commute around an open cube. -/
 theorem restriction_pullback_cube
     {X' X Y' Y U : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
@@ -834,6 +672,69 @@ theorem restriction_pullback_cube
       C.localRings.exchangeModuleSquare.hom.app ((basePull C.sourceFace).obj M) ≫
         (upperPull C.localRings).map (C.sourceFace.exchangeModuleSquare.hom.app M) ≫
         C.upperFace.exchangeModuleSquare.hom.app ((verticalPull r).obj M) := by
-  exact pointwiseFace6 r C M
+  -- Staging the specialization avoids repeatedly reducing the concrete module functor
+  -- structures.
+  have stageBase := abstractCubeSquare_cube_morphisms
+    (U := vertex C.XU C.localRings.RX) (U' := vertex C.XU' C.localRings.RX')
+    (V := vertex U C.localRings.RY) (V' := vertex C.YU' C.localRings.RY')
+    (fun A : RingedVertex.{u} ↦ proEtaleRingModules A.scheme A.ring)
+    (fun {S X : RingedVertex.{u}} (a : RingedMap S X) ↦
+      proEtaleRingModulePullback a.hom X.ring S.ring a.coefficient) (@moduleCompositor)
+    (fun a b c ↦ pull_assoc c b a (immersion_assoc c b a))
+    (ringedMap f r.RY r.RX r.cf) (ringedMap f' r.RY' r.RX' r.cf')
+    (ringedMap g r.RY r.RY' r.cg) (ringedMap g' r.RX r.RX' r.cg')
+  have stageCoherence := stageBase
+    (square_map_eq r)
+    (ringedMap C.jX r.RX C.localRings.RX C.cjX)
+    (ringedMap C.jX' r.RX' C.localRings.RX' C.cjX')
+    (ringedMap j r.RY C.localRings.RY C.cj)
+    (ringedMap C.jY' r.RY' C.localRings.RY' C.cjY')
+    (ringedMap C.fU C.localRings.RY C.localRings.RX C.localRings.cf)
+    (ringedMap C.fU' C.localRings.RY' C.localRings.RX' C.localRings.cf')
+    (ringedMap C.gU C.localRings.RY C.localRings.RY' C.localRings.cg)
+    (ringedMap C.gU' C.localRings.RX C.localRings.RX' C.localRings.cg')
+    (square_map_eq C.sourceFace).symm (square_map_eq C.targetFace).symm
+    (square_map_eq C.baseFace).symm (square_map_eq C.upperFace).symm
+    (square_map_eq C.localRings)
+  have stageFaces := stageCoherence
+    C.baseFace.exchangeModuleSquare.hom C.targetFace.exchangeModuleSquare.hom
+    r.exchangeModuleSquare.hom C.localRings.exchangeModuleSquare.hom
+    C.sourceFace.exchangeModuleSquare.hom C.upperFace.exchangeModuleSquare.hom
+  have stageProof := stageFaces
+    (square_eq C.baseFace (square_map_eq C.baseFace).symm)
+    (square_eq C.targetFace (square_map_eq C.targetFace).symm)
+    (square_eq r (square_map_eq r).symm)
+    (square_eq C.localRings (square_map_eq C.localRings).symm)
+    (square_eq C.sourceFace (square_map_eq C.sourceFace).symm)
+    (square_eq C.upperFace (square_map_eq C.upperFace).symm)
+  have pointwiseBase :=
+    stageProof M (Cat.of (proEtaleRingModules C.XU' C.localRings.RX')) rfl
+  have pointwiseRight := pointwiseBase _ _ _ _ _ _
+    ((targetPull C.localRings).map (C.baseFace.exchangeModuleSquare.hom.app M))
+    (C.targetFace.exchangeModuleSquare.hom.app ((basePull r).obj M))
+    ((upperPull C.targetFace).map (r.exchangeModuleSquare.hom.app M))
+    (C.localRings.exchangeModuleSquare.hom.app ((basePull C.sourceFace).obj M))
+    ((upperPull C.localRings).map (C.sourceFace.exchangeModuleSquare.hom.app M))
+    (C.upperFace.exchangeModuleSquare.hom.app ((verticalPull r).obj M))
+  have pointwiseObjects := pointwiseRight (by cube_objects) (by cube_objects)
+    (by cube_objects) (by cube_objects) (by cube_objects) (by cube_objects)
+  have pointwiseFace1 := pointwiseObjects (by
+    apply functor_map_heq rfl rfl HEq.rfl HEq.rfl HEq.rfl
+    · cube_objects
+    · cube_objects
+    · cube_apps)
+  have pointwiseFace2 := pointwiseFace1 (by cube_apps)
+  have pointwiseFace3 := pointwiseFace2 (by
+    apply functor_map_heq rfl rfl HEq.rfl HEq.rfl HEq.rfl
+    · cube_objects
+    · cube_objects
+    · cube_apps)
+  have pointwiseFace4 := pointwiseFace3 (by cube_apps)
+  have pointwiseFace5 := pointwiseFace4 (by
+    apply functor_map_heq rfl rfl HEq.rfl HEq.rfl HEq.rfl
+    · cube_objects
+    · cube_objects
+    · cube_apps)
+  exact pointwiseFace5 (by cube_apps)
 
 end AlgebraicGeometry.Scheme.RingedRestrictionExchange

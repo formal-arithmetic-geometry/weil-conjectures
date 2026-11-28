@@ -295,31 +295,27 @@ variable {A B C D : Type uA} [Category.{vA} A] [Category.{vA} B]
   (e : JS ⋙ rT ≅ rU ⋙ JR) (d : rT ⋙ qR ≅ qS ⋙ rU)
   (adjS : JS ⊣ qS) (adjR : JR ⊣ qR)
 
--- The statement uses the deprecated `TwoSquare.natTrans`; dropping it changes the statement.
-set_option linter.deprecated false in
 private theorem inverseMate_of_unit
     (hu : ∀ N : A, rU.map (adjS.unit.app N) ≫ d.inv.app (JS.obj N) ≫
       qR.map (e.hom.app N) = adjR.unit.app (rU.obj N)) :
-    ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans = e.inv := by
+    ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)) = e.inv := by
   ext N
   apply (adjR.homEquiv _ _).injective
   rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
   change adjR.unit.app (rU.obj N) ≫ qR.map
-      (((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans.app N) = _
+      (((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).app N) = _
   have h := unit_mateEquiv_symm adjS adjR (TwoSquare.mk _ _ _ _ d.inv) N
   change rU.map (adjS.unit.app N) ≫ d.inv.app (JS.obj N) =
     adjR.unit.app (rU.obj N) ≫ qR.map
-      (((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans.app N) at h
+      (((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).app N) at h
   rw [← h, ← hu N]
   simp only [Category.assoc]
   rw [← qR.map_comp, Iso.hom_inv_id_app]
   erw [qR.map_id]
   erw [Category.comp_id]
 
--- The statement uses the deprecated `TwoSquare.natTrans`; dropping it changes the statement.
-set_option linter.deprecated false in
 private theorem equations_of_inverseMate
-    (hm : ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans = e.inv) :
+    (hm : ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)) = e.inv) :
     CbcAdjunctionCompatible e d adjS adjR := by
   have hu (N : A) := unit_mateEquiv_symm adjS adjR (TwoSquare.mk _ _ _ _ d.inv) N
   have hc (Q : C) := mateEquiv_counit_symm adjS adjR (TwoSquare.mk _ _ _ _ d.inv) Q
@@ -328,7 +324,7 @@ private theorem equations_of_inverseMate
     have hu' := hu N
     change rU.map (adjS.unit.app N) ≫ d.inv.app (JS.obj N) =
       adjR.unit.app (rU.obj N) ≫ qR.map
-        (((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans.app N) at hu'
+        (((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).app N) at hu'
     rw [hm] at hu'
     rw [reassoc_of% hu']
     rw [← qR.map_comp, Iso.inv_hom_id_app]
@@ -337,7 +333,7 @@ private theorem equations_of_inverseMate
   · intro Q
     have hc' := hc Q
     change JR.map (d.inv.app Q) ≫ adjR.counit.app (rT.obj Q) =
-      (((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans.app (qS.obj Q)) ≫
+      (((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).app (qS.obj Q)) ≫
         rT.map (adjS.counit.app Q) at hc'
     rw [hm] at hc'
     rw [hc', Iso.hom_inv_id_app_assoc]

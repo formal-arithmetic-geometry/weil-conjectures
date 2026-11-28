@@ -52,8 +52,6 @@ variable {A K C : Type u} [CommRing A] [IsLocalRing A] [Field K]
   [Algebra A K] [IsScalarTower A (ResidueField A) K]
   [CommRing C] [Algebra A C]
 
--- `[IsLocalRing A]` is needed by `ResidueField A` in the section variables; it cannot be dropped.
-set_option linter.overlappingInstances false in
 /-- **A strict henselization of a discrete valuation ring is a discrete valuation ring**: it is
 noetherian (Stacks 06LJ), regular (Stacks 06LN) and of dimension one (Stacks 06LK). -/
 theorem isDiscreteValuationRing (hC : IsStrictHenselization A K C) [IsDomain A]

@@ -239,8 +239,6 @@ variable [HasDerivedCategory.{wb} (RingedTensorModules.{c, v, r} J R)]
 attribute [local irreducible] coefficientTotalTensor tensorSummand
 
 include cB cA
--- Kept in the public interface: `omit` makes downstream proofs warn about these instances.
-set_option linter.unusedSectionVars false in
 /-- Associativity on the image of flat-term K-flat representatives.
 This only concerns three specified complexes, not arbitrary derived objects, and
 constructs neither a unit comparison nor any other structural constraint.

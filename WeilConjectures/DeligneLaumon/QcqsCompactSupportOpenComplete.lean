@@ -45,8 +45,6 @@ variable (l : ℕ) [Fact l.Prime]
 
 include K₀ hl Xbase Ybase Xft Xqc Yft Yqc fbase fs fft fqc
 
--- Keep the included section hypotheses as hypotheses of this public statement.
-set_option linter.unusedSectionVars false in
 /-- The completed extension by the quasi-compact open immersion of a compactification sends an
 integral constructible object to a derived complete object. -/
 theorem sfQcqsCompactSupport_open_complete

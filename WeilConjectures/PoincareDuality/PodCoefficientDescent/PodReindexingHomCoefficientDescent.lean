@@ -1089,8 +1089,6 @@ private theorem transportNatIso {C D : Type*} [Category* C] [Category* D]
 
 section CommonCompositorProof
 
--- Keep the section instances as hypotheses of this public statement.
-set_option linter.unusedSectionVars false in
 /-- The recorded scheme compositor in literal common-stage coordinates. -/
 theorem common_compositor_existsUnique {Z : Scheme.{u}} (h : Z ⟶ X) [IsIso h]
     [∀ z : Z, Invertible (l : Z.residueField z)] :

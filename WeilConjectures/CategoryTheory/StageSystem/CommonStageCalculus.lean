@@ -495,8 +495,6 @@ private theorem cscIntegralTriangulated (l : ℕ) [Fact l.Prime]
   rw [hPredicate]
   exact ⟨inferInstance, inferInstance⟩
 
--- `omit` would drop this instance from downstream instances and definitions, which then warn.
-set_option linter.unusedSectionVars false in
 /-- Signed reindexing preserves completion, bounded constructible reductions and
 compatible etale origins. -/
 @[instance] theorem pbcIntegralStableShift (E : Padic.FiniteCoefficientFields l Ω) :
@@ -505,8 +503,6 @@ compatible etale origins. -/
   have := (cscIntegralTriangulated l (pbcFiniteField.{u} l Ω E) T).2
   infer_instance
 
--- `omit` would drop this instance from downstream instances and definitions, which then warn.
-set_option linter.unusedSectionVars false in
 /-- The inherited shift remains linear for the actual constant-section action. -/
 @[instance] theorem pbcIntegralShiftLinear (E : Padic.FiniteCoefficientFields l Ω) (n : ℤ) :
     (shiftFunctor (PbcBoundedConstructibleComplete T (pbcStageDatum.{u} l Ω E)) n).Linear
@@ -549,8 +545,6 @@ def PbcRationalShiftNormalized (E : Padic.FiniteCoefficientFields l Ω)
           ((shiftFunctorAdd
             (PbcBoundedConstructibleComplete T (pbcStageDatum.{u} l Ω E)) n m).hom.app K.obj)))
 
--- `omit` would drop this instance from downstream instances and definitions, which then warn.
-set_option linter.unusedSectionVars false in
 /-- Tensoring the integral shift and its comparisons gives the unique normalized
 rational shift. -/
 theorem pbcRationalShift_exists (E : Padic.FiniteCoefficientFields l Ω) :
@@ -567,8 +561,6 @@ instance pbcRationalHasShift (E : Padic.FiniteCoefficientFields l Ω) :
     HasShift (PbcRationalCategory T (pbcStageDatum.{u} l Ω E) (pbcStageUniformizer.{u} l Ω E)) ℤ :=
   (pbcRationalShift_exists l Ω T E).exists.choose
 
--- `omit` would drop this instance from downstream instances and definitions, which then warn.
-set_option linter.unusedSectionVars false in
 /-- The tensor Hom shift is additive. -/
 @[instance] theorem pbcRationalShiftAdditive (E : Padic.FiniteCoefficientFields l Ω) (n : ℤ) :
     (shiftFunctor (PbcRationalCategory T (pbcStageDatum.{u} l Ω E)
@@ -576,8 +568,6 @@ set_option linter.unusedSectionVars false in
   rw [((pbcRationalShift_exists l Ω T E).exists.choose_spec).1 n]
   infer_instance
 
--- `omit` would drop this instance from downstream instances and definitions, which then warn.
-set_option linter.unusedSectionVars false in
 /-- Localization commutes with shifts through the identity component comparison. -/
 theorem pbcRationalizationShift_exists (E : Padic.FiniteCoefficientFields l Ω) :
     ∃! q : (pbcRationalization T (pbcStageDatum.{u} l Ω E)
@@ -710,8 +700,6 @@ set_option backward.isDefEq.respectTransparency.types true in
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
--- `omit` would drop this instance from downstream instances and definitions, which then warn.
-set_option linter.unusedSectionVars false in
 /-- The actual raw rational stages have finite biproducts and a zero object. -/
 @[instance] theorem pbcStageFiniteBiproducts (E : Padic.FiniteCoefficientFields l Ω) :
     Limits.HasFiniteBiproducts (PbcRationalCategory T (pbcStageDatum.{u} l Ω E)
