@@ -14221,6 +14221,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.MatePasting
 public import WeilConjectures.CategoryTheory.Adjunction.MateRestrictionComparison
 public import WeilConjectures.CategoryTheory.Adjunction.MateSymmRestrict
 public import WeilConjectures.CategoryTheory.Adjunction.MateTransport
+public import WeilConjectures.CategoryTheory.Adjunction.MateTransportCompatible
 public import WeilConjectures.CategoryTheory.Adjunction.MateTransposeIsIso
 public import WeilConjectures.CategoryTheory.Adjunction.MateTwoColimit
 public import WeilConjectures.CategoryTheory.Adjunction.MateUnitIsIso
@@ -15622,6 +15623,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.ProjectionBaseChange
 public import WeilConjectures.CategoryTheory.Monoidal.ProjectionBaseChangeComp
 public import WeilConjectures.CategoryTheory.Monoidal.ProjectionMap
 public import WeilConjectures.CategoryTheory.Monoidal.ProjectionMapTraceCounit
+public import WeilConjectures.CategoryTheory.Monoidal.ProjectionMateDualizable
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.Biproduct
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.BraidedTrace
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.FiniteBiproductUnit
@@ -20974,6 +20976,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitDer
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitMate
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitRefinement
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
 public import WeilConjectures.SixFunctors.Etale.Derived.CoextendScalars
@@ -21290,6 +21293,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionPro
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionRefinement
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionShift
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekReduction
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekTensorRightMate
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStarClopen
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStarShift

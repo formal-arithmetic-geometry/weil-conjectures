@@ -12,7 +12,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Reduction
 public import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeLowerStarDualizable
-public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsHom
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.ScalarExtension
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.Hom
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.LowerStarFree
@@ -1005,6 +1005,26 @@ theorem exists_isDerivedBaseChange_derivedHom_of_isSitePerfect {X : Scheme.{u}} 
       ((derivedHom (ModuleCat.{u + 1} Λ') X).mapIso eK.symm.op).app _ ≪≫
       ((derivedHom (ModuleCat.{u + 1} Λ') X).obj (op K')).mapIso eL)⟩
 
+/-- The reduction `K ↦ K ⊗ᴸ (Λ ⧸ J)_X` is the derived extension of scalars along
+`Λ → Λ ⧸ J` followed by restriction of scalars. -/
+noncomputable def reductionModIdealIsoExtendScalarsRestrictScalars {Λ : Type (u + 1)}
+    [CommRing Λ] (J : Ideal Λ) (X : Scheme.{u}) :
+    reductionModIdeal Λ X J ≅
+      L(sheafExtendScalars (Ideal.Quotient.mk J) X) ⋙
+        derivedRestrictScalars (Ideal.Quotient.mk J) X :=
+  (derivedTensor (ModuleCat.{u + 1} Λ) X).flip.mapIso
+      ((DerivedCategory.singleFunctor _ 0).mapIso
+        ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapIso
+          (restrictScalarsQuotientMkUnitIso J).symm) ≪≫
+        (derivedSingleSheafRestrictScalarsUnitIso Λ (Λ ⧸ J) X).symm) ≪≫
+    (leftDerivedTensorRightIso _).symm ≪≫
+    asIso (leftDerivedSheafExtendScalarsProjection Λ (Λ ⧸ J) X)
+
+/-- A natural transformation `α : F ⟶ G` gives isomorphic arrows at isomorphic objects. -/
+private def natTransAppArrowIso {C D : Type*} [Category C] [Category D] {F G : C ⥤ D}
+    (α : F ⟶ G) {A B : C} (e : A ≅ B) : Arrow.mk (α.app A) ≅ Arrow.mk (α.app B) :=
+  Arrow.isoMk (F.mapIso e) (G.mapIso e) (α.naturality e.hom)
+
 end Tensor
 
 /-- Reduction `Λ → Λ ⧸ (ϖ)ⁿ` commutes with the basic operations of the étale derived
@@ -1025,9 +1045,27 @@ theorem reductionCompatibility {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ) (n : 
   projectionMap := sorry
   derivedHom K L Kn Ln η η' hη hη' :=
     exists_isDerivedBaseChange_derivedHom_quotient_span_pow _ hϖ n hη hη'
-  rightDerivedUpperShriek := sorry
-  upperShriekCounit := sorry
-  upperShriekUnit := sorry
+  rightDerivedUpperShriek f _ _ _ L Ln η hη := by
+    obtain ⟨e⟩ := nonempty_iso_leftDerivedSheafExtendScalars_of_isDerivedBaseChange _ _ hη
+    obtain ⟨i⟩ := nonempty_iso_rightDerivedUpperShriek_extendScalars_quotient_span_pow hϖ n f L
+    exact ⟨_, (isDerivedBaseChange_leftDerivedEtaleSheafExtendScalarsAdjunction_unit _ _ _)
+      |>.comp_map_iso (i ≪≫ (R(f)_![ModuleCat.{u + 1} (Λ ⧸ _)]).rightAdjoint.mapIso e)⟩
+  upperShriekCounit f _ _ _ L Ln η hη := by
+    obtain ⟨e⟩ := nonempty_iso_leftDerivedSheafExtendScalars_of_isDerivedBaseChange _ _ hη
+    exact ⟨Arrow.isoOfNatIso (reductionModIdealIsoExtendScalarsRestrictScalars _ _)
+        (Arrow.mk ((Adjunction.ofIsLeftAdjoint (R(f)_![ModuleCat.{u + 1} Λ])).counit.app L)) ≪≫
+      (derivedRestrictScalars _ _).mapArrow.mapIso
+        (arrowIsoRightDerivedUpperShriekCounitOfRingHom _ f
+          (isDualizable_constantSingle_restrictScalars_quotient_span_pow _ hϖ n) L ≪≫
+          natTransAppArrowIso _ e)⟩
+  upperShriekUnit f _ _ _ K Kn η hη := by
+    obtain ⟨e⟩ := nonempty_iso_leftDerivedSheafExtendScalars_of_isDerivedBaseChange _ _ hη
+    exact ⟨Arrow.isoOfNatIso (reductionModIdealIsoExtendScalarsRestrictScalars _ _)
+        (Arrow.mk ((Adjunction.ofIsLeftAdjoint (R(f)_![ModuleCat.{u + 1} Λ])).unit.app K)) ≪≫
+      (derivedRestrictScalars _ _).mapArrow.mapIso
+        (arrowIsoRightDerivedUpperShriekUnitOfRingHom _ f
+          (isDualizable_constantSingle_restrictScalars_quotient_span_pow _ hϖ n) K ≪≫
+          natTransAppArrowIso _ e)⟩
 
 /-- Reduction `Λ ⧸ (ϖ)ⁿ → Λ ⧸ (ϖ)ᵐ` between finite quotients commutes with the basic operations
 of the étale derived categories on `Dctf`. -/

@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.MateTransport
 public import WeilConjectures.CategoryTheory.Monoidal.ProjectionMateDualizable
 public import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduction
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorSheafUpperStar
 
 /-!
 # Tensoring with a dualizable object and the right adjoint of `Rf_!`
@@ -32,6 +33,9 @@ projection map of the extension by zero `D(j_!)` is the left adjoint mate of the
 
 ## Main results
 
+- `leftDerivedUpperStarDerivedTensorRightIso_hom_app_comp_leftDerivedTensorRightIso_inv`
+  (in the namespace `AlgebraicGeometry.Etale`): the comparison of `Lg^*` with `- ⊗ᴸ N`
+  through `L(- ⊗ c) ≅ - ⊗ᴸ c`.
 - `AlgebraicGeometry.Etale.mateEquiv_leftDerivedUpperStarDerivedTensorRightIso_hom`
 - `AlgebraicGeometry.Etale.mateEquiv_symm_leftDerivedUpperStarDerivedTensorRightIso_inv_app`
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekDerivedTensorRightMap_app_comp_map`
@@ -102,6 +106,23 @@ lemma mateEquiv_leftDerivedUpperStarDerivedTensorRightIso_hom
   simp only [Iso.refl_hom, NatTrans.id_app, Category.id_comp] at h
   erw [CategoryTheory.Functor.map_id, Category.comp_id] at h
   exact h
+
+/-- Through `L(- ⊗ c) ≅ - ⊗ᴸ c`, the comparison `Lg^* L(K ⊗ c_Y) ⟶ L(Lg^* K ⊗ c_Z)` induced by an
+isomorphism `κ : g^* c_Y ⟶ c_Z` of sheaves is the comparison `Lg^*(K ⊗ᴸ c_Y) ≅ Lg^* K ⊗ᴸ c_Z` of
+`AlgebraicGeometry.Etale.leftDerivedUpperStarDerivedTensorRightIso`. -/
+lemma leftDerivedUpperStarDerivedTensorRightIso_hom_app_comp_leftDerivedTensorRightIso_inv
+    {c_Y : Sheaf Y.smallEtaleTopology A} {c_Z : Sheaf Z.smallEtaleTopology A}
+    (κ : (g)^*[A].obj c_Y ⟶ c_Z) [IsIso κ] (K : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    (leftDerivedUpperStarDerivedTensorRightIso A g
+        (asIso (leftDerivedUpperStarDerivedSingleMap g κ))).hom.app K ≫
+        (leftDerivedTensorRightIso c_Z).inv.app (L((g)^*[A]).obj K) =
+      L((g)^*[A]).map ((leftDerivedTensorRightIso c_Y).inv.app K) ≫
+        (leftDerivedTensorRightUpperStarMap g κ).app K := by
+  have h := leftDerivedTensorRightUpperStarMap_app_comp g κ K
+  rw [leftDerivedUpperStarDerivedTensorRightIso_hom_app, asIso_hom, ← derivedTensor_obj_map,
+    ← cancel_epi (L((g)^*[A]).map ((leftDerivedTensorRightIso c_Y).hom.app K)),
+    ← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp,
+    Category.assoc, ← reassoc_of% h, Iso.hom_inv_id_app, Category.comp_id]
 
 end LowerStar
 
@@ -205,74 +226,70 @@ theorem rightDerivedLowerShriekDerivedTensorRightMap_app_comp_map
 
 end Compactification
 
-section Monoidal
-
-variable {X Y : Scheme.{u}} (f : X ⟶ Y)
-
-/-- The unit of the monoidal structure of `Lf^*` is the inverse of the identification
-`Lf^* Λ_Y ≅ Λ_X`. -/
-lemma leftDerivedUpperStarMonoidal_ε :
-    letI := leftDerivedUpperStarMonoidal A f
-    Functor.LaxMonoidal.ε L((f)^*[A]) = (leftDerivedUpperStarUnitIso A f).inv := by
-  let := leftDerivedUpperStarMonoidal A f
-  have hη : Functor.OplaxMonoidal.η L((f)^*[A]) = (leftDerivedUpperStarUnitIso A f).hom :=
-    leftDerivedUpperStarOplaxMonoidal_η A f
-  rw [← cancel_mono (leftDerivedUpperStarUnitIso A f).hom, Iso.inv_hom_id, ← hη,
-    Functor.Monoidal.ε_η]
-
-/-- The tensor structure of the monoidal structure of `Lf^*` is the inverse of the tensor
-comparison `Lf^*(B ⊗ᴸ C) ⟶ Lf^* B ⊗ᴸ Lf^* C`. -/
-lemma leftDerivedUpperStarMonoidal_μ (B C : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    letI := leftDerivedUpperStarMonoidal A f
-    Functor.LaxMonoidal.μ L((f)^*[A]) B C =
-      inv (((leftDerivedUpperStarTensorComparison A f).app B).app C) := by
-  let := leftDerivedUpperStarMonoidal A f
-  have hδ : Functor.OplaxMonoidal.δ L((f)^*[A]) B C =
-      ((leftDerivedUpperStarTensorComparison A f).app B).app C := rfl
-  rw [← cancel_mono (((leftDerivedUpperStarTensorComparison A f).app B).app C),
-    IsIso.inv_hom_id, ← hδ, Functor.Monoidal.μ_δ]
+section Dualizable
 
 variable {FC : A → A → Type (u + 1)} {CC : A → Type (u + 1)}
   [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
   [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
-  {f} (c : Compactification f)
+  {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
 
-/-- **Unitality of the projection map of `Rf_!`**, in terms of the monoidal structure of
-`Lf^*`: `PF_{K, Λ} = Rf_! K ⊗ᴸ Λ ≅ Rf_! K ≅ Rf_!(K ⊗ᴸ Λ) ⟶ Rf_!(K ⊗ᴸ Lf^* Λ)`. -/
-lemma projectionMapOfCompactification_app_app_tensorUnit
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    letI := leftDerivedUpperStarMonoidal A f
-    ((projectionMapOfCompactification A c).app K).app (𝟙_ _) =
-      (ρ_ ((Rf_!(c)[A]).obj K)).hom ≫
-        (Rf_!(c)[A]).map ((ρ_ K).inv ≫ K ◁ Functor.LaxMonoidal.ε L((f)^*[A])) := by
+/- The projection map of `Rf_!(c) = Rg_* ∘ i_!`, in the form of
+`CategoryTheory.Adjunction.compProjectionMap`. -/
+set_option quotPrecheck false in
+local notation "𝚷" =>
+  (derivedUpperStarLowerStarAdjunction A c.g).compProjectionMap
+    (leftDerivedUpperStarTensorComparison A c.g) D((c.i)_!open[A])
+    (fun K N ↦ ((derivedOpenImmersionLowerShriekProjectionIso A c.i).inv.app K).app N)
+    (fun L ↦ (leftDerivedUpperStarCompactificationIso A c).hom.app L)
+
+/-- **The right adjoint of `Rf_!` commutes with tensoring by a dualizable object.** For a
+dualizable `N_Y`, an isomorphism `a : Lf^* N_Y ≅ N_X` and a right adjoint `G` of `Rf_!`, the
+mate `G M ⊗ᴸ N_X ⟶ G (M ⊗ᴸ N_Y)` of the inverse of the comparison
+`Rf_! K ⊗ᴸ N_Y ⟶ Rf_!(K ⊗ᴸ N_X)` is an isomorphism: the projection map of `Rf_!` is compatible
+with the unit and the tensor structure of `Lf^*`, and invertible at `N_Y` and at its dual. -/
+theorem isIso_mateEquiv_app_inv_rightDerivedLowerShriekDerivedTensorRightMap
+    {G : DerivedCategory (Sheaf Y.smallEtaleTopology A) ⥤
+      DerivedCategory (Sheaf X.smallEtaleTopology A)} (adj : Rf_!(c)[A] ⊣ G)
+    {NY : DerivedCategory (Sheaf Y.smallEtaleTopology A)}
+    {NX : DerivedCategory (Sheaf X.smallEtaleTopology A)} (a : L((f)^*[A]).obj NY ≅ NX)
+    (hN : IsDualizable NY) [IsIso (rightDerivedLowerShriekDerivedTensorRightMap A c a.hom)]
+    (M : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    IsIso ((mateEquiv adj adj (inv (rightDerivedLowerShriekDerivedTensorRightMap A c a.hom))).app
+      M) := by
   let := leftDerivedUpperStarMonoidal A f
-  have h := compactificationProjectionMap_rightUnitality A c K
-  rw [← projectionMapOfCompactification_app_app_eq_compProjectionMap] at h
-  rw [leftDerivedUpperStarMonoidal_ε]
-  sorry
-  rw [    ← cancel_mono ((Rf_!(c)[A]).map (K ◁ (leftDerivedUpperStarUnitIso A f).hom ≫ (ρ_ K).hom)),
-    h]
-  trace_state
-  sorry
+  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory (Sheaf Y.smallEtaleTopology A)
+  obtain ⟨_⟩ := hN
+  let := BraidedCategory.exactPairing_swap NY NYᘁ
+  have hπ₁ (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) : IsIso (𝚷 K NY) := by
+    have := hasProjectionFormulaOfCompactification_of_isDualizable A c K (L := NY)
+      ⟨inferInstance⟩
+    rwa [HasProjectionFormulaOfCompactification,
+      projectionMapOfCompactification_app_app_eq_compProjectionMap] at this
+  have hπ₂ (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) : IsIso (𝚷 K NYᘁ) := by
+    have := hasProjectionFormulaOfCompactification_of_isDualizable A c K (L := NYᘁ)
+      ⟨{ rightDual := NY }⟩
+    rwa [HasProjectionFormulaOfCompactification,
+      projectionMapOfCompactification_app_app_eq_compProjectionMap] at this
+  have hη : Functor.OplaxMonoidal.η L((f)^*[A]) = (leftDerivedUpperStarUnitIso A f).hom :=
+    leftDerivedUpperStarOplaxMonoidal_η A f
+  refine Adjunction.isIso_mateEquiv_app_of_projection' adj (π := 𝚷)
+    (fun φ N ↦ compactificationProjectionMap_naturality_left A c φ N)
+    (fun K _ _ φ ↦ compactificationProjectionMap_naturality_right A c K φ)
+    (fun K ↦ ?_) (fun K B C ↦ compactificationProjectionMap_associativity A c K B C)
+    NYᘁ NY a _ (fun K ↦ ?_) M
+  · rw [hη]
+    exact compactificationProjectionMap_rightUnitality A c K
+  · rw [NatIso.isIso_inv_app]
+    apply IsIso.inv_eq_of_hom_inv_id
+    rw [rightDerivedLowerShriekDerivedTensorRightMap_app,
+      projectionMapOfCompactification_app_app_eq_compProjectionMap]
+    simp only [Category.assoc, ← Functor.map_comp_assoc, ← MonoidalCategory.whiskerLeft_comp,
+      Iso.hom_inv_id, MonoidalCategory.whiskerLeft_id]
+    erw [CategoryTheory.Functor.map_id, Category.id_comp]
+    exact IsIso.hom_inv_id _
 
-/-- **Associativity of the projection map of `Rf_!`**, in terms of the monoidal structure of
-`Lf^*`. -/
-lemma projectionMapOfCompactification_app_app_tensor
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (B C : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    letI := leftDerivedUpperStarMonoidal A f
-    ((projectionMapOfCompactification A c).app K).app (B ⊗ C) =
-      (α_ _ _ _).inv ≫ ((projectionMapOfCompactification A c).app K).app B ▷ C ≫
-        ((projectionMapOfCompactification A c).app (K ⊗ L((f)^*[A]).obj B)).app C ≫
-        (Rf_!(c)[A]).map ((α_ _ _ _).hom ≫ K ◁ Functor.LaxMonoidal.μ L((f)^*[A]) B C) := by
-  let := leftDerivedUpperStarMonoidal A f
-  have e := projectionMapOfCompactification_assoc A c K B C
-  rw [leftDerivedUpperStarMonoidal_μ, Functor.map_comp]
-  erw [reassoc_of% e]
-  simp [← Functor.map_comp]
-
-end Monoidal
+end Dualizable
 
 end AlgebraicGeometry.Etale

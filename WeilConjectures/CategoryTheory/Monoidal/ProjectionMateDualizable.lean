@@ -26,7 +26,10 @@ conjugate of the projection map at `K'`, for the adjunctions
 
 - `CategoryTheory.Adjunction.mateEquiv_app_eq_conjugateEquiv_projection`: the identification of
   the mate with a conjugate.
-- `CategoryTheory.Adjunction.isIso_mateEquiv_app_of_projection`: the mate is an isomorphism.
+- `CategoryTheory.Adjunction.isIso_mateEquiv_app_of_projection`,
+  `CategoryTheory.Adjunction.isIso_mateEquiv_app_of_projection'`: the mate is an isomorphism
+  (with the axioms of the projection map stated in terms of the monoidal, resp. comonoidal,
+  structure of `F`).
 -/
 
 @[expose] public section
@@ -134,5 +137,49 @@ theorem isIso_mateEquiv_app_of_projection [F.Monoidal]
     dsimp [a₀]
   rw [e']
   infer_instance
+
+/-- The unit axiom of a projection map, in the form `π A 𝟙 ≫ L (A ◁ η ≫ ρ) = ρ` involving the
+comonoidal unit `η : F 𝟙 ⟶ 𝟙`, implies the form used in
+`CategoryTheory.Adjunction.isIso_mateEquiv_app_of_projection`. -/
+lemma projection_unit_of_comp_map [F.Monoidal]
+    (hunit : ∀ A, π A (𝟙_ 𝒴) ≫ L.map (A ◁ Functor.OplaxMonoidal.η F ≫ (ρ_ A).hom) =
+      (ρ_ (L.obj A)).hom) (A : 𝒳) :
+    π A (𝟙_ 𝒴) = (ρ_ (L.obj A)).hom ≫ L.map ((ρ_ A).inv ≫ A ◁ ε F) := by
+  rw [← cancel_mono (L.map (A ◁ Functor.OplaxMonoidal.η F ≫ (ρ_ A).hom)), hunit,
+    Category.assoc, ← L.map_comp]
+  simp
+
+/-- The associativity axiom of a projection map, in the form
+`π A B ▷ C ≫ π (A ⊗ F B) C ≫ L α = α ≫ π A (B ⊗ C) ≫ L (A ◁ δ)` involving the comonoidal structure
+`δ` of `F`, implies the form used in
+`CategoryTheory.Adjunction.isIso_mateEquiv_app_of_projection`. -/
+lemma projection_tensor_of_comp_map [F.Monoidal]
+    (hassoc : ∀ A B C, π A B ▷ C ≫ π (A ⊗ F.obj B) C ≫ L.map (α_ _ _ _).hom =
+      (α_ _ _ _).hom ≫ π A (B ⊗ C) ≫ L.map (A ◁ Functor.OplaxMonoidal.δ F B C)) (A : 𝒳)
+    (B C : 𝒴) :
+    π A (B ⊗ C) = (α_ _ _ _).inv ≫ (π A B ▷ C) ≫
+      π (A ⊗ F.obj B) C ≫ L.map ((α_ _ _ _).hom ≫ A ◁ μ F B C) := by
+  rw [L.map_comp, reassoc_of% (hassoc A B C), Iso.inv_hom_id_assoc, ← L.map_comp,
+    ← MonoidalCategory.whiskerLeft_comp, Functor.Monoidal.δ_μ, MonoidalCategory.whiskerLeft_id,
+    L.map_id, Category.comp_id]
+
+/-- **The mate of the inverse projection map is an isomorphism at a dualizable object**, with the
+unit and tensor axioms of the projection map stated in terms of the comonoidal structure of `F`
+(see `CategoryTheory.Adjunction.isIso_mateEquiv_app_of_projection`). -/
+theorem isIso_mateEquiv_app_of_projection' [F.Monoidal]
+    (hπ : ∀ {A A' : 𝒳} (φ : A ⟶ A') (B : 𝒴),
+      L.map φ ▷ B ≫ π A' B = π A B ≫ L.map (φ ▷ F.obj B))
+    (hπr : ∀ (A : 𝒳) {B B' : 𝒴} (φ : B ⟶ B'),
+      L.obj A ◁ φ ≫ π A B' = π A B ≫ L.map (A ◁ F.map φ))
+    (hunit : ∀ A, π A (𝟙_ 𝒴) ≫ L.map (A ◁ Functor.OplaxMonoidal.η F ≫ (ρ_ A).hom) =
+      (ρ_ (L.obj A)).hom)
+    (hassoc : ∀ A B C, π A B ▷ C ≫ π (A ⊗ F.obj B) C ≫ L.map (α_ _ _ _).hom =
+      (α_ _ _ _).hom ≫ π A (B ⊗ C) ≫ L.map (A ◁ Functor.OplaxMonoidal.δ F B C))
+    (K' K : 𝒴) [ExactPairing K' K] [∀ A, IsIso (π A K)] [∀ A, IsIso (π A K')] {KX : 𝒳}
+    (c : F.obj K ≅ KX) (a : tensorRight KX ⋙ L ⟶ L ⋙ tensorRight K)
+    (ha : ∀ A, a.app A = L.map (A ◁ c.inv) ≫ inv (π A K)) (N : 𝒴) :
+    IsIso ((mateEquiv adj adj a).app N) :=
+  isIso_mateEquiv_app_of_projection adj hπ hπr (projection_unit_of_comp_map hunit)
+    (projection_tensor_of_comp_map hassoc) K' K c a ha N
 
 end CategoryTheory.Adjunction

@@ -27,15 +27,17 @@ The predicate is stable under composition (`CategoryTheory.Adjunction.TransportC
 under passing to right adjoints (`CategoryTheory.Adjunction.TransportCompatible.rightAdjoint`) and
 to left adjoints (`CategoryTheory.Adjunction.TransportCompatible.leftAdjoint`) through mates, and
 under replacing `Tᵢ` by isomorphic functors
-(`CategoryTheory.Adjunction.TransportCompatible.of_iso`).
+(`CategoryTheory.Adjunction.TransportCompatible.of_hom`).
 
 ## Main results
 
 - `CategoryTheory.Adjunction.TransportCompatible`: the compatibility predicate.
 - `CategoryTheory.Adjunction.TransportCompatible.comp`,
   `CategoryTheory.Adjunction.TransportCompatible.rightAdjoint`,
+  `CategoryTheory.Adjunction.TransportCompatible.rightAdjoint_of_eq`,
   `CategoryTheory.Adjunction.TransportCompatible.leftAdjoint`,
-  `CategoryTheory.Adjunction.TransportCompatible.of_iso`: its stability properties.
+  `CategoryTheory.Adjunction.TransportCompatible.leftAdjoint_iso`,
+  `CategoryTheory.Adjunction.TransportCompatible.of_hom`: its stability properties.
 - `CategoryTheory.Adjunction.isIso_mateEquiv_symm_of_isIso_mateEquiv`: the left adjoint mate of
   a 2-cell whose other mate is invertible is invertible.
 -/
@@ -164,6 +166,15 @@ lemma TransportCompatible.rightAdjoint (h : TransportCompatible adj₁ adj₂ ϑ
     ← cancel_epi (N₁.map ((mateEquiv adj adj a).app M)), reassoc_of% e, IsIso.hom_inv_id,
     Category.comp_id, ← N₁.map_comp_assoc, IsIso.hom_inv_id, N₁.map_id, Category.id_comp]
 
+/-- A form of `CategoryTheory.Adjunction.TransportCompatible.rightAdjoint` in which the mates
+are given by arbitrary invertible `β` and `p`. -/
+lemma TransportCompatible.rightAdjoint_of_eq (h : TransportCompatible adj₁ adj₂ ϑ₁ ϑ₂ G G' α a)
+    {β : F ⋙ N₁ ⟶ N₂ ⋙ F'} {p : F ⋙ T₁ ⟶ T₂ ⋙ F} (hβ : mateEquiv adj adj' α = β)
+    (hp : mateEquiv adj adj a = p) [IsIso β] [IsIso p] :
+    TransportCompatible adj₂ adj₁ ϑ₂ ϑ₁ F F' (inv β) (inv p) := by
+  subst hβ hp
+  exact h.rightAdjoint adj adj'
+
 end RightAdjoint
 
 section LeftAdjoint
@@ -198,6 +209,14 @@ lemma TransportCompatible.leftAdjoint (h : TransportCompatible adj₁ adj₂ ϑ�
     ← reassoc_of% hα₂, hc, reassoc_of% hn₂, IsIso.inv_hom_id_assoc, ← N₂.map_comp_assoc, ← ha,
     N₂.map_comp, Category.assoc, ← N₂.map_comp_assoc (inv _), IsIso.inv_hom_id, N₂.map_id,
     Category.id_comp, hn₁]
+
+/-- A form of `CategoryTheory.Adjunction.TransportCompatible.leftAdjoint` for isomorphisms `α` and
+`a`. -/
+lemma TransportCompatible.leftAdjoint_iso {α : N₁ ⋙ G' ≅ G ⋙ N₂} {a : T₁ ⋙ G ≅ G ⋙ T₂}
+    (h : TransportCompatible adj₁ adj₂ ϑ₁ ϑ₂ G G' α.hom a.hom) :
+    TransportCompatible adj₂ adj₁ ϑ₂ ϑ₁ F F' ((mateEquiv adj adj').symm α.inv)
+      ((mateEquiv adj adj).symm a.inv) := by
+  simpa using h.leftAdjoint adj adj'
 
 end LeftAdjoint
 
