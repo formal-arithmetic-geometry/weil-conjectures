@@ -284,4 +284,41 @@ theorem systemScalarModelDerivedUnit_rep {R : Sheaf J CommRingCat.{w}} {φ : R �
   dsimp only [systemScalarModelDerivedUnit, δ, Rφ, η, ν] at h ⊢
   exact h
 
+section Composition
+variable {R' S' T' : Sheaf J CommRingCat.{w}} {φ : R' ⟶ S'} {ψ : S' ⟶ T'} {γ : R' ⟶ T'}
+  (hγ : γ = φ ≫ ψ) (A₁ : SystemScalarModel φ) (A₂ : SystemScalarModel ψ)
+  (A₃ : SystemScalarModel γ)
+
+/-- The derived scalar associator transposes along the composite scalar adjunction to the
+transpose along the composite scalar model, followed by the restriction compositor. -/
+theorem systemScalarModelDerivedComposition_homEquiv_hom (P Z) (f : A₃.model.T.obj P ⟶ Z) :
+    A₁.adjunction.homEquiv P _ (A₂.adjunction.homEquiv _ Z
+        ((systemScalarModelDerivedComposition hγ A₁ A₂ A₃).hom.app P ≫ f)) =
+      A₃.adjunction.homEquiv P Z f ≫
+        (Functor.exactDerivedRestrictionComposition _ _ _
+          (systemScalarRestrictionComposition φ ψ γ hγ)).inv.app Z := by
+  have h := leftAdjointUniq_homEquiv_comp
+    ((A₁.adjunction.comp A₂.adjunction).ofNatIsoRight
+      (Functor.exactDerivedRestrictionComposition _ _ _
+        (systemScalarRestrictionComposition φ ψ γ hγ))) A₃.adjunction P Z f
+  rw [Adjunction.homEquiv_ofNatIsoRight_apply, Adjunction.comp_homEquiv] at h
+  rw [← h, Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
+  rfl
+
+/-- The inverse derived scalar associator transposes along the composite scalar model to the
+transpose along the composite scalar adjunction, followed by the restriction compositor. -/
+theorem systemScalarModelDerivedComposition_homEquiv_inv (P Z)
+    (g : (A₁.model.T ⋙ A₂.model.T).obj P ⟶ Z) :
+    A₃.adjunction.homEquiv P Z
+        ((systemScalarModelDerivedComposition hγ A₁ A₂ A₃).inv.app P ≫ g) =
+      A₁.adjunction.homEquiv P _ (A₂.adjunction.homEquiv _ Z g) ≫
+        (Functor.exactDerivedRestrictionComposition _ _ _
+          (systemScalarRestrictionComposition φ ψ γ hγ)).hom.app Z := by
+  rw [systemScalarModelDerivedComposition, Adjunction.leftAdjointUniq_inv_app,
+    leftAdjointUniq_homEquiv_comp, Adjunction.homEquiv_ofNatIsoRight_apply,
+    Adjunction.comp_homEquiv]
+  rfl
+
+end Composition
+
 end SheafOfModules

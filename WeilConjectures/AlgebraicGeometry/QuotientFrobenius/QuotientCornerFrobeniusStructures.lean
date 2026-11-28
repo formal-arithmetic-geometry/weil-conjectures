@@ -239,26 +239,32 @@ abbrev evaluation (T : Scheme.{t}) (n : ℕ) :=
 abbrev siteMap {U V : Scheme.{t}} (u : U ⟶ V) :=
   (𝟭 ℕ).prod (proEtaleBaseChange u)
 
+/-- Projection to the original site is continuous for vertical covers. -/
+theorem diagonal_continuous (T : Scheme.{t}) :
+    (CategoryTheory.Prod.snd ℕ T.ProEt).IsContinuous
+      (coefficientSequenceTopology (ProEt.topology T))
+      (ProEt.topology T) := by
+  let adj : Prod.sectR 0 T.ProEt ⊣ CategoryTheory.Prod.snd ℕ T.ProEt :=
+    Adjunction.mkOfUnitCounit
+      { unit := 𝟙 _
+        counit := { app X := Prod.mkHom (homOfLE (Nat.zero_le X.1)) (𝟙 X.2) } }
+  let : (Prod.sectR 0 T.ProEt).IsCocontinuous (ProEt.topology T)
+      (coefficientSequenceTopology (ProEt.topology T)) := ⟨fun hS ↦ hS⟩
+  exact adj.isContinuous_of_isCocontinuous _ _
+
+attribute [instance] diagonal_continuous
+
 /-- A constant coefficient presheaf is a sheaf on the vertical sequence site. -/
 theorem diagonalRing_isSheaf (T : Scheme.{t}) :
     Presheaf.IsSheaf (coefficientSequenceTopology (ProEt.topology T))
-      ((CategoryTheory.Prod.snd ℕ T.ProEt).op ⋙ (d.completedRing T).obj) := by
-  sorry
+      ((CategoryTheory.Prod.snd ℕ T.ProEt).op ⋙ (d.completedRing T).obj) :=
+  (CategoryTheory.Prod.snd ℕ T.ProEt).op_comp_isSheaf _ _ (d.completedRing T)
 
 /-- The completed-coefficient diagonal ring on the same vertical sequence site. -/
 def diagonalRing (T : Scheme.{t}) :
     Sheaf (coefficientSequenceTopology (ProEt.topology T)) CommRingCat.{t + 1} :=
   ⟨(CategoryTheory.Prod.snd ℕ T.ProEt).op ⋙ (d.completedRing T).obj,
     diagonalRing_isSheaf d T⟩
-
-/-- Projection to the original site is continuous for vertical covers. -/
-theorem diagonal_continuous (T : Scheme.{t}) :
-    (CategoryTheory.Prod.snd ℕ T.ProEt).IsContinuous
-      (coefficientSequenceTopology (ProEt.topology T))
-      (ProEt.topology T) := by
-  sorry
-
-attribute [instance] diagonal_continuous
 
 /-- The exact diagonal module functor, implemented by its sectionwise pullback presheaf. -/
 abbrev diagonal (T : Scheme.{t}) :
@@ -268,15 +274,44 @@ abbrev diagonal (T : Scheme.{t}) :
   SheafOfModules.pushforward.{t + 1} (F := CategoryTheory.Prod.snd ℕ T.ProEt) (𝟙 _)
 
 /-- Diagonal retains addition of module maps on every section. -/
-theorem diagonal_additive (T : Scheme.{t}) : (diagonal d T).Additive := by
-  sorry
+theorem diagonal_additive (T : Scheme.{t}) : (diagonal d T).Additive :=
+  ⟨fun {_ _ _ _} ↦ rfl⟩
 
 attribute [instance] diagonal_additive
 
 /-- Diagonal is exact, since its restriction to every slice is identity. -/
 theorem diagonal_exact (T : Scheme.{t}) :
     PreservesFiniteLimits (diagonal d T) ∧ PreservesFiniteColimits (diagonal d T) := by
-  sorry
+  let R := (sheafCompose (ProEt.topology T) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj
+    (d.completedRing T)
+  constructor
+  · let S := (sheafCompose (coefficientSequenceTopology (ProEt.topology T))
+      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj (diagonalRing d T)
+    let F := SheafOfModules.forget.{t + 1} S ⋙ PresheafOfModules.toPresheaf S.obj
+    have : PreservesFiniteLimits (diagonal d T ⋙ F) := by
+      change PreservesFiniteLimits
+        ((SheafOfModules.forget.{t + 1} R ⋙ PresheafOfModules.toPresheaf R.obj) ⋙
+          (Functor.whiskeringLeft _ _ _).obj (CategoryTheory.Prod.snd ℕ T.ProEt).op)
+      infer_instance
+    exact preservesFiniteLimits_of_reflects_of_preserves _ F
+  · let : (CategoryTheory.Prod.snd ℕ T.ProEt).IsCocontinuous
+        (coefficientSequenceTopology (ProEt.topology T)) (ProEt.topology T) :=
+      ⟨fun hS ↦ hS⟩
+    let H := (CategoryTheory.Prod.snd ℕ T.ProEt).sheafPushforwardContinuous
+      AddCommGrpCat.{t + 1} (coefficientSequenceTopology (ProEt.topology T)) (ProEt.topology T)
+    have : PreservesColimitsOfSize.{0, 0} H :=
+      ((CategoryTheory.Prod.snd ℕ T.ProEt).sheafAdjunctionCocontinuous AddCommGrpCat.{t + 1}
+        (coefficientSequenceTopology (ProEt.topology T))
+          (ProEt.topology T)).leftAdjoint_preservesColimits
+    let F := SheafOfModules.toSheaf.{t + 1} ((sheafCompose
+      (coefficientSequenceTopology (ProEt.topology T))
+        (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj (diagonalRing d T))
+    have : PreservesFiniteColimits (diagonal d T ⋙ F) := by
+      change PreservesFiniteColimits (SheafOfModules.toSheaf.{t + 1} R ⋙ H)
+      infer_instance
+    have : ReflectsFiniteColimits F :=
+      { reflects := fun _ _ _ ↦ reflectsColimitsOfShape_of_reflectsIsomorphisms }
+    exact preservesFiniteColimits_of_reflects_of_preserves _ F
 
 /-- Left exactness of diagonal. -/
 instance diagonal_limits (T : Scheme.{t}) : PreservesFiniteLimits (diagonal d T) :=
@@ -332,8 +367,8 @@ structure Cube (_sq : ChosenCartesianSquare g' f' f g) where
 
 /-- Each commutative face with invertible horizontal edges is Cartesian. -/
 theorem face_isPullback {U V : Scheme.{t}} (u : U ⟶ V) (FU : U ≅ U) (FV : V ≅ V)
-    (comm : FU.hom ≫ u = u ≫ FV.hom) : IsPullback FU.hom u u FV.hom := by
-  sorry
+    (comm : FU.hom ≫ u = u ≫ FV.hom) : IsPullback FU.hom u u FV.hom :=
+  .of_horiz_isIso ⟨comm⟩
 
 /-- The chosen Cartesian identification is the universal one for the Frobenius face. -/
 def face {U V : Scheme.{t}} (u : U ⟶ V) (FU : U ≅ U) (FV : V ≅ V)

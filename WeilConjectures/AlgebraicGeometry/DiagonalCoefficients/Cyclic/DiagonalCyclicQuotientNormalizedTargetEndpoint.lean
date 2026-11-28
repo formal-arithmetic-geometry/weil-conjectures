@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicQuotientAugmentation
+import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicQuotientTargetShift
+import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicQuotientTargetRoots
 
 /-! # Quotient and normalized endpoint comparisons for cyclic coefficients -/
 
@@ -40,6 +42,8 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
   cyclicLine cyclicLineMap derivedScalars
   diagonalSingleLimitComparison diagonalShiftedSingleLimitComparison
 
+attribute [local semireducible] diagonalForget diagonalFiniteToPadic
+
 /-- The shifted root endpoint equation for a quotient-unit-preserving comparison.
 This is the target half of the normalized endpoint argument. -/
 theorem diagonalCyclicQuotient_normalizedTargetEndpoint
@@ -49,7 +53,7 @@ theorem diagonalCyclicQuotient_normalizedTargetEndpoint
     (eW : CompletedRealization l (diagonalSurface Y))
     (sourceIso : eW.F.obj (diagonalCompletedSource l Y) ≅
       source (Profinite.continuousMapRingObj.{u} ℤ_[l]) Y)
-    (source_normalization :
+    (_source_normalization :
       HEq (eW.underlying.inv.app (diagonalCompletedSource l Y) ≫ sourceIso.hom.hom)
         ((lowerStar Ab.{u + 1} (diagonalImmersion Y)).map
           (eP.underlying.inv.app (SheafOfModules.unit
@@ -84,8 +88,8 @@ theorem diagonalCyclicQuotient_normalizedTargetEndpoint
         (diagonalCompletedSource l Y) ≅ limit (D.ordinary.E.obj (diagonalIntegralSource Y)))
     (t0 : (diagonalCompletedRestriction l (diagonalSurface Y)).obj
         (Scheme.purTwistZlModule (diagonalSurface Y) l) ≅ limit H)
-    (hs0 : DiagonalTrace.SupportedSourceConeNormalization l Y D.ordinary s0)
-    (ht0 : HEq ((diagonalForget l (diagonalSurface Y)).map t0.hom)
+    (_hs0 : DiagonalTrace.SupportedSourceConeNormalization l Y D.ordinary s0)
+    (_ht0 : HEq ((diagonalForget l (diagonalSurface Y)).map t0.hom)
       (diagonalRootLimitComparison l (diagonalSurface Y) H roots).inv)
     (n : ℕ) (p : CyclicCartierFrame l Y n)
     (s : (D.ordinary.E.obj (diagonalIntegralSource Y)).obj (op n) ≅
@@ -96,8 +100,8 @@ theorem diagonalCyclicQuotient_normalizedTargetEndpoint
     (t : H.obj (op n) ≅ (diagonalFiniteToPadic l n (diagonalSurface Y)).obj
       (geoCartierLine (diagonalResidue.{u} l n) (l ^ (n + 1))
         (cartierResidue_cast l (n + 1)) (diagonalSurface Y)))
-    (hs : DiagonalSourceNormalization l Y D.ordinary n s)
-    (ht : DiagonalTrace.FiniteRootNormalization l Y hY H roots n t),
+    (_hs : DiagonalSourceNormalization l Y D.ordinary n s)
+    (_ht : DiagonalTrace.FiniteRootNormalization l Y hY H roots n t),
     let F : DerivedCategory.{u + 1} (DiagonalCompleted l (diagonalSurface Y)) ⥤
         DerivedCategory.{u + 1} (DiagonalMod l (diagonalSurface Y)) :=
       cyclicDiscreteRestriction l (diagonalSurface Y)
@@ -129,6 +133,29 @@ theorem diagonalCyclicQuotient_normalizedTargetEndpoint
           (En.commShiftIso (2 : ℤ)).hom.app _ ≫
             ((((evaluation ℕᵒᵖ (DiagonalMod l (diagonalSurface Y))).obj
               (op n)).mapDerivedCategorySingleFunctor 0).hom.app H)⟦(2 : ℤ)⟧' ≫
-            ((DerivedCategory.singleFunctor _ 0).map t.hom)⟦(2 : ℤ)⟧' := by sorry
+            ((DerivedCategory.singleFunctor _ 0).map t.hom)⟦(2 : ℤ)⟧' := by
+  intro D H roots a b L M s0 t0 hs0 ht0 n p s t hs ht
+  dsimp only
+  intro sa ta hsa hta e he
+  have : (diagonalForget l (diagonalSurface Y)).Faithful := by
+    unfold diagonalForget
+    infer_instance
+  have := cyclic_target_root_projection_epi l Y hY H roots t0 ht0 n
+  refine target_endpoint_assembly (diagonalForget l (diagonalSurface Y)) _ ta _ _ ?β₁ _ ?hβ _ _
+    ?hε₁ ?hε₂ _ _ ?he' _ _ ?hc _ ?hκ _ _ _ _ _ hta ?hP (he _)
+    (cyclicEvaluationAugmentation_targetShift l Y n eW p)
+    ((Category.assoc _ _ _).trans (cyclicEvaluationAugmentation_zeroTarget l Y n eW p))
+    ((cyclic_target_root_projection l Y hY H roots t0 ht0 n t ht).trans
+      (cyclic_line_root_projection l Y hY n eW p).symm)
+  case hP =>
+    unfold diagonalTargetLimitMap
+    exact shiftedSingleLimitComparison_projection _ L _ H _ t0 b n
+  case hβ =>
+    rw [← CategoryTheory.Functor.map_comp, b.hom_inv_id, CategoryTheory.Functor.map_id]
+  case he' => exact e.hom_inv_id_app _
+  case hε₁ => exact NatIso.isIso_app_of_isIso _ _
+  case hε₂ => exact Functor.map_isIso _ _
+  case hc => exact NatIso.isIso_app_of_isIso _ _
+  case hκ => exact NatIso.isIso_app_of_isIso _ _
 
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients
