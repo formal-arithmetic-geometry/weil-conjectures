@@ -75,13 +75,12 @@ private theorem integralRestriction
     ScalarLocalization.localization]
   exact ht
 
-/-- The raw finite comparison restricts to the specified integral identity. -/
-theorem finiteRawIntegralFormula (A : FiniteCondensedData l X)
+/-- On stages, the raw finite comparison restricts to the specified integral identity. -/
+theorem finiteRawStageFormula (A : FiniteCondensedData l X)
     (E : Index l (PadicAlgCl l)) :
     sfRationalConstructibleLocalization l (Coefficient.{u} l (PadicAlgCl l) E) X ⋙
-        finiteFunctor l X A.toCore E =
-      (A.stage E).integral.functor ⋙ pbcStageLocalization l (PadicAlgCl l) X E ⋙
-        (A.realization E).J := by
+        A.raw.family.Φ E =
+      (A.stage E).integral.functor ⋙ pbcStageLocalization l (PadicAlgCl l) X E := by
   have hf := A.raw.finite_functor
   unfold FdCompletionFiniteFunctor at hf
   have hc : HEq (GeneralAlgebraicallyClosedCoefficients.stageCategory l (PadicAlgCl l) X E)
@@ -97,9 +96,17 @@ theorem finiteRawIntegralFormula (A : FiniteCondensedData l X)
     (sfRationalConstructibleLocalization l (Coefficient.{u} l (PadicAlgCl l) E) X)
     (sfRationalConstructibleLocalization l (pbcFiniteField.{u} l (PadicAlgCl l) E) X)
     hQ (A.raw.family.Φ E) (A.stage E).rational.functor (hf E)
+  exact h.trans (integralRestriction l X A E)
+
+/-- The raw finite comparison restricts to the specified integral identity. -/
+theorem finiteRawIntegralFormula (A : FiniteCondensedData l X)
+    (E : Index l (PadicAlgCl l)) :
+    sfRationalConstructibleLocalization l (Coefficient.{u} l (PadicAlgCl l) E) X ⋙
+        finiteFunctor l X A.toCore E =
+      (A.stage E).integral.functor ⋙ pbcStageLocalization l (PadicAlgCl l) X E ⋙
+        (A.realization E).J := by
   change (sfRationalConstructibleLocalization l (Coefficient.{u} l (PadicAlgCl l) E) X ⋙
     A.raw.family.Φ E) ⋙ (A.realization E).J = _
-  refine (congrArg (fun F ↦ F ⋙ (A.realization E).J) h).trans ?_
-  exact congrArg (fun F ↦ F ⋙ (A.realization E).J) (integralRestriction l X A E)
+  exact congrArg (fun F ↦ F ⋙ (A.realization E).J) (finiteRawStageFormula l X A E)
 
 end WeilConjectures.LocallyFiniteAdicRealization
