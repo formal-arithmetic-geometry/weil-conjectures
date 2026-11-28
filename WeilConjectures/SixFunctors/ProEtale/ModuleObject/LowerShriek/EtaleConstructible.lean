@@ -167,8 +167,7 @@ theorem isConstructibleModuleObject_weaklyEtaleLowerShriek_of_isFinite {X Y : Sc
 
 /-- **Extension by zero along an étale morphism preserves constructibility**: for an étale
 morphism `f : X ⟶ Y` of Noetherian schemes, `f_!` maps constructible module objects over `Λ` to
-constructible module objects. Over the strata of a stratification of `Y`, `f` is finite étale
-(Stacks, Tag 03S0). -/
+constructible module objects. -/
 theorem isConstructibleModuleObject_weaklyEtaleLowerShriek_of_etale {X Y : Scheme.{u}}
     [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) [Etale f]
     {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}

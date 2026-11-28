@@ -96,8 +96,7 @@ noncomputable def weaklyEtaleLowerShriekBaseChange (sq : CommSq g' f' f g) [Weak
     (weaklyEtaleLowerShriekUpperStarAdjunction Λ f')).symm
       (upperStarSquareComparison Λ sq.flip).hom
 
-/-- For a cartesian square, the exchange morphism of the extension by zero is an isomorphism: its
-other mate is the weakly étale base change morphism of the pushforward along `g`. -/
+/-- For a cartesian square, the exchange morphism of the extension by zero is an isomorphism. -/
 theorem isIso_weaklyEtaleLowerShriekBaseChange (hsq : IsPullback g' f' f g) [WeaklyEtale f]
     [WeaklyEtale f'] : IsIso (weaklyEtaleLowerShriekBaseChange Λ hsq.toCommSq) := by
   have := isIso_lowerStarBaseChange_of_isPullback Λ hsq.flip

@@ -28,6 +28,12 @@ Let `Λ` be a commutative condensed ring and `X` a scheme. We show:
   The restriction of `M` to an open `W` contained in a stratum is lisse, since it becomes lisse
   after pullback along the surjective closed immersion `Xₐ ×_X W ⟶ W`
   (`ProEtale.CondensedRing.isLocallyFinitelyPresented_upperStar_ι_of_le_range`).
+
+## Implementation details
+
+The restriction of `M` to an open `U` covered by opens `W i` on which `M` is lisse is lisse, since
+the `W i` form a Zariski, hence pro-étale, cover of `U`
+(`ProEtale.CondensedRing.isLocallyFinitelyPresented_upperStar_ι_of_forall_mem`).
 -/
 
 @[expose] public section
@@ -80,13 +86,6 @@ lemma isLocallyFinitelyPresented_biprod {X : Scheme.{u}}
     (IsLocallyFinitelyPresented.upperStar Λ (𝒰.f i) hN)).of_iso
       ((𝒰.f i)^*⟦Λ⟧.mapBiprod M N).symm
 
-/-- A zero module object is pro-étale locally finitely presented. -/
-lemma isLocallyFinitelyPresented_of_isZero {X : Scheme.{u}}
-    {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
-    (hM : IsZero M) : IsLocallyFinitelyPresented (condensedRingObj Λ X) M :=
-  (isLocallyFinitelyPresented_iff M).2 ⟨.singleton (𝟙 X) (Precoverage.mem_coverings_of_isIso _),
-    fun _ ↦ IsFinitelyPresented.upperStar Λ _ (Mod.IsFinitelyPresented.of_isZero hM)⟩
-
 /-- Pro-étale local finite presentation, as a property of module objects over `Λ_X`, is closed
 under binary products. -/
 lemma isClosedUnderBinaryProducts_isLocallyFinitelyPresented (X : Scheme.{u}) :
@@ -109,7 +108,7 @@ theorem isLocallyFinitelyPresented_biproduct {X : Scheme.{u}} {J : Type*} [Finit
     (condensedRingObj Λ X)) := IsLocallyFinitelyPresented (condensedRingObj Λ X)
   have : P.IsClosedUnderIsomorphisms := ⟨fun e h ↦ h.of_iso e⟩
   have : P.ContainsZero :=
-    ⟨⟨0, isZero_zero _, isLocallyFinitelyPresented_of_isZero (isZero_zero _)⟩⟩
+    ⟨⟨0, isZero_zero _, ProEtale.isLocallyFinitelyPresented_of_isZero _ (isZero_zero _)⟩⟩
   have := isClosedUnderBinaryProducts_isLocallyFinitelyPresented (Λ := Λ) X
   have : P.IsClosedUnderFiniteProducts := .mk'
   exact P.prop_of_isLimit_fan (biproduct.isLimit M) hM
@@ -118,8 +117,7 @@ theorem isLocallyFinitelyPresented_biproduct {X : Scheme.{u}} {J : Type*} [Finit
 
 /-- Let `f : Z ⟶ X` be an immersion such that `f^* M` is pro-étale locally finitely presented.
 Then the restriction of `M` to any open `W` contained in the range of `f` is pro-étale locally
-finitely presented: it becomes so after pullback along the surjective closed immersion
-`Z ×_X W ⟶ W`. -/
+finitely presented. -/
 theorem isLocallyFinitelyPresented_upperStar_ι_of_le_range {X Z : Scheme.{u}} (f : Z ⟶ X)
     [IsImmersion f] {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
     (hM : IsLocallyFinitelyPresented (condensedRingObj Λ Z) ((f)^*⟦Λ⟧.obj M)) (W : X.Opens)

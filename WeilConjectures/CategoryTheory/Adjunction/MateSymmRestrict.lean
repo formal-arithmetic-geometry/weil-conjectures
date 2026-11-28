@@ -101,7 +101,6 @@ lemma map_mateEquiv_symm_restrictFullyFaithful_app (β : TwoSquare R H G R')
   rw [Ga.map_comp, assoc, reassoc_of% h₂, Ra'.map_comp]
   rfl
 
-
 /-- The left mate of the restrictions of adjunctions to full subcategories is invertible as soon
 as the left mate of the ambient adjunctions is, for squares compatible through the
 inclusions. -/

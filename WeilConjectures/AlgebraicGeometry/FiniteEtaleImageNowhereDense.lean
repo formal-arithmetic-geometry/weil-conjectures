@@ -9,6 +9,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.Topology.NoetherianSpace
+public import WeilConjectures.Mathlib.Topology.Sober
 
 /-! # Images of nowhere dense closed sets under finite morphisms
 
@@ -37,14 +38,6 @@ universe u
 
 open Topology
 
-/-- In a `T₀` space, a point whose closure is an irreducible component admits no proper
-generization. -/
-theorem eq_of_specializes_of_closure_mem_irreducibleComponents {α : Type*}
-    [TopologicalSpace α] [T0Space α] {x y : α}
-    (hy : closure {y} ∈ irreducibleComponents α) (hxy : x ⤳ y) : x = y := by
-  have h := hy.2 isIrreducible_singleton.closure (specializes_iff_closure_subset.mp hxy)
-  exact (hxy.antisymm (specializes_iff_closure_subset.mpr h)).eq
-
 namespace AlgebraicGeometry
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -58,7 +51,7 @@ theorem closure_singleton_mem_irreducibleComponents_of_locallyQuasiFinite
     isClosed_irreducibleComponent
   have hξx : ξ ⤳ x := hξ.specializes mem_irreducibleComponent
   have hfξ : f ξ = f x :=
-    eq_of_specializes_of_closure_mem_irreducibleComponents hx (hξx.map f.continuous)
+    mem_genericPoints_iff_forall_specializes.1 hx _ (hξx.map f.continuous)
   rw [← (f.isDiscrete_preimage_singleton (f x)).eq_of_specializes hξx hfξ rfl, hξ.def]
   exact irreducibleComponent_mem_irreducibleComponents x
 
