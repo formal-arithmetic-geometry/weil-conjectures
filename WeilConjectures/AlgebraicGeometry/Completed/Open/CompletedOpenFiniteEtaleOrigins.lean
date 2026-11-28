@@ -45,31 +45,6 @@ private theorem finiteComparison_eq
       (congr_app (toSheafify_naturality (ProEt.topology T)
         (AdicCoefficients.constants T (A ⧸ d.ideal ^ (n + 1)))) V) b |>.symm
 
-private theorem restriction_exact
-    {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
-    {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
-    PreservesFiniteLimits (cbcOpenRestriction d j inferInstance) ∧
-      PreservesFiniteColimits (cbcOpenRestriction d j inferInstance) := by
-  let G := cbcOpenSiteFunctor j inferInstance
-  have : G.IsCocontinuous (ProEt.topology U) (ProEt.topology T) :=
-    ProEt.isCocontinuous_overMap (inferInstance : WeaklyEtale j)
-  let F := cbcOpenRestriction d j inferInstance
-  let V := SheafOfModules.toSheaf (reductionModuleRing U (d.completedRing U))
-  let H := G.sheafPushforwardContinuous AddCommGrpCat.{t + 1}
-    (ProEt.topology U) (ProEt.topology T)
-  have : PreservesFiniteLimits H := inferInstance
-  have : PreservesColimitsOfSize.{t + 1, t + 1} H :=
-    (G.sheafAdjunctionCocontinuous AddCommGrpCat.{t + 1}
-      (ProEt.topology U) (ProEt.topology T)).leftAdjoint_preservesColimits
-  have : PreservesFiniteLimits (F ⋙ V) :=
-    inferInstanceAs (PreservesFiniteLimits
-      (SheafOfModules.toSheaf (reductionModuleRing T (d.completedRing T)) ⋙ H))
-  have : PreservesFiniteColimits (F ⋙ V) :=
-    inferInstanceAs (PreservesFiniteColimits
-      (SheafOfModules.toSheaf (reductionModuleRing T (d.completedRing T)) ⋙ H))
-  exact ⟨preservesFiniteLimits_of_reflects_of_preserves F V,
-    preservesFiniteColimits_of_reflects_of_preserves F V⟩
-
 -- Localize an exact adjunction directly; no resolution choices are needed.
 private def exactAdjunction
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]

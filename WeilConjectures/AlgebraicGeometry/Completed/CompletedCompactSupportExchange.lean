@@ -30,7 +30,7 @@ public import WeilConjectures.AlgebraicGeometry.Koszul.KoszulReconstruction
 public import WeilConjectures.AlgebraicGeometry.Projection.ProjectionCompactification
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcActualRingedExchange
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcActualStrictPullback
-public import WeilConjectures.AlgebraicGeometry.Completed.Open.CompletedOpenExchangeTransport
+public import WeilConjectures.AlgebraicGeometry.Completed.Open.CompletedOpenExtensionZeroExchange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
 public import Mathlib.CategoryTheory.Adjunction.Evaluation
 public import Mathlib.Algebra.Category.Grp.FilteredColimits

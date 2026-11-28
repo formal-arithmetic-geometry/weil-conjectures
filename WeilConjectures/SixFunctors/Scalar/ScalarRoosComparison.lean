@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
+import WeilConjectures.CategoryTheory.SignedCoconeShift.SignedMappingCoconeShift
 
 /-! # The coordinate-normalized additive Roos comparison
 
@@ -34,6 +35,42 @@ abbrev scalarRoosBoundary {A : Type a} [Category.{b} A] [Abelian A]
     [HasCountableProducts A] (C : ℕᵒᵖ ⥤ CochainComplex A ℤ) :=
   towerTransitionEndomorphism (K := fun n ↦ C.obj (op n))
     (integralOperationsTowerStep C)
+
+/-- The Roos functor commutes with the product coordinate of the Roos cocones. -/
+theorem integralOperationsRoosFunctor_map_fst
+    {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
+    {V W : ℕᵒᵖ ⥤ CochainComplex A ℤ} (α : V ⟶ W) (i : ℤ) :
+    (integralOperationsRoosFunctor.map α).f i ≫
+        (CochainComplex.mappingCocone.fst (scalarRoosBoundary W)).f i =
+      (CochainComplex.mappingCocone.fst (scalarRoosBoundary V)).f i ≫
+        (Limits.Pi.map (fun n : ℕ ↦ α.app (op n))).f i := by
+  apply SignedCoconeShift.cocone_ext_from (scalarRoosBoundary V) i
+  · change (CochainComplex.mappingCocone.inl _).v i i _ ≫
+      (SignedCoconeShift.coconeMap _ _ _).f i ≫ _ = _
+    rw [SignedCoconeShift.coconeMap_inl_assoc]
+    simp
+  · change (CochainComplex.mappingCocone.inr _).1.v (i - 1) i _ ≫
+      (SignedCoconeShift.coconeMap _ _ _).f i ≫ _ = _
+    rw [SignedCoconeShift.coconeMap_inr_assoc]
+    simp
+
+/-- The Roos functor commutes with the shifted coordinate of the Roos cocones. -/
+theorem integralOperationsRoosFunctor_map_snd
+    {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
+    {V W : ℕᵒᵖ ⥤ CochainComplex A ℤ} (α : V ⟶ W) (i : ℤ) :
+    (integralOperationsRoosFunctor.map α).f i ≫
+        (CochainComplex.mappingCocone.snd (scalarRoosBoundary W)).v i (i - 1) (by omega) =
+      (CochainComplex.mappingCocone.snd (scalarRoosBoundary V)).v i (i - 1) (by omega) ≫
+        (Limits.Pi.map (fun n : ℕ ↦ α.app (op n))).f (i - 1) := by
+  apply SignedCoconeShift.cocone_ext_from (scalarRoosBoundary V) i
+  · change (CochainComplex.mappingCocone.inl _).v i i _ ≫
+      (SignedCoconeShift.coconeMap _ _ _).f i ≫ _ = _
+    rw [SignedCoconeShift.coconeMap_inl_assoc]
+    simp
+  · change (CochainComplex.mappingCocone.inr _).1.v (i - 1) i _ ≫
+      (SignedCoconeShift.coconeMap _ _ _).f i ≫ _ = _
+    rw [SignedCoconeShift.coconeMap_inr_assoc]
+    simp
 
 section ScalarRoos
 
