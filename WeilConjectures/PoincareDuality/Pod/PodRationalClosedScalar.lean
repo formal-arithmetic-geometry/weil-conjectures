@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.PoincareDuality.Derived.DerivedAutomorphismHomEvaluationContinuationABase
 import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationPureTensor
+import WeilConjectures.PoincareDuality.StrictTensorAugmentation.StrictTensorAugmentationScalar
+import WeilConjectures.SixFunctors.GeneratorReduction.CompletedTensorUnitOnGood
+import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 import all WeilConjectures.PoincareDuality.Pod.Integral.PodIntegralHomComparisonNaturality
 public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSectionsScalarHomZeroCycleFormal
 
@@ -302,6 +305,108 @@ variable (l : ℕ) [Fact l.Prime]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L) (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
 
+-- A good complex represents every derived object.
+omit [∀ w : W, Invertible (l : W.residueField w)] in
+private theorem goodRepresentative (K : DerivedCategory (integralTowerModules l E W)) :
+    ∃ P : (integralOperationsGoodComplex l E W).FullSubcategory,
+      Nonempty (DerivedCategory.Q.obj P.obj ≅ K) := by
+  let q := integralOperationsGoodLocalization l E W
+  let V := (HomologicalComplex.quasiIso (integralTowerModules l E W) (.up ℤ)).inverseImage
+    (integralOperationsGoodComplex l E W).ι
+  let : q.IsLocalization V := integralOperationsGoodLocalization_isLocalization l E W
+  let : q.EssSurj := Localization.essSurj q V
+  exact ⟨q.objPreimage K, ⟨q.objObjPreimageIso K⟩⟩
+
+-- The ordinary-to-completed tensor unit as a natural transformation.
+private def completedTensorUnitNat (E : Type u) [Field E] [Algebra ℚ_[l] E]
+    [FiniteDimensional ℚ_[l] E] :
+    (pullbackTensorCalculus l E W).integralClosed.tensor ⟶ integralCompletedTensor l E W where
+  app MN := podCompletedTensorUnit l E W MN.1 MN.2
+  naturality _ _ f := completedTensorUnit_naturality l E W _ _ _ _ f.1 f.2
+
+-- The diagram chase behind the statement on good complexes.
+private theorem unit_scalar_of_representatives {C D : Type*} [Category* C] [Category* D]
+    (F : C ⥤ D) {A T CT X : C} {Y YA B TL TL' CL CL' Z : D}
+    (β : A ≅ T) {u : T ⟶ CT} {c : CT ⟶ X} {aE : A ⟶ X} (hgE : β.hom ≫ u ≫ c = aE)
+    {σ : F.obj CT ⟶ CL} (dC : CL ≅ CL') (cL : CL' ≅ Z) {φX : F.obj X ⟶ Y} {stc : Y ⟶ Z}
+    (h1 : F.map c ≫ φX ≫ stc = σ ≫ dC.hom ≫ cL.hom)
+    {φA : F.obj A ⟶ YA} {saE : YA ⟶ Y} (h3 : F.map aE ≫ φX = φA ≫ saE)
+    {sotc : YA ⟶ B} {aL : B ⟶ Z} (h4 : saE ≫ stc = sotc ≫ aL)
+    {τ : F.obj T ⟶ TL} {uL : TL ⟶ CL} {dT : TL ⟶ TL'} {uL' : TL' ⟶ CL'}
+    (h5 : dT ≫ uL' = uL ≫ dC.hom)
+    {βL : B ⟶ TL'} (h6 : F.map β.hom ≫ τ ≫ dT = φA ≫ sotc ≫ βL)
+    (hgL : βL ≫ uL' ≫ cL.hom = aL) :
+    F.map u ≫ σ = τ ≫ uL := by
+  apply (cancel_epi (F.mapIso β).hom).1
+  apply (cancel_mono (dC.hom ≫ cL.hom)).1
+  have h2 : F.map β.hom ≫ F.map u ≫ F.map c = F.map aE := by
+    simp only [← F.map_comp, hgE]
+  simp only [Functor.mapIso_hom, Category.assoc]
+  rw [← h1, reassoc_of% h2, reassoc_of% h3, h4, ← reassoc_of% h5, reassoc_of% h6, hgL]
+
+-- The statement on good complexes.
+omit [∀ w : W, Invertible (l : W.residueField w)] in
+set_option maxHeartbeats 800000 in
+private theorem podCompletedTensorUnit_scalar_onGood
+    (P Q : (integralOperationsGoodComplex l E W).FullSubcategory) :
+    (integralOrdinaryDerivedScalar l E L ι W).map
+        (podCompletedTensorUnit l E W (DerivedCategory.Q.obj P.obj)
+          (DerivedCategory.Q.obj Q.obj)) ≫
+        (scalarTensorOrdinary l E L ι W).hom.app
+          (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) =
+      (scalarClosedTensor l E L ι W).hom.app
+          (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) ≫
+        podCompletedTensorUnit l L W
+          ((integralOrdinaryDerivedScalar l E L ι W).obj (DerivedCategory.Q.obj P.obj))
+          ((integralOrdinaryDerivedScalar l E L ι W).obj (DerivedCategory.Q.obj Q.obj)) := by
+  refine unit_scalar_of_representatives (integralOrdinaryDerivedScalar l E L ι W)
+    ((pullbackTensorCalculus l E W).integralTensorModel.iso (ProEt.topology W)
+      (completedIntegralCommRingSheafUnrestricted l E W)
+      (pullbackTensorCalculus l E W).integralClosed P.obj Q.obj P.property.1 Q.property.1)
+    (podCompletedTensorUnit_onGood l E W P Q)
+    ((integralCompletedTensor l L W).mapIso
+      (((integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.app P.obj).prod
+        ((integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.app Q.obj)))
+    ((integralCompletedTensorComparison l L W).app
+      (⟨_, scalarGood l E L ι W P⟩, ⟨_, scalarGood l E L ι W Q⟩))
+    (φX := (integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app
+      ((integralOperationsTensorComplexFunctor l E W).obj (P.obj, Q.obj)))
+    (stc := DerivedCategory.Q.map (scalarTensorChain l E L ι W P.obj Q.obj))
+    (φA := (integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app
+      ((coefficientTotalTensor.{u, u + 1, u} (ProEt.topology W)
+        (completedIntegralCommRingSheafUnrestricted l E W)).obj (P.obj, Q.obj)))
+    (saE := DerivedCategory.Q.map
+      (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).map
+        ((StrictTensorAugmentation.map l E W).app (P.obj, Q.obj))))
+    (sotc := DerivedCategory.Q.map ((scalarOrdinaryTensorChain l E L ι W).hom.app (P.obj, Q.obj)))
+    (aL := DerivedCategory.Q.map ((StrictTensorAugmentation.map l L W).app
+      (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj P.obj,
+        ((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj Q.obj)))
+    (dT := (pullbackTensorCalculus l L W).integralClosed.tensor.map
+      (Prod.mkHom ((integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app P.obj)
+        ((integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app Q.obj)))
+    (uL' := podCompletedTensorUnit l L W
+      (DerivedCategory.Q.obj (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex
+        (.up ℤ)).obj P.obj))
+      (DerivedCategory.Q.obj (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex
+        (.up ℤ)).obj Q.obj)))
+    (βL := ((pullbackTensorCalculus l L W).integralTensorModel.iso (ProEt.topology W)
+      (completedIntegralCommRingSheafUnrestricted l L W)
+      (pullbackTensorCalculus l L W).integralClosed _ _ (scalarGood l E L ι W P).1
+      (scalarGood l E L ι W Q).1).hom) ?_ ?_ ?_ ?_ ?_ ?_
+  · exact (scalarTensorOrdinary_existsUnique l E L ι W).exists.choose_spec P Q
+  · exact (integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.naturality
+      ((StrictTensorAugmentation.map l E W).app (P.obj, Q.obj))
+  · rw [← Functor.map_comp, ← Functor.map_comp]
+    exact congrArg DerivedCategory.Q.map
+      (StrictTensorAugmentation.map_scalar l E L ι W P.obj Q.obj)
+  · exact completedTensorUnit_naturality l L W _ _ _ _
+      ((integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app P.obj)
+      ((integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app Q.obj)
+  · exact (scalarClosedTensor_existsUnique l E L ι W).exists.choose_spec P Q
+  · exact podCompletedTensorUnit_onGood l L W ⟨_, scalarGood l E L ι W P⟩
+      ⟨_, scalarGood l E L ι W Q⟩
+omit [∀ w : W, Invertible (l : W.residueField w)] in
 /-- Ordinary scalar extension carries the ordinary-to-completed tensor unit to the
 ordinary-to-completed tensor unit, conjugated by the closed and completed tensor scalar
 comparisons. -/
@@ -311,7 +416,22 @@ theorem podCompletedTensorUnit_scalar (M N : DerivedCategory (integralTowerModul
       (scalarClosedTensor l E L ι W).hom.app (M, N) ≫
         podCompletedTensorUnit l L W ((integralOrdinaryDerivedScalar l E L ι W).obj M)
           ((integralOrdinaryDerivedScalar l E L ι W).obj N) := by
-  sorry
+  let F := integralOrdinaryDerivedScalar l E L ι W
+  let α : (pullbackTensorCalculus l E W).integralClosed.tensor ⋙ F ⟶
+      F.prod F ⋙ integralCompletedTensor l L W :=
+    Functor.whiskerRight (completedTensorUnitNat l W E) F ≫ (scalarTensorOrdinary l E L ι W).hom
+  let β : (pullbackTensorCalculus l E W).integralClosed.tensor ⋙ F ⟶
+      F.prod F ⋙ integralCompletedTensor l L W :=
+    (scalarClosedTensor l E L ι W).hom ≫
+      Functor.whiskerLeft (F.prod F) (completedTensorUnitNat l W L)
+  obtain ⟨P, ⟨eP⟩⟩ := goodRepresentative l E W M
+  obtain ⟨Q, ⟨eQ⟩⟩ := goodRepresentative l E W N
+  change α.app (M, N) = β.app (M, N)
+  apply (cancel_epi (((pullbackTensorCalculus l E W).integralClosed.tensor ⋙ F).map
+    (eP.prod eQ).hom)).1
+  rw [α.naturality, β.naturality]
+  congr 1
+  exact podCompletedTensorUnit_scalar_onGood l E L ι W P Q
 
 /-- Completed scalar extension carries integral inverse transposition, conjugated by the
 integral tensor and internal-Hom scalar comparisons, to integral inverse transposition. -/
