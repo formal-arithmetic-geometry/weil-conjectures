@@ -152,6 +152,38 @@ private theorem coefficient_stratified_lattice
   have := hj
   exact finite_stratum_lattice A B a descend X U Y f j L hL M hM e
 
+/-- A lisse rational module on a Noetherian scheme has a lisse integral lattice on each
+stratum of some finite locally closed stratification. -/
+theorem exists_stratified_lisse_integral_lattice_of_isNoetherian
+    (l : ℕ) [Fact l.Prime] (E : Type) [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    (X : Scheme.{u}) [IsNoetherian X] :
+    letI := spectralNorm.nontriviallyNormedField ℚ_[l] E
+    let A := Profinite.continuousMapRingObj.{u} (Padic.coefficientExtensionIntegers l E)
+    let B := Profinite.continuousMapRingObj.{u} E
+    let a : A ⟶ B :=
+      (sheafCompose (coherentTopology Profinite.{u})
+        (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
+          (Profinite.continuousMapRingSheafMap
+            (Padic.coefficientExtensionIntegers l E).subtype continuous_subtype_val)
+    ∀ L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj B X),
+      LocallyFree (condensedRingObj B X) L →
+      ∃ S : Scheme.FiniteLocallyClosedStratification X, ∀ i : Fin S.n,
+        let T := S.domain i
+        let aT := (upperStarFromPoint T).map a
+        let LT := (CondensedRing.upperStar B (S.immersion i)).obj L
+        ∃ M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj A T),
+          LocallyFree (condensedRingObj A T) M ∧
+          ∃ ι : M ⟶ (Mod.comap aT).obj LT,
+            Mono ι ∧ IsIso (((Mod.extendRestrictAdjunction aT).homEquiv M LT).symm ι) := by
+  dsimp only
+  intro L hL
+  have hlocal := spectralLisse_etale_lattice l E X L hL
+  apply coefficient_stratified_lattice _ _ _ X L hL hlocal
+  intro Y V q _ _ _ P hP N hN he
+  obtain ⟨e⟩ := he
+  exact spectralFiniteEtaleTrace_lattice l E Y P hP q N hN e
+
 /-- A lisse rational module on a standing scheme has a lisse integral lattice on each
 stratum of some finite locally closed stratification. Finite ranks may vary, including
 rank zero. The coefficient topology is the canonical spectral norm topology; the integral
@@ -182,15 +214,9 @@ theorem exists_stratified_lisse_integral_lattice
           LocallyFree (condensedRingObj A T) M ∧
           ∃ ι : M ⟶ (Mod.comap aT).obj LT,
             Mono ι ∧ IsIso (((Mod.extendRestrictAdjunction aT).homEquiv M LT).symm ι) := by
-  dsimp only
-  intro L hL
   have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
   have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
   have : IsNoetherian X := ⟨⟩
-  have hlocal := spectralLisse_etale_lattice l E X L hL
-  apply coefficient_stratified_lattice _ _ _ X L hL hlocal
-  intro Y V q _ _ _ P hP N hN he
-  obtain ⟨e⟩ := he
-  exact spectralFiniteEtaleTrace_lattice l E Y P hP q N hN e
+  exact exists_stratified_lisse_integral_lattice_of_isNoetherian l E X
 
 end AlgebraicGeometry.ProEtale.CondensedRing

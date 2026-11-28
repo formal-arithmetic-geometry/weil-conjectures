@@ -8,11 +8,22 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
+import WeilConjectures.PoincareDuality.Biduality.Constructible
+import WeilConjectures.PoincareDuality.Biduality.Reduction
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleStratum
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 
 /-! # Geometric Verdier biduality for constructible sheaves
 
 This is the sheaf case, before the separate formal finite-truncation argument.
 The target of the structure morphism is required to be isomorphic to the base point.
+
+## Implementation details
+
+Since `S ⟶ Spec k` is an isomorphism, it is an open immersion, so `Ra^! ℚ̄_ℓ` is the dualizing
+complex `ω_X` relative to `Spec k`. The statement is then constructible Verdier biduality
+`isIso_verdierBiduality` for the sheaf placed in degree `0`, read in the ambient derived
+category through the inclusion of the bounded constructible complexes.
 
 ## References
 
@@ -49,6 +60,27 @@ theorem isIso_biduality_constructible_sheaf [IsIso S.hom] (a : X ⟶ S)
     IsIso (toIhomIhom
       ((boundedConstructibleUpperShriek ℓ a).obj (𝟙_ _)).obj
       ((DerivedCategory.singleFunctor _ 0).obj M)) := by
-  sorry
+  let := boundedConstructibleBraiding (ℓ := ℓ) X
+  let K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
+    ⟨_, boundedConstructible_singleFunctor_zero_obj _ M hM⟩
+  have : IsOpenImmersion (Over.mkIdTerminal.from S).left := by
+    rw [Over.mkIdTerminal_from_left]
+    infer_instance
+  let e : (boundedConstructibleUpperShriek ℓ a).obj (𝟙_ _) ≅ dualizingComplex ℓ X :=
+    (boundedConstructibleUpperShriek ℓ a).mapIso
+      (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ (Over.mkIdTerminal.from S)).symm ≪≫
+    upperShriekDualizingComplexIso ℓ a
+  let ι := (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι
+  have hd (A : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+      IsIso (dualComparison ι (W := dualizingComplex ℓ X) e.inv.hom A) := by
+    have : IsIso ((Functor.LaxMonoidal.ihomComparison ι A).app (dualizingComplex ℓ X)) := by
+      rw [ObjectProperty.ihomComparison_ι_app]
+      exact IsIso.id _
+    unfold dualComparison
+    infer_instance
+  have := hd K
+  have := hd ((ihom K).obj (dualizingComplex ℓ X))
+  have : IsIso (toIhomIhom (dualizingComplex ℓ X) K) := isIso_verdierBiduality ℓ K
+  exact (isIso_map_toIhomIhom_iff ι (W := dualizingComplex ℓ X) e.inv.hom K).1 inferInstance
 
 end AlgebraicGeometry.ProEtale.CondensedRing
