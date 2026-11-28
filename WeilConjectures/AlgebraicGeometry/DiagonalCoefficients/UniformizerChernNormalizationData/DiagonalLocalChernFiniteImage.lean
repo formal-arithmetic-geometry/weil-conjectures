@@ -39,9 +39,8 @@ attribute [-instance] AlgebraicGeometry.ProEtale.diagonalModuleSheafAbelian
 
 section ExactImage
 attribute [-instance] ConstantScalarRestriction.fixedAbelian
-set_option linter.auxLemma false in
-attribute [local instance 100000] Etale.DerivedCategoryModule._proof_1
-  Etale.DerivedCategoryModule._proof_2
+attribute [local instance 100000] GrothendieckTopology.hasSheafify_smallEtaleTopology
+  GrothendieckTopology.isGrothendieckAbelian_sheaf_smallEtaleTopology
 
 /-- The finite comparison image of an ordinary finite arrow, unfolded. -/
 theorem finiteComparison_heq (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
