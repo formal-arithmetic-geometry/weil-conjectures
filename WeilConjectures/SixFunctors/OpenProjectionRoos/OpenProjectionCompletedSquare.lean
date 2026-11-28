@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.OpenProjectionRoos.OpenProjectionRoosC
 import WeilConjectures.SixFunctors.OpenTensorAugmentation.OpenTensorAugmentationLimitSquare
 import WeilConjectures.SixFunctors.CompactSupportCoefficientTensor.ProjectionTensorCoefficientComparison
 import WeilConjectures.SixFunctors.OpenProjectionRoos.OpenProjectionRoosProducts
+import WeilConjectures.AlgebraicGeometry.FiniteFieldPrimePowerUnit
 
 /-! # Descent of the augmented open tensor square through completion
 
@@ -310,23 +311,6 @@ attribute [local irreducible] integralOperationsTensorTowerFunctor
   completedIntegralCommRingSheafUnrestricted completedIntegralCoefficientSheafUnrestricted
   unrestrictedIntegralComplexFunctor scalarReductionExistence unrestrictedIntegralReductionExistence
 
-/-- The prime `l` is a unit in every residue field of a scheme over a finite field of
-characteristic different from `l`. -/
-theorem isUnit_natCast_residueField_of_finiteFieldDatum (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
-    (W : Scheme.{u}) [W.Over (Spec (.of D.k))] (w : W) :
-    IsUnit (l : W.residueField w) := by
-  let : Fintype D.k₀ := Fintype.ofFinite D.k₀
-  let : Fact D.p.Prime := ⟨D.prime⟩
-  have hcard : Fintype.card D.k₀ = D.p ^ D.a := by
-    simpa only [Nat.card_eq_fintype_card] using D.card_base.trans D.cardinality_eq
-  let : CharP D.k₀ D.p := charP_of_card_eq_prime_pow hcard
-  let : CharP D.k D.p := charP_of_injective_algebraMap' D.k₀ D.p
-  have hunit : IsUnit (l : D.k) :=
-    isUnit_iff_ne_zero.mpr (CharP.cast_ne_zero_of_ne_of_prime D.k (Fact.out) hl.symm)
-  simpa only [map_natCast] using hunit.map
-      (((Scheme.ΓSpecIso (.of D.k)).inv ≫ (W ↘ Spec (.of D.k)).appTop) ≫
-        W.presheaf.germ (⊤ : W.Opens) w (by trivial) ≫ W.residue w).hom
-
 /-- There is a completed open tensor isomorphism `gamma` compatible with the augmentations
 `chi` (which are invertible on constructible inputs) and satisfying the completed
 representative equation. -/
@@ -373,9 +357,11 @@ theorem openProjectionCompletedSquare
   have : CompactSpace U := QuasiCompact.compactSpace_of_compactSpace (U ↘ Spec (.of D.k))
   have : IsNoetherian U := {}
   let : ∀ x : X, Invertible (l : X.residueField x) := fun x ↦
-    (isUnit_natCast_residueField_of_finiteFieldDatum l D hl X x).invertible
+    (AlgebraicGeometry.ProEtale.finiteFieldPrime_isUnit_residueField D l hl
+      (X ↘ Spec (.of D.k)) x).invertible
   let : ∀ x : U, Invertible (l : U.residueField x) := fun x ↦
-    (isUnit_natCast_residueField_of_finiteFieldDatum l D hl U x).invertible
+    (AlgebraicGeometry.ProEtale.finiteFieldPrime_isUnit_residueField D l hl
+      (U ↘ Spec (.of D.k)) x).invertible
   have hinv (K : sfIntegralConstructibleCategory l E U × sfIntegralConstructibleCategory l E X) :
       IsIso ((q.tensorX.chi l E).app ((leftInputs l E j o).obj (K.1.obj, K.2.obj))) ∧
         IsIso ((q.tensorU.chi l E).app ((rightInputs l E j o).obj (K.1.obj, K.2.obj))) :=
