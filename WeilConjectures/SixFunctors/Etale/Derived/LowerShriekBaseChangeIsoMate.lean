@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangeIdentity
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompIsoUnit
+public import WeilConjectures.CategoryTheory.Adjunction.PullbackOfComp
 
 /-!
 # Compact-support base change along a square of isomorphisms
@@ -88,14 +89,6 @@ lemma rightDerivedLowerShriekBaseChangeMap_app_congr {X X' Y Y' : Scheme.{u}} {v
   exact Category.comp_id _
 
 end Congr
-
-/-- Naturality of `ι` along `f`, in a form avoiding a comparison of components of `ι` at
-definitionally equal objects. -/
-lemma comp_map_eq_of_naturality {C D : Type*} [Category C] [Category D] {F G : C ⥤ D}
-    (ι : F ⟶ G) {P Q : C} (f : P ⟶ Q) {A : D} (e : A ⟶ F.obj P) (η : A ⟶ G.obj P)
-    (hη : e ≫ ι.app P = η) (r : A ⟶ F.obj Q) (hr : e ≫ F.map f = r) :
-    η ≫ G.map f = r ≫ ι.app Q := by
-  rw [← hη, Category.assoc, ← ι.naturality, ← reassoc_of% hr]
 
 variable [Finite Λ] {X X' s s' : Scheme.{u}} {g : X' ⟶ X} {h : s' ⟶ s} {a : X ⟶ s}
   {a' : X' ⟶ s'} [QuasiCompact a] [HasCompactification a] [QuasiCompact a']

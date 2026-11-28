@@ -14259,6 +14259,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ProperBaseChange.Adjunct
 public import WeilConjectures.CategoryTheory.Adjunction.ProperBaseChange.CoefficientExchange
 public import WeilConjectures.CategoryTheory.Adjunction.ProperBaseChange.ThreeStepAdjunctionComparison
 public import WeilConjectures.CategoryTheory.Adjunction.ProperOpenTransport
+public import WeilConjectures.CategoryTheory.Adjunction.PullbackOfComp
 public import WeilConjectures.CategoryTheory.Adjunction.PushHomComp
 public import WeilConjectures.CategoryTheory.Adjunction.RestrictEssImage
 public import WeilConjectures.CategoryTheory.Adjunction.RingAdjunctPreservesOperations
