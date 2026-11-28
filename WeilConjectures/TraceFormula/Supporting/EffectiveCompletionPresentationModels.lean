@@ -50,8 +50,8 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace WeilConjectures
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
   constantSheaf HasDerivedCategory.standard SheafOfModules.monoidalCategory
-  CategoryTheory.Limits.limit scalarReductionExistence scalarReductionDerivedExistence
-  unrestrictedIntegralReductionExistence coefficientSequenceRestriction
+  CategoryTheory.Limits.limit
+  coefficientSequenceRestriction
   coefficientSequenceEvaluation unrestrictedTowerUnit coefficientConstantTowerLimit
 
 /-- The actual completion unit is the strict quotient augmentation on every

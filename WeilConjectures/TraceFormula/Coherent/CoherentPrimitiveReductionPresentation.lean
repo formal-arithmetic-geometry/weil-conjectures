@@ -199,8 +199,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
-  constantSheaf SheafOfModules.monoidalCategory scalarReductionExistence
-  scalarReductionDerivedExistence unrestrictedIntegralReductionExistence
+  constantSheaf SheafOfModules.monoidalCategory
   coefficientSequenceRestriction coefficientSequenceEvaluation
 
 private theorem moduleEqToHom_heq

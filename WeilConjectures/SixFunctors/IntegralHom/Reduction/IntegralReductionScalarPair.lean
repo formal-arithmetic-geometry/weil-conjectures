@@ -27,8 +27,8 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 universe d t u
 open CategoryTheory CategoryTheory.Limits SheafOfModules
 namespace WeilConjectures.IntegralHom
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-  integralReductionExistence integralReductionDerivedExistence HasDerivedCategory.standard
+attribute [local irreducible] integralReductionExistence integralReductionDerivedExistence
+  HasDerivedCategory.standard
   completedIntegralCoefficientSheafUnrestricted constantSheaf
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]

@@ -124,7 +124,7 @@ universe t
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
-attribute [local irreducible] completedAdicChangeData HasDerivedCategory.standard
+attribute [local irreducible] HasDerivedCategory.standard
   SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
   SheafOfModules.siteDerivedTensorIndependentCoefficients
 

@@ -176,8 +176,7 @@ private noncomputable abbrev projection (n : ℕ) :=
 private noncomputable abbrev coeff (n : ℕ) :=
   coefficient X (base X l E) (level X l E n) (projection X l E n)
 
-attribute [local irreducible] scalarReductionExistence
-  completedIntegralCoefficientSheafUnrestricted constantSheaf
+attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted constantSheaf
 attribute [local implicit_reducible] scalarReductionExtension
 set_option backward.defeqAttrib.useBackward true
 attribute [local implicit_reducible] completedIntegralCommRingSheafUnrestricted

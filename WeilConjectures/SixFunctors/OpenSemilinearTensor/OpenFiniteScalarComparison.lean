@@ -104,7 +104,7 @@ attribute [local implicit_reducible] CategoryTheory.sheafCompose
   SheafOfModules.restrictScalars PresheafOfModules.restrictScalars
   SheafOfModules.sliceScalarAlgebra CategoryTheory.Functor.constComp
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted constantSheaf
-  completedIntegralCommRingProjectionUnrestricted scalarReductionExistence
+  completedIntegralCommRingProjectionUnrestricted
 
 private abbrev scalarAdj (T : Scheme.{t}) (n : ℕ) :=
   (scalarReductionExtension_adjunction l E T n).choose

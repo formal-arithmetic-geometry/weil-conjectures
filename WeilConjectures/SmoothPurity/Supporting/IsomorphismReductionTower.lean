@@ -95,8 +95,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open scoped ChangeOfRings
 open AlgebraicGeometry.Scheme
 namespace WeilConjectures
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-  unrestrictedIntegralReductionExistence scalarReductionExtension
+attribute [local irreducible] scalarReductionExtension
   scalarReductionDerivedExtension scalarReductionCounit
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -712,8 +711,7 @@ private theorem isoReduction_extension_obj (W : Scheme.{t}) (n : ℕ)
   exact (scalarReductionExistence l E W n).choose_spec.choose M
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
-attribute [local semireducible] scalarReductionExtension scalarReductionExistence
-  unrestrictedIntegralReductionExistence in
+attribute [local semireducible] scalarReductionExtension in
 private theorem isoReduction_tensorSection_eq (W : Scheme.{t}) (n : ℕ)
     (M : scalarReductionSource l E W) (U : W.ProEtᵒᵖ)
     (s : (integralCoefficientCommRingSheaf l E W n).obj.obj U) (x : M.val.obj U) :
@@ -894,8 +892,7 @@ private theorem isoReduction_moduleTransition
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 set_option backward.isDefEq.respectTransparency.types false in
-attribute [local semireducible] scalarReductionExtension scalarReductionExistence
-  unrestrictedIntegralReductionExistence in
+attribute [local semireducible] scalarReductionExtension in
 private theorem isoReduction_transition
     (e : ∀ n, scalarReductionExtension l E Y n ⋙ isoReductionFiniteInverse l E g n ≅
       isoReductionIntegralInverse l E g ⋙ scalarReductionExtension l E X n)

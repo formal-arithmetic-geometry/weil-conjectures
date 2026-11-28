@@ -53,8 +53,7 @@ namespace WeilConjectures.ConstantGeometricStalkUnit
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-  unrestrictedIntegralReductionExistence HasDerivedCategory.standard limit
+attribute [local irreducible] HasDerivedCategory.standard limit
   finiteRegularIso finiteSingleRegularIso finiteRingUnit finiteChainUnit
 attribute [local implicit_reducible] integralConstantReduction
 

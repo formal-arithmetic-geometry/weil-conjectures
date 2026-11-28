@@ -28,7 +28,6 @@ set_option backward.isDefEq.respectTransparency.types true
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
 attribute [local irreducible] WeilConjectures.scalarReductionExtension
-  WeilConjectures.scalarReductionExistence
   WeilConjectures.CoefficientExtensionAssociation.quotientAdjunction
   WeilConjectures.completedIntegralCoefficientSheafUnrestricted
   WeilConjectures.coefficientSequenceTransition

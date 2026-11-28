@@ -22,7 +22,7 @@ universe t
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
-attribute [local irreducible] completedAdicChangeData completedAdicRing
+attribute [local irreducible] completedAdicRing
 
 private lemma restrictedIso_forget
     {C : Type (t + 1)} [Category.{t} C] {J : GrothendieckTopology C}

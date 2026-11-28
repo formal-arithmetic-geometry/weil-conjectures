@@ -164,8 +164,8 @@ def coefCompactSupportInputTau (W : Scheme.{u})
 attribute [local irreducible] Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors
   HasDerivedCategory.standard constantSheaf Padic.coefficientExtensionIdeal
   coefficientSequenceEvaluation coefficientSequenceTransition
-  completedIntegralCoefficientSheafUnrestricted scalarReductionExistence
-  scalarReductionDerivedExistence Functor.objPreimage Functor.objObjPreimageIso
+  completedIntegralCoefficientSheafUnrestricted
+  Functor.objPreimage Functor.objObjPreimageIso
 
 /-- The finite-level output transition, before restriction to completed coefficients. -/
 def coefCompactSupportTau {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

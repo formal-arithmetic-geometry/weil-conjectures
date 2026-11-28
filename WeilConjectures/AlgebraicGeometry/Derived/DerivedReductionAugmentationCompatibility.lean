@@ -34,7 +34,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] completedReductionModuleTowerFunctor_additive
 attribute [local irreducible] HasDerivedCategory.standard
   cochainRepresentativeWhiskering complexCounitNat
-attribute [local irreducible] completedAdicChangeData completedReductionCoefficient
+attribute [local irreducible] completedReductionCoefficient
   completedReductionTower CategoryTheory.Functor.mapDerivedCategory
   CategoryTheory.Functor.mapDerivedCategoryFactors CategoryTheory.Functor.mapDerivedCategoryFactorsh
   CategoryTheory.Functor.mapDerivedCategoryNatIso

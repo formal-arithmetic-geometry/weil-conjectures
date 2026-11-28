@@ -97,8 +97,7 @@ theorem OrdinaryModel.unit_projection (M : OrdinaryModel l E W)
   intro V
   ext x
   exact (M.unit_tensor X n V x).trans (by
-    dsimp only [unrestrictedIntegralTensorSection, unrestrictedIntegralReductionFunctor,
-      unrestrictedIntegralReductionExistence, scalarReductionExistence] at hu ⊢
+    dsimp only [unrestrictedIntegralTensorSection, unrestrictedIntegralReductionFunctor] at hu ⊢
     exact (hu V x).symm)
 
 /-- The ordinary transpose of a strict unit presentation evaluates, at every finite level,

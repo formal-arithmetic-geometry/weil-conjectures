@@ -21,7 +21,7 @@ universe d t u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace WeilConjectures
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
-  scalarReductionDerivedExistence normalizedDVRResCompletedComp
+  normalizedDVRResCompletedComp
   scalarReductionDerivedExtension scalarReductionCounit
 
 section AdjunctionHelpers
@@ -133,12 +133,10 @@ attribute [local instance] scalarReductionExtensionAdditive
 
 attribute [local irreducible] normalizedDVRQuotient integralCoefficientSheafTransition
 
-attribute [local irreducible] scalarReductionExistence unrestrictedIntegralReductionExistence
-  scalarReductionExtension unrestrictedIntegralReductionFunctor
+attribute [local irreducible] scalarReductionExtension unrestrictedIntegralReductionFunctor
 
 section TensorIdentification
-attribute [local semireducible] scalarReductionExistence unrestrictedIntegralReductionExistence
-  scalarReductionExtension unrestrictedIntegralReductionFunctor
+attribute [local semireducible] scalarReductionExtension unrestrictedIntegralReductionFunctor
 
 end TensorIdentification
 

@@ -44,7 +44,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open WeilConjectures
 open scoped CategoryTheory.Obj
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
-  scalarReductionExistence scalarReductionDerivedExistence
   scalarReductionDerivedExtension scalarReductionExtension scalarReductionCounit
   normalizedDVRResCompletedComp normalizedDVRKFlatComparison
 namespace AlgebraicGeometry.ProEtale.IntegralPresentation

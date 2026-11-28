@@ -489,8 +489,6 @@ private theorem finiteTopology_discrete (l : ℕ) [Fact l.Prime]
   rw [he] at hb
   exact hb
 
-attribute [local irreducible] WeilConjectures.scalarReductionExistence
-  WeilConjectures.scalarReductionDerivedExistence
 
 private theorem reductionAbSheafify (X : Scheme.{u}) :
     HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=

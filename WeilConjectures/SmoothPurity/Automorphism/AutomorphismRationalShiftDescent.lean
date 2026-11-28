@@ -33,8 +33,8 @@ local instance (priority := 5000) instEssentiallySmallProEt_automorphismRational
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
 attribute [local irreducible] sfIntrinsicModuleEquivalence
-  HasDerivedCategory.standard integralDerivedPullback scalarReductionExistence
-  scalarReductionDerivedExistence completedIntegralCoefficientSheafUnrestricted
+  HasDerivedCategory.standard integralDerivedPullback
+  completedIntegralCoefficientSheafUnrestricted
 
 set_option allowUnsafeReducibility true in
 attribute [local irreducible] AlgebraicGeometry.Scheme.residueField

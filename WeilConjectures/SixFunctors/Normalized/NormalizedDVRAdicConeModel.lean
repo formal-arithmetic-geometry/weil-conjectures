@@ -518,8 +518,6 @@ private theorem modelTower_exact (T : NormalizedDVRTower l E X D hl) (a b : ℕ)
 attribute [local irreducible] normalizedDVRUniformizer
   Functor.mapDerivedCategory normalizedDVRResCompletedComp
   completedIntegralCoefficientSheafUnrestricted
-  scalarReductionExistence scalarReductionDerivedExistence
-  unrestrictedIntegralReductionExistence
 
 private theorem modelTowerIso_successor (T : NormalizedDVRTower l E X D hl) (j : ℕ) :
     DerivedCategory.Q.map ((modelTower l E X D hl T).map

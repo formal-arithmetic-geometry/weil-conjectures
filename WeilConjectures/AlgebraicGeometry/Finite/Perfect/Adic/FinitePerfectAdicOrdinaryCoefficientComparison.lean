@@ -176,7 +176,7 @@ attribute [local instance] constantModulesMonoidal
 
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-attribute [local irreducible] completedAdicChangeData completedAdicRing
+attribute [local irreducible] completedAdicRing
 
 private theorem ordinaryScalar_exact
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) :

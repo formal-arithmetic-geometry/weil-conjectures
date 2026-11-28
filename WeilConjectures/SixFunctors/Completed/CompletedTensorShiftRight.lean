@@ -63,7 +63,6 @@ open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits Opposite
 namespace WeilConjectures
 
 attribute [local irreducible] unrestrictedIntegralReductionFunctor
-  unrestrictedIntegralReductionExistence
   integralCompletedTensor
 
 /-- Shift the second input of a bifunctor, retaining the first input. -/

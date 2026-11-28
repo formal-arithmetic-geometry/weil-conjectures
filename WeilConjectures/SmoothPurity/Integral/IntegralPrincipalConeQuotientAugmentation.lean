@@ -199,7 +199,6 @@ private theorem coneAugmentations {A : Type*} [Category* A] [Abelian A]
 
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
   IntegralOnSlice.reductionWitness
-  unrestrictedIntegralReductionExistence
 
 private theorem levelAugmentation
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]

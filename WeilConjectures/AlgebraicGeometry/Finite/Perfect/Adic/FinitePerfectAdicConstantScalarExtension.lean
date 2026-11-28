@@ -33,7 +33,7 @@ attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 attribute [local instance] ULift.algebra'
 
-attribute [local irreducible] completedAdicChangeData completedAdicDerivedChange
+attribute [local irreducible] completedAdicDerivedChange
   Functor.mapDerivedCategory HasDerivedCategory.standard Functor.leftAdjoint
 
 private abbrev coefficientLift (A : Type t) [CommRing A] :

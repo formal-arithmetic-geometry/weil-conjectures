@@ -456,7 +456,7 @@ def roosSecond {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A
 attribute [local irreducible] roosProjection roosSecond
 
 attribute [local irreducible] coefficients IntegralOnSlice.reductionWitness
-  unrestrictedIntegralReductionExistence IntegralOnSlice.completion
+  IntegralOnSlice.completion
   IntegralOnSlice.completionComparison IntegralOnSlice.completionUnit
   integralDerivedPullback integralDerivedPullbackComparison
 

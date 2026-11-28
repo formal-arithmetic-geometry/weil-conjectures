@@ -163,13 +163,11 @@ def topReduction (M : DerivedCategory (scalarReductionSource l E T)) (b : ℤ) :
     ((scalarReductionRestriction l E T 0).mapDerivedCategoryHomologyFunctorIso b).inv.app
       ((scalarReductionDerivedExtension l E T 0).obj M)
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
 
 -- Prefer the same standard localizations used by the scalar-reduction functors.
 attribute [local instance 3000] scalarReductionSourceDerived scalarReductionTargetDerived
 
-attribute [local irreducible] unrestrictedIntegralReductionExistence
-  integralReductionExistence integralReductionDerivedExistence
+attribute [local irreducible] integralReductionExistence integralReductionDerivedExistence
   unrestrictedTowerUnit unrestrictedTowerTransition unrestrictedTowerResolutionIso
   unrestrictedTowerFiniteComparison unrestrictedTowerComparison
   strictDvrReductionComparison

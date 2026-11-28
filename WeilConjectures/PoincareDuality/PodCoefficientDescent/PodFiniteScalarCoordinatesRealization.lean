@@ -107,7 +107,6 @@ namespace WeilConjectures.PodCoefficientDescent
 
 attribute [local irreducible] AlgebraicGeometry.Scheme.residueField
   HasDerivedCategory.standard completedIntegralCoefficientSheafUnrestricted
-  scalarReductionExistence scalarReductionDerivedExistence
 
 attribute [local irreducible] Linear.homModule
 

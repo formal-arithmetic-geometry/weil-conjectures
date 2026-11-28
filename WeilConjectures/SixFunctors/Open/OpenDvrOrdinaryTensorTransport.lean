@@ -67,7 +67,7 @@ local instance (priority := 20000) preciseAbLocallyBijective (T : Scheme.{u}) :
     (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   openDvrAbLocallyBijective T
 
-attribute [local irreducible] HasDerivedCategory.standard scalarReductionExistence
+attribute [local irreducible] HasDerivedCategory.standard
   scalarReductionExtension coefficientSequenceRestriction
   coefficientSequenceEvaluation coefficientSequenceTransition coefficientOrdinaryQuotient
   unrestrictedIntegralTransition constantSheaf operationOrdinaryAdjunction

@@ -109,7 +109,7 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
-  scalarReductionExistence scalarReductionDerivedExistence HasDerivedCategory.standard
+  HasDerivedCategory.standard
   Scheme.residueField
 
 private theorem fieldChainShift_unique
@@ -214,7 +214,7 @@ private theorem fieldConstructibleShift_normalization
     rfl)
 
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
-  scalarReductionExistence scalarReductionDerivedExistence HasDerivedCategory.standard
+  HasDerivedCategory.standard
   Scheme.residueField
 
 set_option backward.isDefEq.respectTransparency true

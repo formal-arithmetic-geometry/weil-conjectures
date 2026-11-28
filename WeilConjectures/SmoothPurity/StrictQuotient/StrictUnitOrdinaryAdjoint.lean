@@ -29,7 +29,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 attribute [local irreducible] coefficientFiniteQuotientExtension
-  scalarReductionExistence scalarReductionDerivedExistence
 
 private theorem compatible_adjoint_isIso
     {B C : Type*} [Category B] [Category C]

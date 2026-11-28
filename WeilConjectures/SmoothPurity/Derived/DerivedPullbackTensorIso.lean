@@ -89,8 +89,7 @@ attribute [local irreducible] Scheme.residueField Padic ScalarLocalization.compo
   sfIntegralConstructibleLinear
   HasDerivedCategory.standard CategoryTheory.Functor.leftAdjoint
   CategoryTheory.Functor.mapDerivedCategory
-  completedIntegralCoefficientSheafUnrestricted scalarReductionExistence
-  scalarReductionDerivedExistence
+  completedIntegralCoefficientSheafUnrestricted
   commonStageTensorComparison commonStagePullbackComparison
   operationStageTransitionIso commonStageDerivedTensor commonStageDerivedPullback
 

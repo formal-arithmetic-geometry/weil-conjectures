@@ -36,7 +36,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped ChangeOfRings
 namespace WeilConjectures
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
-  scalarReductionExistence scalarReductionDerivedExistence
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : AlgebraicGeometry.Scheme.{u})

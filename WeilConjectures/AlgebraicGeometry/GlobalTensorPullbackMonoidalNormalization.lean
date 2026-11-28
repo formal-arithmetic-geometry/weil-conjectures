@@ -38,8 +38,7 @@ local instance : MonoidalPreadditive (SheafOfModules.{u} (moduleRings X.toRinged
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).1
 local instance : MonoidalClosed (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).2.1
--- Keep the section instances as hypotheses of this public statement.
-set_option linter.unusedSectionVars false in
+omit [HasDerivedCategory.{u} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] in
 /-- The concrete global pullback admits the tensor constraint normalized by its counit
 (Stacks, Tags 008A, 008Y and 0FKU). -/
 theorem globalTensorPullback_monoidal_normalization

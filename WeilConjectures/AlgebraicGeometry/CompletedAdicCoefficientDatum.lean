@@ -209,13 +209,19 @@ def DerivedReductionModelData.complexCounit (D : DerivedReductionModelData F P)
 
 end DerivedReductionModels
 
--- Untyped proof-valued def: its type is inferred and downstream code unfolds it.
-set_option linter.defProp false in
 /-- The full normalized scalar-extension witness along a map of coefficient sheaves.
 Its object and map equalities fix ordinary tensor; its universal counit fixes the derived
 functor (Stacks, Tag 06YY). -/
-def completedAdicChangeData (T : Scheme.{t})
-    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :=
+theorem completedAdicChangeData (T : Scheme.{t})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :
+    type_of% (
+      letI := HasDerivedCategory.standard (SheafOfModules.{t + 1}
+        (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
+          (ProEt.topology T) R))
+      letI := HasDerivedCategory.standard (SheafOfModules.{t + 1}
+        (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
+          (ProEt.topology T) S))
+      SheafOfModules.derivedChangeOfRingsIndependentCoefficients.{t + 2, t + 1, t + 1, t} φ) :=
   letI := HasDerivedCategory.standard (SheafOfModules.{t + 1}
     (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
       (ProEt.topology T) R))

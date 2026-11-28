@@ -398,14 +398,12 @@ private def scalarTransportEquivalence {R S : Sheaf J CommRingCat.{w}} (a : R �
     ext U x
     rfl
 
--- The statement uses the deprecated `TwoSquare.natTrans`; replacing it changes the statement.
-set_option linter.deprecated false in
 private theorem normalizedComparison_exists
     {A₀ B₀ C₀ D₀ : Type*} [Category A₀] [Category B₀] [Category C₀] [Category D₀]
     {L : A₀ ⥤ B₀} {U : B₀ ⥤ A₀} {L' : C₀ ⥤ D₀} {U' : D₀ ⥤ C₀}
     (a : L ⊣ U) (b : L' ⊣ U') (G : A₀ ⥤ C₀) (H : B₀ ⥤ D₀)
     [G.IsEquivalence] [H.IsEquivalence] (ρ : U ⋙ G ≅ H ⋙ U') :
-    ∃! j : L ⋙ H ≅ G ⋙ L', (mateEquiv a b j.inv).natTrans = ρ.hom := by
+    ∃! j : L ⋙ H ≅ G ⋙ L', mateEquiv a b j.inv = ρ.hom := by
   obtain ⟨j, hj, hu, _⟩ := exists_equivalenceAdjunctionComparison
     G.asEquivalence H.asEquivalence a b ρ
   exact ⟨j, hj, hu⟩
@@ -420,18 +418,16 @@ private def normalizedComparison
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
--- The statement uses the deprecated `TwoSquare.natTrans`; replacing it changes the statement.
-set_option linter.deprecated false in
 private theorem normalizedComparison_inv
     {A₀ B₀ C₀ D₀ : Type*} [Category A₀] [Category B₀] [Category C₀] [Category D₀]
     {L : A₀ ⥤ B₀} {U : B₀ ⥤ A₀} {L' : C₀ ⥤ D₀} {U' : D₀ ⥤ C₀}
     (a : L ⊣ U) (b : L' ⊣ U') (G : A₀ ⥤ C₀) (H : B₀ ⥤ D₀)
     [G.IsEquivalence] [H.IsEquivalence] (ρ : U ⋙ G ≅ H ⋙ U') :
-    (normalizedComparison a b G H ρ).inv = ((mateEquiv a b).symm ρ.hom).natTrans := by
+    (normalizedComparison a b G H ρ).inv = (mateEquiv a b).symm ρ.hom := by
   have hm := (normalizedComparison_exists a b G H ρ).exists.choose_spec
   change mateEquiv a b (normalizedComparison a b G H ρ).inv = ρ.hom at hm
   have he := congrArg (mateEquiv a b).symm hm
-  simpa only [Equiv.symm_apply_apply] using congrArg TwoSquare.natTrans he
+  simpa only [Equiv.symm_apply_apply] using he
 
 private instance transportIsEquivalence {R S : Sheaf J CommRingCat.{w}} (a : R ≅ S) :
     (transport a).IsEquivalence := (scalarTransportEquivalence a).isEquivalence_functor
@@ -446,15 +442,13 @@ private def ordinaryScalarSquare {R R' S S' : Sheaf J CommRingCat.{w}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
--- The statement uses the deprecated `TwoSquare.natTrans`; replacing it changes the statement.
-set_option linter.deprecated false in
 private theorem ordinaryScalarSquare_inv {R R' S S' : Sheaf J CommRingCat.{w}}
     (a : R ⟶ R') (b : S ⟶ S') (e : R ≅ S) (e' : R' ≅ S')
     (h : e.hom ≫ b = a ≫ e'.hom)
     (A : SystemScalarModel a) (B : SystemScalarModel b) :
     (ordinaryScalarSquare a b e e' h A B).inv =
-      ((mateEquiv A.ordinaryAdj B.ordinaryAdj).symm
-        (scalarRestrictionSquare a b e e' h).hom).natTrans :=
+      (mateEquiv A.ordinaryAdj B.ordinaryAdj).symm
+        (scalarRestrictionSquare a b e e' h).hom :=
   normalizedComparison_inv A.ordinaryAdj B.ordinaryAdj _ _ _
 
 private theorem ordinaryScalarSquare_transpose {R R' S S' : Sheaf J CommRingCat.{w}}
@@ -548,15 +542,13 @@ private theorem invertComparisonForward
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
--- The statement uses the deprecated `TwoSquare.natTrans`; replacing it changes the statement.
-set_option linter.deprecated false in
 private theorem derivedScalarSquare_inv {R R' S S' : Sheaf J CommRingCat.{w}}
     (a : R ⟶ R') (b : S ⟶ S') (e : R ≅ S) (e' : R' ≅ S')
     (h : e.hom ≫ b = a ≫ e'.hom)
     (A : SystemScalarModel a) (B : SystemScalarModel b) :
     (derivedScalarSquare a b e e' h A B).inv =
-      ((mateEquiv A.adjunction B.adjunction).symm
-        (derivedSquare a b e e' (scalarRestrictionSquare a b e e' h)).hom).natTrans :=
+      (mateEquiv A.adjunction B.adjunction).symm
+        (derivedSquare a b e e' (scalarRestrictionSquare a b e e' h)).hom :=
   normalizedComparison_inv A.adjunction B.adjunction _ _ _
 
 private theorem derivedScalarSquare_transpose {R R' S S' : Sheaf J CommRingCat.{w}}
@@ -576,8 +568,6 @@ private theorem derivedScalarSquare_transpose {R R' S S' : Sheaf J CommRingCat.{
 
 attribute [local irreducible] derivedScalarSquare
 
--- The statement uses the deprecated `TwoSquare.natTrans`; replacing it changes the statement.
-set_option linter.deprecated false in
 private theorem derivedMate_isoComparison
     {A₀ B₀ C₀ D₀ A₁ B₁ C₁ D₁ : Type*}
     [Category A₀] [Category B₀] [Category C₀] [Category D₀]
@@ -599,11 +589,11 @@ private theorem derivedMate_isoComparison
       GD.map (ρ.hom.app K) ≫ γ.hom.app (R.obj K) ≫ QC.map (τ.app K))
     (i : L ⋙ H ≅ G ⋙ L') (j : LD ⋙ HD ≅ GD ⋙ LD')
     (hi : ∀ P, b.homEquiv _ _ (i.inv.app P) = G.map (a.unit.app P) ≫ τ.app (L.obj P))
-    (hj : j.inv = ((mateEquiv ad bd).symm τD).natTrans) (P : A₀) :
+    (hj : j.inv = (mateEquiv ad bd).symm τD) (P : A₀) :
     j.hom.app (QA.obj P) ≫ LD'.map (γ.hom.app P) ≫ ε'.app (G.obj P) =
       HD.map (ε.app P) ≫ η.hom.app (L.obj P) ≫ QD.map (i.hom.app P) := by
   have ht := derivedMate_comparison a b ad bd ε ε' ρ ρ' γ η ha hb τ τD hτ i.inv hi P
-  change ((mateEquiv ad bd).symm τD).natTrans.app _ ≫ _ ≫ _ = _ at ht
+  change ((mateEquiv ad bd).symm τD).app _ ≫ _ ≫ _ = _ at ht
   rw [← hj] at ht
   exact invertComparisonForward (j.app (QA.obj P)) (QD.mapIso (i.app P)) _ _ _ _ ht
 
@@ -641,8 +631,6 @@ private theorem ordinaryScalarSquare_unit {R R' S S' : Sheaf J CommRingCat.{w}}
   dsimp only [Functor.comp_obj]
   simpa only [Adjunction.homEquiv_id] using ht
 
--- The statement uses the deprecated `TwoSquare.natTrans`; replacing it changes the statement.
-set_option linter.deprecated false in
 private theorem derivedMate_cochainIsoComparison
     {A₀ B₀ C₀ D₀ : Type*} [Category A₀] [Category B₀] [Category C₀] [Category D₀]
     [Abelian A₀] [Abelian B₀] [Abelian C₀] [Abelian D₀]
@@ -672,7 +660,7 @@ private theorem derivedMate_cochainIsoComparison
     (ρ : R ⋙ G ≅ H ⋙ R') (i : L ⋙ H ≅ G ⋙ L')
     (j : T ⋙ H.mapDerivedCategory ≅ G.mapDerivedCategory ⋙ T')
     (hi : ∀ P, b.homEquiv _ _ (i.inv.app P) = G.map (a.unit.app P) ≫ ρ.hom.app (L.obj P))
-    (hj : j.inv = ((mateEquiv ad bd).symm (Functor.mapDerivedCategorySquareIso ρ).hom).natTrans)
+    (hj : j.inv = (mateEquiv ad bd).symm (Functor.mapDerivedCategorySquareIso ρ).hom)
     (P : CochainComplex A₀ ℤ) :
     j.hom.app (DerivedCategory.Q.obj P) ≫ T'.map (G.mapDerivedCategoryFactors.hom.app P) ≫
         ε'.app ((G.mapHomologicalComplex (.up ℤ)).obj P) =

@@ -74,7 +74,6 @@ attribute [local irreducible] HasDerivedCategory.standard
   WeilConjectures.FdOrdinaryScalarTransport.completion
   WeilConjectures.fdCoefficientTransportFactors
   AlgebraicGeometry.Scheme.pbcIntegralDatum
-  AlgebraicGeometry.Scheme.completedAdicChangeData
   AlgebraicGeometry.Scheme.integralDetailedCoefficientComparison
 universe d u w v u' v'
 

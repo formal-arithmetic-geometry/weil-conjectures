@@ -328,6 +328,7 @@ private noncomputable def ordinaryCurry
 
 attribute [local irreducible] ordinaryCurry
 
+omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)] in
 private theorem ordinaryCurry_symm_spec
     (P E F : CochainComplex Mod ℤ) (g : P ⟶ homComplex (R := R) E F) :
     IsCoefficientTensorCurry.{u, c, v} J R P E F
@@ -335,15 +336,17 @@ private theorem ordinaryCurry_symm_spec
   intro p a U y x
   simpa only [ordinaryCurry, coefficientHomSectionApply, coefficientHomComponent,
     SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply] using
-    RingedDerivedNative.chainEquiv_symm_pure.{c, v, u, w} J R P E F g
+    RingedDerivedNative.chainEquiv_symm_pure.{c, v, u} J R P E F g
       p a (p + a) rfl (add_comm a p) U y x
 
+omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)] in
 private theorem ordinaryCurry_spec (P E F : CochainComplex Mod ℤ)
     (f : (coefficientTotalTensor.{u, c, v} J R).obj (P, E) ⟶ F) :
     IsCoefficientTensorCurry.{u, c, v} J R P E F f (ordinaryCurry.{c, v, u} J R P E F f) := by
   simpa only [Equiv.symm_apply_apply] using
     ordinaryCurry_symm_spec.{c, v, u} J R P E F (ordinaryCurry.{c, v, u} J R P E F f)
 
+omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)] in
 private theorem ordinaryCurry_symm_apply
     (P E F : CochainComplex Mod ℤ) (g : P ⟶ homComplex (R := R) E F)
     (p a n : ℤ) (h : p + a = n) (h' : a + p = n)
@@ -356,6 +359,7 @@ private theorem ordinaryCurry_symm_apply
   subst n
   exact ordinaryCurry_symm_spec.{c, v, u} J R P E F g p a U y x
 
+omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)] in
 private theorem ordinaryCurry_apply
     (P E F : CochainComplex Mod ℤ)
     (f : (coefficientTotalTensor.{u, c, v} J R).obj (P, E) ⟶ F)
@@ -378,6 +382,7 @@ private theorem ordinaryUnit_zero (n : ℤ) (hn : n ≠ 0) (U : Cᵒᵖ)
   have hi := hz.eq_of_src (𝟙 _) 0
   exact congrArg (fun f ↦ f.val.app U x) hi
 
+omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)] in
 private theorem ordinaryIterated_ext (P Q L I : CochainComplex Mod ℤ)
     (f g : (coefficientTotalTensor.{u, c, v} J R).obj
       ((coefficientTotalTensor.{u, c, v} J R).obj (P, Q), L) ⟶ I)
@@ -457,6 +462,7 @@ private theorem ordinaryRightUnitor_apply
 attribute [local irreducible] ordinaryAssociator ordinaryRightUnitor
   coefficientTotalTensor coefficientTensorGenerator
 
+omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)] in
 private theorem ordinaryAssociator_unique
     (P Q L : CochainComplex Mod ℤ)
     (f : (coefficientTotalTensor.{u, c, v} J R).obj
@@ -562,6 +568,7 @@ private theorem ordinaryEvaluation_eq (E F : CochainComplex Mod ℤ) :
 
 attribute [local irreducible] ordinaryEvaluation
 
+omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)] in
 private theorem ordinaryEvaluation_formula (E F : CochainComplex Mod ℤ) :
     RingedOrdinaryEvaluationFormula.{c, v, u} J R E F (ordinaryEvaluation.{c, v, u} J R E F) := by
   intro p q n a b hn hb U y φ x

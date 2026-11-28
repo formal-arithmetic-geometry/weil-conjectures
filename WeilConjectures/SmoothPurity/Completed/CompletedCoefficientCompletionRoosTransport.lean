@@ -60,7 +60,7 @@ attribute [local instance 30000] HasDerivedCategory.standard
 attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoidalCategory
 attribute [local irreducible] completedReductionEvaluation
   pbcActualCompletion pbcActualCompletionUnit
-  scalarReductionExistence scalarReductionDerivedExistence scalarReductionDerivedExtension
+  scalarReductionDerivedExtension
   scalarReductionExtension scalarReductionCounit normalizedDVRResCompletedComp
   completedIntegralCoefficientSheafUnrestricted normalizedDVRKFlatComparison
   CategoryTheory.Limits.limit

@@ -18,7 +18,6 @@ attribute [local irreducible] Padic.coefficientExtensionIdeal
   HasDerivedCategory.standard SheafOfModules.monoidalCategory
   WeilConjectures.completedIntegralCommRingSheafUnrestricted
 attribute [local irreducible] CategoryTheory.Functor.mapDerivedCategory
-  WeilConjectures.scalarReductionExistence WeilConjectures.scalarReductionDerivedExistence
   WeilConjectures.scalarReductionDerivedExtension WeilConjectures.compactSupportReductionMap
 attribute [local implicit_reducible] WeilConjectures.integralCoefficientSheaf
   WeilConjectures.scalarReductionTargetDerived

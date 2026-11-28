@@ -68,7 +68,6 @@ theorem CoefficientTensorModels.iso_naturality
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
 
 
 /-- The finite unit comparison sends `1` to the scalar unit section of `1`. -/

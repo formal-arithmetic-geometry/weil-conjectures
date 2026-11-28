@@ -232,7 +232,7 @@ private theorem changeOfRings_over_isIso
 
 end SliceHelpers
 
-attribute [local irreducible] scalarReductionExistence scalarReductionExtension
+attribute [local irreducible] scalarReductionExtension
 attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficientCommRingSheaf
   CategoryTheory.sheafCompose
 

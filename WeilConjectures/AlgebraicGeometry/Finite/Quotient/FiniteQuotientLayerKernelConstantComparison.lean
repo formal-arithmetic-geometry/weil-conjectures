@@ -31,7 +31,7 @@ universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
-attribute [local irreducible] HasDerivedCategory.standard completedAdicChangeData
+attribute [local irreducible] HasDerivedCategory.standard
 
 namespace FiniteLayerKernelProof
 

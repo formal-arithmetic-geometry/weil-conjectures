@@ -52,8 +52,8 @@ private local instance siteSmall : EssentiallySmall.{u + 1} X.ProEt :=
 attribute [-instance] WeilConjectures.integralOperationsFiniteMonoidal
 attribute [local instance 30000] SheafOfModules.monoidalCategory
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-  HasDerivedCategory.standard coefficientTotalTensor CoefficientClosedStructure.tensor
+attribute [local irreducible] HasDerivedCategory.standard coefficientTotalTensor
+  CoefficientClosedStructure.tensor
   CoefficientTensorModels.iso completedIntegralCoefficientSheafUnrestricted constantSheaf
 
 -- Instantiate the prescribed two-variable tensor model with the actual scalar pair.

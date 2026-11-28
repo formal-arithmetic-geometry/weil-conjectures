@@ -72,8 +72,7 @@ attribute [local irreducible] CategoryTheory.constantSheaf
   completedIntegralCoefficientSheafUnrestricted
   completedIntegralCommRingSheafUnrestricted normalizedDVRQuotient
   completedIntegralCommRingProjectionUnrestricted
-  scalarReductionExistence scalarReductionDerivedExistence
-  unrestrictedIntegralReductionExistence scalarReductionExtension
+  scalarReductionExtension
   coefficientFiniteDerivedExtension HasDerivedCategory.standard SheafOfModules.monoidalCategory
 
 private abbrev baseTopology := Scheme.ProEt.topology W

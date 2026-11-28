@@ -70,7 +70,7 @@ universe t
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposite
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
-attribute [local irreducible] HasDerivedCategory.standard completedAdicChangeData
+attribute [local irreducible] HasDerivedCategory.standard
 
 @[irreducible] private def restrictionCompIso (X : Scheme.{t})
     {R S T : Sheaf (ProEt.topology X) RingCat.{t + 1}}

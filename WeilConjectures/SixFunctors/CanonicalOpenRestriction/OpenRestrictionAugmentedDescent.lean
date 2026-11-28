@@ -54,7 +54,6 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGe
 open WeilConjectures.IntegralOpenReduction
 namespace WeilConjectures.CanonicalOpenRestriction
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

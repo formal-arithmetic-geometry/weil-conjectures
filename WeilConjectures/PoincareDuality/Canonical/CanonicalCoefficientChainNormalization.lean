@@ -44,8 +44,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 attribute [local irreducible] regularExtensionIso regularExtensionPresheafIso
-  identityRestrictionIso scalarReductionExistence HasDerivedCategory.standard
-  unrestrictedIntegralReductionExistence limit finiteRegularIso finiteSingleRegularIso
+  identityRestrictionIso HasDerivedCategory.standard
+  limit finiteRegularIso finiteSingleRegularIso
   finitePullbackRegularIso pullbackLevelRegularIso pullbackUnitLevel chainUnitCandidate
   integralDerivedPullback integralDerivedPullbackComparison
   constantWeilIntegralRoosComparison

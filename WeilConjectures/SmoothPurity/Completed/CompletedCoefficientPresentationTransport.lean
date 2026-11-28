@@ -259,7 +259,7 @@ private theorem coefficientScalar_square (W : Scheme.{u}) :
 
 attribute [local irreducible] completedAdicChange
   completedIntegralCommRingSheafUnrestricted
-  completedAdicChangeData integralDetailedCoefficientComparison integralCompletedScalarMap
+  integralDetailedCoefficientComparison integralCompletedScalarMap
   pbcScalarCoefficientMap purCoefficientIso
 
 private theorem ordinaryScalarAdjunction (W : Scheme.{u}) :

@@ -310,7 +310,6 @@ namespace WeilConjectures
 attribute [local irreducible] constantSheaf HasDerivedCategory.standard
   coefficientSequenceEvaluation coefficientSequenceTransition
   completedIntegralCoefficientSheafUnrestricted
-  scalarReductionExistence scalarReductionDerivedExistence unrestrictedIntegralReductionExistence
   normalizedDVRResCompletedComp
 private theorem restrictionTransport
     {C : Type*} [Category C] {J : GrothendieckTopology C}

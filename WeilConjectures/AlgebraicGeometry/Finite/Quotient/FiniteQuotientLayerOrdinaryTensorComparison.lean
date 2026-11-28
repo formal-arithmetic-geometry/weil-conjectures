@@ -50,8 +50,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 open MonoidalCategory
 open scoped TensorProduct
 attribute [local instance] ULift.algebra'
-attribute [local irreducible] completedAdicChangeData
-  SheafOfModules.tensorObjIsoSheafification
+attribute [local irreducible] SheafOfModules.tensorObjIsoSheafification
   SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
 @[irreducible] private def layerCoefficientRestriction (X : Scheme.{t})

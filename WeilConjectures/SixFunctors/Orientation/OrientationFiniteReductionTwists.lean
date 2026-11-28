@@ -41,7 +41,7 @@ end SingleAdjunction
 section ReductionProof
 
 attribute [local irreducible] HasDerivedCategory.standard
-  scalarReductionExistence scalarReductionDerivedExistence scalarReductionExtension
+  scalarReductionExtension
   completedIntegralCoefficientSheafUnrestricted SheafOfModules.monoidalCategory
 attribute [local implicit_reducible] completedIntegralCommRingSheafUnrestricted
 set_option synthInstance.maxSize 4096

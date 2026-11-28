@@ -60,7 +60,6 @@ import all WeilConjectures.CategoryTheory.ScalarHomTensor.ScalarHomTensorCompari
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoidalCategory
-  AlgebraicGeometry.Scheme.completedAdicChangeData
   AlgebraicGeometry.Scheme.pbcScalarAdjunction
   SheafOfModules.CochainScalarConstruction.tensorUnit
 

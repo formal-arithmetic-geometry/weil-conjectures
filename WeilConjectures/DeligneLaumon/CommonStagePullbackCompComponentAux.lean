@@ -64,8 +64,8 @@ attribute [local irreducible] ScalarLocalization.composition
   GeneralAlgebraicallyClosedCoefficients.ofHom StageSystem.PairCategory.mkHom
   rationalDerivedPullback commonStagePullbackComparison
   commonStagePullbackRationalComposition HasDerivedCategory.standard integralCoefficientLinear
-  completedIntegralCoefficientSheafUnrestricted scalarReductionExistence
-  scalarReductionDerivedExistence Scheme.residueField
+  completedIntegralCoefficientSheafUnrestricted
+  Scheme.residueField
 
 private theorem normalization_map_heq
     {C D : Type*} [Category* C] [Category* D] (F : C ⥤ D)

@@ -53,7 +53,6 @@ universe t u tX tY tZ v₁ v₂ v₃ v₄ v₅ v₆ u₁ u₂ u₃ u₄ u₅ u�
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor AlgebraicGeometry
 namespace WeilConjectures
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
-  scalarReductionExistence scalarReductionDerivedExistence unrestrictedIntegralReductionExistence
   normalizedDVRResCompletedComp normalizedDVRKFlatComparison
 attribute [local instance 4000] normalizedDVRKFlatReductionModelLocal1
 attribute [local instance] normalizedDVRKFlatReductionModelLocal2

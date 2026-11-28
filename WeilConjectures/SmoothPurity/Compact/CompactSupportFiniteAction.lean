@@ -45,8 +45,7 @@ open GeneralAlgebraicallyClosedCoefficients
 
 attribute [local irreducible] HasDerivedCategory.standard
   CategoryTheory.Functor.mapDerivedCategory CategoryTheory.Functor.rightDerivedFunctor
-  completedIntegralCoefficientSheafUnrestricted scalarReductionExistence
-  scalarReductionDerivedExistence unrestrictedIntegralReductionExistence
+  completedIntegralCoefficientSheafUnrestricted
   coefficientSequenceEvaluation coefficientSequenceTransition constantSheaf
   sfIntegralCompactSupportValue
   Padic.coefficientExtensionIdeal compactSupportOrdinaryCoefficientTransition

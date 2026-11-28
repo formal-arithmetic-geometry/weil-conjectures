@@ -111,7 +111,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 section GeneralPullbackUnitProof
 attribute [local irreducible] finiteRegularIso finiteSingleRegularIso
-  unrestrictedIntegralReductionExistence limit pullbackUnitLevel
+  limit pullbackUnitLevel
 
 private def stalkFinitePullbackRegularIso {X Y : Scheme.{u}} (g : X ⟶ Y) (n : ℕ) :
     (integralOperationsLevelPullback.{u, u} l E g n).obj

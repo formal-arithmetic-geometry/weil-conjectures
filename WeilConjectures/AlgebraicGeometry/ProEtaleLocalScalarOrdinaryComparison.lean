@@ -169,7 +169,7 @@ variable {X Y : Scheme.{u}} (i : Y ⟶ X)
   (B : Type (u + 1)) [CommRing B] (φ : R ⟶ adicLisseConstantRing X B) (U : Y.ProEt)
 
 attribute [local irreducible] proEtaleModuleInverseImage HasDerivedCategory.standard
-  completedAdicChangeData Functor.leftAdjoint
+  Functor.leftAdjoint
 
 /-- Actual inverse image followed by slice restriction. -/
 abbrev restriction := proEtaleModuleInverseImage i R ⋙

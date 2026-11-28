@@ -81,7 +81,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 attribute [local irreducible] DerivedCategory _root_.instCategoryDerivedCategory
   DerivedCategory.Q DerivedCategory.Qh HasDerivedCategory.standard
-  scalarReductionExistence scalarReductionDerivedExistence scalarReductionExtension
+  scalarReductionExtension
   coefficientTotalTensor
   coefficientFiniteReductionModel coefficientLocalizedCounitModel
 

@@ -257,7 +257,7 @@ private theorem small_finite_module (B : Type t) [CommRing B]
       map_smul' := fun r x ↦ f.map_smul r.down x.down }
   exact ⟨P, Module.Finite.equiv f.symm, ⟨fl.toModuleIso⟩⟩
 
-attribute [local irreducible] completedAdicChangeData pbcScalarAdjunction
+attribute [local irreducible] pbcScalarAdjunction
 
 /-- Reflect a supplied constant model through the fixed-scalar slice coordinates. -/
 private theorem ringed_model_of_fixed (X : Scheme.{t}) (B : Type t) [CommRing B]

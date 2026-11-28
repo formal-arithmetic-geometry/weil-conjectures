@@ -24,7 +24,6 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 attribute [-instance] WeilConjectures.IntegralOnSlice.abLocallyBijective
 attribute [local irreducible] WeilConjectures.completedIntegralCommRingSheafUnrestricted
-  WeilConjectures.scalarReductionExistence
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped ChangeOfRings

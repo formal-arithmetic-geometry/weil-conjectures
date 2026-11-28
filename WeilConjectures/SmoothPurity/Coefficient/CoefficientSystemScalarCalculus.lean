@@ -283,8 +283,7 @@ section StandardCoefficientInstances
 
 attribute [-instance] SemilinearSections.hasDerived SemilinearSections.moduleAbelian
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-  SheafOfModules.monoidalCategory HasDerivedCategory.standard
+attribute [local irreducible] SheafOfModules.monoidalCategory HasDerivedCategory.standard
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})

@@ -26,7 +26,7 @@ universe t
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
-attribute [local irreducible] completedAdicChangeData completedAdicRing
+attribute [local irreducible] completedAdicRing
   directCoefficientMap overDirectMap
 
 private def sourceDirectIso (X : Scheme.{t}) {A : Type t} [CommRing A]

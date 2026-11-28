@@ -33,7 +33,7 @@ attribute [local irreducible] HasDerivedCategory.standard Functor.mapDerivedCate
   completedIntegralCommRingSheafUnrestricted
   pbcDerivedScalarAdjunction pbcComplexCounit pbcExtensionCounit
   Functor.leftAdjoint SheafOfModules.monoidalCategory
-  PurCompactSupport.finiteReductionIso scalarReductionExistence scalarReductionDerivedExistence
+  PurCompactSupport.finiteReductionIso
 attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficientCommRingSheaf
   PurCompactSupport.completed scalarReductionDerivedRestriction
   coefficientFiniteDerivedExtension coefficientFiniteDerivedRestriction

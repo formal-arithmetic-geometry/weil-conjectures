@@ -66,7 +66,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 attribute [local irreducible] integralDerivedPullback integralCompletedTensor
-  scalarReductionExistence scalarReductionDerivedExistence
 
 /-- The canonical reduction comparison for integral pullback. Its adjoint is the
 Roos projection, after the defining representative comparison and exact-restriction
@@ -132,7 +131,6 @@ private theorem goodRepresentative (W : AlgebraicGeometry.Scheme.{u})
         (completedIntegralCommRingSheafUnrestricted.{u, u} l E W) (P.X i)).symm (hflat i)
   exact ⟨⟨P, hP, hsite⟩, ⟨asIso (DerivedCategory.Q.map f) ≪≫ e⟩⟩
 
-attribute [local irreducible] unrestrictedIntegralReductionExistence
 
 private theorem finiteReduction_kflat (W : AlgebraicGeometry.Scheme.{u})
     (P : (integralOperationsGoodComplex l E W).FullSubcategory) (n : ℕ) :

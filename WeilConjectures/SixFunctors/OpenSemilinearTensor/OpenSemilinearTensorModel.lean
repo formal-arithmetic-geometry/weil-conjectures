@@ -65,7 +65,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
 
 attribute [local irreducible] CategoryTheory.Limits.limit HasDerivedCategory.standard
-  scalarReductionExistence scalarReductionDerivedExistence
   SheafOfModules.monoidalCategory completedIntegralCoefficientSheafUnrestricted
   SheafOfModules.extensionByZeroPresheaf SheafOfModules.overFunctor
 

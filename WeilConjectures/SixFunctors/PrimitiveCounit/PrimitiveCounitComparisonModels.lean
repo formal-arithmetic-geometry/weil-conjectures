@@ -157,8 +157,7 @@ attribute [local instance 5000] scalarReductionSourceDerived coefficientConstant
 
 attribute [local irreducible] coefficientConstantTowerProjection
   Functor.rightDerivedFunctor Functor.mapDerivedCategory
-  Functor.mapDerivedCategoryFactors scalarReductionExistence scalarReductionDerivedExistence
-  unrestrictedIntegralReductionExistence
+  Functor.mapDerivedCategoryFactors
 
 /-- The type of natural isomorphisms comparing the Roos complex with the derived limit. -/
 def RoosComparison (W : Scheme.{t}) :=

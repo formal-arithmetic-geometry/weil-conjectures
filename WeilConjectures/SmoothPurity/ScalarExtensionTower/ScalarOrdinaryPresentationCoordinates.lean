@@ -99,8 +99,7 @@ private theorem finiteReductionUnit (Y : Scheme.{u})
     ((scalarReductionExtension_adjunction l L Y n).choose.unit.app M).val.app U x =
       unrestrictedIntegralTensorSection l L Y n M U 1 x := by
   have h := (scalarReductionExtension_adjunction l L Y n).choose_spec M U x
-  dsimp only [unrestrictedIntegralTensorSection, unrestrictedIntegralReductionFunctor,
-    unrestrictedIntegralReductionExistence, scalarReductionExistence] at h ⊢
+  dsimp only [unrestrictedIntegralTensorSection, unrestrictedIntegralReductionFunctor] at h ⊢
   with_unfolding_all exact h
 
 private theorem completedScalarAdj_exists (Y : Scheme.{u}) :

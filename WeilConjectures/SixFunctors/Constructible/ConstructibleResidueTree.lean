@@ -72,7 +72,6 @@ private instance residueSiteSmall (Y : Scheme.{u}) :
     EssentiallySmall.{u + 1} Y.ProEt := essentiallySmallSelf.{0} _
 attribute [local irreducible] HasDerivedCategory.standard
   ordinaryPull
-  scalarReductionExistence scalarReductionDerivedExistence
 
 private theorem ordinaryRingMap_eq
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]

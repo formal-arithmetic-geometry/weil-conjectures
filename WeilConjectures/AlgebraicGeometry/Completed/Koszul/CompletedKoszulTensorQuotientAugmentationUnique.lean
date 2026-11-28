@@ -199,7 +199,7 @@ private theorem scalarExtendedUnit_isIso
   dsimp only [v']
   infer_instance
 
-attribute [local irreducible] completedAdicRing completedAdicChangeData in
+attribute [local irreducible] completedAdicRing in
 private theorem completedKoszulUnitZero_isIso (r : ℕ) (a : Fin r → A) (n : ℕ) :
     IsIso (completedAdicKoszulUnitZero T d r a n) := by
   let E := (completedAdicScalarExtensionData T d).choose

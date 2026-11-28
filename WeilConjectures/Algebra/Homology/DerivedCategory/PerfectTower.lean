@@ -513,8 +513,8 @@ theorem exists_trace_eq_of_isLift {f : ∀ n, T.obj n ⟶ T.obj n} (_hf : T.IsCo
     (m.iso.hom ≫ V ≫ m.iso.inv)
   exact ⟨_, m.trace_eq V G hG, m.trace_f_eq hπ hker hV G hG⟩
 
--- Omitting the unused instances would make `trace_eq_of_isAdicComplete` downstream warn.
-set_option linter.unusedSectionVars false in
+omit [∀ n, Abelian.HasFunctorialFlatResolution (ModuleCat.{u} (A n))]
+  [∀ n, HasRightDual (T.obj n)] in
 include hπ hker hcomplete hsep hc in
 /-- The categorical trace of a lift of a compatible family does not depend on the lift. -/
 theorem trace_eq_of_isLift {f : ∀ n, T.obj n ⟶ T.obj n} (_hf : T.IsCompatible f)

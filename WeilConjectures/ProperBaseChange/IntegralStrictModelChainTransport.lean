@@ -38,7 +38,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
-attribute [local irreducible] completedAdicChangeData HasDerivedCategory.standard
+attribute [local irreducible] HasDerivedCategory.standard
   completedIntegralCoefficientSheafUnrestricted pbcIntegralDatum
 
 attribute [local instance] completedReductionModuleTowerFunctor_additive

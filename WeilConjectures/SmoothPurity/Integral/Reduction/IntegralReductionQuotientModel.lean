@@ -32,7 +32,6 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGe
 
 namespace WeilConjectures
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
 
 /-- Apply the ordinary mate's unit equation degreewise before specializing coefficients. -/
 private theorem quotient_chain_unit

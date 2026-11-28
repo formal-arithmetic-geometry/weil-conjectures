@@ -114,8 +114,8 @@ local instance (priority := 5000) instEssentiallySmallProEt_automorphismConstruc
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
 attribute [local irreducible] sfIntrinsicModuleEquivalence
-  HasDerivedCategory.standard integralDerivedPullback scalarReductionExistence
-  scalarReductionDerivedExistence completedIntegralCoefficientSheafUnrestricted
+  HasDerivedCategory.standard integralDerivedPullback
+  completedIntegralCoefficientSheafUnrestricted
 
 /-- Prime-to-characteristic coefficients are invertible on each scheme in the statement. -/
 theorem automorphismConstructibleStage_units

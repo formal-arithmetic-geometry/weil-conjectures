@@ -235,8 +235,8 @@ attribute [local implicit_reducible] integralTowerHasDerivedCategory
 
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
   HasDerivedCategory.standard constantSheaf SheafOfModules.monoidalCategory
-  CategoryTheory.Limits.limit scalarReductionExistence scalarReductionDerivedExistence
-  unrestrictedIntegralReductionExistence unrestrictedIntegralTransition
+  CategoryTheory.Limits.limit
+  unrestrictedIntegralTransition
   unrestrictedTowerUnit IntegralOnSlice.augmentation
   CochainComplex.mappingCocone.lift
 attribute [local implicit_reducible] completedIntegralCommRingSheafUnrestricted

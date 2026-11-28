@@ -44,8 +44,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
 section OrdinaryConstruction
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-  scalarReductionExtension HasDerivedCategory.standard SheafOfModules.monoidalCategory
+attribute [local irreducible] scalarReductionExtension HasDerivedCategory.standard
+  SheafOfModules.monoidalCategory
   constantSheaf
 
 private theorem ordinary_projection_unit (O : PurSequenceOrdinaryAdjoints l E W)
@@ -86,8 +86,7 @@ private theorem finite_unit_tensor (M : scalarReductionSource l E W) (n : ℕ)
       unrestrictedIntegralTensorSection l E W n M V 1 x := by
   have hu := (scalarReductionExtension_adjunction.{t, u} l E W n).choose_spec M V x
   dsimp only [purSequenceFiniteAdjunction, unrestrictedIntegralTensorSection,
-    unrestrictedIntegralReductionFunctor, unrestrictedIntegralReductionExistence,
-    scalarReductionExistence] at hu ⊢
+    unrestrictedIntegralReductionFunctor] at hu ⊢
   exact hu
 
 private theorem ordinary_unit_tensor (O : PurSequenceOrdinaryAdjoints l E W)

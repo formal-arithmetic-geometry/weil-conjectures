@@ -50,7 +50,7 @@ private theorem localWEquals (X : Scheme.{u}) :
 
 attribute [local instance 3000] localWEquals
 
-attribute [local irreducible] completedAdicChangeData HasDerivedCategory.standard
+attribute [local irreducible] HasDerivedCategory.standard
   CochainComplex.IsKFlatIndependentCoefficients
   SheafOfModules.monoidalCategory proEtaleModuleInverseImage
   Functor.sheafPullbackConstruction.sheafPullback
@@ -247,7 +247,7 @@ set_option backward.isDefEq.respectTransparency true
 section LocalScalarComparison
 
 attribute [local instance 3000] localWEquals
-attribute [local irreducible] completedAdicChangeData HasDerivedCategory.standard
+attribute [local irreducible] HasDerivedCategory.standard
   CochainComplex.IsKFlatIndependentCoefficients
   SheafOfModules.monoidalCategory proEtaleModuleInverseImage
   Functor.sheafPullbackConstruction.sheafPullback
@@ -341,17 +341,16 @@ private def localRestrictionIso {X Y : Scheme.{u}} (i : Y ⟶ X)
     (localFunctor i R U).mapDerivedCategory.mapIso
       (DerivedCategory.Q.objObjPreimageIso K)
 
--- The Prop is inferred from the body; a `theorem` would need the long type spelled out.
-set_option linter.defProp false in
 attribute [-instance] WeilConjectures.integralReductionSiteEssentiallySmall
   ProjectionRestriction.derivedOver ProjectionRestriction.derivedOverModules in
-private def sliceChangeData {X Y : Scheme.{u}} (i : Y ⟶ X)
-    {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (φ : R ⟶ S) (U : Y.ProEt) :=
+private theorem sliceChangeData {X Y : Scheme.{u}} (i : Y ⟶ X)
+    {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (φ : R ⟶ S) (U : Y.ProEt) :
+    type_of% (SheafOfModules.derivedChangeOfRingsIndependentCoefficients.{u + 2, u + 1, u + 1, u}
+      (((ProEt.topology Y).overPullback CommRingCat.{u + 1} U).map
+        ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).map φ))) :=
   SheafOfModules.derivedChangeOfRingsIndependentCoefficients.{u + 2, u + 1, u + 1, u}
     (((ProEt.topology Y).overPullback CommRingCat.{u + 1} U).map
       ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).map φ))
-
-attribute [local irreducible] sliceChangeData
 
 attribute [-instance] WeilConjectures.integralReductionSiteEssentiallySmall
   ProjectionRestriction.derivedOver ProjectionRestriction.derivedOverModules in
@@ -572,8 +571,8 @@ end LocalScalarComparison
 
 attribute [-instance] WeilConjectures.integralReductionSiteEssentiallySmall
   ProjectionRestriction.derivedOver ProjectionRestriction.derivedOverModules in
-attribute [local irreducible] completedAdicChangeData HasDerivedCategory.standard
-  CochainComplex.IsKFlatIndependentCoefficients sliceChangeData
+attribute [local irreducible] HasDerivedCategory.standard
+  CochainComplex.IsKFlatIndependentCoefficients
   sliceChange sliceDerivedChange completedAdicChange completedAdicDerivedChange localFunctor
   SheafOfModules.monoidalCategory proEtaleModuleInverseImage
   Functor.sheafPullbackConstruction.sheafPullback in

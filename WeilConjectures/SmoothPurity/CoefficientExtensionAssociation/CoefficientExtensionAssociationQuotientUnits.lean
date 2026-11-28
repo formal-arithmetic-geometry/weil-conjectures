@@ -176,7 +176,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local irreducible] constantSheaf HasDerivedCategory.standard
   integralScalarReduction completedIntegralCommRingSheafUnrestricted
   CategoryTheory.Functor.leftAdjoint SemilinearSections.systemMap
-  scalarReductionExtension scalarReductionExistence coefficientOrdinaryQuotient
+  scalarReductionExtension coefficientOrdinaryQuotient
   coefficientQuotientNatTrans coefficientOrdinaryQuotientComponent
 
 /-- The completed coefficient projection, viewed as a ring-sheaf map. -/

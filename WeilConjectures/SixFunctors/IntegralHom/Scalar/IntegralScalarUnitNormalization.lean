@@ -29,8 +29,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace WeilConjectures.IntegralHom
 attribute [local instance 20000] abSheafify abLocallyBijective
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
-  HasDerivedCategory.standard scalarReductionExistence scalarReductionDerivedExistence
-  unrestrictedIntegralReductionExistence
+  HasDerivedCategory.standard
 attribute [local implicit_reducible] completedIntegralCommRingSheafUnrestricted
   CategoryTheory.sheafCompose IntegralOnSlice.Site IntegralOnSlice.siteCategory
   IntegralOnSlice.topology IntegralOnSlice.restrict IntegralOnSlice.ring IntegralOnSlice.finite

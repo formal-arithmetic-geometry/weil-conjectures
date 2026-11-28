@@ -32,7 +32,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGe
 
 namespace WeilConjectures
 
-attribute [local irreducible] scalarReductionExtension scalarReductionExistence
+attribute [local irreducible] scalarReductionExtension
   completedIntegralCoefficientSheafUnrestricted
   coefficientOrdinaryQuotient coefficientOrdinaryQuotientComponent
   coefficientOrdinaryQuotientNaturalTransformation coefficientQuotientNatTrans

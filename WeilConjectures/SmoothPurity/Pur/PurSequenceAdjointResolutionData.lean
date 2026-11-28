@@ -187,7 +187,6 @@ open scoped CategoryTheory
 namespace WeilConjectures
 
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
-  scalarReductionExistence scalarReductionDerivedExistence unrestrictedIntegralReductionExistence
   coefficientSequenceRestriction
   coefficientSequenceEvaluation coefficientFiniteDerivedExtension scalarReductionExtension
 

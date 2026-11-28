@@ -198,7 +198,7 @@ private theorem complexData_eq (l : ℕ) [Fact l.Prime]
   unfold nativeNormalizedData completedData completedScalarCounit
     pbcDerivedExtend reductionDerivedChange
     completedAdicDerivedChange pbcExtensionCounit reductionDerivedCounit
-    completedDerivedScalarExtension completedScalarChangeData completedAdicChangeData
+    completedDerivedScalarExtension completedScalarChangeData
   with_unfolding_all rfl
 
 private theorem extension_models_eq (l : ℕ) [Fact l.Prime]
@@ -209,7 +209,7 @@ private theorem extension_models_eq (l : ℕ) [Fact l.Prime]
         DerivedCategory (integralTowerModules l E T)) =
       completedDerivedScalarExtension l E E (AlgHom.id (Padic l) E) T := by
   unfold pbcDerivedExtend reductionDerivedChange completedAdicDerivedChange
-    completedAdicChangeData completedDerivedScalarExtension completedScalarChangeData
+    completedDerivedScalarExtension completedScalarChangeData
   rfl
 
 private theorem ordinary_models_eq (l : ℕ) [Fact l.Prime]
@@ -217,7 +217,7 @@ private theorem ordinary_models_eq (l : ℕ) [Fact l.Prime]
     [FiniteDimensional (Padic l) E] (T : Scheme.{w}) :
     pbcExtend (completedCoefficientMap l E E (AlgHom.id (Padic l) E) T) =
       completedOrdinaryScalarExtension l E E (AlgHom.id (Padic l) E) T := by
-  unfold pbcExtend reductionChange completedAdicChange completedAdicChangeData
+  unfold pbcExtend reductionChange completedAdicChange
     completedOrdinaryScalarExtension completedScalarChangeData
   rfl
 

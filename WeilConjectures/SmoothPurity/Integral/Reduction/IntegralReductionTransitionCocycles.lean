@@ -24,8 +24,7 @@ attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoida
 universe u
 open CategoryTheory AlgebraicGeometry
 namespace WeilConjectures
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-  completedIntegralCoefficientSheafUnrestricted unrestrictedIntegralReductionExistence
+attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
 attribute [local instance] normalizedDVREffectivityLocal1 normalizedDVREffectivityLocal2
   normalizedDVREffectivityLocal3
 

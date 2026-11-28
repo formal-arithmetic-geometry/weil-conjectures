@@ -51,8 +51,7 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
 
 namespace WeilConjectures.IntegralHom
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-  integralReductionExistence integralReductionDerivedExistence
+attribute [local irreducible] integralReductionExistence integralReductionDerivedExistence
   HasDerivedCategory.standard completedIntegralCoefficientSheafUnrestricted constantSheaf
 
 universe c₁ v₁ r w₁ e ve
@@ -257,8 +256,8 @@ theorem reduction_normalization_data_exists
       totalPair_eq_generator.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)]
     simp only [pairUnit, actual_ordinaryAdjunction,
       reductionUnit] at h ⊢
-    dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor, scalarReductionExtension,
-      scalarReductionExistence] at h ⊢
+    dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor,
+      scalarReductionExtension] at h ⊢
     exact h
   · have hh := ha P Q hp hq
     have hc (X : CochainComplex A ℤ) : reductionCounit l E Y D hl n X = eps.app X :=

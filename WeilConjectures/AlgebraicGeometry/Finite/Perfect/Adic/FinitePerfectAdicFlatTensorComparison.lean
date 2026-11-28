@@ -30,7 +30,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-attribute [local irreducible] completedAdicChangeData completedAdicScalar
+attribute [local irreducible] completedAdicScalar
 
 local instance finitePerfectAdicFlatTensorCategory
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) :

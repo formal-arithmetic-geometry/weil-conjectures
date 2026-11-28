@@ -283,7 +283,7 @@ private theorem model_evaluation
   have hc : IsCoefficientTensorCurry.{u, c, v} J A Q P I
       ((RingedDerivedNative.chainEquiv.{c, v, u} J A Q P I).symm q) q := by
     intro a b V x y
-    exact RingedDerivedNative.chainEquiv_symm_pure.{c, v, u, w}
+    exact RingedDerivedNative.chainEquiv_symm_pure.{c, v, u}
       J A Q P I q a b (a + b) rfl (add_comm b a) V x y
   have hn := coefficientTensorCurry_normalize.{u, c, v, w} J A S T Q P I hQ hP
     _ q hc
@@ -329,6 +329,10 @@ set_option hygiene false in
 local notation "totU" => coefficientTotalTensor.{u, max c v, v} (J.over U) (A.over U)
 
 -- The local-family formula has dependent slice-section and complex-degree endpoints.
+omit [HasDerivedCategory.{w} (SheafOfModules.{max c v u} ((sheafCompose J (forget₂
+  CommRingCat.{max c v u} RingCat.{max c v u})).obj A))]
+  [HasDerivedCategory.{w'} (SheafOfModules.{max c v u} ((sheafCompose (J.over U)
+    (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj (A.over U)))] in
 private theorem slice_uncurry
     (Q P I : CochainComplex Mod ℤ) (q : Q ⟶ homComplex (R := A) P I)
     (γt : (rC).obj ((tot).obj (Q, P)) ≅ (totU).obj ((rC).obj Q, (rC).obj P))
@@ -375,11 +379,11 @@ private theorem slice_uncurry
   refine (congrArg (fun z ↦
     (((RingedDerivedNative.chainEquiv.{c, v, u} J A Q P I).symm q).f k).val.app
       (op V.left) z) hinv).trans ?_
-  refine (RingedDerivedNative.chainEquiv_symm_pure.{c, v, u, w}
+  refine (RingedDerivedNative.chainEquiv_symm_pure.{c, v, u}
     J A Q P I q p a k h (add_comm a p) (op V.left) x y).trans ?_
   exact (hh p a k (add_comm a p) V (Over.mk (𝟙 V)) y
     ((q.f p).val.app (op V.left) x)).symm.trans
-      (RingedDerivedNative.chainEquiv_symm_pure.{max c v, v, u, w'}
+      (RingedDerivedNative.chainEquiv_symm_pure.{max c v, v, u}
         (J.over U) (A.over U) ((rC).obj Q) ((rC).obj P) ((rC).obj I)
         ((rC).map q ≫ γh.hom) p a k h (add_comm a p) (op V) x y).symm
 
@@ -463,7 +467,7 @@ theorem ringedSlice_representativeEvaluation
         (α.hom.app Q) (α.hom.app (homComplex (R := A) P I))
         (DerivedCategory.Q.map (rC.map q)) (DerivedCategory.Q.map γh.hom)
         hhom (α.hom.naturality q)
-  · have hc := slice_uncurry.{c, v, u, w, w'} J A U Q P I q γt γh hγt hγh
+  · have hc := slice_uncurry.{c, v, u} J A U Q P I q γt γh hγt hγh
     have hn := α.hom.naturality f
     dsimp only [Functor.comp_map] at hn
     change r.map (DerivedCategory.Q.map f) ≫ α.hom.app I = _

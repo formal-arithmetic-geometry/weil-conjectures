@@ -66,8 +66,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace WeilConjectures.IntegralHom
 
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
-  HasDerivedCategory.standard scalarReductionExistence scalarReductionDerivedExistence
-  unrestrictedIntegralReductionExistence
+  HasDerivedCategory.standard
 
 private noncomputable def tensorTowerFunctor
     (Y : AlgebraicGeometry.Scheme.{t})

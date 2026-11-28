@@ -42,7 +42,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace WeilConjectures
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
-  scalarReductionExistence scalarReductionDerivedExistence unrestrictedIntegralReductionExistence
   normalizedDVRResCompletedComp
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]

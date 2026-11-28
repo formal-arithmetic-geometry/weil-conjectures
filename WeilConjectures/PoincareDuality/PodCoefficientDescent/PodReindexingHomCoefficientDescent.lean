@@ -127,7 +127,6 @@ namespace WeilConjectures.PodCoefficientDescent
 
 attribute [local irreducible] AlgebraicGeometry.Scheme.residueField
   HasDerivedCategory.standard completedIntegralCoefficientSheafUnrestricted
-  scalarReductionExistence scalarReductionDerivedExistence
 
 private theorem existsUnique_iso_of_eq {C : Type*} [Category* C]
     {A B A' B' : C} (hA : A = A') (hB : B = B') (e : A' ≅ B') :

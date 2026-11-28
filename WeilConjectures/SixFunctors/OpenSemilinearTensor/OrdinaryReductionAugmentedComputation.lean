@@ -41,8 +41,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-  coefficientSequenceRestriction coefficientSequenceEvaluation
+attribute [local irreducible] coefficientSequenceRestriction coefficientSequenceEvaluation
 
 private theorem ordinaryIso (W : Scheme.{t})
     (M : CompletionUnit.OrdinaryModel l E W) (A : OrdinaryReduction l E W) :
@@ -144,8 +143,7 @@ private theorem ordinaryUnitSection (W : Scheme.{t})
     change _ = (((scalarReductionExtension_adjunction l E W n).choose.unit.app
       P).val.app V) x
     refine hu.trans ?_
-    dsimp only [unrestrictedIntegralTensorSection, unrestrictedIntegralReductionFunctor,
-      unrestrictedIntegralReductionExistence, scalarReductionExistence] at hs ⊢
+    dsimp only [unrestrictedIntegralTensorSection, unrestrictedIntegralReductionFunctor] at hs ⊢
     exact hs.symm
   let N := (scalarReductionRestriction l E W n).obj
     ((coefficientSequenceEvaluation l E W n).obj (M.tensor.obj P))

@@ -42,8 +42,8 @@ noncomputable def canonicalOpenQuotientScalarComparisonLevel
     Functor.isoWhiskerLeft (scalarReductionExtension l E U n) (sc.finite n)
   exact (NatIso.mapHomologicalComplex e (.up ℤ)).app Q
 
-attribute [local irreducible] scalarReductionExistence
-  completedIntegralCoefficientSheafUnrestricted completedIntegralCommRingSheafUnrestricted
+attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
+  completedIntegralCommRingSheafUnrestricted
 
 private theorem scalarUnit_epi (W : Scheme.{u}) (n : ℕ)
     (M : scalarReductionSource l E W) :

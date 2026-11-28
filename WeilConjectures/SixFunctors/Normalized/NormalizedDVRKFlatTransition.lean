@@ -40,7 +40,7 @@ universe d t u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace WeilConjectures
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
-  scalarReductionDerivedExistence normalizedDVRResCompletedComp
+  normalizedDVRResCompletedComp
   scalarReductionDerivedExtension scalarReductionCounit
 
 section AdjunctionHelpers
@@ -330,8 +330,7 @@ private theorem tensorSection_eq (n : ℕ) (N : scalarReductionSource l E X)
   unfold SheafOfModules.UnrestrictedTowerProof.tensorSection unrestrictedIntegralTensorSection
   rfl
 
-attribute [local irreducible] scalarReductionExistence unrestrictedIntegralReductionExistence
-  scalarReductionExtension unrestrictedIntegralReductionFunctor
+attribute [local irreducible] scalarReductionExtension unrestrictedIntegralReductionFunctor
 
 private noncomputable def finiteModuleStep (n : ℕ) (N : scalarReductionSource l E X) :
     (scalarReductionExtension l E X (n + 1)).obj N ⟶
@@ -402,8 +401,7 @@ private theorem completedComp_eq (n : ℕ) :
   congr 2
 
 section TensorIdentification
-attribute [local semireducible] scalarReductionExistence unrestrictedIntegralReductionExistence
-  scalarReductionExtension unrestrictedIntegralReductionFunctor
+attribute [local semireducible] scalarReductionExtension unrestrictedIntegralReductionFunctor
 
 private theorem finiteChainStep_restrict (n : ℕ)
     (P : CochainComplex (scalarReductionSource l E X) ℤ) :

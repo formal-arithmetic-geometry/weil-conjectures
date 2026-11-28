@@ -506,7 +506,7 @@ private def openAdj {T : Scheme.{u}} (W : T.ProEt)
     (SheafOfModules.localizedSystemAdjunction.{u + 1, u, u + 1} R W)
 
 section ScalarComparison
-attribute [local irreducible] completedAdicChangeData completedReductionCoefficient
+attribute [local irreducible] completedReductionCoefficient
 
 variable {T : Scheme.{u}} (W : T.ProEt)
   {R B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}

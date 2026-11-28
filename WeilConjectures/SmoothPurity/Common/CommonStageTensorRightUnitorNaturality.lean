@@ -40,8 +40,8 @@ attribute [local reducible] GeneralAlgebraicallyClosedCoefficients.stageCategory
   commonStageTensorObject
 
 attribute [local irreducible] AlgebraicGeometry.Scheme.residueField
-  completedIntegralCoefficientSheafUnrestricted scalarReductionExistence
-  scalarReductionDerivedExistence commonStageTensorComparison
+  completedIntegralCoefficientSheafUnrestricted
+  commonStageTensorComparison
   operationStageTransitionIso
 
 private theorem chosen_spec {A : Sort*} {p : A → Prop} (h : ∃! a, p a)

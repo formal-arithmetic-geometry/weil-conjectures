@@ -292,8 +292,8 @@ private theorem restriction_comp (W : Scheme.{u})
   rw [hd]
   simp only [Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app]
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-  scalarReductionDerivedExtension completedIntegralCommRingProjectionUnrestricted
+attribute [local irreducible] scalarReductionDerivedExtension
+  completedIntegralCommRingProjectionUnrestricted
   compactSupportLevelQuotient
 
 /-- The normalized quotient reductions satisfy identity and composition before applying

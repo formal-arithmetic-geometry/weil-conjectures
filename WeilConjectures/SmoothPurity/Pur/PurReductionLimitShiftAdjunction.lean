@@ -74,7 +74,6 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 namespace WeilConjectures
 
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
-  scalarReductionExistence scalarReductionDerivedExistence unrestrictedIntegralReductionExistence
   coefficientSequenceRestriction coefficientSequenceEvaluation
   coefficientFiniteDerivedExtension scalarReductionExtension
   coefficientFiniteReductionModel coefficientSequenceLimit coefficientConstantTowerLimit

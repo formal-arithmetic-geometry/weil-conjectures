@@ -62,7 +62,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite
 namespace AlgebraicGeometry.Scheme
 
 attribute [local instance] finitePerfectModelsAbLocallyBijective
-attribute [local irreducible] completedAdicChangeData completedAdicRing
+attribute [local irreducible] completedAdicRing
 
 private theorem moduleNatTrans_ext_regular
     {R : Type t} [CommRing R] {C : Type*} [Category C]

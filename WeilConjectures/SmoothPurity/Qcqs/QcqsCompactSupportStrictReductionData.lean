@@ -47,7 +47,7 @@ attribute [local implicit_reducible] coefficientSequenceCommRingSheaf
   integralCoefficientSheafTransition compactSupportSystemLevel compactSupportSystemQuotient
   ProEtale.VaryingRing.coefficientTransition
 attribute [local irreducible] HasDerivedCategory.standard Functor.mapDerivedCategory
-  Functor.rightDerivedFunctor scalarReductionExistence scalarReductionDerivedExistence
+  Functor.rightDerivedFunctor
   SheafOfModules.monoidalCategory
 
 variable (l : ℕ) [Fact l.Prime]

@@ -175,7 +175,6 @@ private theorem quotientUnit_epi
   have : Epi (F.map (finiteQuotientUnitMap X d n)) := Sheaf.epi_of_isLocallySurjective _
   exact F.epi_of_epi_map inferInstance
 
-attribute [local irreducible] completedAdicChangeData
 
 private theorem homotopyModelIso
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]

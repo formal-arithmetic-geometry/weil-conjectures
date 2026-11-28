@@ -35,7 +35,7 @@ local instance unitTensorCochainMonoidalStruct
   (unitTensorCochainMonoidal T d).toMonoidalCategoryStruct
 
 variable (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
-attribute [local irreducible] completedAdicRing completedAdicChangeData
+attribute [local irreducible] completedAdicRing
 
 private theorem generator_single (r : ℕ) (a : Fin r → A)
     (j : Fin r) (c : ULift.{t + 1} A) :

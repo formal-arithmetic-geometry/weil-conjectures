@@ -107,7 +107,7 @@ def completedAdicSliceDerivedChange (X : Scheme.{t}) (U : X.ProEt)
     {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :=
   (completedAdicSliceChangeData X U f).choose_spec.choose_spec.choose_spec.choose_spec.2.2.choose
 
-attribute [local irreducible] completedAdicChangeData completedAdicSliceChangeData
+attribute [local irreducible] completedAdicSliceChangeData
 
 universe u₀ v₀ r₀ m₀
 

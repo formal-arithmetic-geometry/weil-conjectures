@@ -656,8 +656,10 @@ theorem derivedRHomAlgebraModule_comparison :
           DerivedCategory.Q) := by
   exact ⟨Localization.fac _ (sheafAlgebraHomResolution_inverts Y B) DerivedCategory.Q⟩
 
--- Keep the unused instance binders: callers apply this with `@` and explicit universes.
-set_option linter.unusedSectionVars false in
+omit [HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y)
+      (forget₂ CommRingCat RingCat)).obj Y.sheaf))]
+  [HasDerivedCategory.{wB} (SheafOfModules.{u}
+    ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat RingCat)).obj B.right))] in
 /-- Restriction of algebra scalars preserves finite limits (Stacks, Tag 0BV1). -/
 theorem sheafAlgebraRestrictScalars_preservesFiniteLimits :
     PreservesFiniteLimits (SheafOfModules.restrictScalars.{u}
@@ -667,8 +669,10 @@ theorem sheafAlgebraRestrictScalars_preservesFiniteLimits :
 
 attribute [instance] sheafAlgebraRestrictScalars_preservesFiniteLimits
 
--- Keep the unused instance binders: callers apply this with `@` and explicit universes.
-set_option linter.unusedSectionVars false in
+omit [HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y)
+      (forget₂ CommRingCat RingCat)).obj Y.sheaf))]
+  [HasDerivedCategory.{wB} (SheafOfModules.{u}
+    ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat RingCat)).obj B.right))] in
 /-- Restriction of algebra scalars preserves finite colimits (Stacks, Tag 0BV1). -/
 theorem sheafAlgebraRestrictScalars_preservesFiniteColimits :
     PreservesFiniteColimits (SheafOfModules.restrictScalars.{u}

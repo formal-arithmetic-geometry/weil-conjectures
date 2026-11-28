@@ -54,8 +54,7 @@ def integralConstantReduction (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   letI := ((integralConstantCoefficient_constructible l E X D hl).2.2.2 n).1
   asIso (constantCoefficientReductionMap l E X n)
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-  unrestrictedIntegralReductionExistence HasDerivedCategory.standard limit
+attribute [local irreducible] HasDerivedCategory.standard limit
   finiteRegularIso finiteSingleRegularIso
   integralConstantReduction
 

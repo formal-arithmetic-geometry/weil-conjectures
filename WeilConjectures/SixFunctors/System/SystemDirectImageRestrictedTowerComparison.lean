@@ -45,7 +45,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFun
   Functor.ofSequence Functor.ofOpSequence presheafToSheaf Functor.leftAdjoint
   MorphismProperty.Over.pullback
   completedIntegralCoefficientSheafUnrestricted
-  scalarReductionDerivedExtension scalarReductionExistence scalarReductionDerivedExistence
+  scalarReductionDerivedExtension
   compactSupportNativeDirectEvaluation
 
 attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficientCommRingSheaf

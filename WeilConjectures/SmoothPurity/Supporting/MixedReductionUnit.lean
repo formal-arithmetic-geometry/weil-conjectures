@@ -122,8 +122,7 @@ namespace WeilConjectures
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-  completedIntegralCoefficientSheafUnrestricted
+attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
 
 section ScalarUnit
 variable (l : ℕ) [Fact l.Prime]

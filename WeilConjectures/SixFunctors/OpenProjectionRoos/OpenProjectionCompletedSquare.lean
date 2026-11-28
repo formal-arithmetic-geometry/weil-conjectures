@@ -319,7 +319,7 @@ theorem completedRepresentative_of_ordinary
 attribute [local irreducible] integralOperationsTensorTowerFunctor
   coefficientTotalTensor integralOperationsTensorLevel
   completedIntegralCommRingSheafUnrestricted completedIntegralCoefficientSheafUnrestricted
-  unrestrictedIntegralComplexFunctor scalarReductionExistence unrestrictedIntegralReductionExistence
+  unrestrictedIntegralComplexFunctor
 
 /-- There is a completed open tensor isomorphism `gamma` compatible with the augmentations
 `chi` (which are invertible on constructible inputs) and satisfying the completed

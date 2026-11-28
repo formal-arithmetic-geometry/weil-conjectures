@@ -202,7 +202,7 @@ def finiteUnit {X Y : Scheme.{u}} (f : X ⟶ Y) (m : ℕ) :
         (@asIso _ _ _ _ (finiteUnitHom l E f m) (finiteUnitHom_isIso l E f m))
 
 section
-attribute [local irreducible] unrestrictedIntegralReductionExistence limit
+attribute [local irreducible] limit
   chainUnitCandidate pullbackUnitProduct pullbackUnitLevel
 
 /-- There is a unique normalized strict unit chain map for an arbitrary morphism of schemes,
@@ -256,7 +256,7 @@ def integralUnit {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 section
 attribute [local irreducible] coefficientFinitePullIso canonicalCoefficientFiniteKappaComplex
-  canonicalCoefficientFiniteUnit constantSheaf unrestrictedIntegralReductionExistence limit
+  canonicalCoefficientFiniteUnit constantSheaf limit
 
 end
 

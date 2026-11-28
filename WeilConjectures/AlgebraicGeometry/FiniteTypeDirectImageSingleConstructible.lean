@@ -203,8 +203,8 @@ section Finiteness
 variable (ℓ : ℕ) [Fact ℓ.Prime]
   {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]
   {X Y : Over (Spec (.of k))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
 
 private instance source_noetherian : IsNoetherian X.left :=
   isNoetherian_of_locallyOfFiniteType X.hom
@@ -218,8 +218,6 @@ private theorem ell_unit : IsUnit (ℓ : k) :=
   isUnit_iff_ne_zero.mpr (CharP.cast_ne_zero_of_ne_of_prime k (p := ringChar k)
     (Fact.out : ℓ.Prime) (Fact.out : ringChar k ≠ ℓ))
 
--- Keep separatedness here so the public direct-image theorems retain it as a hypothesis.
-set_option linter.unusedSectionVars false in
 private theorem finite_etale (f : X ⟶ Y)
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (n : ℕ) (hn : (ℓ : A) ^ n = 0)
@@ -492,8 +490,8 @@ section SingleConstructible
 variable (ℓ : ℕ) [Fact ℓ.Prime]
   {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]
   {X Y : Over (Spec (.of k))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
   (f : X ⟶ Y)
 
 include ℓ k

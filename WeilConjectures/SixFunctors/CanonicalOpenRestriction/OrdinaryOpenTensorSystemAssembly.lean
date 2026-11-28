@@ -28,7 +28,7 @@ set_option backward.isDefEq.respectTransparency.types true
 set_option backward.defeqAttrib.useBackward true
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [local irreducible] HasDerivedCategory.standard
-  WeilConjectures.scalarReductionExtension WeilConjectures.scalarReductionExistence
+  WeilConjectures.scalarReductionExtension
   WeilConjectures.SemilinearSections.transition
   WeilConjectures.SemilinearSections.coefficientMap
   WeilConjectures.OpenSemilinearTensor.scalarLevelComparison

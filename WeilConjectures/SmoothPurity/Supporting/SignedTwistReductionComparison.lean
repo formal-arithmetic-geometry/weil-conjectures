@@ -23,7 +23,6 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 4096
-attribute [local irreducible] WeilConjectures.scalarReductionExistence
 attribute [-instance] WeilConjectures.IntegralOnSlice.abLocallyBijective
 set_option allowUnsafeReducibility true in
 attribute [local reducible] CategoryTheory.sheafCompose

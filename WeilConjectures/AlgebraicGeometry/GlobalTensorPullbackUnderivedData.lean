@@ -40,6 +40,7 @@ local instance : MonoidalPreadditive (SheafOfModules.{u} (moduleRings X.toRinged
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).1
 local instance : MonoidalClosed (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).2.1
+omit [HasDerivedCategory.{u} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] in
 /-- Underived global pullback data and its tensor-counit normalization
 (Stacks, Tags 008A, 008Y and 0FKU). -/
 theorem exists_globalTensorPullback_underived_data :

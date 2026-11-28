@@ -465,7 +465,6 @@ private theorem tensor_derived_exists (M : OrdinaryModel l E W)
 
 section FiniteMate
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
 
 
 /-- Localization factors for the canonical square of exact functors. -/
@@ -642,8 +641,7 @@ private theorem ordinary_unit (M : OrdinaryModel l E W)
   intro V
   ext x
   exact (hunit V x).trans (by
-    dsimp only [unrestrictedIntegralTensorSection, unrestrictedIntegralReductionFunctor,
-      unrestrictedIntegralReductionExistence, scalarReductionExistence] at hu ⊢
+    dsimp only [unrestrictedIntegralTensorSection, unrestrictedIntegralReductionFunctor] at hu ⊢
     exact (hu V x).symm)
 
 /-- Project the comparison with total limit in the exact finite restriction coordinates. -/

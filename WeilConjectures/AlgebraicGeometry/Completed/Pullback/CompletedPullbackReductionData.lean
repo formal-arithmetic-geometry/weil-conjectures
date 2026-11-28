@@ -132,7 +132,6 @@ theorem completedReductionModelPushforward_isRightAdjoint
     (proEtaleModelTopology Y) (proEtaleModelTopology X) (proEtaleModelBaseChange g)
     (proEtaleModelBaseChange_isContinuous g) _ _ (proEtaleModelRingUnit g R)
 
-attribute [local irreducible] completedAdicChangeData
 
 set_option synthInstance.maxSize 2048
 attribute [local instance] completedTowerModulePullback_additive

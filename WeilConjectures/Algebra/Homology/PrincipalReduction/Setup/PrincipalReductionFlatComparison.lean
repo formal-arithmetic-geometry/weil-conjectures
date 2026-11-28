@@ -67,7 +67,9 @@ variable [HasDerivedCategory.{wO}
   [HasDerivedCategory.{wA} (ModuleCat.{r} D.A)]
 
 omit [HasDerivedCategory (ringedSiteModules (derivedChangeRingIndependentCoefficients J D.O))]
-    [HasDerivedCategory (ringedSiteModules (derivedChangeRingIndependentCoefficients J D.S))] in
+    [HasDerivedCategory (ringedSiteModules (derivedChangeRingIndependentCoefficients J D.S))]
+    [EssentiallySmall.{r} C] [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}] in
 private theorem c_isIso_on_kFlat (K : CochainComplex (ModuleCat.{r} R) ℤ)
     (hK : (HomologicalComplex.quasiIso (ModuleCat.{r} R) (.up ℤ)).kFlat K) :
     IsIso (D.c K) := by
@@ -77,7 +79,9 @@ private theorem c_isIso_on_kFlat (K : CochainComplex (ModuleCat.{r} R) ℤ)
   infer_instance
 
 omit [HasDerivedCategory (ringedSiteModules (derivedChangeRingIndependentCoefficients J D.O))]
-    [HasDerivedCategory (ringedSiteModules (derivedChangeRingIndependentCoefficients J D.S))] in
+    [HasDerivedCategory (ringedSiteModules (derivedChangeRingIndependentCoefficients J D.S))]
+    [EssentiallySmall.{r} C] [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}] in
 private theorem c_isIso_on_regular [IsDomain R] (ht : D.t ≠ 0)
     (K : CochainComplex (ModuleCat.{r} R) ℤ)
     (hK : ∀ i : ℤ, Function.Injective (fun x : K.X i ↦ D.t • x)) :

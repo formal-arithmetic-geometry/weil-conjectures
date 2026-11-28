@@ -25,7 +25,7 @@ universe t
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
-attribute [local irreducible] completedAdicChangeData completedAdicRing
+attribute [local irreducible] completedAdicRing
   directCoefficientMap overDirectMap directCoefficientIso
 
 /-- Scalar restriction is compatible with composition of sheaf-ring maps. -/

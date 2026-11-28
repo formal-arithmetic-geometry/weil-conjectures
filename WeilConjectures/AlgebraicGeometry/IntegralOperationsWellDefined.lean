@@ -1116,8 +1116,7 @@ section IntegralTensorTransitionProof
 
 section FiniteLinearization
 
-attribute [local irreducible] unrestrictedIntegralReductionExistence
-  unrestrictedIntegralReductionFunctor unrestrictedIntegralTransition
+attribute [local irreducible] unrestrictedIntegralReductionFunctor unrestrictedIntegralTransition
   completedIntegralCoefficientSheafUnrestricted completedIntegralCommRingProjectionUnrestricted
 
 private noncomputable def integralFiniteStep (W : AlgebraicGeometry.Scheme.{t}) (n : ℕ) :
@@ -1314,8 +1313,7 @@ private noncomputable def integralPullbackFiniteComplexMap
       (((unrestrictedIntegralFiniteComplex l E Y n).obj P).d i j)
       (((integralFiniteTransition l E Y n).app P).comm i j).symm).symm
 
-attribute [local irreducible] unrestrictedIntegralReductionExistence
-  unrestrictedIntegralReductionFunctor unrestrictedIntegralTransition
+attribute [local irreducible] unrestrictedIntegralReductionFunctor unrestrictedIntegralTransition
   completedIntegralCoefficientSheafUnrestricted completedIntegralCommRingProjectionUnrestricted
 
 private noncomputable abbrev integralCompletedProjection
@@ -1697,7 +1695,6 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite
 attribute [local irreducible] SheafOfModules.monoidalCategory
   CochainComplex.IsKFlatIndependentCoefficients
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
-  WeilConjectures.unrestrictedIntegralReductionExistence
 
 set_option backward.isDefEq.respectTransparency false
 
@@ -1715,7 +1712,6 @@ set_option backward.isDefEq.respectTransparency.types true
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite
 
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
-  WeilConjectures.unrestrictedIntegralReductionExistence
 
 namespace IntegralTensorProof
 

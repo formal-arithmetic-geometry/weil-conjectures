@@ -32,7 +32,6 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 attribute [local irreducible] HasDerivedCategory.standard
   WeilConjectures.completedIntegralCoefficientSheafUnrestricted
-  WeilConjectures.scalarReductionExistence WeilConjectures.scalarReductionDerivedExistence
   WeilConjectures.integralDerivedPullback WeilConjectures.pullbackTensorCalculus
   CategoryTheory.Functor.leftAdjoint CategoryTheory.Functor.mapDerivedCategory
 attribute [local implicit_reducible] WeilConjectures.integralCoefficientSheaf

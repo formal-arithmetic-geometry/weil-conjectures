@@ -180,7 +180,7 @@ structure ScalarComparison (sc : ScalarCompatibility l E j o)
 attribute [local irreducible] integralOperationsTensorTowerFunctor
   coefficientTotalTensor integralOperationsTensorLevel
   completedIntegralCommRingSheafUnrestricted completedIntegralCoefficientSheafUnrestricted
-  unrestrictedIntegralComplexFunctor scalarReductionExistence unrestrictedIntegralReductionExistence
+  unrestrictedIntegralComplexFunctor
 
 /-- The tensor augmentation square is an equality of strict chain-system maps.
 Balancing identifies its finite tensor comparison with reduction of the same signed

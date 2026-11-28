@@ -42,8 +42,8 @@ variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E
 
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
   constantSheaf HasDerivedCategory.standard SheafOfModules.monoidalCategory
-  CategoryTheory.Limits.limit scalarReductionExistence scalarReductionDerivedExistence
-  unrestrictedIntegralReductionExistence coefficientSequenceRestriction
+  CategoryTheory.Limits.limit
+  coefficientSequenceRestriction
   coefficientSequenceEvaluation unrestrictedTowerUnit coefficientConstantTowerLimit
 
 private theorem scalar_roos_unit_eq (W : Scheme.{u})

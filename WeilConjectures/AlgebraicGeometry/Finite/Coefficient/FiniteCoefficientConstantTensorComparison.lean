@@ -81,8 +81,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective ULift.algebra'
-attribute [local irreducible] completedAdicChangeData
-  SheafOfModules.tensorObjIsoSheafification
+attribute [local irreducible] SheafOfModules.tensorObjIsoSheafification
   SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
 private abbrev layerLift (B : Type t) [CommRing B] :

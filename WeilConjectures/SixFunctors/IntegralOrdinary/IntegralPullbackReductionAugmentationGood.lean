@@ -48,8 +48,8 @@ namespace WeilConjectures.IntegralOrdinary
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-attribute [local irreducible] HasDerivedCategory.standard scalarReductionExistence
-  scalarReductionDerivedExistence Functor.leftAdjoint Functor.mapDerivedCategory
+attribute [local irreducible] HasDerivedCategory.standard
+  Functor.leftAdjoint Functor.mapDerivedCategory
 attribute [local implicit_reducible] pullbackTensorReferencePullback
   pullbackTensorSequenceDerived integralOperationsGoodLocalization
   integralOperationsPullbackOnGood integralOperationsPullbackComplexFunctor

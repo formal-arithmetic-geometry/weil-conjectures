@@ -283,7 +283,6 @@ private theorem extensionUnit_normalized (n : ℕ) :
   exact ⟨⟨f, g, hfg, hgf⟩, hf⟩
 
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
-  scalarReductionExistence scalarReductionDerivedExistence
 
 private theorem normalizedUnit_products
     {A : Type a} {B : Type b} [Category A] [Category B] [Abelian A] [Abelian B]

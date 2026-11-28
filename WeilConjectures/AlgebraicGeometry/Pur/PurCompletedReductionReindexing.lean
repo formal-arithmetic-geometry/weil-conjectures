@@ -53,7 +53,7 @@ set_option linter.privateModule false
 universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
-attribute [local irreducible] completedAdicChangeData completedReductionCoefficient
+attribute [local irreducible] completedReductionCoefficient
 attribute [local irreducible] proEtaleRingModulePullback proEtaleRingModuleDirectImage
 attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor
 attribute [local irreducible] CochainComplex.IsKFlatIndependentCoefficients

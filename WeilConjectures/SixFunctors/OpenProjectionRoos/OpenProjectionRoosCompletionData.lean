@@ -230,7 +230,7 @@ abbrev completedRight := completedInside l E j o ⋙ IntegralOpenReduction.shrie
 attribute [local irreducible] integralOperationsTensorTowerFunctor
   coefficientTotalTensor integralOperationsTensorLevel
   completedIntegralCommRingSheafUnrestricted completedIntegralCoefficientSheafUnrestricted
-  unrestrictedIntegralComplexFunctor scalarReductionExistence unrestrictedIntegralReductionExistence
+  unrestrictedIntegralComplexFunctor
 
 variable
   (SX : CoefficientDerivedSystemCalculus l E X)

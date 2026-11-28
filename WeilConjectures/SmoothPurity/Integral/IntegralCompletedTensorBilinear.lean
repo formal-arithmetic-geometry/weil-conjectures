@@ -106,7 +106,7 @@ private noncomputable abbrev ScalarRing := Padic.coefficientExtensionIntegers l 
 
 attribute [local instance] coefficientModuleLinear
 attribute [local instance 3000] integralCoefficientLinear
-attribute [local irreducible] unrestrictedIntegralReductionExistence HasDerivedCategory.standard
+attribute [local irreducible] HasDerivedCategory.standard
 
 @[instance_reducible]
 private noncomputable def sectionsLinear

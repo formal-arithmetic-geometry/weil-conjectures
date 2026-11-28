@@ -30,8 +30,7 @@ set_option synthInstance.maxSize 4096
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-  scalarReductionExtension coefficientEvaluationTensorIso
+attribute [local irreducible] scalarReductionExtension coefficientEvaluationTensorIso
   coefficientScalarTensorIso
 
 /-- Exactness of a short complex on the ringed sequence site is detected by the finite

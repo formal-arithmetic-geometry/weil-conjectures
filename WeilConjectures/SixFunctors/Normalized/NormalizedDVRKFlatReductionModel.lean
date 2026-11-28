@@ -61,8 +61,7 @@ universe d t u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace WeilConjectures
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
-  scalarReductionExistence scalarReductionDerivedExistence
-  unrestrictedIntegralReductionExistence normalizedDVRKFlatComparison
+  normalizedDVRKFlatComparison
   normalizedDVRResCompletedComp
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : AlgebraicGeometry.Scheme.{t})

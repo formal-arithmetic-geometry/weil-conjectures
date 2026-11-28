@@ -34,10 +34,9 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
 open CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open WeilConjectures.ZeroClassAux
 
--- Keep this cache transparent: opaque proofs leave the coefficient universe unresolved.
-set_option linter.defProp false in
-@[instance_reducible]
-private def cachedCompose [EssentiallySmall.{a} C] :
+omit [HasSheafify J AddCommGrpCat.{max c v u}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}] in
+private theorem cachedCompose [EssentiallySmall.{a} C] :
     J.HasSheafCompose (forget₂ CommRingCat.{a} RingCat.{a}) := by
   exact (equivSmallModel.{a} C).hasSheafCompose J
     ((equivSmallModel.{a} C).inverse.inducedTopology J)
@@ -949,8 +948,7 @@ private theorem closedStructure_representatives
     (representativeFunctor.{c, v, u, w} J R) (representativeW.{c, v, u} J R)
     (representativeHomIso.{c, v, u, w} J R) (op P, (op L, M)) ξ
 
--- Omitting the unused `HasDerivedCategory.{w}` drops universe `w`, which callers pass explicitly.
-set_option linter.unusedSectionVars false in
+omit [HasDerivedCategory.{w} (Modules.{c, v, u} J R)] in
 private theorem chainEquiv_symm_pure
     (P L M : CochainComplex (Modules.{c, v, u} J R) ℤ)
     (φ : P ⟶ homComplex (R := R) L M)

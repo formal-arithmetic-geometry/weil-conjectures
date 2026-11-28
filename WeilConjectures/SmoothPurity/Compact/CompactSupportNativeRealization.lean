@@ -36,7 +36,7 @@ namespace WeilConjectures
 attribute [local irreducible] Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors
   HasDerivedCategory.standard constantSheaf Padic.coefficientExtensionIdeal
   coefficientSequenceEvaluation coefficientSequenceTransition
-  completedIntegralCoefficientSheafUnrestricted scalarReductionExistence
-  scalarReductionDerivedExistence Functor.objPreimage Functor.objObjPreimageIso
+  completedIntegralCoefficientSheafUnrestricted
+  Functor.objPreimage Functor.objObjPreimageIso
 
 end WeilConjectures

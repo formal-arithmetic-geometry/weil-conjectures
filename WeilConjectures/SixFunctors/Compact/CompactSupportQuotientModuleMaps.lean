@@ -23,8 +23,7 @@ attribute [local irreducible] Padic.coefficientExtensionIdeal
   HasDerivedCategory.standard SheafOfModules.monoidalCategory
   WeilConjectures.completedIntegralCommRingSheafUnrestricted
 
-attribute [local irreducible] WeilConjectures.scalarReductionExistence
-  WeilConjectures.scalarReductionExtension
+attribute [local irreducible] WeilConjectures.scalarReductionExtension
 
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme

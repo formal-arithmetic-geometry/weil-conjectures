@@ -37,7 +37,7 @@ private instance localBoundsWEquals (X : Scheme.{u}) :
   GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall.{u, u + 1,
     u + 1, u + 2, u + 1} (ProEt.topology X)
 
-attribute [local irreducible] completedAdicChangeData HasDerivedCategory.standard
+attribute [local irreducible] HasDerivedCategory.standard
 
 private def scalarExtensionIso (X : Scheme.{u})
     {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (φ : R ⟶ S)

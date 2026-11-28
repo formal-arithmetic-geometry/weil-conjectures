@@ -45,7 +45,6 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
 
 /-- Localization of a termwise adjunction unit agrees in the two quotient coordinates. -/
 theorem localizedUnit_eq

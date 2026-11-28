@@ -173,7 +173,6 @@ end FiniteShiftHelpers
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [local irreducible] levelIso CategoryTheory.constantSheaf
   WeilConjectures.unrestrictedIntegralReductionFunctor
-  WeilConjectures.unrestrictedIntegralReductionExistence
   WeilConjectures.completedIntegralCoefficientSheafUnrestricted
 universe t u
 open WeilConjectures

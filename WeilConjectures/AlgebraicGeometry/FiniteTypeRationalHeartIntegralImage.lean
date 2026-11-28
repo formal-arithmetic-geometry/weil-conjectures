@@ -37,8 +37,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 include k
 
--- Keep the section instances as hypotheses of this public statement.
-set_option linter.unusedSectionVars false in
+omit [Fact (ringChar k ≠ ℓ)] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom] in
 /-- A rational constructible sheaf has an ordinary integral model whose direct image
 localizes to the rational direct image. No cohomological upper bound is asserted.
 (Bhatt--Scholze, Lemmas 6.8.12--6.8.13, Proposition 6.8.14(2), Remark 6.8.15.) -/

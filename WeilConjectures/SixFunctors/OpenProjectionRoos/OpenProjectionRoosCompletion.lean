@@ -93,7 +93,7 @@ variable
 
 attribute [local irreducible] integralOperationsTensorTowerFunctor
   coefficientTotalTensor integralOperationsTensorLevel
-  unrestrictedIntegralComplexFunctor scalarReductionExistence unrestrictedIntegralReductionExistence
+  unrestrictedIntegralComplexFunctor
 
 attribute [local irreducible] Completion CompletionData
   OrdinaryRepresentative CompletedRepresentative RestrictionRepresentative

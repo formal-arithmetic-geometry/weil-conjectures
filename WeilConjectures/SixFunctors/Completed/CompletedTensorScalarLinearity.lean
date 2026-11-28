@@ -55,7 +55,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry TensorProdu
 open scoped ChangeOfRings
 namespace WeilConjectures
 
-attribute [local irreducible] unrestrictedIntegralReductionExistence HasDerivedCategory.standard
+attribute [local irreducible] HasDerivedCategory.standard
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{u})

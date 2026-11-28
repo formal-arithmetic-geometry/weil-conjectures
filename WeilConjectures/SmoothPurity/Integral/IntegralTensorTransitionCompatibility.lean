@@ -98,7 +98,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
 attribute [local irreducible] SheafOfModules.monoidalCategory constantSheaf
   completedIntegralCoefficientSheafUnrestricted HasDerivedCategory.standard
-  unrestrictedIntegralReductionExistence
 
 private theorem pure_local_ext
     {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]

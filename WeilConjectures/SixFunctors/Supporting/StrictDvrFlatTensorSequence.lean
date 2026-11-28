@@ -61,7 +61,6 @@ private instance strictDvrAbLocallyBijective :
 open SheafOfModules
 
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
-  unrestrictedIntegralReductionExistence scalarReductionExistence
   unrestrictedIntegralTransition unrestrictedTowerTransition
 
 private theorem reduction_obj_eq (n : ℕ) (M : scalarReductionSource l E X) :

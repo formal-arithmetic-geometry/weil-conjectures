@@ -123,8 +123,7 @@ def zlStagePullIso {X Y : Scheme.{u}} (f : X ⟶ Y)
 section CompositionProof
 attribute [local irreducible] commonStageDerivedPullback rationalDerivedPullback
   constructibleIntegralPullback commonStagePullbackCompComponent
-  completedIntegralCoefficientSheafUnrestricted scalarReductionExistence
-  scalarReductionDerivedExistence
+  completedIntegralCoefficientSheafUnrestricted
 
 /-- There is a unique composition isomorphism for common-stage pullback whose components on
 rationalized integral objects are induced by the integral pullback composition. -/

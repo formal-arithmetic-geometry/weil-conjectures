@@ -43,8 +43,8 @@ set_option backward.isDefEq.respectTransparency.types true
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-  scalarReductionExtension HasDerivedCategory.standard coefficientSequenceCommRingSheaf
+attribute [local irreducible] scalarReductionExtension HasDerivedCategory.standard
+  coefficientSequenceCommRingSheaf
   coefficientSequenceCommRingPresheaf coefficientSequenceCommRingSystem
   coefficientSequenceTopology constantSheaf coefficientSequenceEvaluation
   coefficientTotalTensor coefficientTensorGenerator coefficientEvaluationTensorIso

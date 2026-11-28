@@ -101,7 +101,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (X : AlgebraicGeometry.Scheme.{t})
 
 attribute [local irreducible] SheafOfModules.monoidalCategory
-  constantSheaf HasDerivedCategory.standard unrestrictedIntegralReductionExistence
+  constantSheaf HasDerivedCategory.standard
 
 universe a₁ b₁ a₂ b₂
 

@@ -147,7 +147,7 @@ open AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
-  scalarReductionExistence scalarReductionDerivedExistence scalarReductionExtension
+  scalarReductionExtension
 
 attribute [-instance] integralCoefficientAbLocallyBijective integralCoefficientAbSheafify
   GrothendieckTopology.hasSheafify_of_essentiallySmall

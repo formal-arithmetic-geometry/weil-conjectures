@@ -45,7 +45,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open AlgebraicGeometry.Scheme
 namespace WeilConjectures.StrictTensorAugmentation
 attribute [local irreducible] completedIntegralCommRingSheafUnrestricted
-  completedIntegralCoefficientSheafUnrestricted unrestrictedIntegralReductionExistence
+  completedIntegralCoefficientSheafUnrestricted
   coefficientTotalTensor
 attribute [local implicit_reducible] IntegralOnSlice.ring IntegralOnSlice.restrict
   IntegralOnSlice.topology IntegralOnSlice.Site IntegralOnSlice.roos IntegralAmbient.tensorTower

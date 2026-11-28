@@ -27,7 +27,7 @@ attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-attribute [local irreducible] completedAdicChangeData completedAdicScalar completedAdicRing
+attribute [local irreducible] completedAdicScalar completedAdicRing
   Functor.mapDerivedCategory HasDerivedCategory.standard Functor.leftAdjoint
 
 private theorem squareSymm

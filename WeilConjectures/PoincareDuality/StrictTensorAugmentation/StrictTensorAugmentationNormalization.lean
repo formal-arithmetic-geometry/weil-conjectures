@@ -39,7 +39,7 @@ namespace WeilConjectures.StrictTensorAugmentation
 attribute [local implicit_reducible] integralOperationsTensorComplexFunctor
   integralOperationsRoos integralOperationsRoosFunctor
 attribute [local irreducible] completedIntegralCommRingSheafUnrestricted
-  completedIntegralCoefficientSheafUnrestricted unrestrictedIntegralReductionExistence
+  completedIntegralCoefficientSheafUnrestricted
   coefficientTotalTensor
 attribute [local implicit_reducible] IntegralOnSlice.ring IntegralOnSlice.restrict
   IntegralOnSlice.topology IntegralOnSlice.Site IntegralOnSlice.siteCategory

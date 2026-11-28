@@ -641,8 +641,8 @@ end CompletionProof
 
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
   unrestrictedTowerUnit unrestrictedTowerTransition DerivedCategory.Q
-  HasDerivedCategory.standard scalarReductionExistence scalarReductionDerivedExistence
-  unrestrictedIntegralReductionExistence IntegralOnSlice.reductionWitness
+  HasDerivedCategory.standard
+  IntegralOnSlice.reductionWitness
 
 private noncomputable def integralAuxiliaryDatum (p : ℕ) [Fact p.Prime] :
     FiniteFieldDatum.{0} :=

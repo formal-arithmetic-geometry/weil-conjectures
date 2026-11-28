@@ -143,8 +143,8 @@ noncomputable abbrev additiveSheaf (O : Sheaf J CommRingCat.{r}) :=
   (sheafCompose J ((forget₂ CommRingCat.{r} RingCat.{r} ⋙
     forget₂ RingCat.{r} AddCommGrpCat.{r}))).obj O
 
--- Omitting the unused instances re-elaborates the statement and times out downstream proofs.
-set_option linter.unusedSectionVars false in
+omit [EssentiallySmall.{r} C] [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}] in
 /-- Multiplication by a final-object section is uniquely specified on every section. -/
 theorem existsUnique_sectionMultiplication (O : Sheaf J CommRingCat.{r})
     (U : C) (hU : IsTerminal U) (a : O.obj.obj (op U)) :
@@ -246,6 +246,7 @@ noncomputable abbrev quotientSections :
   evaluation (derivedChangeRingIndependentCoefficients J D.S) (op D.U) ⋙
     ModuleCat.restrictScalars D.quotientSectionsMap
 
+omit [EssentiallySmall.{r} C] in
 /-- Exact abelian sections induce exact module sections, for either coefficient map. -/
 theorem sections_exact :
     (PreservesFiniteLimits D.sections ∧ PreservesFiniteColimits D.sections) ∧
@@ -354,6 +355,8 @@ private noncomputable def coefficientProjection :
         intro x
         exact ConcreteCategory.congr_hom (D.φ.hom.naturality f) x }
 
+omit [EssentiallySmall.{r} C] [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
+  [HasSheafify J AddCommGrpCat.{r}] in
 private theorem coefficientMultiplication_underlying :
     (toSheaf D.Omod).map D.coefficientMultiplication =
       sectionMultiplication D.O D.U D.terminal (D.ρ D.t) := by
@@ -362,6 +365,8 @@ private theorem coefficientMultiplication_underlying :
     rfl
   · exact (existsUnique_sectionMultiplication D.O D.U D.terminal (D.ρ D.t)).exists.choose_spec
 
+omit [EssentiallySmall.{r} C] [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
+  [HasSheafify J AddCommGrpCat.{r}] in
 private theorem coefficient_zero :
     D.coefficientMultiplication ≫ D.coefficientProjection = 0 := by
   apply (toSheaf D.Omod).map_injective
@@ -369,6 +374,7 @@ private theorem coefficient_zero :
   ext V x
   exact congrArg (fun f ↦ f.hom.app V x) D.zero
 
+omit [EssentiallySmall.{r} C] in
 private theorem coefficient_shortExact :
     (ShortComplex.mk D.coefficientMultiplication D.coefficientProjection
       D.coefficient_zero).ShortExact := by
@@ -410,6 +416,7 @@ private noncomputable def restrictedSheafification
 
 attribute [local irreducible] restrictedSheafification
 
+omit [EssentiallySmall.{r} C] in
 set_option backward.isDefEq.respectTransparency false in
 private theorem restrictedSheafification_underlying
     (P : PresheafOfModules.{r} D.Smod.obj) :
@@ -429,6 +436,7 @@ private theorem restrictedSheafification_underlying
   have hh := adj.homEquiv_symm_unit P.presheaf
   exact hh.symm ▸ IsIso.id _
 
+omit [EssentiallySmall.{r} C] in
 private theorem restrictedSheafification_isIso
     (P : PresheafOfModules.{r} D.Smod.obj) :
     IsIso (D.restrictedSheafification P) := by
@@ -465,6 +473,8 @@ private noncomputable def tensorQuotientIso
 
 attribute [local irreducible] tensorUnitIso tensorQuotientPresheafIso tensorQuotientIso
 
+omit [EssentiallySmall.{r} C] [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}] in
 private theorem quotientTensor_bijective
     (M : ModuleCat.{r} R) (N : ModuleCat.{r} D.A)
     (f : (ModuleCat.extendScalars D.quotientMap).obj M ⟶ N)
@@ -543,6 +553,7 @@ private theorem tensorUnitIso_inv_apply
     have hb := ConcreteCategory.congr_hom hc b
     exact ha.symm.trans (h.trans hb)
 
+omit [EssentiallySmall.{r} C] in
 private theorem restrictedSheafification_unit
     (P : PresheafOfModules.{r} D.Smod.obj) (V : Cᵒᵖ) (x : P.obj V) :
     (D.restrictedSheafification P).val.app V
@@ -592,7 +603,7 @@ private theorem quotientMorphism_apply
   change ((adj.unit.app _).app V) (g.app V _) = _ at hg
   rw [hg1] at hg
   simp only [quotientMorphism, comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply]
-  erw [tensorUnitIso_inv_apply]
+  erw [D.tensorUnitIso_inv_apply M V x]
   change (D.tensorQuotientIso M).hom.val.app V
     ((PresheafOfModules.sheafification (𝟙 D.Omod.obj)).map g |>.val.app V <| _) = _
   erw [← hg]
@@ -634,7 +645,7 @@ private theorem tensorMultiplication_apply
   simp only [PresheafOfModules.comp_app, ModuleCat.comp_apply] at hg
   simp only [tensorMultiplication, comp_val, PresheafOfModules.comp_app,
     ModuleCat.comp_apply]
-  erw [tensorUnitIso_inv_apply]
+  erw [D.tensorUnitIso_inv_apply M V x]
   change (D.tensorUnitIso M).hom.val.app V
     ((PresheafOfModules.sheafification (𝟙 D.Omod.obj)).map g |>.val.app V <| _) = _
   erw [← hg]
@@ -785,7 +796,9 @@ omit [HasDerivedCategory.{wO}
     (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J D.O))]
   [HasDerivedCategory.{wS}
     (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J D.S))]
-  [HasDerivedCategory.{wR} (ModuleCat.{r} R)] [HasDerivedCategory.{wA} (ModuleCat.{r} D.A)] in
+  [HasDerivedCategory.{wR} (ModuleCat.{r} R)] [HasDerivedCategory.{wA} (ModuleCat.{r} D.A)]
+  [EssentiallySmall.{r} C] [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}] in
 private theorem tensorSingleIso_naturality
     {K K' : CochainComplex (ModuleCat.{r} R) ℤ} (f : K ⟶ K') :
     (((ModuleCat.mixedTensor D.quotientMap).flip.map₂CochainComplex).map f).app
@@ -805,7 +818,9 @@ attribute [local irreducible] tensorSingleIso
 omit [HasDerivedCategory.{wO}
     (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J D.O))]
   [HasDerivedCategory.{wS}
-    (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J D.S))] in
+    (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J D.S))]
+  [EssentiallySmall.{r} C] [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}] in
 private theorem c_naturality
     {K K' : CochainComplex (ModuleCat.{r} R) ℤ} (f : K ⟶ K') :
     D.c K ≫ DerivedCategory.Q.map

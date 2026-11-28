@@ -156,7 +156,7 @@ def doublePure (n : ℕ) (P : CochainComplex (integralTowerModules l E Y) ℤ)
 attribute [local irreducible] completedScalarChangeData completedOrdinaryScalarExtension
   completedDerivedScalarExtension completedScalarCounit completedScalarTensorSection
   integralScalarReductionWitness integralScalarReduction integralScalarTensorSection
-  unrestrictedIntegralReductionExistence unrestrictedIntegralReductionFunctor
+  unrestrictedIntegralReductionFunctor
   unrestrictedIntegralTensorSection inverseImageCompletedCoefficientMap finiteChangeData
   finitePure doublePure
 

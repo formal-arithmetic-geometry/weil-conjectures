@@ -35,7 +35,7 @@ namespace WeilConjectures
 
 attribute [local irreducible] constantSheaf CategoryTheory.Limits.limit
   HasDerivedCategory.standard
-  unrestrictedIntegralReductionExistence unrestrictedIntegralReductionFunctor
+  unrestrictedIntegralReductionFunctor
   completedIntegralCoefficientSheafUnrestricted
   completedIntegralCommRingProjectionUnrestricted
   AlgebraicGeometry.Scheme.coefficientProEtaleModuleAdjunction

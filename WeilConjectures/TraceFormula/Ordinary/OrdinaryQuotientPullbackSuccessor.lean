@@ -35,7 +35,7 @@ attribute [local irreducible] Functor.leftAdjoint limit constantSheaf
   HasDerivedCategory.standard coefficientSequenceRestriction scalarReductionExtension
   completedIntegralCommRingProjectionUnrestricted
   coefficientSequenceCommRingSheaf
-  integralComparisonSequenceRingMap scalarReductionExistence
+  integralComparisonSequenceRingMap
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 

@@ -32,7 +32,6 @@ attribute [local irreducible] CategoryTheory.constantSheaf HasDerivedCategory.st
   AlgebraicGeometry.Scheme.proEtaleRingModulePullback
 attribute [local irreducible] CategoryTheory.Functor.leftAdjoint
   CategoryTheory.Adjunction.leftAdjointUniq SheafOfModules.monoidalCategory
-  WeilConjectures.scalarReductionExistence WeilConjectures.scalarReductionDerivedExistence
   WeilConjectures.scalarReductionExtension
   AlgebraicGeometry.Scheme.pbcScalarAdjunction
   AlgebraicGeometry.Scheme.proEtaleRingModuleAdjunction

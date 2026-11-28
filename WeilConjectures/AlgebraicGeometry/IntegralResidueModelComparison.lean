@@ -418,7 +418,7 @@ def integralResidueScalarEquiv (l : ℕ) [Fact l.Prime]
 attribute [local irreducible] scalarMap residueMap IntegralConstantModel.modulesFunctor
   discreteCoefficientModel smallModules HasDerivedCategory.standard
   ConstantCompletion.derivedExtension ConstantCompletion.extend
-  Scheme.completedAdicChangeData Scheme.completedAdicDerivedChange
+  Scheme.completedAdicDerivedChange
   Functor.rightDerivedFunctor
   residueExtensionIso residueDerivedComposite residueDerivedSquare residueDiscreteIso
   residueSiteScalarSquare residueScalarSquare residueSmallScalarSquare

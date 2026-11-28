@@ -123,7 +123,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
 attribute [local irreducible] scalarReductionDerivedExtension
-  scalarReductionExistence scalarReductionDerivedExistence
   pbcRestrictComp normalizedDVRRestrictionCompIso
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]

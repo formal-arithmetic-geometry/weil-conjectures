@@ -44,7 +44,7 @@ variable (l : ℕ) [Fact l.Prime]
   (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (i : E →ₐ[ℚ_[l]] F)
 
-attribute [local irreducible] scalarReductionExistence scalarReductionExtension
+attribute [local irreducible] scalarReductionExtension
 
 private theorem reductionUnit_epi (W : Scheme.{u}) (M : scalarReductionSource l E W)
     (n : ℕ) : Epi ((ordinaryReductionAdj l E W).unit.app M ≫

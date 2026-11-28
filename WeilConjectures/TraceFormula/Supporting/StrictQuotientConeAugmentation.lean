@@ -26,8 +26,8 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace WeilConjectures
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
   constantSheaf HasDerivedCategory.standard SheafOfModules.monoidalCategory
-  CategoryTheory.Limits.limit scalarReductionExistence scalarReductionDerivedExistence
-  unrestrictedIntegralReductionExistence unrestrictedIntegralTransition
+  CategoryTheory.Limits.limit
+  unrestrictedIntegralTransition
   unrestrictedTowerUnit
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : Scheme.{t})

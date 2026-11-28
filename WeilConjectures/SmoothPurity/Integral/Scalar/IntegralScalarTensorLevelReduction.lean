@@ -30,7 +30,7 @@ open scoped ChangeOfRings
 namespace WeilConjectures
 attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoidalCategory
   integralOrdinaryScalar integralOrdinaryTensorSection integralCompletedScalarMap
-  coefficientTotalTensor unrestrictedIntegralReductionExistence
+  coefficientTotalTensor
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]

@@ -65,15 +65,13 @@ theorem finite_algebraHom_exact {X Y : Scheme.{u}} (f : X ⟶ Y)
     exact isIso_of_reflects_iso g
       (SheafOfModules.toSheaf.{u} (moduleRings (directImageAlgebraSpace f)))
   have : PreservesFiniteLimits T :=
-    @sheafAlgebraRestrictScalars_preservesFiniteLimits.{u, _, _} Y
+    sheafAlgebraRestrictScalars_preservesFiniteLimits.{u} Y
       (Under.mk (show Y.sheaf ⟶
         (TopCat.Sheaf.pushforward CommRingCat f.base).obj X.sheaf from ⟨f.c⟩))
-      (HasDerivedCategory.standard _) (HasDerivedCategory.standard _)
   have : PreservesFiniteColimits T :=
-    @sheafAlgebraRestrictScalars_preservesFiniteColimits.{u, _, _} Y
+    sheafAlgebraRestrictScalars_preservesFiniteColimits.{u} Y
       (Under.mk (show Y.sheaf ⟶
         (TopCat.Sheaf.pushforward CommRingCat f.base).obj X.sheaf from ⟨f.c⟩))
-      (HasDerivedCategory.standard _) (HasDerivedCategory.standard _)
   have : ReflectsFiniteLimits T :=
     { reflects := fun _ _ _ ↦ reflectsLimitsOfShape_of_reflectsIsomorphisms }
   have : ReflectsFiniteColimits T :=

@@ -47,7 +47,6 @@ section IntegralReductionTransitionHelpers
 open WeilConjectures
 open scoped CategoryTheory.Obj
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
-  scalarReductionExistence scalarReductionDerivedExistence
   scalarReductionDerivedExtension scalarReductionExtension scalarReductionCounit
   normalizedDVRResCompletedComp normalizedDVRKFlatComparison
 namespace AlgebraicGeometry.ProEtale.IntegralPresentation
@@ -309,8 +308,8 @@ private theorem restrictedMate_change
     Functor.whiskerRight_app, ← Category.assoc, ← R.map_comp, hm]
 
 attribute [local irreducible] Functor.mapDerivedCategory HasDerivedCategory.standard
-  completedIntegralCoefficientSheafUnrestricted scalarReductionExistence
-  scalarReductionDerivedExistence scalarReductionDerivedExtension
+  completedIntegralCoefficientSheafUnrestricted
+  scalarReductionDerivedExtension
 
 private theorem ordinaryCompletedComp_eq
     {C : Type*} [Category C] {J : GrothendieckTopology C}

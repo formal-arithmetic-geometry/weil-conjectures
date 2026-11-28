@@ -743,7 +743,6 @@ local instance : PreservesFilteredColimitsOfSize.{t + 1, t + 1}
     (CategoryTheory.forget AddCommGrpCat.{max u (t + 1)}) :=
   preservesFilteredColimitsOfSize_shrink _
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in

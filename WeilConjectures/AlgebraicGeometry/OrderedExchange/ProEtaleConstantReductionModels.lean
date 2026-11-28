@@ -161,7 +161,6 @@ set_option synthInstance.maxSize 2048
 universe t u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme.OrderedExchange
-attribute [local irreducible] completedAdicChangeData
 
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 

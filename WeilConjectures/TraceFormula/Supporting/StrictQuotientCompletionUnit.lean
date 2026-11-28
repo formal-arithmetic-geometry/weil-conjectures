@@ -45,8 +45,8 @@ open AlgebraicGeometry.Scheme AlgebraicGeometry.ProEtale
 namespace WeilConjectures
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
   constantSheaf HasDerivedCategory.standard SheafOfModules.monoidalCategory
-  CategoryTheory.Limits.limit scalarReductionExistence scalarReductionDerivedExistence
-  unrestrictedIntegralReductionExistence coefficientSequenceRestriction
+  CategoryTheory.Limits.limit
+  coefficientSequenceRestriction
   coefficientSequenceEvaluation unrestrictedTowerUnit coefficientConstantTowerLimit
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in

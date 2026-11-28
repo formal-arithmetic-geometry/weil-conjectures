@@ -261,7 +261,7 @@ private theorem normalizedScalarUnit_eq
       (normalizedScalarTensor_map φ E h u hm V (1 : S.obj.obj V) (1 : R.obj.obj V)).symm
   exact he
 
-attribute [local irreducible] completedAdicRing completedAdicChangeData
+attribute [local irreducible] completedAdicRing
 
 private lemma map_constant_unit
     {C D B : Type*} [Category* C] [Category* D] [Category* B]

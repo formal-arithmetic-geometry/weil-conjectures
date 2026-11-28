@@ -556,8 +556,6 @@ private theorem finiteEncoding_constructible
     (finiteBounded_iso A X
       ((Functor.mapDerivedCategoryNatIso (eqToIso h)).app K).symm)
 
-attribute [local irreducible] WeilConjectures.scalarReductionExistence
-  WeilConjectures.scalarReductionDerivedExistence
 
 private theorem reductionAbSheafify (X : Scheme.{u}) :
     HasSheafify (Scheme.ProEt.topology X) Ab.{u + 1} :=

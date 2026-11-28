@@ -292,7 +292,6 @@ attribute [local irreducible] leftLevelIso leftLevelNatIso towerShiftGeneric
   CochainComplex.mapBifunctorShift₁Iso
   CategoryTheory.constantSheaf
   WeilConjectures.unrestrictedIntegralReductionFunctor
-  WeilConjectures.unrestrictedIntegralReductionExistence
 section StrictModelShift
 universe g h
 variable {A : Type a} [Category.{b} A] {B : Type c} [Category.{d} B]

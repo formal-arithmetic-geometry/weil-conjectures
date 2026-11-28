@@ -52,8 +52,7 @@ namespace WeilConjectures
 
 -- Avoid unfolding the inverse limit and the constructed maps when identifying interfaces.
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
-  scalarReductionExistence scalarReductionDerivedExistence
-  unrestrictedIntegralReductionExistence integralReductionExistence
+  integralReductionExistence
   integralReductionDerivedExistence
   unrestrictedTowerUnit unrestrictedTowerTransition unrestrictedTowerResolutionIso
   unrestrictedTowerFiniteComparison unrestrictedTowerComparison

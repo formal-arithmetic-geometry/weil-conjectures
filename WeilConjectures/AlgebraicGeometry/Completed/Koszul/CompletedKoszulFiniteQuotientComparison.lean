@@ -455,7 +455,7 @@ private lemma scalarRegular_one
   rw [scalarUnitIso_inv_one]
   exact normalizedScalarTensor_map φ G h u hm V 1 (1 : R.obj.obj V)
 
-attribute [local irreducible] completedAdicRing completedAdicChangeData
+attribute [local irreducible] completedAdicRing
 
 private lemma comparisonScalarTensor_map (T : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) {M N : SheafOfModules.{t + 1} (adicModuleRing T A)}

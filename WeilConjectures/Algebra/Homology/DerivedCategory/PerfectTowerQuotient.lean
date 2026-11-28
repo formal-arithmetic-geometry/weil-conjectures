@@ -159,6 +159,7 @@ theorem exists_trace_eq_of_isAdicComplete {f : ∀ n, T.obj n ⟶ T.obj n}
   T.exists_trace_eq_of_isLift I.powSuccMk_surjective (Ideal.ker_powSuccMk hI)
     Ideal.exists_powSuccMk_eq Ideal.eq_zero_of_forall_powSuccMk_eq_zero hc hf hV
 
+omit [∀ n, HasRightDual (T.obj n)] in
 include hϖ hI hc in
 /-- The categorical trace of a lift of a compatible family does not depend on the lift. -/
 theorem trace_eq_of_isAdicComplete {f : ∀ n, T.obj n ⟶ T.obj n} (hf : T.IsCompatible f)

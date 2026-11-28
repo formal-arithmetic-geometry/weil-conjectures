@@ -63,8 +63,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-  SheafOfModules.monoidalCategory HasDerivedCategory.standard
+attribute [local irreducible] SheafOfModules.monoidalCategory HasDerivedCategory.standard
 
 /-- A section of a restricted module is the same as a section over the quotient ring:
 `f` is sent to the morphism `b ↦ b • f 1`. -/

@@ -106,7 +106,7 @@ namespace AlgebraicGeometry.Scheme.OrderedExchange
 attribute [local instance 0] SheafOfModules.RingedTensorCorner.category
   SheafOfModules.RingedTensorCorner.derived
 
-attribute [local irreducible] completedAdicChangeData completedAdicDerivedChange
+attribute [local irreducible] completedAdicDerivedChange
   HasDerivedCategory.standard Functor.mapDerivedCategory
   Functor.mapDerivedCategoryFactors Functor.mapDerivedCategoryFactorsh
   completedAdicChange reductionChange reductionDerivedChange reductionHomotopy

@@ -63,7 +63,7 @@ attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficien
   integralOperationsTensorTowerFunctor integralOperationsTensorLevel
   integralOperationsTensorComposite coefficientTotalTensor
 attribute [local irreducible] completedIntegralCommRingSheafUnrestricted
-  completedIntegralCommRingProjectionUnrestricted scalarReductionExistence scalarReductionExtension
+  completedIntegralCommRingProjectionUnrestricted scalarReductionExtension
 
 private theorem lift_iso_eq {A B : Type*} [Category A] [Category B]
     (R : A ⥤ B) [R.Full] [R.Faithful] {P Q : A} {H : B}

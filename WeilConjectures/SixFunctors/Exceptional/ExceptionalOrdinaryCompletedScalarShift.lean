@@ -133,7 +133,7 @@ theorem ordinary_completed_scalar_shift :
         completedScalarCounit.{u, u} l E L i T P := by
       dsimp only [η, φ, AlgebraicGeometry.Scheme.pbcExtensionCounit,
         AlgebraicGeometry.Scheme.reductionDerivedCounit, completedScalarCounit,
-        completedScalarChangeData, AlgebraicGeometry.Scheme.completedAdicChangeData]
+        completedScalarChangeData]
       rfl
     have htP : tH.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) =
         DerivedCategory.Q.map ((NatIso.mapHomologicalComplex t (.up ℤ)).hom.app P) := rfl

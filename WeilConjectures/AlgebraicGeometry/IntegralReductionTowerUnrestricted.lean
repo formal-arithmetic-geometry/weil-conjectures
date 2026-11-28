@@ -287,7 +287,7 @@ attribute [local irreducible] identifiedMap
 end SheafOfModules.UnrestrictedTowerProof
 
 namespace WeilConjectures
-attribute [local irreducible] scalarReductionExistence HasDerivedCategory.standard
+attribute [local irreducible] HasDerivedCategory.standard
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{t})
@@ -312,10 +312,9 @@ noncomputable instance integralCompletedRingHasDerivedCategory :
       (completedIntegralCoefficientSheafUnrestricted l E Y)) :=
   HasDerivedCategory.standard _
 
--- Kept as a `def`: downstream code unfolds it and sets its reducibility attributes.
-set_option linter.defProp false in
 /-- The canonical scalar-extension witness, with explicit standard localizations. -/
-noncomputable def unrestrictedIntegralReductionExistence (n : ℕ) :=
+theorem unrestrictedIntegralReductionExistence (n : ℕ) :
+    type_of% (scalarReductionExistence l E Y n) :=
   scalarReductionExistence l E Y n
 
 /-- Ordinary scalar extension along the actual coefficient projection, fixed on
@@ -381,8 +380,7 @@ private theorem unrestrictedCoefficientStep_comp (n : ℕ) :
   simpa only [integralCoefficientSheafSystem, Functor.ofOpSequence_map_homOfLE_succ,
     ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app] using h
 
-attribute [local irreducible] unrestrictedIntegralReductionExistence
-  completedIntegralCoefficientSheafUnrestricted constantSheaf
+attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted constantSheaf
   SheafOfModules.changeOfRings SheafOfModules.changeOfRingsHom
 
 private theorem unrestrictedReduction_obj (n : ℕ) (M : integralTowerModules l E Y) :

@@ -55,8 +55,7 @@ private theorem scalarUnit_tensor (W : Scheme.{t})
     ((scalarReductionExtension_adjunction l E W n).choose.unit.app A).val.app V x =
       unrestrictedIntegralTensorSection l E W n A V 1 x := by
   have h := (scalarReductionExtension_adjunction l E W n).choose_spec A V x
-  dsimp only [unrestrictedIntegralTensorSection, unrestrictedIntegralReductionFunctor,
-    unrestrictedIntegralReductionExistence, scalarReductionExistence] at h ⊢
+  dsimp only [unrestrictedIntegralTensorSection, unrestrictedIntegralReductionFunctor] at h ⊢
   exact h
 
 private theorem ordinaryUnit_projection (W : Scheme.{t})

@@ -81,7 +81,6 @@ attribute [local irreducible] WeilConjectures.completedScalarComparison
   WeilConjectures.completedScalarChainComparison
 attribute [local irreducible] HasDerivedCategory.standard
   CategoryTheory.Functor.mapDerivedCategory
-attribute [local irreducible] AlgebraicGeometry.Scheme.completedAdicChangeData
 attribute [local irreducible] CochainComplex.mapBifunctorSingle₂Iso
   CochainComplex.mapBifunctorSingle₁Iso
 universe u
@@ -185,7 +184,7 @@ attribute [local irreducible] reductionChange reductionDerivedChange
 attribute [local semireducible] Padic.coefficientExtensionIntegers
   Padic.coefficientExtensionIdeal Padic.coefficientExtensionUniformizer
 attribute [local semireducible] reductionChange reductionDerivedChange
-  completedAdicChangeData completedCoefficientMap
+  completedCoefficientMap
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false

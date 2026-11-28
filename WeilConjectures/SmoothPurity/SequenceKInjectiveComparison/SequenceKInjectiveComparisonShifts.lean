@@ -163,8 +163,7 @@ attribute [-instance] WeilConjectures.SemilinearSections.hasDerived
   WeilConjectures.SemilinearSections.abelianSheafify
   WeilConjectures.SemilinearSections.locallyBijective
   WeilConjectures.SemilinearSections.sequenceSmall WeilConjectures.SemilinearSections.sliceSmall
-attribute [local irreducible] WeilConjectures.scalarReductionExistence
-  WeilConjectures.scalarReductionDerivedExistence SheafOfModules.monoidalCategory
+attribute [local irreducible] SheafOfModules.monoidalCategory
   HasDerivedCategory.standard
 attribute [local instance high] HasDerivedCategory.standard
 attribute [local irreducible] WeilConjectures.coefficientSequenceCommRingSheaf

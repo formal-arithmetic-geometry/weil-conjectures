@@ -28,8 +28,7 @@ namespace WeilConjectures
 
 attribute [local irreducible] HasDerivedCategory.standard
   CategoryTheory.Functor.mapDerivedCategory CategoryTheory.Functor.rightDerivedFunctor
-  completedIntegralCoefficientSheafUnrestricted scalarReductionExistence
-  scalarReductionDerivedExistence unrestrictedIntegralReductionExistence
+  completedIntegralCoefficientSheafUnrestricted
   constantSheaf
   sfIntegralCompactSupportValue
   Padic.coefficientExtensionIdeal

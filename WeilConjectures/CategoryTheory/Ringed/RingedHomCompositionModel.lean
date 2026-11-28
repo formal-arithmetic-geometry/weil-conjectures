@@ -306,7 +306,7 @@ private lemma chain_pure
       (((φ.f p ≫ homComplexπ L M p q k h').val.app U x).app
         (op (Over.mk (𝟙 U.unop)))).hom y := by
   let := HasDerivedCategory.standard (RingedTensorModules.{c, v, u} J R)
-  exact RingedDerivedNative.chainEquiv_symm_pure.{c, v, u, _} J R P L M φ
+  exact RingedDerivedNative.chainEquiv_symm_pure.{c, v, u} J R P L M φ
     p q k h h' U x y
 
 private lemma ev_pure

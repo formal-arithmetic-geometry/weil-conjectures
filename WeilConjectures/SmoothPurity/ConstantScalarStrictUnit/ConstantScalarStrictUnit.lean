@@ -512,8 +512,6 @@ private theorem regularSection_smul (V : Y.ProEt)
 attribute [local implicit_reducible] scalarReductionExtension
   unrestrictedTowerTensorSection unrestrictedIntegralTensorSection
   unrestrictedIntegralReductionFunctor
-attribute [local irreducible] scalarReductionExistence
-  unrestrictedIntegralReductionExistence
 
 private def reductionTransport (n : ℕ) (M : integralTowerModules l E Y) :
     (scalarReductionExtension l E Y n).obj M ≅

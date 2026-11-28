@@ -265,7 +265,7 @@ def tensorTower (W : Scheme.{t}) :
 
 attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
 attribute [local irreducible] coefficientTotalTensor SheafOfModules.monoidalCategory
-  completedIntegralCoefficientSheafUnrestricted unrestrictedIntegralReductionExistence
+  completedIntegralCoefficientSheafUnrestricted
   SheafOfModules.changeOfRings PresheafOfModules.sheafification
 
 set_option maxHeartbeats 60000 in

@@ -521,7 +521,7 @@ attribute [local irreducible] TensorAugmentationNormalized
 
 section TensorAugmentationProof
 attribute [local irreducible] completedIntegralCommRingSheafUnrestricted
-  completedIntegralCoefficientSheafUnrestricted unrestrictedIntegralReductionExistence
+  completedIntegralCoefficientSheafUnrestricted
   coefficientTensorGenerator StrictTensorAugmentation.map integralOperationsTotalTensorSection
   unrestrictedIntegralTensorSection
 attribute [local implicit_reducible] coefficientTotalTensor
@@ -650,7 +650,7 @@ section TensorAugmentationIsoProof
 attribute [local irreducible] StrictTensorAugmentation.map
   IntegralOnSlice.roosUnit IntegralAmbient.tensorTowerIso
   completedIntegralCommRingSheafUnrestricted completedIntegralCoefficientSheafUnrestricted
-  unrestrictedIntegralReductionExistence coefficientTensorGenerator
+  coefficientTensorGenerator
   integralOperationsTotalTensorSection unrestrictedIntegralTensorSection
 attribute [local implicit_reducible] ordinaryTotal IntegralAmbient.tensorTower
 attribute [local irreducible] coefficientTotalTensor

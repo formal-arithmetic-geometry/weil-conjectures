@@ -28,7 +28,6 @@ attribute [local irreducible] Padic.coefficientExtensionIdeal
   WeilConjectures.completedIntegralCommRingSheafUnrestricted
 
 attribute [local irreducible] CategoryTheory.Functor.mapDerivedCategory
-  WeilConjectures.scalarReductionExistence WeilConjectures.scalarReductionDerivedExistence
   WeilConjectures.scalarReductionDerivedExtension
 
 universe u

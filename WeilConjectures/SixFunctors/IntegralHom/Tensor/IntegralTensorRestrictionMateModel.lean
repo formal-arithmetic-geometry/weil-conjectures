@@ -588,8 +588,7 @@ private noncomputable abbrev projection (n : ℕ) :=
 private noncomputable abbrev coeff (n : ℕ) :=
   coefficient X (base X l E) (level X l E n) (projection X l E n)
 
-attribute [local irreducible] scalarReductionExistence
-  completedIntegralCoefficientSheafUnrestricted constantSheaf
+attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted constantSheaf
 attribute [local implicit_reducible] scalarReductionExtension
 set_option backward.defeqAttrib.useBackward true
 attribute [local implicit_reducible] completedIntegralCommRingSheafUnrestricted
@@ -628,7 +627,7 @@ end WeilConjectures.IntegralHom.MateCoefficient
    then use total-summand extensionality to identify the ordinary transpose. -/
 namespace WeilConjectures.IntegralHom.MateOrdinary
 
-attribute [local irreducible] scalarReductionExistence constantSheaf
+attribute [local irreducible] constantSheaf
 attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficientCommRingSheaf
   completedIntegralCommRingSheafUnrestricted
 
@@ -1083,8 +1082,8 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
 attribute [-instance] MateModel.fixedSmall MateModel.fixedSheafify
   MateModel.fixedLocallyBijective MateModel.fixedDerived
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-  integralReductionExistence integralReductionDerivedExistence constantSheaf
+attribute [local irreducible] integralReductionExistence integralReductionDerivedExistence
+  constantSheaf
   completedIntegralCoefficientSheafUnrestricted HasDerivedCategory.standard
 
 attribute [local implicit_reducible] completedIntegralCommRingSheaf

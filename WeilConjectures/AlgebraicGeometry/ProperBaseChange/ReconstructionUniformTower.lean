@@ -172,7 +172,6 @@ This applies also to the inverse-image coefficient diagram on a stratum cover. -
 def localReductionLevel (n : ℕ) : pbcModules Y B ⥤ pbcModules Y B :=
   pbcExtend (π.app (op n)) ⋙ pbcRestrict (π.app (op n))
 
-attribute [local irreducible] completedAdicChangeData
 
 private theorem tensorCast_smul
     {T : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}} (c : B ⟶ T)

@@ -28,7 +28,7 @@ open AlgebraicGeometry.Scheme AlgebraicGeometry.ProEtale
 namespace WeilConjectures
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
   constantSheaf HasDerivedCategory.standard SheafOfModules.monoidalCategory
-  CategoryTheory.Limits.limit scalarReductionDerivedExistence
+  CategoryTheory.Limits.limit
   unrestrictedTowerUnit
   unrestrictedIntegralTransition inverseImageReductionProduct
 
@@ -36,8 +36,7 @@ attribute [local implicit_reducible] completedIntegralCommRingSheafUnrestricted
   CategoryTheory.sheafCompose integralOperationsRoosFunctor integralOperationsRoos
   integralOperationsPullbackComplexFunctor integralOperationsPullbackTowerFunctor
   trfQuotientTowerFunctor unrestrictedIntegralComplexFunctor
-  unrestrictedIntegralReductionFunctor scalarReductionExtension scalarReductionExistence
-  unrestrictedIntegralReductionExistence
+  unrestrictedIntegralReductionFunctor scalarReductionExtension
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem lift_map_eq
@@ -267,8 +266,7 @@ theorem isomorphismRoosUnitCancellation
   let γ : ∀ n : ℕ, P ⟶ Q.obj (op n) := fun n ↦ by
     change P ⟶ (unrestrictedIntegralComplexFunctor l E Y n).obj P
     dsimp only [unrestrictedIntegralComplexFunctor, Functor.comp_obj,
-      unrestrictedIntegralFiniteComplex, unrestrictedIntegralReductionFunctor,
-      unrestrictedIntegralReductionExistence]
+      unrestrictedIntegralFiniteComplex, unrestrictedIntegralReductionFunctor]
     exact unrestrictedTowerUnit l E Y P n
   let θ : ∀ n : ℕ, G.obj P ⟶ C.obj (op n) :=
     fun n ↦ inverseImageReductionTheta l E g n P

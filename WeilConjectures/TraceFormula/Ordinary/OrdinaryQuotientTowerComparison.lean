@@ -48,10 +48,10 @@ attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
   Functor.mapDerivedCategoryFactors Functor.mapDerivedCategory DerivedCategory.Q
   integralOperationsRoosMap
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-  unrestrictedIntegralComplexFunctor scalarReductionExtension coefficientQuotientNatTrans
+attribute [local irreducible] unrestrictedIntegralComplexFunctor scalarReductionExtension
+  coefficientQuotientNatTrans
   unrestrictedIntegralTransition coefficientOrdinaryQuotientComponent coefficientOrdinaryQuotient
-  coefficientSequenceEvaluation coefficientSequenceTransition unrestrictedIntegralReductionExistence
+  coefficientSequenceEvaluation coefficientSequenceTransition
 
 namespace OrdinaryTowerComparisonProof
 

@@ -207,8 +207,7 @@ private theorem completedProjectionComp (W : Scheme.{t}) {m n : ℕ} (h : n ≤ 
 
 attribute [local irreducible] constantSheaf coefficientSequenceEvaluation
   coefficientSequenceTransition HasDerivedCategory.standard
-  completedIntegralCoefficientSheafUnrestricted scalarReductionExistence
-  scalarReductionDerivedExistence unrestrictedIntegralReductionExistence
+  completedIntegralCoefficientSheafUnrestricted
 
 variable (W : Scheme.{t})
 

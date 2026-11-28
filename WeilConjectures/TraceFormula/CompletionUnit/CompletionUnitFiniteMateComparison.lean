@@ -42,7 +42,6 @@ namespace WeilConjectures.CompletionUnit
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
 
 /-- Localization factors for the canonical square of exact functors. -/
 private theorem square_factors
@@ -218,8 +217,7 @@ private theorem ordinary_unit (M : OrdinaryModel l E W)
   intro V
   ext x
   exact (hunit V x).trans (by
-    dsimp only [unrestrictedIntegralTensorSection, unrestrictedIntegralReductionFunctor,
-      unrestrictedIntegralReductionExistence, scalarReductionExistence] at hu ⊢
+    dsimp only [unrestrictedIntegralTensorSection, unrestrictedIntegralReductionFunctor] at hu ⊢
     exact (hu V x).symm)
 
 /-- Project the comparison with total limit in the exact finite restriction coordinates. -/

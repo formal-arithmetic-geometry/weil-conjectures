@@ -144,7 +144,7 @@ private theorem uniqueLimitComparison {C E : Type*} [Category C] [Category E]
     intro n
     exact (he Z n.unop).trans (preservesLimitIso_hom_π r Z n).symm
 
-attribute [local irreducible] completedAdicChangeData completedAdicDerivedChange
+attribute [local irreducible] completedAdicDerivedChange
   HasDerivedCategory.standard Functor.mapDerivedCategory
   Functor.mapDerivedCategoryFactors Functor.mapDerivedCategoryFactorsh
   completedAdicChange reductionChange reductionDerivedChange reductionHomotopy

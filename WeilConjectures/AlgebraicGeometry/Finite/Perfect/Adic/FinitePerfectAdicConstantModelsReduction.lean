@@ -140,7 +140,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-attribute [local irreducible] completedAdicChangeData completedAdicDerivedChange
+attribute [local irreducible] completedAdicDerivedChange
   Functor.mapDerivedCategory HasDerivedCategory.standard
   CochainComplex.IsKFlatIndependentCoefficients SheafOfModules.monoidalCategory
 

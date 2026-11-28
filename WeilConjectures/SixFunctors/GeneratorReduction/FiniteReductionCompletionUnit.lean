@@ -44,8 +44,8 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGe
 open WeilConjectures
 
 namespace WeilConjectures.GeneratorReduction
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-  completedIntegralCoefficientSheafUnrestricted constantSheaf IntegralOnSlice.roosUnit
+attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted constantSheaf
+  IntegralOnSlice.roosUnit
 attribute [local implicit_reducible] IntegralOnSlice.Site IntegralOnSlice.siteCategory
   IntegralOnSlice.topology IntegralOnSlice.ring IntegralOnSlice.restrict
   IntegralOnSlice.hasDerived scalarReductionSourceDerived integralOperationsRoos

@@ -73,8 +73,7 @@ def leg (η : regularComplex l L Y ⟶
   inclusion l E L ι Y η ≫ Pi.π (fun m : ℕ ↦ (tower l E L ι Y).obj (op m)) n
 
 -- The pure-tensor and functor APIs below do not need the existence witnesses unfolded.
-attribute [local irreducible] integralScalarReductionWitness scalarReductionExistence
-  scalarReductionDerivedExistence unrestrictedIntegralReductionExistence
+attribute [local irreducible] integralScalarReductionWitness
 
 private theorem transition_locallySurjective (n : ℕ) :
     Sheaf.IsLocallySurjective (integralCoefficientSheafTransition l L Y n) := by

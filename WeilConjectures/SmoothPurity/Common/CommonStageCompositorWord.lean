@@ -50,8 +50,7 @@ attribute [local reducible] Functor.category StageSystem.instCategoryPairCategor
 attribute [local irreducible] HasDerivedCategory.standard integralCoefficientLinear
 attribute [local irreducible] commonStageDerivedPullback rationalDerivedPullback
   constructibleIntegralPullback Scheme.residueField
-  completedIntegralCoefficientSheafUnrestricted scalarReductionExistence
-  scalarReductionDerivedExistence
+  completedIntegralCoefficientSheafUnrestricted
   sfRationalScalarExtension rationalPullbackScalarComparison sfRationalScalarComp
 
 set_option allowUnsafeReducibility true in

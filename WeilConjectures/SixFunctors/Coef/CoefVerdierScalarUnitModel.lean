@@ -46,7 +46,7 @@ attribute [local instance 5000] WeilConjectures.integralTowerHasDerivedCategory
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 universe u
 namespace WeilConjectures
-attribute [local irreducible] completedScalarChangeData completedAdicChangeData
+attribute [local irreducible] completedScalarChangeData
   completedIntegralCommRingSheafUnrestricted completedIntegralCoefficientSheafUnrestricted
   pbcComplexCounit completedScalarCounit
 

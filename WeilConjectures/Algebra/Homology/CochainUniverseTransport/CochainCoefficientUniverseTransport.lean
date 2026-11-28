@@ -49,11 +49,9 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace SheafOfModules.CochainUniverseTransport
 set_option autoImplicit false
 
--- Merging the universe parameters that only occur together would change the statement.
-set_option linter.checkUnivs false in
 /-- Ring-universe transport is the usual sectionwise ULift ring functor. -/
-def ringFunctor : CommRingCat.{r} ⥤ CommRingCat.{max r m w} where
-  obj A := CommRingCat.of (ULift.{max m w} A)
+def ringFunctor : CommRingCat.{r} ⥤ CommRingCat.{max r m} where
+  obj A := CommRingCat.of (ULift.{m} A)
   map f := CommRingCat.ofHom f.hom.ulift
 
 variable {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
@@ -75,7 +73,7 @@ private theorem commRing_isSheaf_of_forget (P : Cᵒᵖ ⥤ CommRingCat.{z})
 
 /-- Sectionwise ring lifting preserves the sheaf condition. -/
 @[instance]
-theorem ringFunctor_hasSheafCompose : J.HasSheafCompose (ringFunctor.{r, m, w}) := by
+theorem ringFunctor_hasSheafCompose : J.HasSheafCompose (ringFunctor.{r, m}) := by
   constructor
   intro P hP
   apply commRing_isSheaf_of_forget
@@ -85,11 +83,9 @@ theorem ringFunctor_hasSheafCompose : J.HasSheafCompose (ringFunctor.{r, m, w}) 
   exact (isSheaf_iff_isSheaf_of_type J _).1
     (Presheaf.isSheaf_comp_of_isSheaf J P (CategoryTheory.forget CommRingCat) hP)
 
--- Merging the universe parameters that only occur together would change the statement.
-set_option linter.checkUnivs false in
 /-- The genuinely constructed coefficient ring in the common ambient universe. -/
-abbrev ring (R : Sheaf J CommRingCat.{r}) : Sheaf J CommRingCat.{max r m w} :=
-  (sheafCompose J (ringFunctor.{r, m, w})).obj R
+abbrev ring (R : Sheaf J CommRingCat.{r}) : Sheaf J CommRingCat.{max r m} :=
+  (sheafCompose J (ringFunctor.{r, m})).obj R
 
 /-- Forgetting a lifted commutative ring to a ring preserves sheaves. -/
 @[instance]
@@ -122,7 +118,7 @@ abbrev OriginalModules := ringedSiteModules.{m}
 
 /-- The lifted scalar acts by its down-map on the lifted module carrier. -/
 noncomputable instance moduleAction (M : OriginalModules.{uC, vC, r, m} R) (U : Cᵒᵖ) :
-    Module ((ring.{uC, vC, r, m, w} R).obj.obj U)
+    Module ((ring.{uC, vC, r, max m w} R).obj.obj U)
       (ULift.{max r w} (M.val.obj U)) :=
   letI : Module (R.obj.obj U) (M.val.obj U) := (M.val.obj U).isModule
   inferInstanceAs (Module (ULift.{max m w} (R.obj.obj U))
@@ -130,14 +126,14 @@ noncomputable instance moduleAction (M : OriginalModules.{uC, vC, r, m} R) (U : 
 
 /-- Lift a local restriction, applying the original map to the descended section. -/
 noncomputable def moduleMap (M : OriginalModules.{uC, vC, r, m} R) {U V : Cᵒᵖ} (f : U ⟶ V) :
-    ModuleCat.of ((ring.{uC, vC, r, m, w} R).obj.obj U) (ULift.{max r w} (M.val.obj U)) ⟶
-      (ModuleCat.restrictScalars ((ring.{uC, vC, r, m, w} R).obj.map f).hom).obj
-        (ModuleCat.of ((ring.{uC, vC, r, m, w} R).obj.obj V) (ULift.{max r w} (M.val.obj V))) :=
+    ModuleCat.of ((ring.{uC, vC, r, max m w} R).obj.obj U) (ULift.{max r w} (M.val.obj U)) ⟶
+      (ModuleCat.restrictScalars ((ring.{uC, vC, r, max m w} R).obj.map f).hom).obj
+        (ModuleCat.of ((ring.{uC, vC, r, max m w} R).obj.obj V) (ULift.{max r w} (M.val.obj V))) :=
   ModuleCat.ofHom
-    (X := ModuleCat.of ((ring.{uC, vC, r, m, w} R).obj.obj U)
+    (X := ModuleCat.of ((ring.{uC, vC, r, max m w} R).obj.obj U)
       (ULift.{max r w} (M.val.obj U)))
-    (Y := (ModuleCat.restrictScalars ((ring.{uC, vC, r, m, w} R).obj.map f).hom).obj
-      (ModuleCat.of ((ring.{uC, vC, r, m, w} R).obj.obj V)
+    (Y := (ModuleCat.restrictScalars ((ring.{uC, vC, r, max m w} R).obj.map f).hom).obj
+      (ModuleCat.of ((ring.{uC, vC, r, max m w} R).obj.obj V)
         (ULift.{max r w} (M.val.obj V))))
     { toFun := fun x ↦ ULift.up (M.val.map f x.down)
       map_add' := fun x y ↦ congrArg ULift.up (map_add (M.val.map f).hom x.down y.down)
@@ -146,18 +142,18 @@ noncomputable def moduleMap (M : OriginalModules.{uC, vC, r, m} R) {U V : Cᵒ�
 /-- Functoriality of lifted restrictions. -/
 theorem moduleMap_laws (M : OriginalModules.{uC, vC, r, m} R) :
     (∀ U : Cᵒᵖ, moduleMap.{uC, vC, r, m, w} R M (𝟙 U) =
-      (ModuleCat.restrictScalarsId' (((ring.{uC, vC, r, m, w} R).obj ⋙
+      (ModuleCat.restrictScalarsId' (((ring.{uC, vC, r, max m w} R).obj ⋙
         forget₂ CommRingCat RingCat).map (𝟙 U)).hom
-          (congrArg RingCat.Hom.hom (((ring.{uC, vC, r, m, w} R).obj ⋙
+          (congrArg RingCat.Hom.hom (((ring.{uC, vC, r, max m w} R).obj ⋙
             forget₂ CommRingCat RingCat).map_id U))).inv.app _) ∧
     (∀ {U V W : Cᵒᵖ} (f : U ⟶ V) (g : V ⟶ W),
       moduleMap.{uC, vC, r, m, w} R M (f ≫ g) = moduleMap.{uC, vC, r, m, w} R M f ≫
-        (ModuleCat.restrictScalars ((ring.{uC, vC, r, m, w} R).obj.map f).hom).map
+        (ModuleCat.restrictScalars ((ring.{uC, vC, r, max m w} R).obj.map f).hom).map
           (moduleMap.{uC, vC, r, m, w} R M g) ≫
-        (ModuleCat.restrictScalarsComp' ((ring.{uC, vC, r, m, w} R).obj.map f).hom
-          ((ring.{uC, vC, r, m, w} R).obj.map g).hom ((ring.{uC, vC, r, m, w} R).obj.map (f ≫
-            g)).hom
-          (congrArg RingCat.Hom.hom (((ring.{uC, vC, r, m, w} R).obj ⋙
+        (ModuleCat.restrictScalarsComp' ((ring.{uC, vC, r, max m w} R).obj.map f).hom
+          ((ring.{uC, vC, r, max m w} R).obj.map g).hom
+          ((ring.{uC, vC, r, max m w} R).obj.map (f ≫ g)).hom
+          (congrArg RingCat.Hom.hom (((ring.{uC, vC, r, max m w} R).obj ⋙
             forget₂ CommRingCat RingCat).map_comp f g))).inv.app _) := by
   constructor
   · intro U
@@ -174,8 +170,8 @@ theorem moduleMap_laws (M : OriginalModules.{uC, vC, r, m} R) :
 /-- The lifted module presheaf, with explicit ULift carriers and restrictions. -/
 noncomputable def modulePresheaf (M : OriginalModules.{uC, vC, r, m} R) :
     PresheafOfModules.{max r m w}
-      (((ring.{uC, vC, r, m, w} R).obj ⋙ forget₂ CommRingCat RingCat)) where
-  obj U := ModuleCat.of ((ring.{uC, vC, r, m, w} R).obj.obj U) (ULift.{max r w} (M.val.obj U))
+      (((ring.{uC, vC, r, max m w} R).obj ⋙ forget₂ CommRingCat RingCat)) where
+  obj U := ModuleCat.of ((ring.{uC, vC, r, max m w} R).obj.obj U) (ULift.{max r w} (M.val.obj U))
   map := moduleMap.{uC, vC, r, m, w} R M
   map_id := (moduleMap_laws.{uC, vC, r, m, w} R M).1
   map_comp := (moduleMap_laws.{uC, vC, r, m, w} R M).2
@@ -194,7 +190,7 @@ theorem modulePresheaf_isSheaf (M : OriginalModules.{uC, vC, r, m} R) :
 noncomputable def module (M : OriginalModules.{uC, vC, r, m} R) :
     ringedSiteModules.{max r m w}
       ((sheafCompose J (forget₂ CommRingCat.{max r m w} RingCat.{max r m w})).obj (ring.{uC, vC,
-        r, m, w} R)) :=
+        r, max m w} R)) :=
   ⟨modulePresheaf.{uC, vC, r, m, w} R M, modulePresheaf_isSheaf.{uC, vC, r, m, w} R M⟩
 
 /-- Lift a module homomorphism by its explicit sectionwise ULift formula. -/
@@ -210,7 +206,7 @@ noncomputable def moduleHomComponent {M N : OriginalModules.{uC, vC, r, m} R} (h
 theorem moduleHomComponent_naturality {M N : OriginalModules.{uC, vC, r, m} R} (h : M ⟶ N)
     {U V : Cᵒᵖ} (f : U ⟶ V) :
     (module.{uC, vC, r, m, w} R M).val.map f ≫
-        (ModuleCat.restrictScalars ((ring.{uC, vC, r, m, w} R).obj.map f).hom).map
+        (ModuleCat.restrictScalars ((ring.{uC, vC, r, max m w} R).obj.map f).hom).map
           (moduleHomComponent.{uC, vC, r, m, w} R h V) =
       moduleHomComponent.{uC, vC, r, m, w} R h U ≫ (module.{uC, vC, r, m, w} R N).val.map f := by
   ext x
@@ -239,7 +235,7 @@ theorem moduleHom_laws :
 /-- Canonical common-universe embedding; every carrier and every map is explicit. -/
 noncomputable def functor : OriginalModules.{uC, vC, r, m} R ⥤ ringedSiteModules.{max r m w}
     ((sheafCompose J (forget₂ CommRingCat.{max r m w} RingCat.{max r m w})).obj (ring.{uC, vC, r,
-      m, w} R)) where
+      max m w} R)) where
   obj := module.{uC, vC, r, m, w} R
   map := moduleHom.{uC, vC, r, m, w} R
   map_id := (moduleHom_laws.{uC, vC, r, m, w} R).1
@@ -299,9 +295,9 @@ private noncomputable def tensorDownComponent
     [EssentiallySmall.{max r m w} C]
     [J.WEqualsLocallyBijective AddCommGrpCat.{m}] [HasWeakSheafify J AddCommGrpCat.{m}]
     (M N : OriginalModules.{uC, vC, r, m} R) (U : Cᵒᵖ) :
-    TensorProduct ((ring.{uC, vC, r, m, w} R).obj.obj U)
+    TensorProduct ((ring.{uC, vC, r, max m w} R).obj.obj U)
       ((module.{uC, vC, r, m, w} R M).val.obj U)
-      ((module.{uC, vC, r, m, w} R N).val.obj U) →ₗ[(ring.{uC, vC, r, m, w} R).obj.obj U]
+      ((module.{uC, vC, r, m, w} R N).val.obj U) →ₗ[(ring.{uC, vC, r, max m w} R).obj.obj U]
       (module.{uC, vC, r, m, w} R ((siteSheafTensorRight N).obj M)).val.obj U :=
   liftTensorMap.{r, m, w}
     (((PresheafOfModules.sheafificationAdjunction
@@ -372,12 +368,10 @@ private theorem tensorDown_factor
       have ha : (ULift.up (x + y) : ULift.{max r w} _) = ULift.up x + ULift.up y := rfl
       simpa only [ha, map_add] using congrArg₂ (· + ·) hx hy
 
--- Merging the universe parameters that only occur together would change the statement.
-set_option linter.checkUnivs false in
 private theorem ulift_preservesSheafification
-    [EssentiallySmall.{max r m w} C]
+    [EssentiallySmall.{max r m} C]
     [J.WEqualsLocallyBijective AddCommGrpCat.{m}] :
-    J.PreservesSheafification AddCommGrpCat.uliftFunctor.{max r w, m} := by
+    J.PreservesSheafification AddCommGrpCat.uliftFunctor.{r, m} := by
   constructor
   intro P Q f hf
   have hi := hf.isLocallyInjective
@@ -408,7 +402,7 @@ private theorem tensorDown_W
     J.W ((PresheafOfModules.toPresheaf _).map
       (tensorDown.{uC, vC, r, m, w} R M N)) := by
   let : J.PreservesSheafification AddCommGrpCat.uliftFunctor.{max r w, m} :=
-    ulift_preservesSheafification.{uC, vC, r, m, w}
+    ulift_preservesSheafification.{uC, vC, max r w, m}
   have h := J.W_of_preservesSheafification AddCommGrpCat.uliftFunctor.{max r w, m}
     _ (J.W_toSheafify (siteTensorPresheaf M.val N.val).presheaf)
   change J.W (Functor.whiskerRight ((PresheafOfModules.toPresheaf _).map
@@ -425,7 +419,7 @@ private noncomputable def tensorDescent
     (M N : OriginalModules.{uC, vC, r, m} R) :
     (PresheafOfModules.sheafification.{max r m w}
       (R := (sheafCompose J (forget₂ CommRingCat.{max r m w} RingCat.{max r m w})).obj
-        (ring.{uC, vC, r, m, w} R)) (𝟙 _)).obj
+        (ring.{uC, vC, r, max m w} R)) (𝟙 _)).obj
       ((module.{uC, vC, r, m, w} R M).val ⊗
         (module.{uC, vC, r, m, w} R N).val) ⟶
       module.{uC, vC, r, m, w} R ((siteSheafTensorRight N).obj M) :=

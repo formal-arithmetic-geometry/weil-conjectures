@@ -59,7 +59,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 attribute [local irreducible] totalTensor homComplexFunctor homModelMap
   derivedInternalHomOfUniverses scalarReductionDerivedExtension scalarReductionDerivedRestriction
-  scalarReductionExistence scalarReductionDerivedExistence
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Given a K-flat representative `P` of `K`, a K-injective representative `I` of `L`, a K-flat

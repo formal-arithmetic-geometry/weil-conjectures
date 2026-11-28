@@ -52,8 +52,7 @@ def finiteRingUnit {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
   (openSquareDerivedPullbackModel (Padic.coefficientExtensionRing l E (n + 1)) f).app _ ≪≫
     finiteUnit l E f n
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-  unrestrictedIntegralReductionExistence HasDerivedCategory.standard limit
+attribute [local irreducible] HasDerivedCategory.standard limit
   finiteRegularIso finiteSingleRegularIso finiteRingUnit
 
 private theorem finite_coordinate_unit {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :

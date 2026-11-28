@@ -40,7 +40,7 @@ local instance instWEqualsLocallyBijective_derivedCompleteFiniteReductionDetecti
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 attribute [local irreducible] HasDerivedCategory.standard
-  scalarReductionDerivedExistence completedIntegralCoefficientSheafUnrestricted
+  completedIntegralCoefficientSheafUnrestricted
 
 private theorem reduction_cone_isHomotopyLimit
     {A : Type*} [Category A] [HasZeroObject A] [HasShift A ℤ] [Preadditive A]

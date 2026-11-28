@@ -93,8 +93,7 @@ attribute [local instance 30000] sectionComparisonBraiding
 
 variable (R : Sheaf J AddCommGrpCat.{u + 1}) [MonObj R] [hcomm : IsCommMonObj R]
 
--- Keep the section instances as hypotheses of this public statement.
-set_option linter.unusedSectionVars false in
+omit [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}] in
 /-- Commutativity for the direct canonical braiding on abelian sheaves. (Stacks, Tag 03EK) -/
 theorem sectionRingCommDirect :
     @IsCommMonObj (Sheaf J AddCommGrpCat.{u + 1}) _ _
@@ -103,12 +102,14 @@ theorem sectionRingCommDirect :
 
 attribute [local instance] sectionRingCommDirect
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}] in
 /-- The primitive section functor is additive, with evidence named before totalization.
 (Stacks, Tag 00YV) -/
 theorem sectionFunctorAdditiveForSite :
     (sectionModuleFunctor.{u + 1, u + 1, u} J R).Additive :=
   comparison_EAdditive J R
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}] in
 /-- The primitive section functor is an equivalence. (Stacks, Tag 00YV) -/
 theorem sectionFunctorEquivalenceForSite :
     (sectionModuleFunctor.{u + 1, u + 1, u} J R).IsEquivalence :=

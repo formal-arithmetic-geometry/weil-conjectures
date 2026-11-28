@@ -53,8 +53,7 @@ attribute [local reducible] Functor.category StageSystem.instCategoryPairCategor
 attribute [local irreducible] HasDerivedCategory.standard integralCoefficientLinear
 attribute [local irreducible] rationalDerivedPullback
   constructibleIntegralPullback Scheme.residueField
-  completedIntegralCoefficientSheafUnrestricted scalarReductionExistence
-  scalarReductionDerivedExistence
+  completedIntegralCoefficientSheafUnrestricted
   sfRationalScalarExtension rationalPullbackScalarComparison sfRationalScalarComp
 
 -- The tower equation at three equal fields forces the coefficient-unit equation.

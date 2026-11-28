@@ -391,7 +391,7 @@ private theorem pullbackUnit_one (V : C) :
 end
 
 section ChainConstruction
-attribute [local irreducible] unrestrictedIntegralReductionExistence limit
+attribute [local irreducible] limit
 
 -- Explicit coefficient transports require a larger elaboration budget.
 private theorem reduction_map_tensor (Y : Scheme.{u}) (n : ℕ)
@@ -721,7 +721,7 @@ private theorem normalized_chainUnit_unique {X Y : Scheme.{u}} (g : X ⟶ Y)
 end ChainConstruction
 
 section LevelIsoProof
-attribute [local irreducible] unrestrictedIntegralReductionExistence limit
+attribute [local irreducible] limit
 private def finiteRegularIso (Y : Scheme.{u}) (n : ℕ) :
     (unrestrictedIntegralReductionFunctor.{u, u} l E Y n).obj
       (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted.{u, u} l E Y)) ≅
@@ -1158,7 +1158,7 @@ end CoefficientTowerProof
 section FinalAssemblyProof
 attribute [local irreducible] finiteRegularIso finiteSingleRegularIso
   finitePullbackRegularIso pullbackLevelRegularIso pullbackUnitLevel
-  unrestrictedIntegralReductionExistence limit
+  limit
 private theorem singleTower_epi {A : Type c} [Category.{v} A] [Abelian A]
     [HasCountableProducts A] [HasCountableProducts (CochainComplex A ℤ)]
     (M : ℕᵒᵖ ⥤ A)
@@ -1301,7 +1301,7 @@ end FinalAssemblyProof
 end ConstantWeilUnitProof
 
 section NormalizedUnitUse
-attribute [local irreducible] unrestrictedIntegralReductionExistence limit
+attribute [local irreducible] limit
   chainUnitCandidate pullbackUnitProduct pullbackUnitLevel
 
 /-- The canonical comparison into the strict completed pullback is uniquely fixed by the

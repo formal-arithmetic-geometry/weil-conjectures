@@ -72,8 +72,8 @@ universe t u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 namespace WeilConjectures
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-  scalarReductionExtension coefficientFiniteReductionModel coefficientLocalizedCounitModel
+attribute [local irreducible] scalarReductionExtension coefficientFiniteReductionModel
+  coefficientLocalizedCounitModel
 
 -- Recover the evaluation from its normalized mate under two shift-compatible adjunctions.
 private theorem evaluation_shift

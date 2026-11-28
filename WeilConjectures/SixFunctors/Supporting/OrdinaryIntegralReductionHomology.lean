@@ -47,8 +47,7 @@ private local instance (priority := 5000) reductionAbLocallyBijective (W : Schem
     (ProEt.topology W).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   integralCoefficientAbLocallyBijective.{u, u} W
 
-attribute [local irreducible] HasDerivedCategory.standard scalarReductionExistence
-  scalarReductionDerivedExistence
+attribute [local irreducible] HasDerivedCategory.standard
 
 section
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]

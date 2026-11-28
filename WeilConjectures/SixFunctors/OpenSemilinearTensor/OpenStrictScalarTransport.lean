@@ -39,7 +39,6 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 
 -- Keep the scalar and sequence constructions closed during component comparisons.
 attribute [local irreducible] WeilConjectures.scalarReductionExtension
-  WeilConjectures.scalarReductionExistence
   WeilConjectures.OpenSemilinearTensor.scalarLevelComparison
   WeilConjectures.IntegralOpenReduction.extensionEvaluation
   CategoryTheory.Functor.leftAdjoint CategoryTheory.constantSheaf

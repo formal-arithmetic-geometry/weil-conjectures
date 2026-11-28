@@ -60,7 +60,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
-attribute [local irreducible] completedAdicChangeData completedAdicRing
+attribute [local irreducible] completedAdicRing
 
 /-- Ordinary completed realization, written without the later tensor-cone modules. -/
 abbrev finitePerfectAdicScalarModelOrdinary (X : Scheme.{t}) {A : Type t} [CommRing A]

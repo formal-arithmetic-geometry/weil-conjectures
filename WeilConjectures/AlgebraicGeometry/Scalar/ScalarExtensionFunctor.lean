@@ -733,6 +733,5 @@ set_option backward.isDefEq.respectTransparency true
 
 set_option backward.isDefEq.respectTransparency false in
 attribute [local irreducible] scalarExtensionFunctorCounit
-  completedAdicChangeData
 
 end AlgebraicGeometry.ProEtale

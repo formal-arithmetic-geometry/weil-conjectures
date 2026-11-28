@@ -32,7 +32,6 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 attribute [local irreducible] CategoryTheory.constantSheaf HasDerivedCategory.standard
   WeilConjectures.tensorScalarLevelIso
   WeilConjectures.completedIntegralCoefficientSheafUnrestricted
-  WeilConjectures.unrestrictedIntegralReductionExistence
   WeilConjectures.IntegralOnSlice.reductionWitness
 attribute [local implicit_reducible] SheafOfModules.KFlatTotalTensorModel.monoidal
   SheafOfModules.KFlatTotalTensorModel.tensor

@@ -37,7 +37,7 @@ variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E
 attribute [local irreducible] integralOrdinaryScalar integralOrdinaryTensorSection
   integralCompletedScalarMap completedIntegralCoefficientSheafUnrestricted
   HasDerivedCategory.standard unrestrictedIntegralReductionFunctor
-  completedIntegralCommRingProjectionUnrestricted scalarReductionExistence
+  completedIntegralCommRingProjectionUnrestricted
   AlgebraicGeometry.Scheme.coefficientProEtaleModuleAdjunction
   AlgebraicGeometry.Scheme.coefficientProEtaleModulePullback Functor.leftAdjoint
 

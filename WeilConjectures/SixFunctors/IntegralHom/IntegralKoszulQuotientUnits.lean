@@ -90,8 +90,7 @@ attribute [local implicit_reducible] completedIntegralCommRingSheafUnrestricted
   integralCoefficientSheaf integralCoefficientCommRingSheaf
   SheafOfModules.KFlatTotalTensorModel.tensor SheafOfModules.KFlatTotalTensorModel.monoidal
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-  unrestrictedIntegralReductionExistence tensorScalarLevelIso
+attribute [local irreducible] tensorScalarLevelIso
   FiniteReductionTower.scalarTowerIso
 
 private theorem map_comp_with_sides

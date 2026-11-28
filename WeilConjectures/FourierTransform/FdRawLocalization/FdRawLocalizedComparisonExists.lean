@@ -42,7 +42,7 @@ variable (l : ℕ) [Fact l.Prime]
 
 attribute [local irreducible] HasDerivedCategory.standard
   FdOrdinaryScalarTransport.complex FdOrdinaryScalarTransport.completion
-  fdCoefficientTransportFactors pbcIntegralDatum completedAdicChangeData
+  fdCoefficientTransportFactors pbcIntegralDatum
   integralDetailedCoefficientComparison sfRationalTriangulationDatum
   sfRationalScalarExtension sfRationalScalarComp sfRationalScalarUnit
   GeneralAlgebraicallyClosedCoefficients.transition

@@ -243,8 +243,7 @@ private theorem scalar_unit_tensor (W : Scheme.{u}) (M : integralTowerModules l 
       unrestrictedIntegralTensorSection l E W n M V 1 x := by
   have h := (scalarReductionExtension_adjunction l E W n).choose_spec M V x
   dsimp only [pullbackTensorFiniteAdjunction, unrestrictedIntegralTensorSection,
-    unrestrictedIntegralReductionFunctor, unrestrictedIntegralReductionExistence,
-    scalarReductionExistence] at h ⊢
+    unrestrictedIntegralReductionFunctor] at h ⊢
   exact h
 
 attribute [local irreducible] finiteComparison pullbackTensorOrdinaryReduction

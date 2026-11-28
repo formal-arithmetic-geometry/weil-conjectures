@@ -133,7 +133,6 @@ private theorem reductionEvaluation_transition (Y : Scheme.{u})
     congrArg ((coefficientSequenceEvaluation l E Y m).map (a.inv.app M) ≫ ·)
       (O.tensor_transition M m n h)
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
 
 /-- Localization factors for the canonical square of exact functors. -/
 private theorem square_factors

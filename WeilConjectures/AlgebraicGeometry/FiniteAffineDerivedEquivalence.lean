@@ -71,21 +71,13 @@ theorem finite_affine_derived_equivalence {X Y : Scheme.{v}} (f : X ⟶ Y)
     (R' := moduleRings (directImageAlgebraSpace f))
     ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩
   have : Limits.PreservesFiniteLimits T :=
-    @sheafAlgebraRestrictScalars_preservesFiniteLimits.{v, wY, wA} Y
+    sheafAlgebraRestrictScalars_preservesFiniteLimits.{v} Y
       (Under.mk (show Y.sheaf ⟶
         (TopCat.Sheaf.pushforward CommRingCat f.base).obj X.sheaf from ⟨f.c⟩))
-      inferInstance (by
-        change HasDerivedCategory.{wA}
-          (SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)))
-        infer_instance)
   have : Limits.PreservesFiniteColimits T :=
-    @sheafAlgebraRestrictScalars_preservesFiniteColimits.{v, wY, wA} Y
+    sheafAlgebraRestrictScalars_preservesFiniteColimits.{v} Y
       (Under.mk (show Y.sheaf ⟶
         (TopCat.Sheaf.pushforward CommRingCat f.base).obj X.sheaf from ⟨f.c⟩))
-      inferInstance (by
-        change HasDerivedCategory.{wA}
-          (SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)))
-        infer_instance)
   have hT : ∀ M, pA M → schemeDerivedQCohProperty Y (T.rightDerivedFunctor.obj M) := by
     intro M hM n
     let e := (T.rightDerivedFunctorHomologyFunctorIso n).app M

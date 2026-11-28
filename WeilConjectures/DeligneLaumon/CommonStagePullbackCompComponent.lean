@@ -74,8 +74,8 @@ attribute [local irreducible] ScalarLocalization.composition
   rationalDerivedPullback commonStagePullbackComparison
   rationalPullbackCompositionIso rationalPullbackScalarComparison
   commonStagePullbackRationalComposition HasDerivedCategory.standard integralCoefficientLinear
-  completedIntegralCoefficientSheafUnrestricted scalarReductionExistence
-  scalarReductionDerivedExistence Scheme.residueField
+  completedIntegralCoefficientSheafUnrestricted
+  Scheme.residueField
 
 /-- Generic form of the transport of a compositor square through functors equal to the
 scalar extensions. -/

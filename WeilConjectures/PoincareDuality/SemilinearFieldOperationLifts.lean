@@ -156,7 +156,6 @@ attribute [local reducible] GeneralAlgebraicallyClosedCoefficients.stageCategory
 attribute [local irreducible] sfIntegralConstructible Linear.homModule
   ObjectProperty.FullSubcategory.category
   HasDerivedCategory.standard completedIntegralCoefficientSheafUnrestricted
-  scalarReductionExistence scalarReductionDerivedExistence
 
 set_option allowUnsafeReducibility true in
 attribute [local irreducible] GeneralAlgebraicallyClosedCoefficients.stageSystem
@@ -323,7 +322,7 @@ def PodFieldOperationTransportSpec
       (podCommonPairs_pullback l Ω (D.geometricFrobenius T₀).asIso.hom) κ
 
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
-  scalarReductionExistence scalarReductionDerivedExistence commonStageTensorComparison
+  commonStageTensorComparison
   operationStageTransitionIso commonStageDerivedTensor
 
 set_option backward.isDefEq.respectTransparency true in

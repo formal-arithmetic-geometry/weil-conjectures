@@ -39,7 +39,7 @@ attribute [-instance] WeilConjectures.integralCoefficientAbLocallyBijective
 
 attribute [local instance 30000] proEtaleRingModules_hasDerivedCategory
 
-attribute [local irreducible] completedAdicChangeData HasDerivedCategory.standard
+attribute [local irreducible] HasDerivedCategory.standard
   Functor.leftAdjoint
 
 private def modelScalarExtensionIso (X : Scheme.{u})

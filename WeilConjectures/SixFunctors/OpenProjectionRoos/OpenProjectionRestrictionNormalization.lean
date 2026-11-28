@@ -43,7 +43,7 @@ variable
 attribute [local irreducible] integralOperationsTensorTowerFunctor
   coefficientTotalTensor integralOperationsTensorLevel
   completedIntegralCommRingSheafUnrestricted completedIntegralCoefficientSheafUnrestricted
-  unrestrictedIntegralComplexFunctor scalarReductionExistence unrestrictedIntegralReductionExistence
+  unrestrictedIntegralComplexFunctor
 
 /-- Restricting the completed representative gives the strict finite restriction
 comparison of the same quotient towers. -/

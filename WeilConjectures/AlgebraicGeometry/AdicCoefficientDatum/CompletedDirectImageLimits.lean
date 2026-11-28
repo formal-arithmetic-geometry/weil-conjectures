@@ -99,7 +99,7 @@ set_option autoImplicit false
 universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
-attribute [local irreducible] completedAdicChangeData completedReductionCoefficient
+attribute [local irreducible] completedReductionCoefficient
 attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor
 attribute [local irreducible] CochainComplex.IsKFlatIndependentCoefficients
 attribute [local instance 2000] reductionModulesHasDerivedCategory

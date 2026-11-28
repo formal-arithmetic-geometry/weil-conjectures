@@ -39,7 +39,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
 attribute [local irreducible] completedIntegralCommRingSheafUnrestricted
-  scalarReductionExistence scalarReductionExtension
+  scalarReductionExtension
   scalarUnitTower
 
 private def augmentationOfBalanced (W : Scheme.{u})

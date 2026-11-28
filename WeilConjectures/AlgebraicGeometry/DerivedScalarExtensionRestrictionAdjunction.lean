@@ -522,11 +522,23 @@ theorem scalarReductionRestrictionColimits :
 
 attribute [local instance] scalarReductionRestrictionColimits
 
--- Inferred-type def whose reducibility is toggled here and downstream; a theorem cannot be.
-set_option linter.defProp false in
 /-- The canonical universal derived-change-of-rings witness for the limit projection
 (Stacks, Tag 06YY). -/
-noncomputable def scalarReductionExistence :=
+theorem scalarReductionExistence :
+    type_of% (
+      letI := HasDerivedCategory.standard (SheafOfModules.{max u (t + 1)}
+        (SheafOfModules.derivedChangeRingIndependentCoefficients
+          (AlgebraicGeometry.Scheme.ProEt.topology Y)
+          (completedIntegralCommRingSheafUnrestricted l E Y)))
+      letI := HasDerivedCategory.standard (SheafOfModules.{max u (t + 1)}
+        (SheafOfModules.derivedChangeRingIndependentCoefficients
+          (AlgebraicGeometry.Scheme.ProEt.topology Y)
+          (integralCoefficientCommRingSheaf l E Y n)))
+      SheafOfModules.derivedChangeOfRingsIndependentCoefficients
+        (J := AlgebraicGeometry.Scheme.ProEt.topology Y)
+        (O := completedIntegralCommRingSheafUnrestricted l E Y)
+        (O' := integralCoefficientCommRingSheaf l E Y n)
+        (completedIntegralCommRingProjectionUnrestricted l E Y n)) :=
   letI := HasDerivedCategory.standard (SheafOfModules.{max u (t + 1)}
     (SheafOfModules.derivedChangeRingIndependentCoefficients
       (AlgebraicGeometry.Scheme.ProEt.topology Y)
@@ -554,16 +566,14 @@ theorem scalarReductionExtensionAdditive :
 
 attribute [local instance] scalarReductionExtensionAdditive
 
-attribute [local irreducible] scalarReductionExistence scalarReductionExtension
+attribute [local irreducible] scalarReductionExtension
   HasDerivedCategory.standard
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
--- Downstream files toggle its reducibility, which is not allowed for a theorem.
-set_option linter.defProp false in
 /-- The universal derived pair, including the K-flat computation and exactness (Stacks, Tag 06YY).
 -/
-noncomputable def scalarReductionDerivedExistence :
+theorem scalarReductionDerivedExistence :
     ∃ (LF : DerivedCategory (scalarReductionSource l E Y) ⥤
         DerivedCategory (scalarReductionTarget l E Y n))
       (ε : DerivedCategory.Qh ⋙ LF ⟶
@@ -580,7 +590,6 @@ noncomputable def scalarReductionDerivedExistence :
 
 attribute [local semireducible] scalarReductionExtension
 
-attribute [local irreducible] scalarReductionDerivedExistence
 
 end WeilConjectures
 

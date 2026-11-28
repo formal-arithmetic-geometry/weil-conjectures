@@ -30,7 +30,6 @@ open AlgebraicGeometry.Scheme
 namespace WeilConjectures.PodCoefficientDescent
 attribute [local irreducible] HasDerivedCategory.standard
   completedIntegralCoefficientSheafUnrestricted scalarIntegralClosed scalarClosedTensor
-  scalarReductionExistence scalarReductionDerivedExistence
 
 attribute [-instance] integralOperationsSiteSmall
   GrothendieckTopology.hasSheafify_of_essentiallySmall

@@ -50,7 +50,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local irreducible] coefficientFiniteQuotientExistence
   coefficientFiniteQuotientDerivedExistence coefficientFiniteQuotientModel
   coefficientFiniteQuotientExtension coefficientFiniteQuotientUnitSection
-  SheafOfModules.monoidalCategory scalarReductionExistence scalarReductionDerivedExistence
+  SheafOfModules.monoidalCategory
   scalarReductionExtension coefficientFiniteQuotientDerived HasDerivedCategory.standard
   CoefficientClosedStructure.tensor coefficientSequenceCommRingSheaf
   coefficientSequenceCommRingPresheaf coefficientSequenceCommRingSystem

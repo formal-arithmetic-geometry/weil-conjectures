@@ -213,8 +213,7 @@ universe t
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : AlgebraicGeometry.Scheme.{t})
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-  HasDerivedCategory.standard
+attribute [local irreducible] HasDerivedCategory.standard
 
 theorem coefficientFiniteAdjunction_unit (n : ℕ) :
     ∀ (P : CochainComplex (scalarReductionSource l E W) ℤ),

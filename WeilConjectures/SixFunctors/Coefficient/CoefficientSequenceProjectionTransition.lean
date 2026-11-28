@@ -174,7 +174,6 @@ set_option backward.isDefEq.respectTransparency.types true
 namespace WeilConjectures
 attribute [local irreducible] constantSheaf HasDerivedCategory.standard
   coefficientSequenceEvaluation coefficientSequenceTransition
-  scalarReductionExistence scalarReductionDerivedExistence unrestrictedIntegralReductionExistence
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})

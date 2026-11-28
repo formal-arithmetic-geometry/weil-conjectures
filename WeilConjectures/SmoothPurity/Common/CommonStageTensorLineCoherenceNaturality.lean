@@ -32,8 +32,8 @@ open GeneralAlgebraicallyClosedCoefficients
 open CategoryTheory.StageSystem.PairCategory
 
 attribute [local irreducible] Scheme.residueField
-  completedIntegralCoefficientSheafUnrestricted scalarReductionExistence
-  scalarReductionDerivedExistence commonStageTensorComparison operationStageTransitionIso
+  completedIntegralCoefficientSheafUnrestricted
+  commonStageTensorComparison operationStageTransitionIso
   pullbackTensorCommonLeft pullbackTensorCommonRight
 
 private theorem chosen_operation_spec {A : Sort*} {p : A → Prop}

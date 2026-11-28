@@ -223,8 +223,7 @@ attribute [local implicit_reducible] completedIntegralCommRingSheafUnrestricted
   integralCoefficientSheaf integralCoefficientCommRingSheaf
   SheafOfModules.KFlatTotalTensorModel.tensor SheafOfModules.KFlatTotalTensorModel.monoidal
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-  unrestrictedIntegralReductionExistence tensorScalarLevelIso
+attribute [local irreducible] tensorScalarLevelIso
 
 attribute [local implicit_reducible] tensorDiagram
 

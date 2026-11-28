@@ -46,7 +46,6 @@ namespace WeilConjectures
 attribute [-instance] SemilinearSections.hasDerived SemilinearSections.moduleAbelian
 attribute [local irreducible] constantSheaf HasDerivedCategory.standard
   completedIntegralCoefficientSheafUnrestricted
-  scalarReductionExistence scalarReductionDerivedExistence
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -453,7 +452,6 @@ private theorem restrictComp_eq
   exact reflEqTrans _ _
 
 attribute [local irreducible] coefficientSequenceEvaluation coefficientSequenceTransition
-  unrestrictedIntegralReductionExistence
 private def complexComparison
     {A B C : Type*} [Category A] [Category B] [Category C]
     [HasZeroMorphisms A] [HasZeroMorphisms B] [HasZeroMorphisms C]

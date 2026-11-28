@@ -103,8 +103,8 @@ namespace WeilConjectures.StrictQuotient
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-  coefficientFiniteQuotientExistence coefficientFiniteQuotientDerivedExistence
+attribute [local irreducible] coefficientFiniteQuotientExistence
+  coefficientFiniteQuotientDerivedExistence
   coefficientFiniteQuotientModel coefficientFiniteQuotientUnitSection
   SheafOfModules.monoidalCategory scalarReductionExtension
   coefficientFiniteQuotientExtension coefficientSequenceEvaluation

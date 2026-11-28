@@ -89,7 +89,7 @@ theorem scalarUnitTower_natural (W : Scheme.{u})
 
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
-attribute [local irreducible] scalarReductionExistence scalarReductionExtension
+attribute [local irreducible] scalarReductionExtension
   completedIntegralCoefficientSheafUnrestricted completedIntegralCommRingSheafUnrestricted
 
 /-- For fixed normalized scalar data and a strict scalar comparison, the scalar-adjunction

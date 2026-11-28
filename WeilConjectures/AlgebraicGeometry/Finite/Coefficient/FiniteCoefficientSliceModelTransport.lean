@@ -225,7 +225,7 @@ end Scalars
 
 section Coordinates
 
-attribute [local irreducible] completedAdicChangeData pbcDerivedScalarAdjunction
+attribute [local irreducible] pbcDerivedScalarAdjunction
 
 variable (X : Scheme.{t}) (B : Type t) [CommRing B]
   (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1})

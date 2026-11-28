@@ -63,7 +63,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposit
 open AlgebraicGeometry.Scheme
 namespace WeilConjectures
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
-  scalarReductionExistence scalarReductionDerivedExistence scalarReductionExtension
+  scalarReductionExtension
 attribute [-instance] integralCoefficientAbLocallyBijective integralCoefficientAbSheafify
   GrothendieckTopology.hasSheafify_of_essentiallySmall
 /-- The published category structure at the explicit coefficient sizes. -/

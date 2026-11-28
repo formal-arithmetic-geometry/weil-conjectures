@@ -572,7 +572,7 @@ attribute [local instance] scalarReductionRestrictionColimits
 
 attribute [local instance] scalarReductionExtensionAdditive
 
-attribute [local irreducible] scalarReductionExistence scalarReductionExtension
+attribute [local irreducible] scalarReductionExtension
   HasDerivedCategory.standard
 
 set_option backward.isDefEq.respectTransparency true in
@@ -582,7 +582,6 @@ attribute [local semireducible] scalarReductionExtension
 
 
 -- The proof-valued witnesses have large types; their bodies are never needed below.
-attribute [local irreducible] scalarReductionDerivedExistence
 
 
 set_option backward.isDefEq.respectTransparency true in

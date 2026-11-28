@@ -121,8 +121,7 @@ private theorem tensorQuasiIso
 
 end Resolutions
 
-attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
-  HasDerivedCategory.standard
+attribute [local irreducible] HasDerivedCategory.standard
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

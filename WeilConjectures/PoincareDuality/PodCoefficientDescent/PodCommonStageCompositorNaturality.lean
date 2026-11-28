@@ -35,8 +35,7 @@ attribute [local irreducible] rationalDerivedPullback sfIntegralConstructible
   commonStageDerivedPullback commonStageDerivedInternalHom rationalDerivedInternalHom
   commonStagePullbackComparison Scheme.residueField Linear.homModule
   ObjectProperty.FullSubcategory.category HasDerivedCategory.standard
-  completedIntegralCoefficientSheafUnrestricted scalarReductionExistence
-  scalarReductionDerivedExistence
+  completedIntegralCoefficientSheafUnrestricted
 
 set_option allowUnsafeReducibility true in
 attribute [local irreducible] Preadditive.fullSubcategory

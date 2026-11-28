@@ -333,7 +333,7 @@ attribute [local irreducible] identifiedMap
 end SheafOfModules.UnrestrictedTowerProof
 
 namespace WeilConjectures
-attribute [local irreducible] scalarReductionExistence HasDerivedCategory.standard
+attribute [local irreducible] HasDerivedCategory.standard
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{t})
@@ -362,8 +362,7 @@ private theorem unrestrictedCoefficientStep_comp (n : ℕ) :
   simpa only [integralCoefficientSheafSystem, Functor.ofOpSequence_map_homOfLE_succ,
     ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app] using h
 
-attribute [local irreducible] unrestrictedIntegralReductionExistence
-  completedIntegralCoefficientSheafUnrestricted constantSheaf
+attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted constantSheaf
   SheafOfModules.changeOfRings SheafOfModules.changeOfRingsHom
 
 private theorem unrestrictedReduction_obj (n : ℕ) (M : integralTowerModules l E Y) :

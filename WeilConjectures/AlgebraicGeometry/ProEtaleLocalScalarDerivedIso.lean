@@ -31,7 +31,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
-attribute [local irreducible] completedAdicChangeData HasDerivedCategory.standard
+attribute [local irreducible] HasDerivedCategory.standard
   proEtaleModuleInverseImage LocalScalar.changeData SheafOfModules.monoidalCategory
   Functor.leftAdjoint
   CochainComplex.IsKFlatIndependentCoefficients CochainComplex.IsKFlatTensor

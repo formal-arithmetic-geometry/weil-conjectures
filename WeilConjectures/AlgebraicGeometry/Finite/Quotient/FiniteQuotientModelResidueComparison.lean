@@ -89,7 +89,6 @@ open CategoryTheory CategoryTheory.Limits
 open AlgebraicGeometry.ProEtale
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
-attribute [local irreducible] completedAdicChangeData
 
 private abbrev residueModules (X : Scheme.{t})
     (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1}) :=
