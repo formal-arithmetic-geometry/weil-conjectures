@@ -68,6 +68,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Limits
 import WeilConjectures.CategoryTheory.Ringed.RingedConstantTowerPushforwardNormalization
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitTowerTriangle
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import all WeilConjectures.AlgebraicGeometry.AdicCompletion.DerivedCompletionSupplement
 
@@ -499,6 +500,64 @@ private theorem constant_coherence_Q (n : ℕ)
           rw [he]
           exact (congrArg (Uf ≫ ·) (DerivedCategory.Q.map_id _)).trans (Category.comp_id _)
   exact hLHS.trans hRHS.symm
+
+private theorem constant_coherence (n : ℕ) (N : DerivedCategory (AdicCompletion.Modules l E Y)) :
+    (dpullModule l E f).map ((constantEvaluationIso l E Y n).inv.app N) ≫
+      (pullEvaluation l E f n).inv.app ((dconstant l E Y).obj N) =
+    (constantEvaluationIso l E X n).inv.app ((dpullModule l E f).obj N) ≫
+      (dev l E X n).map ((constantInterchange l E
+        (CondensedRing.upperStar (DerivedNakayama.integerRing l E) f)).hom.app N) := by
+  let p := dpullModule l E f
+  let e := DerivedCategory.Q.objObjPreimageIso N
+  have h := constant_coherence_Q l E f n (DerivedCategory.Q.objPreimage N)
+  have n1 := (constantEvaluationIso l E Y n).inv.naturality e.hom
+  have n2 := (pullEvaluation l E f n).inv.naturality ((dconstant l E Y).map e.hom)
+  have n3 := (constantEvaluationIso l E X n).inv.naturality (p.map e.hom)
+  have n4 := (constantInterchange l E
+    (CondensedRing.upperStar (DerivedNakayama.integerRing l E) f)).hom.naturality e.hom
+  simp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at n1 n2 n3 n4
+  rw [← cancel_epi (p.map e.hom), ← p.map_comp_assoc, n1, p.map_comp_assoc, n2,
+    reassoc_of% h, ← (dev l E X n).map_comp, ← n4, (dev l E X n).map_comp,
+    reassoc_of% n3]
+
+/-- The conjugate limit comparison preserves the canonical counit projections. -/
+private theorem pushLimitIso_levelProjection (M : DTow l E X) (n : ℕ) :
+    (pushLimitIso l E f).hom.app M ≫
+        (levelProjection l E Y n).app ((rpush l E f).obj M) ≫
+        (pushEvaluationMap l E f n).app M =
+      (rpushModule l E f).map ((levelProjection l E X n).app M) := by
+  let p := dpullModule l E f
+  let adjp := moduleAdjunction l E f
+  let adjP := towerAdjunction l E f
+  let cX := constantLimitAdjunction l E X
+  let cY := constantLimitAdjunction l E Y
+  let eX := constantEvaluationIso l E X n
+  let ci := constantInterchange l E (CondensedRing.upperStar (DerivedNakayama.integerRing l E) f)
+  let β := (pullEvaluation l E f n).inv
+  have hA : p.map ((pushEvaluationMap l E f n).app M) ≫ adjp.counit.app ((dev l E X n).obj M) =
+      β.app ((rpush l E f).obj M) ≫ (dev l E X n).map (adjP.counit.app M) :=
+    mateEquiv_counit adjP adjp (.mk _ _ _ _ β) M
+  have hC := conjugateEquiv_counit (adjp.comp cX) (cY.comp adjP) ci.symm.hom M
+  have hγ : (pushLimitIso l E f).hom = conjugateEquiv (adjp.comp cX) (cY.comp adjP) ci.symm.hom :=
+    rfl
+  rw [← hγ, Adjunction.comp_counit_app, Adjunction.comp_counit_app] at hC
+  simp only [Functor.comp_obj, Functor.comp_map, Iso.symm_hom] at hC
+  apply (adjp.homEquiv _ _).symm.injective
+  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  erw [hA, adjp.counit_naturality]
+  rw [levelProjection_app, levelProjection_app]
+  have n2 := β.naturality (cY.counit.app ((rpush l E f).obj M))
+  have n3 := eX.inv.naturality (p.map ((pushLimitIso l E f).hom.app M))
+  have n4 := ci.hom.naturality ((pushLimitIso l E f).hom.app M)
+  have n5 := eX.inv.naturality (adjp.counit.app ((rlim l E X).obj M))
+  simp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at n2 n3 n4 n5
+  simp only [Functor.map_comp, Category.assoc]
+  erw [reassoc_of% n2, reassoc_of% (constant_coherence l E f n _), reassoc_of% n3]
+  simp only [← (dev l E X n).map_comp]
+  erw [reassoc_of% n4, hC, ci.hom_inv_id_app_assoc]
+  simp only [(dev l E X n).map_comp]
+  erw [reassoc_of% n5]
+
 end ProjectionSquare
 
 /-- Roos triangles, product comparison and the projection compatibility for direct image,
@@ -525,6 +584,29 @@ theorem directImage_roos_limit_data :
             (levelProjection l E Y n).app ((rpush l E f).obj M) ≫
             (pushEvaluationMap l E f n).app M =
           (rpushModule l E f).map ((levelProjection l E X n).app M)) := by
-  sorry
+  obtain ⟨β, hβ, -⟩ := (completeDerivedCompletion l E Y X f).2.2.2.1.2.2.2
+  refine ⟨fun n ↦ hβ n ▸ inferInstance, ?_⟩
+  have : HasCountableProducts (AdicCompletion.Modules l E X) :=
+    AdicCompletion.modulesProducts l E _
+  have : HasCountableProducts (AdicCompletion.Modules l E Y) :=
+    AdicCompletion.modulesProducts l E _
+  have : CountableAB4Star (AdicCompletion.Modules l E X) :=
+    AdicCompletion.modules_countableAB4Star l E X
+  have : CountableAB4Star (AdicCompletion.Modules l E Y) :=
+    AdicCompletion.modules_countableAB4Star l E Y
+  obtain ⟨hX, -⟩ := derivedCategory_countableProducts_and_towerLimit.{0}
+    (AdicCompletion.Modules l E X)
+  obtain ⟨hY, -⟩ := derivedCategory_countableProducts_and_towerLimit.{0}
+    (AdicCompletion.Modules l E Y)
+  refine ⟨hX, hY, fun M ↦ ⟨roos_triangle l E X M, roos_triangle l E Y _, ?_, ?_,
+    pushLimitIso_levelProjection l E f M⟩⟩
+  · have := (moduleAdjunction l E f).rightAdjoint_preservesLimits.{0, 0}
+    infer_instance
+  · apply Pi.hom_ext
+    intro n
+    simp only [towerTransitionEndomorphism, towerProductShift, Category.assoc,
+      piComparison_comp_π, Preadditive.sub_comp, Category.id_comp, Pi.lift_comp_π,
+      ← Functor.map_comp, Functor.map_sub, Preadditive.comp_sub]
+    simp only [Functor.map_comp, piComparison_comp_π_assoc]
 
 end AlgebraicGeometry.ProEtale.CompleteDerivedCompletion

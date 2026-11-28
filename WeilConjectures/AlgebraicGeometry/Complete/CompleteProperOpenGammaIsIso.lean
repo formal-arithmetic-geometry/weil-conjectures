@@ -119,41 +119,6 @@ theorem isIso_of_reductionTower_isIso (T : Scheme.{t}) {K L : d.derived T} (f : 
 
 end Reflection
 
-/-- Intrinsic completeness implies quotient-tower completeness. -/
-theorem cbcTowerComplete_of_completeProperty (T : Scheme.{t})
-    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)
-    (K : d.derived T) (hK : cbcCompleteProperty d T r a ha K) :
-    d.TowerComplete T K := by
-  obtain ⟨c, hc⟩ := completedKoszulQuotientComparison T d r a ha K
-    (DerivedCategory.Q.objPreimage K) (DerivedCategory.Q.objObjPreimageIso K)
-  change IsIso (intrinsicCompletionUnit T d r a ha K
-    (DerivedCategory.Q.objPreimage K) (DerivedCategory.Q.objObjPreimageIso K)) at hK
-  change IsIso (d.completionUnit T K)
-  change intrinsicCompletionUnit T d r a ha K
-    (DerivedCategory.Q.objPreimage K) (DerivedCategory.Q.objObjPreimageIso K) ≫
-      c.hom = d.completionUnit T K at hc
-  rw [← hc]
-  infer_instance
-
-/-- Quotient-tower completeness implies intrinsic completeness. -/
-theorem cbcCompleteProperty_of_towerComplete (T : Scheme.{t})
-    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)
-    (K : d.derived T) (hK : d.TowerComplete T K) :
-    cbcCompleteProperty d T r a ha K := by
-  obtain ⟨c, hc⟩ := completedKoszulQuotientComparison T d r a ha K
-    (DerivedCategory.Q.objPreimage K) (DerivedCategory.Q.objObjPreimageIso K)
-  change IsIso (d.completionUnit T K) at hK
-  change IsIso (intrinsicCompletionUnit T d r a ha K
-    (DerivedCategory.Q.objPreimage K) (DerivedCategory.Q.objObjPreimageIso K))
-  change intrinsicCompletionUnit T d r a ha K
-    (DerivedCategory.Q.objPreimage K) (DerivedCategory.Q.objObjPreimageIso K) ≫
-      c.hom = d.completionUnit T K at hc
-  have : IsIso (intrinsicCompletionUnit T d r a ha K
-      (DerivedCategory.Q.objPreimage K) (DerivedCategory.Q.objObjPreimageIso K) ≫ c.hom) := by
-    rw [hc]
-    exact hK
-  exact IsIso.of_isIso_comp_right _ c.hom
-
 /-- The trivial Cartesian square of an open immersion over the identity. -/
 def cbcIdOpenImmersionSquare {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
     OpenImmersionSquare (𝟙 U) j j (𝟙 T) :=
