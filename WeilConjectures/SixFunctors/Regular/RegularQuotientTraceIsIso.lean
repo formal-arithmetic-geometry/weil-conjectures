@@ -6,8 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Regular.RegularQuotientTraceData
-import WeilConjectures.SixFunctors.Regular.RegularQuotientInjectiveKernel
-import WeilConjectures.Algebra.Homology.RegularQuotientCone.RegularQuotientConeAdjoint
+import WeilConjectures.SixFunctors.RegularQuotientTraceOnInjectiveTerms
 
 /-! # Invertibility of the normalized regular quotient coinduction trace
 
@@ -30,11 +29,31 @@ universe u
 open CategoryTheory AlgebraicGeometry
 namespace WeilConjectures
 
+attribute [-instance] PrincipalKoszulStrictReplacement.siteSmall
+  PrincipalKoszulStrictReplacement.abSheafify PrincipalKoszulStrictReplacement.abLocallyBijective
+  integralCoefficientAbSheafify integralCoefficientAbLocallyBijective
+  scalarReductionSourceDerived scalarReductionTargetDerived
+  GrothendieckTopology.hasSheafify_of_essentiallySmall
+attribute [local instance] HasDerivedCategory.standard
+attribute [local irreducible] HasDerivedCategory.standard
+
 /-- The actual quotient-linear cone trace is an isomorphism on unbounded derived categories. -/
 theorem reductionCoinductionTrace_isIso
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (n : ℕ) :
     IsIso (reductionCoinductionTrace.{u} l E T n) := by
-  sorry
+  obtain ⟨_, _, Rf, η, h⟩ :=
+    SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{
+      u + 1, u, u + 1} (Scheme.ProEt.topology T) (completedIntegralCommRingSheafUnrestricted l E T)
+  suffices ∀ K, IsIso ((reductionCoinductionTrace.{u} l E T n).app K) from
+    NatIso.isIso_of_isIso_app _
+  intro K
+  let X := DerivedCategory.Q.objPreimage K
+  have : ∀ i : ℤ, Injective ((Rf.obj X).X i) := (h X).2.2
+  have : QuasiIso (η.app X) := (h X).1
+  refine (NatTrans.isIso_app_iff_of_iso _
+    (DerivedCategory.Q.objObjPreimageIso K)).mp ?_
+  exact (NatTrans.isIso_app_iff_of_iso _ (asIso (DerivedCategory.Q.map (η.app X)))).mpr
+    (reductionCoinductionTrace_isIso_onInjectiveTerms l E T n (Rf.obj X))
 
 end WeilConjectures

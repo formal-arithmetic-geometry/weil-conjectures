@@ -43,8 +43,9 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.AffineSpace
 
-/-- Splitting off a coordinate presents affine space as a trivial line bundle. -/
-private theorem option_coordinate_pullback (n : Type u) (S : Scheme.{u}) :
+/-- Splitting off the coordinate `none` presents `𝔸(Option n; S)` as the trivial line bundle over
+`𝔸(n; S)`. -/
+theorem isPullback_reindex_some_reindex_none (n : Type u) (S : Scheme.{u}) :
     IsPullback (reindex (Option.some : n → Option n) S)
       (reindex (fun _ : PUnit.{u + 1} ↦ (none : Option n)) S)
       (AffineSpace n S ↘ S) (AffineSpace PUnit.{u + 1} S ↘ S) := by
@@ -86,8 +87,8 @@ end AlgebraicGeometry.AffineSpace
 
 namespace AlgebraicGeometry.WeilComplex
 
-/-- For any isomorphism, inverse image followed by image with compact support is identity. -/
-private theorem iso_integral_edge
+/-- Along an isomorphism, pullback followed by compact-support direct image is the identity. -/
+theorem nonempty_iso_upperStar_comp_derivedLowerShriek_of_isIso
     {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] {X Y : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
@@ -123,7 +124,8 @@ private theorem rank_zero_edge
     ⟨(AffineSpace PEmpty.{u + 1} X ↘ X) ≫ (X ↘ Spec (CommRingCat.of k₀))⟩
   have : (AffineSpace PEmpty.{u + 1} X ↘ X).IsOver
       (Spec (CommRingCat.of k₀)) := ⟨rfl⟩
-  obtain ⟨e⟩ := iso_integral_edge (k₀ := k₀) (l := l) (AffineSpace PEmpty.{u + 1} X ↘ X)
+  obtain ⟨e⟩ := nonempty_iso_upperStar_comp_derivedLowerShriek_of_isIso (k₀ := k₀) (l := l)
+    (AffineSpace PEmpty.{u + 1} X ↘ X)
   obtain ⟨t⟩ := nonempty_iso_tensorLisse_adicConstant (k₀ := k₀) (l := l) (X := X)
   have t₀ : tateTwist k₀ l X 0 ≅ 𝟭 _ := t
   simp only [Fintype.card_pempty, Int.natCast_zero, neg_zero, mul_zero]
@@ -138,8 +140,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [X.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- The natural Tate comparison needed to sum the twists in the coordinate tower. -/
-private noncomputable def twist_add_edge (m n : ℤ) :
+/-- Twisting by `m` and then by `n` is twisting by `m + n`. -/
+noncomputable def tateTwistCompTateTwistAddIso (m n : ℤ) :
     tateTwist k₀ l X m ⋙ tateTwist k₀ l X n ≅ tateTwist k₀ l X (m + n) :=
   ((objectProperty k₀ l X).fullyFaithfulι.whiskeringRight _).preimageIso
     (Functor.associator _ _ _ ≪≫
@@ -302,7 +304,7 @@ private theorem trace_option_step
     inferInstanceAs (IsSeparated (p ≫ X ↘ Spec (CommRingCat.of k₀)))
   let t := AffineSpace.reindex (fun _ : PUnit.{u + 1} ↦ (none : Option n)) X
   let s := t ≫ AffineSpace.map PUnit.{u + 1} (X ↘ Spec (CommRingCat.of k₀))
-  have hq := (AffineSpace.option_coordinate_pullback n X).flip.paste_horiz
+  have hq := (AffineSpace.isPullback_reindex_some_reindex_none n X).flip.paste_horiz
     (AffineSpace.isPullback_map (n := PUnit.{u + 1}) (X ↘ Spec (CommRingCat.of k₀)))
   have : IsSeparated q := MorphismProperty.of_isPullback hq inferInstance
   have : LocallyOfFiniteType q := MorphismProperty.of_isPullback hq inferInstance
@@ -322,7 +324,7 @@ private theorem trace_option_step
       (Functor.commShiftIso (derivedLowerShriek k₀ l p) (-2 : ℤ)) trRest
   have sum : T ⋙ R ⋙ S ≅
       tateTwist k₀ l X (-1 + -r) ⋙ shiftFunctor _ (-(2 * r) + -2) :=
-    Functor.isoWhiskerRight (twist_add_edge (-1) (-r))
+    Functor.isoWhiskerRight (tateTwistCompTateTwistAddIso (-1) (-r))
       (shiftFunctor _ (-(2 * r)) ⋙ S) ≪≫
     Functor.isoWhiskerLeft (tateTwist k₀ l X (-1 + -r))
       (shiftFunctorAdd _ (-(2 * r)) (-2)).symm
