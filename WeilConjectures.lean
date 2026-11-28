@@ -4708,6 +4708,7 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Scalar.Diag
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Scalar.DiagonalScalarEndpointComposition
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Scalar.DiagonalScalarEndpointsTranspose
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Scalar.DiagonalScalarExchangeCube
+public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Scalar.DiagonalScalarFamilyPullback
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Scalar.DiagonalScalarPullbackComparison
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Scalar.DiagonalScalarPullbackCompatibility
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Scalar.DiagonalScalarRationalStage
@@ -4818,6 +4819,8 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalFiniteCart
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalRlimForgetPullback
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalRlimForgetUnit
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalRlimPullbackEndpoints
+public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalRlimPullbackFormal
+public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalRlimPullbackScalars
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalRlimVaryingScalarMate
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalRootTowerRigidity
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTowerTraceCoefficients
@@ -17718,6 +17721,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafi
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Products
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Projective
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
@@ -17931,6 +17935,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Abelian.CommSq
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Exact
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.FunctorCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ModuleEmbedding.GabrielPopescu
