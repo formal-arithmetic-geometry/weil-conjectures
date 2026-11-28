@@ -70,6 +70,53 @@ lemma mapDerivedCategorySquareIso_isoWhiskerRight_hom {F F' : A ⥤ B} (G : B �
   simp only [mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom]
   rw [mapDerivedCategoryNatIso_isoWhiskerRight, Iso.hom_inv_id_assoc]
 
+/-- If a square `e : RA ⋙ P ≅ P ⋙ RB` is compatible with isomorphisms `RA ≅ 𝟭` and `RB ≅ 𝟭`,
+then so is its derived comparison, through `mapDerivedCategoryIdIso`. -/
+lemma mapDerivedCategorySquareIso_unitors {RA : A ⥤ A} {RB : B ⥤ B} {P : A ⥤ B}
+    [RA.Additive] [PreservesFiniteLimits RA] [PreservesFiniteColimits RA]
+    [RB.Additive] [PreservesFiniteLimits RB] [PreservesFiniteColimits RB]
+    [P.Additive] [PreservesFiniteLimits P] [PreservesFiniteColimits P]
+    (e : RA ⋙ P ≅ P ⋙ RB) (sA : RA ≅ 𝟭 A) (sB : RB ≅ 𝟭 B)
+    (h : ∀ X, e.hom.app X ≫ sB.hom.app (P.obj X) = P.map (sA.hom.app X))
+    (M : DerivedCategory A) :
+    (mapDerivedCategorySquareIso e).hom.app M ≫
+        (mapDerivedCategoryNatIso sB ≪≫ mapDerivedCategoryIdIso B).hom.app
+          (P.mapDerivedCategory.obj M) =
+      P.mapDerivedCategory.map
+        ((mapDerivedCategoryNatIso sA ≪≫ mapDerivedCategoryIdIso A).hom.app M) := by
+  have hl := congr_app (mapDerivedCategoryCompIso_id_comp P) M
+  have hr := congr_app (mapDerivedCategoryCompIso_comp_id P) M
+  have wl := congr_app (mapDerivedCategoryNatIso_isoWhiskerLeft P sB) M
+  have wr := congr_app (mapDerivedCategoryNatIso_isoWhiskerRight sA P) M
+  have he : e ≪≫ isoWhiskerLeft P sB = isoWhiskerRight sA P := by
+    ext X
+    exact h X
+  have ht := congr_app (congrArg Iso.hom (congrArg mapDerivedCategoryNatIso he)) M
+  rw [mapDerivedCategoryNatIso_trans] at ht
+  simp only [NatTrans.comp_app, whiskerLeft_app, whiskerRight_app, NatTrans.id_app]
+    at hl hr wl wr ht
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.map_comp, mapDerivedCategorySquareIso,
+    Iso.symm_hom, Category.assoc]
+  have hr' : (mapDerivedCategoryIdIso B).hom.app (D(P).obj M) =
+      (P.mapDerivedCategoryCompIso (𝟭 B)).hom.app M := by
+    rw [← cancel_epi ((P.mapDerivedCategoryCompIso (𝟭 B)).inv.app M), hr, Iso.inv_hom_id_app]
+    rfl
+  have hl' : D(P).map ((mapDerivedCategoryIdIso A).hom.app M) =
+      ((𝟭 A).mapDerivedCategoryCompIso P).hom.app M := by
+    rw [← cancel_epi (((𝟭 A).mapDerivedCategoryCompIso P).inv.app M), hl, Iso.inv_hom_id_app]
+    rfl
+  have wl' : (mapDerivedCategoryNatIso (P.isoWhiskerLeft sB)).hom.app M =
+      (P.mapDerivedCategoryCompIso RB).inv.app M ≫ (mapDerivedCategoryNatIso sB).hom.app
+        (D(P).obj M) ≫ (P.mapDerivedCategoryCompIso (𝟭 B)).hom.app M := by
+    rw [← reassoc_of% wl, Iso.inv_hom_id_app, Category.comp_id]
+  have wr' : D(P).map ((mapDerivedCategoryNatIso sA).hom.app M) =
+      (RA.mapDerivedCategoryCompIso P).hom.app M ≫
+        (mapDerivedCategoryNatIso (isoWhiskerRight sA P)).hom.app M ≫
+          ((𝟭 A).mapDerivedCategoryCompIso P).inv.app M := by
+    rw [wr, Iso.hom_inv_id_app_assoc]
+  rw [hr', hl', wr', ← ht, wl']
+  simp
+
 end SquareIso
 
 section Cube
