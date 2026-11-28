@@ -6,18 +6,14 @@ module
 
 public import Mathlib.CategoryTheory.Adjunction.Mates
 public import Mathlib.CategoryTheory.Adjunction.Restrict
-public import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-!
-# Left mates under a change of left adjoint and under restriction
+# Left mates under restriction to full subcategories
 
 For adjunctions `L₁ ⊣ R₁`, `L₂ ⊣ R₂` and a square `β : R₁ ⋙ G ⟶ H ⋙ R₂`, the left mate
-`(mateEquiv adj₁ adj₂).symm β : G ⋙ L₂ ⟶ L₁ ⋙ H` is computed here in two situations.
+`(mateEquiv adj₁ adj₂).symm β : G ⋙ L₂ ⟶ L₁ ⋙ H` is computed componentwise
+(`CategoryTheory.mateEquiv_symm_app`).
 
-* `CategoryTheory.mateEquiv_symm_app_eq_leftAdjointUniq`: for other left adjoints `S₁ ⊣ R₁`,
-  `S₂ ⊣ R₂` of the same right adjoints, the two left mates differ by the canonical isomorphisms
-  `S₁ ≅ L₁`, `S₂ ≅ L₂`; in particular one is invertible as soon as the other is
-  (`CategoryTheory.isIso_mateEquiv_symm_of_leftAdjointUniq`).
 * `CategoryTheory.map_mateEquiv_symm_restrictFullyFaithful_app`: the left mate of the
   restrictions of adjunctions to full subcategories
   (`CategoryTheory.Adjunction.restrictFullyFaithful`) is the left mate of the ambient
@@ -39,11 +35,11 @@ namespace CategoryTheory
 
 open Category Adjunction
 
-section LeftAdjointUniq
+section MateApp
 
 variable {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
-  {G : A ⥤ C} {H : B ⥤ D} {L₁ S₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ S₂ : C ⥤ D} {R₂ : D ⥤ C}
-  (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (adjS₁ : S₁ ⊣ R₁) (adjS₂ : S₂ ⊣ R₂)
+  {G : A ⥤ C} {H : B ⥤ D} {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}
+  (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
 
 /-- The component of the left mate of a square: the unit of `L₁ ⊣ R₁`, then the square, then the
 counit of `L₂ ⊣ R₂`. -/
@@ -53,32 +49,7 @@ lemma mateEquiv_symm_app (β : TwoSquare R₁ H G R₂) (X : A) :
         adj₂.counit.app (H.obj (L₁.obj X)) := by
   simp
 
-/-- The left mates of a square under two choices of left adjoints differ by the canonical
-isomorphisms between the left adjoints. -/
-lemma mateEquiv_symm_app_eq_leftAdjointUniq (β : TwoSquare R₁ H G R₂) (X : A) :
-    ((mateEquiv adj₁ adj₂).symm β).app X =
-      (leftAdjointUniq adjS₂ adj₂).inv.app (G.obj X) ≫ ((mateEquiv adjS₁ adjS₂).symm β).app X ≫
-        H.map ((leftAdjointUniq adjS₁ adj₁).hom.app X) := by
-  rw [mateEquiv_symm_app, mateEquiv_symm_app]
-  have h₁ := adjS₂.counit.naturality (H.map ((leftAdjointUniq adjS₁ adj₁).hom.app X))
-  have h₂ := β.naturality ((leftAdjointUniq adjS₁ adj₁).hom.app X)
-  simp only [Functor.comp_obj, Functor.id_obj, Functor.comp_map, Functor.id_map] at h₁ h₂
-  rw [assoc, assoc, ← h₁, ← S₂.map_comp_assoc (β.app _), ← h₂, S₂.map_comp_assoc,
-    ← S₂.map_comp_assoc (G.map _), ← G.map_comp, unit_leftAdjointUniq_hom_app,
-    leftAdjointUniq_inv_app]
-  rw [← (leftAdjointUniq adj₂ adjS₂).hom.naturality_assoc,
-    ← (leftAdjointUniq adj₂ adjS₂).hom.naturality_assoc, leftAdjointUniq_hom_app_counit]
-
-/-- Whether the left mate of a square is invertible does not depend on the chosen left
-adjoints. -/
-lemma isIso_mateEquiv_symm_of_leftAdjointUniq (β : TwoSquare R₁ H G R₂)
-    [IsIso ((mateEquiv adjS₁ adjS₂).symm β)] : IsIso ((mateEquiv adj₁ adj₂).symm β) := by
-  rw [NatTrans.isIso_iff_isIso_app]
-  intro X
-  rw [mateEquiv_symm_app_eq_leftAdjointUniq adj₁ adj₂ adjS₁ adjS₂]
-  infer_instance
-
-end LeftAdjointUniq
+end MateApp
 
 section Restrict
 

@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityDescendedTraceUniversal
+public import WeilConjectures.CategoryTheory.Adjunction.MateRestrictionComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.EtaleExtensionByZero
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.GenericPoint
@@ -58,16 +59,13 @@ for `Rh_!` (`ProEtale.CondensedRing.isIso_etaleLowerShriekExchange`) is deduced 
 change for the extension by zero on the ambient derived categories
 (`ProEtale.CondensedRing.isIso_mateEquiv_symm_derivedWeaklyEtaleLowerShriek`): whether a left
 mate is invertible does not depend on the chosen left adjoints
-(`CategoryTheory.isIso_mateEquiv_symm_of_leftAdjointUniq`), and the extension by zero restricts
+(`CategoryTheory.isIso_mateEquiv_symm_of_isIso`), and the extension by zero restricts
 to bounded constructible complexes
 (`ProEtale.CondensedRing.boundedConstructibleEtaleExtensionByZeroAdjunction`), so that the mate
 is the restriction of the ambient one (`CategoryTheory.isIso_mateEquiv_symm_restrictFullyFaithful`).
 
 ## Remaining input (left as `sorry`)
 
-* `ProEtale.CondensedRing.boundedConstructibleUpperStarOfMapSquareIso_hom_app_hom`: the
-  composition isomorphism of the pullbacks along a commutative square is the restriction of the
-  ambient pullback comparison `pullbackSquareComparison`.
 * `ProEtale.CondensedRing.isConstructibleModuleObject_weaklyEtaleLowerShriek_obj`: the extension
   by zero along an étale morphism preserves constructibility.
 
@@ -198,25 +196,47 @@ variable (l : ℕ) [Fact l.Prime] {k₁ k₂ : Type u} [Field k₁] [Field k₂]
   {πU : U'.left ⟶ U.left} {πV : V'.left ⟶ V.left}
 
 /-- The composition isomorphism `h^* ⋙ πU^* ≅ πV^* ⋙ h'^*` of the pullbacks of bounded
-constructible complexes along a commutative square `πU ≫ h = h' ≫ πV`. -/
+constructible complexes along a commutative square `πU ≫ h = h' ≫ πV`: the restriction of the
+pullback comparison `pullbackSquareComparison` of the ambient derived categories. -/
 def boundedConstructibleUpperStarOfMapSquareIso (h : U ⟶ V) (h' : U' ⟶ V')
     (w : πU ≫ h.left = h'.left ≫ πV) :
     boundedConstructibleUpperStarOfMap l (X := V) (Y := U) h.left ⋙
         boundedConstructibleUpperStarOfMap l (X := U) (Y := U') πU ≅
       boundedConstructibleUpperStarOfMap l (X := V) (Y := V') πV ⋙
         boundedConstructibleUpperStarOfMap l (X := V') (Y := U') h'.left :=
-  (boundedConstructibleUpperStarOfMapComp l h.left πU).symm ≪≫
-    eqToIso (by rw [w]) ≪≫ boundedConstructibleUpperStarOfMapComp l πV h'.left
+  NatIso.ofComponents
+    (fun M ↦ ObjectProperty.isoMk _
+      ((pullbackSquareComparison (Profinite.padicAlgClRingObj l) ⟨w.symm⟩).app M.obj))
+    fun f ↦ ObjectProperty.hom_ext _
+      ((pullbackSquareComparison (Profinite.padicAlgClRingObj l) ⟨w.symm⟩).hom.naturality f.hom)
 
+omit [Fact (ringChar k₁).Prime] [Fact (ringChar k₁ ≠ l)] [Fact (ringChar k₂).Prime]
+  [Fact (ringChar k₂ ≠ l)] [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
+  [LocallyOfFiniteType U'.hom] [QuasiCompact U'.hom] [IsSeparated U'.hom]
+  [LocallyOfFiniteType V'.hom] [QuasiCompact V'.hom] [IsSeparated V'.hom]
+  [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom] in
+/-- The components of `boundedConstructibleUpperStarOfMapSquareIso` are those of the pullback
+comparison `pullbackSquareComparison` of the ambient derived categories. -/
+lemma boundedConstructibleUpperStarOfMapSquareIso_hom_app (h : U ⟶ V) (h' : U' ⟶ V')
+    (w : πU ≫ h.left = h'.left ≫ πV) (M : Dᵇc(V.left)⟦Profinite.padicAlgClRingObj l⟧) :
+    (boundedConstructibleUpperStarOfMapSquareIso l h h' w).hom.app M = ObjectProperty.homMk
+      ((pullbackSquareComparison (Profinite.padicAlgClRingObj l) ⟨w.symm⟩).app M.obj).hom :=
+  rfl
+
+omit [Fact (ringChar k₁).Prime] [Fact (ringChar k₁ ≠ l)] [Fact (ringChar k₂).Prime]
+  [Fact (ringChar k₂ ≠ l)] [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
+  [LocallyOfFiniteType U'.hom] [QuasiCompact U'.hom] [IsSeparated U'.hom]
+  [LocallyOfFiniteType V'.hom] [QuasiCompact V'.hom] [IsSeparated V'.hom]
+  [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom] in
 /-- The composition isomorphism `h^* ⋙ πU^* ≅ πV^* ⋙ h'^*` of the pullbacks of bounded
 constructible complexes along a commutative square is, after forgetting, the pullback comparison
 `pullbackSquareComparison` of the ambient derived categories. -/
-theorem boundedConstructibleUpperStarOfMapSquareIso_hom_app_hom (h : U ⟶ V) (h' : U' ⟶ V')
-    (w : πU ≫ h.left = h'.left ≫ πV) (sq : CommSq h'.left πU πV h.left)
-    (M : Dᵇc(V.left)⟦Profinite.padicAlgClRingObj l⟧) :
+lemma boundedConstructibleUpperStarOfMapSquareIso_hom_app_hom (h : U ⟶ V) (h' : U' ⟶ V')
+    (w : πU ≫ h.left = h'.left ≫ πV) (M : Dᵇc(V.left)⟦Profinite.padicAlgClRingObj l⟧) :
     ((boundedConstructibleUpperStarOfMapSquareIso l h h' w).hom.app M).hom =
-      (pullbackSquareComparison (Profinite.padicAlgClRingObj l) sq).hom.app M.obj :=
-  sorry
+      (pullbackSquareComparison (Profinite.padicAlgClRingObj l) ⟨w.symm⟩).hom.app M.obj := by
+  -- Rewriting rather than `rfl`: the kernel would otherwise unfold `pullbackSquareComparison`.
+  rw [boundedConstructibleUpperStarOfMapSquareIso_hom_app, ObjectProperty.homMk_hom, Iso.app_hom]
 
 section General
 
@@ -378,9 +398,8 @@ theorem isIso_etaleLowerShriekExchange : IsIso (etaleLowerShriekExchange l hsq) 
       (fun X hX ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ πV X hX) _
       (pullbackSquareComparison _ hsq.flip.toCommSq).hom
       (fun M ↦ by
-        cast_proofs (boundedConstructibleUpperStarOfMapSquareIso_hom_app_hom l h h' hsq.w
-          hsq.flip.toCommSq M))
-  exact isIso_mateEquiv_symm_of_leftAdjointUniq _ _
+        cast_proofs (boundedConstructibleUpperStarOfMapSquareIso_hom_app_hom l h h' hsq.w M))
+  exact isIso_mateEquiv_symm_of_isIso _ _
     (boundedConstructibleEtaleExtensionByZeroAdjunction l h)
     (boundedConstructibleEtaleExtensionByZeroAdjunction l h') _
 

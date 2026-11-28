@@ -53,7 +53,7 @@ variable {U V U' V' : Scheme.{u}} {h : U ⟶ V} {h' : U' ⟶ V'} {πU : U' ⟶ U
 
 /-- **Weakly étale base change for the extension by zero** on the ambient derived categories:
 for a cartesian square with `h` and `h'` weakly étale, the exchange morphism
-`h'_! ⋙ πU^* ⟶ πV^* ⋙ h_!` (the left mate of the composition isomorphism of the pullbacks) is
+`πU^* ⋙ h'_! ⟶ h_! ⋙ πV^*` (the left mate of the composition isomorphism of the pullbacks) is
 an isomorphism. -/
 theorem isIso_mateEquiv_symm_derivedWeaklyEtaleLowerShriek (hsq : IsPullback πU h' h πV)
     [WeaklyEtale h] [WeaklyEtale h'] :
