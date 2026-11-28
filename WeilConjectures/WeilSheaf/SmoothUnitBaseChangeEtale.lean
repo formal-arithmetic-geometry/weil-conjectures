@@ -5,9 +5,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.WeilSheaf.SmoothPurityDescendedTraceUniversal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.EtaleExtensionByZero
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.GenericPoint
 public import WeilConjectures.SmoothPurity.EtaleUpperShriek
+import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 # The exceptional base change at the unit for étale morphisms
@@ -46,15 +48,28 @@ open
   `ProEtale.CondensedRing.etaleLowerShriekBaseChange` (the inverse of the mate of
   `πU^* h^* ≅ h'^* πV^*`), `smoothUnitBaseChange` is invertible, with no hypothesis on `bc`.
 
-## Remaining input (left as `sorry`)
+## Étale base change for `Rh_!`
 
 The adjunction `Rh_! ⊣ h^*` of an étale `h`
 (`ProEtale.CondensedRing.nonempty_boundedConstructibleLowerShriekUpperStarAdjunction_of_etale`) is
 purity in relative dimension zero, `Rh^! ≅ h^*`
-(`ProEtale.CondensedRing.boundedConstructibleUpperStarIsoUpperShriekOfEtale`). What remains is
+(`ProEtale.CondensedRing.boundedConstructibleUpperStarIsoUpperShriekOfEtale`). Étale base change
+for `Rh_!` (`ProEtale.CondensedRing.isIso_etaleLowerShriekExchange`) is deduced from the base
+change for the extension by zero on the ambient derived categories
+(`ProEtale.CondensedRing.isIso_mateEquiv_symm_derivedWeaklyEtaleLowerShriek`): whether a left
+mate is invertible does not depend on the chosen left adjoints
+(`CategoryTheory.isIso_mateEquiv_symm_of_leftAdjointUniq`), and the extension by zero restricts
+to bounded constructible complexes
+(`ProEtale.CondensedRing.boundedConstructibleEtaleExtensionByZeroAdjunction`), so that the mate
+is the restriction of the ambient one (`CategoryTheory.isIso_mateEquiv_symm_restrictFullyFaithful`).
 
-* `ProEtale.CondensedRing.isIso_etaleLowerShriekExchange`: étale base change for `Rh_!`, the
-  exchange `πU^* ⋙ Rh'_! ⟶ Rh_! ⋙ πV^*` of a cartesian square with `h` étale is invertible.
+## Remaining input (left as `sorry`)
+
+* `ProEtale.CondensedRing.boundedConstructibleUpperStarOfMapSquareIso_hom_app_hom`: the
+  composition isomorphism of the pullbacks along a commutative square is the restriction of the
+  ambient pullback comparison `pullbackSquareComparison`.
+* `ProEtale.CondensedRing.isConstructibleModuleObject_weaklyEtaleLowerShriek_obj`: the extension
+  by zero along an étale morphism preserves constructibility.
 
 The invertibility of `e : πV^* ℚ̄_ℓ ⟶ ℚ̄_ℓ` is needed: once the mate is invertible,
 `smoothUnitBaseChange` is invertible if and only if `Rh'^!(e)` is.
@@ -192,6 +207,16 @@ def boundedConstructibleUpperStarOfMapSquareIso (h : U ⟶ V) (h' : U' ⟶ V')
         boundedConstructibleUpperStarOfMap l (X := V') (Y := U') h'.left :=
   (boundedConstructibleUpperStarOfMapComp l h.left πU).symm ≪≫
     eqToIso (by rw [w]) ≪≫ boundedConstructibleUpperStarOfMapComp l πV h'.left
+
+/-- The composition isomorphism `h^* ⋙ πU^* ≅ πV^* ⋙ h'^*` of the pullbacks of bounded
+constructible complexes along a commutative square is, after forgetting, the pullback comparison
+`pullbackSquareComparison` of the ambient derived categories. -/
+theorem boundedConstructibleUpperStarOfMapSquareIso_hom_app_hom (h : U ⟶ V) (h' : U' ⟶ V')
+    (w : πU ≫ h.left = h'.left ≫ πV) (sq : CommSq h'.left πU πV h.left)
+    (M : Dᵇc(V.left)⟦Profinite.padicAlgClRingObj l⟧) :
+    ((boundedConstructibleUpperStarOfMapSquareIso l h h' w).hom.app M).hom =
+      (pullbackSquareComparison (Profinite.padicAlgClRingObj l) sq).hom.app M.obj :=
+  sorry
 
 section General
 
@@ -339,8 +364,25 @@ def etaleLowerShriekExchange :
 /-- **Étale base change for the lower shriek** on bounded constructible `ℚ̄_ℓ`-complexes: for a
 cartesian square with `h` étale, the exchange morphism `πU^* ⋙ Rh'_! ⟶ Rh_! ⋙ πV^*` is an
 isomorphism. -/
-theorem isIso_etaleLowerShriekExchange : IsIso (etaleLowerShriekExchange l hsq) :=
-  sorry
+theorem isIso_etaleLowerShriekExchange : IsIso (etaleLowerShriekExchange l hsq) := by
+  have := isIso_mateEquiv_symm_derivedWeaklyEtaleLowerShriek l hsq
+  have : IsIso ((mateEquiv (boundedConstructibleEtaleExtensionByZeroAdjunction l h)
+      (boundedConstructibleEtaleExtensionByZeroAdjunction l h')).symm
+        (.mk _ _ _ _ (boundedConstructibleUpperStarOfMapSquareIso l h h' hsq.w).hom)) :=
+    isIso_mateEquiv_symm_restrictFullyFaithful_lift _ _
+      (fun X hX ↦ boundedConstructible_weaklyEtaleLowerShriek_mapDerivedCategory_obj l h ⟨X, hX⟩)
+      (fun X hX ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ h.left X hX)
+      (fun X hX ↦ boundedConstructible_weaklyEtaleLowerShriek_mapDerivedCategory_obj l h' ⟨X, hX⟩)
+      (fun X hX ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ h'.left X hX)
+      (fun X hX ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ πU X hX)
+      (fun X hX ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ πV X hX) _
+      (pullbackSquareComparison _ hsq.flip.toCommSq).hom
+      (fun M ↦ by
+        cast_proofs (boundedConstructibleUpperStarOfMapSquareIso_hom_app_hom l h h' hsq.w
+          hsq.flip.toCommSq M))
+  exact isIso_mateEquiv_symm_of_leftAdjointUniq _ _
+    (boundedConstructibleEtaleExtensionByZeroAdjunction l h)
+    (boundedConstructibleEtaleExtensionByZeroAdjunction l h') _
 
 /-- The **compact-support base change isomorphism of an étale morphism**,
 `Rh_! ⋙ πV^* ≅ πU^* ⋙ Rh'_!`: the inverse of `etaleLowerShriekExchange`. -/
