@@ -325,4 +325,82 @@ lemma derivedRepresents_mapDerivedCategoryNatIso_trans_compIso {F : C ⥤ E}
 
 end Basic
 
+section Square
+
+variable {Ym Yn Yt Zm Zn Zt : Type*} [Category Ym] [Category Yn] [Category Yt]
+  [Category Zm] [Category Zn] [Category Zt] [Abelian Ym] [Abelian Yn] [Abelian Yt]
+  [Abelian Zm] [Abelian Zn] [Abelian Zt] [HasDerivedCategory Ym] [HasDerivedCategory Yn]
+  [HasDerivedCategory Yt] [HasDerivedCategory Zm] [HasDerivedCategory Zn]
+  [HasDerivedCategory Zt]
+
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits in
+/-- If three squares `RY ⋙ P ≅ P ⋙ RZ` are compatible with isomorphisms `RYht ⋙ RYh ≅ RYc`
+and `RZht ⋙ RZh ≅ RZc`, then so are their derived comparisons. -/
+lemma mapDerivedCategorySquareIso_compIso
+    {RYh : Yn ⥤ Ym} {RYht : Yt ⥤ Yn} {RYc : Yt ⥤ Ym}
+    {RZh : Zn ⥤ Zm} {RZht : Zt ⥤ Zn} {RZc : Zt ⥤ Zm}
+    {Pm : Ym ⥤ Zm} {Pn : Yn ⥤ Zn} {Pt : Yt ⥤ Zt}
+    [RYh.Additive] [PreservesFiniteLimits RYh] [PreservesFiniteColimits RYh]
+    [RYht.Additive] [PreservesFiniteLimits RYht] [PreservesFiniteColimits RYht]
+    [RYc.Additive] [PreservesFiniteLimits RYc] [PreservesFiniteColimits RYc]
+    [RZh.Additive] [PreservesFiniteLimits RZh] [PreservesFiniteColimits RZh]
+    [RZht.Additive] [PreservesFiniteLimits RZht] [PreservesFiniteColimits RZht]
+    [RZc.Additive] [PreservesFiniteLimits RZc] [PreservesFiniteColimits RZc]
+    [Pm.Additive] [PreservesFiniteLimits Pm] [PreservesFiniteColimits Pm]
+    [Pn.Additive] [PreservesFiniteLimits Pn] [PreservesFiniteColimits Pn]
+    [Pt.Additive] [PreservesFiniteLimits Pt] [PreservesFiniteColimits Pt]
+    (eh : RYh ⋙ Pm ≅ Pn ⋙ RZh) (eht : RYht ⋙ Pn ≅ Pt ⋙ RZht) (ec : RYc ⋙ Pm ≅ Pt ⋙ RZc)
+    (ρY : RYht ⋙ RYh ≅ RYc) (ρZ : RZht ⋙ RZh ≅ RZc)
+    (hyp : ∀ X, ec.hom.app X ≫ ρZ.inv.app (Pt.obj X) =
+      Pm.map (ρY.inv.app X) ≫ eh.hom.app (RYht.obj X) ≫ RZh.map (eht.hom.app X))
+    (M : DerivedCategory Yt) :
+    (mapDerivedCategorySquareIso ec).hom.app M ≫
+        (mapDerivedCategoryCompIso RZht RZh ≪≫ mapDerivedCategoryNatIso ρZ).inv.app
+          (Pt.mapDerivedCategory.obj M) =
+      Pm.mapDerivedCategory.map
+          ((mapDerivedCategoryCompIso RYht RYh ≪≫ mapDerivedCategoryNatIso ρY).inv.app M) ≫
+        (mapDerivedCategorySquareIso eh).hom.app (RYht.mapDerivedCategory.obj M) ≫
+        RZh.mapDerivedCategory.map ((mapDerivedCategorySquareIso eht).hom.app M) := by
+  -- the two composites, as natural transformations
+  let τ₁ : RYc.mapDerivedCategory ⋙ Pm.mapDerivedCategory ⟶
+      Pt.mapDerivedCategory ⋙ RZht.mapDerivedCategory ⋙ RZh.mapDerivedCategory :=
+    (mapDerivedCategorySquareIso ec).hom ≫ whiskerLeft _
+      (mapDerivedCategoryCompIso RZht RZh ≪≫ mapDerivedCategoryNatIso ρZ).inv
+  let τ₂ : RYc.mapDerivedCategory ⋙ Pm.mapDerivedCategory ⟶
+      Pt.mapDerivedCategory ⋙ RZht.mapDerivedCategory ⋙ RZh.mapDerivedCategory :=
+    whiskerRight (mapDerivedCategoryCompIso RYht RYh ≪≫ mapDerivedCategoryNatIso ρY).inv _ ≫
+      (associator _ _ _).hom ≫ whiskerLeft _ (mapDerivedCategorySquareIso eh).hom ≫
+      (associator _ _ _).inv ≫ whiskerRight (mapDerivedCategorySquareIso eht).hom _ ≫
+      (associator _ _ _).hom
+  have r₁ : DerivedRepresents ((ofMap RYc).comp (ofMap Pm))
+      ((ofMap Pt).comp ((ofMap RZht).comp (ofMap RZh))) τ₁
+      (ec.hom ≫ whiskerLeft Pt (ρZ.inv ≫ 𝟙 _)) := by
+    refine (derivedRepresents_mapDerivedCategorySquareIso ec).comp
+      (DerivedRepresents.whiskerLeft (ofMap Pt) ?_)
+    exact ((DerivedRepresents.inv (derivedRepresents_mapDerivedCategoryNatIso ρZ)).comp
+      (derivedRepresents_mapDerivedCategoryCompIso RZht RZh)).congr (by simp) rfl
+  have r₂ : DerivedRepresents ((ofMap RYc).comp (ofMap Pm))
+      ((ofMap Pt).comp ((ofMap RZht).comp (ofMap RZh))) τ₂
+      (whiskerRight (ρY.inv ≫ 𝟙 _) Pm ≫ (associator _ _ _).hom ≫ whiskerLeft RYht eh.hom ≫
+        (associator _ _ _).inv ≫ whiskerRight eht.hom RZh ≫ (associator _ _ _).hom) := by
+    have k : DerivedRepresents (ofMap RYc) ((ofMap RYht).comp (ofMap RYh))
+        (mapDerivedCategoryCompIso RYht RYh ≪≫ mapDerivedCategoryNatIso ρY).inv
+        (ρY.inv ≫ 𝟙 _) :=
+      ((DerivedRepresents.inv (derivedRepresents_mapDerivedCategoryNatIso ρY)).comp
+        (derivedRepresents_mapDerivedCategoryCompIso RYht RYh)).congr (by simp) rfl
+    exact (DerivedRepresents.whiskerRight k (ofMap Pm)).comp
+      ((derivedRepresents_associator _ _ _).comp
+      ((DerivedRepresents.whiskerLeft (ofMap RYht)
+        (derivedRepresents_mapDerivedCategorySquareIso eh)).comp
+      ((derivedRepresents_associator_inv _ _ _).comp
+      ((DerivedRepresents.whiskerRight (derivedRepresents_mapDerivedCategorySquareIso eht)
+        (ofMap RZh)).comp (derivedRepresents_associator _ _ _)))))
+  have e : τ₁ = τ₂ := r₁.ext' (r₂.congr rfl (by
+    ext X
+    simpa using (hyp X).symm))
+  have := congr_app e M
+  simpa [τ₁, τ₂] using this
+
+end Square
+
 end CategoryTheory.Functor
