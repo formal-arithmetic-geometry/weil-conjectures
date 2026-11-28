@@ -12,6 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.FrobeniusCorrespondence
 public import WeilConjectures.SixFunctors.Etale.Derived.FrobeniusCorrespondenceOperator
 public import WeilConjectures.SixFunctors.Etale.Derived.StalkFrobeniusIterate
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplex
+public import WeilConjectures.TraceFormula.GrothendieckLefschetz.FrobeniusPullback
 
 /-!
 # The Grothendieck–Lefschetz trace formula with finite coefficients
@@ -248,6 +249,58 @@ theorem finite_geometricFixedPoint [LocallyOfFiniteType f] [QuasiCompact f] [IsS
     fun x y h ↦
     Subtype.ext (Hom.geometricFiber_hom_ext f (congrArg Subtype.val h) (x.2.1.trans y.2.1.symm))
 
+/-- The `m`-th iterate of the scheme Frobenius `Φ_X` is the absolute `q ^ m`-power Frobenius
+followed by the `m`-th iterate of the geometric Galois Frobenius `g_X`. -/
+lemma iterateHom_geometricFiberFrobenius_eq (m : ℕ) :
+    iterateHom f.geometricFiberFrobenius m =
+      f.geometricFiber.iterateFrobenius (FiniteField.ringChar_prime (k := k))
+          f.isOfCharacteristic_geometricFiber (FiniteField.frobeniusExponent k * m) ≫
+        endIterate f.geometricGaloisFrobenius.asIso.hom m := by
+  rw [Hom.iterateFrobenius_geometricFiber_mul_eq, endIterate_hom_eq_pow_hom, Category.assoc,
+    Iso.inv_hom_id, Category.comp_id, ProEtale.iterateHom]
+
+/-- The inverse of the composition isomorphism `L(𝟙 ≫ w)^* ≅ Lw^* ⋙ L(𝟙)^*`, for a morphism `z`
+equal to `𝟙 ≫ w`, is the identity isomorphism `L(𝟙)^* ≅ 𝟭` up to the cast. -/
+lemma leftDerivedUpperStarComp_id_left_inv_app_of_eq {A : Type (u + 1)} [CommRing A]
+    {S T : Scheme.{u}} {w z : S ⟶ T} (hz : z = 𝟙 S ≫ w)
+    (K : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))) :
+    (leftDerivedUpperStarComp _ (𝟙 S) w z hz).inv.app K =
+      (leftDerivedUpperStarId _ S).hom.app (L((w)^*[ModuleCat.{u + 1} A]).obj K) ≫
+        eqToHom (by rw [hz, Category.id_comp]; rfl) := by
+  obtain rfl : z = w := hz.trans (Category.id_comp w)
+  rw [eqToHom_refl, Category.comp_id]
+  exact leftDerivedUpperStarComp_id_left_inv_app _ _ K
+
+/-- The isomorphism `κ_m : L(Φ_X^m)^* ≅ L(g_X^m)^*` is the composition isomorphism for
+`Φ_X^m = F_X ≫ g_X^m` followed by the trivialization `L(F_X)^* ≅ L(𝟙)^* ≅ 𝟭` of the pullback
+along the absolute `q ^ m`-power Frobenius `F_X`. -/
+lemma leftDerivedUpperStarGeometricFiberFrobeniusIterateIso_hom_app_eq {A : Type (u + 1)}
+    [CommRing A] (m : ℕ)
+    (K : DerivedCategory (Sheaf f.geometricFiber.smallEtaleTopology (ModuleCat.{u + 1} A))) :
+    (leftDerivedUpperStarGeometricFiberFrobeniusIterateIso _ f m).hom.app K ≫
+        eqToHom (by rw [endIterate_eq_iterateHom]; rfl) =
+      (leftDerivedUpperStarComp _ _ _ _ (iterateHom_geometricFiberFrobenius_eq f m)).hom.app K ≫
+        (leftDerivedUpperStarIterateFrobeniusIso _ (FiniteField.ringChar_prime (k := k))
+          f.isOfCharacteristic_geometricFiber (FiniteField.frobeniusExponent k * m) ≪≫
+            leftDerivedUpperStarId _ _).hom.app
+          (L((endIterate f.geometricGaloisFrobenius.asIso.hom m)^*[ModuleCat.{u + 1} A]).obj
+            K) := by
+  have P := leftDerivedUpperStarComp_hom_app_map_leftDerivedUpperStarIterateHomIso_hom_app
+    (ModuleCat.{u + 1} A) (FiniteField.ringChar_prime (k := k)) f.isOfCharacteristic_geometricFiber
+    f.isOfCharacteristic_geometricFiber (FiniteField.frobeniusExponent k)
+    (iterateFrobenius_geometricFiber_comp_geometricGaloisFrobenius_hom f) m (𝟙 _)
+    (Category.id_comp _).symm
+    (by rw [Category.id_comp, endIterate_eq_iterateHom])
+    (iterateHom_geometricFiberFrobenius_eq f m) K
+  rw [leftDerivedUpperStarComp_id_left_inv_app_of_eq] at P
+  have hI := leftDerivedUpperStarComp_id_left_hom_app (ModuleCat.{u + 1} A)
+    (iterateHom f.geometricFiberFrobenius m) K
+  rw [← P]
+  have hn := (leftDerivedUpperStarId (ModuleCat.{u + 1} A) f.geometricFiber).hom.naturality
+    ((leftDerivedUpperStarGeometricFiberFrobeniusIterateIso _ f m).hom.app K)
+  dsimp only [Functor.id_map, Functor.id_obj] at hn
+  erw [reassoc_of% hn, reassoc_of% hI]
+
 section TraceFormula
 
 variable [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f]
@@ -278,6 +331,7 @@ theorem trace_frobeniusCompactOperator_eq_finsum
           (frobeniusStalkMap x.2.2 (weilDatumIterate ψ m)) := by
   sorry
 
+omit [IsSeparated f] [HasInvertibleExponent Λ (Spec (.of (AlgebraicClosure k)))] in
 /-- For `v : L(g_X^m)^* K ⟶ K`, the operator of the Frobenius correspondence `κ_{m,K} ≫ v` along
 `Φ_X^m` is the global Frobenius operator of `v`, `T(κ_{m,K} ≫ v) = F_c(v)` on `RΓ_c(X, K)`,
 `κ_m : L(Φ_X^m)^* ≅ L(g_X^m)^*` being
@@ -292,7 +346,24 @@ theorem correspondenceOperator_iterateHom_geometricFiberFrobenius
         ((leftDerivedUpperStarGeometricFiberFrobeniusIterateIso _ f m).hom.app K ≫
           eqToHom (by rw [endIterate_eq_iterateHom]) ≫ v) =
       globalOperator Λ (isPullback_endIterate f.isPullback_geometricGaloisFrobenius m) v := by
-  sorry
+  have hp := FiniteField.ringChar_prime (k := k)
+  have hK : (ringChar k : Γ(Spec (.of (AlgebraicClosure k)), ⊤)) = 0 :=
+    isOfCharacteristic_Spec ringChar_cast_algebraicClosure
+  have : IsProper (f.geometricFiber.iterateFrobenius hp f.isOfCharacteristic_geometricFiber
+      (FiniteField.frobeniusExponent k * m)) := by
+    rw [show f.geometricFiber.iterateFrobenius hp f.isOfCharacteristic_geometricFiber
+        (FiniteField.frobeniusExponent k * m) = iterateHom f.geometricFiberFrobenius m ≫
+          inv (endIterate f.geometricGaloisFrobenius.asIso.hom m) by
+      rw [iterateHom_geometricFiberFrobenius_eq, Category.assoc, IsIso.hom_inv_id,
+        Category.comp_id]]
+    infer_instance
+  rw [reassoc_of% (leftDerivedUpperStarGeometricFiberFrobeniusIterateIso_hom_app_eq f m K)]
+  exact correspondenceOperator_comp_eq_globalOperator Λ _ hp f.isOfCharacteristic_geometricFiber hK
+    _ _ _ (iterateHom_geometricFiberFrobenius_eq f m)
+    (by rw [endIterate_hom_eq_pow_hom, ← specGeometricFrobenius_pow_inv_eq_iterateFrobenius hp hK,
+      Iso.inv_hom_id])
+    (by rw [endIterate_hom_eq_pow_hom, ← specGeometricFrobenius_pow_inv_eq_iterateFrobenius hp hK,
+      Iso.hom_inv_id]) v
 
 omit [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f]
   [HasCompactification f.geometricFiberToAlgebraicClosure] [Finite Λ]
