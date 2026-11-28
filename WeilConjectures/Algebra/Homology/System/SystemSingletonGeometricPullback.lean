@@ -463,7 +463,7 @@ theorem systemSingletonGeometricPullback
   obtain ⟨G, ordinary, tensor, heval, hgen, habove, hmul⟩ :=
     geometricSystemOrdinaryComparison BY BX u I htransition SY TY SX TX
   obtain ⟨comparison, scalar, hrep, hdmul, hsrep, hlower⟩ :=
-    geometricSystemDerivedLift SY TY SX TX G ordinary tensor heval hgen habove hmul
+    geometricSystemDerivedLift SY TY SX TX G ordinary tensor heval hmul
   let F : SystemGeometricInverseImageData BY BX u I :=
     { functor := G.functor
       additive := G.additive

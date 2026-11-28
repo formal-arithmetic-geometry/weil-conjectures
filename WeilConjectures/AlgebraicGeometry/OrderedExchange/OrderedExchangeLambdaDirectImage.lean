@@ -11,6 +11,7 @@ import all WeilConjectures.AlgebraicGeometry.OrderedExchange.OrderedExchangeCoef
 import all WeilConjectures.AlgebraicGeometry.OrderedExchange.OrderedExchangeRhoLambda
 import all WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMateNormalization
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquareChainMap
 
 /-! # Restriction commutes with the direct-image/derived-limit comparisons
 
@@ -27,62 +28,6 @@ set_option backward.isDefEq.respectTransparency.types false
 universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory.Functor
-
-section SquareIsoQ
-
-variable {𝒜 ℬ ℬ' ℰ : Type*} [Category 𝒜] [Category ℬ] [Category ℬ'] [Category ℰ]
-  [Abelian 𝒜] [Abelian ℬ] [Abelian ℬ'] [Abelian ℰ] [HasDerivedCategory 𝒜]
-  [HasDerivedCategory ℬ] [HasDerivedCategory ℬ'] [HasDerivedCategory ℰ]
-  {F₁ : 𝒜 ⥤ ℬ} {F₂ : ℬ ⥤ ℰ} {G₁ : 𝒜 ⥤ ℬ'} {G₂ : ℬ' ⥤ ℰ}
-  [F₁.Additive] [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
-  [F₂.Additive] [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
-  [G₁.Additive] [PreservesFiniteLimits G₁] [PreservesFiniteColimits G₁]
-  [G₂.Additive] [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂]
-
-/-- The levelwise square of complexes, with source and target in iterated form. -/
-@[simps f]
-def squareChainMap (e : F₁ ⋙ F₂ ⟶ G₁ ⋙ G₂) (K : CochainComplex 𝒜 ℤ) :
-    (F₂.mapHomologicalComplex (.up ℤ)).obj ((F₁.mapHomologicalComplex (.up ℤ)).obj K) ⟶
-      (G₂.mapHomologicalComplex (.up ℤ)).obj ((G₁.mapHomologicalComplex (.up ℤ)).obj K) where
-  f i := e.app (K.X i)
-  comm' i j _ := by simpa using (e.naturality (K.d i j)).symm
-
-/-- On a complex, the exact descent of a square is the levelwise square, after the
-factorization isomorphisms. -/
-@[reassoc]
-theorem mapDerivedCategorySquareIso_hom_app_Q (e : F₁ ⋙ F₂ ≅ G₁ ⋙ G₂)
-    (K : CochainComplex 𝒜 ℤ) :
-    (mapDerivedCategorySquareIso e).hom.app (DerivedCategory.Q.obj K) ≫
-        G₂.mapDerivedCategory.map (G₁.mapDerivedCategoryFactors.hom.app K) ≫
-        G₂.mapDerivedCategoryFactors.hom.app ((G₁.mapHomologicalComplex (.up ℤ)).obj K) =
-      F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactors.hom.app K) ≫
-        F₂.mapDerivedCategoryFactors.hom.app ((F₁.mapHomologicalComplex (.up ℤ)).obj K) ≫
-        DerivedCategory.Q.map (squareChainMap e.hom K) := by
-  simp only [mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-    Category.assoc]
-  rw [mapDerivedCategoryCompIso_hom_app_factors, mapDerivedCategoryNatIso_fac,
-    ← mapDerivedCategoryCompIso_hom_app_factors_assoc F₁ F₂ K, Iso.hom_inv_id_app_assoc]
-  rfl
-
-/-- The inverse form of `mapDerivedCategorySquareIso_hom_app_Q`. -/
-@[reassoc]
-theorem mapDerivedCategorySquareIso_inv_app_Q (e : F₁ ⋙ F₂ ≅ G₁ ⋙ G₂)
-    (K : CochainComplex 𝒜 ℤ) :
-    (mapDerivedCategorySquareIso e).inv.app (DerivedCategory.Q.obj K) ≫
-        F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactors.hom.app K) ≫
-        F₂.mapDerivedCategoryFactors.hom.app ((F₁.mapHomologicalComplex (.up ℤ)).obj K) =
-      G₂.mapDerivedCategory.map (G₁.mapDerivedCategoryFactors.hom.app K) ≫
-        G₂.mapDerivedCategoryFactors.hom.app ((G₁.mapHomologicalComplex (.up ℤ)).obj K) ≫
-        DerivedCategory.Q.map (squareChainMap e.inv K) := by
-  have h := mapDerivedCategorySquareIso_hom_app_Q e K
-  have hid : squareChainMap e.hom K ≫ squareChainMap e.inv K = 𝟙 _ := by
-    ext i
-    simp
-  rw [← cancel_epi ((mapDerivedCategorySquareIso e).hom.app (DerivedCategory.Q.obj K)),
-    Iso.hom_inv_id_app_assoc, reassoc_of% h, ← DerivedCategory.Q.map_comp, hid,
-    DerivedCategory.Q.map_id, Category.comp_id]
-
-end SquareIsoQ
 
 section Cube
 
