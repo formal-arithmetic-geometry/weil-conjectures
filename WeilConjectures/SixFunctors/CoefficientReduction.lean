@@ -14,7 +14,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeLowerStarDualizable
 public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsHom
 public import WeilConjectures.SixFunctors.Etale.Derived.ScalarExtension
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.LowerStarDualizable
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.Hom
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.LowerStarFree
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.OpenImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom
@@ -69,9 +70,14 @@ common-stage scalar extension `𝒪_E → 𝒪_{E'}` with its rationalization. T
 - `AlgebraicGeometry.coefficientChangeCompatibility`: the reduction of coefficients commutes with
   the basic operations.
 - `AlgebraicGeometry.Etale.exists_isDerivedBaseChange_leftDerivedUpperStar`,
-  `AlgebraicGeometry.Etale.exists_isDerivedBaseChange_derivedTensor` and the pro-étale
-  `AlgebraicGeometry.ProEtale.exists_isDerivedBaseChange_derivedTensor`: derived pullback and
-  derived tensor product commute with derived base change along any ring morphism.
+  `AlgebraicGeometry.Etale.exists_isDerivedBaseChange_derivedTensor` and their pro-étale
+  analogues: derived pullback and derived tensor product commute with derived base change along
+  any ring morphism.
+- `AlgebraicGeometry.Etale.exists_isDerivedBaseChange_rightDerivedLowerStar_of_isIso`,
+  `AlgebraicGeometry.Etale.exists_isDerivedBaseChange_rightDerivedLowerShriek_of_isIso` and their
+  pro-étale analogues: the (compact-support) direct image commutes with derived base change as
+  soon as the base change map of `Rg_*` is an isomorphism, which holds for the reduction modulo
+  `(ϖ)ⁿ` and for finite free scalar extensions.
 - `AlgebraicGeometry.Etale.exists_isDerivedBaseChange_arrowIso_reductionModIdeal_projectionMap`:
   the reduction of `PF_{f, K, L}` modulo `(ϖ)ⁿ` is isomorphic, as an arrow, to the restriction
   of scalars of `PF_{f, K_n, L_n}`.
@@ -1160,7 +1166,8 @@ theorem reductionCompatibility {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ) (n : 
   rightDerivedLowerStar f K Kn η hη :=
     exists_isDerivedBaseChange_rightDerivedLowerStar_of_isIso _ _ f K Kn η hη
       (isIso_rightDerivedLowerStarExtendScalarsMap_app_quotient_span_pow hϖ n f K)
-  derivedHom := sorry
+  derivedHom K L Kn Ln η η' hη hη' :=
+    exists_isDerivedBaseChange_derivedHom_quotient_span_pow _ hϖ n hη hη'
   rightDerivedUpperShriek := sorry
 
 /-- Reduction `Λ ⧸ (ϖ)ⁿ → Λ ⧸ (ϖ)ᵐ` between finite quotients commutes with the basic operations
@@ -1186,9 +1193,15 @@ theorem scalarExtensionCompatibility (l : ℕ) [Fact l.Prime] (E E' : Type) [Fie
     exists_isDerivedBaseChange_leftDerivedUpperStar _ f L L' η hη
   derivedTensor K L _ _ K' L' η η' hη hη' :=
     exists_isDerivedBaseChange_derivedTensor _ K L K' L' η η' hη hη'
-  rightDerivedLowerShriekOfCompactification := sorry
+  rightDerivedLowerShriekOfCompactification c K _ K' η hη := by
+    let := (PadicAlgCl.integersShrinkMap.{0, u} l E E').toAlgebra
+    exact exists_isDerivedBaseChange_rightDerivedLowerShriekOfCompactification_of_isIso _ _ c K
+      K' η hη (isIso_rightDerivedLowerStarExtendScalarsMap_app_integersShrinkMap l E E' _)
   exchange := sorry
-  rightDerivedLowerStar := sorry
+  rightDerivedLowerStar f K K' η hη := by
+    let := (PadicAlgCl.integersShrinkMap.{0, u} l E E').toAlgebra
+    exact exists_isDerivedBaseChange_rightDerivedLowerStar_of_isIso _ _ f K K' η hη
+      (isIso_rightDerivedLowerStarExtendScalarsMap_app_integersShrinkMap l E E' f K)
 
 end ProEtale
 
