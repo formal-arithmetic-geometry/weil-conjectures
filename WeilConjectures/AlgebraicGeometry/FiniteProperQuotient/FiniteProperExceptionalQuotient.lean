@@ -280,7 +280,8 @@ private theorem mate_refl_of_transpose {C D : Type*} [Category C] [Category D] (
   have n := δ.hom.naturality (sC.hom.app K)
   dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj] at n
   rw [← n, ← F.map_comp_assoc, hC, ← cancel_mono (ρD.hom.app (F.obj K)), ← h K]
-  simp [← F.map_comp]
+  simp only [Functor.id_obj, Functor.comp_obj, Category.assoc, Iso.hom_inv_id_app_assoc,
+    Iso.inv_hom_id_app_map]
   rw [h K, Iso.inv_hom_id_app]
   rfl
 

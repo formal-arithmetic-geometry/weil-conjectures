@@ -81,9 +81,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Tate.ProEtaleTateTwists
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 import Mathlib.CategoryTheory.Localization.Predicate
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalRlimPullbackFormal
+import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalRlimPullbackScalars
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalRlimVaryingScalarMate
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceVaryingScalarSquare
-import all WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceUnitComparisonIso
 
 /-! # Derived-limit pullback comparison with normalized endpoints
 -/
@@ -204,94 +204,12 @@ def diagonalRlimVaryingSquare (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
   letI := rX.colimits
   exact diagonalRlimExactSquare rS.F (diagonalRlimTowerPull l f) g.pull rX.F v
 
-/-- The transitions of a restricted coefficient tower are epimorphisms. -/
-theorem coefficientTower_transition_epi (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {T : Scheme.{u}}
-    [DiagonalTraceLocalizations l T] {c : Chern l E T} {r : Restriction l E T}
-    (a : Coefficients l E T c r) (n : ℕ) :
-    Epi ((r.F.obj (coefficient T (Arings l E T))).map (homOfLE (Nat.le_succ n)).op) :=
-  forgottenTower_epi l T _
-    (towerTransitions_of_iso a.coefficientForget (coefficientTransitions_epi l T)) n
-
-/-- The transitions of a restricted root-line tower are epimorphisms when `l` is invertible. -/
-theorem lineTower_transition_epi (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {T : Scheme.{u}}
-    [DiagonalTraceLocalizations l T] [∀ x : T, Invertible (l : T.residueField x)]
-    {c : Chern l E T} {r : Restriction l E T} (a : Coefficients l E T c r) (n : ℕ) :
-    Epi ((r.F.obj (lineModule l E c)).map (homOfLE (Nat.le_succ n)).op) := by
-  have hroot (n : ℕ) : Epi ((roots l T).map (homOfLE (Nat.le_succ n)).op) := by
-    simpa only [roots, Scheme.proEtaleRootsOfUnityTower,
-      Functor.ofOpSequence_map_homOfLE_succ] using
-        Scheme.purTwistRootTransitions_epi T l n
-  exact forgottenTower_epi l T _ (towerTransitions_of_iso a.lineForget hroot) n
-
-/-- Exact inverse image of fixed discrete scalar sheaves preserves the limit of the restricted
-coefficient tower, the tower of the quotients `ℤ/l^(n+1)`. -/
-theorem diagonalRlimPull_coefficientTower_limit (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
-    (f : X ⟶ S) [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
-    {cS : Chern l (ULift.{u} (Padic l)) S} {rS : Restriction l (ULift.{u} (Padic l)) S}
-    (aS : Coefficients l (ULift.{u} (Padic l)) S cS rS) :
-    IsIso (limit.post (rS.F.obj (coefficient S (Arings l (ULift.{u} (Padic l)) S)))
-      (diagonalRlimPull l f)) := by
-  sorry
-
-/-- Exact inverse image of fixed discrete scalar sheaves preserves the limit of the restricted
-root-line tower, the tower of the roots of unity `μ_(l^(n+1))`, when `l` is invertible. -/
-theorem diagonalRlimPull_lineTower_limit (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
-    (f : X ⟶ S) [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
-    [∀ x : X, Invertible (l : X.residueField x)] [∀ y : S, Invertible (l : S.residueField y)]
-    {cS : Chern l (ULift.{u} (Padic l)) S} {rS : Restriction l (ULift.{u} (Padic l)) S}
-    (aS : Coefficients l (ULift.{u} (Padic l)) S cS rS) :
-    IsIso (limit.post (rS.F.obj (lineModule l (ULift.{u} (Padic l)) cS))
-      (diagonalRlimPull l f)) := by
-  sorry
-
-/-- The direct image of completed coefficient modules commutes with the restriction to the
-fixed discrete scalars, by an isomorphism which is the identity on sections. -/
-theorem diagonalCompletedScalarPush_exists (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
-    (f : X ⟶ S) :
-    ∃ d : Scheme.proEtaleRingModuleDirectImage f
-          (Scheme.purTwistZlCompletion S l) (Scheme.purTwistZlCompletion X l)
-          (asIso (diagonalCompletedCoefficientMap l f)) ⋙ diagonalCompletedRestriction l S ≅
-        diagonalCompletedRestriction l X ⋙
-          lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f,
-      ∀ (M : DiagonalCompleted l X) (U : S.ProEtᵒᵖ)
-        (x : ((Scheme.proEtaleRingModuleDirectImage f
-          (Scheme.purTwistZlCompletion S l) (Scheme.purTwistZlCompletion X l)
-          (asIso (diagonalCompletedCoefficientMap l f)) ⋙
-          diagonalCompletedRestriction l S).obj M).obj.obj U),
-        HEq ((d.hom.app M).hom.app U x) x := by
-  sorry
-
-/-- The inverse-image mate of a section-preserving comparison between completed direct image
-and restriction to the fixed discrete scalars is invertible. -/
-theorem diagonalCompletedScalarMate_isIso (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
-    (f : X ⟶ S)
-    (d : Scheme.proEtaleRingModuleDirectImage f
-          (Scheme.purTwistZlCompletion S l) (Scheme.purTwistZlCompletion X l)
-          (asIso (diagonalCompletedCoefficientMap l f)) ⋙ diagonalCompletedRestriction l S ≅
-        diagonalCompletedRestriction l X ⋙
-          lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f)
-    (hd : ∀ (M : DiagonalCompleted l X) (U : S.ProEtᵒᵖ)
-        (x : ((Scheme.proEtaleRingModuleDirectImage f
-          (Scheme.purTwistZlCompletion S l) (Scheme.purTwistZlCompletion X l)
-          (asIso (diagonalCompletedCoefficientMap l f)) ⋙
-          diagonalCompletedRestriction l S).obj M).obj.obj U),
-        HEq ((d.hom.app M).hom.app U x) x) :
-    IsIso ((mateEquiv (Scheme.proEtaleRingModuleAdjunction f
-          (Scheme.purTwistZlCompletion S l) (Scheme.purTwistZlCompletion X l)
-          (asIso (diagonalCompletedCoefficientMap l f)))
-        (upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f)).symm
-        (TwoSquare.mk _ _ _ _ d.hom)) := by
-  sorry
-
 -- The statement writes `ℕᵒᵖ ⥤ DiagonalMod l _` rather than the abbreviation `DiagonalSystems l _`,
 -- matching the types of the `DiagonalRlim` fields, and writes the cone conjunct with the
 -- `whiskeringRight` functor of `LocalChernConeMate`. Mixed spellings under projections such as
 -- `Functor.obj` make the kernel unfold derived-category functors on every comparison.
 /-- The normalized mate on the actual quotient and root towers, its full ordinary cones,
 shifted coefficient and root-line arrows, scalar restrictions, and derived morphisms. -/
-set_option profiler true in
 theorem diagonalRlim_pullback_endpoints (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X ⟶ S)
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -425,20 +343,56 @@ theorem diagonalRlim_pullback_endpoints (l : ℕ) [Fact l.Prime] {X S : Scheme.{
           (diagonalRlimPullbackMate l f LX LS adjX adjS).app K' =
         (diagonalRlimPullbackMate l f LX LS adjX adjS).app K ≫
           ((diagonalRlimTowerPull l f).mapDerivedCategory ⋙ LX.R).map z) := by
-  let : IsGrothendieckAbelian.{u + 1} (ℕᵒᵖ ⥤ DiagonalMod l X) :=
-    isGrothendieckAbelian_tower (DiagonalMod l X)
-  let : IsGrothendieckAbelian.{u + 1} (ℕᵒᵖ ⥤ DiagonalMod l S) :=
-    isGrothendieckAbelian_tower (DiagonalMod l S)
-  have hresX (K : CochainComplex (ℕᵒᵖ ⥤ DiagonalMod l X) ℤ) :
-      ∃ (I : CochainComplex (ℕᵒᵖ ⥤ DiagonalMod l X) ℤ) (q : K ⟶ I),
-        I.IsKInjective ∧ QuasiIso q := by
-    obtain ⟨I, hI, q, _, hq⟩ := Abelian.HasKInjectiveResolutions.exists_isKInjective K
-    exact ⟨I, q, hI, hq⟩
-  have hresS (K : CochainComplex (ℕᵒᵖ ⥤ DiagonalMod l S) ℤ) :
-      ∃ (I : CochainComplex (ℕᵒᵖ ⥤ DiagonalMod l S) ℤ) (q : K ⟶ I),
-        I.IsKInjective ∧ QuasiIso q := by
-    obtain ⟨I, hI, q, _, hq⟩ := Abelian.HasKInjectiveResolutions.exists_isKInjective K
-    exact ⟨I, q, hI, hq⟩
-  sorry
+  have hcX := diagonalRlim_counitFac l X LX adjX hCounitX
+  have hcS := diagonalRlim_counitFac l S LS adjS hCounitS
+  have hcone := diagonalRlim_mate_coneMap (diagonalRlimPull l f) LX LS adjX adjS hcX hcS
+  have : (diagonalRlimPull l f).IsLeftAdjoint :=
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f).isLeftAdjoint
+  refine ⟨fun K n ↦ diagonalRlim_mate_projection (diagonalRlimPull l f) LX LS adjX adjS
+      hProjectionX hProjectionS n K, ?_, ?_, hcone, fun m ↦ ?_, fun m ↦ ?_, ?_, ?_,
+    diagonalRlim_mate_commShift (diagonalRlimPull l f) LX LS adjX adjS
+      (diagonalRlim_counit_commShift l X LX adjX hcX)
+      (diagonalRlim_counit_commShift l S LS adjS hcS),
+    fun z ↦ (diagonalRlimPullbackMate l f LX LS adjX adjS).naturality z⟩
+  · exact diagonalRlim_mate_app_isIso (diagonalRlimPull l f) LX LS adjX adjS hcone _
+      (diagonalOrdinaryRlim_isIso_of_epi l S LS _
+        (coefficientTower_transition_epi l (ULift.{u} (Padic l)) aS))
+      (diagonalOrdinaryRlim_isIso_of_epi l X LX _ fun n ↦ by
+        have := coefficientTower_transition_epi l (ULift.{u} (Padic l)) aS n
+        exact (diagonalRlimPull l f).map_epi _)
+      (upperStar_preserves_coefficientTower_limit l f aS)
+  · exact diagonalRlim_mate_app_isIso (diagonalRlimPull l f) LX LS adjX adjS hcone _
+      (diagonalOrdinaryRlim_isIso_of_epi l S LS _
+        (lineTower_transition_epi l (ULift.{u} (Padic l)) aS))
+      (diagonalOrdinaryRlim_isIso_of_epi l X LX _ fun n ↦ by
+        have := lineTower_transition_epi l (ULift.{u} (Padic l)) aS n
+        exact (diagonalRlimPull l f).map_epi _)
+      (upperStar_preserves_lineTower_limit l f aS)
+  · congr 1
+    exact diagonalRlim_mate_exactConeComparison (diagonalRlimPull l f)
+      (diagonalCompletedRestriction l S) rS.F LX LS adjX adjS hcone _ _ _
+  · congr 1
+    exact diagonalRlim_mate_exactConeComparison (diagonalRlimPull l f)
+      (diagonalCompletedRestriction l S) rS.F LX LS adjX adjS hcone _ _ _
+  · intro b g rX
+    let d := diagonalTraceVaryingScalarSquare l f b g rS rX
+    have hd := diagonalTraceVaryingScalarSquare_hom_app_app_hom_app l f b g rS rX
+    have := diagonalRlimVaryingScalarMate l f b g rS rX d hd
+    refine ⟨d, asIso ((mateEquiv g.ordinaryAdjunction
+      ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f).whiskerRight
+        ℕᵒᵖ)).symm (TwoSquare.mk _ _ _ _ d.hom)), hd, ?_, ?_⟩
+    · exact Equiv.apply_symm_apply _ _
+    · simp only [diagonalRlimVaryingSquare, diagonalRlimExactSquare, Iso.trans_hom, Iso.symm_hom]
+      infer_instance
+  · obtain ⟨d, hd⟩ := diagonalCompletedScalarPush_exists l f
+    have := diagonalCompletedScalarMate_isIso l f d hd
+    refine ⟨d, asIso ((mateEquiv (Scheme.proEtaleRingModuleAdjunction f
+      (Scheme.purTwistZlCompletion S l) (Scheme.purTwistZlCompletion X l)
+      (asIso (diagonalCompletedCoefficientMap l f)))
+      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f)).symm
+      (TwoSquare.mk _ _ _ _ d.hom)), hd, ?_, ?_⟩
+    · exact Equiv.apply_symm_apply _ _
+    · simp only [diagonalRlimExactSquare, Iso.trans_hom, Iso.symm_hom]
+      infer_instance
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace
