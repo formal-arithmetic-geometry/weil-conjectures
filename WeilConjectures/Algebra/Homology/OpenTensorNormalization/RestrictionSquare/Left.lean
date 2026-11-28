@@ -27,8 +27,7 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
     (o : Operations (finiteInput A gU j' j g sq) t)
     (e : FiniteComparisons A o)
 
--- False positive: the statement does not elaborate without `[IsOpenImmersion j']`.
-set_option linter.unusedSectionVars false in
+omit [IsOpenImmersion j'] in
 /-- The left half: the restricted tensor model, the open pin and the mixed representative
 equation. -/
 theorem leftEq (P Q : CochainComplex (FiniteModules A X) ℤ)
@@ -38,6 +37,7 @@ theorem leftEq (P Q : CochainComplex (FiniteModules A X) ℤ)
       ((finiteComplexRealization e.realizeX).obj Q)) :
     LeftEq A gU j' j g sq o e P Q hp hq := by
   constructor
+  have := sq.isOpenImmersion'
   let : (restrict .ordinary j (finiteInput A gU j' j g sq).R).Additive :=
     (restriction_exact .ordinary j (finiteInput A gU j' j g sq).R).1
   exact representative_square_left

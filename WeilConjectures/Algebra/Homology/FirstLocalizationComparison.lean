@@ -44,9 +44,8 @@ variable (R A B Aq D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} R)]
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
 
--- The included scalar-tower hypotheses belong to the statement; the proof does not use them.
-set_option linter.unusedSectionVars false in
-include tAD tBD tAqD tBqD tAAqD in
+omit [Algebra A D] [Algebra Aq D] in
+include tBD tBqD in
 /-- Comparison square for the characterized localization map. -/
 theorem firstLocalization_comparison (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)

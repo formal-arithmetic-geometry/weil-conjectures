@@ -27,8 +27,7 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
     (o : Operations (finiteInput A gU j' j g sq) t)
     (e : FiniteComparisons A o)
 
--- `IsOpenImmersion j'` is needed to elaborate the proof but is erased from the final term.
-set_option linter.unusedSectionVars false in
+omit [IsOpenImmersion j'] in
 /-- The right half: the tensor model on `U`, the ringed tensor comparison and the open pin. -/
 theorem rightEq (P Q : CochainComplex (FiniteModules A X) ℤ)
     (hp : resolving (finiteInput A gU j' j g sq).R
@@ -37,6 +36,7 @@ theorem rightEq (P Q : CochainComplex (FiniteModules A X) ℤ)
       ((finiteComplexRealization e.realizeX).obj Q)) :
     RightEq A gU j' j g sq o e P Q hp hq := by
   constructor
+  have := sq.isOpenImmersion'
   let : (restrict .ordinary j (finiteInput A gU j' j g sq).R).Additive :=
     (restriction_exact .ordinary j (finiteInput A gU j' j g sq).R).1
   have hpL := o.tensorComparison.preserves ((finiteComplexRealization e.realizeX).obj P) hp

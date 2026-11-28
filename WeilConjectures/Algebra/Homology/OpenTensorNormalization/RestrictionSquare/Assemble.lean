@@ -27,6 +27,7 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
     (o : Operations (finiteInput A gU j' j g sq) t)
     (e : FiniteComparisons A o)
 
+omit [IsOpenImmersion j'] in
 /-- The representative square from its two halves and the chain-level equation. -/
 theorem squareEq_of_halves (P Q : CochainComplex (FiniteModules A X) ℤ)
     (hp : resolving (finiteInput A gU j' j g sq).R
@@ -53,6 +54,7 @@ theorem squareEq_of_halves (P Q : CochainComplex (FiniteModules A X) ℤ)
           o.tensorComparison.comm ((finiteComplexRealization e.realizeX).obj P)
             ((finiteComplexRealization e.realizeX).obj Q)) :
     SquareEq A gU j' j g sq o e P Q := by
+  have := sq.isOpenImmersion'
   have := suffix_isIso A gU j' j g sq o e P Q hp hq
   exact ⟨(cancel_mono (suffix A gU j' j g sq o e P Q hp hq)).1 (hL.eq.trans
     ((congrArg (fun z ↦ restrictionTransport% ≫ DerivedCategory.Q.map z) (h_total P Q)).trans

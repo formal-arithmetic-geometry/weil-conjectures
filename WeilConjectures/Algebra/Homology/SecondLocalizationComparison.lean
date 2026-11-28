@@ -80,9 +80,8 @@ variable (R A B Bp D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
   [HasDerivedCategory.{w} (ModuleCat.{u} Bp)]
 
--- The included scalar-tower hypotheses belong to the statement; the proof does not use them.
-set_option linter.unusedSectionVars false in
-include tRB tAD tBD tApD tBpD tBBpD in
+omit [Algebra A D] in
+include tRB tBD tBpD tBBpD in
 /-- The localized comparison commutes with the characterized coefficient map. -/
 theorem secondLocalization_comparison (hflat : (algebraMap B Bp).Flat) (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)

@@ -48,7 +48,8 @@ variable (R A B Rp D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
   [HasDerivedCategory.{w} (ModuleCat.{u} Rp)]
 
-include tRpA tRpB tAD tBD tApD tBpD in
+omit [Algebra A D] in
+include tRpA tRpB tBD tBpD in
 /-- Compatibility of the characterized map with localized augmentation. -/
 theorem baseLocalization_comparison (S : Submonoid R) [IsLocalization S Rp] (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)

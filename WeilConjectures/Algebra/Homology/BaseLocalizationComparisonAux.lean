@@ -44,11 +44,10 @@ variable (R A B Rp D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
   [HasDerivedCategory.{w} (ModuleCat.{u} Rp)]
 
--- Keep the included scalar-tower parameters in the statement even though the proof needs fewer.
-set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-include tRpA tRpB tAD tBD tApD tBpD in
+omit [Algebra A D] in
+include tRpA tRpB tBD tBpD in
 /-- The base-localization comparison identity on extension generators. -/
 theorem baseLocalization_comparison_aux (S : Submonoid R) [IsLocalization S Rp]
     (i : ℤ) (Q : CochainComplex (ModuleCat.{u} A) ℤ)

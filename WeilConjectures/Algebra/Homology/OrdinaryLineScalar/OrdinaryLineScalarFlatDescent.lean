@@ -226,8 +226,6 @@ private theorem flat_restriction_fullyFaithful :
   exact ⟨ff.ofIso ((Functor.whiskeringLeft _ _ _).mapIso
     (Functor.isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso A)))⟩
 
--- The `simp only` form of the normalizing `simp` breaks the kernel check of the final identity.
-set_option linter.flexible false in
 /-- Descend a fixed ordinary comparison with exact signed-line tensors. -/
 theorem ordinary_scalar_line_flat_descent
     (α : R ⟶ S) (p : SuccessiveDerivedQuotient.Presentation.{t + 1, t, max a (t + 1), w}
@@ -291,18 +289,21 @@ theorem ordinary_scalar_line_flat_descent
   have hi : IsIso (compute p Y) := by
     rw [← complexComputation_app α p Y]
     exact computation_iso α p Y hY
-  -- Normalize the presentation maps before supplying the fixed categorical identity below.
-  simp [complexComputation_app, E, T]
-  have hfinal := Category.comp_id
-    (p.derived.map ((l.factors m).hom.app Y) ≫
+  have hfinal : p.derived.map ((l.factors m).hom.app Y) ≫
       compute p (((tensor L m).mapHomologicalComplex (.up ℤ)).obj Y) ≫
-      𝒬[S].map ((Functor.mapHomologicalComplexCompIso (o m) (.up ℤ)).hom.app Y))
-  simp only [Category.assoc] at hfinal
-  -- The two composite-complex encodings are definitionally equal; the kernel checks this.
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let some h := (← Lean.getLCtx).findFromUserName? `hfinal
-      | Lean.throwError "missing identity calculation"
-    (← Lean.Elab.Tactic.getMainGoal).assign h.toExpr
-    Lean.Elab.Tactic.replaceMainGoal []
+      𝒬[S].map ((Functor.mapHomologicalComplexCompIso (o m) (.up ℤ)).hom.app Y) ≫
+      𝟙 (𝒬[S].obj (((tensor K m).mapHomologicalComplex (.up ℤ)).obj
+        ((p.ordinary.mapHomologicalComplex (.up ℤ)).obj Y))) =
+      p.derived.map ((l.factors m).hom.app Y) ≫
+      compute p (((tensor L m).mapHomologicalComplex (.up ℤ)).obj Y) ≫
+      𝒬[S].map ((Functor.mapHomologicalComplexCompIso (o m) (.up ℤ)).hom.app Y) := by
+    have h := Category.comp_id
+      (p.derived.map ((l.factors m).hom.app Y) ≫
+        compute p (((tensor L m).mapHomologicalComplex (.up ℤ)).obj Y) ≫
+        𝒬[S].map ((Functor.mapHomologicalComplexCompIso (o m) (.up ℤ)).hom.app Y))
+    simp only [Category.assoc] at h
+    exact h
+  -- Normalize the presentation maps before supplying the fixed categorical identity below.
+  simpa [complexComputation_app, E, T] using hfinal
 
 end SheafOfModules.OrdinaryLineScalar

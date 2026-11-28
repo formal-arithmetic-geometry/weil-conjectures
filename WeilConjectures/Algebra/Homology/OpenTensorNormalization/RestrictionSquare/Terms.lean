@@ -72,8 +72,7 @@ def suffix (P Q : CochainComplex (FiniteModules A X) ℤ)
       ((total (finiteInput A gU j' j g sq).R).obj
         ((finiteComplexRealization e.realizeX).obj P, (finiteComplexRealization e.realizeX).obj Q))
 
--- `IsOpenImmersion j'` is needed to elaborate the proof but is erased from the final term.
-set_option linter.unusedSectionVars false in
+omit [IsOpenImmersion j'] in
 /-- The cancellable suffix is invertible. -/
 theorem suffix_isIso (P Q : CochainComplex (FiniteModules A X) ℤ)
     (hp : resolving (finiteInput A gU j' j g sq).R
@@ -81,6 +80,7 @@ theorem suffix_isIso (P Q : CochainComplex (FiniteModules A X) ℤ)
     (hq : resolving (finiteInput A gU j' j g sq).R
       ((finiteComplexRealization e.realizeX).obj Q)) :
     IsIso (suffix A gU j' j g sq o e P Q hp hq) :=
+  haveI := sq.isOpenImmersion'
   representative_suffix_isIso (QX := DerivedCategory.Q) (QR := DerivedCategory.Q)
     (QS := DerivedCategory.Q) (EXd := e.realizeX.derived) (J := o.opens.jStar)
     (TR := o.tensorX.functor) (totR := total (finiteInput A gU j' j g sq).R)
