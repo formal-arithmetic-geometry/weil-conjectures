@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Adjunction.MateHCompUnit
 public import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectTransportProfile
 public import WeilConjectures.CategoryTheory.Adjunction.TowerTransitionTransport
 import all WeilConjectures.Algebra.Homology.SuccessiveDerivedQuotientNormalization
@@ -97,26 +98,6 @@ theorem pbcDerivedRestrictComp_assoc_app
   simpa only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
     Functor.whiskerLeft_app, Iso.symm_hom, Functor.associator_inv_app,
     Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Category.id_comp] using hY
-
-/-- Mates of isomorphisms between equivalences are isomorphisms. -/
-theorem isIso_mateEquiv_symm_of_equivalences
-    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
-    {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
-    {G : C ⥤ C'} {H : D ⥤ D'}
-    (a : L ⊣ R) (b : L' ⊣ R') [G.IsEquivalence] [H.IsEquivalence]
-    (β : TwoSquare R H G R') [IsIso β] :
-    IsIso ((mateEquiv a b).symm β) := by
-  let eG := G.asEquivalence.toAdjunction
-  let eH := H.asEquivalence.toAdjunction
-  let α := (mateEquiv a b).symm β
-  have hi : IsIso (mateEquiv eH eG β) := by
-    dsimp only [mateEquiv, Equiv.coe_fn_mk]
-    infer_instance
-  have he := iterated_mateEquiv_conjugateEquiv a b eG eH α
-  change (mateEquiv eH eG ((mateEquiv a b) ((mateEquiv a b).symm β))) = _ at he
-  rw [Equiv.apply_symm_apply] at he
-  have : IsIso (conjugateEquiv (a.comp eH) (eG.comp b) α) := he ▸ hi
-  exact conjugateEquiv_of_iso (a.comp eH) (eG.comp b) α
 
 section Tower
 

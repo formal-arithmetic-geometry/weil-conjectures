@@ -14206,6 +14206,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.MateCompose
 public import WeilConjectures.CategoryTheory.Adjunction.MateCounitIsIso
 public import WeilConjectures.CategoryTheory.Adjunction.MateCube
 public import WeilConjectures.CategoryTheory.Adjunction.MateFixedSquare
+public import WeilConjectures.CategoryTheory.Adjunction.MateHCompUnit
 public import WeilConjectures.CategoryTheory.Adjunction.MateHomBasis
 public import WeilConjectures.CategoryTheory.Adjunction.MateIterated
 public import WeilConjectures.CategoryTheory.Adjunction.MateOfNatIsoLeft

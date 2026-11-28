@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import Mathlib.CategoryTheory.Adjunction.Mates
+public import WeilConjectures.CategoryTheory.Adjunction.MateHCompUnit
 public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleCompleteSupplement
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullbackSupplement
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcAutomorphismLocalComplex
@@ -33,80 +33,6 @@ to exact inverse image and to restriction along coefficient isomorphisms.
 set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
-
-namespace CategoryTheory
-
-/-- Adjuncts of composite units commute with the mates of a compatible family of squares
-of right adjoints. -/
-theorem homEquiv_symm_unit_mateEquiv_symm
-    {C₀ C₁ C₂ D₀ D₁ D₂ : Type*} [Category C₀] [Category C₁] [Category C₂]
-    [Category D₀] [Category D₁] [Category D₂]
-    {L₁ : C₀ ⥤ C₁} {R₁ : C₁ ⥤ C₀} {L₂ : C₀ ⥤ C₂} {R₂ : C₂ ⥤ C₀} {Rb : C₂ ⥤ C₁}
-    {L₁' : D₀ ⥤ D₁} {R₁' : D₁ ⥤ D₀} {L₂' : D₀ ⥤ D₂} {R₂' : D₂ ⥤ D₀} {Rb' : D₂ ⥤ D₁}
-    (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (adj₁' : L₁' ⊣ R₁') (adj₂' : L₂' ⊣ R₂')
-    (γ : Rb ⋙ R₁ ≅ R₂) (γ' : Rb' ⋙ R₁' ≅ R₂')
-    {F₀ : C₀ ⥤ D₀} {F₁ : C₁ ⥤ D₁} {F₂ : C₂ ⥤ D₂}
-    (σ₁ : R₁ ⋙ F₀ ⟶ F₁ ⋙ R₁') (σ₂ : R₂ ⋙ F₀ ⟶ F₂ ⋙ R₂') (σb : Rb ⋙ F₁ ⟶ F₂ ⋙ Rb')
-    (K : C₀)
-    (hσ : F₀.map (γ.hom.app (L₂.obj K)) ≫ σ₂.app (L₂.obj K) =
-      σ₁.app (Rb.obj (L₂.obj K)) ≫ R₁'.map (σb.app (L₂.obj K)) ≫
-        γ'.hom.app (F₂.obj (L₂.obj K))) :
-    ((mateEquiv adj₁ adj₁').symm σ₁).app K ≫
-        F₁.map ((adj₁.homEquiv _ _).symm (adj₂.unit.app K ≫ γ.inv.app (L₂.obj K))) ≫
-        σb.app (L₂.obj K) =
-      (adj₁'.homEquiv _ _).symm
-          (adj₂'.unit.app (F₀.obj K) ≫ γ'.inv.app (L₂'.obj (F₀.obj K))) ≫
-        Rb'.map (((mateEquiv adj₂ adj₂').symm σ₂).app K) := by
-  have h₁ := unit_mateEquiv_symm adj₁ adj₁' σ₁ K
-  have h₂ := unit_mateEquiv_symm adj₂ adj₂' σ₂ K
-  have hT := adj₁.homEquiv_unit K _ ((adj₁.homEquiv _ _).symm
-    (adj₂.unit.app K ≫ γ.inv.app (L₂.obj K)))
-  rw [Equiv.apply_symm_apply] at hT
-  have hT' := adj₁'.homEquiv_unit (F₀.obj K) _ ((adj₁'.homEquiv _ _).symm
-    (adj₂'.unit.app (F₀.obj K) ≫ γ'.inv.app (L₂'.obj (F₀.obj K))))
-  rw [Equiv.apply_symm_apply] at hT'
-  have hn := σ₁.naturality
-    ((adj₁.homEquiv _ _).symm (adj₂.unit.app K ≫ γ.inv.app (L₂.obj K)))
-  have hγ := γ'.inv.naturality (((mateEquiv adj₂ adj₂').symm σ₂).app K)
-  dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj] at h₁ h₂ hn hT hT' hγ ⊢
-  apply (adj₁'.homEquiv _ _).injective
-  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
-  simp only [Functor.map_comp, ← Category.assoc]
-  rw [← h₁]
-  simp only [Category.assoc]
-  rw [← reassoc_of% hn, ← F₀.map_comp_assoc, ← hT, ← reassoc_of% hT', ← hγ,
-    ← reassoc_of% h₂, F₀.map_comp_assoc]
-  congr 1
-  rw [← cancel_epi (F₀.map (γ.hom.app (L₂.obj K))), ← F₀.map_comp_assoc,
-    Iso.hom_inv_id_app, F₀.map_id, Category.id_comp, reassoc_of% hσ, Iso.hom_inv_id_app]
-  simp
-
-/-- The inverse mate of an isomorphism of right adjoints along equivalences is invertible. -/
-theorem isIso_mateEquiv_symm_of_equivalence
-    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
-    {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}
-    (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (eG : A ≌ C) (eH : B ≌ D)
-    (σ : R₁ ⋙ eG.functor ≅ eH.functor ⋙ R₂) :
-    IsIso ((mateEquiv adj₁ adj₂).symm σ.hom) := by
-  have h := iterated_mateEquiv_conjugateEquiv_symm adj₁ adj₂ eG.toAdjunction eH.toAdjunction
-    (mateEquiv eH.toAdjunction eG.toAdjunction σ.hom)
-  rw [Equiv.symm_apply_apply] at h
-  rw [h]
-  have : IsIso (mateEquiv eH.toAdjunction eG.toAdjunction σ.hom) := by
-    have (X : D) : IsIso ((mateEquiv eH.toAdjunction eG.toAdjunction σ.hom).app X) := by
-      simp only [mateEquiv_apply, NatTrans.comp_app, Functor.whiskerLeft_app,
-        Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
-        Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app, Equivalence.toAdjunction_unit,
-        Equivalence.toAdjunction_counit, Functor.comp_obj, Functor.id_obj, Category.id_comp,
-        Category.comp_id, Functor.comp_map]
-      have : IsIso (σ.hom.app (eH.inverse.obj X)) := inferInstance
-      have : IsIso (eG.unit.app (R₁.obj (eH.inverse.obj X))) := inferInstance
-      have : IsIso (eH.counit.app X) := inferInstance
-      infer_instance
-    exact NatIso.isIso_of_isIso_app _
-  infer_instance
-
-end CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
@@ -280,10 +206,12 @@ def pbcRelabelExtend {R S R' S' : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
 @[instance]
 theorem pbcRelabelExtend_isIso {R S R' S' : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
     (ψ : R ≅ R') (κ : S ≅ S') (a : R ⟶ S) (a' : R' ⟶ S') (w : a ≫ κ.hom = ψ.hom ≫ a') :
-    IsIso (pbcRelabelExtend ψ κ a a' w) :=
-  isIso_mateEquiv_symm_of_equivalence (pbcDerivedScalarAdjunction a')
-    (pbcDerivedScalarAdjunction a) (pbcDerivedRestrictEquivalence ψ)
-    (pbcDerivedRestrictEquivalence κ) (pbcDerivedRestrictSquare ψ.hom κ.hom a a' w)
+    IsIso (pbcRelabelExtend ψ κ a a' w) := by
+  have : (pbcDerivedRestrict ψ.hom).IsEquivalence :=
+    (pbcDerivedRestrictEquivalence ψ).isEquivalence_functor
+  have : (pbcDerivedRestrict κ.hom).IsEquivalence :=
+    (pbcDerivedRestrictEquivalence κ).isEquivalence_functor
+  exact isIso_mateEquiv_symm_of_equivalences _ _ (pbcDerivedRestrictSquare ψ.hom κ.hom a a' w).hom
 
 /-- Relabelling along coefficient isomorphisms carries reduction transitions to
 reduction transitions. -/
@@ -403,7 +331,7 @@ private theorem pullback_restrict_congr {Z W : Scheme.{u}}
 
 /-- Inverse image along `g ≫ inv f` of ordinary pullback along `f` is the relabelled
 inverse image along `g`. -/
-theorem pbcIsoLocalPullback_nonempty (K : PbcCompletedDerived Y d) :
+private theorem pbcIsoLocalPullback_nonempty (K : PbcCompletedDerived Y d) :
     Nonempty ((adicTowerPullback (g ≫ inv f) (pbcAdicCompletion X d)).obj
         ((completedOrdinaryPullback f d).obj K) ≅
       (pbcDerivedRestrict (pbcIsoLocalCoefficient f d g).hom).obj

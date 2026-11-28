@@ -245,25 +245,6 @@ variable (E F : Type u) [Field E] [Field F] [Algebra ℚ_[l] E] [Algebra ℚ_[l]
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g)
 
-/-- The ambient scalar exchange equation: scalar extension along `i` carries the completed
-exchange at `E` to the completed exchange at `F`, through the scalar direct-image and
-completed-pullback comparisons. -/
-theorem pbcScalarCompletedExchange (K : PbcCompletedDerived X (pbcIntegralDatum l E)) :
-    (pbcEmbeddingAmbientTensor l E F i Y').map
-        ((pbcActualCompletedExchange (pbcIntegralDatum l E) sq).app K) ≫
-      (pbcScalarDirectImageIso l E F i f').hom.app
-        ((pbcActualCompletedPull g' (pbcIntegralDatum l E)).obj K) ≫
-      (pbcActualDerivedPush f' (pbcIntegralDatum l F)).map
-        ((pbcScalarCompletedPullIso l E F i g').inv.app K) =
-    (pbcScalarCompletedPullIso l E F i g).inv.app
-        ((pbcActualDerivedPush f (pbcIntegralDatum l E)).obj K) ≫
-      (pbcActualCompletedPull g (pbcIntegralDatum l F)).map
-        ((pbcScalarDirectImageIso l E F i f).hom.app K) ≫
-      (pbcActualCompletedExchange (pbcIntegralDatum l F) sq).app
-        ((pbcEmbeddingAmbientTensor l E F i X).obj K) := by
-  exact pbcActualCompletedExchange_scalarExtension l E F i sq K
-
-
 /-- The scalar exchange equation conjugated by `eqToHom`s, with the middle exchange
 components given up to `eqToHom`s; this is the shape of the `E ≠ F` exchange branch. -/
 theorem pbcScalarCompletedExchange_eqToHom_square

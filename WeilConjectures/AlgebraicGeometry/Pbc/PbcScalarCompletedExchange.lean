@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Adjunction.MateHCompUnit
+public import WeilConjectures.CategoryTheory.Adjunction.MateCube
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcActualRingedExchange
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarAmbientOperations
 import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarAmbientOperations
@@ -271,59 +273,6 @@ private theorem scalarDerivedPullComp (K : PbcCompletedDerived V dA) :
 
 end PullComposition
 
-end AlgebraicGeometry.Scheme
-
-namespace CategoryTheory
-
-/-- A cube of squares of functors commutes: pasting the faces `α₂`, `θ`, `γ⁻¹` agrees with
-pasting the faces `β⁻¹`, `θ'`, `α₁`. -/
-def MateCubeCommutes {C₁ C₂ C₃ C₄ D₁ D₂ D₃ D₄ : Type*} [Category C₁] [Category C₂]
-    [Category C₃] [Category C₄] [Category D₁] [Category D₂] [Category D₃] [Category D₄]
-    {L₁ : C₁ ⥤ C₂} {L₂ : C₃ ⥤ C₄} {M₁ : D₁ ⥤ D₂} {M₂ : D₃ ⥤ D₄}
-    {G : C₁ ⥤ C₃} {H : C₂ ⥤ C₄} {G' : D₁ ⥤ D₃} {H' : D₂ ⥤ D₄}
-    {S₁ : C₁ ⥤ D₁} {S₂ : C₂ ⥤ D₂} {S₃ : C₃ ⥤ D₃} {S₄ : C₄ ⥤ D₄}
-    (θ : G ⋙ L₂ ⟶ L₁ ⋙ H) (θ' : G' ⋙ M₂ ⟶ M₁ ⋙ H')
-    (α₁ : S₁ ⋙ M₁ ⟶ L₁ ⋙ S₂) (α₂ : S₃ ⋙ M₂ ⟶ L₂ ⋙ S₄)
-    (β : S₁ ⋙ G' ≅ G ⋙ S₃) (γ : S₂ ⋙ H' ≅ H ⋙ S₄) : Prop :=
-  whiskerLeft G α₂ ≫ (Functor.associator _ _ _).inv ≫ whiskerRight θ S₄ ≫
-      (Functor.associator _ _ _).hom ≫ whiskerLeft L₁ γ.inv ≫ (Functor.associator _ _ _).inv =
-    (Functor.associator _ _ _).inv ≫ whiskerRight β.inv M₂ ≫ (Functor.associator _ _ _).hom ≫
-      whiskerLeft S₁ θ' ≫ (Functor.associator _ _ _).inv ≫ whiskerRight α₁ H' ≫
-      (Functor.associator _ _ _).hom
-
-/-- A cube of squares of left adjoints whose faces commute gives a commuting cube of the
-mates along the two horizontal adjunctions. -/
-theorem mateEquiv_cube {C₁ C₂ C₃ C₄ D₁ D₂ D₃ D₄ : Type*} [Category C₁] [Category C₂]
-    [Category C₃] [Category C₄] [Category D₁] [Category D₂] [Category D₃] [Category D₄]
-    {L₁ : C₁ ⥤ C₂} {R₁ : C₂ ⥤ C₁} {L₂ : C₃ ⥤ C₄} {R₂ : C₄ ⥤ C₃}
-    {M₁ : D₁ ⥤ D₂} {N₁ : D₂ ⥤ D₁} {M₂ : D₃ ⥤ D₄} {N₂ : D₄ ⥤ D₃}
-    (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (b₁ : M₁ ⊣ N₁) (b₂ : M₂ ⊣ N₂)
-    {G : C₁ ⥤ C₃} {H : C₂ ⥤ C₄} {G' : D₁ ⥤ D₃} {H' : D₂ ⥤ D₄}
-    {S₁ : C₁ ⥤ D₁} {S₂ : C₂ ⥤ D₂} {S₃ : C₃ ⥤ D₃} {S₄ : C₄ ⥤ D₄}
-    (θ : G ⋙ L₂ ⟶ L₁ ⋙ H) (θ' : G' ⋙ M₂ ⟶ M₁ ⋙ H')
-    (α₁ : S₁ ⋙ M₁ ⟶ L₁ ⋙ S₂) (α₂ : S₃ ⋙ M₂ ⟶ L₂ ⋙ S₄)
-    (β : S₁ ⋙ G' ≅ G ⋙ S₃) (γ : S₂ ⋙ H' ≅ H ⋙ S₄)
-    (hcube : MateCubeCommutes θ θ' α₁ α₂ β γ)
-    (μ : R₁ ⋙ G ⟶ H ⋙ R₂) (hμ : μ = mateEquiv a₁ a₂ (TwoSquare.mk _ _ _ _ θ))
-    (ν : R₂ ⋙ S₃ ⟶ S₄ ⋙ N₂) (hν : ν = mateEquiv a₂ b₂ (TwoSquare.mk _ _ _ _ α₂))
-    (ρ : R₁ ⋙ S₁ ⟶ S₂ ⋙ N₁) (hρ : ρ = mateEquiv a₁ b₁ (TwoSquare.mk _ _ _ _ α₁))
-    (χ : N₁ ⋙ G' ⟶ H' ⋙ N₂) (hχ : χ = mateEquiv b₁ b₂ (TwoSquare.mk _ _ _ _ θ'))
-    (K : C₂) :
-    S₃.map (μ.app K) ≫ ν.app (H.obj K) ≫ N₂.map (γ.inv.app K) =
-      β.inv.app (R₁.obj K) ≫ G'.map (ρ.app K) ≫ χ.app (S₂.obj K) := by
-  subst hμ hν hρ hχ
-  unfold MateCubeCommutes at hcube
-  have hm := AlgebraicGeometry.Scheme.scalarMate_coefficients a₁ a₂ b₂
-    (TwoSquare.mk _ _ _ _ θ) (TwoSquare.mk _ _ _ _ α₂)
-    (TwoSquare.hComp (TwoSquare.mk _ _ _ _ α₁) (TwoSquare.mk _ _ _ _ θ')) β.symm γ.symm
-    (fun T ↦ by simpa [TwoSquare.hComp] using NatTrans.congr_app hcube T) K
-  rw [mateEquiv_vcomp a₁ b₁ b₂] at hm
-  simpa using hm
-
-end CategoryTheory
-
-namespace AlgebraicGeometry.Scheme
-
 section ScalarExchange
 
 variable (l : ℕ) [Fact l.Prime]
@@ -396,11 +345,19 @@ private theorem ambientExchange_eq {A : Type (u + 1)} [CommRing A]
 /-- The scalar/pullback comparisons form a commutative cube with the pullback squares
 at both coefficient levels. -/
 theorem pbcScalarOrdinaryPullIso_pullSquare :
-    MateCubeCommutes (pbcActualCompletedPullSquareIso (pbcIntegralDatum l E) sq).hom
-      (pbcActualCompletedPullSquareIso (pbcIntegralDatum l F) sq).hom
-      (pbcScalarOrdinaryPullIso l E F i f).hom (pbcScalarOrdinaryPullIso l E F i f').hom
-      (pbcScalarOrdinaryPullIso l E F i g) (pbcScalarOrdinaryPullIso l E F i g') := by
-  unfold MateCubeCommutes
+    Functor.whiskerLeft _ (pbcScalarOrdinaryPullIso l E F i f').hom ≫
+        (Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight (pbcActualCompletedPullSquareIso (pbcIntegralDatum l E) sq).hom _ ≫
+        (Functor.associator _ _ _).hom ≫
+        Functor.whiskerLeft _ (pbcScalarOrdinaryPullIso l E F i g').inv ≫
+        (Functor.associator _ _ _).inv =
+      (Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight (pbcScalarOrdinaryPullIso l E F i g).inv _ ≫
+        (Functor.associator _ _ _).hom ≫
+        Functor.whiskerLeft _ (pbcActualCompletedPullSquareIso (pbcIntegralDatum l F) sq).hom ≫
+        (Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight (pbcScalarOrdinaryPullIso l E F i f).hom _ ≫
+        (Functor.associator _ _ _).hom := by
   have t := scalarOrdinaryPull_eqToHom l E F i sq.w.symm
   rw [pullSquare_hom, pullSquare_hom]
   generalize (eqToIso (congrArg (fun a ↦ pbcActualDerivedPull a (pbcIntegralDatum l E))
@@ -442,6 +399,46 @@ theorem pbcScalarOrdinaryPullIso_pullSquare :
     CategoryTheory.Functor.map_id, Category.id_comp, c2']
   simp
 
+-- `CategoryTheory.mateEquiv_app_cube` with isomorphisms as the side faces, with the face
+-- condition stated through whiskerings.
+private theorem mateEquiv_app_cube_of_iso {C₁ C₂ C₃ C₄ D₁ D₂ D₃ D₄ : Type*} [Category C₁]
+    [Category C₂] [Category C₃] [Category C₄] [Category D₁] [Category D₂] [Category D₃]
+    [Category D₄] {L₁ : C₁ ⥤ C₂} {R₁ : C₂ ⥤ C₁} {L₂ : C₃ ⥤ C₄} {R₂ : C₄ ⥤ C₃}
+    {M₁ : D₁ ⥤ D₂} {N₁ : D₂ ⥤ D₁} {M₂ : D₃ ⥤ D₄} {N₂ : D₄ ⥤ D₃}
+    (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (b₁ : M₁ ⊣ N₁) (b₂ : M₂ ⊣ N₂)
+    {G : C₁ ⥤ C₃} {H : C₂ ⥤ C₄} {G' : D₁ ⥤ D₃} {H' : D₂ ⥤ D₄}
+    {S₁ : C₁ ⥤ D₁} {S₂ : C₂ ⥤ D₂} {S₃ : C₃ ⥤ D₃} {S₄ : C₄ ⥤ D₄}
+    (θ : G ⋙ L₂ ⟶ L₁ ⋙ H) (θ' : G' ⋙ M₂ ⟶ M₁ ⋙ H')
+    (α₁ : S₁ ⋙ M₁ ⟶ L₁ ⋙ S₂) (α₂ : S₃ ⋙ M₂ ⟶ L₂ ⋙ S₄)
+    (β : S₁ ⋙ G' ≅ G ⋙ S₃) (γ : S₂ ⋙ H' ≅ H ⋙ S₄)
+    (hcube : Functor.whiskerLeft G α₂ ≫ (Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight θ S₄ ≫ (Functor.associator _ _ _).hom ≫
+        Functor.whiskerLeft L₁ γ.inv ≫ (Functor.associator _ _ _).inv =
+      (Functor.associator _ _ _).inv ≫ Functor.whiskerRight β.inv M₂ ≫
+        (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft S₁ θ' ≫
+        (Functor.associator _ _ _).inv ≫ Functor.whiskerRight α₁ H' ≫
+        (Functor.associator _ _ _).hom)
+    (μ : R₁ ⋙ G ⟶ H ⋙ R₂) (hμ : μ = mateEquiv a₁ a₂ (TwoSquare.mk _ _ _ _ θ))
+    (ν : R₂ ⋙ S₃ ⟶ S₄ ⋙ N₂) (hν : ν = mateEquiv a₂ b₂ (TwoSquare.mk _ _ _ _ α₂))
+    (ρ : R₁ ⋙ S₁ ⟶ S₂ ⋙ N₁) (hρ : ρ = mateEquiv a₁ b₁ (TwoSquare.mk _ _ _ _ α₁))
+    (χ : N₁ ⋙ G' ⟶ H' ⋙ N₂) (hχ : χ = mateEquiv b₁ b₂ (TwoSquare.mk _ _ _ _ θ'))
+    (K : C₂) :
+    S₃.map (μ.app K) ≫ ν.app (H.obj K) ≫ N₂.map (γ.inv.app K) =
+      β.inv.app (R₁.obj K) ≫ G'.map (ρ.app K) ≫ χ.app (S₂.obj K) := by
+  subst hμ hν hρ hχ
+  have h := mateEquiv_app_cube a₁ a₂ b₁ b₂ θ θ' α₁ α₂ β.hom γ.hom (fun M ↦ by
+    have hM := NatTrans.congr_app hcube M
+    simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Functor.associator_hom_app, Functor.associator_inv_app, Functor.comp_obj,
+      Category.id_comp, Category.comp_id] at hM
+    rw [← cancel_epi (M₂.map (β.inv.app M)), ← M₂.map_comp_assoc, Iso.inv_hom_id_app]
+    simp [← reassoc_of% hM]) K
+  rw [← cancel_epi (β.hom.app _), Iso.hom_inv_id_app_assoc, ← cancel_mono (N₂.map (γ.hom.app K))]
+  simp only [Category.assoc]
+  rw [← N₂.map_comp, Iso.inv_hom_id_app]
+  simp only [Functor.comp_obj, CategoryTheory.Functor.map_id, Category.comp_id]
+  exact h
+
 -- The ambient exchange square with the four mates as variables.
 private theorem scalarAmbientExchange_aux
     (μ : pbcActualDerivedPush f (pbcIntegralDatum l E) ⋙
@@ -477,7 +474,7 @@ private theorem scalarAmbientExchange_aux
         ((pbcActualDerivedPush f (pbcIntegralDatum l E)).obj K) ≫
       (pbcActualDerivedPull g (pbcIntegralDatum l F)).map (ρ.app K) ≫
       χ.app ((pbcEmbeddingAmbientTensor l E F i X).obj K) :=
-  mateEquiv_cube
+  mateEquiv_app_cube_of_iso
     (pbcActualDerivedAdjunction f (pbcIntegralDatum l E))
     (pbcActualDerivedAdjunction f' (pbcIntegralDatum l E))
     (pbcActualDerivedAdjunction f (pbcIntegralDatum l F))
@@ -589,10 +586,10 @@ private theorem scalarCompletion_hom_ext (T : Scheme.{u})
   apply pbcCompletion_hom_ext T (pbcIntegralDatum l F) _ _ hL
   rw [← Category.assoc, hk, ← Category.assoc, hk, hab]
 
-/-- Scalar extension along `i` carries the completed exchange at `E` to the completed exchange
-at `F`, through the scalar direct-image and completed-pullback comparisons. -/
-theorem pbcActualCompletedExchange_scalarExtension
-    (K : PbcCompletedDerived X (pbcIntegralDatum l E)) :
+/-- The ambient scalar exchange equation: scalar extension along `i` carries the completed
+exchange at `E` to the completed exchange at `F`, through the scalar direct-image and
+completed-pullback comparisons. -/
+theorem pbcScalarCompletedExchange (K : PbcCompletedDerived X (pbcIntegralDatum l E)) :
     (pbcEmbeddingAmbientTensor l E F i Y').map
         ((pbcActualCompletedExchange (pbcIntegralDatum l E) sq).app K) ≫
       (pbcScalarDirectImageIso l E F i f').hom.app
