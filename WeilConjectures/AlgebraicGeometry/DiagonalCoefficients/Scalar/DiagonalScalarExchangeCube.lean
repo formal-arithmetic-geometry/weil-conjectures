@@ -13,6 +13,7 @@ import WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare
 import WeilConjectures.CategoryTheory.Adjunction.MateCube
 import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightPaste
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.IsoId
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
 
@@ -243,32 +244,6 @@ private theorem scalarRestrictionPullbackIso_inv_app {X S : Scheme.{u}} (f : X �
     CondensedRing.derivedComapUpperStarIso, CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory,
     Functor.mapDerivedCategoryNatIso_symm]
 
-section LeftDerivedEqToIso
-
-universe uC uD vC vD wC wD
-variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D] [Abelian C] [Abelian D]
-  [HasDerivedCategory.{wC} C] [HasDerivedCategory.{wD} D]
-  [MonoidalCategory C] [MonoidalPreadditive C]
-  [HasCountableCoproducts C]
-  [HasColimitsOfShape ℤ C] [HasExactColimitsOfShape ℤ C]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [∀ (X : C), PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor C).obj X)]
-  [∀ (X : C), PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor C).flip.obj X)]
-  [Abelian.HasFunctorialFlatResolution C]
-
-/-- The isomorphism of left derived functors induced by an equality of exact functors is
-the transport along the induced equality. -/
-private theorem leftDerivedFunctorNatIso_eqToIso_hom_app {F G : C ⥤ D} [F.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F] [G.Additive]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (h : F = G) (K : DerivedCategory C) :
-    (F.leftDerivedFunctorNatIso (eqToIso h)).hom.app K = eqToHom (by subst h; rfl) := by
-  subst h
-  simp
-
-end LeftDerivedEqToIso
-
 /-- Restriction commutes with transport of derived inverse images along an equality of
 morphisms. -/
 private theorem derivedComapLeftDerivedUpperStarIso_eqToHom {Z Y : Scheme.{u}} {g g' : Z ⟶ Y}
@@ -323,7 +298,7 @@ private theorem restriction_exchange_cube {X S X' S' : Scheme.{u}}
     (CondensedRing.derivedComapLeftDerivedUpperStarIso_comp_hom_app a hX f N) ?_ ?_ ?_
   · simp
   · simp
-  · simp only [CondensedRing.upperStarCongr, leftDerivedFunctorNatIso_eqToIso_hom_app]
+  · simp only [CondensedRing.upperStarCongr, Functor.leftDerivedFunctorNatIso_eqToIso_hom_app]
     exact derivedComapLeftDerivedUpperStarIso_eqToHom a h N _ _
 
 /-- A restriction square between canonical models is the canonical comparison. -/
