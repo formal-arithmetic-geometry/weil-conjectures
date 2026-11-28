@@ -43,9 +43,8 @@ theorem intrinsicComparison_boundedConstructible
           (Padic.finite_coefficientExtensionRing l E n hn)) T K')
     :
     Scheme.intrinsicFiniteTorsionConstructible l E n hn T
-      ((@ProEtale.finiteCoefficientIntrinsicDerivedComparison.{u} T
-        (Padic.coefficientExtensionRing l E n) inferInstance
-        (Padic.finite_coefficientExtensionRing l E n hn)).obj K') := by
+      ((ProEtale.finiteCoefficientIntrinsicDerivedComparison.{u} T
+        (Padic.coefficientExtensionRing l E n)).obj K') := by
   let B := Padic.coefficientExtensionRing l E n
   have : Finite B := Padic.finite_coefficientExtensionRing l E n hn
   have : Finite (ULift.{u + 1, u} B) := Finite.of_equiv B Equiv.ulift.symm

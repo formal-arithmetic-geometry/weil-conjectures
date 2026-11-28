@@ -61,6 +61,7 @@ private theorem supported_normalization {P W : Scheme.{u}} (k : P ⟶ W) (f : W 
     (heq_of_eq (CondensedRing.lowerStarComp_hom_app_hom Λ k f M))
   exact eq_of_heq (hs.trans hc.symm)
 
+omit [IsCommMonObj Λ] in
 /--
 The inverse support isomorphism is the normalized lower-star composite,
 congruence, and identity comparison on the regular module.

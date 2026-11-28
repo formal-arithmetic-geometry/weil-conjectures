@@ -161,6 +161,7 @@ variable (l : ℕ) [Fact l.Prime] (Qbar : Type w)
     [hDim : Fact (∃ n : ℕ, topologicalKrullDim T ≤ (n : WithBot ℕ∞))]
     [hInv : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
 
+omit [IsAlgClosure ℚ_[l] Qbar] in
 /-- The finite stage is triangulated for exactly its integral-image triangles. -/
 @[instance] theorem qbarStageTriangulated (E : Padic.FiniteCoefficientFields l Qbar) :
     IsTriangulated (pbcStageCategory l Qbar T E) := by

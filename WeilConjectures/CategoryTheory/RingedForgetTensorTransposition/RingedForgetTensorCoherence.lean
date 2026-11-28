@@ -318,6 +318,8 @@ private theorem flat_representative (X : DerivedCategory (RingedTensorModules.{c
 attribute [local irreducible] coefficientTotalTensor tensorSummand ringedForgetTensorUnitIso
 
 -- Assemble the four transported constraints without unfolding their model constructions.
+omit [∀ I : Type (max c v r), PreservesLimitsOfShape (Discrete I) U]
+  [U.PreservesKInjectiveComplexes] in
 /-- A tensor comparison already constructed and normalized on flat-term K-flat models
 preserves the structural constraints of the two fixed derived tensor presentations.
 This statement constructs neither the chain comparison nor its derived extension and

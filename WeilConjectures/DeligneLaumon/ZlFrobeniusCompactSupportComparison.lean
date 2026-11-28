@@ -49,6 +49,8 @@ variable (D : FiniteFieldDatum.{u})
   [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
   (f₀ : X₀ ⟶ Y₀) (c₀ : Compactification f₀.left)
 
+omit [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
+  [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] in
 /-- The geometric-fibre factorization is the base change of the model factorization. -/
 theorem zlGeometricCompactification_comm :
     zlFiberMap D f₀ =
@@ -64,6 +66,8 @@ theorem zlGeometricCompactification_comm :
     (congrArg (fun h ↦ h.left)
       (F.map_comp (zlCompactificationOpen D f₀ c₀) (zlCompactificationProper D f₀ c₀)))
 
+omit [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
+  [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] in
 /-- The geometric proper part is proper by stability under base change. -/
 theorem zlGeometricCompactification_isProper :
     IsProper (zlFiberMap D (zlCompactificationProper D f₀ c₀)) := by
@@ -71,6 +75,8 @@ theorem zlGeometricCompactification_isProper :
     (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))
     (zlCompactificationProper D f₀ c₀) c₀.isProper
 
+omit [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
+  [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] in
 /-- The geometric open part is an open immersion by stability under base change. -/
 theorem zlGeometricCompactification_isOpenImmersion :
     IsOpenImmersion (zlFiberMap D (zlCompactificationOpen D f₀ c₀)) := by

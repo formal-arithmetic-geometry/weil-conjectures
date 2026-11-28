@@ -52,6 +52,7 @@ def pushSectionIso (Y : Scheme.{u}) :
     (pullSectionIso Λ Y (secondProjection Y) (pullback.diagonal_snd _))
 
 -- Keep fixed site and derived comparisons folded during elaboration.
+omit [IsCommMonObj Λ] in
 /-- Closed direct image on internal modules is exact. -/
 theorem diagonalPush_preservesFiniteColimits (Y : Scheme.{u}) :
     PreservesFiniteColimits (CondensedRing.lowerStar Λ (diagonalImmersion Y)) := by

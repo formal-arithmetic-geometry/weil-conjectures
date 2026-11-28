@@ -296,6 +296,7 @@ private theorem commShift_eq_of_heq {C D : Type*} [Category C] [Category D]
   funext n
   exact eq_of_heq (h n)
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 private theorem stageFactors (E : Padic.FiniteCoefficientFields l Ω) :
     sfRationalConstructibleLocalization l (pbcFiniteField.{u} l Ω E) T ⋙
         suppliedJ l Ω T stage E =
@@ -308,6 +309,7 @@ private theorem stageFactors (E : Padic.FiniteCoefficientFields l Ω) :
     pbcStageLocalization, ScalarLocalization.localization, Functor.comp_map] at *
   with_unfolding_all exact h
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 private theorem suppliedStageShift (E : Padic.FiniteCoefficientFields l Ω) :
     NatTrans.CommShift (eqToIso (stageFactors l Ω T stage E)).hom ℤ := by
   apply commShift_eqToIso
@@ -347,6 +349,7 @@ private theorem copy_eqToIso_commShift
   cases commShift_eq_of_heq J cJ cJ' hcJ
   exact hc'
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 /-- The supplied rational functor is the localization of the integral identity functor. -/
 theorem stageFactorsJ (family : RationalFamily l Ω T stage)
     (E : Padic.FiniteCoefficientFields l Ω) :
@@ -409,6 +412,7 @@ private theorem presentationPretriangulated (E : Padic.FiniteCoefficientFields l
   exact coefficient_congr_heq₁ l (fun E _ _ _ ↦ sfRationalConstructiblePretriangulated l E T)
     _ _ _ _ _ _ rfl HEq.rfl HEq.rfl
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 private theorem stageShiftSquare (family : RationalFamily l Ω T stage)
     (E : Padic.FiniteCoefficientFields l Ω) :
     NatTrans.CommShift (eqToIso (stageFactorsJ l Ω T stage family E)).hom ℤ := by
@@ -531,6 +535,7 @@ private theorem copy_isTriangulated
   exact hT
 
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 private theorem jTriangulated (family : RationalFamily l Ω T stage)
     (E : Padic.FiniteCoefficientFields l Ω) : (J l Ω T stage family E).IsTriangulated :=
   copy_isTriangulated _ _ _ _ _ _ _ _ _ _ _ _ (presentationType l Ω T E)

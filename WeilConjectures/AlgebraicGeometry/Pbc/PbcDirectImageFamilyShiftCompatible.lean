@@ -268,6 +268,7 @@ private abbrev integralPushShift {X Y : Scheme.{u}}
   exact Functor.CommShift.ofComp (F := integralPush l Ω f pres E)
     (G := pbcStageInclusion l Ω Y E) e ℤ
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem integralPushShift_exists (f : X ⟶ Y)

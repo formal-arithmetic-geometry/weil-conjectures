@@ -60,10 +60,7 @@ structure TensorIntegerShiftComparisons
   /-- Extract the shift in the second argument, naturally in both inputs. -/
   second : ∀ n : ℤ, (𝟭 D).prod (shiftFunctor D n) ⋙ B ≅ B ⋙ shiftFunctor D n
 
--- Transparent `def`: an opaque `theorem` leaves the coefficient universe unresolved.
-set_option linter.defProp false in
-@[instance_reducible]
-private def cachedCompose {C : Type c} [Category.{v} C] [EssentiallySmall.{a} C]
+private theorem cachedCompose {C : Type c} [Category.{v} C] [EssentiallySmall.{a} C]
     (J : GrothendieckTopology C) :
     J.HasSheafCompose (forget₂ CommRingCat.{a} RingCat.{a}) := by
   exact (equivSmallModel.{a} C).hasSheafCompose J

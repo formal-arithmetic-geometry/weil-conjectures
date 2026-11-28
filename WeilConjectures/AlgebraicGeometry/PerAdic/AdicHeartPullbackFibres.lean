@@ -416,6 +416,7 @@ theorem rationalGE_stageExtension (W : Base k) {L L' : Padic.FiniteCoefficientFi
       ⟨((stages l Qbar W).T h).mapIso e ≪≫ (pbcScalarIntegralComparison l Qbar W.scheme
         (baseDimension W).out (basePrimeUnit l W).out h).app K⟩⟩
 
+omit [IsAlgClosure (Padic l) Qbar] in
 /-- The finite-stage aisles are stable under the normalized stage shift. -/
 theorem rationalLE_shift (W : Base k) (L : Padic.FiniteCoefficientFields l Qbar)
     (n a n' : ℤ) (hn : a + n' = n) (M : pbcStageCategory l Qbar W.scheme L)
@@ -430,6 +431,7 @@ theorem rationalLE_shift (W : Base k) (L : Padic.FiniteCoefficientFields l Qbar)
         (pbcRationalHasShift l Qbar W.scheme L) a).mapIso e ≪≫
       ((pbcStageLocalization l Qbar W.scheme L).commShiftIso a).symm.app K⟩⟩
 
+omit [IsAlgClosure (Padic l) Qbar] in
 /-- The finite-stage coaisles are stable under the normalized stage shift. -/
 theorem rationalGE_shift (W : Base k) (L : Padic.FiniteCoefficientFields l Qbar)
     (n a n' : ℤ) (hn : a + n' = n) (M : pbcStageCategory l Qbar W.scheme L)

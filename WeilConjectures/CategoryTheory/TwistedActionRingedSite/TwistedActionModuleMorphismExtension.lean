@@ -264,6 +264,7 @@ private theorem extendMap_app (S : Site J s R a) :
     Iso.inv_hom_id, op_id]
   simp
 
+omit [s.functor.IsContinuous J J] in
 /-- An intertwining map on the base extends to the integer-action site.
 Source: Stacks 03CV (module linearity). -/
 theorem moduleMorphismExtension (S : Site J s R a) :

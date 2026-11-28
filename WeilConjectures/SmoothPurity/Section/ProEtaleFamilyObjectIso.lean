@@ -49,6 +49,7 @@ namespace ProEtale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {Y : Scheme.{u}} [HasInvertibleExponent Λ Y]
 
+omit [Finite Λ] [HasInvertibleExponent Λ Y] in
 /-- *Invariance along the line*, pro-étale, on complexes of étale origin.
 Let `F` on `𝔸¹_Y` be invertible and `C` on `Y` be étale complexes such that `F`,
 `La^* C` and `Li₁^* La^* C` are bounded below. Two isomorphisms `α, β : F' ≅ La^* C'` of pro-étale

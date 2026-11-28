@@ -255,6 +255,7 @@ private theorem restriction_faithful :
     exact hh
   exact congrArg (fun k ↦ k x) hh
 
+omit [s.functor.IsContinuous J J] in
 private theorem restriction_full :
     letI := S.category
     letI := S.inclusion_continuous

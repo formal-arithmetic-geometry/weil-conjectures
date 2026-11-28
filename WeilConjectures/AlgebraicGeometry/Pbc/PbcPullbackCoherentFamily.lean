@@ -340,6 +340,7 @@ private def pullStageShiftSpec (f : X ⟶ Y)
     NatTrans.CommShift e.hom ℤ
 
 -- Restrict the canonical exact completed pullback and localize its normalized shift.
+omit [IsAlgClosure ℚ_[l] Ω] in
 private theorem pullStageShift_exists (f : X ⟶ Y)
     (pres : ∀ (E : Padic.FiniteCoefficientFields l Ω)
       (K : pbcIntegralStage l Ω Y E),

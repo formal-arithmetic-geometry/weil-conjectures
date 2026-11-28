@@ -89,6 +89,7 @@ def PbcDirectImageStageShiftSpec (f : X ⟶ Y)
   exact (pbcDescentDirectImage l Ω f pres E).IsTriangulated ∧
     NatTrans.CommShift e.hom ℤ
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 /-- Exact direct image, with a unique shift fixed by the integral square. -/
 theorem pbcDirectImageStageShift_exists (f : X ⟶ Y)
     (pres : ∀ (E : Padic.FiniteCoefficientFields l Ω)

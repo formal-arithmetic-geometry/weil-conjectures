@@ -47,15 +47,15 @@ open CategoryTheory Limits IsLocalRing
 
 namespace Algebra.IsStrictHenselization
 
-variable {A K C : Type u} [CommRing A] [IsLocalRing A] [Field K]
+variable {A K C : Type u} [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] [Field K]
   [Algebra (ResidueField A) K] [IsSepClosure (ResidueField A) K]
   [Algebra A K] [IsScalarTower A (ResidueField A) K]
   [CommRing C] [Algebra A C]
 
 /-- **A strict henselization of a discrete valuation ring is a discrete valuation ring**: it is
 noetherian (Stacks 06LJ), regular (Stacks 06LN) and of dimension one (Stacks 06LK). -/
-theorem isDiscreteValuationRing (hC : IsStrictHenselization A K C) [IsDomain A]
-    [IsDiscreteValuationRing A] : ∃ _ : IsDomain C, IsDiscreteValuationRing C := by
+theorem isDiscreteValuationRing (hC : IsStrictHenselization A K C) :
+    ∃ _ : IsDomain C, IsDiscreteValuationRing C := by
   have : IsNoetherianRing C := (isNoetherianRing_iff_isStrictHenselization A K C hC).1 inferInstance
   have : IsRegularLocalRing C :=
     (isRegularLocalRing_iff_strictHenselization A K C hC).1 inferInstance

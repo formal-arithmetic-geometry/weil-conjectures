@@ -379,6 +379,7 @@ def commonSource {X Y : Scheme.{u}} (f : X ⟶ Y)
     (commonShiftedLine l Ω X d)).prod' (commonStageDerivedPullback l Ω f) ⋙
       commonStageDerivedTensor l Ω X
 
+omit [IsAlgClosure ℚ_[l] Ω] in
 /-- The least coefficient stage is contained in every finite stage. -/
 theorem base_le (L : Index l Ω) : Padic.finiteCoefficientBase l Ω ≤ L := by
   exact (bot_le : (⊥ : IntermediateField (Padic l) Ω) ≤ L.val)

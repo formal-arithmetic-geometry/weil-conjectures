@@ -42,9 +42,8 @@ theorem intrinsicComparison_torAmplitude
     (_hTor' : Etale.DerivedCategory.hasTorAmplitudeIn
       (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) T a b K') :
     Scheme.HasProEtaleTorAmplitude T (Padic.coefficientExtensionRing l E n)
-      ((@ProEtale.finiteCoefficientIntrinsicDerivedComparison.{u} T
-        (Padic.coefficientExtensionRing l E n) inferInstance
-        (Padic.finite_coefficientExtensionRing l E n hn)).obj K') a b := by
+      ((ProEtale.finiteCoefficientIntrinsicDerivedComparison.{u} T
+        (Padic.coefficientExtensionRing l E n)).obj K') a b := by
   let B := Padic.coefficientExtensionRing l E n
   have : Finite B := Padic.finite_coefficientExtensionRing l E n hn
   have : Finite (ULift.{u + 1, u} B) := Finite.of_equiv B Equiv.ulift.symm

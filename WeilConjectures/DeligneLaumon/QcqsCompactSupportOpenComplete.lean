@@ -45,6 +45,7 @@ variable (l : ℕ) [Fact l.Prime]
 
 include K₀ hl Xbase Ybase Xft Xqc Yft Yqc fbase fs fft fqc
 
+omit Xft Xqc Yft Yqc fbase fs fft in
 /-- The completed extension by the quasi-compact open immersion of a compactification sends an
 integral constructible object to a derived complete object. -/
 theorem sfQcqsCompactSupport_open_complete

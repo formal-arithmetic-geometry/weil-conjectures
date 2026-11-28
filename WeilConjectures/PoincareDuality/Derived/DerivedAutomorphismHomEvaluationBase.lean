@@ -415,6 +415,7 @@ private theorem finiteComparison_eq (n : ℕ)
         podFiniteHomComparison l E g n M N := by
   rfl
 
+omit [IsIso g] in
 /-- Naturality of the finite comparison in both inputs: the naturality clause of
 `podFiniteHomComparison_laws`. -/
 theorem podFiniteHomComparison_naturality (n : ℕ)

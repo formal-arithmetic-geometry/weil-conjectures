@@ -130,6 +130,8 @@ def scalarLocalizationDerivedLinearOfUniverses (A : Type v) [CommRing A]
   letI := scalarLocalizationCoefficientLinearOfUniverses A R a
   DerivedCategory.instLinear A _
 
+omit [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
+  [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
 /-- The localized coefficient is a unit in the ring of sections of R[1/t].
 Source: Bhatt–Scholze, Proposition 6.8.14(2).
 -/
@@ -501,7 +503,9 @@ private theorem continuousSheafificationScalar
     s.val U • (adj.unit.app Q).app U z
   exact ((adj.unit.app Q).app U).hom.map_smul _ _
 
-omit [EssentiallySmall.{u} C] in
+omit [EssentiallySmall.{u} C] [HasSheafify J AddCommGrpCat.{u}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
+  [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
 private theorem continuousCoefficientRestriction
     (A B : Type v) [CommRing A] [CommRing B] (t : A)
     (eB : Localization.Away t ≃+* B) (R : Sheaf J CommRingCat.{u})

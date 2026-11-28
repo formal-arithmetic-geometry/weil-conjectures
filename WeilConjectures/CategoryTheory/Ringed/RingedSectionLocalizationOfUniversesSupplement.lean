@@ -35,6 +35,8 @@ variable [HasSheafify J CommRingCat.{u}]
 variable [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
 variable (O : Sheaf J CommRingCat.{u})
 
+omit [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
+  [HasSheafify J CommRingCat.{u}] in
 /-- The sectionwise units form a section of the localization presheaf.
 Source: Stacks Project, algebraization.tex, Tag 0996. -/
 theorem ringedSectionLocalizationPresheaf_one_naturalOfUniverses
@@ -66,6 +68,8 @@ variable [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
 variable (R : Sheaf J CommRingCat.{u})
 variable (s : (R.obj ⋙ forget CommRingCat).sections)
 
+omit [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
+  [HasSheafify J CommRingCat.{u}] [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
 /-- The localization restrictions preserve identities as ring maps.
 Source: Stacks Tags 0996 and 099E. -/
 theorem ringedLocalizationRing_map_idOfUniverses (U : Cᵒᵖ) :
@@ -74,6 +78,8 @@ theorem ringedLocalizationRing_map_idOfUniverses (U : Cᵒᵖ) :
   ext r
   simp [ringedSectionLocalizationMapOfUniverses]
 
+omit [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
+  [HasSheafify J CommRingCat.{u}] [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
 /-- The localization restrictions preserve composites as ring maps.
 Source: Stacks Tags 0996 and 099E. -/
 theorem ringedLocalizationRing_map_compOfUniverses {U V W : Cᵒᵖ} (f : U ⟶ V) (g : V ⟶ W) :
@@ -92,6 +98,8 @@ def ringedLocalizationRingPresheafOfUniverses : Cᵒᵖ ⥤ CommRingCat.{u} wher
   map_id U := congrArg CommRingCat.ofHom (ringedLocalizationRing_map_idOfUniverses R s U)
   map_comp f g := congrArg CommRingCat.ofHom (ringedLocalizationRing_map_compOfUniverses R s f g)
 
+omit [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
+  [HasSheafify J CommRingCat.{u}] [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
 /-- The section localization algebra maps commute with restrictions.
 Source: Stacks Tags 0996 and 099E. -/
 theorem ringedLocalizationRing_unit_naturalityOfUniverses {U V : Cᵒᵖ} (f : U ⟶ V) :

@@ -141,13 +141,11 @@ theorem finiteCoefficient_comparison_preserves_torAmplitude
     (_hTor' : Etale.DerivedCategory.hasTorAmplitudeIn
       (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) T a b K') :
     Scheme.intrinsicFiniteTorsionConstructible l E n hn T
-        ((@ProEtale.finiteCoefficientIntrinsicDerivedComparison.{u} T
-          (Padic.coefficientExtensionRing l E n) inferInstance
-          (Padic.finite_coefficientExtensionRing l E n hn)).obj K') ∧
+        ((ProEtale.finiteCoefficientIntrinsicDerivedComparison.{u} T
+          (Padic.coefficientExtensionRing l E n)).obj K') ∧
       Scheme.HasProEtaleTorAmplitude T (Padic.coefficientExtensionRing l E n)
-        ((@ProEtale.finiteCoefficientIntrinsicDerivedComparison.{u} T
-          (Padic.coefficientExtensionRing l E n) inferInstance
-          (Padic.finite_coefficientExtensionRing l E n hn)).obj K') a b := by
+        ((ProEtale.finiteCoefficientIntrinsicDerivedComparison.{u} T
+          (Padic.coefficientExtensionRing l E n)).obj K') a b := by
   exact ⟨intrinsicComparison_boundedConstructible D l _hlp E n hn T K' _hK',
     intrinsicComparison_torAmplitude D l _hlp E n hn T a b _hab K' _hK' _hTor'⟩
 
@@ -166,9 +164,8 @@ theorem finiteCoefficient_comparison_reflects_torAmplitude
     (K : Scheme.proEtaleDerivedCategory T (Padic.coefficientExtensionRing l E n))
     (_hK : Scheme.intrinsicFiniteTorsionConstructible l E n hn T K)
     (_hTor : Scheme.HasProEtaleTorAmplitude T (Padic.coefficientExtensionRing l E n) K a b)
-    (_e : K ≅ (@ProEtale.finiteCoefficientIntrinsicDerivedComparison.{u} T
-          (Padic.coefficientExtensionRing l E n) inferInstance
-          (Padic.finite_coefficientExtensionRing l E n hn)).obj K') :
+    (_e : K ≅ (ProEtale.finiteCoefficientIntrinsicDerivedComparison.{u} T
+          (Padic.coefficientExtensionRing l E n)).obj K') :
     Etale.DerivedCategory.hasTorAmplitudeIn
       (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) T a b K' := by
   let A := Padic.coefficientExtensionRing l E n

@@ -239,6 +239,8 @@ variable [HasDerivedCategory.{wb} (RingedTensorModules.{c, v, r} J R)]
 attribute [local irreducible] coefficientTotalTensor tensorSummand
 
 include cB cA
+omit [∀ I : Type (max c v r), PreservesLimitsOfShape (Discrete I) U]
+  [U.PreservesKInjectiveComplexes] in
 /-- Associativity on the image of flat-term K-flat representatives.
 This only concerns three specified complexes, not arbitrary derived objects, and
 constructs neither a unit comparison nor any other structural constraint.

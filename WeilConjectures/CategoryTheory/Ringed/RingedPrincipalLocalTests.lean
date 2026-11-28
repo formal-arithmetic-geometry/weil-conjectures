@@ -154,6 +154,7 @@ def principalLocallyComplete (a : (R.obj ⋙ forget CommRingCat).sections)
     principalLocallyDivisible.{c, v, r} R a U s →
     IsZero (principalLocalTest.{c, v, r, w} R N U s)
 
+omit [∀ U : C, HasSheafify (J.over U) CommRingCat.{max c v r}] in
 /-- Principal local completeness is invariant under isomorphism of derived objects.
 Source: Stacks 0999. -/
 theorem principalLocallyComplete_iso

@@ -357,10 +357,24 @@ set_option backward.isDefEq.respectTransparency.types true
 set_option backward.isDefEq.respectTransparency.types false in
 attribute [local semireducible] homComplexFunctor
 set_option backward.isDefEq.respectTransparency.types false in
--- Cache the inferred proof type without elaborating the concrete interface twice.
--- `theorem` needs an explicit type; the inferred proof type is deliberately left implicit.
-set_option linter.defProp false in
-private def sheafHomRestrictionComparison :=
+private theorem sheafHomRestrictionComparison :
+    letI : (nativeRestriction.{c, v, u} J A U).Additive :=
+      (ringedOverFunctor_exactGeneral.{c, v, max c v u, max c v u}
+        ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A) U).1
+    ∃ γ : Functor.uncurry.obj (nativeHomInterface.{c, v, u} J A).complex ⋙
+          (nativeRestriction.{c, v, u} J A U).mapHomologicalComplex (.up ℤ) ≅
+        (((nativeRestriction.{c, v, u} J A U).mapHomologicalComplex (.up ℤ)).op.prod
+          ((nativeRestriction.{c, v, u} J A U).mapHomologicalComplex (.up ℤ))) ⋙
+          Functor.uncurry.obj (nativeHomInterface.{max c v, v, u} (J.over U) (A.over U)).complex,
+      ∀ (L M : CochainComplex (ModuleSheaf.{c, v, u} J A) ℤ) (n p q : ℤ) (h : p + n = q),
+        (γ.hom.app (op L, M)).f n ≫
+            (nativeHomInterface.{max c v, v, u} (J.over U) (A.over U)).π
+              (((nativeRestriction.{c, v, u} J A U).mapHomologicalComplex (.up ℤ)).obj L)
+              (((nativeRestriction.{c, v, u} J A U).mapHomologicalComplex (.up ℤ)).obj M)
+              n p q h =
+          (nativeRestriction.{c, v, u} J A U).map
+              ((nativeHomInterface.{c, v, u} J A).π L M n p q h) ≫
+            (homOverIso.{c, v, u} J A U (L.X p) (M.X q)).hom :=
   let V := nativeRestriction.{c, v, u} J A U
   letI hLim : PreservesLimitsOfSize.{0, 0} V :=
     (SheafOfModules.localizedSystemAdjunction.{c, v, u} A U).rightAdjoint_preservesLimits
