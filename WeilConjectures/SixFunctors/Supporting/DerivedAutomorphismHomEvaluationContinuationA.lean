@@ -100,6 +100,7 @@ import WeilConjectures.PoincareDuality.Pod.PodRationalClosedHomNaturality
 import WeilConjectures.PoincareDuality.Pod.PodCommonClosedHomNaturality
 import WeilConjectures.PoincareDuality.Derived.PodPartialHomNaturality
 import WeilConjectures.PoincareDuality.Pod.PodCommonHomComparisonStage
+import WeilConjectures.PoincareDuality.Pod.PodCommonInverseTransposeStage
 public import WeilConjectures.PoincareDuality.Pod.PodCommonClosedExistence
 
 /-! # Internal Hom and evaluation under coefficient-site isomorphisms
@@ -548,7 +549,9 @@ theorem podCommonInverseTranspose_tr
       commonStageInverseTranspose l Ω W
         (fun F ↦ podRationalClosed l (Coefficient.{u} l Ω F) W) L P F' (hL.trans k)
         (hP.trans k) (hT.trans k) (hN.trans k) ((stageSystem l Ω W).tr k φ) := by
-  sorry
+  exact commonStageInverseTranspose_transition l Ω W _
+    (fun F ↦ (podRationalClosed_existsUnique l (Coefficient.{u} l Ω F) W).exists.choose_spec)
+    L P F F' k hL hP hT hN φ
 
 /-- Common-stage closed maps are determined by rational transposition at every
 larger finite field, and are natural on the actual Hom-colimit category. -/
