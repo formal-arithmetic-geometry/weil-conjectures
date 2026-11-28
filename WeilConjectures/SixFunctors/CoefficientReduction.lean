@@ -26,6 +26,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Con
 import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.EtaleRestrictScalarsFunctorComparisons
 import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
+import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.Comparison
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalKFlat
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriek
@@ -977,6 +978,33 @@ theorem exists_isDerivedBaseChange_derivedTensor {X : Scheme.{u}} (K L : 𝐃(X,
     (((Sheaf.extendScalars X.smallEtaleTopology φ).leftDerivedTensorIso K).app L ≪≫
       MonoidalCategory.tensorIso eK eL)⟩
 
+/-- The internal Hom out of a complex which is perfect on the coefficient site commutes with
+derived base change along any ring morphism `φ : Λ →+* Λ'`: if `K'` and `L'` are derived base
+changes of `K` and `L`, then `RHom(K', L')` is a derived base change of `RHom(K, L)`. Indeed `K` is
+dualizable, and the monoidal functor `- ⊗ᴸ_Λ Λ'` preserves internal Homs out of dualizable
+objects. -/
+theorem exists_isDerivedBaseChange_derivedHom_of_isSitePerfect {X : Scheme.{u}} {K L : 𝐃(X, Λ)}
+    (hK : DerivedCategory.IsSitePerfect K) {K' L' : 𝐃(X, Λ')}
+    {η : K ⟶ (derivedRestrictScalars φ X).obj K'} {η' : L ⟶ (derivedRestrictScalars φ X).obj L'}
+    (hη : IsDerivedBaseChange η) (hη' : IsDerivedBaseChange η') :
+    ∃ θ : ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj L ⟶
+      (derivedRestrictScalars φ X).obj (((derivedHom (ModuleCat.{u + 1} Λ') X).obj (op K')).obj L'),
+      IsDerivedBaseChange θ := by
+  let := (sheafExtendScalars φ X).leftDerivedFunctorMonoidal
+  obtain ⟨eK⟩ := nonempty_iso_leftDerivedSheafExtendScalars_of_isDerivedBaseChange φ X hη
+  obtain ⟨eL⟩ := nonempty_iso_leftDerivedSheafExtendScalars_of_isDerivedBaseChange φ X hη'
+  obtain ⟨_⟩ := hK.isDualizable
+  obtain ⟨_⟩ := DerivedCategory.nonempty_braidedCategory
+    (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+  let := BraidedCategory.exactPairing_swap K Kᘁ
+  have := Functor.Monoidal.isIso_ihomComparison_app_of_exactPairing L(sheafExtendScalars φ X)
+    Kᘁ K L
+  exact ⟨_, (isDerivedBaseChange_leftDerivedEtaleSheafExtendScalarsAdjunction_unit φ X _)
+    |>.comp_map_iso
+      (asIso ((Functor.LaxMonoidal.ihomComparison L(sheafExtendScalars φ X) K).app L) ≪≫
+      ((derivedHom (ModuleCat.{u + 1} Λ') X).mapIso eK.symm.op).app _ ≪≫
+      ((derivedHom (ModuleCat.{u + 1} Λ') X).obj (op K')).mapIso eL)⟩
+
 end Tensor
 
 /-- Reduction `Λ → Λ ⧸ (ϖ)ⁿ` commutes with the basic operations of the étale derived
@@ -1011,7 +1039,8 @@ theorem finiteReductionCompatibility {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
     exists_isDerivedBaseChange_derivedTensor _ K L K' L' η η' hη hη'
   rightDerivedLowerShriek := sorry
   projectionMap := sorry
-  derivedHom := sorry
+  derivedHom _ _ hK _ _ _ _ hη hη' :=
+    exists_isDerivedBaseChange_derivedHom_of_isSitePerfect _ hK hη hη'
 
 /-- The base change map `(Rf_* K) ⊗ᴸ 𝒪_{E'} ⟶ Rf_* (K ⊗ᴸ 𝒪_{E'})` of the common-stage scalar
 extension `𝒪_E → 𝒪_{E'}` is an isomorphism, `𝒪_{E'}` being a finite free `𝒪_E`-module. -/
