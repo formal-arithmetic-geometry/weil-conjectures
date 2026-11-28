@@ -18,6 +18,7 @@ import all WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalSupportedCoefficie
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalRootLimitCompatibility
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalFiniteRootsCanonicalMap
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Trace.DiagonalTraceFiniteEtaleImageSurjective
+public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerChernNormalizationData.DiagonalLocalChernHEqCongr
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.FiniteExactArrow.FiniteExactArrowCalculus
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerChernNormalizationData.DiagonalLocalChernStageTransport
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerChernNormalizationData.DiagonalLocalChernStagedArrow
@@ -63,7 +64,7 @@ theorem localStagedArrow_forget (s : UniformizerChernNormalizationData l Y)
     SpTowerClasses.mapSingleArrow (localCompletedForget l (ProjectiveLine Y)) 2 z ≫
       ((DerivedCategory.singleFunctor (DiagonalAb (ProjectiveLine Y)) 0).map
         (localLineEndpoint l Y s))⟦(2 : ℤ)⟧' := by
-  exact single_stage_trans _ _ _ _ _ _ _ _
+  have h := single_stage_trans _ _ _ _ _ _ _ _
     (mapSingleArrow_exact_stage s.completedP.F _ _
       (s.completedP.underlying ≪≫ localCompletedForgetIso l (ProjectiveLine Y))
       s.completedP.unitIso s.completedP.lineIso z)
@@ -72,6 +73,7 @@ theorem localStagedArrow_forget (s : UniformizerChernNormalizationData l Y)
         s.toIntegral.lineP _)
       (Endpoint.mapSingleArrow_forget_exact _ (s.scalar.units (ProjectiveLine Y)) s.scalar.lineP
         s.eP.F _ s.eP.underlying s.eP.unitIso (s.lineP.iso l) _))
+  heq_congr
 
 end UniformizerChernNormalizationData
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients

@@ -18,6 +18,7 @@ import all WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalSupportedCoefficie
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalRootLimitCompatibility
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalFiniteRootsCanonicalMap
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Trace.DiagonalTraceFiniteEtaleImageSurjective
+public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerChernNormalizationData.DiagonalLocalChernHEqCongr
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.FiniteExactArrow.FiniteExactArrowCalculus
 
 /-! # The staged form of a local uniformizer reduction
@@ -121,9 +122,11 @@ theorem localComposite_eq_staged (s : UniformizerChernNormalizationData l Y)
   unfold LocalComposite localUnitInv localLine localFunctor ChernCoefficientDiagram.localUnitIso
     QuotientLineRealization.shifted FiniteRealization.shiftedLine CompletedRealization.shiftedLine
     localStagedArrow SpTowerClasses.mapSingleArrow
-  simp only [id, diagram, Iso.trans_inv, Functor.mapIso_inv, Iso.app_inv, Iso.symm_inv,
-    Functor.comp_map, Functor.map_comp, Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id,
-    Category.comp_id]
+  apply eq_of_heq
+  simp only [id, diagram, Iso.trans_inv, Functor.mapIso_inv, Iso.app_inv,
+    Iso.symm_inv, Functor.comp_map, Functor.map_comp, Category.assoc, Iso.inv_hom_id_assoc,
+    Iso.inv_hom_id, Category.comp_id]
+  heq_congr
 
 end UniformizerChernNormalizationData
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients
