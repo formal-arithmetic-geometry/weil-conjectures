@@ -60,6 +60,7 @@ theorem integralKernel_first_contraction
   intro M
   obtain ⟨u, v, hu, hv, htransport⟩ := integralKernel_first_transport
     ℓ E k Y hq hr family _href a _hnorm M
-  have hambient := integralKernel_first_ambient_formula ℓ E k Y family M.obj u v hu hv
+  have hambient := integralKernel_first_ambient_formula ℓ E k Y family _href M.obj M.property
+    u v hu hv
   exact htransport.trans hambient
 end AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction

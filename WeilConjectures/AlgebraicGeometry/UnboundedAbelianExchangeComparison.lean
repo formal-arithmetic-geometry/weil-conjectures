@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.ExactUnboundedExchange
 public import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.BaseChange
 import WeilConjectures.AlgebraicGeometry.ModuleAbelianKInjectiveDirectImageAcyclic
 import WeilConjectures.AlgebraicGeometry.ModuleAbelianUnderivedExchange
 
@@ -115,22 +116,6 @@ private lemma exactComparison_inv
       (Functor.mapDerivedCategoryNatIso e.symm).hom := rfl
   simp only [Iso.trans_inv, Iso.trans_hom, Iso.symm_inv, Iso.symm_hom, hi, Category.assoc]
 
--- K-injective derivability makes these right derived functors absolute.
-private lemma derivedSquare_absolute
-    {B C E : Type*} [Category* B] [Category* C] [Category* E]
-    [Abelian B] [Abelian C] [HasDerivedCategory B] [HasDerivedCategory C]
-    [Abelian.HasKInjectiveResolutions B] (F : B ⥤ C) [F.Additive]
-    (T : DerivedCategory C ⥤ E) :
-    (F.rightDerivedFunctor ⋙ T).IsRightDerivedFunctor
-      (Functor.whiskerRight F.rightDerivedFunctorUnit T ≫
-        (Functor.associator _ _ _).hom) (HomotopyCategory.quasiIso B (.up ℤ)) :=
-  (HomotopyCategory.KInjectives.localizerMorphism B)
-    |>.isRightDerivedFunctor_comp_of_isRightDerivabilityStructure _
-      (fun I ↦ (HomotopyCategory.KInjectives.localizerMorphism_derives
-        _).isIso_of_isRightDerivedFunctor _ I) _
-
-attribute [local instance] derivedSquare_absolute
-
 section DerivedSquare
 
 variable {B B' C C' : Type*} [Category* B] [Category* B'] [Category* C] [Category* C']
@@ -142,75 +127,19 @@ variable {B B' C C' : Type*} [Category* B] [Category* B'] [Category* C] [Categor
   [PreservesFiniteLimits β] [PreservesFiniteColimits β]
   [PreservesFiniteLimits γ] [PreservesFiniteColimits γ]
 
--- The comparison before right-derived descent; only beta and gamma are exact.
-private noncomputable def derivedSquareAux (e : G ⋙ γ ⟶ β ⋙ G') :
-    (G.mapHomotopyCategory (.up ℤ)) ⋙ DerivedCategory.Qh ⋙ γ.mapDerivedCategory ⟶
-      DerivedCategory.Qh ⋙ β.mapDerivedCategory ⋙ G'.rightDerivedFunctor :=
-  Functor.whiskerLeft (G.mapHomotopyCategory (.up ℤ)) γ.mapDerivedCategoryFactorsh.hom ≫
-    (Functor.associator _ _ _).inv ≫
-    Functor.whiskerRight (Functor.mapHomotopyCategoryCompIso (Iso.refl (G ⋙ γ)) (.up ℤ)).hom
-      DerivedCategory.Qh ≫
-    Functor.whiskerRight (NatTrans.mapHomotopyCategory e (.up ℤ)) DerivedCategory.Qh ≫
-    Functor.whiskerRight (Functor.mapHomotopyCategoryCompIso (Iso.refl (β ⋙ G')) (.up ℤ)).inv
-      DerivedCategory.Qh ≫
-    (Functor.associator _ _ _).hom ≫
-    Functor.whiskerLeft (β.mapHomotopyCategory (.up ℤ)) G'.rightDerivedFunctorUnit ≫
-    (Functor.associator _ _ _).inv ≫
-    Functor.whiskerRight β.mapDerivedCategoryFactorsh.inv G'.rightDerivedFunctor ≫
-    (Functor.associator _ _ _).hom
-
-private noncomputable def derivedSquare (e : G ⋙ γ ⟶ β ⋙ G') :
-    G.rightDerivedFunctor ⋙ γ.mapDerivedCategory ⟶
-      β.mapDerivedCategory ⋙ G'.rightDerivedFunctor :=
-  (G.rightDerivedFunctor ⋙ γ.mapDerivedCategory).rightDerivedDesc
-    (Functor.whiskerRight G.rightDerivedFunctorUnit γ.mapDerivedCategory ≫
-      (Functor.associator _ _ _).hom)
-    (HomotopyCategory.quasiIso B (.up ℤ)) _ (derivedSquareAux e)
-
-@[reassoc]
-private lemma derivedSquare_fac (e : G ⋙ γ ⟶ β ⋙ G') :
-    (Functor.whiskerRight G.rightDerivedFunctorUnit γ.mapDerivedCategory ≫
-      (Functor.associator _ _ _).hom) ≫
-      Functor.whiskerLeft DerivedCategory.Qh (derivedSquare e) =
-    derivedSquareAux e :=
-  Functor.rightDerived_fac _ _ _ _ _
-
-private lemma derivedSquare_app_fac (e : G ⋙ γ ⟶ β ⋙ G')
-    (K : HomotopyCategory B (.up ℤ)) :
-    γ.mapDerivedCategoryFactorsh.inv.app ((G.mapHomotopyCategory (.up ℤ)).obj K) ≫
-        γ.mapDerivedCategory.map (G.rightDerivedFunctorUnit.app K) ≫
-        (derivedSquare e).app (DerivedCategory.Qh.obj K) =
-      DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory e (.up ℤ)).app K) ≫
-        G'.rightDerivedFunctorUnit.app ((β.mapHomotopyCategory (.up ℤ)).obj K) ≫
-        G'.rightDerivedFunctor.map (β.mapDerivedCategoryFactorsh.inv.app K) := by
-  have h := congr_app (derivedSquare_fac e) K
-  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Functor.associator_hom_app, Category.comp_id] at h
-  have hh := congrArg (fun k ↦
-    γ.mapDerivedCategoryFactorsh.inv.app ((G.mapHomotopyCategory (.up ℤ)).obj K) ≫ k) h
-  simp only [derivedSquareAux, NatTrans.comp_app, Functor.whiskerRight_app,
-    Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app,
-    Category.id_comp, Category.comp_id] at hh
-  simp only [Functor.mapHomotopyCategoryCompIso_refl_hom_app,
-    homotopyCompIso_inv_app] at hh
-  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id] at hh
-  erw [Category.id_comp, Category.id_comp] at hh
-  erw [Iso.inv_hom_id_app_assoc] at hh
-  exact hh
-
 -- Test invertibility on module K-injectives; beta need not preserve K-injectives.
 private lemma derivedSquare_isIso (e : G ⋙ γ ≅ β ⋙ G')
     (hβ : ∀ (K : CochainComplex B ℤ) [K.IsKInjective],
       IsIso (G'.rightDerivedFunctorUnit.app
         ((β.mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient _ _).obj K)))) :
-    IsIso (derivedSquare e.hom) := by
+    IsIso (Functor.rightDerivedFunctorBaseChange e.hom) := by
   have ht : (β.mapDerivedCategory ⋙ G'.rightDerivedFunctor).IsRightDerivedFunctor
-      (derivedSquareAux e.hom) (HomotopyCategory.quasiIso B (.up ℤ)) := by
+      (Functor.rightDerivedFunctorBaseChangeAux e.hom) (HomotopyCategory.quasiIso B (.up ℤ)) := by
     refine (HomotopyCategory.KInjectives.localizerMorphism_derives
       ((G.mapHomotopyCategory (.up ℤ)) ⋙ DerivedCategory.Qh ⋙
         γ.mapDerivedCategory)).isRightDerivedFunctor_of_isIso _ (fun I ↦ ?_)
     obtain ⟨K, _, rfl⟩ := HomotopyCategory.KInjectives.mk_surjective I
-    change IsIso ((derivedSquareAux e.hom).app
+    change IsIso ((Functor.rightDerivedFunctorBaseChangeAux e.hom).app
       ((HomotopyCategory.quotient _ _).obj K))
     let eh : (G ⋙ γ).mapHomotopyCategory (.up ℤ) ≅
         (β ⋙ G').mapHomotopyCategory (.up ℤ) :=
@@ -223,11 +152,12 @@ private lemma derivedSquare_isIso (e : G ⋙ γ ≅ β ⋙ G')
     have : IsIso (NatTrans.mapHomotopyCategory e.hom (.up ℤ)) :=
       ⟨⟨eh.inv, eh.hom_inv_id, eh.inv_hom_id⟩⟩
     have := hβ K
-    simp only [derivedSquareAux, NatTrans.comp_app, Functor.whiskerRight_app,
+    simp only [Functor.rightDerivedFunctorBaseChangeAux, NatTrans.comp_app,
+        Functor.whiskerRight_app,
       Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app]
     infer_instance
   exact (Functor.isRightDerivedFunctor_iff_isIso_rightDerivedDesc _ _
-    (HomotopyCategory.quasiIso B (.up ℤ)) _ (derivedSquareAux e.hom)).1 ht
+    (HomotopyCategory.quasiIso B (.up ℤ)) _ (Functor.rightDerivedFunctorBaseChangeAux e.hom)).1 ht
 
 end DerivedSquare
 
@@ -309,28 +239,28 @@ private lemma derivedSquare_cube
     (h : ∀ F : B, V'.map (e.app F) ≫ b.app (P.obj F) ≫ H₀.map (d.inv.app F) =
       c.inv.app (G.obj F) ≫ Q₀.map (a.app F) ≫ e₀.app (U.obj F))
     (K : DerivedCategory B) :
-    D(V').map ((derivedSquare e).app K) ≫
-        (derivedSquare b).app (D(P).obj K) ≫
+    D(V').map ((Functor.rightDerivedFunctorBaseChange e).app K) ≫
+        (Functor.rightDerivedFunctorBaseChange b).app (D(P).obj K) ≫
         R(H₀).map ((Functor.mapDerivedCategoryCompIso U P₀ ≪≫
           Functor.mapDerivedCategoryNatIso d ≪≫
           (Functor.mapDerivedCategoryCompIso P U').symm).inv.app K) =
       (Functor.mapDerivedCategoryCompIso V Q₀ ≪≫
         Functor.mapDerivedCategoryNatIso c ≪≫ (Functor.mapDerivedCategoryCompIso Q V').symm).inv.app
           (R(G).obj K) ≫
-        D(Q₀).map ((derivedSquare a).app K) ≫
-        (derivedSquare e₀).app (D(U).obj K) := by
+        D(Q₀).map ((Functor.rightDerivedFunctorBaseChange a).app K) ≫
+        (Functor.rightDerivedFunctorBaseChange e₀).app (D(U).obj K) := by
   let dc := Functor.mapDerivedCategoryCompIso V Q₀ ≪≫
     Functor.mapDerivedCategoryNatIso c ≪≫ (Functor.mapDerivedCategoryCompIso Q V').symm
   let dd := Functor.mapDerivedCategoryCompIso U P₀ ≪≫
     Functor.mapDerivedCategoryNatIso d ≪≫ (Functor.mapDerivedCategoryCompIso P U').symm
   let α : R(G) ⋙ (D(Q) ⋙ D(V')) ⟶ (D(U) ⋙ D(P₀)) ⋙ R(H₀) :=
-    Functor.whiskerRight (derivedSquare e) D(V') ≫
-    Functor.whiskerLeft D(P) (derivedSquare b) ≫
+    Functor.whiskerRight (Functor.rightDerivedFunctorBaseChange e) D(V') ≫
+    Functor.whiskerLeft D(P) (Functor.rightDerivedFunctorBaseChange b) ≫
     Functor.whiskerRight dd.inv R(H₀)
   let β : R(G) ⋙ (D(Q) ⋙ D(V')) ⟶ (D(U) ⋙ D(P₀)) ⋙ R(H₀) :=
     Functor.whiskerLeft R(G) dc.inv ≫
-    Functor.whiskerRight (derivedSquare a) D(Q₀) ≫
-    Functor.whiskerLeft D(U) (derivedSquare e₀)
+    Functor.whiskerRight (Functor.rightDerivedFunctorBaseChange a) D(Q₀) ≫
+    Functor.whiskerLeft D(U) (Functor.rightDerivedFunctorBaseChange e₀)
   -- Absoluteness reduces equality to compatibility on the homotopy category.
   have heq : α = β := by
     apply CategoryTheory.Functor.rightDerived_ext (R(G) ⋙ (D(Q) ⋙ D(V')))
@@ -342,33 +272,33 @@ private lemma derivedSquare_cube
       Functor.associator_hom_app, Category.id_comp,
       Functor.comp_map, α, β, Category.assoc]
     -- Replace the first two derived faces by their defining unit factorizations.
-    have he := congr_app (derivedSquare_fac e) M
-    have ha := congr_app (derivedSquare_fac a) M
+    have he := congr_app (Functor.rightDerivedFunctorBaseChange_fac e) M
+    have ha := congr_app (Functor.rightDerivedFunctorBaseChange_fac a) M
     simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
       Functor.associator_hom_app, Category.comp_id, Functor.comp_obj] at he ha
     rw [← D(V').map_comp_assoc, he]
     have hc := dc.inv.naturality (G.rightDerivedFunctorUnit.app M)
     simp only [Functor.comp_map] at hc
     rw [reassoc_of% hc, ← D(Q₀).map_comp_assoc, ha]
-    simp only [derivedSquareAux, NatTrans.comp_app,
+    simp only [Functor.rightDerivedFunctorBaseChangeAux, NatTrans.comp_app,
       Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
       Functor.associator_inv_app, Category.id_comp, Category.comp_id,
       Functor.map_comp, Category.assoc]
     -- Move the localization comparisons through the remaining faces and factor them.
-    have hb := (derivedSquare b).naturality
+    have hb := (Functor.rightDerivedFunctorBaseChange b).naturality
       (P.mapDerivedCategoryFactorsh.inv.app M)
-    have he₀ := (derivedSquare e₀).naturality
+    have he₀ := (Functor.rightDerivedFunctorBaseChange e₀).naturality
       (U.mapDerivedCategoryFactorsh.inv.app M)
     simp only [Functor.comp_map, Functor.comp_obj] at hb he₀
     rw [reassoc_of% hb, he₀]
-    have hbf := congr_app (derivedSquare_fac b)
+    have hbf := congr_app (Functor.rightDerivedFunctorBaseChange_fac b)
       ((P.mapHomotopyCategory (.up ℤ)).obj M)
-    have he₀f := congr_app (derivedSquare_fac e₀)
+    have he₀f := congr_app (Functor.rightDerivedFunctorBaseChange_fac e₀)
       ((U.mapHomotopyCategory (.up ℤ)).obj M)
     simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
       Functor.associator_hom_app, Category.comp_id, Functor.comp_obj] at hbf he₀f
     rw [reassoc_of% hbf, reassoc_of% he₀f]
-    simp only [derivedSquareAux, NatTrans.comp_app,
+    simp only [Functor.rightDerivedFunctorBaseChangeAux, NatTrans.comp_app,
       Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
       Functor.associator_inv_app, Category.id_comp, Category.comp_id,
       Category.assoc]
@@ -616,18 +546,18 @@ private lemma derived_mate_eq_square (adj : L ⊣ R) (adj' : L' ⊣ R')
           DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory σ (.up ℤ)).app N)) :
     (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
       adj'.mapDerivedCategoryRightDerivedAdjunction θ) =
-        derivedSquare (mateEquiv adj adj' σ) := by
+        Functor.rightDerivedFunctorBaseChange (mateEquiv adj adj' σ) := by
   apply Functor.rightDerived_ext (R.rightDerivedFunctor ⋙ G.mapDerivedCategory)
     (Functor.whiskerRight R.rightDerivedFunctorUnit G.mapDerivedCategory ≫
       (Functor.associator _ _ _).hom) (HomotopyCategory.quasiIso C₁ (.up ℤ))
   apply NatTrans.ext
   funext K
   have hn := derived_mate_app_fac adj adj' σ θ hθ K
-  have hd := congr_app (derivedSquare_fac (mateEquiv adj adj' σ)) K
+  have hd := congr_app (Functor.rightDerivedFunctorBaseChange_fac (mateEquiv adj adj' σ)) K
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.associator_hom_app, Category.comp_id] at hd ⊢
   rw [hd]
-  simp only [derivedSquareAux, NatTrans.comp_app, Functor.whiskerRight_app,
+  simp only [Functor.rightDerivedFunctorBaseChangeAux, NatTrans.comp_app, Functor.whiskerRight_app,
     Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.comp_id]
   simp only [Functor.mapHomotopyCategoryCompIso_refl_hom_app,
@@ -643,7 +573,7 @@ private lemma derived_mate_exact_eq_square (adj : L ⊣ R) (adj' : L' ⊣ R')
       (TwoSquare.mk _ _ _ _ ((Functor.mapDerivedCategoryCompIso G L' ≪≫
         Functor.mapDerivedCategoryNatIso e ≪≫
         (Functor.mapDerivedCategoryCompIso L G').symm).hom))) =
-      derivedSquare (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)) := by
+      Functor.rightDerivedFunctorBaseChange (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)) := by
   apply derived_mate_eq_square
   intro N
   exact exactComparison_factorsh G L' L G' e N
@@ -655,7 +585,7 @@ private lemma derived_mate_exact_inv_eq_square (adj : L ⊣ R) (adj' : L' ⊣ R'
       (TwoSquare.mk _ _ _ _ ((Functor.mapDerivedCategoryCompIso L G' ≪≫
         Functor.mapDerivedCategoryNatIso e ≪≫
         (Functor.mapDerivedCategoryCompIso G L').symm).inv))) =
-      derivedSquare (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.inv)) := by
+      Functor.rightDerivedFunctorBaseChange (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.inv)) := by
   apply derived_mate_eq_square
   intro N
   have hi : (Functor.mapDerivedCategoryNatIso e).inv =
@@ -793,7 +723,7 @@ theorem unbounded_abelian_exchange_comparison
           _ _ |>.apply_symm_apply _)
   have hc {A B : Scheme.{u}} (v : A ⟶ B) :
       moduleAbelianUnboundedLowerStarComparison Λ v =
-        derivedSquare (moduleAbelianLowerStarIso Λ v).hom := by
+        Functor.rightDerivedFunctorBaseChange (moduleAbelianLowerStarIso Λ v).hom := by
     have h := derived_mate_exact_inv_eq_square
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) v)
       (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} v)
@@ -818,7 +748,7 @@ theorem unbounded_abelian_exchange_comparison
       exact moduleAbelianForget_kInjective_directImage_quasiIso Λ v I J j
     · intro P
       rw [hc]
-      have h := derivedSquare_app_fac (moduleAbelianLowerStarIso Λ v).hom P
+      have h := Functor.rightDerivedFunctorBaseChange_app_fac (moduleAbelianLowerStarIso Λ v).hom P
       simpa only [moduleAbelianLowerStarIso, Iso.refl_hom,
         NatTrans.mapHomotopyCategory_id, NatTrans.id_app,
         CategoryTheory.Functor.map_id, Category.id_comp] using h
@@ -838,7 +768,7 @@ theorem unbounded_abelian_exchange_comparison
     have he (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]
         [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] :
         exactDerivedBaseChangeMap A sq.toCommSq =
-          derivedSquare (baseChangeMap A sq.toCommSq) :=
+          Functor.rightDerivedFunctorBaseChange (baseChangeMap A sq.toCommSq) :=
       derived_mate_exact_eq_square (upperStarLowerStarAdjunction A f)
         (upperStarLowerStarAdjunction A f') (squareUpperStarIso A sq.toCommSq)
     rw [he (ModuleCat.{u + 1} Λ), he AddCommGrpCat.{u + 1}, hc f, hc f']
