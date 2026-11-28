@@ -17721,6 +17721,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafi
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Products
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Projective
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
@@ -17934,6 +17935,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Abelian.CommSq
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Exact
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.FunctorCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ModuleEmbedding.GabrielPopescu

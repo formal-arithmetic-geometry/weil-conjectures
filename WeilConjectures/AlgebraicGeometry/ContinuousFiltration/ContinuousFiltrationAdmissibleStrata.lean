@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FiniteLocallyClosedStratification
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousConstructibleModule
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.ContinuousModuleEncodingUniverses
 public import WeilConjectures.AlgebraicGeometry.Integral.IntegralModelOpenClosedBasic
@@ -406,24 +407,6 @@ def stratumPiece {X : Scheme.{u}} (V : X.Opens) {S : Scheme.{u}}
     ((continuousModuleDirectImage t E).obj
       ((pull l E t).obj ((pull l E V.ι).obj F)))
 
-/-- A morphism of module sheaves which is bijective on all sections is an isomorphism. -/
-theorem _root_.SheafOfModules.isIso_of_bijective_app {C : Type (u + 1)} [Category.{u} C]
-    {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u + 1}}
-    {M N : SheafOfModules.{u + 1} R} (f : M ⟶ N)
-    (hf : ∀ W : Cᵒᵖ, Function.Bijective (f.val.app W)) : IsIso f := by
-  rw [← isIso_iff_of_reflects_iso _ (SheafOfModules.forget _ ⋙ PresheafOfModules.toPresheaf _),
-    NatTrans.isIso_iff_isIso_app]
-  intro W
-  exact (ConcreteCategory.isIso_iff_bijective _).mpr (hf W)
-
-/-- A module sheaf all of whose sections are subsingletons is zero. -/
-theorem _root_.SheafOfModules.isZero_of_subsingleton {C : Type (u + 1)} [Category.{u} C]
-    {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u + 1}}
-    (M : SheafOfModules.{u + 1} R) (h : ∀ W : Cᵒᵖ, Subsingleton (M.val.obj W)) : IsZero M := by
-  rw [IsZero.iff_id_eq_zero]
-  ext W x
-  exact Subsingleton.elim _ _
-
 /-- The counit is the counit of the extension-by-zero/restriction adjunction. -/
 private theorem counit_eq_extensionSheafAdjunction_counit {X : Scheme.{u}} (V : X.Opens)
     (F : SheafOfModules.{u + 1} (latticeModuleRing X E)) :
@@ -774,11 +757,6 @@ theorem isNoetherian_of_isImmersion {Y X : Scheme.{u}} (f : Y ⟶ X) [IsImmersio
   have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian f
   have : TopologicalSpace.NoetherianSpace Y := f.isEmbedding.isInducing.noetherianSpace
   exact ⟨⟩
-
-/-- A morphism out of a topologically Noetherian scheme is quasi-compact. -/
-theorem quasiCompact_of_noetherianSpace {Y X : Scheme.{u}} [TopologicalSpace.NoetherianSpace Y]
-    (f : Y ⟶ X) : QuasiCompact f :=
-  ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
 
 end AlgebraicGeometry.ProEtale
 
@@ -1438,7 +1416,9 @@ theorem exists_continuousFiltration_of_stratification
     exact ⟨hci, hred, hrange⟩
   have hVn (k : Fin (m + 1)) : IsNoetherian (V k).toScheme :=
     isNoetherian_of_isImmersion (V k).ι
-  have hVqc (k : Fin (m + 1)) : QuasiCompact (V k).ι := quasiCompact_of_noetherianSpace _
+  have hVqc (k : Fin (m + 1)) : QuasiCompact (V k).ι := by
+    have := hVn k
+    infer_instance
   have hSn (k : Fin m) : IsNoetherian (S k) := by
     have := (ht k).1
     have := hVn k.succ
@@ -1453,7 +1433,7 @@ theorem exists_continuousFiltration_of_stratification
     have := isNoetherian_of_isImmersion ((V k.succ).ι ⁻¹ᵁ V k.castSucc).ι
     refine ⟨hSn k, (t k ≫ (V k.succ).ι).isEmbedding.isInducing.topologicalKrullDim_le,
       isUnit_natCast_stalk (t k ≫ (V k.succ).ι) l hl,
-      quasiCompact_of_noetherianSpace _, inferInstance, ?_⟩
+      inferInstance, inferInstance, ?_⟩
     obtain ⟨a, ha⟩ := hstep k
     have := s.isImmersion a
     obtain ⟨g, hg⟩ := exists_factor_immersion_of_isReduced (t k ≫ (V k.succ).ι)
