@@ -80,6 +80,10 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceOrdinaryLimi
 import WeilConjectures.AlgebraicGeometry.ProEtale.Tate.ProEtaleTateTwists
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 import Mathlib.CategoryTheory.Localization.Predicate
+import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalRlimPullbackFormal
+import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalRlimPullbackScalars
+import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalRlimVaryingScalarMate
+import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceVaryingScalarSquare
 
 /-! # Derived-limit pullback comparison with normalized endpoints
 -/
@@ -339,6 +343,56 @@ theorem diagonalRlim_pullback_endpoints (l : ℕ) [Fact l.Prime] {X S : Scheme.{
           (diagonalRlimPullbackMate l f LX LS adjX adjS).app K' =
         (diagonalRlimPullbackMate l f LX LS adjX adjS).app K ≫
           ((diagonalRlimTowerPull l f).mapDerivedCategory ⋙ LX.R).map z) := by
-  sorry
+  have hcX := diagonalRlim_counitFac l X LX adjX hCounitX
+  have hcS := diagonalRlim_counitFac l S LS adjS hCounitS
+  have hcone := diagonalRlim_mate_coneMap (diagonalRlimPull l f) LX LS adjX adjS hcX hcS
+  have : (diagonalRlimPull l f).IsLeftAdjoint :=
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f).isLeftAdjoint
+  refine ⟨fun K n ↦ diagonalRlim_mate_projection (diagonalRlimPull l f) LX LS adjX adjS
+      hProjectionX hProjectionS n K, ?_, ?_, hcone, fun m ↦ ?_, fun m ↦ ?_, ?_, ?_,
+    diagonalRlim_mate_commShift (diagonalRlimPull l f) LX LS adjX adjS
+      (diagonalRlim_counit_commShift l X LX adjX hcX)
+      (diagonalRlim_counit_commShift l S LS adjS hcS),
+    fun z ↦ (diagonalRlimPullbackMate l f LX LS adjX adjS).naturality z⟩
+  · exact diagonalRlim_mate_app_isIso (diagonalRlimPull l f) LX LS adjX adjS hcone _
+      (diagonalOrdinaryRlim_isIso_of_epi l S LS _
+        (coefficientTower_transition_epi l (ULift.{u} (Padic l)) aS))
+      (diagonalOrdinaryRlim_isIso_of_epi l X LX _ fun n ↦ by
+        have := coefficientTower_transition_epi l (ULift.{u} (Padic l)) aS n
+        exact (diagonalRlimPull l f).map_epi _)
+      (upperStar_preserves_coefficientTower_limit l f aS)
+  · exact diagonalRlim_mate_app_isIso (diagonalRlimPull l f) LX LS adjX adjS hcone _
+      (diagonalOrdinaryRlim_isIso_of_epi l S LS _
+        (lineTower_transition_epi l (ULift.{u} (Padic l)) aS))
+      (diagonalOrdinaryRlim_isIso_of_epi l X LX _ fun n ↦ by
+        have := lineTower_transition_epi l (ULift.{u} (Padic l)) aS n
+        exact (diagonalRlimPull l f).map_epi _)
+      (upperStar_preserves_lineTower_limit l f aS)
+  · congr 1
+    exact diagonalRlim_mate_exactConeComparison (diagonalRlimPull l f)
+      (diagonalCompletedRestriction l S) rS.F LX LS adjX adjS hcone _ _ _
+  · congr 1
+    exact diagonalRlim_mate_exactConeComparison (diagonalRlimPull l f)
+      (diagonalCompletedRestriction l S) rS.F LX LS adjX adjS hcone _ _ _
+  · intro b g rX
+    let d := diagonalTraceVaryingScalarSquare l f b g rS rX
+    have hd := diagonalTraceVaryingScalarSquare_hom_app_app_hom_app l f b g rS rX
+    have := diagonalRlimVaryingScalarMate l f b g rS rX d hd
+    refine ⟨d, asIso ((mateEquiv g.ordinaryAdjunction
+      ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f).whiskerRight
+        ℕᵒᵖ)).symm (TwoSquare.mk _ _ _ _ d.hom)), hd, ?_, ?_⟩
+    · exact Equiv.apply_symm_apply _ _
+    · simp only [diagonalRlimVaryingSquare, diagonalRlimExactSquare, Iso.trans_hom, Iso.symm_hom]
+      infer_instance
+  · obtain ⟨d, hd⟩ := diagonalCompletedScalarPush_exists l f
+    have := diagonalCompletedScalarMate_isIso l f d hd
+    refine ⟨d, asIso ((mateEquiv (Scheme.proEtaleRingModuleAdjunction f
+      (Scheme.purTwistZlCompletion S l) (Scheme.purTwistZlCompletion X l)
+      (asIso (diagonalCompletedCoefficientMap l f)))
+      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f)).symm
+      (TwoSquare.mk _ _ _ _ d.hom)), hd, ?_, ?_⟩
+    · exact Equiv.apply_symm_apply _ _
+    · simp only [diagonalRlimExactSquare, Iso.trans_hom, Iso.symm_hom]
+      infer_instance
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace
