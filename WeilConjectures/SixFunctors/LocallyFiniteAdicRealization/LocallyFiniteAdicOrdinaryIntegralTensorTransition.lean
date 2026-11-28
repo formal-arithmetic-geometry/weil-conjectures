@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFi
 public import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdicCondensedIntegralModel
 public import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdicCondensedRawIntegralFormula
 public import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdicCondensedCoefficientSquare
+public import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdicRawCompletionComparison
 import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdicOrdinaryRawIntegralTransition
 import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdicOrdinaryCoefficientIntegralTransition
 
@@ -76,7 +77,8 @@ coefficient tensor comparisons; it contains no condensed closure transition. -/
   letI := C.commutative
   let I := (sfIntegralConstructible l (Coefficient.{u} l (PadicAlgCl l) E) X).ι
   let r := (A.realization E).integralIso.hom ≫ (A.realization E).inclusion
-  let s := r ≫ A.closure.leg E
+  let r' := realizationCoefficientMap l X A E
+  let s := r' ≫ A.closure.leg E
   let t := ProEtale.CondensedRing.sectionRingMap X (condensedNativeMap l X)
   letI := sectionRingMap_isIso X (condensedNativeMap l X)
   let b := Functor.isoWhiskerRight (eqToIso (finiteRawIntegralFormula l X A E))
@@ -88,17 +90,12 @@ coefficient tensor comparisons; it contains no condensed closure transition. -/
     (pbcDerivedExtend r ⋙ pbcDerivedExtend (A.closure.leg E))
   let m := tensorThroughCoefficientSquare X (purCoefficientIso l
       (Coefficient.{u} l (PadicAlgCl l) E) X) (asIso t) s
-    ((C.coefficient E).integralMap l X)
-    (by
-      dsimp only [asIso_hom]
-      dsimp only [s, r]
-      simp only [Category.assoc]
-      exact finiteCondensedIntegralCoefficientSquare l X A E (C.coefficient E))
-  let c : pbcDerivedExtend r ⋙ pbcDerivedExtend (A.closure.leg E) ≅
+    ((C.coefficient E).integralMap l X) (finiteOrdinaryCoefficientSquare l X A C E)
+  let c : pbcDerivedExtend r' ⋙ pbcDerivedExtend (A.closure.leg E) ≅
       pbcDerivedExtend s :=
-    Adjunction.leftAdjointCompIso (pbcDerivedScalarAdjunction r)
+    Adjunction.leftAdjointCompIso (pbcDerivedScalarAdjunction r')
       (pbcDerivedScalarAdjunction (A.closure.leg E)) (pbcDerivedScalarAdjunction s)
-      (pbcDerivedRestrictComp r (A.closure.leg E) s rfl)
+      (pbcDerivedRestrictComp r' (A.closure.leg E) s rfl)
   let f := Functor.isoWhiskerLeft (I ⋙ integralDetailedTransport X l
     (Coefficient.{u} l (PadicAlgCl l) E)) c
   let j := Functor.isoWhiskerRight
