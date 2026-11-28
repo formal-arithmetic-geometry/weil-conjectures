@@ -13,7 +13,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.KFlatDerivedAdjunctionTransportShifts
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.ModuleDerivedFunctorCompositorShifts
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Realization.DiagonalRealizationPullbackUnitComponent
-import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Realization.DiagonalRealizationPullbackLineComponent
+import all WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Realization.DiagonalRealizationPullbackLineComponent
 
 /-! # Endpoint components of the derived completed realization comparison. -/
 
@@ -26,48 +26,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
-
-private theorem commShift_ext
-    {C D : Type*} [Category C] [Category D] [HasShift C ℤ] [HasShift D ℤ]
-    {F : C ⥤ D} (s t : F.CommShift ℤ)
-    (h : ∀ n, F.commShiftIso (self := s) n = F.commShiftIso (self := t) n) : s = t := by
-  cases s
-  cases t
-  congr 1
-  funext n
-  exact h n
-
-private theorem adjoint_shift_eq
-    {C D : Type*} [Category C] [Category D] [HasShift C ℤ] [HasShift D ℤ]
-    {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
-    [s : F.CommShift ℤ] [G.CommShift ℤ] [adj.CommShift ℤ] :
-    adj.leftAdjointCommShift ℤ = s := by
-  apply commShift_ext
-  intro n
-  exact Adjunction.CommShift.compatibilityUnit_unique_left adj _ _ _
-    (Adjunction.LeftAdjointCommShift.compatibilityUnit_iso adj n)
-    (adj.shift_unit_app n)
-
-private theorem geometric_shift
-    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj R] [IsCommMonObj R] {X S : Scheme.{u}} (f : X ⟶ S) :
-    NatTrans.CommShift (F₁ := derivedUpper R f)
-      (F₂ := (CondensedRing.upperStar R f).mapDerivedCategory)
-      (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory R f).hom ℤ := by
-  have ha := (CondensedRing.kflat_derived_adjunction_transport_shifts
-    (Mon.mk R) f).2.2
-  let : (CondensedRing.derivedUpperStarLowerStarAdjunction R f).CommShift ℤ := ha
-  have he : derivedUpperCommShift R f =
-      CondensedRing.modulePullbackDerivedCommShift R f := by
-    exact adjoint_shift_eq
-      (F := CondensedRing.moduleObjectDerivedPullback R f)
-      (G := CondensedRing.moduleObjectDerivedPushforward R f)
-      (CondensedRing.derivedUpperStarLowerStarAdjunction R f)
-  change NatTrans.CommShift (F₁ := derivedUpper R f)
-    (F₂ := (CondensedRing.upperStar R f).mapDerivedCategory)
-    (CondensedRing.modulePullbackExactComparison R f).hom ℤ
-  rw [he]
-  exact (CondensedRing.module_derived_functors_exact_and_comparison_shifts R f).2.2.1
 
 structure DiagonalRealizationPullbackComparisonData (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S)

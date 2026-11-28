@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Derived.DerivedReductionComparisonFormula
-public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquareIsoFactors
 
 /-! # Pasting of normalized derived reduction comparisons
 
@@ -26,36 +26,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-section Square
-
-variable {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
-  [Abelian A] [Abelian B] [Abelian C] [Abelian D]
-  [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory C] [HasDerivedCategory D]
-  (F₁ : A ⥤ B) (F₂ : B ⥤ D) (F₃ : A ⥤ C) (F₄ : C ⥤ D)
-  [F₁.Additive] [F₂.Additive] [F₃.Additive] [F₄.Additive]
-  [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
-  [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
-  [PreservesFiniteLimits F₃] [PreservesFiniteColimits F₃]
-  [PreservesFiniteLimits F₄] [PreservesFiniteColimits F₄]
-
-/-- The derived square of exact functors on the image of a complex is the localization of
-the ordinary square, up to the factorization isomorphisms. -/
-theorem mapDerivedCategorySquareIso_hom_app_factors (σ : F₁ ⋙ F₂ ≅ F₃ ⋙ F₄)
-    (P : CochainComplex A ℤ) :
-    (Functor.mapDerivedCategorySquareIso σ).hom.app (DerivedCategory.Q.obj P) ≫
-        F₄.mapDerivedCategory.map (F₃.mapDerivedCategoryFactors.hom.app P) ≫
-        F₄.mapDerivedCategoryFactors.hom.app ((F₃.mapHomologicalComplex (.up ℤ)).obj P) =
-      F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactors.hom.app P) ≫
-        F₂.mapDerivedCategoryFactors.hom.app ((F₁.mapHomologicalComplex (.up ℤ)).obj P) ≫
-        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex σ.hom (.up ℤ)).app P) := by
-  simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, Category.assoc]
-  rw [Functor.mapDerivedCategoryCompIso_hom_app_factors, Functor.mapDerivedCategoryNatIso_fac,
-    ← Functor.mapDerivedCategoryCompIso_hom_app_factors F₁ F₂ P]
-  simp
-
-end Square
-
 private theorem natTrans_ext_of_good
     {C D : Type*} [Category C] [Category D] (F G : C ⥤ D)
     (good : C → Prop)
@@ -65,6 +35,7 @@ private theorem natTrans_ext_of_good
   obtain ⟨P, p, hP, hp⟩ := res X
   apply (cancel_epi (F.map p)).1
   rw [α.naturality, β.naturality, h P hP]
+
 section Pasting
 
 variable {BY BY' BX BX' DY DY' DX DX' : Type*}
@@ -169,10 +140,10 @@ theorem derivedReductionSquare_paste
       (Functor.mapDerivedCategorySquareIso τ).hom.app (MY.obj (DerivedCategory.Q.obj P)) ≫
         Gg'.mapDerivedCategory.map (Gf.mapDerivedCategory.map (εY.app P)) :=
       (Functor.mapDerivedCategorySquareIso τ).hom.naturality _
-    have r6 := mapDerivedCategorySquareIso_hom_app_factors Gg Gf' Gf Gg' τ
+    have r6 := Functor.mapDerivedCategorySquareIso_hom_app_factors Gg Gf' Gf Gg' τ
       ((RY.mapHomologicalComplex (.up ℤ)).obj P)
     -- left-hand side
-    have l1 := mapDerivedCategorySquareIso_hom_app_factors Fg Ff' Ff Fg' σ P
+    have l1 := Functor.mapDerivedCategorySquareIso_hom_app_factors Fg Ff' Ff Fg' σ P
     have l2 : MX'.map (DerivedCategory.Q.map
         ((NatTrans.mapHomologicalComplex σ.hom (.up ℤ)).app P)) ≫
         εX'.app ((Fg'.mapHomologicalComplex (.up ℤ)).obj
