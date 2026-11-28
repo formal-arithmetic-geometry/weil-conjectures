@@ -14,6 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerSystem
 import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerLimit
 import WeilConjectures.AlgebraicGeometry.RationalP1.RationalP1CompletedLimitBridge
 import WeilConjectures.AlgebraicGeometry.RationalP1.AffineLineAdjunctionAssembly
+import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Scalar.DiagonalScalarFamilyPullback
 
 /-!
 # The `ℓ`-adic cycle class of the diagonal
@@ -429,6 +430,8 @@ abbrev diagonalSurfaceToSpec (k : Type u) [Field k] (Y : Scheme.{u}) [Y.Over (Sp
 
 variable {l}
 
+/-! ### Base change of the canonical families -/
+
 /-- The diagonal classes and the traces `Tr_q, Tr_{p₁}, Tr_{p₂}` of the canonical families are
 compatible with base change along a morphism `g : Y' ⟶ Y` of separated `k`-schemes of finite
 type, for `Λ = 𝒪_E, E, ℚ̄_ℓ`. The Tate twists are compared through `spIntegralComparison` and its
@@ -459,6 +462,22 @@ theorem Family.IsCanonical.pullbackCompatibility (k : Type u) [Field k]
         (baseP g))
       (closureTwistComparison l k (diagonalSurfaceToSpec k Y') (diagonalSurfaceToSpec k Y)
         (baseW g))) := by
-  sorry
+  obtain ⟨hY, aY, aP, aW, D, -, -, δ, hδ, ⟨reference⟩, -⟩ := _h
+  obtain ⟨hY', aY', aP', aW', D', -, -, δ', hδ', ⟨reference'⟩, -⟩ := _h'
+  have : IsNoetherian (ProjectiveLine Y) :=
+    isNoetherian_of_locallyOfFiniteType (ProjectiveLine Y ↘ Y)
+  have : IsNoetherian (diagonalSurface Y) :=
+    isNoetherian_of_locallyOfFiniteType
+      (pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y))
+  have : IsNoetherian (ProjectiveLine Y') :=
+    isNoetherian_of_locallyOfFiniteType (ProjectiveLine Y' ↘ Y')
+  have : IsNoetherian (diagonalSurface Y') :=
+    isNoetherian_of_locallyOfFiniteType
+      (pullback.fst (ProjectiveLine Y' ↘ Y') (ProjectiveLine Y' ↘ Y'))
+  let := invertibleResidueField l k (projectiveLineToSpec k Y)
+  let := invertibleResidueField l k (projectiveLineToSpec k Y')
+  let := invertibleResidueField l k (diagonalSurfaceToSpec k Y)
+  let := invertibleResidueField l k (diagonalSurfaceToSpec k Y')
+  exact pullbackCompatibility_of_isDiagonalLimit g hY hY' D D' δ δ' hδ hδ' reference reference'
 
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients
