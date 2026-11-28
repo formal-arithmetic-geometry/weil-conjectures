@@ -19,8 +19,10 @@ import all WeilConjectures.Algebra.Homology.SubterminalLocal.SubterminalModuleLo
 
 The Roos comparisons come from countable product preservation (open extension by zero preserves
 products on the pro-étale site). The open units are invertible because the open is subterminal.
-Restriction preserves good complexes since tensoring with a restriction is the restriction of
-tensoring with an extension. The ordinary comparison is `ordinaryProjection_exists`.
+Restriction preserves flatness and K-flatness (hence good complexes) since tensoring with a
+restriction is the restriction of tensoring with an extension, by the ordinary projection
+isomorphism; for K-flatness the total tensor is detected after extension. The ordinary
+comparison is `ordinaryProjection_exists`.
 
 ## References
 
@@ -126,8 +128,7 @@ theorem restriction_preservesCountableProducts :
   have := (IntegralOpenReduction.ordinaryAdjunction l E j o).rightAdjoint_preservesLimits.{0, 0}
   infer_instance
 
-/-- Open restriction preserves flatness of module sheaves: tensoring with a restriction is
-restriction of tensoring with an extension, by the ordinary projection isomorphism. -/
+/-- Open restriction preserves flatness of module sheaves. -/
 theorem restriction_isFlatOnSite
     [PreservesFiniteLimits (IntegralOpenReduction.restriction l E j o)]
     [PreservesFiniteColimits (IntegralOpenReduction.restriction l E j o)]
@@ -170,8 +171,7 @@ theorem restriction_isFlatOnSite
   exact (exactFunctor _ _).prop_of_iso
     (SheafOfModules.siteSheafTensorRightIso RU (res.obj M)).symm hU
 
-/-- Open restriction preserves K-flatness: the total tensor with a restriction is detected
-after extension, where it becomes the total tensor with an extension. -/
+/-- Open restriction preserves K-flatness. -/
 theorem restriction_isKFlat
     [PreservesFiniteLimits (IntegralOpenReduction.restriction l E j o)]
     [PreservesFiniteColimits (IntegralOpenReduction.restriction l E j o)]

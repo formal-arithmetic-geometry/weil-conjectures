@@ -180,10 +180,8 @@ section Augmentations
 
 variable (F : A ⥤ B) [F.Additive] (r : RoosComparison F)
 
-/-- A square of strict augmentations is carried by a Roos comparison: if `u` and `v` are
-augmentations of strict Roos cocones with first coordinates `a` and `b` and zero shifted
-coordinates, and `c` intertwines `b` with the image of `a` along the tower map `γ`, then the
-two induced maps into the Roos cocone of the image tower agree. -/
+/-- A Roos comparison carries a square of strict augmentations (first coordinates `a`, `b`,
+zero shifted coordinates, intertwined by `c` along `γ`) to a commuting square. -/
 theorem RoosComparison.augmentation_square
     (T : ℕᵒᵖ ⥤ CochainComplex A ℤ) (T' : ℕᵒᵖ ⥤ CochainComplex B ℤ)
     (γ : T' ⟶ (onTowers F).obj T) {M : CochainComplex B ℤ} {N : CochainComplex A ℤ}
