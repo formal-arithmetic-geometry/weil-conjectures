@@ -238,6 +238,7 @@ private def integralRingComparison {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
   exact asIso (Scheme.proEtaleConstantInverseImageMap f CommRingCat.{u + 1}
     (CommRingCat.of (ULift.{u + 1} (ZMod (l ^ (n + 1))))))
 
+omit [Fact l.Prime] in
 private theorem finite_integralInverseImages
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ I : ∀ n : ℕ, SheafOfModules.AlgebraicInverseImage
