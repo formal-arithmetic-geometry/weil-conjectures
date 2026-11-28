@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import
   WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStar
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarLeftAdjoint
 
 /-!
 # A right adjoint to proper constructible pushforward with condensed Qlbar coefficients
@@ -18,7 +19,8 @@ ring `Profinite.padicAlgClRingObj`, whose sections take values in a finite subex
 
 ## Implementation details
 
-The proof route is descent of finite-coefficient adjunctions along the constructible cocones.
+This is the instance `isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj`, obtained by
+descent of the finite-coefficient adjunctions along the constructible cocones.
 -/
 
 @[expose] public section
@@ -39,8 +41,7 @@ theorem properPushforward_isLeftAdjoint_qlbar
     [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
     (p : Z ⟶ Y) [IsProper p.left] :
-    (boundedConstructibleLowerStar ℓ p).IsLeftAdjoint := by
-  -- Descend the finite-coefficient adjunctions along the two constructible cocones.
-  sorry
+    (boundedConstructibleLowerStar ℓ p).IsLeftAdjoint :=
+  isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj ℓ p
 
 end AlgebraicGeometry.ProEtale.CondensedRing
