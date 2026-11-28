@@ -40,6 +40,7 @@ namespace WeilConjectures.ExceptionalIntegralScalar
 open ConstructibleExceptionalCoefficients
 variable (l : ℕ) [Fact l.Prime]
 variable (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
+
 -- The categorical core: the selected square follows from the reduction, evaluation and
 -- cocycle squares once the selected comparison is identified with the two associators.
 private theorem selectedLeftCompat_of_cocycles
