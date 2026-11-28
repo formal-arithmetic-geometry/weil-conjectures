@@ -137,13 +137,6 @@ theorem single_stage_trans {B D : Type*} [Category B] [Category D] [HasShift D �
     S.map (p₁ ≫ p₂) ≫ g₂ = g₀ ≫ (S.map (q₁ ≫ q₂))⟦(2 : ℤ)⟧' := by
   rw [Functor.map_comp, Category.assoc, h₂, reassoc_of% h₁, Functor.map_comp, Functor.map_comp]
 
-/-- Reassociate a composite of seven morphisms. -/
-theorem comp_reassoc_seven {C : Type*} [Category C] {X₀ X₁ X₂ X₃ X₄ X₅ X₆ X₇ : C}
-    (f₀ : X₀ ⟶ X₁) (f₁ : X₁ ⟶ X₂) (f₂ : X₂ ⟶ X₃) (f₃ : X₃ ⟶ X₄) (f₄ : X₄ ⟶ X₅) (f₅ : X₅ ⟶ X₆)
-    (f₆ : X₆ ⟶ X₇) :
-    ((f₀ ≫ f₁) ≫ f₂) ≫ f₃ ≫ f₄ ≫ (f₅ ≫ f₆) = f₀ ≫ (((f₁ ≫ f₂) ≫ f₃) ≫ f₄) ≫ f₅ ≫ f₆ := by
-  simp only [Category.assoc]
-
 /-- A composite starting at a unit map stays a unit map along unit-preserving steps. -/
 theorem comp_unit_chain {C : Type*} [Category C] {I R₀ R₁ R₂ R₃ M R₄ : C}
     (a : I ⟶ R₀) (u : R₀ ⟶ R₁) (b : R₁ ⟶ R₂) (c : R₂ ⟶ R₃) (e : R₃ ⟶ M) (k : M ⟶ R₄)

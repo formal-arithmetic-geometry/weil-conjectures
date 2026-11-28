@@ -161,8 +161,8 @@ theorem localLineEndpoint_eq (s : UniformizerChernNormalizationData l Y) :
     ((t ≫ integralLineMap l s.E (ProjectiveLine Y)) ≫
       quotientLineMap l s.E s.π s.n (ProjectiveLine Y)) ≫ _) h₁)
   unfold localLineEndpoint
-  simp only [Iso.trans_inv, NatTrans.comp_app]
-  exact comp_reassoc_seven _ _ _ _ _ _ _
+  simp only [Iso.trans_inv, NatTrans.comp_app, Category.assoc]
+  rfl
 
 end UniformizerChernNormalizationData
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients
