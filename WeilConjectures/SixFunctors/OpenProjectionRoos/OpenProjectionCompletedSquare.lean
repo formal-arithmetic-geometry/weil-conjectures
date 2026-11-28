@@ -13,6 +13,16 @@ import WeilConjectures.AlgebraicGeometry.FiniteFieldPrimePowerUnit
 
 /-! # Descent of the augmented open tensor square through completion
 
+The completed open projection `openProjectionCompletedSquare` is the ordinary open projection
+conjugated by the tensor completion units.
+
+## Implementation details
+
+The completion units are invertible on constructible pairs. The completed representative
+equation reduces, through the representative isomorphisms of the tensor models, to the
+chain-level identity `roosChainSquare` in the strict Roos cocone, which is checked on both
+cocone coordinates (`RoosComparison.augmentation_square`).
+
 ## References
 
 * Bhatt--Scholze, Lemmas 6.5.5 and 6.5.8

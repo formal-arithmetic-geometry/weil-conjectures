@@ -15,6 +15,13 @@ import all WeilConjectures.Algebra.Homology.SubterminalLocal.SubterminalModuleLo
 
 /-! # Transport of the ordinary open tensor and signed Roos comparisons
 
+## Implementation details
+
+The Roos comparisons come from countable product preservation (open extension by zero preserves
+products on the pro-étale site). The open units are invertible because the open is subterminal.
+Restriction preserves good complexes since tensoring with a restriction is the restriction of
+tensoring with an extension. The ordinary comparison is `ordinaryProjection_exists`.
+
 ## References
 
 * Stacks Project, Tags 09BP, 03DI, 0GL1
