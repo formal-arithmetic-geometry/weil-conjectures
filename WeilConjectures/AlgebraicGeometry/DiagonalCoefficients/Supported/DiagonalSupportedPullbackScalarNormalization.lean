@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Scalar.DiagonalScalarPullbackComparison
 import all WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Scalar.ScalarPullbackSingleTransposes
 import WeilConjectures.AlgebraicGeometry.ComapUpperStarIsoMate
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedPullIsoCoherenceProof
 
 /-! # Supported-source normalization of the scalar/pullback mate
 
@@ -61,7 +62,7 @@ private theorem inv_square {C : Type*} [Category C] {A B D E H K : C}
 
 /-- The adjoint transpose of an exchange morphism followed by a map, through the
 conjugate of the exchanged isomorphism. -/
-theorem homEquiv_exchangeRight_app_comp {A B A' B' : Type*} [Category A] [Category B]
+private theorem homEquiv_exchangeRight_app_comp {A B A' B' : Type*} [Category A] [Category B]
     [Category A'] [Category B'] {Lf : B ⥤ A} {Rf : A ⥤ B} {Lf' : B' ⥤ A'} {Rf' : A' ⥤ B'}
     {G : B ⥤ B'} {G' : A ⥤ A'} {RG : B' ⥤ B} {RG' : A' ⥤ A}
     (af : Lf ⊣ Rf) (af' : Lf' ⊣ Rf') (aG : G ⊣ RG) (aG' : G' ⊣ RG')
@@ -142,14 +143,6 @@ theorem UnitPullEndpoint.homEquiv_iso_hom_hom
   rw [c.normalization, Adjunction.homEquiv_unit]
   rfl
 
-/-- The restriction/direct-image comparison is the identity on underlying sheaves. -/
-theorem comapLowerStarIso_hom_app_hom
-    {R T : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
-    [MonObj R] [IsCommMonObj R] [MonObj T] [IsCommMonObj T]
-    (a : R ⟶ T) [IsMonHom a] {X S : Scheme.{u}} (f : X ⟶ S) (M : Modules T X) :
-    ((CondensedRing.comapLowerStarIso a f).hom.app M).hom = 𝟙 _ :=
-  Mod.comapMapModComapIso_hom_app_hom _ _ _ _ _ _ M
-
 /-- Inverting a composite of isomorphisms. -/
 private theorem inv_square_three {C : Type*} [Category C] {A B D E F : C}
     (p : A ≅ B) (q : B ≅ D) (c : A ≅ E) (d : E ≅ F) (e : F ≅ D)
@@ -157,23 +150,6 @@ private theorem inv_square_three {C : Type*} [Category C] {A B D E F : C}
     q.inv ≫ p.inv ≫ c.hom = e.inv ≫ d.inv := by
   rw [Iso.inv_comp_eq, Iso.inv_comp_eq, reassoc_of% h]
   simp
-
-/-- The restriction/direct-image comparison of a composite is the composite of the
-comparisons, through the composition isomorphisms of module direct images. -/
-theorem comapLowerStarIso_hom_app_lowerStarComp
-    {R T : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
-    [MonObj R] [IsCommMonObj R] [MonObj T] [IsCommMonObj T]
-    (a : R ⟶ T) [IsMonHom a] {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (N : Modules T X) :
-    (Mod.comap (coefficientMap a Z)).map ((CondensedRing.lowerStarComp T f g).hom.app N) ≫
-        (CondensedRing.comapLowerStarIso a (f ≫ g)).hom.app N =
-      (CondensedRing.comapLowerStarIso a g).hom.app ((CondensedRing.lowerStar T f).obj N) ≫
-        (CondensedRing.lowerStar R g).map ((CondensedRing.comapLowerStarIso a f).hom.app N) ≫
-          (CondensedRing.lowerStarComp R f g).hom.app ((Mod.comap (coefficientMap a X)).obj N) := by
-  apply Mod.hom_ext
-  rw [Mod.comp_hom', Mod.comp_hom', Mod.comp_hom', CondensedRing.lowerStar_map_hom,
-    comapLowerStarIso_hom_app_hom, comapLowerStarIso_hom_app_hom, comapLowerStarIso_hom_app_hom]
-  rfl
-
 
 /-- The composition isomorphism of direct images commutes with the inverse restriction
 comparisons. -/
@@ -188,7 +164,7 @@ theorem comapLowerStarIso_inv_app_comp_lowerStarComp
         (CondensedRing.lowerStarComp R f g).hom.app ((Mod.comap (coefficientMap a X)).obj N) ≫
         (CondensedRing.comapLowerStarIso a (f ≫ g)).inv.app N := by
   rw [← cancel_mono ((CondensedRing.comapLowerStarIso a (f ≫ g)).hom.app N), Category.assoc,
-    comapLowerStarIso_hom_app_lowerStarComp, Iso.inv_hom_id_app_assoc]
+    CondensedRing.comapLowerStarIso_hom_app_lowerStarComp, Iso.inv_hom_id_app_assoc]
   simp
 
 /-- The inverse composition isomorphism of direct images commutes with the restriction
@@ -208,7 +184,8 @@ theorem comapLowerStarIso_inv_app_comp_lowerStarComp_inv
     ((CondensedRing.comapLowerStarIso a (f ≫ g)).app N)
     ((CondensedRing.comapLowerStarIso a g).app _)
     ((CondensedRing.lowerStar R g).mapIso ((CondensedRing.comapLowerStarIso a f).app N))
-    ((CondensedRing.lowerStarComp R f g).app _) (comapLowerStarIso_hom_app_lowerStarComp a f g N)
+    ((CondensedRing.lowerStarComp R f g).app _)
+    (CondensedRing.comapLowerStarIso_hom_app_lowerStarComp R f g a N)
 
 /-- Transport of direct images along an equality of morphisms commutes with the inverse
 restriction comparisons. -/
@@ -310,8 +287,8 @@ theorem coefficient_unitPull_square
         (CondensedRing.lowerStar R p).map v'.hom := by
   apply Mod.hom_ext
   simp only [Mod.comp_hom', Mod.comap_map_hom, CondensedRing.lowerStar_map_hom,
-    comapLowerStarIso_hom_app_hom, UnitPullEndpoint.homEquiv_iso_hom_hom, v.underlying,
-    v'.underlying]
+    CondensedRing.comapLowerStarIso_hom_app_hom, UnitPullEndpoint.homEquiv_iso_hom_hom,
+    v.underlying, v'.underlying]
   erw [Category.comp_id]
   exact (condensedPushforwardHom_comp_map_coefficientMap a p).symm
 
