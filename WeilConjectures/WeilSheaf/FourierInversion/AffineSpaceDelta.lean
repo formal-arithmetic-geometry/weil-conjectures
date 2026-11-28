@@ -133,6 +133,7 @@ private def DeltaClaim (ψ : AddChar k₀ (PadicAlgCl l)) (n : Type u) [Fintype 
       upperStar i ⋙ tateTwist k₀ l Z (-(Fintype.card n : ℤ)) ⋙
         shiftFunctor _ (-(2 * (Fintype.card n : ℤ))) ⋙ derivedLowerShriek k₀ l i)
 
+/-- The delta kernel statement in rank zero. -/
 private theorem deltaClaim_pempty (ψ : AddChar k₀ (PadicAlgCl l)) :
     DeltaClaim k₀ l ψ PEmpty.{u + 1} := by
   intro X Z _ _ _ _ _ _ h _ i _ _ hi
@@ -168,6 +169,7 @@ private theorem deltaClaim_pempty (ψ : AddChar k₀ (PadicAlgCl l)) :
       Functor.leftUnitor _ ≪≫ Functor.isoWhiskerRight (shiftFunctorZero _ ℤ) _ ≪≫
         Functor.leftUnitor _).symm⟩
 
+/-- The delta kernel statement is invariant under reindexing the coordinates. -/
 private theorem deltaClaim_of_equiv (ψ : AddChar k₀ (PadicAlgCl l)) {α β : Type u} [Fintype α]
     [Fintype β] (e : α ≃ β) (ih : DeltaClaim k₀ l ψ α) : DeltaClaim k₀ l ψ β := by
   intro X Z _ _ _ _ _ _ h _ i _ _ hi
@@ -259,6 +261,7 @@ private theorem nonempty_iso_of_optionStep {CX CY CB CZ₀ CZ₁ CZ : Type*} [Ca
           Functor.isoWhiskerLeft sh di))
   exact ⟨c₁ ≪≫ c₂ ≪≫ c₃ ≪≫ c₄ ≪≫ c₅ ≪≫ c₆ ≪≫ c₇ ≪≫ c₈⟩
 
+/-- The inductive step: the delta kernel statement for `m` implies it for `Option m`. -/
 private theorem deltaClaim_option (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1) (m : Type u)
     [Fintype m] (ih : DeltaClaim k₀ l ψ m) : DeltaClaim k₀ l ψ (Option m) := by
   intro X Z _ _ _ _ _ _ h _ i _ _ hi
@@ -429,6 +432,7 @@ private theorem deltaClaim_option (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ �
     ((upperStarCompIso i' j₀).symm ≪≫ upperStarCongrIso hi'j)
     (eDi'j₀.symm ≪≫ derivedLowerShriekIsoOfEq hi'j)
 
+/-- The delta kernel statement for the standard bundle, in every rank. -/
 private theorem deltaClaim (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1) (n : Type u)
     [Fintype n] : DeltaClaim k₀ l ψ n := by
   refine Fintype.induction_empty_option (P := fun n _ ↦ DeltaClaim k₀ l ψ n) ?_ ?_ ?_ n
