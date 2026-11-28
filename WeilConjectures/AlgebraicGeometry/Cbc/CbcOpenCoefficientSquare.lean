@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.SmoothPurity.QbarCompactSupportExchangeModel
 import all WeilConjectures.AlgebraicGeometry.Ringed.RingedOpenScalarLimitCoherence
 import all WeilConjectures.AlgebraicGeometry.Completed.Open.CompletedOpenExchangeTransport
+import WeilConjectures.AlgebraicGeometry.Completed.Open.CompletedOpenExtensionZeroExchange
 
 /-! # The open factor of the completed coefficient square
 -/

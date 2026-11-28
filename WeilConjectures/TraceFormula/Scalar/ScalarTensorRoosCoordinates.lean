@@ -53,40 +53,6 @@ private theorem restriction_map_section
     ((heq_apply (integralComparisonRestrictedSectionType l E X N n U) h hx).trans
       (cast_heq _ _).symm)
 
-private theorem roosMap_fst
-    {A : Type*} [Category* A] [Abelian A] [HasCountableProducts A]
-    {V W : ℕᵒᵖ ⥤ CochainComplex A ℤ} (α : V ⟶ W) (i : ℤ) :
-    (integralOperationsRoosFunctor.map α).f i ≫
-        (CochainComplex.mappingCocone.fst (scalarRoosBoundary W)).f i =
-      (CochainComplex.mappingCocone.fst (scalarRoosBoundary V)).f i ≫
-        (CategoryTheory.Limits.Pi.map (fun n : ℕ ↦ α.app (op n))).f i := by
-  apply SignedCoconeShift.cocone_ext_from (scalarRoosBoundary V) i
-  · change (CochainComplex.mappingCocone.inl _).v i i _ ≫
-      (SignedCoconeShift.coconeMap _ _ _).f i ≫ _ = _
-    rw [SignedCoconeShift.coconeMap_inl_assoc]
-    simp
-  · change (CochainComplex.mappingCocone.inr _).1.v (i - 1) i _ ≫
-      (SignedCoconeShift.coconeMap _ _ _).f i ≫ _ = _
-    rw [SignedCoconeShift.coconeMap_inr_assoc]
-    simp
-
-private theorem roosMap_snd
-    {A : Type*} [Category* A] [Abelian A] [HasCountableProducts A]
-    {V W : ℕᵒᵖ ⥤ CochainComplex A ℤ} (α : V ⟶ W) (i : ℤ) :
-    (integralOperationsRoosFunctor.map α).f i ≫
-        (CochainComplex.mappingCocone.snd (scalarRoosBoundary W)).v i (i - 1) (by omega) =
-      (CochainComplex.mappingCocone.snd (scalarRoosBoundary V)).v i (i - 1) (by omega) ≫
-        (CategoryTheory.Limits.Pi.map (fun n : ℕ ↦ α.app (op n))).f (i - 1) := by
-  apply SignedCoconeShift.cocone_ext_from (scalarRoosBoundary V) i
-  · change (CochainComplex.mappingCocone.inl _).v i i _ ≫
-      (SignedCoconeShift.coconeMap _ _ _).f i ≫ _ = _
-    rw [SignedCoconeShift.coconeMap_inl_assoc]
-    simp
-  · change (CochainComplex.mappingCocone.inr _).1.v (i - 1) i _ ≫
-      (SignedCoconeShift.coconeMap _ _ _).f i ≫ _ = _
-    rw [SignedCoconeShift.coconeMap_inr_assoc]
-    simp
-
 private theorem roosMap_level
     {A : Type*} [Category* A] [Abelian A] [HasCountableProducts A]
     {V W : ℕᵒᵖ ⥤ CochainComplex A ℤ} (α : V ⟶ W) (n : ℕ) (i : ℤ) :
@@ -95,7 +61,7 @@ private theorem roosMap_level
         (Pi.π (fun m : ℕ ↦ W.obj (op m)) n).f i =
       (CochainComplex.mappingCocone.fst (scalarRoosBoundary V)).f i ≫
         (Pi.π (fun m : ℕ ↦ V.obj (op m)) n).f i ≫ (α.app (op n)).f i := by
-  rw [← Category.assoc, roosMap_fst, Category.assoc]
+  rw [← Category.assoc, integralOperationsRoosFunctor_map_fst, Category.assoc]
   have h := congrArg (fun f ↦ f.f i) (CategoryTheory.Limits.Pi.map_π (fun m : ℕ ↦ α.app (op m)) n)
   simpa only [HomologicalComplex.comp_f, Category.assoc] using
     congrArg ((CochainComplex.mappingCocone.fst (scalarRoosBoundary V)).f i ≫ ·) h
@@ -310,12 +276,12 @@ theorem scalarTensorRoosCoordinates
   refine ⟨?_, ?_, ?_⟩
   · intro i
     simp only [HomologicalComplex.comp_f, Category.assoc]
-    erw [roosMap_snd]
+    erw [integralOperationsRoosFunctor_map_snd]
     erw [reassoc_of% (completedScalarChainComparison_spec l E L ι X).2 P i]
     simp only [zero_comp]
   · intro i
     simp only [HomologicalComplex.comp_f, Category.assoc]
-    erw [roosMap_snd]
+    erw [integralOperationsRoosFunctor_map_snd]
     erw [reassoc_of% (completedScalarChainComparison_spec l E F (j.comp ι) X).2 P i]
     simp only [zero_comp, comp_zero]
   · intro n i U s t x y h

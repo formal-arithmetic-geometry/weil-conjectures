@@ -1625,44 +1625,4 @@ def cbcCompleteProperty (T : Scheme.{t}) (r : ℕ) (a : Fin r → A)
   fun K ↦ IsDerivedCompleteIntrinsic T d r a ha K
     (DerivedCategory.Q.objPreimage K) (DerivedCategory.Q.objObjPreimageIso K)
 
-/-- Extension by zero along a quasi-compact open immersion preserves intrinsic
-derived completeness. The completed base-change map is the unique natural map
-compatible with ordinary base change and the specified completion units. It is
-an isomorphism, and both sides are derived complete. -/
-theorem cbcCompletedExchange_exists [QuasiCompact j]
-    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :
-    ∃! β : (cbcCompleteProperty d U r a ha).ι ⋙
-        cbcDerivedOpenShriek d j sq.isOpenImmersion ⋙ cbcCompletedPullback d g ⟶
-      (cbcCompleteProperty d U r a ha).ι ⋙ cbcCompletedPullback d gU ⋙
-        cbcDerivedOpenShriek d j' sq.isOpenImmersion',
-      ∀ K : (cbcCompleteProperty d U r a ha).FullSubcategory,
-        (cbcCompletedPullbackComparison d g).app
-            ((cbcDerivedOpenShriek d j sq.isOpenImmersion).obj K.obj) ≫ β.app K =
-          (cbcOrdinaryExchange d sq).app K.obj ≫
-            (cbcDerivedOpenShriek d j' sq.isOpenImmersion').map
-              ((cbcCompletedPullbackComparison d gU).app K.obj) := by
-  sorry
-
-/-- The canonical completed base-change map, natural on the full complete subcategory.
-It is fixed by the ordinary adjoint mate and the strict quotient completion units. -/
-def cbcCompletedExchange [QuasiCompact j]
-    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :=
-  (cbcCompletedExchange_exists d sq r a ha).exists.choose
-
-/-- Completed extension by zero commutes with pullback, naturally in complete K.
-It preserves completeness and both sides of the canonical exchange are complete. -/
-theorem completedExtensionZeroComparison [QuasiCompact j]
-    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :
-    IsIso (cbcCompletedExchange d sq r a ha) ∧
-      (∀ K : (cbcCompleteProperty d U r a ha).FullSubcategory,
-        cbcCompleteProperty d X r a ha
-            ((cbcDerivedOpenShriek d j sq.isOpenImmersion).obj K.obj) ∧
-          cbcCompleteProperty d X' r a ha
-            ((cbcCompletedPullback d g).obj
-              ((cbcDerivedOpenShriek d j sq.isOpenImmersion).obj K.obj)) ∧
-          cbcCompleteProperty d X' r a ha
-            ((cbcDerivedOpenShriek d j' sq.isOpenImmersion').obj
-              ((cbcCompletedPullback d gU).obj K.obj))) := by
-  sorry
-
 end AlgebraicGeometry.Scheme
