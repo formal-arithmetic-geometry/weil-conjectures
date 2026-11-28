@@ -260,7 +260,7 @@ noncomputable abbrev leftDerivedTensorRestrictScalarsUnitUpperStarMap :
 
 /-- `AlgebraicGeometry.Etale.sheafExtendScalarsProjectionTranspose_upperStar` on homotopy
 categories. -/
-lemma mapHomotopyCategory_sheafExtendScalarsProjectionTranspose_upperStar [IsNoetherianRing R]
+lemma mapHomotopyCategory_sheafExtendScalarsProjectionTranspose_upperStar
     (K : HomotopyCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) (.up ℤ)) :
     ((g)^*[ModuleCat.{u + 1} S].mapHomotopyCategory (.up ℤ)).map
         ((Functor.mapHomotopyCategoryCompIso
@@ -288,8 +288,6 @@ lemma mapHomotopyCategory_sheafExtendScalarsProjectionTranspose_upperStar [IsNoe
     (mapHomotopyCategoryTensorRestrictScalarsUnitUpperStarMap R S g) rfl K
 
 section Derived
-
-variable [IsNoetherianRing R]
 
 set_option hygiene false in
 /-- Derived extension of scalars on `X`. -/

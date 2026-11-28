@@ -135,7 +135,7 @@ end
 
 section Pullback
 
-variable [IsNoetherianRing R] {Y Z : Scheme.{u}} (g : Z ⟶ Y)
+variable {Y Z : Scheme.{u}} (g : Z ⟶ Y)
 
 /-- The isomorphism `g^*(S ⊗_R -) ≅ S ⊗_R g^* -` of
 `AlgebraicGeometry.Etale.sheafExtendScalarsCompUpperStarIso`, on homotopy categories. -/
@@ -189,7 +189,6 @@ noncomputable def leftDerivedUpperStarEtaleSheafExtendScalarsCounit :
     Functor.whiskerLeft ((g)^*[ModuleCat.{u + 1} R].mapHomotopyCategory (.up ℤ))
       (sheafExtendScalars φ Z).leftDerivedFunctorCounit
 
-omit [IsNoetherianRing R] in
 /-- On a complex whose pullback by `g` is K-flat, the counit of `L(S ⊗_R -)` at the pullback is an
 isomorphism. -/
 lemma isIso_leftDerivedFunctorCounit_app_upperStar_mapHomotopyCategory_obj
@@ -230,7 +229,6 @@ noncomputable def leftDerivedUpperStarEtaleSheafExtendScalarsIso :
     (Functor.isoWhiskerRight (mapHomotopyCategoryEtaleSheafExtendScalarsCompUpperStarIso φ g)
       DerivedCategory.Qh)
 
-omit [IsNoetherianRing R] in
 /-- The isomorphism `leftDerivedUpperStarEtaleSheafExtendScalarsIso` is compatible with the
 counits: it is induced by `g^*(S ⊗_R F) ≅ S ⊗_R g^* F`. -/
 @[reassoc]
