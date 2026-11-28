@@ -72,6 +72,9 @@ public import WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySuppl
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
 public import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+import WeilConjectures.Algebra.Homology.GeometricSystemOrdinaryData.GeometricSystemInverseImage
+import WeilConjectures.CategoryTheory.ScalarInverseImageIndependent
+import WeilConjectures.Algebra.Homology.InverseImageScalarRestriction.InverseImageScalarRestrictionComparison
 
 /-!
 # Ordinary geometric comparison on strict semilinear systems
@@ -212,7 +215,7 @@ theorem geometricSystemOrdinaryComparison
           ((F.levelInverseImage n).obj P) W
           (((u.inverse.map b) ≫ (I j).ringUnderlying.hom).hom.app W t)
           (((u.inverse.map x) ≫ (I n).moduleUnderlying.inv.app P).hom.app W t)) ∧
-    (∀ (n j : ℕ) (h : n < j) (P : systemLevel BY n),
+    (∀ (n j : ℕ) (_h : n < j) (P : systemLevel BY n),
     ((ordinary n).hom.app P).app j = 0) ∧
     (∀ (n : ℕ) (P : systemLevel BY n),
     ((ordinary n).hom.app P).app n ≫
@@ -222,7 +225,69 @@ theorem geometricSystemOrdinaryComparison
         (F.levelInverseImage n).map
           ((systemSingleBelow SY TY BY n (Nat.le_refl n) ≪≫
             TY.ordinaryUnit BY n).hom.app P)) := by
-  sorry
+  classical
+  have : PreservesFiniteLimits u.inverse := u.leftExact
+  have hres (m n : ℕ) (h : m ≤ n) := InverseImageScalarRestriction.exists_comparison (I n) (I m)
+    (BY.map (homOfLE h).op) (BX.map (homOfLE h).op) (htransition h)
+  choose ρ hρ using hres
+  have hten (j n : ℕ) (h : j ≤ n) := ScalarIndependent.exists_scalarInverseImageIndependent
+    u.inverse u.direct u.adj (I n) (I j) (BY.map (homOfLE h).op) (BX.map (homOfLE h).op)
+    (htransition h) _ _ (SY (BY.map (homOfLE h).op)).ordinaryAdj
+    (SX (BX.map (homOfLE h).op)).ordinaryAdj
+  choose e he using hten
+  have hex (n : ℕ) := AlgebraicInverseImage.exact_modules u (I n)
+  have (n : ℕ) : PreservesFiniteLimits (I n).modules := (hex n).1
+  have (n : ℕ) : PreservesFiniteColimits (I n).modules := (hex n).2
+  have (n : ℕ) : (I n).modules.Additive := Functor.additive_of_preserves_binary_products _
+  let ρ' : ∀ {m n : ℕ} (h : m ≤ n), _ := fun {m n} h ↦ ρ m n h
+  have hρ' : ∀ {m n : ℕ} (h : m ≤ n) (M : systemLevel BY m), _ := fun {m n} h ↦ hρ m n h
+  let e' : ∀ {j n : ℕ} (h : j ≤ n), _ := fun {j n} h ↦ e j n h
+  have he' : ∀ {j n : ℕ} (h : j ≤ n) (P : systemLevel BY n), _ := fun {j n} h ↦ he j n h
+  let G := strictRingSystemInverseImage I ρ' hρ'
+  have hG := strictRingSystemInverseImage_exact I ρ' hρ'
+  let F : GeometricSystemOrdinaryData BY BX u I :=
+    { functor := G
+      limits := hG.1
+      colimits := hG.2
+      evaluation := fun n ↦ Iso.refl _
+      transition := fun M {m n} h ↦ by
+        simp only [Iso.refl_hom, NatTrans.id_app]
+        exact (strictRingSystemInverseImageTransition_underlying I ρ' hρ' M h).symm }
+  let κ := strictRingSystemInverseImageSingle I ρ' hρ' SY TY SX TX
+  have (n : ℕ) : IsIso (κ n) :=
+    isIso_strictRingSystemInverseImageSingle I ρ' hρ' SY TY SX TX e' he' n
+  have hcl1 : ∀ {j n : ℕ} (h : j ≤ n) (P : systemLevel BY n),
+      (F.evaluation j).hom.app ((systemSingleFunctor SY TY BY n).obj P) ≫
+        (F.levelInverseImage j).map ((systemSingleBelow SY TY BY n h).hom.app P) ≫
+          (e' h).hom.app P =
+        (((asIso (κ n)).symm.hom.app P).app j) ≫
+          (systemSingleBelow SX TX BX n h).hom.app ((F.levelInverseImage n).obj P) := by
+    intro j n h P
+    have hb := congrArg (fun f ↦ f.app j) ((asIso (κ n)).inv_hom_id_app P)
+    have hf := strictRingSystemInverseImageSingle_app_below I ρ' hρ' SY TY SX TX e' he' h P
+    change 𝟙 _ ≫ (I j).modules.map ((systemSingleBelow SY TY BY n h).hom.app P) ≫
+        (e' h).hom.app P = _
+    have ha : ((κ n).app P).app j =
+        (systemSingleBelow SX TX BX n h).hom.app ((I n).modules.obj P) ≫
+        (e' h).inv.app P ≫ (I j).modules.map ((systemSingleBelow SY TY BY n h).inv.app P) := by
+      rw [← hf, Iso.hom_inv_id_app_assoc]
+    rw [Category.id_comp, ← cancel_mono ((e' h).inv.app P ≫
+      (I j).modules.map ((systemSingleBelow SY TY BY n h).inv.app P))]
+    rw [Category.assoc, Iso.hom_inv_id_app_assoc, ← Functor.map_comp, Iso.hom_inv_id_app,
+      CategoryTheory.Functor.map_id]
+    erw [Category.assoc, ← ha]
+    exact hb.symm
+  refine ⟨F, fun n ↦ (asIso (κ n)).symm, fun {j n} h ↦ e' h, hcl1, ?_, ?_, ?_⟩
+  · intro j n h P Z b x z hz W t
+    exact systemTensorInverseImage_hom_tmul I SY SX e' he' h P Z b x z hz W t
+  · intro n j h P
+    exact (systemSingleLevelAbove SX BX n ((I n).modules.obj P) h).eq_of_tgt _ _
+  · intro n P
+    have h1 := hcl1 (Nat.le_refl n) P
+    have h4 := systemTensorInverseImage_hom_unit I ρ' hρ' SY SX e' he' TY TX n P
+    dsimp only [GeometricSystemOrdinaryData.levelInverseImage] at h1 ⊢
+    rw [Iso.trans_hom, Iso.trans_hom, NatTrans.comp_app, NatTrans.comp_app, ← Category.assoc,
+      ← h1, Category.assoc, Category.assoc, h4, Functor.map_comp]
 
 variable (SY : SystemScalarAssignment (J := J)) (TY : SystemTensorCoherence SY)
   (SX : SystemScalarAssignment (J := K)) (TX : SystemTensorCoherence SX)
