@@ -6,7 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SmoothPurity.Supporting.Coefficient.IntrinsicCoefficientTwists
-public import WeilConjectures.AlgebraicGeometry.Pbc.PbcCoefficientTwists
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.FixedFinitePositiveCoefficientTwist
+public import WeilConjectures.AlgebraicGeometry.Pbc.PbcCohomologySheaves
 public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientTwistAnnihilator
 public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientFreeTensorLinear
 public import WeilConjectures.TateTwist.ProEtale

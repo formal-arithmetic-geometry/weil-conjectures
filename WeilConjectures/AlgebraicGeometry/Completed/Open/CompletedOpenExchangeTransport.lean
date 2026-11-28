@@ -44,12 +44,12 @@ The completion-unit equation retains its ordinary adjoint-mate normalization.
 ## Main definitions
 
 - `cbcDatumCompletedTransport`: the normalized comparison of pullback presentations.
-- `cbcDatumCompletedExchange`: completed open exchange on `d.completedPull`.
+- `cbcDatumOrdinaryExchange`: the ordinary open exchange on `d.pull`.
 
 ## Main statements
 
-- `completedOpenExchangeComparison`: quasi-compact open extension preserves intrinsic
-  completeness, and its canonical completed exchange is invertible and natural.
+- `cbcDatumCompletedTransport_unit`: the transport preserves the ordinary-to-completed
+  comparison.
 
 ## Implementation details
 
@@ -646,77 +646,5 @@ def cbcDatumOrdinaryExchange :
     cbcOrdinaryExchange d sq ≫
       whiskerRight (cbcDatumOrdinaryTransport d gU).hom
         (cbcDerivedOpenShriek d j' sq.isOpenImmersion')
-
-/-- Canonical completed open exchange on the same presentation as proper exchange.
-It is Rlim of the finite exchange followed by the extension/Rlim comparison,
-transported through the strict tower counits. -/
-def cbcDatumCompletedExchange [QuasiCompact j]
-    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :
-    (cbcCompleteProperty d U r a ha).ι ⋙
-        cbcDerivedOpenShriek d j sq.isOpenImmersion ⋙ d.completedPull g ⟶
-      (cbcCompleteProperty d U r a ha).ι ⋙ d.completedPull gU ⋙
-        cbcDerivedOpenShriek d j' sq.isOpenImmersion' :=
-  whiskerLeft ((cbcCompleteProperty d U r a ha).ι ⋙
-      cbcDerivedOpenShriek d j sq.isOpenImmersion)
-      (cbcDatumCompletedTransport d g).inv ≫
-    cbcCompletedExchange d sq r a ha ≫
-      whiskerLeft (cbcCompleteProperty d U r a ha).ι
-        (whiskerRight (cbcDatumCompletedTransport d gU).hom
-          (cbcDerivedOpenShriek d j' sq.isOpenImmersion'))
-
-
-/-- Quasi-compact open extension preserves intrinsic completeness, and its canonical
-completed exchange is invertible and natural, with both sides intrinsically complete. -/
-theorem completedOpenExchangeComparison [QuasiCompact j]
-    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :
-    IsIso (cbcDatumCompletedExchange d sq r a ha) ∧
-      (∀ K : (cbcCompleteProperty d U r a ha).FullSubcategory,
-        cbcCompleteProperty d X r a ha
-            ((cbcDerivedOpenShriek d j sq.isOpenImmersion).obj K.obj) ∧
-          cbcCompleteProperty d X' r a ha
-            ((d.completedPull g).obj
-              ((cbcDerivedOpenShriek d j sq.isOpenImmersion).obj K.obj)) ∧
-          cbcCompleteProperty d X' r a ha
-            ((cbcDerivedOpenShriek d j' sq.isOpenImmersion').obj
-              ((d.completedPull gU).obj K.obj))) := by
-  have hold := completedExtensionZeroComparison d sq r a ha
-  have : IsIso (cbcCompletedExchange d sq r a ha) := hold.1
-  constructor
-  · unfold cbcDatumCompletedExchange
-    infer_instance
-  · have hpull {V W : Scheme.{t}} (f : V ⟶ W) (M : d.derived W)
-        (hm : cbcCompleteProperty d W r a ha M) :
-        cbcCompleteProperty d V r a ha ((d.completedPull f).obj M) := by
-      let N := (d.completedPull f).obj M
-      let C := DerivedCategory.Q.objPreimage N
-      let eN : DerivedCategory.Q.obj C ≅ N := DerivedCategory.Q.objObjPreimageIso N
-      let e := eN ≪≫ ((cbcDatumCompletedTransport d f).app M).symm
-      have hc := (completedPullback_reduction f d r a ha M
-        (DerivedCategory.Q.objPreimage M) (DerivedCategory.Q.objObjPreimageIso M) hm).1 C e
-      change IsIso (e.inv ≫ DerivedCategory.Q.map
-        (intrinsicCompletionComplexUnit V d r a C)) at hc
-      have : IsIso (DerivedCategory.Q.map
-          (intrinsicCompletionComplexUnit V d r a C)) :=
-        IsIso.of_isIso_comp_left e.inv _
-      change IsIso (eN.inv ≫ DerivedCategory.Q.map
-        (intrinsicCompletionComplexUnit V d r a C))
-      infer_instance
-    have hsq : IsPullback gU j' j g :=
-      IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd
-    have : QuasiCompact j' := MorphismProperty.of_isPullback (P := @QuasiCompact)
-      hsq inferInstance
-    let hi := IsPullback.id_horiz j'
-    let sq' : AlgebraicGeometry.OpenImmersionSquare (𝟙 U') j' j' (𝟙 X') :=
-      { toCommSq := hi.toCommSq
-        isoPullback := hi.isoPullback
-        hom_fst := hi.isoPullback_hom_fst
-        hom_snd := hi.isoPullback_hom_snd
-        isOpenImmersion := sq.isOpenImmersion'
-        isOpenImmersion' := sq.isOpenImmersion' }
-    intro K
-    refine ⟨(hold.2 K).1, hpull g _ (hold.2 K).1, ?_⟩
-    exact ((completedExtensionZeroComparison d sq' r a ha).2
-      ⟨(d.completedPull gU).obj K.obj, hpull gU K.obj K.property⟩).1
-
 
 end AlgebraicGeometry.Scheme

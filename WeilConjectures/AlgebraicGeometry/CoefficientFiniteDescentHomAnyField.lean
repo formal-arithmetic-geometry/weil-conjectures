@@ -94,6 +94,10 @@ theorem coefficient_finite_descent_hom_of_char_ne
       ∃ (H : PadicAlgCl.FiniteIntermediateField ℓ) (hF : F ≤ H) (hG : G ≤ H),
         coefficientDescentHomTransition X ℓ h hF C.obj D.obj r f =
           coefficientDescentHomTransition X ℓ j hG C.obj D.obj r g) := by
-  sorry
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : IsNoetherian X := ⟨⟩
+  exact coefficient_finite_descent_hom_of_isNoetherian X ℓ E C D r
 
 end AlgebraicGeometry.ProEtale

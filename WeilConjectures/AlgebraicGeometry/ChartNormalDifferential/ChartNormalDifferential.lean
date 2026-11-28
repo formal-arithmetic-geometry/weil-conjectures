@@ -23,6 +23,7 @@ import WeilConjectures.AlgebraicGeometry.AffinePushforwardBaseChange
 import all WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
 import WeilConjectures.AlgebraicGeometry.ConormalGradedAlgebra.ConormalGradedAlgebraHomExt
 import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+import all WeilConjectures.AlgebraicGeometry.AffineStructureAlgebraFullyFaithful
 
 /-! # The actual normal comparison of an etale coordinate chart
 
@@ -621,33 +622,6 @@ private theorem normalTangentIdentification {U Y M : Scheme.{u}}
   exact hs
 
 -- Construct and recognize the actual spectrum maps by their section formulas.
-private theorem affineHom_exists {X Y : Scheme.{u}} [IsAffine Y]
-    (a : Γ(Y, ⊤) ⟶ Γ(X, ⊤)) : ∃ f : X ⟶ Y, f.appTop = a := by
-  let f := ΓSpec.adjunction.homEquiv X (op Γ(Y, ⊤)) a.op ≫ Y.isoSpec.inv
-  refine ⟨f, ?_⟩
-  have h : f ≫ Y.isoSpec.hom = ΓSpec.adjunction.homEquiv X (op Γ(Y, ⊤)) a.op := by
-    simp [f]
-  have hh := congrArg Scheme.Hom.appTop h
-  rw [Scheme.Hom.comp_appTop, ΓSpec_adjunction_homEquiv_eq] at hh
-  apply (cancel_epi (Scheme.ΓSpecIso Γ(Y, ⊤)).hom).mp
-  simpa only [Scheme.isoSpec_hom, Scheme.toSpecΓ_appTop] using hh
-
-private theorem algebraHom_ext {S : Scheme.{u}} [IsAffine S]
-    {A B : S.CommAlgebraSheaf} [A.toModule.IsQuasicoherent]
-    {a b : A ⟶ B} (h : ∀ x, a.right.hom.app (op ⊤) x = b.right.hom.app (op ⊤) x) :
-    a = b := by
-  have hm : (commAlgebraSheafModuleFunctor S.sheaf).map a =
-      (commAlgebraSheafModuleFunctor S.sheaf).map b := by
-    apply Scheme.Modules.hom_ext_of_isAffine (M := A.toModule) (N := B.toModule)
-    exact h
-  apply Under.UnderMorphism.ext
-  apply Sheaf.hom_ext
-  apply NatTrans.ext
-  funext V
-  apply ConcreteCategory.hom_ext
-  intro x
-  exact congrArg (fun q ↦ q.val.app V x) hm
-
 private def structureAlgebra {X S : Scheme.{u}} (f : X ⟶ S) :
     S.CommAlgebraSheaf := Under.mk (⟨f.c⟩ : S.sheaf ⟶
       (TopCat.Sheaf.pushforward CommRingCat.{u} f.base).obj X.sheaf)
@@ -670,9 +644,8 @@ private def structureAlgebraMap {S T Y : Scheme.{u}} (p : Y ⟶ S) (t : T ⟶ S)
     exact Scheme.Hom.appLE_eq_app (f ≫ p)
 
 set_option backward.isDefEq.respectTransparency false in
-private theorem specMap_exists {Z Z' N N' : Scheme.{u}} [IsAffine Z']
+private theorem specMap_exists {Z Z' N N' : Scheme.{u}}
     (f : Z ⟶ Z') (B : Z.CommAlgebraSheaf) (B' : Z'.CommAlgebraSheaf)
-    [B'.toModule.IsQuasicoherent]
     (π : N ⟶ Z) (π' : N' ⟶ Z') [IsAffineHom π']
     (α : B ≅ structureAlgebra π) (α' : B' ≅ structureAlgebra π')
     (ρ : B'.right ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} f.base).obj B.right)
@@ -687,26 +660,24 @@ private theorem specMap_exists {Z Z' N N' : Scheme.{u}} [IsAffine Z']
       rw [← Category.assoc, hρ, Category.assoc, ← Functor.map_comp, Under.w α.hom]
       rfl)
   let κ := α'.inv ≫ θ
-  have : IsAffine N' := isAffine_of_isAffineHom π'
-  obtain ⟨ν, hν⟩ := affineHom_exists (κ.right.hom.app (op ⊤))
-  have hw : ν ≫ π' = π ≫ f := by
-    apply ext_of_isAffine
-    rw [Scheme.Hom.comp_appTop, hν]
-    exact congrArg (fun q ↦ q.hom.app (op ⊤)) (Under.w κ)
+  obtain ⟨ν, hw, hν⟩ := exists_over_map_of_algebra (π ≫ f) π' κ
   have hκ : κ = structureAlgebraMap π' (π ≫ f) ν hw := by
-    have : (structureAlgebra π').toModule.IsQuasicoherent :=
-      (affine_morphism_relative_spec Z').1 π' inferInstance
-    apply algebraHom_ext
-    intro a
-    change _ = ν.appLE ⊤ ⊤ _ a
-    have ht : ν.appLE ⊤ ⊤ (by simp) = ν.appTop := by
-      unfold Scheme.Hom.appLE
-      rw [show (homOfLE (show (⊤ : N.Opens) ≤ ν ⁻¹ᵁ ⊤ from le_rfl)).op =
-        𝟙 (op (⊤ : N.Opens)) from Subsingleton.elim _ _]
-      erw [N.presheaf.map_id]
-      rfl
-    rw [ht]
-    exact (congrArg (fun q ↦ q a) hν).symm
+    apply Under.UnderMorphism.ext
+    apply CategoryTheory.Sheaf.hom_ext
+    apply TopCat.Sheaf.hom_ext _ _ (B := fun U : Z'.affineOpens ↦ U.1)
+      (by
+        change TopologicalSpace.Opens.IsBasis
+          (Set.range (fun U : Z'.affineOpens ↦ U.1))
+        rw [show Set.range (fun U : Z'.affineOpens ↦ U.1) = Z'.affineOpens by
+          ext V
+          constructor
+          · rintro ⟨U, rfl⟩
+            exact U.2
+          · intro hV
+            exact ⟨⟨V, hV⟩, rfl⟩]
+        exact Z'.isBasis_affineOpens)
+    intro U
+    exact (hν U).symm
   refine ⟨ν, hw, ?_⟩
   intro V a
   have he : α'.hom ≫ κ = θ := by simp [κ]
@@ -890,10 +861,7 @@ private theorem specMap_cartesian {Z Z' N N' : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-private theorem identitySpecMap {S N N' : Scheme.{u}}
-    (B B' : S.CommAlgebraSheaf) (π : N ⟶ S) (π' : N' ⟶ S)
-    [IsAffineHom π] [IsAffineHom π']
-    (α : B ≅ structureAlgebra π) (α' : B' ≅ structureAlgebra π')
+private theorem identityAlgebraIso {S : Scheme.{u}} (B B' : S.CommAlgebraSheaf)
     (c : (tensorPullback (𝟙 S)).obj B'.toModule ≅ B.toModule)
     (ρ : B'.right ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} (𝟙 S : S ⟶ S).base).obj
       B.right)
@@ -901,8 +869,8 @@ private theorem identitySpecMap {S N N' : Scheme.{u}}
       (TopCat.Sheaf.pushforward CommRingCat.{u} (𝟙 S : S ⟶ S).base).obj S.sheaf) ≫
       (TopCat.Sheaf.pushforward CommRingCat.{u} (𝟙 S : S ⟶ S).base).map B.hom)
     (hc : ∀ V a, pullbackSection (𝟙 S) _ _ c.hom V a = ρ.hom.app (op V) a) :
-    ∃ r : N ≅ N', IsSpecMap (𝟙 S) B B' π π' α α' r.hom
-      (pullbackSection (𝟙 S) _ _ c.hom) := by
+    ∃ θ : B' ≅ B, ∀ (V : S.Opens) (a : B'.right.obj.obj (op V)),
+      θ.hom.right.hom.app (op V) a = pullbackSection (𝟙 S) _ _ c.hom V a := by
   let θ : B' ⟶ B := Under.homMk ρ (by
     apply CategoryTheory.Sheaf.hom_ext
     apply NatTrans.ext
@@ -925,10 +893,28 @@ private theorem identitySpecMap {S N N' : Scheme.{u}}
     rw [he]
     infer_instance
   have : IsIso θ := algebra_isIso_of_module θ
-  obtain ⟨r, hr⟩ := specIso_exists π π' α α' (asIso θ)
+  exact ⟨asIso θ, fun V a ↦ (hc V a).symm⟩
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem identitySpecMap {S N N' : Scheme.{u}}
+    (B B' : S.CommAlgebraSheaf) (π : N ⟶ S) (π' : N' ⟶ S)
+    [IsAffineHom π] [IsAffineHom π']
+    (α : B ≅ structureAlgebra π) (α' : B' ≅ structureAlgebra π')
+    (c : (tensorPullback (𝟙 S)).obj B'.toModule ≅ B.toModule)
+    (ρ : B'.right ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} (𝟙 S : S ⟶ S).base).obj
+      B.right)
+    (hρ : B'.hom ≫ ρ = (⟨(𝟙 S : S ⟶ S).c⟩ : S.sheaf ⟶
+      (TopCat.Sheaf.pushforward CommRingCat.{u} (𝟙 S : S ⟶ S).base).obj S.sheaf) ≫
+      (TopCat.Sheaf.pushforward CommRingCat.{u} (𝟙 S : S ⟶ S).base).map B.hom)
+    (hc : ∀ V a, pullbackSection (𝟙 S) _ _ c.hom V a = ρ.hom.app (op V) a) :
+    ∃ r : N ≅ N', IsSpecMap (𝟙 S) B B' π π' α α' r.hom
+      (pullbackSection (𝟙 S) _ _ c.hom) := by
+  obtain ⟨θ, hθ⟩ := identityAlgebraIso B B' c ρ hρ hc
+  obtain ⟨r, hr⟩ := specIso_exists π π' α α' θ
   refine ⟨r, hr.1, ?_⟩
   intro V a
-  rw [hc V a]
+  rw [← hθ V a]
   exact hr.2 V a
 
 set_option backward.isDefEq.respectTransparency false in
@@ -1576,9 +1562,10 @@ attribute [local irreducible] SymmetricAlgebraSheaf.algebra ConormalGradedAlgebr
 -- Keep the affine-space implementation out of the normal-comparison construction.
 set_option backward.isDefEq.respectTransparency true in
 private theorem comparisonOfChart {k : Type u} [Field k]
-    {Y U A : Scheme.{u}} [IsAffine Y] [IsAffine A]
+    {Y U A : Scheme.{u}}
     [IsNoetherian Y] [IsNoetherian U] [IsNoetherian A]
-    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (aY : Y ⟶ Spec (.of k)) [IsSeparated aY]
+    [LocallyOfFiniteType aY] [QuasiCompact aY]
     (d : ℕ) (p : A ⟶ Y) (e : U ⟶ A) [Etale e]
     [IsSeparated p] [LocallyOfFiniteType p] [QuasiCompact p]
     [SmoothOfRelativeDimension d p] [Smooth p]
@@ -1638,9 +1625,6 @@ private theorem comparisonOfChart {k : Type u} [Field k]
   have hρ := hc₀.choose_spec.choose_spec.1
   have hsec := hc₀.choose_spec.choose_spec.2.1
   have hgr := hc₀.choose_spec.choose_spec.2.2.1
-  have : (ConormalGradedAlgebra.presentation
-      (pullback.diagonal p)).algebra.toModule.IsQuasicoherent :=
-    (ConormalGradedAlgebra.presentation (pullback.diagonal p)).quasicoherent
   obtain ⟨ν, hν⟩ := specMap_exists e
     (ConormalGradedAlgebra.presentation δ).algebra
     (ConormalGradedAlgebra.presentation (pullback.diagonal p)).algebra
