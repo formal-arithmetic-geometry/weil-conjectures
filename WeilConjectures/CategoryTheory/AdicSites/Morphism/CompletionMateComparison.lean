@@ -364,6 +364,7 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 import Mathlib.CategoryTheory.Yoneda
 import Mathlib.CategoryTheory.Generator.Basic
 import WeilConjectures.Algebra.Homology.RingedTensorCorner.ProjectionMateExact
+import WeilConjectures.AlgebraicGeometry.ConstantCompletionPullSquare
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-!
@@ -830,7 +831,7 @@ theorem moduleSquare_existsUnique
     (sq : Square f g h k) (A : Type u) [CommRing A] :
     ∃! e : g.modulePull A ⋙ k.modulePull A ≅ f.modulePull A ⋙ h.modulePull A,
       moduleSquare_normalized sq A e := by
-  sorry
+  exact ConstantCompletion.pullSquare_existsUnique g.algebra k.algebra f.algebra h.algebra sq A
 
 /-- The ordinary module comparison with its scalar-insertion normalization.
 Source: Stacks 0E48. -/
