@@ -11,6 +11,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCo
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Reduction
 public import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeLowerStarDualizable
 public import WeilConjectures.SixFunctors.Etale.Derived.ScalarExtension
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom
@@ -20,6 +21,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Con
 
 import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.EtaleRestrictScalarsFunctorComparisons
+import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalKFlat
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriek
@@ -810,6 +812,19 @@ private lemma scalarPullback
       (lowerStarRestrictScalarsIso φ f).symm
   exact leftDerivedSquare FA EX EY FB e
 
+-- Both composites are left adjoint to restriction of scalars followed by `D(j^*)`.
+private lemma scalarOpenLowerShriek
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
+    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    Nonempty (L(sheafExtendScalars φ U) ⋙ D((j)_!open[ModuleCat.{u + 1} B]) ≅
+      D((j)_!open[ModuleCat.{u + 1} A]) ⋙ L(sheafExtendScalars φ X)) :=
+  ⟨(conjugateIsoEquiv
+      ((derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j).comp
+        (leftDerivedEtaleSheafExtendScalarsAdjunction φ X))
+      ((leftDerivedEtaleSheafExtendScalarsAdjunction φ U).comp
+        (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j))).symm
+    (Functor.mapDerivedCategorySquareIso (upperStarRestrictScalarsIsoSheaf φ j))⟩
+
 end Etale
 
 namespace ProEtale
@@ -885,6 +900,44 @@ theorem exists_isDerivedBaseChange_leftDerivedUpperStar {X Y : Scheme.{u}} (f : 
   exact ⟨_, (coefficientUnit _ φ (Sheaf.scalarDerivedAdjunction X.smallEtaleTopology φ) _)
     |>.comp_map_iso (σ.symm.app L ≪≫ (L((f)^*[ModuleCat.{u + 1} Λ'])).mapIso e)⟩
 
+/-- The derived direct image commutes with derived base change along a ring morphism
+`φ : Λ →+* Λ'` at `K` as soon as the base change map `(Rf_* K) ⊗ᴸ_Λ Λ' ⟶ Rf_* (K ⊗ᴸ_Λ Λ')` is an
+isomorphism: if `K'` is a derived base change of `K`, then `Rf_* K'` is a derived base change of
+`Rf_* K`. -/
+theorem exists_isDerivedBaseChange_rightDerivedLowerStar_of_isIso {X Y : Scheme.{u}}
+    (f : X ⟶ Y) (K : 𝐃(X, Λ)) (K' : 𝐃(X, Λ')) (η : K ⟶ (derivedRestrictScalars φ X).obj K')
+    (hη : IsDerivedBaseChange η) (h : IsIso ((rightDerivedLowerStarExtendScalarsMap φ f).app K)) :
+    ∃ θ : R((f)_*[ModuleCat.{u + 1} Λ]).obj K ⟶
+      (derivedRestrictScalars φ Y).obj (R((f)_*[ModuleCat.{u + 1} Λ']).obj K'),
+      IsDerivedBaseChange θ := by
+  obtain ⟨e⟩ := coefficientIso _ φ (leftDerivedEtaleSheafExtendScalarsAdjunction φ X) hη
+  exact ⟨_, (coefficientUnit _ φ (leftDerivedEtaleSheafExtendScalarsAdjunction φ Y) _)
+    |>.comp_map_iso (asIso ((rightDerivedLowerStarExtendScalarsMap φ f).app K) ≪≫
+      (R((f)_*[ModuleCat.{u + 1} Λ'])).mapIso e)⟩
+
+/-- The compact-support direct image commutes with derived base change along a ring morphism
+`φ : Λ →+* Λ'` as soon as the base change maps `(Rg_* M) ⊗ᴸ_Λ Λ' ⟶ Rg_* (M ⊗ᴸ_Λ Λ')` along the
+proper part `g` of the chosen compactification of `f` are isomorphisms: if `K'` is a derived base
+change of `K`, then `Rf_! K'` is a derived base change of `Rf_! K`. -/
+theorem exists_isDerivedBaseChange_rightDerivedLowerShriek_of_isIso {X Y : Scheme.{u}}
+    (f : X ⟶ Y) [HasCompactification f] (K : 𝐃(X, Λ)) (K' : 𝐃(X, Λ'))
+    (η : K ⟶ (derivedRestrictScalars φ X).obj K') (hη : IsDerivedBaseChange η)
+    (h : ∀ M, IsIso ((rightDerivedLowerStarExtendScalarsMap φ
+      (HasCompactification.compactification f).g).app M)) :
+    ∃ θ : (R(f)_![ModuleCat.{u + 1} Λ]).obj K ⟶
+      (derivedRestrictScalars φ Y).obj ((R(f)_![ModuleCat.{u + 1} Λ']).obj K'),
+      IsDerivedBaseChange θ := by
+  let c := HasCompactification.compactification f
+  have := c.isOpenImmersion
+  obtain ⟨e⟩ := coefficientIso _ φ (leftDerivedEtaleSheafExtendScalarsAdjunction φ X) hη
+  obtain ⟨σ⟩ := scalarOpenLowerShriek φ c.i
+  have := h ((D((c.i)_!open[ModuleCat.{u + 1} Λ])).obj K)
+  exact ⟨_, (coefficientUnit _ φ (leftDerivedEtaleSheafExtendScalarsAdjunction φ Y) _)
+    |>.comp_map_iso (asIso ((rightDerivedLowerStarExtendScalarsMap φ c.g).app
+        ((D((c.i)_!open[ModuleCat.{u + 1} Λ])).obj K)) ≪≫
+      (R((c.g)_*[ModuleCat.{u + 1} Λ'])).mapIso
+        (σ.symm.app K ≪≫ (D((c.i)_!open[ModuleCat.{u + 1} Λ'])).mapIso e))⟩
+
 section Tensor
 
 attribute [local instance high] SymmetricCategory.toBraidedCategory
@@ -922,8 +975,12 @@ theorem reductionCompatibility {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ) (n : 
     exists_isDerivedBaseChange_leftDerivedUpperStar _ f L Ln η hη
   derivedTensor K L Kn Ln η η' hη hη' :=
     exists_isDerivedBaseChange_derivedTensor _ K L Kn Ln η η' hη hη'
-  rightDerivedLowerStar := sorry
-  rightDerivedLowerShriek := sorry
+  rightDerivedLowerStar f K Kn η hη :=
+    exists_isDerivedBaseChange_rightDerivedLowerStar_of_isIso _ f K Kn η hη
+      (isIso_rightDerivedLowerStarExtendScalarsMap_app_quotient_span_pow hϖ n f K)
+  rightDerivedLowerShriek f _ K Kn η hη :=
+    exists_isDerivedBaseChange_rightDerivedLowerShriek_of_isIso _ f K Kn η hη
+      (isIso_rightDerivedLowerStarExtendScalarsMap_app_quotient_span_pow hϖ n _)
   projectionMap := sorry
   derivedHom := sorry
   rightDerivedUpperShriek := sorry
@@ -942,6 +999,23 @@ theorem finiteReductionCompatibility {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
   projectionMap := sorry
   derivedHom := sorry
 
+/-- The base change map `(Rf_* K) ⊗ᴸ 𝒪_{E'} ⟶ Rf_* (K ⊗ᴸ 𝒪_{E'})` of the common-stage scalar
+extension `𝒪_E → 𝒪_{E'}` is an isomorphism, `𝒪_{E'}` being a finite free `𝒪_E`-module. -/
+theorem isIso_rightDerivedLowerStarExtendScalarsMap_app_integersShrinkMap (l : ℕ) [Fact l.Prime]
+    (E E' : Type) [Field E] [Field E'] [Algebra E (PadicAlgCl l)] [Algebra E' (PadicAlgCl l)]
+    [Algebra E E'] [IsScalarTower E E' (PadicAlgCl l)] [Algebra ℚ_[l] E]
+    [IsScalarTower ℚ_[l] E (PadicAlgCl l)] [FiniteDimensional ℚ_[l] E] [Algebra ℚ_[l] E']
+    [IsScalarTower ℚ_[l] E' (PadicAlgCl l)] [FiniteDimensional ℚ_[l] E'] [Small.{u + 1} E]
+    [Small.{u + 1} E'] {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (K : 𝐃(X, Shrink.{u + 1} (PadicAlgCl.integers l E))) :
+    IsIso ((rightDerivedLowerStarExtendScalarsMap (PadicAlgCl.integersShrinkMap l E E') f).app
+      K) := by
+  let := (PadicAlgCl.integersShrinkMap.{0, u} l E E').toAlgebra
+  obtain ⟨n, b, -, -⟩ := PadicAlgCl.exists_basis_frobeniusForm_integersShrinkMap.{0, u} l E E'
+  have := Module.Free.of_basis b
+  have := Module.Finite.of_basis b
+  exact isIso_rightDerivedLowerStarExtendScalarsMap_app_of_free f K
+
 /-- The common-stage scalar extension `𝒪_E → 𝒪_{E'}` commutes with the basic operations of the
 étale derived categories, also after rationalization. -/
 theorem scalarExtensionCompatibility (l : ℕ) [Fact l.Prime] (E E' : Type) [Field E]
@@ -954,9 +1028,13 @@ theorem scalarExtensionCompatibility (l : ℕ) [Fact l.Prime] (E E' : Type) [Fie
     exists_isDerivedBaseChange_leftDerivedUpperStar _ f L L' η hη
   derivedTensor K L _ _ K' L' η η' hη hη' :=
     exists_isDerivedBaseChange_derivedTensor _ K L K' L' η η' hη hη'
-  rightDerivedLowerShriek := sorry
+  rightDerivedLowerShriek f _ K _ K' η hη :=
+    exists_isDerivedBaseChange_rightDerivedLowerShriek_of_isIso _ f K K' η hη
+      (isIso_rightDerivedLowerStarExtendScalarsMap_app_integersShrinkMap l E E' _)
   projectionMap := sorry
-  rightDerivedLowerStar := sorry
+  rightDerivedLowerStar f K K' η hη :=
+    exists_isDerivedBaseChange_rightDerivedLowerStar_of_isIso _ f K K' η hη
+      (isIso_rightDerivedLowerStarExtendScalarsMap_app_integersShrinkMap l E E' f K)
   rationalProjectionMap := sorry
 
 end Etale
